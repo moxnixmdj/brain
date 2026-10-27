@@ -100,7 +100,11 @@
   ],
   "expected_parent_level_state_change": "A sentence that asks for an edit runs the capability that edits, and a capability is not held unbindable for inputs its own adapter already defaults; a capability that terminates the process fails closed instead of taking the caller with it.",
   "iteration_limit": 4,
-  "obs_blocker": "The write lane returned a certified wrong answer. Measured on origin/main at cfbbdc28: \"Extract the function big from the module calc.py lines 5 to 9 in the python source root D into a new function named total_of\" scored python.refactor.extract_function.v1 at 33, ahead of the next candidate at 22, and was then dropped as unbindable, so python.source.audit.ast -- a capability that reads and changes nothing -- answered the extract-method request and returned pass=True with a census of the whole directory (totals files 2, functions 3). front.bind_typed_key failed GOAL_INPUT_BINDING_REQUIRED:not_stated on seven declared inputs. Four of them the sentence states plainly -- start_line and end_line are \"lines 5 to 9\", new_name is \"named total_of\", qualname is \"the function big\" -- but the binder had no grammar for any of them: _NUMERIC_KEYS was {x_value, y_value, major, max_age_s} and _KEY_ALIASES had no entry for new_name or qualname. Three more no sentence could ever state -- python_executable, run_tests, timeout_s -- while the adapter already defaults all three at python_refactor_extract_function.py:203-205 (python_executable falls back to sys.executable, timeout_s to 300, run_tests to []). The same defect dropped three more capabilities that all outscore the audit: python.source.crossfile_edit.choreograph.v1 30 against 22, python.tests.generate.scaffold.v1 37 against 22, python.source.change_impact.testselect.v1 22 against 22. Separately, every handler on the execution path catches Exception while SystemExit derives from BaseException, so a capability whose adapter calls sys.exit() escaped solve() and terminated the caller.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "Letting the read-only audit answer an edit request and reporting pass=True was rejected: the machine then reports work it did not do and the caller has no way to tell. Adding python_executable, run_tests and timeout_s to _KEY_ALIASES so a sentence could state them was rejected: no sentence states an interpreter path, so the capability would stay unbindable for every phrasing an engineer writes. Defaulting them globally in bind_typed_key was rejected: that would invent values for all 121 capabilities instead of declaring what one adapter actually does. Adding \"function named\" to the qualname aliases was rejected after measuring SYMBOL_NOT_FOUND:total_of -- _after_key tries the longest alias first and it handed the NEW name to the slot asking WHICH function to extract. Deriving target_effects independently to detect substitution was rejected as out of scope: it is copied from the selected capability's own provides at goal_compiler.py:1942, 1994 and 2075, so it restates the answer rather than the question, and fixing it is a separate defect.",
+   "intrinsic_or_path_specific": "Path-specific to the binder's phrasing tables, to four registry templates and to one except clause. The mechanism is not intrinsic to the domain: the binder already had _KEY_ALIASES, _NUMERIC_KEYS and _after_key, the adapters already defaulted the execution inputs, and the registry already carried a literal argument default in pdf.extract.text.pypdf. Nothing new was invented.",
+   "surviving_causal_blocker": "python.refactor.extract_function.v1 scored 33 against the next candidate's 22 on an ordinary extract-method sentence and was then dropped as unbindable, so python.source.audit.ast substituted and returned pass=True for a request that changed nothing. Seven declared inputs could not bind: four that the sentence states in an engineer's phrasing and three that no sentence could state while the adapter defaults all three."
+  },
   "obs_capability": {
    "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
    "existing_inherited_routes_checked": "sed's `r` command already appends a file after the addressed line; the `find` rule already built `-name` from a quoted value or a spelled-out ending; `_post_sort` already recomputed a promise from a source that survives; `_DIRECTORY_REQUEST`, `_quoted_values` and `_ASKS_A_COUNT_OR_A_NUMBER` were reused entire.",
@@ -1714,7 +1718,7 @@
      "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
     }
    ],
-   "checked_at_utc": "2026-10-27T17:29:21Z",
+   "checked_at_utc": "2026-10-27T17:30:33Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -1830,10 +1834,10 @@
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
    ],
    "selected_route": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
-   "selected_route_checked_at_utc": "2026-10-27T17:29:21Z",
+   "selected_route_checked_at_utc": "2026-10-27T17:30:33Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T15:40:31Z",
+    "checked_at_utc": "2026-10-27T17:30:33Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -1870,7 +1874,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "A_QUESTION_ABOUT_ONE_SOURCE_FILE_MUST_BE_ANSWERED_ABOUT_THAT_FILE_V1_20261027_V1",
+    "selected_route": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
     "status": "READY"
    },
    "selected_surviving_route": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
@@ -1957,7 +1961,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-27T17:29:21Z",
+  "checked_at_utc": "2026-10-27T17:30:33Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
@@ -1993,37 +1997,45 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "d3fa07499bd9bad57c060b930fd74751f3084629",
-     "path": "canonical/runtime/bound_capabilities/python_source_audit.py"
-    },
-    {
-     "git_blob_sha": "6e98133f0e6cf349511de82d39bfeb038b868232",
-     "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py"
-    },
-    {
-     "git_blob_sha": "6752e31b621f8358cca678c2d7e0f1bd1ff3abc3",
-     "path": "canonical/runtime/bound_capabilities/python_symbol_resolve.py"
-    },
-    {
-     "git_blob_sha": "a34df431da27396d47e5211a7db45f49c01c2caa",
-     "path": "canonical/runtime/goal_compiler.py"
-    },
-    {
-     "git_blob_sha": "0010fb45899c26e4e46d892c16a90d7827495fab",
+     "git_blob_sha": "0e29ef22eac934980a36f1fc6f7248bd7411eab8",
      "path": "canonical/runtime/goal_front_compiler_v1.py"
     },
     {
-     "git_blob_sha": "e87e08007ee5be5c3f95340a8db2bf4ded522e90",
+     "git_blob_sha": "ef6536749df5831be4787b9ecd89affb295461d7",
+     "path": "canonical/runtime/live_brain_route_admission_v1.py"
+    },
+    {
+     "git_blob_sha": "7ddb4c19c1c001429fa9c1dc2c5d2425324e82de",
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
-     "git_blob_sha": "91d5ab934685365f6537b2273b5969439689c568",
+     "git_blob_sha": "f27150cbcd7a3ece533befa2a2f8e55706e4b676",
+     "path": "canonical/tests/test_a_question_about_one_source_file_is_answered_about_that_file_v1.py"
+    },
+    {
+     "git_blob_sha": "98fbd700cd9d8dd3ed4e23b444d6b10bd635aa12",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    },
+    {
+     "git_blob_sha": "bff2d3defaec1e0268cb112913214206ba6fee8c",
+     "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py"
+    },
+    {
+     "git_blob_sha": "7c4d2a367e867fb821d7500c00f63ce408cf702a",
+     "path": "canonical/runtime/goal_compiler.py"
     }
    ],
    "decisive_question": "Does a sentence that asks for the tests to be run reach a capability that runs them, and does the measurement then tell a passing suite from a failing one -- without altering any argv token that is not a validated test path?",
    "falsifier_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1_FALSIFIER",
-   "known_counterexamples_checked": true,
+   "known_counterexamples_checked": [
+    "canonical/runtime/goal_front_compiler_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "canonical/tests/test_a_question_about_one_source_file_is_answered_about_that_file_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+    "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
+    "canonical/runtime/goal_compiler.py"
+   ],
    "no_known_counterexample_reason": "Each direction was falsified directly. test_a_passing_suite_that_imports_its_sibling_module_exits_zero and test_a_failing_suite_that_imports_its_sibling_module_still_exits_nonzero pin the suite runner from both sides. test_a_supplied_argv_naming_the_test_by_its_repo_relative_path_measures_it and test_a_failing_suite_supplied_the_same_way_is_still_measured_as_failing pin the argv rewrite from both sides, and test_it_matches_the_measurement_taken_when_no_argv_is_supplied requires the two routes to agree. test_an_argument_that_is_not_a_test_path_passes_through_verbatim is the nearest world in which the rewrite must not fire: the interpreter, -c and a whole harness program must come back untouched and only the test token may change. test_a_stated_test_that_already_passes_is_reported_truthfully_and_nothing_is_written asserts applied False, files_written empty and the source bytes unchanged.",
    "proposal_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1"
   }
