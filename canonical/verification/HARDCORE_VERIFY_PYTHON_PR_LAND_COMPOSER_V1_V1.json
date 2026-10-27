@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.pr.land.composer.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_PR_LAND_COMPOSER_V1-V1",
+  "observed_effect": {
+    "adapter": "python_pr_land_composer_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PR_LAND_COMPOSER_V1.json",
+    "output_sha256": "e0450efeadb1ad9cf447bac2c1670a3f401472192142b8e2e4b22ccad99df542",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "e0450efeadb1ad9cf447bac2c1670a3f401472192142b8e2e4b22ccad99df542",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_PR_LAND_COMPOSER_V1.json",
+  "verified": true
+}
