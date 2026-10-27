@@ -1,0 +1,9 @@
+{
+  "mission_id": "ASTRA-VERIFY-DIFFTRIAGE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.review.diff_static_triage.v1",
+  "statement": "The crown produced diffs nobody reviewed. This gate reviews the produced diff the senior-engineer way: compile baseline (stdlib, always) + ruff F/E/W sweep intersected with the diff's new-side changed line ranges. Golden leg: NL issue -> orchestrator diff -> gate PASS. Sabotage leg: same diff plus an injected undefined-name line -> gate FAIL with F821 evidence on the changed line. Both legs measured; byte-identical artifacts on rerun.",
+  "input_root": "/home/user/nl_mission/../triage_mission/fixrepo",
+  "zero_spend": true
+}

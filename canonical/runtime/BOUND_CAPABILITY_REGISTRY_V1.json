@@ -7076,6 +7076,98 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
       }
+    },
+    "python.review.diff_static_triage.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_static_triage.v1",
+          "diff_path": "${input.diff_path}",
+          "worktree_path": "${input.worktree_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_static_triage",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "static",
+        "triage",
+        "ruff",
+        "lint",
+        "gate",
+        "pull request",
+        "pr",
+        "f821",
+        "syntax",
+        "changed lines",
+        "pre-existing",
+        "noise"
+      ],
+      "limitations": [
+        "ruff stage needs a ruff-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_SYNTAX_ONLY recorded loudly, the F/E/W sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking: untouched pre-existing findings are advisory context listed as out_of_scope (never blockers).",
+        "isolated ruff run (--isolated, --no-cache): repo lint config is NOT read; zero config law keeps verdicts reproducible.",
+        "v1 reviews unified diffs of .py files; other languages fall through to the syntax baseline silently-listed as non-Python rows."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_static_triage"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "ruff",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "ruff",
+        "type": "pypi",
+        "version_family": ">=0.5"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-DIFFTRIAGE-001",
+        "observed_effect": {
+          "chain": "natural-language issue -> orchestrator (apply + tests green) -> produced diff -> this gate",
+          "golden": "gate PASS, 0 blocking on a real choreographed rename diff",
+          "sabotage": "injected undefined-name line -> gate FAIL with F821 at pkg/core.py:3",
+          "ruff": "0.17.3",
+          "e2e_loop_ms": [
+            382.2,
+            322.7
+          ],
+          "deterministic": "triage artifact byte-identical on rerun"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIFFTRIAGE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIFFTRIAGE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
