@@ -1,0 +1,10 @@
+{
+  "mission_id": "ASTRA-VERIFY-NLISSUE-001",
+  "status": "COMPLETE",
+  "e2e_ms_run1": 305.0,
+  "e2e_ms_run2": 300.6,
+  "nl_ops": 1,
+  "nl_complete": true,
+  "orch_tests_passed": 1,
+  "determinism": "diff_byte_identical"
+}

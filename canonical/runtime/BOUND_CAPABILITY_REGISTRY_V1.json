@@ -6892,6 +6892,96 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ISSUE2PR-002__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-ISSUE2PR-002.json"
       }
+    },
+    "python.issue.natural_language.parse_edit_intent.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.issue.natural_language.parse_edit_intent.v1",
+          "issue_path": "${input.issue_path}",
+          "source_root": "${input.source_root}",
+          "output_path": "${input.output_path}",
+          "index_path": "${input.index_path}"
+        },
+        "expect": {
+          "field": "complete",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_issue_nl_parse_edit_intent",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "issue",
+        "natural language",
+        "prose",
+        "parse",
+        "intent",
+        "free text",
+        "english",
+        "edit ops",
+        "binding",
+        "rename",
+        "move"
+      ],
+      "limitations": [
+        "strict anchored grammar only: 'rename N to N2 [in M]' and 'move N [from M] to M2' clauses bind; every other imperative line refuses with the line quoted (never guesses a verb).",
+        "v1 is deterministic text parsing, not an LLM: vague prose ('make it faster') is refused loudly as evidence, not silently interpreted.",
+        "module qualifiers are used only as index homes; semantic validity of the ops (collisions, ambiguity at plan time) is slice-4's job downstream."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.issue.natural_language.edit_intent"
+      ],
+      "requires": [
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "ambiguous_name_count",
+        "bound_name_count",
+        "cache_used",
+        "complete",
+        "issue_id",
+        "line_count",
+        "op_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "refused_line_count"
+      ],
+      "source": {
+        "module": "re",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-NLISSUE-001",
+        "observed_effect": {
+          "issue_id": "GH-9101",
+          "issue_text": "title 'Rename helper to compute in pkg/core.py' + duplicated body line",
+          "ops_emitted": 1,
+          "complete": true,
+          "composed_with": "python.software.issue_to_pr.orchestrate.v1 unchanged",
+          "applied_sites": 2,
+          "selected_tests_green": 1,
+          "e2e_median_ms": 300.6,
+          "first_run_ms": 305.0,
+          "deterministic": "diff byte-identical across reruns",
+          "refusal_stories": "NAME_NOT_FOUND w/ lexical candidates; NAME_AMBIGUOUS w/ homes; UNSUPPORTED_ANCHOR w/ quoted line"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLISSUE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-NLISSUE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

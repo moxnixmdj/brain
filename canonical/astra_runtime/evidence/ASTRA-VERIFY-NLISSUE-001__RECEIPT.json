@@ -1,0 +1,20 @@
+{
+  "receipt_for": "ASTRA-VERIFY-NLISSUE-001",
+  "capability_id": "python.issue.natural_language.parse_edit_intent.v1",
+  "adapter_module": "python_issue_nl_parse_edit_intent",
+  "observed": {
+    "issue_id": "GH-9101",
+    "nl_complete": true,
+    "ops": 1,
+    "bound_names": 2,
+    "refused_lines": 0,
+    "orch_verified": true,
+    "applied_sites": 6,
+    "tests_selected": 1,
+    "tests_passed": 1,
+    "loop_e2e_ms_run1": 305.0,
+    "loop_e2e_ms_run2": 300.6,
+    "diff_sha256": "7d4ca76acc41e31595edda689c5812d1bf62ea543dc991290c092c1e28e2490e",
+    "byte_identical_rerun": true
+  }
+}
