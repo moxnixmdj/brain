@@ -638,8 +638,43 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if re.search(r"\b"+re.escape(str(stem).replace("_"," "))+r"s?\b",
                          str(goal),re.IGNORECASE):
                 files=[raw for raw,p in paths if p.is_file()]
+                # THE SAME TWO FILTERS THE TWO SITES ABOVE ALREADY APPLY.  This
+                # fallback had neither, and it is the one that fires when the
+                # sentence names no file at all -- which is how an ordinary
+                # request is phrased.  Measured on 96015b9:
+                #
+                #   "Fix the failing test in the python source root D and write
+                #    the report to D_out/r1.json"
+                #
+                #   selected  python.software.repair.apply.verified.v1
+                #   test_paths ["canonical/astra_runtime/tmp/hx/r1.json"]
+                #
+                # The machine handed the repair adapter ITS OWN REPORT as the
+                # test to fix.  Nothing was repaired, the promise layer saw no
+                # source change, and the run died PROMISED_SOURCE_CHANGE_NOT_APPLIED
+                # -- a truthful refusal for the wrong reason.  Both filters
+                # already exist in this file and are already applied to the role
+                # list above and to the derived *_argv below; a helper that
+                # fixes a defect has to be called from every site that has it.
+                out=_path_named_after_output_verb(goal,root)
+                if out is not None:
+                    files=[x for x in files if x!=out]
+                files=[x for x in files if x not in _claimed_paths(result)]
                 if files:
                     result[key]=files
+                    continue
+                # The role was stated and no file survived, so the sentence
+                # named no test.  [] is the identity element for a list input,
+                # not a guess -- the same discipline this function already uses
+                # for {} on a key/value input and [] on a payload selector.  The
+                # capability that owns the semantics derives the corpus from the
+                # tree it was given and still fails closed on a tree that has no
+                # tests (NO_TEST_FILES_UNDER_SOURCE_ROOT), so nothing is
+                # invented here and a green empty suite is still impossible.
+                # Guessing the report was worse than either: it is a file that
+                # exists, so every downstream existence check passed.
+                if key=="test_paths":
+                    result[key]=[]
                     continue
         if key.endswith("_argv"):
             # Derived, never invented: ask the adapter for the command line it

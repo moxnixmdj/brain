@@ -25135,7 +25135,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "8026c41d795890dcfdb48f79ec9c5a54d4f1cd13f2b43bcae6958bf2f5a10479",
+    "source_sha256": "7a1af578cd29f1e82892e0efc4b0536c4f0930c29eb29cc07fa896fd0e7a53b8",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -28692,7 +28692,7 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6493,
+  "research_index_records": 6494,
   "routing_tokens": 2096,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28701,7 +28701,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1228d61900fc0081556ed54434c7100e7a3f64d25c0ef4cc299c45af201738fc"
+  "value": "549d14d8863608e403abbc33116b3f9d14d74f3a053ed0fde01e53285fafa7be"
  },
  "engines": [
   {
@@ -52242,7 +52242,7 @@
   "included_source_count": 940,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9e44a807f67835b86bfdc462e2daf37f05cb1737024bb76d6c0f876f721c01f1"
+  "source_tree_digest": "1479cb3b90fd8b5c942e95efe0259271a002d560647a5147cff999fbc3f96fde"
  },
  "research_index": [
   {
@@ -196251,6 +196251,51 @@
    }
   },
   {
+   "action_id": "A_REPAIR_SENTENCE_THAT_NAMES_NO_TEST_STILL_REPAIRS_THE_SOURCE_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/A_REPAIR_SENTENCE_THAT_NAMES_NO_TEST_STILL_REPAIRS_THE_SOURCE_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REPAIR_SENTENCE_THAT_NAMES_NO_TEST_STILL_REPAIRS_THE_SOURCE_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d087df608ec1798f89310bbab708424b96ce5047267afd8588ceace9b230196a",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "a_repair_sentence_that_names_no_test_still_repairs_the_source_v1_20261027_v1": 2,
+    "adapter": 2,
+    "already": 2,
+    "applied": 2,
+    "argv": 2,
+    "bound": 2,
+    "but": 2,
+    "corpus": 2,
+    "failing": 2,
+    "fallback": 2,
+    "file": 2,
+    "finds": 2,
+    "fix": 3,
+    "names": 2,
+    "no": 2,
+    "not": 2,
+    "one": 2,
+    "passing": 2,
+    "r1.json": 2,
+    "repair": 3,
+    "report": 3,
+    "returned": 2,
+    "role": 2,
+    "sentence": 2,
+    "source": 2,
+    "still": 2,
+    "test": 8,
+    "time": 2,
+    "v1": 2,
+    "were": 2,
+    "whose": 4
+   }
+  },
+  {
    "action_id": "A_REPORT_VERB_IS_NOT_A_SOURCE_WRITE_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27T18:41:58Z",
@@ -230576,7 +230621,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "3815c08c9f7013493fcf4a768d82063fa5c54a7f66ff7f126ef0ff2f8346fa2b",
+   "sha256": "481fbf457ba46d90d27b1bf647518112f7c7ce0286c129031f5c0f2cbe37a332",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 130,
    "symbols": [
