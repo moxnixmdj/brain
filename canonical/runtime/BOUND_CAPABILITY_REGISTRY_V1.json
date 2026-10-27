@@ -6982,6 +6982,100 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLISSUE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-NLISSUE-001.json"
       }
+    },
+    "python.tests.generate.scaffold.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.tests.generate.scaffold.v1",
+          "targets_path": "${input.targets_path}",
+          "source_root": "${input.source_root}",
+          "generated_tests_root": "${input.generated_tests_root}",
+          "output_path": "${input.output_path}",
+          "index_path": "${input.index_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_tests_generate_scaffold",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "test",
+        "generate",
+        "scaffold",
+        "smoke",
+        "unittest",
+        "uncovered",
+        "fixture",
+        "annotation",
+        "derive",
+        "coverage gap",
+        "regression",
+        "born",
+        "author"
+      ],
+      "limitations": [
+        "smoke-class only: asserts 'evaluates with derived fixtures' (result is not an exception); no invented semantic expectations, no coverage-percentage claims.",
+        "v1 targets module-scope functions only; class targets refuse loudly with evidence.",
+        "parameters: annotated via the pinned deterministic fixture table, else literal ast default, else refused UNANNOTATED_PARAM_NO_DEFAULT (listed, never guessed).",
+        "execution requires a pytest-bearing python_executable; otherwise pytest:'UNAVAILABLE' and verified=false with the generation evidence still recorded (never a silent skip)."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.tests.generate.scaffold"
+      ],
+      "requires": [
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "complete",
+        "generated_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "refused_count",
+        "target_count",
+        "test_count",
+        "test_failed",
+        "test_passed",
+        "verified"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TESTGEN-001",
+        "observed_effect": {
+          "module": "engine/thermo.py (4 annotated, previously-uncovered functions)",
+          "generated_tests": 4,
+          "tests_passed": 4,
+          "tests_failed": 0,
+          "fixture_derivation": "celsius_to_kelvin(c=1.5); fan_curve(temp=1.5, max_rpm=1); serial_id(zone='s', idx=1); summarize(readings=[1.5])",
+          "run1_ms": 317.5,
+          "run2_ms": 306.7,
+          "deterministic": "summary artifact byte-identical on rerun",
+          "source_tree_manifest": "unchanged (byte-frozen before/after)"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

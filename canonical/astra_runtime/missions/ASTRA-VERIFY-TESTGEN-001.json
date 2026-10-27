@@ -1,0 +1,9 @@
+{
+  "mission_id": "ASTRA-VERIFY-TESTGEN-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.tests.generate.scaffold.v1",
+  "statement": "Close the crown's biggest honest hole: the issue->PR loop only closes loops where tests exist. Given a realistic fully-annotated module (engine/thermo.py), derive deterministic fixtures from annotations/defaults, emit smoke-scaffold unittests, and EXECUTE them with pytest in the same call. Laws: no semantic expectations invented; unannotated-without-default params refuse with evidence; class targets refuse loudly; source tree manifest byte-frozen; byte-identical reruns; pytest absence -> UNAVAILABLE and verified=false. Design iteration recorded honestly: the first harness run caught summarize([]) IndexError in the fixture (real crash class), which hardened the fixture law (typed collections get minimal populated elements).",
+  "input_root": "/home/user/testgen_mission/fixrepo",
+  "zero_spend": true
+}
