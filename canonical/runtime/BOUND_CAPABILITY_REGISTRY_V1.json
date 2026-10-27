@@ -6662,17 +6662,17 @@
   "python.software.repair.loop.coupled.ast.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.software.repair.loop.coupled.ast.v1",
-     "max_files": 8,
-     "max_pair_candidates": 1200,
-     "max_symbols_per_file": 8,
-     "mutations_per_file": 24,
-     "output_path": "${input.output_path}",
-     "source_root": "${input.source_root}",
-     "test_argv": "${input.test_argv}",
-     "test_paths": "${input.test_paths}",
-     "timeout_s": 20
-    },
+          "capability_id": "python.software.repair.loop.coupled.ast.v1",
+          "max_files": 8,
+          "max_pair_candidates": 1200,
+          "max_symbols_per_file": 8,
+          "mutations_per_file": 24,
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 20
+        },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",

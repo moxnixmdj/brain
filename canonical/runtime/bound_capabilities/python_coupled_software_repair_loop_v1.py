@@ -154,7 +154,17 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise RepairLoopError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
  env=_PATCH._source_env(src)
- tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+ _stated_tests=[x for x in (args.get("test_paths") or []) if str(x).strip()]
+ if _stated_tests:
+  tests=[_safe_file(repo,x) for x in _stated_tests];test_paths_source="stated"
+ else:
+  # "Repair the source root so the tests pass" names no file, and which files are
+  # tests is a fact about the tree. The command on the next line was already
+  # derived when unstated; only this list was missing, and its absence is what
+  # kept the whole repair lane unreachable from the front door.
+  from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+  try:tests=discover_test_files(src);test_paths_source="discovered_under_source_root"
+  except FileNotFoundError:raise RepairLoopError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  if not tests:raise RepairLoopError("TEST_PATHS_REQUIRED")
  argv=[str(x) for x in (args.get("test_argv") or _PATCH.suite_argv(sys.executable,*tests))]
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_files=max(1,min(int(args.get("max_files",8)),32));max_symbols=max(1,min(int(args.get("max_symbols_per_file",8)),64));per=max(1,min(int(args.get("mutations_per_file",24)),128));pair_max=max(1,min(int(args.get("max_pair_candidates",1200)),20000))
