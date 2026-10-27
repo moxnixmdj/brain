@@ -120,6 +120,10 @@ def _eval(expr: Mapping[str, Any], meta: Mapping[str, Mapping[str, str]], vals: 
         typ = str(expr.get("type") or "")
         dim = _dim_string(_dim_parse(str(expr.get("dimension") or "")))
         value = expr.get("value")
+        if typ == "integer":
+            if not isinstance(value, int) or isinstance(value, bool):
+                raise CompileError("CONST_INTEGER_INVALID")
+            return "integer", dim, value
         if typ == "number":
             if not isinstance(value, (int, float)) or isinstance(value, bool) or not math.isfinite(float(value)):
                 raise CompileError("CONST_NUMBER_INVALID")
