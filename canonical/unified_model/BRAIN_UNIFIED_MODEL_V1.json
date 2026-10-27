@@ -24454,7 +24454,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "85cfe70b2a3f777ca9645be7850ac05b5a8ce1f4626ebff604ed5637450095f0",
+    "source_sha256": "e57c10eaac49cf6ea9252d5f1db7d407eb25462c1d8020d9f583ea4592165a88",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25309,7 +25309,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "3a6cfe12f9dc3606d36d4bc8cd0660da89db2e549b26e62aec4cbb51c4ceb58b",
+    "source_sha256": "7e10b867c02357cb7465eefa258d289ad97df4f9a1876e93a53d15db36746016",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28692,16 +28692,16 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6490,
+  "research_index_records": 6491,
   "routing_tokens": 2096,
   "skills": 18,
-  "source_index_entry_points": 422,
-  "source_index_modules": 1886
+  "source_index_entry_points": 423,
+  "source_index_modules": 1887
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "227c1759039f68178301bba89148a67632f06a08968183d96fa60957a2065fd4"
+  "value": "15405ef0dbbcd743ef324e07de5cce1fe6739b03c6a70dd39f430e8067f2e959"
  },
  "engines": [
   {
@@ -52242,7 +52242,7 @@
   "included_source_count": 940,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "39450018fde231e71df73f5615a94370bc34148b556f936d770dd631fbe6ab11"
+  "source_tree_digest": "9e44a807f67835b86bfdc462e2daf37f05cb1737024bb76d6c0f876f721c01f1"
  },
  "research_index": [
   {
@@ -203227,6 +203227,51 @@
    }
   },
   {
+   "action_id": "WHICH_FILES_ARE_TESTS_IS_A_FACT_ABOUT_THE_TREE_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/WHICH_FILES_ARE_TESTS_IS_A_FACT_ABOUT_THE_TREE_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHICH_FILES_ARE_TESTS_IS_A_FACT_ABOUT_THE_TREE_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "477a6d16e7deff0c4db3f34eaa0e1adee95e38d47bd042a650b7db7490b9a325",
+   "status": "",
+   "terms": {
+    "116": 1,
+    "130": 1,
+    "140": 1,
+    "158": 1,
+    "191": 1,
+    "2019": 1,
+    "20261027": 1,
+    "216": 1,
+    "286": 1,
+    "31": 1,
+    "all": 2,
+    "already": 2,
+    "answer": 2,
+    "command": 3,
+    "each": 2,
+    "files": 6,
+    "itself": 2,
+    "list": 2,
+    "main": 2,
+    "measured": 2,
+    "next": 2,
+    "no": 3,
+    "one": 4,
+    "python_repository_acceptance_measurement_v1.py": 2,
+    "question": 2,
+    "second": 2,
+    "so": 3,
+    "test": 5,
+    "tests": 4,
+    "tree": 3,
+    "v1": 2,
+    "which_files_are_tests_is_a_fact_about_the_tree_v1_20261027_v1": 2
+   }
+  },
+  {
    "action_id": "WHICH_TESTS_A_CHANGE_BREAKS_IS_NOT_A_QUESTION_A_CENSUS_CAN_ANSWER_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -210692,6 +210737,42 @@
     "test": 1,
     "test-corpus": 1,
     "text": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py",
+   "sha256": "a7de9817032419348773db41379eeb8c798f295fe2ce4c59830f2e650c328130",
+   "summary": "Which files in a source tree are tests. One rule, one place.",
+   "symbol_count": 4,
+   "symbols": [
+    "discover_test_files",
+    "discover_test_paths",
+    "is_test_file_name",
+    "stated_or_discovered"
+   ],
+   "terms": {
+    "corpus": 1,
+    "discover_test_files": 1,
+    "discover_test_paths": 1,
+    "discovery": 1,
+    "files": 1,
+    "is_test_file_name": 1,
+    "one": 2,
+    "place": 1,
+    "python": 1,
+    "rule": 1,
+    "source": 1,
+    "stated_or_discovered": 1,
+    "test": 1,
+    "tests": 1,
+    "tree": 1,
+    "v1": 1
    }
   },
   {
