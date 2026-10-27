@@ -75,7 +75,7 @@
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": "run_adapter_locally (canonical/runtime/live_brain_route_admission_v1.py:671) already executes any registry entry's adapter in-process with capability_id popped -- reused unchanged as the execution engine.  The 73-entry registry, its provides/requires vocabularies, the 94 bound adapters with their own refusal classes (PATH_OUTSIDE_REPOSITORY, TAR_GZ_OUTPUT_REQUIRED, GNU_TAR_LIST_FAILED, SQLITE_ID_COLUMN_REQUIRED, BYTE oracle magics) -- all read and run as found.  tarfile/sqlite3/zipfile/hashlib/json stdlib reused as the independent oracles.  GNU tar, jq, node reused as environment probes.  External candidates (unified-planning, up-fast-downward, SymK, cvc5 SyGuS enumeration, safe-planner, pddl2smv, provenflow) were fetched, weighed and recorded as donors; none is imported by this change because the missing thing is the EDGES, not a planner to walk them.",
   "recursive_obs": {
-    "canonical_base_commit": "249a7025e46c08b5bd122b87b5b6d169f0ee97e7",
+    "canonical_base_commit": "4bcb20974d8af00e9b475baf992f30eaa5c9e79a",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "TRUSTING_A_DECLARED_TYPE_TOKEN_AS_PROOF_TWO_CAPABILITIES_COMPOSE_WITHOUT_RUNNING_EITHER",
@@ -489,7 +489,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "786c1fa59359b1ae60d05f8f649ebc3babee3b91",
+          "git_blob_sha": "7e4f07f8a7ebe54e4b800c90ed3a5e69528ecc62",
           "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
         },
         {
