@@ -38,7 +38,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Human software-engineering requests state their inputs in a different shape than the registry declares: \"fix calc.py\" states a FILE while the repair loop declares source_root (a DIRECTORY), \"rename old_price to price\" states names the binder has no grammar for, and templates demand configuration slots the adapters already default. The typed selector therefore shortlists the right capability and refuses it, so the machine cannot reach its own SWE mechanisms from an ordinary sentence.",
-  "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+  "canonical_base_commit": "6c929302c85dd2b372564ab8160a80d7f7035ae1",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -88,7 +88,7 @@
     "canonical/runtime/live_brain_route_admission_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+    "canonical_base_commit": "6c929302c85dd2b372564ab8160a80d7f7035ae1",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ROPE_LIBCST_EXTERNAL_REFACTOR_ENGINES__HEAVY_CONFIG_NONDETERMINISTIC_FORMATTING_FOR_A_BYTE_EXACT_STD_AST_JOB",
@@ -284,10 +284,10 @@
         "STATEMENT_CHAIN_ALIGNMENT_LAW_WITH_BLOCK_DESCENT__SELECTED_PART"
       ],
       "selected_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
-      "selected_route_checked_at_utc": "2026-10-27T22:36:39Z",
+      "selected_route_checked_at_utc": "2026-10-27T22:45:04Z",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-27T22:36:39Z",
+        "checked_at_utc": "2026-10-27T22:45:04Z",
         "execution_dependencies": [
           {
             "dependency": "python3 >= 3.8 stdlib (ast, json, pathlib, re, sys)",
@@ -299,7 +299,7 @@
             ],
             "evidence_scope": "LOCAL",
             "kind": "LOCAL_RUNTIME",
-            "observed_at_utc": "2026-10-27T22:36:39Z",
+            "observed_at_utc": "2026-10-27T22:45:04Z",
             "required": true,
             "scope": "GLOBAL",
             "status": "READY",
@@ -316,7 +316,7 @@
             ],
             "evidence_scope": "LOCAL",
             "kind": "CODE_ARTIFACT",
-            "observed_at_utc": "2026-10-27T22:36:39Z",
+            "observed_at_utc": "2026-10-27T22:45:04Z",
             "required": true,
             "scope": "LOCAL",
             "status": "READY",
