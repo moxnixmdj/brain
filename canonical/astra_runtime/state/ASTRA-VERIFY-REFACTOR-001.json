@@ -1,0 +1,32 @@
+{
+ "mission_id": "ASTRA-VERIFY-REFACTOR-001",
+ "status": "COMPLETE",
+ "e2e_ms_golden": 204,
+ "golden": {
+  "rename": "pkg.core.describe: n -> size",
+  "edit_count": 9,
+  "files_edited": ["pkg/core.py", "use/aliasmod.py", "use/caller.py"],
+  "complete": true,
+  "gate": "PASS",
+  "post_edit_pytest": "2 passed (contract oracle + through-caller propagation)",
+  "positional_call_count_leg": "recursive describe(size-1, depth=depth) positional args untouched",
+  "byte_law": "docstring word 'n' and comments byte-identical (identifier spans only)"
+ },
+ "honest_legs": {
+  "shadowing": "use/shadowed.py byte-identical vs baseline (its own local describe survives; no import resolution to target)",
+  "dynamic_getattr": {
+   "site": "use/dynamic.py:5 getattr(core_mod, \"describe\")(n=k)",
+   "listed": "unknown_sites",
+   "complete_lowered": true,
+   "bytes_untouched": true,
+   "known_edits_still_applied": 9
+  },
+  "red_suite_rollback": {
+   "tamper": "contract asserted 70 (true value 71)",
+   "outcome": "SystemExit TESTS_RED_AFTER_EDIT, every source byte restored to baseline"
+  },
+  "byte_determinism": "two pristine worlds -> trees AND refactor.json byte-identical",
+  "rerun_idempotence": "PARAM_NOT_FOUND refusal (old name gone -- honest no-noop)"
+ },
+ "loop": "EDITS ARE NOW SEMANTIC: the maiden renames through scope and scope only"
+}
