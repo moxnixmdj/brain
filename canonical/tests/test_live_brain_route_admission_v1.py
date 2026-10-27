@@ -740,3 +740,61 @@ def test_r9_does_not_move_the_compile_or_selection_rates():
     c = bench.run_all()["combined"]
     assert c["compiled"] == 23, c
     assert c["expected_first_selected"] == 22, c
+
+
+def test_a_stated_patch_report_discharges_the_repair_promise():
+    """Two authorities for "repair X", and the sentence says which one applies.
+
+    Measured on 18ecf7db: the six repair families ask for "repair the python source
+    X ... so the unit tests in T pass, and save the repair report to R".  Their
+    oracle requires X's bytes untouched plus one applicable patch for X inside R
+    (live_solver_families_v3.py:430); the door required X's bytes to change.  Every
+    run therefore failed one of the two, whichever way it behaved.  A stated report
+    path is a promise of a report, so an applicable patch for the untouched source
+    discharges it -- and only that: a missing patch, a patch for another file, or a
+    patch that does not apply all still fail closed.
+    """
+    import difflib
+    import json as _json
+    work = WORK / "patchauth"
+    shutil.rmtree(work, ignore_errors=True)
+    work.mkdir(parents=True)
+    base = "canonical/astra_runtime/tmp/test_live_brain_route_admission/patchauth"
+    rel = base + "/m.py"
+    report_rel = base + "/report.json"
+    (work / "m.py").write_text("x = 1\n", encoding="utf-8")
+    before = {rel: adm._source_digest(rel)}
+    goal = "repair the python source %s so the test t.py passes and save the report to %s" % (rel, report_rel)
+    admin_stated = adm._future_artifacts(goal)
+    assert admin_stated == [report_rel], admin_stated
+
+    def report(diff, source_path=rel):
+        (work / "report.json").write_text(_json.dumps(
+            {"patches": [{"source_path": source_path, "unified_diff": diff}]}), encoding="utf-8")
+
+    good = "".join(difflib.unified_diff(["x = 1\n"], ["x = 2\n"], fromfile="a/" + rel, tofile="b/" + rel))
+    assert adm.promised_source_change_errors(goal, before) == ["PROMISED_SOURCE_UNCHANGED:" + rel]
+    assert adm.promised_source_change_errors(goal, before, []) == ["PROMISED_SOURCE_UNCHANGED:" + rel]
+    report(good)
+    assert adm.promised_source_change_errors(goal, before, [report_rel]) == []
+    # the same report is no authority unless the sentence stated it: the caller
+    # passes exactly what the goal names, and "repair X" names no report at all
+    bare = "repair %s" % rel
+    assert adm._future_artifacts(bare) == [], adm._future_artifacts(bare)
+    assert adm.promised_source_change_errors(bare, before, adm._future_artifacts(bare)) == [
+        "PROMISED_SOURCE_UNCHANGED:" + rel]
+    assert admin_stated == [report_rel]
+    # a patch for another file promises nothing about this one
+    report(good, source_path=base + "/other.py")
+    assert adm.promised_source_change_errors(goal, before, [report_rel]) == [
+        "PROMISED_SOURCE_UNCHANGED:" + rel]
+    # a patch whose context does not match the bytes on disk is not a promise either
+    stale = "".join(difflib.unified_diff(["x = 99\n"], ["x = 2\n"], fromfile="a/" + rel, tofile="b/" + rel))
+    report(stale)
+    assert adm.promised_source_change_errors(goal, before, [report_rel]) == [
+        "PROMISED_SOURCE_UNCHANGED:" + rel]
+    # an empty diff changes nothing, so it discharges nothing
+    report("")
+    assert adm.promised_source_change_errors(goal, before, [report_rel]) == [
+        "PROMISED_SOURCE_UNCHANGED:" + rel]
+    shutil.rmtree(work, ignore_errors=True)
