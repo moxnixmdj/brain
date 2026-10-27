@@ -25313,7 +25313,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6433,
+  "research_index_records": 6436,
   "routing_tokens": 1878,
   "skills": 18,
   "source_index_entry_points": 411,
@@ -25322,7 +25322,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f9acd3586cc06063603c6ba66f3fb6be5b0ab9353758c6acd72092cb46139e05"
+  "value": "79564390a0681eecc03cc84e1425c3526d8fc22fcefd67ce39433d0f1711b627"
  },
  "engines": [
   {
@@ -175073,6 +175073,47 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.1.1.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.1.1.pyc",
+   "schema": "",
+   "sha256": "f66f5c17a6b8676f193e188bb1c6e87c178ef59095dfad9d43fd8546b48053d2",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.1.1": 1,
+    "finite": 1,
+    "pytest": 1,
+    "search.cpython": 1,
+    "test": 1,
+    "verifier": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.1.1.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.1.1.pyc",
+   "schema": "",
+   "sha256": "3850b831c0295e9f900c27fc156652cf202c93f192765b26f64ac3877a39b415",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.1.1": 1,
+    "causal": 1,
+    "falsification": 1,
+    "owned": 1,
+    "pytest": 1,
+    "test": 1,
+    "v1.cpython": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
@@ -189920,6 +189961,51 @@
     "ordinary": 2,
     "sentence": 4,
     "spaces": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FILE_PATH_AND_A_REPEATED_WORD_MUST_NOT_CHOOSE_THE_CAPABILITY_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8549470fa8f4cf98923a21c272d75a91c05cf760e90e6ce5a4d2d586b25e0160",
+   "status": "",
+   "terms": {
+    "0.240": 1,
+    "0.34": 1,
+    "0.556": 1,
+    "20261027": 1,
+    "a_file_path_and_a_repeated_word_must_not_choose_the_capability_v1_20261027_v1": 2,
+    "about": 2,
+    "absent": 1,
+    "absolute": 1,
+    "adapter": 1,
+    "against": 1,
+    "answered": 1,
+    "anything": 1,
+    "caller": 2,
+    "cannot": 2,
+    "capability": 5,
+    "coverage": 2,
+    "crosshair": 2,
+    "declared": 2,
+    "every": 2,
+    "file": 3,
+    "machine": 2,
+    "measured": 2,
+    "name": 2,
+    "not": 4,
+    "path": 4,
+    "paths": 2,
+    "python": 2,
+    "sentence": 3,
+    "so": 2,
+    "substrate": 2,
+    "tokens": 2,
     "v1": 2
    }
   },
@@ -205624,7 +205710,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "63c2cf21c157af526f8f3f7b3fb305c1c35997edbd00945f1dd78a5041457dd0",
+   "sha256": "a620b2642fe226df94cf2bd3b8ec5e58d74660307603c585464226bcdfacb310",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 15,
    "symbols": [
