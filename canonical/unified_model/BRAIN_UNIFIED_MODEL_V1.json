@@ -22584,7 +22584,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "00d03acc2bc40ecef0eaf3411e7c929a64844b4a51053fa75ae80935b73b5254",
+    "source_sha256": "a17890910cbf7df6c9121bba02b12e41bb368b5b38ea4e4452d90b0645e0c9a2",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24706,7 +24706,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6427,
+  "research_index_records": 6428,
   "routing_tokens": 1824,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24715,7 +24715,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0b9375ee7c7a1d524ee1c47d62f8bbdf98c9d4e72aa6ef96b4cadf7f9062f8f8"
+  "value": "794f639e410622879381ade35e08ac1315d2305c1975723a076aed65fb626dc2"
  },
  "engines": [
   {
@@ -46760,7 +46760,7 @@
   "included_source_count": 867,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0f0f9e7eb88b1a5f5239a9cd4de6f5f1ae355bb7d5fcc234c626a1f195635ead"
+  "source_tree_digest": "ffcd107dba3b0f171614d7188ebafe442086a89f53b074bc5e182c9f53255686"
  },
  "research_index": [
   {
@@ -195294,6 +195294,51 @@
     "verified": 2,
     "were": 2,
     "word": 3
+   }
+  },
+  {
+   "action_id": "TWO_SPELLINGS_OF_ONE_PATH_ARE_ONE_QUESTION_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27T08:40:00Z",
+   "id": "research:canonical/action_intents/TWO_SPELLINGS_OF_ONE_PATH_ARE_ONE_QUESTION_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TWO_SPELLINGS_OF_ONE_PATH_ARE_ONE_QUESTION_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ac2ec73b96b7cb9d6883f95dd84de6fbbd10fa8befa0a5fbeff9ae42da48b30c",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "accept_both_spellings_of_the_same_path_when_the_speaker_only_ever_uses_one": 1,
+    "adapter": 1,
+    "answer": 1,
+    "ask": 1,
+    "capability": 2,
+    "compiler": 1,
+    "content-addressed": 1,
+    "converter": 1,
+    "door": 1,
+    "file": 1,
+    "front": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "get": 1,
+    "inside": 1,
+    "measured": 1,
+    "measurement": 1,
+    "named": 1,
+    "now": 1,
+    "one": 2,
+    "ones": 1,
+    "path": 1,
+    "paths": 1,
+    "pdf": 1,
+    "python_parse_ok": 1,
+    "question": 1,
+    "reaches": 1,
+    "read": 1,
+    "real": 1,
+    "refused": 2,
+    "sentence": 2,
+    "v1": 2
    }
   },
   {
