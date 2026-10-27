@@ -5199,18 +5199,17 @@
   "python.refactor.extract_function.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.refactor.extract_function.v1",
-     "end_line": "${input.end_line}",
-     "module": "${input.module}",
-     "new_name": "${input.new_name}",
-     "output_path": "${input.output_path}",
-     "python_executable": "${input.python_executable}",
-     "qualname": "${input.qualname}",
-     "run_tests": "${input.run_tests}",
-     "source_root": "${input.source_root}",
-     "start_line": "${input.start_line}",
-     "timeout_s": "${input.timeout_s}"
-    },
+          "capability_id": "python.refactor.extract_function.v1",
+          "end_line": "${input.end_line}",
+          "module": "${input.module}",
+          "new_name": "${input.new_name}",
+          "output_path": "${input.output_path}",
+          "qualname": "${input.qualname}",
+          "run_tests": [],
+          "source_root": "${input.source_root}",
+          "start_line": "${input.start_line}",
+          "timeout_s": 300
+        },
     "expect": {
      "field": "gate",
      "type": "field_equals",
@@ -7286,13 +7285,11 @@
   "python.source.change_impact.testselect.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.source.change_impact.testselect.v1",
-     "changed_paths": "${input.changed_paths}",
-     "diff_path": "${input.diff_path}",
-     "output_path": "${input.output_path}",
-     "source_root": "${input.source_root}",
-     "test_roots": "${input.test_roots}"
-    },
+          "capability_id": "python.source.change_impact.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7370,13 +7367,11 @@
   "python.source.crossfile_edit.choreograph.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.source.crossfile_edit.choreograph.v1",
-     "edits": "${input.edits}",
-     "edits_path": "${input.edits_path}",
-     "index_path": "${input.index_path}",
-     "output_path": "${input.output_path}",
-     "source_root": "${input.source_root}"
-    },
+          "capability_id": "python.source.crossfile_edit.choreograph.v1",
+          "edits_path": "${input.edits_path}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",

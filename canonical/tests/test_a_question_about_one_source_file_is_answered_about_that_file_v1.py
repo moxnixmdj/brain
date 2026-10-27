@@ -184,13 +184,19 @@ class APreconditionIsNotARequestTests(unittest.TestCase):
         n = float(len(declaring))
         expected = frozenset(t for t, c in counts.items() if c / n > gc._REQUIRES_SHARE_CEILING)
         self.assertEqual(gc._nondiscriminating_requires_tokens(), expected)
-        # The gap that makes the threshold meaningful rather than arbitrary:
-        # measured, 28.6% then 19.6%, nothing in between.
+        # The gap that makes the threshold meaningful rather than arbitrary.
+        # Pinned as a GAP, not as two magic margins: at 118 capabilities the
+        # measured pair was 28.6% / 19.6%, at 121 it is 34.6% / 21.0%, so hard
+        # margins went stale the first time main grew the registry while the
+        # property that justifies the threshold -- a real gap, with the ceiling
+        # strictly between the two groups -- did not move. Ten points is the
+        # weakest claim that still fails if the ceiling ever sits inside a
+        # cluster instead of between two.
+        self.assertEqual(expected, {"available", "file", "python", "source"})
         shares = sorted((c / n for c in counts.values()), reverse=True)
         just_below = max(s for s in shares if s <= gc._REQUIRES_SHARE_CEILING)
         just_above = min(s for s in shares if s > gc._REQUIRES_SHARE_CEILING)
-        self.assertLess(just_below, 0.20)
-        self.assertGreater(just_above, 0.28)
+        self.assertGreater(just_above - just_below, 0.10)
 
     def test_requiring_a_python_file_does_not_outscore_the_capability_asked_for(self):
         goal = (
@@ -206,8 +212,14 @@ class APreconditionIsNotARequestTests(unittest.TestCase):
         self.assertGreater(audit[0], crosshair[0], (audit, crosshair))
         # The mechanism, not just the outcome: `file` and `python` are matched but
         # carry no information, so they are neither scored nor counted.
-        self.assertEqual(crosshair[2]["nondiscriminating_requires"], ["file", "python"])
-        self.assertEqual(crosshair[2]["informative_requires"], [])
+        # Read off the derived set and the matched tokens rather than off the
+        # evidence dict: _score returns a short evidence dict on the early path a
+        # zero-scoring entry now takes, so the dict no longer always carries these
+        # keys. Measured on main at 3e71a8f2 this assertion failed there too --
+        # crosshair scores 0 and its evidence has no nondiscriminating_requires.
+        self.assertEqual(sorted(crosshair[2]["matched_requires"]), ["file", "python"])
+        nondiscriminating = gc._nondiscriminating_requires_tokens()
+        self.assertTrue(set(crosshair[2]["matched_requires"]) <= set(nondiscriminating))
         self.assertEqual(crosshair[1], 0)
 
 

@@ -2,31 +2,8 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1793121505.8945415,
+   "last_seen": 1792322989.8236697,
    "observations": [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
     1,
     1,
     1,
@@ -98,12 +75,8 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1793121713.1728153,
+   "last_seen": 1792323284.1871977,
    "observations": [
-    1,
-    1,
-    1,
-    1,
     1,
     1,
     1,
@@ -121,22 +94,6 @@
    "structural": false,
    "where": "archive.verify.tar_gz.gnu",
    "why": "VERIFIED"
-  },
-  "auto.pypi.msgpack|bound_pypi_install_failed": {
-   "first_seen": 1793120101.7048597,
-   "last_seen": 1793121647.8912349,
-   "observations": [
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1,
-    -1
-   ],
-   "structural": true,
-   "where": "auto.pypi.msgpack",
-   "why": "BOUND_PYPI_INSTALL_FAILED"
   },
   "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
    "first_seen": 1792312537.2174094,
@@ -175,9 +132,8 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1793120103.1529057,
+   "last_seen": 1792322989.643618,
    "observations": [
-    1,
     1,
     1,
     1,
@@ -504,14 +460,8 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1793123632.028818,
+   "last_seen": 1792323290.3054066,
    "observations": [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
     1,
     1,
     1,
