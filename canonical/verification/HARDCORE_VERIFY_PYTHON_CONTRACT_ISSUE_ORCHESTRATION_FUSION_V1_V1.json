@@ -1,0 +1,17 @@
+{
+  "capability_id": "python.contract.issue_orchestration.fusion.v1",
+  "mission_id": "AUTO-VERIFY-HARDCORE_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1-V1",
+  "observed_effect": {
+    "adapter": "python_contract_issue_orchestration_fusion_v1",
+    "incremental_spend_usd": 0,
+    "model_dependency_count": 0,
+    "output_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1.json",
+    "output_sha256": "786e6b621f21d6b565eb6e0a6995be666ca51b395ca26a8c6ad32a05ed34dda8",
+    "output_verified": true,
+    "verified": true
+  },
+  "output_sha256": "786e6b621f21d6b565eb6e0a6995be666ca51b395ca26a8c6ad32a05ed34dda8",
+  "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+  "state_path": "canonical/astra_runtime/state/HARDCORE_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1.json",
+  "verified": true
+}
