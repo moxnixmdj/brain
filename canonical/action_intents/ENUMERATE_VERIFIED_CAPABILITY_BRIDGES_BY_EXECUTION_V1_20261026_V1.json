@@ -489,7 +489,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "7e4f07f8a7ebe54e4b800c90ed3a5e69528ecc62",
+          "git_blob_sha": "0ef857702b59164d7792003e6580b4b2f1f704a1",
           "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
         },
         {
