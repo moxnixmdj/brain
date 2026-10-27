@@ -1,0 +1,17 @@
+{
+ "capability_id": "test.slice.never_miss.v1",
+ "mission_id": "AUTO-VERIFY-TEST_SLICE_NEVER_MISS_V1-V1",
+ "observed_effect": {
+  "adapter": "test_slice_never_miss_v1",
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "output_path": "canonical/astra_runtime/state/HARDCORE_TEST_SLICE_NEVER_MISS_V1.json",
+  "output_sha256": "d551425009ee09ae99267cb1c3e9164efc14877c158e88104abaecb953452c45",
+  "output_verified": true,
+  "verified": true
+ },
+ "output_sha256": "d551425009ee09ae99267cb1c3e9164efc14877c158e88104abaecb953452c45",
+ "schema": "PROJECT_BRAIN_HARDCORE_CAPABILITY_VERIFY_V1",
+ "state_path": "canonical/astra_runtime/state/HARDCORE_TEST_SLICE_NEVER_MISS_V1.json",
+ "verified": true
+}

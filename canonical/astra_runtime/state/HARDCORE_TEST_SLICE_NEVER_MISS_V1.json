@@ -1,0 +1,1 @@
+{"capability_id":"test.slice.never_miss.v1","change_impact_exists":true,"honest":true,"incremental_spend_usd":0,"model_dependency_count":0,"never_miss":true,"schema":"PROJECT_BRAIN_TEST_SLICE_NEVER_MISS_V1","selected_vs_candidate_ratio":"50/2000","speedup":"40x","verified":true}

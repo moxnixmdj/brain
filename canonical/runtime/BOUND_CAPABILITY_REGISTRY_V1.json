@@ -7171,6 +7171,150 @@
     "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_CHOREOGRAPH_V1.json"
    }
   },
+  "software.repair.loop.cegis_hypothesis.v1": {
+   "action_template": {
+    "args": {
+     "budget": "${input.budget}",
+     "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "software_repair_loop_cegis_hypothesis_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "software",
+    "repair",
+    "loop",
+    "cegis",
+    "hypothesis",
+    "htn",
+    "triad",
+    "choreograph",
+    "htn",
+    "counterexample"
+   ],
+   "limitations": [
+    "HTN loop: CEGIS(T) 24/12 DPLL(T) \u2192 hypothesis 50\u00d7 \u2192 concrete 13 \u2192 choreograph 221k \u2192 slice 50 \u2192 gate \u2014 until pass or budget. Loop not DAG. Deterministic 0 model $0."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "software.repair.loop.cegis_verified",
+    "software.repair.synthesis.triad_proven"
+   ],
+   "requires": [
+    "python.fault.localization.symbol_ranked"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "iterations",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-LOOP-CEGIS-HYPOTHESIS-V1",
+    "observed_effect": {
+     "iterations": 1,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json"
+   }
+  },
+  "software.review.gate.composer.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "software.review.gate.composer.v1",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "software_review_gate_composer_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "software",
+    "review",
+    "gate",
+    "composer",
+    "fan-in",
+    "ruff",
+    "mypy",
+    "coverage",
+    "perf",
+    "bandit",
+    "mutation"
+   ],
+   "limitations": [
+    "Typed 6-gate fan-in after choreography: static+type+coverage+perf+security+mutation must all PASS. Fixes requires=[] fail-open. Deterministic 0 model $0."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "software.review.all_gates.verified",
+    "software.review.composition.typed"
+   ],
+   "requires": [
+    "software.repair.choreography.verified"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "gates_verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-SOFTWARE-REVIEW-GATE-COMPOSER-V1",
+    "observed_effect": {
+     "gates_verified": true,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json"
+   }
+  },
   "software.synthesis.grid_induction.v1": {
    "action_template": {
     "args": {
@@ -8052,6 +8196,75 @@
     "independent_verification_required_for_any_scope_complete_promotion": true,
     "model_dependency_count": 0,
     "status": "BOUND_WITH_FAIL_CLOSED_REGRESSION_TEST"
+   }
+  },
+  "test.slice.never_miss.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "test.slice.never_miss.v1",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "test_slice_never_miss_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "test",
+    "slice",
+    "never-miss",
+    "change-impact",
+    "2070",
+    "2096",
+    "honest",
+    "minimal",
+    "40x"
+   ],
+   "limitations": [
+    "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop \u2014 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "test.slice.never_miss.verified",
+    "test.selection.minimal"
+   ],
+   "requires": [
+    "python.source.change_impact.test_selection"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/test_slice_never_miss_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "AUTO-VERIFY-TEST-SLICE-NEVER-MISS-V1",
+    "observed_effect": {
+     "never_miss": true,
+     "verified": true
+    },
+    "receipt_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json",
+    "state_path": "canonical/astra_runtime/state/HARDCORE_TEST_SLICE_NEVER_MISS_V1.json"
    }
   },
   "text.file.write": {
