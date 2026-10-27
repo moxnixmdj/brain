@@ -111,6 +111,56 @@ class TypedPlanEvidenceTests(unittest.TestCase):
         with mock.patch.object(derivation, "stated_existing_files", return_value=[]):
             self.assertIsNone(plan.build_plan(goal, ROOT))
 
+    def test_effect_inconsistent_request_produces_no_plan_and_no_false_pass(self):
+        """FALSE-PASS REGRESSION.  ``select`` admits by declared-input contract,
+        not effect: a single bindable repair choreographer was SELECTED for
+        "Type-check the file X" and no-op'd to a PASS with the source unchanged.
+        The plan must refuse effect-inconsistent goals so the front door keeps
+        its fail-closed verdict.  Independent oracle: the live solve() verdict
+        and the filesystem (source bytes unchanged)."""
+        base = _fresh("effect")
+        calc = _rel(base / "pkg/calc.py")
+        for goal in ("Type-check the file %s." % calc,
+                     "Lint the file %s." % calc):
+            # plan layer refuses
+            self.assertIsNone(plan.build_plan(goal, ROOT), goal)
+            # and the live door stays fail-closed with no retry credit
+            result = door.solve({"task_id": "SWE_effect", "goal": goal})
+            self.assertIs(result.get("pass"), False, (goal, result.get("status")))
+            self.assertNotIn("typed_swe_retry", result, goal)
+            self.assertEqual((base / "pkg/calc.py").read_text(),
+                             "def add(a, b):\n    return a - b\n", goal)
+
+    def test_refactor_module_is_relative_to_source_root(self):
+        """The three refactor adapters resolve ``module`` relative to
+        ``source_root``; a doubled prefix yields PATH_MISSING.  The plan must
+        strip it."""
+        base = _fresh("module_rel")
+        util = _rel(base / "pkg/util.py")
+        out = _rel(base / "r.json")
+        goal = ("Rename the parameter old_price to price in the python module %s "
+                "and save the report to %s." % (util, out))
+        p = plan.build_plan(goal, ROOT)
+        self.assertIsNotNone(p)
+        self.assertEqual(p[2]["inputs"].get("module"), "util.py",
+                         p[2]["inputs"].get("module"))
+        self.assertTrue((ROOT / p[2]["inputs"]["source_root"]).is_dir())
+
+    def test_rename_family_passes_honestly_through_the_live_door(self):
+        """Independent oracle: the source bytes actually change and the
+        adapter's own gate fires (not merely a PASS string)."""
+        base = _fresh("rename_pass")
+        util = _rel(base / "pkg/util.py")
+        goal = "Rename the parameter old_price to price in %s" % util
+        result = door.solve({"task_id": "SWE_rename", "goal": goal})
+        self.assertIs(result.get("pass"), True, result.get("status"))
+        self.assertIsNone(result.get("tool_truth_errors"))
+        self.assertIsNone(result.get("observed_effect_errors"))
+        after = (base / "pkg/util.py").read_text()
+        self.assertIn("def total(price, qty)", after)
+        self.assertIn("return price * qty", after)
+        self.assertNotIn("old_price", after)
+
 
 class LiveFrontDoorRetryTests(unittest.TestCase):
     def test_human_swe_sentences_pass_through_the_real_gate_chain(self):

@@ -84,11 +84,33 @@ def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any])
     return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
 
 
+def _effect_consistent(goal: str, cid: str) -> bool:
+    """Reuse the selector's OWN E30 effect vocabulary as an admission gate.
+
+    Measured 2026-10-27: ``select`` admits by DECLARED-INPUT CONTRACT, not by
+    effect.  With a single bindable proposal (F17) the E30 effect disambiguator
+    never runs, so "Type-check the file X" bound to a repair choreographer
+    (``software.repair.choreograph.crossfile.v1``) that no-op'd to a false PASS
+    with the source unchanged.  An effect-inconsistent plan must be refused so
+    the caller keeps its fail-closed verdict.  A goal that states NO effect word
+    imposes no constraint (its decisive typed admission is the evidence).
+    """
+    text = str(goal or "").lower()
+    stated: list[str] = []
+    for verbs, effects in selection._EFFECT_WORDS:
+        if any(verb in text for verb in verbs):
+            stated.extend(effects)
+    if not stated:
+        return True
+    low = str(cid or "").lower()
+    return any(effect in low for effect in set(stated))
+
+
 def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
     """Return ``(registry, admissible, compiled)`` for a DECISIVE typed SWE
     selection, or ``None``.  ``None`` means: not a SWE request, ambiguous, no
-    bindable proposal, or any fault — the caller keeps its original fail-closed
-    verdict.  Ambiguity is never silently resolved (``select`` refuses it)."""
+    bindable proposal, effect-inconsistent, or any fault — the caller keeps its
+    original fail-closed verdict.  Ambiguity is never silently resolved."""
     root = pathlib.Path(root)
     if not is_swe_request(goal):
         return None
@@ -100,6 +122,8 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         cid = str(decision.get("selected_capability") or "")
         if not cid:
             return None
+        if not _effect_consistent(goal, cid):
+            return None  # stated effect != selected capability -> no false PASS
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
         entry = dict(admissible.get(cid) or registry.get(cid) or {})
         if not entry:
@@ -113,6 +137,20 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         relocated = _fresh_output_path(goal, root, inputs)
         if relocated:
             inputs["output_path"] = relocated
+
+        # The three refactor adapters (rename_parameter / rename_symbol /
+        # extract_function) resolve ``module`` RELATIVE to ``source_root``:
+        # ``_safe_path(src_abs, module_rel)``.  The derivation emits the full
+        # repo-relative path, which doubles the prefix -> PATH_MISSING.  Measured:
+        # with ``module`` relative to ``source_root`` the rename adapter returns
+        # gate=PASS, edit_count=2, complete=true.  Only strip the prefix when the
+        # stated source_root is a real directory and genuinely prefixes module.
+        sr = inputs.get("source_root")
+        mod = inputs.get("module")
+        if (isinstance(sr, str) and sr and isinstance(mod, str)
+                and mod.startswith(sr.rstrip("/") + "/")
+                and (root / sr).is_dir()):
+            inputs["module"] = mod[len(sr.rstrip("/")) + 1:]
 
         exec_entry = dict(entry)
         exec_entry["action_template"] = _execution_template(entry, removed)
