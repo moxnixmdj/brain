@@ -1,0 +1,11 @@
+{
+  "mission_id": "ASTRA-VERIFY-DIFFTRIAGE-001",
+  "status": "COMPLETE",
+  "e2e_ms_run1": 382.2,
+  "e2e_ms_run2": 322.7,
+  "golden_gate": "PASS",
+  "sabotage_gate": "FAIL",
+  "sabotage_blocking": 1,
+  "ruff": "ruff 0.17.3",
+  "determinism": "triage_artifact_byte_identical"
+}
