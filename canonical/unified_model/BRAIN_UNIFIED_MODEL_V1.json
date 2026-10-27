@@ -28692,7 +28692,7 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6494,
+  "research_index_records": 6495,
   "routing_tokens": 2096,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28701,7 +28701,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "549d14d8863608e403abbc33116b3f9d14d74f3a053ed0fde01e53285fafa7be"
+  "value": "1996529b0e97a69102e17833d68eef68df19b8e4ae92614de1d3a3630d273281"
  },
  "engines": [
   {
@@ -196258,7 +196258,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_REPAIR_SENTENCE_THAT_NAMES_NO_TEST_STILL_REPAIRS_THE_SOURCE_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d087df608ec1798f89310bbab708424b96ce5047267afd8588ceace9b230196a",
+   "sha256": "1795c26625bdff26f8dc412a8bde76250819225c369ca150d6368922f1b620a6",
    "status": "",
    "terms": {
     "20261027": 1,
@@ -199900,6 +199900,51 @@
     "measurement": 1,
     "measurement_dependency_blocked_not_aborted_v1_20261023_v1": 2,
     "source": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d1fb034c758fe684a5d3c99bbc9f50d2ef299385dabf375fb5af440fb708a3d6",
+   "status": "",
+   "terms": {
+    "125": 1,
+    "20261027": 1,
+    "419": 1,
+    "against": 1,
+    "all": 1,
+    "attached": 1,
+    "became": 1,
+    "becomes": 1,
+    "before": 1,
+    "best": 1,
+    "both": 2,
+    "bytes": 1,
+    "cannot": 1,
+    "capabilities": 1,
+    "capability": 2,
+    "carrying": 1,
+    "catch-all": 1,
+    "census": 1,
+    "chain": 1,
+    "chainer": 1,
+    "changed": 1,
+    "collect_the_unbindable_word_matches_during_the_same_bind_attempt_and_refuse_at_fusion": 1,
+    "compare": 1,
+    "compile": 1,
+    "compiled": 1,
+    "compiler": 1,
+    "consumer": 2,
+    "modelled": 2,
+    "no": 3,
+    "refusal": 2,
+    "rows": 2,
     "v1": 2
    }
   },
@@ -230579,7 +230624,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compilation_benchmark_v1.py",
-   "sha256": "f8b04281e95a5dd7de720976cb0eb304fe4d948aa193c2be417230b9c1932205",
+   "sha256": "614336d82b169068769e3513e157511dd9c0f2afdc698e4511d91b2af365ce5d",
    "summary": "Fixed, measured benchmark for plain-goal -> executable-plan compilation.",
    "symbol_count": 9,
    "symbols": [

@@ -245,14 +245,26 @@ class KnownSelectionGapTests(unittest.TestCase):
         from canonical.runtime import goal_compilation_benchmark_v1 as bench
 
         report = bench.run()
-        gapped = sorted(report["known_selection_gaps"])
-        self.assertEqual(gapped, sorted(bench.KNOWN_SELECTION_GAPS))
-        # Was 2, then 1, now 0. BENCH_JSON_FETCH_CONSISTENCY was closed by
-        # supplying the effect_result producer map and keeping the better-scoring
-        # plan. BENCH_MARKDOWN_TO_DECISION was closed by breaking a tie the
-        # registry already had the facts to break -- see KNOWN_SELECTION_GAPS.
-        self.assertEqual(len(gapped), 0)
-        for goal_id, cause in report["known_selection_gaps"].items():
+        primary_gapped = sorted(report["known_selection_gaps"])
+        # Was 2, then 1, now 0 on the PRIMARY tier. BENCH_JSON_FETCH_CONSISTENCY
+        # was closed by supplying the effect_result producer map and keeping the
+        # better-scoring plan. BENCH_MARKDOWN_TO_DECISION was closed by breaking
+        # a tie the registry already had the facts to break.
+        self.assertEqual(primary_gapped, [])
+        # The EXTENDED tier's two residual gaps are the chain-laundered msgpack
+        # substitutions, named with their mechanism and the falsification that
+        # blocks a compare-level fix -- the dict must name exactly those and
+        # nothing else, so a fresh wrong selection elsewhere fails loudly.
+        extended = bench.run(list(bench.EXTENDED_BENCHMARK_GOALS))
+        self.assertEqual(
+            sorted(extended["known_selection_gaps"]),
+            sorted(bench.KNOWN_SELECTION_GAPS),
+        )
+        self.assertEqual(
+            sorted(bench.KNOWN_SELECTION_GAPS),
+            ["EXT_SQLITE_VERIFY", "EXT_XLSX_CREATE"],
+        )
+        for goal_id, cause in extended["known_selection_gaps"].items():
             self.assertTrue(cause, f"{goal_id} has no recorded cause")
 
     def test_decision_synthesizer_exists_but_is_unbindable(self):
@@ -559,6 +571,29 @@ class BenchmarkFloorTests(unittest.TestCase):
             BENCHMARK_EXPECTED_FIRST_FLOOR,
             "selection correctness regressed; compiling is not selecting correctly",
         )
+
+    def test_the_chain_launder_residuals_stay_named_and_measured(self):
+        """EXT_XLSX_CREATE / EXT_SQLITE_VERIFY remain a named substitution.
+
+        msgpack wins those goals with a DANGLING ``$effect_result`` slot and no
+        producer step attached (measured 2026-10-27), while the grounded xlsx /
+        sqlite consumers bind their json_path by world-guess and lose on the
+        unjustified-slot preference.  The compare-level fix was falsified the
+        same day: it is indistinguishable from the parity-pinned correct pair
+        over the routable view.  Any engine change that moves either of these
+        goals must make this pin say what it moved to.
+        """
+        from canonical.runtime import goal_compilation_benchmark_v1 as bench
+
+        report = bench.run(list(bench.EXTENDED_BENCHMARK_GOALS))
+        rows = {r["id"]: r for r in report["rows"]}
+        for gid in ("EXT_XLSX_CREATE", "EXT_SQLITE_VERIFY"):
+            row = rows[gid]
+            self.assertTrue(row["compiled"], gid)
+            self.assertFalse(row["expected_first_selected"], gid)
+            self.assertIn(
+                "CHAIN_LAUNDERED_SUBSTITUTION", row["known_selection_gap"] or "", gid)
+            self.assertIn("auto.pypi.msgpack", [str(s) for s in row["selected"]], gid)
 
     def test_every_benchmark_goal_is_a_real_live_capability(self):
         """The benchmark must not rot when a capability is renamed or removed."""

@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The repair lane reported success without repairing anything, three times over, on main at 96015b9. (1) goal_compiler._bind_inputs has a fallback for a *_paths key whose role word was stated but whose files were named separately; two filters -- _path_named_after_output_verb and _claimed_paths -- were already applied to the role list above it and to the derived *_argv below it, but not to this fallback, which is the one that fires for the ordinary phrasing. Measured: \"Fix the failing test in the python source root D and write the report to D_out/r1.json\" selected python.software.repair.apply.verified.v1 with test_paths=[\"canonical/astra_runtime/tmp/hx/r1.json\"] -- the machine handed the repair adapter its OWN REPORT as the test to fix. (2) A command line bound at COMPILE time cannot name a corpus found at RUN time. With the corpus discovered, the adapter honoured the argv bound from targets that did not exist, which collected zero tests and returned 0, and gate 1 read that as the test already passing: on a fixture whose add(1,2) returned -1 and whose test genuinely failed, the report said pre_apply_test_returncode=0, applied=false, status=PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR. (3) python_repair_apply_verified_v1 was one of the eleven TEST_PATHS_REQUIRED adapters still without the shared discovery.",
- "canonical_base_commit": "96015b9228c91e451946f5a8409c2f0109521380",
+ "canonical_base_commit": "f3a6ce3256f9ac1a6d4c077d275d1484b5f6e021",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -50,7 +50,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "96015b9228c91e451946f5a8409c2f0109521380",
+  "canonical_base_commit": "f3a6ce3256f9ac1a6d4c077d275d1484b5f6e021",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -93,7 +93,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "96015b9228c91e451946f5a8409c2f0109521380",
+  "canonical_base_commit": "f3a6ce3256f9ac1a6d4c077d275d1484b5f6e021",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -1720,7 +1720,7 @@
      "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
     }
    ],
-   "checked_at_utc": "2026-10-27T21:45:50Z",
+   "checked_at_utc": "2026-10-27T22:09:15Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -1836,10 +1836,10 @@
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
    ],
    "selected_route": "A_REPAIR_SENTENCE_THAT_NAMES_NO_TEST_STILL_REPAIRS_THE_SOURCE_V1_20261027_V1",
-   "selected_route_checked_at_utc": "2026-10-27T21:45:50Z",
+   "selected_route_checked_at_utc": "2026-10-27T22:09:15Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T21:45:50Z",
+    "checked_at_utc": "2026-10-27T22:09:15Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -1963,7 +1963,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-27T21:45:50Z",
+  "checked_at_utc": "2026-10-27T22:09:15Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
@@ -2015,7 +2015,7 @@
      "path": "canonical/tests/test_live_brain_route_admission_v1.py"
     },
     {
-     "git_blob_sha": "b134ba4169bcea60d3e13b0e20144062ccec80dd",
+     "git_blob_sha": "01fb41ab46baf4ac1f4654685a706a9dc0e2fc1f",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],
