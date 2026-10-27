@@ -123,50 +123,13 @@ def _tree_manifest(root: pathlib.Path, *, max_files: int, max_bytes: int) -> tup
     return rows, _sha_obj(rows)
 
 
-_SKIP_DISCOVERY_DIRS = {".git", ".tox", ".nox", "node_modules", "__pycache__", ".venv",
-                        "venv", "build", "dist", ".mypy_cache", ".pytest_cache"}
-
-
-def _is_test_file_name(name: str) -> bool:
-    """The repository's own rule for what a test file is called.
-
-    Not invented here: python_change_impact_testselect.py:286 already selects on
-    exactly this pair -- ``name.startswith("test_") or name.endswith("_test.py")``
-    -- and python_test_audit.py:116 defaults its pattern to ``test_*.py``. One
-    rule, one place, reused.
-    """
-    return name.startswith("test_") or name.endswith("_test.py")
-
-
-def _discover_test_paths(source_root: pathlib.Path, limit: int = 5000) -> list[str]:
-    """Every test file under ``source_root``, when the sentence did not name one.
-
-    "Run the python tests in the python source root <D>" names no file, and it
-    should not have to: the tree says which files are tests. Measured on main at
-    2754cf0d that sentence scored python.repository.acceptance.measure.v1 at 27,
-    ahead of the next candidate at 22, and was then dropped as unbindable because
-    the template demanded test_paths from the sentence -- so
-    python.source.audit.ast, which runs nothing, answered a request to RUN the
-    suite and reported pass=True.
-
-    Recursive, because the ordinary layout puts tests in a ``tests/`` directory
-    and a top-level glob finds none of them. Bounded, sorted, and skipping the
-    directories that hold copies rather than sources.
-    """
-    found = []
-    for path in sorted(source_root.rglob("*.py")):
-        if any(part in _SKIP_DISCOVERY_DIRS for part in path.relative_to(source_root).parts):
-            continue
-        if not _is_test_file_name(path.name):
-            continue
-        if path.is_symlink() or not path.is_file():
-            continue
-        found.append(_rel(source_root, path))
-        if len(found) >= limit:
-            break
-    if not found:
-        raise MeasurementError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
-    return found
+# The name rule and the walk now live in one place, shared with the eleven other
+# capabilities that refuse TEST_PATHS_REQUIRED. This module held the only copy;
+# a second copy in the repair lane would have been a rule edited once.
+from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
+    discover_test_paths as _discover_test_paths,
+    is_test_file_name as _is_test_file_name,
+)
 
 
 def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.Path | None = None) -> list[str]:
@@ -186,7 +149,10 @@ def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.P
     two spellings coincide and behaviour is unchanged.
     """
     if values is None or (isinstance(values, list) and not values):
-        return _discover_test_paths(source_root)
+        try:
+            return _discover_test_paths(source_root)
+        except FileNotFoundError:
+            raise MeasurementError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
     if not isinstance(values, list):
         raise MeasurementError("TEST_PATHS_REQUIRED")
     out = []
