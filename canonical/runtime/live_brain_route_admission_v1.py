@@ -1927,14 +1927,70 @@ def _composed_acceptance(goal: str, chain: Any, executed: Mapping[str, Any]) -> 
 
 
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
-    """THE live Brain entry: front-compile -> admit -> execute -> tool truth -> promised artifacts."""
+    """THE live Brain entry, now with a scoped, ambiguity-preserving typed-SWE retry.
+
+    The PRIMARY path below (``_solve_body``) is unchanged: front-compile -> admit
+    -> execute -> the full observation gate chain.  Only when it FAILS BEFORE
+    EXECUTING anything, the request is an explicit software-engineering request,
+    and the hidden typed selector ``capability_selection_retrieval_v1.select`` is
+    DECISIVE, does a second attempt run -- re-entering the SAME ``_solve_body``
+    gate chain with a fully-bound typed plan (see ``swe_typed_plan_v1``).
+
+    Measured 2026-10-27: on five fresh human SWE sentences the primary door
+    routed to PDF/document converters and refused; the typed retry reaches the
+    capability the sentence actually names and runs the same honesty gates.
+    Nothing is widened: a non-decisive (ambiguous) selector returns no plan and
+    the original refusal stands; an executed verdict is never overwritten; a
+    non-SWE goal never reaches the retry (three pinned front-door refusals were
+    verified non-SWE).  Zero model dependency, zero incremental spend.
+    """
+    result = _solve_body(request)
+    if result.get("pass") is True or (request or {}).get("_typed_swe_plan") is not None:
+        return result
+    # A retry is only for "could not route/bind yet".  An executed verdict, a
+    # genuine adapter fault, or an observation failure already judged the world;
+    # a second guess must never overwrite it.
+    if result.get("executed") is True:
+        return result
+    goal = str((request or {}).get("goal") or "").strip()
+    try:
+        from canonical.runtime import swe_typed_plan_v1 as _typed_plan
+        if not _typed_plan.is_swe_request(goal):
+            return result
+        plan = _typed_plan.build_plan(goal, ROOT)
+        if plan is None:  # ambiguous or no bindable proposal -> keep fail-closed
+            return result
+        retry_request = dict(request)
+        retry_request["_typed_swe_plan"] = plan
+        retry = _solve_body(retry_request)
+        if retry.get("pass") is True:
+            retry["typed_swe_retry"] = {
+                "schema": "SWE_TYPED_RETRY_V1",
+                "primary_status": result.get("status"),
+                "selected_capability": plan[2].get("selected_capability"),
+                "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
+                "model_dependency_count": 0,
+                "incremental_spend_usd": 0,
+            }
+            return retry
+    except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
+        pass
+    return result
+
+
+def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
+    """Primary front-compile -> admit -> execute -> tool truth -> promised artifacts."""
     started = perf_counter_ns()
     task_id = str((request or {}).get("task_id") or "").strip()
     goal = str((request or {}).get("goal") or "").strip()
     if not task_id or not goal:
         return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
+    _typed_plan = (request or {}).get("_typed_swe_plan")
     try:
-        registry, admissible, compiled = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
+        if _typed_plan is not None:
+            registry, admissible, compiled = _typed_plan
+        else:
+            registry, admissible, compiled = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
     except goal_compiler.GoalCompilationFailure as exc:
         # The sentence names no single capability. Before calling that a gap,
         # ask the composer whether a CHAIN of capabilities reaches it: the
