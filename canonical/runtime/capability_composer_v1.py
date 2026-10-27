@@ -35,6 +35,105 @@ REGISTRY = Path(__file__).resolve().parents[0] / "BOUND_CAPABILITY_REGISTRY_V1.j
 
 
 # --------------------------------------------------------------------------- #
+# verified emitted artifacts
+# --------------------------------------------------------------------------- #
+# WHY THIS TABLE EXISTS
+#
+# 85 of the 96 effect tokens the registry provides are consumed by nothing, and
+# 25 capabilities "provide" their own name (`archive.tar_gz.create_from_manifest`
+# provides `archive.tar_gz.create_from_manifest`).  A name is not a type: no
+# consumer can ever unify with it, so the edge does not exist and the planner
+# cannot chain two capabilities that really do fit together.
+#
+# `archive.tar_gz.create_from_manifest` writes a tar.gz and the registry's own
+# verification record says so: it names `archive.verify.tar_gz.gnu` as its
+# independent verifier, that verifier requires `archive.tar_gz.available`, and
+# the pair carries a mission receipt with the observed member count and archive
+# hash.  So the fact is already proven and paid for -- only the token the
+# consumer needs was never declared, and the graph could not see a composition
+# its own evidence certifies.
+#
+# WHAT MAY GO IN A ROW
+#
+# Only what an execution proved.  A row states the token a capability really
+# emits, the oracle that re-read the emitted bytes independently of the adapter,
+# and the consumer that accepts them.  A row whose token no consumer requires,
+# or whose capability is not in the registry, contributes NOTHING (see
+# `verified_emits_report`), because a declaration no one can use is decoration
+# and an unproven declaration is the exact defect this table exists to remove.
+#
+# Nothing here calls a model and nothing is asserted from a name: every row is
+# re-proven on demand by canonical/tests/test_verified_emitted_artifacts_v1.py,
+# which runs the producer and re-reads the bytes with the stdlib.
+VERIFIED_EMITS_V1: dict[str, dict[str, Any]] = {
+    "archive.tar_gz.create_from_manifest": {
+        "tokens": ["archive.tar_gz.available"],
+        "consumer": "archive.verify.tar_gz.gnu",
+        "evidence": {
+            "proven_by": "EXECUTION",
+            "oracle": (
+                "stdlib tarfile reopens the emitted bytes, requires the gzip "
+                "magic, and byte-compares every member against the manifest's "
+                "verification_paths; the archive is then handed to "
+                "archive.verify.tar_gz.gnu, which must report verified=true"
+            ),
+            "registry_record": (
+                "archive.tar_gz.create_from_manifest.verification."
+                "independently_verified_by = archive.verify.tar_gz.gnu"
+            ),
+            "receipt": (
+                "canonical/astra_runtime/evidence/"
+                "ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json"
+            ),
+            "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+        },
+    },
+}
+
+
+def verified_emits_report(
+    reg: Mapping[str, Any] | None = None,
+    table: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Which rows are usable, and why the others are not.
+
+    Fail-closed: a row is admitted only when its capability exists, every token
+    it claims is required by some other capability, and the row names the
+    oracle and the consumer that prove it.  Everything else is reported as
+    refused with a reason instead of being quietly trusted.
+    """
+    reg = reg if reg is not None else load_registry()
+    table = table if table is not None else VERIFIED_EMITS_V1
+    required = {t for entry in reg.values() for t in (entry.get("requires") or [])}
+    admitted: dict[str, list[str]] = {}
+    refused: list[dict[str, Any]] = []
+    for cid, row in table.items():
+        tokens = [str(t) for t in (row.get("tokens") or [])]
+        evidence = row.get("evidence") or {}
+        if cid not in reg:
+            refused.append({"capability_id": cid, "reason": "CAPABILITY_NOT_IN_REGISTRY"})
+            continue
+        if not tokens:
+            refused.append({"capability_id": cid, "reason": "NO_TOKENS_CLAIMED"})
+            continue
+        unused = [t for t in tokens if t not in required]
+        if unused:
+            refused.append({"capability_id": cid, "reason": "TOKEN_NO_CONSUMER",
+                            "tokens": unused})
+            continue
+        if not evidence.get("oracle") or not row.get("consumer"):
+            refused.append({"capability_id": cid, "reason": "NO_EXECUTION_EVIDENCE"})
+            continue
+        if str(row.get("consumer")) not in reg:
+            refused.append({"capability_id": cid, "reason": "CONSUMER_NOT_IN_REGISTRY",
+                            "consumer": str(row.get("consumer"))})
+            continue
+        admitted[cid] = tokens
+    return {"schema": SCHEMA + "_VERIFIED_EMITS", "admitted": admitted,
+            "refused": refused, "rows": len(table)}
+
+
+# --------------------------------------------------------------------------- #
 # graph
 # --------------------------------------------------------------------------- #
 def load_registry(path: str | Path | None = None) -> dict[str, Any]:
@@ -42,16 +141,34 @@ def load_registry(path: str | Path | None = None) -> dict[str, Any]:
     return json.loads(p.read_text(encoding="utf-8"))["capabilities"]
 
 
-def graph(registry: Mapping[str, Any] | None = None) -> dict[str, dict[str, list[str]]]:
-    """cid -> {"requires": [...], "provides": [...]}"""
+def graph(registry: Mapping[str, Any] | None = None,
+          verified: Mapping[str, Mapping[str, Any]] | None = None,
+          use_verified: bool = True) -> dict[str, dict[str, list[str]]]:
+    """cid -> {"requires": [...], "provides": [...]}
+
+    The declared graph is the registry's own `requires`/`provides`.  A token a
+    capability really emits but never declared (see VERIFIED_EMITS_V1) is added
+    here, so a chain its evidence already certifies becomes visible to `plan`
+    and `forward_closure`.  `use_verified=False` reproduces the declared graph
+    exactly, which is how the negative controls prove the added edge is what
+    changed the answer.
+    """
     reg = registry if registry is not None else load_registry()
-    return {
-        cid: {
+    additions: dict[str, list[str]] = {}
+    if use_verified:
+        table = verified if verified is not None else VERIFIED_EMITS_V1
+        additions = verified_emits_report(reg, table)["admitted"]
+    out: dict[str, dict[str, list[str]]] = {}
+    for cid, entry in reg.items():
+        provides = list(entry.get("provides") or [])
+        for token in additions.get(cid, []):
+            if token not in provides:
+                provides.append(token)
+        out[cid] = {
             "requires": list(entry.get("requires") or []),
-            "provides": list(entry.get("provides") or []),
+            "provides": provides,
         }
-        for cid, entry in reg.items()
-    }
+    return out
 
 
 def producers(token: str, g: Mapping[str, Any] | None = None) -> list[str]:

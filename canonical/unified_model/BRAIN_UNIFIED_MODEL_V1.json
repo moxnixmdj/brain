@@ -24706,7 +24706,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6426,
+  "research_index_records": 6427,
   "routing_tokens": 1824,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24715,7 +24715,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "58d44f2e6d8b8ac984eb9c580a122e2d181b68c820d753473fc88bf10f5ac8b2"
+  "value": "0b9375ee7c7a1d524ee1c47d62f8bbdf98c9d4e72aa6ef96b4cadf7f9062f8f8"
  },
  "engines": [
   {
@@ -195772,6 +195772,30 @@
    }
   },
   {
+   "action_id": "VERIFIED_EMITTED_ARTIFACT_EDGE_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/VERIFIED_EMITTED_ARTIFACT_EDGE_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/VERIFIED_EMITTED_ARTIFACT_EDGE_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5bf38bce51bbe34dd2820f626d205f340a7d367a427c2674e2776aedac108002",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "artifact": 1,
+    "declare_the_artifact_a_capability_really_emits_so_the_planner_can_chain_it_to_the_verifier_that_already_requires_that_type": 1,
+    "edge": 1,
+    "eighty_five_of_the_ninety_six_effect_tokens_the_registry_provides_are_consumed_by_nothing_and_twenty_five_capabilities_provide_their_own_name_as_an_effect_so_no_consumer_can_ever_unify_with_it__measured_2026_10_27_sixteen_of_seventy_three_capabilities_can_take_another_capabilitys_output_and_the_archive_pair_whose_joint_verification_the_registry_already_records_could_not_be_chained_by_the_planner_at_all": 1,
+    "emitted": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "the_producer_declares_the_artifact_it_really_writes_and_the_planner_chains_it_to_the_verifier_that_already_requires_it__before_plan_manifest_json_available_to_archive_verify_manifest_members_was_none_after_it_is_archive_tar_gz_create_from_manifest_then_archive_verify_tar_gz_gnu__capabilities_that_can_take_anothers_output_16_of_73_to_17_of_73": 1,
+    "v1": 2,
+    "verified": 1,
+    "verified_emitted_artifact_edge_v1_20261027_v1": 1
+   }
+  },
+  {
    "action_id": "VERIFIER_ROUTING_CHECK_SAMPLE_SIZE_FIX_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -207385,9 +207409,9 @@
    "imported_by_count": 6,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_composer_v1.py",
-   "sha256": "5ef7b96e49b854f30edbce40aa794330af96e4da10ad5785ef8fe072f391ba59",
+   "sha256": "db0eda3d6b2f34afaa8c666c1563223fd0c557ad089293bb1caa3a49a96b4fec",
    "summary": "PROJECT_BRAIN_CAPABILITY_COMPOSER_V1 -- connect the 67 bound capabilities.",
-   "symbol_count": 14,
+   "symbol_count": 15,
    "symbols": [
     "blockers",
     "call_errors",
@@ -207402,7 +207426,8 @@
     "producers",
     "report",
     "signature",
-    "unreachable"
+    "unreachable",
+    "verified_emits_report"
    ],
    "terms": {
     "67": 1,
@@ -207426,7 +207451,8 @@
     "report": 1,
     "signature": 1,
     "unreachable": 1,
-    "v1": 1
+    "v1": 1,
+    "verified_emits_report": 1
    }
   },
   {
