@@ -1,0 +1,30 @@
+{
+ "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
+ "status": "COMPLETE",
+ "e2e_ms": 218,
+ "golden": {
+  "world": "rensym_mission: pkg/core.py (def top/THRESHOLD/class Meter) + use/caller.py (from-import + import-module attribute) + use/aliaser.py (from-import alias) + tests/test_core.py referee",
+  "rename": {
+   "qualname": "top",
+   "new_symbol": "apex",
+   "symbol_kind": "FUNCTION",
+   "edit_count": 5,
+   "files_edited": [
+    "pkg/core.py",
+    "use/aliaser.py",
+    "use/caller.py"
+   ],
+   "gate": "PASS",
+   "verified": true,
+   "complete": true
+  },
+  "post_world": "def apex(values, verbose=False): with body uses renamed; caller `from pkg.core import apex, THRESHOLD` + core_mod.apex(...); aliaser `from pkg.core import apex as apex` (alias law preserved); tests green post-edit"
+ },
+ "adversarial_legs": {
+  "rollback": "named suite tampered -> TESTS_RED_AFTER_EDIT; sha256 of every edited file equals the pre-edit hash",
+  "inheritance_refusal": "REFUSE_INHERITED_OVERRIDE:Sub.bands and REFUSE_INHERITED_USE on self.bands through a subclass, zero bytes moved",
+  "unknown_sites": "unattributable receiver and getattr(core_mod, \"top\") listed with complete=false, untouched"
+ },
+ "pin_suite": "canonical/tests/test_python_refactor_rename_symbol_v1.py: 18 passed x 3 runs",
+ "census": "modelled 418 -> 419 on main 3e71a8f; registry rows 124 -> 125"
+}

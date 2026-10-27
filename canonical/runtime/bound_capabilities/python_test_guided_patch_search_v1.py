@@ -454,6 +454,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
         "incremental_spend_usd":0,
         "source_restored":source.read_bytes()==original_bytes,
         "attempts":attempts,
+        "patches":[],  # candidate patches: the machine-readable promised artifact
         "hard_nonclaims":[
             "NO_UNIVERSAL_PATCH_SEARCH_COMPLETENESS",
             "NO_MULTI_EDIT_COMPLETENESS",
@@ -471,6 +472,13 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
             "candidate_source_sha256":_sha(candidate.encode("utf-8")),
             "verification_replays":replay,
             "unified_diff":patch,
+            "patches":[{
+                "source_path":rel,
+                "winning_mutation":desc,
+                "candidate_source_sha256":_sha(candidate.encode("utf-8")),
+                "verification_replays":replay,
+                "unified_diff":patch,
+            }],
         })
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")

@@ -1,0 +1,44 @@
+{
+ "receipt_for": "ASTRA-VERIFY-RENAMESYM-001",
+ "capability_id": "python.refactor.rename_symbol.v1",
+ "adapter_module": "python_refactor_rename_symbol",
+ "observed": {
+  "golden": {
+   "qualname": "top",
+   "new_symbol": "apex",
+   "symbol_kind": "FUNCTION",
+   "edit_count": 5,
+   "files_edited": [
+    "pkg/core.py",
+    "use/aliaser.py",
+    "use/caller.py"
+   ],
+   "gate": "PASS",
+   "verified": true,
+   "pytest_rc": 0,
+   "e2e_ms": 218
+  },
+  "white_box_harvest": "_safe_path, _sha256, substrprocess/env/test-gate shape, _binds_name scope collector and rollback discipline imported unchanged from python_refactor_rename_parameter; registry row shape + ASTRA-VERIFY triple choreography from the extract_function slice",
+  "kind_matrix_observed": [
+   "FUNCTION cross-file golden (def + load uses + from-import token + import-module attribute)",
+   "CLASS rename with constructor/use propagation",
+   "MODULE_BINDING over Assign and AnnAssign (RATIO/FACTOR)",
+   "METHOD self/cls/C.m law; super() never touched; module-level C.m renamed",
+   "NESTED_FUNCTION file-local via qualname probe.collect"
+  ],
+  "honesty_legs_observed": [
+   "shadowed inner scope keeps old name; recorded in shadowed_keeps (scope=inner)",
+   "NEW_NAME_COLLIDES on existing def, module binding, nested scope and non-target import alias",
+   "ALIAS_BINDING_SAME_NAME refused (`from m import top as top`)",
+   "REFUSE_INHERITED_OVERRIDE:Sub.bands when subclass overrides the renamed method",
+   "REFUSE_INHERITED_USE when subclass inherits-and-calls self.bands",
+   "REFUSE_NONLOCAL_OR_GLOBAL on module binding declared global in a function",
+   "SYMBOL_KIND_UNSUPPORTED locals/params/class-assigns",
+   "SYMBOL_NOT_FOUND, MULTI_DEFINITION, INVALID_IDENTIFIER, SPAN_INTEGRITY refuse closed",
+   "unattributable attribute receiver and getattr dispatch listed in unknown_sites, complete=false, bytes never edited",
+   "TESTS_RED_AFTER_EDIT with full sha256 byte restoration",
+   "PASS_BLIND with verified=false when no tests are named",
+   "two pristine worlds byte-identical trees and artifacts"
+  ]
+ }
+}

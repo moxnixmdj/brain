@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::\"Which tests does my change break?\" had no answer. Measured on origin/main at b0da6f4, \"Select the tests affected by the changed paths <F> in the python source root <D>\" scored python.source.change_impact.testselect.v1 at 22 and python.source.audit.ast at 22 -- an exact tie -- and _rank_bindable_candidates ends in ranked.sort(key=lambda x:(-x[0],-x[1],x[2])), so the tie was broken by CAPABILITY ID and \"audit\" sorts before \"change_impact\". A read-only census that reports files, functions, classes and sha256 answered a test-impact question because of the first letter of its own name. The capability that owns the question declares the keywords test, affected, change, impact and selection while the sentence says tests, affected, changed and Select: three of its four discriminating words missed on inflection alone, and it matched exactly one (affected). Worse, even when it was selected it could not run: python_change_impact_testselect.py:234 requires changed_paths to be a LIST -- isinstance(changed_paths, list) and all(isinstance(x, str) ...) -- but changed_paths was absent from goal_front_compiler_v1._PATH_LIST_KEYS, so the binder handed it the bare string '/\u2026/calc.py' and the adapter raised RuntimeError:CHANGE_IMPACT_INPUT_REQUIRED from inside its own body. The key's own plural name already said it was a list.",
- "canonical_base_commit": "b0da6f47869a7d8639438499d6bc80f66ba32546",
+ "canonical_base_commit": "34648e4f1bd79aeed334f21a3f6db30f81e10f9e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -50,7 +50,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "b0da6f47869a7d8639438499d6bc80f66ba32546",
+  "canonical_base_commit": "34648e4f1bd79aeed334f21a3f6db30f81e10f9e",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -89,7 +89,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "b0da6f47869a7d8639438499d6bc80f66ba32546",
+  "canonical_base_commit": "34648e4f1bd79aeed334f21a3f6db30f81e10f9e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -1716,7 +1716,7 @@
      "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
     }
    ],
-   "checked_at_utc": "2026-10-27T18:42:33Z",
+   "checked_at_utc": "2026-10-27T18:46:01Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -1832,10 +1832,10 @@
     "SPEED_BY_REMOVING_DUPLICATED_WORK_V1_20261026_V1"
    ],
    "selected_route": "WHICH_TESTS_A_CHANGE_BREAKS_IS_NOT_A_QUESTION_A_CENSUS_CAN_ANSWER_V1_20261027_V1",
-   "selected_route_checked_at_utc": "2026-10-27T18:42:33Z",
+   "selected_route_checked_at_utc": "2026-10-27T18:46:01Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-27T18:42:33Z",
+    "checked_at_utc": "2026-10-27T18:46:01Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -1959,7 +1959,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-27T18:42:33Z",
+  "checked_at_utc": "2026-10-27T18:46:01Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
@@ -1999,7 +1999,7 @@
      "path": "canonical/runtime/goal_front_compiler_v1.py"
     },
     {
-     "git_blob_sha": "9314386fc97f5d447ffa5caa4f13a5cf51c54395",
+     "git_blob_sha": "f65cc56f97f6e7355075364cfebf8196347b638f",
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
@@ -2007,7 +2007,7 @@
      "path": "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py"
     },
     {
-     "git_blob_sha": "02a8f3f2d7fee877d34c2cc67a3ffbb5a9472aa9",
+     "git_blob_sha": "325b4fe96d38ca707be872e1687b743a64eb07df",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     },
     {
@@ -2015,7 +2015,7 @@
      "path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py"
     },
     {
-     "git_blob_sha": "41331aa299a224ff9887c135c5483c66f70ac5a2",
+     "git_blob_sha": "0849551a5c78af2444047f384d206c5c8ce62719",
      "path": "canonical/runtime/goal_compiler.py"
     },
     {

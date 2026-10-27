@@ -5377,6 +5377,101 @@
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REFACTOR-001.json"
    }
   },
+  "python.refactor.rename_symbol.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.rename_symbol.v1",
+     "module": "${input.module}",
+     "new_symbol": "${input.new_symbol}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_refactor_rename_symbol",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "refactor",
+    "rename",
+    "symbol",
+    "identifier",
+    "ast",
+    "scope",
+    "binding",
+    "shadowing",
+    "call site",
+    "import propagation",
+    "semantic edit",
+    "codemod"
+   ],
+   "limitations": [
+    "edits identifiers at exact spans only: strings, comments and formatting are byte-preserved; every splice is verified against the original bytes (SPAN_INTEGRITY).",
+    "only uses that provably resolve to the same binding are renamed; dynamic receivers, getattr dispatch and unattributable attribute sites are listed in unknown_sites and lower complete, never silently edited or dropped.",
+    "method renames refuse when a subclass overrides the same name (REFUSE_INHERITED_OVERRIDE) or inherits-and-calls it (REFUSE_INHERITED_USE); super() references are never touched.",
+    "locals, parameters and class-level assignments refuse SYMBOL_KIND_UNSUPPORTED (rename_parameter owns params); global/nonlocal declarations on the old name refuse REFUSE_NONLOCAL_OR_GLOBAL.",
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.rename_symbol"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "module",
+    "qualname",
+    "old_symbol",
+    "new_symbol",
+    "symbol_kind",
+    "edit_count",
+    "files_edited",
+    "unknown_sites",
+    "shadowed_keeps",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified"
+   ],
+   "source": {
+    "module": "python stdlib ast",
+    "type": "runtime",
+    "version_family": ">=3.8"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
+    "observed_effect": {
+     "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
+     "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
+     "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
+     "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical",
+     "determinism": "two pristine worlds -> byte-identical trees and artifacts; string literals and substring-carriers (topper, \"top of \") never edited",
+     "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files"
+    },
+    "pin_green": "18/18 rename-symbol pins green",
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-RENAMESYM-001.json"
+   }
+  },
   "python.refactor.test_scaffold.fusion.v1": {
    "action_template": {
     "args": {

@@ -1244,6 +1244,39 @@ _RESULT_DESTINATION = re.compile(
     re.IGNORECASE)
 
 
+# The noun a sentence uses when the thing being saved is EVIDENCE rather than a
+# command's output.  "Save the report to R" reserves R for the report.
+_EVIDENCE_NOUN = (r"report|receipt|result|output|log|summary|patch|findings|"
+                  r"transcript|explanation|plan|evidence|proof|manifest|inventory")
+
+
+def _reserved_for_the_report(sentence: str) -> set[str]:
+    """Paths the sentence reserved for evidence, which are therefore not operands.
+
+    Measured on 53150bd: "Rename the parameter old_price to price in the python
+    module X and save the report to R" bound ``mv X R``.  ``_RESULT_DESTINATION``
+    reads "to R" as the destination of the command, which is true of "copy the
+    file A to the file B" and false here: what goes to R is the REPORT, and the
+    thing the sentence named as the module is not something to rename into it.
+    The command removed X and put nothing in its place; the front door then
+    refused the run with FAIL_CLOSED__NAMED_INPUT_REMOVED, with the source gone.
+
+    A destination is only the command's destination when the sentence says the
+    COMMAND's output goes there.  When the object of the save verb is evidence,
+    the path belongs to the report and to nothing else.
+    """
+    text = str(sentence or "")
+    reserved: set[str] = set()
+    for path in extract_paths(sentence):
+        where = text.rfind(str(path))
+        if where <= 0:
+            continue
+        if re.search(r"\b(?:" + _EVIDENCE_NOUN + r")\b[^\n]{0,24}?" 
+                     r"\b(?:to|into|at)\b[^\n]{0,8}$", text[:where], re.IGNORECASE):
+            reserved.add(str(path))
+    return reserved
+
+
 def _states_a_destination_for_the_result(sentence: str, dest: Any) -> bool:
     """True when the sentence introduces `dest` as where the result goes."""
     text = str(sentence or "")
@@ -1653,10 +1686,16 @@ def _prose_argv(sentence: str) -> list[str] | None:
     from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
 
     known = set(_accept._READ_ONLY_COMMANDS) | set(_accept._MUTATING_POSTCONDITIONS)
+    mutating = set(_accept._MUTATING_POSTCONDITIONS)
     text = str(sentence or "").lower()
     paths = extract_paths(sentence)
     if not paths:
         return None
+    # A path the sentence reserved for the REPORT is not an operand of a command
+    # that changes the filesystem: it is where the evidence goes.  Read-only
+    # programs are unaffected -- their stdout is what lands there, which is the
+    # mechanism that already existed ("write the unique lines of A to the file B").
+    reserved_for_report = _reserved_for_the_report(sentence)
     # The table is matched against the sentence with every path masked out.  A
     # path is a name, not prose, and leaving it in measured two ways: a fixture
     # called `blank.txt` satisfied the blank-line pattern by its own name, and
@@ -1671,6 +1710,8 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if not re.search(pattern, text):
             continue
         if len(paths) != 2:
+            return None
+        if program in mutating and reserved_for_report & set(map(str, paths)):
             return None
         return [program, dest_flag, str(paths[1]), str(paths[0])]
     # "Append the contents of the file A to the file B" measured as binding
@@ -2534,6 +2575,10 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if not re.search(pattern, text):
             continue
         operands = paths
+        if program in mutating and reserved_for_report & set(map(str, paths)):
+            # The report path was about to be read, moved, copied or deleted as
+            # though the sentence had named it as an operand.
+            return None
         if arity < 0:
             # A negative arity means the program takes as many operands as the
             # sentence names, and every one of them has to be stated.  Only
