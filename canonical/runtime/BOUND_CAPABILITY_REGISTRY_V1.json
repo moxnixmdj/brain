@@ -6520,6 +6520,84 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CHANGE-IMPACT-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CHANGE-IMPACT-001.json"
       }
+    },
+    "python.source.symbols.resolve.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.symbols.resolve.v1",
+          "output_path": "${input.output_path}",
+          "queries": "${input.queries}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_symbol_resolve",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "resolve",
+        "definition",
+        "reference",
+        "import",
+        "alias",
+        "cross",
+        "module",
+        "symbol",
+        "lookup"
+      ],
+      "limitations": [
+        "Resolution is truthful, not omniscient: MULTI_HOME lists every candidate, EXTERNAL/BUILTIN declare their lane, UNRESOLVED carries its reason.",
+        "Dynamic receiver objects are not traced; dotted references walk module/class structure only."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.symbols.resolve"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "external_count",
+        "multi_home_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "query_count",
+        "resolved_count",
+        "unresolved_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SYMBOL-RESOLVE-001",
+        "observed_effect": {
+          "source_root": "canonical",
+          "queries": 4,
+          "resolved": 2,
+          "multi_home": 1,
+          "builtin": 1,
+          "external": 0,
+          "unresolved": 0,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

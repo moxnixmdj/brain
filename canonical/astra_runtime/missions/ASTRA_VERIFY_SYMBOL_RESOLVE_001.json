@@ -1,0 +1,32 @@
+{
+  "mission_id": "ASTRA-VERIFY-SYMBOL-RESOLVE-001",
+  "schema": "PROJECT_BRAIN_ASTRA_MISSION_V1",
+  "steps": [
+    {
+      "args": {
+        "output_path": "canonical/astra_runtime/tmp/ASTRA-VERIFY-SYMBOL-RESOLVE-001__FULL.json",
+        "queries": [
+          {
+            "line": 40,
+            "module": "canonical/runtime/capability_planner.py",
+            "name": "registry"
+          },
+          {
+            "reference": "canonical.runtime.bound_capabilities.python_change_impact_testselect.run"
+          },
+          {
+            "line": 60,
+            "module": "canonical/runtime/capability_planner.py",
+            "name": "len"
+          },
+          {
+            "reference": "canonical.runtime.enforce_goal_hierarchy"
+          }
+        ],
+        "source_root": "canonical"
+      },
+      "capability_id": "python.source.symbols.resolve.v1"
+    }
+  ],
+  "title": "Verify python.source.symbols.resolve.v1: line/name and dotted queries resolve definitions truthfully over the brain's own canonical tree"
+}
