@@ -162,7 +162,9 @@ def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.P
     return out
 
 
-def _validate_argv(values: Any, test_paths: list[str]) -> list[str]:
+def _validate_argv(values: Any, test_paths: list[str],
+                   source_root: pathlib.Path | None = None,
+                   repo: pathlib.Path | None = None) -> list[str]:
     argv = values
     if argv is None:
         # Executing a test file as a script only starts the tests when the file carries a __main__
@@ -176,7 +178,35 @@ def _validate_argv(values: Any, test_paths: list[str]) -> list[str]:
     allowed = {pathlib.Path(sys.executable).name.lower(), "python", "python3", "py"}
     if exe not in allowed:
         raise MeasurementError("TEST_EXECUTABLE_NOT_PYTHON")
-    return [str(x) for x in argv]
+    argv = [str(x) for x in argv]
+    if source_root is None:
+        return argv
+    # The caller states repository-relative paths, but this measurement runs in a
+    # COPIED workspace with that workspace as its cwd -- so a token naming
+    # ``canonical/.../test_calc.py`` names nothing there, the suite runner loads
+    # no tests, and the measurement records returncode 1 with test_count 0 for a
+    # suite that passes.  A token naming one of the already-validated test files
+    # is therefore rewritten to the workspace-relative name, exactly as the repair
+    # controller's candidate layout does.  Only tokens that resolve to a
+    # validated test file are touched; every other argument, including a whole
+    # harness program carried in one token, passes through verbatim.
+    by_abs = {}
+    for rel in test_paths:
+        by_abs[(source_root / rel).resolve()] = rel
+    bases = [b for b in (repo, source_root) if b is not None]
+    rewritten = []
+    for token in argv:
+        hit = None
+        for base in bases:
+            try:
+                candidate = (base / token).resolve()
+            except OSError:
+                continue
+            if candidate in by_abs:
+                hit = by_abs[candidate]
+                break
+        rewritten.append(hit if hit is not None else token)
+    return rewritten
 
 
 def _python_parse_measurement(workspace: pathlib.Path) -> tuple[bool, int, list[dict[str, str]]]:
@@ -251,7 +281,7 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
     max_files = max(1, min(int(args.get("max_files", 5000)), 20000))
     max_bytes = max(1024, min(int(args.get("max_bytes", 100_000_000)), 500_000_000))
     test_paths = _validate_test_paths(source_root, args.get("test_paths"), repo)
-    argv = _validate_argv(args.get("test_argv"), test_paths)
+    argv = _validate_argv(args.get("test_argv"), test_paths, source_root, repo)
 
     before_manifest, before_sha = _tree_manifest(
         source_root, max_files=max_files, max_bytes=max_bytes

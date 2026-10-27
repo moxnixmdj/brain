@@ -73,14 +73,18 @@ class RepairApplyVerifiedTests(unittest.TestCase):
 
     # ---- the gates that must refuse ----
 
-    def test_a_stated_test_that_already_passes_is_refused_and_nothing_is_written(self):
+    def test_a_stated_test_that_already_passes_is_reported_truthfully_and_nothing_is_written(self):
         td,root=self.fixture(src="def f(x):\n    return x <= 3\n")
         original=(root/"m.py").read_bytes()
         with td:
             out=self.go(root)
-            self.assertFalse(out["pass"],out)
-            self.assertEqual(out["status"],"REFUSED__STATED_TEST_ALREADY_PASSES")
-            self.assertFalse(out["applied"])
+            # The outcome the sentence asked for -- the stated test passing --
+            # already holds, and that was measured before any write.  So this is
+            # a truthful pass that changed nothing, not a crash and not a repair.
+            self.assertTrue(out["pass"],out)
+            self.assertEqual(out["status"],"PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR")
+            self.assertFalse(out["applied"],out)
+            self.assertEqual(out["files_written"],[])
             self.assertEqual(out["pre_apply_test_returncode"],0)
             self.assertEqual((root/"m.py").read_bytes(),original)
 
@@ -178,13 +182,15 @@ class RepairApplyVerifiedTests(unittest.TestCase):
             self.assertTrue(report["output_verified"])
             self.assertEqual(report["files_written"],["m.py"])
 
-    def test_a_refusal_is_also_written_to_the_report(self):
+    def test_a_nothing_to_repair_verdict_is_also_written_to_the_report(self):
         td,root=self.fixture(src="def f(x):\n    return x <= 3\n")
         with td:
             self.go(root)
             report=json.loads((root/"report.json").read_text())
-            self.assertEqual(report["status"],"REFUSED__STATED_TEST_ALREADY_PASSES")
-            self.assertFalse(report["pass"])
+            self.assertEqual(report["status"],"PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR")
+            self.assertTrue(report["pass"])
+            self.assertFalse(report["applied"])
+            self.assertEqual(report["files_written"],[])
 
     def test_the_same_request_twice_gives_the_same_verdict(self):
         verdicts=[]
