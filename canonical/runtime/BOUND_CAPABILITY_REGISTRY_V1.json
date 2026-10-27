@@ -3890,7 +3890,13 @@
         "test",
         "content-addressed",
         "objective",
-        "receipt"
+        "receipt",
+        "tests",
+        "run the tests",
+        "run tests",
+        "test suite",
+        "test path",
+        "source root"
       ],
       "limitations": [
         "Measures an isolated copy of one repository-local source root; test-side mutations do not alter the measured source.",

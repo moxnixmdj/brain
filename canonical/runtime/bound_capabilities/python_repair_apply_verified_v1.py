@@ -143,8 +143,20 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     before_rc,before_tail=_run_test(run_argv,source_root,timeout)
     out["pre_apply_test_returncode"]=before_rc
     if before_rc==0:
-        out["status"]="REFUSED__STATED_TEST_ALREADY_PASSES"
-        out["detail"]="The stated test passes on the current source, so there is nothing to repair."
+        # The sentence asked for the stated test to pass.  It already does, and
+        # that was measured rather than assumed, so the outcome the sentence
+        # asked for holds and nothing needs writing.  Reporting this as a
+        # failure told the caller the machine had crashed when it had in fact
+        # checked and correctly declined to change a file that was not broken;
+        # `applied` stays False and `files_written` stays empty so the pass
+        # cannot be read as "I changed something".
+        out["pass"]=True
+        out["output_verified"]=True
+        out["status"]="PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR"
+        out["detail"]=(
+            "The stated test passes on the current source, measured before any write, "
+            "so the outcome the sentence asked for already holds and no file was changed."
+        )
         _emit(output,out)
         return out
     out["pre_apply_test_tail"]=before_tail.decode("utf-8","replace")[-1024:]

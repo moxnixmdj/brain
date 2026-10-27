@@ -216,3 +216,78 @@ class RepoRelativeTestPathTests(unittest.TestCase):
             self.assertEqual(out["measurements"]["test_returncode"], 1)
             self.assertEqual(out["test_evidence"]["returncode"], 1)
             self.assertIn("MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE", out["hard_nonclaims"])
+
+
+class SuppliedArgvCarriesTheCallersSpellingTests(unittest.TestCase):
+    """The caller states repository-relative paths; measurement runs in a COPIED workspace.
+
+    ``_run_tests`` uses the workspace as its cwd, so a supplied ``test_argv``
+    carrying ``proj/test_m.py`` named nothing there: the suite runner loaded no
+    tests and the measurement recorded a failure with ``test_count`` 0 for a
+    suite that passes.
+    """
+
+    SOURCE = "def f():\n    return 1\n"
+    TEST = """
+        import unittest
+        from m import f
+        class T(unittest.TestCase):
+            def test_f(self): self.assertEqual(f(), 1)
+        """
+
+    def fixture(self, source=SOURCE):
+        td = tempfile.TemporaryDirectory()
+        root = pathlib.Path(td.name)
+        proj = root / "proj"
+        proj.mkdir()
+        (proj / "m.py").write_text(source, encoding="utf-8")
+        (proj / "test_m.py").write_text(textwrap.dedent(self.TEST), encoding="utf-8")
+        return td, root, proj
+
+    def run_measure(self, root, **extra):
+        args = {"source_root": "proj", "test_paths": ["test_m.py"],
+                "output_path": "receipt.json", "timeout_s": 10}
+        args.update(extra)
+        return m.run(args, root)
+
+    def test_a_supplied_argv_naming_the_test_by_its_repo_relative_path_measures_it(self):
+        td, root, _ = self.fixture()
+        with td:
+            argv = m._PATCH.suite_argv(sys.executable, "proj/test_m.py")
+            out = self.run_measure(root, test_paths=["proj/test_m.py"], test_argv=argv)
+            self.assertIs(out["measurements"]["tests_pass"], True, out["measurements"])
+            self.assertEqual(out["measurements"]["test_returncode"], 0)
+            self.assertEqual(out["measurements"]["test_count"], 1)
+
+    def test_it_matches_the_measurement_taken_when_no_argv_is_supplied(self):
+        td, root, _ = self.fixture()
+        with td:
+            a = self.run_measure(root, test_paths=["proj/test_m.py"])
+            b = self.run_measure(
+                root, test_paths=["proj/test_m.py"],
+                test_argv=m._PATCH.suite_argv(sys.executable, "proj/test_m.py"))
+            self.assertEqual(a["measurements"], b["measurements"])
+
+    def test_a_failing_suite_supplied_the_same_way_is_still_measured_as_failing(self):
+        td, root, _ = self.fixture(source="def f():\n    return 2\n")
+        with td:
+            out = self.run_measure(
+                root, test_paths=["proj/test_m.py"],
+                test_argv=m._PATCH.suite_argv(sys.executable, "proj/test_m.py"))
+            self.assertIs(out["measurements"]["tests_pass"], False)
+            self.assertEqual(out["measurements"]["test_returncode"], 1)
+            self.assertEqual(out["measurements"]["test_count"], 1)
+
+    def test_an_argument_that_is_not_a_test_path_passes_through_verbatim(self):
+        # The nearest world in which the rewrite above must not fire: only tokens
+        # that resolve to a validated test file may be touched.
+        td, root, _ = self.fixture()
+        with td:
+            harness = m._PATCH.SUITE_RUNNER + m._PATCH.SUITE_ENTRY
+            argv = m._validate_argv(
+                [sys.executable, "-c", harness, "proj/test_m.py"],
+                ["test_m.py"], root / "proj", root)
+            self.assertEqual(argv[0], sys.executable)
+            self.assertEqual(argv[1], "-c")
+            self.assertEqual(argv[2], harness)
+            self.assertEqual(argv[3], "test_m.py")
