@@ -3959,6 +3959,99 @@
         "test_git_blob_sha": "0c99781622b30b7067063f2be626e0c0f132be73"
       }
     },
+    "python.software.repair.apply.verified.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.apply.verified.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repair_apply_verified_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "apply the repair",
+        "apply the patch",
+        "apply the verified repair",
+        "apply the fix",
+        "land the patch",
+        "land the fix",
+        "write the fix",
+        "apply in place",
+        "make the test pass"
+      ],
+      "limitations": [
+        "Composes the existing bounded provenance-guided Python repair with a gated write to the real source tree; it does not add any new patch search.",
+        "Writes only behind four fail-closed gates: the stated test must fail first, a verified repair must exist, the realized bytes must match the patch's own candidate hash, and the stated test must pass in place afterwards.",
+        "Any gate failing restores every original byte and reports failure, so a pass means the stated test went from failing to passing on the file that is on disk.",
+        "Python only, and the inherited repair search remains bounded to the verified AST mutation/search families; there is no general patch completeness.",
+        "A passing stated test is not proof that the wider program is correct; it certifies only the stated test on the stated source root."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.repair.apply.verified",
+        "python.source.write.verified_repair_applied"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "applied",
+        "source_restored",
+        "files_written",
+        "unified_diffs",
+        "pre_apply_test_returncode",
+        "post_apply_test_returncode",
+        "repair_status",
+        "output_verified",
+        "detail"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+        "composed_capabilities": [
+          "python.software.repair.guided.provenance.coupled.v1",
+          "python.software.repair.measured_acceptance.v1"
+        ],
+        "modules": [
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "subprocess",
+          "sys",
+          "typing"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_two_carrier_replay": "NOT_CLAIMED__SINGLE_CARRIER_SANDBOX_MEASUREMENT_ONLY",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-repair-apply-verified-20261027-v1",
+        "independent_test_count": 13,
+        "model_dependency_count": 0,
+        "status": "SANDBOX_MEASUREMENT_ONLY__NO_TWO_SPRITE_FALSIFICATION_CLAIMED"
+      }
+    },
     "python.software.repair.guided.provenance.coupled.v1": {
       "action_template": {
         "args": {

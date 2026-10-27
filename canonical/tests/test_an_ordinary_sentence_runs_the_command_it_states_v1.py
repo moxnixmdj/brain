@@ -30,7 +30,9 @@ finding are green verdicts over work that did not happen.
 """
 
 from __future__ import annotations
+import json
 import os
+import re
 
 import shutil
 import sys
@@ -840,12 +842,21 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                          "a request for one column was answered with whole lines: %r" % argv)
 
     def test_a_search_that_states_no_pattern_is_refused(self):
-        """grep needs a pattern; a sentence that states none binds nothing."""
+        """grep needs a pattern; a sentence that states none binds nothing.
+
+        Rewritten harder, not deleted.  The second assertion used to require that
+        "matching 'a' or 'b'" bind NOTHING, on the reasoning that two stated
+        patterns are a guess between them.  They are not a guess: for a filter
+        over lines, "a or b" states ONE pattern with an alternation in it, and
+        `egrep` is the program that reads an alternation.  Refusing was better
+        than guessing; building the alternation the sentence actually stated is
+        better than refusing, and it is measured here from the argv.
+        """
         self.assertIsNone(_argv("Search the file %s/a1.txt" % SCRATCH),
                           "invented a search pattern")
-        self.assertIsNone(_argv("Find the lines in %s/a1.txt matching 'a' or 'b'"
-                                % SCRATCH),
-                          "guessed between two stated patterns")
+        argv = _argv("Find the lines in %s/a1.txt matching 'a' or 'b'" % SCRATCH)
+        self.assertEqual(argv[:2], ["egrep", "a|b"],
+                         "two values joined by 'or' are one alternation: %r" % (argv,))
 
     def test_the_counting_and_column_commands_run_and_report_the_real_numbers(self):
         """Read back from the command's own output, not from a flag."""
@@ -4423,3 +4434,811 @@ class TestThePlainestWordForAConceptIsInTheSameListAsItsSynonyms(unittest.TestCa
                             % (a, b))
         self.assertNotEqual("apple\nbanana\ncherry\n", _stdout(cmp_result),
                             "the two-file question was answered with a deduplicated set")
+
+
+class TestANegationAndALongFilenameAreNotSilentlyDropped(unittest.TestCase):
+    """Two certified wrong answers, found by a 28-row census of everyday requests.
+
+    Both were certified with the strongest verdict the system has, and neither
+    destroyed anything -- which is why they survived.
+
+    (1) "the lines in the file X that are NOT BLANK" bound `grep '^$'` with no
+        `-v` and returned the two blank lines: the exact opposite of the
+        question.  So did "the NON-BLANK lines".  Four phrasings of two opposite
+        questions bound one command, because the blank arm inverted for a REMOVAL
+        verb and for nothing else.
+
+    (2) "Make the file X all upper case" printed the upper-cased text, left the
+        file lower case, and was certified.  The rule that decides whether to
+        write the file back is `make ... upper` with TWENTY CHARACTERS allowed
+        between the words -- and a path sits between them.  Measured: with the
+        name `a.txt` it wrote the file; with `notes.txt` it did not.  The same
+        question, answered by how long the filename is.
+    """
+
+    NOTED = "# Title\n\nbody line\n\nlast\n"      # 5 lines: 3 non-blank, 2 blank
+    LOWER = "apple\nbanana\n"
+
+    def _f(self, name, content):
+        d = "%s/%s" % (SCRATCH, name)
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "notes.md").write_text(content, encoding="utf-8")
+        return d + "/notes.md"
+
+    def test_the_lines_that_are_not_blank_are_not_the_blank_lines(self):
+        for word in ("that are not blank", "that are not empty"):
+            f = self._f("nb1", self.NOTED)
+            result = _solve("the lines in the file %s %s" % (f, word))
+            self.assertTrue(_verified(result), "%s -> %s" % (word, result.get("status")))
+            self.assertEqual("# Title\nbody line\nlast\n", _stdout(result), word)
+        # And the hyphenated form, which is one word and not a window at all.
+        f = self._f("nb2", self.NOTED)
+        self.assertEqual("# Title\nbody line\nlast\n",
+                         _stdout(_solve("the non-blank lines in the file %s" % f)))
+
+    def test_the_blank_lines_are_still_the_blank_lines(self):
+        # The pin on the other side of the inversion: asking FOR the blank lines
+        # must not grow a -v it did not ask for.
+        for word in ("blank", "empty"):
+            f = self._f("nb3", self.NOTED)
+            result = _solve("the %s lines in the file %s" % (word, f))
+            self.assertTrue(_verified(result), result.get("status"))
+            self.assertEqual("\n\n", _stdout(result), word)
+
+    def test_removing_the_blank_lines_is_still_a_filter(self):
+        f = self._f("nb4", self.NOTED)
+        result = _solve("Remove the blank lines from the file %s" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("# Title\nbody line\nlast\n", _stdout(result))
+        self.assertEqual(self.NOTED, (ROOT / f).read_text(encoding="utf-8"),
+                         "a filter must not rewrite the file")
+
+    def test_making_a_file_upper_case_changes_the_file(self):
+        f = self._f("up1", self.LOWER)
+        result = _solve("Make the file %s all upper case" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("APPLE\nBANANA\n", (ROOT / f).read_text(encoding="utf-8"),
+                         "the sentence said MAKE THE FILE, and the file did not change")
+
+    def test_a_short_name_and_a_long_name_get_the_same_answer(self):
+        # The defect in one assertion.  The old rule allowed twenty characters
+        # between "make" and "upper", so the answer depended on the filename.
+        short = "a.txt"
+        long_ = "a-filename-long-enough-to-break-the-window.txt"
+        for name in (short, long_):
+            d = "%s/up2" % SCRATCH
+            (ROOT / d).mkdir(parents=True, exist_ok=True)
+            (ROOT / d / name).write_text(self.LOWER, encoding="utf-8")
+            result = _solve("Make the file %s/%s all upper case" % (d, name))
+            self.assertTrue(_verified(result), "%s -> %s" % (name, result.get("status")))
+            self.assertEqual("APPLE\nBANANA\n",
+                             (ROOT / d / name).read_text(encoding="utf-8"),
+                             "the filename decided the answer: %s" % name)
+
+    def test_showing_a_file_in_upper_case_still_does_not_write(self):
+        # The pin that must not move.  A request to be SHOWN something puts its
+        # answer on stdout and leaves the file alone, even though the script it
+        # binds would rewrite it.
+        f = self._f("up3", self.LOWER)
+        result = _solve("Show the contents of the file %s in upper case" % f)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual("APPLE\nBANANA\n", _stdout(result))
+        self.assertEqual(self.LOWER, (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_a_file_named_after_a_verb_is_not_a_request_to_change_it(self):
+        # Masking the path before reading the verbs cuts both ways: a file called
+        # `convert.md` is an operand, and its name must not turn a reading into a
+        # rewrite.
+        d = "%s/up4" % SCRATCH
+        (ROOT / d).mkdir(parents=True, exist_ok=True)
+        (ROOT / d / "convert.md").write_text(self.LOWER, encoding="utf-8")
+        result = _solve("Show the contents of the file %s/convert.md" % d)
+        self.assertTrue(_verified(result), result.get("status"))
+        self.assertEqual(self.LOWER, (ROOT / d / "convert.md").read_text(encoding="utf-8"),
+                         "the filename made a reading into a rewrite")
+
+
+class TestTheOrderARequestNamesIsNotTheDefaultOrder(unittest.TestCase):
+    """Three requests said WHICH order.  All three were certified without it.
+
+    "Sort the file X in reverse order" returned the forward order.
+    "Sort the file X numerically" returned the lexicographic one, 100 ahead of 2.
+    "Sort the file X and remove duplicates" fell past the `-u` rule to the `rm`
+    rule and DELETED THE FILE -- certified as an exact semantic answer.
+
+    The word that names the order, and the thing the verb acts on, are both part
+    of the request.  A default that ignores them is a wrong answer, and a wrong
+    answer that destroys the input is the worst kind: there is nothing left to
+    ask again.
+    """
+
+    LINES = "apple\nbanana\napple\ncherry\nbanana\n"
+    NUMS = "10\n9\n100\n2\n33\n"
+
+    def _file(self, content, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content, encoding="utf-8")
+        return rel
+
+    def test_reverse_order_is_the_reverse_order(self):
+        f = self._file(self.LINES)
+        r = _solve("Sort the file %s in reverse order" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "cherry\nbanana\nbanana\napple\napple\n")
+
+    def test_numeric_order_puts_two_before_one_hundred(self):
+        f = self._file(self.NUMS, "n.txt")
+        r = _solve("Sort the file %s numerically" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "2\n9\n10\n33\n100\n")
+
+    def test_removing_duplicates_does_not_remove_the_file(self):
+        f = self._file(self.LINES)
+        r = _solve("Sort the file %s and remove duplicates" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\ncherry\n")
+        self.assertTrue((ROOT / f).exists(),
+                        "the request was to remove DUPLICATES, not the file")
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"), self.LINES)
+
+    # --- and the neighbours that must not move to make those three true.
+    def test_a_file_actually_named_duplicates_is_still_removed(self):
+        f = self._file("keep me\n", "duplicates.txt")
+        r = _solve("Remove the file %s" % f)
+        self.assertFalse((ROOT / f).exists(),
+                         "a file NAMED duplicates.txt is the object, not a set")
+
+    def test_reversing_the_lines_is_still_tac_not_a_sorted_reverse(self):
+        f = self._file(self.LINES)
+        r = _solve("Reverse the lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "banana\ncherry\napple\nbanana\napple\n")
+
+    def test_the_unique_lines_still_bind_sort_dash_u(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the unique lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\ncherry\n")
+
+    def test_a_plain_sort_still_carries_no_ordering_flag(self):
+        f = self._file(self.LINES)
+        r = _solve("Sort the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\napple\nbanana\nbanana\ncherry\n")
+
+
+class TestAnUnquotedValueIsTheSameValueAsAQuotedOne(unittest.TestCase):
+    """Punctuation is not part of the question.
+
+    "the lines containing apple" bound `cat` and returned the WHOLE FILE for a
+    question about two of its lines, certified.  The quoted form of the same
+    sentence bound `fgrep apple` and returned the two.  "How many lines contain
+    apple" bound `wc -l` and answered 5 where two lines hold the word.
+
+    Both arms already did the whole job once they held one value; both read it
+    from `_quoted_values`, so a sentence that stated its value bare arrived
+    holding none.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+
+    def _file(self, content, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content, encoding="utf-8")
+        return rel
+
+    def test_the_lines_containing_an_unquoted_value(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_the_lines_that_contain_an_unquoted_value(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines in the file %s that contain apple" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_how_many_lines_contain_an_unquoted_value(self):
+        f = self._file(self.LINES)
+        r = _solve("How many lines contain apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "2")
+
+    def test_how_many_empty_lines_counts_the_empty_ones(self):
+        f = self._file(self.LINES)
+        r = _solve("How many empty lines are in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "1")
+
+    # --- pins: the quoted forms, and the sentences that must not be hijacked.
+    def test_the_quoted_form_still_answers_the_same(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing 'apple' in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_file_whose_name_is_the_value_keeps_its_path(self):
+        f = self._file(self.LINES, "apple.txt")
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_plain_line_count_is_still_a_plain_line_count(self):
+        f = self._file(self.LINES)
+        r = _solve("How many lines are in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "5")
+
+    def test_a_file_named_blank_is_not_asked_how_many_lines_are_empty(self):
+        f = self._file("apple\n\n\npear\n", "blank.txt")
+        r = _solve("How many lines are in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "4")
+
+    def test_the_blank_lines_themselves_are_still_returned(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the blank lines in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "\n")
+
+    def test_a_regex_pattern_is_still_not_a_literal(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines in the file %s matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+
+class TestAWordThatQualifiesAFilterMustReachTheFlags(unittest.TestCase):
+    """A word that says HOW to match is part of the question.
+
+    "the lines containing APPLE ... ignoring case" bound `fgrep APPLE`, matched
+    nothing in a file that holds "apple pie", and was CERTIFIED returning an
+    empty answer.  The words were read, decided nothing, and were dropped.
+
+    And a filter whose value cannot be recovered must be refused.  "the lines
+    containing text" states "text" as often as an ordinary noun as a value, so
+    refusing to guess it is right -- but the sentence then fell to the leftover
+    `cat` row and was certified with the WHOLE FILE, an answer to a question no
+    line of that file asks.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+
+    def _file(self, content, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content, encoding="utf-8")
+        return rel
+
+    def test_ignoring_case_reaches_the_command(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing APPLE in the file %s ignoring case" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_case_insensitive_is_the_same_request(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing APPLE in the file %s case-insensitive" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_case_is_still_significant_when_nothing_says_otherwise(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing APPLE in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "")
+
+    def test_a_value_that_cannot_be_recovered_is_refused_not_the_whole_file(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing text in the file %s" % f)
+        self.assertNotEqual(_stdout(r), self.LINES,
+                            "the whole file is not an answer to 'which lines hold text'")
+
+    # --- pins: the sentences the narrower `cat` row must keep serving.
+    def test_reading_a_file_still_reads_it(self):
+        f = self._file(self.LINES)
+        r = _solve("Read the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_the_contents_of_a_file_still_reads_it(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the contents of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_a_file_whose_name_says_containing_still_reads_it(self):
+        f = self._file("the report\n", "report.txt")
+        r = _solve("Show the contents of the file %s containing the report" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "the report\n")
+
+    def test_showing_the_lines_of_a_file_still_reads_it(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_a_bare_value_still_matches_without_the_case_flag(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_line_numbers_still_carry_their_numbers(self):
+        f = self._file(self.LINES)
+        r = _solve("Show the line numbers in the file %s containing apple" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "1:apple pie\n3:apple tart\n")
+
+
+class TestAListWrittenTwiceIsAListEditedOnce(unittest.TestCase):
+    """The nouns that name something inside a file were written twice.
+
+    Both copies were byte-identical across 37 nouns, which is exactly how a list
+    comes to be edited in one place only.  `duplicate` was in NEITHER copy, so
+    the fix to the `rm` row's own duplicates clause left its sibling deleting:
+
+        "Remove the duplicates from every file in the directory D"
+          -> `rm one.txt two.txt`   THE DIRECTORY CAME BACK EMPTY.  CERTIFIED.
+
+    A set expansion turns one wrong deletion into a whole directory of them,
+    which is the reason the guard exists at all.
+    """
+
+    CONTENT = "apple\nbanana\napple\n"
+
+    def _set(self):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        (root / "set").mkdir(parents=True, exist_ok=True)
+        for n in ("one.txt", "two.txt"):
+            (root / "set" / n).write_text(self.CONTENT, encoding="utf-8")
+        (root / "a.txt").write_text(self.CONTENT, encoding="utf-8")
+        (root / "duplicates.txt").write_text(self.CONTENT, encoding="utf-8")
+        return "%s/set" % SCRATCH, "%s/a.txt" % SCRATCH
+
+    def _argv(self, result):
+        m = re.findall(r'"argv"\s*:\s*(\[[^\]]*\])', json.dumps(result, default=str))
+        return " ".join(json.loads(m[0])) if m else "NONE"
+
+    def test_removing_duplicates_from_a_set_does_not_delete_the_set(self):
+        d, _ = self._set()
+        r = _solve("Remove the duplicates from every file in the directory %s" % d)
+        self.assertEqual(sorted(p.name for p in (ROOT / d).iterdir()),
+                         ["one.txt", "two.txt"],
+                         "the request was to remove DUPLICATES, not every file")
+        self.assertNotIn("rm ", self._argv(r))
+
+    def test_removing_repeats_from_a_set_does_not_delete_the_set(self):
+        d, _ = self._set()
+        r = _solve("Remove the repeats from every file in the directory %s" % d)
+        self.assertEqual(sorted(p.name for p in (ROOT / d).iterdir()),
+                         ["one.txt", "two.txt"])
+        self.assertNotIn("rm ", self._argv(r))
+
+    def test_the_noun_list_is_written_once(self):
+        src = (ROOT / "canonical/runtime/composer_route_v1.py").read_text(encoding="utf-8")
+        self.assertEqual(src.count("permission|permissions|bit|bits"), 1,
+                         "the list is duplicated again; the two copies will drift")
+        self.assertIn("duplicate", _binder._INSIDE_THE_FILE_NOUNS)
+
+    # --- pins: the deletions and refusals that must not move.
+    def test_sorting_and_removing_duplicates_still_sorts(self):
+        _, f = self._set()
+        r = _solve("Sort the file %s and remove duplicates" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\n")
+        self.assertTrue((ROOT / f).exists())
+
+    def test_a_file_named_duplicates_is_still_removed(self):
+        _, _f = self._set()
+        target = "%s/duplicates.txt" % SCRATCH
+        _solve("Remove the file %s" % target)
+        self.assertFalse((ROOT / target).exists())
+
+    def test_removing_the_duplicate_lines_still_sorts(self):
+        _, f = self._set()
+        r = _solve("Remove the duplicate lines from the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\nbanana\n")
+
+    def test_removing_the_first_line_is_still_refused(self):
+        _, f = self._set()
+        _solve("Remove the first line from the file %s" % f)
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"), self.CONTENT)
+
+    def test_removing_the_read_permission_is_still_refused(self):
+        _, f = self._set()
+        _solve("Remove the read permission from the file %s" % f)
+        self.assertEqual((ROOT / f).read_text(encoding="utf-8"), self.CONTENT)
+
+    def test_deleting_a_whole_directory_still_deletes_it(self):
+        d, _ = self._set()
+        _solve("Delete the directory %s" % d)
+        self.assertFalse((ROOT / d).exists())
+
+
+class TestTwoValuesJoinedByOrAreOnePattern(unittest.TestCase):
+    """An alternation stated in English is an alternation.
+
+    All four phrasings of one question were wrong.  "the lines containing apple
+    or banana" bound `fgrep apple` and dropped every banana line, certified.
+    The quoted form quoted two values, so the arm that requires exactly one
+    refused it.  And "matching 'apple|banana'" bound `grep` -- BRE, where `|` is
+    a LITERAL character -- matched nothing in a file holding both words, and was
+    certified with an empty answer.
+
+    `egrep` was already a rule in this module and its exit status was already
+    declared an answer.  This is wiring, not new policy.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+    BOTH = "apple pie\nbanana split\napple tart\n"
+
+    def _file(self, content=None, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content or self.LINES, encoding="utf-8")
+        return rel
+
+    def test_two_values_joined_by_or_are_one_pattern(self):
+        f = self._file()
+        r = _solve("Show the lines containing apple or banana in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTH)
+
+    def test_the_quoted_form_of_the_same_alternative(self):
+        f = self._file()
+        r = _solve("Show the lines containing 'apple' or 'banana' in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTH)
+
+    def test_an_alternative_the_sentence_calls_a_regex_reaches_egrep(self):
+        # The module's design is three-way and pinned elsewhere: `fgrep` when the
+        # sentence calls the text literal, `grep` when it says "matching", `egrep`
+        # when it says regex.  So the supported way to state an alternation is to
+        # call it a regex -- and that is asserted here, because it is the phrasing
+        # a caller must use once "or" is the only English form the filter arm
+        # builds an alternation from.  "matching 'apple|banana'" stays BRE by
+        # design and is recorded as open, not silently re-dialected.
+        f = self._file()
+        r = _solve("Search the file %s for the regex 'apple|banana'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTH)
+
+    def test_a_pattern_the_sentence_only_calls_matching_stays_bre(self):
+        f = self._file()
+        r = _solve("Show the lines in the file %s matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    # --- pins: the dialect change must be inert where a dot is all there is.
+    def test_a_regex_with_only_a_dot_is_unchanged(self):
+        f = self._file()
+        r = _solve("Show the lines in the file %s matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_negated_regex_still_inverts(self):
+        f = self._file()
+        r = _solve("Show the lines in the file %s not matching 'ap.le'" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "banana split\n\ncherry\n")
+
+    def test_a_single_value_is_still_a_literal_match(self):
+        f = self._file()
+        r = _solve("Show the lines containing apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_single_quoted_value_is_still_a_literal_match(self):
+        f = self._file()
+        r = _solve("Show the lines containing 'apple' in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_ignoring_case_still_reaches_the_command(self):
+        f = self._file()
+        r = _solve("Show the lines containing APPLE in the file %s ignoring case" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\napple tart\n")
+
+    def test_a_count_is_still_a_count(self):
+        f = self._file()
+        r = _solve("How many lines contain apple in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r).split()[0], "2")
+
+    def test_the_blank_lines_still_come_back(self):
+        f = self._file()
+        r = _solve("Show the blank lines in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "\n")
+
+    def test_a_value_that_cannot_be_recovered_is_still_refused(self):
+        f = self._file()
+        r = _solve("Show the lines containing text in the file %s" % f)
+        self.assertNotEqual(_stdout(r), self.LINES)
+
+
+class TestTopAndBottomArePositionsNotDecorations(unittest.TestCase):
+    """"top" and "bottom" are the plainest English words for first and last.
+
+    Neither was in the rule that engages `head` or the one that engages `tail`,
+    so both sentences fell through to the leftover `cat` row and were CERTIFIED
+    with the WHOLE FILE -- while two other phrasings of the same question bound
+    `head -n 3` and returned three lines.  Measured across twelve operations and
+    several phrasings of each: these were the only two that disagreed.
+
+    A rule that lists words is a list of phrasings, not a list of questions.
+    """
+
+    LINES = "apple pie\nbanana split\napple tart\n\ncherry\n"
+    TOP3 = "apple pie\nbanana split\napple tart\n"
+    BOTTOM3 = "apple tart\n\ncherry\n"
+
+    def _file(self, content=None, name="a1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(content or self.LINES, encoding="utf-8")
+        return rel
+
+    def test_the_top_lines_are_the_first_lines(self):
+        f = self._file()
+        r = _solve("Show the top 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.TOP3)
+
+    def test_the_bottom_lines_are_the_last_lines(self):
+        f = self._file()
+        r = _solve("Show the bottom 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTTOM3)
+
+    def test_the_verbless_form_of_the_top_lines(self):
+        f = self._file()
+        r = _solve("the top 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.TOP3)
+
+    def test_the_top_lines_are_not_the_whole_file(self):
+        f = self._file()
+        r = _solve("Show the top 3 lines of the file %s" % f)
+        self.assertNotEqual(_stdout(r), self.LINES,
+                            "four lines were asked for three of them")
+
+    # --- pins.
+    def test_the_first_lines_are_unchanged(self):
+        f = self._file()
+        r = _solve("Show the first 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.TOP3)
+
+    def test_the_last_lines_are_unchanged(self):
+        f = self._file()
+        r = _solve("Show the last 3 lines of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.BOTTOM3)
+
+    def test_the_contents_of_a_file_still_reads_the_whole_file(self):
+        f = self._file()
+        r = _solve("Show the contents of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_reading_a_file_still_reads_the_whole_file(self):
+        f = self._file()
+        r = _solve("Read the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), self.LINES)
+
+    def test_a_line_whose_text_is_top_is_not_read_as_a_position(self):
+        f = self._file()
+        before = (ROOT / f).read_text(encoding="utf-8")
+        _solve("Append the line 'top' to the file %s" % f)
+        self.assertNotEqual((ROOT / f).read_text(encoding="utf-8"), before[:0])
+        self.assertIn("top", (ROOT / f).read_text(encoding="utf-8"))
+
+    def test_the_first_line_is_still_exactly_one_line(self):
+        f = self._file()
+        r = _solve("Show the first line of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple pie\n")
+
+
+class TestAUnitTheSentenceStatesReachesTheCommand(unittest.TestCase):
+    """Three units a sentence can name, all measured to bind the wrong command.
+
+    A word, a character range and a sort column are each answerable by a program
+    already on the allowlist -- `cut` and `sort` -- and each was claimed by a rule
+    that answers a different question:
+
+        "the first word of each line"          -> `sed -n 1p`, the first LINE,
+                                                 CERTIFIED.
+        "the first 5 characters of each line"  -> `head -c 5`, the first five
+                                                 characters OF THE FILE,
+                                                 CERTIFIED as "zebra".
+        "Sort the file X by the second column" -> `cut -s -f 2`, EMPTY,
+                                                 CERTIFIED.
+
+    None of them needed a pipeline, a new capability, or a new policy.  `cut -c`,
+    `cut -d` and `sort -k` were already available; only the wiring was missing.
+    """
+
+    LINES = "zebra apple\nalpha cherry\nbeta banana\n"
+
+    def _file(self, name="b1.txt"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        (ROOT / rel).write_text(self.LINES, encoding="utf-8")
+        return rel
+
+    # --- the three units, each compared against the command that means it.
+    def test_the_first_word_of_each_line_is_a_word_not_a_line(self):
+        f = self._file()
+        r = _solve("the first word of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_argv(r)[:2], ["cut", "-d"])
+        self.assertEqual(_stdout(r), "zebra\nalpha\nbeta\n")
+
+    def test_the_second_word_of_each_line_is_the_second_word(self):
+        f = self._file()
+        r = _solve("the second word of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "apple\ncherry\nbanana\n")
+
+    def test_the_first_characters_of_each_line_come_from_every_line(self):
+        f = self._file()
+        r = _solve("the first 5 characters of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "zebra\nalpha\nbeta \n")
+
+    def test_a_character_count_the_sentence_does_not_state_is_not_invented(self):
+        # `_prose_count` DEFAULTS to two when nothing is stated.  Measured that
+        # way, "the first character of each line" bound `cut -c1-2` and returned
+        # two characters per line -- a quantity the sentence never said.
+        f = self._file()
+        r = _solve("the first character of each line in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "z\na\nb\n")
+
+    def test_sorting_by_a_stated_column_returns_the_lines_ordered_by_it(self):
+        f = self._file()
+        r = _solve("Sort the file %s by the second column" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_argv(r)[:3], ["sort", "-k", "2"])
+        self.assertEqual(_stdout(r),
+                         "zebra apple\nbeta banana\nalpha cherry\n")
+
+    # --- pins.  Every one of these was measured before the change.
+    def test_the_first_characters_of_the_file_are_still_read_from_the_file(self):
+        f = self._file()
+        r = _solve("Show the first 5 characters of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "zebra")
+
+    def test_the_last_characters_of_the_file_are_still_read_from_the_file(self):
+        f = self._file()
+        r = _solve("Show the last 5 characters of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "nana\n")
+
+    def test_an_numbered_line_is_still_exactly_one_line(self):
+        f = self._file()
+        r = _solve("the first line of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "zebra apple\n")
+
+    def test_a_tab_column_is_still_cut_with_the_suppressing_flag(self):
+        # `cut -s` is deliberate and pinned: a file with no tab HAS no second
+        # column, and `-s` is what makes the command say so.
+        f = self._file()
+        r = _solve("the second column of the file %s" % f)
+        self.assertEqual(_argv(r)[:4], ["cut", "-s", "-f", "2"])
+        self.assertEqual(_stdout(r), "")
+
+    def test_counting_characters_is_still_a_count(self):
+        f = self._file()
+        r = _solve("Count the characters in the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertTrue(_stdout(r).split()[0] == "37", _stdout(r))
+
+    def test_sorting_with_no_column_stated_is_still_a_whole_line_sort(self):
+        f = self._file()
+        r = _solve("Sort the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r),
+                         "alpha cherry\nbeta banana\nzebra apple\n")
+
+    def test_a_span_of_lines_is_still_one_sed_script(self):
+        f = self._file()
+        r = _solve("Show lines 2 to 4 of the file %s" % f)
+        self.assertTrue(_verified(r))
+        self.assertEqual(_stdout(r), "alpha cherry\nbeta banana\n")
+
+
+class TestASentenceCanStateMoreThanOneLine(unittest.TestCase):
+    """A payload containing a newline is a payload, not a parsing failure.
+
+    `_CONTENT` captured with `(.+?)`, and `.` stops at a newline.  So a stated
+    text that CONTAINED one never matched, the write slot bound nothing, and the
+    chain reported OPEN__COMPOSER_SLOT_UNBOUND.  Measured, that meant no source
+    file could be authored through this door at all, because every source file
+    has more than one line -- while `_QUOTED_SPAN` read the very same payload
+    correctly, because `[^']+` does cross a newline.  Two grammars for one
+    sentence, disagreeing.
+
+    The fix lets the newline through.  It does NOT start interpreting `\\n`
+    escapes: `extract_content` promises the payload is delivered VERBATIM, and
+    turning two stated characters into one unrequested byte would break that.
+    """
+
+    SOURCE = ("def fib(n):\n"
+              "    a, b = 0, 1\n"
+              "    for _ in range(n):\n"
+              "        a, b = b, a + b\n"
+              "    return a\n")
+
+    def _write(self, text, name="s1.py"):
+        root = ROOT / SCRATCH
+        shutil.rmtree(root, ignore_errors=True)
+        root.mkdir(parents=True, exist_ok=True)
+        rel = "%s/%s" % (SCRATCH, name)
+        r = _solve("Write the text '%s' to the file %s" % (text, rel))
+        return r, rel
+
+    def test_a_source_file_of_several_lines_is_written_verbatim(self):
+        r, rel = self._write(self.SOURCE)
+        self.assertTrue(_verified(r), r.get("status"))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), self.SOURCE)
+
+    def test_the_file_holds_every_line_the_sentence_stated(self):
+        r, rel = self._write(self.SOURCE)
+        self.assertEqual(len((ROOT / rel).read_text(encoding="utf-8").splitlines()), 5)
+
+    def test_what_is_written_parses_as_the_program_it_states(self):
+        import ast
+        r, rel = self._write(self.SOURCE)
+        self.assertTrue(_verified(r))
+        tree = ast.parse((ROOT / rel).read_text(encoding="utf-8"))
+        self.assertEqual([n.name for n in tree.body if hasattr(n, "name")], ["fib"])
+
+    def test_an_empty_line_in_the_middle_survives(self):
+        r, rel = self._write("one\n\ntwo\n", name="s2.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), "one\n\ntwo\n")
+
+    # --- pins.
+    def test_a_single_line_is_still_written_verbatim(self):
+        r, rel = self._write("hello world", name="s3.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), "hello world")
+
+    def test_a_leading_article_is_still_part_of_the_payload(self):
+        r, rel = self._write("the archive manifest listing", name="s4.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"),
+                         "the archive manifest listing")
+
+    def test_an_escape_sequence_is_delivered_verbatim_not_interpreted(self):
+        # The stated text is backslash-n: two characters.  Turning it into a
+        # newline would be writing a byte the sentence never stated.
+        r, rel = self._write("a\\nb", name="s5.txt")
+        self.assertTrue(_verified(r))
+        self.assertEqual((ROOT / rel).read_text(encoding="utf-8"), "a\\nb")

@@ -597,16 +597,28 @@ _DEST_AHEAD = r"(?=[^\s]*/|\S+\.[A-Za-z0-9]{1,6}\b)"
 _DEST_MODIFIER = r"(?:(?:output|target|destination|same|given|stated|named|following|new|existing)\s+){0,2}"
 _DEST_WORDS = (r"\s+(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?" + _DEST_MODIFIER +
                r"(?:file|path|folder|directory)?\s*")
+# `re.S` is not a convenience here, it is the whole fix.  Without it `.` stops at
+# a newline, so a payload that CONTAINS one never matched at all: "Write the text
+# '<two lines of source>' to the file X" left the write slot unbound and the
+# chain reported OPEN__COMPOSER_SLOT_UNBOUND -- measured, and it means no source
+# file can be authored through this door, because every source file has more than
+# one line.  `_QUOTED_SPAN` already crossed newlines (`[^']+` does), which is why
+# `_quoted_value` read the same payload correctly while `extract_content` did not:
+# two grammars for one sentence, disagreeing.  Non-greedy capture plus the
+# destination lookahead still stops at the first "to <path>", so a payload with no
+# newline in it matches exactly as it did before.
 _CONTENT = [
-    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
-    re.compile(r"\bwrite\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I),
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD,
+               re.I | re.S),
+    re.compile(r"\bwrite\s+(.+?)" + _DEST_WORDS + _DEST_AHEAD, re.I | re.S),
 ]
 # Kept, and tried only when nothing above matched, so a destination with no
 # extension and no separator still binds exactly as it did before.  A fallback
 # that is never reached first cannot change any sentence that already worked.
 _CONTENT_FALLBACK = [
-    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)\s+(?:to|into|in|at)\s+", re.I),
-    re.compile(r"\bwrite\s+(.+?)\s+(?:to|into)\s+", re.I),
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+(.+?)\s+(?:to|into|in|at)\s+",
+               re.I | re.S),
+    re.compile(r"\bwrite\s+(.+?)\s+(?:to|into)\s+", re.I | re.S),
 ]
 
 
@@ -615,7 +627,10 @@ _CONTENT_FALLBACK = [
 # payload patterns already use, so a sentence is parsed by one grammar rather than
 # two that can disagree.
 _CONTENT_DEST = [
-    re.compile(r"\b(?:text|content|string|message|word|line)\s+.+?" + _DEST_WORDS + r"(\S+)", re.I),
+    # `re.S` for the same reason as `_CONTENT`: the destination sits AFTER the
+    # payload, and a payload containing a newline put it out of reach.
+    re.compile(r"\b(?:text|content|string|message|word|line)\s+.+?" + _DEST_WORDS + r"(\S+)",
+               re.I | re.S),
     re.compile(r"\bwrite\s+.+?" + _DEST_WORDS + r"(\S+)", re.I),
 ]
 
@@ -763,6 +778,27 @@ def _cut_flags(n: int) -> list[str]:
     return ["-s", "-f", str(n)]
 
 
+def _word_flags(n: int) -> list[str]:
+    # A WORD is a run of characters, and in a file whose columns are separated by
+    # spaces the delimiter is the space itself.  `-s` is right for a tab column
+    # and wrong here: with `-s` a line holding one word and no space at all would
+    # be suppressed rather than returned, and "the first word of each line" would
+    # quietly drop the lines it was asked about.
+    return ["-d", " ", "-f", str(n)]
+
+
+def _character_flags(n: int) -> list[str]:
+    # `cut -c1-N` takes the first N characters of EVERY line.  Measured, "the
+    # first 5 characters of each line" bound `sed -n 5p`, which prints the fifth
+    # LINE -- a different question, asked of a different unit.
+    return ["-c", "1-%d" % n]
+
+
+def _sort_key_flags(n: int) -> list[str]:
+    # `sort -k N` orders the lines by the Nth field, leaving every line whole.
+    return ["-k", str(n)]
+
+
 def _head_flags(n: int) -> list[str]:
     return ["-n", str(n)]
 
@@ -777,6 +813,24 @@ _WC_QTY = r"count|counts|counting|how many|number of|total|tally"
 _WC_WORDS = r"words?|word count"
 _WC_CHARS = r"bytes?|characters?|char count|byte count"
 _WC_LINES = r"lines?|line count"
+
+# The nouns that name something INSIDE a file rather than the file itself.
+# Written ONCE.  This list was written twice -- inline in the `rm` row's
+# lookahead below and again in `_REMOVES_SOMETHING_INSIDE_THE_FILE` -- and the
+# two copies were byte-identical across all 37 nouns, which is precisely how a
+# list comes to be edited in one place only.  Measured: `duplicate` was in
+# NEITHER copy, so the fix to the `rm` row's own duplicates clause left its
+# sibling deleting, and "Remove the duplicates from every file in the directory
+# D" bound `rm` over every file the set expansion matched -- the directory came
+# back EMPTY, certified.  A set expansion turns one wrong deletion into a whole
+# directory of them, which is the reason this list exists at all.
+_INSIDE_THE_FILE_NOUNS = (
+    r"permission|permissions|bit|bits|line|lines|word|words|character|"
+    r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
+    r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
+    r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix|"
+    r"duplicate|duplicates|repeat|repeats|repeated"
+)
 
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Synonyms measured rather than guessed: "duplicate the file a as b" bound
@@ -798,11 +852,8 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # third in this table and the first pattern to match wins -- so teaching
     # `uniq` the word "duplicate" alone would have changed nothing at all.
     (r"\b(?:remove|delete|erase)\b"
-     r"(?![^\n]{0,40}?\b(?:duplicate|repeated|unique)\b[^\n]{0,20}?\blines?\b)"
-     r"(?![^\n]{0,60}?\b(?:permission|permissions|bit|bits|line|lines|word|words|"
-     r"character|characters|letter|letters|header|headers|footer|footers|space|"
-     r"spaces|comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
-     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix)\b)"
+     r"(?![^\n]{0,40}?\b(?:duplicates?|repeated|unique)\b(?!\.\w))"
+     r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)"
      r"(?![^\n]{0,40}?\bfrom the (?:file|files)\b)",
      "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\b(?:directory|folder)\b", "mkdir",
@@ -844,17 +895,66 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # contains both "show" and "first", and the first pattern to match wins.
     # Measured out of order, it bound `head -n 2` and returned two whole lines
     # when the sentence asked for one column.
+    # Three sentences, all measured to bind the wrong command, all answerable by
+    # a program already on the allowlist.  Each row sits ABOVE the `cut` row,
+    # which matches any sentence containing the word "column", and above the
+    # `head` row, which matches any "first ... line" -- and the table is
+    # first-match-wins, so a row below them would be dead code.
+    #
+    #   "Sort the file X by the second column"  -> `cut -s -f 2` -> EMPTY, and
+    #       CERTIFIED.  The file's columns are separated by spaces, so `cut`
+    #       found no tab and printed nothing, and an empty answer to "sort these
+    #       lines" passed as an exact semantic acceptance.
+    (r"\bsort\w*\b[^\n]{0,30}?\b(?:columns?|fields?)\b", "sort", _sort_key_flags, 1),
+    #   "the first word of each line"           -> `sed -n 1p` -> the first
+    #       LINE, and CERTIFIED.  A line is not a word; the sentence asked for
+    #       one unit and was answered with a larger one containing it.
+    (r"\b(?:first|second|third|fourth|fifth|top)\b[^\n]{0,20}?\bwords?\b",
+     "cut", _word_flags, 1),
+    #   "the first 5 characters of each line"   -> `sed -n 5p` -> the fifth
+    #       LINE.  Failed loudly rather than certifying, but it still answered a
+    #       question nobody asked.
+    (r"\bfirst\b[^\n]{0,20}?\bcharacters?\b", "cut", _character_flags, 1),
     (r"\bcut\b|\bfields?\b|\bcolumns?\b", "cut", _cut_flags, 1),
     # "Show me the beginning of the file X" measured to bind `cat`, which returns
     # the whole file.  Not a false answer, but the sentence asked for the
     # beginning and `head` is the command that means it.
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning)\b"
-     r"|\bfirst\b[^\n]{0,20}?\blines?\b", "head", _head_flags, 1),
-    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|final|end)\b"
-     r"|\b(?:last|final)\b[^\n]{0,20}?\blines?\b", "tail", _tail_flags, 1),
+    # "top" is the plainest English word for the first of a set of lines and it
+    # was in neither alternative, so "Show the top 3 lines of the file X" fell
+    # through to the leftover `cat` row and was CERTIFIED with the WHOLE FILE --
+    # measured, and the two other phrasings of the same question bound `head -n 3`
+    # and returned three lines.  A rule that lists words is a list of phrasings,
+    # not a list of questions.
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:first|beginning|top)\b"
+     r"|\b(?:first|top)\b[^\n]{0,20}?\blines?\b", "head", _head_flags, 1),
+    # The same gap on the other end: "Show the bottom 3 lines of the file X"
+    # measured as `cat` and the whole file, certified, while "the last 3 lines"
+    # and "the last 3 lines of X" both bound `tail -n 3`.
+    (r"\b(?:show|print|read|display)\b[^.\n]{0,40}?\b(?:last|final|end|bottom)\b"
+     r"|\b(?:last|final|bottom)\b[^\n]{0,20}?\blines?\b", "tail", _tail_flags, 1),
     # "Put the lines of the file X in order" and "Arrange the lines of the file
     # X in order" both measured to bind nothing: the sentence states the RESULT
     # rather than naming the program.
+    # WHICH order, not merely that there is one.  All three measured to bind a
+    # bare `sort` and be certified: "in reverse order" returned the forward
+    # order, "numerically" returned the lexicographic one with 100 ahead of 2,
+    # and "remove duplicates" fell past `-u` below to the `rm` row and DELETED
+    # THE FILE.  They stand above the catch-all `sort` row because in this table
+    # the first pattern to match wins and that row matches any sentence
+    # containing the word "sort" at all.  "reverse ... lines" is a different
+    # operation and stays with `tac`.
+    (r"\bsort\w*\b[^\n]{0,40}?\b(?:reverse|reversed|descending)\b"
+     r"|\b(?:reverse|reversed|descending)\b[^\n]{0,40}?\bsort\w*\b",
+     "sort", lambda _n: ["-r"], 1),
+    (r"\bsort\w*\b[^\n]{0,40}?\b(?:numeric|numerically)\b"
+     r"|\b(?:numeric|numerically)\b[^\n]{0,40}?\bsort\w*\b",
+     "sort", lambda _n: ["-n"], 1),
+    # Anchored to the object, never to the file: "remove duplicates" names
+    # something INSIDE the file.  A file actually named duplicates.txt keeps its
+    # own answer -- measured, and the `\.\w` is what tells the two apart.
+    (r"\b(?:remove|delete|erase|drop|strip)s?\b[^\n]{0,40}?"
+     r"\b(?:duplicates?|repeated)\b(?!\.\w)",
+     "sort", lambda _n: ["-u"], 1),
     (r"\bsort(?:ed|ing)?\b|\bin order\b|\balphabetical(?:ly)?\b", "sort",
      _no_flags, 1),
     # `md5sum` must be tried BEFORE `sha256sum` now that the latter answers to
@@ -906,7 +1006,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # and both put the noun before the adjective.  Measured against both.
     (r"\bunique\b|\bdistinct\b|\bdifferent\b[^\n]{0,20}?\blines?\b"
      r"|\b(?:remove|delete|erase|drop|strip)s?\b[^\n]{0,40}?"
-     r"\b(?:duplicate|duplicates|repeated)\b[^\n]{0,20}?\blines?\b",
+     r"\b(?:duplicate|duplicates|repeated)\b(?!\.\w)",
      "sort", lambda _n: ["-u"], 1),
     (r"\breverse\b[^\n]{0,40}?\blines?\b|\blines?\b[^\n]{0,40}?\breverse\b",
      "tac", _no_flags, 1),
@@ -977,7 +1077,16 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # The noun phrase on its own.  "the contents of the file X" states the thing
     # wanted and the thing it is in, with no verb at all, and measured as routing
     # to a JSON file WRITER -- a write capability picked for a read request.
-    (r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
+    # Not when the sentence asks WHICH lines.  "Show the lines containing text
+    # in the file X" states a filter whose value cannot be recovered -- "text" is
+    # an ordinary noun as often as it is a value -- and this row caught the
+    # leftover and answered with the WHOLE FILE, certified, for a question no
+    # line of that file answers.  Refusing to guess the value is right; answering
+    # a different question is not.  Scoped to a sentence that mentions lines AND
+    # a verb of containing, so "the contents of the file containing the report"
+    # keeps `cat` and "show the lines of the file X" is untouched.
+    (r"(?![^\n]{0,120}?\blines?\b[^\n]{0,80}?\b(?:contain|includ|match|hold)\w*\b)"
+     r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
      r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b"
      r"|\bcontents?\b[^\n]{0,20}?\bof\b", "cat", _no_flags, 1),
 )
@@ -1184,12 +1293,97 @@ def _quoted_values(sentence: str) -> list[str]:
     return [m.group(2) for m in _QUOTED.finditer(str(sentence or ""))]
 
 
+# The value a sentence states WITHOUT quoting it.  Both the filter arm and the
+# `grep -c` arm already do the entire job once they hold one value, and both read
+# it from `_quoted_values` -- so a sentence that states the value bare arrived
+# holding none and fell through to a reader.  Measured: "the lines containing
+# apple" bound `cat` and returned the WHOLE FILE for a question about two of its
+# lines, certified, while the quoted form of the same sentence bound `fgrep
+# apple` and returned the two.  One question, two answers, decided by punctuation.
+_NOT_A_STATED_VALUE = frozenset("""
+the a an and or of in on to it its this that those these is are was were be been
+file files line lines text word words string strings pattern patterns one any all
+every each them they there here which what where from with without not no yes
+""".split())
+
+
+def _bare_alternatives(sentence: str) -> list[str] | None:
+    """The two values a sentence joins with "or", stated without quoting them.
+
+    Same masking as `_bare_stated_value`, for the same reason: a path is bare
+    text too, and read off the raw sentence the filename is offered as a value.
+    """
+    s = str(sentence or "")
+    for span in _QUOTED_SPAN.finditer(s):
+        s = s.replace(str(span.group(0)), " " * len(str(span.group(0))))
+    for path in extract_paths(s):
+        s = s.replace(str(path), " " * len(str(path)))
+    m = re.search(
+        r"\b(?:contain(?:s|ed|ing)?|match(?:es|ed|ing)?|includ\w*|hold(?:s|ing)?)"
+        r"\b(?:\s+(?:the|a|an|every|all|any|that|which))?"
+        r"(?:\s+(?:word|text|string|pattern|lines?|ones?))?"
+        r"\s+([A-Za-z0-9][A-Za-z0-9_+-]*)"
+        r"\s+or\s+"
+        r"(?:the\s+)?(?:word\s+|text\s+|string\s+|pattern\s+)?"
+        r"([A-Za-z0-9][A-Za-z0-9_+-]*)", s, re.IGNORECASE)
+    if not m:
+        return None
+    first, second = m.group(1), m.group(2)
+    if first.lower() in _NOT_A_STATED_VALUE or second.lower() in _NOT_A_STATED_VALUE:
+        return None
+    return [first, second]
+
+
+def _bare_stated_value(sentence: str) -> str | None:
+    """The one value a sentence states bare, or None when it states none.
+
+    Uses the masking idiom this file already owns -- quoted spans first, then
+    paths -- because a path is bare text too.  Read off the raw sentence the
+    filename itself is offered as the pattern, which is the defect
+    `_mask_a_quoted_value` documents at length.
+    """
+    s = str(sentence or "")
+    for span in _QUOTED_SPAN.finditer(s):
+        s = s.replace(str(span.group(0)), " " * len(str(span.group(0))))
+    for path in extract_paths(s):
+        s = s.replace(str(path), " " * len(str(path)))
+    m = re.search(
+        r"\b(?:contain(?:s|ed|ing)?|match(?:es|ed|ing)?|includ\w*|hold(?:s|ing)?)"
+        r"\b(?:\s+(?:the|a|an|every|all|any|that|which))?"
+        r"(?:\s+(?:word|text|string|pattern|lines?|ones?))?"
+        r"\s+([A-Za-z0-9][A-Za-z0-9_+-]*)", s, re.IGNORECASE)
+    if not m:
+        return None
+    value = m.group(1)
+    return None if value.lower() in _NOT_A_STATED_VALUE else value
+
+
 # Filtering lines OUT of a file is `grep -v`.  Two shapes, and neither is a
 # guess about the pattern:
 #   * the sentence quotes the text and says the lines must NOT have it;
 #   * the sentence says the lines are EMPTY, which is one exact pattern.
 # "empty" is not a loose synonym here -- it names `^$` and nothing else, the same
 # way an ordinal names a column number.
+# A sentence that says the CASE does not matter.  `-i` is the flag that carries
+# it and nothing else about the command changes -- the same reasoning the `-n`
+# arm below already records for line numbers.  Measured without it: "the lines
+# containing APPLE in the file X ignoring case" bound `fgrep APPLE`, matched
+# nothing in a file that holds "apple pie", and was CERTIFIED returning an empty
+# answer.  The word was read, decided nothing, and was dropped.
+# Two values joined by "or" are ONE pattern with an alternation in it, and the
+# sentence says so in plain English.  Measured, all four phrasings of the same
+# question were wrong: "the lines containing apple or banana" bound `fgrep
+# apple` and dropped every banana line, certified; the quoted form quoted two
+# values, so `len(values) == 1` failed and it was refused; and "matching
+# 'apple|banana'" bound `grep`, which is BRE, where `|` is a LITERAL character
+# -- it matched nothing in a file that holds both words, certified.  `egrep` is
+# already a rule in this module and its exit status is already declared an
+# answer, so this is wiring, not new policy.
+_STATES_AN_ALTERNATIVE = re.compile(r"\bor\b|\beither\b", re.IGNORECASE)
+_ASKS_TO_IGNORE_CASE = re.compile(
+    r"\bignor(?:e|es|ing)\s+(?:the\s+)?case\b|\bcase[\s-]*insensitive\b"
+    r"|\bregardless\s+of\s+case\b|\bwithout\s+regard\s+to\s+case\b"
+    r"|\beither\s+case\b|\bany\s+case\b", re.IGNORECASE)
 _NEGATED_LINE = re.compile(
     r"\b(?:do(?:es)?n't|do(?:es)? not|don't|without|excluding|except)\b"
     r"[^\n]{0,40}?\b(?:contain|containing|match|matching|include|including|have)\b"
@@ -1208,6 +1402,23 @@ _NEGATED_LINE = re.compile(
 # "Show the lines in the file X that are empty" did not, so the second fell all
 # the way through to `cat` and was certified with the whole file as the answer to
 # a question about one line of it.
+# The other way a sentence asks for the lines that are NOT blank.  The blank
+# arm below already inverted for a REMOVAL verb -- "Remove the blank lines" is a
+# filter that keeps the rest -- but the plain negation was never written, so
+# "the lines that are not blank" and "the non-blank lines" both bound
+# `grep '^$'` and were certified while handing back the blank lines themselves:
+# the exact opposite of the question.  Four phrasings of two opposite questions
+# bound one command, which is the shape that hides this.
+#
+# Tested against the masked sentence, not the raw one: these are windows between
+# two words, and a path sits between words.  That is the same defect measured in
+# the write-back gate below.
+_NEGATES_A_BLANK_LINE = re.compile(
+    r"\bnot\b[^\n]{0,20}?\b(?:blank|empty)\b"
+    r"|\bare\s*n'?t\b[^\n]{0,20}?\b(?:blank|empty)\b"
+    r"|\bnon[- ]?(?:blank|empty)\b"
+    r"|\bwithout\b[^\n]{0,20}?\b(?:blank|empty)\b")
+
 _BLANK_LINE = re.compile(
     r"\b(?:empty|blank)\b[^\n]{0,40}?\blines?\b"
     r"|\blines?\b[^\n]{0,40}?\b(?:empty|blank)\b")
@@ -1365,10 +1576,7 @@ _READ_VERBS = re.compile(r"\b(?:show|print|read|display)\b")
 # verb rather than to the verb.
 _REMOVES_SOMETHING_INSIDE_THE_FILE = re.compile(
     r"\bfrom the (?:file|files)\b"
-    r"|\b(?:permission|permissions|bit|bits|line|lines|word|words|character|"
-    r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
-    r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
-    r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix)\b",
+    r"|\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b",
     re.IGNORECASE)
 
 _CHANGE_VERBS = re.compile(
@@ -1693,6 +1901,17 @@ def _prose_argv(sentence: str) -> list[str] | None:
         and (_BLANK_LINE.search(text) or _ASKS_FOR_A_PATTERN.search(text)))
     if _asks_a_filter and "grep" in known:
         values = _quoted_values(sentence)
+        if not values:
+            # The sentence stated its value without quoting it.  Every branch
+            # below keys off `len(values) == 1` and a bare value is a literal,
+            # so it takes the `fgrep` branch the quoted form already takes.
+            _bare = _bare_stated_value(sentence)
+            if _bare is not None:
+                values = [_bare]
+        if len(values) < 2:
+            _alts = _bare_alternatives(sentence)
+            if _alts is not None:
+                values = _alts
         # The blank test runs over the sentence with every path masked out, the
         # way `_prose_ordinal` reads its number from the prose alone.  Measured
         # without this: a file literally named `blank.txt` satisfied the pattern
@@ -1728,12 +1947,25 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # three quote marks in it.  What matters is whether any quote is left
             # over once the spans the sentence really delimited are removed.
             return None
-        if blank:
+        if len(values) == 2 and _STATES_AN_ALTERNATIVE.search(text):
+            # "apple or banana" is one pattern with an alternation in it, and
+            # `egrep` is the program that reads an alternation.  Placed above the
+            # blank branch because a sentence that names two values has said what
+            # it wants more specifically than a sentence that says "empty".
+            needle = "|".join(str(v) for v in values)
+            matcher = "egrep"
+            invert = bool(_NEGATED_LINE.search(text))
+        elif blank:
             # `^$` is the pattern the sentence itself described -- a regular
             # expression, so it goes to `grep` and not to the literal matcher.
             needle = "^$"
             matcher = "grep"
-            invert = bool(_REMOVES_THE_LINES.search(text))
+            # Two ways to ask for the lines that are not the blank ones: say to
+            # REMOVE the blank ones, or say the lines are NOT blank.  Only the
+            # first was written, so the second returned the blank lines and was
+            # certified.  Read over the masked sentence for the reason above.
+            invert = bool(_REMOVES_THE_LINES.search(text)
+                          or _NEGATES_A_BLANK_LINE.search(_masked_for_blank.lower()))
         elif len(values) == 1 and _ASKS_FOR_A_PATTERN.search(text):
             # "matching 'ap.le'" states a REGULAR EXPRESSION, so this is `grep`
             # and not the literal matcher -- the opposite of the branch below it, and
@@ -1816,6 +2048,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
                 # carries it and nothing else about the command changes.
                 _numbered = bool(_ASKS_FOR_LINE_NUMBERS.search(text)) and not invert
                 return [matcher, *(["-v"] if invert else []),
+                        *(["-i"] if _ASKS_TO_IGNORE_CASE.search(text) else []),
                         *(["-n"] if _numbered else []), str(needle),
                         str(operand_paths[0])]
             return None
@@ -2028,7 +2261,29 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # "Show the third line of X" returned the whole file, and "How many lines in
     # X contain 'apple'" returned 4 -- the number of lines in the file -- when
     # two of them hold the text.
+    # "How many empty lines are in the file X" is a COUNT of one exact pattern,
+    # and `_BLANK_LINE` already names it: `^$`.  Measured binding `wc -l`, which
+    # counts every line in the file -- 5 where the file holds one blank -- and
+    # certified all the same, because 5 is a perfectly reproducible answer to a
+    # question nobody asked.  Read over the masked sentence, the way the filter
+    # arm reads its own blank test, so a file NAMED blank.txt cannot claim it.
+    if ("grep" in known and re.search(r"\blines?\b", text)
+            and re.search(r"\b(?:%s)\b" % _WC_QTY, text)):
+        _blank_probe = str(sentence)
+        for _sp in _QUOTED_SPAN.finditer(_blank_probe):
+            _blank_probe = _blank_probe.replace(str(_sp.group(0)),
+                                                " " * len(str(_sp.group(0))))
+        for _pp in extract_paths(_blank_probe):
+            _blank_probe = _blank_probe.replace(str(_pp).lower(), " ")
+        if _BLANK_LINE.search(_blank_probe):
+            _ops = extract_paths(sentence)
+            if len(_ops) == 1:
+                return ["grep", "-c", "^$", str(_ops[0])]
     _asked = _quoted_values(sentence)
+    if not _asked:
+        _bare = _bare_stated_value(sentence)
+        if _bare is not None:
+            _asked = [_bare]
     # Not when the sentence is about a TREE.  "Show which files in the directory
     # D contain 'apple'" names a directory and asks which files in it match, and
     # the recursive search rule owns that sentence; taking it here bound
@@ -2063,7 +2318,14 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # Singular "line", so "the first 3 lines" stays with `head`, which is the
     # command that means it, and only "the third line" comes here.
     _which = _prose_ordinal(sentence)
+    # A WORD and a CHARACTER are units too, and they are not lines.  Without this
+    # exclusion "the first word of each line in the file X" matched here on the
+    # singular "line" inside "each line", was answered with `sed -n 1p` -- the
+    # first LINE, a larger unit containing the one asked for -- and was
+    # CERTIFIED.  The object of the sentence decides the operation, and the rows
+    # in the table below are the ones that mean a word and a character range.
     if (_which is not None and "sed" in known
+            and not re.search(r"\b(?:words?|characters?)\b", text)
             and re.search(r"\bline\b", text) and not re.search(r"\blines\b", text)
             # No `not _ANOTHER_OPERATION` guard here, and putting one in measured
             # as the defect.  Gating the noun phrase on "states no other
@@ -2143,8 +2405,15 @@ def _prose_argv(sentence: str) -> list[str] | None:
         # A quantity in BYTES or CHARACTERS, not in lines.  `_WC_QTY` is excluded
         # so "Count the characters in X" stays with `wc -c`, which is the command
         # that answers it.
+        # `head -c N` reads the first N characters OF THE FILE.  A sentence that
+        # says "of each line" is asking a per-line question, and `cut -c1-N` is
+        # the command that means it.  Measured without this exclusion, "the first
+        # 5 characters of each line in the file X" bound `head -c 5` and came
+        # back CERTIFIED with "zebra" -- the first five characters of the whole
+        # file, from a three-line file, with the other two lines gone.
         if (re.search(r"\b(?:%s)\b" % _WC_CHARS, _prose)
                 and not re.search(r"\b(?:%s)\b" % _WC_QTY, _prose)
+                and not re.search(r"\b(?:each|every|per)\s+lines?\b", _prose)
                 and len(_digits) == 1):
             if re.search(r"\b(?:last|end)\b", _prose) and "tail" in known:
                 return ["tail", "-c", _digits[0], _operand]
@@ -2171,10 +2440,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
     # reported as the work that was asked for.  The removals that ARE owned keep
     # working and are pinned -- duplicate, repeated, unique, empty and blank lines
     # each reach a rule that really performs them.
+    # The exclusion below names the removals a rule really OWNS, and it demanded
+    # the noun "lines" after the word -- the same shape as the defect it guards:
+    # "remove duplicate LINES" was owned and "remove duplicates" was not, so a
+    # sentence the `sort -u` row serves was refused here first.  Scoped to a
+    # sentence that says SORT, because that is what makes the removal owned; a
+    # bare "remove the duplicates from every file in the directory D" is owned by
+    # nothing and must stay refused rather than fall through to a reader.
     if (re.search(r"\b(?:remove|delete|erase)s?\b", text)
             and _REMOVES_SOMETHING_INSIDE_THE_FILE.search(text)
             and not re.search(
                 r"\b(?:duplicate|repeated|unique|empty|blank)\b[^\n]{0,20}?\blines?\b",
+                text)
+            and not re.search(
+                r"\bsort\w*\b[^\n]{0,60}?\b(?:duplicates?|repeats?|repeated)\b"
+                r"|\b(?:duplicates?|repeats?|repeated)\b[^\n]{0,60}?\bsort\w*\b",
                 text)):
         return None
     # "How many files are in the directory D" measured as binding `ls D` and was
@@ -2280,6 +2560,26 @@ def _prose_argv(sentence: str) -> list[str] | None:
                     return None
         paths = operands
         if program == "cut":
+            if re.search(r"\bcharacters?\b", text):
+                # How MANY characters, not which one.  `_prose_count` reads the
+                # number the sentence states; the ordinal word is the fallback so
+                # "the first character of each line" means one character and not
+                # nothing at all.
+                # A stated number wins; otherwise the ordinal word is the
+                # number.  `_prose_count` DEFAULTS to two when the sentence
+                # states nothing, and measured that way "the first character of
+                # each line" bound `cut -c1-2` and returned two characters per
+                # line -- an invented quantity the sentence never stated.
+                how_many = (_prose_count(text) if _COUNT_RE.search(text)
+                            else _prose_ordinal(sentence))
+                if not how_many:
+                    return None
+                return [program, *_character_flags(how_many), str(paths[0])]
+            if re.search(r"\bwords?\b", text):
+                which = _prose_ordinal(sentence)
+                if which is None:
+                    return None
+                return [program, *_word_flags(which), str(paths[0])]
             column = _prose_ordinal(sentence)
             if column is None:
                 # No column stated.  Defaulting to 1 would be inventing the
@@ -2321,6 +2621,14 @@ def _prose_argv(sentence: str) -> list[str] | None:
             # the sentence to the next loose one, so the loose one is scoped too.
             # A sentence that really asks for a listing says so.
             return None
+        if program == "sort" and re.search(r"\b(?:columns?|fields?)\b", text):
+            # The lines come back whole, ordered by the field the sentence named.
+            key = _prose_ordinal(sentence)
+            if key is None:
+                # No column stated.  Defaulting to 1 would order by a column the
+                # sentence never named -- the same refusal `cut` already makes.
+                return None
+            return [program, *_sort_key_flags(key), str(paths[0])]
         _count = _prose_count(text)
         if (program in ("head", "tail") and _COUNT_RE.search(text) is None
                 and re.search(r"\bline\b", text) and not re.search(r"\blines\b", text)):
@@ -2525,7 +2833,24 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
             # is still accepted -- the upper-cased text is on stdout, which is
             # where a reading puts its answer.
             _said = str(sentence or "").lower()
-            if (_READ_VERBS.search(_said) or not _CHANGE_VERBS.search(_said)
+            # One of these rules is a DISTANCE between two words --
+            # `make ... upper` allows twenty characters between them -- and a path
+            # sits between the words.  Measured: "Make the file a.txt all upper
+            # case" was read as a request to change the file and wrote it back,
+            # while "Make the file notes.txt all upper case" was not, and the
+            # same question on a real path printed the upper-cased text, left the
+            # file lower case, and was certified.  The verb list decided the
+            # answer by how long the filename was.
+            #
+            # So the verbs are read over the sentence with its paths masked out,
+            # the way the blank-line arm above already masks before reading its
+            # own pattern.  A path is an operand, not a verb, and a file named
+            # `convert.txt` should not make a sentence a conversion.
+            _said_masked = _said
+            for _p in extract_paths(_said):
+                _said_masked = _said_masked.replace(str(_p).lower(), " ")
+            if (_READ_VERBS.search(_said_masked)
+                    or not _CHANGE_VERBS.search(_said_masked)
                     or not any(re.match(r"^(?:s[|/#]|\$a\s)", str(part).lstrip())
                                for part in argv[1:])):
                 return

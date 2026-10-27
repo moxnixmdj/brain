@@ -23,11 +23,44 @@ GENERIC={
     "which","who","why","with","whether","determine","find","compare","using",
 }
 
+# Both of these are pure functions of a string, and the corpus they are applied
+# to is the capability registry -- it does not change between two questions asked
+# in one process.  Measured over 48 solves: 35,424 calls to the `_tokens` list
+# comprehension, 195,000 `re.findall`, and 3,849,792 `str.casefold` calls, all of
+# them re-reading the same titles and snippets.  Caching the invariant half is
+# what makes a second question cheap; nothing here is skipped, the same tokens
+# are produced, they are just not produced twice.
+#
+# Callers get a COPY of the token list: `_bm25_scores` builds `set(doc)` and a
+# term-frequency map from it, and a caller that mutated the cached list would
+# change every later ranking.
+_CANON_CACHE: dict[str, str] = {}
+_TOKENS_CACHE: dict[str, list] = {}
+_CACHE_MAX = 8192
+
+
 def _canon(value):
-    return " ".join(unicodedata.normalize("NFKC",str(value or "")).strip().split())
+    raw=str(value or "")
+    hit=_CANON_CACHE.get(raw)
+    if hit is not None:
+        return hit
+    out=" ".join(unicodedata.normalize("NFKC",raw).strip().split())
+    if len(_CANON_CACHE)>=_CACHE_MAX:
+        _CANON_CACHE.clear()
+    _CANON_CACHE[raw]=out
+    return out
 
 def _tokens(value):
-    return [x.casefold() for x in WORD_RE.findall(_canon(value)) if len(x)>1 and x.casefold() not in GENERIC]
+    key=_canon(value)
+    hit=_TOKENS_CACHE.get(key)
+    if hit is not None:
+        return list(hit)
+    toks=[x.casefold() for x in WORD_RE.findall(key)
+          if len(x)>1 and x.casefold() not in GENERIC]
+    if len(_TOKENS_CACHE)>=_CACHE_MAX:
+        _TOKENS_CACHE.clear()
+    _TOKENS_CACHE[key]=list(toks)
+    return list(toks)
 
 
 def _focus(objective):
