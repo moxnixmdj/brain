@@ -25478,7 +25478,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6433,
+  "research_index_records": 6434,
   "routing_tokens": 1898,
   "skills": 18,
   "source_index_entry_points": 413,
@@ -25487,7 +25487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7dea1e6ee2247d3f399f1a436ec7e41044a90dcc75b4fe5644296af5316e4ea4"
+  "value": "9b7bca7dae593c6cdd312f15c886bbe70212b688ac42727b6939c05f60148399"
  },
  "engines": [
   {
@@ -193352,6 +193352,29 @@
     "v1": 2,
     "verified_bound_capability_execution_adapter_v1_caught_every_exception_and_returned_the_cause_only_in_the_errors_list_while_the_controller_blocker_builder_astra_runtime_verify_action_expectation_reads_the_singular_keys_reason_and_error_so_the_cause_was_in_the_payload_and_invisible_in_the_only_message_anyone_ever_reads__measured_all_twelve_failing_benchmark_goals_reported_the_byte_identical_string_action_expectation_failed_pass_observed_false_result_status_fail_closed": 1,
     "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
+   "action_id": "FAMILIES_MEASURED_CONCURRENTLY_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/FAMILIES_MEASURED_CONCURRENTLY_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FAMILIES_MEASURED_CONCURRENTLY_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d9cb278915d191873a2b8d2d42e4f62cbfbe2c04dc198bf7f68889b191bfe011",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "concurrently": 1,
+    "families": 1,
+    "families_are_measured_at_the_same_time_with_a_derived_per_family_seed_and_a_per_run_work_root__measured_37_7s_to_15_3s_at_two_workers_on_two_cores_with_zero_rows_differing_across_serial_two_and_four_workers_including_route_histograms": 1,
+    "families_measured_concurrently_v1_20261027_v1": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measure_the_independent_families_at_the_same_time_and_give_each_run_its_own_work_root": 1,
+    "measured": 1,
+    "the_family_suite_is_seventeen_thousand_instances_worth_of_work_that_is_embarrassingly_parallel_but_was_executed_strictly_one_family_after_another__measured_2026_10_27_thirty_seven_families_at_three_instances_take_37_7s_serially_and_15_3s_at_two_workers_and_a_run_cannot_even_attempt_concurrency_because_every_run_rmtrees_one_fixed_work_directory": 1,
+    "v1": 2
    }
   },
   {

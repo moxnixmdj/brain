@@ -38,6 +38,7 @@ import subprocess
 import sys
 import tarfile
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
@@ -559,88 +560,126 @@ def _family_plan(only_families: set[str] | None) -> list[str]:
     return [f for f in all_generators() if not only_families or f in only_families]
 
 
+def _measure_family(job: tuple[str, str, str, str, int, Path]) -> tuple[str, dict[str, Any], list[dict[str, Any]]]:
+    """Measure one family, start to finish.  One body for the serial and parallel paths.
+
+    The seed of a family is derived from the run seed and the family's OWN name, so a
+    family's fixtures do not depend on which families ran before it or on how the
+    workers were scheduled.  Replaying a seed reproduces the corpus exactly, in any
+    order, at any concurrency.
+    """
+    run_tag, run_seed, entry_name, family, n, work = job
+    fn = _entry(entry_name)
+    gen = all_generators()[family]
+    rng = random.Random(f"project-brain-e2e::{run_seed}::{entry_name}::{family}")
+    work.mkdir(parents=True, exist_ok=True)
+    ok = 0
+    env_blocked = 0
+    elapsed = 0
+    caps: dict[str, int] = {}
+    failures: list[dict[str, Any]] = []
+    for i in range(n):
+        case, gen_blocker = generated_case(gen, rng, work, i)
+        if case is None:
+            env_blocked += 1
+            if len(failures) < 60:
+                failures.append({
+                    "family": family, "goal": "(fixture could not be generated)",
+                    "why": "ENVIRONMENT_BLOCKED_HERE:" + gen_blocker,
+                    "status": "GENERATOR_DEPENDENCY_MISSING", "capability": "-",
+                    "admission_rule": None})
+            continue
+        for a in case.artifacts:
+            if a.exists():
+                a.unlink()
+        t0 = time.perf_counter_ns()
+        try:
+            # task ids must be unique: the live controller checkpoints per task id and
+            # refuses to re-run a finished id (MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH)
+            result = fn({"task_id": f"{run_tag}_{family}_{i}", "goal": case.goal})
+        except Exception as exc:  # noqa: BLE001 - an exception leak is itself a finding
+            result = {"pass": None, "status": "EXCEPTION_LEAK", "failure_class": type(exc).__name__ + ":" + str(exc)[:200]}
+        elapsed += time.perf_counter_ns() - t0
+        cap = str(result.get("compiled_capability_id") or result.get("compiler_mode") or "-")
+        caps[cap] = caps.get(cap, 0) + 1
+        blocker = environment_blocker(result)
+        good, why, blocker = oracle_outcome(case, result, blocker)
+        if good:
+            ok += 1
+        elif blocker:
+            env_blocked += 1
+            if len(failures) < 60:
+                failures.append({"family": family, "goal": case.goal[:220], "why": "ENVIRONMENT_BLOCKED_HERE:" + blocker,
+                                 "status": str(result.get("status"))[:120], "capability": cap, "admission_rule": None})
+        elif len(failures) < 60:
+            failures.append({"family": family, "goal": case.goal[:220], "why": (why + " | " + _failure_reason(result))[:400],
+                             "status": str(result.get("status"))[:120], "capability": cap,
+                             "admission_rule": ((result.get("route_admission") or {}).get("rule") if isinstance(result.get("route_admission"), dict) else None)})
+    row = {"instances": n, "oracle_pass": ok, "environment_blocked_here": env_blocked,
+           "pass_rate": round(ok / n, 4) if n else None, "mean_ms": round(elapsed / n / 1e6, 2) if n else None,
+           "routes_taken": caps,
+           "expected": "all PASS with exact artifact" if family != "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else "all FAIL closed, no artifact"}
+    return family, row, failures
+
+
 def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], keep: bool,
         only_families: set[str] | None = None,
-        progress_path: str | Path | None = None) -> dict[str, Any]:
+        progress_path: str | Path | None = None,
+        workers: int = 1) -> dict[str, Any]:
     replay = seed is not None
     if seed is None:
         seed = int.from_bytes(os.urandom(8), "big")
-    work = ROOT / WORK
+    run_tag = "E2E_" + hashlib.sha256(f"{seed}:{os.urandom(8).hex()}".encode()).hexdigest()[:10]
+    # Per-run, because WORK used to be one fixed directory that every run rmtree'd on
+    # start.  Measured 2026-10-27 by running three families in three processes: the
+    # PDF family dropped from 3/3 to 2/3 and one process ran for over fifteen minutes,
+    # because the runs were deleting each other's fixtures mid-measurement.  A shared
+    # mutable work root makes ANY concurrency -- a developer's two shells, a retried
+    # job, a second runner -- silently corrupt the measurement.
+    work = ROOT / WORK / run_tag
     if work.exists():
         shutil.rmtree(work)
     work.mkdir(parents=True)
     kstar_artifact = ROOT / "canonical/astra_runtime/artifacts/TERMINAL_KSTAR_RESULT_20261007_V1.json"
     kstar_existed = kstar_artifact.exists()
-    run_tag = "E2E_" + hashlib.sha256(f"{seed}:{os.urandom(8).hex()}".encode()).hexdigest()[:10]
     results: dict[str, Any] = {}
-    plan = _RunPlan(entries, _family_plan(only_families))
+    all_families = _family_plan(only_families)
+    plan = _RunPlan(entries, all_families)
     for entry_name in entries:
-        fn = _entry(entry_name)
-        rng = random.Random(seed)
         families: dict[str, dict[str, Any]] = {}
         failures: list[dict[str, Any]] = []
-        for family, gen in all_generators().items():
-            if only_families and family not in only_families:
-                continue
-            n = oos_count if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else per_family
-            ok = 0
-            env_blocked = 0
-            elapsed = 0
-            caps: dict[str, int] = {}
-            for i in range(n):
-                case, gen_blocker = generated_case(gen, rng, work / entry_name, i)
-                if case is None:
-                    env_blocked += 1
-                    if len(failures) < 60:
-                        failures.append({
-                            "family": family, "goal": "(fixture could not be generated)",
-                            "why": "ENVIRONMENT_BLOCKED_HERE:" + gen_blocker,
-                            "status": "GENERATOR_DEPENDENCY_MISSING", "capability": "-",
-                            "admission_rule": None})
-                    continue
-                for a in case.artifacts:
-                    if a.exists():
-                        a.unlink()
-                t0 = time.perf_counter_ns()
-                try:
-                    # task ids must be unique: the live controller checkpoints per task id and
-                    # refuses to re-run a finished id (MODEL_INDEPENDENT_CONTROLLER_PLAN_WITHOUT_FINISH)
-                    result = fn({"task_id": f"{run_tag}_{entry_name}_{family}_{i}", "goal": case.goal})
-                except Exception as exc:  # noqa: BLE001 - an exception leak is itself a finding
-                    result = {"pass": None, "status": "EXCEPTION_LEAK", "failure_class": type(exc).__name__ + ":" + str(exc)[:200]}
-                elapsed += time.perf_counter_ns() - t0
-                cap = str(result.get("compiled_capability_id") or result.get("compiler_mode") or "-")
-                caps[cap] = caps.get(cap, 0) + 1
-                blocker = environment_blocker(result)
-                good, why, blocker = oracle_outcome(case, result, blocker)
-                if good:
-                    ok += 1
-                elif blocker:
-                    env_blocked += 1
-                    if len(failures) < 60:
-                        failures.append({"family": family, "goal": case.goal[:220], "why": "ENVIRONMENT_BLOCKED_HERE:" + blocker,
-                                         "status": str(result.get("status"))[:120], "capability": cap, "admission_rule": None})
-                elif len(failures) < 60:
-                    failures.append({"family": family, "goal": case.goal[:220], "why": (why + " | " + _failure_reason(result))[:400],
-                                     "status": str(result.get("status"))[:120], "capability": cap,
-                                     "admission_rule": ((result.get("route_admission") or {}).get("rule") if isinstance(result.get("route_admission"), dict) else None)})
-            families[family] = {"instances": n, "oracle_pass": ok, "environment_blocked_here": env_blocked, "pass_rate": round(ok / n, 4) if n else None,
-                                "mean_ms": round(elapsed / n / 1e6, 2) if n else None, "routes_taken": caps,
-                                "expected": "all PASS with exact artifact" if family != "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else "all FAIL closed, no artifact"}
+
+        def record(family: str, row: dict[str, Any], fam_failures: list[dict[str, Any]]) -> None:
+            families[family] = row
+            failures.extend(fam_failures)
+            # Sorted, so two runs of the same seed produce the same receipt whatever
+            # order the workers happened to finish in.
+            failures.sort(key=lambda f: (str(f.get("family")), str(f.get("goal"))))
+            del failures[60:]
             results[entry_name] = _entry_payload(entry_name, families, failures)
             _write_progress(progress_path, _receipt(
                 results, plan, seed=seed, replay=replay, run_tag=run_tag, removed=0,
                 liveness=None, reach=None, complete=False))
-        in_scope = [f for f in families if f != "OUT_OF_SCOPE_MUST_FAIL_CLOSED"]
-        results[entry_name] = {
-            "entry": "canonical.runtime.live_integrated_brain_v1.run_raw_goal" if entry_name == "old" else "canonical.runtime.live_brain_route_admission_v1.solve",
-            "families": families,
-            "in_scope_families_measured": len(in_scope),
-            "in_scope_families_all_pass": sum(1 for f in in_scope if families[f]["oracle_pass"] == families[f]["instances"]),
-            "in_scope_instance_pass_rate": round(sum(families[f]["oracle_pass"] for f in in_scope) / max(1, sum(families[f]["instances"] for f in in_scope)), 4),
-            "out_of_scope_fail_closed_rate": families["OUT_OF_SCOPE_MUST_FAIL_CLOSED"]["pass_rate"] if "OUT_OF_SCOPE_MUST_FAIL_CLOSED" in families else None,
-            "failures_sample": failures,
-        }
+
+        jobs = [(run_tag, seed, entry_name, family,
+                 oos_count if family == "OUT_OF_SCOPE_MUST_FAIL_CLOSED" else per_family,
+                 work / entry_name / family)
+                for family in all_families]
+        if workers > 1 and len(jobs) > 1:
+            # Families are independent: separate fixtures, separate artifact paths,
+            # separate task ids.  Measuring them at the same time is the difference
+            # between a suite that is long and a suite that is slow -- measured
+            # 2026-10-27, the 37-family suite did not finish inside 40 minutes, and
+            # the wall clock is what the schedule, not the verdict, has to pay for.
+            with ProcessPoolExecutor(max_workers=min(workers, len(jobs))) as pool:
+                futures = {pool.submit(_measure_family, job): job[3] for job in jobs}
+                for fut in as_completed(futures):
+                    family, row, fam_failures = fut.result()
+                    record(family, row, fam_failures)
+        else:
+            for job in jobs:
+                family, row, fam_failures = _measure_family(job)
+                record(family, row, fam_failures)
     if not keep and work.exists():
         shutil.rmtree(work)
     # remove the controller checkpoints this run created (state dir is not a measurement artifact)
@@ -653,7 +692,7 @@ def run(seed: int | None, per_family: int, oos_count: int, entries: list[str], k
     if not kstar_existed and kstar_artifact.exists():
         kstar_artifact.unlink()  # written by the catch-all tool during fail-open runs of the old entry
     liveness = tool_liveness()
-    reach_work = ROOT / WORK / "reachability"
+    reach_work = work / "reachability"
     reach = reachability(reach_work)
     if reach_work.exists():
         shutil.rmtree(reach_work)
@@ -726,6 +765,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--seed", type=int, default=None, help="replay seed (labels the run as a replay)")
     ap.add_argument("--per-family", type=int, default=50)
     ap.add_argument("--oos", type=int, default=100)
+    ap.add_argument("--jobs", type=int, default=1,
+                    help="families measured at the same time (default 1 = serial). Each family is independent.")
     ap.add_argument("--entries", default="old,new", help="comma list of entries to measure: old,new")
     ap.add_argument("--out", default=None, help="receipt path (default: print only)")
     ap.add_argument("--keep", action="store_true", help="keep generated workspaces")
@@ -759,7 +800,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     receipt = run(ns.seed, ns.per_family, ns.oos, [x.strip() for x in ns.entries.split(",") if x.strip()], ns.keep,
                   only_families={x.strip() for x in ns.families.split(",") if x.strip()} or None,
-                  progress_path=ns.out)
+                  progress_path=ns.out, workers=max(1, ns.jobs))
     text = json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     if ns.out:
         # The receipt is the ONLY record of a ten-minute measurement.  Measured: the run
