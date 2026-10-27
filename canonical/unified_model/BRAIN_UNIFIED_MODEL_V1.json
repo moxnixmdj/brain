@@ -28692,7 +28692,7 @@
   "engines": 26,
   "knowledge_documents": 170,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6493,
+  "research_index_records": 6494,
   "routing_tokens": 2096,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28701,7 +28701,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bfad759aadadbb5ce579c8a4e2f839f6bf3c46c61626f80926c578cb408dd5dc"
+  "value": "043aa6162f73e84d221c3411cf3000cec75a95258aeb650655872c662da0746c"
  },
  "engines": [
   {
@@ -194223,6 +194223,51 @@
    }
   },
   {
+   "action_id": "AN_UNQUOTED_COMMAND_LINE_IS_A_PROGRAM_OR_IT_IS_NOT_A_COMMAND_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/AN_UNQUOTED_COMMAND_LINE_IS_A_PROGRAM_OR_IT_IS_NOT_A_COMMAND_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_UNQUOTED_COMMAND_LINE_IS_A_PROGRAM_OR_IT_IS_NOT_A_COMMAND_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "57c51fcd9f7f9a0f4fed0bf6cc7a0fc6b534343addb1ab522dc0a7a7a329a49f",
+   "status": "",
+   "terms": {
+    "1686-1689": 1,
+    "20261027": 1,
+    "822-824": 1,
+    "absent": 1,
+    "adapter": 1,
+    "already": 2,
+    "an_unquoted_command_line_is_a_program_or_it_is_not_a_command_v1_20261027_v1": 2,
+    "argv": 3,
+    "command": 11,
+    "d_out": 2,
+    "english": 2,
+    "line": 4,
+    "machine": 2,
+    "no": 2,
+    "not": 2,
+    "passes": 4,
+    "program": 3,
+    "prose": 2,
+    "r.json": 2,
+    "refuses": 2,
+    "report": 2,
+    "returns": 2,
+    "s+": 6,
+    "sentence": 3,
+    "shell": 3,
+    "so": 2,
+    "test": 2,
+    "unquoted": 3,
+    "v1": 2,
+    "whose": 2,
+    "word": 3,
+    "writing": 2
+   }
+  },
+  {
    "action_id": "APT_PURE_PYTHON_DEPENDENCIES_ACQUIRE_FROM_A_PINNED_PYPI_WHEEL_WHEN_THE_DEB_IS_UNAVAILABLE_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -199821,7 +199866,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURE_CHAIN_LAUNDER_RESIDUAL_PIN_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "1be72381abf5bb9c9689fa2fae2d699b403f6b9436d85db6e9a5f19296a5a5a5",
+   "sha256": "d1fb034c758fe684a5d3c99bbc9f50d2ef299385dabf375fb5af440fb708a3d6",
    "status": "",
    "terms": {
     "125": 1,
@@ -218961,9 +219006,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "bb4bdd772cedc5980276464c97ef69780b7a171f88d2d1196bba06e472f12f2d",
+   "sha256": "3b6e505fb6c7e4135694ddb81c1992c2ed67170de7e6b2cf04e4d448833ab9e7",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 53,
+   "symbol_count": 54,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -218979,6 +219024,7 @@
     "_head_flags",
     "_is_directory_in_repo",
     "_is_repository_path",
+    "_known_programs",
     "_listed_paths",
     "_mask_a_quoted_value",
     "_no_flags",
@@ -218987,8 +219033,7 @@
     "_pathish",
     "_preceding_words",
     "_prose_argv",
-    "_prose_count",
-    "_prose_ordinal"
+    "_prose_count"
    ],
    "terms": {
     "candidate_tokens": 1,
@@ -219004,6 +219049,7 @@
     "extract_paths": 1,
     "fully_bound_contract_tokens": 1,
     "head_flags": 1,
+    "known_programs": 1,
     "no_flags": 1,
     "prose_count": 1,
     "prose_ordinal": 1,
@@ -219015,7 +219061,6 @@
     "sed_print_script": 1,
     "sentence": 1,
     "sort_key_flags": 1,
-    "states_a_destination_for_the_result": 1,
     "tail_flags": 1,
     "token_words": 1,
     "typed": 1,

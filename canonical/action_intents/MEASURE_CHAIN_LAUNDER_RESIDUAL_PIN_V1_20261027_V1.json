@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The chainer washes substitutions: a consumer whose effect_result slot stays dangling (no producer attached, no provenance) outranks the grounded correct consumer on the unjustified-slot preference, and the compare stage cannot separate it from the pinned-correct pair",
- "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+ "canonical_base_commit": "96015b9228c91e451946f5a8409c2f0109521380",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -76,7 +76,7 @@
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": "White-box harvest inside the same file: _score, the pass protocol, the bindable/unbindable invariant comments, _plan_has_unjustified_world_slots' binding vocabulary (filled_from_world_not_goal), the repo's own law test (test_decision_synthesizer_exists_but_is_unbindable: 'the honest behaviour is to refuse, not to substitute a converter'), and the GoalCompilationFailure channel. No new file, no new dependency: one ranker gains an unbindable collector (same single binding attempt per candidate -- zero extra binding cost) and one refusal predicate at the fusion point, scoped by the measured discriminator (vacuous bind or unjustified world slots) so grounded winners whose contract the sentence states are never collateral.",
  "recursive_obs": {
-  "canonical_base_commit": "ce92836e7e943f0226ba4bec3e96a85590f4df92",
+  "canonical_base_commit": "96015b9228c91e451946f5a8409c2f0109521380",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "NARROWING_THE_SCORES_TO_HIDE_THE_CASE__THE_FILE_ITSELF_MEASURED_THAT_SCORING-LEVEL_ATTEMPTS_FAILED",
