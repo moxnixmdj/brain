@@ -7344,6 +7344,91 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TYPEGATE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TYPEGATE-001.json"
       }
+    },
+    "python.review.diff_coverage_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_coverage_gate.v1",
+          "anchor_path": "${input.anchor_path}",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}",
+          "min_coverage_ratio": "${input.min_coverage_ratio}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_coverage_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "coverage",
+        "gate",
+        "test coverage",
+        "changed lines",
+        "pull request",
+        "pr",
+        "untested",
+        "pre-merge",
+        "regression"
+      ],
+      "limitations": [
+        "coverage stage needs coverage.py on the python_executable (PyPI tool, offline-probed); absent -> gate PASS_BLIND recorded loudly after the suite is still proven green, the coverage sweep honestly did not run.",
+        "a failing suite is SUITE_RED, a refusal: coverage under failing tests is untrustworthy data, never produced.",
+        "statement coverage is a floor: a def line counts as executed at import; behavioral adequacy belongs to test-quality capabilities (property/mutation) outside v1.",
+        "test discovery is the pytest filename convention; suites named otherwise are not discovered and an empty suite is a refusal, not a pass."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_coverage_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "complete",
+        "diff_covered_ratio",
+        "diff_executable_lines",
+        "diff_miss_lines",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "tests_discovered",
+        "verified"
+      ],
+      "source": {
+        "module": "coverage",
+        "type": "pypi",
+        "version_family": ">=7.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-COVGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> lint triage + type gate -> anchored full-suite -> this coverage gate",
+          "golden": "gate PASS at diff coverage ratio 1.0 in a ~1.9s full six-stage chain",
+          "blind_leg": "lint PASS, type PASS, suite PASS, coverage FAIL with pkg/util.py:9 named -- ONLY this gate sees the untested changed line",
+          "deterministic": "coverage artifact byte-identical on rerun; anchor hash-identical before/after"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COVGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-COVGATE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

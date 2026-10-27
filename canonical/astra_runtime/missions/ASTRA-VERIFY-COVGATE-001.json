@@ -1,0 +1,8 @@
+{
+  "mission_id": "ASTRA-VERIFY-COVGATE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.review.diff_coverage_gate.v1",
+  "statement": "Lint (F/E/W on changed lines), type soundness (mypy on changed lines) and a green full suite cannot see a changed line nothing executes. This gate intersects coverage.py missing-executable lines with the diff's changed ranges on a pristine anchored apply. Golden leg: full 6-stage crown all PASS at ratio 1.0. Blind leg: a lint-clean, type-clean, suite-green added function -> coverage FAIL naming the exact uncovered body line. Both legs measured; artifact byte-identical on rerun.",
+  "zero_spend": true
+}
