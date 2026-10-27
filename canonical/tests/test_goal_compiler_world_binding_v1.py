@@ -1077,37 +1077,47 @@ class ChainedPlanScoreComparisonTests(unittest.TestCase):
     def test_forcing_the_grounded_plan_back_reproduces_the_catch_all(self):
         """Negative control. Without it the test above proves nothing.
 
-        Making _plan_score rank every grounded plan above every chained one is
-        equivalent to never taking the chained plan, which must return the old
-        wrong answer.
+        Re-measured 2026-10-27 after the refuse-never-substitute law landed on
+        main (GOAL_COMPILATION_BEST_MATCH_UNBINDABLE): the grounded pass no
+        longer produces the catch-all at all.  The vacuously-binding
+        terminal.kstar.root.assess.stdlib is REFUSED because the true match
+        (knowledge.consistency.assess at score 22) cannot bind without its
+        effect producer, and a vacuous bind must never substitute for a
+        strictly better word-match.  That refusal is the BEFORE state this
+        negative control exists to bound: without the chained plan the goal
+        receives a loud refusal, not a silent wrong answer; with the chained
+        plan it compiles to the correct capability (the test above).  The
+        control is STRONGER than the older "bounded comparison" it replaces:
+        it proves the comparison machinery is what saves the goal from
+        refusal, not from substitution.
         """
-        real = compiler._plan_score
-        compiler._plan_score = lambda plan: real(plan) - 1000 if (
-            isinstance(plan, dict) and plan.get("compiler_mode")
-        ) else real(plan)
-        try:
-            # Prefer whichever plan the grounded pass produced by demoting any
-            # plan that carries chained provenance is brittle, so demote by
-            # identity instead: the grounded plan for this goal selects the
-            # catch-all, and both plans share the same schema. Compare directly.
-            grounded = compiler._compile_single_goal(
+        with self.assertRaises(compiler.GoalCompilationFailure) as cm:
+            compiler._compile_single_goal(
                 "Assess knowledge consistency.", self.registry, self.root
             )
-            self.assertEqual(
-                grounded.get("selected_capability"),
-                "terminal.kstar.root.assess.stdlib",
-                "the grounded pass no longer produces the catch-all; this "
-                "counterexample no longer bounds the comparison",
-            )
-            self.assertGreater(
-                real(compiler.compile_goal(
-                    "Assess knowledge consistency.", self.registry, self.root)),
-                real(grounded),
-                "the chained plan does not out-score the grounded one, so the "
-                "comparison is not what selects it",
-            )
-        finally:
-            compiler._plan_score = real
+        self.assertEqual(cm.exception.code, "GOAL_COMPILATION_BEST_MATCH_UNBINDABLE")
+        detail = json.loads(cm.exception.detail or "{}")
+        self.assertEqual(
+            detail["substitute_refused"], "terminal.kstar.root.assess.stdlib",
+            "the vacuous catch-all is what the refusal blocks",
+        )
+        self.assertEqual(detail["substitute_binding"], "VACUOUS")
+        # Both knowledge capabilities tie at the refusal frontier (score 22):
+        # the best-match label names whichever sorts first; either is the
+        # same law -- the producer-fed rows the sentence cannot call.
+        self.assertIn(
+            detail["unbindable_best_match"],
+            {"knowledge.consistency.assess", "knowledge.json.fetch.external"},
+            "the better word-match whose producer the sentence cannot supply",
+        )
+        self.assertGreater(
+            detail["unbindable_best_match_score"], detail["substitute_score"],
+        )
+        # And the chained pass DOES rescue the goal to the right capability:
+        plan = compiler.compile_goal(
+            "Assess knowledge consistency.", self.registry, self.root
+        )
+        self.assertEqual(plan.get("selected_capability"), "knowledge.consistency.assess")
 
     def test_the_grounded_plan_is_kept_when_it_scores_higher(self):
         """The theft guard. This goal compiled correctly before the comparison
