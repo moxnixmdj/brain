@@ -57,8 +57,24 @@ def _parse_unified_diff(text):
     return {k: v for k, v in changed.items() if v}
 
 
-def _load_index(repo, source_root, work):
-    """The semantic symbol index, built fresh by the sibling adapter."""
+def _load_index(repo, source_root, work, cached_index_path=None):
+    """The semantic symbol index, built fresh by the sibling adapter, or a
+    validated cache artifact (optional ``index_path`` input).  A cache must
+    carry the published schema, nonzero totals, and the exact requested
+    source_root — a cache misdescribing the tree it measured is worse than
+    no cache."""
+    if cached_index_path is not None:
+        try:
+            artifact = json.loads(pathlib.Path(cached_index_path).read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001 - truthfulness beats type lists
+            raise RuntimeError(f"INDEX_CACHE_UNREADABLE:{type(exc).__name__}")
+        if artifact.get("schema") != "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1" or int(
+            (artifact.get("totals") or {}).get("files", 0)
+        ) <= 0:
+            raise RuntimeError("INDEX_CACHE_INVALID")
+        if str(artifact.get("source_root")) != str(source_root.relative_to(repo)):
+            raise RuntimeError("INDEX_CACHE_SOURCE_ROOT_MISMATCH")
+        return artifact, {"cache_used": 1}
     spec = importlib.util.spec_from_file_location(
         "python_source_symbol_index_sibling",
         pathlib.Path(__file__).with_name("python_source_symbol_index.py"),
@@ -230,10 +246,15 @@ def run(args, root):
     py_changed = {p: r for p, r in changed.items() if p.endswith(".py")}
     ignored = sorted(set(changed) - set(py_changed))
 
+    cached_index_path = None
+    if args.get("index_path"):
+        cached_index_path = _safe_path(repo, str(args["index_path"]))
+        if not cached_index_path.is_file():
+            raise RuntimeError("INDEX_CACHE_MISSING")
     work = repo / ".change_impact_work"
     work.mkdir(parents=True, exist_ok=True)
     try:
-        index, _index_result = _load_index(repo, source_root, work)
+        index, _index_result = _load_index(repo, source_root, work, cached_index_path)
     finally:
         shutil_free = work / ".change_impact_index.json"
         if shutil_free.is_file():

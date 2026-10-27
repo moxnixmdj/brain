@@ -6700,6 +6700,90 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
       }
+    },
+    "python.source.crossfile_edit.choreograph.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.crossfile_edit.choreograph.v1",
+          "edits": "${input.edits}",
+          "edits_path": "${input.edits_path}",
+          "index_path": "${input.index_path}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_crossfile_edit_choreograph",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "edit",
+        "rename",
+        "move",
+        "refactor",
+        "cross-file",
+        "choreograph",
+        "plan",
+        "collision",
+        "impact"
+      ],
+      "limitations": [
+        "Plans, does not apply: mutation of sources is a separate concern.",
+        "complete=true only at zero ambiguous sites; plain-import attribute use and unknown-resolution loads are listed, never silently dropped (index retains no asname and no attribute loads in v1)."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.crossfile_edit.choreography"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "affected_file_count",
+        "ambiguous_site_count",
+        "cache_used",
+        "edit_op_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "planned_op_count",
+        "planned_site_count",
+        "refused_op_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CROSSFILE-EDIT-001",
+        "observed_effect": {
+          "source_root": "canonical",
+          "edit": "rename_symbol Capability -> PlanningCapability in canonical/runtime/capability_planner.py",
+          "planned_sites": 2,
+          "ambiguous_sites": 0,
+          "complete": true,
+          "fresh_seconds": 25.2,
+          "cached_seconds": 1.98,
+          "cache_speedup_x": 12.7,
+          "plans_byte_identical": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CROSSFILE-EDIT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CROSSFILE-EDIT-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

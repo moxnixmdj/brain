@@ -96,23 +96,8 @@ def _sha256_text(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
-def _load_index(repo, source_abs, work):
-    """The semantic symbol index, built fresh by the sibling adapter
-    (identical delegation pattern to the change-impact capability)."""
-    import importlib.util
-    import pathlib as _plib
-    spec = importlib.util.spec_from_file_location(
-        "python_source_symbol_index_sibling",
-        _plib.Path(__file__).with_name("python_source_symbol_index.py"),
-    )
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    tmp = work / ".symbol_resolve_index.json"
-    module.run(
-        {"source_root": str(source_abs.relative_to(repo)), "output_path": str(tmp)},
-        str(repo),
-    )
-    index = json.loads(tmp.read_text(encoding="utf-8"))
+def _materialize(index):
+    """index artifact -> (index, modules, definitions_by_module, qualnames)."""
     modules = {}
     for module in index.get("modules") or []:
         modules.setdefault(module["path"], module)
@@ -137,6 +122,42 @@ def _load_index(repo, source_abs, work):
             qualnames.setdefault(d["qualname"], []).append(record)
         definitions_by_module[module] = sorted(items, key=lambda r: (r["lineno"], r["qualname"]))
     return index, modules, definitions_by_module, qualnames
+
+
+def _load_index(repo, source_abs, work, cached_index_path=None):
+    """The semantic symbol index, built fresh by the sibling adapter
+    (identical delegation pattern to the change-impact capability), or a
+    validated cache artifact (optional ``index_path`` input).  Cache law:
+    published schema, nonzero totals, exact source_root match.  Fresh and
+    cached paths share one materialization, so results are identical."""
+    if cached_index_path is not None:
+        try:
+            artifact = json.loads(Path(cached_index_path).read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            _systemic(f"cached index unreadable: {type(exc).__name__}")
+        if artifact.get("schema") != "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1" or int(
+            (artifact.get("totals") or {}).get("files", 0)
+        ) <= 0:
+            _systemic("cached index invalid: schema or totals mismatch")
+        want = str(source_abs.relative_to(repo)).replace("\\", "/")
+        if str(artifact.get("source_root")) != want:
+            _systemic("cached index invalid: source_root mismatch")
+        return _materialize(artifact)
+    import importlib.util
+    import pathlib as _plib
+    spec = importlib.util.spec_from_file_location(
+        "python_source_symbol_index_sibling",
+        _plib.Path(__file__).with_name("python_source_symbol_index.py"),
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    tmp = work / ".symbol_resolve_index.json"
+    module.run(
+        {"source_root": str(source_abs.relative_to(repo)), "output_path": str(tmp)},
+        str(repo),
+    )
+    index = json.loads(tmp.read_text(encoding="utf-8"))
+    return _materialize(index)
 
 
 def _import_rows(module_row):
@@ -325,7 +346,7 @@ def _builtin_lookup(name):
     return {"status": "BUILTIN", "reason": None, "definitions": [], "resolved_from": "BUILTIN"} if hasattr(builtins, name) else None
 
 
-def build_resolution(source_root, queries, root):
+def build_resolution(source_root, queries, root, cached_index_path=None):
     """Build the resolution artifact rows."""
     import shutil
     import tempfile
@@ -333,7 +354,7 @@ def build_resolution(source_root, queries, root):
     source_abs = (repo / source_root).resolve()
     work = Path(tempfile.mkdtemp(dir=str(repo), prefix=".symbol_resolve_work_"))
     try:
-        index, modules, definitions_by_module, qualnames_by_qual = _load_index(repo, source_abs, work)
+        index, modules, definitions_by_module, qualnames_by_qual = _load_index(repo, source_abs, work, cached_index_path)
     finally:
         shutil.rmtree(work, ignore_errors=True)
     rows = []
@@ -432,7 +453,13 @@ def run(args, root):
     if raw_queries is None:
         _systemic("queries input is required")
     queries = _queries_from_raw(json.loads(raw_queries) if isinstance(raw_queries, str) else raw_queries)
-    artifact = build_resolution(source_root, queries, root)
+    cached_index_path = None
+    if args.get("index_path"):
+        candidate = _safe_path(root, str(args["index_path"]), allow_overwrite=True)
+        if not candidate.is_file():
+            _systemic("index_path does not exist: " + str(args["index_path"]))
+        cached_index_path = candidate
+    artifact = build_resolution(source_root, queries, root, cached_index_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(artifact, indent=2, ensure_ascii=False) + "\n"
     output_path.write_text(text, encoding="utf-8")
