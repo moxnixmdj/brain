@@ -1,0 +1,408 @@
+{
+  "action_id": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+  "action_intent_id": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Repair plain-goal composite admission and identity-aware unified routing; preserve fail-closed negative controls; 124 bound / 418 modelled unchanged.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_REPAIR",
+    "progress_evidence_paths": [
+      "canonical/runtime/goal_compiler.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+      "canonical/tests/test_brain_unified_model_v1.py"
+    ],
+    "route_class": "CONFIGURE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::On main 94afa871, eighteen zero-input internal composites bypassed plain-goal operand admission and produced a score-14 ambiguity ahead of python.source.audit.ast; separately, effect-only tree-sitter triggers scored 331.186564 against the audit owner's 212.786564 and stole its unified-model route.",
+  "canonical_base_commit": "94afa87134dc8a1ec522165248585fcd252019f2",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "On main 94afa871, eighteen zero-input internal composites bypassed plain-goal operand admission and produced a score-14 ambiguity ahead of python.source.audit.ast; separately, effect-only tree-sitter triggers scored 331.186564 against the audit owner's 212.786564 and stole its unified-model route.",
+  "date": "2026-10-27T17:21:08Z",
+  "expected_parent_change": "Restore correct plain-goal admission and unified-model routing without adding capabilities or weakening refusals: zero-input nodes with unbound prerequisite effects no longer masquerade as grounded candidates, standalone zero-input legacy behavior and genuine ambiguity remain intact, and capability-identity evidence prevents effect-only rare tokens from stealing the AST audit route. Refresh six stale census assertions to the live 418 and recompile the content-addressed model after indexing this intent.",
+  "expected_parent_frontier_change": "Restore correct plain-goal admission and unified-model routing without adding capabilities or weakening refusals: zero-input nodes with unbound prerequisite effects no longer masquerade as grounded candidates, standalone zero-input legacy behavior and genuine ambiguity remain intact, and capability-identity evidence prevents effect-only rare tokens from stealing the AST audit route. Refresh six stale census assertions to the live 418 and recompile the content-addressed model after indexing this intent.",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-27: do the optimal in the fastest way, insanely fast, only the right way; use existing Brain mechanisms and verified integration.",
+  "falsification_condition": "Any zero-input composite with prerequisites still appears in the grounded audit ranking; any standalone zero-input negative control regresses; genuine ambiguity compiles; the AST audit route selects another capability; source_root is invented; the 16/7 grounding split moves; any census assertion disagrees with the live 418; or the compiled model digest is stale.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "0/13",
+    "interpretation": "This is a correctness repair to existing routing and admission mechanisms. It claims no benchmark discharge, capability gain, terminal credit, or new authority.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.99,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Restore correct plain-goal admission and unified-model routing without adding capabilities or weakening refusals: zero-input nodes with unbound prerequisite effects no longer masquerade as grounded candidates, standalone zero-input legacy behavior and genuine ambiguity remain intact, and capability-identity evidence prevents effect-only rare tokens from stealing the AST audit route. Refresh six stale census assertions to the live 418 and recompile the content-addressed model after indexing this intent.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": "Reused goal_front_compiler_v1's plain-goal operand contract, the pinned compiler's existing placeholder scanner and ambiguity resolver, the unified model's compiled IDF postings, the existing grounding adapter, and the repository's independent unittest and digest oracles. No package, model, planner, or external service.",
+  "recursive_obs": {
+    "canonical_base_commit": "94afa87134dc8a1ec522165248585fcd252019f2",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "GROUNDED_STATUS_FOR_PREREQUISITE_BEARING_ZERO_INPUT_COMPOSITES",
+      "EFFECT_ONLY_RARE_TOKEN_PRECEDENCE_OVER_OPERATION_IDENTITY",
+      "STALE_HARDCODED_CAPABILITY_CENSUS"
+    ],
+    "expected_parent_level_state_change": "Restore correct plain-goal admission and unified-model routing without adding capabilities or weakening refusals: zero-input nodes with unbound prerequisite effects no longer masquerade as grounded candidates, standalone zero-input legacy behavior and genuine ambiguity remain intact, and capability-identity evidence prevents effect-only rare tokens from stealing the AST audit route. Refresh six stale census assertions to the live 418 and recompile the content-addressed model after indexing this intent.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETE_FALSE_ADMISSION__BYPASS_NO_GUARDS__REUSE_EXISTING_PLACEHOLDER_AND_IDF_EVIDENCE",
+      "intrinsic_or_path_specific": "Path-specific integration defect: the needed capabilities and evidence already exist, but two entry points discard operand and identity distinctions.",
+      "surviving_causal_blocker": "Any candidate admitted without an operand can create ambiguity before the real owner is considered; any scorer that merges identity with effects can let rare implementation vocabulary steal the operation."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "Deleted only false admission and effect-only precedence; no capability, adapter, route, or verifier is removed.",
+      "existing_inherited_routes_checked": "Read and directly probed goal_compiler ranking/tie resolution, goal_front_compiler_v1 routability, plain_goal_bound_grounding admission, and UnifiedModel.route IDF scoring.",
+      "external_existing_routes_checked": "No external route is required; the installed Python standard library and canonical test oracles are sufficient and unchanged.",
+      "surviving_gap": "Lexical routing remains bounded by declared triggers and identity; this repair does not claim arbitrary natural-language understanding."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "GREEN_BY_CHANGING_BEHAVIORAL_ASSERTIONS",
+        "NEW_CAPABILITY_LABELS_AS_A_ROUTING_FIX",
+        "HOST_SPECIFIC_ROUTING_AS_A_FIX"
+      ],
+      "real_outcome": "Restore correct plain-goal admission and unified-model routing without adding capabilities or weakening refusals: zero-input nodes with unbound prerequisite effects no longer masquerade as grounded candidates, standalone zero-input legacy behavior and genuine ambiguity remain intact, and capability-identity evidence prevents effect-only rare tokens from stealing the AST audit route. Refresh six stale census assertions to the live 418 and recompile the content-addressed model after indexing this intent.",
+      "surviving_necessity": "Every emitted plan must be operand-grounded, genuine ambiguity must still refuse, and the model must select the capability that owns the asked operation on every host."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "All 124 bound capabilities and all explicit capability_id invocation paths remain; only plain-goal candidate admission and score composition change.",
+      "downstream_work_to_delete_or_supersede": "No guard or capability is deleted. Test-generated experience state is reverted, and the unified model is recompiled only after this intent exists.",
+      "fresh_reuse_plan": "Reuse the existing placeholder scanner and compiled IDF postings, run the original negative controls, then regenerate the content-addressed model and run all governance gates."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "The initial 136-test failure log and direct score probes are reused; the broad-filter experiment is not repeated; no external search or package installation is needed.",
+      "search_stop_decision": "Stop only when the original 136 tests, 33 model checks, integrity guard, and drift guard all pass with the live 124/418 census and no model cognition or spend."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "The broad filter removes a pinned standalone route and changes the grounding invariant; host filtering violates host-independent routing; expectation edits conceal rather than repair the wrong selection.",
+      "routes_ranked": [
+        "Composite-only plain-goal admission plus identity-aware existing IDF scoring",
+        "Broad zero-input filtering (falsified)",
+        "Host-dependent filtering (contract violation)",
+        "Expectation-only edits (not a repair)"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "No new synthetic world is needed. Existing live-registry tests independently pin the audit owner, source_root refusal, 16/7 grounding split, terminal catch-all, genuine ambiguity, and model digest; one real route case is added."
+    },
+    "prior_routes_considered": [
+      "BROAD_ZERO_INPUT_FILTER__REJECTED_BY_TERMINAL_CATCH_ALL_AND_16_7_SPLIT",
+      "EXPECTATION_ONLY_CHANGE__REJECTED_HIDES_ROUTING_DEFECT",
+      "HOST_DEPENDENCY_FILTER__REJECTED_HOST_INDEPENDENCE_CONTRACT"
+    ],
+    "real_outcome": "Restore correct plain-goal admission and unified-model routing without adding capabilities or weakening refusals: zero-input nodes with unbound prerequisite effects no longer masquerade as grounded candidates, standalone zero-input legacy behavior and genuine ambiguity remain intact, and capability-identity evidence prevents effect-only rare tokens from stealing the AST audit route. Refresh six stale census assertions to the live 418 and recompile the content-addressed model after indexing this intent.",
+    "required_capability": "python.source.audit.ast",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "No new operand evidence or correct owner precedence",
+            "CORRECTNESS": "Fails at least one live owner-route or negative-control assertion",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "Fails closed incorrectly or hides the defect",
+            "VERIFIABILITY": "Contradicted by existing executable oracles",
+            "WALL_CLOCK": "Locally cheap but pays repeated failures"
+          },
+          "evidence": [
+            "Direct probe: the broad filter made _compile_single_goal lose the pinned terminal.kstar catch-all and moved the measured grounding split from 16/7 to 23/0."
+          ],
+          "qualification_evidence": [
+            "Direct probe: the broad filter made _compile_single_goal lose the pinned terminal.kstar catch-all and moved the measured grounding split from 16/7 to 23/0."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "FILTER_EVERY_ZERO_INPUT_CAPABILITY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "No new operand evidence or correct owner precedence",
+            "CORRECTNESS": "Fails at least one live owner-route or negative-control assertion",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "Fails closed incorrectly or hides the defect",
+            "VERIFIABILITY": "Contradicted by existing executable oracles",
+            "WALL_CLOCK": "Locally cheap but pays repeated failures"
+          },
+          "evidence": [
+            "Direct probe: the audit owner scores 33 with world binding but is never reached while two internal composites tie at 14; changing assertions would conceal that routing defect."
+          ],
+          "qualification_evidence": [
+            "Direct probe: the audit owner scores 33 with world binding but is never reached while two internal composites tie at 14; changing assertions would conceal that routing defect."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "UPDATE_EXPECTATIONS_OR_ACCEPT_THE_NEW_AMBIGUITY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "No new operand evidence or correct owner precedence",
+            "CORRECTNESS": "Fails at least one live owner-route or negative-control assertion",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "Fails closed incorrectly or hides the defect",
+            "VERIFIABILITY": "Contradicted by existing executable oracles",
+            "WALL_CLOCK": "Locally cheap but pays repeated failures"
+          },
+          "evidence": [
+            "Direct probe and existing model comments/tests: route() is deliberately host-independent; hiding unrunnable capabilities would make the artifact answer vary by machine and violates the declared-context controls."
+          ],
+          "qualification_evidence": [
+            "Direct probe and existing model comments/tests: route() is deliberately host-independent; hiding unrunnable capabilities would make the artifact answer vary by machine and violates the declared-context controls."
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "FILTER_ROUTES_BY_HOST_DEPENDENCY_PRESENCE"
+        }
+      ],
+      "checked_at_utc": "2026-10-27T17:21:08Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "ADMIT_ALL_ZERO_INPUT_COMPOSITES_AND_USE_MERGED_TRIGGER_SCORE_ONLY",
+      "max_age_hours": 24,
+      "negative_search_summary": "No new scorer, package, model, or host-dependent filter is needed. Existing placeholder and identity evidence is sufficient; broader alternatives were executed and rejected by counterexamples.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "repository zero-input plain-goal routability and internal composite admission"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "repository unified-model capability identity and IDF routing channels"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "existing Python 3.11 stdlib unittest zero-spend verification substrate"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "main 94afa871 current unified workflow 136-test failure census"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "routes_considered": [
+        "FILTER_EVERY_ZERO_INPUT_CAPABILITY",
+        "UPDATE_EXPECTATIONS_OR_ACCEPT_THE_NEW_AMBIGUITY",
+        "FILTER_ROUTES_BY_HOST_DEPENDENCY_PRESENCE",
+        "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1__SELECTED"
+      ],
+      "selected_route": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+      "selected_route_checked_at_utc": "2026-10-27T17:21:08Z",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-27T17:21:08Z",
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11 standard library and existing repository test runner",
+            "evidence": [
+              "DIRECT_PROBE: Python 3.11.2 ran the 35 targeted routing, grounding, ambiguity, and negative-control tests successfully."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "Exact main base and live 124-bound / 418-modelled registry and model artifacts",
+            "evidence": [
+              "DIRECT_PROBE: HEAD is 94afa87134dc8a1ec522165248585fcd252019f2; the live registry has 124 capabilities and the digest-verified model has 418."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "observed_at_utc": "2026-10-27T17:21:08Z",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "VOLATILE"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+        "status": "READY"
+      },
+      "selected_surviving_route": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "goal_front_compiler_v1.is_plain_goal_routable, goal_compiler._placeholders, unified-model IDF postings, and existing negative-control tests supplied every load-bearing mechanism."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "No external community mechanism is necessary or used; the live failures and their oracles are fully reproduced inside the canonical repository."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "No package or version change is needed; the existing Python 3.11 standard-library substrate executed the probes unchanged."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "The canonical repository's own compiler contracts and unified-model tests are the primary specification for this internal routing repair."
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "FILTER_EVERY_ZERO_INPUT_CAPABILITY",
+      "UPDATE_EXPECTATIONS_OR_ACCEPT_THE_NEW_AMBIGUITY",
+      "FILTER_ROUTES_BY_HOST_DEPENDENCY_PRESENCE",
+      "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1__SELECTED"
+    ],
+    "selected_route": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+    "selected_surviving_route": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+    "stop_condition": "Holds when the 136-test unified command passes, the 33-check model verifier passes, the original 16/7 grounding split and terminal catch-all negative control remain unchanged, genuine ambiguity still refuses, the AST audit goal reports missing source_root rather than executing another capability, no model cognition or incremental spend is introduced, and repository integrity and drift guards pass.",
+    "why_selected_route_is_fastest_sufficient": "The defect is admission and evidence routing, not missing capability. Two narrow deterministic checks reuse fields already present: prerequisite-bearing zero-input nodes are internal, and an IDF posting that also matches the capability id supplies identity evidence. This avoids a new planner, package, model, or host-dependent behavior."
+  },
+  "resolution": "SELECTED",
+  "route_id": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1",
+  "stop_condition": "Holds when the 136-test unified command passes, the 33-check model verifier passes, the original 16/7 grounding split and terminal catch-all negative control remain unchanged, genuine ambiguity still refuses, the AST audit goal reports missing source_root rather than executing another capability, no model cognition or incremental spend is introduced, and repository integrity and drift guards pass.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__ROUTING_REPAIR_ONLY__NO_TRUTH_OBLIGATION_OR_PROOF_STATE_MODIFIED",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "7c4d2a367e867fb821d7500c00f63ce408cf702a",
+          "path": "canonical/runtime/goal_compiler.py"
+        },
+        {
+          "git_blob_sha": "77f49ef05e242e7a83692a1d11425da6bf258a24",
+          "path": "canonical/runtime/brain_unified_model_v1.py"
+        },
+        {
+          "git_blob_sha": "de7d51ba00abff7f9ba459bfccf23189fbe91cb8",
+          "path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py"
+        },
+        {
+          "git_blob_sha": "56c5ce317676704ff4a488d0ba5ad07e8aed6ac4",
+          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        }
+      ],
+      "decisive_question": "MAY_A_PLAIN_GOAL_ROUTE_AN_INTERNAL_ZERO_INPUT_COMPOSITE_OR_LET_EFFECT_ONLY_RARE_TOKENS_OUTRANK_THE_OPERATION_OWNER",
+      "falsifier_id": "TERMINAL_CATCH_ALL_AND_GENUINE_AMBIGUITY_AND_GROUNDING_SPLIT_AND_AST_OWNER_NEGATIVE_CONTROLS_MUST_ALL_SURVIVE",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "The first broad zero-input filter was directly falsified by the terminal catch-all counterexample and moved the grounding split from 16/7 to 23/0; the selected composite-only condition preserves both.",
+      "proposal_id": "PLAIN_GOAL_COMPOSITE_ADMISSION_AND_IDENTITY_ROUTING_REPAIR_V1_20261027_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard or fail-closed assertion is weakened. The broad filter candidate was rejected by existing counterexamples; the selected repair is narrower and preserves them."
+}
