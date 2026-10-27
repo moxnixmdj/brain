@@ -1,0 +1,28 @@
+{
+ "mission_id": "ASTRA-VERIFY-MUTGATE-001",
+ "status": "COMPLETE",
+ "e2e_ms_golden": 2225,
+ "golden": {
+  "scenario": "BatchSizer ceil-half fix + the diff's own strong tests (diff adds tests/test_batch_strong.py)",
+  "mutants_generated": 8,
+  "mutants_killed": 8,
+  "mutants_survived": 0,
+  "kill_ratio": 1.0,
+  "gate": "PASS",
+  "complete": true
+ },
+ "honest_legs": {
+  "survivor_witness": {
+   "scenario": "identical fix diff WITHOUT the strong tests (weak anchor suite only)",
+   "gate": "FAIL",
+   "kill_ratio": 0.875,
+   "survivor": {"file": "src/pkg/core.py", "line": 13, "operator": "arith_swap", "replacement": "-"},
+   "meaning": "the changed halving line runs under the weak suite but its arithmetic is never observed"
+  },
+  "base_red_refusal": "tampered anchor test -> BASE_WORLD_RED refusal with the failing assertion named; anchor bytes never mutated",
+  "byte_determinism": "two pristine worlds -> mutation.json byte-identical AND anchors byte-identical",
+  "confinement": "every mutant line lies inside the diff hunk's new-side range (pin suite + mission rows)",
+  "new_file_safety": "diff-created files are measured, never mutated; 1e9 sentinel hunk ranges clamped to true file extent"
+ },
+ "loop": "THE CROWN NOW PROVES OBSERVATION: a changed line the tests never pin cannot pass review"
+}

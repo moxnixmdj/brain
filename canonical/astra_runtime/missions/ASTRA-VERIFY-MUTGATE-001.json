@@ -1,0 +1,8 @@
+{
+ "mission_id": "ASTRA-VERIFY-MUTGATE-001",
+ "arc_class": "semantic_engine",
+ "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+ "target_capability": "python.review.diff_mutation_gate.v1",
+ "statement": "Coverage proves the suite EXECUTES a changed line; only a mutation gate proves the suite OBSERVES it. For every changed executable line the gate generates AST mutants confined to that line (compare/arithmetic/aug swaps, bool swap, numeric bump, return-None), splices them byte-exact at verified spans into a scratch copy of anchor+diff (anchor and diff never mutated), and runs the named suite per mutant. A survivor is a falsifying witness: the changed behaviour is not pinned by tests. The unchanged world must be green BEFORE any mutation (BASE_WORLD_RED refusal prevents killed-by-baseline laundering); mutant timeouts count as kills (infinite loops are observable); a diff of pure content with no mutable executable sites is a loud refusal, never a silent zero-score. Golden leg: a batch-sizer fix shipped with its own tests kills all 8 generated mutants. Adversarial leg: the same fix WITHOUT its own tests lets the arith-swap survivor live -> gate FAIL with the exact (file, line, operator, replacement) witness. Base-red worlds refuse; two pristine worlds produce byte-identical artifacts.",
+ "zero_spend": true
+}

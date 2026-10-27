@@ -1,0 +1,30 @@
+{
+ "receipt_for": "ASTRA-VERIFY-MUTGATE-001",
+ "capability_id": "python.review.diff_mutation_gate.v1",
+ "adapter_module": "python_review_diff_mutation_gate",
+ "observed": {
+  "golden": {
+   "mutants_generated": 8,
+   "mutants_killed": 8,
+   "mutants_survived": 0,
+   "kill_ratio": 1.0,
+   "gate": "PASS",
+   "complete": true,
+   "e2e_ms": 2225
+  },
+  "adversarial_weak_suite": {
+   "mutants_killed": 7,
+   "mutants_survived": 1,
+   "gate": "FAIL",
+   "complete": false,
+   "kill_ratio": 0.875,
+   "survivor_witness": "src/pkg/core.py:13 arith_swap '+'->'-'"
+  },
+  "base_world_red": "loud refusal naming the red assertion; anchor byte-identical afterwards",
+  "anchor_and_diff_immutable": "byte-identical before/after every leg",
+  "determinism_two_worlds": true,
+  "operators": ["compare_swap", "arith_swap", "aug_swap", "bool_swap", "numeric_bump", "return_none"],
+  "refusal_ladder": ["PATH_MISSING", "PATH_ESCAPE", "MISSING_OR_INVALID_PATH_ARGUMENT", "ANCHOR_NOT_DIRECTORY", "DIFF_EMPTY", "DIFF_DOES_NOT_APPLY", "DIFF_APPLY_FAILED_AFTER_CHECK", "GIT_UNAVAILABLE", "NO_TESTS_DISCOVERED", "BASE_WORLD_RED", "NO_MUTABLE_SITES", "SYNTAX_ERROR_IN_FILE", "SPAN_INTEGRITY", "TIMEOUT"],
+  "pin_green": "15/15 x 3 consecutive runs"
+ }
+}
