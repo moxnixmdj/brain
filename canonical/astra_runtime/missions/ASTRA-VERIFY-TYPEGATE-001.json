@@ -1,0 +1,8 @@
+{
+  "mission_id": "ASTRA-VERIFY-TYPEGATE-001",
+  "arc_class": "semantic_engine",
+  "kind": "VERIFY_CAPABILITY_WORTHSHIP",
+  "target_capability": "python.review.diff_type_gate.v1",
+  "statement": "The lint gate (ruff F/E/W, capability 82) proves name/syntax hygiene on changed lines and is structurally blind to type lies. This gate runs mypy's native JSON rows intersected with the diff's changed ranges. Golden leg: full crown chain (NL -> orchestrate -> lint triage -> type gate) all PASS. Blind-spot leg: an int+str operand lie on changed lines that ruff reports zero blocking rows for -> type gate FAIL with operator/assignment evidence at the exact line. Both legs measured; artifact byte-identical on rerun.",
+  "zero_spend": true
+}
