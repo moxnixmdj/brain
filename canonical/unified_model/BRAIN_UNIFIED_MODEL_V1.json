@@ -26448,13 +26448,8 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "generated_tests_root",
-    "index_path",
     "output_path",
-    "python_executable",
-    "source_root",
-    "targets_path",
-    "timeout_s"
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28704,7 +28699,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "817e9352b7ac1dde5d66c5682df1312f939d0cabfbf504a4f782370100ef140c"
+  "value": "d9e65ce4944aa59699e83283b4e64613690dde95b372b9644c7f18130c48acfc"
  },
  "engines": [
   {
@@ -52236,7 +52231,7 @@
   "included_source_count": 940,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6a9ac3e33db09c78906cfe382f8bf9f25b7a438fb0c99f6b2fee355e56d142a9"
+  "source_tree_digest": "53ea2abbef85d2c808af4c3bfb1ddf678897213abc889dc0d52ac41e482c7569"
  },
  "research_index": [
   {
@@ -210606,7 +210601,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_tests_generate_scaffold.py",
-   "sha256": "3321063abb69c11a97d2a8022b0364fbffcd7dd47941473dee60ba5f3767e393",
+   "sha256": "fdf81f002fa648ad0ecd14654fd977dc6a4c20a73c9bf8c6d0cb6f00b5433b8c",
    "summary": "python.tests.generate.scaffold.v1 — write tests for uncovered paths.",
    "symbol_count": 10,
    "symbols": [
