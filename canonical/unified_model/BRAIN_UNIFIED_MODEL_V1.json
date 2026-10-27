@@ -23022,7 +23022,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-    "source_sha256": "40331ef4b982ea8ac9e54cb725b27f58fba55f8ad0f1832754416193e131028e",
+    "source_sha256": "99d492f82262ef80c30d5ba18b44c635ef0ddfe1b9c3c4e5f64fb88030bf98e3",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -24619,7 +24619,7 @@
   "engines": 26,
   "knowledge_documents": 168,
   "receipt_backed_capabilities": 295,
-  "research_index_records": 6424,
+  "research_index_records": 6425,
   "routing_tokens": 1816,
   "skills": 18,
   "source_index_entry_points": 406,
@@ -24628,7 +24628,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7c865e8aff69260d02574decf1b3871cf94591a74c6a9dbb5a68638935a9a7f5"
+  "value": "6506bea4c15bb5a404aae1cdb3c81203a8533e0c17afa62d878c98f3780a50de"
  },
  "engines": [
   {
@@ -46640,7 +46640,7 @@
   "included_source_count": 866,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "adc89ae13f5547cb72849a09eeb871430a6be6db5aad0bacba4fd2deddceffe6"
+  "source_tree_digest": "1c35e5a423c7cb8a2e36efdce1d4e5b6b9c84e0cb00f2b89d4e1e55515214268"
  },
  "research_index": [
   {
@@ -190498,6 +190498,51 @@
     "v1": 2,
     "wc_lines": 2,
     "while": 2
+   }
+  },
+  {
+   "action_id": "A_TEST_ARGV_TOKEN_IS_AN_ARGUMENT_NOT_A_PATH_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27T00:00:00Z",
+   "id": "research:canonical/action_intents/A_TEST_ARGV_TOKEN_IS_AN_ARGUMENT_NOT_A_PATH_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_TEST_ARGV_TOKEN_IS_AN_ARGUMENT_NOT_A_PATH_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1fa61060049539266b330cd27f4cacdf2ff9a9e440069caa7870eeb277398443",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "36": 1,
+    "a_test_argv_token_is_an_argument_not_a_path_v1_20261027_v1": 1,
+    "about": 1,
+    "already": 1,
+    "argument": 2,
+    "argv": 2,
+    "asked": 1,
+    "branch": 1,
+    "but": 1,
+    "candidate-layout": 1,
+    "command": 1,
+    "completes": 1,
+    "crashing": 1,
+    "door": 1,
+    "else": 1,
+    "enametoolong": 1,
+    "engine": 1,
+    "errno": 1,
+    "every": 1,
+    "existing": 1,
+    "fail__live_controller_execution": 1,
+    "false": 1,
+    "filesystem": 1,
+    "front": 1,
+    "not": 2,
+    "oserror": 2,
+    "path": 2,
+    "test": 2,
+    "token": 3,
+    "true": 3,
+    "v1": 2
    }
   },
   {
