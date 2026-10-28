@@ -190,3 +190,21 @@ def test_repair_loop_zero_budget_runs_nothing(scratch):
     result = mod.run({"budget": 0, "manifest": {}, "output_path": out}, ROOT)
     assert result["iterations"] == 0 and result["verified"] is False
     assert result["reason"] == "REPAIR_BUDGET_ZERO"
+
+
+def test_deadline_is_an_end_to_end_budget(scratch):
+    mod = importlib.import_module(BC + "test_slice_never_miss_v1")
+    out = (scratch / "deadline.json").as_posix()
+    result = mod.run({"source_root": "canonical", "changed_paths": ["x.py"], "deadline_s": 0,
+                      "output_path": out}, ROOT)
+    assert result["verified"] is False and result["steps_run"] == 1
+    assert result["reason"].startswith("COMPOSER_DEADLINE_EXCEEDED:")
+    assert json.loads((ROOT / out).read_text())["deadline_s"] == 0
+
+
+def test_unbound_timeout_inherits_the_remaining_budget(tmp_path):
+    bound, unbound = ce._bind("p", {"timeout_s": "${input.timeout_s}", "x": "${input.x}"},
+                              {"x": 1}, "o.json", remaining_s=7.9)
+    assert unbound == [] and bound == {"timeout_s": 7, "x": 1, "output_path": "o.json"}
+    bound, unbound = ce._bind("p", {"timeout_s": "${input.timeout_s}"}, {}, "o.json", remaining_s=None)
+    assert unbound == ["timeout_s"]

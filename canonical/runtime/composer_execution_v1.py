@@ -22,6 +22,10 @@ Rules enforced here, all fail-closed:
   door uses, its registry ``expect`` is checked, and a result carrying
   ``verified: False`` fails the step;
 * a composer reached again while it is still running is a cycle, refused;
+* ``deadline_s`` (optional) is an end-to-end budget: a step that would start
+  after it is refused ``COMPOSER_DEADLINE_EXCEEDED``, and a producer whose
+  template declares ``timeout_s`` that the caller left unbound inherits the
+  remaining budget instead of running open-ended;
 * ``verified`` is the conjunction over a non-empty step ledger.
 
 Composer registry templates deliberately carry no producer-input placeholders:
@@ -41,6 +45,7 @@ import json
 import pathlib
 import re
 import sys
+import time
 import traceback
 from typing import Any, Mapping
 
@@ -115,7 +120,7 @@ def _expectation_holds(expect: Any, result: Mapping[str, Any]) -> tuple[bool, st
 
 
 def _bind(producer: str, template: Mapping[str, Any], inputs: Mapping[str, Any],
-          step_output_rel: str) -> tuple[dict[str, Any], list[str]]:
+          step_output_rel: str, remaining_s: float | None = None) -> tuple[dict[str, Any], list[str]]:
     bound: dict[str, Any] = {}
     unbound: list[str] = []
     for key, value in (template or {}).items():
@@ -128,6 +133,9 @@ def _bind(producer: str, template: Mapping[str, Any], inputs: Mapping[str, Any],
         name = m.group(1)
         if name == "output_path":
             bound[key] = step_output_rel
+        elif name == "timeout_s" and name not in inputs and remaining_s is not None:
+            # a composition deadline is the budget every step inherits
+            bound[key] = max(1, int(remaining_s))
         elif name in inputs:
             # an explicit None is a binding (the door renders it the same way)
             bound[key] = inputs[name]
@@ -160,7 +168,10 @@ def compose(*, capability_id: str, schema: str, adapter: str, producers: list[st
     output = _safe_output(repo, args.get("output_path"), default_output)
     step_dir = output.with_name(output.stem + ".steps")
     step_dir.mkdir(parents=True, exist_ok=True)
-    inputs = {k: v for k, v in args.items() if k not in ("output_path", "capability_id")}
+    inputs = {k: v for k, v in args.items() if k not in ("output_path", "capability_id", "deadline_s")}
+    deadline_s = args.get("deadline_s")
+    started = time.monotonic()
+    deadline = (started + float(deadline_s)) if deadline_s is not None else None
 
     steps: list[dict[str, Any]] = []
     reason = ""
@@ -184,12 +195,18 @@ def compose(*, capability_id: str, schema: str, adapter: str, producers: list[st
                     steps.append(row)
                     break
                 template = (entry.get("action_template") or {})
-                bound, unbound = _bind(pid, template.get("args") or {}, inputs, step_rel)
+                remaining = (deadline - time.monotonic()) if deadline is not None else None
+                if remaining is not None and remaining <= 0:
+                    row["status"] = "COMPOSER_DEADLINE_EXCEEDED:" + str(deadline_s) + "s"
+                    steps.append(row)
+                    break
+                bound, unbound = _bind(pid, template.get("args") or {}, inputs, step_rel, remaining)
                 row["bound_inputs"] = sorted(bound)
                 if unbound:
                     row["status"] = "COMPOSER_INPUT_UNBOUND:" + ",".join(sorted(unbound))
                     steps.append(row)
                     break
+                step_started = time.monotonic()
                 try:
                     module = _load_adapter(repo, entry)
                     fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
@@ -218,6 +235,7 @@ def compose(*, capability_id: str, schema: str, adapter: str, producers: list[st
                 else:
                     row["status"] = "VERIFIED"
                     row["verified"] = True
+                row["seconds"] = round(time.monotonic() - step_started, 3)
                 row["result_output_sha256"] = result.get("output_sha256")
                 row["result_summary"] = {k: result[k] for k in ("status", "gate", "verified", "complete")
                                          if k in result and isinstance(result[k], (str, bool, int, float))}
@@ -242,6 +260,8 @@ def compose(*, capability_id: str, schema: str, adapter: str, producers: list[st
         "inputs_bound": sorted(inputs),
         "steps": steps,
         "steps_run": len(steps),
+        "deadline_s": deadline_s,
+        "seconds": round(time.monotonic() - started, 3),
         "verified": verified,
         "reason": reason,
         "verification_basis": "EVERY_PRODUCER_EXECUTED_ON_THESE_INPUTS_AND_VERIFIED"
