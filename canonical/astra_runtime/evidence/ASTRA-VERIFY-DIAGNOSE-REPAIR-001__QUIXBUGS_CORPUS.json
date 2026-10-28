@@ -1,0 +1,5993 @@
+{
+ "receipt_for": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
+ "kind": "CORPUS",
+ "corpus": "QuixBugs (github.com/jkoppel/QuixBugs @ 4257f44): 40 single-defect Python programs; the 31 with JSON I/O cases are usable",
+ "runner": "canonical/runtime/corpus_quixbugs_diagnose_repair_v1.py",
+ "capability_id": "software.diagnose_repair.v1",
+ "brain_commit_before_this_pass": "f7144b7efb5b30f3ba006ea48168073f89a1134f",
+ "generated_utc": "2026-10-28T23:38:35Z",
+ "protocol": {
+  "given_to_capability": "every failing case + up to 2 passing cases as plain pytest asserts",
+  "held_out": "the remaining cases; CORRECT = the shipped diff passes every usable case of the program (reference-consistent, non-hanging)",
+  "deadline_s": 120,
+  "host_cpus": null,
+  "python": null
+ },
+ "caveats": [
+  "The templates added in this pass (NAME_OFFSET, NAME_REPLACE, ARG_SWAP, CALL_UNWRAP, SLICE_INSERT, [] -> [[]], max(0, _), append-after-loop, Add operand order) were derived from the misses of run 1 on this same corpus: these numbers measure coverage of QuixBugs' one-line fix patterns, not blind generalisation.",
+  "CORRECT means every usable case of the program passes; several shipped patches are equivalent to, not identical with, the reference fix (find_first_in_sorted `hi = len(arr[1:])`, lcs_length `dp[i, j + 1]`, is_valid_parenthesization's synthesized condition).",
+  "bitcount and sqrt are excluded: every failing case hangs and the real-pytest reproduce has no per-test timeout; hanoi is excluded: the reference returns tuples where the JSON cases hold lists.",
+  "Programs without JSON cases (9 of 40) are not run."
+ ],
+ "summary": {
+  "programs": [
+   {
+    "cases": 9,
+    "failing_on_defect": [],
+    "hang_on_defect": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "oracle_inconsistent": [],
+    "passing_on_defect": [],
+    "program": "bitcount",
+    "status": "NOT_APPLICABLE:ALL_FAILURES_HANG"
+   },
+   {
+    "cases": 7,
+    "diff": [
+     "-    for i, count in enumerate(arr):",
+     "+    for i, count in enumerate(counts):"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/bucketsort.py",
+      "greens": [
+       408
+      ],
+      "seconds": 5.226,
+      "stop_reason": "VERIFIED",
+      "tested": 448
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "bucketsort",
+    "seconds": 6.06,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.36
+     ],
+     [
+      "localize",
+      0.126
+     ],
+     [
+      "patch_search",
+      5.226
+     ],
+     [
+      "full_suite_gate",
+      0.34
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 448,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "5b072ff85c439769e2c957c8152cd224a713791902d7c59cabd8c6dd1e60ac04",
+     "col_offset": 30,
+     "detail": "arr->counts",
+     "end_col_offset": 33,
+     "end_lineno": 7,
+     "kind": "NAME_REPLACE",
+     "lineno": 7
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 7,
+    "diff": [
+     "-    hi = len(arr)",
+     "+    hi = len(arr[1:])"
+    ],
+    "failing_on_defect": [
+     1
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/find_first_in_sorted.py",
+      "greens": [
+       100,
+       101,
+       102,
+       103,
+       124,
+       145,
+       146,
+       157,
+       161,
+       165,
+       166
+      ],
+      "seconds": 16.523,
+      "stop_reason": "VERIFIED",
+      "tested": 192
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     3
+    ],
+    "hang_on_defect": [
+     2,
+     4
+    ],
+    "heldout_cases": [
+     5,
+     6
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "HANG",
+      "PASS",
+      "HANG",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     3,
+     5,
+     6
+    ],
+    "program": "find_first_in_sorted",
+    "seconds": 17.289,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.333
+     ],
+     [
+      "localize",
+      0.115
+     ],
+     [
+      "patch_search",
+      16.523
+     ],
+     [
+      "full_suite_gate",
+      0.312
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+    "tested_candidates": 192,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "fb9eed4ffe8f4ae9bf92052d1f198c93ba62788beed6ac151e9742ebadd6a9e4",
+     "col_offset": 13,
+     "detail": "arr[1:]",
+     "end_col_offset": 16,
+     "end_lineno": 3,
+     "kind": "SLICE_INSERT",
+     "lineno": 3
+    },
+    "witness": {
+     "behaviour_classes": 7,
+     "hypothesis": "MEASURED",
+     "property_inputs": 60,
+     "status": "MEASURED",
+     "tie_at_top": true
+    }
+   },
+   {
+    "cases": 7,
+    "diff": [
+     "-            return binsearch(mid, end)",
+     "+            return binsearch(mid + 1, end)"
+    ],
+    "failing_on_defect": [
+     1,
+     6
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/find_in_sorted.py",
+      "greens": [
+       4,
+       5,
+       41,
+       52
+      ],
+      "seconds": 0.892,
+      "stop_reason": "VERIFIED",
+      "tested": 64
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     6
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     3,
+     4,
+     5
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     2,
+     3,
+     4,
+     5
+    ],
+    "program": "find_in_sorted",
+    "seconds": 1.658,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.322
+     ],
+     [
+      "localize",
+      0.121
+     ],
+     [
+      "patch_search",
+      0.892
+     ],
+     [
+      "full_suite_gate",
+      0.318
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NO_FREE_FUNCTION:NESTED_FUNCTION",
+    "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+    "tested_candidates": 64,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "36b584bf56ae774a500fbfe51e7a473b7819f00723feb4b9c4651aa496f8246e",
+     "col_offset": 29,
+     "detail": "mid + 1",
+     "end_col_offset": 32,
+     "end_lineno": 9,
+     "kind": "NAME_OFFSET",
+     "lineno": 9
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "WITNESS_UNAVAILABLE:NESTED_FUNCTION",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 7,
+    "diff": [
+     "-            yield flatten(x)",
+     "+            yield x"
+    ],
+    "failing_on_defect": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/flatten.py",
+      "greens": [
+       1
+      ],
+      "seconds": 0.87,
+      "stop_reason": "VERIFIED",
+      "tested": 64
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     1
+    ],
+    "program": "flatten",
+    "seconds": 1.657,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.353
+     ],
+     [
+      "localize",
+      0.116
+     ],
+     [
+      "patch_search",
+      0.87
+     ],
+     [
+      "full_suite_gate",
+      0.313
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "UNDERSPECIFIED:0_examples",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 64,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "d4933e1703965abc2ff647a553e61c7b630641d6497a3a02910fd7ef176e489a",
+     "col_offset": 18,
+     "detail": "flatten(x) -> x",
+     "end_col_offset": 28,
+     "end_lineno": 7,
+     "kind": "CALL_UNWRAP",
+     "lineno": 7
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 6,
+    "diff": [
+     "-        return gcd(a % b, b)",
+     "+        return gcd(b, a % b)"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/gcd.py",
+      "greens": [
+       1
+      ],
+      "seconds": 2.994,
+      "stop_reason": "VERIFIED",
+      "tested": 64
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "gcd",
+    "seconds": 3.854,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.391
+     ],
+     [
+      "localize",
+      0.123
+     ],
+     [
+      "patch_search",
+      2.994
+     ],
+     [
+      "full_suite_gate",
+      0.342
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+    "tested_candidates": 64,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "a0ec600c411a124edcda62d627b22aa8ce29c4eda65dbf5927e12e4f3c344213",
+     "col_offset": 15,
+     "detail": "args 0<->1",
+     "end_col_offset": 28,
+     "end_lineno": 5,
+     "kind": "ARG_SWAP",
+     "lineno": 5
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 11,
+    "diff": [
+     "-    for i in range(2, int(n ** 0.5) + 1):",
+     "+    for i in range(2, int(n) + 1):"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/get_factors.py",
+      "greens": [
+       16,
+       18,
+       21,
+       22
+      ],
+      "seconds": 4.804,
+      "stop_reason": "VERIFIED",
+      "tested": 64
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "get_factors",
+    "seconds": 5.583,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.346
+     ],
+     [
+      "localize",
+      0.112
+     ],
+     [
+      "patch_search",
+      4.804
+     ],
+     [
+      "full_suite_gate",
+      0.317
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 64,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "c9c24f48148bd06192fe8cb69c055f9485515ff07729137102e40ef9b90a68e4",
+     "col_offset": 26,
+     "detail": "keep left",
+     "end_col_offset": 34,
+     "end_lineno": 6,
+     "kind": "BINOP_DROP",
+     "lineno": 6
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 59,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 8,
+    "failing_on_defect": [],
+    "hang_on_defect": [],
+    "oracle_inconsistent": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "hanoi",
+    "status": "NOT_APPLICABLE:NO_FAILING_CASE"
+   },
+   {
+    "cases": 3,
+    "diff": [
+     "-        if paren == '(':",
+     "+        if paren == '(' and paren + paren < parens:"
+    ],
+    "failing_on_defect": [
+     2
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/is_valid_parenthesization.py",
+      "greens": [
+       131,
+       132,
+       133
+      ],
+      "seconds": 2.748,
+      "stop_reason": "VERIFIED",
+      "tested": 244
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     1
+    ],
+    "program": "is_valid_parenthesization",
+    "seconds": 3.479,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.307
+     ],
+     [
+      "localize",
+      0.115
+     ],
+     [
+      "patch_search",
+      2.748
+     ],
+     [
+      "full_suite_gate",
+      0.304
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 244,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "0f21c76fa63431778590f42eb623e49bca61ed1295b013f886aeb566a454fc4c",
+     "col_offset": 11,
+     "detail": "condition -> paren == '(' and paren + paren < parens",
+     "end_col_offset": 23,
+     "end_lineno": 5,
+     "kind": "HOLE_SYNTH",
+     "lineno": 5,
+     "order": 0.5
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 59,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 4,
+    "diff": [
+     "-    for x in arr:",
+     "+    for x in arr[k:]:"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/kheapsort.py",
+      "greens": [
+       150
+      ],
+      "seconds": 2.441,
+      "stop_reason": "VERIFIED",
+      "tested": 192
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "kheapsort",
+    "seconds": 3.175,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.32
+     ],
+     [
+      "localize",
+      0.115
+     ],
+     [
+      "patch_search",
+      2.441
+     ],
+     [
+      "full_suite_gate",
+      0.293
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "UNDERSPECIFIED:0_examples",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 192,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "94999c1a5e46e04ac3de1917feaeb2e1a508415aaca9e8e99875723ac13d4538",
+     "col_offset": 13,
+     "detail": "arr[k:]",
+     "end_col_offset": 16,
+     "end_lineno": 7,
+     "kind": "SLICE_INSERT",
+     "lineno": 7
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 10,
+    "diff": [
+     "-            if weight < j:",
+     "+            if weight <= j:"
+    ],
+    "failing_on_defect": [
+     1,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/knapsack.py",
+      "greens": [
+       1332,
+       1339,
+       1342
+      ],
+      "seconds": 15.065,
+      "stop_reason": "VERIFIED",
+      "tested": 1408
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "hang_on_defect": [
+     9
+    ],
+    "heldout_cases": [
+     8
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "HANG"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [
+     9
+    ],
+    "passing_on_defect": [
+     0,
+     2,
+     8
+    ],
+    "program": "knapsack",
+    "seconds": 15.954,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.385
+     ],
+     [
+      "localize",
+      0.178
+     ],
+     [
+      "patch_search",
+      15.065
+     ],
+     [
+      "full_suite_gate",
+      0.317
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 1408,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "d57173440f38b14aa0842a59c5f06b148ee8616cd043fdef389266ccbdbab2c8",
+     "col_offset": 15,
+     "detail": "Lt->LtE",
+     "end_col_offset": 25,
+     "end_lineno": 12,
+     "kind": "COMPARE_SWAP",
+     "lineno": 12
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 60,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 7,
+    "diff": [
+     "-        return kth(above, k)",
+     "+        return kth(above, k - num_lessoreq)"
+    ],
+    "failing_on_defect": [
+     0,
+     1,
+     5,
+     6
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/kth.py",
+      "greens": [
+       149
+      ],
+      "seconds": 4.505,
+      "stop_reason": "VERIFIED",
+      "tested": 192
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     5,
+     6
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     4
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     2,
+     3,
+     4
+    ],
+    "program": "kth",
+    "seconds": 5.273,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.326
+     ],
+     [
+      "localize",
+      0.116
+     ],
+     [
+      "patch_search",
+      4.505
+     ],
+     [
+      "full_suite_gate",
+      0.319
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+    "tested_candidates": 192,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "b3304a20e649afe9bca26f420bc47dab377918598dcde79768a0a7ae786c0147",
+     "col_offset": 26,
+     "detail": "k Sub num_lessoreq",
+     "end_col_offset": 27,
+     "end_lineno": 12,
+     "kind": "EXPR_EXTEND",
+     "lineno": 12
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 9,
+    "diff": [
+     "-                dp[i, j] = dp[i - 1, j] + 1",
+     "+                dp[i, j + 1] = dp[i - 1, j] + 1"
+    ],
+    "failing_on_defect": [
+     0,
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/lcs_length.py",
+      "greens": [
+       72,
+       95
+      ],
+      "seconds": 4.965,
+      "stop_reason": "VERIFIED",
+      "tested": 256
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     2
+    ],
+    "program": "lcs_length",
+    "seconds": 5.774,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.336
+     ],
+     [
+      "localize",
+      0.113
+     ],
+     [
+      "patch_search",
+      4.965
+     ],
+     [
+      "full_suite_gate",
+      0.354
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 256,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "a76dd3ccf54d01d9e6431afdb2ff65b6e151cbef0e317bb94cfebdec894019de",
+     "col_offset": 22,
+     "detail": "j + 1",
+     "end_col_offset": 23,
+     "end_lineno": 9,
+     "kind": "NAME_OFFSET",
+     "lineno": 9
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 59,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 7,
+    "diff": [
+     "-        return 1 + levenshtein(source[1:], target[1:])",
+     "+        return levenshtein(source[1:], target[1:])"
+    ],
+    "failing_on_defect": [
+     0,
+     1,
+     2,
+     4,
+     6
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/levenshtein.py",
+      "greens": [
+       133,
+       135,
+       142,
+       171
+      ],
+      "seconds": 23.581,
+      "stop_reason": "VERIFIED",
+      "tested": 192
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     4,
+     5,
+     6
+    ],
+    "hang_on_defect": [
+     3
+    ],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "HANG",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [
+     3
+    ],
+    "passing_on_defect": [
+     5
+    ],
+    "program": "levenshtein",
+    "seconds": 31.814,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      1.469
+     ],
+     [
+      "localize",
+      5.223
+     ],
+     [
+      "patch_search",
+      23.581
+     ],
+     [
+      "full_suite_gate",
+      1.534
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 192,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "dfca7b1c843530d7895a598f197af6092645987fa330e08f8546fe5bd6bfe2b4",
+     "col_offset": 15,
+     "detail": "keep right",
+     "end_col_offset": 54,
+     "end_lineno": 6,
+     "kind": "BINOP_DROP",
+     "lineno": 6
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 59,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 12,
+    "diff": [
+     "+        ends[length + 1] = i"
+    ],
+    "failing_on_defect": [
+     8,
+     9,
+     10,
+     11
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/lis.py",
+      "greens": [
+       358
+      ],
+      "seconds": 4.991,
+      "stop_reason": "VERIFIED",
+      "tested": 384
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     8,
+     9,
+     10,
+     11
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "program": "lis",
+    "seconds": 5.759,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.328
+     ],
+     [
+      "localize",
+      0.117
+     ],
+     [
+      "patch_search",
+      4.991
+     ],
+     [
+      "full_suite_gate",
+      0.315
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 384,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "751cc2c9a45b008993beb90e87385254def7c2215011bc973bb21ce441720b9a",
+     "col_offset": 0,
+     "detail": "after: ends[length + 1] = i",
+     "end_col_offset": 0,
+     "end_lineno": 10,
+     "kind": "STMT_INSERT",
+     "lineno": 10
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 10,
+    "diff": [
+     "-        return a[0] + longest_common_subsequence(a[1:], b)",
+     "+        return a[0] + longest_common_subsequence(a[1:], b[1:])"
+    ],
+    "failing_on_defect": [
+     3,
+     5,
+     6,
+     7
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/longest_common_subsequence.py",
+      "greens": [
+       261
+      ],
+      "seconds": 6.848,
+      "stop_reason": "VERIFIED",
+      "tested": 282
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     3,
+     5,
+     6,
+     7
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     2,
+     4,
+     8,
+     9
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     1,
+     2,
+     4,
+     8,
+     9
+    ],
+    "program": "longest_common_subsequence",
+    "seconds": 12.094,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.608
+     ],
+     [
+      "localize",
+      4.198
+     ],
+     [
+      "patch_search",
+      6.848
+     ],
+     [
+      "full_suite_gate",
+      0.433
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 282,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "cd1bad7b9747d1344bef2e51bc7ae494a53e8fb2490960faf16f153bf7c43ef3",
+     "col_offset": 56,
+     "detail": "b[1:]",
+     "end_col_offset": 57,
+     "end_lineno": 6,
+     "kind": "SLICE_INSERT",
+     "lineno": 6
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 6,
+    "diff": [
+     "-        max_ending_here = max_ending_here + x",
+     "+        max_ending_here = max(0, max_ending_here + x)"
+    ],
+    "failing_on_defect": [
+     0,
+     1,
+     3,
+     5
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/max_sublist_sum.py",
+      "greens": [
+       150
+      ],
+      "seconds": 4.397,
+      "stop_reason": "VERIFIED",
+      "tested": 192
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     2,
+     4
+    ],
+    "program": "max_sublist_sum",
+    "seconds": 5.223,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.349
+     ],
+     [
+      "localize",
+      0.113
+     ],
+     [
+      "patch_search",
+      4.397
+     ],
+     [
+      "full_suite_gate",
+      0.356
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 192,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "9d399bb1c5f4fd5a2f52a0f69271bb8963c3e629a7b0aff06d6167cc8a8d5d27",
+     "col_offset": 26,
+     "detail": "max(0, _)",
+     "end_col_offset": 45,
+     "end_lineno": 7,
+     "kind": "EXPR_EXTEND",
+     "lineno": 7
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 14,
+    "diff": [
+     "-    if len(arr) == 0:",
+     "+    if len(arr) == 0 or len(arr) <= 1:"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/mergesort.py",
+      "greens": [
+       358,
+       359,
+       360,
+       371,
+       372
+      ],
+      "seconds": 8.903,
+      "stop_reason": "VERIFIED",
+      "tested": 448
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "mergesort",
+    "seconds": 10.375,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.93
+     ],
+     [
+      "localize",
+      0.194
+     ],
+     [
+      "patch_search",
+      8.903
+     ],
+     [
+      "full_suite_gate",
+      0.339
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+    "tested_candidates": 448,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "0c1101baf2b9140754f0c34bc6b6fc73af530b5aa9acaa9093056dea9992f723",
+     "col_offset": 7,
+     "detail": "condition -> len(arr) == 0 or len(arr) <= 1",
+     "end_col_offset": 20,
+     "end_lineno": 17,
+     "kind": "HOLE_SYNTH",
+     "lineno": 17,
+     "order": 0.5
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 58,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 5,
+    "diff": [
+     "-    return [1] + (len(digit_list)) * [0] + [1]",
+     "+    return [1] + (len(digit_list) - 1) * [0] + [1]"
+    ],
+    "failing_on_defect": [
+     4
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/next_palindrome.py",
+      "greens": [
+       28,
+       80,
+       81,
+       85
+      ],
+      "seconds": 4.835,
+      "stop_reason": "VERIFIED",
+      "tested": 128
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     4
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     2,
+     3
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "program": "next_palindrome",
+    "seconds": 5.603,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.31
+     ],
+     [
+      "localize",
+      0.112
+     ],
+     [
+      "patch_search",
+      4.835
+     ],
+     [
+      "full_suite_gate",
+      0.34
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 128,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "dc91fa3a2eb5752637bab6dbf98cb20e9569aef0e6f48ee901fb207410422d6d",
+     "col_offset": 18,
+     "detail": "len(digit_list) - 1",
+     "end_col_offset": 33,
+     "end_lineno": 15,
+     "kind": "NAME_OFFSET",
+     "lineno": 15
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 58,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 8,
+    "diff": [
+     "-                if perm[j] < perm[i]:",
+     "+                if perm[j] >= perm[i]:"
+    ],
+    "failing_on_defect": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/next_permutation.py",
+      "greens": [
+       206,
+       207,
+       210,
+       211
+      ],
+      "seconds": 5.329,
+      "stop_reason": "VERIFIED",
+      "tested": 256
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [],
+    "program": "next_permutation",
+    "seconds": 6.144,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.357
+     ],
+     [
+      "localize",
+      0.117
+     ],
+     [
+      "patch_search",
+      5.329
+     ],
+     [
+      "full_suite_gate",
+      0.333
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 256,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "150c04c09d7addda419ff562ebc2ecfecd8aa5f0bbe123ff27900570bfe6ef88",
+     "col_offset": 19,
+     "detail": "Lt->GtE",
+     "end_col_offset": 36,
+     "end_lineno": 6,
+     "kind": "COMPARE_SWAP",
+     "lineno": 6
+    },
+    "witness": {
+     "behaviour_classes": 2,
+     "hypothesis": "MEASURED",
+     "property_inputs": 58,
+     "status": "MEASURED",
+     "tie_at_top": true
+    }
+   },
+   {
+    "cases": 5,
+    "diff": [
+     "-        for c in range(0, r):",
+     "+        for c in range(0, r + 1):"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/pascal.py",
+      "greens": [
+       52,
+       90
+      ],
+      "seconds": 5.805,
+      "stop_reason": "VERIFIED",
+      "tested": 128
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "pascal",
+    "seconds": 6.612,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.351
+     ],
+     [
+      "localize",
+      0.131
+     ],
+     [
+      "patch_search",
+      5.805
+     ],
+     [
+      "full_suite_gate",
+      0.317
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+    "tested_candidates": 128,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "d962f4432ab55ca51bc3056149d90c5951a9db943d989a376bcb80381203709a",
+     "col_offset": 26,
+     "detail": "r + 1",
+     "end_col_offset": 27,
+     "end_lineno": 6,
+     "kind": "NAME_OFFSET",
+     "lineno": 6
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 59,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 10,
+    "diff": [
+     "+    if not coins:",
+     "+        return 0"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/possible_change.py",
+      "greens": [
+       227
+      ],
+      "seconds": 8.517,
+      "stop_reason": "VERIFIED",
+      "tested": 320
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "possible_change",
+    "seconds": 9.551,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.534
+     ],
+     [
+      "localize",
+      0.114
+     ],
+     [
+      "patch_search",
+      8.517
+     ],
+     [
+      "full_suite_gate",
+      0.38
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+    "tested_candidates": 320,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "bc1bd5a420f04b24334c63744170e98b4a83ad651ad9e3bd3086e75ae8a83cad",
+     "col_offset": 4,
+     "detail": "if not coins: return 0",
+     "end_col_offset": 16,
+     "end_lineno": 4,
+     "kind": "GUARD_INSERT",
+     "lineno": 3
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 5,
+    "diff": [
+     "-        return [[first] + subset for subset in rest_subsets]",
+     "+        return rest_subsets + [[first] + subset for subset in rest_subsets]"
+    ],
+    "failing_on_defect": [
+     0,
+     1,
+     2,
+     4
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/powerset.py",
+      "greens": [
+       30
+      ],
+      "seconds": 5.571,
+      "stop_reason": "VERIFIED",
+      "tested": 128
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     3
+    ],
+    "program": "powerset",
+    "seconds": 6.555,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.355
+     ],
+     [
+      "localize",
+      0.118
+     ],
+     [
+      "patch_search",
+      5.571
+     ],
+     [
+      "full_suite_gate",
+      0.505
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 128,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "811f4f890158aee624b797066e8448a2c8cd53771e402fef12c3c7f14fb06800",
+     "col_offset": 15,
+     "detail": "rest_subsets Add <expr>",
+     "end_col_offset": 60,
+     "end_lineno": 6,
+     "kind": "EXPR_EXTEND",
+     "lineno": 6
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 13,
+    "diff": [
+     "-    lesser = quicksort([x for x in arr[1:] if x < pivot])",
+     "+    lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+    ],
+    "failing_on_defect": [
+     1
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/quicksort.py",
+      "greens": [
+       60,
+       66,
+       69,
+       140,
+       147,
+       148
+      ],
+      "seconds": 3.939,
+      "stop_reason": "VERIFIED",
+      "tested": 192
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ],
+    "program": "quicksort",
+    "seconds": 4.765,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.368
+     ],
+     [
+      "localize",
+      0.124
+     ],
+     [
+      "patch_search",
+      3.94
+     ],
+     [
+      "full_suite_gate",
+      0.327
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 192,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "a9f329b846b92a4393e007f143f5d731c57778757b22d99b5e7d72a482712bfd",
+     "col_offset": 46,
+     "detail": "Lt->LtE",
+     "end_col_offset": 55,
+     "end_lineno": 6,
+     "kind": "COMPARE_SWAP",
+     "lineno": 6
+    },
+    "witness": {
+     "behaviour_classes": 1,
+     "hypothesis": "MEASURED",
+     "property_inputs": 58,
+     "status": "MEASURED",
+     "tie_at_top": false
+    }
+   },
+   {
+    "cases": 6,
+    "diff": [
+     "-        return {",
+     "-            '+': lambda a, b: a + b,",
+     "-            '-': lambda a, b: a - b,",
+     "-            '*': lambda a, b: a * b,",
+     "-            '/': lambda a, b: a / b",
+     "-        }[symbol](a, b)",
+     "+        return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](b, a)"
+    ],
+    "failing_on_defect": [
+     0,
+     2,
+     5
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/rpn_eval.py",
+      "greens": [
+       80
+      ],
+      "seconds": 1.431,
+      "stop_reason": "VERIFIED",
+      "tested": 256
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     5
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     4
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     1,
+     3,
+     4
+    ],
+    "program": "rpn_eval",
+    "seconds": 2.39,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.489
+     ],
+     [
+      "localize",
+      0.148
+     ],
+     [
+      "patch_search",
+      1.431
+     ],
+     [
+      "full_suite_gate",
+      0.315
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NO_FREE_FUNCTION:NESTED_FUNCTION",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 256,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "6430316fbb56b54305c189db073bfee1829da5ee598b18a036e0401215bde289",
+     "col_offset": 15,
+     "detail": "args 0<->1",
+     "end_col_offset": 23,
+     "end_lineno": 9,
+     "kind": "ARG_SWAP",
+     "lineno": 4
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 6,
+    "diff": [
+     "+            opstack.append(token)"
+    ],
+    "failing_on_defect": [
+     2,
+     3,
+     4,
+     5
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/shunting_yard.py",
+      "greens": [
+       84
+      ],
+      "seconds": 2.549,
+      "stop_reason": "VERIFIED",
+      "tested": 128
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     1
+    ],
+    "program": "shunting_yard",
+    "seconds": 3.33,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.334
+     ],
+     [
+      "localize",
+      0.124
+     ],
+     [
+      "patch_search",
+      2.549
+     ],
+     [
+      "full_suite_gate",
+      0.317
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 128,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "f4894485a9bfabd0813df7f42fef68e962d60590c919362419f9ead8b9e86093",
+     "col_offset": 0,
+     "detail": "after loop: opstack.append(token)",
+     "end_col_offset": 0,
+     "end_lineno": 17,
+     "kind": "STMT_INSERT",
+     "lineno": 16
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 6,
+    "diff": [
+     "-        if any(n % p > 0 for p in primes):",
+     "+        if all((n % p > 0 for p in primes)):"
+    ],
+    "failing_on_defect": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/sieve.py",
+      "greens": [
+       24
+      ],
+      "seconds": 2.954,
+      "stop_reason": "VERIFIED",
+      "tested": 128
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0
+    ],
+    "program": "sieve",
+    "seconds": 3.726,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.35
+     ],
+     [
+      "localize",
+      0.115
+     ],
+     [
+      "patch_search",
+      2.954
+     ],
+     [
+      "full_suite_gate",
+      0.301
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 128,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "2450f9fd505b9e6c7013d943fff3e79d0311e63d04672164b9edcf20825345a8",
+     "col_offset": 11,
+     "detail": "any->all",
+     "end_col_offset": 41,
+     "end_lineno": 4,
+     "kind": "NAME_REPLACE",
+     "lineno": 4
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 7,
+    "failing_on_defect": [],
+    "hang_on_defect": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     1
+    ],
+    "program": "sqrt",
+    "status": "NOT_APPLICABLE:ALL_FAILURES_HANG"
+   },
+   {
+    "cases": 12,
+    "diff": [
+     "-        return []",
+     "+        return [[]]"
+    ],
+    "failing_on_defect": [
+     0,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/subsequences.py",
+      "greens": [
+       35
+      ],
+      "seconds": 4.653,
+      "stop_reason": "VERIFIED",
+      "tested": 64
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     1,
+     2
+    ],
+    "program": "subsequences",
+    "seconds": 5.557,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.429
+     ],
+     [
+      "localize",
+      0.136
+     ],
+     [
+      "patch_search",
+      4.653
+     ],
+     [
+      "full_suite_gate",
+      0.329
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:BUDGET",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 64,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "edf1a567623d61fa8464bbea3a8e8bbe90440e555e594891bc6b7320d46b2b64",
+     "col_offset": 15,
+     "detail": "[] -> [[]]",
+     "end_col_offset": 17,
+     "end_lineno": 3,
+     "kind": "CONSTANT_REPLACE",
+     "lineno": 3
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 10,
+    "diff": [
+     "-        result = result + alphabet[i]",
+     "+        result = alphabet[i] + result"
+    ],
+    "failing_on_defect": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/to_base.py",
+      "greens": [
+       372
+      ],
+      "seconds": 8.869,
+      "stop_reason": "VERIFIED",
+      "tested": 512
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [
+     2
+    ],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [
+     0,
+     1,
+     2
+    ],
+    "program": "to_base",
+    "seconds": 9.653,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.334
+     ],
+     [
+      "localize",
+      0.118
+     ],
+     [
+      "patch_search",
+      8.869
+     ],
+     [
+      "full_suite_gate",
+      0.325
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:EXHAUSTED",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 512,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "357d91305ab8ac3b7c99dfb219d2a68721a6fc80882dc2c0695e745cfa1b5525",
+     "col_offset": 17,
+     "detail": "Add",
+     "end_col_offset": 37,
+     "end_lineno": 9,
+     "kind": "OPERAND_SWAP",
+     "lineno": 9
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   },
+   {
+    "cases": 5,
+    "diff": [
+     "+    lines.append(text)"
+    ],
+    "failing_on_defect": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "files_searched": [
+     {
+      "file": "pkg/wrap.py",
+      "greens": [
+       516
+      ],
+      "seconds": 10.797,
+      "stop_reason": "VERIFIED",
+      "tested": 576
+     }
+    ],
+    "given_cases": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "hang_on_defect": [],
+    "heldout_cases": [],
+    "independent": {
+     "all_usable_pass": true,
+     "given_pass": true,
+     "heldout_failures": [],
+     "heldout_pass": true,
+     "per_case": [
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS",
+      "PASS"
+     ]
+    },
+    "judge_in_process": true,
+    "oracle_inconsistent": [],
+    "passing_on_defect": [],
+    "program": "wrap",
+    "seconds": 11.629,
+    "status": "VERIFIED_PATCH",
+    "steps": [
+     [
+      "reproduce",
+      0.367
+     ],
+     [
+      "localize",
+      0.122
+     ],
+     [
+      "patch_search",
+      10.797
+     ],
+     [
+      "full_suite_gate",
+      0.334
+     ]
+    ],
+    "stop_reason": "VERIFIED",
+    "synthesis_status": "NONE:BUDGET",
+    "target_basis": "SPECTRUM_TOP",
+    "tested_candidates": 576,
+    "verdict": "CORRECT",
+    "verified": true,
+    "winning_mutation": {
+     "candidate_sha256": "5af548257c3946776a59e0a232be1310d7c15259372c0d088d321180fb55cf34",
+     "col_offset": 0,
+     "detail": "after loop: lines.append(text)",
+     "end_col_offset": 0,
+     "end_lineno": 8,
+     "kind": "STMT_INSERT",
+     "lineno": 3
+    },
+    "witness": {
+     "behaviour_classes": null,
+     "hypothesis": null,
+     "property_inputs": null,
+     "status": "SINGLE_GREEN",
+     "tie_at_top": null
+    }
+   }
+  ]
+ },
+ "run_1_before_this_pass": {
+  "applicable": 28,
+  "plausible": 10,
+  "correct_on_heldout": 9,
+  "plausible_only": 1,
+  "seconds_total": 822,
+  "seconds_median": 5.8,
+  "open": 14,
+  "only_overfit": 1,
+  "deadline_exceeded": 3
+ },
+ "programs": [
+  {
+   "cases": 9,
+   "failing_on_defect": [],
+   "hang_on_defect": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "oracle_inconsistent": [],
+   "passing_on_defect": [],
+   "program": "bitcount",
+   "status": "NOT_APPLICABLE:ALL_FAILURES_HANG"
+  },
+  {
+   "cases": 7,
+   "diff": [
+    "-    for i, count in enumerate(arr):",
+    "+    for i, count in enumerate(counts):"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/bucketsort.py",
+     "greens": [
+      408
+     ],
+     "seconds": 5.226,
+     "stop_reason": "VERIFIED",
+     "tested": 448
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "bucketsort",
+   "seconds": 6.06,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.36
+    ],
+    [
+     "localize",
+     0.126
+    ],
+    [
+     "patch_search",
+     5.226
+    ],
+    [
+     "full_suite_gate",
+     0.34
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 448,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "5b072ff85c439769e2c957c8152cd224a713791902d7c59cabd8c6dd1e60ac04",
+    "col_offset": 30,
+    "detail": "arr->counts",
+    "end_col_offset": 33,
+    "end_lineno": 7,
+    "kind": "NAME_REPLACE",
+    "lineno": 7
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 7,
+   "diff": [
+    "-    hi = len(arr)",
+    "+    hi = len(arr[1:])"
+   ],
+   "failing_on_defect": [
+    1
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/find_first_in_sorted.py",
+     "greens": [
+      100,
+      101,
+      102,
+      103,
+      124,
+      145,
+      146,
+      157,
+      161,
+      165,
+      166
+     ],
+     "seconds": 16.523,
+     "stop_reason": "VERIFIED",
+     "tested": 192
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    3
+   ],
+   "hang_on_defect": [
+    2,
+    4
+   ],
+   "heldout_cases": [
+    5,
+    6
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "HANG",
+     "PASS",
+     "HANG",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    3,
+    5,
+    6
+   ],
+   "program": "find_first_in_sorted",
+   "seconds": 17.289,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.333
+    ],
+    [
+     "localize",
+     0.115
+    ],
+    [
+     "patch_search",
+     16.523
+    ],
+    [
+     "full_suite_gate",
+     0.312
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+   "tested_candidates": 192,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "fb9eed4ffe8f4ae9bf92052d1f198c93ba62788beed6ac151e9742ebadd6a9e4",
+    "col_offset": 13,
+    "detail": "arr[1:]",
+    "end_col_offset": 16,
+    "end_lineno": 3,
+    "kind": "SLICE_INSERT",
+    "lineno": 3
+   },
+   "witness": {
+    "behaviour_classes": 7,
+    "hypothesis": "MEASURED",
+    "property_inputs": 60,
+    "status": "MEASURED",
+    "tie_at_top": true
+   }
+  },
+  {
+   "cases": 7,
+   "diff": [
+    "-            return binsearch(mid, end)",
+    "+            return binsearch(mid + 1, end)"
+   ],
+   "failing_on_defect": [
+    1,
+    6
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/find_in_sorted.py",
+     "greens": [
+      4,
+      5,
+      41,
+      52
+     ],
+     "seconds": 0.892,
+     "stop_reason": "VERIFIED",
+     "tested": 64
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    6
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    3,
+    4,
+    5
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    2,
+    3,
+    4,
+    5
+   ],
+   "program": "find_in_sorted",
+   "seconds": 1.658,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.322
+    ],
+    [
+     "localize",
+     0.121
+    ],
+    [
+     "patch_search",
+     0.892
+    ],
+    [
+     "full_suite_gate",
+     0.318
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NO_FREE_FUNCTION:NESTED_FUNCTION",
+   "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+   "tested_candidates": 64,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "36b584bf56ae774a500fbfe51e7a473b7819f00723feb4b9c4651aa496f8246e",
+    "col_offset": 29,
+    "detail": "mid + 1",
+    "end_col_offset": 32,
+    "end_lineno": 9,
+    "kind": "NAME_OFFSET",
+    "lineno": 9
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "WITNESS_UNAVAILABLE:NESTED_FUNCTION",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 7,
+   "diff": [
+    "-            yield flatten(x)",
+    "+            yield x"
+   ],
+   "failing_on_defect": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/flatten.py",
+     "greens": [
+      1
+     ],
+     "seconds": 0.87,
+     "stop_reason": "VERIFIED",
+     "tested": 64
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    1
+   ],
+   "program": "flatten",
+   "seconds": 1.657,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.353
+    ],
+    [
+     "localize",
+     0.116
+    ],
+    [
+     "patch_search",
+     0.87
+    ],
+    [
+     "full_suite_gate",
+     0.313
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "UNDERSPECIFIED:0_examples",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 64,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "d4933e1703965abc2ff647a553e61c7b630641d6497a3a02910fd7ef176e489a",
+    "col_offset": 18,
+    "detail": "flatten(x) -> x",
+    "end_col_offset": 28,
+    "end_lineno": 7,
+    "kind": "CALL_UNWRAP",
+    "lineno": 7
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 6,
+   "diff": [
+    "-        return gcd(a % b, b)",
+    "+        return gcd(b, a % b)"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/gcd.py",
+     "greens": [
+      1
+     ],
+     "seconds": 2.994,
+     "stop_reason": "VERIFIED",
+     "tested": 64
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "gcd",
+   "seconds": 3.854,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.391
+    ],
+    [
+     "localize",
+     0.123
+    ],
+    [
+     "patch_search",
+     2.994
+    ],
+    [
+     "full_suite_gate",
+     0.342
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+   "tested_candidates": 64,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "a0ec600c411a124edcda62d627b22aa8ce29c4eda65dbf5927e12e4f3c344213",
+    "col_offset": 15,
+    "detail": "args 0<->1",
+    "end_col_offset": 28,
+    "end_lineno": 5,
+    "kind": "ARG_SWAP",
+    "lineno": 5
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 11,
+   "diff": [
+    "-    for i in range(2, int(n ** 0.5) + 1):",
+    "+    for i in range(2, int(n) + 1):"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/get_factors.py",
+     "greens": [
+      16,
+      18,
+      21,
+      22
+     ],
+     "seconds": 4.804,
+     "stop_reason": "VERIFIED",
+     "tested": 64
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "get_factors",
+   "seconds": 5.583,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.346
+    ],
+    [
+     "localize",
+     0.112
+    ],
+    [
+     "patch_search",
+     4.804
+    ],
+    [
+     "full_suite_gate",
+     0.317
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 64,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "c9c24f48148bd06192fe8cb69c055f9485515ff07729137102e40ef9b90a68e4",
+    "col_offset": 26,
+    "detail": "keep left",
+    "end_col_offset": 34,
+    "end_lineno": 6,
+    "kind": "BINOP_DROP",
+    "lineno": 6
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 59,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 8,
+   "failing_on_defect": [],
+   "hang_on_defect": [],
+   "oracle_inconsistent": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "hanoi",
+   "status": "NOT_APPLICABLE:NO_FAILING_CASE"
+  },
+  {
+   "cases": 3,
+   "diff": [
+    "-        if paren == '(':",
+    "+        if paren == '(' and paren + paren < parens:"
+   ],
+   "failing_on_defect": [
+    2
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/is_valid_parenthesization.py",
+     "greens": [
+      131,
+      132,
+      133
+     ],
+     "seconds": 2.748,
+     "stop_reason": "VERIFIED",
+     "tested": 244
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    1
+   ],
+   "program": "is_valid_parenthesization",
+   "seconds": 3.479,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.307
+    ],
+    [
+     "localize",
+     0.115
+    ],
+    [
+     "patch_search",
+     2.748
+    ],
+    [
+     "full_suite_gate",
+     0.304
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 244,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "0f21c76fa63431778590f42eb623e49bca61ed1295b013f886aeb566a454fc4c",
+    "col_offset": 11,
+    "detail": "condition -> paren == '(' and paren + paren < parens",
+    "end_col_offset": 23,
+    "end_lineno": 5,
+    "kind": "HOLE_SYNTH",
+    "lineno": 5,
+    "order": 0.5
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 59,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 4,
+   "diff": [
+    "-    for x in arr:",
+    "+    for x in arr[k:]:"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/kheapsort.py",
+     "greens": [
+      150
+     ],
+     "seconds": 2.441,
+     "stop_reason": "VERIFIED",
+     "tested": 192
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "kheapsort",
+   "seconds": 3.175,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.32
+    ],
+    [
+     "localize",
+     0.115
+    ],
+    [
+     "patch_search",
+     2.441
+    ],
+    [
+     "full_suite_gate",
+     0.293
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "UNDERSPECIFIED:0_examples",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 192,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "94999c1a5e46e04ac3de1917feaeb2e1a508415aaca9e8e99875723ac13d4538",
+    "col_offset": 13,
+    "detail": "arr[k:]",
+    "end_col_offset": 16,
+    "end_lineno": 7,
+    "kind": "SLICE_INSERT",
+    "lineno": 7
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 10,
+   "diff": [
+    "-            if weight < j:",
+    "+            if weight <= j:"
+   ],
+   "failing_on_defect": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/knapsack.py",
+     "greens": [
+      1332,
+      1339,
+      1342
+     ],
+     "seconds": 15.065,
+     "stop_reason": "VERIFIED",
+     "tested": 1408
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "hang_on_defect": [
+    9
+   ],
+   "heldout_cases": [
+    8
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "HANG"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [
+    9
+   ],
+   "passing_on_defect": [
+    0,
+    2,
+    8
+   ],
+   "program": "knapsack",
+   "seconds": 15.954,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.385
+    ],
+    [
+     "localize",
+     0.178
+    ],
+    [
+     "patch_search",
+     15.065
+    ],
+    [
+     "full_suite_gate",
+     0.317
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 1408,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "d57173440f38b14aa0842a59c5f06b148ee8616cd043fdef389266ccbdbab2c8",
+    "col_offset": 15,
+    "detail": "Lt->LtE",
+    "end_col_offset": 25,
+    "end_lineno": 12,
+    "kind": "COMPARE_SWAP",
+    "lineno": 12
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 60,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 7,
+   "diff": [
+    "-        return kth(above, k)",
+    "+        return kth(above, k - num_lessoreq)"
+   ],
+   "failing_on_defect": [
+    0,
+    1,
+    5,
+    6
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/kth.py",
+     "greens": [
+      149
+     ],
+     "seconds": 4.505,
+     "stop_reason": "VERIFIED",
+     "tested": 192
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    4
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    2,
+    3,
+    4
+   ],
+   "program": "kth",
+   "seconds": 5.273,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.326
+    ],
+    [
+     "localize",
+     0.116
+    ],
+    [
+     "patch_search",
+     4.505
+    ],
+    [
+     "full_suite_gate",
+     0.319
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+   "tested_candidates": 192,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "b3304a20e649afe9bca26f420bc47dab377918598dcde79768a0a7ae786c0147",
+    "col_offset": 26,
+    "detail": "k Sub num_lessoreq",
+    "end_col_offset": 27,
+    "end_lineno": 12,
+    "kind": "EXPR_EXTEND",
+    "lineno": 12
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 9,
+   "diff": [
+    "-                dp[i, j] = dp[i - 1, j] + 1",
+    "+                dp[i, j + 1] = dp[i - 1, j] + 1"
+   ],
+   "failing_on_defect": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/lcs_length.py",
+     "greens": [
+      72,
+      95
+     ],
+     "seconds": 4.965,
+     "stop_reason": "VERIFIED",
+     "tested": 256
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    2
+   ],
+   "program": "lcs_length",
+   "seconds": 5.774,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.336
+    ],
+    [
+     "localize",
+     0.113
+    ],
+    [
+     "patch_search",
+     4.965
+    ],
+    [
+     "full_suite_gate",
+     0.354
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 256,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "a76dd3ccf54d01d9e6431afdb2ff65b6e151cbef0e317bb94cfebdec894019de",
+    "col_offset": 22,
+    "detail": "j + 1",
+    "end_col_offset": 23,
+    "end_lineno": 9,
+    "kind": "NAME_OFFSET",
+    "lineno": 9
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 59,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 7,
+   "diff": [
+    "-        return 1 + levenshtein(source[1:], target[1:])",
+    "+        return levenshtein(source[1:], target[1:])"
+   ],
+   "failing_on_defect": [
+    0,
+    1,
+    2,
+    4,
+    6
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/levenshtein.py",
+     "greens": [
+      133,
+      135,
+      142,
+      171
+     ],
+     "seconds": 23.581,
+     "stop_reason": "VERIFIED",
+     "tested": 192
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    6
+   ],
+   "hang_on_defect": [
+    3
+   ],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "HANG",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [
+    3
+   ],
+   "passing_on_defect": [
+    5
+   ],
+   "program": "levenshtein",
+   "seconds": 31.814,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     1.469
+    ],
+    [
+     "localize",
+     5.223
+    ],
+    [
+     "patch_search",
+     23.581
+    ],
+    [
+     "full_suite_gate",
+     1.534
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 192,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "dfca7b1c843530d7895a598f197af6092645987fa330e08f8546fe5bd6bfe2b4",
+    "col_offset": 15,
+    "detail": "keep right",
+    "end_col_offset": 54,
+    "end_lineno": 6,
+    "kind": "BINOP_DROP",
+    "lineno": 6
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 59,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 12,
+   "diff": [
+    "+        ends[length + 1] = i"
+   ],
+   "failing_on_defect": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/lis.py",
+     "greens": [
+      358
+     ],
+     "seconds": 4.991,
+     "stop_reason": "VERIFIED",
+     "tested": 384
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    8,
+    9,
+    10,
+    11
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "program": "lis",
+   "seconds": 5.759,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.328
+    ],
+    [
+     "localize",
+     0.117
+    ],
+    [
+     "patch_search",
+     4.991
+    ],
+    [
+     "full_suite_gate",
+     0.315
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 384,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "751cc2c9a45b008993beb90e87385254def7c2215011bc973bb21ce441720b9a",
+    "col_offset": 0,
+    "detail": "after: ends[length + 1] = i",
+    "end_col_offset": 0,
+    "end_lineno": 10,
+    "kind": "STMT_INSERT",
+    "lineno": 10
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 10,
+   "diff": [
+    "-        return a[0] + longest_common_subsequence(a[1:], b)",
+    "+        return a[0] + longest_common_subsequence(a[1:], b[1:])"
+   ],
+   "failing_on_defect": [
+    3,
+    5,
+    6,
+    7
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/longest_common_subsequence.py",
+     "greens": [
+      261
+     ],
+     "seconds": 6.848,
+     "stop_reason": "VERIFIED",
+     "tested": 282
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    3,
+    5,
+    6,
+    7
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    2,
+    4,
+    8,
+    9
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    9
+   ],
+   "program": "longest_common_subsequence",
+   "seconds": 12.094,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.608
+    ],
+    [
+     "localize",
+     4.198
+    ],
+    [
+     "patch_search",
+     6.848
+    ],
+    [
+     "full_suite_gate",
+     0.433
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 282,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "cd1bad7b9747d1344bef2e51bc7ae494a53e8fb2490960faf16f153bf7c43ef3",
+    "col_offset": 56,
+    "detail": "b[1:]",
+    "end_col_offset": 57,
+    "end_lineno": 6,
+    "kind": "SLICE_INSERT",
+    "lineno": 6
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 6,
+   "diff": [
+    "-        max_ending_here = max_ending_here + x",
+    "+        max_ending_here = max(0, max_ending_here + x)"
+   ],
+   "failing_on_defect": [
+    0,
+    1,
+    3,
+    5
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/max_sublist_sum.py",
+     "greens": [
+      150
+     ],
+     "seconds": 4.397,
+     "stop_reason": "VERIFIED",
+     "tested": 192
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    2,
+    4
+   ],
+   "program": "max_sublist_sum",
+   "seconds": 5.223,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.349
+    ],
+    [
+     "localize",
+     0.113
+    ],
+    [
+     "patch_search",
+     4.397
+    ],
+    [
+     "full_suite_gate",
+     0.356
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 192,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "9d399bb1c5f4fd5a2f52a0f69271bb8963c3e629a7b0aff06d6167cc8a8d5d27",
+    "col_offset": 26,
+    "detail": "max(0, _)",
+    "end_col_offset": 45,
+    "end_lineno": 7,
+    "kind": "EXPR_EXTEND",
+    "lineno": 7
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 14,
+   "diff": [
+    "-    if len(arr) == 0:",
+    "+    if len(arr) == 0 or len(arr) <= 1:"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/mergesort.py",
+     "greens": [
+      358,
+      359,
+      360,
+      371,
+      372
+     ],
+     "seconds": 8.903,
+     "stop_reason": "VERIFIED",
+     "tested": 448
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "mergesort",
+   "seconds": 10.375,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.93
+    ],
+    [
+     "localize",
+     0.194
+    ],
+    [
+     "patch_search",
+     8.903
+    ],
+    [
+     "full_suite_gate",
+     0.339
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+   "tested_candidates": 448,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "0c1101baf2b9140754f0c34bc6b6fc73af530b5aa9acaa9093056dea9992f723",
+    "col_offset": 7,
+    "detail": "condition -> len(arr) == 0 or len(arr) <= 1",
+    "end_col_offset": 20,
+    "end_lineno": 17,
+    "kind": "HOLE_SYNTH",
+    "lineno": 17,
+    "order": 0.5
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 58,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 5,
+   "diff": [
+    "-    return [1] + (len(digit_list)) * [0] + [1]",
+    "+    return [1] + (len(digit_list) - 1) * [0] + [1]"
+   ],
+   "failing_on_defect": [
+    4
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/next_palindrome.py",
+     "greens": [
+      28,
+      80,
+      81,
+      85
+     ],
+     "seconds": 4.835,
+     "stop_reason": "VERIFIED",
+     "tested": 128
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    4
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    2,
+    3
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "program": "next_palindrome",
+   "seconds": 5.603,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.31
+    ],
+    [
+     "localize",
+     0.112
+    ],
+    [
+     "patch_search",
+     4.835
+    ],
+    [
+     "full_suite_gate",
+     0.34
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 128,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "dc91fa3a2eb5752637bab6dbf98cb20e9569aef0e6f48ee901fb207410422d6d",
+    "col_offset": 18,
+    "detail": "len(digit_list) - 1",
+    "end_col_offset": 33,
+    "end_lineno": 15,
+    "kind": "NAME_OFFSET",
+    "lineno": 15
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 58,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 8,
+   "diff": [
+    "-                if perm[j] < perm[i]:",
+    "+                if perm[j] >= perm[i]:"
+   ],
+   "failing_on_defect": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/next_permutation.py",
+     "greens": [
+      206,
+      207,
+      210,
+      211
+     ],
+     "seconds": 5.329,
+     "stop_reason": "VERIFIED",
+     "tested": 256
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [],
+   "program": "next_permutation",
+   "seconds": 6.144,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.357
+    ],
+    [
+     "localize",
+     0.117
+    ],
+    [
+     "patch_search",
+     5.329
+    ],
+    [
+     "full_suite_gate",
+     0.333
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 256,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "150c04c09d7addda419ff562ebc2ecfecd8aa5f0bbe123ff27900570bfe6ef88",
+    "col_offset": 19,
+    "detail": "Lt->GtE",
+    "end_col_offset": 36,
+    "end_lineno": 6,
+    "kind": "COMPARE_SWAP",
+    "lineno": 6
+   },
+   "witness": {
+    "behaviour_classes": 2,
+    "hypothesis": "MEASURED",
+    "property_inputs": 58,
+    "status": "MEASURED",
+    "tie_at_top": true
+   }
+  },
+  {
+   "cases": 5,
+   "diff": [
+    "-        for c in range(0, r):",
+    "+        for c in range(0, r + 1):"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/pascal.py",
+     "greens": [
+      52,
+      90
+     ],
+     "seconds": 5.805,
+     "stop_reason": "VERIFIED",
+     "tested": 128
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "pascal",
+   "seconds": 6.612,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.351
+    ],
+    [
+     "localize",
+     0.131
+    ],
+    [
+     "patch_search",
+     5.805
+    ],
+    [
+     "full_suite_gate",
+     0.317
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+   "tested_candidates": 128,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "d962f4432ab55ca51bc3056149d90c5951a9db943d989a376bcb80381203709a",
+    "col_offset": 26,
+    "detail": "r + 1",
+    "end_col_offset": 27,
+    "end_lineno": 6,
+    "kind": "NAME_OFFSET",
+    "lineno": 6
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 59,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 10,
+   "diff": [
+    "+    if not coins:",
+    "+        return 0"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/possible_change.py",
+     "greens": [
+      227
+     ],
+     "seconds": 8.517,
+     "stop_reason": "VERIFIED",
+     "tested": 320
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "possible_change",
+   "seconds": 9.551,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.534
+    ],
+    [
+     "localize",
+     0.114
+    ],
+    [
+     "patch_search",
+     8.517
+    ],
+    [
+     "full_suite_gate",
+     0.38
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_AND_TRACEBACK_AGREE",
+   "tested_candidates": 320,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "bc1bd5a420f04b24334c63744170e98b4a83ad651ad9e3bd3086e75ae8a83cad",
+    "col_offset": 4,
+    "detail": "if not coins: return 0",
+    "end_col_offset": 16,
+    "end_lineno": 4,
+    "kind": "GUARD_INSERT",
+    "lineno": 3
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 5,
+   "diff": [
+    "-        return [[first] + subset for subset in rest_subsets]",
+    "+        return rest_subsets + [[first] + subset for subset in rest_subsets]"
+   ],
+   "failing_on_defect": [
+    0,
+    1,
+    2,
+    4
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/powerset.py",
+     "greens": [
+      30
+     ],
+     "seconds": 5.571,
+     "stop_reason": "VERIFIED",
+     "tested": 128
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    3
+   ],
+   "program": "powerset",
+   "seconds": 6.555,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.355
+    ],
+    [
+     "localize",
+     0.118
+    ],
+    [
+     "patch_search",
+     5.571
+    ],
+    [
+     "full_suite_gate",
+     0.505
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 128,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "811f4f890158aee624b797066e8448a2c8cd53771e402fef12c3c7f14fb06800",
+    "col_offset": 15,
+    "detail": "rest_subsets Add <expr>",
+    "end_col_offset": 60,
+    "end_lineno": 6,
+    "kind": "EXPR_EXTEND",
+    "lineno": 6
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 13,
+   "diff": [
+    "-    lesser = quicksort([x for x in arr[1:] if x < pivot])",
+    "+    lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+   ],
+   "failing_on_defect": [
+    1
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/quicksort.py",
+     "greens": [
+      60,
+      66,
+      69,
+      140,
+      147,
+      148
+     ],
+     "seconds": 3.939,
+     "stop_reason": "VERIFIED",
+     "tested": 192
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "program": "quicksort",
+   "seconds": 4.765,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.368
+    ],
+    [
+     "localize",
+     0.124
+    ],
+    [
+     "patch_search",
+     3.94
+    ],
+    [
+     "full_suite_gate",
+     0.327
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 192,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "a9f329b846b92a4393e007f143f5d731c57778757b22d99b5e7d72a482712bfd",
+    "col_offset": 46,
+    "detail": "Lt->LtE",
+    "end_col_offset": 55,
+    "end_lineno": 6,
+    "kind": "COMPARE_SWAP",
+    "lineno": 6
+   },
+   "witness": {
+    "behaviour_classes": 1,
+    "hypothesis": "MEASURED",
+    "property_inputs": 58,
+    "status": "MEASURED",
+    "tie_at_top": false
+   }
+  },
+  {
+   "cases": 6,
+   "diff": [
+    "-        return {",
+    "-            '+': lambda a, b: a + b,",
+    "-            '-': lambda a, b: a - b,",
+    "-            '*': lambda a, b: a * b,",
+    "-            '/': lambda a, b: a / b",
+    "-        }[symbol](a, b)",
+    "+        return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](b, a)"
+   ],
+   "failing_on_defect": [
+    0,
+    2,
+    5
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/rpn_eval.py",
+     "greens": [
+      80
+     ],
+     "seconds": 1.431,
+     "stop_reason": "VERIFIED",
+     "tested": 256
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    5
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    4
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    1,
+    3,
+    4
+   ],
+   "program": "rpn_eval",
+   "seconds": 2.39,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.489
+    ],
+    [
+     "localize",
+     0.148
+    ],
+    [
+     "patch_search",
+     1.431
+    ],
+    [
+     "full_suite_gate",
+     0.315
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NO_FREE_FUNCTION:NESTED_FUNCTION",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 256,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "6430316fbb56b54305c189db073bfee1829da5ee598b18a036e0401215bde289",
+    "col_offset": 15,
+    "detail": "args 0<->1",
+    "end_col_offset": 23,
+    "end_lineno": 9,
+    "kind": "ARG_SWAP",
+    "lineno": 4
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 6,
+   "diff": [
+    "+            opstack.append(token)"
+   ],
+   "failing_on_defect": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/shunting_yard.py",
+     "greens": [
+      84
+     ],
+     "seconds": 2.549,
+     "stop_reason": "VERIFIED",
+     "tested": 128
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    1
+   ],
+   "program": "shunting_yard",
+   "seconds": 3.33,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.334
+    ],
+    [
+     "localize",
+     0.124
+    ],
+    [
+     "patch_search",
+     2.549
+    ],
+    [
+     "full_suite_gate",
+     0.317
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 128,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "f4894485a9bfabd0813df7f42fef68e962d60590c919362419f9ead8b9e86093",
+    "col_offset": 0,
+    "detail": "after loop: opstack.append(token)",
+    "end_col_offset": 0,
+    "end_lineno": 17,
+    "kind": "STMT_INSERT",
+    "lineno": 16
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 6,
+   "diff": [
+    "-        if any(n % p > 0 for p in primes):",
+    "+        if all((n % p > 0 for p in primes)):"
+   ],
+   "failing_on_defect": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/sieve.py",
+     "greens": [
+      24
+     ],
+     "seconds": 2.954,
+     "stop_reason": "VERIFIED",
+     "tested": 128
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0
+   ],
+   "program": "sieve",
+   "seconds": 3.726,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.35
+    ],
+    [
+     "localize",
+     0.115
+    ],
+    [
+     "patch_search",
+     2.954
+    ],
+    [
+     "full_suite_gate",
+     0.301
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 128,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "2450f9fd505b9e6c7013d943fff3e79d0311e63d04672164b9edcf20825345a8",
+    "col_offset": 11,
+    "detail": "any->all",
+    "end_col_offset": 41,
+    "end_lineno": 4,
+    "kind": "NAME_REPLACE",
+    "lineno": 4
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 7,
+   "failing_on_defect": [],
+   "hang_on_defect": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    1
+   ],
+   "program": "sqrt",
+   "status": "NOT_APPLICABLE:ALL_FAILURES_HANG"
+  },
+  {
+   "cases": 12,
+   "diff": [
+    "-        return []",
+    "+        return [[]]"
+   ],
+   "failing_on_defect": [
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/subsequences.py",
+     "greens": [
+      35
+     ],
+     "seconds": 4.653,
+     "stop_reason": "VERIFIED",
+     "tested": 64
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    1,
+    2
+   ],
+   "program": "subsequences",
+   "seconds": 5.557,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.429
+    ],
+    [
+     "localize",
+     0.136
+    ],
+    [
+     "patch_search",
+     4.653
+    ],
+    [
+     "full_suite_gate",
+     0.329
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:BUDGET",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 64,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "edf1a567623d61fa8464bbea3a8e8bbe90440e555e594891bc6b7320d46b2b64",
+    "col_offset": 15,
+    "detail": "[] -> [[]]",
+    "end_col_offset": 17,
+    "end_lineno": 3,
+    "kind": "CONSTANT_REPLACE",
+    "lineno": 3
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 10,
+   "diff": [
+    "-        result = result + alphabet[i]",
+    "+        result = alphabet[i] + result"
+   ],
+   "failing_on_defect": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/to_base.py",
+     "greens": [
+      372
+     ],
+     "seconds": 8.869,
+     "stop_reason": "VERIFIED",
+     "tested": 512
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [
+    2
+   ],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [
+    0,
+    1,
+    2
+   ],
+   "program": "to_base",
+   "seconds": 9.653,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.334
+    ],
+    [
+     "localize",
+     0.118
+    ],
+    [
+     "patch_search",
+     8.869
+    ],
+    [
+     "full_suite_gate",
+     0.325
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:EXHAUSTED",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 512,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "357d91305ab8ac3b7c99dfb219d2a68721a6fc80882dc2c0695e745cfa1b5525",
+    "col_offset": 17,
+    "detail": "Add",
+    "end_col_offset": 37,
+    "end_lineno": 9,
+    "kind": "OPERAND_SWAP",
+    "lineno": 9
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  },
+  {
+   "cases": 5,
+   "diff": [
+    "+    lines.append(text)"
+   ],
+   "failing_on_defect": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "files_searched": [
+    {
+     "file": "pkg/wrap.py",
+     "greens": [
+      516
+     ],
+     "seconds": 10.797,
+     "stop_reason": "VERIFIED",
+     "tested": 576
+    }
+   ],
+   "given_cases": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "hang_on_defect": [],
+   "heldout_cases": [],
+   "independent": {
+    "all_usable_pass": true,
+    "given_pass": true,
+    "heldout_failures": [],
+    "heldout_pass": true,
+    "per_case": [
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS",
+     "PASS"
+    ]
+   },
+   "judge_in_process": true,
+   "oracle_inconsistent": [],
+   "passing_on_defect": [],
+   "program": "wrap",
+   "seconds": 11.629,
+   "status": "VERIFIED_PATCH",
+   "steps": [
+    [
+     "reproduce",
+     0.367
+    ],
+    [
+     "localize",
+     0.122
+    ],
+    [
+     "patch_search",
+     10.797
+    ],
+    [
+     "full_suite_gate",
+     0.334
+    ]
+   ],
+   "stop_reason": "VERIFIED",
+   "synthesis_status": "NONE:BUDGET",
+   "target_basis": "SPECTRUM_TOP",
+   "tested_candidates": 576,
+   "verdict": "CORRECT",
+   "verified": true,
+   "winning_mutation": {
+    "candidate_sha256": "5af548257c3946776a59e0a232be1310d7c15259372c0d088d321180fb55cf34",
+    "col_offset": 0,
+    "detail": "after loop: lines.append(text)",
+    "end_col_offset": 0,
+    "end_lineno": 8,
+    "kind": "STMT_INSERT",
+    "lineno": 3
+   },
+   "witness": {
+    "behaviour_classes": null,
+    "hypothesis": null,
+    "property_inputs": null,
+    "status": "SINGLE_GREEN",
+    "tie_at_top": null
+   }
+  }
+ ]
+}

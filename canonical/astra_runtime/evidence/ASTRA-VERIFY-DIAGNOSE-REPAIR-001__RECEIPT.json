@@ -4,20 +4,20 @@
  "adapter_module": "software_diagnose_then_repair_v1",
  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12; two-example cases add area(2, 5) == 10), proj/tests/test_other.py is the rest of the suite; 2-cpu host, confinement on",
  "e2e_ms_golden": [
-  2250.0,
-  2139.5
+  2497.6,
+  2238.0
  ],
  "observed": {
   "golden": {
    "bug": "return w * h - 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2250.0,
-   "search_s": 1.517,
+   "e2e_ms": 2497.6,
+   "search_s": 1.664,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 85,
+   "candidates": 93,
    "tested": 64,
    "greens": [
     1,
@@ -52,6 +52,7 @@
       "delta_outside_tests": 168,
       "edit_size": 28,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 1,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
@@ -66,6 +67,7 @@
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 4,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
@@ -80,6 +82,7 @@
       "delta_outside_tests": 168,
       "edit_size": 33,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 6,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
@@ -94,6 +97,7 @@
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 5,
       "inexact_on_tests": 1,
       "new_exceptions": 0,
@@ -103,7 +107,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.73,
+    "seconds": 0.848,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -114,19 +118,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.319
+     "seconds": 0.347
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 1.517
+     "seconds": 1.664
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.294
+     "seconds": 0.363
     }
    ],
    "gate": "PASS",
@@ -139,13 +143,13 @@
   "wrong_operator": {
    "bug": "return w + h",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1567.8,
-   "search_s": 0.805,
+   "e2e_ms": 1569.4,
+   "search_s": 0.809,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 68,
+   "candidates": 77,
    "tested": 64,
    "greens": [
     4
@@ -174,19 +178,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.317
+     "seconds": 0.328
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 0.805
+     "seconds": 0.809
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.327
+     "seconds": 0.311
     }
    ],
    "gate": "PASS",
@@ -198,16 +202,16 @@
   "missing_term": {
    "bug": "return w",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1547.4,
+   "e2e_ms": 1548.9,
    "search_s": 0.795,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 70,
+   "candidates": 76,
    "tested": 64,
    "greens": [
-    2
+    4
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -222,7 +226,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 2
+      "index": 4
      }
     ],
     "status": "SINGLE_GREEN"
@@ -233,11 +237,11 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.321
+     "seconds": 0.323
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
@@ -245,7 +249,7 @@
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.312
+     "seconds": 0.308
     }
    ],
    "gate": "PASS",
@@ -257,17 +261,17 @@
   "missing_guard": {
    "bug": "return w * h  (+ area(None, 4) == 0)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2101.0,
-   "search_s": 1.341,
+   "e2e_ms": 2163.3,
+   "search_s": 1.409,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 68,
+   "candidates": 76,
    "tested": 64,
    "greens": [
-    11,
-    18
+    17,
+    24
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -300,7 +304,7 @@
        "status": "NONE"
       }
      ],
-     "seconds": 0.174
+     "seconds": 0.183
     },
     "seconds": 0.016,
     "status": "NONE:EXHAUSTED",
@@ -324,7 +328,8 @@
       "delta_outside_tests": 26,
       "edit_size": 21,
       "grid_inputs": 176,
-      "index": 11,
+      "hangs_kept": 0,
+      "index": 17,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -338,7 +343,8 @@
       "delta_outside_tests": 26,
       "edit_size": 17,
       "grid_inputs": 176,
-      "index": 18,
+      "hangs_kept": 0,
+      "index": 24,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -347,7 +353,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.37,
+    "seconds": 0.388,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -359,19 +365,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.323
+     "seconds": 0.321
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 1.341
+     "seconds": 1.409
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.319
+     "seconds": 0.31
     }
    ],
    "gate": "PASS",
@@ -383,54 +389,54 @@
   "two_edits_and_overfit": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3628.7,
-   "search_s": 2.874,
+   "e2e_ms": 3749.4,
+   "search_s": 2.994,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 260,
+   "candidates": 294,
    "tested": 128,
    "greens": [
-    25,
-    103,
-    104,
-    105,
-    106
+    33,
+    99,
+    100,
+    117,
+    118
    ],
    "overfit_signature_indices": [
-    25
+    33
    ],
    "compose": {
     "composed_from": [
-     25,
-     13,
-     24,
+     33,
+     14,
+     32,
+     31,
+     21,
      23,
-     20,
+     24,
+     28,
+     9,
+     19,
      1,
      4,
      5,
      6,
      8,
-     18,
+     20,
      22,
+     25,
+     26,
+     30,
      3,
-     19,
-     11,
-     21,
-     10,
-     16,
-     14,
-     2,
-     15,
-     7,
+     27,
      12,
-     17
+     29
     ],
-    "pair_count": 176,
-    "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 2.104
+    "pair_count": 200,
+    "reason": "ONLY_SUSPICIOUS_GREENS:[33]",
+    "seconds": 2.181
    },
    "synthesis": {
     "class": null,
@@ -441,7 +447,7 @@
    },
    "winning_mutation": "COMPOSE BINOP_SWAP Add->Mult + BINOP_DROP keep left",
    "witness": {
-    "behaviour_classes": 3,
+    "behaviour_classes": 2,
     "class": null,
     "function": "area",
     "grid_inputs": 109,
@@ -457,7 +463,8 @@
       "delta_outside_tests": 164,
       "edit_size": 28,
       "grid_inputs": 168,
-      "index": 103,
+      "hangs_kept": 0,
+      "index": 117,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -471,21 +478,8 @@
       "delta_outside_tests": 164,
       "edit_size": 32,
       "grid_inputs": 168,
-      "index": 104,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": true,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 1,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 164,
-      "edit_size": 33,
-      "grid_inputs": 168,
-      "index": 106,
+      "hangs_kept": 0,
+      "index": 118,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -499,7 +493,8 @@
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
-      "index": 25,
+      "hangs_kept": 0,
+      "index": 33,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -508,21 +503,37 @@
       "witness": "MEASURED"
      },
      {
-      "behaviour_class": 2,
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 168,
+      "edit_size": 34,
+      "grid_inputs": 168,
+      "hangs_kept": 0,
+      "index": 99,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
-      "index": 105,
-      "inexact_on_tests": 1,
+      "hangs_kept": 0,
+      "index": 100,
+      "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
       "tie_at_top": true,
-      "tied_with_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.714,
+    "seconds": 0.733,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": true
@@ -533,19 +544,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.327
+     "seconds": 0.317
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 2.874
+     "seconds": 2.994
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.309
+     "seconds": 0.315
     }
    ],
    "gate": "PASS",
@@ -558,61 +569,36 @@
   "two_edits_and_overfit__judge_pytest": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 22377.5,
-   "search_s": 21.6,
+   "e2e_ms": 21621.9,
+   "search_s": 20.867,
    "judge": {
     "in_process": false,
     "reason": "JUDGE_PYTEST_REQUESTED"
    },
-   "candidates": 260,
-   "tested": 116,
+   "candidates": 269,
+   "tested": 113,
    "greens": [
-    25,
-    104,
+    33,
+    102,
     112,
-    132,
+    120,
     146
    ],
    "overfit_signature_indices": [
-    25
+    33
    ],
    "compose": {
-    "composed_from": [
-     25,
-     1,
-     2,
-     3,
-     4,
-     5,
-     6,
-     7,
-     8,
-     9,
-     10,
-     11,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17,
-     18,
-     19,
-     20,
-     21,
-     22,
-     23
-    ],
-    "pair_count": 176,
-    "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 12.151
+    "composed_from": [],
+    "pair_count": 175,
+    "reason": "ONLY_SUSPICIOUS_GREENS:[33]",
+    "seconds": 10.355
    },
    "synthesis": {
     "status": "NOT_ATTEMPTED"
    },
    "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult",
    "witness": {
-    "behaviour_classes": 4,
+    "behaviour_classes": 2,
     "class": null,
     "function": "area",
     "grid_inputs": 109,
@@ -628,7 +614,8 @@
       "delta_outside_tests": 164,
       "edit_size": 28,
       "grid_inputs": 168,
-      "index": 104,
+      "hangs_kept": 0,
+      "index": 120,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -642,21 +629,8 @@
       "delta_outside_tests": 164,
       "edit_size": 32,
       "grid_inputs": 168,
-      "index": 132,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": true,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 2,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 165,
-      "edit_size": 25,
-      "grid_inputs": 168,
-      "index": 112,
+      "hangs_kept": 0,
+      "index": 146,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -670,7 +644,8 @@
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
-      "index": 25,
+      "hangs_kept": 0,
+      "index": 33,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -679,12 +654,28 @@
       "witness": "MEASURED"
      },
      {
-      "behaviour_class": 3,
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 168,
+      "edit_size": 34,
+      "grid_inputs": 168,
+      "hangs_kept": 0,
+      "index": 102,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
-      "index": 146,
+      "hangs_kept": 0,
+      "index": 112,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -693,7 +684,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.708,
+    "seconds": 0.752,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": true
@@ -704,19 +695,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.325
+     "seconds": 0.319
     },
     {
      "step": "localize",
-     "seconds": 0.123
+     "seconds": 0.122
     },
     {
      "step": "patch_search",
-     "seconds": 21.6
+     "seconds": 20.867
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.326
+     "seconds": 0.31
     }
    ],
    "gate": "PASS",
@@ -728,51 +719,34 @@
   },
   "only_overfit": {
    "bug": "return 0",
-   "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-   "e2e_ms": 1261.8,
-   "search_s": 0.818,
+   "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[25]",
+   "e2e_ms": 1406.6,
+   "search_s": 0.958,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 86,
-   "tested": 64,
+   "candidates": 90,
+   "tested": 100,
    "greens": [
-    23
+    25
    ],
    "overfit_signature_indices": [
-    23
+    25
    ],
    "compose": {
     "composed_from": [
-     23,
-     24,
-     27,
-     12,
-     14,
-     26,
-     2,
-     4,
-     25,
-     21,
-     1,
-     5,
-     7,
-     9,
-     11,
-     15,
-     17,
-     19,
-     22,
-     3,
-     13,
-     6,
-     8,
-     10
+     60,
+     59,
+     58,
+     64,
+     62,
+     63,
+     61
     ],
     "pair_count": 0,
-    "reason": "ONLY_SUSPICIOUS_GREENS:[23]",
-    "seconds": 0.0
+    "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
+    "seconds": 0.001
    },
    "synthesis": {
     "class": null,
@@ -785,7 +759,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 23
+      "index": 25
      }
     ],
     "status": "SINGLE_GREEN"
@@ -793,15 +767,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.326
+     "seconds": 0.324
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.121
     },
     {
      "step": "patch_search",
-     "seconds": 0.818
+     "seconds": 0.958
     }
    ],
    "gate": null,
@@ -814,14 +788,14 @@
   "cross_file_spectrum": {
    "bug": "util.mul returns a + b (called by calc.area)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1535.5,
-   "search_s": 0.782,
+   "e2e_ms": 1554.0,
+   "search_s": 0.79,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 37,
-   "tested": 37,
+   "candidates": 44,
+   "tested": 44,
    "greens": [
     4
    ],
@@ -849,19 +823,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.324
+     "seconds": 0.328
     },
     {
      "step": "localize",
-     "seconds": 0.118
+     "seconds": 0.117
     },
     {
      "step": "patch_search",
-     "seconds": 0.782
+     "seconds": 0.79
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.308
+     "seconds": 0.316
     }
    ],
    "gate": "PASS",
@@ -874,16 +848,16 @@
   "parametrized_synthesis": {
    "bug": "return len(str(w)) (parametrized rows 12/(3,4), 10/(2,5))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1905.3,
-   "search_s": 1.04,
+   "e2e_ms": 2234.8,
+   "search_s": 1.359,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 83,
-   "tested": 64,
+   "candidates": 112,
+   "tested": 112,
    "greens": [
-    2
+    8
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -901,7 +875,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.101,
+    "seconds": 0.103,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -909,7 +883,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 2
+      "index": 8
      }
     ],
     "status": "SINGLE_GREEN"
@@ -920,19 +894,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.311
+     "seconds": 0.334
     },
     {
      "step": "localize",
-     "seconds": 0.226
+     "seconds": 0.235
     },
     {
      "step": "patch_search",
-     "seconds": 1.04
+     "seconds": 1.359
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.324
+     "seconds": 0.302
     }
    ],
    "gate": "PASS",
@@ -945,22 +919,22 @@
   "hole_in_loop_assignment": {
    "bug": "acc = acc + 1 inside `for x in xs` (should be acc + x)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3443.8,
-   "search_s": 2.704,
+   "e2e_ms": 3942.5,
+   "search_s": 3.159,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 137,
-   "tested": 64,
+   "candidates": 164,
+   "tested": 164,
    "greens": [
-    48,
-    49,
-    50,
-    51
+    61,
+    62,
+    63,
+    64
    ],
    "overfit_signature_indices": [
-    50
+    63
    ],
    "compose": null,
    "synthesis": {
@@ -997,7 +971,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.354,
+       "seconds": 0.363,
        "sites": [
         {
          "distinct": 7252,
@@ -1022,7 +996,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.477,
+       "seconds": 0.513,
        "sites": [
         {
          "distinct": 4607,
@@ -1038,7 +1012,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.268
+     "seconds": 1.339
     },
     "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
@@ -1062,7 +1036,8 @@
       "delta_outside_tests": 76,
       "edit_size": 26,
       "grid_inputs": 84,
-      "index": 48,
+      "hangs_kept": 0,
+      "index": 61,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1076,7 +1051,8 @@
       "delta_outside_tests": 81,
       "edit_size": 24,
       "grid_inputs": 84,
-      "index": 49,
+      "hangs_kept": 0,
+      "index": 62,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1090,7 +1066,8 @@
       "delta_outside_tests": 81,
       "edit_size": 36,
       "grid_inputs": 84,
-      "index": 51,
+      "hangs_kept": 0,
+      "index": 64,
       "inexact_on_tests": 0,
       "new_exceptions": 8,
       "postcondition_violations": 0,
@@ -1104,7 +1081,8 @@
       "delta_outside_tests": 83,
       "edit_size": 30,
       "grid_inputs": 84,
-      "index": 50,
+      "hangs_kept": 0,
+      "index": 63,
       "inexact_on_tests": 0,
       "new_exceptions": 11,
       "postcondition_violations": 0,
@@ -1113,7 +1091,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.625,
+    "seconds": 0.641,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -1124,19 +1102,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.323
+     "seconds": 0.353
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.126
     },
     {
      "step": "patch_search",
-     "seconds": 2.704
+     "seconds": 3.159
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.297
+     "seconds": 0.3
     }
    ],
    "gate": "PASS",
@@ -1149,18 +1127,18 @@
   "hole_in_condition": {
    "bug": "if x < lo (should be x < lo or x > hi)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3701.3,
-   "search_s": 2.957,
+   "e2e_ms": 4130.3,
+   "search_s": 3.302,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 137,
-   "tested": 64,
+   "candidates": 173,
+   "tested": 173,
    "greens": [
-    8,
-    9,
-    10
+    12,
+    13,
+    14
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -1180,7 +1158,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.142,
+       "seconds": 0.134,
        "sites": [
         {
          "distinct": 24,
@@ -1204,7 +1182,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.098,
+       "seconds": 0.101,
        "sites": [
         {
          "distinct": 990,
@@ -1224,7 +1202,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.773,
+       "seconds": 0.748,
        "sites": [
         {
          "distinct": 8023,
@@ -1238,9 +1216,9 @@
        "status": "NONE"
       }
      ],
-     "seconds": 1.446
+     "seconds": 1.424
     },
-    "seconds": 0.151,
+    "seconds": 0.142,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -1262,7 +1240,8 @@
       "delta_outside_tests": 60,
       "edit_size": 30,
       "grid_inputs": 180,
-      "index": 8,
+      "hangs_kept": 0,
+      "index": 12,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1276,7 +1255,8 @@
       "delta_outside_tests": 60,
       "edit_size": 30,
       "grid_inputs": 180,
-      "index": 9,
+      "hangs_kept": 0,
+      "index": 13,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1290,7 +1270,8 @@
       "delta_outside_tests": 83,
       "edit_size": 31,
       "grid_inputs": 180,
-      "index": 10,
+      "hangs_kept": 0,
+      "index": 14,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1299,7 +1280,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.508,
+    "seconds": 0.52,
     "status": "MEASURED",
     "test_inputs": 3,
     "tie_at_top": false
@@ -1310,19 +1291,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.323
+     "seconds": 0.361
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.129
     },
     {
      "step": "patch_search",
-     "seconds": 2.957
+     "seconds": 3.302
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.301
+     "seconds": 0.332
     }
    ],
    "gate": "PASS",
@@ -1335,16 +1316,16 @@
   "stmt_missing_return": {
    "bug": "area() computes r and never returns it",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1566.1,
-   "search_s": 0.82,
+   "e2e_ms": 1621.3,
+   "search_s": 0.817,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 68,
+   "candidates": 78,
    "tested": 64,
    "greens": [
-    9
+    17
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -1359,7 +1340,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 9
+      "index": 17
      }
     ],
     "status": "SINGLE_GREEN"
@@ -1370,19 +1351,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.323
+     "seconds": 0.348
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.132
     },
     {
      "step": "patch_search",
-     "seconds": 0.82
+     "seconds": 0.817
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.303
+     "seconds": 0.321
     }
    ],
    "gate": "PASS",
@@ -1395,22 +1376,23 @@
   "stmt_delete": {
    "bug": "stray `acc = 0` inside the loop",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3653.0,
-   "search_s": 2.921,
+   "e2e_ms": 3879.8,
+   "search_s": 3.097,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 158,
+   "candidates": 187,
    "tested": 128,
    "greens": [
-    64,
-    65,
-    77,
-    79
+    82,
+    83,
+    96,
+    97,
+    99
    ],
    "overfit_signature_indices": [
-    65
+    83
    ],
    "compose": null,
    "synthesis": {
@@ -1447,7 +1429,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.283,
+       "seconds": 0.285,
        "sites": [
         {
          "distinct": 2590,
@@ -1467,7 +1449,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.291,
+       "seconds": 0.283,
        "sites": [
         {
          "distinct": 2552,
@@ -1490,7 +1472,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.171,
+       "seconds": 0.165,
        "sites": [
         {
          "distinct": 1566,
@@ -1506,7 +1488,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.329
+     "seconds": 1.332
     },
     "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
@@ -1530,7 +1512,8 @@
       "delta_outside_tests": 81,
       "edit_size": 7,
       "grid_inputs": 84,
-      "index": 64,
+      "hangs_kept": 0,
+      "index": 82,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1544,7 +1527,8 @@
       "delta_outside_tests": 81,
       "edit_size": 20,
       "grid_inputs": 84,
-      "index": 77,
+      "hangs_kept": 0,
+      "index": 96,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1558,7 +1542,23 @@
       "delta_outside_tests": 81,
       "edit_size": 20,
       "grid_inputs": 84,
-      "index": 79,
+      "hangs_kept": 0,
+      "index": 97,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 81,
+      "edit_size": 20,
+      "grid_inputs": 84,
+      "hangs_kept": 0,
+      "index": 99,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -1572,7 +1572,8 @@
       "delta_outside_tests": 81,
       "edit_size": 33,
       "grid_inputs": 84,
-      "index": 65,
+      "hangs_kept": 0,
+      "index": 83,
       "inexact_on_tests": 0,
       "new_exceptions": 8,
       "postcondition_violations": 0,
@@ -1581,7 +1582,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.617,
+    "seconds": 0.748,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -1590,19 +1591,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.312
+     "seconds": 0.326
     },
     {
      "step": "localize",
-     "seconds": 0.12
+     "seconds": 0.127
     },
     {
      "step": "patch_search",
-     "seconds": 2.921
+     "seconds": 3.097
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.296
+     "seconds": 0.325
     }
    ],
    "gate": "PASS",
@@ -1615,16 +1616,16 @@
   "stmt_insert_donor": {
    "bug": "normalize() never appends to out",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2633.6,
-   "search_s": 1.89,
+   "e2e_ms": 2930.7,
+   "search_s": 2.159,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 163,
-   "tested": 64,
+   "candidates": 242,
+   "tested": 128,
    "greens": [
-    49
+    77
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -1642,7 +1643,7 @@
        "names": [
         "xs"
        ],
-       "seconds": 0.017,
+       "seconds": 0.02,
        "sites": [
         {
          "distinct": 125,
@@ -1662,7 +1663,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.099,
+       "seconds": 0.102,
        "sites": [
         {
          "distinct": 40,
@@ -1682,7 +1683,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.198,
+       "seconds": 0.201,
        "sites": [
         {
          "distinct": 1597,
@@ -1702,7 +1703,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.195,
+       "seconds": 0.21,
        "sites": [
         {
          "distinct": 1553,
@@ -1716,7 +1717,7 @@
        "status": "NONE"
       }
      ],
-     "seconds": 1.085
+     "seconds": 1.13
     },
     "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
@@ -1726,7 +1727,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 49
+      "index": 77
      }
     ],
     "status": "SINGLE_GREEN"
@@ -1737,19 +1738,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.33
+     "seconds": 0.325
     },
     {
      "step": "localize",
-     "seconds": 0.119
+     "seconds": 0.121
     },
     {
      "step": "patch_search",
-     "seconds": 1.89
+     "seconds": 2.159
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.291
+     "seconds": 0.321
     }
    ],
    "gate": "PASS",
@@ -1762,16 +1763,17 @@
   "stmt_swap": {
    "bug": "out.append(acc) before acc += x",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 4282.9,
-   "search_s": 3.552,
+   "e2e_ms": 5148.7,
+   "search_s": 4.361,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 165,
+   "candidates": 229,
    "tested": 128,
    "greens": [
-    69
+    103,
+    113
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -1789,7 +1791,7 @@
        "names": [
         "xs"
        ],
-       "seconds": 0.686,
+       "seconds": 0.696,
        "sites": [
         {
          "distinct": 125,
@@ -1808,7 +1810,7 @@
         "out",
         "xs"
        ],
-       "seconds": 0.024,
+       "seconds": 0.028,
        "sites": [
         {
          "distinct": 186,
@@ -1829,7 +1831,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.752,
+       "seconds": 0.755,
        "sites": [
         {
          "distinct": 6178,
@@ -1850,7 +1852,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.542,
+       "seconds": 0.54,
        "sites": [
         {
          "distinct": 4443,
@@ -1864,40 +1866,79 @@
        "status": "NONE"
       }
      ],
-     "seconds": 2.582
+     "seconds": 2.654
     },
     "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
-   "winning_mutation": "STMT_SWAP with next",
+   "winning_mutation": "EXPR_EXTEND acc Add x",
    "witness": {
+    "behaviour_classes": 1,
+    "class": null,
+    "function": "running",
+    "grid_inputs": 25,
+    "hypothesis": "MEASURED",
+    "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 58,
+    "proves_correctness": false,
     "ranking": [
      {
-      "index": 69
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 81,
+      "edit_size": 34,
+      "grid_inputs": 83,
+      "hangs_kept": 0,
+      "index": 103,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 81,
+      "edit_size": 16,
+      "grid_inputs": 83,
+      "hangs_kept": 0,
+      "index": 113,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
      }
     ],
-    "status": "SINGLE_GREEN"
+    "seconds": 0.398,
+    "status": "MEASURED",
+    "test_inputs": 2,
+    "tie_at_top": false
    },
    "patched_lines": [
-    "+        acc += x"
+    "+        out.append(acc + x)"
    ],
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.313
+     "seconds": 0.343
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.122
     },
     {
      "step": "patch_search",
-     "seconds": 3.552
+     "seconds": 4.361
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.297
+     "seconds": 0.317
     }
    ],
    "gate": "PASS",
@@ -1910,17 +1951,143 @@
   "method_wrong_op": {
    "bug": "Rect.area returns self.w + self.h",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2594.3,
-   "search_s": 1.818,
+   "e2e_ms": 2609.3,
+   "search_s": 1.827,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 102,
+   "candidates": 121,
    "tested": 64,
    "greens": [
     4,
-    10
+    11
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "class": "Rect",
+    "examples": 2,
+    "expressions": [],
+    "function": "area",
+    "hole": {
+     "candidates": 1,
+     "lines": [
+      {
+       "line": 7,
+       "names": [
+        "self.h",
+        "self.w"
+       ],
+       "seconds": 0.47,
+       "sites": [
+        {
+         "distinct": 4485,
+         "expressions": [
+          "self.h * self.w"
+         ],
+         "kind": "return",
+         "original": "self.w + self.h",
+         "stop": "EXHAUSTED",
+         "tried": 4485
+        }
+       ],
+       "status": "FOUND:1"
+      }
+     ],
+     "seconds": 0.616
+    },
+    "status": "METHOD:HOLE_ONLY"
+   },
+   "winning_mutation": "BINOP_SWAP Add->Mult",
+   "witness": {
+    "behaviour_classes": 1,
+    "class": "Rect",
+    "function": "area",
+    "grid_inputs": 118,
+    "hypothesis": "MEASURED",
+    "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 175,
+      "edit_size": 44,
+      "grid_inputs": 177,
+      "hangs_kept": 0,
+      "index": 4,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 175,
+      "edit_size": 44,
+      "grid_inputs": 177,
+      "hangs_kept": 0,
+      "index": 11,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.386,
+    "status": "MEASURED",
+    "test_inputs": 2,
+    "tie_at_top": false
+   },
+   "patched_lines": [
+    "+        return self.w * self.h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.323
+    },
+    {
+     "step": "localize",
+     "seconds": 0.119
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.827
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.336
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "an instance method: the assertion `Rect(3, 4).area()` names area() as the subject, so its lines rank ahead of __init__'s (same Ochiai score, same call depth); BINOP_SWAP green, the witness constructs Rect from the tests' own literals and probes the grid over (w, h)"
+  },
+  "method_hole_self_attrs": {
+   "bug": "Rect.area returns len(str(self.w))",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 2363.3,
+   "search_s": 1.6,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 118,
+   "tested": 118,
+   "greens": [
+    6
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -1946,130 +2113,6 @@
           "self.h * self.w"
          ],
          "kind": "return",
-         "original": "self.w + self.h",
-         "stop": "EXHAUSTED",
-         "tried": 4485
-        }
-       ],
-       "status": "FOUND:1"
-      }
-     ],
-     "seconds": 0.619
-    },
-    "status": "METHOD:HOLE_ONLY"
-   },
-   "winning_mutation": "BINOP_SWAP Add->Mult",
-   "witness": {
-    "behaviour_classes": 1,
-    "class": "Rect",
-    "function": "area",
-    "grid_inputs": 118,
-    "hypothesis": "MEASURED",
-    "module": "pkg.calc",
-    "postconditions": [],
-    "property_inputs": 59,
-    "proves_correctness": false,
-    "ranking": [
-     {
-      "behaviour_class": 0,
-      "delta_on_tests": 2,
-      "delta_outside_tests": 175,
-      "edit_size": 44,
-      "grid_inputs": 177,
-      "index": 4,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 0,
-      "delta_on_tests": 2,
-      "delta_outside_tests": 175,
-      "edit_size": 44,
-      "grid_inputs": 177,
-      "index": 10,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     }
-    ],
-    "seconds": 0.374,
-    "status": "MEASURED",
-    "test_inputs": 2,
-    "tie_at_top": false
-   },
-   "patched_lines": [
-    "+        return self.w * self.h"
-   ],
-   "steps": [
-    {
-     "step": "reproduce",
-     "seconds": 0.334
-    },
-    {
-     "step": "localize",
-     "seconds": 0.118
-    },
-    {
-     "step": "patch_search",
-     "seconds": 1.818
-    },
-    {
-     "step": "full_suite_gate",
-     "seconds": 0.32
-    }
-   ],
-   "gate": "PASS",
-   "tests_discovered": 2,
-   "verified": true,
-   "confined": true,
-   "tree_unchanged": true,
-   "note": "an instance method: the assertion `Rect(3, 4).area()` names area() as the subject, so its lines rank ahead of __init__'s (same Ochiai score, same call depth); BINOP_SWAP green, the witness constructs Rect from the tests' own literals and probes the grid over (w, h)"
-  },
-  "method_hole_self_attrs": {
-   "bug": "Rect.area returns len(str(self.w))",
-   "status": "VERIFIED_PATCH",
-   "e2e_ms": 2226.7,
-   "search_s": 1.414,
-   "judge": {
-    "in_process": true,
-    "reason": "PLAIN"
-   },
-   "candidates": 94,
-   "tested": 64,
-   "greens": [
-    2
-   ],
-   "overfit_signature_indices": [],
-   "compose": null,
-   "synthesis": {
-    "class": "Rect",
-    "examples": 2,
-    "expressions": [],
-    "function": "area",
-    "hole": {
-     "candidates": 1,
-     "lines": [
-      {
-       "line": 7,
-       "names": [
-        "self.h",
-        "self.w"
-       ],
-       "seconds": 0.473,
-       "sites": [
-        {
-         "distinct": 4485,
-         "expressions": [
-          "self.h * self.w"
-         ],
-         "kind": "return",
          "original": "len(str(self.w))",
          "stop": "EXHAUSTED",
          "tried": 4485
@@ -2078,7 +2121,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 0.615
+     "seconds": 0.623
     },
     "status": "METHOD:HOLE_ONLY"
    },
@@ -2086,7 +2129,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 2
+      "index": 6
      }
     ],
     "status": "SINGLE_GREEN"
@@ -2097,19 +2140,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.32
+     "seconds": 0.335
     },
     {
      "step": "localize",
-     "seconds": 0.121
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 1.414
+     "seconds": 1.6
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.368
+     "seconds": 0.306
     }
    ],
    "gate": "PASS",
@@ -2122,22 +2165,22 @@
   "method_loop_witness": {
    "bug": "Bag.total adds 1 instead of x",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3546.2,
-   "search_s": 2.805,
+   "e2e_ms": 4021.1,
+   "search_s": 3.221,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 107,
-   "tested": 64,
+   "candidates": 144,
+   "tested": 144,
    "greens": [
-    22,
-    23,
-    24,
-    25
+    26,
+    27,
+    28,
+    29
    ],
    "overfit_signature_indices": [
-    24
+    28
    ],
    "compose": null,
    "synthesis": {
@@ -2173,7 +2216,7 @@
         "self.items",
         "x"
        ],
-       "seconds": 0.4,
+       "seconds": 0.414,
        "sites": [
         {
          "distinct": 7252,
@@ -2198,7 +2241,7 @@
         "self.items",
         "x"
        ],
-       "seconds": 0.551,
+       "seconds": 0.535,
        "sites": [
         {
          "distinct": 4607,
@@ -2214,7 +2257,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.399
+     "seconds": 1.419
     },
     "status": "METHOD:HOLE_ONLY"
    },
@@ -2236,7 +2279,8 @@
       "delta_outside_tests": 76,
       "edit_size": 26,
       "grid_inputs": 84,
-      "index": 22,
+      "hangs_kept": 0,
+      "index": 26,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2250,7 +2294,8 @@
       "delta_outside_tests": 81,
       "edit_size": 24,
       "grid_inputs": 84,
-      "index": 23,
+      "hangs_kept": 0,
+      "index": 27,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2264,7 +2309,8 @@
       "delta_outside_tests": 81,
       "edit_size": 36,
       "grid_inputs": 84,
-      "index": 25,
+      "hangs_kept": 0,
+      "index": 29,
       "inexact_on_tests": 0,
       "new_exceptions": 8,
       "postcondition_violations": 0,
@@ -2278,7 +2324,8 @@
       "delta_outside_tests": 83,
       "edit_size": 30,
       "grid_inputs": 84,
-      "index": 24,
+      "hangs_kept": 0,
+      "index": 28,
       "inexact_on_tests": 0,
       "new_exceptions": 11,
       "postcondition_violations": 0,
@@ -2287,7 +2334,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.624,
+    "seconds": 0.664,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -2298,19 +2345,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.316
+     "seconds": 0.346
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.121
     },
     {
      "step": "patch_search",
-     "seconds": 2.805
+     "seconds": 3.221
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.307
+     "seconds": 0.327
     }
    ],
    "gate": "PASS",
@@ -2323,36 +2370,40 @@
   "two_files_coupled": {
    "bug": "util.scale k + x and calc.area scale(w, h) - 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2976.0,
-   "search_s": 2.229,
+   "e2e_ms": 3172.4,
+   "search_s": 2.398,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 200,
-   "tested": 261,
+   "candidates": 108,
+   "tested": 499,
    "greens": [
-    1,
-    7,
-    11,
-    16
+    1
    ],
    "overfit_signature_indices": [],
    "compose": {
     "composed_from": [
      4,
+     15,
+     12,
+     14,
+     9,
+     11,
+     13,
+     16,
      2,
      1,
      7,
      5,
      6,
      3,
-     9,
+     10,
      8
     ],
-    "pair_count": 0,
+    "pair_count": 58,
     "reason": "NO_SINGLE_EDIT_GREEN",
-    "seconds": 0.0
+    "seconds": 0.181
    },
    "synthesis": {
     "class": null,
@@ -2363,77 +2414,12 @@
    },
    "winning_mutation": "COMPOSE_HUNKS pkg/util.py:2 BINOP_SWAP Add->Mult + pkg/calc.py:5 EXPR_SYNTH -> w * h",
    "witness": {
-    "behaviour_classes": 1,
-    "class": null,
-    "function": "scale",
-    "grid_inputs": 109,
-    "hypothesis": "MEASURED",
-    "module": "pkg.util",
-    "postconditions": [],
-    "property_inputs": 59,
-    "proves_correctness": false,
     "ranking": [
      {
-      "behaviour_class": 0,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 166,
-      "edit_size": 58,
-      "grid_inputs": 168,
-      "index": 1,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 0,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 166,
-      "edit_size": 64,
-      "grid_inputs": 168,
-      "index": 7,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 0,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 166,
-      "edit_size": 68,
-      "grid_inputs": 168,
-      "index": 11,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 0,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 166,
-      "edit_size": 68,
-      "grid_inputs": 168,
-      "index": 16,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
+      "index": 1
      }
     ],
-    "seconds": 0.583,
-    "status": "MEASURED",
-    "test_inputs": 1,
-    "tie_at_top": false
+    "status": "SINGLE_GREEN"
    },
    "patched_lines": [
     "+    return w * h",
@@ -2442,19 +2428,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.311
+     "seconds": 0.335
     },
     {
      "step": "localize",
-     "seconds": 0.117
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 2.229
+     "seconds": 2.398
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.313
+     "seconds": 0.315
     }
    ],
    "gate": "PASS",
@@ -2467,50 +2453,51 @@
   "two_hunks_one_file": {
    "bug": "if x > k (>=) and out.append(x - 1) (x)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3754.3,
-   "search_s": 3.02,
+   "e2e_ms": 5680.7,
+   "search_s": 4.861,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
    "candidates": 200,
-   "tested": 278,
+   "tested": 628,
    "greens": [
-    78,
-    88,
-    99,
-    111
+    172,
+    180,
+    188,
+    196
    ],
    "overfit_signature_indices": [],
    "compose": {
     "composed_from": [
-     2,
-     11,
-     1,
-     3,
-     4,
-     5,
-     6,
-     7,
-     8,
-     9,
-     10,
-     12,
-     13,
-     14,
-     15,
-     16,
-     17,
-     18,
-     19,
-     20,
-     21,
-     22,
-     23
+     130,
+     133,
+     134,
+     135,
+     137,
+     140,
+     147,
+     131,
+     132,
+     136,
+     138,
+     139,
+     141,
+     142,
+     143,
+     144,
+     145,
+     146,
+     148,
+     149,
+     150,
+     151,
+     152,
+     153
     ],
-    "pair_count": 0,
+    "pair_count": 200,
     "reason": "NO_SINGLE_EDIT_GREEN",
-    "seconds": 0.001
+    "seconds": 1.23
    },
    "synthesis": {
     "class": null,
@@ -2527,7 +2514,7 @@
         "k",
         "xs"
        ],
-       "seconds": 0.093,
+       "seconds": 0.091,
        "sites": [
         {
          "distinct": 662,
@@ -2548,7 +2535,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.258,
+       "seconds": 0.264,
        "sites": [
         {
          "distinct": 127,
@@ -2568,7 +2555,7 @@
         "out",
         "xs"
        ],
-       "seconds": 0.113,
+       "seconds": 0.107,
        "sites": [
         {
          "distinct": 808,
@@ -2582,9 +2569,9 @@
        "status": "NONE"
       }
      ],
-     "seconds": 0.901
+     "seconds": 0.914
     },
-    "seconds": 0.026,
+    "seconds": 0.029,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -2606,7 +2593,8 @@
       "delta_outside_tests": 119,
       "edit_size": 49,
       "grid_inputs": 176,
-      "index": 78,
+      "hangs_kept": 0,
+      "index": 172,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2620,7 +2608,8 @@
       "delta_outside_tests": 119,
       "edit_size": 53,
       "grid_inputs": 176,
-      "index": 88,
+      "hangs_kept": 0,
+      "index": 180,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2634,7 +2623,8 @@
       "delta_outside_tests": 119,
       "edit_size": 54,
       "grid_inputs": 176,
-      "index": 111,
+      "hangs_kept": 0,
+      "index": 196,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2648,7 +2638,8 @@
       "delta_outside_tests": 119,
       "edit_size": 53,
       "grid_inputs": 176,
-      "index": 99,
+      "hangs_kept": 0,
+      "index": 188,
       "inexact_on_tests": 2,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2657,7 +2648,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.619,
+    "seconds": 0.64,
     "status": "MEASURED",
     "test_inputs": 3,
     "tie_at_top": false
@@ -2669,19 +2660,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.305
+     "seconds": 0.342
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.124
     },
     {
      "step": "patch_search",
-     "seconds": 3.02
+     "seconds": 4.861
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.307
+     "seconds": 0.34
     }
    ],
    "gate": "PASS",
@@ -2694,17 +2685,18 @@
   "second_file_from_spectrum": {
    "bug": "calc.area scale(w, h) + h (callee clean)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2163.6,
-   "search_s": 1.419,
+   "e2e_ms": 2709.7,
+   "search_s": 1.93,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 75,
-   "tested": 105,
+   "candidates": 113,
+   "tested": 215,
    "greens": [
     1,
-    10
+    14,
+    20
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -2722,7 +2714,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.103,
+    "seconds": 0.105,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -2744,7 +2736,23 @@
       "delta_outside_tests": 164,
       "edit_size": 40,
       "grid_inputs": 177,
+      "hangs_kept": 0,
       "index": 1,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 164,
+      "edit_size": 48,
+      "grid_inputs": 177,
+      "hangs_kept": 0,
+      "index": 14,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2758,7 +2766,8 @@
       "delta_outside_tests": 164,
       "edit_size": 34,
       "grid_inputs": 177,
-      "index": 10,
+      "hangs_kept": 0,
+      "index": 20,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2767,7 +2776,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.367,
+    "seconds": 0.51,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -2778,19 +2787,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.317
+     "seconds": 0.343
     },
     {
      "step": "localize",
-     "seconds": 0.112
+     "seconds": 0.122
     },
     {
      "step": "patch_search",
-     "seconds": 1.419
+     "seconds": 1.93
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.312
+     "seconds": 0.31
     }
    ],
    "gate": "PASS",
@@ -2803,19 +2812,19 @@
   "contract_outranks_least_change": {
    "bug": "w <= 0 with post: _ >= 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2202.4,
-   "search_s": 1.427,
+   "e2e_ms": 2335.1,
+   "search_s": 1.487,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 63,
-   "tested": 63,
+   "candidates": 102,
+   "tested": 64,
    "greens": [
-    11,
-    13,
-    14,
-    15
+    15,
+    16,
+    18,
+    19
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -2841,39 +2850,12 @@
     "proves_correctness": false,
     "ranking": [
      {
-      "behaviour_class": 1,
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 145,
       "edit_size": 57,
       "grid_inputs": 168,
-      "index": 13,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 27,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 1,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 145,
-      "edit_size": 58,
-      "grid_inputs": 168,
-      "index": 14,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 27,
-      "tie_at_top": false,
-      "tied_with_top": true,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 1,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 145,
-      "edit_size": 58,
-      "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 15,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
@@ -2885,10 +2867,41 @@
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 58,
+      "grid_inputs": 168,
+      "hangs_kept": 0,
+      "index": 16,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 27,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 58,
+      "grid_inputs": 168,
+      "hangs_kept": 0,
+      "index": 19,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 27,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
       "delta_outside_tests": 89,
       "edit_size": 58,
       "grid_inputs": 168,
-      "index": 11,
+      "hangs_kept": 0,
+      "index": 18,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 58,
@@ -2897,7 +2910,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.618,
+    "seconds": 0.646,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -2908,19 +2921,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.319
+     "seconds": 0.406
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.128
     },
     {
      "step": "patch_search",
-     "seconds": 1.427
+     "seconds": 1.487
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.339
+     "seconds": 0.311
     }
    ],
    "gate": "PASS",
@@ -2933,17 +2946,18 @@
   "tie_named_and_shipped": {
    "bug": "return a (a tie the suite cannot break)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1985.0,
-   "search_s": 1.194,
+   "e2e_ms": 2108.4,
+   "search_s": 1.334,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 63,
-   "tested": 63,
+   "candidates": 69,
+   "tested": 64,
    "greens": [
-    2,
-    3
+    4,
+    5,
+    6
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -2972,7 +2986,8 @@
       "delta_outside_tests": 139,
       "edit_size": 20,
       "grid_inputs": 158,
-      "index": 2,
+      "hangs_kept": 0,
+      "index": 4,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2986,7 +3001,23 @@
       "delta_outside_tests": 145,
       "edit_size": 20,
       "grid_inputs": 158,
-      "index": 3,
+      "hangs_kept": 0,
+      "index": 5,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 20,
+      "grid_inputs": 158,
+      "hangs_kept": 0,
+      "index": 6,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -2995,7 +3026,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.384,
+    "seconds": 0.511,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": true
@@ -3006,7 +3037,7 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.359
+     "seconds": 0.339
     },
     {
      "step": "localize",
@@ -3014,11 +3045,11 @@
     },
     {
      "step": "patch_search",
-     "seconds": 1.194
+     "seconds": 1.334
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.31
+     "seconds": 0.314
     }
    ],
    "gate": "PASS",
@@ -3030,18 +3061,19 @@
   },
   "tie_refused": {
    "bug": "return a (a tie the suite cannot break)",
-   "status": "OPEN:WITNESS_TIE:classes=2:[2, 3]",
-   "e2e_ms": 1635.4,
-   "search_s": 1.173,
+   "status": "OPEN:WITNESS_TIE:classes=2:[4, 5, 6]",
+   "e2e_ms": 1750.5,
+   "search_s": 1.316,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 63,
-   "tested": 63,
+   "candidates": 69,
+   "tested": 64,
    "greens": [
-    2,
-    3
+    4,
+    5,
+    6
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -3070,7 +3102,8 @@
       "delta_outside_tests": 139,
       "edit_size": 20,
       "grid_inputs": 158,
-      "index": 2,
+      "hangs_kept": 0,
+      "index": 4,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -3084,7 +3117,23 @@
       "delta_outside_tests": 145,
       "edit_size": 20,
       "grid_inputs": 158,
-      "index": 3,
+      "hangs_kept": 0,
+      "index": 5,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 20,
+      "grid_inputs": 158,
+      "hangs_kept": 0,
+      "index": 6,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -3093,7 +3142,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.373,
+    "seconds": 0.512,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": true
@@ -3101,15 +3150,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.335
+     "seconds": 0.316
     },
     {
      "step": "localize",
-     "seconds": 0.124
+     "seconds": 0.114
     },
     {
      "step": "patch_search",
-     "seconds": 1.173
+     "seconds": 1.316
     }
    ],
    "gate": null,
@@ -3122,14 +3171,14 @@
   "two_examples_synthesis__return_0": {
    "bug": "return 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1635.6,
-   "search_s": 0.881,
+   "e2e_ms": 1819.3,
+   "search_s": 1.049,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 94,
-   "tested": 64,
+   "candidates": 98,
+   "tested": 98,
    "greens": [
     1
    ],
@@ -3149,7 +3198,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.099,
+    "seconds": 0.102,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -3168,19 +3217,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.32
+     "seconds": 0.329
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 0.881
+     "seconds": 1.049
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.316
+     "seconds": 0.318
     }
    ],
    "gate": "PASS",
@@ -3193,16 +3242,16 @@
   "two_examples_synthesis__len_str_w": {
    "bug": "return len(str(w))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1628.8,
-   "search_s": 0.891,
+   "e2e_ms": 1877.0,
+   "search_s": 1.071,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 77,
-   "tested": 64,
+   "candidates": 106,
+   "tested": 106,
    "greens": [
-    2
+    8
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -3220,7 +3269,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.098,
+    "seconds": 0.102,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -3228,7 +3277,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 2
+      "index": 8
      }
     ],
     "status": "SINGLE_GREEN"
@@ -3239,19 +3288,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.318
+     "seconds": 0.333
     },
     {
      "step": "localize",
-     "seconds": 0.112
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 0.891
+     "seconds": 1.071
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.304
+     "seconds": 0.351
     }
    ],
    "gate": "PASS",
@@ -3263,16 +3312,16 @@
   "two_examples_synthesis__w_plus_h_plus_1": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1661.7,
-   "search_s": 0.914,
+   "e2e_ms": 1888.9,
+   "search_s": 1.072,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 91,
-   "tested": 64,
+   "candidates": 101,
+   "tested": 101,
    "greens": [
-    18
+    24
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -3290,7 +3339,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.128,
+    "seconds": 0.126,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -3298,7 +3347,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 18
+      "index": 24
      }
     ],
     "status": "SINGLE_GREEN"
@@ -3309,19 +3358,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.319
+     "seconds": 0.358
     },
     {
      "step": "localize",
-     "seconds": 0.118
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 0.914
+     "seconds": 1.072
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.306
+     "seconds": 0.336
     }
    ],
    "gate": "PASS",
@@ -3332,42 +3381,50 @@
   },
   "two_examples_no_expression__test_literal_rejected": {
    "bug": "return len(str(w))",
-   "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[1, 2, 4, 7]",
-   "e2e_ms": 2697.8,
-   "search_s": 2.263,
+   "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[1, 2, 4, 7, 8]",
+   "e2e_ms": 3562.8,
+   "search_s": 3.115,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 77,
-   "tested": 128,
+   "candidates": 306,
+   "tested": 342,
    "greens": [
-    2
+    8
    ],
    "overfit_signature_indices": [
     1,
     2,
     4,
-    7
+    7,
+    8
    ],
    "compose": {
     "composed_from": [
-     2,
-     4,
-     3,
-     8,
-     10,
-     6,
-     11,
-     9,
-     7,
-     12,
-     5,
-     1
+     72,
+     73,
+     74,
+     75,
+     76,
+     77,
+     78,
+     79,
+     80,
+     81,
+     82,
+     83,
+     84,
+     85,
+     86,
+     87,
+     88,
+     89,
+     90
     ],
-    "pair_count": 0,
-    "reason": "ONLY_SUSPICIOUS_GREENS:[2]",
-    "seconds": 0.0
+    "pair_count": 200,
+    "reason": "ONLY_SUSPICIOUS_GREENS:[8]",
+    "seconds": 0.628
    },
    "synthesis": {
     "candidates": 1,
@@ -3383,7 +3440,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.101,
+    "seconds": 0.097,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -3391,7 +3448,7 @@
    "witness": {
     "ranking": [
      {
-      "index": 2
+      "index": 8
      }
     ],
     "status": "SINGLE_GREEN"
@@ -3399,15 +3456,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.316
+     "seconds": 0.322
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 2.263
+     "seconds": 3.115
     }
    ],
    "gate": null,
@@ -3420,19 +3477,20 @@
   "under_specified_suite": {
    "bug": "return w * h if w <= 0 else 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2189.7,
-   "search_s": 1.454,
+   "e2e_ms": 2343.6,
+   "search_s": 1.595,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 90,
+   "candidates": 129,
    "tested": 64,
    "greens": [
-    11,
-    13,
-    14,
-    15
+    15,
+    16,
+    18,
+    19,
+    23
    ],
    "overfit_signature_indices": [],
    "compose": null,
@@ -3450,7 +3508,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.059,
+    "seconds": 0.06,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -3467,12 +3525,13 @@
     "proves_correctness": false,
     "ranking": [
      {
-      "behaviour_class": 0,
+      "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 89,
       "edit_size": 58,
       "grid_inputs": 167,
-      "index": 11,
+      "hangs_kept": 0,
+      "index": 18,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -3483,38 +3542,56 @@
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
+      "delta_outside_tests": 89,
+      "edit_size": 41,
+      "grid_inputs": 167,
+      "hangs_kept": 0,
+      "index": 23,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
       "delta_outside_tests": 145,
       "edit_size": 57,
       "grid_inputs": 167,
-      "index": 13,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": false,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 1,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 145,
-      "edit_size": 58,
-      "grid_inputs": 167,
-      "index": 14,
-      "inexact_on_tests": 0,
-      "new_exceptions": 0,
-      "postcondition_violations": 0,
-      "tie_at_top": false,
-      "tied_with_top": false,
-      "witness": "MEASURED"
-     },
-     {
-      "behaviour_class": 1,
-      "delta_on_tests": 1,
-      "delta_outside_tests": 145,
-      "edit_size": 58,
-      "grid_inputs": 167,
+      "hangs_kept": 0,
       "index": 15,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": false,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 58,
+      "grid_inputs": 167,
+      "hangs_kept": 0,
+      "index": 16,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": false,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 58,
+      "grid_inputs": 167,
+      "hangs_kept": 0,
+      "index": 19,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
       "postcondition_violations": 0,
@@ -3523,7 +3600,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.615,
+    "seconds": 0.734,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -3534,19 +3611,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.313
+     "seconds": 0.32
     },
     {
      "step": "localize",
-     "seconds": 0.12
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 1.454
+     "seconds": 1.595
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.298
+     "seconds": 0.305
     }
    ],
    "gate": "PASS",
@@ -3558,13 +3635,13 @@
   "parametrized_not_plain": {
    "bug": "return w + h (parametrized test)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1848.3,
-   "search_s": 1.012,
+   "e2e_ms": 1908.6,
+   "search_s": 1.048,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 80,
+   "candidates": 89,
    "tested": 64,
    "greens": [
     4
@@ -3585,7 +3662,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.095,
+    "seconds": 0.104,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -3604,19 +3681,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.309
+     "seconds": 0.316
     },
     {
      "step": "localize",
-     "seconds": 0.221
+     "seconds": 0.231
     },
     {
      "step": "patch_search",
-     "seconds": 1.012
+     "seconds": 1.048
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.302
+     "seconds": 0.311
     }
    ],
    "gate": "PASS",
@@ -3629,13 +3706,13 @@
   "sabotage_full_suite": {
    "bug": "return w * h - 1 (+ a test pinning the bug)",
    "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-   "e2e_ms": 2174.7,
-   "search_s": 1.408,
+   "e2e_ms": 2194.3,
+   "search_s": 1.429,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 85,
+   "candidates": 93,
    "tested": 64,
    "greens": [
     1,
@@ -3670,6 +3747,7 @@
       "delta_outside_tests": 168,
       "edit_size": 28,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 1,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
@@ -3684,6 +3762,7 @@
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 4,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
@@ -3698,6 +3777,7 @@
       "delta_outside_tests": 168,
       "edit_size": 33,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 6,
       "inexact_on_tests": 0,
       "new_exceptions": 0,
@@ -3712,6 +3792,7 @@
       "delta_outside_tests": 168,
       "edit_size": 32,
       "grid_inputs": 168,
+      "hangs_kept": 0,
       "index": 5,
       "inexact_on_tests": 1,
       "new_exceptions": 0,
@@ -3721,7 +3802,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.613,
+    "seconds": 0.64,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -3732,19 +3813,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.324
+     "seconds": 0.331
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 1.408
+     "seconds": 1.429
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.325
+     "seconds": 0.311
     }
    ],
    "gate": "FAIL",
@@ -3756,7 +3837,7 @@
   "nothing_to_repair": {
    "bug": null,
    "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-   "e2e_ms": 316.6,
+   "e2e_ms": 320.2,
    "steps": [],
    "gate": null,
    "tests_discovered": null,
@@ -3767,7 +3848,7 @@
   "harness_crash": {
    "bug": null,
    "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-   "e2e_ms": 319.7,
+   "e2e_ms": 296.9,
    "steps": [],
    "gate": null,
    "tests_discovered": null,

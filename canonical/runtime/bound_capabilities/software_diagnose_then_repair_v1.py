@@ -360,6 +360,8 @@ def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[st
         return {}
     out: dict[int, Any] = {}
     for k, v in data.items():
+        if not str(k).lstrip("-").isdigit():
+            continue                      # "_per_candidate_s": the measured budget, informational
         if isinstance(v, list) and len(v) == 2:
             out[int(k)] = (int(v[0]), float(v[1]))
         else:
@@ -832,6 +834,17 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             stage2: dict[str, Any] = {}
             suspicious = [i for i in search["green_indices"] if _overfit_signature(candidates[i - 1][0], nums, strings)]
             only_suspicious = bool(search["green_indices"]) and len(suspicious) == len(search["green_indices"])
+            if search["winner"] and search["winner"]["index"] in suspicious and not only_suspicious:
+                # the witness chose a green that carries the overfit signature while
+                # clean greens exist (measured: mergesort -- `len(arr) < 2` with the test
+                # literal 2, beside `len(arr) <= 1`): re-rank the clean ones alone
+                clean = [(i, candidates[i - 1][1]) for i in search["green_indices"] if i not in suspicious]
+                chosen = make_choose(target_rel, source_text, candidates, expected_rows)(clean) if len(clean) > 1 else clean[0][0]
+                replay = _replay(tree, target_rel, candidates[chosen - 1][1], run_tests, scratch_root)
+                if all(r == 0 for r in replay):
+                    search = {**search, "winner": {"index": chosen, "mutation": candidates[chosen - 1][0],
+                                                   "candidate": candidates[chosen - 1][1], "replay_returncodes": replay,
+                                                   "rechosen_from": clean and [i for i, _ in clean]}}
             if (not search["winner"] or only_suspicious) and search["stop_reason"] in ("EXHAUSTED", "VERIFIED") \
                     and deadline - time.monotonic() > 10:
                 # stage 2: no single edit is green -- or every green one carries an
@@ -843,13 +856,25 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                 # singles on the top-ranked line only (a two-edit fix inside one statement),
                 # best fitness first; with one failing test fitness is flat and search
                 # order (cheapest edits first) decides the window
-                top_line = candidates[0][0].get("lineno") if candidates else None
+                # ... on each of the top-ranked lines in turn, bounded by compose_limit
+                # (the spectrum ties every line a failing test executes; measured:
+                # mergesort's two-token fix `== 0` -> `<= 1` sits on the fourth-ranked line)
+                top_lines: list[int] = []
+                for d, _ in candidates:
+                    if d.get("lineno") not in top_lines and d.get("lineno") is not None:
+                        top_lines.append(d["lineno"])
+                    if len(top_lines) >= 8:
+                        break
                 fit = sorted(search["attempts"], key=lambda a: (a["returncode"], a.get("distance", 1e9), a["index"]))
-                order = [a["index"] for a in fit if a["returncode"] < 1000
-                         and a["mutation"].get("lineno") == top_line
-                         and a["mutation"].get("kind") != "GUARD_INSERT"][:int(args.get("compose_from") or 24)]
-                pairs = candidates_v1.compose_pairs(source_text, candidates, order,
-                                                    limit=int(args.get("compose_limit") or 200))
+                pairs = []
+                limit = int(args.get("compose_limit") or 200)
+                for top_line in top_lines:
+                    order = [a["index"] for a in fit if a["returncode"] < 1000
+                             and a["mutation"].get("lineno") == top_line
+                             and a["mutation"].get("kind") != "GUARD_INSERT"][:int(args.get("compose_from") or 24)]
+                    pairs += candidates_v1.compose_pairs(source_text, candidates, order, limit=limit - len(pairs))
+                    if len(pairs) >= limit:
+                        break
                 if pairs:
                     base = len(candidates)
                     s2 = run_search(target_rel, pairs, make_choose(target_rel, source_text, pairs, expected_rows))
@@ -916,8 +941,19 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             window = int(args.get("compose_from") or 24)
             for r in per_file:
                 fit = sorted(r["search"]["attempts"], key=lambda a: (a["returncode"], a.get("distance", 1e9), a["index"]))
-                order = [a["index"] for a in fit if a["returncode"] < 1000 and a["index"] <= len(r["candidates"])
-                         and a["mutation"].get("kind") not in ("GUARD_INSERT", "COMPOSE")][:window]
+                eligible = [a for a in fit if a["returncode"] < 1000 and a["index"] <= len(r["candidates"])
+                            and a["mutation"].get("kind") not in ("GUARD_INSERT", "COMPOSE")]
+                # the window is line-diverse: hunks pair edits on different lines, so no
+                # one line's many equal-fitness singles may crowd the other line's out
+                per_line: dict[Any, int] = {}
+                order = []
+                for a in eligible:
+                    ln = a["mutation"].get("lineno")
+                    if per_line.get(ln, 0) < max(2, window // 4):
+                        order.append(a["index"])
+                        per_line[ln] = per_line.get(ln, 0) + 1
+                    if len(order) >= window:
+                        break
                 pools.append((r["target_rel"], r["candidates"], order))
             originals = {r["target_rel"]: r["source_text"] for r in per_file}
             hunks = candidates_v1.compose_hunks(originals, pools, limit=int(args.get("compose_limit") or 200))

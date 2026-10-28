@@ -663,15 +663,19 @@ def test_a_missing_statement_is_copied_from_elsewhere_in_the_file(tmp_path: Path
 
 def test_two_statements_in_the_wrong_order_are_swapped(tmp_path: Path):
     _fixture(tmp_path)
+    # Horner's rule with the two steps in the wrong order: double, then add -- no
+    # one-expression edit is equivalent (`out.append(acc)` / `acc += x` was: the
+    # name-level extension `out.append(acc + x)` is the same program)
     _calc(tmp_path,
-          "def running(xs):\n    out = []\n    acc = 0\n    for x in xs:\n        out.append(acc)\n        acc += x\n    return out\n",
-          "from pkg.calc import running\n\ndef test_running():\n    assert running([1, 2, 3]) == [1, 3, 6]\n    assert running([4]) == [4]\n")
+          "def fold(xs):\n    acc = 0\n    for x in xs:\n        acc += x\n        acc *= 2\n    return acc\n",
+          "from pkg.calc import fold\n\ndef test_fold():\n    assert fold([1, 2, 3]) == 11\n    assert fold([4]) == 4\n"
+          "    assert fold([1, 1, 1, 1]) == 15\n")
     result = dr.run(_args(deadline_s=300), tmp_path)
     assert result["status"] == "VERIFIED_PATCH", result["status"]
     patched = (tmp_path / "proj" / "pkg" / "calc.py").read_text()          # the tree is never written ...
-    assert "out.append(acc)\n        acc += x" in patched
+    assert "acc += x\n        acc *= 2" in patched
     diff = (tmp_path / result["diff_path"]).read_text()                     # ... the diff swaps them
-    assert "+        acc += x\n" in diff and "-        acc += x\n" in diff
+    assert "+        acc *= 2\n" in diff and "-        acc *= 2\n" in diff
     search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
     assert search["winning_mutation"]["kind"] == "STMT_SWAP"
 
@@ -791,7 +795,7 @@ def test_a_coupled_bug_across_two_files_is_repaired_as_one_patch_set(tmp_path: P
     assert all(f["greens"] == [] for f in search["files_searched"])          # no file alone is green
     assert search["compose_hunks"]["reason"] == "NO_SINGLE_FILE_GREEN" and search["compose_hunks"]["stop_reason"] == "VERIFIED"
     assert search["winning_mutation"]["kind"] == "COMPOSE_HUNKS" and search["winning_mutation"]["files"] == ["pkg/calc.py", "pkg/util.py"]
-    assert search["witness"]["status"] == "MEASURED"
+    assert search["witness"]["status"] in ("MEASURED", "SINGLE_GREEN")     # one green pair under the line-diverse window
     assert result["seconds"] < 20
 
 
@@ -999,3 +1003,83 @@ def test_postconditions_are_parsed_from_the_owning_callables_docstring_only():
     assert w.postconditions(src, "g") == [] and w.postconditions("def (", "f") == []
     program = w.probe_program("pkg.calc", "f", [[1], [2]], "o.json", params=["x"], posts=["_ == 2 * x"])
     assert "POSTS = ['_ == 2 * x']" in program and "'R!'" in program
+
+
+# --- templates measured on QuixBugs (pass 19): name-level edits, slices, argument order ------
+
+def test_name_level_templates_cover_the_quixbugs_fix_patterns():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    src = ("def kth(arr, k, lo, counts):\n    above = arr\n    n = len(arr)\n    s = '' + arr\n"
+           "    if any(x for x in arr):\n        return kth(above, k)\n    for x in arr:\n        pass\n    return [] if lo < n else arr[k]\n")
+    rows = c.generate(src, [1, 2], [], [6, 9, 3, 7, 4])
+    kd = {(d["kind"], d["detail"]) for d, _ in rows}
+    texts = [t for _, t in rows]
+    assert ("NAME_OFFSET", "k - 1") in kd and ("NAME_OFFSET", "k + 1") in kd            # j -> j - 1 (lcs_length, pascal)
+    assert ("NAME_OFFSET", "len(arr) - 1") in kd                                       # len(x) - 1 (next_palindrome)
+    assert ("EXPR_EXTEND", "k Sub counts") in kd                                       # kth(above, k - num_lessoreq)
+    assert ("NAME_REPLACE", "arr->counts") in kd and ("NAME_REPLACE", "any->all") in kd  # bucketsort, sieve
+    assert ("ARG_SWAP", "args 0<->1") in kd and ("CALL_UNWRAP", "kth(x) -> x") not in kd  # gcd; a 2-arg call is not unwrapped
+    assert ("CALL_UNWRAP", "len(x) -> x") in kd                                        # yield flatten(x) -> yield x
+    assert ("SLICE_INSERT", "arr[1:]") in kd and ("SLICE_INSERT", "arr[k:]") in kd       # b[1:] (lcs), arr[k:] (kheapsort)
+    assert ("OPERAND_SWAP", "Add") in kd and any("arr + ''" in t for t in texts)        # to_base: string order
+    assert ("CONSTANT_REPLACE", "[] -> [[]]") in kd                                    # subsequences
+    assert ("EXPR_EXTEND", "max(0, _)") in kd and any("above = max(0, arr)" in t for t in texts)  # max_sublist_sum
+    assert ("EXPR_EXTEND", "counts Add <expr>") in kd                                  # powerset: `rest + [...]`
+    # the nearest comparison first: `<` -> `<=` before `>=` before `>`
+    swaps = [d["detail"] for d, _ in rows if d["kind"] == "COMPARE_SWAP" and d["lineno"] == 9]
+    assert swaps[:3] == ["Lt->LtE", "Lt->GtE", "Lt->Gt"]
+    # every candidate still parses
+    import ast as _ast
+    for t in texts:
+        _ast.parse(t)
+
+
+def test_a_missing_append_after_a_loop_is_inserted_for_a_list_the_function_builds():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    src = ("def shunting_yard(tokens):\n    rpntokens = []\n    opstack = []\n    for token in tokens:\n"
+           "        while opstack and token <= opstack[-1]:\n            rpntokens.append(opstack.pop())\n    return rpntokens\n")
+    rows = c.statement_candidates(src, [6, 5])
+    details = [d["detail"] for d, _ in rows if d["kind"] == "STMT_INSERT"]
+    assert "after loop: opstack.append(token)" in details            # opstack is only ever `[]` here: still a list
+    cand = next(t for d, t in rows if d["detail"] == "after loop: opstack.append(token)")
+    assert "            rpntokens.append(opstack.pop())\n        opstack.append(token)\n    return rpntokens\n" in cand
+
+
+def test_synthesized_greens_do_not_close_the_search_and_judged_greens_on_other_lines_stay_in_the_pool():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    hole = {"kind": "HOLE_SYNTH", "lineno": 3}
+    tmpl3 = {"kind": "EXPR_EXTEND", "lineno": 3}
+    tmpl5 = {"kind": "COMPARE_SWAP", "lineno": 5}
+    pool, line = c.green_pool([(100, "a", hole), (101, "b", hole)], 4)
+    assert line is None and [i for i, _ in pool] == [100, 101]                        # nothing closes yet
+    pool, line = c.green_pool([(100, "a", hole), (113, "c", tmpl3), (139, "d", tmpl5)], 4)
+    assert line == 3 and [i for i, _ in pool] == [100, 113]                           # pytest path: closing line only
+    pool, line = c.green_pool([(100, "a", hole), (113, "c", tmpl3), (139, "d", tmpl5)], 4, all_lines=True)
+    assert line == 3 and [i for i, _ in pool] == [100, 113, 139]                      # in-process: judged greens stay
+    pool, _ = c.green_pool([(i, "x", tmpl5) for i in range(10)], 2, all_lines=True)
+    assert [i for i, _ in pool] == [0, 1]                                             # budget per line
+
+
+def test_the_witness_does_not_reward_preserving_a_hang_of_the_original():
+    from canonical.runtime import patch_differential_witness_v1 as w
+    original = [["R", "0"], ["E", "Timeout"], ["E", "Timeout"], ["R", "c"]]
+    cands = [(1, [["R", "x"], ["E", "Timeout"], ["E", "Timeout"], ["R", "c"]]),   # keeps both hangs
+             (2, [["R", "x"], ["R", "-1"], ["R", "-1"], ["R", "c"]])]             # terminates where the original looped
+    rows = w.rank(original, cands, n_test_inputs=1)
+    assert [r["index"] for r in rows] == [2, 1]
+    assert rows[0]["delta_outside_tests"] == 0 and rows[1]["new_exceptions"] == 0
+    # ... and a hang the candidate introduces counts as behaviour it added
+    rows = w.rank([["R", "0"], ["R", "a"]], [(3, [["R", "x"], ["E", "Timeout"]]), (4, [["R", "x"], ["R", "b"]])], n_test_inputs=1)
+    assert [r["index"] for r in rows] == [4, 3] and rows[1]["new_exceptions"] == 1
+
+
+def test_the_probe_program_bounds_every_input_and_reports_a_timeout_row(tmp_path: Path):
+    import subprocess
+    from canonical.runtime import patch_differential_witness_v1 as w
+    (tmp_path / "m.py").write_text("def f(x):\n    while x > 1:\n        pass\n    return x\n")
+    prog = w.probe_program("m", "f", [[0], [1], [5]], "rows.json", None, 0, params=["x"], per_input_s=0.2, n_test_inputs=2)
+    t0 = time.monotonic()
+    subprocess.run([sys.executable, "-c", prog], cwd=tmp_path, check=True, timeout=30)
+    rows = json.loads((tmp_path / "rows.json").read_text())
+    assert rows == [["R", "0"], ["R", "1"], ["E", "Timeout"]]
+    assert time.monotonic() - t0 < 5

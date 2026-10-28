@@ -337,12 +337,16 @@ def property_inputs(test_inputs: list[list[Any]], arity: int, n: int = PROPERTY_
 
 def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel: str,
                   cls: str | None = None, n_ctor: int = 0, params: list[str] | None = None,
-                  posts: list[str] | None = None) -> str:
+                  posts: list[str] | None = None, per_input_s: float = 0.5, n_test_inputs: int = 0,
+                  total_budget_s: float = 10.0) -> str:
     """Python source that imports ``module_name`` and writes one outcome per input to
     ``out_rel``; for a method each input is constructor literals + call literals and
     the outcome is the result followed by the instance's simple attributes.  With
     ``posts`` (docstring postconditions) a row whose result violates one -- or on which
-    a postcondition cannot be evaluated -- is tagged 'R!' instead of 'R'."""
+    a postcondition cannot be evaluated -- is tagged 'R!' instead of 'R'.  Every call
+    runs under a ``per_input_s`` alarm: an input the version loops on is the row
+    ['E', 'Timeout'] (measured: find_first_in_sorted's defect loops on absent keys and
+    the witness waited 60 s per version)."""
     if cls is None:
         get = ("    MOD = importlib.import_module(" + repr(module_name) + ")\n"
                "    f = getattr(MOD, " + repr(func) + ")\n")
@@ -355,9 +359,15 @@ def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel:
                "(C(*a[:" + str(n_ctor) + "]))\n")
         call = "            r, st = f(*args); rows.append([_tag(args[" + str(n_ctor) + ":], r), repr(r)[:200], st])\n"
     return (
-        "import importlib, json, os, sys\n"
+        "import importlib, json, os, signal, sys\n"
         "sys.path.insert(0, os.getcwd())\n"
         "rows = []\n"
+        "class _T(BaseException):\n"
+        "    pass\n"
+        "def _alarm(*a):\n"
+        "    raise _T()\n"
+        "signal.signal(signal.SIGALRM, _alarm)\n"
+        "PER = " + repr(float(per_input_s)) + "\n"
         "POSTS = " + repr(list(posts or [])) + "\n"
         "PARAMS = " + repr(list(params or [])) + "\n"
         "SAFE = {'abs': abs, 'min': min, 'max': max, 'len': len, 'sum': sum, 'int': int, 'float': float, 'bool': bool,\n"
@@ -383,12 +393,29 @@ def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel:
         + get +
         "except BaseException as exc:\n"
         "    f = None; rows.append(['IMPORT', type(exc).__name__])\n"
+        "import time as _time\n"
+        "N_TEST = " + repr(int(n_test_inputs)) + "\n"
+        "BUDGET = " + repr(float(total_budget_s)) + "\n"
         "if f is not None:\n"
-        "    for args in json.loads(" + repr(json.dumps(inputs)) + "):\n"
+        "    _start = _time.monotonic(); slowest = 0.0; per = PER\n"
+        "    for k, args in enumerate(json.loads(" + repr(json.dumps(inputs)) + ")):\n"
+        "        if k == N_TEST and N_TEST > 0:\n"
+        "            # the budget per probe input is measured on the tests' own inputs: 20x the\n"
+        "            # slowest of them (bounded) -- an input the version loops on costs that, not PER\n"
+        "            per = max(0.02, min(PER, 20.0 * slowest))\n"
+        "        if _time.monotonic() - _start > BUDGET:\n"
+        "            rows.append(['E', 'Budget']); continue\n"
+        "        t0 = _time.monotonic()\n"
+        "        signal.setitimer(signal.ITIMER_REAL, per)\n"
         "        try:\n"
         + call +
+        "        except _T:\n"
+        "            rows.append(['E', 'Timeout'])\n"
         "        except BaseException as exc:\n"
         "            rows.append(['E', type(exc).__name__])\n"
+        "        finally:\n"
+        "            signal.setitimer(signal.ITIMER_REAL, 0)\n"
+        "        slowest = max(slowest, _time.monotonic() - t0)\n"
         "open(" + repr(out_rel) + ", 'w', encoding='utf-8').write(json.dumps(rows))\n"
     )
 
@@ -402,6 +429,11 @@ def edit_size(original_text: str, candidate_text: str) -> int:
         if tag != "equal":
             n += sum(len(x.strip()) for x in a[i1:i2]) + sum(len(x.strip()) for x in b[j1:j2])
     return n
+
+
+def _unknown(row: Any) -> bool:
+    """A probe row that says nothing about the version's answer: it looped or the budget ran out."""
+    return isinstance(row, list) and len(row) == 2 and row[0] == "E" and row[1] in ("Timeout", "Budget")
 
 
 def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | None]],
@@ -421,7 +453,18 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
                          "witness": "UNAVAILABLE"})
             continue
         on_tests = sum(1 for a, b in zip(original[:n_test_inputs], outcomes[:n_test_inputs]) if a != b)
-        outside = sum(1 for a, b in zip(original[n_test_inputs:], outcomes[n_test_inputs:]) if a != b)
+        # an input the original looped on (or ran out of budget for) is not a behaviour
+        # to preserve: it is excluded from the outside delta, so a candidate that
+        # terminates there is not penalised against one that keeps the hang
+        # (measured: find_first_in_sorted chose `hi = x % len(arr)` -- same hangs as the
+        # original on absent keys -- over `lo < hi`, which terminates)
+        outside = sum(1 for a, b in zip(original[n_test_inputs:], outcomes[n_test_inputs:])
+                      if a != b and not _unknown(a))
+        # ... and the candidate's own hangs count as behaviour it introduced
+        hangs = sum(1 for a, b in zip(original, outcomes) if _unknown(b) and not _unknown(a))
+        # a hang of the original that the candidate still has: the weakest tiebreak,
+        # after everything the tests and the contract say
+        hangs_kept = sum(1 for a, b in zip(original, outcomes) if _unknown(a) and _unknown(b))
         # the tests' literal, exactly: `12` is not `12.0` even though `==` accepts it
         inexact = 0
         for o, e in zip(outcomes[:n_test_inputs], expected_reprs or []):
@@ -430,10 +473,12 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         # a stated postcondition violated (any input), and inputs the original answered
         # that the candidate turns into an exception: both before the plain delta
         posts_broken = sum(1 for o in outcomes if isinstance(o, list) and o and o[0] == "R!")
-        new_exc = sum(1 for a, b in zip(original, outcomes)
-                      if isinstance(a, list) and isinstance(b, list) and a and b and a[0] != "E" and b[0] == "E")
+        new_exc = hangs + sum(1 for a, b in zip(original, outcomes)
+                              if isinstance(a, list) and isinstance(b, list) and a and b and a[0] != "E"
+                              and b[0] == "E" and not _unknown(b))
         rows.append({"index": index, "delta_outside_tests": outside, "delta_on_tests": on_tests,
                      "inexact_on_tests": inexact, "postcondition_violations": posts_broken, "new_exceptions": new_exc,
+                     "hangs_kept": hangs_kept,
                      "edit_size": (sizes or {}).get(index, 0),
                      "grid_inputs": len(original) - n_test_inputs, "witness": "MEASURED"})
     # behavioural classes among the greens themselves: two candidates with the same
@@ -462,7 +507,7 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         # are one behaviour class on an int/None grid, and the smaller edit is the less
         # specific guard); edit_size is reported, not ranked on
         return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["postcondition_violations"],
-                r["new_exceptions"], r["delta_outside_tests"], r["inexact_on_tests"],
+                r["new_exceptions"], r["delta_outside_tests"], r["inexact_on_tests"], r.get("hangs_kept", 0),
                 first_of_class[r["behaviour_class"]], 0, r["index"])
     rows.sort(key=key)
     measured = [r for r in rows if r["witness"] == "MEASURED"]
@@ -475,6 +520,7 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         slack = max(1, int(0.05 * n_out))
         tied = {r["behaviour_class"] for r in measured
                 if key(r)[:3] == key(top)[:3] and r["inexact_on_tests"] == top["inexact_on_tests"]
+                and r.get("hangs_kept", 0) == top.get("hangs_kept", 0)
                 and abs(r["delta_outside_tests"] - top["delta_outside_tests"]) <= slack}
         for r in rows:
             r["tie_at_top"] = len(tied) > 1
@@ -510,7 +556,8 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
     inputs += [g for g in prop_rows if g not in inputs]
     posts = postconditions(original_text, name, cls)
     out_rel = ".brain_diagnose/witness.json"
-    program = probe_program(module_name, name, inputs, out_rel, cls, n_ctor, params=list(c["params"]), posts=posts)
+    program = probe_program(module_name, name, inputs, out_rel, cls, n_ctor, params=list(c["params"]), posts=posts,
+                            n_test_inputs=len(t_inputs))
     import shutil
     base = scratch / "witness"
     shutil.rmtree(base, ignore_errors=True)

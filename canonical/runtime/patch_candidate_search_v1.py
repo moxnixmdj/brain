@@ -54,8 +54,16 @@ from typing import Any, Callable, Iterable, Iterator
 
 _ARITH = [ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow]
 _CMP = [ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE]
+# boundary flip first (`<` <-> `<=`), then the negation (`<=` -> `>`), then the rest
+_CMP_NEAR = {ast.Lt: [ast.LtE, ast.GtE, ast.Gt, ast.NotEq, ast.Eq], ast.LtE: [ast.Lt, ast.Gt, ast.GtE, ast.Eq, ast.NotEq],
+             ast.Gt: [ast.GtE, ast.LtE, ast.Lt, ast.NotEq, ast.Eq], ast.GtE: [ast.Gt, ast.Lt, ast.LtE, ast.Eq, ast.NotEq],
+             ast.Eq: [ast.NotEq, ast.LtE, ast.GtE, ast.Lt, ast.Gt], ast.NotEq: [ast.Eq, ast.Lt, ast.Gt, ast.LtE, ast.GtE]}
 _CMP_PAIRS = {ast.Is: ast.IsNot, ast.IsNot: ast.Is, ast.In: ast.NotIn, ast.NotIn: ast.In}
 _BOOL = {ast.And: ast.Or, ast.Or: ast.And}
+_BUILTIN_PAIRS = {"any": ["all"], "all": ["any"], "min": ["max"], "max": ["min"], "sorted": ["reversed", "list"],
+                  "reversed": ["sorted"], "floor": ["ceil"], "ceil": ["floor"], "len": ["sum"], "sum": ["len"],
+                  "int": ["float", "round"], "round": ["int"], "str": ["repr"], "list": ["set", "tuple"], "set": ["list"],
+                  "tuple": ["list"], "next": ["iter"], "range": ["reversed"]}
 _SKIP = {".git", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "node_modules"}
 
 
@@ -186,6 +194,22 @@ def test_literals(test_paths: Iterable[pathlib.Path]) -> tuple[list[Any], list[s
     return nums, strings
 
 
+def _chain_names(node: ast.AST) -> set[str]:
+    """Names that are operands of the expression's own arithmetic chain (through
+    BinOp/UnaryOp only, not into calls, subscripts or comprehensions)."""
+    out: set[str] = set()
+    stack = [node]
+    while stack:
+        n = stack.pop()
+        if isinstance(n, ast.Name):
+            out.add(n.id)
+        elif isinstance(n, ast.BinOp):
+            stack += [n.left, n.right]
+        elif isinstance(n, ast.UnaryOp):
+            stack.append(n.operand)
+    return out
+
+
 def _scope_names(tree: ast.AST) -> dict[int, list[str]]:
     """id(node) -> names in scope at that node: the owning function's parameters and
     the locals assigned before the node's line.  Module level: assigned module names."""
@@ -215,6 +239,21 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
     returns = {id(n.value) for n in ast.walk(tree) if isinstance(n, ast.Return) and n.value is not None}
     assigned_values = {id(n.value) for n in ast.walk(tree) if isinstance(n, (ast.Assign, ast.AugAssign, ast.AnnAssign)) and n.value is not None}
     scope = _scope_names(tree)
+    call_funcs = {id(n.func) for n in ast.walk(tree) if isinstance(n, ast.Call)}
+    arg_like: set[int] = set()
+    for n in ast.walk(tree):
+        if isinstance(n, ast.Call):
+            arg_like.update(id(a) for a in n.args)
+        elif isinstance(n, ast.Subscript):
+            sl = n.slice
+            arg_like.update(id(e) for e in (sl.elts if isinstance(sl, ast.Tuple) else [sl]))
+            if isinstance(sl, ast.Slice):
+                arg_like.update(id(e) for e in (sl.lower, sl.upper, sl.step) if e is not None)
+        elif isinstance(n, ast.Compare):
+            arg_like.update(id(e) for e in (n.left, *n.comparators))
+        elif isinstance(n, (ast.For, ast.comprehension)):
+            arg_like.add(id(n.iter))
+    binop_operands = {id(e) for n in ast.walk(tree) if isinstance(n, ast.BinOp) for e in (n.left, n.right)}
     guard_consts: list[Any] = [None, 0]
     for v in nums + strings:
         if v not in guard_consts:
@@ -226,14 +265,17 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
         # (return w -> return w * h).  The original stays a sub-expression: smallest edit
         # that adds code, and the one PAR/Prophet-style template that adds code at all.
         if id(node) in returns or id(node) in assigned_values:
-            used = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
+            # a name already a direct operand of the expression is not added again; one
+            # used deeper inside (a comprehension's source) may well be the missing
+            # term (measured: powerset -- `rest_subsets + [[first] + s for s in rest_subsets]`)
+            used = _chain_names(node)
             for name in scope.get(id(node), []):
                 if name in used:
                     continue
                 for t in (ast.Mult, ast.Add, ast.Sub, ast.FloorDiv, ast.Div, ast.Mod):
                     yield node, "EXPR_EXTEND", "<expr> " + t.__name__ + " " + name, (
                         lambda n, t=t, name=name: ast.BinOp(left=n, op=t(), right=ast.Name(id=name, ctx=ast.Load())))
-                    if t in (ast.Sub, ast.FloorDiv, ast.Div, ast.Mod):
+                    if t in (ast.Add, ast.Sub, ast.FloorDiv, ast.Div, ast.Mod):     # Add: str/list order matters
                         yield node, "EXPR_EXTEND", name + " " + t.__name__ + " <expr>", (
                             lambda n, t=t, name=name: ast.BinOp(left=ast.Name(id=name, ctx=ast.Load()), op=t(), right=n))
         # a missing guard: the function's first statement gets `if <param> is None: return <c>`
@@ -248,7 +290,10 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
                             lambda n, test=test, c=c: _Block([ast.If(test=test, body=[ast.Return(value=ast.Constant(value=c))], orelse=[]), n]))
         if isinstance(node, ast.Compare) and len(node.ops) == 1:
             op = type(node.ops[0])
-            targets = [t for t in _CMP if t is not op] if op in _CMP else ([_CMP_PAIRS[op]] if op in _CMP_PAIRS else [])
+            # nearest operator first (boundary flips before direction flips before
+            # (in)equality): the witness cannot separate `lo < hi` from `lo != hi` on a
+            # loop that keeps lo <= hi, and the generator's order is the tiebreak
+            targets = list(_CMP_NEAR.get(op, [])) if op in _CMP else ([_CMP_PAIRS[op]] if op in _CMP_PAIRS else [])
             for t in targets:
                 yield node, "COMPARE_SWAP", op.__name__ + "->" + t.__name__, (
                     lambda n, t=t: ast.Compare(left=n.left, ops=[t()], comparators=n.comparators))
@@ -264,9 +309,73 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
                 if t is not op:
                     yield node, "BINOP_SWAP", op.__name__ + "->" + t.__name__, (
                         lambda n, t=t: ast.BinOp(left=n.left, op=t(), right=n.right))
-            if op in (ast.Sub, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow):
+            if op in (ast.Add, ast.Sub, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow):   # Add: `result + c` vs `c + result`
                 yield node, "OPERAND_SWAP", op.__name__, (
                     lambda n: ast.BinOp(left=n.right, op=type(n.op)(), right=n.left))
+        if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load) and id(node) not in call_funcs:
+            # off-by-one on a name wherever it stands (an index, an argument, a bound):
+            # j -> j - 1, r -> r + 1 -- the most frequent one-line fix in QuixBugs/Defects4J
+            for t, lab in ((ast.Sub, "- 1"), (ast.Add, "+ 1")):
+                yield node, "NAME_OFFSET", node.id + " " + lab, (
+                    lambda n, t=t: ast.BinOp(left=ast.Name(id=n.id, ctx=ast.Load()), op=t(), right=ast.Constant(value=1)))
+            # the wrong variable: another name in scope of the same function
+            for other in scope.get(id(node), []):
+                if other != node.id:
+                    yield node, "NAME_REPLACE", node.id + "->" + other, (lambda n, other=other: ast.Name(id=other, ctx=ast.Load()))
+            # a name that is an argument, an index or a comparison operand joined to another
+            # in-scope name: kth(above, k) -> kth(above, k - num_lessoreq)
+            if id(node) in arg_like:
+                for other in scope.get(id(node), []):
+                    if other == node.id:
+                        continue
+                    for t in (ast.Sub, ast.Add):
+                        yield node, "EXPR_EXTEND", node.id + " " + t.__name__ + " " + other, (
+                            lambda n, t=t, other=other: ast.BinOp(left=ast.Name(id=n.id, ctx=ast.Load()), op=t(),
+                                                                  right=ast.Name(id=other, ctx=ast.Load())))
+        if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load) and id(node) in arg_like:
+            # an argument or index off by one element: b -> b[1:], arr -> arr[:-1]
+            bounds: list[tuple[Any, Any, str]] = [(1, None, "[1:]"), (None, -1, "[:-1]")]
+            for other in scope.get(id(node), []):        # arr -> arr[k:] (the first k already consumed)
+                if other != node.id:
+                    bounds += [(other, None, "[" + other + ":]"), (None, other, "[:" + other + "]")]
+            for lo, hi, lab in bounds:
+                def _bound(v: Any) -> ast.expr | None:
+                    return None if v is None else (ast.Name(id=v, ctx=ast.Load()) if isinstance(v, str) else ast.Constant(value=v))
+                yield node, "SLICE_INSERT", node.id + lab, (
+                    lambda n, lo=lo, hi=hi: ast.Subscript(value=ast.Name(id=n.id, ctx=ast.Load()),
+                                                          slice=ast.Slice(lower=_bound(lo), upper=_bound(hi)), ctx=ast.Load()))
+        if isinstance(node, ast.List) and not node.elts and isinstance(node.ctx, ast.Load):
+            # the empty answer of the wrong depth: [] -> [[]]
+            yield node, "CONSTANT_REPLACE", "[] -> [[]]", (lambda n: ast.List(elts=[ast.List(elts=[], ctx=ast.Load())], ctx=ast.Load()))
+        if id(node) in assigned_values and not isinstance(node, ast.Constant):
+            # a running value that must not go negative / must stay bounded
+            for wrap in ("max(0, _)", "abs(_)"):
+                yield node, "EXPR_EXTEND", wrap, (
+                    lambda n, wrap=wrap: ast.Call(func=ast.Name(id=wrap.split("(")[0], ctx=ast.Load()),
+                                                  args=([ast.Constant(value=0)] if wrap.startswith("max") else []) + [n],
+                                                  keywords=[]))
+        if isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and (id(node) in arg_like or id(node) in binop_operands
+                                                     or id(node) in assigned_values):
+                # len(x) -> len(x) - 1 where it is a bound, an index, a term or an assigned value
+                for t, lab in ((ast.Sub, "- 1"), (ast.Add, "+ 1")):
+                    yield node, "NAME_OFFSET", ast.unparse(node)[:40] + " " + lab, (
+                        lambda n, t=t: ast.BinOp(left=n, op=t(), right=ast.Constant(value=1)))
+            if isinstance(node.func, ast.Name) and node.func.id in _BUILTIN_PAIRS:
+                # any <-> all, min <-> max, floor <-> ceil ... the dual builtin
+                for other in _BUILTIN_PAIRS[node.func.id]:
+                    yield node, "NAME_REPLACE", node.func.id + "->" + other, (
+                        lambda n, other=other: ast.Call(func=ast.Name(id=other, ctx=ast.Load()), args=n.args, keywords=n.keywords))
+            pos = [a for a in node.args if not isinstance(a, ast.Starred)]
+            if len(pos) == len(node.args) and 2 <= len(pos) <= 4:
+                for i in range(len(pos)):
+                    for j in range(i + 1, len(pos)):
+                        yield node, "ARG_SWAP", "args " + str(i) + "<->" + str(j), (
+                            lambda n, i=i, j=j: ast.Call(func=n.func, args=[n.args[j] if k == i else n.args[i] if k == j else a
+                                                                        for k, a in enumerate(n.args)], keywords=n.keywords))
+            if len(pos) == 1 and not node.keywords and not isinstance(node.func, ast.Attribute):
+                # the call is spurious: f(x) -> x  (yield flatten(x) -> yield x)
+                yield node, "CALL_UNWRAP", ast.unparse(node.func)[:40] + "(x) -> x", (lambda n: n.args[0])
         if isinstance(node, ast.BoolOp):
             t = _BOOL[type(node.op)]
             yield node, "BOOL_SWAP", type(node.op).__name__ + "->" + t.__name__, (
@@ -300,8 +409,9 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
 # within one line: the cheapest, most specific edits first; guards are the most
 # speculative (many of them, any one of them plausible) and go last
 _KIND_ORDER = {"BINOP_DROP": 0, "COMPARE_SWAP": 0, "BINOP_SWAP": 0, "BOOL_SWAP": 0, "NOT_TOGGLE": 0, "OPERAND_SWAP": 0,
+               "ARG_SWAP": 0, "CALL_UNWRAP": 0, "NAME_OFFSET": 0,
                "EXPR_SYNTH": 0.5, "HOLE_SYNTH": 0.5,            # synthesized: after the cheap swaps, before constants
-               "CONSTANT_REPLACE": 1, "STRING_REPLACE": 1, "EXPR_EXTEND": 1,
+               "CONSTANT_REPLACE": 1, "STRING_REPLACE": 1, "EXPR_EXTEND": 1, "NAME_REPLACE": 1, "SLICE_INSERT": 1,
                "STMT_SWAP": 2, "STMT_DELETE": 2, "RETURN_INSERT": 2, "STMT_INSERT": 2, "GUARD_INSERT": 3}
 
 
@@ -540,6 +650,51 @@ def compose_hunks(originals: dict[str, str], pools: list[tuple[str, list[tuple[d
     return out
 
 
+_SYNTH_KINDS = ("HOLE_SYNTH", "EXPR_SYNTH")
+
+
+def green_pool(items: list[tuple[int, str, dict[str, Any]]], budget: int,
+               all_lines: bool = False) -> tuple[list[tuple[int, str]], int | None]:
+    """The greens the witness will rank, and the line that closes the search.
+
+    ``items`` are the greens so far in search order as (index, text, descriptor).
+    Template greens close the search on their first line: the pool is the first
+    ``budget`` of them on that line.  Synthesized greens (HOLE_SYNTH/EXPR_SYNTH --
+    expressions fitted to the examples) never close it on their own: they stay
+    in the pool (first ``budget``) while the search goes on to the later priority
+    lines, so a one-token template fix further down is still found and ranked
+    against them (measured: find_first_in_sorted -- four hole fillings on
+    `hi = len(arr)` ended the search before `lo < hi` two lines later; the hole
+    `hi = x % len(arr)` shipped and failed the held-out cases).  Returns
+    ``(pool, closing_line)``; ``closing_line`` is None while nothing closes.
+    With ``all_lines`` (the in-process judge, whose batches are deterministic) the
+    pool also keeps up to ``budget`` template greens from every other line already
+    judged: they cost nothing more and the witness ranks them (measured:
+    find_first_in_sorted -- `lo < hi` on line 5 was judged green in the same
+    batch as `hi = len(arr) % x` on line 3 and was thrown away by the line filter).
+    """
+    if budget <= 0:
+        return [(i, t) for i, t, _ in items], (items[0][2].get("lineno") if items else None)
+    synth = [(i, t, d) for i, t, d in items if d.get("kind") in _SYNTH_KINDS]
+    tmpl = [(i, t, d) for i, t, d in items if d.get("kind") not in _SYNTH_KINDS]
+    if not tmpl:
+        return [(i, t) for i, t, _ in synth[:budget]], None
+    line = tmpl[0][2].get("lineno")
+    if all_lines:
+        per_line: dict[Any, int] = {}
+        kept = []
+        for x in tmpl:
+            n = per_line.get(x[2].get("lineno"), 0)
+            if n < budget:
+                kept.append(x)
+                per_line[x[2].get("lineno")] = n + 1
+        tmpl = kept
+    else:
+        tmpl = [x for x in tmpl if x[2].get("lineno") == line][:budget]
+    pool = sorted(tmpl + synth[:budget], key=lambda x: x[0])
+    return [(i, t) for i, t, _ in pool], line
+
+
 def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[str, Any], str]],
              run_tests: Callable[[pathlib.Path], int], *, workers: int, deadline: float,
              max_candidates: int, scratch: pathlib.Path, green_budget: int = 4,
@@ -568,6 +723,7 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
     lock = threading.Lock()
     stop = threading.Event()
     attempts: list[dict[str, Any]] = []
+    found: list[tuple[int, str, dict[str, Any]]] = []
     greens: list[tuple[int, str]] = []
     green_line: int | None = None
     stop_reason = "EXHAUSTED"
@@ -596,9 +752,9 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
         tested += 1
         attempts.append({"index": index, "mutation": desc, "returncode": rc, "elapsed_s": round(took, 3)})
         if rc == 0:
-            greens.append((index, text))
-            if green_line is None:
-                green_line = desc.get("lineno")
+            found.append((index, text, desc))
+            found.sort(key=lambda f: f[0])
+            greens[:], green_line = green_pool(found, green_budget)
 
     pool = cf.ThreadPoolExecutor(max_workers=workers)
     winner: dict[str, Any] | None = None
@@ -606,8 +762,11 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
         queue = list(enumerate(candidates[:max_candidates], 1))
         pending: set = set()
         while queue or pending:
-            if greens and (len(greens) >= green_budget or not queue
-                           or (green_line is not None and queue[0][1][0].get("lineno") != green_line)):
+            closing = [g for g in greens if green_line is not None
+                       and next(d for i, _, d in found if i == g[0]).get("lineno") == green_line
+                       and next(d for i, _, d in found if i == g[0]).get("kind") not in _SYNTH_KINDS]
+            if greens and (not queue or (green_line is not None and
+                                         (len(closing) >= green_budget or queue[0][1][0].get("lineno") != green_line))):
                 stop.set()
                 queue = []
             while queue and len(pending) < workers and not stop.is_set():
@@ -635,8 +794,8 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
         attempts.sort(key=lambda a: a["index"])
         # in-flight runs can finish after the budget is reached; keep the budget
         # deterministic (by search order), whatever the thread timing was
-        greens.sort(key=lambda g: g[0])
-        del greens[green_budget:]
+        found.sort(key=lambda f: f[0])
+        greens[:], green_line = green_pool(found, green_budget)
         if greens:
             chosen = choose(greens) if choose else greens[0][0]
             text = next(t for i, t in greens if i == chosen)
@@ -690,13 +849,11 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
     stop_reason = "EXHAUSTED"
     winner: dict[str, Any] | None = None
 
-    def judged_greens() -> list[tuple[int, str]]:
-        # same semantics as evaluate: greens on the first green's line, by search order
-        g = [(i + 1, todo[i][1]) for i in sorted(verdicts) if verdicts[i] == 0]
-        if g and green_budget > 0:
-            line = todo[g[0][0] - 1][0].get("lineno")
-            g = [x for x in g if todo[x[0] - 1][0].get("lineno") == line][:green_budget]
-        return g
+    def judged_greens() -> tuple[list[tuple[int, str]], int | None]:
+        # same semantics as evaluate: template greens on the first such line close the
+        # search; synthesized greens are kept but do not close it (see green_pool)
+        return green_pool([(i + 1, todo[i][1], todo[i][0]) for i in sorted(verdicts) if verdicts[i] == 0], green_budget,
+                          all_lines=True)
 
     try:
         # rounds of workers*batch candidates in search order, so a search that is
@@ -721,14 +878,16 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
                             verdicts[i], distances[i] = int(rc[0]), float(rc[1])
                         else:
                             verdicts[i] = int(rc)
-                g = judged_greens()
-                if g and (len(g) >= green_budget or
-                          (pos < len(todo) and todo[pos][0].get("lineno") != todo[g[0][0] - 1][0].get("lineno"))):
-                    break
+                g, closing_line = judged_greens()
+                if g and closing_line is not None:
+                    on_line = [x for x in g if todo[x[0] - 1][0].get("lineno") == closing_line
+                               and todo[x[0] - 1][0].get("kind") not in _SYNTH_KINDS]
+                    if len(on_line) >= green_budget or (pos < len(todo) and todo[pos][0].get("lineno") != closing_line):
+                        break
         attempts = [{"index": i + 1, "mutation": todo[i][0], "returncode": verdicts[i], "judge": "in_process",
                      **({"distance": distances[i]} if i in distances else {})}
                     for i in sorted(verdicts)]
-        greens = judged_greens()
+        greens, _ = judged_greens()
         if not greens and len(verdicts) < len(todo):
             stop_reason = "DEADLINE"
         if greens:
@@ -960,6 +1119,28 @@ def statement_candidates(source_text: str, priority_lines: Iterable[int], *, max
             for k, t in enumerate(texts[:max_donors]):
                 emit((*base_key, 2, 2, k), st, "STMT_INSERT", "before: " + t[:60], lines[:a] + [indent + t + "\n"] + lines[a:])
                 emit((*base_key, 2, 2, k), st, "STMT_INSERT", "after: " + t[:60], lines[:b] + [indent + t + "\n"] + lines[b:])
+            # the element the loop never stored: after the innermost loop around the
+            # line, `L.append(N)` for a list the function appends to and a name in scope
+            # (measured: wrap's `lines.append(text)`, shunting_yard's `opstack.append(token)`)
+            loops = [lp for lp in ast.walk(fn) if isinstance(lp, (ast.For, ast.While)) and id(lp) in parent
+                     and lp.lineno <= ln <= (lp.end_lineno or lp.lineno)]
+            if loops:
+                loops.sort(key=lambda lp: (lp.end_lineno or lp.lineno) - lp.lineno)
+                lp = loops[0]
+                la, lb = _block(lines, lp)
+                lind = _indent_of(lines[la])
+                appended = []
+                for c in ast.walk(fn):
+                    if (isinstance(c, ast.Call) and isinstance(c.func, ast.Attribute) and c.func.attr == "append"
+                            and isinstance(c.func.value, ast.Name) and c.func.value.id not in appended):
+                        appended.append(c.func.value.id)
+                    elif isinstance(c, ast.Assign) and isinstance(c.value, ast.List) and not c.value.elts:
+                        appended += [t.id for t in c.targets if isinstance(t, ast.Name) and t.id not in appended]
+                params = [a.arg for a in [*fn.args.posonlyargs, *fn.args.args, *fn.args.kwonlyargs]]
+                names = params + sorted(fn_bound.get(id(fn), set()) - set(params))
+                for k, (lst, nm) in enumerate((l, n) for l in appended for n in names if n != l):
+                    emit((*base_key, 2, 2, 50 + k), lp, "STMT_INSERT", "after loop: " + lst + ".append(" + nm + ")",
+                         lines[:lb] + [lind + lst + ".append(" + nm + ")\n"] + lines[lb:])
             if id(fn) not in done_fns and not isinstance(fn.body[-1], (ast.Return, ast.Raise)):
                 done_fns.add(id(fn))
                 last = fn.body[-1]

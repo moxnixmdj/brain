@@ -274,10 +274,34 @@ def _distance(actual, expected):
     return 1.0
 
 
-def _run():
+TIMING = {}      # (module, test, row) -> (seconds, failed) measured on the original
+
+
+def _tests(mod, m, mi):
+    for name in sorted(dir(mod)):
+        fn = getattr(mod, name)
+        if name.startswith("test") and callable(fn) and getattr(fn, "__module__", None) == mod.__name__:
+            for r, kw in enumerate(_rows((m.get("cases") or {}).get(name))):
+                yield (mi, name, r), fn, kw
+
+
+EARLY_STOP = False   # set after the baseline: True when the suite is slow enough for it to matter
+
+
+def _run(baseline=False):
+    # Candidates run the tests the original fails first, fastest first, and -- when
+    # the suite itself is slow (> 50 ms) -- stop at the first failure (Qi et al. 2013,
+    # RSRepair test prioritisation): a wrong edit costs one short test, not the whole
+    # suite.  ``failed`` is then a lower bound (1 + the tests not reached) and
+    # ``distance`` the first failing assertion's.  On a fast suite every test runs and
+    # the full fitness (how many tests each edit fixes) orders composition; on a slow
+    # one that information is bought with time and is not (measured: levenshtein
+    # 94 s -> 28 s, longest_common_subsequence 115 s -> 19 s).  Never the verdict:
+    # the chosen green is replayed in full.
+    import time as _t
     failed = passed = 0
     distance = 0.0
-    for m in SPEC["modules"]:
+    for mi, m in enumerate(SPEC["modules"]):
         try:
             mod = importlib.import_module(m["import"])
         except _Timeout:
@@ -287,18 +311,26 @@ def _run():
             distance += float(m.get("tests") or 1)
             continue
         failing = set()
-        for name in sorted(dir(mod)):
-            fn = getattr(mod, name)
-            if name.startswith("test") and callable(fn) and getattr(fn, "__module__", None) == mod.__name__:
-                for kw in _rows((m.get("cases") or {}).get(name)):
-                    try:
-                        fn(**kw)
-                        passed += 1
-                    except _Timeout:
-                        raise
-                    except BaseException:
-                        failed += 1
-                        failing.add(name)
+        tests = list(_tests(mod, m, mi))
+        if not baseline:
+            tests.sort(key=lambda t: (0 if TIMING.get(t[0], (0, True))[1] else 1, TIMING.get(t[0], (0, True))[0]))
+        for k, (key, fn, kw) in enumerate(tests):
+            t0 = _t.monotonic()
+            try:
+                fn(**kw)
+                passed += 1
+                if baseline:
+                    TIMING[key] = (_t.monotonic() - t0, False)
+            except _Timeout:
+                raise
+            except BaseException:
+                failed += 1
+                failing.add(key[1])
+                if baseline:
+                    TIMING[key] = (_t.monotonic() - t0, True)
+                elif EARLY_STOP:
+                    failed += len(tests) - k - 1
+                    break
         for spec in m.get("asserts") or []:
             if spec["test"] not in failing:
                 continue
@@ -309,10 +341,32 @@ def _run():
                 raise
             except BaseException:
                 distance += 1.0
+        if failed and not baseline and EARLY_STOP:
+            failed += sum(int(x.get("tests") or 1) for x in SPEC["modules"][mi + 1:])
+            break
     return failed, passed, distance
 
 
 results = {}
+# the per-candidate budget is measured, not guessed: the original suite's own run
+# time x 5 (bounded to [0.25 s, per]) -- a candidate that loops where the original
+# took 2 ms is cut at 0.25 s instead of 5 s (measured: levenshtein 99 s -> 12 s;
+# longest_common_subsequence, whose suite itself takes 0.25 s, 99 s -> 25 s)
+import time as _time
+_purge()
+_t0 = _time.monotonic()
+signal.setitimer(signal.ITIMER_REAL, SPEC["per"])
+try:
+    _run(baseline=True)
+except BaseException:
+    pass
+finally:
+    signal.setitimer(signal.ITIMER_REAL, 0)
+_base = _time.monotonic() - _t0
+PER = max(0.25, min(float(SPEC["per"]), 5.0 * _base))
+EARLY_STOP = _base > 0.05
+results["_per_candidate_s"] = round(PER, 3)
+results["_early_stop"] = EARLY_STOP
 for i in range(SPEC["count"]):
     cand = os.path.join(ROOT, SPEC["batch"], str(i))
     for rel, raw in list(originals.items()):           # back to the original before the next candidate
@@ -326,7 +380,7 @@ for i in range(SPEC["count"]):
         with open(cand + ".py", "rb") as fh:
             _write(SPEC["target"], fh.read())
     _purge()
-    signal.alarm(SPEC["per"])
+    signal.setitimer(signal.ITIMER_REAL, PER)
     try:
         failed, passed, distance = _run()
         results[i] = [failed if failed else (0 if passed else 998), round(distance, 6)]
@@ -335,7 +389,7 @@ for i in range(SPEC["count"]):
     except BaseException:
         results[i] = [997, 997.0]
     finally:
-        signal.alarm(0)
+        signal.setitimer(signal.ITIMER_REAL, 0)
     with open(os.path.join(ROOT, SPEC["out"]), "w", encoding="utf-8") as fh:
         json.dump(results, fh)
 for rel, raw in originals.items():
