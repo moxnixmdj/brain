@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "07b931c22b97d548ce10f41a5e55c968cb8fc7ca208c5ce59aae398722cca619"
+  "value": "6ae11a59cd69f2f4a27a62c086eaaa1329d42e0f5b71ce0384e547a4ee9e6c56"
  },
  "engines": [
   {
@@ -194654,7 +194654,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_BINDER_THAT_CONSUMED_NOTHING_DOES_NOT_OUTRANK_ONE_THAT_DID_V1_20261028_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "27135d0794c971b48d79c3e90e9955c95801e29d14eb41f036c90b2b8b9edf3f",
+   "sha256": "78123b8e401f4bc364f675cc903807026f54470dad96e4f3ee3b85b32eaac84d",
    "status": "",
    "terms": {
     "20261028": 1,
@@ -194678,7 +194678,7 @@
     "file": 1,
     "first": 1,
     "frequency": 1,
-    "goal_compiler._bm25_rerank": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
     "guard": 1,
     "interprocedural": 1,
     "inverse": 1,

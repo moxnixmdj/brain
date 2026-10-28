@@ -37,11 +37,11 @@
   "route_class": "INTEGRATE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::goal_compiler._bm25_rerank::The pinned scorer already ranked the owner first at 28. The order was then rewritten by a re-ranker whose inverse document frequency is measured over the surviving shortlist rather than the corpus, and the selection guard read ranked[0] as if it were the best bindable candidate.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The pinned scorer already ranked the owner first at 28. The order was then rewritten by a re-ranker whose inverse document frequency is measured over the surviving shortlist rather than the corpus, and the selection guard read ranked[0] as if it were the best bindable candidate.",
  "canonical_base_commit": "a4606e027d8da0f5734262c98918f78a9035f05a",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
- "capability_target": "goal_compiler._bm25_rerank",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "causal_blocker": "The pinned scorer already ranked the owner first at 28. The order was then rewritten by a re-ranker whose inverse document frequency is measured over the surviving shortlist rather than the corpus, and the selection guard read ranked[0] as if it were the best bindable candidate.",
  "date": "2026-10-27",
  "expected_parent_change": "Eight adapters gain the discovery fallback: python_dynamic_fault_localizer_v1, python_interprocedural_value_provenance_v1, python_iterative_software_repair_loop_v1, python_provenance_guided_coupled_repair_v1, python_repair_measured_acceptance_controller_v1, python_repair_semantic_acceptance_controller_v1, python_software_repair_loop_v1 and python_test_guided_patch_search_v1. canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json: five capabilities gain the inflected forms of the words that already identify them. canonical/tests/test_test_paths_required_is_derivable_at_every_site_that_raises_it_v1.py. canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled after the intent.",
@@ -49,7 +49,7 @@
  "explicit_user_authorization": "Owner instruction this session, verbatim and repeated nine times: all of the problems are already solved in the brain or hidden somewhere in the repos, so wire what is already there instead of inventing policy. The module being imported was written for all eleven consumers and named all eleven in its own docstring; this finishes the job it was written for. Owner instruction to do the optimal in the fastest way and only the right way, which this turn measured as reverting a keyword deletion that stole two fixed sentences. Owner instruction that all tests must be extremely hard and only truthful. Owner instruction to focus on hardcore software engineering: fault localization and automated repair are the capabilities this model exists for. No external model, zero spend, fail closed.",
  "falsification_condition": "False if any capability that binds vacuously still ranks above a grounded candidate with a strictly higher pinned score, or if the admissible SET changes rather than only its order, or if the extended-tier selection gap set grows.",
  "governance_change": true,
- "highest_leverage_now": "Stop a vacuous catch-all from outranking the owner of the sentence. Three sentences -- localize the fault, trace value provenance, iterative repair loop -- were answered by python.repository.acceptance.measure.v1 with pass=true.",
+ "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
   "canonical_base_commit": "a4606e027d8da0f5734262c98918f78a9035f05a",
@@ -1947,7 +1947,7 @@
   ],
   "selected_route": "TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1",
   "selected_surviving_route": "TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1",
-  "stop_condition": "STOP when no site raises TEST_PATHS_REQUIRED for a tree that has tests, when a tree with no tests is refused rather than measured as green, when a stated test file still wins over discovery, when the four previously fixed sentences still pass, and when the regression failure SET matches the PR base exactly.",
+  "stop_condition": "Stop when no vacuous binder ranks above a grounded candidate with a strictly higher pinned score on the measured sentences, the admissible set is byte-for-byte unchanged, and the known selection gap sets on both benchmark tiers are unchanged.",
   "why_selected_route_is_fastest_sufficient": "The module already existed, named all eleven consumers, and three were wired. Eight imports and eight fallbacks is the whole distance, and each unlocks a capability that already scores highest for its own question."
  },
  "resolution": "Applied inside _bm25_rerank, after the BM25 sort: a candidate whose action_template.args declare no ${input.} placeholder is moved behind every candidate the pinned scorer rated strictly higher. The partition is stable, so BM25's order is preserved inside each part and the admissible set is untouched.",
@@ -1997,26 +1997,22 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "ee131fbb40386302e8b897199dd3a559816b267c",
+     "git_blob_sha": "f344970d5026a68dabca0295c6728dc14b5cdcc8",
      "path": "canonical/runtime/goal_compiler.py"
-    },
-    {
-     "git_blob_sha": "fa780ccacedbfccb95f45c90a3d00ff5ec1a9f0d",
-     "path": "canonical/tests/test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py"
     },
     {
      "git_blob_sha": "1d61bf5ecacc9c41121448f3438c6340dbc758ca",
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
-     "git_blob_sha": "e92af316ffac0c627cc80a0d6a05046c2dd77557",
+     "git_blob_sha": "279752d5ef7ef05ad3fd10d3ccbf57ee7f6298a5",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],
    "decisive_question": "Does a capability that binds vacuously still rank above one that consumed the sentence and scored strictly higher, and does the pinned compiler still refuse GOAL_COMPILATION_BEST_MATCH_UNBINDABLE on a sentence whose owner binds cleanly?",
    "falsifier_id": "A_BINDER_THAT_CONSUMED_NOTHING_DOES_NOT_OUTRANK_ONE_THAT_DID_V1_20261028_V1_FALSIFIER",
    "known_counterexamples_checked": true,
-   "no_known_counterexample_reason": "Checked: the pinned BM25 tests in test_goal_compiler_world_binding_v1.py (test_bm25_reorders_without_introducing_or_dropping_a_candidate and test_the_overlap_count_alone_still_picks_the_decoder) both patch _bm25_rerank with a two-argument identity stub and both pass, as does test_exactly_the_documented_goals_select_wrongly, whose own comment requires that a fresh wrong selection anywhere fail loudly.",
+   "no_known_counterexample_reason": "Checked against the pinned counterexamples in test_goal_compiler_world_binding_v1.py: test_bm25_reorders_without_introducing_or_dropping_a_candidate and test_the_overlap_count_alone_still_picks_the_decoder both patch _bm25_rerank with a two-argument identity stub and both still pass, as does test_exactly_the_documented_goals_select_wrongly, whose own comment requires that a fresh wrong selection anywhere fail loudly -- the extended tier still reports exactly ['EXT_SQLITE_VERIFY','EXT_XLSX_CREATE'] and the primary tier still reports no gaps.",
    "proposal_id": "A_BINDER_THAT_CONSUMED_NOTHING_DOES_NOT_OUTRANK_ONE_THAT_DID_V1_20261028_V1"
   }
  },
