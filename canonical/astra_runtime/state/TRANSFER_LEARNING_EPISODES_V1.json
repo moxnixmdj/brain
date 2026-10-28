@@ -120,5 +120,67 @@
     "trials": 1,
     "successes": 1,
     "last_used_utc": "2026-10-28T19:35:07Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_convert-im6.q16",
+        "run_coverage-3.11",
+        "run_docker-entrypoint.sh",
+        "run_dpkg-architecture",
+        "run_dpkg-buildpackage",
+        "run_dpkg-source",
+        "run_flock",
+        "run_gcov-12",
+        "run_gcov-dump-12",
+        "run_gcov-tool-12",
+        "run_gmake",
+        "run_gold",
+        "run_gp-display-html",
+        "run_last",
+        "run_make",
+        "run_node",
+        "run_nodejs",
+        "run_pip",
+        "run_pip3",
+        "run_pip3.11",
+        "run_prove",
+        "run_py.test",
+        "run_pytest",
+        "run_script",
+        "run_sudoedit",
+        "run_systemd-detect-virt",
+        "run_systemd-run",
+        "run_top",
+        "run_x86_64-linux-gnu-gcov-12",
+        "run_xargs"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.472,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "d2d7e5d6ea3c58964bc2",
+    "goal_key": "goal",
+    "plan": [
+      "run_gcov-dump-12"
+    ],
+    "reached": true,
+    "model": null,
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-28T20:13:35Z"
   }
 ]
