@@ -1,8 +1,8 @@
 {
  "instrument": "execution_guard/hardcore_se_domain_coverage_v1.py",
  "measured": {
-  "capabilities_in_registry": 162,
-  "provides_vocabulary": 227,
+  "capabilities_in_registry": 165,
+  "provides_vocabulary": 235,
   "rows": [
    {
     "act": "git.status",
@@ -343,14 +343,14 @@
    {
     "act": "dynamic.memory_profile",
     "domain": "dynamic analysis",
-    "owner": "",
-    "state": "ABSENT"
+    "owner": "dynamic.memory_profile",
+    "state": "BOUND"
    },
    {
     "act": "dynamic.cpu_profile",
     "domain": "dynamic analysis",
-    "owner": "",
-    "state": "ABSENT"
+    "owner": "dynamic.cpu_profile",
+    "state": "BOUND"
    },
    {
     "act": "dynamic.debugger_breakpoint",
@@ -379,8 +379,8 @@
    {
     "act": "dynamic.benchmark",
     "domain": "dynamic analysis",
-    "owner": "",
-    "state": "NAMED"
+    "owner": "perf.benchmark",
+    "state": "BOUND"
    },
    {
     "act": "perf.regression_gate",
@@ -397,20 +397,20 @@
    {
     "act": "perf.big_o_inference",
     "domain": "performance engineering",
-    "owner": "",
-    "state": "ABSENT"
+    "owner": "perf.big_o_inference",
+    "state": "BOUND"
    },
    {
     "act": "perf.hotspot_ranking",
     "domain": "performance engineering",
-    "owner": "",
-    "state": "ABSENT"
+    "owner": "perf.hotspot_ranking",
+    "state": "BOUND"
    },
    {
     "act": "perf.allocation_growth",
     "domain": "performance engineering",
-    "owner": "",
-    "state": "ABSENT"
+    "owner": "perf.allocation_growth",
+    "state": "BOUND"
    },
    {
     "act": "perf.query_plan",
@@ -835,9 +835,9 @@
     "total": 4
    },
    "dynamic analysis": {
-    "ABSENT": 4,
-    "BOUND": 2,
-    "NAMED": 3,
+    "ABSENT": 2,
+    "BOUND": 5,
+    "NAMED": 2,
     "total": 9
    },
    "infrastructure and delivery": {
@@ -859,8 +859,8 @@
     "total": 5
    },
    "performance engineering": {
-    "ABSENT": 4,
-    "BOUND": 2,
+    "ABSENT": 1,
+    "BOUND": 5,
     "NAMED": 0,
     "total": 6
    },

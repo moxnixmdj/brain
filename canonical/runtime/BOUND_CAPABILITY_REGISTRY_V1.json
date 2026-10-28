@@ -5462,6 +5462,272 @@
     "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS"
    }
   },
+  "python.perf.benchmark.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "benchmark",
+     "capability_id": "python.perf.benchmark.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "perf_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "benchmark",
+    "benchmarking",
+    "growth",
+    "scaling",
+    "asymptotic",
+    "big-o",
+    "timing",
+    "timings",
+    "throughput"
+   ],
+   "limitations": [
+    "the growth class is a FIT over a measured ladder (default 64..2048), not a proof: `slope` and `r2` are reported and a class is claimed only when the log-log line is straight.",
+    "one child runs the whole ladder after a warm-up, because per-size process startup cost more than the call at small sizes; if that child dies the run is refused rather than half-timed.",
+    "the size is carried by one positional parameter (default index 0), as an int, or as a list of that length when the parameter is annotated as a list.",
+    "the minimum of the repetitions is kept, because one scheduler hiccup must not become a curve."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "perf.big_o_inference",
+    "perf.benchmark"
+   ],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "capability_id",
+    "target",
+    "module",
+    "qualname",
+    "sizes",
+    "timings",
+    "growth",
+    "best_class",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib tracemalloc/cProfile/pstats/time, subprocess",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "391c229c53f290a9226bc2fcd9d6c00e018c1ea7b71f9f43e94f46775986c7a6",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "`quadratic` measured at 64..2048 and reported as O(n^2) with slope 2.03 and r2 0.9999",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a known cost shape), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.perf.benchmark.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.perf.cpu_profile.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "cpu_profile",
+     "capability_id": "python.perf.cpu_profile.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "perf_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "cpu",
+    "profile",
+    "profiling",
+    "profiler",
+    "hotspot",
+    "hotspots",
+    "bottleneck",
+    "cprofile",
+    "slowest"
+   ],
+   "limitations": [
+    "every case runs in its own interpreter, so a crash or a hang is an outcome and never a lost run, and the profiler never measures itself in the caller's process.",
+    "the reported hotspots are the WORST case's, not an average over all of them: an average ranks a function that is slow once beside one that is slow always.",
+    "the harness's own frames are filtered out, so the ranking cannot be topped by the profiler.",
+    "cProfile adds per-call overhead, which is why the ranking is by cumulative time and the absolute seconds are reported as measured rather than as a floor."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "perf.hotspot_ranking",
+    "perf.cpu_profile"
+   ,
+    "dynamic.cpu_profile"],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "capability_id",
+    "target",
+    "module",
+    "qualname",
+    "cases_run",
+    "worst_case",
+    "hotspots",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib tracemalloc/cProfile/pstats/time, subprocess",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "391c229c53f290a9226bc2fcd9d6c00e018c1ea7b71f9f43e94f46775986c7a6",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the quadratic `quadratic(512)` ranked first by cumulative time in work.py, found without being told which function was slow",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a known cost shape), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.perf.cpu_profile.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.perf.memory_profile.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "memory_profile",
+     "capability_id": "python.perf.memory_profile.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "perf_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "memory",
+    "allocation",
+    "allocations",
+    "allocated",
+    "tracemalloc",
+    "footprint",
+    "memory-profile"
+   ],
+   "limitations": [
+    "the measurement is tracemalloc's TRACED allocation, which is Python objects only; memory held by C extensions or the allocator's arenas is not counted.",
+    "the snapshot is taken while the returned value is still alive, because the bytes a call RETURNS are the interesting ones and a profile of freed intermediates measures the collector.",
+    "the ladder of sizes is always present (8, 64, 512) beside the annotated draws, because the fuzzer's boundary corpus tops out at 2**63 and a profile cannot finish it.",
+    "attribution is by allocating LINE through an 8-frame traceback; a single-frame traceback attributes everything to the caller and is a measured defect this adapter avoids."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "perf.allocation_growth",
+    "perf.memory_profile"
+   ,
+    "dynamic.memory_profile"],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "capability_id",
+    "target",
+    "module",
+    "qualname",
+    "cases_run",
+    "worst_case",
+    "peak_bytes",
+    "top_sites",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib tracemalloc/cProfile/pstats/time, subprocess",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "391c229c53f290a9226bc2fcd9d6c00e018c1ea7b71f9f43e94f46775986c7a6",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the `hog(512)` list that holds 40 KB at work.py:9, named as the allocating line",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a known cost shape), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.perf.memory_profile.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
   "python.pipeline.allowlist_gate.v1": {
    "action_template": {
     "args": {

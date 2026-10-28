@@ -240,6 +240,34 @@ def _inputs(cid: str, source: Path, repo, good: str, upstream: str, out: Path) -
     if cid == "python.supply_chain.vulnerability_audit.v1":
         return {"source_root": str(source), "act_verb": "vulnerability_audit",
                 "output_path": str(out / "vulnerability_audit.json")}
+    if cid in ("python.perf.cpu_profile.v1", "python.perf.memory_profile.v1",
+               "python.perf.benchmark.v1"):
+        # ONE COST SHAPE PER ACT, in a file whose only public function it is.  The declared
+        # invocation has no `qualname` slot (a profiler sentence need not name a function), so the
+        # fixture is what puts the target in scope -- and that keeps the pin honest: the capability
+        # still has to find the worst case by itself.
+        scratch = out.parent / "perf_fixture"
+        scratch.mkdir(parents=True, exist_ok=True)
+        fixture = {"python.perf.cpu_profile.v1": (
+                       "cost_cpu.py",
+                       "def loop(n: int) -> int:\n"
+                       "    total = 0\n"
+                       "    for i in range(n):\n"
+                       "        total += i\n"
+                       "    return total\n"),
+                   "python.perf.memory_profile.v1": (
+                       "cost_memory.py",
+                       "def hog(n: int) -> list:\n"
+                       "    return [str(i) * 8 for i in range(n)]\n"),
+                   "python.perf.benchmark.v1": (
+                       "cost_growth.py",
+                       "def quadratic(n: int) -> int:\n"
+                       "    return sum(1 for _ in range(n) for _ in range(n))\n")}[cid]
+        name, body = fixture
+        (scratch / name).write_text(body, encoding="utf-8")
+        return {"source_root": str(scratch / name), "act_verb": cid.split(".")[2],
+                "max_cases": 6, "case_timeout_s": 30,
+                "output_path": str(out / (cid.rsplit(".", 2)[-2] + ".json"))}
     if cid == "python.dynamic.crash_repro.v1":
         # ONE MODULE, ONE CRASH, NO FUNCTION NAMED.  The sentence for this act says which FILE to
         # reproduce the crash in and never which function -- if it knew, it would have said -- so
@@ -320,7 +348,13 @@ _VOLATILE_KEYS = ("target", "artifact_path", "artifact_sha256", "output_path", "
                   # A process TRANSCRIPT is not a finding: pytest's own tail carries its
                   # runtime ("1 failed in 0.42s"), so two identical analyses never match on it.
                   # The verdict, the counts and the finding list all stay in the comparison.
-                  "test_output_tail", "stdout", "stderr", "log", "log_tail")
+                  "test_output_tail", "stdout", "stderr", "log", "log_tail",
+                  # A MEASUREMENT OF THE MACHINE IS A CLOCK READING.  A profiler's microseconds and
+                  # a tracemalloc peak byte count never repeat exactly, so comparing them would make
+                  # every profiling capability "fail to reproduce" while finding the same thing.  The
+                  # ordering (`hotspot_ranking`, `allocating_sites`) and the growth class stay IN the
+                  # comparison: those are the findings, the figures are what the box did that second.
+                  "timings", "seconds", "growth", "peak_bytes", "hotspots", "top_sites")
 _VOLATILE_PARTS = ("elapsed", "duration", "timestamp", "_at", "_ms", "_ns", "sha256", "path")
 
 
@@ -390,6 +424,21 @@ ORACLE = {
         "the PYSEC advisories on the pinned urllib3==1.26.0",
         lambda r: int(r.get("vulnerability_count") or 0) >= 1
         and int(r.get("vulnerable_packages") or 0) >= 1),
+    "python.perf.cpu_profile.v1": (
+        ("`loop`, ranked first by cumulative time in cost_cpu.py, found without being told "
+         "which function to look at"),
+        lambda r: int(r.get("cases_run") or 0) >= 1
+        and bool(r.get("hotspot_ranking"))
+        and str(r["hotspot_ranking"][0]).endswith("loop")),
+    "python.perf.memory_profile.v1": (
+        ("the `hog(512)` list holding tens of kilobytes, attributed to its allocating line in "
+         "cost_memory.py"),
+        lambda r: int(r.get("peak_bytes") or 0) >= 20000
+        and any("cost_memory.py" in str(site) for site in (r.get("allocating_sites") or []))),
+    "python.perf.benchmark.v1": (
+        "`quadratic` measured over the ladder and reported as O(n^2) with a straight log-log line",
+        lambda r: r.get("best_class") == "O(n^2)"
+        and float((r.get("growth") or {}).get("r2") or 0.0) >= 0.95),
     "python.dynamic.crash_repro.v1": (
         "the divide-by-zero in `divide`, found without being told which function crashes "
         "and shrunk to `divide(0, 0)`",

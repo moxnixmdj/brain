@@ -1,8 +1,8 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `f5f191c` + this unit**
+**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `580fa4d` + this unit (P5: the performance trio)**
 
-_Supersedes `…GAP_MAP_20261028_V21.md`.
+_Supersedes `…GAP_MAP_20261028_V22.md`.
 
 This is the complete answer to *"what are all the problems?"*, restricted to what the owner asked for:
 the machine must be the most advanced, fastest software engineer — repair, refactor, analysis,
@@ -24,7 +24,7 @@ document rests on an earlier reading.
 | ~~**P3**~~ | ~~**Capability is a function of the shell, not of the machine.**~~ **CLOSED this unit (§5)** — the door now checks the engine before it promises the work, installs the pinned tool when the interpreter is one we manage, and otherwise refuses by name; 13 acts that failed as *broken capabilities* on a clean box are now honest refusals. | was 13 + 3 lost acts | every deployment that is not this sandbox |
 | **P4** | **Eight acts nothing in the machine owns** (was ten): merge-conflict resolution, interactive debugging, memory profiling, schema migration, CI config, retry design, observability instrumentation, docstrings. **Crash reproduction and differential testing are CLOSED this unit (§6.1)**. | 8 of 43 probed acts | day-to-day senior engineering |
 | **P5** | **Acts the machine owns but cannot be asked for.** `git bisect` needs a predicate no sentence states; two of six refactors are `NOT_REACHABLE` and four `ROUTE_ELSEWHERE` from a synthesised sentence. | 11 unreachable + 9 misrouted of 452 | the door, not the verbs |
-| **P6** | **Whole domains sit at zero**: infrastructure/delivery 0/6, observability 0/5, dynamic analysis 1/9, performance engineering 2/6, services & concurrency 3/8, dependencies & build 2/10, documentation 1/4. | 44 absent acts of 135 | "build software end to end" |
+| **P6** | **Whole domains sit at zero**: infrastructure/delivery 0/6, observability 0/5, services & concurrency 3/8, dependencies & build 2/10, documentation 1/4. **Dynamic analysis is now 5/9 and performance engineering 5/6 (§6.4).** | 38 absent acts of 135 | "build software end to end" |
 | **P7** | **25 red compiler tests** in four defect families (DAG result invalid, over-eager compilation, stale guard assertions, door parity). | 25 of 133 | the compiler's word |
 | **P8** | **Everything advanced is Python-only.** Tree-sitter parses a dozen languages; every refactor, repair loop and test generator is `python.*`. | 3 of 7 language acts | non-Python work |
 | **P9** | **The office/visual family is 22 of 158 entries (14%)** — deprioritized by the owner, kept because it is already verified. | 22 | nothing, if left alone |
@@ -37,7 +37,7 @@ owner said. P3 second, because it was the larger version of the same lie: thirte
 capabilities reported as broken because a package had never been installed. Both were *reporting*
 defects, and both are now measured to be gone.
 
-The 43-act probe now reads **34 answered / 9 honest refusals / 0 broken / 0 hollow** (it was
+The 43-act probe now reads **35 answered / 8 honest refusals / 0 broken / 0 hollow** (it was
 16/11/13/3 on a bare box at the start of the previous unit and 32/11/0/0 with the toolchain).
 
 The most critical remaining problem is **P4 — the eight acts nothing owns** (crash reproduction,
@@ -51,30 +51,29 @@ profilers and the git plumbing are already in the repository (§13, rows 1–3).
 ## 1. How this was measured
 
 ```
-registry                      canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json      158 entries
-43-act front-door probe       execution_guard/hardcore_se_missing_verb_probe_v1.py     32 / 11 / 0
+registry                      canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json      165 entries
+43-act front-door probe       execution_guard/hardcore_se_missing_verb_probe_v1.py     35 / 8 / 0
 domain coverage (this doc)    execution_guard/hardcore_se_domain_coverage_v1.py         135 acts, 15 domains
 evidence audit                execution_guard/capability_evidence_probe_v1.py --audit-pointers
-reachability (452 rows)       execution_guard/live_solver_end_to_end_measurement_v1.py
-compiler suites               pytest canonical/tests/test_goal_*_v1.py …               25 F / 108 P
+reachability (452 rows)       execution_guard/live_solver_end_to_end_measurement_v1.py NOT re-measured (times out at 15 min)
+compiler suites               pytest canonical/tests/test_goal_*_v1.py …               25 F / 108 P  (same 25 node ids at 580fa4d)
 environment probe             this document, §10 (binaries + importable modules)
 ```
 
 ```
 43-ACT FRONT DOOR (through solve(), current HEAD)
-  ANSWERED_BY_OWNING_CAPABILITY   32   all verified against a real owner (2 were lies before §3)
-  HONEST_REFUSAL                  11   (6 name the act, 5 name a wrong candidate)
-  WRONG_TOOL by the probe's oracle 0   <- the oracle is lexical; see P1
-  HOLLOW PASS                      0
+  ANSWERED_BY_OWNING_CAPABILITY   35   all verified against a real owner (2 were lies before §3)
+  HONEST_REFUSAL                   8   (3 name the act, 5 name a wrong candidate)
+  WRONG_TOOL by the probe's oracle  0   <- the oracle is lexical; see P1
+  HOLLOW PASS                       0
 
-REGISTRY EVIDENCE (160)
-  OK 118 · pointer names nothing 34 · pointer names a file nobody wrote 8
+REGISTRY EVIDENCE (165)
+  OK 123 · pointer names nothing 34 · pointer names a file nobody wrote 8
 
-REACHABILITY (452 rows = 158 registered + 294 receipt projections)
-  REACHED_AND_BOUND 429 · NOT_REACHABLE 11 · ROUTED_ELSEWHERE 9 · BY EXPLICIT NAME 3
+REACHABILITY (452 rows)  last measured at f5f191c: 429 bound · 11 NOT_REACHABLE · 9 ROUTED_ELSEWHERE · 3 BY NAME
 
 DOMAIN COVERAGE (135 acts a senior engineer performs)
-  BOUND 63 · NAMED-ONLY 29 · ABSENT 43
+  BOUND 69 · NAMED-ONLY 28 · ABSENT 38
 ```
 
 ---
@@ -90,8 +89,8 @@ it (vocabulary, not capability). `ABSENT` = nothing in the machine mentions it.
 | refactoring | 6/14 | 2 | 6 | rename symbol/parameter, extract, inline, move, change signature |
 | static analysis | 10/13 | 1 | 2 | ruff, mypy, complexity, dead code, duplication, symbols, resolve, impact, tree-sitter index |
 | testing | 6/10 | 2 | 2 | coverage, slice, scaffold, flake detect, property oracle, contract oracle |
-| dynamic analysis | 2/9 | 3 | 4 | fuzz, crash reproduction, differential testing |
-| performance engineering | 2/6 | 0 | 4 | diff perf gate, complexity metric |
+| dynamic analysis | 5/9 | 2 | 2 | fuzz, crash reproduction, differential testing, memory profile, CPU profile |
+| performance engineering | 5/6 | 0 | 1 | diff perf gate, complexity metric, big-O inference, hotspot ranking, allocation growth |
 | security & supply chain | 6/9 | 2 | 1 | bandit SAST, diff security gate, license, provenance |
 | dependencies & build | 2/10 | 3 | 5 | wheel build, dependency add |
 | data & persistence | 5/9 | 1 | 3 | sqlite create/verify, json, yaml, binary codecs |
@@ -191,9 +190,9 @@ produce `BOUND`, the other that these two acts *are* bound by a real claim.
 ## 4. P2 — capability claims that name nothing
 
 ```
-OK (a verification block whose pointed-at files exist)        116 / 158
-BLOCK_WITHOUT_ANY_POINTER (names no file a reader can check)  34 / 158
-DANGLING (names a file nobody wrote)                           8 / 158
+OK (a verification block whose pointed-at files exist)        123 / 165
+BLOCK_WITHOUT_ANY_POINTER (names no file a reader can check)  34 / 165
+DANGLING (names a file nobody wrote)                           8 / 165
 ```
 
 The 8 dangling are pinned by name in
@@ -370,10 +369,76 @@ reference. A scope stayed a scope; it just stopped widening a file.
 
 ### 6.3 What is still missing here
 
-`merge_conflict`, `interactive_debug`, `memory_profile`, `schema_migration`, `ci_config`,
-`retry_design`, `observability`, `docstrings` — and of those, the profilers (`tracemalloc`,
-`cProfile`) and `git`'s own merge machinery are already installed, which is why they are rows 1–3
-of §13 rather than a research programme.
+`merge_conflict`, `interactive_debug`, `schema_migration`, `ci_config`, `retry_design`,
+`observability`, `docstrings` — and of those, `git`'s own merge machinery is already installed,
+which is why `merge_conflict` is row 4 of §13 rather than a research programme.
+
+### 6.4 The performance trio is closed — and measuring it found four defects in the instrument
+
+`performance engineering` read **2 / 6** and `dynamic analysis` **2 / 9**; the memory sentence was
+refused outright. All three acts are stdlib: `tracemalloc`, `cProfile`/`pstats`, `perf_counter`.
+One module, `perf_probe_v1.py`, serves all three through the same child-process protocol
+(`memory` / `cpu` / `benchmark_sweep`, one JSON line back), reusing `dynamic_probe_v1`'s locator,
+its annotation-directed case generator and its per-case isolation.
+
+The three answers, measured on a fixture whose cost shape is known:
+
+| act | measurement | answer |
+|---|---|---|
+| `benchmark` | `quadratic(n)` over the ladder 64…2048 | `O(n^2)`, slope 2.03, r² 0.9999 |
+| `cpu_profile` | `loop(n)` | `hotspot_ranking[0] == loop`, ranked by cumulative time |
+| `memory_profile` | `hog(512)` | peak 55,670 B, top allocating line `work.py:9` (40,656 B) |
+
+**The instrument was wrong four times before the answers were right**, and each wrong version was a
+confident result, not an error:
+
+1. **One frame is not a stack.** `tracemalloc.start()` defaults to one frame, which is the
+   *harness's* line, so every allocation in the report was `File "<string>", line 30`, 249 bytes,
+   while the peak was 55,670 bytes. Fixed: 8 frames, and a site must be a frame in the target (or a
+   library it called), never a `<string>` frame.
+2. **A freed value is not a measurement.** The snapshot was taken after the measured object had gone
+   out of scope, so the profile described the collector. The value is now held across the snapshot.
+3. **`Profile.getstats()` does not unpack.** `for (key), values in profiler.getstats()` raised, the
+   hotspot list came back *empty*, every score was 0, and the least-work case "won". Rows now come
+   from `pstats.Stats`, and the profiler's own `enable`/`disable` stubs are filtered out.
+4. **A minimum over candidates always has a winner.** The growth class was the shape with the lowest
+   coefficient of variation — with four points, a `0.25` spread is noise, and a linear loop was
+   confidently reported as `O(log n)`. It is now a least-squares fit of `log t` against `log n`,
+   reported as `slope` and `r2`; a class is claimed only when `r2 ≥ 0.98` **and** the exponent is
+   within 0.25 of it, and an unresolved fit still names the closest shape.
+
+Two more defects were found by running the thing rather than reading it:
+
+- **A fuzz corpus is the wrong corpus for profiling.** The generator's boundary draws are `2**63`,
+  `sys.maxsize` and 10,000-character strings — right for finding crashes, useless for measuring:
+  the profile was vacuous (peak 713 B, worst case `[0]`). `_measurable()` now filters the corpus and
+  a geometric ladder (8, 64, 512) is always appended.
+- **A process per size is a measurement of process startup.** Import plus interpreter cost more than
+  the call at small sizes, and a linear loop came back with a 0.5 spread and no class. The whole
+  ladder now runs in one child after one warm-up, keeping the minimum of the repetitions; the parent
+  still isolates the run, so a hang or a crash is an outcome instead of a lost measurement.
+- **A keyword phrase is a bag of words.** `"how does it scale"` contributed the tokens `how`, `does`,
+  `it`, `scale` — and `it` then matched *"Write a continuous integration workflow … and report it
+  to …"*, which made the benchmark capability the best candidate for writing CI config. The
+  keywords now name the act (`benchmark`, `cpu`, `hotspot`, `memory`, `allocation`, …), and the four
+  unrelated sentences that used to select a perf capability select it no longer.
+- **A package is not a flat directory.** The first version of the scan globbed `*.py` at the root of
+  the stated directory, so a repository refused with `NO_PYTHON_MODULE_IN` while its modules sat one
+  level down in `pkg/`. Both this probe and `dynamic_probe_v1` now scan recursively.
+
+Wiring: three registry rows (`python.perf.benchmark.v1`, `python.perf.cpu_profile.v1`,
+`python.perf.memory_profile.v1`) with `provides` naming the acts the domain map looks for
+(`perf.big_o_inference`, `perf.hotspot_ranking`, `perf.allocation_growth`, `dynamic.memory_profile`,
+`dynamic.cpu_profile`), three `capability_tools` rows that are empty because the whole toolchain is
+the interpreter, three evidence receipts, and 13 pins in
+`canonical/tests/test_performance_measurement_v1.py`.
+
+One defect the evidence audit exposed: **a measurement of the machine is a clock reading.** Two runs
+of the same profile never agree on microseconds or on a traced-byte peak, so all three capabilities
+first came back `reproduced=False` while finding exactly the same thing. The adapter now writes the
+finding twice — the numbers for a human, and a stable ordering (`hotspot_ranking`, `allocating_sites`,
+`growth` class) for the equality test — and the evidence probe treats profiler figures as volatile
+while keeping the ranking in the comparison.
 
 ---
 
@@ -393,12 +458,12 @@ hand-written keywords — moves 20 rows and two failing tests at once (P7).
 
 ## 8. P6 — the absent acts, by domain
 
-The 44 acts nothing mentions, i.e. where a senior engineer would notice the machine is not there:
+The 38 acts nothing mentions, i.e. where a senior engineer would notice the machine is not there:
 
 - **infrastructure & delivery (6):** CI config, container image, IaC, deploy, secret management, environment fit.
 - **observability (5):** logging instrumentation, metrics instrumentation, tracing, log analysis, SLO.
-- **performance (4):** big-O inference, hotspot ranking, allocation growth, query plans.
-- **dynamic analysis (4):** memory profile, CPU profile, debugger/breakpoint, syscall trace.
+- **performance (1):** query plans.
+- **dynamic analysis (2):** debugger/breakpoint, syscall trace.
 - **services & concurrency (5):** retry policy, timeout policy, circuit breaker, task graph, local HTTP server.
 - **dependencies & build (5):** install, upgrade, remove, lockfile, reproducible build, publish.
 - **refactoring (6):** extract variable, encapsulate field, pull-up method, replace conditional, unused-import removal, split module.
@@ -483,7 +548,7 @@ Reuse first, and nothing here needs an absent instrument.
 | ~~0~~ | ~~**make a mutating verb safe** (`format` ate 2238 files and its own source)~~ | P12 | **DONE this unit** — dry pass, receipt that cannot land on the artifact, named file not its directory | — |
 | ~~1~~ | ~~**install-or-refuse at the door**~~ | P3 (13 lost acts + 3 silent) | **DONE this unit** — `toolchain_gate_v1` + 34 per-capability rows; bare box 16→18 answered, 13 owned-but-failed → 0, nothing falsely refused | — |
 | ~~**1**~~ | ~~**`crash_repro` + `differential_test`**~~ | P4 (2 acts), P6 | **DONE this unit** — one engine, two oracles: 34/43 acts answered, the crash found and shrunk to `divide(0, 0)`, the divergence to `sub(0, 1)`; 9 pins | — |
-| 2 | **`memory_profile` + `cpu_profile` + `benchmark`** | P6 (3 acts) | `tracemalloc`, `cProfile`, `timeit` — stdlib, one module | ~1 unit |
+| ~~2~~ | ~~**`memory_profile` + `cpu_profile` + `benchmark`**~~ | P6 (3 acts) | **DONE this unit (§6.4)** — `tracemalloc`, `cProfile`/`pstats`, `perf_counter`; one module, three verbs, four measured defects fixed, 13 pins | — |
 | 3 | **routability law** (one row → one rule) | P5 (20 rows, 2 tests) | derived from `provides` instead of hand-written keywords | ~1–2 units |
 | 4 | **`schema_migration` + data integrity** | P4, P6 | `sqlite3` is present; the migration is a transaction plus a verification law | ~1 unit |
 | 5 | **`merge_conflict`** | P4 | `git merge` exists; conflict markers are text; the resolution gate is a test run | ~1 unit |
@@ -507,6 +572,9 @@ PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_missing_verb_probe_v1.
     --only crash_repro,differential_test
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py \
     --only python.dynamic.crash_repro.v1,python.dynamic.differential_test.v1 --remeasure
+PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py \
+    --only python.perf.memory_profile.v1,python.perf.cpu_profile.v1,python.perf.benchmark.v1 --remeasure
+PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_performance_measurement_v1.py -q
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_domain_coverage_v1.py
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py --audit-pointers
 PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_goal_front_compiler_v1.py \

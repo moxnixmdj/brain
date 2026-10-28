@@ -14,6 +14,9 @@
   "python.packaging.dependency_add.v1": [
    "pip"
   ],
+  "python.perf.benchmark.v1": [],
+  "python.perf.cpu_profile.v1": [],
+  "python.perf.memory_profile.v1": [],
   "python.quality.api_compatibility.v1": [],
   "python.quality.changelog.v1": [],
   "python.quality.coverage.v1": [

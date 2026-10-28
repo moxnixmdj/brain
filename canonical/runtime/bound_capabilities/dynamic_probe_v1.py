@@ -354,7 +354,7 @@ def _crash_candidates(args: dict, project: Path, module_file: Path, module: str
     if module_file.is_dir():
         modules = [(path, (str(path.relative_to(project)).replace(os.sep, "/")
                            .removesuffix(".py").replace("/", ".")))
-                   for path in sorted(module_file.glob("*.py")) if not path.name.startswith("_")]
+                   for path in sorted(module_file.rglob("*.py")) if not path.name.startswith("_")]
         if not modules:
             _fail("NO_PYTHON_MODULE_IN:" + str(module_file))
     else:
