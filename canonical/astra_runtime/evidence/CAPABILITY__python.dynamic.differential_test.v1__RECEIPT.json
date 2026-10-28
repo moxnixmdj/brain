@@ -1,0 +1,31 @@
+{
+ "artifact_sha256": "cc894c0b3df7e04e672a53d60e74192b460efc0b1e2f5b5d0bb0b65714755353",
+ "capability_id": "python.dynamic.differential_test.v1",
+ "elapsed_ms": null,
+ "entrypoint": "run",
+ "executor": "execution_guard/capability_evidence_probe_v1.py",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "invoked_args": {
+  "act_verb": "differential_test",
+  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_s8a9_201/first/out/differential_test.json",
+  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_s8a9_201/first/differential_fixture/pkg/calc.py"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/differential_probe_v1.py",
+ "module_sha256": "5039c38c08d834fda478b913138b87f180b29b07e43c2f0afaa6845537849e63",
+ "observed": {
+  "gate": "PASS",
+  "output_verified": true
+ },
+ "outcome": "EXECUTED",
+ "planted_defect": "the `sub` that adds instead of subtracting, against the committed version of the same file, shrunk to a minimal call",
+ "planted_defect_found": true,
+ "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+ "producer_independent": false,
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.differential_test.v1__RECEIPT.json",
+ "reproduced_on_second_run": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

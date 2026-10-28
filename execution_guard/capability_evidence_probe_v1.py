@@ -240,6 +240,35 @@ def _inputs(cid: str, source: Path, repo, good: str, upstream: str, out: Path) -
     if cid == "python.supply_chain.vulnerability_audit.v1":
         return {"source_root": str(source), "act_verb": "vulnerability_audit",
                 "output_path": str(out / "vulnerability_audit.json")}
+    if cid == "python.dynamic.crash_repro.v1":
+        # ONE MODULE, ONE CRASH, NO FUNCTION NAMED.  The sentence for this act says which FILE to
+        # reproduce the crash in and never which function -- if it knew, it would have said -- so
+        # the world is a module whose only function divides, and the search has to find it.  (The
+        # shared fixture would also work and would find `add('', 0)` first, which is a real crash
+        # in a different function: correct behaviour, useless as a pin.)
+        scratch = out.parent / "crash_fixture"
+        scratch.mkdir(parents=True, exist_ok=True)
+        (scratch / "calc.py").write_text("def divide(a, b):\n    return a/b\n",
+                                         encoding="utf-8")
+        return {"source_root": str(scratch / "calc.py"), "act_verb": "crash_repro",
+                "max_cases": 12, "case_timeout_s": 5,
+                "output_path": str(out / "crash_repro.json")}
+    if cid == "python.dynamic.differential_test.v1":
+        # A reference exists only if there is something to compare against, so the world is a
+        # repository with a committed implementation and an uncommitted behavioural change --
+        # which is exactly the situation a differential test is for.
+        scratch = out.parent / "differential_fixture"
+        (scratch / "pkg").mkdir(parents=True, exist_ok=True)
+        module = scratch / "pkg" / "calc.py"
+        module.write_text("def sub(a, b):\n    return a - b\n", encoding="utf-8")
+        _git(scratch, ["init", "-q", "-b", "main"])
+        _git(scratch, ["add", "-A"])
+        _git(scratch, ["-c", "user.name=probe", "-c", "user.email=probe@example.invalid",
+                       "commit", "-qm", "the implementation to compare against"])
+        module.write_text("def sub(a, b):\n    return a + b\n", encoding="utf-8")
+        return {"source_root": str(module), "act_verb": "differential_test",
+                "max_cases": 12, "case_timeout_s": 5,
+                "output_path": str(out / "differential_test.json")}
     if cid == "python.dynamic.fuzz.v1":
         return {"source_root": str(source), "qualname": "divide",
                 "max_cases": 12, "case_timeout_s": 5,
@@ -361,6 +390,17 @@ ORACLE = {
         "the PYSEC advisories on the pinned urllib3==1.26.0",
         lambda r: int(r.get("vulnerability_count") or 0) >= 1
         and int(r.get("vulnerable_packages") or 0) >= 1),
+    "python.dynamic.crash_repro.v1": (
+        "the divide-by-zero in `divide`, found without being told which function crashes "
+        "and shrunk to `divide(0, 0)`",
+        lambda r: r.get("reproduced") is True and r.get("qualname") == "divide"
+        and r.get("minimal_case") == [0, 0] and bool(r.get("reproducer_path"))),
+    "python.dynamic.differential_test.v1": (
+        "the `sub` that adds instead of subtracting, against the committed version of the same "
+        "file, shrunk to a minimal call",
+        lambda r: int(r.get("divergences") or 0) >= 1
+        and str(r.get("reference_basis") or "").startswith("git:HEAD:")
+        and isinstance(r.get("minimal_case"), list)),
     "python.dynamic.fuzz.v1": (
         "the divide-by-zero found by generation and shrunk to `divide(0, 0)`",
         lambda r: r.get("failure_mode") == "raised" and r.get("minimal_case") == [0, 0]

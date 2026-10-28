@@ -1285,6 +1285,19 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if len(matching)==1:
                 result[key]=matching[0]
                 continue
+            # THE FILE THE CALLER NAMED OUTRANKS THE DIRECTORY ITS PATH SPELLS -- but only where
+            # the capability declares that its adapter can index one file (`path_file_or_dir`),
+            # because most scope keys (a test runner, a repair loop) genuinely need a tree.
+            # Measured twice, both destructive: `ruff format` took a one-file sentence, was handed
+            # the file's directory, and rewrote 2238 files; and a crash search was handed a
+            # directory when its sentence named the module.  A scope stays what was named.
+            bindings=entry.get("proposal_bindings") if isinstance(entry, dict) else None
+            if (isinstance(bindings, dict) and isinstance(bindings.get(key), dict)
+                    and bindings[key].get("type")=="path_file_or_dir"):
+                named_files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                if len(named_files)==1:
+                    result[key]=named_files[0][0]
+                    continue
             if named and len(dirs)==1:
                 result[key]=dirs[0][0]
                 continue

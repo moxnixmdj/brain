@@ -52,6 +52,7 @@ import sys
 from pathlib import Path
 
 from canonical.runtime.bound_capabilities.quality_v1 import (
+    QualityError,
     _base,
     _destination,
     _fail,
@@ -60,8 +61,14 @@ from canonical.runtime.bound_capabilities.quality_v1 import (
 )
 
 CAPABILITY_ID = "python.dynamic.fuzz.v1"
+# Two acts, one engine.  `fuzz` searches a function the sentence names; `crash_repro` searches the
+# file the sentence names, because "reproduce the crash in <file>" does not say which function
+# crashed -- if the sentence knew, it would have said.  Both generate, isolate, classify, shrink and
+# write a runnable reproducer; the difference is where the search starts and what it reports.
+_ACTS = ("fuzz", "crash_repro")
 
 DEFAULT_CASES = 64
+DEFAULT_REPRO_CASES = 24
 DEFAULT_CASE_TIMEOUT_S = 5
 
 # The child.  It prints exactly one JSON line and exits 0; anything else is a crash the parent
@@ -332,18 +339,157 @@ def _reproducer(path: Path, module: str, qualname: str, case: list, mode: str) -
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def run(args: dict, root) -> dict:
-    root = Path(root)
-    args = dict(args or {})
-    capability_id = str(args.get("capability_id") or CAPABILITY_ID)
-    act = str(args.get("act_verb") or args.get("act") or "fuzz").strip() or "fuzz"
-    if act != "fuzz":
-        _fail("ACT_NOT_SUPPORTED:" + act)
-    output_path = str(args.get("output_path") or "").strip()
-    if not output_path:
-        _fail("OUTPUT_PATH_NOT_STATED")
-    destination = _destination(root, output_path)
+def _crash_candidates(args: dict, project: Path, module_file: Path, module: str
+                      ) -> list[tuple[Path, str, str]]:
+    """(module file, dotted module, function) for everything the sentence puts in scope.
 
+    A sentence that names a FILE means that file, never its siblings.  A sentence that names a
+    DIRECTORY -- which is how the compiler binds a scope key when no single file is named -- means
+    any public module directly inside it, because "reproduce the crash in this package" is a real
+    request and the crash is wherever it is.  In both cases the search is over PUBLIC functions
+    with positional parameters: a zero-argument function has no input-dependent crash, and a
+    varargs function's arity is not knowable without running it.
+    """
+    only = str(args.get("qualname") or "").strip()
+    if module_file.is_dir():
+        modules = [(path, (str(path.relative_to(project)).replace(os.sep, "/")
+                           .removesuffix(".py").replace("/", ".")))
+                   for path in sorted(module_file.glob("*.py")) if not path.name.startswith("_")]
+        if not modules:
+            _fail("NO_PYTHON_MODULE_IN:" + str(module_file))
+    else:
+        modules = [(module_file, module)]
+    candidates: list[tuple[Path, str, str]] = []
+    for path, dotted in modules:
+        names = [only] if only else _public_functions(path)
+        for name in names:
+            candidates.append((path, dotted, name))
+    if not candidates:
+        _fail("NO_FUNCTION_TO_REPRODUCE_IN:" + module_file.name)
+    return candidates
+
+
+def _crash_repro(args: dict, root: Path, destination: Path, project: Path,
+                 module_file: Path, module: str, capability_id: str) -> dict:
+    """Find a crash that is really there, shrink it, and hand back a runnable reproduction.
+
+    Reuse, not new code: the case generator, the isolating child, the failure classifier, the
+    greedy shrinker and the reproducer writer are the fuzzer's, because they are the same problem.
+    What is different is the search: no function is named, so the search covers everything the
+    sentence put in scope and reports WHICH module and function crashed.  If nothing crashes, that
+    is the finding -- `reproduced: False` with the functions searched and cases run, because "no
+    crash reproduced" and "no search done" must never look alike.
+    """
+    try:
+        max_cases = int(args.get("max_cases") or DEFAULT_REPRO_CASES)
+        seed = int(args.get("seed") or 0)
+        case_timeout = int(args.get("case_timeout_s") or DEFAULT_CASE_TIMEOUT_S)
+    except (TypeError, ValueError):
+        _fail("NUMERIC_ARGUMENT_INVALID")
+    expected = {str(name) for name in (args.get("expected_exceptions") or [])}
+    python_exe = str(args.get("python_executable") or sys.executable)
+
+    found: dict | None = None
+    searched: list[dict] = []
+    cases_run = 0
+    for path, dotted, name in _crash_candidates(args, project, module_file, module):
+        try:
+            node, params, defaults = _target_function(project, path, name)
+        except QualityError:
+            # a varargs/async/keyword-only target is out of scope for a generated call, not a
+            # reason to abandon the other functions in the same file
+            continue
+        cases = _cases(node, params, defaults, seed, max_cases)
+        failures = 0
+        for case in cases:
+            outcome = _run_case(python_exe, project, dotted, name, case, case_timeout)
+            cases_run += 1
+            if outcome["outcome"] == "unimportable":
+                _fail("MODULE_NOT_IMPORTABLE:" + str(outcome.get("msg")))
+            if not _fails(outcome, expected):
+                continue
+            failures += 1
+            if found is None:
+                found = {"module_file": str(path), "module": dotted, "qualname": name,
+                         "case": list(case), "mode": outcome["outcome"],
+                         "exc": outcome.get("exc"), "msg": outcome.get("msg")}
+                break
+        searched.append({"module": dotted, "qualname": name, "cases_run": len(cases),
+                         "cases_that_failed": failures})
+        if found is not None:
+            break
+
+    minimal = None
+    reproducer_path = None
+    failure_mode = found["mode"] if found else None
+    if found is not None:
+        target_module, target_qualname = found["module"], found["qualname"]
+        minimal = _shrink(python_exe, project, target_module, target_qualname, list(found["case"]),
+                          failure_mode, case_timeout, expected)
+        recheck = _run_case(python_exe, project, target_module, target_qualname, minimal,
+                            case_timeout)
+        if not (_fails(recheck, expected) and recheck["outcome"] == failure_mode):
+            _fail("SHRINK_CHANGED_THE_FAILURE_MODE")
+        reproducer_path = str(destination.with_name(destination.stem + "__reproducer.py"))
+        Path(reproducer_path).parent.mkdir(parents=True, exist_ok=True)
+        _reproducer(Path(reproducer_path), target_module, target_qualname, minimal, failure_mode)
+
+    payload = _base(capability_id, "crash_repro", Path(found["module_file"]) if found else module_file)
+    payload.update({
+        "target": str(module_file),
+        "module": found["module"] if found else module,
+        "reproduced": found is not None,
+        "qualname": found["qualname"] if found else None,
+        "reproducer_module": found["module"] if found else None,
+        "functions_searched": searched,
+        "cases_run": cases_run,
+        "minimal_case": minimal,
+        "failure_mode": failure_mode,
+        "exception": found.get("exc") if found else None,
+        "failure_message": found.get("msg") if found else None,
+        "expected_exceptions": sorted(expected),
+        "reproducer_path": reproducer_path,
+        "claim": ("A CRASH IS REPRODUCED: this call, run against this module, fails the same way "
+                  "the search found it, and the reproducer beside this artifact runs it."
+                  if found else
+                  "NO CRASH REPRODUCED: every public function in scope was run over the generated "
+                  "cases and none failed; the count above is the search, not a pass."),
+        "law": ("the search covers everything the sentence put in scope -- the named file, or every "
+                "public module in the named directory -- because a sentence that named one function "
+                "would have said which; each case runs in its own interpreter so a crash or a hang "
+                "is an outcome rather than a lost run; the minimal case must fail the SAME way or "
+                "it is not a shrink"),
+        "complete": True,
+    })
+    written = _write(destination, payload)
+    return {
+        "adapter": "dynamic_probe_v1",
+        "capability_id": capability_id,
+        "act": "crash_repro",
+        "module": payload["module"],
+        "reproduced": found is not None,
+        "qualname": payload["qualname"],
+        "cases_run": cases_run,
+        "minimal_case": minimal,
+        "failure_mode": failure_mode,
+        "reproducer_path": reproducer_path,
+        "gate": "PASS",
+        "complete": True,
+        "output_path": str(destination),
+        "output_sha256": written.get("artifact_sha256"),
+        "output_verified": json.loads(Path(destination).read_text(encoding="utf-8"))["artifact_sha256"]
+        == written.get("artifact_sha256"),
+    }
+
+
+def _locate(root: Path, args: dict, allow_directory_scan: bool = False
+            ) -> tuple[Path, Path, str]:
+    """(project, module_file, dotted module) for the path the sentence named.
+
+    A sentence names a FILE, a directory, or a directory plus a module; all three resolve here,
+    because every dynamic verb needs the same two facts and inferring them twice is how the two
+    answers come to differ.
+    """
     stated = str(args.get("source_root") or args.get("path") or "").strip()
     if not stated:
         _fail("PATH_NOT_STATED")
@@ -358,21 +504,60 @@ def run(args: dict, root) -> dict:
     else:
         project = located
         module = str(args.get("module") or "").strip()
-        qualname = str(args.get("qualname") or "").strip()
         if module:
             module_file = project / module
             if not module_file.is_file():
                 _fail("MODULE_NOT_FOUND:" + module)
         else:
+            qualname = str(args.get("qualname") or "").strip()
+            if not qualname and allow_directory_scan:
+                # the whole directory is the scope; the caller searches its modules
+                return project, project, ""
             if not qualname:
                 _fail("MODULE_NOT_STATED")
-            module = ""
-            module_file = None
-    if module_file is None:
-        module_file = _module_defining(project, qualname)
-    module = str(module_file.relative_to(project)).replace(os.sep, "/")
-    module = module.removesuffix(".py")
-    module = module.replace("/", ".")
+            module_file = _module_defining(project, qualname)
+    dotted = str(module_file.relative_to(project)).replace(os.sep, "/").removesuffix(".py")
+    return project, module_file, dotted.replace("/", ".")
+
+
+def _public_functions(module_file: Path) -> list[str]:
+    """Every module-level function that takes at least one positional parameter, in source order.
+
+    `reproduce the crash in <file>` names a FILE and no function: the crash is wherever it is.  A
+    zero-argument function is skipped because a crash in it is not an input-dependent crash, and a
+    varargs function is skipped because its arity is not knowable without running it.
+    """
+    try:
+        tree = ast.parse(module_file.read_text(encoding="utf-8"), filename=str(module_file))
+    except (SyntaxError, UnicodeDecodeError) as exc:
+        _fail("MODULE_UNPARSEABLE:" + module_file.name + ":" + str(exc))
+    names: list[str] = []
+    for node in tree.body:
+        if not isinstance(node, ast.FunctionDef) or node.name.startswith("_"):
+            continue
+        if node.args.vararg or node.args.kwarg or node.args.kwonlyargs:
+            continue
+        if not (list(node.args.posonlyargs) + list(node.args.args)):
+            continue
+        names.append(node.name)
+    return names
+
+
+def run(args: dict, root) -> dict:
+    root = Path(root)
+    args = dict(args or {})
+    capability_id = str(args.get("capability_id") or CAPABILITY_ID)
+    act = str(args.get("act_verb") or args.get("act") or "fuzz").strip() or "fuzz"
+    if act not in _ACTS:
+        _fail("ACT_NOT_SUPPORTED:" + act)
+    output_path = str(args.get("output_path") or "").strip()
+    if not output_path:
+        _fail("OUTPUT_PATH_NOT_STATED")
+    destination = _destination(root, output_path)
+
+    project, module_file, module = _locate(root, args, allow_directory_scan=(act == "crash_repro"))
+    if act == "crash_repro":
+        return _crash_repro(args, root, destination, project, module_file, module, capability_id)
 
     qualname = str(args.get("qualname") or "").strip()
     if not qualname:

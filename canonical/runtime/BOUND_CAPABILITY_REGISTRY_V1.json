@@ -4319,6 +4319,194 @@
     "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1_V1.json"
    }
   },
+  "python.dynamic.crash_repro.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "crash_repro",
+     "capability_id": "python.dynamic.crash_repro.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "dynamic_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "reproduce the crash",
+    "reproduce a crash",
+    "crash reproduction",
+    "reproducer",
+    "reproduce",
+    "crash",
+    "shrink",
+    "shrinking",
+    "minimal case",
+    "minimal reproduction",
+    "dynamic analysis",
+    "failure reproduction"
+   ],
+   "limitations": [
+    "the search covers every PUBLIC function in the stated file, in source order, because a sentence that named one function would have said which; a private function or a method is not searched unless it is named.",
+    "cases are the fuzzer's: annotation-directed draws plus a boundary corpus; an unannotated parameter gets int and str draws, which is what finds `add('', 0)` as a TypeError.",
+    "each case runs in its own interpreter with a wall-clock cap, so a hang or a segfault is an outcome that is reported, not a lost run.",
+    "an exception named in expected_exceptions is not a crash.",
+    "the shrink must keep the SAME failure mode; the reproduction is re-checked after shrinking and a changed mode is a refusal.",
+    "when nothing crashes the answer is 'NO CRASH REPRODUCED' with the number of functions searched and cases run -- that is a search result, not a pass."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.dynamic.crash_repro",
+    "python.dynamic.crash.reproduction"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "capability_id",
+    "act",
+    "module",
+    "reproduced",
+    "qualname",
+    "cases_run",
+    "minimal_case",
+    "failure_mode",
+    "reproducer_path",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib subprocess/random/ast",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "da3690eabf3125e0ba3814ea64c51574791dcd0f71bbb58298802e85e5e3f1ff",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the TypeError in `add('', 0)`, found in a file whose sentence named no function, shrunk from a random mixed-type draw to the minimal case",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a crashing function), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.crash_repro.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.dynamic.differential_test.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "differential_test",
+     "capability_id": "python.dynamic.differential_test.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "differential_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "differential test",
+    "differential testing",
+    "differential",
+    "against a reference",
+    "reference implementation",
+    "behavioral equivalence",
+    "behavioural equivalence",
+    "cross-check",
+    "compare implementations",
+    "equivalence",
+    "oracle comparison",
+    "regression against the previous version"
+   ],
+   "limitations": [
+    "the reference is stated or it comes from git (default HEAD); with neither, the call is REFUSED rather than compared against whatever file is nearby.",
+    "both implementations are loaded by file path under private module names, so a reference cannot shadow the code under test and two same-named packages cannot collide.",
+    "agreement means the same outcome and, for a return, the same repr; two equal exceptions agree even when their messages differ, because a message is prose.",
+    "the shrink must keep the same KIND of disagreement (value vs exception vs returns-vs-raises).",
+    "one child evaluates both sides over the whole case list for speed; if that child dies, the unreported cases are re-run one at a time so a crash is attributed to a side instead of losing the run.",
+    "a module that imports its own package relatively is reported NOT IMPORTABLE rather than silently compared as a stub."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.dynamic.differential_test",
+    "python.dynamic.differential.testing"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "capability_id",
+    "act",
+    "module",
+    "reference_basis",
+    "cases_run",
+    "divergences",
+    "minimal_case",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib subprocess/importlib/random/ast, git",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "5039c38c08d834fda478b913138b87f180b29b07e43c2f0afaa6845537849e63",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "a `sub` that adds instead of subtracting, found against the committed version of the same file and shrunk to `sub(0, 1)`",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a git repository with an uncommitted behavioural change), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.differential_test.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
   "python.dynamic.fuzz.v1": {
    "action_template": {
     "args": {

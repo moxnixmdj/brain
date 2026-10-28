@@ -1,8 +1,8 @@
 {
  "instrument": "execution_guard/hardcore_se_domain_coverage_v1.py",
  "measured": {
-  "capabilities_in_registry": 160,
-  "provides_vocabulary": 223,
+  "capabilities_in_registry": 162,
+  "provides_vocabulary": 227,
   "rows": [
    {
     "act": "git.status",
@@ -308,7 +308,7 @@
     "act": "test.differential",
     "domain": "testing",
     "owner": "",
-    "state": "ABSENT"
+    "state": "NAMED"
    },
    {
     "act": "test.golden_snapshot",
@@ -337,8 +337,8 @@
    {
     "act": "dynamic.crash_repro",
     "domain": "dynamic analysis",
-    "owner": "",
-    "state": "NAMED"
+    "owner": "python.dynamic.crash_repro",
+    "state": "BOUND"
    },
    {
     "act": "dynamic.memory_profile",
@@ -836,8 +836,8 @@
    },
    "dynamic analysis": {
     "ABSENT": 4,
-    "BOUND": 1,
-    "NAMED": 4,
+    "BOUND": 2,
+    "NAMED": 3,
     "total": 9
    },
    "infrastructure and delivery": {
@@ -895,9 +895,9 @@
     "total": 13
    },
    "testing": {
-    "ABSENT": 2,
+    "ABSENT": 1,
     "BOUND": 6,
-    "NAMED": 2,
+    "NAMED": 3,
     "total": 10
    },
    "version control": {

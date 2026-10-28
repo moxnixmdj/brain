@@ -4,6 +4,10 @@
   "python.contract.check.crosshair.v1": [
    "crosshair"
   ],
+  "python.dynamic.crash_repro.v1": [],
+  "python.dynamic.differential_test.v1": [
+   "git"
+  ],
   "python.packaging.build_package.v1": [
    "pip"
   ],

@@ -742,6 +742,25 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
     if key in _PATH_DIR_KEYS:
         dirs = [raw for raw, p in paths if p.is_dir()
                 and not _excludes_destination(raw, destination, root)]
+        bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
+        declared_file_scope = (
+            isinstance(bindings, Mapping)
+            and isinstance(bindings.get(key), Mapping)
+            and bindings[key].get("type") == "path_file_or_dir"
+        )
+        # THE FILE THE CALLER NAMED WINS OVER THE DIRECTORY ITS PATH HAPPENS TO SPELL.
+        # `_repo_paths` yields every prefix of a stated path, so `.../pkg/calc.py` produced BOTH
+        # the file and its directory, and returning `dirs[0]` widened the scope of a one-file
+        # request to everything beside it.  Measured: "Format the python file <F> in place."
+        # bound the directory and ruff rewrote 2238 files; "Reproduce the crash in <F>" bound the
+        # directory again, so a capability that can only search a file was handed a tree.
+        # A declared `path_file_or_dir` capability means exactly what the caller named, so when
+        # the caller named a file and nothing else, the file is the scope.
+        if declared_file_scope:
+            files = [raw for raw, p in paths if p.is_file()
+                     and not _excludes_destination(raw, destination, root)]
+            if len(files) == 1:
+                return files[0]
         if len(dirs) == 1:
             return dirs[0]
         # A scope key is a scope, not a directory. "Audit the python source root
@@ -757,12 +776,6 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         # accepts one. The scope stays exactly what the caller named -- one file
         # means one file, never its siblings -- and anything but exactly one
         # named existing file still fails closed.
-        bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
-        declared_file_scope = (
-            isinstance(bindings, Mapping)
-            and isinstance(bindings.get(key), Mapping)
-            and bindings[key].get("type") == "path_file_or_dir"
-        )
         if not dirs and declared_file_scope:
             files = [raw for raw, p in paths if p.is_file()]
             if len(files) == 1:
@@ -1463,6 +1476,24 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         try:
             bound_val = gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses)
             val = bound_val.get(key)
+            # THE FILE THE CALLER NAMED OUTRANKS THE DIRECTORY ITS PATH SPELLS.  The pinned binder
+            # returns the enclosing directory for a scope key even when the sentence named one
+            # file, and `_repo_paths` yields every prefix of a stated path, so a one-file request
+            # silently became a whole-tree request.  Measured twice: `ruff format` rewrote 2238
+            # files from a sentence about one file, and a crash search was handed a directory when
+            # its sentence named the module.  Only capabilities that DECLARE `path_file_or_dir`
+            # are affected, because only their adapters can index a single file.
+            _bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
+            if (key in _PATH_DIR_KEYS and isinstance(val, str)
+                    and isinstance(_bindings, Mapping)
+                    and isinstance(_bindings.get(key), Mapping)
+                    and _bindings[key].get("type") == "path_file_or_dir"):
+                _files = [raw for raw, path in gc._repo_paths(goal, root)
+                          if path.is_file()
+                          and not _excludes_destination(raw, _stated_destination(goal, root), root)]
+                if len(_files) == 1:
+                    val = _files[0]
+                    bound_val[key] = val
             if key.endswith("_path") and not _is_output_key(key, entry) and val:
                 stem = key[:-5].lower()
                 wanted = _STEM_SUFFIXES.get(stem) or _JOINT_SUFFIX_GUARD.get(stem)

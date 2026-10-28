@@ -1,8 +1,8 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `32575a2` + this unit**
+**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `f5f191c` + this unit**
 
-_Supersedes `…GAP_MAP_20261028_V20.md`.
+_Supersedes `…GAP_MAP_20261028_V21.md`.
 
 This is the complete answer to *"what are all the problems?"*, restricted to what the owner asked for:
 the machine must be the most advanced, fastest software engineer — repair, refactor, analysis,
@@ -22,7 +22,7 @@ document rests on an earlier reading.
 | **P2** | **Capability claims that name nothing a reader can check.** 34 of 158 evidence blocks point at no file; 8 point at files nobody wrote. | 42 / 158 entries | anyone deciding whether to trust a capability |
 | ~~**P12**~~ | ~~**A verb that rewrites its target can eat the repository.**~~ **CLOSED this unit (§5.5)** — `format` took a one-file sentence, bound the file's *directory*, rewrote 2238 files and then wrote its own receipt over the named source file. Found by using the capability, not by reading it. | 1 verb, 2 laws | the tree the machine works in |
 | ~~**P3**~~ | ~~**Capability is a function of the shell, not of the machine.**~~ **CLOSED this unit (§5)** — the door now checks the engine before it promises the work, installs the pinned tool when the interpreter is one we manage, and otherwise refuses by name; 13 acts that failed as *broken capabilities* on a clean box are now honest refusals. | was 13 + 3 lost acts | every deployment that is not this sandbox |
-| **P4** | **Ten acts nothing in the machine owns**: merge-conflict resolution, interactive debugging, crash reproduction, memory profiling, differential testing, schema migration, CI config, retry design, observability instrumentation, docstrings. | 10 of 43 probed acts | day-to-day senior engineering |
+| **P4** | **Eight acts nothing in the machine owns** (was ten): merge-conflict resolution, interactive debugging, memory profiling, schema migration, CI config, retry design, observability instrumentation, docstrings. **Crash reproduction and differential testing are CLOSED this unit (§6.1)**. | 8 of 43 probed acts | day-to-day senior engineering |
 | **P5** | **Acts the machine owns but cannot be asked for.** `git bisect` needs a predicate no sentence states; two of six refactors are `NOT_REACHABLE` and four `ROUTE_ELSEWHERE` from a synthesised sentence. | 11 unreachable + 9 misrouted of 452 | the door, not the verbs |
 | **P6** | **Whole domains sit at zero**: infrastructure/delivery 0/6, observability 0/5, dynamic analysis 1/9, performance engineering 2/6, services & concurrency 3/8, dependencies & build 2/10, documentation 1/4. | 44 absent acts of 135 | "build software end to end" |
 | **P7** | **25 red compiler tests** in four defect families (DAG result invalid, over-eager compilation, stale guard assertions, door parity). | 25 of 133 | the compiler's word |
@@ -37,11 +37,14 @@ owner said. P3 second, because it was the larger version of the same lie: thirte
 capabilities reported as broken because a package had never been installed. Both were *reporting*
 defects, and both are now measured to be gone.
 
-The most critical remaining problem is **P4 — the ten acts nothing owns** (crash reproduction,
+The 43-act probe now reads **34 answered / 9 honest refusals / 0 broken / 0 hollow** (it was
+16/11/13/3 on a bare box at the start of the previous unit and 32/11/0/0 with the toolchain).
+
+The most critical remaining problem is **P4 — the eight acts nothing owns** (crash reproduction,
 differential testing, memory and CPU profiling, schema migration, merge-conflict resolution,
 CI config, retry design, observability, interactive debugging, docstrings). It is the only front
-where the machine lacks ability rather than honesty, and the first four of those are cheap because
-the runner, the shrinker and the profilers are already in the repository (§13, rows 2–3).
+where the machine lacks ability rather than honesty, and the next ones are cheap because the
+profilers and the git plumbing are already in the repository (§13, rows 1–3).
 
 ---
 
@@ -71,7 +74,7 @@ REACHABILITY (452 rows = 158 registered + 294 receipt projections)
   REACHED_AND_BOUND 429 · NOT_REACHABLE 11 · ROUTED_ELSEWHERE 9 · BY EXPLICIT NAME 3
 
 DOMAIN COVERAGE (135 acts a senior engineer performs)
-  BOUND 62 · NAMED-ONLY 29 · ABSENT 44
+  BOUND 63 · NAMED-ONLY 29 · ABSENT 43
 ```
 
 ---
@@ -87,7 +90,7 @@ it (vocabulary, not capability). `ABSENT` = nothing in the machine mentions it.
 | refactoring | 6/14 | 2 | 6 | rename symbol/parameter, extract, inline, move, change signature |
 | static analysis | 10/13 | 1 | 2 | ruff, mypy, complexity, dead code, duplication, symbols, resolve, impact, tree-sitter index |
 | testing | 6/10 | 2 | 2 | coverage, slice, scaffold, flake detect, property oracle, contract oracle |
-| dynamic analysis | 1/9 | 4 | 4 | fuzz |
+| dynamic analysis | 2/9 | 3 | 4 | fuzz, crash reproduction, differential testing |
 | performance engineering | 2/6 | 0 | 4 | diff perf gate, complexity metric |
 | security & supply chain | 6/9 | 2 | 1 | bandit SAST, diff security gate, license, provenance |
 | dependencies & build | 2/10 | 3 | 5 | wheel build, dependency add |
@@ -317,27 +320,60 @@ says it cannot lint, which is true, and it now also says which package would mak
 
 ---
 
-## 6. P4 — the ten acts nothing owns
+## 6. P4 — eight acts nothing owns (two closed this unit)
 
-Measured through the front door, each named by the sentence an engineer would write:
+### 6.1 Crash reproduction and differential testing are closed — by reuse, not by a new engine
 
-| act | what the door does now |
-|---|---|
-| merge-conflict resolution | `NO_VERIFIED_CAPABILITY_MATCH` (a symbol-resolve candidate wants `queries`) |
-| interactive debugging | refuses; a static auditor is proposed and rejected (`R12`) |
-| crash reproduction + shrink | refuses; a test-selection candidate is proposed and rejected (`R3`) |
-| memory profiling | mis-compiles to an acceptance-measurement verb that wants `test_argv` |
-| differential testing | refuses; the incremental indexer is proposed and rejected (`R14`) |
-| schema migration | a sqlite writer wants `json_path` — the wrong object |
-| CI configuration | `NO_VERIFIED_CAPABILITY_MATCH` |
-| retry design | refuses; a symbol indexer is proposed and rejected (`R14`) |
-| observability instrumentation | **now binds `python.packaging.dependency_add.v1`** and fails on `dependency:not_stated` — my own new verb became the candidate for "add logging" |
-| docstrings | refuses; a static auditor is proposed and rejected (`R14`) |
+Both rows read as refusals on the last measurement, and both refusals were honest:
 
-Two of these are cheap reuse rather than new science: **crash reproduction** is the shrinker and
-reproducer that `fuzz` already ships (§12), and **differential testing** is the same runner pointed
-at two coordinates. **Memory profiling** is `tracemalloc` from the stdlib. **Observability** and
-**CI config** are template-emission with a verification law.
+```
+crash_repro        R3_WEAK_EVIDENCE      answered by a TEST SELECTOR
+differential_test  R14_UNHEARD_ACT_WORD  the act word did not exist
+```
+
+Neither needed an engine. `dynamic_probe_v1` already drew cases from the annotations, ran each in
+its own interpreter, classified `ok` / `raised` / `timeout` / `crashed` as facts about a process,
+shrank the first failure greedily *while keeping the same failure mode*, and wrote a runnable
+reproducer. What was missing was one sentence's worth of semantics, twice:
+
+- **`python.dynamic.crash_repro.v1`** — the same engine with a wider search. "Reproduce the crash in
+  `<file>`" does not name a function; if it knew which one crashed it would have said, so the search
+  covers every public function in scope and reports **which one crashed**. Measured on
+  `def divide(a, b): return a/b`: `reproduced: True`, `qualname: divide`, `minimal_case: [0, 0]`,
+  and the reproducer written beside the artifact exits non-zero with the same `ZeroDivisionError`.
+  When nothing crashes the answer is `NO CRASH REPRODUCED` with the functions searched and cases
+  run — a search result, never a silent pass.
+- **`python.dynamic.differential_test.v1`** — the same generator and the same shrinker with a
+  different oracle: two implementations must agree. The reference is stated, or it is the file's own
+  **git `HEAD`** (which is how a risky refactor is checked: the working tree against the code it
+  replaced), or the call is *refused* — a comparison against whatever file happened to be nearby is
+  not an oracle. Measured on a `sub` that adds instead of subtracting: 7 divergences, shrunk to
+  `sub(0, 1)` (`2` vs `0`), basis `git:HEAD:calc.py`.
+
+Speed is part of the design: one child interpreter evaluates **both** implementations over the whole
+case list and streams a line per case; only when that child dies do the unreported cases get one
+isolated process each, so a crash is attributed to a side instead of losing the run.
+
+### 6.2 The binding defect they exposed, for the third time
+
+Both sentences name a **file**; the compiler bound `source_root` to the file's **directory**, and
+both capabilities reported `MODULE_NOT_STATED` / searched the wrong scope. This is the same defect
+that let `ruff format` rewrite 2238 files (§5.5), now caught at the third layer, and this time the
+fix is complete rather than local: a capability that declares `proposal_bindings.source_root:
+path_file_or_dir` is a capability whose adapter can index one file, and it now *receives the file
+the sentence named* — one file means one file, never its siblings. Capabilities that did not
+declare it keep binding the directory, because a test runner genuinely needs a tree.
+
+Where a sentence names only a directory, both new verbs treat it as a scope: crash reproduction
+searches every public module inside it, differential testing compares each module with its own
+reference. A scope stayed a scope; it just stopped widening a file.
+
+### 6.3 What is still missing here
+
+`merge_conflict`, `interactive_debug`, `memory_profile`, `schema_migration`, `ci_config`,
+`retry_design`, `observability`, `docstrings` — and of those, the profilers (`tracemalloc`,
+`cProfile`) and `git`'s own merge machinery are already installed, which is why they are rows 1–3
+of §13 rather than a research programme.
 
 ---
 
@@ -424,6 +460,8 @@ not a fog.
 | fuzz (generate → isolate → shrink → reproduce) | `python.dynamic.fuzz.v1` | answered, evidenced, 11/11 pins |
 | install-or-refuse at the door | `python.toolchain.gate.v1` (all 34 tool-backed verbs) | 13 owned-but-failed → 0 on a bare box, 3 silent → 0, nothing falsely refused, 18/18 pins |
 | a formatter cannot eat the tree or its receipt | `python.toolchain.ruff_format.v1` | 2238-file half-rewrite and source-file replacement both refused/avoided; 7/7 pins |
+| crash reproduction (find → shrink → reproduce) | `python.dynamic.crash_repro.v1` | answered through the door, reproduced `divide(0, 0)`, reproducer re-run and failing the same way; 9/9 pins with the differential test |
+| differential testing (two implementations, one oracle) | `python.dynamic.differential_test.v1` | answered through the door, 7 divergences shrunk to `sub(0, 1)`, basis `git:HEAD`; reference refused when unstoppable |
 
 Those four verbs took the 43-act score from 28 answered to 32, and each was measured by the same
 instruments this document uses — including the three laws each one gained *because* the measurement
@@ -444,7 +482,7 @@ Reuse first, and nothing here needs an absent instrument.
 | ~~3~~ | ~~structural ownership oracle~~ | P1 root | **DONE this unit** — claims, not keywords; bandit's false keywords removed | — |
 | ~~0~~ | ~~**make a mutating verb safe** (`format` ate 2238 files and its own source)~~ | P12 | **DONE this unit** — dry pass, receipt that cannot land on the artifact, named file not its directory | — |
 | ~~1~~ | ~~**install-or-refuse at the door**~~ | P3 (13 lost acts + 3 silent) | **DONE this unit** — `toolchain_gate_v1` + 34 per-capability rows; bare box 16→18 answered, 13 owned-but-failed → 0, nothing falsely refused | — |
-| **1** | **`crash_repro` + `differential_test`** | P4 (2 acts), P6 | the runner, the shrinker and the reproducer exist inside `fuzz` | ~1 unit for both |
+| ~~**1**~~ | ~~**`crash_repro` + `differential_test`**~~ | P4 (2 acts), P6 | **DONE this unit** — one engine, two oracles: 34/43 acts answered, the crash found and shrunk to `divide(0, 0)`, the divergence to `sub(0, 1)`; 9 pins | — |
 | 2 | **`memory_profile` + `cpu_profile` + `benchmark`** | P6 (3 acts) | `tracemalloc`, `cProfile`, `timeit` — stdlib, one module | ~1 unit |
 | 3 | **routability law** (one row → one rule) | P5 (20 rows, 2 tests) | derived from `provides` instead of hand-written keywords | ~1–2 units |
 | 4 | **`schema_migration` + data integrity** | P4, P6 | `sqlite3` is present; the migration is a transaction plus a verification law | ~1 unit |
@@ -465,6 +503,10 @@ authority, and no AI model participates in Brain-credited producer cognition.
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_missing_verb_probe_v1.py --json /tmp/a.json
 env -i HOME=/root PATH=/usr/bin:/bin PYTHONPATH=. /usr/bin/python3 \
     execution_guard/hardcore_se_missing_verb_probe_v1.py --json /tmp/bare.json
+PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_missing_verb_probe_v1.py \
+    --only crash_repro,differential_test
+PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py \
+    --only python.dynamic.crash_repro.v1,python.dynamic.differential_test.v1 --remeasure
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_domain_coverage_v1.py
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py --audit-pointers
 PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_goal_front_compiler_v1.py \
