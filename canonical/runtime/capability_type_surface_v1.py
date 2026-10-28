@@ -173,6 +173,7 @@ _EXPLICIT: dict[str, str] = {
     # unfilled slot is a chain that never runs
     "content": STRING,
     "module_name": STRING,
+    "max_mutants": NUMBER,
     "argv": ARGV,                  # general command vector -- the universal
                                    # action primitive in any environment
     "actions": JSON_TEXT,          # browser action script, consumed by

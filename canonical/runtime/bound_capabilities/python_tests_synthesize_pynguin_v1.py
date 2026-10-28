@@ -52,12 +52,18 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
 
     out_rel = str(out_dir.relative_to(repo))
     src_rel = str(src.relative_to(repo))
+    # MOSA: many-objective search explicitly targeting branch coverage -- on
+    # modules with hard-to-reach functions the default random search plateaued
+    # at the easy functions and never touched the rest (measured: appended
+    # helper got zero calls under RANDOM, 7 under MOSA, same wall clock).
     pynguin_argv = [
         sys.executable, "-m", "pynguin",
         "--project-path", src_rel,
         "--module-name", module_name,
         "--output-path", out_rel,
         "--maximum-search-time", str(budget),
+        "--algorithm", str(args.get("algorithm") or "MOSA"),
+        "--seed", str(args.get("search_seed") or 20261029),
     ]
     env = dict(os.environ)
     env["PYNGUIN_DANGER_AWARE"] = "true"

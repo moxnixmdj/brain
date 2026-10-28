@@ -562,6 +562,32 @@ def _pynguin_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
             out[slot] = "calc"
         elif slot == "time_budget_s":
             out[slot] = 12
+        elif slot == "algorithm":
+            out[slot] = "MOSA"
+        elif slot == "search_seed":
+            out[slot] = 20261029
+    return out or None
+
+
+def _amplify_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
+    """Domain generator for the mutation-amplification family: a GREEN world
+    with an existing suite (the mutation gate refuses a red base world) and a
+    real module for Pynguin to cover."""
+    if "mutation_kill" not in cid:
+        return None
+    fx = _swe_unittest_fixture(ws / f"amp{rng.randrange(1 << 30)}", green=True)
+    out: dict = {}
+    for slot in sig:
+        if slot == "source_root":
+            out[slot] = str(fx["src"])
+        elif slot == "module_name":
+            out[slot] = "calc"
+        elif slot in ("time_budget_s",):
+            out[slot] = 10
+        elif slot in ("timeout_s",):
+            out[slot] = 60
+        elif slot in ("max_mutants",):
+            out[slot] = 40
     return out or None
 
 
@@ -643,8 +669,12 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path,
         # groundable when the SWE generator supplies worktree/diff/executable.
         # Repair loops have no structural keys, so they still fall through to
         # the repair fixture unharmed.
-        domain = (_swe_repo_args(cid, all_slots, rng, ws)
+        # exact-cid generators claim BEFORE the broad _swe_repo_args claimer:
+        # the broad one grounded source_root into its own repo world, leaving
+        # module_name to the random string sampler (TARGET_MODULE_MISSING)
+        domain = (_amplify_args(cid, all_slots, rng, ws)
                   or _pynguin_args(cid, all_slots, rng, ws)
+                  or _swe_repo_args(cid, all_slots, rng, ws)
                   or _python_repair_args(cid, all_slots, rng, ws)
                   or _saccr_args(cid, all_slots, rng, ws)
                   or _docx_args(cid, all_slots, rng, ws) or {})

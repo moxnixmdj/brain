@@ -10560,7 +10560,9 @@
      "capability_id": "python.tests.synthesize.pynguin.v1",
      "output_path": "${input.output_path}",
      "source_root": "${input.source_root}",
-     "time_budget_s": "${input.time_budget_s}"
+     "time_budget_s": "${input.time_budget_s}",
+     "algorithm": "${input.algorithm}",
+     "search_seed": "${input.search_seed}"
     },
     "expect": {
      "field": "output_verified",
@@ -10614,6 +10616,76 @@
    "verification": {
     "independently_verified": false,
     "mission_id": "AUTO-VERIFY-PYTHON_TESTS_SYNTHESIZE_PYNGUIN_V1",
+    "observed_effect": {},
+    "receipt_path": "",
+    "state_path": ""
+   }
+  },
+  "python.tests.advance.mutation_kill.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.tests.advance.mutation_kill.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "module_name": "${input.module_name}",
+     "time_budget_s": "${input.time_budget_s}",
+     "timeout_s": "${input.timeout_s}",
+     "max_mutants": "${input.max_mutants}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_tests_advance_mutation_kill_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "mutation",
+    "amplification",
+    "test",
+    "survivor",
+    "kill",
+    "pynguin",
+    "score"
+   ],
+   "limitations": [
+    "Composes mutation gate x Pynguin: measures kill_before, synthesizes green regression tests on the post-diff world, measures kill_after. verified = tests execute AND non-worsening kill. Amplification loop of REPAIR_DEPTH program."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "python.tests.amplified.mutation_scored"
+   ],
+   "requires": [
+    "python.source.file.available"
+   ],
+   "result_fields": [
+    "adapter",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "amplified",
+    "kill_before",
+    "kill_after",
+    "tests_generated",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_tests_advance_mutation_kill_v1.py",
+    "type": "brain_native_deterministic_composition",
+    "version_family": "v1"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": false,
+    "mission_id": "AUTO-VERIFY-PYTHON-TESTS-ADVANCE-MUTATION-KILL-V1",
     "observed_effect": {},
     "receipt_path": "",
     "state_path": ""
