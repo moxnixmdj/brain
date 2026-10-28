@@ -1,6 +1,6 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `32575a2` + this unit (`fc229a1`)**
+**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `32575a2` + this unit**
 
 _Supersedes `…GAP_MAP_20261028_V20.md`.
 
@@ -20,6 +20,7 @@ document rests on an earlier reading.
 |---|---|---|---|
 | ~~**P1**~~ | ~~**The door credits acts nothing owns.**~~ **CLOSED this unit (§3)** — both acts now have real owners built on the tools that already are the answer (`detect-secrets`, `pip-audit`), and the probe's ownership oracle reads claims instead of keywords. | was 2 acts miscredited | the scoreboard is now honest |
 | **P2** | **Capability claims that name nothing a reader can check.** 34 of 158 evidence blocks point at no file; 8 point at files nobody wrote. | 42 / 158 entries | anyone deciding whether to trust a capability |
+| ~~**P12**~~ | ~~**A verb that rewrites its target can eat the repository.**~~ **CLOSED this unit (§5.5)** — `format` took a one-file sentence, bound the file's *directory*, rewrote 2238 files and then wrote its own receipt over the named source file. Found by using the capability, not by reading it. | 1 verb, 2 laws | the tree the machine works in |
 | ~~**P3**~~ | ~~**Capability is a function of the shell, not of the machine.**~~ **CLOSED this unit (§5)** — the door now checks the engine before it promises the work, installs the pinned tool when the interpreter is one we manage, and otherwise refuses by name; 13 acts that failed as *broken capabilities* on a clean box are now honest refusals. | was 13 + 3 lost acts | every deployment that is not this sandbox |
 | **P4** | **Ten acts nothing in the machine owns**: merge-conflict resolution, interactive debugging, crash reproduction, memory profiling, differential testing, schema migration, CI config, retry design, observability instrumentation, docstrings. | 10 of 43 probed acts | day-to-day senior engineering |
 | **P5** | **Acts the machine owns but cannot be asked for.** `git bisect` needs a predicate no sentence states; two of six refactors are `NOT_REACHABLE` and four `ROUTE_ELSEWHERE` from a synthesised sentence. | 11 unreachable + 9 misrouted of 452 | the door, not the verbs |
@@ -261,6 +262,46 @@ re-running the bare probe and watching the answered count fall:
   external tool"), not an absence of one; five `quality_v1` verbs that read the AST, the git
   history or installed metadata are empty rows.
 
+### 5.5 A verb that rewrites its target can eat the repository
+
+Found the way these things are found — by asking the machine to do the work. This document's own
+repository was destroyed twice in ninety seconds by one sentence:
+
+```
+goal: "Format the python file canonical/runtime/toolchain_gate_v1.py in place."
+
+the compiler bound   source_root = canonical/runtime        <- the file's DIRECTORY
+the adapter ran      ruff format canonical/runtime
+ruff rewrote         2238 files, 229,816 insertions
+then died            "Failed to parse livebench_legacy_predecessor_compiler_audit_v1.py"
+the adapter wrote    its own refusal JSON to output_path
+output_path was      canonical/runtime/toolchain_gate_v1.py <- the source file it had just been asked about
+result               a 256-line module replaced by nine lines of JSON, and a half-formatted tree
+```
+
+Two defects, both of the kind that make every other capability worthless because the workspace is
+gone, and both fixed at the seam where the write happens (`bound_capabilities/toolchain_v1.py`):
+
+1. **A mutation is all-or-nothing.** ruff is not transactional — it rewrites file after file and
+   stops at the first it cannot parse. Every mutating call now runs a dry pass first
+   (`ruff format --check --diff`); a pass that cannot complete REFUSES
+   (`FORMAT_WOULD_LEAVE_A_HALF_FORMATTED_TREE`, naming the unparsable files) and nothing is
+   written. One extra process buys "the tree is either formatted or untouched".
+2. **A receipt never lands on the artifact.** For a verb whose target *is* its output ("format
+   this file in place"), the artifact is the file and the receipt travels as the returned payload
+   (`receipt_written: False`, `artifact_path` = the file). And because a refusal is also a write,
+   the destination is validated *where no write can follow it* — the first version of this guard
+   put the check inside the block that reports refusals, so its own refusal was written to the
+   path it had just rejected, which is the same corruption wearing a different hat.
+3. **The named file is the target, not its directory.** When the sentence names one file and the
+   compiler derives the enclosing directory, formatting "in place" now means the file. Measured
+   after the fix, through the live door: the named file is formatted, its neighbours are
+   byte-identical, and the request PASSes instead of refusing.
+
+A fourth, smaller lie died with it: `changed_files` came from parsing `"Reformatted N files"` — a
+COUNT, never paths — so the receipt reported **zero** changed files after changing them. ruff 0.17.3
+names each file only in the `+++ <path>` header of its diff, and that is what the receipt now reads.
+
 ### 5.4 What it measures now
 
 ```
@@ -382,6 +423,7 @@ not a fog.
 | inline function | `python.refactor.inline_function.v1` | answered, evidenced, 11/11 pins |
 | fuzz (generate → isolate → shrink → reproduce) | `python.dynamic.fuzz.v1` | answered, evidenced, 11/11 pins |
 | install-or-refuse at the door | `python.toolchain.gate.v1` (all 34 tool-backed verbs) | 13 owned-but-failed → 0 on a bare box, 3 silent → 0, nothing falsely refused, 18/18 pins |
+| a formatter cannot eat the tree or its receipt | `python.toolchain.ruff_format.v1` | 2238-file half-rewrite and source-file replacement both refused/avoided; 7/7 pins |
 
 Those four verbs took the 43-act score from 28 answered to 32, and each was measured by the same
 instruments this document uses — including the three laws each one gained *because* the measurement
@@ -400,6 +442,7 @@ Reuse first, and nothing here needs an absent instrument.
 | ~~1~~ | ~~real `secret_scan`~~ | P1 | **DONE this unit** — detect-secrets, declared and bootstrapped, 3 findings on a planted fixture | — |
 | ~~2~~ | ~~real `vulnerability_audit`~~ | P1 | **DONE this unit** — pip-audit, 22 advisories on a pinned urllib3 | — |
 | ~~3~~ | ~~structural ownership oracle~~ | P1 root | **DONE this unit** — claims, not keywords; bandit's false keywords removed | — |
+| ~~0~~ | ~~**make a mutating verb safe** (`format` ate 2238 files and its own source)~~ | P12 | **DONE this unit** — dry pass, receipt that cannot land on the artifact, named file not its directory | — |
 | ~~1~~ | ~~**install-or-refuse at the door**~~ | P3 (13 lost acts + 3 silent) | **DONE this unit** — `toolchain_gate_v1` + 34 per-capability rows; bare box 16→18 answered, 13 owned-but-failed → 0, nothing falsely refused | — |
 | **1** | **`crash_repro` + `differential_test`** | P4 (2 acts), P6 | the runner, the shrinker and the reproducer exist inside `fuzz` | ~1 unit for both |
 | 2 | **`memory_profile` + `cpu_profile` + `benchmark`** | P6 (3 acts) | `tracemalloc`, `cProfile`, `timeit` — stdlib, one module | ~1 unit |

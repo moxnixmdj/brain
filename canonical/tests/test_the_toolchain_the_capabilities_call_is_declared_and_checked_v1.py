@@ -33,6 +33,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 DECLARATION = ROOT / "canonical/runtime/TOOLCHAIN_DECLARATION_V1.json"
 PREFLIGHT = ROOT / "execution_guard/toolchain_preflight_v1.py"
 PROBE = ROOT / "execution_guard/hardcore_se_reachability_v1.py"
+ACTS_PROBE = ROOT / "execution_guard/hardcore_se_missing_verb_probe_v1.py"
 
 
 def _load(path: pathlib.Path, name: str):
@@ -47,7 +48,23 @@ def _declaration() -> dict:
 
 
 def _task_tags() -> set[str]:
-    return {tag for tag, _cid, _goal in _load(PROBE, "_se_probe").PROBES}
+    """Every task tag EITHER probe runs.
+
+    `blocks` names the work a missing distribution takes away, and there are two act probes now:
+    the 22-task reachability probe (which produced this declaration's 14/22 -> 22/22) and the
+    43-act missing-verb probe, where the supply-chain acts actually live.  Checking only the
+    first made `secret_scan` look like a task nobody runs, when it is a task the other probe
+    runs every time.
+    """
+    tags = {tag for tag, _cid, _goal in _load(PROBE, "_se_probe").PROBES}
+    acts = _load(ACTS_PROBE, "_se_acts_probe")
+    for name in ("ACTS", "PROBES"):
+        for row in getattr(acts, name, ()) or ():
+            if isinstance(row, (tuple, list)) and row and isinstance(row[0], str):
+                tags.add(row[0])
+            elif isinstance(row, dict) and isinstance(row.get("act"), str):
+                tags.add(row["act"])
+    return tags
 
 
 def test_every_declared_distribution_names_an_import_a_version_and_its_blast_radius():

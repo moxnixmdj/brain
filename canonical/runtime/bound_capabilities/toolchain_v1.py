@@ -227,40 +227,69 @@ def _lint(args, target: Path, cap: str) -> dict:
     }
 
 
+# Formatting MUTATES what it is pointed at, and ruff is not transactional across a tree: it
+# rewrites file after file and stops at the first file it cannot parse.  Measured on
+# 2026-10-28, on this repository: one request for "format the python file <one file> in place"
+# bound `source_root` to the file's DIRECTORY and ruff rewrote 2238 files (229,816 insertions)
+# before dying on `livebench_legacy_predecessor_compiler_audit_v1.py`.  Half the tree was
+# reformatted and nothing said so.  A dry run costs one process and makes the write all-or-nothing
+# in the only way that matters: the write pass never starts on a tree that cannot be completed.
+_FORMAT_PREFLIGHT_MAX_ERRORS = 3
+
+
+def _would_reformat(stdout: str) -> list[str]:
+    """The paths ruff says it would rewrite.  This is the only per-file list it gives.
+
+    Measured on ruff 0.17.3, the pinned version: `--check` prints a count and no paths, and
+    `--check --diff` prints a unified diff whose `+++ <path>` header is the only place each
+    rewritten file is NAMED.  The receipt used to parse "Reformatted N files" out of the write
+    pass -- a COUNT -- so it reported zero changed files after changing them.
+    """
+    paths: list[str] = []
+    for line in (stdout or "").splitlines():
+        if line.startswith("+++ "):
+            path = line[4:].strip().split("\t", 1)[0].strip()
+        elif line.startswith("Would reformat:"):
+            path = line.split("Would reformat:", 1)[1].strip()
+        else:
+            continue
+        if path and path not in paths:
+            paths.append(path)
+    return paths
+
+
 def _format(args, target: Path, cap: str) -> dict:
     tool = _resolve_tool("ruff")
     timeout_s = int(args.get("timeout_s") or DEFAULT_TIMEOUT_S)
     check_only = bool(args.get("check_only", False))
-    argv = (
-        [tool, "format", "--no-cache"]
-        + (["--check", "--diff"] if check_only else [])
-        + [str(target)]
-    )
-    proc = _run(argv, Path.cwd(), timeout_s)
-    if proc.returncode not in (0, 1):
-        _fail("TOOL_FAILED:ruff:" + (proc.stderr or proc.stdout or "").strip()[:200])
-    touched = (
-        [
-            line.split("Would reformat:", 1)[1].strip()
-            for line in (proc.stdout or "").splitlines()
-            if line.startswith("Would reformat:")
-        ]
-        if check_only
-        else []
-    )
+    # THE DRY RUN DECIDES, FOR A FILE AS WELL AS A TREE.  ruff format is not transactional: it
+    # rewrites file after file and stops at the first it cannot parse.  Measured on this
+    # repository: a request about one file bound its DIRECTORY, and ruff rewrote 2238 files
+    # (229,816 insertions) before dying on a file it could not parse -- half-applied, unreported.
+    # The dry run costs one process, gives the exact list of files a write pass would touch, and
+    # makes the write pass all-or-nothing in the only way that matters: it never starts on a
+    # target that cannot be finished.
+    pre = _run([tool, "format", "--check", "--diff", "--no-cache", str(target)],
+               Path.cwd(), timeout_s)
+    if pre.returncode not in (0, 1):
+        lines = [line for line in (pre.stderr or pre.stdout or "").splitlines() if line.strip()]
+        _fail("REFUSED:FORMAT_WOULD_LEAVE_A_HALF_FORMATTED_TREE:"
+              + " | ".join(lines[:_FORMAT_PREFLIGHT_MAX_ERRORS]))
+    proposed = _would_reformat(pre.stdout or "")
     if not check_only:
-        touched = [
-            line.split("Reformatted", 1)[1].strip()
-            for line in (proc.stderr or "").splitlines()
-            if line.startswith("Reformatted")
-        ]
+        proc = _run([tool, "format", "--no-cache", str(target)], Path.cwd(), timeout_s)
+        if proc.returncode not in (0, 1):
+            _fail("TOOL_FAILED:ruff:" + (proc.stderr or proc.stdout or "").strip()[:200])
     return {
         **_base(cap, "ruff", target),
         "check_only": check_only,
-        "changed_files": touched,
-        "changed_count": len(touched),
-        "reformatted": bool(touched),
-        "unformatted": proc.returncode == 1 if check_only else bool(touched),
+        # NOT parsed out of "Reformatted N files" -- that line carries a COUNT, not the paths, so
+        # the receipt used to claim nothing had changed after changing it.  The dry run knows.
+        "changed_files": [] if check_only else proposed,
+        "would_reformat": proposed,
+        "changed_count": 0 if check_only else len(proposed),
+        "reformatted": bool(proposed) and not check_only,
+        "unformatted": bool(proposed),
     }
 
 
@@ -530,6 +559,45 @@ _HANDLERS = {
 }
 
 
+# Verbs whose target is not merely read but REWRITTEN.  For these the destination is not just a
+# report: if it lands inside the target, the receipt would be written into the tree the verb is
+# mutating.
+_MUTATING_VERBS = frozenset({"format"})
+
+
+def _mutates(verb: str, args: dict) -> bool:
+    """A mutation verb under `check_only` reads; it does not write."""
+    return verb in _MUTATING_VERBS and not bool(args.get("check_only", False))
+
+
+def _destination_aliases_target(verb: str, target: Path, destination: Path,
+                                mutates: bool = True) -> bool:
+    """True when a verb that will REWRITE its target was told to report to that same path."""
+    if verb not in _MUTATING_VERBS or not mutates:
+        return False
+    try:
+        target_resolved = target.resolve()
+        destination_resolved = destination.resolve()
+    except OSError:
+        return False
+    return (destination_resolved == target_resolved
+            or target_resolved in destination_resolved.parents)
+
+
+def _in_place_payload(payload: dict, target: Path) -> dict:
+    """The artifact is the file itself, so the receipt must travel as the return value."""
+    payload["artifact_path"] = str(target)
+    payload["artifact_sha256"] = (
+        hashlib.sha256(target.read_bytes()).hexdigest() if target.is_file() else ""
+    )
+    payload["receipt_written"] = False
+    payload["receipt_note"] = (
+        "the sentence asked for this edit in place, so the artifact is the edited path itself; "
+        "the receipt is this returned payload, never a file written over the artifact"
+    )
+    return payload
+
+
 def run(args: dict, root: Path) -> dict:
     """The one entrypoint every analyser capability uses.  Keys come from the action template."""
     args = dict(args or {})
@@ -549,6 +617,15 @@ def run(args: dict, root: Path) -> dict:
             destination = absolute_like
         else:
             destination = joined
+    def _refusal(reason: str) -> dict:
+        return {
+            "adapter": "toolchain_v1",
+            "capability_id": capability_id,
+            "tool": verb,
+            "gate": "FAIL",
+            "reason": reason,
+        }
+
     try:
         if verb not in _HANDLERS:
             _fail("TOOL_VERB_NOT_SUPPORTED:" + (verb or "<none>"))
@@ -558,15 +635,26 @@ def run(args: dict, root: Path) -> dict:
         target = _inside(root, stated)
         if target is None:
             _fail("PATH_NOT_IN_THE_REPOSITORY:" + stated)
+    except ToolchainError as exc:
+        _write(destination, _refusal(str(exc)))
+        raise
+    # "IN PLACE" MEANS THE ARTIFACT IS THE PATH, NOT THE RECEIPT.  Measured: this is how a
+    # 256-line module became nine lines of receipt JSON -- the sentence said "format <file> in
+    # place", the compiler bound `output_path` to that same file, and the write below replaced it.
+    # So for a verb that REWRITES its target, an aliased destination is not a conflict to refuse
+    # and not a file to write: the work is done, and the receipt travels as the return value.  A
+    # refusal here would also write to the objected destination, which is the same corruption.
+    if _destination_aliases_target(verb, target, destination, mutates=_mutates(verb, args)):
+        # A mutating verb told to report into its own target: the sentence asked for an edit in
+        # place, and the sentence named the FILE, not the directory the compiler derived for it.
+        # Formatting the enclosing tree because one file was named is how 2238 files were
+        # rewritten; the named file is the target.
+        in_place_target = destination if destination.is_file() or not target.is_dir() else target
+        return _in_place_payload(
+            _HANDLERS[verb](args, in_place_target, capability_id), in_place_target)
+    try:
         payload = _HANDLERS[verb](args, target, capability_id)
     except ToolchainError as exc:
-        refusal = {
-            "adapter": "toolchain_v1",
-            "capability_id": capability_id,
-            "tool": verb,
-            "gate": "FAIL",
-            "reason": str(exc),
-        }
-        _write(destination, refusal)
+        _write(destination, _refusal(str(exc)))
         raise
     return _write(destination, payload)
