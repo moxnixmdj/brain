@@ -74,6 +74,13 @@ GENERIC_MATCH_TOKENS={
     # Measured after adding these: hollow passes 15 -> 11 on that probe, no suite moved.
     "report","reports","receipt","artifact","result","results","summary","findings",
     "issue","issues","log","record",
+    # The words that name the MEDIUM the sentence works in, rather than the act.  Measured on
+    # the 43-act probe: "Find the flaky tests in the repository R" was admitted to
+    # `python.quality.changelog.v1` with a PASS on exactly {report, repository} -- the artifact
+    # word and the medium word -- because `repository` counted as distinctive evidence for a
+    # changelog.  Every goal in this repository names one, so it can never distinguish two.
+    # Measured before adding: 0 of 149 live capabilities lose their last distinctive token.
+    "repository","repo","directory","folder",
     # "python" alone names a language, not an operation: zero-input fleet rows
     # whose entire match is the word "python" score 16 on "Audit python source
     # structure..." and outrank the right capability only because their empty
@@ -834,6 +841,31 @@ def _introduced(text,raw,phrases,root):
     return False
 
 
+def _enclosing_worktree(path, root):
+    """The git worktree that CONTAINS a file, relative to ``root``, or None.
+
+    A repository anchor is the tree the tool must run INSIDE, and "the tree the file is in" is a
+    fact on the filesystem: walk up to the nearest ancestor that carries ``.git``.  Measured:
+    "Blame the lines of <root>/scratch/repo/pkg/calc.py" anchored `worktree_path` at ``"."`` --
+    the outer project -- because the file is inside the project, so git ran in the project while
+    the path was stated against the nested repository and refused `fatal: no such path`.  The
+    nested worktree was on disk the whole time.
+    """
+    try:
+        candidate = pathlib.Path(path)
+        start = (pathlib.Path(root) / candidate) if not candidate.is_absolute() else candidate
+        start = (start if start.is_dir() else start.parent).resolve()
+        base = pathlib.Path(root).resolve()
+        for parent in (start, *start.parents):
+            if str(parent) in ("/", "."):
+                return None
+            if (parent / ".git").exists():
+                return "." if parent == base else str(parent.relative_to(base))
+    except (OSError, ValueError):
+        return None
+    return None
+
+
 def _bind_by_role_kind(goal,key,root,bound,extra=None,paths=None):
     """Bind one slot from the words a person uses for it -- or nothing at all.
 
@@ -896,7 +928,9 @@ def _bind_by_role_kind(goal,key,root,bound,extra=None,paths=None):
         if repo_anchor:
             inside=[raw for raw,p in named if p.is_file() and rr in p.parents]
             if inside:
-                return "."
+                # ...and it is the worktree CONTAINING that file, not this project by default.
+                worktree=_enclosing_worktree(inside[0],root)
+                return worktree if worktree is not None else "."
         return _UNBOUND
     if kind in (lex.KIND_FILE,lex.KIND_FILES):
         existing=[raw for raw,p in named if p.is_file() and rr in p.parents]
@@ -1540,7 +1574,48 @@ def _artifact_write_tokens(goal):
 # A sentence may open with a word that is not the act ("Please ...", "The ...").
 # Those never name a capability, so the head-verb rule simply does not fire.
 _NON_ACT_TOKENS=frozenset({"please","the","a","an","i","we","you","it","this","that",
-                           "and","or","if","then","hello","test","file"})
+                           "and","or","if","then","hello","test","file",
+    # A REQUEST VERB IS NOT AN ACT.  "Scan", "check", "find", "show", "measure", "look" --
+    # these say how the caller wants the answer, and every capability that carries one of them
+    # in its own id would collect the head-verb bonus for it.  Measured on the 43-act probe:
+    # "Scan the repository R for leaked secrets" scored python.quality.license_scan.v1 14 (the
+    # word `scan` is in its id) against python.toolchain.bandit_security.v1 13, which matched
+    # `leaked` and `secrets`.  The security analyser lost to the licence scanner by one point
+    # over a word that names no act, and the request was answered with a licence report.
+    # Dropping the bonus for these words costs nothing: a capability that names its act
+    # ("lint", "bisect", "blame", "rebase") still gets it.
+    "scan","check","find","show","list","look","measure","report","review","inspect",
+    "detect","ensure","verify","validate"})
+
+
+_shared_identity_verbs_cache = None
+
+
+def _shared_identity_verbs():
+    """Verbs that more than one capability carries in its own NAME.
+
+    An act word is evidence of an act only while it names ONE thing.  `audit` sits in the
+    identifiers of five capabilities (a source-structure auditor, a unittest auditor, a
+    provenance auditor and two ruff rule audits), so the word alone cannot say which act the
+    sentence asked for -- its object does.  `bisect` sits in exactly one, so the verb alone is
+    the capability.  Read from the pinned registry beside this module, cached, never inferred:
+    the same construction the requires ceiling above uses.
+    """
+    global _shared_identity_verbs_cache
+    if _shared_identity_verbs_cache is not None:
+        return _shared_identity_verbs_cache
+    out = {}
+    try:
+        path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        with open(path, "r", encoding="utf-8") as fh:
+            caps = (json.load(fh) or {}).get("capabilities") or {}
+        for cid in caps:
+            for tok in _tokens(cid):
+                out[tok] = out.get(tok, 0) + 1
+    except Exception:  # noqa: BLE001 - an unreadable registry disables the rule, never the score
+        out = {}
+    _shared_identity_verbs_cache = out
+    return out
 
 
 def _head_verb(goal):
@@ -1556,6 +1631,24 @@ def _head_verb(goal):
             continue
         return low
     return None
+
+
+def _head_verb_compound(goal):
+    """The sentence's opening verb phrase when the registry spells it as one word.
+
+    English compounds are written apart and named together: "Type check the python source ..."
+    is the act in `python.toolchain.mypy_typecheck.v1`, but the first word alone is `type`, and
+    `type` also prefixes an unrelated gate (`python.review.diff_type_gate.v1`) which then claimed
+    the head-verb bonus and turned a right capability into a refusal.  The two words are joined
+    only when the join is a token some capability already carries in its own name, so nothing is
+    invented; otherwise this returns None and the first word stands.
+    """
+    words = [w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9]*", str(goal or ""))
+             if len(w) > 1 and w.lower() not in STOPWORDS]
+    if len(words) < 2:
+        return None
+    joined = words[0] + words[1]
+    return joined if _shared_identity_verbs().get(joined) else None
 
 
 def _named_by_the_goal(goal_tokens, name_tokens):
@@ -1611,6 +1704,13 @@ def _score(goal, cid, entry):
     # on python.software.repair.apply.verified.v1, the one capability that both
     # finds the patch and lands it, so the file really is repaired.
     gt_effect=gt-(_artifact_write_tokens(goal) if _names_a_patch_route(goal) else set())
+    # A verb phrase the registry spells as one word is a token of this sentence (see
+    # _head_verb_compound): "type check" is `typecheck`, and the capability whose name contains
+    # it is claiming this sentence's own verb rather than a prefix of it.
+    _compound=_head_verb_compound(goal)
+    if _compound:
+        gt=gt|{_compound}
+        gt_effect=gt_effect|{_compound}
     provides=_tokens(entry.get("provides",[]))
     requires=_tokens(entry.get("requires",[]))
     identity=_tokens(cid)
@@ -1666,11 +1766,28 @@ def _score(goal, cid, entry):
     # the distinction: "Generate a QR code image ..." moved the pinned overlap
     # order from the decoder to the generator, which empties a negative control
     # that proves the BM25 re-rank is load-bearing.
-    head_verb=_head_verb(goal)
+    head_verb=_compound or _head_verb(goal)
     verb_bonus=0
+    # The verb picks the frame, and its ARGUMENTS fill it.  A capability that claims the verb
+    # but matches nothing else in the sentence is not the capability the sentence describes --
+    # it is a tool that happens to be named after the verb.  Measured: "Audit the dependencies
+    # in R for known vulnerabilities and report it to O" gave python.source.audit.ast only
+    # {audit} plus this bonus, 18, over python.toolchain.bandit_security.v1 at 17 with
+    # {audit, known, vulnerabilities}, so the source-structure auditor PASSed a question about
+    # dependency vulnerabilities.  An artefact or medium word ("report", "repository") cannot
+    # be that second token either -- it names where the answer goes, not what is being audited.
+    _verb_matched=(set(gt_effect & keywords) | set(gt_effect & provides) | set(gt_effect & identity)
+                   | {stem for stem in stem_hits})
+    head_verb_arguments=((_verb_matched - {head_verb}) - GENERIC_MATCH_TOKENS) if head_verb else set()
+    # ...unless the verb names exactly one capability in the whole registry.  Then the verb IS
+    # the identification and there is no other candidate to confuse it with: `bisect` matches
+    # nothing but itself in "Bisect the repository R from the ref HEAD~2", and without the bonus
+    # it tied shell.command.run at 11 and lost on alphabetical order.
+    _verb_shared = _shared_identity_verbs().get(head_verb or "", 0) > 1
     if (head_verb and head_verb in identity
             and head_verb not in GENERIC_MATCH_TOKENS
-            and head_verb not in _NON_ACT_TOKENS):
+            and head_verb not in _NON_ACT_TOKENS
+            and (head_verb_arguments or not _verb_shared)):
         verb_bonus=7
         score+=verb_bonus
     # Prefer more-specific matched preconditions when base scores tie.

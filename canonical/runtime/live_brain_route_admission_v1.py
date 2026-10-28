@@ -156,6 +156,13 @@ _REQUEST_VERBS = frozenset({
     "execute", "invoke", "call", "use", "using", "with", "please", "let", "keep", "ensure",
     "must", "should", "can", "i", "we", "you", "it", "this", "that", "there", "do", "does",
     "have", "has", "want", "need", "take", "put", "set", "start", "stop", "repeat", "again",
+    # "Scan", "measure", "detect", "review": the same class.  Measured on the 43-act probe:
+    # "Scan the repository R for leaked secrets" selected the security analyser and was then
+    # REJECTED with "scan is owned by python.quality.license_scan.v1" -- the word `scan` is in
+    # that capability's id, and a request verb in an id is not a claim on an act.  The
+    # capability that matched `leaked` and `secrets` was refused in favour of nothing.
+    "scan", "measure", "detect", "review", "analyze", "analyse", "collect", "compute",
+    "count", "check", "display", "dump", "emit", "log", "note", "observe", "track",
 })
 
 
@@ -235,7 +242,102 @@ def _act_owned_by_someone_else(goal: str, selected: str,
         chosen_words = set()
     if word in chosen_words:
         return None
+    # THE SELECTED CAPABILITY MAY NAME A MORE SPECIFIC ACT THAN THE VERB DOES.
+    #
+    # `word` is the sentence's OPENING verb, and an opening verb is often the generic one:
+    # "Measure the cyclomatic complexity of the python source ..." opens with `measure`, which
+    # python.repository.acceptance.measure.v1 names and python.toolchain.ruff_complexity.v1 does
+    # not -- so this rule rejected the analyser that performs the act and reported "measure is
+    # owned by another capability".  The refusal was correct in form and wrong in fact: the
+    # sentence's DISTINCTIVE words are `cyclomatic` and `complexity`, and only the selected
+    # capability names them.  So when the selected entry matches a word the supposed owner does
+    # not, the sentence is more specific than its own first verb and the evidence decides.
+    goal_words = {str(w).lower() for w in re.findall(r"[a-z0-9]+", str(goal or "").lower())}
+    owner_entry = registry.get(owners[0]) or {}
+    owner_words = {str(x).lower() for x in (owner_entry.get("keywords") or [])}
+    owner_words |= set(re.findall(r"[a-z0-9]+", str(owners[0]).lower()))
+    specific = (goal_words & chosen_words) - owner_words
+    if specific:
+        return None
     return (word, owners[0])
+
+
+_PROSE_STOPWORDS = frozenset({
+    "the", "and", "for", "with", "from", "into", "onto", "that", "this", "these", "those",
+    "then", "than", "them", "they", "there", "here", "each", "every", "some", "any", "all",
+    "its", "it", "is", "are", "was", "were", "be", "been", "being", "has", "have", "had",
+    "its", "our", "your", "their", "which", "what", "when", "where", "while", "also", "just",
+    "only", "very", "more", "most", "less", "least", "such", "same", "other", "another",
+    "should", "would", "could", "must", "may", "can", "will", "shall", "please", "using",
+    "use", "used", "make", "made", "make", "give", "keep", "take", "want", "need", "let",
+    "python", "source", "code", "file", "files", "path", "paths", "report", "output",
+    # Determiners and ordinals: they qualify a thing, they never name the act of a sentence.
+    "previous", "last", "first", "next", "new", "existing", "current", "same", "whole",
+    "entire", "some", "several", "many", "much", "both", "either", "neither", "each",
+    # Interrogatives: they open a question, they never name what is asked about.
+    "whether", "what", "which", "how", "why", "when", "where", "who", "whom", "whose",
+})
+
+
+def _unheard_act_word(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> str:
+    """A content word in the sentence that the registry has NEVER heard as an act.
+
+    Measured: "Find the flaky tests in the repository R" was answered by the CHANGELOG
+    builder with a PASS, because `report` and `repository` -- the words that name the artifact
+    and the medium, not the act -- were the only evidence, and the declared-input contract
+    bound.  Bindability is not relevance: a capability whose inputs fit proves where the
+    values go, never that it performs what was asked.
+
+    So when the evidence is generic AND the sentence carries a content word that appears
+    nowhere in the registry's vocabulary, the answer is a refusal that names that word.  It is
+    the same discipline as R12 (an act this brain does not perform), applied to the word that
+    actually distinguishes the act instead of to the sentence's opening verb.
+    """
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+        text = _front.without_stated_text_value(str(goal or ""))
+    except Exception:  # noqa: BLE001 - no front grammar, no claim to make
+        return ""
+    try:
+        from canonical.runtime import goal_compiler as _gc
+        for raw, _resolved in _gc._repo_paths(text, ROOT):
+            text = text.replace(str(raw), " ")
+    except Exception:  # noqa: BLE001 - a path that cannot be read is simply not a word
+        pass
+    # A filesystem path is a VALUE, not a word about the act: "/home/user/..." made `home` an
+    # unheard act word, and a ref named `main` did the same.  Absolute paths, drive paths and
+    # anything carrying an extension are dropped before the vocabulary test.
+    text = re.sub(r"(?:[A-Za-z]:[\\/]|/)\S*", " ", text)
+    text = re.sub(r"\S+\.\w{1,5}\b", " ", text)
+    vocabulary = _registry_vocabulary(registry)
+    for token in re.findall(r"[A-Za-z][A-Za-z0-9]+", text):
+        word = token.lower()
+        if len(word) < 4 or word in _PROSE_STOPWORDS or word in _REQUEST_VERBS:
+            continue
+        if word in vocabulary:
+            continue
+        if any(len(claimed) >= 4 and (claimed.startswith(word) or word.startswith(claimed))
+               for claimed in vocabulary):
+            continue
+        return word
+    return ""
+
+
+def _unheard_is_the_requested_object(goal: str, unheard: str, registry: Mapping[str, Mapping[str, Any]]) -> bool:
+    """Is this unheard word what the sentence's opening request verb asks about?"""
+    try:
+        from canonical.runtime import goal_compiler as _gc
+        head = _gc._head_verb(goal)
+    except Exception:  # noqa: BLE001 - no parser, no claim
+        return False
+    if not head or head not in _REQUEST_VERBS:
+        return False
+    words = [w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9]+", str(goal or ""))]
+    for word in words[words.index(head) + 1:]:
+        if len(word) < 4 or word in _PROSE_STOPWORDS or word in _REQUEST_VERBS:
+            continue
+        return word == unheard
+    return False
 
 
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
@@ -368,12 +470,42 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # R3_WEAK_EVIDENCE, one semantic token).  Re-verified HERE rather than trusting a rule string, and
     # only for a SPECIFIC contract: a capability whose only input is the whole request binds any
     # sentence at all, so binding it proves nothing about what was asked for.
+    # THE WORD THAT NAMES THE ACT IS THE EVIDENCE, NOT THE WORD THAT NAMES THE ARTIFACT.
+    # Placed before the typed admission, because a bound contract proves where the values go
+    # and never that this capability performs what was asked.
+    _unheard = _unheard_act_word(goal, registry)
+    # Two readings of the same defect.  (a) The evidence is only artefact and medium words, and
+    # the sentence carries a word no capability has ever heard: nothing names the act.  (b) The
+    # sentence opens with a request verb ("find", "check", "scan") and the FIRST thing that verb
+    # is asked to find is itself unheard: "Find the flaky tests" -- `flaky` is in no capability's
+    # vocabulary, so `python.quality.coverage.v1` measured test coverage and reported PASS, which
+    # is a true statement about a different question.  A request verb is a frame, and the frame's
+    # object has to be something this machine knows how to reason about.
+    if _unheard and ((semantic and semantic <= goal_compiler.GENERIC_MATCH_TOKENS)
+                     or _unheard_is_the_requested_object(goal, _unheard, registry)):
+        return {**base, "admitted": False,
+                "rule": "R14_UNHEARD_ACT_WORD:%s" % _unheard,
+                "admission_basis": "GENERIC_EVIDENCE_FOR_AN_ACT_NO_CAPABILITY_NAMES"}
     try:
         from canonical.runtime import capability_selection_retrieval_v1 as _selection
         typed = _selection.admit(goal, selected, entry, ROOT)
     except Exception:  # noqa: BLE001 - any failure to re-verify is simply no admission here
         typed = None
-    if isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True:
+    # ...and the contract proves nothing on its own either.  A capability binds a sentence it
+    # shares ONE WORD with, and that word need not be the act it performs: `python.source.
+    # symbols.index.ast` was admitted for "Make the network calls in X retry safely" on the single
+    # keyword `calls` (score 4, no other candidate above 5) and PASSed, answering a request for a
+    # retry policy with a symbol index.  So a bound contract admits only when the sentence says at
+    # least two things this capability is about, OR the one thing it says is the ACT (its own
+    # name) or the EFFECT (its provides) rather than an incidental keyword.  A sentence that
+    # shares NO word with the capability is not that case -- there the declared contract is the
+    # whole of the evidence (measured: "Audit the pypi wheel artifact provenance and sha256
+    # download hash on <a> with selection <b> and save the report to <c>" overlaps the capability
+    # not once, and the pinned binder places all three files; refusing it was a regression).
+    _act_or_effect = semantic & (set(evidence.get("matched_provides") or [])
+                                 | set(evidence.get("matched_identity") or []))
+    if (isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True
+            and (len(semantic) >= 2 or _act_or_effect or not matched)):
         return {**base, "admitted": True, "rule": None,
                 "admission_basis": "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL",
                 "typed_admission": {"required_inputs": typed.get("required_inputs"), "specific": True}}

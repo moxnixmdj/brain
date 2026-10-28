@@ -2937,6 +2937,20 @@ def _stated_directory(slot: str, goal: str) -> str | None:
     return None
 
 
+# The slots whose value is a REPOSITORY the tool runs inside, from the compiler's own table
+# (goal_compiler._REPO_ANCHOR_SLOTS) so the two layers cannot drift apart.
+_REPO_ANCHOR_SLOTS = frozenset({"anchor_path", "repo_path", "worktree_path", "apply_directory"})
+
+
+def _enclosing_worktree(candidate: str) -> str | None:
+    """The git worktree that CONTAINS a stated path (goal_compiler owns the rule)."""
+    try:
+        from canonical.runtime import goal_compiler as _gc
+        return _gc._enclosing_worktree(candidate, _repo_root())
+    except Exception:  # noqa: BLE001 - an unresolvable path is simply not an anchor
+        return None
+
+
 def _is_directory_in_repo(candidate: str) -> bool:
     try:
         return (_repo_root() / str(candidate)).is_dir()
@@ -3106,6 +3120,10 @@ def bind(signature: Mapping[str, str], goal: str,
                     continue
             named = _noun_matched_path(slot, paths, goal)
             chosen = named if named is not None else _sole_existing_repository_path(paths)
+            if chosen is not None and t == "PATH_DIR" and slot in _REPO_ANCHOR_SLOTS:
+                # A slot that names a repository is the worktree that contains the path, not
+                # the path's parent directory (see _enclosing_worktree).
+                chosen = _enclosing_worktree(chosen) or chosen
             if chosen is not None and t == "PATH_DIR":
                 # A DIRECTORY slot takes a directory.  Measured the same day: on
                 # "Run the strict progress repair loop on the python source root

@@ -35,7 +35,11 @@ sys.path.insert(0, str(ROOT))
 WORK = ROOT / "canonical/astra_runtime/tmp/missing_verb_probe"
 
 
-def build_repo() -> Path:
+# The rows whose sentence promises uncommitted work.  Every other act gets a clean tree.
+_DIRTY_WORLD_ACTS = {"git_stash", "git_diff", "git_commit", "git_status", "git_log"}
+
+
+def build_repo(dirty: bool = True) -> Path:
     """A tiny but REAL repository: two commits, a branch, a dirty file, a conflict-free tree."""
     b = WORK / "repo"
     shutil.rmtree(b, ignore_errors=True)
@@ -44,13 +48,33 @@ def build_repo() -> Path:
     (b / "README.md").write_text("# demo\n", encoding="utf-8")
     g = lambda *a: subprocess.run(["git", "-c", "user.email=a@b", "-c", "user.name=a", *a],
                                   cwd=b, capture_output=True, text=True)
-    g("init", "-q"); g("add", "-A"); g("commit", "-qm", "first")
+    # A named branch, a test module and a branch to replay.  Three acts had nothing to act
+    # on and their failures were read as capability defects: `git rebase ... onto main` died
+    # REF_NOT_FOUND because `git init` made a tree with no `main`, and `measure the coverage
+    # of the tests` died NO_TESTS_FOUND because the world had no tests.  A fixture that
+    # cannot support the act measures the fixture, not the machine.
+    g("init", "-q", "-b", "main"); g("add", "-A"); g("commit", "-qm", "first")
     (b / "pkg/calc.py").write_text("def add(a, b):\n    return a + b\n\n\ndef sub(a, b):\n    return a - b\n",
                                    encoding="utf-8")
-    g("add", "-A"); g("commit", "-qm", "second")
-    (b / "pkg/calc.py").write_text(
-        "def add(a, b):\n    return a + b\n\n\ndef sub(a, b):\n    return a - b\n\n\ndef mul(a, b):\n    return a * b\n",
+    (b / "pkg/__init__.py").write_text("", encoding="utf-8")
+    (b / "pkg/test_calc.py").write_text(
+        "from pkg.calc import add, sub\n\n\ndef test_add():\n    assert add(1, 2) == 3\n\n\ndef test_sub():\n    assert sub(3, 1) == 2\n",
         encoding="utf-8")
+    g("add", "-A"); g("commit", "-qm", "second")
+    g("checkout", "-q", "-b", "work")
+    (b / "README.md").write_text("# demo\n\nfeature work\n", encoding="utf-8")
+    g("add", "-A"); g("commit", "-qm", "feature work")
+    g("checkout", "-q", "main")
+    (b / "pkg/calc.py").write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
+    g("add", "-A"); g("commit", "-qm", "main moved on")
+    g("checkout", "-q", "work")
+    if dirty:
+        # Only the rows whose SENTENCE implies uncommitted work get one.  A checkout, a revert
+        # and a rebase refuse a dirty tree by contract (WORKING_TREE_DIRTY), so a world that
+        # hands them one measures the fixture's choice, not the capability's.
+        (b / "pkg/calc.py").write_text(
+            "def add(a, b):\n    return a + b\n\n\ndef sub(a, b):\n    return a - b\n\n\ndef mul(a, b):\n    return a * b\n",
+            encoding="utf-8")
     return b
 
 
@@ -149,6 +173,14 @@ def main() -> int:
     for act, sentence in ACTS:
         if ns.only and act not in ns.only.split(","):
             continue
+        # A FRESH WORLD PER ROW.  These acts MUTATE the repository they are pointed at --
+        # checkout rewinds HEAD, revert and bisect move it, rebase replays a branch -- so a
+        # shared world measures whatever the previous row left behind.  Measured on the run
+        # before this: coverage_measure and flake_detect failed TESTS_COULD_NOT_RUN (import of
+        # `sub`) against a tree that an earlier `checkout the previous commit` had rewound, and
+        # the failures were read as capability defects.  Rebuilt here, each row is a statement
+        # about the capability alone.
+        repo = build_repo(dirty=act in _DIRTY_WORLD_ACTS)
         out = WORK / "out" / (act + ".json")
         out.parent.mkdir(parents=True, exist_ok=True)
         goal = sentence.format(R=str(repo), O=str(out))
@@ -196,11 +228,35 @@ def main() -> int:
                 # act" no matter who answered it, and the eleven git acts that the registry
                 # now owns were counted as hollow passes for being served correctly.
                 _tokens = [t for t in re.split(r"[^a-z0-9]+", act.lower()) if t]
-                owns = bool(_tokens) and all(
+                # ANY ACT WORD, NOT ALL OF THEM.  A compound act key ("complexity_metric",
+                # "secret_scan") asks the capability to name every part of it, and a capability
+                # names the ACT, not the sentence's phrasing: python.toolchain.ruff_complexity.v1
+                # says `complexity` and never says `metric`, so a correct cyclomatic-complexity
+                # report was counted as a hollow pass.  The words that name the medium or the
+                # request are excluded instead, which is the distinction that matters.
+                _medium = {"the", "and", "for", "with", "run", "make", "test", "tests", "python",
+                           "source", "code", "repo", "repository", "project", "file", "files",
+                           # Request verbs and generic act words: a capability that says
+                           # "change" or "check" has not thereby claimed to change a signature
+                           # or check a licence.  Measured: with these words counted, the test
+                           # SELECTOR (python.source.change_impact.testselect.v1) was credited
+                           # with owning "Change the signature of the function add".
+                           "change", "add", "find", "check", "scan", "measure", "detect",
+                           "report", "write", "create", "make", "build", "fix", "get", "set",
+                           "use", "apply", "ensure", "verify", "validate", "update", "remove",
+                           "delete", "audit", "review", "inspect", "show", "list", "profile"}
+                _named = [t for t in _tokens if t not in _medium]
+                owns = bool(_named) and any(
                     any(o == t or o.startswith(t) or t.startswith(o) for o in _own)
-                    for t in _tokens)
+                    for t in _named)
             except Exception:  # noqa: BLE001 - measurement must not crash the probe
                 owns = None
+        if verdict == "WRONG_TOOL" and owns:
+            # The RIGHT capability answered and its execution failed.  That is not a routing
+            # defect and it is not a hollow pass: it is a capability defect, and counting it as
+            # "the wrong tool" hid four of them (git_blame, git_rebase, coverage_measure,
+            # api_compatibility) behind a verdict about vocabulary.
+            verdict = "OWNED_BUT_FAILED"
         if verdict == "SILENTLY_WRONG" and owns:
             # The act EXISTS and the capability that answered it is the one that owns it:
             # answering is the correct outcome, not a hollow pass.  The probe was written
