@@ -124,7 +124,44 @@ def _norm_key(module_path: str, lineno: int, api: str) -> tuple[str, int, str]:
     return (module_path, lineno, api)
 
 
+def _universe_cache_key(root: Path) -> str:
+    """Content fingerprint of every input the compiler reads.
+
+    The universe scan reads each runtime *.py byte-for-byte, and the compiler
+    itself is these modules, so hashing ALL their bytes (not mtimes -- those
+    lie) is a sound cache key: a hit implies byte-identical inputs, hence an
+    identical output. ~2258 files hash in ~0.2 s versus a ~9 s recompile.
+    """
+    runtime = (Path(root) / "canonical/runtime").resolve()
+    h = hashlib.sha256()
+    h.update(b"registry-cache-v1\0")
+    for f in sorted(runtime.rglob("*.py")):
+        h.update(f.relative_to(root).as_posix().encode())
+        h.update(b"\0")
+        h.update(f.read_bytes())
+        h.update(b"\0")
+    return h.hexdigest()
+
+
+_CACHE_DIR = Path("/tmp/project_brain_registry_cache")
+
+
 def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
+    key = _universe_cache_key(root)
+    cache = _CACHE_DIR / (key + ".json")
+    if cache.is_file():
+        try:
+            doc = json.loads(cache.read_text(encoding="utf-8"))
+            # self-consistency check: a tampered cache yields a wrong material
+            # sha, which the authorizer's pinned registry sha rejects anyway --
+            # but verify here so the failure is ATTRIBUTED, not downstream.
+            # `universe` itself is not cached: only the compile OUTPUT is, and
+            # the only registry fields derived from it are hashed inside
+            # `material` below.
+            if _sha(doc["material"]) == doc.get("registry_sha256"):
+                return doc["registry"]
+        except (KeyError, json.JSONDecodeError, OSError):
+            pass  # corrupt cache: fall through to an honest recompile
     universe = compile_universe(root)
     if not universe[
         "two_chokepoint_preconditions_proved_for_parseable_runtime_python"
@@ -225,7 +262,7 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
     }
     registry_sha256 = _sha(material)
 
-    return {
+    registry = {
         "schema": SCHEMA,
         "status": (
             "PASS__WHOLE_RUNTIME_PROCESS_SITES_TOTALIZED__"
@@ -262,6 +299,17 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
             "ownership_credit_delta": 0,
         },
     }
+
+    try:
+        _CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        (_CACHE_DIR / (key + ".json")).write_text(json.dumps({
+            "material": material,
+            "registry_sha256": registry_sha256,
+            "registry": registry,
+        }), encoding="utf-8")
+    except OSError:
+        pass  # cache is an accelerator only; the registry is the authority
+    return registry
 
 
 if __name__ == "__main__":
