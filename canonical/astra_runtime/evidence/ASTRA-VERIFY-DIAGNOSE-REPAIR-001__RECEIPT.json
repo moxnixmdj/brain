@@ -1,763 +1,1187 @@
 {
-  "receipt_for": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
-  "capability_id": "software.diagnose_then_repair.v1",
-  "adapter_module": "software_diagnose_then_repair_v1",
-  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12), proj/tests/test_other.py is the rest of the suite; 2-cpu host, confinement on",
-  "e2e_ms_golden": [
-    2159.9,
-    2257.1
-  ],
-  "observed": {
-    "golden": {
-      "bug": "return w * h - 1",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 2159.9,
-      "search_s": 1.401,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 85,
-      "tested": 64,
-      "greens": [
-        1,
-        4,
-        5,
-        6
-      ],
-      "overfit_signature_indices": [],
-      "compose": null,
-      "winning_mutation": "BINOP_DROP keep left",
-      "patched_lines": [
-        "+    return w * h"
-      ],
-      "witness": {
-        "status": "MEASURED",
-        "seconds": 0.585,
-        "ranking": [
-          {
-            "index": 1,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 4,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 5,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 6,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.32
-        },
-        {
-          "step": "localize",
-          "seconds": 0.121
-        },
-        {
-          "step": "patch_search",
-          "seconds": 1.401
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.314
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true,
-      "note": "diff byte-identical on rerun; source tree hash unchanged"
+ "receipt_for": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
+ "capability_id": "software.diagnose_repair.v1",
+ "adapter_module": "software_diagnose_then_repair_v1",
+ "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12; two-example cases add area(2, 5) == 10), proj/tests/test_other.py is the rest of the suite; 2-cpu host, confinement on",
+ "e2e_ms_golden": [
+  2064.1,
+  2093.5
+ ],
+ "observed": {
+  "golden": {
+   "bug": "return w * h - 1",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 2064.1,
+   "search_s": 1.332,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 85,
+   "tested": 64,
+   "greens": [
+    1,
+    4,
+    5,
+    6
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "BINOP_DROP keep left",
+   "witness": {
+    "function": "area",
+    "grid_inputs": 109,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 1,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 4,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 5,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 6,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.561,
+    "status": "MEASURED",
+    "test_inputs": 1
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.309
     },
-    "wrong_operator": {
-      "bug": "return w + h",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 1601.0,
-      "search_s": 0.822,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 68,
-      "tested": 64,
-      "greens": [
-        4
-      ],
-      "overfit_signature_indices": [],
-      "compose": null,
-      "winning_mutation": "BINOP_SWAP Add->Mult",
-      "patched_lines": [
-        "+    return w * h"
-      ],
-      "witness": {
-        "status": "SINGLE_GREEN",
-        "seconds": null,
-        "ranking": [
-          {
-            "index": 4,
-            "delta_on_tests": null,
-            "delta_outside_tests": null
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.349
-        },
-        {
-          "step": "localize",
-          "seconds": 0.127
-        },
-        {
-          "step": "patch_search",
-          "seconds": 0.822
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.299
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true
+    {
+     "step": "localize",
+     "seconds": 0.12
     },
-    "missing_term": {
-      "bug": "return w",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 1571.2,
-      "search_s": 0.792,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 70,
-      "tested": 64,
-      "greens": [
-        2
-      ],
-      "overfit_signature_indices": [],
-      "compose": null,
-      "winning_mutation": "EXPR_EXTEND <expr> Mult h",
-      "patched_lines": [
-        "+    return w * h"
-      ],
-      "witness": {
-        "status": "SINGLE_GREEN",
-        "seconds": null,
-        "ranking": [
-          {
-            "index": 2,
-            "delta_on_tests": null,
-            "delta_outside_tests": null
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.331
-        },
-        {
-          "step": "localize",
-          "seconds": 0.123
-        },
-        {
-          "step": "patch_search",
-          "seconds": 0.792
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.321
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true
+    {
+     "step": "patch_search",
+     "seconds": 1.332
     },
-    "missing_guard": {
-      "bug": "return w * h  (+ area(None, 4) == 0)",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 2034.5,
-      "search_s": 1.225,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 68,
-      "tested": 64,
-      "greens": [
-        11,
-        18
-      ],
-      "overfit_signature_indices": [],
-      "compose": null,
-      "winning_mutation": "GUARD_INSERT if w is None: return 0",
-      "patched_lines": [
-        "+    if w is None:",
-        "+        return 0"
-      ],
-      "witness": {
-        "status": "MEASURED",
-        "seconds": 0.356,
-        "ranking": [
-          {
-            "index": 11,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 10
-          },
-          {
-            "index": 18,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 10
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.332
-        },
-        {
-          "step": "localize",
-          "seconds": 0.155
-        },
-        {
-          "step": "patch_search",
-          "seconds": 1.225
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.319
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true
-    },
-    "two_edits_and_overfit": {
-      "bug": "return w + h + 1",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 3836.3,
-      "search_s": 3.044,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 260,
-      "tested": 128,
-      "greens": [
-        25,
-        104,
-        112,
-        132,
-        146
-      ],
-      "overfit_signature_indices": [
-        25
-      ],
-      "compose": {
-        "composed_from": [
-          25,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "pair_count": 176,
-        "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-        "seconds": 2.196
-      },
-      "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult",
-      "patched_lines": [
-        "+    return w * h"
-      ],
-      "witness": {
-        "status": "MEASURED",
-        "seconds": 0.682,
-        "ranking": [
-          {
-            "index": 104,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 105
-          },
-          {
-            "index": 132,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 105
-          },
-          {
-            "index": 112,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 106
-          },
-          {
-            "index": 25,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 146,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.337
-        },
-        {
-          "step": "localize",
-          "seconds": 0.133
-        },
-        {
-          "step": "patch_search",
-          "seconds": 3.044
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.315
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true,
-      "note": "'+ 5' is green and flagged -> composition -> 'return w * h' ranked above it by the witness"
-    },
-    "two_edits_and_overfit__judge_pytest": {
-      "bug": "return w + h + 1",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 22612.0,
-      "search_s": 21.848,
-      "judge": {
-        "in_process": false,
-        "reason": "JUDGE_PYTEST_REQUESTED"
-      },
-      "candidates": 260,
-      "tested": 116,
-      "greens": [
-        25,
-        104,
-        112,
-        132,
-        146
-      ],
-      "overfit_signature_indices": [
-        25
-      ],
-      "compose": {
-        "composed_from": [
-          25,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          23
-        ],
-        "pair_count": 176,
-        "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-        "seconds": 12.416
-      },
-      "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult",
-      "patched_lines": [
-        "+    return w * h"
-      ],
-      "witness": {
-        "status": "MEASURED",
-        "seconds": 0.68,
-        "ranking": [
-          {
-            "index": 104,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 105
-          },
-          {
-            "index": 132,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 105
-          },
-          {
-            "index": 112,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 106
-          },
-          {
-            "index": 25,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 146,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.328
-        },
-        {
-          "step": "localize",
-          "seconds": 0.127
-        },
-        {
-          "step": "patch_search",
-          "seconds": 21.848
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.304
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true,
-      "note": "same answer under per-candidate pytest; the time difference is the in-process judge"
-    },
-    "only_overfit": {
-      "bug": "return 0",
-      "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-      "e2e_ms": 1333.0,
-      "search_s": 0.873,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 86,
-      "tested": 64,
-      "greens": [
-        23
-      ],
-      "overfit_signature_indices": [
-        23
-      ],
-      "compose": {
-        "composed_from": [
-          23,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15,
-          16,
-          17,
-          18,
-          19,
-          20,
-          21,
-          22,
-          24
-        ],
-        "pair_count": 0,
-        "reason": "ONLY_SUSPICIOUS_GREENS:[23]",
-        "seconds": 0.0
-      },
-      "winning_mutation": "CONSTANT_REPLACE 0->12",
-      "patched_lines": null,
-      "witness": {
-        "status": "SINGLE_GREEN",
-        "seconds": null,
-        "ranking": [
-          {
-            "index": 23,
-            "delta_on_tests": null,
-            "delta_outside_tests": null
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.333
-        },
-        {
-          "step": "localize",
-          "seconds": 0.124
-        },
-        {
-          "step": "patch_search",
-          "seconds": 0.873
-        }
-      ],
-      "gate": null,
-      "tests_discovered": null,
-      "verified": false,
-      "confined": true
-    },
-    "under_specified_suite": {
-      "bug": "return w * h if w <= 0 else 0",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 2248.8,
-      "search_s": 1.437,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 89,
-      "tested": 64,
-      "greens": [
-        11,
-        13,
-        14,
-        15
-      ],
-      "overfit_signature_indices": [],
-      "compose": null,
-      "winning_mutation": "COMPARE_SWAP LtE->NotEq",
-      "patched_lines": [
-        "+    return w * h if w != 0 else 0"
-      ],
-      "witness": {
-        "status": "MEASURED",
-        "seconds": 0.588,
-        "ranking": [
-          {
-            "index": 11,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 59
-          },
-          {
-            "index": 13,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 89
-          },
-          {
-            "index": 14,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 89
-          },
-          {
-            "index": 15,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 89
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.339
-        },
-        {
-          "step": "localize",
-          "seconds": 0.136
-        },
-        {
-          "step": "patch_search",
-          "seconds": 1.437
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.333
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true
-    },
-    "parametrized_not_plain": {
-      "bug": "return w + h (parametrized test)",
-      "status": "VERIFIED_PATCH",
-      "e2e_ms": 16073.3,
-      "search_s": 8.066,
-      "judge": {
-        "in_process": false,
-        "reason": "TEST_TAKES_PARAMETERS:tests/test_calc.py:test_area"
-      },
-      "candidates": 80,
-      "tested": 45,
-      "greens": [
-        4
-      ],
-      "overfit_signature_indices": [],
-      "compose": null,
-      "winning_mutation": "BINOP_SWAP Add->Mult",
-      "patched_lines": [
-        "+    return w * h"
-      ],
-      "witness": {
-        "status": "SINGLE_GREEN",
-        "seconds": null,
-        "ranking": [
-          {
-            "index": 4,
-            "delta_on_tests": null,
-            "delta_outside_tests": null
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.343
-        },
-        {
-          "step": "localize",
-          "seconds": 7.331
-        },
-        {
-          "step": "patch_search",
-          "seconds": 8.066
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.33
-        }
-      ],
-      "gate": "PASS",
-      "tests_discovered": 2,
-      "verified": true,
-      "confined": true,
-      "note": "not plain -> pytest judge; dynamic localizer cannot run this suite shape -> target from the tests' import closure"
-    },
-    "sabotage_full_suite": {
-      "bug": "return w * h - 1 (+ a test pinning the bug)",
-      "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-      "e2e_ms": 2157.8,
-      "search_s": 1.373,
-      "judge": {
-        "in_process": true,
-        "reason": "PLAIN"
-      },
-      "candidates": 85,
-      "tested": 64,
-      "greens": [
-        1,
-        4,
-        5,
-        6
-      ],
-      "overfit_signature_indices": [],
-      "compose": null,
-      "winning_mutation": "BINOP_DROP keep left",
-      "patched_lines": [
-        "+    return w * h"
-      ],
-      "witness": {
-        "status": "MEASURED",
-        "seconds": 0.585,
-        "ranking": [
-          {
-            "index": 1,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 4,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 5,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          },
-          {
-            "index": 6,
-            "delta_on_tests": 1,
-            "delta_outside_tests": 109
-          }
-        ]
-      },
-      "steps": [
-        {
-          "step": "reproduce",
-          "seconds": 0.324
-        },
-        {
-          "step": "localize",
-          "seconds": 0.125
-        },
-        {
-          "step": "patch_search",
-          "seconds": 1.373
-        },
-        {
-          "step": "full_suite_gate",
-          "seconds": 0.332
-        }
-      ],
-      "gate": "FAIL",
-      "tests_discovered": 2,
-      "verified": false,
-      "confined": true
-    },
-    "nothing_to_repair": {
-      "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-      "e2e_ms": 329.7
-    },
-    "harness_crash": {
-      "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-      "e2e_ms": 295.2
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.299
     }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "diff byte-identical on rerun; source tree hash unchanged"
+  },
+  "wrong_operator": {
+   "bug": "return w + h",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1556.0,
+   "search_s": 0.768,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 68,
+   "tested": 64,
+   "greens": [
+    4
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "BINOP_SWAP Add->Mult",
+   "witness": {
+    "ranking": [
+     {
+      "index": 4
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.328
+    },
+    {
+     "step": "localize",
+     "seconds": 0.118
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.768
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.338
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true
+  },
+  "missing_term": {
+   "bug": "return w",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1527.6,
+   "search_s": 0.787,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 70,
+   "tested": 64,
+   "greens": [
+    2
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "EXPR_EXTEND <expr> Mult h",
+   "witness": {
+    "ranking": [
+     {
+      "index": 2
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.326
+    },
+    {
+     "step": "localize",
+     "seconds": 0.123
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.787
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.289
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true
+  },
+  "missing_guard": {
+   "bug": "return w * h  (+ area(None, 4) == 0)",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1960.7,
+   "search_s": 1.184,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 68,
+   "tested": 64,
+   "greens": [
+    11,
+    18
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "enumerated": 5712,
+    "examples": 2,
+    "expressions": [],
+    "function": "area",
+    "seconds": 0.016,
+    "status": "NONE:EXHAUSTED",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "GUARD_INSERT if w is None: return 0",
+   "witness": {
+    "function": "area",
+    "grid_inputs": 118,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 10,
+      "grid_inputs": 118,
+      "index": 11,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 10,
+      "grid_inputs": 118,
+      "index": 18,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.335,
+    "status": "MEASURED",
+    "test_inputs": 2
+   },
+   "patched_lines": [
+    "+    if w is None:",
+    "+        return 0"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.325
+    },
+    {
+     "step": "localize",
+     "seconds": 0.128
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.184
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.321
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true
+  },
+  "two_edits_and_overfit": {
+   "bug": "return w + h + 1",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 3695.0,
+   "search_s": 2.897,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 260,
+   "tested": 128,
+   "greens": [
+    25,
+    103,
+    104,
+    105,
+    106
+   ],
+   "overfit_signature_indices": [
+    25
+   ],
+   "compose": {
+    "composed_from": [
+     25,
+     13,
+     24,
+     23,
+     20,
+     1,
+     4,
+     5,
+     6,
+     8,
+     18,
+     22,
+     3,
+     19,
+     11,
+     21,
+     10,
+     16,
+     14,
+     2,
+     15,
+     7,
+     12,
+     17
+    ],
+    "pair_count": 176,
+    "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
+    "seconds": 2.069
+   },
+   "synthesis": {
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "COMPOSE BINOP_SWAP Add->Mult + BINOP_DROP keep left",
+   "witness": {
+    "function": "area",
+    "grid_inputs": 109,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 105,
+      "grid_inputs": 109,
+      "index": 103,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 105,
+      "grid_inputs": 109,
+      "index": 104,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 105,
+      "grid_inputs": 109,
+      "index": 106,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 25,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 105,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.709,
+    "status": "MEASURED",
+    "test_inputs": 1
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.351
+    },
+    {
+     "step": "localize",
+     "seconds": 0.135
+    },
+    {
+     "step": "patch_search",
+     "seconds": 2.897
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.307
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "one example: '+ 5' is green and flagged -> composition; fitness window ordered by assertion distance ('w * h + 1' d=0.5 ahead of 'w + h' d=0.83)"
+  },
+  "two_edits_and_overfit__judge_pytest": {
+   "bug": "return w + h + 1",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 21447.2,
+   "search_s": 20.703,
+   "judge": {
+    "in_process": false,
+    "reason": "JUDGE_PYTEST_REQUESTED"
+   },
+   "candidates": 260,
+   "tested": 115,
+   "greens": [
+    25,
+    104,
+    112,
+    132,
+    146
+   ],
+   "overfit_signature_indices": [
+    25
+   ],
+   "compose": {
+    "composed_from": [
+     25,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23
+    ],
+    "pair_count": 176,
+    "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
+    "seconds": 11.697
+   },
+   "synthesis": {
+    "status": "NOT_ATTEMPTED"
+   },
+   "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult",
+   "witness": {
+    "function": "area",
+    "grid_inputs": 109,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 105,
+      "grid_inputs": 109,
+      "index": 104,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 105,
+      "grid_inputs": 109,
+      "index": 132,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 106,
+      "grid_inputs": 109,
+      "index": 112,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 25,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 146,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.732,
+    "status": "MEASURED",
+    "test_inputs": 1
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.311
+    },
+    {
+     "step": "localize",
+     "seconds": 0.12
+    },
+    {
+     "step": "patch_search",
+     "seconds": 20.703
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.306
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "same answer under per-candidate pytest; the time difference is the in-process judge"
+  },
+  "only_overfit": {
+   "bug": "return 0",
+   "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
+   "e2e_ms": 1283.4,
+   "search_s": 0.791,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 86,
+   "tested": 64,
+   "greens": [
+    23
+   ],
+   "overfit_signature_indices": [
+    23
+   ],
+   "compose": {
+    "composed_from": [
+     23,
+     24,
+     27,
+     12,
+     14,
+     26,
+     2,
+     4,
+     25,
+     21,
+     1,
+     5,
+     7,
+     9,
+     11,
+     15,
+     17,
+     19,
+     22,
+     3,
+     13,
+     6,
+     8,
+     10
+    ],
+    "pair_count": 0,
+    "reason": "ONLY_SUSPICIOUS_GREENS:[23]",
+    "seconds": 0.0
+   },
+   "synthesis": {
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "CONSTANT_REPLACE 0->12",
+   "witness": {
+    "ranking": [
+     {
+      "index": 23
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.366
+    },
+    {
+     "step": "localize",
+     "seconds": 0.123
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.791
+    }
+   ],
+   "gate": null,
+   "tests_discovered": null,
+   "verified": false,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "one example: synthesis refuses (UNDERSPECIFIED:1_examples); only 'return 12' is green and it is flagged"
+  },
+  "two_examples_synthesis__return_0": {
+   "bug": "return 0",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1636.9,
+   "search_s": 0.896,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 94,
+   "tested": 64,
+   "greens": [
+    1
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "candidates": 1,
+    "enumerated": 34230,
+    "examples": 2,
+    "expressions": [
+     "w * h"
+    ],
+    "function": "area",
+    "seconds": 0.107,
+    "status": "FOUND:1",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "EXPR_SYNTH -> w * h",
+   "witness": {
+    "ranking": [
+     {
+      "index": 1
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.314
+    },
+    {
+     "step": "localize",
+     "seconds": 0.118
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.896
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.306
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "two examples: the returned expression is enumerated bottom-up (observational equivalence), judged in-process, replayed under pytest, gated"
+  },
+  "two_examples_synthesis__len_str_w": {
+   "bug": "return len(str(w))",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1658.3,
+   "search_s": 0.902,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 77,
+   "tested": 64,
+   "greens": [
+    2
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "candidates": 1,
+    "enumerated": 34230,
+    "examples": 2,
+    "expressions": [
+     "w * h"
+    ],
+    "function": "area",
+    "seconds": 0.107,
+    "status": "FOUND:1",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "EXPR_SYNTH -> w * h",
+   "witness": {
+    "ranking": [
+     {
+      "index": 2
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.317
+    },
+    {
+     "step": "localize",
+     "seconds": 0.119
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.902
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.317
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true
+  },
+  "two_examples_synthesis__w_plus_h_plus_1": {
+   "bug": "return w + h + 1",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1780.9,
+   "search_s": 0.95,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 91,
+   "tested": 64,
+   "greens": [
+    18
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "candidates": 1,
+    "enumerated": 34230,
+    "examples": 2,
+    "expressions": [
+     "w * h"
+    ],
+    "function": "area",
+    "seconds": 0.102,
+    "status": "FOUND:1",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "EXPR_SYNTH -> w * h",
+   "witness": {
+    "ranking": [
+     {
+      "index": 18
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.338
+    },
+    {
+     "step": "localize",
+     "seconds": 0.175
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.95
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.315
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true
+  },
+  "two_examples_no_expression__test_literal_rejected": {
+   "bug": "return len(str(w))",
+   "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[2]",
+   "e2e_ms": 1303.1,
+   "search_s": 0.872,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 77,
+   "tested": 64,
+   "greens": [
+    2
+   ],
+   "overfit_signature_indices": [
+    2
+   ],
+   "compose": {
+    "composed_from": [
+     2,
+     4,
+     3,
+     8,
+     10,
+     6,
+     11,
+     9,
+     7,
+     12,
+     5,
+     1
+    ],
+    "pair_count": 0,
+    "reason": "ONLY_SUSPICIOUS_GREENS:[2]",
+    "seconds": 0.0
+   },
+   "synthesis": {
+    "candidates": 1,
+    "enumerated": 34230,
+    "examples": 2,
+    "expressions": [
+     "w + (w + h + 2)"
+    ],
+    "function": "area",
+    "seconds": 0.098,
+    "status": "FOUND:1",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "EXPR_SYNTH -> w + (w + h + 2)",
+   "witness": {
+    "ranking": [
+     {
+      "index": 2
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.312
+    },
+    {
+     "step": "localize",
+     "seconds": 0.116
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.872
+    }
+   ],
+   "gate": null,
+   "tests_discovered": null,
+   "verified": false,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "12 for (3,4) and 11 for (2,5): two examples under-specify; synthesis uses only the function's own constants (so '12 + w - 3' is never proposed), the spurious 'w + (w + h + 2)' is green but carries the tests' literal 2 and is refused as an overfit signature -> OPEN, not shipped"
+  },
+  "under_specified_suite": {
+   "bug": "return w * h if w <= 0 else 0",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 2209.9,
+   "search_s": 1.443,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 90,
+   "tested": 64,
+   "greens": [
+    11,
+    13,
+    14,
+    15
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "candidates": 1,
+    "enumerated": 21162,
+    "examples": 2,
+    "expressions": [
+     "w * h"
+    ],
+    "function": "area",
+    "seconds": 0.075,
+    "status": "FOUND:1",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "COMPARE_SWAP LtE->NotEq",
+   "witness": {
+    "function": "area",
+    "grid_inputs": 108,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 59,
+      "grid_inputs": 108,
+      "index": 11,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 89,
+      "grid_inputs": 108,
+      "index": 13,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 89,
+      "grid_inputs": 108,
+      "index": 14,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 89,
+      "grid_inputs": 108,
+      "index": 15,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.573,
+    "status": "MEASURED",
+    "test_inputs": 2
+   },
+   "patched_lines": [
+    "+    return w * h if w != 0 else 0"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.322
+    },
+    {
+     "step": "localize",
+     "seconds": 0.125
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.443
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.317
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true
+  },
+  "parametrized_not_plain": {
+   "bug": "return w + h (parametrized test)",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 15599.2,
+   "search_s": 7.977,
+   "judge": {
+    "in_process": false,
+    "reason": "TEST_TAKES_PARAMETERS:tests/test_calc.py:test_area"
+   },
+   "candidates": 80,
+   "tested": 45,
+   "greens": [
+    4
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "status": "NOT_ATTEMPTED"
+   },
+   "winning_mutation": "BINOP_SWAP Add->Mult",
+   "witness": {
+    "ranking": [
+     {
+      "index": 4
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.349
+    },
+    {
+     "step": "localize",
+     "seconds": 6.966
+    },
+    {
+     "step": "patch_search",
+     "seconds": 7.977
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.303
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "not plain -> pytest judge; dynamic localizer cannot run this suite shape -> target from the tests' import closure; localizer bounded by localizer_timeout_s"
+  },
+  "sabotage_full_suite": {
+   "bug": "return w * h - 1 (+ a test pinning the bug)",
+   "status": "PATCH_FAILS_FULL_SUITE:FAIL",
+   "e2e_ms": 2136.9,
+   "search_s": 1.357,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 85,
+   "tested": 64,
+   "greens": [
+    1,
+    4,
+    5,
+    6
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "BINOP_DROP keep left",
+   "witness": {
+    "function": "area",
+    "grid_inputs": 109,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 1,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 4,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 5,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 6,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.571,
+    "status": "MEASURED",
+    "test_inputs": 1
+   },
+   "patched_lines": [
+    "+    return w * h"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.329
+    },
+    {
+     "step": "localize",
+     "seconds": 0.121
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.357
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.326
+    }
+   ],
+   "gate": "FAIL",
+   "tests_discovered": 2,
+   "verified": false,
+   "confined": true,
+   "tree_unchanged": true
+  },
+  "nothing_to_repair": {
+   "bug": null,
+   "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
+   "e2e_ms": 311.7,
+   "steps": [],
+   "gate": null,
+   "tests_discovered": null,
+   "verified": false,
+   "confined": false,
+   "tree_unchanged": true
+  },
+  "harness_crash": {
+   "bug": null,
+   "status": "REPRODUCE_HARNESS_ERROR:rc=4",
+   "e2e_ms": 290.4,
+   "steps": [],
+   "gate": null,
+   "tests_discovered": null,
+   "verified": false,
+   "confined": false,
+   "tree_unchanged": true
   }
+ }
 }

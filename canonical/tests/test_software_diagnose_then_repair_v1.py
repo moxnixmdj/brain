@@ -1,5 +1,5 @@
 # PROJECT_BRAIN
-"""software.diagnose_then_repair.v1: failing test in, verified patch (or a named
+"""software.diagnose_repair.v1: failing test in, verified patch (or a named
 refusal) out; the user's tree is never written.  Real subprocesses, real pytest,
 real confinement when the host has it."""
 from __future__ import annotations
@@ -77,8 +77,9 @@ def test_no_candidate_in_bound_is_an_open_result_not_a_patch(tmp_path: Path):
 
 def test_truly_unreachable_bug_is_open_with_the_count(tmp_path: Path):
     _fixture(tmp_path, bug="return len(str(w))")
+    # two examples no expression over (w, h) of size <= 3 satisfies: 12 for (3, 4) and 11 for (2, 5)
     (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
-        "from pkg.calc import area\n\ndef test_area():\n    assert area(3, 4) == 12\n    assert area(2, 5) == 10\n")
+        "from pkg.calc import area\n\ndef test_area():\n    assert area(3, 4) == 12\n    assert area(2, 5) == 11\n")
     result = dr.run(_args(), tmp_path)
     assert result["verified"] is False and result["diff_path"] is None
     assert result["status"].startswith(("OPEN:NO_VERIFIED_CANDIDATE:", "OPEN:ONLY_OVERFIT")), result["status"]
@@ -363,7 +364,10 @@ def test_plain_tests_applicability_is_static_and_names_the_reason(tmp_path: Path
     _fixture(tmp_path)
     tree = tmp_path / "proj"
     ok, why, mods = j.plain_tests(tree, ["tests/test_calc.py"])
-    assert ok and why == "PLAIN" and mods == [{"path": "tests/test_calc.py", "import": "tests.test_calc", "sys_path": ".", "tests": 2}]
+    assert ok and why == "PLAIN"
+    assert {k: v for k, v in mods[0].items() if k != "asserts"} == {"path": "tests/test_calc.py", "import": "tests.test_calc", "sys_path": ".", "tests": 2}
+    assert mods[0]["asserts"] == [{"test": "test_area", "expr": "area(3, 4)", "expected": 12},
+                                  {"test": "test_twice", "expr": "twice(5)", "expected": 10}]
     (tree / "conftest.py").write_text("import pytest\n\n@pytest.fixture(autouse=True)\ndef x():\n    yield\n")
     assert j.plain_tests(tree, ["tests/test_calc.py"])[:2] == (False, "CONFTEST_HOOKS_OR_AUTOUSE:conftest.py")
     (tree / "conftest.py").unlink()
@@ -392,5 +396,67 @@ def test_a_runaway_candidate_is_bounded_and_the_batch_goes_on(tmp_path: Path):
         res = dr._judge_batch(tree, "pkg/calc.py", mods, texts, sys.executable, "auto", time.monotonic() + 60)
     finally:
         jj.judge_program = prog
-    assert res == {0: 999, 1: 0, 2: 1, 3: 1}, res
+    assert {k: v[0] for k, v in res.items()} == {0: 999, 1: 0, 2: 1, 3: 1}, res
+    assert res[1][1] == 0.0 and 0.0 < res[2][1] < 1.0 and res[3][1] == 1.0     # distance: green 0, near, exception 1
     assert (tree / "pkg" / "calc.py").read_text().endswith("return w * h - 1\n\n\ndef twice(x):\n    return 2 * x\n")
+
+
+# --- assertion-distance fitness and expression synthesis ---
+
+def _two_examples(root: Path) -> None:
+    (root / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area, twice\n\ndef test_area():\n    assert area(3, 4) == 12\n    assert area(2, 5) == 10\n\n"
+        "def test_twice():\n    assert twice(5) == 10\n")
+
+
+def test_the_in_process_judge_reports_an_assertion_distance_that_orders_composition(tmp_path: Path):
+    _fixture(tmp_path, bug="return w + h + 1")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH"
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    singles = [a for a in search["attempts"] if "stage" not in a]
+    assert singles and all(0.0 <= a["distance"] <= 1.0 for a in singles if a["returncode"] == 1)
+    window = search["compose"]["fitness_of_window"]
+    keys = [(rc, d) for _, rc, d in window]
+    assert keys == sorted(keys)                                  # fewest failing, then closest
+    # 'w * h + 1' (13 vs 12) is nearer than 'w + h' (7 vs 12) and sits before it
+    by_index = {a["index"]: a for a in singles}
+    near = next(i for i, rc, d in window if by_index[i]["mutation"]["detail"] == "Add->Mult" and by_index[i]["mutation"]["lineno"] == 2 and d < 0.6)
+    farther = [i for i, rc, d in window if rc == 1 and d > 0.6]
+    order = [i for i, _, _ in window]
+    assert farther and all(order.index(near) < order.index(i) for i in farther)
+    assert all(by_index[i]["mutation"]["detail"] != "keep left" for i, _, _ in window[: order.index(near) + 1])
+
+
+@pytest.mark.parametrize("bug", ["return len(str(w))", "return 0", "return w + h + 1"])
+def test_two_examples_let_synthesis_fill_the_returned_expression(tmp_path: Path, bug: str):
+    _fixture(tmp_path, bug=bug)
+    _two_examples(tmp_path)
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["synthesis"]["status"] == "FOUND:1" and search["synthesis"]["expressions"] == ["w * h"]
+    assert search["synthesis"]["examples"] == 2
+
+
+def test_one_example_is_not_a_specification_for_synthesis(tmp_path: Path):
+    _fixture(tmp_path, bug="return 0")
+    result = dr.run(_args(), tmp_path)
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["synthesis"]["status"] == "UNDERSPECIFIED:1_examples"
+    assert result["status"].startswith("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS")
+
+
+def test_synthesis_is_bounded_bottom_up_with_observational_equivalence():
+    from canonical.runtime import expression_synthesis_v1 as es
+    r = es.synthesize(["w", "h"], [([3, 4], 12), ([2, 5], 10)])
+    assert r["expressions"] == ["w * h"] and r["seconds"] < 2.0
+    assert es.synthesize(["s"], [(["abc"], 3), (["hello"], 5)])["expressions"] == ["len(s)"]
+    assert es.synthesize(["a", "b"], [([7, 2], 1), ([9, 4], 1), ([8, 4], 0)])["expressions"] == ["a % b"]
+    assert es.synthesize(["n"], [([3], 7)])["status"] == "UNDERSPECIFIED:1_examples"
+    r = es.synthesize(["n"], [([3], 1000003), ([4], 1000004)], max_size=1)
+    assert r["expressions"] == [] and r["status"].startswith("NONE:")
+    specs = [{"test": "t", "expr": "area(3, 4)", "expected": 12}, {"test": "t", "expr": "other(1)", "expected": 1},
+             {"test": "t", "expr": "area(x, 4)", "expected": 12}]
+    assert es.examples_for("area", ["w", "h"], specs) == [([3, 4], 12)]

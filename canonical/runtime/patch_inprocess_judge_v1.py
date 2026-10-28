@@ -12,7 +12,11 @@ file is rewritten, every module under the tree is dropped from sys.modules,
 the named test modules are imported fresh and their zero-parameter ``test_*``
 functions called directly.  Failures are counted from exceptions, imports
 that fail count as failures, a per-candidate alarm bounds runaway candidates,
-results are written incrementally so a deadline still yields what ran.
+results are written incrementally so a deadline still yields what ran.  Each
+failing test also yields an ASSERTION DISTANCE: for `assert <expr> == <lit>`
+the expression is evaluated in the imported module and |actual - expected| is
+scaled into [0, 1) -- a gradient for composition (GenProg/Arja-style fitness),
+never a verdict.
 
 When it may: only for PLAIN tests -- every ``test_*`` function in the named
 files takes no parameters (no fixtures, no parametrize), no test classes, no
@@ -89,10 +93,35 @@ def plain_tests(tree: pathlib.Path, tests_rel: list[str]) -> tuple[bool, str, li
             d = d.parent
         dotted = ".".join(pkg + [p.stem])
         sys_path = d.relative_to(tree).as_posix() if d != tree else "."
-        mods.append({"path": rel, "import": dotted, "sys_path": sys_path, "tests": n})
+        mods.append({"path": rel, "import": dotted, "sys_path": sys_path, "tests": n,
+                     "asserts": assert_specs(t)})
         if total > PLAIN_MAX_TESTS:
             return False, "TOO_MANY_TESTS:" + str(total), []
     return True, "PLAIN", mods
+
+
+def assert_specs(test_tree: ast.AST) -> list[dict[str, Any]]:
+    """`assert <expr> == <literal>` (either side literal) inside zero-parameter test
+    functions: the pairs an assertion-distance fitness can measure.  The expression
+    is kept as source; the judge evaluates it in the imported test module."""
+    out: list[dict[str, Any]] = []
+    for fn in test_tree.body:
+        if not (isinstance(fn, ast.FunctionDef) and fn.name.startswith("test")):
+            continue
+        for node in ast.walk(fn):
+            if not (isinstance(node, ast.Assert) and isinstance(node.test, ast.Compare)
+                    and len(node.test.ops) == 1 and isinstance(node.test.ops[0], ast.Eq)):
+                continue
+            left, right = node.test.left, node.test.comparators[0]
+            for expr, lit in ((left, right), (right, left)):
+                try:
+                    expected = ast.literal_eval(lit)
+                except (ValueError, TypeError, SyntaxError):
+                    continue
+                if isinstance(expected, (bool, int, float, str, type(None), tuple, list)):
+                    out.append({"test": fn.name, "expr": ast.unparse(expr), "expected": expected})
+                    break
+    return out[:200]
 
 
 def judge_program(target_rel: str, modules: list[dict[str, Any]], batch_dir_rel: str, count: int,
@@ -134,8 +163,33 @@ def _purge():
     importlib.invalidate_caches()
 
 
+def _distance(actual, expected):
+    # 0 when equal; numeric gap scaled to [0, 1); otherwise 1 -- a gradient for the
+    # search, never a verdict (the verdict is the assertion itself)
+    try:
+        if actual == expected and type(actual) is type(expected):
+            return 0.0
+    except Exception:
+        return 1.0
+    if isinstance(actual, (int, float)) and isinstance(expected, (int, float)) and not isinstance(actual, bool) and not isinstance(expected, bool):
+        try:
+            d = abs(float(actual) - float(expected))
+            return d / (1.0 + d)
+        except Exception:
+            return 1.0
+    if isinstance(actual, str) and isinstance(expected, str):
+        n = max(len(actual), len(expected)) or 1
+        same = sum(1 for a, b in zip(actual, expected) if a == b)
+        return 1.0 - same / n if same else 1.0
+    if isinstance(actual, (list, tuple)) and isinstance(expected, (list, tuple)):
+        n = max(len(actual), len(expected)) or 1
+        return 1.0 - sum(1 for a, b in zip(actual, expected) if a == b) / n
+    return 1.0
+
+
 def _run():
     failed = passed = 0
+    distance = 0.0
     for m in SPEC["modules"]:
         try:
             mod = importlib.import_module(m["import"])
@@ -143,7 +197,9 @@ def _run():
             raise
         except BaseException:
             failed += int(m.get("tests") or 1)
+            distance += float(m.get("tests") or 1)
             continue
+        failing = set()
         for name in sorted(dir(mod)):
             fn = getattr(mod, name)
             if name.startswith("test") and callable(fn) and getattr(fn, "__module__", None) == mod.__name__:
@@ -154,7 +210,18 @@ def _run():
                     raise
                 except BaseException:
                     failed += 1
-    return failed, passed
+                    failing.add(name)
+        for spec in m.get("asserts") or []:
+            if spec["test"] not in failing:
+                continue
+            try:
+                actual = eval(spec["expr"], vars(mod))
+                distance += _distance(actual, spec["expected"])
+            except _Timeout:
+                raise
+            except BaseException:
+                distance += 1.0
+    return failed, passed, distance
 
 
 results = {}
@@ -164,12 +231,12 @@ for i in range(SPEC["count"]):
     _purge()
     signal.alarm(SPEC["per"])
     try:
-        failed, passed = _run()
-        results[i] = failed if failed else (0 if passed else 998)
+        failed, passed, distance = _run()
+        results[i] = [failed if failed else (0 if passed else 998), round(distance, 6)]
     except _Timeout:
-        results[i] = 999
+        results[i] = [999, 999.0]
     except BaseException:
-        results[i] = 997
+        results[i] = [997, 997.0]
     finally:
         signal.alarm(0)
     with open(os.path.join(ROOT, SPEC["out"]), "w", encoding="utf-8") as fh:

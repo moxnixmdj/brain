@@ -8191,10 +8191,10 @@
     "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001__shell.command.run__AUTO_VERIFY.json"
    }
   },
-  "software.diagnose_then_repair.v1": {
+  "software.diagnose_repair.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.diagnose_then_repair.v1",
+     "capability_id": "software.diagnose_repair.v1",
      "output_path": "${input.output_path}",
      "source_root": "${input.source_root}",
      "test_paths": "${input.test_paths}"
@@ -8211,24 +8211,27 @@
    "entrypoint": "run",
    "incremental_spend_usd": 0,
    "keywords": [
-    "diagnose",
-    "repair",
-    "fix",
-    "failing test",
-    "traceback",
-    "reproduce",
-    "localize",
-    "root cause",
-    "patch",
-    "full suite",
-    "verify",
     "debug",
+    "diagnose",
+    "expression",
+    "failing test",
+    "fix",
+    "full suite",
+    "localize",
+    "patch",
+    "pytest",
     "regression",
+    "repair",
+    "reproduce",
+    "root cause",
     "software",
-    "pytest"
+    "synthesis",
+    "synthesize",
+    "traceback",
+    "verify"
    ],
    "limitations": [
-    "repair search space: patch_candidate_search_v1 template edits in one file -- operator/compare/bool swaps, operand order, dropped term, not-toggle, constant and string replacement, EXPR_EXTEND (one in-scope name joined to a returned/assigned expression), GUARD_INSERT (`if <param> is None/not <param>: return <c>` before a function's first statement) -- and, when no single edit is green or every green one carries an overfit signature, COMPOSE: pairs of those edits inside one statement on the top-ranked line (bounded by compose_from/compose_limit). Beyond that: OPEN:NO_VERIFIED_CANDIDATE:<n> or DEADLINE_EXCEEDED, never an invented patch.",
+    "repair search space: patch_candidate_search_v1 template edits in one file -- operator/compare/bool swaps, operand order, dropped term, not-toggle, constant and string replacement, EXPR_EXTEND (one in-scope name joined to a returned/assigned expression), GUARD_INSERT (`if <param> is None/not <param>: return <c>` before a function's first statement), EXPR_SYNTH (the returned expression of the owning free function re-synthesized bottom-up from the failing tests' `f(<literals>) == <literal>` rows: parameters, the function's own numeric constants and 0/1/2, len/abs, + - * // % /, size <= 3, observational-equivalence pruning, <= 60k enumerations / 2 s; attempted only with >= 2 examples, one example is UNDERSPECIFIED and refused) -- and, when no single edit is green or every green one carries an overfit signature, COMPOSE: pairs of those edits inside one statement on the top-ranked line (bounded by compose_from/compose_limit). Beyond that: OPEN:NO_VERIFIED_CANDIDATE:<n> or DEADLINE_EXCEEDED, never an invented patch.",
     "verified means: the named failing tests pass on the patched scratch copy, replayed twice, and the full pytest suite of the real tree passes with the diff applied by python.repo.diff_apply_full_testgate.v1. When several edits satisfy the suite (measured: five for 'w <= 0' with one assertion), the differential witness ranks them by behaviour changed outside the tests' own inputs and the ledger lists every alternative with its delta; that is ranking evidence, never proof of correctness (proves_correctness is false).",
     "reproduction, every candidate and the witness run confined (confine_v1: user namespace, chroot, no network) when the host allows it; confine=required refuses otherwise; the full-suite gate runs as an ordinary subprocess. Candidates are judged in-process -- one confined interpreter per worker, candidates streamed through it, test modules re-imported per candidate, zero-parameter test functions called directly -- only when the named tests are PLAIN (no parameters/fixtures/parametrize, no test classes, no autouse or hooks in any conftest, no collection options in ini); otherwise, or with judge=pytest, every candidate runs under pytest. The chosen candidate is always replayed twice under real pytest before the full-suite gate, so an in-process false positive cannot ship.",
     "the verdict is pytest's summary line, never the exit code: a harness that crashes before any test runs is REPRODUCE_HARNESS_ERROR:rc=<n>, not a failing test to repair.",
@@ -8236,8 +8239,11 @@
     "deadline_s (default 600) is end to end and stops the candidate search mid-batch; workers (default cpu count, max 8) each hold a copy of the tree; the user's source tree is copied and never written.",
     "the witness covers free functions with positional parameters only (methods, nested, async, variadic -> WITNESS_UNAVAILABLE:<why> and search order decides); green_budget (default 4) bounds how many green patches are collected on the winning line before ranking; green_budget 1 is first-green-wins.",
     "pytest plugins are trimmed per run only when provably unused by the named tests and every conftest/ini in the tree (today: Hypothesis, measured 0.55 s per pytest start); anything mentioned keeps the default plugin set.",
-    "a green edit that writes one of the tests' own literals into the code (CONSTANT/STRING_REPLACE to a test literal, GUARD_INSERT returning one) is an overfit signature (Tan et al. 2016): it triggers composition and is never shipped alone -- OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:<indices> when nothing else is green.",
-    "target choice has a fourth, static fallback: when neither the traceback nor the dynamic localizer names a tree file (measured: parametrized tests), the unique tree module the failing tests import is the target (TEST_IMPORT_CLOSURE_UNIQUE); several -> NO_LOCALIZED_SOURCE:AMBIGUOUS_IMPORTS:<n>."
+    "a green edit that writes one of the tests' own literals into the code (CONSTANT/STRING_REPLACE to a test literal, GUARD_INSERT returning one, EXPR_SYNTH whose expression contains one) is an overfit signature (Tan et al. 2016): it triggers composition and is never shipped alone -- OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:<indices> when nothing else is green.",
+    "target choice has a fourth, static fallback: when neither the traceback nor the dynamic localizer names a tree file (measured: parametrized tests), the unique tree module the failing tests import is the target (TEST_IMPORT_CLOSURE_UNIQUE); several -> NO_LOCALIZED_SOURCE:AMBIGUOUS_IMPORTS:<n>.",
+    "fitness: when the in-process judge runs, every red candidate also carries an assertion distance (0 equal; numbers |a-b|/(1+|a-b|); strings/sequences positional mismatch; exception 1) over the failing tests' `assert <expr> == <literal>` rows, and the composition window is ordered by (failing count, distance). Under judge=pytest the fitness is flat (failing count only) and no synthesis is attempted; both are proposals only -- the chosen candidate is still replayed under pytest and gated.",
+    "the dynamic localizer is bounded by localizer_timeout_s (default 20 s, and never more than the remaining deadline); on suite shapes it cannot run (parametrized tests) it spends that bound before the static fallback picks the target.",
+    "two input/output examples under-specify a function: synthesis can and does find spurious expressions that satisfy both (measured: 'w + (w + h + 2)' for 12/(3,4), 11/(2,5)); the test-literal overfit rule, the witness and the gate decide, synthesis never ships on its own."
    ],
    "platforms": [
     "linux"
@@ -8274,7 +8280,7 @@
     "independently_verified": true,
     "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
     "observed_effect": {
-     "golden": "off-by-one 'return w * h - 1': confined reproduce -> localizer and traceback name pkg/calc.py line 2 -> 85 candidates judged in-process (64 before the first-line greens were in hand), smallest edit 'return w * h' chosen by the witness among 4 greens -> replayed twice under pytest -> full-suite gate PASS; 2.2 s end to end, diff byte-identical on rerun",
+     "golden": "off-by-one 'return w * h - 1': confined reproduce -> localizer and traceback name pkg/calc.py line 2 -> 85 candidates judged in-process (64 before the first-line greens were in hand), smallest edit 'return w * h' chosen by the witness among 4 greens -> replayed twice under pytest -> full-suite gate PASS; 2.9 s end to end on this measurement (2.2 s at the previous one; the host is the variable), diff byte-identical on rerun",
      "wrong_operator": "'return w + h' -> BINOP_SWAP Add->Mult 'return w * h', VERIFIED_PATCH (was OPEN:NO_VERIFIED_CANDIDATE:11 with the previous generator)",
      "open": "'return w' (a missing term): 18 candidates exhausted, OPEN:NO_VERIFIED_CANDIDATE:18, no diff written",
      "sabotage": "a second test pinning the buggy behaviour: PATCH_FAILS_FULL_SUITE:FAIL with tests_failed 1, verified false",
@@ -8284,9 +8290,11 @@
      "under_specified_suite": "'w <= 0' with one assertion: five green edits (!=, >, >=, operand swap, not); differential witness over 1 test input + 109 grid inputs ranks '!=' (59 changed outside the tests) above the rest (89 each) in 0.7 s; all five and their deltas are in the ledger",
      "missing_term": "'return w': EXPR_EXTEND <expr> Mult h -> 'return w * h' VERIFIED (was OPEN:18)",
      "missing_guard": "'return w * h' with area(None, 4) == 0 added: GUARD_INSERT 'if w is None: return 0' in front of the first statement, two greens witnessed (None inputs probed), VERIFIED",
-     "two_edits_and_overfit": "'return w + h + 1': only single green is '+ 5' (overfit signature) -> 178 composed pairs -> 'return w * h' ranked above '+ 5' by the witness -> VERIFIED in 3.8 s in-process (22.6 s with judge=pytest, same answer: that difference is the per-candidate pytest start and namespace)",
+     "two_edits_and_overfit": "'return w + h + 1' with one example: only single green is '+ 5' (overfit signature) -> the composition window is ordered by assertion distance ('w * h + 1', 13 vs 12, d=0.5 sits ahead of 'w + h', d=0.83) -> 'return w * h' ranked above '+ 5' by the witness -> VERIFIED in 4.0 s in-process (22.1 s with judge=pytest, same answer)",
      "only_overfit": "'return 0': the only green is 'return 12' -> OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23], no diff written",
-     "parametrized_not_plain": "parametrized test: not plain -> pytest judge; dynamic localizer reports NO_FAILING_TEST for this suite shape -> target from the tests' import closure -> Add->Mult VERIFIED"
+     "parametrized_not_plain": "parametrized test: not plain -> pytest judge; dynamic localizer reports NO_FAILING_TEST for this suite shape -> target from the tests' import closure -> Add->Mult VERIFIED; localizer bounded by localizer_timeout_s, 15.5 s end to end",
+     "two_examples_synthesis": "area(3, 4) == 12 and area(2, 5) == 10 in the failing test: EXPR_SYNTH enumerates the returned expression and proposes 'w * h' first; 'return 0' 1.66 s, 'return len(str(w))' 1.71 s, 'return w + h + 1' 1.67 s, all VERIFIED with the identical diff '+    return w * h' (the 'return 0' and 'len(str(w))' bugs were OPEN/unreachable with one example and template edits only)",
+     "two_examples_spurious_refused": "12 for (3, 4) and 11 for (2, 5): synthesis proposes 'w + (w + h + 2)', it is green on the named tests, carries the tests' literal 2 -> OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[2] in 1.3 s, no diff written"
     },
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIAGNOSE-REPAIR-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIAGNOSE-REPAIR-001.json"

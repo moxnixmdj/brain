@@ -22,6 +22,9 @@ templates, Kali's checks -- restricted to edits whose rendering is exact):
                       returned/assigned expression; the only template that adds code)
     GUARD_INSERT      if <param> is None: return <c> / if not <param>: return <c>
                       in front of a function's first statement
+    EXPR_SYNTH        the returned expression replaced by one synthesized from the
+                      tests' own input/output pairs (expression_synthesis_v1; >= 2
+                      examples required), placed after the cheap edits on the top line
     COMPOSE           two single edits inside one statement (compose_pairs), tried
                       only after every single edit failed, ordered by the singles'
                       fitness (fewest failing tests), bounded
@@ -529,8 +532,9 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
     """Judge candidates in batches -- one judge process per worker copy -- then replay
     the chosen green under ``run_tests`` (real pytest) exactly as ``evaluate`` does.
 
-    ``judge_batch(copy_root, texts, deadline)`` returns {position: failed_count}
-    for the texts it managed to judge (0 = green).  Candidates are dealt to the
+    ``judge_batch(copy_root, texts, deadline)`` returns {position: failed_count} or
+    {position: (failed_count, assertion_distance)} for the texts it managed to
+    judge (0 = green); the distance orders composition, never decides.  Candidates are dealt to the
     workers round-robin in search order, so the earliest candidates are judged
     first on every worker; the budget keeps search-order semantics.
     """
@@ -543,6 +547,7 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
         copies.append(c)
     original = (tree / target_rel).read_bytes()
     verdicts: dict[int, int] = {}
+    distances: dict[int, float] = {}
     stop_reason = "EXHAUSTED"
     winner: dict[str, Any] | None = None
 
@@ -572,12 +577,17 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
                     return {chunks[w][k]: rc for k, rc in res.items()}
 
                 for part in pool.map(one, range(workers)):
-                    verdicts.update(part)
+                    for i, rc in part.items():
+                        if isinstance(rc, tuple):
+                            verdicts[i], distances[i] = int(rc[0]), float(rc[1])
+                        else:
+                            verdicts[i] = int(rc)
                 g = judged_greens()
                 if g and (len(g) >= green_budget or
                           (pos < len(todo) and todo[pos][0].get("lineno") != todo[g[0][0] - 1][0].get("lineno"))):
                     break
-        attempts = [{"index": i + 1, "mutation": todo[i][0], "returncode": verdicts[i], "judge": "in_process"}
+        attempts = [{"index": i + 1, "mutation": todo[i][0], "returncode": verdicts[i], "judge": "in_process",
+                     **({"distance": distances[i]} if i in distances else {})}
                     for i in sorted(verdicts)]
         greens = judged_greens()
         if not greens and len(verdicts) < len(todo):
@@ -609,6 +619,55 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
     return {"winner": winner, "attempts": attempts, "tested_candidate_count": len(verdicts),
             "green_indices": [i for i, _ in greens] if greens else [], "candidate_count": len(candidates),
             "workers": workers, "stop_reason": stop_reason, "judge": "in_process"}
+
+
+def synthesized_candidates(source_text: str, lineno: int, expressions: list[str]) -> list[tuple[dict[str, Any], str]]:
+    """EXPR_SYNTH rows: the value of the `return` on ``lineno`` (else the owning
+    function's last return) replaced by each synthesized expression."""
+    tree = ast.parse(source_text)
+    target: ast.Return | None = None
+    for fn in ast.walk(tree):
+        if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)) and fn.lineno <= lineno <= (fn.end_lineno or fn.lineno):
+            rets = [n for n in ast.walk(fn) if isinstance(n, ast.Return) and n.value is not None]
+            on_line = [r for r in rets if r.lineno == lineno]
+            target = (on_line or rets or [None])[-1]
+            break
+    if target is None or target.value is None:
+        return []
+    out: list[tuple[dict[str, Any], str]] = []
+    seen: set[str] = set()
+    for expr in expressions:
+        try:
+            node = ast.parse(expr, mode="eval").body
+        except SyntaxError:
+            continue
+        cand = _render(source_text, target.value, node)
+        if cand is None or cand == source_text:
+            continue
+        digest = _sha(cand.encode("utf-8"))
+        if digest in seen:
+            continue
+        seen.add(digest)
+        out.append(({**_descriptor(target.value, "EXPR_SYNTH", "-> " + expr), "candidate_sha256": digest}, cand))
+    return out
+
+
+def insert_after_cheap_edits(candidates: list[tuple[dict[str, Any], str]], extra: list[tuple[dict[str, Any], str]]) -> list[tuple[dict[str, Any], str]]:
+    """Place ``extra`` on the top-ranked line after its kind-order-0 edits (swaps, drops)
+    and before constants/guards, keeping the spectrum-first order intact."""
+    if not extra:
+        return candidates
+    if not candidates:
+        return list(extra)
+    top = candidates[0][0].get("lineno")
+    have = {d["candidate_sha256"] for d, _ in candidates}
+    extra = [(d, c) for d, c in extra if d["candidate_sha256"] not in have]
+    pos = len(candidates)
+    for i, (d, _) in enumerate(candidates):
+        if d.get("lineno") != top or _KIND_ORDER.get(d.get("kind"), 1) >= 1:
+            pos = i
+            break
+    return candidates[:pos] + extra + candidates[pos:]
 
 
 def default_workers() -> int:

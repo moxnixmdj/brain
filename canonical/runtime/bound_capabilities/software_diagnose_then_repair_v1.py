@@ -1,5 +1,5 @@
 # PROJECT_BRAIN
-"""software.diagnose_then_repair.v1 -- the engineering loop from the failure
+"""software.diagnose_repair.v1 -- the engineering loop from the failure
 forward, wired from parts the Brain already owned.
 
 Measured before this adapter (2026-10-28): the registry had a dynamic fault
@@ -57,6 +57,7 @@ output_path, output_sha256, output_verified.
 """
 from __future__ import annotations
 
+import ast
 import difflib
 import hashlib
 import json
@@ -75,9 +76,10 @@ from canonical.runtime.bound_capabilities import python_repo_diff_apply_full_tes
 from canonical.runtime import patch_candidate_search_v1 as candidates_v1
 from canonical.runtime import patch_differential_witness_v1 as witness_v1
 from canonical.runtime import patch_inprocess_judge_v1 as judge_v1
+from canonical.runtime import expression_synthesis_v1 as synth_v1
 
 SCHEMA = "PROJECT_BRAIN_SOFTWARE_DIAGNOSE_THEN_REPAIR_V1"
-CAPABILITY_ID = "software.diagnose_then_repair.v1"
+CAPABILITY_ID = "software.diagnose_repair.v1"   # no sequencing word ("then") in the id: the sentence door splits clauses on it
 ADAPTER = "software_diagnose_then_repair_v1"
 OWNED_MARKER = ".brain_owned_output_v1"
 _SKIP = {".git", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "node_modules"}
@@ -291,6 +293,13 @@ def _overfit_signature(desc: dict[str, Any], nums: list[Any], strings: list[str]
     if kind == "GUARD_INSERT":
         ret = detail.split("return ", 1)[-1]
         return any(repr(v) == ret for v in [*nums, *strings] if v not in (0, 1, -1))
+    if kind == "EXPR_SYNTH":
+        try:
+            literals = {n.value for n in ast.walk(ast.parse(detail.split("-> ", 1)[-1], mode="eval"))
+                        if isinstance(n, ast.Constant)}
+        except SyntaxError:
+            return False
+        return any(v in literals for v in [*nums, *strings] if v not in (0, 1, -1))
     return False
 
 
@@ -342,7 +351,13 @@ def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[st
         data = json.loads(out.read_text(encoding="utf-8"))
     except ValueError:
         return {}
-    return {int(k): int(v) for k, v in data.items()}
+    out: dict[int, Any] = {}
+    for k, v in data.items():
+        if isinstance(v, list) and len(v) == 2:
+            out[int(k)] = (int(v[0]), float(v[1]))
+        else:
+            out[int(k)] = (int(v), float(int(v)))
+    return out
 
 
 def _test_import_closure(tree: pathlib.Path, tests_rel: list[str]) -> list[str]:
@@ -477,7 +492,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         try:
             loc = localizer.run({"source_root": tree_rel,
                                  "test_paths": [tree_rel + "/" + t for t in tests_tree],
-                                 "timeout_s": min(remaining(), 120),
+                                 "timeout_s": min(remaining(), int(args.get("localizer_timeout_s") or 20)),
                                  "output_path": _rel(repo, scratch_root / "localize.json")}, repo)
             seen: list[str] = []
             for row in loc.get("ranked_lines") or []:
@@ -540,7 +555,35 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                                                            if r["path"] == target_rel), [])]:
             if ln not in priority:
                 priority.append(ln)
+        judge_mode = str(args.get("judge") or "auto")       # auto | pytest
+        plain_ok, plain_why, plain_mods = (judge_v1.plain_tests(tree, tests_tree) if judge_mode == "auto"
+                                           else (False, "JUDGE_PYTEST_REQUESTED", []))
+        judge_row = {"in_process": plain_ok, "reason": plain_why}
         candidates = candidates_v1.generate(source_text, nums, strings, priority)
+        synth_row: dict[str, Any] = {"status": "NOT_ATTEMPTED"}
+        if plain_ok and priority:
+            # the tests pin the function's value on >= 2 inputs: the returned
+            # expression is a hole, enumerate it (bounded) and let the judge decide
+            fname, arity, why = witness_v1.owning_function(source_text, priority[0])
+            if fname is None:
+                synth_row = {"status": "NO_FREE_FUNCTION:" + str(why)}
+            else:
+                fn_node = next(n for n in ast.walk(ast.parse(source_text))
+                               if isinstance(n, ast.FunctionDef) and n.name == fname)
+                params = [a.arg for a in [*fn_node.args.posonlyargs, *fn_node.args.args]]
+                specs = [sp for m in plain_mods for sp in (m.get("asserts") or [])]
+                examples = synth_v1.examples_for(fname, params, specs)
+                # constants come from the function's own body, never from the tests:
+                # a test literal in a synthesized expression is the overfit anti-pattern
+                own_consts = sorted({n.value for n in ast.walk(fn_node)
+                                     if isinstance(n, ast.Constant) and type(n.value) in (int, float)})
+                synth = synth_v1.synthesize(params, examples, constants=own_consts,
+                                            budget_s=min(2.0, max(0.5, remaining() / 10)))
+                synth_row = {"function": fname, "examples": len(examples), **{k: v for k, v in synth.items()}}
+                if synth["expressions"]:
+                    extra = candidates_v1.synthesized_candidates(source_text, priority[0], synth["expressions"])
+                    candidates = candidates_v1.insert_after_cheap_edits(candidates, extra)
+                    synth_row["candidates"] = len(extra)
         per_run = max(5, min(remaining(), 300))
         witness_row: dict[str, Any] = {}
 
@@ -567,10 +610,6 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
 
         run_tests = lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine, trim)  # noqa: E731
         green_budget = int(args.get("green_budget") or 4)
-        judge_mode = str(args.get("judge") or "auto")       # auto | pytest
-        plain_ok, plain_why, plain_mods = (judge_v1.plain_tests(tree, tests_tree) if judge_mode == "auto"
-                                           else (False, "JUDGE_PYTEST_REQUESTED", []))
-        judge_row = {"in_process": plain_ok, "reason": plain_why}
 
         def judge_batch(copy: pathlib.Path, texts: list[str], dl: float) -> dict[int, int]:
             return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl)
@@ -602,7 +641,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             # best fitness first; with one failing test fitness is flat and search
             # order (cheapest edits first) decides the window
             top_line = candidates[0][0].get("lineno") if candidates else None
-            fit = sorted(search["attempts"], key=lambda a: (a["returncode"], a["index"]))
+            fit = sorted(search["attempts"], key=lambda a: (a["returncode"], a.get("distance", 1e9), a["index"]))
             order = [a["index"] for a in fit if a["returncode"] < 1000
                      and a["mutation"].get("lineno") == top_line
                      and a["mutation"].get("kind") != "GUARD_INSERT"][:int(args.get("compose_from") or 24)]
@@ -636,11 +675,13 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                           "green_indices": search["green_indices"] + [i + base for i in s2["green_indices"]],
                           "stop_reason": "VERIFIED" if winner else s2["stop_reason"]}
             stage2 = {"reason": "ONLY_SUSPICIOUS_GREENS:" + str(suspicious) if only_suspicious else "NO_SINGLE_EDIT_GREEN",
-                      "composed_from": order, "pair_count": len(pairs), "seconds": round(time.monotonic() - t1, 3)}
+                      "composed_from": order, "fitness_of_window": [(a["index"], a["returncode"], a.get("distance"))
+                                                                    for a in fit[:len(order)]],
+                      "pair_count": len(pairs), "seconds": round(time.monotonic() - t1, 3)}
         steps.append({"step": "patch_search", "seconds": round(time.monotonic() - t0, 3),
                       "candidate_count": search["candidate_count"], "tested_candidate_count": search["tested_candidate_count"],
                       "workers": search["workers"], "stop_reason": search["stop_reason"],
-                      "priority_lines": priority[:20], "compose": stage2, "judge": judge_row,
+                      "priority_lines": priority[:20], "compose": stage2, "judge": judge_row, "synthesis": synth_row,
                       "winning_mutation": (search["winner"] or {}).get("mutation"),
                       "winning_index": (search["winner"] or {}).get("index"),
                       "green_indices": search["green_indices"], "witness": witness_row,
