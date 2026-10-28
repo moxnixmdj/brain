@@ -535,6 +535,13 @@ def test_a_wrong_accumulator_inside_a_loop_is_synthesized_from_every_arrival(tmp
     # (identical on the first iteration) and is the first expression found
     assert line4["sites"][0]["kind"] == "assign" and line4["sites"][0]["expressions"][0] == "acc + x"
     assert result["seconds"] < 15
+    # the witness now probes LISTS shaped like the tests' own: the four greens are four
+    # behaviours and 'acc + x' wins on evidence (fewest changes outside the tests), not order
+    w = search["witness"]
+    assert w["status"] == "MEASURED" and w["grid_inputs"] >= 20 and w["behaviour_classes"] == 4
+    assert w["tie_at_top"] is False
+    first, second = w["ranking"][0], w["ranking"][1]
+    assert first["index"] == search["winning_index"] and first["delta_outside_tests"] < second["delta_outside_tests"]
 
 
 def test_a_missing_disjunct_in_a_condition_is_synthesized_in_staged_order(tmp_path: Path):
@@ -575,3 +582,30 @@ def test_hole_synthesis_units_are_pure_and_bounded():
     assert conds and all(c[0].startswith("(__ORIG__)") for c in conds[:4])              # staged: orig or/and C first
     one, _, _ = h.enumerate_distinct(["x"], [{"x": 5}], [], booleans=True, max_size=1)
     assert one == [] or all(" " in c[0] for c in one)                                   # no constant truth values
+
+
+def test_the_witness_prefers_the_tests_exact_literal_type_and_names_real_ties(tmp_path: Path):
+    _fixture(tmp_path)                                   # 'return w * h - 1'
+    result = dr.run(_args(), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH"
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    w = search["witness"]
+    # 'w * h / 1' is green (12.0 == 12) but inexact on the test literal: it ranks last and
+    # breaks what used to be a tie between two behaviour classes at delta 109
+    last = w["ranking"][-1]
+    assert last["inexact_on_tests"] == 1 and last["behaviour_class"] != w["ranking"][0]["behaviour_class"]
+    assert w["tie_at_top"] is False and w["ranking"][0]["inexact_on_tests"] == 0
+    assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+
+
+def test_witness_inputs_follow_the_shape_of_the_tests_arguments():
+    from canonical.runtime import patch_differential_witness_v1 as w
+    import ast as _ast
+    assert w._literal(_ast.parse("[1, 2, 3]", mode="eval").body) == (True, [1, 2, 3])
+    assert w._literal(_ast.parse("[object()]", mode="eval").body) == (False, None)
+    pool = w._sequence_pool([[1, 2, 3], [5, 5]])
+    assert [] in pool and [1] in pool and [3, 2, 1] in pool and [1, 2] in pool and [1, 2, 3, 1] in pool
+    assert all(isinstance(v, list) for v in pool) and len(pool) == len({repr(v) for v in pool})
+    grid = w.grid_inputs([[[1, 2, 3]], [[5, 5]]], 1)
+    assert [[]] in grid and len(grid) >= 20
+    assert w._sequence_pool([("a", "b")])[0] == () and ("", "a") in w._sequence_pool([("a", "b")])

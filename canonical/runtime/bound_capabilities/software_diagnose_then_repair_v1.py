@@ -717,6 +717,12 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                                          "seconds": round(time.monotonic() - t_h, 3)}
         per_run = max(5, min(remaining(), 300))
         witness_row: dict[str, Any] = {}
+        expected_rows: list[tuple[list[Any], Any]] = []
+        if plain_mods and priority:
+            w_name, w_arity, _why = witness_v1.owning_function(source_text, priority[0])
+            if w_name:
+                expected_rows = synth_v1.examples_for(w_name, ["_"] * w_arity,
+                                                      [sp for m in plain_mods for sp in (m.get("asserts") or [])])
 
         def make_choose(cands: list[tuple[dict[str, Any], str]]):
             def choose(greens: list[tuple[int, str]]) -> int:
@@ -734,7 +740,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                     greens=greens, test_paths=[tree / t for t in tests_tree],
                     run_program=lambda copy, program, out_rel: _probe(copy, program, out_rel, python_exe,
                                                                        max(5, min(remaining(), 60)), confine),
-                    scratch=scratch_root)
+                    scratch=scratch_root, expected=expected_rows)
                 witness_row["seconds"] = round(time.monotonic() - t0w, 3)
                 return int(witness_row["ranking"][0]["index"])
             return choose

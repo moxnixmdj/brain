@@ -68,9 +68,60 @@ def _literal(node: ast.AST) -> tuple[bool, Any]:
         v = ast.literal_eval(node)
     except (ValueError, TypeError, SyntaxError):
         return False, None
-    if isinstance(v, (bool, int, float, str, type(None))):
+    if _simple(v):
         return True, v
     return False, None
+
+
+def _simple(v: Any, depth: int = 0) -> bool:
+    if isinstance(v, (bool, int, float, str, type(None))):
+        return True
+    if isinstance(v, (list, tuple)) and depth < 2 and len(v) <= 50:
+        return all(_simple(x, depth + 1) for x in v)
+    return False
+
+
+def _sequence_pool(seen: list[Any]) -> list[Any]:
+    """Lists/tuples shaped like the ones the tests passed: empty, singletons, the
+    tests' own values permuted/extended/shrunk, element types from the tests plus
+    zero/negative/duplicate elements -- deterministic, no randomness."""
+    kinds = {type(v) for v in seen if isinstance(v, (list, tuple))} or {list}
+    elems: list[Any] = []
+    for v in seen:
+        if isinstance(v, (list, tuple)):
+            for x in v:
+                if not any(type(x) is type(y) and x == y for y in elems):
+                    elems.append(x)
+    etypes = {type(x) for x in elems} or {int}
+    base: list[Any] = []
+    if int in etypes:
+        base += [0, 1, 2, -1, 3, 10]
+    if float in etypes:
+        base += [0.0, 0.5, -1.5, 2.0]
+    if str in etypes:
+        base += ["", "a", "b", "ab"]
+    if bool in etypes:
+        base += [True, False]
+    if type(None) in etypes:
+        base += [None]
+    for x in elems:
+        if not any(type(x) is type(y) and x == y for y in base):
+            base.append(x)
+    shapes: list[list[Any]] = [[]]
+    shapes += [[x] for x in base[:6]]
+    shapes += [[base[i], base[j]] for i in range(min(4, len(base))) for j in range(min(4, len(base))) if i != j][:8]
+    for v in seen:
+        if isinstance(v, (list, tuple)) and v:
+            lv = list(v)
+            shapes += [lv[::-1], lv + lv[:1], lv[1:], lv + [base[0]], [lv[0]] * (len(lv) + 1), sorted(lv, key=repr)]
+    shapes += [base[:3], base[:5], (base[:3] + base[:3])]
+    out: list[Any] = []
+    for kind in sorted(kinds, key=lambda k: k.__name__):
+        for sh in shapes:
+            v = kind(sh)
+            if not any(type(v) is type(y) and v == y for y in out):
+                out.append(v)
+    return out
 
 
 def test_call_inputs(test_paths: Iterable[pathlib.Path], name: str, arity: int) -> list[list[Any]]:
@@ -115,6 +166,8 @@ def grid_inputs(test_inputs: list[list[Any]], arity: int, cap: int = MAX_INPUTS)
             pool += STR_GRID
         if type(None) in types:
             pool += NONE_GRID
+        if list in types or tuple in types:
+            pool += _sequence_pool(seen)
         for v in seen:
             if not any(type(v) is type(x) and v == x for x in pool):
                 pool.append(v)
@@ -157,7 +210,7 @@ def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel:
 
 
 def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | None]],
-         n_test_inputs: int) -> list[dict[str, Any]]:
+         n_test_inputs: int, expected_reprs: list[str | None] | None = None) -> list[dict[str, Any]]:
     """Order candidates by behavioural delta vs the original outside the tests' own inputs.
 
     ``original``/candidate outcome lists align with the inputs: the first
@@ -173,20 +226,47 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
             continue
         on_tests = sum(1 for a, b in zip(original[:n_test_inputs], outcomes[:n_test_inputs]) if a != b)
         outside = sum(1 for a, b in zip(original[n_test_inputs:], outcomes[n_test_inputs:]) if a != b)
+        # the tests' literal, exactly: `12` is not `12.0` even though `==` accepts it
+        inexact = 0
+        for o, e in zip(outcomes[:n_test_inputs], expected_reprs or []):
+            if e is not None and isinstance(o, list) and len(o) == 2 and o[0] == "R" and o[1] != e:
+                inexact += 1
         rows.append({"index": index, "delta_outside_tests": outside, "delta_on_tests": on_tests,
+                     "inexact_on_tests": inexact,
                      "grid_inputs": len(original) - n_test_inputs, "witness": "MEASURED"})
     def key(r: dict[str, Any]) -> tuple:
         if r["witness"] != "MEASURED":
-            return (2, 0, r["index"])
-        return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["delta_outside_tests"], r["index"])
+            return (2, 0, 0, r["index"])
+        return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["delta_outside_tests"],
+                r["inexact_on_tests"], r["index"])
     rows.sort(key=key)
+    # behavioural classes among the greens themselves: two candidates with the same
+    # outcomes on every input are one behaviour; different classes with the same
+    # delta are a TIE the suite cannot break -- said in the ledger, never hidden
+    by_index = dict(per_candidate)
+    classes: list[tuple[int, list[Any] | None]] = []
+    for r in rows:
+        o = by_index.get(r["index"])
+        for cid, rep in classes:
+            if rep == o:
+                r["behaviour_class"] = cid
+                break
+        else:
+            classes.append((len(classes), o))
+            r["behaviour_class"] = len(classes) - 1
+    measured = [r for r in rows if r["witness"] == "MEASURED"]
+    if measured:
+        top = key(measured[0])[:3]
+        tied = {r["behaviour_class"] for r in measured if key(r)[:3] == top}
+        for r in rows:
+            r["tie_at_top"] = len(tied) > 1
     return rows
 
 
 def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: int,
             greens: list[tuple[int, str]], test_paths: list[pathlib.Path],
             run_program: Callable[[pathlib.Path, str, str], list[Any] | None],
-            scratch: pathlib.Path) -> dict[str, Any]:
+            scratch: pathlib.Path, expected: list[tuple[list[Any], Any]] = ()) -> dict[str, Any]:
     """Rank ``greens`` [(index, candidate_text)] by behavioural delta.
 
     ``run_program(copy_root, program_source, out_rel)`` executes the probe in a
@@ -221,7 +301,11 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
         per = [(i, run_version(text)) for i, text in greens]
     finally:
         shutil.rmtree(base, ignore_errors=True)
-    ranking = rank(original, per, len(t_inputs))
+    exp_map = {json.dumps(list(a), default=repr): repr(e)[:200] for a, e in expected}
+    expected_reprs = [exp_map.get(json.dumps(row, default=repr)) for row in t_inputs]
+    ranking = rank(original, per, len(t_inputs), expected_reprs)
     return {"status": "MEASURED" if original is not None else "WITNESS_UNAVAILABLE:ORIGINAL_PROBE_FAILED",
             "function": name, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": len(inputs) - len(t_inputs),
+            "behaviour_classes": len({r.get("behaviour_class") for r in ranking if "behaviour_class" in r}),
+            "tie_at_top": any(r.get("tie_at_top") for r in ranking),
             "ranking": ranking, "proves_correctness": False}

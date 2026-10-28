@@ -4,15 +4,15 @@
  "adapter_module": "software_diagnose_then_repair_v1",
  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12; two-example cases add area(2, 5) == 10), proj/tests/test_other.py is the rest of the suite; 2-cpu host, confinement on",
  "e2e_ms_golden": [
-  2111.0,
-  2141.7
+  2096.7,
+  2090.6
  ],
  "observed": {
   "golden": {
    "bug": "return w * h - 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2111.0,
-   "search_s": 1.352,
+   "e2e_ms": 2096.7,
+   "search_s": 1.344,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -35,43 +35,57 @@
    },
    "winning_mutation": "BINOP_DROP keep left",
    "witness": {
+    "behaviour_classes": 2,
     "function": "area",
     "grid_inputs": 109,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 1,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 4,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
-      "delta_on_tests": 1,
-      "delta_outside_tests": 109,
-      "grid_inputs": 109,
-      "index": 5,
-      "witness": "MEASURED"
-     },
-     {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 6,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 5,
+      "inexact_on_tests": 1,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.576,
+    "seconds": 0.557,
     "status": "MEASURED",
-    "test_inputs": 1
+    "test_inputs": 1,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+    return w * h"
@@ -79,19 +93,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.33
+     "seconds": 0.328
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.117
     },
     {
      "step": "patch_search",
-     "seconds": 1.352
+     "seconds": 1.344
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.31
+     "seconds": 0.304
     }
    ],
    "gate": "PASS",
@@ -104,8 +118,8 @@
   "wrong_operator": {
    "bug": "return w + h",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1501.7,
-   "search_s": 0.77,
+   "e2e_ms": 1553.5,
+   "search_s": 0.799,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -138,19 +152,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.319
+     "seconds": 0.335
     },
     {
      "step": "localize",
-     "seconds": 0.121
+     "seconds": 0.114
     },
     {
      "step": "patch_search",
-     "seconds": 0.77
+     "seconds": 0.799
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.288
+     "seconds": 0.302
     }
    ],
    "gate": "PASS",
@@ -162,8 +176,8 @@
   "missing_term": {
    "bug": "return w",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1533.6,
-   "search_s": 0.788,
+   "e2e_ms": 1590.2,
+   "search_s": 0.79,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -200,15 +214,15 @@
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.121
     },
     {
      "step": "patch_search",
-     "seconds": 0.788
+     "seconds": 0.79
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.309
+     "seconds": 0.357
     }
    ],
    "gate": "PASS",
@@ -220,8 +234,8 @@
   "missing_guard": {
    "bug": "return w * h  (+ area(None, 4) == 0)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2155.9,
-   "search_s": 1.403,
+   "e2e_ms": 2184.6,
+   "search_s": 1.373,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -262,7 +276,7 @@
        "status": "NONE"
       }
      ],
-     "seconds": 0.183
+     "seconds": 0.18
     },
     "seconds": 0.016,
     "status": "NONE:EXHAUSTED",
@@ -270,29 +284,37 @@
    },
    "winning_mutation": "GUARD_INSERT if w is None: return 0",
    "witness": {
+    "behaviour_classes": 1,
     "function": "area",
     "grid_inputs": 118,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 10,
       "grid_inputs": 118,
       "index": 11,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 10,
       "grid_inputs": 118,
       "index": 18,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.348,
+    "seconds": 0.359,
     "status": "MEASURED",
-    "test_inputs": 2
+    "test_inputs": 2,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+    if w is None:",
@@ -301,19 +323,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.32
+     "seconds": 0.328
     },
     {
      "step": "localize",
-     "seconds": 0.118
+     "seconds": 0.152
     },
     {
      "step": "patch_search",
-     "seconds": 1.403
+     "seconds": 1.373
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.311
+     "seconds": 0.327
     }
    ],
    "gate": "PASS",
@@ -325,8 +347,8 @@
   "two_edits_and_overfit": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3586.0,
-   "search_s": 2.825,
+   "e2e_ms": 3729.4,
+   "search_s": 2.955,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -372,7 +394,7 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 2.029
+    "seconds": 2.109
    },
    "synthesis": {
     "examples": 1,
@@ -382,50 +404,67 @@
    },
    "winning_mutation": "COMPOSE BINOP_SWAP Add->Mult + BINOP_DROP keep left",
    "witness": {
+    "behaviour_classes": 3,
     "function": "area",
     "grid_inputs": 109,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
       "grid_inputs": 109,
       "index": 103,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
       "grid_inputs": 109,
       "index": 104,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
       "grid_inputs": 109,
       "index": 106,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 25,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 2,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 105,
+      "inexact_on_tests": 1,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.676,
+    "seconds": 0.716,
     "status": "MEASURED",
-    "test_inputs": 1
+    "test_inputs": 1,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+    return w * h"
@@ -433,15 +472,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.324
+     "seconds": 0.334
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 2.825
+     "seconds": 2.955
     },
     {
      "step": "full_suite_gate",
@@ -458,8 +497,8 @@
   "two_edits_and_overfit__judge_pytest": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 21929.1,
-   "search_s": 21.155,
+   "e2e_ms": 22558.9,
+   "search_s": 21.792,
    "judge": {
     "in_process": false,
     "reason": "JUDGE_PYTEST_REQUESTED"
@@ -505,57 +544,74 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 11.968
+    "seconds": 12.438
    },
    "synthesis": {
     "status": "NOT_ATTEMPTED"
    },
    "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult",
    "witness": {
+    "behaviour_classes": 4,
     "function": "area",
     "grid_inputs": 109,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
       "grid_inputs": 109,
       "index": 104,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
       "grid_inputs": 109,
       "index": 132,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 106,
       "grid_inputs": 109,
       "index": 112,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 2,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 25,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 3,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 146,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.676,
+    "seconds": 0.711,
     "status": "MEASURED",
-    "test_inputs": 1
+    "test_inputs": 1,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+    return w * h"
@@ -563,19 +619,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.332
+     "seconds": 0.327
     },
     {
      "step": "localize",
-     "seconds": 0.126
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 21.155
+     "seconds": 21.792
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.311
+     "seconds": 0.317
     }
    ],
    "gate": "PASS",
@@ -588,8 +644,8 @@
   "only_overfit": {
    "bug": "return 0",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-   "e2e_ms": 1187.0,
-   "search_s": 0.758,
+   "e2e_ms": 1304.1,
+   "search_s": 0.84,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -651,15 +707,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.31
+     "seconds": 0.341
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.12
     },
     {
      "step": "patch_search",
-     "seconds": 0.758
+     "seconds": 0.84
     }
    ],
    "gate": null,
@@ -672,8 +728,8 @@
   "cross_file_spectrum": {
    "bug": "util.mul returns a + b (called by calc.area)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1503.7,
-   "search_s": 0.77,
+   "e2e_ms": 1587.4,
+   "search_s": 0.811,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -706,19 +762,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.313
+     "seconds": 0.328
     },
     {
      "step": "localize",
-     "seconds": 0.112
+     "seconds": 0.12
     },
     {
      "step": "patch_search",
-     "seconds": 0.77
+     "seconds": 0.811
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.305
+     "seconds": 0.326
     }
    ],
    "gate": "PASS",
@@ -731,8 +787,8 @@
   "parametrized_synthesis": {
    "bug": "return len(str(w)) (parametrized rows 12/(3,4), 10/(2,5))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1975.8,
-   "search_s": 1.12,
+   "e2e_ms": 1974.5,
+   "search_s": 1.04,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -757,7 +813,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.106,
+    "seconds": 0.111,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -776,19 +832,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.304
+     "seconds": 0.333
     },
     {
      "step": "localize",
-     "seconds": 0.223
+     "seconds": 0.233
     },
     {
      "step": "patch_search",
-     "seconds": 1.12
+     "seconds": 1.04
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.325
+     "seconds": 0.365
     }
    ],
    "gate": "PASS",
@@ -801,8 +857,8 @@
   "hole_in_loop_assignment": {
    "bug": "acc = acc + 1 inside `for x in xs` (should be acc + x)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3408.4,
-   "search_s": 2.668,
+   "e2e_ms": 3540.5,
+   "search_s": 2.757,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -852,7 +908,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.358,
+       "seconds": 0.375,
        "sites": [
         {
          "distinct": 7252,
@@ -877,7 +933,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.515,
+       "seconds": 0.498,
        "sites": [
         {
          "distinct": 4607,
@@ -893,7 +949,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.319
+     "seconds": 1.327
     },
     "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
@@ -901,43 +957,57 @@
    },
    "winning_mutation": "HOLE_SYNTH assign -> acc + x",
    "witness": {
+    "behaviour_classes": 4,
     "function": "total",
-    "grid_inputs": 10,
+    "grid_inputs": 26,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
-      "delta_on_tests": 0,
-      "delta_outside_tests": 0,
-      "grid_inputs": 10,
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 18,
+      "grid_inputs": 26,
       "index": 1,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
-      "delta_on_tests": 0,
-      "delta_outside_tests": 0,
-      "grid_inputs": 10,
+      "behaviour_class": 1,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 23,
+      "grid_inputs": 26,
       "index": 2,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
-      "delta_on_tests": 0,
-      "delta_outside_tests": 0,
-      "grid_inputs": 10,
-      "index": 3,
-      "witness": "MEASURED"
-     },
-     {
-      "delta_on_tests": 0,
-      "delta_outside_tests": 0,
-      "grid_inputs": 10,
+      "behaviour_class": 2,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 23,
+      "grid_inputs": 26,
       "index": 4,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 3,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 25,
+      "grid_inputs": 26,
+      "index": 3,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.562,
+    "seconds": 0.589,
     "status": "MEASURED",
-    "test_inputs": 0
+    "test_inputs": 2,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+        acc = acc + x"
@@ -945,19 +1015,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.321
+     "seconds": 0.348
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.128
     },
     {
      "step": "patch_search",
-     "seconds": 2.668
+     "seconds": 2.757
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.299
+     "seconds": 0.303
     }
    ],
    "gate": "PASS",
@@ -965,13 +1035,13 @@
    "verified": true,
    "confined": true,
    "tree_unchanged": true,
-   "note": "the fault is an assignment inside a loop, not a return: locals snapshotted at every arrival of line 4 (5 iterations over 2 examples), 7252 distinct expressions, 'acc + x' first; three spurious greens ('x + x', ...) also agree with the tests and the witness cannot separate them for a list parameter -> search order (smallest first) decides; stated, not hidden"
+   "note": "the fault is an assignment inside a loop, not a return: locals snapshotted at every arrival of line 4 (5 iterations over 2 examples), 7252 distinct expressions, 'acc + x' first; three spurious greens ('x + x', ...) also agree with the tests -- the witness now probes 26 lists shaped like the tests' own, sees four behaviour classes and ranks 'acc + x' first on evidence (18 changed outside the tests vs 23/23/25)"
   },
   "hole_in_condition": {
    "bug": "if x < lo (should be x < lo or x > hi)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2701.0,
-   "search_s": 1.956,
+   "e2e_ms": 2919.3,
+   "search_s": 2.103,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1000,7 +1070,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.132,
+       "seconds": 0.169,
        "sites": [
         {
          "distinct": 24,
@@ -1032,44 +1102,55 @@
        "status": "HOLE_LINE_NOT_REACHED_BY_EXAMPLE"
       }
      ],
-     "seconds": 0.547
+     "seconds": 0.624
     },
-    "seconds": 0.134,
+    "seconds": 0.139,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
    "winning_mutation": "HOLE_SYNTH condition -> x < lo or hi < x",
    "witness": {
+    "behaviour_classes": 2,
     "function": "inside",
     "grid_inputs": 120,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 42,
       "grid_inputs": 120,
       "index": 8,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 42,
       "grid_inputs": 120,
       "index": 9,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 50,
       "grid_inputs": 120,
       "index": 10,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.457,
+    "seconds": 0.484,
     "status": "MEASURED",
-    "test_inputs": 3
+    "test_inputs": 3,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+    if x < lo or hi < x:"
@@ -1077,19 +1158,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.32
+     "seconds": 0.318
     },
     {
      "step": "localize",
-     "seconds": 0.111
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 1.956
+     "seconds": 2.103
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.31
+     "seconds": 0.377
     }
    ],
    "gate": "PASS",
@@ -1102,8 +1183,8 @@
   "two_examples_synthesis__return_0": {
    "bug": "return 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1648.1,
-   "search_s": 0.9,
+   "e2e_ms": 1717.9,
+   "search_s": 0.943,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1128,7 +1209,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.105,
+    "seconds": 0.098,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1147,19 +1228,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.315
+     "seconds": 0.327
     },
     {
      "step": "localize",
-     "seconds": 0.117
+     "seconds": 0.114
     },
     {
      "step": "patch_search",
-     "seconds": 0.9
+     "seconds": 0.943
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.312
+     "seconds": 0.329
     }
    ],
    "gate": "PASS",
@@ -1172,8 +1253,8 @@
   "two_examples_synthesis__len_str_w": {
    "bug": "return len(str(w))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1604.6,
-   "search_s": 0.889,
+   "e2e_ms": 1805.3,
+   "search_s": 0.975,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1198,7 +1279,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.111,
+    "seconds": 0.119,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1217,19 +1298,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.303
+     "seconds": 0.335
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 0.889
+     "seconds": 0.975
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.295
+     "seconds": 0.373
     }
    ],
    "gate": "PASS",
@@ -1241,8 +1322,8 @@
   "two_examples_synthesis__w_plus_h_plus_1": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1625.3,
-   "search_s": 0.884,
+   "e2e_ms": 1802.0,
+   "search_s": 1.028,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1267,7 +1348,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.096,
+    "seconds": 0.105,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1286,19 +1367,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.321
+     "seconds": 0.334
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.122
     },
     {
      "step": "patch_search",
-     "seconds": 0.884
+     "seconds": 1.028
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.304
+     "seconds": 0.312
     }
    ],
    "gate": "PASS",
@@ -1310,8 +1391,8 @@
   "two_examples_no_expression__test_literal_rejected": {
    "bug": "return len(str(w))",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[2]",
-   "e2e_ms": 1327.3,
-   "search_s": 0.89,
+   "e2e_ms": 1529.9,
+   "search_s": 1.031,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1356,7 +1437,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.098,
+    "seconds": 0.135,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1372,15 +1453,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.317
+     "seconds": 0.365
     },
     {
      "step": "localize",
-     "seconds": 0.117
+     "seconds": 0.13
     },
     {
      "step": "patch_search",
-     "seconds": 0.89
+     "seconds": 1.031
     }
    ],
    "gate": null,
@@ -1393,8 +1474,8 @@
   "under_specified_suite": {
    "bug": "return w * h if w <= 0 else 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2235.3,
-   "search_s": 1.467,
+   "e2e_ms": 2395.2,
+   "search_s": 1.623,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1422,49 +1503,63 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.073,
+    "seconds": 0.077,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
    "winning_mutation": "COMPARE_SWAP LtE->NotEq",
    "witness": {
+    "behaviour_classes": 2,
     "function": "area",
     "grid_inputs": 108,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 59,
       "grid_inputs": 108,
       "index": 11,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 89,
       "grid_inputs": 108,
       "index": 13,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 89,
       "grid_inputs": 108,
       "index": 14,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 89,
       "grid_inputs": 108,
       "index": 15,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.605,
+    "seconds": 0.609,
     "status": "MEASURED",
-    "test_inputs": 2
+    "test_inputs": 2,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+    return w * h if w != 0 else 0"
@@ -1472,19 +1567,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.315
+     "seconds": 0.332
     },
     {
      "step": "localize",
-     "seconds": 0.14
+     "seconds": 0.12
     },
     {
      "step": "patch_search",
-     "seconds": 1.467
+     "seconds": 1.623
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.309
+     "seconds": 0.314
     }
    ],
    "gate": "PASS",
@@ -1496,8 +1591,8 @@
   "parametrized_not_plain": {
    "bug": "return w + h (parametrized test)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1886.1,
-   "search_s": 1.033,
+   "e2e_ms": 1983.3,
+   "search_s": 1.057,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1522,7 +1617,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.104,
+    "seconds": 0.098,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1541,19 +1636,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.311
+     "seconds": 0.364
     },
     {
      "step": "localize",
-     "seconds": 0.228
+     "seconds": 0.232
     },
     {
      "step": "patch_search",
-     "seconds": 1.033
+     "seconds": 1.057
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.31
+     "seconds": 0.326
     }
    ],
    "gate": "PASS",
@@ -1566,8 +1661,8 @@
   "sabotage_full_suite": {
    "bug": "return w * h - 1 (+ a test pinning the bug)",
    "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-   "e2e_ms": 2091.0,
-   "search_s": 1.353,
+   "e2e_ms": 2253.5,
+   "search_s": 1.474,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1590,43 +1685,57 @@
    },
    "winning_mutation": "BINOP_DROP keep left",
    "witness": {
+    "behaviour_classes": 2,
     "function": "area",
     "grid_inputs": 109,
     "module": "pkg.calc",
     "proves_correctness": false,
     "ranking": [
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 1,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 4,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
       "witness": "MEASURED"
      },
      {
-      "delta_on_tests": 1,
-      "delta_outside_tests": 109,
-      "grid_inputs": 109,
-      "index": 5,
-      "witness": "MEASURED"
-     },
-     {
+      "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
       "grid_inputs": 109,
       "index": 6,
+      "inexact_on_tests": 0,
+      "tie_at_top": false,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 109,
+      "grid_inputs": 109,
+      "index": 5,
+      "inexact_on_tests": 1,
+      "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.563,
+    "seconds": 0.601,
     "status": "MEASURED",
-    "test_inputs": 1
+    "test_inputs": 1,
+    "tie_at_top": false
    },
    "patched_lines": [
     "+    return w * h"
@@ -1634,19 +1743,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.321
+     "seconds": 0.328
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.115
     },
     {
      "step": "patch_search",
-     "seconds": 1.353
+     "seconds": 1.474
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.3
+     "seconds": 0.333
     }
    ],
    "gate": "FAIL",
@@ -1658,7 +1767,7 @@
   "nothing_to_repair": {
    "bug": null,
    "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-   "e2e_ms": 315.5,
+   "e2e_ms": 331.1,
    "steps": [],
    "gate": null,
    "tests_discovered": null,
@@ -1669,7 +1778,7 @@
   "harness_crash": {
    "bug": null,
    "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-   "e2e_ms": 283.9,
+   "e2e_ms": 318.7,
    "steps": [],
    "gate": null,
    "tests_discovered": null,
