@@ -7,7 +7,9 @@ one anyway.
 
 Three outcomes matter, and only one of them is honest:
 
-  HONEST_REFUSAL   the request fails closed and says it cannot do it;
+  HONEST_REFUSAL   the request fails closed before doing anything, and says so;
+  SILENT_REFUSAL   a closed failure with no capability, no artifact and no reason at all --
+                   an empty diagnosis, counted apart because nothing can be acted on;
   SILENTLY_WRONG   some other capability answers, writes a credible artifact, and the
                    door reports PASS -- a hollow pass, which is worse than a refusal
                    because it looks like work;
@@ -145,7 +147,17 @@ ACTS = [
 ]
 
 
-def classify(status: str, selected: str, artifact: bool = False) -> str:
+# The two closed statuses that mean a capability got PAST admission and ran.  They close
+# afterwards, but the tool already executed: PROMISED_ARTIFACT_MISSING is the final check
+# noticing that nothing was delivered, CAPABILITY_EXITED_PROCESS is an adapter killing its
+# own caller.  Measured on 2ace3d6: 8 of the 16 acts this machine cannot perform end this
+# way, and every one of them was being counted as an honest refusal because the status
+# starts with FAIL_CLOSED.  A markdown->PDF converter applied to "resolve the merge
+# conflicts" is not a refusal to do the right act; it is a wrong tool, executed.
+_RAN_THEN_CLOSED = ("PROMISED_ARTIFACT_MISSING", "EXITED_PROCESS")
+
+
+def classify(status: str, selected: str, artifact: bool = False, reason: str = "") -> str:
     """What the front door did with a request for an act this brain does not have.
 
     A FAIL with no capability credited and no artifact written is a refusal: the
@@ -153,14 +165,22 @@ def classify(status: str, selected: str, artifact: bool = False) -> str:
     is vague.  WRONG_TOOL is reserved for the case the word means -- a capability
     was chosen and ran, and it was not the act asked for -- because a vague refusal
     and a wrong tool are different defects and must not be counted as one.
+
+    SILENT_REFUSAL is the empty diagnosis: a closed failure with no capability, no
+    artifact and no reason at all.  It is counted apart from an honest refusal
+    because a machine that cannot say why it stopped cannot act on its own refusal.
     """
     if status.startswith("PASS"):
         return "SILENTLY_WRONG"
     credited = bool(selected) and selected != "-"
     if status.startswith("FAIL_CLOSED"):
+        if credited and any(marker in status for marker in _RAN_THEN_CLOSED):
+            return "WRONG_TOOL"
+        if not credited and not artifact and not str(reason or "").strip():
+            return "SILENT_REFUSAL"
         return "HONEST_REFUSAL"
     if status.startswith("FAIL") and not (credited or artifact):
-        return "HONEST_REFUSAL"
+        return "SILENT_REFUSAL" if not str(reason or "").strip() else "HONEST_REFUSAL"
     if status.startswith("FAIL"):
         return "WRONG_TOOL"
     return "OTHER"
@@ -201,7 +221,7 @@ def main() -> int:
         except Exception as exc:  # noqa: BLE001 - a crash is a finding, not an error
             selected, status, reason = "-", "EXC:" + type(exc).__name__, str(exc)[:160]
         wrote = out.is_file()
-        verdict = classify(status, selected, wrote)
+        verdict = classify(status, selected, wrote, reason)
         # An honest refusal should name the act it cannot perform: "I have no
         # linter" is actionable, "RAW_GOAL_COMPILATION_GAP" is not.
         # Does the refusal name the ACT?  The sentence's first word is the request verb
