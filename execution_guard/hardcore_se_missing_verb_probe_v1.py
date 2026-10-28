@@ -39,7 +39,7 @@ WORK = ROOT / "canonical/astra_runtime/tmp/missing_verb_probe"
 _DIRTY_WORLD_ACTS = {"git_stash", "git_diff", "git_commit", "git_status", "git_log"}
 
 
-def build_repo(dirty: bool = True) -> Path:
+def build_repo(dirty: bool = True, with_spec: bool = False) -> Path:
     """A tiny but REAL repository: two commits, a branch, a dirty file, a conflict-free tree."""
     b = WORK / "repo"
     shutil.rmtree(b, ignore_errors=True)
@@ -68,6 +68,15 @@ def build_repo(dirty: bool = True) -> Path:
     (b / "pkg/calc.py").write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
     g("add", "-A"); g("commit", "-qm", "main moved on")
     g("checkout", "-q", "work")
+    if with_spec:
+        # A STRUCTURED EDIT SPEC IS A FILE.  `python.source.crossfile_edit.choreograph.v1` already
+        # states edit ops that way (`edits_path`), and a signature is the same kind of value: a map
+        # of renames, additions and defaults.  The sentence names the spec; nothing is inferred
+        # from prose that never said it.
+        (b / "sig.json").write_text(
+            json.dumps({"renames": {"a": "left"},
+                        "add": [{"name": "scale", "default": "1"}]}) + "\n",
+            encoding="utf-8")
     if dirty:
         # Only the rows whose SENTENCE implies uncommitted work get one.  A checkout, a revert
         # and a rebase refuse a dirty tree by contract (WORKING_TREE_DIRTY), so a world that
@@ -129,7 +138,7 @@ ACTS = [
     # ---- refactoring beyond rename/extract ------------------------------------
     ("move_function", "Move the function add from {R}/pkg/calc.py into a new module {R}/pkg/ops.py and report it to {O}."),
     ("inline_function", "Inline the function sub in {R}/pkg/calc.py and report it to {O}."),
-    ("change_signature", "Change the signature of the function add in {R}/pkg/calc.py to take a tuple and report it to {O}."),
+    ("change_signature", "Change the signature of the function add in {R}/pkg/calc.py using the edits {R}/sig.json and report it to {O}."),
     # ---- documentation and compatibility -------------------------------------
     ("docstrings", "Write docstrings for the functions in {R}/pkg/calc.py and report it to {O}."),
     ("api_compatibility", "Check whether the change breaks the public api of {R}/pkg and report it to {O}."),
@@ -180,7 +189,7 @@ def main() -> int:
         # `sub`) against a tree that an earlier `checkout the previous commit` had rewound, and
         # the failures were read as capability defects.  Rebuilt here, each row is a statement
         # about the capability alone.
-        repo = build_repo(dirty=act in _DIRTY_WORLD_ACTS)
+        repo = build_repo(dirty=act in _DIRTY_WORLD_ACTS, with_spec=act == "change_signature")
         out = WORK / "out" / (act + ".json")
         out.parent.mkdir(parents=True, exist_ok=True)
         goal = sentence.format(R=str(repo), O=str(out))

@@ -5196,6 +5196,102 @@
     "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1_V1.json"
    }
   },
+  "python.refactor.change_signature.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.change_signature.v1",
+     "edits_path": "${input.edits_path}",
+     "module": "${input.module}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_refactor_change_signature",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "refactor",
+    "signature",
+    "parameter",
+    "argument",
+    "call site",
+    "arity",
+    "default value",
+    "keyword argument",
+    "ast",
+    "codemod",
+    "semantic edit",
+    "change signature"
+   ],
+   "limitations": [
+    "the signature is re-rendered from the parsed def and spliced as ONE span: annotations and unstated defaults are carried through byte-exactly, and a param rename rewrites the body by the same lexical shadow law as rename_symbol.",
+    "a call site is edited only when it provably binds this symbol (same module, from-import, or import-module attribute); a call inside a scope that rebinds the name is not this function and is left alone.",
+    "adding a parameter WITHOUT a default requires call_default, because then every resolved call site must be rewritten; a function that also ESCAPES as a value (a callback, an alias) refuses FUNCTION_OBJECT_ESCAPES instead of silently leaving a broken arity.",
+    "removal is only a trailing parameter with a default that the body never reads and no call site passes (REMOVAL_SHIFTS_ARGUMENT / PARAM_IN_USE otherwise).",
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly; a red post-edit suite restores every original byte and refuses TESTS_RED_AFTER_EDIT."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.change_signature"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "module",
+    "qualname",
+    "old_signature",
+    "new_signature",
+    "renames",
+    "added",
+    "removed",
+    "defaults_set",
+    "call_sites_edited",
+    "edit_count",
+    "files_edited",
+    "unknown_sites",
+    "shadowed_keeps",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified"
+   ],
+   "source": {
+    "module": "python stdlib ast",
+    "type": "runtime",
+    "version_family": ">=3.8"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-CHANGESIG-001",
+    "observed_effect": {
+     "arity": "a parameter added without a default appends `scale=1` at every resolved call site (positional and keyword forms both), suite green, 4 call sites + 1 signature span",
+     "blind": "no run_tests named -> gate PASS_BLIND, verified=false",
+     "golden": "def add(a, b) -> add(x, b, scale=1); body `return a + b` -> `return x + b`; keyword call sites add(a=3) -> add(x=3) across the defining module and two importers; named pytest suite green post-edit (gate PASS, complete true)",
+     "honesty": "removal of a non-trailing or defaultless parameter refuses REMOVAL_SHIFTS_ARGUMENT; a parameter renamed onto an existing name refuses DUPLICATE_PARAM; an escaping function object refuses FUNCTION_OBJECT_ESCAPES when the change is not backward compatible; an empty request refuses SIGNATURE_NOT_STATED",
+     "rollback": "a red named suite restores every edited file sha256-identical and refuses TESTS_RED_AFTER_EDIT",
+     "shadowing": "a nested def that rebinds the target name has its calls left untouched (the call is not this function)"
+    }
+   }
+  },
   "python.refactor.extract_function.v1": {
    "action_template": {
     "args": {
