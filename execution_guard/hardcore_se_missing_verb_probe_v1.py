@@ -48,6 +48,22 @@ def build_repo(dirty: bool = True, with_spec: bool = False) -> Path:
     (b / "pkg").mkdir(parents=True)
     (b / "pkg/calc.py").write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
     (b / "README.md").write_text("# demo\n", encoding="utf-8")
+    # A PROJECT MANIFEST.  `dependency_add` and `build_package` act on the file that declares a
+    # project, and a fixture without one makes both rows measure the fixture: measured before this
+    # was added, both refused NO_MANIFEST and were read as missing capabilities when the machine
+    # had just been given them.
+    (b / "pyproject.toml").write_text(
+        '[build-system]\n'
+        'requires = ["setuptools>=61"]\n'
+        'build-backend = "setuptools.build_meta"\n'
+        '\n'
+        '[project]\n'
+        'name = "probe-demo"\n'
+        'version = "0.1.0"\n'
+        'dependencies = [\n'
+        '    "pytest>=8",\n'
+        ']\n',
+        encoding="utf-8")
     g = lambda *a: subprocess.run(["git", "-c", "user.email=a@b", "-c", "user.name=a", *a],
                                   cwd=b, capture_output=True, text=True)
     # A named branch, a test module and a branch to replay.  Three acts had nothing to act

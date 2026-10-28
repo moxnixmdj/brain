@@ -1,8 +1,8 @@
 # The complete problem inventory — hardcore software engineering
 
-**2026-10-28 · V15 · measured on `arena/4ca3a720-brain` at `1ad9764` + this unit**
+**2026-10-28 · V16 · measured on `arena/4ca3a720-brain` at `a066d7b` + this unit**
 
-Supersedes `…GAP_MAP_20261028_V14.md`. V14 answered "what are all the problems" with three
+Supersedes `…GAP_MAP_20261028_V15.md`. V14 answered "what are all the problems" with three
 probes. V15 keeps those and adds the four classes that only appear when you ask a different
 question: **is the machine's capability real when the environment is clean, is the evidence it
 cites checkable, can the instrument that measures it finish, and does the number it reports mean
@@ -24,19 +24,19 @@ Everything below is a row from a probe that can be re-run. Nothing is a wish lis
 
 ```
 HARDCORE-SE MISSING-VERB PROBE (43 acts)          with the declared toolchain  |  bare interpreter
-  ANSWERED_BY_OWNING_CAPABILITY      28                                     |   20   <-- see §9
-  HONEST_REFUSAL                     15                                     |   15
+  ANSWERED_BY_OWNING_CAPABILITY      30                                     |   22   <-- see §9
+  HONEST_REFUSAL                     13                                     |   13
   OWNED_BUT_FAILED                    0                                     |    8
   WRONG_TOOL                          0                                     |    0
   SILENT_REFUSAL                      0                                     |    0
-  refusals that NAME the missing act  9/15
+  refusals that NAME the missing act  9/13
 
-WHOLE-SURFACE REACHABILITY (448 entries = 154 registered + 294 receipt projections)
+WHOLE-SURFACE REACHABILITY (450 entries = 156 registered + 294 receipt projections)
   REACHED_AND_BOUND                426      NOT_REACHABLE 10
   ROUTED_ELSEWHERE                   9      REACHED_BY_EXPLICIT_NAME 3
 
-REGISTRY EVIDENCE (154 entries)                                              see §8
-  a verification block whose pointers exist on disk            112
+REGISTRY EVIDENCE (156 entries)                                              see §8
+  a verification block whose pointers exist on disk            114
   a block that names NO file a reader could check               34
   a block whose pointers name files nobody wrote                 8
 
@@ -53,17 +53,15 @@ ever *worse than zero* — a confident wrong answer costs more than a refusal.
 
 ---
 
-## 2. Class A — fourteen acts this machine cannot perform at all
+## 2. Class A — twelve acts this machine cannot perform at all
 
-No capability in the 154-entry registry performs these; verified by searching every id, keyword,
+No capability in the 156-entry registry performs these; verified by searching every id, keyword,
 `provides` and effect, not assumed. Each is a missing *tier* of engineering, not a missing
 parameter.
 
 | act | the sentence | what it needs |
 |---|---|---|
 | `inline_function` | "Inline the function `sub`" | the exact inverse of `extract_function`, which ships: call-site capture + return fusion |
-| `dependency_add` | "Add the dependency `requests` to the project" | a `pyproject`/`requirements` edit + pin resolution — a reuse job |
-| `build_package` | "Build a wheel for the project" | `python -m build` is not a bound system tool; the whole pypi lane is behind this |
 | `ci_config` | "Write a continuous integration workflow" | a workflow emitter + the schemas it must satisfy |
 | `fuzz` | "Fuzz the function `add`" | a generator + a crash oracle; `atheris` is absent, a stdlib random+subprocess harness is not |
 | `memory_profile` | "Measure the memory usage" | `tracemalloc` is stdlib; nothing wraps it |
@@ -76,10 +74,13 @@ parameter.
 | `retry_design` | "Make the network calls retry safely" | an edit, decomposable into existing refactor primitives |
 | `docstrings` | "Write docstrings for the functions" | the only act here that needs judgement — and no AI model may participate in Brain-credited cognition, so it needs a structural lane, not a generator |
 
-**Ranked by capability gained per hour of work:** `dependency_add` and `build_package` (both pure
-reuse, and they unblock everything pypi-sourced), then `inline_function` (its machinery just
-shipped inside `extract_function`), then `fuzz` + `differential_test` + `crash_repro` (one harness
-family: generate, run, compare, shrink), then `memory_profile` (one stdlib wrapper), then
+**Closed in this unit: `dependency_add` and `build_package`** (§13) — the two that stood between
+this machine and using any project it is pointed at.
+
+**Ranked by capability gained per hour of work:** `inline_function` (its machinery just shipped
+inside `extract_function`), then `fuzz` + `differential_test` + `crash_repro` (one harness family:
+generate, run, compare, shrink), then `memory_profile` (one stdlib wrapper), then
+`merge_conflict` + `schema_migration` (both read a state the machine can already read), then
 `docstrings` last.
 
 ---
@@ -270,6 +271,10 @@ nothing looks green.
 | `world_binding_v1` per-kind index cache | one test >90 s, suite >15 min with no verdict | that test 66 s, verdict delivered |
 | `ruff_complexity.max_complexity` | `0` on a tree whose worst function is 5 | `null` + `max_complexity_measured` + `measurement_limit` |
 | evidence pins | — | 6/6, incl. "a new dangling pointer fails" |
+| **this unit** — `packaging_v1.py` (new) | 2 acts undeliverable by any of 154 entries | both answered, both evidenced, pinned (10/10) |
+| probe fixture | a source tree only; packaging rows measured the fixture (`NO_MANIFEST`) | a *project*: manifest + build-system |
+| evidence probe "reproduction" | second run re-used the first run's mutated world, so a mutating verb "failed" to reproduce | every observation is a copy of a pristine template |
+| registry evidence blocks with a real pointer | 112 / 154 | 114 / 156 |
 
 Nothing was promoted. Every receipt written here records `independent_verifier: null` and
 `producer_independent: false`: one identity ran its own work, and that is exactly what the evidence
@@ -277,20 +282,58 @@ says.
 
 ---
 
-## 12. The plan this implies
+## 12. Closed in this unit — `dependency_add` and `build_package`
+
+The two acts the inventory ranked #2 and #3, and neither needed a new tool.
+
+**`dependency_add`** (`python.packaging.dependency_add.v1`) splices one line into the project's own
+manifest — `[project].dependencies` in `pyproject.toml`, or `requirements*.txt` — and verifies the
+edit **by re-reading the file**: it still parses with `tomllib`, the dependency appears exactly
+once, and nothing outside the dependency array moved. The manifest is never re-serialised, which is
+the same law the bound registry obeys. Asking twice is answered (`already_present: true`), not
+applied twice. A value that starts an option or carries a second line is refused
+(`DEPENDENCY_NOT_A_REQUIREMENT`), because a manifest is code an installer will execute.
+
+**`build_package`** (`python.packaging.build_package.v1`) builds with `pip wheel` — the tool that
+builds wheels, already installed, 1.5 s on a small project — and verifies the artifact **by reading
+it**: a wheel is a zip with `.dist-info/METADATA` and `RECORD`, and name, version, `Requires-Python`,
+declared requirements and top-level modules are read back out of it. A build that produced a file
+with no metadata has not built the package it claims to.
+
+Both reuse rather than invent: the manifest parse is the same one `environment_fit_v1` already uses
+to decide what to install, `pip` is the builder, and the artifact law (digest, verification, FAIL
+artifact on refusal) is `quality_v1`'s, imported rather than reimplemented.
+
+Measured, through the real door (`solve()`), 2.1 s for both rows:
+
+```
+dependency_add   ANSWERED_BY_OWNING_CAPABILITY  python.packaging.dependency_add.v1   PASS
+build_package    ANSWERED_BY_OWNING_CAPABILITY  python.packaging.build_package.v1    PASS
+```
+
+and evidenced like every other capability: `EXECUTED`, `reproduced` on a byte-identical second
+world, and the planted defect found (the new dependency is in the manifest; the wheel's own
+METADATA names `demo-pkg 0.1.0`). Registry 154 → 156. Pins 10/10.
+
+The one thing this does **not** do is install what it declares. `environment_fit_v1.satisfy` is
+still the step that puts a declared dependency into the interpreter, and wiring that so the door
+installs instead of refusing is §13 row 5.
+
+---
+
+## 13. The plan this implies
 
 | # | work | class | why now |
 |---|---|---|---|
-| 1 | noun-side **selection** guard | B residual | five refusals still hand a wrong candidate to admission; nothing executes, but the door should know at selection time |
-| 2 | `dependency_add` + `build_package` | A | pure reuse (a `pyproject` edit and `python -m build`); unblocks the entire pypi/build lane |
+| 1 | `inline_function` | A | its span machinery shipped inside `extract_function`; the inverse is now cheap |
+| 2 | noun-side **selection** guard | B residual | five refusals still hand a wrong candidate to admission; nothing executes, but the door should know at selection time |
 | 3 | the routability **law** (one row → one rule) | D | 22 rows, two failing tests and the `r9` rate are the same defect seen three ways |
-| 4 | `inline_function` | A | its span machinery shipped inside `extract_function`; the inverse is now cheap |
-| 5 | install-or-refuse at the door | H | the toolchain is declared; nothing enforces it, so 8 capabilities vanish silently on a clean interpreter |
-| 6 | three stale guard-code assertions | F | the guard improved and the test did not; 3 of 25 red rows for free |
-| 7 | `fuzz` + `differential_test` + `crash_repro` | A | one harness family: generate, run, compare, shrink |
-| 8 | the four compiler defect families (DAG result, DID NOT RAISE, quoted literal, door parity) | F | each is a law with more than one failing row behind it |
-| 9 | 34 evidence blocks that name no file | G | each needs the lane that measured it to write one line |
-| 10 | `docstrings` | A | last on purpose: the only act here that needs judgement, and no model may supply it |
+| 4 | install-or-refuse at the door | H | the toolchain is declared; nothing enforces it, so 8 capabilities vanish silently on a clean interpreter |
+| 5 | three stale guard-code assertions | F | the guard improved and the test did not; 3 of 25 red rows for free |
+| 6 | `fuzz` + `differential_test` + `crash_repro` | A | one harness family: generate, run, compare, shrink |
+| 7 | the four compiler defect families (DAG result, DID NOT RAISE, quoted literal, door parity) | F | each is a law with more than one failing row behind it |
+| 8 | 34 evidence blocks that name no file | G | each needs the lane that measured it to write one line |
+| 9 | `docstrings` | A | last on purpose: the only act here that needs judgement, and no model may supply it |
 
 Two rules for all of it, unchanged: **reuse before synthesis**, and **measure, never assert** —
 every row above is a re-runnable probe, and a red row is still not an authority until the owner

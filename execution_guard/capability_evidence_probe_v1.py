@@ -163,6 +163,20 @@ def build_source_fixture(work: Path) -> Path:
     # both read the committed revision through `git show`).  A plain directory makes them
     # refuse NOT_A_REPOSITORY / NOT_A_GIT_WORKTREE, which is a fact about the fixture, not
     # about the capability.  So the fixture is a repository with a committed baseline.
+    # A manifest makes the fixture a PROJECT, so the packaging verbs have something to edit and
+    # build.  Without it they refuse NO_MANIFEST, which is a fact about the fixture.
+    (root / "pyproject.toml").write_text(
+        '[build-system]\n'
+        'requires = ["setuptools>=61"]\n'
+        'build-backend = "setuptools.build_meta"\n'
+        '\n'
+        '[project]\n'
+        'name = "evidence-demo"\n'
+        'version = "0.1.0"\n'
+        'dependencies = [\n'
+        '    "packaging>=23",\n'
+        ']\n',
+        encoding="utf-8")
     _git(root, ["init", "-q", "-b", "main"])
     _git(root, ["add", "-A"])
     _git(root, ["commit", "-qm", "baseline"])
@@ -209,6 +223,11 @@ def _inputs(cid: str, source: Path, repo, good: str, upstream: str, out: Path) -
     if cid == "vcs.git.rebase.v1":
         return {"ref": upstream, "worktree_path": str(repo),
                 "output_path": str(out / "rebase.json")}
+    if cid == "python.packaging.dependency_add.v1":
+        return {"source_root": str(source), "dependency": "requests>=2",
+                "output_path": str(out / "dependency_add.json")}
+    if cid == "python.packaging.build_package.v1":
+        return {"source_root": str(source), "output_path": str(out / "build_package.json")}
     return {"source_root": str(source),
             "source_paths": [str(source / "pkg" / "calc.py")],
             "output_path": str(out / (cid.rsplit(".", 2)[-2] + ".json"))}
@@ -304,6 +323,13 @@ ORACLE = {
                           lambda r: bool(r.get("found")) and r.get("first_bad_subject") == "bad"),
     "vcs.git.rebase.v1": ("the one commit replayed onto the upstream branch",
                           lambda r: int(r.get("commits_replayed") or 0) >= 1),
+    "python.packaging.dependency_add.v1": (
+        "the new dependency, spliced into [project].dependencies and verified by re-reading",
+        lambda r: bool(r.get("verified")) and "requests>=2" in (r.get("dependencies") or [])),
+    "python.packaging.build_package.v1": (
+        "the built wheel's own METADATA (name, version, RECORD)",
+        lambda r: bool(r.get("verified")) and bool(r.get("name")) and bool(r.get("version"))
+        and bool(r.get("has_record"))),
 }
 
 
@@ -383,8 +409,15 @@ def main(argv: list[str] | None = None) -> int:
     receipts: dict[str, dict] = {}
     rows = []
     try:
-        source = build_source_fixture(work)
-        repo, good, upstream = build_git_fixture(work)
+        # A PRISTINE TEMPLATE, built once.  Every observation is a COPY of it, because some of
+        # these verbs MUTATE the world they are pointed at -- `rebase` replays commits,
+        # `ruff_format` rewrites the source, `dependency_add` edits the manifest.  Copying the
+        # template is what makes "reproduced" mean the work reproduced rather than that the second
+        # run inherited the first run's answer.  Measured: copying the already-mutated world made
+        # dependency_add "fail" to reproduce, having correctly found its own dependency present.
+        template = work / "template"
+        source = build_source_fixture(template)
+        repo, good, upstream = build_git_fixture(template)
         for cid in wanted:
             entry = caps[cid]
             module_path = _module_path(cid, entry)
@@ -395,29 +428,30 @@ def main(argv: list[str] | None = None) -> int:
                                fromlist=["contract_shape"]).contract_shape(
                 str(ROOT / module_path))
             entrypoint = shape[0] if shape else "run"
-            base_args = _declared_args(entry, _inputs(cid, source, repo, good, upstream,
-                                                      work / "out"))
+
+            def _world(name: str):
+                """A byte-identical copy of the template under its own directory."""
+                root = work / name
+                shutil.rmtree(root, ignore_errors=True)
+                shutil.copytree(source, root / "source")
+                shutil.copytree(repo, root / "repo")
+                return root
+
+            first_world = _world("first")
+            base_args = _declared_args(entry, _inputs(cid, first_world / "source",
+                                                      first_world / "repo", good, upstream,
+                                                      first_world / "out"))
             if base_args is None:
                 rows.append({"capability_id": cid, "outcome": "NO_TASK_SHAPE"})
                 continue
-            base_args.setdefault("output_path", str(work / "out" / (cid + ".json")))
-            # A fresh output path per run so the second run cannot "reproduce" by finding the
-            # first run's artifact already there.
+            base_args.setdefault("output_path", str(first_world / "out" / (cid + ".json")))
             first = _run_once(cid, module_path, entrypoint, base_args)
             first_sha = _sha256(Path(base_args["output_path"]))
-            # Same STARTING WORLD, second time -- a COPY of the template, so the tree and the
-            # git history are byte-identical rather than merely equivalent.  Some of these verbs
-            # mutate what they are pointed at (`rebase` replays commits, `ruff_format` rewrites
-            # the source), so a second run against the world the first one left behind measures
-            # idempotence, not reproduction; and rebuilding mints new commit shas, which the
-            # findings legitimately quote.
-            second_world = work / "second"
-            shutil.rmtree(second_world, ignore_errors=True)
-            shutil.copytree(source, second_world / "source")
-            shutil.copytree(repo, second_world / "repo")
+            second_world = _world("second")
             second_args = _declared_args(entry, _inputs(cid, second_world / "source",
                                                         second_world / "repo", good, upstream,
                                                         second_world / "out"))
+            second_args.setdefault("output_path", str(second_world / "out" / (cid + ".json")))
             second = _run_once(cid, module_path, entrypoint, second_args)
             ran = isinstance(first, Mapping) and not first.get("probe_error")
             reproduced = bool(ran and _findings_sha(first) == _findings_sha(second))

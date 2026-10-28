@@ -11033,6 +11033,171 @@
     "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.resource_leak.v1__RECEIPT.json",
     "reproduced_on_second_run": true
   }},
+  "python.packaging.dependency_add.v1": {
+    "action_template": {
+     "args": {
+      "act_verb": "dependency_add",
+      "capability_id": "python.packaging.dependency_add.v1",
+      "dependency": "${input.dependency}",
+      "output_path": "${input.output_path}",
+      "source_root": "${input.source_root}"
+     },
+     "expect": {
+      "field": "gate",
+      "type": "field_equals",
+      "value": "PASS"
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "packaging_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "dependency",
+     "dependencies",
+     "add a dependency",
+     "add the dependency",
+     "requirement",
+     "requirements",
+     "install",
+     "package",
+     "pyproject",
+     "manifest"
+    ],
+    "limitations": [
+     "Edits the project's own manifest in place: a line is SPLICED into `[project].dependencies` or appended to requirements*.txt, and the file is never re-serialised.",
+     "The edit is verified by re-reading: the manifest still parses, the dependency appears exactly once, and no existing line changed.",
+     "Adding a dependency does not install it.  `environment_fit_v1.satisfy` remains the step that puts a declared dependency into the interpreter."
+    ],
+    "platforms": [
+     "linux",
+     "windows",
+     "darwin"
+    ],
+    "provides": [
+     "python.project.dependency.added"
+    ],
+    "requires": [
+     "python.source.available"
+    ],
+    "result_fields": [
+     "act",
+     "manifest",
+     "manifest_kind",
+     "dependency",
+     "already_present",
+     "lines_added",
+     "verified",
+     "dependencies",
+     "other_lines_changed",
+     "gate",
+     "complete"
+    ],
+    "source": {
+     "adapter_path": "canonical/runtime/bound_capabilities/packaging_v1.py",
+     "module": "subprocess",
+     "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "59d0163ffa43230741bcaa9068867123d13bae3b31cdaaaeb9ca01072adb84ba",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the new dependency, spliced into [project].dependencies and verified by re-reading",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.packaging.dependency_add.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
+  "python.packaging.build_package.v1": {
+    "action_template": {
+     "args": {
+      "act_verb": "build_package",
+      "capability_id": "python.packaging.build_package.v1",
+      "output_path": "${input.output_path}",
+      "source_root": "${input.source_root}"
+     },
+     "expect": {
+      "field": "gate",
+      "type": "field_equals",
+      "value": "PASS"
+     },
+     "type": "invoke_capability"
+    },
+    "adapter_module": "packaging_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+     "build",
+     "build a wheel",
+     "wheel",
+     "package",
+     "distributable",
+     "sdist",
+     "dist",
+     "pip wheel",
+     "release artifact"
+    ],
+    "limitations": [
+     "Builds with `pip wheel`, the tool that builds wheels and is already installed; no new dependency and no build backend is chosen by this adapter.",
+     "The artifact is verified by reading it: a wheel is a zip with a `.dist-info/METADATA` and a `RECORD`, and name, version and top-level modules are read out of those.",
+     "The wheel is copied to `<project>/dist/` so the caller can find it; the temporary wheelhouse is removed."
+    ],
+    "platforms": [
+     "linux",
+     "windows",
+     "darwin"
+    ],
+    "provides": [
+     "python.project.wheel.built"
+    ],
+    "requires": [
+     "python.source.available"
+    ],
+    "result_fields": [
+     "act",
+     "manifest",
+     "wheel",
+     "wheel_name",
+     "wheel_sha256",
+     "wheel_bytes",
+     "name",
+     "version",
+     "requires_python",
+     "requires_dist",
+     "member_count",
+     "top_level",
+     "has_record",
+     "verified",
+     "gate",
+     "complete"
+    ],
+    "source": {
+     "adapter_path": "canonical/runtime/bound_capabilities/packaging_v1.py",
+     "module": "subprocess",
+     "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "59d0163ffa43230741bcaa9068867123d13bae3b31cdaaaeb9ca01072adb84ba",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the built wheel's own METADATA (name, version, RECORD)",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.packaging.build_package.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.quality.api_compatibility.v1": {
    "action_template": {
     "args": {
