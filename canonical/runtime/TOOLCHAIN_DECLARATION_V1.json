@@ -1,0 +1,119 @@
+{
+  "schema": "brain.toolchain.declaration.v1",
+  "declared_at": "2026-10-28",
+  "why": [
+    "A capability is not the adapter file.  It is the adapter PLUS the software that adapter calls,",
+    "and nothing in this repository stated that second half in a form a gate could check: the live",
+    "registry's `source` block is human prose ('python stdlib ast/pytest + git'), and",
+    "`declared_dependency_executables` is empty for all 419 verified capabilities.  Measured on a",
+    "clean checkout of this branch: the 22-task hardcore-SE probe reads 14/22 pass with no venv and",
+    "22/22 pass with one.  The same commit, the same code, eight capabilities appearing and",
+    "disappearing -- because the toolchain they need was never declared, so nothing could install it",
+    "and nothing could warn that it was missing.",
+    "Every entry below was attributed BY MEASUREMENT, not by reading the source: the module was",
+    "blocked with an import hook and the 22-task probe re-run, so `blocks` lists exactly the tasks",
+    "that fail when that module is absent (execution_guard/toolchain_preflight_v1.py --attribute)."
+  ],
+  "distribution": {
+    "mypy": {
+      "import": "mypy",
+      "version": "2.4.0",
+      "declared_by_capability": "python.review.diff_type_gate.v1",
+      "blocks": [
+        "review_type"
+      ],
+      "absent_effect": "the type gate exits its process rather than reporting a verdict"
+    },
+    "coverage": {
+      "import": "coverage",
+      "version": "7.17.0",
+      "declared_by_capability": "python.review.diff_coverage_gate.v1",
+      "blocks": [
+        "review_coverage"
+      ],
+      "absent_effect": "the coverage gate exits its process; the diff is never measured"
+    },
+    "bandit": {
+      "import": "bandit",
+      "version": "1.9.4",
+      "declared_by_capability": "python.review.diff_security_gate.v1",
+      "blocks": [
+        "review_security"
+      ],
+      "absent_effect": "the security gate exits its process"
+    },
+    "crosshair-tool": {
+      "import": "crosshair",
+      "version": "0.0.112",
+      "declared_by_capability": "python.contract.check.crosshair.v1",
+      "blocks": [
+        "contract_check"
+      ],
+      "absent_effect": "symbolic contract checking is unavailable; the capability looks broken instead",
+      "metadata_name": "crosshair-tool"
+    },
+    "z3-solver": {
+      "import": "z3",
+      "version": "5.3.2.0",
+      "declared_by_capability": "python.contract.check.crosshair.v1",
+      "blocks": [
+        "contract_check"
+      ],
+      "absent_effect": "crosshair-tool cannot solve; the contract check reports a crash, not a verdict",
+      "metadata_name": "z3-solver"
+    },
+    "pytest": {
+      "import": "pytest",
+      "version": "9.2.0",
+      "declared_by_capability": "python.repo.diff_apply_full_testgate.v1",
+      "blocks": [
+        "rename_symbol",
+        "rename_param",
+        "repo_diff_apply",
+        "review_coverage"
+      ],
+      "absent_effect": "the machine loses the ability to VERIFY ITS OWN WORK: the full test gate, the coverage gate, and both refactor capabilities that re-run the suite after editing are gone.  Highest blast radius of any entry here -- pytest is the oracle the repair loop uses, so without it 'repaired' is unmeasurable."
+    },
+    "ruff": {
+      "import": "ruff",
+      "version": "0.17.3",
+      "declared_by_capability": null,
+      "blocks": [],
+      "absent_effect": "nothing on the 22-task surface; declared for the lint/format acts that do not exist yet"
+    },
+    "tree-sitter": {
+      "import": "tree_sitter",
+      "version": "0.26.0",
+      "declared_by_capability": "code.multilanguage.parse.tree_sitter.v1",
+      "blocks": [],
+      "absent_effect": "nothing on the 22-task surface; the parse capability itself needs it",
+      "metadata_name": "tree-sitter"
+    }
+  },
+  "measurements": {
+    "clean_image_bare_python3": {
+      "bind": "22/22",
+      "select": "19/22",
+      "pass": "14/22",
+      "failing": [
+        "rename_symbol",
+        "rename_param",
+        "repo_diff_apply",
+        "review_coverage",
+        "review_security",
+        "review_type",
+        "contract_check",
+        "mutation_gate"
+      ]
+    },
+    "with_this_declaration_installed": {
+      "bind": "22/22",
+      "select": "22/22",
+      "pass": "22/22",
+      "failing": []
+    },
+    "note": "identical commits; only the interpreter and its installed distributions differ"
+  },
+  "bootstrap": "python3 execution_guard/toolchain_preflight_v1.py --bootstrap",
+  "check": "python3 execution_guard/toolchain_preflight_v1.py"
+}
