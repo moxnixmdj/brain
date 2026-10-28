@@ -165,6 +165,9 @@ PARSERS: dict[str, Callable[[str], Any]] = {
 _EXPLICIT: dict[str, str] = {
     "x_ticks": PAIR_LIST, "y_ticks": PAIR_LIST,          # was NUMBER_LIST -- a real type error
     "x_value": NUMBER, "y_value": NUMBER, "major": NUMBER, "max_age_s": NUMBER,
+    # a repair-loop budget is a bounded attempt count -- a NUMBER; left UNKNOWN
+    # it made software.repair.loop.cegis_hypothesis unsampleable
+    "budget": NUMBER,
     "authoritative": BOOL, "test_argv": ARGV, "spec": JSON_TEXT, "objective": JSON_TEXT,
     # a slot the router cannot type is a slot the router cannot fill, and an
     # unfilled slot is a chain that never runs

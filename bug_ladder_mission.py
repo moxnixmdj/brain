@@ -239,7 +239,9 @@ def ground_args(cid: str, fixture: dict, tag: str = "run") -> dict:
                       fixture["module"]],
         "timeout_s": LOOP_BUDGET["timeout_s"],
     }
-    if "apply.verified" in cid:
+    if "cegis_hypothesis" in cid:
+        args["source_root"] = rel(fixture["src"])
+    elif "apply.verified" in cid:
         args["source_root"] = rel(fixture["src"])
     elif "strict_progress" in cid:
         args["source_root"] = rel(fixture["src"])
@@ -251,18 +253,24 @@ def ground_args(cid: str, fixture: dict, tag: str = "run") -> dict:
 
 
 def run_ladder() -> dict:
-    rng = random.Random(SEED)
     import shutil
     shutil.rmtree(WORK, ignore_errors=True)
     WORK.mkdir(parents=True, exist_ok=True)
     rows = []
-    for tier_name, maker in TIERS:
+    for tier_idx, (tier_name, maker) in enumerate(TIERS):
         for i in range(INSTANCES_PER_TIER):
-            base = WORK / f"{tier_name}_{i}"
-            base.mkdir(parents=True, exist_ok=True)
-            fixture = maker(base, rng)
-            baseline_green = suite_green(fixture)
+            # Fixture-state protocol: agents include WRITERS (strict, coupled,
+            # cegis, apply all realize bytes). One shared fixture let a writer
+            # repair the tree out from under the agents after it -- measured
+            # artifact: cegis honest-refused off strict's repair, apply took
+            # credit via ALREADY_PASSES. Every agent gets its OWN pristine red
+            # copy, rebuilt from the same per-instance seed.
+            instance_seed = SEED * 1000 + tier_idx * 10 + i
             for cid, fn in (_load(cid, mod) for cid, mod in CAPS.items()):
+                base = WORK / f"{tier_name}_{i}_{cid.rsplit('.', 2)[-2]}"
+                base.mkdir(parents=True, exist_ok=True)
+                fixture = maker(base, random.Random(instance_seed))
+                baseline_green = suite_green(fixture)
                 row = {"tier": tier_name, "instance": i, "capability_id": cid,
                        "baseline_green": baseline_green}
                 if baseline_green:
@@ -270,7 +278,6 @@ def run_ladder() -> dict:
                     rows.append(row)
                     continue
                 args = ground_args(cid, fixture, f'{tier_name}_{i}')
-                is_writer = "apply.verified" in cid
                 report = None
                 t0 = time.monotonic()
                 try:
@@ -287,17 +294,18 @@ def run_ladder() -> dict:
                 row["seconds"] = round(seconds, 2)
                 row["claimed_verified"] = claimed
                 row["independent_green"] = green
-                if is_writer:
-                    row["verdict"] = ("REPAIRED" if green else
-                                      "NOT_REPAIRED" + ("_claimed_but_red"
-                                                        if claimed else ""))
+                # Verdict law: REPAIRED == independent green, PERIOD. The
+                # writer/searcher name table lied (a repair loop whose
+                # patches live in its artifact, not its return, got labelled
+                # "searcher" and its real green was hidden behind a tag).
+                found = bool(report and report.get("patches"))
+                row["patch_reported"] = found
+                if green:
+                    row["verdict"] = "REPAIRED"
+                elif claimed:
+                    row["verdict"] = "NOT_REPAIRED_claimed_but_red"
                 else:
-                    found = bool(report and report.get("patches"))
-                    row["patch_reported"] = found
-                    row["verdict"] = (
-                        "SEARCH_PATCH_REPORTED" if found else
-                        "SEARCH_NO_PATCH" + ("_claimed_but_red"
-                                             if claimed else ""))
+                    row["verdict"] = "NOT_REPAIRED_refused"
                 rows.append(row)
                 print(f"{tier_name:13s} i{i} {cid.split('repair.')[-1]:28s} "
                       f"{row['verdict']:28s} {row['seconds']:>6}s")
@@ -310,13 +318,18 @@ def summarize(doc: dict) -> dict:
     per: dict[str, dict[str, dict[str, int]]] = {}
     for r in doc["rows"]:
         cell = per.setdefault(r["tier"], {}).setdefault(
-            r["capability_id"], {"repaired": 0, "runs": 0, "seconds": 0})
+            r["capability_id"], {"repaired": 0, "patched": 0,
+                                 "runs": 0, "seconds": 0})
         cell["runs"] += 1
         cell["seconds"] += r.get("seconds", 0)
-        if r["verdict"] == "REPAIRED" or r.get("patch_reported"):
+        if r["verdict"] == "REPAIRED":
             cell["repaired"] += 1
-    table = {t: {cid: {"rate": c["repaired"] / c["runs"],
-                       "repaired": c["repaired"], "runs": c["runs"],
+        if r.get("patch_reported"):
+            cell["patched"] += 1
+    table = {t: {cid: {"repair_rate": c["repaired"] / c["runs"],
+                       "patch_reported_rate": c["patched"] / c["runs"],
+                       "repaired": c["repaired"], "patched": c["patched"],
+                       "runs": c["runs"],
                        "mean_s": round(c["seconds"] / c["runs"], 1)}
                  for cid, c in sorted(caps.items())}
              for t, caps in per.items()}
@@ -333,7 +346,8 @@ def main() -> int:
     for tier, caps in doc["summary"].items():
         line = " ".join(
             f"{cid.split('repair.')[-1].split('.ast')[0].split('.v1')[0]}"
-            f"={c['rate']:.0%}({c['mean_s']}s)"
+            f"={c['repair_rate']:.0%}/P{c['patch_reported_rate']:.0%}"
+            f"({c['mean_s']}s)"
             for cid, c in caps.items())
         print(f"{tier:13s} {line}")
     print("receipt:", out.relative_to(ROOT))
