@@ -18,6 +18,13 @@ templates, Kali's checks -- restricted to edits whose rendering is exact):
     NOT_TOGGLE        cond -> not cond ; not cond -> cond   (if/while/return/assert tests)
     CONSTANT_REPLACE  bools flipped; numbers -> 0, 1, -1, n-1, n+1, test literals
     STRING_REPLACE    string literal -> each string literal the tests mention
+    EXPR_EXTEND       return w -> return w * h   (one in-scope name joined to the
+                      returned/assigned expression; the only template that adds code)
+    GUARD_INSERT      if <param> is None: return <c> / if not <param>: return <c>
+                      in front of a function's first statement
+    COMPOSE           two single edits inside one statement (compose_pairs), tried
+                      only after every single edit failed, ordered by the singles'
+                      fitness (fewest failing tests), bounded
 
 Ordering is spectrum-first: candidates on lines the localizer or the traceback
 named come first in rank order; the rest in file order.  Measured on the golden
@@ -68,19 +75,56 @@ def _byte_offset(lines: list[bytes], lineno: int, col: int) -> int:
     return sum(len(x) for x in lines[: lineno - 1]) + col
 
 
+class _Block(ast.AST):
+    """Several statements rendered in place of one (used by GUARD_INSERT)."""
+    _fields = ("body",)
+
+    def __init__(self, body: list[ast.stmt]):
+        super().__init__()
+        self.body = body
+
+
+def _first_statements(tree: ast.AST) -> set[int]:
+    return {id(fn.body[0]) for fn in ast.walk(tree)
+            if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)) and fn.body
+            and not (isinstance(fn.body[0], ast.Expr) and isinstance(getattr(fn.body[0], "value", None), ast.Constant))}
+
+
+def _params_of(tree: ast.AST, stmt: ast.stmt) -> list[str]:
+    for fn in ast.walk(tree):
+        if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)) and fn.body and fn.body[0] is stmt:
+            return [a.arg for a in [*fn.args.posonlyargs, *fn.args.args] if a.arg not in ("self", "cls")]
+    return []
+
+
+def _unparse(node: ast.AST) -> str:
+    if isinstance(node, _Block):
+        return "\n".join(ast.unparse(b) for b in node.body)
+    return ast.unparse(node)
+
+
 def _render(source_text: str, node: ast.AST, replacement: ast.AST) -> str | None:
     span = _span(node)
     if span is None:
         return None
     ast.fix_missing_locations(replacement)
     try:
-        text = ast.unparse(replacement)
+        text = _unparse(replacement)
     except Exception:  # noqa: BLE001
         return None
     raw = source_text.encode("utf-8")
     lines = raw.splitlines(keepends=True)
     start = _byte_offset(lines, span[0], span[1])
     end = _byte_offset(lines, span[2], span[3])
+    if isinstance(replacement, (ast.Name, ast.Constant, ast.Attribute, ast.Call, ast.Subscript)):
+        # the span sat inside its own parentheses: (w + 1) -> (w) is not an edit anyone writes
+        while raw[start - 1:start] == b"(" and raw[end:end + 1] == b")" and start > 0:
+            start, end = start - 1, end + 1
+    if "\n" in text:
+        # a multi-line rendering (statement-level edit): continuation lines take
+        # the column of the statement they replace, so the block stays inside it
+        indent = " " * span[1]
+        text = ("\n" + indent).join(text.split("\n"))
     candidate = (raw[:start] + text.encode("utf-8") + raw[end:]).decode("utf-8")
     try:
         ast.parse(candidate)
@@ -109,13 +153,66 @@ def test_literals(test_paths: Iterable[pathlib.Path]) -> tuple[list[Any], list[s
     return nums, strings
 
 
+def _scope_names(tree: ast.AST) -> dict[int, list[str]]:
+    """id(node) -> names in scope at that node: the owning function's parameters and
+    the locals assigned before the node's line.  Module level: assigned module names."""
+    out: dict[int, list[str]] = {}
+    for fn in ast.walk(tree):
+        if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        params = [a.arg for a in [*fn.args.posonlyargs, *fn.args.args, *fn.args.kwonlyargs] if a.arg not in ("self", "cls")]
+        assigned: list[tuple[int, str]] = []
+        for n in ast.walk(fn):
+            if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store):
+                assigned.append((n.lineno, n.id))
+        for n in ast.walk(fn):
+            if n is fn or not hasattr(n, "lineno"):
+                continue
+            names = list(params)
+            for ln, name in assigned:
+                if ln < n.lineno and name not in names:
+                    names.append(name)
+            out[id(n)] = names
+    return out
+
+
 def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple[ast.AST, str, str, Callable[[ast.AST], ast.AST]]]:
     """Yield (node, kind, detail, replacer).  Replacers build a NEW node from the original."""
     cond_tests = {id(n.test) for n in ast.walk(tree) if isinstance(n, (ast.If, ast.While, ast.IfExp, ast.Assert))}
     returns = {id(n.value) for n in ast.walk(tree) if isinstance(n, ast.Return) and n.value is not None}
+    assigned_values = {id(n.value) for n in ast.walk(tree) if isinstance(n, (ast.Assign, ast.AugAssign, ast.AnnAssign)) and n.value is not None}
+    scope = _scope_names(tree)
+    guard_consts: list[Any] = [None, 0]
+    for v in nums + strings:
+        if v not in guard_consts:
+            guard_consts.append(v)
     for node in ast.walk(tree):
         if _span(node) is None:
             continue
+        # a missing term: extend the returned/assigned expression by one in-scope name
+        # (return w -> return w * h).  The original stays a sub-expression: smallest edit
+        # that adds code, and the one PAR/Prophet-style template that adds code at all.
+        if id(node) in returns or id(node) in assigned_values:
+            used = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
+            for name in scope.get(id(node), []):
+                if name in used:
+                    continue
+                for t in (ast.Mult, ast.Add, ast.Sub, ast.FloorDiv, ast.Div, ast.Mod):
+                    yield node, "EXPR_EXTEND", "<expr> " + t.__name__ + " " + name, (
+                        lambda n, t=t, name=name: ast.BinOp(left=n, op=t(), right=ast.Name(id=name, ctx=ast.Load())))
+                    if t in (ast.Sub, ast.FloorDiv, ast.Div, ast.Mod):
+                        yield node, "EXPR_EXTEND", name + " " + t.__name__ + " <expr>", (
+                            lambda n, t=t, name=name: ast.BinOp(left=ast.Name(id=name, ctx=ast.Load()), op=t(), right=n))
+        # a missing guard: the function's first statement gets `if <param> is None: return <c>`
+        # / `if not <param>: return <c>` in front of it (Kali/PAR null-check template)
+        if isinstance(node, ast.stmt) and id(node) in _first_statements(tree):
+            for name in _params_of(tree, node):
+                for cond_kind in ("is None", "not"):
+                    for c in guard_consts:
+                        test = (ast.Compare(left=ast.Name(id=name, ctx=ast.Load()), ops=[ast.Is()], comparators=[ast.Constant(value=None)])
+                                if cond_kind == "is None" else ast.UnaryOp(op=ast.Not(), operand=ast.Name(id=name, ctx=ast.Load())))
+                        yield node, "GUARD_INSERT", ("if " + name + " is None" if cond_kind == "is None" else "if not " + name) + ": return " + repr(c), (
+                            lambda n, test=test, c=c: _Block([ast.If(test=test, body=[ast.Return(value=ast.Constant(value=c))], orelse=[]), n]))
         if isinstance(node, ast.Compare) and len(node.ops) == 1:
             op = type(node.ops[0])
             targets = [t for t in _CMP if t is not op] if op in _CMP else ([_CMP_PAIRS[op]] if op in _CMP_PAIRS else [])
@@ -167,6 +264,12 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
                 yield node, kind, repr(v) + "->" + repr(r), (lambda n, r=r: ast.Constant(value=r))
 
 
+# within one line: the cheapest, most specific edits first; guards are the most
+# speculative (many of them, any one of them plausible) and go last
+_KIND_ORDER = {"BINOP_DROP": 0, "COMPARE_SWAP": 0, "BINOP_SWAP": 0, "BOOL_SWAP": 0, "NOT_TOGGLE": 0, "OPERAND_SWAP": 0,
+               "CONSTANT_REPLACE": 1, "STRING_REPLACE": 1, "EXPR_EXTEND": 1, "GUARD_INSERT": 3}
+
+
 def generate(source_text: str, nums: list[Any], strings: list[str],
              priority_lines: Iterable[int] = ()) -> list[tuple[dict[str, Any], str]]:
     """All distinct candidates for one file, spectrum-first, each parsed once."""
@@ -174,6 +277,7 @@ def generate(source_text: str, nums: list[Any], strings: list[str],
     rank = {int(ln): i for i, ln in enumerate(priority_lines) if ln is not None}
     rows: list[tuple[tuple, dict[str, Any], str]] = []
     seen: set[str] = set()
+    edits: dict[str, tuple[tuple, Callable[[ast.AST], ast.AST]]] = {}
     for node, kind, detail, replacer in _edits(tree, nums, strings):
         candidate = _render(source_text, node, replacer(node))
         if candidate is None or candidate == source_text:
@@ -183,10 +287,101 @@ def generate(source_text: str, nums: list[Any], strings: list[str],
             continue
         seen.add(digest)
         line = getattr(node, "lineno", 10**9)
-        key = (rank.get(line, len(rank)), line, getattr(node, "col_offset", 0), len(rows))
+        key = (rank.get(line, len(rank)), line, _KIND_ORDER.get(kind, 1), getattr(node, "col_offset", 0), len(rows))
+        edits[digest] = (_node_key(node), replacer)
         rows.append((key, {**_descriptor(node, kind, detail), "candidate_sha256": digest}, candidate))
     rows.sort(key=lambda r: r[0])
-    return [(d, c) for _, d, c in rows]
+    out = [(d, c) for _, d, c in rows]
+    _LAST_EDITS[id(out)] = edits
+    return out
+
+
+_LAST_EDITS: dict[int, dict[str, tuple[tuple, Callable[[ast.AST], ast.AST]]]] = {}
+
+
+def _node_key(node: ast.AST) -> tuple:
+    return (type(node).__name__, *(_span(node) or (None,) * 4))
+
+
+class _Apply(ast.NodeTransformer):
+    def __init__(self, table: dict[tuple, Callable[[ast.AST], ast.AST]]):
+        self.table = table
+        self.applied = 0
+
+    def generic_visit(self, node: ast.AST) -> ast.AST:
+        k = _node_key(node) if hasattr(node, "lineno") else None
+        node = super().generic_visit(node)   # inner edits first ...
+        if k in self.table:
+            self.applied += 1
+            return self.table[k](node)       # ... then the outer one, on the edited subtree
+        return node
+
+
+def compose_pairs(source_text: str, singles: list[tuple[dict[str, Any], str]], order: list[int],
+                  limit: int = 300) -> list[tuple[dict[str, Any], str]]:
+    """Two single edits applied together, for pairs inside one statement.
+
+    ``order`` indexes into ``singles`` (1-based, best first -- the caller's fitness
+    ranking).  The statement that owns both edits is re-rendered from the AST
+    and spliced over its own span, so formatting changes stay inside that one
+    statement.  Nested edits compose outer-first on the original subtree.
+    """
+    edits = _LAST_EDITS.get(id(singles), {})
+    tree = ast.parse(source_text)
+    stmt_of: dict[tuple, ast.stmt] = {}
+    for st in ast.walk(tree):            # breadth-first: the last statement seen is the innermost
+        if isinstance(st, ast.stmt):
+            for n in ast.walk(st):
+                if hasattr(n, "lineno"):
+                    stmt_of[_node_key(n)] = st
+    out: list[tuple[dict[str, Any], str]] = []
+    seen: set[str] = {_sha(c.encode("utf-8")) for _, c in singles}   # a pair equal to a single is not new
+    seen.add(_sha(source_text.encode("utf-8")))
+    raw = source_text.encode("utf-8")
+    lines = raw.splitlines(keepends=True)
+    for a_i in range(len(order)):
+        for b_i in range(a_i + 1, len(order)):
+            if len(out) >= limit:
+                return out
+            da, ca = singles[order[a_i] - 1]
+            db, cb = singles[order[b_i] - 1]
+            ea, eb = edits.get(da["candidate_sha256"]), edits.get(db["candidate_sha256"])
+            if not ea or not eb or ea[0] == eb[0]:
+                continue
+            if da["kind"] == "GUARD_INSERT" or db["kind"] == "GUARD_INSERT":
+                continue
+            sa, sb = stmt_of.get(ea[0]), stmt_of.get(eb[0])
+            if sa is None or sa is not sb:
+                continue
+            import copy as _copy
+            st = _copy.deepcopy(sa)
+            ap = _Apply({ea[0]: ea[1], eb[0]: eb[1]})
+            new_st = ap.visit(st)
+            if ap.applied != 2:
+                continue
+            ast.fix_missing_locations(new_st)
+            try:
+                text = ast.unparse(new_st)
+            except Exception:  # noqa: BLE001
+                continue
+            span = _span(sa)
+            start, end = _byte_offset(lines, span[0], span[1]), _byte_offset(lines, span[2], span[3])
+            indent = " " * span[1]
+            text = ("\n" + indent).join(text.split("\n"))
+            candidate = (raw[:start] + text.encode("utf-8") + raw[end:]).decode("utf-8")
+            try:
+                ast.parse(candidate)
+            except SyntaxError:
+                continue
+            digest = _sha(candidate.encode("utf-8"))
+            if candidate == source_text or digest in seen:
+                continue
+            seen.add(digest)
+            out.append(({"kind": "COMPOSE", "detail": da["kind"] + " " + da["detail"] + " + " + db["kind"] + " " + db["detail"],
+                         "lineno": sa.lineno, "col_offset": sa.col_offset, "end_lineno": sa.end_lineno,
+                         "end_col_offset": sa.end_col_offset, "parts": [order[a_i], order[b_i]],
+                         "candidate_sha256": digest}, candidate))
+    return out
 
 
 def _purge_bytecode(source: pathlib.Path) -> None:

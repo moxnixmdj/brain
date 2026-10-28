@@ -1,37 +1,58 @@
 {
   "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
   "status": "COMPLETE",
-  "e2e_ms_run1": 3253.9,
-  "e2e_ms_run2": 3265.3,
-  "golden": {
-    "status": "VERIFIED_PATCH",
-    "gate": "PASS",
-    "tests": 2,
-    "candidates": 43,
-    "greens": 4,
-    "winning_index": 1,
-    "confined": true
-  },
-  "wrong_operator": "VERIFIED_PATCH",
-  "under_specified_suite": {
-    "status": "VERIFIED_PATCH",
-    "greens": 5,
-    "witness": "MEASURED"
-  },
-  "open": "OPEN:NO_VERIFIED_CANDIDATE:18",
-  "sabotage_full_suite": "PATCH_FAILS_FULL_SUITE:FAIL",
-  "nothing_to_repair": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-  "harness_crash": "REPRODUCE_HARNESS_ERROR:rc=4",
-  "parallel": {
-    "workers=1": {
-      "search_s": 6.178,
-      "tested": 18,
-      "per_candidate_s": 0.343
+  "e2e_ms_run1": 3377.5,
+  "e2e_ms_run2": 3184.8,
+  "cases": {
+    "golden": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 3377.5,
+      "winning_mutation": "BINOP_DROP keep left"
     },
-    "workers=2": {
-      "search_s": 2.935,
-      "tested": 18,
-      "per_candidate_s": 0.163
+    "wrong_operator": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 7559.1,
+      "winning_mutation": "BINOP_SWAP Add->Mult"
+    },
+    "missing_term": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 7994.9,
+      "winning_mutation": "EXPR_EXTEND <expr> Mult h"
+    },
+    "missing_guard": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 7709.8,
+      "winning_mutation": "GUARD_INSERT if w is None: return 0"
+    },
+    "two_edits_and_overfit": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 21890.9,
+      "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult"
+    },
+    "only_overfit": {
+      "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
+      "e2e_ms": 9738.8,
+      "winning_mutation": "CONSTANT_REPLACE 0->12"
+    },
+    "under_specified_suite": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 4562.3,
+      "winning_mutation": "COMPARE_SWAP LtE->NotEq"
+    },
+    "sabotage_full_suite": {
+      "status": "PATCH_FAILS_FULL_SUITE:FAIL",
+      "e2e_ms": 2865.4,
+      "winning_mutation": "BINOP_DROP keep left"
+    },
+    "nothing_to_repair": {
+      "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
+      "e2e_ms": 324.3,
+      "winning_mutation": null
+    },
+    "harness_crash": {
+      "status": "REPRODUCE_HARNESS_ERROR:rc=4",
+      "e2e_ms": 286.5,
+      "winning_mutation": null
     }
   },
   "determinism": "diff byte-identical on rerun"

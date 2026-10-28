@@ -147,7 +147,7 @@ def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel:
         "except BaseException as exc:\n"
         "    f = None; rows.append(['IMPORT', type(exc).__name__])\n"
         "if f is not None:\n"
-        "    for args in " + json.dumps(inputs) + ":\n"
+        "    for args in json.loads(" + repr(json.dumps(inputs)) + "):\n"
         "        try:\n"
         "            r = f(*args); rows.append(['R', repr(r)[:200]])\n"
         "        except BaseException as exc:\n"

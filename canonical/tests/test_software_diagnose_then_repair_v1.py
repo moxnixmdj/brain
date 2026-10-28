@@ -67,11 +67,20 @@ def test_a_passing_suite_is_nothing_to_repair(tmp_path: Path):
 
 
 def test_no_candidate_in_bound_is_an_open_result_not_a_patch(tmp_path: Path):
-    _fixture(tmp_path, bug="return w")   # a missing term: no template adds code
+    _fixture(tmp_path, bug="return 0")   # needs both names back: only 'return 12' is green
     result = dr.run(_args(), tmp_path)
     assert result["verified"] is False and result["diff_path"] is None
-    assert result["status"].startswith("OPEN:NO_VERIFIED_CANDIDATE:")
+    assert result["status"].startswith("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:"), result["status"]
     assert result["steps"] == ["reproduce", "localize", "patch_search"]
+
+
+def test_truly_unreachable_bug_is_open_with_the_count(tmp_path: Path):
+    _fixture(tmp_path, bug="return len(str(w))")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area\n\ndef test_area():\n    assert area(3, 4) == 12\n    assert area(2, 5) == 10\n")
+    result = dr.run(_args(), tmp_path)
+    assert result["verified"] is False and result["diff_path"] is None
+    assert result["status"].startswith(("OPEN:NO_VERIFIED_CANDIDATE:", "OPEN:ONLY_OVERFIT")), result["status"]
 
 
 def test_a_patch_that_fixes_the_stated_test_but_breaks_another_is_not_verified(tmp_path: Path):
@@ -176,7 +185,7 @@ def test_workers_run_candidates_in_parallel_on_their_own_copies(tmp_path: Path):
 
 
 def test_the_deadline_stops_the_search_and_says_so(tmp_path: Path):
-    _fixture(tmp_path, bug="return w")
+    _fixture(tmp_path, bug="return 0")
     result = dr.run(_args(deadline_s=5, workers=1), tmp_path)
     assert result["verified"] is False
     assert result["status"].startswith(("DEADLINE_EXCEEDED:5s", "OPEN:NO_VERIFIED_CANDIDATE:")), result["status"]
@@ -248,3 +257,60 @@ def test_plugin_trim_only_when_no_test_or_conftest_mentions_the_plugin(tmp_path:
     assert dr.plugin_trim(tree, ["tests/test_calc.py"]) == ["-p", "no:hypothesispytest"]
     (tree / "conftest.py").write_text("import hypothesis\n")
     assert dr.plugin_trim(tree, ["tests/test_calc.py"]) == []
+
+
+# --- code that adds code: missing term, missing guard, two edits in one statement ---
+
+def test_a_missing_term_is_added_from_the_names_in_scope(tmp_path: Path):
+    _fixture(tmp_path, bug="return w")
+    result = dr.run(_args(), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH"
+    assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    assert art["steps"][2]["winning_mutation"]["kind"] == "EXPR_EXTEND"
+
+
+def test_a_missing_none_guard_is_inserted_in_front_of_the_first_statement(tmp_path: Path):
+    _fixture(tmp_path, bug="return w * h")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area, twice\n\ndef test_area():\n    assert area(3, 4) == 12\n"
+        "    assert area(None, 4) == 0\n\ndef test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH"
+    diff = (tmp_path / result["diff_path"]).read_text()
+    assert "+    if w is None:\n+        return 0\n" in diff and "-" not in [l[:1] for l in diff.splitlines()[2:]]
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    assert art["steps"][2]["winning_mutation"]["kind"] == "GUARD_INSERT"
+    assert art["steps"][2]["witness"]["status"] == "MEASURED"     # None inputs probe fine
+
+
+def test_an_overfitting_single_edit_triggers_composition_and_the_witness_prefers_the_two_edit_fix(tmp_path: Path):
+    _fixture(tmp_path, bug="return w + h + 1")        # 3 + 4 + 5 == 12 is green too
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH"
+    assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["overfit_signature_indices"]                      # the '+ 5' green was flagged
+    assert search["compose"]["reason"].startswith("ONLY_SUSPICIOUS_GREENS")
+    assert search["winning_mutation"]["kind"] == "COMPOSE"
+    assert search["witness"]["status"] == "MEASURED"
+
+
+def test_compose_pairs_edits_one_statement_inner_first_and_leaves_the_rest_of_the_file_alone():
+    from canonical.runtime import patch_candidate_search_v1 as pcs
+    src = "import os\n\n\ndef area(w, h):\n    return w + h + 1\n\n\ndef twice(x):\n    return 2 * x\n"
+    singles = pcs.generate(src, [12], [], [5])
+    pairs = pcs.compose_pairs(src, singles, list(range(1, len(singles) + 1)), limit=1000)
+    texts = [c for d, c in pairs if d["lineno"] == 5]
+    assert src.replace("return w + h + 1", "return w * h") in texts
+    assert all(c.startswith("import os\n\n\ndef area(w, h):\n") and c.endswith("def twice(x):\n    return 2 * x\n") for c in texts)
+    assert all(d["kind"] == "COMPOSE" and len(d["parts"]) == 2 for d, _ in pairs)
+    assert len(set(texts)) == len(texts) and not (set(texts) & {c for _, c in singles})
+
+
+def test_overfit_signature_is_a_test_literal_written_into_the_code():
+    sig = dr._overfit_signature
+    assert sig({"kind": "CONSTANT_REPLACE", "detail": "1->5"}, [12, 5], []) is True
+    assert sig({"kind": "CONSTANT_REPLACE", "detail": "1->0"}, [12, 5], []) is False      # 0/1/-1 are not evidence
+    assert sig({"kind": "GUARD_INSERT", "detail": "if w is None: return 12"}, [12], []) is True
+    assert sig({"kind": "BINOP_SWAP", "detail": "Add->Mult"}, [12], []) is False

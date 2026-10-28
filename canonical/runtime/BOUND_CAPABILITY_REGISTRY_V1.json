@@ -8228,14 +8228,15 @@
     "pytest"
    ],
    "limitations": [
-    "repair search space is patch_candidate_search_v1's template edits (comparison/arithmetic/bool operator swaps, operand order, dropped term, not-toggle, constant and string replacement), one file, one edit; a bug needing new code ends as OPEN:NO_VERIFIED_CANDIDATE:<n> or DEADLINE_EXCEEDED, never as an invented patch.",
+    "repair search space: patch_candidate_search_v1 template edits in one file -- operator/compare/bool swaps, operand order, dropped term, not-toggle, constant and string replacement, EXPR_EXTEND (one in-scope name joined to a returned/assigned expression), GUARD_INSERT (`if <param> is None/not <param>: return <c>` before a function's first statement) -- and, when no single edit is green or every green one carries an overfit signature, COMPOSE: pairs of those edits inside one statement on the top-ranked line (bounded by compose_from/compose_limit). Beyond that: OPEN:NO_VERIFIED_CANDIDATE:<n> or DEADLINE_EXCEEDED, never an invented patch.",
     "verified means: the named failing tests pass on the patched scratch copy, replayed twice, and the full pytest suite of the real tree passes with the diff applied by python.repo.diff_apply_full_testgate.v1. When several edits satisfy the suite (measured: five for 'w <= 0' with one assertion), the differential witness ranks them by behaviour changed outside the tests' own inputs and the ledger lists every alternative with its delta; that is ranking evidence, never proof of correctness (proves_correctness is false).",
     "reproduction and every candidate run confined (confine_v1: user namespace, chroot, no network) when the host allows it, at a measured ~0.1 s per candidate; confine=required refuses otherwise; the full-suite gate runs as an ordinary subprocess.",
     "the verdict is pytest's summary line, never the exit code: a harness that crashes before any test runs is REPRODUCE_HARNESS_ERROR:rc=<n>, not a failing test to repair.",
     "Python/pytest only; target file is the caller's source_path, else localizer and traceback agreement, else localizer top, else traceback top, else NO_LOCALIZED_SOURCE; candidates are ordered by the lines those witnesses named.",
     "deadline_s (default 600) is end to end and stops the candidate search mid-batch; workers (default cpu count, max 8) each hold a copy of the tree; the user's source tree is copied and never written.",
     "the witness covers free functions with positional parameters only (methods, nested, async, variadic -> WITNESS_UNAVAILABLE:<why> and search order decides); green_budget (default 4) bounds how many green patches are collected on the winning line before ranking; green_budget 1 is first-green-wins.",
-    "pytest plugins are trimmed per run only when provably unused by the named tests and every conftest/ini in the tree (today: Hypothesis, measured 0.55 s per pytest start); anything mentioned keeps the default plugin set."
+    "pytest plugins are trimmed per run only when provably unused by the named tests and every conftest/ini in the tree (today: Hypothesis, measured 0.55 s per pytest start); anything mentioned keeps the default plugin set.",
+    "a green edit that writes one of the tests' own literals into the code (CONSTANT/STRING_REPLACE to a test literal, GUARD_INSERT returning one) is an overfit signature (Tan et al. 2016): it triggers composition and is never shipped alone -- OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:<indices> when nothing else is green."
    ],
    "platforms": [
     "linux"
@@ -8278,8 +8279,12 @@
      "sabotage": "a second test pinning the buggy behaviour: PATCH_FAILS_FULL_SUITE:FAIL with tests_failed 1, verified false",
      "harness": "raising conftest: REPRODUCE_HARNESS_ERROR:rc=4 -- the measured reason the verdict is parsed from the summary line, not the exit code",
      "parallel": "exhaustive 18-candidate search, confined: 1 worker 6.2 s, 2 workers 2.9 s (2-cpu host); Hypothesis pytest plugin trimmed when unused (0.55 s per start measured)",
-     "wired_from": "confine_v1 + python.fault.localize.dynamic.dataflow.v1 + patch_candidate_search_v1 + patch_differential_witness_v1 + python.repo.diff_apply_full_testgate.v1",
-     "under_specified_suite": "'w <= 0' with one assertion: five green edits (!=, >, >=, operand swap, not); differential witness over 1 test input + 109 grid inputs ranks '!=' (59 changed outside the tests) above the rest (89 each) in 0.7 s; all five and their deltas are in the ledger"
+     "wired_from": "confine_v1 + python.fault.localize.dynamic.dataflow.v1 + patch_candidate_search_v1 (generate, compose_pairs, evaluate) + patch_differential_witness_v1 + python.repo.diff_apply_full_testgate.v1",
+     "under_specified_suite": "'w <= 0' with one assertion: five green edits (!=, >, >=, operand swap, not); differential witness over 1 test input + 109 grid inputs ranks '!=' (59 changed outside the tests) above the rest (89 each) in 0.7 s; all five and their deltas are in the ledger",
+     "missing_term": "'return w': EXPR_EXTEND <expr> Mult h -> 'return w * h' VERIFIED (was OPEN:18)",
+     "missing_guard": "'return w * h' with area(None, 4) == 0 added: GUARD_INSERT 'if w is None: return 0' in front of the first statement, two greens witnessed (None inputs probed), VERIFIED",
+     "two_edits_and_overfit": "'return w + h + 1': the only single green is '+ 5' (3+4+5 == 12), flagged as an overfit signature -> stage 2 composes 178 pairs on the top line -> BINOP_DROP + Add->Mult = 'return w * h' -> differential witness ranks it (105 changed grid inputs) above '+ 5' (109) -> VERIFIED; 22 s",
+     "only_overfit": "'return 0': the only green is 'return 12' -> OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23], no diff written"
     },
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIAGNOSE-REPAIR-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIAGNOSE-REPAIR-001.json"

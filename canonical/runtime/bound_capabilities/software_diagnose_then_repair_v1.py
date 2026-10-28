@@ -248,7 +248,9 @@ def _candidate_verdict(copy_root: pathlib.Path, tests_rel: list[str], python_exe
     counts = _summary_counts(log)
     if rc == 0 and counts is not None and counts["failed"] + counts["error"] == 0 and counts["passed"] > 0:
         return 0
-    return rc if rc not in (None, 0) else 1
+    if counts is not None and counts["failed"] + counts["error"] > 0:
+        return counts["failed"] + counts["error"]      # fitness: how many still fail
+    return 1000 + (rc if rc not in (None, 0) else 1)   # no verdict at all: worse than any failure count
 
 
 def _probe(copy_root: pathlib.Path, program: str, out_rel: str, python_exe: str, timeout_s: int,
@@ -276,6 +278,34 @@ def _probe(copy_root: pathlib.Path, program: str, out_rel: str, python_exe: str,
         return json.loads(out.read_text(encoding="utf-8"))
     except ValueError:
         return None
+
+
+def _overfit_signature(desc: dict[str, Any], nums: list[Any], strings: list[str]) -> bool:
+    """A green edit that wrote one of the tests' own literals into the code (Tan et al.
+    2016, anti-patterns in search-based repair): plausible, and the classic overfit."""
+    kind, detail = str(desc.get("kind")), str(desc.get("detail"))
+    if kind in ("CONSTANT_REPLACE", "STRING_REPLACE"):
+        new = detail.split("->", 1)[-1]
+        return any(repr(v) == new for v in [*nums, *strings] if v not in (0, 1, -1))
+    if kind == "GUARD_INSERT":
+        ret = detail.split("return ", 1)[-1]
+        return any(repr(v) == ret for v in [*nums, *strings] if v not in (0, 1, -1))
+    return False
+
+
+def _replay(tree: pathlib.Path, target_rel: str, text: str, run_tests, scratch: pathlib.Path) -> list[int]:
+    copy = scratch / "replay"
+    shutil.rmtree(copy, ignore_errors=True)
+    shutil.copytree(tree, copy, ignore=shutil.ignore_patterns(*_SKIP))
+    try:
+        out = []
+        for _ in range(2):
+            (copy / target_rel).write_text(text, encoding="utf-8")
+            shutil.rmtree(copy / pathlib.Path(target_rel).parent / "__pycache__", ignore_errors=True)
+            out.append(run_tests(copy))
+        return out
+    finally:
+        shutil.rmtree(copy, ignore_errors=True)
 
 
 def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
@@ -439,42 +469,103 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         per_run = max(5, min(remaining(), 300))
         witness_row: dict[str, Any] = {}
 
-        def choose(greens: list[tuple[int, str]]) -> int:
-            # several green patches: the one that changes behaviour least outside
-            # the tests' own inputs (PATCH-SIM); ties and unavailability -> search order
-            nonlocal witness_row
-            if len(greens) == 1:
-                witness_row = {"status": "SINGLE_GREEN", "ranking": [{"index": greens[0][0]}]}
-                return greens[0][0]
-            t0w = time.monotonic()
-            first = greens[0][0]
-            desc = next((d for i, (d, _) in enumerate(candidates, 1) if i == first), {})
-            witness_row = witness_v1.witness(
-                tree=tree, target_rel=target_rel, original_text=source_text, lineno=int(desc.get("lineno") or 1),
-                greens=greens, test_paths=[tree / t for t in tests_tree],
-                run_program=lambda copy, program, out_rel: _probe(copy, program, out_rel, python_exe,
-                                                                   max(5, min(remaining(), 60)), confine),
-                scratch=scratch_root)
-            witness_row["seconds"] = round(time.monotonic() - t0w, 3)
-            return int(witness_row["ranking"][0]["index"])
+        def make_choose(cands: list[tuple[dict[str, Any], str]]):
+            def choose(greens: list[tuple[int, str]]) -> int:
+                # several green patches: the one that changes behaviour least outside
+                # the tests' own inputs (PATCH-SIM); ties and unavailability -> search order
+                nonlocal witness_row
+                if len(greens) == 1:
+                    witness_row = {"status": "SINGLE_GREEN", "ranking": [{"index": greens[0][0]}]}
+                    return greens[0][0]
+                t0w = time.monotonic()
+                first = greens[0][0]
+                desc = next((d for i, (d, _) in enumerate(cands, 1) if i == first), {})
+                witness_row = witness_v1.witness(
+                    tree=tree, target_rel=target_rel, original_text=source_text, lineno=int(desc.get("lineno") or 1),
+                    greens=greens, test_paths=[tree / t for t in tests_tree],
+                    run_program=lambda copy, program, out_rel: _probe(copy, program, out_rel, python_exe,
+                                                                       max(5, min(remaining(), 60)), confine),
+                    scratch=scratch_root)
+                witness_row["seconds"] = round(time.monotonic() - t0w, 3)
+                return int(witness_row["ranking"][0]["index"])
+            return choose
 
+        run_tests = lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine, trim)  # noqa: E731
+        green_budget = int(args.get("green_budget") or 4)
         search = candidates_v1.evaluate(
-            tree, target_rel, candidates,
-            lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine, trim),
+            tree, target_rel, candidates, run_tests,
             workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
-            green_budget=int(args.get("green_budget") or 4), choose=choose)
+            green_budget=green_budget, choose=make_choose(candidates))
+        stage2: dict[str, Any] = {}
+        suspicious = [i for i in search["green_indices"] if _overfit_signature(candidates[i - 1][0], nums, strings)]
+        only_suspicious = bool(search["green_indices"]) and len(suspicious) == len(search["green_indices"])
+        if (not search["winner"] or only_suspicious) and search["stop_reason"] in ("EXHAUSTED", "VERIFIED") \
+                and deadline - time.monotonic() > 10:
+            # stage 2: no single edit is green -- or every green one carries an
+            # overfitting signature (a test literal written into the code, Tan et
+            # al. 2016 anti-patterns).  Compose pairs inside one statement, ordered
+            # by the singles' fitness (fewest tests still failing, then search
+            # order); bounded, same deadline, same runner, same witness.
+            t1 = time.monotonic()
+            # singles on the top-ranked line only (a two-edit fix inside one statement),
+            # best fitness first; with one failing test fitness is flat and search
+            # order (cheapest edits first) decides the window
+            top_line = candidates[0][0].get("lineno") if candidates else None
+            fit = sorted(search["attempts"], key=lambda a: (a["returncode"], a["index"]))
+            order = [a["index"] for a in fit if a["returncode"] < 1000
+                     and a["mutation"].get("lineno") == top_line
+                     and a["mutation"].get("kind") != "GUARD_INSERT"][:int(args.get("compose_from") or 24)]
+            pairs = candidates_v1.compose_pairs(source_text, candidates, order,
+                                                limit=int(args.get("compose_limit") or 200))
+            if pairs:
+                base = len(candidates)
+                s2 = candidates_v1.evaluate(
+                    tree, target_rel, pairs, run_tests,
+                    workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
+                    green_budget=green_budget, choose=make_choose(pairs))
+                for a in s2["attempts"]:
+                    a["index"] += base
+                    a["stage"] = "compose"
+                if s2["winner"]:
+                    s2["winner"]["index"] += base
+                combined = candidates + pairs
+                greens_all = [(i, combined[i - 1][1]) for i in search["green_indices"]] + \
+                             [(i + base, combined[i + base - 1][1]) for i in s2["green_indices"]]
+                winner = search["winner"]
+                if greens_all:
+                    chosen = make_choose(combined)(greens_all) if len(greens_all) > 1 else greens_all[0][0]
+                    if winner is None or winner["index"] != chosen:
+                        if s2["winner"] and s2["winner"]["index"] == chosen:
+                            winner = s2["winner"]
+                        else:
+                            text = combined[chosen - 1][1]
+                            replay = _replay(tree, target_rel, text, run_tests, scratch_root)
+                            winner = ({"index": chosen, "mutation": combined[chosen - 1][0], "candidate": text,
+                                       "replay_returncodes": replay} if all(r == 0 for r in replay) else winner)
+                search = {**s2, "winner": winner, "attempts": search["attempts"] + s2["attempts"],
+                          "tested_candidate_count": search["tested_candidate_count"] + s2["tested_candidate_count"],
+                          "candidate_count": base + len(pairs),
+                          "green_indices": search["green_indices"] + [i + base for i in s2["green_indices"]],
+                          "stop_reason": "VERIFIED" if winner else s2["stop_reason"]}
+            stage2 = {"reason": "ONLY_SUSPICIOUS_GREENS:" + str(suspicious) if only_suspicious else "NO_SINGLE_EDIT_GREEN",
+                      "composed_from": order, "pair_count": len(pairs), "seconds": round(time.monotonic() - t1, 3)}
         steps.append({"step": "patch_search", "seconds": round(time.monotonic() - t0, 3),
                       "candidate_count": search["candidate_count"], "tested_candidate_count": search["tested_candidate_count"],
                       "workers": search["workers"], "stop_reason": search["stop_reason"],
-                      "priority_lines": priority[:20],
+                      "priority_lines": priority[:20], "compose": stage2,
                       "winning_mutation": (search["winner"] or {}).get("mutation"),
                       "winning_index": (search["winner"] or {}).get("index"),
                       "green_indices": search["green_indices"], "witness": witness_row,
+                      "overfit_signature_indices": suspicious,
                       "attempts": search["attempts"][:200]})
         if search["stop_reason"] == "DEADLINE":
             raise DiagnoseRepairRefusal("DEADLINE_EXCEEDED:" + str(deadline_s) + "s:tested=" + str(search["tested_candidate_count"]))
         if not search["winner"]:
             raise DiagnoseRepairRefusal("OPEN:NO_VERIFIED_CANDIDATE:" + str(search["tested_candidate_count"]))
+        if search["winner"]["index"] in suspicious:
+            # the only way to make the suite green was to write its expected value into
+            # the code; that is the suite's weakness, not a repair, and it is not shipped
+            raise DiagnoseRepairRefusal("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:" + str(suspicious))
         diff_text = "".join(difflib.unified_diff(
             source_text.splitlines(keepends=True), search["winner"]["candidate"].splitlines(keepends=True),
             fromfile="a/" + target_rel, tofile="b/" + target_rel))
