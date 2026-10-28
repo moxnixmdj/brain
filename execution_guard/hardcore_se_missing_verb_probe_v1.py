@@ -38,7 +38,12 @@ WORK = ROOT / "canonical/astra_runtime/tmp/missing_verb_probe"
 
 
 # The rows whose sentence promises uncommitted work.  Every other act gets a clean tree.
-_DIRTY_WORLD_ACTS = {"git_stash", "git_diff", "git_commit", "git_status", "git_log"}
+# Rows whose act is done on a working tree, not on a clean checkout: the git acts read uncommitted
+# work, and an inlining refactor edits a file the engineer is holding.  `inline_function` was in
+# this list's world only by accident: its caller existed in the dirty variant of the fixture and
+# not in the clean one, so the row refused INLINE_NO_CALL_SITES -- a fact about the fixture.
+_DIRTY_WORLD_ACTS = {"git_stash", "git_diff", "git_commit", "git_status", "git_log",
+                     "inline_function"}
 
 
 def build_repo(dirty: bool = True, with_spec: bool = False) -> Path:
@@ -100,7 +105,7 @@ def build_repo(dirty: bool = True, with_spec: bool = False) -> Path:
         # and a rebase refuse a dirty tree by contract (WORKING_TREE_DIRTY), so a world that
         # hands them one measures the fixture's choice, not the capability's.
         (b / "pkg/calc.py").write_text(
-            "def add(a, b):\n    return a + b\n\n\ndef sub(a, b):\n    return a - b\n\n\ndef mul(a, b):\n    return a * b\n",
+            "def add(a, b):\n    return a + b\n\n\ndef sub(a, b):\n    return a - b\n\n\ndef mul(a, b):\n    return a * b\n\n\ndef use(x):\n    return sub(x, 2)\n",
             encoding="utf-8")
     return b
 

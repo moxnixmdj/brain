@@ -11033,6 +11033,99 @@
     "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.resource_leak.v1__RECEIPT.json",
     "reproduced_on_second_run": true
   }},
+  "python.refactor.inline_function.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.refactor.inline_function.v1",
+        "module": "${input.module}",
+        "output_path": "${input.output_path}",
+        "python_executable": "${input.python_executable}",
+        "qualname": "${input.qualname}",
+        "run_tests": "${input.run_tests}",
+        "source_root": "${input.source_root}",
+        "timeout_s": "${input.timeout_s}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "python_refactor_inline_function",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "python",
+      "refactor",
+      "inline",
+      "inlining",
+      "inline function",
+      "remove function",
+      "call site",
+      "dead function",
+      "ast",
+      "codemod",
+      "semantic edit",
+      "extract inverse"
+    ],
+    "limitations": [
+      "inlining is statement-level: a call site must be a single-line assignment, augmented assignment, expression statement or return. A call inside a larger expression is refused by line (CALL_SITE_INSIDE_EXPRESSION), because splicing a statement list into an expression needs an invented lambda.",
+      "a body whose return is inside a branch, a decorated/async/generator body, a body with nested def/class/lambda or a multi-line string, and recursion are all refused by name rather than spliced.",
+      "a parameter name already live at the site is renamed (_inl_<name>) and the returned expression is renamed with it, since the expression was written in the callee's scope.",
+      "*args/**kwargs at a site, and callees with varargs/kw-only params, refuse: the binding is not knowable without running the code.",
+      "the definition is deleted only when no call in the module and no other module in the tree names it; otherwise function_removed is false and the name survives.",
+      "no run_tests named => gate PASS_BLIND with verified=false; a red post-edit suite restores every original byte and refuses TESTS_RED_AFTER_EDIT."
+    ],
+    "platforms": [
+      "linux",
+      "windows",
+      "darwin"
+    ],
+    "provides": [
+      "python.refactor.inline_function"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "module",
+      "qualname",
+      "inlined_sites",
+      "renames",
+      "sites_refused",
+      "function_removed",
+      "external_references",
+      "edit_count",
+      "files_edited",
+      "gate",
+      "complete",
+      "output_path",
+      "output_sha256",
+      "output_verified",
+      "verified"
+    ],
+    "source": {
+      "module": "python stdlib ast",
+      "type": "runtime",
+      "version_family": ">=3.9"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "44ecf4c823df90366a1560d64e8b95e201d89b66603eaaadcfccb18fba1e6844",
+    "observed_effect": {
+     "gate": "PASS_BLIND",
+     "output_verified": true
+    },
+    "planted_defect": "every call site replaced by the callee's body, the def kept because the tests import it",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.refactor.inline_function.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.packaging.dependency_add.v1": {
     "action_template": {
      "args": {

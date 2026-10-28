@@ -122,6 +122,11 @@ CALC_SOURCE = '''def add(a, b):
 
 def divide(a, b):
     return a / b
+
+
+def total(a, b):
+    half = divide(a, b)
+    return add(a, half)
 '''
 
 TEST_SOURCE = '''from pkg.calc import divide
@@ -223,6 +228,15 @@ def _inputs(cid: str, source: Path, repo, good: str, upstream: str, out: Path) -
     if cid == "vcs.git.rebase.v1":
         return {"ref": upstream, "worktree_path": str(repo),
                 "output_path": str(out / "rebase.json")}
+    if cid == "python.refactor.inline_function.v1":
+        return {"source_root": str(source), "module": "pkg/calc.py", "qualname": "divide",
+                # This fixture's suite CONTAINS a planted defect (a divide-by-zero that must
+                # raise), so it cannot referee an edit that must stay green -- naming it made the
+                # verb refuse TESTS_RED_AFTER_EDIT, which is the referee working, not the verb
+                # failing.  Blind is stated honestly instead.
+                "run_tests": [],
+                "python_executable": sys.executable, "timeout_s": 300,
+                "output_path": str(out / "inline_function.json")}
     if cid == "python.packaging.dependency_add.v1":
         return {"source_root": str(source), "dependency": "requests>=2",
                 "output_path": str(out / "dependency_add.json")}
@@ -323,6 +337,12 @@ ORACLE = {
                           lambda r: bool(r.get("found")) and r.get("first_bad_subject") == "bad"),
     "vcs.git.rebase.v1": ("the one commit replayed onto the upstream branch",
                           lambda r: int(r.get("commits_replayed") or 0) >= 1),
+    "python.refactor.inline_function.v1": (
+        "every call site replaced by the callee's body, the def kept because the tests import it",
+        lambda r: int(r.get("edit_count") or 0) == 1
+        and len(r.get("inlined_sites") or []) == 1
+        and "tests/test_calc.py" in (r.get("external_references") or [])
+        and r.get("gate") == "PASS_BLIND"),
     "python.packaging.dependency_add.v1": (
         "the new dependency, spliced into [project].dependencies and verified by re-reading",
         lambda r: bool(r.get("verified")) and "requests>=2" in (r.get("dependencies") or [])),
@@ -405,7 +425,11 @@ def main(argv: list[str] | None = None) -> int:
         keep = {c.strip() for c in ns.only.split(",") if c.strip()}
         wanted = [c for c in wanted if c in keep]
 
-    work = Path(tempfile.mkdtemp(prefix="brain_evidence_"))
+    # INSIDE the repository, like the missing-verb probe's world.  The refactor verbs confine every
+    # stated path to the root they are handed (the traversal law), so a fixture minted in /tmp makes
+    # them refuse PATH_ESCAPE -- a fact about where the probe put the world, not about the verb.
+    work = Path(tempfile.mkdtemp(prefix="brain_evidence_",
+                                 dir=str(ROOT / "canonical/astra_runtime/tmp")))
     receipts: dict[str, dict] = {}
     rows = []
     try:

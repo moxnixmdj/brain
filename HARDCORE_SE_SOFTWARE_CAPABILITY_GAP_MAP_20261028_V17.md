@@ -1,8 +1,8 @@
 # The complete problem inventory — hardcore software engineering
 
-**2026-10-28 · V16 · measured on `arena/4ca3a720-brain` at `a066d7b` + this unit**
+**2026-10-28 · V17 · measured on `arena/4ca3a720-brain` at `5b12023` + this unit**
 
-Supersedes `…GAP_MAP_20261028_V15.md`. V14 answered "what are all the problems" with three
+Supersedes `…GAP_MAP_20261028_V16.md`. V14 answered "what are all the problems" with three
 probes. V15 keeps those and adds the four classes that only appear when you ask a different
 question: **is the machine's capability real when the environment is clean, is the evidence it
 cites checkable, can the instrument that measures it finish, and does the number it reports mean
@@ -24,19 +24,19 @@ Everything below is a row from a probe that can be re-run. Nothing is a wish lis
 
 ```
 HARDCORE-SE MISSING-VERB PROBE (43 acts)          with the declared toolchain  |  bare interpreter
-  ANSWERED_BY_OWNING_CAPABILITY      30                                     |   22   <-- see §9
-  HONEST_REFUSAL                     13                                     |   13
+  ANSWERED_BY_OWNING_CAPABILITY      31                                     |   23   <-- see §9
+  HONEST_REFUSAL                     12                                     |   12
   OWNED_BUT_FAILED                    0                                     |    8
   WRONG_TOOL                          0                                     |    0
   SILENT_REFUSAL                      0                                     |    0
-  refusals that NAME the missing act  9/13
+  refusals that NAME the missing act  8/12
 
-WHOLE-SURFACE REACHABILITY (450 entries = 156 registered + 294 receipt projections)
-  REACHED_AND_BOUND                428      NOT_REACHABLE 10
+WHOLE-SURFACE REACHABILITY (451 entries = 157 registered + 294 receipt projections)
+  REACHED_AND_BOUND                428      NOT_REACHABLE 11
   ROUTED_ELSEWHERE                   9      REACHED_BY_EXPLICIT_NAME 3
 
-REGISTRY EVIDENCE (156 entries)                                              see §8
-  a verification block whose pointers exist on disk            114
+REGISTRY EVIDENCE (157 entries)                                              see §8
+  a verification block whose pointers exist on disk            115
   a block that names NO file a reader could check               34
   a block whose pointers name files nobody wrote                 8
 
@@ -45,9 +45,9 @@ PINNED PINS                        16/16 evidence, 8/8 route-identification,
                                    6/6 api-compatibility, 6/6 resource-leak, 9/9 move-function
 ```
 
-Read the first block as a capability statement: **30 of the 43 acts a senior engineer performs on
+Read the first block as a capability statement: **31 of the 43 acts a senior engineer performs on
 any given day are performed by their owning capability, with the promised artifact on disk, and
-13 are refused in words that name the act.** Zero are answered by a tool that had no business
+12 are refused in words that name the act.** Zero are answered by a tool that had no business
 answering them. That last number is what V14 bought, and it is the only one in this table that was
 ever *worse than zero* — a confident wrong answer costs more than a refusal.
 
@@ -57,15 +57,14 @@ here and merely *declared* there. That is a law the door does not yet enforce.
 
 ---
 
-## 2. Class A — twelve acts this machine cannot perform at all
+## 2. Class A — eleven acts this machine cannot perform at all
 
-No capability in the 156-entry registry performs these; verified by searching every id, keyword,
+No capability in the 157-entry registry performs these; verified by searching every id, keyword,
 `provides` and effect, not assumed. Each is a missing *tier* of engineering, not a missing
 parameter.
 
 | act | the sentence | what it needs |
 |---|---|---|
-| `inline_function` | "Inline the function `sub`" | the exact inverse of `extract_function`, which ships: call-site capture + return fusion |
 | `ci_config` | "Write a continuous integration workflow" | a workflow emitter + the schemas it must satisfy |
 | `fuzz` | "Fuzz the function `add`" | a generator + a crash oracle; `atheris` is absent, a stdlib random+subprocess harness is not |
 | `memory_profile` | "Measure the memory usage" | `tracemalloc` is stdlib; nothing wraps it |
@@ -81,10 +80,12 @@ parameter.
 **Closed in this unit: `dependency_add` and `build_package`** (§13) — the two that stood between
 this machine and using any project it is pointed at.
 
-**Ranked by capability gained per hour of work:** `inline_function` (its machinery just shipped
-inside `extract_function`), then `fuzz` + `differential_test` + `crash_repro` (one harness family:
-generate, run, compare, shrink), then `memory_profile` (one stdlib wrapper), then
-`merge_conflict` + `schema_migration` (both read a state the machine can already read), then
+**Closed in this unit: `inline_function`** (§12) — the inverse of `extract_function`, and the only
+refactor whose failure mode is silently wrong code, which is why it refuses more than it edits.
+
+**Ranked by capability gained per hour of work:** `fuzz` + `differential_test` + `crash_repro`
+(one harness family: generate, run, compare, shrink), then `memory_profile` (one stdlib wrapper),
+then `merge_conflict` + `schema_migration` (both read a state the machine can already read), then
 `docstrings` last.
 
 ---
@@ -275,10 +276,14 @@ nothing looks green.
 | `world_binding_v1` per-kind index cache | one test >90 s, suite >15 min with no verdict | that test 66 s, verdict delivered |
 | `ruff_complexity.max_complexity` | `0` on a tree whose worst function is 5 | `null` + `max_complexity_measured` + `measurement_limit` |
 | evidence pins | — | 6/6, incl. "a new dangling pointer fails" |
-| **this unit** — `packaging_v1.py` (new) | 2 acts undeliverable by any of 154 entries | both answered, both evidenced, pinned (10/10) |
+| `packaging_v1.py` (new, previous unit) | 2 acts undeliverable by any of 154 entries | both answered, both evidenced, pinned (10/10) |
 | probe fixture | a source tree only; packaging rows measured the fixture (`NO_MANIFEST`) | a *project*: manifest + build-system |
 | evidence probe "reproduction" | second run re-used the first run's mutated world, so a mutating verb "failed" to reproduce | every observation is a copy of a pristine template |
-| registry evidence blocks with a real pointer | 112 / 154 | 114 / 156 |
+| registry evidence blocks with a real pointer | 112 / 154 | 115 / 157 |
+| **this unit** — `python_refactor_inline_function.py` (new) | `inline_function` undeliverable by any of 156 entries | answered through the door, evidenced, pinned (11/11) |
+| the fixture's `sub` had no caller in the clean world | the row refused `INLINE_NO_CALL_SITES` — a fact about the fixture | the refactor rows get a working tree (`_DIRTY_WORLD_ACTS`) |
+| evidence probe's world | minted in `/tmp`, so every path-confining verb refused `PATH_ESCAPE` | minted under `canonical/astra_runtime/tmp`, like the missing-verb probe |
+| a refusal inside an adapter | `SystemExit` — it took the caller with it (`CAPABILITY_EXITED_PROCESS`, reason lost) | a normal exception: the door now reports the reason it was given |
 
 Nothing was promoted. Every receipt written here records `independent_verifier: null` and
 `producer_independent: false`: one identity ran its own work, and that is exactly what the evidence
@@ -286,7 +291,7 @@ says.
 
 ---
 
-## 12. Closed in this unit — `dependency_add` and `build_package`
+## 12. Closed in the previous unit — `dependency_add` and `build_package`
 
 The two acts the inventory ranked #2 and #3, and neither needed a new tool.
 
@@ -321,23 +326,71 @@ METADATA names `demo-pkg 0.1.0`). Registry 154 → 156. Pins 10/10.
 
 The one thing this does **not** do is install what it declares. `environment_fit_v1.satisfy` is
 still the step that puts a declared dependency into the interpreter, and wiring that so the door
-installs instead of refusing is §13 row 5.
+installs instead of refusing is §14 row 5.
 
 ---
 
-## 13. The plan this implies
+## 13. Closed in this unit — `inline_function`
+
+`python.refactor.inline_function.v1`, the exact inverse of the verb that already shipped. Its
+machinery was free (the span/marker law, the path law, the test referee, the def-lookup); what
+cost thought is that **inlining is the only refactor here whose failure is silently wrong code**:
+the module still parses, the call is gone, and the answer changed. So the verb refuses more than
+it edits, and every refusal names its reason.
+
+The five laws it holds:
+
+1. **evaluated once.** Each argument becomes a binding at the site (`a = <expr>`), so an argument
+   expression runs once and a body that mutates its parameter is still correct.
+2. **never clobbers the caller.** A parameter name already live at the site is renamed `_inl_<name>`,
+   and the returned expression is renamed *with it* — the expression was written in the callee's
+   scope, and copying it unchanged reads whatever the caller happens to have under that name.
+3. **the definition dies only when nothing names it.** A test file that does
+   `from pkg.calc import sub` keeps it (`external_references`), and the suite stays green.
+4. **a branching return is refused, not spliced.** Turning `if v > hi: return hi` into a statement
+   list needs a flag and an indent level that the original did not have.
+5. **a red suite restores every byte**, and no named suite is `PASS_BLIND` / `verified: false`.
+
+Three of those laws were **written because the measurement found the bug**, not before it:
+
+| defect | what it looked like | what caught it |
+|---|---|---|
+| the body's own `return` was copied *and* re-emitted | `return n * 2` in the middle of a loop body; the code ran and the answer was wrong | `PASS_BLIND` on the fixture, then a wrong number from `caller()` |
+| the returned expression was copied from the callee's scope | `t += n * 2` where `n` was the caller's loop variable; right by coincidence | the rename that produced a dead `_inl_n` binding |
+| the rename ran over the whole body including the dropped `return` | a stray `_inl_n` line above the call | `INLINE_BODY_DEDENT_UNSAFE` |
+
+Through the real door (`solve()`), and evidenced like every other capability
+(`EXECUTED`, reproduced on a byte-identical second world, planted defect found):
+
+```
+inline_function   ANSWERED_BY_OWNING_CAPABILITY  python.refactor.inline_function.v1  PASS
+```
+
+Registry 156 → 157; pins 11/11. Whole-surface reachability stays 428 of 451: the new verb is
+`NOT_REACHABLE` from a keyword-synthesised sentence — exactly the state its sibling `move_function`
+is in, and exactly Class D (§5). Through the door a sentence a person would actually write
+("Inline the function sub in …") reaches it; the synthesised keyword soup does not. That is the
+routability law's problem, not this verb's, and pretending otherwise by adding keywords would be
+the same defect wearing a fix's clothes.
+
+The one thing the probe had to be told: a fixture whose suite *contains a planted defect* cannot referee an edit that
+must stay green — naming it made the verb refuse `TESTS_RED_AFTER_EDIT`, which is the referee
+working. That row is evidenced `PASS_BLIND` and says so.
+
+---
+
+## 14. The plan this implies
 
 | # | work | class | why now |
 |---|---|---|---|
-| 1 | `inline_function` | A | its span machinery shipped inside `extract_function`; the inverse is now cheap |
-| 2 | noun-side **selection** guard | B residual | five refusals still hand a wrong candidate to admission; nothing executes, but the door should know at selection time |
-| 3 | the routability **law** (one row → one rule) | D | 22 rows, two failing tests and the `r9` rate are the same defect seen three ways |
-| 4 | install-or-refuse at the door | H | the toolchain is declared; nothing enforces it, so 8 capabilities vanish silently on a clean interpreter |
-| 5 | three stale guard-code assertions | F | the guard improved and the test did not; 3 of 25 red rows for free |
-| 6 | `fuzz` + `differential_test` + `crash_repro` | A | one harness family: generate, run, compare, shrink |
-| 7 | the four compiler defect families (DAG result, DID NOT RAISE, quoted literal, door parity) | F | each is a law with more than one failing row behind it |
-| 8 | 34 evidence blocks that name no file | G | each needs the lane that measured it to write one line |
-| 9 | `docstrings` | A | last on purpose: the only act here that needs judgement, and no model may supply it |
+| 1 | noun-side **selection** guard | B residual | five refusals still hand a wrong candidate to admission; nothing executes, but the door should know at selection time |
+| 2 | the routability **law** (one row → one rule) | D | 22 rows, two failing tests and the `r9` rate are the same defect seen three ways |
+| 3 | install-or-refuse at the door | H | the toolchain is declared; nothing enforces it, so 8 capabilities vanish silently on a clean interpreter |
+| 4 | three stale guard-code assertions | F | the guard improved and the test did not; 3 of 25 red rows for free |
+| 5 | `fuzz` + `differential_test` + `crash_repro` | A | one harness family: generate, run, compare, shrink |
+| 6 | the four compiler defect families (DAG result, DID NOT RAISE, quoted literal, door parity) | F | each is a law with more than one failing row behind it |
+| 7 | 34 evidence blocks that name no file | G | each needs the lane that measured it to write one line |
+| 8 | `docstrings` | A | last on purpose: the only act here that needs judgement, and no model may supply it |
 
 Two rules for all of it, unchanged: **reuse before synthesis**, and **measure, never assert** —
 every row above is a re-runnable probe, and a red row is still not an authority until the owner
