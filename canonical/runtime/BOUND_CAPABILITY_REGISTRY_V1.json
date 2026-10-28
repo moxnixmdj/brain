@@ -1362,10 +1362,10 @@
   "code.impact.tree_sitter.testselect.v1": {
    "action_template": {
     "args": {
-          "capability_id": "code.impact.tree_sitter.testselect.v1",
-          "changed_paths": "${input.changed_paths}",
-          "output_path": "${input.output_path}"
-        },
+     "capability_id": "code.impact.tree_sitter.testselect.v1",
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -4262,7 +4262,18 @@
   "python.contract.issue_orchestration.fusion.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.contract.issue_orchestration.fusion.v1"
+     "capability_id": "python.contract.issue_orchestration.fusion.v1",
+     "diff_path": "${input.diff_path}",
+     "index_path": "${input.index_path}",
+     "issue_path": "${input.issue_path}",
+     "output_path": "${input.output_path}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "source_root": "${input.source_root}",
+     "target_path": "${input.target_path}",
+     "task_path": "${input.task_path}",
+     "timeout_s": "${input.timeout_s}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -4321,7 +4332,24 @@
   "python.evidence.contract.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.evidence.contract.supercomposer.v1"
+     "capability_id": "python.evidence.contract.supercomposer.v1",
+     "diff_path": "${input.diff_path}",
+     "extraction_path": "${input.extraction_path}",
+     "index_path": "${input.index_path}",
+     "input_path": "${input.input_path}",
+     "issue_path": "${input.issue_path}",
+     "objective": "${input.objective}",
+     "output_path": "${input.output_path}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "source": "${input.source}",
+     "source_path": "${input.source_path}",
+     "source_root": "${input.source_root}",
+     "spec": "${input.spec}",
+     "target_path": "${input.target_path}",
+     "task_path": "${input.task_path}",
+     "timeout_s": "${input.timeout_s}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -4482,7 +4510,14 @@
   "python.fault.patch.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.fault.patch.supercomposer.v1"
+     "capability_id": "python.fault.patch.supercomposer.v1",
+     "goal": "${input.goal}",
+     "output_path": "${input.output_path}",
+     "source_path": "${input.source_path}",
+     "source_paths": "${input.source_paths}",
+     "source_root": "${input.source_root}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}"
     },
     "expect": {
      "field": "output_verified",
@@ -4543,7 +4578,10 @@
   "python.fault.provenance.fusion.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.fault.provenance.fusion.v1"
+     "capability_id": "python.fault.provenance.fusion.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "test_paths": "${input.test_paths}"
     },
     "expect": {
      "field": "output_verified",
@@ -4794,7 +4832,20 @@
   "python.orchestration.symbol.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.orchestration.symbol.supercomposer.v1"
+     "capability_id": "python.orchestration.symbol.supercomposer.v1",
+     "diff_path": "${input.diff_path}",
+     "edits_path": "${input.edits_path}",
+     "index_path": "${input.index_path}",
+     "issue_path": "${input.issue_path}",
+     "output_path": "${input.output_path}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "queries": "${input.queries}",
+     "source_root": "${input.source_root}",
+     "target_path": "${input.target_path}",
+     "task_path": "${input.task_path}",
+     "timeout_s": "${input.timeout_s}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -4855,7 +4906,22 @@
   "python.patch.review.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.patch.review.supercomposer.v1"
+     "anchor_path": "${input.anchor_path}",
+     "bench_path": "${input.bench_path}",
+     "capability_id": "python.patch.review.supercomposer.v1",
+     "diff_path": "${input.diff_path}",
+     "goal": "${input.goal}",
+     "max_mutants": "${input.max_mutants}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "repeats": "${input.repeats}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}"
     },
     "expect": {
      "field": "output_verified",
@@ -5017,7 +5083,21 @@
   "python.pipeline.allowlist_gate.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.pipeline.allowlist_gate.v1"
+     "anchor_path": "${input.anchor_path}",
+     "bench_path": "${input.bench_path}",
+     "capability_id": "python.pipeline.allowlist_gate.v1",
+     "diff_path": "${input.diff_path}",
+     "max_mutants": "${input.max_mutants}",
+     "min_coverage_ratio": "${input.min_coverage_ratio}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "repeats": "${input.repeats}",
+     "run_tests": "${input.run_tests}",
+     "stages": "${input.stages}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -5077,7 +5157,21 @@
   "python.pr.land.composer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.pr.land.composer.v1"
+     "anchor_path": "${input.anchor_path}",
+     "apply_directory": "${input.apply_directory}",
+     "base_branch": "${input.base_branch}",
+     "branch_name": "${input.branch_name}",
+     "capability_id": "python.pr.land.composer.v1",
+     "diff_path": "${input.diff_path}",
+     "goal": "${input.goal}",
+     "output_path": "${input.output_path}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "repo_path": "${input.repo_path}",
+     "source_root": "${input.source_root}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": "${input.timeout_s}"
     },
     "expect": {
      "field": "output_verified",
@@ -5137,7 +5231,11 @@
   "python.provenance.coupling.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.provenance.coupling.supercomposer.v1"
+     "capability_id": "python.provenance.coupling.supercomposer.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}"
     },
     "expect": {
      "field": "output_verified",
@@ -5198,17 +5296,17 @@
   "python.refactor.extract_function.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.refactor.extract_function.v1",
-          "end_line": "${input.end_line}",
-          "module": "${input.module}",
-          "new_name": "${input.new_name}",
-          "output_path": "${input.output_path}",
-          "qualname": "${input.qualname}",
-          "run_tests": [],
-          "source_root": "${input.source_root}",
-          "start_line": "${input.start_line}",
-          "timeout_s": 300
-        },
+     "capability_id": "python.refactor.extract_function.v1",
+     "end_line": "${input.end_line}",
+     "module": "${input.module}",
+     "new_name": "${input.new_name}",
+     "output_path": "${input.output_path}",
+     "qualname": "${input.qualname}",
+     "run_tests": [],
+     "source_root": "${input.source_root}",
+     "start_line": "${input.start_line}",
+     "timeout_s": 300
+    },
     "expect": {
      "field": "gate",
      "type": "field_equals",
@@ -5474,7 +5572,16 @@
   "python.refactor.test_scaffold.fusion.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.refactor.test_scaffold.fusion.v1"
+     "capability_id": "python.refactor.test_scaffold.fusion.v1",
+     "module": "${input.module}",
+     "new_param": "${input.new_param}",
+     "old_param": "${input.old_param}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "timeout_s": "${input.timeout_s}"
     },
     "expect": {
      "field": "output_verified",
@@ -5707,11 +5814,11 @@
   "python.repository.acceptance.measure.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.repository.acceptance.measure.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "timeout_s": 60
-        },
+     "capability_id": "python.repository.acceptance.measure.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -6661,17 +6768,17 @@
   "python.software.repair.loop.coupled.ast.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.software.repair.loop.coupled.ast.v1",
-          "max_files": 8,
-          "max_pair_candidates": 1200,
-          "max_symbols_per_file": 8,
-          "mutations_per_file": 24,
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 20
-        },
+     "capability_id": "python.software.repair.loop.coupled.ast.v1",
+     "max_files": 8,
+     "max_pair_candidates": 1200,
+     "max_symbols_per_file": 8,
+     "mutations_per_file": 24,
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": 20
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7377,11 +7484,11 @@
   "python.source.change_impact.testselect.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.source.change_impact.testselect.v1",
-          "changed_paths": "${input.changed_paths}",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.source.change_impact.testselect.v1",
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7465,11 +7572,11 @@
   "python.source.crossfile_edit.choreograph.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.source.crossfile_edit.choreograph.v1",
-          "edits_path": "${input.edits_path}",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.source.crossfile_edit.choreograph.v1",
+     "edits_path": "${input.edits_path}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7712,7 +7819,10 @@
   "python.symbol.resolve.standalone.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.symbol.resolve.standalone.v1"
+     "capability_id": "python.symbol.resolve.standalone.v1",
+     "output_path": "${input.output_path}",
+     "queries": "${input.queries}",
+     "source_root": "${input.source_root}"
     },
     "expect": {
      "field": "output_verified",
@@ -7881,7 +7991,12 @@
   "python.test.pipeline.verifier.v1": {
    "action_template": {
     "args": {
-     "capability_id": "python.test.pipeline.verifier.v1"
+     "capability_id": "python.test.pipeline.verifier.v1",
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}",
+     "pattern": "${input.pattern}",
+     "source_root": "${input.source_root}",
+     "stages": "${input.stages}"
     },
     "expect": {
      "field": "output_verified",
@@ -8007,10 +8122,10 @@
   "python.tests.generate.scaffold.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.tests.generate.scaffold.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.tests.generate.scaffold.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "verified",
      "type": "field_equals",
@@ -8194,7 +8309,12 @@
   "software.evidence.synthesis.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.evidence.synthesis.supercomposer.v1"
+     "capability_id": "software.evidence.synthesis.supercomposer.v1",
+     "extraction_path": "${input.extraction_path}",
+     "input_path": "${input.input_path}",
+     "objective": "${input.objective}",
+     "output_path": "${input.output_path}",
+     "spec": "${input.spec}"
     },
     "expect": {
      "field": "output_verified",
@@ -8255,7 +8375,41 @@
   "software.hardcore.closing.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.hardcore.closing.supercomposer.v1"
+     "anchor_path": "${input.anchor_path}",
+     "apply_directory": "${input.apply_directory}",
+     "base_branch": "${input.base_branch}",
+     "bench_path": "${input.bench_path}",
+     "branch_name": "${input.branch_name}",
+     "budget": "${input.budget}",
+     "capability_id": "software.hardcore.closing.supercomposer.v1",
+     "changed_paths": "${input.changed_paths}",
+     "diff_path": "${input.diff_path}",
+     "goal": "${input.goal}",
+     "manifest": "${input.manifest}",
+     "max_mutants": "${input.max_mutants}",
+     "min_coverage_ratio": "${input.min_coverage_ratio}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "module": "${input.module}",
+     "new_param": "${input.new_param}",
+     "old_param": "${input.old_param}",
+     "output_path": "${input.output_path}",
+     "pattern": "${input.pattern}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "repeats": "${input.repeats}",
+     "repo_path": "${input.repo_path}",
+     "run_tests": "${input.run_tests}",
+     "source": "${input.source}",
+     "source_path": "${input.source_path}",
+     "source_root": "${input.source_root}",
+     "stages": "${input.stages}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}",
+     "training_pairs_path": "${input.training_pairs_path}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -8316,7 +8470,37 @@
   "software.hardcore.final.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.hardcore.final.supercomposer.v1"
+     "anchor_path": "${input.anchor_path}",
+     "apply_directory": "${input.apply_directory}",
+     "base_branch": "${input.base_branch}",
+     "bench_path": "${input.bench_path}",
+     "branch_name": "${input.branch_name}",
+     "budget": "${input.budget}",
+     "capability_id": "software.hardcore.final.supercomposer.v1",
+     "diff_path": "${input.diff_path}",
+     "goal": "${input.goal}",
+     "manifest": "${input.manifest}",
+     "max_mutants": "${input.max_mutants}",
+     "min_coverage_ratio": "${input.min_coverage_ratio}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "module": "${input.module}",
+     "new_param": "${input.new_param}",
+     "old_param": "${input.old_param}",
+     "output_path": "${input.output_path}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "repeats": "${input.repeats}",
+     "repo_path": "${input.repo_path}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "stages": "${input.stages}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}",
+     "training_pairs_path": "${input.training_pairs_path}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -8378,6 +8562,7 @@
    "action_template": {
     "args": {
      "capability_id": "software.hardcore.kernel.orchestrate.v1",
+     "manifest": "${input.manifest}",
      "output_path": "${input.output_path}"
     },
     "expect": {
@@ -8457,7 +8642,36 @@
   "software.hardcore.swe.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.hardcore.swe.supercomposer.v1"
+     "anchor_path": "${input.anchor_path}",
+     "apply_directory": "${input.apply_directory}",
+     "base_branch": "${input.base_branch}",
+     "bench_path": "${input.bench_path}",
+     "branch_name": "${input.branch_name}",
+     "budget": "${input.budget}",
+     "capability_id": "software.hardcore.swe.supercomposer.v1",
+     "diff_path": "${input.diff_path}",
+     "goal": "${input.goal}",
+     "manifest": "${input.manifest}",
+     "max_mutants": "${input.max_mutants}",
+     "min_coverage_ratio": "${input.min_coverage_ratio}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "module": "${input.module}",
+     "new_param": "${input.new_param}",
+     "old_param": "${input.old_param}",
+     "output_path": "${input.output_path}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "repeats": "${input.repeats}",
+     "repo_path": "${input.repo_path}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "stages": "${input.stages}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -8736,8 +8950,20 @@
   "software.review.gate.composer.v1": {
    "action_template": {
     "args": {
+     "anchor_path": "${input.anchor_path}",
+     "bench_path": "${input.bench_path}",
      "capability_id": "software.review.gate.composer.v1",
-     "output_path": "${input.output_path}"
+     "diff_path": "${input.diff_path}",
+     "max_mutants": "${input.max_mutants}",
+     "min_coverage_ratio": "${input.min_coverage_ratio}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "repeats": "${input.repeats}",
+     "run_tests": "${input.run_tests}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -8808,7 +9034,30 @@
   "software.review.synthesis.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.review.synthesis.supercomposer.v1"
+     "anchor_path": "${input.anchor_path}",
+     "apply_directory": "${input.apply_directory}",
+     "base_branch": "${input.base_branch}",
+     "bench_path": "${input.bench_path}",
+     "branch_name": "${input.branch_name}",
+     "capability_id": "software.review.synthesis.supercomposer.v1",
+     "diff_path": "${input.diff_path}",
+     "goal": "${input.goal}",
+     "max_mutants": "${input.max_mutants}",
+     "min_coverage_ratio": "${input.min_coverage_ratio}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "output_path": "${input.output_path}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "repeats": "${input.repeats}",
+     "repo_path": "${input.repo_path}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "stages": "${input.stages}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -8870,7 +9119,8 @@
    "action_template": {
     "args": {
      "capability_id": "software.synthesis.grid_induction.v1",
-     "output_path": "${input.output_path}"
+     "output_path": "${input.output_path}",
+     "training_pairs_path": "${input.training_pairs_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -8939,7 +9189,40 @@
   "software.test.contract.supercomposer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.test.contract.supercomposer.v1"
+     "anchor_path": "${input.anchor_path}",
+     "apply_directory": "${input.apply_directory}",
+     "base_branch": "${input.base_branch}",
+     "bench_path": "${input.bench_path}",
+     "branch_name": "${input.branch_name}",
+     "budget": "${input.budget}",
+     "capability_id": "software.test.contract.supercomposer.v1",
+     "changed_paths": "${input.changed_paths}",
+     "diff_path": "${input.diff_path}",
+     "goal": "${input.goal}",
+     "manifest": "${input.manifest}",
+     "max_mutants": "${input.max_mutants}",
+     "min_coverage_ratio": "${input.min_coverage_ratio}",
+     "min_kill_ratio": "${input.min_kill_ratio}",
+     "module": "${input.module}",
+     "new_param": "${input.new_param}",
+     "old_param": "${input.old_param}",
+     "output_path": "${input.output_path}",
+     "pattern": "${input.pattern}",
+     "pr_intent_path": "${input.pr_intent_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "repeats": "${input.repeats}",
+     "repo_path": "${input.repo_path}",
+     "run_tests": "${input.run_tests}",
+     "source": "${input.source}",
+     "source_path": "${input.source_path}",
+     "source_root": "${input.source_root}",
+     "stages": "${input.stages}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": "${input.timeout_s}",
+     "tolerance": "${input.tolerance}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "output_verified",
@@ -9814,7 +10097,9 @@
    "action_template": {
     "args": {
      "capability_id": "test.slice.never_miss.v1",
-     "output_path": "${input.output_path}"
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
     },
     "expect": {
      "field": "output_verified",

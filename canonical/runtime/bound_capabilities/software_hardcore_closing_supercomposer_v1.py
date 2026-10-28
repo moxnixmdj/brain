@@ -1,29 +1,37 @@
 #!/usr/bin/env python3
 """Hardcore closing supercomposer — only-right-way final engineer.
 
-Hidden kernels: hardcore final + final synthesis + triad proven + test contract + verification super (5 dead).
-Why max: closing SWE engineer was 5 isolated hardcore verifiers (dead). This super-composes them: triad proven → test contract → verification super → hardcore final → final synthesis → closing verified."""
+Composition executed by ``canonical.runtime.composer_execution_v1``: every
+producer below runs on the caller's inputs through its registry action
+template; ``verified`` is true only when every producer ran and verified.
+Registry presence proves nothing here.
+"""
 from __future__ import annotations
-import hashlib, json, pathlib
+import importlib.util, pathlib
 from typing import Any
-SCHEMA="PROJECT_BRAIN_SOFTWARE_HARDCORE_CLOSING_SUPERCOMPOSER_V1"
-CAPABILITY_ID="software.hardcore.closing.supercomposer.v1"
-PROVIDES=["software.hardcore.closing.verified","software.hardcore.closing.synthesis.verified"]
-REQUIRES: list[str]=["software.hardcore.final.verified","software.hardcore.final.synthesis.verified","software.repair.synthesis.triad_proven","software.test.contract.verified","software.verification.super.verified"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_hardcore_closing_supercomposer.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
+SCHEMA = 'PROJECT_BRAIN_SOFTWARE_HARDCORE_CLOSING_SUPERCOMPOSER_V1'
+CAPABILITY_ID = 'software.hardcore.closing.supercomposer.v1'
+PROVIDES = ['software.hardcore.closing.verified', 'software.hardcore.closing.synthesis.verified']
+REQUIRES: list[str] = ['software.hardcore.final.verified', 'software.hardcore.final.synthesis.verified', 'software.repair.synthesis.triad_proven', 'software.test.contract.verified', 'software.verification.super.verified']
+PRODUCERS: list[str] = ['software.hardcore.final.supercomposer.v1', 'software.test.contract.supercomposer.v1', 'software.repair.loop.cegis_hypothesis.v1', 'software.hardcore.swe.supercomposer.v1']
+DEFAULT_OUTPUT = 'canonical/tmp_hardcore_closing_supercomposer.json'
+REPO = pathlib.Path(__file__).resolve().parents[3]
+
+
+def _executor():
+    try:
+        from canonical.runtime import composer_execution_v1 as mod  # type: ignore
+        return mod
+    except Exception:
+        spec = importlib.util.spec_from_file_location(
+            "composer_execution_v1", REPO / "canonical" / "runtime" / "composer_execution_v1.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
-    repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
-    reg=json.loads((repo/"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
-    all_prov={p for m in reg["capabilities"].values() for p in m.get("provides",[])}
-    required=REQUIRES
-    found={r: (r in all_prov) for r in required}
-    producers=["software.hardcore.final.supercomposer.v1","software.test.contract.supercomposer.v1","software.repair.loop.cegis_hypothesis.v1","software.hardcore.swe.supercomposer.v1"]
-    prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"triad proven → test contract verified → verification super → hardcore final → final synthesis → closing","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_hardcore_closing_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    return _executor().compose(
+        capability_id=CAPABILITY_ID, schema=SCHEMA, adapter='software_hardcore_closing_supercomposer_v1', producers=PRODUCERS,
+        requires=REQUIRES, args=args, root=root, default_output=DEFAULT_OUTPUT,
+        description='Hardcore closing supercomposer — only-right-way final engineer. Hidden kernels: hardcore final + final synthesis + triad proven + test contract + verification super (5 dead). Why max: closing SWE engineer was 5 isolated hardcore verifiers (dead). This super-composes them: triad proven → test contract → verification super → hardcore final → final synthesis → closing verified.')

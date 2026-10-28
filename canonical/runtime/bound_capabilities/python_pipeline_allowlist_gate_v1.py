@@ -1,28 +1,37 @@
 #!/usr/bin/env python3
 """Pipeline allowlist gate — the only-right-way review composition.
 
-Hidden kernels: 6 diff gates (ruff+mypy+coverage+perf+bandit+mutation) + 8-stage pipeline + symbol index.
-Why max: gates were isolated with requires=[] fail-open. This gate allowlists repository paths and fans in all 6 gates plus pipeline completion into one verified composition — no unreviewed code lands."""
+Composition executed by ``canonical.runtime.composer_execution_v1``: every
+producer below runs on the caller's inputs through its registry action
+template; ``verified`` is true only when every producer ran and verified.
+Registry presence proves nothing here.
+"""
 from __future__ import annotations
-import hashlib, json, pathlib
+import importlib.util, pathlib
 from typing import Any
-SCHEMA="PROJECT_BRAIN_PYTHON_PIPELINE_ALLOWLIST_GATE_V1"
-CAPABILITY_ID="python.pipeline.allowlist_gate.v1"
-PROVIDES=["python.pipeline.allowlist.verified","python.review.composition.allowlist_verified"]
-REQUIRES: list[str]=["python.review.diff_static_triage","python.review.diff_type_gate","python.review.diff_coverage_gate","python.review.diff_security_gate"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_pipeline_allowlist.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
+SCHEMA = 'PROJECT_BRAIN_PYTHON_PIPELINE_ALLOWLIST_GATE_V1'
+CAPABILITY_ID = 'python.pipeline.allowlist_gate.v1'
+PROVIDES = ['python.pipeline.allowlist.verified', 'python.review.composition.allowlist_verified']
+REQUIRES: list[str] = ['python.review.diff_static_triage', 'python.review.diff_type_gate', 'python.review.diff_coverage_gate', 'python.review.diff_security_gate']
+PRODUCERS: list[str] = ['python.review.diff_static_triage.v1', 'python.review.diff_type_gate.v1', 'python.review.diff_coverage_gate.v1', 'python.review.diff_perf_gate.v1', 'python.review.diff_security_gate.v1', 'python.review.diff_mutation_gate.v1', 'execution.pipeline.8stage.v1']
+DEFAULT_OUTPUT = 'canonical/tmp_pipeline_allowlist.json'
+REPO = pathlib.Path(__file__).resolve().parents[3]
+
+
+def _executor():
+    try:
+        from canonical.runtime import composer_execution_v1 as mod  # type: ignore
+        return mod
+    except Exception:
+        spec = importlib.util.spec_from_file_location(
+            "composer_execution_v1", REPO / "canonical" / "runtime" / "composer_execution_v1.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
-    repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
-    reg=json.loads((repo/"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
-    required=REQUIRES
-    found={r: (r in {p for m in reg["capabilities"].values() for p in m.get("provides",[])}) for r in required}
-    gates=["python.review.diff_static_triage.v1","python.review.diff_type_gate.v1","python.review.diff_coverage_gate.v1","python.review.diff_perf_gate.v1","python.review.diff_security_gate.v1","python.review.diff_mutation_gate.v1"]
-    gate_caps={g: g in reg["capabilities"] for g in gates}
-    pipeline_ok="execution.pipeline.8stage.v1" in reg["capabilities"] or "execution.pipeline.completed" in {p for m in reg["capabilities"].values() for p in m.get("provides",[])}
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"gate_caps":gate_caps,"pipeline_ok":pipeline_ok,"allowlist":"canonical/** allowlisted, vendor/** blocked","verified":all(found.values()),"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"python_pipeline_allowlist_gate_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":artifact["verified"],"verified":artifact["verified"],"model_dependency_count":0,"incremental_spend_usd":0}
+    return _executor().compose(
+        capability_id=CAPABILITY_ID, schema=SCHEMA, adapter='python_pipeline_allowlist_gate_v1', producers=PRODUCERS,
+        requires=REQUIRES, args=args, root=root, default_output=DEFAULT_OUTPUT,
+        description='Pipeline allowlist gate — the only-right-way review composition. Hidden kernels: 6 diff gates (ruff+mypy+coverage+perf+bandit+mutation) + 8-stage pipeline + symbol index. Why max: gates were isolated with requires=[] fail-open. This gate allowlists repository paths and fans in all 6 gates plus pipeline completion into one verified composition — no unreviewed code lands.')

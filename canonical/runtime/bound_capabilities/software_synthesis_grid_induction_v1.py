@@ -49,12 +49,20 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
         training_pairs = json.loads(p.read_text(encoding="utf-8")).get("training_pairs", [])
 
-    # Default deterministic demo: transpose pattern (works with DEFAULT_OPERATORS)
+    # No demo default: a synthesis verdict is about the caller's pairs or nothing.
     if not training_pairs:
-        training_pairs = [
-            {"input": [[1, 2, 0], [3, 4, 0]], "output": [[1, 3], [2, 4]]},
-            {"input": [[5, 6, 0], [7, 8, 0]], "output": [[5, 7], [6, 8]]},
-        ]
+        artifact = {"schema": SCHEMA, "capability_id": CAPABILITY_ID, "training_pairs": [],
+                    "result": {"status": "TRAINING_PAIRS_REQUIRED"}, "prediction": None,
+                    "operator_registry": None, "model_dependency_count": 0,
+                    "incremental_spend_usd": 0, "verified": False}
+        raw = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
+        output.write_bytes(raw)
+        return {"adapter": "software_synthesis_grid_induction_v1",
+                "output_path": str(output.relative_to(repo)),
+                "output_sha256": hashlib.sha256(raw).hexdigest(), "output_verified": False,
+                "status": "TRAINING_PAIRS_REQUIRED", "candidates_evaluated": 0, "program_count": 0,
+                "minimum_cost": None, "verified": False, "reason": "TRAINING_PAIRS_REQUIRED",
+                "model_dependency_count": 0, "incremental_spend_usd": 0}
 
     max_depth = int(args.get("max_depth", 3))
     max_programs = int(args.get("max_programs", 50000))
