@@ -59,6 +59,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -1619,6 +1620,46 @@ def _observation_roots(goal: str) -> list[Path]:
     return [r for r in roots if not any(o != r and r in o.parents for o in roots)]
 
 
+_OBSERVATION_SKIP_DIRS = frozenset({".git", "node_modules", "__pycache__", ".brain_venv"})
+
+
+def _observe_tree(root: Path, limit: int) -> dict[str, tuple[int, int]] | None:
+    """One walk: stat what is under ``root``, or None if the tree is too large to trust.
+
+    This replaces a count-then-snapshot pair that walked every observation root TWICE
+    (`sum(1 for _ in root.rglob("*"))` purely to decide whether to walk it again) and
+    built two Path objects per entry.  Measured on the AST-audit sentence: 22k
+    pathlib `_parse_args` calls and 0.12 s per observation, with two observations per
+    solve -- the largest single cost in the door, larger than compiling and running the
+    capability together.  A single `os.scandir` pass keeps the size guard, drops the
+    duplicate walk, and still refuses a tree it cannot afford: the guard now aborts
+    WHILE walking (the old one walked the whole tree first, so it paid the cost it was
+    trying to avoid).
+    """
+    stack = [root]
+    out: dict[str, tuple[int, int]] = {}
+    while stack:
+        current = stack.pop()
+        try:
+            entries = list(os.scandir(current))
+        except OSError:
+            continue
+        for entry in entries:
+            if entry.name in _OBSERVATION_SKIP_DIRS:
+                continue
+            try:
+                if entry.is_dir(follow_symlinks=False):
+                    stack.append(Path(entry.path))
+                    continue
+                st = entry.stat(follow_symlinks=False)
+            except OSError:
+                continue
+            out[Path(entry.path).relative_to(root).as_posix()] = (st.st_size, st.st_mtime_ns)
+            if len(out) > limit:
+                return None
+    return out
+
+
 def observe_world(goal: str) -> dict[str, Any]:
     """What the filesystem looked like, read here rather than taken on report.
 
@@ -1633,15 +1674,13 @@ def observe_world(goal: str) -> dict[str, Any]:
     files: dict[str, tuple[int, int]] = {}
     walked = []
     for root in _observation_roots(goal):
-        try:
-            count = sum(1 for _ in root.rglob("*"))
-        except OSError:
-            continue
-        if count > _OBSERVATION_MAX_FILES:
+        observed = _observe_tree(root, _OBSERVATION_MAX_FILES)
+        if observed is None:
             continue
         walked.append(str(root.relative_to(ROOT)) if root != ROOT else ".")
-        for rel, stat_row in _kernel._snapshot(str(root)).items():
-            files[str(Path(root, rel).relative_to(ROOT))] = stat_row
+        base = str(root.relative_to(ROOT)) if root != ROOT else ""
+        for rel, stat_row in observed.items():
+            files[(base + "/" + rel).lstrip("/")] = stat_row
     parses: dict[str, bool] = {}
     for raw in stated:
         path = ROOT / raw
