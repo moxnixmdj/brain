@@ -64,6 +64,16 @@ STOPWORDS={
 GENERIC_MATCH_TOKENS={
     "generate","image","text","extract","create","save","output","input",
     "file","read","write","convert","process","data",
+    # The words that name the ARTIFACT a sentence asks for, rather than the act it asks for.
+    # Almost every request in this repository ends "and report it to <O>", and a capability
+    # whose `provides` contains "...report" therefore matches all of them: measured on the
+    # 43-act probe, `python.toolchain.bandit_security.v1` (provides
+    # `python.source.security.report`) was selected for "Find the resource leaks in X",
+    # "Add the dependency requests ...", "Build a wheel ..." and four more, each answered with
+    # a security report and a PASS.  Asking for a report is not asking for a security audit.
+    # Measured after adding these: hollow passes 15 -> 11 on that probe, no suite moved.
+    "report","reports","receipt","artifact","result","results","summary","findings",
+    "issue","issues","log","record",
     # "python" alone names a language, not an operation: zero-input fleet rows
     # whose entire match is the word "python" score 16 on "Audit python source
     # structure..." and outrank the right capability only because their empty
