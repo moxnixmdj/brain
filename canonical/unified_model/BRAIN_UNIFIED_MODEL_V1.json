@@ -20350,7 +20350,6 @@
    "input_contract_source": "action_template",
    "input_names": [
     "changed_paths",
-    "index_path",
     "output_path"
    ],
    "kind": "BOUND_CAPABILITY",
@@ -20364,7 +20363,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/code_tree_sitter_impact_v1.py",
-    "source_sha256": "1ea1626238320ccd2c2c5e6121a7345eae9dd8dc4f9127ba11f5045c15adf848",
+    "source_sha256": "8654f5190e40d0cd8719a5e22ea6a94ce701b39369c94cbea467a841aabf9012",
     "source_type": "pypi"
    },
    "provides": [
@@ -28692,7 +28691,7 @@
   "engines": 26,
   "knowledge_documents": 171,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6496,
+  "research_index_records": 6497,
   "routing_tokens": 2096,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28701,7 +28700,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "70129ffe81cff1831c102bf393a8b9791c77ef281c6af30a3c3a2d7a5661d375"
+  "value": "79008535b28ab248b48e841d9b4dac5b2e077dbf3bdc1e57d8d6680313781f18"
  },
  "engines": [
   {
@@ -52324,7 +52323,7 @@
   "included_source_count": 941,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5b1a59a56565a0a6abd60275da8f3a80b8f3ff2cccd00db3c5711dd0f016d032"
+  "source_tree_digest": "0cc5cead6c8c2c218f57576f0cf2b13396a61b95febaa0c1ef18674bc3ab314f"
  },
  "research_index": [
   {
@@ -203534,6 +203533,51 @@
    }
   },
   {
+   "action_id": "WHICH_TESTS_A_CHANGE_BREAKS_IS_A_FACT_ABOUT_THE_IMPORTS_V1_20261027_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/WHICH_TESTS_A_CHANGE_BREAKS_IS_A_FACT_ABOUT_THE_IMPORTS_V1_20261027_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHICH_TESTS_A_CHANGE_BREAKS_IS_A_FACT_ABOUT_THE_IMPORTS_V1_20261027_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "edc209182a0150115cd192cde18f327dfd281e7f400a2a766d787de262af8062",
+   "status": "",
+   "terms": {
+    "20261027": 1,
+    "about": 2,
+    "absolute": 1,
+    "acceptance": 1,
+    "adapter": 1,
+    "affected": 1,
+    "after": 1,
+    "against": 1,
+    "alone": 1,
+    "already": 1,
+    "answer": 4,
+    "artifact": 2,
+    "asking": 1,
+    "back": 3,
+    "binds": 1,
+    "break": 1,
+    "breaks": 2,
+    "change": 5,
+    "changed": 2,
+    "every": 2,
+    "imports": 2,
+    "modules": 2,
+    "no": 5,
+    "not": 2,
+    "one": 2,
+    "python.source.change_impact.testselect.v1": 2,
+    "rolled": 2,
+    "sentence": 2,
+    "so": 4,
+    "tests": 5,
+    "v1": 2,
+    "which_tests_a_change_breaks_is_a_fact_about_the_imports_v1_20261027_v1": 2
+   }
+  },
+  {
    "action_id": "WHICH_TESTS_A_CHANGE_BREAKS_IS_NOT_A_QUESTION_A_CENSUS_CAN_ANSWER_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -210175,7 +210219,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
-   "sha256": "7a728539aba27a47d295d6a38d5a4c630906cae1d83689ecf803cbd9ce3cb2ac",
+   "sha256": "ec04e39e3438f805cc14b1d7b2270cfe5ccb331ee07c8eb8d7be15cbd26fa896",
    "summary": "Deterministic diff-to-minimal-test-set selection (change impact analysis).",
    "symbol_count": 8,
    "symbols": [
@@ -257995,9 +258039,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "b26c6c5c2c32c6f49d1911de62082f89d790b71f3aae0aa66426da585d379464",
+   "sha256": "4be44eb261fc3cb21eb6d10b32c64d702c49424d1befc1b204cd458c9383d853",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 41,
+   "symbol_count": 43,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -258006,9 +258050,11 @@
     "_canonical_json_sha256",
     "_consumed_downstream",
     "_digest",
+    "_imported_names",
     "_inside",
     "_inspect_archive_verify",
     "_inspect_candidates_enumerate",
+    "_inspect_change_impact_testselect",
     "_inspect_decision_locate",
     "_inspect_decision_synthesis",
     "_inspect_decision_verify",
@@ -258020,9 +258066,7 @@
     "_inspect_tar_gz_create_from_manifest",
     "_inspect_text_file_write",
     "_inspect_xlsx_create",
-    "_json",
-    "_payload_runs_to_the_destination",
-    "_plan_chain"
+    "_json"
    ],
    "terms": {
     "acceptance": 2,
@@ -258036,12 +258080,12 @@
     "every": 1,
     "generic": 1,
     "goal": 1,
+    "imported_names": 1,
     "inside": 1,
     "inspect_archive_verify": 1,
     "inspect_candidates_enumerate": 1,
+    "inspect_change_impact_testselect": 1,
     "inspect_decision_locate": 1,
-    "inspect_decision_synthesis": 1,
-    "inspect_decision_verify": 1,
     "inspect_docx_verify": 1,
     "inspect_pdf_extract_text": 1,
     "inspect_python_source_audit": 1,
