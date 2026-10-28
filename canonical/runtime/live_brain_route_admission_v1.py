@@ -171,7 +171,15 @@ def _registry_vocabulary(registry: Mapping[str, Mapping[str, Any]]) -> set[str]:
     words: set[str] = set()
     for cid, entry in registry.items():
         try:
-            words.update(str(x).lower() for x in (entry.get("keywords") or []))
+            for keyword in (entry.get("keywords") or []):
+                # The phrase AND its words: "duplicated code" is how a capability says it acts on
+                # duplication, and the sentence says "the duplicated code".  Keeping only the
+                # phrase made the sentence's own word unheard -- measured: `Find the duplicated
+                # code in X` was refused R14 UNHEARD_ACT_WORD:duplicated while
+                # python.quality.duplication.v1 sat in the registry with that exact phrase.
+                low = str(keyword).lower()
+                words.add(low)
+                words.update(re.findall(r"[a-z0-9]+", low))
             words.update(re.findall(r"[a-z0-9]+", str(cid).lower()))
             words.update(re.findall(r"[a-z0-9]+", " ".join(entry.get("provides") or []).lower()))
         except Exception:  # noqa: BLE001 - an unreadable entry claims nothing extra
@@ -279,6 +287,23 @@ _PROSE_STOPWORDS = frozenset({
 })
 
 
+_INFLECTIONS = frozenset({
+    "s", "es", "ed", "d", "ing", "ion", "ions", "ation", "ations", "ly", "er", "ers",
+    "ment", "ments", "ness", "ity", "ive", "able", "al", "y", "en",
+})
+
+
+def _is_a_form_of(word: str, claimed: str) -> bool:
+    """Is `word` the same word as `claimed`, allowing an inflectional ending?"""
+    if word == claimed:
+        return True
+    if claimed.startswith(word) and len(word) >= 4:
+        return claimed[len(word):] in _INFLECTIONS
+    if word.startswith(claimed) and len(claimed) >= 4:
+        return word[len(claimed):] in _INFLECTIONS
+    return False
+
+
 def _unheard_act_word(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> str:
     """A content word in the sentence that the registry has NEVER heard as an act.
 
@@ -316,8 +341,12 @@ def _unheard_act_word(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> s
             continue
         if word in vocabulary:
             continue
-        if any(len(claimed) >= 4 and (claimed.startswith(word) or word.startswith(claimed))
-               for claimed in vocabulary):
+        # AN INFLECTION, not a shared prefix.  A prefix is not evidence of the same word:
+        # measured, "Run a differential test of X against a reference" was never flagged because
+        # `different` starts `differential` -- the one word that names the act was "heard" through
+        # a different word.  Two words are the same word here only when the shorter is the longer
+        # with an inflectional ending on it.
+        if any(_is_a_form_of(word, claimed) for claimed in vocabulary):
             continue
         return word
     return ""

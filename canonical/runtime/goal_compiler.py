@@ -81,6 +81,19 @@ GENERIC_MATCH_TOKENS={
     # changelog.  Every goal in this repository names one, so it can never distinguish two.
     # Measured before adding: 0 of 149 live capabilities lose their last distinctive token.
     "repository","repo","directory","folder",
+    # "test" is the SUBJECT MATTER of this whole repository, not a distinction between two acts.
+    # Measured: "Run a differential test of X against a reference" was answered by
+    # `python.repository.acceptance.measure.v1` -- a PASS for a measurement nobody asked for --
+    # on {tests, report} alone, the two words that say "there are tests" and "write it down".
+    # A capability that genuinely tests something still matches through its own act word
+    # (runner, flake, coverage, scaffold), which is why measured on the live registry 0 of 151
+    # capabilities lose their last distinctive token.
+    "test","tests","testing",
+    # "run" names an execution MODE, not an act: every capability that runs something carries it,
+    # so it can never pick between them.  Measured: "Run a differential test of X against a
+    # reference" was answered by python.repository.acceptance.measure.v1 with a PASS on
+    # {run, test} alone -- two words that say "start something" and "there are tests".
+    "run","runs","running",
     # "python" alone names a language, not an operation: zero-input fleet rows
     # whose entire match is the word "python" score 16 on "Audit python source
     # structure..." and outrank the right capability only because their empty

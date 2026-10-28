@@ -10529,6 +10529,91 @@
     },
     "status": "VERIFIED_BOUND_CAPABILITY"
   },
+  "python.quality.flake_detect.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.quality.flake_detect.v1",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "repeats": "${input.repeats}",
+     "source_root": "${input.source_root}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_flake_detect_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "flaky",
+    "flake",
+    "flaky tests",
+    "intermittent",
+    "nondeterministic",
+    "test order",
+    "hash seed",
+    "rerun",
+    "reproducibility",
+    "quality"
+   ],
+   "limitations": [
+    "a flake is proven by REPLAY, never by a linter: the verdict is outcome variance across runs, and the evidence for each flaky test names the exact order and hash seeds that failed.",
+    "the tree is never modified: the order-shuffling plugin is written to a temp dir and put on PYTHONPATH for the child run only.",
+    "a test that fails in EVERY run is reported as consistently_failing, not as a flake, so a stable failure is not 'fixed' by rerunning.",
+    "stable means 'passed in every run of this budget'; a flake rarer than the run count is invisible, and detection_scope says so instead of certifying determinism.",
+    "repeats below 2 refuses REPEATS_BELOW_TWO: one execution is a test run, not a flake hunt."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.quality.flaky_tests.report"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "source_root",
+    "targets",
+    "runs",
+    "flakes_found",
+    "flaky_tests",
+    "flaky_evidence",
+    "consistently_failing",
+    "stable",
+    "test_count",
+    "detection_scope",
+    "run_summary",
+    "gate",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "pytest",
+    "type": "runtime",
+    "version_family": ">=7"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-FLAKEDETECT-001",
+    "observed_effect": {
+     "golden": "a suite with one order-dependent test: 4 runs over 4 seeded collection orders report flakes_found=1, the flaky test named with per-run evidence (seed 0 passed, seeds 1-3 failed)",
+     "honesty": "repeats<2 refuses REPEATS_BELOW_TWO; no tests refuses NO_TESTS_FOUND; a collection error refuses TESTS_COULD_NOT_RUN instead of reporting zero flakes",
+     "scope": "the tree is byte-untouched by the probe (the shuffle plugin lives in a temp dir on PYTHONPATH)",
+     "stable": "the order-independent test in the same suite is in `stable`, and a test that fails in every run appears in `consistently_failing` rather than `flaky_tests`"
+    }
+   }
+  },
   "python.quality.license_scan.v1": {
     "action_template": {
       "args": {
