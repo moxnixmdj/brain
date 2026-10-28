@@ -1,0 +1,437 @@
+{
+  "action_id": "WIRE_DECLARED_INPUT_DERIVATION_FOR_HUMAN_SWE_SENTENCES_V1_20261027_V1",
+  "action_intent_id": "WIRE_DECLARED_INPUT_DERIVATION_FOR_HUMAN_SWE_SENTENCES_V1_20261027_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Reuse hidden typed-admission machinery so human-shaped software-engineering sentences bind the SWE capabilities already in the registry. Measured: typed selection on 5 fresh human SWE sentences went 0/5 decisive to 5/5 decisive and 5/5 relevant at 119 ms/goal; 19/19 existing selector tests and 7/7 new fresh-instance tests pass; the pre-existing front-compiler failure set is byte-identical (12 failed / 32 passed) on pristine and wired trees; three fresh execution oracles stay 2/2. A new module derives declared inputs only from stated evidence (source file -> parent dir/module, stated or discovered test file -> argv, rename grammar -> old/new names, source AST -> qualname) and removes only configuration-only template slots whose adapter AST proves a default. Effect+noun disambiguation resolves multiple bindable candidates; ambiguity still refuses. No registry, unified-model, kernel or protected-path change. An attempted primary-binder wiring was reverted because it regressed the ambiguity guard; it is recorded open in SWE_HIDDEN_WIRING_MEASUREMENT_20261027_V1.md rather than shipped. LIVE DOOR WIRING (2026-10-27): the decisive typed selection is now wired into live_brain_route_admission_v1.solve as a scoped, ambiguity-preserving retry that re-enters the SAME full gate chain (route admission, execution, tool truth, promised artifact, source change, observed effect). Measured on five fresh human SWE sentences: 1/5 -> 3/5 honest end-to-end pass, zero false passes; two remaining are honest fail-closed adapter faults (a rename module/source_root shape mismatch and a bare 'fix X' composed chain), not routing failures. New suite test_swe_typed_plan_v1.py 8/8; front-door regression suite failure set identical with and without the change (3 pre-existing fleet-drift failures from main #6292). Zero model dependency, zero incremental spend. FALSE-PASS FIX + RENAME FAMILY (2026-10-27 follow-up): select() admits by declared-input contract, not effect. A single bindable repair choreographer was SELECTED for 'Type-check the file X' and no-op'd to a false PASS with the source unchanged. swe_typed_plan_v1 now reuses the selector's OWN E30 effect map (_EFFECT_WORDS) to refuse effect-inconsistent plans, so the front door keeps its fail-closed verdict. Measured on the 10 held-out INV_ real-SWE tasks: the false PASS is gone (typecheck/lint honest fail-closed); on 10 held-out tasks 1 honest pass + 9 honest refusals, no false credit. Additionally the three refactor adapters' module input is now relative to source_root (measured gate=PASS edit_count=2), so 3/4 fresh rename phrasings pass end-to-end with the source bytes genuinely changed and every honesty gate clean. New suite 11/11; front-door failure set identical to pristine (pre-existing main #6292 drift). Zero model dependency, zero incremental spend.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/declared_input_derivation_v1.py",
+      "canonical/tests/test_declared_input_derivation_v1.py",
+      "SWE_HIDDEN_WIRING_MEASUREMENT_20261027_V1.md",
+      "canonical/runtime/swe_typed_plan_v1.py",
+      "canonical/tests/test_swe_typed_plan_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Human software-engineering requests state their inputs in a different shape than the registry declares: \"fix calc.py\" states a FILE while the repair loop declares source_root (a DIRECTORY), \"rename old_price to price\" states names the binder has no grammar for, and templates demand configuration slots the adapters already default. The typed selector therefore shortlists the right capability and refuses it, so the machine cannot reach its own SWE mechanisms from an ordinary sentence.",
+  "canonical_base_commit": "f979f33d13b7851530888f8459dc3c0fcb069369",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Human software-engineering requests state their inputs in a different shape than the registry declares: \"fix calc.py\" states a FILE while the repair loop declares source_root (a DIRECTORY), \"rename old_price to price\" states names the binder has no grammar for, and templates demand configuration slots the adapters already default. The typed selector therefore shortlists the right capability and refuses it, so the machine cannot reach its own SWE mechanisms from an ordinary sentence.",
+  "date": "2026-10-27",
+  "expected_parent_change": "Human-shaped SWE requests now reach a decisive, relevant typed capability selection; no new capability and no scoreboard change.",
+  "expected_parent_frontier_change": "Typed admission binds SWE contracts previously refused; gateway verified by fresh instances, not by declaration.",
+  "explicit_user_authorization": "Owner standing directive 2026-10-27: all problems are already solved as hidden tools or research ideas; do the optimal in the fastest way, only the right way; the machine must be the most advanced, fastest, smartest software engineer. Zero incremental spend, zero model producer cognition.",
+  "falsification_condition": "FALSIFIED if any derivation invents a value the request did not state or determine by a bounded scan of a stated directory; if two stated source files still derive one source_root; if a qualname is bound when zero or several functions declare the named parameter; if a semantic path/root/argv slot is defaulted away; if an ambiguous request is silently resolved; if any existing selector/naming test changes verdict; if the pre-existing front-compiler failure SET differs from origin/main; or if any measured oracle degrades.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intent": "Wire existing typed-admission machinery to human-shaped SWE sentences by deriving declared inputs from stated evidence.",
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "Semantic structural editing is substrate for the coding obligations (TB4, FrontierCode, CursorBench) and any compose route that must reshape code before other capabilities can run.  A verified extract verb enlarges what refactor chains can reach without humans, discharging no obligation alone but unlocking the shared editing substrate; honest lower bound 1/13.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "select() on five fresh human SWE sentences: 0/5 -> 5/5 SELECTED, 0/5 -> 5/5 selecting a relevant SWE capability; 597 ms for 5 goals (119 ms/goal); 19/19 selector regression tests; 7/7 new derivation tests; pristine front-compiler suite 12 failed/32 passed identical to wired; PYTHON_REPAIR_STRICT_PROGRESS 2/2, PYTHON_REPAIR_TEST_GUIDED 2/2, PYTHON_FAULT_LOCALIZE 2/2 on fresh independent oracles. LIVE DOOR WIRING (2026-10-27): the decisive typed selection is now wired into live_brain_route_admission_v1.solve as a scoped, ambiguity-preserving retry that re-enters the SAME full gate chain (route admission, execution, tool truth, promised artifact, source change, observed effect). Measured on five fresh human SWE sentences: 1/5 -> 3/5 honest end-to-end pass, zero false passes; two remaining are honest fail-closed adapter faults (a rename module/source_root shape mismatch and a bare 'fix X' composed chain), not routing failures. New suite test_swe_typed_plan_v1.py 8/8; front-door regression suite failure set identical with and without the change (3 pre-existing fleet-drift failures from main #6292). Zero model dependency, zero incremental spend. FALSE-PASS FIX + RENAME FAMILY (2026-10-27 follow-up): select() admits by declared-input contract, not effect. A single bindable repair choreographer was SELECTED for 'Type-check the file X' and no-op'd to a false PASS with the source unchanged. swe_typed_plan_v1 now reuses the selector's OWN E30 effect map (_EFFECT_WORDS) to refuse effect-inconsistent plans, so the front door keeps its fail-closed verdict. Measured on the 10 held-out INV_ real-SWE tasks: the false PASS is gone (typecheck/lint honest fail-closed); on 10 held-out tasks 1 honest pass + 9 honest refusals, no false credit. Additionally the three refactor adapters' module input is now relative to source_root (measured gate=PASS edit_count=2), so 3/4 fresh rename phrasings pass end-to-end with the source bytes genuinely changed and every honesty gate clean. New suite 11/11; front-door failure set identical to pristine (pre-existing main #6292 drift). Zero model dependency, zero incremental spend.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": "capability_selection_retrieval_v1.select/admit/request_may_select, capability_type_surface_v1 ARGV/PATH_DIR types and KEY_ALIASES, goal_front_compiler_v1.bind_all_inputs (unchanged), acceptance_clause_v1 declared path keys, bridge_enumeration_v1 enumerate-and-execute pattern, COMPOSITION_LEVERAGE_20261018_V1.md section 9, PR #6272 manual removal of adapter-defaulted template slots, true_capability_harness_v1 oracle discipline.",
+  "progress_evidence_paths": [
+    "canonical/runtime/declared_input_derivation_v1.py",
+    "canonical/tests/test_declared_input_derivation_v1.py",
+    "SWE_HIDDEN_WIRING_MEASUREMENT_20261027_V1.md",
+    "canonical/runtime/swe_typed_plan_v1.py",
+    "canonical/tests/test_swe_typed_plan_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "f979f33d13b7851530888f8459dc3c0fcb069369",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "ROPE_LIBCST_EXTERNAL_REFACTOR_ENGINES__HEAVY_CONFIG_NONDETERMINISTIC_FORMATTING_FOR_A_BYTE_EXACT_STD_AST_JOB",
+      "STRING_SURGERY_EXTRACTION_WITHOUT_SCOPE_INFERENCE__WRONG_PARAMS_SILENTLY",
+      "TRUSTING_A_REGION_THAT_STRADDLES_A_STATEMENT_BOUNDARY",
+      "EDITING_BEFORE_THE_SUITE_HAS_REFEREED__UNVERIFIED_CLAIM",
+      "SHIP_WITHOUT_ROLLBACK__A_RED_SUITE_LEAVES_THE_TREE_MUTATED"
+    ],
+    "expected_parent_level_state_change": "Typed admission binds SWE contracts previously refused; gateway verified by fresh instances, not by declaration.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "STRING_SURGERY__OR_EXTERNAL_ENGINE__OR_LLM_AUTHORED_HUNK_WITH_HOPE",
+      "intrinsic_or_path_specific": "Intrinsic: correct extraction requires scope-aware inference (params, outputs, module globals excluded) -- a property of the language semantics, not of this repo's plumbing.  The splice mechanics are path-specific and were therefore harvested, not reinvented.",
+      "surviving_causal_blocker": "Nothing else in the tree derives inputs/outputs from the scope graph with byte-exact splices and a post-edit suite referee; adding the registry row without the adapter would be a claim without a run."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_TRUSTED_CAPABILITY_DELETED__PURE_ADDITION_BESIDE_THE_RENAME_VERB__SHARED_LAWS_IMPORTED_RATHER_THAN_COPIED",
+      "existing_inherited_routes_checked": "declared input derivation / typed admission's spine (_safe_path repo-confined path law, _sha256 artifact hashing, subprocess pytest gate with PYTHONDONTWRITEBYTECODE, full-byte rollback) harvested unchanged; ast scope walking reaches Store/Load names through If/For/While/With/Try arms and comprehension targets while never entering nested def/class scopes; qualname addressing covers methods (self extracts as an explicit parameter).",
+      "external_existing_routes_checked": "rope: complete but config-heavy and non-deterministically formatting (rejected for byte-exact law); libcst: concrete-syntax rewriting power far beyond the need with a full parser dependency (rejected); AI completion extraction: zero spend policy and unverifiable (rejected).",
+      "surviving_gap": "Rename, move and NL-intent exist; extraction closes the structural verb gap of the editing core -- the tier-1 hole from the problems map."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "TREATING_A_SUCCESSFUL_DEF_PARSE_AS_PROOF_THE_EXTRACTION_IS_SCOPE_CORRECT",
+        "TREATING_MODULE_LEVEL_NAMES_AS_PARAMETERS_BECAUSE_THEY_APPEAR_IN_THE_REGION",
+        "TREATING_A_RED_SUITE_AFTER_EDIT_AS_A_REASON_TO_KEEP_THE_EDIT"
+      ],
+      "real_outcome": "The editing core verifiably performs its second structural verb; the brain's refactor capability is now composable (extract then rename, rename then extract) with both verbs bound and receipted.",
+      "surviving_necessity": "Extraction is the unique verb that shrinks functions: renaming cannot manufacture a smaller unit, and move transports whole symbols; without extract the editing core cannot reduce function size, the actual driver of reviewable diffs."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "ALL_99_EXISTING_REGISTRY_ROWS_STAY_AUTHORITATIVE_AND_UNTOUCHED__THE_NEW_ROW_IS_PURE_ADDITION_SORTED_BEFORE_python.refactor.rename_parameter.v1",
+      "downstream_work_to_delete_or_supersede": "NOTHING_DELETED__THE_UNREGISTERED_ADAPTER_AND_PINS_BECOME_THE_REGISTRY_ROW_AND_MISSION_RECEIPT_OF_THIS_SAME_PR",
+      "fresh_reuse_plan": "Compose extract+rename chains through registry dispatch; the NL intent layer can address extract targets by qualname because the symbol index already resolves them."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_SCOPE_WALK_IS_COMPUTED_ONCE_PER_EXTRACTION_AND_THE_TEST_GATE_RUNS_ONCE_PER_EDIT__DETERMINISM_PINS_PROVE_NO_HIDDEN_TIME_DEPENDENCE",
+      "search_stop_decision": "Stop: the golden law, both descent depths, six refusal laws, rollback and determinism are pinned and receipted; wider grammars (expressions, decorators, async variants) are deliberate refusals today, not silence."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "implementation_still_necessary_reason": "The inference laws (alignment, inputs, outputs, refusals) did not exist anywhere in the tree; harvesting supplied only the spine.",
+      "losing_routes_reason": "Every losing route either cannot prove scope correctness, nondeterministically reprints bytes, or adds weight without adding truth.",
+      "routes_ranked": [
+        "HARVEST_RENAME_SPLICE_SPINE_AND_AST_SCOPE_LAW__SELECTED",
+        "LIBCST_CST_REWRITE__REJECTED_DEPENDENCY_AND_REPRINT_RISK",
+        "ROPE_EXTERNAL_REFACTOR_ENGINE__REJECTED_CONFIG_WEIGHT_NONDETERMINISM",
+        "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW__REJECTED_UNPROVEN_PARAMS"
+      ],
+      "routes_ranked_reason": "1) harvest spine + stdlib ast scope law (selected); 2) libcst full rewrite -- rejected (dependency + formatting nondeterminism); 3) rope -- rejected (config weight, nondeterminism); 4) text surgery -- rejected (no scope law, silent wrong params)."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Scratch worlds are declared and tiny, but the referee is a real pytest run whose oracles are arithmetic identities of the fixture, the rollback leg mutates the suite itself, and determinism compares raw bytes across two pristine worlds -- no expectation is assumed, everything is re-measured per run."
+    },
+    "prior_routes_considered": [
+      "FILL_PROVIDES_AS_AND_REQUIRES_AS_BY_HAND__REJECTED_96_BY_38_PAIRS_OUTLIVE_REVIEW_AND_NO_PROOF_THE_FILLED_EDGE_RUNS",
+      "STRING_SIMILARITY_OVER_REQUIRES_AND_PROVIDES_VOCABULARIES__REJECTED_MEASURED_GENERIC_VOCABULARY_MATCHES_BURN_TRUST",
+      "EXTERNAL_PLANNER_OVER_THE_11_LITERAL_EDGES__NON_DOMINATING_UNTIL_THE_SEMANTIC_EDGES_EXIST_TO_PLAN_OVER",
+      "CYCLIC_SYNTHESIS_OF_MISSING_FILLER_ADAPTERS__REJECTED_ADDS_PRODUCERS_TO_TRUST_WHERE_MEASUREMENT_SUFFICES",
+      "DOC_DRIVEN_BRIDGE_GUESSING_FROM_ADAPTER_DOCSTRINGS__REJECTED_THE_DOCS_SAY_WHAT_IS_WRITTEN_NOT_WHAT_RUNS",
+      "TRUST_ADAPTER_SELF_REPORT_AS_EMITS_PROOF__REJECTED_THE_XLSX_CONTAINER_PASSED_A_NAIVE_ZIP_CHECK_AS_DOCX_IN_REHEARSAL",
+      "TMP_SCOPED_SCRATCH__REJECTED_VERIFIED_ADAPTERS_REFUSE_PATHS_OUTSIDE_THE_REPOSITORY",
+      "FIRST_PROBE_WITH_GENERIC_PATH_FIXTURES__REJECTED_MEASURED_0_OF_48_PRODUCERS_DRIVABLE",
+      "REGISTRY_EDIT_IN_THE_SAME_PR__REJECTED_MEASUREMENT_MUST_LAND_BEFORE_ANY_TRUSTED_WRITE"
+    ],
+    "real_outcome": "Human-shaped SWE requests reach the right Brain-owned capability through existing typed admission, with every derived input backed by stated evidence.",
+    "required_capability": "DECLARED_INPUT_DERIVATION_FOR_TYPED_ADMISSION_V1",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "BROAD_SUITE_OF_REFACTORS",
+            "CORRECTNESS": "GOOD_BUT_CONFIG_INFLUENCED",
+            "INCREMENTAL_COST": "NEW_DEPENDENCY",
+            "RELIABILITY": "FORMAT_REPRINTS_VARY_BY_CONFIG",
+            "VERIFIABILITY": "NEEDS_PROJECT_DISCIPLINE",
+            "WALL_CLOCK": "SLOWER_SETUP"
+          },
+          "evidence": [
+            "rope extract-method operates on ropeproject configs; output formatting varies with user config"
+          ],
+          "qualification_evidence": [
+            "pypi project page read in this session"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "ROPE_EXTERNAL_REFACTOR_ENGINE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "FULL_CODEMOD_FRAMEWORK",
+            "CORRECTNESS": "EXCELLENT_CONCRETE_FIDELITY",
+            "INCREMENTAL_COST": "NEW_DEPENDENCY_NATIVE_PARTS",
+            "RELIABILITY": "DETERMINISTIC_BUT_LARGE",
+            "VERIFIABILITY": "GOOD",
+            "WALL_CLOCK": "HEAVY_FOR_ONE_VERB"
+          },
+          "evidence": [
+            "LibCST guarantees byte-lossless rewrites but is a full parser/matcher dependency for a job stdlib ast + line preservation does byte-exactly"
+          ],
+          "qualification_evidence": [
+            "LibCST docs read in this session"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "LIBCST_CST_REWRITE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NONE_DURABLE",
+            "CORRECTNESS": "UNPROVEN_PARAMS",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "SILENT_WRONG_NAME_ERRORS_AT_RUNTIME",
+            "VERIFIABILITY": "NOTHING_RAN_POST_EDIT",
+            "WALL_CLOCK": "FAST"
+          },
+          "evidence": [
+            "slice rehearsal: string surgery cannot know base is bound earlier or that dead writes must not surface"
+          ],
+          "qualification_evidence": [
+            "the six refusal laws in the pin suite exist because this route has no laws"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW"
+        }
+      ],
+      "checked_at_utc": "2026-10-27T17:51:04Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "EDIT_REGIONS_WITH_PLAIN_STRING_SURGERY_AND_NO_POST_EDIT_REFEREE",
+      "max_age_hours": 24,
+      "negative_search_summary": "No new trusted capability outside this slice, no network call at runtime, no install. The splice spine (_safe_path/_sha256/test gate/rollback) pre-exists in the tree and is imported unchanged; external refactor engines were fetched, weighed and disqualified or left non-dominating as recorded.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "python extract method function refactor library rope libcst bowler"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "rope python refactoring library extract method pypi"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "libcst codemod declared input derivation / typed admission cst transformers examples"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "python ast end_lineno col_offset statement spans 3.11 3.12 changelog"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "routes_considered": [
+        "ROPE_EXTERNAL_REFACTOR_ENGINE",
+        "LIBCST_CONCRETE_SYNTAX_REWRITE",
+        "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW",
+        "EDIT_THEN_VERIFY_WITHOUT_ROLLBACK",
+        "SHIP_UNVERIFIED_NO_TEST_GATE",
+        "HARVEST_RENAME_SPLICE_SPINE_AND_AST_SCOPE_LAW__SELECTED",
+        "NAMED_TEST_SUITE_REFEREE_WITH_FULL_BYTE_ROLLBACK__SELECTED_PART",
+        "STATEMENT_CHAIN_ALIGNMENT_LAW_WITH_BLOCK_DESCENT__SELECTED_PART"
+      ],
+      "selected_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
+      "selected_route_checked_at_utc": "2026-10-27T23:15:44Z",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-27T23:15:44Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 >= 3.8 stdlib (ast, json, pathlib, re, sys)",
+            "evidence": [
+              "DIRECT_PROBE: 3.11 interpreter parsed adapter ASTs, source ASTs and derived every measured input"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "observed_at_utc": "2026-10-27T23:15:44Z",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "capability_selection_retrieval_v1 + capability_type_surface_v1 + goal_front_compiler_v1 (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 19/19 selector tests, 7/7 new derivation tests, three fresh execution oracles 2/2"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "observed_at_utc": "2026-10-27T23:15:44Z",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
+        "status": "READY"
+      },
+      "selected_surviving_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "declared input derivation / typed admission ships the repo-confined path law, sha256 artifact law, subprocess pytest gate and full-byte rollback this slice imports unchanged",
+          "registry row shape, ASTRA-VERIFY mission/state/receipt triple and census-pin choreography read off the rename and NL slices on main 1041574"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "rope (python-rope) and bicycle-repair-man lineage: extract-method via configurable project objects",
+          "LibCST codemod ecosystem: lossless concrete syntax trees for rewrites"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pypi.org/project/rope 1.x: full refactoring library incl. extract method, requires project config and reprints code",
+          "pypi.org/project/libcst 1.x: parser + matchers + codemods, some curated codemods; depends on native module"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "docs.python.org ast: lineno/end_lineno/col_offset spans are part of the stdlib parse tree API this slice pins against"
+        ]
+      },
+      "stop_condition": "Holds: on this environment the golden extraction runs gate PASS verified=true in ~230 ms, all 15 pins pass three consecutive runs including the paired failing worlds, the registry carries capability 91, the modelled census reads 386 everywhere it is asserted, and both guards (drift, load-bearing admission) pass.",
+      "unresolved_plausible_dominators": [],
+      "why_selected_route_is_fastest_sufficient": "REUSE/ADAPT of the already-built typed selector, typed surface and pinned binder is the smallest sufficient route: the mechanisms exist, only their declared contracts were shaped for machine sentences. DELETE/BYPASS would remove needed SWE capability; SUBSTITUTE/COMPOSE would add a translation layer; SYNTHESIZE_NEW_PRIMITIVE is unnecessary because the selector already shortlists the right capability. Measured 0/5 -> 5/5 at 119 ms/goal with zero regressions."
+    },
+    "routes_considered": [
+      "ROPE_EXTERNAL_REFACTOR_ENGINE",
+      "LIBCST_CONCRETE_SYNTAX_REWRITE",
+      "PLAIN_TEXT_REGION_SURGERY_NO_SCOPE_LAW",
+      "EDIT_THEN_VERIFY_WITHOUT_ROLLBACK",
+      "SHIP_UNVERIFIED_NO_TEST_GATE",
+      "HARVEST_RENAME_SPLICE_SPINE_AND_AST_SCOPE_LAW__SELECTED",
+      "NAMED_TEST_SUITE_REFEREE_WITH_FULL_BYTE_ROLLBACK__SELECTED_PART",
+      "STATEMENT_CHAIN_ALIGNMENT_LAW_WITH_BLOCK_DESCENT__SELECTED_PART"
+    ],
+    "selected_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
+    "selected_surviving_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
+    "stop_condition": "Ship only the reuse/adapt wiring measured here. Do not touch the pinned primary binder, registry, unified model or protected paths. The scoped F31 retry waits for a full 37-family measurement that preserves the ambiguity guard. Do not promote any capability or terminal credit.",
+    "why_selected_route_is_fastest_sufficient": "REUSE/ADAPT of the already-built typed selector, typed surface and pinned binder is the smallest sufficient route: the mechanisms exist, only their declared contracts were shaped for machine sentences. DELETE/BYPASS would remove needed SWE capability; SUBSTITUTE/COMPOSE would add a translation layer; SYNTHESIZE_NEW_PRIMITIVE is unnecessary because the selector already shortlists the right capability. Measured 0/5 -> 5/5 at 119 ms/goal with zero regressions."
+  },
+  "resolution": "Measured reuse/adapt slice; no new primitive, no model, no spend, no protected path. LIVE DOOR WIRING (2026-10-27): the decisive typed selection is now wired into live_brain_route_admission_v1.solve as a scoped, ambiguity-preserving retry that re-enters the SAME full gate chain (route admission, execution, tool truth, promised artifact, source change, observed effect). Measured on five fresh human SWE sentences: 1/5 -> 3/5 honest end-to-end pass, zero false passes; two remaining are honest fail-closed adapter faults (a rename module/source_root shape mismatch and a bare 'fix X' composed chain), not routing failures. New suite test_swe_typed_plan_v1.py 8/8; front-door regression suite failure set identical with and without the change (3 pre-existing fleet-drift failures from main #6292). Zero model dependency, zero incremental spend. FALSE-PASS FIX + RENAME FAMILY (2026-10-27 follow-up): select() admits by declared-input contract, not effect. A single bindable repair choreographer was SELECTED for 'Type-check the file X' and no-op'd to a false PASS with the source unchanged. swe_typed_plan_v1 now reuses the selector's OWN E30 effect map (_EFFECT_WORDS) to refuse effect-inconsistent plans, so the front door keeps its fail-closed verdict. Measured on the 10 held-out INV_ real-SWE tasks: the false PASS is gone (typecheck/lint honest fail-closed); on 10 held-out tasks 1 honest pass + 9 honest refusals, no false credit. Additionally the three refactor adapters' module input is now relative to source_root (measured gate=PASS edit_count=2), so 3/4 fresh rename phrasings pass end-to-end with the source bytes genuinely changed and every honesty gate clean. New suite 11/11; front-door failure set identical to pristine (pre-existing main #6292 drift). Zero model dependency, zero incremental spend.",
+  "route_id": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "REUSE_HIDDEN_TYPED_ADMISSION_WITH_DECLARED_INPUT_DERIVATION",
+  "stop_condition": "Ship only the reuse/adapt wiring measured here. Do not touch the pinned primary binder, registry, unified model or protected paths. The scoped F31 retry waits for a full 37-family measurement that preserves the ambiguity guard. Do not promote any capability or terminal credit.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__NEW_BOUND_ADAPTER_UNIFIED_MODEL_REFRESH_AND_TESTS_ONLY__NO_EXISTING_EXECUTION_PATH_MODIFIED__SCRATCH_WORLDS_DELETED_AFTER_MEASUREMENT",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "b52e237aba951446e0c28c0fe7163da37236a2ba",
+          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+        },
+        {
+          "git_blob_sha": "6abd18ccdf596cc39a4a1360bd2cdb7a11ece69a",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        }
+      ],
+      "decisive_question": "Does an ordinary human SWE sentence now bind a relevant capability without inventing any input and without changing an existing verdict?",
+      "falsifier_id": "FRESH_INSTANCE_TYPED_ADMISSION_ORACLE_V1",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_CANDIDATE_WAS_ROPE__REJECTED_BECAUSE_CONFIG_HEAVY_AND_FORMATTING_NONDETERMINISTIC__SECOND_CANDIDATE_WAS_LIBCST__REJECTED_BECAUSE_A_FULL_PARSER_DEPENDENCY_FOR_A_STDLIB_AST_JOB__THIRD_CANDIDATE_WAS_TEXT_EDITING__REJECTED_BECAUSE_NO_SCOPE_LAW",
+      "proposal_id": "WIRE_DECLARED_INPUT_DERIVATION_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

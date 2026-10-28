@@ -152,28 +152,34 @@ class NoOpRepairIsNotVerifiedTest(unittest.TestCase):
             except BaseException as exc:  # the door's refusal is the expected shape here
                 return "REFUSED", str(exc)
 
-    TEST = ("import unittest\n"
-            "from m import area\n\n\n"
-            "class T(unittest.TestCase):\n"
-            "    def test_area(self):\n"
-            "        self.assertEqual(area(9, 4), 5)\n")
+    # A bug the candidate basis cannot reach: the body must produce a string, and no swap or
+    # constant substitution over `None` can write one. The loop therefore finds no edit, and
+    # the adapter used to report that as `output_verified: true`.
+    #
+    # This fixture used to be a swapped call argument, on the grounds that the basis could not
+    # express one. `CALL_ARG_SWAP` now exists, the loop repairs that shape in one edit, and the
+    # door is right to admit it -- so the no-op case needs a bug that is still outside the basis.
+    UNSOLVABLE = ("def describe(x):\n"
+                  "    return None\n")
 
-    # The bug is a swapped argument at the call site. The engine's vocabulary is five local
-    # AST rewrites (COMPARE_SWAP, BINOP_SWAP, BOOL_SWAP, CONSTANT_REPLACE, DROP_NOT), so it
-    # cannot express this fix -- which is exactly the case that used to report success.
-    UNSOLVABLE = ("def combine(first, second):\n"
-                  "    return first - second\n\n\n"
-                  "def area(w, h):\n"
-                  "    return combine(h, w)\n")
+    TEST_UNSOLVABLE = ("import unittest\n"
+                       "from m import describe\n\n\n"
+                       "class T(unittest.TestCase):\n"
+                       "    def test_describe(self):\n"
+                       "        self.assertEqual(describe(3), \"odd\")\n")
 
-    # The same shape with a bug the vocabulary can express, so the adapter must succeed.
-    SOLVABLE = ("def combine(first, second):\n"
-                "    return first + second\n\n\n"
-                "def area(w, h):\n"
-                "    return combine(w, h)\n")
+    # The same predicate on a bug the basis can express, so the adapter must succeed.
+    SOLVABLE = ("def area(w, h):\n"
+                "    return w - h\n")
+
+    TEST_SOLVABLE = ("import unittest\n"
+                     "from m import area\n\n\n"
+                     "class T(unittest.TestCase):\n"
+                     "    def test_area(self):\n"
+                     "        self.assertEqual(area(2, 3), 5)\n")
 
     def test_a_no_op_repair_may_not_be_reported_as_verified(self):
-        verdict, detail = self._invoke(self.UNSOLVABLE, self.TEST)
+        verdict, detail = self._invoke(self.UNSOLVABLE, self.TEST_UNSOLVABLE)
         self.assertEqual(verdict, "REFUSED",
                          "the door credited a repair that changed nothing: %s" % (detail,))
         self.assertIn("output_verified", str(detail))
@@ -181,7 +187,7 @@ class NoOpRepairIsNotVerifiedTest(unittest.TestCase):
                          "a refused repair must leave the source untouched")
 
     def test_a_real_repair_still_passes_the_same_predicate(self):
-        verdict, detail = self._invoke(self.SOLVABLE, self.TEST)
+        verdict, detail = self._invoke(self.SOLVABLE, self.TEST_SOLVABLE)
         self.assertEqual(verdict, "PASS", "a real fix must still be credited: %s" % (detail,))
         self.assertTrue(detail.get("output_verified"))
 

@@ -1362,11 +1362,10 @@
   "code.impact.tree_sitter.testselect.v1": {
    "action_template": {
     "args": {
-     "capability_id": "code.impact.tree_sitter.testselect.v1",
-     "changed_paths": "${input.changed_paths}",
-     "index_path": "${input.index_path}",
-     "output_path": "${input.output_path}"
-    },
+          "capability_id": "code.impact.tree_sitter.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "output_path": "${input.output_path}"
+        },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",

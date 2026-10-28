@@ -28,6 +28,7 @@ Nothing here calls a model. Nothing here spends. Everything fails closed.
 from __future__ import annotations
 
 import hashlib
+import ast
 import json
 import re
 import subprocess
@@ -448,6 +449,108 @@ def _inspect_python_source_audit(args, result, root):
         audited += 1
     return True, "", {"ledger_files_rehashed": audited,
                      "totals_reconciled": True}
+
+
+def _inspect_change_impact_testselect(args, result, root):
+    """Re-derive the selection from the imports actually on disk.
+
+    A change-impact report makes one claim that can be measured without asking
+    the producer anything: *these tests are the ones that reach the changed
+    code, and no others do.*  Both halves are re-checked here against the bytes
+    in the repository, by parsing every candidate test file with ``ast`` and
+    asking whether it imports a module the changed files define.
+
+    The direction that matters is the omission.  A selection that names too many
+    tests costs time; a selection that names too few silently skips the tests
+    that cover the change, and the caller reads the short list as a complete
+    answer.  So an omitted test that DOES import a changed module is a refusal,
+    and so is a selected test that imports nothing the change touches -- that
+    one means the report is padding its own numbers.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.source.change_impact.testselect.v1),
+    so the artifact was rolled back on every run and the whole lane was
+    unreachable from the front door no matter how correct its answer was.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "IMPACT_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "IMPACT_REPORT_NOT_A_JSON_OBJECT", {}
+    selected = data.get("selected_tests")
+    rows = data.get("tests")
+    totals = data.get("totals")
+    if not isinstance(selected, list) or not isinstance(rows, list):
+        return False, "IMPACT_REPORT_HAS_NO_SELECTION_LEDGER", {}
+    if not isinstance(totals, dict):
+        return False, "IMPACT_REPORT_HAS_NO_TOTALS", {}
+    if len(selected) != result.get("selected_test_count"):
+        return False, "IMPACT_SELECTED_COUNT_MISMATCH", {
+            "ledger": len(selected), "claimed": result.get("selected_test_count")}
+    if len(rows) != result.get("candidate_test_count"):
+        return False, "IMPACT_CANDIDATE_COUNT_MISMATCH", {}
+    if len(rows) != totals.get("candidate_tests") or len(selected) != totals.get("selected_tests"):
+        return False, "IMPACT_TOTALS_DO_NOT_RECONCILE", {}
+    changed = data.get("changed_files")
+    if not isinstance(changed, list) or not changed:
+        return False, "IMPACT_REPORT_NAMES_NO_CHANGED_FILE", {}
+    # The module names the change defines. A file is reachable under its own
+    # stem and under any dotted suffix of its path, which is how both a flat
+    # module and a package member get imported.
+    names = set()
+    for raw in changed:
+        path = _inside(root, raw)
+        if path is None or not path.is_file():
+            return False, "IMPACT_CHANGED_FILE_ABSENT_FROM_DISK", {"path": raw}
+        rel = str(path.relative_to(root)).replace("\\", "/")
+        stem = rel[:-3] if rel.endswith(".py") else rel
+        if stem.endswith("/__init__"):
+            stem = stem[: -len("/__init__")]
+        names.add(stem.rsplit("/", 1)[-1].replace("/", "."))
+        names.add(stem.replace("/", "."))
+    picked = set()
+    for row in rows:
+        if not isinstance(row, Mapping):
+            return False, "IMPACT_LEDGER_ROW_INVALID", {}
+        path = _inside(root, row.get("path"))
+        if path is None or not path.is_file():
+            return False, "IMPACT_CANDIDATE_FILE_ABSENT_FROM_DISK", {}
+        imported = _imported_names(path)
+        if imported is None:
+            return False, "IMPACT_CANDIDATE_FILE_UNPARSEABLE", {}
+        reaches = bool(imported & names)
+        if row.get("selected") and not reaches:
+            return False, "IMPACT_SELECTED_TEST_REACHES_NOTHING_CHANGED", {
+                "path": row.get("path")}
+        if not row.get("selected") and reaches:
+            return False, "IMPACT_TEST_THAT_REACHES_THE_CHANGE_WAS_OMITTED", {
+                "path": row.get("path")}
+        if row.get("selected"):
+            picked.add(row.get("path"))
+    if picked != set(selected):
+        return False, "IMPACT_LEDGER_AND_SELECTION_DISAGREE", {}
+    return True, "", {"candidates_reparsed": len(rows),
+                      "changed_modules_resolved": len(names)}
+
+
+def _imported_names(path: Path):
+    """Every module name a file imports, or None if it does not parse."""
+    try:
+        tree = ast.parse(path.read_bytes())
+    except Exception:
+        return None
+    names = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                names.add(str(alias.name).split(".")[0])
+                names.add(str(alias.name))
+        elif isinstance(node, ast.ImportFrom):
+            if node.module:
+                names.add(str(node.module).split(".")[0])
+                names.add(str(node.module))
+    return names
 
 
 def _inspect_archive_verify(args, result, root):
@@ -1494,6 +1597,7 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
+    "python.source.change_impact.testselect.v1": _inspect_change_impact_testselect,
     "archive.verify.tar_gz.gnu": _inspect_archive_verify,
     "archive.tar_gz.create_from_manifest": _inspect_tar_gz_create_from_manifest,
     "xlsx.table.create_from_json_records": _inspect_xlsx_create,

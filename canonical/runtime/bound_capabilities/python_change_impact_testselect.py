@@ -237,8 +237,19 @@ def run(args, root):
         # An explicit path list cannot know line ranges: whole-module change.
         changed = {}
         for raw in changed_paths:
-            _safe_path(repo, raw)  # containment is law even for reads
-            changed[str(raw)] = [(1, 10**9)]
+            p = _safe_path(repo, raw)  # containment is law even for reads
+            # KEY THE CHANGE THE WAY THE INDEX IS KEYED.  The index holds
+            # repo-relative posix paths and ``_changed_symbols`` looks the
+            # changed file up in it by that key; storing ``str(raw)`` verbatim
+            # meant an ABSOLUTE path -- which is what the composer binds -- never
+            # matched, every changed module came back MODULE_NOT_INDEXED, and the
+            # report said selected_tests: [] with candidate_test_count: 2.  An
+            # empty selection a caller reads as "nothing to run" is worse than a
+            # refusal: it is a green light to skip the tests that cover the
+            # change.  Measured on main: a change to calc.py that
+            # tests/test_calc.py imports selected zero tests.
+            rel = str(p.relative_to(repo)).replace("\\", "/")
+            changed[rel] = [(1, 10**9)]
         changed_source = "changed_paths"
     else:
         raise RuntimeError("CHANGE_IMPACT_INPUT_REQUIRED")
@@ -305,6 +316,15 @@ def run(args, root):
         p for p, row in changed_symbols.items()
         if row["reason"] == "MODULE_NOT_INDEXED"
     )
+    if unknown and not selected:
+        # A changed Python module the index does not carry is not a module
+        # nothing depends on -- it is a module this run could not reason about.
+        # Reporting selected_tests: [] there is the same lie as a green empty
+        # suite: the caller skips the tests that cover the change and believes
+        # it was told they were unaffected.  The tree-sitter selector resolves
+        # the same import correctly, so the honest answer is to refuse and let
+        # the next capability be tried, not to certify an empty selection.
+        raise RuntimeError("CHANGED_PYTHON_MODULE_NOT_INDEXED:" + ",".join(unknown))
     report = {
         "schema": "PROJECT_BRAIN_CHANGE_IMPACT_TEST_SELECTION_V1",
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
