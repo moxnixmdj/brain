@@ -766,12 +766,190 @@ def _resource_leak(args, target: Path, cap: str) -> dict:
     return payload
 
 
+# ------------------------------------------------------------------- api compatibility
+
+
+def _signature_of(node) -> dict:
+    """A function's callable shape, as the facts a caller depends on."""
+    args = node.args
+    positional = [a.arg for a in args.posonlyargs] + [a.arg for a in args.args]
+    defaults = len(args.defaults)
+    required = len(positional) - defaults
+    kwonly = [a.arg for a in args.kwonlyargs]
+    kwonly_required = [
+        a.arg for a, d in zip(args.kwonlyargs, args.kw_defaults) if d is None
+    ]
+    return {
+        "positional": positional,
+        "required": positional[:required],
+        "defaults": defaults,
+        "kwonly": kwonly,
+        "kwonly_required": kwonly_required,
+        "vararg": args.vararg.arg if args.vararg else None,
+        "kwarg": args.kwarg.arg if args.kwarg else None,
+    }
+
+
+def _public_surface(tree) -> dict:
+    """name -> what a caller sees, for module-level names that do not start with `_`."""
+    surface = {}
+    for node in tree.body:
+        if isinstance(node, ast.ClassDef) and not node.name.startswith("_"):
+            members = {}
+            for sub in node.body:
+                if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)) \
+                        and not sub.name.startswith("_"):
+                    members[sub.name] = _signature_of(sub)
+            surface[node.name] = {
+                "kind": "class",
+                "bases": [ast.unparse(b) for b in node.bases],
+                "members": members,
+            }
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) \
+                and not node.name.startswith("_"):
+            surface[node.name] = {"kind": "function", "signature": _signature_of(node)}
+        elif isinstance(node, (ast.Assign, ast.AnnAssign)):
+            targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+            for target in targets:
+                if isinstance(target, ast.Name) and not target.id.startswith("_"):
+                    surface[target.id] = {"kind": "value"}
+    return surface
+
+
+def _signature_breaks(old: dict, new: dict) -> list[str]:
+    """Why a changed signature breaks a caller that was correct against the old one."""
+    breaks = []
+    for name in old["required"]:
+        if name not in new["positional"]:
+            breaks.append("required parameter removed or renamed: " + name)
+    for index, name in enumerate(new["positional"]):
+        if index < len(old["positional"]) and old["positional"][index] != name:
+            breaks.append("positional parameter renamed at %d: %s -> %s"
+                          % (index, old["positional"][index], name))
+    for name in new["required"]:
+        if name not in old["positional"]:
+            breaks.append("new required parameter: " + name)
+    for name in new["kwonly_required"]:
+        if name not in old["kwonly"]:
+            breaks.append("new required keyword-only parameter: " + name)
+    if old["vararg"] and not new["vararg"]:
+        breaks.append("vararg removed: *" + old["vararg"])
+    if old["kwarg"] and not new["kwarg"]:
+        breaks.append("kwarg removed: **" + old["kwarg"])
+    return breaks
+
+
+def _git_root(path: Path) -> Path | None:
+    for candidate in [path, *path.parents]:
+        if (candidate / ".git").exists():
+            return candidate
+    return None
+
+
+def _api_compatibility(args, target: Path, cap: str) -> dict:
+    """What the working tree changed in the PUBLIC surface, and which of it breaks callers.
+
+    The baseline is the committed revision (`base_ref`, default HEAD), read with `git
+    show` -- the same git the changelog and coverage verbs already use.  A file that is
+    not in the baseline is a NEW module: everything in it is an addition, never a break.
+    """
+    timeout_s = int(args.get("timeout_s") or 60)
+    base_ref = str(args.get("base_ref") or "HEAD").strip() or "HEAD"
+    root = _git_root(target if target.is_dir() else target.parent)
+    if root is None:
+        _fail("NOT_A_GIT_WORKTREE:" + str(target))
+    files = (
+        [target]
+        if target.is_file()
+        else sorted(
+            p
+            for p in target.rglob("*.py")
+            if ".venv" not in p.parts and "/.git/" not in str(p)
+        )
+    )
+    if not files:
+        _fail("NO_PYTHON_SOURCE_FOUND:" + str(target))
+    changes = []
+    compared = 0
+    for path in files:
+        try:
+            new_tree = ast.parse(path.read_text(encoding="utf-8"))
+        except (SyntaxError, UnicodeDecodeError):
+            continue
+        rel = path.resolve().relative_to(root).as_posix()
+        proc = subprocess.run(
+            ["git", "show", base_ref + ":" + rel],
+            cwd=str(root), capture_output=True, text=True, timeout=timeout_s,
+        )
+        if proc.returncode != 0:
+            # not in the baseline: a new module adds surface and cannot break a caller
+            for name, shape in _public_surface(new_tree).items():
+                changes.append({"file": rel, "symbol": name, "kind": shape["kind"],
+                                "change": "added", "breaking": False})
+            continue
+        compared += 1
+        try:
+            old_tree = ast.parse(proc.stdout)
+        except SyntaxError:
+            continue
+        old_surface = _public_surface(old_tree)
+        new_surface = _public_surface(new_tree)
+        for name in sorted(set(old_surface) - set(new_surface)):
+            changes.append({"file": rel, "symbol": name,
+                            "kind": old_surface[name]["kind"],
+                            "change": "removed", "breaking": True,
+                            "why": "public name no longer exists"})
+        for name in sorted(set(new_surface) - set(old_surface)):
+            changes.append({"file": rel, "symbol": name,
+                            "kind": new_surface[name]["kind"],
+                            "change": "added", "breaking": False})
+        for name in sorted(set(old_surface) & set(new_surface)):
+            old, new = old_surface[name], new_surface[name]
+            if old["kind"] == "function" and new["kind"] == "function":
+                breaks = _signature_breaks(old["signature"], new["signature"])
+                if breaks:
+                    changes.append({"file": rel, "symbol": name, "kind": "function",
+                                    "change": "signature", "breaking": True,
+                                    "why": "; ".join(breaks)})
+            elif old["kind"] == "class" and new["kind"] == "class":
+                for member in sorted(set(old["members"]) - set(new["members"])):
+                    changes.append({"file": rel, "symbol": name + "." + member,
+                                    "kind": "method", "change": "removed",
+                                    "breaking": True,
+                                    "why": "public method no longer exists"})
+                for member in sorted(set(new["members"]) - set(old["members"])):
+                    changes.append({"file": rel, "symbol": name + "." + member,
+                                    "kind": "method", "change": "added",
+                                    "breaking": False})
+                for member in sorted(set(old["members"]) & set(new["members"])):
+                    breaks = _signature_breaks(old["members"][member],
+                                               new["members"][member])
+                    if breaks:
+                        changes.append({"file": rel, "symbol": name + "." + member,
+                                        "kind": "method", "change": "signature",
+                                        "breaking": True, "why": "; ".join(breaks)})
+    breaking = [c for c in changes if c["breaking"]]
+    payload = _base(cap, "api_compatibility", target)
+    payload.update({
+        "base_ref": base_ref,
+        "files_compared": compared,
+        "change_count": len(changes),
+        "breaking_count": len(breaking),
+        "breaking_changes": breaking,
+        "changes": changes,
+        "compatible": not breaking,
+        "complete": True,
+    })
+    return payload
+
+
 _HANDLERS = {
     "changelog": _changelog,
     "license_scan": _license_scan,
     "coverage": _coverage,
     "duplication": _duplication,
     "resource_leak": _resource_leak,
+    "api_compatibility": _api_compatibility,
 }
 
 

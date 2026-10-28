@@ -1,0 +1,13 @@
+{
+ "learned": {
+  ".json": {
+   "effect": "ROUND_TRIP_OK",
+   "goal": "Fuzz the function add in /home/user/brain/canonical/astra_runtime/tmp/missing_verb_probe/repo/pkg/calc.py and report it to /tmp/probe_out/fuzz.json.",
+   "learned_at": 1793215459.107258,
+   "name": "json_dump",
+   "source": "import json\njson.dump({'content': 'brain-synthesis-sample'}, open('/tmp/brain-synth-ln9ux6a2/out.json', 'w', encoding='utf-8'))\n",
+   "verified_sha256": "64803be9dd2081597d579fa322276af4372db74911fa1fbed01f9508f9bc4a1e"
+  }
+ },
+ "schema": "PROJECT_BRAIN_PROGRAM_SYNTHESIS_V1"
+}

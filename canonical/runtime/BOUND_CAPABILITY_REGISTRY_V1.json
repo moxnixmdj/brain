@@ -10903,6 +10903,69 @@
    },
    "status": "VERIFIED_BOUND_CAPABILITY"
   },
+  "python.quality.api_compatibility.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "api_compatibility",
+     "capability_id": "python.quality.api_compatibility.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "public api",
+    "api compatibility",
+    "backward compatible",
+    "breaking change",
+    "breaking changes",
+    "breaks the public api",
+    "removed symbol",
+    "signature change",
+    "api surface"
+   ],
+   "limitations": [
+    "the baseline is the committed revision (base_ref, default HEAD) read through `git show`; an uncommitted file with no committed version is a NEW module, so everything in it is an addition and nothing in it can break a caller.",
+    "the surface is module-level public names, public class methods and their signatures; instance attributes, type annotations as contracts, and behaviour changes that keep the same signature are not detected.",
+    "a renamed positional parameter is breaking even when the function still accepts the same calls positionally, because a keyword caller breaks."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.source.api_compatibility.report"
+   ],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "base_ref",
+    "files_compared",
+    "change_count",
+    "breaking_count",
+    "breaking_changes",
+    "changes",
+    "compatible",
+    "gate",
+    "complete"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
   "python.quality.duplication.v1": {
     "action_template": {
       "args": {
