@@ -1702,6 +1702,51 @@ def _command_match(pattern: str, text: str):
     return None
 
 
+_NON_ACTION_WORDS = frozenset({"please", "the", "a", "an", "my", "our", "your", "their", "then",
+                               "now", "and", "so", "show", "give", "tell", "me", "us"})
+
+
+def _stated_action_word(sentence: str) -> str:
+    """The verb the sentence opens with, or '' -- the same reading the front compiler uses."""
+    for word in re.findall(r"[A-Za-z][A-Za-z0-9_]*", str(sentence or "")):
+        low = word.lower()
+        if low in _NON_ACTION_WORDS or len(low) < 2:
+            continue
+        return low
+    return ""
+
+
+def statement_is_a_command_line(sentence: str) -> bool:
+    """Does the sentence ASK FOR this command, or does it merely mention the program?
+
+    ``extract_argv`` reads a program and its operands out of prose, and that is what makes
+    ordinary requests runnable: "Copy the file A to the file B".  It is also how a sentence
+    that names an ACT gets stolen: measured while adding the git surface, "Show the git diff
+    of the repository <R> against HEAD and write it to <O>" was read as the shell command
+    ``diff <O> <R>`` -- it ran /usr/bin/diff against the two paths and failed, while the
+    capability that performs the requested act (vcs.git.diff.v1) had already been selected
+    and was refused NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND.
+
+    The distinction that fixes it without narrowing the reader is the sentence's own
+    grammar: an imperative puts the ACTION first, so the program a sentence asks for is the
+    verb it opens with, or a program introduced by run/execute/invoke.  A program the
+    sentence merely MENTIONS ("the git diff", "a cp of the tree") is its object, not its
+    action, and the act belongs to whatever capability performs it.
+    """
+    parts = extract_argv(sentence)
+    if not parts:
+        return False
+    program = str(parts[0]).strip().rsplit("/", 1)[-1].lower()
+    if not program:
+        return False
+    head = _stated_action_word(sentence)
+    if program == head:
+        return True
+    return bool(re.search(r"\b(?:run|runs|running|execute|executes|invoke|invokes|call|calls)\s+"
+                          r"(?:the\s+|a\s+)?(?:command\s+|program\s+|tool\s+)?"
+                          + re.escape(program) + r"\b", str(sentence or ""), re.I))
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -3263,6 +3308,40 @@ _ROLLBACK_PATH_KEYS = ("output_path", "archive_path", "target_path", "path", "de
                        "output", "out", "into", "to", "source_path", "input_path")
 
 
+def _template_constants(entry: Mapping[str, Any]) -> dict[str, Any]:
+    """The action template's literal arguments -- the values the REGISTRY declares."""
+    declared = ((entry.get("action_template") or {}).get("args") or {})
+    out: dict[str, Any] = {}
+    for key, value in declared.items():
+        if isinstance(value, str) and "${" in value:
+            continue
+        if isinstance(value, (str, int, float, bool)):
+            out[str(key)] = value
+    return out
+
+
+def _stated_destination_path(goal: str) -> str:
+    """The path the sentence says to write to, as an absolute path, or ''."""
+    try:
+        raw = str(extract_content_destination(str(goal or "")) or "").strip()
+    except Exception:  # noqa: BLE001 - an unreadable sentence states no destination
+        return ""
+    if not raw:
+        return ""
+    try:
+        return str(pathlib.Path(raw).expanduser().resolve())
+    except (OSError, RuntimeError):
+        return ""
+
+
+def _same_path(left: str, right: str) -> bool:
+    """Do these two stated paths name the same place?"""
+    try:
+        return str(pathlib.Path(left).expanduser().resolve()) == str(pathlib.Path(right).resolve())
+    except (OSError, RuntimeError):
+        return False
+
+
 def _pathish(value: Any) -> str | None:
     """A string that the chain treats as a file it can touch, or None."""
     if not isinstance(value, str) or not value or "\n" in value:
@@ -3354,6 +3433,27 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "steps": steps}
         sig = TS.signature(entry)
         args = bind(sig, goal, inputs, produced)
+        # The template's own constants are part of the contract.  `bind` fills the SLOTS the
+        # sentence states, and a constant is not a slot: measured while composing the git
+        # surface, "Show me the git status of the repository and write it to <O>" dispatched
+        # vcs.git.status.v1 WITHOUT `git_verb`, so the adapter refused
+        # GIT_VERB_NOT_SUPPORTED:<none> -- a correct refusal about an argument the caller never
+        # supplies and the registry already declares.
+        for constant_key, constant_value in _template_constants(entry).items():
+            args.setdefault(constant_key, constant_value)
+        # A stated destination is never a SOURCE.  The same sentence names one path, the file
+        # it writes, and bind() filled `worktree_path` with it by elimination -- so the adapter
+        # was asked to run git inside the report it was about to write.  Left as the empty
+        # string rather than removed, so the adapter refuses with the reason that is true
+        # (REPOSITORY_NOT_STATED) instead of one about a directory that is not a repository.
+        destination = _stated_destination_path(goal)
+        if destination:
+            for slot_name, slot_value in list(args.items()):
+                if str(sig.get(slot_name) or "").upper() == "PATH_OUTPUT":
+                    continue
+                candidate = _pathish(slot_value)
+                if candidate and _same_path(candidate, destination):
+                    args[slot_name] = ""
         # Snapshot what already exists, so this step can only be credited with
         # files it actually created.
         existed_before = {v for v in (_pathish(a) for a in args.values()) if v and _exists_in_repo(v)}

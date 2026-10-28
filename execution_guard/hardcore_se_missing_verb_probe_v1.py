@@ -156,15 +156,22 @@ def main() -> int:
             res = adm.solve({"task_id": "MISS_" + act, "goal": goal})
             selected = res.get("capability_id") or res.get("compiled_capability_id") or "-"
             status = str(res.get("status") or "")
-            reason = str(res.get("reason") or "")[:90]
+            reason = str(res.get("reason") or "")[:160]
         except Exception as exc:  # noqa: BLE001 - a crash is a finding, not an error
-            selected, status, reason = "-", "EXC:" + type(exc).__name__, str(exc)[:90]
+            selected, status, reason = "-", "EXC:" + type(exc).__name__, str(exc)[:160]
         wrote = out.is_file()
         verdict = classify(status, selected, wrote)
         # An honest refusal should name the act it cannot perform: "I have no
         # linter" is actionable, "RAW_GOAL_COMPILATION_GAP" is not.
-        head = (re.findall(r"[A-Za-z][A-Za-z0-9]*", goal) or [""])[0].lower()
-        named = bool(head) and head in (status + " " + reason).lower()
+        # Does the refusal name the ACT?  The sentence's first word is the request verb
+        # ("Find", "Measure", "Write"), not the act, so it was the wrong question and the
+        # answer was always "no" -- the same misreading this probe already had in its
+        # ownership check.
+        _generic = {"git", "test", "check", "find", "measure", "write", "create", "report",
+                    "the", "and", "for", "run", "make", "with"}
+        _act_words = [t for t in re.findall(r"[a-z]{4,}", act.lower())
+                      if t not in _generic and not t.endswith("ing")]
+        named = any(w in (status + " " + reason).lower() for w in _act_words)
         # Does the capability that answered even claim to perform the act?  A
         # refusal that names a substitute is luck, not a refusal: the substitute
         # failed only because it did not produce the promised artifact.
@@ -176,9 +183,23 @@ def main() -> int:
                 _own = (set(str(x).lower() for x in (_entry.get("keywords") or []))
                         | set(re.findall(r"[a-z0-9]+", selected.lower()))
                         | set(re.findall(r"[a-z0-9]+", " ".join(_entry.get("provides") or []).lower())))
-                owns = head in _own
+                # Does the answering capability claim THIS ACT?  The act's own name is the
+                # question, not the sentence's first word: measured, this read `head` -- the
+                # verb that opens the request ("Show", "Commit") -- against the answering
+                # capability's vocabulary, so every act was reported as "does not own the
+                # act" no matter who answered it, and the eleven git acts that the registry
+                # now owns were counted as hollow passes for being served correctly.
+                _tokens = [t for t in re.split(r"[^a-z0-9]+", act.lower()) if t]
+                owns = bool(_tokens) and all(
+                    any(o == t or o.startswith(t) or t.startswith(o) for o in _own)
+                    for t in _tokens)
             except Exception:  # noqa: BLE001 - measurement must not crash the probe
                 owns = None
+        if verdict == "SILENTLY_WRONG" and owns:
+            # The act EXISTS and the capability that answered it is the one that owns it:
+            # answering is the correct outcome, not a hollow pass.  The probe was written
+            # when no capability performed these acts at all, and its verdict has to say so.
+            verdict = "ANSWERED_BY_OWNING_CAPABILITY"
         rows.append({"act": act, "goal": goal, "selected": selected, "status": status[:70],
                      "reason": reason, "verdict": verdict, "artifact": wrote,
                      "refusal_names_the_act": named,
@@ -201,6 +222,8 @@ def main() -> int:
     wrongly_accepted = [r["act"] for r in rows if r["verdict"] == "SILENTLY_WRONG"]
     named = sum(1 for r in rows if r["verdict"] == "HONEST_REFUSAL" and r["refusal_names_the_act"])
     refusals = sum(1 for r in rows if r["verdict"] == "HONEST_REFUSAL")
+    owned = counts.get("ANSWERED_BY_OWNING_CAPABILITY", 0)
+    print("acts now owned by a capability that answers them: %d" % owned)
     print("refusals that name the missing act: %d/%d" % (named, refusals))
     borrowed = [r["act"] for r in rows if r["selected_owns_the_act"] is False]
     print("answered by a capability that does not own the act: %d (%s)"

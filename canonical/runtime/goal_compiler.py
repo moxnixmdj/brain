@@ -973,6 +973,32 @@ def _identifiers_after_role(text,phrases):
     return found
 
 
+def _stated_text(goal, key):
+    """The text a tuning slot's introducing phrase states, or None.
+
+    Reads with the pinned tail reader, so the slot binds exactly what the sentence wrote and
+    nothing the sentence left out.  Used only for the slots the lexicon marks as text-valued
+    tuning (`ref`): without it a stated revision was dropped and its adapter defaulted to HEAD.
+    """
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+    except Exception:  # noqa: BLE001 - no reader, no binding
+        return None
+    if str(key) == "ref":
+        # A revision named in words is a revision; it is not a tail to parse.
+        named = _role_lexicon().revision_from_phrase(goal)
+        if named:
+            return named
+    try:
+        for tail in _front._after_key(str(goal or ""), str(key)):
+            value = _front._parse_typed_value(str(key), tail)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    except Exception:  # noqa: BLE001 - an unreadable tail states nothing
+        return None
+    return None
+
+
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -994,6 +1020,8 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             # python_executable, and the type gate was unreachable for exactly
             # this reason.  A value the sentence does state is still bound below.
             stated=_stated_number(goal,key)
+            if stated is None and _role_lexicon().is_textual_tuning(key):
+                stated=_stated_text(goal,key)
             if stated is not None:
                 result[key]=stated
             continue

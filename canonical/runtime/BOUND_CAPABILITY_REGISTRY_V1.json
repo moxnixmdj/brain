@@ -5626,7 +5626,7 @@
      "diff_path": "${input.diff_path}",
      "output_path": "${input.output_path}",
      "pr_intent_path": "${input.pr_intent_path}",
-     "repo_path": "${input.repo_path}",
+     "worktree_path": "${input.worktree_path}",
      "timeout_s": "${input.timeout_s}"
     },
     "expect": {
@@ -7403,8 +7403,7 @@
     "diff",
     "test",
     "selection",
-    "blame",
-    "callers",
+     "callers",
     "affected",
     "minimal",
     "fast",
@@ -9942,6 +9941,560 @@
      "output_verified": true
     },
     "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001__text.file.write__AUTO_VERIFY.json"
+   }
+  },
+  "vcs.git.blame.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.blame.v1",
+     "git_verb": "blame",
+     "output_path": "${input.output_path}",
+     "path": "${input.path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "blame",
+    "who wrote",
+    "who last changed",
+    "last changed",
+    "attribution",
+    "per line"
+   ],
+   "limitations": [
+    "read-only; porcelain blame of exactly one file, parsed to per-line rows plus author totals",
+    "the file must already exist inside the repository"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.blame"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.branch_create.v1": {
+   "action_template": {
+    "args": {
+     "branch_name": "${input.branch_name}",
+     "capability_id": "vcs.git.branch_create.v1",
+     "git_verb": "branch_create",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "branch",
+    "create branch",
+    "new branch"
+   ],
+   "limitations": [
+    "mutating; `git branch NAME [start]`, which creates without switching",
+    "refuses BRANCH_ALREADY_EXISTS and BRANCH_NAME_INVALID instead of reusing a name"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.branch_create"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.branch_list.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.branch_list.v1",
+     "git_verb": "branch_list",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "branch",
+    "branches",
+    "list branches",
+    "which branch",
+    "current branch"
+   ],
+   "limitations": [
+    "read-only; every local branch with its commit and a current flag"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.branch_list"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.checkout.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.checkout.v1",
+     "git_verb": "checkout",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "checkout",
+    "switch",
+    "switch branch",
+    "go to branch",
+    "check out"
+   ],
+   "limitations": [
+    "mutating; refuses WORKING_TREE_DIRTY and REF_NOT_FOUND before touching the tree",
+    "the resulting branch is read back from git, not assumed"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.checkout"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.commit.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.commit.v1",
+     "git_verb": "commit",
+     "message": "${input.message}",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "commit",
+    "save changes",
+    "record changes",
+    "commit changes"
+   ],
+   "limitations": [
+    "mutating; stages everything not ignored, commits the stated message, proves HEAD moved",
+    "refuses NOTHING_TO_COMMIT rather than reporting a commit that did not happen"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.commit"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.diff.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.diff.v1",
+     "git_verb": "diff",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "diff",
+    "changes",
+    "patch",
+    "modified files",
+    "uncommitted diff"
+   ],
+   "limitations": [
+    "read-only; unified diff plus --stat over the same selection",
+    "`ref` compares the working tree against that commit; omitted means the unstaged changes"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.diff"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.log.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.log.v1",
+     "git_verb": "log",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "log",
+    "history",
+    "commits",
+    "commit history",
+    "recent commits"
+   ],
+   "limitations": [
+    "read-only; newest first, at most 20 commits",
+    "an empty repository is empty_repository=true, never a failure"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.log"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.revert.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.revert.v1",
+     "git_verb": "revert",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "revert",
+    "undo commit",
+    "undo the last commit",
+    "roll back a commit"
+   ],
+   "limitations": [
+    "mutating; `git revert --no-edit`, WORKING_TREE_DIRTY refused first, REVERT_CONFLICT aborts",
+    "reverts by creating the inverse commit; it never rewrites history"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.revert"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.stash.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.stash.v1",
+     "git_verb": "stash",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "stash",
+    "uncommitted",
+    "set aside",
+    "shelve",
+    "put aside",
+    "working changes"
+   ],
+   "limitations": [
+    "mutating; stashes tracked and untracked changes with a message, then reads the tree back",
+    "a clean tree is stashed=false with reason WORKING_TREE_CLEAN, never a success"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.stash"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.status.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.status.v1",
+     "git_verb": "status",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "status",
+    "working tree",
+    "dirty",
+    "uncommitted changes",
+    "clean",
+    "what changed"
+   ],
+   "limitations": [
+    "read-only; `git --no-optional-locks status --porcelain=v1 -b --untracked-files=all`",
+    "a dirty tree is clean=false, not a failure: the verb succeeded and the finding is the tree's"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.status"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
    }
   },
   "web.browser.rendered.capture.chromedriver": {

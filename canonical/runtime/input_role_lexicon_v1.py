@@ -103,6 +103,12 @@ SLOT_KIND: dict[str, str] = {
     "max_mutants": KIND_TUNING,
     "min_kill_ratio": KIND_TUNING,
     "tolerance": KIND_TUNING,
+    # `ref` is a knob the ADAPTER defaults, and each verb decides what "unstated" means:
+    # diff -> the unstaged changes, revert -> HEAD, checkout -> a refusal (REF_NOT_STATED).
+    # Declared tuning rather than required because "Revert the last commit in <R>" is how an
+    # engineer states it, and with `ref` required that sentence could not bind this
+    # capability at all -- measured: it fell through to vcs.git.log.v1, a different act.
+    "ref": KIND_TUNING,
     "repeats": KIND_TUNING,
     "budget": KIND_TUNING,
 }
@@ -111,6 +117,21 @@ SLOT_KIND: dict[str, str] = {
 # always also accepted (the binders add it), so these are only the words a
 # person uses instead of the registry's noun.
 ROLE_ALIASES: dict[str, tuple[str, ...]] = {
+    # --- the git surface -------------------------------------------------------
+    # "against HEAD", "at commit abc123", "the revision main": a revision is named the way
+    # an engineer names it.  These four aliases exist because the capabilities that were
+    # just added (vcs.git.diff/checkout/revert) need one, and a slot with no alias could only
+    # be bound by its own registry spelling -- measured: the exclusion fallback assigned the
+    # OUTPUT path to the slot and the request died as output_path_equals_an_input_path.
+    # A BRANCH is a revision: `git checkout <branch>` and `git checkout <sha>` are one act
+    # with one slot.  Declared here because a checkout sentence that names a branch and a
+    # checkout sentence that names a commit are the same sentence with a different value, and
+    # the earlier split (branch_name for the branch, ref for the commit) made the second one
+    # unbindable, so "Check out the previous commit ..." was answered by a `git log` listing.
+    "ref": ("ref", "revision", "against", "at commit", "at revision", "commit",
+            "branch", "branch called", "branch named"),
+    "message": ("message", "commit message", "with the message", "saying"),
+    "branch_name": ("branch", "branch called", "branch named", "new branch"),
     # "the repository", "the repo", "the checkout", "the tree it was cut from"
     "anchor_path": ("repository", "repo", "git repository", "checkout", "anchor",
                     "tree", "source tree", "project"),
@@ -199,6 +220,42 @@ def is_rescuable(key) -> bool:
 def kind_of(key) -> str | None:
     """The value kind this slot takes, or None when the binder already knows."""
     return SLOT_KIND.get(str(key or ""))
+
+
+# A tuning slot that is DEFAULTED by its adapter but is still something a sentence states in
+# words rather than as a number.  `ref` is the whole case: "Revert the commit 49b9ce0" states a
+# revision, the adapter defaults `ref` to HEAD when it is absent, and the tuning rule (which
+# binds only a stated NUMBER) therefore threw the stated commit away and reverted HEAD -- a
+# different commit, silently.  Listed explicitly, because a name pattern would sweep in knobs
+# whose unstated value means something.
+TEXTUAL_TUNING = frozenset({"ref"})
+
+
+# The revisions an engineer names without typing a sha.  Each maps to the revision the phrase
+# means, so the adapter receives a revision rather than a word.  Measured: "Check out the
+# previous commit in the repository R" was SKIPPED (F24) because `ref` could not be bound,
+# and the sentence was then answered by `vcs.git.log.v1` -- a listing -- with a PASS, for a
+# request to move HEAD.
+_REVISION_PHRASES: tuple[tuple[str, str], ...] = (
+    (r"\bthe previous commit\b|\bthe prior commit\b|\bthe commit before\b", "HEAD~1"),
+    (r"\bthe last commit\b|\bthe latest commit\b|\bthe most recent commit\b"
+     r"|\bthe head commit\b|\bhead of the branch\b", "HEAD"),
+)
+
+
+def revision_from_phrase(goal) -> str:
+    """The revision a sentence names in words, or '' when it names none."""
+    import re as _re
+    text = str(goal or "")
+    for pattern, revision in _REVISION_PHRASES:
+        if _re.search(pattern, text, _re.I):
+            return revision
+    return ""
+
+
+def is_textual_tuning(key) -> bool:
+    """A tuning slot whose stated value is text: bound when the sentence states it."""
+    return str(key or "") in TEXTUAL_TUNING
 
 
 def is_tuning(key) -> bool:

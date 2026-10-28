@@ -145,6 +145,58 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
     )
 
 
+# The verbs a request is MADE of, not the act it asks for: "Show me the git status", "Write
+# the changelog", "Find the dead code".  A sentence opening with one of these states its act
+# somewhere else, so the act vocabulary check below does not apply to it.
+_REQUEST_VERBS = frozenset({
+    "show", "give", "tell", "list", "report", "write", "save", "send", "return", "print",
+    "find", "search", "look", "check", "verify", "validate", "confirm", "inspect", "examine",
+    "get", "read", "open", "load", "fetch", "produce", "generate", "create", "make", "build",
+    "add", "remove", "delete", "update", "change", "modify", "apply", "perform", "run",
+    "execute", "invoke", "call", "use", "using", "with", "please", "let", "keep", "ensure",
+    "must", "should", "can", "i", "we", "you", "it", "this", "that", "there", "do", "does",
+    "have", "has", "want", "need", "take", "put", "set", "start", "stop", "repeat", "again",
+})
+
+
+def _registry_vocabulary(registry: Mapping[str, Mapping[str, Any]]) -> set[str]:
+    """Every word the registry claims to act on: its keywords, its identifiers, its provides."""
+    words: set[str] = set()
+    for cid, entry in registry.items():
+        try:
+            words.update(str(x).lower() for x in (entry.get("keywords") or []))
+            words.update(re.findall(r"[a-z0-9]+", str(cid).lower()))
+            words.update(re.findall(r"[a-z0-9]+", " ".join(entry.get("provides") or []).lower()))
+        except Exception:  # noqa: BLE001 - an unreadable entry claims nothing extra
+            continue
+    return {w for w in words if w}
+
+
+def _stated_act_is_unknown(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> str:
+    """The act a sentence opens with that no capability claims, or ''.
+
+    Only the sentence's own opening act word is judged, and only when it is not one of the
+    request verbs every sentence is made of -- so this refuses "Bisect the history of R"
+    (no capability is about bisecting) while leaving "Show me the git status of R" to the
+    evidence rules that already decide it.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _croute
+        word = _croute._stated_action_word(str(goal or ""))
+    except Exception:  # noqa: BLE001 - an unreadable sentence claims no act
+        return ""
+    if not word or word in _REQUEST_VERBS or len(word) < 3:
+        return ""
+    vocabulary = _registry_vocabulary(registry)
+    if word in vocabulary:
+        return ""
+    for claimed in vocabulary:
+        # Inflections of ONE act -- "audit"/"audits", "debug"/"debugging", "lint"/"linting".
+        if len(claimed) >= 4 and (claimed.startswith(word) or word.startswith(claimed)):
+            return ""
+    return word
+
+
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
     dag = compiled.get("capability_dag")
@@ -159,6 +211,18 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     entry = registry.get(selected)
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
+    # An act this brain has never claimed to perform must be REFUSED, not answered by whichever
+    # capability shares a word with the sentence.  Measured over 43 acts an engineer asks for
+    # that the registry holds no capability for: 18 of them were answered with a PASS and a
+    # credible artifact -- "Bisect the history of the repository R" by a `git log` LISTING,
+    # "Lint the python source R/pkg" by an AST parser, "Fuzz the function add" by the same
+    # parser.  The reader that says what act a sentence asks for already exists
+    # (`_stated_action_word`), and the registry already says which words it can act on.
+    unknown_act = _stated_act_is_unknown(goal, registry)
+    if unknown_act:
+        return {"schema": SCHEMA, "admitted": False,
+                "rule": "R12_STATED_ACT_IS_NOT_AN_ACT_THIS_BRAIN_PERFORMS:" + unknown_act,
+                "compiler_mode": mode, "selected_capability": selected}
     # A sentence that states a settled command line states a COMMAND, and a
     # capability that cannot run a command line cannot answer it -- however many
     # of the sentence's words its keywords happen to contain.  The retrieval
@@ -184,7 +248,7 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {"schema": SCHEMA, "admitted": False,
                 "rule": "WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
                 "compiler_mode": mode, "selected_capability": selected}
-    if composer_route.extract_argv(goal) is not None:
+    if composer_route.statement_is_a_command_line(goal):
         _slots = {str(k or "").lower() for k in
                   ((entry.get("action_template") or {}).get("args") or {})}
         # A COMMAND slot is a command slot whatever it is called.  Measured on
@@ -1840,6 +1904,9 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     composed["failure_class"] = cls
     composed["promised_artifact_errors"] = still
     composed["composer_ran_but_left_the_artifact_missing"] = True
+    # Say WHY, not just that something is missing: the caller has to be able to tell a
+    # request this brain cannot perform from one it performed badly.
+    composed.setdefault("reason", ";".join(still)[:400])
     # The chain is being declared a failure, so what it created must stop existing.
     # Otherwise the caller reports FAIL_CLOSED while the file it wrote sits on disk,
     # and the next reader cannot tell a refused goal from an executed one.
@@ -2083,6 +2150,11 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             "compiled_capability_id": _rejected,
             "compiler_mode": compiled.get("compiler_mode"),
             "route_admission": admission,
+            # The rule and the capability were computed and then left out of the report, so a
+            # refusal reached the caller as FAIL_CLOSED__ROUTE_ADMISSION_REJECTED with an empty
+            # reason and no way to tell a missing act from an unbound argument.  Measured over
+            # the 43-act probe: 18 honest refusals, none of which named the act it declined.
+            "reason": (_detail or ("ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")))),
         }
         if _detail is not None:
             _extra["compiler_detail"] = _detail
@@ -2151,7 +2223,13 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # #6119 hazard stays closed for the reason it always has: "Check the
         # file X" states no command line, so extract_argv is None and it keeps
         # failing closed.
-        stated_a_command_line = composer_route.extract_argv(normalized) is not None
+        # A sentence that merely MENTIONS a program is not asking for it to be run.
+        # Measured: "Show the git diff of the repository <R> against HEAD and write it to
+        # <O>" was read as `diff <O> <R>`, executed, and failed -- after the capability that
+        # performs the act had been selected and refused for want of a command slot.  The
+        # composer is the right answer for "Copy the file A to the file B"; it is the wrong
+        # answer when the sentence's own verb names the act a capability already performs.
+        stated_a_command_line = composer_route.statement_is_a_command_line(normalized)
         # The symmetric case, measured.  A sentence can state BOTH a payload and
         # the path it goes to, and still be refused for a reason that has
         # nothing to do with the binder -- so this gate, which required
@@ -2248,6 +2326,7 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = cls
         result["promised_artifact_errors"] = missing
+        result.setdefault("reason", ";".join(missing)[:400])
     stated_files = _stated_files(normalized)
     patch_evidence = future_artifacts + [p for p in stated_files if p not in future_artifacts]
     unchanged = promised_source_change_errors(

@@ -612,7 +612,31 @@ def _after_key(goal: str, key: str) -> list[str]:
     phrases = sorted(set(aliases + [key, key.replace("_", " ")]), key=len, reverse=True)
     tails: list[str] = []
     for phrase in phrases:
-        pattern = re.compile(r"(?i)\b" + re.escape(phrase) + r"\s*(?:=|:|\bof\b|\bis\b)?\s*")
+        pattern = re.compile(r"(?i)\b" + re.escape(phrase)
+                             + r"(?![A-Za-z0-9_])\s*(?:=|:|\bof\b|\bis\b)?\s*")
+        tails.extend(goal[m.end():] for m in pattern.finditer(goal))
+    if tails:
+        return tails
+    # A slot the lexicon DECLARES aliases for was still only matched by its own name, so a
+    # sentence that used the ordinary English word found nothing and the slot was then filled
+    # by an elimination pass -- or not at all.  Measured while binding the git surface:
+    # `repo_path` is declared in the lexicon with the aliases ("repository", "repo",
+    # "project"), and "Show me the git status of the repository <R> and write it to <O>"
+    # bound repo_path to the OUTPUT path, because its own regex found no tail and the
+    # remaining path was assigned to it by position.  The fallback is additive by
+    # construction: it runs only when the key's own phrases produced nothing, so no route
+    # that binds today can lose the tail it binds from.
+    declared = [phrase for phrase in input_role_lexicon.phrases_for(key)
+                if phrase not in aliases and phrase not in (key, key.replace("_", " "))]
+    for phrase in sorted(set(declared), key=len, reverse=True):
+        if gated and phrase in gated:
+            continue
+        # The alias must END where the word ends.  Measured: the alias "ref" matched inside
+        # the word "refuse_revert_conflict" -- every alias hit inside a longer word (a path, a
+        # directory name) binds its slot to whatever follows, and the value the sentence
+        # actually stated is then bound by whichever slot is left.
+        pattern = re.compile(r"(?i)\b" + re.escape(phrase)
+                             + r"(?![A-Za-z0-9_])\s*(?:=|:|\bof\b|\bis\b)?\s*")
         tails.extend(goal[m.end():] for m in pattern.finditer(goal))
     return tails
 
@@ -666,16 +690,58 @@ def _kv_pairs(text: str) -> dict[str, float] | None:
     return out or None
 
 
+def _stated_destination(goal: str, root: pathlib.Path) -> pathlib.Path | None:
+    """The path the sentence says to WRITE to, if it states one.
+
+    A destination is not a source.  Measured: "Blame the lines of the file R/pkg/calc.py in the
+    repository R and write it to R/out/blame.json" bound correctly on the first run and refused
+    `path:2_existing_files_named` on every run after it, because the report the capability wrote
+    was, from the second run on, an existing file the sentence also named.  The same act then
+    answered differently depending on whether its own output already existed.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _cr
+        dest = _cr.extract_content_destination(str(goal or ""))
+    except Exception:  # noqa: BLE001 - an unreadable sentence states no destination
+        return None
+    raw = str(dest or "").strip()
+    if not raw:
+        return None
+    candidate = pathlib.Path(raw)
+    if not candidate.is_absolute():
+        candidate = pathlib.Path(root) / candidate
+    try:
+        return candidate.resolve()
+    except OSError:
+        return None
+
+
+def _excludes_destination(raw: str, destination: pathlib.Path | None, root: pathlib.Path) -> bool:
+    """Is this stated path the sentence's own destination rather than a value it reads?"""
+    if destination is None:
+        return False
+    candidate = pathlib.Path(str(raw))
+    if not candidate.is_absolute():
+        candidate = pathlib.Path(root) / candidate
+    try:
+        return candidate.resolve() == destination
+    except OSError:
+        return False
+
+
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
+    destination = _stated_destination(goal, root)
     if key in _PATH_FILE_KEYS:
-        files = [raw for raw, p in paths if p.is_file()]
+        files = [raw for raw, p in paths if p.is_file()
+                 and not _excludes_destination(raw, destination, root)]
         if len(files) == 1:
             return files[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(files)) + "_existing_files_named")
     if key in _PATH_DIR_KEYS:
-        dirs = [raw for raw, p in paths if p.is_dir()]
+        dirs = [raw for raw, p in paths if p.is_dir()
+                and not _excludes_destination(raw, destination, root)]
         if len(dirs) == 1:
             return dirs[0]
         # A scope key is a scope, not a directory. "Audit the python source root
@@ -838,6 +904,14 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
     if value is None and not quoted_only:
         m = re.match(r"\s*([A-Za-z0-9_.:/-]+)", tail)
         value = m.group(1) if m else None
+        # ... and a connective is not a value either.  Measured while binding the git
+        # surface: "Revert the last commit in the repository <R>" bound `ref` to "in",
+        # because "commit" is one of ref's own aliases and the word after it is the
+        # preposition.  `ref` is then a revision that does not exist and the capability
+        # refuses a sentence that stated nothing wrong; the honest reading is that the
+        # sentence did not state a revision, which is what None means here.
+        if value is not None and value.lower() in gc.STOPWORDS:
+            return None
         # a bare version token names a capability; it is not a value the caller stated
         if value is not None and _VERSION_FRAGMENT.match(value) and key not in _VERSION_KEYS:
             return None
