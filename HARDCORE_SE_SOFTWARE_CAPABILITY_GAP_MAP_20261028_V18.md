@@ -1,8 +1,8 @@
 # The complete problem inventory — hardcore software engineering
 
-**2026-10-28 · V17 · measured on `arena/4ca3a720-brain` at `5b12023` + this unit**
+**2026-10-28 · V18 · measured on `arena/4ca3a720-brain` at `43eaba7` + this unit**
 
-Supersedes `…GAP_MAP_20261028_V16.md`. V14 answered "what are all the problems" with three
+Supersedes `…GAP_MAP_20261028_V17.md`. V14 answered "what are all the problems" with three
 probes. V15 keeps those and adds the four classes that only appear when you ask a different
 question: **is the machine's capability real when the environment is clean, is the evidence it
 cites checkable, can the instrument that measures it finish, and does the number it reports mean
@@ -24,19 +24,19 @@ Everything below is a row from a probe that can be re-run. Nothing is a wish lis
 
 ```
 HARDCORE-SE MISSING-VERB PROBE (43 acts)          with the declared toolchain  |  bare interpreter
-  ANSWERED_BY_OWNING_CAPABILITY      31                                     |   23   <-- see §9
-  HONEST_REFUSAL                     12                                     |   12
+  ANSWERED_BY_OWNING_CAPABILITY      32                                     |   24   <-- see §9
+  HONEST_REFUSAL                     11                                     |   11
   OWNED_BUT_FAILED                    0                                     |    8
   WRONG_TOOL                          0                                     |    0
   SILENT_REFUSAL                      0                                     |    0
-  refusals that NAME the missing act  8/12
+  refusals that NAME the missing act  7/11
 
-WHOLE-SURFACE REACHABILITY (451 entries = 157 registered + 294 receipt projections)
-  REACHED_AND_BOUND                428      NOT_REACHABLE 11
+WHOLE-SURFACE REACHABILITY (452 entries = 158 registered + 294 receipt projections)
+  REACHED_AND_BOUND                429      NOT_REACHABLE 11
   ROUTED_ELSEWHERE                   9      REACHED_BY_EXPLICIT_NAME 3
 
-REGISTRY EVIDENCE (157 entries)                                              see §8
-  a verification block whose pointers exist on disk            115
+REGISTRY EVIDENCE (158 entries)                                              see §8
+  a verification block whose pointers exist on disk            116
   a block that names NO file a reader could check               34
   a block whose pointers name files nobody wrote                 8
 
@@ -45,9 +45,9 @@ PINNED PINS                        16/16 evidence, 8/8 route-identification,
                                    6/6 api-compatibility, 6/6 resource-leak, 9/9 move-function
 ```
 
-Read the first block as a capability statement: **31 of the 43 acts a senior engineer performs on
+Read the first block as a capability statement: **32 of the 43 acts a senior engineer performs on
 any given day are performed by their owning capability, with the promised artifact on disk, and
-12 are refused in words that name the act.** Zero are answered by a tool that had no business
+11 are refused in words that name the act.** Zero are answered by a tool that had no business
 answering them. That last number is what V14 bought, and it is the only one in this table that was
 ever *worse than zero* — a confident wrong answer costs more than a refusal.
 
@@ -57,16 +57,15 @@ here and merely *declared* there. That is a law the door does not yet enforce.
 
 ---
 
-## 2. Class A — eleven acts this machine cannot perform at all
+## 2. Class A — ten acts this machine cannot perform at all
 
-No capability in the 157-entry registry performs these; verified by searching every id, keyword,
+No capability in the 158-entry registry performs these; verified by searching every id, keyword,
 `provides` and effect, not assumed. Each is a missing *tier* of engineering, not a missing
 parameter.
 
 | act | the sentence | what it needs |
 |---|---|---|
 | `ci_config` | "Write a continuous integration workflow" | a workflow emitter + the schemas it must satisfy |
-| `fuzz` | "Fuzz the function `add`" | a generator + a crash oracle; `atheris` is absent, a stdlib random+subprocess harness is not |
 | `memory_profile` | "Measure the memory usage" | `tracemalloc` is stdlib; nothing wraps it |
 | `differential_test` | "Run a differential test against a reference" | two implementations, one input stream, a diff |
 | `crash_repro` | "Reproduce the crash and shrink it" | delta-debugging — a loop over the existing test runner |
@@ -83,10 +82,13 @@ this machine and using any project it is pointed at.
 **Closed in this unit: `inline_function`** (§12) — the inverse of `extract_function`, and the only
 refactor whose failure mode is silently wrong code, which is why it refuses more than it edits.
 
-**Ranked by capability gained per hour of work:** `fuzz` + `differential_test` + `crash_repro`
-(one harness family: generate, run, compare, shrink), then `memory_profile` (one stdlib wrapper),
-then `merge_conflict` + `schema_migration` (both read a state the machine can already read), then
-`docstrings` last.
+**Closed in this unit: `fuzz`** (§14) — the generator, the subprocess isolation, the shrinker and
+the reproducer, over the function the sentence names.
+
+**Ranked by capability gained per hour of work:** `crash_repro` (its hard half — reproduce, then
+shrink — now exists inside `fuzz`), then `differential_test` (the same runner, two coordinates and
+a comparison), then `memory_profile` (one stdlib wrapper), then `merge_conflict` +
+`schema_migration`, then `docstrings` last.
 
 ---
 
@@ -284,6 +286,8 @@ nothing looks green.
 | the fixture's `sub` had no caller in the clean world | the row refused `INLINE_NO_CALL_SITES` — a fact about the fixture | the refactor rows get a working tree (`_DIRTY_WORLD_ACTS`) |
 | evidence probe's world | minted in `/tmp`, so every path-confining verb refused `PATH_ESCAPE` | minted under `canonical/astra_runtime/tmp`, like the missing-verb probe |
 | a refusal inside an adapter | `SystemExit` — it took the caller with it (`CAPABILITY_EXITED_PROCESS`, reason lost) | a normal exception: the door now reports the reason it was given |
+| **this unit** — `dynamic_probe_v1.py` (new) | `fuzz` undeliverable by any of 157 entries | answered through the door, evidenced, pinned (11/11) |
+| the door's binding of "fuzz the function X in <file>" | a directory + a name, no module | the module that DEFINES the name is resolved; two definitions refuse `MODULE_AMBIGUOUS` |
 
 Nothing was promoted. Every receipt written here records `independent_verifier: null` and
 `producer_independent: false`: one identity ran its own work, and that is exactly what the evidence
@@ -326,11 +330,11 @@ METADATA names `demo-pkg 0.1.0`). Registry 154 → 156. Pins 10/10.
 
 The one thing this does **not** do is install what it declares. `environment_fit_v1.satisfy` is
 still the step that puts a declared dependency into the interpreter, and wiring that so the door
-installs instead of refusing is §14 row 5.
+installs instead of refusing is §15 row 5.
 
 ---
 
-## 13. Closed in this unit — `inline_function`
+## 13. Closed in the previous unit — `inline_function`
 
 `python.refactor.inline_function.v1`, the exact inverse of the verb that already shipped. Its
 machinery was free (the span/marker law, the path law, the test referee, the def-lookup); what
@@ -379,7 +383,46 @@ working. That row is evidenced `PASS_BLIND` and says so.
 
 ---
 
-## 14. The plan this implies
+## 14. Closed in this unit — `fuzz`
+
+`python.dynamic.fuzz.v1`. The piece that makes it a capability rather than a loop is **process
+isolation**: every case runs in a child interpreter with a wall-clock cap, so a segfault, a
+`sys.exit`, a `MemoryError` or a hang is an *outcome* (`crashed`, `signaled`, `timeout`) instead
+of the run that was measuring it. The second piece is the shrink: each argument is reduced
+greedily against a pool of strictly smaller candidates, and a reduction is kept only while it
+fails the **same way**.
+
+Measured on a fixture with a planted divide-by-zero and a planted hang:
+
+```
+buggy(a: int, b: int)   -> 16 cases, 2 failures, minimal [0, 0], mode raised, 0.42 s
+hangs(n: int)           ->  3 cases, 1 failure,  minimal [1],    mode timeout, 2.07 s
+safe_div                -> 16 cases, 0 failures                     0.39 s
+```
+
+Two of its laws were written because the first run misbehaved:
+
+| what happened | what it was | the law now |
+|---|---|---|
+| the run never returned, parked inside the child's `communicate()` | the shrink accepted `0` as a reduction of `0` — `candidate == 0` in the filter — so it looped on the case it started with | candidates must be **strictly** smaller, and the loop is bounded |
+| the reproducer said `from pkg.c import buggy` | the module had already been dotted, and the reproducer stripped `.py` a second time | the reproducer takes the dotted module as given |
+
+And one thing the door hid: the sentence says *"fuzz the function add in …/pkg/calc.py"*, but the
+compiler binds a **directory** and a **function name**, not a file. Resolving that by choosing the
+module that *defines* the name is a fact about the tree — so it is done, and when two files define
+it the verb refuses `MODULE_AMBIGUOUS` with their names instead of guessing.
+
+```
+fuzz   ANSWERED_BY_OWNING_CAPABILITY  python.dynamic.fuzz.v1   PASS   (through solve())
+```
+
+Registry 157 → 158, pins 11/11, evidenced (`EXECUTED`, reproduced, planted defect found:
+`minimal_case == [0, 0]`, `failure_mode == raised`). Reachability 428 → 429 of 452 — this one *is*
+reachable from a synthesised keyword sentence, which is why the number moved.
+
+---
+
+## 15. The plan this implies
 
 | # | work | class | why now |
 |---|---|---|---|
@@ -387,7 +430,7 @@ working. That row is evidenced `PASS_BLIND` and says so.
 | 2 | the routability **law** (one row → one rule) | D | 22 rows, two failing tests and the `r9` rate are the same defect seen three ways |
 | 3 | install-or-refuse at the door | H | the toolchain is declared; nothing enforces it, so 8 capabilities vanish silently on a clean interpreter |
 | 4 | three stale guard-code assertions | F | the guard improved and the test did not; 3 of 25 red rows for free |
-| 5 | `fuzz` + `differential_test` + `crash_repro` | A | one harness family: generate, run, compare, shrink |
+| 5 | `crash_repro` + `differential_test` | A | the runner, the shrinker and the reproducer now exist inside `fuzz`; these add a stated case and a second coordinate |
 | 6 | the four compiler defect families (DAG result, DID NOT RAISE, quoted literal, door parity) | F | each is a law with more than one failing row behind it |
 | 7 | 34 evidence blocks that name no file | G | each needs the lane that measured it to write one line |
 | 8 | `docstrings` | A | last on purpose: the only act here that needs judgement, and no model may supply it |
