@@ -8191,6 +8191,95 @@
     "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001__shell.command.run__AUTO_VERIFY.json"
    }
   },
+  "software.diagnose_then_repair.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "software.diagnose_then_repair.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "test_paths": "${input.test_paths}"
+    },
+    "expect": {
+     "field": "verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "software_diagnose_then_repair_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "diagnose",
+    "repair",
+    "fix",
+    "failing test",
+    "traceback",
+    "reproduce",
+    "localize",
+    "root cause",
+    "patch",
+    "full suite",
+    "verify",
+    "debug",
+    "regression",
+    "software",
+    "pytest"
+   ],
+   "limitations": [
+    "repair search space is the test-guided AST mutation table (operator/compare/bool swaps, constant replacement, early returns); a bug outside it ends as OPEN:NO_VERIFIED_CANDIDATE:<n>, never as an invented patch.",
+    "verified means: the named failing tests pass on the patched scratch copy, replayed twice, and the full pytest suite of the real tree passes with the diff applied by python.repo.diff_apply_full_testgate.v1; it does not mean the patch is semantically right beyond what the suite checks.",
+    "reproduction runs confined (confine_v1) when the host allows user namespaces; confine=required refuses otherwise; patch search and the full gate run as ordinary subprocesses.",
+    "the verdict is pytest's summary line, never the exit code: a harness that crashes before any test runs is REPRODUCE_HARNESS_ERROR:rc=<n>, not a failing test to repair.",
+    "Python/pytest only; one target file per run (caller source_path, else localizer and traceback agreement, else localizer top, else traceback top, else NO_LOCALIZED_SOURCE).",
+    "deadline_s (default 600) is end to end; the user's source tree is copied once and never written."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "software.diagnose_then_repair",
+    "python.failing_test.to_verified_patch"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "confined",
+    "diff_path",
+    "diff_sha256",
+    "gate",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "seconds",
+    "status",
+    "steps",
+    "target_path",
+    "tests_discovered",
+    "tests_failed",
+    "verified"
+   ],
+   "source": {
+    "module": "pytest",
+    "type": "python_package",
+    "version_family": ">=7"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
+    "observed_effect": {
+     "golden": "off-by-one in pkg/calc.py named by tests/test_calc.py: confined reproduce 0.29 s -> localizer names pkg/calc.py -> 4 candidates -> CONSTANT_REPLACE 1->0 -> full-suite gate PASS (2 test files), 3.3 s end to end, diff byte-identical on rerun, source tree untouched",
+     "harness": "raising conftest: REPRODUCE_HARNESS_ERROR:rc=4 -- the measured reason the verdict is parsed from the summary line, not the exit code",
+     "open": "w + h bug (Add->Mult outside the mutation table): OPEN:NO_VERIFIED_CANDIDATE:11, no diff written",
+     "sabotage": "a second test pinning the buggy behaviour: PATCH_FAILS_FULL_SUITE:FAIL with tests_failed 1, verified false",
+     "wired_from": "python.fault.localize.dynamic.dataflow.v1 + python.patch.search.test_guided.ast.v1 + python.repo.diff_apply_full_testgate.v1 + confine_v1; no new engine"
+    },
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIAGNOSE-REPAIR-001__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIAGNOSE-REPAIR-001.json"
+   }
+  },
   "software.evidence.synthesis.supercomposer.v1": {
    "action_template": {
     "args": {

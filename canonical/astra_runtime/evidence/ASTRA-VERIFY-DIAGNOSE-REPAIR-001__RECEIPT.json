@@ -1,0 +1,69 @@
+{
+  "receipt_for": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
+  "capability_id": "software.diagnose_then_repair.v1",
+  "adapter_module": "software_diagnose_then_repair_v1",
+  "fixture": "proj/pkg/calc.py `return w * h - 1` (off by one), proj/tests/test_calc.py names the failure, proj/tests/test_other.py is the rest of the suite",
+  "observed": {
+    "golden": {
+      "status": "VERIFIED_PATCH",
+      "verified": true,
+      "confined": true,
+      "target_path": "pkg/calc.py",
+      "target_basis": "LOCALIZER_TOP",
+      "tested_candidate_count": 4,
+      "winning_mutation": "CONSTANT_REPLACE 1->0",
+      "gate": "PASS",
+      "tests_discovered": 2,
+      "tests_failed": 0,
+      "diff_sha256": "73fa015d603e48afb927925429cee9c7b51ae27524641e0884551568596bc7e7",
+      "steps": [
+        {
+          "step": "reproduce",
+          "seconds": 0.466
+        },
+        {
+          "step": "localize",
+          "seconds": 0.139
+        },
+        {
+          "step": "patch_search",
+          "seconds": 2.359
+        },
+        {
+          "step": "full_suite_gate",
+          "seconds": 0.362
+        }
+      ],
+      "anchor_unchanged": true
+    },
+    "e2e_ms": [
+      3330.2,
+      3317.9
+    ],
+    "determinism": "diff byte-identical on rerun (yes), source tree hash unchanged both runs",
+    "open": {
+      "status": "OPEN:NO_VERIFIED_CANDIDATE:11",
+      "note": "Add->Mult is outside the search's mutation table; the loop says OPEN with the candidate count instead of inventing a patch",
+      "e2e_ms": 4618.1
+    },
+    "sabotage_full_suite": {
+      "status": "PATCH_FAILS_FULL_SUITE:FAIL",
+      "tests_failed": 1,
+      "note": "the stated test is repaired but another test in the tree breaks: full-suite gate FAIL, verified false, no patch shipped",
+      "e2e_ms": 3275.6
+    },
+    "nothing_to_repair": {
+      "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
+      "e2e_ms": 426.9
+    },
+    "harness_crash": {
+      "status": "REPRODUCE_HARNESS_ERROR:rc=4",
+      "note": "conftest raising -> pytest rc 4 without a summary line; the verdict is the summary line, never the exit code, so this is a named refusal rather than a 'failing test' to repair",
+      "e2e_ms": 347.7
+    },
+    "confinement": {
+      "reproduce_confined": true,
+      "note": "reproduction runs under confine_v1 (user namespace + chroot, /project only writable, no network); measured: without /dev/null bound into the chroot pytest dies at startup with rc 1 / INTERNALERROR rc 3, which the exit code alone cannot tell from a failing test"
+    }
+  }
+}

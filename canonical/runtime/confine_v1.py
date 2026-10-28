@@ -46,6 +46,7 @@ What is actually visible inside, measured rather than assumed:
 
     /home /etc /tmp /var /root /opt /srv /proc   all INVISIBLE
     /usr /bin /lib /lib64                        read-only
+    /dev/null /dev/urandom                       the only device nodes
     /project                                     the only writable place
 
 So reads are confined too, not only writes. An earlier note claimed a
@@ -113,6 +114,19 @@ for s in __RO_BINDS__:
     subprocess.run(["mount", "-o", "remount,ro,bind", BASE + s],
                    capture_output=True)
 m("--bind", PROJ, BASE + "/project")
+# /dev/null and /dev/urandom, nothing else from /dev. Measured without them:
+# pytest dies at startup (capture and logging both open os.devnull) with rc 1
+# or INTERNALERROR rc 3 -- indistinguishable from a failing test by exit code.
+# Bound from the host's node, not created here: a node created on a tmpfs
+# mounted inside a user namespace is nodev and unusable.
+os.makedirs(BASE + "/dev", exist_ok=True)
+for dev in ("/dev/null", "/dev/urandom"):
+    if os.path.exists(dev):
+        try:
+            open(BASE + dev, "w").close()
+        except OSError:
+            continue
+        m("--bind", dev, BASE + dev)
 # A network namespace is not enough on its own. With no /etc in the
 # chroot there is no resolv.conf, so every name fails to resolve and a
 # program with perfectly good connectivity reports it has none --

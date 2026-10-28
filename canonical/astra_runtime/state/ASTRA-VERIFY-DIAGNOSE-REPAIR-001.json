@@ -1,0 +1,18 @@
+{
+  "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
+  "status": "COMPLETE",
+  "e2e_ms_run1": 3330.2,
+  "e2e_ms_run2": 3317.9,
+  "golden": {
+    "status": "VERIFIED_PATCH",
+    "gate": "PASS",
+    "tests": 2,
+    "candidates": 4,
+    "confined": true
+  },
+  "open": "OPEN:NO_VERIFIED_CANDIDATE:11",
+  "sabotage_full_suite": "PATCH_FAILS_FULL_SUITE:FAIL",
+  "nothing_to_repair": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
+  "harness_crash": "REPRODUCE_HARNESS_ERROR:rc=4",
+  "determinism": "diff byte-identical on rerun"
+}
