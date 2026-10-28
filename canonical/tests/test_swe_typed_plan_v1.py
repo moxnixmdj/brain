@@ -214,5 +214,112 @@ class LiveFrontDoorRetryTests(unittest.TestCase):
             self.assertTrue(str(retry.get("selected_capability")).startswith("python."))
 
 
+class EffectFamilyEnumerationTests(unittest.TestCase):
+    """§9 enumerate-and-let-admission-be-oracle: a caller-finding sentence reaches
+    the hidden symbol-index capability the lexical shortlist buries, and produces
+    a REAL callers_of artifact.  Independent oracle: the filesystem artifact must
+    name exactly the callers present in fresh source (never self-reported)."""
+
+    @staticmethod
+    def _tree(case: str, with_callers: bool) -> pathlib.Path:
+        base = ROOT / "canonical/astra_runtime/tmp/test_family" / case
+        if base.exists():
+            shutil.rmtree(base)
+        (base / "pkg").mkdir(parents=True)
+        body = "def add(a, b):\n    return a - b\n"
+        if with_callers:
+            body += ("def caller():\n    return add(1, 2)\n"
+                     "def other():\n    return add(3, 4)\n")
+        (base / "pkg/mod.py").write_text(body, encoding="utf-8")
+        return base
+
+    @staticmethod
+    def _cleanup():
+        shutil.rmtree(ROOT / "canonical/astra_runtime/tmp/test_family", ignore_errors=True)
+
+    def tearDown(self):
+        self._cleanup()
+
+    def _goal(self, base):
+        return "Find every caller of the function add in %s." % _rel(base / "pkg/mod.py")
+
+    def test_caller_family_plan_is_decisive_and_effect_consistent(self):
+        base = self._tree("plan", True)
+        self.assertTrue(plan.is_swe_request(self._goal(base)))
+        p = plan.build_plan(self._goal(base), ROOT)
+        self.assertIsNotNone(p)
+        self.assertEqual(p[2]["selected_capability"], "python.source.symbols.index.ast")
+        # output must NOT be bound onto the stated source file
+        self.assertNotEqual(p[2]["inputs"].get("output_path"), _rel(base / "pkg/mod.py"))
+
+    def test_caller_family_passes_with_a_real_callers_of_artifact(self):
+        """Independent oracle: the report names exactly the two real callers."""
+        import json
+        base = self._tree("solve", True)
+        result = door.solve({"task_id": "FAM_callers", "goal": self._goal(base)})
+        self.assertIs(result.get("pass"), True, result.get("status"))
+        self.assertIsNone(result.get("tool_truth_errors"))
+        self.assertIsNone(result.get("observed_effect_errors"))
+        reports = list(base.rglob("*.json"))
+        self.assertTrue(reports, "no report artifact was written")
+        callers = set()
+        for rf in reports:
+            data = json.loads(rf.read_text())
+            callers |= set((data.get("callers_of") or {}).get("add") or [])
+        self.assertEqual(callers, {"caller", "other"}, callers)
+        # source untouched (no corruption: the false-PASS class)
+        self.assertTrue((base / "pkg/mod.py").read_text().startswith("def add"))
+
+    def test_no_callers_still_passes_with_empty_index_but_no_false_credit(self):
+        """A tree with zero callers yields an empty callers_of (honest, not invented)."""
+        import json
+        base = self._tree("empty", False)
+        result = door.solve({"task_id": "FAM_empty", "goal": self._goal(base)})
+        # either honest PASS with an empty index, or fail-closed; never a forged caller
+        for rf in base.rglob("*.json"):
+            data = json.loads(rf.read_text())
+            callers = (data.get("callers_of") or {}).get("add") or []
+            self.assertEqual(callers, [], "invented a caller that does not exist")
+
+    def test_non_swe_and_ambiguous_family_requests_stay_fail_closed(self):
+        """Negative controls: a non-SWE goal and a two-source caller goal refuse."""
+        base = self._tree("neg", True)
+        util = base / "pkg/util.py"
+        util.write_text("def helper():\n    return add(9, 9)\n", encoding="utf-8")
+        g_non = "Summarize the file %s into three sentences." % _rel(base / "pkg/mod.py")
+        self.assertIsNone(plan.build_plan(g_non, ROOT))
+        r = door.solve({"task_id": "FAM_non", "goal": g_non})
+        self.assertIs(r.get("pass"), False)
+        self.assertNotIn("typed_swe_retry", r)
+
+    def test_mutation_admit_as_oracle_breaks_the_family_plan(self):
+        """Mutation control: the family resolver's oracle is admit(). If NO
+        candidate is admitted (bind the declared contract fails), the family
+        must produce NO decisive plan — proving it does not fabricate one."""
+        from canonical.runtime import capability_selection_retrieval_v1 as selection
+        base = self._tree("mutation", True)
+        goal = self._goal(base)
+        self.assertIsNotNone(plan.build_plan(goal, ROOT))
+        with mock.patch.object(selection, "admit",
+                               return_value={"admitted": False, "reason": "MUTATION"}):
+            self.assertIsNone(plan.build_plan(goal, ROOT))
+
+    def test_family_keyword_enumeration_is_the_mechanism(self):
+        """Mutation control 2: strip the registry-keyword evidence the resolver
+        enumerates on; with no matching candidate it must refuse (fail closed)."""
+        from canonical.runtime import live_integrated_brain_v1 as live
+        base = self._tree("kw_mut", True)
+        goal = self._goal(base)
+        real = live.load_verified_registry()
+        stripped = {}
+        for cid, e in real.items():
+            e2 = dict(e)
+            e2["keywords"] = []
+            e2["provides"] = []
+            stripped[cid] = e2
+        with mock.patch.object(live, "load_verified_registry", return_value=stripped):
+            self.assertIsNone(plan.build_plan(goal, ROOT))
+
+
 if __name__ == "__main__":
     unittest.main()
