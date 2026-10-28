@@ -69,6 +69,7 @@ SLOT_KIND: dict[str, str] = {
     # --- one existing file the machine reads --------------------------------
     "target_path": KIND_FILE,
     "module": KIND_FILE,
+    "target_module": KIND_FILE,
     "diff_path": KIND_FILE,
     "index_path": KIND_FILE,
     "manifest": KIND_FILE,
@@ -146,6 +147,13 @@ ROLE_ALIASES: dict[str, tuple[str, ...]] = {
     "target_path": ("python module", "module", "source file", "source", "file",
                     "target", "script", "program"),
     "module": ("python module", "module", "source file", "module file", "file"),
+    # "into a new module pkg/ops.py", "the target module X".  A move states TWO files and
+    # they are told apart by preposition, not by kind: the one after "from" is where the
+    # symbol lives now, the one after "into" is where it should live.  Measured before this
+    # row existed: the sentence reached python.refactor.move_function.v1 correctly and then
+    # failed GOAL_STATED_ACT_INPUTS_UNBOUND:target_module:not_stated.
+    "target_module": ("new module", "target module", "into a new module",
+                      "destination module", "into the module", "new file"),
     "diff_path": ("diff", "diff file", "patch", "patch file", "unified diff",
                   "changes", "change set", "the changes in"),
     "index_path": ("index", "symbol index", "index file"),

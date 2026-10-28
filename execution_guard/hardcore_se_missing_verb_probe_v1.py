@@ -138,7 +138,11 @@ ACTS = [
     ("retry_design", "Make the network calls in {R}/pkg/calc.py retry safely and report it to {O}."),
     ("observability", "Add logging and metrics to {R}/pkg/calc.py and report it to {O}."),
     # ---- refactoring beyond rename/extract ------------------------------------
-    ("move_function", "Move the function add from {R}/pkg/calc.py into a new module {R}/pkg/ops.py and report it to {O}."),
+    # The verification clause is part of the act: this verb, like every refactor verb here,
+    # refuses to call an edit verified without a suite, and a sentence that names none gets
+    # PASS_BLIND -- correct, and not what the registry's expectation asks for.  Stating the
+    # suite is what a working engineer does anyway.
+    ("move_function", "Move the function add from {R}/pkg/calc.py into a new module {R}/pkg/ops.py, run the tests {R}/pkg/test_calc.py and report it to {O}."),
     ("inline_function", "Inline the function sub in {R}/pkg/calc.py and report it to {O}."),
     ("change_signature", "Change the signature of the function add in {R}/pkg/calc.py using the edits {R}/sig.json and report it to {O}."),
     # ---- documentation and compatibility -------------------------------------

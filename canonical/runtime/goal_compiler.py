@@ -197,6 +197,12 @@ _REPO_PATHS_CACHE: dict[tuple[str, str], list] = {}
 _REPO_PATHS_CACHE_MAX = 1024
 
 
+# File roles whose value is a DESTINATION, not a source: they may legitimately name a path
+# that does not exist yet.  Kept to an explicit allowlist so every other file role keeps
+# failing closed on a missing file.
+_CREATABLE_FILE_SLOTS = frozenset({"target_module"})
+
+
 def _repo_paths(goal, root):
     key=(str(goal or ""), str(root or ""))
     hit=_REPO_PATHS_CACHE.get(key)
@@ -375,7 +381,11 @@ def _path_named_by_role(goal, stem, root):
 # A verb, up to four words of object ("write the report", "save the final audit"),
 # then "to".  A fixed phrase list only ever matched the exact wording it was
 # written against: "write to" matched, "write the report to" did not.
-_OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit)\b(?:\s+[A-Za-z0-9_.\-']+){0,4}\s+to\b"
+# "report it to X" IS AN OUTPUT ROLE.  Every software-engineering sentence in this
+# repository's own probes ends that way, and the verb table did not contain it, so a
+# sentence with one future path bound by luck (non-existence) and a sentence with two --
+# a destination module AND a report -- bound neither.
+_OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit|report|log|dump|persist)\b(?:\s+[A-Za-z0-9_.\-']+){0,4}\s+(?:to|into|in)\b"
 
 
 # Clauses are separated by a comma, a semicolon, or a coordinating word.  A
@@ -979,6 +989,17 @@ def _bind_by_role_kind(goal,key,root,bound,extra=None,paths=None):
             pool=inside or existing
             stated=[raw for raw in pool if _introduced(text,raw,phrases,root)]
             return stated if stated else _UNBOUND
+        # A DESTINATION MAY NOT EXIST YET.  Every other file role names something the
+        # machine READS, so a missing file cannot be that role.  `target_module` names where
+        # the thing should GO, and "into a new module pkg/ops.py" is a statement about a
+        # file that by definition does not exist when the sentence is written.  Bound only
+        # when the sentence introduces it with the slot's own destination phrase, only
+        # inside the repository, and only when exactly one such path is stated.
+        if str(key) in _CREATABLE_FILE_SLOTS:
+            future=[raw for raw,p in _repo_paths(goal,root)
+                    if rr in p.parents and not p.exists()
+                    and _introduced(text,raw,phrases,root)]
+            return future[0] if len(future)==1 else _UNBOUND
         # A file role is bound only by the role the sentence actually states.
         # Binding "the only existing file" to a slot whose noun the sentence never
         # used is invention: measured, "Apply the jq filter ... to <a>.json ...
@@ -1218,6 +1239,29 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if argv is not None:
                 result[key]=argv
                 continue
+        if key == "target_module":
+            # A DESTINATION THAT DOES NOT EXIST YET IS STILL STATED.  Every other file role
+            # names what the machine reads, so a missing file cannot be that role; a move
+            # names where the symbol should GO, and "into a new module pkg/ops.py" is a
+            # statement about a file that by definition does not exist when it is written.
+            # Bound only from the slot's own destination phrases, only for a stated path
+            # inside the repository, only when exactly one is left after the paths already
+            # claimed by other keys are removed -- and preferring the one that does not
+            # exist, because a target that already exists is a different request.
+            claimed=_claimed_paths(result)
+            phrases=_role_lexicon().phrases_for(key)
+            future=[(raw,pth) for raw,pth in paths if raw not in claimed
+                    and pth.suffix==".py" and _introduced(goal,raw,phrases,root)]
+            fresh=[raw for raw,pth in future if not pth.exists()]
+            if len(fresh)==1:
+                result[key]=fresh[0]
+                continue
+            if not fresh and len(future)==1:
+                result[key]=future[0][0]
+                continue
+            if not future:
+                raise GoalCompilationFailure("GOAL_STATED_ACT_INPUTS_UNBOUND",key+":not_stated")
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key+":"+str(len(future))+"_paths_named")
         if key.endswith("_root") or key.endswith("_dir"):
             # A *_root key names a DIRECTORY, and the binder only ever handled
             # *_path.  Every capability whose input is source_root therefore
@@ -1340,9 +1384,18 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     # is the only causally admissible output. Do not require its
                     # filename to contain the word "output" or pre-enumerate its
                     # extension.
+                    # A PATH ALREADY GIVEN ANOTHER ROLE IS NOT THE OUTPUT.  "Move the
+                    # function add from A into a new module B, run the tests T and report
+                    # it to R" names TWO paths that do not exist yet -- the destination
+                    # module and the report -- and counting both here left the output
+                    # unbound, so the capability ran correctly and was then failed for a
+                    # promised artifact it had never been given.  `_claimed_paths` is the
+                    # existing answer to "which paths are already spoken for".
+                    claimed=_claimed_paths(result)
                     future_artifacts=[
                         raw for raw,p in paths
                         if pathlib.Path(raw).suffix and not p.exists()
+                        and raw not in claimed
                     ]
                     if len(future_artifacts)==1:
                         result[key]=future_artifacts[0]

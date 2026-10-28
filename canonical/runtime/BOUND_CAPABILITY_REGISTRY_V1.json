@@ -5481,6 +5481,101 @@
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REFACTOR-001.json"
    }
   },
+  "python.refactor.move_function.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.move_function.v1",
+     "module": "${input.module}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "target_module": "${input.target_module}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_refactor_move_function",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "refactor",
+    "move",
+    "move function",
+    "relocate",
+    "move to module",
+    "new module",
+    "module",
+    "function",
+    "ast",
+    "import rewrite",
+    "cross-file",
+    "codemod",
+    "semantic edit"
+   ],
+   "limitations": [
+    "moves module-scope functions only; methods, nested functions and module bindings refuse SYMBOL_KIND_UNSUPPORTED.",
+    "an `import pkg.mod as alias` site is rewritten only when that alias is used for the moved name and nothing else; otherwise the whole edit refuses UNSUPPORTED_SHARED_MODULE_IMPORT and lists the sites -- a half-rewritten import is worse than a refusal.",
+    "every file that loads the name must hold a provable import of it, or the edit refuses UNPROVABLE_REFERENCE rather than leaving a NameError behind.",
+    "comments immediately above the def are not moved: they are not provably the symbol's.",
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.move_function"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "module",
+    "qualname",
+    "symbol_kind",
+    "moved_to",
+    "moved_line_count",
+    "edit_count",
+    "files_edited",
+    "injected_imports",
+    "unresolved_sites",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified"
+   ],
+   "source": {
+    "module": "python stdlib ast",
+    "type": "runtime",
+    "version_family": ">=3.8"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-MOVEFN-001",
+    "observed_effect": {
+     "golden": "pkg/calc.py add -> pkg/ops.py across three importers: def bytes moved with its decorator and docstring, `from pkg.calc import add, sub` SPLIT into `from pkg.ops import add` + `from pkg.calc import sub`, `import pkg.calc as calc` swapped to `import pkg.ops as calc` because the alias was used for add alone, and a source module that still calls the name re-imported it; 4 files edited, named pytest suite green, gate PASS",
+     "split_law": "measured on the first build: rewriting the module token of a multi-name import sent `sub` to a module that does not define it, and only the named suite noticed -- the split is now the only behaviour",
+     "seam": "blank lines are normalised only where the def was removed; every other byte of every edited file is preserved",
+     "rollback": "a red named suite restores every original byte and refuses TESTS_RED_AFTER_EDIT",
+     "determinism": "identical worlds produce byte-identical trees and artifacts"
+    },
+    "pin_green": "9/9 move-function pins green",
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MOVEFN-001__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MOVEFN-001.json"
+   }
+  },
   "python.refactor.rename_symbol.v1": {
    "action_template": {
     "args": {
