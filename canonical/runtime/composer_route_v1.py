@@ -481,7 +481,17 @@ def extract_paths(text: str) -> list[str]:
     matches = list(_EXT.finditer(body))
     base = len(found)
     for match in matches:
-        found.append(match.group(0))
+        candidate = match.group(0)
+        # An ABSOLUTE path keeps its separator.  The pattern cannot match a leading "/", so
+        # "/home/u/x.json" was read as "home/u/x.json" -- and every layer that then joins a
+        # path onto the repository root wrote a mirror of the absolute path INSIDE the
+        # repository: measured while binding the analyser capabilities, a report stated at
+        # /home/user/brain/tmp/tc/fmt.json was written to
+        # /home/user/brain/home/user/brain/tmp/tc/fmt.json.  The path the sentence states is
+        # the path that is used, or the request is refused.
+        if match.start() > 0 and body[match.start() - 1] == "/":
+            candidate = "/" + candidate
+        found.append(candidate)
     seen.update(found)
     # A name with spaces that no word introduces -- "sort <dir>/my notes.txt".
     # Taking any run of words would invent paths out of prose, so the candidate

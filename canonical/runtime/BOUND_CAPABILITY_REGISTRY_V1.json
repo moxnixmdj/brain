@@ -10000,7 +10000,382 @@
     "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
    }
   },
-  "vcs.git.branch_create.v1": {
+    "python.toolchain.ruff_lint.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.toolchain.ruff_lint.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}",
+        "select": "E,F,W,I,B,UP,SIM,C4,RUF",
+        "tool_verb": "lint"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "lint",
+      "linter",
+      "ruff",
+      "style",
+      "pep8",
+      "flake",
+      "static check",
+      "warnings"
+    ],
+    "limitations": [
+      "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+      "Static analysis only: it reads the source it is pointed at and nothing else."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+   "source_root": {
+    "type": "path_file_or_dir"
+   }
+  },
+  "provides": [
+      "python.source.lint.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "issue_count",
+      "issues",
+      "issue_codes",
+      "clean"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "tool": "ruff",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.toolchain.ruff_format.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.toolchain.ruff_format.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}",
+        "tool_verb": "format"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "format",
+      "formatter",
+      "reformat",
+      "formatting",
+      "ruff format",
+      "style fix"
+    ],
+    "limitations": [
+      "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+      "Static analysis only: it reads the source it is pointed at and nothing else."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+   "source_root": {
+    "type": "path_file_or_dir"
+   }
+  },
+  "provides": [
+      "python.source.format.applied"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "check_only",
+      "changed_files",
+      "changed_count",
+      "reformatted"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "tool": "ruff",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.toolchain.mypy_typecheck.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.toolchain.mypy_typecheck.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}",
+        "tool_verb": "type_check"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "type check",
+      "typecheck",
+      "mypy",
+      "types",
+      "type error",
+      "annotations",
+      "static types",
+      "type hints"
+    ],
+    "limitations": [
+      "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+      "Static analysis only: it reads the source it is pointed at and nothing else."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+   "source_root": {
+    "type": "path_file_or_dir"
+   }
+  },
+  "provides": [
+      "python.source.types.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "error_count",
+      "errors",
+      "clean"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "tool": "mypy",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.toolchain.ruff_complexity.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.toolchain.ruff_complexity.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}",
+        "select": "C901",
+        "threshold": 10,
+        "tool_verb": "complexity"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "complexity",
+      "cyclomatic",
+      "mccabe",
+      "branching",
+      "hard to read",
+      "c901"
+    ],
+    "limitations": [
+      "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+      "Static analysis only: it reads the source it is pointed at and nothing else."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+   "source_root": {
+    "type": "path_file_or_dir"
+   }
+  },
+  "provides": [
+      "python.source.complexity.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "threshold",
+      "functions",
+      "max_complexity",
+      "over_threshold_count"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "tool": "ruff",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.toolchain.ruff_dead_code.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.toolchain.ruff_dead_code.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}",
+        "select": "F401,F811,F841",
+        "tool_verb": "dead_code"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "dead code",
+      "unused",
+      "unreachable",
+      "unused import",
+      "unused variable",
+      "never used",
+      "orphan"
+    ],
+    "limitations": [
+      "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+      "Static analysis only: it reads the source it is pointed at and nothing else."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+   "source_root": {
+    "type": "path_file_or_dir"
+   }
+  },
+  "provides": [
+      "python.source.dead_code.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "unused_count",
+      "unused",
+      "clean"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "tool": "ruff",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.toolchain.bandit_security.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "python.toolchain.bandit_security.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}",
+        "tool_verb": "security"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "security",
+      "vulnerability",
+      "vulnerabilities",
+      "bandit",
+      "insecure",
+      "unsafe call",
+      "cwe",
+      "exploit",
+      "security audit",
+   "security vulnerabilities",
+   "for vulnerabilities",
+   "known vulnerabilities",
+   "leaked secrets",
+   "supply chain"
+    ],
+    "limitations": [
+      "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+      "Static analysis only: it reads the source it is pointed at and nothing else."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+   "source_root": {
+    "type": "path_file_or_dir"
+   }
+  },
+  "provides": [
+      "python.source.security.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "issue_count",
+      "issues",
+      "severity_counts",
+      "clean"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "tool": "bandit",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+"vcs.git.branch_create.v1": {
    "action_template": {
     "args": {
      "branch_name": "${input.branch_name}",
