@@ -6,6 +6,13 @@ in the semantic index, and walk its static call and import graphs. This is an
 advisory impact slice, not a proof that omitted tests are unaffected: dynamic
 imports, reflection, non-Python dependencies, and other runtime effects can be
 missed. Do not use it alone as a green test gate.
+
+With ``dependency_map_path`` (a PROJECT_BRAIN_TEST_DEPENDENCY_MAP_V1 written by
+``canonical.runtime.test_dependency_trace_v1`` -- per-test-file call-event
+traces, the Ekstazi/testmon idea) the selection becomes the UNION of the
+static closure and the recorded dynamic dependencies; a test with no trace,
+an incomplete trace, or a trace older than the test file is selected, never
+assumed unaffected.
 """
 from __future__ import annotations
 
@@ -282,6 +289,11 @@ def run(args, root):
                 row["reason"] = "EXPLICIT_PATH_LIST__MODULE_WIDE"
     affected, _reached = _affected_modules(index, set(py_changed), changed_symbols)
 
+    dependency_map = None
+    if args.get("dependency_map_path"):
+        from canonical.runtime import test_dependency_trace_v1 as _trace
+        dependency_map = _trace.load_map(repo, str(args["dependency_map_path"]))
+
     test_roots = args.get("test_roots") or ["tests", "canonical/tests"]
     test_rows = []
     seen = set()
@@ -302,11 +314,20 @@ def run(args, root):
             # The closure already chased import edges (name-scoped) and call
             # edges through the whole indexed tree, including test modules.
             reason = "MODULE_IN_AFFECTED_CLOSURE"
-        test_rows.append({
+        dynamic_reason = None
+        if dependency_map is not None:
+            from canonical.runtime import test_dependency_trace_v1 as _trace
+            picked, dynamic_reason = _trace.decide(repo, dependency_map, rel, set(changed))
+            if picked and reason is None:
+                reason = dynamic_reason
+        row = {
             "path": rel,
             "selected": reason is not None,
             "reason": reason or "UNAFFECTED",
-        })
+        }
+        if dynamic_reason is not None:
+            row["dynamic"] = dynamic_reason
+        test_rows.append(row)
 
     selected = sorted(r["path"] for r in test_rows if r["selected"])
     unknown = sorted(
@@ -324,7 +345,10 @@ def run(args, root):
         raise RuntimeError("CHANGED_PYTHON_MODULE_NOT_INDEXED:" + ",".join(unknown))
     report = {
         "schema": "PROJECT_BRAIN_CHANGE_IMPACT_TEST_SELECTION_V1",
-        "selection_guarantee": "STATIC_HEURISTIC_NOT_A_COMPLETE_TEST_GATE",
+        "selection_guarantee": (
+            "STATIC_CLOSURE_UNION_TRACED_CALL_SET__UNTRACED_TESTS_SELECTED"
+            if dependency_map is not None else "STATIC_HEURISTIC_NOT_A_COMPLETE_TEST_GATE"),
+        "dependency_map_path": str(args.get("dependency_map_path") or "") or None,
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
         "changed_source": changed_source,
         "changed_files": sorted(changed),
