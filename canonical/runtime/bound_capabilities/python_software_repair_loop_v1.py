@@ -165,5 +165,11 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     result["output_path"]=str(output.relative_to(repo)).replace("\\","/")
-    result["output_sha256"]=_sha(output.read_bytes()); result["output_verified"]=True
+    result["output_sha256"]=_sha(output.read_bytes())
+    # "verified" must mean the WORK was verified, not that the JSON was written.  Measured
+    # 2026-10-28: a non-expressible bug (swapped call arguments) made this adapter return
+    # status OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP with edits_applied 0 while still
+    # reporting output_verified True -- so the door credited a repair that never happened,
+    # three runs out of three.  The adapter already computes the verdict; it was not used.
+    result["output_verified"]=bool(result.get("pass"))
     return result

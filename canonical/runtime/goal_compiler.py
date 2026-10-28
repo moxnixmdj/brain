@@ -98,7 +98,40 @@ GENERIC_MATCH_TOKENS={
     "terminal","kstar","opus","falsify","tournament","adequacy","discriminator",
     "counterexample","residual","ownership","universal","proof","policy","basis",
     "scope","complete","capability","reuse","cover","composition","transform",
-    "generator","context","semantic","evidence"
+    "generator","context","semantic","evidence",
+    # QUANTITY is not identity.  A numeral says HOW MANY of something the
+    # sentence wants; it never says WHICH capability is being asked for.  It
+    # was nevertheless doing exactly that, because `_tokens` drops single
+    # digits (len >= 2) but keeps them spelled out.  Measured on ce92836:
+    # "Show the last three git commits." shared exactly one token with
+    # `cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1`
+    # -- the word "three" -- the lexical margin came out DECISIVE against
+    # `python.repo.diff_apply_full_testgate.v1`, the candidate was admitted
+    # through `request_names_capability`, ran, exited 0, and the door returned
+    # PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED with
+    # semantic_acceptance_complete: true and 1/1 obligations accepted for a
+    # request about git history that the capability does not touch.  That is a
+    # false credit, not a ranking nuisance: the same defect answers
+    # "Compute the first ten terms" with whatever capability happens to have a
+    # numeral in its name.
+    #
+    # Measured before adding these (419-entry live registry): 8 numerals are in
+    # use across capability ids, keywords and `provides` (zero 11, one 3, two 3,
+    # five 3, four 1, seven 1, second 1, three 1); 0 of 419 capabilities lose
+    # their last distinctive token, and 0 are named ONLY by a numeral -- so
+    # none becomes unmatchable, and a capability that is genuinely about two
+    # regions still matches through "region"/"complement".  The control that
+    # proves the route survived is in
+    # canonical/tests/test_a_quantity_word_is_not_a_name_v1.py: the same
+    # capability is still selected when the sentence names it.
+    "zero","one","two","three","four","five","six","seven","eight","nine","ten",
+    "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen",
+    "eighteen","nineteen","twenty","thirty","forty","fifty","sixty","seventy",
+    "eighty","ninety","hundred","thousand","million",
+    # Ordinals and frequency words: they order or count a set the sentence has
+    # already described, and they are the same defect class.
+    "first","second","third","fourth","fifth","sixth","seventh","eighth","ninth",
+    "tenth","once","twice","thrice"
 }
 
 

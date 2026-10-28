@@ -323,5 +323,5 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         **result,
         "output_path":_rel(repo,output),
         "output_sha256":_sha(raw),
-        "output_verified":True,
+        "output_verified":bool(result.get("pass")),
     }

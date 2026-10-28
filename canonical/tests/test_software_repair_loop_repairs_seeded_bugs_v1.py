@@ -91,6 +91,24 @@ CASES = [
         "CONSTANT_REPLACE",
     ),
     (
+        "swapped_call_arguments",
+        "def _ordered(x, y):\n    return (x, y)\n\n\ndef merge(a, b):\n    return _ordered(b, a)\n",
+        "import unittest, calc\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_merge(self):\n"
+        '        self.assertEqual(calc.merge("p", "q"), ("p", "q"))\n',
+        "CALL_ARG_SWAP",
+    ),
+    (
+        "wrong_variable",
+        "def invoice(price, quantity):\n    return price * price\n",
+        "import unittest, calc\n"
+        "class T(unittest.TestCase):\n"
+        "    def test_invoice(self):\n"
+        "        self.assertEqual(calc.invoice(3, 4), 12)\n",
+        "NAME_SWAP",
+    ),
+    (
         "inverted_condition",
         'def label(x):\n    if not x:\n        return "yes"\n    return "no"\n',
         "import unittest, calc\n"
@@ -139,9 +157,11 @@ class SeededBugBenchmarkTests(unittest.TestCase):
         shutil.rmtree(WORK_ROOT, ignore_errors=True)
 
     def test_every_seeded_bug_in_the_mutation_basis_is_repaired(self):
-        """Five distinct defect classes; the loop must find a verified repair for all five.
+        """Seven distinct defect classes; the loop must find a verified repair for all seven.
 
-        This is the number that was 0 of 5 before the PYTHONPATH fix.
+        This was 0 of 5 before the PYTHONPATH fix, and 5 of 7 while the mutation basis could not
+        express swapped call arguments or a wrong variable (both `OPEN__NO_STRICTLY_IMPROVING_CANDIDATE`
+        with `accepted_edits: []`).
         """
         repaired = []
         detail = []
@@ -164,6 +184,8 @@ class SeededBugBenchmarkTests(unittest.TestCase):
             "comparison_swap": "COMPARE_SWAP",
             "wrong_constant": "CONSTANT_REPLACE",
             "inverted_condition": "DROP_NOT",
+            "swapped_call_arguments": "CALL_ARG_SWAP",
+            "wrong_variable": "NAME_SWAP",
         }
         for name, source, test_source, _ in CASES:
             if name not in expected:

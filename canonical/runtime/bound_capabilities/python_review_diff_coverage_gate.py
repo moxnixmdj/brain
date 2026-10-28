@@ -53,6 +53,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from canonical.runtime.scratch_git_apply_v1 import apply_to_scratch
+
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
     _parse_diff_ranges,
 )
@@ -119,16 +121,9 @@ def run(args, root):
     shutil.copytree(anchor_abs, scratch,
                     ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
     try:
-        check = subprocess.run(["git", "apply", "--check", str(diff_abs)],
-                               cwd=scratch, capture_output=True, text=True,
-                               timeout=min(timeout_s, 60))
-        if check.returncode != 0:
-            _fail("DIFF_DOES_NOT_APPLY:" + (check.stderr.strip().splitlines() or ["<empty>"])[0][:200])
-        applied = subprocess.run(["git", "apply", str(diff_abs)],
-                                 cwd=scratch, capture_output=True, text=True,
-                                 timeout=min(timeout_s, 60))
-        if applied.returncode != 0:
-            _fail("DIFF_APPLY_FAILED_AFTER_CHECK")
+        refusal, detail = apply_to_scratch(diff_abs, scratch, timeout_s=min(timeout_s, 60))
+        if refusal != "OK":
+            _fail(refusal + (":" + detail if detail else ""))
 
         tests = sorted(str(p.relative_to(scratch))
                        for p in scratch.rglob("*.py")

@@ -75,7 +75,7 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
         live = set(live_brain.load_verified_registry())
         modelled = set(self.model.capabilities)
         self.assertEqual(live, modelled)
-        self.assertEqual(len(modelled), 419)
+        self.assertEqual(len(modelled), 422)
 
     def test_every_capability_has_a_trigger_and_a_route(self):
         for cid, row in self.model.capabilities.items():
@@ -1175,10 +1175,10 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
     def test_status_reports_the_machine_it_actually_runs_on(self):
         """Presence is measured live, so it tracks the real interpreter."""
         status = self.model.status()
-        self.assertEqual(status["counts"]["capabilities"], 419)
+        self.assertEqual(status["counts"]["capabilities"], 422)
         self.assertEqual(
             status["declared_dependencies_present"] + status["declared_dependencies_missing"],
-            419,
+            422,
             "present + missing must account for every capability",
         )
 
@@ -1346,7 +1346,7 @@ class SourceIndexTests(unittest.TestCase):
         )
         self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
         # The capability count must not have been inflated by indexing.
-        self.assertEqual(int(counts.get("capabilities", -1)), 419)
+        self.assertEqual(int(counts.get("capabilities", -1)), 422)
 
     def test_status_reports_the_source_index_it_holds(self):
         """The model's self-description must not omit what it indexes.
@@ -1381,7 +1381,7 @@ class SourceIndexTests(unittest.TestCase):
         # The distinction must be stated wherever the larger number appears, so
         # it cannot be read as a capability gain.
         self.assertIs(status.get("source_index_is_addressable_not_executable"), True)
-        self.assertEqual(int(counts["capabilities"]), 419)
+        self.assertEqual(int(counts["capabilities"]), 422)
 
     def test_status_does_not_overcount_reachable_modules(self):
         """A tempting derived figure that is wrong must not be reported.
@@ -1492,4 +1492,4 @@ class ResearchIndexTests(unittest.TestCase):
             int(counts.get("research_index_records", -1)),
             len(self.model.research_index),
         )
-        self.assertEqual(int(counts["capabilities"]), 419)
+        self.assertEqual(int(counts["capabilities"]), 422)

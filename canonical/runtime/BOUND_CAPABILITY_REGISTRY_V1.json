@@ -2793,6 +2793,282 @@
     "model_dependency_count": 0
    }
   },
+  "git.change.land.v1": {
+   "action_template": {
+    "args": {
+     "author": "${input.author}",
+     "branch_name": "${input.branch_name}",
+     "capability_id": "git.change.land.v1",
+     "diff_path": "${input.diff_path}",
+     "message": "${input.message}",
+     "output_path": "${input.output_path}",
+     "repo_path": "${input.repo_path}",
+     "test_argv": "${input.test_argv}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "git_object_model_v1",
+   "cost": 1,
+   "entrypoint": "run_land",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "commit",
+    "branch",
+    "create branch",
+    "apply patch",
+    "apply diff",
+    "land change",
+    "commit the change",
+    "commit the staged",
+    "stage",
+    "unified diff",
+    "test gate",
+    "green",
+    "red",
+    "rollback",
+    "undo",
+    "atomic change",
+    "never push",
+    "local commit"
+   ],
+   "limitations": [
+    "POSIX only: the lane forces GIT_ASKPASS=/bin/true and LC_ALL=C, so it is verified on linux and darwin and is not claimed for windows. Measured 2026-10-28: 37 registry rows claim windows while their adapter contains POSIX-only constructs; these three no longer do.",
+    "applies a unified diff only: binary hunks and mode changes are refused by git apply as DIFF_DOES_NOT_APPLY.",
+    "never pushes, never fetches, never changes repository configuration; landing on a remote is a separate authorisation this capability does not hold.",
+    "on any red (tests, commit, or a diff that does not apply) the branch is deleted and the tree is reset to the recorded HEAD before the call is refused, so a caller cannot be left mid-change.",
+    "the caller's HEAD is restored to the branch it was on; the landed state is one new branch plus one commit.",
+    "test_argv is a python interpreter plus arguments only."
+   ],
+   "platforms": [
+    "linux",
+    "darwin"
+   ],
+   "provides": [
+    "git.change.land"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "base_head",
+    "branch",
+    "changed_paths",
+    "commit_sha",
+    "diff_applied",
+    "head_restored",
+    "incremental_spend_usd",
+    "model_dependency_count",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "tests_passed"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/git_object_model_v1.py",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.0"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "independently_verified_by": "canonical/tests/test_git_object_model_v1.py (reads the repository with its own git calls; the adapter's report is never the verdict)",
+    "mission_id": "ASTRA-HARVEST-GIT-LAND-001",
+    "observed_effect": {
+     "bad_diff": "diff that does not apply -> DIFF_DOES_NOT_APPLY with no branch and no modified file left behind",
+     "green": "commit created on the new branch, changed_paths == [calc.py], branch tip equals commit_sha, caller HEAD back on main",
+     "measured_on": "fixture repository whose suite is red until the applied diff fixes it, canonical/tests/test_git_object_model_v1.py",
+     "red": "suite exit 1 -> TESTS_RED_BEFORE_COMMIT, branch absent from `git branch`, tree clean, HEAD equal to the starting sha",
+     "step_time_s": "branch+apply+test+commit in 0.05 s wall"
+    },
+    "verification_run": "python3 -m unittest canonical.tests.test_git_object_model_v1 -> Ran 10 tests, OK (2026-10-27, branch arena/df695a36-brain)"
+   }
+  },
+  "git.regression.bisect.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "git.regression.bisect.v1",
+     "goal": "${input.goal}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "git_object_model_v1",
+   "cost": 1,
+   "entrypoint": "run_bisect",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "bisect",
+    "regression",
+    "which commit broke",
+    "first bad commit",
+    "bug introduced",
+    "culprit",
+    "binary search",
+    "history",
+    "test suite",
+    "refactor broke",
+    "green to red",
+    "locate the change",
+    "which change caused"
+   ],
+   "limitations": [
+    "POSIX only: the lane forces GIT_ASKPASS=/bin/true and LC_ALL=C, so it is verified on linux and darwin and is not claimed for windows. Measured 2026-10-28: 37 registry rows claim windows while their adapter contains POSIX-only constructs; these three no longer do.",
+    "bad defaults to HEAD and good to the oldest root commit reachable from bad, both recorded in the artifact (good_inferred_as_root_commit) because \"when did it break\" names an effect rather than two commit ids.",
+    "the range is counted before anything runs and a range needing more than max_steps bisections refuses with BISECT_RANGE_EXCEEDS_MAX_STEPS instead of being killed mid-bisect with the tree checked out on some commit.",
+    "test_argv defaults to the repository's own test_*.py suites run through the loader-based suite runner (chain: python_test_guided_patch_search_v1.suite_argv), not to a script run that would execute nothing in the 695 of 2019 files without a __main__ guard.",
+    "needs a modified-tracked-file clean tree (untracked files are allowed; a test run creates __pycache__).",
+    "test_argv must be a python interpreter plus arguments, the same allowlist the repair corridor uses, because a change capability must not become a general command runner.",
+    "good and bad must be commits that this repository already contains; there is no fetch.",
+    "bisect work is undone by `bisect reset` to the recorded HEAD and the restoration is proven by re-reading rev-parse, otherwise BISECT_DID_NOT_RESTORE_HEAD is raised rather than reported as clean."
+   ],
+   "platforms": [
+    "linux",
+    "darwin"
+   ],
+   "provides": [
+    "git.regression.bisect"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "first_bad_commit",
+    "incremental_spend_usd",
+    "model_dependency_count",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "restored"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/git_object_model_v1.py",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.0"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "independently_verified_by": "canonical/tests/test_git_object_model_v1.py (reads the repository with its own git calls; the adapter's report is never the verdict)",
+    "mission_id": "ASTRA-HARVEST-GIT-BISECT-001",
+    "observed_effect": {
+     "dirty_refusal": "one modified tracked file -> DIRTY_WORKTREE refusal, HEAD and the modified bytes untouched",
+     "first_bad_commit": "equals the sha the test created for the second commit, which is where the bug really entered",
+     "measured_on": "fixture repository, 3 commits (correct, wrong, differently wrong), canonical/tests/test_git_object_model_v1.py",
+     "restored": "HEAD re-read equals the starting sha and `git status --porcelain --untracked-files=no` is empty after the run",
+     "step_time_s": "bisect over 3 commits in 0.03 s wall"
+    },
+    "verification_run": "python3 -m unittest canonical.tests.test_git_object_model_v1 -> Ran 10 tests, OK (2026-10-27, branch arena/df695a36-brain)"
+   }
+  },
+  "git.repository.inspect.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "git.repository.inspect.v1",
+     "goal": "${input.goal}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "git_object_model_v1",
+   "cost": 1,
+   "entrypoint": "run_inspect",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "repository",
+    "repo",
+    "status",
+    "diff",
+    "diffs",
+    "log",
+    "history",
+    "commits",
+    "recent commits",
+    "last three commits",
+    "show",
+    "blame",
+    "who wrote",
+    "last touched",
+    "who last touched",
+    "ls-files",
+    "tracked",
+    "tracked files",
+    "which files",
+    "merge-base",
+    "describe",
+    "what changed",
+    "uncommitted changes",
+    "dirty",
+    "clean",
+    "read-only",
+    "branch list"
+   ],
+   "limitations": [
+    "POSIX only: the lane forces GIT_ASKPASS=/bin/true and LC_ALL=C, so it is verified on linux and darwin and is not claimed for windows. Measured 2026-10-28: 37 registry rows claim windows while their adapter contains POSIX-only constructs; these three no longer do.",
+    "the goal sentence is read deterministically (derive_queries: literal patterns, no model); the artifact records the sentence next to the queries it produced, and a sentence that names no readable effect refuses with QUERY_KIND_UNDERIVED rather than falling back to a status dump.",
+    "repo_path defaults to the caller's root and output_path to canonical/astra_runtime/tmp/git_lane/inspect_<digest>.json, because a sentence about a repository names an effect, not its own arguments.",
+    "read-only: every subcommand it can run is in the read set; a write verb never reaches subprocess.",
+    "artifacts are written under the caller's root, never inside the inspected repository.",
+    "history is whatever the local clone has; there is no fetch, so an unfetched commit is invisible rather than guessed.",
+    "queries are the declared kinds (status, diff, diff_staged, log, show, blame, ls_files, branch, rev_parse, merge_base, describe, tree); anything else is QUERY_KIND_UNKNOWN."
+   ],
+   "platforms": [
+    "linux",
+    "darwin"
+   ],
+   "provides": [
+    "git.repository.inspect"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "branch",
+    "failed_query_count",
+    "head",
+    "incremental_spend_usd",
+    "model_dependency_count",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "query_count"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/git_object_model_v1.py",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.0"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "independently_verified_by": "canonical/tests/test_git_object_model_v1.py (reads the repository with its own git calls; the adapter's report is never the verdict)",
+    "mission_id": "ASTRA-HARVEST-GIT-INSPECT-001",
+    "observed_effect": {
+     "head_matches_independent_read": "artifact head equals `git rev-parse HEAD` read by the test itself, not by the adapter",
+     "measured_on": "fixture repository, 3 commits, canonical/tests/test_git_object_model_v1.py",
+     "reachability": "invoked through live_brain_route_admission_v1.run_adapter_locally with the declared expectation output_verified == true",
+     "refusals_measured": "artifact outside caller root -> OUTPUT_PATH_OUTSIDE_REPOSITORY; plain directory -> NOT_A_GIT_WORK_TREE",
+     "step_time_s": "4 queries over 3 commits in 0.02 s wall (0.79 s for the whole 10-test file)"
+    },
+    "verification_run": "python3 -m unittest canonical.tests.test_git_object_model_v1 -> Ran 10 tests, OK (2026-10-27, branch arena/df695a36-brain)"
+   }
+  },
   "http.json.fetch_from_state": {
    "action_template": {
     "args": {
