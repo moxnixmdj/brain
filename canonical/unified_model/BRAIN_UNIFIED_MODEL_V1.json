@@ -28965,12 +28965,12 @@
   "routing_tokens": 2132,
   "skills": 18,
   "source_index_entry_points": 423,
-  "source_index_modules": 1887
+  "source_index_modules": 1888
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "03141e0a3490d57f96fadf4a913178aa7f9f3b043e126da061dc8ce55ac974cb"
+  "value": "91642ff8b46909ff6cffb9e4d26e3682ec2c6a456b0c1694e9d7b35b216767da"
  },
  "engines": [
   {
@@ -210738,7 +210738,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_repo_diff_apply_full_testgate.py",
-   "sha256": "bb8108eeae91c3da6b775b80b03721f16960a7ddc660349553bf379a52c4c339",
+   "sha256": "6da4edd0d327fd356d2dc98c67e41e1521e25637c3b645e0a330c149292b6cec",
    "summary": "python.repo.diff_apply_full_testgate.v1 — the pre-merge integration gate.",
    "symbol_count": 4,
    "symbols": [
@@ -210854,7 +210854,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py",
-   "sha256": "62cec72beed2e64b84e1a6e90d48798fe6810ca3af4567c400ada04f653b1e7e",
+   "sha256": "dd84a833afeff4b9344501a08aa24f07b93584edee084baab3b85f386479f21e",
    "summary": "python.review.diff_coverage_gate.v1 — every changed line must be",
    "symbol_count": 5,
    "symbols": [
@@ -210890,7 +210890,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py",
-   "sha256": "b24b7eda796ae04243eaaa2b53d7d4616ec35124ca5eb19bf0819f10cf064ab5",
+   "sha256": "94aa4c39df5f9740d67e029da83fbafb5ce9d33ea309905c2a69d09c07ead7bd",
    "summary": "python.review.diff_mutation_gate.v1 — every changed executable line",
    "symbol_count": 10,
    "symbols": [
@@ -210936,7 +210936,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_perf_gate.py",
-   "sha256": "79058ffa6a162f564ea0b8c676d911f6b85ebaea27d905ba884becbf9d070d32",
+   "sha256": "446ed36a7315698216f519b484ae5e8f840c4f55d0608c1fec25f68510c4cc93",
    "summary": "python.review.diff_perf_gate.v1 — performance-regression gate on the diff.",
    "symbol_count": 5,
    "symbols": [
@@ -264065,6 +264065,39 @@
     "substitution": 1,
     "terminal": 1,
     "v2": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/scratch_git_apply_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/scratch_git_apply_v1.py",
+   "sha256": "2b9eea6019af39bb3cd38a56f92f1e4cd03d5d1b9f3782a53086079173c13c08",
+   "summary": "Apply a unified diff to a scratch copy, without letting git escape to an enclosing repo.",
+   "symbol_count": 3,
+   "symbols": [
+    "apply_to_scratch",
+    "isolated_env",
+    "tree_fingerprint"
+   ],
+   "terms": {
+    "apply": 2,
+    "apply_to_scratch": 1,
+    "copy": 1,
+    "diff": 1,
+    "enclosing": 1,
+    "escape": 1,
+    "git": 2,
+    "isolated_env": 1,
+    "letting": 1,
+    "repo": 1,
+    "scratch": 2,
+    "tree_fingerprint": 1,
+    "unified": 1,
+    "v1": 1
    }
   },
   {

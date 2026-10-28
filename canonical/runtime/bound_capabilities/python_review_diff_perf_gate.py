@@ -58,6 +58,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from canonical.runtime.scratch_git_apply_v1 import apply_to_scratch
+
 SCHEMA = "PROJECT_BRAIN_DIFF_PERF_GATE_V1"
 
 _CHILD = r'''
@@ -187,16 +189,9 @@ def run(args, root):
                         ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
         shutil.copytree(anchor_abs, scratch_p,
                         ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
-        check = subprocess.run(["git", "apply", "--check", str(diff_abs)],
-                               cwd=scratch_p, capture_output=True, text=True,
-                               timeout=min(timeout_s, 60))
-        if check.returncode != 0:
-            _fail("DIFF_DOES_NOT_APPLY:" + (check.stderr.strip().splitlines() or ["<empty>"])[0][:200])
-        applied = subprocess.run(["git", "apply", str(diff_abs)],
-                                 cwd=scratch_p, capture_output=True, text=True,
-                                 timeout=min(timeout_s, 60))
-        if applied.returncode != 0:
-            _fail("DIFF_APPLY_FAILED_AFTER_CHECK")
+        refusal, detail = apply_to_scratch(diff_abs, scratch_p, timeout_s=min(timeout_s, 60))
+        if refusal != "OK":
+            _fail(refusal + (":" + detail if detail else ""))
 
         anchor_runs, anchor_cal = _bench(scratch_a, bench_rel, python_exe, repeats, timeout_s)
         patched_runs, patched_cal = _bench(scratch_p, bench_rel, python_exe, repeats, timeout_s)
