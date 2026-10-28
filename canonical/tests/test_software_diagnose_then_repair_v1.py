@@ -348,15 +348,68 @@ def test_judge_pytest_is_the_same_answer_slower(tmp_path: Path):
 
 def test_non_plain_tests_fall_back_to_pytest_and_still_verify(tmp_path: Path):
     _fixture(tmp_path, bug="return w + h")
+    # a fixture parameter is not plain: no in-process judge, no spectrum -> the dynamic
+    # localizer and per-candidate pytest still verify the same patch
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "import pytest\nfrom pkg.calc import area\n\n@pytest.fixture\ndef four():\n    return 4\n\n"
+        "def test_area(four):\n    assert area(3, four) == 12\n")
+    result = dr.run(_args(), tmp_path)
+    artifact = json.loads((tmp_path / "out" / "dr.json").read_text())
+    search = artifact["steps"][2]
+    assert search["judge"]["in_process"] is False
+    assert search["judge"]["reason"].startswith("TEST_TAKES_PARAMETERS")
+    assert artifact["steps"][1]["status"] not in ("SPECTRUM_INPROCESS",)
+    assert result["status"] == "VERIFIED_PATCH"
+    assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+
+
+def test_literal_parametrize_is_plain_judged_in_process_and_feeds_synthesis(tmp_path: Path):
+    _fixture(tmp_path, bug="return len(str(w))")
     (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
         "import pytest\nfrom pkg.calc import area\n\n"
         "@pytest.mark.parametrize('w,h,e', [(3, 4, 12), (2, 5, 10)])\ndef test_area(w, h, e):\n    assert area(w, h) == e\n")
-    result = dr.run(_args(), tmp_path)
-    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
-    assert search["judge"]["in_process"] is False
-    assert search["judge"]["reason"].startswith(("TEST_TAKES_PARAMETERS", "DECORATED_TEST"))
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    artifact = json.loads((tmp_path / "out" / "dr.json").read_text())
+    loc, search = artifact["steps"][1], artifact["steps"][2]
+    assert loc["status"] == "SPECTRUM_INPROCESS" and loc["target_basis"] == "SPECTRUM_TOP"
+    assert loc["failing_test_count"] == 2                       # each row is a test
+    assert loc["seconds"] < 2.0                                 # was 7 s of dynamic localizer refusing
+    assert search["judge"] == {"in_process": True, "reason": "PLAIN"}
+    assert search["synthesis"]["status"] == "FOUND:1" and search["synthesis"]["examples"] == 2
     assert result["status"] == "VERIFIED_PATCH"
     assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+    assert result["seconds"] < 8
+
+
+def test_spectrum_localizes_across_files_to_the_callee_that_computes_the_wrong_value(tmp_path: Path):
+    _fixture(tmp_path)
+    (tmp_path / "proj" / "pkg" / "util.py").write_text("def mul(a, b):\n    return a + b\n")
+    (tmp_path / "proj" / "pkg" / "calc.py").write_text(
+        "from pkg.util import mul\n\n\ndef area(w, h):\n    return mul(w, h)\n\n\ndef twice(x):\n    return 2 * x\n")
+    result = dr.run(_args(), tmp_path)
+    loc = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][1]
+    # no exception anywhere: the traceback names only the test file, the tests import
+    # only calc; the spectrum ranks util.py line 2 (ef=1, ep=0, deeper) above calc.py
+    assert loc["ranked_lines"][0][:5] == ["pkg/util.py", 2, 1.0, 1, 0]
+    assert result["status"] == "VERIFIED_PATCH" and result["target_path"] == "pkg/util.py"
+    assert "+    return a * b\n" in (tmp_path / result["diff_path"]).read_text()
+
+
+def test_parametrize_expansion_is_literal_only_and_in_pytest_order():
+    import ast as _ast
+    from canonical.runtime import patch_inprocess_judge_v1 as j
+    dec = _ast.parse("@pytest.mark.parametrize('a,b', [(1, 2), (3, 4)])\ndef f(a, b): pass").body[0].decorator_list[0]
+    assert j._literal_parametrize(dec) == {"names": ["a", "b"], "rows": [[1, 2], [3, 4]]}
+    for src in ("@pytest.mark.parametrize('a', [1], ids=['x'])\ndef f(a): pass",
+                "@pytest.mark.parametrize('a', [pytest.param(1)])\ndef f(a): pass",
+                "@pytest.mark.parametrize('a', values)\ndef f(a): pass",
+                "@pytest.mark.skip\ndef f(): pass"):
+        assert j._literal_parametrize(_ast.parse(src).body[0].decorator_list[0]) is None, src
+    stacked = [{"names": ["a"], "rows": [[1], [2]]}, {"names": ["b"], "rows": [[10], [20]]}]
+    assert j.expand_cases(stacked) == [{"a": 1, "b": 10}, {"a": 2, "b": 10}, {"a": 1, "b": 20}, {"a": 2, "b": 20}]
+    tree = _ast.parse("@pytest.mark.parametrize('w,h,e', [(3, 4, 12)])\ndef test_area(w, h, e):\n    assert area(w, h) == e\n")
+    assert j.assert_specs(tree, {"test_area": [{"names": ["w", "h", "e"], "rows": [[3, 4, 12]]}]}) == \
+        [{"test": "test_area", "expr": "area(3, 4)", "expected": 12}]
 
 
 def test_plain_tests_applicability_is_static_and_names_the_reason(tmp_path: Path):
@@ -365,7 +418,8 @@ def test_plain_tests_applicability_is_static_and_names_the_reason(tmp_path: Path
     tree = tmp_path / "proj"
     ok, why, mods = j.plain_tests(tree, ["tests/test_calc.py"])
     assert ok and why == "PLAIN"
-    assert {k: v for k, v in mods[0].items() if k != "asserts"} == {"path": "tests/test_calc.py", "import": "tests.test_calc", "sys_path": ".", "tests": 2}
+    assert {k: v for k, v in mods[0].items() if k not in ("asserts", "cases")} == {"path": "tests/test_calc.py", "import": "tests.test_calc", "sys_path": ".", "tests": 2}
+    assert mods[0]["cases"] == {}
     assert mods[0]["asserts"] == [{"test": "test_area", "expr": "area(3, 4)", "expected": 12},
                                   {"test": "test_twice", "expr": "twice(5)", "expected": 10}]
     (tree / "conftest.py").write_text("import pytest\n\n@pytest.fixture(autouse=True)\ndef x():\n    yield\n")

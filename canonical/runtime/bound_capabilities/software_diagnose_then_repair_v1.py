@@ -87,6 +87,10 @@ _FRAME = re.compile(r"^(?P<path>[^\s:][^:\n]*\.py):(?P<line>\d+):")
 _TESTNAME = lambda n: n.startswith("test_") or n.endswith("_test.py")  # noqa: E731
 
 
+class _SpectrumSufficed(Exception):
+    """Internal: the in-process spectrum named the target; the dynamic localizer is skipped."""
+
+
 class DiagnoseRepairRefusal(RuntimeError):
     pass
 
@@ -360,6 +364,40 @@ def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[st
     return out
 
 
+def _spectrum(copy_root: pathlib.Path, modules: list[dict[str, Any]], python_exe: str, confine: str,
+              deadline: float) -> dict[str, Any]:
+    """One in-process run of the plain tests under a line tracer (confined when the host
+    can): Ochiai-ranked (path, line) over the tree's non-test files."""
+    out_rel = ".brain_diagnose/spectrum.json"
+    out = copy_root / out_rel
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if out.exists():
+        out.unlink()
+    program = judge_v1.spectrum_program(modules, out_rel)
+    timeout = max(5, min(60, int(deadline - time.monotonic())))
+    ran = False
+    if confine in ("auto", "required") and confine_v1.available():
+        receipt = confine_v1.run("import os\nos.chdir('/project')\n" + program, str(copy_root), timeout=timeout,
+                                 network=False, ro_binds=_site_dirs())
+        ran = receipt.get("verdict") in ("OK", "TIMEOUT") or out.is_file()
+    if not ran and confine != "required":
+        try:
+            subprocess.run([python_exe, "-c", program], cwd=copy_root, capture_output=True, timeout=timeout,
+                           env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        except subprocess.TimeoutExpired:
+            pass
+    if not out.is_file():
+        return {"status": "SPECTRUM_NO_OUTPUT"}
+    try:
+        data = json.loads(out.read_text(encoding="utf-8"))
+    except ValueError:
+        return {"status": "SPECTRUM_UNREADABLE"}
+    ranked = [r for r in data.get("ranked") or [] if r[2] > 0]
+    return {"status": "SPECTRUM_INPROCESS" if ranked else "SPECTRUM_NO_SUSPICIOUS_LINE",
+            "failing_test_count": data.get("failing"), "test_count": len(data.get("tests") or []),
+            "ranked": ranked}
+
+
 def _test_import_closure(tree: pathlib.Path, tests_rel: list[str]) -> list[str]:
     """Tree files (not tests, not __init__) the named test files import, in order of appearance."""
     import ast as _ast
@@ -484,12 +522,29 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         repro = _reproduce(tree, tests_tree, python_exe, min(remaining(), 300), confine, trim)
         steps.append({"step": "reproduce", "seconds": round(time.monotonic() - t0, 3), "plugin_trim": trim, **repro})
 
-        # 2. diagnose
+        # 2. diagnose: spectrum first (one in-process traced run, ~0.1 s) when the
+        #    judge can run the suite; the dynamic dataflow localizer otherwise, bounded
+        judge_mode = str(args.get("judge") or "auto")       # auto | pytest
+        plain_ok, plain_why, plain_mods = (judge_v1.plain_tests(tree, tests_tree) if judge_mode == "auto"
+                                           else (False, "JUDGE_PYTEST_REQUESTED", []))
+        judge_row = {"in_process": plain_ok, "reason": plain_why}
         t0 = time.monotonic()
         loc_row: dict[str, Any] = {"step": "localize"}
         loc_top: list[str] = []
         loc_lines: dict[str, list[int]] = {}
+        spectrum: dict[str, Any] = {"status": "NOT_PLAIN:" + plain_why} if not plain_ok else {}
+        if plain_ok:
+            spectrum = _spectrum(tree, plain_mods, python_exe, confine, deadline)
+            for path, line, score, ef, ep, _depth in spectrum.get("ranked") or []:
+                if path.endswith(".py") and not _TESTNAME(pathlib.PurePosixPath(path).name):
+                    loc_lines.setdefault(path, []).append(int(line))
+                    if path not in loc_top:
+                        loc_top.append(path)
+            loc_row.update({"status": spectrum["status"], "failing_test_count": spectrum.get("failing_test_count"),
+                            "ranked_files": loc_top[:10], "ranked_lines": (spectrum.get("ranked") or [])[:20]})
         try:
+            if loc_top:
+                raise _SpectrumSufficed()
             loc = localizer.run({"source_root": tree_rel,
                                  "test_paths": [tree_rel + "/" + t for t in tests_tree],
                                  "timeout_s": min(remaining(), int(args.get("localizer_timeout_s") or 20)),
@@ -510,6 +565,8 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             loc_top = seen
             loc_row.update({"status": loc.get("status"), "failing_test_count": loc.get("failing_test_count"),
                             "ranked_files": seen[:10], "output_sha256": loc.get("output_sha256")})
+        except _SpectrumSufficed:
+            pass
         except BaseException as exc:  # noqa: BLE001 - a localizer refusal is evidence, not a crash
             loc_row.update({"status": "LOCALIZER_REFUSED:" + type(exc).__name__ + ":" + str(exc)[:160]})
         tb_files = [r["path"] for r in repro["traceback_files"]]
@@ -520,10 +577,11 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             target_rel, basis = t_abs.relative_to(source_root).as_posix(), "CALLER_STATED"
         else:
             agreed = [p for p in loc_top if p in tb_files]
+            spectral = str(loc_row.get("status")) == "SPECTRUM_INPROCESS"
             if agreed:
-                target_rel, basis = agreed[0], "LOCALIZER_AND_TRACEBACK_AGREE"
+                target_rel, basis = agreed[0], ("SPECTRUM_AND_TRACEBACK_AGREE" if spectral else "LOCALIZER_AND_TRACEBACK_AGREE")
             elif loc_top:
-                target_rel, basis = loc_top[0], "LOCALIZER_TOP"
+                target_rel, basis = loc_top[0], ("SPECTRUM_TOP" if spectral else "LOCALIZER_TOP")
             elif tb_files:
                 target_rel, basis = tb_files[0], "TRACEBACK_TOP"
             else:
@@ -555,10 +613,6 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                                                            if r["path"] == target_rel), [])]:
             if ln not in priority:
                 priority.append(ln)
-        judge_mode = str(args.get("judge") or "auto")       # auto | pytest
-        plain_ok, plain_why, plain_mods = (judge_v1.plain_tests(tree, tests_tree) if judge_mode == "auto"
-                                           else (False, "JUDGE_PYTEST_REQUESTED", []))
-        judge_row = {"in_process": plain_ok, "reason": plain_why}
         candidates = candidates_v1.generate(source_text, nums, strings, priority)
         synth_row: dict[str, Any] = {"status": "NOT_ATTEMPTED"}
         if plain_ok and priority:

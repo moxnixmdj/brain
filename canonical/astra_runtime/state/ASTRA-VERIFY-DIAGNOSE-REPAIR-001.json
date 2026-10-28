@@ -1,117 +1,131 @@
 {
  "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
  "status": "COMPLETE",
- "e2e_ms_run1": 2064.1,
- "e2e_ms_run2": 2093.5,
+ "e2e_ms_run1": 2115.4,
+ "e2e_ms_run2": 2082.8,
  "cases": {
   "golden": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2064.1,
-   "search_s": 1.332,
+   "e2e_ms": 2115.4,
+   "search_s": 1.364,
    "judge": true,
    "winning_mutation": "BINOP_DROP keep left"
   },
   "wrong_operator": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1556.0,
-   "search_s": 0.768,
+   "e2e_ms": 1525.1,
+   "search_s": 0.775,
    "judge": true,
    "winning_mutation": "BINOP_SWAP Add->Mult"
   },
   "missing_term": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1527.6,
-   "search_s": 0.787,
+   "e2e_ms": 1551.7,
+   "search_s": 0.796,
    "judge": true,
    "winning_mutation": "EXPR_EXTEND <expr> Mult h"
   },
   "missing_guard": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1960.7,
-   "search_s": 1.184,
+   "e2e_ms": 1916.3,
+   "search_s": 1.154,
    "judge": true,
    "winning_mutation": "GUARD_INSERT if w is None: return 0"
   },
   "two_edits_and_overfit": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3695.0,
-   "search_s": 2.897,
+   "e2e_ms": 3721.0,
+   "search_s": 2.966,
    "judge": true,
    "winning_mutation": "COMPOSE BINOP_SWAP Add->Mult + BINOP_DROP keep left"
   },
   "two_edits_and_overfit__judge_pytest": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 21447.2,
-   "search_s": 20.703,
+   "e2e_ms": 22232.4,
+   "search_s": 21.465,
    "judge": false,
    "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult"
   },
   "only_overfit": {
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-   "e2e_ms": 1283.4,
-   "search_s": 0.791,
+   "e2e_ms": 1276.7,
+   "search_s": 0.813,
    "judge": true,
    "winning_mutation": "CONSTANT_REPLACE 0->12"
   },
+  "cross_file_spectrum": {
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1512.4,
+   "search_s": 0.763,
+   "judge": true,
+   "winning_mutation": "BINOP_SWAP Add->Mult"
+  },
+  "parametrized_synthesis": {
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1895.7,
+   "search_s": 1.03,
+   "judge": true,
+   "winning_mutation": "EXPR_SYNTH -> w * h"
+  },
   "two_examples_synthesis__return_0": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1636.9,
-   "search_s": 0.896,
+   "e2e_ms": 1678.6,
+   "search_s": 0.885,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w * h"
   },
   "two_examples_synthesis__len_str_w": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1658.3,
-   "search_s": 0.902,
+   "e2e_ms": 1671.8,
+   "search_s": 0.9,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w * h"
   },
   "two_examples_synthesis__w_plus_h_plus_1": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1780.9,
-   "search_s": 0.95,
+   "e2e_ms": 1683.2,
+   "search_s": 0.944,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w * h"
   },
   "two_examples_no_expression__test_literal_rejected": {
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[2]",
-   "e2e_ms": 1303.1,
-   "search_s": 0.872,
+   "e2e_ms": 1337.7,
+   "search_s": 0.899,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w + (w + h + 2)"
   },
   "under_specified_suite": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2209.9,
-   "search_s": 1.443,
+   "e2e_ms": 2192.0,
+   "search_s": 1.417,
    "judge": true,
    "winning_mutation": "COMPARE_SWAP LtE->NotEq"
   },
   "parametrized_not_plain": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 15599.2,
-   "search_s": 7.977,
-   "judge": false,
+   "e2e_ms": 1913.1,
+   "search_s": 1.045,
+   "judge": true,
    "winning_mutation": "BINOP_SWAP Add->Mult"
   },
   "sabotage_full_suite": {
    "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-   "e2e_ms": 2136.9,
+   "e2e_ms": 2112.1,
    "search_s": 1.357,
    "judge": true,
    "winning_mutation": "BINOP_DROP keep left"
   },
   "nothing_to_repair": {
    "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-   "e2e_ms": 311.7,
+   "e2e_ms": 318.1,
    "search_s": null,
    "judge": null,
    "winning_mutation": null
   },
   "harness_crash": {
    "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-   "e2e_ms": 290.4,
+   "e2e_ms": 292.6,
    "search_s": null,
    "judge": null,
    "winning_mutation": null
