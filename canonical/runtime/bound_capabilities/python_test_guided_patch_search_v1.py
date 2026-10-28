@@ -363,8 +363,16 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     if not isinstance(args,Mapping):
         raise PatchSearchError("ARGS_NOT_OBJECT")
     source=_safe_file(repo,args.get("source_path"),suffix=".py")
-    tests_raw=args.get("test_paths") or []
-    if not isinstance(tests_raw,list) or not tests_raw:
+    tests_raw=[x for x in (args.get("test_paths") or []) if str(x).strip()]
+    if not isinstance(tests_raw,list):
+        raise PatchSearchError("TEST_PATHS_REQUIRED")
+    if not tests_raw:
+        # This capability names a single SOURCE file, so the corpus is the tree
+        # that file lives in -- the smallest scope in which its tests can be.
+        from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_paths
+        try: tests_raw=discover_test_paths(source.parent)
+        except FileNotFoundError: raise PatchSearchError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+    if not tests_raw:
         raise PatchSearchError("TEST_PATHS_REQUIRED")
     tests=[_safe_file(repo,x,suffix=".py") for x in tests_raw]
     argv=args.get("test_argv")
