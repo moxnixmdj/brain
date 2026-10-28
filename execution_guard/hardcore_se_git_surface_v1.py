@@ -372,6 +372,47 @@ def main() -> int:
               % (tag, "Y" if row["hit"] else "N", "Y" if row["pass"] else "N",
                  "Y" if row["artifact"] else "N", "Y" if effected else "N", status[:40]), flush=True)
 
+    # THE RECEIPT THIS INSTRUMENT HAS ALWAYS BEEN EARNING AND NEVER WROTE.  Eleven registry
+    # entries cite `canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json` and
+    # `.../state/VCS-GIT-SURFACE-V1.json`, and neither file has ever existed: measured over the
+    # registry, 33 verification pointers name a path that is not on disk, and these are 22 of
+    # them.  A pointer to a file nobody writes is the same assertion a `status: VERIFIED` string
+    # is, wearing a filename.  This run just measured every act (selection, door status,
+    # artifact fields, and -- for the mutating verbs -- that the repository actually changed),
+    # so the measurement is written where the registry says it is.
+    receipt_path = ROOT / "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json"
+    state_path = ROOT / "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+    receipt = {
+        "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1",
+        "capability_ids": sorted({r["expected"] for r in rows}),
+        "probe": "execution_guard/hardcore_se_git_surface_v1.py",
+        "probe_input": "a real git repository per act (fresh world per row)",
+        "what_was_measured": ["selected the owning capability", "the door reported PASS",
+                              "the artifact carries the promised fields",
+                              "the repository actually changed (mutating verbs)"],
+        "rows": [{k: r[k] for k in ("tag", "expected", "selected", "hit", "pass", "artifact",
+                                    "missing_fields", "effect")} for r in rows],
+        "totals": {"acts": len(rows),
+                   "selected": sum(1 for r in rows if r["hit"]),
+                   "pass": sum(1 for r in rows if r["pass"]),
+                   "artifact": sum(1 for r in rows if r["artifact"] and not r["missing_fields"]),
+                   "effect": sum(1 for r in rows if r["effect"])},
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "ran_by": "local-session",
+        "independent_verifier": None,
+        "producer_independent": False,
+    }
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(json.dumps(receipt, indent=1, sort_keys=True), encoding="utf-8")
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    state_path.write_text(json.dumps({"schema": "brain.git.surface.state.v1",
+                                      "measured_at": None,
+                                      "totals": receipt["totals"],
+                                      "receipt": str(receipt_path.relative_to(ROOT))},
+                                     indent=1, sort_keys=True), encoding="utf-8")
+    print("receipt: " + str(receipt_path.relative_to(ROOT)))
+
     hits = sum(1 for r in rows if r["hit"])
     passes = sum(1 for r in rows if r["pass"])
     arts = sum(1 for r in rows if r["artifact"] and not r["missing_fields"])

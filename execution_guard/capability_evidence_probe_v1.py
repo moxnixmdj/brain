@@ -335,11 +335,46 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true", help="measure without writing receipts")
     ap.add_argument("--only", default="", help="comma separated capability ids")
+    ap.add_argument("--audit-pointers", action="store_true",
+                    help="count how many registry entries can be checked and how many cannot")
     ns = ap.parse_args(argv)
 
     caps = json.loads(REGISTRY.read_text(encoding="utf-8"))["capabilities"]
-    wanted = [c for c, e in sorted(caps.items())
-              if not isinstance(e.get("verification"), dict) or not e.get("verification")]
+
+    def _category(entry: Mapping[str, Any]) -> str:
+        """Which kind of evidence this entry carries -- measured, not assumed.
+
+        OK                        a block whose pointers all exist on disk
+        DANGLING                  a block whose pointers name files nobody wrote
+        BLOCK_WITHOUT_ANY_POINTER a block that names nothing a reader could check
+        NO_BLOCK                  the status is VERIFIED and there is no block at all
+        """
+        verification = entry.get("verification")
+        if not isinstance(verification, dict) or not verification:
+            return "NO_BLOCK"
+        pointers = [verification.get(k) for k in ("receipt_path", "state_path")]
+        present = [p for p in pointers if p]
+        if not present:
+            return "BLOCK_WITHOUT_ANY_POINTER"
+        if not all((ROOT / str(p)).is_file() for p in present):
+            return "DANGLING"
+        return "OK"
+
+    if ns.audit_pointers:
+        counts: dict[str, int] = {}
+        for cid, entry in sorted(caps.items()):
+            counts[_category(entry)] = counts.get(_category(entry), 0) + 1
+        print(json.dumps(counts, indent=1, sort_keys=True))
+        for cid, entry in sorted(caps.items()):
+            if _category(entry) != "OK":
+                print("%-28s %s" % (_category(entry), cid))
+        return 0
+
+    # The default scope is the entries that carry NO evidence block: those are the ones this
+    # probe can close.  A dangling pointer or a blockless-pointer block needs the lane that
+    # measured the capability, so they are AUDITED here (--audit-pointers) rather than
+    # re-measured with a fixture that may not be the capability's task.
+    wanted = [c for c, e in sorted(caps.items()) if _category(e) == "NO_BLOCK"]
     if ns.only:
         keep = {c.strip() for c in ns.only.split(",") if c.strip()}
         wanted = [c for c in wanted if c in keep]
@@ -365,6 +400,7 @@ def main(argv: list[str] | None = None) -> int:
             if base_args is None:
                 rows.append({"capability_id": cid, "outcome": "NO_TASK_SHAPE"})
                 continue
+            base_args.setdefault("output_path", str(work / "out" / (cid + ".json")))
             # A fresh output path per run so the second run cannot "reproduce" by finding the
             # first run's artifact already there.
             first = _run_once(cid, module_path, entrypoint, base_args)

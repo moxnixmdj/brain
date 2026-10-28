@@ -5573,7 +5573,7 @@
     },
     "pin_green": "9/9 move-function pins green",
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MOVEFN-001__RECEIPT.json",
-    "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MOVEFN-001.json"
+    "state_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MOVEFN-001__RECEIPT.json"
    }
   },
   "python.refactor.rename_symbol.v1": {

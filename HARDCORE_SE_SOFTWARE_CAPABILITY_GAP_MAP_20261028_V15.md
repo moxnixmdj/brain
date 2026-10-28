@@ -1,0 +1,297 @@
+# The complete problem inventory — hardcore software engineering
+
+**2026-10-28 · V15 · measured on `arena/4ca3a720-brain` at `1ad9764` + this unit**
+
+Supersedes `…GAP_MAP_20261028_V14.md`. V14 answered "what are all the problems" with three
+probes. V15 keeps those and adds the four classes that only appear when you ask a different
+question: **is the machine's capability real when the environment is clean, is the evidence it
+cites checkable, can the instrument that measures it finish, and does the number it reports mean
+what it says?**
+
+Everything below is a row from a probe that can be re-run. Nothing is a wish list.
+
+| instrument | what it can see | what it cannot |
+|---|---|---|
+| `execution_guard/hardcore_se_missing_verb_probe_v1.py` | 43 sentences an engineer says, through the real door (`solve()`), classified answered / honest / silent / wrong-capability | only the 43 acts it names |
+| `execution_guard/live_solver_end_to_end_measurement_v1.reachability()` | 448 bound entries: can the compiler reach each one from a sentence built from its own vocabulary | self-measures with the capability's own words |
+| `execution_guard/capability_evidence_probe_v1.py` **(new)** | for every entry claiming verification: does it execute on a task-shaped fixture, find the planted defect, and reproduce on an identical second world | only the capabilities whose task it knows how to build |
+| `execution_guard/toolchain_preflight_v1.py` | which declared distributions are actually installed in THIS interpreter | only what the declaration names |
+| the pinned guard suites | that a capability which exists still behaves | nothing about acts that do not exist |
+
+---
+
+## 1. The scoreboard
+
+```
+HARDCORE-SE MISSING-VERB PROBE (43 acts)          with the declared toolchain  |  bare interpreter
+  ANSWERED_BY_OWNING_CAPABILITY      28                                     |   20   <-- see §9
+  HONEST_REFUSAL                     15                                     |   15
+  OWNED_BUT_FAILED                    0                                     |    8
+  WRONG_TOOL                          0                                     |    0
+  SILENT_REFUSAL                      0                                     |    0
+  refusals that NAME the missing act  9/15
+
+WHOLE-SURFACE REACHABILITY (448 entries = 154 registered + 294 receipt projections)
+  REACHED_AND_BOUND                426      NOT_REACHABLE 10
+  ROUTED_ELSEWHERE                   9      REACHED_BY_EXPLICIT_NAME 3
+
+REGISTRY EVIDENCE (154 entries)                                              see §8
+  a verification block whose pointers exist on disk            112
+  a block that names NO file a reader could check               34
+  a block whose pointers name files nobody wrote                 8
+
+COMPILER SUITES                    25 failed / 108 passed   (V14: 26/107)  see §7
+PINNED PINS                        16/16 evidence, 8/8 route-identification,
+                                   6/6 api-compatibility, 6/6 resource-leak, 9/9 move-function
+```
+
+Read the first block as a capability statement: **28 of the 43 acts a senior engineer performs on
+any given day are performed by their owning capability, with the promised artifact on disk, and
+15 are refused in words that name the act.** Zero are answered by a tool that had no business
+answering them. That last number is what V14 bought, and it is the only one in this table that was
+ever *worse than zero* — a confident wrong answer costs more than a refusal.
+
+---
+
+## 2. Class A — fourteen acts this machine cannot perform at all
+
+No capability in the 154-entry registry performs these; verified by searching every id, keyword,
+`provides` and effect, not assumed. Each is a missing *tier* of engineering, not a missing
+parameter.
+
+| act | the sentence | what it needs |
+|---|---|---|
+| `inline_function` | "Inline the function `sub`" | the exact inverse of `extract_function`, which ships: call-site capture + return fusion |
+| `dependency_add` | "Add the dependency `requests` to the project" | a `pyproject`/`requirements` edit + pin resolution — a reuse job |
+| `build_package` | "Build a wheel for the project" | `python -m build` is not a bound system tool; the whole pypi lane is behind this |
+| `ci_config` | "Write a continuous integration workflow" | a workflow emitter + the schemas it must satisfy |
+| `fuzz` | "Fuzz the function `add`" | a generator + a crash oracle; `atheris` is absent, a stdlib random+subprocess harness is not |
+| `memory_profile` | "Measure the memory usage" | `tracemalloc` is stdlib; nothing wraps it |
+| `differential_test` | "Run a differential test against a reference" | two implementations, one input stream, a diff |
+| `crash_repro` | "Reproduce the crash and shrink it" | delta-debugging — a loop over the existing test runner |
+| `interactive_debug` | "Debug it with breakpoints" | `sys.settrace`/`bdb` are stdlib |
+| `merge_conflict` | "Resolve the merge conflicts" | conflict parse + a resolution policy; the git tool already reads the state |
+| `schema_migration` | "Write a schema migration" | a schema reader (sqlite reader exists) + a writer |
+| `observability` | "Add logging and metrics" | an edit, and a logging/metrics model to edit *towards* |
+| `retry_design` | "Make the network calls retry safely" | an edit, decomposable into existing refactor primitives |
+| `docstrings` | "Write docstrings for the functions" | the only act here that needs judgement — and no AI model may participate in Brain-credited cognition, so it needs a structural lane, not a generator |
+
+**Ranked by capability gained per hour of work:** `dependency_add` and `build_package` (both pure
+reuse, and they unblock everything pypi-sourced), then `inline_function` (its machinery just
+shipped inside `extract_function`), then `fuzz` + `differential_test` + `crash_repro` (one harness
+family: generate, run, compare, shrink), then `memory_profile` (one stdlib wrapper), then
+`docstrings` last.
+
+---
+
+## 3. Class B — CLOSED: sentences answered by a capability with no business answering
+
+Nine of the 43 were answered by the wrong tool in V13. `WRONG_TOOL` is now **0**, closed by three
+laws in V14 (§3 of that document): an artefact word is not evidence about the act; a chain is
+accepted only when the sentence *identified* the token; the synthesis fallback answers only what a
+format writer can actually do. Costs measured then: composer/synthesis suites 9 → 8 failing ids,
+compiler suites unchanged, 8/8 new pins.
+
+What remains is not the same class: **five refusals still SELECT a candidate that does not own the
+act** (`interactive_debug`, `crash_repro`, `differential_test`, `retry_design`, `docstrings`) and
+are then stopped by route admission (`R12`/`R14`). Nothing executes and the refusal names the word
+it could not perform — but the door hands a wrong candidate to the guard instead of knowing at
+selection time. **This is the single highest-value routing guard left.**
+
+---
+
+## 4. Class C — a refusal must name the act it cannot perform
+
+`FAIL__RAW_GOAL_COMPILATION_GAP` used to report the closest capability and the unbound slot and
+nothing a reader could act on. V14 made it append `NO_CAPABILITY_PERFORMS:<word>`, reusing
+`_unheard_act_word` (already computed for R14). **9 of 15 refusals now name the act in the word a
+user reads.**
+
+The six that do not name it in `reason` all carry the name in `status`/`detail` instead
+(`git_bisect`, `interactive_debug`, `crash_repro`, `differential_test`, `retry_design`,
+`docstrings`). The gap is reporting plumbing, not knowledge: the word is computed and then dropped
+on the `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` path.
+
+---
+
+## 5. Class D — twenty-two reachability defects
+
+Each row is a capability that exists and cannot be reached from a sentence built out of its own
+vocabulary; 426 of 448 entries bind.
+
+**Not reachable (10).** `vcs.git.log.v1` (its sentence is claimed by commit), `vcs.git.blame.v1`
+(two files named, one slot), `code.impact.tree_sitter.testselect.v1` and
+`python.source.change_impact.testselect.v1` (`source_root` unbound on a sentence naming a file),
+`chart.raster.curve_value_query.v1` + `chart.raster.direct_curve_label_family_rank.v1`
+(`y_value: not_stated`), `json.file.write` (`output_path_equals_an_input_path`),
+`text.file.write` (`NO_VERIFIED_CAPABILITY_MATCH: source_root`), `shell.command.run`
+(`argv: not_stated` — a capability whose input is a command, not a sentence),
+`python.refactor.move_function.v1` + `python.refactor.rename_symbol.v1` (their own vocabulary
+generates a sentence that binds `source_paths` to zero files).
+
+**Routed elsewhere (9).** `code.patch.tree_sitter.verify.v1`, `python.refactor.extract_function.v1`,
+`python.refactor.rename_parameter.v1`, `python.refactor.change_signature.v1`,
+`python.repo.pr_realize.v1`, `software.patch.synthesize.cegis.z3.v1`,
+`plain_goal.bound_capability.grounding.stdlib`, `vcs.git.bisect.v1`, `vcs.git.branch_create.v1` —
+each lost to a neighbour that shares its noun.
+
+**By explicit name only (3).** `python.contract.issue_orchestration.fusion.v1`,
+`python.pipeline.allowlist_gate.v1`, `python.refactor.test_scaffold.fusion.v1`.
+
+This is the cheapest class in the document: routing and vocabulary, no new abilities. It must be
+fixed **by law** — a capability must not lose its own sentence to a neighbour — and the two
+reachability tests in §7 fail for exactly this reason.
+
+---
+
+## 6. Class E — capabilities that exist but cannot be asked
+
+The interface is the wrong shape for a sentence: `vcs.git.bisect.v1` and `vcs.git.rebase.v1` want
+an `argv`/`ref` a person does not say; `extract_function` wants a statement span
+(`GOAL_STATED_ACT_INPUTS_UNBOUND … end_line`); `shell.command.run` wants a command line. The
+capability works when called correctly (this unit proved it: §11), and a sentence reaches it only
+if the sentence happens to state exactly that shape.
+
+---
+
+## 7. Class F — the 25 red compiler tests, now ATTRIBUTED
+
+V13 called these "unexplained". They are now grouped by cause from their own failure bodies, and
+the grouping is what makes them fixable:
+
+| # | cause | tests | whose problem |
+|---|---|---|---|
+| 5 | multi-step DAG returns `FAIL__CAPABILITY_DAG_RESULT_INVALID` / `NO_OBSERVED_EFFECT` | f11 ×4, no-op repair | the DAG executor, not the compiler |
+| 3 | a sentence that should stay open compiles anyway (`DID NOT RAISE`), or binds the wrong code | f23 ×2, f24 | over-eager compilation: the mirror of §3, on the ambiguity side |
+| 3 | the test expects an older guard code (`R1_PATH_TOKENS_ONLY`, `R3_WEAK_EVIDENCE`) than the one now issued (`R12`, `R14`) | path-token, single-word | the guard improved; the assertion is stale |
+| 2 | reachability counts | `…BY_PROSE_alone` ×1 (+1 body covering the same) | Class D, exactly |
+| 2 | a quoted literal routes to the wrong capability | f25 | generic token scoring again |
+| 2 | `source_root` binds the parser instead of the auditor; the two live doors disagree | source-root, both-doors | slot binding / door parity |
+| 1 | `r9` selection rate 18 vs 22 | r9 | Class D, measured as a rate |
+| 1 | named source unparseable on a real repair | no-op repair (also #1) | the repair lane |
+| ~~1~~ | ~~no registry entry without proof~~ | — | **FIXED this unit (§8): 26 → 25** |
+
+Two of the 25 are Class D wearing a test name, three are stale assertions about a guard that
+improved, and the rest are real compiler defects in four families. That is a work queue, not a fog.
+
+---
+
+## 8. NEW Class G — evidence that names nothing
+
+`test_no_registry_entry_is_left_without_proof` asserts that every entry carries a `verification`
+block. It was **red**: 16 of 154 entries had none — and they were exactly the hardcore-software
+lanes added through the adapter lanes (`quality_v1`, `toolchain_v1`, `vcs_git_v1`), i.e. the hole
+sat where the work is.
+
+The existing receipt lane could not close it. `capability_receipt_lane_v1.discover()` fills every
+`${input.*}` with a content-addressed **sink path**, so an adapter whose declared input is a real
+source tree fails closed on a path that does not exist: measured, **0 of 16 receipts issued**.
+
+Three further measurements, once the hole was probed properly:
+
+* **34 entries carry a block that names no file at all** — a `verification` dict with no
+  `receipt_path` and no `state_path` (`shell.command.run`, `text.file.write`, `json.query.jq`,
+  `python.fault.provenance.interprocedural.value.v1`, …). A block a reader cannot follow is the
+  same assertion as a status string.
+* **33 pointers named files that do not exist**, over 19 capabilities. Twenty-two of them were the
+  git surface (11 capabilities × receipt + state) and `move_function`: probes that measured
+  everything and wrote nothing.
+* the one metric in this class that was actively false: `ruff_complexity` reported
+  **`max_complexity: 0`** on a tree whose most complex function is 5 — `0` is impossible for any
+  function with a branch, and it meant "nothing measured". Fixed: `null` plus `measurement_limit`.
+
+**What this unit did about it.**
+
+`execution_guard/capability_evidence_probe_v1.py` builds task-shaped fixtures *outside* the
+repository — a python package that leaks a handle, duplicates a block, carries no licence and has a
+failing test; a git repository with a known-good commit, a known-bad commit and an upstream — then
+runs each capability on it **twice, from byte-identical worlds**, and records:
+
+* `EXECUTED` — the adapter really returned a mapping;
+* `reproduced` — the findings of the two runs are equal, after dropping what belongs to the run
+  (paths, clocks, transcripts, commit ids) and keeping what belongs to the work;
+* `planted_defect_found` — an oracle predicate over the capability's own result, because *running
+  is not finding*: a leak analyser reporting "0 leaks" on a file with an unclosed `open()` has
+  executed successfully and told a lie.
+
+Measured: **16/16 executed, 16/16 reproduced, 13/13 planted defects found, 0 false claims.**
+The git-surface probe now writes the receipt its 11 entries have always cited (12/12 selected,
+12/12 pass, 12/12 artifact, 12/12 repository actually changed). Evidence pointers: **33 dangling →
+8**, pinned by name so a new one fails. Registry: 154/154 entries carry a block; compiler suites
+**25 failed / 108 passed** with the failure list otherwise byte-identical.
+
+---
+
+## 9. NEW Class H — the machine's capability is a function of its environment
+
+The same commit, the same code, twice:
+
+```
+with the declared toolchain      28 answered /  0 owned-but-failed
+bare interpreter                 20 answered /  8 owned-but-failed
+```
+
+The eight are `coverage_measure`, `complexity_metric`, `dead_code`, `lint`, `format`, `type_check`,
+`async_audit`, `exception_audit` — the entire analysis tier. The adapters do not degrade either:
+they exit their process, so the caller is told a capability is **BROKEN** when it is merely
+**ABSENT**, which is the difference between debugging code that is fine and installing a package.
+
+`TOOLCHAIN_DECLARATION_V1.json` + `execution_guard/toolchain_preflight_v1.py --bootstrap` now
+declare, check and install the eight distributions (`ruff`, `bandit`, `mypy`, `coverage`,
+`pytest`, `tree-sitter`, `z3-solver`, `crosshair-tool`): measured **8 of 8 present** after
+bootstrap. What is still missing is not the fix but the **enforcement**: nothing in the door
+refuses a capability whose declared tool is absent with a status that says "install this", and
+nothing in CI installs from the declaration.
+
+---
+
+## 10. NEW Class I — the instrument that sees routing regressions could not finish
+
+`test_every_capability_is_reachable_from_one_sentence_by_prose_or_by_name` ran past a 90-second
+test timeout, and the suite ran past **15 minutes with no verdict at all**. The stack was the same
+frame every time: `world_binding_v1._world_path_for` re-`sorted()` the whole world index and
+re-matched every entry against the kind's suffixes, once per slot ask.
+
+15,181 files, 9,458 of them JSON. The index itself was already cached; the *filtering* was not.
+
+Fixed with a per-kind cache: **66 s for that test, verdict delivered** (a real failure — Class D,
+§5). This is the class that hides every other class: a gate that cannot finish reports nothing, and
+nothing looks green.
+
+---
+
+## 11. What this unit changed, each with its measurement
+
+| change | before | after |
+|---|---|---|
+| `capability_evidence_probe_v1.py` (new): task-shaped fixtures, twofold observation, planted-defect oracle | 0 of 16 entries could be evidenced by the generic lane | 16/16 executed, 16/16 reproduced, 13/13 defects found |
+| registry evidence blocks | 16 entries with none, 33 dangling pointers | 154/154 with a block, 8 dangling (pinned by name) |
+| `hardcore_se_git_surface_v1.py` writes the receipt its 11 entries cite | pointer to a file nobody wrote | 12/12 selected / pass / artifact / effect, receipt on disk |
+| `world_binding_v1` per-kind index cache | one test >90 s, suite >15 min with no verdict | that test 66 s, verdict delivered |
+| `ruff_complexity.max_complexity` | `0` on a tree whose worst function is 5 | `null` + `max_complexity_measured` + `measurement_limit` |
+| evidence pins | — | 6/6, incl. "a new dangling pointer fails" |
+
+Nothing was promoted. Every receipt written here records `independent_verifier: null` and
+`producer_independent: false`: one identity ran its own work, and that is exactly what the evidence
+says.
+
+---
+
+## 12. The plan this implies
+
+| # | work | class | why now |
+|---|---|---|---|
+| 1 | noun-side **selection** guard | B residual | five refusals still hand a wrong candidate to admission; nothing executes, but the door should know at selection time |
+| 2 | `dependency_add` + `build_package` | A | pure reuse (a `pyproject` edit and `python -m build`); unblocks the entire pypi/build lane |
+| 3 | the routability **law** (one row → one rule) | D | 22 rows, two failing tests and the `r9` rate are the same defect seen three ways |
+| 4 | `inline_function` | A | its span machinery shipped inside `extract_function`; the inverse is now cheap |
+| 5 | install-or-refuse at the door | H | the toolchain is declared; nothing enforces it, so 8 capabilities vanish silently on a clean interpreter |
+| 6 | three stale guard-code assertions | F | the guard improved and the test did not; 3 of 25 red rows for free |
+| 7 | `fuzz` + `differential_test` + `crash_repro` | A | one harness family: generate, run, compare, shrink |
+| 8 | the four compiler defect families (DAG result, DID NOT RAISE, quoted literal, door parity) | F | each is a law with more than one failing row behind it |
+| 9 | 34 evidence blocks that name no file | G | each needs the lane that measured it to write one line |
+| 10 | `docstrings` | A | last on purpose: the only act here that needs judgement, and no model may supply it |
+
+Two rules for all of it, unchanged: **reuse before synthesis**, and **measure, never assert** —
+every row above is a re-runnable probe, and a red row is still not an authority until the owner
+says so.
