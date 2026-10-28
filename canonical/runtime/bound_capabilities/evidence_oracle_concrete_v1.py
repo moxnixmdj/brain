@@ -50,10 +50,11 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
         source = sp.read_text(encoding="utf-8")
     if not source:
-        # default deterministic sample: post: _ > 0 but f can return -1
-        source = "def f(x):\n    \"\"\"post: _ >= 0\"\"\"\n    return x - 5\n"
-
-    result = oracle.check_source(source)
+        # No demo default: an oracle verdict is about the caller's source or nothing.
+        result = {"status": "SOURCE_REQUIRED", "checked": 0, "violations": []}
+        source = ""
+    else:
+        result = oracle.check_source(source)
     artifact = {
         "schema": SCHEMA,
         "capability_id": CAPABILITY_ID,
@@ -61,7 +62,11 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "result": result,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
-        "verified": result.get("status") in ("CONTRACT_VIOLATION_FOUND", "NO_POSTCONDITION_PARSED", "NO_VIOLATION_IN_SAMPLE"),
+        # verified == the oracle exercised a real postcondition on the caller's
+        # source and reached a verdict; a source with no contract verified nothing,
+        # and NO_VIOLATION_IN_SAMPLE never proves absence.
+        "verified": result.get("status") in ("CONTRACT_VIOLATION_FOUND", "NO_VIOLATION_IN_SAMPLE"),
+        "proves_absence": False,
     }
     raw = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
     output.write_bytes(raw)

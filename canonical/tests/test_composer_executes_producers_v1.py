@@ -29,8 +29,17 @@ COMPOSERS = [
     "python_fault_patch_supercomposer_v1", "python_evidence_contract_supercomposer_v1",
     "python_contract_issue_orchestration_fusion_v1", "python_orchestration_symbol_supercomposer_v1",
     "python_pipeline_allowlist_gate_v1", "test_slice_never_miss_v1", "software_review_gate_composer_v1",
-    "python_symbol_resolve_standalone_v1",
+    "python_symbol_resolve_standalone_v1", "software_repair_crossfile_choreograph_v1",
+    "software_repair_loop_cegis_hypothesis_v1",
 ]
+# Non-composer adapters that used to verify a built-in demo when given no inputs.
+DEMO_DEFAULTERS = {
+    "software_patch_cegis_z3_v1": "MANIFEST_REQUIRED",
+    "hardcore_software_engineering_orchestrator_v1": "CEGIS_MANIFEST_REQUIRED",
+    "software_synthesis_grid_induction_v1": "TRAINING_PAIRS_REQUIRED",
+    "execution_pipeline_8stage_v1": "STAGES_REQUIRED",
+    "evidence_oracle_concrete_v1": "SOURCE_REQUIRED",
+}
 
 
 @pytest.fixture
@@ -70,8 +79,10 @@ def test_every_composer_lists_only_registered_producers_and_its_registry_entry()
         template_inputs = {
             v[8:-1] for v in reg[mod.CAPABILITY_ID]["action_template"]["args"].values()
             if isinstance(v, str) and v.startswith("${input.")} - {"output_path"}
-        assert template_inputs == set(), (name, template_inputs)
-        assert ce.declared_inputs(ROOT, mod.PRODUCERS), name  # and they do need real inputs
+        declared = set(ce.declared_inputs(ROOT, mod.PRODUCERS))
+        assert declared, name  # they do need real inputs
+        own = set(getattr(mod, "OWN_INPUTS", ()))  # e.g. the repair loop's budget
+        assert template_inputs <= declared | own, (name, template_inputs - declared - own)
 
 
 def test_real_inputs_run_the_producer_and_verify(scratch):
@@ -125,3 +136,57 @@ def test_output_outside_repository_is_refused():
     mod = importlib.import_module(BC + "test_slice_never_miss_v1")
     with pytest.raises(RuntimeError, match="PATH_OUTSIDE_REPOSITORY"):
         mod.run({"output_path": "../escape.json"}, ROOT)
+
+
+@pytest.mark.parametrize("name,reason", sorted(DEMO_DEFAULTERS.items()))
+def test_no_inputs_means_no_demo_verdict(name, reason, scratch):
+    mod = importlib.import_module(BC + name)
+    out = (scratch / "d.json").as_posix()
+    result = mod.run({"output_path": out}, ROOT)
+    assert result["verified"] is False and result["output_verified"] is False, result
+    assert reason in (str(result.get("reason")) + str(result.get("status"))), result
+    assert json.loads((ROOT / out).read_text())["verified"] is False
+
+
+def test_tree_sitter_index_refuses_without_a_source_root(scratch):
+    mod = importlib.import_module(BC + "code_multilanguage_tree_sitter_v1")
+    with pytest.raises(RuntimeError, match="SOURCE_ROOT_REQUIRED"):
+        mod.run({"output_path": (scratch / "ts.json").as_posix()}, ROOT)
+
+
+def test_repair_loop_runs_the_oracles_on_the_callers_source(scratch):
+    src = scratch / "fx"
+    (ROOT / src).mkdir(parents=True)
+    (ROOT / src / "m.py").write_text('def f(x):\n    """post: _ == x + 1"""\n    return abs(x)\n')
+    (ROOT / src / "edits.json").write_text(json.dumps({"edits": []}))
+    (ROOT / scratch / "manifest.json").write_text(json.dumps({
+        "components": [{"id": "k", "kind": "MECHANISM", "requires": [], "provides": ["e"],
+                        "verified": True, "brain_owned": True, "donor_independent": True,
+                        "cost": {"wall_clock": 0.1, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}}],
+        "counterexamples": [], "initial_facts": [],
+        "target": {"required_effects": ["e"], "forbidden_effects": [], "max_components": 2, "top_k": 1},
+        "allow_candidate_components": False}))
+    mod = importlib.import_module(BC + "software_repair_loop_cegis_hypothesis_v1")
+    out = (scratch / "loop.json").as_posix()
+    result = mod.run({"budget": 2, "manifest": (scratch / "manifest.json").as_posix(),
+                      "source_path": (src / "m.py").as_posix(), "source": None, "source_root": src.as_posix(),
+                      "edits_path": (src / "edits.json").as_posix(), "changed_paths": [(src / "m.py").as_posix()],
+                      "output_path": out}, ROOT)
+    artifact = json.loads((ROOT / out).read_text())
+    assert result["iterations"] == 1
+    by = {s["producer"]: s for s in artifact["steps"]}
+    assert by["software.patch.synthesize.cegis.z3.v1"]["verified"] is True
+    # the property oracle ran on the caller's source and found the real violation (x = 0)
+    hyp = by["evidence.oracle.hypothesis_property.v1"]
+    assert hyp["status"] == "VERIFIED", hyp
+    hyp_artifact = json.loads((ROOT / hyp["output_path"]).read_text())
+    assert hyp_artifact["status"] == "CONTRACT_VIOLATION_FOUND", hyp_artifact.get("status")
+    assert result["verified"] in (True, False)  # the verdict is whatever the ledger says, never a default
+
+
+def test_repair_loop_zero_budget_runs_nothing(scratch):
+    mod = importlib.import_module(BC + "software_repair_loop_cegis_hypothesis_v1")
+    out = (scratch / "loop0.json").as_posix()
+    result = mod.run({"budget": 0, "manifest": {}, "output_path": out}, ROOT)
+    assert result["iterations"] == 0 and result["verified"] is False
+    assert result["reason"] == "REPAIR_BUDGET_ZERO"

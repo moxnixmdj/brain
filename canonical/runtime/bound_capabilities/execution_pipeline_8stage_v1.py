@@ -36,14 +36,18 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     output = _safe_output(repo, args.get("output_path"))
     pipe_mod = _load_pipeline()
-    # Demo: 2-stage pipeline if no args supplied, else use caller's stages
+    # No demo default: a pipeline verdict is about the caller's stages or nothing.
     stages = args.get("stages")
-    if not stages:
-        # deterministic demo: echo -> wc, no shell, allowlisted
-        stages = [
-            ["/usr/bin/python3", "-c", "import sys; sys.stdout.write('a\\na\\nb\\n')"],
-            ["/usr/bin/wc", "-l"],
-        ]
+    if not stages or not isinstance(stages, list) or not all(isinstance(s, list) and s for s in stages):
+        artifact = {"schema": SCHEMA, "capability_id": CAPABILITY_ID, "stages": stages,
+                    "result": {"status": "STAGES_REQUIRED"}, "model_dependency_count": 0,
+                    "incremental_spend_usd": 0, "verified": False}
+        raw = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
+        output.write_bytes(raw)
+        return {"adapter": "execution_pipeline_8stage_v1", "output_path": str(output.relative_to(repo)),
+                "output_sha256": hashlib.sha256(raw).hexdigest(), "output_verified": False,
+                "verified": False, "reason": "STAGES_REQUIRED", "returncode": None,
+                "model_dependency_count": 0, "incremental_spend_usd": 0}
     # hidden kernel is run_stages(argv_lists, cwd, timeout, max_bytes) — allowlist-checked in caller
     import tempfile
     with tempfile.TemporaryDirectory() as td:

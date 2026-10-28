@@ -128,7 +128,8 @@ def _bind(producer: str, template: Mapping[str, Any], inputs: Mapping[str, Any],
         name = m.group(1)
         if name == "output_path":
             bound[key] = step_output_rel
-        elif name in inputs and inputs[name] is not None:
+        elif name in inputs:
+            # an explicit None is a binding (the door renders it the same way)
             bound[key] = inputs[name]
         else:
             unbound.append(name)

@@ -276,7 +276,7 @@ class CrossfileEditRegistryContractTests(unittest.TestCase):
         self.assertEqual(entry["status"], "VERIFIED_BOUND_CAPABILITY")
         self.assertEqual(entry["adapter_module"], "python_crossfile_edit_choreograph")
         self.assertEqual(entry["entrypoint"], "run")
-        self.assertEqual(entry["provides"], ["python.source.crossfile_edit.choreography"])
+        self.assertIn("python.source.crossfile_edit.choreography", entry["provides"])  # identity token also present since effect-family admission
         self.assertEqual(entry["requires"], [])
         self.assertEqual(entry["incremental_spend_usd"], 0)
 

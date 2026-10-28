@@ -1,42 +1,58 @@
 #!/usr/bin/env python3
-"""Software repair loop — CEGIS+hypothesis HTN loop, only-right-way.
+"""Software repair loop — CEGIS + property/concrete oracles + choreography, as ONE
+executed composition over the caller's inputs.
 
-Hidden kernels harvested: CEGIS(T) 321L + hypothesis 6.170.12 + concrete 13 + CrossHair Z3 +
-symbol 86k/221k + change-impact 2070/2096 + crossfile + pipeline 8-stage.
-Why max: repair is loop not DAG. Synthesize→verify triad→counterexample→resynthesize until pass or budget. No blind search.
+Measured before (2026-10-28): the "loop" called four kernels with no inputs
+but an output path, ``budget`` times, and verified whatever their demo
+defaults produced; nothing about the caller's program was ever examined.
+Now every round is ``composer_execution_v1.compose`` over the registered
+producers, bound from the caller's ``manifest`` (CEGIS), ``source`` /
+``source_path`` (both oracles) and ``source_root`` (choreography).  The
+producers are deterministic, so one round is the whole answer; ``budget``
+must still be >= 1 or nothing ran and nothing is verified.
 """
 from __future__ import annotations
-import hashlib, json, pathlib
+import importlib.util, pathlib
 from typing import Any
-SCHEMA="PROJECT_BRAIN_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1"
-CAPABILITY_ID="software.repair.loop.cegis_hypothesis.v1"
-PROVIDES=["software.repair.loop.cegis_verified","software.repair.synthesis.triad_proven"]
-REQUIRES: list[str]=["python.fault.localization.symbol_ranked"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_repair_loop_cegis.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
+SCHEMA = "PROJECT_BRAIN_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1"
+CAPABILITY_ID = "software.repair.loop.cegis_hypothesis.v1"
+PROVIDES = ["software.repair.loop.cegis_verified", "software.repair.synthesis.triad_proven"]
+REQUIRES: list[str] = ["python.fault.localization.symbol_ranked"]
+PRODUCERS: list[str] = ["software.patch.synthesize.cegis.z3.v1", "evidence.oracle.hypothesis_property.v1",
+                        "evidence.oracle.concrete_execution.v1", "software.repair.choreograph.crossfile.v1"]
+OWN_INPUTS = ("budget",)
+DEFAULT_OUTPUT = "canonical/tmp_repair_loop.json"
+REPO = pathlib.Path(__file__).resolve().parents[3]
+
+
+def _executor():
+    try:
+        from canonical.runtime import composer_execution_v1 as mod  # type: ignore
+        return mod
+    except Exception:
+        spec = importlib.util.spec_from_file_location(
+            "composer_execution_v1", REPO / "canonical" / "runtime" / "composer_execution_v1.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
-    repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
-    import canonical.runtime.bound_capabilities.software_patch_cegis_z3_v1 as cegis_mod
-    import canonical.runtime.bound_capabilities.evidence_oracle_hypothesis_v1 as hyp_mod
-    import canonical.runtime.bound_capabilities.evidence_oracle_concrete_v1 as conc_mod
-    import canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1 as choreo_mod
-    budget=int(args.get("budget",3)); cegis_iterations=[]
-    for i in range(budget):
-        r1=cegis_mod.run({"output_path": f"canonical/tmp_loop_cegis_{i}.json"}, repo)
-        r2=hyp_mod.run({"output_path": f"canonical/tmp_loop_hyp_{i}.json"}, repo)
-        r3=conc_mod.run({"output_path": f"canonical/tmp_loop_conc_{i}.json"}, repo)
-        r4=choreo_mod.run({"output_path": f"canonical/tmp_loop_choreo_{i}.json"}, repo)
-        cegis_iterations.append({"round":i,"cegis":r1["verified"],"hypothesis":r2["verified"],"concrete":r3["verified"],"choreograph":r4["verified"]})
-        if r1["verified"] and r2["verified"] and r3["verified"]: break
-    # A loop that ran zero rounds verified nothing (measured: budget=0 returned
-    # verified=True), and a round in which only some oracles passed is a
-    # counterexample, not a pass.  Verified means the LAST round ran and every
-    # oracle in it passed.
-    last=cegis_iterations[-1] if cegis_iterations else None
-    verified=bool(last) and all(last[k] is True for k in ("cegis","hypothesis","concrete","choreograph"))
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"budget":budget,"iterations":cegis_iterations,"verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_repair_loop_cegis_hypothesis_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":True,"verified":verified,"iterations":len(cegis_iterations),"model_dependency_count":0,"incremental_spend_usd":0}
+    args = dict(args or {})
+    budget = int(args.get("budget", 3) or 0)
+    ce = _executor()
+    if budget < 1:
+        result = ce.compose(capability_id=CAPABILITY_ID, schema=SCHEMA,
+                            adapter="software_repair_loop_cegis_hypothesis_v1", producers=[],
+                            requires=REQUIRES, args=args, root=root, default_output=DEFAULT_OUTPUT,
+                            description="budget < 1: no round ran")
+        result["reason"] = "REPAIR_BUDGET_ZERO"
+        result["iterations"] = 0
+        return result
+    result = ce.compose(capability_id=CAPABILITY_ID, schema=SCHEMA,
+                        adapter="software_repair_loop_cegis_hypothesis_v1", producers=PRODUCERS,
+                        requires=REQUIRES, args=args, root=root, default_output=DEFAULT_OUTPUT,
+                        description="one executed CEGIS + hypothesis + concrete + choreography round")
+    result["iterations"] = 1
+    result["budget"] = budget
+    return result

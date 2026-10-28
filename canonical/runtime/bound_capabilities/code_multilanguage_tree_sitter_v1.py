@@ -41,7 +41,10 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     output = _safe_output(repo, args.get("output_path"))
 
-    source_root_raw = args.get("source_root") or "canonical/runtime"
+    source_root_raw = args.get("source_root")
+    if not source_root_raw:
+        # No default tree: an index is of the caller's source_root or nothing.
+        raise RuntimeError("SOURCE_ROOT_REQUIRED")
     source_root = (repo / str(source_root_raw)).resolve()
     if source_root != repo and repo not in source_root.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
