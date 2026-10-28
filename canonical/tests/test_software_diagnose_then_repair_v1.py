@@ -907,3 +907,95 @@ def test_a_hole_inside_a_loop_is_still_synthesized_when_one_example_skips_the_lo
     hole = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["synthesis"]["hole"]["lines"]
     row = next(r for r in hole if r["line"] == 4)
     assert row["status"].startswith("FOUND") and "acc + x" in row["sites"][0]["expressions"]
+
+
+# --- the third oracle: stated contracts, property inputs, crashes, and the tie policy ---------
+
+_ONE_AREA = "from pkg.calc import area, twice\n\ndef test_area():\n    assert area(3, 4) == 12\n\ndef test_twice():\n    assert twice(5) == 10\n"
+
+
+def test_a_docstring_postcondition_outranks_the_least_change_heuristic(tmp_path: Path):
+    # one assertion under-specifies `w <= 0`: least change picks `w != 0` (measured since
+    # pass 8); `post: _ >= 0` is violated 58 times by `!=` and 27 by `>` -- the contract decides
+    _fixture(tmp_path)
+    _calc(tmp_path, "def area(w, h):\n    \"\"\"Area, never negative.\n\n    post: _ >= 0\n    \"\"\"\n    return w * h if w <= 0 else 0\n", _ONE_AREA)
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+    return w * h if w > 0 else 0\n" in (tmp_path / result["diff_path"]).read_text()
+    w = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    assert w["postconditions"] == ["_ >= 0"] and w["hypothesis"] == "MEASURED" and w["property_inputs"] > 40
+    top, last = w["ranking"][0], w["ranking"][-1]
+    assert top["postcondition_violations"] < last["postcondition_violations"]
+    assert top["delta_outside_tests"] > last["delta_outside_tests"]          # least change lost to the contract
+    assert w["proves_correctness"] is False
+
+
+def test_a_metamorphic_postcondition_calls_the_module_under_probe(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, "def area(w, h):\n    \"\"\"post: _ == area(h, w)\"\"\"\n    return w * h if w <= 0 else 0\n", _ONE_AREA)
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    w = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    assert w["ranking"][0]["postcondition_violations"] == 0                   # `w != 0` is the commutative one
+    assert all(r["postcondition_violations"] > 0 for r in w["ranking"][1:])
+
+
+def test_a_green_that_introduces_crashes_on_probe_inputs_is_ranked_below_one_that_does_not(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, "def total(xs):\n    acc = 0\n    for x in xs:\n        acc = acc + 1\n    return acc\n", _TOTAL_TESTS)
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    w = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    assert w["ranking"][0]["new_exceptions"] == 0
+    crashers = [r for r in w["ranking"] if r["new_exceptions"] > 0]
+    assert crashers, "the spurious `x * (2 % x)` family raises ZeroDivisionError on probe inputs"
+    assert all(w["ranking"].index(c) > 0 for c in crashers)
+
+
+def test_tie_policy_first_ships_and_names_the_tie_and_refuse_refuses(tmp_path: Path):
+    src = "def pick(a, b):\n    return a\n"
+    tests = "from pkg.calc import pick, twice\n\ndef test_pick():\n    assert pick(2, 2) == 4\n\ndef test_twice():\n    assert twice(5) == 10\n"
+    _fixture(tmp_path / "first")
+    _calc(tmp_path / "first", src, tests)
+    first = dr.run(_args(deadline_s=300), tmp_path / "first")
+    assert first["status"] == "VERIFIED_PATCH"
+    w = json.loads((tmp_path / "first" / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    assert w["tie_at_top"] is True and w["behaviour_classes"] == 2 and all(r["tied_with_top"] for r in w["ranking"])
+    _fixture(tmp_path / "refuse")
+    _calc(tmp_path / "refuse", src, tests)
+    refused = dr.run({**_args(deadline_s=300), "tie_policy": "refuse"}, tmp_path / "refuse")
+    assert refused["status"].startswith("OPEN:WITNESS_TIE:classes=2:[") and refused["diff_path"] is None
+    assert not (tmp_path / "refuse" / "out" / "dr.json.diff").exists()
+    with pytest.raises(dr.DiagnoseRepairRefusal, match="TIE_POLICY_INVALID"):
+        dr.run({**_args(), "tie_policy": "coin"}, tmp_path / "refuse")
+
+
+def test_property_inputs_are_type_directed_deterministic_and_optional(monkeypatch):
+    from canonical.runtime import patch_differential_witness_v1 as w
+    rows, status = w.property_inputs([[3, "ab", None, [1, 2]]], 4, n=40)
+    assert status == "MEASURED" and 20 <= len(rows) <= 40
+    assert all(isinstance(r[0], int) and isinstance(r[1], str) and r[2] is None and isinstance(r[3], list) for r in rows)
+    assert all(isinstance(x, int) for r in rows for x in r[3])
+    assert any(r[0] < 0 for r in rows) and any(len(r[1]) == 0 or len(r[3]) == 0 for r in rows)
+    again, _ = w.property_inputs([[3, "ab", None, [1, 2]]], 4, n=40)
+    assert again == rows                                                        # derandomized
+    assert w.property_inputs([], 0) == ([], "NOT_NEEDED")
+    import builtins
+    real_import = builtins.__import__
+    def no_hypothesis(name, *a, **k):
+        if name == "hypothesis" or name.startswith("hypothesis."):
+            raise ImportError("hidden for the test")
+        return real_import(name, *a, **k)
+    monkeypatch.setattr(builtins, "__import__", no_hypothesis)
+    assert w.property_inputs([[1]], 1) == ([], "HYPOTHESIS_UNAVAILABLE:ImportError")
+
+
+def test_postconditions_are_parsed_from_the_owning_callables_docstring_only():
+    from canonical.runtime import patch_differential_witness_v1 as w
+    src = ("def f(x):\n    \"\"\"Doubles.\n\n    post: _ == 2 * x\n    - Postcondition: result >= x or x < 0\n    post: this is not python(\n    \"\"\"\n    return x\n\n\n"
+           "class C:\n    def m(self):\n        \"\"\"post: _ is None\"\"\"\n        return 1\n\n\ndef g():\n    return 0\n")
+    assert w.postconditions(src, "f") == ["_ == 2 * x", "result >= x or x < 0"]
+    assert w.postconditions(src, "m", "C") == ["_ is None"]
+    assert w.postconditions(src, "g") == [] and w.postconditions("def (", "f") == []
+    program = w.probe_program("pkg.calc", "f", [[1], [2]], "o.json", params=["x"], posts=["_ == 2 * x"])
+    assert "POSTS = ['_ == 2 * x']" in program and "'R!'" in program

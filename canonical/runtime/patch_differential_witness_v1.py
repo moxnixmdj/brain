@@ -32,6 +32,7 @@ import itertools
 import json
 import pathlib
 import random
+import re
 from typing import Any, Callable, Iterable
 
 INT_GRID = [-7, -2, -1, 0, 1, 2, 3, 7, 10, 100]
@@ -253,24 +254,131 @@ def grid_inputs(test_inputs: list[list[Any]], arity: int, cap: int = MAX_INPUTS)
     return out
 
 
+POST_RE = re.compile(r"^\s*(?:-\s*)?post(?:condition)?\s*:\s*(.+)$", re.I)
+PROPERTY_EXAMPLES = 60
+
+
+def postconditions(source_text: str, name: str, cls: str | None = None) -> list[str]:
+    """``post: <expr>`` lines of the owning callable's docstring -- the same contract
+    notation evidence_oracle_hypothesis_v1 checks; ``_``/``result`` is the return value,
+    parameters are bound by name.  A stated contract is the third oracle beside the
+    suite and the behavioural delta."""
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError:
+        return []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == name:
+            doc = ast.get_docstring(node) or ""
+            posts = [m.group(1).strip() for m in (POST_RE.match(ln) for ln in doc.splitlines()) if m]
+            out = []
+            for pexpr in posts:
+                try:
+                    ast.parse(pexpr, mode="eval")
+                    out.append(pexpr)
+                except SyntaxError:
+                    continue
+            if out:
+                return out
+    return []
+
+
+def _strategy(seen: list[Any]):
+    from hypothesis import strategies as st
+    types = {type(v) for v in seen} or {int}
+    parts = []
+    if bool in types:
+        parts.append(st.booleans())
+    if int in types:
+        parts.append(st.integers(min_value=-10 ** 6, max_value=10 ** 6))
+    if float in types:
+        parts.append(st.floats(min_value=-1e6, max_value=1e6, allow_nan=False, allow_infinity=False))
+    if str in types:
+        parts.append(st.text(max_size=8))
+    if type(None) in types:
+        parts.append(st.none())
+    if list in types or tuple in types:
+        elems = [x for v in seen if isinstance(v, (list, tuple)) for x in v]
+        parts.append(st.lists(_strategy(elems) if elems else st.integers(-100, 100), max_size=8))
+    return st.one_of(*parts) if len(parts) > 1 else parts[0]
+
+
+def property_inputs(test_inputs: list[list[Any]], arity: int, n: int = PROPERTY_EXAMPLES) -> tuple[list[list[Any]], str]:
+    """``n`` inputs drawn by Hypothesis from strategies shaped like the tests' literals per
+    position (type-directed; negative, zero, large, empty, long, unicode -- what a hand
+    grid misses), deterministic (derandomize) so a rerun ranks identically.  (rows, status)."""
+    if arity == 0 or n <= 0:
+        return [], "NOT_NEEDED"
+    try:
+        from hypothesis import HealthCheck, Phase, given, settings, strategies as st
+    except Exception as exc:  # noqa: BLE001 - optional: the grid alone remains
+        return [], "HYPOTHESIS_UNAVAILABLE:" + type(exc).__name__
+    try:
+        per_pos = [_strategy([row[i] for row in test_inputs] if test_inputs else []) for i in range(arity)]
+        drawn: list[list[Any]] = []
+
+        @settings(max_examples=n, database=None, derandomize=True, deadline=None,
+                  phases=[Phase.generate], suppress_health_check=list(HealthCheck))
+        @given(st.tuples(*per_pos))
+        def draw(values):
+            drawn.append([list(v) if isinstance(v, tuple) else v for v in values])
+
+        draw()
+    except Exception as exc:  # noqa: BLE001
+        return [], "HYPOTHESIS_FAILED:" + type(exc).__name__
+    out, seen = [], set()
+    for row in drawn:
+        k = json.dumps(row, sort_keys=True, default=repr)
+        if k not in seen:
+            seen.add(k)
+            out.append(row)
+    return out, "MEASURED"
+
+
 def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel: str,
-                  cls: str | None = None, n_ctor: int = 0) -> str:
+                  cls: str | None = None, n_ctor: int = 0, params: list[str] | None = None,
+                  posts: list[str] | None = None) -> str:
     """Python source that imports ``module_name`` and writes one outcome per input to
     ``out_rel``; for a method each input is constructor literals + call literals and
-    the outcome is the result followed by the instance's simple attributes."""
+    the outcome is the result followed by the instance's simple attributes.  With
+    ``posts`` (docstring postconditions) a row whose result violates one -- or on which
+    a postcondition cannot be evaluated -- is tagged 'R!' instead of 'R'."""
     if cls is None:
-        get = "    f = getattr(importlib.import_module(" + repr(module_name) + "), " + repr(func) + ")\n"
-        call = "            r = f(*args); rows.append(['R', repr(r)[:200]])\n"
+        get = ("    MOD = importlib.import_module(" + repr(module_name) + ")\n"
+               "    f = getattr(MOD, " + repr(func) + ")\n")
+        call = "            r = f(*args); rows.append([_tag(args, r), repr(r)[:200]])\n"
     else:
-        get = ("    C = getattr(importlib.import_module(" + repr(module_name) + "), " + repr(cls) + ")\n"
+        get = ("    MOD = importlib.import_module(" + repr(module_name) + ")\n"
+               "    C = getattr(MOD, " + repr(cls) + ")\n"
                "    f = lambda *a: (lambda inst: (getattr(inst, " + repr(func) + ")(*a[" + str(n_ctor) + ":]), "
                "sorted((k, repr(v)[:80]) for k, v in vars(inst).items() if isinstance(v, (bool, int, float, str, tuple, list, type(None))))))"
                "(C(*a[:" + str(n_ctor) + "]))\n")
-        call = "            r, st = f(*args); rows.append(['R', repr(r)[:200], st])\n"
+        call = "            r, st = f(*args); rows.append([_tag(args[" + str(n_ctor) + ":], r), repr(r)[:200], st])\n"
     return (
         "import importlib, json, os, sys\n"
         "sys.path.insert(0, os.getcwd())\n"
         "rows = []\n"
+        "POSTS = " + repr(list(posts or [])) + "\n"
+        "PARAMS = " + repr(list(params or [])) + "\n"
+        "SAFE = {'abs': abs, 'min': min, 'max': max, 'len': len, 'sum': sum, 'int': int, 'float': float, 'bool': bool,\n"
+        "        'str': str, 'list': list, 'tuple': tuple, 'all': all, 'any': any, 'sorted': sorted, 'isinstance': isinstance,\n"
+        "        'round': round, 'set': set, 'dict': dict, 'range': range, 'type': type}\n"
+        "MOD = None\n"
+        "def _tag(args, r):\n"
+        "    if not POSTS:\n"
+        "        return 'R'\n"
+        "    # the module's own names are in scope, so a contract can be metamorphic:\n"
+        "    # `post: _ == area(h, w)` calls the version under probe\n"
+        "    g = dict(vars(MOD)) if MOD is not None else {}\n"
+        "    g.update(SAFE); g['__builtins__'] = {}\n"
+        "    env = dict(zip(PARAMS, args)); env.update({'_': r, 'result': r, '__return__': r})\n"
+        "    for p in POSTS:\n"
+        "        try:\n"
+        "            if not bool(eval(p, g, env)):\n"
+        "                return 'R!'\n"
+        "        except BaseException:\n"
+        "            return 'R!'\n"
+        "    return 'R'\n"
         "try:\n"
         + get +
         "except BaseException as exc:\n"
@@ -317,10 +425,16 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         # the tests' literal, exactly: `12` is not `12.0` even though `==` accepts it
         inexact = 0
         for o, e in zip(outcomes[:n_test_inputs], expected_reprs or []):
-            if e is not None and isinstance(o, list) and len(o) >= 2 and o[0] == "R" and o[1] != e:
+            if e is not None and isinstance(o, list) and len(o) >= 2 and o[0] in ("R", "R!") and o[1] != e:
                 inexact += 1
+        # a stated postcondition violated (any input), and inputs the original answered
+        # that the candidate turns into an exception: both before the plain delta
+        posts_broken = sum(1 for o in outcomes if isinstance(o, list) and o and o[0] == "R!")
+        new_exc = sum(1 for a, b in zip(original, outcomes)
+                      if isinstance(a, list) and isinstance(b, list) and a and b and a[0] != "E" and b[0] == "E")
         rows.append({"index": index, "delta_outside_tests": outside, "delta_on_tests": on_tests,
-                     "inexact_on_tests": inexact, "edit_size": (sizes or {}).get(index, 0),
+                     "inexact_on_tests": inexact, "postcondition_violations": posts_broken, "new_exceptions": new_exc,
+                     "edit_size": (sizes or {}).get(index, 0),
                      "grid_inputs": len(original) - n_test_inputs, "witness": "MEASURED"})
     # behavioural classes among the greens themselves: two candidates with the same
     # outcomes on every input are one behaviour; different classes with the same
@@ -341,27 +455,38 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
 
     def key(r: dict[str, Any]) -> tuple:
         if r["witness"] != "MEASURED":
-            return (2, 0, 0, 0, 0, r["index"])
-        # behaviour first (least change outside the tests, exact on their literals), then
-        # search order -- the generator's own specificity ranking (`is None` before `not x`,
-        # measured: both are one behaviour class on an int/None grid, and the smaller edit is
-        # the less specific guard); edit_size is reported, not ranked on
-        return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["delta_outside_tests"],
-                r["inexact_on_tests"], first_of_class[r["behaviour_class"]], 0, r["index"])
+            return (2, 0, 0, 0, 0, 0, 0, r["index"])
+        # stated contract first, then crashes the candidate introduces, then behaviour
+        # (least change outside the tests, exact on their literals), then search order --
+        # the generator's own specificity ranking (`is None` before `not x`, measured: both
+        # are one behaviour class on an int/None grid, and the smaller edit is the less
+        # specific guard); edit_size is reported, not ranked on
+        return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["postcondition_violations"],
+                r["new_exceptions"], r["delta_outside_tests"], r["inexact_on_tests"],
+                first_of_class[r["behaviour_class"]], 0, r["index"])
     rows.sort(key=key)
     measured = [r for r in rows if r["witness"] == "MEASURED"]
     if measured:
-        top = key(measured[0])[:3]
-        tied = {r["behaviour_class"] for r in measured if key(r)[:3] == top}
+        # a TIE: another behaviour class equal on the contract, the new exceptions and
+        # exactness, and within noise on the delta (one or two probe inputs out of a
+        # hundred decide nothing); the ranking still orders them, the flag says so
+        top = measured[0]
+        n_out = max(1, len(original) - n_test_inputs)
+        slack = max(1, int(0.05 * n_out))
+        tied = {r["behaviour_class"] for r in measured
+                if key(r)[:3] == key(top)[:3] and r["inexact_on_tests"] == top["inexact_on_tests"]
+                and abs(r["delta_outside_tests"] - top["delta_outside_tests"]) <= slack}
         for r in rows:
             r["tie_at_top"] = len(tied) > 1
+            r["tied_with_top"] = r["witness"] == "MEASURED" and r["behaviour_class"] in tied
     return rows
 
 
 def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: int,
             greens: list[tuple[int, str]], test_paths: list[pathlib.Path],
             run_program: Callable[[pathlib.Path, str, str], list[Any] | None],
-            scratch: pathlib.Path, expected: list[tuple[list[Any], Any]] = ()) -> dict[str, Any]:
+            scratch: pathlib.Path, expected: list[tuple[list[Any], Any]] = (),
+            property_examples: int = PROPERTY_EXAMPLES) -> dict[str, Any]:
     """Rank ``greens`` [(index, candidate_text)] by behavioural delta.
 
     ``run_program(copy_root, program_source, out_rel)`` executes the probe in a
@@ -380,8 +505,12 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
         module_name = module_name[: -len(".__init__")]
     t_inputs = test_call_inputs(test_paths, name, arity, cls, n_ctor)
     inputs = t_inputs + [g for g in grid_inputs(t_inputs, arity + n_ctor) if g not in t_inputs]
+    prop_rows, prop_status = property_inputs(t_inputs, arity + n_ctor, property_examples)
+    n_grid = len(inputs) - len(t_inputs)
+    inputs += [g for g in prop_rows if g not in inputs]
+    posts = postconditions(original_text, name, cls)
     out_rel = ".brain_diagnose/witness.json"
-    program = probe_program(module_name, name, inputs, out_rel, cls, n_ctor)
+    program = probe_program(module_name, name, inputs, out_rel, cls, n_ctor, params=list(c["params"]), posts=posts)
     import shutil
     base = scratch / "witness"
     shutil.rmtree(base, ignore_errors=True)
@@ -413,7 +542,9 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
     ranking = rank(original, per, len(t_inputs), expected_reprs,
                    {i: size(text) for i, text in greens})
     return {"status": "MEASURED" if original is not None else "WITNESS_UNAVAILABLE:ORIGINAL_PROBE_FAILED",
-            "function": name, "class": cls, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": len(inputs) - len(t_inputs),
+            "function": name, "class": cls, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": n_grid,
+            "property_inputs": len(inputs) - len(t_inputs) - n_grid, "hypothesis": prop_status,
+            "postconditions": posts,
             "behaviour_classes": len({r.get("behaviour_class") for r in ranking if "behaviour_class" in r}),
             "tie_at_top": any(r.get("tie_at_top") for r in ranking),
             "ranking": ranking, "proves_correctness": False}

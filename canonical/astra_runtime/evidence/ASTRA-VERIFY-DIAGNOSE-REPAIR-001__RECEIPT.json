@@ -4,15 +4,15 @@
  "adapter_module": "software_diagnose_then_repair_v1",
  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12; two-example cases add area(2, 5) == 10), proj/tests/test_other.py is the rest of the suite; 2-cpu host, confinement on",
  "e2e_ms_golden": [
-  2114.7,
-  2154.1
+  2250.0,
+  2139.5
  ],
  "observed": {
   "golden": {
    "bug": "return w * h - 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2114.7,
-   "search_s": 1.346,
+   "e2e_ms": 2250.0,
+   "search_s": 1.517,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -40,55 +40,70 @@
     "class": null,
     "function": "area",
     "grid_inputs": 109,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 28,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 1,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 4,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 33,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 6,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 5,
       "inexact_on_tests": 1,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.563,
+    "seconds": 0.73,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -99,19 +114,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.337
+     "seconds": 0.319
     },
     {
      "step": "localize",
-     "seconds": 0.117
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 1.346
+     "seconds": 1.517
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.311
+     "seconds": 0.294
     }
    ],
    "gate": "PASS",
@@ -124,8 +139,8 @@
   "wrong_operator": {
    "bug": "return w + h",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1575.5,
-   "search_s": 0.828,
+   "e2e_ms": 1567.8,
+   "search_s": 0.805,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -159,19 +174,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.319
+     "seconds": 0.317
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.115
     },
     {
      "step": "patch_search",
-     "seconds": 0.828
+     "seconds": 0.805
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.309
+     "seconds": 0.327
     }
    ],
    "gate": "PASS",
@@ -183,8 +198,8 @@
   "missing_term": {
    "bug": "return w",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1592.5,
-   "search_s": 0.803,
+   "e2e_ms": 1547.4,
+   "search_s": 0.795,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -218,19 +233,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.364
+     "seconds": 0.321
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 0.803
+     "seconds": 0.795
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.308
+     "seconds": 0.312
     }
    ],
    "gate": "PASS",
@@ -242,8 +257,8 @@
   "missing_guard": {
    "bug": "return w * h  (+ area(None, 4) == 0)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2092.9,
-   "search_s": 1.346,
+   "e2e_ms": 2101.0,
+   "search_s": 1.341,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -271,7 +286,7 @@
         "h",
         "w"
        ],
-       "seconds": 0.038,
+       "seconds": 0.036,
        "sites": [
         {
          "distinct": 330,
@@ -285,7 +300,7 @@
        "status": "NONE"
       }
      ],
-     "seconds": 0.179
+     "seconds": 0.174
     },
     "seconds": 0.016,
     "status": "NONE:EXHAUSTED",
@@ -297,33 +312,42 @@
     "class": null,
     "function": "area",
     "grid_inputs": 118,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 58,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 10,
+      "delta_outside_tests": 26,
       "edit_size": 21,
-      "grid_inputs": 118,
+      "grid_inputs": 176,
       "index": 11,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 10,
+      "delta_outside_tests": 26,
       "edit_size": 17,
-      "grid_inputs": 118,
+      "grid_inputs": 176,
       "index": 18,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.344,
+    "seconds": 0.37,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -335,19 +359,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.331
+     "seconds": 0.323
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.114
     },
     {
      "step": "patch_search",
-     "seconds": 1.346
+     "seconds": 1.341
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.297
+     "seconds": 0.319
     }
    ],
    "gate": "PASS",
@@ -359,8 +383,8 @@
   "two_edits_and_overfit": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3690.0,
-   "search_s": 2.906,
+   "e2e_ms": 3628.7,
+   "search_s": 2.874,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -406,7 +430,7 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 2.096
+    "seconds": 2.104
    },
    "synthesis": {
     "class": null,
@@ -421,69 +445,87 @@
     "class": null,
     "function": "area",
     "grid_inputs": 109,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 105,
+      "delta_outside_tests": 164,
       "edit_size": 28,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 103,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 105,
+      "delta_outside_tests": 164,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 104,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 105,
+      "delta_outside_tests": 164,
       "edit_size": 33,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 106,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 25,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 2,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 105,
       "inexact_on_tests": 1,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.697,
+    "seconds": 0.714,
     "status": "MEASURED",
     "test_inputs": 1,
-    "tie_at_top": false
+    "tie_at_top": true
    },
    "patched_lines": [
     "+    return w * h"
@@ -491,19 +533,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.314
+     "seconds": 0.327
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.114
     },
     {
      "step": "patch_search",
-     "seconds": 2.906
+     "seconds": 2.874
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.35
+     "seconds": 0.309
     }
    ],
    "gate": "PASS",
@@ -516,8 +558,8 @@
   "two_edits_and_overfit__judge_pytest": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 21884.3,
-   "search_s": 21.121,
+   "e2e_ms": 22377.5,
+   "search_s": 21.6,
    "judge": {
     "in_process": false,
     "reason": "JUDGE_PYTEST_REQUESTED"
@@ -563,7 +605,7 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 11.981
+    "seconds": 12.151
    },
    "synthesis": {
     "status": "NOT_ATTEMPTED"
@@ -574,69 +616,87 @@
     "class": null,
     "function": "area",
     "grid_inputs": 109,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 105,
+      "delta_outside_tests": 164,
       "edit_size": 28,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 104,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 105,
+      "delta_outside_tests": 164,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 132,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 2,
       "delta_on_tests": 1,
-      "delta_outside_tests": 106,
+      "delta_outside_tests": 165,
       "edit_size": 25,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 112,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 25,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 3,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 146,
       "inexact_on_tests": 0,
-      "tie_at_top": false,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.686,
+    "seconds": 0.708,
     "status": "MEASURED",
     "test_inputs": 1,
-    "tie_at_top": false
+    "tie_at_top": true
    },
    "patched_lines": [
     "+    return w * h"
@@ -644,7 +704,7 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.314
+     "seconds": 0.325
     },
     {
      "step": "localize",
@@ -652,11 +712,11 @@
     },
     {
      "step": "patch_search",
-     "seconds": 21.121
+     "seconds": 21.6
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.321
+     "seconds": 0.326
     }
    ],
    "gate": "PASS",
@@ -669,8 +729,8 @@
   "only_overfit": {
    "bug": "return 0",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-   "e2e_ms": 1221.4,
-   "search_s": 0.772,
+   "e2e_ms": 1261.8,
+   "search_s": 0.818,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -733,15 +793,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.332
+     "seconds": 0.326
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.114
     },
     {
      "step": "patch_search",
-     "seconds": 0.772
+     "seconds": 0.818
     }
    ],
    "gate": null,
@@ -754,8 +814,8 @@
   "cross_file_spectrum": {
    "bug": "util.mul returns a + b (called by calc.area)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1542.8,
-   "search_s": 0.775,
+   "e2e_ms": 1535.5,
+   "search_s": 0.782,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -789,19 +849,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.335
+     "seconds": 0.324
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 0.775
+     "seconds": 0.782
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.316
+     "seconds": 0.308
     }
    ],
    "gate": "PASS",
@@ -814,8 +874,8 @@
   "parametrized_synthesis": {
    "bug": "return len(str(w)) (parametrized rows 12/(3,4), 10/(2,5))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1864.7,
-   "search_s": 1.013,
+   "e2e_ms": 1905.3,
+   "search_s": 1.04,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -841,7 +901,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.112,
+    "seconds": 0.101,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -860,19 +920,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.316
+     "seconds": 0.311
     },
     {
      "step": "localize",
-     "seconds": 0.229
+     "seconds": 0.226
     },
     {
      "step": "patch_search",
-     "seconds": 1.013
+     "seconds": 1.04
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.303
+     "seconds": 0.324
     }
    ],
    "gate": "PASS",
@@ -885,8 +945,8 @@
   "hole_in_loop_assignment": {
    "bug": "acc = acc + 1 inside `for x in xs` (should be acc + x)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3382.1,
-   "search_s": 2.624,
+   "e2e_ms": 3443.8,
+   "search_s": 2.704,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -937,7 +997,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.35,
+       "seconds": 0.354,
        "sites": [
         {
          "distinct": 7252,
@@ -962,7 +1022,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.48,
+       "seconds": 0.477,
        "sites": [
         {
          "distinct": 4607,
@@ -978,7 +1038,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.262
+     "seconds": 1.268
     },
     "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
@@ -990,55 +1050,70 @@
     "class": null,
     "function": "total",
     "grid_inputs": 26,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 58,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 18,
+      "delta_outside_tests": 76,
       "edit_size": 26,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 48,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 24,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 49,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 3,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 36,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 51,
       "inexact_on_tests": 0,
+      "new_exceptions": 8,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 2,
       "delta_on_tests": 2,
-      "delta_outside_tests": 25,
+      "delta_outside_tests": 83,
       "edit_size": 30,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 50,
       "inexact_on_tests": 0,
+      "new_exceptions": 11,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.565,
+    "seconds": 0.625,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -1049,19 +1124,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.333
+     "seconds": 0.323
     },
     {
      "step": "localize",
-     "seconds": 0.117
+     "seconds": 0.115
     },
     {
      "step": "patch_search",
-     "seconds": 2.624
+     "seconds": 2.704
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.305
+     "seconds": 0.297
     }
    ],
    "gate": "PASS",
@@ -1074,8 +1149,8 @@
   "hole_in_condition": {
    "bug": "if x < lo (should be x < lo or x > hi)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3667.4,
-   "search_s": 2.876,
+   "e2e_ms": 3701.3,
+   "search_s": 2.957,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1105,7 +1180,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.137,
+       "seconds": 0.142,
        "sites": [
         {
          "distinct": 24,
@@ -1129,7 +1204,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.1,
+       "seconds": 0.098,
        "sites": [
         {
          "distinct": 990,
@@ -1149,7 +1224,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.778,
+       "seconds": 0.773,
        "sites": [
         {
          "distinct": 8023,
@@ -1163,9 +1238,9 @@
        "status": "NONE"
       }
      ],
-     "seconds": 1.454
+     "seconds": 1.446
     },
-    "seconds": 0.139,
+    "seconds": 0.151,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -1175,44 +1250,56 @@
     "class": null,
     "function": "inside",
     "grid_inputs": 120,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 60,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 42,
+      "delta_outside_tests": 60,
       "edit_size": 30,
-      "grid_inputs": 120,
+      "grid_inputs": 180,
       "index": 8,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 42,
+      "delta_outside_tests": 60,
       "edit_size": 30,
-      "grid_inputs": 120,
+      "grid_inputs": 180,
       "index": 9,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 50,
+      "delta_outside_tests": 83,
       "edit_size": 31,
-      "grid_inputs": 120,
+      "grid_inputs": 180,
       "index": 10,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.453,
+    "seconds": 0.508,
     "status": "MEASURED",
     "test_inputs": 3,
     "tie_at_top": false
@@ -1223,7 +1310,7 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.337
+     "seconds": 0.323
     },
     {
      "step": "localize",
@@ -1231,11 +1318,11 @@
     },
     {
      "step": "patch_search",
-     "seconds": 2.876
+     "seconds": 2.957
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.334
+     "seconds": 0.301
     }
    ],
    "gate": "PASS",
@@ -1248,8 +1335,8 @@
   "stmt_missing_return": {
    "bug": "area() computes r and never returns it",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1602.6,
-   "search_s": 0.811,
+   "e2e_ms": 1566.1,
+   "search_s": 0.82,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1283,19 +1370,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.352
+     "seconds": 0.323
     },
     {
      "step": "localize",
-     "seconds": 0.133
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 0.811
+     "seconds": 0.82
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.301
+     "seconds": 0.303
     }
    ],
    "gate": "PASS",
@@ -1308,8 +1395,8 @@
   "stmt_delete": {
    "bug": "stray `acc = 0` inside the loop",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3616.8,
-   "search_s": 2.866,
+   "e2e_ms": 3653.0,
+   "search_s": 2.921,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1360,7 +1447,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.282,
+       "seconds": 0.283,
        "sites": [
         {
          "distinct": 2590,
@@ -1380,7 +1467,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.287,
+       "seconds": 0.291,
        "sites": [
         {
          "distinct": 2552,
@@ -1403,7 +1490,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.162,
+       "seconds": 0.171,
        "sites": [
         {
          "distinct": 1566,
@@ -1419,7 +1506,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.319
+     "seconds": 1.329
     },
     "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
@@ -1431,76 +1518,91 @@
     "class": null,
     "function": "total",
     "grid_inputs": 26,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 58,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 7,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 64,
       "inexact_on_tests": 0,
-      "tie_at_top": true,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 20,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 77,
       "inexact_on_tests": 0,
-      "tie_at_top": true,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 20,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 79,
       "inexact_on_tests": 0,
-      "tie_at_top": true,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 33,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 65,
       "inexact_on_tests": 0,
-      "tie_at_top": true,
+      "new_exceptions": 8,
+      "postcondition_violations": 0,
+      "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.584,
+    "seconds": 0.617,
     "status": "MEASURED",
     "test_inputs": 2,
-    "tie_at_top": true
+    "tie_at_top": false
    },
    "patched_lines": [],
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.325
+     "seconds": 0.312
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.12
     },
     {
      "step": "patch_search",
-     "seconds": 2.866
+     "seconds": 2.921
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.306
+     "seconds": 0.296
     }
    ],
    "gate": "PASS",
@@ -1513,8 +1615,8 @@
   "stmt_insert_donor": {
    "bug": "normalize() never appends to out",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2775.1,
-   "search_s": 2.024,
+   "e2e_ms": 2633.6,
+   "search_s": 1.89,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1540,7 +1642,7 @@
        "names": [
         "xs"
        ],
-       "seconds": 0.018,
+       "seconds": 0.017,
        "sites": [
         {
          "distinct": 125,
@@ -1560,7 +1662,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.103,
+       "seconds": 0.099,
        "sites": [
         {
          "distinct": 40,
@@ -1580,7 +1682,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.216,
+       "seconds": 0.198,
        "sites": [
         {
          "distinct": 1597,
@@ -1600,7 +1702,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.222,
+       "seconds": 0.195,
        "sites": [
         {
          "distinct": 1553,
@@ -1614,9 +1716,9 @@
        "status": "NONE"
       }
      ],
-     "seconds": 1.172
+     "seconds": 1.085
     },
-    "seconds": 0.005,
+    "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -1635,19 +1737,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.33
     },
     {
      "step": "localize",
-     "seconds": 0.124
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 2.024
+     "seconds": 1.89
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.295
+     "seconds": 0.291
     }
    ],
    "gate": "PASS",
@@ -1660,8 +1762,8 @@
   "stmt_swap": {
    "bug": "out.append(acc) before acc += x",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 4448.3,
-   "search_s": 3.648,
+   "e2e_ms": 4282.9,
+   "search_s": 3.552,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1706,7 +1808,7 @@
         "out",
         "xs"
        ],
-       "seconds": 0.026,
+       "seconds": 0.024,
        "sites": [
         {
          "distinct": 186,
@@ -1727,7 +1829,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.761,
+       "seconds": 0.752,
        "sites": [
         {
          "distinct": 6178,
@@ -1748,7 +1850,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.57,
+       "seconds": 0.542,
        "sites": [
         {
          "distinct": 4443,
@@ -1762,9 +1864,9 @@
        "status": "NONE"
       }
      ],
-     "seconds": 2.637
+     "seconds": 2.582
     },
-    "seconds": 0.004,
+    "seconds": 0.003,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -1787,15 +1889,15 @@
     },
     {
      "step": "localize",
-     "seconds": 0.12
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 3.648
+     "seconds": 3.552
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.363
+     "seconds": 0.297
     }
    ],
    "gate": "PASS",
@@ -1808,8 +1910,8 @@
   "method_wrong_op": {
    "bug": "Rect.area returns self.w + self.h",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2775.5,
-   "search_s": 1.966,
+   "e2e_ms": 2594.3,
+   "search_s": 1.818,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1836,7 +1938,7 @@
         "self.h",
         "self.w"
        ],
-       "seconds": 0.477,
+       "seconds": 0.475,
        "sites": [
         {
          "distinct": 4485,
@@ -1852,7 +1954,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 0.622
+     "seconds": 0.619
     },
     "status": "METHOD:HOLE_ONLY"
    },
@@ -1862,33 +1964,42 @@
     "class": "Rect",
     "function": "area",
     "grid_inputs": 118,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 116,
+      "delta_outside_tests": 175,
       "edit_size": 44,
-      "grid_inputs": 118,
+      "grid_inputs": 177,
       "index": 4,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 116,
+      "delta_outside_tests": 175,
       "edit_size": 44,
-      "grid_inputs": 118,
+      "grid_inputs": 177,
       "index": 10,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.381,
+    "seconds": 0.374,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -1899,19 +2010,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.322
+     "seconds": 0.334
     },
     {
      "step": "localize",
-     "seconds": 0.13
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 1.966
+     "seconds": 1.818
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.354
+     "seconds": 0.32
     }
    ],
    "gate": "PASS",
@@ -1924,8 +2035,8 @@
   "method_hole_self_attrs": {
    "bug": "Rect.area returns len(str(self.w))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2414.4,
-   "search_s": 1.513,
+   "e2e_ms": 2226.7,
+   "search_s": 1.414,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1951,7 +2062,7 @@
         "self.h",
         "self.w"
        ],
-       "seconds": 0.495,
+       "seconds": 0.473,
        "sites": [
         {
          "distinct": 4485,
@@ -1967,7 +2078,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 0.678
+     "seconds": 0.615
     },
     "status": "METHOD:HOLE_ONLY"
    },
@@ -1986,19 +2097,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.425
+     "seconds": 0.32
     },
     {
      "step": "localize",
-     "seconds": 0.15
+     "seconds": 0.121
     },
     {
      "step": "patch_search",
-     "seconds": 1.513
+     "seconds": 1.414
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.321
+     "seconds": 0.368
     }
    ],
    "gate": "PASS",
@@ -2011,8 +2122,8 @@
   "method_loop_witness": {
    "bug": "Bag.total adds 1 instead of x",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3818.9,
-   "search_s": 3.046,
+   "e2e_ms": 3546.2,
+   "search_s": 2.805,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2042,7 +2153,7 @@
        "names": [
         "self.items"
        ],
-       "seconds": 0.017,
+       "seconds": 0.016,
        "sites": [
         {
          "distinct": 113,
@@ -2062,7 +2173,7 @@
         "self.items",
         "x"
        ],
-       "seconds": 0.446,
+       "seconds": 0.4,
        "sites": [
         {
          "distinct": 7252,
@@ -2087,7 +2198,7 @@
         "self.items",
         "x"
        ],
-       "seconds": 0.584,
+       "seconds": 0.551,
        "sites": [
         {
          "distinct": 4607,
@@ -2103,7 +2214,7 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.509
+     "seconds": 1.399
     },
     "status": "METHOD:HOLE_ONLY"
    },
@@ -2113,55 +2224,70 @@
     "class": "Bag",
     "function": "total",
     "grid_inputs": 26,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 58,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 18,
+      "delta_outside_tests": 76,
       "edit_size": 26,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 22,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 24,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 23,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 3,
       "delta_on_tests": 2,
-      "delta_outside_tests": 23,
+      "delta_outside_tests": 81,
       "edit_size": 36,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 25,
       "inexact_on_tests": 0,
+      "new_exceptions": 8,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 2,
       "delta_on_tests": 2,
-      "delta_outside_tests": 25,
+      "delta_outside_tests": 83,
       "edit_size": 30,
-      "grid_inputs": 26,
+      "grid_inputs": 84,
       "index": 24,
       "inexact_on_tests": 0,
+      "new_exceptions": 11,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.663,
+    "seconds": 0.624,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -2172,19 +2298,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.344
+     "seconds": 0.316
     },
     {
      "step": "localize",
-     "seconds": 0.126
+     "seconds": 0.115
     },
     {
      "step": "patch_search",
-     "seconds": 3.046
+     "seconds": 2.805
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.299
+     "seconds": 0.307
     }
    ],
    "gate": "PASS",
@@ -2197,8 +2323,8 @@
   "two_files_coupled": {
    "bug": "util.scale k + x and calc.area scale(w, h) - 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3127.0,
-   "search_s": 2.323,
+   "e2e_ms": 2976.0,
+   "search_s": 2.229,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2241,55 +2367,70 @@
     "class": null,
     "function": "scale",
     "grid_inputs": 109,
+    "hypothesis": "MEASURED",
     "module": "pkg.util",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 107,
+      "delta_outside_tests": 166,
       "edit_size": 58,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 1,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 107,
+      "delta_outside_tests": 166,
       "edit_size": 64,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 7,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 107,
+      "delta_outside_tests": 166,
       "edit_size": 68,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 11,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 107,
+      "delta_outside_tests": 166,
       "edit_size": 68,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 16,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.595,
+    "seconds": 0.583,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -2301,19 +2442,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.311
     },
     {
      "step": "localize",
-     "seconds": 0.129
+     "seconds": 0.117
     },
     {
      "step": "patch_search",
-     "seconds": 2.323
+     "seconds": 2.229
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.341
+     "seconds": 0.313
     }
    ],
    "gate": "PASS",
@@ -2326,8 +2467,8 @@
   "two_hunks_one_file": {
    "bug": "if x > k (>=) and out.append(x - 1) (x)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3944.1,
-   "search_s": 3.144,
+   "e2e_ms": 3754.3,
+   "search_s": 3.02,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2386,7 +2527,7 @@
         "k",
         "xs"
        ],
-       "seconds": 0.088,
+       "seconds": 0.093,
        "sites": [
         {
          "distinct": 662,
@@ -2407,7 +2548,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.275,
+       "seconds": 0.258,
        "sites": [
         {
          "distinct": 127,
@@ -2427,7 +2568,7 @@
         "out",
         "xs"
        ],
-       "seconds": 0.106,
+       "seconds": 0.113,
        "sites": [
         {
          "distinct": 808,
@@ -2441,9 +2582,9 @@
        "status": "NONE"
       }
      ],
-     "seconds": 0.926
+     "seconds": 0.901
     },
-    "seconds": 0.024,
+    "seconds": 0.026,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -2453,55 +2594,70 @@
     "class": null,
     "function": "tally",
     "grid_inputs": 118,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 58,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 71,
+      "delta_outside_tests": 119,
       "edit_size": 49,
-      "grid_inputs": 118,
+      "grid_inputs": 176,
       "index": 78,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 71,
+      "delta_outside_tests": 119,
       "edit_size": 53,
-      "grid_inputs": 118,
+      "grid_inputs": 176,
       "index": 88,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 71,
+      "delta_outside_tests": 119,
       "edit_size": 54,
-      "grid_inputs": 118,
+      "grid_inputs": 176,
       "index": 111,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 2,
-      "delta_outside_tests": 71,
+      "delta_outside_tests": 119,
       "edit_size": 53,
-      "grid_inputs": 118,
+      "grid_inputs": 176,
       "index": 99,
       "inexact_on_tests": 2,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.628,
+    "seconds": 0.619,
     "status": "MEASURED",
     "test_inputs": 3,
     "tie_at_top": false
@@ -2513,19 +2669,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.345
+     "seconds": 0.305
     },
     {
      "step": "localize",
-     "seconds": 0.128
+     "seconds": 0.113
     },
     {
      "step": "patch_search",
-     "seconds": 3.144
+     "seconds": 3.02
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.317
+     "seconds": 0.307
     }
    ],
    "gate": "PASS",
@@ -2538,8 +2694,8 @@
   "second_file_from_spectrum": {
    "bug": "calc.area scale(w, h) + h (callee clean)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2246.1,
-   "search_s": 1.459,
+   "e2e_ms": 2163.6,
+   "search_s": 1.419,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2566,7 +2722,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.105,
+    "seconds": 0.103,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -2576,33 +2732,42 @@
     "class": null,
     "function": "area",
     "grid_inputs": 118,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 108,
+      "delta_outside_tests": 164,
       "edit_size": 40,
-      "grid_inputs": 118,
+      "grid_inputs": 177,
       "index": 1,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 2,
-      "delta_outside_tests": 108,
+      "delta_outside_tests": 164,
       "edit_size": 34,
-      "grid_inputs": 118,
+      "grid_inputs": 177,
       "index": 10,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.341,
+    "seconds": 0.367,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -2613,19 +2778,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.34
+     "seconds": 0.317
     },
     {
      "step": "localize",
-     "seconds": 0.132
+     "seconds": 0.112
     },
     {
      "step": "patch_search",
-     "seconds": 1.459
+     "seconds": 1.419
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.311
+     "seconds": 0.312
     }
    ],
    "gate": "PASS",
@@ -2635,11 +2800,330 @@
    "tree_unchanged": true,
    "note": "the spectrum ranks the clean callee first (deeper call, same score); its search is exhausted in ~0.15 s and the caller -- the spectrum's next file -- is searched and repaired"
   },
+  "contract_outranks_least_change": {
+   "bug": "w <= 0 with post: _ >= 0",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 2202.4,
+   "search_s": 1.427,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 63,
+   "tested": 63,
+   "greens": [
+    11,
+    13,
+    14,
+    15
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "class": null,
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "COMPARE_SWAP LtE->Gt",
+   "witness": {
+    "behaviour_classes": 2,
+    "class": null,
+    "function": "area",
+    "grid_inputs": 109,
+    "hypothesis": "MEASURED",
+    "module": "pkg.calc",
+    "postconditions": [
+     "_ >= 0"
+    ],
+    "property_inputs": 59,
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 57,
+      "grid_inputs": 168,
+      "index": 13,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 27,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 58,
+      "grid_inputs": 168,
+      "index": 14,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 27,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 58,
+      "grid_inputs": 168,
+      "index": 15,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 27,
+      "tie_at_top": false,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 89,
+      "edit_size": 58,
+      "grid_inputs": 168,
+      "index": 11,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 58,
+      "tie_at_top": false,
+      "tied_with_top": false,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.618,
+    "status": "MEASURED",
+    "test_inputs": 1,
+    "tie_at_top": false
+   },
+   "patched_lines": [
+    "+    return w * h if w > 0 else 0"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.319
+    },
+    {
+     "step": "localize",
+     "seconds": 0.114
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.427
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.339
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "the same under-specified `w <= 0` with a docstring contract `post: _ >= 0`: the probe evaluates the contract on every input (109 grid + 59 Hypothesis-drawn), `!=` violates it 58 times, `>`/`>=` 27 -- the contract outranks least change and `w > 0` ships (without the contract `w != 0` ships, 89 vs 145 changed outside the tests)"
+  },
+  "tie_named_and_shipped": {
+   "bug": "return a (a tie the suite cannot break)",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1985.0,
+   "search_s": 1.194,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 63,
+   "tested": 63,
+   "greens": [
+    2,
+    3
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "class": null,
+    "examples": 1,
+    "expressions": [],
+    "function": "pick",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "EXPR_EXTEND <expr> Mult b",
+   "witness": {
+    "behaviour_classes": 2,
+    "class": null,
+    "function": "pick",
+    "grid_inputs": 99,
+    "hypothesis": "MEASURED",
+    "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 139,
+      "edit_size": 20,
+      "grid_inputs": 158,
+      "index": 2,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 20,
+      "grid_inputs": 158,
+      "index": 3,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.384,
+    "status": "MEASURED",
+    "test_inputs": 1,
+    "tie_at_top": true
+   },
+   "patched_lines": [
+    "+    return a * b"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.359
+    },
+    {
+     "step": "localize",
+     "seconds": 0.118
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.194
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.31
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "`a * b` and `a + b` both satisfy pick(2, 2) == 4, differ in behaviour, and sit within noise of each other on the probes (139 vs 145 of 158): tie_at_top is named in the ledger and, under the default tie_policy=first, the lower delta ships"
+  },
+  "tie_refused": {
+   "bug": "return a (a tie the suite cannot break)",
+   "status": "OPEN:WITNESS_TIE:classes=2:[2, 3]",
+   "e2e_ms": 1635.4,
+   "search_s": 1.173,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 63,
+   "tested": 63,
+   "greens": [
+    2,
+    3
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "class": null,
+    "examples": 1,
+    "expressions": [],
+    "function": "pick",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "EXPR_EXTEND <expr> Mult b",
+   "witness": {
+    "behaviour_classes": 2,
+    "class": null,
+    "function": "pick",
+    "grid_inputs": 99,
+    "hypothesis": "MEASURED",
+    "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 139,
+      "edit_size": 20,
+      "grid_inputs": 158,
+      "index": 2,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 1,
+      "delta_outside_tests": 145,
+      "edit_size": 20,
+      "grid_inputs": 158,
+      "index": 3,
+      "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
+      "tie_at_top": true,
+      "tied_with_top": true,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.373,
+    "status": "MEASURED",
+    "test_inputs": 1,
+    "tie_at_top": true
+   },
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.335
+    },
+    {
+     "step": "localize",
+     "seconds": 0.124
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.173
+    }
+   ],
+   "gate": null,
+   "tests_discovered": null,
+   "verified": false,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "same tie under tie_policy=refuse: OPEN:WITNESS_TIE:classes=2:[2, 3], no diff written -- the suite's under-specification is the answer"
+  },
   "two_examples_synthesis__return_0": {
    "bug": "return 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1683.4,
-   "search_s": 0.92,
+   "e2e_ms": 1635.6,
+   "search_s": 0.881,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2665,7 +3149,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.116,
+    "seconds": 0.099,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -2684,19 +3168,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.312
+     "seconds": 0.32
     },
     {
      "step": "localize",
-     "seconds": 0.141
+     "seconds": 0.115
     },
     {
      "step": "patch_search",
-     "seconds": 0.92
+     "seconds": 0.881
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.306
+     "seconds": 0.316
     }
    ],
    "gate": "PASS",
@@ -2709,8 +3193,8 @@
   "two_examples_synthesis__len_str_w": {
    "bug": "return len(str(w))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1686.4,
-   "search_s": 0.938,
+   "e2e_ms": 1628.8,
+   "search_s": 0.891,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2736,7 +3220,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.121,
+    "seconds": 0.098,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -2755,19 +3239,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.327
+     "seconds": 0.318
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.112
     },
     {
      "step": "patch_search",
-     "seconds": 0.938
+     "seconds": 0.891
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.302
+     "seconds": 0.304
     }
    ],
    "gate": "PASS",
@@ -2779,8 +3263,8 @@
   "two_examples_synthesis__w_plus_h_plus_1": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1677.6,
-   "search_s": 0.913,
+   "e2e_ms": 1661.7,
+   "search_s": 0.914,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2806,7 +3290,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.1,
+    "seconds": 0.128,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -2825,19 +3309,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.319
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 0.913
+     "seconds": 0.914
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.316
+     "seconds": 0.306
     }
    ],
    "gate": "PASS",
@@ -2849,8 +3333,8 @@
   "two_examples_no_expression__test_literal_rejected": {
    "bug": "return len(str(w))",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[1, 2, 4, 7]",
-   "e2e_ms": 2745.1,
-   "search_s": 2.306,
+   "e2e_ms": 2697.8,
+   "search_s": 2.263,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2899,7 +3383,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.122,
+    "seconds": 0.101,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -2915,15 +3399,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.321
+     "seconds": 0.316
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 2.306
+     "seconds": 2.263
     }
    ],
    "gate": null,
@@ -2936,8 +3420,8 @@
   "under_specified_suite": {
    "bug": "return w * h if w <= 0 else 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2139.9,
-   "search_s": 1.407,
+   "e2e_ms": 2189.7,
+   "search_s": 1.454,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -2966,7 +3450,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.056,
+    "seconds": 0.059,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -2976,55 +3460,70 @@
     "class": null,
     "function": "area",
     "grid_inputs": 108,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 59,
+      "delta_outside_tests": 89,
       "edit_size": 58,
-      "grid_inputs": 108,
+      "grid_inputs": 167,
       "index": 11,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 89,
+      "delta_outside_tests": 145,
       "edit_size": 57,
-      "grid_inputs": 108,
+      "grid_inputs": 167,
       "index": 13,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 89,
+      "delta_outside_tests": 145,
       "edit_size": 58,
-      "grid_inputs": 108,
+      "grid_inputs": 167,
       "index": 14,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 89,
+      "delta_outside_tests": 145,
       "edit_size": 58,
-      "grid_inputs": 108,
+      "grid_inputs": 167,
       "index": 15,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.569,
+    "seconds": 0.615,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -3039,15 +3538,15 @@
     },
     {
      "step": "localize",
-     "seconds": 0.112
+     "seconds": 0.12
     },
     {
      "step": "patch_search",
-     "seconds": 1.407
+     "seconds": 1.454
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.304
+     "seconds": 0.298
     }
    ],
    "gate": "PASS",
@@ -3059,8 +3558,8 @@
   "parametrized_not_plain": {
    "bug": "return w + h (parametrized test)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1922.2,
-   "search_s": 1.023,
+   "e2e_ms": 1848.3,
+   "search_s": 1.012,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -3086,7 +3585,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.113,
+    "seconds": 0.095,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -3105,19 +3604,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.35
+     "seconds": 0.309
     },
     {
      "step": "localize",
-     "seconds": 0.239
+     "seconds": 0.221
     },
     {
      "step": "patch_search",
-     "seconds": 1.023
+     "seconds": 1.012
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.308
+     "seconds": 0.302
     }
    ],
    "gate": "PASS",
@@ -3130,8 +3629,8 @@
   "sabotage_full_suite": {
    "bug": "return w * h - 1 (+ a test pinning the bug)",
    "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-   "e2e_ms": 2168.2,
-   "search_s": 1.397,
+   "e2e_ms": 2174.7,
+   "search_s": 1.408,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -3159,55 +3658,70 @@
     "class": null,
     "function": "area",
     "grid_inputs": 109,
+    "hypothesis": "MEASURED",
     "module": "pkg.calc",
+    "postconditions": [],
+    "property_inputs": 59,
     "proves_correctness": false,
     "ranking": [
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 28,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 1,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 4,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 0,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 33,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 6,
       "inexact_on_tests": 0,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": true,
       "witness": "MEASURED"
      },
      {
       "behaviour_class": 1,
       "delta_on_tests": 1,
-      "delta_outside_tests": 109,
+      "delta_outside_tests": 168,
       "edit_size": 32,
-      "grid_inputs": 109,
+      "grid_inputs": 168,
       "index": 5,
       "inexact_on_tests": 1,
+      "new_exceptions": 0,
+      "postcondition_violations": 0,
       "tie_at_top": false,
+      "tied_with_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.601,
+    "seconds": 0.613,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -3218,19 +3732,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.329
+     "seconds": 0.324
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.113
     },
     {
      "step": "patch_search",
-     "seconds": 1.397
+     "seconds": 1.408
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.324
+     "seconds": 0.325
     }
    ],
    "gate": "FAIL",
@@ -3242,7 +3756,7 @@
   "nothing_to_repair": {
    "bug": null,
    "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-   "e2e_ms": 325.3,
+   "e2e_ms": 316.6,
    "steps": [],
    "gate": null,
    "tests_discovered": null,
@@ -3253,7 +3767,7 @@
   "harness_crash": {
    "bug": null,
    "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-   "e2e_ms": 291.3,
+   "e2e_ms": 319.7,
    "steps": [],
    "gate": null,
    "tests_discovered": null,

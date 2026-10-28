@@ -569,6 +569,9 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     if confine not in ("auto", "required", "off"):
         raise DiagnoseRepairRefusal("CONFINE_MODE_INVALID")
     max_candidates = int(args.get("max_candidates") or 2000)
+    tie_policy = str(args.get("tie_policy") or "first")       # first | refuse
+    if tie_policy not in ("first", "refuse"):
+        raise DiagnoseRepairRefusal("TIE_POLICY_INVALID")
     workers = int(args.get("workers") or candidates_v1.default_workers())
     caller_target = args.get("source_path")
 
@@ -719,7 +722,8 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                     greens=greens, test_paths=[tree / t for t in tests_tree],
                     run_program=lambda copy, program, out_rel: _probe(copy, program, out_rel, python_exe,
                                                                        max(5, min(remaining(), 60)), confine),
-                    scratch=scratch_root, expected=expected_rows)
+                    scratch=scratch_root, expected=expected_rows,
+                    property_examples=int(args.get("property_examples", witness_v1.PROPERTY_EXAMPLES)))
                 witness_row["seconds"] = round(time.monotonic() - t0w, 3)
                 return int(witness_row["ranking"][0]["index"])
             return choose
@@ -960,6 +964,13 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             # the only way to make the suite green was to write its expected value into
             # the code; that is the suite's weakness, not a repair, and it is not shipped
             raise DiagnoseRepairRefusal("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:" + str(suspicious))
+        if tie_policy == "refuse" and witness_row.get("tie_at_top"):
+            # two different behaviours satisfy the suite, the contract and the probes
+            # equally: the suite under-specifies; under tie_policy=refuse that is the
+            # answer, with every tied alternative in the ledger, and nothing is shipped
+            tied = [r["index"] for r in witness_row.get("ranking") or [] if r.get("tied_with_top")]
+            raise DiagnoseRepairRefusal("OPEN:WITNESS_TIE:classes=" + str(witness_row.get("behaviour_classes"))
+                                        + ":" + str(tied[:8]))
         patched = candidates_v1.candidate_files(target_rel, search["winner"]["candidate"])
         diff_text = ""
         for rel in sorted(patched):
