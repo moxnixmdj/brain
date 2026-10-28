@@ -319,7 +319,9 @@ def _tracer(frame, event, arg):
     return _tracer
 
 
-reached_all = True
+# an example that never reaches the line (an empty list skipping the loop body)
+# contributes no snapshot but still judges every candidate in _agrees below
+reached = 0
 for args, expected in SPEC["examples"]:
     before = len(arrivals)
     signal.setitimer(signal.ITIMER_REAL, 0.5)
@@ -331,9 +333,10 @@ for args, expected in SPEC["examples"]:
     finally:
         sys.settrace(None)
         signal.setitimer(signal.ITIMER_REAL, 0)
-    if len(arrivals) == before:
-        reached_all = False
-if not arrivals or not reached_all:
+    if len(arrivals) != before:
+        reached += 1
+OUT["reached_examples"] = reached
+if not arrivals:
     _done("HOLE_LINE_NOT_REACHED_BY_EXAMPLE")
 # a hole inside a loop is executed many times: observational equivalence is taken
 # over EVERY arrival, so `acc + x` and `x` stay distinct after the first iteration

@@ -315,8 +315,7 @@ def _replay(tree: pathlib.Path, target_rel: str, text: str, run_tests, scratch: 
     try:
         out = []
         for _ in range(2):
-            (copy / target_rel).write_text(text, encoding="utf-8")
-            shutil.rmtree(copy / pathlib.Path(target_rel).parent / "__pycache__", ignore_errors=True)
+            candidates_v1.write_candidate(copy, target_rel, text)
             out.append(run_tests(copy))
         return out
     finally:
@@ -332,7 +331,10 @@ def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[st
     shutil.rmtree(bdir, ignore_errors=True)
     bdir.mkdir(parents=True)
     for i, t in enumerate(texts):
-        (bdir / (str(i) + ".py")).write_text(t, encoding="utf-8")
+        if isinstance(t, dict):      # a patch set spanning files
+            (bdir / (str(i) + ".json")).write_text(json.dumps(t), encoding="utf-8")
+        else:
+            (bdir / (str(i) + ".py")).write_text(t, encoding="utf-8")
     out = copy_root / out_rel
     if out.exists():
         out.unlink()
@@ -578,6 +580,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     steps: list[dict[str, Any]] = []
     status = ""
     target_rel: str | None = None
+    target_files: list[str] = []
     gate: dict[str, Any] = {}
     diff_text = ""
     try:
@@ -690,96 +693,18 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         # 3. repair: fault-prioritized candidates, tested in parallel on per-worker
         #    copies of the scratch tree, each under the same pytest command (confined
         #    when the host can) that reproduced the failure.  The user's tree is
-        #    never touched.
+        #    never touched.  One file at a time in the spectrum's order; when no file
+        #    alone has a green edit, pairs of hunks across lines and files (stage 3).
         t0 = time.monotonic()
-        source_text = (tree / target_rel).read_text(encoding="utf-8")
         nums, strings = candidates_v1.test_literals([tree / t for t in tests_tree])
-        priority: list[int] = []
-        for ln in [*loc_lines.get(target_rel, []), *next((r["lines"] for r in repro["traceback_files"]
-                                                           if r["path"] == target_rel), [])]:
-            if ln not in priority:
-                priority.append(ln)
-        candidates = candidates_v1.generate(source_text, nums, strings, priority)
-        stmt_rows = candidates_v1.statement_candidates(source_text, priority)
-        candidates = candidates_v1.merge_ranked(candidates, stmt_rows, priority)
-        synth_row: dict[str, Any] = {"status": "NOT_ATTEMPTED"}
-        if plain_ok and priority:
-            # the tests pin the function's value on >= 2 inputs: the returned
-            # expression is a hole, enumerate it (bounded) and let the judge decide
-            owner = witness_v1.owning_callable(source_text, priority[0])
-            fname, cls_name = owner["name"], owner["class"]
-            if fname is None:
-                synth_row = {"status": "NO_FREE_FUNCTION:" + str(owner["why"])}
-            else:
-                fn_node = hole_v1.find_def(ast.parse(source_text), fname, cls_name)
-                params = list(owner["params"])
-                n_ctor = len(owner["ctor_params"] or []) if cls_name else 0
-                specs = [sp for m in plain_mods for sp in (m.get("asserts") or [])]
-                if cls_name:
-                    examples = synth_v1.examples_for_method(cls_name, fname, n_ctor, len(params), specs)
-                else:
-                    examples = synth_v1.examples_for(fname, params, specs)
-                # constants come from the function's own body, never from the tests:
-                # a test literal in a synthesized expression is the overfit anti-pattern
-                own_consts = sorted({n.value for n in ast.walk(fn_node)
-                                     if isinstance(n, ast.Constant) and type(n.value) in (int, float)})
-                if cls_name:
-                    # a method's value depends on the instance: only the executing hole
-                    # synthesizer (which sees self.<attr>) can propose it
-                    synth = {"status": "METHOD:HOLE_ONLY", "expressions": []}
-                else:
-                    synth = synth_v1.synthesize(params, examples, constants=own_consts,
-                                                budget_s=min(2.0, max(0.5, remaining() / 10)))
-                synth_row = {"function": fname, "class": cls_name, "examples": len(examples), **{k: v for k, v in synth.items()}}
-                if synth["expressions"]:
-                    extra = candidates_v1.synthesized_candidates(source_text, priority[0], synth["expressions"])
-                    candidates = candidates_v1.merge_ranked(candidates, extra, priority)
-                    synth_row["candidates"] = len(extra)
-                if len(examples) >= 2 and remaining() > 10:
-                    # the hole is any expression on the suspicious line (assignment,
-                    # condition, return): run the function on the examples, confined,
-                    # with each distinct expression spliced in; keep the ones that agree
-                    fn_lines = set(range(fn_node.lineno, (fn_node.end_lineno or fn_node.lineno) + 1))
-                    hole_rows: list[dict[str, Any]] = []
-                    extra = []
-                    t_h = time.monotonic()
-                    budget_h = min(3.0, max(0.5, remaining() / 8))
-                    def _worth(x: int) -> bool:
-                        kinds = {st["kind"] for st in hole_v1.hole_sites(source_text, fname, x, cls_name)}
-                        return bool(kinds) and not (synth["expressions"] and kinds == {"return"})
-                    for ln in [x for x in priority if x in fn_lines and _worth(x)][:4]:
-                        left = budget_h - (time.monotonic() - t_h)
-                        if left < 0.3:
-                            break
-                        hole = _hole_synth(tree, target_rel, fname, ln, examples, own_consts, python_exe,
-                                           confine, deadline, budget_s=min(1.5, left), cls=cls_name, n_ctor=n_ctor)
-                        sites = [r for r in hole.get("sites") or []
-                                 if not (synth["expressions"] and (r.get("site") or {}).get("kind") == "return")]
-                        extra += candidates_v1.hole_candidates(source_text, sites)
-                        hole_rows.append({"line": ln, "status": hole.get("status"), "names": hole.get("names"),
-                                          "seconds": hole.get("seconds"),
-                                          "sites": [{"kind": (r.get("site") or {}).get("kind"),
-                                                     "original": (r.get("site") or {}).get("original"),
-                                                     "distinct": r.get("distinct"), "tried": r.get("tried"),
-                                                     "expressions": r.get("expressions"), "stop": r.get("stop")}
-                                                    for r in hole.get("sites") or []]})
-                    candidates = candidates_v1.merge_ranked(candidates, extra, priority)
-                    synth_row["hole"] = {"lines": hole_rows, "candidates": len(extra),
-                                         "seconds": round(time.monotonic() - t_h, 3)}
         per_run = max(5, min(remaining(), 300))
+        run_tests = lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine, trim)  # noqa: E731
+        green_budget = int(args.get("green_budget") or 4)
         witness_row: dict[str, Any] = {}
-        expected_rows: list[tuple[list[Any], Any]] = []
-        if plain_mods and priority:
-            w_owner = witness_v1.owning_callable(source_text, priority[0])
-            w_specs = [sp for m in plain_mods for sp in (m.get("asserts") or [])]
-            if w_owner["name"] and w_owner["class"]:
-                expected_rows = synth_v1.examples_for_method(w_owner["class"], w_owner["name"],
-                                                             len(w_owner["ctor_params"] or []), len(w_owner["params"]), w_specs)
-            elif w_owner["name"]:
-                expected_rows = synth_v1.examples_for(w_owner["name"], w_owner["params"], w_specs)
 
-        def make_choose(cands: list[tuple[dict[str, Any], str]]):
-            def choose(greens: list[tuple[int, str]]) -> int:
+        def make_choose(target_rel: str, source_text: str, cands: list[tuple[dict[str, Any], Any]],
+                        expected_rows: list[tuple[list[Any], Any]]):
+            def choose(greens: list[tuple[int, Any]]) -> int:
                 # several green patches: the one that changes behaviour least outside
                 # the tests' own inputs (PATCH-SIM); ties and unavailability -> search order
                 nonlocal witness_row
@@ -799,13 +724,9 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                 return int(witness_row["ranking"][0]["index"])
             return choose
 
-        run_tests = lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine, trim)  # noqa: E731
-        green_budget = int(args.get("green_budget") or 4)
-
-        def judge_batch(copy: pathlib.Path, texts: list[str], dl: float) -> dict[int, int]:
-            return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl)
-
-        def run_search(cands: list[tuple[dict[str, Any], str]], chooser) -> dict[str, Any]:
+        def run_search(target_rel: str, cands: list[tuple[dict[str, Any], Any]], chooser) -> dict[str, Any]:
+            def judge_batch(copy: pathlib.Path, texts: list[Any], dl: float) -> dict[int, int]:
+                return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl)
             if plain_ok:
                 return candidates_v1.evaluate_batch(
                     tree, target_rel, cands, judge_batch, run_tests,
@@ -816,81 +737,238 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                 workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
                 green_budget=green_budget, choose=chooser)
 
-        search = run_search(candidates, make_choose(candidates))
-        stage2: dict[str, Any] = {}
-        suspicious = [i for i in search["green_indices"] if _overfit_signature(candidates[i - 1][0], nums, strings)]
-        only_suspicious = bool(search["green_indices"]) and len(suspicious) == len(search["green_indices"])
-        if (not search["winner"] or only_suspicious) and search["stop_reason"] in ("EXHAUSTED", "VERIFIED") \
-                and deadline - time.monotonic() > 10:
-            # stage 2: no single edit is green -- or every green one carries an
-            # overfitting signature (a test literal written into the code, Tan et
-            # al. 2016 anti-patterns).  Compose pairs inside one statement, ordered
-            # by the singles' fitness (fewest tests still failing, then search
-            # order); bounded, same deadline, same runner, same witness.
-            t1 = time.monotonic()
-            # singles on the top-ranked line only (a two-edit fix inside one statement),
-            # best fitness first; with one failing test fitness is flat and search
-            # order (cheapest edits first) decides the window
-            top_line = candidates[0][0].get("lineno") if candidates else None
-            fit = sorted(search["attempts"], key=lambda a: (a["returncode"], a.get("distance", 1e9), a["index"]))
-            order = [a["index"] for a in fit if a["returncode"] < 1000
-                     and a["mutation"].get("lineno") == top_line
-                     and a["mutation"].get("kind") != "GUARD_INSERT"][:int(args.get("compose_from") or 24)]
-            pairs = candidates_v1.compose_pairs(source_text, candidates, order,
-                                                limit=int(args.get("compose_limit") or 200))
-            if pairs:
-                base = len(candidates)
-                s2 = run_search(pairs, make_choose(pairs))
-                for a in s2["attempts"]:
-                    a["index"] += base
-                    a["stage"] = "compose"
-                if s2["winner"]:
-                    s2["winner"]["index"] += base
-                combined = candidates + pairs
-                greens_all = [(i, combined[i - 1][1]) for i in search["green_indices"]] + \
-                             [(i + base, combined[i + base - 1][1]) for i in s2["green_indices"]]
-                winner = search["winner"]
-                if greens_all:
-                    chosen = make_choose(combined)(greens_all) if len(greens_all) > 1 else greens_all[0][0]
-                    if winner is None or winner["index"] != chosen:
-                        if s2["winner"] and s2["winner"]["index"] == chosen:
-                            winner = s2["winner"]
-                        else:
-                            text = combined[chosen - 1][1]
-                            replay = _replay(tree, target_rel, text, run_tests, scratch_root)
-                            winner = ({"index": chosen, "mutation": combined[chosen - 1][0], "candidate": text,
-                                       "replay_returncodes": replay} if all(r == 0 for r in replay) else winner)
-                search = {**s2, "winner": winner, "attempts": search["attempts"] + s2["attempts"],
-                          "tested_candidate_count": search["tested_candidate_count"] + s2["tested_candidate_count"],
-                          "candidate_count": base + len(pairs),
-                          "green_indices": search["green_indices"] + [i + base for i in s2["green_indices"]],
-                          "stop_reason": "VERIFIED" if winner else s2["stop_reason"]}
-            stage2 = {"reason": "ONLY_SUSPICIOUS_GREENS:" + str(suspicious) if only_suspicious else "NO_SINGLE_EDIT_GREEN",
-                      "composed_from": order, "fitness_of_window": [(a["index"], a["returncode"], a.get("distance"))
-                                                                    for a in fit[:len(order)]],
-                      "pair_count": len(pairs), "seconds": round(time.monotonic() - t1, 3)}
+        def expected_for(source_text: str, priority: list[int]) -> list[tuple[list[Any], Any]]:
+            if not (plain_mods and priority):
+                return []
+            w_owner = witness_v1.owning_callable(source_text, priority[0])
+            w_specs = [sp for m in plain_mods for sp in (m.get("asserts") or [])]
+            if w_owner["name"] and w_owner["class"]:
+                return synth_v1.examples_for_method(w_owner["class"], w_owner["name"],
+                                                    len(w_owner["ctor_params"] or []), len(w_owner["params"]), w_specs)
+            if w_owner["name"]:
+                return synth_v1.examples_for(w_owner["name"], w_owner["params"], w_specs)
+            return []
+
+        def search_file(target_rel: str) -> dict[str, Any]:
+            source_text = (tree / target_rel).read_text(encoding="utf-8")
+            priority: list[int] = []
+            for ln in [*loc_lines.get(target_rel, []), *next((r["lines"] for r in repro["traceback_files"]
+                                                               if r["path"] == target_rel), [])]:
+                if ln not in priority:
+                    priority.append(ln)
+            candidates = candidates_v1.generate(source_text, nums, strings, priority)
+            stmt_rows = candidates_v1.statement_candidates(source_text, priority)
+            candidates = candidates_v1.merge_ranked(candidates, stmt_rows, priority)
+            synth_row: dict[str, Any] = {"status": "NOT_ATTEMPTED"}
+            if plain_ok and priority:
+                # the tests pin the function's value on >= 2 inputs: the returned
+                # expression is a hole, enumerate it (bounded) and let the judge decide
+                owner = witness_v1.owning_callable(source_text, priority[0])
+                fname, cls_name = owner["name"], owner["class"]
+                if fname is None:
+                    synth_row = {"status": "NO_FREE_FUNCTION:" + str(owner["why"])}
+                else:
+                    fn_node = hole_v1.find_def(ast.parse(source_text), fname, cls_name)
+                    params = list(owner["params"])
+                    n_ctor = len(owner["ctor_params"] or []) if cls_name else 0
+                    specs = [sp for m in plain_mods for sp in (m.get("asserts") or [])]
+                    if cls_name:
+                        examples = synth_v1.examples_for_method(cls_name, fname, n_ctor, len(params), specs)
+                    else:
+                        examples = synth_v1.examples_for(fname, params, specs)
+                    # constants come from the function's own body, never from the tests:
+                    # a test literal in a synthesized expression is the overfit anti-pattern
+                    own_consts = sorted({n.value for n in ast.walk(fn_node)
+                                         if isinstance(n, ast.Constant) and type(n.value) in (int, float)})
+                    if cls_name:
+                        # a method's value depends on the instance: only the executing hole
+                        # synthesizer (which sees self.<attr>) can propose it
+                        synth = {"status": "METHOD:HOLE_ONLY", "expressions": []}
+                    else:
+                        synth = synth_v1.synthesize(params, examples, constants=own_consts,
+                                                    budget_s=min(2.0, max(0.5, remaining() / 10)))
+                    synth_row = {"function": fname, "class": cls_name, "examples": len(examples), **{k: v for k, v in synth.items()}}
+                    if synth["expressions"]:
+                        extra = candidates_v1.synthesized_candidates(source_text, priority[0], synth["expressions"])
+                        candidates = candidates_v1.merge_ranked(candidates, extra, priority)
+                        synth_row["candidates"] = len(extra)
+                    if len(examples) >= 2 and remaining() > 10:
+                        # the hole is any expression on the suspicious line (assignment,
+                        # condition, return): run the function on the examples, confined,
+                        # with each distinct expression spliced in; keep the ones that agree
+                        fn_lines = set(range(fn_node.lineno, (fn_node.end_lineno or fn_node.lineno) + 1))
+                        hole_rows: list[dict[str, Any]] = []
+                        extra = []
+                        t_h = time.monotonic()
+                        budget_h = min(3.0, max(0.5, remaining() / 8))
+                        def _worth(x: int) -> bool:
+                            kinds = {st["kind"] for st in hole_v1.hole_sites(source_text, fname, x, cls_name)}
+                            return bool(kinds) and not (synth["expressions"] and kinds == {"return"})
+                        for ln in [x for x in priority if x in fn_lines and _worth(x)][:4]:
+                            left = budget_h - (time.monotonic() - t_h)
+                            if left < 0.3:
+                                break
+                            hole = _hole_synth(tree, target_rel, fname, ln, examples, own_consts, python_exe,
+                                               confine, deadline, budget_s=min(1.5, left), cls=cls_name, n_ctor=n_ctor)
+                            sites = [r for r in hole.get("sites") or []
+                                     if not (synth["expressions"] and (r.get("site") or {}).get("kind") == "return")]
+                            extra += candidates_v1.hole_candidates(source_text, sites)
+                            hole_rows.append({"line": ln, "status": hole.get("status"), "names": hole.get("names"),
+                                              "seconds": hole.get("seconds"),
+                                              "sites": [{"kind": (r.get("site") or {}).get("kind"),
+                                                         "original": (r.get("site") or {}).get("original"),
+                                                         "distinct": r.get("distinct"), "tried": r.get("tried"),
+                                                         "expressions": r.get("expressions"), "stop": r.get("stop")}
+                                                        for r in hole.get("sites") or []]})
+                        candidates = candidates_v1.merge_ranked(candidates, extra, priority)
+                        synth_row["hole"] = {"lines": hole_rows, "candidates": len(extra),
+                                             "seconds": round(time.monotonic() - t_h, 3)}
+            expected_rows = expected_for(source_text, priority)
+            search = run_search(target_rel, candidates, make_choose(target_rel, source_text, candidates, expected_rows))
+            stage2: dict[str, Any] = {}
+            suspicious = [i for i in search["green_indices"] if _overfit_signature(candidates[i - 1][0], nums, strings)]
+            only_suspicious = bool(search["green_indices"]) and len(suspicious) == len(search["green_indices"])
+            if (not search["winner"] or only_suspicious) and search["stop_reason"] in ("EXHAUSTED", "VERIFIED") \
+                    and deadline - time.monotonic() > 10:
+                # stage 2: no single edit is green -- or every green one carries an
+                # overfitting signature (a test literal written into the code, Tan et
+                # al. 2016 anti-patterns).  Compose pairs inside one statement, ordered
+                # by the singles' fitness (fewest tests still failing, then search
+                # order); bounded, same deadline, same runner, same witness.
+                t1 = time.monotonic()
+                # singles on the top-ranked line only (a two-edit fix inside one statement),
+                # best fitness first; with one failing test fitness is flat and search
+                # order (cheapest edits first) decides the window
+                top_line = candidates[0][0].get("lineno") if candidates else None
+                fit = sorted(search["attempts"], key=lambda a: (a["returncode"], a.get("distance", 1e9), a["index"]))
+                order = [a["index"] for a in fit if a["returncode"] < 1000
+                         and a["mutation"].get("lineno") == top_line
+                         and a["mutation"].get("kind") != "GUARD_INSERT"][:int(args.get("compose_from") or 24)]
+                pairs = candidates_v1.compose_pairs(source_text, candidates, order,
+                                                    limit=int(args.get("compose_limit") or 200))
+                if pairs:
+                    base = len(candidates)
+                    s2 = run_search(target_rel, pairs, make_choose(target_rel, source_text, pairs, expected_rows))
+                    for a in s2["attempts"]:
+                        a["index"] += base
+                        a["stage"] = "compose"
+                    if s2["winner"]:
+                        s2["winner"]["index"] += base
+                    combined = candidates + pairs
+                    greens_all = [(i, combined[i - 1][1]) for i in search["green_indices"]] + \
+                                 [(i + base, combined[i + base - 1][1]) for i in s2["green_indices"]]
+                    winner = search["winner"]
+                    if greens_all:
+                        chosen = make_choose(target_rel, source_text, combined, expected_rows)(greens_all) if len(greens_all) > 1 else greens_all[0][0]
+                        if winner is None or winner["index"] != chosen:
+                            if s2["winner"] and s2["winner"]["index"] == chosen:
+                                winner = s2["winner"]
+                            else:
+                                text = combined[chosen - 1][1]
+                                replay = _replay(tree, target_rel, text, run_tests, scratch_root)
+                                winner = ({"index": chosen, "mutation": combined[chosen - 1][0], "candidate": text,
+                                           "replay_returncodes": replay} if all(r == 0 for r in replay) else winner)
+                    search = {**s2, "winner": winner, "attempts": search["attempts"] + s2["attempts"],
+                              "tested_candidate_count": search["tested_candidate_count"] + s2["tested_candidate_count"],
+                              "candidate_count": base + len(pairs),
+                              "green_indices": search["green_indices"] + [i + base for i in s2["green_indices"]],
+                              "stop_reason": "VERIFIED" if winner else s2["stop_reason"]}
+                stage2 = {"reason": "ONLY_SUSPICIOUS_GREENS:" + str(suspicious) if only_suspicious else "NO_SINGLE_EDIT_GREEN",
+                          "composed_from": order, "fitness_of_window": [(a["index"], a["returncode"], a.get("distance"))
+                                                                        for a in fit[:len(order)]],
+                          "pair_count": len(pairs), "seconds": round(time.monotonic() - t1, 3)}
+            return {"target_rel": target_rel, "source_text": source_text, "priority": priority, "candidates": candidates,
+                    "search": search, "stage2": stage2, "suspicious": suspicious, "synth_row": synth_row,
+                    "witness_row": witness_row, "expected_rows": expected_rows}
+
+        # files in the spectrum's order: the agreed/top target first, then the next
+        # ranked files that own suspicious lines (bounded); a file is only searched
+        # when the previous one had no verified, non-overfit edit
+        file_order = [target_rel] + [p for p in loc_top if p != target_rel and loc_lines.get(p)
+                                     and (tree / p).is_file() and p.endswith(".py")][:int(args.get("max_files") or 3) - 1]
+        per_file: list[dict[str, Any]] = []
+        for rel in file_order:
+            witness_row = {}
+            r = search_file(rel)
+            r["seconds"] = round(time.monotonic() - t0 - sum(x["seconds"] for x in per_file), 3)
+            per_file.append(r)
+            s_ = r["search"]
+            if s_["winner"] and s_["winner"]["index"] not in r["suspicious"]:
+                break
+            if s_["stop_reason"] == "DEADLINE" or remaining() < 15:
+                break
+        chosen_file = next((r for r in per_file if r["search"]["winner"] and r["search"]["winner"]["index"] not in r["suspicious"]),
+                           per_file[0])
+        stage3: dict[str, Any] = {}
+        if not (chosen_file["search"]["winner"] and chosen_file["search"]["winner"]["index"] not in chosen_file["suspicious"]) \
+                and all(r["search"]["stop_reason"] in ("EXHAUSTED", "VERIFIED") for r in per_file) and remaining() > 10:
+            # stage 3: no file has a green edit on its own -- the fix may need two hunks:
+            # two lines of one file, or one line in each of two files (a wrong value
+            # computed in a callee and mishandled by its caller).  Pairs of the
+            # best-fitness singles across the searched files, disjoint by construction,
+            # judged as patch sets; the witness ranks greens as before.
+            t3 = time.monotonic()
+            pools = []
+            window = int(args.get("compose_from") or 24)
+            for r in per_file:
+                fit = sorted(r["search"]["attempts"], key=lambda a: (a["returncode"], a.get("distance", 1e9), a["index"]))
+                order = [a["index"] for a in fit if a["returncode"] < 1000 and a["index"] <= len(r["candidates"])
+                         and a["mutation"].get("kind") not in ("GUARD_INSERT", "COMPOSE")][:window]
+                pools.append((r["target_rel"], r["candidates"], order))
+            originals = {r["target_rel"]: r["source_text"] for r in per_file}
+            hunks = candidates_v1.compose_hunks(originals, pools, limit=int(args.get("compose_limit") or 200))
+            s3: dict[str, Any] = {}
+            if hunks:
+                lead = per_file[0]
+                witness_row = {}
+                s3 = run_search(lead["target_rel"], hunks, make_choose(lead["target_rel"], lead["source_text"], hunks, lead["expected_rows"]))
+                for a in s3["attempts"]:
+                    a["stage"] = "compose_hunks"
+                sus3 = [i for i in s3["green_indices"]
+                        if any(_overfit_signature(pt, nums, strings) for pt in hunks[i - 1][0]["parts"])]
+                if s3["winner"] and s3["winner"]["index"] not in sus3:
+                    chosen_file = {**lead, "search": s3, "candidates": hunks, "suspicious": sus3,
+                                   "witness_row": witness_row, "stage2": lead["stage2"]}
+                elif s3["green_indices"]:
+                    chosen_file = {**chosen_file, "suspicious": sorted(set(chosen_file["suspicious"]) | set(sus3))}
+            stage3 = {"reason": "NO_SINGLE_FILE_GREEN", "files": [r["target_rel"] for r in per_file],
+                      "window_per_file": [{"file": rel, "singles": o} for rel, _, o in pools], "pair_count": len(hunks),
+                      "tested": s3.get("tested_candidate_count", 0), "green_indices": s3.get("green_indices", []),
+                      "stop_reason": s3.get("stop_reason"), "seconds": round(time.monotonic() - t3, 3)}
+        search, candidates, suspicious = chosen_file["search"], chosen_file["candidates"], chosen_file["suspicious"]
+        source_text, priority, target_rel = chosen_file["source_text"], chosen_file["priority"], chosen_file["target_rel"]
+        synth_row, witness_row, stage2 = chosen_file["synth_row"], chosen_file["witness_row"], chosen_file["stage2"]
+        tested_total = sum(r["search"]["tested_candidate_count"] for r in per_file) + int(stage3.get("tested") or 0)
         steps.append({"step": "patch_search", "seconds": round(time.monotonic() - t0, 3),
-                      "candidate_count": search["candidate_count"], "tested_candidate_count": search["tested_candidate_count"],
+                      "candidate_count": search["candidate_count"], "tested_candidate_count": tested_total,
                       "workers": search["workers"], "stop_reason": search["stop_reason"],
-                      "priority_lines": priority[:20], "compose": stage2, "judge": judge_row, "synthesis": synth_row,
+                      "priority_lines": priority[:20], "compose": stage2, "compose_hunks": stage3, "judge": judge_row,
+                      "synthesis": synth_row,
+                      "files_searched": [{"file": r["target_rel"], "tested": r["search"]["tested_candidate_count"],
+                                          "greens": r["search"]["green_indices"], "stop_reason": r["search"]["stop_reason"],
+                                          "seconds": r["seconds"]} for r in per_file],
                       "winning_mutation": (search["winner"] or {}).get("mutation"),
                       "winning_index": (search["winner"] or {}).get("index"),
                       "green_indices": search["green_indices"], "witness": witness_row,
                       "overfit_signature_indices": suspicious,
                       "attempts": search["attempts"][:200]})
-        if search["stop_reason"] == "DEADLINE":
-            raise DiagnoseRepairRefusal("DEADLINE_EXCEEDED:" + str(deadline_s) + "s:tested=" + str(search["tested_candidate_count"]))
+        if any(r["search"]["stop_reason"] == "DEADLINE" for r in per_file) or stage3.get("stop_reason") == "DEADLINE":
+            raise DiagnoseRepairRefusal("DEADLINE_EXCEEDED:" + str(deadline_s) + "s:tested=" + str(tested_total))
         if not search["winner"]:
-            raise DiagnoseRepairRefusal("OPEN:NO_VERIFIED_CANDIDATE:" + str(search["tested_candidate_count"]))
+            raise DiagnoseRepairRefusal("OPEN:NO_VERIFIED_CANDIDATE:" + str(tested_total))
         if search["winner"]["index"] in suspicious:
             # the only way to make the suite green was to write its expected value into
             # the code; that is the suite's weakness, not a repair, and it is not shipped
             raise DiagnoseRepairRefusal("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:" + str(suspicious))
-        diff_text = "".join(difflib.unified_diff(
-            source_text.splitlines(keepends=True), search["winner"]["candidate"].splitlines(keepends=True),
-            fromfile="a/" + target_rel, tofile="b/" + target_rel))
-        if not diff_text.endswith("\n"):
-            diff_text += "\n"
+        patched = candidates_v1.candidate_files(target_rel, search["winner"]["candidate"])
+        diff_text = ""
+        for rel in sorted(patched):
+            before = source_text if rel == target_rel else (tree / rel).read_text(encoding="utf-8")
+            diff_text += "".join(difflib.unified_diff(before.splitlines(keepends=True), patched[rel].splitlines(keepends=True),
+                                                      fromfile="a/" + rel, tofile="b/" + rel))
+            if not diff_text.endswith("\n"):
+                diff_text += "\n"
+        target_files = sorted(patched)
         diff_out.parent.mkdir(parents=True, exist_ok=True)
         diff_out.write_text(diff_text, encoding="utf-8")
 
@@ -924,12 +1002,12 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     artifact = {
         "schema": SCHEMA, "capability_id": CAPABILITY_ID,
         "source_root": _rel(repo, source_root), "test_paths": [_rel(repo, t) for t in tests_abs],
-        "target_path": target_rel, "confined": confined, "deadline_s": deadline_s,
+        "target_path": target_rel, "target_paths": target_files, "confined": confined, "deadline_s": deadline_s,
         "steps": steps, "gate": gate.get("gate"), "status": status, "verified": verified,
         "diff_path": _rel(repo, diff_out) if diff_text else None,
         "diff_sha256": _sha(diff_text.encode("utf-8")) if diff_text else None,
         "anchor_tree_sha256": anchor_before, "anchor_unchanged": anchor_after == anchor_before,
-        "hard_nonclaims": ["BOUNDED_SINGLE_FILE_AST_REPAIR_ONLY", "FULL_SUITE_GREEN_IS_NOT_SEMANTIC_CORRECTNESS",
+        "hard_nonclaims": ["BOUNDED_AST_REPAIR_AT_MOST_TWO_HUNKS_IN_AT_MOST_TWO_FILES", "FULL_SUITE_GREEN_IS_NOT_SEMANTIC_CORRECTNESS",
                            "PATCH_IS_PROPOSED_NEVER_APPLIED_TO_SOURCE_ROOT"],
         "model_dependency_count": 0, "incremental_spend_usd": 0,
     }
@@ -937,7 +1015,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     raw = (json.dumps(artifact, indent=2, sort_keys=True) + "\n").encode("utf-8")
     output.write_bytes(raw)
     return {
-        "adapter": ADAPTER, "status": status, "verified": verified, "target_path": target_rel,
+        "adapter": ADAPTER, "status": status, "verified": verified, "target_path": target_rel, "target_paths": target_files,
         "confined": confined, "steps": [s.get("step") for s in steps],
         "diff_path": artifact["diff_path"], "diff_sha256": artifact["diff_sha256"],
         "gate": gate.get("gate"), "tests_discovered": gate.get("tests_discovered"),

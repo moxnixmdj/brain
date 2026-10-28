@@ -213,7 +213,15 @@ for m in SPEC["modules"]:
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 target = os.path.join(ROOT, SPEC["target"])
-original = open(target, "rb").read()
+originals = {}
+
+
+def _write(rel, data):
+    path = os.path.join(ROOT, rel)
+    if rel not in originals:
+        originals[rel] = open(path, "rb").read()
+    with open(path, "wb") as fh:
+        fh.write(data)
 
 
 class _Timeout(BaseException):
@@ -306,8 +314,17 @@ def _run():
 
 results = {}
 for i in range(SPEC["count"]):
-    cand = os.path.join(ROOT, SPEC["batch"], str(i) + ".py")
-    shutil.copyfile(cand, target)
+    cand = os.path.join(ROOT, SPEC["batch"], str(i))
+    for rel, raw in list(originals.items()):           # back to the original before the next candidate
+        with open(os.path.join(ROOT, rel), "wb") as fh:
+            fh.write(raw)
+    if os.path.exists(cand + ".json"):                  # a patch set: {rel: text}
+        with open(cand + ".json", "r", encoding="utf-8") as fh:
+            for rel, text in json.load(fh).items():
+                _write(rel, text.encode("utf-8"))
+    else:
+        with open(cand + ".py", "rb") as fh:
+            _write(SPEC["target"], fh.read())
     _purge()
     signal.alarm(SPEC["per"])
     try:
@@ -321,7 +338,9 @@ for i in range(SPEC["count"]):
         signal.alarm(0)
     with open(os.path.join(ROOT, SPEC["out"]), "w", encoding="utf-8") as fh:
         json.dump(results, fh)
-open(target, "wb").write(original)
+for rel, raw in originals.items():
+    with open(os.path.join(ROOT, rel), "wb") as fh:
+        fh.write(raw)
 _purge()
 print("BRAIN_JUDGE_DONE=" + str(len(results)))
 ''' % repr(spec)

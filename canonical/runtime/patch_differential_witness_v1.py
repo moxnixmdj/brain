@@ -322,21 +322,13 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         rows.append({"index": index, "delta_outside_tests": outside, "delta_on_tests": on_tests,
                      "inexact_on_tests": inexact, "edit_size": (sizes or {}).get(index, 0),
                      "grid_inputs": len(original) - n_test_inputs, "witness": "MEASURED"})
-    def key(r: dict[str, Any]) -> tuple:
-        if r["witness"] != "MEASURED":
-            return (2, 0, 0, 0, r["index"])
-        # behaviour first (least change outside the tests, exact on their literals), then
-        # search order -- the generator's own specificity ranking (`is None` before `not x`);
-        # edit_size is reported, not ranked on: a shorter edit is not a more faithful one
-        return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["delta_outside_tests"],
-                r["inexact_on_tests"], 0, r["index"])
-    rows.sort(key=key)
     # behavioural classes among the greens themselves: two candidates with the same
     # outcomes on every input are one behaviour; different classes with the same
     # delta are a TIE the suite cannot break -- said in the ledger, never hidden
     by_index = dict(per_candidate)
     classes: list[tuple[int, list[Any] | None]] = []
-    for r in rows:
+    first_of_class: dict[int, int] = {}
+    for r in sorted(rows, key=lambda r: r["index"]):
         o = by_index.get(r["index"])
         for cid, rep in classes:
             if rep == o:
@@ -345,6 +337,18 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         else:
             classes.append((len(classes), o))
             r["behaviour_class"] = len(classes) - 1
+            first_of_class[len(classes) - 1] = r["index"]
+
+    def key(r: dict[str, Any]) -> tuple:
+        if r["witness"] != "MEASURED":
+            return (2, 0, 0, 0, 0, r["index"])
+        # behaviour first (least change outside the tests, exact on their literals), then
+        # search order -- the generator's own specificity ranking (`is None` before `not x`,
+        # measured: both are one behaviour class on an int/None grid, and the smaller edit is
+        # the less specific guard); edit_size is reported, not ranked on
+        return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["delta_outside_tests"],
+                r["inexact_on_tests"], first_of_class[r["behaviour_class"]], 0, r["index"])
+    rows.sort(key=key)
     measured = [r for r in rows if r["witness"] == "MEASURED"]
     if measured:
         top = key(measured[0])[:3]
@@ -382,13 +386,22 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
     base = scratch / "witness"
     shutil.rmtree(base, ignore_errors=True)
     shutil.copytree(tree, base, ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
-    target = base / target_rel
-    cache = target.parent / "__pycache__"
+    touched: dict[str, str] = {}      # patch sets may span files: every file written is restored
+    for _, text in greens:
+        for rel in (text if isinstance(text, dict) else {target_rel: text}):
+            touched.setdefault(rel, (tree / rel).read_text(encoding="utf-8"))
+    touched.setdefault(target_rel, original_text)
 
-    def run_version(text: str) -> list[Any] | None:
-        target.write_text(text, encoding="utf-8")
-        shutil.rmtree(cache, ignore_errors=True)
+    def run_version(text: Any) -> list[Any] | None:
+        files = dict(text) if isinstance(text, dict) else {target_rel: text}
+        for rel, t in touched.items():
+            (base / rel).write_text(files.get(rel, t), encoding="utf-8")
+            shutil.rmtree((base / rel).parent / "__pycache__", ignore_errors=True)
         return run_program(base, program, out_rel)
+
+    def size(text: Any) -> int:
+        files = dict(text) if isinstance(text, dict) else {target_rel: text}
+        return sum(edit_size(touched[rel], t) for rel, t in files.items())
 
     try:
         original = run_version(original_text)
@@ -398,7 +411,7 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
     exp_map = {json.dumps(list(a), default=repr): repr(e)[:200] for a, e in expected}
     expected_reprs = [exp_map.get(json.dumps(row, default=repr)) for row in t_inputs]
     ranking = rank(original, per, len(t_inputs), expected_reprs,
-                   {i: edit_size(original_text, text) for i, text in greens})
+                   {i: size(text) for i, text in greens})
     return {"status": "MEASURED" if original is not None else "WITNESS_UNAVAILABLE:ORIGINAL_PROBE_FAILED",
             "function": name, "class": cls, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": len(inputs) - len(t_inputs),
             "behaviour_classes": len({r.get("behaviour_class") for r in ranking if "behaviour_class" in r}),

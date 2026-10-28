@@ -42,6 +42,7 @@ the middle of a batch; the result says how many were tested and why it stopped.
 from __future__ import annotations
 
 import ast
+import json
 import concurrent.futures as cf
 import hashlib
 import os
@@ -106,6 +107,32 @@ def _unparse(node: ast.AST) -> str:
     return ast.unparse(node)
 
 
+_KEYWORDS_BEFORE_PAREN = {b"return", b"in", b"if", b"elif", b"while", b"else", b"and", b"or", b"not", b"yield",
+                          b"await", b"assert", b"lambda", b"is", b"for", b"with", b"del", b"print"}
+
+
+def _grouping_paren(raw: bytes, at: int) -> bool:
+    """True when the ``(`` at ``at`` groups an expression rather than opening a call,
+    a subscript's callee or a decorator: what precedes it is an operator, a delimiter,
+    a keyword, or nothing."""
+    i = at - 1
+    while i >= 0 and raw[i:i + 1] in (b" ", b"\t"):
+        i -= 1
+    if i < 0 or raw[i:i + 1] in (b"\n", b"\r"):
+        return True
+    c = raw[i:i + 1]
+    if c in b"=+-*/%<>!&|^~,(:[{@;":
+        return True
+    if c in b")]}.\"'":
+        return False
+    if c.isalnum() or c == b"_":
+        j = i
+        while j >= 0 and (raw[j:j + 1].isalnum() or raw[j:j + 1] == b"_"):
+            j -= 1
+        return raw[j + 1:i + 1] in _KEYWORDS_BEFORE_PAREN
+    return True
+
+
 def _render(source_text: str, node: ast.AST, replacement: ast.AST) -> str | None:
     span = _span(node)
     if span is None:
@@ -120,8 +147,11 @@ def _render(source_text: str, node: ast.AST, replacement: ast.AST) -> str | None
     start = _byte_offset(lines, span[0], span[1])
     end = _byte_offset(lines, span[2], span[3])
     if isinstance(replacement, (ast.Name, ast.Constant, ast.Attribute, ast.Call, ast.Subscript)):
-        # the span sat inside its own parentheses: (w + 1) -> (w) is not an edit anyone writes
-        while raw[start - 1:start] == b"(" and raw[end:end + 1] == b")" and start > 0:
+        # the span sat inside its own GROUPING parentheses: (w + 1) -> (w) is not an edit
+        # anyone writes; the parentheses of a call `f(w + 1)` are not grouping (measured:
+        # stripping them rendered `out.append(x - 1)` as `out.appendx`)
+        while raw[start - 1:start] == b"(" and raw[end:end + 1] == b")" and start > 0 \
+                and _grouping_paren(raw, start - 1):
             start, end = start - 1, end + 1
     if "\n" in text:
         # a multi-line rendering (statement-level edit): continuation lines take
@@ -403,6 +433,113 @@ def _purge_bytecode(source: pathlib.Path) -> None:
                 pass
 
 
+Candidate = "str | dict[str, str]"   # one file's full text, or {rel: text} for a patch set
+
+
+def candidate_files(target_rel: str, text: Any) -> dict[str, str]:
+    """A candidate is the target file's text, or a patch set {rel: text} spanning files."""
+    return dict(text) if isinstance(text, dict) else {target_rel: text}
+
+
+def write_candidate(copy: pathlib.Path, target_rel: str, text: Any) -> None:
+    for rel, t in candidate_files(target_rel, text).items():
+        (copy / rel).write_text(t, encoding="utf-8")
+        _purge_bytecode(copy / rel)
+
+
+def originals_of(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[str, Any], Any]]) -> dict[str, bytes]:
+    rels = {target_rel}
+    for _, t in candidates:
+        if isinstance(t, dict):
+            rels.update(t)
+    return {rel: (tree / rel).read_bytes() for rel in sorted(rels)}
+
+
+def restore_candidate(copy: pathlib.Path, originals: dict[str, bytes]) -> None:
+    for rel, raw in originals.items():
+        (copy / rel).write_bytes(raw)
+        _purge_bytecode(copy / rel)
+
+
+def _changed_ranges(original: list[str], text: list[str]) -> list[tuple[int, int, list[str]]]:
+    import difflib
+    out = []
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, original, text, autojunk=False).get_opcodes():
+        if tag != "equal":
+            out.append((i1, i2, text[j1:j2]))
+    return out
+
+
+def merge_disjoint(original_text: str, a: str, b: str) -> str | None:
+    """Both edits spliced onto the original when their changed line ranges do not overlap
+    (two hunks in one file); None when they touch the same lines."""
+    orig = original_text.splitlines(keepends=True)
+    ra, rb = _changed_ranges(orig, a.splitlines(keepends=True)), _changed_ranges(orig, b.splitlines(keepends=True))
+    if not ra or not rb:
+        return None
+    for i1, i2, _ in ra:
+        for k1, k2, _ in rb:
+            if not (i2 <= k1 or k2 <= i1) or (i1 == k1 and i2 == k2):
+                return None
+    out, pos = [], 0
+    for i1, i2, rep in sorted(ra + rb):
+        out += orig[pos:i1] + rep
+        pos = i2
+    out += orig[pos:]
+    merged = "".join(out)
+    try:
+        ast.parse(merged)
+    except SyntaxError:
+        return None
+    return merged
+
+
+def compose_hunks(originals: dict[str, str], pools: list[tuple[str, list[tuple[dict[str, Any], str]], list[int]]],
+                  limit: int = 200) -> list[tuple[dict[str, Any], Any]]:
+    """Two single edits on disjoint hunks -- different lines of one file, or two
+    files -- applied together (GenProg's multi-edit patches, bounded to pairs).
+
+    ``pools`` = [(rel, singles, order)] per file, ``order`` 1-based into ``singles``,
+    best fitness first.  Pairs are emitted by the sum of their ranks, so the pair of
+    the two best singles comes first, then (1st, 2nd) / (2nd, 1st) ...  Output
+    candidates are patch sets {rel: text}; their descriptor names both parts.
+    """
+    items: list[tuple[int, str, dict[str, Any], str]] = []    # (rank, rel, desc, text)
+    for rel, singles, order in pools:
+        for r, idx in enumerate(order):
+            d, t = singles[idx - 1]
+            if d.get("kind") in ("GUARD_INSERT", "COMPOSE", "COMPOSE_HUNKS"):
+                continue
+            items.append((r, rel, d, t))
+    pairs: list[tuple[int, int, int]] = []                    # (rank sum, i, j)
+    for i in range(len(items)):
+        for j in range(i + 1, len(items)):
+            pairs.append((items[i][0] + items[j][0], i, j))
+    pairs.sort()
+    out: list[tuple[dict[str, Any], Any]] = []
+    seen: set[str] = set()
+    for _, i, j in pairs:
+        if len(out) >= limit:
+            break
+        (_, ra, da, ta), (_, rb, db, tb) = items[i], items[j]
+        if ra == rb:
+            merged = merge_disjoint(originals[ra], ta, tb)
+            if merged is None:
+                continue
+            files = {ra: merged}
+        else:
+            files = {ra: ta, rb: tb}
+        digest = _sha(json.dumps(files, sort_keys=True).encode("utf-8"))
+        if digest in seen:
+            continue
+        seen.add(digest)
+        out.append(({"kind": "COMPOSE_HUNKS", "lineno": da.get("lineno"), "files": sorted(files),
+                     "detail": ra + ":" + str(da.get("lineno")) + " " + str(da.get("kind")) + " " + str(da.get("detail"))
+                     + " + " + rb + ":" + str(db.get("lineno")) + " " + str(db.get("kind")) + " " + str(db.get("detail")),
+                     "parts": [dict(da, file=ra), dict(db, file=rb)], "candidate_sha256": digest}, files))
+    return out
+
+
 def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[str, Any], str]],
              run_tests: Callable[[pathlib.Path], int], *, workers: int, deadline: float,
              max_candidates: int, scratch: pathlib.Path, green_budget: int = 4,
@@ -426,7 +563,7 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
         c = scratch / ("w" + str(i))
         shutil.copytree(tree, c, ignore=shutil.ignore_patterns(*_SKIP), dirs_exist_ok=True)
         copies.append(c)
-    original = (tree / target_rel).read_bytes()
+    originals = originals_of(tree, target_rel, candidates)
     free: list[pathlib.Path] = list(copies)
     lock = threading.Lock()
     stop = threading.Event()
@@ -437,8 +574,7 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
     tested = 0
 
     def restore(copy: pathlib.Path) -> None:
-        (copy / target_rel).write_bytes(original)
-        _purge_bytecode(copy / target_rel)
+        restore_candidate(copy, originals)
 
     def one(index: int, desc: dict[str, Any], text: str) -> tuple[int, dict[str, Any], str, int, float]:
         with lock:
@@ -446,9 +582,7 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
         try:
             if stop.is_set() or time.monotonic() >= deadline:
                 return index, desc, text, -1, 0.0
-            src = copy / target_rel
-            src.write_text(text, encoding="utf-8")
-            _purge_bytecode(src)
+            write_candidate(copy, target_rel, text)
             t0 = time.monotonic()
             rc = run_tests(copy)
             restore(copy)
@@ -510,8 +644,7 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
             copy = copies[0]
             replay = []
             for _ in range(2):
-                (copy / target_rel).write_text(text, encoding="utf-8")
-                _purge_bytecode(copy / target_rel)
+                write_candidate(copy, target_rel, text)
                 replay.append(run_tests(copy))
                 restore(copy)
             if all(r == 0 for r in replay):
@@ -551,7 +684,7 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
         c = scratch / ("j" + str(i))
         shutil.copytree(tree, c, ignore=shutil.ignore_patterns(*_SKIP), dirs_exist_ok=True)
         copies.append(c)
-    original = (tree / target_rel).read_bytes()
+    originals = originals_of(tree, target_rel, candidates)
     verdicts: dict[int, int] = {}
     distances: dict[int, float] = {}
     stop_reason = "EXHAUSTED"
@@ -604,11 +737,9 @@ def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[d
             copy = copies[0]
             replay = []
             for _ in range(2):
-                (copy / target_rel).write_text(text, encoding="utf-8")
-                _purge_bytecode(copy / target_rel)
+                write_candidate(copy, target_rel, text)
                 replay.append(run_tests(copy))
-                (copy / target_rel).write_bytes(original)
-                _purge_bytecode(copy / target_rel)
+                restore_candidate(copy, originals)
             if all(r == 0 for r in replay):
                 winner = {"index": chosen, "mutation": todo[chosen - 1][0], "candidate": text, "replay_returncodes": replay}
                 stop_reason = "VERIFIED"

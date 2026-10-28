@@ -763,3 +763,147 @@ def test_owning_callable_and_method_examples_are_exact_about_what_they_accept():
              {"test": "t", "expr": "Other(1, 2).area()", "expected": 0}, {"test": "t", "expr": "Rect(x, 4).area()", "expected": 0}]
     assert sv.examples_for_method("Rect", "area", 2, 0, specs) == [([3, 4], 12)]
     assert sv.examples_for_method("Rect", "scaled", 2, 1, specs) == [([2, 5, 3], 30)]
+
+
+# --- two hunks: across lines of one file, across two files; the spectrum's next file ---------
+
+def _files(root: Path, files: dict[str, str], tests: str) -> None:
+    for rel, src in files.items():
+        (root / "proj" / rel).parent.mkdir(parents=True, exist_ok=True)
+        (root / "proj" / rel).write_text(src)
+    (root / "proj" / "tests" / "test_calc.py").write_text(tests)
+
+
+def test_a_coupled_bug_across_two_files_is_repaired_as_one_patch_set(tmp_path: Path):
+    _fixture(tmp_path)
+    _files(tmp_path, {"pkg/util.py": "def scale(k, x):\n    return k + x\n",
+                      "pkg/calc.py": "from pkg.util import scale\n\n\ndef area(w, h):\n    return scale(w, h) - 1\n" + _TWICE},
+           "from pkg.calc import area, twice\nfrom pkg.util import scale\n\ndef test_area():\n    assert area(3, 4) == 12\n"
+           "    assert area(2, 5) == 10\n\ndef test_scale():\n    assert scale(3, 4) == 12\n\ndef test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert result["target_paths"] == ["pkg/calc.py", "pkg/util.py"]
+    diff = (tmp_path / result["diff_path"]).read_text()
+    assert "--- a/pkg/util.py\n" in diff and "--- a/pkg/calc.py\n" in diff
+    assert "+    return k * x\n" in diff and "-    return scale(w, h) - 1\n" in diff
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert [f["file"] for f in search["files_searched"]] == ["pkg/util.py", "pkg/calc.py"]
+    assert all(f["greens"] == [] for f in search["files_searched"])          # no file alone is green
+    assert search["compose_hunks"]["reason"] == "NO_SINGLE_FILE_GREEN" and search["compose_hunks"]["stop_reason"] == "VERIFIED"
+    assert search["winning_mutation"]["kind"] == "COMPOSE_HUNKS" and search["winning_mutation"]["files"] == ["pkg/calc.py", "pkg/util.py"]
+    assert search["witness"]["status"] == "MEASURED"
+    assert result["seconds"] < 20
+
+
+def test_two_wrong_lines_in_one_function_are_repaired_together_when_no_single_edit_is_green(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, "def tally(xs, k):\n    out = []\n    for x in xs:\n        if x > k:\n            out.append(x - 1)\n    return out\n",
+          "from pkg.calc import tally, twice\n\ndef test_tally():\n    assert tally([1, 2, 3, 4], 2) == [2, 3, 4]\n"
+          "    assert tally([5, 1], 1) == [5, 1]\n    assert tally([], 0) == []\n\ndef test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    diff = (tmp_path / result["diff_path"]).read_text()
+    assert "+        if x >= k:\n" in diff and "+            out.append(x)\n" in diff
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["files_searched"][0]["greens"] == [] and search["winning_mutation"]["kind"] == "COMPOSE_HUNKS"
+    assert search["winning_mutation"]["files"] == ["pkg/calc.py"]
+    assert search["witness"]["status"] == "MEASURED" and search["witness"]["tie_at_top"] is False
+
+
+def test_when_the_spectrums_first_file_has_no_green_edit_the_next_ranked_file_is_searched(tmp_path: Path):
+    # the callee is clean, the caller is wrong; the spectrum still ranks the deeper
+    # callee first (same Ochiai score) -- the caller is the second file searched
+    _fixture(tmp_path)
+    _files(tmp_path, {"pkg/util.py": "def scale(k, x):\n    return k * x\n",
+                      "pkg/calc.py": "from pkg.util import scale\n\n\ndef area(w, h):\n    return scale(w, h) + h\n" + _TWICE},
+           "from pkg.calc import area, twice\n\ndef test_area():\n    assert area(3, 4) == 12\n    assert area(2, 5) == 10\n\n"
+           "def test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert result["target_path"] == "pkg/calc.py" and result["target_paths"] == ["pkg/calc.py"]
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    files = search["files_searched"]
+    assert [f["file"] for f in files] == ["pkg/util.py", "pkg/calc.py"] and files[0]["greens"] == [] and files[1]["greens"]
+    assert search["compose_hunks"] == {}
+
+
+def test_patch_sets_merge_disjoint_hunks_and_refuse_overlapping_ones():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    src = "def f(a, b):\n    x = a - 1\n    y = b + 1\n    return x * y\n"
+    a = src.replace("a - 1", "a")
+    b = src.replace("b + 1", "b")
+    b2 = src.replace("a - 1", "a + 2")
+    assert c.merge_disjoint(src, a, b) == "def f(a, b):\n    x = a\n    y = b\n    return x * y\n"
+    assert c.merge_disjoint(src, a, b2) is None                      # same hunk
+    assert c.merge_disjoint(src, a, a) is None
+    assert c.merge_disjoint(src, src, b) is None                     # nothing to merge
+    singles = [({"kind": "BINOP_DROP", "detail": "keep left", "lineno": 2}, a),
+               ({"kind": "BINOP_DROP", "detail": "keep left", "lineno": 3}, b),
+               ({"kind": "GUARD_INSERT", "detail": "if a is None: return 0", "lineno": 2}, src.replace("    x =", "    if a is None:\n        return 0\n    x =")),
+               ({"kind": "BINOP_SWAP", "detail": "Sub->Add", "lineno": 2}, b2)]
+    out = c.compose_hunks({"pkg/m.py": src, "pkg/n.py": "def g():\n    return 1\n"},
+                          [("pkg/m.py", singles, [1, 2, 3, 4]),
+                           ("pkg/n.py", [({"kind": "CONSTANT_REPLACE", "detail": "1->2", "lineno": 2}, "def g():\n    return 2\n")], [1])])
+    kinds = [(d["files"], d["detail"]) for d, _ in out]
+    # rank sum: the two best singles (one per file) first, then (1st, 2nd) inside pkg/m.py
+    assert kinds[0] == (["pkg/m.py", "pkg/n.py"], "pkg/m.py:2 BINOP_DROP keep left + pkg/n.py:2 CONSTANT_REPLACE 1->2")
+    assert kinds[1] == (["pkg/m.py"], "pkg/m.py:2 BINOP_DROP keep left + pkg/m.py:3 BINOP_DROP keep left")
+    assert out[1][1] == {"pkg/m.py": "def f(a, b):\n    x = a\n    y = b\n    return x * y\n"}
+    assert all("GUARD_INSERT" not in d["detail"] for d, _ in out)
+    assert any(d["files"] == ["pkg/m.py", "pkg/n.py"] for d, _ in out)
+    assert all(isinstance(t, dict) and set(t) == set(d["files"]) for d, t in out)
+    assert not any(d["files"] == ["pkg/m.py"] and d["parts"][0]["lineno"] == d["parts"][1]["lineno"] for d, _ in out)
+    assert c.candidate_files("pkg/m.py", a) == {"pkg/m.py": a} and c.candidate_files("pkg/m.py", {"x": "y"}) == {"x": "y"}
+
+
+def test_the_in_process_judge_applies_a_patch_set_and_restores_every_file(tmp_path: Path):
+    from canonical.runtime import patch_inprocess_judge_v1 as judge_v1
+    import subprocess
+    tree = tmp_path / "tree"
+    (tree / "pkg").mkdir(parents=True)
+    (tree / "pkg" / "__init__.py").write_text("")
+    (tree / "pkg" / "util.py").write_text("def scale(k, x):\n    return k + x\n")
+    (tree / "pkg" / "calc.py").write_text("from pkg.util import scale\n\n\ndef area(w, h):\n    return scale(w, h) - 1\n")
+    (tree / "tests").mkdir()
+    (tree / "tests" / "test_calc.py").write_text("from pkg.calc import area\n\ndef test_area():\n    assert area(3, 4) == 12\n")
+    ok, why, mods = judge_v1.plain_tests(tree, ["tests/test_calc.py"])
+    assert ok, why
+    batch = tree / ".b"
+    batch.mkdir()
+    (batch / "0.py").write_text("from pkg.util import scale\n\n\ndef area(w, h):\n    return scale(w, h)\n")       # calc only: still red
+    (batch / "1.json").write_text(json.dumps({"pkg/util.py": "def scale(k, x):\n    return k * x\n",
+                                              "pkg/calc.py": "from pkg.util import scale\n\n\ndef area(w, h):\n    return scale(w, h)\n"}))
+    (batch / "2.py").write_text("from pkg.util import scale\n\n\ndef area(w, h):\n    return w * h\n")                  # calc only: green
+    program = judge_v1.judge_program("pkg/calc.py", mods, ".b", 3, "judge.json")
+    subprocess.run([sys.executable, "-c", program], cwd=tree, check=True, capture_output=True, timeout=60)
+    verdicts = json.loads((tree / "judge.json").read_text())
+    assert verdicts["0"][0] == 1 and verdicts["1"][0] == 0 and verdicts["2"][0] == 0
+    assert (tree / "pkg" / "util.py").read_text() == "def scale(k, x):\n    return k + x\n"           # restored
+    assert (tree / "pkg" / "calc.py").read_text().endswith("return scale(w, h) - 1\n")
+
+
+def test_dropping_a_term_inside_a_call_keeps_the_calls_parentheses():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    def drops(src: str, line: int) -> list[str]:
+        return [t.splitlines()[line - 1] for d, t in c.generate(src, [1, 2], [], [line])
+                if d["kind"] == "BINOP_DROP" and d["detail"] == "keep left"]
+    assert drops("def f(out, x):\n    out.append(x - 1)\n", 2) == ["    out.append(x)"]        # was `out.appendx`
+    assert drops("def f(w):\n    return abs((w + 1))\n", 2) == ["    return abs(w)"]
+    assert "    return w * 2" in drops("def f(w):\n    return (w + 1) * 2\n", 2)
+    assert drops("def f(w):\n    if (w + 1):\n        return 1\n", 2) == ["    if w:"]
+    assert drops("def f(w, xs):\n    return xs[(w + 1)]\n", 2) == ["    return xs[w]"]
+    assert drops("def f(w):\n    return (w + 1)\n", 2) == ["    return w"]
+    assert drops("def f(w):\n    return len(str(w - 1))\n", 2) == ["    return len(str(w))"]
+
+
+def test_a_hole_inside_a_loop_is_still_synthesized_when_one_example_skips_the_loop(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, "def total(xs):\n    acc = 0\n    for x in xs:\n        acc = acc + 1\n    return acc\n",
+          "from pkg.calc import total, twice\n\ndef test_total():\n    assert total([1, 2, 3]) == 6\n    assert total([5, 5]) == 10\n"
+          "    assert total([]) == 0\n\ndef test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+        acc = acc + x\n" in (tmp_path / result["diff_path"]).read_text()
+    hole = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["synthesis"]["hole"]["lines"]
+    row = next(r for r in hole if r["line"] == 4)
+    assert row["status"].startswith("FOUND") and "acc + x" in row["sites"][0]["expressions"]
