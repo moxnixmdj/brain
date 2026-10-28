@@ -162,14 +162,24 @@ def _finish(order, by_size, envs, booleans, enum, stop, original=None, per_vecto
     return out, enum, stop
 
 
-def hole_sites(source_text: str, function: str, line: int) -> list[dict[str, Any]]:
+def find_def(tree: ast.AST, function: str, cls: str | None = None) -> Any:
+    """The FunctionDef named ``function`` -- at module level, or inside class ``cls``."""
+    if cls is None:
+        return next((n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == function), None)
+    c = next((n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == cls), None)
+    if c is None:
+        return None
+    return next((n for n in c.body if isinstance(n, ast.FunctionDef) and n.name == function), None)
+
+
+def hole_sites(source_text: str, function: str, line: int, cls: str | None = None) -> list[dict[str, Any]]:
     """Single-line expression holes on ``line`` inside ``function``: return value,
     assignment / augmented assignment RHS, if/elif/while condition."""
     try:
         tree = ast.parse(source_text)
     except SyntaxError:
         return []
-    fn = next((n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == function), None)
+    fn = find_def(tree, function, cls)
     if fn is None or not (fn.lineno <= line <= (fn.end_lineno or fn.lineno)):
         return []
     out: list[dict[str, Any]] = []
@@ -203,10 +213,10 @@ def splice(source_text: str, site: dict[str, Any], expr: str) -> str:
     return "".join(lines)
 
 
-def function_text(source_text: str, function: str) -> tuple[str, int] | None:
+def function_text(source_text: str, function: str, cls: str | None = None) -> tuple[str, int] | None:
     """(dedented source of the def with its decorators, first line number)."""
     tree = ast.parse(source_text)
-    fn = next((n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == function), None)
+    fn = find_def(tree, function, cls)
     if fn is None:
         return None
     first = min([fn.lineno, *[d.lineno for d in fn.decorator_list]])
@@ -262,14 +272,30 @@ try:
     mod = importlib.import_module(SPEC["module"])
 except BaseException as exc:
     _done("MODULE_IMPORT_FAILED:" + type(exc).__name__)
-fn = getattr(mod, SPEC["function"], None)
+CLS = SPEC.get("class")
+N_CTOR = int(SPEC.get("n_ctor") or 0)
+if CLS:
+    klass = getattr(mod, CLS, None)
+    fn = vars(klass).get(SPEC["function"]) if isinstance(klass, type) else None
+else:
+    klass = None
+    fn = getattr(mod, SPEC["function"], None)
 if not callable(fn):
     _done("FUNCTION_NOT_FOUND")
+
+
+def _call(f, args):
+    # a method runs on a fresh instance built from the example's constructor literals
+    if klass is None:
+        return f(*args)
+    return f(klass(*args[:N_CTOR]), *args[N_CTOR:])
+
+
 source_text = open(target_abs, encoding="utf-8").read()
-sites = hole_sites(source_text, SPEC["function"], SPEC["line"])
+sites = hole_sites(source_text, SPEC["function"], SPEC["line"], CLS)
 if not sites:
     _done("NO_HOLE_ON_LINE")
-ft = function_text(source_text, SPEC["function"])
+ft = function_text(source_text, SPEC["function"], CLS)
 if ft is None:
     _done("FUNCTION_NOT_FOUND")
 
@@ -282,7 +308,12 @@ def _tracer(frame, event, arg):
     if frame.f_code.co_name != SPEC["function"] or os.path.realpath(frame.f_code.co_filename) != target_abs:
         return None
     if event == "line" and frame.f_lineno == SPEC["line"]:
-        arrivals.append({k: v for k, v in frame.f_locals.items() if isinstance(v, SIMPLE) and _ok(v)})
+        env = {k: v for k, v in frame.f_locals.items() if isinstance(v, SIMPLE) and _ok(v)}
+        me = frame.f_locals.get("self")
+        if me is not None and hasattr(me, "__dict__"):
+            # the instance's simple attributes are names too: `self.w`
+            env.update({"self." + k: v for k, v in vars(me).items() if isinstance(v, SIMPLE) and _ok(v)})
+        arrivals.append(env)
         if len(arrivals) >= MAX_ARRIVALS:
             raise _Captured()
     return _tracer
@@ -294,7 +325,7 @@ for args, expected in SPEC["examples"]:
     signal.setitimer(signal.ITIMER_REAL, 0.5)
     sys.settrace(_tracer)
     try:
-        fn(*args)
+        _call(fn, args)
     except BaseException:
         pass
     finally:
@@ -313,12 +344,26 @@ if not names:
     _done("NO_NAMES_IN_SCOPE")
 OUT["names"] = names
 
+class _Attrs:
+    def __init__(self, d):
+        self.__dict__.update(d)
+
+
+def _ns(env):
+    # `self.w` entries become a stand-in object so the original condition can be evaluated
+    plain = {k: v for k, v in env.items() if "." not in k}
+    attrs = {k[5:]: v for k, v in env.items() if k.startswith("self.")}
+    if attrs:
+        plain["self"] = _Attrs(attrs)
+    return plain
+
+
 # 2./3. enumerate distinct expressions, splice, recompile, run the examples
 def _agrees(g):
     for args, expected in SPEC["examples"]:
         signal.setitimer(signal.ITIMER_REAL, 0.05)
         try:
-            got = g(*args)
+            got = _call(g, args)
         except BaseException:
             return False
         finally:
@@ -344,7 +389,7 @@ for site in sites:
     ovec = None
     if site["kind"] == "condition":
         try:
-            ovec = tuple(bool(eval(original, dict(vars(mod)), dict(env))) for env in envs)
+            ovec = tuple(bool(eval(original, dict(vars(mod)), _ns(env))) for env in envs)
         except Exception:
             ovec = None
     exprs, enum, stop = enumerate_distinct(names, envs, SPEC.get("constants") or [], budget_s=remaining * 0.5,
@@ -363,7 +408,7 @@ for site in sites:
             continue
         patched = splice(source_text, site, text)
         try:
-            fsrc, first = function_text(patched, SPEC["function"])
+            fsrc, first = function_text(patched, SPEC["function"], CLS)
             code = compile(fsrc, target_abs, "exec")
         except (SyntaxError, ValueError, TypeError):
             continue

@@ -148,3 +148,30 @@ def examples_for(function: str, params: list[str], specs: list[dict[str, Any]]) 
         if row not in out:
             out.append(row)
     return out
+
+
+def examples_for_method(cls: str, method: str, n_ctor: int, n_params: int,
+                        specs: list[dict[str, Any]]) -> list[tuple[list[Any], Any]]:
+    """`assert Cls(<literals>).m(<literals>) == <literal>` specs -> examples whose args
+    are the constructor's literals followed by the call's (flat)."""
+    out: list[tuple[list[Any], Any]] = []
+    for spec in specs:
+        try:
+            node = ast.parse(spec["expr"], mode="eval").body
+        except SyntaxError:
+            continue
+        if not (isinstance(node, ast.Call) and not node.keywords and len(node.args) == n_params
+                and isinstance(node.func, ast.Attribute) and node.func.attr == method):
+            continue
+        recv = node.func.value
+        if not (isinstance(recv, ast.Call) and isinstance(recv.func, ast.Name) and recv.func.id == cls
+                and not recv.keywords and len(recv.args) == n_ctor):
+            continue
+        try:
+            args = [ast.literal_eval(a) for a in [*recv.args, *node.args]]
+        except (ValueError, TypeError, SyntaxError):
+            continue
+        row = (args, spec["expected"])
+        if row not in out:
+            out.append(row)
+    return out

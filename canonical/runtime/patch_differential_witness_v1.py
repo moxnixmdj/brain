@@ -44,23 +44,74 @@ MAX_INPUTS = 120
 
 def owning_function(source_text: str, lineno: int) -> tuple[str | None, int, str | None]:
     """(name, arity, why_not) of the free function that owns ``lineno``."""
+    c = owning_callable(source_text, lineno)
+    if c["name"] is None or c["class"] is not None:
+        return None, 0, c["why"] or "METHOD"
+    return c["name"], len(c["params"]), None
+
+
+def _positional(node: ast.FunctionDef) -> tuple[list[str] | None, str | None]:
+    a = node.args
+    if a.vararg or a.kwarg or a.kwonlyargs:
+        return None, "VARIADIC_SIGNATURE"
+    return [x.arg for x in [*a.posonlyargs, *a.args]], None
+
+
+def owning_callable(source_text: str, lineno: int) -> dict[str, Any]:
+    """The free function or the plain instance method that owns ``lineno``:
+    {name, class, params (without self), ctor_params (methods), why}.  Static/class
+    methods, properties, async, variadic and nested callables -> name None with why."""
+    none = {"name": None, "class": None, "params": [], "ctor_params": None, "why": "NO_OWNING_FUNCTION"}
     tree = ast.parse(source_text)
+
+    def inner_owner(node: ast.AST) -> bool:
+        for inner in ast.walk(node):
+            if inner is not node and isinstance(inner, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+                if inner.lineno <= lineno <= (inner.end_lineno or inner.lineno):
+                    return True
+        return False
+
     for node in tree.body:
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            if node.lineno <= lineno <= (node.end_lineno or node.lineno):
-                if isinstance(node, ast.AsyncFunctionDef):
-                    return None, 0, "ASYNC_FUNCTION"
-                a = node.args
-                if a.vararg or a.kwarg or a.kwonlyargs:
-                    return None, 0, "VARIADIC_SIGNATURE"
-                for inner in ast.walk(node):
-                    if inner is not node and isinstance(inner, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
-                        if inner.lineno <= lineno <= (inner.end_lineno or inner.lineno):
-                            return None, 0, "NESTED_FUNCTION"
-                return node.name, len(a.posonlyargs) + len(a.args), None
-        elif isinstance(node, ast.ClassDef) and node.lineno <= lineno <= (node.end_lineno or node.lineno):
-            return None, 0, "METHOD"
-    return None, 0, "NO_OWNING_FUNCTION"
+        if not (node.lineno <= lineno <= (node.end_lineno or node.lineno)):
+            continue
+        if isinstance(node, ast.AsyncFunctionDef):
+            return {**none, "why": "ASYNC_FUNCTION"}
+        if isinstance(node, ast.FunctionDef):
+            params, why = _positional(node)
+            if params is None:
+                return {**none, "why": why}
+            if inner_owner(node):
+                return {**none, "why": "NESTED_FUNCTION"}
+            return {"name": node.name, "class": None, "params": params, "ctor_params": None, "why": None}
+        if isinstance(node, ast.ClassDef):
+            for m in node.body:
+                if isinstance(m, (ast.FunctionDef, ast.AsyncFunctionDef)) and m.lineno <= lineno <= (m.end_lineno or m.lineno):
+                    if isinstance(m, ast.AsyncFunctionDef):
+                        return {**none, "why": "ASYNC_METHOD"}
+                    if m.decorator_list:
+                        return {**none, "why": "DECORATED_METHOD"}
+                    params, why = _positional(m)
+                    if params is None:
+                        return {**none, "why": why}
+                    if not params or params[0] != "self":
+                        return {**none, "why": "NO_SELF"}
+                    if inner_owner(m):
+                        return {**none, "why": "NESTED_FUNCTION"}
+                    if m.name == "__init__":
+                        return {**none, "why": "CONSTRUCTOR"}
+                    init = next((x for x in node.body if isinstance(x, ast.FunctionDef) and x.name == "__init__"), None)
+                    if init is None:
+                        ctor: list[str] | None = []
+                    else:
+                        ctor, why = _positional(init)
+                        if ctor is None or not ctor or ctor[0] != "self":
+                            return {**none, "why": "CONSTRUCTOR_" + str(why or "NO_SELF")}
+                        ctor = ctor[1:]
+                    if node.bases or node.keywords:
+                        return {**none, "why": "CLASS_WITH_BASES"}
+                    return {"name": m.name, "class": node.name, "params": params[1:], "ctor_params": ctor, "why": None}
+            return {**none, "why": "CLASS_BODY"}
+    return none
 
 
 def _literal(node: ast.AST) -> tuple[bool, Any]:
@@ -124,8 +175,11 @@ def _sequence_pool(seen: list[Any]) -> list[Any]:
     return out
 
 
-def test_call_inputs(test_paths: Iterable[pathlib.Path], name: str, arity: int) -> list[list[Any]]:
-    """Argument tuples the tests pass to ``name`` -- the inputs the suite actually specifies."""
+def test_call_inputs(test_paths: Iterable[pathlib.Path], name: str, arity: int,
+                     cls: str | None = None, n_ctor: int = 0) -> list[list[Any]]:
+    """Argument tuples the tests pass to ``name`` -- the inputs the suite actually
+    specifies.  For a method (``cls`` given) the form is `Cls(<lits>).name(<lits>)` and
+    the row is the constructor's literals followed by the call's (flat)."""
     out: list[list[Any]] = []
     for p in test_paths:
         try:
@@ -139,9 +193,19 @@ def test_call_inputs(test_paths: Iterable[pathlib.Path], name: str, arity: int) 
             fname = f.id if isinstance(f, ast.Name) else (f.attr if isinstance(f, ast.Attribute) else None)
             if fname != name or len(n.args) != arity:
                 continue
+            ctor_vals: list[Any] = []
+            if cls is not None:
+                recv = f.value if isinstance(f, ast.Attribute) else None
+                if not (isinstance(recv, ast.Call) and isinstance(recv.func, ast.Name) and recv.func.id == cls
+                        and not recv.keywords and len(recv.args) == n_ctor):
+                    continue
+                cv = [_literal(a) for a in recv.args]
+                if not all(ok for ok, _ in cv):
+                    continue
+                ctor_vals = [v for _, v in cv]
             vals = [_literal(a) for a in n.args]
             if all(ok for ok, _ in vals):
-                row = [v for _, v in vals]
+                row = ctor_vals + [v for _, v in vals]
                 if row not in out:
                     out.append(row)
     return out
@@ -189,20 +253,32 @@ def grid_inputs(test_inputs: list[list[Any]], arity: int, cap: int = MAX_INPUTS)
     return out
 
 
-def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel: str) -> str:
-    """Python source that imports ``module_name`` and writes one outcome per input to ``out_rel``."""
+def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel: str,
+                  cls: str | None = None, n_ctor: int = 0) -> str:
+    """Python source that imports ``module_name`` and writes one outcome per input to
+    ``out_rel``; for a method each input is constructor literals + call literals and
+    the outcome is the result followed by the instance's simple attributes."""
+    if cls is None:
+        get = "    f = getattr(importlib.import_module(" + repr(module_name) + "), " + repr(func) + ")\n"
+        call = "            r = f(*args); rows.append(['R', repr(r)[:200]])\n"
+    else:
+        get = ("    C = getattr(importlib.import_module(" + repr(module_name) + "), " + repr(cls) + ")\n"
+               "    f = lambda *a: (lambda inst: (getattr(inst, " + repr(func) + ")(*a[" + str(n_ctor) + ":]), "
+               "sorted((k, repr(v)[:80]) for k, v in vars(inst).items() if isinstance(v, (bool, int, float, str, tuple, list, type(None))))))"
+               "(C(*a[:" + str(n_ctor) + "]))\n")
+        call = "            r, st = f(*args); rows.append(['R', repr(r)[:200], st])\n"
     return (
         "import importlib, json, os, sys\n"
         "sys.path.insert(0, os.getcwd())\n"
         "rows = []\n"
         "try:\n"
-        "    f = getattr(importlib.import_module(" + repr(module_name) + "), " + repr(func) + ")\n"
+        + get +
         "except BaseException as exc:\n"
         "    f = None; rows.append(['IMPORT', type(exc).__name__])\n"
         "if f is not None:\n"
         "    for args in json.loads(" + repr(json.dumps(inputs)) + "):\n"
         "        try:\n"
-        "            r = f(*args); rows.append(['R', repr(r)[:200]])\n"
+        + call +
         "        except BaseException as exc:\n"
         "            rows.append(['E', type(exc).__name__])\n"
         "open(" + repr(out_rel) + ", 'w', encoding='utf-8').write(json.dumps(rows))\n"
@@ -241,7 +317,7 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         # the tests' literal, exactly: `12` is not `12.0` even though `==` accepts it
         inexact = 0
         for o, e in zip(outcomes[:n_test_inputs], expected_reprs or []):
-            if e is not None and isinstance(o, list) and len(o) == 2 and o[0] == "R" and o[1] != e:
+            if e is not None and isinstance(o, list) and len(o) >= 2 and o[0] == "R" and o[1] != e:
                 inexact += 1
         rows.append({"index": index, "delta_outside_tests": outside, "delta_on_tests": on_tests,
                      "inexact_on_tests": inexact, "edit_size": (sizes or {}).get(index, 0),
@@ -288,17 +364,20 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
     copy whose target file already holds the version under test and returns
     the parsed outcome rows (or None).  Copy management is the caller's.
     """
-    name, arity, why = owning_function(original_text, lineno)
+    c = owning_callable(original_text, lineno)
+    name, cls = c["name"], c["class"]
     if name is None:
-        return {"status": "WITNESS_UNAVAILABLE:" + str(why), "ranking": [{"index": i, "witness": "UNAVAILABLE"} for i, _ in greens],
+        return {"status": "WITNESS_UNAVAILABLE:" + str(c["why"]), "ranking": [{"index": i, "witness": "UNAVAILABLE"} for i, _ in greens],
                 "proves_correctness": False}
+    arity = len(c["params"])
+    n_ctor = len(c["ctor_params"] or []) if cls else 0
     module_name = target_rel[:-3].replace("/", ".") if target_rel.endswith(".py") else target_rel.replace("/", ".")
     if module_name.endswith(".__init__"):
         module_name = module_name[: -len(".__init__")]
-    t_inputs = test_call_inputs(test_paths, name, arity)
-    inputs = t_inputs + [g for g in grid_inputs(t_inputs, arity) if g not in t_inputs]
+    t_inputs = test_call_inputs(test_paths, name, arity, cls, n_ctor)
+    inputs = t_inputs + [g for g in grid_inputs(t_inputs, arity + n_ctor) if g not in t_inputs]
     out_rel = ".brain_diagnose/witness.json"
-    program = probe_program(module_name, name, inputs, out_rel)
+    program = probe_program(module_name, name, inputs, out_rel, cls, n_ctor)
     import shutil
     base = scratch / "witness"
     shutil.rmtree(base, ignore_errors=True)
@@ -321,7 +400,7 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
     ranking = rank(original, per, len(t_inputs), expected_reprs,
                    {i: edit_size(original_text, text) for i, text in greens})
     return {"status": "MEASURED" if original is not None else "WITNESS_UNAVAILABLE:ORIGINAL_PROBE_FAILED",
-            "function": name, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": len(inputs) - len(t_inputs),
+            "function": name, "class": cls, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": len(inputs) - len(t_inputs),
             "behaviour_classes": len({r.get("behaviour_class") for r in ranking if "behaviour_class" in r}),
             "tie_at_top": any(r.get("tie_at_top") for r in ranking),
             "ranking": ranking, "proves_correctness": False}

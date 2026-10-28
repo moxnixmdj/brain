@@ -698,3 +698,68 @@ def test_statement_candidates_are_scoped_and_merge_keeps_the_spectrum_order():
     # composing still works on a merged list (edits are keyed by content, not by list identity)
     pairs = c.compose_pairs(src, merged, list(range(1, min(6, len(merged)) + 1)), limit=20)
     assert isinstance(pairs, list)
+
+
+# --- methods: the subject under test, self.<attr> in the hole, instances in the witness -----
+
+_RECT = "class Rect:\n    def __init__(self, w, h):\n        self.w = w\n        self.h = h\n\n    def area(self):\n        {body}\n"
+_RECT_TESTS = ("from pkg.calc import Rect, twice\n\ndef test_area():\n    assert Rect(3, 4).area() == 12\n"
+               "    assert Rect(2, 5).area() == 10\n\ndef test_twice():\n    assert twice(5) == 10\n")
+
+
+def test_a_method_bug_is_localized_to_the_method_the_assertion_calls_not_the_constructor(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, _RECT.format(body="return self.w"), _RECT_TESTS)
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    diff = (tmp_path / result["diff_path"]).read_text()
+    assert "-        return self.w\n" in diff and "self.w = w" not in diff.replace(" self.w = w\n", "")  # area(), not __init__
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    loc, search = art["steps"][1], art["steps"][2]
+    assert loc["ranked_lines"][0][1] == 7 and "area" in art["steps"][1].get("subjects", ["area"])
+    assert search["synthesis"]["class"] == "Rect" and search["synthesis"]["status"] == "METHOD:HOLE_ONLY"
+    hole = search["synthesis"]["hole"]["lines"][0]
+    assert sorted(hole["names"]) == ["self.h", "self.w"] and hole["sites"][0]["expressions"] == ["self.h * self.w"]
+    assert search["winning_mutation"]["kind"] == "HOLE_SYNTH"
+
+
+def test_a_method_hole_that_no_template_reaches_is_synthesized_from_self_attributes(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, _RECT.format(body="return len(str(self.w))"), _RECT_TESTS)
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+        return self.h * self.w\n" in (tmp_path / result["diff_path"]).read_text()
+    assert result["seconds"] < 10
+
+
+def test_the_witness_builds_instances_from_the_tests_constructor_literals(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, "class Bag:\n    def __init__(self, items):\n        self.items = list(items)\n\n    def total(self):\n"
+                    "        acc = 0\n        for x in self.items:\n            acc = acc + 1\n        return acc\n",
+          "from pkg.calc import Bag, twice\n\ndef test_total():\n    assert Bag([1, 2, 3]).total() == 6\n"
+          "    assert Bag([5, 5]).total() == 10\n\ndef test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+            acc = acc + x\n" in (tmp_path / result["diff_path"]).read_text()
+    w = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    assert w["status"] == "MEASURED" and w["class"] == "Bag" and w["grid_inputs"] >= 20 and w["behaviour_classes"] == 4
+    assert w["ranking"][0]["delta_outside_tests"] < w["ranking"][1]["delta_outside_tests"]
+
+
+def test_owning_callable_and_method_examples_are_exact_about_what_they_accept():
+    from canonical.runtime import patch_differential_witness_v1 as w
+    from canonical.runtime import expression_synthesis_v1 as sv
+    src = ("class Rect:\n    def __init__(self, w, h):\n        self.w = w\n\n    def area(self):\n        return self.w\n\n"
+           "    @staticmethod\n    def unit():\n        return 1\n\n    def scaled(self, k):\n        return k\n\n"
+           "class Sub(Rect):\n    def area(self):\n        return 0\n\n\ndef free(a):\n    return a\n")
+    assert w.owning_callable(src, 6) == {"name": "area", "class": "Rect", "params": [], "ctor_params": ["w", "h"], "why": None}
+    assert w.owning_callable(src, 12)["params"] == ["k"]
+    assert w.owning_callable(src, 3)["why"] == "CONSTRUCTOR"
+    assert w.owning_callable(src, 10)["why"] == "DECORATED_METHOD"
+    assert w.owning_callable(src, 16)["why"] == "CLASS_WITH_BASES"
+    assert w.owning_callable(src, 20) == {"name": "free", "class": None, "params": ["a"], "ctor_params": None, "why": None}
+    assert w.owning_function(src, 6) == (None, 0, "METHOD") and w.owning_function(src, 20) == ("free", 1, None)
+    specs = [{"test": "t", "expr": "Rect(3, 4).area()", "expected": 12}, {"test": "t", "expr": "Rect(2, 5).scaled(3)", "expected": 30},
+             {"test": "t", "expr": "Other(1, 2).area()", "expected": 0}, {"test": "t", "expr": "Rect(x, 4).area()", "expected": 0}]
+    assert sv.examples_for_method("Rect", "area", 2, 0, specs) == [([3, 4], 12)]
+    assert sv.examples_for_method("Rect", "scaled", 2, 1, specs) == [([2, 5, 3], 30)]

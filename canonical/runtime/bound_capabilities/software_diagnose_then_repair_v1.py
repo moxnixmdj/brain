@@ -399,6 +399,25 @@ def _spectrum(copy_root: pathlib.Path, modules: list[dict[str, Any]], python_exe
             "ranked": ranked}
 
 
+def _assert_subjects(plain_mods: list[dict[str, Any]]) -> set[str]:
+    """Callables the plain tests' `assert <expr> == <lit>` rows call: the subjects under test."""
+    out: set[str] = set()
+    for m in plain_mods:
+        for sp in m.get("asserts") or []:
+            try:
+                node = ast.parse(str(sp.get("expr") or ""), mode="eval")
+            except SyntaxError:
+                continue
+            for n in ast.walk(node):
+                if isinstance(n, ast.Call):
+                    f = n.func
+                    if isinstance(f, ast.Name):
+                        out.add(f.id)
+                    elif isinstance(f, ast.Attribute):
+                        out.add(f.attr)
+    return out
+
+
 def _dotted(tree: pathlib.Path, rel: str) -> tuple[str, str]:
     """Import name and sys.path entry for a tree file, the way pytest's prepend mode sees it."""
     p = tree / rel
@@ -412,7 +431,7 @@ def _dotted(tree: pathlib.Path, rel: str) -> tuple[str, str]:
 
 def _hole_synth(copy_root: pathlib.Path, target_rel: str, function: str, line: int,
                 examples: list[tuple[list[Any], Any]], constants: list[Any], python_exe: str, confine: str,
-                deadline: float, budget_s: float) -> dict[str, Any]:
+                deadline: float, budget_s: float, cls: str | None = None, n_ctor: int = 0) -> dict[str, Any]:
     """One confined run of hole_synthesis_v1 for ``function``'s hole(s) on ``line``."""
     out_rel = ".brain_diagnose/hole.json"
     out = copy_root / out_rel
@@ -422,7 +441,7 @@ def _hole_synth(copy_root: pathlib.Path, target_rel: str, function: str, line: i
     module, sys_path = _dotted(copy_root, target_rel)
     spec = {"module": module, "sys_path": sys_path, "target": target_rel, "function": function, "line": line,
             "examples": [[list(a), e] for a, e in examples], "constants": list(constants), "out": out_rel,
-            "budget_s": budget_s, "max_found": 4}
+            "budget_s": budget_s, "max_found": 4, "class": cls, "n_ctor": n_ctor}
     program = hole_v1.program(spec, pathlib.Path(hole_v1.__file__).read_text(encoding="utf-8"))
     timeout = max(5, min(60, int(deadline - time.monotonic())))
     ran = False
@@ -581,6 +600,27 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         spectrum: dict[str, Any] = {"status": "NOT_PLAIN:" + plain_why} if not plain_ok else {}
         if plain_ok:
             spectrum = _spectrum(tree, plain_mods, python_exe, confine, deadline)
+            # equal Ochiai score and call depth (every line the failing tests touched): the callable the
+            # failing assertions name directly -- the subject under test -- comes first,
+            # so `Rect(3, 4).area()` ranks area()'s lines ahead of __init__'s
+            subjects = _assert_subjects(plain_mods)
+            if subjects and spectrum.get("ranked"):
+                owners: dict[str, dict[int, str]] = {}
+                def _owner_name(path: str, line: int) -> str:
+                    if path not in owners:
+                        owners[path] = {}
+                        try:
+                            t_ = ast.parse((tree / path).read_text(encoding="utf-8"))
+                            for n in ast.walk(t_):
+                                if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                                    for ln_ in range(n.lineno, (n.end_lineno or n.lineno) + 1):
+                                        owners[path][ln_] = n.name       # innermost wins (walk is outer-first)
+                        except (OSError, SyntaxError, UnicodeDecodeError):
+                            pass
+                    return owners[path].get(line, "")
+                spectrum["ranked"] = sorted(spectrum["ranked"],
+                                            key=lambda r: (-r[2], -r[5], 0 if _owner_name(r[0], r[1]) in subjects else 1))
+                spectrum["subjects"] = sorted(subjects)
             for path, line, score, ef, ep, _depth in spectrum.get("ranked") or []:
                 if path.endswith(".py") and not _TESTNAME(pathlib.PurePosixPath(path).name):
                     loc_lines.setdefault(path, []).append(int(line))
@@ -666,22 +706,31 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         if plain_ok and priority:
             # the tests pin the function's value on >= 2 inputs: the returned
             # expression is a hole, enumerate it (bounded) and let the judge decide
-            fname, arity, why = witness_v1.owning_function(source_text, priority[0])
+            owner = witness_v1.owning_callable(source_text, priority[0])
+            fname, cls_name = owner["name"], owner["class"]
             if fname is None:
-                synth_row = {"status": "NO_FREE_FUNCTION:" + str(why)}
+                synth_row = {"status": "NO_FREE_FUNCTION:" + str(owner["why"])}
             else:
-                fn_node = next(n for n in ast.walk(ast.parse(source_text))
-                               if isinstance(n, ast.FunctionDef) and n.name == fname)
-                params = [a.arg for a in [*fn_node.args.posonlyargs, *fn_node.args.args]]
+                fn_node = hole_v1.find_def(ast.parse(source_text), fname, cls_name)
+                params = list(owner["params"])
+                n_ctor = len(owner["ctor_params"] or []) if cls_name else 0
                 specs = [sp for m in plain_mods for sp in (m.get("asserts") or [])]
-                examples = synth_v1.examples_for(fname, params, specs)
+                if cls_name:
+                    examples = synth_v1.examples_for_method(cls_name, fname, n_ctor, len(params), specs)
+                else:
+                    examples = synth_v1.examples_for(fname, params, specs)
                 # constants come from the function's own body, never from the tests:
                 # a test literal in a synthesized expression is the overfit anti-pattern
                 own_consts = sorted({n.value for n in ast.walk(fn_node)
                                      if isinstance(n, ast.Constant) and type(n.value) in (int, float)})
-                synth = synth_v1.synthesize(params, examples, constants=own_consts,
-                                            budget_s=min(2.0, max(0.5, remaining() / 10)))
-                synth_row = {"function": fname, "examples": len(examples), **{k: v for k, v in synth.items()}}
+                if cls_name:
+                    # a method's value depends on the instance: only the executing hole
+                    # synthesizer (which sees self.<attr>) can propose it
+                    synth = {"status": "METHOD:HOLE_ONLY", "expressions": []}
+                else:
+                    synth = synth_v1.synthesize(params, examples, constants=own_consts,
+                                                budget_s=min(2.0, max(0.5, remaining() / 10)))
+                synth_row = {"function": fname, "class": cls_name, "examples": len(examples), **{k: v for k, v in synth.items()}}
                 if synth["expressions"]:
                     extra = candidates_v1.synthesized_candidates(source_text, priority[0], synth["expressions"])
                     candidates = candidates_v1.merge_ranked(candidates, extra, priority)
@@ -696,14 +745,14 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                     t_h = time.monotonic()
                     budget_h = min(3.0, max(0.5, remaining() / 8))
                     def _worth(x: int) -> bool:
-                        kinds = {st["kind"] for st in hole_v1.hole_sites(source_text, fname, x)}
+                        kinds = {st["kind"] for st in hole_v1.hole_sites(source_text, fname, x, cls_name)}
                         return bool(kinds) and not (synth["expressions"] and kinds == {"return"})
                     for ln in [x for x in priority if x in fn_lines and _worth(x)][:4]:
                         left = budget_h - (time.monotonic() - t_h)
                         if left < 0.3:
                             break
                         hole = _hole_synth(tree, target_rel, fname, ln, examples, own_consts, python_exe,
-                                           confine, deadline, budget_s=min(1.5, left))
+                                           confine, deadline, budget_s=min(1.5, left), cls=cls_name, n_ctor=n_ctor)
                         sites = [r for r in hole.get("sites") or []
                                  if not (synth["expressions"] and (r.get("site") or {}).get("kind") == "return")]
                         extra += candidates_v1.hole_candidates(source_text, sites)
@@ -721,10 +770,13 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         witness_row: dict[str, Any] = {}
         expected_rows: list[tuple[list[Any], Any]] = []
         if plain_mods and priority:
-            w_name, w_arity, _why = witness_v1.owning_function(source_text, priority[0])
-            if w_name:
-                expected_rows = synth_v1.examples_for(w_name, ["_"] * w_arity,
-                                                      [sp for m in plain_mods for sp in (m.get("asserts") or [])])
+            w_owner = witness_v1.owning_callable(source_text, priority[0])
+            w_specs = [sp for m in plain_mods for sp in (m.get("asserts") or [])]
+            if w_owner["name"] and w_owner["class"]:
+                expected_rows = synth_v1.examples_for_method(w_owner["class"], w_owner["name"],
+                                                             len(w_owner["ctor_params"] or []), len(w_owner["params"]), w_specs)
+            elif w_owner["name"]:
+                expected_rows = synth_v1.examples_for(w_owner["name"], w_owner["params"], w_specs)
 
         def make_choose(cands: list[tuple[dict[str, Any], str]]):
             def choose(greens: list[tuple[int, str]]) -> int:
