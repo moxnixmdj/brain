@@ -4,15 +4,15 @@
  "adapter_module": "software_diagnose_then_repair_v1",
  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12; two-example cases add area(2, 5) == 10), proj/tests/test_other.py is the rest of the suite; 2-cpu host, confinement on",
  "e2e_ms_golden": [
-  2115.4,
-  2082.8
+  2111.0,
+  2141.7
  ],
  "observed": {
   "golden": {
    "bug": "return w * h - 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2115.4,
-   "search_s": 1.364,
+   "e2e_ms": 2111.0,
+   "search_s": 1.352,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -69,7 +69,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.556,
+    "seconds": 0.576,
     "status": "MEASURED",
     "test_inputs": 1
    },
@@ -79,19 +79,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.329
+     "seconds": 0.33
     },
     {
      "step": "localize",
-     "seconds": 0.117
+     "seconds": 0.114
     },
     {
      "step": "patch_search",
-     "seconds": 1.364
+     "seconds": 1.352
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.301
+     "seconds": 0.31
     }
    ],
    "gate": "PASS",
@@ -104,8 +104,8 @@
   "wrong_operator": {
    "bug": "return w + h",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1525.1,
-   "search_s": 0.775,
+   "e2e_ms": 1501.7,
+   "search_s": 0.77,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -138,19 +138,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.332
+     "seconds": 0.319
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.121
     },
     {
      "step": "patch_search",
-     "seconds": 0.775
+     "seconds": 0.77
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.297
+     "seconds": 0.288
     }
    ],
    "gate": "PASS",
@@ -162,8 +162,8 @@
   "missing_term": {
    "bug": "return w",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1551.7,
-   "search_s": 0.796,
+   "e2e_ms": 1533.6,
+   "search_s": 0.788,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -196,19 +196,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.315
+     "seconds": 0.319
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.113
     },
     {
      "step": "patch_search",
-     "seconds": 0.796
+     "seconds": 0.788
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.323
+     "seconds": 0.309
     }
    ],
    "gate": "PASS",
@@ -220,8 +220,8 @@
   "missing_guard": {
    "bug": "return w * h  (+ area(None, 4) == 0)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1916.3,
-   "search_s": 1.154,
+   "e2e_ms": 2155.9,
+   "search_s": 1.403,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -239,7 +239,32 @@
     "examples": 2,
     "expressions": [],
     "function": "area",
-    "seconds": 0.017,
+    "hole": {
+     "candidates": 0,
+     "lines": [
+      {
+       "line": 2,
+       "names": [
+        "h",
+        "w"
+       ],
+       "seconds": 0.038,
+       "sites": [
+        {
+         "distinct": 330,
+         "expressions": [],
+         "kind": "return",
+         "original": "w * h",
+         "stop": "EXHAUSTED",
+         "tried": 330
+        }
+       ],
+       "status": "NONE"
+      }
+     ],
+     "seconds": 0.183
+    },
+    "seconds": 0.016,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -265,7 +290,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.342,
+    "seconds": 0.348,
     "status": "MEASURED",
     "test_inputs": 2
    },
@@ -276,19 +301,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.317
+     "seconds": 0.32
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 1.154
+     "seconds": 1.403
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.325
+     "seconds": 0.311
     }
    ],
    "gate": "PASS",
@@ -300,8 +325,8 @@
   "two_edits_and_overfit": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3721.0,
-   "search_s": 2.966,
+   "e2e_ms": 3586.0,
+   "search_s": 2.825,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -347,7 +372,7 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 2.144
+    "seconds": 2.029
    },
    "synthesis": {
     "examples": 1,
@@ -398,7 +423,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.723,
+    "seconds": 0.676,
     "status": "MEASURED",
     "test_inputs": 1
    },
@@ -408,19 +433,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.321
+     "seconds": 0.324
     },
     {
      "step": "localize",
-     "seconds": 0.112
+     "seconds": 0.115
     },
     {
      "step": "patch_search",
-     "seconds": 2.966
+     "seconds": 2.825
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.316
+     "seconds": 0.317
     }
    ],
    "gate": "PASS",
@@ -433,8 +458,8 @@
   "two_edits_and_overfit__judge_pytest": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 22232.4,
-   "search_s": 21.465,
+   "e2e_ms": 21929.1,
+   "search_s": 21.155,
    "judge": {
     "in_process": false,
     "reason": "JUDGE_PYTEST_REQUESTED"
@@ -480,7 +505,7 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 12.01
+    "seconds": 11.968
    },
    "synthesis": {
     "status": "NOT_ATTEMPTED"
@@ -528,7 +553,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.696,
+    "seconds": 0.676,
     "status": "MEASURED",
     "test_inputs": 1
    },
@@ -538,19 +563,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.336
+     "seconds": 0.332
     },
     {
      "step": "localize",
-     "seconds": 0.13
+     "seconds": 0.126
     },
     {
      "step": "patch_search",
-     "seconds": 21.465
+     "seconds": 21.155
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.297
+     "seconds": 0.311
     }
    ],
    "gate": "PASS",
@@ -563,8 +588,8 @@
   "only_overfit": {
    "bug": "return 0",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-   "e2e_ms": 1276.7,
-   "search_s": 0.813,
+   "e2e_ms": 1187.0,
+   "search_s": 0.758,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -626,15 +651,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.334
+     "seconds": 0.31
     },
     {
      "step": "localize",
-     "seconds": 0.126
+     "seconds": 0.115
     },
     {
      "step": "patch_search",
-     "seconds": 0.813
+     "seconds": 0.758
     }
    ],
    "gate": null,
@@ -647,8 +672,8 @@
   "cross_file_spectrum": {
    "bug": "util.mul returns a + b (called by calc.area)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1512.4,
-   "search_s": 0.763,
+   "e2e_ms": 1503.7,
+   "search_s": 0.77,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -681,19 +706,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.313
     },
     {
      "step": "localize",
-     "seconds": 0.113
+     "seconds": 0.112
     },
     {
      "step": "patch_search",
-     "seconds": 0.763
+     "seconds": 0.77
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.304
+     "seconds": 0.305
     }
    ],
    "gate": "PASS",
@@ -706,8 +731,8 @@
   "parametrized_synthesis": {
    "bug": "return len(str(w)) (parametrized rows 12/(3,4), 10/(2,5))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1895.7,
-   "search_s": 1.03,
+   "e2e_ms": 1975.8,
+   "search_s": 1.12,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -727,7 +752,12 @@
      "w * h"
     ],
     "function": "area",
-    "seconds": 0.11,
+    "hole": {
+     "candidates": 0,
+     "lines": [],
+     "seconds": 0.0
+    },
+    "seconds": 0.106,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -746,19 +776,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.327
+     "seconds": 0.304
     },
     {
      "step": "localize",
-     "seconds": 0.229
+     "seconds": 0.223
     },
     {
      "step": "patch_search",
-     "seconds": 1.03
+     "seconds": 1.12
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.306
+     "seconds": 0.325
     }
    ],
    "gate": "PASS",
@@ -768,11 +798,312 @@
    "tree_unchanged": true,
    "note": "literal parametrize is plain: rows expanded statically, each row a test, substituted asserts are the synthesis examples"
   },
+  "hole_in_loop_assignment": {
+   "bug": "acc = acc + 1 inside `for x in xs` (should be acc + x)",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 3408.4,
+   "search_s": 2.668,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 126,
+   "tested": 64,
+   "greens": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "overfit_signature_indices": [
+    3
+   ],
+   "compose": null,
+   "synthesis": {
+    "enumerated": 1104,
+    "examples": 2,
+    "expressions": [],
+    "function": "total",
+    "hole": {
+     "candidates": 5,
+     "lines": [
+      {
+       "line": 2,
+       "names": [
+        "xs"
+       ],
+       "seconds": 0.014,
+       "sites": [
+        {
+         "distinct": 113,
+         "expressions": [],
+         "kind": "assign",
+         "original": "0",
+         "stop": "EXHAUSTED",
+         "tried": 112
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 4,
+       "names": [
+        "acc",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.358,
+       "sites": [
+        {
+         "distinct": 7252,
+         "expressions": [
+          "acc + x",
+          "x + x",
+          "x * (2 % x)",
+          "x + x % (acc + x)"
+         ],
+         "kind": "assign",
+         "original": "acc + 1",
+         "stop": "EXHAUSTED",
+         "tried": 2010
+        }
+       ],
+       "status": "FOUND:4"
+      },
+      {
+       "line": 5,
+       "names": [
+        "acc",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.515,
+       "sites": [
+        {
+         "distinct": 4607,
+         "expressions": [
+          "x + x"
+         ],
+         "kind": "return",
+         "original": "acc",
+         "stop": "EXHAUSTED",
+         "tried": 4606
+        }
+       ],
+       "status": "FOUND:1"
+      }
+     ],
+     "seconds": 1.319
+    },
+    "seconds": 0.003,
+    "status": "NONE:EXHAUSTED",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "HOLE_SYNTH assign -> acc + x",
+   "witness": {
+    "function": "total",
+    "grid_inputs": 10,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 0,
+      "delta_outside_tests": 0,
+      "grid_inputs": 10,
+      "index": 1,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 0,
+      "delta_outside_tests": 0,
+      "grid_inputs": 10,
+      "index": 2,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 0,
+      "delta_outside_tests": 0,
+      "grid_inputs": 10,
+      "index": 3,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 0,
+      "delta_outside_tests": 0,
+      "grid_inputs": 10,
+      "index": 4,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.562,
+    "status": "MEASURED",
+    "test_inputs": 0
+   },
+   "patched_lines": [
+    "+        acc = acc + x"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.321
+    },
+    {
+     "step": "localize",
+     "seconds": 0.116
+    },
+    {
+     "step": "patch_search",
+     "seconds": 2.668
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.299
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "the fault is an assignment inside a loop, not a return: locals snapshotted at every arrival of line 4 (5 iterations over 2 examples), 7252 distinct expressions, 'acc + x' first; three spurious greens ('x + x', ...) also agree with the tests and the witness cannot separate them for a list parameter -> search order (smallest first) decides; stated, not hidden"
+  },
+  "hole_in_condition": {
+   "bug": "if x < lo (should be x < lo or x > hi)",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 2701.0,
+   "search_s": 1.956,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 136,
+   "tested": 64,
+   "greens": [
+    8,
+    9,
+    10
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "enumerated": 40806,
+    "examples": 3,
+    "expressions": [],
+    "function": "inside",
+    "hole": {
+     "candidates": 3,
+     "lines": [
+      {
+       "line": 2,
+       "names": [
+        "hi",
+        "lo",
+        "x"
+       ],
+       "seconds": 0.132,
+       "sites": [
+        {
+         "distinct": 24,
+         "expressions": [
+          "x < lo or hi < x",
+          "x < lo or x > hi",
+          "x < lo or hi <= x"
+         ],
+         "kind": "condition",
+         "original": "x < lo",
+         "stop": "EXHAUSTED",
+         "tried": 24
+        }
+       ],
+       "status": "FOUND:3"
+      },
+      {
+       "line": 3,
+       "names": null,
+       "seconds": 0.001,
+       "sites": [],
+       "status": "HOLE_LINE_NOT_REACHED_BY_EXAMPLE"
+      },
+      {
+       "line": 4,
+       "names": null,
+       "seconds": 0.001,
+       "sites": [],
+       "status": "HOLE_LINE_NOT_REACHED_BY_EXAMPLE"
+      }
+     ],
+     "seconds": 0.547
+    },
+    "seconds": 0.134,
+    "status": "NONE:EXHAUSTED",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "HOLE_SYNTH condition -> x < lo or hi < x",
+   "witness": {
+    "function": "inside",
+    "grid_inputs": 120,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 42,
+      "grid_inputs": 120,
+      "index": 8,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 42,
+      "grid_inputs": 120,
+      "index": 9,
+      "witness": "MEASURED"
+     },
+     {
+      "delta_on_tests": 1,
+      "delta_outside_tests": 50,
+      "grid_inputs": 120,
+      "index": 10,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.457,
+    "status": "MEASURED",
+    "test_inputs": 3
+   },
+   "patched_lines": [
+    "+    if x < lo or hi < x:"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.32
+    },
+    {
+     "step": "localize",
+     "seconds": 0.111
+    },
+    {
+     "step": "patch_search",
+     "seconds": 1.956
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.31
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "a missing disjunct: staged condition synthesis (SPR/Prophet) emits `orig or C` / `orig and C` first; three greens, witness ranks the two equivalent forms of `x < lo or x > hi` (42 changed outside the tests) above `x < lo or hi <= x` (50)"
+  },
   "two_examples_synthesis__return_0": {
    "bug": "return 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1678.6,
-   "search_s": 0.885,
+   "e2e_ms": 1648.1,
+   "search_s": 0.9,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -792,7 +1123,12 @@
      "w * h"
     ],
     "function": "area",
-    "seconds": 0.102,
+    "hole": {
+     "candidates": 0,
+     "lines": [],
+     "seconds": 0.0
+    },
+    "seconds": 0.105,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -811,19 +1147,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.355
+     "seconds": 0.315
     },
     {
      "step": "localize",
-     "seconds": 0.122
+     "seconds": 0.117
     },
     {
      "step": "patch_search",
-     "seconds": 0.885
+     "seconds": 0.9
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.313
+     "seconds": 0.312
     }
    ],
    "gate": "PASS",
@@ -836,8 +1172,8 @@
   "two_examples_synthesis__len_str_w": {
    "bug": "return len(str(w))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1671.8,
-   "search_s": 0.9,
+   "e2e_ms": 1604.6,
+   "search_s": 0.889,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -857,7 +1193,12 @@
      "w * h"
     ],
     "function": "area",
-    "seconds": 0.097,
+    "hole": {
+     "candidates": 0,
+     "lines": [],
+     "seconds": 0.0
+    },
+    "seconds": 0.111,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -876,19 +1217,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.33
+     "seconds": 0.303
     },
     {
      "step": "localize",
-     "seconds": 0.129
+     "seconds": 0.113
     },
     {
      "step": "patch_search",
-     "seconds": 0.9
+     "seconds": 0.889
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.309
+     "seconds": 0.295
     }
    ],
    "gate": "PASS",
@@ -900,8 +1241,8 @@
   "two_examples_synthesis__w_plus_h_plus_1": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1683.2,
-   "search_s": 0.944,
+   "e2e_ms": 1625.3,
+   "search_s": 0.884,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -921,7 +1262,12 @@
      "w * h"
     ],
     "function": "area",
-    "seconds": 0.098,
+    "hole": {
+     "candidates": 0,
+     "lines": [],
+     "seconds": 0.0
+    },
+    "seconds": 0.096,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -940,19 +1286,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.31
+     "seconds": 0.321
     },
     {
      "step": "localize",
-     "seconds": 0.109
+     "seconds": 0.113
     },
     {
      "step": "patch_search",
-     "seconds": 0.944
+     "seconds": 0.884
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.316
+     "seconds": 0.304
     }
    ],
    "gate": "PASS",
@@ -964,8 +1310,8 @@
   "two_examples_no_expression__test_literal_rejected": {
    "bug": "return len(str(w))",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[2]",
-   "e2e_ms": 1337.7,
-   "search_s": 0.899,
+   "e2e_ms": 1327.3,
+   "search_s": 0.89,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1005,7 +1351,12 @@
      "w + (w + h + 2)"
     ],
     "function": "area",
-    "seconds": 0.109,
+    "hole": {
+     "candidates": 0,
+     "lines": [],
+     "seconds": 0.0
+    },
+    "seconds": 0.098,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1025,11 +1376,11 @@
     },
     {
      "step": "localize",
-     "seconds": 0.118
+     "seconds": 0.117
     },
     {
      "step": "patch_search",
-     "seconds": 0.899
+     "seconds": 0.89
     }
    ],
    "gate": null,
@@ -1042,8 +1393,8 @@
   "under_specified_suite": {
    "bug": "return w * h if w <= 0 else 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2192.0,
-   "search_s": 1.417,
+   "e2e_ms": 2235.3,
+   "search_s": 1.467,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1066,7 +1417,12 @@
      "w * h"
     ],
     "function": "area",
-    "seconds": 0.057,
+    "hole": {
+     "candidates": 0,
+     "lines": [],
+     "seconds": 0.0
+    },
+    "seconds": 0.073,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1106,7 +1462,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.567,
+    "seconds": 0.605,
     "status": "MEASURED",
     "test_inputs": 2
    },
@@ -1116,19 +1472,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.314
+     "seconds": 0.315
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.14
     },
     {
      "step": "patch_search",
-     "seconds": 1.417
+     "seconds": 1.467
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.343
+     "seconds": 0.309
     }
    ],
    "gate": "PASS",
@@ -1140,8 +1496,8 @@
   "parametrized_not_plain": {
    "bug": "return w + h (parametrized test)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1913.1,
-   "search_s": 1.045,
+   "e2e_ms": 1886.1,
+   "search_s": 1.033,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1161,7 +1517,12 @@
      "w * h"
     ],
     "function": "area",
-    "seconds": 0.099,
+    "hole": {
+     "candidates": 0,
+     "lines": [],
+     "seconds": 0.0
+    },
+    "seconds": 0.104,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1180,19 +1541,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.324
+     "seconds": 0.311
     },
     {
      "step": "localize",
-     "seconds": 0.232
+     "seconds": 0.228
     },
     {
      "step": "patch_search",
-     "seconds": 1.045
+     "seconds": 1.033
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.308
+     "seconds": 0.31
     }
    ],
    "gate": "PASS",
@@ -1205,8 +1566,8 @@
   "sabotage_full_suite": {
    "bug": "return w * h - 1 (+ a test pinning the bug)",
    "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-   "e2e_ms": 2112.1,
-   "search_s": 1.357,
+   "e2e_ms": 2091.0,
+   "search_s": 1.353,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1263,7 +1624,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.57,
+    "seconds": 0.563,
     "status": "MEASURED",
     "test_inputs": 1
    },
@@ -1273,19 +1634,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.316
+     "seconds": 0.321
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.113
     },
     {
      "step": "patch_search",
-     "seconds": 1.357
+     "seconds": 1.353
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.319
+     "seconds": 0.3
     }
    ],
    "gate": "FAIL",
@@ -1297,7 +1658,7 @@
   "nothing_to_repair": {
    "bug": null,
    "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-   "e2e_ms": 318.1,
+   "e2e_ms": 315.5,
    "steps": [],
    "gate": null,
    "tests_discovered": null,
@@ -1308,7 +1669,7 @@
   "harness_crash": {
    "bug": null,
    "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-   "e2e_ms": 292.6,
+   "e2e_ms": 283.9,
    "steps": [],
    "gate": null,
    "tests_discovered": null,

@@ -652,6 +652,32 @@ def synthesized_candidates(source_text: str, lineno: int, expressions: list[str]
     return out
 
 
+def hole_candidates(source_text: str, sites: list[dict[str, Any]]) -> list[tuple[dict[str, Any], str]]:
+    """HOLE_SYNTH rows from hole_synthesis_v1 output: each site's span replaced by each
+    expression that made the function agree with the tests' examples."""
+    out: list[tuple[dict[str, Any], str]] = []
+    seen: set[str] = set()
+    lines = source_text.splitlines(keepends=True)
+    for row in sites:
+        site = row.get("site") or {}
+        for expr in row.get("expressions") or []:
+            i = int(site["lineno"]) - 1
+            if not (0 <= i < len(lines)):
+                continue
+            ln = lines[i]
+            cand = "".join([*lines[:i], ln[:site["col_offset"]] + expr + ln[site["end_col_offset"]:], *lines[i + 1:]])
+            if cand == source_text:
+                continue
+            digest = _sha(cand.encode("utf-8"))
+            if digest in seen:
+                continue
+            seen.add(digest)
+            out.append(({"kind": "HOLE_SYNTH", "detail": str(site.get("kind")) + " -> " + expr, "lineno": site["lineno"],
+                         "col_offset": site["col_offset"], "end_lineno": site["lineno"],
+                         "end_col_offset": site["end_col_offset"], "candidate_sha256": digest}, cand))
+    return out
+
+
 def insert_after_cheap_edits(candidates: list[tuple[dict[str, Any], str]], extra: list[tuple[dict[str, Any], str]]) -> list[tuple[dict[str, Any], str]]:
     """Place ``extra`` on the top-ranked line after its kind-order-0 edits (swaps, drops)
     and before constants/guards, keeping the spectrum-first order intact."""

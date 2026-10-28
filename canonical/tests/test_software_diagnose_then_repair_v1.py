@@ -514,3 +514,64 @@ def test_synthesis_is_bounded_bottom_up_with_observational_equivalence():
     specs = [{"test": "t", "expr": "area(3, 4)", "expected": 12}, {"test": "t", "expr": "other(1)", "expected": 1},
              {"test": "t", "expr": "area(x, 4)", "expected": 12}]
     assert es.examples_for("area", ["w", "h"], specs) == [([3, 4], 12)]
+
+
+# --- one-hole sketch synthesis inside the function (assignment, condition) ---------------
+
+def test_a_wrong_accumulator_inside_a_loop_is_synthesized_from_every_arrival(tmp_path: Path):
+    _fixture(tmp_path)
+    (tmp_path / "proj" / "pkg" / "calc.py").write_text(
+        "def total(xs):\n    acc = 0\n    for x in xs:\n        acc = acc + 1\n    return acc\n\n\ndef twice(x):\n    return 2 * x\n")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import total, twice\n\ndef test_total():\n    assert total([1, 2, 3]) == 6\n    assert total([5, 5]) == 10\n\n"
+        "def test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+        acc = acc + x\n" in (tmp_path / result["diff_path"]).read_text()
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["winning_mutation"]["kind"] == "HOLE_SYNTH"
+    line4 = next(r for r in search["synthesis"]["hole"]["lines"] if r["line"] == 4)
+    # observational equivalence over every arrival: `acc + x` is distinct from `x`
+    # (identical on the first iteration) and is the first expression found
+    assert line4["sites"][0]["kind"] == "assign" and line4["sites"][0]["expressions"][0] == "acc + x"
+    assert result["seconds"] < 15
+
+
+def test_a_missing_disjunct_in_a_condition_is_synthesized_in_staged_order(tmp_path: Path):
+    _fixture(tmp_path)
+    (tmp_path / "proj" / "pkg" / "calc.py").write_text(
+        "def inside(x, lo, hi):\n    if x < lo:\n        return False\n    return True\n\n\ndef twice(x):\n    return 2 * x\n")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import inside, twice\n\ndef test_inside():\n    assert inside(5, 1, 10) == True\n"
+        "    assert inside(0, 1, 10) == False\n    assert inside(11, 1, 10) == False\n\n"
+        "def test_twice():\n    assert twice(5) == 10\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    added = next(l for l in (tmp_path / result["diff_path"]).read_text().splitlines() if l.startswith("+    if "))
+    assert added.startswith("+    if x < lo or ") and ("hi < x" in added or "x > hi" in added), added
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    exprs = search["synthesis"]["hole"]["lines"][0]["sites"][0]["expressions"]
+    assert all(e.startswith("x < lo or ") for e in exprs)      # the original loosened, SPR-style, first
+    assert len(search["green_indices"]) >= 2 and search["witness"]["status"] == "MEASURED"
+
+
+def test_hole_synthesis_units_are_pure_and_bounded():
+    from canonical.runtime import hole_synthesis_v1 as h
+    src = "def f(a, b):\n    t = a + b\n    if t > 3:\n        return t\n    return 0\n"
+    assert [s["kind"] for s in h.hole_sites(src, "f", 2)] == ["assign"]
+    assert [s["kind"] for s in h.hole_sites(src, "f", 3)] == ["condition"]
+    assert [s["kind"] for s in h.hole_sites(src, "f", 4)] == ["return"]
+    assert h.hole_sites(src, "f", 1) == [] and h.hole_sites(src, "g", 2) == []
+    site = h.hole_sites(src, "f", 2)[0]
+    assert h.splice(src, site, "a * b").splitlines()[1] == "    t = a * b"
+    envs = [{"acc": 0, "x": 1}, {"acc": 1, "x": 2}, {"acc": 3, "x": 3}]
+    exprs, enum, stop = h.enumerate_distinct(["acc", "x"], envs, [], max_size=2)
+    srcs = [e[0] for e in exprs]
+    assert "acc" in srcs and "x" in srcs and "(acc + x)" in srcs and stop == "EXHAUSTED"
+    vectors = {tuple((type(v).__name__, repr(v)) for v in (eval(e, {}, env) for env in envs)) for e in srcs}
+    assert len(vectors) == len(srcs)                                                    # one per typed output vector
+    conds, _, _ = h.enumerate_distinct(["x", "lo"], [{"x": 5, "lo": 1}, {"x": 0, "lo": 1}], [], max_size=1,
+                                       booleans=True, original=(False, True))
+    assert conds and all(c[0].startswith("(__ORIG__)") for c in conds[:4])              # staged: orig or/and C first
+    one, _, _ = h.enumerate_distinct(["x"], [{"x": 5}], [], booleans=True, max_size=1)
+    assert one == [] or all(" " in c[0] for c in one)                                   # no constant truth values

@@ -77,6 +77,7 @@ from canonical.runtime import patch_candidate_search_v1 as candidates_v1
 from canonical.runtime import patch_differential_witness_v1 as witness_v1
 from canonical.runtime import patch_inprocess_judge_v1 as judge_v1
 from canonical.runtime import expression_synthesis_v1 as synth_v1
+from canonical.runtime import hole_synthesis_v1 as hole_v1
 
 SCHEMA = "PROJECT_BRAIN_SOFTWARE_DIAGNOSE_THEN_REPAIR_V1"
 CAPABILITY_ID = "software.diagnose_repair.v1"   # no sequencing word ("then") in the id: the sentence door splits clauses on it
@@ -297,7 +298,7 @@ def _overfit_signature(desc: dict[str, Any], nums: list[Any], strings: list[str]
     if kind == "GUARD_INSERT":
         ret = detail.split("return ", 1)[-1]
         return any(repr(v) == ret for v in [*nums, *strings] if v not in (0, 1, -1))
-    if kind == "EXPR_SYNTH":
+    if kind in ("EXPR_SYNTH", "HOLE_SYNTH"):
         try:
             literals = {n.value for n in ast.walk(ast.parse(detail.split("-> ", 1)[-1], mode="eval"))
                         if isinstance(n, ast.Constant)}
@@ -396,6 +397,51 @@ def _spectrum(copy_root: pathlib.Path, modules: list[dict[str, Any]], python_exe
     return {"status": "SPECTRUM_INPROCESS" if ranked else "SPECTRUM_NO_SUSPICIOUS_LINE",
             "failing_test_count": data.get("failing"), "test_count": len(data.get("tests") or []),
             "ranked": ranked}
+
+
+def _dotted(tree: pathlib.Path, rel: str) -> tuple[str, str]:
+    """Import name and sys.path entry for a tree file, the way pytest's prepend mode sees it."""
+    p = tree / rel
+    d = p.parent
+    pkg: list[str] = []
+    while (d / "__init__.py").is_file() and d != tree.parent:
+        pkg.insert(0, d.name)
+        d = d.parent
+    return ".".join(pkg + [p.stem]), (d.relative_to(tree).as_posix() if d != tree else ".")
+
+
+def _hole_synth(copy_root: pathlib.Path, target_rel: str, function: str, line: int,
+                examples: list[tuple[list[Any], Any]], constants: list[Any], python_exe: str, confine: str,
+                deadline: float, budget_s: float) -> dict[str, Any]:
+    """One confined run of hole_synthesis_v1 for ``function``'s hole(s) on ``line``."""
+    out_rel = ".brain_diagnose/hole.json"
+    out = copy_root / out_rel
+    out.parent.mkdir(parents=True, exist_ok=True)
+    if out.exists():
+        out.unlink()
+    module, sys_path = _dotted(copy_root, target_rel)
+    spec = {"module": module, "sys_path": sys_path, "target": target_rel, "function": function, "line": line,
+            "examples": [[list(a), e] for a, e in examples], "constants": list(constants), "out": out_rel,
+            "budget_s": budget_s, "max_found": 4}
+    program = hole_v1.program(spec, pathlib.Path(hole_v1.__file__).read_text(encoding="utf-8"))
+    timeout = max(5, min(60, int(deadline - time.monotonic())))
+    ran = False
+    if confine in ("auto", "required") and confine_v1.available():
+        receipt = confine_v1.run("import os\nos.chdir('/project')\n" + program, str(copy_root), timeout=timeout,
+                                 network=False, ro_binds=_site_dirs())
+        ran = receipt.get("verdict") in ("OK", "TIMEOUT") or out.is_file()
+    if not ran and confine != "required":
+        try:
+            subprocess.run([python_exe, "-c", program], cwd=copy_root, capture_output=True, timeout=timeout,
+                           env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        except subprocess.TimeoutExpired:
+            pass
+    if not out.is_file():
+        return {"status": "HOLE_NO_OUTPUT"}
+    try:
+        return json.loads(out.read_text(encoding="utf-8"))
+    except ValueError:
+        return {"status": "HOLE_UNREADABLE"}
 
 
 def _test_import_closure(tree: pathlib.Path, tests_rel: list[str]) -> list[str]:
@@ -638,6 +684,37 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                     extra = candidates_v1.synthesized_candidates(source_text, priority[0], synth["expressions"])
                     candidates = candidates_v1.insert_after_cheap_edits(candidates, extra)
                     synth_row["candidates"] = len(extra)
+                if len(examples) >= 2 and remaining() > 10:
+                    # the hole is any expression on the suspicious line (assignment,
+                    # condition, return): run the function on the examples, confined,
+                    # with each distinct expression spliced in; keep the ones that agree
+                    fn_lines = set(range(fn_node.lineno, (fn_node.end_lineno or fn_node.lineno) + 1))
+                    hole_rows: list[dict[str, Any]] = []
+                    extra = []
+                    t_h = time.monotonic()
+                    budget_h = min(3.0, max(0.5, remaining() / 8))
+                    def _worth(x: int) -> bool:
+                        kinds = {st["kind"] for st in hole_v1.hole_sites(source_text, fname, x)}
+                        return bool(kinds) and not (synth["expressions"] and kinds == {"return"})
+                    for ln in [x for x in priority if x in fn_lines and _worth(x)][:4]:
+                        left = budget_h - (time.monotonic() - t_h)
+                        if left < 0.3:
+                            break
+                        hole = _hole_synth(tree, target_rel, fname, ln, examples, own_consts, python_exe,
+                                           confine, deadline, budget_s=min(1.5, left))
+                        sites = [r for r in hole.get("sites") or []
+                                 if not (synth["expressions"] and (r.get("site") or {}).get("kind") == "return")]
+                        extra += candidates_v1.hole_candidates(source_text, sites)
+                        hole_rows.append({"line": ln, "status": hole.get("status"), "names": hole.get("names"),
+                                          "seconds": hole.get("seconds"),
+                                          "sites": [{"kind": (r.get("site") or {}).get("kind"),
+                                                     "original": (r.get("site") or {}).get("original"),
+                                                     "distinct": r.get("distinct"), "tried": r.get("tried"),
+                                                     "expressions": r.get("expressions"), "stop": r.get("stop")}
+                                                    for r in hole.get("sites") or []]})
+                    candidates = candidates_v1.insert_after_cheap_edits(candidates, extra)
+                    synth_row["hole"] = {"lines": hole_rows, "candidates": len(extra),
+                                         "seconds": round(time.monotonic() - t_h, 3)}
         per_run = max(5, min(remaining(), 300))
         witness_row: dict[str, Any] = {}
 
