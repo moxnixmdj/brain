@@ -23133,7 +23133,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "ca327e0782fca640161eeb39a265d0e01d6a6f53b105fc8eed2d05dcf7d676d8",
+    "source_sha256": "0e4f0f520fc019d72722b5b9067ca5851d65228a148b5c04682d2fff6af68d53",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23165,6 +23165,12 @@
     "dataflow",
     "def-use",
     "localize",
+    "localizer",
+    "localizing",
+    "localize the fault",
+    "fault localizer",
+    "localize the failing test",
+    "spectrum-based fault localization",
     "v1",
     "ranked",
     "backward",
@@ -23363,7 +23369,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
-    "source_sha256": "d191b5149837d4dd615dbdfc9cd332249218def83436fe9dc9c4ed0cca7820b5",
+    "source_sha256": "7e7514167194d201604681064f2847e09f74c7c57aa29950bc9ed38ea2555c0e",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23393,6 +23399,12 @@
     "dynamic",
     "dataflow",
     "callsite",
+    "value provenance",
+    "trace the value",
+    "tracing",
+    "provenance trace",
+    "trace the provenance",
+    "where does this value come from",
     "v1",
     "edges",
     "hypotheses"
@@ -23672,7 +23684,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "da02f8fc556f2a89a835ae2e25c2580853f4d9fc26818cecd9498fde59e58db7",
+    "source_sha256": "b908eab2af422e6bef281f3664d602c2c308a1e299797d94c50c2293838898b0",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25222,7 +25234,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "96ac2dcd00e7f16e4a93190402cdec06ff94646ca87add16923f21c45878c6ba",
+    "source_sha256": "df5782726e335e1b3c3217ebfd5f43d730714ede98619f806dde5b7f8bbb95bf",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25399,7 +25411,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "d9a9a8006e8198bbd84bc702fd72a86b657b9993754e47d4655224c9a5e56f9d",
+    "source_sha256": "f7796117f2ff99e9ce6e3f714b5a265c527178a0e4c74734632694710f4bff3d",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25427,6 +25439,11 @@
     "tests",
     "counterexample",
     "ast",
+    "iterative",
+    "iterative repair",
+    "iterative software repair loop",
+    "repair loop",
+    "repair the source iteratively",
     "loop",
     "strict_progress",
     "v1",
@@ -25488,7 +25505,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-    "source_sha256": "e3a41d1021f167e34f9a3fe2128bebb793a28e4ebb28e34f1a298036dfee3220",
+    "source_sha256": "bb3ac83e68b84a8272eb0c4cd3011228cb236bb1e42f0733538f0065b9ffc582",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25578,7 +25595,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-    "source_sha256": "25672504a0aadd7296b70e5db8cfe5b185a0786c5291f573e1efb44e30e6e128",
+    "source_sha256": "870901dbeb3b110eadf52b36487de64c67435c052fbf7f2759c60eacd26da22e",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25662,7 +25679,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
-    "source_sha256": "7674de24ab84e53324322f6ded17462447bd9be8ed3a72592d007c5771bcb6e6",
+    "source_sha256": "80ab3fa0a56a51db01dfce152be5e8d316b80ab19b767ad47058d4dbfcdc8ae7",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25692,6 +25709,9 @@
     "content-addressed",
     "candidate",
     "verification",
+    "semantic acceptance controller",
+    "acceptance controller",
+    "semantic acceptance of the repair",
     "semantic_acceptance",
     "v1",
     "patch",
@@ -26422,7 +26442,11 @@
     "corpus",
     "pass rate",
     "pass_rate",
-    "rate report"
+    "rate report",
+    "test corpus",
+    "audit the test corpus",
+    "audit the tests",
+    "auditing"
    ],
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
@@ -28689,10 +28713,10 @@
   "bound_capabilities": 125,
   "capabilities": 419,
   "engines": 26,
-  "knowledge_documents": 172,
+  "knowledge_documents": 171,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6497,
-  "routing_tokens": 2096,
+  "research_index_records": 6498,
+  "routing_tokens": 2105,
   "skills": 18,
   "source_index_entry_points": 423,
   "source_index_modules": 1889
@@ -28700,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "99f0f92219dcefcb5ff4e040ac89122c4c6d936ab32b58408ce60de02bd6112b"
+  "value": "fcfbbfabfa3de1f4acf910495d9098401f87a0e90b04473bb9c8b5ea6ec9247e"
  },
  "engines": [
   {
@@ -29466,6 +29490,9 @@
    },
    "audit_live_artifact": {
     "pypi.provenance.audit_live_artifact": 447.0
+   },
+   "auditing": {
+    "python.tests.audit.unittest": 447.0
    },
    "author": {
     "python.tests.generate.scaffold.v1": 447.0
@@ -31666,6 +31693,9 @@
     "xlsx.table.create_from_json_records": 180.0,
     "xlsx.table.verify_against_json_records": 180.0
    },
+   "come": {
+    "python.fault.provenance.interprocedural.value.v1": 670.5
+   },
    "command": {
     "shell.command.run": 447.0
    },
@@ -31882,8 +31912,9 @@
     "canonical/runtime/root1_contrastive_semantic_gate_v1.py.auto.v1": 447.0
    },
    "controller": {
-    "canonical/runtime/terminal_causal_depth_controller_v1.py.auto.v1": 298.666667,
-    "canonical/runtime/terminal_four_invariant_controller_v1.py.auto.v1": 298.666667
+    "canonical/runtime/terminal_causal_depth_controller_v1.py.auto.v1": 224.5,
+    "canonical/runtime/terminal_four_invariant_controller_v1.py.auto.v1": 224.5,
+    "python.software.repair.semantic_acceptance.v1": 336.75
    },
    "convert": {
     "document.convert.markdown_pdf.pandoc_weasyprint": 298.666667,
@@ -32848,6 +32879,9 @@
    "failed": {
     "python.tests.audit.unittest": 447.0
    },
+   "failing": {
+    "python.fault.localize.dynamic.dataflow.v1": 670.5
+   },
    "failure": {
     "terminal.kstar.root.assess.stdlib": 447.0
    },
@@ -33504,6 +33538,12 @@
     "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py.auto.v1": 150.333333,
     "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1": 150.333333
    },
+   "iterative": {
+    "python.software.repair.loop.strict_progress.ast.v1": 447.0
+   },
+   "iteratively": {
+    "python.software.repair.loop.strict_progress.ast.v1": 670.5
+   },
    "java": {
     "code.multilanguage.parse.tree_sitter.v1": 447.0
    },
@@ -34133,6 +34173,12 @@
    "localize": {
     "python.fault.localize.dynamic.dataflow.v1": 447.0
    },
+   "localizer": {
+    "python.fault.localize.dynamic.dataflow.v1": 447.0
+   },
+   "localizing": {
+    "python.fault.localize.dynamic.dataflow.v1": 447.0
+   },
    "locate": {
     "structured.decision_evidence.locate.stdlib": 447.0
    },
@@ -34152,7 +34198,7 @@
     "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1": 129.142857,
     "python.software.issue_to_pr.orchestrate.v1": 193.714286,
     "python.software.repair.loop.coupled.ast.v1": 129.142857,
-    "python.software.repair.loop.strict_progress.ast.v1": 129.142857,
+    "python.software.repair.loop.strict_progress.ast.v1": 193.714286,
     "python.software.repair.loop.test_guided.ast.v1": 129.142857,
     "software.repair.loop.cegis_hypothesis.v1": 129.142857
    },
@@ -37360,24 +37406,25 @@
     "python.review.diff_type_gate.v1": 447.0
    },
    "source": {
-    "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1": 48.842105,
-    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 48.842105,
-    "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1": 48.842105,
-    "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1": 48.842105,
-    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1": 48.842105,
-    "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1": 48.842105,
-    "code.multilanguage.parse.tree_sitter.v1": 48.842105,
-    "python.repository.acceptance.measure.v1": 73.263158,
-    "python.software.repair.apply.verified.v1": 48.842105,
-    "python.source.audit.ast": 48.842105,
-    "python.source.change_impact.testselect.v1": 48.842105,
-    "python.source.crossfile_edit.choreograph.v1": 48.842105,
-    "python.source.symbols.index.ast": 48.842105,
-    "python.source.symbols.resolve.v1": 48.842105,
-    "source.authority.identity.ror": 48.842105,
-    "source.candidates.enumerate.stdlib": 48.842105,
-    "source.evidence.extract.objective_grounded.stdlib": 48.842105,
-    "source.objective_relevance.rank.bm25": 48.842105
+    "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1": 46.5,
+    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 46.5,
+    "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1": 46.5,
+    "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1": 46.5,
+    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1": 46.5,
+    "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1": 46.5,
+    "code.multilanguage.parse.tree_sitter.v1": 46.5,
+    "python.repository.acceptance.measure.v1": 69.75,
+    "python.software.repair.apply.verified.v1": 46.5,
+    "python.software.repair.loop.strict_progress.ast.v1": 69.75,
+    "python.source.audit.ast": 46.5,
+    "python.source.change_impact.testselect.v1": 46.5,
+    "python.source.crossfile_edit.choreograph.v1": 46.5,
+    "python.source.symbols.index.ast": 46.5,
+    "python.source.symbols.resolve.v1": 46.5,
+    "source.authority.identity.ror": 46.5,
+    "source.candidates.enumerate.stdlib": 46.5,
+    "source.evidence.extract.objective_grounded.stdlib": 46.5,
+    "source.objective_relevance.rank.bm25": 46.5
    },
    "source.authority.identity.ror": {
     "source.authority.identity.ror": 2682.0
@@ -37402,6 +37449,9 @@
    },
    "spectrum": {
     "python.fault.localize.dynamic.dataflow.v1": 447.0
+   },
+   "spectrum-based": {
+    "python.fault.localize.dynamic.dataflow.v1": 670.5
    },
    "spreadsheet": {
     "xlsx.table.create_from_json_records": 298.666667,
@@ -37899,24 +37949,26 @@
     "pdf.extract.ocr.tesseract": 224.5
    },
    "test": {
-    "code.impact.tree_sitter.testselect.v1": 48.842105,
-    "code.multilanguage.parse.tree_sitter.v1": 48.842105,
-    "code.patch.tree_sitter.verify.v1": 48.842105,
-    "evidence.oracle.hypothesis_property.v1": 48.842105,
-    "python.patch.search.test_guided.ast.v1": 48.842105,
-    "python.repo.diff_apply_full_testgate.v1": 48.842105,
-    "python.repository.acceptance.measure.v1": 48.842105,
-    "python.review.diff_coverage_gate.v1": 73.263158,
-    "python.review.diff_mutation_gate.v1": 73.263158,
-    "python.software.repair.apply.verified.v1": 73.263158,
-    "python.software.repair.loop.coupled.ast.v1": 48.842105,
-    "python.software.repair.loop.strict_progress.ast.v1": 48.842105,
-    "python.software.repair.loop.test_guided.ast.v1": 48.842105,
-    "python.source.change_impact.testselect.v1": 48.842105,
-    "python.test.pipeline.verifier.v1": 48.842105,
-    "python.tests.generate.scaffold.v1": 48.842105,
-    "software.test.contract.supercomposer.v1": 48.842105,
-    "test.slice.never_miss.v1": 48.842105
+    "code.impact.tree_sitter.testselect.v1": 44.380952,
+    "code.multilanguage.parse.tree_sitter.v1": 44.380952,
+    "code.patch.tree_sitter.verify.v1": 44.380952,
+    "evidence.oracle.hypothesis_property.v1": 44.380952,
+    "python.fault.localize.dynamic.dataflow.v1": 66.571429,
+    "python.patch.search.test_guided.ast.v1": 44.380952,
+    "python.repo.diff_apply_full_testgate.v1": 44.380952,
+    "python.repository.acceptance.measure.v1": 44.380952,
+    "python.review.diff_coverage_gate.v1": 66.571429,
+    "python.review.diff_mutation_gate.v1": 66.571429,
+    "python.software.repair.apply.verified.v1": 66.571429,
+    "python.software.repair.loop.coupled.ast.v1": 44.380952,
+    "python.software.repair.loop.strict_progress.ast.v1": 44.380952,
+    "python.software.repair.loop.test_guided.ast.v1": 44.380952,
+    "python.source.change_impact.testselect.v1": 44.380952,
+    "python.test.pipeline.verifier.v1": 44.380952,
+    "python.tests.audit.unittest": 66.571429,
+    "python.tests.generate.scaffold.v1": 44.380952,
+    "software.test.contract.supercomposer.v1": 44.380952,
+    "test.slice.never_miss.v1": 44.380952
    },
    "test.slice.never_miss.v1": {
     "test.slice.never_miss.v1": 2682.0
@@ -38061,12 +38113,16 @@
     "terminal.kstar.root.assess.stdlib": 447.0
    },
    "trace": {
-    "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1": 129.142857,
-    "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py.auto.v1": 129.142857,
-    "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1": 129.142857,
-    "decision.synthesis.typed.stdlib": 129.142857,
-    "decision.synthesis.verify.stdlib": 129.142857,
-    "python.fault.localize.dynamic.dataflow.v1": 129.142857
+    "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1": 113.25,
+    "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py.auto.v1": 113.25,
+    "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1": 113.25,
+    "decision.synthesis.typed.stdlib": 113.25,
+    "decision.synthesis.verify.stdlib": 113.25,
+    "python.fault.localize.dynamic.dataflow.v1": 113.25,
+    "python.fault.provenance.interprocedural.value.v1": 169.875
+   },
+   "tracing": {
+    "python.fault.provenance.interprocedural.value.v1": 447.0
    },
    "trades": {
     "finance.saccr.credit.addon.v1": 447.0
@@ -39755,99 +39811,6 @@
     "only-right-way",
     "problems",
     "swe"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
-   "bytes": 12232,
-   "headings": [
-    "Hardcore-SWE problem map — measured 2026-10-28 on `main` c4128ca",
-    "The one-line summary",
-    "P0 — blocking \"most advanced SWE engineer\"",
-    "P0-1. Human-sentence routing still fails 5/12, and two failures are wrong-domain",
-    "P0-2. No SWE capability has independent-oracle credit",
-    "P0-3. The public-runner liveness proof is non-blocking and red",
-    "P0-4. Reachability is measured on the wrong sentences",
-    "P1 — capability depth (what \"advanced\" actually needs)",
-    "P1-5. The composition graph is dead",
-    "P1-6. No solver-grade determinism at the type level",
-    "P1-7. Fake cost model; resource-bounded law unenforced",
-    "P1-8. `channel_schema` on 0 SWE capabilities",
-    "P2 — speed & consistency (the \"insanely fast\" requirement)",
-    "P2-9. ~400 ms/goal and double work on failure",
-    "P2-10. A one-line doc edit forces a 9.4 MB model rebuild",
-    "P2-11. Drift race + a partly-red test suite on pristine main",
-    "P3 — governance / owner-only (agent cannot land these)",
-    "P3-12. Protected paths",
-    "P3-13. Pinned SWE kernel installed by no workflow",
-    "P3-14. 30 `HARDCORE_VERIFY_*` receipts are tautological",
-    "Hidden mechanisms + research ideas already in the repo (the fixes are NOT new)",
-    "Fastest correct order",
-    "SHIPPED 2026-10-28 — hidden-tool effect-family resolver (P0-1 partial)"
-   ],
-   "kind": "DOCUMENT",
-   "path": "HARDCORE_SWE_PROBLEM_MAP_20261028_V1.md",
-   "sha256": "b17db20ba9062dcad249e5e3bfbe9fa406d5986aedad0a4e207b491e81cfc8ce",
-   "summary": "Authority: **NONE**. This is a measurement, not an independent verification. Producer: `arena/bf97adf2-brain` sandbox. Model dependency: 0. Incremental spend: $0. Focus: advanced software-engineering capability only. PDF/DOCX/XLSX/codec/chart capabilities are deliberately out of scope except where they are the *wrong-domain* destination of a SWE request.",
-   "terms": {
-    "12": 8,
-    "50": 5,
-    "adapter": 4,
-    "add": 5,
-    "advanced": 6,
-    "all": 9,
-    "but": 7,
-    "cannot": 4,
-    "capabilities": 14,
-    "capability": 11,
-    "correct": 7,
-    "cost": 4,
-    "e30": 4,
-    "each": 7,
-    "effect": 6,
-    "enumerate": 4,
-    "every": 8,
-    "fail": 4,
-    "failure": 4,
-    "families": 6,
-    "fresh": 8,
-    "gap": 5,
-    "gate": 4,
-    "goal": 4,
-    "heartbeat": 5,
-    "hidden": 4,
-    "human": 4,
-    "independent": 5,
-    "instances": 4,
-    "let": 5,
-    "measured": 6,
-    "ms": 5,
-    "never": 6,
-    "new": 6,
-    "no": 10,
-    "not": 16,
-    "one": 6,
-    "only": 5,
-    "oracle": 6,
-    "own": 5,
-    "pass": 5,
-    "registry": 5,
-    "required": 6,
-    "sentence": 5,
-    "so": 6,
-    "still": 6,
-    "swe": 21,
-    "typed": 8
-   },
-   "title": "Hardcore-SWE problem map — measured 2026-10-28 on `main` c4128ca",
-   "title_terms": [
-    "2026-10-28",
-    "c4128ca",
-    "hardcore-swe",
-    "main",
-    "map",
-    "measured",
-    "problem"
    ]
   },
   {
@@ -52413,10 +52376,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 942,
+  "included_source_count": 941,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d3658fbbed7b8234f721b8d23e0edd4128963b2fcfd202c39a257b3b309741bf"
+  "source_tree_digest": "ddc801d32b03ca68d4c2bd12dcc2dd60f588191821ae41aaadb5fcb426939883"
  },
  "research_index": [
   {
@@ -201888,6 +201851,51 @@
    }
   },
   {
+   "action_id": "TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c6e7953745fd303555f1996cc02dec8532d6c0ba4b758066fe97999cbb664097",
+   "status": "",
+   "terms": {
+    "125": 1,
+    "140": 1,
+    "20261028": 1,
+    "216": 1,
+    "28": 1,
+    "36": 1,
+    "368": 1,
+    "59": 1,
+    "69": 1,
+    "76": 1,
+    "acceptance": 1,
+    "after": 1,
+    "ahead": 1,
+    "all": 3,
+    "answers": 1,
+    "capabilities": 2,
+    "eleven": 2,
+    "every": 2,
+    "fault": 2,
+    "file": 2,
+    "list": 2,
+    "loop": 2,
+    "no": 3,
+    "raises": 2,
+    "repair": 3,
+    "run": 2,
+    "sentence": 2,
+    "source": 2,
+    "test": 3,
+    "test_paths_required": 2,
+    "test_paths_required_is_derivable_at_every_site_that_raises_it_v1_20261028_v1": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -203768,7 +203776,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WIRE_DECLARED_INPUT_DERIVATION_FOR_HUMAN_SWE_SENTENCES_V1_20261027_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "13b44b11d550e06b1dba118e6386b626221e028892de9191796322cbdbf44f37",
+   "sha256": "63944bd4441d4f9c21751ea02935635e4e9081d90a46b9c069893a2db628697a",
    "status": "",
    "terms": {
     "20261027": 1,
@@ -266812,15 +266820,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "200b0788aece6e62ed127a3e2d9e7e032514b0ca90c358efad96a1b7060d503c",
+   "sha256": "8016900f3e07178df9e2bcfc32c386f2aec2e189802dae9dd055c56f9b0b85b4",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
-   "symbol_count": 8,
+   "symbol_count": 6,
    "symbols": [
     "_effect_consistent",
     "_execution_template",
-    "_family_terms",
     "_fresh_output_path",
-    "_resolve_family",
     "build_plan",
     "is_swe_request",
     "plan_report"
@@ -266831,7 +266837,6 @@
     "effect_consistent": 1,
     "execution": 1,
     "execution_template": 1,
-    "family_terms": 1,
     "fresh_output_path": 1,
     "front": 1,
     "hidden-tool": 1,
@@ -266839,7 +266844,6 @@
     "live": 1,
     "plan": 2,
     "plan_report": 1,
-    "resolve_family": 1,
     "scoped": 1,
     "swe": 1,
     "typed": 1,

@@ -135,7 +135,11 @@ def _canon(v): return json.dumps(v,sort_keys=True,separators=(",",":"))
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise ProvenanceError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
- tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+ tests=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
+ if not tests:
+  from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+  try:tests=discover_test_files(src)
+  except FileNotFoundError:raise ProvenanceError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  env=_source_env(src,*tests)
  if not tests:raise ProvenanceError("TEST_PATHS_REQUIRED")
  timeout=max(1,min(int(args.get("timeout_s",20)),120))
