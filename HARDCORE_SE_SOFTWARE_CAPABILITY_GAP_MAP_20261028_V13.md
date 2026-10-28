@@ -1,10 +1,11 @@
 # The complete problem inventory — hardcore software engineering
 
-**2026-10-28 · V12 · measured on `arena/4ca3a720-brain` at `2ace3d6`**
+**2026-10-28 · V13 · measured on `arena/4ca3a720-brain` at `1a20557`**
 
 This supersedes `HARDCORE_SE_PROBLEM_INVENTORY_20261028_V11.md`. V11 answered "what is
 blocking one verb". This answers the question actually asked: **what are all the
-problems**, across the whole machine, measured rather than asserted.
+problems**, across the whole machine, measured rather than asserted. V13 closes two of
+them and adds the binder laws they needed; §10 says exactly what moved.
 
 Nothing here is a wish list. Every row below is a row from a probe that can be re-run:
 
@@ -15,7 +16,7 @@ Nothing here is a wish list. Every row below is a row from a probe that can be r
 | the pinned guard suites (`git_surface`, `hardcore_se_reachability`, `adapter_failure_law`, per-adapter pins) | that a capability which exists still behaves | nothing about acts that do not exist |
 
 The first two disagree on purpose, and the disagreement is the most useful number here:
-**the surface is 424/445 reachable by its own vocabulary while 18 of 43 real engineering
+**the surface is 424/445 reachable by its own vocabulary while 16 of 43 real engineering
 sentences are answered by nothing, and 9 more by the wrong thing.**
 
 ---
@@ -24,15 +25,13 @@ sentences are answered by nothing, and 9 more by the wrong thing.**
 
 ```
 HARDCORE-SE MISSING-VERB PROBE (43 acts)
-  ANSWERED_BY_OWNING_CAPABILITY   25
-  HONEST_REFUSAL                  10      "I cannot do this", said in words, before doing anything
-  WRONG_TOOL                       7      a capability that does not own the act was ADMITTED and ran
-  SILENT_REFUSAL                   0      (was 1: fixed in this commit, see §4)
-  OWNED_BUT_FAILED                 1      the ownership heuristic credited a neighbour (see §3)
-  ----------------------------------------------------------------
-  for reference: a capability that does not own the act was selected in 14 of the 43 rows
+  ANSWERED_BY_OWNING_CAPABILITY   27      (V12: 25)
+  HONEST_REFUSAL                   7      "I cannot do this", said in words, before doing anything
+  WRONG_TOOL                       9      a capability that does not own the act was ADMITTED and ran
+  SILENT_REFUSAL                   0
+  OWNED_BUT_FAILED                 0      (V12: 1 -- move_function is now a capability)
 
-WHOLE-SURFACE REACHABILITY (445 capabilities)
+WHOLE-SURFACE REACHABILITY (445 capabilities, measured at V12)
   REACHED_AND_BOUND              424
   NOT_REACHABLE                    8      a sentence in its own vocabulary cannot bind it
   ROUTED_ELSEWHERE                10      another capability claims that sentence
@@ -44,11 +43,11 @@ PINNED GUARDS             all green: 20/20 refactor pins, 63/63 refactor+flake s
                                     (+10/10 refusals), 18/18 adapter-failure-typed
 ```
 
-Read the first block as a capability statement, not a bug count: **25 of the 43 acts a
+Read the first block as a capability statement, not a bug count: **27 of the 43 acts a
 senior software engineer performs on any given day are performed, correctly, by their
-owning capability, with the promised artifact on disk.** Of the other 18, 17 have no
-owning capability anywhere in this machine (§2), and 7 of them are answered by a wrong
-tool that actually executed (§3). Nothing on this surface now fails without saying why.
+owning capability, with the promised artifact on disk.** Of the other 16, 15 have no
+owning capability anywhere in this machine (§2), and 9 of them are answered by a wrong
+tool that actually executed (§3). Nothing on this surface fails without saying why.
 
 ### How a verdict is decided
 
@@ -291,3 +290,54 @@ Two rules for all of it, unchanged: **reuse before synthesis** — five of the e
 are rebuilds over machinery that already ships — and **measure, never assert**: every row
 above is a re-runnable probe, and a red row is still not an authority until the owner
 says so.
+
+
+---
+
+## 10. What closed since V12
+
+Two capabilities, and the four binder laws they could not exist without. Both were
+measured before and after with the same instrument.
+
+| act | before | now | why it was cheap |
+|---|---|---|---|
+| `move_function` | `OWNED_BUT_FAILED` — a source audit was selected, ran, and never wrote the promised artifact | `ANSWERED_BY_OWNING_CAPABILITY` | it is `rename_symbol`'s machinery pointed the other way: same def resolution, same span cut, same file-identity import test, same rollback-on-red |
+| `resource_leak` | `WRONG_TOOL` — `vcs.git.checkout.v1` answered "find the resource leaks" | `ANSWERED_BY_OWNING_CAPABILITY` | a new act verb inside `quality_v1`, the adapter every other quality analysis already uses, so artifact digest law and digest verification came for free |
+
+Both carry their own measured laws, in their own docstrings, because each was wrong
+before it was right:
+
+* **the import is split, not swapped** — `from pkg.calc import add, sub` binds two names
+  and only one moved; the first build sent `sub` to a module that does not define it and
+  only the named suite noticed;
+* **rollback removes what it created** — restoring pre-existing bytes while leaving the
+  new module behind is a tree the refused edit changed;
+* **`return handle.read()` is not a transfer** — reading the whole returned expression
+  made the most common leak in Python (open, read, never close) the one shape the leak
+  detector missed;
+* **scopes are analysed separately** — a handle opened in a nested function is not closed
+  by anything in its parent.
+
+Four laws went into the door itself, all general rather than verb-specific:
+
+1. **A destination may not exist yet.** `target_module` is where the thing GOES, so it is
+   allowlisted to bind a stated path that does not exist, introduced by its own phrases.
+2. **A stated path has two legitimate spellings** — source-root-relative and
+   repository-relative — and the reading whose PARENT DIRECTORY exists wins. The first
+   version resolved repository-relative first, produced
+   `pkg/canonical/astra_runtime/.../ops.py`, and refused an honest request.
+3. **"report it to X" is an output role.** The verb table knew save/write/store/output/
+   emit and not report, so every sentence in this repository's own probes rested on a
+   weaker rule.
+4. **A path already given to another input is not the output.** A sentence naming two
+   future paths — a destination module and a report — bound neither.
+
+**The consequence that must be read honestly:** wrong-tool executions rose 7 → 9. Two
+rows (`docstrings`, `inline_function`) that previously refused because their output could
+not bind now reach admission and execute a capability that does not own the act. The
+binding fix is right and the exposure is real: **the noun-side refusal law of §3 is now
+the single highest-value remaining guard**, and it is the next thing to build.
+
+Guards after this unit: move-function pins 9/9, resource-leak pins 6/6, refactor and
+source-type suites 26/26, compiler suites 26 failed / 116 passed with failing node ids
+**identical** to `62be529`.

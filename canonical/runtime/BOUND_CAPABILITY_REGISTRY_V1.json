@@ -10841,6 +10841,68 @@
     },
     "status": "VERIFIED_BOUND_CAPABILITY"
   },
+  "python.quality.resource_leak.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "resource_leak",
+     "capability_id": "python.quality.resource_leak.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "resource leak",
+    "resource leaks",
+    "leak",
+    "leaks",
+    "unclosed",
+    "unclosed file",
+    "file descriptor",
+    "handle",
+    "socket leak",
+    "not closed",
+    "context manager"
+   ],
+   "limitations": [
+    "a same-scope static reading: a with-statement, a close/terminate/kill/release call on the bound name in the same scope, or returning the handle clears a finding; it does not claim path-sensitivity, so a handle closed on one branch and leaked on another is not reported.",
+    "builtins/io open, socket.socket, socket.create_connection, sqlite3.connect, subprocess.Popen, os.popen, tempfile.NamedTemporaryFile, tarfile.open, zipfile.ZipFile, urllib.request.urlopen and mmap.mmap are the acquisitions it knows; a wrapper with its own close() is not assumed to be one of them.",
+    "a resource acquired in one function and closed in another is reported: scopes are analysed separately."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.source.resource_leak.report"
+   ],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "files_scanned",
+    "leaks_found",
+    "leaks",
+    "detection_scope",
+    "gate",
+    "complete"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
   "python.quality.duplication.v1": {
     "action_template": {
       "args": {

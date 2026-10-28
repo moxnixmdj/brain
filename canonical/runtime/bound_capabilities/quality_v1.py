@@ -591,11 +591,187 @@ def _duplication(args, target: Path, cap: str) -> dict:
     }
 
 
+# The acquisitions worth reporting: a call that TAKES an operating-system resource and
+# whose release is a separate, forgettable step.  Each entry is (module, name, release
+# method).  A resource acquired through `with` needs no release and is never reported.
+_RESOURCE_ACQUISITIONS = {
+    ("builtins", "open"): "close",
+    ("io", "open"): "close",
+    ("io", "open_code"): "close",
+    ("socket", "socket"): "close",
+    ("socket", "create_connection"): "close",
+    ("sqlite3", "connect"): "close",
+    ("subprocess", "Popen"): "terminate",
+    ("os", "popen"): "close",
+    ("tempfile", "NamedTemporaryFile"): "close",
+    ("tempfile", "TemporaryFile"): "close",
+    ("tarfile", "open"): "close",
+    ("zipfile", "ZipFile"): "close",
+    ("urllib.request", "urlopen"): "close",
+    ("mmap", "mmap"): "close",
+}
+
+
+def _acquisition_kind(node: ast.AST):
+    """(kind, release) when this Call acquires a resource, else None.
+
+    `open(...)` is a bare name in the builtins; `sqlite3.connect(...)` is an attribute
+    whose receiver names the module.  A call through some other receiver is NOT assumed
+    to be one of these: guessing here would report a leak in every wrapper that has a
+    `close()` method of its own.
+    """
+    if not isinstance(node, ast.Call):
+        return None
+    func = node.func
+    if isinstance(func, ast.Name):
+        key = ("builtins", func.id)
+        if key in _RESOURCE_ACQUISITIONS:
+            return func.id + "()", _RESOURCE_ACQUISITIONS[key]
+        return None
+    if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
+        key = (func.value.id, func.attr)
+        if key in _RESOURCE_ACQUISITIONS:
+            return func.value.id + "." + func.attr + "()", _RESOURCE_ACQUISITIONS[key]
+    return None
+
+
+def _scope_bodies(tree):
+    """(name, node, body) for the module and every function, WITHOUT nested scopes.
+
+    A resource acquired inside `inner()` and closed in `outer()` is not closed; the
+    scopes are reported separately, which is the truth a reader can act on.
+    """
+    yield "<module>", tree, tree.body
+
+    def walk(parent_name, nodes):
+        for node in nodes:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                qual = parent_name + "." + node.name if parent_name != "<module>" else node.name
+                yield qual, node, node.body
+                yield from walk(qual, node.body)
+
+    yield from walk("<module>", tree.body)
+
+
+def _scope_nodes(body):
+    """Every node of ONE scope, never descending into a nested def, class or lambda."""
+    stack = list(body)
+    while stack:
+        node = stack.pop()
+        yield node
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda)):
+            continue
+        stack.extend(ast.iter_child_nodes(node))
+
+
+def _resource_leak(args, target: Path, cap: str) -> dict:
+    """Unreleased OS resources: every acquisition whose release is provable-missing.
+
+    The law is deliberately conservative in one direction and strict in the other:
+    a `with` or a matching `.close()`/`.terminate()` anywhere in the same scope counts
+    as released (this is a static reading, not a path-sensitive one), and RETURNING the
+    handle is ownership transfer, not a leak.  Anything else is reported with the line,
+    the variable and the release call that is missing -- a finding a reader can check.
+    """
+    files = (
+        [target]
+        if target.is_file()
+        else sorted(
+            p
+            for p in target.rglob("*.py")
+            if ".venv" not in p.parts and "/.git/" not in str(p)
+        )
+    )
+    if not files:
+        _fail("NO_PYTHON_SOURCE_FOUND:" + str(target))
+    findings = []
+    scanned = 0
+    for path in files:
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+        except (SyntaxError, UnicodeDecodeError):
+            continue
+        scanned += 1
+        rel = path.name if target.is_file() else str(path.relative_to(target))
+        for scope_name, _node, body in _scope_bodies(tree):
+            # handles bound in this scope, and what release calls exist on those names
+            nodes = list(_scope_nodes(body))
+            released = set()
+            for sub in nodes:
+                if isinstance(sub, ast.Call) and isinstance(sub.func, ast.Attribute) \
+                        and isinstance(sub.func.value, ast.Name):
+                    if sub.func.attr in {"close", "terminate", "kill", "release", "__exit__"}:
+                        released.add(sub.func.value.id)
+            # OWNERSHIP TRANSFER IS `return handle`, NOT `return handle.read()`.
+            # Measured on the first build: reading the whole returned expression made every
+            # `return handle.read()` count as handing the handle over, so the most common
+            # leak in Python -- open, read, never close -- was the one shape it missed.
+            transferred = set()
+            for sub in nodes:
+                if not isinstance(sub, ast.Return) or sub.value is None:
+                    continue
+                returned = sub.value.elts if isinstance(sub.value, (ast.Tuple, ast.List)) \
+                    else [sub.value]
+                for inner in returned:
+                    if isinstance(inner, ast.Name):
+                        transferred.add(inner.id)
+            in_with = set()
+            for sub in nodes:
+                if isinstance(sub, (ast.With, ast.AsyncWith)):
+                    for item in sub.items:
+                        for inner in ast.walk(item.context_expr):
+                            if isinstance(inner, ast.Name):
+                                in_with.add(inner.id)
+            for sub in nodes:
+                target_names = []
+                value = None
+                if isinstance(sub, ast.Assign) and len(sub.targets) == 1 \
+                        and isinstance(sub.targets[0], ast.Name):
+                    target_names = [sub.targets[0].id]
+                    value = sub.value
+                elif isinstance(sub, ast.AnnAssign) and isinstance(sub.target, ast.Name):
+                    target_names = [sub.target.id]
+                    value = sub.value
+                elif isinstance(sub, ast.Expr):
+                    value = sub.value
+                kind = _acquisition_kind(value) if value is not None else None
+                if not kind:
+                    continue
+                kind_name, release = kind
+                if not target_names:
+                    findings.append({
+                        "file": rel, "line": sub.lineno, "scope": scope_name,
+                        "kind": kind_name, "variable": None,
+                        "reason": "resource acquired and neither bound nor released",
+                    })
+                    continue
+                name = target_names[0]
+                if name in released or name in transferred or name in in_with:
+                    continue
+                findings.append({
+                    "file": rel, "line": sub.lineno, "scope": scope_name,
+                    "kind": kind_name, "variable": name,
+                    "reason": "no " + release + "() on this variable in the same scope",
+                })
+    payload = _base(cap, "resource_leak", target)
+    payload.update({
+        "files_scanned": scanned,
+        "leaks_found": len(findings),
+        "leaks": findings,
+        "detection_scope": "same-scope static reading: a with-statement, a close/terminate "
+                           "call on the bound name, or returning the handle clears a "
+                           "finding; path-sensitivity is not claimed",
+        "complete": True,
+    })
+    return payload
+
+
 _HANDLERS = {
     "changelog": _changelog,
     "license_scan": _license_scan,
     "coverage": _coverage,
     "duplication": _duplication,
+    "resource_leak": _resource_leak,
 }
 
 
