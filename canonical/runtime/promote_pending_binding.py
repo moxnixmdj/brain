@@ -12,11 +12,18 @@ def _inside(raw):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
     return p
 
+def main_for_paths(pending_rel, verify_rel):
+    """In-process entry: same contract as main() but with explicit repository-
+    relative paths; used by the outer acquisition caller after the confined
+    verification child completes."""
+    return _main_impl(_inside(pending_rel), _inside(verify_rel))
+
 def main():
     if len(sys.argv)!=3:
         raise SystemExit("usage: promote_pending_binding.py PENDING_JSON VERIFY_JSON")
-    pending_path=_inside(sys.argv[1])
-    verify_path=_inside(sys.argv[2])
+    return main_for_paths(sys.argv[1], sys.argv[2])
+
+def _main_impl(pending_path, verify_path):
     pending=json.loads(pending_path.read_text(encoding="utf-8"))
     verified=json.loads(verify_path.read_text(encoding="utf-8"))
     if pending.get("schema")!="PROJECT_BRAIN_PENDING_AUTO_BINDING_V1":
@@ -68,6 +75,16 @@ def main():
         if prior.get("source")!=entry.get("source") or prior.get("action_template")!=entry.get("action_template"):
             raise RuntimeError("CAPABILITY_ID_VERIFIED_CONFLICT")
     entry["status"]="VERIFIED_BOUND_CAPABILITY"
+    # Persist the producer's pre-probed independent-verifier materials with the
+    # promoted binding so replay-time cross-supplier checks stay offline and
+    # content-addressed (2026-10-28 staged-replay channel).
+    cand_npm=pending.get("independent_verifier_npm_candidates")
+    trees=pending.get("independent_verifier_source_trees")
+    if isinstance(trees,list) and trees or isinstance(cand_npm,list) and cand_npm:
+        entry["independence_materials"]={
+          "independent_verifier_source_trees":trees if isinstance(trees,list) else [],
+          "independent_verifier_npm_candidates":cand_npm if isinstance(cand_npm,list) else [],
+        }
     entry["verification"]={
       "mission_id":pending["verification_mission_id"],
       "verification_result_path":str(verify_path.relative_to(ROOT)),

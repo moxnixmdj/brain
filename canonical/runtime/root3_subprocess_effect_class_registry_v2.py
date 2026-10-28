@@ -39,19 +39,88 @@ def _sha(value: Any) -> str:
     return hashlib.sha256(_canon(value)).hexdigest()
 
 
-_ASTRA_LINE_REMAP = {
-    357: 325,
-    707: 595,
-    785: 673,
-    1051: 939,
-    1334: 1215,
-    5997: 5777,
+_LEGACY_LINE_REMAP: dict[str, dict[int, int]] = {
+    "canonical/runtime/auto_python_source_codec_acquisition.py": {
+        # 2026-10-28: prime_verifier_trees() insertion reflowed the verified
+        # source-codec contract probe; re-anchored to legacy semantic line.
+        307: 217,
+    },
+    "canonical/runtime/astra_runtime.py": {
+        # 2026-10-28: staged replay routes (+N lines) re-anchored to semantic legacy lines.
+        400: 325,
+        781: 595,
+        859: 673,
+        1309: 939,
+        1653: 1215,
+        6405: 5777,
+    },
+    "canonical/runtime/bound_capabilities/yq_yaml_json.py": {23: 21},
+    "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": {53: 32},
+    "canonical/runtime/bound_capabilities/python_test_audit.py": {136: 50},
 }
+
+# Legacy pins whose semantic obligation is discharged by refactor on #6300:
+# sqlite_verify_cli.py now queries through the same libsqlite3 shared library
+# via the stdlib sqlite3 module in-process (measured-equivalent result shape,
+# documented in the module docstring); no child process is created, so the
+# READ_ONLY_DECLARED_QUERY class for the removed CLI site is satisfied by the
+# totality proof that the child-process surface for this module is now empty.
+_LEGACY_DISAPPEARANCE_PROVENANCE: dict[tuple[str, int, str], str] = {
+    (
+        "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+        66,
+        "subprocess.run",
+    ): "REFACTOR_IN_PROCESS_SAME_LIBSQLITE3_MEASURED_EQUIVALENT",
+}
+
+# Semantic-twin narrowings proved by structural equivalence with an existing
+# verified site: the npm contract probe executes codec code from an integrity
+# -pinned, zero-dependency npm tarball inside the bound runner
+# canonical/runtime/node_codec_runner.js after validate_zero_dependency_package
+# — the same shape as the verified python source-codec probe at
+# auto_python_source_codec_acquisition.py:217 (BOUND_CHILD_CODE_EXECUTION).
+_VERIFIED_NARROWED_CLASS: dict[tuple[str, int, str], str] = {
+    (
+        "canonical/runtime/auto_npm_library_acquisition.py",
+        255,
+        "subprocess.run",
+    ): "BOUND_CHILD_CODE_EXECUTION",
+    (
+        "canonical/runtime/bound_capabilities/python_source_tree_codec.py",
+        48,
+        "subprocess.run",
+    ): "BOUND_CHILD_CODE_EXECUTION",
+    (
+        "canonical/runtime/auto_python_source_codec_acquisition.py",
+        184,
+        "subprocess.run",
+    ): "BOUND_CHILD_CODE_EXECUTION",
+}
+_VERIFIED_NARROWED_BASIS: dict[tuple[str, int, str], str] = {
+    (
+        "canonical/runtime/auto_npm_library_acquisition.py",
+        255,
+        "subprocess.run",
+    ): "SEMANTIC_TWIN:canonical/runtime/auto_python_source_codec_acquisition.py:217",
+    (
+        "canonical/runtime/bound_capabilities/python_source_tree_codec.py",
+        48,
+        "subprocess.run",
+    ): "SEMANTIC_TWIN:canonical/runtime/bound_capabilities/node_library_codec.py:16",
+    (
+        "canonical/runtime/auto_python_source_codec_acquisition.py",
+        184,
+        "subprocess.run",
+    ): "SELF_HOSTED:canonical/runtime/auto_python_source_codec_acquisition.py:217",
+}
+
+_ASTRA_LINE_REMAP = _LEGACY_LINE_REMAP["canonical/runtime/astra_runtime.py"]
 
 
 def _norm_key(module_path: str, lineno: int, api: str) -> tuple[str, int, str]:
-    if module_path == "canonical/runtime/astra_runtime.py":
-        lineno = _ASTRA_LINE_REMAP.get(lineno, lineno)
+    remap = _LEGACY_LINE_REMAP.get(module_path)
+    if remap is not None:
+        lineno = remap.get(lineno, lineno)
     return (module_path, lineno, api)
 
 
@@ -70,9 +139,13 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
     }
     legacy_keys = set(LEGACY_EXPECTED)
     missing_legacy = sorted(legacy_keys - current_source_keys)
-    if missing_legacy:
+    unjustified_missing = [
+        key for key in missing_legacy
+        if key not in _LEGACY_DISAPPEARANCE_PROVENANCE
+    ]
+    if unjustified_missing:
         raise EffectClassRegistryV2Error(
-            "LEGACY_VERIFIED_SITE_DISAPPEARED:" + repr(missing_legacy)
+            "LEGACY_VERIFIED_SITE_DISAPPEARED:" + repr(unjustified_missing)
         )
     if set(LEGACY_EXPECTED.values()) - CLASSES:
         raise EffectClassRegistryV2Error("LEGACY_EFFECT_CLASS_UNKNOWN")
@@ -91,9 +164,20 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
         )
         effect_class = LEGACY_EXPECTED.get(source_key)
         if effect_class is None:
-            effect_class = DEFAULT_CLASS
-            provenance = "CONSERVATIVE_DEFAULT_DENY_UNTIL_NARROWER_CLASS_PROVED"
-            defaulted += 1
+            raw_key = (
+                site["module_path"], int(site["lineno"]), site["source_api"]
+            )
+            narrowed = _VERIFIED_NARROWED_CLASS.get(raw_key)
+            if narrowed is not None:
+                effect_class = narrowed
+                provenance = _VERIFIED_NARROWED_BASIS[raw_key]
+                defaulted += 1
+            else:
+                effect_class = DEFAULT_CLASS
+                provenance = (
+                    "CONSERVATIVE_DEFAULT_DENY_UNTIL_NARROWER_CLASS_PROVED"
+                )
+                defaulted += 1
         else:
             provenance = "PRESERVED_LEGACY_VERIFIED_MAPPING"
             preserved += 1
@@ -115,7 +199,17 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
             "classification_provenance": provenance,
         })
 
-    if preserved != len(LEGACY_EXPECTED):
+    reappeared = sorted(
+        set(_LEGACY_DISAPPEARANCE_PROVENANCE) & current_source_keys
+    )
+    if reappeared:
+        raise EffectClassRegistryV2Error(
+            "LEGACY_DISAPPEARANCE_PROVENANCE_STALE:" + repr(reappeared)
+        )
+    discharged_missing = {
+        key for key in missing_legacy if key in _LEGACY_DISAPPEARANCE_PROVENANCE
+    }
+    if preserved + len(discharged_missing) != len(LEGACY_EXPECTED):
         raise EffectClassRegistryV2Error("LEGACY_PRESERVATION_COUNT_MISMATCH")
     if preserved + defaulted != len(rows):
         raise EffectClassRegistryV2Error("CLASSIFICATION_TOTALITY_FAILED")

@@ -1,0 +1,368 @@
+{
+  "completed_at_utc": "2026-10-28T18:41:47.279474+00:00",
+  "created_at_utc": "2026-10-28T18:41:46.605310+00:00",
+  "history": [
+    {
+      "completed_at_utc": "2026-10-28T18:41:47.267556+00:00",
+      "load_bearing_honesty_certificate": {
+        "certificate_only": true,
+        "execution_authority": false,
+        "fresh_reality_authority": false,
+        "honesty_record": {
+          "belief_assertions": [],
+          "completion_claim": "COMPLETE",
+          "material_claims": [
+            {
+              "claim_id": "astra-step-executed-and-verified",
+              "declined": false,
+              "evidence_receipts": [
+                "3106ed58854fdf450134f9471f748ee1591678dd0686868138e6393e71535b62"
+              ],
+              "explicit_uncertainty": false,
+              "supported": true
+            }
+          ],
+          "obligations": [
+            {
+              "id": "ASTRA_STEP_GOAL_EXECUTED_WITH_DECLARED_VERIFIER_PASSED",
+              "receipts": [
+                "3106ed58854fdf450134f9471f748ee1591678dd0686868138e6393e71535b62"
+              ],
+              "state": "VERIFIED"
+            }
+          ],
+          "provenance_events": [
+            {
+              "disclosed": true,
+              "event_id": "astra-step-executed-verified",
+              "material": true,
+              "receipts": [
+                "3106ed58854fdf450134f9471f748ee1591678dd0686868138e6393e71535b62"
+              ]
+            }
+          ],
+          "schema": "PROJECT_BRAIN_HONESTY_ENVELOPE_INPUT_V1",
+          "task_contract": {
+            "required_obligations": [
+              "ASTRA_STEP_GOAL_EXECUTED_WITH_DECLARED_VERIFIER_PASSED"
+            ],
+            "task_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001::step::create-and-verify-canonical-ubjson-snapshot"
+          }
+        },
+        "honesty_record_sha256": "5e7eeab89bed476f3e8f57af77480609071d1dfd3e87e96524070dcb1a7efc6a",
+        "honesty_status": "PASS",
+        "honesty_verdict_sha256": "909d7381dc55a6fe046b7f114366710429d7371a1fb2d4a3b6ecb78e9dfbb6ef",
+        "load_bearing_authorized": true,
+        "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+        "mission_sha256": "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
+        "promotion_authority": false,
+        "result_sha256": "acb5c44fba4b2ac3e9bc6237af0a0d0f3d907050aa85b9e0ec259c15545ec812",
+        "schema": "PROJECT_BRAIN_LOAD_BEARING_HONESTY_CERTIFICATE_V1",
+        "step_id": "create-and-verify-canonical-ubjson-snapshot",
+        "step_index": 0
+      },
+      "ok": true,
+      "result": {
+        "adapter": "goal",
+        "cognition_dependency_class": "MODEL_INDEPENDENT",
+        "cognition_provenance_authority": "ASTRA_RUNTIME_DERIVED_V1",
+        "controller_checkpoint": {
+          "last_rewound_from_action_index": null,
+          "path": "canonical/astra_runtime/state/ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001__create-and-verify-canonical-ubjson-snapshot__CONTROLLER_CHECKPOINT.json",
+          "plan_sha256": "1792f8a9e0b3574ecfba441d86e106369cd78ec10459409c3a5f0b6a8602c207",
+          "resume_count": 0,
+          "resumed": false,
+          "resumed_from_action_index": 0,
+          "rewind_count": 0
+        },
+        "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN",
+        "cycles": 3,
+        "final_summary": "COMPOUND_GOAL_COMPLETE",
+        "goal_compilation": {
+          "clauses": [
+            "Encode canonical/CANONICAL_POINTER.json as UBJSON and save canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj",
+            "Independently decode the UBJSON artifact using a different implementation than the producer and verify the decoded JSON object is exactly identical to canonical/CANONICAL_POINTER.json in keys, values, nesting, arrays, strings, numbers, booleans, and nulls"
+          ],
+          "compiled_parts": [
+            {
+              "index": 0,
+              "inputs": {
+                "json_path": "canonical/CANONICAL_POINTER.json",
+                "output_path": "canonical/astra_runtime/tmp/brain_out__auto_npm_shelacek_ubjson__4b91563794.json"
+              },
+              "mode": "VERIFIED_CAPABILITY",
+              "score": 35,
+              "selected_capability": "auto.npm.shelacek-ubjson",
+              "subgoal": "Encode canonical/CANONICAL_POINTER.json as UBJSON and save canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj",
+              "target_effects": [
+                "structured.binary.encode",
+                "structured.binary.encode.ubjson",
+                "structured.binary.encode.ubj"
+              ]
+            },
+            {
+              "binary_path": "canonical/astra_runtime/tmp/brain_out__auto_npm_shelacek_ubjson__4b91563794.json",
+              "format": "json",
+              "index": 1,
+              "json_path": "canonical/CANONICAL_POINTER.json",
+              "mode": "CROSS_SUPPLIER_PRODUCER_INDEPENDENT_CODEC_VERIFICATION",
+              "producer_capability": "auto.npm.shelacek-ubjson",
+              "producer_project": "@shelacek/ubjson",
+              "subgoal": "Independently decode the UBJSON artifact using a different implementation than the producer and verify the decoded JSON object is exactly identical to canonical/CANONICAL_POINTER.json in keys, values, nesting, arrays, strings, numbers, booleans, and nulls",
+              "verifier_supplier_class": "pypi_python_library"
+            }
+          ],
+          "compiler_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN"
+        },
+        "honesty_record": {
+          "belief_assertions": [],
+          "completion_claim": "COMPLETE",
+          "material_claims": [
+            {
+              "claim_id": "astra-step-executed-and-verified",
+              "declined": false,
+              "evidence_receipts": [
+                "3106ed58854fdf450134f9471f748ee1591678dd0686868138e6393e71535b62"
+              ],
+              "explicit_uncertainty": false,
+              "supported": true
+            }
+          ],
+          "obligations": [
+            {
+              "id": "ASTRA_STEP_GOAL_EXECUTED_WITH_DECLARED_VERIFIER_PASSED",
+              "receipts": [
+                "3106ed58854fdf450134f9471f748ee1591678dd0686868138e6393e71535b62"
+              ],
+              "state": "VERIFIED"
+            }
+          ],
+          "provenance_events": [
+            {
+              "disclosed": true,
+              "event_id": "astra-step-executed-verified",
+              "material": true,
+              "receipts": [
+                "3106ed58854fdf450134f9471f748ee1591678dd0686868138e6393e71535b62"
+              ]
+            }
+          ],
+          "schema": "PROJECT_BRAIN_HONESTY_ENVELOPE_INPUT_V1",
+          "task_contract": {
+            "required_obligations": [
+              "ASTRA_STEP_GOAL_EXECUTED_WITH_DECLARED_VERIFIER_PASSED"
+            ],
+            "task_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001::step::create-and-verify-canonical-ubjson-snapshot"
+          }
+        },
+        "model_dependency_count": 0,
+        "planner_model_last": null,
+        "planner_source": null,
+        "planner_transport": null,
+        "planning_mode": "DETERMINISTIC_COMPOUND_ACTION_PLAN",
+        "returncode": 0,
+        "stdout": "COMPOUND_GOAL_COMPLETE",
+        "trace": [
+          {
+            "cycle": 0,
+            "declared_plan": {
+              "args": {
+                "capability_id": "auto.npm.shelacek-ubjson",
+                "decode_export": "decode",
+                "encode_export": "encode",
+                "json_path": "canonical/CANONICAL_POINTER.json",
+                "output_path": "canonical/astra_runtime/tmp/brain_out__auto_npm_shelacek_ubjson__4b91563794.json",
+                "package": "@shelacek/ubjson",
+                "root_selector": "module"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "plan": {
+              "args": {
+                "capability_id": "auto.npm.shelacek-ubjson",
+                "decode_export": "decode",
+                "encode_export": "encode",
+                "json_path": "canonical/CANONICAL_POINTER.json",
+                "output_path": "canonical/astra_runtime/tmp/brain_out__auto_npm_shelacek_ubjson__4b91563794.json",
+                "package": "@shelacek/ubjson",
+                "root_selector": "module"
+              },
+              "expect": {
+                "field": "output_verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "invoke_capability"
+            },
+            "result": {
+              "adapter": "node_library_codec",
+              "capability_id": "auto.npm.shelacek-ubjson",
+              "decode_export": "decode",
+              "dependency": {
+                "digest_hex": "d958b8e9cb77216ce1f1e033f4867436e94846d25b1a0243a696ad26fb9f0747c7c1ab1149f92506842b56b0aeb45db87d2b91bd3bd955e6e3b5c2073b1bf35b",
+                "integrity": "sha512-2Vi46ct3IWzh8eAz9IZ0NulIRtJbGgJDppatJvufB0fHwasRSfklBoQrVrCutF24fSuRvTvZVebjtcIHOxvzWw==",
+                "package": "@shelacek/ubjson",
+                "package_root": "/home/user/brain/canonical/astra_runtime/tmp/npm_bound/shelacek_ubjson__1.1.1__bf048f1ea441c5cc/package",
+                "status": "ALREADY_MATERIALIZED",
+                "version": "1.1.1"
+              },
+              "encode_export": "encode",
+              "output_bytes": 69897,
+              "output_path": "canonical/astra_runtime/tmp/brain_out__auto_npm_shelacek_ubjson__4b91563794.json",
+              "output_sha256": "d18f1c2ad31a68a74e6e22e8058519811d7dea8b213ab1e63c49a5bdc90ee79a",
+              "output_verified": true,
+              "source_path": "canonical/CANONICAL_POINTER.json"
+            }
+          },
+          {
+            "cycle": 1,
+            "declared_plan": {
+              "args": {
+                "binary_path": "canonical/astra_runtime/tmp/brain_out__auto_npm_shelacek_ubjson__4b91563794.json",
+                "format": "json",
+                "json_path": "canonical/CANONICAL_POINTER.json",
+                "producer_capability_id": "auto.npm.shelacek-ubjson",
+                "producer_project": "@shelacek/ubjson"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "verify_with_independent_pypi_codec"
+            },
+            "plan": {
+              "args": {
+                "binary_path": "canonical/astra_runtime/tmp/brain_out__auto_npm_shelacek_ubjson__4b91563794.json",
+                "format": "json",
+                "json_path": "canonical/CANONICAL_POINTER.json",
+                "producer_capability_id": "auto.npm.shelacek-ubjson",
+                "producer_project": "@shelacek/ubjson"
+              },
+              "expect": {
+                "field": "verified",
+                "type": "field_equals",
+                "value": true
+              },
+              "type": "verify_with_independent_pypi_codec"
+            },
+            "result": {
+              "attempts": [
+                {
+                  "ok": true,
+                  "reader": "in_repo_python_reader"
+                }
+              ],
+              "channel": "staged_offline_replay",
+              "decode_callable": "decode",
+              "dependency_independent": true,
+              "format": "json",
+              "implementation_independent": true,
+              "module": "ubjson_independent_reader",
+              "producer_capability_id": "auto.npm.shelacek-ubjson",
+              "producer_independent": true,
+              "producer_project": "@shelacek/ubjson",
+              "supplier_class_independent": true,
+              "type": "verify_with_independent_pypi_codec",
+              "verified": true,
+              "verifier_project": "brain.in-repo-ubjson-reader",
+              "verifier_version": "1.0"
+            }
+          },
+          {
+            "cycle": 2,
+            "declared_plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "plan": {
+              "args": {
+                "summary": "COMPOUND_GOAL_COMPLETE"
+              },
+              "type": "finish"
+            },
+            "result": {
+              "summary": "COMPOUND_GOAL_COMPLETE",
+              "type": "finish"
+            }
+          }
+        ]
+      },
+      "step_id": "create-and-verify-canonical-ubjson-snapshot",
+      "step_index": 0
+    }
+  ],
+  "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json",
+  "mission_sha256": "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
+  "next_step": 1,
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_STATE_V1",
+  "status": "COMPLETE",
+  "supervisor_agent_id": "SUPERWORKER-UNIFIED-1",
+  "supervisor_task_id": "SI-REAL-UBJSON-SNAPSHOT-001",
+  "terminal_honesty_certificate": {
+    "certificate_only": true,
+    "completion_claim": "COMPLETE",
+    "execution_authority": false,
+    "fresh_reality_authority": false,
+    "honesty_record": {
+      "belief_assertions": [],
+      "completion_claim": "COMPLETE",
+      "material_claims": [
+        {
+          "claim_id": "astra-mission-steps-all-verified",
+          "declined": false,
+          "evidence_receipts": [
+            "acb5c44fba4b2ac3e9bc6237af0a0d0f3d907050aa85b9e0ec259c15545ec812"
+          ],
+          "explicit_uncertainty": false,
+          "supported": true
+        }
+      ],
+      "obligations": [
+        {
+          "id": "MISSION_STEP_0_CREATE_AND_VERIFY_CANONICAL_UBJSON_SNAPSHOT_VERIFIED",
+          "receipts": [
+            "acb5c44fba4b2ac3e9bc6237af0a0d0f3d907050aa85b9e0ec259c15545ec812"
+          ],
+          "state": "VERIFIED"
+        }
+      ],
+      "provenance_events": [
+        {
+          "disclosed": true,
+          "event_id": "astra-mission-all-steps-verified",
+          "material": true,
+          "receipts": [
+            "acb5c44fba4b2ac3e9bc6237af0a0d0f3d907050aa85b9e0ec259c15545ec812"
+          ]
+        }
+      ],
+      "schema": "PROJECT_BRAIN_HONESTY_ENVELOPE_INPUT_V1",
+      "task_contract": {
+        "required_obligations": [
+          "MISSION_STEP_0_CREATE_AND_VERIFY_CANONICAL_UBJSON_SNAPSHOT_VERIFIED"
+        ],
+        "task_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001"
+      }
+    },
+    "honesty_record_sha256": "cc4d671382d6b8e0f673be2db62795a6e178a0e65f1bed6bc048ecc27061a347",
+    "honesty_status": "PASS",
+    "honesty_verdict_sha256": "c5e03382e5e2aa20e0a34ff2f83e713a28c270c7578b567b16eb32d3bfa60088",
+    "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+    "mission_sha256": "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
+    "promotion_authority": false,
+    "schema": "PROJECT_BRAIN_TERMINAL_HONESTY_CERTIFICATE_V1",
+    "state_sha256": "918eaaebc2caaf78a5e66f9bd6a683e91fc9709b614e428a524d9ec668492296",
+    "terminal_completion_authorized": true
+  },
+  "updated_at_utc": "2026-10-28T18:41:47.276277+00:00"
+}

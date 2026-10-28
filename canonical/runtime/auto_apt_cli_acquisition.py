@@ -325,12 +325,6 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
           "adapter":"shell",
           "command":f"set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
           "verify":{"type":"stdout_contains","text":"PENDING_CLI_BINDING_EFFECT_VERIFIED"}
-        },
-        {
-          "id":"promote-and-replay",
-          "adapter":"shell",
-          "command":f"set -euo pipefail\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
-          "verify":{"type":"stdout_contains","text":"PENDING_CAPABILITY_PROMOTED"}
         }
       ],
       "constraints":{
