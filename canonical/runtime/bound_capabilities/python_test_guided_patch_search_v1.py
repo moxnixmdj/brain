@@ -130,8 +130,85 @@ def _node_key(node: ast.AST) -> tuple:
         getattr(node,"end_lineno",None),getattr(node,"end_col_offset",None),
     )
 
+#: The mutation basis is one splice per node, so a class it cannot name is a class the whole
+#: repair family cannot repair. Measured on the seeded-bug benchmark (5 of 7 cases repaired
+#: before this section existed, both failures `OPEN__NO_STRICTLY_IMPROVING_CANDIDATE` with
+#: `accepted_edits: []`):
+#:
+#:   * `_ordered(b, a)` where `_ordered(a, b)` was meant -- swapped call arguments;
+#:   * `price * price` where `price * quantity` was meant -- the wrong variable.
+#:
+#: Neither is an operator swap, a comparison swap or a constant change, so no candidate in the
+#: basis could score better than the bug. Both are a single argument/Name splice away, which is
+#: why they belong in this generator and not in a new subsystem.
+_MAX_ARG_SWAP_PAIRS = 3
+_MAX_SCOPE_ALTERNATIVES = 4
+#: Per-kind, file-wide ceilings. Without them a 2 356-line module yields 304 argument swaps
+#: (measured) and can consume the loop's whole candidate budget before it reaches the buggy
+#: line, lowering the pass rate of the five classes that already worked. They are separate on
+#: purpose: one shared ceiling let NAME_SWAP eat 195 of 200 and left 5 argument swaps, so a
+#: class's reachability depended on how many names happened to precede it in the file.
+_MAX_ARG_SWAPS = 120
+_MAX_NAME_SWAPS = 80
+
+
+def _scope_alternatives(tree: ast.AST) -> dict[tuple, list[str]]:
+    """Sibling names a Load occurrence may be replaced by, from its own lexical scope.
+
+    Parameters and locally bound names of the innermost enclosing function only. A name bound
+    in a nested function is not offered to the outer scope and vice versa, because a candidate
+    that would need a closure the source never had is not a repair of this bug.
+    """
+    parents: dict[ast.AST, ast.AST] = {}
+    for node in ast.walk(tree):
+        for child in ast.iter_child_nodes(node):
+            parents[child] = node
+
+    def enclosing_function(node: ast.AST):
+        parent = parents.get(node)
+        while parent is not None and not isinstance(parent, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            parent = parents.get(parent)
+        return parent
+
+    bound_per_function: dict[ast.AST, list[str]] = {}
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        bound: list[str] = []
+        spec = node.args
+        for arg in (list(getattr(spec, "posonlyargs", [])) + list(spec.args)
+                    + list(spec.kwonlyargs) + [spec.vararg, spec.kwarg]):
+            if arg is not None and arg.arg not in bound:
+                bound.append(arg.arg)
+        stack = list(ast.iter_child_nodes(node))
+        while stack:
+            inner = stack.pop()
+            if isinstance(inner, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda, ast.ClassDef)):
+                continue
+            if isinstance(inner, ast.Name) and isinstance(inner.ctx, ast.Store) and inner.id not in bound:
+                bound.append(inner.id)
+            stack.extend(ast.iter_child_nodes(inner))
+        bound_per_function[node] = bound
+
+    out: dict[tuple, list[str]] = {}
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Name) or not isinstance(node.ctx, ast.Load):
+            continue
+        function = enclosing_function(node)
+        if function is None or function not in bound_per_function:
+            continue
+        alternatives = [n for n in bound_per_function[function]
+                        if n != node.id and n != "_"][:_MAX_SCOPE_ALTERNATIVES]
+        if alternatives:
+            out[_node_key(node)] = alternatives
+    return out
+
+
 def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals: list[str]):
     seen=set()
+    scope=_scope_alternatives(tree)
+    arg_swaps=[_MAX_ARG_SWAPS]
+    name_swaps=[_MAX_NAME_SWAPS]
     for node in _locations(tree):
         key=_node_key(node)
         if isinstance(node,ast.Compare) and len(node.ops)==1:
@@ -161,6 +238,19 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                 yield key,_descriptor(node,"BINOP_SWAP",type(node.op).__name__+"->"+newtyp.__name__),(
                     lambda n,newtyp=newtyp: ast.BinOp(left=n.left,op=newtyp(),right=n.right)
                 )
+        if isinstance(node,ast.Call) and len(node.args)>=2 and not any(isinstance(a,ast.Starred) for a in node.args) \
+                and arg_swaps[0]>0:
+            for i in range(min(len(node.args)-1,_MAX_ARG_SWAP_PAIRS)):
+                sig=(key,"argswap",i)
+                if sig in seen: continue
+                seen.add(sig)
+                arg_swaps[0]-=1
+                yield key,_descriptor(node,"CALL_ARG_SWAP","arg%d<->arg%d"%(i,i+1)),(
+                    lambda n,i=i: ast.Call(func=n.func,
+                                           args=[*n.args[:i],n.args[i+1],n.args[i],*n.args[i+2:]],
+                                           keywords=n.keywords)
+                )
+                if arg_swaps[0]<=0: break
         if isinstance(node,ast.Constant):
             value=node.value
             replacements=[]
@@ -204,6 +294,16 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                 yield tkey,_descriptor(test,"ADD_NOT","condition -> not condition"),(
                     lambda n: ast.UnaryOp(op=ast.Not(),operand=n)
                 )
+        if isinstance(node,ast.Name) and isinstance(node.ctx,ast.Load) and name_swaps[0]>0:
+            for alt in scope.get(key,[]):
+                sig=(key,"name",alt)
+                if sig in seen: continue
+                seen.add(sig)
+                name_swaps[0]-=1
+                yield key,_descriptor(node,"NAME_SWAP",node.id+"->"+alt),(
+                    lambda n,alt=alt: ast.Name(id=alt,ctx=ast.Load())
+                )
+                if name_swaps[0]<=0: break
 
 """Child-side source injected into every traced suite execution.
 
