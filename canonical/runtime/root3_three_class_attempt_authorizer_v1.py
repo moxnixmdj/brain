@@ -58,6 +58,54 @@ EXPECTED_FUNCTION: dict[tuple[str, int, str], str] = {
     (codec_child.VERIFY_MISSION_SITE): "_verify_and_promote_acquisition",
     ("canonical/runtime/astra_runtime.py", 357, "subprocess.run"): "run_shell",
     ("canonical/runtime/astra_runtime.py", 400, "subprocess.run"): "run_shell",
+    # 2026-10-28 SWE_TOOL_STEP fleet lighting (profile enforced in the
+    # executor and authorizer; argv families: pytest/mypy/coverage/ruff/
+    # bandit/unittest/crosshair/git/sha256sum/python -c/-I).
+    ("canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py", 108, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py", 112, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py", 122, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py", 127, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py", 143, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py", 154, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py", 164, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py", 281, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py", 292, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py", 297, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py", 320, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py", 373, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_perf_gate.py", 128, "subprocess.run"): "_bench",
+    ("canonical/runtime/bound_capabilities/python_review_diff_perf_gate.py", 174, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_perf_gate.py", 190, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_perf_gate.py", 195, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_security_gate.py", 129, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_security_gate.py", 136, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_type_gate.py", 119, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_type_gate.py", 125, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_static_triage.py", 160, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_review_diff_static_triage.py", 166, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_repo_diff_apply_full_testgate.py", 100, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_repo_diff_apply_full_testgate.py", 111, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_repo_diff_apply_full_testgate.py", 116, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_repo_diff_apply_full_testgate.py", 130, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_repo_pr_realize.py", 69, "subprocess.run"): "_git",
+    ("canonical/runtime/bound_capabilities/python_issue_to_pr_orchestrate.py", 485, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_issue_to_pr_orchestrate.py", 597, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_refactor_extract_function.py", 398, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_refactor_rename_parameter.py", 346, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py", 503, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py", 78, "subprocess.run"): "_run_test",
+    ("canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py", 59, "subprocess.run"): "_run_tests",
+    ("canonical/runtime/bound_capabilities/python_tests_generate_scaffold.py", 321, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_tests_generate_scaffold.py", 326, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_tests_generate_scaffold.py", 347, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py", 58, "subprocess.run"): "_trace_one",
+    ("canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py", 94, "subprocess.run"): "_trace_one",
+    ("canonical/runtime/bound_capabilities/code_tree_sitter_patch_verify_v1.py", 101, "subprocess.run"): "_run_tests",
+    ("canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py", 249, "subprocess.run"): "_run_tests",
+    ("canonical/runtime/bound_capabilities/brain_module_invoke_v1.py", 145, "subprocess.run"): "_child",
+    ("canonical/runtime/bound_capabilities/source_candidates_verify_git_index.py", 56, "subprocess.run"): "_independent_digests",
+    ("canonical/runtime/bound_capabilities/source_candidates_verify_git_index.py", 83, "subprocess.run"): "run",
+    ("canonical/runtime/bound_capabilities/crosshair_contract_oracle.py", 51, "subprocess.run"): "run",
 }
 
 
@@ -253,6 +301,32 @@ def _authorize_temp(request: Mapping[str, Any], key: tuple[str, int, str]) -> di
 def _authorize_shell_step(request: Mapping[str, Any], key: tuple[str, int, str]) -> dict[str, Any]:
     if key not in confined_shell.SUPPORTED:
         return _deny("CALLSITE_NOT_VERIFIED_CONFINED_SHELL:" + repr(key))
+    profile = confined_shell.SUPPORTED.get(key)
+    if profile == "SWE_TOOL_STEP":
+        argv = _plain_argv(request)
+        if argv is None:
+            return _deny("SWE_TOOL_ARGV_NOT_LIST")
+        try:
+            confined_shell.classify_tool_argv(list(argv))
+        except confined_shell.ConfinedShellDenied as exc:
+            return _deny(str(exc))
+        if _timeout_value(request, 300.0) is None:
+            return _deny("TIMEOUT_OUT_OF_RANGE")
+        input_binding = request.get("input")
+        if input_binding is not None:
+            return _deny("SWE_TOOL_INPUT_FORBIDDEN")
+        cwd = request.get("cwd")
+        if cwd is not None:
+            try:
+                pathlib.Path(str(cwd)).resolve().relative_to(confined_shell.ROOT)
+            except ValueError:
+                return _deny("SWE_TOOL_CWD_OUTSIDE_REPO:" + repr(cwd))
+        return _allow(
+            request=request,
+            effect_class=SHELL,
+            key=key,
+            profile="SWE_TOOL_STEP",
+        )
     common = _common(request, key)
     if common:
         return _deny(common)
