@@ -485,5 +485,5 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     raw=output.read_bytes()
     result["output_path"]=str(output.relative_to(repo)).replace("\\","/")
     result["output_sha256"]=_sha(raw)
-    result["output_verified"]=True
+    result["output_verified"]=bool(result.get("pass"))
     return result

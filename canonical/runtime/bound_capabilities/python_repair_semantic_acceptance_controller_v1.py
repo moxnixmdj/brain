@@ -141,4 +141,6 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     raw=output.read_bytes()
-    return {**result,"output_path":v8._rel(repo,output),"output_sha256":_sha(raw),"output_verified":True}
+    # The artifact being written is not the acceptance being met: `pass` is the verdict this
+    # controller computed, so that is what the door must judge.
+    return {**result,"output_path":v8._rel(repo,output),"output_sha256":_sha(raw),"output_verified":bool(result.get("pass"))}

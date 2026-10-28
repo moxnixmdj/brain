@@ -408,5 +408,5 @@ def run(args:dict[str,Any],root:str|pathlib.Path)->dict[str,Any]:
         **result,
         "output_path":str(output.relative_to(repo)).replace("\\","/"),
         "output_sha256":_sha(raw),
-        "output_verified":True,
+        "output_verified":bool(result.get("pass")),
     }

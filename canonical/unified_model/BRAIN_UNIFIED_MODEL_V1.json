@@ -23942,7 +23942,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "da02f8fc556f2a89a835ae2e25c2580853f4d9fc26818cecd9498fde59e58db7",
+    "source_sha256": "a752062e339affda25e98bf147c7493c7368fe2d4d986ee78a3f3d53111379db",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25492,7 +25492,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "96ac2dcd00e7f16e4a93190402cdec06ff94646ca87add16923f21c45878c6ba",
+    "source_sha256": "414ed78198dc1c8e725e5387015ea74d8fbbe75ad69fb405bf98ae0707ed3070",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25578,7 +25578,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "7e10b867c02357cb7465eefa258d289ad97df4f9a1876e93a53d15db36746016",
+    "source_sha256": "d6c3fad8a23c1910094e6ad7497892cba728a2ad340ea08f7debb7ada90b08e7",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25669,7 +25669,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "d9a9a8006e8198bbd84bc702fd72a86b657b9993754e47d4655224c9a5e56f9d",
+    "source_sha256": "384e24fe77ab63eecf364fe3b75bc105a36a013c392388128f234584106908d3",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25758,7 +25758,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-    "source_sha256": "e3a41d1021f167e34f9a3fe2128bebb793a28e4ebb28e34f1a298036dfee3220",
+    "source_sha256": "0348d678d1fe4a402be44ba563a85fad8052cab8e374c2d7c543c43d70c6da51",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25848,7 +25848,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-    "source_sha256": "25672504a0aadd7296b70e5db8cfe5b185a0786c5291f573e1efb44e30e6e128",
+    "source_sha256": "995a841d6249858d6ac88ad58a975f9750dbc83abbe0e6da1043e26b4f46dc17",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25932,7 +25932,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
-    "source_sha256": "7674de24ab84e53324322f6ded17462447bd9be8ed3a72592d007c5771bcb6e6",
+    "source_sha256": "1b7edee6579c28ba81f1deb259908d2b9ee8dfc19a4de118c874a6d5ef7c0167",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -26014,7 +26014,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
-    "source_sha256": "4054efa46e5e749f3aaa742e5d4d787bc16e539755d7ea2aa38d447a8fa3d9dc",
+    "source_sha256": "ef306d4f174ffb89d1f7c69bf40a45293aaf2e98a3c9c82ba9270d3b03801e5c",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28970,7 +28970,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5e055b90bca3253534067620222cfe0c1e1b93c16c08de2f4f409d34d5f2ee2e"
+  "value": "f8893538e7cd83de8a1d4d96d01ec85588da3f4bd3dc8e9cc005e9de9faa1b6b"
  },
  "engines": [
   {
@@ -52662,7 +52662,7 @@
   "included_source_count": 943,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "71fd8d5f49ebad35ad115b82b505b6091b07c9f97b088d522e80d7c750677131"
+  "source_tree_digest": "38f66451996b0ffbe273d6e7a811eb3c8847541ed1748e918ee1d5f3b4749705"
  },
  "research_index": [
   {
