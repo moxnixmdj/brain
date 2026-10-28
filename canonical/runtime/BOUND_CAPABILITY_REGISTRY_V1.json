@@ -11126,6 +11126,97 @@
     "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.refactor.inline_function.v1__RECEIPT.json",
     "reproduced_on_second_run": true
   }},
+  "python.dynamic.fuzz.v1": {
+    "action_template": {
+      "args": {
+        "act_verb": "fuzz",
+        "capability_id": "python.dynamic.fuzz.v1",
+        "output_path": "${input.output_path}",
+        "qualname": "${input.qualname}",
+        "source_root": "${input.source_root}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "dynamic_probe_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "python",
+      "fuzz",
+      "fuzzing",
+      "fuzzer",
+      "property",
+      "random input",
+      "crash",
+      "minimal case",
+      "shrink",
+      "reproduce",
+      "execution",
+      "dynamic analysis",
+      "subprocess isolation",
+      "edge case"
+    ],
+    "limitations": [
+      "cases are drawn from the parameter annotations plus a boundary corpus (0, 1, -1, sys.maxsize, '', 'a', '0'); an unannotated parameter gets int and str draws only, so a structured or generic input is not invented.",
+      "each case runs in its own interpreter with a wall-clock cap; timeout, nonzero exit and unparseable child output are all outcomes ('timeout', 'crashed', 'signaled'), never a lost run.",
+      "an exception is a finding only when it is not in expected_exceptions, because a validator that must raise is not a bug.",
+      "shrinking is greedy and must keep the SAME failure mode; a reduction that changes how it fails is rejected and the previous case is kept.",
+      "the reproducer is written beside the artifact as a standalone script; it is a record of the minimal call, not a regression test for the suite.",
+      "varargs / keyword-only targets are refused, because the arity is not knowable without running the code."
+    ],
+    "platforms": [
+      "linux",
+      "windows",
+      "darwin"
+    ],
+    "provides": [
+      "python.dynamic.fuzz"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "act",
+      "module",
+      "qualname",
+      "cases_run",
+      "cases_that_failed",
+      "minimal_case",
+      "failure_mode",
+      "reproducer_path",
+      "gate",
+      "complete",
+      "output_path",
+      "output_sha256",
+      "output_verified"
+    ],
+    "source": {
+      "module": "python stdlib subprocess/random/ast",
+      "type": "runtime",
+      "version_family": ">=3.9"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "94ab417910129d6e28cdb9c9d2f83c57a53be00942deca986c97221292c7ccca",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the divide-by-zero found by generation and shrunk to `divide(0, 0)`",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.fuzz.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.packaging.dependency_add.v1": {
     "action_template": {
      "args": {

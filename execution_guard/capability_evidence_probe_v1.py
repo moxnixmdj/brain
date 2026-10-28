@@ -228,6 +228,10 @@ def _inputs(cid: str, source: Path, repo, good: str, upstream: str, out: Path) -
     if cid == "vcs.git.rebase.v1":
         return {"ref": upstream, "worktree_path": str(repo),
                 "output_path": str(out / "rebase.json")}
+    if cid == "python.dynamic.fuzz.v1":
+        return {"source_root": str(source), "qualname": "divide",
+                "max_cases": 12, "case_timeout_s": 5,
+                "output_path": str(out / "fuzz.json")}
     if cid == "python.refactor.inline_function.v1":
         return {"source_root": str(source), "module": "pkg/calc.py", "qualname": "divide",
                 # This fixture's suite CONTAINS a planted defect (a divide-by-zero that must
@@ -337,6 +341,10 @@ ORACLE = {
                           lambda r: bool(r.get("found")) and r.get("first_bad_subject") == "bad"),
     "vcs.git.rebase.v1": ("the one commit replayed onto the upstream branch",
                           lambda r: int(r.get("commits_replayed") or 0) >= 1),
+    "python.dynamic.fuzz.v1": (
+        "the divide-by-zero found by generation and shrunk to `divide(0, 0)`",
+        lambda r: r.get("failure_mode") == "raised" and r.get("minimal_case") == [0, 0]
+        and int(r.get("cases_that_failed") or 0) >= 1),
     "python.refactor.inline_function.v1": (
         "every call site replaced by the callee's body, the def kept because the tests import it",
         lambda r: int(r.get("edit_count") or 0) == 1
