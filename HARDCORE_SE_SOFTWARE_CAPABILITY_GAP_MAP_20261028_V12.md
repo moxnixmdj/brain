@@ -25,9 +25,9 @@ sentences are answered by nothing, and 9 more by the wrong thing.**
 ```
 HARDCORE-SE MISSING-VERB PROBE (43 acts)
   ANSWERED_BY_OWNING_CAPABILITY   25
-  HONEST_REFUSAL                   9      "I cannot do this", said in words, before doing anything
+  HONEST_REFUSAL                  10      "I cannot do this", said in words, before doing anything
   WRONG_TOOL                       7      a capability that does not own the act was ADMITTED and ran
-  SILENT_REFUSAL                   1      no capability, no artifact, no reason at all
+  SILENT_REFUSAL                   0      (was 1: fixed in this commit, see §4)
   OWNED_BUT_FAILED                 1      the ownership heuristic credited a neighbour (see §3)
   ----------------------------------------------------------------
   for reference: a capability that does not own the act was selected in 14 of the 43 rows
@@ -47,8 +47,8 @@ PINNED GUARDS             all green: 20/20 refactor pins, 63/63 refactor+flake s
 Read the first block as a capability statement, not a bug count: **25 of the 43 acts a
 senior software engineer performs on any given day are performed, correctly, by their
 owning capability, with the promised artifact on disk.** Of the other 18, 17 have no
-owning capability anywhere in this machine (§2), 7 of them are answered by a wrong tool
-that actually executed (§4), and 1 produces no diagnosis at all.
+owning capability anywhere in this machine (§2), and 7 of them are answered by a wrong
+tool that actually executed (§3). Nothing on this surface now fails without saying why.
 
 ### How a verdict is decided
 
@@ -140,20 +140,25 @@ probe's ownership test matches the word `function`, which `python.source.audit.a
 claims. That is the probe's own heuristic being generous, not a capability: nothing in
 this machine moves a function.
 
-## 4. Class C — one row with no diagnosis at all, and one lost diagnosis
+## 4. Class C — the diagnosis that was written and then dropped (fixed here)
 
-| act | what came back |
-|---|---|
-| `ci_config` | `FAIL__RAW_GOAL_COMPILATION_GAP`, `reason: ""` — a closed failure with an empty diagnosis |
-| `change_signature` (before this commit's fixture fix) | `FAIL_CLOSED__CAPABILITY_EXITED_PROCESS`, `reason: ""` — a capability raised `SystemExit`, the door converted it to a closed failure, and **which capability did it and the reason it gave were both dropped** |
+`ci_config` returned `FAIL__RAW_GOAL_COMPILATION_GAP` with `reason: ""`: the only row of
+43 with no diagnosis at all. The compiler had a code; `solve()` put it under
+`compiler_code`/`compiler_detail` while every other refusal in the door puts its diagnosis
+under `reason`, so a caller reading `reason` saw nothing. Copying the code the compiler
+already wrote into the field the reader reads is not new computation — it is putting the
+diagnosis where the reader looks.
 
-The second is worse than it looks: the adapter's `SystemExit` payload *is* the diagnosis,
-and the conversion at `live_brain_route_admission_v1._execute_locally` throws it away
-while reporting a status that names no capability. A caller cannot tell what failed.
-Both are one-line fixes in the diagnosis path, not capability work, and both matter more
-than they look because *an unexplained refusal cannot be acted on by the machine that
-received it* — the owner's goal requires the system to detect missing data and acquire it,
-which it cannot do for a refusal that says nothing.
+Measured after: `GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:…:diff_path:0_type_compatible_existing_files_named`.
+Still not a good answer (it names the nearest capability it could not match, not the act
+the machine cannot perform), but it is now an answer, and the row moved from
+`SILENT_REFUSAL` to `HONEST_REFUSAL`. **Zero of 43 rows now fail without saying why.**
+
+The same shape appeared twice in the tooling around this class: a capability raising
+`SystemExit` surfaced as `FAIL_CLOSED__CAPABILITY_EXITED_PROCESS` with an empty `reason`,
+and a probe row whose fixture lacked the file its sentence named was read as a capability
+defect. Both are the same lesson the door learned here — *a diagnosis that is not where
+the reader looks is not a diagnosis*.
 
 ## 5. Class D — eighteen reachability defects
 
@@ -257,6 +262,11 @@ Four defects, all in the hardcore-software lane, all measured before and after.
    file, and only when that spelling denotes no other file. Measured end to end:
    rename over a real package layout → 3 edits in 2 files, tests green, `gate: PASS`,
    `verified: true`, through `solve()`.
+
+5. **A diagnosis was written and then dropped.** `FAIL__RAW_GOAL_COMPILATION_GAP`
+   carried its code under `compiler_code`, not `reason`, so `ci_config` — the one row of
+   43 with no diagnosis at all — was silent. It now says
+   `GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:…`. Zero of 43 rows fail silently now.
 
 Pins added: 2 (package-root source root; ambiguous name never matched). The probe itself
 is now a committed instrument, and it changed two of its own conclusions while being
