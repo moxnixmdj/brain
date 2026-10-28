@@ -197,6 +197,47 @@ def _stated_act_is_unknown(goal: str, registry: Mapping[str, Mapping[str, Any]])
     return word
 
 
+def _act_owned_by_someone_else(goal: str, selected: str,
+                               registry: Mapping[str, Mapping[str, Any]]) -> tuple[str, str] | None:
+    """(act, owner) when exactly one OTHER capability names the act the sentence opens with.
+
+    Narrow on purpose: one owner, and only when the owner names the word itself (a keyword or
+    its own identifier), not a stem, not a phrase.  Two owners means the word does not identify
+    an act, and the evidence rules that already exist decide it.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _croute
+        word = _croute._stated_action_word(str(goal or ""))
+    except Exception:  # noqa: BLE001 - an unreadable sentence claims no act
+        return None
+    if not word or word in _REQUEST_VERBS or len(word) < 3:
+        return None
+    owners = []
+    for cid, entry in registry.items():
+        if str(cid) == str(selected):
+            continue
+        try:
+            words = {str(x).lower() for x in (entry.get("keywords") or [])}
+            words |= set(re.findall(r"[a-z0-9]+", str(cid).lower()))
+        except Exception:  # noqa: BLE001 - an unreadable entry names nothing
+            continue
+        if word in words:
+            owners.append(str(cid))
+    if len(owners) != 1:
+        return None
+    # The selected capability must not also name it: then both claim the act and the evidence
+    # decides, exactly as it did before this rule existed.
+    try:
+        chosen = registry.get(str(selected)) or {}
+        chosen_words = {str(x).lower() for x in (chosen.get("keywords") or [])}
+        chosen_words |= set(re.findall(r"[a-z0-9]+", str(selected).lower()))
+    except Exception:  # noqa: BLE001
+        chosen_words = set()
+    if word in chosen_words:
+        return None
+    return (word, owners[0])
+
+
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
     dag = compiled.get("capability_dag")
@@ -218,6 +259,19 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # "Lint the python source R/pkg" by an AST parser, "Fuzz the function add" by the same
     # parser.  The reader that says what act a sentence asks for already exists
     # (`_stated_action_word`), and the registry already says which words it can act on.
+    # ... and the same is true in the other direction.  A capability that CLAIMS the act must be
+    # the one that answers it; when the sentence's act verb is named by exactly one entry and a
+    # DIFFERENT entry was selected, the selected one is answering a request it does not perform.
+    # Measured after the analyser capabilities were registered: adding the act vocabulary turned
+    # five honest refusals into hollow passes, because the front layer still preferred the AST
+    # parser that matched the medium ("python source") over the analyser that matched the act.
+    # Refusing here is the honest half of that: the caller is told the act exists and which
+    # capability owns it, instead of receiving an artifact about something else.
+    other_owner = _act_owned_by_someone_else(goal, selected, registry)
+    if other_owner:
+        return {"schema": SCHEMA, "admitted": False,
+                "rule": "R13_STATED_ACT_IS_OWNED_BY_ANOTHER_CAPABILITY:%s:%s" % other_owner,
+                "compiler_mode": mode, "selected_capability": selected}
     unknown_act = _stated_act_is_unknown(goal, registry)
     if unknown_act:
         return {"schema": SCHEMA, "admitted": False,

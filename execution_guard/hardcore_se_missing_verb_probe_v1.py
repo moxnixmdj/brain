@@ -180,7 +180,13 @@ def main() -> int:
             try:
                 from canonical.runtime import live_integrated_brain_v1 as _live
                 _entry = _live.load_verified_registry().get(selected) or {}
-                _own = (set(str(x).lower() for x in (_entry.get("keywords") or []))
+                # Every keyword is split into the WORDS it is made of.  A capability that
+                # declares "type check" names `type` and `check`; comparing whole phrases meant
+                # the analyser that answered a type check was reported as not owning it, and a
+                # correct answer was counted as a hollow pass -- the third time in this probe
+                # that a comparison was made at the wrong granularity.
+                _own = (set(re.findall(r"[a-z0-9]+", " ".join(
+                            str(x).lower() for x in (_entry.get("keywords") or []))))
                         | set(re.findall(r"[a-z0-9]+", selected.lower()))
                         | set(re.findall(r"[a-z0-9]+", " ".join(_entry.get("provides") or []).lower())))
                 # Does the answering capability claim THIS ACT?  The act's own name is the
