@@ -180,3 +180,71 @@ def test_the_deadline_stops_the_search_and_says_so(tmp_path: Path):
     result = dr.run(_args(deadline_s=5, workers=1), tmp_path)
     assert result["verified"] is False
     assert result["status"].startswith(("DEADLINE_EXCEEDED:5s", "OPEN:NO_VERIFIED_CANDIDATE:")), result["status"]
+
+
+# --- differential witness: several green patches are ranked, not shipped first-come ---
+
+def test_several_green_patches_are_ranked_by_behavioural_delta_and_the_ledger_shows_all(tmp_path: Path):
+    _fixture(tmp_path, bug="return w * h if w <= 0 else 0")
+    result = dr.run(_args(), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH"
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    search = next(s for s in art["steps"] if s["step"] == "patch_search")
+    assert len(search["green_indices"]) >= 2
+    w = search["witness"]
+    assert w["status"] == "MEASURED" and w["function"] == "area" and w["proves_correctness"] is False
+    measured = [r for r in w["ranking"] if r["witness"] == "MEASURED"]
+    assert measured and all(r["delta_on_tests"] >= 1 for r in measured)
+    assert search["winning_index"] == measured[0]["index"]
+    assert measured[0]["delta_outside_tests"] == min(r["delta_outside_tests"] for r in measured)
+
+
+def test_green_budget_one_restores_first_green_wins(tmp_path: Path):
+    _fixture(tmp_path, bug="return w * h if w <= 0 else 0")
+    result = dr.run(_args(green_budget=1), tmp_path)
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    search = next(s for s in art["steps"] if s["step"] == "patch_search")
+    assert result["status"] == "VERIFIED_PATCH" and len(search["green_indices"]) == 1
+    assert search["witness"]["status"] == "SINGLE_GREEN"
+
+
+def test_witness_rank_prefers_least_collateral_change_and_demotes_no_change_on_tests():
+    from canonical.runtime import patch_differential_witness_v1 as w
+    original = [["R", "0"], ["R", "a"], ["R", "b"], ["R", "c"]]
+    cands = [(1, [["R", "x"], ["R", "q"], ["R", "q"], ["R", "c"]]),   # changes test input, 2 outside
+             (2, [["R", "x"], ["R", "a"], ["R", "q"], ["R", "c"]]),   # changes test input, 1 outside
+             (3, [["R", "0"], ["R", "q"], ["R", "q"], ["R", "q"]]),   # did not change the test input
+             (4, None)]                                             # probe failed
+    order = [r["index"] for r in w.rank(original, cands, n_test_inputs=1)]
+    assert order == [2, 1, 3, 4]
+
+
+def test_witness_only_covers_free_functions_and_says_why_otherwise():
+    from canonical.runtime import patch_differential_witness_v1 as w
+    src = ("def f(a, b):\n    return a\n\n\nclass C:\n    def m(self):\n        return 1\n\n\n"
+           "def g(x):\n    def inner(y):\n        return y\n    return inner(x)\n\n\ndef v(*a):\n    return a\n")
+    assert w.owning_function(src, 2) == ("f", 2, None)
+    assert w.owning_function(src, 7)[2] == "METHOD"
+    assert w.owning_function(src, 12)[2] == "NESTED_FUNCTION"
+    assert w.owning_function(src, 16)[2] == "VARIADIC_SIGNATURE"
+    assert w.owning_function(src, 4)[2] == "NO_OWNING_FUNCTION"
+
+
+def test_witness_inputs_come_from_the_tests_and_a_deterministic_grid(tmp_path: Path):
+    from canonical.runtime import patch_differential_witness_v1 as w
+    t = tmp_path / "test_x.py"
+    t.write_text("from m import area\n\ndef test_a():\n    assert area(3, 4) == 12\n    assert area(1.5, 2) == 3.0\n")
+    calls = w.test_call_inputs([t], "area", 2)
+    assert calls == [[3, 4], [1.5, 2]]
+    g1 = w.grid_inputs(calls, 2)
+    g2 = w.grid_inputs(calls, 2)
+    assert g1 == g2 and len(g1) <= w.MAX_INPUTS   # the tests' own calls are prepended by witness()
+    assert any(isinstance(row[0], float) for row in g1)
+
+
+def test_plugin_trim_only_when_no_test_or_conftest_mentions_the_plugin(tmp_path: Path):
+    _fixture(tmp_path)
+    tree = tmp_path / "proj"
+    assert dr.plugin_trim(tree, ["tests/test_calc.py"]) == ["-p", "no:hypothesispytest"]
+    (tree / "conftest.py").write_text("import hypothesis\n")
+    assert dr.plugin_trim(tree, ["tests/test_calc.py"]) == []

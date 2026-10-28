@@ -2,7 +2,7 @@
   "receipt_for": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
   "capability_id": "software.diagnose_then_repair.v1",
   "adapter_module": "software_diagnose_then_repair_v1",
-  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure, proj/tests/test_other.py is the rest of the suite",
+  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12), proj/tests/test_other.py is the rest of the suite",
   "observed": {
     "golden": {
       "bug": "return w * h - 1",
@@ -11,6 +11,10 @@
       "confined": true,
       "target_path": "pkg/calc.py",
       "target_basis": "LOCALIZER_TOP",
+      "plugin_trim": [
+        "-p",
+        "no:hypothesispytest"
+      ],
       "priority_lines": [
         1,
         2,
@@ -18,9 +22,54 @@
         6
       ],
       "candidate_count": 43,
-      "tested_candidate_count": 3,
+      "tested_candidate_count": 7,
+      "greens": [
+        [
+          1,
+          "BINOP_DROP keep left"
+        ],
+        [
+          4,
+          "BINOP_SWAP Sub->Mult"
+        ],
+        [
+          5,
+          "BINOP_SWAP Sub->Div"
+        ],
+        [
+          6,
+          "BINOP_SWAP Sub->FloorDiv"
+        ]
+      ],
+      "witness": {
+        "status": "MEASURED",
+        "seconds": 0.577,
+        "test_inputs": 1,
+        "grid_inputs": 109,
+        "ranking": [
+          {
+            "index": 1,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 109
+          },
+          {
+            "index": 4,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 109
+          },
+          {
+            "index": 5,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 109
+          },
+          {
+            "index": 6,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 109
+          }
+        ]
+      },
       "winning_index": 1,
-      "winning_mutation": "BINOP_DROP keep left",
       "patched_line": [
         "+    return w * h"
       ],
@@ -31,86 +80,152 @@
       "steps": [
         {
           "step": "reproduce",
-          "seconds": 0.413
+          "seconds": 0.307
         },
         {
           "step": "localize",
-          "seconds": 0.133
+          "seconds": 0.122
         },
         {
           "step": "patch_search",
-          "seconds": 1.243
+          "seconds": 2.497
         },
         {
           "step": "full_suite_gate",
-          "seconds": 0.305
+          "seconds": 0.325
         }
       ],
       "anchor_unchanged": true
     },
     "e2e_ms": [
-      2096.6,
-      2072.5
+      3253.9,
+      3265.3
     ],
     "determinism": "diff byte-identical on rerun, source tree hash unchanged both runs",
     "wrong_operator": {
       "bug": "return w + h",
       "status": "VERIFIED_PATCH",
-      "winning_mutation": "BINOP_SWAP Add->Mult",
+      "greens": [
+        [
+          4,
+          "BINOP_SWAP Add->Mult"
+        ]
+      ],
       "patched_line": [
         "+    return w * h"
       ],
-      "tested": 5,
-      "e2e_ms": 2435.1,
-      "note": "Add->Mult was outside python.patch.search.test_guided.ast.v1's table (OPEN:11 in the previous receipt); the template generator reaches it"
+      "e2e_ms": 2938.4
+    },
+    "under_specified_suite": {
+      "bug": "return w * h if w <= 0 else 0",
+      "status": "VERIFIED_PATCH",
+      "greens": [
+        [
+          11,
+          "COMPARE_SWAP LtE->NotEq"
+        ],
+        [
+          13,
+          "COMPARE_SWAP LtE->Gt"
+        ],
+        [
+          14,
+          "COMPARE_SWAP LtE->GtE"
+        ],
+        [
+          15,
+          "OPERAND_SWAP LtE"
+        ],
+        [
+          16,
+          "NOT_TOGGLE add not"
+        ]
+      ],
+      "witness": {
+        "status": "MEASURED",
+        "seconds": 0.731,
+        "test_inputs": 1,
+        "grid_inputs": 109,
+        "ranking": [
+          {
+            "index": 11,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 59
+          },
+          {
+            "index": 13,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 89
+          },
+          {
+            "index": 14,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 89
+          },
+          {
+            "index": 15,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 89
+          },
+          {
+            "index": 16,
+            "delta_on_tests": 1,
+            "delta_outside_tests": 89
+          }
+        ]
+      },
+      "chosen": 11,
+      "patched_line": [
+        "+    return w * h if w != 0 else 0"
+      ],
+      "e2e_ms": 4911.1,
+      "note": "five different edits satisfy the suite; the differential witness ranks them by behaviour changed outside the tests' own inputs (PATCH-SIM) and the ledger shows every alternative with its delta; this is ranking evidence, not proof"
+    },
+    "green_budget_1": {
+      "status": "VERIFIED_PATCH",
+      "greens": [
+        [
+          11,
+          "COMPARE_SWAP LtE->NotEq"
+        ]
+      ],
+      "e2e_ms": 3503.7,
+      "note": "first green wins, witness skipped: the old behaviour, still available"
     },
     "open": {
       "bug": "return w",
       "status": "OPEN:NO_VERIFIED_CANDIDATE:18",
       "candidate_count": 18,
       "stop_reason": "EXHAUSTED",
-      "e2e_ms": 4178.4,
-      "note": "a missing term: no template adds code; the loop says OPEN with the count instead of inventing a patch"
+      "e2e_ms": 3453.4
     },
     "sabotage_full_suite": {
       "status": "PATCH_FAILS_FULL_SUITE:FAIL",
       "tests_failed": 1,
-      "e2e_ms": 2028.8,
-      "note": "the stated test is repaired but another test in the tree breaks: full-suite gate FAIL, verified false"
+      "e2e_ms": 3426.0
     },
     "nothing_to_repair": {
       "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-      "e2e_ms": 416.5
+      "e2e_ms": 338.6
     },
     "harness_crash": {
       "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-      "e2e_ms": 293.1,
-      "note": "conftest raising -> pytest rc 4 without a summary line; the verdict is the summary line, never the exit code"
+      "e2e_ms": 305.5
     },
-    "parallel_and_confinement": {
-      "exhaustive_search_18_candidates": {
-        "workers=1,confine=auto": {
-          "search_s": 7.226,
+    "parallel": {
+      "exhaustive_search_18_candidates_confined": {
+        "workers=1": {
+          "search_s": 6.178,
           "tested": 18,
-          "per_candidate_s": 0.401
+          "per_candidate_s": 0.343
         },
-        "workers=1,confine=off": {
-          "search_s": 5.266,
+        "workers=2": {
+          "search_s": 2.935,
           "tested": 18,
-          "per_candidate_s": 0.293
-        },
-        "workers=2,confine=auto": {
-          "search_s": 3.618,
-          "tested": 18,
-          "per_candidate_s": 0.201
-        },
-        "workers=2,confine=off": {
-          "search_s": 2.626,
-          "tested": 18,
-          "per_candidate_s": 0.146
+          "per_candidate_s": 0.163
         }
       },
-      "note": "candidates run on per-worker copies under the same confined pytest command that reproduced the failure; 2 workers on a 2-cpu host; confinement costs the difference between auto and off"
+      "note": "2-cpu host; the Hypothesis pytest plugin, autoloaded, costs 0.55 s per pytest start and is trimmed when no named test or conftest mentions it"
     }
   }
 }

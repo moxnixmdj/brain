@@ -73,6 +73,7 @@ from canonical.runtime import confine_v1
 from canonical.runtime.bound_capabilities import python_dynamic_fault_localizer_v1 as localizer
 from canonical.runtime.bound_capabilities import python_repo_diff_apply_full_testgate as full_gate
 from canonical.runtime import patch_candidate_search_v1 as candidates_v1
+from canonical.runtime import patch_differential_witness_v1 as witness_v1
 
 SCHEMA = "PROJECT_BRAIN_SOFTWARE_DIAGNOSE_THEN_REPAIR_V1"
 CAPABILITY_ID = "software.diagnose_then_repair.v1"
@@ -156,14 +157,49 @@ def _summary_counts(log: str) -> dict[str, int] | None:
     return None
 
 
+def plugin_trim(tree: pathlib.Path, tests_rel: list[str]) -> list[str]:
+    """pytest ``-p no:<plugin>`` flags for plugins the named tests provably do not use.
+
+    Measured (pytest 9.2, 2-cpu host): a one-test file takes 0.20 s to run and
+    0.75 s with the Hypothesis plugin autoloaded -- 0.55 s per candidate, paid
+    thousands of times in a search, by tests that never import it.  A plugin is
+    trimmed only when NO test file named and NO conftest.py in the tree mentions
+    its import name; anything else keeps the default plugin set.
+    """
+    texts = []
+    for rel in tests_rel:
+        try:
+            texts.append((tree / rel).read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError):
+            return []
+    for conf in tree.rglob("conftest.py"):
+        if not any(part in _SKIP for part in conf.relative_to(tree).parts):
+            try:
+                texts.append(conf.read_text(encoding="utf-8"))
+            except (OSError, UnicodeDecodeError):
+                return []
+    for ini in ("pytest.ini", "pyproject.toml", "setup.cfg", "tox.ini"):
+        if (tree / ini).is_file():
+            try:
+                texts.append((tree / ini).read_text(encoding="utf-8"))
+            except (OSError, UnicodeDecodeError):
+                return []
+    blob = "\n".join(texts)
+    flags: list[str] = []
+    for module, plugin in (("hypothesis", "hypothesispytest"),):
+        if module not in blob:
+            flags += ["-p", "no:" + plugin]
+    return flags
+
+
 def _pytest(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
-            confine: str, tb: str = "long") -> tuple[int | None, str, bool]:
+            confine: str, tb: str = "long", trim: list[str] | None = None) -> tuple[int | None, str, bool]:
     """Run pytest on ``tests_rel`` inside ``tree``; prefer confinement; report which happened.
 
     Returns (rc, log, confined).  rc None means no verdict came back at all."""
     log_rel = ".brain_diagnose/pytest.txt"
     (tree / ".brain_diagnose").mkdir(exist_ok=True)
-    argv = ["-m", "pytest", "-q", "-p", "no:cacheprovider", "--tb=" + tb, *tests_rel]
+    argv = ["-m", "pytest", "-q", "-p", "no:cacheprovider", *(trim or []), "--tb=" + tb, *tests_rel]
     program = (
         "import os, subprocess, sys\n"
         "os.chdir('/project')\n"
@@ -203,10 +239,10 @@ def _pytest(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s
 
 
 def _candidate_verdict(copy_root: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
-                       confine: str) -> int:
+                       confine: str, trim: list[str] | None = None) -> int:
     """pytest verdict for one candidate copy: 0 only when the summary line says nothing failed."""
     try:
-        rc, log, _ = _pytest(copy_root, tests_rel, python_exe, timeout_s, confine, tb="no")
+        rc, log, _ = _pytest(copy_root, tests_rel, python_exe, timeout_s, confine, tb="no", trim=trim)
     except DiagnoseRepairRefusal:
         return 2
     counts = _summary_counts(log)
@@ -215,10 +251,37 @@ def _candidate_verdict(copy_root: pathlib.Path, tests_rel: list[str], python_exe
     return rc if rc not in (None, 0) else 1
 
 
+def _probe(copy_root: pathlib.Path, program: str, out_rel: str, python_exe: str, timeout_s: int,
+           confine: str) -> list[Any] | None:
+    """Run a witness probe inside ``copy_root`` (confined when the host can); return its rows."""
+    out = copy_root / out_rel
+    out.parent.mkdir(exist_ok=True)
+    if out.exists():
+        out.unlink()
+    ran = False
+    if confine in ("auto", "required") and confine_v1.available():
+        receipt = confine_v1.run("import os\nos.chdir('/project')\n" + program, str(copy_root), timeout=timeout_s,
+                                 network=False, ro_binds=_site_dirs())
+        ran = receipt.get("verdict") == "OK"
+    if not ran and confine != "required":
+        try:
+            subprocess.run([python_exe, "-c", program], cwd=copy_root, capture_output=True, timeout=timeout_s,
+                           env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+            ran = True
+        except subprocess.TimeoutExpired:
+            ran = False
+    if not ran or not out.is_file():
+        return None
+    try:
+        return json.loads(out.read_text(encoding="utf-8"))
+    except ValueError:
+        return None
+
+
 def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
-               confine: str) -> dict[str, Any]:
+               confine: str, trim: list[str] | None = None) -> dict[str, Any]:
     """Run the failing tests once; the verdict is the summary line, never the exit code."""
-    rc, log, confined = _pytest(tree, tests_rel, python_exe, timeout_s, confine)
+    rc, log, confined = _pytest(tree, tests_rel, python_exe, timeout_s, confine, trim=trim)
     if rc is None:
         raise DiagnoseRepairRefusal("REPRODUCE_NO_VERDICT")
     if rc == 5:
@@ -306,8 +369,9 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     try:
         # 1. reproduce
         t0 = time.monotonic()
-        repro = _reproduce(tree, tests_tree, python_exe, min(remaining(), 300), confine)
-        steps.append({"step": "reproduce", "seconds": round(time.monotonic() - t0, 3), **repro})
+        trim = plugin_trim(tree, tests_tree)
+        repro = _reproduce(tree, tests_tree, python_exe, min(remaining(), 300), confine, trim)
+        steps.append({"step": "reproduce", "seconds": round(time.monotonic() - t0, 3), "plugin_trim": trim, **repro})
 
         # 2. diagnose
         t0 = time.monotonic()
@@ -373,16 +437,39 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                 priority.append(ln)
         candidates = candidates_v1.generate(source_text, nums, strings, priority)
         per_run = max(5, min(remaining(), 300))
+        witness_row: dict[str, Any] = {}
+
+        def choose(greens: list[tuple[int, str]]) -> int:
+            # several green patches: the one that changes behaviour least outside
+            # the tests' own inputs (PATCH-SIM); ties and unavailability -> search order
+            nonlocal witness_row
+            if len(greens) == 1:
+                witness_row = {"status": "SINGLE_GREEN", "ranking": [{"index": greens[0][0]}]}
+                return greens[0][0]
+            t0w = time.monotonic()
+            first = greens[0][0]
+            desc = next((d for i, (d, _) in enumerate(candidates, 1) if i == first), {})
+            witness_row = witness_v1.witness(
+                tree=tree, target_rel=target_rel, original_text=source_text, lineno=int(desc.get("lineno") or 1),
+                greens=greens, test_paths=[tree / t for t in tests_tree],
+                run_program=lambda copy, program, out_rel: _probe(copy, program, out_rel, python_exe,
+                                                                   max(5, min(remaining(), 60)), confine),
+                scratch=scratch_root)
+            witness_row["seconds"] = round(time.monotonic() - t0w, 3)
+            return int(witness_row["ranking"][0]["index"])
+
         search = candidates_v1.evaluate(
             tree, target_rel, candidates,
-            lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine),
-            workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root)
+            lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine, trim),
+            workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
+            green_budget=int(args.get("green_budget") or 4), choose=choose)
         steps.append({"step": "patch_search", "seconds": round(time.monotonic() - t0, 3),
                       "candidate_count": search["candidate_count"], "tested_candidate_count": search["tested_candidate_count"],
                       "workers": search["workers"], "stop_reason": search["stop_reason"],
                       "priority_lines": priority[:20],
                       "winning_mutation": (search["winner"] or {}).get("mutation"),
-                      "winning_index": next((a["index"] for a in search["attempts"] if a["returncode"] == 0), None),
+                      "winning_index": (search["winner"] or {}).get("index"),
+                      "green_indices": search["green_indices"], "witness": witness_row,
                       "attempts": search["attempts"][:200]})
         if search["stop_reason"] == "DEADLINE":
             raise DiagnoseRepairRefusal("DEADLINE_EXCEEDED:" + str(deadline_s) + "s:tested=" + str(search["tested_candidate_count"]))

@@ -201,12 +201,20 @@ def _purge_bytecode(source: pathlib.Path) -> None:
 
 def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[str, Any], str]],
              run_tests: Callable[[pathlib.Path], int], *, workers: int, deadline: float,
-             max_candidates: int, scratch: pathlib.Path) -> dict[str, Any]:
+             max_candidates: int, scratch: pathlib.Path, green_budget: int = 4,
+             choose: Callable[[list[tuple[int, str]]], int] | None = None) -> dict[str, Any]:
     """Test candidates in parallel on per-worker copies of ``tree``.
 
     ``run_tests(copy_root)`` returns pytest's verdict as an int (0 = green) for
     that copy; it is the caller's runner, so confinement and argv are decided
-    once, outside.  The first green candidate is replayed twice on its copy.
+    once, outside.
+
+    A green candidate does not end the search by itself: the suite is the
+    weakest oracle in the loop, and the first green edit is only the first
+    the generator emitted (measured: ``w != 0`` before ``w > 0``).  The search
+    goes on through the remaining candidates on the SAME line until
+    ``green_budget`` greens are in hand, then ``choose(greens)`` (default: the
+    first) picks one, and that one is replayed twice before it is reported.
     """
     workers = max(1, int(workers))
     copies: list[pathlib.Path] = []
@@ -219,37 +227,51 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
     lock = threading.Lock()
     stop = threading.Event()
     attempts: list[dict[str, Any]] = []
-    winner: dict[str, Any] | None = None
+    greens: list[tuple[int, str]] = []
+    green_line: int | None = None
     stop_reason = "EXHAUSTED"
     tested = 0
 
-    def one(index: int, desc: dict[str, Any], text: str) -> tuple[int, dict[str, Any], str, int, float, pathlib.Path | None]:
+    def restore(copy: pathlib.Path) -> None:
+        (copy / target_rel).write_bytes(original)
+        _purge_bytecode(copy / target_rel)
+
+    def one(index: int, desc: dict[str, Any], text: str) -> tuple[int, dict[str, Any], str, int, float]:
         with lock:
             copy = free.pop()
         try:
             if stop.is_set() or time.monotonic() >= deadline:
-                return index, desc, text, -1, 0.0, None
+                return index, desc, text, -1, 0.0
             src = copy / target_rel
             src.write_text(text, encoding="utf-8")
             _purge_bytecode(src)
             t0 = time.monotonic()
             rc = run_tests(copy)
-            took = time.monotonic() - t0
-            if rc == 0:
-                return index, desc, text, rc, took, copy  # keep the copy dirty for replay
-            src.write_bytes(original)
-            _purge_bytecode(src)
-            return index, desc, text, rc, took, None
+            restore(copy)
+            return index, desc, text, rc, time.monotonic() - t0
         finally:
-            if copy not in free:
-                with lock:
-                    free.append(copy)
+            with lock:
+                free.append(copy)
+
+    def record(index: int, desc: dict[str, Any], text: str, rc: int, took: float) -> None:
+        nonlocal tested, green_line
+        tested += 1
+        attempts.append({"index": index, "mutation": desc, "returncode": rc, "elapsed_s": round(took, 3)})
+        if rc == 0:
+            greens.append((index, text))
+            if green_line is None:
+                green_line = desc.get("lineno")
 
     pool = cf.ThreadPoolExecutor(max_workers=workers)
+    winner: dict[str, Any] | None = None
     try:
         queue = list(enumerate(candidates[:max_candidates], 1))
         pending: set = set()
-        while (queue or pending) and winner is None:
+        while queue or pending:
+            if greens and (len(greens) >= green_budget or not queue
+                           or (green_line is not None and queue[0][1][0].get("lineno") != green_line)):
+                stop.set()
+                queue = []
             while queue and len(pending) < workers and not stop.is_set():
                 i, (d, t) = queue.pop(0)
                 pending.add(pool.submit(one, i, d, t))
@@ -257,53 +279,51 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
                 break
             done, pending = cf.wait(pending, return_when=cf.FIRST_COMPLETED)
             for fut in done:
-                index, desc, text, rc, took, copy = fut.result()
-                if rc == -1:
-                    continue
-                tested += 1
-                attempts.append({"index": index, "mutation": desc, "returncode": rc, "elapsed_s": round(took, 3)})
-                if rc == 0 and winner is None and copy is not None:
-                    stop.set()
-                    replay = []
-                    for _ in range(2):
-                        _purge_bytecode(copy / target_rel)
-                        replay.append(run_tests(copy))
-                    if all(r == 0 for r in replay):
-                        winner = {"mutation": desc, "candidate": text, "replay_returncodes": replay}
-                        stop_reason = "VERIFIED"
-                    else:
-                        stop.clear()
-                        (copy / target_rel).write_bytes(original)
-                        _purge_bytecode(copy / target_rel)
-                        attempts[-1]["flaky_replay"] = replay
-                elif copy is not None:
-                    (copy / target_rel).write_bytes(original)
-                    _purge_bytecode(copy / target_rel)
-            if time.monotonic() >= deadline and winner is None:
+                index, desc, text, rc, took = fut.result()
+                if rc != -1:
+                    record(index, desc, text, rc, took)
+            if time.monotonic() >= deadline and not greens:
                 stop.set()
                 stop_reason = "DEADLINE"
-                for fut in pending:
-                    fut.cancel()
+                queue = []
                 break
-        if winner is None and stop_reason == "EXHAUSTED" and len(candidates) > max_candidates:
-            stop_reason = "MAX_CANDIDATES"
-        # runs that were in flight when the search stopped still count: they ran
         for fut in cf.as_completed(list(pending)) if pending else []:
             try:
-                index, desc, text, rc, took, copy = fut.result()
+                index, desc, text, rc, took = fut.result()
             except cf.CancelledError:
                 continue
-            if rc == -1:
-                continue
-            tested += 1
-            attempts.append({"index": index, "mutation": desc, "returncode": rc, "elapsed_s": round(took, 3)})
+            if rc != -1:
+                record(index, desc, text, rc, took)
         attempts.sort(key=lambda a: a["index"])
+        # in-flight runs can finish after the budget is reached; keep the budget
+        # deterministic (by search order), whatever the thread timing was
+        greens.sort(key=lambda g: g[0])
+        del greens[green_budget:]
+        if greens:
+            chosen = choose(greens) if choose else greens[0][0]
+            text = next(t for i, t in greens if i == chosen)
+            desc = next(a["mutation"] for a in attempts if a["index"] == chosen)
+            copy = copies[0]
+            replay = []
+            for _ in range(2):
+                (copy / target_rel).write_text(text, encoding="utf-8")
+                _purge_bytecode(copy / target_rel)
+                replay.append(run_tests(copy))
+                restore(copy)
+            if all(r == 0 for r in replay):
+                winner = {"index": chosen, "mutation": desc, "candidate": text, "replay_returncodes": replay}
+                stop_reason = "VERIFIED"
+            else:
+                stop_reason = "FLAKY_REPLAY:" + str(replay)
+        elif stop_reason == "EXHAUSTED" and len(candidates) > max_candidates:
+            stop_reason = "MAX_CANDIDATES"
     finally:
         pool.shutdown(wait=True, cancel_futures=True)
         for c in copies:
             shutil.rmtree(c, ignore_errors=True)
     return {"winner": winner, "attempts": attempts, "tested_candidate_count": tested,
-            "candidate_count": len(candidates), "workers": workers, "stop_reason": stop_reason}
+            "green_indices": [i for i, _ in greens], "candidate_count": len(candidates),
+            "workers": workers, "stop_reason": stop_reason}
 
 
 def default_workers() -> int:
