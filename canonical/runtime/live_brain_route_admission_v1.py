@@ -2342,7 +2342,20 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
                 gap_normalized, observe_world(gap_normalized), gap_future_artifacts)
+        # THE DIAGNOSIS MUST BE WHERE THE READER LOOKS.  This branch reported the gap
+        # only under `compiler_code`/`compiler_detail`, so a caller reading `reason` --
+        # which is where every other refusal in this entry puts its diagnosis -- saw an
+        # empty string.  Measured by the missing-verb probe: "Write a continuous
+        # integration workflow for the repository R" returned
+        # FAIL__RAW_GOAL_COMPILATION_GAP with reason "", the one row of 43 with no
+        # diagnosis at all, and the probe had to classify it as a SILENT_REFUSAL.
+        # Nothing new is computed here; the code the compiler already wrote is copied
+        # into the field the reader reads.
+        _gap_reason = str(exc.code or "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP")
+        if exc.detail:
+            _gap_reason += ":" + str(exc.detail)
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
+                     reason=_gap_reason,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
         return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
