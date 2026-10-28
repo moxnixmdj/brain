@@ -28970,7 +28970,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f8893538e7cd83de8a1d4d96d01ec85588da3f4bd3dc8e9cc005e9de9faa1b6b"
+  "value": "03141e0a3490d57f96fadf4a913178aa7f9f3b043e126da061dc8ce55ac974cb"
  },
  "engines": [
   {
@@ -209665,7 +209665,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py",
-   "sha256": "70813ea238c4a42200df5bb8158840d0f507e3dfb1874b5a4b545dee83cb08cc",
+   "sha256": "ddfa6ea56a71999407791e826f92b003c83b24e0f8e61fcef87f7e96227712b5",
    "summary": "Multi-language deterministic parser — tree-sitter harvest, insanely fast.",
    "symbol_count": 3,
    "symbols": [

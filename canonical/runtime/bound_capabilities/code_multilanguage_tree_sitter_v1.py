@@ -135,10 +135,20 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "error_count": len(errors),
         "skipped_count": skipped_count,
         "tree_sitter_available": tree_sitter_available,
+        "substrate_missing": not tree_sitter_available,
         "substrate": ["tree_sitter==0.20.4", "tree_sitter_languages==1.10.2"],
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
-        "verified": parsed_count > 0 and not errors,
+        # A capability named `code.multilanguage.parse.tree_sitter` that has no tree_sitter is
+        # not verified by parsing Python with `ast`: that is a different effect, and this
+        # repository already registers it as python.source.audit.ast.  Measured 2026-10-28:
+        # without the pinned kernel this adapter returned output_verified true with
+        # tree_sitter_available false, so the door credited a multilanguage parse that never
+        # happened.  Its sibling code_tree_sitter_incremental_index_v1 already refuses with
+        # TREE_SITTER_SUBSTRATE_MISSING; this is the same law, applied to the row that was
+        # still reporting success.
+        "verified": bool(tree_sitter_available) and parsed_count > 0 and not errors,
+        "reason": None if tree_sitter_available else "TREE_SITTER_SUBSTRATE_MISSING",
     }
 
     raw_bytes = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
@@ -152,6 +162,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "file_count": parsed_count,
         "languages_seen": sorted(languages_seen),
         "tree_sitter_available": tree_sitter_available,
+        "substrate_missing": not tree_sitter_available,
         "symbol_count": len(symbols),
         "error_count": len(errors),
         "skipped_count": skipped_count,

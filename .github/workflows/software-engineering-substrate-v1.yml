@@ -1,0 +1,97 @@
+name: software-engineering-substrate-v1
+
+# The software-engineering kernel is pinned, hash-verified, and was installed by nothing.
+#
+# requirements/software_engineering_kernel_v1.txt pins tree_sitter 0.20.4,
+# tree_sitter_languages 1.10.2, z3-solver 4.15.4.0, hypothesis 6.170.12 and
+# crosshair-tool 0.0.112 with SHA-256 hashes. Measured on c8a3d34: `grep -rl
+# software_engineering_kernel_v1 .github/` returned nothing, and on a machine
+# without it the language capabilities degrade while still reporting success:
+#
+#   code.multilanguage.parse.tree_sitter.v1 -> verified true, tree_sitter_available false
+#   evidence.oracle.hypothesis_property.v1  -> 13 checked cases instead of 50
+#
+# That adapter now refuses with TREE_SITTER_SUBSTRATE_MISSING when the parser is
+# absent (canonical/tests/test_the_pinned_kernel_is_installed_or_the_capability_says_it_is_not.py),
+# so this job is what keeps the honest answer "installed" rather than "missing":
+# it installs the repository's own pinned file with --require-hashes and runs the
+# software-engineering capability suites against the real parser.
+#
+# 5.7 s to install the whole kernel, measured in this repository on 2026-10-28.
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: software-engineering-substrate-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  substrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # The pinned file is the repository's own artifact; --require-hashes makes a
+      # substituted wheel a failure rather than an install. No network is needed at
+      # test time -- these are build-time wheels, not a runtime service.
+      - name: Install the pinned software-engineering kernel
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --require-hashes \
+            -r requirements/software_engineering_kernel_v1.txt
+          python -m pip install --disable-pip-version-check pytest
+          python - <<'PY'
+          import tree_sitter_languages, hypothesis, z3
+          parser = tree_sitter_languages.get_parser("python")
+          assert parser is not None
+          print("kernel present:", hypothesis.__version__, z3.get_version_string())
+          PY
+
+      # The kernel-dependent test is the point: with the substrate installed, the
+      # capability must report a real parse, and without it the door must refuse.
+      # Both directions are in one file so neither can rot silently.
+      - name: Software-engineering capability suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest -v \
+            canonical.tests.test_the_pinned_kernel_is_installed_or_the_capability_says_it_is_not \
+            canonical.tests.test_a_written_artifact_is_not_a_verified_result \
+            canonical.tests.test_git_object_model_v1 \
+            canonical.tests.test_python_software_repair_loop_v1 \
+            canonical.tests.test_python_test_guided_patch_search_v1 \
+            2>&1 | tee /tmp/substrate.log
+
+      - name: Publish failure detail to the pull request
+        if: failure() && github.event_name == 'pull_request'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo '### software-engineering-substrate-v1 FAILED'
+            echo
+            echo "run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo
+            echo '```'
+            echo '--- interpreter ---'
+            python -VV 2>&1
+            echo '--- kernel ---'
+            python -m pip list 2>/dev/null | grep -Ei 'tree|z3|hypothesis|crosshair' || echo 'kernel: NOT INSTALLED'
+            echo '--- log tail ---'
+            tail -60 /tmp/substrate.log 2>/dev/null || echo 'no log'
+            echo '```'
+          } > /tmp/comment.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md || true
