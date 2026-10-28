@@ -1,0 +1,912 @@
+{
+ "instrument": "execution_guard/hardcore_se_domain_coverage_v1.py",
+ "measured": {
+  "capabilities_in_registry": 158,
+  "provides_vocabulary": 220,
+  "rows": [
+   {
+    "act": "git.status",
+    "domain": "version control",
+    "owner": "vcs.git.status",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.diff",
+    "domain": "version control",
+    "owner": "vcs.git.diff",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.commit",
+    "domain": "version control",
+    "owner": "vcs.git.commit",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.branch.create",
+    "domain": "version control",
+    "owner": "vcs.git.branch_create",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.checkout",
+    "domain": "version control",
+    "owner": "vcs.git.checkout",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.revert",
+    "domain": "version control",
+    "owner": "vcs.git.revert",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.rebase",
+    "domain": "version control",
+    "owner": "vcs.git.branch.rebase",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.bisect",
+    "domain": "version control",
+    "owner": "vcs.git.history.bisect",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.blame",
+    "domain": "version control",
+    "owner": "vcs.git.blame",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.stash",
+    "domain": "version control",
+    "owner": "vcs.git.stash",
+    "state": "BOUND"
+   },
+   {
+    "act": "git.merge",
+    "domain": "version control",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "git.cherry_pick",
+    "domain": "version control",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "git.tag",
+    "domain": "version control",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "git.worktree",
+    "domain": "version control",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "git.remote",
+    "domain": "version control",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "git.conflict.resolve",
+    "domain": "version control",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "git.reflog.undo",
+    "domain": "version control",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "refactor.rename_symbol",
+    "domain": "refactoring",
+    "owner": "python.refactor.rename_symbol",
+    "state": "BOUND"
+   },
+   {
+    "act": "refactor.rename_parameter",
+    "domain": "refactoring",
+    "owner": "python.refactor.rename_parameter",
+    "state": "BOUND"
+   },
+   {
+    "act": "refactor.extract_function",
+    "domain": "refactoring",
+    "owner": "python.refactor.extract_function",
+    "state": "BOUND"
+   },
+   {
+    "act": "refactor.inline_function",
+    "domain": "refactoring",
+    "owner": "python.refactor.inline_function",
+    "state": "BOUND"
+   },
+   {
+    "act": "refactor.move_function",
+    "domain": "refactoring",
+    "owner": "python.refactor.move_function",
+    "state": "BOUND"
+   },
+   {
+    "act": "refactor.change_signature",
+    "domain": "refactoring",
+    "owner": "python.refactor.change_signature",
+    "state": "BOUND"
+   },
+   {
+    "act": "refactor.extract_variable",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "refactor.encapsulate_field",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "refactor.pull_up_method",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "refactor.replace_conditional",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "refactor.convert_to_method",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "refactor.remove_dead_imports",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "refactor.organise_imports",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "refactor.split_module",
+    "domain": "refactoring",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "static.lint",
+    "domain": "static analysis",
+    "owner": "python.source.lint.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.type_check",
+    "domain": "static analysis",
+    "owner": "python.source.types.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.complexity",
+    "domain": "static analysis",
+    "owner": "python.source.complexity.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.dead_code",
+    "domain": "static analysis",
+    "owner": "python.source.dead_code.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.duplication",
+    "domain": "static analysis",
+    "owner": "python.source.duplication.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.symbol_index",
+    "domain": "static analysis",
+    "owner": "python.source.symbol_index",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.symbol_resolve",
+    "domain": "static analysis",
+    "owner": "python.source.symbols.resolve",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.impact_analysis",
+    "domain": "static analysis",
+    "owner": "python.source.change_impact.test_selection",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.audit_ast",
+    "domain": "static analysis",
+    "owner": "python.source.audit",
+    "state": "BOUND"
+   },
+   {
+    "act": "static.dataflow_taint",
+    "domain": "static analysis",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "static.call_graph",
+    "domain": "static analysis",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "static.dependency_graph",
+    "domain": "static analysis",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "static.cross_language_index",
+    "domain": "static analysis",
+    "owner": "code.symbols.multilanguage.indexed",
+    "state": "BOUND"
+   },
+   {
+    "act": "test.coverage",
+    "domain": "testing",
+    "owner": "python.tests.coverage.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "test.slice",
+    "domain": "testing",
+    "owner": "code.test.slice.tree_sitter",
+    "state": "BOUND"
+   },
+   {
+    "act": "test.scaffold",
+    "domain": "testing",
+    "owner": "python.tests.generate.scaffold",
+    "state": "BOUND"
+   },
+   {
+    "act": "test.flake_detect",
+    "domain": "testing",
+    "owner": "python.quality.flaky_tests.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "test.mutation",
+    "domain": "testing",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "test.property_based",
+    "domain": "testing",
+    "owner": "evidence.hypothesis.property_violation",
+    "state": "BOUND"
+   },
+   {
+    "act": "test.differential",
+    "domain": "testing",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "test.golden_snapshot",
+    "domain": "testing",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "test.data_generation",
+    "domain": "testing",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "test.contract_oracle",
+    "domain": "testing",
+    "owner": "python.contract.verdict",
+    "state": "BOUND"
+   },
+   {
+    "act": "dynamic.fuzz",
+    "domain": "dynamic analysis",
+    "owner": "python.dynamic.fuzz",
+    "state": "BOUND"
+   },
+   {
+    "act": "dynamic.crash_repro",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "dynamic.memory_profile",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "dynamic.cpu_profile",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "dynamic.debugger_breakpoint",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "dynamic.race_detect",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "dynamic.deadlock_detect",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "dynamic.syscall_trace",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "dynamic.benchmark",
+    "domain": "dynamic analysis",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "perf.regression_gate",
+    "domain": "performance engineering",
+    "owner": "python.review.diff_perf_gate",
+    "state": "BOUND"
+   },
+   {
+    "act": "perf.complexity_metric",
+    "domain": "performance engineering",
+    "owner": "python.source.complexity.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "perf.big_o_inference",
+    "domain": "performance engineering",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "perf.hotspot_ranking",
+    "domain": "performance engineering",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "perf.allocation_growth",
+    "domain": "performance engineering",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "perf.query_plan",
+    "domain": "performance engineering",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "security.sast",
+    "domain": "security and supply chain",
+    "owner": "python.source.security.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "security.diff_gate",
+    "domain": "security and supply chain",
+    "owner": "python.review.diff_security_gate",
+    "state": "BOUND"
+   },
+   {
+    "act": "security.secret_scan",
+    "domain": "security and supply chain",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "security.vulnerability_audit",
+    "domain": "security and supply chain",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "security.sbom",
+    "domain": "security and supply chain",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "security.signature_verify",
+    "domain": "security and supply chain",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "supplychain.license",
+    "domain": "security and supply chain",
+    "owner": "python.dependencies.licenses.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "supplychain.provenance",
+    "domain": "security and supply chain",
+    "owner": "pypi.provenance.audit_live_artifact",
+    "state": "BOUND"
+   },
+   {
+    "act": "supplychain.pin_lockfile",
+    "domain": "security and supply chain",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "build.package",
+    "domain": "dependencies and build",
+    "owner": "python.project.wheel.built",
+    "state": "BOUND"
+   },
+   {
+    "act": "build.dependency_add",
+    "domain": "dependencies and build",
+    "owner": "python.project.dependency.added",
+    "state": "BOUND"
+   },
+   {
+    "act": "build.install",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "build.upgrade_dependency",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "build.remove_dependency",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "build.version_bump",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "build.reproducible",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "build.monorepo",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "build.cache",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "release.publish",
+    "domain": "dependencies and build",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "data.sqlite_create",
+    "domain": "data and persistence",
+    "owner": "sqlite.table.create_from_json_records",
+    "state": "BOUND"
+   },
+   {
+    "act": "data.sqlite_verify",
+    "domain": "data and persistence",
+    "owner": "sqlite.table.verify_against_json_records",
+    "state": "BOUND"
+   },
+   {
+    "act": "data.json_transform",
+    "domain": "data and persistence",
+    "owner": "json.file.available",
+    "state": "BOUND"
+   },
+   {
+    "act": "data.yaml_transform",
+    "domain": "data and persistence",
+    "owner": "yaml.to_json",
+    "state": "BOUND"
+   },
+   {
+    "act": "data.binary_codec",
+    "domain": "data and persistence",
+    "owner": "structured.binary.encode",
+    "state": "BOUND"
+   },
+   {
+    "act": "data.schema_migration",
+    "domain": "data and persistence",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "data.query_optimise",
+    "domain": "data and persistence",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "data.transaction",
+    "domain": "data and persistence",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "data.integrity_check",
+    "domain": "data and persistence",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "service.http_client",
+    "domain": "services and concurrency",
+    "owner": "http.json.fetch_from_state",
+    "state": "BOUND"
+   },
+   {
+    "act": "service.shell",
+    "domain": "services and concurrency",
+    "owner": "shell.command.result",
+    "state": "BOUND"
+   },
+   {
+    "act": "service.retry_design",
+    "domain": "services and concurrency",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "service.timeout_policy",
+    "domain": "services and concurrency",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "service.circuit_breaker",
+    "domain": "services and concurrency",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "service.async_audit",
+    "domain": "services and concurrency",
+    "owner": "python.source.concurrency.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "service.task_graph",
+    "domain": "services and concurrency",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "service.server_local",
+    "domain": "services and concurrency",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "infra.ci_config",
+    "domain": "infrastructure and delivery",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "infra.container",
+    "domain": "infrastructure and delivery",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "infra.iac",
+    "domain": "infrastructure and delivery",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "infra.deploy",
+    "domain": "infrastructure and delivery",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "infra.secret_management",
+    "domain": "infrastructure and delivery",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "infra.environment_fit",
+    "domain": "infrastructure and delivery",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "obs.logging_instrument",
+    "domain": "observability",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "obs.metrics_instrument",
+    "domain": "observability",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "obs.tracing",
+    "domain": "observability",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "obs.structured_log_analysis",
+    "domain": "observability",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "obs.slo",
+    "domain": "observability",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "docs.docstrings",
+    "domain": "documentation",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "docs.readme",
+    "domain": "documentation",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "docs.api_reference",
+    "domain": "documentation",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "docs.changelog",
+    "domain": "documentation",
+    "owner": "python.repository.changelog.report",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.diff_gate",
+    "domain": "review and delivery flow",
+    "owner": "python.review.diff_coverage_gate",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.mutation_gate",
+    "domain": "review and delivery flow",
+    "owner": "python.review.diff_mutation_gate",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.type_gate",
+    "domain": "review and delivery flow",
+    "owner": "python.review.diff_type_gate",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.static_triage",
+    "domain": "review and delivery flow",
+    "owner": "python.review.diff_static_triage",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.pr_land",
+    "domain": "review and delivery flow",
+    "owner": "python.pr.land.verified",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.pr_realize",
+    "domain": "review and delivery flow",
+    "owner": "python.repo.pr_realize",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.issue_to_pr",
+    "domain": "review and delivery flow",
+    "owner": "python.software.issue_to_pr.orchestration",
+    "state": "BOUND"
+   },
+   {
+    "act": "review.code_review_comment",
+    "domain": "review and delivery flow",
+    "owner": "",
+    "state": "ABSENT"
+   },
+   {
+    "act": "lang.python_parse",
+    "domain": "multi-language",
+    "owner": "python.source.symbol_index",
+    "state": "BOUND"
+   },
+   {
+    "act": "lang.tree_sitter_parse",
+    "domain": "multi-language",
+    "owner": "code.ast.tree_sitter.available",
+    "state": "BOUND"
+   },
+   {
+    "act": "lang.tree_sitter_patch_verify",
+    "domain": "multi-language",
+    "owner": "code.patch.tree_sitter.verified",
+    "state": "BOUND"
+   },
+   {
+    "act": "lang.javascript_refactor",
+    "domain": "multi-language",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "lang.go_analysis",
+    "domain": "multi-language",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "lang.rust_analysis",
+    "domain": "multi-language",
+    "owner": "",
+    "state": "NAMED"
+   },
+   {
+    "act": "lang.c_cpp_compile",
+    "domain": "multi-language",
+    "owner": "",
+    "state": "NAMED"
+   }
+  ],
+  "summary": {
+   "data and persistence": {
+    "ABSENT": 3,
+    "BOUND": 5,
+    "NAMED": 1,
+    "total": 9
+   },
+   "dependencies and build": {
+    "ABSENT": 5,
+    "BOUND": 2,
+    "NAMED": 3,
+    "total": 10
+   },
+   "documentation": {
+    "ABSENT": 3,
+    "BOUND": 1,
+    "NAMED": 0,
+    "total": 4
+   },
+   "dynamic analysis": {
+    "ABSENT": 4,
+    "BOUND": 1,
+    "NAMED": 4,
+    "total": 9
+   },
+   "infrastructure and delivery": {
+    "ABSENT": 2,
+    "BOUND": 0,
+    "NAMED": 4,
+    "total": 6
+   },
+   "multi-language": {
+    "ABSENT": 0,
+    "BOUND": 3,
+    "NAMED": 4,
+    "total": 7
+   },
+   "observability": {
+    "ABSENT": 3,
+    "BOUND": 0,
+    "NAMED": 2,
+    "total": 5
+   },
+   "performance engineering": {
+    "ABSENT": 4,
+    "BOUND": 2,
+    "NAMED": 0,
+    "total": 6
+   },
+   "refactoring": {
+    "ABSENT": 6,
+    "BOUND": 6,
+    "NAMED": 2,
+    "total": 14
+   },
+   "review and delivery flow": {
+    "ABSENT": 1,
+    "BOUND": 7,
+    "NAMED": 0,
+    "total": 8
+   },
+   "security and supply chain": {
+    "ABSENT": 1,
+    "BOUND": 4,
+    "NAMED": 4,
+    "total": 9
+   },
+   "services and concurrency": {
+    "ABSENT": 5,
+    "BOUND": 3,
+    "NAMED": 0,
+    "total": 8
+   },
+   "static analysis": {
+    "ABSENT": 2,
+    "BOUND": 10,
+    "NAMED": 1,
+    "total": 13
+   },
+   "testing": {
+    "ABSENT": 2,
+    "BOUND": 6,
+    "NAMED": 2,
+    "total": 10
+   },
+   "version control": {
+    "ABSENT": 3,
+    "BOUND": 10,
+    "NAMED": 4,
+    "total": 17
+   }
+  }
+ },
+ "schema": "HARDCORE_SE_DOMAIN_COVERAGE_V1"
+}
