@@ -1320,6 +1320,63 @@ def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any]
                        controller=controller, checkpoint=checkpoint)
 
 
+def _capability_ids_in(compiled: Mapping[str, Any]) -> list[str]:
+    """Every capability this plan will call, in order."""
+    ids: list[str] = []
+    selected = str(compiled.get("selected_capability") or "").strip()
+    if selected:
+        ids.append(selected)
+    dag = compiled.get("capability_dag")
+    if isinstance(dag, Mapping):
+        for step in dag.get("steps") or []:
+            if isinstance(step, Mapping):
+                cid = str(step.get("capability_id") or step.get("selected_capability") or "").strip()
+                if cid and cid not in ids:
+                    ids.append(cid)
+    for part in compiled.get("compiled_parts") or []:
+        if isinstance(part, Mapping):
+            cid = str(part.get("capability_id") or part.get("selected_capability") or "").strip()
+            if cid and cid not in ids:
+                ids.append(cid)
+    return ids
+
+
+def _toolchain_refusal(compiled: Mapping[str, Any]) -> tuple[str, str] | None:
+    """(capability_id, reason) when a capability in this plan has no engine here.
+
+    Measured: the same commit answers 32 of 43 acts with its declared toolchain installed and 16
+    without it, and thirteen of the losses were reported as `OWNED_BUT_FAILED` -- the capability
+    blamed for a package nobody installed.  The gate turns each of those into one refusal that
+    names the tool and the command that installs it, and installs it first when this interpreter
+    is one we manage.
+    """
+    try:
+        from canonical.runtime import capability_receipt_lane_v1 as _lane
+        from canonical.runtime import toolchain_gate_v1 as _gate
+    except Exception:  # noqa: BLE001 - no gate module, no claim to make
+        return None
+    try:
+        from pathlib import Path as _Path
+        _root = _Path(__file__).resolve().parents[2]
+    except Exception:  # noqa: BLE001
+        _root = None
+    for capability_id in _capability_ids_in(compiled):
+        try:
+            entry = load_verified_registry().get(capability_id)
+        except Exception:  # noqa: BLE001 - an unreadable registry claims nothing
+            entry = None
+        if not entry:
+            continue
+        try:
+            module_path = _lane._bound_module_path(str(_root), entry)
+            ok, missing, _installed, _detail = _gate.check(capability_id, module_path)
+        except Exception:  # noqa: BLE001 - a gate that cannot read the adapter must not decide
+            continue
+        if not ok and missing:
+            return capability_id, _gate.refuse_reason(missing)
+    return None
+
+
 def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: Mapping[str, Mapping[str, Any]], started: int) -> dict[str, Any]:
     """Execute a compiled plan with the same controller calls ``run_raw_goal`` makes."""
     controller_actions = compiled.get("controller_actions")
@@ -2527,6 +2584,15 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     promised_roots = _promised_source_roots(normalized)
     roots_before = {root: {rel: _source_digest(rel) for rel in _py_files_under(root)}
                     for root in promised_roots}
+    # THE DOOR CHECKS THE ENGINE BEFORE IT PROMISES THE WORK.  A capability is the adapter plus
+    # the software it calls; without this, a clean box answers 16 of 43 acts instead of 32, and
+    # the 13 it loses are reported as broken capabilities rather than as absent packages.
+    _missing_engine = _toolchain_refusal(compiled)
+    if _missing_engine is not None:
+        return _fail(task_id, "FAIL_CLOSED__TOOLCHAIN_MISSING",
+                     _missing_engine[1], started,
+                     reason=_missing_engine[1],
+                     compiled_capability_id=_missing_engine[0])
     try:
         result = _execute(task_id, goal, compiled, admissible, started)
     except SystemExit as exc:

@@ -1,8 +1,8 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `f67b65a` + this unit**
+**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `32575a2` + this unit (`fc229a1`)**
 
-_Supersedes `…GAP_MAP_20261028_V19.md`.
+_Supersedes `…GAP_MAP_20261028_V20.md`.
 
 This is the complete answer to *"what are all the problems?"*, restricted to what the owner asked for:
 the machine must be the most advanced, fastest software engineer — repair, refactor, analysis,
@@ -20,7 +20,7 @@ document rests on an earlier reading.
 |---|---|---|---|
 | ~~**P1**~~ | ~~**The door credits acts nothing owns.**~~ **CLOSED this unit (§3)** — both acts now have real owners built on the tools that already are the answer (`detect-secrets`, `pip-audit`), and the probe's ownership oracle reads claims instead of keywords. | was 2 acts miscredited | the scoreboard is now honest |
 | **P2** | **Capability claims that name nothing a reader can check.** 34 of 158 evidence blocks point at no file; 8 point at files nobody wrote. | 42 / 158 entries | anyone deciding whether to trust a capability |
-| **P3** | **Capability is a function of the shell, not of the machine.** `ruff`, `mypy`, `bandit`, `coverage`, `pytest`, `crosshair`, `z3`, `tree_sitter` are importable from `.venv` and from **none** of the system interpreters. Nothing installs-or-refuses, so 8 analyser families vanish silently on a clean box. | 45 of 158 shell out to a tool | every deployment that is not this sandbox |
+| ~~**P3**~~ | ~~**Capability is a function of the shell, not of the machine.**~~ **CLOSED this unit (§5)** — the door now checks the engine before it promises the work, installs the pinned tool when the interpreter is one we manage, and otherwise refuses by name; 13 acts that failed as *broken capabilities* on a clean box are now honest refusals. | was 13 + 3 lost acts | every deployment that is not this sandbox |
 | **P4** | **Ten acts nothing in the machine owns**: merge-conflict resolution, interactive debugging, crash reproduction, memory profiling, differential testing, schema migration, CI config, retry design, observability instrumentation, docstrings. | 10 of 43 probed acts | day-to-day senior engineering |
 | **P5** | **Acts the machine owns but cannot be asked for.** `git bisect` needs a predicate no sentence states; two of six refactors are `NOT_REACHABLE` and four `ROUTE_ELSEWHERE` from a synthesised sentence. | 11 unreachable + 9 misrouted of 452 | the door, not the verbs |
 | **P6** | **Whole domains sit at zero**: infrastructure/delivery 0/6, observability 0/5, dynamic analysis 1/9, performance engineering 2/6, services & concurrency 3/8, dependencies & build 2/10, documentation 1/4. | 44 absent acts of 135 | "build software end to end" |
@@ -29,11 +29,18 @@ document rests on an earlier reading.
 | **P9** | **The office/visual family is 22 of 158 entries (14%)** — deprioritized by the owner, kept because it is already verified. | 22 | nothing, if left alone |
 | **P10** | **Missing instruments in the flesh**: no `docker`/`podman`/`kubectl`/`terraform`, no `gdb`/`lldb`, no `strace`/`perf`/`valgrind`/`py-spy`, no `hypothesis`/`libcst`/`rope`, no `psutil`, no `sqlalchemy`/`alembic`. | measured below | any verb built on them would be a lie today |
 
-**P1 was the most critical problem and it is closed in this unit**, because it was not a missing
-capability — it was a *lie in the accounting*, and every other number in this document is only as
-good as the instrument behind it. The fix was not to write a scanner: both answers already existed
-as tools, exactly as the owner said. The remaining critical problem is **P3**, because a capability
-that depends on a package nobody declared is a capability that disappears on another machine.
+**P1 and P3 are closed.** P1 first, because it was not a missing capability but a *lie in the
+accounting*, and every other number in this document is only as good as the instrument behind it —
+and the fix was not to write a scanner, since both answers already existed as tools, exactly as the
+owner said. P3 second, because it was the larger version of the same lie: thirteen working
+capabilities reported as broken because a package had never been installed. Both were *reporting*
+defects, and both are now measured to be gone.
+
+The most critical remaining problem is **P4 — the ten acts nothing owns** (crash reproduction,
+differential testing, memory and CPU profiling, schema migration, merge-conflict resolution,
+CI config, retry design, observability, interactive debugging, docstrings). It is the only front
+where the machine lacks ability rather than honesty, and the first four of those are cheap because
+the runner, the shrinker and the profilers are already in the repository (§13, rows 2–3).
 
 ---
 
@@ -193,7 +200,23 @@ can open.**
 
 ---
 
-## 5. P3 — capability is a function of the shell
+## 5. P3 — CLOSED: capability is a function of the shell
+
+### 5.1 The measurement that opened it
+
+The same commit, the same 43-act probe, two interpreters:
+
+```
+.venv interpreter            32 answered / 11 honest refusal /  0 owned-but-failed / 0 silent
+/usr/bin/python3 (bare)      16 answered / 11 honest refusal / 13 owned-but-failed / 3 silent
+```
+
+The thirteen were `lint`, `format`, `type_check`, `coverage_measure`, `dead_code`,
+`complexity_metric`, `async_audit`, `exception_audit`, `secret_scan`, `vulnerability_audit`,
+`inline_function`, plus `flake_detect`, `move_function` and `change_signature` as silent refusals.
+Every one of them reported itself as `TOOL_NOT_INSTALLED:<name>` inside a `*Error`, which the
+scoreboard reads as *this capability is broken*. It was not: the adapter was fine and the package
+was absent, which is an environment fact a door can act on and a capability cannot.
 
 ```
 this sandbox, .venv interpreter:   ruff ✓ mypy ✓ bandit ✓ coverage ✓ pytest ✓ crosshair ✓ z3 ✓ tree_sitter ✓
@@ -203,13 +226,53 @@ absent binaries:                   docker podman kubectl terraform gdb lldb stra
 present binaries:                  git gcc make node npm jq perl openssl gzip tar
 ```
 
-Measured over the registry and the adapters behind it: **46 of 158 capabilities shell out** — 45 to
-a `-m` tool (`ruff`, `mypy`, `bandit`, `coverage`, `pytest`, `crosshair`) and 23 to `git` (some do
-both). On any interpreter but this one the tool-backed ones fail — and they fail as
-`OWNED_BUT_FAILED`, which the scoreboard reads as a capability defect when it is an environment
-fact. `git` is the exception that proves the rule: it is a real binary, present everywhere, which is
-why the 12 VCS verbs are the only family that is environment-independent. The fix is one law at the door: **install-or-refuse** — if a capability declares a tool, the
-door either satisfies it or refuses the request naming the tool, before anything is promised.
+### 5.2 The law, and where it is enforced
+
+`canonical/runtime/toolchain_gate_v1.py` — a capability is the adapter **plus** the software it
+calls, and the door checks the second half before it promises the first:
+
+1. **the tool is there** → run.
+2. **the tool is absent and this interpreter is one we manage** (a venv, writable, not a system or
+   externally-managed interpreter, `BRAIN_TOOLCHAIN_INSTALL != 0`) → install the **pinned**
+   distribution from `TOOLCHAIN_DECLARATION_V1.json`, then run. Autonomy where it is safe: a venv
+   does not need a human to `pip install`.
+3. **otherwise** → refuse with `FAIL_CLOSED__TOOLCHAIN_MISSING` and a sentence a reader can act on:
+   `TOOLCHAIN_MISSING:ruff (declared: ruff==0.17.3); install with: python3
+   execution_guard/toolchain_preflight_v1.py --bootstrap`.
+
+It is enforced once, at the one door every request passes: `live_brain_route_admission_v1`
+computes the plan's capabilities (`selected_capability`, DAG steps, compiled parts) and calls the
+gate before `_execute`. A refused plan never reaches the controller, so it can no longer come back
+as `FAIL__LIVE_CONTROLLER_EXECUTION` — the controller was blamed for an empty shell.
+
+### 5.3 Two mistakes the gate itself made, and how they were caught
+
+Both are the *opposite* error — refusing work the machine can do — and both were caught by
+re-running the bare probe and watching the answered count fall:
+
+- **A quoted word is not a dependency.** The first version scanned adapter source for known binary
+  names and read `"perf"` out of a display-name dict and `"sqlite3"` out of a connection-key dict in
+  `quality_v1.py`. Detection now accepts only three shapes that provably invoke something:
+  `["-m", X]`, `_resolve_tool("X")`, `shutil.which("X")`.
+- **A shared adapter's union is not a capability's need.** `toolchain_v1.py` runs ruff, mypy,
+  bandit, coverage and crosshair, so every verb behind it inherited all five and `ruff_format`
+  demanded mypy — measured: the bare run fell 16 → 13 answered. The declaration now states tools
+  **per capability** (`capability_tools`, 34 rows), and an **empty row is a claim** ("calls no
+  external tool"), not an absence of one; five `quality_v1` verbs that read the AST, the git
+  history or installed metadata are empty rows.
+
+### 5.4 What it measures now
+
+```
+after the gate, bare interpreter   18 answered / 25 honest refusal / 0 owned-but-failed / 0 silent
+after the gate, .venv              32 answered / 11 honest refusal / 0 owned-but-failed / 0 silent
+```
+
+The 25 refusals are **exactly** the 14 acts the installed toolchain supplies plus the 11 goal-level
+refusals that were already honest — checked set-for-set, so the gate refuses nothing that works and
+misses nothing that would fail. Nothing turned green: on a box with no analysers the machine still
+says it cannot lint, which is true, and it now also says which package would make it able to.
+`canonical/tests/test_toolchain_gate_v1.py` holds 18 pins for both directions.
 
 ---
 
@@ -318,10 +381,13 @@ not a fog.
 | dependency add, wheel build | `python.packaging.{dependency_add,build_package}.v1` | answered, evidenced, 10/10 pins |
 | inline function | `python.refactor.inline_function.v1` | answered, evidenced, 11/11 pins |
 | fuzz (generate → isolate → shrink → reproduce) | `python.dynamic.fuzz.v1` | answered, evidenced, 11/11 pins |
+| install-or-refuse at the door | `python.toolchain.gate.v1` (all 34 tool-backed verbs) | 13 owned-but-failed → 0 on a bare box, 3 silent → 0, nothing falsely refused, 18/18 pins |
 
 Those four verbs took the 43-act score from 28 answered to 32, and each was measured by the same
 instruments this document uses — including the three laws each one gained *because* the measurement
-caught its own bug.
+caught its own bug. The gate did not add an answered act to that list: it removed four
+misclassifications (13 owned-but-failed and 3 silent refusals) and gave back the two that the gate
+itself had briefly taken away.
 
 ---
 
@@ -334,16 +400,16 @@ Reuse first, and nothing here needs an absent instrument.
 | ~~1~~ | ~~real `secret_scan`~~ | P1 | **DONE this unit** — detect-secrets, declared and bootstrapped, 3 findings on a planted fixture | — |
 | ~~2~~ | ~~real `vulnerability_audit`~~ | P1 | **DONE this unit** — pip-audit, 22 advisories on a pinned urllib3 | — |
 | ~~3~~ | ~~structural ownership oracle~~ | P1 root | **DONE this unit** — claims, not keywords; bandit's false keywords removed | — |
-| 1 | **install-or-refuse at the door** | P3 (45 tool-backed capabilities) | the toolchain is already declared; nothing enforces it | ~1 unit |
-| 2 | **`crash_repro` + `differential_test`** | P4 (2 acts), P6 | the runner, the shrinker and the reproducer exist inside `fuzz` | ~1 unit for both |
-| 3 | **`memory_profile` + `cpu_profile` + `benchmark`** | P6 (3 acts) | `tracemalloc`, `cProfile`, `timeit` — stdlib, one module | ~1 unit |
-| 4 | **routability law** (one row → one rule) | P5 (20 rows, 2 tests) | derived from `provides` instead of hand-written keywords | ~1–2 units |
-| 5 | **`schema_migration` + data integrity** | P4, P6 | `sqlite3` is present; the migration is a transaction plus a verification law | ~1 unit |
-| 6 | **`merge_conflict`** | P4 | `git merge` exists; conflict markers are text; the resolution gate is a test run | ~1 unit |
-| 7 | **4 compiler defect families** | P7 (25 rows) | each is one law, not 25 patches | ~2 units |
-| 8 | **34 pointerless evidence blocks** | P2 | each needs the lane that measured it to write one line | ~1 unit, mechanical |
-| 9 | **`ci_config` + observability instrumentation** | P4, P6 | template emission with a verification law | ~1 unit each |
-| 10 | **`docstrings`** | P4 | last on purpose: the only act here that needs judgement, and no model may supply it | — |
+| ~~1~~ | ~~**install-or-refuse at the door**~~ | P3 (13 lost acts + 3 silent) | **DONE this unit** — `toolchain_gate_v1` + 34 per-capability rows; bare box 16→18 answered, 13 owned-but-failed → 0, nothing falsely refused | — |
+| **1** | **`crash_repro` + `differential_test`** | P4 (2 acts), P6 | the runner, the shrinker and the reproducer exist inside `fuzz` | ~1 unit for both |
+| 2 | **`memory_profile` + `cpu_profile` + `benchmark`** | P6 (3 acts) | `tracemalloc`, `cProfile`, `timeit` — stdlib, one module | ~1 unit |
+| 3 | **routability law** (one row → one rule) | P5 (20 rows, 2 tests) | derived from `provides` instead of hand-written keywords | ~1–2 units |
+| 4 | **`schema_migration` + data integrity** | P4, P6 | `sqlite3` is present; the migration is a transaction plus a verification law | ~1 unit |
+| 5 | **`merge_conflict`** | P4 | `git merge` exists; conflict markers are text; the resolution gate is a test run | ~1 unit |
+| 6 | **4 compiler defect families** | P7 (25 rows) | each is one law, not 25 patches | ~2 units |
+| 7 | **34 pointerless evidence blocks** | P2 | each needs the lane that measured it to write one line | ~1 unit, mechanical |
+| 8 | **`ci_config` + observability instrumentation** | P4, P6 | template emission with a verification law | ~1 unit each |
+| 9 | **`docstrings`** | P4 | last on purpose: the only act here that needs judgement, and no model may supply it | — |
 
 Rules that do not change: **reuse before synthesis**, **measure, never assert**, a red row is not an
 authority, and no AI model participates in Brain-credited producer cognition.
@@ -354,6 +420,8 @@ authority, and no AI model participates in Brain-credited producer cognition.
 
 ```
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_missing_verb_probe_v1.py --json /tmp/a.json
+env -i HOME=/root PATH=/usr/bin:/bin PYTHONPATH=. /usr/bin/python3 \
+    execution_guard/hardcore_se_missing_verb_probe_v1.py --json /tmp/bare.json
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_domain_coverage_v1.py
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py --audit-pointers
 PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_goal_front_compiler_v1.py \

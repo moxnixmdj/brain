@@ -1,5 +1,101 @@
 {
  "bootstrap": "python3 execution_guard/toolchain_preflight_v1.py --bootstrap",
+ "capability_tools": {
+  "python.contract.check.crosshair.v1": [
+   "crosshair"
+  ],
+  "python.packaging.build_package.v1": [
+   "pip"
+  ],
+  "python.packaging.dependency_add.v1": [
+   "pip"
+  ],
+  "python.quality.api_compatibility.v1": [],
+  "python.quality.changelog.v1": [],
+  "python.quality.coverage.v1": [
+   "coverage",
+   "pytest"
+  ],
+  "python.quality.duplication.v1": [],
+  "python.quality.flake_detect.v1": [
+   "pytest"
+  ],
+  "python.quality.license_scan.v1": [],
+  "python.quality.resource_leak.v1": [],
+  "python.refactor.change_signature.v1": [
+   "pytest"
+  ],
+  "python.refactor.extract_function.v1": [
+   "pytest"
+  ],
+  "python.refactor.inline_function.v1": [
+   "pytest"
+  ],
+  "python.refactor.move_function.v1": [
+   "pytest"
+  ],
+  "python.refactor.rename_parameter.v1": [
+   "pytest"
+  ],
+  "python.refactor.rename_symbol.v1": [
+   "pytest"
+  ],
+  "python.repo.diff_apply_full_testgate.v1": [
+   "pytest"
+  ],
+  "python.review.diff_coverage_gate.v1": [
+   "coverage",
+   "pytest"
+  ],
+  "python.review.diff_mutation_gate.v1": [
+   "pytest"
+  ],
+  "python.review.diff_security_gate.v1": [
+   "bandit"
+  ],
+  "python.review.diff_static_triage.v1": [
+   "ruff"
+  ],
+  "python.review.diff_type_gate.v1": [
+   "mypy"
+  ],
+  "python.software.issue_to_pr.orchestrate.v1": [
+   "pytest"
+  ],
+  "python.supply_chain.secret_scan.v1": [
+   "detect_secrets"
+  ],
+  "python.supply_chain.vulnerability_audit.v1": [
+   "pip_audit"
+  ],
+  "python.tests.generate.scaffold.v1": [
+   "pytest"
+  ],
+  "python.toolchain.bandit_security.v1": [
+   "bandit"
+  ],
+  "python.toolchain.mypy_typecheck.v1": [
+   "mypy"
+  ],
+  "python.toolchain.ruff_async_audit.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_complexity.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_dead_code.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_exception_audit.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_format.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_lint.v1": [
+   "ruff"
+  ]
+ },
  "check": "python3 execution_guard/toolchain_preflight_v1.py",
  "declared_at": "2026-10-28",
  "distribution": {
@@ -135,5 +231,13 @@
   "Every entry below was attributed BY MEASUREMENT, not by reading the source: the module was",
   "blocked with an import hook and the 22-task probe re-run, so `blocks` lists exactly the tasks",
   "that fail when that module is absent (execution_guard/toolchain_preflight_v1.py --attribute)."
+ ],
+ "why_capability_tools": [
+  "A shared adapter serves several verbs (toolchain_v1 runs ruff, mypy, bandit, coverage and",
+  "crosshair), so reading the TOOLS out of the source attributes the UNION to every verb that",
+  "uses it -- which would make ruff_format demand mypy.  This map is per capability and each row",
+  "was measured: the verb failed on a bare interpreter with TOOL_NOT_INSTALLED naming that tool,",
+  "or with a suite that could not run because pytest was absent.",
+  "An empty row is a claim as well: it says this capability invokes no external tool, and it must be stated, because the fallback (read the tools out of the adapter) attributes the union of a shared adapter to every verb that uses it."
  ]
 }
