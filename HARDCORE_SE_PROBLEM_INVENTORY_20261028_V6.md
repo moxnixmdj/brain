@@ -197,6 +197,56 @@ the failure it is supposed to detect.
 
 ---
 
+## Where the solutions actually are (searched, not assumed)
+
+The instruction was: *the answer already exists in the brain, in a hidden tool, or in a paper.*
+Searched, and here is what is there:
+
+| searched | found |
+|---|---|
+| extended registry (419 ids) for `git/vcs/blame/stash/rebase/bisect/coverage/complexity/dead/fuzz/differential/flake/invariant/lint/format/type/sbom/license/migration/changelog/retry/observab/inline/split/docstring/compat/container` | **34 id matches, zero usable**: every one is a self-referential project verifier (`composition_cross_step_no_bypass_audit_v1`, `escape_progress_shared_gap_audit_v2`, …), not a software-engineering tool |
+| `grep "git status"` / `"git diff"` / `"git commit"` | 4 files each — all *this project's own* guards |
+| `grep "git blame"`, `"git stash"`, `"git bisect"`, `"git rebase"` | **0 files** |
+| the one git helper in the runtime | `_git_head()` in `live_brain_route_admission_v1.py` — it reads `HEAD` for change detection |
+| `auto_*_acquisition.py` (the brain's own capability-acquisition pipeline) | real, but it acquires through apt/pypi probes over the network and infers a text→file contract; not usable to bind a tool that is *already installed* |
+
+**Conclusion, measured:** the brain does not contain the 38 missing verbs, and nothing hidden in the
+repository implements them. What exists is the *tooling* — `git 2.39.5` is installed, and
+`ruff / vulture / radon / coverage / bandit / hypothesis` are one `pip install` away — plus one
+design from the literature that fits the honesty defect exactly: **the verb's frame is filled by its
+arguments**, so a capability must declare the *acts* (verb + object) it performs, and a request is
+admitted only when both are declared.
+
+So the fastest right path is not to write algorithms. It is:
+
+1. **Bind `git` as eleven declared capabilities** (`vcs.git.status/log/diff/commit/branch/checkout/
+   revert/bisect/blame/stash/rebase`) through one thin adapter that runs a fixed argv shape, writes
+   an artifact, and refuses anything outside that shape. `git` is deterministic, zero-cost, already
+   present, and it is #1 on the leverage list — everything else in software engineering assumes it.
+2. **Bind the already-installed analysers** (`ruff`, `vulture`, `radon`, `coverage`, `bandit`) the
+   same way, which closes lint/format, dead code, complexity, coverage-of-a-tree, and vulnerability
+   audit with code that already exists on the internet.
+3. Each new entry carries the `acts` declaration, so families 3, 6 and 7 close by construction as the
+   capabilities arrive rather than in a second migration.
+
+---
+
+## Speed (the door's own cost, measured)
+
+`observe_world` — the third authority, run before *and* after every solve — walked each observation
+root **twice** (once purely to count files, to decide whether to walk it again). Replaced with one
+`os.scandir` pass that aborts as soon as a tree is over the cap:
+
+| | before | after |
+|---|---|---|
+| `observe_world`, per call | 0.120 s | **0.021 s** |
+| door, warm, AST-audit sentence | 0.362 s | **0.299 s** (−17%) |
+| 22-task SE suite (dominated by real adapter work) | 5.98 s | **5.83 s** (−2.5%) |
+
+Unchanged by it: 22/22 bind–select–pass, 18/23/2 absent-act verdicts, 16/16 typed adapter failures.
+
+---
+
 ## Reproduce every number
 
 ```bash
