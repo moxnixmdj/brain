@@ -99,7 +99,12 @@ _COMPARE_SWAPS={
     ast.In:ast.NotIn, ast.NotIn:ast.In,
 }
 _BINOP_SWAPS={
-    ast.Add:[ast.Sub],
+    # Add->Mult is load-bearing: the canonical injected-operator defect class
+    # is "+ where * belongs" (unit_price(q) * k written as q + k). Without the
+    # Add->Mult swap the bounded search never contains the repair, whatever
+    # the budget (measured: L3 interprocedural tier 0% before, ladder receipt
+    # REPAIR_DEPTH_LADDER_20261029). Pool growth is +1 candidate per Add site.
+    ast.Add:[ast.Sub, ast.Mult],
     ast.Sub:[ast.Add],
     ast.Mult:[ast.FloorDiv,ast.Div],
     ast.FloorDiv:[ast.Mult,ast.Div],
