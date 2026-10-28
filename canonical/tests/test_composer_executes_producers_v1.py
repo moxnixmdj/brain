@@ -47,7 +47,8 @@ def test_no_inputs_is_never_verified(name, scratch):
     out = (scratch / "c.json").as_posix()
     result = mod.run({"output_path": out}, ROOT)
     assert result["verified"] is False and result["output_verified"] is False
-    assert result["reason"].startswith("COMPOSER_INPUT_UNBOUND:"), result["reason"]
+    # directly, or through a nested composer that refused for the same reason
+    assert "COMPOSER_INPUT_UNBOUND:" in result["reason"], result["reason"]
     artifact = json.loads((ROOT / out).read_text())
     assert artifact["verified"] is False
     assert "found" not in artifact  # the old metadata ledger is gone
@@ -61,11 +62,16 @@ def test_every_composer_lists_only_registered_producers_and_its_registry_entry()
         assert mod.PRODUCERS, name
         assert all(p in reg for p in mod.PRODUCERS), (name, mod.PRODUCERS)
         assert reg[mod.CAPABILITY_ID]["adapter_module"] == name
-        declared = set(ce.declared_inputs(ROOT, mod.PRODUCERS))
+        # Composers are internal composition nodes: their registry templates
+        # carry no producer-input placeholders, so the plain-goal ranker does
+        # not let their broad vocabulary steal a sentence (measured 2026-10-28:
+        # with placeholders, test.slice.never_miss.v1 tied a translation goal
+        # through world binding).  Inputs reach them from explicit callers.
         template_inputs = {
             v[8:-1] for v in reg[mod.CAPABILITY_ID]["action_template"]["args"].values()
             if isinstance(v, str) and v.startswith("${input.")} - {"output_path"}
-        assert declared <= template_inputs, (name, declared - template_inputs)
+        assert template_inputs == set(), (name, template_inputs)
+        assert ce.declared_inputs(ROOT, mod.PRODUCERS), name  # and they do need real inputs
 
 
 def test_real_inputs_run_the_producer_and_verify(scratch):

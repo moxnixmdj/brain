@@ -24,6 +24,13 @@ Rules enforced here, all fail-closed:
 * a composer reached again while it is still running is a cycle, refused;
 * ``verified`` is the conjunction over a non-empty step ledger.
 
+Composer registry templates deliberately carry no producer-input placeholders:
+the plain-goal ranker treats a prerequisite-bearing, placeholder-free entry as
+an internal composition node and leaves it out, which keeps a composer's broad
+vocabulary from stealing an unrelated sentence.  Inputs reach a composer from
+explicit callers (typed plans, other composers, direct invocation); through
+the front door it refuses with COMPOSER_INPUT_UNBOUND instead of lying.
+
 Nothing here knows what any producer does.  It only insists that it did it.
 """
 from __future__ import annotations
@@ -125,6 +132,9 @@ def _bind(producer: str, template: Mapping[str, Any], inputs: Mapping[str, Any],
             bound[key] = inputs[name]
         else:
             unbound.append(name)
+    # Every step writes under the composer's own artifact directory, whether or
+    # not its template names an output slot (nested composers do not).
+    bound.setdefault("output_path", step_output_rel)
     return bound, unbound
 
 
@@ -199,10 +209,11 @@ def compose(*, capability_id: str, schema: str, adapter: str, producers: list[st
                     steps.append(row)
                     break
                 ok, why = _expectation_holds(template.get("expect"), result)
-                if not ok:
+                if result.get("verified") is False:
+                    # the producer's own reason beats a bare expectation miss
+                    row["status"] = "PRODUCER_NOT_VERIFIED:" + str(result.get("reason") or result.get("status") or why or "")[:200]
+                elif not ok:
                     row["status"] = why
-                elif result.get("verified") is False:
-                    row["status"] = "PRODUCER_NOT_VERIFIED:" + str(result.get("reason") or result.get("status") or "")[:200]
                 else:
                     row["status"] = "VERIFIED"
                     row["verified"] = True
