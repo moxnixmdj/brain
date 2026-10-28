@@ -1395,7 +1395,43 @@ def _bm25_rerank(goal,ranked):
     # BM25 first; the pinned overlap score breaks BM25 ties, then specificity,
     # then identity for determinism.
     out.sort(key=lambda x:(-x[0],-x[1],-x[2],x[3]))
-    return [x[4] for x in out]
+    ordered=[x[4] for x in out]
+    # A capability that binds VACUOUSLY -- it declares no ``${input.}``
+    # placeholder at all, so it attaches to any sentence for free -- is demoted
+    # below every candidate the pinned scorer rated strictly higher.
+    #
+    # This is the same distinction _compile_single_goal already draws when it
+    # decides whether a substitution is a substitution ("a vacuous bind: it
+    # attaches to any sentence for free, e.g. msgpack/kstar catch-alls"); it was
+    # only ever applied to the REFUSAL, never to the ORDER, and the order is
+    # what selects: _compile_single_goal takes ranked[0].  Measured on
+    # 29b3107, "Localize the fault in the python source root D using the tests"
+    # ranked terminal.kstar.root.assess.stdlib FIRST at pinned score 15, above
+    # the capability that owns the sentence at 28 -- the exact inversion this
+    # function's own docstring says BM25 exists to prevent -- because BM25's
+    # inverse document frequency is measured over the surviving shortlist,
+    # where a token most capabilities carry but few survivors carry looks rare.
+    # Rather than re-weight the whole corpus and move goals that already select
+    # correctly, the ordering is made to respect the fact the pinned scorer
+    # already established: a binder that consumed nothing from the sentence
+    # does not outrank one that consumed it and scored higher.
+    def _vacuous(item):
+        args=((item[3].get("action_template") or {}).get("args") or {})
+        return not any(
+            isinstance(v,str) and v.startswith("${input.") for v in args.values()
+        )
+    grounded=[it[0] for it in ordered if not _vacuous(it)]
+    if not grounded:
+        return ordered
+    best_grounded=max(grounded)
+    head=[]
+    tail=[]
+    for it in ordered:
+        if _vacuous(it) and it[0]<best_grounded:
+            tail.append(it)
+        else:
+            head.append(it)
+    return head+tail
 
 
 def _effect_providers(registry):
