@@ -4,15 +4,15 @@
  "adapter_module": "software_diagnose_then_repair_v1",
  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure (area(3, 4) == 12; two-example cases add area(2, 5) == 10), proj/tests/test_other.py is the rest of the suite; 2-cpu host, confinement on",
  "e2e_ms_golden": [
-  2096.7,
-  2090.6
+  2337.0,
+  2309.4
  ],
  "observed": {
   "golden": {
    "bug": "return w * h - 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2096.7,
-   "search_s": 1.344,
+   "e2e_ms": 2337.0,
+   "search_s": 1.504,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -45,6 +45,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 28,
       "grid_inputs": 109,
       "index": 1,
       "inexact_on_tests": 0,
@@ -55,6 +56,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 4,
       "inexact_on_tests": 0,
@@ -65,6 +67,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 33,
       "grid_inputs": 109,
       "index": 6,
       "inexact_on_tests": 0,
@@ -75,6 +78,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 5,
       "inexact_on_tests": 1,
@@ -82,7 +86,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.557,
+    "seconds": 0.621,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -93,7 +97,7 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.37
     },
     {
      "step": "localize",
@@ -101,11 +105,11 @@
     },
     {
      "step": "patch_search",
-     "seconds": 1.344
+     "seconds": 1.504
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.304
+     "seconds": 0.34
     }
    ],
    "gate": "PASS",
@@ -118,8 +122,8 @@
   "wrong_operator": {
    "bug": "return w + h",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1553.5,
-   "search_s": 0.799,
+   "e2e_ms": 1616.7,
+   "search_s": 0.813,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -152,19 +156,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.335
+     "seconds": 0.32
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.128
     },
     {
      "step": "patch_search",
-     "seconds": 0.799
+     "seconds": 0.813
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.302
+     "seconds": 0.352
     }
    ],
    "gate": "PASS",
@@ -176,8 +180,8 @@
   "missing_term": {
    "bug": "return w",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1590.2,
-   "search_s": 0.79,
+   "e2e_ms": 1621.1,
+   "search_s": 0.85,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -210,19 +214,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.319
+     "seconds": 0.327
     },
     {
      "step": "localize",
-     "seconds": 0.121
+     "seconds": 0.13
     },
     {
      "step": "patch_search",
-     "seconds": 0.79
+     "seconds": 0.85
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.357
+     "seconds": 0.31
     }
    ],
    "gate": "PASS",
@@ -234,8 +238,8 @@
   "missing_guard": {
    "bug": "return w * h  (+ area(None, 4) == 0)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2184.6,
-   "search_s": 1.373,
+   "e2e_ms": 2165.5,
+   "search_s": 1.357,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -276,9 +280,9 @@
        "status": "NONE"
       }
      ],
-     "seconds": 0.18
+     "seconds": 0.177
     },
-    "seconds": 0.016,
+    "seconds": 0.021,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -294,6 +298,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 10,
+      "edit_size": 21,
       "grid_inputs": 118,
       "index": 11,
       "inexact_on_tests": 0,
@@ -304,6 +309,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 10,
+      "edit_size": 17,
       "grid_inputs": 118,
       "index": 18,
       "inexact_on_tests": 0,
@@ -323,19 +329,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.333
     },
     {
      "step": "localize",
-     "seconds": 0.152
+     "seconds": 0.139
     },
     {
      "step": "patch_search",
-     "seconds": 1.373
+     "seconds": 1.357
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.327
+     "seconds": 0.331
     }
    ],
    "gate": "PASS",
@@ -347,8 +353,8 @@
   "two_edits_and_overfit": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3729.4,
-   "search_s": 2.955,
+   "e2e_ms": 3712.8,
+   "search_s": 2.937,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -394,7 +400,7 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 2.109
+    "seconds": 2.107
    },
    "synthesis": {
     "examples": 1,
@@ -414,6 +420,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
+      "edit_size": 28,
       "grid_inputs": 109,
       "index": 103,
       "inexact_on_tests": 0,
@@ -424,6 +431,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 104,
       "inexact_on_tests": 0,
@@ -434,6 +442,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
+      "edit_size": 33,
       "grid_inputs": 109,
       "index": 106,
       "inexact_on_tests": 0,
@@ -444,6 +453,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 25,
       "inexact_on_tests": 0,
@@ -454,6 +464,7 @@
       "behaviour_class": 2,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 105,
       "inexact_on_tests": 1,
@@ -461,7 +472,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.716,
+    "seconds": 0.699,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -472,19 +483,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.334
+     "seconds": 0.337
     },
     {
      "step": "localize",
-     "seconds": 0.119
+     "seconds": 0.123
     },
     {
      "step": "patch_search",
-     "seconds": 2.955
+     "seconds": 2.937
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.317
+     "seconds": 0.31
     }
    ],
    "gate": "PASS",
@@ -497,8 +508,8 @@
   "two_edits_and_overfit__judge_pytest": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 22558.9,
-   "search_s": 21.792,
+   "e2e_ms": 22710.3,
+   "search_s": 21.932,
    "judge": {
     "in_process": false,
     "reason": "JUDGE_PYTEST_REQUESTED"
@@ -544,7 +555,7 @@
     ],
     "pair_count": 176,
     "reason": "ONLY_SUSPICIOUS_GREENS:[25]",
-    "seconds": 12.438
+    "seconds": 12.4
    },
    "synthesis": {
     "status": "NOT_ATTEMPTED"
@@ -561,6 +572,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
+      "edit_size": 28,
       "grid_inputs": 109,
       "index": 104,
       "inexact_on_tests": 0,
@@ -571,6 +583,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 105,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 132,
       "inexact_on_tests": 0,
@@ -581,6 +594,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 106,
+      "edit_size": 25,
       "grid_inputs": 109,
       "index": 112,
       "inexact_on_tests": 0,
@@ -591,6 +605,7 @@
       "behaviour_class": 2,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 25,
       "inexact_on_tests": 0,
@@ -601,6 +616,7 @@
       "behaviour_class": 3,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 146,
       "inexact_on_tests": 0,
@@ -608,7 +624,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.711,
+    "seconds": 0.701,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -619,19 +635,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.327
+     "seconds": 0.329
     },
     {
      "step": "localize",
-     "seconds": 0.119
+     "seconds": 0.121
     },
     {
      "step": "patch_search",
-     "seconds": 21.792
+     "seconds": 21.932
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.317
+     "seconds": 0.323
     }
    ],
    "gate": "PASS",
@@ -644,8 +660,8 @@
   "only_overfit": {
    "bug": "return 0",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-   "e2e_ms": 1304.1,
-   "search_s": 0.84,
+   "e2e_ms": 1290.2,
+   "search_s": 0.832,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -707,15 +723,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.341
+     "seconds": 0.336
     },
     {
      "step": "localize",
-     "seconds": 0.12
+     "seconds": 0.118
     },
     {
      "step": "patch_search",
-     "seconds": 0.84
+     "seconds": 0.832
     }
    ],
    "gate": null,
@@ -728,8 +744,8 @@
   "cross_file_spectrum": {
    "bug": "util.mul returns a + b (called by calc.area)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1587.4,
-   "search_s": 0.811,
+   "e2e_ms": 1634.6,
+   "search_s": 0.831,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -762,19 +778,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.334
     },
     {
      "step": "localize",
-     "seconds": 0.12
+     "seconds": 0.129
     },
     {
      "step": "patch_search",
-     "seconds": 0.811
+     "seconds": 0.831
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.326
+     "seconds": 0.337
     }
    ],
    "gate": "PASS",
@@ -787,8 +803,8 @@
   "parametrized_synthesis": {
    "bug": "return len(str(w)) (parametrized rows 12/(3,4), 10/(2,5))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1974.5,
-   "search_s": 1.04,
+   "e2e_ms": 2106.2,
+   "search_s": 1.173,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -813,7 +829,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.111,
+    "seconds": 0.138,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -832,19 +848,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.333
+     "seconds": 0.352
     },
     {
      "step": "localize",
-     "seconds": 0.233
+     "seconds": 0.255
     },
     {
      "step": "patch_search",
-     "seconds": 1.04
+     "seconds": 1.173
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.365
+     "seconds": 0.322
     }
    ],
    "gate": "PASS",
@@ -857,22 +873,22 @@
   "hole_in_loop_assignment": {
    "bug": "acc = acc + 1 inside `for x in xs` (should be acc + x)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3540.5,
-   "search_s": 2.757,
+   "e2e_ms": 3788.2,
+   "search_s": 2.984,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 126,
+   "candidates": 137,
    "tested": 64,
    "greens": [
-    1,
-    2,
-    3,
-    4
+    48,
+    49,
+    50,
+    51
    ],
    "overfit_signature_indices": [
-    3
+    50
    ],
    "compose": null,
    "synthesis": {
@@ -888,7 +904,7 @@
        "names": [
         "xs"
        ],
-       "seconds": 0.014,
+       "seconds": 0.015,
        "sites": [
         {
          "distinct": 113,
@@ -908,7 +924,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.375,
+       "seconds": 0.425,
        "sites": [
         {
          "distinct": 7252,
@@ -933,7 +949,7 @@
         "x",
         "xs"
        ],
-       "seconds": 0.498,
+       "seconds": 0.548,
        "sites": [
         {
          "distinct": 4607,
@@ -949,9 +965,9 @@
        "status": "FOUND:1"
       }
      ],
-     "seconds": 1.327
+     "seconds": 1.449
     },
-    "seconds": 0.003,
+    "seconds": 0.005,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -967,8 +983,9 @@
       "behaviour_class": 0,
       "delta_on_tests": 2,
       "delta_outside_tests": 18,
+      "edit_size": 26,
       "grid_inputs": 26,
-      "index": 1,
+      "index": 48,
       "inexact_on_tests": 0,
       "tie_at_top": false,
       "witness": "MEASURED"
@@ -977,8 +994,9 @@
       "behaviour_class": 1,
       "delta_on_tests": 2,
       "delta_outside_tests": 23,
+      "edit_size": 24,
       "grid_inputs": 26,
-      "index": 2,
+      "index": 49,
       "inexact_on_tests": 0,
       "tie_at_top": false,
       "witness": "MEASURED"
@@ -987,8 +1005,9 @@
       "behaviour_class": 2,
       "delta_on_tests": 2,
       "delta_outside_tests": 23,
+      "edit_size": 36,
       "grid_inputs": 26,
-      "index": 4,
+      "index": 51,
       "inexact_on_tests": 0,
       "tie_at_top": false,
       "witness": "MEASURED"
@@ -997,14 +1016,15 @@
       "behaviour_class": 3,
       "delta_on_tests": 2,
       "delta_outside_tests": 25,
+      "edit_size": 30,
       "grid_inputs": 26,
-      "index": 3,
+      "index": 50,
       "inexact_on_tests": 0,
       "tie_at_top": false,
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.589,
+    "seconds": 0.659,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -1015,19 +1035,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.348
+     "seconds": 0.353
     },
     {
      "step": "localize",
-     "seconds": 0.128
+     "seconds": 0.126
     },
     {
      "step": "patch_search",
-     "seconds": 2.757
+     "seconds": 2.984
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.303
+     "seconds": 0.32
     }
    ],
    "gate": "PASS",
@@ -1040,13 +1060,13 @@
   "hole_in_condition": {
    "bug": "if x < lo (should be x < lo or x > hi)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2919.3,
-   "search_s": 2.103,
+   "e2e_ms": 3038.5,
+   "search_s": 2.191,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
    },
-   "candidates": 136,
+   "candidates": 137,
    "tested": 64,
    "greens": [
     8,
@@ -1070,7 +1090,7 @@
         "lo",
         "x"
        ],
-       "seconds": 0.169,
+       "seconds": 0.153,
        "sites": [
         {
          "distinct": 24,
@@ -1102,9 +1122,9 @@
        "status": "HOLE_LINE_NOT_REACHED_BY_EXAMPLE"
       }
      ],
-     "seconds": 0.624
+     "seconds": 0.629
     },
-    "seconds": 0.139,
+    "seconds": 0.154,
     "status": "NONE:EXHAUSTED",
     "stop": "EXHAUSTED"
    },
@@ -1120,6 +1140,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 42,
+      "edit_size": 30,
       "grid_inputs": 120,
       "index": 8,
       "inexact_on_tests": 0,
@@ -1130,6 +1151,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 42,
+      "edit_size": 30,
       "grid_inputs": 120,
       "index": 9,
       "inexact_on_tests": 0,
@@ -1140,6 +1162,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 50,
+      "edit_size": 31,
       "grid_inputs": 120,
       "index": 10,
       "inexact_on_tests": 0,
@@ -1147,7 +1170,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.484,
+    "seconds": 0.528,
     "status": "MEASURED",
     "test_inputs": 3,
     "tie_at_top": false
@@ -1158,19 +1181,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.318
+     "seconds": 0.355
     },
     {
      "step": "localize",
-     "seconds": 0.116
+     "seconds": 0.153
     },
     {
      "step": "patch_search",
-     "seconds": 2.103
+     "seconds": 2.191
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.377
+     "seconds": 0.335
     }
    ],
    "gate": "PASS",
@@ -1180,11 +1203,566 @@
    "tree_unchanged": true,
    "note": "a missing disjunct: staged condition synthesis (SPR/Prophet) emits `orig or C` / `orig and C` first; three greens, witness ranks the two equivalent forms of `x < lo or x > hi` (42 changed outside the tests) above `x < lo or hi <= x` (50)"
   },
+  "stmt_missing_return": {
+   "bug": "area() computes r and never returns it",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1770.7,
+   "search_s": 0.871,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 68,
+   "tested": 64,
+   "greens": [
+    9
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "examples": 1,
+    "expressions": [],
+    "function": "area",
+    "status": "UNDERSPECIFIED:1_examples"
+   },
+   "winning_mutation": "RETURN_INSERT return r",
+   "witness": {
+    "ranking": [
+     {
+      "index": 9
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+    return r"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.372
+    },
+    {
+     "step": "localize",
+     "seconds": 0.13
+    },
+    {
+     "step": "patch_search",
+     "seconds": 0.871
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.394
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "the function falls off its end: RETURN_INSERT `return r` (a local of the function) appended"
+  },
+  "stmt_delete": {
+   "bug": "stray `acc = 0` inside the loop",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 4126.4,
+   "search_s": 3.253,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 158,
+   "tested": 128,
+   "greens": [
+    64,
+    65,
+    77,
+    79
+   ],
+   "overfit_signature_indices": [
+    65
+   ],
+   "compose": null,
+   "synthesis": {
+    "enumerated": 1104,
+    "examples": 2,
+    "expressions": [],
+    "function": "total",
+    "hole": {
+     "candidates": 3,
+     "lines": [
+      {
+       "line": 2,
+       "names": [
+        "xs"
+       ],
+       "seconds": 0.015,
+       "sites": [
+        {
+         "distinct": 113,
+         "expressions": [],
+         "kind": "assign",
+         "original": "0",
+         "stop": "EXHAUSTED",
+         "tried": 112
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 4,
+       "names": [
+        "acc",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.429,
+       "sites": [
+        {
+         "distinct": 2590,
+         "expressions": [],
+         "kind": "augassign",
+         "original": "x",
+         "stop": "EXHAUSTED",
+         "tried": 2589
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 5,
+       "names": [
+        "acc",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.326,
+       "sites": [
+        {
+         "distinct": 2552,
+         "expressions": [
+          "acc",
+          "acc - 2 * (2 // acc)"
+         ],
+         "kind": "assign",
+         "original": "0",
+         "stop": "EXHAUSTED",
+         "tried": 2551
+        }
+       ],
+       "status": "FOUND:2"
+      },
+      {
+       "line": 6,
+       "names": [
+        "acc",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.19,
+       "sites": [
+        {
+         "distinct": 1566,
+         "expressions": [
+          "x + x"
+         ],
+         "kind": "return",
+         "original": "acc",
+         "stop": "EXHAUSTED",
+         "tried": 1565
+        }
+       ],
+       "status": "FOUND:1"
+      }
+     ],
+     "seconds": 1.636
+    },
+    "seconds": 0.003,
+    "status": "NONE:EXHAUSTED",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "STMT_DELETE via hole: acc = 0",
+   "witness": {
+    "behaviour_classes": 2,
+    "function": "total",
+    "grid_inputs": 26,
+    "module": "pkg.calc",
+    "proves_correctness": false,
+    "ranking": [
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 23,
+      "edit_size": 7,
+      "grid_inputs": 26,
+      "index": 64,
+      "inexact_on_tests": 0,
+      "tie_at_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 1,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 23,
+      "edit_size": 33,
+      "grid_inputs": 26,
+      "index": 65,
+      "inexact_on_tests": 0,
+      "tie_at_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 23,
+      "edit_size": 20,
+      "grid_inputs": 26,
+      "index": 77,
+      "inexact_on_tests": 0,
+      "tie_at_top": true,
+      "witness": "MEASURED"
+     },
+     {
+      "behaviour_class": 0,
+      "delta_on_tests": 2,
+      "delta_outside_tests": 23,
+      "edit_size": 20,
+      "grid_inputs": 26,
+      "index": 79,
+      "inexact_on_tests": 0,
+      "tie_at_top": true,
+      "witness": "MEASURED"
+     }
+    ],
+    "seconds": 0.594,
+    "status": "MEASURED",
+    "test_inputs": 2,
+    "tie_at_top": true
+   },
+   "patched_lines": [],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.392
+    },
+    {
+     "step": "localize",
+     "seconds": 0.148
+    },
+    {
+     "step": "patch_search",
+     "seconds": 3.253
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.326
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "hole synthesis says the assignment's value should be `acc` itself; that is normalized to deleting the statement, never `acc = acc`"
+  },
+  "stmt_insert_donor": {
+   "bug": "normalize() never appends to out",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 2904.9,
+   "search_s": 2.065,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 163,
+   "tested": 64,
+   "greens": [
+    49
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "enumerated": 1152,
+    "examples": 2,
+    "expressions": [],
+    "function": "normalize",
+    "hole": {
+     "candidates": 0,
+     "lines": [
+      {
+       "line": 2,
+       "names": [
+        "xs"
+       ],
+       "seconds": 0.018,
+       "sites": [
+        {
+         "distinct": 125,
+         "expressions": [],
+         "kind": "assign",
+         "original": "[]",
+         "stop": "EXHAUSTED",
+         "tried": 125
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 4,
+       "names": [
+        "out",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.103,
+       "sites": [
+        {
+         "distinct": 40,
+         "expressions": [],
+         "kind": "condition",
+         "original": "x < 0",
+         "stop": "EXHAUSTED",
+         "tried": 40
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 5,
+       "names": [
+        "out",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.207,
+       "sites": [
+        {
+         "distinct": 1597,
+         "expressions": [],
+         "kind": "assign",
+         "original": "-x",
+         "stop": "EXHAUSTED",
+         "tried": 1597
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 6,
+       "names": [
+        "out",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.203,
+       "sites": [
+        {
+         "distinct": 1553,
+         "expressions": [],
+         "kind": "return",
+         "original": "out",
+         "stop": "EXHAUSTED",
+         "tried": 1552
+        }
+       ],
+       "status": "NONE"
+      }
+     ],
+     "seconds": 1.107
+    },
+    "seconds": 0.003,
+    "status": "NONE:EXHAUSTED",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "STMT_INSERT after: out.append(x)",
+   "witness": {
+    "ranking": [
+     {
+      "index": 49
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+        out.append(x)"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.341
+    },
+    {
+     "step": "localize",
+     "seconds": 0.125
+    },
+    {
+     "step": "patch_search",
+     "seconds": 2.065
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.368
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "plastic surgery (Barr et al. 2014): `out.append(x)` exists in copy_all() in the same file, reads only names bound in normalize(), and is inserted after the suspicious `if`"
+  },
+  "stmt_swap": {
+   "bug": "out.append(acc) before acc += x",
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 4817.6,
+   "search_s": 3.839,
+   "judge": {
+    "in_process": true,
+    "reason": "PLAIN"
+   },
+   "candidates": 165,
+   "tested": 128,
+   "greens": [
+    69
+   ],
+   "overfit_signature_indices": [],
+   "compose": null,
+   "synthesis": {
+    "enumerated": 1152,
+    "examples": 2,
+    "expressions": [],
+    "function": "running",
+    "hole": {
+     "candidates": 0,
+     "lines": [
+      {
+       "line": 2,
+       "names": [
+        "xs"
+       ],
+       "seconds": 0.695,
+       "sites": [
+        {
+         "distinct": 125,
+         "expressions": [],
+         "kind": "assign",
+         "original": "[]",
+         "stop": "EXHAUSTED",
+         "tried": 125
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 3,
+       "names": [
+        "out",
+        "xs"
+       ],
+       "seconds": 0.032,
+       "sites": [
+        {
+         "distinct": 186,
+         "expressions": [],
+         "kind": "assign",
+         "original": "0",
+         "stop": "EXHAUSTED",
+         "tried": 185
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 6,
+       "names": [
+        "acc",
+        "out",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.86,
+       "sites": [
+        {
+         "distinct": 6178,
+         "expressions": [],
+         "kind": "augassign",
+         "original": "x",
+         "stop": "BUDGET",
+         "tried": 6177
+        }
+       ],
+       "status": "NONE"
+      },
+      {
+       "line": 7,
+       "names": [
+        "acc",
+        "out",
+        "x",
+        "xs"
+       ],
+       "seconds": 0.575,
+       "sites": [
+        {
+         "distinct": 4443,
+         "expressions": [],
+         "kind": "return",
+         "original": "out",
+         "stop": "EXHAUSTED",
+         "tried": 4442
+        }
+       ],
+       "status": "NONE"
+      }
+     ],
+     "seconds": 2.825
+    },
+    "seconds": 0.004,
+    "status": "NONE:EXHAUSTED",
+    "stop": "EXHAUSTED"
+   },
+   "winning_mutation": "STMT_SWAP with next",
+   "witness": {
+    "ranking": [
+     {
+      "index": 69
+     }
+    ],
+    "status": "SINGLE_GREEN"
+   },
+   "patched_lines": [
+    "+        acc += x"
+   ],
+   "steps": [
+    {
+     "step": "reproduce",
+     "seconds": 0.488
+    },
+    {
+     "step": "localize",
+     "seconds": 0.153
+    },
+    {
+     "step": "patch_search",
+     "seconds": 3.839
+    },
+    {
+     "step": "full_suite_gate",
+     "seconds": 0.33
+    }
+   ],
+   "gate": "PASS",
+   "tests_discovered": 2,
+   "verified": true,
+   "confined": true,
+   "tree_unchanged": true,
+   "note": "two adjacent statements in the wrong order: STMT_SWAP"
+  },
   "two_examples_synthesis__return_0": {
    "bug": "return 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1717.9,
-   "search_s": 0.943,
+   "e2e_ms": 1910.6,
+   "search_s": 1.094,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1209,7 +1787,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.098,
+    "seconds": 0.13,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1228,19 +1806,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.327
+     "seconds": 0.353
     },
     {
      "step": "localize",
-     "seconds": 0.114
+     "seconds": 0.128
     },
     {
      "step": "patch_search",
-     "seconds": 0.943
+     "seconds": 1.094
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.329
+     "seconds": 0.332
     }
    ],
    "gate": "PASS",
@@ -1253,8 +1831,8 @@
   "two_examples_synthesis__len_str_w": {
    "bug": "return len(str(w))",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1805.3,
-   "search_s": 0.975,
+   "e2e_ms": 1900.4,
+   "search_s": 1.015,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1279,7 +1857,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.119,
+    "seconds": 0.105,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1298,19 +1876,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.335
+     "seconds": 0.392
     },
     {
      "step": "localize",
-     "seconds": 0.118
+     "seconds": 0.133
     },
     {
      "step": "patch_search",
-     "seconds": 0.975
+     "seconds": 1.015
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.373
+     "seconds": 0.355
     }
    ],
    "gate": "PASS",
@@ -1322,8 +1900,8 @@
   "two_examples_synthesis__w_plus_h_plus_1": {
    "bug": "return w + h + 1",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1802.0,
-   "search_s": 1.028,
+   "e2e_ms": 1836.5,
+   "search_s": 1.043,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1348,7 +1926,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.105,
+    "seconds": 0.102,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1367,19 +1945,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.334
+     "seconds": 0.348
     },
     {
      "step": "localize",
-     "seconds": 0.122
+     "seconds": 0.119
     },
     {
      "step": "patch_search",
-     "seconds": 1.028
+     "seconds": 1.043
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.312
+     "seconds": 0.321
     }
    ],
    "gate": "PASS",
@@ -1391,8 +1969,8 @@
   "two_examples_no_expression__test_literal_rejected": {
    "bug": "return len(str(w))",
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[2]",
-   "e2e_ms": 1529.9,
-   "search_s": 1.031,
+   "e2e_ms": 1466.9,
+   "search_s": 0.968,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1422,7 +2000,7 @@
     ],
     "pair_count": 0,
     "reason": "ONLY_SUSPICIOUS_GREENS:[2]",
-    "seconds": 0.0
+    "seconds": 0.001
    },
    "synthesis": {
     "candidates": 1,
@@ -1437,7 +2015,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.135,
+    "seconds": 0.106,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1453,15 +2031,15 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.365
+     "seconds": 0.37
     },
     {
      "step": "localize",
-     "seconds": 0.13
+     "seconds": 0.124
     },
     {
      "step": "patch_search",
-     "seconds": 1.031
+     "seconds": 0.968
     }
    ],
    "gate": null,
@@ -1474,8 +2052,8 @@
   "under_specified_suite": {
    "bug": "return w * h if w <= 0 else 0",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2395.2,
-   "search_s": 1.623,
+   "e2e_ms": 2332.8,
+   "search_s": 1.531,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1503,7 +2081,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.077,
+    "seconds": 0.071,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1519,6 +2097,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 59,
+      "edit_size": 58,
       "grid_inputs": 108,
       "index": 11,
       "inexact_on_tests": 0,
@@ -1529,6 +2108,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 89,
+      "edit_size": 57,
       "grid_inputs": 108,
       "index": 13,
       "inexact_on_tests": 0,
@@ -1539,6 +2119,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 89,
+      "edit_size": 58,
       "grid_inputs": 108,
       "index": 14,
       "inexact_on_tests": 0,
@@ -1549,6 +2130,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 89,
+      "edit_size": 58,
       "grid_inputs": 108,
       "index": 15,
       "inexact_on_tests": 0,
@@ -1556,7 +2138,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.609,
+    "seconds": 0.605,
     "status": "MEASURED",
     "test_inputs": 2,
     "tie_at_top": false
@@ -1567,19 +2149,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.332
+     "seconds": 0.344
     },
     {
      "step": "localize",
-     "seconds": 0.12
+     "seconds": 0.116
     },
     {
      "step": "patch_search",
-     "seconds": 1.623
+     "seconds": 1.531
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.314
+     "seconds": 0.337
     }
    ],
    "gate": "PASS",
@@ -1591,8 +2173,8 @@
   "parametrized_not_plain": {
    "bug": "return w + h (parametrized test)",
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1983.3,
-   "search_s": 1.057,
+   "e2e_ms": 2087.8,
+   "search_s": 1.138,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1617,7 +2199,7 @@
      "lines": [],
      "seconds": 0.0
     },
-    "seconds": 0.098,
+    "seconds": 0.102,
     "status": "FOUND:1",
     "stop": "EXHAUSTED"
    },
@@ -1636,19 +2218,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.364
+     "seconds": 0.365
     },
     {
      "step": "localize",
-     "seconds": 0.232
+     "seconds": 0.241
     },
     {
      "step": "patch_search",
-     "seconds": 1.057
+     "seconds": 1.138
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.326
+     "seconds": 0.339
     }
    ],
    "gate": "PASS",
@@ -1661,8 +2243,8 @@
   "sabotage_full_suite": {
    "bug": "return w * h - 1 (+ a test pinning the bug)",
    "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-   "e2e_ms": 2253.5,
-   "search_s": 1.474,
+   "e2e_ms": 2574.7,
+   "search_s": 1.633,
    "judge": {
     "in_process": true,
     "reason": "PLAIN"
@@ -1695,6 +2277,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 28,
       "grid_inputs": 109,
       "index": 1,
       "inexact_on_tests": 0,
@@ -1705,6 +2288,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 4,
       "inexact_on_tests": 0,
@@ -1715,6 +2299,7 @@
       "behaviour_class": 0,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 33,
       "grid_inputs": 109,
       "index": 6,
       "inexact_on_tests": 0,
@@ -1725,6 +2310,7 @@
       "behaviour_class": 1,
       "delta_on_tests": 1,
       "delta_outside_tests": 109,
+      "edit_size": 32,
       "grid_inputs": 109,
       "index": 5,
       "inexact_on_tests": 1,
@@ -1732,7 +2318,7 @@
       "witness": "MEASURED"
      }
     ],
-    "seconds": 0.601,
+    "seconds": 0.669,
     "status": "MEASURED",
     "test_inputs": 1,
     "tie_at_top": false
@@ -1743,19 +2329,19 @@
    "steps": [
     {
      "step": "reproduce",
-     "seconds": 0.328
+     "seconds": 0.39
     },
     {
      "step": "localize",
-     "seconds": 0.115
+     "seconds": 0.133
     },
     {
      "step": "patch_search",
-     "seconds": 1.474
+     "seconds": 1.633
     },
     {
      "step": "full_suite_gate",
-     "seconds": 0.333
+     "seconds": 0.41
     }
    ],
    "gate": "FAIL",
@@ -1767,7 +2353,7 @@
   "nothing_to_repair": {
    "bug": null,
    "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-   "e2e_ms": 331.1,
+   "e2e_ms": 364.5,
    "steps": [],
    "gate": null,
    "tests_discovered": null,
@@ -1778,7 +2364,7 @@
   "harness_crash": {
    "bug": null,
    "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-   "e2e_ms": 318.7,
+   "e2e_ms": 349.1,
    "steps": [],
    "gate": null,
    "tests_discovered": null,

@@ -187,8 +187,11 @@ def hole_sites(source_text: str, function: str, line: int) -> list[dict[str, Any
             kind, expr = "condition", node.test
         if expr is None or expr.lineno != expr.end_lineno:
             continue
-        out.append({"kind": kind, "lineno": expr.lineno, "col_offset": expr.col_offset,
-                    "end_col_offset": expr.end_col_offset, "original": ast.get_source_segment(source_text, expr)})
+        site = {"kind": kind, "lineno": expr.lineno, "col_offset": expr.col_offset,
+                "end_col_offset": expr.end_col_offset, "original": ast.get_source_segment(source_text, expr)}
+        if kind == "assign" and isinstance(node.targets[0], ast.Name) and node.lineno == node.end_lineno:
+            site["target"] = node.targets[0].id          # `x = x` is a deletion, not an assignment
+        out.append(site)
     return out
 
 

@@ -1,145 +1,173 @@
 {
  "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
  "status": "COMPLETE",
- "e2e_ms_run1": 2096.7,
- "e2e_ms_run2": 2090.6,
+ "e2e_ms_run1": 2337.0,
+ "e2e_ms_run2": 2309.4,
  "cases": {
   "golden": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2096.7,
-   "search_s": 1.344,
+   "e2e_ms": 2337.0,
+   "search_s": 1.504,
    "judge": true,
    "winning_mutation": "BINOP_DROP keep left"
   },
   "wrong_operator": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1553.5,
-   "search_s": 0.799,
+   "e2e_ms": 1616.7,
+   "search_s": 0.813,
    "judge": true,
    "winning_mutation": "BINOP_SWAP Add->Mult"
   },
   "missing_term": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1590.2,
-   "search_s": 0.79,
+   "e2e_ms": 1621.1,
+   "search_s": 0.85,
    "judge": true,
    "winning_mutation": "EXPR_EXTEND <expr> Mult h"
   },
   "missing_guard": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2184.6,
-   "search_s": 1.373,
+   "e2e_ms": 2165.5,
+   "search_s": 1.357,
    "judge": true,
    "winning_mutation": "GUARD_INSERT if w is None: return 0"
   },
   "two_edits_and_overfit": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3729.4,
-   "search_s": 2.955,
+   "e2e_ms": 3712.8,
+   "search_s": 2.937,
    "judge": true,
    "winning_mutation": "COMPOSE BINOP_SWAP Add->Mult + BINOP_DROP keep left"
   },
   "two_edits_and_overfit__judge_pytest": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 22558.9,
-   "search_s": 21.792,
+   "e2e_ms": 22710.3,
+   "search_s": 21.932,
    "judge": false,
    "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult"
   },
   "only_overfit": {
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-   "e2e_ms": 1304.1,
-   "search_s": 0.84,
+   "e2e_ms": 1290.2,
+   "search_s": 0.832,
    "judge": true,
    "winning_mutation": "CONSTANT_REPLACE 0->12"
   },
   "cross_file_spectrum": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1587.4,
-   "search_s": 0.811,
+   "e2e_ms": 1634.6,
+   "search_s": 0.831,
    "judge": true,
    "winning_mutation": "BINOP_SWAP Add->Mult"
   },
   "parametrized_synthesis": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1974.5,
-   "search_s": 1.04,
+   "e2e_ms": 2106.2,
+   "search_s": 1.173,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w * h"
   },
   "hole_in_loop_assignment": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 3540.5,
-   "search_s": 2.757,
+   "e2e_ms": 3788.2,
+   "search_s": 2.984,
    "judge": true,
    "winning_mutation": "HOLE_SYNTH assign -> acc + x"
   },
   "hole_in_condition": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2919.3,
-   "search_s": 2.103,
+   "e2e_ms": 3038.5,
+   "search_s": 2.191,
    "judge": true,
    "winning_mutation": "HOLE_SYNTH condition -> x < lo or hi < x"
   },
+  "stmt_missing_return": {
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 1770.7,
+   "search_s": 0.871,
+   "judge": true,
+   "winning_mutation": "RETURN_INSERT return r"
+  },
+  "stmt_delete": {
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 4126.4,
+   "search_s": 3.253,
+   "judge": true,
+   "winning_mutation": "STMT_DELETE via hole: acc = 0"
+  },
+  "stmt_insert_donor": {
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 2904.9,
+   "search_s": 2.065,
+   "judge": true,
+   "winning_mutation": "STMT_INSERT after: out.append(x)"
+  },
+  "stmt_swap": {
+   "status": "VERIFIED_PATCH",
+   "e2e_ms": 4817.6,
+   "search_s": 3.839,
+   "judge": true,
+   "winning_mutation": "STMT_SWAP with next"
+  },
   "two_examples_synthesis__return_0": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1717.9,
-   "search_s": 0.943,
+   "e2e_ms": 1910.6,
+   "search_s": 1.094,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w * h"
   },
   "two_examples_synthesis__len_str_w": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1805.3,
-   "search_s": 0.975,
+   "e2e_ms": 1900.4,
+   "search_s": 1.015,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w * h"
   },
   "two_examples_synthesis__w_plus_h_plus_1": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1802.0,
-   "search_s": 1.028,
+   "e2e_ms": 1836.5,
+   "search_s": 1.043,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w * h"
   },
   "two_examples_no_expression__test_literal_rejected": {
    "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[2]",
-   "e2e_ms": 1529.9,
-   "search_s": 1.031,
+   "e2e_ms": 1466.9,
+   "search_s": 0.968,
    "judge": true,
    "winning_mutation": "EXPR_SYNTH -> w + (w + h + 2)"
   },
   "under_specified_suite": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 2395.2,
-   "search_s": 1.623,
+   "e2e_ms": 2332.8,
+   "search_s": 1.531,
    "judge": true,
    "winning_mutation": "COMPARE_SWAP LtE->NotEq"
   },
   "parametrized_not_plain": {
    "status": "VERIFIED_PATCH",
-   "e2e_ms": 1983.3,
-   "search_s": 1.057,
+   "e2e_ms": 2087.8,
+   "search_s": 1.138,
    "judge": true,
    "winning_mutation": "BINOP_SWAP Add->Mult"
   },
   "sabotage_full_suite": {
    "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-   "e2e_ms": 2253.5,
-   "search_s": 1.474,
+   "e2e_ms": 2574.7,
+   "search_s": 1.633,
    "judge": true,
    "winning_mutation": "BINOP_DROP keep left"
   },
   "nothing_to_repair": {
    "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-   "e2e_ms": 331.1,
+   "e2e_ms": 364.5,
    "search_s": null,
    "judge": null,
    "winning_mutation": null
   },
   "harness_crash": {
    "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-   "e2e_ms": 318.7,
+   "e2e_ms": 349.1,
    "search_s": null,
    "judge": null,
    "winning_mutation": null

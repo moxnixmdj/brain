@@ -660,6 +660,8 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             if ln not in priority:
                 priority.append(ln)
         candidates = candidates_v1.generate(source_text, nums, strings, priority)
+        stmt_rows = candidates_v1.statement_candidates(source_text, priority)
+        candidates = candidates_v1.merge_ranked(candidates, stmt_rows, priority)
         synth_row: dict[str, Any] = {"status": "NOT_ATTEMPTED"}
         if plain_ok and priority:
             # the tests pin the function's value on >= 2 inputs: the returned
@@ -682,7 +684,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                 synth_row = {"function": fname, "examples": len(examples), **{k: v for k, v in synth.items()}}
                 if synth["expressions"]:
                     extra = candidates_v1.synthesized_candidates(source_text, priority[0], synth["expressions"])
-                    candidates = candidates_v1.insert_after_cheap_edits(candidates, extra)
+                    candidates = candidates_v1.merge_ranked(candidates, extra, priority)
                     synth_row["candidates"] = len(extra)
                 if len(examples) >= 2 and remaining() > 10:
                     # the hole is any expression on the suspicious line (assignment,
@@ -712,7 +714,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                                                      "distinct": r.get("distinct"), "tried": r.get("tried"),
                                                      "expressions": r.get("expressions"), "stop": r.get("stop")}
                                                     for r in hole.get("sites") or []]})
-                    candidates = candidates_v1.insert_after_cheap_edits(candidates, extra)
+                    candidates = candidates_v1.merge_ranked(candidates, extra, priority)
                     synth_row["hole"] = {"lines": hole_rows, "candidates": len(extra),
                                          "seconds": round(time.monotonic() - t_h, 3)}
         per_run = max(5, min(remaining(), 300))

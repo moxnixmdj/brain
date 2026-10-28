@@ -270,7 +270,9 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
 # within one line: the cheapest, most specific edits first; guards are the most
 # speculative (many of them, any one of them plausible) and go last
 _KIND_ORDER = {"BINOP_DROP": 0, "COMPARE_SWAP": 0, "BINOP_SWAP": 0, "BOOL_SWAP": 0, "NOT_TOGGLE": 0, "OPERAND_SWAP": 0,
-               "CONSTANT_REPLACE": 1, "STRING_REPLACE": 1, "EXPR_EXTEND": 1, "GUARD_INSERT": 3}
+               "EXPR_SYNTH": 0.5, "HOLE_SYNTH": 0.5,            # synthesized: after the cheap swaps, before constants
+               "CONSTANT_REPLACE": 1, "STRING_REPLACE": 1, "EXPR_EXTEND": 1,
+               "STMT_SWAP": 2, "STMT_DELETE": 2, "RETURN_INSERT": 2, "STMT_INSERT": 2, "GUARD_INSERT": 3}
 
 
 def generate(source_text: str, nums: list[Any], strings: list[str],
@@ -296,10 +298,14 @@ def generate(source_text: str, nums: list[Any], strings: list[str],
     rows.sort(key=lambda r: r[0])
     out = [(d, c) for _, d, c in rows]
     _LAST_EDITS[id(out)] = edits
+    if len(_EDITS_BY_SHA) > 200000:
+        _EDITS_BY_SHA.clear()
+    _EDITS_BY_SHA.update(edits)
     return out
 
 
 _LAST_EDITS: dict[int, dict[str, tuple[tuple, Callable[[ast.AST], ast.AST]]]] = {}
+_EDITS_BY_SHA: dict[str, tuple[tuple, Callable[[ast.AST], ast.AST]]] = {}   # survives list merges/insertions
 
 
 def _node_key(node: ast.AST) -> tuple:
@@ -329,7 +335,7 @@ def compose_pairs(source_text: str, singles: list[tuple[dict[str, Any], str]], o
     and spliced over its own span, so formatting changes stay inside that one
     statement.  Nested edits compose outer-first on the original subtree.
     """
-    edits = _LAST_EDITS.get(id(singles), {})
+    edits = {**_EDITS_BY_SHA, **_LAST_EDITS.get(id(singles), {})}
     tree = ast.parse(source_text)
     stmt_of: dict[tuple, ast.stmt] = {}
     for st in ast.walk(tree):            # breadth-first: the last statement seen is the innermost
@@ -665,17 +671,196 @@ def hole_candidates(source_text: str, sites: list[dict[str, Any]]) -> list[tuple
             if not (0 <= i < len(lines)):
                 continue
             ln = lines[i]
-            cand = "".join([*lines[:i], ln[:site["col_offset"]] + expr + ln[site["end_col_offset"]:], *lines[i + 1:]])
+            kind, detail, order = "HOLE_SYNTH", str(site.get("kind")) + " -> " + expr, 0.5
+            if site.get("target") and expr == site["target"]:
+                # the synthesizer says the assignment should not change its target:
+                # the honest edit is removing the statement, not writing `x = x`
+                cand = "".join([*lines[:i], *lines[i + 1:]])
+                kind, detail = "STMT_DELETE", "via hole: " + ln.strip()[:60]
+                order = 0.5
+            else:
+                cand = "".join([*lines[:i], ln[:site["col_offset"]] + expr + ln[site["end_col_offset"]:], *lines[i + 1:]])
             if cand == source_text:
+                continue
+            try:
+                ast.parse(cand)
+            except SyntaxError:
                 continue
             digest = _sha(cand.encode("utf-8"))
             if digest in seen:
                 continue
             seen.add(digest)
-            out.append(({"kind": "HOLE_SYNTH", "detail": str(site.get("kind")) + " -> " + expr, "lineno": site["lineno"],
+            out.append(({"kind": kind, "detail": detail, "lineno": site["lineno"], "order": order,
                          "col_offset": site["col_offset"], "end_lineno": site["lineno"],
                          "end_col_offset": site["end_col_offset"], "candidate_sha256": digest}, cand))
     return out
+
+
+_SIMPLE_STMT = (ast.Assign, ast.AugAssign, ast.AnnAssign, ast.Expr, ast.Return, ast.Raise, ast.Continue, ast.Break)
+
+
+def _block(lines: list[str], st: ast.stmt) -> tuple[int, int]:
+    return st.lineno - 1, (st.end_lineno or st.lineno)
+
+
+def _indent_of(line: str) -> str:
+    return line[:len(line) - len(line.lstrip())]
+
+
+def _reindent(block: list[str], indent: str) -> list[str]:
+    base = _indent_of(block[0])
+    return [(indent + ln[len(base):]) if ln.startswith(base) else (indent + ln.lstrip()) for ln in block]
+
+
+def _load_names(node: ast.AST) -> set[str]:
+    return {n.id for n in ast.walk(node) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)}
+
+
+def statement_candidates(source_text: str, priority_lines: Iterable[int], *, max_lines: int = 4,
+                         max_donors: int = 24) -> list[tuple[dict[str, Any], str]]:
+    """Statement-level edits around the suspicious lines (GenProg's operators under the
+    plastic-surgery hypothesis, Barr et al. 2014: most fixes are already written
+    somewhere in the same file):
+      STMT_DELETE   the suspicious simple statement removed (never the only one in its block)
+      STMT_SWAP     swapped with its previous / next simple sibling
+      STMT_INSERT   a simple statement from elsewhere in the file -- same function first,
+                    then by distance -- copied before / after it at its indentation, only
+                    when every name it reads is bound in the owning function or module
+      RETURN_INSERT `return <local>` appended to a function that falls off its end
+    Whole-line operations; the result is a candidate for the judge, never a verdict."""
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError:
+        return []
+    lines = source_text.splitlines(keepends=True)
+    if lines and not lines[-1].endswith("\n"):
+        lines[-1] += "\n"
+    module_names = {n.name.split(".")[0] for n in ast.walk(tree) if isinstance(n, ast.Import) for n in n.names}
+    for n in tree.body:
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            module_names.add(n.name)
+        elif isinstance(n, ast.ImportFrom):
+            module_names |= {a.asname or a.name for a in n.names}
+        elif isinstance(n, ast.Assign):
+            module_names |= {t.id for t in n.targets if isinstance(t, ast.Name)}
+    import builtins as _b
+    builtins_ = set(dir(_b))
+    # owning function, parent body and index for every statement
+    owner: dict[int, ast.FunctionDef] = {}
+    parent: dict[int, tuple[list[ast.stmt], int]] = {}
+
+    def walk(body: list[ast.stmt], fn: ast.FunctionDef | None) -> None:
+        for i, st in enumerate(body):
+            parent[id(st)] = (body, i)
+            if fn is not None:
+                owner[id(st)] = fn
+            f2 = st if isinstance(st, ast.FunctionDef) else fn
+            for field in ("body", "orelse", "finalbody"):
+                sub = getattr(st, field, None)
+                if isinstance(sub, list) and sub and isinstance(sub[0], ast.stmt):
+                    walk(sub, f2)
+            for h in getattr(st, "handlers", []) or []:
+                walk(h.body, f2)
+
+    walk(tree.body, None)
+    all_simple = [st for st in ast.walk(tree) if isinstance(st, _SIMPLE_STMT) and id(st) in parent]
+    fn_bound: dict[int, set[str]] = {}
+    for st in all_simple:
+        fn = owner.get(id(st))
+        if fn is not None and id(fn) not in fn_bound:
+            bound = {a.arg for a in [*fn.args.posonlyargs, *fn.args.args, *fn.args.kwonlyargs]}
+            bound |= {n.id for n in ast.walk(fn) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)}
+            bound |= {n.target.id for n in ast.walk(fn) if isinstance(n, ast.For) and isinstance(n.target, ast.Name)}
+            fn_bound[id(fn)] = bound
+    rank = {int(ln): i for i, ln in enumerate(priority_lines) if ln is not None}
+    out: list[tuple[tuple, dict[str, Any], str]] = []
+    seen: set[str] = {_sha(source_text.encode("utf-8"))}
+
+    def emit(key: tuple, st: ast.stmt, kind: str, detail: str, new_lines: list[str]) -> None:
+        cand = "".join(new_lines)
+        try:
+            ast.parse(cand)
+        except SyntaxError:
+            return
+        digest = _sha(cand.encode("utf-8"))
+        if digest in seen:
+            return
+        seen.add(digest)
+        out.append((key, {"kind": kind, "detail": detail, "lineno": st.lineno, "col_offset": 0,
+                          "end_lineno": st.end_lineno, "end_col_offset": 0, "candidate_sha256": digest}, cand))
+
+    done_fns: set[int] = set()
+    for ln in list(rank)[:max_lines]:
+        # innermost simple statement covering the line, else the innermost statement
+        covering = [st for st in ast.walk(tree) if isinstance(st, ast.stmt) and id(st) in parent
+                    and st.lineno <= ln <= (st.end_lineno or st.lineno) and not isinstance(st, (ast.FunctionDef, ast.ClassDef))]
+        if not covering:
+            continue
+        covering.sort(key=lambda st: ((st.end_lineno or st.lineno) - st.lineno, -st.lineno))
+        st = covering[0]
+        body, idx = parent[id(st)]
+        a, b = _block(lines, st)
+        indent = _indent_of(lines[a])
+        fn = owner.get(id(st))
+        base_key = (rank[ln], ln)
+        if isinstance(st, _SIMPLE_STMT) and len(body) > 1:
+            emit((*base_key, 2, 0), st, "STMT_DELETE", ast.unparse(st)[:60], lines[:a] + lines[b:])
+        for j, name in ((idx - 1, "previous"), (idx + 1, "next")):
+            if 0 <= j < len(body) and isinstance(body[j], _SIMPLE_STMT) and isinstance(st, _SIMPLE_STMT):
+                oa, ob = _block(lines, body[j])
+                lo, hi = (min(a, oa), max(b, ob))
+                first, second = (lines[a:b], lines[oa:ob]) if a < oa else (lines[oa:ob], lines[a:b])
+                emit((*base_key, 2, 1), st, "STMT_SWAP", "with " + name, lines[:lo] + second + first + lines[hi:])
+        if fn is not None:
+            bound = fn_bound.get(id(fn), set()) | module_names | builtins_
+            donors = []
+            for d in all_simple:
+                if d is st or isinstance(d, (ast.Return, ast.Raise, ast.Continue, ast.Break)):
+                    continue
+                stores = {n.id for n in ast.walk(d) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)}
+                if d.lineno == d.end_lineno and (_load_names(d) | stores) <= bound:
+                    donors.append(d)
+            donors.sort(key=lambda d: (0 if owner.get(id(d)) is fn else 1, abs(d.lineno - st.lineno)))
+            texts: list[str] = []
+            for d in donors:
+                t = lines[d.lineno - 1].strip()
+                if t and t not in texts and t != lines[a].strip():
+                    texts.append(t)
+            for k, t in enumerate(texts[:max_donors]):
+                emit((*base_key, 2, 2, k), st, "STMT_INSERT", "before: " + t[:60], lines[:a] + [indent + t + "\n"] + lines[a:])
+                emit((*base_key, 2, 2, k), st, "STMT_INSERT", "after: " + t[:60], lines[:b] + [indent + t + "\n"] + lines[b:])
+            if id(fn) not in done_fns and not isinstance(fn.body[-1], (ast.Return, ast.Raise)):
+                done_fns.add(id(fn))
+                last = fn.body[-1]
+                la, lb = _block(lines, last)
+                find = _indent_of(lines[la])
+                stores = []
+                for n in ast.walk(fn):
+                    if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store) and n.id not in stores:
+                        stores.append(n.id)
+                for k, name in enumerate(stores[:6]):
+                    emit((*base_key, 2, 3, k), last, "RETURN_INSERT", "return " + name,
+                         lines[:lb] + [find + "return " + name + "\n"] + lines[lb:])
+    out.sort(key=lambda r: r[0])
+    return [(d, c) for _, d, c in out]
+
+
+def merge_ranked(a: list[tuple[dict[str, Any], str]], b: list[tuple[dict[str, Any], str]],
+                 priority_lines: Iterable[int]) -> list[tuple[dict[str, Any], str]]:
+    """One spectrum-first list from two generators: (priority rank of the line, line,
+    kind order, original position); duplicates by content dropped."""
+    rank = {int(ln): i for i, ln in enumerate(priority_lines) if ln is not None}
+    rows = []
+    seen: set[str] = set()
+    best: dict[str, tuple] = {}
+    for pos, (d, c) in enumerate([*a, *b]):
+        line = int(d.get("lineno") or 10**9)
+        key = (rank.get(line, len(rank)), line, d.get("order", _KIND_ORDER.get(d.get("kind"), 1)), pos)
+        sha = d["candidate_sha256"]
+        if sha not in best or key < best[sha][0]:
+            best[sha] = (key, d, c)
+    rows = sorted(best.values(), key=lambda r: r[0])
+    return [(d, c) for _, d, c in rows]
 
 
 def insert_after_cheap_edits(candidates: list[tuple[dict[str, Any], str]], extra: list[tuple[dict[str, Any], str]]) -> list[tuple[dict[str, Any], str]]:

@@ -609,3 +609,92 @@ def test_witness_inputs_follow_the_shape_of_the_tests_arguments():
     grid = w.grid_inputs([[[1, 2, 3]], [[5, 5]]], 1)
     assert [[]] in grid and len(grid) >= 20
     assert w._sequence_pool([("a", "b")])[0] == () and ("", "a") in w._sequence_pool([("a", "b")])
+
+
+# --- statement-level edits: delete, swap, insert a donor, append a return ------------------
+
+_TWICE = "\n\ndef twice(x):\n    return 2 * x\n"
+
+
+def _calc(root: Path, source: str, tests: str | None = None) -> None:
+    (root / "proj" / "pkg" / "calc.py").write_text(source + _TWICE)
+    if tests:
+        (root / "proj" / "tests" / "test_calc.py").write_text(tests)
+
+
+_TOTAL_TESTS = ("from pkg.calc import total, twice\n\ndef test_total():\n    assert total([1, 2, 3]) == 6\n"
+                "    assert total([5, 5]) == 10\n\ndef test_twice():\n    assert twice(5) == 10\n")
+
+
+def test_a_function_that_falls_off_its_end_gets_its_local_returned(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, "def area(w, h):\n    r = w * h\n")
+    result = dr.run(_args(), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+    return r\n" in (tmp_path / result["diff_path"]).read_text()
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["winning_mutation"]["kind"] == "RETURN_INSERT" and result["seconds"] < 10
+
+
+def test_a_stray_statement_is_deleted_not_rewritten_as_a_no_op(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path, "def total(xs):\n    acc = 0\n    for x in xs:\n        acc += x\n        acc = 0\n    return acc\n", _TOTAL_TESTS)
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    diff = (tmp_path / result["diff_path"]).read_text()
+    assert "-        acc = 0\n" in diff and "acc = acc\n" not in diff        # the hole said `acc`; the edit is a deletion
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["winning_mutation"]["kind"] == "STMT_DELETE"
+
+
+def test_a_missing_statement_is_copied_from_elsewhere_in_the_file(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path,
+          "def normalize(xs):\n    out = []\n    for x in xs:\n        if x < 0:\n            x = -x\n    return out\n\n\n"
+          "def copy_all(xs):\n    out = []\n    for x in xs:\n        out.append(x)\n    return out\n",
+          "from pkg.calc import normalize\n\ndef test_normalize():\n    assert normalize([1, -2, 3]) == [1, 2, 3]\n"
+          "    assert normalize([-5]) == [5]\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    assert "+        out.append(x)\n" in (tmp_path / result["diff_path"]).read_text()
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["winning_mutation"]["kind"] == "STMT_INSERT" and search["winning_mutation"]["detail"].startswith("after: ")
+
+
+def test_two_statements_in_the_wrong_order_are_swapped(tmp_path: Path):
+    _fixture(tmp_path)
+    _calc(tmp_path,
+          "def running(xs):\n    out = []\n    acc = 0\n    for x in xs:\n        out.append(acc)\n        acc += x\n    return out\n",
+          "from pkg.calc import running\n\ndef test_running():\n    assert running([1, 2, 3]) == [1, 3, 6]\n    assert running([4]) == [4]\n")
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    patched = (tmp_path / "proj" / "pkg" / "calc.py").read_text()          # the tree is never written ...
+    assert "out.append(acc)\n        acc += x" in patched
+    diff = (tmp_path / result["diff_path"]).read_text()                     # ... the diff swaps them
+    assert "+        acc += x\n" in diff and "-        acc += x\n" in diff
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["winning_mutation"]["kind"] == "STMT_SWAP"
+
+
+def test_statement_candidates_are_scoped_and_merge_keeps_the_spectrum_order():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    src = ("def total(xs):\n    acc = 0\n    for x in xs:\n        acc += x\n        acc = 0\n    return acc\n\n\n"
+           "def other(ys):\n    seen = set()\n    seen.add(ys)\n    return seen\n")
+    rows = c.statement_candidates(src, [5])
+    kinds = [(d["kind"], d["detail"]) for d, _ in rows]
+    assert ("STMT_DELETE", "acc = 0") in kinds and ("STMT_SWAP", "with previous") in kinds
+    assert any(k == "STMT_INSERT" and "acc += x" in det for k, det in kinds)
+    assert not any("seen" in det for _, det in kinds)              # `seen` is not bound in total(): not a donor
+    assert all(d["lineno"] == 5 for d, _ in rows)
+    assert c.statement_candidates(src, [1]) == []                  # a def line owns no statement edit
+    gen = c.generate(src, [6, 10], [], [5, 4])
+    merged = c.merge_ranked(gen, rows, [5, 4])
+    assert [d["candidate_sha256"] for d, _ in merged][:len(merged)] and len(merged) == len({d["candidate_sha256"] for d, _ in merged})
+    lines = [d["lineno"] for d, _ in merged]
+    assert lines == sorted(lines, key=lambda ln: {5: 0, 4: 1}.get(ln, 2))  # line 5 first, then 4, then the rest
+    on5 = [d["kind"] for d, _ in merged if d["lineno"] == 5]
+    assert on5.index("STMT_DELETE") > max(i for i, k in enumerate(on5) if k in ("CONSTANT_REPLACE", "BINOP_SWAP", "BINOP_DROP", "OPERAND_SWAP") or i == 0)
+    assert on5.index("STMT_DELETE") < on5.index("GUARD_INSERT") if "GUARD_INSERT" in on5 else True
+    # composing still works on a merged list (edits are keyed by content, not by list identity)
+    pairs = c.compose_pairs(src, merged, list(range(1, min(6, len(merged)) + 1)), limit=20)
+    assert isinstance(pairs, list)

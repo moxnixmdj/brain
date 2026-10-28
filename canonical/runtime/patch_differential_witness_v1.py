@@ -209,8 +209,20 @@ def probe_program(module_name: str, func: str, inputs: list[list[Any]], out_rel:
     )
 
 
+def edit_size(original_text: str, candidate_text: str) -> int:
+    """Characters on changed lines, both sides: the smaller edit among behavioural equals."""
+    import difflib
+    a, b = original_text.splitlines(), candidate_text.splitlines()
+    n = 0
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(None, a, b, autojunk=False).get_opcodes():
+        if tag != "equal":
+            n += sum(len(x.strip()) for x in a[i1:i2]) + sum(len(x.strip()) for x in b[j1:j2])
+    return n
+
+
 def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | None]],
-         n_test_inputs: int, expected_reprs: list[str | None] | None = None) -> list[dict[str, Any]]:
+         n_test_inputs: int, expected_reprs: list[str | None] | None = None,
+         sizes: dict[int, int] | None = None) -> list[dict[str, Any]]:
     """Order candidates by behavioural delta vs the original outside the tests' own inputs.
 
     ``original``/candidate outcome lists align with the inputs: the first
@@ -232,13 +244,16 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
             if e is not None and isinstance(o, list) and len(o) == 2 and o[0] == "R" and o[1] != e:
                 inexact += 1
         rows.append({"index": index, "delta_outside_tests": outside, "delta_on_tests": on_tests,
-                     "inexact_on_tests": inexact,
+                     "inexact_on_tests": inexact, "edit_size": (sizes or {}).get(index, 0),
                      "grid_inputs": len(original) - n_test_inputs, "witness": "MEASURED"})
     def key(r: dict[str, Any]) -> tuple:
         if r["witness"] != "MEASURED":
-            return (2, 0, 0, r["index"])
+            return (2, 0, 0, 0, r["index"])
+        # behaviour first (least change outside the tests, exact on their literals), then
+        # search order -- the generator's own specificity ranking (`is None` before `not x`);
+        # edit_size is reported, not ranked on: a shorter edit is not a more faithful one
         return (0 if r["delta_on_tests"] > 0 or n_test_inputs == 0 else 1, r["delta_outside_tests"],
-                r["inexact_on_tests"], r["index"])
+                r["inexact_on_tests"], 0, r["index"])
     rows.sort(key=key)
     # behavioural classes among the greens themselves: two candidates with the same
     # outcomes on every input are one behaviour; different classes with the same
@@ -303,7 +318,8 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
         shutil.rmtree(base, ignore_errors=True)
     exp_map = {json.dumps(list(a), default=repr): repr(e)[:200] for a, e in expected}
     expected_reprs = [exp_map.get(json.dumps(row, default=repr)) for row in t_inputs]
-    ranking = rank(original, per, len(t_inputs), expected_reprs)
+    ranking = rank(original, per, len(t_inputs), expected_reprs,
+                   {i: edit_size(original_text, text) for i, text in greens})
     return {"status": "MEASURED" if original is not None else "WITNESS_UNAVAILABLE:ORIGINAL_PROBE_FAILED",
             "function": name, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": len(inputs) - len(t_inputs),
             "behaviour_classes": len({r.get("behaviour_class") for r in ranking if "behaviour_class" in r}),
