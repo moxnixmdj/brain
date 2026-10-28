@@ -99,3 +99,41 @@ def test_a_failing_or_erroring_test_is_still_traced_not_trusted_blindly(tmp_path
     rows = {r["path"]: r for r in report["tests"]}
     assert rows["src/tests/test_broken.py"]["selected"] is True
     assert rows["src/tests/test_broken.py"]["reason"].startswith("DYNAMIC_TRACE_INCOMPLETE_FAIL_CLOSED")
+
+
+def test_issue_to_pr_run_leaves_a_dependency_map_behind_for_free(tmp_path: Path):
+    """The orchestrator already runs the whole suite once; the session plugin
+    turns that run into a per-test-file dependency map (trace once, slice many)."""
+    from canonical.runtime.bound_capabilities import python_issue_to_pr_orchestrate as orch
+    _fixture(tmp_path)
+    # rename a symbol no test reaches dynamically, so every test still runs
+    (tmp_path / "src" / "calc.py").write_text("def add(a, b):\n    return a + b\n\n\ndef helper():\n    return 1\n")
+    (tmp_path / "task.json").write_text(json.dumps({
+        "issue_id": "MAP-1", "title": "Rename helper to aux",
+        "edits": [{"op": "rename_symbol", "module": "calc.py", "name": "helper", "new_name": "aux"}]}))
+    result = orch.run({"task_path": "task.json", "source_root": "src", "worktree_path": "wt",
+                       "output_path": "out/summary.json", "diff_path": "out/change.diff",
+                       "pr_intent_path": "out/pr.json", "python_executable": sys.executable,
+                       "timeout_s": 60}, tmp_path)
+    assert result["dependency_map_path"] == "out/summary.dependency_map.json", result
+    mapping = trace.load_map(tmp_path, result["dependency_map_path"])
+    assert mapping["tree_root"] == "wt"
+    rows = mapping["tests"]
+    assert set(rows) == {"tests/test_dynamic.py", "tests/test_other.py", "tests/test_static.py"}
+    assert all(r["status"] == "TRACED" for r in rows.values()), rows
+    assert "calc.py" in rows["tests/test_dynamic.py"]["files"]   # the static blind spot, seen at run time
+    assert "calc.py" in rows["tests/test_static.py"]["files"]
+    assert "calc.py" not in rows["tests/test_other.py"]["files"]
+    # the map slices the worktree it was traced on: repo-relative in, tree-relative lookup
+    picked, reason = trace.decide(tmp_path, mapping, "wt/tests/test_dynamic.py", {"wt/calc.py"})
+    assert picked and reason == "DYNAMIC_DEPENDENCY_TRACED:calc.py"
+    picked, reason = trace.decide(tmp_path, mapping, "wt/tests/test_other.py", {"wt/calc.py"})
+    assert not picked and reason == "NOT_EXECUTED_IN_TRACE"
+    # and through the selector itself
+    args = {"source_root": "wt", "changed_paths": ["wt/calc.py"], "test_roots": ["wt/tests"],
+            "output_path": "slice.json", "dependency_map_path": result["dependency_map_path"]}
+    impact.run(args, tmp_path)
+    report = json.loads((tmp_path / "slice.json").read_text())
+    sel = {r["path"]: r["selected"] for r in report["tests"]}
+    assert sel == {"wt/tests/test_dynamic.py": True, "wt/tests/test_other.py": False,
+                   "wt/tests/test_static.py": True}, sel

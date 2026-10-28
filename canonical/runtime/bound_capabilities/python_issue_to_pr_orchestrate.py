@@ -90,6 +90,7 @@ from canonical.runtime.bound_capabilities import (
 from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
     discover_test_files,
 )
+from canonical.runtime import test_dependency_trace_v1 as dependency_trace
 
 ARTIFACT_VERSION = 1
 NAME_RE = re.compile(r"^[A-Za-z_]\w*$")
@@ -152,7 +153,8 @@ def _read_pytest_report(path: Path) -> dict:
 
 
 def _run_worktree_tests(worktree: Path, python_exe: str,
-                        pytest_version: str | None, timeout_s: int) -> dict:
+                        pytest_version: str | None, timeout_s: int,
+                        repo: Path | None = None, dependency_map_out: Path | None = None) -> dict:
     """Run the existing test-discovery rule once, without an impact-only gate.
 
     Discover without the helper's default 5,000-file cap: truncation would
@@ -170,6 +172,7 @@ def _run_worktree_tests(worktree: Path, python_exe: str,
         "failed": 0, "skipped": 0, "deselected": 0, "uncollected_files": 0,
         "failed_cases": [], "deselected_cases": [], "uncollected_examples": [], "pytest_rc": None,
         "status": "NO_TEST_FILES" if not files else "PYTEST_UNAVAILABLE",
+        "dependency_map": None,
     }
     if not files or not pytest_version:
         return evidence
@@ -207,13 +210,38 @@ def _run_worktree_tests(worktree: Path, python_exe: str,
                 "    with open(" + repr(str(selection_report)) + ", 'w', encoding='utf-8') as f:\n"
                 "        json.dump({'deselected': sum(omitted.values()), "
                 "'deselected_cases': sorted(omitted.elements())[:50], 'collected_files': paths}, f)\n", encoding="utf-8")
+            # The same session also records which source files each test file
+            # executes (trace once, slice many): the dependency map lets later
+            # repair loops run the tests a change can reach instead of the suite.
+            trace_name = "_brain_pr_dep_trace_" + Path(tmp).name.replace("-", "_")
+            trace_out = Path(tmp) / "dependency_trace.json"
+            (Path(tmp) / (trace_name + ".py")).write_text(
+                dependency_trace.SESSION_PLUGIN_SOURCE, encoding="utf-8")
             env = os.environ.copy()
             env["PYTHONPATH"] = tmp + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+            env["BRAIN_DEP_TRACE_OUT"] = str(trace_out)
+            env["BRAIN_DEP_TRACE_ROOT"] = str(worktree.resolve())
             proc = subprocess.run(
                 [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", plugin_name,
-                 "--junitxml=" + str(report), str(worktree)],
+                 "-p", trace_name, "--junitxml=" + str(report), str(worktree)],
                 cwd=worktree, capture_output=True, text=True, timeout=timeout_s, env=env)
             evidence["pytest_rc"] = proc.returncode
+            if repo is not None and dependency_map_out is not None and trace_out.is_file():
+                try:
+                    payload = json.loads(trace_out.read_text(encoding="utf-8"))
+                    tree_rel = str(worktree.resolve().relative_to(repo)).replace("\\", "/")
+                    mapping = dependency_trace.map_from_session(
+                        repo, tree_rel, payload,
+                        [str(f.resolve().relative_to(worktree.resolve())).replace("\\", "/") for f in files])
+                    sha = dependency_trace.write_map(
+                        repo, str(dependency_map_out.relative_to(repo)).replace("\\", "/"), mapping)
+                    traced = sum(1 for r in mapping["tests"].values() if r["status"] == "TRACED")
+                    evidence["dependency_map"] = {
+                        "path": str(dependency_map_out.relative_to(repo)).replace("\\", "/"),
+                        "sha256": sha, "tree_root": tree_rel,
+                        "test_files": len(mapping["tests"]), "traced": traced}
+                except (OSError, ValueError, KeyError, TypeError, RuntimeError) as exc:
+                    evidence["dependency_map"] = {"error": type(exc).__name__ + ":" + str(exc)[:120]}
             try:
                 evidence.update(_read_pytest_report(report))
                 selection = json.loads(selection_report.read_text(encoding="utf-8"))
@@ -823,7 +851,9 @@ def run(args, root):
     # The impact slice is useful advice, but static imports cannot establish
     # that unselected tests are unaffected (dynamic imports are one example).
     # Run the whole conventionally discovered suite once in the existing copy.
-    test_evidence = _run_worktree_tests(worktree_abs, python_exe, pytest_version, timeout_s)
+    test_evidence = _run_worktree_tests(
+        worktree_abs, python_exe, pytest_version, timeout_s, repo=repo,
+        dependency_map_out=output_abs.with_name(output_abs.stem + ".dependency_map.json"))
     test_evidence["selected"] = len(selected)
     test_evidence["selection_role"] = "advisory"
     test_passed = test_evidence["passed"]
@@ -883,6 +913,7 @@ def run(args, root):
         "verified": bool(verified),
         "verified_scope": verified_scope,
         "repository_gate": repository_gate,
+        "dependency_map_path": (test_evidence.get("dependency_map") or {}).get("path"),
     }
     output_abs.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(summary, indent=2, ensure_ascii=False) + "\n"

@@ -16,9 +16,22 @@ map cannot see: data files, subprocesses, C extensions, ``exec`` of text that
 never becomes a code object with a real filename.  The selector says so in
 ``selection_guarantee``.
 
-Cost: one interpreter + one pytest session per test file, once; the map is
-then reused across every change until the test file itself changes.  That
-is the speed law: trace once, slice many.
+Two ways to build the map:
+
+* ``trace()`` -- one interpreter + one pytest session per test file.  Sound
+  attribution (nothing imported by an earlier file can hide), slower.
+* ``SESSION_PLUGIN_SOURCE`` / ``map_from_session()`` -- a pytest plugin that
+  rides along an existing full run (the issue-to-PR orchestrator already runs
+  the whole suite once) and attributes call events plus newly imported
+  modules to the test file that is current at collection and run time.  Same
+  leak pytest-testmon accepts: a module imported by an earlier file and only
+  read, never called, by a later one is not attributed.
+
+Either way the map is reused across every change until the test file itself
+changes.  That is the speed law: trace once, slice many.
+
+Maps may be keyed relative to a traced tree (``tree_root``, repo-relative);
+the selector translates.  ``tree_root == ""`` means repo-relative keys.
 """
 from __future__ import annotations
 
@@ -28,6 +41,7 @@ import os
 import pathlib
 import subprocess
 import sys
+from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_TEST_DEPENDENCY_MAP_V1"
 
@@ -58,8 +72,110 @@ print("__BRAIN_DEPS__" + json.dumps({"status": status, "files": out}))
 '''
 
 
+SESSION_PLUGIN_SOURCE = r'''
+import json, os, sys, threading
+OUT = os.environ["BRAIN_DEP_TRACE_OUT"]
+ROOT = os.environ.get("BRAIN_DEP_TRACE_ROOT", "")
+_cur = None
+_files = {}
+_snap = {}
+_newmods = {}
+_status = {}
+def _tr(frame, event, arg):
+    if event == "call":
+        c = _cur
+        if c is not None:
+            f = frame.f_code.co_filename
+            if f.endswith(".py") and not f.startswith("<") and f.startswith(ROOT):
+                _files[c].add(f)
+    return None
+def _set(path):
+    global _cur
+    if _cur is not None:
+        _newmods[_cur].update(set(sys.modules) - _snap[_cur])
+    _cur = path
+    _files.setdefault(path, set())
+    _newmods.setdefault(path, set())
+    _snap[path] = set(sys.modules)
+def _p(obj):
+    p = getattr(obj, "path", None)
+    if p is None:
+        p = getattr(obj, "fspath", None)
+    return str(p) if p is not None else None
+def pytest_sessionstart(session):
+    sys.settrace(_tr); threading.settrace(_tr)
+def pytest_collectstart(collector):
+    p = _p(collector)
+    if p and p.endswith(".py"):
+        _set(p)
+def pytest_collectreport(report):
+    if report.failed:
+        p = report.nodeid.split("::", 1)[0]
+        _status[p] = "COLLECTION_ERROR"
+def pytest_runtest_protocol(item, nextitem):
+    p = _p(item)
+    if p:
+        _set(p)
+    return None
+def pytest_sessionfinish(session, exitstatus):
+    sys.settrace(None); threading.settrace(None)
+    if _cur is not None:
+        _newmods[_cur].update(set(sys.modules) - _snap[_cur])
+    tests = {}
+    for p, files in _files.items():
+        for m in _newmods.get(p, ()):
+            mod = sys.modules.get(m)
+            f = getattr(mod, "__file__", None) if mod is not None else None
+            if isinstance(f, str) and f.endswith(".py") and f.startswith(ROOT):
+                files.add(f)
+        tests[p] = {"files": sorted(files)}
+    for p, st in _status.items():
+        full = os.path.join(str(session.config.rootpath), p)
+        tests.setdefault(full, {"files": []})["status"] = st
+    with open(OUT, "w", encoding="utf-8") as fh:
+        json.dump({"exitstatus": int(exitstatus), "tests": tests}, fh)
+'''
+
+
 def _sha(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def map_from_session(repo: str | os.PathLike[str], tree_root: str, payload: Mapping[str, Any],
+                     test_files: list[str] | None = None) -> dict:
+    """Turn a session plugin payload into a map keyed relative to ``tree_root``.
+
+    ``test_files`` (tree-relative) names every file the run was supposed to
+    cover; any of them absent from the payload is recorded as UNTRACED so the
+    selector fails closed on it.
+    """
+    root = pathlib.Path(repo).resolve()
+    tree = (root / tree_root).resolve() if tree_root else root
+    if tree != root and root not in tree.parents:
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    exit_ok = int(payload.get("exitstatus", 99)) in (0, 1)
+    tests: dict[str, dict] = {}
+    for abs_test, row in (payload.get("tests") or {}).items():
+        tp = pathlib.Path(abs_test).resolve()
+        if tree not in tp.parents or not tp.is_file():
+            continue
+        name = tp.name
+        if not (name.startswith("test_") or name.endswith("_test.py")):
+            continue
+        rel = tp.relative_to(tree).as_posix()
+        files = {}
+        for f in row.get("files") or []:
+            fp = pathlib.Path(f).resolve()
+            if tree in fp.parents and fp.is_file():
+                files[fp.relative_to(tree).as_posix()] = _sha(fp)
+        status = row.get("status") or ("TRACED" if exit_ok else "PYTEST_EXIT:" + str(payload.get("exitstatus")))
+        tests[rel] = {"test_sha256": _sha(tp), "status": status, "files": files}
+    for rel in test_files or []:
+        tests.setdefault(rel, {"test_sha256": None, "status": "UNTRACED", "files": {}})
+    return {"schema": SCHEMA, "repository_relative": not tree_root, "tree_root": tree_root,
+            "source_root": tree_root,
+            "tracer": "pytest session plugin: sys.settrace(call) + sys.modules delta per current test file",
+            "tests": tests}
 
 
 def trace(repo: str | os.PathLike[str], test_files: list[str], *, source_root: str = "",
@@ -130,10 +246,22 @@ def load_map(repo: str | os.PathLike[str], path: str) -> dict:
     return data
 
 
+def _tree_rel(tree_root: str, rel: str) -> str | None:
+    if not tree_root:
+        return rel
+    prefix = tree_root.rstrip("/") + "/"
+    return rel[len(prefix):] if rel.startswith(prefix) else None
+
+
 def decide(repo: str | os.PathLike[str], mapping: dict, test_rel: str, changed: set[str]) -> tuple[bool, str]:
-    """(select?, reason) for one test under the recorded map.  Unknown -> select."""
+    """(select?, reason) for one test under the recorded map.  Unknown -> select.
+
+    ``test_rel`` and ``changed`` are repo-relative; a map with ``tree_root`` is
+    consulted relative to that tree."""
     root = pathlib.Path(repo).resolve()
-    row = (mapping.get("tests") or {}).get(test_rel)
+    tree_root = str(mapping.get("tree_root") or "")
+    key = _tree_rel(tree_root, test_rel)
+    row = (mapping.get("tests") or {}).get(key) if key is not None else None
     if not row:
         return True, "NO_DYNAMIC_TRACE_FAIL_CLOSED"
     if row.get("status") != "TRACED":
@@ -141,7 +269,8 @@ def decide(repo: str | os.PathLike[str], mapping: dict, test_rel: str, changed: 
     path = root / test_rel
     if not path.is_file() or _sha(path) != row.get("test_sha256"):
         return True, "DYNAMIC_TRACE_STALE_FAIL_CLOSED"
-    hit = sorted(set(row.get("files") or {}) & changed)
+    changed_in_tree = {c for c in (_tree_rel(tree_root, x) for x in changed) if c is not None}
+    hit = sorted(set(row.get("files") or {}) & changed_in_tree)
     if hit:
         return True, "DYNAMIC_DEPENDENCY_TRACED:" + ",".join(hit)
     return False, "NOT_EXECUTED_IN_TRACE"
