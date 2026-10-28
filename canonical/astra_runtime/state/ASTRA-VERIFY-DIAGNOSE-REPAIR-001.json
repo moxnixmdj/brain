@@ -1,57 +1,91 @@
 {
   "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
   "status": "COMPLETE",
-  "e2e_ms_run1": 3377.5,
-  "e2e_ms_run2": 3184.8,
+  "e2e_ms_run1": 2159.9,
+  "e2e_ms_run2": 2257.1,
   "cases": {
     "golden": {
       "status": "VERIFIED_PATCH",
-      "e2e_ms": 3377.5,
+      "e2e_ms": 2159.9,
+      "search_s": 1.401,
+      "judge": true,
       "winning_mutation": "BINOP_DROP keep left"
     },
     "wrong_operator": {
       "status": "VERIFIED_PATCH",
-      "e2e_ms": 7559.1,
+      "e2e_ms": 1601.0,
+      "search_s": 0.822,
+      "judge": true,
       "winning_mutation": "BINOP_SWAP Add->Mult"
     },
     "missing_term": {
       "status": "VERIFIED_PATCH",
-      "e2e_ms": 7994.9,
+      "e2e_ms": 1571.2,
+      "search_s": 0.792,
+      "judge": true,
       "winning_mutation": "EXPR_EXTEND <expr> Mult h"
     },
     "missing_guard": {
       "status": "VERIFIED_PATCH",
-      "e2e_ms": 7709.8,
+      "e2e_ms": 2034.5,
+      "search_s": 1.225,
+      "judge": true,
       "winning_mutation": "GUARD_INSERT if w is None: return 0"
     },
     "two_edits_and_overfit": {
       "status": "VERIFIED_PATCH",
-      "e2e_ms": 21890.9,
+      "e2e_ms": 3836.3,
+      "search_s": 3.044,
+      "judge": true,
+      "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult"
+    },
+    "two_edits_and_overfit__judge_pytest": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 22612.0,
+      "search_s": 21.848,
+      "judge": false,
       "winning_mutation": "COMPOSE BINOP_DROP keep left + BINOP_SWAP Add->Mult"
     },
     "only_overfit": {
       "status": "OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:[23]",
-      "e2e_ms": 9738.8,
+      "e2e_ms": 1333.0,
+      "search_s": 0.873,
+      "judge": true,
       "winning_mutation": "CONSTANT_REPLACE 0->12"
     },
     "under_specified_suite": {
       "status": "VERIFIED_PATCH",
-      "e2e_ms": 4562.3,
+      "e2e_ms": 2248.8,
+      "search_s": 1.437,
+      "judge": true,
       "winning_mutation": "COMPARE_SWAP LtE->NotEq"
+    },
+    "parametrized_not_plain": {
+      "status": "VERIFIED_PATCH",
+      "e2e_ms": 16073.3,
+      "search_s": 8.066,
+      "judge": false,
+      "winning_mutation": "BINOP_SWAP Add->Mult"
     },
     "sabotage_full_suite": {
       "status": "PATCH_FAILS_FULL_SUITE:FAIL",
-      "e2e_ms": 2865.4,
+      "e2e_ms": 2157.8,
+      "search_s": 1.373,
+      "judge": true,
       "winning_mutation": "BINOP_DROP keep left"
     },
     "nothing_to_repair": {
       "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-      "e2e_ms": 324.3,
+      "e2e_ms": 329.7,
+      "search_s": null,
+      "judge": null,
       "winning_mutation": null
     },
     "harness_crash": {
       "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-      "e2e_ms": 286.5,
+      "e2e_ms": 295.2,
+      "search_s": null,
+      "judge": null,
       "winning_mutation": null
     }
   },

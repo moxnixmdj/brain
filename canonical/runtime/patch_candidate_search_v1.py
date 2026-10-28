@@ -521,6 +521,96 @@ def evaluate(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[st
             "workers": workers, "stop_reason": stop_reason}
 
 
+def evaluate_batch(tree: pathlib.Path, target_rel: str, candidates: list[tuple[dict[str, Any], str]],
+                   judge_batch: Callable[[pathlib.Path, list[str], float], dict[int, int]],
+                   run_tests: Callable[[pathlib.Path], int], *, workers: int, deadline: float,
+                   max_candidates: int, scratch: pathlib.Path, green_budget: int = 4,
+                   choose: Callable[[list[tuple[int, str]]], int] | None = None, batch: int = 32) -> dict[str, Any]:
+    """Judge candidates in batches -- one judge process per worker copy -- then replay
+    the chosen green under ``run_tests`` (real pytest) exactly as ``evaluate`` does.
+
+    ``judge_batch(copy_root, texts, deadline)`` returns {position: failed_count}
+    for the texts it managed to judge (0 = green).  Candidates are dealt to the
+    workers round-robin in search order, so the earliest candidates are judged
+    first on every worker; the budget keeps search-order semantics.
+    """
+    workers = max(1, int(workers))
+    todo = candidates[:max_candidates]
+    copies: list[pathlib.Path] = []
+    for i in range(workers):
+        c = scratch / ("j" + str(i))
+        shutil.copytree(tree, c, ignore=shutil.ignore_patterns(*_SKIP), dirs_exist_ok=True)
+        copies.append(c)
+    original = (tree / target_rel).read_bytes()
+    verdicts: dict[int, int] = {}
+    stop_reason = "EXHAUSTED"
+    winner: dict[str, Any] | None = None
+
+    def judged_greens() -> list[tuple[int, str]]:
+        # same semantics as evaluate: greens on the first green's line, by search order
+        g = [(i + 1, todo[i][1]) for i in sorted(verdicts) if verdicts[i] == 0]
+        if g and green_budget > 0:
+            line = todo[g[0][0] - 1][0].get("lineno")
+            g = [x for x in g if todo[x[0] - 1][0].get("lineno") == line][:green_budget]
+        return g
+
+    try:
+        # rounds of workers*batch candidates in search order, so a search that is
+        # green on its first line stops early instead of judging everything
+        pos = 0
+        with cf.ThreadPoolExecutor(max_workers=workers) as pool:
+            while pos < len(todo) and time.monotonic() < deadline:
+                chunks: list[list[int]] = [[] for _ in range(workers)]
+                for idx in range(pos, min(len(todo), pos + workers * batch)):
+                    chunks[(idx - pos) % workers].append(idx)
+                pos = min(len(todo), pos + workers * batch)
+
+                def one(w: int, chunks=chunks) -> dict[int, int]:
+                    if not chunks[w]:
+                        return {}
+                    res = judge_batch(copies[w], [todo[i][1] for i in chunks[w]], deadline)
+                    return {chunks[w][k]: rc for k, rc in res.items()}
+
+                for part in pool.map(one, range(workers)):
+                    verdicts.update(part)
+                g = judged_greens()
+                if g and (len(g) >= green_budget or
+                          (pos < len(todo) and todo[pos][0].get("lineno") != todo[g[0][0] - 1][0].get("lineno"))):
+                    break
+        attempts = [{"index": i + 1, "mutation": todo[i][0], "returncode": verdicts[i], "judge": "in_process"}
+                    for i in sorted(verdicts)]
+        greens = judged_greens()
+        if not greens and len(verdicts) < len(todo):
+            stop_reason = "DEADLINE"
+        if greens:
+            chosen = choose(greens) if choose else greens[0][0]
+            text = next(t for i, t in greens if i == chosen)
+            copy = copies[0]
+            replay = []
+            for _ in range(2):
+                (copy / target_rel).write_text(text, encoding="utf-8")
+                _purge_bytecode(copy / target_rel)
+                replay.append(run_tests(copy))
+                (copy / target_rel).write_bytes(original)
+                _purge_bytecode(copy / target_rel)
+            if all(r == 0 for r in replay):
+                winner = {"index": chosen, "mutation": todo[chosen - 1][0], "candidate": text, "replay_returncodes": replay}
+                stop_reason = "VERIFIED"
+            else:
+                stop_reason = "FLAKY_REPLAY:" + str(replay)
+                for a in attempts:
+                    if a["index"] == chosen:
+                        a["pytest_replay"] = replay
+        elif stop_reason == "EXHAUSTED" and len(candidates) > max_candidates:
+            stop_reason = "MAX_CANDIDATES"
+    finally:
+        for c in copies:
+            shutil.rmtree(c, ignore_errors=True)
+    return {"winner": winner, "attempts": attempts, "tested_candidate_count": len(verdicts),
+            "green_indices": [i for i, _ in greens] if greens else [], "candidate_count": len(candidates),
+            "workers": workers, "stop_reason": stop_reason, "judge": "in_process"}
+
+
 def default_workers() -> int:
     n = os.cpu_count() or 1
     return max(1, min(n, 8))

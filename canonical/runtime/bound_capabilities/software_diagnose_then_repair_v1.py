@@ -74,6 +74,7 @@ from canonical.runtime.bound_capabilities import python_dynamic_fault_localizer_
 from canonical.runtime.bound_capabilities import python_repo_diff_apply_full_testgate as full_gate
 from canonical.runtime import patch_candidate_search_v1 as candidates_v1
 from canonical.runtime import patch_differential_witness_v1 as witness_v1
+from canonical.runtime import patch_inprocess_judge_v1 as judge_v1
 
 SCHEMA = "PROJECT_BRAIN_SOFTWARE_DIAGNOSE_THEN_REPAIR_V1"
 CAPABILITY_ID = "software.diagnose_then_repair.v1"
@@ -308,6 +309,71 @@ def _replay(tree: pathlib.Path, target_rel: str, text: str, run_tests, scratch: 
         shutil.rmtree(copy, ignore_errors=True)
 
 
+def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[str, Any]], texts: list[str],
+                 python_exe: str, confine: str, deadline: float) -> dict[int, int]:
+    """One judge process for ``texts`` in ``copy_root`` (confined when the host can)."""
+    batch_rel = ".brain_diagnose/batch"
+    out_rel = ".brain_diagnose/judge.json"
+    bdir = copy_root / batch_rel
+    shutil.rmtree(bdir, ignore_errors=True)
+    bdir.mkdir(parents=True)
+    for i, t in enumerate(texts):
+        (bdir / (str(i) + ".py")).write_text(t, encoding="utf-8")
+    out = copy_root / out_rel
+    if out.exists():
+        out.unlink()
+    program = judge_v1.judge_program(target_rel, modules, batch_rel, len(texts), out_rel)
+    timeout = max(5, int(deadline - time.monotonic()))
+    ran = False
+    if confine in ("auto", "required") and confine_v1.available():
+        receipt = confine_v1.run("import os\nos.chdir('/project')\n" + program, str(copy_root), timeout=timeout,
+                                 network=False, ro_binds=_site_dirs())
+        ran = receipt.get("verdict") in ("OK", "TIMEOUT") or out.is_file()
+    if not ran and confine != "required":
+        try:
+            subprocess.run([python_exe, "-c", program], cwd=copy_root, capture_output=True, timeout=timeout,
+                           env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        except subprocess.TimeoutExpired:
+            pass
+    shutil.rmtree(bdir, ignore_errors=True)
+    if not out.is_file():
+        return {}
+    try:
+        data = json.loads(out.read_text(encoding="utf-8"))
+    except ValueError:
+        return {}
+    return {int(k): int(v) for k, v in data.items()}
+
+
+def _test_import_closure(tree: pathlib.Path, tests_rel: list[str]) -> list[str]:
+    """Tree files (not tests, not __init__) the named test files import, in order of appearance."""
+    import ast as _ast
+    out: list[str] = []
+
+    def add(mod: str) -> None:
+        rel = mod.replace(".", "/")
+        for cand in (rel + ".py", rel + "/__init__.py"):
+            p = tree / cand
+            if p.is_file() and not _TESTNAME(p.name) and cand not in out:
+                out.append(cand)
+                return
+
+    for rel in tests_rel:
+        try:
+            t = _ast.parse((tree / rel).read_text(encoding="utf-8"))
+        except (OSError, SyntaxError, UnicodeDecodeError):
+            continue
+        for n in _ast.walk(t):
+            if isinstance(n, _ast.Import):
+                for a in n.names:
+                    add(a.name)
+            elif isinstance(n, _ast.ImportFrom) and n.module and not n.level:
+                add(n.module)
+                for a in n.names:            # from pkg import calc
+                    add(n.module + "." + a.name)
+    return [p for p in out if not p.endswith("/__init__.py")] or out
+
+
 def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
                confine: str, trim: list[str] | None = None) -> dict[str, Any]:
     """Run the failing tests once; the verdict is the summary line, never the exit code."""
@@ -446,7 +512,16 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             elif tb_files:
                 target_rel, basis = tb_files[0], "TRACEBACK_TOP"
             else:
-                raise DiagnoseRepairRefusal("NO_LOCALIZED_SOURCE")
+                # a wrong return value raises nothing inside the tree and the dynamic
+                # localizer may not run this suite's shape (measured: parametrized
+                # tests -> NO_FAILING_TEST); the files the failing tests import from
+                # the tree are the last static witness before refusing
+                imported = _test_import_closure(tree, tests_tree)
+                loc_row["test_import_closure"] = imported[:10]
+                if len(imported) == 1:
+                    target_rel, basis = imported[0], "TEST_IMPORT_CLOSURE_UNIQUE"
+                else:
+                    raise DiagnoseRepairRefusal("NO_LOCALIZED_SOURCE" + (":AMBIGUOUS_IMPORTS:" + str(len(imported)) if imported else ""))
         loc_row.update({"target": target_rel, "target_basis": basis,
                         "seconds": round(time.monotonic() - t0, 3)})
         steps.append(loc_row)
@@ -492,10 +567,26 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
 
         run_tests = lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine, trim)  # noqa: E731
         green_budget = int(args.get("green_budget") or 4)
-        search = candidates_v1.evaluate(
-            tree, target_rel, candidates, run_tests,
-            workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
-            green_budget=green_budget, choose=make_choose(candidates))
+        judge_mode = str(args.get("judge") or "auto")       # auto | pytest
+        plain_ok, plain_why, plain_mods = (judge_v1.plain_tests(tree, tests_tree) if judge_mode == "auto"
+                                           else (False, "JUDGE_PYTEST_REQUESTED", []))
+        judge_row = {"in_process": plain_ok, "reason": plain_why}
+
+        def judge_batch(copy: pathlib.Path, texts: list[str], dl: float) -> dict[int, int]:
+            return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl)
+
+        def run_search(cands: list[tuple[dict[str, Any], str]], chooser) -> dict[str, Any]:
+            if plain_ok:
+                return candidates_v1.evaluate_batch(
+                    tree, target_rel, cands, judge_batch, run_tests,
+                    workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
+                    green_budget=green_budget, choose=chooser)
+            return candidates_v1.evaluate(
+                tree, target_rel, cands, run_tests,
+                workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
+                green_budget=green_budget, choose=chooser)
+
+        search = run_search(candidates, make_choose(candidates))
         stage2: dict[str, Any] = {}
         suspicious = [i for i in search["green_indices"] if _overfit_signature(candidates[i - 1][0], nums, strings)]
         only_suspicious = bool(search["green_indices"]) and len(suspicious) == len(search["green_indices"])
@@ -519,10 +610,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                                                 limit=int(args.get("compose_limit") or 200))
             if pairs:
                 base = len(candidates)
-                s2 = candidates_v1.evaluate(
-                    tree, target_rel, pairs, run_tests,
-                    workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
-                    green_budget=green_budget, choose=make_choose(pairs))
+                s2 = run_search(pairs, make_choose(pairs))
                 for a in s2["attempts"]:
                     a["index"] += base
                     a["stage"] = "compose"
@@ -552,7 +640,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         steps.append({"step": "patch_search", "seconds": round(time.monotonic() - t0, 3),
                       "candidate_count": search["candidate_count"], "tested_candidate_count": search["tested_candidate_count"],
                       "workers": search["workers"], "stop_reason": search["stop_reason"],
-                      "priority_lines": priority[:20], "compose": stage2,
+                      "priority_lines": priority[:20], "compose": stage2, "judge": judge_row,
                       "winning_mutation": (search["winner"] or {}).get("mutation"),
                       "winning_index": (search["winner"] or {}).get("index"),
                       "green_indices": search["green_indices"], "witness": witness_row,

@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import json
 import sys
+import time
 from pathlib import Path
 
 import pytest
@@ -185,10 +186,14 @@ def test_workers_run_candidates_in_parallel_on_their_own_copies(tmp_path: Path):
 
 
 def test_the_deadline_stops_the_search_and_says_so(tmp_path: Path):
-    _fixture(tmp_path, bug="return 0")
-    result = dr.run(_args(deadline_s=5, workers=1), tmp_path)
+    _fixture(tmp_path, bug="return len(str(w))")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area\n\ndef test_area():\n    assert area(3, 4) == 12\n    assert area(2, 5) == 10\n")
+    result = dr.run(_args(deadline_s=5, workers=1, judge="pytest"), tmp_path)   # 0.2 s a candidate: 5 s cannot finish
     assert result["verified"] is False
-    assert result["status"].startswith(("DEADLINE_EXCEEDED:5s", "OPEN:NO_VERIFIED_CANDIDATE:")), result["status"]
+    assert result["status"].startswith("DEADLINE_EXCEEDED:5s"), result["status"]
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    assert art["steps"][2]["stop_reason"] == "DEADLINE" and art["steps"][2]["tested_candidate_count"] >= 1
 
 
 # --- differential witness: several green patches are ranked, not shipped first-come ---
@@ -314,3 +319,78 @@ def test_overfit_signature_is_a_test_literal_written_into_the_code():
     assert sig({"kind": "CONSTANT_REPLACE", "detail": "1->0"}, [12, 5], []) is False      # 0/1/-1 are not evidence
     assert sig({"kind": "GUARD_INSERT", "detail": "if w is None: return 12"}, [12], []) is True
     assert sig({"kind": "BINOP_SWAP", "detail": "Add->Mult"}, [12], []) is False
+
+
+# --- in-process judge: one confined interpreter per worker, candidates streamed through ---
+
+def test_plain_tests_are_judged_in_process_and_the_ledger_says_so(tmp_path: Path):
+    _fixture(tmp_path, bug="return w + h + 1")
+    t0 = time.monotonic()
+    result = dr.run(_args(deadline_s=300), tmp_path)
+    seconds = time.monotonic() - t0
+    assert result["status"] == "VERIFIED_PATCH"
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["judge"] == {"in_process": True, "reason": "PLAIN"}
+    assert all(a.get("judge") == "in_process" for a in search["attempts"])
+    assert search["winning_mutation"]["kind"] == "COMPOSE"
+    assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+    assert seconds < 20, seconds          # was 22 s under per-candidate pytest; measured 3.6 s
+
+
+def test_judge_pytest_is_the_same_answer_slower(tmp_path: Path):
+    _fixture(tmp_path, bug="return w")
+    result = dr.run(_args(judge="pytest"), tmp_path)
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert result["status"] == "VERIFIED_PATCH" and search["judge"]["in_process"] is False
+    assert search["winning_mutation"]["kind"] == "EXPR_EXTEND"
+
+
+def test_non_plain_tests_fall_back_to_pytest_and_still_verify(tmp_path: Path):
+    _fixture(tmp_path, bug="return w + h")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "import pytest\nfrom pkg.calc import area\n\n"
+        "@pytest.mark.parametrize('w,h,e', [(3, 4, 12), (2, 5, 10)])\ndef test_area(w, h, e):\n    assert area(w, h) == e\n")
+    result = dr.run(_args(), tmp_path)
+    search = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]
+    assert search["judge"]["in_process"] is False
+    assert search["judge"]["reason"].startswith(("TEST_TAKES_PARAMETERS", "DECORATED_TEST"))
+    assert result["status"] == "VERIFIED_PATCH"
+    assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+
+
+def test_plain_tests_applicability_is_static_and_names_the_reason(tmp_path: Path):
+    from canonical.runtime import patch_inprocess_judge_v1 as j
+    _fixture(tmp_path)
+    tree = tmp_path / "proj"
+    ok, why, mods = j.plain_tests(tree, ["tests/test_calc.py"])
+    assert ok and why == "PLAIN" and mods == [{"path": "tests/test_calc.py", "import": "tests.test_calc", "sys_path": ".", "tests": 2}]
+    (tree / "conftest.py").write_text("import pytest\n\n@pytest.fixture(autouse=True)\ndef x():\n    yield\n")
+    assert j.plain_tests(tree, ["tests/test_calc.py"])[:2] == (False, "CONFTEST_HOOKS_OR_AUTOUSE:conftest.py")
+    (tree / "conftest.py").unlink()
+    (tree / "tests" / "__init__.py").unlink()        # rootdir-less layout: import by basename from its dir
+    ok, why, mods = j.plain_tests(tree, ["tests/test_calc.py"])
+    assert ok and mods[0]["import"] == "test_calc" and mods[0]["sys_path"] == "tests"
+    (tree / "tests" / "test_calc.py").write_text("class TestX:\n    def test_a(self):\n        pass\n")
+    assert j.plain_tests(tree, ["tests/test_calc.py"])[1].startswith("TEST_CLASS:")
+
+
+def test_a_runaway_candidate_is_bounded_and_the_batch_goes_on(tmp_path: Path):
+    from canonical.runtime import patch_inprocess_judge_v1 as j
+    _fixture(tmp_path, bug="return w * h - 1")
+    tree = tmp_path / "proj"
+    ok, _, mods = j.plain_tests(tree, ["tests/test_calc.py"])
+    assert ok
+    texts = ["def area(w, h):\n    while True:\n        pass\n\n\ndef twice(x):\n    return 2 * x\n",
+             "def area(w, h):\n    return w * h\n\n\ndef twice(x):\n    return 2 * x\n",
+             "def area(w, h):\n    return w\n\n\ndef twice(x):\n    return 2 * x\n",
+             "def area(w, h):\n    raise SystemExit(3)\n\n\ndef twice(x):\n    return 2 * x\n"]
+    # a short per-candidate alarm for the test; the default is 5 s
+    import canonical.runtime.patch_inprocess_judge_v1 as jj
+    prog = jj.judge_program
+    jj.judge_program = lambda *a, **k: prog(*a, **{**k, "per_candidate_s": 1})
+    try:
+        res = dr._judge_batch(tree, "pkg/calc.py", mods, texts, sys.executable, "auto", time.monotonic() + 60)
+    finally:
+        jj.judge_program = prog
+    assert res == {0: 999, 1: 0, 2: 1, 3: 1}, res
+    assert (tree / "pkg" / "calc.py").read_text().endswith("return w * h - 1\n\n\ndef twice(x):\n    return 2 * x\n")
