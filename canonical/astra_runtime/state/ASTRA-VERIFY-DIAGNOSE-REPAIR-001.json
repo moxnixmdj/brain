@@ -1,18 +1,42 @@
 {
   "mission_id": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
   "status": "COMPLETE",
-  "e2e_ms_run1": 3330.2,
-  "e2e_ms_run2": 3317.9,
+  "e2e_ms_run1": 2096.6,
+  "e2e_ms_run2": 2072.5,
   "golden": {
     "status": "VERIFIED_PATCH",
     "gate": "PASS",
     "tests": 2,
-    "candidates": 4,
+    "candidates": 43,
+    "winning_index": 1,
     "confined": true
   },
-  "open": "OPEN:NO_VERIFIED_CANDIDATE:11",
+  "wrong_operator": "VERIFIED_PATCH",
+  "open": "OPEN:NO_VERIFIED_CANDIDATE:18",
   "sabotage_full_suite": "PATCH_FAILS_FULL_SUITE:FAIL",
   "nothing_to_repair": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
   "harness_crash": "REPRODUCE_HARNESS_ERROR:rc=4",
+  "parallel": {
+    "workers=1,confine=auto": {
+      "search_s": 7.226,
+      "tested": 18,
+      "per_candidate_s": 0.401
+    },
+    "workers=1,confine=off": {
+      "search_s": 5.266,
+      "tested": 18,
+      "per_candidate_s": 0.293
+    },
+    "workers=2,confine=auto": {
+      "search_s": 3.618,
+      "tested": 18,
+      "per_candidate_s": 0.201
+    },
+    "workers=2,confine=off": {
+      "search_s": 2.626,
+      "tested": 18,
+      "per_candidate_s": 0.146
+    }
+  },
   "determinism": "diff byte-identical on rerun"
 }

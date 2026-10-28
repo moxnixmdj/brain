@@ -2,68 +2,115 @@
   "receipt_for": "ASTRA-VERIFY-DIAGNOSE-REPAIR-001",
   "capability_id": "software.diagnose_then_repair.v1",
   "adapter_module": "software_diagnose_then_repair_v1",
-  "fixture": "proj/pkg/calc.py `return w * h - 1` (off by one), proj/tests/test_calc.py names the failure, proj/tests/test_other.py is the rest of the suite",
+  "fixture": "proj/pkg/calc.py with one injected bug, proj/tests/test_calc.py names the failure, proj/tests/test_other.py is the rest of the suite",
   "observed": {
     "golden": {
+      "bug": "return w * h - 1",
       "status": "VERIFIED_PATCH",
       "verified": true,
       "confined": true,
       "target_path": "pkg/calc.py",
       "target_basis": "LOCALIZER_TOP",
-      "tested_candidate_count": 4,
-      "winning_mutation": "CONSTANT_REPLACE 1->0",
+      "priority_lines": [
+        1,
+        2,
+        5,
+        6
+      ],
+      "candidate_count": 43,
+      "tested_candidate_count": 3,
+      "winning_index": 1,
+      "winning_mutation": "BINOP_DROP keep left",
+      "patched_line": [
+        "+    return w * h"
+      ],
       "gate": "PASS",
       "tests_discovered": 2,
       "tests_failed": 0,
-      "diff_sha256": "73fa015d603e48afb927925429cee9c7b51ae27524641e0884551568596bc7e7",
+      "diff_sha256": "d9961ebab29d1a8cda6343f0d05ea8d46c0673379f168ae71dc6c00671d3d5a5",
       "steps": [
         {
           "step": "reproduce",
-          "seconds": 0.466
+          "seconds": 0.413
         },
         {
           "step": "localize",
-          "seconds": 0.139
+          "seconds": 0.133
         },
         {
           "step": "patch_search",
-          "seconds": 2.359
+          "seconds": 1.243
         },
         {
           "step": "full_suite_gate",
-          "seconds": 0.362
+          "seconds": 0.305
         }
       ],
       "anchor_unchanged": true
     },
     "e2e_ms": [
-      3330.2,
-      3317.9
+      2096.6,
+      2072.5
     ],
-    "determinism": "diff byte-identical on rerun (yes), source tree hash unchanged both runs",
+    "determinism": "diff byte-identical on rerun, source tree hash unchanged both runs",
+    "wrong_operator": {
+      "bug": "return w + h",
+      "status": "VERIFIED_PATCH",
+      "winning_mutation": "BINOP_SWAP Add->Mult",
+      "patched_line": [
+        "+    return w * h"
+      ],
+      "tested": 5,
+      "e2e_ms": 2435.1,
+      "note": "Add->Mult was outside python.patch.search.test_guided.ast.v1's table (OPEN:11 in the previous receipt); the template generator reaches it"
+    },
     "open": {
-      "status": "OPEN:NO_VERIFIED_CANDIDATE:11",
-      "note": "Add->Mult is outside the search's mutation table; the loop says OPEN with the candidate count instead of inventing a patch",
-      "e2e_ms": 4618.1
+      "bug": "return w",
+      "status": "OPEN:NO_VERIFIED_CANDIDATE:18",
+      "candidate_count": 18,
+      "stop_reason": "EXHAUSTED",
+      "e2e_ms": 4178.4,
+      "note": "a missing term: no template adds code; the loop says OPEN with the count instead of inventing a patch"
     },
     "sabotage_full_suite": {
       "status": "PATCH_FAILS_FULL_SUITE:FAIL",
       "tests_failed": 1,
-      "note": "the stated test is repaired but another test in the tree breaks: full-suite gate FAIL, verified false, no patch shipped",
-      "e2e_ms": 3275.6
+      "e2e_ms": 2028.8,
+      "note": "the stated test is repaired but another test in the tree breaks: full-suite gate FAIL, verified false"
     },
     "nothing_to_repair": {
       "status": "NOTHING_TO_REPAIR:FAILING_TESTS_PASS",
-      "e2e_ms": 426.9
+      "e2e_ms": 416.5
     },
     "harness_crash": {
       "status": "REPRODUCE_HARNESS_ERROR:rc=4",
-      "note": "conftest raising -> pytest rc 4 without a summary line; the verdict is the summary line, never the exit code, so this is a named refusal rather than a 'failing test' to repair",
-      "e2e_ms": 347.7
+      "e2e_ms": 293.1,
+      "note": "conftest raising -> pytest rc 4 without a summary line; the verdict is the summary line, never the exit code"
     },
-    "confinement": {
-      "reproduce_confined": true,
-      "note": "reproduction runs under confine_v1 (user namespace + chroot, /project only writable, no network); measured: without /dev/null bound into the chroot pytest dies at startup with rc 1 / INTERNALERROR rc 3, which the exit code alone cannot tell from a failing test"
+    "parallel_and_confinement": {
+      "exhaustive_search_18_candidates": {
+        "workers=1,confine=auto": {
+          "search_s": 7.226,
+          "tested": 18,
+          "per_candidate_s": 0.401
+        },
+        "workers=1,confine=off": {
+          "search_s": 5.266,
+          "tested": 18,
+          "per_candidate_s": 0.293
+        },
+        "workers=2,confine=auto": {
+          "search_s": 3.618,
+          "tested": 18,
+          "per_candidate_s": 0.201
+        },
+        "workers=2,confine=off": {
+          "search_s": 2.626,
+          "tested": 18,
+          "per_candidate_s": 0.146
+        }
+      },
+      "note": "candidates run on per-worker copies under the same confined pytest command that reproduced the failure; 2 workers on a 2-cpu host; confinement costs the difference between auto and off"
     }
   }
 }

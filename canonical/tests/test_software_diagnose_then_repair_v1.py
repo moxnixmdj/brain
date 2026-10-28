@@ -49,7 +49,7 @@ def test_failing_test_in_verified_patch_out_and_the_tree_untouched(tmp_path: Pat
     assert result["gate"] == "PASS" and result["tests_discovered"] == 2 and result["tests_failed"] == 0
     assert result["target_path"] == "pkg/calc.py"
     diff = (tmp_path / result["diff_path"]).read_text()
-    assert "--- a/pkg/calc.py" in diff and "+    return w * h - 0" in diff
+    assert "--- a/pkg/calc.py" in diff and "+    return w * h\n" in diff   # the term dropped, not a 1 made 0
     assert _snapshot(tmp_path) == before                      # never written
     assert not (tmp_path / "out" / "dr.scratch").exists()    # scratch removed
     artifact = json.loads((tmp_path / "out" / "dr.json").read_text())
@@ -67,7 +67,7 @@ def test_a_passing_suite_is_nothing_to_repair(tmp_path: Path):
 
 
 def test_no_candidate_in_bound_is_an_open_result_not_a_patch(tmp_path: Path):
-    _fixture(tmp_path, bug="return w + h")   # Add->Sub is the only swap; no candidate fixes it
+    _fixture(tmp_path, bug="return w")   # a missing term: no template adds code
     result = dr.run(_args(), tmp_path)
     assert result["verified"] is False and result["diff_path"] is None
     assert result["status"].startswith("OPEN:NO_VERIFIED_CANDIDATE:")
@@ -131,3 +131,52 @@ def test_confinement_exposes_only_null_and_urandom_from_dev(tmp_path: Path):
         "import os\nopen('/dev/null', 'w').write('x')\nprint(len(os.urandom(2)), sorted(os.listdir('/dev')))\n",
         str(tmp_path), timeout=20, network=False)
     assert receipt["verdict"] == "OK" and "2 ['null', 'urandom']" in receipt["output"]
+
+
+@pytest.mark.parametrize("bug,fix", [
+    ("return w + h", "return w * h"),                 # wrong operator (outside the old Add->Sub table)
+    ("return w * h - 1", "return w * h"),             # spurious term
+    ("return w * h if w <= 0 else 0", None),          # boundary: some comparison flip must pass
+])
+def test_bug_classes_the_generator_reaches(tmp_path: Path, bug: str, fix: str | None):
+    _fixture(tmp_path, bug=bug)
+    result = dr.run(_args(), tmp_path)
+    assert result["status"] == "VERIFIED_PATCH", result["status"]
+    if fix:
+        assert "+    " + fix + "\n" in (tmp_path / result["diff_path"]).read_text()
+
+
+def test_candidates_are_spectrum_first_distinct_and_parse(tmp_path: Path):
+    from canonical.runtime import patch_candidate_search_v1 as pcs
+    import ast
+    src = "def f(a, b):\n    x = a - b\n    if x < 0:\n        return 1\n    return x + 1\n"
+    rows = pcs.generate(src, [3], ["s"], priority_lines=[5, 3])
+    assert rows and rows[0][0]["lineno"] == 5 and all(r[0]["lineno"] == 5 for r in rows[:6])
+    first_other = next(r for r in rows if r[0]["lineno"] != 5)
+    assert first_other[0]["lineno"] == 3
+    texts = [c for _, c in rows]
+    assert len(set(texts)) == len(texts) and src not in texts
+    for c in texts:
+        ast.parse(c)
+    kinds = {r[0]["kind"] for r in rows}
+    assert {"BINOP_SWAP", "BINOP_DROP", "COMPARE_SWAP", "OPERAND_SWAP", "NOT_TOGGLE", "CONSTANT_REPLACE"} <= kinds
+
+
+def test_workers_run_candidates_in_parallel_on_their_own_copies(tmp_path: Path):
+    _fixture(tmp_path, bug="return w * h if w <= 0 else 0")
+    before = _snapshot(tmp_path)
+    r2 = dr.run(_args(workers=2), tmp_path)
+    assert r2["status"] == "VERIFIED_PATCH"
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    search = next(s for s in art["steps"] if s["step"] == "patch_search")
+    assert search["workers"] == 2 and search["stop_reason"] == "VERIFIED"
+    assert search["tested_candidate_count"] >= search["winning_index"]
+    assert _snapshot(tmp_path) == before
+    assert not (tmp_path / "out" / "dr.scratch").exists()
+
+
+def test_the_deadline_stops_the_search_and_says_so(tmp_path: Path):
+    _fixture(tmp_path, bug="return w")
+    result = dr.run(_args(deadline_s=5, workers=1), tmp_path)
+    assert result["verified"] is False
+    assert result["status"].startswith(("DEADLINE_EXCEEDED:5s", "OPEN:NO_VERIFIED_CANDIDATE:")), result["status"]

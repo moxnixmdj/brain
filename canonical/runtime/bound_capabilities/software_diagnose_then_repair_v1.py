@@ -19,10 +19,15 @@ for the next:
                  ``source_path`` or the top-ranked file both witnesses agree on,
                  else the top localized file, else the top traceback file.
                  No witness -> NO_LOCALIZED_SOURCE, no guessing.
-  3. REPAIR      python.patch.search.test_guided.ast.v1 on the scratch copy
-                 (it edits in place while searching; the user's tree is never
-                 touched).  No verified candidate -> OPEN, the ledger says how
-                 many were tried.
+  3. REPAIR      patch_candidate_search_v1: template edits (operator, compare,
+                 bool, operand-order, not-toggle, constant and string
+                 replacements) ordered spectrum-first by the lines the
+                 localizer and the traceback named, tested in parallel on
+                 per-worker copies of the scratch tree under the same pytest
+                 command (confined when the host can) that reproduced the
+                 failure; the first green candidate is replayed twice.  The
+                 user's tree is never touched.  No verified candidate -> OPEN,
+                 the ledger says how many were tried and why it stopped.
   4. VERIFY      re-anchor the diff to the tree and run
                  python.repo.diff_apply_full_testgate.v1: scratch copy, git
                  apply --check, the WHOLE discovered suite under pytest.  Only
@@ -43,6 +48,7 @@ Inputs (repo-confined):
   python_executable  interpreter for pytest (default: this one)
   deadline_s         end-to-end budget in seconds (default 600)
   max_candidates     patch-search bound (default 2000)
+  workers            parallel candidate workers (default: cpu count, max 8)
   confine            "auto" (default) | "required" | "off"
 
 result_fields: adapter, status, verified, target_path, confined, steps,
@@ -51,6 +57,7 @@ output_path, output_sha256, output_verified.
 """
 from __future__ import annotations
 
+import difflib
 import hashlib
 import json
 import os
@@ -65,7 +72,7 @@ from typing import Any
 from canonical.runtime import confine_v1
 from canonical.runtime.bound_capabilities import python_dynamic_fault_localizer_v1 as localizer
 from canonical.runtime.bound_capabilities import python_repo_diff_apply_full_testgate as full_gate
-from canonical.runtime.bound_capabilities import python_test_guided_patch_search_v1 as patch_search
+from canonical.runtime import patch_candidate_search_v1 as candidates_v1
 
 SCHEMA = "PROJECT_BRAIN_SOFTWARE_DIAGNOSE_THEN_REPAIR_V1"
 CAPABILITY_ID = "software.diagnose_then_repair.v1"
@@ -149,19 +156,21 @@ def _summary_counts(log: str) -> dict[str, int] | None:
     return None
 
 
-def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
-               confine: str) -> dict[str, Any]:
-    """Run the failing tests once; prefer confinement; report which happened."""
+def _pytest(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
+            confine: str, tb: str = "long") -> tuple[int | None, str, bool]:
+    """Run pytest on ``tests_rel`` inside ``tree``; prefer confinement; report which happened.
+
+    Returns (rc, log, confined).  rc None means no verdict came back at all."""
     log_rel = ".brain_diagnose/pytest.txt"
     (tree / ".brain_diagnose").mkdir(exist_ok=True)
+    argv = ["-m", "pytest", "-q", "-p", "no:cacheprovider", "--tb=" + tb, *tests_rel]
     program = (
         "import os, subprocess, sys\n"
         "os.chdir('/project')\n"
         "env = dict(os.environ); env['PYTHONDONTWRITEBYTECODE'] = '1'\n"
         # the chroot has no /tmp: the temp dir lives in the scratch tree
         "os.makedirs('/project/.brain_diagnose/tmp', exist_ok=True); env['TMPDIR'] = '/project/.brain_diagnose/tmp'\n"
-        "r = subprocess.run([sys.executable, '-m', 'pytest', '-q', '-p', 'no:cacheprovider', '--tb=long',\n"
-        "                    *" + repr(tests_rel) + "], capture_output=True, text=True, env=env)\n"
+        "r = subprocess.run([sys.executable, *" + repr(argv) + "], capture_output=True, text=True, env=env)\n"
         "open(" + repr("/project/" + log_rel) + ", 'w', encoding='utf-8').write(r.stdout + '\\n' + r.stderr)\n"
         "print('BRAIN_RC=' + str(r.returncode))\n"
         "sys.exit(0)\n"
@@ -183,14 +192,33 @@ def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeou
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         try:
-            proc = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                                   "--tb=long", *tests_rel], cwd=tree, capture_output=True,
+            proc = subprocess.run([python_exe, *argv], cwd=tree, capture_output=True,
                                   text=True, timeout=timeout_s, env=env)
         except subprocess.TimeoutExpired:
             raise DiagnoseRepairRefusal("REPRODUCE_TIMEOUT")
         (tree / log_rel).write_text(proc.stdout + "\n" + proc.stderr, encoding="utf-8")
         rc = proc.returncode
     log = (tree / log_rel).read_text(encoding="utf-8", errors="replace") if (tree / log_rel).is_file() else ""
+    return rc, log, confined
+
+
+def _candidate_verdict(copy_root: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
+                       confine: str) -> int:
+    """pytest verdict for one candidate copy: 0 only when the summary line says nothing failed."""
+    try:
+        rc, log, _ = _pytest(copy_root, tests_rel, python_exe, timeout_s, confine, tb="no")
+    except DiagnoseRepairRefusal:
+        return 2
+    counts = _summary_counts(log)
+    if rc == 0 and counts is not None and counts["failed"] + counts["error"] == 0 and counts["passed"] > 0:
+        return 0
+    return rc if rc not in (None, 0) else 1
+
+
+def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeout_s: int,
+               confine: str) -> dict[str, Any]:
+    """Run the failing tests once; the verdict is the summary line, never the exit code."""
+    rc, log, confined = _pytest(tree, tests_rel, python_exe, timeout_s, confine)
     if rc is None:
         raise DiagnoseRepairRefusal("REPRODUCE_NO_VERDICT")
     if rc == 5:
@@ -204,6 +232,7 @@ def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeou
     if counts["failed"] + counts["error"] == 0:
         raise DiagnoseRepairRefusal("NOTHING_TO_REPAIR:FAILING_TESTS_PASS")
     frames: dict[str, int] = {}
+    frame_lines: dict[str, list[int]] = {}
     for line in log.splitlines():
         m = _FRAME.match(line.strip())
         if not m:
@@ -219,23 +248,13 @@ def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeou
         if not p.is_file() or _TESTNAME(p.name) or rel.startswith(".brain_diagnose/"):
             continue
         frames[rel] = frames.get(rel, 0) + 1
+        ln = int(m.group("line"))
+        if ln not in frame_lines.setdefault(rel, []):
+            frame_lines[rel].append(ln)
     ranked = sorted(frames.items(), key=lambda kv: (-kv[1], kv[0]))
     return {"confined": confined, "returncode": rc, "log_sha256": _sha(log.encode("utf-8")),
             "failed": counts["failed"], "errors": counts["error"], "passed": counts["passed"],
-            "traceback_files": [{"path": p, "frames": n} for p, n in ranked]}
-
-
-def _reanchor(diff_text: str, prefix: str) -> str:
-    if not prefix:
-        return diff_text
-    out = []
-    for line in diff_text.splitlines(keepends=True):
-        if line.startswith("--- a/"):
-            line = "--- a/" + prefix + line[6:]
-        elif line.startswith("+++ b/"):
-            line = "+++ b/" + prefix + line[6:]
-        out.append(line)
-    return "".join(out)
+            "traceback_files": [{"path": p, "frames": n, "lines": frame_lines.get(p, [])} for p, n in ranked]}
 
 
 def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
@@ -271,6 +290,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     if confine not in ("auto", "required", "off"):
         raise DiagnoseRepairRefusal("CONFINE_MODE_INVALID")
     max_candidates = int(args.get("max_candidates") or 2000)
+    workers = int(args.get("workers") or candidates_v1.default_workers())
     caller_target = args.get("source_path")
 
     anchor_before = _tree_hash(source_root)
@@ -293,12 +313,19 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         t0 = time.monotonic()
         loc_row: dict[str, Any] = {"step": "localize"}
         loc_top: list[str] = []
+        loc_lines: dict[str, list[int]] = {}
         try:
             loc = localizer.run({"source_root": tree_rel,
                                  "test_paths": [tree_rel + "/" + t for t in tests_tree],
                                  "timeout_s": min(remaining(), 120),
                                  "output_path": _rel(repo, scratch_root / "localize.json")}, repo)
             seen: list[str] = []
+            for row in loc.get("ranked_lines") or []:
+                p = str(row.get("path") or "")
+                if p.startswith(tree_rel + "/"):
+                    p = p[len(tree_rel) + 1:]
+                if row.get("line") is not None:
+                    loc_lines.setdefault(p, []).append(int(row["line"]))
             for sym in loc.get("ranked_symbols") or []:
                 p = str(sym.get("path") or "")
                 if p.startswith(tree_rel + "/"):
@@ -332,27 +359,40 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         if not (tree / target_rel).is_file() or not target_rel.endswith(".py"):
             raise DiagnoseRepairRefusal("TARGET_NOT_PYTHON_FILE:" + target_rel)
 
-        # 3. repair (in the scratch copy only)
+        # 3. repair: fault-prioritized candidates, tested in parallel on per-worker
+        #    copies of the scratch tree, each under the same pytest command (confined
+        #    when the host can) that reproduced the failure.  The user's tree is
+        #    never touched.
         t0 = time.monotonic()
-        # The same pytest command that reproduced the failure judges every
-        # candidate: rootdir-based imports (packages, conftest) keep working,
-        # instead of the search's sibling-directory runner.
-        search = patch_search.run({"source_path": tree_rel + "/" + target_rel,
-                                   "test_paths": [tree_rel + "/" + t for t in tests_tree],
-                                   "test_argv": [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                                                 "--rootdir", str(tree), *[str(tree / t) for t in tests_tree]],
-                                   "timeout_s": min(remaining(), 300), "max_candidates": max_candidates,
-                                   "output_path": _rel(repo, scratch_root / "patch_search.json")}, repo)
+        source_text = (tree / target_rel).read_text(encoding="utf-8")
+        nums, strings = candidates_v1.test_literals([tree / t for t in tests_tree])
+        priority: list[int] = []
+        for ln in [*loc_lines.get(target_rel, []), *next((r["lines"] for r in repro["traceback_files"]
+                                                           if r["path"] == target_rel), [])]:
+            if ln not in priority:
+                priority.append(ln)
+        candidates = candidates_v1.generate(source_text, nums, strings, priority)
+        per_run = max(5, min(remaining(), 300))
+        search = candidates_v1.evaluate(
+            tree, target_rel, candidates,
+            lambda copy: _candidate_verdict(copy, tests_tree, python_exe, per_run, confine),
+            workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root)
         steps.append({"step": "patch_search", "seconds": round(time.monotonic() - t0, 3),
-                      "status": search.get("status"), "tested_candidate_count": search.get("tested_candidate_count"),
-                      "winning_mutation": search.get("winning_mutation"),
-                      "source_restored": search.get("source_restored"),
-                      "output_sha256": search.get("output_sha256")})
-        if not search.get("pass") or not search.get("unified_diff"):
-            raise DiagnoseRepairRefusal("OPEN:NO_VERIFIED_CANDIDATE:" + str(search.get("tested_candidate_count")))
-        diff_text = _reanchor(str(search["unified_diff"]), "")
-        # the search's diff names the scratch path; make it name the tree's path
-        diff_text = diff_text.replace("a/" + tree_rel + "/", "a/").replace("b/" + tree_rel + "/", "b/")
+                      "candidate_count": search["candidate_count"], "tested_candidate_count": search["tested_candidate_count"],
+                      "workers": search["workers"], "stop_reason": search["stop_reason"],
+                      "priority_lines": priority[:20],
+                      "winning_mutation": (search["winner"] or {}).get("mutation"),
+                      "winning_index": next((a["index"] for a in search["attempts"] if a["returncode"] == 0), None),
+                      "attempts": search["attempts"][:200]})
+        if search["stop_reason"] == "DEADLINE":
+            raise DiagnoseRepairRefusal("DEADLINE_EXCEEDED:" + str(deadline_s) + "s:tested=" + str(search["tested_candidate_count"]))
+        if not search["winner"]:
+            raise DiagnoseRepairRefusal("OPEN:NO_VERIFIED_CANDIDATE:" + str(search["tested_candidate_count"]))
+        diff_text = "".join(difflib.unified_diff(
+            source_text.splitlines(keepends=True), search["winner"]["candidate"].splitlines(keepends=True),
+            fromfile="a/" + target_rel, tofile="b/" + target_rel))
+        if not diff_text.endswith("\n"):
+            diff_text += "\n"
         diff_out.parent.mkdir(parents=True, exist_ok=True)
         diff_out.write_text(diff_text, encoding="utf-8")
 
