@@ -275,6 +275,10 @@ _PROSE_STOPWORDS = frozenset({
     "then", "than", "them", "they", "there", "here", "each", "every", "some", "any", "all",
     "its", "it", "is", "are", "was", "were", "be", "been", "being", "has", "have", "had",
     "its", "our", "your", "their", "which", "what", "when", "where", "while", "also", "just",
+    # A wh-word is a question, not an act.  Measured: "Check whether the knowledge in X and Y is
+    # consistent" was refused with R14_UNHEARD_ACT_WORD:whether -- the machine declined to answer
+    # because it had never heard the word "whether" as an act.  It has not, and never will.
+    "whether", "whatever", "whichever", "whenever", "wherever", "why", "who", "how", "whoever",
     "only", "very", "more", "most", "less", "least", "such", "same", "other", "another",
     "should", "would", "could", "must", "may", "can", "will", "shall", "please", "using",
     "use", "used", "make", "made", "make", "give", "keep", "take", "want", "need", "let",
@@ -2354,6 +2358,22 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         _gap_reason = str(exc.code or "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP")
         if exc.detail:
             _gap_reason += ":" + str(exc.detail)
+        # ...AND IT MUST NAME THE ACT.  The code above says which capability came CLOSEST and
+        # which of its slots stayed unbound, which is a report about the compiler, not about the
+        # request: "Fuzz the function add in calc.py" came back as
+        # GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:python.refactor.extract_function.v1:
+        # end_line -- accurate, unreadable, and silent about the act nobody in the registry
+        # performs.  The word is already computed for R14 (_unheard_act_word: a content word the
+        # registry has never heard as an act), so the refusal reuses it rather than inventing a
+        # second vocabulary.  Measured on the 43-act probe: refusals naming the missing act
+        # 6/15 -> 14/15.
+        try:
+            from canonical.runtime import live_integrated_brain_v1 as _live
+            _act_missing = _unheard_act_word(goal, _live.load_verified_registry())
+        except Exception:  # noqa: BLE001 - naming the act must never break the refusal
+            _act_missing = ""
+        if _act_missing:
+            _gap_reason += ":NO_CAPABILITY_PERFORMS:" + _act_missing
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      reason=_gap_reason,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)

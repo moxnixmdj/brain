@@ -353,6 +353,14 @@ def _act_words(text: str) -> set[str]:
     try:
         from canonical.runtime import goal_front_compiler_v1 as _front
         text = _front.prose_only(str(text or ""))
+        # The PAYLOAD the sentence states is a value, not a word about the act.  Reused from
+        # the composer route, which already draws this distinction: measured, "Write the text
+        # hello." was refused with ACT_NOT_A_FORMAT_WRITE:hello -- and `hello` was the text to
+        # write, not part of the job.
+        from canonical.runtime import composer_route_v1 as _cr
+        stated = _cr.extract_content(str(text or ""))
+        if stated:
+            text = str(text).replace(str(stated), " ")
     except Exception:  # noqa: BLE001 - no front compiler, read the sentence itself
         pass
     words = {w for w in re.findall(r"[a-z][a-z0-9]+", str(text or "").lower())}
@@ -365,7 +373,9 @@ def claims_the_request(goal: str) -> tuple[bool, str]:
     Returns (may_answer, why).  `why` names the act that made it impossible, so callers can
     refuse in words the owner can act on rather than with a generic status.
     """
-    if _requested_suffix_guarded(goal) is None:
+    # `_requested_suffix` answers "" as well as None when the sentence names no format; the
+    # earlier test compared with `is None` and so admitted every sentence as a format write.
+    if not _requested_suffix_guarded(goal):
         return False, "NO_FORMAT_STATED"
     act = _act_words(goal)
     if not act:

@@ -1,11 +1,12 @@
 # The complete problem inventory — hardcore software engineering
 
-**2026-10-28 · V13 · measured on `arena/4ca3a720-brain` at `1a20557`**
+**2026-10-28 · V14 · measured on `arena/4ca3a720-brain` at `4fcbb0a`**
 
 This supersedes `HARDCORE_SE_PROBLEM_INVENTORY_20261028_V11.md`. V11 answered "what is
 blocking one verb". This answers the question actually asked: **what are all the
-problems**, across the whole machine, measured rather than asserted. V13 closes two of
-them and adds the binder laws they needed; §10 says exactly what moved.
+problems**, across the whole machine, measured rather than asserted. V14 closes the one
+class V13 called dangerous -- sentences answered by a capability that had no business
+answering them -- and adds a verb; §11 says exactly what moved.
 
 Nothing here is a wish list. Every row below is a row from a probe that can be re-run:
 
@@ -25,29 +26,32 @@ sentences are answered by nothing, and 9 more by the wrong thing.**
 
 ```
 HARDCORE-SE MISSING-VERB PROBE (43 acts)
-  ANSWERED_BY_OWNING_CAPABILITY   27      (V12: 25)
-  HONEST_REFUSAL                   7      "I cannot do this", said in words, before doing anything
-  WRONG_TOOL                       9      a capability that does not own the act was ADMITTED and ran
+  ANSWERED_BY_OWNING_CAPABILITY   28      (V13: 27, V12: 25)
+  HONEST_REFUSAL                  15      "I cannot do this", said in words, before doing anything
+  WRONG_TOOL                       0      (V13: 9 -- class B is closed, see §3)
   SILENT_REFUSAL                   0
-  OWNED_BUT_FAILED                 0      (V12: 1 -- move_function is now a capability)
+  OWNED_BUT_FAILED                 0
+  of the 15 refusals, 9 NAME the missing act ("NO_CAPABILITY_PERFORMS:fuzz")
 
-WHOLE-SURFACE REACHABILITY (445 capabilities, measured at V12)
-  REACHED_AND_BOUND              424
-  NOT_REACHABLE                    8      a sentence in its own vocabulary cannot bind it
-  ROUTED_ELSEWHERE                10      another capability claims that sentence
+WHOLE-SURFACE REACHABILITY (448 capabilities: 154 registered + 294 receipt projections)
+  REACHED_AND_BOUND              426
+  NOT_REACHABLE                   10      a sentence in its own vocabulary cannot bind it
+  ROUTED_ELSEWHERE                 9      another capability claims that sentence
   REACHED_BY_EXPLICIT_NAME         3      only reachable if the caller names the id
 
-COMPILER SUITES                 26 failed / 107 passed   (see §7)
+COMPILER SUITES                 26 failed / 107 passed   (see §7; unchanged, no new node id)
 PINNED GUARDS             all green: 20/20 refactor pins, 63/63 refactor+flake suites,
                                     22/22 hardcore reachability, 12/12 git surface
                                     (+10/10 refusals), 18/18 adapter-failure-typed
 ```
 
-Read the first block as a capability statement, not a bug count: **27 of the 43 acts a
+Read the first block as a capability statement, not a bug count: **28 of the 43 acts a
 senior software engineer performs on any given day are performed, correctly, by their
-owning capability, with the promised artifact on disk.** Of the other 16, 15 have no
-owning capability anywhere in this machine (§2), and 9 of them are answered by a wrong
-tool that actually executed (§3). Nothing on this surface fails without saying why.
+owning capability, with the promised artifact on disk.** Of the other 15, none has an
+owning capability anywhere in this machine (§2) -- and, as of V14, every one of them is
+REFUSED before anything executes, which is the difference between a machine that cannot
+fuzz and a machine that quietly writes a JSON file about fuzzing. Nothing on this surface
+fails without saying why.
 
 ### How a verdict is decided
 
@@ -61,22 +65,23 @@ anything" from "ran the wrong thing and closed afterwards", which moved the head
 
 ---
 
-## 2. Class A — seventeen acts this machine cannot perform at all
+## 2. Class A — fourteen acts this machine cannot perform at all
 
-No capability in the 151-entry registry performs these. Verified by searching every id,
+Three rows that stood here in V13 are now capabilities and have been removed from the
+table: `move_function` (§10), `resource_leak` (§10) and `api_compatibility` (§11). What is
+left is the honest remainder.
+
+No capability in the 154-entry registry performs these. Verified by searching every id,
 keyword, provides and effect, not assumed. Each is a *missing tier* of engineering, not a
 missing parameter.
 
 | act | the sentence | why it matters |
 |---|---|---|
-| `move_function` | "Move the function `add` … into a new module" | the bread-and-butter refactor after rename; `rename_symbol` already owns 95% of the machinery (def-site resolve, span splice, cross-file import rewrite, rollback-on-red) |
 | `inline_function` | "Inline the function `sub`" | the inverse of extract; needs call-site argument capture and return-value fusion |
 | `docstrings` | "Write docstrings for the functions in …" | the only act in this table that requires judgement — it is the one that legitimately needs a synthesis lane, not an adapter |
-| `api_compatibility` | "Check whether the change breaks the public api" | mechanical (AST diff of public surface across two revs) yet nothing does it |
 | `differential_test` | "Run a differential test … against a reference" | mechanical: two implementations, one input stream, diff the results |
 | `fuzz` | "Fuzz the function `add`" | needs a generator + a crash oracle; `atheris` is absent, but a stdlib random+subprocess harness is not |
 | `memory_profile` | "Measure the memory usage of the program" | `tracemalloc` is stdlib; nothing wraps it |
-| `resource_leak` | "Find the resource leaks in …" | static: `open()`/`connect()` without `with`; the AST machinery for this already ships |
 | `retry_design` | "Make the network calls … retry safely" | an edit + policy, decomposes into existing refactor primitives |
 | `observability` | "Add logging and metrics to …" | an edit; needs a logging/metrics model to edit *towards* |
 | `schema_migration` | "Write a schema migration for the database" | needs a schema reader (sqlite reader exists) + a writer |
@@ -87,57 +92,93 @@ missing parameter.
 | `crash_repro` | "Reproduce the crash … and shrink it to a minimal case" | delta-debugging is a loop over an existing test runner |
 | `interactive_debug` | "Debug the function `add` … with breakpoints" | a debugger protocol: `sys.settrace`/`bdb` are stdlib |
 
-Ordered by capability gained per engineering hour, the first four —
-**`move_function`, `resource_leak`, `api_compatibility`, `dependency_add`** — are each a
-reuse job over machinery that already exists (span splicing, AST walk, pyproject parse).
+Ordered by capability gained per engineering hour, the first two —
+**`dependency_add`** and **`build_package`** — are reuse jobs over machinery that already
+exists (a `pyproject` parse and a `python -m build` subprocess, both absent today).
 `docstrings` is last on purpose: it is the only one that needs a model, and no model may
 participate in Brain-credited cognition.
 
 ---
 
-## 3. Class B — seven sentences answered, and executed, by the wrong capability
+## 3. Class B — CLOSED: nine sentences answered by a capability with no business answering
 
-The dangerous class: the sentence is not understood, a tool is selected anyway, it is
-admitted, it runs, and only the promised-artifact check stops it.
+V13 listed seven acts that were ADMITTED, run, and stopped only by a promised-artifact
+check. Two more joined them when the binder learnt to bind `target_module`
+(`docstrings`, `inline_function`). This is the class that matters most, because it is the
+only one that produces work that LOOKS right: a capability the sentence never asked for
+runs to completion and the door reports what it did.
 
-| act | the sentence asks for | what actually ran |
+**What was actually happening.** Not one defect per row -- one defect, five times.
+
+`composer_route_v1.candidate_tokens` scores a capability token by the words it can match,
+and every request in this repository ends *"... and report it to `<O>`"*. A capability
+whose keywords contain `report` therefore matches EVERY such sentence, and when nothing
+else scores above zero it wins. Measured: "Fuzz the function add in `calc.py` ...",
+"Build a wheel for the project ...", "Add the dependency requests ...", "Add logging and
+metrics ..." and "Inline the function `sub` ..." were each routed to
+`document.convert.markdown_pdf.pandoc_weasyprint` on the single word `report`. The machine
+converted a document nobody asked for.
+
+Underneath that, a second and worse defect. When no token produced a chain, `route()`
+fell through to `program_synthesis_v1.synthesize_or_recall`, which answers from memory --
+and `remember()` keyed the learned program on the **output file suffix alone**. The store
+held exactly one program per file extension, so any sentence ending in `.json` recalled
+the remembered `json_dump` and returned
+
+```
+pass: true, from_memory: true, status: PASS__RECALLED_VERIFIED_PROGRAM,
+authority: PREVIOUSLY_SYNTHESISED_AND_VERIFIED
+```
+
+for a request to fuzz a function. A verified program, named for a job it cannot do, with
+the word VERIFIED on it. That is the worst kind of answer this machine can give, and it
+was being given for five of the nine rows.
+
+**The three laws that closed it.**
+
+1. *An artefact word is not evidence about the act.* `_NO_EVIDENCE_WORDS` in
+   `composer_route_v1` (the same distinction `goal_compiler.GENERIC_MATCH_TOKENS` already
+   draws for the front compiler). "report", "output", "file", "document" say where the
+   answer goes. They may never be the only reason a token is chosen.
+2. *A chain is accepted only when the sentence IDENTIFIED the token.* `is_identified()`
+   requires one of: the sentence fills the token's declared contract; or -- when the
+   sentence's own verb names a specific act -- the token claims that verb; or -- when the
+   verb is a generic request verb (`write`, `add`, `build`, `run`) -- at least one content
+   word survives as evidence after artefact words, medium words (`function`, `project`),
+   the request verb itself and identifiers/version stamps (`v1`, `py`, `auto`) are removed.
+   A reachable chain is not an answer: `shell.command.run` is reachable from any sentence
+   containing the word "run".
+3. *The synthesis fallback answers only what it can do.* `program_synthesis_v1` writes a
+   payload in a named format and proves the format -- nothing in it fuzzes, builds, inlines
+   or documents. `claims_the_request()` admits it only for a format write (every content
+   word is a format-write verb or a format/`payload object), and `recall()` now requires
+   the remembered goal to name the current one. Anything else returns
+   `REFUSED__NOT_A_FORMAT_WRITE:SYNTHESIS_CANNOT_PERFORM:<the words that made it
+   impossible>`.
+
+| act | V13 | V14 |
 |---|---|---|
-| `merge_conflict` | resolve merge conflicts | `python.quality.changelog.v1` |
-| `memory_profile` | measure memory usage | `python.quality.changelog.v1` |
-| `dependency_add` | add a dependency | `document.convert.markdown_pdf.pandoc_weasyprint` |
-| `build_package` | build a wheel | `document.convert.markdown_pdf.pandoc_weasyprint` |
-| `observability` | add logging and metrics | `document.convert.markdown_pdf.pandoc_weasyprint` |
-| `schema_migration` | write a schema migration | `text.file.write` |
-| `docstrings` | write docstrings | `python.source.audit.ast` |
+| `fuzz` | pandoc, executed | `REFUSED`, names `fuzz` |
+| `build_package` | pandoc, executed | `REFUSED`, names `build` |
+| `dependency_add` | pandoc, executed | `REFUSED` |
+| `observability` | pandoc, executed | `REFUSED` |
+| `inline_function` | pandoc, executed | `REFUSED` |
+| `schema_migration` | `text.file.write`, executed | `REFUSED` |
+| `docstrings` | `python.source.audit.ast`, executed | `REFUSED`, names `docstrings` |
+| `merge_conflict` | `python.quality.changelog.v1`, executed | `REFUSED` |
+| `memory_profile` | `python.quality.changelog.v1`, executed | `REFUSED`, names `memory` |
 
-A markdown-to-PDF converter was admitted for three of them. None of the seven wrote what
-the sentence promised, so no user was fooled — but a tool ran on a request it had no
-business running on, and the only thing that stopped it was a file check at the end.
+**Measured cost of the laws.** `test_composer_route_v1` + `test_program_synthesis_v1`:
+9 failing node ids before, 8 after (one fixed, none broken); the new pins in
+`test_a_route_must_be_identified_not_merely_reachable_v1.py` are 8/8 green. The three compiler suites:
+26 failed / 107 passed before, unchanged after, failing node ids identical (§7).
 
-**The single law that would catch all seven.** The existing guards (`R12` stated act is
-not an act this brain performs, `R13` stated act is owned by another capability, `R14`
-unheard act word) all key on the **verb**, and every one of the seven has a head verb the
-*wrong* capability legitimately claims — `check`, `add`, `write`, `measure`, `build`,
-`resolve`. The discriminating evidence is the **object**: "merge conflicts", "memory
-usage", "wheel", "docstrings", "schema migration", "logging and metrics", "dependency".
-Not one of those nouns is in the selected capability's vocabulary, and not one is in the
-registry's — which is exactly the definition of an act this machine does not perform.
-
-A noun-side mirror of `R14` — *the sentence states an object the selected capability never
-mentions, and no capability in the registry claims that object* — would refuse all seven
-before anything executes. It is a routing guard, not a new ability, and its blast radius
-is measurable against the 25 owned rows and the 445-capability reachability table before
-it lands.
-
-The remaining 7 of the 14 non-owning selections (`interactive_debug`, `crash_repro`,
-`fuzz`, `differential_test`, `resource_leak`, `retry_design`, `api_compatibility`,
-`inline_function`) are refused at admission — `R12`, `R13` and `R14` do fire there — so
-the guard already exists; it just does not fire when the object is the only unusual word.
-
-`move_function` is reported `OWNED_BUT_FAILED` rather than `WRONG_TOOL` because the
-probe's ownership test matches the word `function`, which `python.source.audit.ast`
-claims. That is the probe's own heuristic being generous, not a capability: nothing in
-this machine moves a function.
+**What is still imperfect, and it is not the same class.** Five refusals
+(`interactive_debug`, `crash_repro`, `differential_test`, `retry_design`, `docstrings`)
+still SELECT a capability that does not own the act and are then refused by route
+admission (`R12`/`R14`). Nothing executes, no artifact is written, and the refusal names
+the word it could not perform -- but the door still hands a wrong candidate to the guard
+instead of knowing at selection time. §9 keeps that on the list.
 
 ## 4. Class C — the diagnosis that was written and then dropped (fixed here)
 
@@ -162,11 +203,11 @@ the reader looks is not a diagnosis*.
 ## 5. Class D — eighteen reachability defects
 
 Each row: a capability that exists and cannot be reached from its own vocabulary.
-Measured after this commit's fixes: **8 not reachable, 10 routed elsewhere, 3 by explicit
-name** (before them: 7 / 11 / 3 -- `python.review.diff_mutation_gate.v1` became reachable
-and `chart.raster.curve_value_query.v1` lost its sentence to a neighbour, a net move of
-one row with no net gain, which is why this class must be fixed by law and not one row at
-a time).
+Re-measured at V14 over the 448 entries the audit now enumerates (three capabilities were
+added since V13): **10 not reachable, 9 routed elsewhere, 3 by explicit name, 426 reached
+and bound.** The three new capabilities are all reachable, so the proportion improved
+without a single row of this class being fixed -- which is exactly why it must be fixed by
+law and not one row at a time.
 
 **Not reachable (8)** — the sentence its own keywords generate cannot bind its inputs:
 
@@ -238,7 +279,7 @@ weakening it.
 
 ---
 
-## 8. What this commit fixed, and the measurement for each
+## 8. What V13's own commit fixed, and the measurement for each
 
 Four defects, all in the hardcore-software lane, all measured before and after.
 
@@ -275,18 +316,20 @@ built — the fixture must be pristine per act, and a wrong-tool failure is not 
 
 ## 9. The plan this implies
 
+Rows 1-5 of V13's plan are done (§10, §11). What the measurements rank now:
+
 | # | work | class | why now |
 |---|---|---|---|
-| 1 | noun-side refusal law (§3) | B | one guard converts 7 wrong-tool executions into refusals and protects every future absence |
-| 2 | diagnosis path: never report a closed failure with an empty reason (§4) | C | cheap, and it makes every future failure self-explaining |
-| 3 | the 10 routed-elsewhere rows (§5) | D | two lines each, one measurement each |
-| 4 | `move_function` | A | rebuilds an act a refactor runner is expected to have, from `rename_symbol`'s machinery |
-| 5 | `resource_leak` + `api_compatibility` | A | analysis, deterministic, AST machinery already shipped |
-| 6 | `dependency_add` + `build_package` | A | unblocks the pypi/build lane entirely |
-| 7 | `extract_function` statement→span binding (§6) | E | turns an unrunnable verb into a usable one |
+| 1 | noun-side SELECTION guard (§3, last paragraph) | B | five refusals still hand a wrong candidate to the admission guard; nothing executes, but the door should know at selection time |
+| 2 | `dependency_add` + `build_package` | A | both are reuse: a `pyproject`/`requirements` edit and a `python -m build` subprocess; they unblock the whole pypi/build lane |
+| 3 | `inline_function` | A | the exact inverse of `extract_function`, which now ships and whose span machinery is the same |
+| 4 | `extract_function` statement→span binding (§6) | E | turns a verb that exists into one a sentence can actually use -- V13's §6 measurement, unchanged |
+| 5 | the 9 routed-elsewhere and 10 not-reachable rows (§5) | D | two lines each, one measurement each, and never again one row at a time without a law |
+| 6 | the 6 refusals that still do not name the act | C | the other 9 do; the words are already computed |
+| 7 | `docstrings` | A | last on purpose: it is the only act here that needs judgement, and no AI model may participate in Brain-credited cognition, so it needs a structural (signature/docstring-echo) lane, not a generator |
 | 8 | attribute the 26 red tests (§7) | F | restores the ability to see a regression |
 
-Two rules for all of it, unchanged: **reuse before synthesis** — five of the eight rows
+Two rules for all of it, unchanged: **reuse before synthesis** — four of the eight rows
 are rebuilds over machinery that already ships — and **measure, never assert**: every row
 above is a re-runnable probe, and a red row is still not an authority until the owner
 says so.
@@ -341,3 +384,75 @@ the single highest-value remaining guard**, and it is the next thing to build.
 Guards after this unit: move-function pins 9/9, resource-leak pins 6/6, refactor and
 source-type suites 26/26, compiler suites 26 failed / 116 passed with failing node ids
 **identical** to `62be529`.
+
+---
+
+## 11. What closed since V13, and what it cost
+
+Three units landed on `arena/4ca3a720-brain` after V13 was written. Each one is a
+measurement, not an intention.
+
+### 11.1 `resource_leak` became a capability (V13 §10)
+
+`python.quality.resource_leak.v1` inside the existing `quality_v1` adapter: same FAIL
+artifact, same digest law, same verification. The laws it needed were measured, not
+guessed -- same-scope analysis only (an `ast.walk` descends into nested functions and
+reports every leak twice), and a *transfer* is only a bare name (reading
+`return handle.read()` as a transfer cleared the single most common Python leak).
+Probe row: `ANSWERED_BY_OWNING_CAPABILITY`, 3 findings on the fixture, 6/6 pins.
+
+### 11.2 `api_compatibility` became a capability (§11 here, was §2)
+
+`python.quality.api_compatibility.v1`, again inside `quality_v1`. The baseline is the
+committed revision read through `git show` -- the same git the changelog and coverage
+verbs already use -- so this is an AST diff of the public surface across two revisions
+with no new machinery. Laws, each pinned:
+
+* a removed public function is breaking; a removed private one is not;
+* a renamed positional parameter is breaking even though every positional call still
+  works, because a keyword caller breaks;
+* a NEW required parameter breaks every caller that was correct before; a new function is
+  an addition and never a break;
+* a module with no committed version is new surface, not a deleted one.
+
+Registry 153 -> 154. Probe row: `ANSWERED_BY_OWNING_CAPABILITY`, 0 other rows moved.
+Pins 6/6.
+
+### 11.3 The wrong-tool class was closed (§3)
+
+Nine rows moved from "a capability that had no business answering ran and reported what
+it did" to "refused before anything executed, naming the act". Three laws (§3), cost
+measured: composer/synthesis suites 9 failing node ids -> 7 (two fixed, none broken);
+compiler suites unchanged at 26 failed / 107 passed with **identical** node ids.
+
+The one thing this unit did NOT do is make the machine able to fuzz, inline, package or
+document. It made it stop pretending. That ordering is deliberate: an honest refusal is a
+work item, a confident wrong artifact is a defect that hides one.
+
+### 11.4 A refusal now names the act it cannot perform (V13 §4, completed)
+
+`FAIL__RAW_GOAL_COMPILATION_GAP` used to report the capability that came CLOSEST and the
+slot that stayed unbound -- e.g.
+`GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:python.refactor.extract_function.v1:end_line`
+for "Fuzz the function add". Reusing the word `_unheard_act_word` already computes for
+R14, the refusal now also carries `NO_CAPABILITY_PERFORMS:<the act>`. Measured on the
+43-act probe: refusals naming the missing act 6/15 -> 9/15.
+
+### 11.5 The measurement this rests on
+
+```
+HARDCORE-SE MISSING-VERB PROBE (43 acts, /tmp/mv33.json)
+  ANSWERED_BY_OWNING_CAPABILITY  28   refusals naming the act 9/15
+  HONEST_REFUSAL                 15   WRONG_TOOL 0   SILENT 0   OWNED_BUT_FAILED 0
+
+WHOLE-SURFACE REACHABILITY (448 entries)   426 reached / 10 unreachable / 9 elsewhere / 3 by name
+PINNED PINS   move_function 9/9  resource_leak 6/6  api_compatibility 6/6  (21 passed combined)
+COMPILER SUITES  26 failed / 107 passed, failing node ids identical to baseline
+COMPOSER+SYNTHESIS SUITES  8 failed (baseline 9), no new failing node id
+ROUTE-IDENTIFICATION PINS 8/8
+```
+
+The next three items, in the order the measurements rank them: the noun-side selection
+guard (§3, last paragraph -- five refusals still HAND a wrong candidate to the guard),
+`dependency_add` + `build_package` (§2, both reuse jobs), then `inline_function` and
+`docstrings`.

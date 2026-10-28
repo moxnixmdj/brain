@@ -82,6 +82,88 @@ _ADAPTER_DIRECTIVES = frozenset({"output_may_be_consumed",
                                  "exit_status_is_the_answer"})
 
 
+# THE WORDS THAT NAME WHERE THE ANSWER GOES ARE NOT EVIDENCE ABOUT WHAT THE TASK IS.
+# `score` counts a hit on any word the capability knows, and every request in this
+# repository ends "and report it to <O>".  A capability that lists `report` among its
+# keywords therefore matches EVERY such sentence, and when nothing else scores above zero
+# it wins -- measured on the 43-act probe: "Fuzz the function add in calc.py ...", "Build a
+# wheel for the project ...", "Add logging and metrics to calc.py ...", "Inline the function
+# sub ..." and "Add the dependency requests ..." were each routed to
+# document.convert.markdown_pdf.pandoc_weasyprint, on the single word `report`, and five of
+# those six reached the route with a PASS.  The machine converted a document nobody asked
+# for.  This is the same distinction goal_compiler.GENERIC_MATCH_TOKENS already draws for the
+# front compiler; it is repeated here because this module scores on its own vocabulary and
+# never sees that set.  Only artefact and medium words are listed: an act verb such as
+# `convert`, `write` or `generate` IS the request, so dropping a hit on it would drop the
+# request itself -- "Convert a.md to b.pdf" hits only `convert` and must still route.
+_NO_EVIDENCE_WORDS = frozenset("""
+report reports receipt artifact artefacts result results summary summaries findings
+issue issues log logs record records output outputs document documents repository repo
+directory directorys folder folders file files json xml txt markdown md pdf html
+""".split())
+
+
+# A REQUEST VERB IS NOT AN IDENTIFICATION.  "Build ...", "Add ...", "Write ..." open half the
+# sentences in this repository; a capability that lists one of those words has not thereby
+# said it performs THIS request.  Measured on the remaining wrong-tool routes of the 43-act
+# probe after the artefact-word rule: "Add logging and metrics to calc.py" and "Add the
+# dependency requests ..." both reached finance.saccr.credit.addon.v1 on the single word
+# `compute`, and "Build a wheel for the project ..." reached
+# pypi.provenance.audit_live_artifact.v1 on the single word `build` -- each of them a PASS on
+# an act nobody asked for.  The list is the same one the probe's ownership oracle already
+# uses to decide whether an answering capability claims the act, so the two cannot drift.
+_REQUEST_VERBS = frozenset("""
+write create make add build run check find show list get set use apply ensure verify
+validate update remove delete report measure produce generate save read print convert
+extract compute process change fix scan audit review inspect debug improve design
+refactor document
+""".split())
+
+# ...and an act NOUN that nothing else in the sentence supports is not one either: "the
+# function add" names the SUBJECT of the request, so a capability that hit `function` has
+# been told what the sentence is about, not what to do with it.
+# An identifier or a version stamp is a NAME, not an act: `v1`, `py`, `auto`, `brain`.
+# Measured: "run <unknown-capability-id>" was admitted to python.test.measurement.objective
+# on the two "content" words `run` and `v1`.
+_IDENTIFIER_WORDS = frozenset("py auto brain canonical runtime tmp v1 v2 v3 v4 v5".split())
+
+_MEDIUM_WORDS = frozenset("""
+function functions method methods class classes module modules package packages library
+project python program code source file files repository repo directory folder data network
+call calls test tests suite suites line lines block blocks svn git wheel
+""".split())
+
+
+def _head_verb(goal: str) -> str:
+    """The request verb: the first content word the sentence actually opens with."""
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+        prose = _front.prose_only(goal)
+    except Exception:  # noqa: BLE001 - no front compiler, read the goal itself
+        prose = str(goal or "")
+    for word in _WORD.findall(str(prose or "").lower()):
+        if len(word) > 1 and word not in _STOP:
+            return word
+    return ""
+
+
+def _claims(word: str, token: str, extra_words: Mapping[str, set[str]] | None) -> bool:
+    """Does this token claim `word`, allowing for inflection (inline/inlining)? """
+    if not word:
+        return False
+    known = token_words(token) | set((extra_words or {}).get(token) or ())
+    return any(k == word or (len(word) > 3 and (k.startswith(word) or word.startswith(k)))
+               for k in known)
+
+
+def _matched_words(goal_words: set[str], token: str,
+                   extra_words: Mapping[str, set[str]] | None = None) -> set[str]:
+    """The goal's own words that this token hit."""
+    known = token_words(token) | set((extra_words or {}).get(token) or ())
+    return set(goal_words) & known
+
+
+
 def _fully_bound_contract_tokens(goal: str, g: Mapping[str, Any],
                                  reg: Mapping[str, Any]) -> frozenset[str]:
     """Tokens provided by a capability every declared input of which the goal fills.
@@ -246,6 +328,14 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     # same test PR #6135 established as DECLARED_CONTRACT_FULLY_BOUND.
     scored = [(score(gw, tok, extra), tok) for tok in provided]
     scored = [(s0, t) for s0, t in scored if s0 > 0]
+    # A hit on an artefact word ("report", "output", "file") says where the answer goes,
+    # not what the task is: a candidate whose ONLY hits are those words has not been
+    # identified by the sentence at all.  It is kept when the contract test below binds it
+    # (the sentence fills its declared inputs, which is evidence the words are not), and
+    # dropped otherwise -- see _NO_EVIDENCE_WORDS.  Measured on the 43-act probe: five
+    # wrong-tool routes to pandoc, 0 correct routes lost.
+
+
     bound = _fully_bound_contract_tokens(goal, g, reg)
     # The last two terms are the tiebreak, and their ORDER is the fix.  A
     # capability that contradicts the payload the sentence states is demoted
@@ -256,6 +346,65 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
                                   _contradicts_the_stated_payload(goal, pair[1]),
                                   pair[1]))
     return [t for _, t in scored]
+
+
+def is_identified(goal: str, token: str,
+                  g: Mapping[str, Any] | None = None,
+                  reg: Mapping[str, Any] | None = None) -> bool:
+    """Has the SENTENCE identified this token as the act it asks for?
+
+    Not "did the words overlap".  Three things a hit on a word does not prove, each measured
+    on the 43-act probe:
+
+    * an ARTEFACT word ("report", "output") says where the answer goes, not what the task is;
+    * a MEDIUM word ("function", "project") says what the task is about, not what to do with it;
+    * a REQUEST VERB ("write", "add", "build") opens half the sentences in this repository.
+
+    So a token is identified when the sentence FILLS ITS DECLARED CONTRACT, or -- for a
+    sentence whose own verb names a specific act ("Fuzz ...", "Inline ...", "Bisect ...") --
+    when the token claims that verb, or -- for a generic request verb -- when at least two of
+    the sentence's own content words support it.
+
+    This is the admission side of the same distinction the front compiler draws with
+    GENERIC_MATCH_TOKENS, and it is deliberately NOT applied by shrinking the candidate list:
+    the list is what the composER is allowed to TRY, and removing entries from it promoted
+    unrelated zero-input capabilities into the top window -- measured, that broke
+    "run <unknown-capability-id>", which must fail closed as a compilation gap and instead
+    composed a step that raised.  The law belongs where the chain is ACCEPTED.
+    """
+    if reg is None:
+        from canonical.runtime import capability_composer_v1 as _cc
+        g = g if g is not None else _cc.graph()
+        reg = _cc.load_registry()
+    from canonical.runtime import goal_front_compiler_v1 as _front
+    gw = words(_front.prose_only(goal))
+    extra: dict[str, set[str]] = {}
+    for cid, node in (g or {}).items():
+        entry = (reg or {}).get(cid) or {}
+        words_for = set(words(cid))
+        for kw in (entry.get("keywords") or []):
+            words_for |= words(str(kw))
+        for tok in (node.get("provides") or []):
+            extra.setdefault(str(tok), set()).update(words_for)
+    if token in _fully_bound_contract_tokens(goal, g, reg):
+        return True
+    matched = _matched_words(gw, token, extra)
+    if not matched:
+        return False
+    head = _head_verb(goal)
+    if head and head not in _REQUEST_VERBS:
+        # The sentence asks for a NAMED act.  A token that never says that word has not been
+        # identified by it, however many other words it matched.
+        return _claims(head, token, extra)
+    # A generic request verb identifies nothing, so at least one of the sentences's own
+    # content words has to survive as evidence -- an artefact word, a medium word, the
+    # request verb itself and a version stamp do not.
+    evidence = {w for w in matched
+                if w not in _NO_EVIDENCE_WORDS and w not in _MEDIUM_WORDS
+                and w not in _REQUEST_VERBS and w not in _IDENTIFIER_WORDS
+                and not any(ch.isdigit() for ch in w)}
+    return bool(evidence)
+
 
 
 def route(goal: str, seed: Sequence[str] | None = None,
@@ -307,10 +456,16 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "status": "PASS__COMPOSER_ROUTE_FOUND",
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
 
+    _reg_for_law = composer.load_registry()
     for token in candidate_tokens(goal, g)[:max_candidates]:
-        chain = composer.plan(have, token, g)
+        # A reachable chain is not an answer: `shell.command.run` is reachable from any
+        # sentence containing the word "run", which is how "run <unknown-capability-id>"
+        # composed a step instead of failing closed as a compilation gap.  The sentence has
+        # to have IDENTIFIED the token before its chain may be accepted.
+        identified = is_identified(goal, token, g, _reg_for_law)
+        chain = composer.plan(have, token, g) if identified else None
         tried.append({"token": token, "reachable": chain is not None,
-                      "chain": chain})
+                      "chain": chain, "identified": identified})
         if chain:
             return {"schema": SCHEMA, "pass": True, "goal": goal,
                     "token": token, "chain": list(chain), "tried": tried,
