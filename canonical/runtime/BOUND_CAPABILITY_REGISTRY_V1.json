@@ -10265,8 +10265,21 @@
       "tool": "ruff",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the unclosed file (SIM115) and the unused import (F401)",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_lint.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.toolchain.ruff_format.v1": {
     "action_template": {
       "args": {
@@ -10325,8 +10338,21 @@
       "tool": "ruff",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": null,
+    "planted_defect_found": null,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_format.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.toolchain.mypy_typecheck.v1": {
     "action_template": {
       "args": {
@@ -10386,8 +10412,21 @@
       "tool": "mypy",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the functions it must at least parse",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.mypy_typecheck.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.toolchain.ruff_complexity.v1": {
     "action_template": {
       "args": {
@@ -10448,8 +10487,21 @@
       "tool": "ruff",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the twelve-branch function `branchy`, which is above the default threshold",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_complexity.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.toolchain.ruff_dead_code.v1": {
     "action_template": {
       "args": {
@@ -10509,8 +10561,21 @@
       "tool": "ruff",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the unused `import os`",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_dead_code.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.toolchain.bandit_security.v1": {
     "action_template": {
       "args": {
@@ -10577,8 +10642,21 @@
       "tool": "bandit",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the assert in the test module (B101)",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.bandit_security.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.quality.changelog.v1": {
     "action_template": {
       "args": {
@@ -10635,8 +10713,21 @@
       "module": "subprocess",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the committed baseline",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.changelog.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.quality.flake_detect.v1": {
    "action_template": {
     "args": {
@@ -10780,8 +10871,21 @@
       "module": "subprocess",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the package's undeclared licence",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.license_scan.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.quality.coverage.v1": {
     "action_template": {
       "args": {
@@ -10839,8 +10943,21 @@
       "module": "subprocess",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the failing test in tests/test_calc.py",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.coverage.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.quality.resource_leak.v1": {
    "action_template": {
     "args": {
@@ -10901,8 +11018,21 @@
     "module": "subprocess",
     "type": "python_stdlib"
    },
-   "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the unclosed open() in pkg/io_leak.py",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.resource_leak.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.quality.api_compatibility.v1": {
    "action_template": {
     "args": {
@@ -10964,8 +11094,21 @@
     "module": "subprocess",
     "type": "python_stdlib"
    },
-   "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the committed revision it must diff against",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.api_compatibility.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.quality.duplication.v1": {
     "action_template": {
       "args": {
@@ -11024,8 +11167,21 @@
       "module": "subprocess",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the block duplicated between duplicate_a and duplicate_b",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.duplication.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.toolchain.ruff_async_audit.v1": {
     "action_template": {
       "args": {
@@ -11088,8 +11244,21 @@
       "module": "subprocess",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": null,
+    "planted_defect_found": null,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_async_audit.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "python.toolchain.ruff_exception_audit.v1": {
     "action_template": {
       "args": {
@@ -11151,8 +11320,21 @@
       "module": "subprocess",
       "type": "python_stdlib"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": null,
+    "planted_defect_found": null,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_exception_audit.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "vcs.git.bisect.v1": {
     "action_template": {
       "args": {
@@ -11208,8 +11390,21 @@
       "type": "system_tool",
       "version_family": ">=2.30"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7ecd4eead024db31d52690b34b914ed47b44e95372f95338a850e7cc0f02fa3a",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the first bad commit, whose subject is 'bad'",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__vcs.git.bisect.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
   "vcs.git.rebase.v1": {
     "action_template": {
       "args": {
@@ -11263,8 +11458,21 @@
       "type": "system_tool",
       "version_family": ">=2.30"
     },
-    "status": "VERIFIED_BOUND_CAPABILITY"
-  },
+    "status": "VERIFIED_BOUND_CAPABILITY",
+  "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7ecd4eead024db31d52690b34b914ed47b44e95372f95338a850e7cc0f02fa3a",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the one commit replayed onto the upstream branch",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__vcs.git.rebase.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }},
 "vcs.git.branch_create.v1": {
    "action_template": {
     "args": {

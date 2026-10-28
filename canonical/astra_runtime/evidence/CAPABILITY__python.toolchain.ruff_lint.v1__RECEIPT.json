@@ -1,0 +1,31 @@
+{
+ "artifact_sha256": "c10dcb08b4aad4d78cb24a57aa6e769b8d3292be54356f53f92ab361ccd3cd7e",
+ "capability_id": "python.toolchain.ruff_lint.v1",
+ "elapsed_ms": null,
+ "entrypoint": "run",
+ "executor": "execution_guard/capability_evidence_probe_v1.py",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "invoked_args": {
+  "output_path": "/tmp/brain_evidence_peexj2do/out/ruff_lint.json",
+  "select": "E,F,W,I,B,UP,SIM,C4,RUF",
+  "source_root": "/tmp/brain_evidence_peexj2do/source",
+  "tool_verb": "lint"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+ "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+ "observed": {
+  "gate": "PASS"
+ },
+ "outcome": "EXECUTED",
+ "planted_defect": "the unclosed file (SIM115) and the unused import (F401)",
+ "planted_defect_found": true,
+ "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+ "producer_independent": false,
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_lint.v1__RECEIPT.json",
+ "reproduced_on_second_run": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

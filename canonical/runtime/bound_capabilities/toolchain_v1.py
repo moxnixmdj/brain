@@ -350,15 +350,26 @@ def _complexity(args, target: Path, cap: str) -> dict:
             value = int(head) if head.isdigit() else 0
         measured.append({**row, "cyclomatic_complexity": value})
     over = [m for m in measured if m["cyclomatic_complexity"] > threshold]
+    # `max_complexity: 0` on a tree with functions in it is a false fact, not a small one: it
+    # reads as "the most complex function here has cyclomatic complexity zero", which is
+    # impossible for any function with a branch.  It happened because ruff's C901 only REPORTS a
+    # function once it exceeds the threshold, so "no findings" and "nothing measured" were the
+    # same value here.  Measured by the evidence probe on a fixture whose most complex function
+    # is 5: `functions: []`, `max_complexity: 0`, `within_threshold: true`.  The two are now
+    # separated -- no measurement is reported as None, and `within_threshold` keeps its meaning.
+    highest = max([m["cyclomatic_complexity"] for m in measured], default=None)
     return {
         **_base(cap, "ruff", target),
         "threshold": threshold,
         "functions": measured,
         "over_threshold_count": len(over),
-        "max_complexity": max(
-            [m["cyclomatic_complexity"] for m in measured], default=0
-        ),
+        "max_complexity": highest,
+        "max_complexity_measured": highest is not None,
         "within_threshold": not over,
+        "measurement_limit": (
+            "ruff's C901 reports a function only when it is ABOVE the threshold, so a complex "
+            "function that is within the threshold is not listed and max_complexity is null "
+            "rather than 0. Lower `threshold` to measure every function."),
         "tool_stderr": stderr,
     }
 
