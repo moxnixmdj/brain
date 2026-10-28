@@ -25,6 +25,9 @@ on:
 
 permissions:
   contents: read
+  # The failure step posts the log tail to the pull request. Without this the comment is a 403
+  # that `|| true` swallows, which is how the first failure of this job arrived with no detail.
+  pull-requests: write
 
 concurrency:
   group: software-engineering-substrate-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
@@ -101,18 +104,35 @@ jobs:
       # The kernel-dependent test is the point: with the substrate installed, the
       # capability must report a real parse, and without it the door must refuse.
       # Both directions are in one file so neither can rot silently.
+      # One suite at a time, and no early exit: a red run must name every suite that failed in a
+      # single pass, not just the first. All output goes to the log the failure step posts.
       - name: Software-engineering capability suites
         shell: bash
         run: |
-          set -euo pipefail
-          python -m unittest -v \
-            canonical.tests.test_the_pinned_kernel_is_installed_or_the_capability_says_it_is_not \
-            canonical.tests.test_a_written_artifact_is_not_a_verified_result \
-            canonical.tests.test_a_skipped_patch_is_not_a_verified_result \
-            canonical.tests.test_git_object_model_v1 \
-            canonical.tests.test_python_software_repair_loop_v1 \
-            canonical.tests.test_python_test_guided_patch_search_v1 \
-            2>&1 | tee /tmp/substrate.log
+          set -uo pipefail
+          suites=(
+            canonical.tests.test_the_pinned_kernel_is_installed_or_the_capability_says_it_is_not
+            canonical.tests.test_a_written_artifact_is_not_a_verified_result
+            canonical.tests.test_a_skipped_patch_is_not_a_verified_result
+            canonical.tests.test_git_object_model_v1
+            canonical.tests.test_python_software_repair_loop_v1
+            canonical.tests.test_python_test_guided_patch_search_v1
+          )
+          : > /tmp/substrate.log
+          failed=()
+          for suite in "${suites[@]}"; do
+            echo "=== $suite" | tee -a /tmp/substrate.log
+            if ! python -m unittest -v "$suite" >>/tmp/substrate.log 2>&1; then
+              failed+=("$suite")
+              echo "FAILED: $suite" | tee -a /tmp/substrate.log
+            fi
+            tail -3 /tmp/substrate.log
+          done
+          if [ ${#failed[@]} -gt 0 ]; then
+            printf 'failing suites: %s\n' "${failed[*]}" | tee -a /tmp/substrate.log
+            exit 1
+          fi
+          echo 'all software-engineering suites green'
 
       - name: Publish failure detail to the pull request
         if: failure() && github.event_name == 'pull_request'
@@ -135,8 +155,10 @@ jobs:
             for t in pytest mypy ruff bandit coverage; do
               printf '%-9s ' "$t"; python -m "$t" --version 2>&1 | head -1 || echo MISSING
             done
+            echo '--- failing suites ---'
+            grep -E '^(FAILED: |failing suites: )' /tmp/substrate.log 2>/dev/null || echo 'none recorded'
             echo '--- log tail ---'
-            tail -60 /tmp/substrate.log 2>/dev/null || echo 'no log'
+            tail -120 /tmp/substrate.log 2>/dev/null || echo 'no log'
             echo '```'
           } > /tmp/comment.md
           gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md || true
