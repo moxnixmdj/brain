@@ -1,9 +1,9 @@
 {
-  "completed_at_utc": "2026-10-28T19:34:12.160231+00:00",
-  "created_at_utc": "2026-10-28T19:34:11.504935+00:00",
+  "completed_at_utc": "2026-10-28T20:14:51.401171+00:00",
+  "created_at_utc": "2026-10-28T20:14:50.732842+00:00",
   "history": [
     {
-      "completed_at_utc": "2026-10-28T19:34:12.148999+00:00",
+      "completed_at_utc": "2026-10-28T20:14:51.387068+00:00",
       "load_bearing_honesty_certificate": {
         "certificate_only": true,
         "execution_authority": false,
@@ -361,8 +361,8 @@
     "mission_sha256": "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
     "promotion_authority": false,
     "schema": "PROJECT_BRAIN_TERMINAL_HONESTY_CERTIFICATE_V1",
-    "state_sha256": "cf5048ce068b778aa44eade76fa279b15addc1311f62a8a129732049c3e37c0c",
+    "state_sha256": "ba3bcb1b6d904dbccc462748cdc5e5d5df529a947afc37e162421aeea87c3022",
     "terminal_completion_authorized": true
   },
-  "updated_at_utc": "2026-10-28T19:34:12.157168+00:00"
+  "updated_at_utc": "2026-10-28T20:14:51.397631+00:00"
 }

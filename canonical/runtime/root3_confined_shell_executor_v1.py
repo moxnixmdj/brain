@@ -30,6 +30,8 @@ EFFECT_CLASS = "ARBITRARY_COMMAND_EXECUTION"
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 ASTRA_DIR_REL = "canonical/astra_runtime"
+TOOLCHAIN_DIR = pathlib.Path("/home/user/toolchain_swe/python")
+TOOLCHAIN_DIR_S = str(TOOLCHAIN_DIR) if TOOLCHAIN_DIR.is_dir() else None
 
 # The single astra_runtime run_shell subprocess site.
 SUPPORTED = {
@@ -195,7 +197,7 @@ os.write(fd,(json.dumps(out,sort_keys=True,separators=(",",":"))+"\n").encode("u
 
 
 _SETUP = r'''set -euo pipefail
-ROOT="$1"; INPUT="$2"; RWSUB="$3"; BROKER="$4"; MEM_KB="$5"; CPU_S="$6"; FILE_KB="$7"; NOFILE="$8"; PIDS="$9"; SCRATCH_MB="${10}"; ALIAS="${11}"; shift 11
+ROOT="$1"; INPUT="$2"; RWSUB="$3"; BROKER="$4"; MEM_KB="$5"; CPU_S="$6"; FILE_KB="$7"; NOFILE="$8"; PIDS="$9"; SCRATCH_MB="${10}"; ALIAS="${11}"; TOOLCHAIN="${12}"; shift 12
 mount --make-rprivate /
 mount -t tmpfs -o size=96m,nosuid,nodev tmpfs "$ROOT"
 mkdir -p "$ROOT/dev" "$ROOT/proc" "$ROOT/usr" "$ROOT/bin" "$ROOT/lib" "$ROOT/lib64" "$ROOT/tmp" "$ROOT/work" "$ROOT/input"
@@ -240,6 +242,11 @@ if [ "$ALIAS" != "-" ]; then
 fi
 mount -t tmpfs -o size="${SCRATCH_MB}m",nosuid,nodev,noexec tmpfs "$ROOT/tmp"
 mount -t tmpfs -o size="${SCRATCH_MB}m",nosuid,nodev tmpfs "$ROOT/work"
+if [ "$TOOLCHAIN" != "-" ]; then
+  mkdir -p "$ROOT/tmp/.local/lib/python3.11/site-packages"
+  mount --bind "$TOOLCHAIN" "$ROOT/tmp/.local/lib/python3.11/site-packages"
+  mount -o remount,bind,ro,nosuid,nodev "$ROOT/tmp/.local/lib/python3.11/site-packages"
+fi
 IP_BIN="$(command -v ip)"; CHROOT_BIN="$(command -v chroot || command -v /usr/sbin/chroot || command -v /sbin/chroot)"
 "$IP_BIN" link set lo up
 ulimit -t "$CPU_S"; ulimit -v "$MEM_KB"; ulimit -f "$FILE_KB"; ulimit -n "$NOFILE"; ulimit -u "$PIDS"
@@ -409,8 +416,14 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
             "timeout": v["timeout"],
             "stdin_file": None,
             "env": {
+                # Tool caches on the writable private scratch, never the
+                # read-only repo bind.
+                "MYPY_CACHE_DIR": "/tmp/.mypy_cache",
+                "RUFF_CACHE_DIR": "/tmp/.ruff_cache",
+                "COVERAGE_FILE": "/tmp/.coverage",
+                "PYTHONDONTWRITEBYTECODE": "1",
                 **v["env"],
-                "PYTHONPATH": "/input",
+                "PYTHONPATH": "/input:/tmp/.local/lib/python3.11/site-packages",
                 "HOME": "/tmp",
                 "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
             },
@@ -423,6 +436,7 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
             "input_dir": str(ROOT),
             "writable_dir": str((ROOT / ASTRA_DIR_REL).resolve()),
             "alias_dir": str(ROOT),
+            "toolchain_dir": TOOLCHAIN_DIR_S,
             "limits": {
                 # Caps enforced by zero_ambient_namespace_launcher_v1.canonical_policy.
                 "pids": 128,
@@ -551,6 +565,7 @@ def _run_confined_with_popen(
         str(math.ceil(lim["max_file_mb"] * 1024)), str(lim["nofile"]),
         str(lim["pids"]), str(lim["scratch_mb"]),
         (str(policy.get("alias_dir")) if policy.get("alias_dir") else "-"),
+        (str(policy.get("toolchain_dir")) if policy.get("toolchain_dir") else "-"),
         resolved["setpriv"], "--no-new-privs", "--bounding-set=-all",
         "--inh-caps=-all", "--ambient-caps=-all", resolved["env"], "-i",
         "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
