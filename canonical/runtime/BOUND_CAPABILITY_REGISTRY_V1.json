@@ -10375,6 +10375,482 @@
     },
     "status": "VERIFIED_BOUND_CAPABILITY"
   },
+  "python.quality.changelog.v1": {
+    "action_template": {
+      "args": {
+        "act_verb": "changelog",
+        "capability_id": "python.quality.changelog.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "quality_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "changelog",
+      "release notes",
+      "release history",
+      "what changed",
+      "history of changes"
+    ],
+    "limitations": [
+      "Reads the repository's own history: it reports what the commits say, never a summary.",
+      "Conventional-commit types are grouped; everything else is kept under Other."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+      "source_root": {
+        "type": "path_file_or_dir"
+      }
+    },
+    "provides": [
+      "python.repository.changelog.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "act",
+      "commit_count",
+      "sections",
+      "commits",
+      "changelog_markdown"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+      "module": "subprocess",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.quality.license_scan.v1": {
+    "action_template": {
+      "args": {
+        "act_verb": "license_scan",
+        "capability_id": "python.quality.license_scan.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "quality_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "license",
+      "licenses",
+      "licence",
+      "licensing",
+      "spdx",
+      "compliance",
+      "attribution"
+    ],
+    "limitations": [
+      "Reads installed distribution metadata for the modules the project imports.",
+      "A distribution that declares no license is counted separately, never assumed permissive."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+      "source_root": {
+        "type": "path_file_or_dir"
+      }
+    },
+    "provides": [
+      "python.dependencies.licenses.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "act",
+      "dependency_count",
+      "declared_count",
+      "licenses",
+      "license_counts"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+      "module": "subprocess",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.quality.coverage.v1": {
+    "action_template": {
+      "args": {
+        "act_verb": "coverage",
+        "capability_id": "python.quality.coverage.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "quality_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "coverage",
+      "test coverage",
+      "line coverage",
+      "covered",
+      "untested",
+      "branch coverage"
+    ],
+    "limitations": [
+      "Runs the stated suite under coverage.py: coverage is a fact about a run, not about source.",
+      "Refuses NO_TESTS_FOUND rather than reporting 0% for a tree it never executed."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+      "source_root": {
+        "type": "path_file_or_dir"
+      }
+    },
+    "provides": [
+      "python.tests.coverage.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "act",
+      "percent_covered",
+      "files",
+      "least_covered",
+      "test_exit"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+      "module": "subprocess",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.quality.duplication.v1": {
+    "action_template": {
+      "args": {
+        "act_verb": "duplication",
+        "capability_id": "python.quality.duplication.v1",
+        "output_path": "${input.output_path}",
+        "source_root": "${input.source_root}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "quality_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "duplication",
+      "duplicated code",
+      "duplicate code",
+      "clone",
+      "clones",
+      "copy pasted",
+      "repeated code",
+      "dry"
+    ],
+    "limitations": [
+      "AST statement windows (6), normalised for names and literals.",
+      "Overlapping windows of one copied block are reported once, not once per offset."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+      "source_root": {
+        "type": "path_file_or_dir"
+      }
+    },
+    "provides": [
+      "python.source.duplication.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "act",
+      "clone_group_count",
+      "clones",
+      "duplicated_statement_estimate"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+      "module": "subprocess",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.toolchain.ruff_async_audit.v1": {
+    "action_template": {
+      "args": {
+        "act_verb": "async_audit",
+        "capability_id": "python.toolchain.ruff_async_audit.v1",
+        "output_path": "${input.output_path}",
+        "select": "ASYNC,RUF006,PT",
+        "source_root": "${input.source_root}",
+        "tool_verb": "async_audit"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "concurrency",
+      "race condition",
+      "race conditions",
+      "async",
+      "await",
+      "coroutine",
+      "event loop",
+      "thread safety",
+      "asyncio"
+    ],
+    "limitations": [
+      "ruff ASYNC + RUF006 + PT rule families.",
+      "Static rules only: they cannot prove the absence of a race, only its known shapes."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+      "source_root": {
+        "type": "path_file_or_dir"
+      }
+    },
+    "provides": [
+      "python.source.concurrency.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "issue_count",
+      "issues",
+      "issue_codes",
+      "clean"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.toolchain.ruff_exception_audit.v1": {
+    "action_template": {
+      "args": {
+        "act_verb": "exception_audit",
+        "capability_id": "python.toolchain.ruff_exception_audit.v1",
+        "output_path": "${input.output_path}",
+        "select": "BLE,TRY,B,E722,S110",
+        "source_root": "${input.source_root}",
+        "tool_verb": "exception_audit"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "toolchain_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "exception handling",
+      "exception",
+      "exceptions",
+      "error handling",
+      "except",
+      "swallowed",
+      "bare except",
+      "raise"
+    ],
+    "limitations": [
+      "ruff BLE + TRY + B rule families.",
+      "Reports the patterns the rules encode; it does not judge whether an except is correct."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "proposal_bindings": {
+      "source_root": {
+        "type": "path_file_or_dir"
+      }
+    },
+    "provides": [
+      "python.source.exception_handling.report"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "tool",
+      "issue_count",
+      "issues",
+      "issue_codes",
+      "clean"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+      "module": "subprocess",
+      "type": "python_stdlib"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "vcs.git.bisect.v1": {
+    "action_template": {
+      "args": {
+        "argv": "${input.argv}",
+        "capability_id": "vcs.git.bisect.v1",
+        "git_verb": "bisect",
+        "output_path": "${input.output_path}",
+        "ref": "${input.ref}",
+        "worktree_path": "${input.worktree_path}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "vcs_git_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "git",
+      "bisect",
+      "first bad commit",
+      "which commit broke",
+      "regression range"
+    ],
+    "limitations": [
+      "Requires the predicate command; a bisect with an invented predicate is refused.",
+      "Always resets the bisect state, including on the failure path."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "vcs.git.history.bisect"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "good_ref",
+      "bad_ref",
+      "command",
+      "first_bad_sha",
+      "first_bad_subject"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+      "executable": "git",
+      "module": "git",
+      "type": "system_tool",
+      "version_family": ">=2.30"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "vcs.git.rebase.v1": {
+    "action_template": {
+      "args": {
+        "capability_id": "vcs.git.rebase.v1",
+        "git_verb": "rebase",
+        "output_path": "${input.output_path}",
+        "ref": "${input.ref}",
+        "worktree_path": "${input.worktree_path}"
+      },
+      "expect": {
+        "field": "gate",
+        "type": "field_equals",
+        "value": "PASS"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "vcs_git_v1",
+    "cost": 1,
+    "entrypoint": "run",
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "git",
+      "rebase",
+      "replay onto",
+      "linearise",
+      "apply onto"
+    ],
+    "limitations": [
+      "Refuses a dirty tree, and aborts a conflicting rebase rather than leaving it open."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "vcs.git.branch.rebase"
+    ],
+    "requires": [
+      "python.source.available"
+    ],
+    "result_fields": [
+      "onto",
+      "branch",
+      "previous_sha",
+      "sha",
+      "commits_replayed"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+      "executable": "git",
+      "module": "git",
+      "type": "system_tool",
+      "version_family": ">=2.30"
+    },
+    "status": "VERIFIED_BOUND_CAPABILITY"
+  },
 "vcs.git.branch_create.v1": {
    "action_template": {
     "args": {

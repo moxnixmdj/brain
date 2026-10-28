@@ -779,6 +779,17 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         if chosen:
             return chosen
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":no_matching_existing_files_named")
+    if key == "argv":
+        # A COMMAND THE SENTENCE QUOTES IS THE COMMAND, and the front binder had no rule for a
+        # slot literally named `argv`.  Measured: "Bisect the repository R ... using the command
+        # \"pytest -q t.py\"" bound no argv at all (GOAL_INPUT_BINDING_REQUIRED:argv:not_stated),
+        # the capability that ranks FIRST for that sentence was skipped as unstateable, and the
+        # request was answered by a changelog builder.  `test_argv` keeps its own derivation
+        # below, because a test runner's command line is also expressible as the tests it names.
+        stated = gc._stated_command_argv(goal)
+        if stated:
+            return stated
+        raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":not_stated")
     tails = _after_key(goal, key)
     if not tails:
         if key in _KV_KEYS:
@@ -829,6 +840,15 @@ _VERSION_FRAGMENT = re.compile(r"^v\d+$")
 _LINE_RANGE_RE = re.compile(
     r"\s*(\d+)\s*(?:-|\bto\b|\bthrough\b|\buntil\b|\.\.)\s*(\d+)\b", re.I
 )
+
+
+def _textual_tuning(key: str) -> bool:
+    """Is this slot a tuning value the sentence states in words (a revision)? See the lexicon."""
+    try:
+        from canonical.runtime import input_role_lexicon_v1 as _lex
+    except Exception:  # noqa: BLE001 - no lexicon, historical behaviour
+        return False
+    return _lex.is_textual_tuning(key)
 
 
 def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
@@ -902,7 +922,15 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
             return q
     value = _quoted(tail)
     if value is None and not quoted_only:
-        m = re.match(r"\s*([A-Za-z0-9_.:/-]+)", tail)
+        # A REVISION IS READ WHOLE.  The bare-token class below stops at "~" and "^", so
+        # "from the ref HEAD~2" bound `ref` to "HEAD" -- a DIFFERENT commit, silently, exactly
+        # the class of error this key was already fixed for once ("the commit 49b9ce0" used to
+        # be dropped entirely).  The wider class is confined to the slots declared textual
+        # tuning, where a value really is a revision expression; every other key keeps the
+        # historical token shape byte for byte.
+        _clause=(r"([A-Za-z0-9_.:/~^@{}-]+)" if _textual_tuning(key)
+                 else r"([A-Za-z0-9_.:/-]+)")
+        m = re.match(r"\s*" + _clause, tail)
         value = m.group(1) if m else None
         # ... and a connective is not a value either.  Measured while binding the git
         # surface: "Revert the last commit in the repository <R>" bound `ref` to "in",
@@ -2114,6 +2142,101 @@ def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, A
     }
 
 
+# Verbs that state HOW work is asked for, never WHICH work it is.
+_EXECUTION_VERBS = frozenset({"run", "call", "execute", "invoke", "perform", "do", "use", "apply"})
+
+
+def stated_act_unbound(
+    goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path,
+    selected: str | None = None,
+) -> dict[str, Any] | None:
+    """The ACT the sentence's own verb names, when its declared inputs cannot be bound.
+
+    A sentence states its verb first, and that verb is the strongest identity evidence a caller
+    gives without writing a capability id.  Measured: "Bisect the repository R from the ref
+    HEAD~2" -- a bisect with no predicate -- could not bind `argv`, so the pinned compiler
+    served it with `source.candidates.enumerate.stdlib`, which enumerated 400 python files and
+    reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.  The caller asked
+    for a commit and was handed a file listing, certified as the work requested.
+
+    So: when the head verb matches a registered capability's identity, and that capability's
+    own declared inputs cannot be bound from the sentence, that is a REFUSAL about the act the
+    caller named -- never a licence to answer with a different act.  Returns the capability and
+    the unbound input, or None when no act is named this way (which is the ordinary case and
+    changes nothing).
+    """
+    registry = dict(admissible)
+    text = without_stated_text_value(normalize_goal(str(goal or "")))
+    ranked = ranked_candidates(text, registry)
+    winner_score = next((row[0] for row in ranked if row[2] == selected), 0)
+    act = ""
+    failure: dict[str, Any] | None = None
+    for score, _specificity, cid, evidence in ranked[:6]:
+        # ONLY A DISPLACEMENT IS REFUSED.  If the winner OUTRANKS the capability the sentence's
+        # own verb names, the caller's words were read as something better and that is an
+        # ordinary routing decision -- measured: "Check out the branch feature in the repository
+        # R" ranks vcs.git.checkout.v1 first (17) while python.contract.check.crosshair.v1 reads
+        # the word "Check" (score below it) and cannot bind; refusing there took a working
+        # checkout off the surface.  Refusal is for the case where the act the sentence names is
+        # the one the ranking PREFERS and it still cannot be served.
+        if score <= winner_score:
+            continue
+        verb = str(evidence.get("matched_head_verb") or "")
+        if not verb or verb.lower() in _EXECUTION_VERBS:
+            # "Run the pdf extract text pypdf on X" has the head verb `run`, which names how the
+            # work is asked for, not which work it is: taking it as identity made
+            # shell.command.run the "stated act" of a PDF extraction and refused the capability
+            # the sentence actually described.
+            continue
+        if not act:
+            act = verb.lower()
+        if verb.lower() != act:
+            # Only the candidates the SAME verb names are alternatives for this act.
+            break
+        entry = registry.get(cid)
+        if not isinstance(entry, Mapping) or not is_plain_goal_routable(entry):
+            continue
+        if _binds(goal, entry, root):
+            # The act is serviceable by at least one of the capabilities that name it, so this
+            # is an ordinary routing decision -- not a refusal.  Measured: rename_parameter and
+            # rename_symbol both name `rename` and both outrank the winner; rename_parameter
+            # cannot bind `module`, rename_symbol binds everything.  Refusing on the first
+            # unbound sibling would have taken a working refactor off the surface.
+            return None
+        if failure is None:
+            failure = {"capability_id": cid, "act": verb, "code": "GOAL_INPUT_BINDING_REQUIRED",
+                       "detail": _bind_detail(goal, entry, root)}
+    return failure
+
+
+def _binds(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> bool:
+    """Can this capability's own declared inputs be bound from the sentence, by EITHER binder?
+
+    Two binders serve this repository -- the pinned one in goal_compiler and the front one here
+    -- and they do not overlap completely: `module` is a role the pinned binder resolves and the
+    front binder does not.  Asking only the front binder made a working capability look
+    unstateable.
+    """
+    try:
+        bind_all_inputs(goal, entry, root, cycle=0, spool=set())
+        return True
+    except GoalCompilationFailure:
+        pass
+    try:
+        gc._bind_inputs(goal, root, entry)
+        return True
+    except Exception:  # noqa: BLE001 - the pinned binder refuses by raising
+        return False
+
+
+def _bind_detail(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> str:
+    try:
+        bind_all_inputs(goal, entry, root, cycle=0, spool=set())
+        return "unstated"
+    except GoalCompilationFailure as exc:
+        return str(exc.detail or exc.code)
+
+
 def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
@@ -2229,6 +2352,17 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
 
     selected = (compiled or {}).get("selected_capability") if compiled else None
     single_shape = bool(compiled) and compiled.get("compiler_mode") == "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH" and selected
+
+    # A NAMED ACT IS NOT A LICENCE TO SERVE A DIFFERENT ONE.
+    # The pinned compiler answers with whatever BINDS, so an act whose inputs the sentence
+    # states incompletely silently loses to a neighbour that needs nothing.  Refuse instead,
+    # naming the act and the input, and let the caller fix the sentence.
+    _unbound_act = stated_act_unbound(text, registry, root, selected) if single_shape else None
+    if _unbound_act is not None and _unbound_act["capability_id"] != selected:
+        rules.append("F32_STATED_ACT_INPUTS_UNBOUND")
+        raise GoalCompilationFailure(
+            "GOAL_STATED_ACT_INPUTS_UNBOUND",
+            _unbound_act["capability_id"] + ":" + _unbound_act["detail"])
 
     # An explicit name outranks a scorer that could not see the thing named.
     # The name is read OUTSIDE the single_shape gate on purpose.  Inside it, the

@@ -522,6 +522,32 @@ def _claimed_paths(result):
     return claimed
 
 
+_COMMAND_QUOTED=re.compile(
+    r"(?:command|using|with|run|running|execute|executing|via)\s+(?:the\s+)?"
+    r"(?:shell\s+)?(?:command\s+)?[\"\u201c']([^\"\u201d']+)[\"\u201d']",
+    re.IGNORECASE)
+
+
+def _stated_command_argv(goal):
+    """The command line the sentence quotes, or None.
+
+    Read only where the sentence INTRODUCES it as a command, and split with shlex so the argv is
+    exactly what a shell would receive -- never a prose guess about which words are operands.
+    """
+    import shlex
+    for match in _COMMAND_QUOTED.finditer(str(goal or "")):
+        raw=match.group(1).strip()
+        if not raw or " " not in raw:
+            continue
+        try:
+            parts=shlex.split(raw)
+        except ValueError:
+            continue
+        if parts:
+            return parts
+    return None
+
+
 def _find_suite_argv(mod, _seen=None, _depth=0):
     """Follow an adapter's own delegation chain to the suite runner it uses.
 
@@ -841,6 +867,17 @@ def _bind_by_role_kind(goal,key,root,bound,extra=None,paths=None):
         return first if str(key).startswith("start") else last
     if kind==lex.KIND_TUNING:
         stated=_stated_number(goal,key)
+        if stated is None and lex.is_textual_tuning(key):
+            # A TUNING SLOT THE SENTENCE STATES IN WORDS IS STILL STATED.
+            #
+            # This branch used to read numbers only, so "Revert the commit 49b9ce0 in the
+            # repository R" dropped the commit, the adapter defaulted `ref` to HEAD, and a
+            # DIFFERENT commit was reverted -- silently, with the request reported as done.
+            # Where the value is a revision rather than a knob, the words the sentence uses are
+            # read in this order: the revision phrase table ("the previous commit" -> HEAD~1),
+            # then the slot's own introducer ("onto main" -> main).  Nothing is invented: a
+            # sentence that names no revision leaves the slot unbound exactly as before.
+            stated=lex.revision_from_phrase(goal) or _stated_text_value(goal,key) or None
         return stated if stated is not None else _UNBOUND
     text=str(goal or "")
     phrases=lex.phrases_for(key)
@@ -1009,6 +1046,27 @@ def _stated_text(goal, key):
     return None
 
 
+_TEXT_VALUE_OK=re.compile(r"^[\w./~^@{}-]{1,120}$")
+
+
+def _stated_text_value(goal,key):
+    """The plain word or token the sentence puts after this slot's own introducer.
+
+    Only for slots declared TEXTUAL_TUNING, and only a token shaped like a value a program
+    would accept (no spaces, no punctuation beyond a revision's own characters).  An
+    unshaped remainder is prose, and prose is not a value.
+    """
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+    except Exception:  # noqa: BLE001 - no front grammar, nothing to read
+        return None
+    for tail in _front._after_key(str(goal or ""),str(key)):
+        value=_front._parse_typed_value(str(key),tail)
+        if isinstance(value,str) and _TEXT_VALUE_OK.match(value.strip()):
+            return value.strip()
+    return None
+
+
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -1084,6 +1142,16 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     result[key]=files
                     continue
         if key.endswith("_argv"):
+            # A COMMAND THE SENTENCE QUOTES IS THE COMMAND.  This branch used to bind only the
+            # adapter's own default runner, so "bisect ... using the command \"pytest -q t.py\""
+            # bound no argv at all, the candidate was skipped as unstated, and the request was
+            # answered by a changelog builder.  The stated command comes first; the derived
+            # default remains the fallback for the sentences that state tests instead of a
+            # command line.
+            stated=_stated_command_argv(goal)
+            if stated:
+                result[key]=stated
+                continue
             # Derived, never invented: ask the adapter for the command line it
             # would itself have used for the tests the sentence named, and fail
             # closed when it offers no default.

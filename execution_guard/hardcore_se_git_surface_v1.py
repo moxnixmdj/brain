@@ -1,4 +1,4 @@
-"""Ten git acts, asked in ordinary English, executed against a real repository.
+"""Twelve git acts, asked in ordinary English, executed against a real repository.
 
 The inventory ranked version control as the #1 missing area: the machine could not run
 `git status` on its own tree, and `git blame`, `git stash`, `git bisect` and `git rebase`
@@ -67,6 +67,18 @@ PROBES = [
     ("revert", "vcs.git.revert.v1",
      "Revert the last commit in the repository {R} and write it to {O}.",
      ["reverted_subject", "sha", "previous_sha"], "head_moved"),
+    # The two acts that were missing from this repository entirely.  Both are HISTORIES, not
+    # files: a bisect names the commit a predicate first fails at, and a rebase replays a
+    # branch -- neither can be checked by looking at the artifact alone.
+    ("bisect", "vcs.git.bisect.v1",
+     'Bisect the repository {R} from the ref HEAD~2 using the command '
+     '"{PY} -m pytest -q {R}/pkg/test_calc.py" and write it to {O}.',
+     ["good_ref", "bad_ref", "command", "first_bad_sha", "first_bad_subject", "found"],
+     "bisect_names_the_commit_that_broke_the_test", "bisect"),
+    ("rebase", "vcs.git.rebase.v1",
+     "Rebase the branch in the repository {R} onto main and write it to {O}.",
+     ["onto", "branch", "previous_sha", "sha", "commits_replayed"], "branch_replayed_onto_main",
+     "rebase"),
 ]
 
 
@@ -75,8 +87,69 @@ def _git(repo: Path, *argv: str) -> subprocess.CompletedProcess:
                           cwd=str(repo), capture_output=True, text=True)
 
 
-def build_world(tag: str) -> Path:
+def build_bisect_world(tag: str) -> Path:
+    """Three commits: the test passes, the test still passes, then it fails.
+
+    A bisect is only meaningful when a PREDICATE flips, so the fixture carries the predicate
+    from the first commit: a repository whose test file appears only later would make every
+    earlier commit "bad" for having no tests at all, and the act would be graded against the
+    fixture rather than against git.
+    """
+    repo = WORK / tag / "repo"
+    shutil.rmtree(repo.parent, ignore_errors=True)
+    (repo / "pkg").mkdir(parents=True)
+    test = "from pkg.calc import add\n\n\ndef test_add():\n    assert add(2, 3) == 5\n"
+    (repo / "pkg/calc.py").write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
+    (repo / "pkg/test_calc.py").write_text(test, encoding="utf-8")
+    _git(repo, "init", "-q", "-b", "main")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-qm", "first: addition with its test")
+    (repo / "pkg/calc.py").write_text(
+        "def add(a, b):\n    return a + b\n\n\ndef sub(a, b):\n    return a - b\n",
+        encoding="utf-8")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-qm", "second: add subtract")
+    (repo / "pkg/calc.py").write_text(
+        "def add(a, b):\n    return a - b\n\n\ndef sub(a, b):\n    return a - b\n",
+        encoding="utf-8")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-qm", "third: break addition")
+    return repo
+
+
+def build_rebase_world(tag: str) -> Path:
+    """`main` and a `feature` branch that has both moved: a rebase has work to replay."""
+    repo = WORK / tag / "repo"
+    shutil.rmtree(repo.parent, ignore_errors=True)
+    (repo / "pkg").mkdir(parents=True)
+    calc = repo / "pkg/calc.py"
+    calc.write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
+    _git(repo, "init", "-q", "-b", "main")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-qm", "first")
+    _git(repo, "checkout", "-q", "-b", "feature")
+    calc.write_text(calc.read_text(encoding="utf-8") + "\n\ndef sub(a, b):\n    return a - b\n",
+                    encoding="utf-8")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-qm", "feature: subtract")
+    calc.write_text(calc.read_text(encoding="utf-8") + "\n\ndef mul(a, b):\n    return a * b\n",
+                    encoding="utf-8")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-qm", "feature: multiply")
+    _git(repo, "checkout", "-q", "main")
+    (repo / "README.md").write_text("# demo\n", encoding="utf-8")
+    _git(repo, "add", "-A")
+    _git(repo, "commit", "-qm", "main moves on")
+    _git(repo, "checkout", "-q", "feature")
+    return repo
+
+
+def build_world(tag: str, setup: str = "") -> Path:
     """Two commits on `main`, one extra branch, and a dirty working tree."""
+    if setup == "bisect":
+        return build_bisect_world(tag)
+    if setup == "rebase":
+        return build_rebase_world(tag)
     repo = WORK / tag / "repo"
     shutil.rmtree(repo.parent, ignore_errors=True)
     (repo / "pkg").mkdir(parents=True)
@@ -126,6 +199,19 @@ EFFECTS = {
     "head_is_on_the_feature_branch": lambda repo, before, body: _branch(repo) == "feature",
     "head_moved": lambda repo, before, body: _head(repo) != before,
     "tree_is_clean": lambda repo, before, body: not _dirty(repo),
+    # A bisect is right when the commit it names is the commit that broke the test -- HEAD in
+    # this fixture -- and wrong when it names a neighbour that merely happens to be nearby.
+    "bisect_names_the_commit_that_broke_the_test": lambda repo, before, body: (
+        body.get("found") is True
+        and str(body.get("first_bad_sha") or "") == _head(repo)
+        and "break" in str(body.get("first_bad_subject") or "")),
+    # A rebase is right when the branch now CONTAINS what it was rebased onto and its own work
+    # was replayed onto it -- a rebase that reported success while leaving main outside the
+    # branch's history is the hollow pass this check exists for.
+    "branch_replayed_onto_main": lambda repo, before, body: (
+        int(body.get("commits_replayed") or 0) >= 2
+        and _git(repo, "merge-base", "--is-ancestor", "main", "HEAD").returncode == 0
+        and _branch(repo) == "feature"),
 }
 
 
@@ -172,6 +258,15 @@ REFUSALS = [
     ("path_not_in_repository",
      "Blame the lines of the file {OUTSIDE} in the repository {R} and write it to {O}.",
      "clean", ("PATH_NOT_IN_REPOSITORY", "BINDING_REFUSED", "FAIL_CLOSED")),
+    # A bisect with no predicate and a rebase onto a revision that is not there.  Both are acts
+    # whose WRONG version damages history, so both must refuse by name.
+    ("bisect_without_a_command",
+     "Bisect the repository {R} from the ref HEAD~2 and write it to {O}.",
+     "bisect", ("argv:not_stated", "BISECT_COMMAND_NOT_STATED", "BINDING_REFUSED",
+                "STATED_ACT_INPUTS_UNBOUND", "FAIL_CLOSED")),
+    ("rebase_onto_a_missing_ref",
+     "Rebase the branch in the repository {R} onto nosuchbranch and write it to {O}.",
+     "rebase", ("REF_NOT_FOUND",)),
 ]
 
 
@@ -182,6 +277,14 @@ def _refusal_world(tag: str, setup: str) -> tuple[Path, str, dict]:
         NOT_A_REPO_DIR.mkdir(parents=True)
         (NOT_A_REPO_DIR / "README.md").write_text("# not a repository\n", encoding="utf-8")
         return NOT_A_REPO_DIR, "", {}
+    if setup in ("bisect", "rebase"):
+        # These two verbs need a history that has something to find (a predicate that flips) or
+        # something to replay (a branch that has moved), so they build their own world.
+        repo = build_world("refuse_" + tag, setup)
+        outside = WORK / "outside" / ("outside_%s.py" % tag)
+        outside.parent.mkdir(parents=True, exist_ok=True)
+        outside.write_text("value = 1\n", encoding="utf-8")
+        return repo, str(outside.relative_to(ROOT)), {}
     repo = build_world("refuse_" + tag)
     if setup == "clean":
         # A clean tree, because these rows test the REFUSAL and not the dirty-tree guard.
@@ -226,11 +329,13 @@ def main() -> int:
     if ns.refusals:
         return _measure_refusals(adm, ns)
     rows = []
-    for tag, cid, sentence, fields, effect in PROBES:
+    for row_def in PROBES:
+        tag, cid, sentence, fields, effect = row_def[:5]
+        setup = row_def[5] if len(row_def) > 5 else ""
         if ns.only and tag not in ns.only.split(","):
             continue
         fresh = not (ns.reuse and (WORK / tag / "repo" / ".git").exists())
-        repo = build_world(tag) if fresh else (WORK / tag / "repo")
+        repo = build_world(tag, setup) if fresh else (WORK / tag / "repo")
         if fresh and tag in ("revert", "checkout"):
             # `git revert` and `git checkout` both refuse a dirty tree -- that refusal IS the
             # contract -- so the fixture commits first rather than the check being weakened.
@@ -238,7 +343,7 @@ def main() -> int:
             _git(repo, "commit", "-qm", "third: add multiply")
         out = repo.parent / "out" / (tag + ".json")
         out.parent.mkdir(parents=True, exist_ok=True)
-        goal = sentence.format(R=str(repo), O=str(out))
+        goal = sentence.format(R=str(repo), O=str(out), PY=sys.executable)
         before = _head(repo)
         try:
             res = adm.solve({"task_id": "GIT_" + tag, "goal": goal})

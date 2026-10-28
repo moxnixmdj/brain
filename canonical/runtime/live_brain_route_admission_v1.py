@@ -2165,6 +2165,15 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # PROMISED_ARTIFACT_MISSING:A, naming the source the sentence asked to
         # have gone.  The main path below has always read this list before
         # _execute; this branch did not.
+        if exc.code == "GOAL_STATED_ACT_INPUTS_UNBOUND":
+            # The sentence named the act and could not state what it needs.  Composition is the
+            # wrong question here: it would search for ANY chain that reaches the sentence's
+            # words, which is how a predicate-less bisect came to be answered by a source-file
+            # enumerator that reported PASS.  The honest answer is the refusal the compiler
+            # already wrote, naming the capability and the input it could not bind.
+            return _fail(task_id, "FAIL_CLOSED__STATED_ACT_INPUTS_UNBOUND",
+                         "THE_ACT_THE_SENTENCE_NAMES_NEEDS_INPUTS_IT_DOES_NOT_STATE", started,
+                         reason=str(exc.detail or exc.code), compiler_code=exc.code)
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
         composed = _try_composed(task_id, goal, started)

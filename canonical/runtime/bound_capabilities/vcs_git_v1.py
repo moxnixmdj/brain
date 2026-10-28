@@ -28,6 +28,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import shlex
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -265,9 +266,18 @@ def _branch_list(args, repo, cap):
 
 # ----------------------------------------------------------------------------- mutating
 
-def _dirty(repo: Path, timeout_s: int) -> list[dict]:
+def _dirty(repo: Path, timeout_s: int, include_untracked: bool = True) -> list[dict]:
+    """Uncommitted changes, tracked by default.
+
+    `git checkout`, `git revert` and `git rebase` rewrite TRACKED state and leave untracked files
+    exactly where they are, so an untracked `__pycache__` is not a reason to refuse them --
+    measured while binding the reuse surface: a coverage run left a `__pycache__` in the fixture
+    and every later rebase refused WORKING_TREE_DIRTY:1 over a file git would never have touched.
+    `git stash` is the verb built to move uncommitted work, so it asks for untracked too.
+    """
+    untracked = [] if include_untracked else ["--untracked-files=no"]
     proc = _git(repo, ["--no-optional-locks", "status", "--porcelain=v1",
-                       "--untracked-files=all"], timeout_s)
+                       "--untracked-files=all"] + untracked, timeout_s)
     return [{"index": l[0], "worktree": l[1], "path": l[3:]}
             for l in proc.stdout.splitlines() if len(l) > 3]
 
@@ -334,7 +344,7 @@ def _checkout(args, repo, cap):
     if not _rev_exists(repo, target, args):
         _fail("REF_NOT_FOUND:" + target)
     if bool(args.get("require_clean", True)):
-        dirty = _dirty(repo, timeout_s)
+        dirty = _dirty(repo, timeout_s, include_untracked=False)
         if dirty:
             _fail("WORKING_TREE_DIRTY:%d" % len(dirty))
     before = _git(repo, ["rev-parse", "--abbrev-ref", "HEAD"], timeout_s).stdout.strip()
@@ -381,7 +391,7 @@ def _revert(args, repo, cap):
     timeout_s = args.get("timeout_s", DEFAULT_TIMEOUT_S)
     if not _rev_exists(repo, ref, args):
         _fail("REF_NOT_FOUND:" + ref)
-    dirty = _dirty(repo, timeout_s)
+    dirty = _dirty(repo, timeout_s, include_untracked=False)
     if dirty:
         _fail("WORKING_TREE_DIRTY:%d" % len(dirty))
     target = _git(repo, ["rev-parse", ref], timeout_s).stdout.strip()
@@ -396,9 +406,82 @@ def _revert(args, repo, cap):
             "reverted_subject": subject, "sha": after, "previous_sha": before}
 
 
+def _bisect(args, repo, cap):
+    """Find the first commit at which a stated command fails.
+
+    This is the one git act that needs a PREDICATE, and the honest form of that predicate is the
+    command the caller states -- `git bisect run` exists for exactly this and the composer already
+    carries `argv` slots.  What it must never do is guess: no stated command is a refusal, because
+    a bisect with an invented predicate would name a commit that has nothing to do with the bug.
+    """
+    good = str(args.get("ref") or "").strip()
+    if not good:
+        _fail("BISECT_GOOD_REF_NOT_STATED")
+    timeout_s = args.get("timeout_s", DEFAULT_TIMEOUT_S)
+    if not _rev_exists(repo, good, args):
+        _fail("REF_NOT_FOUND:" + good)
+    bad = str(args.get("bad_ref") or "HEAD").strip()
+    if not _rev_exists(repo, bad, args):
+        _fail("REF_NOT_FOUND:" + bad)
+    command = args.get("argv")
+    if isinstance(command, str):
+        command = shlex.split(command)
+    command = [str(part) for part in (command or []) if str(part).strip()] \
+        if isinstance(command, list) else []
+    if not command:
+        _fail("BISECT_COMMAND_NOT_STATED")
+    dirty = _dirty(repo, timeout_s, include_untracked=False)
+    if dirty:
+        _fail("WORKING_TREE_DIRTY:%d" % len(dirty))
+    _git(repo, ["bisect", "start", bad, good], timeout_s)
+    proc = _git(repo, ["bisect", "run"] + command, timeout_s, check=False)
+    first_bad = _git(repo, ["rev-parse", "refs/bisect/bad"], timeout_s, check=False).stdout.strip()
+    subject = _git(repo, ["log", "-1", "--pretty=format:%s", first_bad], timeout_s,
+                   check=False).stdout.strip() if first_bad else ""
+    steps = _git(repo, ["bisect", "log"], timeout_s, check=False).stdout.splitlines()
+    # Always reset, including on the failure path: leaving the caller on a detached bisect HEAD is
+    # the same class of damage as a checkout that throws the tree away.
+    _git(repo, ["bisect", "reset"], timeout_s, check=False)
+    if proc.returncode != 0 and not first_bad:
+        _fail("BISECT_FAILED:" + (proc.stderr or proc.stdout or "").strip().splitlines()[-1][:200]
+              if (proc.stderr or proc.stdout or "").strip() else "BISECT_FAILED")
+    return {**_base(cap, "bisect", repo), "good_ref": good, "bad_ref": bad,
+            "command": command, "first_bad_sha": first_bad,
+            "first_bad_subject": subject, "steps_examined": len(steps),
+            "found": bool(first_bad)}
+
+
+def _rebase(args, repo, cap):
+    """Replay the current branch onto a stated revision; refuse rather than leave a conflict."""
+    onto = str(args.get("ref") or "").strip()
+    if not onto:
+        _fail("REF_NOT_STATED")
+    timeout_s = args.get("timeout_s", DEFAULT_TIMEOUT_S)
+    if not _rev_exists(repo, onto, args):
+        _fail("REF_NOT_FOUND:" + onto)
+    if bool(args.get("require_clean", True)):
+        dirty = _dirty(repo, timeout_s, include_untracked=False)
+        if dirty:
+            _fail("WORKING_TREE_DIRTY:%d" % len(dirty))
+    branch = _git(repo, ["rev-parse", "--abbrev-ref", "HEAD"], timeout_s).stdout.strip()
+    before = _git(repo, ["rev-parse", "HEAD"], timeout_s).stdout.strip()
+    proc = _git(repo, ["rebase", onto], timeout_s, check=False)
+    if proc.returncode != 0:
+        _git(repo, ["rebase", "--abort"], timeout_s, check=False)
+        detail = (proc.stdout or proc.stderr or "").strip().splitlines()
+        _fail("REBASE_CONFLICT:" + onto + ":" + (detail[-1] if detail else "")[:160])
+    after = _git(repo, ["rev-parse", "HEAD"], timeout_s).stdout.strip()
+    replayed = _git(repo, ["rev-list", "--count", "%s..%s" % (onto, after)], timeout_s,
+                    check=False).stdout.strip()
+    return {**_base(cap, "rebase", repo), "onto": onto, "branch": branch,
+            "previous_sha": before, "sha": after,
+            "commits_replayed": int(replayed) if replayed.isdigit() else 0}
+
+
 _HANDLERS = {"status": _status, "log": _log, "diff": _diff, "blame": _blame,
              "branch_list": _branch_list, "stash": _stash, "branch_create": _branch_create,
-             "checkout": _checkout, "commit": _commit, "revert": _revert}
+             "checkout": _checkout, "bisect": _bisect, "rebase": _rebase,
+             "commit": _commit, "revert": _revert}
 
 
 def run(args: dict, root: Path) -> dict:

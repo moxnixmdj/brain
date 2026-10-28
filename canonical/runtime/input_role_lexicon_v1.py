@@ -129,7 +129,7 @@ ROLE_ALIASES: dict[str, tuple[str, ...]] = {
     # the earlier split (branch_name for the branch, ref for the commit) made the second one
     # unbindable, so "Check out the previous commit ..." was answered by a `git log` listing.
     "ref": ("ref", "revision", "against", "at commit", "at revision", "commit",
-            "branch", "branch called", "branch named"),
+            "branch", "branch called", "branch named", "onto", "on top of"),
     "message": ("message", "commit message", "with the message", "saying"),
     "branch_name": ("branch", "branch called", "branch named", "new branch"),
     # "the repository", "the repo", "the checkout", "the tree it was cut from"

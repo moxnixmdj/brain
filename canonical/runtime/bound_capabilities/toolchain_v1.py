@@ -39,6 +39,8 @@ DEFAULT_TIMEOUT_S = 300
 _RUFF_LINT_SELECT = "E,F,W,I,B,UP,SIM,C4,RUF"
 _RUFF_DEAD_CODE_SELECT = "F401,F811,F841"
 _RUFF_COMPLEXITY_SELECT = "C901"
+_RUFF_ASYNC_SELECT = "ASYNC,RUF006,PT"
+_RUFF_EXCEPTION_SELECT = "BLE,TRY,B,E722,S110"
 _COMPLEXITY_THRESHOLD = 10
 
 
@@ -443,8 +445,72 @@ def _security(args, target: Path, cap: str) -> dict:
     }
 
 
+def _ruff_rows(tool: str, target: Path, select: str, timeout_s: int):
+    """(rows, stderr) for one ruff rule set over one target."""
+    findings, stderr = _ruff_json(
+        tool,
+        [tool, "check", "--output-format", "json", "--select", select, "--no-cache", str(target)],
+        Path.cwd(),
+        timeout_s,
+    )
+    rows = [
+        {
+            "code": str(f.get("code") or ""),
+            "message": str(f.get("message") or "")[:200],
+            "path": _rel(target.parent, str((f.get("location") or {}).get("path") or "")),
+            "line": int(((f.get("location") or {}).get("row") or 0)),
+        }
+        for f in findings
+    ]
+    return rows, stderr
+
+
+def _rule_audit(args, target: Path, cap: str, default_select: str, tool_name: str) -> dict:
+    """One audit body for every rule-derived act: select, measure, report."""
+    tool = _resolve_tool("ruff")
+    timeout_s = int(args.get("timeout_s") or DEFAULT_TIMEOUT_S)
+    select = str(args.get("select") or default_select)
+    rows, stderr = _ruff_rows(tool, target, select, timeout_s)
+    codes: dict[str, int] = {}
+    for row in rows:
+        codes[row["code"]] = codes.get(row["code"], 0) + 1
+    return {
+        **_base(cap, "ruff", target),
+        "rules": select,
+        "issue_count": len(rows),
+        "issues": rows,
+        "issue_codes": codes,
+        "clean": not rows,
+        "tool_stderr": stderr,
+    }
+
+
+def _async_audit(args, target: Path, cap: str) -> dict:
+    """Concurrency defects, measured by the rules that already encode them.
+
+    `ASYNC` is flake8-async: blocking calls inside an async function, unawaited coroutines,
+    asyncio APIs used outside a loop.  `RUF006` is the dangling-task rule.  The act "audit the
+    concurrency for race conditions" had no capability at all, and was answered by an AST
+    walker with a PASS; the analyser that measures it was already installed.
+    """
+    return _rule_audit(args, target, cap, _RUFF_ASYNC_SELECT, "async")
+
+
+def _exception_audit(args, target: Path, cap: str) -> dict:
+    """Exception-handling defects: blind excepts, swallowed errors, raise-without-from.
+
+    `BLE` is flake8-blind-except, `TRY` is tryceratops, `B` carries the bugbear rules that matter
+    here (B904 raise-without-from), and E722/S110 name the bare except and the swallowed except.
+    Measured on the smoke fixture: a file whose only content was a bare except that swallowed an
+    error audited as ZERO issues because neither rule was selected.  Same reason as the
+    concurrency audit: the act existed in the request vocabulary and nowhere in the registry.
+    """
+    return _rule_audit(args, target, cap, _RUFF_EXCEPTION_SELECT, "exception")
+
 _HANDLERS = {
     "lint": _lint,
+    "async_audit": _async_audit,
+    "exception_audit": _exception_audit,
     "format": _format,
     "type_check": _type_check,
     "complexity": _complexity,

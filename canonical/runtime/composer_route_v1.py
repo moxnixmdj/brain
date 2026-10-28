@@ -441,6 +441,7 @@ def extract_paths(text: str) -> list[str]:
     library looks is how a machine decides a goal named no input.
     """
     body = str(text or "")
+    original = body
     found: list[str] = []
     seen: set[str] = set()
 
@@ -448,6 +449,33 @@ def extract_paths(text: str) -> list[str]:
         if candidate and candidate not in seen:
             found.append(candidate)
             seen.add(candidate)
+
+    def _add_in_sentence_order(candidate: str) -> None:
+        """Add a path where the sentence puts it, not where the scanner reaches it.
+
+        ``found`` is in sentence order for everything ``_EXT`` reads, and ORDER IS MEANING:
+        PATH_OUTPUT binds ``paths[-1]`` and a command's first operand is its source.  A
+        DIRECTORY token is found by a later pass, so appending it moved it to the end of the
+        sentence: measured on "Measure the line coverage of the tests in <abs>/repo and report
+        it to <abs>/out/cov.json", the repository came out LAST, PATH_OUTPUT bound the
+        repository, source_root bound the report, and the coverage capability was handed a
+        directory where it wanted to write.  The sentence states the repository first, so the
+        list says so too.
+        """
+        if not candidate or candidate in seen:
+            return
+        at = original.find(candidate)
+        if at < 0:
+            _add(candidate)
+            return
+        index = len(found)
+        for position, existing in enumerate(found):
+            spot = original.find(str(existing))
+            if spot < 0 or spot > at:
+                index = position
+                break
+        found.insert(index, candidate)
+        seen.add(candidate)
 
     # A quoted name is read whole first, and then removed from the sentence, so
     # its fragments cannot be picked up as separate paths below.  Only a quoted
@@ -542,6 +570,12 @@ def extract_paths(text: str) -> list[str]:
         body = body.replace(str(stated), " ", 1)
     for m in _DIRPATH.finditer(body):
         token = m.group(0)
+        # An ABSOLUTE directory keeps its separator, for the reason the file scanner above
+        # already keeps it: `_DIRPATH` cannot match a leading "/", so "/home/u/x/repo" was read
+        # as "home/u/x/repo" and every layer that joins a path onto the repository root wrote a
+        # mirror of the absolute path INSIDE the repository.
+        if m.start() > 0 and body[m.start() - 1] == "/":
+            token = "/" + token
         if token in seen:
             continue
         # The parent of a path already found is not a second path.  Appending it
@@ -553,7 +587,7 @@ def extract_paths(text: str) -> list[str]:
             # The last arm is a name with spaces: "canonical/x/my" is the head of
             # "canonical/x/my backup.txt", not a directory holding it.
             continue
-        _add(token)
+        _add_in_sentence_order(token)
     return found
 
 
@@ -3108,7 +3142,16 @@ def bind(signature: Mapping[str, str], goal: str,
             # side -- and it is only consulted when content was actually stated,
             # so a sentence with no payload keeps binding exactly as before.
             destination = extract_content_destination(goal)
-            if destination and destination in paths:
+            # ... and a DESTINATION FOR CONTENT IS A FILE.  The payload grammar reads
+            # "line coverage of the tests in <dir>" as a payload introduced by "line" whose
+            # destination is <dir>, so a request that states no payload at all bound its
+            # output_path to the directory it was asked to MEASURE.  Measured: "Measure the
+            # line coverage of the tests in <abs>/repo and report it to <abs>/out/cov.json"
+            # handed the coverage adapter its own source root as the place to write, the
+            # adapter raised IsADirectoryError, and the request died as
+            # PROMISED_ARTIFACT_MISSING.  An existing directory is not a place this slot can
+            # put a file, whatever the grammar said.
+            if destination and destination in paths and not _is_directory_in_repo(destination):
                 args[slot] = destination
             elif _noun_matched_path(slot, paths, goal) is not None:
                 # "the archive <A>" is what this slot is about, whatever exists.
