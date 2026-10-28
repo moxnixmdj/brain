@@ -145,11 +145,28 @@ class GitObjectModelTest(unittest.TestCase):
             "repo_path": "repo", "good": self.shas[0], "bad": self.shas[2],
             "test_argv": TEST_ARGV_OK, "output_path": "out/bisect.json",
         }, self.root)
-        self.assertTrue(result["output_verified"])
+        self.assertTrue(result["output_verified"], result.get("output_path"))
         self.assertEqual(result["first_bad_commit"], self.shas[1])
         self.assertTrue(result["restored"])
         self.assertEqual(_git(self.repo, "rev-parse", "HEAD").strip(), self.shas[-1])
         self.assertEqual(_git(self.repo, "status", "--porcelain", "--untracked-files=no"), "")
+
+    def test_the_bisect_answer_is_read_from_the_bisect_ref_not_from_a_sentence(self):
+        """The verdict must not depend on git's message wording or on which stream carries it.
+
+        The lane used to parse `X is the first bad commit` out of stdout. On the 3.11.17 CI
+        runner that sentence was not there, `first_bad_commit` stayed empty and the capability
+        reported `verified: false` for a bisect that had succeeded. The answer is now read from
+        `refs/bisect/bad`, the ref bisect itself uses, and the artifact says which source it used.
+        """
+        result = self.module.run_bisect({
+            "repo_path": "repo", "good": self.shas[0], "bad": self.shas[2],
+            "test_argv": TEST_ARGV_OK, "output_path": "out/bisect_source.json",
+        }, self.root)
+        artifact = json.loads(pathlib.Path(result["output_path"]).read_text(encoding="utf-8"))
+        self.assertEqual(artifact["first_bad_source"], "refs/bisect/bad")
+        self.assertEqual(artifact["bisect_run_returncode"], 0)
+        self.assertEqual(artifact["first_bad_commit"], self.shas[1])
 
     def test_bisect_refuses_a_dirty_tree_and_leaves_it_untouched(self):
         (self.repo / "calc.py").write_text("def add(a,b):\n    return 0\n", encoding="utf-8")
@@ -255,7 +272,7 @@ class GitObjectModelTest(unittest.TestCase):
         result = self.module.run_bisect({"repo_path": "repo",
                                          "goal": "which commit broke the test suite"},
                                         self.root)
-        self.assertTrue(result["output_verified"])
+        self.assertTrue(result["output_verified"], result.get("output_path"))
         self.assertEqual(result["first_bad_commit"], self.shas[1])
         artifact = json.loads(pathlib.Path(result["output_path"]).read_text(encoding="utf-8"))
         self.assertTrue(artifact["good_inferred_as_root_commit"])

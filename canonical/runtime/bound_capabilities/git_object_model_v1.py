@@ -563,6 +563,7 @@ def run_bisect(args, root):
     transcript: list[str] = []
     restored = False
     first_bad = ""
+    first_bad_source = ""
     try:
         for argv in (["bisect", "start"], ["bisect", "bad", bad], ["bisect", "good", good]):
             rc, out, err = _git(repo, argv, timeout_s)
@@ -572,14 +573,32 @@ def run_bisect(args, root):
         steps = 0
         rc, out, err = _git(repo, ["bisect", "run", *test_argv], max(timeout_s, 600))
         transcript.append("$ git bisect run " + " ".join(test_argv) + "\n" + out + err)
-        for line in out.splitlines():
-            if line.endswith(_FIRST_BAD):
-                first_bad = line.split()[0].strip()
-                break
-            if " is the first bad commit" in line:
-                first_bad = line.replace(_FIRST_BAD, "").strip()
-                break
-        steps = sum(1 for line in out.splitlines() if line.startswith("Bisecting:"))
+        # The answer is read from `refs/bisect/bad`, not from the English sentence. Parsing
+        # "X is the first bad commit" made the lane's verdict depend on git's message wording
+        # and on which stream it chose: on the 3.11.17 CI runner the sentence was not found in
+        # stdout, `first_bad` stayed empty and `verified` became False even though bisect had
+        # succeeded. `refs/bisect/bad` is what bisect itself uses, it is stable across versions
+        # and locales, and it disappears at `bisect reset` -- so it is read first, right here.
+        bad_rc, bad_out, _bad_err = _git(repo, ["rev-parse", "--verify", "-q", "refs/bisect/bad"],
+                                        timeout_s)
+        candidate = bad_out.strip().splitlines()[-1].strip() if bad_out.strip() else ""
+        # `bisect run` returns 0 only when it actually concluded. Without that check the
+        # ref would still name the caller's `bad` commit after an inconclusive run, and the
+        # lane would report a culprit bisect never found.
+        if rc == 0 and bad_rc == 0 and candidate:
+            first_bad = candidate
+            first_bad_source = "refs/bisect/bad"
+        if not first_bad:
+            for line in (out + "\n" + err).splitlines():
+                if line.endswith(_FIRST_BAD):
+                    first_bad = line.split()[0].strip()
+                    break
+                if _FIRST_BAD in line:
+                    first_bad = line.split(_FIRST_BAD)[0].strip()
+                    break
+            first_bad_source = "bisect_output_text" if first_bad else ""
+        steps = sum(1 for line in (out + "\n" + err).splitlines()
+                    if line.startswith("Bisecting:"))
     finally:
         _git(repo, ["bisect", "reset"], max(timeout_s, 300))
         # Independent restoration proof, read back from the repository itself.
@@ -600,6 +619,8 @@ def run_bisect(args, root):
         "commits_in_range": commits_in_range,
         "steps_needed": steps_needed,
         "first_bad_commit": first_bad or None,
+        "first_bad_source": first_bad_source or None,
+        "bisect_run_returncode": rc,
         "steps_observed": steps,
         "head_before": started_head,
         "head_after": _head(repo),

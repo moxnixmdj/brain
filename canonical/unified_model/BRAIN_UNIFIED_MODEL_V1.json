@@ -21666,7 +21666,7 @@
     "source_executable": null,
     "source_module": "git",
     "source_path": "canonical/runtime/bound_capabilities/git_object_model_v1.py",
-    "source_sha256": "ff36babf2ef112228d4bb79710ab8a48ea3552e69a8f8209276d3cc52a78771d",
+    "source_sha256": "9662637ccd736a146f8486712ac9ef2ca36ba895f5832b297270b649a57bd6dc",
     "source_type": "system_tool"
    },
    "provides": [
@@ -21753,7 +21753,7 @@
     "source_executable": null,
     "source_module": "git",
     "source_path": "canonical/runtime/bound_capabilities/git_object_model_v1.py",
-    "source_sha256": "ff36babf2ef112228d4bb79710ab8a48ea3552e69a8f8209276d3cc52a78771d",
+    "source_sha256": "9662637ccd736a146f8486712ac9ef2ca36ba895f5832b297270b649a57bd6dc",
     "source_type": "system_tool"
    },
    "provides": [
@@ -21833,7 +21833,7 @@
     "source_executable": null,
     "source_module": "git",
     "source_path": "canonical/runtime/bound_capabilities/git_object_model_v1.py",
-    "source_sha256": "ff36babf2ef112228d4bb79710ab8a48ea3552e69a8f8209276d3cc52a78771d",
+    "source_sha256": "9662637ccd736a146f8486712ac9ef2ca36ba895f5832b297270b649a57bd6dc",
     "source_type": "system_tool"
    },
    "provides": [
@@ -28993,7 +28993,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "782c0df6b2592fb45dd1199458d606ce82b1688c6cab66976495ad18a239075b"
+  "value": "b2ea3c5e05e919421c901956f877c0a7182390eb4e0adef1eb4109ca0edab164"
  },
  "engines": [
   {
@@ -52799,7 +52799,7 @@
   "included_source_count": 944,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "96e88f28ed92b385669d1eeb0e299c1b1001dbef52bbf882d336032a0e77e7e8"
+  "source_tree_digest": "c0734fb6435eeeb63264564e94d2da8cfc5aaa69eab5f8500a401095e0c7453a"
  },
  "research_index": [
   {
