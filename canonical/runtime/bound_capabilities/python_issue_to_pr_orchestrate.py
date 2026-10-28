@@ -10,8 +10,8 @@ instead of four disconnected tools:
       -> cross-file edit plan          (slice 4: python_crossfile_edit_choreograph)
       -> apply plan to a WORKTREE copy (this adapter; source tree is never mutated)
       -> prove application             (re-index + re-plan: fixed point == no-op)
-      -> select minimal tests          (slice 2: python_change_impact_testselect)
-      -> run selected tests            (pytest on the worktree)
+      -> select impacted tests        (slice 2: advisory, not a proof of coverage)
+      -> run all discovered tests      (one pytest run on the worktree)
       -> emit unified diff + pr_intent + Merkle receipt (this adapter)
 
 Correctness laws it refuses to violate:
@@ -26,6 +26,12 @@ Correctness laws it refuses to violate:
   the same edits are re-planned; rename ops must now refuse with
   NAME_NOT_AT_MODULE_SCOPE (old name gone) and the new name must bind at
   module scope.  Anything else is a hard failure.
+* TESTS-BEFORE-VERIFIED — impact selection is advisory: dynamic dependencies
+  can evade it.  Verification requires a successful pytest run with at least
+  one passed test over every conventionally named test file discovered under
+  source_root. Missing or uncollected files, deselected tests, skipped-only,
+  failed, or unreportable runs cannot pass. Tests outside source_root,
+  nonstandard test filenames, and skipped tests are not covered.
 * FAIL CLOSED on any unknown/missing input; v1 applies ``rename_symbol``
   and ``move_symbol`` ops (decorator-aware cut spans, deterministic
   multi-name import splitting, and re-import injection when the defining
@@ -56,11 +62,14 @@ import ast
 import difflib
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from canonical.runtime.bound_capabilities import (
@@ -68,6 +77,9 @@ from canonical.runtime.bound_capabilities import (
 )
 from canonical.runtime.bound_capabilities import (
     python_change_impact_testselect as testselect,
+)
+from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
+    discover_test_files,
 )
 
 ARTIFACT_VERSION = 1
@@ -99,6 +111,138 @@ def _sha256(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
+def _read_pytest_report(path: Path) -> dict:
+    """Read outcome counts from pytest's JUnit report, not its console text.
+
+    A successful process with no usable report, or no actually passed test,
+    is not evidence that the worktree was tested. Pytest's built-in JUnit
+    plugin emits one top-level suite; accept multiple top-level suites too.
+    """
+    root = ET.parse(path).getroot()
+    suites = [root] if root.tag == "testsuite" else root.findall("./testsuite")
+    if not suites:
+        raise ValueError("PYTEST_REPORT_HAS_NO_SUITES")
+    totals = {key: 0 for key in ("tests", "failures", "errors", "skipped")}
+    failed_cases = []
+    for suite in suites:
+        for key in totals:
+            count = int(suite.attrib[key])
+            if count < 0:
+                raise ValueError("PYTEST_REPORT_NEGATIVE_COUNT")
+            totals[key] += count
+        for case in suite.findall(".//testcase"):
+            if case.find("failure") is not None or case.find("error") is not None:
+                failed_cases.append("::".join(filter(None, (
+                    case.get("classname", ""), case.get("name", "")))))
+    failed = totals["failures"] + totals["errors"]
+    passed = totals["tests"] - failed - totals["skipped"]
+    if passed < 0:
+        raise ValueError("PYTEST_REPORT_INCONSISTENT_COUNTS")
+    return {"reported_cases": totals["tests"], "passed": passed, "failed": failed,
+            "skipped": totals["skipped"], "failed_cases": failed_cases[:50]}
+
+
+def _run_worktree_tests(worktree: Path, python_exe: str,
+                        pytest_version: str | None, timeout_s: int) -> dict:
+    """Run the existing test-discovery rule once, without an impact-only gate.
+
+    Discover without the helper's default 5,000-file cap: truncation would
+    make a full-worktree claim false. Pass the worktree directory explicitly,
+    bypassing `testpaths` without pytest's quadratic per-file argument cost;
+    independently check that pytest collected every discovered file.
+    """
+    try:
+        files = discover_test_files(worktree, limit=sys.maxsize)
+    except FileNotFoundError:
+        files = []
+    evidence = {
+        "scope": "conventional_test_files_under_source_root",
+        "discovered_files": len(files), "reported_cases": 0, "passed": 0,
+        "failed": 0, "skipped": 0, "deselected": 0, "uncollected_files": 0,
+        "failed_cases": [], "deselected_cases": [], "uncollected_examples": [], "pytest_rc": None,
+        "status": "NO_TEST_FILES" if not files else "PYTEST_UNAVAILABLE",
+    }
+    if not files or not pytest_version:
+        return evidence
+
+    try:
+        # JUnit is written outside the worktree and discarded after reading;
+        # timing, temporary paths, and captured output do not taint deterministic
+        # PR-intent artifacts.
+        with tempfile.TemporaryDirectory(prefix="brain-issue-to-pr-pytest-") as tmp:
+            report = Path(tmp) / "pytest.xml"
+            selection_report = Path(tmp) / "selection.json"
+            plugin_name = "_brain_pr_test_audit_" + Path(tmp).name.replace("-", "_")
+            # JUnit omits deselected and ignored files. Record pytest's real
+            # collection and deselection hooks too, so a configured ignore,
+            # -k/-m/--deselect cannot hide a test behind a successful exit.
+            (Path(tmp) / (plugin_name + ".py")).write_text(
+                "import json, pytest\n"
+                "from collections import Counter\n"
+                "deselected = Counter()\n"
+                "removed = Counter()\n"
+                "collected = set()\n"
+                "def pytest_deselected(items):\n"
+                "    deselected.update(item.nodeid for item in items)\n"
+                "@pytest.hookimpl(hookwrapper=True, tryfirst=True)\n"
+                "def pytest_collection_modifyitems(items):\n"
+                "    before = Counter(item.nodeid for item in items)\n"
+                "    yield\n"
+                "    removed.update(before - Counter(item.nodeid for item in items))\n"
+                "def pytest_collectreport(report):\n"
+                "    path = report.nodeid.split('::', 1)[0]\n"
+                "    if path.endswith('.py'): collected.add(path)\n"
+                "def pytest_sessionfinish(session, exitstatus):\n"
+                "    paths = sorted(str((session.config.rootpath / p).resolve()) for p in collected)\n"
+                "    omitted = deselected | removed\n"
+                "    with open(" + repr(str(selection_report)) + ", 'w', encoding='utf-8') as f:\n"
+                "        json.dump({'deselected': sum(omitted.values()), "
+                "'deselected_cases': sorted(omitted.elements())[:50], 'collected_files': paths}, f)\n", encoding="utf-8")
+            env = os.environ.copy()
+            env["PYTHONPATH"] = tmp + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+            proc = subprocess.run(
+                [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-p", plugin_name,
+                 "--junitxml=" + str(report), str(worktree)],
+                cwd=worktree, capture_output=True, text=True, timeout=timeout_s, env=env)
+            evidence["pytest_rc"] = proc.returncode
+            try:
+                evidence.update(_read_pytest_report(report))
+                selection = json.loads(selection_report.read_text(encoding="utf-8"))
+                count, cases = selection["deselected"], selection["deselected_cases"]
+                collected_files = selection["collected_files"]
+                if type(count) is not int or count < 0 or not isinstance(cases, list) or \
+                        len(cases) > count or any(not isinstance(case, str) for case in cases) or \
+                        not isinstance(collected_files, list) or \
+                        any(not isinstance(path, str) for path in collected_files):
+                    raise ValueError("PYTEST_SELECTION_REPORT_INVALID")
+                missing = sorted({str(path.resolve()) for path in files} - set(collected_files))
+                examples = [str(Path(path).relative_to(worktree)).replace("\\", "/")
+                            for path in missing[:50]]
+                evidence.update({"deselected": count, "deselected_cases": cases,
+                                 "uncollected_files": len(missing), "uncollected_examples": examples})
+            except (OSError, ET.ParseError, ValueError, KeyError, TypeError):
+                evidence["status"] = "REPORT_UNAVAILABLE"
+                return evidence
+    except subprocess.TimeoutExpired:
+        evidence["status"] = "TIMEOUT"
+        return evidence
+    except OSError:
+        evidence["status"] = "PYTEST_LAUNCH_FAILED"
+        return evidence
+
+    if evidence["pytest_rc"] != 0 or evidence["failed"]:
+        evidence["status"] = "FAILED"
+    elif evidence["uncollected_files"]:
+        evidence["status"] = "UNCOLLECTED_TEST_FILES"
+    elif evidence["deselected"]:
+        evidence["status"] = "DESELECTED_TESTS"
+    elif not evidence["passed"]:
+        evidence["status"] = "NO_PASSED_TESTS"
+    else:
+        evidence["status"] = "PASSED"
+    return evidence
+
+
 def _tree_manifest(root: Path) -> dict:
     rows = []
     for p in sorted(root.rglob("*.py")):
@@ -108,8 +252,22 @@ def _tree_manifest(root: Path) -> dict:
             "sha256": _sha256(json.dumps(rows, separators=(",", ":")).encode("utf-8"))}
 
 
+OWNED_DIR_MARKER = ".brain_owned_output_v1"
+
+
 def _copy_tree(src: Path, dst: Path) -> None:
-    if dst.exists():
+    """Stage a byte-copy of src at dst, recreating dst only when Brain owns it.
+
+    Ownership is the marker a previous run left behind.  A non-empty worktree
+    path without it is the caller's data and is refused, never deleted.
+    Measured before this: an existing directory at worktree_path lost its
+    contents on every run, including runs whose verification then failed.
+    """
+    if dst.is_symlink() or (dst.exists() and not dst.is_dir()):
+        _fail("WORKTREE_PATH_NOT_A_DIRECTORY")
+    if dst.is_dir():
+        if any(dst.iterdir()) and not (dst / OWNED_DIR_MARKER).is_file():
+            _fail("WORKTREE_DIR_NOT_OWNED_BY_BRAIN")
         shutil.rmtree(dst)
     dst.mkdir(parents=True)
 
@@ -117,6 +275,8 @@ def _copy_tree(src: Path, dst: Path) -> None:
         return [n for n in names if n in _SKIP_DIRS]
 
     shutil.copytree(src, dst, dirs_exist_ok=True, ignore=ignore)
+    (dst / OWNED_DIR_MARKER).write_text(
+        "staged by python_issue_to_pr_orchestrate; safe to recreate\n", encoding="utf-8")
 
 
 # --------------------------------------------------------------------------
@@ -408,17 +568,20 @@ def _apply_move(work_src: Path, op: dict, plan_op: dict) -> dict:
             "splice_total": 1 + rewrites + (1 if refs_here else 0)}
 
 
-def _verify_application(work_src: Path, edits: list[dict]) -> tuple[bool, list[str]]:
-    """Fixed-point proof: re-index the edited worktree.  Renames must leave
-    the old name gone and the new name bound at module scope; moves must
-    leave the moved name defined in the target module and absent from the
-    defining module's own definitions (a re-injected from-import is text,
-    not a definition)."""
+def _verify_application(work_src: Path, edits: list[dict]) -> tuple[bool, list[str], bytes]:
+    """Prove the edits against a fresh index and return its bytes for reuse.
+
+    Renames must leave the old name gone and the new name bound at module
+    scope; moves must leave the definition in the target and not the source.
+    The same freshly built index can then serve advisory impact selection,
+    after that consumer verifies its file-set and content hashes.
+    """
     from canonical.runtime.bound_capabilities import python_source_symbol_index as indexer
 
     out = work_src / ".orchestrate_probe_index.json"
     indexer.run({"source_root": ".", "output_path": out.name}, work_src)
-    index = json.loads(out.read_text(encoding="utf-8"))
+    index_bytes = out.read_bytes()
+    index = json.loads(index_bytes)
     out.unlink()
     problems = []
     defs_of = {}
@@ -446,7 +609,7 @@ def _verify_application(work_src: Path, edits: list[dict]) -> tuple[bool, list[s
                 problems.append("MOVED_NAME_NOT_IN_TARGET:" + op["to_module"] + ":" + name)
             if name in src_names:
                 problems.append("MOVED_NAME_STILL_IN_SOURCE:" + op["module"] + ":" + name)
-    return (not problems), problems
+    return (not problems), problems, index_bytes
 
 
 def run(args, root):
@@ -482,11 +645,14 @@ def run(args, root):
     timeout_s = int(args.get("timeout_s") or 300)
     python_exe = str(args.get("python_executable") or sys.executable)
     pytest_version = None
-    probe = subprocess.run([python_exe, "-c",
-                            "import pytest;print(pytest.__version__)"],
-                           capture_output=True, text=True, timeout=min(timeout_s, 60))
-    if probe.returncode == 0:
-        pytest_version = probe.stdout.strip()
+    try:
+        probe = subprocess.run([python_exe, "-c",
+                                "import pytest;print(pytest.__version__)"],
+                               capture_output=True, text=True, timeout=min(timeout_s, 60))
+        if probe.returncode == 0:
+            pytest_version = probe.stdout.strip()
+    except (OSError, subprocess.TimeoutExpired):
+        pass  # The edit can still be inspected, but tests cannot be verified.
 
     # nesting laws — the spoke index scan rglobs its root: any overlap
     # between the source tree, the worktree, or the artifact outputs double-
@@ -547,7 +713,7 @@ def run(args, root):
         applied += 1
         splice_rows.append(apply_row)
 
-    ok, verify_problems = _verify_application(worktree_abs, edits)
+    ok, verify_problems, verified_index = _verify_application(worktree_abs, edits)
     if not ok:
         _fail("APPLICATION_PROOF_FAILED:" + ",".join(verify_problems))
 
@@ -581,27 +747,31 @@ def run(args, root):
     # diff-based selection (exact line ranges) beats path-list module-wide mode;
     # the spoke sees the diff inside its own root (confinement law).
     (worktree_abs / ".orchestrate_stage.diff").write_text(diff_text, encoding="utf-8")
-    testselect.run({
-        "source_root": ".",
-        "diff_path": ".orchestrate_stage.diff",
-        "changed_paths": None,
-        "test_roots": ["."],
-        "output_path": ".orchestrate_testselect.json",
-    }, worktree_abs)
+    # Reuse the just-rebuilt fixed-point index instead of parsing the entire
+    # staged tree a second time. The selector independently rechecks its file
+    # set and hashes; the temporary copy is removed even if selection fails.
+    with tempfile.TemporaryDirectory(prefix=".orchestrate_verified_", dir=worktree_abs) as tmp:
+        cache = Path(tmp) / "index.json"
+        cache.write_bytes(verified_index)
+        testselect.run({
+            "source_root": ".",
+            "diff_path": ".orchestrate_stage.diff",
+            "changed_paths": None,
+            "test_roots": ["."],
+            "output_path": ".orchestrate_testselect.json",
+            "index_path": str(cache.relative_to(worktree_abs)),
+        }, worktree_abs)
     selection = json.loads((worktree_abs / ".orchestrate_testselect.json").read_text(encoding="utf-8"))
     selected = sorted(r["path"] for r in (selection.get("tests") or []) if r.get("selected"))
 
-    # run the selected subset on the worktree
-    test_passed, test_failed, run_rc = 0, 0, None
-    if selected and pytest_version:
-        proc = subprocess.run(
-            [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + selected,
-            cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
-        run_rc = proc.returncode
-        m = re.search(r"(\d+) passed", proc.stdout + proc.stderr)
-        test_passed = int(m.group(1)) if m else 0
-        m = re.search(r"(\d+) failed", proc.stdout + proc.stderr)
-        test_failed = int(m.group(1)) if m else 0
+    # The impact slice is useful advice, but static imports cannot establish
+    # that unselected tests are unaffected (dynamic imports are one example).
+    # Run the whole conventionally discovered suite once in the existing copy.
+    test_evidence = _run_worktree_tests(worktree_abs, python_exe, pytest_version, timeout_s)
+    test_evidence["selected"] = len(selected)
+    test_evidence["selection_role"] = "advisory"
+    test_passed = test_evidence["passed"]
+    test_failed = test_evidence["failed"]
 
     pr_intent = {
         "schema": "pr_intent_v1", "issue_id": issue_id, "title": title,
@@ -612,13 +782,12 @@ def run(args, root):
             "plan": {"planned_op_count": plan["planned_op_count"],
                      "planned_site_count": plan["planned_site_count"],
                      "complete": plan["complete"]},
-            "tests": {"selected": len(selected), "passed": test_passed,
-                      "failed": test_failed, "pytest_rc": run_rc},
+            "tests": test_evidence,
             "proof": {"fixed_point_verified": True, "diff_sha256": diff_sha},
         },
         "checklist": ["plan complete (zero ambiguous sites)",
                       "apply fixed point proven by re-index",
-                      "minimal test selection executed"],
+                      "run discovered conventional tests under source_root"],
     }
     pr_abs.parent.mkdir(parents=True, exist_ok=True)
     pr_text = json.dumps(pr_intent, indent=2, ensure_ascii=False) + "\n"
@@ -626,7 +795,7 @@ def run(args, root):
     pr_verified = json.loads(pr_abs.read_text(encoding="utf-8")) == pr_intent
 
     edits_verified = pr_verified and not problems
-    tests_verified = (run_rc == 0) if selected else True
+    tests_verified = test_evidence["status"] == "PASSED"
     verified = edits_verified and tests_verified
     summary = {
         "adapter": "python_issue_to_pr_orchestrate",

@@ -34,6 +34,7 @@ import re
 import subprocess
 import tarfile
 import zipfile
+from collections import deque
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any, Callable
@@ -451,36 +452,120 @@ def _inspect_python_source_audit(args, result, root):
                      "totals_reconciled": True}
 
 
-def _inspect_change_impact_testselect(args, result, root):
-    """Re-derive the selection from the imports actually on disk.
+def _impact_reinspection_graph(source: Path, files: list[Path], candidates: set[Path],
+                               changed: set[Path]) -> tuple[set[Path], set[Path], int]:
+    """Independently approximate transitive imports and recognized dynamic risks.
 
-    A change-impact report makes one claim that can be measured without asking
-    the producer anything: *these tests are the ones that reach the changed
-    code, and no others do.*  Both halves are re-checked here against the bytes
-    in the repository, by parsing every candidate test file with ``ast`` and
-    asking whether it imports a module the changed files define.
-
-    The direction that matters is the omission.  A selection that names too many
-    tests costs time; a selection that names too few silently skips the tests
-    that cover the change, and the caller reads the short list as a complete
-    answer.  So an omitted test that DOES import a changed module is a refusal,
-    and so is a selected test that imports nothing the change touches -- that
-    one means the report is padding its own numbers.
-
-    Before this existed the capability could not be accepted at all
-    (NO_INDEPENDENT_REINSPECTION_FOR:python.source.change_impact.testselect.v1),
-    so the artifact was rolled back on every run and the whole lane was
-    unreachable from the front door no matter how correct its answer was.
+    The graph is built from the current source bytes, not the producer's index.
+    Module-name suffixes deliberately widen ambiguous resolutions. This cannot
+    prove the absence of arbitrary runtime dependencies; it only identifies
+    some omissions that the direct-import-only inspector previously accepted.
     """
+    by_name: dict[str, set[Path]] = {}
+    for path in files:
+        parts = [source.name, *path.relative_to(source).parts]
+        parts[-1] = parts[-1][:-3]
+        if parts[-1] == "__init__":
+            parts.pop()
+        for i in range(len(parts)):
+            by_name.setdefault(".".join(parts[i:]), set()).add(path)
+
+    dependencies: dict[Path, set[Path]] = {p: set() for p in files}
+    dynamic: set[Path] = set()
+    parsed = 0
+    reflective_calls = {"__import__", "getattr", "setattr", "globals", "locals",
+                        "vars", "eval", "exec", "compile"}
+    dynamic_attributes = {"import_module", "load_module", "exec_module", "find_spec"}
+    for path in files:
+        try:
+            tree = ast.parse(path.read_bytes(), filename=str(path))
+        except (OSError, SyntaxError, ValueError, UnicodeError, RecursionError):
+            # An unparseable reachable module cannot prove an omission safe.
+            dynamic.add(path)
+            continue
+        parsed += 1
+        names = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    names.add(alias.name)
+                    names.add(alias.name.split(".")[0])
+                    if alias.name.split(".")[0] in {"importlib", "runpy", "pkgutil"}:
+                        dynamic.add(path)
+            elif isinstance(node, ast.ImportFrom):
+                base = str(node.module or "")
+                if node.level:
+                    package = list(path.relative_to(source).parts[:-1])
+                    up = node.level - 1
+                    if up > len(package):
+                        dynamic.add(path)
+                    else:
+                        base = ".".join(package[:len(package) - up] + ([base] if base else []))
+                if base:
+                    names.add(base)
+                    names.add(base.split(".")[0])
+                    for alias in node.names:
+                        if alias.name != "*":
+                            names.add(base + "." + alias.name)
+                if str(node.module or "").split(".")[0] in {"importlib", "runpy", "pkgutil"} or (
+                    node.module in {"builtins", "__builtin__"} and
+                    any(alias.name in reflective_calls for alias in node.names)
+                ):
+                    dynamic.add(path)
+            elif isinstance(node, ast.Name) and node.id in reflective_calls | {"__builtins__"}:
+                # The name may be aliased before it is called.
+                dynamic.add(path)
+            elif isinstance(node, ast.Attribute) and node.attr in dynamic_attributes | reflective_calls:
+                dynamic.add(path)
+        for name in names:
+            dependencies[path].update(by_name.get(name, ()))
+
+    # Pytest loads ancestor conftest.py and package initializers even without
+    # explicit imports in the test module.
+    file_set = set(files)
+    for candidate in candidates:
+        for parent in candidate.parents:
+            if parent != source and source not in parent.parents:
+                break
+            for filename in ("conftest.py", "__init__.py"):
+                implicit = parent / filename
+                if implicit in file_set:
+                    dependencies[candidate].add(implicit)
+
+    reverse: dict[Path, set[Path]] = {p: set() for p in files}
+    for importer, imports in dependencies.items():
+        for imported in imports:
+            reverse[imported].add(importer)
+
+    def downstream(initial: set[Path]) -> set[Path]:
+        reached = set(initial)
+        queue = deque(initial)
+        while queue:
+            for importer in reverse.get(queue.popleft(), ()):
+                if importer not in reached:
+                    reached.add(importer)
+                    queue.append(importer)
+        return reached
+
+    return downstream(changed), downstream(dynamic), parsed
+
+
+def _inspect_change_impact_testselect(args, result, root):
+    """Reinspect scope, current candidates and import evidence independently.
+
+    The selection is a static approximation, not a universal never-miss
+    proof. Refuse recognized dynamic omissions and non-Python changes rather
+    than accepting them as unaffected; arbitrary reflection can still evade a
+    static inspector, so this is not a substitute for executing the suite.
+    """
+    root = Path(root).resolve()
     out = _inside(root, result.get("output_path") or args.get("output_path"))
     if out is None or not out.is_file():
         return False, "IMPACT_REPORT_ABSENT_FROM_DISK", {}
     data = _json(out)
     if not isinstance(data, dict):
         return False, "IMPACT_REPORT_NOT_A_JSON_OBJECT", {}
-    selected = data.get("selected_tests")
-    rows = data.get("tests")
-    totals = data.get("totals")
+    selected, rows, totals = data.get("selected_tests"), data.get("tests"), data.get("totals")
     if not isinstance(selected, list) or not isinstance(rows, list):
         return False, "IMPACT_REPORT_HAS_NO_SELECTION_LEDGER", {}
     if not isinstance(totals, dict):
@@ -492,65 +577,95 @@ def _inspect_change_impact_testselect(args, result, root):
         return False, "IMPACT_CANDIDATE_COUNT_MISMATCH", {}
     if len(rows) != totals.get("candidate_tests") or len(selected) != totals.get("selected_tests"):
         return False, "IMPACT_TOTALS_DO_NOT_RECONCILE", {}
+    if any(not isinstance(p, str) for p in selected) or len(set(selected)) != len(selected):
+        return False, "IMPACT_SELECTION_LEDGER_INVALID", {}
+
+    source = _inside(root, args.get("source_root") or data.get("source_root"))
+    if source is None or not source.is_dir():
+        return False, "IMPACT_SOURCE_ROOT_ABSENT", {}
+    if str(source.relative_to(root)).replace("\\", "/") != data.get("source_root"):
+        return False, "IMPACT_SOURCE_ROOT_MISMATCH", {}
     changed = data.get("changed_files")
-    if not isinstance(changed, list) or not changed:
+    if not isinstance(changed, list) or not changed or any(not isinstance(p, str) for p in changed):
         return False, "IMPACT_REPORT_NAMES_NO_CHANGED_FILE", {}
-    # The module names the change defines. A file is reachable under its own
-    # stem and under any dotted suffix of its path, which is how both a flat
-    # module and a package member get imported.
-    names = set()
+    changed_paths = set()
     for raw in changed:
         path = _inside(root, raw)
         if path is None or not path.is_file():
             return False, "IMPACT_CHANGED_FILE_ABSENT_FROM_DISK", {"path": raw}
+        changed_paths.add(path)
+    requested = args.get("changed_paths")
+    if isinstance(requested, list) and requested:
+        requested_paths = {_inside(root, p) for p in requested}
+        if None in requested_paths or requested_paths != changed_paths:
+            return False, "IMPACT_CHANGED_PATHS_MISMATCH", {}
+    elif args.get("diff_path"):
+        diff = _inside(root, args.get("diff_path"))
+        if diff is None or not diff.is_file():
+            return False, "IMPACT_DIFF_ABSENT_FROM_DISK", {}
+        current, paths = None, set()
+        for line in diff.read_text(encoding="utf-8").splitlines():
+            if line.startswith("+++ b/"):
+                current = line[len("+++ b/"):]
+            elif line.startswith("+++ "):
+                current = None
+            elif current and re.match(r"^@@ -\d+(?:,\d+)? \+\d+(?:,\d+)? @@", line):
+                paths.add(_inside(root, current))
+        if None in paths or paths != changed_paths:
+            return False, "IMPACT_CHANGED_PATHS_MISMATCH", {}
+    else:
+        return False, "IMPACT_CHANGED_PATHS_UNSPECIFIED", {}
+    if any(p.suffix != ".py" for p in changed_paths):
+        return False, "IMPACT_NON_PYTHON_CHANGE_UNSUPPORTED", {}
+    if any(source not in p.parents for p in changed_paths):
+        return False, "IMPACT_CHANGED_OUTSIDE_SOURCE_ROOT", {}
+
+    # Re-enumerate the same candidate scope from the actual tree, including
+    # unparseable files. Producer-supplied totals cannot prove completeness.
+    files = sorted(p for p in source.rglob("*.py") if p.is_file())
+    test_roots = args.get("test_roots") or ["tests", "canonical/tests"]
+    candidates = set()
+    for path in files:
         rel = str(path.relative_to(root)).replace("\\", "/")
-        stem = rel[:-3] if rel.endswith(".py") else rel
-        if stem.endswith("/__init__"):
-            stem = stem[: -len("/__init__")]
-        names.add(stem.rsplit("/", 1)[-1].replace("/", "."))
-        names.add(stem.replace("/", "."))
-    picked = set()
+        if (path.name.startswith("test_") or path.name.endswith("_test.py")) and any(
+            rel.startswith(str(r).rstrip("/") + "/") or str(r).rstrip("/") in rel
+            for r in test_roots
+        ):
+            candidates.add(path)
+    ledger = {}
     for row in rows:
-        if not isinstance(row, Mapping):
+        if not isinstance(row, Mapping) or not isinstance(row.get("selected"), bool):
             return False, "IMPACT_LEDGER_ROW_INVALID", {}
         path = _inside(root, row.get("path"))
         if path is None or not path.is_file():
             return False, "IMPACT_CANDIDATE_FILE_ABSENT_FROM_DISK", {}
-        imported = _imported_names(path)
-        if imported is None:
-            return False, "IMPACT_CANDIDATE_FILE_UNPARSEABLE", {}
-        reaches = bool(imported & names)
-        if row.get("selected") and not reaches:
-            return False, "IMPACT_SELECTED_TEST_REACHES_NOTHING_CHANGED", {
-                "path": row.get("path")}
-        if not row.get("selected") and reaches:
-            return False, "IMPACT_TEST_THAT_REACHES_THE_CHANGE_WAS_OMITTED", {
-                "path": row.get("path")}
-        if row.get("selected"):
-            picked.add(row.get("path"))
+        if path in ledger:
+            return False, "IMPACT_DUPLICATE_CANDIDATE", {}
+        ledger[path] = row
+    if set(ledger) != candidates:
+        return False, "IMPACT_CANDIDATE_LEDGER_INCOMPLETE", {
+            "missing_count": len(candidates - set(ledger)),
+            "extra_count": len(set(ledger) - candidates)}
+    if not candidates:
+        return False, "IMPACT_NO_CANDIDATE_TESTS", {}
+
+    reaches, dynamic, parsed = _impact_reinspection_graph(source, files, candidates, changed_paths)
+    picked = set()
+    for path, row in ledger.items():
+        if row["selected"] and path not in reaches:
+            return False, "IMPACT_SELECTED_TEST_REACHES_NOTHING_CHANGED", {"path": row["path"]}
+        if not row["selected"] and path in reaches:
+            return False, "IMPACT_TEST_THAT_REACHES_THE_CHANGE_WAS_OMITTED", {"path": row["path"]}
+        if not row["selected"] and path in dynamic:
+            return False, "IMPACT_DYNAMIC_DEPENDENCY_OMITTED", {"path": row["path"]}
+        if row["selected"]:
+            picked.add(row["path"])
     if picked != set(selected):
         return False, "IMPACT_LEDGER_AND_SELECTION_DISAGREE", {}
     return True, "", {"candidates_reparsed": len(rows),
-                      "changed_modules_resolved": len(names)}
-
-
-def _imported_names(path: Path):
-    """Every module name a file imports, or None if it does not parse."""
-    try:
-        tree = ast.parse(path.read_bytes())
-    except Exception:
-        return None
-    names = set()
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for alias in node.names:
-                names.add(str(alias.name).split(".")[0])
-                names.add(str(alias.name))
-        elif isinstance(node, ast.ImportFrom):
-            if node.module:
-                names.add(str(node.module).split(".")[0])
-                names.add(str(node.module))
-    return names
+                      "changed_modules_resolved": len(changed_paths),
+                      "source_files_reparsed": parsed,
+                      "selection_scope": "static_import_approximation"}
 
 
 def _inspect_archive_verify(args, result, root):

@@ -44,6 +44,45 @@ def _py_files(source_root):
     return sorted(source_root.rglob("*.py"))
 
 
+def validate_cached_index_freshness(index, repository_root, source_root):
+    """Refuse a cache if its file ledger differs from the current source tree.
+
+    The V1 index already records a SHA-256 for every parsed *and* unparseable
+    Python file. Compare the complete file set before hashing each current
+    file, using exactly the same traversal and path spelling as index creation.
+    This checks freshness, not the authenticity of a deliberately forged index.
+    """
+    repo = pathlib.Path(repository_root).resolve()
+    source = pathlib.Path(source_root).resolve()
+    modules = index.get("modules")
+    unparseable = index.get("unparseable")
+    if not isinstance(modules, list) or not isinstance(unparseable, list):
+        raise RuntimeError("INDEX_CACHE_INVALID_FILE_LEDGER")
+    totals = index.get("totals") or {}
+    if totals.get("files") != len(modules) or totals.get("unparseable") != len(unparseable):
+        raise RuntimeError("INDEX_CACHE_INVALID_FILE_LEDGER")
+    expected = {}
+    for row in modules + unparseable:
+        if not isinstance(row, dict):
+            raise RuntimeError("INDEX_CACHE_INVALID_FILE_LEDGER")
+        path, digest = row.get("path"), row.get("sha256")
+        if not isinstance(path, str) or not path or not isinstance(digest, str) or path in expected:
+            raise RuntimeError("INDEX_CACHE_INVALID_FILE_LEDGER")
+        expected[path] = digest
+    try:
+        actual = {str(p.relative_to(repo)).replace("\\", "/"): p
+                  for p in _py_files(source) if p.is_file()}
+        added, removed = sorted(actual.keys() - expected.keys()), sorted(expected.keys() - actual.keys())
+        if added or removed:
+            raise RuntimeError("INDEX_CACHE_STALE:FILE_SET_CHANGED:added=" + repr(added[:5])
+                               + ":removed=" + repr(removed[:5]))
+        for rel, path in actual.items():
+            if hashlib.sha256(path.read_bytes()).hexdigest() != expected[rel]:
+                raise RuntimeError("INDEX_CACHE_STALE:CONTENT_CHANGED:" + rel)
+    except OSError as exc:
+        raise RuntimeError("INDEX_CACHE_STALE:TREE_UNREADABLE:" + type(exc).__name__) from exc
+
+
 def _signature(node):
     args = node.args
     names = [a.arg for a in args.posonlyargs]

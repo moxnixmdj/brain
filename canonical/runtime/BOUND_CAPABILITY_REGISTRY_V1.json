@@ -6388,7 +6388,7 @@
    "limitations": [
     "requires a JSON task file whose edits are choreograph ops (rename_symbol, move_symbol); free-text issue parsing is a separate concern (refuses TASK_SCHEMA_MISSING fields, never guesses).",
     "move_symbol creates a missing target module by declared intent; multi-line import statements, multi-line decorator spans, and aliased-from-import rewrite shapes fail closed rather than guess.",
-    "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' — edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
+    "impact selection is advisory. Composite verification runs pytest once over source_root, requires at least one passing test, and fails closed if any discovered conventional test file is uncollected, or on missing tests, unavailable pytest, timeout, failure, deselection, or missing test reports. Tests outside source_root, nonstandard names, and skipped tests are not covered; fixed-point edit proof remains separate from composite verification.",
     "writes land only in the named worktree copy; producing the PR itself (git push/gh pr create) is intentionally outside v1."
    ],
    "platforms": [
@@ -7413,7 +7413,8 @@
    ],
    "limitations": [
     "Diff input is unified diff or an explicit changed-path list (paths imply module-wide change).",
-    "Selection is never-miss with carried evidence: same-named definitions across modules widen selection, they never omit."
+    "Selection is a static heuristic: dynamic imports, reflection, non-Python changes and other runtime dependencies can be missed. An omitted test is not proof that it is unaffected; use a broader test gate for verification.",
+    "A supplied symbol-index cache is rejected if its Python file set or content hashes no longer match the source tree."
    ],
    "platforms": [
     "linux",
@@ -7494,7 +7495,8 @@
    ],
    "limitations": [
     "Plans, does not apply: mutation of sources is a separate concern.",
-    "complete=true only at zero ambiguous sites; plain-import attribute use and unknown-resolution loads are listed, never silently dropped (index retains no asname and no attribute loads in v1)."
+    "complete=true only at zero ambiguous sites; plain-import attribute use and unknown-resolution loads are listed, never silently dropped (index retains no asname and no attribute loads in v1).",
+    "A supplied symbol-index cache is rejected if its Python file set or content hashes no longer match the source tree; freshness does not authenticate an untrusted cache."
    ],
    "platforms": [
     "linux",

@@ -125,6 +125,18 @@ def _materialize(index):
     return index, modules, definitions_by_module, qualnames
 
 
+def _sibling_indexer():
+    import importlib.util
+    import pathlib as _plib
+    spec = importlib.util.spec_from_file_location(
+        "python_source_symbol_index_sibling",
+        _plib.Path(__file__).with_name("python_source_symbol_index.py"),
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def _load_index(repo, source_abs, work, cached_index_path=None):
     """The semantic symbol index, built fresh by the sibling adapter
     (identical delegation pattern to the change-impact capability), or a
@@ -143,15 +155,12 @@ def _load_index(repo, source_abs, work, cached_index_path=None):
         want = str(source_abs.relative_to(repo)).replace("\\", "/")
         if str(artifact.get("source_root")) != want:
             _systemic("cached index invalid: source_root mismatch")
+        try:
+            _sibling_indexer().validate_cached_index_freshness(artifact, repo, source_abs)
+        except RuntimeError as exc:
+            _systemic(str(exc))
         return _materialize(artifact)
-    import importlib.util
-    import pathlib as _plib
-    spec = importlib.util.spec_from_file_location(
-        "python_source_symbol_index_sibling",
-        _plib.Path(__file__).with_name("python_source_symbol_index.py"),
-    )
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    module = _sibling_indexer()
     tmp = work / ".symbol_resolve_index.json"
     module.run(
         {"source_root": str(source_abs.relative_to(repo)), "output_path": str(tmp)},

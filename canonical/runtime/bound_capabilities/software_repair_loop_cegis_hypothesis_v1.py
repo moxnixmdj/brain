@@ -31,6 +31,12 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         r4=choreo_mod.run({"output_path": f"canonical/tmp_loop_choreo_{i}.json"}, repo)
         cegis_iterations.append({"round":i,"cegis":r1["verified"],"hypothesis":r2["verified"],"concrete":r3["verified"],"choreograph":r4["verified"]})
         if r1["verified"] and r2["verified"] and r3["verified"]: break
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"budget":budget,"iterations":cegis_iterations,"verified":all(any(v for v in it.values() if isinstance(v,bool)) for it in cegis_iterations),"model_dependency_count":0,"incremental_spend_usd":0}
+    # A loop that ran zero rounds verified nothing (measured: budget=0 returned
+    # verified=True), and a round in which only some oracles passed is a
+    # counterexample, not a pass.  Verified means the LAST round ran and every
+    # oracle in it passed.
+    last=cegis_iterations[-1] if cegis_iterations else None
+    verified=bool(last) and all(last[k] is True for k in ("cegis","hypothesis","concrete","choreograph"))
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"budget":budget,"iterations":cegis_iterations,"verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_repair_loop_cegis_hypothesis_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":True,"verified":True,"iterations":len(cegis_iterations),"model_dependency_count":0,"incremental_spend_usd":0}
+    return {"adapter":"software_repair_loop_cegis_hypothesis_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":True,"verified":verified,"iterations":len(cegis_iterations),"model_dependency_count":0,"incremental_spend_usd":0}

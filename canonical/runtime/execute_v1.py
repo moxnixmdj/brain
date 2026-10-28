@@ -47,6 +47,7 @@ the only thing this calls success.
 """
 from __future__ import annotations
 
+import hashlib
 import os
 import subprocess
 import shutil
@@ -64,10 +65,18 @@ WRONG_RESULT = "WRONG_RESULT"
 VACUOUS_CHECK = "VACUOUS_CHECK"
 
 
-def _snapshot(root: str) -> dict[str, tuple[int, int]]:
-    """Path -> (size, mtime). Read by the kernel, not reported."""
+def _snapshot(root: str) -> dict[str, tuple[int, int, str]]:
+    """Path -> (size, mtime, sha256 of the bytes). Read by the kernel, not reported.
+
+    Content as well as mtime.  Measured: a program that rewrote GOOD as EVIL
+    and restored the file's mtime was reported NO_EFFECT with changed=False.
+    A size+mtime pair is what a program can forge; the bytes are not.  The
+    mtime stays in the tuple because a byte-identical rewrite (a deterministic
+    archive re-created) is still an observed write, not an absence of one.
+    Directories and unreadable entries carry an empty digest.
+    """
     base = Path(root)
-    out: dict[str, tuple[int, int]] = {}
+    out: dict[str, tuple[int, int, str]] = {}
     if not base.is_dir():
         return out
     for path in base.rglob("*"):
@@ -77,8 +86,15 @@ def _snapshot(root: str) -> dict[str, tuple[int, int]]:
                for p in parts):
             continue
         try:
-            st = path.stat()
-            out[rel] = (st.st_size, st.st_mtime_ns)
+            st = path.lstat()
+            digest = ""
+            if path.is_file() and not path.is_symlink():
+                h = hashlib.sha256()
+                with open(path, "rb") as fh:
+                    for chunk in iter(lambda: fh.read(1 << 20), b""):
+                        h.update(chunk)
+                digest = h.hexdigest()
+            out[rel] = (st.st_size, st.st_mtime_ns, digest)
         except OSError:
             continue
     return out
@@ -90,6 +106,25 @@ def _diff(before: dict, after: dict) -> dict:
     modified = sorted(k for k in set(before) & set(after) if before[k] != after[k])
     return {"added": added, "removed": removed, "modified": modified,
             "changed": bool(added or removed or modified)}
+
+
+def _confinement():
+    """confine_v1 when this machine can actually confine, else None.
+
+    Asked once per process: the probe forks a namespace, and asking it on
+    every run would cost more than the runs.
+    """
+    global _CONFINE
+    if _CONFINE is None:
+        try:
+            from canonical.runtime import confine_v1 as C
+            _CONFINE = C if C.available() else False
+        except Exception:
+            _CONFINE = False
+    return _CONFINE or None
+
+
+_CONFINE = None
 
 
 def _outside(root: str, paths) -> list[str]:
@@ -127,17 +162,31 @@ def run(program: str, root: str, language: str = "python",
     script.write_text(program if program.endswith("\n") else program + "\n")
 
     before = _snapshot(root)
-    command = (["python3", str(script)] if language == "python"
-               else ["sh", str(script)])
-    try:
-        r = subprocess.run(command, cwd=root, timeout=timeout,
-                           capture_output=True, text=True)
-        code, out = r.returncode, (r.stdout or "") + (r.stderr or "")
-        timed_out = False
-    except subprocess.TimeoutExpired:
-        code, out, timed_out = None, "", True
-    except Exception as exc:
-        code, out, timed_out = None, f"{type(exc).__name__}: {exc}", False
+    confined = False
+    code, out, timed_out = None, "", False
+    if language == "python" and _confinement():
+        # The project is the only writable place (confine_v1: user+mount
+        # namespace, chroot, no network, rlimits).  Measured before this:
+        # a program writing beside the project was reported with
+        # escaped_paths=[] because the kernel can only see its own tree.
+        confined = True
+        r = _confinement().run(program, root, timeout=timeout)
+        code = r.get("exit_status")
+        out = r.get("output") or ""
+        timed_out = r.get("verdict") == "INDETERMINATE" and code is None
+        if r.get("confined") is False:
+            confined = False
+    else:
+        command = (["python3", str(script)] if language == "python"
+                   else ["sh", str(script)])
+        try:
+            r = subprocess.run(command, cwd=root, timeout=timeout,
+                               capture_output=True, text=True)
+            code, out = r.returncode, (r.stdout or "") + (r.stderr or "")
+        except subprocess.TimeoutExpired:
+            code, out, timed_out = None, "", True
+        except Exception as exc:
+            code, out = None, f"{type(exc).__name__}: {exc}"
 
     after = _snapshot(root)
     d = _diff(before, after)
@@ -226,6 +275,9 @@ def run(program: str, root: str, language: str = "python",
         "output": out[-3000:],
         "root": root,
         "language": language,
+        # Whether the program could reach anything outside the project at
+        # all.  False means the escaped_paths check is the only guard.
+        "confined": confined,
     }
 
 

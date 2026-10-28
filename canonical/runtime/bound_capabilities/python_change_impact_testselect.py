@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 """Deterministic diff-to-minimal-test-set selection (change impact analysis).
 
-The speed tax of engineering is paying the full battery for a one-line edit.
-This adapter ends it for Python: parse a unified diff (or an explicit changed
-path list), locate the touched symbols in the semantic symbol index, walk the
-call graph and the import graph downstream, and select exactly the tests that
-can still observe the change. Over-approximation law: selectors must never
-miss an affected test, but may over-select; every selected test carries the
-evidence chain that selected it, and unresolvable changes fail into a named
-truthful reason instead of a confident-looking empty set.
+Parse a unified diff (or an explicit changed path list), locate touched symbols
+in the semantic index, and walk its static call and import graphs. This is an
+advisory impact slice, not a proof that omitted tests are unaffected: dynamic
+imports, reflection, non-Python dependencies, and other runtime effects can be
+missed. Do not use it alone as a green test gate.
 """
 from __future__ import annotations
 
@@ -59,10 +56,15 @@ def _parse_unified_diff(text):
 
 def _load_index(repo, source_root, work, cached_index_path=None):
     """The semantic symbol index, built fresh by the sibling adapter, or a
-    validated cache artifact (optional ``index_path`` input).  A cache must
-    carry the published schema, nonzero totals, and the exact requested
-    source_root — a cache misdescribing the tree it measured is worse than
-    no cache."""
+    validated cache artifact (optional ``index_path`` input). A cache must
+    carry the published schema, exact requested source_root, and the same
+    Python file paths and content hashes as the current tree."""
+    spec = importlib.util.spec_from_file_location(
+        "python_source_symbol_index_sibling",
+        pathlib.Path(__file__).with_name("python_source_symbol_index.py"),
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
     if cached_index_path is not None:
         try:
             artifact = json.loads(pathlib.Path(cached_index_path).read_text(encoding="utf-8"))
@@ -72,15 +74,10 @@ def _load_index(repo, source_root, work, cached_index_path=None):
             (artifact.get("totals") or {}).get("files", 0)
         ) <= 0:
             raise RuntimeError("INDEX_CACHE_INVALID")
-        if str(artifact.get("source_root")) != str(source_root.relative_to(repo)):
+        if str(artifact.get("source_root")) != source_root.relative_to(repo).as_posix():
             raise RuntimeError("INDEX_CACHE_SOURCE_ROOT_MISMATCH")
+        module.validate_cached_index_freshness(artifact, repo, source_root)
         return artifact, {"cache_used": 1}
-    spec = importlib.util.spec_from_file_location(
-        "python_source_symbol_index_sibling",
-        pathlib.Path(__file__).with_name("python_source_symbol_index.py"),
-    )
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
     tmp = work / ".change_impact_index.json"
     result = module.run(
         {"source_root": str(source_root.relative_to(repo)), "output_path": str(tmp)},
@@ -158,13 +155,13 @@ def _dependency_maps(index):
 
 
 def _affected_modules(index, changed, changed_symbols):
-    """Downstream closure that never misses: modules and call names together.
+    """Downstream closure over the indexed modules and static call names.
 
     BFS over two graphs at once: modules that import a changed module, and
     definitions that call a changed name. A reached caller escalates its own
     bare name, so ``helper -> origin -> entrypoint`` propagates as far as the
-    graph goes. Same-named definitions across modules merge (documented
-    over-approximation): the selector may widen, never omit.
+    graph goes. Same-named definitions across modules merge, widening this
+    static approximation; dependencies absent from the index can still be missed.
     """
     callers_of = index.get("callers_of") or {}
     _def_modules, name_edges, wide_edges = _dependency_maps(index)
@@ -327,6 +324,7 @@ def run(args, root):
         raise RuntimeError("CHANGED_PYTHON_MODULE_NOT_INDEXED:" + ",".join(unknown))
     report = {
         "schema": "PROJECT_BRAIN_CHANGE_IMPACT_TEST_SELECTION_V1",
+        "selection_guarantee": "STATIC_HEURISTIC_NOT_A_COMPLETE_TEST_GATE",
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
         "changed_source": changed_source,
         "changed_files": sorted(changed),

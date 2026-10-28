@@ -188,6 +188,30 @@ def _render_module(rows: list[dict], src_abs: Path) -> str:
     return "\n".join(lines)
 
 
+OWNED_DIR_MARKER = ".brain_owned_output_v1"
+
+
+def _replace_owned_dir(path: Path, key: str) -> None:
+    """Recreate an output directory this adapter owns -- and only such a one.
+
+    A directory is owned when a previous run of a Brain adapter created it and
+    left OWNED_DIR_MARKER inside.  An existing directory without the marker is
+    someone's data: refuse instead of deleting it.  An empty directory is
+    adopted.  Measured before this: the output root was rmtree'd
+    unconditionally, taking whatever the caller had under it.
+    """
+    import shutil
+    if path.is_symlink() or (path.exists() and not path.is_dir()):
+        _fail("OUTPUT_PATH_NOT_A_DIRECTORY:" + key)
+    if path.is_dir():
+        if any(path.iterdir()) and not (path / OWNED_DIR_MARKER).is_file():
+            _fail("OUTPUT_DIR_NOT_OWNED_BY_BRAIN:" + key)
+        shutil.rmtree(path)
+    path.mkdir(parents=True)
+    (path / OWNED_DIR_MARKER).write_text(
+        "created by python_tests_generate_scaffold; safe to recreate\n", encoding="utf-8")
+
+
 def _load_index(source_abs: Path, cached: Path | None, source_root: str) -> tuple[dict, bool]:
     from canonical.runtime.bound_capabilities import python_source_symbol_index as indexer
     if cached is not None:
@@ -198,6 +222,14 @@ def _load_index(source_abs: Path, cached: Path | None, source_root: str) -> tupl
             _fail("INDEX_CACHE_SOURCE_ROOT_MISMATCH:" + str(art.get("source_root")))
         if int((art.get("totals") or {}).get("files", 0)) <= 0:
             _fail("INDEX_CACHE_TOTALS_INVALID")
+        # The cache must describe the bytes on disk now.  Measured: a cache
+        # built before a second module was added generated tests for one
+        # module and reported complete.  Paths are relative to source_abs,
+        # exactly as the fresh probe below produces them.
+        try:
+            indexer.validate_cached_index_freshness(art, source_abs, source_abs)
+        except RuntimeError as exc:
+            _fail(str(exc))
         return art, True
     probe = source_abs / ".testgen_probe_index.json"
     indexer.run({"source_root": ".", "output_path": probe.name}, source_abs)
@@ -253,7 +285,10 @@ def run(args, root):
     gen_abs = _safe_path(repo, gen_rel)
     out_abs = _safe_path(repo, str(args.get("output_path") or ""))
     for pth, key in ((gen_abs, "generated_tests_root"), (out_abs, "output_path")):
-        if pth == source_abs or source_abs in pth.parents:
+        # Both directions.  Measured: a generated root that CONTAINED the
+        # source passed the one-way check and was rmtree'd with the source
+        # and an unrelated sibling inside it, before SOURCE_TREE_MUTATED.
+        if pth == source_abs or source_abs in pth.parents or pth in source_abs.parents:
             _fail("PATH_OVERLAPS_SOURCE_ROOT:" + key)
     manifest_before = _tree_manifest(source_abs)
     mods = {}
@@ -302,10 +337,7 @@ def run(args, root):
                          "call_expr": call, "fixtures": notes})
     gen_rows.sort(key=lambda r: (r["module"], r["name"]))
 
-    if gen_abs.exists():
-        import shutil
-        shutil.rmtree(gen_abs)
-    gen_abs.mkdir(parents=True)
+    _replace_owned_dir(gen_abs, "generated_tests_root")
     test_file = gen_abs / f"test_generated_smoke_{_sha256(json.dumps([[r['module'], r['name']] for r in gen_rows]).encode())[:8]}.py"
     text = _render_module(gen_rows, source_abs) if gen_rows else ""
     test_file.write_text(text, encoding="utf-8")

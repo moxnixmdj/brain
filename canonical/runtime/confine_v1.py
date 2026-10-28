@@ -103,6 +103,15 @@ for s in {s for s in __MOUNTS__ if os.path.isdir(s)}:
     m("--bind", s, BASE + s)
     subprocess.run(["mount", "-o", "remount,ro,bind", BASE + s],
                    capture_output=True)
+# Caller-named read-only directories (a site-packages tree outside /usr,
+# for instance).  Same treatment as the system mounts: visible, read-only.
+for s in __RO_BINDS__:
+    if not os.path.isdir(s):
+        continue
+    os.makedirs(BASE + s, exist_ok=True)
+    m("--bind", s, BASE + s)
+    subprocess.run(["mount", "-o", "remount,ro,bind", BASE + s],
+                   capture_output=True)
 m("--bind", PROJ, BASE + "/project")
 # A network namespace is not enough on its own. With no /etc in the
 # chroot there is no resolv.conf, so every name fails to resolve and a
@@ -185,8 +194,12 @@ def available() -> bool:
 
 
 def run(program: str, root: str, timeout: int = 300,
-        network: bool = False) -> dict:
+        network: bool = False, ro_binds: tuple[str, ...] = ()) -> dict:
     """Run a program confined to the project. Only the project is writable.
+
+    `ro_binds` names directories to make visible read-only at their own
+    path, beyond the operating system: a site-packages tree that lives
+    outside /usr, for instance.  Nothing under them becomes writable.
 
     `network` is off by default and must be ASKED FOR.
 
@@ -218,7 +231,11 @@ def run(program: str, root: str, timeout: int = 300,
         script = os.path.join(tmp, "program.py")
         Path(script).write_text(
             program if program.endswith("\n") else program + "\n")
-        helper = _HELPER.replace("__MOUNTS__", repr(list(_MOUNTS)))
+        binds = sorted({os.path.realpath(str(b)) for b in (ro_binds or ())
+                        if os.path.isdir(str(b))})
+        binds = [b for b in binds if not any(b == m_ or b.startswith(m_ + "/") for m_ in _MOUNTS)]
+        helper = (_HELPER.replace("__MOUNTS__", repr(list(_MOUNTS)))
+                  .replace("__RO_BINDS__", repr(binds)))
         helper_path = os.path.join(tmp, "helper.py")
         Path(helper_path).write_text(helper)
         try:
@@ -231,7 +248,8 @@ def run(program: str, root: str, timeout: int = 300,
                     "verdict": "OK" if r.returncode == 0 else "FAILED",
                     "exit_status": r.returncode,
                     "output": ((r.stdout or "") + (r.stderr or ""))[-3000:],
-                    "confined": True, "network": bool(network)}
+                    "confined": True, "network": bool(network),
+                    "ro_binds": binds}
         except subprocess.TimeoutExpired:
             return {"schema": SCHEMA, "verdict": "INDETERMINATE",
                     "exit_status": None, "output": "timed out",

@@ -102,6 +102,13 @@ def _load_index(repo: Path, source_abs: Path, source_root: str,
         files = int((art.get("totals") or {}).get("files", 0))
         if files <= 0 or not isinstance(art.get("modules"), list):
             _fail("INDEX_CACHE_TOTALS_INVALID")
+        # Freshness, not just shape.  Measured: a cache made before a second
+        # `helper` was defined resolved a rename to one home and reported
+        # complete; a fresh parse refused NAME_AMBIGUOUS.
+        try:
+            indexer.validate_cached_index_freshness(art, source_abs, source_abs)
+        except RuntimeError as exc:
+            _fail(str(exc))
         return art, True
     probe = source_abs / ".nl_intent_probe_index.json"
     indexer.run({"source_root": ".", "output_path": probe.name}, source_abs)
