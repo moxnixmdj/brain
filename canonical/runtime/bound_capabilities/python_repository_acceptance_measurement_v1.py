@@ -1,10 +1,11 @@
 """Content-addressed repository-derived acceptance measurements.
 
-This capability measures an isolated copy of one repository-local source root.
+This capability measures a scratch copy of one repository-local source root.
 It does not trust caller-supplied acceptance fields. The measured source tree,
 measurement program, and measurement specification are content-addressed.
-
-Task success is NOT inferred here. This module only emits objective measurements.
+A successful command is not enough: every declared test file needs independent,
+non-skipped execution evidence. The copy is not an OS sandbox. Task success is
+NOT inferred here; this module only emits objective measurements.
 """
 from __future__ import annotations
 
@@ -13,7 +14,6 @@ import hashlib
 import json
 import os
 import pathlib
-import re
 import shutil
 import subprocess
 import sys
@@ -38,6 +38,18 @@ def _load_patch_search():
 
 _PATCH = _load_patch_search()
 
+
+def _load_test_evidence():
+    path = pathlib.Path(__file__).with_name("python_test_execution_evidence_v1.py")
+    spec = importlib.util.spec_from_file_location("_brain_test_execution_evidence", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("TEST_EVIDENCE_PROGRAM_UNAVAILABLE")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_EVIDENCE = _load_test_evidence()
 
 
 SCHEMA = "PROJECT_BRAIN_PYTHON_REPOSITORY_ACCEPTANCE_MEASUREMENT_V1"
@@ -107,16 +119,28 @@ def _tree_manifest(root: pathlib.Path, *, max_files: int, max_bytes: int) -> tup
             raise MeasurementError("SYMLINK_IN_MEASURED_TREE:" + _rel(root, path))
         if not path.is_file():
             continue
-        raw = path.read_bytes()
-        total += len(raw)
         if len(rows) + 1 > max_files:
             raise MeasurementError("MEASURED_TREE_FILE_LIMIT")
-        if total > max_bytes:
+        # Stream bounded chunks rather than allocating each whole file. The
+        # per-read limit still applies if a file grows after its stat call.
+        if path.stat().st_size > max_bytes - total:
             raise MeasurementError("MEASURED_TREE_BYTE_LIMIT")
+        digest = hashlib.sha256()
+        size = 0
+        with path.open("rb") as stream:
+            while True:
+                chunk = stream.read(min(1024 * 1024, max_bytes - total - size + 1))
+                if not chunk:
+                    break
+                size += len(chunk)
+                if total + size > max_bytes:
+                    raise MeasurementError("MEASURED_TREE_BYTE_LIMIT")
+                digest.update(chunk)
+        total += size
         rows.append({
             "path": _rel(root, path),
-            "bytes": len(raw),
-            "sha256": _sha_bytes(raw),
+            "bytes": size,
+            "sha256": digest.hexdigest(),
         })
     if not rows:
         raise MeasurementError("MEASURED_TREE_EMPTY")
@@ -226,8 +250,9 @@ def _python_parse_measurement(workspace: pathlib.Path) -> tuple[bool, int, list[
     return not errors, count, errors
 
 
-def _run_tests(workspace: pathlib.Path, argv: list[str], timeout_s: int) -> dict[str, Any]:
-    env = dict(os.environ)
+def _run_tests(workspace: pathlib.Path, argv: list[str], timeout_s: float,
+               env: dict[str, str] | None = None) -> dict[str, Any]:
+    env = dict(os.environ) if env is None else dict(env)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONHASHSEED"] = "0"
     started = time.monotonic()
@@ -248,18 +273,19 @@ def _run_tests(workspace: pathlib.Path, argv: list[str], timeout_s: int) -> dict
             "stderr": proc.stderr or "",
         }
     except subprocess.TimeoutExpired as exc:
+        def text(value):
+            return value.decode("utf-8", "replace") if isinstance(value, bytes) else value or ""
         return {
             "returncode": 124,
             "timed_out": True,
             "elapsed_s": round(time.monotonic() - started, 6),
-            "stdout": exc.stdout or "",
-            "stderr": exc.stderr or "",
+            "stdout": text(exc.stdout),
+            "stderr": text(exc.stderr),
         }
-
-
-def _test_count(text: str) -> int:
-    m = re.search(r"Ran\s+(\d+)\s+tests?", text)
-    return int(m.group(1)) if m else 0
+    except OSError as exc:
+        return {"returncode": 127, "timed_out": False,
+                "elapsed_s": round(time.monotonic() - started, 6),
+                "stdout": "", "stderr": type(exc).__name__}
 
 
 def _copy_source(source_root: pathlib.Path, workspace: pathlib.Path) -> None:
@@ -269,6 +295,23 @@ def _copy_source(source_root: pathlib.Path, workspace: pathlib.Path) -> None:
         dirs_exist_ok=True,
         ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc", ".pytest_cache"),
     )
+
+
+def _measured_files_intact(workspace: pathlib.Path, manifest: list[dict[str, Any]]) -> bool:
+    """Bind test outcomes to the copied input bytes, not a rewritten candidate."""
+    originals = {row["path"] for row in manifest}
+    try:
+        for row in manifest:
+            path = workspace / row["path"]
+            if path.is_symlink() or not path.is_file() or _sha_bytes(path.read_bytes()) != row["sha256"]:
+                return False
+        for path in workspace.rglob("*.py"):
+            rel = _rel(workspace, path)
+            if not any(part in {"__pycache__", ".pytest_cache"} for part in path.parts) and rel not in originals:
+                return False
+    except OSError:
+        return False
+    return True
 
 
 def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
@@ -291,9 +334,27 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
         workspace = pathlib.Path(td) / "workspace"
         _copy_source(source_root, workspace)
         parse_ok, python_file_count, parse_errors = _python_parse_measurement(workspace)
-        test = _run_tests(workspace, argv, timeout_s)
-        combined = (test["stdout"] or "") + "\n" + (test["stderr"] or "")
-        count = _test_count(combined)
+        deadline = time.monotonic() + timeout_s
+        env = _EVIDENCE._FULL_GATE._pytest_env(source_root, workspace)
+        test = _run_tests(workspace, argv, timeout_s, env)
+        intact_after_command = _measured_files_intact(workspace, before_manifest)
+        intact_after_evidence = False
+        if intact_after_command:
+            # Do not let a command's newly generated files affect the witness.
+            # Start from the measured source snapshot in a separate copy.
+            evidence_workspace = pathlib.Path(td) / "evidence-workspace"
+            _copy_source(source_root, evidence_workspace)
+            if _measured_files_intact(evidence_workspace, before_manifest):
+                evidence = _EVIDENCE.collect(evidence_workspace, source_root, test_paths, argv[0],
+                                             pathlib.Path(td), deadline)
+                intact_after_evidence = _measured_files_intact(evidence_workspace, before_manifest)
+            else:
+                evidence = {"oracle_status": "EVIDENCE_SNAPSHOT_MISMATCH", "oracle_kind": "UNAVAILABLE",
+                            "test_count": 0, "path_evidence": []}
+        else:
+            evidence = {"oracle_status": "SOURCE_CHANGED_DURING_COMMAND", "oracle_kind": "UNAVAILABLE",
+                        "test_count": 0, "path_evidence": []}
+        count = evidence["test_count"]
 
     after_manifest, after_sha = _tree_manifest(
         source_root, max_files=max_files, max_bytes=max_bytes
@@ -303,7 +364,9 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
         raise MeasurementError("SOURCE_ROOT_MUTATED_DURING_MEASUREMENT")
 
     measurements = {
-        "tests_pass": test["returncode"] == 0 and not test["timed_out"],
+        "tests_pass": (test["returncode"] == 0 and not test["timed_out"]
+                       and evidence["oracle_status"] == "PASS" and count > 0
+                       and intact_after_command and intact_after_evidence),
         "test_returncode": int(test["returncode"]),
         "test_count": int(count),
         "python_parse_ok": bool(parse_ok),
@@ -315,6 +378,8 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
         "source_root": _rel(repo, source_root) if source_root != repo else ".",
         "test_paths": test_paths,
         "test_argv": argv,
+        "test_evidence_program_sha256": _sha_bytes(pathlib.Path(_EVIDENCE.__file__).read_bytes()),
+        "pytest_report_parser_sha256": _sha_bytes(pathlib.Path(_EVIDENCE._FULL_GATE.__file__).read_bytes()),
         "timeout_s": timeout_s,
         "max_files": max_files,
         "max_bytes": max_bytes,
@@ -335,9 +400,12 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
         "measurement_schema": MEASUREMENT_SCHEMA,
         "measurements": measurements,
         "test_evidence": {
+            **evidence,
             "returncode": test["returncode"],
             "timed_out": test["timed_out"],
             "test_count": count,
+            "source_intact_after_command": intact_after_command,
+            "source_intact_after_evidence": intact_after_evidence,
             "stdout_sha256": _sha_bytes((test["stdout"] or "").encode("utf-8")),
             "stderr_sha256": _sha_bytes((test["stderr"] or "").encode("utf-8")),
         },
@@ -348,7 +416,9 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
         "hard_nonclaims": [
             "MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE",
             "TEST_PASS_IS_NOT_COMPLETE_REQUEST_SEMANTICS",
-            "MEASURES_ONLY_THE_DECLARED_SOURCE_ROOT_AND_TEST_COMMAND",
+            "MEASURES_ONLY_DECLARED_TEST_FILES_AND_EXPLICIT_COMMAND",
+            "TEST_SUBPROCESSES_ARE_NOT_OS_SANDBOXED",
+            "ASSERTION_SCRIPT_TRACE_IS_BOUNDED_NOT_GENERAL_TEST_COVERAGE",
             "NO_BENCHMARK_SCORE_OR_TERMINAL_AUTHORITY",
         ],
         "terminal_authority": False,

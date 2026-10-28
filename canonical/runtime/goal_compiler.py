@@ -938,6 +938,21 @@ _REQUIRES_SHARE_CEILING = 0.25
 _nondiscriminating_requires_cache = None
 
 
+def _derive_nondiscriminating_requires_tokens(caps):
+    """Calculate precondition frequency only over task-eligible entries."""
+    declaring = [_tokens(e.get("requires", [])) for e in caps.values()
+                 if isinstance(e, dict) and e.get("requires") and e.get("diagnostic_only") is not True]
+    if not declaring:
+        return frozenset()
+    counts = {}
+    for toks in declaring:
+        for token in toks:
+            counts[token] = counts.get(token, 0) + 1
+    n = float(len(declaring))
+    return frozenset(token for token, count in counts.items()
+                     if count / n > _REQUIRES_SHARE_CEILING)
+
+
 def _nondiscriminating_requires_tokens():
     global _nondiscriminating_requires_cache
     if _nondiscriminating_requires_cache is not None:
@@ -947,14 +962,7 @@ def _nondiscriminating_requires_tokens():
         path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
         with open(path, "r", encoding="utf-8") as fh:
             caps = (json.load(fh) or {}).get("capabilities") or {}
-        declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]
-        if declaring:
-            counts = {}
-            for toks in declaring:
-                for t in toks:
-                    counts[t] = counts.get(t, 0) + 1
-            n = float(len(declaring))
-            out = frozenset(t for t, c in counts.items() if c / n > _REQUIRES_SHARE_CEILING)
+        out = _derive_nondiscriminating_requires_tokens(caps)
     except Exception:
         out = frozenset()
     _nondiscriminating_requires_cache = out
@@ -962,6 +970,12 @@ def _nondiscriminating_requires_tokens():
 
 
 def _score(goal, cid, entry):
+    # Registry inventories remain inspectable, but their declared historical
+    # effects cannot answer or compete with a task-bound capability.
+    if entry.get("diagnostic_only") is True:
+        return 0,0,{"goal_tokens":sorted(_tokens(goal)), "diagnostic_only":True,
+                    "matched_provides":[], "matched_requires":[],
+                    "matched_identity":[], "matched_keywords":[]}
     surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
     if not surface_ok:
         return 0,0,{
@@ -1322,7 +1336,7 @@ def _effect_providers(registry):
     """
     providers={}
     for cid,entry in sorted((registry or {}).items()):
-        if not isinstance(entry,dict):
+        if not isinstance(entry,dict) or entry.get("diagnostic_only") is True:
             continue
         for effect in entry.get("provides") or []:
             key=str(effect).strip()

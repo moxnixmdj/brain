@@ -12,6 +12,7 @@ from pathlib import Path
 
 from canonical.runtime import brain_unified_model_v1 as model_runtime
 from canonical.runtime import compile_brain_unified_model_v1 as compiler
+from canonical.runtime import live_integrated_brain_v1 as live_brain
 
 ROOT = Path(__file__).resolve().parents[2]
 ARTIFACT = ROOT / model_runtime.DEFAULT_ARTIFACT
@@ -70,12 +71,11 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
     # ------------------------------------------------------------------ coverage
 
     def test_every_live_capability_is_modelled(self):
-        from canonical.runtime import live_integrated_brain_v1 as live_brain
-
         live = set(live_brain.load_verified_registry())
         modelled = set(self.model.capabilities)
         self.assertEqual(live, modelled)
-        self.assertEqual(len(modelled), 385)
+        # Preserve the historical floor, but allow legitimately admitted entries.
+        self.assertGreaterEqual(len(modelled), 385)
 
     def test_every_capability_has_a_trigger_and_a_route(self):
         for cid, row in self.model.capabilities.items():
@@ -1133,11 +1133,12 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
     def test_status_reports_the_machine_it_actually_runs_on(self):
         """Presence is measured live, so it tracks the real interpreter."""
         status = self.model.status()
-        self.assertEqual(status["counts"]["capabilities"], 385)
+        live_count = len(live_brain.load_verified_registry())
+        self.assertEqual(status["counts"]["capabilities"], live_count)
         self.assertEqual(
             status["declared_dependencies_present"] + status["declared_dependencies_missing"],
-            385,
-            "present + missing must account for every capability",
+            live_count,
+            "present + missing must account for every live capability",
         )
 
         import shutil
@@ -1303,8 +1304,10 @@ class SourceIndexTests(unittest.TestCase):
             if row.get("classification") == "ENTRY_POINT"
         )
         self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
-        # The capability count must not have been inflated by indexing.
-        self.assertEqual(int(counts.get("capabilities", -1)), 385)
+        # Indexing source must not promote it into the live capability registry.
+        live = set(live_brain.load_verified_registry())
+        self.assertEqual(set(self.model.capabilities), live)
+        self.assertEqual(int(counts.get("capabilities", -1)), len(live))
 
     def test_status_reports_the_source_index_it_holds(self):
         """The model's self-description must not omit what it indexes.
@@ -1339,7 +1342,7 @@ class SourceIndexTests(unittest.TestCase):
         # The distinction must be stated wherever the larger number appears, so
         # it cannot be read as a capability gain.
         self.assertIs(status.get("source_index_is_addressable_not_executable"), True)
-        self.assertEqual(int(counts["capabilities"]), 385)
+        self.assertEqual(int(counts["capabilities"]), len(live_brain.load_verified_registry()))
 
     def test_status_does_not_overcount_reachable_modules(self):
         """A tempting derived figure that is wrong must not be reported.
@@ -1450,4 +1453,4 @@ class ResearchIndexTests(unittest.TestCase):
             int(counts.get("research_index_records", -1)),
             len(self.model.research_index),
         )
-        self.assertEqual(int(counts["capabilities"]), 385)
+        self.assertEqual(int(counts["capabilities"]), len(live_brain.load_verified_registry()))

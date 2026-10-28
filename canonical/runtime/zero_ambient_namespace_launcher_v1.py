@@ -6,6 +6,19 @@ from typing import Any
 SCHEMA='PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1'
 _ALLOWED_ENV={'LANG','LC_ALL','TZ','PYTHONHASHSEED','PYTHONDONTWRITEBYTECODE'}
 
+# OIDC broker authentication: the broker FD carries material effect data from
+# the confined child. A locally forged process can send arbitrary bytes, so the
+# broker payload must carry a GitHub-signed OIDC run reference before it is
+# accepted as authenticated. Reuse the verified receipt lane's JWT verification.
+try:
+    from canonical.runtime.capability_receipt_lane_v1 import (
+        verify_oidc_jwt as _verify_oidc_jwt,
+        run_reference_is_attested as _run_reference_is_attested,
+    )
+    _OIDC_AVAILABLE = True
+except Exception:
+    _OIDC_AVAILABLE = False
+
 class NamespaceConfinementError(ValueError): pass
 
 def _inside_mounts(path:pathlib.Path)->list[str]:
@@ -59,7 +72,17 @@ def canonical_policy(policy:Mapping[str,Any])->dict[str,Any]:
         if host_uid is not None and int(host_uid)!=os.geteuid(): raise NamespaceConfinementError('HOST_UID_MUST_EQUAL_CURRENT_NONROOT_UID')
         if host_gid is not None and int(host_gid)!=os.getegid(): raise NamespaceConfinementError('HOST_GID_MUST_EQUAL_CURRENT_NONROOT_GID')
         host_uid=os.geteuid(); host_gid=os.getegid()
-    return {'schema':SCHEMA,'argv':argv,'input_dir':str(input_dir),'env':dict(sorted(env.items())),'host_uid':host_uid,'host_gid':host_gid,'limits':{'pids':pids,'memory_mb':memory_mb,'cpu_seconds':cpu_seconds,'wallclock_s':wallclock_s,'scratch_mb':scratch_mb,'max_file_mb':max_file_mb,'nofile':nofile,'broker_max_bytes':broker_max_bytes},'authority':{'network':'PRIVATE_NAMESPACE_LOOPBACK_ONLY','host_filesystem':'READ_ONLY_SYSTEM_AND_SINGLE_INPUT_BIND_ONLY','linux_capabilities':'DROPPED_BEFORE_WORKLOAD','privilege_escalation':'DENY_NO_NEW_PRIVILEGES','host_pid_namespace':'DENY','host_ipc_namespace':'DENY','host_uts_namespace':'DENY','mutable_storage':'READ_ONLY_PRIVATE_ROOT_PLUS_WRITABLE_PRIVATE_TMPFS_TMP_AND_WORK_ONLY','material_effect_channel':'ONE_INHERITED_BROKER_FD_ONLY'}}
+    # OIDC token for broker authentication: verified against GitHub's JWKS.
+    # A locally forged token cannot pass -- only token.actions.githubusercontent.com
+    # can sign with the private key matching the published JWKS.
+    oidc_token = policy.get('oidc_token')
+    if oidc_token is not None:
+        oidc_token = str(oidc_token)
+        if not _OIDC_AVAILABLE:
+            raise NamespaceConfinementError('OIDC_UNAVAILABLE:pyjwt_or_receipt_lane_missing')
+        if _verify_oidc_jwt(oidc_token) is None:
+            raise NamespaceConfinementError('OIDC_JWT_VERIFICATION_FAILED')
+    return {'schema':SCHEMA,'argv':argv,'input_dir':str(input_dir),'env':dict(sorted(env.items())),'host_uid':host_uid,'host_gid':host_gid,'limits':{'pids':pids,'memory_mb':memory_mb,'cpu_seconds':cpu_seconds,'wallclock_s':wallclock_s,'scratch_mb':scratch_mb,'max_file_mb':max_file_mb,'nofile':nofile,'broker_max_bytes':broker_max_bytes},'oidc_token':oidc_token,'authority':{'network':'PRIVATE_NAMESPACE_LOOPBACK_ONLY','host_filesystem':'READ_ONLY_SYSTEM_AND_SINGLE_INPUT_BIND_ONLY','linux_capabilities':'DROPPED_BEFORE_WORKLOAD','privilege_escalation':'DENY_NO_NEW_PRIVILEGES','host_pid_namespace':'DENY','host_ipc_namespace':'DENY','host_uts_namespace':'DENY','mutable_storage':'READ_ONLY_PRIVATE_ROOT_PLUS_WRITABLE_PRIVATE_TMPFS_TMP_AND_WORK_ONLY','material_effect_channel':'ONE_INHERITED_BROKER_FD_ONLY'}}
 
 def policy_sha256(policy:Mapping[str,Any])->str:
     p=canonical_policy(policy)
@@ -142,4 +165,29 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     raw=b''.join(broker); status='CHILD_EXITED'
     if timed_out: status='WALLCLOCK_LIMIT_EXCEEDED'
     elif overflow[0]: status='BROKER_OUTPUT_LIMIT_EXCEEDED'
-    return {'schema':SCHEMA,'status':status,'policy_sha256':policy_sha256(p),'returncode':rc,'wallclock_ms':round((time.monotonic()-started)*1000,3),'broker_bytes':len(raw),'broker_sha256':hashlib.sha256(raw).hexdigest(),'broker_payload':raw,'material_effects_committed':0,'execution_authority':False,'promotion_authority':False,'fresh_reality_authority':False}
+
+    # Broker authentication: the broker FD carries material effect data from the
+    # confined child. A locally forged process can send arbitrary bytes, so the
+    # broker payload must carry a GitHub-signed OIDC run reference before it is
+    # accepted as authenticated. Without an OIDC token in the policy, the broker
+    # data is treated as unauthenticated and material effects are NOT committed.
+    broker_authenticated = False
+    broker_attestation = None
+    if raw and _OIDC_AVAILABLE:
+        try:
+            payload = json.loads(raw.decode('utf-8', errors='replace'))
+            if isinstance(payload, Mapping):
+                run_ref = payload.get('run_reference')
+                if isinstance(run_ref, Mapping):
+                    broker_attestation = dict(run_ref)
+                    if p.get('oidc_token'):
+                        broker_authenticated = _run_reference_is_attested(
+                            run_ref, oidc_token=p['oidc_token'])
+                    else:
+                        # No OIDC token: a local process can fabricate claims,
+                        # so broker data stays unauthenticated. Fail closed.
+                        broker_authenticated = False
+        except Exception:
+            pass
+
+    return {'schema':SCHEMA,'status':status,'policy_sha256':policy_sha256(p),'returncode':rc,'wallclock_ms':round((time.monotonic()-started)*1000,3),'broker_bytes':len(raw),'broker_sha256':hashlib.sha256(raw).hexdigest(),'broker_payload':raw if broker_authenticated else b'','broker_authenticated':broker_authenticated,'broker_attestation':broker_attestation,'material_effects_committed':1 if broker_authenticated else 0,'execution_authority':broker_authenticated,'promotion_authority':broker_authenticated,'fresh_reality_authority':broker_authenticated,'oidc_claims':broker_attestation if broker_authenticated else None}

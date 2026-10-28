@@ -1,112 +1,108 @@
-"""Second independent oracle: concrete execution.
+"""Bounded, concrete contract witnesses for a safe pure-Python numeric subset.
 
-The CrossHair oracle answers "does a satisfying assignment exist?" by
-symbolic execution over Z3.  This one answers "does it break when I run it?"
-by actually calling the function on enumerated concrete inputs.
-
-The two share no machinery, no solver and no assumptions.  That independence
-is the entire point: an oracle that agrees with itself proves nothing.
-
-Model dependency: 0.  This evaluates Python and arithmetic.  No network, no
-model, no solver.
+Source is parsed and interpreted by the same restricted expression engine used
+by the Hypothesis adapter. It is never imported or executed, and a finite clean
+sample does not prove correctness. This oracle is not independent of that
+Hypothesis adapter because they share the expression interpreter.
 """
 from __future__ import annotations
 
+import importlib.util
 import pathlib
-import re
 import sys
+from typing import Any
 
 SCHEMA = "CONTRACT_VIOLATION_ORACLE_CONCRETE_V1"
 PROVIDES = ["evidence.concrete_contract_violation"]
 INPUTS = ["source.python_function_with_docstring_contract"]
 MODEL_DEPENDENCY_COUNT = 0
-
-_POST_RE = re.compile(r"^\s*(?:-\s*)?post(?:condition)?\s*:\s*(.+)$", re.I)
-
-# Deliberately small.  A concrete oracle may only ever witness a violation, so
-# a clean run is "no counterexample found in this sample", never "proven".
 _SAMPLE = (-8, -3, -1, 0, 1, 2, 3, 5, 7, 11, 16, 100, -100)
 
-_SAFE = {
-    "abs": abs, "min": min, "max": max, "len": len,
-    "sum": sum, "int": int, "float": float, "bool": bool,
-}
+
+def _load_safe_contract():
+    path = pathlib.Path(__file__).with_name("evidence_oracle_hypothesis_v1.py")
+    spec = importlib.util.spec_from_file_location("_brain_safe_contract_expressions", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("SAFE_CONTRACT_INTERPRETER_UNAVAILABLE")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
-def _posts(docstring: str) -> list[str]:
-    out = []
-    for line in (docstring or "").splitlines():
-        m = _POST_RE.match(line)
-        if m:
-            out.append(m.group(1).strip())
-    return out
+_CONTRACT = _load_safe_contract()
 
 
-def check_source(source: str, sample=_SAMPLE) -> dict:
-    """Execute the function on concrete inputs.  Report the first witness."""
-    ns: dict = {}
-    exec(compile(source, "<instance>", "exec"), ns)  # noqa: S102
-    fn = ns.get("f")
-    if fn is None:
-        raise ValueError("NO_FUNCTION_F")
+def _result(status: str, checked: int, violations: list[dict[str, Any]],
+            posts: list[str], sample_size: int, reason: str = "") -> dict[str, Any]:
+    result = {"status": status, "violations": violations, "checked": checked,
+              "posts": posts, "sample_size": sample_size, "proves_absence": False,
+              "engine": "RESTRICTED_NUMERIC_AST_INTERPRETER",
+              "independent_of_hypothesis_adapter": False}
+    if reason:
+        result["reason"] = reason
+    return result
 
-    posts = _posts(fn.__doc__ or "")
-    if not posts:
-        return {
-            "status": "NO_POSTCONDITION_PARSED",
-            "violations": [],
-            "checked": 0,
-            "posts": [],
-        }
 
-    violations = []
+def check_source(source: str, sample: tuple | list = _SAMPLE) -> dict[str, Any]:
+    """Return concrete witnesses, or an explicit unsupported/indeterminate result."""
+    if type(sample) not in (list, tuple) or len(sample) > 10000:
+        raise ValueError("INVALID_SAMPLE")
+    if not isinstance(source, str):
+        return _result("UNSUPPORTED_SOURCE", 0, [], [], len(sample), "SOURCE_NOT_TEXT")
+    try:
+        arg, expression, pre, post = _CONTRACT._parse(source)
+    except (_CONTRACT._Unsupported, RecursionError, UnicodeError) as exc:
+        return _result("UNSUPPORTED_SOURCE", 0, [], [], len(sample), str(exc))
+    posts = [text for text, _ in post]
     checked = 0
-    for x in sample:
+    violations: list[dict[str, Any]] = []
+    for value in sample:
         try:
-            result = fn(x)
-        except Exception as exc:  # raising IS a contract failure
-            violations.append({"input": x, "reason": f"raised {type(exc).__name__}"})
-            checked += 1
-            continue
-        checked += 1
-        env = dict(_SAFE)
-        env.update({"x": x, "_": result, "__return__": result, "result": result})
-        for post in posts:
-            try:
-                ok = bool(eval(post, {"__builtins__": {}}, env))  # noqa: S307
-            except Exception as exc:
-                violations.append({"input": x, "post": post,
-                                   "reason": f"unevaluable: {type(exc).__name__}"})
+            value = _CONTRACT._number(value)
+            env = {arg: value}
+            if not all(bool(_CONTRACT._interpret(cond, env)) for cond in pre):
                 continue
-            if not ok:
-                violations.append({"input": x, "post": post, "returned": result})
-
-    return {
-        "status": "CONTRACT_VIOLATION_FOUND" if violations else "NO_COUNTEREXAMPLE_IN_SAMPLE",
-        "violations": violations,
-        "checked": checked,
-        "posts": posts,
-        "sample_size": len(sample),
-    }
+        except (_CONTRACT._Unsupported, ArithmeticError, TypeError, RecursionError) as exc:
+            return _result("UNSUPPORTED_EVALUATION", checked, [], posts, len(sample), str(exc))
+        checked += 1
+        try:
+            returned = _CONTRACT._interpret(expression, env)
+        except _CONTRACT._Unsupported as exc:
+            return _result("UNSUPPORTED_EVALUATION", checked, [], posts, len(sample), str(exc))
+        except (ArithmeticError, TypeError, ValueError) as exc:
+            # A postcondition describes returned values. Without an explicit
+            # supported exception contract, raising is not itself a witness.
+            return _result("UNSUPPORTED_EVALUATION", checked, [], posts, len(sample),
+                           "FUNCTION_EXPRESSION_RAISED:" + type(exc).__name__)
+        env.update({"_": returned, "result": returned, "__return__": returned})
+        for text, condition in post:
+            try:
+                holds = bool(_CONTRACT._interpret(condition, env))
+            except (_CONTRACT._Unsupported, ArithmeticError, TypeError, ValueError, RecursionError) as exc:
+                return _result("UNSUPPORTED_EVALUATION", checked, [], posts, len(sample), str(exc))
+            if not holds:
+                violations.append({"input": value, "post": text, "returned": returned})
+    status = ("CONTRACT_VIOLATION_FOUND" if violations else
+              "NO_COUNTEREXAMPLE_IN_SAMPLE" if checked else
+              "NO_INPUTS_SATISFY_PRECONDITIONS" if sample else "NO_INPUTS_CHECKED")
+    return _result(status, checked, violations, posts, len(sample))
 
 
 def run(args: dict, root: str) -> dict:
     args = dict(args or {})
-    raw = args.get("source")
-    if raw is None:
-        target = pathlib.Path(str(args.get("target_path")))
+    source = args.get("source")
+    if source is None:
+        repo = pathlib.Path(root).resolve()
+        target = (repo / str(args.get("target_path") or "")).resolve()
+        if target == repo or repo not in target.parents:
+            raise ValueError("PATH_OUTSIDE_ROOT")
         if not target.is_file():
             raise ValueError("ORACLE_TARGET_MISSING")
-        raw = target.read_text()
-    sample = tuple(args.get("sample") or _SAMPLE)
-    out = check_source(raw, sample)
-    out.update({
-        "schema": SCHEMA,
-        "provides": PROVIDES,
-        "model_dependency_count": MODEL_DEPENDENCY_COUNT,
-        # Honesty clause: absence of a witness is not proof.
-        "proves_absence": False,
-    })
+        source = target.read_text(encoding="utf-8")
+    sample = _SAMPLE if args.get("sample") is None else args["sample"]
+    out = check_source(source, sample)
+    out.update({"schema": SCHEMA, "provides": PROVIDES,
+                "model_dependency_count": MODEL_DEPENDENCY_COUNT})
     return out
 
 

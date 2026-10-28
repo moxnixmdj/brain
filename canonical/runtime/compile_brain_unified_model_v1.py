@@ -611,6 +611,7 @@ def _capability_row(
             else "BOUND_CAPABILITY"
         ),
         "registry_status": str(entry.get("status") or "UNSPECIFIED"),
+        "diagnostic_only": entry.get("diagnostic_only") is True,
         "incremental_spend_usd": entry.get("incremental_spend_usd", 0),
         "cost": entry.get("cost", 1),
         "triggers": triggers,
@@ -625,10 +626,23 @@ def _capability_row(
             "carrier": "verified_bound_capability_execution_adapter_v1.execute",
             "carrier_path": "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
             "call": "execute(capability_id, inputs=..., instance_id=...)",
-            "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
+            "authority": (
+                "LOCAL_ONLY__CURRENT_IMPLEMENTATION_NOT_INDEPENDENTLY_VERIFIED"
+                if verification.get("current_implementation_independently_verified") is False
+                else "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME"
+            ),
         },
         "verification": {
-            "independent_verification_evident": independent,
+            "independent_verification_evident": (
+                independent
+                and entry.get("diagnostic_only") is not True
+                and verification.get("current_implementation_independently_verified") is not False
+            ),
+            "evidence_scope": (
+                "HISTORICAL_IMPLEMENTATION_ONLY"
+                if verification.get("current_implementation_independently_verified") is False
+                else "REGISTRY_DECLARATION"
+            ),
             "mission_id": verification.get("mission_id"),
             "producer_independent": verification.get("producer_independent"),
             "module_sha256": verification.get("module_sha256"),
@@ -657,6 +671,10 @@ def _capability_row(
 def _build_grammar(capabilities: list[Mapping[str, Any]], engines: list[Mapping[str, Any]]) -> dict[str, Any]:
     rows: list[tuple[str, str, int]] = []
     for cap in capabilities:
+        # Preserve explicit addressability in the model but do not suggest an
+        # inventory-only diagnostic as an executable answer to a task.
+        if cap.get("diagnostic_only") is True:
+            continue
         cid = str(cap["id"])
         seen: set[str] = set()
         # A multiword keyword such as "direct label" contributes both of its
@@ -692,7 +710,7 @@ def _build_grammar(capabilities: list[Mapping[str, Any]], engines: list[Mapping[
     for token, posting in postings.items():
         doc_freq[token] = len(posting)
 
-    total = max(1, len(capabilities) + len(engines))
+    total = max(1, sum(cap.get("diagnostic_only") is not True for cap in capabilities) + len(engines))
     index: dict[str, dict[str, float]] = {}
     for token in sorted(postings):
         idf = 1.0 + (total / (1.0 + doc_freq[token]))

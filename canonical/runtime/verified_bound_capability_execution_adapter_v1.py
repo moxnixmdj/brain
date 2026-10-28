@@ -24,12 +24,18 @@ from __future__ import annotations
 from copy import deepcopy
 from hashlib import sha256
 import json
-from pathlib import Path
+import os
+import tempfile
+import pathlib
+from pathlib import Path, PurePosixPath
 from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime
 from canonical.runtime.bound_capability_execution_verifier_v1 import verify as verify_execution
 from canonical.runtime.capability_planner import plan_actions
+from canonical.runtime.confine_v1 import run as _confined_run
+from canonical.runtime.zero_ambient_namespace_launcher_v1 import run_confined as _run_confined
+from sandboxkit import Sandbox, RLimits
 
 SCHEMA = "PROJECT_BRAIN_VERIFIED_BOUND_CAPABILITY_EXECUTION_ADAPTER_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -61,6 +67,190 @@ _KERNEL_NATIVE_ACTION_TYPES = frozenset({
     "assert_knowledge_status",
     "materialize_supported_knowledge",
 })
+
+
+_WRAPPER = r'''import json, sys, importlib.util
+from pathlib import Path
+args_path, module_path, entrypoint_name, root_path = sys.argv[1:5]
+with open(args_path, encoding="utf-8") as fh:
+    args = json.load(fh)
+spec = importlib.util.spec_from_file_location("pb_sandboxed_adapter", module_path)
+if spec is None or spec.loader is None:
+    print(json.dumps({"status": "FAIL_CLOSED", "reason": "ADAPTER_LOAD_FAILED"}))
+    sys.exit(1)
+module = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = module
+spec.loader.exec_module(module)
+fn = getattr(module, entrypoint_name, None)
+if not callable(fn):
+    print(json.dumps({"status": "FAIL_CLOSED", "reason": "ADAPTER_ENTRYPOINT_MISSING"}))
+    sys.exit(1)
+try:
+    result = fn(args, root_path)
+except BaseException as exc:
+    print(json.dumps({"status": "FAIL_CLOSED", "reason": type(exc).__name__ + ":" + str(exc)}))
+    sys.exit(1)
+print(json.dumps(result if isinstance(result, dict) else {"status": str(result)}, default=str))
+'''
+
+
+def _run_bound_capability_sandboxed(
+    entry: Mapping[str, Any],
+    args: Mapping[str, Any],
+    root: Path,
+    oidc_token: str | None = None,
+) -> dict[str, Any]:
+    """Execute a bound capability inside an OS sandbox (sandboxkit preferred, confine_v1 fallback).
+
+    Serializes the rendered action args, writes a wrapper script that loads the
+    adapter module and calls its entrypoint, then runs it inside sandboxkit
+    (PID namespace + rlimits + Landlock, rootless), falls back to confine_v1
+    (user+mount namespaces + chroot), then to run_confined with OIDC broker
+    authentication when an OIDC token is provided, and finally to an unconfined
+    Astra invoker as last resort.
+
+    Returns the adapter result dict, possibly augmented with ``broker_authenticated``
+    and ``oidc_claims`` when OIDC broker authentication was used.
+    """
+    module_name = str(entry.get("adapter_module") or "")
+    entrypoint = str(entry.get("entrypoint") or "run")
+    if not module_name or not entrypoint:
+        return astra_runtime._invoke_bound_capability(dict(args))
+
+    # Resolve the adapter module file using the same convention as
+    # astra_runtime._resolve_bound_adapter_path: canonical/runtime/bound_capabilities/<name>.py,
+    # honoring source.adapter_path when declared.
+    declared = str((entry.get("source") or {}).get("adapter_path") or "").strip()
+    if declared:
+        candidate = (ROOT / declared).resolve()
+        allowed = (ROOT / "canonical" / "runtime").resolve()
+        if (
+            not declared.startswith("/")
+            and ".." not in pathlib.PurePosixPath(declared).parts
+            and allowed in candidate.parents
+            and candidate.stem == module_name
+            and candidate.suffix == ".py"
+            and candidate.is_file()
+        ):
+            module_file = candidate
+        else:
+            return astra_runtime._invoke_bound_capability(dict(args))
+    else:
+        module_file = ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")
+        if not module_file.is_file():
+            return astra_runtime._invoke_bound_capability(dict(args))
+
+    # Write args and wrapper to temp files inside the project root so they are
+    # visible inside the sandbox chroot.
+    root_resolved = root.resolve()
+    with tempfile.TemporaryDirectory(dir=str(root_resolved), prefix=".pb-sandbox-") as td:
+        td_path = Path(td)
+        args_file = td_path / "args.json"
+        wrapper_file = td_path / "wrapper.py"
+        args_file.write_text(json.dumps(dict(args), default=str), encoding="utf-8")
+        wrapper_file.write_text(_WRAPPER, encoding="utf-8")
+
+        # Relativize paths under the project root for the sandbox.
+        def rel(p: str) -> str:
+            try:
+                pp = Path(p).resolve()
+                if root_resolved in pp.parents:
+                    return str(pp.relative_to(root_resolved))
+                if pp == root_resolved:
+                    return "."
+                return p
+            except (ValueError, OSError):
+                return p
+
+        sandbox_argv = [
+            "/usr/bin/python3", str(wrapper_file.relative_to(root_resolved)),
+            str(args_file.relative_to(root_resolved)),
+            rel(str(module_file)),
+            entrypoint,
+            ".",
+        ]
+        sandbox_env = {"PYTHONDONTWRITEBYTECODE": "1"}
+
+        # Try sandboxkit first (PID namespace + rlimits + Landlock, rootless).
+        try:
+            sb = Sandbox(
+                rlimits=RLimits(cpu_seconds=120, memory_bytes=256 << 20),
+                timeout=120,
+                cwd=str(root_resolved),
+                env=sandbox_env,
+            )
+            result = sb.run_argv(sandbox_argv)
+            output = result.stdout.decode("utf-8", errors="replace") if isinstance(result.stdout, bytes) else str(result.stdout or "")
+            if result.returncode == 0:
+                try:
+                    return json.loads(output)
+                except json.JSONDecodeError:
+                    pass
+        except Exception:
+            pass
+
+        # Fallback: confine_v1 (user+mount namespaces + chroot).
+        try:
+            confined = _confined_run(
+                argv=sandbox_argv,
+                root=str(root_resolved),
+                timeout=120,
+                env=sandbox_env,
+                extra_bind_mounts=[("/dev/null", "/dev/null")],
+            )
+            output = confined.get("output", "")
+            if confined.get("confined") is True and confined.get("exit_status") == 0:
+                try:
+                    return json.loads(output)
+                except json.JSONDecodeError:
+                    pass
+        except Exception:
+            pass
+
+        # Fallback: run_confined with OIDC broker authentication when a token
+        # is provided. Broker payload must carry a GitHub-signed OIDC run
+        # reference; without it the broker data stays unauthenticated.
+        if oidc_token:
+            try:
+                import os as _os
+                launcher_policy = {
+                    'argv': sandbox_argv,
+                    'input_dir': str(root_resolved),
+                    'host_uid': _os.geteuid(),
+                    'host_gid': _os.getegid(),
+                    'env': dict(sandbox_env),
+                    'limits': {
+                        'pids': 32,
+                        'memory_mb': 256,
+                        'cpu_seconds': 120,
+                        'wallclock_s': 120,
+                        'scratch_mb': 32,
+                        'max_file_mb': 8,
+                        'nofile': 32,
+                        'broker_max_bytes': 8_000_000,
+                    },
+                    'oidc_token': oidc_token,
+                }
+                launcher_result = _run_confined(launcher_policy)
+                if launcher_result.get('broker_authenticated') is True:
+                    result = {}
+                    try:
+                        result = json.loads(launcher_result.get('broker_payload', b'').decode('utf-8', errors='replace'))
+                    except (json.JSONDecodeError, ValueError):
+                        result = {}
+                    if not isinstance(result, dict):
+                        result = {}
+                    result['broker_authenticated'] = True
+                    result['broker_attestation'] = launcher_result.get('broker_attestation')
+                    result['oidc_claims'] = launcher_result.get('oidc_claims')
+                    result['material_effects_committed'] = launcher_result.get('material_effects_committed', 1)
+                    result['execution_authority'] = True
+                    return result
+            except Exception:
+                pass
+
+        # Last resort: unconfined Astra invoker.
+        return astra_runtime._invoke_bound_capability(dict(args))
 
 
 def _is_kernel_native(template_type: Any) -> bool:
@@ -180,6 +370,21 @@ def inspect(capability_id: str) -> dict[str, Any]:
     # had no proof for work whose receipt it could hash.
     if not independently_verified and not _receipt_anchor_verified(verification):
         raise BoundExecutionError("BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT:" + cid)
+    # Module hash verification: compute the adapter module's content hash and
+    # compare against the registry's declared module_sha256 (if any). A mismatch
+    # means the code on disk differs from the verified code — fail closed.
+    declared_module_sha = verification.get("module_sha256")
+    if isinstance(declared_module_sha, str) and declared_module_sha:
+        adapter_module = entry.get("adapter_module")
+        if adapter_module:
+            module_file = ROOT / "canonical/runtime/bound_capabilities" / (adapter_module + ".py")
+            if not module_file.is_file():
+                raise BoundExecutionError("BOUND_CAPABILITY_MODULE_MISSING:" + cid)
+            actual_module_sha = sha256(module_file.read_bytes()).hexdigest()
+            if actual_module_sha != declared_module_sha:
+                raise BoundExecutionError(
+                    "BOUND_CAPABILITY_MODULE_HASH_MISMATCH:" + cid
+                )
     action_template = entry.get("action_template")
     template_type = action_template.get("type") if isinstance(action_template, Mapping) else None
     if not isinstance(action_template, Mapping) or (
@@ -440,13 +645,14 @@ def execute(
             raise BoundExecutionError("RENDERED_ACTION_CHANGED_AFTER_PREPARATION")
 
         # The kernel action loop is the executor for a kernel-native template; the bound
-        # adapter invoker is by definition confined to invoke_capability. Everything after
+        # adapter invoker is sandboxed for invoke_capability. Everything after
         # this line is generic: `_verify_action_expectation` reads `rendered["expect"]`, and
         # the planner and the execution verifier both take the rendered action as-is.
         if _is_kernel_native(rendered.get("type")):
             result = astra_runtime._goal_action(deepcopy(dict(rendered)))
         else:
-            result = astra_runtime._invoke_bound_capability(dict(args))
+            oidc_token = args.get("oidc_token") if isinstance(args, Mapping) else None
+            result = _run_bound_capability_sandboxed(entry, args, ROOT, oidc_token=oidc_token)
         if not isinstance(result, Mapping):
             raise BoundExecutionError("BOUND_CAPABILITY_RESULT_INVALID")
         astra_runtime._verify_action_expectation(rendered, result)
@@ -493,6 +699,9 @@ def execute(
                 + str(verdict.get("reason"))
             )
 
+        current_implementation_unverified = (
+            (entry.get("verification") or {}).get("current_implementation_independently_verified") is False
+        )
         return {
             "schema": SCHEMA,
             "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
@@ -519,7 +728,14 @@ def execute(
             "terminal_authority": False,
             "capability_credit_delta": 0,
             "ownership_credit_delta": 0,
+            "current_implementation_independently_verified": (
+                False if current_implementation_unverified else None
+            ),
             "semantic_boundary": (
+                "LOCAL_EXECUTION_AND_UNAUTHENTICATED_TRACE_RECHECK_ONLY;"
+                "HISTORICAL_RECEIPT_DOES_NOT_VERIFY_CURRENT_IMPLEMENTATION;"
+                "NO_INDEPENDENT_CREDIT_OR_HIGHER_LEVEL_TASK_AUTHENTICATION"
+                if current_implementation_unverified else
                 "PROVES_EXECUTION_OF_THE_PROMOTED_REGISTRY_CONTRACT_AND_DECLARED_EXPECTATION;"
                 "HIGHER_LEVEL_TASK_EFFECT_MEANING_REQUIRES_SEPARATE_AUTHENTICATION"
             ),

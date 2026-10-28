@@ -755,17 +755,19 @@ class PytestStyleSuiteTests(unittest.TestCase):
             if result is not None:
                 self.assertFalse(result.get("pass"), cid + " fabricated a repair for correct code")
 
-    def test_a_function_needing_an_argument_is_skipped_not_guessed(self):
-        """A fixture-parameterised test must not be called with a fabricated argument."""
+    @unittest.skipUnless(importlib.util.find_spec("pytest"), "real pytest is required for fixture injection")
+    def test_a_fixture_function_is_executed_by_pytest_not_skipped_or_guessed(self):
+        """The shared runner must execute both tests with pytest's real fixture."""
         work = self._seed_pytest(
             "pyt_fixture", "def add(a, b):\n    return a + b\n",
-            "import calc\n\n\ndef test_with_fixture(tmp_path):\n    assert calc.add(1, 1) == 2\n\n\n"
+            "import calc\n\n\ndef test_with_fixture(tmp_path):\n    assert tmp_path.is_dir()\n"
+            "    assert calc.add(1, 1) == 2\n\n\n"
             "def test_plain():\n    assert calc.add(1, 1) == 2\n")
         r = runtime._invoke_bound_capability({
             "capability_id": "python.tests.audit.unittest", "source_root": str(work),
             "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
-        self.assertEqual(r.get("test_count"), 1, "the fixture-parameterised function must be skipped")
-        self.assertEqual(r.get("error_count"), 0, "skipping must not be recorded as an error")
+        self.assertEqual(r.get("test_count"), 2, "both collected tests must execute")
+        self.assertEqual(r.get("error_count"), 0)
 
 
 PEP695 = "from typing import Literal\n\ntype ReasoningEffort = Literal[\"none\", \"low\", \"high\"]\n"

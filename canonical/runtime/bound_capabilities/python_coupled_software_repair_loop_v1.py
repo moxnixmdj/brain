@@ -1,5 +1,5 @@
 from __future__ import annotations
-import ast,difflib,hashlib,importlib.util,json,os,pathlib,re,sys
+import ast,difflib,hashlib,importlib.util,json,os,pathlib,re,sys,tempfile
 from typing import Any,Mapping
 SCHEMA="PROJECT_BRAIN_PYTHON_COUPLED_SOFTWARE_REPAIR_LOOP_V1"
 class RepairLoopError(RuntimeError): pass
@@ -142,16 +142,18 @@ def _candidate(originals,items):
   if v is None or v.encode()==originals[p]:return None
   out[p]=v
  return out
-def _run_candidate(repo,originals,cand,argv,timeout,env):
+def _run_candidate(repo,originals,cand,argv,timeout,env,test_originals=None):
  try:
-  for p,t in cand.items():p.write_text(t);_PATCH._purge_source_bytecode(p)
-  return _PATCH._run_tests(repo,argv,timeout,env)
+  for p,t in cand.items():p.write_bytes(t.encode());_PATCH._purge_source_bytecode(p)
+  protected={**originals,**{p:t.encode() for p,t in cand.items()},**(test_originals or {})}
+  return _PATCH._run_tests_guarded(repo,argv,timeout,env,protected)
  finally:
   for p in cand:p.write_bytes(originals[p]);_PATCH._purge_source_bytecode(p)
 def _diff(repo,p,a,b):
  return "".join(difflib.unified_diff(a.decode().splitlines(True),b.splitlines(True),fromfile="a/"+_rel(repo,p),tofile="b/"+_rel(repo,p)))
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise RepairLoopError("ARGS_NOT_OBJECT")
+ budget=_PATCH.WallBudget(args.get("max_wall_time_s"))
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
  env=_PATCH._source_env(src)
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
@@ -160,55 +162,67 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_files=max(1,min(int(args.get("max_files",8)),32));max_symbols=max(1,min(int(args.get("max_symbols_per_file",8)),64));per=max(1,min(int(args.get("mutations_per_file",24)),128));pair_max=max(1,min(int(args.get("max_pair_candidates",1200)),20000))
  out=(repo/str(args.get("output_path") or "")).resolve()
  if out==repo or repo not in out.parents:raise RepairLoopError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
- strict_probe=out.parent/(".strict_"+out.name)
- strict_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"test_argv":argv,"output_path":_rel(repo,strict_probe),"timeout_s":timeout,"max_rounds":args.get("max_strict_rounds",6),"max_files":max_files,"max_candidates_per_file":args.get("max_strict_candidates_per_file",120),"max_total_candidates":args.get("max_strict_total_candidates",1000)}
- try:
-  strict=_STRICT.run(strict_args,repo)
- except Exception as exc:
-  strict={"pass":False,"status":"OPEN__STRICT_ROUTE_DECLINED","reason":type(exc).__name__+":"+str(exc)}
- finally:
-  if strict_probe.exists():strict_probe.unlink()
+ oracle_files=set(tests)|_PATCH._argv_python_files(repo,argv)
+ _PATCH._reject_output_overlap(out,src,oracle_files)
+ test_originals={p:p.read_bytes() for p in oracle_files}
+ out.parent.mkdir(parents=True,exist_ok=True)
+ # A unique private probe avoids overwriting or unlinking a caller's file.
+ with tempfile.TemporaryDirectory(prefix=".brain-strict-",dir=out.parent) as tmp:
+  strict_probe=pathlib.Path(tmp)/"result.json"
+  strict_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"test_argv":argv,"output_path":_rel(repo,strict_probe),"timeout_s":timeout,"max_rounds":args.get("max_strict_rounds",6),"max_files":max_files,"max_candidates_per_file":args.get("max_strict_candidates_per_file",120),"max_total_candidates":args.get("max_strict_total_candidates",1000),"max_wall_time_s":budget.timeout(budget.limit)}
+  try:
+   strict=_STRICT.run(strict_args,repo)
+  except _STRICT.RepairLoopError as exc:
+   if str(exc)!="BASELINE_FAILURE_METRIC_UNPARSEABLE" and not (str(exc)=="BASELINE_TIMEOUT" and budget.expired()):
+    raise
+   strict={"pass":False,"status":"OPEN__STRICT_ROUTE_DECLINED","reason":type(exc).__name__+":"+str(exc)}
  if strict.get("pass"):
   result={"schema":SCHEMA,"status":"PASS__STRICT_PROGRESS_ROUTE","pass":True,"route":"STRICT_PROGRESS","strict_result":strict,"localization_candidates":[],"crossed_nonmonotonic_valley":False,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"source_restored":strict.get("source_restored") is True,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
+ elif budget.expired():
+  result={"schema":SCHEMA,"status":"OPEN__WALL_TIME_BUDGET_EXHAUSTED","pass":False,
+          "route":"NONE","strict_result_status":strict.get("status"),"localization_candidates":[],
+          "crossed_nonmonotonic_valley":False,"patches":[],"source_restored":True,
+          "model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0}
  else:
-  base=_PATCH._run_tests(repo,argv,timeout,env);score=_STRICT._score(base)
-  if score is None and not base.get("timed_out"): score=1
+  base=_PATCH._run_tests_guarded(repo,argv,budget.timeout(timeout),env,test_originals);score=_STRICT._score(base)
   if base.get("timed_out"):raise RepairLoopError("BASELINE_TIMEOUT")
   if base.get("returncode")==0:raise RepairLoopError("BASELINE_ALREADY_PASSES")
-  if score is None:raise RepairLoopError("BASELINE_FAILURE_METRIC_UNPARSEABLE")
-  loc=_localize(repo,src,tests,_STRICT._text(base),max_files,max_symbols)
+  loc=_localize(repo,src,sorted(oracle_files),_STRICT._text(base),max_files,max_symbols)
   originals={r["path"]:r["path"].read_bytes() for r in loc}
   pools={r["path"]:_pool(r,tests,per) for r in loc}
   items=[(r["path"],e) for r in loc for e in pools[r["path"]]]
   single_scores={};tested_single=0
   for p,e in items:
+   if budget.expired():break
    cand=_candidate(originals,[(p,e)])
    if cand is None:continue
-   rr=_run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr);single_scores[(p,e["start"],e["end"],e["replacement"])]=(1 if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out") else ss);tested_single+=1
+   rr=_run_candidate(repo,originals,cand,argv,budget.timeout(timeout),env,test_originals);ss=_STRICT._score(rr);single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
   winner=None;winner_items=None;pair_count=0;crossed=False
   for i in range(len(items)):
-   if pair_count>=pair_max:break
+   if pair_count>=pair_max or budget.expired():break
    for j in range(i+1,len(items)):
-    if pair_count>=pair_max:break
+    if pair_count>=pair_max or budget.expired():break
     pair_count+=1;a,b=items[i],items[j];cand=_candidate(originals,[a,b])
     if cand is None:continue
-    rr=_run_candidate(repo,originals,cand,argv,timeout,env);ps=_STRICT._score(rr)
-    if ps is None and rr.get("returncode")!=0 and not rr.get("timed_out"): ps=1
+    rr=_run_candidate(repo,originals,cand,argv,budget.timeout(timeout),env,test_originals);ps=_STRICT._score(rr)
     if rr.get("returncode")==0 and ps==0:
      ka=(a[0],a[1]["start"],a[1]["end"],a[1]["replacement"]);kb=(b[0],b[1]["start"],b[1]["end"],b[1]["replacement"])
-     sa=single_scores.get(ka);sb=single_scores.get(kb);crossed=(sa is None or sa>=score) and (sb is None or sb>=score)
+     sa=single_scores.get(ka);sb=single_scores.get(kb);crossed=score is not None and (sa is not None and sa>=score) and (sb is not None and sb>=score)
      winner=cand;winner_items=[a,b];break
    if winner:break
   replay=[]
   if winner:
    ok=True
    for _ in range(2):
-    rr=_run_candidate(repo,originals,winner,argv,timeout,env);rs=_STRICT._score(rr);rs=(0 if rr.get("returncode")==0 else (1 if rs is None and not rr.get("timed_out") else rs));replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")});ok=ok and rr.get("returncode")==0 and rs==0
+    if budget.expired():ok=False;break
+    rr=_run_candidate(repo,originals,winner,argv,budget.timeout(timeout),env,test_originals);rs=_STRICT._score(rr);replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")});ok=ok and rr.get("returncode")==0 and rs==0
    if not ok:winner=None;winner_items=None
   patches=[]
   if winner:
    for p,t in sorted(winner.items(),key=lambda x:_rel(repo,x[0])):patches.append({"source_path":_rel(repo,p),"original_sha256":_sha(originals[p]),"candidate_sha256":_sha(t.encode()),"unified_diff":_diff(repo,p,originals[p],t)})
   restored=all(p.read_bytes()==b for p,b in originals.items())
-  result={"schema":SCHEMA,"status":"PASS__NONMONOTONIC_COUPLED_PAIR_REPAIR_FOUND" if winner else "OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED_BOUNDS","pass":winner is not None,"route":"COUPLED_PAIR" if winner else "NONE","baseline_failure_score":score,"strict_result_status":strict.get("status"),"localization_candidates":[{"path":r["rel"],"score":r["score"],"reasons":r["reasons"],"symbols":r["symbols"]} for r in loc],"single_candidates_tested":tested_single,"pair_candidates_tested":pair_count,"crossed_nonmonotonic_valley":crossed if winner else False,"verification_replays":replay,"patches":patches,"source_restored":restored,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_ARBITRARY_EDIT_BASIS_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_CLAIM_LOCALIZATION_IS_COMPLETE_SEMANTIC_CAUSALITY","NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
+  result={"schema":SCHEMA,"status":("PASS__NONMONOTONIC_COUPLED_PAIR_REPAIR_FOUND" if crossed else "PASS__COUPLED_PAIR_REPAIR_FOUND") if winner else "OPEN__NO_VERIFIED_REPAIR_IN_STRICT_OR_COUPLED_BOUNDS","pass":winner is not None,"route":"COUPLED_PAIR" if winner else "NONE","baseline_failure_score":score,"strict_result_status":strict.get("status"),"localization_candidates":[{"path":r["rel"],"score":r["score"],"reasons":r["reasons"],"symbols":r["symbols"]} for r in loc],"single_candidates_tested":tested_single,"pair_candidates_tested":pair_count,"crossed_nonmonotonic_valley":crossed if winner else False,"verification_replays":replay,"patches":patches,"source_restored":restored,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_ARBITRARY_EDIT_BASIS_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_CLAIM_LOCALIZATION_IS_COMPLETE_SEMANTIC_CAUSALITY","NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
  if not result.get("source_restored"):raise RepairLoopError("SOURCE_RESTORATION_FAILED")
+ if not result.get("pass") and budget.expired():result["status"]="OPEN__WALL_TIME_BUDGET_EXHAUSTED"
+ result["max_wall_time_s"]=budget.limit
  out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n");result["output_path"]=_rel(repo,out);result["output_sha256"]=_sha(out.read_bytes());result["output_verified"]=True;return result

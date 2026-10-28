@@ -50,25 +50,29 @@ import subprocess
 import sys
 from pathlib import Path
 
+from canonical.runtime.bound_capabilities.review_gate_input_safety_v1 import guard_inputs
+
 SCHEMA = "PROJECT_BRAIN_DIFF_STATIC_TRIAGE_V1"
 BLOCKING_PREFIXES = ("F", "E9")
 _HUNK = re.compile(r"^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@")
 
 
-def _fail(reason: str) -> None:
-    raise SystemExit(json.dumps({"error": True,
-                                 "capability": "python.review.diff_static_triage.v1",
-                                 "reason": reason}, indent=2, sort_keys=True))
+def _fail(reason: str) -> dict:
+    return {
+        "error": True,
+        "capability": "python.review.diff_static_triage.v1",
+        "reason": reason,
+    }
 
 
-def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path:
+def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path | dict:
     if not rel or not isinstance(rel, str):
-        _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
+        return _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
     p = (repo / rel).resolve()
     if p != repo and repo not in p.parents:
-        _fail("PATH_ESCAPE:" + rel)
+        return _fail("PATH_ESCAPE:" + rel)
     if must_exist and not p.exists():
-        _fail("PATH_MISSING:" + rel)
+        return _fail("PATH_MISSING:" + rel)
     return p
 
 
@@ -127,17 +131,23 @@ def run(args, root):
     args = dict(args or {})
     diff_rel = str(args.get("diff_path") or "")
     diff_abs = _safe_path(repo, diff_rel, must_exist=True)
+    if isinstance(diff_abs, dict): return diff_abs
     diff_text = diff_abs.read_text(encoding="utf-8", errors="replace")
     if not diff_text.strip():
-        _fail("DIFF_EMPTY")
+        return _fail("DIFF_EMPTY")
     changed, created = _parse_diff_ranges(diff_text)
     py_changed = {p: r for p, r in changed.items() if p.endswith(".py")}
 
     worktree_rel = str(args.get("worktree_path") or "")
     worktree_abs = _safe_path(repo, worktree_rel, must_exist=True)
+    if isinstance(worktree_abs, dict): return worktree_abs
     if not worktree_abs.is_dir():
-        _fail("WORKTREE_NOT_DIRECTORY")
+        return _fail("WORKTREE_NOT_DIRECTORY")
     out_abs = _safe_path(repo, str(args.get("output_path") or ""))
+    if isinstance(out_abs, dict): return out_abs
+    guard_result = guard_inputs(worktree_abs, diff_abs, out_abs, py_changed, _fail)
+    if isinstance(guard_result, dict):
+        return guard_result
     timeout_s = int(args.get("timeout_s") or 60)
     python_exe = str(args.get("python_executable") or sys.executable)
 
@@ -147,7 +157,7 @@ def run(args, root):
     for rel in sorted(py_changed):
         target = worktree_abs / rel
         if not target.is_file():
-            _fail("TOUCHED_FILE_MISSING_IN_WORKTREE:" + rel)
+            return _fail("TOUCHED_FILE_MISSING_IN_WORKTREE:" + rel)
         files_on_disk[rel] = target
         try:
             ast.parse(target.read_text(encoding="utf-8"), filename=rel)
@@ -165,14 +175,22 @@ def run(args, root):
         if touched:
             proc = subprocess.run(
                 [python_exe, "-m", "ruff", "check", "--output-format", "json",
-                 "--no-cache", "--isolated", "--select", "E,F,W"] + touched,
+                 "--no-cache", "--isolated", "--select", "E,F,W", "--"] + touched,
                 cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
+            if proc.returncode not in (0, 1):
+                _fail("RUFF_INVOCATION_FAILED:rc=" + str(proc.returncode))
             try:
-                rows = json.loads(proc.stdout or "[]")
+                rows = json.loads(proc.stdout)
             except json.JSONDecodeError:
-                _fail("RUFF_OUTPUT_NOT_JSON")
-            if not isinstance(rows, list):
-                _fail("RUFF_OUTPUT_SHAPE_UNEXPECTED")
+                return _fail("RUFF_OUTPUT_NOT_JSON")
+            if (not isinstance(rows, list) or (proc.returncode == 1 and not rows)
+                    or (proc.returncode == 0 and rows)
+                    or any(not isinstance(row, dict) or not isinstance(row.get("filename"), str)
+                           or not isinstance(row.get("location"), dict)
+                           or not isinstance(row["location"].get("row"), int)
+                           or row["location"]["row"] <= 0 or not isinstance(row.get("code"), str)
+                           for row in rows)):
+                return _fail("RUFF_OUTPUT_SHAPE_UNEXPECTED")
             for row in sorted(rows, key=lambda r: (str(r.get("filename")),
                                                    int(r.get("location", {}).get("row", 0)),
                                                    str(r.get("code")))):
@@ -197,7 +215,9 @@ def run(args, root):
                             advisory.append({**item, "out_of_scope": row_class})
 
     gate = "FAIL"
-    if ruff_version is None:
+    if not py_changed:
+        gate = "NO_PYTHON_CHANGES"
+    elif ruff_version is None:
         gate = "FAIL" if syntax_errors else "PASS_SYNTAX_ONLY"
     elif ruff_version and not syntax_errors and not blocking:
         gate = "PASS"

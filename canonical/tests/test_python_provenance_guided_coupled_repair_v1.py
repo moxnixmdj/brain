@@ -12,13 +12,13 @@ class T(unittest.TestCase):
   files={"a.py":"def a(x):\n    return x < 3\n","b.py":"def b(y):\n    return y > 5\n","noise1.py":"def n1(x): return x < 100\n","noise2.py":"def n2(x): return x > -100\n","trace_fail.py":"from a import a\nfrom b import b\nassert a(3) and b(5)\n","trace_pass.py":"from a import a\nfrom b import b\nassert a(2) and b(6)\n","test_all.py":"from a import a\nfrom b import b\nassert a(3) and b(5)\nassert a(2) and b(6)\nassert not a(4)\nassert not b(4)\n"}
   td,r=self.fixture(files)
   with td:
-   o=self.runr(r,["trace_fail.py","trace_pass.py"]);self.assertTrue(o["pass"],o);self.assertEqual(o["winner_mode"],"COUPLED_PAIR_GUIDED");self.assertEqual({p["source_path"] for p in o["patches"]},{"a.py","b.py"});self.assertTrue(o["source_restored"]);self.assertTrue(o["crossed_nonmonotonic_valley"])
+   o=self.runr(r,["trace_fail.py","trace_pass.py"]);self.assertTrue(o["pass"],o);self.assertEqual(o["winner_mode"],"COUPLED_PAIR_GUIDED");self.assertEqual({p["source_path"] for p in o["patches"]},{"a.py","b.py"});self.assertTrue(o["source_restored"]);self.assertFalse(o["crossed_nonmonotonic_valley"]);self.assertIsNone(o["baseline_failure_score"]);self.assertFalse(o["provenance_guided_verified"]);self.assertEqual(o["status"],"PASS__DYNAMIC_GUIDED_COUPLED_REPAIR")
  def test_guidance_reduces_control_space(self):
   noise={f"noise{i}.py":f"def noise{i}(x):\n return x < {100+i}\n" for i in range(8)}
   files={**noise,"m.py":"def helper(x): return x < 3\ndef f(x): return helper(x)\n","trace_fail.py":"from m import f\nassert f(3)\n","trace_pass.py":"from m import f\nassert f(2)\n","test_all.py":"from m import f\nassert f(3)\nassert f(2)\nassert not f(4)\n"}
   td,r=self.fixture(files)
   with td:
-   o=self.runr(r,["trace_fail.py","trace_pass.py"],max_guided_files=1,max_control_files=12);self.assertTrue(o["pass"],o);self.assertEqual(o["winner_mode"],"SINGLE_GUIDED");self.assertTrue(o["guidance"]["guidance_reduced_candidate_items"],o["guidance"]);self.assertTrue(o["guidance"]["guidance_reduced_pair_space"],o["guidance"])
+   o=self.runr(r,["trace_fail.py","trace_pass.py"],max_guided_files=1,max_control_files=12);self.assertTrue(o["pass"],o);self.assertEqual(o["winner_mode"],"SINGLE_GUIDED");self.assertTrue(o["guidance"]["guidance_reduced_candidate_items"],o["guidance"]);self.assertTrue(o["guidance"]["guidance_reduced_pair_space"],o["guidance"]);self.assertTrue(o["provenance_guided_verified"]);self.assertEqual(o["status"],"PASS__PROVENANCE_GUIDED_COUPLED_REPAIR")
  def test_provenance_present(self):
   td,r=self.fixture({"m.py":"def h(x): return x < 3\ndef f(x): return h(x)\n","trace_fail.py":"from m import f\nassert f(3)\n","trace_pass.py":"from m import f\nassert f(2)\n","test_all.py":"from m import f\nassert f(3)\n"})
   with td:

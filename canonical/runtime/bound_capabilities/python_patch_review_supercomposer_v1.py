@@ -1,29 +1,179 @@
 #!/usr/bin/env python3
-"""Patch-review supercomposer — only-right-way patch review.
+# PROJECT_BRAIN
+"""Real patch-review supercomposer: apply patch → run all review gates → verify.
 
-Hidden kernels: patch candidate objective/semantic/strict_progress + review diff mutation/perf (5 dead).
-Why max: patch review was 5 isolated gates (dead). This super-composes them: objective acceptance → semantic acceptance → strict progress multi-round → mutation gate → perf gate → patch-review verified."""
+Runs python_review_diff_mutation_gate, python_review_diff_perf_gate,
+python_review_diff_security_gate, python_review_diff_static_triage,
+python_review_diff_type_gate on the actual patched worktree.
+"""
 from __future__ import annotations
-import hashlib, json, pathlib
-from typing import Any
-SCHEMA="PROJECT_BRAIN_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1"
-CAPABILITY_ID="python.patch.review.supercomposer.v1"
-PROVIDES=["python.patch.review.super.verified","python.patch.review.family.verified"]
-REQUIRES: list[str]=["python.patch.candidate.objective_acceptance_verified","python.patch.candidate.semantic_acceptance_verified","python.patch.candidate.strict_progress.multi_round.test_verified","python.review.diff_mutation_gate","python.review.diff_perf_gate"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
+
+import hashlib
+import importlib.util
+import json
+import pathlib
+import subprocess
+import sys
+from typing import Any, Mapping
+
+from canonical.runtime.bound_capabilities.real_swe_execution_v1 import (
+    end_to_end_repair, full_test_gate, _run_in_process, REPO, _SKIP_DIRS,
+)
+
+SCHEMA = 'PROJECT_BRAIN_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1'
+CAPABILITY_ID = 'python.patch.review.supercomposer.v1'
+PROVIDES = ['python.patch.review.super.verified', 'python.patch.review.family.verified']
+REQUIRES = ['python.patch.candidate.objective_acceptance_verified',
+            'python.patch.candidate.semantic_acceptance_verified',
+            'python.patch.candidate.strict_progress.multi_round.test_verified',
+            'python.review.diff_mutation_gate', 'python.review.diff_perf_gate']
+PRODUCERS = ['python.software.repair.measured_acceptance.v1',
+             'python.software.repair.semantic_acceptance.v1',
+             'python.software.repair.loop.strict_progress.ast.v1',
+             'python.review.diff_mutation_gate.v1', 'python.review.diff_perf_gate.v1']
+
+
 def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_patch_review_supercomposer.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
-def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
-    repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
-    reg=json.loads((repo/"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
-    all_prov={p for m in reg["capabilities"].values() for p in m.get("provides",[])}
-    required=REQUIRES
-    found={r: (r in all_prov) for r in required}
-    producers=["python.software.repair.measured_acceptance.v1","python.software.repair.semantic_acceptance.v1","python.software.repair.loop.strict_progress.ast.v1","python.review.diff_mutation_gate.v1","python.review.diff_perf_gate.v1"]
-    prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"objective acceptance → semantic acceptance → strict progress → mutation gate → perf gate, patch-review verified","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"python_patch_review_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    p = (root / str(raw or 'canonical/tmp_patch_review_supercomposer.json')).resolve()
+    if p == root or root not in p.parents:
+        raise RuntimeError('PATH_OUTSIDE_REPOSITORY')
+    if p.is_file() and p.suffix == '.py':
+        raise RuntimeError('OUTPUT_OVERLAPS_INPUT')
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def _run_review_gate(adapter_name: str, anchor_path: pathlib.Path,
+                     diff_path: pathlib.Path, output_path: pathlib.Path,
+                     timeout_s: int) -> dict:
+    """Run a single review gate adapter in-process."""
+    adapter = REPO / 'canonical/runtime/bound_capabilities' / adapter_name
+    args = {
+        'anchor_path': str(anchor_path),
+        'diff_path': str(diff_path),
+        'output_path': str(output_path),
+        'python_executable': sys.executable,
+        'timeout_s': timeout_s,
+    }
+    return _run_in_process(adapter, 'run', args, REPO)
+
+
+def _unified_diff(before: pathlib.Path, after: pathlib.Path) -> str:
+    import difflib
+    before_files = {}
+    after_files = {}
+    for p in before.rglob('*.py'):
+        if p.is_file() and not any(part in _SKIP_DIRS for part in p.parts):
+            before_files[str(p.relative_to(before))] = p.read_text(encoding='utf-8')
+    for p in after.rglob('*.py'):
+        if p.is_file() and not any(part in _SKIP_DIRS for part in p.parts):
+            after_files[str(p.relative_to(after))] = p.read_text(encoding='utf-8')
+    all_files = sorted(set(before_files) | set(after_files))
+    chunks = []
+    for rel in all_files:
+        old = before_files.get(rel)
+        new = after_files.get(rel)
+        if old is None:
+            new_lines = new.splitlines(keepends=True)
+            chunks.append('--- /dev/null\n+++ b/{}\n@@ -0,0 +1,{} @@\n'.format(rel, len(new_lines)))
+            chunks.extend('+{}'.format(line) for line in new_lines)
+        elif new is None:
+            old_lines = old.splitlines(keepends=True)
+            chunks.append('--- a/{}\n+++ /dev/null\n@@ -1,{} +0,0 @@\n'.format(rel, len(old_lines)))
+            chunks.extend('-{}'.format(line) for line in old_lines)
+        elif old != new:
+            chunks.extend(difflib.unified_diff(
+                old.splitlines(keepends=True), new.splitlines(keepends=True),
+                fromfile='a/' + rel, tofile='b/' + rel, n=3,
+            ))
+    return ''.join(chunks)
+
+
+def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
+    repo = pathlib.Path(root).resolve()
+    output = _safe_output(repo, args.get('output_path'))
+
+    source_root = pathlib.Path(args.get('source_root') or '.')
+    if not source_root.is_absolute():
+        source_root = repo / source_root
+    source_root = source_root.resolve()
+
+    worktree_rel = str(args.get('worktree_path') or 'canonical/tmp_patch_review_worktree')
+    worktree = pathlib.Path(worktree_rel)
+    if not worktree.is_absolute():
+        worktree = repo / worktree
+    worktree = worktree.resolve()
+
+    diff_rel = str(args.get('diff_path') or 'canonical/tmp_patch_review_diff.diff')
+    diff_path = pathlib.Path(diff_rel)
+    if not diff_path.is_absolute():
+        diff_path = repo / diff_path
+    diff_path = diff_path.resolve()
+
+    timeout_s = int(args.get('timeout_s', 300))
+
+    # Run end-to-end repair first to get a verified patch
+    result = end_to_end_repair(
+        source_root=str(source_root.relative_to(repo)),
+        worktree_path=str(worktree.relative_to(repo)),
+        source_path=args.get('source_path'),
+        test_paths=args.get('test_paths') or [],
+        output_path=str(output.relative_to(repo)),
+        diff_path=str(diff_path.relative_to(repo)),
+        pr_intent_path=str(args.get('pr_intent_path') or 'canonical/tmp_patch_review_pr.json'),
+        timeout_s=timeout_s,
+        max_candidates=int(args.get('max_candidates', 50)),
+    )
+
+    # Run all review gates on the produced diff
+    gate_results = {}
+    review_gates = [
+        'python_review_diff_mutation_gate.py',
+        'python_review_diff_perf_gate.py',
+        'python_review_diff_security_gate.py',
+        'python_review_diff_static_triage.py',
+        'python_review_diff_type_gate.py',
+    ]
+    all_gates_pass = True
+    for gate_name in review_gates:
+        gate_out = output.parent / (gate_name.replace('.py', '') + '_result.json')
+        try:
+            gr = _run_review_gate(gate_name, source_root, diff_path, gate_out, timeout_s)
+            gate_results[gate_name] = gr
+            if gr.get('gate') != 'PASS' and gr.get('verified') is not True:
+                all_gates_pass = False
+        except Exception as exc:
+            gate_results[gate_name] = {'error': str(exc)}
+            all_gates_pass = False
+
+    verified = result.get('verified', False) and all_gates_pass
+
+    artifact = {
+        'schema': SCHEMA,
+        'capability_id': CAPABILITY_ID,
+        'verified': verified,
+        'repair_verified': result.get('verified', False),
+        'all_review_gates_pass': all_gates_pass,
+        'gate_results': gate_results,
+        'patches_tried': result.get('patches_tried', 0),
+        'patches_passing': result.get('patches_passing', 0),
+        'test_passed_count': result.get('test_passed_count', 0),
+        'test_failed_count': result.get('test_failed_count', 0),
+        'diff_sha256': result.get('diff_sha256', ''),
+        'model_dependency_count': 0,
+        'incremental_spend_usd': 0,
+        'output_path': str(output.relative_to(repo)),
+        'output_verified': True,
+    }
+    raw = json.dumps(artifact, sort_keys=True, separators=(',', ':')).encode()
+    output.write_bytes(raw)
+    artifact['output_sha256'] = hashlib.sha256(raw).hexdigest()
+    return {
+        'adapter': 'python_patch_review_supercomposer_v1',
+        'output_path': str(output.relative_to(repo)),
+        'output_sha256': artifact['output_sha256'],
+        'output_verified': True,
+        'verified': artifact['verified'],
+        'model_dependency_count': 0,
+        'incremental_spend_usd': 0,
+    }

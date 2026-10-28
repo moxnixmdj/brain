@@ -30,11 +30,10 @@ Three causes, all mechanical, none of them about understanding the request.
    ``python``, the two words that ARE the question. A capability was chosen
    because both of them need a python file to be there.
 
-   The set of such tokens is derived from the registry, never written by hand:
-   among the 56 entries that declare any precondition, ``available`` appears in
-   82.1%, ``file`` 55.4%, ``source`` 35.7%, ``python`` 28.6% -- then a clear gap
-   to ``test``/``corpus`` at 19.6%. A precondition most of the registry shares
-   discriminates nothing, so it neither scores nor counts as specificity.
+   The set of such tokens is derived from task-eligible registry entries, not a
+   fixed list or historical roster size. A precondition shared by more than a
+   quarter of those entries discriminates little, so it neither scores nor
+   counts as specificity. Diagnostic-only inventories are excluded.
 
 3. **``python.source.symbols.resolve.v1`` demanded a JSON array.** The binder
    hands an adapter what the sentence said; "resolve the symbol top" binds the
@@ -176,7 +175,8 @@ class APreconditionIsNotARequestTests(unittest.TestCase):
         reg = json.loads(
             (ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text(encoding="utf-8")
         )["capabilities"]
-        declaring = [gc._tokens(e.get("requires", [])) for e in reg.values() if e.get("requires")]
+        declaring = [gc._tokens(e.get("requires", [])) for e in reg.values()
+                     if e.get("requires") and e.get("diagnostic_only") is not True]
         counts = {}
         for toks in declaring:
             for t in toks:
@@ -184,13 +184,17 @@ class APreconditionIsNotARequestTests(unittest.TestCase):
         n = float(len(declaring))
         expected = frozenset(t for t, c in counts.items() if c / n > gc._REQUIRES_SHARE_CEILING)
         self.assertEqual(gc._nondiscriminating_requires_tokens(), expected)
-        # The gap that makes the threshold meaningful rather than arbitrary:
-        # measured, 28.6% then 19.6%, nothing in between.
-        shares = sorted((c / n for c in counts.values()), reverse=True)
-        just_below = max(s for s in shares if s <= gc._REQUIRES_SHARE_CEILING)
-        just_above = min(s for s in shares if s > gc._REQUIRES_SHARE_CEILING)
-        self.assertLess(just_below, 0.20)
-        self.assertGreater(just_above, 0.28)
+        self.assertTrue({"available", "file", "source", "python"}.issubset(expected))
+        # Exercise the strict 25% boundary and ensure diagnostic rows cannot
+        # distort frequencies. This survives registry growth unlike old counts.
+        fixture = {
+            "a": {"requires": ["common", "boundary"]},
+            "b": {"requires": ["common"]},
+            "c": {"requires": ["other"]},
+            "d": {"requires": ["last"]},
+            "diag": {"requires": ["boundary"], "diagnostic_only": True},
+        }
+        self.assertEqual(gc._derive_nondiscriminating_requires_tokens(fixture), frozenset({"common"}))
 
     def test_requiring_a_python_file_does_not_outscore_the_capability_asked_for(self):
         goal = (

@@ -281,6 +281,7 @@ def check_routing(model: unified_model.UnifiedModel, rng: random.Random) -> dict
         row
         for row in model.capabilities.values()
         if row.get("kind") in {"BOUND_CAPABILITY", "RECEIPT_BACKED_CAPABILITY"}
+        and row.get("diagnostic_only") is not True
     ]
     pool = [row for row in capabilities if _capability_tokens(row)]
     cases: list[dict[str, Any]] = []
@@ -371,6 +372,12 @@ def check_routing(model: unified_model.UnifiedModel, rng: random.Random) -> dict
             {"false_positives": false_positives},
         )
     )
+    diagnostic_ids = {str(row.get("id")) for row in model.capabilities.values()
+                      if row.get("diagnostic_only") is True}
+    leaked = sorted({cid for postings in model.index.values() for cid in postings
+                     if cid in diagnostic_ids})
+    cases.append(_case("diagnostics_excluded_from_task_routing_index", not leaked,
+                       "STRUCTURAL_NEGATIVE_CONTROL", {"leaked": leaked, "diagnostics": len(diagnostic_ids)}))
     return _category("ROUTING_FRESH_GOALS", cases)
 
 

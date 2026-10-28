@@ -51,18 +51,26 @@ def _files(repo,root,tests,failure):
 def _purge(paths):
  for p in paths:_PATCH._purge_source_bytecode(p)
 def _diff(repo,p,a,b):return ''.join(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),fromfile='a/'+_rel(repo,p),tofile='b/'+_rel(repo,p)))
-def _best(repo,source,tests,argv,timeout,score,limit,touched,env):
+def _best(repo,source,tests,argv,timeout,score,limit,touched,env,test_originals,budget):
  cur=source.read_bytes()
  try:text=cur.decode();tree=ast.parse(text)
  except Exception:return None,0
  nums,strings=_PATCH._test_literals(tests);best=None;tested=0
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
-  if tested>=limit:break
+  if tested>=limit or budget.expired():break
   cand=_PATCH._render_candidate(text,key,replacer)
   if not cand or cand==text:continue
-  tested+=1;source.write_text(cand);_purge(set(touched)|{source});r=_PATCH._run_tests(repo,argv,timeout,env);source.write_bytes(cur);_purge(set(touched)|{source});s=_score(r)
+  tested+=1
+  try:
+   candidate_bytes=cand.encode();source.write_bytes(candidate_bytes);_purge(set(touched)|{source})
+   protected={**test_originals,**{p:p.read_bytes() for p in touched},source:candidate_bytes}
+   r=_PATCH._run_tests_guarded(repo,argv,budget.timeout(timeout),env,protected)
+  finally:
+   # This file may not yet be in the accepted-edit originals map.
+   source.write_bytes(cur);_purge(set(touched)|{source})
+  s=_score(r)
   if s is None or s>=score:continue
-  rec={'source':source,'bytes':cand.encode(),'score':s,'mutation':desc,'sha256':_sha(cand.encode())}
+  rec={'source':source,'bytes':candidate_bytes,'score':s,'mutation':desc,'sha256':_sha(candidate_bytes)}
   return rec,tested
  return best,tested
 def _source_env(src):
@@ -72,41 +80,52 @@ def _source_env(src):
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise RepairLoopError('ARGS_NOT_OBJECT')
+ budget=_PATCH.WallBudget(args.get('max_wall_time_s'))
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get('source_root','.'));tests=[_safe_file(repo,x) for x in (args.get('test_paths') or [])]
  if not tests:raise RepairLoopError('TEST_PATHS_REQUIRED')
  argv=[str(x) for x in (args.get('test_argv') or _PATCH.suite_argv(sys.executable,*tests))]
  timeout=max(1,min(int(args.get('timeout_s',30)),300));rounds_max=max(1,min(int(args.get('max_rounds',6)),20));files_max=max(1,min(int(args.get('max_files',12)),100));per=max(1,min(int(args.get('max_candidates_per_file',250)),5000));total_max=max(1,min(int(args.get('max_total_candidates',2000)),50000))
  out=(repo/str(args.get('output_path') or '')).resolve()
  if out==repo or repo not in out.parents:raise RepairLoopError('OUTPUT_PATH_OUTSIDE_REPOSITORY')
+ oracle_files=set(tests)|_PATCH._argv_python_files(repo,argv)
+ _PATCH._reject_output_overlap(out,src,oracle_files)
+ test_originals={p:p.read_bytes() for p in oracle_files}
  env=_source_env(src)
- base=_PATCH._run_tests(repo,argv,timeout,env);score=_score(base)
+ base=_PATCH._run_tests_guarded(repo,argv,budget.timeout(timeout),env,test_originals);score=_score(base)
  if base.get('timed_out'):raise RepairLoopError('BASELINE_TIMEOUT')
  if base.get('returncode')==0:raise RepairLoopError('BASELINE_ALREADY_PASSES')
  if score is None:raise RepairLoopError('BASELINE_FAILURE_METRIC_UNPARSEABLE')
  originals={};touched=set();accepted=[];rrecs=[];tested_total=0;final_bytes={};vreplays=[];status='OPEN__NO_COMPLETE_REPAIR_IN_BOUNDED_SEARCH';current=base
  try:
   for ri in range(1,rounds_max+1):
-   fs=_files(repo,src,tests,_text(current))[:files_max];best=None;round_tested=0
+   fs=_files(repo,src,sorted(oracle_files),_text(current))[:files_max];best=None;round_tested=0
    for source in fs:
     rem=total_max-tested_total
     if rem<=0:break
-    cand,n=_best(repo,source,tests,argv,timeout,score,min(per,rem),touched,env);tested_total+=n;round_tested+=n
+    cand,n=_best(repo,source,tests,argv,timeout,score,min(per,rem),touched,env,test_originals,budget);tested_total+=n;round_tested+=n
     if cand is not None:
      best=cand
      break
-   if best is None:status='OPEN__NO_STRICTLY_IMPROVING_CANDIDATE';break
-   p=best['source'];originals.setdefault(p,p.read_bytes());p.write_bytes(best['bytes']);touched.add(p);_purge(touched);current=_PATCH._run_tests(repo,argv,timeout,env);ns=_score(current)
+   if best is None:status='OPEN__WALL_TIME_BUDGET_EXHAUSTED' if budget.expired() else 'OPEN__NO_STRICTLY_IMPROVING_CANDIDATE';break
+   p=best['source'];originals.setdefault(p,p.read_bytes());p.write_bytes(best['bytes']);touched.add(p);_purge(touched)
+   protected={**test_originals,**{q:q.read_bytes() for q in touched}}
+   current=_PATCH._run_tests_guarded(repo,argv,budget.timeout(timeout),env,protected);ns=_score(current)
+   if current.get('timed_out') and budget.expired():raise _PATCH.WallBudgetExhausted('WALL_TIME_BUDGET_EXHAUSTED')
    if ns is None or ns>=score:raise RepairLoopError('ACCEPTED_CANDIDATE_DID_NOT_REPLAY_IMPROVEMENT')
    accepted.append({'round':ri,'source_path':_rel(repo,p),'mutation':best['mutation'],'candidate_sha256':best['sha256'],'score_before':score,'score_after':ns});rrecs.append({'round':ri,'localized_file_count':len(fs),'tested_candidate_count':round_tested,'score_before':score,'score_after':ns});score=ns
    if score==0:status='PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND';break
   if score==0:
    for _ in range(2):
-    _purge(touched);rr=_PATCH._run_tests(repo,argv,timeout,env);rs=_score(rr);vreplays.append({'returncode':rr.get('returncode'),'timed_out':rr.get('timed_out'),'failure_score':rs})
+    _purge(touched);protected={**test_originals,**{q:q.read_bytes() for q in touched}}
+    rr=_PATCH._run_tests_guarded(repo,argv,budget.timeout(timeout),env,protected);rs=_score(rr);vreplays.append({'returncode':rr.get('returncode'),'timed_out':rr.get('timed_out'),'failure_score':rs})
+    if rr.get('timed_out') and budget.expired():raise _PATCH.WallBudgetExhausted('WALL_TIME_BUDGET_EXHAUSTED')
     if rr.get('returncode')!=0 or rs!=0:raise RepairLoopError('FINAL_REPLAY_FAILED')
    final_bytes={p:p.read_bytes() for p in touched}
+ except _PATCH.WallBudgetExhausted:
+  status='OPEN__WALL_TIME_BUDGET_EXHAUSTED'
  finally:
   for p,b in originals.items():p.write_bytes(b)
   _purge(originals)
  patches=[{'source_path':_rel(repo,p),'original_sha256':_sha(originals[p]),'candidate_sha256':_sha(final_bytes[p]),'unified_diff':_diff(repo,p,originals[p],final_bytes[p])} for p in sorted(final_bytes,key=lambda q:_rel(repo,q))]
- result={'schema':SCHEMA,'status':status,'pass':status.startswith('PASS__'),'baseline_failure_score':_score(base),'rounds':rrecs,'accepted_edit_count':len(accepted),'accepted_edits':accepted,'tested_candidate_count':tested_total,'final_verification_replays':vreplays,'patches':patches,'source_restored':all(p.read_bytes()==b for p,b in originals.items()),'model_dependency_count':0,'external_capability_provider_count':0,'incremental_spend_usd':0,'hard_nonclaims':['NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS','NO_SYNTACTICALLY_UNIVERSAL_EDIT_BASIS','NO_NON_PYTHON_SUPPORT','NO_HIDDEN_REQUIREMENTS_OR_MERGEABILITY_PROOF','NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY','NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT']}
+ result={'schema':SCHEMA,'max_wall_time_s':budget.limit,'status':status,'pass':status.startswith('PASS__'),'baseline_failure_score':_score(base),'rounds':rrecs,'accepted_edit_count':len(accepted),'accepted_edits':accepted,'tested_candidate_count':tested_total,'final_verification_replays':vreplays,'patches':patches,'source_restored':all(p.read_bytes()==b for p,b in originals.items()),'model_dependency_count':0,'external_capability_provider_count':0,'incremental_spend_usd':0,'hard_nonclaims':['NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS','NO_SYNTACTICALLY_UNIVERSAL_EDIT_BASIS','NO_NON_PYTHON_SUPPORT','NO_HIDDEN_REQUIREMENTS_OR_MERGEABILITY_PROOF','NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY','NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT']}
  out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n');result['output_path']=_rel(repo,out);result['output_sha256']=_sha(out.read_bytes());result['output_verified']=True;return result

@@ -29,8 +29,9 @@ Laws:
 * fail closed: PATH_*, DIFF_EMPTY, ANCHOR_NOT_DIRECTORY, GIT_UNAVAILABLE,
   DIFF_DOES_NOT_APPLY, BENCH_FILE_MISSING, BENCH_CALLABLE_MISSING,
   BENCH_EXPLODED (child nonzero/timeout), TIMEOUT.
-* zero trust in ambient environment: PYTHONDONTWRITEBYTECODE, isolated
-  cwd, no inherited sys.path roots.
+* The copies are not an OS sandbox: benchmark code runs with host privileges,
+  can access external files and can spoof child output. A passing local result
+  is not independent attestation or proof that the benchmark covers the diff.
 
 Inputs (kwargs, repo-confined):
   anchor_path        clean tree the diff was cut against (read-only)
@@ -56,6 +57,7 @@ import shutil
 import statistics
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 SCHEMA = "PROJECT_BRAIN_DIFF_PERF_GATE_V1"
@@ -96,20 +98,22 @@ print(json.dumps({"runs_ns": runs, "calib_ns": cal}))
 '''
 
 
-def _fail(reason: str) -> None:
-    raise SystemExit(json.dumps({"error": True,
-                                 "capability": "python.review.diff_perf_gate.v1",
-                                 "reason": reason}, indent=2, sort_keys=True))
+def _fail(reason: str) -> dict:
+    return {
+        "error": True,
+        "capability": "python.review.diff_perf_gate.v1",
+        "reason": reason,
+    }
 
 
-def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path:
+def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path | dict:
     if not rel or not isinstance(rel, str):
-        _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
+        return _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
     p = (repo / rel).resolve()
     if p != repo and repo not in p.parents:
-        _fail("PATH_ESCAPE:" + rel)
+        return _fail("PATH_ESCAPE:" + rel)
     if must_exist and not p.exists():
-        _fail("PATH_MISSING:" + rel)
+        return _fail("PATH_MISSING:" + rel)
     return p
 
 
@@ -121,7 +125,7 @@ def _bench(tree: Path, bench_rel: str, python_exe: str, repeats: int,
            timeout_s: int) -> list:
     target = tree / bench_rel
     if not target.is_file():
-        _fail("BENCH_FILE_MISSING:" + bench_rel)
+        return _fail("BENCH_FILE_MISSING:" + bench_rel)
     env = dict(os.environ)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     try:
@@ -129,12 +133,12 @@ def _bench(tree: Path, bench_rel: str, python_exe: str, repeats: int,
                               cwd=tree, capture_output=True, text=True,
                               timeout=timeout_s, env=env)
     except subprocess.TimeoutExpired:
-        _fail("TIMEOUT")
+        return _fail("TIMEOUT")
     if proc.returncode != 0:
         try:
             doc = json.loads(proc.stdout.strip().splitlines()[-1])
             if doc.get("error") == "BENCH_CALLABLE_MISSING":
-                _fail("BENCH_CALLABLE_MISSING:" + bench_rel)
+                return _fail("BENCH_CALLABLE_MISSING:" + bench_rel)
         except (json.JSONDecodeError, IndexError, KeyError):
             pass
         _fail("BENCH_EXPLODED:rc=" + str(proc.returncode) + ":" +
@@ -142,13 +146,14 @@ def _bench(tree: Path, bench_rel: str, python_exe: str, repeats: int,
     try:
         doc = json.loads(proc.stdout.strip().splitlines()[-1])
     except (json.JSONDecodeError, IndexError):
-        _fail("BENCH_OUTPUT_NOT_JSON")
+        return _fail("BENCH_OUTPUT_NOT_JSON")
     runs = doc.get("runs_ns")
     calib = doc.get("calib_ns")
     if (not isinstance(runs, list) or len(runs) != repeats
-            or not isinstance(calib, list) or len(calib) != repeats):
-        _fail("BENCH_OUTPUT_SHAPE_UNEXPECTED")
-    return [int(x) for x in runs], [int(x) for x in calib]
+            or not isinstance(calib, list) or len(calib) != repeats
+            or any(type(value) is not int or value <= 0 for value in runs + calib)):
+        return _fail("BENCH_OUTPUT_SHAPE_UNEXPECTED")
+    return runs, calib
 
 
 def run(args, root):
@@ -156,16 +161,33 @@ def run(args, root):
     args = dict(args or {})
     anchor_rel = str(args.get("anchor_path") or "")
     anchor_abs = _safe_path(repo, anchor_rel, must_exist=True)
+    if isinstance(anchor_abs, dict): return anchor_abs
     if not anchor_abs.is_dir():
-        _fail("ANCHOR_NOT_DIRECTORY")
+        return _fail("ANCHOR_NOT_DIRECTORY")
     diff_rel = str(args.get("diff_path") or "")
     diff_abs = _safe_path(repo, diff_rel, must_exist=True)
+    if isinstance(diff_abs, dict): return diff_abs
     diff_text = diff_abs.read_text(encoding="utf-8", errors="replace")
     if not diff_text.strip():
-        _fail("DIFF_EMPTY")
+        return _fail("DIFF_EMPTY")
     bench_rel = str(args.get("bench_path") or "")
     out_rel = str(args.get("output_path") or "")
     out_abs = _safe_path(repo, out_rel)
+    if isinstance(out_abs, dict): return out_abs
+    if (out_abs == diff_abs or out_abs == anchor_abs or anchor_abs in out_abs.parents
+            or (out_abs.exists() and (out_abs.is_dir() or out_abs.stat().st_nlink > 1))):
+        return _fail("OUTPUT_OVERLAPS_INPUT")
+    bench_arg = Path(bench_rel)
+    bench_in_anchor = (anchor_abs / bench_arg).resolve()
+    if (not bench_rel or bench_arg.is_absolute() or bench_in_anchor == anchor_abs
+            or anchor_abs not in bench_in_anchor.parents):
+        return _fail("BENCH_PATH_ESCAPE")
+    # Refuse symlinked benchmark components rather than resolving outside the copy.
+    current = anchor_abs
+    for part in bench_arg.parts:
+        current = current / part
+        if current.is_symlink():
+            return _fail("BENCH_PATH_ESCAPE")
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
     repeats = max(3, int(args.get("repeats") or 5))
@@ -174,15 +196,12 @@ def run(args, root):
     git_probe = subprocess.run(["git", "--version"], capture_output=True, text=True,
                                timeout=min(timeout_s, 30))
     if git_probe.returncode != 0:
-        _fail("GIT_UNAVAILABLE")
-    _safe_path(repo, bench_rel)  # confinement; existence checked per tree
-
-    scratch_a = out_abs.parent / ("_perf_anchor_" + _sha256(diff_text.encode())[:12])
-    scratch_p = out_abs.parent / ("_perf_patched_" + _sha256(diff_text.encode())[:12])
-    for s in (scratch_a, scratch_p):
-        if s.exists():
-            shutil.rmtree(s)
-    try:
+        return _fail("GIT_UNAVAILABLE")
+    out_abs.parent.mkdir(parents=True, exist_ok=True)
+    # Never remove a predictable name from the caller's output directory.
+    with tempfile.TemporaryDirectory(prefix="_perf_", dir=out_abs.parent) as scratch:
+        scratch_a = Path(scratch) / "anchor"
+        scratch_p = Path(scratch) / "patched"
         shutil.copytree(anchor_abs, scratch_a,
                         ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
         shutil.copytree(anchor_abs, scratch_p,
@@ -196,14 +215,10 @@ def run(args, root):
                                  cwd=scratch_p, capture_output=True, text=True,
                                  timeout=min(timeout_s, 60))
         if applied.returncode != 0:
-            _fail("DIFF_APPLY_FAILED_AFTER_CHECK")
+            return _fail("DIFF_APPLY_FAILED_AFTER_CHECK")
 
         anchor_runs, anchor_cal = _bench(scratch_a, bench_rel, python_exe, repeats, timeout_s)
         patched_runs, patched_cal = _bench(scratch_p, bench_rel, python_exe, repeats, timeout_s)
-    finally:
-        for s in (scratch_a, scratch_p):
-            if s.exists():
-                shutil.rmtree(s, ignore_errors=True)
 
     # best-of estimator (pyperf-style: min of N is the noise-robust intrinsic
     # cost), box-normalized by the fixed calibrator measured in the SAME child

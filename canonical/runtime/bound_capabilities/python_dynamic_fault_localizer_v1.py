@@ -1,5 +1,5 @@
 from __future__ import annotations
-import ast,hashlib,json,math,os,pathlib,subprocess,sys,textwrap
+import ast,hashlib,json,math,os,pathlib,sys,textwrap
 from typing import Any,Mapping
 import importlib.util
 def _load_patch():
@@ -33,33 +33,45 @@ def _safe_dir(repo,raw):
  return p
 def _trace_one(repo,test,timeout,max_events,env=None):
  code=_PATCH.SUITE_RUNNER+r'''import json,pathlib,runpy,sys,traceback
-repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); seen={}; events=0
+repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); seen={}; events=0; paths={}
 def tr(frame,event,arg):
  global events
- if event!="line" or events>=cap:return tr
- try:p=pathlib.Path(frame.f_code.co_filename).resolve()
- except Exception:return tr
- if p.is_file() and repo in p.parents and p.suffix==".py":
-  rel=str(p.relative_to(repo)).replace("\\","/"); key=(rel,frame.f_lineno,frame.f_code.co_name)
+ if events>=cap:return None
+ name=frame.f_code.co_filename
+ if name not in paths:
+  try:
+   p=pathlib.Path(name).resolve()
+   paths[name]=str(p.relative_to(repo)).replace("\\","/") if p.is_file() and repo in p.parents and p.suffix==".py" else None
+  except Exception:paths[name]=None
+ rel=paths[name]
+ # Returning None prevents line tracing in pytest, stdlib and dependencies;
+ # the global trace still observes any calls they make into project files.
+ if rel is None:return None
+ if event=="line":
+  key=(rel,frame.f_lineno,frame.f_code.co_name)
   seen[key]=seen.get(key,0)+1;events+=1
  return tr
-ok=True;tb=[]
+ok=True;tb=[];runner_error=""
 sys.settrace(tr)
 try:
  _brain_run_suite(target)
+except _BrainTestRunnerError as e:
+ ok=False;runner_error=str(e)
 except SystemExit as e:
  ok=(e.code in (None,0,False))
  if not ok:tb=traceback.extract_tb(e.__traceback__)
 except BaseException as e:
  ok=False;tb=traceback.extract_tb(e.__traceback__)
 finally:sys.settrace(None)
-print("__BRAIN_TRACE__"+json.dumps({"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":events},sort_keys=True))
+print("__BRAIN_TRACE__"+json.dumps({"pass":ok,"runner_error":runner_error,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":events},sort_keys=True))
 '''
- try:r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
- except subprocess.TimeoutExpired:raise FaultLocalizerError("TEST_TIMEOUT")
- marker="__BRAIN_TRACE__"; lines=[x for x in r.stdout.splitlines() if x.startswith(marker)]
+ r=_PATCH._run_process(repo,[sys.executable,"-c",code,str(repo),str(test),str(max_events)],timeout,env)
+ if r["timed_out"]:raise FaultLocalizerError("TEST_TIMEOUT")
+ marker="__BRAIN_TRACE__"; lines=[x for x in r["stdout"].splitlines() if x.startswith(marker)]
  if not lines: raise FaultLocalizerError("TRACE_OUTPUT_MISSING")
- out=json.loads(lines[-1][len(marker):]);out["returncode"]=r.returncode;return out
+ out=json.loads(lines[-1][len(marker):])
+ if out.get("runner_error"):raise FaultLocalizerError("TEST_RUNNER_INFRASTRUCTURE:"+out["runner_error"])
+ out["returncode"]=r["returncode"];return out
 def _defs_and_lines(path):
   # A file under source_root may be third-party and use syntax this interpreter cannot parse
   # (PEP 695 type aliases need 3.12). Such a file cannot be a repair candidate or a
@@ -97,9 +109,16 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
  env=_source_env(src,*tests)
  if not tests:raise FaultLocalizerError("TEST_PATHS_REQUIRED")
+ out=(repo/str(args.get("output_path") or "")).resolve()
+ if out==repo or repo not in out.parents:raise FaultLocalizerError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+ _PATCH._reject_output_overlap(out,src,tests)
+ protected={p:p.read_bytes() for p in tests}
+ budget=_PATCH.WallBudget(args.get("max_wall_time_s"))
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_events=max(100,min(int(args.get("max_trace_events",200000)),1000000));max_lines=max(1,min(int(args.get("max_ranked_lines",100)),1000));max_symbols=max(1,min(int(args.get("max_ranked_symbols",50)),500))
  traces=[]
- for t in tests:traces.append({"test_path":_rel(repo,t),**_trace_one(repo,t,timeout,max_events,env)})
+ for t in tests:
+  try:traces.append({"test_path":_rel(repo,t),**_trace_one(repo,t,budget.timeout(timeout),max_events,env)})
+  finally:_PATCH._check_protected_bytes(protected)
  F=sum(not x["pass"] for x in traces);P=sum(x["pass"] for x in traces)
  if F==0:raise FaultLocalizerError("NO_FAILING_TEST")
  line_counts={}
@@ -114,7 +133,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  ranked=[]
  for (rel,line,func),c in line_counts.items():
   p=(repo/rel).resolve()
-  if p==repo or repo not in p.parents or not p.is_file() or p.suffix!=".py" or p.name.startswith("test_"):continue
+  if (p==repo or repo not in p.parents or not p.is_file() or p.suffix!=".py"
+      or p in tests or p.name.startswith("test_") or p.name.endswith("_test.py")):continue
   f=c["fail"];q=c["pass"];score=(f/math.sqrt(F*(f+q))) if f else 0.0
   reasons=[]
   if f and not q:reasons.append("FAIL_ONLY_EXECUTION")
@@ -137,9 +157,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
    for name in sorted(loads):
     for dl in d["defs"].get(name,[]):
      if dl<=max(covered):backward.append({"name":name,"definition_line":dl,"used_in_suspicious_region":True})
-   symbols.append({"path":rel,"symbol":d["name"],"kind":d["kind"],"lineno":d["lineno"],"end_lineno":d["end_lineno"],"score":maxscore,"covered_suspicious_lines":covered,"loaded_names":sorted(loads),"stored_names":sorted(stores),"backward_def_use":backward,"reasons":["DYNAMIC_FAILING_EXECUTION"]+(["FAIL_ONLY_REGION"] if any("FAIL_ONLY_EXECUTION" in x["reasons"] for x in rows) else [])})
+   fail_observed=any(x["fail_coverage"]>0 for x in rows)
+   symbols.append({"path":rel,"symbol":d["name"],"kind":d["kind"],"lineno":d["lineno"],"end_lineno":d["end_lineno"],"score":maxscore,"covered_suspicious_lines":covered,"loaded_names":sorted(loads),"stored_names":sorted(stores),"backward_def_use":backward,"fail_execution_observed":fail_observed,"reasons":["DYNAMIC_FAILING_EXECUTION" if fail_observed else "PASS_ONLY_EXECUTION"]+(["FAIL_ONLY_REGION"] if any("FAIL_ONLY_EXECUTION" in x["reasons"] for x in rows) else [])})
  symbols.sort(key=lambda x:(-x["score"],x["path"],x["lineno"],x["symbol"]));symbols=symbols[:max_symbols]
- result={"schema":SCHEMA,"status":"PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION","pass":True,"failing_test_count":F,"passing_test_count":P,"test_traces":traces,"ranked_lines":ranked,"ranked_symbols":symbols,"localization_basis":"FAILING_VS_PASSING_DYNAMIC_LINE_SPECTRUM_PLUS_TRACEBACK_PLUS_AST_SYMBOL_OWNERSHIP_PLUS_BACKWARD_DEF_USE","model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_GENERAL_SEMANTIC_CAUSALITY_PROOF","NO_INTERPROCEDURAL_VALUE_PROVENANCE_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_PATCH_CORRECTNESS_OR_MERGEABILITY_CLAIM","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
- out=(repo/str(args.get("output_path") or "")).resolve()
- if out==repo or repo not in out.parents:raise FaultLocalizerError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+ localized=any(s["fail_execution_observed"] for s in symbols)
+ result={"schema":SCHEMA,"status":"PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION" if localized else "OPEN__NO_FAILING_SOURCE_SYMBOL_OBSERVED","pass":localized,"failing_test_count":F,"passing_test_count":P,"test_traces":traces,"ranked_lines":ranked,"ranked_symbols":symbols,"localization_basis":"FAILING_VS_PASSING_DYNAMIC_LINE_SPECTRUM_PLUS_TRACEBACK_PLUS_AST_SYMBOL_OWNERSHIP_PLUS_BACKWARD_DEF_USE","model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_GENERAL_SEMANTIC_CAUSALITY_PROOF","NO_INTERPROCEDURAL_VALUE_PROVENANCE_COMPLETENESS","NO_SUBPROCESS_TRACE_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_PATCH_CORRECTNESS_OR_MERGEABILITY_CLAIM","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
  out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n");result["output_path"]=_rel(repo,out);result["output_sha256"]=hashlib.sha256(out.read_bytes()).hexdigest();result["output_verified"]=True;return result

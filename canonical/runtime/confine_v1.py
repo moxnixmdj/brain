@@ -68,6 +68,7 @@ can consume the machine.
 """
 from __future__ import annotations
 
+from collections.abc import Mapping
 import os
 import shutil
 import subprocess
@@ -96,6 +97,19 @@ def m(*a):
     return True
 if not m("-t", "tmpfs", "none", BASE):
     sys.exit(90)
+# /dev/null inside the chroot so Python/pytest can open os.devnull.
+os.makedirs(BASE + "/dev", exist_ok=True)
+try:
+    os.remove(BASE + "/dev/null")
+except OSError:
+    pass
+# Open for read+write so FDCapture can dup2 it onto stdout/stderr.
+f = open(BASE + "/dev/null", "a+")
+f.close()
+try:
+    os.chmod(BASE + "/dev/null", 0o666)
+except OSError:
+    pass
 for d in ("project", "work"):
     os.makedirs(BASE + "/" + d.lstrip("/"), exist_ok=True)
 for s in {s for s in __MOUNTS__ if os.path.isdir(s)}:
@@ -104,6 +118,7 @@ for s in {s for s in __MOUNTS__ if os.path.isdir(s)}:
     subprocess.run(["mount", "-o", "remount,ro,bind", BASE + s],
                    capture_output=True)
 m("--bind", PROJ, BASE + "/project")
+__EXTRA_MOUNTS__
 # A network namespace is not enough on its own. With no /etc in the
 # chroot there is no resolv.conf, so every name fails to resolve and a
 # program with perfectly good connectivity reports it has none --
@@ -177,16 +192,20 @@ def available() -> bool:
         "    sys.exit(1)\n"
     )
     try:
-        r = subprocess.run(["unshare", "-r", "-m", sys.executable, "-c", probe],
+        r = subprocess.run(["unshare", "-r", "-m", "-p", "--fork", sys.executable, "-c", probe],
                            timeout=60, capture_output=True, text=True)
         return r.returncode == 0
     except Exception:
         return False
 
 
-def run(program: str, root: str, timeout: int = 300,
-        network: bool = False) -> dict:
-    """Run a program confined to the project. Only the project is writable.
+def run(program: str | None = None, argv: list[str] | None = None,
+        root: str | None = None, timeout: int = 300,
+        network: bool = False,
+        env: Mapping[str, str] | None = None,
+        extra_bind_mounts: list[tuple[str, str]] | None = None) -> dict:
+    """Run a program or argv list confined to the project. Only the project
+    is writable; system dirs are read-only binds; network is off by default.
 
     `network` is off by default and must be ASKED FOR.
 
@@ -201,7 +220,21 @@ def run(program: str, root: str, timeout: int = 300,
     declares that this task needs the network, and that declaration is
     recorded in the receipt, so "which runs could talk to the outside"
     is answerable afterwards rather than inferred.
+
+    When ``argv`` is given instead of ``program``, a thin wrapper is written
+    that execs ``argv`` with cwd=/project inside the chroot, so ordinary
+    command lines (e.g. ``python -m pytest ...``) run confined without
+    being rewritten as a single program source string.
     """
+    if program is None and argv is None:
+        return {"schema": SCHEMA, "verdict": "INDETERMINATE",
+                "detail": "program or argv required", "exit_status": None}
+    if program is not None and argv is not None:
+        return {"schema": SCHEMA, "verdict": "INDETERMINATE",
+                "detail": "program and argv are mutually exclusive",
+                "exit_status": None}
+    if root is None:
+        root = os.getcwd()
     if not Path(root).is_dir():
         return {"schema": SCHEMA, "verdict": "INDETERMINATE",
                 "detail": f"{root!r} is not a directory", "exit_status": None}
@@ -212,6 +245,14 @@ def run(program: str, root: str, timeout: int = 300,
                 "exit_status": None,
                 "note": "caller must decide whether to run unconfined"}
 
+    if argv is not None:
+        program = (
+            "import os, subprocess, sys\n"
+            "for _k, _v in " + repr(dict(env or {})) + ".items():\n"
+            "    os.environ[_k] = str(_v)\n"
+            "sys.exit(subprocess.run(" + repr(list(argv)) + ", cwd=\"/project\").returncode)\n"
+        )
+
     with tempfile.TemporaryDirectory(prefix="brain_confine_") as tmp:
         base = os.path.join(tmp, "root")
         os.makedirs(base, exist_ok=True)
@@ -219,13 +260,27 @@ def run(program: str, root: str, timeout: int = 300,
         Path(script).write_text(
             program if program.endswith("\n") else program + "\n")
         helper = _HELPER.replace("__MOUNTS__", repr(list(_MOUNTS)))
+        # Extra bind mounts are applied inside the helper after the standard
+        # system mounts, before the root is remounted read-only.
+        if extra_bind_mounts:
+            mount_lines = []
+            for src, dst in extra_bind_mounts:
+                mount_lines.append(
+                    'm("--bind", ' + repr(src) + ", BASE + " + repr(dst) + ")\n"
+                    'subprocess.run(["mount", "-o", "remount,ro,bind", BASE + '
+                    + repr(dst) + "], capture_output=True)\n")
+            extra_code = "".join(mount_lines)
+        else:
+            extra_code = ""
+        helper = helper.replace("__EXTRA_MOUNTS__", extra_code)
         helper_path = os.path.join(tmp, "helper.py")
         Path(helper_path).write_text(helper)
         try:
             r = subprocess.run(
-                ["unshare", "-r", "-m"] + ([] if network else ["-n"]) + \
-                [sys.executable, helper_path, base,
-                 os.path.realpath(root), script, "1" if network else "0"],
+                ["unshare", "-r", "-m", "-p", "--fork"]
+                + ([] if network else ["-n"])
+                + [sys.executable, helper_path, base,
+                   os.path.realpath(root), script, "1" if network else "0"],
                 timeout=timeout, capture_output=True, text=True)
             return {"schema": SCHEMA,
                     "verdict": "OK" if r.returncode == 0 else "FAILED",

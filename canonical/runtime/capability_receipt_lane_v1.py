@@ -242,13 +242,81 @@ def contract_shape(path: str | os.PathLike) -> tuple[str, str] | None:
 
 
 GITHUB_OIDC_ISSUER = "https://token.actions.githubusercontent.com"
+GITHUB_OIDC_JWKS_URL = "https://token.actions.githubusercontent.com/.well-known/jwks.json"
+
+_JWKS_CACHE: dict[str, Any] | None = None
 
 
-def run_reference_is_attested(run_reference: Any) -> bool:
+def _fetch_jwks() -> dict[str, Any]:
+    """Fetch GitHub's OIDC JWKS. Cached in memory after first fetch."""
+    global _JWKS_CACHE
+    if _JWKS_CACHE is not None:
+        return _JWKS_CACHE
+    try:
+        import urllib.request
+        with urllib.request.urlopen(GITHUB_OIDC_JWKS_URL, timeout=10) as resp:
+            _JWKS_CACHE = json.loads(resp.read().decode("utf-8"))
+        return _JWKS_CACHE
+    except Exception:
+        _JWKS_CACHE = {}
+        return _JWKS_CACHE
+
+
+def verify_oidc_jwt(token: str, audience: str | None = None) -> dict[str, Any] | None:
+    """Verify a GitHub OIDC JWT signature against the provider's JWKS.
+
+    Returns the verified claims dict on success, None on any failure.
+    A locally forged token cannot pass: only `token.actions.githubusercontent.com`
+    can sign with the private key matching the published JWKS.
+    """
+    if not token or not isinstance(token, str):
+        return None
+    try:
+        import jwt  # PyJWT
+    except ImportError:
+        return None
+    try:
+        unverified = jwt.get_unverified_header(token)
+    except Exception:
+        return None
+    kid = unverified.get("kid")
+    if not kid:
+        return None
+    jwks = _fetch_jwks()
+    keys = jwks.get("keys") if isinstance(jwks, dict) else None
+    if not isinstance(keys, list):
+        return None
+    matching = [k for k in keys if k.get("kid") == kid]
+    if not matching:
+        return None
+    jwk = matching[0]
+    try:
+        claims = jwt.decode(
+            token,
+            jwk,
+            algorithms=["RS256"],
+            issuer=GITHUB_OIDC_ISSUER,
+            audience=audience,
+            options={"require": ["exp", "iat", "nbf"]},
+        )
+    except Exception:
+        return None
+    if not isinstance(claims, dict):
+        return None
+    if claims.get("iss") != GITHUB_OIDC_ISSUER:
+        return None
+    return claims
+
+
+def run_reference_is_attested(run_reference: Any,
+                              oidc_token: str | None = None) -> bool:
     """True only for a reference carrying GitHub-SIGNED OIDC claims.
 
-    A local process can write `{"github_run_id": 1}`; it cannot obtain a token signed by
-    `token.actions.githubusercontent.com`.  Only the latter is independence.
+    When ``oidc_token`` is supplied, the raw JWT is verified against
+    GitHub's OIDC JWKS -- a locally forged token cannot pass.  When no
+    token is supplied, falls back to the issuer-claim check (weaker: a
+    local process can fabricate claims but cannot obtain a GitHub-signed
+    token).
     """
     if not isinstance(run_reference, Mapping):
         return False
@@ -257,7 +325,13 @@ def run_reference_is_attested(run_reference: Any) -> bool:
         return False
     if claims.get("iss") != GITHUB_OIDC_ISSUER:
         return False
-    return bool(claims.get("repository") and claims.get("run_id"))
+    if not bool(claims.get("repository") and claims.get("run_id")):
+        return False
+    if oidc_token is not None:
+        verified = verify_oidc_jwt(oidc_token, audience=claims.get("repository"))
+        if verified is None:
+            return False
+    return True
 
 
 def _changed_paths(root: str) -> set[str] | None:
@@ -419,7 +493,8 @@ def verify_producer_receipts(root: str, ran_by: str,
     """
     import glob as _glob
 
-    attested = run_reference_is_attested(run_reference)
+    oidc_token = run_reference.get("oidc_token") if isinstance(run_reference, Mapping) else None
+    attested = run_reference_is_attested(run_reference, oidc_token=oidc_token)
     produced: list[str] = []
     reproduced: list[str] = []
     mismatched: list[str] = []

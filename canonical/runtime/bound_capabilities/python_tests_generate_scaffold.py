@@ -61,20 +61,22 @@ _FIXTURE_BY_ANNOTATION = {
 }
 
 
-def _fail(reason: str) -> None:
-    raise SystemExit(json.dumps({"error": True,
-                                 "capability": "python.tests.generate.scaffold.v1",
-                                 "reason": reason}, indent=2, sort_keys=True))
+def _fail(reason: str) -> dict:
+    return {
+        "error": True,
+        "capability": "python.tests.generate.scaffold.v1",
+        "reason": reason,
+    }
 
 
-def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path:
+def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path | dict:
     if not rel or not isinstance(rel, str):
-        _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
+        return _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
     p = (repo / rel).resolve()
     if p != repo and repo not in p.parents:
-        _fail("PATH_ESCAPE:" + rel)
+        return _fail("PATH_ESCAPE:" + rel)
     if must_exist and not p.exists():
-        _fail("PATH_MISSING:" + rel)
+        return _fail("PATH_MISSING:" + rel)
     return p
 
 
@@ -193,11 +195,11 @@ def _load_index(source_abs: Path, cached: Path | None, source_root: str) -> tupl
     if cached is not None:
         art = json.loads(cached.read_text(encoding="utf-8"))
         if art.get("schema") != "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1":
-            _fail("INDEX_CACHE_SCHEMA_MISMATCH")
+            return _fail("INDEX_CACHE_SCHEMA_MISMATCH")
         if str(art.get("source_root")) != str(source_root):
             _fail("INDEX_CACHE_SOURCE_ROOT_MISMATCH:" + str(art.get("source_root")))
         if int((art.get("totals") or {}).get("files", 0)) <= 0:
-            _fail("INDEX_CACHE_TOTALS_INVALID")
+            return _fail("INDEX_CACHE_TOTALS_INVALID")
         return art, True
     probe = source_abs / ".testgen_probe_index.json"
     indexer.run({"source_root": ".", "output_path": probe.name}, source_abs)
@@ -211,26 +213,30 @@ def run(args, root):
     args = dict(args or {})
     tgt_rel = str(args.get("targets_path") or "")
     tgt_path = _safe_path(repo, tgt_rel, must_exist=True)
+    if isinstance(tgt_path, dict): return tgt_path
     try:
         targets = json.loads(tgt_path.read_text(encoding="utf-8"))
     except Exception as exc:  # noqa: BLE001
         _fail("TARGETS_UNREADABLE_JSON:" + type(exc).__name__)
     if not isinstance(targets, list) or not targets:
-        _fail("TARGETS_EMPTY")
+        return _fail("TARGETS_EMPTY")
     for t in targets:
         if not isinstance(t, dict) or not t.get("module"):
-            _fail("TARGET_SCHEMA_MISSING:module")
+            return _fail("TARGET_SCHEMA_MISSING:module")
 
     source_root = str(args.get("source_root") or "")
     source_abs = _safe_path(repo, source_root, must_exist=True)
+    if isinstance(source_abs, dict): return source_abs
     if not source_abs.is_dir():
-        _fail("SOURCE_ROOT_NOT_DIRECTORY")
+        return _fail("SOURCE_ROOT_NOT_DIRECTORY")
     gen_rel = str(args.get("generated_tests_root") or "")
     gen_abs = _safe_path(repo, gen_rel)
+    if isinstance(gen_abs, dict): return gen_abs
     out_abs = _safe_path(repo, str(args.get("output_path") or ""))
+    if isinstance(out_abs, dict): return out_abs
     for pth, key in ((gen_abs, "generated_tests_root"), (out_abs, "output_path")):
         if pth == source_abs or source_abs in pth.parents:
-            _fail("PATH_OVERLAPS_SOURCE_ROOT:" + key)
+            return _fail("PATH_OVERLAPS_SOURCE_ROOT:" + key)
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
     cached = _safe_path(repo, str(args["index_path"]), must_exist=True) if args.get("index_path") else None
@@ -314,7 +320,7 @@ def run(args, root):
 
     manifest_after = _tree_manifest(source_abs)
     if manifest_after != manifest_before:
-        _fail("SOURCE_TREE_MUTATED")
+        return _fail("SOURCE_TREE_MUTATED")
 
     complete = (not refused) and bool(gen_rows) and passed == len(gen_rows)
     verified = complete and run_rc == 0
