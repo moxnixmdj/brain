@@ -53,8 +53,6 @@ CAPS = {
     # (hard_nonclaims: NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY), so the honest
     # repair number belongs to apply.verified; search loops are scored on
     # whether their report contains a patch at all.
-    "python.software.repair.apply.verified.v1":
-        "python_repair_apply_verified_v1",
     "python.software.repair.loop.test_guided.ast.v1":
         "python_software_repair_loop_v1",
     "python.software.repair.loop.strict_progress.ast.v1":
@@ -63,6 +61,13 @@ CAPS = {
         "python_coupled_software_repair_loop_v1",
     "software.repair.loop.cegis_hypothesis.v1":
         "software_repair_loop_cegis_hypothesis_v1",
+    # The composed agent runs LAST: the search loops publish patch reports and
+    # restore the source by contract, but apply.verified WRITES. Running the
+    # writer first left the searchers a green baseline and an honest
+    # BASELINE_ALREADY_PASSES refusal -- an instrument ordering artifact, not
+    # a capability result. Writer last = every row sees the same red fixture.
+    "python.software.repair.apply.verified.v1":
+        "python_repair_apply_verified_v1",
 }
 
 
