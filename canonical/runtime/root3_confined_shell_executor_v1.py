@@ -100,7 +100,12 @@ SWE_PY_MODULES = frozenset(
     {"pytest", "coverage", "mypy", "ruff", "bandit", "unittest", "crosshair"}
 )
 SWE_GIT_SUBCOMMANDS = frozenset(
-    {"--version", "apply", "ls-files", "diff", "log", "status", "rev-parse", "show", "-C"}
+    {"--version", "apply", "ls-files", "diff", "log", "status", "rev-parse", "show", "-C",
+     # pr_realize contract: branch checkout, pinned commit, remote round-trip
+     # (remote add/config is done by the harness pre-mediation; the capability
+     # itself only READS remotes and PUSHES a content-pinned branch head, then
+     # proves it by ls-remote -- identity-safe operations on the local origin)
+     "remote", "checkout", "commit", "ls-remote", "push", "add"}
 )
 SWE_HASH_TOOLS = frozenset({"sha256sum"})
 SWE_MAX_CODE_BYTES = 16384
@@ -156,7 +161,9 @@ def classify_tool_argv(argv: list[str]) -> str:
                 SWE_GIT_SUBCOMMANDS - {"-C"}
             ):
                 raise ConfinedShellDenied("SWE_GIT_C_SUBCOMMAND_INVALID")
-        if argv[1] == "apply" and any(a.startswith("-") and a != "--check" and a != "-v" for a in argv[2:]):
+        if argv[1] == "apply" and any(a.startswith("-") and a not in (
+            "--check", "-v", "--unidiff-zero", "--directory"
+        ) for a in argv[2:]):
             raise ConfinedShellDenied("SWE_GIT_APPLY_FIELD_INVALID")
         return "git"
     if base in SWE_HASH_TOOLS:
