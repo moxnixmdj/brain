@@ -1676,6 +1676,32 @@ _LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
 _BARE_NOUN_PHRASE = re.compile(r"^\s*(?:the|a|an)\b")
 
 
+# A determiner in front of a command word makes it a NOUN, not an instruction:
+# "the diff X", "this patch", "the archive" name a thing, they do not ask for a
+# program.  Measured: "Apply the diff <f> to the repository ... and run the full
+# test gate" was read as the command `diff <f> <report>`, so the composer
+# answered an SF-capability request with a file comparison, and "Gate the diff
+# <f> on performance using the benchmark <b>" was read the same way.
+_DETERMINERS = ("the", "a", "an", "this", "that", "these", "those", "its", "our",
+                "your", "my", "their", "his", "her", "each", "every", "any",
+                "some", "one", "another", "same", "given", "stated")
+_DETERMINER_BEFORE = re.compile(
+    r"(?<![a-z0-9])(?:" + "|".join(_DETERMINERS) + r")[\s-]+$", re.IGNORECASE)
+
+
+def _command_match(pattern: str, text: str):
+    """The first occurrence of a program word that is a VERB, not a noun.
+
+    Every occurrence preceded by a determiner is skipped, so a sentence that
+    merely names a diff, a patch or an archive never becomes a command.
+    """
+    for match in re.finditer(pattern, text):
+        if _DETERMINER_BEFORE.search(text[:match.start()]):
+            continue
+        return match
+    return None
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -1707,7 +1733,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
     for pattern, program, dest_flag in _PROSE_COMMAND_DEST_FLAG:
         if program not in known:
             continue
-        if not re.search(pattern, text):
+        if _command_match(pattern, text) is None:
             continue
         if len(paths) != 2:
             return None
@@ -2572,7 +2598,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
-        if not re.search(pattern, text):
+        if _command_match(pattern, text) is None:
             continue
         operands = paths
         if program in mutating and reserved_for_report & set(map(str, paths)):

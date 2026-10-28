@@ -1170,6 +1170,27 @@ _TOOL_NOUNS = ("loop", "search", "tool", "engine", "report", "step", "routine",
                "capability", "pass")
 
 
+def _path_spans(text: str) -> list[tuple[int, int]]:
+    """Character spans of every repository path the sentence spells out.
+
+    Used to answer "was this word part of a VALUE?" without disturbing the
+    positions of the words around it, which the callers rely on to find the file
+    a verb governs.
+    """
+    spans = []
+    for raw, path in goal_compiler._repo_paths(text, ROOT):
+        for spelling in {str(raw), str(path)}:
+            start = text.find(spelling)
+            while start >= 0:
+                spans.append((start, start + len(spelling)))
+                start = text.find(spelling, start + 1)
+    return spans
+
+
+def _inside_spans(pos: int, spans) -> bool:
+    return any(start <= pos < end for start, end in spans)
+
+
 def _promised_source_files(goal: str) -> list[str]:
     """Source files the goal asked to have CHANGED, not merely read.
 
@@ -1187,8 +1208,17 @@ def _promised_source_files(goal: str) -> list[str]:
     # the test Y passes" names Y as the WITNESS; demanding Y change too would
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
+    spans = _path_spans(text)
     out = []
     for m in _REPAIR_VERB_RE.finditer(text):
+        if _inside_spans(m.start(), spans):
+            # The verb was a WORD INSIDE A FILENAME.  "Review the diff fix.patch"
+            # carries the word "patch"; reading it as an instruction to change
+            # source made a review gate promise an edit it must never make, and
+            # the front door threw away the gate's own PASS with
+            # PROMISED_SOURCE_CHANGE_NOT_APPLIED.  A value's words are not the
+            # task's words -- the same rule F25 applies to quoted literals.
+            continue
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -1258,8 +1288,11 @@ def _promised_source_roots(goal: str) -> list[str]:
     text = str(goal or "")
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
+    spans = _path_spans(text)
     out = []
     for m in _REPAIR_VERB_RE.finditer(text):
+        if _inside_spans(m.start(), spans):
+            continue
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None

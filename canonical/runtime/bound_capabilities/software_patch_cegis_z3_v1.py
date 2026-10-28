@@ -38,7 +38,23 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     output = _safe_output(repo, args.get("output_path"))
     cegis = _load_cegis()
-    manifest = args.get("manifest") or {
+    # `manifest` arrives as the PATH the sentence named -- that is what the registry
+    # binds for this slot -- and the synthesizer consumes the DOCUMENT.  Handing the
+    # path straight through crashed every call with
+    # AttributeError: 'str' object has no attribute 'get', so the capability was
+    # reachable, selected, and never once executed.  A dict is still accepted, which
+    # is how an in-process caller supplies one.
+    manifest = args.get("manifest") or {}
+    if isinstance(manifest, str):
+        path = (repo / manifest).resolve()
+        if path != repo and repo not in path.parents:
+            raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+        if not path.is_file():
+            raise RuntimeError("MANIFEST_MISSING:" + manifest)
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(manifest, dict):
+        raise RuntimeError("MANIFEST_NOT_AN_OBJECT")
+    manifest = manifest or {
         "components": [
             {"id": "python.fault.localize.dynamic.dataflow.v1", "kind": "MECHANISM", "requires": ["python.source.file.available"], "provides": ["python.fault.localization.symbol_ranked"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.5, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
             {"id": "python.patch.search.test_guided.ast.v1", "kind": "MECHANISM", "requires": ["python.source.file.available"], "provides": ["python.patch.candidate.test_verified"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.6, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},

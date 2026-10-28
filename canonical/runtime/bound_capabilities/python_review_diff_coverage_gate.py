@@ -45,6 +45,11 @@ output_sha256, output_verified, verified.
 
 from __future__ import annotations
 
+try:  # the module is importable both as a package member and as a script
+    from canonical.runtime.bound_capabilities import _diff_gate_anchor_v1 as _gate_anchor
+except ImportError:  # pragma: no cover - direct script execution
+    import _diff_gate_anchor_v1 as _gate_anchor  # type: ignore
+
 import hashlib
 import json
 import os
@@ -113,7 +118,9 @@ def run(args, root):
                                capture_output=True, text=True, timeout=min(timeout_s, 30))
     coverage_on = cov_probe.returncode == 0 and "overage" in cov_probe.stdout
 
-    scratch = out_abs.parent / ("_cov_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
+    anchor_abs = _gate_anchor.resolve_anchor(repo, anchor_abs, diff_abs, timeout_s)
+    scratch = _gate_anchor.scratch_base(anchor_abs, out_abs.parent) / (
+        "_cov_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
     if scratch.exists():
         shutil.rmtree(scratch)
     shutil.copytree(anchor_abs, scratch,

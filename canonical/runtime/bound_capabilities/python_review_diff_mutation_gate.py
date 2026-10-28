@@ -59,6 +59,11 @@ output_verified, verified.
 
 from __future__ import annotations
 
+try:  # the module is importable both as a package member and as a script
+    from canonical.runtime.bound_capabilities import _diff_gate_anchor_v1 as _gate_anchor
+except ImportError:  # pragma: no cover - direct script execution
+    import _diff_gate_anchor_v1 as _gate_anchor  # type: ignore
+
 import ast
 import hashlib
 import json
@@ -283,7 +288,19 @@ def run(args, root):
     if git_probe.returncode != 0:
         _fail("GIT_UNAVAILABLE")
 
-    scratch = out_abs.parent / ("_mut_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
+    # Never inside the tree it copies: the output usually sits inside the anchor,
+    # and a scratch dir beside it gets copied into the next copy, recursively,
+    # until the path is too long to open.  See the perf gate for the measurement.
+    anchor_abs = _gate_anchor.resolve_anchor(repo, anchor_abs, diff_abs, timeout_s)
+    # A stated test path is written relative to the REPOSITORY (that is how the
+    # sentence names it), but pytest runs inside the scratch copy of the ANCHOR.
+    # Left as written, the copy is asked to run a repository path that does not
+    # exist in it, pytest collects nothing, and the gate refuses a green world
+    # with BASE_WORLD_RED:no tests ran.  Re-express stated paths; never touch a
+    # flag or a node id.
+    run_tests = [_gate_anchor.rebase_arg(t, repo, anchor_abs) for t in run_tests]
+    scratch_base = _gate_anchor.scratch_base(anchor_abs, out_abs.parent)
+    scratch = scratch_base / ("_mut_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
     if scratch.exists():
         shutil.rmtree(scratch)
     shutil.copytree(anchor_abs, scratch,

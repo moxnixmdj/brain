@@ -202,6 +202,9 @@ def without_stated_text_value(text: str) -> str:
 _QUOTED_VALUE_ALIASES: dict[str, tuple[str, ...]] = {
     "content": ("text", "string", "message", "line"),
 }
+from canonical.runtime import input_role_lexicon_v1 as input_role_lexicon
+from canonical.runtime.input_role_lexicon_v1 import ROLE_ALIASES as _ROLE_LEXICON_ALIASES
+
 _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "content": _QUOTED_VALUE_ALIASES["content"],
     # An output has no type of its own, so its role can only come from the sentence.
@@ -220,6 +223,7 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "prompt": ("prompt", "question"),
     "pattern": ("pattern", "test pattern", "file pattern"),
     "test_argv": ("test argv", "test_argv", "test command", "command"),
+
     # The extract-function refactor states its coordinates the way an engineer
     # states them: "the function big", "lines 5 to 9", "named total_of". Without
     # these the capability's own docstring phrasing bound nothing, so the highest
@@ -847,6 +851,18 @@ _STEM_SUFFIXES: dict[str, set[str]] = {
     "sqlite": {".sqlite", ".db", ".sqlite3"}, "database": {".sqlite", ".db", ".sqlite3"}, "yaml": {".yaml", ".yml"}, "csv": {".csv"},
     "html": {".html", ".htm"}, "image": {".png", ".jpg", ".jpeg", ".webp"}, "png": {".png"}, "screenshot": {".png", ".jpg", ".jpeg"},
     "text": {".txt", ".md"}, "source": {".py"}, "python": {".py"}, "test": {".py"},
+    # A diff slot is a patch, not any file that happens to be named: without this a
+    # JSON document the sentence gave to another role was bound as `diff_path` by the
+    # F23 elimination pass, and a repair capability outranked the capability the
+    # sentence actually named ("Apply the jq filter ... to x.json").
+}
+# A slot whose KIND the sentence states even though its stem names no type.  Used only
+# where a bound value must be sanity-checked (the F23 joint pass), never to drive a
+# type SCAN: adding "diff" to _STEM_SUFFIXES made every diff-shaped key scan the whole
+# repository by extension, and the front-compiler suite went from 13 to over 28 minutes.
+_JOINT_SUFFIX_GUARD: dict[str, set[str]] = {
+    "diff": {".diff", ".patch", ".txt"},
+    "patch": {".diff", ".patch"},
 }
 _OUTPUT_STEMS = {"output", "result", "report", "screenshot", "image", "artifact", "destination", "dest"}
 
@@ -1319,7 +1335,22 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     # payload selector (knowledge fetch json_path: literal []), not a file; every other
     # ``*_path`` key (jq json_path ...) keeps the pinned file binder.
     declared_selectors = _declared_literal_selector_keys(entry)
-    pinned_keys = [k for k in keys if k not in declared_selectors and (k in ("text", "goal", "url") or k.endswith("_path"))]
+    # The pinned binder is authoritative for every slot the role lexicon knows a
+    # KIND for: an identifier, a test list, a tree, a knob.  Classifying them as
+    # "typed" handed them to a generic type binder with no grammar for a symbol,
+    # so a refactoring request failed as "the sentence never stated it" and F24
+    # skipped the capability -- after which an artifact writer answered "rename
+    # the function add to plus in .../good.py" by converting that .py to a PDF.
+    pinned_keys = [
+        k for k in keys
+        if k not in declared_selectors
+        and (
+            k in ("text", "goal", "url")
+            or k.endswith("_path")
+            or (input_role_lexicon.kind_of(k) is not None
+                and not k.endswith("_paths"))
+        )
+    ]
     typed_keys = [k for k in keys if k not in pinned_keys]
     inputs: dict[str, Any] = {}
     taken: set[str] = set()
@@ -1332,7 +1363,7 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             val = bound_val.get(key)
             if key.endswith("_path") and not _is_output_key(key, entry) and val:
                 stem = key[:-5].lower()
-                wanted = _STEM_SUFFIXES.get(stem)
+                wanted = _STEM_SUFFIXES.get(stem) or _JOINT_SUFFIX_GUARD.get(stem)
                 if wanted and pathlib.PurePosixPath(val).suffix.lower() not in wanted:
                     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "type_mismatch:" + key)
             inputs.update(bound_val)
@@ -1368,6 +1399,13 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         joint = _joint_role_binding(goal, pending_input_paths, root, taken, produced_paths=produced_paths)
         for key in pending_input_paths:
             if key in joint:
+                stem = key[:-5].lower() if key.endswith("_path") else ""
+                wanted = _STEM_SUFFIXES.get(stem) or _JOINT_SUFFIX_GUARD.get(stem)
+                if wanted and pathlib.PurePosixPath(str(joint[key])).suffix.lower() not in wanted:
+                    # F23's elimination decides WHICH of the stated files fills a slot;
+                    # it never decides that a file of the wrong kind is the slot.  The
+                    # type gate the pinned binder already applies holds here too.
+                    continue
                 inputs[key] = joint[key]
                 taken.add(joint[key])
     for key in pending_input_paths:
@@ -1392,6 +1430,16 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                     inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
                 except GoalCompilationFailure:
                     raise type_failure
+        stem = key[:-5].lower() if key.endswith("_path") else ""
+        wanted = _STEM_SUFFIXES.get(stem) or _JOINT_SUFFIX_GUARD.get(stem)
+        if (wanted and isinstance(inputs.get(key), str)
+                and pathlib.PurePosixPath(inputs[key]).suffix.lower() not in wanted):
+            # The type fallback searches the repository for a file of the key's
+            # TYPE; for a slot that names no type of its own ("diff_path") it
+            # will happily hand back any named file, so the stated kind is
+            # checked here the same way the pinned binder checks it.
+            inputs.pop(key, None)
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "type_mismatch:" + key)
         if isinstance(inputs.get(key), str) and inputs[key]:
             taken.add(inputs[key])
     for key in typed_keys:
@@ -1627,6 +1675,7 @@ def _score_tiers(pool: list[tuple[int, int, str, dict[str, Any]]]) -> list[list[
 # A binding failure that names ZERO candidates means the sentence never stated that input;
 # a failure that names TWO or more means the sentence stated it ambiguously.  The difference
 # decides whether the route may continue (F24) or must fail closed.
+_BARE_KEY_DETAIL = re.compile(r"[A-Za-z_][A-Za-z0-9_]*$")
 _UNSTATED_DETAIL = re.compile(r"(?:^|:)(?:not_stated|value_not_parseable|no_matching_existing_files_named)$")
 
 
@@ -1635,10 +1684,25 @@ def _failure_is_unstated(exc: BaseException) -> bool:
     if getattr(exc, "code", "") != "GOAL_INPUT_BINDING_REQUIRED":
         return False
     detail = str(getattr(exc, "detail", "") or "")
+    # A file of the WRONG KIND is not a statement about this slot either: the
+    # type fallback picked some file that exists, the sentence never said it was
+    # the diff.  Measured: without this, "Apply the jq filter ... to x.json ..."
+    # stopped the walk at the top-ranked repair capability because it had bound
+    # that JSON as its diff_path, and json.query.jq -- the capability the
+    # sentence names -- was never reached.
+    if detail.startswith("type_mismatch:"):
+        return True
     counted = re.search(r":(\d+)_", detail)
     if counted:
         return int(counted.group(1)) == 0
-    return bool(_UNSTATED_DETAIL.search(detail))
+    # The pinned binder names the ONE key it could not fill, bare: `source_root`.
+    # That is a slot the sentence never stated (an ambiguous one is reported as
+    # `<key>:2_<what>_named`, and a type conflict as `type_mismatch:<key>`), so a
+    # bare key must be SKIPPED, not treated as ambiguity.  Measured: without this
+    # the walk stopped on the top-ranked candidate -- "Apply the jq filter ... to
+    # x.json ..." was refused for `python.software.repair.apply`'s `source_root`
+    # and json.query.jq, the capability the sentence names, was never reached.
+    return bool(_UNSTATED_DETAIL.search(detail)) or bool(_BARE_KEY_DETAIL.match(detail))
 
 
 def _single(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any], score: int, evidence: Mapping[str, Any], rules: list[str]) -> dict[str, Any]:    return {

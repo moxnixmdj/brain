@@ -586,6 +586,393 @@ def _adapter_default_argv(entry, root, targets):
     return [str(x) for x in argv]
 
 
+_RENAME_VERB_RE=re.compile(r"\brenam(?:e|es|ing)\b",re.IGNORECASE)
+
+_RENAME_KIND_PATTERNS=(
+    # "rename the parameter a to x in the function add [in module M]"
+    ("param",re.compile(
+        r"\brenam(?:e|es|ing)\s+(?:the\s+)?(?:parameter|param|argument|arg)\s+"
+        r"[`\"']?(?P<old>[A-Za-z_]\w*)[`\"']?\s+(?:to|into|as)\s+"
+        r"[`\"']?(?P<new>[A-Za-z_]\w*)[`\"']?(?P<tail>[^.;\n]*)",re.IGNORECASE)),
+    # "rename the function add to plus", "rename Calc.scale to Calc.multiply",
+    # "rename `add` to `plus`" -- a natural-language instruction, not a channel
+    # that only accepts bare identifiers.
+    ("symbol",re.compile(
+        r"\brenam(?:e|es|ing)\s+(?:the\s+)?(?:(?:python\s+)?(?:function|method|class|"
+        r"symbol|identifier|variable|constant|attribute|module|def)\s+)?"
+        r"[`\"']?(?P<old>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)[`\"']?\s+(?:to|into|as)\s+"
+        r"[`\"']?(?P<new>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)[`\"']?"
+        r"(?P<tail>[^.;\n]*)",re.IGNORECASE)),
+)
+
+_ENCLOSING_CLASS_RE=re.compile(
+    r"\b(?:in|of|inside|within|on)\s+(?:the\s+)?(?:class|type)\s+[`\"']?(?P<name>[A-Za-z_]\w*)",
+    re.IGNORECASE)
+_ENCLOSING_FUNCTION_RE=re.compile(
+    r"\b(?:in|of|inside|within|on)\s+(?:the\s+)?(?:function|method|def)\s+"
+    r"[`\"']?(?P<name>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)",
+    re.IGNORECASE)
+
+
+def _identifier_slots(goal, root):
+    """The identifiers a refactoring sentence states, keyed by slot name.
+
+    Read, never inferred: every value comes from a phrase in the sentence, and a
+    slot the sentence does not state is absent from the result, so the
+    capability still fails closed rather than renaming a symbol nobody named.
+    """
+    text=str(goal or "")
+    if not text:
+        return {}
+    out={}
+    # The module coordinate is stated by any sentence that names a python
+    # module, whether or not it is a renaming: every refactoring adapter
+    # resolves `module` RELATIVE TO `source_root`, so the pair is one binding.
+    renaming=bool(_RENAME_VERB_RE.search(text))
+    for kind,pattern in (_RENAME_KIND_PATTERNS if renaming else ()):
+        m=pattern.search(text)
+        if not m:
+            continue
+        old,new,tail=m.group("old"),m.group("new"),m.group("tail") or ""
+        if old in out.values() or new in out.values():
+            continue
+        cls=_ENCLOSING_CLASS_RE.search(tail)
+        fn=_ENCLOSING_FUNCTION_RE.search(tail)
+        if kind=="param":
+            if not fn:
+                continue
+            qualname=fn.group("name")
+            if cls:
+                qualname=cls.group("name")+"."+qualname
+            out.setdefault("old_param",old)
+            out.setdefault("new_param",new)
+            out.setdefault("qualname",qualname)
+        else:
+            qualname=old
+            if cls and "." not in old:
+                qualname=cls.group("name")+"."+old
+            out.setdefault("old_symbol",old.split(".")[-1])
+            out.setdefault("new_symbol",new.split(".")[-1])
+            out.setdefault("qualname",qualname)
+    # Cheap gate before the filesystem: a module coordinate needs a python
+    # file to be named, and _repo_paths walks the tree.  Measured: calling it
+    # unconditionally here made every binding attempt in the suite pay for a
+    # walk, and the front-compiler suite went from 13 to over 28 minutes.
+    if ".py" not in text:
+        return out
+    module=_module_named_by_sentence(text,root)
+    if module:
+        # `module` is resolved by the adapter RELATIVE TO `source_root`, so the
+        # two slots are one binding and are decided together: binding the
+        # repo-relative path with the module's own directory as the root made
+        # the adapter look for "<dir>/<dir>/calc.py" and refuse PATH_MISSING.
+        parent=str(pathlib.PurePosixPath(str(module)).parent)
+        out["module"]=str(pathlib.PurePosixPath(str(module)).name)
+        out["source_root"]=parent or "."
+    return out
+
+
+def _module_named_by_sentence(goal, root):
+    """The python module a refactoring sentence names, as a repo-relative path."""
+    rr=pathlib.Path(root).resolve()
+    try:
+        candidates=_repo_paths(goal,root)
+    except Exception:
+        return None
+    pys=[raw for raw,p in candidates
+         if str(raw).endswith(".py") and p.is_file() and rr in p.parents]
+    if len(pys)==1:
+        return pys[0]
+    nontest=[raw for raw in pys
+             if "test" not in pathlib.PurePosixPath(str(raw)).name.lower()]
+    if len(nontest)==1:
+        return nontest[0]
+    return None
+
+
+def _referee_tests_for_module(root, identifiers):
+    """Existing test modules beside a stated module that name it.
+
+    Deterministic and bounded: one directory, only files whose name marks them as
+    tests, only when they mention the module.  A refactor with no referee is a
+    blind edit, and the adapter refuses to call that a rename.
+    """
+    module=str((identifiers or {}).get("module") or "")
+    source_root=str((identifiers or {}).get("source_root") or "")
+    if not module or not source_root:
+        return []
+    root_path=(pathlib.Path(root)/source_root).resolve()
+    target=root_path/module
+    if not target.is_file():
+        return []
+    stem=target.stem
+    found=[]
+    try:
+        siblings=sorted(root_path.iterdir())
+    except OSError:
+        return []
+    for path in siblings:
+        if not path.is_file() or path.suffix!=".py" or path.stem==stem:
+            continue
+        name=path.stem.lower()
+        if not (name.startswith("test_") or name.endswith("_test")
+                or name.startswith("tests_") or name.endswith("_tests")):
+            continue
+        try:
+            text=path.read_text(encoding="utf-8",errors="replace")
+        except OSError:
+            continue
+        if re.search(r"\b"+re.escape(stem)+r"\b",text):
+            found.append(str(path.relative_to(pathlib.Path(root).resolve())).replace("\\","/"))
+    return found
+
+
+def _relative_to_source_root(rel, source_root):
+    """Re-express a repo path the way a refactoring adapter resolves it."""
+    if not isinstance(rel,str) or not rel:
+        return rel
+    root=str(source_root or "")
+    if not root or root in (".",""):
+        return rel
+    try:
+        return str(pathlib.PurePosixPath(rel).relative_to(pathlib.PurePosixPath(root)))
+    except ValueError:
+        return rel
+
+
+# The roles that mean "the repository this machine works inside".  A sentence
+# that names a file in the repository has named the repository; it does not have
+# to repeat the word.  No other directory role is inferred this way.
+_REPO_ANCHOR_SLOTS=frozenset({"anchor_path","repo_path","worktree_path","apply_directory"})
+
+
+_UNBOUND=object()
+
+
+def _role_lexicon():
+    from canonical.runtime import input_role_lexicon_v1 as lexicon
+    return lexicon
+
+
+def _stated_number(goal,key):
+    """The number the sentence attaches to this knob, if it states one."""
+    words=[w for w in re.split(r"[^a-z0-9]+",str(key or "").lower()) if w]
+    if not words:
+        return None
+    pattern=r"(?<![a-z0-9])"+"[\s_-]+".join(re.escape(w) for w in words)+r"(?![a-z0-9])"
+    m=re.search(pattern+r"\s*(?:=|:|of|to|is)?\s*(?P<value>-?\d+(?:\.\d+)?)\b",
+                str(goal or ""),re.IGNORECASE)
+    if m is None:
+        return None
+    raw=m.group("value")
+    try:
+        return int(raw) if re.fullmatch(r"-?\d+",raw) else float(raw)
+    except ValueError:
+        return None
+
+
+def _introduced(text,raw,phrases,root):
+    """Is this path introduced by a role phrase, in whichever form the sentence wrote it?
+
+    A sentence may name a file relatively ("pkg/good.py") or absolutely
+    ("/home/u/repo/pkg/good.py").  Binding is the same file either way, but the
+    phrase is anchored against the TEXT, so both spellings have to be tried:
+    measured, every absolutely-spelled path lost its role anchor and a
+    capability whose contract the sentence stated perfectly refused to bind.
+    """
+    raw=str(raw or "")
+    forms=[raw]
+    if raw and not raw.startswith("/"):
+        try:
+            forms.append(str((pathlib.Path(root)/raw).resolve()))
+        except Exception:
+            pass
+    lex=_role_lexicon()
+    tried=set()
+    for form in forms:
+        if not form or form in tried or form not in text:
+            continue
+        tried.add(form)
+        if lex.introduced_before(text,form,phrases):
+            return True
+    return False
+
+
+def _bind_by_role_kind(goal,key,root,bound,extra=None,paths=None):
+    """Bind one slot from the words a person uses for it -- or nothing at all.
+
+    ``bound`` is what this plan has already assigned, so a path another slot
+    owns is never stolen by a slot that merely mentions a nearby word.
+    """
+    lex=_role_lexicon()
+    if not lex.is_rescuable(key):
+        return _UNBOUND
+    kind=lex.kind_of(key)
+    claimed={str(v) for v in (bound or {}).values() if isinstance(v,(str,int,float))}
+    repo_anchor=kind==lex.KIND_DIR and str(key) in _REPO_ANCHOR_SLOTS
+    if isinstance(bound,dict):
+        for value in bound.values():
+            if isinstance(value,list):
+                claimed.update(str(x) for x in value)
+    rr=pathlib.Path(root).resolve()
+    # `paths` is what the caller already computed for this same sentence; the
+    # walk is the expensive part of a binding attempt and recomputing it for
+    # every unbound key is pure repetition.
+    named=[(raw,p) for raw,p in (paths if paths is not None else _repo_paths(goal,root))]
+    named=[(raw,p) for raw,p in named if str(raw) not in claimed]
+    if kind is None:
+        return _UNBOUND
+    if kind==lex.KIND_LINE:
+        # "lines 1 to 2" states both ends once; the slot names which end it wants.
+        shown=_line_span(text_slot:=str(goal or ""))
+        if shown is None:
+            return _UNBOUND
+        first,last=shown
+        return first if str(key).startswith("start") else last
+    if kind==lex.KIND_TUNING:
+        stated=_stated_number(goal,key)
+        return stated if stated is not None else _UNBOUND
+    text=str(goal or "")
+    phrases=lex.phrases_for(key)
+    if kind==lex.KIND_DIR:
+        cands=[raw for raw,p in named if p.is_dir() and rr in p.parents or raw=="."]
+        if len(cands)==1:
+            return cands[0]
+        stated=[raw for raw in cands if _introduced(text,raw,phrases,root)]
+        if len(stated)==1:
+            return stated[0]
+        # A repository anchor is not missing when the sentence named a file IN
+        # the repository: the tree a diff applies to is the tree the diff and the
+        # benchmark live in.  Binding it stays narrow on purpose -- it fires only
+        # for the repo-anchor roles, only when the sentence names a file inside
+        # this repository, and never for `source_root`, which must be STATED.
+        if repo_anchor:
+            inside=[raw for raw,p in named if p.is_file() and rr in p.parents]
+            if inside:
+                return "."
+        return _UNBOUND
+    if kind in (lex.KIND_FILE,lex.KIND_FILES):
+        existing=[raw for raw,p in named if p.is_file() and rr in p.parents]
+        if str(key).endswith("_tests"):
+            # A verification suite is not any file: bind only what the sentence
+            # named that LOOKS like a test module, then fall back to the test
+            # module that already sits beside the module the sentence named.
+            # Discovery is scoped to a refactoring request (one that stated a
+            # module); a repair capability's suite is STATED, never discovered.
+            tests=[raw for raw in existing
+                   if "test" in pathlib.PurePosixPath(raw).stem.lower()]
+            if tests:
+                return tests
+            # Discovery (a referee beside the stated module) is scoped to a
+            # refactoring request; a gate's suite is STATED, never invented.
+            if not dict(extra or {}).get("module"):
+                return _UNBOUND
+            context=dict(extra or {})
+            for source in (bound or {}),:
+                for name in ("module","source_root"):
+                    if isinstance(source,dict) and name in source:
+                        context.setdefault(name,source[name])
+            found=_referee_tests_for_module(root,context)
+            if found:
+                return [_relative_to_source_root(t,context.get("source_root"))
+                        for t in found]
+            return _UNBOUND
+        if kind==lex.KIND_FILES:
+            scoped=[raw for raw,_p in _repo_paths(goal,root)
+                    if _p.is_dir() and rr in _p.parents]
+            inside=[raw for raw in existing
+                    if any(raw.startswith(s.rstrip("/")+"/") for s in scoped)]
+            pool=inside or existing
+            stated=[raw for raw in pool if _introduced(text,raw,phrases,root)]
+            return stated if stated else _UNBOUND
+        # A file role is bound only by the role the sentence actually states.
+        # Binding "the only existing file" to a slot whose noun the sentence never
+        # used is invention: measured, "Apply the jq filter ... to <a>.json ...
+        # and write the output to <b>.json" bound repo_diff_apply's diff_path to
+        # the input JSON and beat the jq capability the sentence names.
+        stated=[raw for raw in existing if _introduced(text,raw,phrases,root)]
+        return stated[0] if len(stated)==1 else _UNBOUND
+    if kind==lex.KIND_TEXT:
+        return _literal_after_role(text,phrases)
+    if kind==lex.KIND_IDENT:
+        stated=_identifier_after_role(text,phrases)
+        return stated if stated else _UNBOUND
+    if kind==lex.KIND_IDENTS:
+        stated=_identifiers_after_role(text,phrases)
+        return stated if stated else _UNBOUND
+    return _UNBOUND
+
+
+_QUOTED_OR_PATTERN=re.compile(r"""["'`]([^"'`]+)["'`]|\b([A-Za-z0-9_.*?\[\]-]*(?:\*|\?)[A-Za-z0-9_.*?\[\]-]*)\b""",re.IGNORECASE)
+
+
+_LINE_SPAN_RE=re.compile(
+    r"\blines?\s+(?P<first>\d+)\s*(?:to|through|until|-|–|and)\s*(?P<last>\d+)\b",
+    re.IGNORECASE)
+
+
+def _line_span(text):
+    """"lines 4 to 7" -> (4, 7).  Read, never inferred: no span, no binding."""
+    m=_LINE_SPAN_RE.search(str(text or ""))
+    if m is None:
+        return None
+    return int(m.group("first")),int(m.group("last"))
+
+
+def _literal_after_role(text,phrases):
+    """A literal value the sentence states for a text slot ("test_*.py")."""
+    for match in _QUOTED_OR_PATTERN.finditer(str(text or "")):
+        value=(match.group(1) or match.group(2) or "").strip()
+        if not value:
+            continue
+        before=str(text)[:match.start()]
+        for phrase in phrases:
+            words=[w for w in re.split(r"[^a-z0-9]+",str(phrase).lower()) if w]
+            if not words:
+                continue
+            pattern=("(?<![a-z0-9])"+"[^a-z0-9]+".join(re.escape(w) for w in words)
+                     +r"(?![a-z0-9])")
+            if re.search(pattern+r"[^.;\n]{0,40}$",before,re.IGNORECASE):
+                return value
+    return _UNBOUND
+
+
+_IDENT_WORD=re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
+
+
+def _identifier_after_role(text,phrases):
+    for phrase in phrases:
+        words=[w for w in re.split(r"[^a-z0-9]+",str(phrase).lower()) if w]
+        if not words:
+            continue
+        pattern=("(?<![A-Za-z0-9])"+"[^a-z0-9]+".join(re.escape(w) for w in words)
+                 +r"(?![a-z0-9])")
+        m=re.search(pattern,text,re.IGNORECASE)
+        if m is None:
+            continue
+        tail=text[m.end():]
+        hit=_IDENT_WORD.search(tail)
+        if hit is not None:
+            return hit.group(0)
+    return None
+
+
+def _identifiers_after_role(text,phrases):
+    found=[]
+    for phrase in phrases:
+        words=[w for w in re.split(r"[^a-z0-9]+",str(phrase).lower()) if w]
+        if not words:
+            continue
+        pattern=("(?<![A-Za-z0-9])"+"[^a-z0-9]+".join(re.escape(w) for w in words)
+                 +r"(?![a-z0-9])")
+        for m in re.finditer(pattern,text,re.IGNORECASE):
+            tail=text[m.end():]
+            hit=_IDENT_WORD.search(tail)
+            if hit is not None and hit.group(0) not in found:
+                found.append(hit.group(0))
+    return found
+
+
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -594,8 +981,25 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     paths=_repo_paths(goal,root)
     future_text=" ".join(str(x) for x in (future_clauses or []))
     future_paths=_repo_paths(future_text,root) if future_text else []
+    identifiers=_identifier_slots(goal,root)
     result={}
     for key in keys:
+        if _role_lexicon().is_tuning(key):
+            # An execution knob is the ADAPTER's input, not the caller's: every
+            # one of these adapters already writes `args.get("timeout_s") or 300`
+            # and `args.get("python_executable") or sys.executable`.  The binder
+            # raised on them anyway, so a capability that was selected and fully
+            # grounded was dropped (or died at dispatch) for want of a number
+            # nobody asked for.  Measured: 12 slots named timeout_s, 11 named
+            # python_executable, and the type gate was unreachable for exactly
+            # this reason.  A value the sentence does state is still bound below.
+            stated=_stated_number(goal,key)
+            if stated is not None:
+                result[key]=stated
+            continue
+        if key in identifiers:
+            result[key]=identifiers[key]
+            continue
         if key=="text":
             result[key]=_extract_text_argument(goal)
             continue
@@ -753,8 +1157,15 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                           (("markdown",),{".md",".markdown"}),
                           (("png","qr","barcode","image"),{".png",".jpg",".jpeg",".webp"}),
                         ]
+                        # WHOLE WORDS, not substrings.  "hardcoded password" in
+                        # the security gate's keywords contains the letters of
+                        # "word", so the format of a JSON report was inferred to
+                        # be .docx and the sentence's own .json destination was
+                        # then refused as type-incompatible.
                         for markers,suffix_set in semantic_suffixes:
-                            if any(marker in semantic_blob for marker in markers):
+                            if any(re.search(r"(?<![a-z0-9])"+re.escape(marker)
+                                             +r"(?![a-z0-9])",semantic_blob)
+                                   for marker in markers):
                                 wanted=suffix_set
                                 break
                 if wanted:
@@ -824,6 +1235,16 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if stem in {"input","source"} and len(existing)==1:
                     result[key]=existing[0][0]
                     continue
+        # Last resort, and the only place every unbound key passes through: the
+        # registry's own noun for this slot is not what a person calls it.  The
+        # role lexicon says what a person calls it, and the binder accepts that
+        # word only when the sentence names EXACTLY ONE value of the right kind
+        # for this slot -- otherwise the key stays unbound and the capability
+        # still fails closed.
+        rescued=_bind_by_role_kind(goal,key,root,result,identifiers,paths=paths)
+        if rescued is not _UNBOUND:
+            result[key]=rescued
+            continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
 
@@ -1010,6 +1431,48 @@ def _artifact_write_tokens(goal):
     return out
 
 
+# A sentence may open with a word that is not the act ("Please ...", "The ...").
+# Those never name a capability, so the head-verb rule simply does not fire.
+_NON_ACT_TOKENS=frozenset({"please","the","a","an","i","we","you","it","this","that",
+                           "and","or","if","then","hello","test","file"})
+
+
+def _head_verb(goal):
+    """The imperative verb a sentence opens with, or None.
+
+    English puts the verb first in an imperative, which is how every request in
+    this system is phrased.  Deterministic: the first token of the prose, with
+    nothing inferred beyond that.
+    """
+    for word in re.findall(r"[A-Za-z][A-Za-z0-9]*", str(goal or "")):
+        low=word.lower()
+        if len(low)<2 or low in STOPWORDS:
+            continue
+        return low
+    return None
+
+
+def _named_by_the_goal(goal_tokens, name_tokens):
+    """Name tokens the goal states in an inflected form (scaffolding -> scaffold).
+
+    Bounded on purpose: a stem must be at least five characters and one must be a
+    prefix of the other, so `test`/`tests` is not a stem match while
+    `scaffold`/`scaffolding`, `localize`/`localizing` and `optimize`/`optimization`
+    are.  The goal token is returned, so the caller's set arithmetic still works.
+    """
+    hits=set()
+    for word in goal_tokens:
+        if len(word)<5:
+            continue
+        for name in name_tokens:
+            if len(name)<5 or name==word:
+                continue
+            if name.startswith(word) or word.startswith(name):
+                hits.add(word)
+                break
+    return hits
+
+
 def _score(goal, cid, entry):
     surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
     if not surface_ok:
@@ -1048,7 +1511,15 @@ def _score(goal, cid, entry):
     keywords=_tokens(entry.get("keywords",[]))
     # Requirements are highly informative for environment qualifiers such as
     # image-only/scanned/local/etc. Provides represent the requested effect.
-    effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords)
+    # A capability NAMES an act; the sentence inflects it.  "Generate unit test
+    # scaffolding ..." is a request for the capability whose own name contains
+    # `scaffold`, and exact word equality could not see it, so the request went to
+    # a parser that merely shared the words "python", "source" and "tree" with the
+    # sentence -- and that parser reported success.  Stem equality is applied only
+    # to the capability's OWN NAME and keywords: a morphological variant of a
+    # name is the same act, while a variant of a precondition word proves nothing.
+    stem_hits=_named_by_the_goal(gt_effect, identity | keywords)
+    effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords) | stem_hits
     distinctive={x for x in effect_matches if x not in GENERIC_MATCH_TOKENS}
     # Preconditions and generic verbs/nouns may refine a match but may never
     # create one. A barcode-image goal must not become a QR-image action merely
@@ -1065,7 +1536,37 @@ def _score(goal, cid, entry):
     # sentence. See _nondiscriminating_requires_tokens for the measurement.
     nondiscriminating=_nondiscriminating_requires_tokens()
     informative_requires=(gt & requires) - nondiscriminating
-    score=5*len(gt_effect & provides)+4*len(gt_effect & keywords)+3*len(informative_requires)+2*len(gt_effect & identity)
+    # An inflected form of the capability's OWN NAME is the same act named in
+    # another grammatical shape, so it is weighted like a provides match rather
+    # than like a keyword.
+    score=(5*len(gt_effect & provides)+4*len(gt_effect & keywords)
+           +3*len(informative_requires)+2*len(gt_effect & identity)
+           +5*len(stem_hits))
+    # The sentence's HEAD VERB is the strongest single piece of evidence about the
+    # act requested: an English imperative puts the verb first, and the verb picks
+    # the frame its arguments fill.  Without it a tool that matches three NOUNS
+    # from the medium ("python source tree") outranks the tool whose own name is
+    # the verb the sentence opens with.  Measured: "Localize the fault in the
+    # python source tree ..." scored code.multilanguage.parse.tree_sitter.v1 25
+    # against python.fault.localize... 24, and "Generate unit test scaffolding
+    # for the python source tree ..." scored the same parser 30 against
+    # python.tests.generate.scaffold.v1 26.  Both wrong capability, both bound,
+    # both executed -- the parse tool really did parse.  A capability that names
+    # the act is the one that performs it.
+    # The bonus is for a verb that IDENTIFIES an act.  A generic act verb
+    # ("generate", "create", "write") is shared by dozens of capabilities and
+    # says nothing about which one -- and rewarding it would let a tool win on
+    # the strength of a word in its own name alone.  Measured cost of dropping
+    # the distinction: "Generate a QR code image ..." moved the pinned overlap
+    # order from the decoder to the generator, which empties a negative control
+    # that proves the BM25 re-rank is load-bearing.
+    head_verb=_head_verb(goal)
+    verb_bonus=0
+    if (head_verb and head_verb in identity
+            and head_verb not in GENERIC_MATCH_TOKENS
+            and head_verb not in _NON_ACT_TOKENS):
+        verb_bonus=7
+        score+=verb_bonus
     # Prefer more-specific matched preconditions when base scores tie.
     specificity=len(informative_requires)
     return score,specificity,{
@@ -1076,19 +1577,38 @@ def _score(goal, cid, entry):
         "nondiscriminating_requires":sorted((gt & requires) & nondiscriminating),
         "matched_identity":sorted(gt_effect & identity),
         "matched_keywords":sorted(gt_effect & keywords),
+        "matched_head_verb":head_verb if verb_bonus else None,
+        "matched_stem":sorted(stem_hits),
     }
+
+
+class _Omitted:
+    """A template slot the adapter itself already defaults."""
+
+    def __repr__(self):  # pragma: no cover - debugging aid
+        return "<omitted>"
+
+
+_OMITTED=_Omitted()
 
 
 def _render_template(value, inputs):
     if isinstance(value,dict):
-        return {k:_render_template(v,inputs) for k,v in value.items()}
+        rendered={k:_render_template(v,inputs) for k,v in value.items()}
+        return {k:v for k,v in rendered.items() if v is not _OMITTED}
     if isinstance(value,list):
-        return [_render_template(v,inputs) for v in value]
+        return [v for v in (_render_template(x,inputs) for x in value)
+                if v is not _OMITTED]
     if isinstance(value,str):
         exact=re.fullmatch(r"\$\{input\.([A-Za-z0-9_]+)\}",value)
         if exact:
             key=exact.group(1)
             if key not in inputs:
+                # The binder no longer invents a knob; the adapter's own default
+                # is the correct value, so the key is left out of the action
+                # rather than raised for a number the sentence never stated.
+                if _role_lexicon().is_tuning(key):
+                    return _OMITTED
                 raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
             return json.loads(json.dumps(inputs[key]))
         out=value
