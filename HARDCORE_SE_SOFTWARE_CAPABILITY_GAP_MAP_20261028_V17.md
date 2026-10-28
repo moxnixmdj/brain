@@ -40,7 +40,7 @@ REGISTRY EVIDENCE (157 entries)                                              see
   a block that names NO file a reader could check               34
   a block whose pointers name files nobody wrote                 8
 
-COMPILER SUITES                    25 failed / 108 passed   (V14: 26/107)  see §7
+COMPILER SUITES                    25 failed / 108 passed   (unchanged by this unit)  see §7
 PINNED PINS                        16/16 evidence, 8/8 route-identification,
                                    6/6 api-compatibility, 6/6 resource-leak, 9/9 move-function
 ```
