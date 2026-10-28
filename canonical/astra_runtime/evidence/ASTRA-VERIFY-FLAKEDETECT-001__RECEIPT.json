@@ -1,0 +1,33 @@
+{
+ "receipt_for": "ASTRA-VERIFY-FLAKEDETECT-001",
+ "capability_id": "python.quality.flake_detect.v1",
+ "adapter_module": "quality_flake_detect_v1",
+ "adapter_path": "canonical/runtime/bound_capabilities/quality_flake_detect_v1.py",
+ "pins": "canonical/tests/test_python_quality_flake_detect_v1.py",
+ "pins_result": "7 passed",
+ "observed": {
+  "golden": {
+   "world": "pkg/test_flaky.py: STATE = []; test_a_first asserts STATE == [1]; test_b_pollutes appends 2",
+   "runs": 4,
+   "order_seeds": [0, 1, 2, 3],
+   "hash_seeds": [0, 1, 2, 3],
+   "flakes_found": 1,
+   "flaky_tests": ["pkg.test_flaky::test_a_first"],
+   "evidence": "seed 0 passed; seeds 1-3 failed -- the outcome changed while the bytes did not",
+   "e2e_ms": 730
+  },
+  "classification_law": [
+   "flaky_tests: outcome CHANGED across runs (evidence, with the seeds that produced it)",
+   "consistently_failing: failed in EVERY run -- a broken test, kept separate so it is never 'fixed' by rerunning",
+   "stable: passed in every run, and detection_scope states that this is a statement about the run budget, not a certificate of determinism"
+  ],
+  "honesty_legs_observed": [
+   "repeats < 2 refuses REPEATS_BELOW_TWO: one execution is a test run, not a flake hunt",
+   "a suite with no tests refuses NO_TESTS_FOUND instead of reporting zero flakes",
+   "a collection error refuses TESTS_COULD_NOT_RUN instead of reporting zero flakes",
+   "the measured tree is byte-untouched: the order-shuffling plugin is written to a temp dir and put on PYTHONPATH for the child run only",
+   "same tree, same budget -> the same flaky set (pinned)"
+  ]
+ },
+ "reuse_note": "the pytest invocation shape (python -m pytest -q -p no:cacheprovider, cwd = the project root, refusal taxonomy TOOL_NOT_INSTALLED / TESTS_COULD_NOT_RUN / NO_TESTS_FOUND) is python.quality.coverage.v1's; the artifact/expect/gate shape is the refactor family's"
+}
