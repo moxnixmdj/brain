@@ -88,6 +88,9 @@ SWE_TOOL_SITES = {
     (_BC + "python_interprocedural_value_provenance_v1.py", 94, "subprocess.run"): "SWE_TOOL_STEP",
     (_BC + "code_tree_sitter_patch_verify_v1.py", 101, "subprocess.run"): "SWE_TOOL_STEP",
     (_BC + "python_repository_acceptance_measurement_v1.py", 249, "subprocess.run"): "SWE_TOOL_STEP",
+    # pynguin test synthesis family: CLI run + generated-suite validation
+    (_BC + "python_tests_synthesize_pynguin_v1.py", 64, "subprocess.run"): "SWE_TOOL_STEP",
+    (_BC + "python_tests_synthesize_pynguin_v1.py", 86, "subprocess.run"): "SWE_TOOL_STEP",
     (_BC + "brain_module_invoke_v1.py", 145, "subprocess.run"): "SWE_TOOL_STEP",
     (_BC + "source_candidates_verify_git_index.py", 56, "subprocess.run"): "SWE_TOOL_STEP",
     (_BC + "source_candidates_verify_git_index.py", 83, "subprocess.run"): "SWE_TOOL_STEP",
@@ -97,7 +100,8 @@ SUPPORTED.update(SWE_TOOL_SITES)
 
 # Tool-family allowlist for SWE_TOOL_STEP (shared with the attempt authorizer).
 SWE_PY_MODULES = frozenset(
-    {"pytest", "coverage", "mypy", "ruff", "bandit", "unittest", "crosshair"}
+    {"pytest", "coverage", "mypy", "ruff", "bandit", "unittest", "crosshair",
+     "pynguin"}
 )
 SWE_GIT_SUBCOMMANDS = frozenset(
     {"--version", "apply", "ls-files", "diff", "log", "status", "rev-parse", "show", "-C",

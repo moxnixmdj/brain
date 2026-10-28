@@ -61,13 +61,15 @@ CAPS = {
         "python_coupled_software_repair_loop_v1",
     "software.repair.loop.cegis_hypothesis.v1":
         "software_repair_loop_cegis_hypothesis_v1",
-    # The composed agent runs LAST: the search loops publish patch reports and
-    # restore the source by contract, but apply.verified WRITES. Running the
-    # writer first left the searchers a green baseline and an honest
-    # BASELINE_ALREADY_PASSES refusal -- an instrument ordering artifact, not
-    # a capability result. Writer last = every row sees the same red fixture.
+    # The composed agents run LAST: reporters publish patch reports and
+    # restore the source by contract; writers realize bytes. Every agent gets
+    # its own pristine fixture copy (fixture-state protocol), so ordering only
+    # reflects composition depth: reporters first, writers, then the router
+    # (diagnose -> route -> escalate -> realize) as the outermost agent.
     "python.software.repair.apply.verified.v1":
         "python_repair_apply_verified_v1",
+    "python.software.repair.route.v1":
+        "python_software_repair_router_v1",
 }
 
 
@@ -239,8 +241,9 @@ def ground_args(cid: str, fixture: dict, tag: str = "run") -> dict:
                       fixture["module"]],
         "timeout_s": LOOP_BUDGET["timeout_s"],
     }
-    if "cegis_hypothesis" in cid:
+    if "cegis_hypothesis" in cid or "route.v1" in cid:
         args["source_root"] = rel(fixture["src"])
+        args["budget"] = 2
     elif "apply.verified" in cid:
         args["source_root"] = rel(fixture["src"])
     elif "strict_progress" in cid:

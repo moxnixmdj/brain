@@ -179,7 +179,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  finally:
   if strict_probe.exists():strict_probe.unlink()
  if strict.get("pass"):
-  result={"schema":SCHEMA,"status":"PASS__STRICT_PROGRESS_ROUTE","pass":True,"route":"STRICT_PROGRESS","strict_result":strict,"localization_candidates":[],"crossed_nonmonotonic_valley":False,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"source_restored":strict.get("source_restored") is True,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
+  result={"schema":SCHEMA,"status":"PASS__STRICT_PROGRESS_ROUTE","pass":True,"route":"STRICT_PROGRESS","strict_result":strict,"patches":strict.get("patches") or [],"localization_candidates":[],"crossed_nonmonotonic_valley":False,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"source_restored":strict.get("source_restored") is True,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
  else:
   base=_PATCH._run_tests(repo,argv,timeout,env);score=_STRICT._score(base)
   if score is None and not base.get("timed_out"): score=1

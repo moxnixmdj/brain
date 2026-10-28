@@ -547,6 +547,24 @@ def _docx_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
     return out or None
 
 
+def _pynguin_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
+    """Domain generator for the pynguin synthesis family: a real module for
+    the search to cover. A random string module_name is not a module -- the
+    sampler lied by filling the type, not the referent."""
+    if "pynguin" not in cid:
+        return None
+    fx = _swe_unittest_fixture(ws / f"pgn{rng.randrange(1 << 30)}")
+    out: dict = {}
+    for slot in sig:
+        if slot == "source_root":
+            out[slot] = str(fx["src"])
+        elif slot == "module_name":
+            out[slot] = "calc"
+        elif slot == "time_budget_s":
+            out[slot] = 12
+    return out or None
+
+
 def _load_adapter(adapter_path: str, name: str):
     path = ROOT / adapter_path
     spec = importlib.util.spec_from_file_location(name, path)
@@ -626,6 +644,7 @@ def sweep_one(cid: str, entry: dict, instances: int, seed: int, work: Path,
         # Repair loops have no structural keys, so they still fall through to
         # the repair fixture unharmed.
         domain = (_swe_repo_args(cid, all_slots, rng, ws)
+                  or _pynguin_args(cid, all_slots, rng, ws)
                   or _python_repair_args(cid, all_slots, rng, ws)
                   or _saccr_args(cid, all_slots, rng, ws)
                   or _docx_args(cid, all_slots, rng, ws) or {})

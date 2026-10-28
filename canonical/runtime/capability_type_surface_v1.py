@@ -172,6 +172,7 @@ _EXPLICIT: dict[str, str] = {
     # a slot the router cannot type is a slot the router cannot fill, and an
     # unfilled slot is a chain that never runs
     "content": STRING,
+    "module_name": STRING,
     "argv": ARGV,                  # general command vector -- the universal
                                    # action primitive in any environment
     "actions": JSON_TEXT,          # browser action script, consumed by
