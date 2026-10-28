@@ -82,7 +82,11 @@ def _python_repair_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
     # source_root), which are the same domain reached by a different door.
     if not ({"source_root", "source_path", "source_paths"} & set(sig)):
         return None
-    from execution_guard import live_solver_families_v6 as v6
+    # The fixture lives in the coupled family, not in v6: importing v6 and calling
+    # `fresh_coupled_bug` on it raised AttributeError on the very first python-source
+    # capability, so this instrument had not completed a run since the two families
+    # were split.  A sweep that crashes is not a sweep that reports zero.
+    from execution_guard.live_solver_families_v6_coupled import fresh_coupled_bug as v6_fixture
 
     root = ws / f"repo{rng.randrange(1 << 30)}"
     root.mkdir(parents=True, exist_ok=True)
@@ -90,7 +94,7 @@ def _python_repair_args(cid: str, sig: dict, rng, ws: Path) -> dict | None:
     # handing the red fixture to python.tests.audit.unittest produced
     # TEST_FILE_FAILED -- the fixture contradicting what the capability means.
     green = ("audit" in cid or "verify" in cid)
-    bug = v6.fresh_coupled_bug(rng, root, rng.randrange(1 << 20), mutate=not green)
+    bug = v6_fixture(rng, root, rng.randrange(1 << 20), mutate=not green)
 
     args: dict = {}
     for slot, want in sig.items():

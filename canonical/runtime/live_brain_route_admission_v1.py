@@ -718,7 +718,24 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
     call_args = dict(action.get("args") or {})
     call_args.pop("capability_id", None)
-    result = fn(call_args, ROOT)
+    # A CAPABILITY MAY NOT KILL THE PROCESS THAT CALLED IT.
+    #
+    # 19 of the bound adapters report failure by raising SystemExit with a JSON body
+    # (`raise SystemExit(json.dumps({"error": True, "reason": ...}))`).  SystemExit is a
+    # BaseException, so the `except Exception` in _execute_locally never saw it: measured on
+    # this branch, `run_adapter_locally(python.issue.natural_language.parse_edit_intent.v1,
+    # {})` terminated the interpreter outright.  A long-running agent that runs an adapter
+    # with a missing argument therefore DIES instead of being told the argument is
+    # missing -- and the caller cannot tell which capability did it, because the process is
+    # gone.  The adapter's exit payload is already the diagnosis it wanted to give, so it
+    # is converted to the same closed failure every other refusal uses.
+    try:
+        result = fn(call_args, ROOT)
+    except SystemExit as exc:
+        detail = exc.code
+        if isinstance(detail, int) or detail is None:
+            detail = "exit_code=%s" % (detail,)
+        raise LocalExecutionFailure(str(detail)[:2000]) from None
     if not isinstance(result, dict):
         raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
     result.setdefault("capability_id", cid)
