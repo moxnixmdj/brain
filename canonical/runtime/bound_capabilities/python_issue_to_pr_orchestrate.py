@@ -48,6 +48,12 @@ Inputs (kwargs; every path is confined to the repo by _safe_path):
   diff_path      unified diff artifact (source_root -> worktree bytes)
   pr_intent_path PR title/body/checklist JSON artifact
   index_path     optional validated slice-1 index cache (speed law)
+  repository_root optional tree containing source_root whose WHOLE test
+                 suite must stay green: the diff is re-anchored to it and
+                 python.repo.diff_apply_full_testgate.v1 applies it to a
+                 scratch copy and runs every conventionally named test file
+                 found there.  Without it ``verified`` is scoped to
+                 source_root and says so (``verified_scope``).
   timeout_s      per-test-run wall clock cap (default 300)
 
 result_fields: adapter, task_id, planned_op_count, applied_op_count,
@@ -77,6 +83,9 @@ from canonical.runtime.bound_capabilities import (
 )
 from canonical.runtime.bound_capabilities import (
     python_change_impact_testselect as testselect,
+)
+from canonical.runtime.bound_capabilities import (
+    python_repo_diff_apply_full_testgate as full_testgate,
 )
 from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
     discover_test_files,
@@ -612,6 +621,53 @@ def _verify_application(work_src: Path, edits: list[dict]) -> tuple[bool, list[s
     return (not problems), problems, index_bytes
 
 
+def _repository_gate(repo: Path, repository_root: str, source_abs: Path, diff_text: str,
+                     diff_abs: Path, output_abs: Path, python_exe: str, timeout_s: int) -> dict:
+    """Apply the source_root diff to the enclosing repository and run ITS suite.
+
+    Reuses python.repo.diff_apply_full_testgate.v1 (scratch copy, git apply
+    --check, whole-tree pytest, empty suite refused).  Every refusal that
+    adapter raises becomes a named gate status; nothing here can pass.
+    """
+    anchor_abs = _safe_path(repo, repository_root, must_exist=True)
+    if not anchor_abs.is_dir():
+        return {"gate": "REFUSED:REPOSITORY_ROOT_NOT_DIRECTORY", "anchor_path": repository_root}
+    if source_abs != anchor_abs and anchor_abs not in source_abs.parents:
+        return {"gate": "REFUSED:SOURCE_ROOT_OUTSIDE_REPOSITORY_ROOT", "anchor_path": repository_root}
+    prefix = source_abs.relative_to(anchor_abs).as_posix()
+    prefix = "" if prefix in ("", ".") else prefix + "/"
+    lines = []
+    for line in diff_text.splitlines(keepends=True):
+        if line.startswith("--- a/"):
+            line = "--- a/" + prefix + line[len("--- a/"):]
+        elif line.startswith("+++ b/"):
+            line = "+++ b/" + prefix + line[len("+++ b/"):]
+        lines.append(line)
+    anchored = diff_abs.with_name(diff_abs.name + ".repository.diff")
+    anchored.write_text("".join(lines), encoding="utf-8")
+    gate_out = output_abs.with_name(output_abs.stem + ".repository_gate.json")
+    gate_args = {"anchor_path": anchor_abs.relative_to(repo).as_posix(),
+                 "diff_path": anchored.relative_to(repo).as_posix(),
+                 "output_path": gate_out.relative_to(repo).as_posix(),
+                 "python_executable": python_exe, "timeout_s": timeout_s}
+    try:
+        result = full_testgate.run(gate_args, repo)
+    except SystemExit as exc:  # the gate refuses with a JSON payload
+        try:
+            reason = json.loads(str(exc.code)).get("reason") or str(exc.code)
+        except Exception:  # noqa: BLE001
+            reason = str(exc.code)
+        return {"gate": "REFUSED:" + str(reason)[:200], "anchor_path": gate_args["anchor_path"],
+                "diff_path": gate_args["diff_path"]}
+    except Exception as exc:  # noqa: BLE001
+        return {"gate": "REFUSED:" + type(exc).__name__ + ":" + str(exc)[:200],
+                "anchor_path": gate_args["anchor_path"], "diff_path": gate_args["diff_path"]}
+    return {"gate": result.get("gate"), "anchor_path": gate_args["anchor_path"],
+            "diff_path": gate_args["diff_path"], "tests_discovered": result.get("tests_discovered"),
+            "tests_failed": result.get("tests_failed"), "output_path": gate_args["output_path"],
+            "output_sha256": result.get("output_sha256"), "verified": bool(result.get("verified"))}
+
+
 def run(args, root):
     repo = Path(root).resolve()
     args = dict(args or {})
@@ -796,7 +852,20 @@ def run(args, root):
 
     edits_verified = pr_verified and not problems
     tests_verified = test_evidence["status"] == "PASSED"
-    verified = edits_verified and tests_verified
+    repository_root = str(args.get("repository_root") or "")
+    if repository_root and edits_verified and tests_verified:
+        repository_gate = _repository_gate(repo, repository_root, source_abs, diff_text, diff_abs,
+                                           output_abs, python_exe, timeout_s)
+    elif repository_root:
+        repository_gate = {"gate": "SKIPPED:SOURCE_ROOT_VERIFICATION_FAILED", "anchor_path": repository_root}
+    else:
+        repository_gate = {"gate": "NOT_REQUESTED"}
+    if repository_root:
+        verified = edits_verified and tests_verified and repository_gate.get("gate") == "PASS"
+        verified_scope = "repository" if verified else "none"
+    else:
+        verified = edits_verified and tests_verified
+        verified_scope = "source_root" if verified else "none"
     summary = {
         "adapter": "python_issue_to_pr_orchestrate",
         "task_id": issue_id,
@@ -812,6 +881,8 @@ def run(args, root):
         "pr_intent_verified": pr_verified,
         "edits_verified": bool(edits_verified),
         "verified": bool(verified),
+        "verified_scope": verified_scope,
+        "repository_gate": repository_gate,
     }
     output_abs.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(summary, indent=2, ensure_ascii=False) + "\n"
@@ -829,6 +900,7 @@ if __name__ == "__main__":
                  "diff_path", "pr_intent_path"):
         p.add_argument("--" + name, required=True)
     p.add_argument("--index_path", default=None)
+    p.add_argument("--repository_root", default=None)
     p.add_argument("--python_executable", default=None)
     p.add_argument("--timeout_s", type=int, default=300)
     ns = p.parse_args()
