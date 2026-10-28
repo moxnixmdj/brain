@@ -1,8 +1,8 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `ce300be`**
+**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `f67b65a` + this unit**
 
-_Supersedes `…GAP_MAP_20261028_V18.md`. Everything in the earlier V-series is either re-measured here or summarised in §12._
+_Supersedes `…GAP_MAP_20261028_V19.md`.
 
 This is the complete answer to *"what are all the problems?"*, restricted to what the owner asked for:
 the machine must be the most advanced, fastest software engineer — repair, refactor, analysis,
@@ -18,7 +18,7 @@ document rests on an earlier reading.
 
 | # | problem | size | who it hurts |
 |---|---|---|---|
-| **P1** | **The door credits acts nothing owns.** "Scan for secrets" and "audit dependencies for vulnerabilities" are both answered by `bandit` and counted as *answered by their owning capability*. Measured: 2 of 3 planted secrets found — by *variable name*, so a `ghp_…` GitHub token in a variable called `TOKEN` was caught while an `AKIA…` AWS access-key id in `AWS_ACCESS_KEY_ID` was not — and no advisory database anywhere. The probe's ownership oracle is lexical, so it certifies the wrong tool. | 2 acts miscredited, 1 oracle wrong | the whole scoreboard — a machine that says "done" having done something else is worse than one that refuses |
+| ~~**P1**~~ | ~~**The door credits acts nothing owns.**~~ **CLOSED this unit (§3)** — both acts now have real owners built on the tools that already are the answer (`detect-secrets`, `pip-audit`), and the probe's ownership oracle reads claims instead of keywords. | was 2 acts miscredited | the scoreboard is now honest |
 | **P2** | **Capability claims that name nothing a reader can check.** 34 of 158 evidence blocks point at no file; 8 point at files nobody wrote. | 42 / 158 entries | anyone deciding whether to trust a capability |
 | **P3** | **Capability is a function of the shell, not of the machine.** `ruff`, `mypy`, `bandit`, `coverage`, `pytest`, `crosshair`, `z3`, `tree_sitter` are importable from `.venv` and from **none** of the system interpreters. Nothing installs-or-refuses, so 8 analyser families vanish silently on a clean box. | 45 of 158 shell out to a tool | every deployment that is not this sandbox |
 | **P4** | **Ten acts nothing in the machine owns**: merge-conflict resolution, interactive debugging, crash reproduction, memory profiling, differential testing, schema migration, CI config, retry design, observability instrumentation, docstrings. | 10 of 43 probed acts | day-to-day senior engineering |
@@ -29,11 +29,11 @@ document rests on an earlier reading.
 | **P9** | **The office/visual family is 22 of 158 entries (14%)** — deprioritized by the owner, kept because it is already verified. | 22 | nothing, if left alone |
 | **P10** | **Missing instruments in the flesh**: no `docker`/`podman`/`kubectl`/`terraform`, no `gdb`/`lldb`, no `strace`/`perf`/`valgrind`/`py-spy`, no `hypothesis`/`libcst`/`rope`, no `psutil`, no `sqlalchemy`/`alembic`. | measured below | any verb built on them would be a lie today |
 
-**The single most critical problem is P1**, and it is not a missing capability — it is a *lie in the
-accounting*. Every other number in this document (and in every earlier V-series document) is only
-as good as the instrument that produced it, and that instrument currently certifies a SAST scanner
-as a secret scanner and a CVE auditor. A machine that must eventually work unsupervised can survive
-"I cannot do that"; it cannot survive "I did that" when it did something else.
+**P1 was the most critical problem and it is closed in this unit**, because it was not a missing
+capability — it was a *lie in the accounting*, and every other number in this document is only as
+good as the instrument behind it. The fix was not to write a scanner: both answers already existed
+as tools, exactly as the owner said. The remaining critical problem is **P3**, because a capability
+that depends on a package nobody declared is a capability that disappears on another machine.
 
 ---
 
@@ -51,19 +51,19 @@ environment probe             this document, §10 (binaries + importable modules
 
 ```
 43-ACT FRONT DOOR (through solve(), current HEAD)
-  ANSWERED_BY_OWNING_CAPABILITY   32   of which 2 are WRONG TOOL by direct test (P1) -> 30 honest
+  ANSWERED_BY_OWNING_CAPABILITY   32   all verified against a real owner (2 were lies before §3)
   HONEST_REFUSAL                  11   (6 name the act, 5 name a wrong candidate)
   WRONG_TOOL by the probe's oracle 0   <- the oracle is lexical; see P1
   HOLLOW PASS                      0
 
-REGISTRY EVIDENCE (158)
-  OK 116 · pointer names nothing 34 · pointer names a file nobody wrote 8
+REGISTRY EVIDENCE (160)
+  OK 118 · pointer names nothing 34 · pointer names a file nobody wrote 8
 
 REACHABILITY (452 rows = 158 registered + 294 receipt projections)
   REACHED_AND_BOUND 429 · NOT_REACHABLE 11 · ROUTED_ELSEWHERE 9 · BY EXPLICIT NAME 3
 
 DOMAIN COVERAGE (135 acts a senior engineer performs)
-  BOUND 60 · NAMED-ONLY 31 · ABSENT 44
+  BOUND 62 · NAMED-ONLY 29 · ABSENT 44
 ```
 
 ---
@@ -81,7 +81,7 @@ it (vocabulary, not capability). `ABSENT` = nothing in the machine mentions it.
 | testing | 6/10 | 2 | 2 | coverage, slice, scaffold, flake detect, property oracle, contract oracle |
 | dynamic analysis | 1/9 | 4 | 4 | fuzz |
 | performance engineering | 2/6 | 0 | 4 | diff perf gate, complexity metric |
-| security & supply chain | 4/9 | 4 | 1 | bandit SAST, diff security gate, license, provenance |
+| security & supply chain | 6/9 | 2 | 1 | bandit SAST, diff security gate, license, provenance |
 | dependencies & build | 2/10 | 3 | 5 | wheel build, dependency add |
 | data & persistence | 5/9 | 1 | 3 | sqlite create/verify, json, yaml, binary codecs |
 | services & concurrency | 3/8 | 0 | 5 | http fetch, shell, async audit |
@@ -99,7 +99,7 @@ Receipt: `canonical/astra_runtime/evidence/HARDCORE-SE-DOMAIN-COVERAGE-V1__RECEI
 
 ---
 
-## 3. P1 — the door credits acts nothing owns
+## 3. P1 — CLOSED: the door credits acts nothing owns
 
 The 43-act probe reports `secret_scan` and `vulnerability_audit` as
 `ANSWERED_BY_OWNING_CAPABILITY`, both selecting `python.toolchain.bandit_security.v1`.
@@ -125,17 +125,55 @@ about; it is a code-pattern scanner. Both are counted as answered because the pr
 whether the selected capability's `provides` *shares words* with the act, and `python.source.security.report`
 shares "security".
 
-Two defects, one root:
+Two defects, one root, both fixed by *reuse* rather than synthesis (§3.1).
 
-1. **A missing capability is being reported as a present one.** The fix is a real secret scanner
-   (entropy + provider regexes, path-aware, with a planted-defect oracle) and a real advisory lane
-   (OSV/`pip-audit` semantics, or an explicitly offline advisory snapshot). Until then the honest
-   answer for both acts is a refusal that names the act.
-2. **The instrument prefers wrong tools to refusals.** The ownership oracle must be *structural*
-   (does the capability's `provides` name the act's object, or does its action template's target
-   equal the act's target?) rather than lexical overlap. This is the same lesson Class B taught at
-   the front door two units ago: a confident wrong answer costs more than a refusal — including when
-   the confident wrong answer is the *measurement*.
+### 3.1 What was built
+
+Nothing here is a new scanner. Both answers were already tools, and both are now declared in
+`canonical/runtime/TOOLCHAIN_DECLARATION_V1.json`, so `toolchain_preflight_v1.py --bootstrap`
+installs them and `--check` refuses when they are gone (10 of 10 distributions present):
+
+| act | engine | what it does that bandit could not |
+|---|---|---|
+| `secret_scan` (`python.supply_chain.secret_scan.v1`) | **detect-secrets 1.5.0** — 27 detectors + entropy | finds the AWS access-key id and the Slack token **bandit misses**, because those detectors read the credential's shape rather than the variable's name |
+| `vulnerability_audit` (`python.supply_chain.vulnerability_audit.v1`) | **pip-audit 2.10.1** — PyPI advisory service | real advisories: PYSEC ids with CVE/GHSA aliases and the versions that fix them; bandit carries no advisory data at all |
+
+Measured through the front door, on a fixture with planted credentials and a pinned vulnerable
+dependency — the fixture had to be given both, because *a fixture that cannot support the act
+measures the fixture*:
+
+```
+secret_scan          3 findings: AWS Access Key, Slack Token, Base64 High Entropy String   0.31 s
+vulnerability_audit  22 advisories on urllib3==1.26.0                                       7.0 s
+```
+
+Laws the module holds, each written from a measurement:
+
+* **a secret is never written down** — findings carry detect-secrets' salted SHA-1 and a location;
+  the artifact records `secrets_written_to_this_artifact: false`, and a pin asserts none of the four
+  credentials appears in it. A report that quotes the credential is a second leak.
+* **a scanner must not read its own report** — measured: two consecutive runs disagreed, because the
+  first artifact's 40-character hashes looked like five `Hex High Entropy String` findings. The
+  artifact path is now excluded from the scan.
+* **an empty report from a tool that did not run is a lie** — `TOOL_NOT_INSTALLED:detect-secrets`
+  and `ADVISORY_SERVICE_UNREACHABLE:pip-audit` are refusals that still write a FAIL artifact; only
+  a real run may report zero. That was the whole defect: 0/0 used to read as "clean".
+* **the audited set is the project's own declaration** — `[project].dependencies`, else
+  `requirements*.txt`, else a stated file, parsed by the manifest reader `packaging_v1` already
+  owns. A project that declares nothing refuses `NO_DECLARED_DEPENDENCIES`.
+
+### 3.2 The instrument
+
+The probe's ownership oracle counted a capability's `keywords` as ownership. `bandit`'s entry
+carried the keywords `leaked secrets`, `known vulnerabilities`, `supply chain` while its `provides`
+said only `python.source.security.report` — so the probe certified both acts against a capability
+that claims neither. **`keywords` are routing handles; `provides` is what a capability claims it will
+do.** The oracle now reads claims only, and `bandit`'s false keywords are gone.
+
+The scoreboard did not move (32 answered before, 32 after) — because both acts were already being
+counted. What changed is that the two rows are now true, and the instrument that counts them can no
+longer be fooled by marketing words. Two pins hold it: one asserts that a keyword alone can never
+produce `BOUND`, the other that these two acts *are* bound by a real claim.
 
 ---
 
@@ -276,6 +314,7 @@ not a fog.
 
 | act | capability | measured |
 |---|---|---|
+| secret scan, advisory audit | `python.supply_chain.{secret_scan,vulnerability_audit}.v1` | answered, evidenced, 12/12 pins, tools declared |
 | dependency add, wheel build | `python.packaging.{dependency_add,build_package}.v1` | answered, evidenced, 10/10 pins |
 | inline function | `python.refactor.inline_function.v1` | answered, evidenced, 11/11 pins |
 | fuzz (generate → isolate → shrink → reproduce) | `python.dynamic.fuzz.v1` | answered, evidenced, 11/11 pins |
@@ -292,19 +331,19 @@ Reuse first, and nothing here needs an absent instrument.
 
 | # | work | closes | why it is cheap | cost |
 |---|---|---|---|---|
-| 1 | **Real `secret_scan`** (entropy + provider regexes, path-aware, planted-defect oracle) | P1 (one of two miscredits) | one module over `pathlib` + `re`; the artifact law exists | ~1 unit |
-| 2 | **Real `vulnerability_audit`** (offline advisory snapshot or explicit refusal naming the missing database) | P1 | `pip-audit`-shaped over the installed metadata; must say "no database" if there is none | ~1 unit |
-| 3 | **Structural ownership oracle in the probe** | P1 root | the probe already knows the selected capability and its `provides`; the act table needs an object, not a word | ~½ unit |
-| 4 | **install-or-refuse at the door** | P3 (45 tool-backed capabilities) | the toolchain is already declared; nothing enforces it | ~1 unit |
-| 5 | **`crash_repro` + `differential_test`** | P4 (2 acts), P6 | the runner, the shrinker and the reproducer exist inside `fuzz` | ~1 unit for both |
-| 6 | **`memory_profile` + `cpu_profile` + `benchmark`** | P6 (3 acts) | `tracemalloc`, `cProfile`, `timeit` — stdlib, one module | ~1 unit |
-| 7 | **routability law** (one row → one rule) | P5 (20 rows, 2 tests) | derived from `provides` instead of hand-written keywords | ~1–2 units |
-| 8 | **`schema_migration` + data integrity** | P4, P6 | `sqlite3` is present; the migration is a transaction plus a verification law | ~1 unit |
-| 9 | **`merge_conflict`** | P4 | `git merge` exists; conflict markers are text; the resolution gate is a test run | ~1 unit |
-| 10 | **4 compiler defect families** | P7 (25 rows) | each is one law, not 25 patches | ~2 units |
-| 11 | **34 pointerless evidence blocks** | P2 | each needs the lane that measured it to write one line | ~1 unit, mechanical |
-| 12 | **`ci_config` + observability instrumentation** | P4, P6 | template emission with a verification law | ~1 unit each |
-| 13 | **`docstrings`** | P4 | last on purpose: the only act here that needs judgement, and no model may supply it | — |
+| ~~1~~ | ~~real `secret_scan`~~ | P1 | **DONE this unit** — detect-secrets, declared and bootstrapped, 3 findings on a planted fixture | — |
+| ~~2~~ | ~~real `vulnerability_audit`~~ | P1 | **DONE this unit** — pip-audit, 22 advisories on a pinned urllib3 | — |
+| ~~3~~ | ~~structural ownership oracle~~ | P1 root | **DONE this unit** — claims, not keywords; bandit's false keywords removed | — |
+| 1 | **install-or-refuse at the door** | P3 (45 tool-backed capabilities) | the toolchain is already declared; nothing enforces it | ~1 unit |
+| 2 | **`crash_repro` + `differential_test`** | P4 (2 acts), P6 | the runner, the shrinker and the reproducer exist inside `fuzz` | ~1 unit for both |
+| 3 | **`memory_profile` + `cpu_profile` + `benchmark`** | P6 (3 acts) | `tracemalloc`, `cProfile`, `timeit` — stdlib, one module | ~1 unit |
+| 4 | **routability law** (one row → one rule) | P5 (20 rows, 2 tests) | derived from `provides` instead of hand-written keywords | ~1–2 units |
+| 5 | **`schema_migration` + data integrity** | P4, P6 | `sqlite3` is present; the migration is a transaction plus a verification law | ~1 unit |
+| 6 | **`merge_conflict`** | P4 | `git merge` exists; conflict markers are text; the resolution gate is a test run | ~1 unit |
+| 7 | **4 compiler defect families** | P7 (25 rows) | each is one law, not 25 patches | ~2 units |
+| 8 | **34 pointerless evidence blocks** | P2 | each needs the lane that measured it to write one line | ~1 unit, mechanical |
+| 9 | **`ci_config` + observability instrumentation** | P4, P6 | template emission with a verification law | ~1 unit each |
+| 10 | **`docstrings`** | P4 | last on purpose: the only act here that needs judgement, and no model may supply it | — |
 
 Rules that do not change: **reuse before synthesis**, **measure, never assert**, a red row is not an
 authority, and no AI model participates in Brain-credited producer cognition.

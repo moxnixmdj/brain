@@ -124,8 +124,9 @@ DOMAINS: list[tuple[str, list[tuple[str, list[str]]]]] = [
     ("security and supply chain", [
         ("security.sast", ["python.source.security.report"]),
         ("security.diff_gate", ["python.review.diff_security_gate"]),
-        ("security.secret_scan", ["security.secret"]),
-        ("security.vulnerability_audit", ["security.vulnerability", "security.cve", "security.osv"]),
+        ("security.secret_scan", ["security.secret", "leaked_secret", "secrets.scanned"]),
+        ("security.vulnerability_audit", ["security.vulnerability",
+                                          "dependencies.vulnerability", "security.cve", "security.osv"]),
         ("security.sbom", ["security.sbom"]),
         ("security.signature_verify", ["security.signature", "security.attestation"]),
         ("supplychain.license", ["python.dependencies.licenses"]),

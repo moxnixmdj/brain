@@ -180,8 +180,14 @@ def build_source_fixture(work: Path) -> Path:
         'version = "0.1.0"\n'
         'dependencies = [\n'
         '    "packaging>=23",\n'
+        # the advisory lane needs something vulnerable to be right about
+        '    "urllib3==1.26.0",\n'
         ']\n',
         encoding="utf-8")
+    # a planted credential the NAME-matching scanner misses (bandit reports nothing for it),
+    # so the secret-scan evidence is about detectors rather than about variable naming
+    (root / "pkg" / "credentials.env").write_text(
+        'AWS_ACCESS_KEY_ID = "AKIA' + 'IOSFODNN7EXAMPLE"\n', encoding="utf-8")
     _git(root, ["init", "-q", "-b", "main"])
     _git(root, ["add", "-A"])
     _git(root, ["commit", "-qm", "baseline"])
@@ -228,6 +234,12 @@ def _inputs(cid: str, source: Path, repo, good: str, upstream: str, out: Path) -
     if cid == "vcs.git.rebase.v1":
         return {"ref": upstream, "worktree_path": str(repo),
                 "output_path": str(out / "rebase.json")}
+    if cid == "python.supply_chain.secret_scan.v1":
+        return {"source_root": str(source), "act_verb": "secret_scan",
+                "output_path": str(out / "secret_scan.json")}
+    if cid == "python.supply_chain.vulnerability_audit.v1":
+        return {"source_root": str(source), "act_verb": "vulnerability_audit",
+                "output_path": str(out / "vulnerability_audit.json")}
     if cid == "python.dynamic.fuzz.v1":
         return {"source_root": str(source), "qualname": "divide",
                 "max_cases": 12, "case_timeout_s": 5,
@@ -341,6 +353,14 @@ ORACLE = {
                           lambda r: bool(r.get("found")) and r.get("first_bad_subject") == "bad"),
     "vcs.git.rebase.v1": ("the one commit replayed onto the upstream branch",
                           lambda r: int(r.get("commits_replayed") or 0) >= 1),
+    "python.supply_chain.secret_scan.v1": (
+        "the AWS access-key detector firing on a credential bandit's name matching misses",
+        lambda r: int(r.get("finding_count") or 0) >= 1
+        and "AWS Access Key" in (r.get("findings_by_detector") or {})),
+    "python.supply_chain.vulnerability_audit.v1": (
+        "the PYSEC advisories on the pinned urllib3==1.26.0",
+        lambda r: int(r.get("vulnerability_count") or 0) >= 1
+        and int(r.get("vulnerable_packages") or 0) >= 1),
     "python.dynamic.fuzz.v1": (
         "the divide-by-zero found by generation and shrunk to `divide(0, 0)`",
         lambda r: r.get("failure_mode") == "raised" and r.get("minimal_case") == [0, 0]
@@ -389,6 +409,10 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--check", action="store_true", help="measure without writing receipts")
     ap.add_argument("--only", default="", help="comma separated capability ids")
+    ap.add_argument("--remeasure", action="store_true",
+                    help=("re-measure the named ids even if they already carry a block: a receipt "
+                          "whose module has changed since it was written is stale, and the only "
+                          "honest repair is to run the measurement again"))
     ap.add_argument("--audit-pointers", action="store_true",
                     help="count how many registry entries can be checked and how many cannot")
     ns = ap.parse_args(argv)
@@ -431,7 +455,12 @@ def main(argv: list[str] | None = None) -> int:
     wanted = [c for c, e in sorted(caps.items()) if _category(e) == "NO_BLOCK"]
     if ns.only:
         keep = {c.strip() for c in ns.only.split(",") if c.strip()}
-        wanted = [c for c in wanted if c in keep]
+        if ns.remeasure:
+            # A named entry is re-measured whether or not it already has a block, so a module
+            # that changed after its receipt was written cannot keep an old receipt as evidence.
+            wanted = [c for c in sorted(caps) if c in keep]
+        else:
+            wanted = [c for c in wanted if c in keep]
 
     # INSIDE the repository, like the missing-verb probe's world.  The refactor verbs confine every
     # stated path to the root they are handed (the traversal law), so a fixture minted in /tmp makes

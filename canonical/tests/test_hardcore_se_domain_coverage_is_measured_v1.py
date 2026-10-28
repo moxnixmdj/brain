@@ -34,10 +34,19 @@ class CoverageInstrumentTests(unittest.TestCase):
         self.assertIn("python.dynamic.fuzz", row["owner"])
 
     def test_a_keyword_is_never_enough_to_count_as_bound(self):
-        # bandit mentions security in its keywords; it does not claim secret scanning, and the
-        # inventory must not pretend otherwise -- the front door already did once.
-        self.assertEqual(self.by_act["security.secret_scan"]["state"], "NAMED")
-        self.assertEqual(self.by_act["security.vulnerability_audit"]["state"], "NAMED")
+        # The law, tested at the classifier rather than through whichever entry happens to hold
+        # the word today: a capability that merely ROUTES by a word has not claimed the act.
+        state, _ = C.classify(["security.secret"], [], ["leaked secrets", "secret", "security"])
+        self.assertEqual(state, "NAMED")
+        state, owner = C.classify(["leaked_secret"],
+                                  ["python.supply_chain.leaked_secret.report"], [])
+        self.assertEqual(state, "BOUND")
+        self.assertIn("leaked_secret", owner)
+
+    def test_the_acts_that_were_miscredited_now_have_real_owners(self):
+        # before the supply-chain unit both of these were credited to bandit, which does neither
+        self.assertEqual(self.by_act["security.secret_scan"]["state"], "BOUND")
+        self.assertEqual(self.by_act["security.vulnerability_audit"]["state"], "BOUND")
 
     def test_an_act_nothing_mentions_stays_absent(self):
         self.assertEqual(self.by_act["dynamic.memory_profile"]["state"], "ABSENT")

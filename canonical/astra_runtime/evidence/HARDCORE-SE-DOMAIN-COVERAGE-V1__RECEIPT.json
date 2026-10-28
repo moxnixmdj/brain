@@ -1,8 +1,8 @@
 {
  "instrument": "execution_guard/hardcore_se_domain_coverage_v1.py",
  "measured": {
-  "capabilities_in_registry": 158,
-  "provides_vocabulary": 220,
+  "capabilities_in_registry": 160,
+  "provides_vocabulary": 223,
   "rows": [
    {
     "act": "git.status",
@@ -433,14 +433,14 @@
    {
     "act": "security.secret_scan",
     "domain": "security and supply chain",
-    "owner": "",
-    "state": "NAMED"
+    "owner": "python.supply_chain.leaked_secret.report",
+    "state": "BOUND"
    },
    {
     "act": "security.vulnerability_audit",
     "domain": "security and supply chain",
-    "owner": "",
-    "state": "NAMED"
+    "owner": "python.dependencies.vulnerability.report",
+    "state": "BOUND"
    },
    {
     "act": "security.sbom",
@@ -878,8 +878,8 @@
    },
    "security and supply chain": {
     "ABSENT": 1,
-    "BOUND": 4,
-    "NAMED": 4,
+    "BOUND": 6,
+    "NAMED": 2,
     "total": 9
    },
    "services and concurrency": {

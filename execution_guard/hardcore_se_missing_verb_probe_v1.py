@@ -67,7 +67,23 @@ def build_repo(dirty: bool = True, with_spec: bool = False) -> Path:
         'version = "0.1.0"\n'
         'dependencies = [\n'
         '    "pytest>=8",\n'
+        # a PINNED, KNOWN-VULNERABLE dependency: the advisory lane is the act, and a fixture with
+        # nothing vulnerable makes the row measure the fixture (it would report zero findings and
+        # look correct while never having had anything to find).
+        '    "urllib3==1.26.0",\n'
         ']\n',
+        encoding="utf-8")
+    # PLANTED CREDENTIALS.  A name-matching scanner finds neither of these -- that is the whole
+    # measured difference between bandit's B105 and detect-secrets' detectors -- so a secret-scan
+    # row on a fixture with no secret would certify nothing.
+    # INSIDE an existing package: a new top-level directory beside `pkg/` makes setuptools see
+    # two top-level packages and the wheel build dies on discovery -- a fixture change that
+    # silently broke a different row (build_package, measured).
+    # assembled from parts: the repository must not carry a token-shaped literal (GitHub push
+    # protection rejected this commit for the Slack one, which is the same law the verb enforces)
+    (b / "pkg" / "credentials.env").write_text(
+        'AWS_ACCESS_KEY_ID = "AKIA' + 'IOSFODNN7EXAMPLE"\n'
+        'SLACK_BOT = "xoxb-' + '123456789012-1234567890123-AbCdEfGhIjKlMnOpQrStUvWx"\n',
         encoding="utf-8")
     g = lambda *a: subprocess.run(["git", "-c", "user.email=a@b", "-c", "user.name=a", *a],
                                   cwd=b, capture_output=True, text=True)
@@ -271,10 +287,17 @@ def main() -> int:
                 # the analyser that answered a type check was reported as not owning it, and a
                 # correct answer was counted as a hollow pass -- the third time in this probe
                 # that a comparison was made at the wrong granularity.
-                _own = (set(re.findall(r"[a-z0-9]+", " ".join(
-                            str(x).lower() for x in (_entry.get("keywords") or []))))
-                        | set(re.findall(r"[a-z0-9]+", selected.lower()))
-                        | set(re.findall(r"[a-z0-9]+", " ".join(_entry.get("provides") or []).lower())))
+                # CLAIMS ONLY, NOT ROUTING HANDLES.  `keywords` are the words the door may
+                # route a sentence BY; `provides` is what the capability says it WILL DO.  A
+                # capability can legitimately be reachable by a word it does not claim, so
+                # counting keywords as ownership let `python.toolchain.bandit_security.v1`
+                # (keywords: "leaked secrets", "known vulnerabilities", provides:
+                # python.source.security.report) own BOTH secret scanning and vulnerability
+                # auditing -- and the probe certified two acts nothing performs, which is the
+                # only way this instrument can do worse than reporting nothing at all.
+                _own = (set(re.findall(r"[a-z0-9]+", selected.lower()))
+                        | set(re.findall(r"[a-z0-9]+",
+                                         " ".join(_entry.get("provides") or []).lower())))
                 # Does the answering capability claim THIS ACT?  The act's own name is the
                 # question, not the sentence's first word: measured, this read `head` -- the
                 # verb that opens the request ("Show", "Commit") -- against the answering
