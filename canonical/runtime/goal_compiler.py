@@ -1398,6 +1398,16 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
         if rescued is not _UNBOUND:
             result[key]=rescued
             continue
+        # A VERIFICATION SLOT IS NOT A PREMISE.  `run_tests` names the suite that will judge the
+        # edit; every refactor adapter treats its absence as PASS_BLIND with verified=false, which
+        # is the truthful statement "nothing checked this".  Refusing to bind an empty list made
+        # the sentence "Rename the function top to apex in <module>" unable to reach ANY refactor
+        # verb -- measured: FAIL_CLOSED__STATED_ACT_INPUTS_UNBOUND
+        # python.refactor.rename_parameter.v1:run_tests, on a request that stated everything the
+        # edit needs.
+        if str(key) == "run_tests":
+            result[key]=[]
+            continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
 

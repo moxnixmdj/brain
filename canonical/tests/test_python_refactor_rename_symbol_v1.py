@@ -335,6 +335,56 @@ def probe():
         self.assertIn("v * FACTOR", core)
         self.assertEqual(art["symbol_kind"], "MODULE_BINDING")
 
+    def test_a_package_directory_as_source_root_still_rewrites_qualified_imports(self):
+        """Module identity is the FILE, not the dotted string.
+
+        Measured before this pin existed: `source_root=src/pkg`, `module=core.py` renamed the def
+        and left `from pkg.core import top` untouched -- the import spells "pkg.core", the target
+        was "core" -- while still reporting complete=True with no unknown site.  Only a post-edit
+        test run could see it.  The name relative to the source root's PARENT is the
+        package-qualified spelling, and it denotes the same file, so it must be rewritten.
+        """
+        src = self.tmp / "src"
+        pkg = src / "pkg"
+        pkg.mkdir(parents=True)
+        (pkg / "__init__.py").write_text("", encoding="utf-8")
+        (pkg / "core.py").write_text("def top(n):\n    return n + 1\n", encoding="utf-8")
+        (pkg / "test_core.py").write_text(
+            "import unittest\nfrom pkg.core import top\n\n\n"
+            "class T(unittest.TestCase):\n    def test_top(self):\n"
+            "        self.assertEqual(top(1), 2)\n", encoding="utf-8")
+        art = _run(self.tmp, source_root="src/pkg", module="core.py", qualname="top",
+                   new_symbol="apex", run_tests=["test_core.py"])
+        self.assertIn("from pkg.core import apex", (pkg / "test_core.py").read_text())
+        self.assertIn("def apex(n):", (pkg / "core.py").read_text())
+        self.assertEqual(art["files_edited"], ["core.py", "test_core.py"])
+        self.assertTrue(art["verified"])
+        self.assertEqual(art["gate"], "PASS")
+
+    def test_an_ambiguous_dotted_name_is_never_matched(self):
+        """A name that could denote two files proves nothing, so it edits nothing.
+
+        `core.py` exists twice here.  The bare spelling "core" is therefore not evidence of which
+        file an import means; only "pkg.core" is.  The caller that spells it ambiguously is left
+        alone rather than edited on a guess.
+        """
+        src = self.tmp / "src"
+        (src / "pkg").mkdir(parents=True)
+        (src / "other").mkdir(parents=True)
+        for d in ("pkg", "other"):
+            (src / d / "__init__.py").write_text("", encoding="utf-8")
+        (src / "pkg/core.py").write_text("def top(n):\n    return n + 1\n", encoding="utf-8")
+        (src / "other/core.py").write_text("def top(n):\n    return n - 1\n", encoding="utf-8")
+        (src / "pkg/user.py").write_text("from pkg.core import top\n\n\ndef go():\n    return top(1)\n", encoding="utf-8")
+        (src / "loose.py").write_text("from core import top\n\n\ndef go():\n    return top(1)\n", encoding="utf-8")
+        _run(self.tmp, source_root="src", module="pkg/core.py", qualname="top", new_symbol="apex")
+        self.assertIn("from pkg.core import apex", (src / "pkg/user.py").read_text())
+        self.assertIn("return apex(1)", (src / "pkg/user.py").read_text())
+        self.assertEqual((src / "loose.py").read_text(),
+                         "from core import top\n\n\ndef go():\n    return top(1)\n")
+        self.assertIn("def top(n):", (src / "other/core.py").read_text())
+
+
 
 if __name__ == "__main__":
     unittest.main()

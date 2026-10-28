@@ -5329,7 +5329,12 @@
     "dedent",
     "inputs outputs inference",
     "semantic edit",
-    "codemod"
+    "codemod",
+    "statement",
+    "block",
+    "extract",
+    "method",
+    "extract statement"
    ],
    "limitations": [
     "region bytes move verbatim and dedent exactly 4: comments and formatting inside the region are byte-carried, never reprinted; the extracted def parse-checks BEFORE the file is touched and the rebuilt module parse-checks before it is written.",
@@ -5419,7 +5424,10 @@
     "kwargs",
     "signature",
     "semantic edit",
-    "codemod"
+    "codemod",
+    "argument",
+    "kwarg",
+    "keyword argument"
    ],
    "limitations": [
     "edits identifiers, never strings or formatting: comment/docstring words byte-preserved; all splices are byte-integrity-checked at exact identifier spans (SPAN_INTEGRITY refusal).",
@@ -5510,7 +5518,12 @@
     "call site",
     "import propagation",
     "semantic edit",
-    "codemod"
+    "codemod",
+    "function",
+    "method",
+    "class",
+    "variable",
+    "rename function"
    ],
    "limitations": [
     "edits identifiers at exact spans only: strings, comments and formatting are byte-preserved; every splice is verified against the original bytes (SPAN_INTEGRITY).",

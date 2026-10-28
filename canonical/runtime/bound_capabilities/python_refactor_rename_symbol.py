@@ -92,6 +92,47 @@ def _modname_of(rel: str) -> str:
     return ".".join(parts)
 
 
+def _module_aliases(module_abs, src_abs, repo, all_py):
+    """Every dotted name that provably denotes `module_abs`, and no other file.
+
+    A module's dotted name depends on which directory is on `sys.path`, and the
+    caller does not say.  `source_root` is the tree being edited, so the file's
+    path relative to it is one name; relative to its parent is another (the
+    package-qualified spelling every `from pkg.core import x` uses); relative to
+    the repo a third.  Each candidate is kept only when it resolves back to this
+    exact file and to nothing else in the tree -- identity of FILE, never of
+    string.  Measured before this existed: renaming `top` in `pkg/core.py` with
+    `source_root=pkg` and `module=core.py` left `from pkg.core import top`
+    untouched (the import says "pkg.core", the target was "core"), reported
+    complete=true with no unknown site, and only the post-edit test run caught
+    it.  A rename that misses a reference while claiming completeness is worse
+    than one that refuses.
+    """
+    names = set()
+    for base in (src_abs, src_abs.parent, repo):
+        try:
+            rel = module_abs.relative_to(base)
+        except ValueError:
+            continue
+        if rel.suffix != ".py":
+            continue
+        names.add(_modname_of(rel.as_posix()))
+    unique = set()
+    for name in names:
+        owners = set()
+        for path in all_py:
+            for base in (src_abs, src_abs.parent, repo):
+                try:
+                    rel = path.relative_to(base)
+                except ValueError:
+                    continue
+                if rel.suffix == ".py" and _modname_of(rel.as_posix()) == name:
+                    owners.add(path)
+        if owners == {module_abs}:
+            unique.add(name)
+    return unique
+
+
 def _params_of(fn):
     a = fn.args
     out = list(a.posonlyargs) + list(a.args) + list(a.kwonlyargs)
@@ -265,6 +306,8 @@ def run(args, root):
     all_py = sorted(p for p in src_abs.rglob("*.py")
                     if "__pycache__" not in p.parts)
     originals = {p: p.read_bytes() for p in all_py}
+    # module identity for imports is by FILE, not by string (see _module_aliases)
+    target_mods = _module_aliases(module_abs, src_abs, repo, all_py) or {target_mod}
     parsed = {}
     for path in all_py:
         rel = path.relative_to(src_abs).as_posix()
@@ -397,13 +440,13 @@ def run(args, root):
             for node in ast.walk(tree):
                 if isinstance(node, ast.Name) and node.id == old:
                     hit = bindings.get(old)
-                    if hit and hit == (target_mod, old):
+                    if hit and hit[0] in target_mods and hit[1] == old:
                         edits.append((node.lineno, node.col_offset, old))
                 elif isinstance(node, ast.Attribute) and node.attr == old:
                     v = node.value
                     if isinstance(v, ast.Name):
                         hit = bindings.get(v.id)
-                        if hit and hit[0] == target_mod and hit[1] is None:
+                        if hit and hit[0] in target_mods and hit[1] is None:
                             # import target_mod [as alias]; alias.old(...)
                             edits.append((node.lineno,
                                           node.col_offset + len(v.id) + 1, old))
@@ -414,7 +457,7 @@ def run(args, root):
             # the import lines themselves (rewrite the imported NAME token)
             for node in ast.walk(tree):
                 if isinstance(node, ast.ImportFrom) and \
-                        (node.module or "") == target_mod:
+                        (node.module or "") in target_mods:
                     for a in node.names:
                         if a.name == old and a.asname is None:
                             ln = node.lineno
