@@ -32,7 +32,7 @@ HARDCORE-SE MISSING-VERB PROBE (43 acts)          with the declared toolchain  |
   refusals that NAME the missing act  9/13
 
 WHOLE-SURFACE REACHABILITY (450 entries = 156 registered + 294 receipt projections)
-  REACHED_AND_BOUND                426      NOT_REACHABLE 10
+  REACHED_AND_BOUND                428      NOT_REACHABLE 10
   ROUTED_ELSEWHERE                   9      REACHED_BY_EXPLICIT_NAME 3
 
 REGISTRY EVIDENCE (156 entries)                                              see §8
@@ -45,11 +45,15 @@ PINNED PINS                        16/16 evidence, 8/8 route-identification,
                                    6/6 api-compatibility, 6/6 resource-leak, 9/9 move-function
 ```
 
-Read the first block as a capability statement: **28 of the 43 acts a senior engineer performs on
+Read the first block as a capability statement: **30 of the 43 acts a senior engineer performs on
 any given day are performed by their owning capability, with the promised artifact on disk, and
-15 are refused in words that name the act.** Zero are answered by a tool that had no business
+13 are refused in words that name the act.** Zero are answered by a tool that had no business
 answering them. That last number is what V14 bought, and it is the only one in this table that was
 ever *worse than zero* — a confident wrong answer costs more than a refusal.
+
+The second column is the honest caveat, and it is Class H (§9): the same 43 sentences against a
+bare interpreter lose 8 acts outright, because the tools those capabilities call are installed
+here and merely *declared* there. That is a law the door does not yet enforce.
 
 ---
 
