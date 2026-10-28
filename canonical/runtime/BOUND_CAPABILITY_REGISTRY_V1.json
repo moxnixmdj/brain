@@ -2840,6 +2840,7 @@
     "local commit"
    ],
    "limitations": [
+    "POSIX only: the lane forces GIT_ASKPASS=/bin/true and LC_ALL=C, so it is verified on linux and darwin and is not claimed for windows. Measured 2026-10-28: 37 registry rows claim windows while their adapter contains POSIX-only constructs; these three no longer do.",
     "applies a unified diff only: binary hunks and mode changes are refused by git apply as DIFF_DOES_NOT_APPLY.",
     "never pushes, never fetches, never changes repository configuration; landing on a remote is a separate authorisation this capability does not hold.",
     "on any red (tests, commit, or a diff that does not apply) the branch is deleted and the tree is reset to the recorded HEAD before the call is refused, so a caller cannot be left mid-change.",
@@ -2848,8 +2849,7 @@
    ],
    "platforms": [
     "linux",
-    "darwin",
-    "windows"
+    "darwin"
    ],
    "provides": [
     "git.change.land"
@@ -2925,6 +2925,7 @@
     "which change caused"
    ],
    "limitations": [
+    "POSIX only: the lane forces GIT_ASKPASS=/bin/true and LC_ALL=C, so it is verified on linux and darwin and is not claimed for windows. Measured 2026-10-28: 37 registry rows claim windows while their adapter contains POSIX-only constructs; these three no longer do.",
     "bad defaults to HEAD and good to the oldest root commit reachable from bad, both recorded in the artifact (good_inferred_as_root_commit) because \"when did it break\" names an effect rather than two commit ids.",
     "the range is counted before anything runs and a range needing more than max_steps bisections refuses with BISECT_RANGE_EXCEEDS_MAX_STEPS instead of being killed mid-bisect with the tree checked out on some commit.",
     "test_argv defaults to the repository's own test_*.py suites run through the loader-based suite runner (chain: python_test_guided_patch_search_v1.suite_argv), not to a script run that would execute nothing in the 695 of 2019 files without a __main__ guard.",
@@ -2935,8 +2936,7 @@
    ],
    "platforms": [
     "linux",
-    "darwin",
-    "windows"
+    "darwin"
    ],
    "provides": [
     "git.regression.bisect"
@@ -3021,6 +3021,7 @@
     "branch list"
    ],
    "limitations": [
+    "POSIX only: the lane forces GIT_ASKPASS=/bin/true and LC_ALL=C, so it is verified on linux and darwin and is not claimed for windows. Measured 2026-10-28: 37 registry rows claim windows while their adapter contains POSIX-only constructs; these three no longer do.",
     "the goal sentence is read deterministically (derive_queries: literal patterns, no model); the artifact records the sentence next to the queries it produced, and a sentence that names no readable effect refuses with QUERY_KIND_UNDERIVED rather than falling back to a status dump.",
     "repo_path defaults to the caller's root and output_path to canonical/astra_runtime/tmp/git_lane/inspect_<digest>.json, because a sentence about a repository names an effect, not its own arguments.",
     "read-only: every subcommand it can run is in the read set; a write verb never reaches subprocess.",
@@ -3030,8 +3031,7 @@
    ],
    "platforms": [
     "linux",
-    "darwin",
-    "windows"
+    "darwin"
    ],
    "provides": [
     "git.repository.inspect"

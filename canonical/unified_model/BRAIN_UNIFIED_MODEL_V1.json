@@ -21661,8 +21661,7 @@
    ],
    "platforms": [
     "darwin",
-    "linux",
-    "windows"
+    "linux"
    ],
    "provenance": {
     "source_executable": null,
@@ -21749,8 +21748,7 @@
    ],
    "platforms": [
     "darwin",
-    "linux",
-    "windows"
+    "linux"
    ],
    "provenance": {
     "source_executable": null,
@@ -21830,8 +21828,7 @@
    ],
    "platforms": [
     "darwin",
-    "linux",
-    "windows"
+    "linux"
    ],
    "provenance": {
     "source_executable": null,
@@ -28973,7 +28970,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f1f12fe53ca7a037603ea3368b4a05a5ade1306f5664e7591478d6802464e5b0"
+  "value": "5e055b90bca3253534067620222cfe0c1e1b93c16c08de2f4f409d34d5f2ee2e"
  },
  "engines": [
   {
@@ -52665,7 +52662,7 @@
   "included_source_count": 943,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "40cb90af1c4e33a13cc8c3ba64d366af531666aed2c7627bb78faa3821d0f1ce"
+  "source_tree_digest": "71fd8d5f49ebad35ad115b82b505b6091b07c9f97b088d522e80d7c750677131"
  },
  "research_index": [
   {
