@@ -742,6 +742,24 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
     # 72-capability probe with ``SystemExit: 1`` instead of reporting anything.
     except (Exception, SystemExit) as exc:  # noqa: BLE001 - every adapter failure is a closed failure
         tool_executed = not isinstance(exc, LocalExecutionFailure) or "ACTION_EXPECTATION_FAILED" in str(exc)
+        # A REVIEW THAT RAN AND FOUND A PROBLEM IS NOT A BROKEN ADAPTER.
+        #
+        # The four review gates declare ``expect: gate == PASS``, so a gate that executed
+        # perfectly and reported FAIL -- a real finding, e.g. ``subprocess.run(shell=True)`` --
+        # came back as FAIL__LIVE_CONTROLLER_EXECUTION, indistinguishable from a crash.  The
+        # expectation is about the CODE, not about the review, and the runner may not silently
+        # reinterpret either; what it can do is report the two separately.  `pass` stays False
+        # (the review did not certify clean code), the status says a review ran, and the verdict
+        # the gate emitted is carried in the reason.
+        _expect = action.get("expect") if isinstance(action.get("expect"), Mapping) else {}
+        _verdict_field = str((_expect or {}).get("field") or "")
+        if _verdict_field and "ACTION_EXPECTATION_FAILED" in str(exc):
+            return _fail(task_id, "FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT",
+                         "REVIEW_EXECUTED__VERDICT_IS_THE_ANSWER__CODE_NOT_CERTIFIED", started,
+                         executed=True, reviewed=True, review_verdict_field=_verdict_field,
+                         compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                         reason=type(exc).__name__ + ":" + str(exc),
+                         executor=LOCAL_EXECUTION_PROOF, tool_executed=True)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
                      executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
@@ -1252,8 +1270,12 @@ _ANSWER_SURFACE_RE = re.compile(r"\b(?:explain\w*|diagnos\w*|fault\w*|locali[sz]
 # admitted the moment one is bound, and nothing here names a capability.
 _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     (_ANSWER_REQUEST_RE, _ANSWER_SURFACE_RE, "STATED_ANSWER_NOT_PROVIDED_BY_CAPABILITY"),
-    (re.compile(r"\bsecurity\s+(?:audit|review|scan)\b|\bvulnerabilit\w*\b|"
-                r"\bsecurity\s+(?:check|analysis)\b", re.IGNORECASE),
+    # "for security ISSUES" is how an engineer says it, and the row did not read it: measured
+    # 2026-10-29, "Review <f> for security issues" matched no stated effect at all, so the
+    # declaration shortlist came back empty and the ranker was free to propose a gate composer.
+    (re.compile(r"\bsecurity\s+(?:audit|review|scan|check|analysis)\b"
+                r"|\b(?:security|securit\w*)\s+(?:issue|problem|bug|risk|flaw|hole)s?\b"
+                r"|\bvulnerabilit\w*\b|\bexploitab\w*\b", re.IGNORECASE),
      re.compile(r"security|vulnerab|injection|secret|taint|bandit|cwe|exploit", re.IGNORECASE),
      "STATED_SECURITY_REVIEW_NOT_PROVIDED_BY_CAPABILITY"),
     (re.compile(r"\b(?:test\s+)?coverage\b", re.IGNORECASE),
@@ -1360,6 +1382,66 @@ def stated_application_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     if _APPLICATION_SURFACE_RE.search(surface):
         return []
     return ["STATED_APPLICATION_NOT_PERFORMED_BY_CAPABILITY:" + (cid or "UNNAMED")]
+
+
+def _declared_surface(cid: str, entry: Mapping[str, Any]) -> str:
+    """The surface a capability is judged by: its id, what it provides, what it names.
+
+    One function, because it was written twice (here and in the answer gate) and two copies of a
+    surface is two chances for the gate that refuses and the filter that proposes to disagree.
+    """
+    return " ".join([str(cid),
+                     " ".join(str(x) for x in (entry.get("provides") or [])),
+                     " ".join(str(x) for x in (entry.get("keywords") or []))])
+
+
+def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[str]:
+    """The rows whose OWN DECLARATION can supply every effect the sentence states.
+
+    THE ROUTER HAD NO "NONE OF THESE".  It ranks 125 routable rows and always returns a top-1, so
+    the only thing between a wrong pick and a wrong answer was whether some downstream gate
+    happened to apply.  Measured 2026-10-29 on a fresh tree: "Review <f> for security issues"
+    reached a gate COMPOSER (and, with a report path, a Pandoc PDF converter) while
+    ``python.review.diff_security_gate.v1`` -- 1 of 125 rows, and the only one that declares
+    ``security`` -- was never a candidate; the same sentence over a directory reached
+    ``python.source.audit.ast``.
+
+    The data for this already existed and was already correct: ``_STATED_EFFECTS`` is the table
+    the answer gate uses to REFUSE a capability that cannot supply the stated effect.  Asking it
+    one step earlier turns "best of 125" into "these rows declare it, and nobody else does" --
+    so a capability is a candidate because of what it says it does, not because of how many of the
+    sentence's words appear in its keywords.
+
+    Returns [] when the sentence states no effect, or when NOTHING declares the effect it states
+    (dead code, bisect, CI today): an empty answer must not narrow the registry, because the
+    honest outcome then is the refusal the answer gate already produces.
+    """
+    text = str(goal or "")
+    if not text.strip():
+        return []
+    asked = [row for row in _STATED_EFFECTS if row[0].search(text)]
+    if not asked:
+        return []
+    # WHAT IT PRODUCES OUTRANKS WHAT IT IS TAGGED WITH.
+    #
+    # `provides` is a claim about output; `keywords` are tags, and tags are how a tool name gets
+    # attached to a row that does not implement it.  Measured: `software.review.gate.composer.v1`
+    # lists `bandit`, `coverage` and `mutation` as KEYWORDS, so it counted as a supplier of a
+    # "security issues" review, outranked the one row that provides a security gate, and the
+    # sentence was refused by the composer's own weakness.  A row that PRODUCES the effect is a
+    # candidate; a row that merely mentions the tool is a candidate only when nothing produces it.
+    strong: list[str] = []
+    weak: list[str] = []
+    for cid, entry in (registry or {}).items():
+        if not isinstance(entry, Mapping):
+            continue
+        produces = " ".join([str(cid), " ".join(str(x) for x in (entry.get("provides") or []))])
+        if all(supplied.search(produces) for _ask, supplied, _code in asked):
+            strong.append(str(cid))
+        elif all(supplied.search(_declared_surface(str(cid), entry))
+                 for _ask, supplied, _code in asked):
+            weak.append(str(cid))
+    return sorted(strong) if strong else sorted(weak)
 
 
 def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
@@ -2245,7 +2327,17 @@ _JUDGED_FAILURE_CLASSES = frozenset({
 # caller's: every step completed (nothing raised, no ``side_effect_landed: UNKNOWN``) and every
 # artifact it named lives under this repository's own spool directory.  A chain that wrote inside
 # the tree the request named is a world nobody has seen, and it stays un-retryable.
-_COMPOSED_UNVERIFIED_CLASSES = frozenset({"COMPOSED_CHAIN_NOT_VERIFIED"})
+#
+# ``STEP_RAISED_OUTCOME_UNKNOWN`` belongs to the same class, by its own name: the composer ran a
+# step and the outcome is UNKNOWN, i.e. it claims nothing about the request.  Measured 2026-10-29
+# on "Measure the test coverage of <file>": the composed chain parsed the file with tree-sitter and
+# then ran ``python.repository.acceptance.measure.v1``, which raised
+# ``MeasurementError:NO_TEST_FILES_UNDER_SOURCE_ROOT``.  That raise made the attempt "executed and
+# un-retryable", so a decisive typed plan for ``python.review.diff_coverage_gate.v1`` was never
+# allowed to answer, and the caller was told the outcome was unknown when a capability that
+# measures exactly this existed.  A raise is not a side effect; what matters is what landed.
+_COMPOSED_UNVERIFIED_CLASSES = frozenset({"COMPOSED_CHAIN_NOT_VERIFIED",
+                                          "STEP_RAISED_OUTCOME_UNKNOWN"})
 _SPOOL_DIR_PREFIX = "canonical/astra_runtime/tmp/"
 
 
@@ -2253,10 +2345,17 @@ def _composed_wrote_only_its_own_scratch(result: Mapping[str, Any]) -> bool:
     steps = list(((result.get("composer_execution") or {}).get("steps") or []))
     if not steps:
         return False
+    # Evidence of the world, not of the code path: anything the chain says it CREATED outside the
+    # spool is a world nobody has seen, and then it stays un-retryable.
+    for created in (((result.get("composer_execution") or {}).get("created_paths")) or []):
+        if isinstance(created, str) and created.strip() and not created.startswith(_SPOOL_DIR_PREFIX):
+            return False
     for row in steps:
         if not isinstance(row, Mapping):
             return False
-        if row.get("adapter_raised") or row.get("side_effect_landed") or row.get("result") is None:
+        # A raised step is allowed (see above); a step that reports a landed side effect or that
+        # produced no result at all is not evidence that nothing happened.
+        if row.get("side_effect_landed") or (row.get("result") is None and not row.get("adapter_raised")):
             return False
         args = row.get("args") or {}
         for key in ("output_path", "result_path"):
@@ -2284,6 +2383,28 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     if result.get("pass") is True:
         return False
     failure_class = str(result.get("failure_class") or "")
+    # THE ANSWER GATE JUDGES ONE CAPABILITY, SO ITS REFUSAL IS NOT A VERDICT ABOUT THE WORLD.
+    #
+    # ``stated_answer_errors`` is a statement about the row that was about to run: "this row does
+    # not provide the effect the sentence states".  When the only evidence in the refusal is that
+    # judgement AND nothing executed, the door has learned that its ROUTING was wrong, not that the
+    # request cannot be served -- and a decisive typed selection (exactly one row that binds every
+    # stated input) is the evidence that a better row exists.  The retry re-enters the SAME gate
+    # chain, so the answer gate is asked again about the row that actually answers: nothing can
+    # slip through, and the refusal is not weakened, only redirected.
+    #
+    # Measured 2026-10-29: "Measure the test coverage of <a file whose directory has no tests>"
+    # compiled to code.impact.tree_sitter.testselect.v1, which was refused pre-execution with
+    # STATED_COVERAGE_NOT_MEASURED_BY_CAPABILITY:UNNAMED, and that refusal -- about the wrong row --
+    # stopped the retry from running python.review.diff_coverage_gate.v1, the one capability that
+    # measures coverage, whose own honest answer is NO_TESTS_DISCOVERED.
+    _only_answer_gate = (result.get("executed") is not True
+                         and result.get("refused_before_execution") is True
+                         and bool(result.get("stated_answer_errors"))
+                         and not any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS
+                                     if field != "stated_answer_errors"))
+    if _only_answer_gate:
+        return True
     if any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS):
         return False
     if failure_class in _COMPOSED_UNVERIFIED_CLASSES:
@@ -2334,6 +2455,52 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         retry_request = dict(request)
         retry_request["_typed_swe_plan"] = plan
         retry = _solve_body(retry_request)
+        # A RETRY THAT REACHED A DIFFERENT CAPABILITY IS THE ANSWER, refusal or not.
+        #
+        # Only a PASS used to be returned.  A capability that refuses for its own reason
+        # (``NO_TESTS_DISCOVERED``, a stated precondition) refused with ``executed: False``, so the
+        # caller was handed the PRIMARY's status -- a refusal about a row that had nothing to do
+        # with the request.  The retry ran the row the sentence actually names and the report said
+        # something else.  The primary did not execute anything here (that is a precondition of the
+        # retry), so there is no verdict to overwrite.
+        _retry_is_the_answer = (
+            retry.get("pass") is True
+            or retry.get("executed") is True
+            or bool(retry.get("refusal_payload"))
+            or bool(retry.get("reviewed"))
+            or (_capability_id_of(retry) and _capability_id_of(retry) != _capability_id_of(result))
+        )
+        if _retry_is_the_answer:
+            retry["typed_swe_retry"] = {
+                "schema": "SWE_TYPED_RETRY_V1",
+                "primary_status": result.get("status"),
+                "selected_capability": plan[2].get("selected_capability"),
+                "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
+                "returned_because": "THE_RETRY_REACHED_THE_CAPABILITY_THE_SENTENCE_NAMES",
+                "model_dependency_count": 0,
+                "incremental_spend_usd": 0,
+            }
+            return retry
+        if retry.get("pass") is not True and retry.get("executed") is True:
+            # THE RETRY RAN THE WORK AND ITS VERDICT WAS THROWN AWAY.
+            #
+            # Only a PASS used to be returned, so when the typed plan reached the RIGHT capability
+            # and that capability executed but could not certify (measured 2026-10-29: a security
+            # review that really ran and really found `shell=True`), the caller was told
+            # FAIL__RAW_GOAL_COMPILATION_GAP -- "I could not turn this into an executable
+            # contract" -- about a review that had just run.  Same class as the composed-chain
+            # fix: the report must not deny work that happened.  `pass` stays False; the retry's
+            # own status, reason and evidence are what the caller gets.
+            retry["typed_swe_retry"] = {
+                "schema": "SWE_TYPED_RETRY_V1",
+                "primary_status": result.get("status"),
+                "selected_capability": plan[2].get("selected_capability"),
+                "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
+                "returned_because": "THE_RETRY_EXECUTED_AND_ITS_VERDICT_IS_THE_ONE_TO_REPORT",
+                "model_dependency_count": 0,
+                "incremental_spend_usd": 0,
+            }
+            return retry
         if retry.get("pass") is True:
             retry["typed_swe_retry"] = {
                 "schema": "SWE_TYPED_RETRY_V1",
@@ -2347,6 +2514,30 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
         pass
     return result
+
+
+def _capability_id_of(result: Mapping[str, Any]) -> str:
+    """The capability a result is ABOUT, whichever key the path used to name it."""
+    for key in ("compiled_capability_id", "capability_id", "selected_capability"):
+        value = str((result or {}).get(key) or "").strip()
+        if value:
+            return value
+    return ""
+
+
+def _decisive_typed_plan(goal: str) -> Any:
+    """The hidden typed selector's decisive plan for this sentence, or None.
+
+    Advisory only: any fault (or a non-SWE sentence, or an ambiguous shortlist) returns None and
+    the caller keeps its original path.
+    """
+    try:
+        from canonical.runtime import swe_typed_plan_v1 as _typed_plan
+        if not _typed_plan.is_swe_request(goal):
+            return None
+        return _typed_plan.build_plan(goal, ROOT)
+    except Exception:  # noqa: BLE001 - a working guess beats a broken advisory
+        return None
 
 
 def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
@@ -2382,6 +2573,32 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # PROMISED_ARTIFACT_MISSING:A, naming the source the sentence asked to
         # have gone.  The main path below has always read this list before
         # _execute; this branch did not.
+        # A DECISIVE TYPED PLAN IS NOT A CHAIN SENTENCE.
+        #
+        # Composition exists for a sentence no single capability answers.  A decisive typed
+        # selection is the opposite evidence: exactly one capability binds every input the
+        # sentence states.  Composing anyway means running a GUESS, and a guess that raises
+        # records ``side_effect_landed: UNKNOWN`` -- which correctly forbids a later retry, so
+        # the decisive plan never got to answer.  Measured 2026-10-29 on "Measure the test
+        # coverage of <file>": the guess parsed the file with tree-sitter and then ran
+        # ``python.repository.acceptance.measure.v1``, which raised
+        # ``MeasurementError:NO_TEST_FILES_UNDER_SOURCE_ROOT``, and the sentence was answered
+        # FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN while
+        # ``python.review.diff_coverage_gate.v1`` bound and executed.  Ask the typed selector
+        # BEFORE guessing; a non-decisive selector returns None and composition runs unchanged.
+        if _typed_plan is None:
+            _pre = _decisive_typed_plan(goal)
+            if _pre is not None:
+                _pre_request = dict(request)
+                _pre_request["_typed_swe_plan"] = _pre
+                _pre_result = _solve_body(_pre_request)
+                _pre_result["typed_plan_before_composed_guess"] = {
+                    "schema": "SWE_TYPED_PLAN_PRECEDES_COMPOSITION_V1",
+                    "selected_capability": _pre[2].get("selected_capability"),
+                    "why": "A_DECISIVE_TYPED_SELECTION_BINDS_EVERY_STATED_INPUT_SO_NO_CHAIN_IS_NEEDED",
+                    "model_dependency_count": 0, "incremental_spend_usd": 0,
+                }
+                return _pre_result
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
         # THE SNAPSHOT THE CHAIN IS JUDGED AGAINST HAS TO EXIST BEFORE THE CHAIN RUNS.
@@ -2566,9 +2783,30 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # "Generate the test scaffold for the python source root D": the capability
         # was selected correctly and then escaped solve() as an uncaught SystemExit.
         # A front door that raises is worse than one that refuses.
+        # A STRUCTURED REFUSAL IS NOT A CRASH.
+        #
+        # The repository's adapters refuse with ``raise SystemExit(json.dumps({"error": true,
+        # "reason": ...}))``.  Reporting that as CAPABILITY_EXITED_PROCESS threw the reason away:
+        # measured 2026-10-29, "measure the test coverage of <a directory with no tests>" came back
+        # with an empty reason while the adapter had said, in JSON, ``NO_TESTS_DISCOVERED``.  The
+        # verdict is still a closed failure -- nothing widens -- but it now names what the
+        # capability refused for.
+        _payload = str(exc)
+        try:
+            _decoded = json.loads(_payload)
+        except (ValueError, TypeError):
+            _decoded = None
+        if isinstance(_decoded, Mapping) and _decoded.get("error") is True:
+            _why = str(_decoded.get("reason") or "UNSPECIFIED").strip()[:200]
+            return _fail(task_id, "FAIL_CLOSED__CAPABILITY_REFUSED_" + _why.split(":")[0][:60],
+                         "CAPABILITY_REFUSED:" + _why, started,
+                         compiled_capability_id=str(compiled.get("capability_id")
+                                                    or compiled.get("selected_capability") or ""),
+                         refusal_payload=dict(_decoded))
         return _fail(task_id, "FAIL_CLOSED__CAPABILITY_EXITED_PROCESS",
-                     "CAPABILITY_EXITED_PROCESS:" + str(exc)[:300], started,
-                     compiled_capability_id=str(compiled.get("capability_id") or ""))
+                     "CAPABILITY_EXITED_PROCESS:" + _payload[:300], started,
+                     compiled_capability_id=str(compiled.get("capability_id")
+                                                or compiled.get("selected_capability") or ""))
     result["route_admission"] = admission
     result["memory_recalled"] = [
         {"id": r.get("id"), "content": r.get("content"),

@@ -80,6 +80,22 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
       "tests fail", "returns the wrong", "wrong value", "does not pass",
       "doesn't pass"),
      ("apply", "land", "write the fix"), "apply"),
+    # THE FOUR REVIEW GATES ARE MEASUREMENTS, AND A MEASUREMENT NAMES ITS EFFECT.
+    # Measured 2026-10-29: each of these four rows exists, executes and reports a real
+    # verdict, and none was reachable from the sentence that describes it -- the lexical
+    # shortlist proposed composers and PDF converters instead, so "measure the test
+    # coverage of <file>" was answered with FAIL__RAW_GOAL_COMPILATION_GAP and "review
+    # <file> for security issues" reached a document converter.  The family route is the
+    # established wiring for exactly this ("type check" above): enumerate by the
+    # registry's OWN keywords, let admit() be the oracle, require the effect token in the
+    # id.  Nothing is added to the registry and no id table is hardcoded.
+    (("test coverage", "coverage"), ("coverage",), "coverage"),
+    (("security issue", "security review", "security audit", "security scan",
+      "vulnerab", "check for security"), ("security", "vulnerab", "bandit"), "security"),
+    (("mutation score", "mutation test", "mutants", "mutation coverage"),
+     ("mutation", "mutant"), "mutation"),
+    (("performance regression", "performance review", "benchmark", "slower than",
+      "timing regression"), ("performance", "perf", "benchmark"), "perf"),
 )
 _FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration.verify.")
 
@@ -201,6 +217,19 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         low = surface.lower()
         if any(term in low for term in terms):
             candidates.append(cid)
+    if not candidates:
+        return None
+    # THE TOKEN IS THE DISCRIMINATOR, SO IT FILTERS BEFORE THE ORACLE RUNS.
+    #
+    # The third element of every family row is the effect the answer's NAME must state -- it was
+    # only checked after exactly one candidate had been admitted, which is the wrong order: a row
+    # that shares a keyword but does not produce the effect could not be the answer, yet its
+    # admission made the decision AMBIGUOUS and the request fail closed.  Measured 2026-10-29:
+    # "measure the test coverage of <file>" enumerated five rows, three of them bound, and the
+    # coverage gate -- the only row whose name states the effect -- was lost to that ambiguity.
+    # Filtering first is a tightening: no candidate the token excludes could ever have been
+    # returned, and every family that was decisive before is still decisive.
+    candidates = [cid for cid in candidates if token in str(cid).lower()]
     if not candidates:
         return None
     admitted: list[tuple[str, dict]] = []

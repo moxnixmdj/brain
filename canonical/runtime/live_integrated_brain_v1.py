@@ -349,6 +349,40 @@ def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
     named_here = {cid: entry for cid, entry in rows.items()
                   if not is_verified_entry(entry) and cid and cid in str(goal or "")}
     admissible = goal_compiler._platform_admissible_registry({**routable, **named_here})
+    # ASK WHAT CAN ANSWER BEFORE ASKING WHAT RANKS BEST.
+    #
+    # Measured 2026-10-29: the ranker returns a top-1 over 125 rows for every sentence, so 7 of
+    # 18 advanced refusals named a capability from an unrelated family, and two PASSED on one.  A
+    # sentence that states an effect (a security review, a coverage measurement, a caller map)
+    # has a smaller, declarable answer set: the rows whose own `provides`/`keywords` say they can
+    # supply it.  _STATED_EFFECTS already holds that data -- the answer gate uses it to REFUSE a
+    # capability that cannot -- so the same table, asked one step earlier, narrows the registry
+    # the compiler sees.  Rows the sentence names verbatim are always kept (identity is not a
+    # guess), and an empty answer set narrows nothing, because then nothing declares the effect
+    # and the gate's refusal is the honest outcome.
+    try:
+        from canonical.runtime import live_brain_route_admission_v1 as _door
+        declared = set(_door.declared_effect_ids(goal, admissible))
+    except Exception:  # noqa: BLE001 - a filter that cannot run must not change the answer
+        declared = set()
+    if declared:
+        kept = {cid: entry for cid, entry in admissible.items()
+                if cid in declared or (cid and cid in str(goal or ""))}
+        if kept and len(kept) < len(admissible):
+            # A SHORTLIST MAY NARROW WHAT IS PREFERRED; IT MAY NEVER MAKE THE ANSWER WORSE.
+            #
+            # The declared rows are a preference about who should answer, not a closure that may
+            # turn a routable sentence into a compile gap.  Measured 2026-10-29: "Set up CI to run
+            # the tests in <pkg>" declares an effect no row produces, yet a row whose keywords
+            # merely overlap ("workflow") was kept, the narrowed registry could not bind the
+            # sentence's inputs, compilation raised, and an honest pre-execution refusal
+            # (FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED) became a guessed chain that raised
+            # (FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN).  So: narrow, and on failure
+            # compile exactly as before.  The refusal this sentence deserves then returns unchanged.
+            try:
+                return registry, kept, goal_front_compiler_v1.compile_goal(goal, kept, base)
+            except goal_compiler.GoalCompilationFailure:
+                pass
     return registry, admissible, goal_front_compiler_v1.compile_goal(goal, admissible, base)
 
 

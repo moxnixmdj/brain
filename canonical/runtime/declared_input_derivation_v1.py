@@ -53,6 +53,11 @@ _CONFIGURATION_SLOTS = frozenset({
     "max_candidates", "max_total_candidates", "max_candidates_per_file",
     "max_edits", "max_pair_candidates", "max_symbols_per_file",
     "mutations_per_file", "pattern", "budget", "top_k", "seed", "verbose", "strict",
+    # Review-gate thresholds.  Measured 2026-10-29: every gate reads its ratio with
+    # ``float(args.get(k) if args.get(k) is not None else <default>)`` -- absence IS the
+    # default -- yet the binder demanded the number be spoken in the sentence, so
+    # "measure the test coverage of <file>" could not bind a gate that defaults it.
+    "min_coverage_ratio", "min_kill_ratio", "max_mutants", "repeats", "tolerance",
 })
 
 # Scope, measured not assumed: typed-admission pins for receipt-projected
@@ -65,6 +70,12 @@ _SWE_VERBS = (
     "rename", "repair", "fix", "bug", "broken", "refactor", "extract function",
     "lint", "type-check", "typecheck", "review", "localize", "traceback",
     "scaffold", "generate test", "failing test", "unit test", "patch",
+    # MEASUREMENT requests are software-engineering requests too.  Measured 2026-10-29:
+    # "Measure the test coverage of <file>." contains no verb from this list, so derivation
+    # never ran, `anchor_path` was never derived, and the coverage gate -- a capability that
+    # exists and works -- was unreachable from the sentence that describes it.
+    "coverage", "mutation", "mutant", "benchmark", "performance", "audit", "security",
+    "vulnerab", "static analysis", "typecheck", "check the",
 )
 
 
@@ -148,6 +159,14 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
             if isinstance(parent, ast.If) and node in ast.walk(parent.test):
                 guarded = True
                 break
+            # ``float(args.get(k) if args.get(k) is not None else 1.0)``: the read sits in a
+            # conditional EXPRESSION whose branch is the fallback.  Absence-provided default,
+            # proved from source, same as an ``or`` fallback.
+            if isinstance(parent, ast.IfExp) and node in ast.walk(parent.test) \
+                    and isinstance(parent.test, ast.Compare) \
+                    and any(isinstance(op, ast.IsNot) for op in parent.test.ops):
+                guarded = True
+                break
         # Scope is declaration-driven: only a proven configuration knob, never
         # an output (the stated destination is the acceptance promise) and never
         # a semantic path/root/argv slot.
@@ -188,8 +207,19 @@ _DERIVED_DIR = "canonical/astra_runtime/tmp/derived"
 _MAX_DIFF_BYTES = 1 << 20  # 1 MiB per stated file; beyond that no row (honest refusal)
 
 
-def _stated_change_set(files: list[str], root: pathlib.Path) -> dict[str, Any] | None:
-    """A unified diff in which every line of every stated file is new.  Pure in the bytes."""
+def _stated_change_set(files: list[str], root: pathlib.Path,
+                       base: str | None = None) -> dict[str, Any] | None:
+    """A unified diff in which every line of every stated file is new.  Pure in the bytes.
+
+    ``base`` is the directory the diff's paths are relative to, and it must be the SAME directory
+    the consuming gate treats as its anchor/worktree.  Measured 2026-10-29: the repository-relative
+    paths below were handed to ``python.review.diff_coverage_gate.v1`` with an anchor of the
+    package directory, so ``git apply`` planted ``canonical/.../calc.py`` INSIDE a copy of that
+    package and the suite (which imports ``calc``) never imported it.  The gate then found the
+    changed file absent from the coverage report, counted zero executable changed lines, and
+    reported ``gate: PASS`` with ``diff_covered_ratio: 1.0`` -- a passing coverage measurement
+    that measured nothing.  Paths and anchor are one decision, not two.
+    """
     root = pathlib.Path(root)
     chunks: list[str] = []
     for rel in files:
@@ -204,9 +234,30 @@ def _stated_change_set(files: list[str], root: pathlib.Path) -> dict[str, Any] |
         except UnicodeDecodeError:
             return None
         lines = text.splitlines()
-        chunks.append("--- /dev/null")
-        chunks.append("+++ b/" + rel)
-        chunks.append("@@ -0,0 +1,%d @@" % max(len(lines), 1))
+        shown = rel
+        if base:
+            try:
+                shown = str(pathlib.PurePosixPath(rel).relative_to(str(base).strip("./") or "."))
+            except ValueError:
+                return None
+        # THE FILE IS WHAT IT IS, SO THE CHANGE SET REWRITES IT IN PLACE.
+        #
+        # "Every line is new" was written as a NEW-file diff (``--- /dev/null``).  A gate that
+        # APPLIES the change set to a copy of the tree then refuses it: the file it claims to
+        # create already exists there.
+        #
+        #   DIFF_DOES_NOT_APPLY:error: .../_cov_tree_.../calc.py: already exists in working directory
+        #
+        # (measured 2026-10-29, python.review.diff_coverage_gate.v1).  A whole-file rewrite -- the
+        # file's own lines removed and re-added -- states the same thing (the entire file is in
+        # scope, every line is the new side) and applies to a tree that already holds it, because
+        # the removed lines are its exact content.  Nothing is invented: same bytes, both sides.
+        chunks.append("--- a/" + shown)
+        chunks.append("+++ b/" + shown)
+        chunks.append("@@ -1,%d +1,%d @@" % (max(len(lines), 1), max(len(lines), 1)))
+        chunks.extend("-" + line for line in lines)
+        if text and not text.endswith("\n"):
+            chunks.append("\\ No newline at end of file")
         chunks.extend("+" + line for line in lines)
         if text and not text.endswith("\n"):
             chunks.append("\\ No newline at end of file")
@@ -252,10 +303,17 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             discovered_tests = True
 
     # A directory slot is satisfied by the parent of the ONE stated source file.
-    if "source_root" in keys and len(sources) == 1:
-        parent = str(pathlib.PurePosixPath(sources[0]).parent)
-        if parent and (pathlib.Path(root) / parent).is_dir():
-            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
+    #
+    # ``anchor_path`` is the review gates' name for the SAME thing: the directory the tests run
+    # from (pytest rootdir).  The coverage/perf/mutation gates all declare it and none of them
+    # could be bound, so "measure the test coverage of <file>" had no route at all.  One rule,
+    # reused: the sentence states a file, the file states its directory, and the directory must
+    # exist.
+    for _dir_slot in ("source_root", "anchor_path"):
+        if _dir_slot in keys and len(sources) == 1 and _dir_slot not in out:
+            parent = str(pathlib.PurePosixPath(sources[0]).parent)
+            if parent and (pathlib.Path(root) / parent).is_dir():
+                out[_dir_slot] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
                                   "evidence": sources[0]}
     # A test command slot is satisfied by running the ONE stated test file -- through
     # the repository's OWN suite runner, never by executing the file as a script.
@@ -290,13 +348,64 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # is a legitimate review target too) becomes one change set in which all of it is new, and the
     # worktree the gate reads the new-side bytes from is the tree the sentence named.
     stated_python = [f for f in files if f.endswith(".py")]
-    if "diff_path" in keys and "worktree_path" in keys and stated_python:
-        change_set = _stated_change_set(stated_python, root)
+    # ONE decision for three slots: where the change set is rooted, which tree holds the NEW-side
+    # bytes, and which directory the tests run from.  They are the parent of the stated file when
+    # every stated .py shares one, and the repository root otherwise -- the same value for all
+    # three, because a diff whose paths are rooted somewhere other than the gate's anchor is a
+    # change set that silently applies to the wrong tree (see _stated_change_set).
+    base = "."
+    parents = {str(pathlib.PurePosixPath(f).parent) for f in stated_python}
+    if len(parents) == 1:
+        candidate = parents.pop().strip("./") or "."
+        if candidate != "" and (pathlib.Path(root) / candidate).is_dir():
+            base = candidate
+    if "diff_path" in keys and stated_python:
+        change_set = _stated_change_set(stated_python, root, base)
         if change_set is not None:
             out["diff_path"] = change_set
-            out["worktree_path"] = {"value": ".", "rule": "WORKTREE_IS_THE_TREE_THE_SENTENCE_NAMES",
-                                    "evidence": stated_python[0]}
+            if "worktree_path" in keys:
+                out["worktree_path"] = {"value": base, "rule": "WORKTREE_IS_THE_TREE_THE_SENTENCE_NAMES",
+                                        "evidence": ",".join(stated_python)}
+            if "anchor_path" in keys:
+                out["anchor_path"] = {"value": base, "rule": "ANCHOR_IS_THE_TREES_ROOT_WHOSE_TESTS_RUN",
+                                      "evidence": ",".join(stated_python)}
 
+    # A BENCHMARK IS A FILE THAT DEFINES ``bench()``, AND THE STATEMENT NAMES THE MODULE.
+    #
+    # ``python.review.diff_perf_gate.v1`` declares ``bench_path``: "a repo file defining
+    # ``def bench(): ...``".  A sentence says "run a performance review of <module>", never the
+    # benchmark's path, so the slot was unbound and one more working capability stayed
+    # unreachable.  Discovery is bounded to the directory the sentence states and is by the
+    # gate's OWN declared contract (a top-level ``def bench``), not by a name heuristic; two
+    # candidates stay ambiguous and yield no row.
+    if "bench_path" in keys and (sources or tests):
+        parent = (pathlib.Path(root) / (sources or tests)[0]).parent
+        found: list[str] = []
+        try:
+            for candidate in sorted(parent.iterdir()):
+                if not (candidate.is_file() and candidate.suffix == ".py"):
+                    continue
+                try:
+                    tree = ast.parse(candidate.read_text(encoding="utf-8", errors="replace"))
+                except (OSError, SyntaxError, ValueError):
+                    continue
+                if any(isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                       and node.name == "bench" for node in tree.body):
+                    found.append(str(candidate.relative_to(pathlib.Path(root))))
+        except OSError:
+            found = []
+        if len(found) == 1:
+            # The gate copies ``anchor_path`` and looks for ``bench_path`` INSIDE that copy, so the
+            # value must be relative to the same base as the change set -- the same one decision
+            # as above.  Measured 2026-10-29: an anchor-relative bench landed as a repo-relative
+            # value and the gate refused BENCH_FILE_MISSING on a file that was right there.
+            shown = found[0]
+            try:
+                shown = str(pathlib.PurePosixPath(found[0]).relative_to(str(base).strip("./") or "."))
+            except ValueError:
+                shown = found[0]
+            out["bench_path"] = {"value": shown, "rule": "BENCH_FILE_DEFINING_BENCH_IN_STATED_DIR",
+                                 "evidence": found[0] + ":def bench"}
     # A stated source file is the module.  No module => no row (fail closed).
     if "module" in keys and len(sources) == 1 and sources[0].endswith(".py"):
         out["module"] = {"value": sources[0], "rule": "MODULE_FROM_STATED_SOURCE_FILE",

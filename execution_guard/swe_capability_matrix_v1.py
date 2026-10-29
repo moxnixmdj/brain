@@ -53,6 +53,20 @@ CLI = ("import argparse\n\n\ndef main():\n    p = argparse.ArgumentParser()\n"
 HTTP = ("import urllib.request\n\n\ndef fetch(url):\n"
         "    return urllib.request.urlopen(url).read()\n")
 LEGACY = "def unused_helper(x):\n    return x * 2\n"
+# A SELF-CONTAINED MEASUREMENT PROJECT: one module whose every line the suite executes.
+#
+# The four review gates (security / coverage / mutation / perf) need a tree whose suite is GREEN
+# and whose changed lines are all executed, because that is the contract they measure.  CALC
+# above is deliberately broken and only half-tested, so it can prove a REFUSAL but never a
+# measurement.  This fixture exists so the matrix can ask the four measurement questions and get
+# an answer that is a real verdict about real bytes.
+COV_CALC = ("def add(a, b):\n    total = a + b\n    return total\n\n\n"
+            "def mul(a, b):\n    return a * b\n")
+COV_TEST = ("import unittest\n\nimport calc\n\n\nclass T(unittest.TestCase):\n"
+            "    def test_add(self):\n        self.assertEqual(calc.add(2, 3), 5)\n\n"
+            "    def test_mul(self):\n        self.assertEqual(calc.mul(2, 3), 6)\n")
+COV_BENCH = ("import calc\n\n\ndef bench():\n    total = 0\n"
+             "    for i in range(2000):\n        total += calc.add(i, 1)\n    return total\n")
 
 
 # --------------------------------------------------------------------------- trees / oracles
@@ -68,6 +82,11 @@ def build(case: str) -> pathlib.Path:
                        ("mod.py", MOD), ("service.py", SERVICE), ("cli.py", CLI),
                        ("http.py", HTTP), ("legacy.py", LEGACY)):
         (pkg / name).write_text(text, encoding="utf-8")
+    cov = base / "cov"
+    cov.mkdir()
+    for name, text in (("calc.py", COV_CALC), ("test_calc.py", COV_TEST),
+                       ("bench_calc.py", COV_BENCH)):
+        (cov / name).write_text(text, encoding="utf-8")
     return base
 
 
@@ -377,6 +396,76 @@ case("setup_ci", lambda b: "Set up CI to run the tests in %s." % rel(b, "pkg"),
      _a_ci_definition_was_written, "toolchain")
 case("bisect_regression", lambda b: "Bisect the regression that broke the test in %s."
      % rel(b, "pkg/test_calc.py"), _a_history_traversal_named_the_commit, "git")
+
+# --- the four review gates, asked as measurements (2026-10-29)
+#
+# Each of these rows exists, executes and reports a real verdict, and each was UNREACHABLE from
+# the sentence that describes it: the lexical shortlist proposed composers and document
+# converters, and "measure the test coverage of <file>" died with FAIL__RAW_GOAL_COMPILATION_GAP
+# while the coverage gate bound every input.  The oracles read the ARTIFACT the gate wrote and
+# require its own schema, its own gate verdict and its own numbers -- never the report blob,
+# which echoes the goal and would certify the sentence with itself.
+def _gate_artifact(r: dict, schema: str, **required: object) -> bool:
+    for doc in _artifacts(r):
+        if str(doc.get("schema") or "") != schema:
+            continue
+        if any(doc.get(key) != value for key, value in required.items()):
+            continue
+        return True
+    return False
+
+
+def _coverage_was_measured(b: pathlib.Path, r: dict) -> bool:
+    """A coverage verdict, and it measured at least one executable changed line.
+
+    ``diff_executable_lines == 0`` with ``gate == PASS`` is the vacuous pass this oracle exists to
+    refuse: measured 2026-10-29, the gate reported PASS / ratio 1.0 over a diff it could not find
+    in the coverage report at all.
+    """
+    for doc in _artifacts(r):
+        if doc.get("schema") != "PROJECT_BRAIN_DIFF_COVERAGE_GATE_V1":
+            continue
+        lines = doc.get("diff_executable_lines")
+        if doc.get("gate") == "PASS" and isinstance(lines, int) and lines > 0 \
+                and isinstance(doc.get("diff_covered_ratio"), (int, float)):
+            return True
+    return False
+
+
+def _security_review_ran(b: pathlib.Path, r: dict) -> bool:
+    return _gate_artifact(r, "PROJECT_BRAIN_DIFF_SECURITY_GATE_V1", gate="PASS")
+
+
+def _mutation_score_measured(b: pathlib.Path, r: dict) -> bool:
+    for doc in _artifacts(r):
+        if doc.get("schema") == "PROJECT_BRAIN_DIFF_MUTATION_GATE_V1" \
+                and doc.get("gate") == "PASS" \
+                and isinstance(doc.get("kill_ratio"), (int, float)):
+            return True
+    return False
+
+
+def _perf_gate_compared_both_sides(b: pathlib.Path, r: dict) -> bool:
+    """A perf verdict from two measured medians -- not from one side and an assumption."""
+    for doc in _artifacts(r):
+        if doc.get("schema") != "PROJECT_BRAIN_DIFF_PERF_GATE_V1":
+            continue
+        if doc.get("gate") != "PASS":
+            continue
+        if isinstance(doc.get("anchor_median_ns"), (int, float)) \
+                and isinstance(doc.get("patched_median_ns"), (int, float)):
+            return True
+    return False
+
+
+case("measure_coverage", lambda b: "Measure the test coverage of %s." % rel(b, "cov/calc.py"),
+     _coverage_was_measured, "analysis")
+case("security_review", lambda b: "Review %s for security issues." % rel(b, "cov/calc.py"),
+     _security_review_ran, "analysis")
+case("mutation_score", lambda b: "Measure the mutation score of %s." % rel(b, "cov/calc.py"),
+     _mutation_score_measured, "analysis")
+case("perf_review", lambda b: "Run a performance review of %s." % rel(b, "cov/calc.py"),
+     _perf_gate_compared_both_sides, "analysis")
 
 case("delete_file", lambda b: "Delete %s." % rel(b, "pkg/legacy.py"),
      lambda b, r: not (b / "pkg/legacy.py").exists(), "honesty")
