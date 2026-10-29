@@ -869,6 +869,12 @@ def _tail_flags(n: int) -> list[str]:
     return ["-n", str(n)]
 
 
+def _ruff_format_flags(_n: int) -> list[str]:
+    # The subcommand is part of the command line, not a default the adapter may pick: the
+    # acceptance layer's postcondition is stated for `ruff format A` and for nothing else.
+    return ["format"]
+
+
 # The units `wc` counts, and the words that say something is being counted.
 # Defined once so the three `wc` rules cannot drift apart from each other.
 _WC_QTY = r"count|counts|counting|how many|number of|total|tally"
@@ -1114,6 +1120,23 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"\bcmp\b|\bbyte[ -]for[ -]byte\b|\bbyte[ -]by[ -]byte\b|\bidentical bytes\b|\bthe same bytes\b",
      "cmp", _no_flags, 2),
     (r"\bdiff\b|\bcompare\b|\bdiffer\w*\b", "diff", _no_flags, 2),
+    # A FORMATTER IS A PROGRAM THE VERIFIER CAN JUDGE.  `ruff` joined
+    # _MUTATING_POSTCONDITIONS with a check that re-derives the promise from the file on disk
+    # (`ruff format --check A`), which is what makes it admissible here at all: this table only
+    # ever routes to a program whose result the acceptance layer can check afterwards.
+    # The pattern names the NOUN the sentence is about -- python/source/file/module/code -- and
+    # never the bare word, because "convert to markdown format" mentions a format without asking
+    # for one to be applied.  Arity 1, so a sentence that names no file is refused rather than
+    # formatted at a guessed destination.
+    # The verb has to LEAD.  Paths are masked out of the text before this table runs, so
+    # "Format <path>." is the string "format ." -- there is no noun left to anchor on, and a
+    # pattern that looked for one refused the shortest, plainest way to ask.  A leading verb is
+    # also what keeps a CONVERSION out: "Convert the file to markdown format" mentions the word
+    # and asks for something else, so the negative lookahead refuses any sentence that names a
+    # destination format.
+    (r"^\s*(?:please\s+|now\s+)?(?:re)?format(?:s|ted|ting)?\b"
+     r"(?![^\n]*\b(?:to|into|as)\s+(?:markdown|md|pdf|docx|html|csv|json|xml|yaml|text|table)\b)",
+     "ruff", _ruff_format_flags, 1),
     # `stat` is deliberately ABSENT, and it was measured
     # rather than assumed:
     #

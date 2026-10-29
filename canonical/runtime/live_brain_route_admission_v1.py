@@ -2360,11 +2360,22 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # _execute; this branch did not.
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
+        # THE SNAPSHOT THE CHAIN IS JUDGED AGAINST HAS TO EXIST BEFORE THE CHAIN RUNS.
+        #
+        # This branch passed `observe_world(...)` AFTER `_try_composed` had already executed, so
+        # "before" and "after" were the same walk of the same tree and every composed run was
+        # accused of NO_OBSERVED_EFFECT -- the mirror image of the failure this gate exists to
+        # catch: not a report accepted as a change, but a change reported as nothing happening.
+        # Measured 2026-10-29: "Format <a badly formatted .py>" ran `ruff format`, rewrote the
+        # file (28 -> 32 bytes, output_verified true) and came back
+        # FAIL_CLOSED__NO_OBSERVED_EFFECT; the same sentence over an already-formatted file was
+        # indistinguishable from it.  The main path below has always taken this snapshot first.
+        gap_world_before = observe_world(gap_normalized)
         composed = _try_composed(task_id, goal, started)
         if composed is not None:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
-                gap_normalized, observe_world(gap_normalized), gap_future_artifacts)
+                gap_normalized, gap_world_before, gap_future_artifacts)
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal

@@ -1507,7 +1507,37 @@ def _post_chmod(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 _RM_RECURSIVE_FLAGS = ("-r", "-R", "--recursive")
 
 
+def _post_ruff_format(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
+    """`ruff format A` promises exactly one thing: A is now in ruff's own format.
+
+    A formatter is the one mutation whose postcondition needs no trust in the tool's exit status
+    and no snapshot taken before it ran: the check IS the tool, asked a question the tool cannot
+    answer differently.  `ruff format --check A` exits 0 when A is already formatted and 1 when
+    it is not, so the promise is re-derived from the file that is on disk afterwards.
+
+    Scoped to the one shape whose promise can be stated without guessing -- `ruff format <path>`;
+    any other ruff subcommand (`check`, `--fix`) has a promise about diagnostics, not about
+    bytes, and stays unverifiable here rather than being approximated.
+    """
+    if len(tokens) != 3 or tokens[1] != "format":
+        return False, "COMMAND_RUFF_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
+            "argv_tokens": len(tokens)}
+    target = _inside(root, tokens[2])
+    if target is None or not target.is_file():
+        return False, "COMMAND_RUFF_FORMAT_TARGET_MISSING", {"path": tokens[2]}
+    try:
+        proc = subprocess.run(["ruff", "format", "--check", str(target)],
+                              capture_output=True, timeout=60)
+    except Exception as exc:  # noqa: BLE001 - an unaskable check grants nothing
+        return False, "COMMAND_RUFF_FORMAT_CHECK_UNAVAILABLE:" + type(exc).__name__, {}
+    if proc.returncode != 0:
+        return False, "COMMAND_RUFF_FORMAT_DID_NOT_FORMAT", {
+            "path": tokens[2], "check_returncode": proc.returncode}
+    return True, "", {"path": tokens[2], "formatted": True, "check_returncode": 0}
+
+
 _MUTATING_POSTCONDITIONS = {
+    "ruff": _post_ruff_format,
     "sed": _post_sed,
     "chmod": _post_chmod,
     "cp": _post_cp,

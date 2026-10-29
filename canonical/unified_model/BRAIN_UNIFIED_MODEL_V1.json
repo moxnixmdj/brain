@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "18c13273138df5fe062b45dabe37c0d3cdb88a227bd8599a5caaf06a0cdf6c00"
+  "value": "65e79b63c064a41e4e120acaee2c2bfbc09b39a745ab4f4f66f3f284f21fe33c"
  },
  "engines": [
   {
@@ -219947,9 +219947,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "e33849f651e9c63dc0759b66cd7b2ed646cae38b6aebb28ca47387f2492efa70",
+   "sha256": "889a3da536efe7bac9e3d530dfa0312cdc7c52695a9aca06c95e876c4fc73d24",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 55,
+   "symbol_count": 56,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -219995,9 +219995,9 @@
     "prose_count": 1,
     "prose_ordinal": 1,
     "quoted_value": 1,
-    "reserved_for_the_report": 1,
     "route": 2,
     "routing": 1,
+    "ruff_format_flags": 1,
     "score": 1,
     "sed_print_script": 1,
     "sentence": 1,
@@ -238016,7 +238016,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "746f1ec022b44d658423e326e2d8ac72de376d880ff0bc846616117e82bb1806",
+   "sha256": "4a0052644ed17b989458c19ecc110192819856f365ae868a36c519334c53a2a3",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 63,
    "symbols": [
@@ -258768,9 +258768,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "78dd10ebb785686243a90d6ee597e758a5808b04878961efab14aa17821249a6",
+   "sha256": "b40b7013b678611f12a0fa22776e6ab46f6e2b09535b104711c768e89606c0ca",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 43,
+   "symbol_count": 44,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
