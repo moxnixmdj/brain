@@ -436,12 +436,43 @@ _BOOLEAN_INPUTS = {"authoritative", "run_tests", "check_only", "strict"}
 _LIST_NUMERIC_INPUTS = {"x_ticks", "y_ticks"}
 
 
+# The role words that are PREPOSITIONS: what follows them is a bare value, never a quoted one.
+_PREPOSITIONAL_ROLES = frozenset({"to", "rename to", "call it", "new name", "as", "into", "named",
+                                  "called", "with the name"})
+
+_COMMAND_INPUTS = ("argv", "test_argv", "predicate", "command", "cmd", "args", "test_command")
+
+
+def _role_phrase(key: str) -> str:
+    """The words a caller uses to introduce this slot -- never the registry's spelling.
+
+    Measured: the named question stated a path-list slot as a bare path, so a sentence naming a
+    source file and a test file carried two paths and no role at all, and the binder (correctly)
+    refused to guess which was which -- `named_but_inputs_not_stated:source_paths,test_paths`.
+    A caller says "the source files X using the tests Y"; that is what this asks.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as front
+    from canonical.runtime.input_role_lexicon_v1 import ROLE_ALIASES
+    for source in (front._KEY_ALIASES, ROLE_ALIASES):
+        forms = source.get(key) or ()
+        if forms:
+            return str(forms[0])
+    return key.replace("_", " ")
+
+
 def _stated(key: str) -> str:
     """One declared input, in the words a caller uses for it, carrying a REAL value."""
     from canonical.runtime import goal_front_compiler_v1 as front
-    from canonical.runtime.input_role_lexicon_v1 import ROLE_ALIASES
+    from canonical.runtime.input_role_lexicon_v1 import ROLE_ALIASES, SLOT_KIND
     if key in _TYPED_EXAMPLE:
         return _TYPED_EXAMPLE[key]
+    if SLOT_KIND.get(key) in ("file", "dir", "files"):
+        # A PATH IS NOT QUOTED AND IT KEEPS ITS ROLE.  Measured: `module` was stated as
+        # `module "pkg/calc.py"` -- the registry's spelling with a quoted literal -- and the
+        # binder, rightly, did not read that as a module; six refactoring capabilities were
+        # reported unreachable for want of a sentence nobody would write.  A caller says
+        # "in the python module pkg/calc.py".
+        return _role_phrase(key) + " " + str(_TYPED_VALUE.get(key, "pkg/calc.py")).strip('"')
     alias = (_KEY_ALIAS_FIRST.get(key)
              or (front._KEY_ALIASES.get(key) or (None,))[0]
              or (ROLE_ALIASES.get(key) or (None,))[0])
@@ -452,6 +483,22 @@ def _stated(key: str) -> str:
         return phrase + " true"
     if key in _LIST_NUMERIC_INPUTS:
         return phrase + " [0, 1, 2]"
+    if SLOT_KIND.get(key) in ("ident", "idents") and phrase in _PREPOSITIONAL_ROLES:
+        # AFTER A PREPOSITION THE IDENTIFIER IS BARE.  "rename add to plus" names the new symbol;
+        # `to "plus"` is a quoted literal, and a quoted literal's words are TEXT, not the value --
+        # so `new_symbol` stayed unstated however plainly the sentence said it, and six
+        # refactoring capabilities were reported unreachable for it.  Everywhere else the quoted
+        # form is kept: it is what the caller states for a symbol that must not be confused with
+        # the prose around it, and it is what the other slots are already measured with.
+        value = str(_TYPED_VALUE.get(key, "plus")).strip('"')
+        if key == "new_symbol":
+            value = "plus"
+        return phrase + " " + value
+    if key in _COMMAND_INPUTS:
+        # A command is QUOTED: "the command git status" gives the binder no way to know where
+        # the command ends and the sentence resumes, and inventing that boundary is exactly the
+        # guess the compiler is right to refuse.  The quoted form is how an engineer writes it.
+        return "the command " + _TYPED_VALUE.get(key, '"git status"')
     return phrase + " " + _TYPED_VALUE.get(key, '"sample"')
 
 
@@ -466,6 +513,7 @@ def named_signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tupl
     identical sentences: 73 -> 78 of the 125 input-taking capabilities reached, 0 lost.
     """
     from canonical.runtime import goal_front_compiler_v1 as front
+    from canonical.runtime.input_role_lexicon_v1 import SLOT_KIND
     stem = str(cid or "").rsplit("/", 1)[-1].replace(".v1", "").replace(".v2", "")
     words = [w for w in stem.replace(".", " ").replace("_", " ").split() if len(w) > 1]
     parts, fixtures, destination = [], [], None
@@ -475,25 +523,38 @@ def named_signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tupl
         if key.endswith("_path") and front._is_output_key(key, entry):
             destination = _rel(work / ("out_" + key + _output_suffix(entry, key)))
             continue
-        if key.endswith("_path") or key in ("path", "source_root") or key.endswith("_paths"):
+        kind = SLOT_KIND.get(key)
+        if (key.endswith("_path") or key in ("path", "source_root", "module")
+                or key.endswith("_paths") or kind in ("file", "dir", "files")):
             stem_key = key[:-5].lower() if key.endswith("_path") else key
-            if key == "source_root":
-                d = work / "src"
+            # A SLOT IS STATED WITH A VALUE OF ITS OWN KIND, AND THAT VALUE EXISTS.  Measured:
+            # `worktree_path` was given a FILE, `module` a relative path to nothing, and `path`
+            # its registry spelling in quotes -- three ways of stating a contract the binder
+            # rightly refused, and the capabilities were reported unreachable for want of a
+            # sentence nobody writes.  A tree is a directory, a module is a file that is there.
+            if kind == "dir" or key in ("source_root", "worktree_path", "apply_directory", "test_cwd"):
+                d = work / (stem_key + "_dir")
                 d.mkdir(exist_ok=True)
                 fixtures.append(d)
-                parts.append(_rel(d))
+                parts.append(_role_phrase(key) + " " + _rel(d))
                 continue
             name = {"path": "chart.png", "test_paths": "test_mod.py", "source_paths": "mod.py",
-                    "evidence_paths": "evidence.json"}.get(
-                        key, stem_key + _FIXTURE_SUFFIX.get(stem_key, ".json"))
+                    "evidence_paths": "evidence.json", "module": "mod.py",
+                    "target_module": "mod.py"}.get(
+                        key, ("test_mod.py" if "test" in key
+                              else stem_key + _FIXTURE_SUFFIX.get(stem_key, ".json")))
             f = work / name
             f.write_bytes(b"fixture")
             fixtures.append(f)
-            parts.append(_rel(f))
+            parts.append(_role_phrase(key) + " " + _rel(f))
         else:
             parts.append(_stated(key))
     if destination is None:
         return None, fixtures
+    # ONE SENTENCE, NOT TWO.  The name was followed by a period, so the compiler's own clause
+    # splitter read the request as two steps -- "Run the python quality coverage." and an
+    # actless "source tree ... " -- and every refusal it then reported was about the split, not
+    # about the contract.  A caller writes one sentence, and the name is not a sentence.
     return ("Run the " + " ".join(words) + ". " + " ".join(parts) + " and save it to "
             + destination), fixtures
 
@@ -893,6 +954,14 @@ def main(argv: list[str] | None = None) -> int:
                     help="print the markdown summary for an existing receipt and exit; no measurement is run")
     ap.add_argument("--environment-blockers-are-failures-for-summary", action="store_true",
                     help=argparse.SUPPRESS)
+    ap.add_argument("--reachability", metavar="WORK_DIR", default=None,
+                    help="answer only the reachability question -- can one sentence reach every "
+                         "capability in the registry? -- and print every row that did not bind; "
+                         "no family is measured")
+    ap.add_argument("--naming", action="store_true",
+                    help="with --reachability: ask by NAMING the capability and stating its "
+                         "contract (how a caller who knows the verb asks) instead of by its own "
+                         "vocabulary")
     ap.add_argument("--annotate", metavar="RECEIPT_JSON",
                     help="print GitHub workflow-command annotations (::error / ::warning / ::notice) for an existing receipt and exit; no measurement is run")
     ns = ap.parse_args(argv)
@@ -905,6 +974,20 @@ def main(argv: list[str] | None = None) -> int:
         existing = json.loads(Path(ns.summarize).read_text(encoding="utf-8"))
         sys.stdout.write(summary_markdown(
             existing, environment_blockers_are_failures=ns.environment_blockers_are_failures))
+        return 0
+    if ns.reachability:
+        # The question the gap map's P5 row is about, answered on its own.  It used to be
+        # reachable only by importing this module and writing the four lines by hand, which
+        # made the number in the document harder to re-derive than to believe -- and a number
+        # nobody re-derives stops being a measurement.
+        report = reachability(Path(ns.reachability).resolve(), naming=ns.naming)
+        print(json.dumps({"mode": "named" if ns.naming else "vocabulary",
+                          "counts": report["counts"],
+                          "capabilities_total": report["capabilities_total"]}, indent=2))
+        for row in report["rows"]:
+            if row["state"] != "REACHED_AND_BOUND":
+                print("%-24s %-56s %s" % (row["state"], row["capability_id"],
+                                          str(row["detail"])[:150]))
         return 0
     if ns.annotate:
         receipt = json.loads(Path(ns.annotate).read_text(encoding="utf-8"))

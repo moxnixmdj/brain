@@ -1073,6 +1073,16 @@ def _identifier_after_role(text,phrases):
 
 
 def _identifiers_after_role(text,phrases):
+    """The identifiers a sentence states for a plural role -- the WHOLE stated run.
+
+    A delimited run is a list and has to be read as one.  This used to take the first
+    id-word after the role, so "resolve the symbols add, sub" bound `queries` to ["add"] and
+    the caller's second question was silently dropped: the artifact then honestly reported
+    one query, and a truthful answer to a narrower question is not the answer to the question.
+    The delimiter is what makes it a list -- "for the queries top, leaf, orphan" states three,
+    while an undelimited tail is indistinguishable from prose and still binds exactly one, the
+    same discipline `goal_front_compiler_v1._parse_typed_value` already applies to this shape.
+    """
     found=[]
     for phrase in phrases:
         words=[w for w in re.split(r"[^a-z0-9]+",str(phrase).lower()) if w]
@@ -1083,8 +1093,19 @@ def _identifiers_after_role(text,phrases):
         for m in re.finditer(pattern,text,re.IGNORECASE):
             tail=text[m.end():]
             hit=_IDENT_WORD.search(tail)
-            if hit is not None and hit.group(0) not in found:
-                found.append(hit.group(0))
+            if hit is None or hit.group(0) in found:
+                continue
+            found.append(hit.group(0))
+            # The delimited run after the first name, read member by member.  It stops at
+            # sentence punctuation and at the first member that is not an identifier, which is
+            # where the prose resumes ("add, sub in the source root S").
+            run=re.split(r"[.\n;]|\band save\b|\bwriting\b",tail,1)[0]
+            for part in re.split(r"\s*(?:,|;|\band\b)\s*",run)[1:]:
+                member=re.match(r"[A-Za-z_][A-Za-z0-9_]*",part.strip())
+                if member is None or member.group(0).lower() in STOPWORDS:
+                    break
+                if member.group(0) not in found:
+                    found.append(member.group(0))
     return found
 
 

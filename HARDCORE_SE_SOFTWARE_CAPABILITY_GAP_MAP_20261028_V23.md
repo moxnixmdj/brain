@@ -1,6 +1,6 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-28 · measured on `arena/4ca3a720-brain` at `580fa4d` + this unit (P5: the performance trio)**
+**Hardcore software-engineering capability inventory · 2026-10-29 · measured on `arena/4ca3a720-brain` at `0c8aab6` + this unit (P5: a stated list is a statement)**
 
 _Supersedes `…GAP_MAP_20261028_V22.md`.
 
@@ -448,7 +448,7 @@ while keeping the ranking in the comparison.
 |---|---|
 | `vcs.git.bisect.v1` exists and is verified, but the sentence cannot state the predicate: every bisect needs an `argv` that says "good here, bad there" | `FAIL_CLOSED__STATED_ACT_INPUTS_UNBOUND:argv:not_stated` |
 | the refactor family from a synthesised sentence | `inline_function` **NOT_REACHABLE**, `move_function` **NOT_REACHABLE**, `extract_function`/`change_signature` **ROUTED_ELSEWHERE** |
-| whole-surface reachability, re-measured at `5e0297d` | **436 bound, 11 not reachable, 9 routed elsewhere, 3 reached only by explicit name** (456 rows) |
+| whole-surface reachability, re-measured at `0c8aab6` | by vocabulary **436 bound, 11 not reachable, 9 routed elsewhere, 3 by explicit name**; by naming **409 bound, 26 not reachable, 21 unaskable, 3 by name** (459 rows) |
 
 This is the same law three times: **a capability is reachable only through the words its registry
 entry happens to use.**
@@ -498,6 +498,66 @@ The five gained are `python.quality.flake_detect.v1`, `web.release.verify.indepe
 three performance acts this session added. No compiler test moved: the same 30 node ids fail across
 the six door/compiler files at `580fa4d` and here (142 passed both).
 
+### 7.2 A list the sentence stated was still "unstated", and that was most of the residue
+
+The next pass asked the residue row by row. Two of the four refusal codes it kept producing were
+not about the machine's reach at all — they were the same defect twice: **a value that is a LIST
+was not a statement.** Every "did the sentence state this?" test in `goal_front_compiler_v1` was
+`isinstance(value, str)`. `shell.command.run` bound `argv` to exactly the quoted command the caller
+wrote — `"cat README.md"` → `["cat", "README.md"]` — and was then refused
+`named_but_inputs_not_stated:argv`, because a list is not a string. `queries`, `test_argv`,
+`test_paths`, `source_paths`, `changed_paths` and `edits` were refused the same way; twelve
+capabilities were "unreachable" while their contracts bound perfectly.
+
+Four laws came out of it, each pinned in `canonical/tests/test_a_stated_list_is_stated_v1.py` (13
+pins):
+
+1. **A list is a value.** A bound list is stated exactly when every member is in the sentence
+   (`_stated_in`). Half a list is not a statement, and the check still refuses it.
+2. **A delimited run is a list of names.** "resolve the symbols add, sub" bound `queries` to
+   `["add"]` and dropped the caller's second question — the artifact then honestly reported one
+   query, and a truthful answer to a narrower question is not the answer to the question. A single
+   name stays a single name; the run stops at the first stopword, so prose is never appended as an
+   identifier (`gc._identifiers_after_role`).
+3. **After a preposition the identifier is bare.** `to "plus"` is a quoted literal, and a quoted
+   literal's words are text, not the value — so `new_symbol` stayed unstated however plainly
+   "rename add to plus" said it.
+4. **A refusal says why.** When no declared input was missing, the refusal reported the word
+   `inputs` as though one were, telling a caller to state inputs they had already stated; it now
+   says `no_declared_input_missing` and carries the body's own complaint, and when a slot really is
+   missing it still names it.
+
+**The instrument was wrong in five ways too, and finding that out *is* the measurement.** Its
+sentences stated slots as `key "value"` (a form no caller uses), gave path-list slots a bare path
+and no role, gave a tree slot a *file*, gave `module` a relative path to nothing, and put a period
+after the capability's name so the compiler's clause splitter read one request as two steps. Every
+one of those produced a refusal about the question rather than the machine. A metric that asks a
+sentence nobody would say measures the sentence.
+
+**Measured, identical sentences, only the tree differs** (`--reachability --naming`, 459 rows):
+
+| | reached by name | not reachable | lost |
+|---|---|---|---|
+| `0c8aab6` (before this pass) | 396 | 39 | — |
+| this pass | **409** | **26** | 4 |
+
+17 gained: `shell.command.run`, `vcs.git.bisect.v1`, `vcs.git.blame.v1`,
+`python.source.symbols.resolve.v1`, `python.source.change_impact.testselect.v1`,
+`code.impact.tree_sitter.testselect.v1`, `code.multilanguage.parse.tree_sitter.v1`,
+`knowledge.consistency.assess`, `python.fault.localize.dynamic.dataflow.v1`,
+`python.fault.provenance.interprocedural.value.v1`, `python.software.repair.{apply.verified,
+loop.test_guided.ast, measured_acceptance, semantic_acceptance}.v1`,
+`python.refactor.{change_signature, inline_function}.v1`, `software.patch.synthesize.cegis.z3.v1`.
+
+The 4 lost are one cause, and it is the next defect: those sentences now **name the role** ("source
+tree <D>") instead of giving a bare path, and the ranker reads the word *tree* as evidence for
+`code.multilanguage.parse.tree_sitter.v1`. The named guard refuses rather than substituting, which
+is why the row reads NOT_REACHABLE instead of "answered by the wrong capability" — but the ranking
+is still wrong. **A word that states a declared input role must not be capability evidence.**
+
+No compiler test moved: the same 33 node ids fail across the six door/compiler files at `9ebfa2a`
+and here, 155 passed on both, plus the 24 new pins now green.
+
 **What is still unaskable** — 11 not reachable and 9 routed elsewhere, and every one now has a named
 cause rather than a shrug:
 
@@ -511,9 +571,14 @@ cause rather than a shrug:
 - `json.file.write` routes to a DOCX creator; `shell.command.run` cannot bind `argv` from "the shell
   command cat <file>".
 
-Which is the next unit: **make the sibling choice structural** (the act word in the entry's own
-`provides` decides, not the bag of words), and give `argv`/`predicate` a stated form so `bisect` and
-`shell.command.run` become askable.
+`shell.command.run` and `vcs.git.bisect.v1` are now askable (both are in the 17 above): the
+quoted-command sentence binds `argv`, which is what `_stated_command_argv` already implemented and
+what the list check was hiding.
+
+Which is the next unit: **make the sibling choice structural** — the act word in the entry's own
+`provides` decides, not the bag of words — **and stop counting a role phrase as name evidence.**
+Both are the same defect seen from two sides: the ranker is reading the sentence's *grammar* as if
+it were the sentence's *subject*.
 
 ---
 
@@ -643,6 +708,11 @@ w = Path('canonical/astra_runtime/tmp/reach_work'); w.mkdir(parents=True, exist_
 print('by vocabulary', M.reachability(w)['counts'])
 print('by name      ', M.reachability(w, naming=True)['counts'])"
 PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_a_declared_knob_is_the_machines_business_v1.py -q
+PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_a_stated_list_is_stated_v1.py -q
+PYTHONPATH=. .venv/bin/python execution_guard/live_solver_end_to_end_measurement_v1.py \
+    --reachability canonical/astra_runtime/tmp/reach_work
+PYTHONPATH=. .venv/bin/python execution_guard/live_solver_end_to_end_measurement_v1.py \
+    --reachability canonical/astra_runtime/tmp/reach_work --naming
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_domain_coverage_v1.py
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py --audit-pointers
 PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_goal_front_compiler_v1.py \

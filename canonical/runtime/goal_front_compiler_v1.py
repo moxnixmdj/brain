@@ -2749,6 +2749,27 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
 _OWNED_OUTPUT_ROLES = ("output_path", "result_path")
 
 
+def _stated_in(text: str, value: Any) -> bool:
+    """Did the sentence state this bound value?  A LIST is stated member by member.
+
+    Every "was it stated?" check in this module used to test `isinstance(value, str)`, so a slot
+    whose value is a LIST could never be shown to have been stated -- whatever the sentence said.
+    Measured, and it is the single largest cause of the capability residue: `shell.command.run`
+    bound `argv` to exactly the quoted command the caller wrote ("cat README.md" -> ["cat",
+    "README.md"]) and was then refused `named_but_inputs_not_stated:argv`, because a list is not a
+    string; `queries`, `test_argv`, `test_paths`, `source_paths`, `changed_paths` and `edits` were
+    refused the same way.  The rule is not new: an output we own is exempt everywhere already;
+    what was missing is that "the caller stated it" holds for a list exactly when it holds for
+    every member.
+    """
+    if isinstance(value, str):
+        stated = value.strip()
+        return bool(stated) and (stated in text or text.strip().startswith(stated))
+    if isinstance(value, (list, tuple)):
+        return bool(value) and all(_stated_in(text, item) for item in value)
+    return False
+
+
 def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
     """Every bound input that is neither an output we own nor the caller's own words.
 
@@ -2784,10 +2805,8 @@ def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
                 or role.endswith("_output_path")
                 or role.endswith("_result_path")):
             continue
-        if isinstance(value, str):
-            stated = value.strip()
-            if stated and (stated in text or text.strip().startswith(stated)):
-                continue
+        if _stated_in(text, value):
+            continue
         unstated.append(role)
     return unstated
 
@@ -2820,11 +2839,8 @@ def _contract_gaps_for(text: str, entry: Mapping[str, Any], root: pathlib.Path) 
                 or role.endswith("_output_path")
                 or role.endswith("_result_path")):
             continue
-        value = bound.get(role)
-        if isinstance(value, str) and value.strip():
-            stated = value.strip()
-            if stated in text or text.strip().startswith(stated):
-                continue
+        if _stated_in(text, bound.get(role)):
+            continue
         gaps.append(role)
     return gaps
 
@@ -2864,9 +2880,17 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         if expected is not None and expected not in str(failure.detail or ""):
             named_entry = (admissible or {}).get(expected) or {}
             gaps = _contract_gaps_for(goal, named_entry, root)
+            # A REFUSAL MUST SAY WHY.  When no declared input is missing, this used to report the
+            # word "inputs" as though one were -- so a request that reached its capability's own
+            # contract was told to state inputs it had already stated, and the body's real
+            # complaint was thrown away.  Measured: `python.perf.benchmark.v1` and the whole
+            # quality family were refused this way while the pinned compiler bound them exactly.
+            # The body's own detail is carried now; the empty case says so in words.
+            why = (",".join(gaps) if gaps
+                   else "no_declared_input_missing;body:" + str(failure.detail or failure.code))
             raise GoalCompilationFailure(
                 "GOAL_INPUT_BINDING_REQUIRED",
-                "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
+                "%s:contract_not_stated:%s" % (expected, why))
         raise failure
     if expected is None:
         return compiled
@@ -2928,6 +2952,11 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     # tells the caller nothing they can act on.
     named_entry = (admissible or {}).get(expected) or {}
     gaps = _contract_gaps_for(goal, named_entry, root)
+    # A REFUSAL MUST SAY WHY.  When no declared input is missing, this reported the word "inputs"
+    # as though one were, so a request that had stated everything was told to state inputs it had
+    # already stated -- measured on `python.perf.benchmark.v1` and the whole quality family, whose
+    # own contracts bound perfectly through the pinned compiler while this path refused them.
     raise GoalCompilationFailure(
         "GOAL_INPUT_BINDING_REQUIRED",
-        "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
+        "%s:contract_not_stated:%s" % (
+            expected, ",".join(gaps) or "no_declared_input_missing"))
