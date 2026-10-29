@@ -1,6 +1,6 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-29 · measured on `arena/4ca3a720-brain` at `1c29585` + this unit (P5: the bar, the number, and the command nobody quotes)**
+**Hardcore software-engineering capability inventory · 2026-10-29 · measured on `arena/4ca3a720-brain` at `b578283` + this unit (P5: the act word is declared, not spelled)**
 
 _Supersedes `…GAP_MAP_20261028_V22.md`.
 
@@ -707,6 +707,50 @@ Five more rows, and every one of them was a rule applied to the wrong object.
 Named reach **409 → 431** over four units, vocabulary **436 → 451** of 459, with **0 capabilities
 lost** at any step. Identical 33 failing node ids at `d16c84e` and here, 155 passed on both, and 35
 pins green in the two pin files.
+
+### 7.6 The act word is DECLARED, not spelled, and a catch-all can be handed a contract
+
+The remaining six rows, and three of them were one idea each.
+
+1. **The act word lives in `provides`.** `json.file.write` provides `json.file.available`; its act is
+   `available`, which appears nowhere in its id. The scorer only credited an act word found in the
+   *identity*, so "make the json document available" scored the DOCX creator 28 against the JSON
+   writer 24 — the DOCX creator matching the word "document" from its own id — and the JSON writer
+   lost to a capability that then refused the sentence with `output_path_equals_an_input_path`.
+   **Law: the last segment of each `provides` value is the act the capability declares**, and the
+   head verb may claim it (the same "the sentence must also match something else in this entry"
+   guard applies, so a tool merely named after the verb still gets nothing).
+2. **A catch-all can be HANDED a contract.** F4's law — a capability that takes the whole request
+   can never be the answer to one — is still the law. But `text.file.write`'s only non-output input
+   is a payload the sentence quoted: the caller stated the text and the destination, and the
+   capability's whole job is to put one in the other. It ranked first at 24 and the request was
+   answered by a capability that ranked 9 and failed on `source_root`. The contract fallback in
+   `ranked_candidates` was written for exactly this sentence shape and could never complete, because
+   the catch-all it ranked was deleted from the pool two lines later. Three narrow conditions —
+   the sentence quotes a value, every declared input binds, nothing bound went unstated — and
+   "Run the thing." is still refused, which is pinned.
+3. **The instrument gave a TREE slot a FILE**, in the vocabulary builder this time, so
+   `worktree_path` and `apply_directory` arrived as files and the binder refused the pair
+   (`path:2_existing_files_named`). The named builder learned this in §7.5; the vocabulary builder
+   had not.
+
+| | by vocabulary | by name |
+|---|---|---|
+| §7.5 | 451 / 4 / 1 / 3 | 431 / 5 / 21 / 3 |
+| §7.6 | **454 / 2 / 1 / 3** | **431 / 5 / 21 / 3** |
+
+**454 of 459 capabilities are now reachable and bound from one sentence built out of their own
+declaration** — 98.9%, from 436 at the start of this session. Identical 33 failing node ids across
+the six door/compiler files, 155 passed on both; 39 pins green.
+
+The two that remain, and they are honest:
+
+- `vcs.git.log.v1`: its own keyword list carries **"commit"**, so a sentence built from its own
+  declaration is read as a request to commit and refused (`vcs.git.commit.v1:message:not_stated`) —
+  a true refusal of a homonym the registry itself declares. The by-name question reaches it.
+- `python.repo.pr_realize.v1`: binds nothing from the generated sentence and routes to
+  `vcs.git.branch_list.v1`. Its declared contract needs a diff, a PR intent and an apply directory
+  that the sentence does not state — the real remaining shape defect in the repo-delivery family.
 
 `shell.command.run` and `vcs.git.bisect.v1` are now askable (both are in the 17 above): the
 quoted-command sentence binds `argv`, which is what `_stated_command_argv` already implemented and

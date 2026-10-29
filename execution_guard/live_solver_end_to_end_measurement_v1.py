@@ -583,11 +583,22 @@ def signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tuple[str,
             parts.append("and save it to " + _rel(work / ("out_" + key + _output_suffix(entry, key))))
         elif key.endswith("_path") or key in ("path", "source_root") or key.endswith("_paths"):
             stem = key[:-5].lower() if key.endswith("_path") else key
-            if key == "source_root":
-                d = work / "src"; d.mkdir(exist_ok=True); fixtures.append(d); parts.append(_rel(d)); continue
+            # A SLOT IS STATED WITH A VALUE OF ITS OWN KIND.  The named question learned this in
+            # the last unit; this one still handed a TREE slot a FILE, so `worktree_path` and
+            # `apply_directory` arrived as files and the binder refused the pair
+            # (`path:2_existing_files_named`).  The question, not the machine, was the defect.
+            from canonical.runtime.input_role_lexicon_v1 import SLOT_KIND
+            if SLOT_KIND.get(key) == "dir" or key in ("source_root", "apply_directory", "test_cwd"):
+                d = work / (stem + "_dir"); d.mkdir(exist_ok=True)
+                fixtures.append(d); parts.append(_role_phrase(key) + " " + _rel(d)); continue
             name = {"path": "chart.png", "test_paths": "test_mod.py", "source_paths": "mod.py", "evidence_paths": "evidence.json"}.get(key, stem + _FIXTURE_SUFFIX.get(stem, ".json"))
             f = work / name
-            f.write_bytes(b"fixture"); fixtures.append(f); parts.append(_rel(f))
+            f.write_bytes(b"fixture"); fixtures.append(f)
+            # A `*_path` the entry's own bindings declare a LITERAL SELECTOR is not a file role
+            # ("json_path" selects inside the payload); introducing it with the words "json path"
+            # turned a selector into prose and it stopped parsing.
+            selector = key in front._declared_literal_selector_keys(entry)
+            parts.append((_rel(f) if selector else _role_phrase(key) + " " + _rel(f)))
         else:
             # THE SAME STATED VALUE THE NAMED QUESTION USES.  This builder emitted
             # `argv "value"` for every non-path input -- the registry's spelling of the slot,

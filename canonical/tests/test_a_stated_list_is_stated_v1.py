@@ -315,3 +315,50 @@ def test_a_named_capability_with_a_stated_contract_beats_the_body_s_ambiguity(re
     assert compiled["selected_capability"] == "web.browser.rendered.capture.chromedriver"
     rules = (compiled.get("front_compiler") or {}).get("rules_applied") or []
     assert "F33_NAMED_CONTRACT_BEATS_BODY_AMBIGUITY" in rules, rules
+
+
+# ------------------------------------------- an act word may be DECLARED in `provides`, not named
+
+def test_a_declared_act_word_beats_a_keyword_sibling(registry, work):
+    """`json.file.write` provides `json.file.available`; the act word is `available`.
+
+    Measured: "make the json file available ..." scored the DOCX creator 28 against the JSON
+    writer 24, because the DOCX creator matched the word "document" from its own id while the JSON
+    writer's declared act word was not an identity token at all. The JSON writer lost — to a
+    capability that then refused the sentence with `output_path_equals_an_input_path`.
+    """
+    (work / "reports").mkdir(exist_ok=True)
+    goal = ("Use available document json structured from the spec '{\"relation\": \"gt\"}' and "
+            "save it to " + rel(work / "reports" / "out.json"))
+    compiled = front.compile_goal(goal, registry, ROOT)
+    assert compiled["selected_capability"] == "json.file.write", compiled["selected_capability"]
+
+
+def test_the_declared_act_word_is_the_last_segment_only():
+    """`json` and `file` sit in `json.file.available` and name no act; `available` does."""
+    entry = {"provides": ["json.file.available"]}
+    assert gc._declared_act_words(entry) == {"available"}
+
+
+# ------------------------------------- a catch-all that was HANDED a contract is not swallowing one
+
+def test_a_catch_all_handed_a_stated_payload_may_decide(registry, work):
+    """F4 says a capability that takes the whole request can never be the answer to one.
+
+    It is still the law. But a capability whose only non-output input is a payload the sentence
+    QUOTED is not swallowing anything — the caller stated the text and the destination. Measured:
+    `text.file.write` ranked first at 24, its own keywords and its own act, and the request was
+    answered by a capability that ranked 9 and failed on `source_root`.
+    """
+    (work / "reports").mkdir(exist_ok=True)
+    goal = 'Write the text "hello world" to ' + rel(work / "reports" / "hello.txt")
+    compiled = front.compile_goal(goal, registry, ROOT)
+    assert compiled["selected_capability"] == "text.file.write"
+    assert compiled["inputs"]["content"] == "hello world"
+
+
+def test_a_catch_all_still_cannot_answer_a_request_that_states_nothing(registry):
+    """The negative control that makes the previous pin safe."""
+    for goal in ("Run the thing.", "Run the capability.", "Do it."):
+        with pytest.raises(gc.GoalCompilationFailure):
+            front.compile_goal(goal, registry, ROOT)

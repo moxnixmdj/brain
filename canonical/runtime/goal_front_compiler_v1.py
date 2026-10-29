@@ -1859,6 +1859,36 @@ def _named_by_its_own_name(goal_tokens: set[str], cid: str) -> bool:
     return len(words) >= 2 and words <= goal_tokens
 
 
+def _catch_all_was_handed_a_contract(text: str, entry: Mapping[str, Any], root: pathlib.Path) -> bool:
+    """Was this catch-all HANDED a contract rather than left to swallow the request?
+
+    F4's law is that a capability which takes the whole request can never be the answer to one.
+    It is still the law.  But a capability whose only non-output input is a PAYLOAD the sentence
+    quoted is not swallowing anything: the caller stated the text and the destination, and the
+    capability's whole job is to put one in the other.
+
+    Measured: "Use available content on text \"hello world\" and save it to <out>" ranked
+    `text.file.write` FIRST at 24 — its own keywords, its own act — and the request was answered
+    by a capability that ranked 9 and failed with `source_root:0_existing_directories_named`.  The
+    contract fallback in `ranked_candidates` was written for exactly this sentence shape ("Write
+    the text 'hello patch' to the file out.txt") and could never complete, because the catch-all it
+    ranked was deleted from the pool two lines later.
+
+    Three conditions, all of them narrow: the sentence quotes a value, every declared input binds,
+    and nothing bound went unstated.  "Run the thing." quotes nothing, so it is refused exactly as
+    before.
+    """
+    if not _QUOTED_LITERAL.search(str(text or "")):
+        return False
+    try:
+        inputs = bind_all_inputs(text, entry, root, cycle=0, spool=set())
+    except GoalCompilationFailure:
+        return False
+    if not any(not _is_output_key(key, entry) for key in inputs):
+        return False
+    return not _inputs_not_stated_by(text, inputs)
+
+
 def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
     """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal.
 
@@ -2700,7 +2730,8 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
         # not a name, so a zero-input tool that is not named stays undecidable.
         selectable = [
             c for c in ranked
-            if c[2] in decidable or request_names_capability_id(text, c[2])
+            if (c[2] in decidable or request_names_capability_id(text, c[2])
+                or _catch_all_was_handed_a_contract(text, registry[c[2]], root))
         ]
         # F3: a goal that names a file to be produced is served by a tool that can write a file
         preferred = [c for c in selectable if _output_keys(registry[c[2]])] if future else []
@@ -2726,7 +2757,8 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
                 tier_error: GoalCompilationFailure | None = None
                 for rank, cand in enumerate(tier):
                     cand_entry = registry[cand[2]]
-                    if _is_catch_all(cand_entry):
+                    if (_is_catch_all(cand_entry)
+                            and not _catch_all_was_handed_a_contract(text, cand_entry, root)):
                         # a capability that binds every sentence is never the decision
                         continue
                     try:

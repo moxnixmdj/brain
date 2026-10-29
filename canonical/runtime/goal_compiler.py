@@ -1772,6 +1772,21 @@ _NON_ACT_TOKENS=frozenset({"please","the","a","an","i","we","you","it","this","t
     "detect","ensure","verify","validate"})
 
 
+def _declared_act_words(entry):
+    """The ACT each `provides` value declares: its last segment, as tokens.
+
+    `vcs.git.blame` declares the act `blame`; `json.file.available` declares the act `available`.
+    The rest of the dotted name is the object it acts on, and it is the OBJECT -- not the act --
+    that the rest of the scoring already matches.
+    """
+    out = set()
+    for value in (entry.get("provides") or []):
+        segments = [seg for seg in re.split(r"[^a-z0-9]+", str(value).lower()) if seg]
+        if segments:
+            out.add(segments[-1])
+    return out
+
+
 _shared_identity_verbs_cache = None
 
 
@@ -1968,10 +1983,31 @@ def _score(goal, cid, entry):
     # nothing but itself in "Bisect the repository R from the ref HEAD~2", and without the bonus
     # it tied shell.command.run at 11 and lost on alphabetical order.
     _verb_shared = _shared_identity_verbs().get(head_verb or "", 0) > 1
-    if (head_verb and head_verb in identity
+    # AN ACT WORD MAY BE DECLARED IN `provides` RATHER THAN SPELLED IN THE ID.
+    #
+    # `provides` is the capability's own statement of the effect it has, and its LAST SEGMENT names
+    # that effect: `json.file.write` provides `json.file.available`, so "make the json file
+    # available" names exactly what it does, and the word never appears in its id.  Measured: the
+    # sentence "Use available document json structured ..." scored
+    # `docx.document.create_from_json_record` 28 against `json.file.write` 24, because the DOCX
+    # creator matched the word "document" from its own id while the JSON writer's declared act word
+    # was not an identity token at all, so it could not collect the verb bonus.  The JSON writer
+    # then lost to a capability that went on to refuse the sentence
+    # (`output_path_equals_an_input_path`) -- a wrong route that could not even run.
+    #
+    # The guard is the one the identity branch already applies and one more: the verb must be a
+    # DECLARED act (the last segment), never merely a word that appears somewhere in `provides`
+    # ("json" and "file" are in `json.file.available` and name nothing), and the sentence must
+    # match something else in the same entry -- a capability that claims the verb alone is a tool
+    # named after the verb, which is what `head_verb_arguments` already exists to refuse.
+    _declared_acts = _declared_act_words(entry)
+    _names_the_act = bool(head_verb) and (head_verb in identity or head_verb in _declared_acts)
+    _shared_act = _verb_shared and head_verb not in identity
+    if (head_verb and _names_the_act
             and head_verb not in GENERIC_MATCH_TOKENS
             and head_verb not in _NON_ACT_TOKENS
-            and (head_verb_arguments or not _verb_shared)):
+            and head_verb_arguments
+            and (head_verb_arguments or not _shared_act)):
         verb_bonus=7
         score+=verb_bonus
     # Prefer more-specific matched preconditions when base scores tie.
