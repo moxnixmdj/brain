@@ -1295,6 +1295,30 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
      re.compile(r"\bblame\b|\bauthor(?:ed|ship)?\b|\bcommitter\b|\bshortlog\b|\bchangelog\b|"
                 r"\battribution\b", re.IGNORECASE),
      "STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY"),
+    # A HISTORY SEARCH IS NOT A TEST SELECTION.  Measured 2026-10-29 on a fresh tree:
+    # "Bisect the regression that broke the test in <T>" returned PASS with
+    # code.impact.tree_sitter.testselect.v1, which treated <T> itself as the changed file and
+    # selected <T> as the candidate test -- an artifact naming one file, no commit, no bisect,
+    # no history traversed.  0 of 125 routable rows declare bisect, so the refusal is the
+    # honest end state and a real bisect capability is admitted by the same declaration.
+    (re.compile(r"\bbisect\b|\bwhich commit\b|\bregression that broke\b|"
+                r"\bwhen did\b[^.\n]{0,40}?\bbreak\b", re.IGNORECASE),
+     re.compile(r"\bbisect\b", re.IGNORECASE),
+     "STATED_BISECT_NOT_PROVIDED_BY_CAPABILITY"),
+    # A MEASUREMENT OF THE REPOSITORY IS NOT A DELIVERABLE.  Measured 2026-10-29: "Set up CI to
+    # run the tests in <D>" returned PASS from python.repository.acceptance.measure.v1, which
+    # measured the tree it was standing in (test_count 0, test_returncode 1, tests_pass false)
+    # and wrote that to a spool file.  Nothing was set up: no workflow, no config, no runner.
+    # The same seam as S-1 -- the artifact was verified as a FILE WRITE -- and the same answer:
+    # the sentence states an effect (a CI definition the repository does not have), a capability
+    # that declares no CI surface cannot supply it.
+    (re.compile(r"\b(?:set\s+up|setup|add|create|configure|wire)\b[^.\n]{0,40}?"
+                r"\b(?:ci|continuous[ _-]?integration|github[ _-]?actions?|workflow|pipeline)\b"
+                r"|\b(?:ci|continuous[ _-]?integration)\b[^.\n]{0,40}?\b(?:run|runs|running)\b",
+                re.IGNORECASE),
+     re.compile(r"\bci\b|continuous[ _-]?integration|github[ _-]?actions?|workflow|"
+                r"\bci[._-]?config\b", re.IGNORECASE),
+     "STATED_CI_SETUP_NOT_PROVIDED_BY_CAPABILITY"),
 )
 
 
