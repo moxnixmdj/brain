@@ -351,12 +351,12 @@
       "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-29T16:08:53Z",
+        "checked_at_utc": "2026-10-29T18:15:19Z",
         "execution_dependencies": [
           {
             "dependency": "local CPython 3.11 interpreter and in-tree suite runner",
             "evidence": [
-              "sys.executable runs the repository's SUITE_RUNNER in this sandbox; the new suite executes it and asserts the exit code."
+              "re-observed now: /usr/bin/python3 reports (3, 11) and the repository suite runner ran canonical.tests.test_swe_typed_plan_v1 to exit 0 in this sandbox"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -371,7 +371,7 @@
           {
             "dependency": "repository tree (live_brain_route_admission_v1, declared_input_derivation_v1, registry)",
             "evidence": [
-              "git hash-object of both edited modules and the 130-file SWE sweep result recorded in measured_effect"
+              "re-observed now, git hash-object: canonical/runtime/live_brain_route_admission_v1.py=c7e6bc32d50cda621ea037e7399b4470d4093d08, canonical/runtime/composer_route_v1.py=caf707ade69673e3c8b4befce222f694215a5ff0, canonical/runtime/documentation_mining_v1.py=e37e380233ae2acc009b20629176404b65c6c69c, canonical/runtime/declared_input_derivation_v1.py=8c8c4c776334c74f53ef024d07ad8b1d91deb2d0, canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json=1d61bf5ecacc9c41121448f3438c6340dbc758ca"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
