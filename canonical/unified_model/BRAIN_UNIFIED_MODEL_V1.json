@@ -24124,7 +24124,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "gate"
+    "complete"
    ],
    "platforms": [
     "darwin",
@@ -28715,7 +28715,7 @@
   "engines": 26,
   "knowledge_documents": 172,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6505,
+  "research_index_records": 6506,
   "routing_tokens": 2105,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5c8a7c270773f741f29e8b130090d3da9d5e73e9cefbc38f62ac2cbf00da895c"
+  "value": "394da2731096ccca08868e90059c546fe494f8c151854a157cf00daab2b87c0f"
  },
  "engines": [
   {
@@ -52472,7 +52472,7 @@
   "included_source_count": 942,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1209c23a72ce3c410e417e72ae5d5b5ccc29cb41d8c5380bf8e3bcd51ceb8c94"
+  "source_tree_digest": "ff9aadeee82568c6ff7c07028595584aefde8b4bde4b2fa2f5837fcec8321015"
  },
  "research_index": [
   {
@@ -202643,6 +202643,51 @@
    }
   },
   {
+   "action_id": "THE_RENAME_WAS_BLIND_NOT_THE_SENTENCE_V1_20261030_V1",
+   "capability": false,
+   "date": "2026-10-30",
+   "id": "research:canonical/action_intents/THE_RENAME_WAS_BLIND_NOT_THE_SENTENCE_V1_20261030_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_RENAME_WAS_BLIND_NOT_THE_SENTENCE_V1_20261030_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "717a91b52e2280d89b5a4e205f6a6e1f146fae9fdfe0d8281f0ef6d005132e94",
+   "status": "",
+   "terms": {
+    "11": 1,
+    "20261030": 1,
+    "adapter": 2,
+    "already": 1,
+    "app": 1,
+    "asserted": 1,
+    "binder": 1,
+    "blind": 1,
+    "caller": 2,
+    "callers": 1,
+    "compared": 1,
+    "complete": 2,
+    "edited": 1,
+    "every": 2,
+    "executes": 1,
+    "files": 1,
+    "first": 1,
+    "function": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "green": 1,
+    "human": 1,
+    "import": 1,
+    "imports": 1,
+    "inputs": 1,
+    "instead": 2,
+    "item_total": 1,
+    "itself": 1,
+    "line_total": 1,
+    "rename": 4,
+    "sentence": 3,
+    "tree": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "THE_REPAIR_PROMISE_MEANS_EITHER_AUTHORITY_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -211041,9 +211086,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
-   "sha256": "89f7f382ef298ae34d89520f788b89c4f0440e616620b79a80f6f164b38f7e4c",
+   "sha256": "ae3597e01b9a02652ceb55319d32dc4e5ac21b7f7885ab77cd3900d10d41bccf",
    "summary": "python.refactor.rename_symbol.v1 — rename ANY def-sited symbol with",
-   "symbol_count": 12,
+   "symbol_count": 16,
    "symbols": [
     "_binds_name",
     "_collect_edits_in_scope",
@@ -211051,11 +211096,15 @@
     "_fail",
     "_import_table",
     "_modname_of",
+    "_module_files",
     "_name_col",
+    "_package_of",
     "_params_of",
     "_resolve_def",
+    "_resolve_module",
     "_safe_path",
     "_sha256",
+    "_splice_file",
     "run"
    ],
    "terms": {
@@ -211067,16 +211116,20 @@
     "fail": 1,
     "import_table": 1,
     "modname_of": 1,
+    "module_files": 1,
     "name_col": 1,
+    "package_of": 1,
     "params_of": 1,
     "python": 1,
     "python.refactor.rename_symbol.v1": 1,
     "refactor": 1,
     "rename": 2,
     "resolve_def": 1,
+    "resolve_module": 1,
     "run": 1,
     "safe_path": 1,
     "sha256": 1,
+    "splice_file": 1,
     "symbol": 2
    }
   },
@@ -231488,13 +231541,14 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "8cb3401f1c2ce89f6fcd22f892d8df41979b76ab301bcfbd017135997f7ac67c",
+   "sha256": "102a404cf087c4bbda155fa7cd696c35667cc15746916a76ea1d27de31e0f43e",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 66,
+   "symbol_count": 74,
    "symbols": [
     "_actions_of",
     "_after_key",
     "_alias_regex",
+    "_args_get_key",
     "_bind_output_by_future",
     "_bind_path_by_type",
     "_bind_produced_artifact",
@@ -231505,28 +231559,28 @@
     "_dag_artifact_edges",
     "_dag_problem",
     "_dag_steps",
+    "_declared_default_value",
     "_declared_literal_selector_keys",
+    "_defines",
     "_excluded",
     "_failure_is_unstated",
     "_future_artifacts",
     "_inputs_not_stated_by",
     "_interchangeable",
     "_is_catch_all",
-    "_is_output_key",
-    "_joint_role_binding",
-    "_kv_pairs",
-    "_module_pair_file"
+    "_is_output_key"
    ],
    "terms": {
     "after_key": 1,
     "alias_regex": 1,
-    "bind_typed_key": 1,
+    "args_get_key": 1,
     "blocked_zero_input_capabilities": 1,
     "bound": 1,
     "byte-pinned": 1,
     "capability": 1,
     "capability_id_shaped_tokens": 1,
     "compiler": 2,
+    "declared_default_value": 1,
     "declared_literal_selector_keys": 1,
     "every": 1,
     "explicitly_named_capabilities": 1,
@@ -231545,7 +231599,6 @@
     "number_list": 1,
     "one": 1,
     "pair_list": 1,
-    "parse_typed_value": 1,
     "prose_of": 1,
     "quoted": 1,
     "request_names_capability_id": 1,
