@@ -115,11 +115,27 @@ Python-level reverse map over **every identifier reference in the index** — 91
 `canonical/runtime` alone — before doing any BFS. The index stores per-reference rows by design; the
 query materialises all of them, per call, in dict-of-sets Python objects.
 
-**Reuse:** the same file already accepts a stated `index_path`, and `code.index.tree_sitter.
-incremental.v1` already maintains an incremental index (`reused_file_count: 2256`) — the missing piece
-is a *persisted* reverse map (symbol → importing/using files) written once when the index is written,
-instead of rebuilt on every question. That is a column in an artifact that already exists, not a new
-subsystem.
+**The cause is not the reverse map I blamed in V3's first draft — it is the import resolver.**
+`cProfile` on the real corpus (2,256 files, 24,270 imports) puts 1,400 of 1,438 s inside
+`_import_targets`, and 977 s of that inside `_module_name`: 54,722,085 calls = 24,270 imports ×
+2,256 rows. `_module_name(source_root, path)` is a per-path question with a fixed answer, so it was
+being recomputed once per (row, import) pair.
+
+**Closed in the same PR, by reuse.** `_name_indexes()` builds `module name → paths`,
+`stem → paths` and `leaf → paths` once per run and `_import_targets` reads them; the old scans are
+gone, not memoised. Equivalence is checked against a verbatim copy of the old resolver on 600
+sampled (importer, import) pairs across all grammars — **0 mismatches** — and the answer is
+identical:
+
+| | before | after |
+|---|---|---|
+| `Which tests are affected if I change canonical/runtime/declared_input_derivation_v1.py?` | 324,727 ms cold / 313,732 ms warm | **21,756 ms cold / 5,896 ms warm** |
+| affected files | 133 | 133 |
+| candidate / selected tests | 15 / 15 | 15 / 15 |
+| `_module_name` calls | 54,722,085 | **≤ 4 × rows** |
+
+8,700× on the toy tree, **53× warm on the real one**, one function removed and one dict added. The
+new suite pins the call count, not the clock, and fails with the change reverted.
 
 ### S-3 · The index representation costs hundreds of megabytes
 
@@ -198,8 +214,8 @@ one of them has to change.
 
 1. ~~**S-1 — stop accepting a parse as an answer.**~~ **Done** (two declaration rows + a
    pre-execution gate; 0/22 → 22/22 callers at 6.4 s on `canonical/tests`).
-2. **S-2 — the persisted reverse map.** One change turns a 5-minute question into a lookup, and it
-   reuses the incremental index that already exists.
+2. ~~**S-2 — one question, five minutes.**~~ **Done** (the resolver scanned the tree per import;
+   324,727 → 21,756 ms cold, 313,732 → 5,896 ms warm, same 133/15 answer).
 3. **S-3 — prune the representation.** 103 MB for a parse is a resource bug that will bite every
    downstream capability; definition rows + per-file identifier multiset.
 4. **F-1 — the missing verbs**, as declarations over installed tools (`ruff format`, `mypy`, `git

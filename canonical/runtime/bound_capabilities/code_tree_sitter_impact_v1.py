@@ -27,19 +27,44 @@ def _module_name(source_root: str, path: str) -> str:
     return rel.replace("/", ".")
 
 
-def _import_targets(importer: str, raw: str, rows: dict[str, dict[str, Any]], source_root: str) -> tuple[set[str], bool]:
+def _name_indexes(rows: dict[str, dict[str, Any]], source_root: str
+                  ) -> tuple[dict[str, set[str]], dict[str, set[str]], dict[str, set[str]]]:
+    """``module name -> paths`` and ``leaf name -> paths``, computed ONCE per run.
+
+    ``_import_targets`` used to answer both questions by scanning every row, and it is called
+    once per (importer, import) pair: 24,270 imports x 2,256 rows = 54.7 M ``posixpath.relpath``
+    calls.  Profile of "Which tests are affected if I change <one file>?" on this repository
+    (2,256 files): 1,400 of 1,438 s inside ``_import_targets``, 977 s of it in ``_module_name``.
+    The two dicts below are the SAME lookup, done once.
+    """
+    by_module: dict[str, set[str]] = defaultdict(set)
+    by_stem: dict[str, set[str]] = defaultdict(set)   # every row, stem only (python fallback)
+    by_leaf: dict[str, set[str]] = defaultdict(set)   # stem OR parent directory (other grammars)
+    for path in rows:
+        if path.endswith(".py"):
+            by_module[_module_name(source_root, path)].add(path)
+        leaf = pathlib.PurePosixPath(path).stem
+        by_stem[leaf].add(path)
+        by_leaf[leaf].add(path)
+        parent = pathlib.PurePosixPath(path).parent.name
+        if parent:
+            by_leaf[parent].add(path)
+    return by_module, by_stem, by_leaf
+
+
+def _import_targets(importer: str, raw: str, rows: dict[str, dict[str, Any]], source_root: str,
+                    indexes: tuple[dict[str, set[str]], dict[str, set[str]], dict[str, set[str]]]
+                    | None = None) -> tuple[set[str], bool]:
     """Return (local targets, unresolved_local). External imports are not gaps."""
     language = rows[importer]["language"]
     targets: set[str] = set()
     unresolved_local = False
+    by_module, by_stem, by_leaf = indexes if indexes is not None else _name_indexes(rows, source_root)
     if language == "python":
         wanted = raw.lstrip(".")
-        for path in rows:
-            if path.endswith(".py") and _module_name(source_root, path) in {wanted, wanted.rsplit(".", 1)[0]}:
-                targets.add(path)
+        targets = set(by_module.get(wanted, ())) | set(by_module.get(wanted.rsplit(".", 1)[0], ()))
         if not targets:
-            stem = wanted.rsplit(".", 1)[-1]
-            targets = {path for path in rows if pathlib.PurePosixPath(path).stem == stem}
+            targets = set(by_stem.get(wanted.rsplit(".", 1)[-1], ()))
         unresolved_local = raw.startswith(".") and not targets
     elif language in {"javascript", "typescript", "cpp"} and raw.startswith("."):
         base = posixpath.normpath(posixpath.join(posixpath.dirname(importer), raw))
@@ -53,10 +78,7 @@ def _import_targets(importer: str, raw: str, rows: dict[str, dict[str, Any]], so
     else:
         leaf = raw.replace("::", "/").replace(".", "/").rsplit("/", 1)[-1]
         if leaf:
-            targets = {
-                path for path in rows
-                if pathlib.PurePosixPath(path).stem == leaf or pathlib.PurePosixPath(path).parent.name == leaf
-            }
+            targets = set(by_leaf.get(leaf, ()))
         if language == "cpp" and ("/" in raw or raw.endswith((".h", ".hh", ".hpp"))):
             unresolved_local = not targets
     targets.discard(importer)
@@ -152,9 +174,10 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
 
     reverse: dict[str, set[str]] = defaultdict(set)
     unresolved_by_file: dict[str, list[str]] = defaultdict(list)
+    indexes = _name_indexes(rows, source_root)
     for importer, row in rows.items():
         for raw in row.get("imports") or []:
-            targets, unresolved = _import_targets(importer, str(raw), rows, source_root)
+            targets, unresolved = _import_targets(importer, str(raw), rows, source_root, indexes)
             for target in targets:
                 reverse[target].add(importer)
             if unresolved:
