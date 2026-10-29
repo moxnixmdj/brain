@@ -28715,7 +28715,7 @@
   "engines": 26,
   "knowledge_documents": 172,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6503,
+  "research_index_records": 6504,
   "routing_tokens": 2105,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0815fc4c31a94639e376a2c1acd49ec03ede2040ed08009a56ef047dd5f5d341"
+  "value": "f34aa42947ddecfc57730b7bea99948003edd1ddce82cb0d35b83e4037bb1c07"
  },
  "engines": [
   {
@@ -195502,6 +195502,51 @@
    }
   },
   {
+   "action_id": "THE_MOST_ORDINARY_SENTENCE_A_SOFTWARE_ENGINEER_SAYS_MUST_BE_ANSWERED_V1_20261029_V1",
+   "capability": false,
+   "date": "2026-10-29",
+   "id": "research:canonical/action_intents/A_DIRECTORY_A_SENTENCE_NAMES_ABSOLUTELY_MUST_SURVIVE_AND_WHICH_FILES_HOLD_THE_TEXT_MUST_BE_READ_V1_20261029_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_DIRECTORY_A_SENTENCE_NAMES_ABSOLUTELY_MUST_SURVIVE_AND_WHICH_FILES_HOLD_THE_TEXT_MUST_BE_READ_V1_20261029_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "96ab077a2cb60d7dc0e5144bea0951233ed49f736030838c146332c1d2befdbf",
+   "status": "",
+   "terms": {
+    "20261029": 1,
+    "absolutely": 1,
+    "acceptance": 1,
+    "all": 1,
+    "behind": 1,
+    "both": 1,
+    "captured": 1,
+    "claim": 2,
+    "compared": 1,
+    "controllers": 1,
+    "copied": 1,
+    "coupled": 1,
+    "digests": 1,
+    "directory": 1,
+    "embeds": 1,
+    "entry": 1,
+    "every": 1,
+    "exit": 1,
+    "fault": 1,
+    "file": 1,
+    "files": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inspector": 2,
+    "loop": 2,
+    "must": 2,
+    "names": 2,
+    "repair": 3,
+    "sentence": 2,
+    "stderr": 2,
+    "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
+    "v1": 2,
+    "workspace": 2
+   }
+  },
+  {
    "action_id": "A_DIRECTORY_IS_A_REAL_ARTIFACT_AND_A_PATH_NEEDS_NO_EXTENSION_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -219641,7 +219686,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "3b6e505fb6c7e4135694ddb81c1992c2ed67170de7e6b2cf04e4d448833ab9e7",
+   "sha256": "c3bc9a1fa4c8da8ad38ca244d89683b9b1b7d0334d54b05220eb23fa2396f518",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 54,
    "symbols": [
