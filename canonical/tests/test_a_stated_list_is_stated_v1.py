@@ -138,16 +138,43 @@ def test_a_tree_slot_takes_a_tree_and_a_file_slot_takes_a_file(registry, work):
     assert compiled["inputs"]["worktree_path"] == rel(work / "src_dir")
 
 
-def test_a_refusal_with_nothing_missing_says_so_instead_of_naming_inputs(registry):
-    """A refusal must name the thing to fix; it may not invent one.
+def test_a_capability_the_sentence_names_is_the_capability(registry):
+    """A NAME in the request outranks keyword overlap, and this is the measured case.
 
-    The measured sentence reaches `code.multilanguage.parse.tree_sitter.v1` through the body's
-    own walk while naming `python.perf.benchmark.v1`, so the named guard fires.  Its diagnosis
-    used to say `contract_not_stated:inputs` -- a slot neither capability declares -- which
-    sends the caller to fix something that is not wrong.
+    "Run the python perf benchmark ... " states the capability's whole name, and the pinned
+    scorer ranked it BEHIND `code.multilanguage.parse.tree_sitter.v1`, which merely shared the
+    word "tree" from "source tree".  The scorer weighs a name word like any other evidence; a
+    sentence that spells the name out is not offering evidence, it is identifying the tool.
+    Eight capabilities were unaskable by their own names for exactly this reason
+    (`python.quality.*`, `python.perf.benchmark.v1`, `python.packaging.build_package.v1`, ...).
     """
     goal = ("Run the python perf benchmark on source tree " + rel(WORK / "src_dir")
             + " and save it to " + rel(WORK / "out.json"))
+    compiled = front.compile_goal(goal, registry, ROOT)
+    assert compiled["selected_capability"] == "python.perf.benchmark.v1"
+
+
+def test_the_whole_name_has_to_be_stated(registry):
+    """The complement, so the law cannot widen into "a name word decides".
+
+    `python.quality.coverage.v1` and `python.quality.flake_detect.v1` share "python quality";
+    a sentence that states only those two words has named neither of them, and the scorer must
+    still be free to choose on the strength of the rest of the sentence.
+    """
+    assert front._named_by_its_own_name(gc._tokens("python quality"), "python.quality.coverage.v1") is False
+    assert front._named_by_its_own_name(
+        gc._tokens("run the python quality coverage"), "python.quality.coverage.v1") is True
+
+
+def test_a_refusal_with_nothing_missing_says_so_instead_of_naming_inputs(registry):
+    """A refusal must name the thing to fix; it may not invent one.
+
+    `text.file.write` is routed away from by the body's own walk even though the sentence names
+    it, so the named guard fires.  Its diagnosis used to say `contract_not_stated:inputs` -- a
+    slot the capability does not declare -- which sends the caller to fix something that is not
+    wrong.
+    """
+    goal = 'Run the text file write. text "hello world" and save it to ' + rel(WORK / "out.json")
     with pytest.raises(gc.GoalCompilationFailure) as raised:
         front.compile_goal(goal, registry, ROOT)
     detail = str(raised.value.detail)
