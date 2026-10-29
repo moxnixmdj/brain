@@ -3416,7 +3416,11 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "steps": steps}
         try:
             result = ra.run_adapter_locally(entry, {"args": dict(args)})
-        except Exception as exc:  # noqa: BLE001 - a step failure is data
+        # ``SystemExit`` too: an adapter that refuses with ``raise SystemExit(1)`` has still
+        # refused, and the record this branch writes ("side_effect_landed": UNKNOWN) is exactly
+        # the truth about it.  Without this the step killed the caller instead (measured
+        # 2026-10-29 on python_crossfile_edit_choreograph.py).
+        except (Exception, SystemExit) as exc:  # noqa: BLE001 - a step failure is data
             # The adapter dispatches the command and only THEN checks its own
             # expectations, so it can raise after the work has already landed.
             # For `rm A` the file is deleted and only then does the output check

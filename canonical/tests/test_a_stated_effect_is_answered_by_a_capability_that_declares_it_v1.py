@@ -88,11 +88,71 @@ class TheGateReadsTheDeclarationNotTheExpectField(unittest.TestCase):
             door.stated_answer_errors("Measure the test coverage of pkg.", COVERAGE_GATE), [])
 
     def test_a_request_that_states_no_effect_is_untouched(self):
-        """The whole point: the gate must not fire on an ordinary request."""
+        """The whole point: the gate must not fire on an ordinary request.
+
+        ("Repair the python source pkg/calc.py" used to be listed here.  It is not an
+        ordinary request -- it asks for a change to be MADE -- so it moved to
+        ``TheSentenceThatAsksForTheChange`` below, where an auditing capability that
+        makes no change is refused instead of admitted.)
+        """
         for goal in ("Count the functions in pkg/calc.py",
-                     "Find every caller of the function add in pkg/mod.py",
-                     "Repair the python source pkg/calc.py"):
+                     "Find every caller of the function add in pkg/mod.py"):
             self.assertEqual(door.stated_answer_errors(goal, SYMBOL_AUDIT), [], goal)
+
+
+class TheSentenceThatAsksForTheChange(unittest.TestCase):
+    """A patch SEARCH is not a patch APPLIED -- the door accepted the search as the repair.
+
+    Measured 2026-10-29 on a fresh tree, filesystem as the oracle::
+
+        "The CI is failing because <test_calc.py> fails. Fix the build."
+          PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED
+          python.patch.search.test_guided.ast.v1   -> PASS__VERIFIED_CANDIDATE_PATCH_FOUND
+          calc.py byte-identical, the stated suite still red
+
+    The registry already draws the line in its own ``provides`` declarations
+    (``...candidate.test_verified`` vs ``...verified_repair_applied``); the gate reads those,
+    so a real repair capability is admitted the moment one is bound.
+    """
+
+    SEARCH = {"capability_id": "python.patch.search.test_guided.ast.v1",
+              "provides": ["python.patch.candidate.test_verified"]}
+    APPLY = {"capability_id": "python.software.repair.apply.verified.v1",
+             "provides": ["python.source.write.verified_repair_applied"]}
+    LOOP = {"capability_id": "python.software.repair.loop.test_guided.ast.v1",
+            "provides": ["python.patch.candidate.multi_edit.test_verified"]}
+
+    def test_a_patch_search_is_not_a_repair(self):
+        self.assertEqual(
+            door.stated_answer_errors("Repair the python source pkg/calc.py", self.SEARCH),
+            ["STATED_APPLICATION_NOT_PERFORMED_BY_CAPABILITY:"
+             "python.patch.search.test_guided.ast.v1"])
+
+    def test_a_repair_capability_is_admitted(self):
+        self.assertEqual(
+            door.stated_answer_errors("Repair the python source pkg/calc.py", self.APPLY), [])
+
+    def test_a_request_that_states_where_the_report_goes_asked_for_a_report(self):
+        """The repair family's own contract: untouched source + one applicable patch."""
+        goal = ("Repair the python source pkg/calc.py so the unit test pkg/test_calc.py passes, "
+                "and save the repair report to pkg/out.json")
+        self.assertEqual(door.stated_answer_errors(goal, self.LOOP), [])
+
+    def test_an_audit_is_not_a_repair(self):
+        self.assertEqual(
+            door.stated_answer_errors("Repair the python source pkg/calc.py", SYMBOL_AUDIT),
+            ["STATED_APPLICATION_NOT_PERFORMED_BY_CAPABILITY:python.source.audit.ast"])
+
+    def test_the_door_refuses_the_search_as_an_answer_to_a_broken_build(self):
+        base = _fresh("ci")
+        before = _digest(base / "pkg/mod.py")
+        result = door.solve({"task_id": "EFF_CI", "goal":
+                             "The CI is failing because %s fails. Fix the build."
+                             % _rel(base / "pkg/mod.py")})
+        self.assertIs(result.get("pass"), False,
+                      "a candidate patch search was reported as a repair: %s"
+                      % result.get("status"))
+        self.assertEqual(_digest(base / "pkg/mod.py"), before)
 
 
 class TheDoorStopsClaimingTheWrongEffect(unittest.TestCase):

@@ -735,7 +735,12 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
     selected = str(compiled.get("selected_capability") or "")
     try:
         tool_result = run_adapter_locally(entry, action)
-    except Exception as exc:  # noqa: BLE001 - every adapter failure is a closed failure with its reason
+    # ``SystemExit`` too: this repository's adapters refuse with ``raise SystemExit(1)`` (the
+    # ``_systemic`` convention in bound_capabilities/*.py), and a capability that exits must be a
+    # closed failure with a reason, never the death of the caller.  Measured 2026-10-29:
+    # python_crossfile_edit_choreograph.py on an occupied output path killed the whole
+    # 72-capability probe with ``SystemExit: 1`` instead of reporting anything.
+    except (Exception, SystemExit) as exc:  # noqa: BLE001 - every adapter failure is a closed failure
         tool_executed = not isinstance(exc, LocalExecutionFailure) or "ACTION_EXPECTATION_FAILED" in str(exc)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
@@ -1257,6 +1262,46 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
 )
 
 
+# A capability that FINDS a patch is not a capability that MAKES the change.  The registry
+# already draws this line in its own ``provides`` declarations --
+# python.patch.search.test_guided.ast.v1 provides "python.patch.candidate.test_verified" and
+# python.software.repair.apply.verified.v1 provides "...verified_repair_applied" -- and the door
+# was accepting the first as an answer to the second.  Measured 2026-10-29 on a fresh tree:
+#
+#   "The CI is failing because <test_calc.py> fails. Fix the build."
+#     -> PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED
+#        capability python.patch.search.test_guided.ast.v1
+#        payload    PASS__VERIFIED_CANDIDATE_PATCH_FOUND
+#        world      calc.py byte-identical, the stated suite still red
+#
+# The exception is the sentence that states where the REPORT goes: the repair family's own
+# contract is "untouched source plus one applicable patch in the report", and a sentence that
+# asks for a report asked for exactly that (``_statement_patch_authority``).  So the demand for
+# an applied change is scoped to the sentences that name no destination.
+_APPLICATION_REQUEST_RE = re.compile(
+    r"\b(?:fix|repair|patch|correct)\b|\bmake\b[^.\n]{0,40}\bpass\b", re.IGNORECASE)
+_APPLICATION_SURFACE_RE = re.compile(
+    r"\b(?:appl(?:y|ied|ies)|in[ _-]?place|writ(?:e|ten|es)|rewr(?:ite|ote)|"
+    r"edit(?:ed|s)?|land(?:ed)?|refactor\w*|rename\w*|reformat\w*)\b", re.IGNORECASE)
+_REPORT_DESTINATION_RE = re.compile(
+    r"\b(?:save|write|output|store|record|put)\b[^.\n]{0,40}\b(?:to|in|into|at)\b",
+    re.IGNORECASE)
+
+
+def stated_application_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
+    """The sentence asks for the change to be MADE; did the capability declare that it makes it?"""
+    text = str(goal or "")
+    if not _APPLICATION_REQUEST_RE.search(text) or _REPORT_DESTINATION_RE.search(text):
+        return []
+    cid = str(entry.get("capability_id") or entry.get("id") or "")
+    surface = " ".join([cid,
+                        " ".join(str(x) for x in (entry.get("provides") or [])),
+                        " ".join(str(x) for x in (entry.get("keywords") or []))])
+    if _APPLICATION_SURFACE_RE.search(surface):
+        return []
+    return ["STATED_APPLICATION_NOT_PERFORMED_BY_CAPABILITY:" + (cid or "UNNAMED")]
+
+
 def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     """A sentence that asks for X must be answered by something that declares X.
 
@@ -1278,6 +1323,7 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
         if not asked.search(text) or supplied.search(surface):
             continue
         errors.append(code + ":" + (cid or "UNNAMED"))
+    errors.extend(stated_application_errors(text, entry))
     return errors
 
 
@@ -2099,6 +2145,66 @@ def _composed_acceptance(goal: str, chain: Any, executed: Mapping[str, Any]) -> 
     return _exact_acceptance(goal, plan, trace, raw_contract)
 
 
+# A failed attempt is not a verdict.  Measured 2026-10-29 on a fresh tree::
+#
+#   "Rename the parameter old_price to price in the python module <util.py> and save the
+#    report to <out.json>"
+#     -> FAIL__LIVE_CONTROLLER_EXECUTION, capability document.convert.markdown_pdf.pandoc_weasyprint,
+#        reason "Blocker:BOUND_APT_METADATA_NOT_FOUND:pandoc"
+#
+# The door had routed a Python refactor to a Markdown->PDF converter and failed to find apt
+# metadata for pandoc.  A DECISIVE typed plan existed the whole time
+# (python.refactor.rename_parameter.v1 -- it renames old_price and rewrites the body, verified
+# here) and the retry that would have used it was blocked by `executed is True`.  That flag was
+# protecting a real rule -- an honest verdict must never be overwritten by a second guess --
+# but "the capability I picked could not run" is not a verdict about the world.
+#
+# So the retry stays refused for every failure a truth/observation gate produced (each of those
+# fields is evidence that the world was judged), and for these classes by name.  Everything
+# else is "could not do it yet", and a decisive plan may answer it.
+_JUDGED_FAILURE_CLASSES = frozenset({
+    "TOOL_REPORTED_NON_SUCCESS", "PROMISED_ARTIFACT_MISSING",
+    "PROMISED_SOURCE_CHANGE_NOT_APPLIED", "NAMED_INPUT_REMOVED",
+    "NAMED_SOURCE_UNPARSEABLE", "NO_OBSERVED_EFFECT",
+    "STATED_ANSWER_NOT_PROVIDED",
+    "STATED_SECURITY_REVIEW_NOT_PROVIDED_BY_CAPABILITY",
+    "STATED_COVERAGE_NOT_MEASURED_BY_CAPABILITY",
+    # A step that RAISED left the world in a state nobody observed
+    # (``side_effect_landed: UNKNOWN`` in the composer's own record).  Running a different
+    # capability on top of that could compound an edit nobody has seen, so it is not a
+    # "could not reach it" failure even though it produced no verdict.
+    "COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN", "COMPOSED_CHAIN_NOT_VERIFIED",
+    "STEP_RAISED_OUTCOME_UNKNOWN", "COMPOSER_STEP_RAISED",
+})
+_JUDGED_EVIDENCE_FIELDS = (
+    "tool_truth_errors", "observed_effect_errors", "promised_source_change_errors",
+    "promised_artifact_errors", "stated_answer_errors",
+)
+# The one executed failure that IS "could not reach it": the adapter stopped on a stated
+# precondition before doing any work, and says so with this marker.
+_PRECONDITION_BLOCKER_RE = re.compile(r"\bBlocker:")
+
+
+def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
+    """Did this failed attempt actually JUDGE the world, or did it just fail to reach it?
+
+    Two ways to be a verdict, and either one forbids the retry: a named judged failure
+    class, or any observation/truth/promise gate that spoke.  Beyond that, an attempt that
+    EXECUTED is only re-tryable when it stopped on a stated precondition blocker -- the
+    world it left behind is then the world it found.
+    """
+    if result.get("pass") is True:
+        return False
+    if str(result.get("failure_class") or "") in _JUDGED_FAILURE_CLASSES:
+        return False
+    if any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS):
+        return False
+    if result.get("executed") is True:
+        stated = "%s %s" % (result.get("reason") or "", result.get("failure_reason") or "")
+        return bool(_PRECONDITION_BLOCKER_RE.search(stated))
+    return True
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     """THE live Brain entry, now with a scoped, ambiguity-preserving typed-SWE retry.
 
@@ -2120,10 +2226,11 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     result = _solve_body(request)
     if result.get("pass") is True or (request or {}).get("_typed_swe_plan") is not None:
         return result
-    # A retry is only for "could not route/bind yet".  An executed verdict, a
-    # genuine adapter fault, or an observation failure already judged the world;
-    # a second guess must never overwrite it.
-    if result.get("executed") is True:
+    # A retry is only for "could not route/bind yet".  An honest verdict -- a truth gate,
+    # an observation gate, a promise gate, or a named judged failure class -- already asked
+    # the world and got an answer; a second guess must never overwrite it.  An attempt that
+    # merely FAILED to reach a capability is not a verdict, and a decisive plan may answer it.
+    if result.get("executed") is True and not _may_supersede_a_failed_attempt(result):
         return result
     goal = str((request or {}).get("goal") or "").strip()
     try:
