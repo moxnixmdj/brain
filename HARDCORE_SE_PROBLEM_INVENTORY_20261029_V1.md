@@ -88,7 +88,7 @@ counts, read off that module against the live registry:
 | distinct adapters the 459 registry entries route through | **248** |
 | distinct `"adapter"` strings the adapters themselves report | ~200 |
 | **capabilities that can be independently re-inspected today** | **at most 192 of 459** |
-| **capabilities that can never be accepted, whatever they produce** | **at least 267** |
+| **capabilities with no independent re-inspector** (the acceptance verifier refuses them whatever they produce) | **at least 267** |
 
 So the fix is not a new engine — it is the same lane, keyed where it is not yet keyed: the artifact a
 capability writes already carries its digest and schema, and a second independent read of it against
