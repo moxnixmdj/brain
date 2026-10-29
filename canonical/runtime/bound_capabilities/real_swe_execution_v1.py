@@ -2535,7 +2535,7 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
                 # Replay twice to confirm (cache hit returns same result).
                 ok = True
                 for _ in range(2):
-                    r2 = _eval_candidate(make_args(cand_source_candidates, cand_index))
+                    r2 = _eval_candidate(make_args(cand_source_candidates, cand_index, cand_affected_tests[cand_index]))
                     if r2.get("returncode") != 0 or r2.get("timed_out"):
                         ok = False
                         break
