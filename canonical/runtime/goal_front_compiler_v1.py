@@ -1796,8 +1796,35 @@ def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int
 _FALLBACK_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
+def _named_by_its_own_name(goal_tokens: set[str], cid: str) -> bool:
+    """Does the sentence state this capability's WHOLE name?
+
+    A capability's name is its identity: `python.quality.coverage.v1` is the thing you get when you
+    say "python quality coverage".  The pinned scorer weighs the words of the name like any other
+    evidence, which is right for a sentence that mentions a capability in passing and wrong for one
+    that spells it out.  Measured: the sentence "Run the python quality coverage. <dir> ... and save
+    it to <out>" — the capability's entire name, in its own order — ranked
+    `python.quality.coverage.v1` THIRD at 20, behind `python.quality.flake_detect.v1` (22) and
+    `python.review.diff_coverage_gate.v1` (22), both of which merely share the words "python" and
+    "coverage".  Same shape on `python.perf.benchmark.v1`, `python.packaging.build_package.v1` and
+    the four quality siblings: eight capabilities were unaskable by their own names.
+
+    Two distinctive words are required, so a name that reduces to one generic word ("source",
+    "python") cannot claim a sentence on the strength of that word alone: `_name_words` already
+    drops the generic vocabulary and the version token, and a one-word residue is not an
+    identification.
+    """
+    from canonical.runtime.capability_selection_retrieval_v1 import _name_words
+    words = {w for w in _name_words(cid) if w not in gc.GENERIC_MATCH_TOKENS}
+    return len(words) >= 2 and words <= goal_tokens
+
+
 def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
-    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal."""
+    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal.
+
+    A capability whose whole NAME the sentence states comes first; the score orders everything the
+    request left open.  The name is the request's own words, not a hint about them.
+    """
     out = []
     for cid, entry in sorted(registry.items()):
         if not isinstance(entry, Mapping) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
@@ -1816,7 +1843,8 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
         score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:
             out.append((score, specificity, cid, evidence))
-    out.sort(key=lambda x: (-x[0], -x[1], x[2]))
+    named_tokens = gc._tokens(prose_only(goal))
+    out.sort(key=lambda x: (not _named_by_its_own_name(named_tokens, x[2]), -x[0], -x[1], x[2]))
     if out:
         return out
     # A request whose every distinctive word is a VALUE carries no prose to rank on.
