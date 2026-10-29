@@ -1999,7 +1999,7 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "3550f9fc596dac03ab493c1c243086846e0c4477",
+     "git_blob_sha": "25dcc814f14cba3cb0ab9d0a7a1312e1cc4be307",
      "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py"
     },
     {
@@ -2011,7 +2011,7 @@
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
-     "git_blob_sha": "2962631592483dbc76611ef990b30a86821714c2",
+     "git_blob_sha": "b392554248d5c58134a3f82f8ad183cd01233774",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],

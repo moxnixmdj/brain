@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d4bf55e5f8378c762d089da91f6a7354580d795d97787b904399facd325332da"
+  "value": "7798e33930c4f72657cbbdb32439e5a12549daae83a59bd8906eadbf958a8921"
  },
  "engines": [
   {
@@ -200594,7 +200594,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ONE_FILE_A_SENTENCE_NAMES_BINDS_THE_TWO_HALVES_A_CAPABILITY_DECLARES_V1_20261029_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "17edbe8994bb8d12991a6cc21e8b6e7b527465ac3c4abd42680dc2a3c72cacff",
+   "sha256": "f36cc2a20b2b112df0d354f9e2d535ab31bb577f7f5e9e34e7a568a0d03bfcb1",
    "status": "",
    "terms": {
     "20261029": 1,
