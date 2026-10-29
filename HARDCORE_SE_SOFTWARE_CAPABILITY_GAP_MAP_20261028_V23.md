@@ -571,6 +571,40 @@ cause rather than a shrug:
 - `json.file.write` routes to a DOCX creator; `shell.command.run` cannot bind `argv` from "the shell
   command cat <file>".
 
+### 7.3 The name in the request decides, and the score orders what is left
+
+The next eight rows were all the same shape, and it is the plainest defect in the whole inventory:
+a sentence that spells out a capability's **whole name** did not reach it.
+
+```
+"Run the python quality coverage. <dir> ... and save it to <out>"
+   1. python.quality.flake_detect.v1        22   (shares "python", "quality")
+   2. python.review.diff_coverage_gate.v1   22   (shares "python", "coverage")
+   3. python.quality.coverage.v1            20   <- the capability the sentence NAMED
+```
+
+The pinned scorer weighs a name word like any other evidence, which is right for a sentence that
+mentions a capability in passing and wrong for one that identifies it. `python.perf.benchmark.v1`,
+`python.packaging.build_package.v1`, `python.toolchain.ruff_async_audit.v1` and the four quality
+siblings were unaskable by their own names for exactly this reason — and the earlier
+`benchmark` row of §7.2 was the same defect seen from the other side.
+
+**The law:** a candidate whose whole name the request states comes first; the score then orders
+everything the request left open (`_named_by_its_own_name` in `goal_front_compiler_v1`, applied in
+`ranked_candidates`). "Whole name" means every distinctive word, with the generic vocabulary and the
+version token already removed by `capability_selection_retrieval_v1._name_words`, and at least TWO
+of them — so a name that reduces to one generic word ("source", "python") cannot claim a sentence on
+the strength of that word. That bit is pinned both ways: the full name identifies, the shared half
+does not.
+
+| | by vocabulary | by name |
+|---|---|---|
+| before §7.3 | 436 / 11 / 9 / 3 | 409 / 26 / 21 / 3 |
+| after §7.3 | **438 / 11 / 7 / 3** | **416 / 19 / 21 / 3** |
+
+Zero new test failures: the same 33 node ids fail across the six door/compiler files as at
+`9ebfa2a`, 155 passed plus the 15 + 11 pins of the last three units.
+
 `shell.command.run` and `vcs.git.bisect.v1` are now askable (both are in the 17 above): the
 quoted-command sentence binds `argv`, which is what `_stated_command_argv` already implemented and
 what the list check was hiding.
