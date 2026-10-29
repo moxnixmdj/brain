@@ -125,7 +125,14 @@ composer calls that function instead of carrying a copy.
 
 ## 3. The problem list, in the order that blocks "most advanced software engineer"
 
-### P0-1 · Three false passes remain, all one mechanism: the capability's own `expect` is read as the sentence's goal
+### P0-1 · One false pass remains, from one mechanism: the capability's own `expect` is read as the sentence's goal
+
+**Two of the three are fixed in `stated_answer_errors`** (see §2 note below): a stated *security
+review* and a stated *coverage measurement* are now refused when the selected capability declares
+neither. The table is data, and the registry's real `python.review.diff_security_gate.v1` and
+`python.review.diff_coverage_gate.v1` are admitted by the same rule.
+
+The remaining case is the repair family's declared contract:
 
 ```
 "Run a security audit on <pkg>"
@@ -139,6 +146,11 @@ composer calls that function instead of carrying a copy.
   → PASS   PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND    ← a patch was found; the source was restored
                                                      and the stated test is still red
 ```
+
+**After the fix:** `Run a security audit on <pkg>` → `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED`
+(108 ms) and `Measure the test coverage of <pkg>` → an honest refusal (60 ms); `Count the
+functions`, `Find every caller` and `Find the dead code` are unchanged. The new suite is 7/7 and
+456 SWE-ish test files are 60 red, the same files as before, with **zero newly red**.
 
 The door now knows how to refuse this shape when the sentence asks a **question**
 (`FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED`, added in `f3f69c5`) but it does not do it for the whole

@@ -1234,23 +1234,51 @@ _ANSWER_REQUEST_RE = re.compile(r"\b(?:explain|explanation|diagnose)\b"
 _ANSWER_SURFACE_RE = re.compile(r"\b(?:explain\w*|diagnos\w*|fault\w*|locali[sz]\w*"
                                 r"|traceback|cause|root_cause|why)\b", re.IGNORECASE)
 
+# The same seam, for every effect a sentence can state.  A capability's own ``expect`` field
+# says what ITS OWN goal is, and the door was reading it as the sentence's goal: measured
+# 2026-10-29 on a fresh tree, "Run a security audit on <pkg>" returned
+# PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE from python.source.audit.ast -- a
+# symbol count -- and "Measure the test coverage of <pkg>" returned PASS from
+# python.repository.acceptance.measure.v1, which measures the repository and not the tests.
+#
+# Each row is (what the sentence asked for, what a capability's OWN DECLARATION must contain
+# to be an answer to it).  Data, not ids: the surface is the capability id plus the
+# ``provides`` and ``keywords`` it declares, so a real security or coverage capability is
+# admitted the moment one is bound, and nothing here names a capability.
+_STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
+    (_ANSWER_REQUEST_RE, _ANSWER_SURFACE_RE, "STATED_ANSWER_NOT_PROVIDED_BY_CAPABILITY"),
+    (re.compile(r"\bsecurity\s+(?:audit|review|scan)\b|\bvulnerabilit\w*\b|"
+                r"\bsecurity\s+(?:check|analysis)\b", re.IGNORECASE),
+     re.compile(r"security|vulnerab|injection|secret|taint|bandit|cwe|exploit", re.IGNORECASE),
+     "STATED_SECURITY_REVIEW_NOT_PROVIDED_BY_CAPABILITY"),
+    (re.compile(r"\b(?:test\s+)?coverage\b", re.IGNORECASE),
+     re.compile(r"coverage", re.IGNORECASE),
+     "STATED_COVERAGE_NOT_MEASURED_BY_CAPABILITY"),
+)
+
 
 def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
-    """A sentence that asks WHY must be answered by something that explains.
+    """A sentence that asks for X must be answered by something that declares X.
 
-    Only the sentence and the capability's own declaration are consulted: the capability id,
-    what it says it provides, and its declared keywords.  A capability that neither explains
-    nor localizes is not an answer to a question, whatever its own ``expect`` field says.
+    Only the sentence and the capability's own declaration are consulted: its id, what it
+    says it provides, and its declared keywords.  A capability that neither explains nor
+    localizes is not an answer to "why did this fail"; one that declares neither security
+    nor coverage is not an answer to a security review or a coverage measurement, whatever
+    its own ``expect`` field says.
     """
-    if not _ANSWER_REQUEST_RE.search(str(goal or "")):
+    text = str(goal or "")
+    if not text.strip():
         return []
     cid = str(entry.get("capability_id") or entry.get("id") or "")
     surface = " ".join([cid,
                         " ".join(str(x) for x in (entry.get("provides") or [])),
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
-    if _ANSWER_SURFACE_RE.search(surface):
-        return []
-    return ["STATED_ANSWER_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED")]
+    errors: list[str] = []
+    for asked, supplied, code in _STATED_EFFECTS:
+        if not asked.search(text) or supplied.search(surface):
+            continue
+        errors.append(code + ":" + (cid or "UNNAMED"))
+    return errors
 
 
 def _promised_source_files(goal: str) -> list[str]:

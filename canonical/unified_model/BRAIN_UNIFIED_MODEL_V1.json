@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "268d8dd109a7210ca0c93cc0d41bd4ed1ecb107bb43c293b74b7762ed0e403c2"
+  "value": "3422d95c11b5ed649ce339da45de25c31a999b0d9a56ebe46f50f3179a36e9de"
  },
  "engines": [
   {
@@ -39718,7 +39718,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 17017,
+   "bytes": 18216,
    "headings": [
     "What it takes, and what is in the way — the hardcore software-engineering matrix",
     "0. The answer in one paragraph",
@@ -39742,17 +39742,17 @@
    ],
    "kind": "DOCUMENT",
    "path": "HARDCORE_SWE_CAPABILITY_MATRIX_20261029_V1.md",
-   "sha256": "0b9822db11755c07fdc402fc7b6e8876bcd014bd09fd974fc3989e04fc1ee827",
+   "sha256": "50ffc82c86117c9caf1ae16874afb0e5b518cdc126f83cbb0cb810b9baa299bb",
    "summary": "Measured 2026-10-29 on `arena/47739ce8-brain` (`5b58fe0`, base `main` `e2d7981`). Authority: **NONE**. This is a sandbox measurement, not an independent verification. Credit: **0**. Producer cognition model dependency: **0**. Incremental spend: **$0**.",
    "terms": {
-    "51": 9,
+    "51": 10,
     "add": 23,
     "all": 8,
-    "already": 10,
+    "already": 11,
     "analysis": 10,
     "audit": 8,
     "bug": 9,
-    "calc.py": 24,
+    "calc.py": 26,
     "capability": 7,
     "case": 7,
     "code": 7,
@@ -39767,31 +39767,31 @@
     "fail_closed__route_admission_rejected": 9,
     "false": 11,
     "feature": 10,
-    "file": 7,
-    "fix": 12,
+    "file": 13,
+    "fix": 13,
     "function": 18,
     "git": 11,
     "lane": 8,
     "mod.py": 7,
-    "ms": 9,
-    "no": 11,
-    "not": 20,
+    "ms": 15,
+    "no": 13,
+    "not": 22,
     "one": 12,
-    "over": 6,
     "pass": 21,
     "pkg": 10,
     "real": 24,
     "refactor": 10,
-    "refusals": 6,
+    "refusals": 7,
     "refused": 42,
     "repair": 20,
     "report": 13,
-    "request": 6,
-    "requests": 8,
-    "run": 8,
-    "so": 9,
+    "request": 7,
+    "requests": 9,
+    "run": 9,
+    "so": 11,
+    "still": 8,
     "test": 18,
-    "tests": 8,
+    "tests": 9,
     "toolchain": 7
    },
    "title": "What it takes, and what is in the way — the hardcore software-engineering matrix",
@@ -52667,7 +52667,7 @@
   "included_source_count": 944,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3cdf6a3f07bbaa0598677dbe77a6a645b99ed4777a1cd157a069b2d7a7c352c9"
+  "source_tree_digest": "992ad3601e958471f43eaf8decf05db71e6c30c9f5f66423fd8206177021b0ed"
  },
  "research_index": [
   {
@@ -237766,7 +237766,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "10b64be5f6f7bf1d2f768c97d2717179ca8938f645b554e5096640784c2bf8d2",
+   "sha256": "83eb78815b049ba5c6bcb21033231fbfd2f1afc23cae82aa0a2be6ed7af8e892",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 60,
    "symbols": [
