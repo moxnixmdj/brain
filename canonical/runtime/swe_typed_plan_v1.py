@@ -101,6 +101,13 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # established wiring for exactly this ("type check" above): enumerate by the
     # registry's OWN keywords, let admit() be the oracle, require the effect token in the
     # id.  Nothing is added to the registry and no id table is hardcoded.
+    # EXTRACT INTO A FUNCTION.  ``python.refactor.extract_function.v1`` has been in the registry
+    # since the refactor round and no sentence could reach it: the lexical matcher answered "extract
+    # ... into a new function named sum2 in <f>" with math.numeric_expression.sympy, and the family
+    # route had no row for the effect.  Measured 2026-10-30.  The declared-input derivation can now
+    # hand it the whole coordinate (module, qualname, statement span, new name, run_tests), so the
+    # family becomes decisive on admission exactly like the review gates and the type check.
+    (("extract", "into a new function", "pull out into"), ("extract", "refactor"), "extract"),
     (("test coverage", "coverage"), ("coverage",), "coverage"),
     (("security issue", "security review", "security audit", "security scan",
       "vulnerab", "check for security"), ("security", "vulnerab", "bandit"), "security"),

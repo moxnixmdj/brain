@@ -1208,6 +1208,26 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         except Exception:  # noqa: BLE001 - a derivation fault keeps the declared template
             _exec_entry = _entry
         _declared = _exec_entry.get("declared_action_template")
+        # A REPORT MAY NEVER BE WRITTEN ONTO THE FILE THE SENTENCE ASKED TO REPAIR.
+        #
+        # Measured 2026-10-30: "Repair the python source <pkg>/broken.py so that its tests pass."
+        # bound ``output_path`` to broken.py itself -- the only .py the sentence names -- so the
+        # adapter's report OVERWROTE the source with JSON and returned pass=True.  The destruction
+        # then satisfied the source-change gate, which is why the sentence passed twice over: the
+        # file had changed, and the change was the report.  The typed retry path has relocated a
+        # report off a stated source since the 2026-10-27 round (``_fresh_output_path``); the
+        # PRIMARY path never did, so the same sentence was destructive or not depending on which
+        # path answered it.  One rule, one place: apply the existing relocation here, on every
+        # path, before the template is rendered.  It changes no verdict on its own -- it only
+        # makes sure the verdict is about a tree that still exists.
+        try:
+            from canonical.runtime import swe_typed_plan_v1 as _typed_plan_module
+            _relocated = _typed_plan_module._fresh_output_path(goal, ROOT, _inputs)
+        except Exception:  # noqa: BLE001 - a relocation fault keeps the bound value
+            _relocated = None
+        if _relocated:
+            _inputs["output_path"] = _relocated
+            compiled = dict(compiled, relocated_output_path=_relocated)
         try:
             action = goal_compiler._render_template(_declared or _exec_entry["action_template"], _inputs)
         except goal_compiler.GoalCompilationFailure:
@@ -2942,10 +2962,29 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # read is a refusal they cannot close.
         _rejected = admission.get("selected_capability")
         _unbound = admission.get("unbound_file_inputs") or []
+        # The selected capability's OWN binder may have said exactly which slot the sentence
+        # never stated -- and this layer dropped the string.  Measured 2026-10-30:
+        #
+        #   "Refactor <tmppath>/calc.py."
+        #     selected python.source.crossfile_edit.choreograph.v1
+        #     typed_binding_reason BINDING_REFUSED:edits_path:0_type_compatible_existing_files_named
+        #     compiler_detail    python.source.crossfile_edit.choreograph.v1:not_admitted:R3_WEAK_EVIDENCE
+        #
+        # The refusal named a weak-evidence rule while the machine was holding the real
+        # reason -- one slot, by name -- in the same dict.  `typed_binding_reason` had been
+        # written since the fallthrough round and never read by anything.  Naming the slot
+        # changes no verdict: the route is refused either way, and the field is only set
+        # where `admit()` already refused with BINDING_REFUSED:.
+        _binding = str(admission.get("typed_binding_reason") or "")
         _detail = None
         if _rejected:
-            _detail = "%s:contract_not_stated:%s" % (_rejected, ",".join(_unbound)) \
-                if _unbound else "%s:not_admitted:%s" % (_rejected, admission.get("rule"))
+            if _binding.startswith("BINDING_REFUSED:"):
+                _detail = "%s:contract_not_stated:%s" % (
+                    _rejected, _binding[len("BINDING_REFUSED:"):])
+            elif _unbound:
+                _detail = "%s:contract_not_stated:%s" % (_rejected, ",".join(_unbound))
+            else:
+                _detail = "%s:not_admitted:%s" % (_rejected, admission.get("rule"))
         _extra: dict[str, Any] = {
             "compiled_capability_id": _rejected,
             "compiler_mode": compiled.get("compiler_mode"),

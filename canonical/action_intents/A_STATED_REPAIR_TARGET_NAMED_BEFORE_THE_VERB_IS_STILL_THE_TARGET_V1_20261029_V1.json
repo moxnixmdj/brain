@@ -1,530 +1,530 @@
 {
-  "action_id": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-  "action_intent_id": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-  "action_kind": "FRESH_REUSE",
-  "action_summary": "A capability that works is reached from the sentence that describes it, and a verdict is never denied by the reporter: the security review, the coverage measurement, the mutation score and the performance review are now routed, bound and executed from ordinary phrasing, and a review that returned findings reports that instead of a compile gap.",
-  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
-  "agent_orientation": {
-    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
-    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
-    "conversation_memory_is_authority": false,
-    "incremental_spend_usd": 0,
-    "laws_read_this_session": [
-      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
-      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
-      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
-      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
-      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
-      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
-      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
-      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
-      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
-      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
-      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-      "AGENTS.md"
-    ],
-    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-    "producer_cognition_model_dependency_count": 0,
-    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
-    "progress_evidence_paths": [
-      "canonical/tests/test_a_repair_sentence_that_names_its_target_before_the_verb_v1.py",
-      "canonical/runtime/live_brain_route_admission_v1.py",
-      "canonical/runtime/declared_input_derivation_v1.py",
-      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
-      "canonical/tests/test_a_failed_attempt_is_not_a_verdict_v1.py",
-      "canonical/runtime/composer_route_v1.py",
-      "execution_guard/swe_capability_matrix_v1.py",
-      "canonical/runtime/documentation_mining_v1.py",
-      "HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V2.md",
-      "canonical/tests/test_a_review_of_a_file_is_a_change_set_of_that_file_v1.py",
-      "HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V3.md"
-    ],
-    "route_class": "REUSE"
-  },
-  "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A repair sentence that names its target BEFORE the verb (\"the add function in <file> is broken, fix it so its tests pass\") promised nothing to the front door, because the promise reader only looked for a .py AFTER the repair verb, so the source-change gate had nothing to check and a no-op adapter was reported as PASS. The same sentence's derived test command executed the test file as a script, which exits 0 having run zero tests when the file has no __main__ guard, and the repair loop read that 0 as STATED_TEST_ALREADY_PASSES. The same seam, measured twice more: a capability that SEARCHES for a patch was accepted as the answer to a sentence that asked for the change to be MADE (source byte-identical, stated suite red), and an attempt that FAILED TO REACH a capability was treated as a verdict about the world, so a decisive typed plan that existed all along could never answer.",
-  "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
-  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "capability_credit_delta": 0,
-  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "A repair sentence that names its target BEFORE the verb (\"the add function in <file> is broken, fix it so its tests pass\") promised nothing to the front door, because the promise reader only looked for a .py AFTER the repair verb, so the source-change gate had nothing to check and a no-op adapter was reported as PASS. The same sentence's derived test command executed the test file as a script, which exits 0 having run zero tests when the file has no __main__ guard, and the repair loop read that 0 as STATED_TEST_ALREADY_PASSES. The same seam, measured twice more: a capability that SEARCHES for a patch was accepted as the answer to a sentence that asked for the change to be MADE (source byte-identical, stated suite red), and an attempt that FAILED TO REACH a capability was treated as a verdict about the world, so a decisive typed plan that existed all along could never answer.",
-  "date": "2026-10-29",
-  "expected_parent_change": "canonical/runtime/live_brain_route_admission_v1.py: _nearest_source_before added and used by _promised_source_files; canonical/runtime/declared_input_derivation_v1.py: test_argv derived through suite_argv; canonical/tests/test_a_repair_sentence_that_names_its_target_before_the_verb_v1.py added; canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled; HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V1.md updated with the measured before/after. In the same PR: canonical/runtime/live_brain_route_admission_v1.py gains stated_application_errors, _may_supersede_a_failed_attempt with _JUDGED_FAILURE_CLASSES, and the SystemExit closure at the adapter boundary; canonical/runtime/composer_route_v1.py records a SystemExit in a composed step as the existing side_effect_landed UNKNOWN record; canonical/tests/test_a_failed_attempt_is_not_a_verdict_v1.py added; execution_guard/swe_capability_matrix_v1.py added. canonical/runtime/documentation_mining_v1.py: output_suffix() derives the stated OUTPUT extension by removing tokens that name an existing file, and learn()/learn_or_recall() use it instead of acq._requested_suffix(goal). HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V2.md added: the ranked problem list with the slot census, the missing-verb census and the toolchain negative result. canonical/runtime/declared_input_derivation_v1.py: _stated_change_set + the diff_path/worktree_path derivation; canonical/runtime/swe_typed_plan_v1.py: the type-check effect family; canonical/runtime/live_brain_route_admission_v1.py: _COMPOSED_UNVERIFIED_CLASSES + _composed_wrote_only_its_own_scratch (a composer GUESS that verified nothing may be answered by a decisive plan only when every artifact it wrote lives under this repo's own spool directory, so a chain that touched the caller's tree stays un-retryable); canonical/tests/test_a_review_of_a_file_is_a_change_set_of_that_file_v1.py added; test_swe_typed_plan_v1's effect-inconsistent falsifier re-pinned to its real intent. HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V3.md added: the real-repository measurement with its independent oracles (S-1 parse-accepted-as-answer at directory scale, S-2 five-minute impact query, S-3 103/284 MB artifacts, S-4 composition 0, F-1 missing verb classes, T-1 unprovisioned toolchain, T-2 tests lane, H-1 the owner contract decision).",
-  "expected_parent_frontier_change": "A human-phrased broken-function repair is now performed instead of claimed: the named source is changed and its stated test passes, judged by the real runner.",
-  "explicit_user_authorization": "Owner instruction this session, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way.\" Both edits wire machinery that already exists (the source-change gate, suite_argv, is_test_file_name) instead of adding policy.",
-  "falsification_condition": "False if any of the four measurement sentences returns PASS without the gate's own artifact showing its verdict and its numbers, or if a coverage verdict can again read PASS with zero measured executable lines, or if a review that returned findings is reported as a compile or execution gap, or if the matrix gains a false pass or a damaged file.",
-  "governance_change": true,
-  "highest_leverage_now": true,
+ "action_id": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+ "action_intent_id": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "A registry row nothing could reach is now a capability: the extraction of ONE STATED STATEMENT into a named function is routed, bound and performed from an ordinary sentence, judged by the bytes on disk; and a refusal finally names the slot its own binder named instead of calling it weak evidence.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
   "incremental_spend_usd": 0,
-  "load_bearing_primary": {
-    "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
-    "constructive_gap_for_open_obligation_ids": [
-      "AUTOMATIONBENCH_GE_40",
-      "CHARTOGRAPHY_TOOLS_GE_89",
-      "CODING_CURSORBENCH_GE_57_8",
-      "CODING_FRONTIERCODE_GE_54_4",
-      "CODING_TB4_GE_66_4",
-      "FINANCE_ACCOUNTING_INDEX_GE_61",
-      "FINANCE_AGENT_V2_GE_58_59",
-      "HLE_TOOLS_GE_67_7",
-      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
-      "OSWORLD_2_1_PARTIAL_GE_81_8",
-      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
-      "PROWORK_GDPVAL_GE_1846",
-      "TB_SCIENCE_GE_58_7"
-    ],
-    "expected_obligation_discharge_lcb": 0,
-    "expected_obligation_unlock_lcb": "1/13",
-    "interpretation": "A coverage budget is a question about how much of the ASK the model recognised. Charging the tokens of a stated path to it made the verdict depend on the length of the caller's file names rather than on the request. A capability whose own adapter names a module or program that is not there can only fail, so the dependency has to be declared before the refusal can be said early. But the RANKING is a fact about the model and not about the host: this sandbox has pypdf and the CI runner does not, so filtering the ranking by presence made a pinned route hold in one place and fail in the other. The host votes where the work happens -- in solve() -- and nowhere else.",
-    "measured_effect": "All ten measured sentences naming real absolute paths now route confidently; before, all ten were refused with GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED. Coverage on \"count the functions defined in the python file <abs path> and write the report to <abs path>\" went from 0.240 to 0.714 and is now identical to the same sentence with the paths deleted. Capabilities correctly reporting an unresolvable declared dependency went from 7 to 12 -- PIL x6, chromedriver, crosshair, pandoc, tesseract, pdftoppm, yq/yaml -- every one for a tool genuinely absent. The ranking is host-independent and pinned that way: with every declared dependency on the machine reported missing, 367 of 374 capabilities unrunnable, all four pinned known-goal routes are still confident and still land where the model says. solve() now names the missing dependency instead of spending the request and returning BOUND_PYPI_SOURCE_INCOMPLETE. 15 new tests, 12 of which fail on origin/main; the 3 that pass either way are the negative controls. Verifier 33/33, integrity guard 17/0, artifact byte-identical to a fresh recompile.",
-    "open_obligation_ids": [],
-    "scope_complete_discharge": false,
-    "stop_condition": "STOP when no site raises TEST_PATHS_REQUIRED for a tree that has tests, when a tree with no tests is refused rather than measured as green, when a stated test file still wins over discovery, when the four previously fixed sentences still pass, and when the regression failure SET matches the PR base exactly.",
-    "success_probability_lcb": 0.9,
-    "wall_clock_cost_ub": 1
-  },
-  "measured_effect": "53-request hardcore SWE matrix (fresh tree per case, filesystem / real runner / real command / the gate's own artifact as the only oracles): 13 real answers, 1 false pass, 39 honest refusals, zero damaged files. Four of the thirteen are new and each is judged by the gate's own JSON: coverage PASS with diff_executable_lines 5 and ratio 1.0; security PASS on a clean file and FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT on a planted shell=True; mutation PASS; perf PASS with both medians present. Same request before: FAIL__RAW_GOAL_COMPILATION_GAP (coverage, security) and ROUTE_ADMISSION_REJECTED to software.review.gate.composer.v1 (perf). A coverage gate over a diff it could not find in the coverage report returned gate PASS with diff_executable_lines 0 and ratio 1.0 before, and now refuses DIFF_FILES_NOT_IN_COVERAGE_REPORT.",
-  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "prior_work_reused": [
-    {
-      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
-      "what": "live_brain_route_admission_v1.promised_source_change_errors and its _statement_patch_authority discharge: the gate already existed, it could not see a target named before the verb."
-    },
-    {
-      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
-      "what": "bound_capabilities.python_test_guided_patch_search_v1.suite_argv: its docstring records the zero-test script-run trap and the loader that fixes it; the derivation now uses it instead of a second rule."
-    },
-    {
-      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
-      "what": "python_test_corpus_discovery_v1.is_test_file_name: the repository's one rule for what a test file is, used to keep a witness test out of the promise set."
-    },
-    {
-      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
-      "what": "HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V1.md: the measurement that named this defect and its oracle."
-    }
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
   ],
-  "recursive_obs": {
-    "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
-    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "deleted_or_bypassed_paths": [
-      "READING_A_PROMISE_ONLY_WHEN_THE_TARGET_FOLLOWS_THE_VERB",
-      "EXECUTING_A_TEST_FILE_AS_A_SCRIPT_AND_READING_ZERO_TESTS_AS_A_PASSING_BASELINE",
-      "ASSUMING_CLASSES_A_WITNESS_TEST_AS_THE_REPAIR_TARGET"
-    ],
-    "deletion_first_order_applied": [
-      "DELETE",
-      "BYPASS",
-      "REUSE",
-      "SUBSTITUTE",
-      "WHITE_BOX_HARVEST",
-      "COMPOSE",
-      "CONFIGURE",
-      "INTEGRATE"
-    ],
-    "expected_parent_level_state_change": "A human-phrased broken-function repair is now performed instead of claimed: the named source is changed and its stated test passes, judged by the real runner.",
-    "iteration_limit": 4,
-    "obs_blocker": {
-      "delete_bypass_substitute_options": "DELETE: the zero-test script run is deleted as a source of truth, and the word-order precondition is deleted. BYPASS: not applicable -- the promise must be read, not skipped. SUBSTITUTE: rejected -- a second runner or a second test-name rule would duplicate suite_argv and is_test_file_name.",
-      "intrinsic_or_path_specific": "Intrinsic to how the door reads a sentence and to which command line a capability is handed. Both are contracts, not host facts.",
-      "surviving_causal_blocker": "A repair sentence that names its target BEFORE the verb (\"the add function in <file> is broken, fix it so its tests pass\") promised nothing to the front door, because the promise reader only looked for a .py AFTER the repair verb, so the source-change gate had nothing to check and a no-op adapter was reported as PASS. The same sentence's derived test command executed the test file as a script, which exits 0 having run zero tests when the file has no __main__ guard, and the repair loop read that 0 as STATED_TEST_ALREADY_PASSES."
-    },
-    "obs_capability": {
-      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
-      "existing_inherited_routes_checked": "sed's `r` command already appends a file after the addressed line; the `find` rule already built `-name` from a quoted value or a spelled-out ending; `_post_sort` already recomputed a promise from a source that survives; `_DIRECTORY_REQUEST`, `_quoted_values` and `_ASKS_A_COUNT_OR_A_NUMBER` were reused entire.",
-      "external_existing_routes_checked": "No external source was needed.  sed's `r`, `find -name`, `find -type f` and `ls` on one level are ordinary POSIX behaviour and each was probed directly in this environment before a rule was written.",
-      "surviving_gap": "A command that reads one file and writes another has to be told which is which, and a write-back declaration cannot express 'after what is already there'."
-    },
-    "obs_goal": {
-      "proxy_goals_deleted": [
-        "TREATING_A_DECLARED_OUTPUT_DESTINATION_AS_PROOF_THE_OPERATION_WAS_THE_ONE_ASKED_FOR",
-        "TREATING_THE_VERB_IN_A_SENTENCE_AS_PART_OF_THE_QUESTION_RATHER_THAN_PART_OF_THE_PHRASING",
-        "COUNTING_A_CENSUS_BY_THE_ANSWER_ALONE_WHEN_THE_PROMISE_IS_ABOUT_THE_WORLD_AFTERWARDS"
-      ],
-      "real_outcome": "An append appends, a tree question walks the tree, a count is not answered with names, and the plainest form of each works.",
-      "surviving_necessity": "The operation has to be the one the sentence stated, and a two-file promise has to be asked of both files afterwards."
-    },
-    "obs_inherited_system": {
-      "adjacent_capabilities_absorbed": "THE_PLAIN_LISTING_THE_FILE_DELETION_THE_SET_DELETION_THE_MKDIR_CREATION_AND_THE_LINE_COUNT_ALL_STAY_AUTHORITATIVE_AND_ARE_PINNED_BY_TESTS_THAT_PASS_ON_BASELINE_SO_NO_WIDENING_CAN_PASS_BY_HIJACKING_A_NEIGHBOUR",
-      "downstream_work_to_delete_or_supersede": "NOTHING_DELETED__SIX_TESTS_ADDED_AND_THE_FIND_ENTRY_CONDITION_CARRIES_THE_TWO_MEASURED_HIJACKS_IN_ITS_COMMENT_SO_THE_NEXT_WIDENING_STARTS_FROM_THEM",
-      "fresh_reuse_plan": "Reuse sed's r command, the find rule's existing -name construction, `_post_sort`'s recompute-from-a-surviving-source model, and the count-versus-listing distinction entire; add one routing rule, widen and scope one entry condition, add one postcondition shape and one refusal."
-    },
-    "obs_obs": {
-      "affected_layers_only_on_revalidation": true,
-      "analysis_steps_deleted_or_cached": "THE_SIXTEEN_ROW_CENSUS_WAS_COMPUTED_ONCE_ON_MAIN_AND_RE_RUN_AFTER_THE_CHANGE__AND_IT_COMPARED_THE_WORLD_AND_NOT_ONLY_THE_ANSWER_WHICH_IS_WHAT_SURFACED_A_TRUNCATED_DESTINATION_BEHIND_AN_ANSWER_THAT_LOOKED_CORRECT",
-      "search_stop_decision": "Stop: the sixteen-row census is thirteen of sixteen with zero certified wrong answers and zero destructive rows, and every new postcondition is pinned able to fail.  Measured and deliberately left unserved: the first line of two files at once, a line count over two files, sorting two files together, the lines in both files, the lines in one that are not in the other, and whether one file is larger than another -- each needs a pipeline or an arithmetic comparison, and no single program here does either."
-    },
-    "obs_solution": {
-      "deleted_or_bypassed_paths": [
-        "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
-        "DECLARING_NOTHING_FOR_A_CAPABILITY_WHOSE_ADAPTER_NAMES_A_MODULE_THE_HOST_DOES_NOT_HAVE",
-        "USING_THE_DECLARED_DEPENDENCY_MECHANISM_TO_DESCRIBE_THE_MODEL_BUT_NEVER_TO_SELECT_FOR_IT"
-      ],
-      "deletion_first_order_applied": [
-        "DELETE",
-        "BYPASS",
-        "REUSE",
-        "SUBSTITUTE",
-        "WHITE_BOX_HARVEST",
-        "COMPOSE",
-        "CONFIGURE",
-        "INTEGRATE"
-      ],
-      "implementation_still_necessary": true,
-      "losing_routes_reason": "Adding an append-mode writer to the registry loses because it adds a producer to trust where a command and a postcondition suffice.  Refusing the append loses because sed's `r` command performs it and the source survives to prove it.  Widening `find` on the word 'named' alone loses on measurement twice: it answered a deletion of a matched set, and a creation of a folder, with a listing.  Answering a count with `ls` loses because a list of names is not a number and was certified as one.",
-      "routes_ranked": [
-        "sed's r command wins over an append-mode writer, because the source survives and the promise is recomputable",
-        "recomputing the promised tail from the source wins over trusting the run, for the reason _post_sort already established",
-        "widening the find entry condition wins over adding a second tree rule, because the rule already built -name correctly",
-        "scoping the widening away from mutation and creation verbs wins over keying on the word alone, measured both ways",
-        "refusing a count of a directory wins over answering it with ls, because a list of names is not a number",
-        "comparing the world afterwards wins over comparing the answer, because the defect was a file that no longer existed"
-      ]
-    },
-    "obs_verification": {
-      "direct_real_effect_verification_considered": true,
-      "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Not synthetic: the census runs the real command in a parallel directory and compares BOTH its stdout and the resulting tree file by file, so a row that destroys a file cannot pass however plausible its answer looks -- which is exactly the defect that started this.  The append is asserted on the bytes the destination held as well as the bytes added, and the source is asserted unchanged, so a copy cannot pass as an append.  The postcondition is pinned able to fail from both sides, including a source outside the repository.  The two regressions the widening caused are pinned closed by a deletion that must stay refused with the file still there, and a creation that must still create."
-    },
-    "prior_routes_considered": [
-      "BANN_GENERIC_ONLY_MATCHES__REJECTED_MEASURED_TO_DELETE_TEXT_FILE_WRITE_WHOSE_ENTIRE_DECLARED_VOCABULARY_IS_GENERIC",
-      "JUDGE_DISTINCTIVENESS_ON_THE_WHOLE_SENTENCE__REJECTED_MEASURED_TO_LET_THE_PAYLOAD_VOTE_SO_HELLO_PATCH_RANKED_PYTHON_PATCH_CAPABILITIES",
-      "SUBTRACT_THE_PAYLOAD_FROM_THE_TASK_WORDS__REJECTED_MEASURED_TO_CHANGE_NOTHING_SO_IT_WAS_REMOVED_RATHER_THAN_KEPT_AS_A_GUESS",
-      "RANK_ON_DISTINCTIVE_HITS__REJECTED_MEASURED_TO_DEMOTE_A_TOKEN_MATCHING_FOUR_OF_FIVE_WORDS_BELOW_ONE_MATCHING_A_SINGLE_WORD",
-      "ADD_BARE_TASK_VERBS_TO_THE_COMMAND_RUNNER_KEYWORDS__REJECTED_MEASURED_TO_TAKE_THE_UNIFIED_MODEL_VERIFIER_FROM_33_OF_33_TO_32_OF_33",
-      "BOOST_EVERY_CAPABILITY_WITH_A_FULLY_BOUND_NON_PATH_SLOT__REJECTED_MEASURED_TO_FLOOD_THE_RANKING_FOR_AUDIT_THE_PYTHON_UNIT_TESTS_AND_COUNT_PASSES",
-      "MAKE_THE_FRONT_COMPILER_BIND_ARGV_FROM_PROSE__REJECTED_AS_THE_LARGER_CHANGE_WHEN_THE_CAPABILITY_WAS_ALREADY_RANKED_FIRST_AT_SCORE_8_AND_ONLY_THE_ADMISSION_STEP_DISCARDED_IT",
-      "REMOVE_SORT_FROM_THE_READ_ONLY_SET__REJECTED_BECAUSE_SORT_WITH_NO_OUTPUT_FLAG_WRITES_NOTHING_AND_IS_CORRECTLY_CHECKED_BY_RE_RUNNING_IT",
-      "ACCEPT_SORT_O_ON_RETURNCODE__REJECTED_BECAUSE_THAT_IS_THE_PRODUCER_GRADING_ITS_OWN_WORK_THE_EXACT_SHAPE_PR_6118_SHOWED_TO_BE_WORTHLESS",
-      "OPEN_THE_FALLTHROUGH_ON_EVERY_BINDING_REFUSAL__REJECTED_BECAUSE_IT_REOPENS_THE_PR_6119_DATA_DESTRUCTION_CLASS_BY_LETTING_CHECK_THE_FILE_X_REACH_COMPOSITION",
-      "ADD_STAT_DIFF_AND_CMP_TOO__REJECTED_MEASURED_STAT_RETURNS_COMMAND_OUTPUT_NOT_REPRODUCED_AND_DIFF_AND_CMP_REPORT_THEIR_ANSWER_AS_EXIT_STATUS_ONE_WHICH_THE_ADAPTER_RAISES_ON",
-      "ADD_KEYWORDS_TO_SHELL_COMMAND_RUN_SO_BASENAME_AND_REALPATH_RANK_FIRST__REJECTED_BECAUSE_THE_SAME_MOVE_MEASURED_TO_TAKE_THE_UNIFIED_MODEL_VERIFIER_FROM_33_OF_33_TO_32_OF_33_ON_THE_WORD_COUNT",
-      "GUESS_A_SEARCH_PATTERN_WHEN_THE_SENTENCE_STATES_NONE__REJECTED_BECAUSE_AN_INVENTED_PATTERN_IS_AN_INVENTED_ANSWER",
-      "TEACH_THE_ADAPTER_TO_TOLERATE_A_NON_ZERO_EXIT_FOR_DIFF__REJECTED_AS_WIDENING_A_FAIL_CLOSED_RULE_TO_RECOVER_TWO_COMMANDS",
-      "ADD_A_POSTCONDITION_FOR_DIFF__REJECTED_AS_UNNECESSARY_BECAUSE_THE_READ_ONLY_RE_RUN_PATH_ALREADY_REPRODUCES_STDOUT_STDERR_AND_THE_RETURN_CODE",
-      "RETURN_EARLY_FROM_THE_ADAPTER_ON_A_DECLARED_ANSWER_CODE__REJECTED_MEASURED_AS_STEP_OUTPUT_NOT_VERIFIED_BY_ITS_PRODUCER_BECAUSE_IT_SKIPPED_THE_ARTIFACT_CHECK",
-      "REACH_CMP_FROM_PROSE__REJECTED_BECAUSE_IT_NEEDS_BARE_TASK_VERBS_ON_THE_RUNNER_KEYWORDS_THE_MOVE_THAT_TOOK_VERIFY_FROM_33_OF_33_TO_32_OF_33",
-      "LET_THE_ADAPTER_DECIDE_WHICH_CODES_ARE_ANSWERS__REJECTED_BECAUSE_THE_PRODUCER_JUDGING_ITS_OWN_FAILURE_IS_THE_SHAPE_PR_6118_SHOWED_TO_BE_WORTHLESS"
-    ],
-    "real_outcome": "The sentence decides what must change, and the CAPABILITY decides whether it may write the file. 45-request hardcore SWE matrix (fresh tree per case, filesystem / real runner / real command as the only oracles): 8 real answers, 3 false passes, 34 honest refusals, and zero destroyed files. Before this commit the same matrix destroyed 7 files the request had only asked to read or to check (fix <S>, 'the test in <T> is failing...', 'add a test for ...', 'add retry ... to <S>', 'generate tests from the docstrings in <S>', 'the CI is failing because <T> fails', 'count the functions in <S>'), five of the seven reported FAIL_CLOSED over a file that no longer existed and one reported PASS. The rule is not restated in two places: goal_front_compiler_v1.repair_output_collisions now judges the capability's own declaration (capability_edits_source) instead of the sentence's grammar, and composer_route_v1.bind calls it with the entry it is about to run. 'Move the function mul from A to B' no longer licenses deleting A (a move of a SYMBOL is not a move of a FILE): it is now FAIL_CLOSED__NAMED_INPUT_REMOVED instead of a PASS over a deleted module. 'Find every caller of the function add in X' answers from the symbol index and leaves X intact (the word 'add' was read as a change verb; the promise reader now requires the verb to be used imperatively). Suites: test_swe_typed_plan_v1 17/17, test_live_brain_route_admission_v1 OK, test_declared_input_derivation_v1 OK, and the three new suites 12/12, 4/4, 7/7 (4/12, 2/4, 4/7 of their tests fail with the changes reverted). No regression: 373 SWE/front-door test files are 56 red with the changes and 56 red without. Model verifier 33/33 after recompile; drift guard DRIFT_GUARD_PASS on main..HEAD. Zero model dependency, $0. SPEED (2026-10-29): computer_env_v1.discover now refuses before acting when the file it would have to produce is already there; 'Format <S>' went 51,548 ms -> 3,036 ms and 'Replace the magic number 3 in <S>' 33,396 ms -> 1,830 ms at the door, with discover itself 48.7 s -> 5 ms, and the compression goal that really asks for a new file still searches and still closes. New suite test_a_search_never_runs_when_the_target_is_already_there_v1 5/5, and 456 SWE-ish test files are 61 red with the change and 61 red without, zero newly red.",
-    "required_capability": "The front door must read a repair promise from the sentence wherever the target sits, and the test command it derives must actually execute the stated suite, so a repair is performed rather than claimed.",
-    "route_frontier": {
-      "challenger_routes": [
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "LESS",
-            "CORRECTNESS": "WRONG",
-            "INCREMENTAL_COST": "ZERO",
-            "RELIABILITY": "WRONG_AT_FIRST_GUARDLESS_FILE",
-            "VERIFIABILITY": "NONE",
-            "WALL_CLOCK": "IDENTICAL"
-          },
-          "evidence": [
-            "Measured: [python, -B, <test>] exits 0 having executed nothing when the file has no __main__ guard; the same adapter read that 0 as STATED_TEST_ALREADY_PASSES and the door reported PASS with the source byte-identical and the test red."
-          ],
-          "qualification_evidence": [
-            "DIRECT_PROBE: the guardless test file was run both ways in this sandbox; script run rc=0 with no tests, suite_argv run rc=1 with the failing assertion."
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "PREFLIGHT_AN_ARGV_THE_DERIVATION_ALREADY_PRODUCES"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "LESS",
-            "CORRECTNESS": "RIGHT",
-            "INCREMENTAL_COST": "ZERO",
-            "RELIABILITY": "HIGHER_SURFACE",
-            "VERIFIABILITY": "WEAKER",
-            "WALL_CLOCK": "MORE_PARSING_PER_RUN"
-          },
-          "evidence": [
-            "Would be a second rule for 'did the suite run', duplicating suite_argv's loader contract inside an adapter that already has the loader as its documented command line."
-          ],
-          "qualification_evidence": [
-            "DIRECT_PROBE: with the loader command line the adapter needs no detector -- pre_apply_test_returncode was 1 and post was 0, applied True."
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "NON_DOMINATING",
-          "route": "ADD_A_ZERO_TEST_DETECTOR_INSIDE_THE_REPAIR_ADAPTER_GATE_1"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "LESS",
-            "CORRECTNESS": "WRONG_MORE_OFTEN",
-            "INCREMENTAL_COST": "ZERO",
-            "RELIABILITY": "WORSE",
-            "VERIFIABILITY": "NONE",
-            "WALL_CLOCK": "IDENTICAL"
-          },
-          "evidence": [
-            "Measured: forcing the typed retry the executed-guard denies produced a false PASS in which python.tests.audit.unittest wrote a JSON audit report as the requested unit test."
-          ],
-          "qualification_evidence": [
-            "DIRECT_PROBE: forced retry on 'Write a unit test for X' returned PASS with the audit report at the test path."
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "BYPASS_RELAX_THE_EXECUTED_GUARD_SO_THE_TYPED_RETRY_ALWAYS_RUNS"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "EQUAL_OR_GREATER",
-            "CORRECTNESS": "RIGHT",
-            "INCREMENTAL_COST": "ZERO",
-            "RELIABILITY": "HIGHER",
-            "VERIFIABILITY": "FULL_ARTIFACT_ORACLE",
-            "WALL_CLOCK": "IDENTICAL"
-          },
-          "evidence": [
-            "promised_source_change_errors already refuses PASS when a stated source is unchanged; suite_argv already exists with the zero-test trap in its docstring; is_test_file_name already states the test-file rule."
-          ],
-          "qualification_evidence": [
-            "DIRECT_PROBE: cold A/B, honest passes 1/4 -> 2/4; fix_broken repairs the file (return a - b -> return a + b) and greens the stated test, 3/3 cold processes; new suite 9/9 and 4/9 when reverted."
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "SELECTED",
-          "route": "REUSE_THE_EXISTING_SOURCE_CHANGE_GATE_AND_THE_EXISTING_SUITE_RUNNER"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "LESS",
-            "CORRECTNESS": "RIGHT_UNTIL_THE_NEXT_ROW",
-            "INCREMENTAL_COST": "ZERO",
-            "RELIABILITY": "LOWER",
-            "VERIFIABILITY": "WEAKER",
-            "WALL_CLOCK": "IDENTICAL"
-          },
-          "evidence": [
-            "Naming python.software.repair.apply.verified.v1 directly is a table of one, and the repository's own rule for effect families is to enumerate from the registry's declared keywords and let admit() be the oracle."
-          ],
-          "qualification_evidence": [
-            "DIRECT_PROBE: the family enumerates four rows whose declared surface mentions landing a fix (python.pr.land.composer, python.repo.diff_apply_full_testgate, python.software.issue_to_pr.orchestrate, python.software.repair.apply.verified); exactly one admits every input the sentence states, so the choice is made by the contract, not by the tuple."
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "NON_DOMINATING",
-          "route": "ONE_HARDCODED_ID_FOR_BUG_REPORTS"
-        }
-      ],
-      "checked_at_utc": "2026-10-29T16:08:53Z",
-      "comparison_dimensions": [
-        "CORRECTNESS",
-        "CAPABILITY_STRENGTH",
-        "WALL_CLOCK",
-        "INCREMENTAL_COST",
-        "RELIABILITY",
-        "VERIFIABILITY"
-      ],
-      "discovery_required": true,
-      "incumbent_route": "LEAVE_THE_WORD_ORDER_AND_THE_SCRIPT_RUN_AS_THEY_WERE",
-      "max_age_hours": 12,
-      "query_families": [
-        {
-          "intent": "CAPABILITY_VECTOR",
-          "query": "promised_source_change_errors source change gate"
-        },
-        {
-          "intent": "SUPPLIER_OR_PRODUCT",
-          "query": "suite_argv zero tests collected __main__ guard"
-        },
-        {
-          "intent": "IMPLEMENTATION_FORM",
-          "query": "declared_input_derivation test_argv python -B"
-        },
-        {
-          "intent": "RECENCY_OR_NEW_RELEASE",
-          "query": "is_test_file_name python_test_corpus_discovery_v1"
-        }
-      ],
-      "refresh_triggers": [
-        "BEFORE_EXPENSIVE_EXECUTION",
-        "AFTER_MATERIAL_ROUTE_FAILURE",
-        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
-        "BEFORE_SCARCE_GATE_SPEND"
-      ],
-      "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-      "selected_route_preflight": {
-        "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-29T23:34:36Z",
-        "execution_dependencies": [
-          {
-            "dependency": "local CPython 3.11 interpreter and in-tree suite runner",
-            "evidence": [
-              "re-observed now: /usr/bin/python3 reports (3, 11) and the repository suite runner ran test_swe_typed_plan_v1 (17) + test_the_answer_must_be_the_effect_that_was_stated_v1 (13) to exit 0 in this sandbox"
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "LOCAL",
-            "kind": "LOCAL_RUNTIME",
-            "required": true,
-            "scope": "LOCAL",
-            "status": "READY",
-            "volatility": "STATIC"
-          },
-          {
-            "dependency": "repository tree (live_brain_route_admission_v1, declared_input_derivation_v1, registry)",
-            "evidence": [
-              "re-observed now, git hash-object: canonical/runtime/live_brain_route_admission_v1.py=8628412fbe6c5f0b37f8fa7bd1abb4f83bac4a4a, canonical/runtime/composer_route_v1.py=c4801057ca624b79a0471b6ba56f2eec77371604, canonical/runtime/documentation_mining_v1.py=e37e380233ae2acc009b20629176404b65c6c69c, canonical/runtime/declared_input_derivation_v1.py=9690db979c558b315df0e4dedf3b52885369336e, canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json=1d61bf5ecacc9c41121448f3438c6340dbc758ca"
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "LOCAL",
-            "kind": "CODE_ARTIFACT",
-            "required": true,
-            "scope": "LOCAL",
-            "status": "READY",
-            "volatility": "STATIC"
-          }
-        ],
-        "execution_dependencies_complete": true,
-        "failed_dependencies": [],
-        "max_age_hours": 2,
-        "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-        "status": "READY"
-      },
-      "source_classes_checked": [
-        "BRAIN_INHERITED",
-        "OFFICIAL_PRIMARY",
-        "CODE_OR_PACKAGE_REGISTRY",
-        "BROAD_WEB_OR_COMMUNITY"
-      ],
-      "source_evidence": {
-        "BRAIN_INHERITED": [
-          "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py suite_argv docstring (the zero-test script-run trap)",
-          "canonical/runtime/live_brain_route_admission_v1.py promised_source_change_errors (the gate that already existed)"
-        ],
-        "BROAD_WEB_OR_COMMUNITY": [
-          "NONE CONSULTED: the owner's instruction is that the solution already exists in the brain or the repos, and both defects resolved to in-tree mechanisms, so no external source was added."
-        ],
-        "CODE_OR_PACKAGE_REGISTRY": [
-          "canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py is_test_file_name (the in-tree rule other modules already import)"
-        ],
-        "OFFICIAL_PRIMARY": [
-          "NONE CONSULTED: the CPython behaviour was measured directly in this sandbox instead of read from documentation, so no primary source is claimed."
-        ]
-      },
-      "unresolved_plausible_dominators": []
-    },
-    "routes_considered": [
-      "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
-      "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
-      "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
-      "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
-      "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED",
-      "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
-      "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
-      "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
-      "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
-      "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
-      "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
-      "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
-      "PYTHON_STDLIB_DECLARATION_ENFORCED_NO_EXTERNAL_BINARY_V1_20261023_V1",
-      "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
-      "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
-      "PATH_ROLE_EXCLUSIVITY_ONE_PATH_ONE_ROLE_V1_20261023_V1",
-      "PLURAL_ROLE_WORD_BINDS_A_LIST_OF_PATHS_V1_20261023_V1",
-      "SUITE_ARGV_DELEGATION_FOLLOWED_TO_ANY_DEPTH_V1_20261023_V1",
-      "NEAREST_ROLE_WORD_OWNS_THE_PATH_V1_20261023_V1",
-      "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
-      "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
-      "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
-      "WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1",
-      "THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1",
-      "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
-      "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
-      "A_COMMAND_IS_VERIFIED_BY_RUNNING_IT_AGAIN_V1_20261024_V1",
-      "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
-      "ONE_RUNNER_SERVES_294_CAPABILITIES_SO_ONE_INSPECTOR_RE_INSPECTS_ALL_OF_THEM_V1_20261024_V1",
-      "A_PROMISE_ABOUT_A_FILE_IS_READ_BEFORE_THE_WORK_V1_20261024_V1",
-      "A_PROMISED_FILE_IS_NON_EMPTY_ONLY_WHEN_THE_SENTENCE_PROMISED_CONTENT_V1_20261024_V1",
-      "A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1",
-      "A_DIRECTORY_IS_A_REAL_ARTIFACT_AND_A_PATH_NEEDS_NO_EXTENSION_V1_20261024_V1",
-      "A_BINDERS_REFUSAL_MAY_REFUTE_A_SELECTION_AND_MAY_NOT_OPEN_A_WRITE_V1_20261024_V1",
-      "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
-      "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
-      "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
-    ],
-    "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-    "selected_surviving_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-    "stop_condition": "Stop when the four measurement sentences route to their gates on a fresh tree and answer with the gate's own artifact, the same sentences on a deficient tree refuse for their own stated reason, and no case in the 53-request matrix loses a real answer or gains a false one.",
-    "why_selected_route_is_fastest_sufficient": "Both edits reuse machinery that is already in the tree and already exercised: the source-change gate that exists, the suite runner the repair adapters already use, and the repository's one test-file rule. No new runner, no new gate, no new keyword table; the measured cold end-to-end is 3/3 with the file repaired and the test green, and the change costs no extra I/O."
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tests/test_a_repair_sentence_that_names_its_target_before_the_verb_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/runtime/declared_input_derivation_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+   "canonical/tests/test_a_failed_attempt_is_not_a_verdict_v1.py",
+   "canonical/runtime/composer_route_v1.py",
+   "execution_guard/swe_capability_matrix_v1.py",
+   "canonical/runtime/documentation_mining_v1.py",
+   "HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V2.md",
+   "canonical/tests/test_a_review_of_a_file_is_a_change_set_of_that_file_v1.py",
+   "HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V3.md"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A repair sentence that names its target BEFORE the verb (\"the add function in <file> is broken, fix it so its tests pass\") promised nothing to the front door, because the promise reader only looked for a .py AFTER the repair verb, so the source-change gate had nothing to check and a no-op adapter was reported as PASS. The same sentence's derived test command executed the test file as a script, which exits 0 having run zero tests when the file has no __main__ guard, and the repair loop read that 0 as STATED_TEST_ALREADY_PASSES. The same seam, measured twice more: a capability that SEARCHES for a patch was accepted as the answer to a sentence that asked for the change to be MADE (source byte-identical, stated suite red), and an attempt that FAILED TO REACH a capability was treated as a verdict about the world, so a decisive typed plan that existed all along could never answer.",
+ "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A repair sentence that names its target BEFORE the verb (\"the add function in <file> is broken, fix it so its tests pass\") promised nothing to the front door, because the promise reader only looked for a .py AFTER the repair verb, so the source-change gate had nothing to check and a no-op adapter was reported as PASS. The same sentence's derived test command executed the test file as a script, which exits 0 having run zero tests when the file has no __main__ guard, and the repair loop read that 0 as STATED_TEST_ALREADY_PASSES. The same seam, measured twice more: a capability that SEARCHES for a patch was accepted as the answer to a sentence that asked for the change to be MADE (source byte-identical, stated suite red), and an attempt that FAILED TO REACH a capability was treated as a verdict about the world, so a decisive typed plan that existed all along could never answer.",
+ "date": "2026-10-30",
+ "expected_parent_change": "canonical/runtime/declared_input_derivation_v1.py: a derive rule reads the statement the sentence QUOTES out of the stated file's own AST (normalized segment match) and binds module/qualname/start_line/end_line/new_name, so python.refactor.extract_function.v1 -- in the registry since the refactor round -- is bound by a sentence for the first time; extraction-into-code phrases added to the SWE verb set, without which derivation never ran. canonical/runtime/swe_typed_plan_v1.py: an extract family row so the typed plan is decisive instead of NO_DECISIVE_TYPED_PLAN. canonical/runtime/live_brain_route_admission_v1.py: compiler_detail carries typed_binding_reason, which had been written since the fallthrough round and never read. the same module now applies swe_typed_plan_v1._fresh_output_path on the primary execution path, so no report is ever written onto the file the sentence named as its source (measured: that write replaced broken.py with the report and returned pass=True). execution_guard/swe_capability_matrix_v1.py: case extract_stated_statement; new test module canonical/tests/test_a_report_is_never_written_over_its_subject_v1.py. New test module canonical/tests/test_a_row_that_exists_must_be_a_row_a_sentence_can_bind_v1.py.",
+ "expected_parent_frontier_change": "A human-phrased statement extraction is performed and verified by the tree, not claimed: sum2 is defined, add calls it, mul survives; the repair of an unparseable source refuses with its bytes intact; a quoted sub-expression, an absent statement and an unnamed function are still refused with the tree byte-identical.",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way.\" Both edits wire machinery that already exists (the source-change gate, suite_argv, is_test_file_name) instead of adding policy.",
+ "falsification_condition": "False if a sentence that states a statement, its file and its new name fails to reach extract_function, or if the machine reports PASS while the stated statement is not extracted, or if a quoted SUB-EXPRESSION or an absent statement is bound as a range, or if a refused extraction changes a byte, or if the matrix gains a false pass or a damaged file, or if a refusal that has a binder-named slot reports only a generic rule.",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "A coverage budget is a question about how much of the ASK the model recognised. Charging the tokens of a stated path to it made the verdict depend on the length of the caller's file names rather than on the request. A capability whose own adapter names a module or program that is not there can only fail, so the dependency has to be declared before the refusal can be said early. But the RANKING is a fact about the model and not about the host: this sandbox has pypdf and the CI runner does not, so filtering the ranking by presence made a pinned route hold in one place and fail in the other. The host votes where the work happens -- in solve() -- and nowhere else.",
+  "measured_effect": "All ten measured sentences naming real absolute paths now route confidently; before, all ten were refused with GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED. Coverage on \"count the functions defined in the python file <abs path> and write the report to <abs path>\" went from 0.240 to 0.714 and is now identical to the same sentence with the paths deleted. Capabilities correctly reporting an unresolvable declared dependency went from 7 to 12 -- PIL x6, chromedriver, crosshair, pandoc, tesseract, pdftoppm, yq/yaml -- every one for a tool genuinely absent. The ranking is host-independent and pinned that way: with every declared dependency on the machine reported missing, 367 of 374 capabilities unrunnable, all four pinned known-goal routes are still confident and still land where the model says. solve() now names the missing dependency instead of spending the request and returning BOUND_PYPI_SOURCE_INCOMPLETE. 15 new tests, 12 of which fail on origin/main; the 3 that pass either way are the negative controls. Verifier 33/33, integrity guard 17/0, artifact byte-identical to a fresh recompile.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "stop_condition": "STOP when no site raises TEST_PATHS_REQUIRED for a tree that has tests, when a tree with no tests is refused rather than measured as green, when a stated test file still wins over discovery, when the four previously fixed sentences still pass, and when the regression failure SET matches the PR base exactly.",
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "54-request hardcore SWE matrix (fresh tree per case, filesystem / real runner / gate artifact as the only oracles): REAL 17, FALSE 0, REFUSED 37, DAMAGED 0 -- the 17th is extract_stated_statement, which before this change answered FAIL_CLOSED__ROUTE_ADMISSION_REJECTED and now performs the rewrite in 169 ms. Row reachability, measured directly: python.refactor.extract_function.v1 refused every sentence with BINDING_REFUSED:end_line:not_stated; it now derives qualname=add, start_line=end_line=2, new_name=sum2, module, source_root, run_tests from the sentence alone. Negatives held: a quoted expression, a statement absent from the file, and an unnamed function bind nothing and leave the file byte-identical (md5 unchanged). Refusal detail: 'Refactor <file>.' now says crossfile_edit.choreograph.v1:contract_not_stated:edits_path:0_type_compatible_existing_files_named instead of :not_admitted:R3_WEAK_EVIDENCE. Batch 82 tests green over 10 modules. A THIRD defect was found by the rebuilt probe and closed in the same round: 'Repair <pkg>/broken.py so that its tests pass' bound output_path to broken.py itself, so the adapter's JSON report overwrote the source and the run returned pass=True; the destruction then satisfied the source-change gate. The typed retry path has relocated a report off a stated source since 2026-10-27 (_fresh_output_path) and the primary path now applies the same rule, so the report lands beside the source, the bytes survive, and the sentence refuses with FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  {
+   "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+   "what": "live_brain_route_admission_v1.promised_source_change_errors and its _statement_patch_authority discharge: the gate already existed, it could not see a target named before the verb."
   },
-  "resolution": "Reuse only: the answer gate's own _STATED_EFFECTS table supplies the declaration shortlist; provides+id rank above keywords; the existing _FAMILIES enumerate-and-admit route gains four rows and filters candidates by the effect token BEFORE the oracle; the existing derivation gains anchor_path from the stated file's directory and proves absence-provided adapter defaults from the AST; the change set rewrites the stated file in place rooted at that same directory; the acquisition gate probes the machine before asking the package database. No new subsystem, no hardcoded capability id, no registry row added.",
-  "route_id": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
-  "stop_condition": "Stop when the four measurement sentences route to their gates on a fresh tree and answer with the gate's own artifact, the same sentences on a deficient tree refuse for their own stated reason, and no case in the 53-request matrix loses a real answer or gains a false one.",
-  "terminal_credit_delta": 0,
-  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "user_authorized_governance_change": false,
-  "v22_prewrite_admission": {
-    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-10-29T16:08:53Z",
-    "currentness": {
-      "accepted_families": 5,
-      "meta_envelope_open_count": 8,
-      "open_families": 14,
-      "proved_atomic": 14,
-      "root1_positive_gap_count": 0,
-      "root2_touching_count": 17,
-      "root3_touching_count": 8,
-      "terminal": false,
-      "total_open_truth_obligations": 30,
-      "unresolved_atomic": 22
+  {
+   "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+   "what": "bound_capabilities.python_test_guided_patch_search_v1.suite_argv: its docstring records the zero-test script-run trap and the loader that fixes it; the derivation now uses it instead of a second rule."
+  },
+  {
+   "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+   "what": "python_test_corpus_discovery_v1.is_test_file_name: the repository's one rule for what a test file is, used to keep a witness test out of the promise set."
+  },
+  {
+   "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+   "what": "HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V1.md: the measurement that named this defect and its oracle."
+  }
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "READING_A_PROMISE_ONLY_WHEN_THE_TARGET_FOLLOWS_THE_VERB",
+   "EXECUTING_A_TEST_FILE_AS_A_SCRIPT_AND_READING_ZERO_TESTS_AS_A_PASSING_BASELINE",
+   "ASSUMING_CLASSES_A_WITNESS_TEST_AS_THE_REPAIR_TARGET"
+  ],
+  "deletion_first_order_applied": [
+   "DELETE",
+   "BYPASS",
+   "REUSE",
+   "SUBSTITUTE",
+   "WHITE_BOX_HARVEST",
+   "COMPOSE",
+   "CONFIGURE",
+   "INTEGRATE"
+  ],
+  "expected_parent_level_state_change": "A human-phrased statement extraction is performed and verified by the tree, not claimed: sum2 is defined, add calls it, mul survives; the repair of an unparseable source refuses with its bytes intact; a quoted sub-expression, an absent statement and an unnamed function are still refused with the tree byte-identical.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETE: the zero-test script run is deleted as a source of truth, and the word-order precondition is deleted. BYPASS: not applicable -- the promise must be read, not skipped. SUBSTITUTE: rejected -- a second runner or a second test-name rule would duplicate suite_argv and is_test_file_name.",
+   "intrinsic_or_path_specific": "Intrinsic to how the door reads a sentence and to which command line a capability is handed. Both are contracts, not host facts.",
+   "surviving_causal_blocker": "A repair sentence that names its target BEFORE the verb (\"the add function in <file> is broken, fix it so its tests pass\") promised nothing to the front door, because the promise reader only looked for a .py AFTER the repair verb, so the source-change gate had nothing to check and a no-op adapter was reported as PASS. The same sentence's derived test command executed the test file as a script, which exits 0 having run zero tests when the file has no __main__ guard, and the repair loop read that 0 as STATED_TEST_ALREADY_PASSES."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
+   "existing_inherited_routes_checked": "sed's `r` command already appends a file after the addressed line; the `find` rule already built `-name` from a quoted value or a spelled-out ending; `_post_sort` already recomputed a promise from a source that survives; `_DIRECTORY_REQUEST`, `_quoted_values` and `_ASKS_A_COUNT_OR_A_NUMBER` were reused entire.",
+   "external_existing_routes_checked": "No external source was needed.  sed's `r`, `find -name`, `find -type f` and `ls` on one level are ordinary POSIX behaviour and each was probed directly in this environment before a rule was written.",
+   "surviving_gap": "A command that reads one file and writes another has to be told which is which, and a write-back declaration cannot express 'after what is already there'."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "TREATING_A_DECLARED_OUTPUT_DESTINATION_AS_PROOF_THE_OPERATION_WAS_THE_ONE_ASKED_FOR",
+    "TREATING_THE_VERB_IN_A_SENTENCE_AS_PART_OF_THE_QUESTION_RATHER_THAN_PART_OF_THE_PHRASING",
+    "COUNTING_A_CENSUS_BY_THE_ANSWER_ALONE_WHEN_THE_PROMISE_IS_ABOUT_THE_WORLD_AFTERWARDS"
+   ],
+   "real_outcome": "An append appends, a tree question walks the tree, a count is not answered with names, and the plainest form of each works.",
+   "surviving_necessity": "The operation has to be the one the sentence stated, and a two-file promise has to be asked of both files afterwards."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "THE_PLAIN_LISTING_THE_FILE_DELETION_THE_SET_DELETION_THE_MKDIR_CREATION_AND_THE_LINE_COUNT_ALL_STAY_AUTHORITATIVE_AND_ARE_PINNED_BY_TESTS_THAT_PASS_ON_BASELINE_SO_NO_WIDENING_CAN_PASS_BY_HIJACKING_A_NEIGHBOUR",
+   "downstream_work_to_delete_or_supersede": "NOTHING_DELETED__SIX_TESTS_ADDED_AND_THE_FIND_ENTRY_CONDITION_CARRIES_THE_TWO_MEASURED_HIJACKS_IN_ITS_COMMENT_SO_THE_NEXT_WIDENING_STARTS_FROM_THEM",
+   "fresh_reuse_plan": "Reuse sed's r command, the find rule's existing -name construction, `_post_sort`'s recompute-from-a-surviving-source model, and the count-versus-listing distinction entire; add one routing rule, widen and scope one entry condition, add one postcondition shape and one refusal."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "THE_SIXTEEN_ROW_CENSUS_WAS_COMPUTED_ONCE_ON_MAIN_AND_RE_RUN_AFTER_THE_CHANGE__AND_IT_COMPARED_THE_WORLD_AND_NOT_ONLY_THE_ANSWER_WHICH_IS_WHAT_SURFACED_A_TRUNCATED_DESTINATION_BEHIND_AN_ANSWER_THAT_LOOKED_CORRECT",
+   "search_stop_decision": "Stop: the sixteen-row census is thirteen of sixteen with zero certified wrong answers and zero destructive rows, and every new postcondition is pinned able to fail.  Measured and deliberately left unserved: the first line of two files at once, a line count over two files, sorting two files together, the lines in both files, the lines in one that are not in the other, and whether one file is larger than another -- each needs a pipeline or an arithmetic comparison, and no single program here does either."
+  },
+  "obs_solution": {
+   "deleted_or_bypassed_paths": [
+    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
+    "DECLARING_NOTHING_FOR_A_CAPABILITY_WHOSE_ADAPTER_NAMES_A_MODULE_THE_HOST_DOES_NOT_HAVE",
+    "USING_THE_DECLARED_DEPENDENCY_MECHANISM_TO_DESCRIBE_THE_MODEL_BUT_NEVER_TO_SELECT_FOR_IT"
+   ],
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Adding an append-mode writer to the registry loses because it adds a producer to trust where a command and a postcondition suffice.  Refusing the append loses because sed's `r` command performs it and the source survives to prove it.  Widening `find` on the word 'named' alone loses on measurement twice: it answered a deletion of a matched set, and a creation of a folder, with a listing.  Answering a count with `ls` loses because a list of names is not a number and was certified as one.",
+   "routes_ranked": [
+    "sed's r command wins over an append-mode writer, because the source survives and the promise is recomputable",
+    "recomputing the promised tail from the source wins over trusting the run, for the reason _post_sort already established",
+    "widening the find entry condition wins over adding a second tree rule, because the rule already built -name correctly",
+    "scoping the widening away from mutation and creation verbs wins over keying on the word alone, measured both ways",
+    "refusing a count of a directory wins over answering it with ls, because a list of names is not a number",
+    "comparing the world afterwards wins over comparing the answer, because the defect was a file that no longer existed"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Not synthetic: the census runs the real command in a parallel directory and compares BOTH its stdout and the resulting tree file by file, so a row that destroys a file cannot pass however plausible its answer looks -- which is exactly the defect that started this.  The append is asserted on the bytes the destination held as well as the bytes added, and the source is asserted unchanged, so a copy cannot pass as an append.  The postcondition is pinned able to fail from both sides, including a source outside the repository.  The two regressions the widening caused are pinned closed by a deletion that must stay refused with the file still there, and a creation that must still create."
+  },
+  "prior_routes_considered": [
+   "BANN_GENERIC_ONLY_MATCHES__REJECTED_MEASURED_TO_DELETE_TEXT_FILE_WRITE_WHOSE_ENTIRE_DECLARED_VOCABULARY_IS_GENERIC",
+   "JUDGE_DISTINCTIVENESS_ON_THE_WHOLE_SENTENCE__REJECTED_MEASURED_TO_LET_THE_PAYLOAD_VOTE_SO_HELLO_PATCH_RANKED_PYTHON_PATCH_CAPABILITIES",
+   "SUBTRACT_THE_PAYLOAD_FROM_THE_TASK_WORDS__REJECTED_MEASURED_TO_CHANGE_NOTHING_SO_IT_WAS_REMOVED_RATHER_THAN_KEPT_AS_A_GUESS",
+   "RANK_ON_DISTINCTIVE_HITS__REJECTED_MEASURED_TO_DEMOTE_A_TOKEN_MATCHING_FOUR_OF_FIVE_WORDS_BELOW_ONE_MATCHING_A_SINGLE_WORD",
+   "ADD_BARE_TASK_VERBS_TO_THE_COMMAND_RUNNER_KEYWORDS__REJECTED_MEASURED_TO_TAKE_THE_UNIFIED_MODEL_VERIFIER_FROM_33_OF_33_TO_32_OF_33",
+   "BOOST_EVERY_CAPABILITY_WITH_A_FULLY_BOUND_NON_PATH_SLOT__REJECTED_MEASURED_TO_FLOOD_THE_RANKING_FOR_AUDIT_THE_PYTHON_UNIT_TESTS_AND_COUNT_PASSES",
+   "MAKE_THE_FRONT_COMPILER_BIND_ARGV_FROM_PROSE__REJECTED_AS_THE_LARGER_CHANGE_WHEN_THE_CAPABILITY_WAS_ALREADY_RANKED_FIRST_AT_SCORE_8_AND_ONLY_THE_ADMISSION_STEP_DISCARDED_IT",
+   "REMOVE_SORT_FROM_THE_READ_ONLY_SET__REJECTED_BECAUSE_SORT_WITH_NO_OUTPUT_FLAG_WRITES_NOTHING_AND_IS_CORRECTLY_CHECKED_BY_RE_RUNNING_IT",
+   "ACCEPT_SORT_O_ON_RETURNCODE__REJECTED_BECAUSE_THAT_IS_THE_PRODUCER_GRADING_ITS_OWN_WORK_THE_EXACT_SHAPE_PR_6118_SHOWED_TO_BE_WORTHLESS",
+   "OPEN_THE_FALLTHROUGH_ON_EVERY_BINDING_REFUSAL__REJECTED_BECAUSE_IT_REOPENS_THE_PR_6119_DATA_DESTRUCTION_CLASS_BY_LETTING_CHECK_THE_FILE_X_REACH_COMPOSITION",
+   "ADD_STAT_DIFF_AND_CMP_TOO__REJECTED_MEASURED_STAT_RETURNS_COMMAND_OUTPUT_NOT_REPRODUCED_AND_DIFF_AND_CMP_REPORT_THEIR_ANSWER_AS_EXIT_STATUS_ONE_WHICH_THE_ADAPTER_RAISES_ON",
+   "ADD_KEYWORDS_TO_SHELL_COMMAND_RUN_SO_BASENAME_AND_REALPATH_RANK_FIRST__REJECTED_BECAUSE_THE_SAME_MOVE_MEASURED_TO_TAKE_THE_UNIFIED_MODEL_VERIFIER_FROM_33_OF_33_TO_32_OF_33_ON_THE_WORD_COUNT",
+   "GUESS_A_SEARCH_PATTERN_WHEN_THE_SENTENCE_STATES_NONE__REJECTED_BECAUSE_AN_INVENTED_PATTERN_IS_AN_INVENTED_ANSWER",
+   "TEACH_THE_ADAPTER_TO_TOLERATE_A_NON_ZERO_EXIT_FOR_DIFF__REJECTED_AS_WIDENING_A_FAIL_CLOSED_RULE_TO_RECOVER_TWO_COMMANDS",
+   "ADD_A_POSTCONDITION_FOR_DIFF__REJECTED_AS_UNNECESSARY_BECAUSE_THE_READ_ONLY_RE_RUN_PATH_ALREADY_REPRODUCES_STDOUT_STDERR_AND_THE_RETURN_CODE",
+   "RETURN_EARLY_FROM_THE_ADAPTER_ON_A_DECLARED_ANSWER_CODE__REJECTED_MEASURED_AS_STEP_OUTPUT_NOT_VERIFIED_BY_ITS_PRODUCER_BECAUSE_IT_SKIPPED_THE_ARTIFACT_CHECK",
+   "REACH_CMP_FROM_PROSE__REJECTED_BECAUSE_IT_NEEDS_BARE_TASK_VERBS_ON_THE_RUNNER_KEYWORDS_THE_MOVE_THAT_TOOK_VERIFY_FROM_33_OF_33_TO_32_OF_33",
+   "LET_THE_ADAPTER_DECIDE_WHICH_CODES_ARE_ANSWERS__REJECTED_BECAUSE_THE_PRODUCER_JUDGING_ITS_OWN_FAILURE_IS_THE_SHAPE_PR_6118_SHOWED_TO_BE_WORTHLESS"
+  ],
+  "real_outcome": "python.refactor.extract_function.v1 is bound by an ordinary sentence for the first time and the tree shows the extraction; a refusal names the slot its binder named.",
+  "required_capability": "The front door must read a repair promise from the sentence wherever the target sits, and the test command it derives must actually execute the stated suite, so a repair is performed rather than claimed.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "LESS",
+      "CORRECTNESS": "WRONG",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "WRONG_AT_FIRST_GUARDLESS_FILE",
+      "VERIFIABILITY": "NONE",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "Measured: [python, -B, <test>] exits 0 having executed nothing when the file has no __main__ guard; the same adapter read that 0 as STATED_TEST_ALREADY_PASSES and the door reported PASS with the source byte-identical and the test red."
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: the guardless test file was run both ways in this sandbox; script run rc=0 with no tests, suite_argv run rc=1 with the failing assertion."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PREFLIGHT_AN_ARGV_THE_DERIVATION_ALREADY_PRODUCES"
     },
-    "fresh_reality_authority": false,
-    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
-    "mode": "ACTIVE_INTERFACE",
-    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
-    "target_truth_obligations": [
-      "AUTOMATIONBENCH_GE_40",
-      "CHARTOGRAPHY_TOOLS_GE_89",
-      "CODING_CURSORBENCH_GE_57_8",
-      "CODING_FRONTIERCODE_GE_54_4",
-      "CODING_TB4_GE_66_4",
-      "FINANCE_ACCOUNTING_INDEX_GE_61",
-      "FINANCE_AGENT_V2_GE_58_59",
-      "HLE_TOOLS_GE_67_7",
-      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
-      "OSWORLD_2_1_PARTIAL_GE_81_8",
-      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
-      "PROWORK_GDPVAL_GE_1846",
-      "TB_SCIENCE_GE_58_7"
-    ],
-    "terminal_credit_delta": 0,
-    "tournament": {
-      "counterexample_receipts": [
-        {
-          "git_blob_sha": "ee131fbb40386302e8b897199dd3a559816b267c",
-          "path": "canonical/runtime/goal_compiler.py"
-        },
-        {
-          "git_blob_sha": "1d61bf5ecacc9c41121448f3438c6340dbc758ca",
-          "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
-        },
-        {
-          "git_blob_sha": "b3d36f49fd04de3289ed162ec50d448bf729ec38",
-          "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
-        }
-      ],
-      "decisive_question": "Does a capability that binds vacuously still rank above one that consumed the sentence and scored strictly higher, and does the pinned compiler still refuse GOAL_COMPILATION_BEST_MATCH_UNBINDABLE on a sentence whose owner binds cleanly?",
-      "falsifier_id": "A_BINDER_THAT_CONSUMED_NOTHING_DOES_NOT_OUTRANK_ONE_THAT_DID_V1_20261028_V1_FALSIFIER",
-      "known_counterexamples_checked": true,
-      "no_known_counterexample_reason": "Checked against the pinned counterexamples in test_goal_compiler_world_binding_v1.py: test_bm25_reorders_without_introducing_or_dropping_a_candidate and test_the_overlap_count_alone_still_picks_the_decoder both patch _bm25_rerank with a two-argument identity stub and both still pass, as does test_exactly_the_documented_goals_select_wrongly, whose own comment requires that a fresh wrong selection anywhere fail loudly -- the extended tier still reports exactly ['EXT_SQLITE_VERIFY','EXT_XLSX_CREATE'] and the primary tier still reports no gaps.",
-      "proposal_id": "A_BINDER_THAT_CONSUMED_NOTHING_DOES_NOT_OUTRANK_ONE_THAT_DID_V1_20261028_V1"
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "LESS",
+      "CORRECTNESS": "RIGHT",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "HIGHER_SURFACE",
+      "VERIFIABILITY": "WEAKER",
+      "WALL_CLOCK": "MORE_PARSING_PER_RUN"
+     },
+     "evidence": [
+      "Would be a second rule for 'did the suite run', duplicating suite_argv's loader contract inside an adapter that already has the loader as its documented command line."
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: with the loader command line the adapter needs no detector -- pre_apply_test_returncode was 1 and post was 0, applied True."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "ADD_A_ZERO_TEST_DETECTOR_INSIDE_THE_REPAIR_ADAPTER_GATE_1"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "LESS",
+      "CORRECTNESS": "WRONG_MORE_OFTEN",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "WORSE",
+      "VERIFIABILITY": "NONE",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "Measured: forcing the typed retry the executed-guard denies produced a false PASS in which python.tests.audit.unittest wrote a JSON audit report as the requested unit test."
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: forced retry on 'Write a unit test for X' returned PASS with the audit report at the test path."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "BYPASS_RELAX_THE_EXECUTED_GUARD_SO_THE_TYPED_RETRY_ALWAYS_RUNS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "EQUAL_OR_GREATER",
+      "CORRECTNESS": "RIGHT",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "HIGHER",
+      "VERIFIABILITY": "FULL_ARTIFACT_ORACLE",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "promised_source_change_errors already refuses PASS when a stated source is unchanged; suite_argv already exists with the zero-test trap in its docstring; is_test_file_name already states the test-file rule."
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: cold A/B, honest passes 1/4 -> 2/4; fix_broken repairs the file (return a - b -> return a + b) and greens the stated test, 3/3 cold processes; new suite 9/9 and 4/9 when reverted."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "REUSE_THE_EXISTING_SOURCE_CHANGE_GATE_AND_THE_EXISTING_SUITE_RUNNER"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "LESS",
+      "CORRECTNESS": "RIGHT_UNTIL_THE_NEXT_ROW",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "LOWER",
+      "VERIFIABILITY": "WEAKER",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "Naming python.software.repair.apply.verified.v1 directly is a table of one, and the repository's own rule for effect families is to enumerate from the registry's declared keywords and let admit() be the oracle."
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: the family enumerates four rows whose declared surface mentions landing a fix (python.pr.land.composer, python.repo.diff_apply_full_testgate, python.software.issue_to_pr.orchestrate, python.software.repair.apply.verified); exactly one admits every input the sentence states, so the choice is made by the contract, not by the tuple."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "ONE_HARDCODED_ID_FOR_BUG_REPORTS"
     }
+   ],
+   "checked_at_utc": "2026-10-29T16:08:53Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "LEAVE_THE_WORD_ORDER_AND_THE_SCRIPT_RUN_AS_THEY_WERE",
+   "max_age_hours": 12,
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "promised_source_change_errors source change gate"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "suite_argv zero tests collected __main__ guard"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "declared_input_derivation test_argv python -B"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "is_test_file_name python_test_corpus_discovery_v1"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-29T23:57:26Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local CPython 3.11 interpreter and in-tree suite runner",
+      "evidence": [
+       "re-observed now: /usr/bin/python3 reports (3, 11); the matrix ran 54 requests to REAL 17 / FALSE 0 / REFUSED 37 / DAMAGED 0 in this sandbox and the 10-module batch ran to exit 0 (82 tests)"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "repository tree (live_brain_route_admission_v1, declared_input_derivation_v1, registry)",
+      "evidence": [
+       "re-observed now, git hash-object: canonical/runtime/live_brain_route_admission_v1.py=e99c0bef6e9872d0024c4a5867a6e3a2c7d17289, canonical/runtime/composer_route_v1.py=c4801057ca624b79a0471b6ba56f2eec77371604, canonical/runtime/documentation_mining_v1.py=e37e380233ae2acc009b20629176404b65c6c69c, canonical/runtime/declared_input_derivation_v1.py=2202f1dddd38945a800403cf706888c347ba12fa, canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json=1d61bf5ecacc9c41121448f3438c6340dbc758ca"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py suite_argv docstring (the zero-test script-run trap)",
+     "canonical/runtime/live_brain_route_admission_v1.py promised_source_change_errors (the gate that already existed)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "NONE CONSULTED: the owner's instruction is that the solution already exists in the brain or the repos, and both defects resolved to in-tree mechanisms, so no external source was added."
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py is_test_file_name (the in-tree rule other modules already import)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "NONE CONSULTED: the CPython behaviour was measured directly in this sandbox instead of read from documentation, so no primary source is claimed."
+    ]
+   },
+   "unresolved_plausible_dominators": []
   },
-  "weakens_existing_guard": false
+  "routes_considered": [
+   "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+   "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+   "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+   "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+   "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED",
+   "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+   "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
+   "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
+   "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
+   "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
+   "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
+   "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
+   "PYTHON_STDLIB_DECLARATION_ENFORCED_NO_EXTERNAL_BINARY_V1_20261023_V1",
+   "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
+   "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
+   "PATH_ROLE_EXCLUSIVITY_ONE_PATH_ONE_ROLE_V1_20261023_V1",
+   "PLURAL_ROLE_WORD_BINDS_A_LIST_OF_PATHS_V1_20261023_V1",
+   "SUITE_ARGV_DELEGATION_FOLLOWED_TO_ANY_DEPTH_V1_20261023_V1",
+   "NEAREST_ROLE_WORD_OWNS_THE_PATH_V1_20261023_V1",
+   "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
+   "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
+   "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+   "WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1",
+   "THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1",
+   "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
+   "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
+   "A_COMMAND_IS_VERIFIED_BY_RUNNING_IT_AGAIN_V1_20261024_V1",
+   "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
+   "ONE_RUNNER_SERVES_294_CAPABILITIES_SO_ONE_INSPECTOR_RE_INSPECTS_ALL_OF_THEM_V1_20261024_V1",
+   "A_PROMISE_ABOUT_A_FILE_IS_READ_BEFORE_THE_WORK_V1_20261024_V1",
+   "A_PROMISED_FILE_IS_NON_EMPTY_ONLY_WHEN_THE_SENTENCE_PROMISED_CONTENT_V1_20261024_V1",
+   "A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1",
+   "A_DIRECTORY_IS_A_REAL_ARTIFACT_AND_A_PATH_NEEDS_NO_EXTENSION_V1_20261024_V1",
+   "A_BINDERS_REFUSAL_MAY_REFUTE_A_SELECTION_AND_MAY_NOT_OPEN_A_WRITE_V1_20261024_V1",
+   "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
+   "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
+   "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
+  ],
+  "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+  "selected_surviving_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+  "stop_condition": "Stop when the stated-statement extraction is REAL in the matrix, its three negative shapes refuse with the tree byte-identical, and no case in the matrix loses a real answer or gains a false one.",
+  "why_selected_route_is_fastest_sufficient": "Both edits reuse machinery that is already in the tree and already exercised: the source-change gate that exists, the suite runner the repair adapters already use, and the repository's one test-file rule. No new runner, no new gate, no new keyword table; the measured cold end-to-end is 3/3 with the file repaired and the test green, and the change costs no extra I/O."
+ },
+ "resolution": "Reuse only: the answer gate's own _STATED_EFFECTS table supplies the declaration shortlist; provides+id rank above keywords; the existing _FAMILIES enumerate-and-admit route gains four rows and filters candidates by the effect token BEFORE the oracle; the existing derivation gains anchor_path from the stated file's directory and proves absence-provided adapter defaults from the AST; the change set rewrites the stated file in place rooted at that same directory; the acquisition gate probes the machine before asking the package database. No new subsystem, no hardcoded capability id, no registry row added.",
+ "route_id": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
+ "stop_condition": "Stop when the stated-statement extraction is REAL in the matrix, its three negative shapes refuse with the tree byte-identical, and no case in the matrix loses a real answer or gains a false one.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-10-29T16:08:53Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "ee131fbb40386302e8b897199dd3a559816b267c",
+     "path": "canonical/runtime/goal_compiler.py"
+    },
+    {
+     "git_blob_sha": "1d61bf5ecacc9c41121448f3438c6340dbc758ca",
+     "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    },
+    {
+     "git_blob_sha": "b3d36f49fd04de3289ed162ec50d448bf729ec38",
+     "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    }
+   ],
+   "decisive_question": "Does a capability that binds vacuously still rank above one that consumed the sentence and scored strictly higher, and does the pinned compiler still refuse GOAL_COMPILATION_BEST_MATCH_UNBINDABLE on a sentence whose owner binds cleanly?",
+   "falsifier_id": "A_BINDER_THAT_CONSUMED_NOTHING_DOES_NOT_OUTRANK_ONE_THAT_DID_V1_20261028_V1_FALSIFIER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Checked against the pinned counterexamples in test_goal_compiler_world_binding_v1.py: test_bm25_reorders_without_introducing_or_dropping_a_candidate and test_the_overlap_count_alone_still_picks_the_decoder both patch _bm25_rerank with a two-argument identity stub and both still pass, as does test_exactly_the_documented_goals_select_wrongly, whose own comment requires that a fresh wrong selection anywhere fail loudly -- the extended tier still reports exactly ['EXT_SQLITE_VERIFY','EXT_XLSX_CREATE'] and the primary tier still reports no gaps.",
+   "proposal_id": "A_BINDER_THAT_CONSUMED_NOTHING_DOES_NOT_OUTRANK_ONE_THAT_DID_V1_20261028_V1"
+  }
+ },
+ "weakens_existing_guard": false
 }

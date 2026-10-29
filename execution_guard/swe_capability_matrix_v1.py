@@ -257,6 +257,21 @@ case("rename_symbol", lambda b: "Rename the function add to plus in %s and updat
 case("extract_function", lambda b: "Extract the body of add in %s into a helper function."
      % rel(b, "pkg/mod.py"),
      lambda b, r: parses(b / "pkg/mod.py") and text_of(b / "pkg/mod.py").count("def ") >= 4, "refactor")
+# THE SAME CAPABILITY, ASKED THE WAY ITS CONTRACT IS DECLARED.  The case above states no
+# statement and no name, so it must refuse -- and it does.  `python.refactor.extract_function.v1`
+# had been in the registry since the refactor round with NO sentence that could reach it, because
+# nothing derived the four slots that describe one region of one file (module, qualname,
+# start_line, end_line).  Measured 2026-10-30, this shape now reaches it and the world can check:
+# the helper is defined, the call site is rewritten, and functions the sentence never named
+# survive.
+case("extract_stated_statement",
+     lambda b: "Extract the statement `total = a + b` into a new function named sum2 in %s."
+     % rel(b, "cov/calc.py"),
+     lambda b, r: (parses(b / "cov/calc.py")
+                   and "def sum2(a, b):" in text_of(b / "cov/calc.py")
+                   and "total = sum2(a, b)" in text_of(b / "cov/calc.py")
+                   and "def mul(a, b):" in text_of(b / "cov/calc.py")),
+     "refactor", allow=("calc.py",))
 case("move_function", lambda b: "Move the function mul from %s to %s."
      % (rel(b, "pkg/calc.py"), rel(b, "pkg/mathx.py")),
      lambda b, r: (b / "pkg/mathx.py").is_file() and "def mul" in text_of(b / "pkg/mathx.py")

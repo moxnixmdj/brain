@@ -80,6 +80,13 @@ _SWE_VERBS = (
     # software-engineering question and contains none of the verbs above, so derivation never
     # ran and the impact row was refused on ``changed_paths`` -- the file the sentence names.
     "which tests", "affected by", "impact of", "after changing",
+    # EXTRACTION AND INLINING ARE CODE TRANSFORMS, AND THE PLAIN VERB IS TOO GENERIC:
+    # "extract the text from a PDF" is not this.  The phrases below only fire when the sentence
+    # states an extraction INTO CODE, which is exactly the shape ``python.refactor.extract_function``
+    # declares -- and without them the derivation never ran for the extract family at all, so the
+    # row could not bind a coordinate it can now compute (measured 2026-10-30).
+    "into a new function", "into a function", "extract the statement", "extract the statements",
+    "extract the expression", "extract the block", "inline the function", "refactor the",
 )
 
 
@@ -448,6 +455,55 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 out["anchor_path"] = {"value": base, "rule": "ANCHOR_IS_THE_TREES_ROOT_WHOSE_TESTS_RUN",
                                       "evidence": ",".join(stated_python)}
 
+    # EXTRACT FUNCTION: THE SENTENCE NAMES THE REGION AND THE NEW NAME; THE AST NAMES THE REST.
+    #
+    # ``python.refactor.extract_function.v1`` has existed since the refactor round and was NEVER
+    # reachable: it wants (source_root, module, qualname, new_name, start_line, end_line) and no rule
+    # produced the coordinate, so "extract ... into a new function named sum2 in <f>" fell through the
+    # lexical matcher to ``math.numeric_expression.sympy``.  Measured 2026-10-30.  Everything the row
+    # needs is evidence already in hand: the sentence states the file (=> source_root, module), the
+    # quoted region (=> the statement span) and the new name; the AST supplies the enclosing function.
+    #
+    # THE REGION MUST BE A STATEMENT.  The adapter lifts *statement blocks* into a function; binding a
+    # sub-expression ("the expression `a + b`") to the statement that contains it would perform a
+    # different edit than the one asked for, so that case is left unbound on purpose: no value is
+    # invented, and the refusal is honest.
+    if {"start_line", "end_line", "new_name", "module"} <= keys and len(sources) == 1:
+        _quoted = re.search(r"[`\x27\"]([^`\x27\"]{1,200})[`\x27\"]", goal)
+        _named = _NAMED_NEW.search(goal)
+        if _quoted and _named:
+            _wanted = " ".join(_quoted.group(1).split())
+            try:
+                _text = (pathlib.Path(root) / sources[0]).read_text(encoding="utf-8", errors="replace")
+                _tree = ast.parse(_text)
+            except (OSError, SyntaxError):
+                _tree = None
+            _hits: list[tuple[str, int, int]] = []
+            if _tree is not None:
+                for _fn in ast.walk(_tree):
+                    if not isinstance(_fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    for _stmt in ast.walk(_fn):
+                        if not isinstance(_stmt, ast.stmt) or _stmt is _fn:
+                            continue
+                        try:
+                            _seg = ast.get_source_segment(_text, _stmt)
+                        except Exception:  # noqa: BLE001 - an unsegmentable node is not evidence
+                            _seg = None
+                        if _seg and " ".join(_seg.split()) == _wanted:
+                            _hits.append((_fn.name, _stmt.lineno, _stmt.end_lineno))
+            if len(_hits) == 1:
+                _fn_name, _start, _end = _hits[0]
+                out["qualname"] = {"value": _fn_name, "rule": "QUALNAME_FROM_ENCLOSING_FUNCTION",
+                                   "evidence": sources[0]}
+                out["start_line"] = {"value": _start, "rule": "SPAN_FROM_STATED_STATEMENT",
+                                     "evidence": _wanted[:80]}
+                out["end_line"] = {"value": _end, "rule": "SPAN_FROM_STATED_STATEMENT",
+                                   "evidence": _wanted[:80]}
+                out["new_name"] = {"value": _named.group(1), "rule": "NAME_FROM_STATED_NEW_NAME",
+                                   "evidence": goal[:120]}
+                out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                 "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
     # A BENCHMARK IS A FILE THAT DEFINES ``bench()``, AND THE STATEMENT NAMES THE MODULE.
     #
     # ``python.review.diff_perf_gate.v1`` declares ``bench_path``: "a repo file defining
