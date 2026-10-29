@@ -494,6 +494,53 @@ def run(args, root):
             _fail("SYNTAX_ERROR_AFTER_EDIT:" + str(exc))
         applied[path] = after
 
+    unknown_sites.sort(key=lambda r: (r["file"], r["line"]))
+    complete = not unknown_sites
+    seen_shadows = {}
+    for s in shadowed_keeps:
+        seen_shadows.setdefault((s["line"], s["scope"], s["rule"]), s)
+    shadowed_rows = [seen_shadows[k] for k in sorted(seen_shadows)]
+
+    # NO TEST, NO WRITE.
+    #
+    # The edits used to land first and the verdict came after, so ``PASS_BLIND`` -- which the front
+    # door's contract (``gate == PASS``) refuses -- arrived only once the files had already been
+    # rewritten.  Measured 2026-10-30: "Rename the symbol `mul` to `multiply` in <file>" on a tree
+    # with no test beside it renamed the module and then reported a closed failure; the caller was
+    # told nothing had happened to a file that had been edited.  The patch is fully computed and
+    # syntax-checked above, so the honest blind answer is a DRY RUN: the verdict, the edit count and
+    # the sites are reported, and ``applied`` says nothing was written.
+    if not run_tests:
+        out = {
+            "schema": SCHEMA,
+            "adapter": "python_refactor_rename_symbol",
+            "capability": "python.refactor.rename_symbol.v1",
+            "module": module_rel,
+            "qualname": qualname,
+            "old_symbol": old,
+            "new_symbol": new,
+            "symbol_kind": kind,
+            "edit_count": sum(len(v) for v in per_file_edits.values()),
+            "files_edited": [],
+            "files_that_would_be_edited": sorted(p.relative_to(src_abs).as_posix()
+                                                 for p in applied),
+            "unknown_sites": unknown_sites,
+            "shadowed_keeps": shadowed_rows,
+            "gate": "PASS_BLIND_DRY_RUN",
+            "complete": not unknown_sites,
+            "verified": False,
+            "applied": False,
+            "reason": "NO_TEST_CAN_VERIFY_THE_RENAME",
+        }
+        out_abs.parent.mkdir(parents=True, exist_ok=True)
+        out_abs.write_text(json.dumps(out, indent=1, sort_keys=True, default=list) + "\n",
+                           encoding="utf-8")
+        final = dict(out)
+        final["output_path"] = out_rel
+        final["output_sha256"] = hashlib.sha256(out_abs.read_bytes()).hexdigest()
+        final["output_verified"] = True
+        return final
+
     for path, b in applied.items():
         path.write_bytes(b)
 
@@ -513,12 +560,6 @@ def run(args, root):
     else:
         gate = "PASS_BLIND"
 
-    unknown_sites.sort(key=lambda r: (r["file"], r["line"]))
-    complete = not unknown_sites
-    seen_shadows = {}
-    for s in shadowed_keeps:
-        seen_shadows.setdefault((s["line"], s["scope"], s["rule"]), s)
-    shadowed_rows = [seen_shadows[k] for k in sorted(seen_shadows)]
     out = {
         "schema": SCHEMA,
         "adapter": "python_refactor_rename_symbol",

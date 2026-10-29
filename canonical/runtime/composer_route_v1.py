@@ -2719,6 +2719,22 @@ def _prose_argv(sentence: str) -> list[str] | None:
                     # numbers fit.
                     return None
         paths = operands
+        # A FILE COMMAND CANNOT MOVE A DEFINITION, AND IT MUST NOT TRY.
+        #
+        # Measured 2026-10-30 on a fresh tree: "Move the function mul from <calc.py> into a new
+        # module <ops.py>." bound `mv <calc.py> <ops.py>`, which OVERWROTE ops.py with calc.py's
+        # bytes and DELETED calc.py -- and then the door, seeing that a file the sentence named was
+        # gone, refused with FAIL_CLOSED__NAMED_INPUT_REMOVED.  The report was honest about the
+        # damage and the damage was still done: the caller's source was destroyed by a request the
+        # machine declined to answer.  A sentence that names a DEFINITION (the function / method /
+        # class / symbol / parameter <name>) is asking for a code transformation; `mv`, `cp` and
+        # `rm` operate on FILES, so none of them can be the answer, and the refusal must come
+        # BEFORE the command runs.  This is the same discipline as the two plain writers above,
+        # applied to the three commands that can destroy a file outright.
+        if program in {"mv", "cp", "rm"} and re.search(
+                r"\b(?:function|method|class|symbol|parameter|argument|definition|fn)\b",
+                text) and not re.search(r"\bfiles?\b|\bdirector(?:y|ies)\b", text):
+            return None
         if program == "cut":
             if re.search(r"\bcharacters?\b", text):
                 # How MANY characters, not which one.  `_prose_count` reads the

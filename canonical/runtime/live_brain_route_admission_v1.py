@@ -730,11 +730,47 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     return result
 
 
+def _empty_test_selection(goal: str, result: Mapping[str, Any]) -> bool:
+    """The sentence asked which tests to run, and the artifact selected none.
+
+    A capability that REPORTS ``selected_tests`` states the shape of its own answer, so an empty
+    list is a measurement of nothing -- not an answer.  Measured 2026-10-30: "Which tests do I need
+    to run after changing <f>?" returned PASS with
+    ``PROJECT_BRAIN_CHANGE_IMPACT_TEST_SELECTION_V1`` whose ``selected_tests`` was ``[]`` while
+    ``affected_modules`` named the module AND its test file.  The same class as the coverage gate's
+    ``gate: PASS`` over zero measured lines: the artifact was verified as a file write, never as an
+    answer to the question that was asked.  Scoped to the sentence that asks it.
+    """
+    if not _CHANGE_IMPACT_REQUEST_RE.search(str(goal or "")):
+        return False
+    # The adapters report the answer two ways: the list itself, or its COUNT in the summary fields
+    # (``selected_test_count``).  Both are the capability's own statement about its answer, so both
+    # are read -- an empty list and a zero count are the same fact.
+    for key in ("selected_tests", "candidate_tests"):
+        value = result.get(key)
+        if isinstance(value, list) and not value:
+            return True
+    for key in ("selected_test_count",):
+        value = result.get(key)
+        if isinstance(value, int) and value == 0:
+            return True
+    return False
+
+
 def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry: Mapping[str, Any], action: Mapping[str, Any],
                      raw_contract: Mapping[str, Any], started: int) -> dict[str, Any]:
     selected = str(compiled.get("selected_capability") or "")
     try:
         tool_result = run_adapter_locally(entry, action)
+        if isinstance(tool_result, Mapping) and _empty_test_selection(goal, tool_result):
+            return _fail(task_id, "FAIL_CLOSED__ANSWER_EMPTY__NO_TESTS_SELECTED",
+                         "ANSWER_EMPTY:SELECTED_TESTS_IS_EMPTY_WHILE_AFFECTED_MODULES_EXIST", started,
+                         executed=True, compiled_capability_id=selected,
+                         answer_artifact={k: tool_result.get(k) for k in
+                                          ("schema", "selected_tests", "candidate_tests",
+                                           "affected_modules", "changed_files")},
+                         executor=LOCAL_EXECUTION_PROOF,
+                         tool_executed=True)
     # ``SystemExit`` too: this repository's adapters refuse with ``raise SystemExit(1)`` (the
     # ``_systemic`` convention in bound_capabilities/*.py), and a capability that exits must be a
     # closed failure with a reason, never the death of the caller.  Measured 2026-10-29:
@@ -754,12 +790,42 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
         _expect = action.get("expect") if isinstance(action.get("expect"), Mapping) else {}
         _verdict_field = str((_expect or {}).get("field") or "")
         if _verdict_field and "ACTION_EXPECTATION_FAILED" in str(exc):
-            return _fail(task_id, "FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT",
-                         "REVIEW_EXECUTED__VERDICT_IS_THE_ANSWER__CODE_NOT_CERTIFIED", started,
-                         executed=True, reviewed=True, review_verdict_field=_verdict_field,
+            # A REVIEW AND A REFACTOR BOTH CARRY THEIR OWN VERDICT, BUT ONLY ONE IS A REVIEW.
+            #
+            # Measured 2026-10-30: a rename that computed and syntax-checked the whole patch but had
+            # no test to verify it came back as "REVIEW_RAN..." -- the right refusal shape, the wrong
+            # name, and a caller reading the status would go looking for a review that never existed.
+            _is_review = "review" in str(selected)
+            return _fail(task_id,
+                         ("FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT" if _is_review
+                          else "FAIL_CLOSED__CAPABILITY_RETURNED_A_VERDICT"),
+                         ("REVIEW_EXECUTED__VERDICT_IS_THE_ANSWER__CODE_NOT_CERTIFIED" if _is_review
+                          else "CAPABILITY_EXECUTED__VERDICT_IS_THE_ANSWER__EXPECTATION_NOT_MET"),
+                         started, executed=True, reviewed=_is_review,
+                         review_verdict_field=_verdict_field,
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
                          reason=type(exc).__name__ + ":" + str(exc),
                          executor=LOCAL_EXECUTION_PROOF, tool_executed=True)
+        # A STRUCTURED REFUSAL IS NOT A CRASH -- HERE TOO.
+        #
+        # The composed path has parsed ``raise SystemExit(json.dumps({"error": true, "reason": ...}))``
+        # for a while; THIS path, which runs the single selected capability, did not, so the gate's
+        # own finding was replaced by a generic controller failure.  Measured 2026-10-30: the
+        # mutation gate refused ``BASE_WORLD_RED:no tests ran`` and the caller was told
+        # ``BOUND_CAPABILITY_SOURCE_UNSUPPORTED:runtime`` -- a statement about the registry, from the
+        # other executor, about a gate that had already answered.
+        _payload = str(exc)
+        try:
+            _decoded = json.loads(_payload)
+        except (ValueError, TypeError):
+            _decoded = None
+        if isinstance(_decoded, Mapping) and _decoded.get("error") is True:
+            _why = str(_decoded.get("reason") or "UNSPECIFIED").strip()[:200]
+            return _fail(task_id, "FAIL_CLOSED__CAPABILITY_REFUSED_" + _why.split(":")[0][:60],
+                         "CAPABILITY_REFUSED:" + _why, started, executed=True,
+                         compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                         refusal_payload=dict(_decoded), executor=LOCAL_EXECUTION_PROOF,
+                         tool_executed=tool_executed)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
                      executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
@@ -1066,9 +1132,56 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
             return _fail(task_id, "FAIL__COMPILED_SHAPE_NOT_EXECUTABLE", "RAW_GOAL_COMPILED_SHAPE_GAP", started, compiler_mode=compiled.get("compiler_mode"))
         _entry = admissible[selected]
         _inputs = dict(compiled["inputs"])
-        _declared = _entry.get("declared_action_template")
+        # THE SENTENCE-PROVED INPUTS BELONG TO THE ROUTE, NOT TO THE TYPED SELECTOR.
+        #
+        # ``declared_input_derivation_v1`` proves values the sentence states in a different shape (a
+        # file where the capability declares a directory, the stated paths of a change set) and the
+        # typed-admission path has always merged them.  The PRIMARY execution path never did, so a
+        # row the declaration shortlist had correctly chosen was executed with an unbound slot and
+        # the adapter raised its own RuntimeError:
+        #
+        #   "Which tests do I need to run after changing <f>?" -> python.source.change_impact
+        #     .testselect.v1 -> RuntimeError:CHANGE_IMPACT_INPUT_REQUIRED
+        #
+        # A missing slot must never reach an adapter.  Only values the derivation PROVES from the
+        # sentence are added (each carries its rule and its evidence), nothing is invented, and a
+        # slot the sentence cannot prove stays absent so the capability's own contract still fails
+        # closed.
+        _exec_entry = _entry
         try:
-            action = goal_compiler._render_template(_declared or _entry["action_template"], _inputs)
+            from canonical.runtime import declared_input_derivation_v1 as _derivation
+            from canonical.runtime import swe_typed_plan_v1 as _typed_plan_module
+            if _derivation.is_swe_request(goal) and str(selected).startswith(_derivation.SWE_CID_PREFIXES):
+                _shadow, _proven, _report = _derivation.binding_view(goal, _entry, ROOT)
+                # SHAPE IS PART OF THE VALUE.  The front binder fills a declared slot with the LAST
+                # path it read -- a string -- where the capability declares a LIST of paths, and the
+                # mismatch only surfaced inside the adapter
+                # (RuntimeError:CHANGE_IMPACT_INPUT_REQUIRED).  When the derivation proves the slot
+                # as a list and the bound value is not one, the derivation wins: the sentence stated
+                # the paths, and the capability said what shape it wants them in.
+                for _key, _value in (_proven or {}).items():
+                    _bound = _inputs.get(_key)
+                    if _key not in _inputs or (isinstance(_value, list)
+                                               and not isinstance(_bound, list)):
+                        _inputs[_key] = _value
+                if _proven:
+                    compiled = dict(compiled, derived_inputs=_report)
+                # The adapter owns its defaults, so only THOSE placeholders leave the executable
+                # template; the DERIVED slots keep their values because the adapter still has to
+                # receive them.  Rendering the declared template as-is against those inputs raises
+                # on the defaulted slot (GOAL_INPUT_BINDING_REQUIRED:min_coverage_ratio, which
+                # escaped ``solve`` as an uncaught GoalCompilationFailure), and rendering
+                # ``binding_view``'s shadow sends the gate out with no anchor at all
+                # (MISSING_OR_INVALID_PATH_ARGUMENT).  The typed path already drew this line, so
+                # its helper is reused rather than redrawn.
+                _exec_entry = dict(_entry)
+                _exec_entry["action_template"] = _typed_plan_module._execution_template(
+                    _entry, set((_report or {}).get("adapter_defaulted") or {}))
+        except Exception:  # noqa: BLE001 - a derivation fault keeps the declared template
+            _exec_entry = _entry
+        _declared = _exec_entry.get("declared_action_template")
+        try:
+            action = goal_compiler._render_template(_declared or _exec_entry["action_template"], _inputs)
         except goal_compiler.GoalCompilationFailure:
             # The capability declares TWO forms and the sentence chose neither of the declared
             # argument values: fall back to the executable template, which is the zero-input form the
@@ -1079,11 +1192,31 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
             # invented, and the capability's own contract still fails closed if it truly needs inputs.
             if not _declared:
                 raise
-            action = goal_compiler._render_template(_entry["action_template"], _inputs)
+            action = goal_compiler._render_template(_exec_entry["action_template"], _inputs)
         if kernel_refuses(admissible[selected]):
             return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         local_res = _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         if local_res.get("pass") is True:
+            return local_res
+        if str(local_res.get("status") or "").startswith("FAIL_CLOSED__CAPABILITY_REFUSED"):
+            # THE CAPABILITY ANSWERED, AND THE ANSWER WAS A REFUSAL WITH ITS OWN REASON.
+            #
+            # Falling through to the controller re-ran the SAME action through the other executor,
+            # which reported ``Blocker:BOUND_CAPABILITY_SOURCE_UNSUPPORTED:runtime`` -- a statement
+            # about the registry's source type that hid the gate's actual finding.  Measured
+            # 2026-10-30: the mutation gate refused ``BASE_WORLD_RED:no tests ran`` and the report
+            # said the capability's substrate was unsupported.  A structured refusal is an answer;
+            # re-running it cannot improve it.
+            return local_res
+        if str(local_res.get("status") or "").startswith("FAIL_CLOSED__ANSWER_EMPTY"):
+            # A JUDGEMENT ABOUT THE ANSWER, NOT A FAILED ATTEMPT AT ROUTING.
+            #
+            # This branch used to fall through to the generic controller, which re-ran the same
+            # action and reported PASS because the adapter had written its artifact -- so the
+            # empty-answer verdict was overwritten by a "file was written" verdict, which is the
+            # oldest defect in this repository in its purest form.  Measured 2026-10-30:
+            # "Which tests do I need to run after changing <f>?" -> selected_test_count 0 ->
+            # PASS__...EXACT_SEMANTIC_ACCEPTANCE.  A stated, evidence-carrying refusal ends here.
             return local_res
         reason_str = str(local_res.get("reason") or "")
         if "MISMATCH" in reason_str or "ACTION_EXPECTATION_FAILED" in reason_str:
@@ -1268,6 +1401,14 @@ _ANSWER_SURFACE_RE = re.compile(r"\b(?:explain\w*|diagnos\w*|fault\w*|locali[sz]
 # to be an answer to it).  Data, not ids: the surface is the capability id plus the
 # ``provides`` and ``keywords`` it declares, so a real security or coverage capability is
 # admitted the moment one is bound, and nothing here names a capability.
+# "WHICH TESTS DO I NEED TO RUN AFTER CHANGING X" -- one regex, because the declaration gate uses it
+# to shortlist and the post-execution gate uses it to judge the answer.
+_CHANGE_IMPACT_REQUEST_RE = re.compile(
+    r"\bwhich tests?\b[^.\n]{0,60}?\b(?:run|runs|need|needs|affected|impact\w*)\b|"
+    r"\baffected tests?\b|\bimpact\w*\b[^.\n]{0,20}\btests?\b|"
+    r"\btests?\b[^.\n]{0,30}\baffected\b", re.IGNORECASE)
+
+
 _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     (_ANSWER_REQUEST_RE, _ANSWER_SURFACE_RE, "STATED_ANSWER_NOT_PROVIDED_BY_CAPABILITY"),
     # "for security ISSUES" is how an engineer says it, and the row did not read it: measured
@@ -1293,6 +1434,44 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
      re.compile(r"\bcallers?\b|\bwho calls\b|\bcall[ _-]?(?:graph|sites?|edges?)\b|"
                 r"\bcallers_of\b", re.IGNORECASE),
      "STATED_CALLER_MAP_NOT_PROVIDED_BY_CAPABILITY"),
+    # "RUN THE TESTS" REQUIRES SOMETHING TO HAVE RUN.  Measured 2026-10-30: "Run the test suite for
+    # <T>" was certified PASS by the same test-selection INDEX that answered the flaky question,
+    # while the tree's own suite was never executed -- no return code, no count of tests run, no
+    # timing.  A selection is a plan to run; the sentence asks for the run.  The row that runs tests
+    # says so in what it provides (a runner, a suite, pytest/unittest, a measured acceptance), which
+    # is the same declaration test the other rows use.
+    # The verb must be the REQUEST.  "Set up CI to run the tests in <dir>" contains "run the tests"
+    # and asks for a workflow file; anchoring the verb at the start of the sentence keeps the CI
+    # sentence on the CI side (measured: an unanchored trigger refused a real CI row).
+    (re.compile(r"^\s*(?:please\s+|now\s+|can you\s+)*(?:re)?run\b[^.\n]{0,40}"
+                r"\b(?:tests?|suite|pytest)\b|^\s*(?:please\s+)?(?:re)?execute\b[^.\n]{0,30}"
+                r"\btests?\b|^\s*(?:run|rerun)\s+the\s+tests?\b", re.IGNORECASE),
+     re.compile(r"\brun\w*|\bsuite\b|\bpytest\b|\bunittest\b|\bacceptance\b|\bexecut\w*"
+                r"|\bharness\b|\bdriver\b", re.IGNORECASE),
+     "STATED_TEST_RUN_NOT_EXECUTED_BY_CAPABILITY"),
+    # A VERDICT ABOUT FLAKINESS IS NOT A TEST SELECTION.  Measured 2026-10-30 on this repository:
+    # "Rerun the failing test <T> three times and tell me if it is flaky" was certified
+    # PASS__RAW_GOAL_..._EXACT_SEMANTIC_ACCEPTANCE by code.impact.tree_sitter.testselect.v1 -- a
+    # test-selection INDEX.  Nothing was rerun once, let alone three times, and no verdict was
+    # formed, but the artifact was verified as a file write and its `selected_tests` entries were
+    # read as evidence of the answer.  The capability:impact shortlist matched "test"; the question
+    # asked for a stability verdict.  Nothing in the registry declares stability, so the honest
+    # outcome today is a NAMED refusal, and a capability that measures flakiness is admitted the
+    # moment it is bound -- by this declaration and nothing else.
+    (re.compile(r"\bflak(?:y|iness)\b|\b(?:non)?determinis\w*\s+test\b"
+                r"|\bintermittent(?:ly)?\s+(?:fail\w*|test\w*)\b", re.IGNORECASE),
+     re.compile(r"\bflak\w*|\brerun\w*|\brepeat\w*|\bstabilit\w*|\bvariance\b",
+                re.IGNORECASE),
+     "STATED_FLAKY_VERDICT_NOT_PROVIDED_BY_CAPABILITY"),
+    # A STACK FRAME IS NOT A SYMBOL INDEX.  Same sentence, same run: "Attach a debugger to the
+    # failing test <T> and show me the frame where it breaks" was answered by the same index.  A
+    # definition list contains no frame, no locals and no traceback; the words "debugger" and
+    # "frame" are how the request is stated, and a row that provides debugging says so.
+    (re.compile(r"\bdebugger\b|\bbreakpoint\b|\bstack\s+(?:frame|trace)\b|\btraceback\b"
+                r"|\bframe\s+where\b", re.IGNORECASE),
+     re.compile(r"\bdebug\w*|\bpdb\b|\bbreakpoint|\bframe\b|\btraceback\b",
+                re.IGNORECASE),
+     "STATED_DEBUGGER_FRAME_NOT_PROVIDED_BY_CAPABILITY"),
     # DEAD CODE.  Nothing in the registry declares it, so this gate's honest outcome today is a
     # refusal -- which is the point: before it, an indexer that lists every definition was certified
     # as "the dead code" because the definition it named appeared in the artifact.  A capability that
@@ -1341,6 +1520,39 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
      re.compile(r"\bci\b|continuous[ _-]?integration|github[ _-]?actions?|workflow|"
                 r"\bci[._-]?config\b", re.IGNORECASE),
      "STATED_CI_SETUP_NOT_PROVIDED_BY_CAPABILITY"),
+    # A TEST SELECTION IS NOT A FLAKINESS VERDICT.  Measured 2026-10-30 on a fresh tree:
+    # "Rerun the failing test <T> three times and tell me if it is flaky." returned PASS with
+    # code.impact.tree_sitter.testselect.v1, which named <T> as a candidate test once.  Nothing
+    # was run three times, no outcome was compared, and no flakiness was decided.  Zero of 125
+    # routable rows declare flakiness (census over id+provides+keywords), so the honest end state
+    # is a refusal -- and a capability that DOES classify flaky tests is admitted by the same
+    # declaration the moment one is bound.
+    (re.compile(r"\bflaky\b|\bflakiness\b|\bintermittent\w*\b|\bnondeterministic\b|"
+                r"\bnondeterminism\b|\bflake\b", re.IGNORECASE),
+     re.compile(r"flak|intermittent|nondetermin", re.IGNORECASE),
+     "STATED_FLAKY_VERDICT_NOT_PROVIDED_BY_CAPABILITY"),
+    # A DEBUGGER IS NOT AN INDEX.  Measured 2026-10-30: "Attach a debugger to the failing test
+    # <T> and show me the frame where it breaks." returned PASS with the same test selection --
+    # no process was debugged, no breakpoint was set, no frame was read.  Zero of 125 routable
+    # rows declare a debugger, a breakpoint or a frame (census), so this is a refusal until one
+    # does; ``python.fault.localize.*`` rows are NOT admitted by it, because localising a fault
+    # from a traceback is a different effect from pausing a process and reading its frame.
+    (re.compile(r"\bdebugger\b|\bbreakpoint\b|\b(?:pdb|gdb|lldb)\b|\bstack frame\b|"
+                r"\bframe where\b|\bthe frame\b", re.IGNORECASE),
+     re.compile(r"\bdebugger\b|\bbreakpoint\b|\b(?:pdb|gdb|lldb)\b|\bstack frame\b",
+                re.IGNORECASE),
+     "STATED_DEBUGGER_FRAME_NOT_PROVIDED_BY_CAPABILITY"),
+    # WHICH TESTS A CHANGE BREAKS IS A TEST SELECTION, NOT A REPOSITORY MEASUREMENT.  Measured
+    # 2026-10-30: "Which tests do I need to run after changing <f>?" returned PASS from
+    # python.repository.acceptance.measure.v1, which ran the repository's suite and reported
+    # test_count/tests_pass -- an answer to "do the tests pass here", not "which tests does this
+    # change touch".  The rows that DO declare impact analysis exist
+    # (code.impact.tree_sitter.testselect.v1 provides change_impact + test selection), so this
+    # row is a SHORTLIST, not a refusal: it asks the declaration which rows can select tests.
+    (_CHANGE_IMPACT_REQUEST_RE,
+     re.compile(r"\bimpact\b|\baffected\b|\btest[._-]?select\w*\b|\bselect\w* tests?\b",
+                re.IGNORECASE),
+     "STATED_CHANGE_IMPACT_NOT_ANSWERED_BY_CAPABILITY"),
 )
 
 
@@ -2405,6 +2617,19 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
                                      if field != "stated_answer_errors"))
     if _only_answer_gate:
         return True
+    # A REFUSAL THAT MEASURED THE TREE UNCHANGED IS NOT A VERDICT ABOUT THE TREE.
+    #
+    # ``PROMISED_SOURCE_CHANGE_NOT_APPLIED`` is in the judged set because a repair loop that
+    # no-ops must not be re-run on top of a half-edited file.  But when the ONLY promise that
+    # failed is ``PROMISED_SOURCE_UNCHANGED:<path>``, the door itself has just proven that no byte
+    # moved -- there is nothing to compound, and the request is still unanswered.  Measured
+    # 2026-10-30: "Rename the symbol ``mul`` to ``multiply`` in <file>" was answered by a read-only
+    # symbol INDEX (which cannot rename anything), and the refusal was read as a verdict, so the
+    # typed plan that performs the rename -- verified to edit every referencing file -- never ran.
+    if failure_class == "PROMISED_SOURCE_CHANGE_NOT_APPLIED":
+        _promises = [str(x) for x in (result.get("promised_source_change_errors") or [])]
+        if _promises and all(x.startswith("PROMISED_SOURCE_UNCHANGED:") for x in _promises):
+            return True
     if any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS):
         return False
     if failure_class in _COMPOSED_UNVERIFIED_CLASSES:

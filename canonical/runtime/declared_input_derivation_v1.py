@@ -76,6 +76,10 @@ _SWE_VERBS = (
     # exists and works -- was unreachable from the sentence that describes it.
     "coverage", "mutation", "mutant", "benchmark", "performance", "audit", "security",
     "vulnerab", "static analysis", "typecheck", "check the",
+    # IMPACT ANALYSIS.  "Which tests do I need to run after changing <f>?" is an explicit
+    # software-engineering question and contains none of the verbs above, so derivation never
+    # ran and the impact row was refused on ``changed_paths`` -- the file the sentence names.
+    "which tests", "affected by", "impact of", "after changing",
 )
 
 
@@ -90,14 +94,21 @@ _SOURCE_SUFFIXES = (".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".
 _NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 # "rename [the] [parameter|symbol|function] OLD to NEW" / "into a new function named NEW".
+# PEOPLE QUOTE IDENTIFIERS.  ``Rename the symbol `mul` to `multiply`` is the same request as
+# "rename the function mul to multiply", and the bare-word pattern refused it: the backtick stopped
+# the name match, so no plan was decisive and a read-only symbol index stayed the answer.  Measured
+# 2026-10-30.  One optional quote character on either side -- backtick, single, double -- is
+# accepted; nothing else about the sentence is relaxed.
+_QUOTE = r"[`\'\"]?"
 _RENAME_OLD_NEW = re.compile(
     r"\brename\b[^.?!]*?\b(?:parameter|symbol|function|argument|variable)?\s*"
-    r"([A-Za-z_][A-Za-z0-9_]*)\s+(?:to|as|into)\s+([A-Za-z_][A-Za-z0-9_]*)\b",
+    + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\s+(?:to|as|into)\s+"
+    + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\b",
     re.IGNORECASE,
 )
 _NAMED_NEW = re.compile(
-    r"\b(?:new\s+(?:function|parameter|symbol|name)\s+named|named)\s+"
-    r"([A-Za-z_][A-Za-z0-9_]*)\b", re.IGNORECASE,
+    r"\b(?:new\s+(?:function|parameter|symbol|name)\s+named|named)\s+" + _QUOTE +
+    r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\b", re.IGNORECASE,
 )
 
 
@@ -336,6 +347,53 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                             "rule": ("ARGV_FROM_DISCOVERED_TEST_FILE_SUITE_RUNNER" if discovered_tests
                                      else "ARGV_FROM_STATED_TEST_FILE_SUITE_RUNNER"),
                             "evidence": tests[0]}
+    # THE REFACTORS VERIFY BY RUNNING THE TESTS THEY ARE GIVEN, AND REFUSE TO CERTIFY WITHOUT THEM.
+    #
+    # ``run_tests`` is a pytest argument list executed with cwd=source_root; with none, the rename
+    # adapters set ``gate: PASS_BLIND`` and ``verified: false`` -- the edit lands and the door then
+    # refuses, i.e. a refused request that already edited the files, which is the worst of both.
+    # The evidence is the same one the repair path already uses: the ONE test file beside the stated
+    # source (discovered under exactly the rule below).  Paths are relative to the directory pytest
+    # runs in, which is the style the adapters' own receipts use.
+    if "run_tests" in keys and tests:
+        # The root the paths are relative to is the directory the capability will RUN in: the
+        # refactors chdir to ``source_root``; the review gates chdir to ``anchor_path`` (the copied
+        # anchor world).  Measured 2026-10-30: without this the mutation gate was handed
+        # ``canonical/astra_runtime/tmp/m1/cov/test_calc.py`` while running inside a scratch copy of
+        # that same directory, pytest collected nothing, and the honest-looking verdict was
+        # ``BASE_WORLD_RED:no tests ran``.
+        _root = str(out.get("source_root", {}).get("value")
+                    or out.get("anchor_path", {}).get("value") or "").rstrip("/")
+        if not _root and sources:
+            _root = str(pathlib.PurePosixPath(sources[0]).parent).rstrip("/")
+        # A TEST THAT DOES NOT IMPORT THE MODULE CANNOT VERIFY A CHANGE IN IT.
+        #
+        # ``run_tests`` makes the refactor adapters run those tests AFTER the edit and demand
+        # green.  Handing them every test beside the source is not evidence of anything: measured
+        # 2026-10-30, "Rename the parameter old_price to price in <pkg/util.py>" was given
+        # ``test_calc.py`` -- a test of a DIFFERENT module that is red in that fixture for its own
+        # reasons -- so a correct rename was rolled back and reported as a red test.  The relation
+        # is read from the test file itself (it must mention the module's stem), which is the same
+        # kind of evidence the index already uses for imports.
+        _stem = pathlib.PurePosixPath(sources[0]).stem if sources else ""
+        _related = []
+        for _t in tests:
+            try:
+                _text = (pathlib.Path(root) / _t).read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            if _stem and (_stem in _text):
+                _related.append(_t)
+        _rel_tests = []
+        for _t in _related:
+            _rel_tests.append(_t[len(_root) + 1:] if _root and _t.startswith(_root + "/") else _t)
+        if _rel_tests:
+            out["run_tests"] = {
+                "value": [x for x in _rel_tests if "/" not in x] or _rel_tests,
+                "rule": ("PYTEST_ARGV_FROM_RELATED_DISCOVERED_TEST_FILE" if discovered_tests
+                         else "PYTEST_ARGV_FROM_RELATED_STATED_TEST_FILE"),
+                "evidence": ",".join(_related),
+            }
     if "test_paths" in keys and tests:
         out["test_paths"] = {"value": list(tests),
                              "rule": ("PATH_LIST_FROM_DISCOVERED_TEST_FILES" if discovered_tests
@@ -344,6 +402,26 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "source_paths" in keys and sources:
         out["source_paths"] = {"value": list(sources), "rule": "PATH_LIST_FROM_STATED_SOURCE_FILES",
                                "evidence": ",".join(sources)}
+    # WHICH TESTS A CHANGE BREAKS needs the CHANGE.  ``changed_paths`` is the impact rows' name for
+    # the file the sentence says it changed ("after changing <f>"), and the sentence already states
+    # it -- the same evidence as ``source_paths``.  Measured 2026-10-30: the declaration shortlist
+    # reached python.source.change_impact.testselect.v1 (the row that provides change_impact and
+    # test selection) and admission refused it on ``changed_paths:no_matching_existing_files_named``,
+    # so the route layer answered R3_WEAK_EVIDENCE while a repository MEASUREMENT had previously
+    # PASSED the same sentence.
+    # SCOPED TO THE SENTENCE THAT STATES A CHANGE.  A stated .py file is not itself a statement
+    # that anything changed: "the add function in <f> is broken, fix it" names a file and states no
+    # change set, and binding ``changed_paths`` for it made ``python.repo.diff_apply_full_testgate``
+    # bind as well as the repair row -- two admitted candidates, so five tests of the decisive
+    # typed plan (and the repair route itself) went from SELECTED to ambiguous.  The evidence for
+    # this slot is the CHANGE, and it is only there when the sentence says so.
+    _CHANGE_WORDS = re.compile(r"\b(?:after changing|changed|changes?|diff|affected by|impact of|"
+                               r"which tests)\b", re.IGNORECASE)
+    stated_change = [f for f in files if f.endswith(".py")] if _CHANGE_WORDS.search(goal) else []
+    if "changed_paths" in keys and stated_change:
+        out["changed_paths"] = {"value": list(stated_change),
+                                "rule": "PATH_LIST_FROM_STATED_CHANGED_FILES",
+                                "evidence": ",".join(stated_change)}
     # A review gate reviews a CHANGE SET; a sentence names FILES.  Every stated .py (a test file
     # is a legitimate review target too) becomes one change set in which all of it is new, and the
     # worktree the gate reads the new-side bytes from is the tree the sentence named.

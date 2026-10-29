@@ -28713,7 +28713,7 @@
   "bound_capabilities": 125,
   "capabilities": 419,
   "engines": 26,
-  "knowledge_documents": 179,
+  "knowledge_documents": 180,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6500,
   "routing_tokens": 2105,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d2c0f99d4ba17e96c312574db73df9993eb065404569667c95afc50975f8868f"
+  "value": "fa8d58d7ff041d21aad968948023a10b3dbf8d990e59fba61fba12d3aaf3a9c7"
  },
  "engines": [
   {
@@ -40415,6 +40415,96 @@
     "software",
     "stands",
     "v6"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 21544,
+   "headings": [
+    "Hardcore Software-Engineering Problem Inventory — 2026-10-29 V7",
+    "1. The scoreboard (measured today)",
+    "2. Problems, ranked by leverage",
+    "P1 — The router cannot say \"I do not have this\".",
+    "P2 — The same sentence gives different answers over time.",
+    "P3 — The write lane is one-and-a-half capabilities wide.",
+    "P4 — Composition is a fallback that swallows the failure.",
+    "P5 — A second executor can overwrite the first one's answer.",
+    "P6 — Measurement requests are reported as refusals.",
+    "P7 — The machine is Python-only, and SWE is polyglot.",
+    "P8 — Whole hardcore families have zero rows.",
+    "P9 — Nothing is cached, so \"insanely fast\" is false at repository scale.",
+    "P10 — The referee is sick.",
+    "P11 — Refusals are not diagnosable.",
+    "P12 — One fabricated PASS survives in the matrix.",
+    "P13 — No long-horizon work.",
+    "P14 — Nothing learns from a refusal.",
+    "3. What changed in this round (all measured, all with tests)",
+    "4. The order to fix them in (each step makes the next cheaper)",
+    "5. Reproduction",
+    "6. The one-sentence summary"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261029_V7.md",
+   "sha256": "e37a7f12fb47b657ae4ddba446fef9c911d411ec761a7662cdd611ea842de0dd",
+   "summary": "**Scope rule (the founder's frame, applied literally).** This document is about one thing: the machine that writes, changes, verifies and reasons about *software*. Document editing, PDFs, images, archives, spreadsheets and the rest of the non-code registry are **out of scope except as misroute destinations** — when one of them answers a code question, that is a bug recorded here, not a capability ",
+   "terms": {
+    "already": 10,
+    "cannot": 8,
+    "canonical": 9,
+    "capability": 17,
+    "code": 10,
+    "every": 17,
+    "evidence": 7,
+    "file": 14,
+    "fixed": 14,
+    "gate": 7,
+    "git": 10,
+    "green": 7,
+    "index": 8,
+    "like": 13,
+    "looks": 13,
+    "machine": 8,
+    "matrix": 14,
+    "measured": 14,
+    "measurement": 10,
+    "mechanism": 12,
+    "module": 7,
+    "no": 17,
+    "not": 23,
+    "nothing": 11,
+    "now": 9,
+    "one": 30,
+    "only": 7,
+    "pass": 14,
+    "real": 16,
+    "red": 9,
+    "refusal": 15,
+    "refused": 14,
+    "registry": 8,
+    "rename": 10,
+    "repair": 11,
+    "request": 11,
+    "row": 12,
+    "rows": 12,
+    "same": 11,
+    "sentence": 9,
+    "size": 15,
+    "small": 10,
+    "so": 10,
+    "test": 21,
+    "tests": 17,
+    "tree": 10,
+    "work": 8,
+    "write": 8
+   },
+   "title": "Hardcore Software-Engineering Problem Inventory — 2026-10-29 V7",
+   "title_terms": [
+    "2026-10-29",
+    "hardcore",
+    "inventory",
+    "problem",
+    "software-engineering",
+    "v7"
    ]
   },
   {
@@ -53073,10 +53163,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 949,
+  "included_source_count": 950,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "28a910b42da08062cdf787b127a73e20368baf50bb14187c2f1b5ff793cf481f"
+  "source_tree_digest": "653589219ea57384f53246bf56fc42c1dc08cd5886360c56e128b54435a03e32"
  },
  "research_index": [
   {
@@ -197947,7 +198037,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "816580bff00656046e4a16f0e25987a051016557cdb2f7e87406971291c5a7f0",
+   "sha256": "7cc04c3d0014c9bd08b196eb3ae2755797d781a29ca32e5f7e4dd8f47d1c5bbe",
    "status": "",
    "terms": {
     "20261029": 1,
@@ -211107,7 +211197,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
-   "sha256": "ec04e39e3438f805cc14b1d7b2270cfe5ccb331ee07c8eb8d7be15cbd26fa896",
+   "sha256": "064c1af0819f17214dcb8410a92b8465c5a02cf11fee032fa5b6877d58412023",
    "summary": "Deterministic diff-to-minimal-test-set selection (change impact analysis).",
    "symbol_count": 8,
    "symbols": [
@@ -211420,7 +211510,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
-   "sha256": "89f7f382ef298ae34d89520f788b89c4f0440e616620b79a80f6f164b38f7e4c",
+   "sha256": "a3b3f80e6ab53c749a058ac2d3fc534c25ac75dcd8ebda4b0e7d81aef8fa1d5b",
    "summary": "python.refactor.rename_symbol.v1 — rename ANY def-sited symbol with",
    "symbol_count": 12,
    "symbols": [
@@ -220110,7 +220200,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "889a3da536efe7bac9e3d530dfa0312cdc7c52695a9aca06c95e876c4fc73d24",
+   "sha256": "1b0ce173f7f5c2b9a1673dddc310d1519e864d1c3085d2b3353b23a16f6a2c07",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 56,
    "symbols": [
@@ -224014,7 +224104,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "e7394a797be20cc97c6907138949ce857428809d9a722c6f06b0d3062dcb0271",
+   "sha256": "0c83b94eb6e3beedac282ffd659238460484dddbad58a9b7db474bcf41593e47",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 6,
    "symbols": [
@@ -238179,9 +238269,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "9f6379161995cc935e002db7996e79932e24097b8d27974d03b5b103d8685f68",
+   "sha256": "152f7d328735f53ddfd61f4bb6def69bcc116cde5ccf253fe5ad9c4c9944903f",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 67,
+   "symbol_count": 68,
    "symbols": [
     "LocalExecutionFailure",
     "_capability_id_of",
@@ -238198,6 +238288,7 @@
     "_decisive_typed_plan",
     "_declared_surface",
     "_destructive_targets",
+    "_empty_test_selection",
     "_exact_acceptance",
     "_execute",
     "_execute_capability_dag",
@@ -238205,8 +238296,7 @@
     "_fail",
     "_future_artifacts",
     "_git_head",
-    "_goal_names_a_file",
-    "_is_executable"
+    "_goal_names_a_file"
    ],
    "terms": {
     "admission": 2,
@@ -238217,7 +238307,7 @@
     "dag_contract_errors": 1,
     "dag_evidence": 1,
     "dag_executor": 1,
-    "dag_rows": 1,
+    "empty_test_selection": 1,
     "exact_acceptance": 1,
     "execute_locally": 1,
     "fail": 1,
@@ -238441,7 +238531,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "1033f958f15720337ce9c910bc5aefaf225b19c1bea667e7611f6dc8e6353b84",
+   "sha256": "7e88306234ee3810aa7b06f97e0ef476cb079015fac60215f33dc7c261526d14",
    "summary": "Live integrated Brain V1.",
    "symbol_count": 27,
    "symbols": [
@@ -267611,7 +267701,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "ef991187b291f3bb5dfc5dc99ddb77d7cc0c85bfead99aba2e95e271551e0656",
+   "sha256": "ec29a81053c8f4f5d739b26223ed12dd7808966d884aaeea00c8819ec60eb0c3",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 8,
    "symbols": [

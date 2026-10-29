@@ -68,12 +68,25 @@ class ADeliverableIsNotAMeasurement(unittest.TestCase):
                            "STATED_BISECT_NOT_PROVIDED_BY_CAPABILITY")
 
     def test_the_ordinary_neighbours_are_untouched(self):
-        """The gate must not fire on the sentences next door to the two it refuses."""
+        """The gate must not fire on the sentences next door to the ones it refuses.
+
+        ``"Which tests are affected if I change <f>?"`` used to be pinned HERE as a neighbour that
+        ``python.repository.acceptance.measure.v1`` was allowed to answer -- and that was the defect
+        in miniature: the repository measurement runs the tree's suite and reports whether it is
+        green, which is an answer to "do the tests pass here", not to "which tests does this change
+        touch".  Measured 2026-10-30 it returned PASS with ``selected_tests: []``.  The neighbour
+        assertion now uses the row that DECLARES impact analysis, and the measurement is pinned on
+        the other side, where it belongs.
+        """
         registry = door.load_verified_registry()
         suite = registry.get("python.repository.acceptance.measure.v1") or {}
+        impact = registry.get("python.source.change_impact.testselect.v1") or {}
         self.assertEqual(door.stated_answer_errors("Run the test suite in %s/pkg." % REL, suite), [])
         self.assertEqual(door.stated_answer_errors(
-            "Which tests are affected if I change %s/pkg/calc.py?" % REL, suite), [])
+            "Which tests are affected if I change %s/pkg/calc.py?" % REL, impact), [])
+        self.assertEqual(door.stated_answer_errors(
+            "Which tests are affected if I change %s/pkg/calc.py?" % REL, suite),
+            ["STATED_CHANGE_IMPACT_NOT_ANSWERED_BY_CAPABILITY:UNNAMED"])
 
     def test_a_real_ci_capability_would_be_admitted_by_its_declaration(self):
         real = {"capability_id": "python.ci.workflow.write.v1",

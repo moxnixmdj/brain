@@ -368,6 +368,40 @@ def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
     if declared:
         kept = {cid: entry for cid, entry in admissible.items()
                 if cid in declared or (cid and cid in str(goal or ""))}
+        # THE BINDER MUST NOT BE ASKED FOR WHAT THE SENTENCE ALREADY PROVES.
+        #
+        # ``declared_input_derivation_v1`` exists because a sentence states a slot's value in a
+        # different SHAPE than the capability declares (a file where the row wants its directory, a
+        # list of changed paths where the binder reads one).  The typed-admission path has always
+        # compiled against ``binding_view``'s shadow; the PRIMARY compiler did not, so a correctly
+        # shortlisted row failed at COMPILE time:
+        #
+        #   "Which tests do I need to run after changing <f>?" -> kept = [change_impact, ...] ->
+        #   GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:...:source_root:0_existing_directories_named
+        #
+        # and the request fell through to a guessed chain.  Compiled against the shadow, the same
+        # row binds, and the proven values are merged back into the plan (they are the sentence's
+        # own evidence, each carrying its rule).
+        derived_by_row: dict[str, dict[str, Any]] = {}
+        kept_declared = kept  # the REAL entries: the shadow below is a compile-time view only
+        shadow = kept
+        try:
+            from canonical.runtime import declared_input_derivation_v1 as _derivation
+            if kept and _derivation.is_swe_request(goal):
+                shadow: dict[str, Any] = {}
+                for cid, entry in kept.items():
+                    if not str(cid).startswith(_derivation.SWE_CID_PREFIXES):
+                        shadow[cid] = entry
+                        continue
+                    try:
+                        view, values, _report = _derivation.binding_view(goal, entry, ROOT)
+                    except Exception:  # noqa: BLE001 - a derivation fault keeps the row as declared
+                        shadow[cid] = entry
+                        continue
+                    derived_by_row[str(cid)] = values
+                    shadow[cid] = view
+        except Exception:  # noqa: BLE001 - import fault keeps the old compile
+            derived_by_row = {}
         if kept and len(kept) < len(admissible):
             # A SHORTLIST MAY NARROW WHAT IS PREFERRED; IT MAY NEVER MAKE THE ANSWER WORSE.
             #
@@ -380,9 +414,22 @@ def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
             # (FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN).  So: narrow, and on failure
             # compile exactly as before.  The refusal this sentence deserves then returns unchanged.
             try:
-                return registry, kept, goal_front_compiler_v1.compile_goal(goal, kept, base)
+                compiled = goal_front_compiler_v1.compile_goal(goal, shadow, base)
             except goal_compiler.GoalCompilationFailure:
-                pass
+                compiled = None
+            if compiled is not None:
+                _row = str(compiled.get("selected_capability") or "")
+                _extra = derived_by_row.get(_row) or {}
+                if _extra:
+                    _inputs = dict(compiled.get("inputs") or {})
+                    for _key, _value in _extra.items():
+                        _bound = _inputs.get(_key)
+                        if _key not in _inputs or (isinstance(_value, list)
+                                                   and not isinstance(_bound, list)):
+                            _inputs[_key] = _value
+                    compiled["inputs"] = _inputs
+                    compiled["derived_inputs"] = sorted(_extra)
+                return registry, kept_declared, compiled
     return registry, admissible, goal_front_compiler_v1.compile_goal(goal, admissible, base)
 
 

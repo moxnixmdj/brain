@@ -76,10 +76,22 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # admit() be the oracle over rows the registry's OWN keywords name -- becomes decisive.
     (("type-check", "type check", "typecheck", "type checks", "mypy"),
      ("type_gate", "typecheck", "type check", "type-check", "mypy"), "type"),
+    # THE EFFECT A BUG REPORT STATES IS REPAIR, NOT "APPLY SOMETHING".
+    #
+    # The token was "apply", and once the declared-input derivation could hand a review change set
+    # to any row that declares ``diff_path``, TWO rows bound a repair sentence:
+    # ``python.software.repair.apply.verified.v1`` and ``python.repo.diff_apply_full_testgate.v1``
+    # ("apply a diff to a tree and run the whole suite").  The second one's change set is the stated
+    # file REWRITTEN AS ITSELF, so admitting it turned "fix this broken function" into "apply a
+    # no-op patch, suite passes" -- the false PASS this repository exists to refuse, one layer up.
+    # Measured 2026-10-30 on ``efe0877``: five red tests in
+    # ``canonical.tests.test_swe_typed_plan_v1``, all of them this ambiguity.  The sentence states
+    # a repair; the row that repairs says so in its name; the row that applies a SUPPLIED diff does
+    # not, and no diff is supplied here.
     (("bug:", "bug report", "bug in", "broken", "failing test", "test fails",
       "tests fail", "returns the wrong", "wrong value", "does not pass",
       "doesn't pass"),
-     ("apply", "land", "write the fix"), "apply"),
+     ("apply", "land", "write the fix"), "repair"),
     # THE FOUR REVIEW GATES ARE MEASUREMENTS, AND A MEASUREMENT NAMES ITS EFFECT.
     # Measured 2026-10-29: each of these four rows exists, executes and reports a real
     # verdict, and none was reachable from the sentence that describes it -- the lexical

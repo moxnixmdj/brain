@@ -196,14 +196,30 @@ class LiveFrontDoorRetryTests(unittest.TestCase):
 
     def test_a_failing_retry_never_forges_a_pass(self):
         """Where the adapter itself cannot do the job, the door stays fail-closed.
-        The Point: the retry must not convert an honest adapter fault into credit."""
-        base = _fresh("honest_fail")
-        # Bare "fix X": primary executes a composed chain (executed=True), so the
-        # conservative guard must NOT re-run anything; verdict stays fail-closed.
-        goal = "fix %s" % _rel(base / "pkg/calc.py")
+
+        The Point: no credit without a REPAIR THE FILESYSTEM CAN SEE.
+
+        This case used to be a bare "fix <calc.py>" on the full fixture, and it passed because the
+        repair route could not be reached at all.  It is reachable now -- measured 2026-10-30, the
+        same sentence turns ``return a - b`` into ``return a + b`` and the suite gate goes red to
+        green, i.e. credit the filesystem confirms.  So the guard is exercised where the adapter
+        genuinely cannot do the job: a stated source with NO test that could prove the repair.  The
+        adapter's own contract needs the red test it must turn green; without one there is nothing
+        to verify against, and the door must refuse instead of editing by faith.
+        """
+        base = WORK / "honest_fail"
+        if base.exists():
+            shutil.rmtree(base)
+        (base / "pkg").mkdir(parents=True)
+        source = base / "pkg/calc.py"
+        source.write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+        before = source.read_bytes()
+        goal = "fix %s" % _rel(source)
         result = door.solve({"task_id": "SWE_honest", "goal": goal})
-        self.assertIs(result.get("pass"), False)
+        self.assertIs(result.get("pass"), False, result.get("status"))
         self.assertNotIn("typed_swe_retry", result)
+        # Independent oracle: the refusal left the source exactly as it found it.
+        self.assertEqual(source.read_bytes(), before)
 
     def test_non_swe_front_door_refusals_are_byte_for_byte_unchanged(self):
         """The three pinned regression goals are non-SWE: retry never fires."""
