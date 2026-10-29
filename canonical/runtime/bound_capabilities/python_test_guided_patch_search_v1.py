@@ -275,6 +275,43 @@ SUITE_ENTRY = (
 )
 
 
+def argv_names_a_target(argv: Any) -> bool:
+    """True when a command line actually names a test suite to run.
+
+    The runner ``suite_argv`` generates reads its targets from ``sys.argv[1:]``,
+    so ``[executable, "-c", script]`` names nothing at all: it executes zero
+    suites and exits 0.  A repair loop reads that exit status as
+    BASELINE_ALREADY_PASSES, which is a false "already passes" for a program
+    that fails its own test -- measured on e2d7981d for "Run the iterative
+    repair loop on the python source root D using the tests", where the bound
+    ``test_argv`` carried no target, the loop raised BASELINE_ALREADY_PASSES
+    against a suite that really was failing, and the whole lane was unreachable.
+
+    A caller-supplied command line is worth keeping only when it really does
+    name something to run.  Targets follow the ``-c`` script when there is one,
+    and otherwise any non-flag element after the executable is a target.
+    """
+    items = [str(x) for x in (argv or [])]
+    if not items:
+        return False
+    if "-c" in items:
+        return len(items) > items.index("-c") + 2
+    return any(not item.startswith("-") for item in items[1:])
+
+
+def argv_or_derived(supplied: Any, executable: Any, *targets: Any) -> list[str]:
+    """The caller's command line when it names a suite, otherwise the derived one.
+
+    The derivation is not a fallback for a missing value only.  An argv that is
+    present but empty of targets is worse than a missing one, because it looks
+    bound: the missing value takes the derived path, while the empty one used to
+    win and silently run nothing.  Both must derive.
+    """
+    if argv_names_a_target(supplied):
+        return [str(x) for x in supplied]
+    return suite_argv(executable, *targets)
+
+
 def suite_argv(executable: Any, *targets: Any) -> list[str]:
     """A command line that runs suites through the loader instead of executing the files.
 

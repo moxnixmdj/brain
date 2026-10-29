@@ -220,7 +220,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             raise RepairAcceptanceError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
     if not test_paths:
         raise RepairAcceptanceError("TEST_PATHS_REQUIRED")
-    argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
+    argv=_REPAIR._PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*test_paths)
     task_text=str(args.get("task_text") or "").strip()
     if not task_text:
         raise RepairAcceptanceError("TASK_TEXT_REQUIRED")

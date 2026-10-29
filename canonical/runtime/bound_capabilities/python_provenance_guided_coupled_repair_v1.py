@@ -71,7 +71,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   try:tests=discover_test_files(src)
   except FileNotFoundError:raise GuidedRepairError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  if not tests:raise GuidedRepairError("TEST_PATHS_REQUIRED")
- argv=[str(x) for x in (args.get("test_argv") or _PATCH.suite_argv(sys.executable,*tests))]
+ argv=_PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*tests)
  timeout=max(1,min(int(args.get("timeout_s",20)),120))
  max_files=max(1,min(int(args.get("max_guided_files",4)),16))
  max_symbols=max(1,min(int(args.get("max_guided_symbols_per_file",6)),32))
