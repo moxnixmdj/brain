@@ -61,11 +61,13 @@ from canonical.runtime import raw_goal_trace_acceptance_v1 as acceptance  # noqa
 LOCALIZER = "python.fault.localize.dynamic.dataflow.v1"
 PROVENANCE = "python.fault.provenance.interprocedural.value.v1"
 REPAIR = "python.software.repair.loop.strict_progress.ast.v1"
+MEASURE = "python.repository.acceptance.measure.v1"
 
 _ADAPTERS = {
     LOCALIZER: "python_dynamic_fault_localizer_v1",
     PROVENANCE: "python_interprocedural_value_provenance_v1",
     REPAIR: "python_iterative_software_repair_loop_v1",
+    MEASURE: "python_repository_acceptance_measurement_v1",
 }
 
 
@@ -128,14 +130,14 @@ class _Run(unittest.TestCase):
 
 class TheInspectorsExistTests(unittest.TestCase):
     def test_all_three_capabilities_are_registered(self):
-        for cid in (LOCALIZER, PROVENANCE, REPAIR):
+        for cid in (LOCALIZER, PROVENANCE, REPAIR, MEASURE):
             self.assertIn(
                 cid, acceptance.INSPECTORS,
                 "%s has no re-inspector, so it can never be accepted" % cid,
             )
 
     def test_the_table_did_not_lose_anything(self):
-        self.assertGreaterEqual(len(acceptance.INSPECTORS), 17)
+        self.assertGreaterEqual(len(acceptance.INSPECTORS), 18)
 
 
 class TheLocalizerIsReinspectedTests(_Run):
@@ -446,6 +448,126 @@ class ACommandlineThatNamesNoTestIsNotARunnerTests(_Run):
         self.assertTrue(result["pass"], result.get("status"))
         self.assertEqual(result["accepted_edit_count"], 1)
         self.assertIs(result["source_restored"], True)
+
+
+class TheMeasurementIsReinspectedTests(_Run):
+    """The capability that answers "run the tests" -- the most ordinary sentence.
+
+    Measured on ``a5a0230``, "Run the tests for the python source root D" and
+    "Write the tests for the python source root D" both reached
+    ``python.repository.acceptance.measure.v1``, ran, wrote a correct 4618-byte
+    report, and had it rolled back with
+    ``NO_INDEPENDENT_REINSPECTION_FOR:python.repository.acceptance.measure.v1``.
+
+    The inspector re-hashes every file in the report's own subject manifest,
+    recomputes the Python file count and the parse verdict, and RUNS THE SUITE
+    AGAIN to confirm the exit status and the test count reproduce.  It does not
+    compare the captured stderr's digest: the producer runs the suite in a copied
+    workspace, so its stderr embeds that path and a re-run legitimately differs.
+    """
+
+    def test_a_genuine_report_is_accepted(self):
+        args, result, _ = self.produce(MEASURE)
+        ok, code, info = self.inspect(MEASURE, args, result)
+        self.assertTrue(ok, code)
+        self.assertGreater(info["subject_files_rehashed"], 0)
+        self.assertGreater(info["python_files_reparsed"], 0)
+
+    def test_a_passing_verdict_the_return_code_does_not_support_is_refused(self):
+        args, result, report = self.produce(MEASURE)
+
+        def lie(data):
+            data["measurements"]["tests_pass"] = True
+
+        self.rewrite(report, lie)
+        ok, code, _ = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_PASS_VERDICT_DOES_NOT_FOLLOW_FROM_THE_RETURN_CODE")
+
+    def test_a_return_code_the_evidence_does_not_support_is_refused(self):
+        args, result, report = self.produce(MEASURE)
+
+        def lie(data):
+            data["test_evidence"]["returncode"] = 0
+
+        self.rewrite(report, lie)
+        ok, code, _ = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_RETURN_CODE_DISAGREES_WITH_ITS_EVIDENCE")
+
+    def test_a_file_count_that_is_not_in_the_tree_is_refused(self):
+        args, result, report = self.produce(MEASURE)
+
+        def lie(data):
+            data["measurements"]["python_file_count"] = 7
+
+        self.rewrite(report, lie)
+        ok, code, _ = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_PYTHON_FILE_COUNT_NOT_REPRODUCED")
+
+    def test_a_manifest_digest_that_is_not_the_file_on_disk_is_refused(self):
+        args, result, report = self.produce(MEASURE)
+
+        def lie(data):
+            data["subject"]["manifest"][0]["bytes"] = 999
+
+        self.rewrite(report, lie)
+        ok, code, _ = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_SUBJECT_FILE_CHANGED_SINCE_THE_MEASUREMENT")
+
+    def test_a_tree_that_gained_a_file_since_the_measurement_is_refused(self):
+        args, result, _ = self.produce(MEASURE)
+        (self.src / "extra.py").write_text("x = 1\n")
+        ok, code, detail = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_SUBJECT_IS_NOT_THE_TREE_ON_DISK")
+        self.assertIn("extra.py", detail["not_in_report"])
+
+    def test_a_test_count_the_suite_does_not_reproduce_is_refused(self):
+        args, result, report = self.produce(MEASURE)
+
+        def lie(data):
+            data["test_evidence"]["test_count"] = 42
+            data["measurements"]["test_count"] = 42
+
+        self.rewrite(report, lie)
+        ok, code, _ = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_TEST_COUNT_NOT_REPRODUCED_BY_THE_RE_RUN")
+
+    def test_a_command_line_that_names_no_suite_is_refused(self):
+        """The empty-runner defect cannot hide inside a measurement report."""
+        args, result, report = self.produce(MEASURE)
+
+        def empty(data):
+            argv = data["measurement_spec"]["test_argv"]
+            del argv[3:]
+
+        self.rewrite(report, empty)
+        ok, code, _ = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_TEST_ARGV_NAMES_NO_SUITE")
+
+    def test_a_missing_report_is_refused(self):
+        args, result, report = self.produce(MEASURE)
+        report.unlink()
+        ok, code, _ = self.inspect(MEASURE, args, result)
+        self.assertFalse(ok)
+        self.assertEqual(code, "MEASURE_REPORT_ABSENT_FROM_DISK")
+
+    def test_the_canonical_digest_matches_the_producers_own_form(self):
+        """ensure_ascii=False: a re-derivation that differs refuses a true report."""
+        from canonical.runtime.bound_capabilities import (
+            python_repository_acceptance_measurement_v1 as producer,
+        )
+
+        rows = [{"path": "a.py", "bytes": 1, "sha256": "x"}, {"path": "é.py", "bytes": 2,
+                                                          "sha256": "y"}]
+        self.assertEqual(
+            acceptance._measure_canon_sha256(rows), producer._sha_obj(rows)
+        )
 
 
 if __name__ == "__main__":
