@@ -1,97 +1,79 @@
 # PROJECT_BRAIN
-"""python.review.diff_mutation_gate.v1 — every changed executable line
-must be BEHAVIOURALLY observed by the suite, measured, not asserted.
+"""Bounded, diff-local Python mutation testing with fail-closed outcomes.
 
-The crown's deepest defense: lint triage proves changed lines are
-name/syntax-clean, the type gate proves type-soundness, coverage proves
-the suite *executes* each changed line — and none of them can see a line
-the suite executes but never OBSERVES (the classic `assertTrue(True)`
-theatre).  A mutation gate is the oracle: for every changed executable
-line, generate behaviour-perturbing AST mutants confined to that line,
-rewrite bytes at exact identifier/pattern spans (never a tree rebuild —
-comments and formatting survive), apply each mutant to a scratch copy of
-the anchor+diff world, and run the named suite.  A mutant that survives
-is a falsifying witness: the changed behaviour is not pinned by tests.
+Apply a diff to a scratch anchor, generate a limited set of byte-exact AST
+mutants on new-side hunk lines in production Python files, and run pytest on
+a fresh copy for the baseline and for each mutant. A green baseline must
+contain passing test cases; explicit test files are checked individually.
+Passing requires every generated mutant to be killed by an actual test failure.
+Survivors fail the gate; timeouts, invalid mutants, collection/infrastructure
+errors, truncated enumeration, and exhausted budget are inconclusive.
 
-* scratch world = pristine anchor copy + diff (anchor never mutated;
-  diff never mutated; cryptographically effective AST splicing only).
-* mutants never cross the changed-lines boundary (pin-proven).
-* src-layout aware: tests are run from the scratch ROOT with
-  PYTHONPATH=<every directory that contains at least one diff-touched
-  .py file>, so plain-layout and src-layout repos both import.
-* suite red ALREADY on the untouched world -> loud refusal
-  (BASE_WORLD_RED: mutations cannot be attributed to a broken base).
-* mutant suite timeout counts as a KILL (MECHANISTICALLY equivalence by
-  infinite loop is observable).
-* degrade loudly: suite missing -> gate PASS_BLIND with verified=False,
-  never a silent pretend-pass.
-* determinism: artifact carries no wall-clock fields; byte-identical on
-  rerun (pin-proven).  Scratch tree deleted after.
+Operators are comparison, arithmetic and augmented-assignment swaps, boolean
+literal swaps, numeric bumps, and return-None. This does not mutate every
+executable line or prove semantic test quality. Equivalent and flaky mutants
+are possible. Tests run as ordinary subprocesses, not in an OS sandbox, and
+may access the host; source/test integrity checks cover only known files.
 
-Operators (each is a minimal semantic delta a diff reviewer would
-question): comparison-swap (==/!=/</>/<=/>=), arithmetic-swap, bool
-literal swap, None-return, numeric-literal bump, condition negate.
+Inputs (paths are repository-confined):
+  anchor_path, diff_path, output_path
+  python_executable  pytest interpreter (default: this one)
+  timeout_s          per-run subprocess timeout (default 120 seconds)
+  max_wall_time_s    overall soft budget (default 120 seconds, max 3600)
+  min_kill_ratio     retained threshold; survivors still prevent PASS
+  max_mutants        generation cap (default 2000, max 20000)
+  run_tests          pytest arguments (default: discovered test_*.py files)
 
-Laws:
-* fail closed: PATH_*, DIFF_EMPTY, ANCHOR_NOT_DIRECTORY,
-  GIT_UNAVAILABLE, DIFF_DOES_NOT_APPLY, SYNTAX_ERROR_IN_FILE,
-  NO_MUTABLE_SITES (a diff of pure prose/doc changes yields zero
-  executable mutants -> loud, never silently zero-scored),
-  BASE_WORLD_RED, TIMEOUT, PASS_BLIND when the suite cannot be run.
-* gate PASS only when every changed-line mutant was KILLED at or above
-  the threshold and complete is True.
-
-Inputs (kwargs, repo-confined):
-  anchor_path        clean tree the diff was cut against (read-only)
-  diff_path          unified diff artifact under test
-  output_path        summary artifact (registry result_fields mirror)
-  python_executable  interpreter used for pytest (default: this one)
-  timeout_s          wall-clock cap PER MUTANT run (default 120)
-  min_kill_ratio     float threshold (default 1.0 — every mutant killed)
-  max_mutants        hard cap on generated mutants (default 2000)
-  run_tests          explicit pytest args (default: discovered suite)
-
-result_fields: adapter, anchor_path, diff_sha256, mutants_generated,
-mutants_killed, mutants_survived, survivors, kill_ratio,
-changed_lines_targeted, gate, complete, output_path, output_sha256,
-output_verified, verified.
+The wall budget limits subprocess waits and checks between steps; filesystem
+copies and process cleanup are not preempted. Full copies prioritize trial
+isolation and can be expensive on large trees. The artifact records survivors,
+inconclusive reasons, truncation, and byte spans needed to replay a mutant.
 """
 
 from __future__ import annotations
 
 import ast
+import bisect
 import hashlib
+import io
 import json
+import math
 import os
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
+import tokenize
 from pathlib import Path
 
+from canonical.runtime.bound_capabilities import python_repo_diff_apply_full_testgate as full_testgate
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
     _parse_diff_ranges,
 )
+from canonical.runtime.bound_capabilities.review_gate_input_safety_v1 import guard_inputs
 
 SCHEMA = "PROJECT_BRAIN_DIFF_MUTATION_GATE_V1"
 
 # ---------------------------------------------------------------- mutators
 
 
-def _fail(reason: str) -> None:
-    raise SystemExit(json.dumps({"error": True,
-                                 "capability": "python.review.diff_mutation_gate.v1",
-                                 "reason": reason}, indent=2, sort_keys=True))
+def _fail(reason: str) -> dict:
+    return {
+        "error": True,
+        "capability": "python.review.diff_mutation_gate.v1",
+        "reason": reason,
+    }
 
 
-def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path:
+def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path | dict:
     if not rel or not isinstance(rel, str):
-        _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
+        return _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
     p = (repo / rel).resolve()
     if p != repo and repo not in p.parents:
-        _fail("PATH_ESCAPE:" + rel)
+        return _fail("PATH_ESCAPE:" + rel)
     if must_exist and not p.exists():
-        _fail("PATH_MISSING:" + rel)
+        return _fail("PATH_MISSING:" + rel)
     return p
 
 
@@ -122,44 +104,55 @@ class _Site:
 
     def row(self, rel: str) -> dict:
         return {"file": rel, "line": self.line, "col": self.col,
-                "operator": self.kind, "replacement":
+                "span_bytes": self.span, "operator": self.kind, "replacement":
                 self.replacement.decode("utf-8", "replace")}
-
-
-def _cmp_join(src_ops: list, src_bytes: bytes) -> list[str]:
-    """Raw spellings of each Compare.ops between comparator spans."""
-    spans = []
-    for op in src_ops:
-        spans.append((op.lineno, op.col_offset, op.end_lineno, op.end_col_offset))
-    return spans
 
 
 def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
                       max_mutants: int) -> list[_Site]:
-    """AST-driven byte-span mutants confined to changed executable lines."""
+    """Generate bounded byte-span mutants on new-side hunk lines."""
     try:
         tree = ast.parse(text, filename=rel)
     except (SyntaxError, ValueError):
-        _fail("SYNTAX_ERROR_IN_FILE:" + rel)
+        return _fail("SYNTAX_ERROR_IN_FILE:" + rel)
     raw = text.encode("utf-8")
-    # offset of each line start (byte-exact; newlines preserved)
+    lines = text.splitlines(keepends=True)
     line_off = [0]
-    for line in text.splitlines(keepends=True):
+    for line in lines:
         line_off.append(line_off[-1] + len(line.encode("utf-8")))
     sites: list[_Site] = []
+    # Locate actual OP tokens, not matching characters in comments or strings.
+    # tokenize columns are character-based whereas AST columns are UTF-8 bytes.
+    operators = []
+    for token in tokenize.tokenize(io.BytesIO(raw).readline):
+        if token.type == tokenize.OP and 0 < token.start[0] <= len(lines):
+            row, col = token.start
+            offset = line_off[row - 1] + len(lines[row - 1][:col].encode("utf-8"))
+            operators.append((offset, token.string.encode("utf-8")))
+    operator_offsets = [offset for offset, _ in operators]
 
     def byte_span(node) -> tuple[int, int]:
         start = line_off[node.lineno - 1] + node.col_offset
         end = line_off[node.end_lineno - 1] + node.end_col_offset
         return start, end
 
-    def in_scope(node) -> bool:
-        return node.lineno in changed_lines
+    def operator_offset(start: int, end: int, spelling: bytes) -> int | None:
+        pos = bisect.bisect_left(operator_offsets, start)
+        while pos < len(operators) and operators[pos][0] < end:
+            offset, token = operators[pos]
+            if token == spelling:
+                return offset
+            pos += 1
+        return None
 
     def add_string(kind: str, line: int, off: int, span: int, repl: bytes):
-        # off is an absolute byte offset in `raw`; the record stores the
-        # column so downstream re-application recomputes the same offset.
-        sites.append(_Site(kind, line, off - line_off[line - 1], span, repl))
+        if span <= 0 or off < 0 or off + span > len(raw) or raw[off:off + span] == repl:
+            return
+        actual_line = bisect.bisect_right(line_off, off)
+        last_line = bisect.bisect_right(line_off, off + span - 1)
+        if any(number not in changed_lines for number in range(actual_line, last_line + 1)):
+            return
+        sites.append(_Site(kind, actual_line, off - line_off[actual_line - 1], span, repl))
 
     for node in ast.walk(tree):
         if len(sites) > max_mutants * 8:  # cheap over-generation brake; sorted later
@@ -169,45 +162,42 @@ def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
             ops = node.ops
             # byte offsets of operator spellings: they sit between the end of
             # the previous comparator and the start of the next
-            prev_end = line_off[node.left.lineno - 1] + node.left.end_col_offset
-            for idx, (op, comp) in enumerate(zip(ops, node.comparators)):
+            prev_end = line_off[node.left.end_lineno - 1] + node.left.end_col_offset
+            for op, comp in zip(ops, node.comparators):
                 if op.__class__ in _COMPARE:
                     next_start = line_off[comp.lineno - 1] + comp.col_offset
-                    seg = raw[prev_end:next_start]
-                    # find the operator spelling inside the gap
                     spelled = {ast.Eq: b"==", ast.NotEq: b"!=", ast.Lt: b"<",
                                ast.Gt: b">", ast.LtE: b"<=", ast.GtE: b">="}[op.__class__]
-                    pos = seg.find(spelled)
-                    assert pos != -1, f"operator spelling not found for {rel}"
-                    off = prev_end + pos
+                    off = operator_offset(prev_end, next_start, spelled)
+                    if off is None:
+                        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
                     repl = {ast.Eq: b"!=", ast.NotEq: b"==", ast.Lt: b">=",
                             ast.Gt: b"<=", ast.LtE: b">", ast.GtE: b"<"}[op.__class__]
-                    if node.lineno in changed_lines:
-                        add_string("compare_swap", node.lineno, off, len(spelled), repl)
-                prev_end = line_off[comp.lineno - 1] + comp.end_col_offset
+                    add_string("compare_swap", node.lineno, off, len(spelled), repl)
+                prev_end = line_off[comp.end_lineno - 1] + comp.end_col_offset
         # ---- arithmetic swaps: x + y -> x - y etc (BinOp and AugAssign)
         elif isinstance(node, ast.BinOp) and isinstance(node.op, tuple(_ARITH_BINOPS)):
             op = node.op
             spelled = {ast.Add: b"+", ast.Sub: b"-", ast.Mult: b"*", ast.Div: b"/"}[op.__class__]
-            prev_end = line_off[node.left.lineno - 1] + node.left.end_col_offset
+            prev_end = line_off[node.left.end_lineno - 1] + node.left.end_col_offset
             next_start = line_off[node.right.lineno - 1] + node.right.col_offset
-            seg = raw[prev_end:next_start]
-            pos = seg.find(spelled)
-            if pos != -1 and node.lineno in changed_lines:
-                repl = {ast.Add: b"-", ast.Sub: b"+", ast.Mult: b"/", ast.Div: b"*"}[op.__class__]
-                add_string("arith_swap", node.lineno, prev_end + pos, len(spelled), repl)
+            off = operator_offset(prev_end, next_start, spelled)
+            if off is None:
+                return _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
+            repl = {ast.Add: b"-", ast.Sub: b"+", ast.Mult: b"/", ast.Div: b"*"}[op.__class__]
+            add_string("arith_swap", node.lineno, off, len(spelled), repl)
         elif isinstance(node, ast.AugAssign) and isinstance(node.op, tuple(_ARITH_AUGOPS)):
             op = node.op
             spelled = {ast.Add: b"+=", ast.Sub: b"-=", ast.Mult: b"*=", ast.Div: b"/="}[op.__class__]
-            prev_end = line_off[node.target.lineno - 1] + node.target.end_col_offset
+            prev_end = line_off[node.target.end_lineno - 1] + node.target.end_col_offset
             next_start = line_off[node.value.lineno - 1] + node.value.col_offset
-            seg = raw[prev_end:next_start]
-            pos = seg.find(spelled)
-            if pos != -1 and node.lineno in changed_lines:
-                repl = {ast.Add: b"-=", ast.Sub: b"+=", ast.Mult: b"/=", ast.Div: b"*="}[op.__class__]
-                add_string("aug_swap", node.lineno, prev_end + pos, len(spelled), repl)
+            off = operator_offset(prev_end, next_start, spelled)
+            if off is None:
+                return _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
+            repl = {ast.Add: b"-=", ast.Sub: b"+=", ast.Mult: b"/=", ast.Div: b"*="}[op.__class__]
+            add_string("aug_swap", node.lineno, off, len(spelled), repl)
         # ---- boolean literal swap: True -> False  (span covers the NAME)
-        elif isinstance(node, ast.Constant) and node.value in (True, False) and node.lineno in changed_lines:
+        elif isinstance(node, ast.Constant) and isinstance(node.value, bool) and node.lineno in changed_lines:
             start, end = byte_span(node)
             spelled = b"True" if node.value else b"False"
             raw_seg = raw[start:end]
@@ -221,11 +211,18 @@ def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
             start, end = byte_span(node)
             tok = raw[start:end]
             try:
-                v = float(tok.decode("utf-8"))
-                bumped = (repr(v + 1.0) if isinstance(node.value, float) else str(int(v) + 1)).encode("utf-8")
-                add_string("numeric_bump", node.lineno, start, len(tok), bumped)
-            except Exception:
-                pass
+                # AST already holds the evaluated value (including 0x/1e forms).
+                # Do not round integers through float or fabricate `inf` source.
+                value = node.value
+                if isinstance(value, float):
+                    if not math.isfinite(value) or not math.isfinite(value + 1.0):
+                        continue
+                    bumped = repr(value + 1.0)
+                else:
+                    bumped = str(value + 1)
+                add_string("numeric_bump", node.lineno, start, len(tok), bumped.encode("utf-8"))
+            except (OverflowError, ValueError):
+                continue
         # ---- return-None: `return X` on a changed line -> `return None`
         elif isinstance(node, ast.Return) and node.value is not None and node.lineno in changed_lines:
             # splice covers the entire `return ...` statement text
@@ -240,181 +237,339 @@ def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
 
 
 def _apply_splice(text: str, rel: str, site: _Site) -> str:
-    """Verify original bytes at the site span, then splice in replacement."""
+    """Validate byte bounds at the site, then splice in replacement."""
     line_off = [0]
     for line in text.splitlines(keepends=True):
         line_off.append(line_off[-1] + len(line.encode("utf-8")))
-    off_line = line_off[site.line - 1] + site.col
     b = text.encode("utf-8")
-    orig = b[off_line:off_line + site.span]
+    if (site.line < 1 or site.line >= len(line_off) or site.col < 0 or site.span <= 0
+            or site.col >= line_off[site.line] - line_off[site.line - 1]):
+        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
+    off_line = line_off[site.line - 1] + site.col
+    if off_line + site.span > len(b):
+        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
     new = b[:off_line] + site.replacement + b[off_line + site.span:]
-    return new.decode("utf-8")
+    try:
+        return new.decode("utf-8")
+    except UnicodeDecodeError:
+        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
 
 
 # ---------------------------------------------------------------- gate
 
 
+def _test_file(scratch: Path, rel: str, run_tests: list[str]) -> bool:
+    """Do not mutate tests: they are the observers, not production targets."""
+    path = Path(rel)
+    name = path.name.lower()
+    if (name.startswith("test_") or name.endswith("_test.py")
+            or any(part.lower() in {"tests", "__tests__"} for part in path.parts)):
+        return True
+    resolved = (scratch / path).resolve()
+    for token in run_tests:
+        candidate = str(token).split("::", 1)[0]
+        if not candidate or candidate.startswith("-"):
+            continue
+        if (scratch / candidate).resolve() == resolved:
+            return True
+    return False
+
+
+def _normalize_test_args(anchor: Path, run_tests: list[str]) -> list[str]:
+    """Keep explicitly named test paths in the copied trial, never the anchor."""
+    normalized = []
+    for token in run_tests:
+        candidate, separator, node = token.partition("::")
+        if candidate and not candidate.startswith("-"):
+            path = Path(candidate)
+            if path.is_absolute():
+                try:
+                    candidate = str(path.resolve().relative_to(anchor)).replace("\\", "/")
+                except ValueError:
+                    return _fail("TEST_PATH_OUTSIDE_ANCHOR:" + candidate)
+            elif ".." in path.parts:
+                return _fail("TEST_PATH_OUTSIDE_ANCHOR:" + candidate)
+        normalized.append(candidate + (separator + node if separator else ""))
+    return normalized
+
+
+def _explicit_test_files(scratch: Path, run_tests: list[str]) -> list[str]:
+    out = []
+    for token in run_tests:
+        candidate = str(token).split("::", 1)[0]
+        if not candidate or candidate.startswith("-"):
+            continue
+        path = (scratch / candidate).resolve()
+        if scratch in path.parents and path.is_file() and path.suffix == ".py":
+            rel = str(path.relative_to(scratch)).replace("\\", "/")
+            if rel not in out:
+                out.append(rel)
+    return out
+
+
+def _pytest_trial(scratch: Path, python: str, tests: list[str], env: dict[str, str],
+                  report_path: Path, timeout_s: float) -> tuple[object, dict, bool]:
+    report_path.unlink(missing_ok=True)
+    argv = [python, "-m", "pytest", "-q", "-p", "no:cacheprovider", "--rootdir=.",
+            "-o", "junit_family=legacy", "--junitxml=" + str(report_path)] + tests
+    try:
+        proc = subprocess.run(argv, cwd=scratch, capture_output=True, text=True,
+                              timeout=timeout_s, env=env)
+    except subprocess.TimeoutExpired:
+        return None, {}, True
+    except OSError:
+        return None, {}, False
+    return proc, full_testgate._pytest_report(report_path), False
+
+
 def run(args, root):
+    started = time.monotonic()
     repo = Path(root).resolve()
     args = dict(args or {})
-
     anchor_rel = str(args.get("anchor_path") or "")
     anchor_abs = _safe_path(repo, anchor_rel, must_exist=True)
+    if isinstance(anchor_abs, dict): return anchor_abs
     if not anchor_abs.is_dir():
-        _fail("ANCHOR_NOT_DIRECTORY")
+        return _fail("ANCHOR_NOT_DIRECTORY")
     diff_rel = str(args.get("diff_path") or "")
     diff_abs = _safe_path(repo, diff_rel, must_exist=True)
-    diff_text = diff_abs.read_text(encoding="utf-8", errors="replace")
-    if not diff_text.strip():
-        _fail("DIFF_EMPTY")
-    changed, created_list = _parse_diff_ranges(diff_text)
-    py_changed = {p: r for p, r in changed.items() if p.endswith(".py")}
+    if isinstance(diff_abs, dict): return diff_abs
+    diff_bytes = diff_abs.read_bytes()
+    if not diff_bytes.strip():
+        return _fail("DIFF_EMPTY")
+    try:
+        diff_text = diff_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return _fail("DIFF_NOT_UTF8")
+    diff_sha = _sha256(diff_bytes)
+    changed, _created = _parse_diff_ranges(diff_text)
+    py_changed = {p: ranges for p, ranges in changed.items() if p.endswith(".py")}
     out_rel = str(args.get("output_path") or "")
     out_abs = _safe_path(repo, out_rel)
+    if isinstance(out_abs, dict): return out_abs
+    if out_abs == anchor_abs or anchor_abs in out_abs.parents:
+        return _fail("OUTPUT_INSIDE_ANCHOR")
+    if out_abs == diff_abs:
+        return _fail("OUTPUT_DIFF_OVERLAP")
+    guard_result = guard_inputs(anchor_abs, diff_abs, out_abs, py_changed.keys(), _fail)
+    if isinstance(guard_result, dict):
+        return guard_result
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
-    min_ratio = float(args.get("min_kill_ratio")
-                      if args.get("min_kill_ratio") is not None else 1.0)
-    max_mutants = int(args.get("max_mutants") or 2000)
+    min_ratio = float(args.get("min_kill_ratio") if args.get("min_kill_ratio") is not None else 1.0)
+    max_mutants = int(args.get("max_mutants") if args.get("max_mutants") is not None else 2000)
+    max_wall_time_s = float(args.get("max_wall_time_s") if args.get("max_wall_time_s") is not None else 120)
     run_tests = list(args.get("run_tests") or [])
+    if (timeout_s <= 0 or max_mutants <= 0 or max_mutants > 20000
+            or not math.isfinite(max_wall_time_s) or not 0 < max_wall_time_s <= 3600):
+        return _fail("INVALID_RESOURCE_LIMIT")
+    deadline = started + max_wall_time_s
+    if not math.isfinite(min_ratio) or not 0 <= min_ratio <= 1:
+        return _fail("INVALID_KILL_RATIO")
+    if any(not isinstance(x, str) or not x for x in run_tests):
+        return _fail("INVALID_TEST_ARGUMENT")
+    run_tests = _normalize_test_args(anchor_abs, run_tests)
 
-    git_probe = subprocess.run(["git", "--version"], capture_output=True,
-                               text=True, timeout=min(timeout_s, 30))
-    if git_probe.returncode != 0:
-        _fail("GIT_UNAVAILABLE")
-
-    scratch = out_abs.parent / ("_mut_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
-    if scratch.exists():
-        shutil.rmtree(scratch)
-    shutil.copytree(anchor_abs, scratch,
-                    ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
+    if deadline <= time.monotonic():
+        return _fail("WALL_TIME_BUDGET_EXHAUSTED_BEFORE_BASELINE")
     try:
-        check = subprocess.run(["git", "apply", "--check", str(diff_abs)],
-                               cwd=scratch, capture_output=True, text=True,
-                               timeout=min(timeout_s, 60))
-        if check.returncode != 0:
-            _fail("DIFF_DOES_NOT_APPLY:" + (check.stderr.strip().splitlines() or ["<empty>"])[0][:200])
-        applied = subprocess.run(["git", "apply", str(diff_abs)],
-                                 cwd=scratch, capture_output=True, text=True,
-                                 timeout=min(timeout_s, 60))
-        if applied.returncode != 0:
-            _fail("DIFF_APPLY_FAILED_AFTER_CHECK")
+        git_probe = subprocess.run(["git", "--version"], capture_output=True,
+                                   text=True, timeout=max(0.001, min(timeout_s, 30, deadline - time.monotonic())))
+    except (OSError, subprocess.TimeoutExpired):
+        return _fail("GIT_UNAVAILABLE")
+    if git_probe.returncode != 0:
+        return _fail("GIT_UNAVAILABLE")
 
-        # base world must be green BEFORE any mutation; otherwise a red suite
-        # would wrongly mark mutants "killed" (killed-by-baseline, not by-test).
+    out_abs.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="_mut_tree_", dir=out_abs.parent) as temp:
+        scratch = Path(temp) / "tree"
+        shutil.copytree(anchor_abs, scratch,
+                        ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
+        if deadline <= time.monotonic():
+            return _fail("WALL_TIME_BUDGET_EXHAUSTED_BEFORE_BASELINE")
+        check = subprocess.run(["git", "apply", "--check", "-"], input=diff_bytes,
+                               cwd=scratch, capture_output=True,
+                               timeout=max(0.001, min(timeout_s, 60, deadline - time.monotonic())))
+        if check.returncode != 0:
+            stderr = check.stderr.decode("utf-8", "replace")
+            return _fail("DIFF_DOES_NOT_APPLY:" + (stderr.strip().splitlines() or ["<empty>"])[0][:200])
+        if deadline <= time.monotonic():
+            return _fail("WALL_TIME_BUDGET_EXHAUSTED_BEFORE_BASELINE")
+        applied = subprocess.run(["git", "apply", "-"], input=diff_bytes, cwd=scratch,
+                                 capture_output=True,
+                                 timeout=max(0.001, min(timeout_s, 60, deadline - time.monotonic())))
+        if applied.returncode != 0:
+            return _fail("DIFF_APPLY_FAILED_AFTER_CHECK")
         if not run_tests:
-            run_tests = sorted(str(p.relative_to(scratch))
+            run_tests = sorted(str(p.relative_to(scratch)).replace("\\", "/")
                                for p in scratch.rglob("test_*.py"))
         if not run_tests:
-            _fail("NO_TESTS_DISCOVERED")
+            return _fail("NO_TESTS_DISCOVERED")
 
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
-        # hermetic lab: the scratch world gets ONLY its own import roots.
-        # Inheriting the caller's PYTHONPATH would smuggle foreign
-        # sitecustomize/conftest machinery into every mutant probe.
-        env.pop("PYTHONPATH", None)
-        env["PYTHONPATH"] = os.pathsep.join(
-            sorted({str((scratch / p).parent.resolve()) for p in py_changed}))
+        env.pop("PYTEST_ADDOPTS", None)
+        def trial_env(world: Path) -> dict[str, str]:
+            return {**env, "PYTHONPATH": os.pathsep.join(sorted(
+                {str((world / p).parent.resolve()) for p in py_changed}))}
 
-        base = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests,
-                              cwd=scratch, capture_output=True, text=True, timeout=timeout_s, env=env)
-        if base.returncode != 0:
-            _fail("BASE_WORLD_RED:" +
-                  ";".join((base.stdout.strip().splitlines() or ["<no output>"])[-2:])[:300])
+        explicit_tests = _explicit_test_files(scratch, run_tests)
+        excluded_tests = sorted(rel for rel in py_changed if _test_file(scratch, rel, run_tests))
+        production = sorted(rel for rel in py_changed if rel not in excluded_tests)
+        snapshots: dict[str, bytes] = {}
+        for rel in sorted(set(production + explicit_tests)):
+            path = _safe_path(scratch, rel, must_exist=True)
+            if isinstance(path, dict): return path
+            if not path.is_file():
+                return _fail("TARGET_NOT_FILE:" + rel)
+            snapshots[rel] = path.read_bytes()
 
-        # post-apply per-file changed lines (new-side ranges), clamped to
-        # the file's true extent — created-file hunks (`-0,0`) arrive with a
-        # 1e9 sentinel end from the diff parser and must be bounded, and
-        # themselves only carry tests/content the suite measures, never
-        # mutation targets.
-        changed_lines = {rel: set() for rel in py_changed}
-        for rel, ranges in py_changed.items():
-            if rel in created_list:
-                continue  # newly created files: measured, never mutated
-            target = scratch / rel
-            n_lines = sum(1 for _ in target.read_text(encoding="utf-8", errors="replace").splitlines())
-            for (start, end) in ranges:
-                for ln in range(start, min(end, n_lines) + 1):
-                    changed_lines[rel].add(ln)
+        report_path = Path(temp) / "pytest.xml"
+        # Every invocation receives a fresh candidate tree. A passing baseline
+        # or an earlier mutant must not leave marker files/state that make a
+        # later, otherwise surviving mutant appear killed.
+        with tempfile.TemporaryDirectory(prefix="baseline_", dir=temp) as trial_dir:
+            world = Path(trial_dir) / "tree"
+            shutil.copytree(scratch, world)
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                return _fail("WALL_TIME_BUDGET_EXHAUSTED_BEFORE_BASELINE")
+            baseline, report, timed_out = _pytest_trial(world, python_exe, run_tests, trial_env(world),
+                                                         report_path, min(timeout_s, remaining))
+            if timed_out:
+                return _fail("BASE_WORLD_TIMEOUT")
+            if (baseline is None or baseline.returncode != 0 or not report.get("available")
+                    or report.get("passed", 0) <= 0 or report.get("failed", 0)
+                    or report.get("errors", 0)):
+                detail = "" if baseline is None else ";".join((baseline.stdout.strip().splitlines() or [""])[-2:])
+                return _fail("BASE_WORLD_RED_OR_UNOBSERVED:" + detail[:300])
+            by_file = full_testgate._pytest_file_evidence(report_path, world, explicit_tests)
+            if any(by_file.get(rel, {}).get("passed", 0) <= 0 for rel in explicit_tests):
+                return _fail("BASE_WORLD_TEST_FILE_UNEXECUTED")
+            if any(not (world / rel).is_file() or (world / rel).read_bytes() != raw
+                   for rel, raw in snapshots.items()):
+                return _fail("BASE_WORLD_CHANGED_TEST_OR_SOURCE")
 
-        mutants: list[dict] = []
+        changed_lines: dict[str, set[int]] = {}
+        for rel in production:
+            try:
+                source = snapshots[rel].decode("utf-8")
+            except UnicodeDecodeError:
+                return _fail("SOURCE_NOT_UTF8:" + rel)
+            n_lines = len(source.splitlines())
+            changed_lines[rel] = {ln for start, end in py_changed[rel]
+                                  for ln in range(start, min(end, n_lines) + 1)}
+
+        mutants: list[tuple[str, _Site]] = []
+        truncated = False
         for rel, lines in sorted(changed_lines.items()):
-            target = scratch / rel
-            text = target.read_text(encoding="utf-8", errors="replace")
+            text = snapshots[rel].decode("utf-8")
             for site in _mutants_for_text(rel, text, lines, max_mutants):
-                mutants.append(site.row(rel))
-                if len(mutants) >= max_mutants:
+                if len(mutants) == max_mutants:
+                    truncated = True
                     break
-            if len(mutants) >= max_mutants:
+                mutants.append((rel, site))
+            if truncated:
                 break
         if not mutants:
-            _fail("NO_MUTABLE_SITES:" + ",".join(sorted(py_changed)))
+            return _fail("NO_MUTABLE_SITES:" + ",".join(production))
 
         killed = 0
         survived: list[dict] = []
-        for idx, m in enumerate(mutants):
-            # mutate in-place, run, restore — scratch stays the crown's lab,
-            # anchor and diff stay pristine.
-            target = scratch / m["file"]
-            original = target.read_text(encoding="utf-8", errors="replace")
-            site = _Site(m["operator"], m["line"], m["col"],
-                         len(original.encode("utf-8")[ _offset_col(original, m["line"], m["col"]):
-                                                       _offset_col(original, m["line"], m["col"]) ]),
-                         m["replacement"].encode("utf-8"))
-            # real splice: find original span by re-deriving site span from name
-            # (replacement length differs).  recompute span from operator law:
-            #  the operator maps old-token-length => replacement-token-length.
-            mutated = _apply_splice_ref(original, m)
-            if mutated is None:
-                _fail("SPAN_INTEGRITY:" + m["file"] + ":" + str(m["line"]))
-            target.write_text(mutated, encoding="utf-8")
+        inconclusive: list[dict] = []
+        budget_exhausted = False
+        for index, (rel, site) in enumerate(mutants):
+            if deadline <= time.monotonic():
+                budget_exhausted = True
+                inconclusive.extend({**pending.row(name), "reason": "WALL_TIME_BUDGET_EXCEEDED"}
+                                    for name, pending in mutants[index:])
+                break
+            original = snapshots[rel]
+            row = site.row(rel)
+            mutated = _apply_splice(original.decode("utf-8"), rel, site)
             try:
-                r = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests,
-                                   cwd=scratch, capture_output=True, text=True,
-                                   timeout=timeout_s, env=env)
-                if r.returncode == 0:
-                    survived.append(m)
-                else:
+                ast.parse(mutated, filename=rel)
+            except (SyntaxError, ValueError):
+                inconclusive.append({**row, "reason": "INVALID_MUTANT"})
+                continue
+            with tempfile.TemporaryDirectory(prefix="mutant_", dir=temp) as trial_dir:
+                world = Path(trial_dir) / "tree"
+                shutil.copytree(scratch, world)
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    budget_exhausted = True
+                    inconclusive.extend({**pending.row(name), "reason": "WALL_TIME_BUDGET_EXCEEDED"}
+                                        for name, pending in mutants[index:])
+                    break
+                (world / rel).write_bytes(mutated.encode("utf-8"))
+                proc, result, timeout = _pytest_trial(world, python_exe, run_tests, trial_env(world),
+                                                       report_path, min(timeout_s, remaining))
+                if timeout and deadline <= time.monotonic():
+                    budget_exhausted = True
+                intact = all((world / name).is_file() and (world / name).read_bytes()
+                             == (mutated.encode("utf-8") if name == rel else raw)
+                             for name, raw in snapshots.items())
+                if not intact:
+                    inconclusive.append({**row, "reason": "TEST_OR_SOURCE_CHANGED"})
+                elif timeout:
+                    inconclusive.append({**row, "reason": "TIMEOUT"})
+                elif proc is None or not result.get("available") or result.get("errors", 0):
+                    inconclusive.append({**row, "reason": "PYTEST_ERROR_OR_NO_REPORT"})
+                elif proc.returncode == 1 and result.get("failed", 0) > 0:
                     killed += 1
-            except subprocess.TimeoutExpired:
-                killed += 1  # infinite loop = observable change = killed
-            target.write_text(original, encoding="utf-8")
+                elif (proc.returncode == 0 and result.get("passed", 0) > 0
+                      and result.get("failed", 0) == 0):
+                    surviving_files = full_testgate._pytest_file_evidence(report_path, world, explicit_tests)
+                    if all(surviving_files.get(name, {}).get("passed", 0) > 0 for name in explicit_tests):
+                        survived.append(row)
+                    else:
+                        inconclusive.append({**row, "reason": "TEST_FILE_UNEXECUTED"})
+                else:
+                    inconclusive.append({**row, "reason": "PYTEST_INCONCLUSIVE"})
+            if budget_exhausted:
+                inconclusive.extend({**pending.row(name), "reason": "WALL_TIME_BUDGET_EXCEEDED"}
+                                    for name, pending in mutants[index + 1:])
+                break
 
-        total = killed + len(survived)
-        ratio = (killed / total) if total else 0.0
-        complete = len(survived) == 0
-        gate = "PASS" if ratio >= min_ratio and complete else "FAIL"
-
+        total = killed + len(survived) + len(inconclusive)
+        ratio = killed / total if total else 0.0
+        try:
+            diff_unchanged = diff_abs.is_file() and _sha256(diff_abs.read_bytes()) == diff_sha
+        except OSError:
+            diff_unchanged = False
+        complete = not truncated and not survived and not inconclusive and diff_unchanged
+        gate = "PASS" if complete and ratio >= min_ratio else ("FAIL" if survived else "INCONCLUSIVE")
+        order = lambda row: (row["file"], row["line"], row["col"], row["operator"])
         artifact = {
             "schema": SCHEMA,
             "anchor_path": anchor_rel,
             "diff_path": diff_rel,
-            "diff_sha256": _sha256(diff_text.encode("utf-8")),
+            "diff_sha256": diff_sha,
+            "diff_unchanged": diff_unchanged,
             "mutants_generated": len(mutants),
             "mutants_killed": killed,
             "mutants_survived": len(survived),
-            "survivors": sorted(survived, key=lambda m: (m["file"], m["line"], m["operator"])),
+            "mutants_inconclusive": len(inconclusive),
+            "survivors": sorted(survived, key=order),
+            "inconclusive": sorted(inconclusive, key=order),
+            "mutation_frontier_truncated": truncated,
+            "max_wall_time_s": max_wall_time_s,
+            "wall_time_budget_exhausted": budget_exhausted,
+            "excluded_test_files": excluded_tests,
             "kill_ratio": round(ratio, 6),
             "min_kill_ratio": min_ratio,
             "changed_lines_targeted": {rel: sorted(lines) for rel, lines in sorted(changed_lines.items())},
             "gate": gate,
-            "law": ("for every changed executable line, AST mutants confined to that line must be "
-                    "killed by the named suite; survivors are falsifying witnesses of unobserved "
-                    "behaviour; base-world red, DIFF_DOES_NOT_APPLY, SYNTAX_ERROR_IN_FILE, "
-                    "NO_MUTABLE_SITES and TIMEOUT are loud refusals — never a silent pass; "
-                    "anchor and diff are never mutated."),
+            "law": ("PASS requires a nonvacuous green baseline, exact localized mutants, "
+                    "a complete bounded mutation frontier, no surviving or inconclusive mutants, "
+                    "and an unchanged diff. Timeouts and pytest infrastructure errors are "
+                    "inconclusive; test processes are not OS-sandboxed."),
             "complete": complete,
-            "verified": True,
+            "verified": gate == "PASS",
         }
-    finally:
-        if scratch.exists():
-            shutil.rmtree(scratch)
 
-    out_abs.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(artifact, indent=2, sort_keys=True) + "\n"
     out_abs.write_text(text, encoding="utf-8")
-
     return {
         "adapter": "python_review_diff_mutation_gate",
         "anchor_path": anchor_rel,
@@ -422,95 +577,18 @@ def run(args, root):
         "mutants_generated": artifact["mutants_generated"],
         "mutants_killed": artifact["mutants_killed"],
         "mutants_survived": artifact["mutants_survived"],
+        "mutants_inconclusive": artifact["mutants_inconclusive"],
+        "mutation_frontier_truncated": artifact["mutation_frontier_truncated"],
+        "max_wall_time_s": artifact["max_wall_time_s"],
+        "wall_time_budget_exhausted": artifact["wall_time_budget_exhausted"],
         "kill_ratio": artifact["kill_ratio"],
         "gate": artifact["gate"],
         "complete": artifact["complete"],
         "output_path": out_rel,
         "output_sha256": _sha256(text.encode("utf-8")),
         "output_verified": json.loads(out_abs.read_text(encoding="utf-8")) == artifact,
-        "verified": True,
+        "verified": artifact["verified"],
     }
-
-
-def _offset_col(text: str, line: int, col: int) -> int:
-    line_off = [0]
-    for l in text.splitlines(keepends=True):
-        line_off.append(line_off[-1] + len(l.encode("utf-8")))
-    return line_off[line - 1] + col
-
-
-def _apply_splice_ref(text: str, row: dict) -> str | None:
-    """Apply the mutation recorded in `row` to `text` byte-exactly.
-
-    The row carries (file, line, col, operator, replacement).  Operator tag
-    fixes the original-token length, so the span is derived, not trusted.
-    """
-    op = row["operator"]
-    # map operator -> (old-token-length, new-token-bytes)
-    OP_SPANS = {
-        "compare_swap": None,  # variable; determined by regex of target token
-        "arith_swap": (1, 1),
-        "aug_swap": (2, 2),
-        "bool_swap": None,     # 4-char True or 5-char False
-        "numeric_bump": None,  # len of old token
-        "return_none": None,   # replace whole statement text
-    }
-    if op == "compare_swap":
-        # re-derive the operator spelling from the contiguous 1-2 byte region
-        # at row.col: it is one of == != < > <= >=
-        line_off = [0]
-        for l in text.splitlines(keepends=True):
-            line_off.append(line_off[-1] + len(l.encode("utf-8")))
-        off = line_off[row["line"] - 1] + row["col"]
-        for cand in (b"==", b"!=", b"<=", b">="):
-            if text.encode("utf-8")[off:off + len(cand)] == cand:
-                return text[:off].encode("utf-8")[:0].decode() + \
-                    text[:off] + row["replacement"] + text[off + len(cand):]
-        # single-char ops: < or >
-        offb = line_off[row["line"] - 1] + row["col"]
-        if text.encode("utf-8")[off:off + 1] in (b"<", b">"):
-            return text[:off] + row["replacement"] + text[off + 1:]
-        return None
-    if op == "bool_swap":
-        line_off = [0]
-        for l in text.splitlines(keepends=True):
-            line_off.append(line_off[-1] + len(l.encode("utf-8")))
-        off = line_off[row["line"] - 1] + row["col"]
-        for cand in (b"True", b"False"):
-            n = len(cand)
-            if text.encode("utf-8")[off:off + n] == cand:
-                return text[:off] + row["replacement"] + text[off + n:]
-        return None
-    if op == "numeric_bump":
-        line_off = [0]
-        for l in text.splitlines(keepends=True):
-            line_off.append(line_off[-1] + len(l.encode("utf-8")))
-        off = line_off[row["line"] - 1] + row["col"]
-        # old token = digits (and optionally one '.')
-        b = text.encode("utf-8")
-        i = off
-        while i < len(b) and (b[i:i + 1].isdigit() or b[i:i + 1] == b"."):
-            i += 1
-        return text[:off] + row["replacement"] + text[off:i - off]
-    if op == "return_none":
-        line_off = [0]
-        for l in text.splitlines(keepends=True):
-            line_off.append(line_off[-1] + len(l.encode("utf-8")))
-        off = line_off[row["line"] - 1] + row["col"]
-        # original statement runs to end of line (no multi-line return value support)
-        b = text.encode("utf-8")
-        end = text.find("\n", off)
-        end = off + 6 if end == -1 else end
-        return text[:off] + row["replacement"] + text[end:]
-    # arith_swap / aug_swap fixed-length
-    line_off = [0]
-    for l in text.splitlines(keepends=True):
-        line_off.append(line_off[-1] + len(l.encode("utf-8")))
-    off = line_off[row["line"] - 1] + row["col"]
-    n, _ = OP_SPANS[op]
-    if text.encode("utf-8")[off:off + n] in (b"+", b"-", b"*", b"/", b"+=", b"-=", b"*=", b"/="):
-        return text[:off] + row["replacement"] + text[off + n:]
-    return None
 
 
 if __name__ == "__main__":
@@ -521,6 +599,7 @@ if __name__ == "__main__":
     p.add_argument("--output_path", required=True)
     p.add_argument("--run_tests", nargs="*", default=None)
     p.add_argument("--timeout_s", type=int, default=120)
+    p.add_argument("--max_wall_time_s", type=float, default=120)
     p.add_argument("--min_kill_ratio", type=float, default=1.0)
     p.add_argument("--max_mutants", type=int, default=2000)
     ns = p.parse_args()

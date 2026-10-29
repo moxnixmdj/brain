@@ -45,9 +45,12 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
+
+from canonical.runtime.bound_capabilities.review_gate_input_safety_v1 import guard_inputs
 
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
     _parse_diff_ranges,
@@ -56,20 +59,22 @@ from canonical.runtime.bound_capabilities.python_review_diff_static_triage impor
 SCHEMA = "PROJECT_BRAIN_DIFF_TYPE_GATE_V1"
 
 
-def _fail(reason: str) -> None:
-    raise SystemExit(json.dumps({"error": True,
-                                 "capability": "python.review.diff_type_gate.v1",
-                                 "reason": reason}, indent=2, sort_keys=True))
+def _fail(reason: str) -> dict:
+    return {
+        "error": True,
+        "capability": "python.review.diff_type_gate.v1",
+        "reason": reason,
+    }
 
 
-def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path:
+def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path | dict:
     if not rel or not isinstance(rel, str):
-        _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
+        return _fail("MISSING_OR_INVALID_PATH_ARGUMENT")
     p = (repo / rel).resolve()
     if p != repo and repo not in p.parents:
-        _fail("PATH_ESCAPE:" + rel)
+        return _fail("PATH_ESCAPE:" + rel)
     if must_exist and not p.exists():
-        _fail("PATH_MISSING:" + rel)
+        return _fail("PATH_MISSING:" + rel)
     return p
 
 
@@ -86,17 +91,23 @@ def run(args, root):
     args = dict(args or {})
     diff_rel = str(args.get("diff_path") or "")
     diff_abs = _safe_path(repo, diff_rel, must_exist=True)
+    if isinstance(diff_abs, dict): return diff_abs
     diff_text = diff_abs.read_text(encoding="utf-8", errors="replace")
     if not diff_text.strip():
-        _fail("DIFF_EMPTY")
+        return _fail("DIFF_EMPTY")
     changed, created = _parse_diff_ranges(diff_text)
     py_changed = {p: r for p, r in changed.items() if p.endswith(".py")}
 
     worktree_rel = str(args.get("worktree_path") or "")
     worktree_abs = _safe_path(repo, worktree_rel, must_exist=True)
+    if isinstance(worktree_abs, dict): return worktree_abs
     if not worktree_abs.is_dir():
-        _fail("WORKTREE_NOT_DIRECTORY")
+        return _fail("WORKTREE_NOT_DIRECTORY")
     out_abs = _safe_path(repo, str(args.get("output_path") or ""))
+    if isinstance(out_abs, dict): return out_abs
+    guard_result = guard_inputs(worktree_abs, diff_abs, out_abs, py_changed, _fail)
+    if isinstance(guard_result, dict):
+        return guard_result
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
 
@@ -106,7 +117,7 @@ def run(args, root):
     for rel in sorted(py_changed):
         target = worktree_abs / rel
         if not target.is_file():
-            _fail("TOUCHED_FILE_MISSING_IN_WORKTREE:" + rel)
+            return _fail("TOUCHED_FILE_MISSING_IN_WORKTREE:" + rel)
         files_on_disk[rel] = target
         try:
             ast.parse(target.read_text(encoding="utf-8"), filename=rel)
@@ -123,12 +134,12 @@ def run(args, root):
         touched = sorted(files_on_disk)
         if touched and not syntax_errors:
             proc = subprocess.run(
-                [python_exe, "-m", "mypy", "-O", "json", "--no-incremental",
+                [python_exe, "-m", "mypy", "-O", "json", "--no-incremental", "--cache-dir", os.devnull,
                  "--follow-imports=silent", "--ignore-missing-imports",
-                 "--no-color-output"] + touched,
+                 "--no-color-output", "--"] + touched,
                 cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
             if proc.returncode not in (0, 1):
-                _fail("MYPY_INVOCATION_FAILED:rc=" + str(proc.returncode) + ":" +
+                return _fail("MYPY_INVOCATION_FAILED:rc=" + str(proc.returncode) + ":" +
                       (proc.stderr.strip().splitlines() or ["<empty>"])[0][:200])
             rows = []
             for line in proc.stdout.splitlines():
@@ -138,7 +149,13 @@ def run(args, root):
                 try:
                     rows.append(json.loads(line))
                 except json.JSONDecodeError:
-                    _fail("MYPY_OUTPUT_ROW_NOT_JSON")
+                    return _fail("MYPY_OUTPUT_ROW_NOT_JSON")
+            if ((proc.returncode == 1 and not rows)
+                    or any(not isinstance(row, dict) or not isinstance(row.get("file"), str)
+                           or not row["file"] or not isinstance(row.get("line"), int)
+                           or row["line"] <= 0 or row.get("severity") not in ("error", "note", "warning")
+                           for row in rows)):
+                return _fail("MYPY_OUTPUT_INCOMPLETE")
             for row in sorted(rows, key=lambda r: (str(r.get("file")),
                                                    int(r.get("line") or 0),
                                                    str(r.get("code")))):
@@ -160,7 +177,9 @@ def run(args, root):
     elif probe.returncode != 0 or "mypy" not in probe.stdout.strip().lower():
         mypy_version = None
 
-    if mypy_version is None:
+    if not py_changed:
+        gate = "NO_PYTHON_CHANGES"
+    elif mypy_version is None:
         gate = "FAIL" if syntax_errors else "PASS_BASELINE_ONLY"
     elif syntax_errors or blocking:
         gate = "FAIL"
