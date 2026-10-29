@@ -35,5 +35,22 @@
  ],
  "next": [
   "fix writer TypeError on real layouts; narrow localization (traceback-frame-first) for 1000-line modules; live-server-safe harness mode; re-measure with per-bug wall budget accounting"
- ]
+ ],
+ "round2": {
+  "date": "20261029",
+  "result": {
+   "tornado/14": "REPAIRED (211s wall; coupled pair route found the real fix is None->is not None, realized, replayed green; independent replay GREEN)",
+   "tornado/2": "NOT_REPAIRED (wall-capped 330s; fix is a structural clause-insertion beyond the mutation grammar -- named MISS)",
+   "tornado/4": "NOT_REPAIRED (wall-capped 330s; live-server test per candidate -- named MISS, harness mode pending)"
+  },
+  "score": "1/3 real historical bugs repaired within wall caps (first genuine external-validity point)",
+  "laws_mined_round2": [
+   "HARNESS: a['cmd'][0] IS '-m'; slicing [1:] ate it and poisoned round 1 with usage errors -- round-1 0/3 was instrument fault",
+   "ENV: import root = WORLD ROOT on PYTHONPATH (world-root env => suite GREEN; test-dir env => no module named tornado); package dirs on sys.path SHADOW STDLIB (tornado/locale.py beat stdlib locale inside gettext) -- _source_env package-walk REVERTED with this evidence",
+   "WALL: hanging mutants burn full caller timeout -- candidate wall = 8x measured baseline suite time + 3s (faulthandler-proven)",
+   "WALL: interprocedural provenance phase = full traced suite run, zero measured benefit ever (prov_hypothesis_count=0 in every receipt) -- off hot path, opt-in",
+   "WALL: 3 sequential engines need a router deadline; skipped steps are LABELED (SKIPPED_WALL_BUDGET), never silent",
+   "RESILIENCE: realize gets one suite retry (wall-pressure transients); suite tail captured in the trace row"
+  ]
+ }
 }

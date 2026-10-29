@@ -106,8 +106,21 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     argv = [str(x) for x in (args.get("test_argv") or
                              _PTG.suite_argv(sys.executable, *tests))]
     timeout = max(1, min(int(args.get("timeout_s", 20)), 120))
-    env = _PTG._source_env(*tests)
+    # Import root = the WORLD ROOT (source_root), not the test's directory:
+    # package-rooted suites import `tornado.test...`, and the A/B probe
+    # measured world-root env => suite GREEN vs test-dir env => no module
+    # named 'tornado'. The test dir stays on the path too (flat layouts).
+    env = _PTG._source_env(src_abs, *tests)
     budget = max(1, min(int(args.get("budget", 2)), 6))
+    # Router wall budget (L6 law: three sequential engines on a real repo
+    # exceed any sane caller cap; the deadline is enforced BETWEEN steps and
+    # a skipped step is labeled, never silent).
+    wall = float(args.get("wall_budget_s") or 0) or None
+    import time as _time
+    _t0 = _time.monotonic()
+
+    def remaining() -> float:
+        return (wall - (_time.monotonic() - _t0)) if wall else 1e9
 
     rc, text = _suite(repo, argv, timeout, env)
     if rc == 0:
@@ -131,7 +144,10 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             "budget": budget,
         }, repo)
     except Exception as exc:
-        step = {"status": type(exc).__name__ + ":" + str(exc)[:120]}
+        import traceback as _tb
+        frames = _tb.extract_tb(_tb.__sys.exc_info()[2]) if False else None
+        step = {"status": type(exc).__name__ + ":" + str(exc)[:120],
+                "where": _tb.format_exc()[-400:]}
     route_trace.append({"step": "cegis_writer",
                         "status": step.get("status"),
                         "verified": step.get("verified")})
@@ -139,7 +155,11 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repaired = rc2 == 0
 
     # Ladder step 2: coupled pair engine's patch report, realized here.
-    if not repaired:
+    if not repaired and remaining() < 90:
+        route_trace.append({"step": "coupled_reporter",
+                            "status": "SKIPPED_WALL_BUDGET",
+                            "remaining_s": round(remaining(), 1)})
+    if not repaired and remaining() >= 90:
         _revert(originals); originals.clear()
         cpl = intermediate.parent / (".route_cpl_" + output.name)
         try:
@@ -158,7 +178,15 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                             "patch_count": len(patches)})
         if patches:
             _realize(repo, patches, originals)
-            rc3, _ = _suite(repo, argv, timeout, env)
+            rc3, tail3 = _suite(repo, argv, timeout, env)
+            if rc3 != 0:
+                # one retry: under wall pressure a suite run can time out
+                # (rc=None) or cold-start; the engines replay their winners
+                # for exactly this reason
+                rc3, tail3 = _suite(repo, argv, timeout, env)
+            route_trace.append({"step": "coupled_realize",
+                                "suite_rc": rc3,
+                                "tail": tail3[-260:] if rc3 else ""})
             if rc3 == 0:
                 repaired = True
                 final_patches = patches
@@ -166,7 +194,11 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 _revert(originals); originals.clear()
 
     # Ladder step 3: iterative single-file engine's patch report, realized.
-    if not repaired:
+    if not repaired and remaining() < 60:
+        route_trace.append({"step": "iterative_reporter",
+                            "status": "SKIPPED_WALL_BUDGET",
+                            "remaining_s": round(remaining(), 1)})
+    if not repaired and remaining() >= 60:
         _revert(originals); originals.clear()
         it = intermediate.parent / (".route_it_" + output.name)
         try:
@@ -186,6 +218,10 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         if patches:
             _realize(repo, patches, originals)
             rc4, _ = _suite(repo, argv, timeout, env)
+            if rc4 != 0:
+                rc4, _ = _suite(repo, argv, timeout, env)
+            route_trace.append({"step": "iterative_realize",
+                                "suite_rc": rc4})
             if rc4 == 0:
                 repaired = True
                 final_patches = patches

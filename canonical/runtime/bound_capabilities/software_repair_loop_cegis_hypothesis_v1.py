@@ -83,6 +83,11 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             "test_argv":argv,
             "output_path":rel(intermediate),
             "timeout_s":timeout,
+            # L6 wall economics: tracing a 1000-line module at the 100k-event
+            # default costs more than the whole search budget (measured
+            # tornado/14: ~2min/round in the tracer alone)
+            "max_trace_events":int(args.get("max_trace_events",30000)),
+            "max_ranked_symbols":int(args.get("max_ranked_symbols",40)),
             **{k:v for k,v in escalation.items()},
         },repo)
         patches=synth.get("patches") or []

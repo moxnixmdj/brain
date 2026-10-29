@@ -115,10 +115,16 @@ def _pool(row,tests,per_file):
  except (SyntaxError,ValueError,UnicodeDecodeError):return []
  nums,strings=_PATCH._test_literals(tests)
  ranges=[(s["lineno"],s["end_lineno"],s["score"]) for s in row["symbols"] if s["score"]>0]
+ focus=set(row.get("focus") or ())
  out=[]
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
   line=desc.get("lineno") or 0
   priority=max([score for a,b,score in ranges if a<=line<=b] or [0])
+  # traceback-frame proximity dominates: a site ON/next-to a line the stack
+  # names is the evidence-first candidate, not early-line trivia
+  if any(a<=line<=b for a,b in ((n,n) for n in focus)) or \
+     any(abs(line-f)<=2 for f in focus):
+   priority+=10000
   e=_edit(text,key,desc,replacer)
   if e is not None:out.append((priority,e))
  out.sort(key=lambda x:(-x[0],x[1]["start"],x[1]["end"],str(x[1]["mutation"])))
