@@ -119,6 +119,63 @@ def blob(result: dict) -> str:
     return out
 
 
+def _artifacts(result: dict) -> list:
+    """Every JSON artifact the run says it wrote, PARSED.
+
+    A mention inside a report is not a verdict.  Measured 2026-10-29: the oracles below used to
+    ask ``"unused_helper" in blob(result)``, which any symbol INDEX satisfies because it lists
+    every definition -- so the matrix certified "Find the dead code in <pkg>" as REAL while the
+    door had returned ``code.index.tree_sitter.incremental.v1`` with nothing but ``definition_count``.
+    The artifact is the only thing a typed question may be answered from.
+    """
+    docs = []
+    for row in (result.get("execution") or []):
+        produced = str(((row or {}).get("result") or {}).get("output_path") or "")
+        if produced and (ROOT / produced).is_file():
+            try:
+                docs.append(json.loads((ROOT / produced).read_text(encoding="utf-8")))
+            except Exception:  # noqa: BLE001 - a non-JSON artifact answers nothing
+                continue
+    return docs
+
+
+def _fields(docs, pattern: str):
+    """Values of every key, at any depth, whose KEY matches ``pattern``."""
+    hit: list = []
+
+    def walk(node):
+        if isinstance(node, dict):
+            for key, value in node.items():
+                if re.search(pattern, str(key), re.I):
+                    hit.append(value)
+                walk(value)
+        elif isinstance(node, list):
+            for item in node[:5000]:
+                walk(item)
+
+    for doc in docs:
+        walk(doc)
+    return hit
+
+
+def _typed(docs, pattern: str, needle: str) -> bool:
+    """A TYPED field matching ``pattern`` carries ``needle`` -- not a mention in some blob."""
+    for value in _fields(docs, pattern):
+        if needle.lower() in json.dumps(value, default=str).lower():
+            return True
+    return False
+
+
+def _number(docs, pattern: str):
+    """The first numeric value under a key matching ``pattern``."""
+    for value in _fields(docs, pattern):
+        if isinstance(value, bool):
+            continue
+        if isinstance(value, (int, float)):
+            return value
+    return None
+
+
 def unchanged(base: pathlib.Path, name: str):
     """An oracle factory: this file must be byte-identical afterwards."""
     want = digest(base / name)
@@ -209,17 +266,19 @@ case("tests_from_docstrings", lambda b: "Generate tests from the docstrings in %
 
 # --- analysis
 case("find_callers", lambda b: "Find every caller of the function add in %s." % rel(b, "pkg/mod.py"),
-     lambda b, r: "caller" in blob(r) and "other" in blob(r), "analysis")
+      lambda b, r: _typed(_artifacts(r), r"caller", "other"), "analysis")
 case("find_definition", lambda b: "Where is the function mul defined?",
      lambda b, r: "mul" in blob(r) and "calc" in blob(r), "analysis")
 case("dead_code", lambda b: "Find the dead code in %s." % rel(b, "pkg"),
-     lambda b, r: "unused_helper" in blob(r), "analysis")
+      lambda b, r: _typed(_artifacts(r), r"unused|dead|unreferenced", "unused_helper"),
+     "analysis")
 case("complexity", lambda b: "Report the cyclomatic complexity of %s." % rel(b, "pkg/mod.py"),
-     lambda b, r: "complexity" in blob(r).lower(), "analysis")
+      lambda b, r: _number(_artifacts(r), r"complexity|cyclomatic") is not None, "analysis")
 case("change_impact", lambda b: "Which tests are affected if I change %s?" % rel(b, "pkg/mod.py"),
-     lambda b, r: "test_calc" in blob(r), "analysis")
+      lambda b, r: _typed(_artifacts(r), r"candidate_test|selected_test|test_paths", "test_calc"),
+     "analysis")
 case("count_functions", lambda b: "Count the functions in %s." % rel(b, "pkg/calc.py"),
-     lambda b, r: "function_count" in blob(r), "analysis")
+      lambda b, r: _number(_artifacts(r), r"function_count|\bfunctions\b") == 2, "analysis")
 case("explain_bug", lambda b: "Explain the bug in %s." % rel(b, "pkg/calc.py"),
      lambda b, r: ("cause" in blob(r).lower() or "because" in blob(r).lower())
      and digest(b / "pkg/calc.py") == _digest_at(r, b, "pkg/calc.py"), "analysis")
@@ -228,17 +287,20 @@ case("security_audit", lambda b: "Run a security audit on %s." % rel(b, "pkg"),
 
 # --- toolchain
 case("run_suite", lambda b: "Run the test suite in %s." % rel(b, "pkg"),
-     lambda b, r: "test" in blob(r).lower() and ("fail" in blob(r).lower() or "ok" in blob(r).lower()),
-     "toolchain")
+      lambda b, r: _number(_artifacts(r), r"test_returncode") is not None
+     or _number(_artifacts(r), r"tests_run|test_count") is not None, "toolchain")
 case("lint", lambda b: "Lint %s with ruff." % rel(b, "pkg/calc.py"),
-     lambda b, r: "ruff" in blob(r).lower(), "toolchain")
+      lambda b, r: _typed(_artifacts(r), r"^gate$", "PASS")
+     and not _typed(_artifacts(r), r"ruff", "UNAVAILABLE"), "toolchain")
 case("typecheck", lambda b: "Type-check %s with mypy." % rel(b, "pkg/calc.py"),
-     lambda b, r: "mypy" in blob(r).lower(), "toolchain")
+      lambda b, r: _typed(_artifacts(r), r"^gate$", "PASS")
+     and not _typed(_artifacts(r), r"mypy|type_tool", "UNAVAILABLE"), "toolchain")
 case("create_pyproject", lambda b: "Create a pyproject.toml for the project in %s." % rel(b, "pkg"),
      lambda b, r: (b / "pyproject.toml").is_file() or (b / "pkg/pyproject.toml").is_file(),
      "toolchain")
 case("measure_coverage", lambda b: "Measure the test coverage of %s." % rel(b, "pkg"),
-     lambda b, r: "coverage" in blob(r).lower() and "%" in blob(r), "toolchain")
+      lambda b, r: _number(_artifacts(r), r"coverage_percent|percent_covered|coverage") is not None,
+     "toolchain")
 case("add_dependency", lambda b: "Add the dependency requests to the project in %s." % rel(b, "pkg"),
      lambda b, r: any("requests" in text_of(p) for p in b.rglob("*.txt")), "toolchain")
 

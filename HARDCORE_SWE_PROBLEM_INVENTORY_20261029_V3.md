@@ -1,6 +1,7 @@
 # What is between this machine and being the most advanced software engineer — V3
 
-Measured 2026-10-29 on `arena/47739ce8-brain` @ `3fb8e01`, branched from `main` `e2d7981`.
+Measured 2026-10-29 on `arena/47739ce8-brain` @ `3fb8e01`, branched from `main` `e2d7981`;
+S-1 was closed after this stamp and re-measured at HEAD (its table carries both columns).
 Authority: **NONE**. Sandbox measurement, not independent verification. Credit: **0**.
 Producer cognition model dependency: **0**. Incremental spend: **$0**.
 Scope: hardcore software engineering. PDF/DOCX/XLSX/chart/archive work is excluded except where it is
@@ -16,8 +17,9 @@ be. Every number below is from a probe that ran on this branch; the sentence mat
 
 ## 0. The answer in one paragraph
 
-On **47 synthetic requests on 8-file trees** the machine is now honest and fast: **11 real answers, 1
-false answer, 35 honest refusals, 0 damaged files, median 91 ms**. That number is misleading in the
+On **47 synthetic requests on 8-file trees** the machine is now honest and fast: **10 real answers, 1
+false answer, 36 honest refusals, 0 damaged files, median 66 ms** (the harness's own oracles were
+blob-substring tests and are now typed; see S-1). That number is misleading in the
 one way that matters: **every one of those 47 trees is tiny.** Measured on *this repository*, the same
 machine:
 
@@ -67,7 +69,24 @@ The machinery is real. The problems are around it.
 | `canonical/runtime/bound_capabilities` | 146 | `code.index.tree_sitter.incremental.v1`, **2.0 s** | **PASS**, reports `file_count` | 0 call sites |
 
 The sentence is identical; only the size of the scope changes. Small scope → the capability that
-answers. Large scope → an indexer that does not answer, and the door still says PASS. The same
+answers. Large scope → an indexer that does not answer, and the door still says PASS.
+
+**Closed in the same PR, by declaration.** The seam already had one table of it — `_STATED_EFFECTS`
+(`live_brain_route_admission_v1.py:1254`, applied by `stated_answer_errors`) — so this is two more
+rows (a caller map, dead code) plus one call *before* execution: a capability that does not declare
+the stated effect is refused without being run, `executed=False`, so no verdict is overwritten and
+the typed retry is free to reach the one that does. Re-measured on `canonical/tests`, same sentence:
+
+| | before | after |
+|---|---|---|
+| capability | `code.index.tree_sitter.incremental.v1` | `python.source.symbols.index.ast` |
+| verdict | PASS, `definition_count`, **no caller named** | PASS, `callers_of` map |
+| coverage of the 22 oracle callers (Name calls) | **0 / 22** | **22 / 22** (61 entries; strict superset — the extras are dotted/attribute calls a Name-only oracle cannot see) |
+| latency | 8.7 s | **6.4 s** |
+| `Find the dead code in <dir>` | PASS over `definition_count` | **`FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED`, 68 ms** (0 of 419 registry rows declare dead/unused) |
+
+The dead-code refusal is the honest answer, not a regression: the moment a capability declares
+`dead`/`unused` it is admitted by the same declaration, with no code change. The same
 substitution happens for **dead code**: on `canonical/runtime/bound_capabilities` the door returns
 `code.index.tree_sitter.incremental.v1` with `definition_count` and PASS in 1.2 s, and names no dead
 function.
@@ -177,9 +196,8 @@ one of them has to change.
 
 ## 3. The order I would work in
 
-1. **S-1 — stop accepting a parse as an answer.** It is the only *false* class left on real code, and
-   it is the one a user would hit first. Fix by declaration (the indexer answers parse requests) or by
-   preferring the answering capability at any scope. Then re-measure on `canonical/tests`.
+1. ~~**S-1 — stop accepting a parse as an answer.**~~ **Done** (two declaration rows + a
+   pre-execution gate; 0/22 → 22/22 callers at 6.4 s on `canonical/tests`).
 2. **S-2 — the persisted reverse map.** One change turns a 5-minute question into a lookup, and it
    reuses the incremental index that already exists.
 3. **S-3 — prune the representation.** 103 MB for a parse is a resource bug that will bite every

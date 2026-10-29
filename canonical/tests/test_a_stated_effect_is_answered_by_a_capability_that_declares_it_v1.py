@@ -93,11 +93,57 @@ class TheGateReadsTheDeclarationNotTheExpectField(unittest.TestCase):
         ("Repair the python source pkg/calc.py" used to be listed here.  It is not an
         ordinary request -- it asks for a change to be MADE -- so it moved to
         ``TheSentenceThatAsksForTheChange`` below, where an auditing capability that
-        makes no change is refused instead of admitted.)
+        makes no change is refused instead of admitted.  "Find every caller of the
+        function add in pkg/mod.py" was listed here too, and it is not ordinary either:
+        it states a caller map, which ``python.source.audit.ast`` cannot provide, so it
+        moved to ``TheParseIsNotTheAnswer`` below.)
         """
         for goal in ("Count the functions in pkg/calc.py",
-                     "Find every caller of the function add in pkg/mod.py"):
+                     "List the definitions in pkg/calc.py"):
             self.assertEqual(door.stated_answer_errors(goal, SYMBOL_AUDIT), [], goal)
+
+
+class TheParseIsNotTheAnswer(unittest.TestCase):
+    """A whole-tree PARSE is not a caller map, and a definition list is not the dead code.
+
+    Measured 2026-10-29 on this repository, the filesystem and an independent ``ast`` walk
+    as the oracle::
+
+        "Find every caller of the function load_verified_registry in canonical/tests"
+          3-file tree         python.source.symbols.index.ast        159 ms  callers_of -> 3
+          canonical/tests     code.index.tree_sitter.incremental.v1  8.7 s  PASS, 0 callers
+                              (independent ast walk: 32 call sites)
+        "Find the dead code in <dir>"
+          index capability    PASS, definition_count only, no unused list
+
+    Both passed because the accepted artifact was verified as a FILE WRITE.  The registry
+    already draws the line: ``callers`` is declared by the symbol index and by nothing else,
+    and nothing bound declares dead/unused, so the honest outcome there is a refusal.
+    """
+
+    INDEXER = {"capability_id": "code.index.tree_sitter.incremental.v1",
+               "provides": ["code.index.tree_sitter.incremental"],
+               "keywords": ["index", "references"]}
+
+    CALLER_SENTENCE = "Find every caller of the function add in pkg/mod.py"
+
+    def test_a_whole_tree_indexer_is_not_a_caller_map(self):
+        self.assertEqual(
+            door.stated_answer_errors(self.CALLER_SENTENCE, self.INDEXER),
+            ["STATED_CALLER_MAP_NOT_PROVIDED_BY_CAPABILITY:"
+             "code.index.tree_sitter.incremental.v1"])
+
+    def test_the_declared_caller_map_is_admitted_from_the_live_registry(self):
+        """Read off the registry itself, so the test cannot invent the declaration."""
+        entry = door.load_verified_registry().get("python.source.symbols.index.ast") or {}
+        self.assertTrue(entry, "the caller-map capability is not in the verified registry")
+        self.assertEqual(door.stated_answer_errors(self.CALLER_SENTENCE, entry), [])
+
+    def test_a_definition_list_is_not_the_dead_code(self):
+        self.assertEqual(
+            door.stated_answer_errors("Find the dead code in pkg.", self.INDEXER),
+            ["STATED_DEAD_CODE_NOT_IDENTIFIED_BY_CAPABILITY:"
+             "code.index.tree_sitter.incremental.v1"])
 
 
 class TheSentenceThatAsksForTheChange(unittest.TestCase):

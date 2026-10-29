@@ -1259,6 +1259,26 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     (re.compile(r"\b(?:test\s+)?coverage\b", re.IGNORECASE),
      re.compile(r"coverage", re.IGNORECASE),
      "STATED_COVERAGE_NOT_MEASURED_BY_CAPABILITY"),
+    # A CALLER MAP IS NOT A PARSE.  Measured 2026-10-29 on this repository: the SAME sentence
+    # "Find every caller of the function <f> in <dir>" is answered by python.source.symbols.index.ast
+    # (a real ``callers_of`` map) on a 3-file tree and by code.index.tree_sitter.incremental.v1 (a
+    # whole-tree parse, ``definition_count`` only, not one caller named) on canonical/tests -- and the
+    # door reported PASS for both, because the accepted artifact was verified as a FILE WRITE and
+    # never as an answer to the question.  The registry already draws the line: ``callers``/``call
+    # graph``/``who calls`` are declared by the symbol index and by nothing else.
+    (re.compile(r"\bcallers?\b|\bwho calls\b|\bcall[ _-]?(?:graph|sites?|edges?)\b",
+                re.IGNORECASE),
+     re.compile(r"\bcallers?\b|\bwho calls\b|\bcall[ _-]?(?:graph|sites?|edges?)\b|"
+                r"\bcallers_of\b", re.IGNORECASE),
+     "STATED_CALLER_MAP_NOT_PROVIDED_BY_CAPABILITY"),
+    # DEAD CODE.  Nothing in the registry declares it, so this gate's honest outcome today is a
+    # refusal -- which is the point: before it, an indexer that lists every definition was certified
+    # as "the dead code" because the definition it named appeared in the artifact.  A capability that
+    # DOES compute unused symbols is admitted the moment one is bound, by declaration alone.
+    (re.compile(r"\bdead\s+code\b|\bunused\s+(?:code|function|symbol|method)s?\b|\bunreferenced\b",
+                re.IGNORECASE),
+     re.compile(r"\bdead\b|\bunused\b|\bunreferenced\b", re.IGNORECASE),
+     "STATED_DEAD_CODE_NOT_IDENTIFIED_BY_CAPABILITY"),
 )
 
 
@@ -2465,6 +2485,22 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
                     normalized, world_before, future_artifacts)
         return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
                      "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started, **_extra)
+    # Ask the DECLARATION before spending the run.  The same gate already exists after execution
+    # (``stated_answer_errors`` in the observation chain); asking it first is strictly better, because
+    # a capability that cannot answer must not touch the tree at all, and the typed retry is then free
+    # to reach the capability that does answer (``executed`` is False, so no verdict is overwritten).
+    _declared = str(compiled.get("capability_id") or compiled.get("selected_capability") or "")
+    # Only a capability that was actually about to run can be refused for not answering: with no
+    # compiled capability there is no claim to reject, and the request keeps its own refusal.
+    declared_answer_errors = (stated_answer_errors(normalized, dict(admissible.get(_declared) or {}))
+                              if _declared else [])
+    if declared_answer_errors:
+        refused = _fail(task_id, "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+                        "STATED_ANSWER_NOT_PROVIDED:" + ";".join(declared_answer_errors), started,
+                        compiled_capability_id=_declared, executed=False)
+        refused["stated_answer_errors"] = declared_answer_errors
+        refused["refused_before_execution"] = True
+        return refused
     promised_sources = _promised_source_files(normalized)
     source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
     promised_roots = _promised_source_roots(normalized)
