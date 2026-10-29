@@ -85,5 +85,17 @@
    "round3": "1/4 (tqdm/9 added, honest labeled NOT_REPAIRED)",
    "instances_available": "4 satisfiable (tornado x3, tqdm x1); corpus breadth bounded by 3.11 satisfiability, not by tooling"
   }
+ },
+ "round4": {
+  "date": "20261029",
+  "edit": "traceback-frame-first candidate ordering ported to the iterative loop (was PGC-only); ladder zero-regression (writers 100% L1-L5, searchers P100 intact)",
+  "tqdm9_decoded": {
+   "real_fix": "numeric boundary tuning: 1000.0->999.95, 100.0->99.95, 10.0->9.995 in format_sizeof (+ __len__ conditional)",
+   "verdict": "GRAMMAR_EXPRESSIBILITY_MISS #2: constant candidates are {0,1,-1} flips; no mutation table produces 999.95",
+   "named_seam": "neighborhood-numeric candidate synthesis (bounded decimal lattice around existing constants, guided by the failing assertion) -- the same beyond-grammar seam as tornado/2's clause insertion; both are the measured case for solver/component-based synthesis"
+  },
+  "l6_scoreboard": {
+   "round4": "1/4 unchanged; misses now 2x grammar-expressibility + 1 live-server + env-rejected corpus tail"
+  }
  }
 }

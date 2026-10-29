@@ -15,7 +15,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.loop.test_guided.ast.v1",
    "baseline_green": false,
-   "seconds": 0.62,
+   "seconds": 0.58,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -24,6 +24,72 @@
   {
    "tier": "L1_literal",
    "instance": 0,
+   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.37,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L1_literal",
+   "instance": 0,
+   "capability_id": "python.software.repair.loop.coupled.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.36,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L1_literal",
+   "instance": 0,
+   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+   "baseline_green": false,
+   "seconds": 0.94,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L1_literal",
+   "instance": 0,
+   "capability_id": "python.software.repair.apply.verified.v1",
+   "baseline_green": false,
+   "seconds": 0.89,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L1_literal",
+   "instance": 0,
+   "capability_id": "python.software.repair.route.v1",
+   "baseline_green": false,
+   "seconds": 1.03,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L1_literal",
+   "instance": 1,
+   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.55,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L1_literal",
+   "instance": 1,
    "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
    "baseline_green": false,
    "seconds": 0.39,
@@ -34,76 +100,10 @@
   },
   {
    "tier": "L1_literal",
-   "instance": 0,
-   "capability_id": "python.software.repair.loop.coupled.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.4,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L1_literal",
-   "instance": 0,
-   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
-   "baseline_green": false,
-   "seconds": 1.04,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L1_literal",
-   "instance": 0,
-   "capability_id": "python.software.repair.apply.verified.v1",
-   "baseline_green": false,
-   "seconds": 0.95,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L1_literal",
-   "instance": 0,
-   "capability_id": "python.software.repair.route.v1",
-   "baseline_green": false,
-   "seconds": 1.17,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L1_literal",
-   "instance": 1,
-   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.64,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L1_literal",
-   "instance": 1,
-   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.38,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L1_literal",
    "instance": 1,
    "capability_id": "python.software.repair.loop.coupled.ast.v1",
    "baseline_green": false,
-   "seconds": 0.38,
+   "seconds": 0.39,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -113,17 +113,6 @@
    "tier": "L1_literal",
    "instance": 1,
    "capability_id": "software.repair.loop.cegis_hypothesis.v1",
-   "baseline_green": false,
-   "seconds": 1.0,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L1_literal",
-   "instance": 1,
-   "capability_id": "python.software.repair.apply.verified.v1",
    "baseline_green": false,
    "seconds": 0.92,
    "claimed_verified": true,
@@ -134,64 +123,20 @@
   {
    "tier": "L1_literal",
    "instance": 1,
-   "capability_id": "python.software.repair.route.v1",
-   "baseline_green": false,
-   "seconds": 1.18,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 0,
-   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.51,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 0,
-   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.34,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 0,
-   "capability_id": "python.software.repair.loop.coupled.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.34,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 0,
-   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
-   "baseline_green": false,
-   "seconds": 1.5,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 0,
    "capability_id": "python.software.repair.apply.verified.v1",
    "baseline_green": false,
-   "seconds": 1.44,
+   "seconds": 0.9,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L1_literal",
+   "instance": 1,
+   "capability_id": "python.software.repair.route.v1",
+   "baseline_green": false,
+   "seconds": 1.1,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -200,20 +145,9 @@
   {
    "tier": "L2_boundary",
    "instance": 0,
-   "capability_id": "python.software.repair.route.v1",
-   "baseline_green": false,
-   "seconds": 1.69,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 1,
    "capability_id": "python.software.repair.loop.test_guided.ast.v1",
    "baseline_green": false,
-   "seconds": 0.53,
+   "seconds": 0.46,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -221,76 +155,142 @@
   },
   {
    "tier": "L2_boundary",
-   "instance": 1,
-   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.37,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 1,
-   "capability_id": "python.software.repair.loop.coupled.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.34,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 1,
-   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
-   "baseline_green": false,
-   "seconds": 1.56,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 1,
-   "capability_id": "python.software.repair.apply.verified.v1",
-   "baseline_green": false,
-   "seconds": 1.44,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L2_boundary",
-   "instance": 1,
-   "capability_id": "python.software.repair.route.v1",
-   "baseline_green": false,
-   "seconds": 1.65,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L3_interproc",
-   "instance": 0,
-   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.47,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L3_interproc",
    "instance": 0,
    "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
    "baseline_green": false,
    "seconds": 0.28,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 0,
+   "capability_id": "python.software.repair.loop.coupled.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.29,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 0,
+   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+   "baseline_green": false,
+   "seconds": 1.37,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 0,
+   "capability_id": "python.software.repair.apply.verified.v1",
+   "baseline_green": false,
+   "seconds": 1.35,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 0,
+   "capability_id": "python.software.repair.route.v1",
+   "baseline_green": false,
+   "seconds": 1.52,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 1,
+   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.54,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 1,
+   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.33,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 1,
+   "capability_id": "python.software.repair.loop.coupled.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.3,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 1,
+   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+   "baseline_green": false,
+   "seconds": 1.4,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 1,
+   "capability_id": "python.software.repair.apply.verified.v1",
+   "baseline_green": false,
+   "seconds": 1.33,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L2_boundary",
+   "instance": 1,
+   "capability_id": "python.software.repair.route.v1",
+   "baseline_green": false,
+   "seconds": 1.57,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L3_interproc",
+   "instance": 0,
+   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.45,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L3_interproc",
+   "instance": 0,
+   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.26,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -312,7 +312,7 @@
    "instance": 0,
    "capability_id": "software.repair.loop.cegis_hypothesis.v1",
    "baseline_green": false,
-   "seconds": 0.82,
+   "seconds": 0.76,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -334,7 +334,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.route.v1",
    "baseline_green": false,
-   "seconds": 0.87,
+   "seconds": 0.85,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -345,7 +345,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.loop.test_guided.ast.v1",
    "baseline_green": false,
-   "seconds": 0.42,
+   "seconds": 0.45,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -355,6 +355,17 @@
    "tier": "L3_interproc",
    "instance": 1,
    "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+   "baseline_green": false,
+   "seconds": 0.21,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L3_interproc",
+   "instance": 1,
+   "capability_id": "python.software.repair.loop.coupled.ast.v1",
    "baseline_green": false,
    "seconds": 0.22,
    "claimed_verified": true,
@@ -365,20 +376,9 @@
   {
    "tier": "L3_interproc",
    "instance": 1,
-   "capability_id": "python.software.repair.loop.coupled.ast.v1",
-   "baseline_green": false,
-   "seconds": 0.23,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L3_interproc",
-   "instance": 1,
    "capability_id": "software.repair.loop.cegis_hypothesis.v1",
    "baseline_green": false,
-   "seconds": 0.79,
+   "seconds": 0.73,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -389,7 +389,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.apply.verified.v1",
    "baseline_green": false,
-   "seconds": 0.74,
+   "seconds": 0.64,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -400,7 +400,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.route.v1",
    "baseline_green": false,
-   "seconds": 0.88,
+   "seconds": 0.84,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -411,7 +411,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.loop.test_guided.ast.v1",
    "baseline_green": false,
-   "seconds": 0.68,
+   "seconds": 0.62,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -422,7 +422,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
    "baseline_green": false,
-   "seconds": 1.4,
+   "seconds": 1.32,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": false,
@@ -433,7 +433,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.loop.coupled.ast.v1",
    "baseline_green": false,
-   "seconds": 7.1,
+   "seconds": 6.43,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -444,7 +444,7 @@
    "instance": 0,
    "capability_id": "software.repair.loop.cegis_hypothesis.v1",
    "baseline_green": false,
-   "seconds": 1.6,
+   "seconds": 1.52,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -455,7 +455,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.apply.verified.v1",
    "baseline_green": false,
-   "seconds": 1.58,
+   "seconds": 1.55,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -466,7 +466,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.route.v1",
    "baseline_green": false,
-   "seconds": 1.76,
+   "seconds": 1.84,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -477,7 +477,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.loop.test_guided.ast.v1",
    "baseline_green": false,
-   "seconds": 0.68,
+   "seconds": 0.66,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -488,7 +488,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
    "baseline_green": false,
-   "seconds": 1.5,
+   "seconds": 1.37,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": false,
@@ -499,7 +499,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.loop.coupled.ast.v1",
    "baseline_green": false,
-   "seconds": 6.83,
+   "seconds": 7.02,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": true,
@@ -510,7 +510,7 @@
    "instance": 1,
    "capability_id": "software.repair.loop.cegis_hypothesis.v1",
    "baseline_green": false,
-   "seconds": 1.77,
+   "seconds": 1.53,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -521,7 +521,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.apply.verified.v1",
    "baseline_green": false,
-   "seconds": 1.67,
+   "seconds": 1.48,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -532,7 +532,7 @@
    "instance": 1,
    "capability_id": "python.software.repair.route.v1",
    "baseline_green": false,
-   "seconds": 1.87,
+   "seconds": 1.72,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -543,7 +543,7 @@
    "instance": 0,
    "capability_id": "python.software.repair.loop.test_guided.ast.v1",
    "baseline_green": false,
-   "seconds": 1.1,
+   "seconds": 1.16,
    "claimed_verified": true,
    "independent_green": false,
    "patch_reported": false,
@@ -564,6 +564,73 @@
   {
    "tier": "L5_coupled",
    "instance": 0,
+   "capability_id": "python.software.repair.loop.coupled.ast.v1",
+   "baseline_green": false,
+   "seconds": 2.44,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": true,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L5_coupled",
+   "instance": 0,
+   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+   "baseline_green": false,
+   "seconds": 2.74,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L5_coupled",
+   "instance": 0,
+   "capability_id": "python.software.repair.apply.verified.v1",
+   "baseline_green": false,
+   "seconds": 2.56,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L5_coupled",
+   "instance": 0,
+   "capability_id": "python.software.repair.route.v1",
+   "baseline_green": false,
+   "seconds": 2.8,
+   "claimed_verified": true,
+   "independent_green": true,
+   "patch_reported": false,
+   "verdict": "REPAIRED"
+  },
+  {
+   "tier": "L5_coupled",
+   "instance": 1,
+   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+   "baseline_green": false,
+   "seconds": 1.04,
+   "claimed_verified": true,
+   "independent_green": false,
+   "patch_reported": false,
+   "verdict": "NOT_REPAIRED_claimed_but_red"
+  },
+  {
+   "tier": "L5_coupled",
+   "instance": 1,
+   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+   "baseline_green": false,
+   "refusal": "RepairLoopError:BASELINE_FAILURE_METRIC_UNPARSEABLE",
+   "seconds": 0.04,
+   "claimed_verified": false,
+   "independent_green": false,
+   "patch_reported": false,
+   "verdict": "NOT_REPAIRED_refused"
+  },
+  {
+   "tier": "L5_coupled",
+   "instance": 1,
    "capability_id": "python.software.repair.loop.coupled.ast.v1",
    "baseline_green": false,
    "seconds": 2.4,
@@ -574,10 +641,10 @@
   },
   {
    "tier": "L5_coupled",
-   "instance": 0,
+   "instance": 1,
    "capability_id": "software.repair.loop.cegis_hypothesis.v1",
    "baseline_green": false,
-   "seconds": 3.16,
+   "seconds": 2.72,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -585,10 +652,10 @@
   },
   {
    "tier": "L5_coupled",
-   "instance": 0,
+   "instance": 1,
    "capability_id": "python.software.repair.apply.verified.v1",
    "baseline_green": false,
-   "seconds": 3.57,
+   "seconds": 2.43,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -596,77 +663,10 @@
   },
   {
    "tier": "L5_coupled",
-   "instance": 0,
+   "instance": 1,
    "capability_id": "python.software.repair.route.v1",
-   "baseline_green": false,
-   "seconds": 3.11,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L5_coupled",
-   "instance": 1,
-   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
-   "baseline_green": false,
-   "seconds": 1.24,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": false,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L5_coupled",
-   "instance": 1,
-   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
-   "baseline_green": false,
-   "refusal": "RepairLoopError:BASELINE_FAILURE_METRIC_UNPARSEABLE",
-   "seconds": 0.04,
-   "claimed_verified": false,
-   "independent_green": false,
-   "patch_reported": false,
-   "verdict": "NOT_REPAIRED_refused"
-  },
-  {
-   "tier": "L5_coupled",
-   "instance": 1,
-   "capability_id": "python.software.repair.loop.coupled.ast.v1",
    "baseline_green": false,
    "seconds": 2.7,
-   "claimed_verified": true,
-   "independent_green": false,
-   "patch_reported": true,
-   "verdict": "NOT_REPAIRED_claimed_but_red"
-  },
-  {
-   "tier": "L5_coupled",
-   "instance": 1,
-   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
-   "baseline_green": false,
-   "seconds": 3.08,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L5_coupled",
-   "instance": 1,
-   "capability_id": "python.software.repair.apply.verified.v1",
-   "baseline_green": false,
-   "seconds": 2.69,
-   "claimed_verified": true,
-   "independent_green": true,
-   "patch_reported": false,
-   "verdict": "REPAIRED"
-  },
-  {
-   "tier": "L5_coupled",
-   "instance": 1,
-   "capability_id": "python.software.repair.route.v1",
-   "baseline_green": false,
-   "seconds": 2.86,
    "claimed_verified": true,
    "independent_green": true,
    "patch_reported": false,
@@ -713,7 +713,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.2
+    "mean_s": 1.1
    },
    "software.repair.loop.cegis_hypothesis.v1": {
     "repair_rate": 1.0,
@@ -721,7 +721,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.0
+    "mean_s": 0.9
    }
   },
   "L2_boundary": {
@@ -731,7 +731,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.4
+    "mean_s": 1.3
    },
    "python.software.repair.loop.coupled.ast.v1": {
     "repair_rate": 0.0,
@@ -747,7 +747,7 @@
     "repaired": 0,
     "patched": 2,
     "runs": 2,
-    "mean_s": 0.4
+    "mean_s": 0.3
    },
    "python.software.repair.loop.test_guided.ast.v1": {
     "repair_rate": 0.0,
@@ -763,7 +763,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.7
+    "mean_s": 1.5
    },
    "software.repair.loop.cegis_hypothesis.v1": {
     "repair_rate": 1.0,
@@ -771,7 +771,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.5
+    "mean_s": 1.4
    }
   },
   "L3_interproc": {
@@ -805,7 +805,7 @@
     "repaired": 0,
     "patched": 2,
     "runs": 2,
-    "mean_s": 0.4
+    "mean_s": 0.5
    },
    "python.software.repair.route.v1": {
     "repair_rate": 1.0,
@@ -813,7 +813,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 0.9
+    "mean_s": 0.8
    },
    "software.repair.loop.cegis_hypothesis.v1": {
     "repair_rate": 1.0,
@@ -821,7 +821,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 0.8
+    "mean_s": 0.7
    }
   },
   "L4_stateful": {
@@ -831,7 +831,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.6
+    "mean_s": 1.5
    },
    "python.software.repair.loop.coupled.ast.v1": {
     "repair_rate": 0.0,
@@ -839,7 +839,7 @@
     "repaired": 0,
     "patched": 2,
     "runs": 2,
-    "mean_s": 7.0
+    "mean_s": 6.7
    },
    "python.software.repair.loop.strict_progress.ast.v1": {
     "repair_rate": 0.0,
@@ -847,7 +847,7 @@
     "repaired": 0,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.4
+    "mean_s": 1.3
    },
    "python.software.repair.loop.test_guided.ast.v1": {
     "repair_rate": 0.0,
@@ -855,7 +855,7 @@
     "repaired": 0,
     "patched": 2,
     "runs": 2,
-    "mean_s": 0.7
+    "mean_s": 0.6
    },
    "python.software.repair.route.v1": {
     "repair_rate": 1.0,
@@ -871,7 +871,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.7
+    "mean_s": 1.5
    }
   },
   "L5_coupled": {
@@ -881,7 +881,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 3.1
+    "mean_s": 2.5
    },
    "python.software.repair.loop.coupled.ast.v1": {
     "repair_rate": 0.0,
@@ -889,7 +889,7 @@
     "repaired": 0,
     "patched": 2,
     "runs": 2,
-    "mean_s": 2.5
+    "mean_s": 2.4
    },
    "python.software.repair.loop.strict_progress.ast.v1": {
     "repair_rate": 0.0,
@@ -905,7 +905,7 @@
     "repaired": 0,
     "patched": 0,
     "runs": 2,
-    "mean_s": 1.2
+    "mean_s": 1.1
    },
    "python.software.repair.route.v1": {
     "repair_rate": 1.0,
@@ -913,7 +913,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 3.0
+    "mean_s": 2.8
    },
    "software.repair.loop.cegis_hypothesis.v1": {
     "repair_rate": 1.0,
@@ -921,7 +921,7 @@
     "repaired": 2,
     "patched": 0,
     "runs": 2,
-    "mean_s": 3.1
+    "mean_s": 2.7
    }
   }
  }

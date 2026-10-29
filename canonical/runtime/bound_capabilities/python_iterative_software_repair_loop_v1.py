@@ -51,12 +51,22 @@ def _files(repo,root,tests,failure):
 def _purge(paths):
  for p in paths:_PATCH._purge_source_bytecode(p)
 def _diff(repo,p,a,b):return ''.join(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),fromfile='a/'+_rel(repo,p),tofile='b/'+_rel(repo,p)))
-def _best(repo,source,tests,argv,timeout,score,limit,touched,env):
+def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None):
  cur=source.read_bytes()
  try:text=cur.decode();tree=ast.parse(text)
  except Exception:return None,0
  nums,strings=_PATCH._test_literals(tests);best=None;tested=0
+ # Traceback-frame-first economics (L6 law, tqdm/9): source-order iteration
+ # spent the whole count budget on early-line trivia of a 3000-line module
+ # before reaching any line the stack names. Near-focus candidates first.
+ fl=set(focus or ())
+ specs=[]
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
+  line=desc.get('lineno') or 0
+  near=1 if not fl else 0 if any(abs(line-f)<=3 for f in fl) else 1
+  specs.append((near,line,key,desc,replacer))
+ specs.sort(key=lambda x:(x[0],x[1]))
+ for near,line,key,desc,replacer in specs:
   if tested>=limit:break
   cand=_PATCH._render_candidate(text,key,replacer)
   if not cand or cand==text:continue
@@ -95,6 +105,12 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if base.get('returncode')==0:raise RepairLoopError('BASELINE_ALREADY_PASSES')
  if score is None:raise RepairLoopError('BASELINE_FAILURE_METRIC_UNPARSEABLE')
  originals={};touched=set();accepted=[];rrecs=[];tested_total=0;final_bytes={};vreplays=[];status='OPEN__NO_COMPLETE_REPAIR_IN_BOUNDED_SEARCH';current=base
+ _focus={}
+ for _f,_n in re.findall(r'File "([^"]+\.py)", line (\d+)',_text(base)):
+  _q=pathlib.Path(_f);_q=_q if _q.is_absolute() else repo/_q
+  try:_k=_rel(repo,_q)
+  except Exception:continue
+  _focus.setdefault(_k,set()).add(int(_n))
  try:
   for ri in range(1,rounds_max+1):
    if not _wall_left():status='OPEN__WALL_DEADLINE_EXHAUSTED';break
@@ -103,7 +119,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
     if not _wall_left():status='OPEN__WALL_DEADLINE_EXHAUSTED';break
     rem=total_max-tested_total
     if rem<=0:break
-    cand,n=_best(repo,source,tests,argv,cand_timeout,score,min(per,rem),touched,env);tested_total+=n;round_tested+=n
+    cand,n=_best(repo,source,tests,argv,cand_timeout,score,min(per,rem),touched,env,focus=_focus.get(_rel(repo,source)));tested_total+=n;round_tested+=n
     if cand is not None:
      best=cand
      break
