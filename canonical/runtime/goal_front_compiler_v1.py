@@ -2734,9 +2734,31 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
                 or _catch_all_was_handed_a_contract(text, registry[c[2]], root))
         ]
         # F3: a goal that names a file to be produced is served by a tool that can write a file
+        #
+        # F3 MUST NOT OUTRULE THE VERB THE SENTENCE USES.  Measured: "Verify the tar.gz archive
+        # <A> against the manifest <M> with gnu tar." ranks `archive.verify.tar_gz.gnu` FIRST at
+        # 63 -- the verifier does not write a file, it returns a verdict about files that already
+        # exist -- and F3, reading the two INPUT paths as things to be produced, restricted the
+        # pool to artifact writers and handed the request to `archive.tar_gz.create_from_manifest`
+        # at 47.  The end-to-end archive-verification family therefore scored 0 of 3 with every
+        # route on the CREATOR: the machine was asked to check an archive and built a new one.
+        #
+        # The escape is the same law the ranking uses, not a new one: when the sentence's own head
+        # verb is an act the best-ranked candidate DECLARES, that candidate is what was asked for,
+        # and a lower-ranked writer cannot take the request from it.  A verifier is exactly the
+        # shape this matters for -- it has no output keys -- so the rule is written in those
+        # terms and cannot lift an arbitrary non-writer over a writer the sentence asked for.
+        outranking_act = None
+        if selectable and not _output_keys(registry[selectable[0][2]]):
+            _verb = gc._head_verb(text)
+            if _verb and _verb in gc._declared_act_words(registry[selectable[0][2]]):
+                outranking_act = selectable[0]
         preferred = [c for c in selectable if _output_keys(registry[c[2]])] if future else []
-        if future and preferred:
+        if future and preferred and outranking_act is None:
             rules.append("F3_ARTIFACT_WRITERS_PREFERRED")
+        elif outranking_act is not None:
+            preferred = [outranking_act]
+            rules.append("F3_NOT_APPLIED__THE_SENTENCE_NAMES_THE_ACT_THE_BEST_CANDIDATE_DECLARES")
         pool = preferred or selectable
         best = pool[0] if pool else None
         if best is not None and selected != best[2]:

@@ -1781,9 +1781,30 @@ def _declared_act_words(entry):
     """
     out = set()
     for value in (entry.get("provides") or []):
-        segments = [seg for seg in re.split(r"[^a-z0-9]+", str(value).lower()) if seg]
+        text = str(value).lower()
+        segments = [seg for seg in re.split(r"[^a-z0-9]+", text) if seg]
         if segments:
             out.add(segments[-1])
+        # A SEGMENT THAT IS A PHRASE DECLARES ITS VERB, NOT ONLY ITS LAST NOUN.
+        #
+        # `archive.verify.tar_gz.verify_manifest_members` splits to its last token,
+        # "members", so the one capability whose whole job is to VERIFY declared the act
+        # "members" and nothing else.  Measured: the end-to-end archive-verification family
+        # scored 0 of 2 and its route was `archive.tar_gz.create_from_manifest` -- a sentence
+        # built from the verifier's own declarations says "members", and the creator answers
+        # it.  On a sentence a person writes the verifier wins cleanly, 64 against 50, which is
+        # why this is a DECLARATION defect and not a ranking one.
+        #
+        # Reading every token of the final segment fixes the class (71 of 459 entries declare a
+        # snake_case phrase) without touching a registry byte: "verify_manifest_members" now
+        # declares verify, manifest and members; "create_from_manifest" declares create,
+        # from (dropped as a stop word) and manifest.  The head-verb bonus still demands that
+        # the sentence match something else in the entry, so a capability merely named after a
+        # verb still collects nothing.
+        last_segment = [part for part in text.split(".") if part]
+        for token in re.split(r"[^a-z0-9]+", last_segment[-1] if last_segment else ""):
+            if token and len(token) > 2 and token not in STOPWORDS:
+                out.add(token)
     return out
 
 

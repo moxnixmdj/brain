@@ -62,6 +62,36 @@ digest (`measurement_program_sha256`) and a schema. Re-inspection is a second, i
 artifact against its schema — no new engine, no model. The lane exists for few capabilities; it must
 exist for every capability that claims `output_verified`.
 
+**TWO OF THE THREE P0 MEASUREMENTS HAVE SINCE BEEN FIXED, both by reusing what was already there:**
+
+1. **The verifier did not declare the act it performs.** `_declared_act_words` read the LAST TOKEN of a
+   `provides` value, so `archive.tar_gz.verify_manifest_members` declared the act `members` —
+   a noun — and nothing else. A sentence built from the verifier's own declaration therefore said
+   "members", and the archive *creator* answered it. The rule now reads every token of the final
+   segment (71 of 459 entries declare a snake_case phrase), so the verifier declares
+   **verify / manifest / members** and the creator declares **create / manifest**. Benchmark 22/23 and
+   reachability 454 / 3 / 1 / 1 both held exactly.
+2. **F3 preferred an artifact writer over the act the sentence named.** In the front door, a goal that
+   names files is served only by candidates with output keys — and the verifier, which writes no file,
+   was dropped from the pool while the two INPUT paths were read as things to be produced. Ranked
+   first at 63, the verifier lost to a creator at 47. F3 now does not fire when the sentence's own head
+   verb is an act the best-ranked candidate DECLARES
+   (`F3_NOT_APPLIED__THE_SENTENCE_NAMES_THE_ACT_THE_BEST_CANDIDATE_DECLARES`).
+
+   Measured on the artefact family, four instances: **0 of 3 with every route on the creator → 3 of 4
+   on the verifier.** The front-door selection rate pin still holds (21 of 23) and the parity suite is
+   27 green.
+
+**The residual is the same law one step out, and it is the next unit.** The family draws four real
+phrasings; *"Verify …"* now routes correctly, *"Check the tar.gz archive …"* and *"Audit the tar.gz
+archive …"* still route to the creator, because the verifier declares the act `verify` and not its
+synonyms. That is "one act, one owner" applied to VERBS, and it belongs in one declared place rather
+than in four capability entries.
+
+**One measurement caveat.** A whole-corpus run at 2 instances per family is not a rate: in the same
+run `JSON_QUERY_JQ` scored 0 of 2 while a direct reproduction of that exact family goal passes and
+routes to `json.query.jq`. Quote a family at n≥4 or not at all.
+
 ### P1 — CORRECTED: multi-step composition works; a missing dependency was being called an invalid result
 
 The first version of this document said the executor's result contract was broken. It was not. Running the
