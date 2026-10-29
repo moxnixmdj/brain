@@ -574,6 +574,11 @@ def run(args: Mapping[str, Any], root: str | Path) -> dict[str, Any]:
     z3_result = {'z3_available': _z3_available(), 'verified': False, 'reason': 'NO_PATCH_TO_VERIFY'}
     counterexamples: list[dict[str, Any]] = []
 
+    # patched_source_p defined outside the `if verified` block so the CEGIS
+    # loop can reference it even when Phase 1 didn't produce a verified patch.
+    patched_source_p = None
+    patched_source = None
+
     if verified:
         # Read patched source from worktree
         worktree_p = Path(worktree_rel)
@@ -583,7 +588,7 @@ def run(args: Mapping[str, Any], root: str | Path) -> dict[str, Any]:
         patched_source_p = worktree_p / source_p.name
         if patched_source_p.is_file():
             patched_source = patched_source_p.read_text(encoding='utf-8')
-            z3_result = _z3_verify_patch(patched_source)
+            z3_result = _z3_verify_patch(original_source, patched_source)
             if not z3_result.get('verified'):
                 counterexamples = z3_result.get('counterexamples', [])
                 verified = False
@@ -601,6 +606,11 @@ def run(args: Mapping[str, Any], root: str | Path) -> dict[str, Any]:
         # source module (not hardcoded) and asserts correct behavior.
         source_module = source_p.stem
         source_dir = str(source_p.parent.relative_to(repo)) if source_p.parent != repo else "."
+
+        # Define ce_test_path before writing — inside repo boundary, inside
+        # canonical/tmp so relative_to(repo) never fails.
+        ce_test_path = (repo / "canonical" / "tmp_cegis_counterexample_test.py").resolve()
+        ce_test_path.parent.mkdir(parents=True, exist_ok=True)
 
         test_lines = [
             'import sys',

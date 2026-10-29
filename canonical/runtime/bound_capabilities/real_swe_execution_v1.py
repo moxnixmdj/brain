@@ -2849,7 +2849,10 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
             except SyntaxError:
                 pass
 
-        # Synthesize each function from ALL test examples across all test files
+        # Synthesize each function from ALL test examples across all test files.
+        # Gather examples from every test file first, then do a single synthesis
+        # with the combined example set — more constraints = more likely to find
+        # the correct closed form (not just one that happens to match one file).
         _orig_source_text = source_text
         current_source = source_text
         synthesized_any = False
@@ -2866,20 +2869,77 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
             except SyntaxError:
                 continue
 
-            # Gather examples for this func from all test texts
-            # _synthesize_from_spec takes one test_text; combine by running per-test
-            best_result = None
+            # Gather ALL examples for this func from ALL test texts
+            all_examples: list[dict] = []
+            seen = set()
             for tt in test_texts:
-                result = _synthesize_from_spec(
-                    current_source, tt, func_name, repo, timeout_s=min(timeout_s, 30)
-                )
-                if result is not None:
-                    best_result = result
-                    break  # first synthesis that works for this func
+                for ex in _extract_io_examples(tt, func_name):
+                    # Recursively convert args to hashable form (tuples instead of lists)
+                    def _hashable(v):
+                        if isinstance(v, list):
+                            return tuple(_hashable(e) for e in v)
+                        return v
+                    key = (tuple(_hashable(a) for a in ex["args"]), ex["expected"])
+                    if key not in seen:
+                        seen.add(key)
+                        all_examples.append(ex)
+            if not all_examples:
+                continue
 
-            if best_result is not None:
-                current_source = best_result
-                synthesized_any = True
+            # Try closed-form synthesis with all combined examples
+            try:
+                tree = ast.parse(current_source)
+            except SyntaxError:
+                continue
+
+            target_func = None
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef) and node.name == func_name:
+                    target_func = node
+                    break
+            if target_func is None:
+                continue
+
+            param_names = [a.arg for a in target_func.args.args]
+            if not param_names:
+                continue
+
+            new_func_text = None
+
+            # Phase 1: Closed-form synthesis via Z3 program sketching
+            new_func_text = _synthesize_closed_form(
+                func_name, param_names, all_examples, timeout_s=min(timeout_s, 30)
+            )
+
+            # Phase 2: Generalize lookup table into closed form
+            if new_func_text is None:
+                new_func_text = _generalize_lookup_table(
+                    func_name, param_names, all_examples, timeout_s=min(timeout_s, 30)
+                )
+
+            # Phase 3: Fall back to decision-tree lookup table (scalar only)
+            if new_func_text is None:
+                has_non_scalar = any(
+                    any(not isinstance(a, (int, float, bool, str)) for a in ex["args"])
+                    or not isinstance(ex["expected"], (int, float, bool, str))
+                    for ex in all_examples
+                )
+                if not has_non_scalar:
+                    new_func_text = _build_lookup_table(
+                        func_name, param_names, all_examples
+                    )
+
+            if new_func_text is None:
+                continue
+
+            # Replace the function in the source
+            start_line = target_func.lineno - 1  # 0-based
+            end_line = (target_func.end_lineno or target_func.lineno)  # 1-based exclusive
+
+            source_lines = current_source.splitlines(keepends=True)
+            new_lines = source_lines[:start_line] + [new_func_text] + source_lines[end_line:]
+            current_source = "".join(new_lines)
+            synthesized_any = True
 
         if synthesized_any and current_source != source_text:
             # Build unified diff for the combined synthesized patch
@@ -3768,9 +3828,12 @@ def _run_tests_plain(repo: Path, source_path: Path, test_paths: list[Path],
     env["PYTHONPATH"] = os.pathsep.join(py_parts)
     _lang = _detect_language(source_path)
     argv = _test_command(_lang, *[str(tp) for tp in test_paths])
+    # CRITICAL: run from source_path.parent (not repo) so multi-file projects
+    # with source files outside the repo root still resolve imports correctly.
+    cwd = str(source_path.parent)
     try:
         proc = subprocess.run(
-            argv, cwd=str(repo), capture_output=True, text=True,
+            argv, cwd=cwd, capture_output=True, text=True,
             timeout=timeout_s, env=env,
         )
         return {"returncode": proc.returncode, "stdout": proc.stdout,
@@ -4352,7 +4415,9 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
             "stage": "dual_oracle",
         })
         # Apply the diff to a temp copy to get the patched source for oracle check.
-        _copy_tree(source_root_p, worktree_p)
+        # Copy only the source file's parent directory (not the entire repo root)
+        # to avoid copying 1M+ files for large repositories.
+        _copy_tree(source_p.parent, worktree_p)
         diff_file = worktree_p / ".swe-patch.diff"
         diff_file.write_text(best_diff, encoding="utf-8")
         try:
@@ -4367,7 +4432,8 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                 )
                 if apply.returncode == 0:
                     # Run dual-oracle on the patched source file.
-                    patched_source = worktree_p / source_p.relative_to(source_root_p)
+                    # Worktree now mirrors source_p.parent, so path is worktree/source_p.name.
+                    patched_source = worktree_p / source_p.name
                     oracle_result = verify_with_dual_oracle(
                         patched_source, test_ps, repo, timeout_s=min(timeout_s, 60))
                     if not oracle_result.get("verified", False):
@@ -4388,7 +4454,8 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                 pass
 
     # Stage 3: Apply to worktree.
-    _copy_tree(source_root_p, worktree_p)
+    # Copy only the source file's parent directory (not the entire repo root).
+    _copy_tree(source_p.parent, worktree_p)
     applied_op_count = 0
     if best_diff:
         diff_file = worktree_p / ".swe-patch.diff"
@@ -4429,14 +4496,14 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         # Write the unified diff to disk before running gates — gates need
         # the diff artifact on disk to analyze changed lines.
         diff_p.parent.mkdir(parents=True, exist_ok=True)
-        full_diff = _unified_diff(source_root_p, worktree_p)
+        full_diff = _unified_diff(source_p.parent, worktree_p)
         diff_p.write_text(full_diff, encoding="utf-8")
 
         _progress_adapter.stage_progress(gid, "end_to_end_repair", 3, 5, {
             "stage": "advanced_gates",
         })
 
-        patched_source_wt = worktree_p / source_p.relative_to(source_root_p)
+        patched_source_wt = worktree_p / source_p.name
         wt_rel = str(worktree_p.relative_to(repo))
         diff_rel = str(diff_p.relative_to(repo))
 
@@ -4537,7 +4604,7 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         if enable_perf_gate and bench_path:
             def _perf_fn():
                 result = _perf_gate_run({
-                    "anchor_path": str(source_root_p.relative_to(repo)),
+                    "anchor_path": str(source_p.parent.relative_to(repo)),
                     "diff_path": diff_rel,
                     "bench_path": str(
                         ((repo / bench_path) if not Path(bench_path).is_absolute()
@@ -4562,7 +4629,7 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         if enable_coverage_gate:
             def _coverage_fn():
                 result = _coverage_gate_run({
-                    "anchor_path": str(source_root_p.relative_to(repo)),
+                    "anchor_path": str(source_p.parent.relative_to(repo)),
                     "diff_path": diff_rel,
                     "output_path": str((worktree_p / ".swe_coverage_gate.json").relative_to(repo)),
                     "python_executable": sys.executable,
@@ -4581,7 +4648,7 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         if enable_mutation_gate:
             def _mutation_fn():
                 result = _mutation_gate_run({
-                    "anchor_path": str(source_root_p.relative_to(repo)),
+                    "anchor_path": str(source_p.parent.relative_to(repo)),
                     "diff_path": diff_rel,
                     "output_path": str((worktree_p / ".swe_mutation_gate.json").relative_to(repo)),
                     "python_executable": sys.executable,
@@ -4625,7 +4692,7 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                         "reason": "Z3_NOT_AVAILABLE",
                         "z3_available": False,
                     }
-                patched_source_wt_check = worktree_p / source_p.relative_to(source_root_p)
+                patched_source_wt_check = worktree_p / source_p.name
                 if patched_source_wt_check.is_file():
                     patched_source = patched_source_wt_check.read_text(encoding="utf-8")
                     original_source = source_p.read_text(encoding="utf-8") if source_p.is_file() else ""
@@ -4645,12 +4712,13 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                 }
             gate_defs.append(("z3_formal", True, True, _z3_fn))
 
-        # Run all gates in parallel
-        with ThreadPoolExecutor(max_workers=len(gate_defs)) as gate_pool:
-            futures = [gate_pool.submit(_run_single_gate, name, en, bl, fn)
-                       for name, en, bl, fn in gate_defs]
-            for fut in as_completed(futures):
-                fut.result()  # exceptions already caught inside _run_single_gate
+        # Run all gates in parallel (skip if no gates enabled)
+        if gate_defs:
+            with ThreadPoolExecutor(max_workers=len(gate_defs)) as gate_pool:
+                futures = [gate_pool.submit(_run_single_gate, name, en, bl, fn)
+                           for name, en, bl, fn in gate_defs]
+                for fut in as_completed(futures):
+                    fut.result()  # exceptions already caught inside _run_single_gate
 
         # Report individual gate progress
         for gname, result in gate_results.items():
@@ -4683,11 +4751,11 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
     _progress_adapter.stage_progress(gid, "end_to_end_repair", 4, 5, {
         "stage": "test_gate",
     })
-    full_diff = _unified_diff(source_root_p, worktree_p)
+    full_diff = _unified_diff(source_p.parent, worktree_p)
     diff_p.parent.mkdir(parents=True, exist_ok=True)
     diff_p.write_text(full_diff, encoding="utf-8")
 
-    gate_result = full_test_gate(source_root_p, diff_p, output_p, timeout_s=timeout_s)
+    gate_result = full_test_gate(source_p.parent, diff_p, output_p, timeout_s=timeout_s)
     gate = gate_result.get("gate", "FAIL")
     tests_passed = gate_result.get("tests_passed", 0)
     tests_failed = gate_result.get("tests_failed", 0)
