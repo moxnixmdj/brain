@@ -1914,7 +1914,48 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
         if score > 0:
             out.append((score, specificity, cid, evidence))
     named_tokens = gc._tokens(prose_only(goal))
-    out.sort(key=lambda x: (not _named_by_its_own_name(named_tokens, x[2]), -x[0], -x[1], x[2]))
+    # A NAME IS ITS ACT AND ITS OBJECT.  THE NAME RULE MAY NOT READ HALF OF ONE.
+    #
+    # `_name_words` drops the verb segment, so the "whole name" of
+    # `archive.tar_gz.create_from_manifest` is {archive, tar, gz, manifest} -- the OBJECT only.
+    # A sentence that shares that object while using a different verb was therefore counted as
+    # stating the capability's whole name and pinned ABOVE the capability that declares the verb
+    # the sentence uses: "Verify the tar.gz archive A against the manifest M." ranked
+    # `archive.tar_gz.create_from_manifest` (47) first and `archive.verify.tar_gz.gnu` (61)
+    # second, and the front door answered the check by building a new archive.  The pinned score
+    # had already picked the verifier; the name rule inverted it.
+    #
+    # The head verb of a sentence names the ACT.  When it names one that this candidate does not
+    # declare, the sentence has not named this candidate -- it named its object and somebody
+    # else's verb. Two other cases are untouched: a sentence with no act verb ("Run the python
+    # quality coverage ...") keeps the old rule, and a sentence whose verb the candidate DOES
+    # declare is still named on object words alone.
+    _head_verb = gc._head_verb(prose_only(goal))
+    # A RIVAL THAT OWNS THE SENTENCE'S VERB AND OUTSCORES YOU MEANS THE SENTENCE NAMED ITS OBJECT,
+    # NOT YOU.  The competitor's own declared act is the test, and only a candidate that
+    # OUTSCORES this one can strip its name -- so a name pin never survives at the cost of a
+    # better-scoring answer, and a capability that is itself the best answer to its own sentence
+    # keeps its pin.  Two measured shapes this must NOT touch: the reachability sentence
+    # "Use ambiguity bound existing goal grounding plain registry stdlib ..." opens with a
+    # keyword, not a verb, and nothing declares "ambiguity"; and `python.repo.pr_realize.v1`
+    # (72) opens "Use branch commit ... verify ..." over `vcs.git.branch_list.v1` (36), which
+    # declares the word but cannot outscore it.
+    _rivals: dict[str, int] = {}
+    if _head_verb:
+        for row in out:
+            entry = registry.get(row[2]) or {}
+            if _head_verb in gc._declared_act_words(entry):
+                _rivals[row[2]] = row[0]
+
+    def _named(row):
+        cid = row[2]
+        if not _named_by_its_own_name(named_tokens, cid):
+            return False
+        if not _head_verb or cid in _rivals:
+            return True
+        return not any(score > row[0] for score in _rivals.values())
+
+    out.sort(key=lambda x: (not _named(x), -x[0], -x[1], x[2]))
     if out:
         return out
     # A request whose every distinctive word is a VALUE carries no prose to rank on.

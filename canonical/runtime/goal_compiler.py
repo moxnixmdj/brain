@@ -1755,6 +1755,32 @@ def _artifact_write_tokens(goal):
     return out
 
 
+# ONE ACT, ONE OWNER -- and one act has MANY SPELLINGS.
+#
+# The registry names an act once, in the capability that performs it: the archive
+# verification family is declared `archive.tar_gz.verify_manifest_members`, so its
+# act words are verify, manifest and members. A person asking for the same thing
+# writes "Check the bundle against its manifest" or "Audit the archive against the
+# manifest" -- and NOTHING in the machine knew that check and audit name the act
+# `verify`, so those sentences went to `archive.tar_gz.create_from_manifest`.
+# Measured head-verb routes on the ARCHIVE_VERIFY_GNU family: verb `verify` reaches
+# the verifier, `check` and `audit` reach the creator; the family scored 4 of 6.
+#
+# This is a declaration, not an inference: each line says these spellings name the
+# SAME act, and it is applied only to capabilities that already declare the act in
+# the left column -- it can never hand an act to a capability that does not own it.
+# The table is deliberately tiny: every line here is one a measured miss needed.
+_ACT_SYNONYMS={
+    "verify": ("check", "audit", "inspect", "validate", "confirm"),
+}
+
+# act word -> every spelling of that act, including the act itself
+_ACT_SPELLINGS={}
+for _act, _synonyms in _ACT_SYNONYMS.items():
+    _ACT_SPELLINGS.setdefault(_act, set()).add(_act)
+    for _syn in _synonyms:
+        _ACT_SPELLINGS.setdefault(_act, set()).add(_syn)
+
 # A sentence may open with a word that is not the act ("Please ...", "The ...").
 # Those never name a capability, so the head-verb rule simply does not fire.
 _NON_ACT_TOKENS=frozenset({"please","the","a","an","i","we","you","it","this","that",
@@ -1805,6 +1831,12 @@ def _declared_act_words(entry):
         for token in re.split(r"[^a-z0-9]+", last_segment[-1] if last_segment else ""):
             if token and len(token) > 2 and token not in STOPWORDS:
                 out.add(token)
+    # The other spellings of an act this entry declares. A capability that declares
+    # `verify` is the owner of `check` and `audit` too -- see `_ACT_SYNONYMS`. The
+    # expansion is one-directional and act-bound: it can only add spellings for an act
+    # the entry already declares, so no capability acquires an act it does not own.
+    for act in tuple(out):
+        out |= _ACT_SPELLINGS.get(act, set())
     return out
 
 
