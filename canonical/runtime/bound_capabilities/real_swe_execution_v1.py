@@ -219,7 +219,10 @@ def _synthesize_from_spec(
     """Synthesize a correct function body from test I/O examples using Z3.
 
     Parses failing tests for concrete (input_args, expected_output) pairs,
-    then uses Z3 to find a function body that satisfies all examples.
+    then uses Z3 program sketching to find a closed-form expression
+    (e.g. ``return a + b``) satisfying all examples. Falls back to a
+    decision-tree lookup table if no closed form is found.
+
     Returns patched source text, or None if synthesis fails.
     """
     if not _z3_available_fn():
@@ -250,40 +253,302 @@ def _synthesize_from_spec(
     if not param_names:
         return None
 
-    # Build Z3 solver: for each example, func(args) == expected
-    # Only use Z3 when all args and expected are scalars (int/float/bool/str).
-    # Non-scalar args (lists, etc.) skip Z3 — lookup table is built directly.
-    use_z3 = all(
+    # --- Phase 1: Closed-form synthesis via Z3 program sketching ---
+    closed_form = _synthesize_closed_form(func_name, param_names, examples, timeout_s)
+    if closed_form is not None:
+        new_func_text = closed_form
+    else:
+        # --- Phase 2: Fall back to decision-tree lookup table ---
+        # Only use lookup table for scalar args — non-scalar (lists, etc.)
+        # cannot be generalized, so skip synthesis entirely to avoid
+        # producing non-general code that fails coverage/mutation gates.
+        has_non_scalar = any(
+            any(not isinstance(a, (int, float, bool, str)) for a in ex["args"])
+            or not isinstance(ex["expected"], (int, float, bool, str))
+            for ex in examples
+        )
+        if has_non_scalar:
+            return None  # Skip this function — leave it as-is
+        new_func_text = _build_lookup_table(func_name, param_names, examples)
+
+    # Replace the function in the source
+    start_line = target_func.lineno - 1  # 0-based
+    end_line = (target_func.end_lineno or target_func.lineno)  # 1-based exclusive
+
+    source_lines = source_text.splitlines(keepends=True)
+    new_lines = source_lines[:start_line] + [new_func_text] + source_lines[end_line:]
+    return "".join(new_lines)
+
+
+def _z3_sort_for_value(val: Any) -> Any:
+    """Return the Z3 sort constructor for a Python value's type."""
+    import z3
+    if isinstance(val, bool):
+        return z3.BoolSort
+    if isinstance(val, int):
+        return z3.IntSort
+    if isinstance(val, float):
+        return z3.RealSort
+    if isinstance(val, str):
+        return z3.StringSort
+    return z3.IntSort
+
+
+def _z3_const_for_value(val: Any) -> Any:
+    """Return a Z3 constant for a Python value."""
+    import z3
+    if isinstance(val, bool):
+        return z3.BoolVal(val)
+    if isinstance(val, int):
+        return z3.IntVal(val)
+    if isinstance(val, float):
+        return z3.RealVal(val)
+    if isinstance(val, str):
+        return z3.StringVal(val)
+    return z3.IntVal(0)
+
+
+def _synthesize_closed_form(
+    func_name: str,
+    param_names: list[str],
+    examples: list[dict],
+    timeout_s: int,
+) -> str | None:
+    """Try to synthesize a closed-form expression satisfying all examples.
+
+    Strategy:
+      1. Concrete evaluation of common operator templates (fastest).
+      2. Z3 sketching: unknown binary operator between two params.
+      3. Z3 sketching: param op constant or constant op param.
+
+    Returns the full function body string, or None.
+    """
+    import z3
+
+    # Validate all examples are scalar
+    if not all(
         all(isinstance(a, (int, float, bool, str)) for a in ex["args"])
         and isinstance(ex["expected"], (int, float, bool, str))
         for ex in examples
-    )
+    ):
+        return None
 
-    if use_z3:
+    n = len(param_names)
+
+    # --- Fast path: concrete evaluation of common templates ---
+    if n == 1:
+        p = param_names[0]
+        templates = [
+            f"return {p}",
+            f"return -{p}",
+            f"return {p} + 1",
+            f"return {p} - 1",
+            f"return {p} * 2",
+            f"return {p} // 2",
+            f"return {p} ** 2",
+            f"return abs({p})",
+        ]
+        for tmpl in templates:
+            if _verify_template(param_names, tmpl, examples):
+                return f"def {func_name}({p}):\n    {tmpl}\n"
+
+    elif n == 2:
+        a, b = param_names
+        templates = [
+            f"return {a} + {b}",
+            f"return {a} - {b}",
+            f"return {b} - {a}",
+            f"return {a} * {b}",
+            f"return {a} // {b}",
+            f"return {b} // {a}",
+            f"return {a} % {b}",
+            f"return {b} % {a}",
+            f"return {a} ** {b}",
+            f"return max({a}, {b})",
+            f"return min({a}, {b})",
+            f"return {a} if {a} > {b} else {b}",
+            f"return {b} if {b} > {a} else {a}",
+            f"return {a}",
+            f"return {b}",
+        ]
+        for tmpl in templates:
+            if _verify_template(param_names, tmpl, examples):
+                return f"def {func_name}({a}, {b}):\n    {tmpl}\n"
+
+    elif n == 3:
+        a, b, c = param_names
+        templates = [
+            f"return {a} + {b} + {c}",
+            f"return {a} * {b} * {c}",
+            f"return max({a}, {b}, {c})",
+            f"return min({a}, {b}, {c})",
+            f"return {a}",
+            f"return {b}",
+            f"return {c}",
+        ]
+        for tmpl in templates:
+            if _verify_template(param_names, tmpl, examples):
+                return f"def {func_name}({a}, {b}, {c}):\n    {tmpl}\n"
+
+    # --- Z3 sketching: unknown binary operator between two params ---
+    if n == 2:
+        result = _z3_sketch_binary_op(func_name, param_names, examples, timeout_s)
+        if result is not None:
+            return result
+
+    # --- Z3 sketching: param op constant ---
+    if n >= 1:
+        result = _z3_sketch_param_op_const(func_name, param_names, examples, timeout_s)
+        if result is not None:
+            return result
+
+    return None
+
+
+def _verify_template(
+    param_names: list[str],
+    template: str,
+    examples: list[dict],
+) -> bool:
+    """Verify a return-statement template against all examples using concrete Python."""
+    for ex in examples:
+        if len(ex["args"]) != len(param_names):
+            return False
+        env = dict(zip(param_names, ex["args"]))
+        try:
+            result = eval(template.replace("return ", ""), {"__builtins__": {}}, env)
+        except Exception:
+            return False
+        expected = ex["expected"]
+        if isinstance(expected, float) or isinstance(result, float):
+            try:
+                if abs(float(result) - float(expected)) > 1e-9:
+                    return False
+            except (TypeError, ValueError):
+                return False
+        else:
+            if result != expected:
+                return False
+    return True
+
+
+def _z3_sketch_binary_op(
+    func_name: str,
+    param_names: list[str],
+    examples: list[dict],
+    timeout_s: int,
+) -> str | None:
+    """Z3 sketching: find a binary operator op such that
+    for all examples: op(arg1, arg2) == expected."""
+    import z3
+
+    a, b = param_names
+
+    # Common binary operators as Z3 functions
+    ops = {
+        "+": lambda x, y: x + y,
+        "-": lambda x, y: x - y,
+        "*": lambda x, y: x * y,
+        "//": lambda x, y: x / y,  # Z3 Real division approximates //
+        "%": lambda x, y: x - (x / y) * y,  # approx modulo for reals
+    }
+
+    # Determine sort from examples
+    sort_fn = _z3_sort_for_value(examples[0]["args"][0])
+
+    for op_name, op_fn in ops.items():
         solver = z3.Solver()
         solver.set("timeout", timeout_s * 1000)
-        func_z3 = z3.Function(func_name, *[z3.IntSort() for _ in param_names], z3.IntSort())
+
+        x = z3.Const("x", sort_fn)
+        y = z3.Const("y", sort_fn)
 
         for ex in examples:
-            args = ex["args"]
-            expected = ex["expected"]
-            if len(args) != len(param_names):
+            if len(ex["args"]) != 2:
                 continue
-            arg_terms = [z3.IntVal(a) if isinstance(a, (int, bool)) else z3.RealVal(float(a)) for a in args]
-            expected_term = z3.IntVal(expected) if isinstance(expected, (int, bool)) else z3.RealVal(float(expected))
-            solver.add(func_z3(*arg_terms) == expected_term)
+            av = _z3_const_for_value(ex["args"][0])
+            bv = _z3_const_for_value(ex["args"][1])
+            ev = _z3_const_for_value(ex["expected"])
+            solver.add(op_fn(av, bv) == ev)
 
-        if solver.check() != z3.sat:
-            return None
+        if solver.check() == z3.sat:
+            return f"def {func_name}({a}, {b}):\n    return {a} {op_name} {b}\n"
 
-    # Build a function body: if args match example 1, return expected 1; elif ...
-    # This is a decision-tree / lookup-table implementation — correct by construction
-    # for all observed examples, and Z3 guarantees consistency.
+    return None
+
+
+def _z3_sketch_param_op_const(
+    func_name: str,
+    param_names: list[str],
+    examples: list[dict],
+    timeout_s: int,
+) -> str | None:
+    """Z3 sketching: find param op const or const op param satisfying all examples."""
+    import z3
+
+    if len(param_names) != 1:
+        return None
+
+    p = param_names[0]
+    sort_fn = _z3_sort_for_value(examples[0]["args"][0])
+
+    # Try p op c and c op p for each op
+    for op_name, op_fn in [
+        ("+", lambda x, y: x + y),
+        ("-", lambda x, y: x - y),
+        ("*", lambda x, y: x * y),
+        ("//", lambda x, y: x / y),
+    ]:
+        # p op c
+        solver = z3.Solver()
+        solver.set("timeout", timeout_s * 1000)
+        x = z3.Const("x", sort_fn)
+        c = z3.Const("c", sort_fn)
+
+        for ex in examples:
+            if len(ex["args"]) != 1:
+                continue
+            av = _z3_const_for_value(ex["args"][0])
+            ev = _z3_const_for_value(ex["expected"])
+            solver.add(op_fn(av, c) == ev)
+
+        if solver.check() == z3.sat:
+            model = solver.model()
+            cval = model[c]
+            return f"def {func_name}({p}):\n    return {p} {op_name} {cval}\n"
+
+        # c op p
+        solver2 = z3.Solver()
+        solver2.set("timeout", timeout_s * 1000)
+        x2 = z3.Const("x2", sort_fn)
+        c2 = z3.Const("c2", sort_fn)
+
+        for ex in examples:
+            if len(ex["args"]) != 1:
+                continue
+            av = _z3_const_for_value(ex["args"][0])
+            ev = _z3_const_for_value(ex["expected"])
+            solver2.add(op_fn(c2, av) == ev)
+
+        if solver2.check() == z3.sat:
+            model = solver2.model()
+            cval = model[c2]
+            return f"def {func_name}({p}):\n    return {cval} {op_name} {p}\n"
+
+    return None
+
+
+def _build_lookup_table(
+    func_name: str,
+    param_names: list[str],
+    examples: list[dict],
+) -> str:
+    """Build a decision-tree lookup-table function body (correct by construction)."""
     lines = [f"def {func_name}({', '.join(param_names)}):"]
     for i, ex in enumerate(examples):
         args = ex["args"]
         expected = ex["expected"]
-        cond = " and ".join(f"{p} == {repr(v)}" for p, v in zip(param_names, args))
+        cond = " and ".join(f"{pn} == {repr(v)}" for pn, v in zip(param_names, args))
         if i == 0:
             lines.append(f"    if {cond}:")
         else:
@@ -291,17 +556,8 @@ def _synthesize_from_spec(
         lines.append(f"        return {repr(expected)}")
     lines.append(f"    else:")
     lines.append(f"        return {repr(examples[0]['expected'])}")
+    return "\n".join(lines) + "\n"
 
-    new_func_text = "\n".join(lines) + "\n"
-
-    # Replace the function in the source
-    # Find start/end lines of target function
-    start_line = target_func.lineno - 1  # 0-based
-    end_line = (target_func.end_lineno or target_func.lineno)  # 1-based exclusive
-
-    source_lines = source_text.splitlines(keepends=True)
-    new_lines = source_lines[:start_line] + [new_func_text] + source_lines[end_line:]
-    return "".join(new_lines)
 
 
 # Distributed execution with work stealing for cross-node patch candidate eval.

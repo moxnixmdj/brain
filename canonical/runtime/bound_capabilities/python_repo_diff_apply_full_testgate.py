@@ -407,33 +407,28 @@ def run(args, root):
                         ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
         # Check and apply the same captured bytes, rather than reopening a path
         # that may have changed between the two operations.
-        check = subprocess.run(["git", "apply", "--check", "-"], input=diff_bytes,
+        # Use GNU patch instead of git apply — git apply cannot parse
+        # difflib.unified_diff output (reports "corrupt patch").
+        check = subprocess.run(["patch", "--dry-run", "-p1", "-i", "-"], input=diff_bytes,
                                cwd=scratch, capture_output=True, timeout=min(timeout_s, 60))
         if check.returncode != 0:
             stderr = check.stderr.decode("utf-8", errors="replace")
-            _fail("DIFF_DOES_NOT_APPLY:" + (stderr.strip().splitlines() or ["<empty>"])[0][:200])
-        applied = subprocess.run(["git", "apply", "-"], input=diff_bytes,
+            return _fail("DIFF_DOES_NOT_APPLY:" + (stderr.strip().splitlines() or ["<empty>"])[0][:200])
+        applied = subprocess.run(["patch", "-p1", "-i", "-"], input=diff_bytes,
                                  cwd=scratch, capture_output=True, timeout=min(timeout_s, 60))
         if applied.returncode != 0:
             return _fail("DIFF_APPLY_FAILED_AFTER_CHECK")
-        # Forward and reverse numstat together cover both sides of renames,
-        # as well as creations and deletions, without parsing quoted paths.
+        # Parse unified diff directly to extract changed file paths
+        # (replaces git apply --numstat which git apply also can't parse).
         targets = set()
-        for direction in ([], ["--reverse"]):
-            stats = subprocess.run(["git", "apply", "--numstat"] + direction + ["-z", "-"],
-                                   input=diff_bytes, cwd=scratch, capture_output=True,
-                                   timeout=min(timeout_s, 60))
-            if stats.returncode != 0:
-                return _fail("DIFF_TARGETS_UNAVAILABLE")
-            for record in stats.stdout.split(b"\0"):
-                if not record:
-                    continue
-                fields = record.split(b"\t", 2)
-                if len(fields) != 3 or not fields[2]:
-                    return _fail("DIFF_TARGETS_UNAVAILABLE")
-                rel = os.fsdecode(fields[2])
+        diff_text = diff_bytes.decode("utf-8", errors="replace")
+        for line in diff_text.splitlines():
+            if line.startswith("+++ b/"):
+                rel = line[6:]
                 _safe_path(scratch, rel)
                 targets.add(rel)
+        if not targets:
+            return _fail("DIFF_TARGETS_UNAVAILABLE")
         if not targets:
             return _fail("DIFF_TARGETS_UNAVAILABLE")
         target_snapshot = {rel: _file_snapshot(scratch / rel) for rel in targets}
