@@ -1,0 +1,39 @@
+{
+ "schema": "PROJECT_BRAIN_REAL_CORPUS_L6_TORNADO_V1",
+ "date": "20261029",
+ "corpus": "BugsInPy (soarsmu/BugsInPy mirror) - real historical tornado bugs",
+ "harness_laws": [
+  "BugsInPy pairs BUGGY SOURCE with the FIXED TEST FILE (the failing test is added in the fix commit). Baseline red must be the REAL bug's symptom.",
+  "Satisfiability gate: an instance is valid only if applying the REAL fix greens the named test in our env (3.11). 2 candidate bugs discarded before this gate existed.",
+  "Wall-clock is part of the metric: repair within B seconds or NOT_REPAIRED_TIMEOUT."
+ ],
+ "instances": [
+  {
+   "id": "tornado/2",
+   "file": "tornado/http1connection.py",
+   "satisfiable": true,
+   "router": "NOT_REPAIRED_WALL_TIMEOUT_330s"
+  },
+  {
+   "id": "tornado/4",
+   "file": "tornado/web.py",
+   "satisfiable": true,
+   "router": "NOT_REPAIRED_232s",
+   "taxonomy": "ProvenanceError:TEST_TIMEOUT (static-file test spawns a live HTTP server per candidate; engine harness timeout)"
+  },
+  {
+   "id": "tornado/14",
+   "file": "tornado/ioloop.py",
+   "satisfiable": true,
+   "router": "CRASH",
+   "taxonomy": "TypeError inside writer path on real-repo layout (debug in progress)"
+  }
+ ],
+ "measured": "0/3 repaired within wall caps on first L6 round - the seeded-ladder 100% does NOT transfer to real repos at current budgets. Named causes: (1) candidate space x per-candidate test cost on 1000-line real modules exceeds wall caps; (2) live-server tests break the engine's per-candidate harness; (3) one real router bug on package-rooted layouts.",
+ "fixes_landed": [
+  "_source_env walks up through __init__.py parents: package-rooted test layouts (tornado.test.*) were rc=2/zero-failing-tests for every localizer - flat-fixture behavior unchanged"
+ ],
+ "next": [
+  "fix writer TypeError on real layouts; narrow localization (traceback-frame-first) for 1000-line modules; live-server-safe harness mode; re-measure with per-bug wall budget accounting"
+ ]
+}

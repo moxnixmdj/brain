@@ -314,6 +314,21 @@ def _source_env(*paths: Any) -> dict[str, str]:
         d = q if q.is_dir() else q.parent
         if str(d) not in dirs:
             dirs.append(str(d))
+        # Package-rooted layouts: a test at <world>/tornado/test/web_test.py
+        # imports `tornado.test...`, which needs the TOP-LEVEL package dir
+        # (<world>) on the path, not only the test's own directory (measured
+        # on BugsInPy tornado bugs: rc=2 usage error, failing_test_count=0 --
+        # the localizers never saw a failing test at all). Walk up through
+        # __init__.py parents; flat layouts (src/test_calc.py) are unchanged.
+        seen = {str(d)}
+        walk = d
+        while (walk / "__init__.py").is_file():
+            walk = walk.parent
+            if str(walk) in seen:
+                break
+            seen.add(str(walk))
+            if str(walk) not in dirs:
+                dirs.append(str(walk))
     existing = os.environ.get("PYTHONPATH", "")
     if existing:
         dirs.append(existing)
