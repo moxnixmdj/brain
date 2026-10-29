@@ -28715,7 +28715,7 @@
   "engines": 26,
   "knowledge_documents": 172,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6501,
+  "research_index_records": 6502,
   "routing_tokens": 2105,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "626d61a551d1a2437ac842c148aff487fab8eb6f102202a3eeb0ae31c525bf2b"
+  "value": "d4bf55e5f8378c762d089da91f6a7354580d795d97787b904399facd325332da"
  },
  "engines": [
   {
@@ -200584,6 +200584,51 @@
     "only_20_of_66_bound_capabilities_were_reachable_from_a_sentence__33_had_inputs_no_sentence_could_bind__the_pinned_compiler_swallowed_following_sentences_kept_sentence_final_periods_in_values_preferred_verifiers_over_writers_and_fell_through_silently__only_1_of_4_fresh_families_passed": 1,
     "reachable": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "THE_MOST_ORDINARY_SENTENCE_A_SOFTWARE_ENGINEER_SAYS_MUST_BE_ANSWERED_V1_20261029_V1",
+   "capability": false,
+   "date": "2026-10-29",
+   "id": "research:canonical/action_intents/ONE_FILE_A_SENTENCE_NAMES_BINDS_THE_TWO_HALVES_A_CAPABILITY_DECLARES_V1_20261029_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_FILE_A_SENTENCE_NAMES_BINDS_THE_TWO_HALVES_A_CAPABILITY_DECLARES_V1_20261029_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "17edbe8994bb8d12991a6cc21e8b6e7b527465ac3c4abd42680dc2a3c72cacff",
+   "status": "",
+   "terms": {
+    "20261029": 1,
+    "acceptance": 1,
+    "all": 1,
+    "behind": 1,
+    "binds": 1,
+    "both": 1,
+    "capability": 1,
+    "captured": 1,
+    "claim": 2,
+    "compared": 1,
+    "controllers": 1,
+    "copied": 1,
+    "coupled": 1,
+    "declares": 1,
+    "digests": 1,
+    "embeds": 1,
+    "entry": 1,
+    "every": 1,
+    "exit": 1,
+    "fault": 1,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inspector": 2,
+    "loop": 2,
+    "names": 2,
+    "one": 2,
+    "repair": 3,
+    "sentence": 2,
+    "stderr": 2,
+    "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
+    "v1": 2,
+    "workspace": 2
    }
   },
   {
