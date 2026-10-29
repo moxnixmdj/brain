@@ -697,8 +697,17 @@ def _compute_candidate_affected_tests(cand_source_candidates: list[list],
 
 _register_local_node = lambda: _start_distributed_worker_nodes(2)
 
+# Workers start lazily via _scale_workers_for_candidates() — not at import
+# (avoids spawning threads for single-machine local execution).
+_DISTRIBUTED_WORKERS_AUTO_STARTED = False
 
-_register_local_node()
+
+def _ensure_distributed_workers() -> None:
+    """Start local distributed workers on first demand."""
+    global _DISTRIBUTED_WORKERS_AUTO_STARTED
+    if not _DISTRIBUTED_WORKERS_AUTO_STARTED:
+        _register_local_node()
+        _DISTRIBUTED_WORKERS_AUTO_STARTED = True
 
 
 # Tree-sitter semantic impact: minimal test set per changed source file
@@ -2609,7 +2618,7 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
                             winner = None
                             # Submit next candidate to keep the pool full.
                             if idx < len(candidates):
-                                f = pool.submit(_eval_candidate, make_args(candidates[idx][1], idx))
+                                f = pool.submit(_eval_candidate, make_args(candidates[idx][1], idx, cand_affected_tests[idx]))
                                 future_to_index[f] = idx
                                 idx += 1
                             continue
@@ -2669,7 +2678,7 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
 
             # Submit next candidate to keep the pool full.
             if idx < len(candidates):
-                f = pool.submit(_eval_candidate, make_args(candidates[idx][1], idx))
+                f = pool.submit(_eval_candidate, make_args(candidates[idx][1], idx, cand_affected_tests[idx]))
                 future_to_index[f] = idx
                 idx += 1
 
@@ -3156,9 +3165,20 @@ def _cegis_synthesize_repair(source_path: str | Path, test_paths: list[str | Pat
 
         # Z3-verify the winning patch against original contracts
         patched_source = ""
-        worktree_p = Path(worktree_rel)
-        if not worktree_p.is_absolute():
-            worktree_p = repo / worktree_rel
+        # Apply the patch to a temp worktree to get patched source for Z3 check.
+        worktree_p = Path(tempfile.mkdtemp(prefix="cegis_wt_", dir=str(repo)))
+        _copy_tree(source_root_p, worktree_p)
+        diff_file = worktree_p / ".cegis-patch.diff"
+        diff_file.write_text(ps_result2["unified_diff"], encoding="utf-8")
+        probe = subprocess.run(
+            ["git", "apply", "--check", str(diff_file)],
+            cwd=str(worktree_p), capture_output=True, text=True, timeout=30,
+        )
+        if probe.returncode == 0:
+            subprocess.run(
+                ["git", "apply", str(diff_file)],
+                cwd=str(worktree_p), capture_output=True, text=True, timeout=30,
+            )
         worktree_p = worktree_p.resolve()
         patched_source_p = worktree_p / source_p.name
         if patched_source_p.is_file():
