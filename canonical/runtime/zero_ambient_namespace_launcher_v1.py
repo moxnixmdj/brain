@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib, json, math, os, pathlib, shutil, socket, subprocess, tempfile, threading, time
+import hashlib, json, math, os, pathlib, shutil, socket, stat, subprocess, tempfile, threading, time
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -50,6 +50,8 @@ def canonical_policy(policy:Mapping[str,Any])->dict[str,Any]:
     ranges=[('pids',pids,1,128),('memory_mb',memory_mb,64,4096),('cpu_seconds',cpu_seconds,1,300),('wallclock_s',wallclock_s,1,600),('scratch_mb',scratch_mb,8,1024),('max_file_mb',max_file_mb,1,1024),('nofile',nofile,8,256),('broker_max_bytes',broker_max_bytes,1,8_000_000)]
     for name,v,lo,hi in ranges:
         if not lo<=v<=hi: raise NamespaceConfinementError(name.upper()+'_LIMIT_INVALID')
+    allow_null=policy.get('allow_dev_null',False)
+    if type(allow_null) is not bool: raise NamespaceConfinementError('ALLOW_DEV_NULL_MUST_BE_BOOLEAN')
     host_uid=policy.get('host_uid'); host_gid=policy.get('host_gid')
     if os.geteuid()==0:
         if host_uid is None or host_gid is None: raise NamespaceConfinementError('ROOT_PARENT_REQUIRES_NONROOT_HOST_UID_GID')
@@ -59,7 +61,19 @@ def canonical_policy(policy:Mapping[str,Any])->dict[str,Any]:
         if host_uid is not None and int(host_uid)!=os.geteuid(): raise NamespaceConfinementError('HOST_UID_MUST_EQUAL_CURRENT_NONROOT_UID')
         if host_gid is not None and int(host_gid)!=os.getegid(): raise NamespaceConfinementError('HOST_GID_MUST_EQUAL_CURRENT_NONROOT_GID')
         host_uid=os.geteuid(); host_gid=os.getegid()
-    return {'schema':SCHEMA,'argv':argv,'input_dir':str(input_dir),'env':dict(sorted(env.items())),'host_uid':host_uid,'host_gid':host_gid,'limits':{'pids':pids,'memory_mb':memory_mb,'cpu_seconds':cpu_seconds,'wallclock_s':wallclock_s,'scratch_mb':scratch_mb,'max_file_mb':max_file_mb,'nofile':nofile,'broker_max_bytes':broker_max_bytes},'authority':{'network':'PRIVATE_NAMESPACE_LOOPBACK_ONLY','host_filesystem':'READ_ONLY_SYSTEM_AND_SINGLE_INPUT_BIND_ONLY','linux_capabilities':'DROPPED_BEFORE_WORKLOAD','privilege_escalation':'DENY_NO_NEW_PRIVILEGES','host_pid_namespace':'DENY','host_ipc_namespace':'DENY','host_uts_namespace':'DENY','mutable_storage':'READ_ONLY_PRIVATE_ROOT_PLUS_WRITABLE_PRIVATE_TMPFS_TMP_AND_WORK_ONLY','material_effect_channel':'ONE_INHERITED_BROKER_FD_ONLY'}}
+    if allow_null:
+        # This opt-in exposes only the kernel's null device, never an arbitrary
+        # host file or a directory of devices. Git and other readers require it.
+        try:
+            device=os.stat('/dev/null')
+            valid=stat.S_ISCHR(device.st_mode) and os.major(device.st_rdev)==1 and os.minor(device.st_rdev)==3
+        except (OSError,AttributeError): valid=False
+        if not valid: raise NamespaceConfinementError('HOST_NULL_DEVICE_INVALID')
+    result={'schema':SCHEMA,'argv':argv,'input_dir':str(input_dir),'env':dict(sorted(env.items())),'host_uid':host_uid,'host_gid':host_gid,'limits':{'pids':pids,'memory_mb':memory_mb,'cpu_seconds':cpu_seconds,'wallclock_s':wallclock_s,'scratch_mb':scratch_mb,'max_file_mb':max_file_mb,'nofile':nofile,'broker_max_bytes':broker_max_bytes},'authority':{'network':'PRIVATE_NAMESPACE_LOOPBACK_ONLY','host_filesystem':'READ_ONLY_SYSTEM_AND_SINGLE_INPUT_BIND_ONLY','linux_capabilities':'DROPPED_BEFORE_WORKLOAD','privilege_escalation':'DENY_NO_NEW_PRIVILEGES','host_pid_namespace':'DENY','host_ipc_namespace':'DENY','host_uts_namespace':'DENY','mutable_storage':'READ_ONLY_PRIVATE_ROOT_PLUS_WRITABLE_PRIVATE_TMPFS_TMP_AND_WORK_ONLY','material_effect_channel':'ONE_INHERITED_BROKER_FD_ONLY'}}
+    if allow_null:
+        result['allow_dev_null']=True
+        result['authority']['host_device']='NULL_CHARACTER_DEVICE_ONLY'
+    return result
 
 def policy_sha256(policy:Mapping[str,Any])->str:
     p=canonical_policy(policy)
@@ -70,6 +84,10 @@ ROOT="$1"; INPUT="$2"; BROKER="$3"; MEM_KB="$4"; CPU_S="$5"; FILE_KB="$6"; NOFIL
 mount --make-rprivate /
 mount -t tmpfs -o size=64m,nosuid,nodev tmpfs "$ROOT"
 mkdir -p "$ROOT/usr" "$ROOT/bin" "$ROOT/lib" "$ROOT/lib64" "$ROOT/tmp" "$ROOT/work" "$ROOT/input"
+if [ "${PROJECT_BRAIN_ALLOW_DEV_NULL:-0}" = 1 ]; then
+  mkdir -p "$ROOT/dev"
+  : > "$ROOT/dev/null"
+fi
 for d in /usr /bin /lib /lib64; do
   [ -e "$d" ] || continue
   base="${d#/}"
@@ -77,6 +95,11 @@ for d in /usr /bin /lib /lib64; do
 done
 mount --bind "$ROOT" "$ROOT"
 mount -o remount,bind,ro "$ROOT"
+if [ "${PROJECT_BRAIN_ALLOW_DEV_NULL:-0}" = 1 ]; then
+  # Only this validated device is exposed. It must be opened read/write by
+  # git, and cannot retain data. Mount after the root bind so it stays visible.
+  mount --bind /dev/null "$ROOT/dev/null"
+fi
 for d in /usr /bin /lib /lib64; do
   [ -e "$d" ] || continue
   [ -L "$d" ] && continue
@@ -96,7 +119,11 @@ exec "$CHROOT_BIN" "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_
 def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     p=canonical_policy(policy); lim=p['limits']
     required_names=['unshare','mount','chroot','setpriv','ip','bash','env']
-    resolved={name:shutil.which(name) for name in required_names}
+    # Resolve the confinement primitives only in system directories, not a
+    # caller-controlled PATH. Non-root shells often omit sbin even though the
+    # system chroot is installed there. Setup must use the same trusted path.
+    host_path=os.defpath+os.pathsep+'/usr/sbin:/sbin'
+    resolved={name:shutil.which(name,path=host_path) for name in required_names}
     missing=[name for name,path in resolved.items() if not path]
     if missing: raise NamespaceConfinementError('HOST_PRIMITIVE_MISSING:'+','.join(missing))
     root=tempfile.mkdtemp(prefix='brain-ns-membrane-'); os.chown(root,p['host_uid'],p['host_gid'])
@@ -116,7 +143,8 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
                 broker.append(b)
         except OSError: pass
     th=threading.Thread(target=reader,daemon=True); th.start()
-    env={'BROKER_FD':str(child.fileno()),'PYTHONDONTWRITEBYTECODE':'1'}
+    env={'BROKER_FD':str(child.fileno()),'PYTHONDONTWRITEBYTECODE':'1','PATH':host_path}
+    if p.get('allow_dev_null'): env['PROJECT_BRAIN_ALLOW_DEV_NULL']='1'
     for k,v in p['env'].items(): env[k]=v
     cmd=[resolved['unshare'],'--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts',resolved['bash'],'-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),resolved['setpriv'],'--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all',resolved['env'],'-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
     for k,v in p['env'].items(): cmd.append(k+'='+v)

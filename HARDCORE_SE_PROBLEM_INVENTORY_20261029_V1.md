@@ -1,6 +1,6 @@
 # HARDCORE SOFTWARE-ENGINEERING PROBLEM INVENTORY
 
-**Date:** 2026-10-29 · **Branch:** `arena/4ca3a720-brain` · **Tree:** `43012dc1`
+**Date:** 2026-10-29 · **Branch:** `arena/4ca3a720-brain` · **Tree:** branch state after `bb36ebae` (see `git log` for subsequent changes)
 **Scope:** the owner's question — *what are all the problems* on the way to the most advanced, fastest
 software engineer. Document, image, chart and PDF families are measured only so the denominator is
 honest; nothing here proposes work on them.
@@ -14,91 +14,114 @@ that no longer reproduces is a bug in this document, not a target. Red is not au
 
 | # | measurement | value | instrument |
 |---|---|---|---|
-| 1 | capabilities in the verified registry | **459** | `load_verified_registry(include_extended=True)` |
-| 2 | reachable from ONE plain sentence (vocabulary / by name / routed / unreachable) | **454 / 3 / 1 / 1** | `live_solver_end_to_end_measurement_v1.py --reachability` |
-| 3 | hardcore acts owned by a bound capability | **69 of 135**, 28 named-only, **38 absent** | `hardcore_se_domain_coverage_v1.py` |
-| 4 | fresh goals end to end, in-scope families all-pass | **30 of 36 families**, instance pass rate **0.8333** — *2 instances per family is not a rate; see the caveat in P0* | `live_solver_end_to_end_measurement_v1.py --per-family 2` |
+| 1 | entries visible in the extended registry (including receipt-projected entries) | **459** | `load_verified_registry(include_extended=True)` |
+| 2 | generated plain-goal probe (bound / by id / routed elsewhere / not reached) | **454 / 3 / 1 / 1** | `live_solver_end_to_end_measurement_v1.py --reachability` |
+| 3 | hardcore act labels with a lexical `provides` match in the **165-entry static registry** | **69 of 135**, 28 keyword-only, **38 no lexical match** | `hardcore_se_domain_coverage_v1.py` |
+| 4 | two-per-family end-to-end sample | too small to quote as a family result; use **n ≥ 4** | `live_solver_end_to_end_measurement_v1.py --per-family 2` |
 | 5 | benchmark capability selection (canonical / front door) | **22 / 23** · **21 / 23** | `goal_compilation_benchmark_v1` |
 | 6 | evidence blocks: ok / no pointer / dangling | **123 / 34 / 8** | `capability_evidence_probe_v1.py --audit-pointers` |
-| 6b | machine-missing external dependencies | **7** (5 doc/image, 1 data, 1 barcode) | same run, `external_dependency_missing_here` |
+| 6b | declared external dependencies flagged missing | **6** in the latest run; the transitive `et_xmlfile` import is separately missing | `live_solver_end_to_end_measurement_v1.py`, tool liveness + direct import |
 | 7 | red door/compiler tests | **17**, **4 skipped** naming a missing dependency (was 33 this session) | `pytest` on the six door/compiler suites (17 failed / 187 passed / 4 skipped) |
 
-Per-domain coverage of the 135 hardcore acts (`hardcore_se_domain_coverage_v1.py` — BOUND / total, with
-NAMED-only and ABSENT split):
+Per-domain lexical classification of 135 predefined act labels against the **165-entry static**
+registry (`hardcore_se_domain_coverage_v1.py`, `measure()`). `BOUND` is a substring match in
+`provides`, not a successful execution; `NAMED` is a keyword match; `ABSENT` means neither lexical
+match was found. It does **not** prove that no implementation exists elsewhere in the repository or
+the extended registry:
 
 | domain | bound | named only | absent | domain | bound | named only | absent |
 |---|---|---|---|---|---|---|---|
-| review and delivery flow | 10/17 | 4 | 3 | testing | 6/10 | 3 | 1 |
+| version control | 10/17 | 4 | 3 | testing | 6/10 | 3 | 1 |
 | refactoring | 6/14 | 2 | 6 | static analysis | 10/13 | 1 | 2 |
 | dependencies and build | 2/10 | 3 | 5 | dynamic analysis | 5/9 | 2 | 2 |
 | data and persistence | 5/9 | 1 | 3 | security and supply chain | 6/9 | 2 | 1 |
-| services and concurrency | 3/8 | 0 | **5** | review and delivery flow (flow) | 7/8 | 0 | 1 |
+| services and concurrency | 3/8 | 0 | **5** | review and delivery flow | 7/8 | 0 | 1 |
 | multi-language | 3/7 | 4 | 0 | infrastructure and delivery | **0/6** | 4 | 2 |
 | performance engineering | 5/6 | 0 | 1 | observability | **0/5** | 2 | 3 |
 | documentation | 1/4 | 0 | 3 | **totals** | **69/135** | 28 | 38 |
 
-Two domains own **nothing** — infrastructure and delivery (0 of 6) and observability (0 of 5) — and
-services/concurrency owns 3 of 8 with 5 acts that do not exist at all. That is where the machine is
-furthest from an engineer, not in the document families.
+The lexical probe finds no `provides` match for infrastructure/delivery (0/6) or observability
+(0/5); services/concurrency has 3/8 matches and 5 unmatched labels. These are search priorities,
+not proof that the corresponding tools do not exist elsewhere.
 
-Tool liveness over 165 capabilities: **0 adapters missing**, 9 adapter import failures (all chart
-raster), **7 machine-missing external dependencies**, 27 executor kernel refusals by source type,
-19 zero-input composition nodes.
+Latest tool-liveness run over 165 capabilities: **0 adapters missing**, 9 adapter import failures,
+**6 declared external dependencies flagged missing**, 27 executor kernel refusals by source type,
+and 19 zero-input composition nodes. The probe can miss transitive dependencies: it marks the XLSX
+verifier's declared package present, but importing `openpyxl` here fails on missing `et_xmlfile`.
 
 ---
 
 ## 2. The problems, ordered by what they cost an engineer
 
-### P0 — It can do work but it cannot be asked to CHECK work (the deepest gap)
+### P0 — Acceptance and re-inspection are not yet a complete trust chain
 
-Five of the twenty-one capabilities that no sentence can reach are **verifiers**:
-`archive.verify.tar_gz.gnu`, `decision.synthesis.verify.stdlib`, `sqlite.table.verify_against_json_records`,
-`xlsx.table.verify_against_json_records`, `plain_goal.bound_capability.grounding.verify.stdlib`.
+**Correcting the previous report:** the earlier statement that “at most 192 of 459” have an inspector
+and “at least 267” do not was **not measured**. Registry adapter *modules* are not the same thing as
+the runtime result's `adapter` field, and a registered inspector may still refuse a particular result.
+The asserted bounds are withdrawn; effective runtime coverage remains to be measured.
 
-Three independent measurements agree on the same hole:
+`raw_goal_trace_acceptance_v1` already has 13 capability-keyed inspectors and one adapter-keyed
+inspector (`bound_capability_cli`). The extended registry has 459 visible entries, 248 distinct
+`adapter_module` values, and 179 entries declaring `cli_command`; `shell.command.run` is in both the
+13 and the 179. The CLI adapter normally reports `bound_capability_cli` when it runs, but these counts
+cannot establish how many real goals receive valid independent acceptance. The remaining
+`NO_INDEPENDENT_REINSPECTION_FOR:python.repository.acceptance.measure.v1` is one directly observed
+coverage gap, not a measurement of the whole registry.
 
-- **End to end**, the family `ARCHIVE_VERIFY_GNU` scores **0 of 2** and its routes are
-  `archive.tar_gz.create_from_manifest` — the *creator*, answering a *verification* request.
-  The cause is narrower than "the verifier cannot be asked": on a sentence a person would write —
-  *"Verify the tar archive at out/backup.tar.gz against the manifest at out/manifest.json."* — the
-  verifier wins cleanly, **64 against 50**. The instrument's sentence is built from the capability's
-  own DECLARATIONS, and `archive.verify.tar_gz.gnu` declares the act `members`, not `verify`; a
-  sentence that says "members" is answered by the creator. **The verifier does not declare the act
-  it performs** — that is the P0 defect in this row, and it is a declaration fix, not a ranking one.
-- **Route admission** reports `raw_goal_acceptance: RAW_GOAL_ACCEPTANCE_UNRESOLVED`,
-  reason **`NO_INDEPENDENT_REINSPECTION_FOR:python.repository.acceptance.measure.v1`** — a capability
-  executed, wrote a verified artifact, and nothing was able to re-inspect it.
-- **Selection**, after this session's fixes, still answers the `jq` question with a converter, because
-  the request states no filter and no verifier owns the shape.
+**Fixed: re-inspection itself could mutate the world.** In a disposable tree, each of four calls to
+`_inspect_shell_command_run` accepted a matching empty report while it also changed files:
+`find -delete`, `sed` with a `w` script, `sort -oFILE`, and a Python file in the tree. A path being
+in the tree did not make its script read-only. Re-inspection now uses the **existing**
+`zero_ambient_namespace_launcher_v1` and its existing query wrapper: the input tree is read-only,
+network is isolated, and inability to confine refuses rather than reruns on the host. Mutating find,
+sed and attached-output sort shapes are refused or held to their existing postconditions. A validated,
+opt-in `/dev/null` is the only host device exposed, enabling Git readers without exposing `/dev` in
+the default policy. `test_command_reinspection_is_read_only_v1.py` exercises the attacks, benign
+readers, no-confinement behavior and executable-name spoofing; the namespace's hostile tests also pass.
+This secures the **re-inspection**, not arbitrary producer execution.
 
-**Why it is P0:** every downstream claim (repair accepted, refactor safe, tests broken, change
-delivered) is a verification claim. A system that cannot re-inspect its own output has to be trusted,
-and trust is the one thing the owner's laws forbid.
+**Fixed: a matching producer hash was not a semantic check.** For an actual CLI `cat` run that saved
+stdout, replacing the destination with `FORGED` and updating its reported sha256 still produced
+`RAW_GOAL_ACCEPTANCE_VERIFIED`. The same constructed trace is now refused with
+`COMMAND_STDOUT_DESTINATION_MISMATCH`: the destination is reopened and compared with independently
+reproduced stdout. The test also checks that the unmodified destination passes.
 
-**The lane already exists. The problem is COVERAGE, and it is measured here for the first time.**
-`raw_goal_trace_acceptance_v1` already performs independent re-inspection and already refuses when it
-cannot: it looks a step up in `INSPECTORS` by capability id, then in `_ADAPTER_INSPECTORS` by the
-adapter the result reports, and otherwise returns `NO_INDEPENDENT_REINSPECTION_FOR:<capability>`. The
-counts, read off that module against the live registry:
+**Partially fixed: extra instructions inherited credit they had not earned.** The diagnostic
+`execution_guard/raw_acceptance_obligation_gap_probe_v1.py` uses real, harmless actions in a temporary
+directory and then feeds the verifier constructed traces and contracts. For a **single** explicit
+command and for a **single** literal text write, each of four unperformed second actions (delete,
+modify, copy, archive) was accepted before; all eight are now refused with zero accepted obligation
+IDs. The bounded whole-sentence checks still accept positive single-action controls.
 
-| what | count |
-|---|---|
-| capability-specific inspectors (`INSPECTORS`) | **13** |
-| adapter-level inspectors (`_ADAPTER_INSPECTORS`) | **1** — `bound_capability_cli`, which is what the **179** `cli_command` rows report at runtime |
-| distinct adapters the 459 registry entries route through | **248** |
-| distinct `"adapter"` strings the adapters themselves report | ~200 |
-| **capabilities that can be independently re-inspected today** | **at most 192 of 459** |
-| **capabilities with no independent re-inspector** (the acceptance verifier refuses them whatever they produce) | **at least 267** |
+**Still open:** the same diagnostic runs the command twice and supplies a two-step trace. **4 of 4**
+unperformed second instructions still receive `semantic_acceptance_complete=True`, while the existing
+`raw_task_acceptance_residual_localizer_v1` reports 3–4 semantic residuals per case. This is a
+constructed-trace test of the verifier, not a claim that all four reach it through the live front door.
+`lossless_raw_task_acceptance_gate_v1` already requires a separate, independently verified receipt for
+every obligation; the raw-trace path does not yet provide those proofs. Do not treat this bounded fix,
+a passing digest, or the existence of an inspector as proof of complete task semantics.
 
-So the fix is not a new engine — it is the same lane, keyed where it is not yet keyed: the artifact a
-capability writes already carries its digest and schema, and a second independent read of it against
-that schema is `_inspect_shell_command_run`'s existing job, generalized from one adapter to the result
-contract every adapter already reports. The comment that introduced the adapter key measured the
-premise: 221 of the 223 passing goals on the 367-prose corpus were stopped by
-`NO_INDEPENDENT_REINSPECTION_FOR`, and 14 of 14 sampled scripts returned a byte-identical returncode and
-stdout on a second run with no change to the working tree.
+**Measurements:** `test_command_reinspection_is_read_only_v1.py` and the related verifier, namespace,
+command, and hostile suites: **112 passed, 3 deselected, 2 subtests passed**. The deselected command
+front-door tests are three pre-existing failures (`TRACE_HAS_NO_CAPABILITY_ACTIONS`); a stash-based
+HEAD comparison confirmed all three predate this work. A 174-test ordinary-command subset had
+**65 failures / 109 passes**, and all 65 failing IDs also failed on unmodified HEAD. Re-running the 109
+passing cases produced **108 passes / 1 failure**; that one also fails alone on unmodified HEAD, routing
+the filter request to `python.quality.resource_leak.v1` (the P3 admission issue). Benchmark selection
+remains **22/23** and parity/act pins **34 passed**. Run the commands in §6 to remeasure.
 
-**TWO OF THE THREE P0 MEASUREMENTS HAVE SINCE BEEN FIXED, both by reusing what was already there:**
+**Speed:** reinspection timing, n=12 after one warmup (`execution_guard/reinspection_timing_probe_v1.py`):
+plain `cat` median **0.183 ms**, one-file `wc -l` **0.156 ms**, and confined `sort` **116.692 ms** on
+this host. Plain `cat` previously used a host subprocess (median **1.39 ms**, n=12). The fast paths
+reopen real file bytes; the slower path has the confinement cost. These are microbenchmarks, not
+end-to-end family latencies.
+
+**Archive routing, separately:** the naming-mode instrument previously mislabeled zero-output
+verifiers as unreachable; plain mode can bind the hardcore verifiers. A generated archive-check
+request also routed to its creator; the verb/name fixes below raised the 8-instance archive family to
+8/8. Routing the right verifier is not itself proof that its work or the complete task is correct.
+
+**The archive selection defects were fixed by reusing the existing declarations and ranking:**
 
 1. **The verifier did not declare the act it performs.** `_declared_act_words` read the LAST TOKEN of a
    `provides` value, so `archive.tar_gz.verify_manifest_members` declared the act `members` —
@@ -114,9 +137,9 @@ stdout on a second run with no change to the working tree.
    verb is an act the best-ranked candidate DECLARES
    (`F3_NOT_APPLIED__THE_SENTENCE_NAMES_THE_ACT_THE_BEST_CANDIDATE_DECLARES`).
 
-   Measured on the artefact family, four instances: **0 of 3 with every route on the creator → 3 of 4
-   on the verifier.** The front-door selection rate pin still holds (21 of 23) and the parity suite is
-   27 green.
+   Measured on the artifact family at that stage: **3 of 4** routed to the verifier. The later
+   eight-instance measurement is 8/8. The front-door selection rate pin still holds (21 of 23)
+   and the parity suite is 27 green.
 
 3. **A verb has many spellings, and the name rule was reading half a name.** The residual above —
    *"Check the tar.gz archive …"* and *"Audit …"* reaching the creator — was two defects, both fixed:
@@ -144,10 +167,10 @@ stdout on a second run with no change to the working tree.
    its route; six door/compiler suites **17 failed / 187 passed / 4 skipped** with the same failing
    ids as the previous sweep and no new ones.
 
-**The residual is now the OBJECT, not the verb.** The archive family is closed; what is left in P0 is
-that the same "one act, one owner" question has no declared answer for object nouns (bundle vs
-archive vs package), which is why the reachability instrument's own generated sentences still read as
-keyword soup rather than a request.
+**Routing still needs object-role investigation.** The archive sample above is repaired; that does not
+close the separate acceptance and inspector-coverage gaps described at the start of P0. Object nouns
+(bundle, archive, package, manifest) remain an unmeasured ranking question, not an established fix
+for either generated-goal miss.
 
 **One measurement caveat.** A whole-corpus run at 2 instances per family is not a rate: in the same
 run `JSON_QUERY_JQ` scored 0 of 2 while a direct reproduction of that exact family goal passes and
@@ -187,19 +210,14 @@ skipped**, no new failing node id.
 What is still genuinely open on composition: `test_f13` returns `FAIL_CLOSED__NO_OBSERVED_EFFECT` — an
 intermediate spool step that produced no observed effect. That is one row, and it is a real one.
 
-### P2 — Near-duplicate capabilities steal each other's sentences
+### P2 — Near-duplicate capabilities can steal each other's sentences
 
-Measured directly, twice:
-
-- `python.repository.acceptance.measure.v1` (score **55**) beats
-  `python.software.repair.measured_acceptance.v1` on a sentence that asks for *measured acceptance*, and
-  the executed result is a plain repository measurement (`semantic_acceptance_complete: false`).
-- `archive.tar_gz.create_from_manifest` beats `archive.verify.tar_gz.gnu` on a *verify* request.
-
-Both pairs declare near-identical vocabulary. The arbitration law this session installed for the act
-word works at the *ranking* stage; it has never been applied to the **declarations themselves** — two
-capabilities may not declare the same act. That is a registry law, and it is cheap: the act words are
-already computable from `provides` + identity.
+A measured repair/acceptance sentence sometimes routes to `python.repository.acceptance.measure.v1`
+rather than `python.software.repair.measured_acceptance.v1`, producing a measurement rather than the
+requested repair. The archive creator/verifier collision was separately fixed and is pinned at n=8
+above. Multiple capabilities may legitimately perform the same act with different inputs or tools;
+the needed rule is correct act, object and binding arbitration, **not** a blanket ban on shared acts.
+The object-noun hypothesis and the two generated-goal misses in P10 still need distinct reproductions.
 
 ### P3 — A refusal falls through to an admission
 
@@ -208,29 +226,32 @@ already computable from `provides` + identity.
 `admitted: True` in the same receipt. `test_f1_best_candidate_that_cannot_bind_fails_closed_instead_of_falling_through`
 pins the law that this must fail closed; it is red.
 
-### P4 — 38 absent acts: the capability that is simply not there
+### P4 — 38 act labels have no lexical match in the static registry
 
-Hardcore subset, by domain (bound / total per domain in brackets):
+This is the 135-label `hardcore_se_domain_coverage_v1.py` vocabulary probe over 165 static entries,
+not a search of every file or an execution test. An `ABSENT` classification means no configured
+`provides`/keyword substring matched; it is **not** proof that the act or an engine is missing from
+the Brain, another repository, or the internet. Names below are exactly the probe's ABSENT rows:
 
-| domain | bound / total | absent acts that matter |
+| domain | matched / total | labels with no lexical match |
 |---|---|---|
-| refactoring | **6 / 14** | extract variable, encapsulate field, pull-up method, replace conditional, remove dead imports, split module |
-| dependencies & build | **2 / 10** | install, upgrade, remove, lockfile pin, reproducible build, cache, monorepo, publish |
-| services & concurrency | **3 / 8** | retry policy, timeout policy, circuit breaker, task graph, local server |
-| infrastructure | **0 / 6** | CI config, container image, IaC, deploy, secret management, environment fit |
-| observability | **0 / 5** | logging instrumentation, metrics instrumentation, tracing, structured log analysis, SLO |
-| data & persistence | **5 / 9** | schema migration, transaction, integrity check, query plan |
-| dynamic analysis | **5 / 9** | debugger/breakpoint, syscall trace, deadlock detect, race detect |
-| testing | **6 / 10** | golden/snapshot, data generation, differential, mutation |
-| version control | **10 / 17** | cherry-pick, worktree, reflog undo |
-| static analysis | **10 / 13** | call graph, package dependency graph, dataflow/taint |
-| documentation | 1 / 4 | docstrings, README, API reference |
-| review flow | 7 / 8 | code-review comment |
-| multi-language | 3 / 7 | JS refactor, Go analysis, Rust analysis, C/C++ compile |
+| refactoring | 6/14 | extract variable, encapsulate field, pull-up method, replace conditional, remove dead imports, split module |
+| dependencies & build | 2/10 | upgrade dependency, reproducible build, monorepo, cache, publish |
+| services & concurrency | 3/8 | retry policy, timeout policy, circuit breaker, task graph, local server |
+| infrastructure & delivery | 0/6 | IaC, environment fit |
+| observability | 0/5 | logging instrumentation, metrics instrumentation, structured log analysis |
+| data & persistence | 5/9 | schema migration, transaction, integrity check |
+| dynamic analysis | 5/9 | debugger/breakpoint, deadlock detect |
+| testing | 6/10 | golden/snapshot |
+| version control | 10/17 | cherry-pick, worktree, reflog undo |
+| static analysis | 10/13 | call graph, dependency graph |
+| security & supply chain | 6/9 | SBOM |
+| documentation | 1/4 | docstrings, README, API reference |
+| review flow | 7/8 | code-review comment |
+| multi-language | 3/7 | none absent by this lexical criterion; 4 are keyword-only |
 
-The refactoring row is the sharpest: **six of the fourteen** refactor acts a senior engineer performs
-daily are absent, and the six that exist (`rename_symbol`, `rename_parameter`, `extract_function`,
-`inline_function`, `move_function`, `change_signature`) all ride one AST engine that already exists.
+The six unmatched refactoring labels are promising candidates for a targeted repository/adapter search,
+but the cost and whether existing AST engines safely implement each verb have not been measured.
 
 ### P5 — 28 acts are NAMED but unbound
 
@@ -242,8 +263,9 @@ Declared in the map, no capability behind them: `build.install`, `build.remove_d
 `supplychain.pin_lockfile`, `test.data_generation`, `test.differential`, `test.mutation`,
 `lang.{javascript_refactor,go_analysis,rust_analysis,c_cpp_compile}`.
 
-These are cheaper than the absent ones (someone already wrote the name and the domain), and three of
-them — `git.merge`, `git.conflict.resolve`, `test.mutation` — are gateway verbs for real engineering.
+A keyword match is only vocabulary, not a working implementation or evidence that an implementation
+can be wired cheaply. `git.merge`, `git.conflict.resolve`, and `test.mutation` are especially relevant
+search targets for real engineering.
 
 ### P6 — Repair and refactor depth is one language deep
 
@@ -253,16 +275,18 @@ engine (7) are all Python-only. `code.multilanguage.parse.tree_sitter.v1` parses
 nothing *edits* or *tests* them. Measured ceiling: `lang.*` is 3 bound of 7, all three of them
 read-only.
 
-### P7 — Seven external dependencies are absent on this machine, and one of them is the answer
+### P7 — Missing tools and an incomplete dependency probe
 
+The latest tool-liveness run flags six capabilities with missing declared external dependencies:
 `auto.apt.zint`, `document.convert.markdown_pdf.pandoc_weasyprint`, `image.code.decode.zbarimg`,
-`image.qr.generate.qrencode`, `pdf.extract.ocr.tesseract`, `xlsx.table.verify_against_json_records`,
-**`yaml.to_json.yq`**.
+`image.qr.generate.qrencode`, `pdf.extract.ocr.tesseract`, and **`yaml.to_json.yq`**. Separately,
+`import openpyxl` fails on `et_xmlfile` even though the probe reports the XLSX verifier's declared
+package present; this is a transitive-import blind spot, not a seventh flagged external dependency.
 
-Five are document/image families and are out of scope by owner instruction. `yaml.to_json.yq` is not:
-it is a **data** capability, and it is the fallback the compiler still returns for the `jq` benchmark
-goal — so the one remaining benchmark miss is answered by a capability that cannot execute on this
-box. Install-or-refuse holds at the door; the compiler still does not know it is routing to a tool
+Most are document/image families and are out of scope by owner instruction. `yaml.to_json.yq` is not:
+it is a **data** capability. The current benchmark miss `EXT_JQ_TABLE` selects
+`document.convert.markdown_pdf.pandoc_weasyprint`, not `yaml.to_json.yq` (`/tmp/bench.py`, 22/23).
+The previous report that yq was the current selected answer was wrong. Install-or-refuse holds at the door; the compiler still does not know it is routing to a tool
 that is not installed. Nine adapters additionally fail to import (8 chart readers +
 `professional.artifact.visual_observer.v1`), which the executor turns into a source-type refusal 27
 times.
@@ -290,7 +314,7 @@ A dangling evidence pointer is not a capability defect; it is an unbacked claim,
 
 Counted this session on the six door/compiler suites: **17 failed / 187 passed / 4 skipped**, down from 33 failed on the same set when the session began, with **no new failing id** at any point (`comm -13` of the two sweeps is empty).
 
-### P10 — TWO capabilities no sentence can reach, and an instrument that hides the verifiers
+### P10 — Generated-goal reachability misses and a naming-instrument blind spot
 
 This section said 26 and it was wrong. Re-measured this session, both modes:
 
@@ -305,7 +329,7 @@ output path gets no sentence — and the list is dominated by exactly the shape 
 verifiers (`archive.verify.tar_gz.gnu`, `decision.synthesis.verify.stdlib`,
 `plain_goal.bound_capability.grounding.verify.stdlib`,
 `sqlite.table.verify_against_json_records`, `xlsx.table.verify_against_json_records`, and the two
-`docx.document.verify.*`) plus sixteen document and image readers that are out of scope. In plain
+`docx.document.verify.*`) plus 14 other rows, including document/image readers. In plain
 mode **every one of the hardcore verifiers is reached and bound**, so the P0 defect was never
 "cannot be asked" — it was "is asked and answers with a different act", which is what the three
 selection fixes closed.
@@ -314,12 +338,12 @@ What is left, measured, is small and specific:
 
 | state | capabilities | why |
 |---|---|---|
-| unreachable from any sentence | **2** — `vcs.git.log.v1`, `python.repo.pr_realize.v1` | **homonym pollution**: `vcs.git.log.v1` carries the word "commit" in its own keywords, so a sentence built from its declaration is read as a commit request; `pr_realize` is out-scored by `vcs.git.branch_list.v1` on its own generated sentence |
+| not reached by the generated plain-goal probe | **2** — `vcs.git.log.v1`, `python.repo.pr_realize.v1` | **homonym pollution**: `vcs.git.log.v1` carries the word "commit" in its own keywords, so a sentence built from its declaration is read as a commit request; `pr_realize` is out-scored by `vcs.git.branch_list.v1` on its own generated sentence |
 | by explicit id only | 3 — `python.contract.issue_orchestration.fusion.v1`, `python.pipeline.allowlist_gate.v1`, `python.refactor.test_scaffold.fusion.v1` | zero-input composers whose prose sentence is answered by `software.repair.loop.cegis_hypothesis.v1` |
 
-The fix for both is the same law as P2 and it is one unit: a capability's **own** keywords must not be
-read as a claim about a *different* act, and a capability that is the sole owner of an act must win its
-own declaration sentence.
+These two rows are failures of the tested generated sentences, not proof that **no** sentence can
+reach either capability. The candidate causes above require targeted checks; no universal sole-owner
+law or unit-cost estimate has been established.
 
 ### P1b — Two claims in this document's first version were wrong, and are corrected here
 
@@ -335,83 +359,78 @@ never a cause.
 
 ### P11 — The instruments that are not here are the ceiling
 
-Absent: `docker`, `kubectl`, `terraform`, `gdb`, `lldb`, `strace`, `perf`, `valgrind`, `hypothesis`,
-`libcst`, `rope`, `psutil`, `sqlalchemy`, `coverage`, `shellcheck`, and the `go`/`rustc`/`java`/`clang`
-toolchains. Every absent act in `dynamic.*`, `infra.*` and `service.*` sits behind one of them.
+A prior environment probe reported missing optional tools including `docker`, `kubectl`, `terraform`,
+`gdb`, `strace`, `hypothesis`, `libcst`, and `rope`. Their availability is host-specific and must be
+rechecked before use. On this host `go` and `rustc` are absent from PATH, while **`gcc` exists at
+`/usr/bin/gcc`** (`command -v`); the previous claim that gcc was absent was wrong. An unmatched act
+is not automatically blocked by any particular tool.
 Two consequences worth stating plainly:
 
-1. **`libcst`/`rope` absence is not a blocker for refactoring** — six refactor verbs already run on
-   `ast` + `tokenize`, and the missing six can run on the same engine.
-2. **The `go`/`rustc` absence is a blocker** for real multi-language work; it should be refused by
-   name (which the repo does) rather than faked.
+1. Existing Python refactor adapters use `ast` and `tokenize`; whether they safely implement each of
+   the six unmatched verbs still needs proof. Missing `libcst`/`rope` alone does not prove impossibility.
+2. Missing `go`/`rustc` blocks compiler-backed execution on this host, not every possible static
+   analysis; report the missing tools by name rather than inventing their results.
 
-### P12 — Speed: one family is 100× slower than the rest
+### P12 — Speed is measured per operation, not inferred from a tiny family sample
 
-Mean wall time per goal, end to end: **87 ms** (archive), **169 ms** (docx), **440 ms** (xlsx),
-sub-second for every code family measured — and **12,866 ms** for the knowledge family
-(`KNOWLEDGE_FETCH_ASSESS_ASSERT`, which also routes to `vcs.git.status.v1`, i.e. it is not doing the
-work at all). "Insanely fast" is already true for 30 of 36 families and is an unbounded-loop problem in
-the one that is not.
+The 2-per-family whole-corpus sample cannot establish a family latency distribution. On this host,
+the reproducible 12-iteration reinspection microbenchmark above measures direct file reopens at
+0.183 ms (`cat`) and 0.156 ms (`wc -l`), but confined `sort` at 116.692 ms median. Confinement adds a
+real cost, and supported fast paths must be justified by independent byte-level checks, not by
+unconfined replay. Larger, n≥4 end-to-end samples are still needed before ranking other families by
+speed; the earlier claim of a knowledge-family “unbounded loop” was not established.
 
 ---
 
-## 3. Where the answer already exists in the tree (reuse before synthesis)
+## 3. Existing mechanisms to search and reuse
 
-The owner's standing instruction is that these problems are already solved somewhere in the brain, in a
-tool, or in a paper. Checked against the tree, that holds for the expensive rows, and it turns them
-from "build" into "wire":
-
-| problem | the mechanism that already exists | what is actually missing |
+| problem | existing mechanism | remaining evidence or work |
 |---|---|---|
-| P0 re-inspection | `raw_goal_trace_acceptance_v1`: `INSPECTORS`, `_ADAPTER_INSPECTORS`, `_inspect_shell_command_run`, and the refusal `NO_INDEPENDENT_REINSPECTION_FOR` | coverage: 14 keys against 248 adapters (see P0's table) |
-| P2 near-duplicate stealing | `goal_compiler._bm25_rerank` + `_order_with_act_flag` (pinned this session) | object-noun classes for the remaining homonyms |
-| P3 refusal fall-through | F24 already refuses `GOAL_STATED_ACT_INPUTS_UNBOUND`; the acceptance verifier already refuses on `STEP_*_NOT_VERIFIED_BY_ITS_PRODUCER` | one branch where the door admits after a refusal |
-| P5 named-but-unbound acts | the engines are in-tree (`vcs_git_v1`, `toolchain_v1`, `quality_v1`, `dynamic_probe_v1`, `perf_probe_v1`, `packaging_v1`) | registry entries and adapters for 28 acts, not new engines |
-| P6 multi-language depth | `code.ast.tree_sitter.*` and `.patch.tree_sitter.verified` already parse and patch | only the *edit* verbs; `go`/`rustc`/`gcc` are absent from this box |
-| P12 speed | the compiler is 87–440 ms per goal on code families | the knowledge family's unbounded loop |
+| P0 safe reinspection | `zero_ambient_namespace_launcher_v1` plus the read-only query wrapper, `INSPECTORS` / `_ADAPTER_INSPECTORS` | effective coverage unknown; replay checks do not prove all task obligations |
+| P0 obligation coverage | `raw_task_acceptance_residual_localizer_v1`, `lossless_raw_task_acceptance_gate_v1` | connect independently verifiable per-obligation evidence; multi-step 4/4 counterexamples remain |
+| P2 selection | `_bm25_rerank`, `_order_with_act_flag`, existing declarations | investigate object-role ambiguity and generated-goal misses without assuming unique act ownership |
+| P3 refusal | F24 and producer-verification refusals | trace why an admission can coexist with `typed_binding_refused` |
+| P4/P5 search | existing `vcs_git_v1`, `toolchain_v1`, `quality_v1`, `dynamic_probe_v1`, `perf_probe_v1`, `packaging_v1` | check each unmatched/keyword-only act against actual engines and evidence; do not infer all 28 are implemented |
+| P6 multi-language | tree-sitter parse and patch verification declarations | demonstrate real edit/test execution per language and check each host toolchain |
 
-## 4. What is NOT a problem (measured — stop spending time here)
+## 4. Lower priority or constrained by the owner
 
-- **Document / image / chart families.** 22 of 459 entries; env-blocked on this box; out of owner scope.
-- **`R1`/`R3` test rows.** The guard is *more* correct than the pin (`R12`, `R14`). The pins are stale,
-  not the code.
-- **The `EXT_JQ_TABLE` benchmark row.** The sentence states no `jq_filter`; inventing one is invention.
-  Refusal is the right answer until a declaration or a sentence provides it.
-- **Reachability.** 454 of 459 capabilities are askable from one plain sentence; the residue is 21
-  document readers and 5 named-shape defects, not a systemic hole.
-
----
-
-## 5. The work queue, ranked by capability per hour
-
-| # | work | closes | why it is cheap | cost |
-|---|---|---|---|---|
-| 1 | **re-inspection lane for every `output_verified` claim** | P0 | the artifact already carries its measurement digest + schema; re-reading it is a second op, no new engine | ~1 unit |
-| 2 | **DAG executor result contract** | P1 (5 rows) | the plan is already correct; the failure is one contract | ~1 unit |
-| 3 | ~~**one act, one owner** (registry law)~~ **DONE — verbs** | P2 | `_ACT_SYNONYMS` + the name rule; archive family 1.0 over 8, nothing else moved | done |
-| 3b | **one act, one owner for OBJECT nouns** (bundle / archive / package / manifest) | P0, P2 | same law, same place; the verb half is measured, the noun half is not | ~0.5 unit |
-| 4 | **refuse-then-stop** (kill the fall-through) | P3 (1 row, big blast radius) | one branch in admission | ~0.5 unit |
-| 5 | **six missing refactor verbs** on the existing AST engine (extract variable, replace conditional, remove dead imports, split module, encapsulate field, pull-up) | P4 (6 acts) | the engine, the plan shape and the pins already exist — this is the single highest-yield build | ~1 unit |
-| 6 | **`git.merge` + conflict resolve + `cherry_pick` + `worktree` + reflog undo** | P4/P5 (5 acts) | the `vcs_git_v1` adapter family exists; conflicts are text plus a test run | ~1 unit |
-| 7 | **`schema_migration` + `data.integrity_check` + `data.query_plan`** | P4 (3 acts) | `sqlite3` present, and a migration is a transaction plus a verification law | ~1 unit |
-| 8 | **`test.mutation`, `test.golden_snapshot`, `test.data_generation`** | P5 (3 acts) | mutmut absent → drive mutation from the existing AST patch engine + the test runner | ~1 unit |
-| 9 | **service policies: retry, timeout, circuit breaker, task graph** | P4/P5 (4 acts) | pure emission with a verification law; no runtime needed | ~1 unit |
-| 10 | **observability + CI config instrumentation** | P4/P5 (5 acts) | template emission, verified against the emitted file | ~1 unit each |
-| 11 | **34 pointerless + 8 dangling evidence blocks** | P8 | mechanical; each needs the lane that measured it to write one line | ~1 unit |
-| 12 | **`static.call_graph` + `static.dependency_graph`** | P4 (2 acts) | `ast` already gives both; the registry needs the verbs | ~0.5 unit |
-| 13 | **multi-language edit/test** | P6 | needs absent toolchains → **declare out of scope** until they exist | blocked |
-
-Rules that do not change: **reuse before synthesis**, **measure, never assert**, a red row is not an
-authority, and **no AI model participates in Brain-credited producer cognition**. Items 1–4 are
-laws that cost less than a unit together and unblock the trust chain; items 5–8 are the actual
-engineering capability the owner is asking for.
+- **Document / image / chart work** is lower priority by the owner's direction; some related tools are
+  missing on this host, but that does not imply every such capability is blocked.
+- **`R1`/`R3` test rows.** The guard's newer `R12`/`R14` verdicts require checking the sentence and
+  declared acts, rather than blindly restoring earlier status codes.
+- **`EXT_JQ_TABLE`** remains a wrong selection to the document converter. The sentence gives no
+  `jq_filter`; the machine must not invent one, and the correct handling needs a grounded contract.
+- **Generated-goal reachability.** 454 of 459 were bound in the plain-goal probe. That is one
+  instrument and does not prove general natural-language reachability; the naming-mode `NO_SENTENCE`
+  rows are a separate instrument limitation (P10).
 
 ---
+
+## 5. Work queue, evidence before estimates
+
+| priority | work | existing machinery / measured reason |
+|---|---|---|
+| 1 | **Per-obligation acceptance for composed traces** | reuse the residual localizer and lossless gate; 4/4 two-step constructed traces still credit an unperformed action (P0) |
+| 2 | **Measure and expand independent inspector coverage** | inspect actual result contracts and add capability-specific checks; no justified 192/267 coverage bound |
+| 3 | **Repair the local-adapter trace identity after acceptance is safe** | `shell.command.run`, `knowledge.consistency.assess`, and `knowledge.json.fetch.external` omit `capability_id` in their templates; the live trace can contain an action but be reported as `TRACE_HAS_NO_CAPABILITY_ACTIONS` |
+| 4 | **Resolve the observed refusal/admission contradiction** | reuse F24 and check actual binding evidence (P3) |
+| 5 | **Resolve generated-goal misses and object-role ambiguity** | reuse declarations and ranking, with benchmark, parity and reachability guards (P2/P10) |
+| 6 | **Search first for unmatched hardcore acts** | start with refactoring, version control, tests and build; registry vocabulary alone is not evidence of absence (P4/P5) |
+| 7 | **Audit pointerless and dangling evidence** | 34/8 observed in the pointer probe (P8); do not manufacture receipts |
+| 8 | **Measure slow confined readers and optimize only with independent byte checks** | n=12 microbenchmark shows a real confined-replay cost (P12) |
+
+No duration estimates are asserted. Reuse before synthesis; measure rather than assert; red is not
+authority; no AI model participates in Brain-credited producer cognition.
 
 ## 6. Reproduce
 
 ```bash
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_domain_coverage_v1.py
+# Exits 1 while any unperformed obligation receives acceptance credit:
+PYTHONPATH=. .venv/bin/python execution_guard/raw_acceptance_obligation_gap_probe_v1.py
+PYTHONPATH=. .venv/bin/python execution_guard/reinspection_timing_probe_v1.py
+PYTHONPATH=. .venv/bin/python -m pytest -q canonical/tests/test_command_reinspection_is_read_only_v1.py
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_missing_verb_probe_v1.py
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py --audit-pointers
 PYTHONPATH=. .venv/bin/python execution_guard/live_solver_end_to_end_measurement_v1.py \

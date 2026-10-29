@@ -1,15 +1,17 @@
-"""One runner serves 294 capabilities, so one inspector can re-inspect all of them.
+"""A shared runner makes one bounded inspector useful to multiple capabilities.
 
-Measured on ``e020898``: the 367-prose corpus passed 223 goals and certified
+Counts below are historical observations, not proof that every invocation is
+re-inspectable or accepted. Measured on ``e020898``: the 367-prose corpus passed 223 goals and certified
 **none** of them. 221 of those 223 were stopped by a single reason --
 ``NO_INDEPENDENT_REINSPECTION_FOR:canonical/runtime/<name>.py.auto.v1`` -- and
 every one of those rows executes through the same ``bound_capability_cli``
 adapter and reports the same result shape: ``argv``, ``returncode``, ``stdout``,
 ``stderr``.
 
-The inspector table was keyed on capability id, so a family of 294 capabilities
-that share one runner needed 294 entries to be checkable and had none. Keying a
-second lookup on the adapter covers the whole family with one entry.
+The inspector table was keyed on capability id, so a family sharing one runner
+needed individual entries to be checkable. A second lookup on the adapter lets
+one inspector handle compatible results; it may still refuse unsafe or
+unreproducible invocations.
 
   367-prose corpus exact-verified    0 of 223 -> 174 of 223
 
@@ -22,11 +24,11 @@ to come back identical. Measured beforehand, 14 of 14 sampled scripts returned a
 byte-identical result on a second run and left the working tree unchanged, so the
 world does answer for them.
 
-The interpreter allowance is deliberately the narrowest shape that covers the
-family, and the tests below are mostly about what it refuses: extra arguments, a
-script outside the repository, a path that is not a .py file, and a report whose
-output does not reproduce. An interpreter in general is not read-only and is not
-treated as one here.
+The interpreter allowance has a narrow argv shape, but an in-tree script can
+still write files. Reinspection now runs it in the read-only namespace, or
+refuses when confinement is unavailable. The tests cover honest output, a
+forgery, and shapes outside the allowance; separate adversarial tests exercise
+scripts that attempt to mutate the tree.
 
 The 46 rows that still refuse are recorded rather than papered over: they carry
 ``adapter=None`` because they are invoked in-process rather than through the
@@ -51,9 +53,10 @@ import canonical.runtime.raw_goal_trace_acceptance_v1 as _acceptance  # noqa: E4
 
 _ADAPTER_INSPECTORS = getattr(_acceptance, "_ADAPTER_INSPECTORS", None)
 SCRATCH = "canonical/astra_runtime/tmp/p3v9k"
-# A script that exists in the tree and is deterministic, so the re-run has
-# something real to agree with.
-REAL_SCRIPT = "canonical/runtime/compile_brain_unified_model_v1.py"
+# A real, read-only script in the test's own scratch tree. The old fixture ran
+# the model compiler, which WRITES the unified model, once before the inspector
+# ever saw it; it was not a read-only fixture.
+REAL_SCRIPT = SCRATCH + "/reader.py"
 
 
 def _cli_inspector():
@@ -84,6 +87,14 @@ class TestTheFamilyHasAnInspector(unittest.TestCase):
 
 class TestTheInterpreterAllowanceIsNarrow(unittest.TestCase):
     """Mostly about refusals. An interpreter is not read-only in general."""
+
+    def setUp(self):
+        directory = ROOT / SCRATCH
+        directory.mkdir(parents=True, exist_ok=True)
+        (ROOT / REAL_SCRIPT).write_text("print('read-only fixture')\n", encoding="utf-8")
+
+    def tearDown(self):
+        shutil.rmtree(ROOT / SCRATCH, ignore_errors=True)
 
     def test_a_bare_script_inside_the_repository_is_accepted(self):
         # Establish the real output first, so this is not a hardcoded expectation.
