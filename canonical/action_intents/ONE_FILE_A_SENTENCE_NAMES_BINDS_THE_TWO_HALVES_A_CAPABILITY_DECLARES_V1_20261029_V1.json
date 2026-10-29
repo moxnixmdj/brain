@@ -38,7 +38,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::One missing table entry, and behind it a trap: the producer runs the suite inside a copied workspace, so its captured stderr embeds that workspace's path. An inspector that compared stderr digests the way the shell-command inspector does would have refused every true report. The verdict -- the exit status -- is the claim that reproduces, and it is the claim that matters.",
- "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
+ "canonical_base_commit": "13b1eafe1953359319453ff2046584acd8a72d6f",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -54,7 +54,7 @@
  "incremental_spend_usd": 0,
  "intent_id": "ONE_FILE_A_SENTENCE_NAMES_BINDS_THE_TWO_HALVES_A_CAPABILITY_DECLARES_V1_20261029_V1",
  "load_bearing_primary": {
-  "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
+  "canonical_base_commit": "13b1eafe1953359319453ff2046584acd8a72d6f",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -93,7 +93,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
+  "canonical_base_commit": "13b1eafe1953359319453ff2046584acd8a72d6f",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "CHARGING_THE_TOKENS_OF_A_STATED_PATH_TO_THE_COVERAGE_BUDGET",
@@ -2011,7 +2011,7 @@
      "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
-     "git_blob_sha": "b392554248d5c58134a3f82f8ad183cd01233774",
+     "git_blob_sha": "e53e470f7728529ac5288e925d1bfa66089213fd",
      "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
     }
    ],
