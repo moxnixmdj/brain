@@ -47,7 +47,7 @@ import sys
 import tempfile
 import threading
 import urllib.request
-from concurrent.futures import ThreadPoolExecutor, as_completed, Future
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed, Future
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -472,140 +472,62 @@ def _eval_candidates_batch_distributed(batch_args: list[tuple]) -> list[dict | N
 
 
 def _eval_candidates_batch_local(batch_args: list[tuple]) -> list[dict | None]:
-    """Evaluate multiple candidates in one shared worktree (local batch mode).
+    """Evaluate multiple candidates in parallel using ProcessPoolExecutor.
 
-    Copies the source tree once, then applies/reverts each candidate's patch
-    in-place. Avoids O(tree_size) copytree per candidate. Sequential within
-    the batch but fastest for small-to-medium source trees where copytree
-    overhead dominates test execution time.
+    Each candidate runs _eval_candidate in its own isolated worktree,
+    but candidates run concurrently across CPU cores. Cached results
+    are returned immediately without re-execution.
     """
     if not batch_args:
         return []
 
-    # Use the first args to determine shared context.
-    (_, source_root_s, test_paths_s, repo_s, timeout_s, _, goal_id, _) = batch_args[0]
-    source_root_p = Path(source_root_s)
-    repo = Path(repo_s)
-    test_ps = [Path(tp) for tp in test_paths_s]
+    # Separate cached from uncached args.
+    cached_results: dict[int, dict] = {}
+    uncached_args: list[tuple] = []
+    for i, args in enumerate(batch_args):
+        (_, _, _, _, _, cache_key, _, cand_index) = args
+        cached = _cache_read(cache_key)
+        if cached is not None:
+            cached_results[cand_index] = dict(cached, cached=True)
+        else:
+            uncached_args.append(args)
 
-    # Create a single worktree copy for all candidates in this batch.
-    import tempfile as _tempfile
-    # Always create .swe_work directory first to avoid polluting repo root.
-    swe_work_dir = repo / ".swe_work"
-    swe_work_dir.mkdir(parents=True, exist_ok=True)
-    worktree_p = Path(_tempfile.mkdtemp(prefix='swe_batch_local_', dir=str(swe_work_dir)))
-    try:
-        # Copy source tree once.
-        shutil.copytree(source_root_p, worktree_p, dirs_exist_ok=True,
-                        ignore=shutil.ignore_patterns('.git', '__pycache__', '.pytest_cache', '.mypy_cache', '.ruff_cache'))
-        _purge_bytecode(worktree_p)
-
-        # Copy test files into the worktree so pytest imports from patched source.
-        pytest_targets: list[str] = []
-        for tp in test_ps:
-            try:
-                trel = tp.relative_to(source_root_p)
-            except ValueError:
-                trel = Path(*tp.relative_to(repo).parts) if tp.is_relative_to(repo) else tp.name
-            dest = worktree_p / trel
-            pytest_targets.append(str(dest))
-            if not dest.exists():
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(tp, dest)
-
-        results: list[dict | None] = []
-        env = dict(os.environ)
-        existing = env.get("PYTHONPATH", "")
-        env["PYTHONPATH"] = str(worktree_p) + (os.pathsep + existing if existing else "")
-
-        for args in batch_args:
-            (cc_json_s, _, _, _, cand_timeout_s, cache_key, _, cand_index) = args
-
-            # Cache check.
-            cached = _cache_read(cache_key)
-            if cached is not None:
-                results.append(dict(cached, cached=True))
-                continue
-
-            # Parse candidate: JSON list of [path, text] pairs.
-            source_candidates = json.loads(cc_json_s)
-
-            # Apply patch: write each changed file in the shared worktree.
-            original_contents: dict[str, str] = {}
-            for sc in source_candidates:
-                sp_str = sc[0]
-                new_text = sc[1] if len(sc) > 1 else None
-                if new_text is None:
-                    continue
-                sp = Path(sp_str)
+    # Evaluate uncached candidates in parallel via ProcessPoolExecutor.
+    # Each _eval_candidate call creates its own isolated worktree
+    # (copytree or git worktree), so workers never share mutable state.
+    parallel_results: dict[int, dict | None] = {}
+    if uncached_args:
+        max_parallel = min(len(uncached_args), os.cpu_count() or 4)
+        with ProcessPoolExecutor(max_workers=max_parallel) as pool:
+            futures = {pool.submit(_eval_candidate, args): i
+                       for i, args in enumerate(uncached_args)}
+            for fut in as_completed(futures):
+                idx = futures[fut]
                 try:
-                    rel = sp.relative_to(source_root_p).as_posix()
-                except ValueError:
-                    rel = sp.name
-                target = worktree_p / rel
-                # Save original.
-                if target.is_file():
-                    original_contents[str(target)] = target.read_text(encoding='utf-8')
-                else:
-                    original_contents[str(target)] = None  # marker for new file
-                target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_text(new_text, encoding='utf-8')
-            _purge_bytecode(worktree_p)
+                    result = fut.result()
+                except Exception:
+                    result = {"returncode": None, "timed_out": True, "cached": False}
+                (_, _, _, _, _, cache_key, _, cand_index) = uncached_args[idx]
+                parallel_results[cand_index] = result
 
-            # Run pytest on the patched worktree.
-            try:
-                cmd = [sys.executable, '-m', 'pytest'] + pytest_targets
-                proc_result = subprocess.run(
-                    cmd, cwd=str(worktree_p), env=env,
-                    capture_output=True, text=True, timeout=cand_timeout_s,
-                )
-                rc = proc_result.returncode
-                timed_out = False
-            except subprocess.TimeoutExpired:
-                rc = None
-                timed_out = True
-
-            result = {
-                'returncode': rc,
-                'timed_out': timed_out,
-                'cached': False,
-                'local_batch': True,
-                'batch_index': cand_index,
-            }
-            results.append(result)
-
-            # Write result to cache.
-            try:
-                CACHE_DIR.mkdir(parents=True, exist_ok=True)
-                (CACHE_DIR / (cache_key + '.json')).write_text(
-                    json.dumps(result), encoding='utf-8')
-            except OSError:
-                pass
-
-            # Revert: restore original file contents.
-            for sc in source_candidates:
-                sp_str = sc[0]
-                new_text = sc[1] if len(sc) > 1 else None
-                if new_text is None:
-                    continue
-                sp = Path(sp_str)
+                # Write result to cache.
                 try:
-                    rel = sp.relative_to(source_root_p).as_posix()
-                except ValueError:
-                    rel = sp.name
-                target = worktree_p / rel
-                orig = original_contents.get(str(target))
-                if orig is None:
-                    # Was a new file — remove it.
-                    if target.is_file():
-                        target.unlink()
-                else:
-                    target.write_text(orig, encoding='utf-8')
-            _purge_bytecode(worktree_p)
+                    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+                    (CACHE_DIR / (cache_key + '.json')).write_text(
+                        json.dumps(result), encoding='utf-8')
+                except OSError:
+                    pass
 
-    finally:
-        # Clean up the shared worktree.
-        shutil.rmtree(worktree_p, ignore_errors=True)
+    # Merge results in original batch order.
+    results: list[dict | None] = []
+    for args in batch_args:
+        (_, _, _, _, _, _, _, cand_index) = args
+        if cand_index in cached_results:
+            results.append(cached_results[cand_index])
+        elif cand_index in parallel_results:
+            results.append(parallel_results[cand_index])
+        else:
+            results.append({"returncode": None, "timed_out": True, "cached": False})
 
     return results
 
