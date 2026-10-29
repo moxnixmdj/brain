@@ -1,6 +1,6 @@
 # What stands between this machine and being the most advanced software engineer — V4
 
-Measured 2026-10-29 on `arena/47739ce8-brain` @ `2621ac7`, branched from `main` `e2d7981`.
+Measured 2026-10-29 on `arena/47739ce8-brain` @ `0936404`, branched from `main` `e2d7981`.
 Authority: **NONE**. Sandbox measurement, not independent verification. Credit: **0**.
 Producer-cognition model dependency: **0**. Incremental spend: **$0**.
 Scope: hardcore software engineering. PDF / DOCX / XLSX / chart / archive work is excluded *except*
@@ -34,6 +34,10 @@ so) — which is why the git lane is 0/4 and why every new verb has to be added 
 | S-2 | one question cost **five minutes** | `_name_indexes()` — the resolver asked a per-path question once per (row, import) pair: 54,722,085 calls | 324,727 ms cold / 313,732 ms warm → **21,756 / 5,896 ms**, identical answer (133 affected, 15 candidate tests) |
 | S-5 | **293 inventory rows were routable**, and a script's exit code was certified as the answer | `is_verified_entry()` from the registry's own declaration + "addressable by name, never by words" | `"Show the last 3 lines of <file>"` ran an unrelated `*_verify_v1.py` and returned PASS with `capability_id: None` → `shell.command.run`, `tail -n 3`, real output |
 | S-5b | `"Who last changed line 2 of <file>?"` was answered by `tail -n 1 <that file>` and certified **exact semantic acceptance** | `_PROVENANCE_RE` + one `_STATED_EFFECTS` row | PASS (fabricated) → `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` in 63 ms |
+| G-1 | `git` could be routed, bound and executed and was then refused by the inspector, because the acceptance table is keyed by **program name** | `_READ_ONLY_SUBCOMMANDS` — the same mechanism `_SIDE_EFFECTING_FLAGS_BY_PROGRAM` already uses, one level deeper | `git diff` / `git log` → **PASS with the re-run verifying stdout**; `git commit` still refuses |
+| S-2b | a new task id rebuilt a 2,256-file index | the derived index is named after the **scope** it describes, not the output file | 21,404 ms cold **every time** → 30,485 / 7,269 / 7,219 ms |
+| S-3b | a composed change was reported as **nothing happening** (the before-snapshot was taken *after* the chain ran) | the composed branch now snapshots first, like the main path | `delete_file` refused → **REAL**; honesty lane 0/5 → 1/5 |
+| F-1a | `format` had **0** rows and `ruff` was unreachable | `_PROSE_COMMAND` row + `_post_ruff_format`, which re-derives the promise by asking the tool (`ruff format --check`) | `Format <file>`: `NO_OBSERVED_EFFECT` → **PASS**, file rewritten and verified |
 
 The lesson that generalises, and the reason S-5 existed: **a report is not an answer, and an exit
 code is the most convincing report of all.** The matrix harness had the same defect (blob-substring
@@ -58,13 +62,13 @@ for `complexity` / `cyclomatic`, so there is nothing to route to. Same shape for
 **Reuse:** `radon`/`mccabe` are pure-python; `ast` gives cyclomatic count in ~30 lines without a
 dependency. This is a *declaration over an installed tool*, not a new engine.
 
-### F-1 · The verbs an SWE actually uses are absent (feature 0/7)
+### F-1 · The verbs an SWE actually uses are absent (feature 0/7, `format` now closed)
 
 Census over the 419 registry rows (id + `provides` + `keywords`):
 
 | verb | rows | verb | rows |
 |---|---|---|---|
-| `format` | **1** — a test-scaffold fusion, not a formatter | `complexity` / `cyclomatic` | **0** |
+| `format` | ~~1 — a test-scaffold fusion~~ **closed**: `Format <f>` binds `ruff format`, verified by `ruff format --check` | `complexity` / `cyclomatic` | **0** |
 | `pyproject` | **0** | `dead` / `unused` | **0** |
 | `type hint` | **0** | `blame` | **1** — inside a change-impact blob, not a blame capability |
 | `logging` | **0** | `fuzz` / `property-based` / `hypothesis` | **0** / **0** / 2 |
@@ -190,12 +194,15 @@ door that refuses what it cannot answer instead of certifying a report.
 
 ## 4. The order I would work in
 
-1. **G-1 — the acceptance key (program + subcommand).** It is one change and it unlocks the whole
-   git lane, which is the substrate of every other workflow (commit, diff, branch, blame, bisect).
-2. **S-2b — key the derived index by scope.** One line; 21.4 s → 5.9 s for every new question.
+1. ~~**G-1 — the acceptance key.**~~ **Half done**: the *key* is now program + subcommand, so every
+   READ git sentence is verified end to end. What remains is the writing half — `git commit`,
+   `git checkout`, `git branch` need postconditions that look at HEAD, exactly the way
+   `_post_ruff_format` looks at the tool's own check.
+2. ~~**S-2b — key the derived index by scope.**~~ **Done.** 21.4 s cold per new task id → 7.3 s.
 3. **T-2 — the tests lane (0/3).** `write_unit_test` promises a file and never writes it.
-4. **F-1 — the missing verbs** as declarations over installed tools (`ruff format`, `mypy`,
-   `import sort`, `logging`, `retry`, `profile`, `complexity`).
+4. **F-1 — the rest of the missing verbs.** `format` is done; the template it proved is
+   `_PROSE_COMMAND` row + a postcondition that asks the tool (next: `import sort` via
+   `ruff check --select I --fix`, which needs `--exit-non-zero-on-fix` to be checkable).
 5. **S-3 — prune the representation** (103 MB per index request is a tax on every downstream use).
 6. **S-4 — let the existing DAG planner fire on SWE chains.**
 7. **H-1** — needs an owner decision, not code.
