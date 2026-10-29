@@ -139,7 +139,7 @@ def run(args, root):
                  "--no-color-output", "--"] + touched,
                 cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
             if proc.returncode not in (0, 1):
-                _fail("MYPY_INVOCATION_FAILED:rc=" + str(proc.returncode) + ":" +
+                return _fail("MYPY_INVOCATION_FAILED:rc=" + str(proc.returncode) + ":" +
                       (proc.stderr.strip().splitlines() or ["<empty>"])[0][:200])
             rows = []
             for line in proc.stdout.splitlines():

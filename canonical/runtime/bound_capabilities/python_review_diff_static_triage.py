@@ -178,7 +178,7 @@ def run(args, root):
                  "--no-cache", "--isolated", "--select", "E,F,W", "--"] + touched,
                 cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
             if proc.returncode not in (0, 1):
-                _fail("RUFF_INVOCATION_FAILED:rc=" + str(proc.returncode))
+                return _fail("RUFF_INVOCATION_FAILED:rc=" + str(proc.returncode))
             try:
                 rows = json.loads(proc.stdout)
             except json.JSONDecodeError:

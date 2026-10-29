@@ -346,12 +346,16 @@ def _stmt_to_z3_constraints(stmt: ast.AST, env: dict[str, Any],
         raise ValueError(f'Unsupported statement: {ast.dump(stmt)}')
 
 
-def _z3_verify_function(patched_text: str,
+def _z3_verify_function(original_text: str | None,
+                        patched_text: str,
                         func_name: str) -> dict[str, Any]:
-    """Verify that patched function satisfies its own contract (pre/post conditions).
+    """Verify that patched function satisfies the ORIGINAL contract (pre/post conditions).
 
-    Uses Z3 to check: for all inputs where pre-condition holds,
-    post-condition holds for the patched version.
+    Uses Z3 to check: for all inputs where the ORIGINAL pre-condition holds,
+    the PATCHED function's behavior satisfies the ORIGINAL post-condition.
+
+    This is non-circular: the contract comes from the original (buggy) function,
+    so changing both code and contract together cannot fool the verifier.
 
     Returns {'verified': True} or {'verified': False, 'counterexample': {...}}.
     """
@@ -371,7 +375,19 @@ def _z3_verify_function(patched_text: str,
     if patched_func is None:
         return {'verified': False, 'reason': f'FUNCTION_NOT_FOUND: {func_name}', 'z3_available': True}
 
-    patched_contract = _extract_contract(patched_func)
+    # Extract contract from ORIGINAL function if available, else from patched.
+    original_contract = {'pre': [], 'post': [], 'return_type': None, 'params': {}}
+    if original_text:
+        try:
+            original_tree = ast.parse(original_text)
+            for node in ast.walk(original_tree):
+                if isinstance(node, ast.FunctionDef) and node.name == func_name:
+                    original_contract = _extract_contract(node)
+                    break
+        except SyntaxError:
+            pass
+
+    contract = original_contract if original_contract['pre'] or original_contract['post'] else _extract_contract(patched_func)
 
     # Build Z3 solver
     solver = z3.Solver()
@@ -385,9 +401,9 @@ def _z3_verify_function(patched_text: str,
         z3_sort = _py_type_to_z3(ptype, {})
         z3_vars[pname] = z3_sort(pname)
 
-    # Pre-conditions from patched function's docstring
+    # Pre-conditions from ORIGINAL function's docstring (the contract)
     pre_constraints = []
-    for pre_expr in patched_contract['pre']:
+    for pre_expr in contract['pre']:
         try:
             pre_ast = ast.parse(pre_expr, mode='eval').body
             pre_z3 = _expr_to_z3(pre_ast, {}, z3_vars)
@@ -395,9 +411,9 @@ def _z3_verify_function(patched_text: str,
         except Exception:
             pass  # Skip unparseable pre-conditions
 
-    # Post-conditions from patched function's docstring
+    # Post-conditions from ORIGINAL function's docstring (the contract)
     post_constraints = []
-    for post_expr in patched_contract['post']:
+    for post_expr in contract['post']:
         try:
             post_ast = ast.parse(post_expr, mode='eval').body
             post_z3 = _expr_to_z3(post_ast, {}, z3_vars)
@@ -470,10 +486,11 @@ def _z3_verify_function(patched_text: str,
     }
 
 
-def _z3_verify_patch(patched_text: str) -> dict[str, Any]:
+def _z3_verify_patch(original_text: str | None,
+                     patched_text: str) -> dict[str, Any]:
     """Verify all functions in patched source using Z3.
 
-    Each function is checked against its own pre/post contract.
+    Each function is checked against the ORIGINAL function's pre/post contract.
     Returns {'verified': True} or {'verified': False, 'counterexamples': [...]}.
     """
     if not _z3_available():
@@ -491,7 +508,7 @@ def _z3_verify_patch(patched_text: str) -> dict[str, Any]:
     counterexamples = []
     skipped = []
     for func_name in patched_funcs:
-        vresult = _z3_verify_function(patched_text, func_name)
+        vresult = _z3_verify_function(original_text, patched_text, func_name)
         if vresult.get('skipped'):
             skipped.append({'function': func_name, 'reason': vresult.get('reason')})
         elif not vresult.get('verified'):
@@ -525,6 +542,11 @@ def run(args: Mapping[str, Any], root: str | Path) -> dict[str, Any]:
 
     source_path = args.get('source_path')
     test_paths = args.get('test_paths') or []
+    source_p_path = Path(source_path)
+    if not source_p_path.is_absolute():
+        source_p_path = repo / source_p_path
+    source_p_path = source_p_path.resolve()
+    original_source = source_p_path.read_text(encoding='utf-8') if source_p_path.is_file() else ""
     worktree_rel = str(args.get('worktree_path') or 'canonical/tmp_cegis_z3_worktree')
     diff_rel = str(args.get('diff_path') or 'canonical/tmp_cegis_z3_diff.diff')
     pr_rel = str(args.get('pr_intent_path') or 'canonical/tmp_cegis_z3_pr.json')

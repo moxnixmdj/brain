@@ -51,6 +51,7 @@ from canonical.runtime.bound_capabilities import python_repo_diff_apply_full_tes
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
     _parse_diff_ranges,
 )
+from canonical.runtime.bound_capabilities.review_gate_input_safety_v1 import guard_inputs
 
 SCHEMA = "PROJECT_BRAIN_DIFF_MUTATION_GATE_V1"
 
@@ -169,7 +170,7 @@ def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
                                ast.Gt: b">", ast.LtE: b"<=", ast.GtE: b">="}[op.__class__]
                     off = operator_offset(prev_end, next_start, spelled)
                     if off is None:
-                        _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
+                        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
                     repl = {ast.Eq: b"!=", ast.NotEq: b"==", ast.Lt: b">=",
                             ast.Gt: b"<=", ast.LtE: b">", ast.GtE: b"<"}[op.__class__]
                     add_string("compare_swap", node.lineno, off, len(spelled), repl)
@@ -182,7 +183,7 @@ def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
             next_start = line_off[node.right.lineno - 1] + node.right.col_offset
             off = operator_offset(prev_end, next_start, spelled)
             if off is None:
-                _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
+                return _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
             repl = {ast.Add: b"-", ast.Sub: b"+", ast.Mult: b"/", ast.Div: b"*"}[op.__class__]
             add_string("arith_swap", node.lineno, off, len(spelled), repl)
         elif isinstance(node, ast.AugAssign) and isinstance(node.op, tuple(_ARITH_AUGOPS)):
@@ -192,7 +193,7 @@ def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
             next_start = line_off[node.value.lineno - 1] + node.value.col_offset
             off = operator_offset(prev_end, next_start, spelled)
             if off is None:
-                _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
+                return _fail("SPAN_INTEGRITY:" + rel + ":" + str(node.lineno))
             repl = {ast.Add: b"-=", ast.Sub: b"+=", ast.Mult: b"/=", ast.Div: b"*="}[op.__class__]
             add_string("aug_swap", node.lineno, off, len(spelled), repl)
         # ---- boolean literal swap: True -> False  (span covers the NAME)
@@ -243,15 +244,15 @@ def _apply_splice(text: str, rel: str, site: _Site) -> str:
     b = text.encode("utf-8")
     if (site.line < 1 or site.line >= len(line_off) or site.col < 0 or site.span <= 0
             or site.col >= line_off[site.line] - line_off[site.line - 1]):
-        _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
+        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
     off_line = line_off[site.line - 1] + site.col
     if off_line + site.span > len(b):
-        _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
+        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
     new = b[:off_line] + site.replacement + b[off_line + site.span:]
     try:
         return new.decode("utf-8")
     except UnicodeDecodeError:
-        _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
+        return _fail("SPAN_INTEGRITY:" + rel + ":" + str(site.line))
 
 
 # ---------------------------------------------------------------- gate
@@ -350,6 +351,9 @@ def run(args, root):
         return _fail("OUTPUT_INSIDE_ANCHOR")
     if out_abs == diff_abs:
         return _fail("OUTPUT_DIFF_OVERLAP")
+    guard_result = guard_inputs(anchor_abs, diff_abs, out_abs, py_changed.keys(), _fail)
+    if isinstance(guard_result, dict):
+        return guard_result
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
     min_ratio = float(args.get("min_kill_ratio") if args.get("min_kill_ratio") is not None else 1.0)
@@ -388,7 +392,7 @@ def run(args, root):
                                timeout=max(0.001, min(timeout_s, 60, deadline - time.monotonic())))
         if check.returncode != 0:
             stderr = check.stderr.decode("utf-8", "replace")
-            _fail("DIFF_DOES_NOT_APPLY:" + (stderr.strip().splitlines() or ["<empty>"])[0][:200])
+            return _fail("DIFF_DOES_NOT_APPLY:" + (stderr.strip().splitlines() or ["<empty>"])[0][:200])
         if deadline <= time.monotonic():
             return _fail("WALL_TIME_BUDGET_EXHAUSTED_BEFORE_BASELINE")
         applied = subprocess.run(["git", "apply", "-"], input=diff_bytes, cwd=scratch,

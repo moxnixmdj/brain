@@ -120,14 +120,14 @@ _Z3_VERIFY_PATCH = None
 _Z3_AVAILABLE = None
 
 
-def _z3_verify_patch_fn(patched_text):
+def _z3_verify_patch_fn(original_text, patched_text):
     global _Z3_VERIFY_PATCH
     if _Z3_VERIFY_PATCH is None:
         from canonical.runtime.bound_capabilities.software_patch_cegis_z3_v1 import (
             _z3_verify_patch as _fn,
         )
         _Z3_VERIFY_PATCH = _fn
-    return _Z3_VERIFY_PATCH(patched_text)
+    return _Z3_VERIFY_PATCH(original_text, patched_text)
 
 
 def _z3_available_fn():
@@ -489,8 +489,26 @@ def _eval_candidates_batch_local(batch_args: list[tuple]) -> list[dict | None]:
         # Copy source tree once.
         shutil.copytree(source_root_p, worktree_p, dirs_exist_ok=True,
                         ignore=shutil.ignore_patterns('.git', '__pycache__', '.pytest_cache', '.mypy_cache', '.ruff_cache'))
+        _purge_bytecode(worktree_p)
+
+        # Copy test files into the worktree so pytest imports from patched source.
+        pytest_targets: list[str] = []
+        for tp in test_ps:
+            try:
+                trel = tp.relative_to(source_root_p)
+            except ValueError:
+                trel = Path(*tp.relative_to(repo).parts) if tp.is_relative_to(repo) else tp.name
+            dest = worktree_p / trel
+            pytest_targets.append(str(dest))
+            if not dest.exists():
+                dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(tp, dest)
 
         results: list[dict | None] = []
+        env = dict(os.environ)
+        existing = env.get("PYTHONPATH", "")
+        env["PYTHONPATH"] = str(worktree_p) + (os.pathsep + existing if existing else "")
+
         for args in batch_args:
             (cc_json_s, _, _, _, cand_timeout_s, cache_key, _, cand_index) = args
 
@@ -523,12 +541,13 @@ def _eval_candidates_batch_local(batch_args: list[tuple]) -> list[dict | None]:
                     original_contents[str(target)] = None  # marker for new file
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text(new_text, encoding='utf-8')
+            _purge_bytecode(worktree_p)
 
             # Run pytest on the patched worktree.
             try:
-                cmd = [sys.executable, '-m', 'pytest'] + [str(tp) for tp in test_ps]
+                cmd = [sys.executable, '-m', 'pytest'] + pytest_targets
                 proc_result = subprocess.run(
-                    cmd, cwd=str(worktree_p),
+                    cmd, cwd=str(worktree_p), env=env,
                     capture_output=True, text=True, timeout=cand_timeout_s,
                 )
                 rc = proc_result.returncode
@@ -573,6 +592,7 @@ def _eval_candidates_batch_local(batch_args: list[tuple]) -> list[dict | None]:
                         target.unlink()
                 else:
                     target.write_text(orig, encoding='utf-8')
+            _purge_bytecode(worktree_p)
 
     finally:
         # Clean up the shared worktree.
@@ -1375,6 +1395,23 @@ def _cache_write(key: str, result: dict) -> None:
         except OSError:
             pass
 
+# ---------------------------------------------------------------------------
+# Gate result extraction — preserve error reasons from fail-closed gates
+# ---------------------------------------------------------------------------
+
+def _extract_gate_result(result: dict) -> tuple[str, dict]:
+    """Extract (gate_status, details) from a gate result.
+
+    Gates return either {"gate": "PASS"/"FAIL", ...} on success or
+    {"error": True, "reason": "..."} on failure. This preserves the
+    actual error reason instead of defaulting to "FAIL".
+    """
+    if result.get("error"):
+        return "FAIL", {"error_reason": result.get("reason", "UNKNOWN_ERROR")}
+    gate = result.get("gate", "FAIL")
+    return gate, {k: v for k, v in result.items() if k not in ("gate",)}
+
+
 
 # ---------------------------------------------------------------------------
 # Distributed candidate evaluation (work-stealing across nodes)
@@ -1826,8 +1863,8 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
         source_contents[str(sp)] = sp.read_bytes()
     # Primary source bytes (first file) for cache key.
     source_bytes = source_contents[str(source_p)]
-    timeout_s = max(1, min(int(timeout_s), 300))
-    max_candidates = max(1, min(int(max_candidates), 500))
+    timeout_s = max(1, int(timeout_s))
+    max_candidates = max(1, int(max_candidates))
     if max_workers is None:
         max_workers = os.cpu_count() or 4
     max_workers = max(1, int(max_workers))
@@ -3315,13 +3352,14 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     },
                     repo,
                 )
-                tgate = triage_result.get("gate", "FAIL")
+                tgate, tdetails = _extract_gate_result(triage_result)
                 gate_results["static_triage"] = {
                     "gate": tgate,
                     "blocking_findings": triage_result.get("blocking_findings", 0),
                     "advisory_findings": triage_result.get("advisory_findings", 0),
                     "syntax_errors": triage_result.get("syntax_errors", 0),
                     "ruff": triage_result.get("ruff", "UNAVAILABLE"),
+                    **tdetails,
                 }
                 if tgate == "FAIL":
                     _progress_adapter.stage_failed(gid, "advanced_gates", "STATIC_TRIAGE_REJECTED")
@@ -3355,13 +3393,14 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     },
                     repo,
                 )
-                tgate = type_result.get("gate", "FAIL")
+                tgate, tdetails = _extract_gate_result(type_result)
                 gate_results["type_check"] = {
                     "gate": tgate,
                     "blocking_findings": type_result.get("blocking_findings", 0),
                     "advisory_findings": type_result.get("advisory_findings", 0),
                     "syntax_errors": type_result.get("syntax_errors", 0),
                     "mypy": type_result.get("mypy", "UNAVAILABLE"),
+                    **tdetails,
                 }
                 if tgate == "FAIL":
                     _progress_adapter.stage_failed(gid, "advanced_gates", "TYPE_CHECK_REJECTED")
@@ -3397,13 +3436,14 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     },
                     repo,
                 )
-                gate = sec_result.get("gate", "FAIL")
+                gate, sdetails = _extract_gate_result(sec_result)
                 gate_results["sast_security"] = {
                     "gate": gate,
                     "blocking_findings": sec_result.get("blocking_findings", 0),
                     "advisory_findings": sec_result.get("advisory_findings", 0),
                     "syntax_errors": sec_result.get("syntax_errors", 0),
                     "bandit": sec_result.get("bandit", "UNAVAILABLE"),
+                    **sdetails,
                 }
                 if gate != "PASS" and gate != "PASS_BASELINE_ONLY":
                     _progress_adapter.stage_failed(gid, "advanced_gates", "SAST_REJECTED")
@@ -3444,13 +3484,14 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     },
                     repo,
                 )
-                pgate = perf_result.get("gate", "FAIL")
+                pgate, pdetails = _extract_gate_result(perf_result)
                 gate_results["performance"] = {
                     "gate": pgate,
                     "slowdown_ratio": perf_result.get("slowdown_ratio", 0),
                     "threshold": 1.0 + perf_tolerance,
                     "anchor_median_ns": perf_result.get("anchor_median_ns", 0),
                     "patched_median_ns": perf_result.get("patched_median_ns", 0),
+                    **pdetails,
                 }
                 if pgate == "FAIL":
                     _progress_adapter.stage_failed(gid, "advanced_gates", "PERFORMANCE_REGRESSION")
@@ -3484,11 +3525,12 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     },
                     repo,
                 )
-                cgate = cov_result.get("gate", "FAIL")
+                cgate, cdetails = _extract_gate_result(cov_result)
                 gate_results["coverage"] = {
                     "gate": cgate,
                     "missing_lines": cov_result.get("missing_lines", 0),
                     "coverage_pct": cov_result.get("coverage_pct", 0.0),
+                    **cdetails,
                 }
                 if cgate == "FAIL":
                     _progress_adapter.stage_failed(gid, "advanced_gates", "COVERAGE_REJECTED")
@@ -3523,12 +3565,13 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     },
                     repo,
                 )
-                mgate = mut_result.get("gate", "FAIL")
+                mgate, mdetails = _extract_gate_result(mut_result)
                 gate_results["mutation"] = {
                     "gate": mgate,
                     "survivors": mut_result.get("survivors", 0),
                     "mutants_generated": mut_result.get("mutants_generated", 0),
                     "kill_ratio": mut_result.get("kill_ratio", 0.0),
+                    **mdetails,
                 }
                 if mgate == "FAIL":
                     _progress_adapter.stage_failed(gid, "advanced_gates", "MUTATION_REJECTED")
@@ -3606,7 +3649,8 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     patched_source_wt = worktree_p / source_p.relative_to(source_root_p)
                     if patched_source_wt.is_file():
                         patched_source = patched_source_wt.read_text(encoding="utf-8")
-                        z3_result = _z3_verify_patch_fn(patched_source)
+                        original_source = source_p.read_text(encoding="utf-8") if source_p.is_file() else ""
+                        z3_result = _z3_verify_patch_fn(original_source, patched_source)
                         zgate = z3_result.get("verified", False)
                         gate_results["z3_formal"] = {
                             "gate": "PASS" if zgate else "FAIL",

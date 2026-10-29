@@ -29,6 +29,7 @@ from canonical.runtime.bound_capabilities import python_repo_diff_apply_full_tes
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
     _parse_diff_ranges,
 )
+from canonical.runtime.bound_capabilities.review_gate_input_safety_v1 import guard_inputs
 
 SCHEMA = "PROJECT_BRAIN_DIFF_COVERAGE_GATE_V1"
 
@@ -97,6 +98,9 @@ def run(args, root):
     cov_probe = subprocess.run([python_exe, "-m", "coverage", "--version"],
                                capture_output=True, text=True, timeout=min(timeout_s, 30))
     coverage_on = cov_probe.returncode == 0 and "overage" in cov_probe.stdout
+    guard_result = guard_inputs(anchor_abs, diff_abs, out_abs, py_changed.keys(), _fail)
+    if isinstance(guard_result, dict):
+        return guard_result
     out_abs.parent.mkdir(parents=True, exist_ok=True)
     unobserved = []
     with tempfile.TemporaryDirectory(prefix=".brain-coverage-", dir=out_abs.parent) as temporary:
@@ -108,7 +112,7 @@ def run(args, root):
                                cwd=scratch, capture_output=True, text=True,
                                timeout=min(timeout_s, 60))
         if check.returncode != 0:
-            _fail("DIFF_DOES_NOT_APPLY:" + (check.stderr.strip().splitlines() or ["<empty>"])[0][:200])
+            return _fail("DIFF_DOES_NOT_APPLY:" + (check.stderr.strip().splitlines() or ["<empty>"])[0][:200])
         applied = subprocess.run(["git", "apply", str(diff_abs)],
                                  cwd=scratch, capture_output=True, text=True,
                                  timeout=min(timeout_s, 60))
@@ -147,7 +151,7 @@ def run(args, root):
             if not evidence["oracle_ok"]:
                 if evidence["reason"] == "TEST_FAILURE":
                     return _fail("SUITE_RED:coverage under a failing suite is untrustworthy evidence")
-                _fail("SUITE_EVIDENCE_UNAVAILABLE:" + str(evidence["reason"]))
+                return _fail("SUITE_EVIDENCE_UNAVAILABLE:" + str(evidence["reason"]))
             # Run coverage json inside the sandbox so /project/ source paths
             # (recorded by coverage run under --source=.) resolve correctly.
             # JSON output goes inside scratch; file names carry the /project/
@@ -162,7 +166,7 @@ def run(args, root):
                 return _fail("COVERAGE_JSON_TIMEOUT")
             if rep["returncode"] != 0 or not jf.is_file():
                 err_text = (rep.get("stderr", "") or rep.get("stdout", "") or "<error>")
-                _fail("COVERAGE_JSON_FAILED:" + str(err_text).strip().splitlines()[-1][:200])
+                return _fail("COVERAGE_JSON_FAILED:" + str(err_text).strip().splitlines()[-1][:200])
             try:
                 doc = json.loads(jf.read_text(encoding="utf-8"))
             except (OSError, json.JSONDecodeError):

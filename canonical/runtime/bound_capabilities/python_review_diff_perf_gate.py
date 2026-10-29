@@ -50,6 +50,11 @@ output_path, output_sha256, output_verified, verified.
 
 from __future__ import annotations
 
+from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
+    _parse_diff_ranges,
+)
+from canonical.runtime.bound_capabilities.review_gate_input_safety_v1 import guard_inputs
+
 import hashlib
 import json
 import os
@@ -141,7 +146,7 @@ def _bench(tree: Path, bench_rel: str, python_exe: str, repeats: int,
                 return _fail("BENCH_CALLABLE_MISSING:" + bench_rel)
         except (json.JSONDecodeError, IndexError, KeyError):
             pass
-        _fail("BENCH_EXPLODED:rc=" + str(proc.returncode) + ":" +
+        return _fail("BENCH_EXPLODED:rc=" + str(proc.returncode) + ":" +
               (proc.stderr.strip().splitlines() or ["<empty>"])[-1][:200])
     try:
         doc = json.loads(proc.stdout.strip().splitlines()[-1])
@@ -170,6 +175,8 @@ def run(args, root):
     diff_text = diff_abs.read_text(encoding="utf-8", errors="replace")
     if not diff_text.strip():
         return _fail("DIFF_EMPTY")
+    changed, _created = _parse_diff_ranges(diff_text)
+    py_changed = {p: r for p, r in changed.items() if p.endswith(".py")}
     bench_rel = str(args.get("bench_path") or "")
     out_rel = str(args.get("output_path") or "")
     out_abs = _safe_path(repo, out_rel)
@@ -188,6 +195,9 @@ def run(args, root):
         current = current / part
         if current.is_symlink():
             return _fail("BENCH_PATH_ESCAPE")
+    guard_result = guard_inputs(anchor_abs, diff_abs, out_abs, py_changed.keys(), _fail)
+    if isinstance(guard_result, dict):
+        return guard_result
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
     repeats = max(3, int(args.get("repeats") or 5))
@@ -210,7 +220,7 @@ def run(args, root):
                                cwd=scratch_p, capture_output=True, text=True,
                                timeout=min(timeout_s, 60))
         if check.returncode != 0:
-            _fail("DIFF_DOES_NOT_APPLY:" + (check.stderr.strip().splitlines() or ["<empty>"])[0][:200])
+            return _fail("DIFF_DOES_NOT_APPLY:" + (check.stderr.strip().splitlines() or ["<empty>"])[0][:200])
         applied = subprocess.run(["git", "apply", str(diff_abs)],
                                  cwd=scratch_p, capture_output=True, text=True,
                                  timeout=min(timeout_s, 60))

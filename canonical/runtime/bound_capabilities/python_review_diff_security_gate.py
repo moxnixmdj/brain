@@ -148,7 +148,7 @@ def run(args, root):
                     cwd=worktree_abs, capture_output=True, text=True,
                     timeout=timeout_s)
                 if proc.returncode not in (0, 1):
-                    _fail("BANDIT_INVOCATION_FAILED:rc=" + str(proc.returncode) + ":" +
+                    return _fail("BANDIT_INVOCATION_FAILED:rc=" + str(proc.returncode) + ":" +
                           (proc.stderr.strip().splitlines() or ["<empty>"])[0][:200])
                 try:
                     doc = json.loads(proc.stdout)
