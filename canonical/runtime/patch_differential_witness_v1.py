@@ -473,11 +473,23 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
         # a stated postcondition violated (any input), and inputs the original answered
         # that the candidate turns into an exception: both before the plain delta
         posts_broken = sum(1 for o in outcomes if isinstance(o, list) and o and o[0] == "R!")
+        # ... and the violations the candidate introduces: inputs on which the original
+        # kept the contract and the candidate breaks it (the original's own violations
+        # are the contract's quarrel with the original, not with the patch)
+        posts_new = 0
+        counterexample = None
+        for k, (a, b) in enumerate(zip(original, outcomes)):
+            if isinstance(b, list) and b and b[0] == "R!" and not (isinstance(a, list) and a and a[0] == "R!"):
+                posts_new += 1
+                if counterexample is None:
+                    counterexample = {"input_index": k, "result": b[1:], "original": a}
         new_exc = hangs + sum(1 for a, b in zip(original, outcomes)
                               if isinstance(a, list) and isinstance(b, list) and a and b and a[0] != "E"
                               and b[0] == "E" and not _unknown(b))
         rows.append({"index": index, "delta_outside_tests": outside, "delta_on_tests": on_tests,
-                     "inexact_on_tests": inexact, "postcondition_violations": posts_broken, "new_exceptions": new_exc,
+                     "inexact_on_tests": inexact, "postcondition_violations": posts_broken,
+                     "new_postcondition_violations": posts_new, "contract_counterexample": counterexample,
+                     "new_exceptions": new_exc,
                      "hangs_kept": hangs_kept,
                      "edit_size": (sizes or {}).get(index, 0),
                      "grid_inputs": len(original) - n_test_inputs, "witness": "MEASURED"})
@@ -526,6 +538,14 @@ def rank(original: list[Any] | None, per_candidate: list[tuple[int, list[Any] | 
             r["tie_at_top"] = len(tied) > 1
             r["tied_with_top"] = r["witness"] == "MEASURED" and r["behaviour_class"] in tied
     return rows
+
+
+def _call_text(name: str, cls: str | None, n_ctor: int, row: list[Any]) -> str:
+    """`f(1, 2)` / `Cls(3).m(1)` for one probe input, as a test would spell it."""
+    args = [repr(a) for a in row]
+    if cls:
+        return cls + "(" + ", ".join(args[:n_ctor]) + ")." + name + "(" + ", ".join(args[n_ctor:]) + ")"
+    return name + "(" + ", ".join(args) + ")"
 
 
 def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: int,
@@ -588,10 +608,36 @@ def witness(*, tree: pathlib.Path, target_rel: str, original_text: str, lineno: 
     expected_reprs = [exp_map.get(json.dumps(row, default=repr)) for row in t_inputs]
     ranking = rank(original, per, len(t_inputs), expected_reprs,
                    {i: size(text) for i, text in greens})
+    # a tie the suite cannot break is also the test that would break it: the probe
+    # inputs on which the tied behaviours differ, with each behaviour's answer, so
+    # the caller (or the user) can write the assertion that decides -- the one
+    # thing an under-specified suite is missing
+    for r in ranking:
+        cx = r.get("contract_counterexample")
+        if cx and cx.get("input_index") is not None and cx["input_index"] < len(inputs):
+            cx["call"] = _call_text(name, cls, n_ctor, inputs[cx["input_index"]])
+    distinguishing: list[dict[str, Any]] = []
+    if ranking and ranking[0].get("tie_at_top"):
+        by_index = dict(per)
+        reps = []
+        seen_classes: set[int] = set()
+        for r in ranking:
+            if r.get("tied_with_top") and r.get("behaviour_class") not in seen_classes:
+                seen_classes.add(r["behaviour_class"])
+                reps.append(r["index"])
+        for k in range(len(t_inputs), len(inputs)):
+            outs = {i: (by_index.get(i) or [None] * len(inputs))[k] for i in reps}
+            if len({json.dumps(o, default=repr) for o in outs.values()}) > 1:
+                distinguishing.append({"input": inputs[k], "call": _call_text(name, cls, n_ctor, inputs[k]),
+                                       "outcomes": {str(i): o for i, o in outs.items()}})
+            if len(distinguishing) >= 3:
+                break
     return {"status": "MEASURED" if original is not None else "WITNESS_UNAVAILABLE:ORIGINAL_PROBE_FAILED",
+            "distinguishing_inputs": distinguishing,
             "function": name, "class": cls, "module": module_name, "test_inputs": len(t_inputs), "grid_inputs": n_grid,
             "property_inputs": len(inputs) - len(t_inputs) - n_grid, "hypothesis": prop_status,
             "postconditions": posts,
+            "original_postcondition_violations": sum(1 for o in (original or []) if isinstance(o, list) and o and o[0] == "R!"),
             "behaviour_classes": len({r.get("behaviour_class") for r in ranking if "behaviour_class" in r}),
             "tie_at_top": any(r.get("tie_at_top") for r in ranking),
             "ranking": ranking, "proves_correctness": False}

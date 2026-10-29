@@ -141,6 +141,56 @@ def _grouping_paren(raw: bytes, at: int) -> bool:
     return True
 
 
+_TOPLEVEL_CACHE: dict[str, list[tuple[int, int]]] = {}
+
+
+def _toplevel_ranges(source_text: str) -> list[tuple[int, int]]:
+    """(first, last) line of every top-level statement -- the unit a candidate's
+    syntax is checked in (parsing the whole file once per candidate was the cost
+    that made a 1,500-line module unrepairable inside any deadline: measured
+    tqdm/_tqdm.py, 0 candidates judged in 70 s, all of it spent in ast.parse)."""
+    key = _sha(source_text.encode("utf-8"))
+    hit = _TOPLEVEL_CACHE.get(key)
+    if hit is None:
+        try:
+            t = ast.parse(source_text)
+            # every function body (methods included) and every top-level statement;
+            # the smallest range holding the line is the unit checked
+            hit = sorted({(n.lineno, n.end_lineno or n.lineno) for n in ast.walk(t)
+                          if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+                         | {(n.lineno, n.end_lineno or n.lineno) for n in t.body},
+                         key=lambda r: (r[1] - r[0], r[0]))
+        except SyntaxError:
+            hit = []
+        if len(_TOPLEVEL_CACHE) > 64:
+            _TOPLEVEL_CACHE.clear()
+        _TOPLEVEL_CACHE[key] = hit
+    return hit
+
+
+def _parses(candidate: str, source_text: str, first_line: int) -> bool:
+    """Does ``candidate`` parse?  Checked on the top-level statement that holds
+    ``first_line`` (dedented), the whole file only when there is no such statement
+    or the segment itself does not parse on its own."""
+    for a, b in _toplevel_ranges(source_text):
+        if a <= first_line <= b:
+            delta = candidate.count("\n") - source_text.count("\n")
+            seg = candidate.splitlines(keepends=True)[a - 1:b + delta]
+            import textwrap
+            try:
+                ast.parse(textwrap.dedent("".join(seg)))
+                return True
+            except SyntaxError:
+                break
+            except Exception:  # noqa: BLE001
+                break
+    try:
+        ast.parse(candidate)
+        return True
+    except SyntaxError:
+        return False
+
+
 def _render(source_text: str, node: ast.AST, replacement: ast.AST) -> str | None:
     span = _span(node)
     if span is None:
@@ -167,9 +217,7 @@ def _render(source_text: str, node: ast.AST, replacement: ast.AST) -> str | None
         indent = " " * span[1]
         text = ("\n" + indent).join(text.split("\n"))
     candidate = (raw[:start] + text.encode("utf-8") + raw[end:]).decode("utf-8")
-    try:
-        ast.parse(candidate)
-    except SyntaxError:
+    if not _parses(candidate, source_text, span[0]):
         return None
     return candidate
 
@@ -226,15 +274,22 @@ def _scope_names(tree: ast.AST) -> dict[int, list[str]]:
             if n is fn or not hasattr(n, "lineno"):
                 continue
             names = list(params)
-            for ln, name in assigned:
+            # nearest assignment first: in a long method the locals bound just above
+            # the line are the ones an edit there plausibly means
+            for ln, name in sorted(assigned, key=lambda r: -r[0]):
                 if ln < n.lineno and name not in names:
                     names.append(name)
             out[id(n)] = names
     return out
 
 
-def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple[ast.AST, str, str, Callable[[ast.AST], ast.AST]]]:
-    """Yield (node, kind, detail, replacer).  Replacers build a NEW node from the original."""
+_EXTEND_NAMES = 12   # in-scope names EXPR_EXTEND / NAME_REPLACE try per site (params first, then nearest locals)
+
+
+def _edits(tree: ast.AST, nums: list[Any], strings: list[str],
+           lines: set[int] | None = None) -> Iterator[tuple[ast.AST, str, str, Callable[[ast.AST], ast.AST]]]:
+    """Yield (node, kind, detail, replacer).  Replacers build a NEW node from the original.
+    With ``lines``, only nodes touching one of those lines are edited."""
     cond_tests = {id(n.test) for n in ast.walk(tree) if isinstance(n, (ast.If, ast.While, ast.IfExp, ast.Assert))}
     returns = {id(n.value) for n in ast.walk(tree) if isinstance(n, ast.Return) and n.value is not None}
     assigned_values = {id(n.value) for n in ast.walk(tree) if isinstance(n, (ast.Assign, ast.AugAssign, ast.AnnAssign)) and n.value is not None}
@@ -261,6 +316,8 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
     for node in ast.walk(tree):
         if _span(node) is None:
             continue
+        if lines is not None and not any(ln in lines for ln in range(node.lineno, (getattr(node, "end_lineno", None) or node.lineno) + 1)):
+            continue
         # a missing term: extend the returned/assigned expression by one in-scope name
         # (return w -> return w * h).  The original stays a sub-expression: smallest edit
         # that adds code, and the one PAR/Prophet-style template that adds code at all.
@@ -269,7 +326,7 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
             # used deeper inside (a comprehension's source) may well be the missing
             # term (measured: powerset -- `rest_subsets + [[first] + s for s in rest_subsets]`)
             used = _chain_names(node)
-            for name in scope.get(id(node), []):
+            for name in scope.get(id(node), [])[:_EXTEND_NAMES]:
                 if name in used:
                     continue
                 for t in (ast.Mult, ast.Add, ast.Sub, ast.FloorDiv, ast.Div, ast.Mod):
@@ -319,13 +376,13 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
                 yield node, "NAME_OFFSET", node.id + " " + lab, (
                     lambda n, t=t: ast.BinOp(left=ast.Name(id=n.id, ctx=ast.Load()), op=t(), right=ast.Constant(value=1)))
             # the wrong variable: another name in scope of the same function
-            for other in scope.get(id(node), []):
+            for other in scope.get(id(node), [])[:_EXTEND_NAMES]:
                 if other != node.id:
                     yield node, "NAME_REPLACE", node.id + "->" + other, (lambda n, other=other: ast.Name(id=other, ctx=ast.Load()))
             # a name that is an argument, an index or a comparison operand joined to another
             # in-scope name: kth(above, k) -> kth(above, k - num_lessoreq)
             if id(node) in arg_like:
-                for other in scope.get(id(node), []):
+                for other in scope.get(id(node), [])[:_EXTEND_NAMES]:
                     if other == node.id:
                         continue
                     for t in (ast.Sub, ast.Add):
@@ -335,7 +392,7 @@ def _edits(tree: ast.AST, nums: list[Any], strings: list[str]) -> Iterator[tuple
         if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load) and id(node) in arg_like:
             # an argument or index off by one element: b -> b[1:], arr -> arr[:-1]
             bounds: list[tuple[Any, Any, str]] = [(1, None, "[1:]"), (None, -1, "[:-1]")]
-            for other in scope.get(id(node), []):        # arr -> arr[k:] (the first k already consumed)
+            for other in scope.get(id(node), [])[:_EXTEND_NAMES]:        # arr -> arr[k:] (the first k already consumed)
                 if other != node.id:
                     bounds += [(other, None, "[" + other + ":]"), (None, other, "[:" + other + "]")]
             for lo, hi, lab in bounds:
@@ -415,15 +472,53 @@ _KIND_ORDER = {"BINOP_DROP": 0, "COMPARE_SWAP": 0, "BINOP_SWAP": 0, "BOOL_SWAP":
                "STMT_SWAP": 2, "STMT_DELETE": 2, "RETURN_INSERT": 2, "STMT_INSERT": 2, "GUARD_INSERT": 3}
 
 
+GENERATE_LINE_WINDOW = 80   # suspicious lines edited when the localizer ranked any
+
+
 def generate(source_text: str, nums: list[Any], strings: list[str],
-             priority_lines: Iterable[int] = ()) -> list[tuple[dict[str, Any], str]]:
-    """All distinct candidates for one file, spectrum-first, each parsed once."""
+             priority_lines: Iterable[int] = (), line_window: int = GENERATE_LINE_WINDOW,
+             max_candidates: int = 2000) -> list[tuple[dict[str, Any], str]]:
+    """All distinct candidates for one file, spectrum-first, each parsed once.
+
+    With ranked lines the edits are confined to the top ``line_window`` of them (the
+    APR literature's fault-localisation-first; GenProg, Prophet): every candidate
+    costs one parse of the whole file, and a 1,500-line module edited everywhere
+    produced tens of thousands of candidates that no deadline could judge
+    (measured: tqdm/std.py, the generator alone past 120 s, nothing tested).
+    Fewer ranked lines than the window (a traceback's one line, a short spectrum)
+    widen it to their neighbourhood, nearest lines first, ranked after them.
+    Without ranked lines (no localizer) the whole file is edited as before."""
     tree = ast.parse(source_text)
     rank = {int(ln): i for i, ln in enumerate(priority_lines) if ln is not None}
+    window = set(list(rank)[:line_window]) if rank else None
+    if window is not None and len(window) < line_window:
+        last = source_text.count("\n") + 1
+        base = sorted(window)
+        for dist in range(1, line_window):
+            if len(window) >= line_window:
+                break
+            for ln in base:
+                for near in (ln - dist, ln + dist):
+                    if 1 <= near <= last and near not in rank and len(window) < line_window:
+                        rank[near] = len(rank)
+                        window.add(near)
     rows: list[tuple[tuple, dict[str, Any], str]] = []
     seen: set[str] = set()
     edits: dict[str, tuple[tuple, Callable[[ast.AST], ast.AST]]] = {}
-    for node, kind, detail, replacer in _edits(tree, nums, strings):
+    # two passes: every edit is first only a (key, node, replacer) -- cheap -- and the
+    # texts are rendered in spectrum order up to ``max_candidates``.  Rendering first
+    # held one copy of the whole file per edit: a 5,000-line module with ten thousand
+    # edits was gigabytes before anything was judged (measured: youtube-dl/utils.py,
+    # the run killed by the kernel at 4 GB)
+    pending: list[tuple[tuple, ast.AST, str, str, Callable[[ast.AST], ast.AST]]] = []
+    for node, kind, detail, replacer in _edits(tree, nums, strings, window):
+        line = getattr(node, "lineno", 10**9)
+        key = (rank.get(line, len(rank)), line, _KIND_ORDER.get(kind, 1), getattr(node, "col_offset", 0), len(pending))
+        pending.append((key, node, kind, detail, replacer))
+    pending.sort(key=lambda r: r[0])
+    for key, node, kind, detail, replacer in pending:
+        if len(rows) >= max_candidates:
+            break
         candidate = _render(source_text, node, replacer(node))
         if candidate is None or candidate == source_text:
             continue
@@ -431,11 +526,8 @@ def generate(source_text: str, nums: list[Any], strings: list[str],
         if digest in seen:
             continue
         seen.add(digest)
-        line = getattr(node, "lineno", 10**9)
-        key = (rank.get(line, len(rank)), line, _KIND_ORDER.get(kind, 1), getattr(node, "col_offset", 0), len(rows))
         edits[digest] = (_node_key(node), replacer)
         rows.append((key, {**_descriptor(node, kind, detail), "candidate_sha256": digest}, candidate))
-    rows.sort(key=lambda r: r[0])
     out = [(d, c) for _, d, c in rows]
     _LAST_EDITS[id(out)] = edits
     if len(_EDITS_BY_SHA) > 200000:
@@ -1153,6 +1245,193 @@ def statement_candidates(source_text: str, priority_lines: Iterable[int], *, max
                 for k, name in enumerate(stores[:6]):
                     emit((*base_key, 2, 3, k), last, "RETURN_INSERT", "return " + name,
                          lines[:lb] + [find + "return " + name + "\n"] + lines[lb:])
+    out.sort(key=lambda r: r[0])
+    return [(d, c) for _, d, c in out]
+
+
+_KIND_ORDER["STMT_REPLACE"] = 2.5
+_KIND_ORDER["STMT_INSERT_DONOR"] = 2.5
+
+
+def _stmt_tokens(st: ast.stmt) -> set[str]:
+    toks: set[str] = {type(st).__name__}
+    for n in ast.walk(st):
+        if isinstance(n, (ast.BinOp, ast.BoolOp, ast.Compare, ast.Subscript, ast.ListComp, ast.Dict, ast.List, ast.Tuple, ast.IfExp)):
+            toks.add(type(n).__name__)
+        if isinstance(n, ast.Name):
+            toks.add(n.id)
+        elif isinstance(n, ast.Attribute):
+            toks.add("." + n.attr)
+        elif isinstance(n, ast.Constant):
+            toks.add("#" + repr(n.value)[:20])
+        elif isinstance(n, (ast.operator, ast.cmpop, ast.boolop, ast.unaryop)):
+            toks.add(type(n).__name__)
+        elif isinstance(n, ast.Call):
+            toks.add("call")
+    return toks
+
+
+def _rename(st: ast.stmt, mapping: dict[str, str]) -> ast.stmt:
+    class R(ast.NodeTransformer):
+        def visit_Name(self, node: ast.Name) -> ast.AST:
+            if node.id in mapping:
+                return ast.copy_location(ast.Name(id=mapping[node.id], ctx=node.ctx), node)
+            return node
+    import copy
+    return ast.fix_missing_locations(R().visit(copy.deepcopy(st)))
+
+
+def donor_candidates(source_text: str, priority_lines: Iterable[int], donors: list[tuple[str, str]], *,
+                     max_lines: int = 4, max_donors: int = 16, max_renamings: int = 4,
+                     min_similarity: float = 0.25) -> list[tuple[dict[str, Any], str]]:
+    """Fixes already written elsewhere in the project, adapted to the fault site
+    (the redundancy assumption, Martinez et al. 2014; SimFix / ssFix, Jiang et al.
+    2018 and Xin & Reiss 2017): for each suspicious simple statement, the single-line
+    simple statements of the same kind anywhere in ``donors`` [(rel, text)] (and the
+    file itself) ranked by token similarity, their free names re-bound to names in
+    scope at the site (one unbound name at a time, every in-scope name tried, bounded),
+    and offered as
+      STMT_REPLACE        the suspicious statement replaced by the adapted donor
+      STMT_INSERT_DONOR   the adapted donor inserted before / after it
+    Whole-line, bounded (``max_lines`` sites x ``max_donors`` donors x ``max_renamings``);
+    the judge decides, the witness ranks.  Same-file donors come first.
+    """
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError:
+        return []
+    lines = source_text.splitlines(keepends=True)
+    if lines and not lines[-1].endswith("\n"):
+        lines[-1] += "\n"
+    import builtins as _b
+    builtins_ = set(dir(_b))
+    module_names: set[str] = set()
+    for n in tree.body:
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            module_names.add(n.name)
+        elif isinstance(n, ast.Import):
+            module_names |= {a.asname or a.name.split(".")[0] for a in n.names}
+        elif isinstance(n, ast.ImportFrom):
+            module_names |= {a.asname or a.name for a in n.names}
+        elif isinstance(n, ast.Assign):
+            module_names |= {t.id for t in n.targets if isinstance(t, ast.Name)}
+    parent: dict[int, tuple[list[ast.stmt], int]] = {}
+    owner: dict[int, ast.AST] = {}
+
+    def walk(body: list[ast.stmt], fn: ast.AST | None) -> None:
+        for i, st in enumerate(body):
+            parent[id(st)] = (body, i)
+            if fn is not None:
+                owner[id(st)] = fn
+            f2 = st if isinstance(st, (ast.FunctionDef, ast.AsyncFunctionDef)) else fn
+            for field in ("body", "orelse", "finalbody"):
+                sub = getattr(st, field, None)
+                if isinstance(sub, list) and sub and isinstance(sub[0], ast.stmt):
+                    walk(sub, f2)
+            for h in getattr(st, "handlers", []) or []:
+                walk(h.body, f2)
+
+    walk(tree.body, None)
+    # the donor pool: single-line simple statements, same file first
+    pool: list[tuple[int, str, ast.stmt, set[str]]] = []   # (file_rank, text, node, tokens)
+    for file_rank, (rel, text) in enumerate([("", source_text), *donors]):
+        try:
+            t = ast.parse(text)
+        except (SyntaxError, ValueError):
+            continue
+        tl = text.splitlines()
+        for st in ast.walk(t):
+            if isinstance(st, _SIMPLE_STMT) and not isinstance(st, (ast.Continue, ast.Break)) \
+                    and st.lineno == st.end_lineno and 0 < st.lineno <= len(tl):
+                src = tl[st.lineno - 1].strip()
+                if 3 < len(src) < 160:
+                    pool.append((file_rank, src, st, _stmt_tokens(st)))
+    if not pool:
+        return []
+    rank = {int(ln): i for i, ln in enumerate(priority_lines) if ln is not None}
+    out: list[tuple[tuple, dict[str, Any], str]] = []
+    seen: set[str] = {_sha(source_text.encode("utf-8"))}
+
+    def emit(key: tuple, st: ast.stmt, kind: str, detail: str, new_lines: list[str]) -> None:
+        cand = "".join(new_lines)
+        try:
+            ast.parse(cand)
+        except SyntaxError:
+            return
+        digest = _sha(cand.encode("utf-8"))
+        if digest in seen:
+            return
+        seen.add(digest)
+        out.append((key, {"kind": kind, "detail": detail, "lineno": st.lineno, "col_offset": 0,
+                          "end_lineno": st.end_lineno, "end_col_offset": 0, "candidate_sha256": digest}, cand))
+
+    for ln in list(rank)[:max_lines]:
+        covering = [st for st in ast.walk(tree) if isinstance(st, _SIMPLE_STMT) and id(st) in parent
+                    and st.lineno <= ln <= (st.end_lineno or st.lineno)]
+        if not covering:
+            continue
+        covering.sort(key=lambda st: ((st.end_lineno or st.lineno) - st.lineno, -st.lineno))
+        st = covering[0]
+        fn = owner.get(id(st))
+        if fn is None:
+            continue
+        a, b = _block(lines, st)
+        indent = _indent_of(lines[a])
+        params = [x.arg for x in [*fn.args.posonlyargs, *fn.args.args, *fn.args.kwonlyargs]]
+        local_names: list[str] = list(params)
+        for n in ast.walk(fn):
+            if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store) and n.id not in local_names:
+                local_names.append(n.id)
+        bound = set(local_names) | module_names | builtins_
+        site_tokens = _stmt_tokens(st)
+        site_text = lines[a].strip()
+        scored = []
+        for file_rank, src, d, toks in pool:
+            if d is st or src == site_text or type(d) is not type(st):
+                continue
+            inter = len(toks & site_tokens)
+            union = len(toks | site_tokens) or 1
+            sim = inter / union
+            if sim < min_similarity:
+                continue
+            scored.append((-sim, file_rank, len(src), src, d))
+        scored.sort(key=lambda r: r[:3])
+        used: set[str] = set()
+        k = 0
+        for neg_sim, file_rank, _, src, d in scored:
+            if k >= max_donors:
+                break
+            free = sorted(n for n in _load_names(d) if n not in bound)
+            variants: list[tuple[str, str]] = []
+            if not free:
+                variants.append((src, ""))
+            elif len(free) <= 2:
+                # the unbound names become in-scope locals (nearest the site's own names
+                # first: the ones the suspicious statement reads); two names map to
+                # distinct locals, bounded
+                prefer = [n for n in local_names if n in site_tokens] + [n for n in local_names if n not in site_tokens]
+                prefer = prefer[:max_renamings + len(free) - 1]
+                import itertools
+                for combo in itertools.permutations(prefer, len(free)):
+                    if len(variants) >= 2 * max_renamings:
+                        break
+                    mapping = dict(zip(free, combo))
+                    try:
+                        variants.append((ast.unparse(_rename(d, mapping)), ",".join(k + "->" + v for k, v in mapping.items())))
+                    except Exception:  # noqa: BLE001
+                        continue
+            else:
+                continue
+            for text, ren in variants:
+                if text in used or text == site_text:
+                    continue
+                used.add(text)
+                detail = text[:60] + ((" [" + ren + "]") if ren else "") + " sim=" + str(round(-neg_sim, 2))
+                emit((rank[ln], ln, 2.5, k, 0), st, "STMT_REPLACE", detail, lines[:a] + [indent + text + "\n"] + lines[b:])
+                if not isinstance(d, (ast.Return, ast.Raise)):
+                    emit((rank[ln], ln, 2.5, k, 1), st, "STMT_INSERT_DONOR", "before: " + detail, lines[:a] + [indent + text + "\n"] + lines[a:])
+                    emit((rank[ln], ln, 2.5, k, 2), st, "STMT_INSERT_DONOR", "after: " + detail, lines[:b] + [indent + text + "\n"] + lines[b:])
+            k += 1
     out.sort(key=lambda r: r[0])
     return [(d, c) for _, d, c in out]
 

@@ -15,7 +15,7 @@ never asked the real question.
 
 How it works, and every step is necessary:
 
-  unshare -r -m      new user + mount namespace; we are uid 0 inside
+  unshare -r -m -p -f  new user, mount and pid namespace; we are uid 0 inside
   tmpfs at BASE      a throwaway root, so nothing here outlives the run
   bind /usr /bin /lib /lib64    the interpreter and its libraries,
                                 each remounted read-only
@@ -44,9 +44,17 @@ Measured:
 
 What is actually visible inside, measured rather than assumed:
 
-    /home /etc /tmp /var /root /opt /srv /proc   all INVISIBLE
+    /home /etc /tmp /var /root /opt /srv         all INVISIBLE
     /usr /bin /lib /lib64                        read-only
     /dev/null /dev/urandom                       the only device nodes
+    /proc                                        a fresh procfs of the run's OWN pid
+                                                 namespace: the confined processes
+                                                 and nothing of the host (measured:
+                                                 a program that asks psutil about its
+                                                 parent -- thefuck's shell detection
+                                                 at import -- died NoSuchProcess with
+                                                 no /proc at all, which read like a
+                                                 bug of the program)
     /project                                     the only writable place
 
 So reads are confined too, not only writes. An earlier note claimed a
@@ -127,6 +135,12 @@ for dev in ("/dev/null", "/dev/urandom"):
         except OSError:
             continue
         m("--bind", dev, BASE + dev)
+# A procfs of the run's own pid namespace (unshare -p -f): programs read
+# /proc/self, /proc/<pid> and /proc/cpuinfo as a matter of course (psutil,
+# multiprocessing's cpu_count, coverage); without it they fail in ways that
+# look like their own bugs. Only this namespace's processes are in it.
+os.makedirs(BASE + "/proc", exist_ok=True)
+m("-t", "proc", "proc", BASE + "/proc")
 # A network namespace is not enough on its own. With no /etc in the
 # chroot there is no resolv.conf, so every name fails to resolve and a
 # program with perfectly good connectivity reports it has none --
@@ -200,7 +214,7 @@ def available() -> bool:
         "    sys.exit(1)\n"
     )
     try:
-        r = subprocess.run(["unshare", "-r", "-m", sys.executable, "-c", probe],
+        r = subprocess.run(["unshare", "-r", "-m", "-p", "-f", "--kill-child", sys.executable, "-c", probe],
                            timeout=60, capture_output=True, text=True)
         return r.returncode == 0
     except Exception:
@@ -254,7 +268,7 @@ def run(program: str, root: str, timeout: int = 300,
         Path(helper_path).write_text(helper)
         try:
             r = subprocess.run(
-                ["unshare", "-r", "-m"] + ([] if network else ["-n"]) + \
+                ["unshare", "-r", "-m", "-p", "-f", "--kill-child"] + ([] if network else ["-n"]) + \
                 [sys.executable, helper_path, base,
                  os.path.realpath(root), script, "1" if network else "0"],
                 timeout=timeout, capture_output=True, text=True)

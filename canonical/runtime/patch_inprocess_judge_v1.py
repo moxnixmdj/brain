@@ -228,12 +228,21 @@ def assert_specs(test_tree: ast.AST, cases: dict[str, list[dict[str, Any]]] | No
 
 def judge_program(target_rel: str, modules: list[dict[str, Any]], batch_dir_rel: str, count: int,
                   out_rel: str, per_candidate_s: int = 5, mode: str = "plain",
-                  pytest_args: list[str] | None = None) -> str:
+                  pytest_args: list[str] | None = None, hit_files: list[str] | None = None) -> str:
     """Source of the batch judge; runs with cwd = the tree copy (confined: /project).
     ``mode`` is "plain" (test functions called directly) or "pytest" (pytest hosted
-    in this process, ``pytest_args`` prepended to the test paths)."""
+    in this process, ``pytest_args`` prepended to the test paths).  ``hit_files``
+    (project files the spectrum run saw the tests execute) bounds the per-candidate
+    module purge: only the patched files, the test modules, conftests and the hit
+    files are re-imported between candidates.  A module the tests never executed
+    keeps its (possibly stale) references to the target -- it cannot influence the
+    verdict unless a candidate routes execution through it, and a false green is
+    still caught by the full-suite gate on the real interpreter.  Without it every
+    project module is purged (measured: youtube-dl re-imported 785 modules per
+    candidate, 0.4 s each, 360 candidates in 150 s)."""
     spec = json.dumps({"target": target_rel, "modules": modules, "batch": batch_dir_rel, "count": count,
-                       "out": out_rel, "per": per_candidate_s, "mode": mode, "pytest_args": list(pytest_args or [])})
+                       "out": out_rel, "per": per_candidate_s, "mode": mode, "pytest_args": list(pytest_args or []),
+                       "hit_files": sorted(hit_files or [])})
     return r'''
 import importlib, json, os, shutil, signal, sys
 sys.dont_write_bytecode = True
@@ -282,21 +291,39 @@ def _alarm(signum, frame):
 signal.signal(signal.SIGALRM, _alarm)
 
 
-class _Collect:
-    """pytest plugin: outcomes from the reports, never from a summary line."""
+HOSTED_FAILING = []      # node ids red on the original, in collection order
+HOSTED_SECONDS = {}      # node id -> call seconds on the original
 
-    def __init__(self):
+
+class _Collect:
+    """pytest plugin: outcomes from the reports, never from a summary line.  After the
+    baseline it also orders every run originally-failing-first, then fastest-first,
+    so `-x` on a red candidate stops after the first test instead of after the
+    whole module (measured: youtube-dl test_utils.py, ~100 tests in one class --
+    0.4 s per candidate with the red test near the end)."""
+
+    def __init__(self, order=False):
         self.failed = 0
         self.passed = 0
+        self.order = order
+        self.failed_ids = []
+
+    def pytest_collection_modifyitems(self, session, config, items):
+        if self.order and (HOSTED_FAILING or HOSTED_SECONDS):
+            first = {nid: i for i, nid in enumerate(HOSTED_FAILING)}
+            items.sort(key=lambda it: (first.get(it.nodeid, len(first)), HOSTED_SECONDS.get(it.nodeid, 0.0)))
 
     def pytest_runtest_logreport(self, report):
         if report.when == "call":
+            HOSTED_SECONDS.setdefault(report.nodeid, float(getattr(report, "duration", 0.0) or 0.0))
             if report.passed:
                 self.passed += 1
             elif report.failed:
                 self.failed += 1
+                self.failed_ids.append(report.nodeid)
         elif report.failed:
             self.failed += 1          # setup or teardown error
+            self.failed_ids.append(report.nodeid)
 
     def pytest_collectreport(self, report):
         if report.failed:
@@ -306,7 +333,7 @@ class _Collect:
 def _run_hosted(baseline=False):
     global TIMED_OUT
     TIMED_OUT = False
-    c = _Collect()
+    c = _Collect(order=not baseline)
     args = list(SPEC["pytest_args"]) + ["-q", "-q", "-p", "no:cacheprovider", "--no-header"]
     if not baseline and EARLY_STOP:
         args.append("-x")
@@ -314,6 +341,8 @@ def _run_hosted(baseline=False):
     rc = pytest.main(args, plugins=[c])
     if TIMED_OUT:
         raise _Timeout()
+    if baseline:
+        HOSTED_FAILING[:] = [nid for nid in c.failed_ids if nid not in HOSTED_FAILING]
     if c.failed:
         return c.failed, c.passed, float(c.failed)
     if c.passed and rc == 0:
@@ -321,11 +350,21 @@ def _run_hosted(baseline=False):
     return 998, c.passed, 998.0           # nothing ran, or pytest itself failed: not green
 
 
-def _purge():
+HIT = {os.path.realpath(os.path.join(ROOT, p)) for p in SPEC.get("hit_files") or []}
+TESTS = {os.path.realpath(os.path.join(ROOT, m["path"])) for m in SPEC["modules"]}
+
+
+def _purge(selective=False):
+    written = {os.path.realpath(os.path.join(ROOT, rel)) for rel in originals}
     for name, mod in list(sys.modules.items()):
         f = getattr(mod, "__file__", None) or ""
-        if f and os.path.abspath(f).startswith(ROOT + os.sep):
-            del sys.modules[name]
+        if not (f and os.path.abspath(f).startswith(ROOT + os.sep)):
+            continue
+        if selective and HIT:
+            r = os.path.realpath(f)
+            if not (r in written or r in HIT or r in TESTS or os.path.basename(r) == "conftest.py"):
+                continue
+        del sys.modules[name]
     importlib.invalidate_caches()
 
 
@@ -467,320 +506,7 @@ for i in range(SPEC["count"]):
     else:
         with open(cand + ".py", "rb") as fh:
             _write(SPEC["target"], fh.read())
-    _purge()
-    signal.setitimer(signal.ITIMER_REAL, PER)
-    try:
-        failed, passed, distance = RUN()
-        results[i] = [failed if failed else (0 if passed else 998), round(distance, 6)]
-    except _Timeout:
-        results[i] = [999, 999.0]
-    except BaseException:
-        results[i] = [997, 997.0]
-    finally:
-        signal.setitimer(signal.ITIMER_REAL, 0)
-    with open(os.path.join(ROOT, SPEC["out"]), "w", encoding="utf-8") as fh:
-        json.dump(results, fh)
-for rel, raw in originals.items():
-    with open(os.path.join(ROOT, rel), "wb") as fh:
-        fh.write(raw)
-_purge()
-print("BRAIN_JUDGE_DONE=" + str(len(results)), file=_REAL_STDOUT)
-''' % repr(spec)
-
-
-def spectrum_program(modules: list[dict[str, Any]], out_rel: str, per_test_s: int = 5, mode: str = "plain",
-                     pytest_args: list[str] | None = None) -> str:
-    """Source of the in-process spectrum localizer (Abreu, Zoeteweij & van Gemund 2007,
-    Ochiai): every plain test (each parametrized row is one test) runs once under
-    ``sys.settrace``; the lines it executes in tree files that are not test files are
-    its spectrum.  Output: ranked (path, line, ochiai, ef, ep) and the per-test verdicts.
-    This is the fast path for suites the judge can run; it proposes lines, nothing else."""
-    spec = json.dumps({"modules": modules, "out": out_rel, "per": per_test_s, "mode": mode,
-                       "pytest_args": list(pytest_args or [])})
-    return r'''
-import importlib, json, math, os, signal, sys
-sys.dont_write_bytecode = True
-SPEC = json.loads(%s)
-ROOT = os.getcwd()
-HOSTED = SPEC["mode"] == "pytest"
-_REAL_STDOUT = sys.stdout
-for m in SPEC["modules"]:
-    sp = os.path.join(ROOT, m["sys_path"]) if m["sys_path"] != "." else ROOT
-    if sp not in sys.path:
-        sys.path.insert(0, sp)
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
-TEST_FILES = {os.path.realpath(os.path.join(ROOT, m["path"])) for m in SPEC["modules"]}
-PREFIX = os.path.realpath(ROOT) + os.sep
-
-
-class _Timeout(BaseException):
-    pass
-
-
-def _alarm(signum, frame):
-    raise _Timeout()
-
-
-signal.signal(signal.SIGALRM, _alarm)
-
-
-def _rows(groups):
-    out = [{}]
-    for g in reversed(groups or []):
-        out = [dict(b, **dict(zip(g["names"], row))) for b in out for row in g["rows"]]
-    return out
-
-
-hits = {}          # (path, line) -> [ef, ep, depth]
-tests = []
-current = {}       # (path, line) -> deepest call depth seen in this test
-depth = 0
-
-
-def _tracer(frame, event, arg):
-    global depth
-    f = frame.f_code.co_filename
-    if not f.startswith(PREFIX) or f in TEST_FILES or os.sep + "conftest.py" in f:
-        return None
-    if event == "call":
-        depth += 1
-    elif event == "return":
-        depth -= 1
-    elif event == "line":
-        key = (f[len(PREFIX):], frame.f_lineno)
-        if current.get(key, -1) < depth:
-            current[key] = depth
-    return _tracer
-
-
-if HOSTED:
-    sys.stdout = open(os.devnull, "w")          # pytest's terminal output per candidate is noise here
-    os.environ.setdefault("TMPDIR", os.path.join(ROOT, ".brain_diagnose", "tmp"))
-    os.makedirs(os.environ["TMPDIR"], exist_ok=True)
-    import pytest
-for m in SPEC["modules"]:
-    sp = os.path.join(ROOT, m["sys_path"]) if m["sys_path"] != "." else ROOT
-    if sp not in sys.path:
-        sys.path.insert(0, sp)
-if ROOT not in sys.path:
-    sys.path.insert(0, ROOT)
-target = os.path.join(ROOT, SPEC["target"])
-originals = {}
-
-
-def _write(rel, data):
-    path = os.path.join(ROOT, rel)
-    if rel not in originals:
-        originals[rel] = open(path, "rb").read()
-    with open(path, "wb") as fh:
-        fh.write(data)
-
-
-class _Timeout(KeyboardInterrupt if HOSTED else BaseException):
-    # under pytest a plain BaseException in a test is recorded as that test's failure
-    # and the session goes on; a KeyboardInterrupt unwinds the session (INTERRUPTED)
-    pass
-
-
-TIMED_OUT = False
-
-
-def _alarm(signum, frame):
-    global TIMED_OUT
-    TIMED_OUT = True
-    raise _Timeout()
-
-
-signal.signal(signal.SIGALRM, _alarm)
-
-
-class _Collect:
-    """pytest plugin: outcomes from the reports, never from a summary line."""
-
-    def __init__(self):
-        self.failed = 0
-        self.passed = 0
-
-    def pytest_runtest_logreport(self, report):
-        if report.when == "call":
-            if report.passed:
-                self.passed += 1
-            elif report.failed:
-                self.failed += 1
-        elif report.failed:
-            self.failed += 1          # setup or teardown error
-
-    def pytest_collectreport(self, report):
-        if report.failed:
-            self.failed += 1
-
-
-def _run_hosted(baseline=False):
-    global TIMED_OUT
-    TIMED_OUT = False
-    c = _Collect()
-    args = list(SPEC["pytest_args"]) + ["-q", "-q", "-p", "no:cacheprovider", "--no-header"]
-    if not baseline and EARLY_STOP:
-        args.append("-x")
-    args += [m["path"] for m in SPEC["modules"]]
-    rc = pytest.main(args, plugins=[c])
-    if TIMED_OUT:
-        raise _Timeout()
-    if c.failed:
-        return c.failed, c.passed, float(c.failed)
-    if c.passed and rc == 0:
-        return 0, c.passed, 0.0
-    return 998, c.passed, 998.0           # nothing ran, or pytest itself failed: not green
-
-
-def _purge():
-    for name, mod in list(sys.modules.items()):
-        f = getattr(mod, "__file__", None) or ""
-        if f and os.path.abspath(f).startswith(ROOT + os.sep):
-            del sys.modules[name]
-    importlib.invalidate_caches()
-
-
-def _rows(groups):
-    out = [{}]
-    for g in reversed(groups or []):
-        out = [dict(b, **dict(zip(g["names"], row))) for b in out for row in g["rows"]]
-    return out
-
-
-def _distance(actual, expected):
-    # 0 when equal; numeric gap scaled to [0, 1); otherwise 1 -- a gradient for the
-    # search, never a verdict (the verdict is the assertion itself)
-    try:
-        if actual == expected and type(actual) is type(expected):
-            return 0.0
-    except Exception:
-        return 1.0
-    if isinstance(actual, (int, float)) and isinstance(expected, (int, float)) and not isinstance(actual, bool) and not isinstance(expected, bool):
-        try:
-            d = abs(float(actual) - float(expected))
-            return d / (1.0 + d)
-        except Exception:
-            return 1.0
-    if isinstance(actual, str) and isinstance(expected, str):
-        n = max(len(actual), len(expected)) or 1
-        same = sum(1 for a, b in zip(actual, expected) if a == b)
-        return 1.0 - same / n if same else 1.0
-    if isinstance(actual, (list, tuple)) and isinstance(expected, (list, tuple)):
-        n = max(len(actual), len(expected)) or 1
-        return 1.0 - sum(1 for a, b in zip(actual, expected) if a == b) / n
-    return 1.0
-
-
-TIMING = {}      # (module, test, row) -> (seconds, failed) measured on the original
-
-
-def _tests(mod, m, mi):
-    for name in sorted(dir(mod)):
-        fn = getattr(mod, name)
-        if name.startswith("test") and callable(fn) and getattr(fn, "__module__", None) == mod.__name__:
-            for r, kw in enumerate(_rows((m.get("cases") or {}).get(name))):
-                yield (mi, name, r), fn, kw
-
-
-EARLY_STOP = False   # set after the baseline: True when the suite is slow enough for it to matter
-
-
-def _run(baseline=False):
-    # Candidates run the tests the original fails first, fastest first, and -- when
-    # the suite itself is slow (> 50 ms) -- stop at the first failure (Qi et al. 2013,
-    # RSRepair test prioritisation): a wrong edit costs one short test, not the whole
-    # suite.  ``failed`` is then a lower bound (1 + the tests not reached) and
-    # ``distance`` the first failing assertion's.  On a fast suite every test runs and
-    # the full fitness (how many tests each edit fixes) orders composition; on a slow
-    # one that information is bought with time and is not (measured: levenshtein
-    # 94 s -> 28 s, longest_common_subsequence 115 s -> 19 s).  Never the verdict:
-    # the chosen green is replayed in full.
-    import time as _t
-    failed = passed = 0
-    distance = 0.0
-    for mi, m in enumerate(SPEC["modules"]):
-        try:
-            mod = importlib.import_module(m["import"])
-        except _Timeout:
-            raise
-        except BaseException:
-            failed += int(m.get("tests") or 1)
-            distance += float(m.get("tests") or 1)
-            continue
-        failing = set()
-        tests = list(_tests(mod, m, mi))
-        if not baseline:
-            tests.sort(key=lambda t: (0 if TIMING.get(t[0], (0, True))[1] else 1, TIMING.get(t[0], (0, True))[0]))
-        for k, (key, fn, kw) in enumerate(tests):
-            t0 = _t.monotonic()
-            try:
-                fn(**kw)
-                passed += 1
-                if baseline:
-                    TIMING[key] = (_t.monotonic() - t0, False)
-            except _Timeout:
-                raise
-            except BaseException:
-                failed += 1
-                failing.add(key[1])
-                if baseline:
-                    TIMING[key] = (_t.monotonic() - t0, True)
-                elif EARLY_STOP:
-                    failed += len(tests) - k - 1
-                    break
-        for spec in m.get("asserts") or []:
-            if spec["test"] not in failing:
-                continue
-            try:
-                actual = eval(spec["expr"], vars(mod))
-                distance += _distance(actual, spec["expected"])
-            except _Timeout:
-                raise
-            except BaseException:
-                distance += 1.0
-        if failed and not baseline and EARLY_STOP:
-            failed += sum(int(x.get("tests") or 1) for x in SPEC["modules"][mi + 1:])
-            break
-    return failed, passed, distance
-
-
-results = {}
-# the per-candidate budget is measured, not guessed: the original suite's own run
-# time x 5 (bounded to [0.25 s, per]) -- a candidate that loops where the original
-# took 2 ms is cut at 0.25 s instead of 5 s (measured: levenshtein 99 s -> 12 s;
-# longest_common_subsequence, whose suite itself takes 0.25 s, 99 s -> 25 s)
-import time as _time
-_purge()
-_t0 = _time.monotonic()
-EARLY_STOP = False
-RUN = _run_hosted if HOSTED else _run
-signal.setitimer(signal.ITIMER_REAL, SPEC["per"])
-try:
-    RUN(baseline=True)
-except BaseException:
-    pass
-finally:
-    signal.setitimer(signal.ITIMER_REAL, 0)
-_base = _time.monotonic() - _t0
-PER = max(0.25, min(float(SPEC["per"]), 5.0 * _base))
-EARLY_STOP = _base > 0.05
-results["_per_candidate_s"] = round(PER, 3)
-results["_early_stop"] = EARLY_STOP
-for i in range(SPEC["count"]):
-    cand = os.path.join(ROOT, SPEC["batch"], str(i))
-    for rel, raw in list(originals.items()):           # back to the original before the next candidate
-        with open(os.path.join(ROOT, rel), "wb") as fh:
-            fh.write(raw)
-    if os.path.exists(cand + ".json"):                  # a patch set: {rel: text}
-        with open(cand + ".json", "r", encoding="utf-8") as fh:
-            for rel, text in json.load(fh).items():
-                _write(rel, text.encode("utf-8"))
-    else:
-        with open(cand + ".py", "rb") as fh:
-            _write(SPEC["target"], fh.read())
-    _purge()
+    _purge(selective=True)
     signal.setitimer(signal.ITIMER_REAL, PER)
     try:
         failed, passed, distance = RUN()

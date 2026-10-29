@@ -220,7 +220,8 @@ def test_green_budget_one_restores_first_green_wins(tmp_path: Path):
     art = json.loads((tmp_path / "out" / "dr.json").read_text())
     search = next(s for s in art["steps"] if s["step"] == "patch_search")
     assert result["status"] == "VERIFIED_PATCH" and len(search["green_indices"]) == 1
-    assert search["witness"]["status"] == "SINGLE_GREEN"
+    # a lone green is no longer waved through: it is witnessed against the original
+    assert search["witness"]["status"] == "MEASURED" and search["witness"].get("single_green") is True
 
 
 def test_witness_rank_prefers_least_collateral_change_and_demotes_no_change_on_tests():
@@ -967,14 +968,19 @@ def test_a_docstring_postcondition_outranks_the_least_change_heuristic(tmp_path:
     _fixture(tmp_path)
     _calc(tmp_path, "def area(w, h):\n    \"\"\"Area, never negative.\n\n    post: _ >= 0\n    \"\"\"\n    return w * h if w <= 0 else 0\n", _ONE_AREA)
     result = dr.run(_args(deadline_s=300), tmp_path)
-    assert result["status"] == "VERIFIED_PATCH", result["status"]
-    assert "+    return w * h if w > 0 else 0\n" in (tmp_path / result["diff_path"]).read_text()
-    w = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    w = art["steps"][2]["witness"]
     assert w["postconditions"] == ["_ >= 0"] and w["hypothesis"] == "MEASURED" and w["property_inputs"] > 40
     top, last = w["ranking"][0], w["ranking"][-1]
     assert top["postcondition_violations"] < last["postcondition_violations"]
     assert top["delta_outside_tests"] > last["delta_outside_tests"]          # least change lost to the contract
     assert w["proves_correctness"] is False
+    # ... but `w > 0` still returns a negative area for a negative height where the
+    # original returned 0: the patch breaks the stated contract on inputs the original
+    # kept it on, so the suite's green does not ship and the counterexample is named
+    assert top["new_postcondition_violations"] > 0 and top["contract_counterexample"]["call"].startswith("area(")
+    assert result["status"].startswith("OPEN:GREEN_VIOLATES_CONTRACT:%d:_ >= 0:on=area(" % top["new_postcondition_violations"]), result["status"]
+    assert art["steps"][2]["winning_mutation"]["detail"] in ("LtE->Gt", "<=-><", "LtE->Lt") or art["steps"][2]["winning_mutation"]["kind"] == "COMPARE_SWAP"
 
 
 def test_a_metamorphic_postcondition_calls_the_module_under_probe(tmp_path: Path):
@@ -1012,6 +1018,13 @@ def test_tie_policy_first_ships_and_names_the_tie_and_refuse_refuses(tmp_path: P
     _calc(tmp_path / "refuse", src, tests)
     refused = dr.run({**_args(deadline_s=300), "tie_policy": "refuse"}, tmp_path / "refuse")
     assert refused["status"].startswith("OPEN:WITNESS_TIE:classes=2:[") and refused["diff_path"] is None
+    # the tie names the test that would decide it: a probe input where the tied
+    # behaviours answer differently, spelled as the call a test would make
+    assert ":decide_with=pick(" in refused["status"]
+    w2 = json.loads((tmp_path / "refuse" / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    d = w2["distinguishing_inputs"]
+    assert d and d[0]["call"].startswith("pick(") and len(d[0]["outcomes"]) == 2
+    assert len({json.dumps(o) for o in d[0]["outcomes"].values()}) == 2
     assert not (tmp_path / "refuse" / "out" / "dr.json.diff").exists()
     with pytest.raises(dr.DiagnoseRepairRefusal, match="TIE_POLICY_INVALID"):
         dr.run({**_args(), "tie_policy": "coin"}, tmp_path / "refuse")
@@ -1203,3 +1216,100 @@ def test_review_off_skips_the_step_and_a_bare_constant_synthesis_is_an_overfit_s
     r2 = dr.run(_args(), other)
     assert r2["status"].startswith("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:")
     assert (other / "proj" / "pkg" / "calc.py").read_text().count("return w * h") == 1
+
+
+def test_confinement_mounts_a_private_procfs_so_process_introspection_works(tmp_path: Path):
+    # measured: thefuck's shell detection asks psutil about its parent at import and
+    # died NoSuchProcess with no /proc -- a bug of the harness that read like the program's
+    receipt = confine_v1.run(
+        "import os\nprint(os.getpid() < 200, os.path.exists('/proc/self/status'), "
+        "open('/proc/self/status').readline().startswith('Name:'), len([p for p in os.listdir('/proc') if p.isdigit()]) < 20)\n",
+        str(tmp_path), timeout=20, network=False)
+    assert receipt["verdict"] == "OK" and "True True True True" in receipt["output"], receipt
+
+
+def test_generator_confines_edits_to_the_ranked_lines_window():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    body = "".join("    x%d = a + %d\n" % (i, i) for i in range(400))
+    src = "def f(a):\n" + body + "    return a - 1\n"
+    everywhere = c.generate(src, [], [], [], max_candidates=10**6)
+    windowed = c.generate(src, [], [], [402, 2, 3], line_window=3)
+    assert len(windowed) < len(everywhere) / 20
+    assert {d["lineno"] for d, _ in windowed} <= {2, 3, 402}
+    # fewer ranked lines than the window: the neighbourhood fills it, nearest first
+    near = c.generate(src, [], [], [200], line_window=5)
+    assert {d["lineno"] for d, _ in near} == {198, 199, 200, 201, 202}
+    assert [d["lineno"] for d, _ in near][0] == 200
+    assert any(d["kind"] == "BINOP_SWAP" and d["lineno"] == 402 for d, _ in windowed)
+    assert len(c.generate(src, [], [], [402], line_window=1)) < len(windowed)
+
+
+def test_donor_candidates_adapt_similar_statements_from_other_files_to_the_site():
+    from canonical.runtime import patch_candidate_search_v1 as c
+    src = "def area(w, h):\n    total = w + h\n    return total\n"
+    other = "def rect(x, y):\n    total = x * y\n    return total\n\n\ndef big(p, q, r):\n    total = p * q * r\n    return total\n"
+    rows = c.donor_candidates(src, [2], [("pkg/other.py", other)])
+    kinds = {d["kind"] for d, _ in rows}
+    assert kinds == {"STMT_REPLACE", "STMT_INSERT_DONOR"}
+    replaced = [(d["detail"], cand) for d, cand in rows if d["kind"] == "STMT_REPLACE"]
+    assert any(cand.splitlines()[1] == "    total = w * h" and "[x->w,y->h]" in det for det, cand in replaced)
+    # three free names are not adapted (the renaming space is bounded, not guessed)
+    assert not any("p * q * r" in cand or "* w * h" in cand for _, cand in rows)
+    assert all(d["lineno"] == 2 for d, _ in rows) and len(rows) <= 3 * 16 * 8
+    assert all(c.ast.parse(cand) for _, cand in rows)
+
+
+def test_a_fix_written_in_another_file_is_grafted_and_verified(tmp_path: Path):
+    # the fault is `total = w + h`; nothing in calc.py says `w * h`, but geometry.py
+    # computes `total = x * y` -- the donor is adapted to the site's names and shipped
+    _fixture(tmp_path, bug="total = w + h\n    return total")
+    (tmp_path / "proj" / "pkg" / "geometry.py").write_text("def rect(x, y):\n    total = x * y\n    return total\n")
+    (tmp_path / "proj" / "pkg" / "calc.py").write_text("from pkg.geometry import rect\n\n\n" + (tmp_path / "proj" / "pkg" / "calc.py").read_text())
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area\n\ndef test_area():\n    assert area(3, 4) == 12\n    assert area(2, 5) == 10\n    assert area(6, 7) == 42\n")
+    r = dr.run(_args(deadline_s=300), tmp_path)
+    assert r["status"] == "VERIFIED_PATCH", r["status"]
+    assert "+    total = w * h\n" in (tmp_path / r["diff_path"]).read_text()
+
+
+def test_a_single_green_is_witnessed_and_a_broken_docstring_contract_refuses_it(tmp_path: Path):
+    _fixture(tmp_path)
+    r = dr.run(_args(), tmp_path)
+    assert r["status"] == "VERIFIED_PATCH"
+    w = json.loads((tmp_path / "out" / "dr.json").read_text())["steps"][2]["witness"]
+    assert w["status"] == "MEASURED" and len(w["ranking"]) >= 1 and w["ranking"][0]["witness"] == "MEASURED"
+    # one green that satisfies the suite but breaks the function's own `post:` on probe
+    # inputs: nothing ships, the contract is named
+    other = tmp_path / "other"
+    other.mkdir()
+    _fixture(other, bug='"""Area.\n\n    post: result >= 0\n    """\n    return w * h + 1')
+    (other / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area\n\ndef test_area():\n    assert area(3, 4) == 12\n")
+    r2 = dr.run({**_args(deadline_s=300), "green_budget": 1}, other)
+    art = json.loads((other / "out" / "dr.json").read_text())
+    w2 = art["steps"][2]["witness"]
+    assert w2["postconditions"] == ["result >= 0"]
+    top = w2["ranking"][0]
+    if top["new_postcondition_violations"] > 0:
+        assert r2["status"].startswith("OPEN:GREEN_VIOLATES_CONTRACT:" + str(top["new_postcondition_violations"])), r2["status"]
+    else:
+        assert r2["status"] == "VERIFIED_PATCH", r2["status"]
+
+
+def test_file_budget_lets_a_second_ranked_file_be_searched(tmp_path: Path):
+    # the spectrum ranks util.py (the deeper call, dense with candidates) first; the
+    # fault is in calc.py, ranked second: the first file's search is bounded to half
+    # the remaining time (FILE_BUDGET) or exhausts, and the second file is still
+    # opened and repaired
+    _fixture(tmp_path, bug="return util.ident(w) + h")
+    (tmp_path / "proj" / "pkg" / "util.py").write_text(
+        "def ident(v):\n" + "".join("    v = v + %d - %d\n" % (i, i) for i in range(40)) + "    return v\n")
+    (tmp_path / "proj" / "pkg" / "calc.py").write_text("from pkg import util\n\n\n" + (tmp_path / "proj" / "pkg" / "calc.py").read_text())
+    r = dr.run(_args(deadline_s=120), tmp_path)
+    assert r["status"] == "VERIFIED_PATCH", r["status"]
+    assert r["target_path"] == "pkg/calc.py"
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    searched = next(s for s in art["steps"] if s["step"] == "patch_search")["files_searched"]
+    assert [f["file"] for f in searched] == ["pkg/util.py", "pkg/calc.py"]
+    assert searched[0]["stop_reason"] in ("FILE_BUDGET", "EXHAUSTED") and searched[0]["greens"] == []
+    assert "+    return util.ident(w) * h\n" in (tmp_path / r["diff_path"]).read_text()

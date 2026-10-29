@@ -87,7 +87,7 @@ ADAPTER = "software_diagnose_then_repair_v1"
 OWNED_MARKER = ".brain_owned_output_v1"
 _SKIP = {".git", "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "node_modules"}
 _FRAME = re.compile(r"^(?P<path>[^\s:][^:\n]*\.py):(?P<line>\d+):")
-_TESTNAME = lambda n: n.startswith("test_") or n.endswith("_test.py")  # noqa: E731
+_TESTNAME = lambda n: n.startswith(("test_", "tests_")) or n.endswith(("_test.py", "_tests.py")) or n == "conftest.py"  # noqa: E731
 
 
 class _SpectrumSufficed(Exception):
@@ -331,7 +331,7 @@ def _replay(tree: pathlib.Path, target_rel: str, text: str, run_tests, scratch: 
 
 def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[str, Any]], texts: list[str],
                  python_exe: str, confine: str, deadline: float, mode: str = "plain",
-                 pytest_args: list[str] | None = None) -> dict[int, int]:
+                 pytest_args: list[str] | None = None, hit_files: list[str] | None = None) -> dict[int, int]:
     """One judge process for ``texts`` in ``copy_root`` (confined when the host can)."""
     batch_rel = ".brain_diagnose/batch"
     out_rel = ".brain_diagnose/judge.json"
@@ -346,7 +346,8 @@ def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[st
     out = copy_root / out_rel
     if out.exists():
         out.unlink()
-    program = judge_v1.judge_program(target_rel, modules, batch_rel, len(texts), out_rel, mode=mode, pytest_args=pytest_args)
+    program = judge_v1.judge_program(target_rel, modules, batch_rel, len(texts), out_rel, mode=mode, pytest_args=pytest_args,
+                                     hit_files=hit_files)
     timeout = max(5, int(deadline - time.monotonic()))
     ran = False
     if confine in ("auto", "required") and confine_v1.available():
@@ -788,6 +789,7 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                         loc_top.append(path)
             loc_row.update({"status": spectrum["status"], "failing_test_count": spectrum.get("failing_test_count"),
                             "ranked_files": loc_top[:10], "ranked_lines": (spectrum.get("ranked") or [])[:20]})
+        hit_files = sorted((spectrum.get("hit_lines") or {}).keys()) if isinstance(spectrum, dict) else []
         try:
             if loc_top:
                 raise _SpectrumSufficed()
@@ -865,9 +867,14 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                 # several green patches: the one that changes behaviour least outside
                 # the tests' own inputs (PATCH-SIM); ties and unavailability -> search order
                 nonlocal witness_row
-                if len(greens) == 1:
+                if len(greens) == 1 and remaining() < 20:
                     witness_row = {"status": "SINGLE_GREEN", "ranking": [{"index": greens[0][0]}]}
                     return greens[0][0]
+                # a single green is witnessed too: it cannot be out-ranked, but the probe
+                # still measures what it does outside the tests' inputs -- a docstring
+                # contract it breaks or an exception it introduces is in the ledger, and a
+                # broken contract is a refusal (the suite was satisfied; the function's own
+                # stated postcondition was not)
                 t0w = time.monotonic()
                 first = greens[0][0]
                 desc = next((d for i, (d, _) in enumerate(cands, 1) if i == first), {})
@@ -879,22 +886,37 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                     scratch=scratch_root, expected=expected_rows,
                     property_examples=int(args.get("property_examples", witness_v1.PROPERTY_EXAMPLES)))
                 witness_row["seconds"] = round(time.monotonic() - t0w, 3)
+                if len(greens) == 1:
+                    witness_row["single_green"] = True
                 return int(witness_row["ranking"][0]["index"])
             return choose
 
+        # the deadline a search runs against: the whole run's, or -- while several
+        # ranked files are still to be searched -- this file's share of it, so the
+        # first-ranked file cannot spend everything when the fault is in the second
+        # (measured: tqdm, 1,472 candidates of std.py judged, contrib/__init__.py --
+        # the developer's file, ranked second -- never opened)
+        budget = {"deadline": deadline}
+
         def run_search(target_rel: str, cands: list[tuple[dict[str, Any], Any]], chooser) -> dict[str, Any]:
-            def judge_batch(copy: pathlib.Path, texts: list[Any], dl: float) -> dict[int, int]:
-                return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl,
-                                    mode=judge_mode_inproc, pytest_args=trim)
+            dl = budget["deadline"]
+
+            def judge_batch(copy: pathlib.Path, texts: list[Any], dl_: float) -> dict[int, int]:
+                return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl_,
+                                    mode=judge_mode_inproc, pytest_args=trim, hit_files=hit_files)
             if plain_ok:
-                return candidates_v1.evaluate_batch(
+                out = candidates_v1.evaluate_batch(
                     tree, target_rel, cands, judge_batch, run_tests,
-                    workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
+                    workers=workers, deadline=dl, max_candidates=max_candidates, scratch=scratch_root,
                     green_budget=green_budget, choose=chooser)
-            return candidates_v1.evaluate(
-                tree, target_rel, cands, run_tests,
-                workers=workers, deadline=deadline, max_candidates=max_candidates, scratch=scratch_root,
-                green_budget=green_budget, choose=chooser)
+            else:
+                out = candidates_v1.evaluate(
+                    tree, target_rel, cands, run_tests,
+                    workers=workers, deadline=dl, max_candidates=max_candidates, scratch=scratch_root,
+                    green_budget=green_budget, choose=chooser)
+            if out.get("stop_reason") == "DEADLINE" and dl < deadline and remaining() > 15:
+                out["stop_reason"] = "FILE_BUDGET"
+            return out
 
         def expected_for(source_text: str, priority: list[int]) -> list[tuple[list[Any], Any]]:
             if not (plain_mods and priority):
@@ -915,8 +937,24 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
                                                                if r["path"] == target_rel), [])]:
                 if ln not in priority:
                     priority.append(ln)
-            candidates = candidates_v1.generate(source_text, nums, strings, priority)
+            candidates = candidates_v1.generate(source_text, nums, strings, priority, max_candidates=max_candidates)
             stmt_rows = candidates_v1.statement_candidates(source_text, priority)
+            # donors: the other ranked files and the files this one imports (bounded),
+            # read once -- fixes already written elsewhere in the project, adapted here
+            donor_rels = [p for p in [*loc_top, *_test_import_closure(tree, [target_rel])]
+                          if p != target_rel and p.endswith(".py") and not _TESTNAME(pathlib.Path(p).name)
+                          and (tree / p).is_file()]
+            donor_texts: list[tuple[str, str]] = []
+            for p_ in dict.fromkeys(donor_rels):
+                if len(donor_texts) >= 8:
+                    break
+                try:
+                    t_ = (tree / p_).read_text(encoding="utf-8")
+                except (OSError, UnicodeDecodeError):
+                    continue
+                if t_.count("\n") <= 3000:
+                    donor_texts.append((p_, t_))
+            stmt_rows += candidates_v1.donor_candidates(source_text, priority, donor_texts)
             candidates = candidates_v1.merge_ranked(candidates, stmt_rows, priority)
             synth_row: dict[str, Any] = {"status": "NOT_ATTEMPTED"}
             if plain_ok and priority:
@@ -1069,8 +1107,10 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         file_order = [target_rel] + [p for p in loc_top if p != target_rel and loc_lines.get(p)
                                      and (tree / p).is_file() and p.endswith(".py")][:int(args.get("max_files") or 3) - 1]
         per_file: list[dict[str, Any]] = []
-        for rel in file_order:
+        for i, rel in enumerate(file_order):
             witness_row = {}
+            files_left = len(file_order) - i
+            budget["deadline"] = deadline if files_left == 1 else time.monotonic() + remaining() * 0.5
             r = search_file(rel)
             r["seconds"] = round(time.monotonic() - t0 - sum(x["seconds"] for x in per_file), 3)
             per_file.append(r)
@@ -1148,18 +1188,33 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         if any(r["search"]["stop_reason"] == "DEADLINE" for r in per_file) or stage3.get("stop_reason") == "DEADLINE":
             raise DiagnoseRepairRefusal("DEADLINE_EXCEEDED:" + str(deadline_s) + "s:tested=" + str(tested_total))
         if not search["winner"]:
+            if any(r["search"]["stop_reason"] == "FILE_BUDGET" for r in per_file):
+                raise DiagnoseRepairRefusal("OPEN:NO_VERIFIED_CANDIDATE:" + str(tested_total) + ":FILE_BUDGET_INCOMPLETE")
             raise DiagnoseRepairRefusal("OPEN:NO_VERIFIED_CANDIDATE:" + str(tested_total))
         if search["winner"]["index"] in suspicious:
             # the only way to make the suite green was to write its expected value into
             # the code; that is the suite's weakness, not a repair, and it is not shipped
             raise DiagnoseRepairRefusal("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:" + str(suspicious))
+        top_row = (witness_row.get("ranking") or [{}])[0]
+        if int(top_row.get("new_postcondition_violations") or 0) > 0 and search["winner"]["index"] == top_row.get("index"):
+            # the suite is green and the function's own docstring contract is broken on
+            # probe inputs the original kept it on: the patch breaks the contract, nothing
+            # ships (violations the original already had are the contract's quarrel with
+            # the original -- `post: _ >= 0` on `area` probed with negative sides -- and
+            # do not block the least-violating repair)
+            cx = top_row.get("contract_counterexample") or {}
+            raise DiagnoseRepairRefusal("OPEN:GREEN_VIOLATES_CONTRACT:" + str(top_row.get("new_postcondition_violations"))
+                                        + ":" + str((witness_row.get("postconditions") or [""])[0])[:80]
+                                        + (":on=" + str(cx.get("call"))[:80] if cx.get("call") else ""))
         if tie_policy == "refuse" and witness_row.get("tie_at_top"):
             # two different behaviours satisfy the suite, the contract and the probes
             # equally: the suite under-specifies; under tie_policy=refuse that is the
             # answer, with every tied alternative in the ledger, and nothing is shipped
             tied = [r["index"] for r in witness_row.get("ranking") or [] if r.get("tied_with_top")]
+            first = (witness_row.get("distinguishing_inputs") or [{}])[0]
             raise DiagnoseRepairRefusal("OPEN:WITNESS_TIE:classes=" + str(witness_row.get("behaviour_classes"))
-                                        + ":" + str(tied[:8]))
+                                        + ":" + str(tied[:8])
+                                        + (":decide_with=" + str(first.get("call"))[:80] if first.get("call") else ""))
         patched = candidates_v1.candidate_files(target_rel, search["winner"]["candidate"])
         diff_text = ""
         for rel in sorted(patched):
