@@ -2319,11 +2319,35 @@ def _bm25_rerank(goal,ranked):
     out=[]
     for item,(relevance,_contributions) in zip(ranked,scores):
         score,specificity,cid=item[0],item[1],item[2]
-        out.append((relevance,score,specificity,cid,item))
-    # BM25 first; the pinned overlap score breaks BM25 ties, then specificity,
-    # then identity for determinism.
-    out.sort(key=lambda x:(-x[0],-x[1],-x[2],x[3]))
-    return [x[4] for x in out]
+        # A CANDIDATE THAT NAMES THE ACT IS NOT DISPLACED BY ONE THAT MERELY
+        # TALKS ABOUT IT.
+        #
+        # BM25 reads the whole document a capability carries, so a long
+        # declaration list can outweigh the one candidate whose own name or
+        # `provides` says it performs the verb the sentence uses.  Measured on
+        # "Audit the python source tree with an AST.": `python.source.audit.ast`
+        # scores 42 against 30 and is the only candidate `_score` records as
+        # `matched_head_verb: audit`, yet BM25 prefers
+        # `code.multilanguage.parse.tree_sitter.v1` (6.25 to 5.72) because
+        # "parse" and "tree" are rarer words in the corpus than "audit".  The
+        # pinned score already knows which one declares the act; that verdict is
+        # not BM25's to overturn.
+        #
+        # This is NOT the act-word bonus `_score` already applies, applied twice:
+        # the flag is None for every candidate on 21 of the 23 benchmark goals,
+        # so on those this changes nothing and BM25 still decides -- which is
+        # what keeps `image.qr.generate.qrencode` (21) ahead of the decoder that
+        # out-scores it (22) and `archive.tar_gz.create_from_manifest` ahead of
+        # the verifier (54 against 61).  It separates candidates on exactly the
+        # goals where the goal's verb has a declared owner.
+        head_verb=(item[5] or {}) if isinstance(item[5],dict) else {}
+        declares_act=1 if head_verb.get("matched_head_verb") else 0
+        out.append((declares_act,relevance,score,specificity,cid,item))
+    # The candidate that declares the goal's verb first; then BM25; the pinned
+    # overlap score breaks BM25 ties, then specificity, then identity for
+    # determinism.
+    out.sort(key=lambda x:(-x[0],-x[1],-x[2],-x[3],x[4]))
+    return [x[5] for x in out]
 
 
 def _effect_providers(registry):
@@ -2378,6 +2402,59 @@ def _plan_score(plan):
         return float(plan.get("score") or 0)
     except (TypeError,ValueError):
         return -1
+
+
+def _plan_terminal_names_the_sentence(plan):
+    """True when the plan's own capability name shares a word with the goal.
+
+    Reads ``match_evidence["matched_identity"]``, which ``_score`` already
+    computes from the capability id -- no new signal, only a use for one that
+    was already recorded and discarded.  A compound plan is judged by its last
+    part, the one whose result the user asked for.
+    """
+    if not isinstance(plan,dict):
+        return False
+    row=plan
+    parts=[p for p in (plan.get("compiled_parts") or []) if isinstance(p,dict)]
+    if parts:
+        row=parts[-1]
+    evidence=row.get("match_evidence")
+    if not isinstance(evidence,dict):
+        evidence=plan.get("match_evidence")
+    if not isinstance(evidence,dict):
+        return False
+    return bool(evidence.get("matched_identity"))
+
+
+def _plan_has_dangling_effect_refs(plan):
+    """True when the plan still carries a ``$effect_result`` nobody produces.
+
+    ``_bind_planned_inputs`` records an effect slot as a reference to the
+    capability that would produce it, and ``_attach_effect_producer_steps``
+    turns those references into real earlier steps -- but only when every
+    producer it needs binds from the sentence.  When one does not, the attach
+    pass returns the plan untouched by design ("a gap stays a gap instead of
+    becoming a chain whose first step is guaranteed to fail"), and the
+    reference survives into the emitted plan.
+
+    The plan comparison did not look.  Measured: on "Create an xlsx table from
+    JSON records." and "Verify a sqlite table against JSON records." the
+    chained pass returned ``auto.pypi.msgpack`` -- a serialization library, for
+    both a spreadsheet and a database question -- at score 7, carrying
+    ``{'json_path': {'$effect_result': {...}}}`` because no producer of
+    ``json.file.available`` could be bound.  An unexecutable plan trivially has
+    no slot filled from the filesystem, so the guess-loses-to-the-sentence rule
+    below preferred it to the world-bound plan that scores 43 and 54.  A
+    dangling reference is not a plan; it is a plan's missing half.
+    """
+    if not isinstance(plan,dict):
+        return False
+    rows=[plan]
+    rows.extend(p for p in (plan.get("compiled_parts") or []) if isinstance(p,dict))
+    for row in rows:
+        if _collect_effect_result_refs(row.get("inputs")):
+            return True
+    return False
 
 
 def _plan_has_unjustified_world_slots(plan):
@@ -7832,6 +7909,28 @@ def compile_goal(goal, registry, root):
     # world-bound UNCONDITIONALLY was tried and measured at 21->19 canonical and
     # 20->19 front-door, because it broke exactly those audit goals -- so the
     # unjustified-slot test is load-bearing, not decoration.
+    if (_plan_has_dangling_effect_refs(chained)
+            and not _plan_has_dangling_effect_refs(grounded)
+            and not _plan_terminal_names_the_sentence(chained)):
+        # THE SECOND CONDITION IS THE WHOLE POINT, AND IT IS MEASURED RATHER
+        # THAN TUNED.  A dangling reference means the plan cannot run as
+        # written, so the question is whether the capability it names is worth
+        # one more step of work.  `match_evidence["matched_identity"]` answers
+        # exactly that: does the capability's OWN NAME contain a word of the
+        # sentence?  Measured -- on "Create an xlsx table from JSON records."
+        # the dangling plan is `auto.pypi.msgpack`, whose matched_identity is
+        # EMPTY: it shares one keyword ("records") and none of its name appears
+        # in the request, so it is a serialization library that happens to hold
+        # the word "records", not an answer.  On "Fetch a JSON document and
+        # assess its internal consistency." the dangling plan is
+        # `knowledge.consistency.assess` with matched_identity
+        # ["assess","consistency"] -- the request's own verb and object -- and
+        # it is the best answer available in the front door's routable view.
+        # No score, margin or ratio separates those two cases half as cleanly:
+        # the same score comparison that prefers xlsx at 43 to msgpack at 7 also
+        # prefers a score-25 docx writer to the score-13 consistency assessor,
+        # which is the very regression the parity suite exists to catch.
+        return grounded
     if (_plan_has_unjustified_world_slots(grounded)
             and not _plan_has_unjustified_world_slots(chained)):
         return chained

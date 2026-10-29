@@ -761,6 +761,71 @@ Which is the next unit: **make the sibling choice structural** — the act word 
 Both are the same defect seen from two sides: the ranker is reading the sentence's *grammar* as if
 it were the sentence's *subject*.
 
+### 7.7 The ranker was right: two later stages were deciding instead
+
+The six benchmark misses were not ranking defects, and the next unit was found by
+instrumenting the goals that lost rather than by reading the scorer. On every one of them
+the correct capability was **first** after `_score` — `xlsx.table.create_from_json_records`
+43 against 36, `sqlite.table.verify_against_json_records` 54 against 36,
+`python.source.audit.ast` 42 against 33 — and a later stage replaced it.
+
+**Defect A — `_bm25_rerank` sorted by relevance first, the declared score second.** Corpus
+statistics could overturn the candidate the pinned scorer had recorded as *declaring the
+goal's verb*. "Audit the python source tree with an AST." gave `python.source.audit.ast`
+42 with `matched_head_verb: audit`, and BM25 preferred
+`code.multilanguage.parse.tree_sitter.v1` at 30/6.25 against 42/5.72 because "parse" and
+"tree" are rarer in the corpus. **Law: relevance orders candidates; it does not overturn
+the one that declares the act.** The flag is absent on 21 of 23 goals, so on those nothing
+changed — including the barcode goal (`generate` 21 ahead of the decoder 22) and the tar
+goal (`create` 54 ahead of the verifier 61) that BM25 was installed for, both re-pinned as
+negative controls.
+
+**Defect B — `compile_goal` compared the grounded plan with the chained plan without
+asking whether the chained one could run.** "Create an xlsx table from JSON records." and
+"Verify a sqlite table against JSON records." were both answered by `auto.pypi.msgpack` —
+a serialization library — at score 7, carrying a `$effect_result` for
+`json.file.available` that no capability in the registry could produce, so the attach pass
+had refused and left the reference dangling by design. An unexecutable plan trivially has
+no slot filled off the filesystem, so the guess-loses-to-the-sentence rule preferred it to
+the world-bound plan scoring 43 and 54.
+
+**The discriminator that makes the fix safe is not a score margin.**
+`match_evidence["matched_identity"]` already records whether a capability's own name
+contains a word of the sentence, and it separates the two cases exactly: `auto.pypi.msgpack`
+matches **no** identity token on the xlsx goal (it shares the keyword "records" and
+nothing else), while `knowledge.consistency.assess` matches `assess` and `consistency` and
+is the best answer available on the consistency goal. So a dangling plan loses to a
+runnable one only when its capability names nothing the sentence said. The same score
+comparison that prefers xlsx 43 to msgpack 7 also prefers a score-25 docx writer to the
+score-13 consistency assessor — the precise regression the parity suite exists to catch,
+and the reason the score was rejected as the discriminator.
+
+| | canonical | front door | suites (7 files) |
+|---|---|---|---|
+| before | 18 / 23 | 17 / 23 | 33 failed / 155 passed |
+| §7.7 | **22 / 23** | **21 / 23** | **21 failed / 191 passed** |
+
+Zero new failing node ids against the baseline; 12 baseline failures now pass, and the
+parity pins — which were stale at 22/22 while both paths measured 18/17 — were re-pinned
+to what actually happens: the two paths now diverge on exactly two goals, and both
+divergences are the front door **refusing** with `GOAL_STATED_ACT_INPUTS_UNBOUND` a plan
+that the canonical path returns one producer step short of executable
+(`BENCH_JSON_FETCH_CONSISTENCY`, `EXT_JQ_TABLE`). That divergence is pinned in a new test
+whose only accepted shape is "the door refuses what canonical answers with a dangling
+`$effect_result`", so path drift in any other direction still fails.
+
+The one remaining miss is the honest one: **`EXT_JQ_TABLE`**. The sentence states no
+`jq_filter`, `json.query.jq` requires one, and inventing the program the user would have
+written is exactly what this repository refuses to do. Neither path answers it; the door
+refuses it and the canonical path returns a plan that cannot run. The registry could
+declare a default filter, or the sentence could state one — that is a declaration decision,
+not a compiler defect, and doing it inside the compiler would be invention.
+
+Pins: `canonical/tests/test_which_stage_decides_the_selection_v1.py` (9) —
+the act-word ordering with its two negative controls, the dangling-reference precondition,
+the nameless-plan and named-plan halves of the rule, the predicate's own reading of
+recorded evidence, and the 22/23 rate.
+
 ---
 
 ## 8. P6 — the absent acts, by domain
