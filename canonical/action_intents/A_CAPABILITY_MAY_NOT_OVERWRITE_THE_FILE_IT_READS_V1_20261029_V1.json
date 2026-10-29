@@ -36,7 +36,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A bound software-engineering capability is handed the path the sentence stated as the thing to READ and writes its own structured report there, because the registry declares output_path and source_root and the goal named no destination. The run destroys the user's source and then reports failure, so the loss is invisible in the verdict.",
-  "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+  "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -50,7 +50,7 @@
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
   "load_bearing_primary": {
-    "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+    "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
     "constructive_gap_for_open_obligation_ids": [
       "AUTOMATIONBENCH_GE_40",
       "CHARTOGRAPHY_TOOLS_GE_89",
@@ -107,7 +107,7 @@
     }
   ],
   "recursive_obs": {
-    "canonical_base_commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+    "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "TRUSTING_THAT_A_DECLARED_OUTPUT_SLOT_IS_SAFE_BECAUSE_IT_IS_DECLARED",
@@ -257,7 +257,7 @@
       ],
       "selected_route_rank": 1,
       "discovery_required": true,
-      "checked_at_utc": "2026-10-29T19:12:49Z",
+      "checked_at_utc": "2026-10-29T19:16:33Z",
       "max_age_hours": 12,
       "source_classes_checked": [
         "BRAIN_INHERITED",
@@ -321,7 +321,7 @@
       "selected_route": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
       "incumbent_route": "TIGHTEN_THE_TYPED_RETRY_RELOCATION",
       "selected_route_preflight": {
-        "checked_at_utc": "2026-10-29T19:12:49Z",
+        "checked_at_utc": "2026-10-29T19:16:33Z",
         "max_age_hours": 2,
         "selected_route": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
         "status": "READY",
@@ -337,7 +337,7 @@
             "scope": "LOCAL",
             "evidence_scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-10-29T19:12:49Z",
+            "observed_at_utc": "2026-10-29T19:16:33Z",
             "evidence": [
               "DIRECT_PROBE on this host: shutil.copyfile(p,p) raises SameFileError; os.path.samefile(p,p) is True"
             ],
@@ -353,7 +353,7 @@
             "scope": "LOCAL",
             "evidence_scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-10-29T19:12:49Z",
+            "observed_at_utc": "2026-10-29T19:16:33Z",
             "evidence": [
               "12/12 fresh-instance tests pass; the module imports with no third-party dependency"
             ],
@@ -369,7 +369,7 @@
             "scope": "LOCAL",
             "evidence_scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-10-29T19:12:49Z",
+            "observed_at_utc": "2026-10-29T19:16:33Z",
             "evidence": [
               "unchanged by this PR: git diff --stat shows no modification"
             ],
@@ -408,7 +408,7 @@
   "v22_prewrite_admission": {
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-    "checked_at_utc": "2026-10-29T00:00:00Z",
+    "checked_at_utc": "2026-10-29T19:16:33Z",
     "currentness": {
       "accepted_families": 5,
       "open_families": 14,
