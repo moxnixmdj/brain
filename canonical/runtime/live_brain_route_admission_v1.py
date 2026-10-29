@@ -898,11 +898,54 @@ def failure_kind(result: Mapping[str, Any]) -> str:
     return FAILURE_KIND_UNKNOWN
 
 
+def _blocked_by(reason: Any) -> str | None:
+    """The module or tool a failure names as missing, when it names one.
+
+    ``failure_kind`` says a failure is environmental; this says WHICH dependency,
+    which is the part a caller can act on.  Read off the message the interpreter or
+    the adapter already wrote -- nothing is probed and nothing is installed.
+    """
+    text = str(reason or "")
+    match = _MISSING_MODULE_RE.search(text)
+    if match:
+        return match.group("module")
+    match = _MISSING_TOOL_RE.search(text)
+    if match:
+        return match.group("tool")
+    return None
+
+
+_MISSING_MODULE_RE = re.compile(r"No module named '?(?P<module>[A-Za-z_][A-Za-z0-9_.]*)'?")
+_MISSING_TOOL_RE = re.compile(r"(?:NOT_FOUND|NOT_INSTALLED|NOT_PRESENT_HERE)[:](?P<tool>[A-Za-z0-9_.+-]+)")
+
+
+def _classify(out: dict[str, Any]) -> dict[str, Any]:
+    """Attach the failure KIND to a closed failure, using the classifier that exists.
+
+    ``failure_kind`` was written for exactly this distinction -- "a defect is never
+    reported as a refusal" -- and is pinned by its own test file, but the live entry
+    point never called it.  Measured: the four-step, five-, eight- and ten-step DAG
+    tests all came back ``FAIL__CAPABILITY_DAG_RESULT_INVALID`` while the actual
+    reason was ``ModuleNotFoundError: No module named 'et_xmlfile'`` -- openpyxl's
+    own dependency, absent from this box.  A missing dependency was being reported
+    as an invalid result, which is the one thing the classifier exists to prevent.
+    """
+    reason = out.get("reason")
+    if reason is None:
+        return out
+    kind = failure_kind({"reason": str(reason)})
+    out["failure_kind"] = kind
+    blocked_by = _blocked_by(reason)
+    if blocked_by:
+        out["blocked_by"] = blocked_by
+    return out
+
+
 def _fail(task_id: str, status: str, failure_class: str, started: int, **extra: Any) -> dict[str, Any]:
     out = {"schema": LIVE_SCHEMA, "status": status, "pass": False, "task_id": task_id, "failure_class": failure_class,
            "executed": extra.pop("executed", False), "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
     out.update(extra)
-    return out
+    return _classify(out)
 
 
 def _controller_passed(controller: Any) -> bool:
@@ -1234,6 +1277,15 @@ def _dag_result(task_id: str, goal: str, compiled: Mapping[str, Any], raw_contra
     if reason is not None:
         out["failure_class"] = "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
         out["reason"] = str(reason)[:1600]
+        _classify(out)
+        if out.get("failure_kind") == FAILURE_KIND_ENVIRONMENT:
+            # AN ABSENT DEPENDENCY IS NOT AN INVALID RESULT.  The plan was fine, the
+            # executor was fine, and the machine does not have the module -- saying
+            # "invalid result" hides that from the caller and from every measurement
+            # that buckets failures by status.  The repo's own law is already
+            # ENVIRONMENT_BLOCKED_CAPABILITIES_ARE_NOT_PASSES; this gives it a name
+            # the DAG path can report.  pass stays False either way.
+            out["status"] = "BLOCKED__CAPABILITY_DAG_ENVIRONMENT_BLOCKER"
     return out
 
 

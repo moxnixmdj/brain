@@ -21,7 +21,7 @@ that no longer reproduces is a bug in this document, not a target. Red is not au
 | 5 | benchmark capability selection (canonical / front door) | **22 / 23** · **21 / 23** | `goal_compilation_benchmark_v1` |
 | 6 | evidence blocks: ok / no pointer / dangling | **123 / 34 / 8** | `capability_evidence_probe_v1.py --audit-pointers` |
 | 6b | machine-missing external dependencies | **7** (5 doc/image, 1 data, 1 barcode) | same run, `external_dependency_missing_here` |
-| 7 | red door/compiler tests | **21** in 4 families (was 33) | `pytest` on the eight suites |
+| 7 | red door/compiler tests | **17** in 3 families, **4 skipped** naming a missing dependency (was 33) | `pytest` on the nine suites |
 
 Tool liveness over 165 capabilities: **0 adapters missing**, 9 adapter import failures (all chart
 raster), **7 machine-missing external dependencies**, 27 executor kernel refusals by source type,
@@ -41,6 +41,12 @@ Three independent measurements agree on the same hole:
 
 - **End to end**, the family `ARCHIVE_VERIFY_GNU` scores **0 of 2** and its routes are
   `archive.tar_gz.create_from_manifest` — the *creator*, answering a *verification* request.
+  The cause is narrower than "the verifier cannot be asked": on a sentence a person would write —
+  *"Verify the tar archive at out/backup.tar.gz against the manifest at out/manifest.json."* — the
+  verifier wins cleanly, **64 against 50**. The instrument's sentence is built from the capability's
+  own DECLARATIONS, and `archive.verify.tar_gz.gnu` declares the act `members`, not `verify`; a
+  sentence that says "members" is answered by the creator. **The verifier does not declare the act
+  it performs** — that is the P0 defect in this row, and it is a declaration fix, not a ranking one.
 - **Route admission** reports `raw_goal_acceptance: RAW_GOAL_ACCEPTANCE_UNRESOLVED`,
   reason **`NO_INDEPENDENT_REINSPECTION_FOR:python.repository.acceptance.measure.v1`** — a capability
   executed, wrote a verified artifact, and nothing was able to re-inspect it.
@@ -56,16 +62,39 @@ digest (`measurement_program_sha256`) and a schema. Re-inspection is a second, i
 artifact against its schema — no new engine, no model. The lane exists for few capabilities; it must
 exist for every capability that claims `output_verified`.
 
-### P1 — Multi-step composition is broken (the "advanced" part)
+### P1 — CORRECTED: multi-step composition works; a missing dependency was being called an invalid result
 
-Four tests fail with **`FAIL__CAPABILITY_DAG_RESULT_INVALID`** (plus one spool-assignment row,
-`test_f13`): the executor produces a DAG result the validator rejects. Measured on
-`test_f11_multi_step_capability_dag_planned_and_executed` and the 5/8/10-step metabolic DAGs.
+The first version of this document said the executor's result contract was broken. It was not. Running the
+failing chain directly gave the whole story:
 
-The compiler can already *plan* multi-step work (the chained pass attaches producer steps and numbers
-`$result` cycles), so the defect is downstream in the executor's result contract, not in selection.
-This is the single biggest block on "senior engineer" behaviour: an engineer that cannot reliably chain
-`localize → patch → test → accept` is a command runner.
+```
+status = FAIL__CAPABILITY_DAG_RESULT_INVALID
+reason = ModuleNotFoundError: No module named 'et_xmlfile'
+```
+
+`et_xmlfile` is openpyxl's own dependency and this box does not have it. The DAG executor crashed, the
+entry point converted *any* exception into an invalid-result status, and a missing library was therefore
+reported as a defect in the plan. The repo already contained the classifier for exactly this
+(`failure_kind`, with its own pinned test file `test_a_defect_is_never_reported_as_a_refusal_v1.py`) and the
+live entry point never called it.
+
+**Fixed in this session:** every closed failure from the DAG path and from `_fail` now carries
+`failure_kind`, the missing module is named in `blocked_by`, and an environment block reports
+`BLOCKED__CAPABILITY_DAG_ENVIRONMENT_BLOCKER` instead of "invalid result":
+
+```
+status = BLOCKED__CAPABILITY_DAG_ENVIRONMENT_BLOCKER
+failure_kind = ENVIRONMENT_BLOCKER
+blocked_by = et_xmlfile
+```
+
+The four multi-step tests now skip, naming the dependency, instead of asserting that this box has a library
+it does not have — which is the repo's own convention (`environment_blocked_here` in the end-to-end
+harness; `ENVIRONMENT_BLOCKED_CAPABILITIES_ARE_NOT_PASSES`). Measured after: **17 red, 201 passed, 4
+skipped**, no new failing node id.
+
+What is still genuinely open on composition: `test_f13` returns `FAIL_CLOSED__NO_OBSERVED_EFFECT` — an
+intermediate spool step that produced no observed effect. That is one row, and it is a real one.
 
 ### P2 — Near-duplicate capabilities steal each other's sentences
 
@@ -162,7 +191,8 @@ A dangling evidence pointer is not a capability defect; it is an unbacked claim,
 
 | family | rows | real cause |
 |---|---|---|
-| DAG executor returns an invalid result | 4 + 1 spool | P1 above |
+| ~~DAG executor returns an invalid result~~ | ~~4~~ | **not a defect** — missing `et_xmlfile`; now `BLOCKED__…_ENVIRONMENT_BLOCKER` and skipped |
+| an intermediate spool step observes no effect | 1 | P1 above (real) |
 | admission/acceptance laws | 7 | P0 and P3 above |
 | stale guard expectations (`R1`/`R3` vs `R12`/`R14`) | 3 | **the guard got better than the pin** — `R12_STATED_ACT_IS_NOT_AN_ACT_THIS_BRAIN_PERFORMS:translate` and `R14_UNHEARD_ACT_WORD:tutorial` are the *correct* verdicts |
 | reachability / parity / rate pins | 6 | measurement pins, deliberately moved |
@@ -177,6 +207,18 @@ PDF/DOCX/XLSX/image readers (out of scope), and the hardcore five from P0 plus
 `plain_goal.bound_capability.grounding.stdlib`, `python.repo.pr_realize.v1`,
 `text.file.write`, `vcs.git.log.v1` (a true homonym: its own keywords carry "commit", so a sentence
 built from its declaration is read as a commit request).
+
+### P1b — Two claims in this document's first version were wrong, and are corrected here
+
+1. **"Multi-step composition is broken."** It is not. The reason was `No module named 'et_xmlfile'`. The
+   defect was that a missing dependency was reported as an invalid result; that is fixed (P1).
+2. **"Archive verify cannot be asked."** It can: *"Verify the tar archive at out/backup.tar.gz against
+   the manifest at out/manifest.json."* selects the verifier 64 against 50. What fails is the
+   declaration-built sentence, because the verifier declares the act `members` rather than `verify`.
+
+Both corrections came from re-reading the measurement instead of the status word, which is the same law
+that produced this document. The lesson is recorded rather than deleted: a red row names an observation,
+never a cause.
 
 ### P11 — The instruments that are not here are the ceiling
 
