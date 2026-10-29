@@ -330,8 +330,10 @@ def markdown(rows: list[dict]) -> str:
     for r in rows:
         mark = {"REAL": "**REAL**", "FALSE": "**FALSE**", "refused": "refused",
                 "DAMAGE": "**DAMAGE**"}.get(r["mark"], r["mark"])
+        base_rel = "canonical/astra_runtime/tmp/frontier_matrix/%s/" % r["case"]
+        shown = r["goal"].replace(base_rel, "").replace("|", "\\|")
         out.append("| %s | `%s` | %s | %d | `%s` |"
-                   % (r["lane"], r["goal"], mark, r["ms"], str(r["status"])[:60]))
+                   % (r["lane"], shown, mark, r["ms"], str(r["status"])[:60]))
     out.append("")
     out.append("REAL: " + (", ".join("`%s`" % r["case"] for r in real) or "-"))
     out.append("")
