@@ -164,7 +164,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         # which is what the pinned binding requires, never an invented command.
         argv=[str(x) for x in _REPAIR._PATCH.suite_argv(sys.executable,*test_paths)]
     else:
-        argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
+        argv=_REPAIR._PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*test_paths)
     if not argv:
         raise RepairApplyError("TEST_ARGV_EMPTY")
     output=_safe_output(repo,args.get("output_path"))

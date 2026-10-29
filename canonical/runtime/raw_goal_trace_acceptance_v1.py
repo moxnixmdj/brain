@@ -30,6 +30,7 @@ from __future__ import annotations
 import hashlib
 import ast
 import json
+import math
 import re
 import subprocess
 import tarfile
@@ -1594,10 +1595,417 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
                       "stdout_bytes_reproduced": len(again.encode("utf-8"))}
 
 
+def _trace_line_coverage(traces, root):
+    """Which (file, line) pairs the failing and the passing tests each reached.
+
+    Re-derived from the raw trace events in the report, never from the
+    producer's own coverage arithmetic.  ``traces`` rows carry ``events`` as
+    ``[path, lineno, function, count]`` and a ``pass`` verdict, so the spectrum
+    the whole report rests on can be rebuilt without asking the producer
+    anything.  Returns ``(fail_lines, pass_lines, n_fail, n_pass)`` or ``None``
+    when a trace names a file that is not on disk, which is itself a refusal the
+    caller turns into one.
+    """
+    fail: set[tuple[str, int]] = set()
+    passed: set[tuple[str, int]] = set()
+    n_fail = 0
+    n_pass = 0
+    for row in traces:
+        if not isinstance(row, Mapping):
+            return None
+        events = row.get("events")
+        if not isinstance(events, list):
+            return None
+        ok = bool(row.get("pass"))
+        n_pass += 1 if ok else 0
+        n_fail += 0 if ok else 1
+        sink = passed if ok else fail
+        for event in events:
+            if not isinstance(event, (list, tuple)) or len(event) < 2:
+                return None
+            path, lineno = event[0], event[1]
+            if not isinstance(path, str) or not isinstance(lineno, int):
+                return None
+            on_disk = _inside(root, path)
+            # _inside proves containment, never existence, so the file test is
+            # separate: a trace naming a path that is not on disk is a report
+            # this inspector cannot reproduce and must refuse.
+            if on_disk is None or not on_disk.is_file():
+                return None
+            sink.add((path, lineno))
+    return fail, passed, n_fail, n_pass
+
+
+def _ochiai(fail_coverage: int, pass_coverage: int, total_failing: int) -> float:
+    """The Ochiai coefficient, in the form both producers compute it.
+
+    ``f / sqrt(F * (f + q))`` where F is the number of failing tests.  A line no
+    failing test reached scores zero however many passing tests reached it.
+    """
+    if not fail_coverage or total_failing <= 0:
+        return 0.0
+    return fail_coverage / math.sqrt(total_failing * (fail_coverage + pass_coverage))
+
+
+def _inspect_fault_localize(args, result, root):
+    """Re-derive the fault ranking from the traces the report itself carries.
+
+    A localizer makes one claim that can be measured without asking the producer
+    anything: *this line is where the failing tests went and the passing tests
+    did not.*  The report carries the raw per-test trace events, so the spectrum
+    is rebuilt here from those bytes and every ranked row is checked against it
+    -- coverage, coefficient, ordering, and the ownership of each line by the
+    symbol the report names for it.
+
+    The direction that matters is the top of the ranking.  A report whose first
+    row is a line no failing test ever executed is not a localization at all,
+    and the caller reads it as one.  So is a report whose stated coverage does
+    not match the traces it shipped: that one has been edited after the fact.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.fault.localize.dynamic.dataflow.v1),
+    so the artifact was rolled back on every run and the whole lane was
+    unreachable from the front door -- measured on e2d7981d, the sentence
+    "Localize the fault in the python source root D using the tests" reached
+    this capability and was then thrown away.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "LOCALIZE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "LOCALIZE_REPORT_NOT_A_JSON_OBJECT", {}
+    rows = data.get("ranked_lines")
+    traces = data.get("test_traces")
+    if not isinstance(rows, list) or not rows:
+        return False, "LOCALIZE_REPORT_RANKS_NO_LINE", {}
+    if not isinstance(traces, list) or not traces:
+        return False, "LOCALIZE_REPORT_CARRIES_NO_TRACE", {}
+    coverage = _trace_line_coverage(traces, root)
+    if coverage is None:
+        return False, "LOCALIZE_TRACE_NAMES_A_FILE_NOT_ON_DISK", {}
+    fail_lines, pass_lines, n_fail, n_pass = coverage
+    if not n_fail:
+        return False, "LOCALIZE_NO_FAILING_TEST_TO_LOCALIZE", {}
+    if data.get("failing_test_count") != n_fail:
+        return False, "LOCALIZE_FAILING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("failing_test_count"), "traced": n_fail}
+    if data.get("passing_test_count") != n_pass:
+        return False, "LOCALIZE_PASSING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("passing_test_count"), "traced": n_pass}
+    expected_order = []
+    for row in rows:
+        if not isinstance(row, Mapping):
+            return False, "LOCALIZE_RANKED_ROW_INVALID", {}
+        path, line = row.get("path"), row.get("line")
+        on_disk = _inside(root, path)
+        if on_disk is None or not on_disk.is_file():
+            return False, "LOCALIZE_RANKED_FILE_ABSENT_FROM_DISK", {"path": path}
+        if not isinstance(line, int) or line < 1:
+            return False, "LOCALIZE_RANKED_ROW_HAS_NO_LINE", {"path": path}
+        if line > len(on_disk.read_text(encoding="utf-8", errors="replace").splitlines()):
+            return False, "LOCALIZE_RANKED_LINE_OUTSIDE_THE_FILE", {
+                "path": path, "line": line}
+        f = row.get("fail_coverage")
+        q = row.get("pass_coverage")
+        if not isinstance(f, int) or not isinstance(q, int):
+            return False, "LOCALIZE_RANKED_ROW_HAS_NO_COVERAGE", {"path": path}
+        if f != (1 if (path, line) in fail_lines else 0):
+            return False, "LOCALIZE_FAIL_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "path": path, "line": line, "claimed": f}
+        if q != (1 if (path, line) in pass_lines else 0):
+            return False, "LOCALIZE_PASS_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "path": path, "line": line, "claimed": q}
+        want = round(_ochiai(f, q, n_fail), 12)
+        if abs(float(row.get("ochiai") or 0.0) - want) > 1e-9:
+            return False, "LOCALIZE_OCHIAI_NOT_REPRODUCED", {
+                "path": path, "line": line, "claimed": row.get("ochiai"),
+                "recomputed": want}
+        bonus = 1.0 if "FAILING_TRACEBACK_FRAME" in (row.get("reasons") or []) else 0.0
+        if abs(float(row.get("score") or 0.0) - (want + bonus)) > 1e-9:
+            return False, "LOCALIZE_SCORE_NOT_REPRODUCED", {
+                "path": path, "line": line, "claimed": row.get("score")}
+        expected_order.append((-float(row.get("score") or 0.0), -f, q,
+                               str(path), line, str(row.get("function"))))
+    if expected_order != sorted(expected_order):
+        return False, "LOCALIZE_RANKING_IS_NOT_IN_ITS_OWN_ORDER", {}
+    if not rows[0].get("fail_coverage"):
+        return False, "LOCALIZE_TOP_RANKED_LINE_WAS_REACHED_BY_NO_FAILING_TEST", {
+            "path": rows[0].get("path"), "line": rows[0].get("line")}
+    symbols = data.get("ranked_symbols")
+    if isinstance(symbols, list):
+        for row in symbols:
+            if not isinstance(row, Mapping):
+                return False, "LOCALIZE_SYMBOL_ROW_INVALID", {}
+            on_disk = _inside(root, row.get("path"))
+            if on_disk is None or not on_disk.is_file():
+                return False, "LOCALIZE_SYMBOL_FILE_ABSENT_FROM_DISK", {}
+            try:
+                tree = ast.parse(on_disk.read_bytes())
+            except (SyntaxError, ValueError, OSError):
+                return False, "LOCALIZE_SYMBOL_FILE_UNPARSEABLE", {}
+            owned = {
+                node.name: (node.lineno, getattr(node, "end_lineno", node.lineno))
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+            }
+            span = owned.get(str(row.get("symbol")))
+            if span is None:
+                return False, "LOCALIZE_NAMED_SYMBOL_IS_NOT_DEFINED_IN_THE_FILE", {
+                    "symbol": row.get("symbol"), "path": row.get("path")}
+            if span != (row.get("lineno"), row.get("end_lineno")):
+                return False, "LOCALIZE_SYMBOL_SPAN_DOES_NOT_MATCH_THE_SOURCE", {
+                    "symbol": row.get("symbol"), "claimed": [row.get("lineno"),
+                                                              row.get("end_lineno")],
+                    "source": list(span)}
+            for covered in row.get("covered_suspicious_lines") or []:
+                if not isinstance(covered, int) or not span[0] <= covered <= span[1]:
+                    return False, "LOCALIZE_SYMBOL_DOES_NOT_OWN_A_LINE_IT_CLAIMS", {
+                        "symbol": row.get("symbol"), "line": covered}
+    return True, "", {"traces_reparsed": len(traces),
+                      "ranked_lines_recomputed": len(rows),
+                      "failing_tests": n_fail}
+
+
+def _trace_call_coverage(traces, root):
+    """Which (caller, callee) pairs the failing and passing tests each crossed.
+
+    The provenance report's trace events are call/return observations, not line
+    events: each carries a ``callee`` and, for a nested call, the ``caller`` that
+    made it.  Re-derived here from those raw observations, never from the
+    producer's own coverage arithmetic.  Returns
+    ``(fail_edges, pass_edges, n_fail, n_pass)`` keyed on
+    ``(caller_path, caller_function, caller_line, callee_path, callee_function)``,
+    or ``None`` when a trace names a file that is not on disk.
+    """
+    fail: dict[tuple, int] = {}
+    passed: dict[tuple, int] = {}
+    n_fail = 0
+    n_pass = 0
+    for row in traces:
+        if not isinstance(row, Mapping):
+            return None
+        events = row.get("events")
+        if not isinstance(events, list):
+            return None
+        ok = bool(row.get("pass"))
+        n_pass += 1 if ok else 0
+        n_fail += 0 if ok else 1
+        sink = passed if ok else fail
+        for event in events:
+            if not isinstance(event, Mapping) or event.get("event") != "call":
+                continue
+            callee = event.get("callee")
+            if not isinstance(callee, Mapping):
+                return None
+            callee_on_disk = _inside(root, callee.get("path"))
+            if callee_on_disk is None or not callee_on_disk.is_file():
+                return None
+            caller = event.get("caller")
+            if isinstance(caller, Mapping):
+                caller_on_disk = _inside(root, caller.get("path"))
+                if caller_on_disk is None or not caller_on_disk.is_file():
+                    return None
+                key = (caller.get("path"), caller.get("function"), caller.get("line"),
+                       callee.get("path"), callee.get("function"))
+            else:
+                key = (None, None, None, callee.get("path"), callee.get("function"))
+            sink[key] = sink.get(key, 0) + 1
+    return fail, passed, n_fail, n_pass
+
+
+def _inspect_value_provenance(args, result, root):
+    """Re-derive every claimed call edge from the traces and the source.
+
+    A provenance report claims *this call site passed this value to that
+    function, and the failing tests crossed it*.  Two halves are checkable
+    without asking the producer anything.  The coverage is rebuilt from the raw
+    call observations the report itself carries, so an edge cannot claim the
+    failing tests crossed it when they did not.  And the callee must really be
+    defined in the file and at the line the report names -- an edge that points
+    at a function which is not there is a fabricated provenance, and that is the
+    failure this exists to catch.
+
+    What this deliberately does NOT re-derive is the call site in the caller's
+    source.  Measured on the report this capability actually ships, the edges
+    include a class body being created (``class T(unittest.TestCase)`` recorded
+    as a call to ``T`` from ``<module>``), which is a real edge with no
+    ``ast.Call`` node at that line.  Reconstructing call sites from the AST would
+    refuse a true report, and a false refusal is as much a defect as a false
+    pass.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.fault.provenance.interprocedural.value.v1),
+    so its artifact was rolled back on every run.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "PROVENANCE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "PROVENANCE_REPORT_NOT_A_JSON_OBJECT", {}
+    edges = data.get("ranked_call_edges")
+    traces = data.get("test_traces")
+    if not isinstance(edges, list) or not edges:
+        return False, "PROVENANCE_REPORT_NAMES_NO_CALL_EDGE", {}
+    if not isinstance(traces, list) or not traces:
+        return False, "PROVENANCE_REPORT_CARRIES_NO_TRACE", {}
+    coverage = _trace_call_coverage(traces, root)
+    if coverage is None:
+        return False, "PROVENANCE_TRACE_NAMES_A_FILE_NOT_ON_DISK", {}
+    fail_edges, pass_edges, n_fail, n_pass = coverage
+    if not n_fail:
+        return False, "PROVENANCE_NO_FAILING_TEST_TO_TRACE", {}
+    if data.get("failing_test_count") != n_fail:
+        return False, "PROVENANCE_FAILING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("failing_test_count"), "traced": n_fail}
+    if data.get("passing_test_count") != n_pass:
+        return False, "PROVENANCE_PASSING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("passing_test_count"), "traced": n_pass}
+    defined_cache: dict[str, Any] = {}
+
+    def _definitions(relative):
+        if relative not in defined_cache:
+            on_disk = _inside(root, relative)
+            if on_disk is None or not on_disk.is_file():
+                defined_cache[relative] = None
+            else:
+                try:
+                    tree = ast.parse(on_disk.read_bytes())
+                except (SyntaxError, ValueError, OSError):
+                    defined_cache[relative] = None
+                else:
+                    defined_cache[relative] = {
+                        node.name: node.lineno
+                        for node in ast.walk(tree)
+                        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef,
+                                             ast.ClassDef))
+                    }
+        return defined_cache[relative]
+
+    for row in edges:
+        if not isinstance(row, Mapping):
+            return False, "PROVENANCE_EDGE_ROW_INVALID", {}
+        caller, callee = row.get("caller"), row.get("callee")
+        if not isinstance(caller, Mapping) or not isinstance(callee, Mapping):
+            return False, "PROVENANCE_EDGE_HAS_NO_CALLER_AND_CALLEE", {}
+        definitions = _definitions(callee.get("path"))
+        if definitions is None:
+            return False, "PROVENANCE_CALLEE_FILE_ABSENT_OR_UNPARSEABLE", {
+                "path": callee.get("path")}
+        name = str(callee.get("function"))
+        if definitions.get(name) != callee.get("firstlineno"):
+            return False, "PROVENANCE_CALLEE_IS_NOT_DEFINED_WHERE_THE_REPORT_SAYS", {
+                "callee": name, "path": callee.get("path"),
+                "claimed": callee.get("firstlineno"),
+                "source": definitions.get(name)}
+        key = (caller.get("path"), caller.get("function"), caller.get("line"),
+               callee.get("path"), name)
+        f = fail_edges.get(key, 0)
+        q = pass_edges.get(key, 0)
+        if row.get("fail_coverage") != f:
+            return False, "PROVENANCE_FAIL_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "callee": name, "claimed": row.get("fail_coverage"), "traced": f}
+        if row.get("pass_coverage") != q:
+            return False, "PROVENANCE_PASS_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "callee": name, "claimed": row.get("pass_coverage"), "traced": q}
+        if not f:
+            return False, "PROVENANCE_EDGE_WAS_CROSSED_BY_NO_FAILING_TEST", {
+                "callee": name}
+        want = round(_ochiai(f, q, n_fail), 12)
+        if abs(float(row.get("ochiai") or 0.0) - want) > 1e-9:
+            return False, "PROVENANCE_OCHIAI_NOT_REPRODUCED", {
+                "callee": name, "claimed": row.get("ochiai"), "recomputed": want}
+    return True, "", {"edges_recomputed": len(edges), "traces_reparsed": len(traces),
+                      "failing_tests": n_fail}
+
+
+def _inspect_repair_loop(args, result, root):
+    """Re-check that the repair made strict progress and wrote nothing.
+
+    An iterative repair loop makes two claims that are checkable from the bytes
+    on disk.  The first is *strict progress*: every accepted edit lowered the
+    failure score, and the final replay of the suite really passes.  The second
+    is the promise the loop's own name makes -- it proposes a patch, it does not
+    silently rewrite the caller's source.  The report carries the digest of the
+    original file, so "the source was restored" is verified by hashing the file
+    as it stands and comparing, not by trusting the flag.
+
+    A loop that reports progress without it, or that leaves the tree edited while
+    claiming it restored it, is the failure this exists to catch.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "REPAIR_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "REPAIR_REPORT_NOT_A_JSON_OBJECT", {}
+    edits = data.get("accepted_edits")
+    if not isinstance(edits, list) or not edits:
+        return False, "REPAIR_REPORT_ACCEPTED_NO_EDIT", {}
+    if data.get("accepted_edit_count") != len(edits):
+        return False, "REPAIR_ACCEPTED_COUNT_DOES_NOT_MATCH_THE_LEDGER", {
+            "claimed": data.get("accepted_edit_count"), "ledger": len(edits)}
+    baseline = data.get("baseline_failure_score")
+    if not isinstance(baseline, int) or baseline <= 0:
+        return False, "REPAIR_BASELINE_SCORE_IS_NOT_A_FAILURE", {"claimed": baseline}
+    previous = baseline
+    for row in edits:
+        if not isinstance(row, Mapping):
+            return False, "REPAIR_EDIT_ROW_INVALID", {}
+        before, after = row.get("score_before"), row.get("score_after")
+        if not isinstance(before, int) or not isinstance(after, int):
+            return False, "REPAIR_EDIT_HAS_NO_SCORES", {}
+        if before != previous:
+            return False, "REPAIR_EDIT_DOES_NOT_CONTINUE_FROM_THE_LAST_SCORE", {
+                "before": before, "previous": previous}
+        if after >= before:
+            return False, "REPAIR_EDIT_MADE_NO_STRICT_PROGRESS", {
+                "before": before, "after": after}
+        on_disk = _inside(root, row.get("source_path"))
+        if on_disk is None or not on_disk.is_file():
+            return False, "REPAIR_EDITED_FILE_ABSENT_FROM_DISK", {
+                "path": row.get("source_path")}
+        previous = after
+    if previous != 0:
+        return False, "REPAIR_LOOP_DID_NOT_REACH_A_PASSING_SUITE", {"final": previous}
+    replays = data.get("final_verification_replays")
+    if not isinstance(replays, list) or not replays:
+        return False, "REPAIR_REPORT_REPLAYED_NOTHING", {}
+    for row in replays:
+        if not isinstance(row, Mapping):
+            return False, "REPAIR_REPLAY_ROW_INVALID", {}
+        if row.get("timed_out") or row.get("returncode") != 0 or row.get("failure_score") != 0:
+            return False, "REPAIR_FINAL_REPLAY_DOES_NOT_PASS", dict(row)
+    if data.get("source_restored") is not True:
+        return False, "REPAIR_SOURCE_NOT_RESTORED", {
+            "claimed": data.get("source_restored")}
+    patches = data.get("patches")
+    if not isinstance(patches, list) or not patches:
+        return False, "REPAIR_REPORT_CARRIES_NO_PATCH_DIGEST", {}
+    for row in patches:
+        if not isinstance(row, Mapping):
+            return False, "REPAIR_PATCH_ROW_INVALID", {}
+        on_disk = _inside(root, row.get("source_path"))
+        if on_disk is None or not on_disk.is_file():
+            return False, "REPAIR_PATCHED_FILE_ABSENT_FROM_DISK", {
+                "path": row.get("source_path")}
+        actual = _digest(on_disk.read_bytes())
+        if actual != row.get("original_sha256"):
+            return False, "REPAIR_LEFT_THE_SOURCE_MODIFIED_WHILE_CLAIMING_RESTORED", {
+                "path": row.get("source_path"), "claimed": row.get("original_sha256"),
+                "on_disk": actual}
+    return True, "", {"edits_rechecked": len(edits), "replays_rechecked": len(replays),
+                      "sources_hashed": len(patches)}
+
+
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
     "python.source.change_impact.testselect.v1": _inspect_change_impact_testselect,
+    "python.fault.localize.dynamic.dataflow.v1": _inspect_fault_localize,
+    "python.fault.provenance.interprocedural.value.v1": _inspect_value_provenance,
+    "python.software.repair.loop.strict_progress.ast.v1": _inspect_repair_loop,
     "archive.verify.tar_gz.gnu": _inspect_archive_verify,
     "archive.tar_gz.create_from_manifest": _inspect_tar_gz_create_from_manifest,
     "xlsx.table.create_from_json_records": _inspect_xlsx_create,

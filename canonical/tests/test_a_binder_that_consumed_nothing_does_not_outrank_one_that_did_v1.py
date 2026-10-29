@@ -253,37 +253,49 @@ class TheNearestWorldsInWhichItMustNotFireTests(_Tree):
 
 class TheNegativeControlTests(_Tree):
     def test_without_the_demotion_the_wrong_capability_returns(self):
-        """The demotion is load-bearing: remove it and kstar leads again.
+        """The demotion is load-bearing, proved without depending on any path.
 
-        Without this the tests above could pass for an unrelated reason -- the
-        registry changing, the sentence changing, or BM25 being disabled.
+        BM25's relevance for a real sentence is a function of the tokens in that
+        sentence, and the fixture's absolute path is among them -- measured on
+        e2d7981d, this control passed under one repository root and failed under
+        another, which is a test that measures the machine it runs on.  The
+        scorer's own behaviour is pinned by test_goal_compiler_world_binding_v1.
+        What this pins is the partition, by fixing the relevance BM25 reports so
+        the only thing left to vary is the demotion itself.
         """
-        goal = self.sentence("Localize the fault")
         reg = _registry()
-        ranked = compiler._rank_bindable_candidates(
-            goal, reg, _ROOT, allow_world_binding=False
+        self.assertTrue(_is_vacuous(reg[KSTAR]), "kstar is no longer a vacuous binder")
+        self.assertFalse(
+            _is_vacuous(reg[LOCALIZER]), "the owner must bind from the sentence"
         )
-        # Replay only the BM25 sort, without the vacuous demotion.
+        # A grounded owner the pinned scorer rated 28, and a vacuous binder it
+        # rated 15, with BM25 reporting the vacuous one as the more relevant.
+        pool = [
+            (15, 0, KSTAR, reg[KSTAR], {}, {}, None),
+            (28, 0, LOCALIZER, reg[LOCALIZER], {}, {}, None),
+        ]
         module = compiler._bm25_module()
         self.assertIsNotNone(module, "the BM25 scorer is unavailable")
-        docs = [compiler._capability_document(it[2], it[3]) for it in ranked]
-        scores = module._bm25_scores(compiler._bm25_terms(goal), docs)
-        out = []
-        for item, (relevance, _c) in zip(ranked, scores):
-            out.append((relevance, item[0], item[1], item[2], item))
-        out.sort(key=lambda x: (-x[0], -x[1], -x[2], x[3]))
-        bare = [x[4] for x in out]
+        original = module._bm25_scores
+        module._bm25_scores = lambda terms, docs, **kw: [
+            (9.0, {}) if KSTAR in str(docs[i]) or i == 0 else (1.0, {})
+            for i in range(len(docs))
+        ]
+        try:
+            ordered = compiler._bm25_rerank("Localize the fault in D", pool)
+        finally:
+            module._bm25_scores = original
         self.assertEqual(
-            bare[0][2], KSTAR,
-            "the negative control no longer reproduces the defect, so the "
-            "tests above are not measuring it",
+            [row[2] for row in ordered], [LOCALIZER, KSTAR],
+            "the demotion did not move the vacuous binder behind the grounded one",
         )
-        self.assertEqual(
-            compiler._rank_bindable_candidates(
-                goal, reg, _ROOT, allow_world_binding=False
-            )[0][2],
-            LOCALIZER,
+        # And without it, the inversion the defect was: relevance alone decides,
+        # and the 15-point binder that consumed nothing leads the 28-point owner.
+        bare = sorted(
+            pool, key=lambda it: (-{KSTAR: 9.0, LOCALIZER: 1.0}[it[2]], -it[0], -it[1], it[2])
         )
+        self.assertEqual(bare[0][2], KSTAR)
+        self.assertLess(bare[0][0], bare[1][0])
 
 
 class EndToEndTests(_Tree):
