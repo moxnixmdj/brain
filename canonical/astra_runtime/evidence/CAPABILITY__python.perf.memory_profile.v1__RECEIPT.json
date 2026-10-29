@@ -1,5 +1,5 @@
 {
- "artifact_sha256": "54ed1e5f0bf7a92abd5ea524adc971d7112f9a470f308fede44165ef37511762",
+ "artifact_sha256": "579e5dff19109188d4592be3ae17e4be1497fa1571abdf9c9571ebe51ca64682",
  "capability_id": "python.perf.memory_profile.v1",
  "elapsed_ms": null,
  "entrypoint": "run",
@@ -8,8 +8,8 @@
  "independent_verifier": null,
  "invoked_args": {
   "act_verb": "memory_profile",
-  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_o60itf1l/first/out/memory_profile.json",
-  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_o60itf1l/first/perf_fixture/cost_memory.py"
+  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/out/memory_profile.json",
+  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/perf_fixture/cost_memory.py"
  },
  "kind": "contract",
  "model_dependency_count": 0,

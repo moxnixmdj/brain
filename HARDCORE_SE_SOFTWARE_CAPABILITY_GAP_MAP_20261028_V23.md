@@ -448,11 +448,72 @@ while keeping the ranking in the comparison.
 |---|---|
 | `vcs.git.bisect.v1` exists and is verified, but the sentence cannot state the predicate: every bisect needs an `argv` that says "good here, bad there" | `FAIL_CLOSED__STATED_ACT_INPUTS_UNBOUND:argv:not_stated` |
 | the refactor family from a synthesised sentence | `inline_function` **NOT_REACHABLE**, `move_function` **NOT_REACHABLE**, `extract_function`/`change_signature` **ROUTED_ELSEWHERE** |
-| whole-surface reachability | 429 bound, **11 not reachable, 9 routed elsewhere, 3 reached only by explicit name** |
+| whole-surface reachability, re-measured at `5e0297d` | **436 bound, 11 not reachable, 9 routed elsewhere, 3 reached only by explicit name** (456 rows) |
 
 This is the same law three times: **a capability is reachable only through the words its registry
-entry happens to use.** Fixing it once — one row, one rule, derived from `provides` rather than
-hand-written keywords — moves 20 rows and two failing tests at once (P7).
+entry happens to use.**
+
+### 7.1 What was fixed here, and what is left
+
+Three declarations already existed in the tree and **no binder read any of them.** That is the whole
+defect class, and it is the owner's point exactly: the answer was in the brain before anybody wrote
+new code.
+
+1. **The prose vocabulary.** `input_role_lexicon_v1.ROLE_ALIASES` declares the words a sentence uses
+   for 38 roles — "timeout", "interpreter", "branch called", "kill ratio", "repeats". The front
+   compiler *imported* it (`_ROLE_LEXICON_ALIASES`) and never consulted it, so every key without an
+   entry in the compiler's own `_KEY_ALIASES` had no prose form at all.
+2. **The knobs.** `input_role_lexicon_v1.SLOT_KIND` declares `timeout_s`, `python_executable`,
+   `repeats`, `min_coverage_ratio`, `max_mutants`, `min_kill_ratio`, `tolerance`, `budget` and `ref`
+   as `KIND_TUNING`, with the reason written beside them: "every adapter writes
+   `args.get("<knob>") or <default>`, so these are the adapter's business, not the caller's". The
+   binder raised on them instead — `timeout_s` alone made 15 capabilities unaskable, and there was
+   no sentence a person could say that compiled.
+3. **The kinds.** `_parse_typed_value` keeps its own four-key numeric sets, so a value the lexicon
+   declares a number parsed to nothing: "with a timeout of 30 seconds" bound no timeout.
+
+The laws are now enforced in `goal_front_compiler_v1`:
+
+- a declared tuning knob the sentence never states is **defaulted and recorded**
+  (`defaulted_inputs` on the compile result), because the adapter already has that value;
+- a knob the sentence **does** state is bound by its declared kind — a number slot takes a number or
+  nothing ("with a timeout of soonish" is refused, not bound as a string), and an interpreter is a
+  path or a program name, never the word "python" that every Python sentence contains;
+- a stated value that no binder can produce is a **refusal**, never a silent drop — the same law the
+  lexicon already records for `ref`, where a stated commit was thrown away and HEAD reverted instead;
+- the anti-fabrication check (`_inputs_not_stated_by`) keeps its full force for every non-knob slot:
+  a defaulted knob is declared tuning, an invented path is not.
+
+**Measured, apples to apples.** The reachability instrument now asks the same declaration two ways —
+by vocabulary (`signature_goal`, 436 / 11 / 9 / 3 of 456) and by **naming the capability**
+(`named_signature_goal`, which is how a caller who knows the verb asks). Sentences are identical
+across the two trees; only the compiler differs:
+
+| | reached by name | not reachable | lost |
+|---|---|---|---|
+| `580fa4d` | 391 | 41 | — |
+| this unit | **396** | **39** | **0** |
+
+The five gained are `python.quality.flake_detect.v1`, `web.release.verify.independent_http` and the
+three performance acts this session added. No compiler test moved: the same 30 node ids fail across
+the six door/compiler files at `580fa4d` and here (142 passed both).
+
+**What is still unaskable** — 11 not reachable and 9 routed elsewhere, and every one now has a named
+cause rather than a shrug:
+
+- `vcs.git.bisect.v1`: the sentence must state a predicate command; nothing in the prose grammar
+  says how ("good here, bad there" is a *pair*, and the slot is one `argv`).
+- the refactor family (`inline_function`, `move_function`, `rename_symbol`) reaches
+  `python.software.repair.loop.test_guided.ast.v1` instead — six siblings compete on the same words
+  and the loser is a repair loop, which is the wrong act and correctly refuses to bind.
+- `chart.raster.*`: three chart capabilities differ only in which coordinate they ask for, and the
+  router returns the sibling that wants `y_value`.
+- `json.file.write` routes to a DOCX creator; `shell.command.run` cannot bind `argv` from "the shell
+  command cat <file>".
+
+Which is the next unit: **make the sibling choice structural** (the act word in the entry's own
+`provides` decides, not the bag of words), and give `argv`/`predicate` a stated form so `bisect` and
+`shell.command.run` become askable.
 
 ---
 
@@ -575,6 +636,13 @@ PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py \
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py \
     --only python.perf.memory_profile.v1,python.perf.cpu_profile.v1,python.perf.benchmark.v1 --remeasure
 PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_performance_measurement_v1.py -q
+PYTHONPATH=. .venv/bin/python -c "
+from execution_guard import live_solver_end_to_end_measurement_v1 as M
+from pathlib import Path
+w = Path('canonical/astra_runtime/tmp/reach_work'); w.mkdir(parents=True, exist_ok=True)
+print('by vocabulary', M.reachability(w)['counts'])
+print('by name      ', M.reachability(w, naming=True)['counts'])"
+PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_a_declared_knob_is_the_machines_business_v1.py -q
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_domain_coverage_v1.py
 PYTHONPATH=. .venv/bin/python execution_guard/capability_evidence_probe_v1.py --audit-pointers
 PYTHONPATH=. .venv/bin/python -m pytest canonical/tests/test_goal_front_compiler_v1.py \

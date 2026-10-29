@@ -1,5 +1,5 @@
 {
- "artifact_sha256": "85203076e86662b9f2a1f79cb9bb6681d9b0132b05f7548685efcdc3f337c155",
+ "artifact_sha256": "53cf13f28c248ec154e659a10ae70eda4e67f7bea72f5bed657cf864d238a4af",
  "capability_id": "python.perf.cpu_profile.v1",
  "elapsed_ms": null,
  "entrypoint": "run",
@@ -8,8 +8,8 @@
  "independent_verifier": null,
  "invoked_args": {
   "act_verb": "cpu_profile",
-  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_o60itf1l/first/out/cpu_profile.json",
-  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_o60itf1l/first/perf_fixture/cost_cpu.py"
+  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/out/cpu_profile.json",
+  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/perf_fixture/cost_cpu.py"
  },
  "kind": "contract",
  "model_dependency_count": 0,

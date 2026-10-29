@@ -1,5 +1,5 @@
 {
- "artifact_sha256": "cf27fbfe5a41e6cc1d4ca6bebfb152f7f96e4413fe89f847e558139d97cb188a",
+ "artifact_sha256": "de446706348749b4e9ebe3d6144d484fbcf1e5aafaf6a298a77f398aefa7717d",
  "capability_id": "python.perf.benchmark.v1",
  "elapsed_ms": null,
  "entrypoint": "run",
@@ -8,8 +8,8 @@
  "independent_verifier": null,
  "invoked_args": {
   "act_verb": "benchmark",
-  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_o60itf1l/first/out/benchmark.json",
-  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_o60itf1l/first/perf_fixture/cost_growth.py"
+  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/out/benchmark.json",
+  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/perf_fixture/cost_growth.py"
  },
  "kind": "contract",
  "model_dependency_count": 0,

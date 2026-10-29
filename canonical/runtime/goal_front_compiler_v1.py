@@ -864,7 +864,45 @@ def _textual_tuning(key: str) -> bool:
     return _lex.is_textual_tuning(key)
 
 
+def _program_or_path(tail: str) -> bool:
+    """Is this stated value a program or a path rather than a word?"""
+    text = str(tail).strip().strip('"\'')
+    if not text:
+        return False
+    token = text.split()[0]
+    return ("/" in token or "\\" in token or token.endswith(".exe")
+            or re.fullmatch(r"(?:python|pypy|node|ruby|perl|java|go|rustc|php)[0-9.]*", token) is not None)
+
+
+def _declared_kind(key: str) -> str | None:
+    """The kind the lexicon declares for this slot, or None when it declares none."""
+    try:
+        return input_role_lexicon.kind_of(key)
+    except Exception:  # noqa: BLE001 - no lexicon, historical behaviour
+        return None
+
+
 def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
+    # THE DECLARED KIND PARSES THE VALUE.  `input_role_lexicon_v1.SLOT_KIND` says which shape each
+    # declared slot takes, and this parser kept its own four-key sets instead: `timeout_s`,
+    # `repeats`, `max_mutants`, `min_coverage_ratio`, `tolerance` and `budget` are declared there
+    # (KIND_TUNING) and were unknown here, so "timeout 30" parsed to nothing and the capability was
+    # refused as though the caller had said nothing.  Only the numeric kinds are added here; every
+    # identifier, path and text slot keeps the pinned rules below, because a number is the one shape
+    # the generic branch could never recover.
+    if (_declared_kind(key) in (input_role_lexicon.KIND_NUMBER, input_role_lexicon.KIND_TUNING)
+            and not _textual_tuning(key)):
+        number = _number(tail)
+        if number is not None:
+            return number
+        # A NUMBER SLOT DOES NOT TAKE TEXT.  Measured: "with a timeout of soonish" bound the string
+        # "soonish" to an integer slot and the adapter would have received it.  A declared number is
+        # parsed as a number or not at all; a tuning knob may also be a program (an interpreter is a
+        # path or a program name), and nothing else.
+        if _declared_kind(key) == input_role_lexicon.KIND_NUMBER:
+            return None
+        if not _program_or_path(tail):
+            return None
     if key in _LINE_RANGE_KEYS:
         # "lines 5 to 9" is ONE statement of TWO bounds. Read as two numbers the
         # first key would take 5 and the second would find nothing, so the pair is
@@ -1292,6 +1330,19 @@ def _role_phrases(key: str) -> list[str]:
         alias = str(alias).lower().strip()
         if alias and alias not in phrases:
             phrases.append(alias)
+    # THE VOCABULARY WAS ALREADY DECLARED AND NOBODY READ IT.  `input_role_lexicon_v1.ROLE_ALIASES`
+    # carries the words a sentence uses for 38 declared roles -- "timeout", "interpreter",
+    # "branch called", "kill ratio", "repeats" -- and this module imported it (`_ROLE_LEXICON_ALIASES`)
+    # without ever consulting it.  Measured consequence: 33 declared inputs had no prose form at
+    # all in this table, so `timeout_s` (15 entries), `python_executable` (14) and `run_tests` (6)
+    # could not be stated by ANY sentence, and every one of those capabilities was refused as
+    # `named_but_inputs_not_stated` -- the machine could not be asked to run its own tests, on its
+    # own interpreter, inside its own time limit.  The lexicon's forms are appended, not substituted:
+    # the explicit aliases in this module keep their precedence.
+    for alias in _ROLE_LEXICON_ALIASES.get(key, ()):
+        alias = str(alias).lower().strip()
+        if alias and alias not in phrases:
+            phrases.append(alias)
     return phrases
 
 
@@ -1433,6 +1484,39 @@ def _joint_role_binding(goal: str, pending: list[str], root: pathlib.Path, taken
     return assignment
 
 
+# WHICH SLOTS WERE LEFT TO THE ADAPTER, so the answer can say so.  A compiler that silently chose
+# a timeout would be guessing; one that records "these knobs were not stated, the adapter's own
+# default applies" has decided nothing the caller asked about.
+_DEFAULTED_INPUTS: contextvars.ContextVar[tuple[str, ...]] = contextvars.ContextVar(
+    "defaulted_inputs", default=())
+
+
+def _record_defaulted(key: str) -> None:
+    _DEFAULTED_INPUTS.set(tuple(sorted(set(_DEFAULTED_INPUTS.get()) | {str(key)})))
+
+
+def _tuning_the_sentence_did_not_state(goal: str, key: str) -> bool:
+    """Is this slot a declared tuning knob, absent from the sentence?
+
+    Both halves are measured: the slot must be declared KIND_TUNING by the lexicon (so this never
+    widens to a slot whose unstated value means something), and the sentence must not state it by
+    any of its own phrases (so a stated knob is never overridden by a default).
+    """
+    if input_role_lexicon.kind_of(key) != input_role_lexicon.KIND_TUNING:
+        return False
+    tails = _after_key(goal, key)
+    if not tails:
+        return True
+    if key == "python_executable":
+        # THE WORD "python" IS NOT AN INTERPRETER.  Every Python sentence contains it, so the
+        # presence test alone made this slot look stated and the capability was refused for not
+        # stating a path nobody says out loud.  A stated interpreter is a PATH (an absolute one, or
+        # a program name with a version), and anything else leaves the choice to the machine.
+        return not any(re.match(r"\s*(?:[\"']?(?:/[^\s\"']+|[A-Za-z]:[\\/][^\s\"']+)|python[0-9.]*\b)",
+                                str(tail)) for tail in tails)
+    return False
+
+
 def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None,
                     produced_paths=None, cycle=None, spool=None) -> dict[str, Any]:
     """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses.
@@ -1508,6 +1592,16 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                 # because the roles the sentence gives the files are only meaningful together.
                 pending_input_paths.append(key)
                 continue
+            # THE ADAPTER'S OWN KNOB  `input_role_lexicon_v1.SLOT_KIND` declares these slots
+                # KIND_TUNING with the reason written beside them: every adapter writes
+                # `args.get("<knob>") or <default>`, so the value is the machine's business, not the
+                # caller's.  The declaration existed and no binder read it, so `timeout_s` (15
+                # entries), `python_executable` (14), `run_tests` (6) and `repeats` each made their
+                # capability unaskable: the sentence could not state them, the compiler refused as
+                # `named_but_inputs_not_stated`, and no adapter ever ran.  A knob the sentence DOES
+                # state is still bound, and a knob it states unparseably still fails closed.
+                _record_defaulted(key)
+                continue
             if key.endswith("_path"):
                 # F26: an OUTPUT is a new artifact.  It never claims an artifact an earlier
                 # step already writes (that would overwrite the producer's output), so the
@@ -1576,7 +1670,31 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         if isinstance(inputs.get(key), str) and inputs[key]:
             taken.add(inputs[key])
     for key in typed_keys:
-        inputs[key] = bind_typed_key(goal, key, root, entry)
+        try:
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+        except GoalCompilationFailure:
+            if _tuning_the_sentence_did_not_state(goal, key):
+                _record_defaulted(key)
+                continue
+            raise
+    # NOTHING STATED MAY VANISH, AND NOTHING DEFAULTED MAY BE SILENT.  A pinned knob can drop out
+    # without raising (`_bind_inputs` simply omits a key it cannot decide), so the budget is settled
+    # here, once: a declared tuning slot the sentence never states is DEFAULTED and recorded, and a
+    # slot the sentence DOES state but that no binder produced is refused -- a stated value that
+    # disappears is the same defect as a stated revision silently replaced by HEAD.
+    for key in keys:
+        if key in inputs or input_role_lexicon.kind_of(key) != input_role_lexicon.KIND_TUNING:
+            continue
+        if _tuning_the_sentence_did_not_state(goal, key):
+            _record_defaulted(key)
+            continue
+        # A STATED KNOB IS BOUND, NOT DISCARDED.  The pinned binder omits a knob it cannot decide
+        # without raising, so "with a timeout of 30 seconds" used to vanish; the declared kind is
+        # what parses it.
+        try:
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+        except GoalCompilationFailure:
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":stated_but_unbound")
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
                              cycle=cycle, spool=spool)
     return inputs
@@ -1954,7 +2072,9 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
             continue
         if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k, entry) for j in inputs if j != k and j.endswith("_path")):
             continue
-        return {"capability_id": cid, "inputs": inputs, "score": score, "specificity": specificity, "match_evidence": dict(evidence)}
+        return {"capability_id": cid, "inputs": inputs, "score": score, "specificity": specificity,
+                "defaulted_inputs": list(_DEFAULTED_INPUTS.get()),
+                "match_evidence": dict(evidence)}
     return None
 
 
@@ -2649,8 +2769,17 @@ def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
     request itself.
     """
     unstated = []
+    # A DECLARED DEFAULT IS NOT AN INVENTED VALUE.  This check exists to catch the binder handing a
+    # capability a plausible path nobody asked for; a slot the lexicon declares KIND_TUNING and that
+    # was filled by the adapter's own default is the opposite of that -- the caller asked about a
+    # timeout no more than the machine needed them to.  Only declared tuning slots can be exempt,
+    # so the anti-fabrication rule keeps all of its force where it matters.
+    defaulted = {k for k in _DEFAULTED_INPUTS.get()
+                 if input_role_lexicon.kind_of(k) == input_role_lexicon.KIND_TUNING}
     for key, value in dict(inputs or {}).items():
         role = str(key)
+        if role in defaulted:
+            continue
         if (role in _OWNED_OUTPUT_ROLES
                 or role.endswith("_output_path")
                 or role.endswith("_result_path")):
@@ -2771,8 +2900,14 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
             still = []
             for role in sorted(unstated):
                 value = named_bound.get(role)
-                if isinstance(value, str) and value.strip() and (
-                        value.strip() in goal or goal.strip().startswith(value.strip())):
+                # A STATED NUMBER IS STATED.  This repair used to accept only strings, so every
+                # numeric or boolean slot -- `x_value`, `x_ticks`, `authoritative`, `max_age_s` --
+                # was reported as "not stated" no matter what the caller said, and the capability
+                # that needed a coordinate could not be asked for one.  The value is now rendered
+                # and looked for in the request, which is exactly the test a string gets.
+                rendered = value.strip() if isinstance(value, str) else str(value).strip()
+                if rendered and (rendered in goal or goal.strip().startswith(rendered)
+                                 or rendered.rstrip("0").rstrip(".") in goal):
                     repaired[role] = value
                 else:
                     still.append(role)

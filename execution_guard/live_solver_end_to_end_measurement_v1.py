@@ -396,6 +396,108 @@ def _output_suffix(entry: Mapping[str, Any], key: str) -> str:
     return ".json"
 
 
+# A STATED VALUE, NOT THE WORD "value".  Measured: the sentence builder emitted `branch_name
+# "value"` for every non-path input, which states nothing -- the binder read it as a placeholder and
+# refused with `branch_name:not_stated`, and the reachability metric then reported eleven of the
+# machine's own capabilities as unreachable when the defect was in the question being asked.  Every
+# entry here is a value a caller could plausibly state; the fallback is a value shaped like the key.
+_KEY_ALIAS_FIRST = {"timeout_s": "timeout", "python_executable": "interpreter"}
+_TYPED_VALUE = {
+    "branch_name": '"feature-x"', "new_name": '"plus"', "old_name": '"add"', "name": '"sample"',
+    "symbol": '"add"', "symbol_name": '"add"', "function": '"add"', "function_name": '"add"',
+    "qualname": '"add"', "callable": '"add"', "module": '"pkg/calc.py"', "module_path": "pkg/calc.py",
+    "message": '"add the parser"', "commit_message": '"add the parser"', "summary": '"a summary"',
+    "title": '"A title"', "description": '"a description"', "reason": '"because it is faster"',
+    "content": '"hello world"', "body": '"hello world"', "payload": '"{\\"n\\": 1}"',
+    "query": '"select 1"', "sql": '"select 1"', "statement": '"select 1"',
+    "argv": '"git status"', "command": '"git status"', "args": '"git status"', "cmd": '"git status"',
+    "predicate": '"python3 -m pytest -x"', "test_command": '"python3 -m pytest -x"',
+    "ref": '"main"', "revision": '"HEAD"', "commit": '"HEAD"', "sha": '"HEAD"', "onto": '"main"',
+    "branch": '"main"', "remote": '"origin"', "url": '"https://example.org/x.json"',
+    "n": "8", "size": "8", "count": "3", "limit": "3", "max_cases": "8", "timeout_s": "30",
+    "timeout": "30", "repeat": "3", "index": "0", "position": "0", "arity": "2",
+    "value": '"sample"', "key": '"sample"', "field": '"status"', "column": '"status"',
+    "old": '"a"', "new": '"b"', "source": '"a"', "target": '"b"', "from": '"a"', "to": '"b"',
+    "exception": '"ValueError"', "error_type": '"ValueError"', "code": '"E501"',
+    "patterns": '"*.py"', "pattern": '"*.py"', "glob": '"*.py"', "languages": '"python"',
+    "format": '"json"', "encoding": '"utf-8"', "kind": '"json"', "mode": '"check"',
+}
+
+
+# How a caller states a value of each kind.  The PHRASE comes from the binder's own vocabulary
+# (`_KEY_ALIASES`) and, where that table has no entry, from the declaration the lexicon already
+# carries (`ROLE_ALIASES`) -- never from the machine name of the slot, because "timeout s 30" is
+# not a sentence anybody says and the binder is right to refuse it.
+_NUMERIC_INPUTS = {"timeout_s", "repeats", "repeat", "max_mutants", "min_coverage_ratio",
+                   "min_kill_ratio", "tolerance", "x_value", "y_value", "max_age_s",
+                   "start_line", "end_line", "n", "size", "count", "limit", "index",
+                   "position", "arity", "max_cases"}
+_BOOLEAN_INPUTS = {"authoritative", "run_tests", "check_only", "strict"}
+_LIST_NUMERIC_INPUTS = {"x_ticks", "y_ticks"}
+
+
+def _stated(key: str) -> str:
+    """One declared input, in the words a caller uses for it, carrying a REAL value."""
+    from canonical.runtime import goal_front_compiler_v1 as front
+    from canonical.runtime.input_role_lexicon_v1 import ROLE_ALIASES
+    if key in _TYPED_EXAMPLE:
+        return _TYPED_EXAMPLE[key]
+    alias = (_KEY_ALIAS_FIRST.get(key)
+             or (front._KEY_ALIASES.get(key) or (None,))[0]
+             or (ROLE_ALIASES.get(key) or (None,))[0])
+    phrase = str(alias or key.replace("_", " "))
+    if key in _NUMERIC_INPUTS:
+        return phrase + " " + _TYPED_VALUE.get(key, "30").strip('"')
+    if key in _BOOLEAN_INPUTS:
+        return phrase + " true"
+    if key in _LIST_NUMERIC_INPUTS:
+        return phrase + " [0, 1, 2]"
+    return phrase + " " + _TYPED_VALUE.get(key, '"sample"')
+
+
+def named_signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tuple[str, list[Path]]:
+    """The same declaration asked the OTHER way: by NAMING the capability, then stating its inputs.
+
+    Two ways of asking are both ordinary, and they test different things.  `signature_goal` asks
+    with the capability's vocabulary and no name, which measures whether the catalogue can be
+    searched.  This one asks the way a caller who knows the verb asks -- "run the python review diff
+    static triage capability on the diff <F> ..." -- which measures whether the typed binder can
+    satisfy a contract once the entry is identified.  Measured on 580fa4d against this tree with
+    identical sentences: 73 -> 78 of the 125 input-taking capabilities reached, 0 lost.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as front
+    stem = str(cid or "").rsplit("/", 1)[-1].replace(".v1", "").replace(".v2", "")
+    words = [w for w in stem.replace(".", " ").replace("_", " ").split() if len(w) > 1]
+    parts, fixtures, destination = [], [], None
+    for key in front.input_keys(entry):
+        if key == "goal":
+            continue
+        if key.endswith("_path") and front._is_output_key(key, entry):
+            destination = _rel(work / ("out_" + key + _output_suffix(entry, key)))
+            continue
+        if key.endswith("_path") or key in ("path", "source_root") or key.endswith("_paths"):
+            stem_key = key[:-5].lower() if key.endswith("_path") else key
+            if key == "source_root":
+                d = work / "src"
+                d.mkdir(exist_ok=True)
+                fixtures.append(d)
+                parts.append(_rel(d))
+                continue
+            name = {"path": "chart.png", "test_paths": "test_mod.py", "source_paths": "mod.py",
+                    "evidence_paths": "evidence.json"}.get(
+                        key, stem_key + _FIXTURE_SUFFIX.get(stem_key, ".json"))
+            f = work / name
+            f.write_bytes(b"fixture")
+            fixtures.append(f)
+            parts.append(_rel(f))
+        else:
+            parts.append(_stated(key))
+    if destination is None:
+        return None, fixtures
+    return ("Run the " + " ".join(words) + ". " + " ".join(parts) + " and save it to "
+            + destination), fixtures
+
+
 def signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tuple[str, list[Path]]:
     """One sentence built ONLY from the capability's own registry declaration: its distinctive
     words plus one explicitly stated value per declared input (fixture files for input paths)."""
@@ -445,7 +547,7 @@ def prose_name_goal(cid: str, entry: Mapping[str, Any]) -> str:
     return "Run the " + " ".join(words) + "."
 
 
-def reachability(work: Path) -> dict[str, Any]:
+def reachability(work: Path, naming: bool = False) -> dict[str, Any]:
     """Can the one entry reach every bound capability from a sentence? (compile + bind only, no execution)
 
     THE PROSE QUESTION IS ASKED FIRST, for every capability, and the internal id is only the
@@ -500,7 +602,11 @@ def reachability(work: Path) -> dict[str, Any]:
                 rows.append({"capability_id": cid, "state": "ROUTED_ELSEWHERE", "goal": goal,
                              "detail": "prose:" + prose_detail + " | by_id:" + str(selected or compiled.get("compiler_mode"))})
             continue
-        goal, _fixtures = signature_goal(cid, entry, work)
+        builder = named_signature_goal if naming else signature_goal
+        goal, _fixtures = builder(cid, entry, work)
+        if goal is None:
+            rows.append({"capability_id": cid, "state": "NO_SENTENCE", "goal": "", "detail": []})
+            continue
         try:
             compiled = front.compile_goal(goal, reg, ROOT)
             selected = compiled.get("selected_capability")
