@@ -1717,6 +1717,30 @@ _LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
 _BARE_NOUN_PHRASE = re.compile(r"^\s*(?:the|a|an)\b")
 
 
+# A QUESTION ABOUT WHO CHANGED A LINE IS NOT A REQUEST FOR ITS TEXT.
+#
+# Measured 2026-10-29 on this repository, real tree: "Who last changed line 2 of
+# canonical/runtime/declared_input_derivation_v1.py?" bound the `tail` row below
+# ("last ... line"), which the table read as "the last line", and the door returned
+# PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED with
+# semantic_acceptance_complete: true for `tail -n 1 <the file>` -- a one-line answer,
+# no commit, no author, and the file itself declared as the output.  The sentence asks
+# a question about HISTORY; no program in the read-only table answers it.  Worse, the
+# next thing the table could reach was the file's own digest as "verification".
+#
+# The refusal is the honest end state, and it is the same one the answer gate already
+# takes: nothing bound declares provenance, so the sentence cannot be answered here.
+# A sentence that quotes a command line still wins -- that path is checked before this
+# one, and quoting `git blame -L2,2 -- f` is the sentence stating the command.
+_PROVENANCE_RE = re.compile(
+    r"\b(?:who|whom|which|what)\b[^.\n]{0,40}?\b(?:changed|wrote|authored|committed|"
+    r"introduced|added|removed|deleted|touched|blame[ds]?)\b"
+    r"|\bwhen\s+(?:was|did)\b[^.\n]{0,40}?\b(?:change|changed|written|added)\b"
+    r"|\b(?:last|most\s+recently)\s+changed\b|\bchanged\s+line\b"
+    r"|\bgit\s+(?:blame|log|show|diff|rev-parse|shortlog)\b"
+    r"|\bcommit\s+(?:that|which)\b|\bhistory\s+of\b", re.IGNORECASE)
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -1725,6 +1749,12 @@ def _prose_argv(sentence: str) -> list[str] | None:
     would be an invented destination, and an invented operand is executed.
     """
     from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+
+    if _PROVENANCE_RE.search(str(sentence or "")):
+        # No program in the read-only table answers "who changed this line", and the
+        # rows below would answer a different question with the same words.  Refuse to
+        # translate rather than translate wrongly.
+        return None
 
     known = set(_accept._READ_ONLY_COMMANDS) | set(_accept._MUTATING_POSTCONDITIONS)
     mutating = set(_accept._MUTATING_POSTCONDITIONS)

@@ -1279,6 +1279,18 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
                 re.IGNORECASE),
      re.compile(r"\bdead\b|\bunused\b|\bunreferenced\b", re.IGNORECASE),
      "STATED_DEAD_CODE_NOT_IDENTIFIED_BY_CAPABILITY"),
+    # WHO CHANGED THIS LINE IS NOT WHAT THIS FILE CONTAINS.  Measured 2026-10-29 on this
+    # repository: "Who last changed line 2 of <file>?" was answered by `tail -n 1 <file>` and
+    # certified PASS__...EXACT_SEMANTIC_ACCEPTANCE, and once the prose table stopped reading
+    # "last ... line" (composer_route_v1._PROVENANCE_RE) the SAME sentence passed on
+    # python.source.symbols.index.ast -- a definition list -- because a file's contents were
+    # still being accepted as its history.  The request is read with the one regex the
+    # command reader already uses, and nothing in the registry declares provenance, so the
+    # honest outcome is a refusal until something does.
+    (composer_route._PROVENANCE_RE,
+     re.compile(r"\bblame\b|\bauthor(?:ed|ship)?\b|\bprovenance\b|\bcommitter\b|\bshortlog\b",
+                re.IGNORECASE),
+     "STATED_PROVENANCE_NOT_ANSWERED_BY_CAPABILITY"),
 )
 
 

@@ -286,6 +286,37 @@ def _with_declared_contract(entry: Mapping[str, Any], declared: Any) -> dict[str
                 json.dumps(template, sort_keys=True, default=str).encode("utf-8")).hexdigest()}
 
 
+_PENDING_PROMOTION_STATUSES = frozenset({"RECEIPT_BACKED_PENDING_PROMOTION"})
+
+
+def is_verified_entry(entry: Mapping[str, Any] | None) -> bool:
+    """May this registry row be ROUTED and EXECUTED, or is it only an inventory record?
+
+    The loader returns two populations, and until now the door could not tell them apart.
+    Measured 2026-10-29 on this repository: 293 of the 419 rows this view carries are
+    ``*.py.auto.v1`` inventory records with ``status: RECEIPT_BACKED_PENDING_PROMOTION`` and
+    **0** of them declare ``verification.verified: true`` -- and the door executed one anyway.
+    "Show the last 3 lines of the file <X>" bound
+    ``canonical/runtime/professional_quality_declared_system_subject_verify_v1.py.auto.v1``
+    -- a repository verification script that merely shares the word "declared" with the path
+    in the sentence -- ran it, and certified
+    ``PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`` with
+    ``semantic_acceptance_complete: true`` because that row's whole expectation is
+    ``returncode == 0``.  The answer was a script's exit status.
+
+    The rule is the registry's own declaration, not a list of ids: a row may be routed when
+    it is a VERIFIED_BOUND_CAPABILITY or when it carries ``verified: true``.  Everything else
+    is discoverable, which is what "pending promotion" means, and discovery is not an answer.
+    """
+    if not isinstance(entry, Mapping):
+        return False
+    verification = entry.get("verification")
+    if isinstance(verification, Mapping) and verification.get("verified") is True:
+        return True
+    status = str(entry.get("status") or "")
+    return status == "VERIFIED_BOUND_CAPABILITY" and status not in _PENDING_PROMOTION_STATUSES
+
+
 def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
         dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]], dict[str, Any]]:
     """The front-door policy in ONE place: THE verified registry, its platform-admissible
@@ -302,7 +333,22 @@ def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
     """
     base = Path(root) if root is not None else ROOT
     registry = load_verified_registry(include_extended=True)
-    admissible = goal_compiler._platform_admissible_registry(dict(registry))
+    rows = dict(registry)
+    routable = {cid: entry for cid, entry in rows.items() if is_verified_entry(entry)}
+    # A PENDING-PROMOTION ROW IS ADDRESSABLE BY ITS NAME AND NOT BY ITS WORDS.
+    #
+    # Filtering every unverified row out would break a contract this repository states in
+    # canonical/tests/test_live_brain_route_admission_v1.py:587 -- "run <receipt-backed id>"
+    # must be admitted and executed, because a sentence that NAMES a capability is stating
+    # its identity, not asking the ranker to guess.  What must not happen is the guess: the
+    # same population ranked a verification script for "Show the last 3 lines of <file>"
+    # because the script's id shares the word "declared" with the path.
+    #
+    # So the sentence decides: a row whose id the sentence contains verbatim is routable;
+    # every other pending row is an inventory record.  One substring test, no id list.
+    named_here = {cid: entry for cid, entry in rows.items()
+                  if not is_verified_entry(entry) and cid and cid in str(goal or "")}
+    admissible = goal_compiler._platform_admissible_registry({**routable, **named_here})
     return registry, admissible, goal_front_compiler_v1.compile_goal(goal, admissible, base)
 
 
