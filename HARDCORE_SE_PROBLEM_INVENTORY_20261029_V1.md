@@ -75,10 +75,28 @@ Three independent measurements agree on the same hole:
 delivered) is a verification claim. A system that cannot re-inspect its own output has to be trusted,
 and trust is the one thing the owner's laws forbid.
 
-**Where the fix lives:** the artifact a capability already writes carries the measurement program's
-digest (`measurement_program_sha256`) and a schema. Re-inspection is a second, independent read of that
-artifact against its schema — no new engine, no model. The lane exists for few capabilities; it must
-exist for every capability that claims `output_verified`.
+**The lane already exists. The problem is COVERAGE, and it is measured here for the first time.**
+`raw_goal_trace_acceptance_v1` already performs independent re-inspection and already refuses when it
+cannot: it looks a step up in `INSPECTORS` by capability id, then in `_ADAPTER_INSPECTORS` by the
+adapter the result reports, and otherwise returns `NO_INDEPENDENT_REINSPECTION_FOR:<capability>`. The
+counts, read off that module against the live registry:
+
+| what | count |
+|---|---|
+| capability-specific inspectors (`INSPECTORS`) | **13** |
+| adapter-level inspectors (`_ADAPTER_INSPECTORS`) | **1** — `bound_capability_cli`, which is what the **179** `cli_command` rows report at runtime |
+| distinct adapters the 459 registry entries route through | **248** |
+| distinct `"adapter"` strings the adapters themselves report | ~200 |
+| **capabilities that can be independently re-inspected today** | **at most 192 of 459** |
+| **capabilities that can never be accepted, whatever they produce** | **at least 267** |
+
+So the fix is not a new engine — it is the same lane, keyed where it is not yet keyed: the artifact a
+capability writes already carries its digest and schema, and a second independent read of it against
+that schema is `_inspect_shell_command_run`'s existing job, generalized from one adapter to the result
+contract every adapter already reports. The comment that introduced the adapter key measured the
+premise: 221 of the 223 passing goals on the 367-prose corpus were stopped by
+`NO_INDEPENDENT_REINSPECTION_FOR`, and 14 of 14 sampled scripts returned a byte-identical returncode and
+stdout on a second run with no change to the working tree.
 
 **TWO OF THE THREE P0 MEASUREMENTS HAVE SINCE BEEN FIXED, both by reusing what was already there:**
 
@@ -337,7 +355,22 @@ the one that is not.
 
 ---
 
-## 3. What is NOT a problem (measured — stop spending time here)
+## 3. Where the answer already exists in the tree (reuse before synthesis)
+
+The owner's standing instruction is that these problems are already solved somewhere in the brain, in a
+tool, or in a paper. Checked against the tree, that holds for the expensive rows, and it turns them
+from "build" into "wire":
+
+| problem | the mechanism that already exists | what is actually missing |
+|---|---|---|
+| P0 re-inspection | `raw_goal_trace_acceptance_v1`: `INSPECTORS`, `_ADAPTER_INSPECTORS`, `_inspect_shell_command_run`, and the refusal `NO_INDEPENDENT_REINSPECTION_FOR` | coverage: 14 keys against 248 adapters (see P0's table) |
+| P2 near-duplicate stealing | `goal_compiler._bm25_rerank` + `_order_with_act_flag` (pinned this session) | object-noun classes for the remaining homonyms |
+| P3 refusal fall-through | F24 already refuses `GOAL_STATED_ACT_INPUTS_UNBOUND`; the acceptance verifier already refuses on `STEP_*_NOT_VERIFIED_BY_ITS_PRODUCER` | one branch where the door admits after a refusal |
+| P5 named-but-unbound acts | the engines are in-tree (`vcs_git_v1`, `toolchain_v1`, `quality_v1`, `dynamic_probe_v1`, `perf_probe_v1`, `packaging_v1`) | registry entries and adapters for 28 acts, not new engines |
+| P6 multi-language depth | `code.ast.tree_sitter.*` and `.patch.tree_sitter.verified` already parse and patch | only the *edit* verbs; `go`/`rustc`/`gcc` are absent from this box |
+| P12 speed | the compiler is 87–440 ms per goal on code families | the knowledge family's unbounded loop |
+
+## 4. What is NOT a problem (measured — stop spending time here)
 
 - **Document / image / chart families.** 22 of 459 entries; env-blocked on this box; out of owner scope.
 - **`R1`/`R3` test rows.** The guard is *more* correct than the pin (`R12`, `R14`). The pins are stale,
@@ -349,7 +382,7 @@ the one that is not.
 
 ---
 
-## 4. The work queue, ranked by capability per hour
+## 5. The work queue, ranked by capability per hour
 
 | # | work | closes | why it is cheap | cost |
 |---|---|---|---|---|
@@ -375,7 +408,7 @@ engineering capability the owner is asking for.
 
 ---
 
-## 5. Reproduce
+## 6. Reproduce
 
 ```bash
 PYTHONPATH=. .venv/bin/python execution_guard/hardcore_se_domain_coverage_v1.py
