@@ -203,6 +203,48 @@ def run(args, root):
     python_exe = str(args.get("python_executable") or sys.executable)
     timeout_s = int(args.get("timeout_s") or 300)
     run_tests = list(args.get("run_tests") or [])
+    # A caller that names pytest args gets pytest; a corpus this module
+    # derived itself is run through the loader instead.
+    verify_argv = [python_exe, "-m", "pytest", "-q",
+                   "-p", "no:cacheprovider"] + run_tests
+    if not run_tests:
+        # The verification law below is the adapter's own: "the named suite runs
+        # after the bytes are rewritten; red => every byte restored and
+        # TESTS_RED_AFTER_EDIT; no tests => verified stays false loudly."  That
+        # honesty is right, but the registry template hardcodes run_tests to [],
+        # so the capability could NEVER vouch for its own edit -- it rewrote the
+        # caller's source, reported verified False, and the acceptance layer
+        # refused it with STEP_NOT_VERIFIED_BY_ITS_PRODUCER.  Measured on
+        # dac97dc, a correct extract-function refactoring was performed and then
+        # rejected for want of a suite nobody had named.
+        #
+        # The corpus is a fact about the tree, not a guess, and the module that
+        # states it is already shared with the eleven capabilities that refuse
+        # TEST_PATHS_REQUIRED.  A tree with no tests still yields nothing here,
+        # and verified still stays false loudly -- exactly as the law requires.
+        try:
+            # discover_test_files, not discover_test_paths: the suite runs with
+            # cwd=src_abs, so a repository-relative path would not resolve from
+            # there and the runner would fail on a corpus that exists.
+            from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
+                discover_test_files as _discover_test_files,
+            )
+            from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
+                suite_argv as _suite_argv,
+            )
+            discovered = [str(x) for x in _discover_test_files(src_abs)]
+            if discovered:
+                run_tests = discovered
+                # Not pytest.  suite_argv collects through unittest's loader and
+                # falls back to runpy, so the verification does not depend on a
+                # third-party package being installed -- measured on dac97dc, the
+                # hardcoded `python -m pytest` answered "No module named pytest"
+                # and the capability rolled back a correct refactoring because
+                # its verifier could not start.  A capability that names pytest
+                # in its own args still gets pytest below.
+                verify_argv = _suite_argv(python_exe, *discovered)
+        except Exception:
+            run_tests = []
 
     original_bytes = module_abs.read_bytes()
     text = original_bytes.decode("utf-8")
@@ -395,8 +437,7 @@ def run(args, root):
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         try:
-            proc = subprocess.run([python_exe, "-m", "pytest", "-q",
-                                   "-p", "no:cacheprovider"] + run_tests,
+            proc = subprocess.run(verify_argv,
                                   cwd=src_abs, capture_output=True, text=True,
                                   timeout=timeout_s, env=env)
         except subprocess.TimeoutExpired:

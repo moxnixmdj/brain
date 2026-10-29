@@ -662,6 +662,36 @@ def _kv_pairs(text: str) -> dict[str, float] | None:
     return out or None
 
 
+def _module_pair_file(entry, paths):
+    """The one .py file the sentence names, when the capability takes BOTH halves.
+
+    A capability that declares ``source_root`` and ``module`` wants a directory
+    and a path relative to it.  A sentence names one file.  Both halves come
+    from that file -- its directory is the root and its name is the module -- so
+    neither is invented, but neither can be bound on its own either, and that is
+    exactly what happened: measured on dac97dc, "Extract the function helper from
+    the python file <abs>/calc.py lines 6 to 7 into a new function named
+    helper_body" scored python.refactor.extract_function.v1 at 33, ahead of the
+    next candidate at 4, and was dropped as unbindable on ``module:not_stated``.
+    The sentence was then answered by document.convert.markdown_pdf.pandoc_weasyprint
+    at score 4, which correctly refused a .py file and failed the whole request
+    closed.  The capability itself runs: given the pair it performs the
+    extraction, infers the parameters and the return, and rewrites the caller.
+
+    Returns None unless the capability declares both keys and the sentence names
+    exactly one existing .py file, so nothing else changes what it binds.
+    """
+    if not isinstance(entry, Mapping):
+        return None
+    keys = gc._placeholders(entry.get("action_template") or {})
+    if "source_root" not in keys or "module" not in keys:
+        return None
+    named = [raw for raw, path in paths if path.is_file() and raw.endswith(".py")]
+    if len(named) != 1:
+        return None
+    return named[0]
+
+
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
@@ -697,6 +727,16 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
             files = [raw for raw, p in paths if p.is_file()]
             if len(files) == 1:
                 return files[0]
+        if not dirs:
+            paired = _module_pair_file(entry, paths)
+            if paired is not None:
+                # The scope the caller named is one file, and this capability
+                # takes that file as a pair.  Its directory is the root; the
+                # module key below takes the name.  Both come from the path the
+                # sentence stated.
+                parent = str(pathlib.PurePosixPath(paired).parent)
+                if parent not in ("", "."):
+                    return parent
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(dirs)) + "_existing_directories_named")
     if key in _PATH_LIST_KEYS:
         files = [raw for raw, p in paths if p.is_file()]
@@ -709,6 +749,10 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         if chosen:
             return chosen
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":no_matching_existing_files_named")
+    if key == "module":
+        paired = _module_pair_file(entry, paths)
+        if paired is not None:
+            return paired.rsplit("/", 1)[-1]
     tails = _after_key(goal, key)
     if not tails:
         if key in _KV_KEYS:

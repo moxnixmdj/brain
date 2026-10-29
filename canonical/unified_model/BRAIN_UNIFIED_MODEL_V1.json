@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "51c05792c34a11c576f09e78dfad778e6ba5a6fefa7af557e0977a2c6e1aaeee"
+  "value": "626d61a551d1a2437ac842c148aff487fab8eb6f102202a3eeb0ae31c525bf2b"
  },
  "engines": [
   {
@@ -210782,7 +210782,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
-   "sha256": "bbd2ad949f263ff62953b2e890fe8d99ab6e9bebe0af8723f4d6285a874223d1",
+   "sha256": "ab7037bce8fe91052a48f7358a9687575c3e6678f8811375465da75f928326e8",
    "summary": "python.refactor.extract_function.v1 — scope-aware statement-block",
    "symbol_count": 8,
    "symbols": [
@@ -231308,9 +231308,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "2d7bdfa73f3b7117e0c1bbc86a13a8e7ecce5fa2786719d570e1b58c84ace387",
+   "sha256": "8cb3401f1c2ce89f6fcd22f892d8df41979b76ab301bcfbd017135997f7ac67c",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 65,
+   "symbol_count": 66,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -231335,7 +231335,7 @@
     "_is_output_key",
     "_joint_role_binding",
     "_kv_pairs",
-    "_named_existing_paths"
+    "_module_pair_file"
    ],
    "terms": {
     "after_key": 1,
@@ -231353,10 +231353,10 @@
     "front": 2,
     "goal": 2,
     "input_keys": 1,
-    "is_output_key": 1,
     "is_plain_goal_routable": 1,
     "kv_pairs": 1,
     "layer": 1,
+    "module_pair_file": 1,
     "mouth": 1,
     "named_receipt_projection": 1,
     "naming_is_the_whole_request": 1,
@@ -258368,9 +258368,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "b9c42244b4ee7d68f44e4af68fb8cc10aaa079ec0d7a8ad13f9a6a373126d5eb",
+   "sha256": "cd207d0d658c7c6115f79567b5fd9c9e532467f9145f41f3797970e275edfaad",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 51,
+   "symbol_count": 52,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -258391,11 +258391,11 @@
     "_inspect_fault_localize",
     "_inspect_pdf_extract_text",
     "_inspect_python_source_audit",
+    "_inspect_refactor_extract_function",
     "_inspect_relevance_rank",
     "_inspect_repair_loop",
     "_inspect_repository_acceptance_measure",
-    "_inspect_shell_command_run",
-    "_inspect_tar_gz_create_from_manifest"
+    "_inspect_shell_command_run"
    ],
    "terms": {
     "acceptance": 2,
