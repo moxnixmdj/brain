@@ -380,6 +380,21 @@ real cost, and supported fast paths must be justified by independent byte-level 
 unconfined replay. Larger, n≥4 end-to-end samples are still needed before ranking other families by
 speed; the earlier claim of a knowledge-family “unbounded loop” was not established.
 
+### P13 — The existing PR cannot currently land
+
+On 2026-10-29, GitHub reports PR #6305 as **CONFLICTING**. Against `origin/main` at `e2d7981d`,
+`git merge-tree --write-tree origin/main HEAD` identifies conflicts in
+`canonical/runtime/goal_compiler.py` and `canonical/runtime/state/experience_v1.json`. No merge was
+attempted. GitHub's integrity/referee and drift-guard checks are red; the same workflows had already
+failed on the previous head `bb36ebae`. Downloading their logs returned `EOF`, so their exact remote
+failure messages are unavailable.
+
+The local integrity guard, run against the branch's merge base `2754cf0d`, reports
+`CAPABILITY_REGISTRATION_FLOOD`: **40** new registry entries against the policy limit of **3 per PR**.
+The re-inspection commit added **zero** registry entries. Resolving file conflicts alone cannot resolve
+that local policy violation; do not delete capabilities or weaken the guard simply to make a check
+pass. Splitting work requires coordination outside this session's fixed branch constraints.
+
 ---
 
 ## 3. Existing mechanisms to search and reuse
@@ -420,6 +435,7 @@ speed; the earlier claim of a knowledge-family “unbounded loop” was not esta
 | 7 | **Audit pointerless and dangling evidence** | 34/8 observed in the pointer probe (P8); do not manufacture receipts |
 | 8 | **Measure slow confined readers and optimize only with independent byte checks** | n=12 microbenchmark shows a real confined-replay cost (P12) |
 
+Delivery is separately blocked by the existing PR conflicts and capability-registration limit (P13).
 No duration estimates are asserted. Reuse before synthesis; measure rather than assert; red is not
 authority; no AI model participates in Brain-credited producer cognition.
 
