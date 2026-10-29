@@ -718,6 +718,22 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
     call_args = dict(action.get("args") or {})
     call_args.pop("capability_id", None)
+    # Write authority, checked BEFORE the adapter runs (measured 2026-10-29).
+    # Every software-engineering row declares `output_path` and `source_root`; a
+    # goal that names no destination therefore had exactly one stated path in
+    # hand and the report was bound onto the source.  "Fix the ZeroDivisionError
+    # in app/utils.py" replaced 14 lines of source with a parse report (3/3), and
+    # a READ-ONLY question replaced app/service.py with 358 lines of JSON.  This
+    # is the single function every local adapter invocation passes through, so
+    # the rule is enforced once for the door, the composer and every composed
+    # step.  LocalExecutionFailure keeps it a typed, closed refusal.
+    try:
+        from canonical.runtime import write_authority_v1 as _write_authority
+        _write_authority.check(ROOT, call_args, cid)
+    except LocalExecutionFailure:
+        raise
+    except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
+        raise LocalExecutionFailure(str(exc)) from exc
     result = fn(call_args, ROOT)
     if not isinstance(result, dict):
         raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
