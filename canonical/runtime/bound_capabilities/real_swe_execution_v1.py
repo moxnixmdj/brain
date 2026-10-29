@@ -472,7 +472,13 @@ def _eval_candidates_batch_distributed(batch_args: list[tuple]) -> list[dict | N
 
 
 def _eval_candidates_batch_local(batch_args: list[tuple]) -> list[dict | None]:
-    """Evaluate multiple candidates in one shared worktree (local batch mode)."""
+    """Evaluate multiple candidates in one shared worktree (local batch mode).
+
+    Copies the source tree once, then applies/reverts each candidate's patch
+    in-place. Avoids O(tree_size) copytree per candidate. Sequential within
+    the batch but fastest for small-to-medium source trees where copytree
+    overhead dominates test execution time.
+    """
     if not batch_args:
         return []
 
