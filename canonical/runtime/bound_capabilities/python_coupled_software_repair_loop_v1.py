@@ -166,7 +166,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   try:tests=discover_test_files(src);test_paths_source="discovered_under_source_root"
   except FileNotFoundError:raise RepairLoopError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  if not tests:raise RepairLoopError("TEST_PATHS_REQUIRED")
- argv=[str(x) for x in (args.get("test_argv") or _PATCH.suite_argv(sys.executable,*tests))]
+ argv=_PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*tests)
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_files=max(1,min(int(args.get("max_files",8)),32));max_symbols=max(1,min(int(args.get("max_symbols_per_file",8)),64));per=max(1,min(int(args.get("mutations_per_file",24)),128));pair_max=max(1,min(int(args.get("max_pair_candidates",1200)),20000))
  out=(repo/str(args.get("output_path") or "")).resolve()
  if out==repo or repo not in out.parents:raise RepairLoopError("OUTPUT_PATH_OUTSIDE_REPOSITORY")

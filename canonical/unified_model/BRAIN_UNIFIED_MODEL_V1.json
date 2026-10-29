@@ -23684,7 +23684,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "b908eab2af422e6bef281f3664d602c2c308a1e299797d94c50c2293838898b0",
+    "source_sha256": "6f9109762461e79a080a30780da91cf8eb8e0867fd71e48a69b1a641f1eb1dea",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25146,7 +25146,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "7a1af578cd29f1e82892e0efc4b0536c4f0930c29eb29cc07fa896fd0e7a53b8",
+    "source_sha256": "7d9b45a1854496d89ac8a511b202b3c4855d8fde4d0f6623e8069e8144a098f3",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25234,7 +25234,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "df5782726e335e1b3c3217ebfd5f43d730714ede98619f806dde5b7f8bbb95bf",
+    "source_sha256": "444c489f301e1eb3c751e3be21b812c9733ea203eada144a74604fee51b8405e",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25320,7 +25320,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "7e10b867c02357cb7465eefa258d289ad97df4f9a1876e93a53d15db36746016",
+    "source_sha256": "5350fe532d88838460a518695ba94b3e1bd23c41e58724e1a08e1b7bb01e7663",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25411,7 +25411,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "f7796117f2ff99e9ce6e3f714b5a265c527178a0e4c74734632694710f4bff3d",
+    "source_sha256": "70d4dfc7a7c1ac0c2b0fc14b9712feb3b52077966c39e515b297708b212455e1",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25595,7 +25595,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-    "source_sha256": "870901dbeb3b110eadf52b36487de64c67435c052fbf7f2759c60eacd26da22e",
+    "source_sha256": "169e5e0769b1c70acd3c1e77cec957fb15cd8c10b0f774fb3665117b03cff536",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25679,7 +25679,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
-    "source_sha256": "80ab3fa0a56a51db01dfce152be5e8d316b80ab19b767ad47058d4dbfcdc8ae7",
+    "source_sha256": "b4a235fc66e459b83ae8c07b28251ff42e497075a348d507885958e7b84a2cf7",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -28715,7 +28715,7 @@
   "engines": 26,
   "knowledge_documents": 172,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6499,
+  "research_index_records": 6500,
   "routing_tokens": 2105,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6ae11a59cd69f2f4a27a62c086eaaa1329d42e0f5b71ce0384e547a4ee9e6c56"
+  "value": "682d88c864ca41e7484e06637b156671c73deb31b42b8f851fb08f5f815849ca"
  },
  "engines": [
   {
@@ -52472,7 +52472,7 @@
   "included_source_count": 942,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6cac10ae94977833d2d156db450eb9fcc14266e73ff06db7b206c45f2e294404"
+  "source_tree_digest": "1209c23a72ce3c410e417e72ae5d5b5ccc29cb41d8c5380bf8e3bcd51ceb8c94"
  },
  "research_index": [
   {
@@ -194692,6 +194692,51 @@
    }
   },
   {
+   "action_id": "A_CAPABILITY_THAT_CANNOT_BE_REINSPECTED_CAN_NEVER_BE_ACCEPTED_V1_20261028_V1",
+   "capability": false,
+   "date": "2026-10-27",
+   "id": "research:canonical/action_intents/A_CAPABILITY_THAT_CANNOT_BE_REINSPECTED_CAN_NEVER_BE_ACCEPTED_V1_20261028_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CAPABILITY_THAT_CANNOT_BE_REINSPECTED_CAN_NEVER_BE_ACCEPTED_V1_20261028_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "033f69fdac9d87991a5c06bb9b171eeabb777a4dd8559cee17fb53870fe6b142",
+   "status": "",
+   "terms": {
+    "14": 1,
+    "20261028": 1,
+    "a_capability_that_cannot_be_reinspected_can_never_be_accepted_v1_20261028_v1": 2,
+    "acceptance": 1,
+    "accepted": 1,
+    "all": 1,
+    "argv": 1,
+    "because": 1,
+    "both": 1,
+    "bound": 1,
+    "but": 1,
+    "cannot": 1,
+    "capabilities": 1,
+    "capability": 1,
+    "command": 1,
+    "controllers": 1,
+    "coupled": 1,
+    "derivation": 1,
+    "empty": 1,
+    "entries": 1,
+    "fault": 1,
+    "file": 1,
+    "first": 1,
+    "gates": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "interprocedural": 1,
+    "loop": 2,
+    "missing": 2,
+    "repair": 3,
+    "targets": 2,
+    "test": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_CAPABILITY_THAT_CANNOT_RUN_HERE_IS_NOT_THE_ANSWER_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27T09:49:26Z",
@@ -258278,9 +258323,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "4be44eb261fc3cb21eb6d10b32c64d702c49424d1befc1b204cd458c9383d853",
+   "sha256": "dad6573b2b0387f3fc19a4daf0051b7666a79cf16cea1cb2d15b3b7de329c605",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 43,
+   "symbol_count": 49,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -258298,14 +258343,14 @@
     "_inspect_decision_synthesis",
     "_inspect_decision_verify",
     "_inspect_docx_verify",
+    "_inspect_fault_localize",
     "_inspect_pdf_extract_text",
     "_inspect_python_source_audit",
     "_inspect_relevance_rank",
+    "_inspect_repair_loop",
     "_inspect_shell_command_run",
     "_inspect_tar_gz_create_from_manifest",
-    "_inspect_text_file_write",
-    "_inspect_xlsx_create",
-    "_json"
+    "_inspect_text_file_write"
    ],
    "terms": {
     "acceptance": 2,
