@@ -1085,6 +1085,21 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     if controller_error == "CONTROL_PLAN_INVALID":
         return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
     if controller_error is not None:
+        # A deliberate refusal is not a controller fault.  Measured on 88bb18bb:
+        # the binder aimed an analyzer's report at the very file it was told to
+        # analyse, write authority stopped it, and the caller was told
+        # FAIL__LIVE_CONTROLLER_EXECUTION -- "execution or verification failure",
+        # which blames the controller and invites a retry of the same action.
+        # The reason string already names the rule, so the status must name it
+        # too: the whole point of refusing is that the caller can tell what
+        # happened without parsing prose.  Same shape as
+        # FAIL_CLOSED__CAPABILITY_EXITED_PROCESS above, which exists for exactly
+        # this reason -- a refusal that is not a fault deserves its own name.
+        if "OUTPUT_OVERWRITES_A_STATED_SOURCE" in str(controller_error):
+            return _fail(task_id, "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
+                         "AN_ACTION_WOULD_OVERWRITE_A_FILE_IT_READS", started, executed=True,
+                         compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"),
+                         reason=controller_error)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
                      compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"), reason=controller_error)
     passed = _controller_passed(controller)
