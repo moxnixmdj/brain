@@ -2156,6 +2156,95 @@ def _inspect_repository_acceptance_measure(args, result, root):
                       "tests_recounted": recounted}
 
 
+def _inspect_refactor_extract_function(args, result, root):
+    """Re-read the refactored source and confirm the extraction is really there.
+
+    This capability REWRITES the caller's source, so its report is the one kind
+    that cannot be checked by re-running anything: the bytes it describes are the
+    bytes it just changed.  What can be checked is whether the edit it claims is
+    the edit that is on disk.  Four things must all hold in the module it names:
+
+    * the file still parses;
+    * the function it says it created is defined at module level;
+    * the function it says it extracted FROM is still defined;
+    * that original function now CALLS the new one -- an extraction that left the
+      caller untouched is a copy, not an extraction, and the caller would be
+      running dead code.
+
+    The inferred parameter list is also checked against the new definition's real
+    signature, so a report cannot claim parameters the function does not take.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.refactor.extract_function.v1), so a
+    correct extract-function refactoring -- measured on dac97dc it scored 33 for
+    the sentence, ran, rewrote the caller and passed its own suite -- was still
+    rolled back at the acceptance layer.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "EXTRACT_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "EXTRACT_REPORT_NOT_A_JSON_OBJECT", {}
+    source_root = _inside(root, data.get("source_root"))
+    if source_root is None or not source_root.is_dir():
+        return False, "EXTRACT_SOURCE_ROOT_ABSENT_FROM_DISK", {
+            "claimed": data.get("source_root")}
+    module_rel = data.get("module")
+    if not isinstance(module_rel, str) or not module_rel:
+        return False, "EXTRACT_REPORT_NAMES_NO_MODULE", {}
+    module = (source_root / module_rel).resolve()
+    try:
+        module.relative_to(root.resolve())
+    except ValueError:
+        return False, "EXTRACT_MODULE_OUTSIDE_THE_REPOSITORY", {"module": module_rel}
+    if not module.is_file():
+        return False, "EXTRACT_MODULE_ABSENT_FROM_DISK", {"module": module_rel}
+    try:
+        tree = ast.parse(module.read_bytes())
+    except (SyntaxError, ValueError, OSError):
+        return False, "EXTRACT_MODULE_DOES_NOT_PARSE_AFTER_THE_EDIT", {}
+    defined = {
+        node.name: node
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    extracted = str(data.get("extracted_name") or "")
+    owner = str(data.get("qualname") or "")
+    if not extracted or not owner:
+        return False, "EXTRACT_REPORT_NAMES_NO_FUNCTIONS", {}
+    if extracted not in defined:
+        return False, "EXTRACT_NEW_FUNCTION_IS_NOT_DEFINED_IN_THE_MODULE", {
+            "claimed": extracted, "defined": sorted(defined)}
+    if owner not in defined:
+        return False, "EXTRACT_ORIGINAL_FUNCTION_IS_NO_LONGER_DEFINED", {
+            "claimed": owner, "defined": sorted(defined)}
+    calls = {
+        node.func.id
+        for node in ast.walk(defined[owner])
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    }
+    if extracted not in calls:
+        return False, "EXTRACT_ORIGINAL_FUNCTION_DOES_NOT_CALL_THE_NEW_ONE", {
+            "owner": owner, "extracted": extracted, "calls": sorted(calls)}
+    claimed_inputs = data.get("inputs")
+    if isinstance(claimed_inputs, list):
+        real = [a.arg for a in defined[extracted].args.args]
+        if [str(x) for x in claimed_inputs] != real:
+            return False, "EXTRACT_INFERRED_INPUTS_ARE_NOT_THE_NEW_SIGNATURE", {
+                "claimed": claimed_inputs, "signature": real}
+    edited = data.get("files_edited")
+    if not isinstance(edited, list) or not edited:
+        return False, "EXTRACT_REPORT_NAMES_NO_EDITED_FILE", {}
+    for row in edited:
+        on_disk = (source_root / str(row)).resolve()
+        if not on_disk.is_file():
+            return False, "EXTRACT_EDITED_FILE_ABSENT_FROM_DISK", {"path": row}
+    return True, "", {"module_reparsed": module_rel,
+                      "functions_defined": len(defined),
+                      "owner_now_calls": extracted}
+
+
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
@@ -2164,6 +2253,7 @@ INSPECTORS: dict[str, Inspector] = {
     "python.fault.provenance.interprocedural.value.v1": _inspect_value_provenance,
     "python.software.repair.loop.strict_progress.ast.v1": _inspect_repair_loop,
     "python.repository.acceptance.measure.v1": _inspect_repository_acceptance_measure,
+    "python.refactor.extract_function.v1": _inspect_refactor_extract_function,
     "archive.verify.tar_gz.gnu": _inspect_archive_verify,
     "archive.tar_gz.create_from_manifest": _inspect_tar_gz_create_from_manifest,
     "xlsx.table.create_from_json_records": _inspect_xlsx_create,

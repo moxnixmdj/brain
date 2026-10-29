@@ -76,6 +76,12 @@ MODULE = (
     "    return total\n"
 )
 
+# The corpus this fixture ships must be GREEN, because the capability's own law
+# is "red suite after the edit => restore every byte".  ``big(4)`` is 0+1+2+3 = 6;
+# this asserted 3, so the suite was red before any edit.  While ``run_tests`` was
+# hardcoded to ``[]`` nothing ran and the wrong arithmetic was invisible; now that
+# the corpus is discovered the verifier really executes it and the error surfaces.
+# Fixing the arithmetic is what lets a true refactoring be verified and kept.
 TESTS = (
     "from calc import add, big\n"
     "\n"
@@ -85,7 +91,7 @@ TESTS = (
     "\n"
     "\n"
     "def test_big():\n"
-    "    assert big(4) == 3\n"
+    "    assert big(4) == 6\n"
 )
 
 

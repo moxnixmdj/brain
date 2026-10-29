@@ -28715,7 +28715,7 @@
   "engines": 26,
   "knowledge_documents": 172,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6502,
+  "research_index_records": 6503,
   "routing_tokens": 2105,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3edc97ee4c92354eaf5a7d74dcf72ff99e6a7655569efc836cd3d96c3e6f9be2"
+  "value": "0815fc4c31a94639e376a2c1acd49ec03ede2040ed08009a56ef047dd5f5d341"
  },
  "engines": [
   {
@@ -165315,7 +165315,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "1e04292d0d8e8f7792612b845997bd241f69cc944653fede224bc80f633091f1",
+   "sha256": "f3ab924505f00b6816b974a700c547e4b72f9381122f54c432f39d3a0da0e899",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -200632,6 +200632,51 @@
    }
   },
   {
+   "action_id": "THE_MOST_ORDINARY_SENTENCE_A_SOFTWARE_ENGINEER_SAYS_MUST_BE_ANSWERED_V1_20261029_V1",
+   "capability": false,
+   "date": "2026-10-29",
+   "id": "research:canonical/action_intents/ONE_FILE_A_SENTENCE_NAMES_BINDS_THE_TWO_HALVES_A_CAPABILITY_DECLARES_V1_20261029_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_FILE_A_SENTENCE_NAMES_BINDS_THE_TWO_HALVES_A_CAPABILITY_DECLARES_V1_20261029_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b1924c58a693cfd1169c5fcc73f454335e8a54036b1a5246fa94ba9e02a9072a",
+   "status": "",
+   "terms": {
+    "20261029": 1,
+    "acceptance": 1,
+    "all": 1,
+    "behind": 1,
+    "binds": 1,
+    "both": 1,
+    "capability": 1,
+    "captured": 1,
+    "claim": 2,
+    "compared": 1,
+    "controllers": 1,
+    "copied": 1,
+    "coupled": 1,
+    "declares": 1,
+    "digests": 1,
+    "embeds": 1,
+    "entry": 1,
+    "every": 1,
+    "exit": 1,
+    "fault": 1,
+    "file": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "inspector": 2,
+    "loop": 2,
+    "names": 2,
+    "one": 2,
+    "repair": 3,
+    "sentence": 2,
+    "stderr": 2,
+    "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
+    "v1": 2,
+    "workspace": 2
+   }
+  },
+  {
    "action_id": "ONE_RUNNER_SERVES_294_CAPABILITIES_SO_ONE_INSPECTOR_RE_INSPECTS_ALL_OF_THEM_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -210827,7 +210872,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
-   "sha256": "bbd2ad949f263ff62953b2e890fe8d99ab6e9bebe0af8723f4d6285a874223d1",
+   "sha256": "ab7037bce8fe91052a48f7358a9687575c3e6678f8811375465da75f928326e8",
    "summary": "python.refactor.extract_function.v1 — scope-aware statement-block",
    "symbol_count": 8,
    "symbols": [
@@ -231353,9 +231398,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "2d7bdfa73f3b7117e0c1bbc86a13a8e7ecce5fa2786719d570e1b58c84ace387",
+   "sha256": "8cb3401f1c2ce89f6fcd22f892d8df41979b76ab301bcfbd017135997f7ac67c",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 65,
+   "symbol_count": 66,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -231380,7 +231425,7 @@
     "_is_output_key",
     "_joint_role_binding",
     "_kv_pairs",
-    "_named_existing_paths"
+    "_module_pair_file"
    ],
    "terms": {
     "after_key": 1,
@@ -231398,10 +231443,10 @@
     "front": 2,
     "goal": 2,
     "input_keys": 1,
-    "is_output_key": 1,
     "is_plain_goal_routable": 1,
     "kv_pairs": 1,
     "layer": 1,
+    "module_pair_file": 1,
     "mouth": 1,
     "named_receipt_projection": 1,
     "naming_is_the_whole_request": 1,
@@ -258413,9 +258458,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "b9c42244b4ee7d68f44e4af68fb8cc10aaa079ec0d7a8ad13f9a6a373126d5eb",
+   "sha256": "cd207d0d658c7c6115f79567b5fd9c9e532467f9145f41f3797970e275edfaad",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 51,
+   "symbol_count": 52,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -258436,11 +258481,11 @@
     "_inspect_fault_localize",
     "_inspect_pdf_extract_text",
     "_inspect_python_source_audit",
+    "_inspect_refactor_extract_function",
     "_inspect_relevance_rank",
     "_inspect_repair_loop",
     "_inspect_repository_acceptance_measure",
-    "_inspect_shell_command_run",
-    "_inspect_tar_gz_create_from_manifest"
+    "_inspect_shell_command_run"
    ],
    "terms": {
     "acceptance": 2,
