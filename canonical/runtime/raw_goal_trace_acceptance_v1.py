@@ -1999,6 +1999,163 @@ def _inspect_repair_loop(args, result, root):
                       "sources_hashed": len(patches)}
 
 
+_MEASURE_MANIFEST_SKIP = {".git", "__pycache__", ".pytest_cache"}
+_MEASURE_PARSE_SKIP = {"__pycache__", ".pytest_cache"}
+_MEASURE_RAN_COUNT = re.compile(r"Ran\s+(\d+)\s+tests?")
+
+
+def _measure_canon_sha256(value) -> str:
+    """The producer's own canonical digest, byte for byte.
+
+    ``python_repository_acceptance_measurement_v1._sha_obj`` serialises with
+    ``sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False``.
+    A re-derivation that differs in any one of those disagrees with an honest
+    producer and refuses a true report, so the form is copied rather than
+    invented.
+    """
+    return _digest(json.dumps(
+        value, sort_keys=True, separators=(",", ":"),
+        ensure_ascii=False, allow_nan=False,
+    ).encode("utf-8"))
+
+
+def _inspect_repository_acceptance_measure(args, result, root):
+    """Re-measure the repository instead of believing the measurement receipt.
+
+    A repository acceptance report claims four things that are all checkable from
+    the bytes on disk: *this is the tree I measured* (a per-file digest manifest),
+    *this many Python files are in it and they all parse*, *the suite returns this
+    exit status*, and *therefore it passes or it does not*.
+
+    The subject manifest is re-hashed file by file, and the set of files actually
+    under the source root must equal the set the report names -- a tree with a
+    file added or removed since the measurement is not the tree that was
+    measured.  The file count and the parse verdict are recomputed with the same
+    exclusion rules the producer uses.  And the suite is RUN AGAIN: the exit
+    status must reproduce, and the test count re-parsed from the re-run must match.
+
+    What is deliberately NOT compared is the captured stderr's digest.  Measured
+    on a5a0230, the producer runs the suite inside a copied workspace, so its
+    stderr embeds that workspace's path; a re-run from the source root produces a
+    different digest for the same verdict.  Comparing those bytes would refuse a
+    true report, and the verdict -- the exit status -- is the claim that matters.
+
+    The command line is also required to name a suite.  An argv of
+    ``[python3, "-c", script]`` with no target runs nothing and exits 0, which a
+    measurement report would record as a passing suite; that is the same defect
+    ``argv_names_a_target`` exists to catch, and it is checked here rather than
+    trusted because the report is the producer's own.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.repository.acceptance.measure.v1), so
+    "run the tests" and "write the tests" -- the two most ordinary sentences a
+    software engineer says -- ran, wrote a correct report, and had it rolled back.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "MEASURE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "MEASURE_REPORT_NOT_A_JSON_OBJECT", {}
+    spec = data.get("measurement_spec")
+    evidence = data.get("test_evidence")
+    measurements = data.get("measurements")
+    subject = data.get("subject")
+    if not isinstance(spec, Mapping) or not isinstance(evidence, Mapping):
+        return False, "MEASURE_REPORT_HAS_NO_SPEC_OR_EVIDENCE", {}
+    if not isinstance(measurements, Mapping) or not isinstance(subject, Mapping):
+        return False, "MEASURE_REPORT_HAS_NO_MEASUREMENTS_OR_SUBJECT", {}
+    source_root = _inside(root, spec.get("source_root"))
+    if source_root is None or not source_root.is_dir():
+        return False, "MEASURE_SOURCE_ROOT_ABSENT_FROM_DISK", {
+            "claimed": spec.get("source_root")}
+    manifest = subject.get("manifest")
+    if not isinstance(manifest, list) or not manifest:
+        return False, "MEASURE_REPORT_CARRIES_NO_SUBJECT_MANIFEST", {}
+    claimed = {}
+    for row in manifest:
+        if not isinstance(row, Mapping):
+            return False, "MEASURE_MANIFEST_ROW_INVALID", {}
+        path, size, digest = row.get("path"), row.get("bytes"), row.get("sha256")
+        if not isinstance(path, str) or not isinstance(size, int) or not isinstance(digest, str):
+            return False, "MEASURE_MANIFEST_ROW_INCOMPLETE", {"path": path}
+        claimed[path] = (size, digest)
+    actual = {}
+    for path in sorted(source_root.rglob("*")):
+        if any(part in _MEASURE_MANIFEST_SKIP for part in path.parts):
+            continue
+        if not path.is_file():
+            continue
+        raw = path.read_bytes()
+        actual[str(path.relative_to(source_root)).replace("\\", "/")] = (
+            len(raw), _digest(raw))
+    if set(actual) != set(claimed):
+        return False, "MEASURE_SUBJECT_IS_NOT_THE_TREE_ON_DISK", {
+            "missing_from_disk": sorted(set(claimed) - set(actual))[:5],
+            "not_in_report": sorted(set(actual) - set(claimed))[:5]}
+    for path, (size, digest) in claimed.items():
+        if actual[path] != (size, digest):
+            return False, "MEASURE_SUBJECT_FILE_CHANGED_SINCE_THE_MEASUREMENT", {
+                "path": path, "claimed_bytes": size, "actual_bytes": actual[path][0]}
+    if subject.get("snapshot_sha256") != _measure_canon_sha256(manifest):
+        return False, "MEASURE_SUBJECT_SNAPSHOT_DIGEST_DOES_NOT_MATCH_ITS_MANIFEST", {}
+    py_files = [
+        path for path in sorted(source_root.rglob("*.py"))
+        if not any(part in _MEASURE_PARSE_SKIP for part in path.parts)
+    ]
+    if measurements.get("python_file_count") != len(py_files):
+        return False, "MEASURE_PYTHON_FILE_COUNT_NOT_REPRODUCED", {
+            "claimed": measurements.get("python_file_count"), "recounted": len(py_files)}
+    unparseable = []
+    for path in py_files:
+        try:
+            ast.parse(path.read_text(encoding="utf-8", errors="replace"), filename=str(path))
+        except Exception as exc:
+            unparseable.append("%s:%s" % (path.name, type(exc).__name__))
+    if bool(measurements.get("python_parse_ok")) != (not unparseable):
+        return False, "MEASURE_PARSE_VERDICT_NOT_REPRODUCED", {
+            "claimed": measurements.get("python_parse_ok"), "unparseable": unparseable[:5]}
+    returncode = evidence.get("returncode")
+    if not isinstance(returncode, int):
+        return False, "MEASURE_EVIDENCE_HAS_NO_RETURN_CODE", {}
+    if measurements.get("test_returncode") != returncode:
+        return False, "MEASURE_RETURN_CODE_DISAGREES_WITH_ITS_EVIDENCE", {
+            "measurements": measurements.get("test_returncode"), "evidence": returncode}
+    if measurements.get("test_count") != evidence.get("test_count"):
+        return False, "MEASURE_TEST_COUNT_DISAGREES_WITH_ITS_EVIDENCE", {
+            "measurements": measurements.get("test_count"),
+            "evidence": evidence.get("test_count")}
+    if bool(measurements.get("tests_pass")) != (returncode == 0 and not evidence.get("timed_out")):
+        return False, "MEASURE_PASS_VERDICT_DOES_NOT_FOLLOW_FROM_THE_RETURN_CODE", {
+            "claimed": measurements.get("tests_pass"), "returncode": returncode,
+            "timed_out": evidence.get("timed_out")}
+    argv = [str(x) for x in (spec.get("test_argv") or [])]
+    try:
+        from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
+            argv_names_a_target as _names_a_target,
+        )
+    except Exception:
+        _names_a_target = None
+    if _names_a_target is not None and not _names_a_target(argv):
+        return False, "MEASURE_TEST_ARGV_NAMES_NO_SUITE", {"argv_length": len(argv)}
+    try:
+        proc = subprocess.run(argv, capture_output=True, cwd=str(source_root), timeout=300)
+    except (OSError, subprocess.SubprocessError):
+        return False, "MEASURE_SUITE_COULD_NOT_BE_RE_RUN", {}
+    if proc.returncode != returncode:
+        return False, "MEASURE_SUITE_RETURN_CODE_NOT_REPRODUCED", {
+            "claimed": returncode, "re_run": proc.returncode}
+    again = _MEASURE_RAN_COUNT.search(proc.stderr.decode("utf-8", "replace"))
+    recounted = int(again.group(1)) if again else 0
+    if recounted != evidence.get("test_count"):
+        return False, "MEASURE_TEST_COUNT_NOT_REPRODUCED_BY_THE_RE_RUN", {
+            "claimed": evidence.get("test_count"), "re_run": recounted}
+    return True, "", {"subject_files_rehashed": len(claimed),
+                      "python_files_reparsed": len(py_files),
+                      "suite_re_run_returncode": proc.returncode,
+                      "tests_recounted": recounted}
+
+
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
@@ -2006,6 +2163,7 @@ INSPECTORS: dict[str, Inspector] = {
     "python.fault.localize.dynamic.dataflow.v1": _inspect_fault_localize,
     "python.fault.provenance.interprocedural.value.v1": _inspect_value_provenance,
     "python.software.repair.loop.strict_progress.ast.v1": _inspect_repair_loop,
+    "python.repository.acceptance.measure.v1": _inspect_repository_acceptance_measure,
     "archive.verify.tar_gz.gnu": _inspect_archive_verify,
     "archive.tar_gz.create_from_manifest": _inspect_tar_gz_create_from_manifest,
     "xlsx.table.create_from_json_records": _inspect_xlsx_create,
