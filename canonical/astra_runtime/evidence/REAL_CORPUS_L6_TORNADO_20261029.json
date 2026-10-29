@@ -97,5 +97,16 @@
   "l6_scoreboard": {
    "round4": "1/4 unchanged; misses now 2x grammar-expressibility + 1 live-server + env-rejected corpus tail"
   }
+ },
+ "round5": {
+  "date": "20261029",
+  "landed": {
+   "numeric_neighborhood_synthesis": "the decoded tqdm/9 spec implemented: n*0.9995/0.99995/0.999 + float eps moves, int sites included (filter-exempt); verified present: 1000->999.5/999.95/999.995, 99.95, 9.995",
+   "wall_allocation": "router now ALLOCATES wall (writer 35%, coupled 60% of rest) instead of capping -- measured: the pair engine went from SKIPPED_WALL_BUDGET to RUNNING on tqdm/9",
+   "fail_fast": "PGC refuses with WALL_BUDGET_EXHAUSTED_BEFORE_SEARCH before the indivisible traced-localization phase (order bug in first cut fixed)"
+  },
+  "tqdm9_status": "STILL NOT_REPAIRED this round: test_si_format asserts ~7 boundary values -- the fix needs 2-3 SIMULTANEOUS numeric edits; the pair engine now gets its share but its pair-space sweep (focus-ordered) needs the next efficiency pass (skip strict-singles on multi-assert diagnosis; tighter pair ordering)",
+  "l6_scoreboard": "1/4 unchanged; the multi-edit class now has BOTH its tool (pair engine with neighborhood values in grammar) and its wall share",
+  "pending_verification": "full ladder + fleet re-verify after neighborhood family (canary passed: apply.verified repairs, refusals honest)"
  }
 }

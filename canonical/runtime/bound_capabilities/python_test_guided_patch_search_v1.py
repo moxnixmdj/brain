@@ -169,22 +169,47 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
         if isinstance(node,ast.Constant):
             value=node.value
             replacements=[]
+            # BOUNDARY NEIGHBORHOOD (L6-decoded spec, receipt REAL_CORPUS_L6
+            # round4): a real numeric-boundary bug replaces a threshold by
+            # one just BELOW it -- 1000.0->999.95, 100.0->99.95, 10.0->9.995
+            # (tqdm format_sizeof). Family: n*0.9995, n*0.99995, n*0.999,
+            # plus float-only eps moves. Bounded: <=9 extra candidates per
+            # numeric site, only for abs(value)>=2 (0/1 boundaries are the
+            # existing {0,1,-1} family's job).
+            neighbors=[]
+            if isinstance(value,(int,float)) and not isinstance(value,bool) \
+                    and not isinstance(value,bool) and abs(value)>=2:
+                v=float(value)
+                for _m in (0.9995,0.99995,0.999):
+                    _c=round(v*_m,6)
+                    if _c!=v and _c not in neighbors:neighbors.append(_c)
+                if isinstance(value,float):
+                    for _e in (0.005,0.05):
+                        for _c in (round(v-_e,6),round(v+_e,6)):
+                            if _c!=v and _c not in neighbors:
+                                neighbors.append(_c)
             if isinstance(value,bool):
                 replacements=[not value]
             elif isinstance(value,(int,float)) and not isinstance(value,bool):
                 base=[0,1,-1]
                 if isinstance(value,int):
                     base += [value-1,value+1]
-                replacements=base+numeric_literals
+                replacements=base+neighbors+numeric_literals
             elif isinstance(value,str):
                 replacements=string_literals
             uniq=[]
             for rep in replacements:
                 if rep==value or type(rep) is not type(value) and isinstance(value,bool):
                     continue
-                if isinstance(value,int) and isinstance(rep,float) and not float(rep).is_integer():
+                if isinstance(value,int) and isinstance(rep,float) \
+                        and not float(rep).is_integer() \
+                        and rep not in neighbors:
+                    # the int->float drop stays for junk (0.5 at an int
+                    # site); decoded boundary neighbors are exempt -- they
+                    # ARE the repair class (tqdm/9: 1000 -> 999.95)
                     continue
-                if isinstance(value,int) and isinstance(rep,float):
+                if isinstance(value,int) and isinstance(rep,float) \
+                        and float(rep).is_integer():
                     rep=int(rep)
                 if rep not in uniq:
                     uniq.append(rep)

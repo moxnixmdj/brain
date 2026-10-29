@@ -69,6 +69,11 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not tests:raise GuidedRepairError("TEST_PATHS_REQUIRED")
  argv=[str(x) for x in (args.get("test_argv") or _PATCH.suite_argv(sys.executable,*tests))]
  timeout=max(1,min(int(args.get("timeout_s",20)),120))
+ import time as _t
+ _wb=args.get("wall_budget_s")
+ _deadline=(_t.monotonic()+float(_wb)) if _wb else None
+ def _wall_left():
+  return _deadline is None or _t.monotonic()<_deadline
  max_files=max(1,min(int(args.get("max_guided_files",4)),16))
  max_symbols=max(1,min(int(args.get("max_guided_symbols_per_file",6)),32))
  per=max(1,min(int(args.get("mutations_per_file",24)),128))
@@ -80,6 +85,11 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  base=_PATCH._run_tests(repo,argv,timeout,env)
  if base.get("timed_out"):raise GuidedRepairError("BASELINE_TIMEOUT")
  if base.get("returncode")==0:raise GuidedRepairError("BASELINE_ALREADY_PASSES")
+ # Fail fast BEFORE the traced localization phase: an indivisible round
+ # (trace + pool + search) that starts with the wall already spent returns
+ # a labeled refusal instead of eating the next engine's share (measured
+ # tqdm/9: writer overshoot starved the pair engine via SKIPPED_WALL_BUDGET).
+ if not _wall_left():raise GuidedRepairError("WALL_BUDGET_EXHAUSTED_BEFORE_SEARCH")
  base_score=_STRICT._score(base)
  if base_score is None:base_score=1
  # Traceback-frame-first economics (L6 law, measured on BugsInPy tornado/14):
@@ -115,11 +125,6 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  # the caller timeout): the real suite is ~0.3s here, so mutants die in <=6s
  # instead of 40.
  cand_timeout=max(6,min(timeout,int(8*float(base.get("elapsed_s") or 1)+3)))
- import time as _t
- _wb=args.get("wall_budget_s")
- _deadline=(_t.monotonic()+float(_wb)) if _wb else None
- def _wall_left():
-  return _deadline is None or _t.monotonic()<_deadline
  rows=_guided_rows(repo,loc,prov,max_files,max_symbols)
  for _row in rows:
   _row["focus"]=sorted(_focus.get(_row["rel"],set()))

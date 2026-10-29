@@ -138,6 +138,14 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     # Ladder step 1: the CEGIS writer (fastest proven writer on every tier).
     intermediate = output.parent / (".route_" + output.name)
     try:
+        # WALL ALLOCATION (L6 tqdm/9 law): single-edit search cannot pass a
+        # multi-assertion test (test_si_format asserts ~7 boundary values;
+        # its real fix is 2-3 simultaneous numeric edits). The writer gets a
+        # bounded SHARE of the wall -- not the whole thing -- so the pair
+        # engine, the only unit that can cross a multi-edit bug, is starved
+        # no more. Shares: writer 35%, coupled 60% of the rest, iterative
+        # the remainder. Every share is enforced by the engine's own
+        # anytime deadline and every skip is labeled.
         step = _CEGIS.run({
             "source_root": _rel(repo, src_abs) if src_abs != repo else ".",
             "test_paths": [_rel(repo, t) for t in tests],
@@ -145,7 +153,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             "output_path": _rel(repo, intermediate),
             "timeout_s": timeout,
             "budget": budget,
-            "wall_budget_s": rel_budget(),
+            "wall_budget_s": max(20.0, round(remaining() * 0.35, 1)),
         }, repo)
     except Exception as exc:
         import traceback as _tb
@@ -173,7 +181,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 "test_argv": argv,
                 "output_path": _rel(repo, cpl),
                 "timeout_s": timeout,
-                "wall_budget_s": rel_budget(),
+                "wall_budget_s": max(20.0, round(remaining() * 0.6, 1)),
             }, repo)
         except Exception as exc:
             r2 = {"status": type(exc).__name__ + ":" + str(exc)[:120]}
@@ -213,7 +221,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 "test_argv": argv,
                 "output_path": _rel(repo, it),
                 "timeout_s": timeout,
-                "wall_budget_s": rel_budget(),
+                "wall_budget_s": max(20.0, round(remaining(), 1)),
             }, repo)
         except Exception as exc:
             r3 = {"status": type(exc).__name__ + ":" + str(exc)[:120]}
