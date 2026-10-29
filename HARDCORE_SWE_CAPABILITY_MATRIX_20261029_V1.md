@@ -84,6 +84,23 @@ not. `refused` = `pass=False` (honest, unless the effect was trivially available
 **Totals: REAL 8 · FALSE 3 · REFUSED 34 · destroyed files 0.**
 Latency: median **86 ms**, p90 **696 ms**, max **51,548 ms**.
 
+**Same measurement after `5ae4f72`** (a program search is no longer run for a file that is already
+there — the route's only oracle is "did a program MAKE this file appear", so an existing file can
+never be produced by it):
+
+| request | before | after | how |
+|---|---|---|---|
+| `Format <calc.py>` | 51,548 ms | **3,036 ms** (162 ms with the documentation cache warm) | `discover` itself: 48.7 s → **5 ms** |
+| `Replace the magic number 3 in <calc.py>` | 33,396 ms | **1,830 ms** | same early exit |
+| `Compress the file notes.txt into notes.txt.gz` (a file that really is missing) | searched | still searches, still closes | positive control in the new suite |
+
+The verdicts are unchanged: both requests are still honest refusals, they are simply no longer paid
+for. The remaining 1.4 s of the 3.0 s is `documentation_mining_v1` fetching six HTTPS pages of
+stdlib docs — nominated by the token "py" from the extension of a file the sentence names — which is
+the next cache target, not a behaviour to change blindly: two existing tests pin that an extension
+IS a legitimate topic signal (`out.gz` → gzip, `out.json` → json), so the fix is a cache/negative
+memory, not a narrower match.
+
 ---
 
 ## 2. What changed today, so the numbers above are not stale
