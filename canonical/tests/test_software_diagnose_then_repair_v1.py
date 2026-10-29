@@ -46,7 +46,7 @@ def test_failing_test_in_verified_patch_out_and_the_tree_untouched(tmp_path: Pat
     before = _snapshot(tmp_path)
     result = dr.run(_args(), tmp_path)
     assert result["status"] == "VERIFIED_PATCH" and result["verified"] is True, result
-    assert result["steps"] == ["reproduce", "localize", "patch_search", "full_suite_gate"]
+    assert result["steps"] == ["reproduce", "localize", "patch_search", "full_suite_gate", "review"]
     assert result["gate"] == "PASS" and result["tests_discovered"] == 2 and result["tests_failed"] == 0
     assert result["target_path"] == "pkg/calc.py"
     diff = (tmp_path / result["diff_path"]).read_text()
@@ -346,21 +346,64 @@ def test_judge_pytest_is_the_same_answer_slower(tmp_path: Path):
     assert search["winning_mutation"]["kind"] == "EXPR_EXTEND"
 
 
-def test_non_plain_tests_fall_back_to_pytest_and_still_verify(tmp_path: Path):
+def test_non_plain_tests_are_judged_by_pytest_hosted_in_the_judge_process(tmp_path: Path):
     _fixture(tmp_path, bug="return w + h")
-    # a fixture parameter is not plain: no in-process judge, no spectrum -> the dynamic
-    # localizer and per-candidate pytest still verify the same patch
+    # a fixture parameter is not plain: pytest itself is hosted in the long-lived judge
+    # process -- the traced spectrum and the per-candidate verdicts come from pytest's
+    # own reports; one pytest process per candidate (15-22 s here) is gone
     (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
         "import pytest\nfrom pkg.calc import area\n\n@pytest.fixture\ndef four():\n    return 4\n\n"
         "def test_area(four):\n    assert area(3, four) == 12\n")
+    t0 = time.monotonic()
     result = dr.run(_args(), tmp_path)
+    seconds = time.monotonic() - t0
     artifact = json.loads((tmp_path / "out" / "dr.json").read_text())
-    search = artifact["steps"][2]
-    assert search["judge"]["in_process"] is False
-    assert search["judge"]["reason"].startswith("TEST_TAKES_PARAMETERS")
-    assert artifact["steps"][1]["status"] not in ("SPECTRUM_INPROCESS",)
+    loc, search = artifact["steps"][1], artifact["steps"][2]
+    assert search["judge"] == {"in_process": True, "reason": "PYTEST_HOSTED:TEST_TAKES_PARAMETERS:tests/test_calc.py:test_area"}
+    assert loc["status"] == "SPECTRUM_INPROCESS" and loc["target_basis"] == "SPECTRUM_TOP" and loc["failing_test_count"] == 1
+    assert all(a.get("judge") == "in_process" for a in search["attempts"])
     assert result["status"] == "VERIFIED_PATCH"
     assert "+    return w * h\n" in (tmp_path / result["diff_path"]).read_text()
+    assert seconds < 12, seconds          # measured 3.7 s (was 15-22 s under per-candidate pytest)
+
+
+def test_pytest_hosted_mode_covers_conftest_autouse_test_classes_fixture_params_and_ini(tmp_path: Path):
+    _fixture(tmp_path, bug="return w + h")
+    (tmp_path / "proj" / "conftest.py").write_text(
+        "import pytest\n\n@pytest.fixture(autouse=True)\ndef _env(monkeypatch):\n    monkeypatch.setenv('BRAIN_T', '1')\n\n"
+        "@pytest.fixture(params=[(3, 4, 12), (2, 5, 10)])\ndef case(request):\n    return request.param\n")
+    (tmp_path / "proj" / "pytest.ini").write_text("[pytest]\naddopts = -ra\n")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "import os\nimport pytest\nfrom pkg.calc import area\n\nclass TestArea:\n    def test_area(self, case):\n"
+        "        w, h, e = case\n        assert os.environ['BRAIN_T'] == '1'\n        assert area(w, h) == e\n")
+    result = dr.run(_args(), tmp_path)
+    artifact = json.loads((tmp_path / "out" / "dr.json").read_text())
+    loc, search = artifact["steps"][1], artifact["steps"][2]
+    assert search["judge"]["reason"] == "PYTEST_HOSTED:INI_CHANGES_COLLECTION:pytest.ini"
+    assert loc["status"] == "SPECTRUM_INPROCESS" and loc["failing_test_count"] == 2       # each fixture param is a test
+    assert result["status"] == "VERIFIED_PATCH" and search["winning_mutation"]["kind"] == "BINOP_SWAP"
+
+
+def test_pytest_hosted_judge_bounds_a_runaway_candidate_and_reads_verdicts_from_reports(tmp_path: Path):
+    from canonical.runtime import patch_inprocess_judge_v1 as j
+    _fixture(tmp_path, bug="return w * h - 1")
+    tree = tmp_path / "proj"
+    (tree / "tests" / "test_calc.py").write_text(
+        "import pytest\nfrom pkg.calc import area, twice\n\n@pytest.fixture\ndef four():\n    return 4\n\n"
+        "def test_area(four):\n    assert area(3, four) == 12\n\ndef test_twice():\n    assert twice(5) == 10\n")
+    mods = j.hosted_modules(tree, ["tests/test_calc.py"])
+    texts = ["def area(w, h):\n    while True:\n        pass\n\n\ndef twice(x):\n    return 2 * x\n",   # hangs
+             "def area(w, h):\n    return w * h\n\n\ndef twice(x):\n    return 2 * x\n",               # green
+             "def area(w, h):\n    return w\n\n\ndef twice(x):\n    return 2 * x\n",                   # one fails
+             "def area(w, h):\n    raise SystemExit(3)\n\n\ndef twice(x):\n    return 2 * x\n",        # exits
+             "def area(w, h):\n    return w * h\n\n\ndef twice(x):\n    return 3 * x\n",               # regresses twice
+             "def area(w, h:\n    return w * h\n"]                                                       # does not parse
+    t0 = time.monotonic()
+    res = dr._judge_batch(tree, "pkg/calc.py", mods, texts, sys.executable, "auto", time.monotonic() + 60,
+                          mode="pytest", pytest_args=["-p", "no:hypothesispytest"])
+    assert {k: v[0] for k, v in res.items()} == {0: 999, 1: 0, 2: 1, 3: 1, 4: 1, 5: 1}, res
+    assert time.monotonic() - t0 < 15
+    assert (tree / "pkg" / "calc.py").read_text().endswith("return w * h - 1\n\n\ndef twice(x):\n    return 2 * x\n")
 
 
 def test_literal_parametrize_is_plain_judged_in_process_and_feeds_synthesis(tmp_path: Path):
@@ -1083,3 +1126,80 @@ def test_the_probe_program_bounds_every_input_and_reports_a_timeout_row(tmp_path
     rows = json.loads((tmp_path / "rows.json").read_text())
     assert rows == [["R", "0"], ["R", "1"], ["E", "Timeout"]]
     assert time.monotonic() - t0 < 5
+
+
+def test_review_step_reports_mutation_coverage_and_types_for_the_shipped_patch_without_changing_the_verdict(tmp_path: Path):
+    _fixture(tmp_path)
+    r = dr.run(_args(), tmp_path)
+    assert r["status"] == "VERIFIED_PATCH" and r["verified"]
+    assert r["steps"][-1] == "review"
+    art = json.loads((tmp_path / "out" / "dr.json").read_text())
+    rv = [s for s in art["steps"] if s["step"] == "review"][0]
+    # mutation: the gate's own operators on the changed line, judged in-process; the
+    # named test `area(3, 4) == 12` pins `w * h` (w / h, w - h ... are killed)
+    assert rv["mutation"]["status"] == "MEASURED" and rv["mutation"]["mutants"] >= 1
+    assert rv["mutation"]["killed"] == rv["mutation"]["mutants"] and rv["mutation"]["kill_ratio"] == 1.0
+    assert rv["mutation"]["operators_from"] == "python.review.diff_mutation_gate.v1"
+    # coverage: every changed executable line was executed by the named tests
+    assert rv["coverage"] == {"status": "MEASURED", "changed_executable_lines": 1, "executed": 1, "uncovered": []}
+    # types: the existing type gate, loud about what it could not check
+    assert rv["types"]["from"] == "python.review.diff_type_gate.v1"
+    assert rv["types"]["gate"] in ("PASS", "PASS_BASELINE_ONLY")
+    assert rv["seconds"] < 3
+    assert r["review"] == {"mutation_kill_ratio": 1.0, "mutation_survivors": 0, "uncovered_changed_lines": 0,
+                           "type_gate": rv["types"]["gate"]}
+
+
+def test_review_names_the_mutants_a_weak_suite_cannot_see(tmp_path: Path):
+    # the suite pins the shipped line only at (1, 1) and (5, 1): `w / h` and `w // h`
+    # behave identically there, so the gate's Mult->Div mutant survives -- the review
+    # says so, with file/line/operator, and the verdict stays what the suite earned
+    _fixture(tmp_path, bug="return w * h - 1")
+    (tmp_path / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area\n\ndef test_area():\n    assert area(1, 1) == 1\n    assert area(5, 1) == 5\n")
+    tree = tmp_path / "proj"
+    patched = {"pkg/calc.py": "def area(w, h):\n    return w * h\n\n\ndef twice(x):\n    return 2 * x\n"}
+    before = (tree / "pkg" / "calc.py").read_text()
+    import difflib
+    diff_text = "".join(difflib.unified_diff(before.splitlines(keepends=True), patched["pkg/calc.py"].splitlines(keepends=True),
+                                             fromfile="a/pkg/calc.py", tofile="b/pkg/calc.py"))
+    scratch = tmp_path / "out" / ".brain_diagnose"
+    scratch.mkdir(parents=True)
+    (scratch / "patch.diff").write_text(diff_text)
+    from canonical.runtime import patch_inprocess_judge_v1 as judge_v1
+    ok, why, mods = judge_v1.plain_tests(tree, ["tests/test_calc.py"])
+    assert ok, why
+    rv = dr._review(tree=tree, repo=tmp_path, patched=patched, diff_text=diff_text, diff_path=scratch / "patch.diff",
+                    tests_tree=["tests/test_calc.py"], modules=mods, inproc=True, mode="plain", pytest_args=[],
+                    python_exe=sys.executable, confine="off", deadline=time.monotonic() + 60, scratch_root=scratch)
+    mut = rv["mutation"]
+    assert mut["status"] == "MEASURED" and mut["mutants"] >= 1
+    assert mut["survived"] >= 1 and mut["killed"] + mut["survived"] == mut["mutants"]
+    assert all(s["file"] == "pkg/calc.py" and s["line"] == 2 and s["operator"] for s in mut["survivors"])
+    assert any("/" in s["replacement"] for s in mut["survivors"])
+    assert rv["coverage"]["status"] == "MEASURED" and rv["coverage"]["uncovered"] == []
+    assert not (scratch / "review").exists()
+    # a review that cannot run in-process says so instead of guessing
+    rv2 = dr._review(tree=tree, repo=tmp_path, patched=patched, diff_text=diff_text, diff_path=scratch / "patch.diff",
+                     tests_tree=["tests/test_calc.py"], modules=[], inproc=False, mode="plain", pytest_args=[],
+                     python_exe=sys.executable, confine="off", deadline=time.monotonic() + 60, scratch_root=scratch)
+    assert rv2["mutation"]["status"] == "SKIPPED:NO_IN_PROCESS_JUDGE"
+    assert rv2["coverage"]["status"] == "SKIPPED:NO_IN_PROCESS_JUDGE"
+    assert rv2["types"]["gate"] in ("PASS", "PASS_BASELINE_ONLY")
+
+
+def test_review_off_skips_the_step_and_a_bare_constant_synthesis_is_an_overfit_signature(tmp_path: Path):
+    _fixture(tmp_path)
+    r = dr.run(_args(review="off"), tmp_path)
+    assert r["status"] == "VERIFIED_PATCH" and "review" not in r["steps"] and r["review"] is None
+    # a suite whose every expectation is 0 can be made green by `return 0`: a
+    # synthesized bare constant reads no input, so it is refused as overfit even
+    # though 0 is otherwise an exempt literal
+    other = tmp_path / "other"
+    other.mkdir()
+    _fixture(other, bug="return w * h")
+    (other / "proj" / "tests" / "test_calc.py").write_text(
+        "from pkg.calc import area\n\ndef test_area():\n    assert area(0, 4) == 0\n    assert area(-3, 4) == 0\n")
+    r2 = dr.run(_args(), other)
+    assert r2["status"].startswith("OPEN:ONLY_OVERFIT_SIGNATURE_GREENS:")
+    assert (other / "proj" / "pkg" / "calc.py").read_text().count("return w * h") == 1

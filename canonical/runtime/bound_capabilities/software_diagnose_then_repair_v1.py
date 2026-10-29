@@ -78,6 +78,8 @@ from canonical.runtime import patch_differential_witness_v1 as witness_v1
 from canonical.runtime import patch_inprocess_judge_v1 as judge_v1
 from canonical.runtime import expression_synthesis_v1 as synth_v1
 from canonical.runtime import hole_synthesis_v1 as hole_v1
+from canonical.runtime.bound_capabilities import python_review_diff_mutation_gate as mutation_gate
+from canonical.runtime.bound_capabilities import python_review_diff_type_gate as type_gate
 
 SCHEMA = "PROJECT_BRAIN_SOFTWARE_DIAGNOSE_THEN_REPAIR_V1"
 CAPABILITY_ID = "software.diagnose_repair.v1"   # no sequencing word ("then") in the id: the sentence door splits clauses on it
@@ -300,10 +302,15 @@ def _overfit_signature(desc: dict[str, Any], nums: list[Any], strings: list[str]
         return any(repr(v) == ret for v in [*nums, *strings] if v not in (0, 1, -1))
     if kind in ("EXPR_SYNTH", "HOLE_SYNTH"):
         try:
-            literals = {n.value for n in ast.walk(ast.parse(detail.split("-> ", 1)[-1], mode="eval"))
-                        if isinstance(n, ast.Constant)}
+            expr = ast.parse(detail.split("-> ", 1)[-1], mode="eval").body
         except SyntaxError:
             return False
+        if isinstance(expr, ast.Constant):
+            # a synthesized expression that is a bare constant reads no input at all:
+            # the suite's expected value written into the code, whatever the value
+            # (measured: `return 0` for a suite whose two expectations are both 0)
+            return True
+        literals = {n.value for n in ast.walk(expr) if isinstance(n, ast.Constant)}
         return any(v in literals for v in [*nums, *strings] if v not in (0, 1, -1))
     return False
 
@@ -323,7 +330,8 @@ def _replay(tree: pathlib.Path, target_rel: str, text: str, run_tests, scratch: 
 
 
 def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[str, Any]], texts: list[str],
-                 python_exe: str, confine: str, deadline: float) -> dict[int, int]:
+                 python_exe: str, confine: str, deadline: float, mode: str = "plain",
+                 pytest_args: list[str] | None = None) -> dict[int, int]:
     """One judge process for ``texts`` in ``copy_root`` (confined when the host can)."""
     batch_rel = ".brain_diagnose/batch"
     out_rel = ".brain_diagnose/judge.json"
@@ -338,7 +346,7 @@ def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[st
     out = copy_root / out_rel
     if out.exists():
         out.unlink()
-    program = judge_v1.judge_program(target_rel, modules, batch_rel, len(texts), out_rel)
+    program = judge_v1.judge_program(target_rel, modules, batch_rel, len(texts), out_rel, mode=mode, pytest_args=pytest_args)
     timeout = max(5, int(deadline - time.monotonic()))
     ran = False
     if confine in ("auto", "required") and confine_v1.available():
@@ -370,7 +378,7 @@ def _judge_batch(copy_root: pathlib.Path, target_rel: str, modules: list[dict[st
 
 
 def _spectrum(copy_root: pathlib.Path, modules: list[dict[str, Any]], python_exe: str, confine: str,
-              deadline: float) -> dict[str, Any]:
+              deadline: float, mode: str = "plain", pytest_args: list[str] | None = None) -> dict[str, Any]:
     """One in-process run of the plain tests under a line tracer (confined when the host
     can): Ochiai-ranked (path, line) over the tree's non-test files."""
     out_rel = ".brain_diagnose/spectrum.json"
@@ -378,7 +386,7 @@ def _spectrum(copy_root: pathlib.Path, modules: list[dict[str, Any]], python_exe
     out.parent.mkdir(parents=True, exist_ok=True)
     if out.exists():
         out.unlink()
-    program = judge_v1.spectrum_program(modules, out_rel)
+    program = judge_v1.spectrum_program(modules, out_rel, mode=mode, pytest_args=pytest_args)
     timeout = max(5, min(60, int(deadline - time.monotonic())))
     ran = False
     if confine in ("auto", "required") and confine_v1.available():
@@ -400,7 +408,7 @@ def _spectrum(copy_root: pathlib.Path, modules: list[dict[str, Any]], python_exe
     ranked = [r for r in data.get("ranked") or [] if r[2] > 0]
     return {"status": "SPECTRUM_INPROCESS" if ranked else "SPECTRUM_NO_SUSPICIOUS_LINE",
             "failing_test_count": data.get("failing"), "test_count": len(data.get("tests") or []),
-            "ranked": ranked}
+            "ranked": ranked, "hit_lines": data.get("hit_lines") or {}}
 
 
 def _assert_subjects(plain_mods: list[dict[str, Any]]) -> set[str]:
@@ -538,6 +546,132 @@ def _reproduce(tree: pathlib.Path, tests_rel: list[str], python_exe: str, timeou
             "traceback_files": [{"path": p, "frames": n, "lines": frame_lines.get(p, [])} for p, n in ranked]}
 
 
+REVIEW_MAX_MUTANTS = 40
+
+
+def _added_lines(diff_text: str) -> dict[str, set[int]]:
+    """New-side line numbers of the `+` lines of a unified diff, per file (the hunk
+    ranges the gate parses include context; the review wants the changed lines only)."""
+    out: dict[str, set[int]] = {}
+    rel, new_ln = "", 0
+    for raw in diff_text.splitlines():
+        if raw.startswith("+++ "):
+            rel = raw[4:].strip()
+            rel = rel[2:] if rel.startswith("b/") else rel
+        elif raw.startswith("@@"):
+            m = re.search(r"\+(\d+)", raw)
+            new_ln = int(m.group(1)) if m else 0
+        elif raw.startswith("-") and not raw.startswith("---"):
+            continue
+        elif raw.startswith("+") and not raw.startswith("+++"):
+            out.setdefault(rel, set()).add(new_ln)
+            new_ln += 1
+        elif raw.startswith((" ", "")) and rel and new_ln:
+            new_ln += 1
+    return out
+
+
+def _function_body_lines(text: str) -> set[int]:
+    """Statement lines inside function bodies: the lines a per-test tracer can see
+    (module-level statements run at import, before any test is traced)."""
+    try:
+        tree_ = ast.parse(text)
+    except SyntaxError:
+        return set()
+    out: set[int] = set()
+    for fn in ast.walk(tree_):
+        if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for n in ast.walk(fn):
+                if isinstance(n, ast.stmt) and not isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                    out.add(n.lineno)
+    return out
+
+
+def _review(*, tree: pathlib.Path, repo: pathlib.Path, patched: dict[str, str], diff_text: str, diff_path: pathlib.Path,
+            tests_tree: list[str], modules: list[dict[str, Any]], inproc: bool, mode: str, pytest_args: list[str],
+            python_exe: str, confine: str, deadline: float, scratch_root: pathlib.Path) -> dict[str, Any]:
+    """What the suite can SEE of the shipped patch, measured with Brain's own review
+    gates on the patched tree: (1) mutation -- python.review.diff_mutation_gate.v1's
+    line-confined mutants of the changed lines, each judged by the same in-process
+    judge that ranked the candidates (a mutant that survives is a changed line the
+    named tests execute but never observe); (2) coverage -- the traced spectrum of
+    the patched tree: changed executable lines the named tests never executed;
+    (3) types -- python.review.diff_type_gate.v1 (mypy when the interpreter has it,
+    PASS_BASELINE_ONLY said loudly otherwise).  Evidence about the suite's grip on
+    the patch, written to the ledger; it does not change the verdict."""
+    t0 = time.monotonic()
+    out: dict[str, Any] = {"step": "review"}
+    copy = scratch_root / "review"
+    shutil.rmtree(copy, ignore_errors=True)
+    shutil.copytree(tree, copy, ignore=shutil.ignore_patterns(*_SKIP))
+    try:
+        for rel, text in patched.items():
+            (copy / rel).write_text(text, encoding="utf-8")
+        lines_by_file = {rel: lines for rel, lines in _added_lines(diff_text).items() if rel in patched}
+        # 1. mutation: survivors are lines the tests do not pin
+        mut: dict[str, Any] = {"status": "SKIPPED:NO_IN_PROCESS_JUDGE"}
+        if inproc:
+            sites: list[dict[str, Any]] = []
+            texts: list[Any] = []
+            for rel, lines in lines_by_file.items():
+                for site in mutation_gate._mutants_for_text(rel, patched[rel], lines, REVIEW_MAX_MUTANTS - len(texts)):
+                    texts.append({rel: mutation_gate._apply_splice(patched[rel], rel, site)})
+                    sites.append(site.row(rel))
+                    if len(texts) >= REVIEW_MAX_MUTANTS:
+                        break
+            if not texts:
+                mut = {"status": "NO_MUTABLE_SITES", "mutants": 0}
+            else:
+                lead = next(iter(patched))
+                verdicts = _judge_batch(copy, lead, modules, texts, python_exe, confine, min(deadline, time.monotonic() + 60),
+                                        mode=mode, pytest_args=pytest_args)
+                survivors = [sites[i] for i in range(len(texts)) if verdicts.get(i, (None,))[0] == 0]
+                judged = [i for i in range(len(texts)) if i in verdicts]
+                mut = {"status": "MEASURED" if len(judged) == len(texts) else "PARTIAL:" + str(len(judged)) + "/" + str(len(texts)),
+                       "mutants": len(texts), "killed": len(judged) - len(survivors), "survived": len(survivors),
+                       "kill_ratio": round((len(judged) - len(survivors)) / len(judged), 4) if judged else None,
+                       "survivors": survivors[:20], "operators_from": "python.review.diff_mutation_gate.v1"}
+        out["mutation"] = mut
+        # 2. coverage: changed executable lines the named tests executed on the patched tree
+        cov: dict[str, Any] = {"status": "SKIPPED:NO_IN_PROCESS_JUDGE"}
+        if inproc:
+            spec = _spectrum(copy, modules, python_exe, confine, min(deadline, time.monotonic() + 60), mode=mode, pytest_args=pytest_args)
+            executed = {(path, int(ln)) for path, lns in (spec.get("hit_lines") or {}).items() for ln in lns}
+            if not spec.get("test_count"):
+                cov = {"status": "SKIPPED:" + str(spec.get("status"))}
+            else:
+                unc: list[dict[str, Any]] = []
+                n_exec = 0
+                for rel, lines in lines_by_file.items():
+                    executable = _function_body_lines(patched[rel]) or set(lines)
+                    for ln in sorted(lines & executable):
+                        if (rel, ln) in executed:
+                            n_exec += 1
+                        else:
+                            unc.append({"file": rel, "line": ln})
+                cov = {"status": "MEASURED", "changed_executable_lines": n_exec + len(unc), "executed": n_exec, "uncovered": unc[:20]}
+        out["coverage"] = cov
+        # 3. types: the existing gate, on the patched copy
+        try:
+            tg = type_gate.run({"diff_path": _rel(repo, diff_path), "worktree_path": _rel(repo, copy),
+                                "output_path": _rel(repo, scratch_root / "review_types.json"),
+                                "python_executable": python_exe, "timeout_s": 60}, repo)
+            out["types"] = {"gate": tg.get("gate"), "mypy_version": tg.get("mypy_version"),
+                            "blocking": tg.get("blocking_count", tg.get("blocking")), "from": "python.review.diff_type_gate.v1"}
+        except SystemExit as exc:
+            try:
+                reason = json.loads(str(exc.code)).get("reason")
+            except Exception:  # noqa: BLE001
+                reason = str(exc.code)
+            out["types"] = {"gate": "REFUSED:" + str(reason)[:160], "from": "python.review.diff_type_gate.v1"}
+        except Exception as exc:  # noqa: BLE001 - the review never breaks the verdict
+            out["types"] = {"gate": "ERROR:" + type(exc).__name__, "from": "python.review.diff_type_gate.v1"}
+    finally:
+        shutil.rmtree(copy, ignore_errors=True)
+    out["seconds"] = round(time.monotonic() - t0, 3)
+    return out
+
+
 def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     started = time.monotonic()
     repo = pathlib.Path(root).resolve()
@@ -600,6 +734,16 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         judge_mode = str(args.get("judge") or "auto")       # auto | pytest
         plain_ok, plain_why, plain_mods = (judge_v1.plain_tests(tree, tests_tree) if judge_mode == "auto"
                                            else (False, "JUDGE_PYTEST_REQUESTED", []))
+        judge_mode_inproc = "plain"
+        if not plain_ok and judge_mode == "auto":
+            # not plain (fixtures, conftest hooks, classes ...): host pytest itself in the
+            # long-lived judge process instead of one pytest process per candidate; the
+            # traced spectrum run below is also the probe -- no output, and the old
+            # per-candidate pytest path is used unchanged
+            judge_mode_inproc = "pytest"
+            plain_mods = judge_v1.hosted_modules(tree, tests_tree)
+            plain_ok = True
+            plain_why = "PYTEST_HOSTED:" + plain_why
         judge_row = {"in_process": plain_ok, "reason": plain_why}
         t0 = time.monotonic()
         loc_row: dict[str, Any] = {"step": "localize"}
@@ -607,7 +751,15 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
         loc_lines: dict[str, list[int]] = {}
         spectrum: dict[str, Any] = {"status": "NOT_PLAIN:" + plain_why} if not plain_ok else {}
         if plain_ok:
-            spectrum = _spectrum(tree, plain_mods, python_exe, confine, deadline)
+            spectrum = _spectrum(tree, plain_mods, python_exe, confine, deadline, mode=judge_mode_inproc, pytest_args=trim)
+            if judge_mode_inproc == "pytest" and not spectrum.get("ranked"):
+                # the hosted probe produced nothing (pytest not importable there, a
+                # collection error, a hang): back to the per-candidate pytest path
+                plain_ok, plain_mods = False, []
+                plain_why = "PYTEST_HOSTED_FAILED:" + str(spectrum.get("status")) + ":" + plain_why.split(":", 1)[-1]
+                judge_row = {"in_process": False, "reason": plain_why}
+                spectrum = {"status": "NOT_PLAIN:" + plain_why}
+        if plain_ok:
             # equal Ochiai score and call depth (every line the failing tests touched): the callable the
             # failing assertions name directly -- the subject under test -- comes first,
             # so `Rect(3, 4).area()` ranks area()'s lines ahead of __init__'s
@@ -732,7 +884,8 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
 
         def run_search(target_rel: str, cands: list[tuple[dict[str, Any], Any]], chooser) -> dict[str, Any]:
             def judge_batch(copy: pathlib.Path, texts: list[Any], dl: float) -> dict[int, int]:
-                return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl)
+                return _judge_batch(copy, target_rel, plain_mods, texts, python_exe, confine, dl,
+                                    mode=judge_mode_inproc, pytest_args=trim)
             if plain_ok:
                 return candidates_v1.evaluate_batch(
                     tree, target_rel, cands, judge_batch, run_tests,
@@ -1036,6 +1189,14 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
             gate = {"gate": "REFUSED:" + str(reason)[:160]}
         steps.append({"step": "full_suite_gate", "seconds": round(time.monotonic() - t0, 3), **gate})
         status = "VERIFIED_PATCH" if gate.get("gate") == "PASS" else "PATCH_FAILS_FULL_SUITE:" + str(gate.get("gate"))
+        # 5. review: what the named tests can see of the shipped lines (mutation,
+        #    coverage, types) -- evidence in the ledger, never a change of verdict
+        if status == "VERIFIED_PATCH" and str(args.get("review") or "auto") != "off" and remaining() > 5:
+            review_row = _review(tree=tree, repo=repo, patched=patched, diff_text=diff_text, diff_path=diff_out,
+                                 tests_tree=tests_tree, modules=plain_mods, inproc=plain_ok, mode=judge_mode_inproc,
+                                 pytest_args=trim, python_exe=python_exe, confine=confine, deadline=deadline,
+                                 scratch_root=scratch_root)
+            steps.append(review_row)
     except DiagnoseRepairRefusal as exc:
         status = str(exc)
     finally:
@@ -1061,9 +1222,14 @@ def run(args: dict[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]:
     output.parent.mkdir(parents=True, exist_ok=True)
     raw = (json.dumps(artifact, indent=2, sort_keys=True) + "\n").encode("utf-8")
     output.write_bytes(raw)
+    rv = next((st for st in steps if st.get("step") == "review"), {})
     return {
         "adapter": ADAPTER, "status": status, "verified": verified, "target_path": target_rel, "target_paths": target_files,
         "confined": confined, "steps": [s.get("step") for s in steps],
+        "review": {"mutation_kill_ratio": (rv.get("mutation") or {}).get("kill_ratio"),
+                   "mutation_survivors": (rv.get("mutation") or {}).get("survived"),
+                   "uncovered_changed_lines": len((rv.get("coverage") or {}).get("uncovered") or []) if (rv.get("coverage") or {}).get("status") == "MEASURED" else None,
+                   "type_gate": (rv.get("types") or {}).get("gate")} if rv else None,
         "diff_path": artifact["diff_path"], "diff_sha256": artifact["diff_sha256"],
         "gate": gate.get("gate"), "tests_discovered": gate.get("tests_discovered"),
         "tests_failed": gate.get("tests_failed"), "seconds": round(time.monotonic() - started, 3),

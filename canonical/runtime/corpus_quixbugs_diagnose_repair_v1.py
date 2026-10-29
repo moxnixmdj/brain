@@ -169,6 +169,7 @@ def one_program(qb: pathlib.Path, prog: str, *, deadline_s: int, keep_passing: i
         row["witness"] = {k: w.get(k) for k in ("status", "behaviour_classes", "tie_at_top", "property_inputs", "hypothesis")} if w else None
         row["synthesis_status"] = (search.get("synthesis") or {}).get("status")
         row["stop_reason"] = search.get("stop_reason")
+        row["review"] = result.get("review")
         if result.get("diff_path"):
             diff = (scratch / result["diff_path"]).read_text(encoding="utf-8")
             row["diff"] = [ln for ln in diff.splitlines() if ln[:1] in "+-" and not ln.startswith(("+++", "---"))]
@@ -230,6 +231,9 @@ def main(argv: list[str] | None = None) -> int:
                "correct_on_heldout": sum(1 for r in verified if r.get("verdict") == "CORRECT"),
                "plausible_only": sum(1 for r in verified if r.get("verdict") == "PLAUSIBLE_ONLY"),
                "by_status": by_status,
+               "review": {"patches_with_surviving_mutants": sum(1 for r in verified if ((r.get("review") or {}).get("mutation_survivors") or 0) > 0),
+                          "patches_with_uncovered_changed_lines": sum(1 for r in verified if ((r.get("review") or {}).get("uncovered_changed_lines") or 0) > 0),
+                          "type_gate": sorted({str((r.get("review") or {}).get("type_gate")) for r in verified})},
                "seconds_median": round(statistics.median(secs), 3) if secs else None,
                "seconds_max": max(secs) if secs else None, "seconds_total": round(time.perf_counter() - t_all, 1),
                "host_cpus": os.cpu_count(), "python": sys.version.split()[0],
