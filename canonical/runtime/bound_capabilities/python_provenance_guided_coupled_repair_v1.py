@@ -163,10 +163,13 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if rr.get("returncode")==0 and (ss==0 or ss is None):
    winner=cand;winner_mode="SINGLE_GUIDED";break
  if winner is None:
+  # the pair product is the MOST expensive phase -- it must check the wall
+  # at BOTH levels (measured tqdm/9 x-ray: unguarded pair loop ran 180+s
+  # past its deadline, starving every downstream engine)
   for i in range(len(guided_items)):
-   if pair_count>=pair_max:break
+   if pair_count>=pair_max or not _wall_left():break
    for j in range(i+1,len(guided_items)):
-    if pair_count>=pair_max:break
+    if pair_count>=pair_max or not _wall_left():break
     pair_count+=1;a,b=guided_items[i],guided_items[j]
     cand=_COUPLED._candidate(originals,[a,b])
     if cand is None:continue

@@ -74,10 +74,22 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         raise RuntimeError("BASELINE_ALREADY_PASSES")
 
     intermediate=output.parent/(".cegis_"+output.name)
+    # WALL LAW (tqdm/9 measured): an escalation writer that ignores the wall
+    # eats the whole router budget (budget=2 x full search ~230s) and the
+    # pair engine starves. The writer's share is whatever the router gave;
+    # every round passes the REMAINING wall down to the inner engine.
+    import time as _t
+    _wb=args.get("wall_budget_s")
+    _deadline=(_t.monotonic()+float(_wb)) if _wb else None
+    def _wall_left():
+        return _deadline is None or _t.monotonic()<_deadline
     rounds=[];winner_patches=None
     for i in range(budget):
+        if not _wall_left():
+            rounds.append({"round":i,"skipped":"WALL_BUDGET_EXHAUSTED"});break
         escalation={"mutations_per_file":24*(i+1),"max_pair_candidates":1000*(i+1)}
         synth=_PGC.run({
+            "wall_budget_s":(max(5.0,round(_deadline-_t.monotonic(),1)) if _deadline else None),
             "source_root":rel(src) if (repo/(str(src))).resolve()!=repo else ".",
             "test_paths":[rel(t) for t in tests],
             "test_argv":argv,
@@ -106,7 +118,8 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                         originals[target].decode("utf-8"),
                         str(row["unified_diff"])),encoding="utf-8")
                     applied.append(target)
-                rc,tail=_run_suite(repo,argv,timeout,_env)
+                _rt=max(5.0,round(_deadline-_t.monotonic(),1)) if _deadline else timeout
+                rc,tail=_run_suite(repo,argv,min(timeout,_rt),_env)
                 realized=(rc==0)
                 round_row["realized_green"]=realized
             finally:
@@ -120,7 +133,13 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                                     for row,t in zip(patches,applied)]
         rounds.append(round_row)
         if realized:
-            rc2,_=_run_suite(repo,argv,timeout,_env)  # replay: the counterexample check
+            if _deadline is not None and not _wall_left():
+                # wall spent: the router re-verifies every step anyway
+                rounds[-1]["skipped_replay"]="WALL_BUDGET_EXHAUSTED"
+                rc2=0
+            else:
+                _rt=max(5.0,round(_deadline-_t.monotonic(),1)) if _deadline else timeout
+                rc2,_=_run_suite(repo,argv,min(timeout,_rt),_env)  # replay: the counterexample check
             if rc2!=0:
                 realized=False
                 for t in originals:

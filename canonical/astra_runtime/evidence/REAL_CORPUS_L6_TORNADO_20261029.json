@@ -108,5 +108,18 @@
   "tqdm9_status": "STILL NOT_REPAIRED this round: test_si_format asserts ~7 boundary values -- the fix needs 2-3 SIMULTANEOUS numeric edits; the pair engine now gets its share but its pair-space sweep (focus-ordered) needs the next efficiency pass (skip strict-singles on multi-assert diagnosis; tighter pair ordering)",
   "l6_scoreboard": "1/4 unchanged; the multi-edit class now has BOTH its tool (pair engine with neighborhood values in grammar) and its wall share",
   "pending_verification": "full ladder + fleet re-verify after neighborhood family (canary passed: apply.verified repairs, refusals honest)"
+ },
+ "round6": {
+  "date": "20261029",
+  "landed": {
+   "family_reserve_law": "candidate families carry tags (family/ratio); legacy budgets byte-identical (provenance tagging, NOT value matching -- 999==999.0 reclassification was the real L5 regression the ladder gate caught)",
+   "pair_space_legacy_only": "pair enumeration excludes neighborhood entries (pair_max index-product dilution law)",
+   "coordinated_neighborhood_phase": "ONE candidate per multiplier applying every same-ratio neighborhood edit simultaneously (the decoded tqdm/9 shape), tried FIRST in the coupled engine, ~1 suite run per ratio",
+   "wall_governor_complete": "every engine now wall-bounded at every phase: CEGIS writer (rounds+realize+replay), PGC (pair loop was UNGUARDED -- faulthandler x-ray), coupled loop (entry deadline, strict-probe skip under 45s share, per-phase guards, shrunk suite timeouts); tqdm/9 measure 460s->246.6s with all three stages taking their shares",
+   "router_observability": "route_trace rows carry at_s/remaining_s"
+  },
+  "regression_cycle": "neighborhood family landed -> L5 broke (2 dilution mechanisms found: uniq[:64] value-reclassification + pair-space index-product) -> ladder gate caught it -> fixed by construction -> zero regression restored (writers 100% L1-L5, searchers P100)",
+  "tqdm9_remaining_seam": "coupled stage reaches evidence phases but pytest tracebacks name only the TEST file -- source-side focus needs test-execution evidence (trace the failing node once, focus pools on executed lines). This is the LAST named seam to 2/4.",
+  "l6_scoreboard": "1/4 (tornado/14) unchanged; all machinery for tqdm/9's decoded fix is IN and verified at L5; one seam remains"
  }
 }

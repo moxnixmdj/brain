@@ -113,9 +113,19 @@ _BINOP_SWAPS={
 }
 _BOOLOP_SWAPS={ast.And:ast.Or, ast.Or:ast.And}
 
-def _descriptor(node: ast.AST, kind: str, detail: str) -> dict[str, Any]:
+def _descriptor(node: ast.AST, kind: str, detail: str, family: str = "legacy", ratio: Any = None) -> dict[str, Any]:
+    # FAMILY TAG (L5 dilution law): every candidate carries its family so
+    # consumers can budget families SEPARATELY. Legacy families keep the
+    # exact trial budget they always had; the decoded neighborhood family
+    # draws from its own small reserve instead of eating legacy slots.
+    # RATIO carries the multiplier that produced a neighborhood value so
+    # consumers can apply the SAME multiplier across sites simultaneously
+    # (the coordinated boundary-retune class: 1000->999.95, 100->99.95,
+    # 10->9.995 is ONE logical edit spread over three constants).
     return {
         "kind":kind,
+        "family":family,
+        "ratio":ratio,
         "detail":detail,
         "lineno":getattr(node,"lineno",None),
         "col_offset":getattr(node,"col_offset",None),
@@ -177,47 +187,60 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
             # numeric site, only for abs(value)>=2 (0/1 boundaries are the
             # existing {0,1,-1} family's job).
             neighbors=[]
+            neighbor_ratio={}
             if isinstance(value,(int,float)) and not isinstance(value,bool) \
-                    and not isinstance(value,bool) and abs(value)>=2:
+                    and abs(value)>=2:
                 v=float(value)
                 for _m in (0.9995,0.99995,0.999):
                     _c=round(v*_m,6)
-                    if _c!=v and _c not in neighbors:neighbors.append(_c)
+                    if _c!=v and _c not in neighbor_ratio:
+                        neighbors.append(_c);neighbor_ratio[_c]=_m
                 if isinstance(value,float):
                     for _e in (0.005,0.05):
                         for _c in (round(v-_e,6),round(v+_e,6)):
-                            if _c!=v and _c not in neighbors:
-                                neighbors.append(_c)
+                            if _c!=v and _c not in neighbor_ratio:
+                                neighbors.append(_c);neighbor_ratio[_c]=None
             if isinstance(value,bool):
                 replacements=[not value]
             elif isinstance(value,(int,float)) and not isinstance(value,bool):
                 base=[0,1,-1]
                 if isinstance(value,int):
                     base += [value-1,value+1]
-                replacements=base+neighbors+numeric_literals
+                replacements=base+numeric_literals+neighbors
             elif isinstance(value,str):
                 replacements=string_literals
+            # provenance-tagged: classification by ORIGIN, never by value
+            # (999 == 999.0 is True in Python -- value-membership testing
+            # against `neighbors` reclassified legacy coerced reps as
+            # neighborhood and silently reordered the legacy stream; that
+            # was the real L5 regression, caught by the ladder gate).
             uniq=[]
+            tagged=[]
             for rep in replacements:
+                is_neigh=rep in neighbors
                 if rep==value or type(rep) is not type(value) and isinstance(value,bool):
                     continue
-                if isinstance(value,int) and isinstance(rep,float) \
-                        and not float(rep).is_integer() \
-                        and rep not in neighbors:
-                    # the int->float drop stays for junk (0.5 at an int
-                    # site); decoded boundary neighbors are exempt -- they
-                    # ARE the repair class (tqdm/9: 1000 -> 999.95)
-                    continue
-                if isinstance(value,int) and isinstance(rep,float) \
-                        and float(rep).is_integer():
-                    rep=int(rep)
+                if not is_neigh:
+                    # LEGACY PATH -- byte-identical to the pre-neighborhood
+                    # grammar so legacy candidates can never be displaced.
+                    if isinstance(value,int) and isinstance(rep,float) \
+                            and not float(rep).is_integer():
+                        continue
+                    if isinstance(value,int) and isinstance(rep,float) \
+                            and float(rep).is_integer():
+                        rep=int(rep)
                 if rep not in uniq:
                     uniq.append(rep)
-            for rep in uniq[:64]:
+                    tagged.append(is_neigh)
+            _legacy=[r for r,f in zip(uniq,tagged) if not f][:64]
+            _neigh=[r for r,f in zip(uniq,tagged) if f][:3]
+            uniq=_legacy+_neigh
+            for rep in uniq:
                 sig=(key,"const",repr(rep))
                 if sig in seen: continue
                 seen.add(sig)
-                yield key,_descriptor(node,"CONSTANT_REPLACE",repr(value)+"->"+repr(rep)),(
+                fam="neighborhood" if rep in neighbors else "legacy"
+                yield key,_descriptor(node,"CONSTANT_REPLACE",repr(value)+"->"+repr(rep),fam,neighbor_ratio.get(rep)),(
                     lambda n,rep=rep: ast.Constant(value=rep)
                 )
         if isinstance(node,ast.UnaryOp) and isinstance(node.op,ast.Not):
@@ -432,14 +455,23 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     attempts=[]
     winner=None
     tested=0
+    legacy_tested=0
+    neigh_tested=0
+    NEIGH_RESERVE=6  # own budget; legacy slots untouched (zero dilution)
     try:
         for key,desc,replacer in _candidate_specs(tree,nums,strings):
-            if tested>=max_candidates:
-                break
+            if desc.get("family")=="neighborhood":
+                if neigh_tested>=NEIGH_RESERVE:
+                    continue
+                neigh_tested+=1
+            elif legacy_tested>=max_candidates:
+                continue  # keep scanning: neighborhood reserve must stay reachable
             candidate=_render_candidate(source_text,key,replacer)
             if candidate is None or candidate==source_text:
                 continue
             tested+=1
+            if desc.get("family")!="neighborhood":
+                legacy_tested+=1
             source.write_text(candidate,encoding="utf-8")
             _purge_source_bytecode(source)
             result=_run_tests(repo,argv,timeout_s,env)

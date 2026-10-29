@@ -118,6 +118,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     wall = float(args.get("wall_budget_s") or 0) or None
     import time as _time
     _t0 = _time.monotonic()
+    def _at():return round(_time.monotonic()-_t0,1)
 
     def remaining() -> float:
         return (wall - (_time.monotonic() - _t0)) if wall else 1e9
@@ -162,7 +163,8 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 "where": _tb.format_exc()[-400:]}
     route_trace.append({"step": "cegis_writer",
                         "status": step.get("status"),
-                        "verified": step.get("verified")})
+                        "verified": step.get("verified"),
+                        "at_s": _at()})
     rc2, _ = _suite(repo, argv, timeout, env)
     repaired = rc2 == 0
 
@@ -170,7 +172,8 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if not repaired and remaining() < 90:
         route_trace.append({"step": "coupled_reporter",
                             "status": "SKIPPED_WALL_BUDGET",
-                            "remaining_s": round(remaining(), 1)})
+                            "remaining_s": round(remaining(), 1),
+                        "at_s": _at()})
     if not repaired and remaining() >= 90:
         _revert(originals); originals.clear()
         cpl = intermediate.parent / (".route_cpl_" + output.name)
@@ -210,7 +213,8 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if not repaired and remaining() < 60:
         route_trace.append({"step": "iterative_reporter",
                             "status": "SKIPPED_WALL_BUDGET",
-                            "remaining_s": round(remaining(), 1)})
+                            "remaining_s": round(remaining(), 1),
+                        "at_s": _at()})
     if not repaired and remaining() >= 60:
         _revert(originals); originals.clear()
         it = intermediate.parent / (".route_it_" + output.name)

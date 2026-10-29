@@ -126,9 +126,20 @@ def _pool(row,tests,per_file):
      any(abs(line-f)<=2 for f in focus):
    priority+=10000
   e=_edit(text,key,desc,replacer)
-  if e is not None:out.append((priority,e))
+  if e is not None:
+   e["family"]=desc.get("family") or "legacy"
+   if desc.get("ratio"):e["ratio"]=desc["ratio"]
+   out.append((priority,e))
  out.sort(key=lambda x:(-x[0],x[1]["start"],x[1]["end"],str(x[1]["mutation"])))
- return [e for _,e in out[:per_file]]
+ # FAMILY-RESERVE LAW (L5 dilution, ladder-measured): legacy families keep
+ # the FULL per_file budget they always had; neighborhood entries are an
+ # appended reserve, never slot competitors. Pair space is legacy-only:
+ # the pair loop enumerates the index product of the flattened pool under
+ # pair_max -- extra entries there push the winning pair past the cap
+ # (the L5 (Add->+,Add->+) repair fell outside 1000).
+ legacy=[e for _,e in out if e.get("family")!="neighborhood"][:per_file]
+ neigh=[e for _,e in out if e.get("family")=="neighborhood"][:6]
+ return legacy+neigh
 def _apply(text,edits):
  raw=text.encode(); es=sorted(edits,key=lambda e:(e["start"],e["end"]));last=-1
  for e in es:
@@ -174,16 +185,31 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not tests:raise RepairLoopError("TEST_PATHS_REQUIRED")
  argv=[str(x) for x in (args.get("test_argv") or _PATCH.suite_argv(sys.executable,*tests))]
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_files=max(1,min(int(args.get("max_files",8)),32));max_symbols=max(1,min(int(args.get("max_symbols_per_file",8)),64));per=max(1,min(int(args.get("mutations_per_file",24)),128));pair_max=max(1,min(int(args.get("max_pair_candidates",1200)),20000))
+ # WALL GOVERNOR (tqdm/9 measured): every phase is individually bounded but
+ # the phases in SUM exceeded the engine's share -- the strict probe burned
+ # the budget before the coordinated/singles/pair phases could run. One
+ # deadline at entry; every phase checks it; suite timeouts shrink to the
+ # remaining wall.
+ import time as _wt
+ _cwb=args.get("wall_budget_s")
+ _cdead=(_wt.monotonic()+float(_cwb)) if _cwb else None
+ def _cleft():return _cdead is None or _wt.monotonic()<_cdead
+ def _ctimeout():
+  return min(timeout,max(5.0,round(_cdead-_wt.monotonic(),1))) if _cdead else timeout
  out=(repo/str(args.get("output_path") or "")).resolve()
  if out==repo or repo not in out.parents:raise RepairLoopError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
  strict_probe=out.parent/(".strict_"+out.name)
  strict_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"test_argv":argv,"output_path":_rel(repo,strict_probe),"timeout_s":timeout,"max_rounds":args.get("max_strict_rounds",6),"max_files":max_files,"max_candidates_per_file":args.get("max_strict_candidates_per_file",120),"max_total_candidates":args.get("max_strict_total_candidates",1000)}
- try:
-  strict=_STRICT.run(strict_args,repo)
- except Exception as exc:
-  strict={"pass":False,"status":"OPEN__STRICT_ROUTE_DECLINED","reason":type(exc).__name__+":"+str(exc)}
- finally:
-  if strict_probe.exists():strict_probe.unlink()
+ if _cdead is not None and (_cdead-_wt.monotonic())<45:
+  # a low-share invocation goes straight to the evidence phases: the strict
+  # probe is a full extra search and would starve the coordinated phase
+  strict={"pass":False,"status":"SKIPPED_WALL_BUDGET_STRICT"}
+ else:
+  try:
+   strict=_STRICT.run(strict_args,repo)
+  except Exception as exc:
+   strict={"pass":False,"status":"OPEN__STRICT_ROUTE_DECLINED","reason":type(exc).__name__+":"+str(exc)}
+ if strict_probe.exists():strict_probe.unlink()
  if strict.get("pass"):
   result={"schema":SCHEMA,"status":"PASS__STRICT_PROGRESS_ROUTE","pass":True,"route":"STRICT_PROGRESS","strict_result":strict,"patches":strict.get("patches") or [],"localization_candidates":[],"crossed_nonmonotonic_valley":False,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"source_restored":strict.get("source_restored") is True,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
  else:
@@ -196,19 +222,39 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   originals={r["path"]:r["path"].read_bytes() for r in loc}
   pools={r["path"]:_pool(r,tests,per) for r in loc}
   items=[(r["path"],e) for r in loc for e in pools[r["path"]]]
-  single_scores={};tested_single=0
-  for p,e in items:
-   cand=_candidate(originals,[(p,e)])
-   if cand is None:continue
-   rr=_run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr);single_scores[(p,e["start"],e["end"],e["replacement"])]=(1 if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out") else ss);tested_single+=1
+  items_pairs=[it for it in items if it[1].get("family")!="neighborhood"]
   winner=None;winner_items=None;pair_count=0;crossed=False
-  for i in range(len(items)):
-   if pair_count>=pair_max:break
-   for j in range(i+1,len(items)):
-    if pair_count>=pair_max:break
-    pair_count+=1;a,b=items[i],items[j];cand=_candidate(originals,[a,b])
+  # COORDINATED-NEIGHBORHOOD PHASE FIRST (decoded tqdm/9 class): a real
+  # boundary fix retunes a FAMILY of thresholds with the SAME multiplier
+  # (1000->999.95, 100->99.95, 10->9.995 = one logical edit over three
+  # constants). One candidate per ratio, all same-ratio edits applied
+  # simultaneously -- ~1 suite run per ratio, cheaper than any sweep.
+  _ratios={}
+  for _p,_e in items:
+   if _e.get("family")=="neighborhood" and _e.get("ratio"):
+    _ratios.setdefault(_e["ratio"],[]).append((_p,_e))
+  for _ratio in sorted(_ratios):
+   if not _cleft():break
+   _ees=_ratios[_ratio];_cand=_candidate(originals,_ees)
+   if _cand is None:continue
+   _rr=_run_candidate(repo,originals,_cand,argv,_ctimeout(),env)
+   pair_count+=1
+   if _rr.get("returncode")==0 and not _rr.get("timed_out"):
+    winner=_cand;winner_items=_ees;crossed=True;break
+  single_scores={};tested_single=0
+  if winner is None:
+   for p,e in items:
+    if not _cleft():break
+    cand=_candidate(originals,[(p,e)])
     if cand is None:continue
-    rr=_run_candidate(repo,originals,cand,argv,timeout,env);ps=_STRICT._score(rr)
+    rr=_run_candidate(repo,originals,cand,argv,_ctimeout(),env);ss=_STRICT._score(rr);single_scores[(p,e["start"],e["end"],e["replacement"])]=(1 if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out") else ss);tested_single+=1
+  for i in range(len(items_pairs)) if not winner else range(0):
+   if pair_count>=pair_max or not _cleft():break
+   for j in range(i+1,len(items_pairs)):
+    if pair_count>=pair_max or not _cleft():break
+    pair_count+=1;a,b=items_pairs[i],items_pairs[j];cand=_candidate(originals,[a,b])
+    if cand is None:continue
+    rr=_run_candidate(repo,originals,cand,argv,_ctimeout(),env);ps=_STRICT._score(rr)
     if ps is None and rr.get("returncode")!=0 and not rr.get("timed_out"): ps=1
     if rr.get("returncode")==0 and ps==0:
      ka=(a[0],a[1]["start"],a[1]["end"],a[1]["replacement"]);kb=(b[0],b[1]["start"],b[1]["end"],b[1]["replacement"])
@@ -219,7 +265,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if winner:
    ok=True
    for _ in range(2):
-    rr=_run_candidate(repo,originals,winner,argv,timeout,env);rs=_STRICT._score(rr);rs=(0 if rr.get("returncode")==0 else (1 if rs is None and not rr.get("timed_out") else rs));replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")});ok=ok and rr.get("returncode")==0 and rs==0
+    rr=_run_candidate(repo,originals,winner,argv,_ctimeout(),env);rs=_STRICT._score(rr);rs=(0 if rr.get("returncode")==0 else (1 if rs is None and not rr.get("timed_out") else rs));replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")});ok=ok and rr.get("returncode")==0 and rs==0
    if not ok:winner=None;winner_items=None
   patches=[]
   if winner:
