@@ -370,7 +370,15 @@ _FIXTURE_SUFFIX = {
 _TYPED_EXAMPLE = {
     "jq_filter": 'jq filter ".a"', "expression": 'expression "2*x+1"', "variables": "variables x=2, y=3", "x_value": "x value 3.5",
     "y_value": "y value 2", "x_ticks": "x ticks [0, 1, 2]", "y_ticks": "y ticks [0, 5, 10]", "label": 'label "Curve A"',
-    "prompt": 'prompt "which phase is stable"', "pattern": 'pattern "test_*.py"', "test_argv": 'test argv "python3 -m unittest"',
+    "prompt": 'prompt "which phase is stable"', "pattern": 'pattern "test_*.py"',
+    # A command is introduced by the words a person uses for it, never by the slot's registry
+    # spelling.  Measured: `test argv "python3 -m pytest -x"` stated nothing, while
+    # `with the test command "python3 -m pytest -x"` stated the command exactly -- and seven
+    # capabilities were unaskable for want of the second form and nothing else.
+    "test_argv": 'with the test command "python3 -m pytest -x"',
+    # An interpreter is a program name or a path; "sample" is neither, so the slot stayed
+    # unstated in every sentence that offered one.
+    "python_executable": "python3",
     "objective": 'objective "A is greater than B"', "spec": 'spec "{\\"relation\\": \\"gt\\"}"', "product": 'product "python"',
     "major": "major version 3", "version_field": 'version field "version"', "field_name": 'field name "status"',
     "expected_status": 'expected status "SUPPORTED"', "url_key": 'url key "release_url"', "authoritative": "authoritative true",

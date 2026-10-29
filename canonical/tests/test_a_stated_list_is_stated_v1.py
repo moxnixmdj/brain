@@ -190,3 +190,50 @@ def test_the_refusal_still_names_the_inputs_that_are_missing(registry, work):
     # The diagnosis names the slot that is genuinely missing, in the caller's own terms.
     assert "module" in detail, detail
     assert "no_declared_input_missing" not in detail
+
+
+# ------------------------------------------- the fallbacks that must run BEFORE a refusal
+
+def test_a_rename_states_its_new_symbol(registry, work):
+    """The pinned binder has no rule for an identifier introduced by "to"; the typed one does.
+
+    Measured: every refactor verb was refused `contract_not_stated:module,new_symbol,...` for a
+    sentence that stated all of them, because the pinned binder failed the slot and the typed
+    grammar was never asked.
+    """
+    goal = ("Rename the symbol add to plus in the python module " + rel(work / "mod.py")
+            + " and save the report to " + rel(work / "reports" / "rename.json"))
+    (work / "reports").mkdir(exist_ok=True)
+    compiled = front.compile_goal(goal, registry, ROOT)
+    assert compiled["selected_capability"] == "python.refactor.rename_symbol.v1"
+    assert compiled["inputs"]["new_symbol"] == "plus"
+    assert compiled["inputs"]["qualname"] == "add"
+
+
+def test_an_identifier_slot_does_not_take_a_path():
+    """The anti-fabrication check cannot catch this one, because the file name IS in the sentence.
+
+    "new_symbol" is an identifier slot; `out.json` is not an identifier.  Without this law the
+    sentence "... and save the report to out.json" offered its own destination as the symbol name.
+    """
+    assert front._parse_typed_value("new_symbol", " out.json") is None
+    assert front._parse_typed_value("new_symbol", " plus") == "plus"
+    assert front._parse_typed_value("qualname", " pkg/mod.py") is None
+
+
+def test_an_output_path_the_pinned_binder_cannot_decide_is_bound_not_dropped(registry, work):
+    """An output that vanishes from the request makes the capability write wherever it likes.
+
+    Measured: the pypi provenance audit states `report_path` in plain words and the row only
+    passed because the missing artifact path was never noticed -- the handler meant to bind it sat
+    after an unconditional `continue`.
+    """
+    (work / "selection.json").write_text("{}", encoding="utf-8")
+    (work / "metadata.json").write_text("{}", encoding="utf-8")
+    entry = dict(registry["pypi.provenance.audit_live_artifact"])
+    goal = ("Audit the provenance of " + rel(work / "metadata.json") + " against the selection "
+            + rel(work / "selection.json") + " and save the report to "
+            + rel(work / "reports" / "provenance.json"))
+    bound = front.bind_all_inputs(goal, entry, ROOT, cycle=0, spool=set())
+    assert "report_path" in bound, bound
+    assert bound["report_path"].endswith(".json"), bound

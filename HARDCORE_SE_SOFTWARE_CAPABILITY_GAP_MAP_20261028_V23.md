@@ -1,6 +1,6 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-29 · measured on `arena/4ca3a720-brain` at `0c8aab6` + this unit (P5: a stated list is a statement)**
+**Hardcore software-engineering capability inventory · 2026-10-29 · measured on `arena/4ca3a720-brain` at `d16c84e` + this unit (P5: three binders took turns being the only one consulted)**
 
 _Supersedes `…GAP_MAP_20261028_V22.md`.
 
@@ -604,6 +604,65 @@ does not.
 
 Zero new test failures: the same 33 node ids fail across the six door/compiler files as at
 `9ebfa2a`, 155 passed plus the 15 + 11 pins of the last three units.
+
+### 7.4 Three binders took turns being the only one consulted
+
+The next pass went after the eight rows still refused with a contract that the sentence plainly
+stated. All three causes are the same architectural defect: **a slot gets ONE binder, chosen by the
+shape of the key, and if that binder cannot read the sentence the request is refused even when
+another binder in the same module could.**
+
+1. **The typed grammar was never asked.** `new_symbol` is declared KIND_IDENT, so
+   `bind_all_inputs` handed it to the pinned binder and, on failure, recorded it as defaulted and
+   moved on. The typed grammar next door reads the introducer the lexicon declares for it ("rename
+   to", "to", "new name") and binds it without hesitation. Every refactor verb was therefore refused
+   `contract_not_stated:module,new_symbol,qualname,...` for a sentence that stated all of them.
+   **Law: a slot the pinned binder cannot decide falls back to its declared kind before the request
+   is refused.**
+2. **An identifier slot took a path.** The generic branch accepts any bare token, so a sentence
+   ending "... and save the report to out.json" put `out.json` into `new_symbol`. The
+   anti-fabrication check cannot catch this — the file name *is* in the sentence. The fabrication is
+   the SHAPE, and the shape is what `SLOT_KIND` declares. **Law: an identifier slot does not take a
+   path**, and the check takes the whole token (measuring only its identifier-shaped prefix read
+   `pkg/mod.py` as `pkg`).
+3. **An output path was silently dropped.** The handler meant to bind an output the pinned binder
+   could not decide sat *after* an unconditional `continue`, so it was unreachable: the slot was
+   recorded as "defaulted" and vanished. A capability whose artifact path disappears still compiles
+   and still runs — and writes its report wherever the adapter felt like it. `pypi.provenance.
+   audit_live_artifact` only passed this measurement because nobody looked at where `report_path`
+   went. **Law: an output is never dropped** — it is bound to the artifact the sentence names, or to
+   a recorded spool path, or the request is refused.
+
+The instrument was wrong once more, in the same direction as §7.2: it stated a command as
+`test argv "python3 -m pytest -x"` — the registry's spelling, which no caller writes — and stated the
+interpreter as `"sample"`, which is not a program. Seven capabilities were unaskable for that reason
+alone. A slot is now stated with the words the lexicon declares for it: *"with the test command
+…"*, *"python3"*.
+
+| | by vocabulary | by name |
+|---|---|---|
+| §7.3 | 438 / 11 / 7 / 3 | 416 / 19 / 21 / 3 |
+| §7.4 | **440 / 11 / 5 / 3** | **427 / 8 / 21 / 3** |
+
+Named reach went from **409 → 427** across §7.3 and §7.4 with **0 lost**; 18 of the 27 rows closed
+were capabilities whose contract the machine could already bind and simply never asked. No compiler
+test moved: identical 33 failing node ids at `d16c84e` and here, 155 passed on both, 29 pins green.
+
+**What is left, and why each one is honest:**
+
+- `shell.command.run`'s *vocabulary* sentence says "the shell command cat <file>" — an unquoted
+  command, where the sentence does not say where the command ends. The named form binds it (§7.2).
+- `vcs.git.blame.v1` needs a file and a tree, and the vocabulary sentence names two files; the
+  named form binds both.
+- `python.refactor.inline_function` / `move_function` / `rename_symbol` are reached **by name** and
+  still fail on the vocabulary sentence, because six siblings share "refactor" and the ranker picks
+  the repair loop — the structural sibling choice of §7.1, unchanged and still the next unit.
+- `text.file.write` and `json.file.write` are routed away from by the body's own walk even when the
+  sentence names them (the named guard refuses rather than substituting).
+- The 21 `NO_SENTENCE` rows are capabilities whose declared contract has an output slot the
+  instrument's sentence cannot be built for (chart raster, OCR, document verification). They are
+  unaskable **by this instrument**, which is a statement about measurement, not about the machine,
+  and they are counted separately for exactly that reason.
 
 `shell.command.run` and `vcs.git.bisect.v1` are now askable (both are in the 17 above): the
 quoted-command sentence binds `argv`, which is what `_stated_command_argv` already implemented and

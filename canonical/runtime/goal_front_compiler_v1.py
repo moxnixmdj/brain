@@ -292,6 +292,13 @@ def _declared_literal_selector_keys(entry: Mapping[str, Any]) -> set[str]:
         if isinstance(binding, Mapping) and binding.get("type") == "literal"
         and isinstance(binding.get("value"), list) and str(key).endswith("_path")
     }
+# The extensions that mean "this token is a FILE, not a name".  Used by the identifier law: a
+# symbol slot that accepts a path is a slot that accepts a sentence's OUTPUT as its value.
+_FILE_SUFFIXES = frozenset({
+    ".py", ".json", ".txt", ".md", ".markdown", ".csv", ".tsv", ".yaml", ".yml", ".toml", ".xml",
+    ".html", ".htm", ".ini", ".cfg", ".log", ".diff", ".patch", ".sqlite", ".sqlite3", ".db",
+    ".pdf", ".docx", ".xlsx", ".png", ".jpg", ".jpeg", ".webp", ".zip", ".tar", ".gz", ".dot",
+})
 _NUMERIC_KEYS = {"x_value", "y_value", "major", "max_age_s"}
 _LINE_RANGE_KEYS = {"start_line", "end_line"}
 _LIST_NUMERIC_KEYS = {"x_ticks", "y_ticks"}
@@ -971,6 +978,22 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
             return json.loads(q)
         except ValueError:
             return q
+    if _declared_kind(key) in (input_role_lexicon.KIND_IDENT, input_role_lexicon.KIND_IDENTS):
+        # AN IDENTIFIER SLOT DOES NOT TAKE A PATH.  The generic branch below accepts any bare
+        # token, so a sentence ending "... and save it to out.json" put `out.json` into
+        # `new_symbol` -- a symbol name that is a file name, bound as though the caller had said
+        # it.  The sentence DID contain the word, which is why the anti-fabrication check cannot
+        # catch it: the fabrication is the SHAPE, and the shape is what the lexicon declares.
+        candidate = _quoted(tail)
+        if candidate is None:
+            # The WHOLE token, slashes included: measuring only its identifier-shaped prefix read
+            # "pkg/mod.py" as "pkg" and let the path through as a symbol name.
+            bare = re.match(r"\s*([A-Za-z_][A-Za-z0-9_./\\-]*)", tail)
+            candidate = bare.group(1) if bare else None
+        if candidate is not None and (
+                "/" in candidate or "\\" in candidate
+                or pathlib.PurePosixPath(candidate).suffix.lower() in _FILE_SUFFIXES):
+            return None
     value = _quoted(tail)
     if value is None and not quoted_only:
         # A REVISION IS READ WHOLE.  The bare-token class below stops at "~" and "^", so
@@ -1592,21 +1615,15 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                 # because the roles the sentence gives the files are only meaningful together.
                 pending_input_paths.append(key)
                 continue
-            # THE ADAPTER'S OWN KNOB  `input_role_lexicon_v1.SLOT_KIND` declares these slots
-                # KIND_TUNING with the reason written beside them: every adapter writes
-                # `args.get("<knob>") or <default>`, so the value is the machine's business, not the
-                # caller's.  The declaration existed and no binder read it, so `timeout_s` (15
-                # entries), `python_executable` (14), `run_tests` (6) and `repeats` each made their
-                # capability unaskable: the sentence could not state them, the compiler refused as
-                # `named_but_inputs_not_stated`, and no adapter ever ran.  A knob the sentence DOES
-                # state is still bound, and a knob it states unparseably still fails closed.
-                _record_defaulted(key)
-                continue
             if key.endswith("_path"):
-                # F26: an OUTPUT is a new artifact.  It never claims an artifact an earlier
-                # step already writes (that would overwrite the producer's output), so the
-                # produced-artifact binder is not offered here - only the future artifacts the
-                # sentence still names, and then the deterministic spool.
+                # AN OUTPUT IS NEVER DROPPED.  This branch used to be UNREACHABLE: the knob
+                # handling above it ended in `continue`, so an output path the pinned binder could
+                # not decide was recorded as defaulted and silently vanished from the request.  A
+                # capability whose artifact path disappears still compiles and still runs, and it
+                # writes its report wherever the adapter felt like.  Measured: the pypi provenance
+                # audit states `report_path` in plain words ("... and save it to .../out.json") and
+                # the row only passed because the missing path was never noticed.  F26: an OUTPUT
+                # is a new artifact, so it never claims one an earlier step already writes.
                 bound = None
                 try:
                     bound = _bind_output_by_future(goal, key, root, exclude=produced_paths)
@@ -1620,7 +1637,30 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                 if isinstance(bound, str) and bound:
                     taken.add(bound)
                 continue
-            raise
+            if input_role_lexicon.kind_of(key) == input_role_lexicon.KIND_TUNING:
+                # THE ADAPTER'S OWN KNOB  `input_role_lexicon_v1.SLOT_KIND` declares these slots
+                # KIND_TUNING with the reason written beside them: every adapter writes
+                # `args.get("<knob>") or <default>`, so the value is the machine's business, not the
+                # caller's.  The declaration existed and no binder read it, so `timeout_s` (15
+                # entries), `python_executable` (14), `run_tests` (6) and `repeats` each made their
+                # capability unaskable: the sentence could not state them, the compiler refused as
+                # `named_but_inputs_not_stated`, and no adapter ever ran.  A knob the sentence DOES
+                # state is still bound, and a knob it states unparseably still fails closed.
+                _record_defaulted(key)
+                continue
+            # THE DECLARED KIND IS A BINDER TOO, and it must get its turn before the request is
+            # refused.  The pinned binder measures one slot at a time against the whole sentence
+            # and gives up when the sentence does not match ITS shape; the typed grammar here
+            # reads the slot's declared introducers ("rename to", "to", "the function").  Measured:
+            # "Rename the symbol add to plus in the python module P" left `new_symbol` unbound --
+            # the pinned binder has no rule for an identifier introduced by "to", and the typed
+            # binder was never asked -- so all six refactor verbs were refused
+            # `contract_not_stated:module,new_symbol,qualname,...` for a sentence that stated every
+            # one of them.  The fallback invents nothing: the value still has to come out of the
+            # sentence, and it still has to be the declared kind (see the identifier law above).
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+            if isinstance(inputs[key], str) and inputs[key]:
+                taken.add(inputs[key])
     # F23: the roles the sentence states decide the keys the pinned binder left open.
     if pending_input_paths:
         joint = _joint_role_binding(goal, pending_input_paths, root, taken, produced_paths=produced_paths)
