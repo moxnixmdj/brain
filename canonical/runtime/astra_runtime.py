@@ -4,6 +4,8 @@ import argparse, ast, base64, gzip, hashlib, importlib.util, io, json, os, pathl
 import importlib.metadata
 from datetime import datetime, timezone
 
+from canonical.runtime.progress_streaming_v1 import hub, adapter as progress_adapter
+
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 
 _ACTIVE_CONTINUOUS_OBS_CONTEXT=None
@@ -4555,7 +4557,6 @@ def _goal_action(action):
           "attempt_count":evidence.get("attempt_count"),
         }
     if typ=="invoke_verified_bound_capability_adapter":
-        from canonical.runtime import verified_bound_capability_execution_adapter_v1 as promoted_bound
         capability_id=str(args.get("capability_id") or "")
         inputs=args.get("inputs")
         if not capability_id or not isinstance(inputs,dict):
@@ -4563,6 +4564,17 @@ def _goal_action(action):
               "type":typ,"pass":False,
               "errors":["PROMOTED_BOUND_CONTROLLER_ARGS_INVALID"],
             }
+        # Distributed execution: dispatch to a remote node when requested.
+        if args.get("distributed") is True or args.get("remote_node"):
+            from canonical.runtime.distributed_execution_v1 import (
+                execute_capability_distributed,
+            )
+            return execute_capability_distributed(
+                capability_id,
+                inputs,
+                prefer_local=True,
+            )
+        from canonical.runtime import verified_bound_capability_execution_adapter_v1 as promoted_bound
         return promoted_bound.execute(
             capability_id,
             inputs=inputs,
@@ -4849,6 +4861,266 @@ def _write_controller_checkpoint(path,data,trace,status="IN_PROGRESS"):
     return data
 
 
+def _find_result_ref_cycles(obj, cycles=None):
+    """Recursively find all cycle numbers referenced by ``{"$result": ...}``."""
+    if cycles is None:
+        cycles = set()
+    if isinstance(obj, dict):
+        if set(obj.keys()) == {"$result"}:
+            spec = obj.get("$result")
+            if isinstance(spec, dict):
+                c = spec.get("cycle")
+                if isinstance(c, int):
+                    cycles.add(c)
+        for v in obj.values():
+            _find_result_ref_cycles(v, cycles)
+    elif isinstance(obj, list):
+        for item in obj:
+            _find_result_ref_cycles(item, cycles)
+    return cycles
+
+
+def _build_dependency_waves(actions, start_cycle=0):
+    """Group actions into parallel waves based on $result dependencies.
+
+    Returns a list of waves; each wave is a list of cycle indices that can
+    execute in parallel. Actions in wave W may reference $result from any
+    action in waves 0..W-1 but not from the same or later waves.
+    """
+    n = len(actions)
+    deps = [set() for _ in range(n)]
+    for i in range(n):
+        raw = actions[i]
+        if not isinstance(raw, dict):
+            continue
+        refs = _find_result_ref_cycles(raw.get("args", {}))
+        # Also check the top-level action for $result in non-args fields
+        refs.update(_find_result_ref_cycles(raw))
+        for c in refs:
+            if start_cycle <= c < i:
+                deps[i].add(c)
+
+    # Topological wave decomposition (levels)
+    waves = []
+    remaining = set(range(n))
+    while remaining:
+        wave = [i for i in remaining if deps[i] <= set(range(start_cycle, i)) - remaining or not (deps[i] & remaining)]
+        # Simpler: an action can go in this wave if all its dependencies are
+        # already assigned to previous waves.
+        wave = [i for i in remaining if not (deps[i] & remaining)]
+        if not wave:
+            # Cycle in dependencies — fall back to sequential
+            waves.append([i] for i in sorted(remaining))
+            break
+        wave.sort()
+        waves.append(wave)
+        remaining -= set(wave)
+    return waves
+
+
+def _execute_action_cycle(cycle, raw_action, trace, step, mission, goal,
+                          composition_guard, composition_capsule,
+                          composition_contract, checkpoint_path, checkpoint,
+                          allowed_types, EVID_DIR, write_evidencej,
+                          _resolve_result_refs, _verify_action_expectation,
+                          _goal_action, Blocker, json):
+    """Execute a single action cycle. Returns (cycle, record, composition_head, error)."""
+    if not isinstance(raw_action, dict):
+        return cycle, None, None, Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
+
+    composition_row = None
+    if composition_guard is not None:
+        if cycle < len(composition_contract):
+            composition_row = composition_contract[cycle]
+            try:
+                composition_guard.assert_action_ready(composition_capsule, composition_row)
+            except Exception as exc:
+                return cycle, None, None, Blocker(
+                    "COMPOSITION_STATE_REQUIRED_EFFECT_UNAVAILABLE:" + type(exc).__name__ + ":" + str(exc)
+                )
+        elif cycle != len(composition_contract) or raw_action.get("type") != "finish":
+            return cycle, None, None, Blocker("COMPOSITION_STATE_UNDECLARED_ACTION_BYPASS:" + str(cycle))
+
+    try:
+        if composition_guard is not None and composition_row is not None:
+            action = composition_guard.resolve_action_from_capsule(composition_capsule, composition_row, dict(raw_action))
+        else:
+            action = _resolve_result_refs(dict(raw_action), trace)
+    except Exception as exc:
+        return cycle, None, None, Blocker("COMPOSITION_STATE_READ_FAILED:" + type(exc).__name__ + ":" + str(exc))
+
+    typ = action.get("type")
+    if typ not in allowed_types:
+        return cycle, None, None, Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_REJECTED:" + str(typ))
+    if not isinstance(action.get("args", {}), dict):
+        return cycle, None, None, Blocker("MODEL_INDEPENDENT_CONTROLLER_ARGS_INVALID")
+    action.setdefault("args", {})
+
+    try:
+        result = _goal_action(action)
+    except Exception as exc:
+        return cycle, None, None, Blocker("MODEL_INDEPENDENT_ACTION_ERROR:" + str(exc))
+
+    if isinstance(result, dict) and result.get("error"):
+        return cycle, None, None, Blocker("MODEL_INDEPENDENT_ACTION_ERROR:" + str(result.get("error")))
+
+    try:
+        _verify_action_expectation(action, result)
+    except Exception as exc:
+        return cycle, None, None, Blocker("ACTION_EXPECTATION_FAILED:" + str(exc))
+
+    composition_head = None
+    if composition_guard is not None and composition_row is not None:
+        try:
+            composition_capsule = composition_guard.append_action_result(composition_capsule, composition_row, action, result)
+            composition_verdict = composition_guard.verify_capsule(composition_capsule)
+            if composition_verdict.get("status") != "PASS":
+                return cycle, None, None, Blocker(
+                    "COMPOSITION_STATE_CAPSULE_POST_ACTION_INVALID:" + str(composition_verdict.get("reason"))
+                )
+            composition_head = composition_capsule.get("head_hash")
+        except Blocker:
+            raise
+        except Exception as exc:
+            return cycle, None, None, Blocker("COMPOSITION_STATE_COMMIT_FAILED:" + type(exc).__name__ + ":" + str(exc))
+
+    record = {"cycle": cycle, "plan": action, "declared_plan": json.loads(json.dumps(raw_action)), "result": result}
+    if composition_head is not None:
+        record["composition_capsule_head_hash"] = composition_head
+    return cycle, record, composition_head, None
+
+
+def _run_actions_async(actions, start_cycle, trace, step, mission, goal,
+                       composition_guard, composition_capsule, composition_contract,
+                       checkpoint_path, checkpoint, allowed_types,
+                       EVID_DIR, write_evidencej,
+                       _resolve_result_refs, _verify_action_expectation,
+                       _goal_action, Blocker, json, ROOT, resumed):
+    """Execute actions in parallel waves based on $result dependency graph.
+
+    Actions with no inter-dependencies run concurrently via ThreadPoolExecutor.
+    Results are committed to the trace/checkpoint after each wave completes.
+    Returns (output_dict_or_None, new_trace_len).
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    waves = _build_dependency_waves(actions, start_cycle)
+    max_workers = min(len(actions), (os.cpu_count() or 4) * 2)
+
+    for wave in waves:
+        # Finish action must run alone, last.
+        if any(actions[i].get("type") == "finish" for i in wave) and len(wave) > 1:
+            return None, len(trace)  # signal caller to fall back to sequential
+
+        futures = {}
+        with ThreadPoolExecutor(max_workers=min(len(wave), max_workers)) as pool:
+            for cycle in wave:
+                raw_action = actions[cycle]
+                fut = pool.submit(
+                    _execute_action_cycle,
+                    cycle, raw_action, trace, step, mission, goal,
+                    composition_guard, composition_capsule,
+                    composition_contract, checkpoint_path, checkpoint,
+                    allowed_types, EVID_DIR, write_evidencej,
+                    _resolve_result_refs, _verify_action_expectation,
+                    _goal_action, Blocker, json,
+                )
+                futures[fut] = cycle
+
+            wave_results = {}
+            for fut in as_completed(futures):
+                cycle = futures[fut]
+                try:
+                    c, record, comp_head, err = fut.result()
+                except Exception as exc:
+                    return None, len(trace)  # signal fallback
+                if err is not None:
+                    raise err
+                wave_results[cycle] = (record, comp_head)
+
+        # Commit wave results to trace in cycle order
+        for cycle in sorted(wave_results):
+            record, comp_head = wave_results[cycle]
+            trace.append(record)
+            checkpoint = _write_controller_checkpoint(
+                checkpoint_path, checkpoint, trace
+            )
+            interrupt_after = step.get("interrupt_after_controller_actions_once")
+            if interrupt_after is not None:
+                limit = int(interrupt_after)
+                if limit < 1 or limit > len(actions):
+                    raise Blocker("CONTROLLER_TEST_INTERRUPT_LIMIT_INVALID")
+                if len(trace) == limit and not checkpoint.get("test_interrupt_injected"):
+                    checkpoint["test_interrupt_injected"] = True
+                    checkpoint = _write_controller_checkpoint(
+                        checkpoint_path, checkpoint, trace
+                    )
+                    raise Blocker("CONTROLLER_CHECKPOINT_TEST_INTERRUPTION")
+
+            # Check for finish
+            if actions[cycle].get("type") == "finish":
+                summary = record["result"].get("summary", "")
+                if not summary.strip():
+                    raise Blocker("MODEL_INDEPENDENT_CONTROLLER_EMPTY_FINISH")
+                checkpoint = _write_controller_checkpoint(
+                    checkpoint_path, checkpoint, trace, status="COMPLETE"
+                )
+                composition_summary = None
+                if composition_guard is not None:
+                    verdict = composition_guard.verify_capsule(composition_capsule)
+                    if verdict.get("status") != "PASS":
+                        raise Blocker(
+                            "COMPOSITION_STATE_CAPSULE_TERMINAL_INVALID:"
+                            + str(verdict.get("reason"))
+                        )
+                    capsule_path = EVID_DIR / (
+                        checkpoint_path.stem + "__COMPOSITION_STATE_CAPSULE.json"
+                    )
+                    write_evidencej(capsule_path, composition_capsule)
+                    composition_summary = {
+                        "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_RUNTIME_BINDING_V2",
+                        "status": "PASS",
+                        "scope": "DETERMINISTIC_CAPABILITY_GRAPH_DECLARED_CROSS_CAPABILITY_STATE",
+                        "declared_cross_capability_state_no_bypass": True,
+                        "state_reads_are_capsule_sourced": True,
+                        "producer_action_and_execution_evidence_are_content_bound": True,
+                        "resume_prefix_is_capsule_head_checked": True,
+                        "semantic_declaration_completeness": "UNVERIFIED",
+                        "external_evidence_channel_completeness": "UNVERIFIED",
+                        "head_hash": composition_capsule.get("head_hash"),
+                        "record_count": verdict.get("record_count"),
+                        "latest_key_count": verdict.get("latest_key_count"),
+                        "evidence_path": str(capsule_path.relative_to(ROOT)).replace("\\", "/"),
+                        "acceptance_credit_delta": 0,
+                    }
+                output = {
+                    "adapter": "goal",
+                    "returncode": 0,
+                    "stdout": summary,
+                    "controller_mode": "MODEL_INDEPENDENT_ACTION_PLAN_ASYNC",
+                    "planner_source": None,
+                    "planner_transport": None,
+                    "planner_model_last": None,
+                    "cycles": len(trace),
+                    "trace": trace,
+                    "final_summary": summary,
+                    "controller_checkpoint": {
+                        "path": str(checkpoint_path.relative_to(ROOT)),
+                        "plan_sha256": checkpoint.get("plan_sha256"),
+                        "resumed": bool(resumed),
+                        "resume_count": int(checkpoint.get("resume_count") or 0),
+                        "resumed_from_action_index": start_cycle,
+                        "rewind_count": int(checkpoint.get("rewind_count") or 0),
+                        "last_rewound_from_action_index": checkpoint.get("last_rewound_from_action_index"),
+                    },
+                }
+                if composition_summary is not None:
+                    output["composition_state_capsule"] = composition_summary
+                return output, len(trace)
+
+    return None, len(trace)  # no finish found, caller continues
+
+
 def _run_model_independent_goal(step, mission, goal):
     actions=_controller_actions(step, mission)
     if actions is None:
@@ -4861,6 +5133,35 @@ def _run_model_independent_goal(step, mission, goal):
       "assert_python_test_audit_zero","assert_python_test_audit_supported_by_fresh_execution",
       "finish"
     }
+
+    # --- Progress streaming -----------------------------------------------
+    # Emit real-time progress events so external clients can observe SWE
+    # execution stages (fault localization, patch search, test gate, etc.).
+    goal_id = step.get("goal_id") or step.get("mission_id") or "unknown"
+    progress_adapter.stage_started(goal_id, "goal_execution", {
+        "action_count": len(actions),
+        "async_execution": bool(step.get("async_execution")),
+    })
+
+    # --- Async execution engine -------------------------------------------
+    # When ``async_execution`` is set on the step, independent actions are
+    # executed in parallel waves based on the ``$result`` dependency graph.
+    # Actions with no inter-dependency run concurrently via ThreadPoolExecutor;
+    # results are committed to the trace/checkpoint after each wave.
+    async_execution = bool(step.get("async_execution"))
+    if async_execution:
+        async_out, _ = _run_actions_async(
+            actions, start_cycle, trace, step, mission, goal,
+            composition_guard, composition_capsule, composition_contract,
+            checkpoint_path, checkpoint, allowed_types,
+            EVID_DIR, write_evidencej,
+            _resolve_result_refs, _verify_action_expectation,
+            _goal_action, Blocker, json, ROOT, resumed,
+        )
+        if async_out is not None:
+            return async_out
+        # Fall through to sequential execution if async could not handle
+        # the plan (e.g. finish not alone in its wave).
 
     composition_guard=None
     composition_contract=None
@@ -4913,6 +5214,11 @@ def _run_model_independent_goal(step, mission, goal):
         raw_action=actions[cycle]
         if not isinstance(raw_action,dict):
             raise Blocker("MODEL_INDEPENDENT_CONTROLLER_ACTION_NOT_OBJECT")
+
+        action_type = raw_action.get("type") if isinstance(raw_action, dict) else "unknown"
+        progress_adapter.stage_progress(goal_id, "goal_execution", cycle, len(actions), {
+            "action_type": action_type,
+        })
 
         composition_row=None
         if composition_guard is not None:
@@ -4988,6 +5294,20 @@ def _run_model_independent_goal(step, mission, goal):
         if composition_head is not None:
             record["composition_capsule_head_hash"]=composition_head
         trace.append(record)
+
+        action_type = action.get("type") if isinstance(action, dict) else "unknown"
+        if action_type == "finish":
+            progress_adapter.stage_completed(goal_id, "goal_execution", {
+                "cycles": len(trace),
+                "final_summary": result.get("summary", "") if isinstance(result, dict) else "",
+            })
+        else:
+            progress_adapter.stage_progress(goal_id, "goal_execution", cycle + 1, len(actions), {
+                "action_type": action_type,
+                "result_pass": result.get("pass") if isinstance(result, dict) else None,
+                "result_verified": result.get("verified") if isinstance(result, dict) else None,
+            })
+
         checkpoint=_write_controller_checkpoint(checkpoint_path,checkpoint,trace)
         interrupt_after=step.get("interrupt_after_controller_actions_once")
         if interrupt_after is not None:
@@ -6016,11 +6336,19 @@ def _inherit_verified_capabilities(problem):
             action=_render_bound_template(template,inputs)
         except Blocker:
             continue
+        require_aliases=_validate_effect_aliases(
+            entry.get("requires_as"),entry.get("requires") or [],"requires",cid,
+            allow_repeat_source=True,
+        )
+        provide_aliases=_validate_effect_aliases(
+            entry.get("provides_as"),entry.get("provides") or [],"provides",cid,
+            allow_repeat_source=False,
+        )
         cap={
           "id":cid,
           "source_capability_id":cid,
-          "requires":list(entry.get("requires") or []),
-          "provides":list(entry.get("provides") or []),
+          "requires":_alias_effects(entry.get("requires") or [],require_aliases),
+          "provides":_alias_effects(entry.get("provides") or [],provide_aliases),
           "cost":float(entry.get("cost",1)),
           "action":action,
           "result_fields":list(entry.get("result_fields") or []),
@@ -6036,6 +6364,30 @@ def _run_capability_planned_goal(step, mission, goal):
     if problem is None:
         return None
     problem=_inherit_verified_capabilities(problem)
+
+    # --- Auto-inject SWE premise facts ---------------------------------------
+    # ``python.source.file.available`` and ``python.test.corpus.available`` are
+    # required by 14 + 11 SWE capabilities (fault localization, patch search,
+    # repair, concrete-execution oracle, ...) but produced by NOTHING in the
+    # registry.  They are premises (the source file and test corpus exist), not
+    # outputs of another capability, so they must be initial facts.  Inject them
+    # when any reachable capability requires them, so repair loops compose
+    # end-to-end through the planner instead of dead-ending at
+    # UNREACHABLE_TARGET_EFFECTS.
+    _caps = problem.get("capabilities") or []
+    _required = set()
+    for _c in _caps:
+        _required.update(_c.get("requires") or [])
+    _provided = set()
+    for _c in _caps:
+        _provided.update(_c.get("provides") or [])
+    _initial = list(problem.get("initial_facts") or [])
+    for _premise in ("python.source.file.available", "python.test.corpus.available"):
+        if _premise in _required and _premise not in _provided and _premise not in _initial:
+            _initial.append(_premise)
+    if _initial != list(problem.get("initial_facts") or []):
+        problem["initial_facts"] = _initial
+
     planner=_load_capability_planner()
     try:
         planned=planner.plan_actions(problem)

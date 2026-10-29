@@ -24,7 +24,8 @@ def _smt(source: str) -> str:
         tp = root / "t.py"
         tp.write_text(source)
         return SMT.run({"target_path": tp.as_posix(),
-                        "output_path": (root / "o.json").as_posix()}, str(root))["status"]
+                        "output_path": (root / "o.json").as_posix(),
+                        "allow_unsafe_host_execution": True}, str(root))["status"]
 
 
 def _conc(source: str) -> str:
@@ -47,7 +48,7 @@ def test_neither_oracle_fires_on_correct_programs():
             contract = G._render(fam["contract"], k)
             expr = G._render(fam["correct"], k)
             src = f'def f(x: int) -> int:\n    """{contract}"""\n    return {expr}\n'
-            assert _smt(src) == "CONTRACTS_HOLD", (fam["name"], k, src)
+            assert _smt(src) == "NO_COUNTEREXAMPLE_FOUND", (fam["name"], k, src)
             assert _conc(src) == "CLEAN", (fam["name"], k, src)
             checked += 1
     assert checked >= 12

@@ -32,7 +32,8 @@ def _write_target(name: str, body: str) -> str:
 
 def _run(target: str) -> dict:
     out = str(WORK / "oracle.json")
-    return ORACLE.run({"target_path": target, "output_path": out}, str(ROOT))
+    return ORACLE.run({"target_path": target, "output_path": out,
+                       "allow_unsafe_host_execution": True}, str(ROOT))
 
 
 def test_oracle_finds_a_known_violation():

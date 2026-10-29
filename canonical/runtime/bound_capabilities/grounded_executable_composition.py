@@ -146,6 +146,8 @@ def compose(goal,grounding,registry,compiler,root,verified_initial_facts=None):
             entry=registry.get(cid)
             if not isinstance(entry,dict) or entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
                 raise CompositionError("CANDIDATE_NOT_VERIFIED:"+cid)
+            if entry.get("diagnostic_only") is True:
+                raise CompositionError("CANDIDATE_DIAGNOSTIC_ONLY:"+cid)
             if float(entry.get("incremental_spend_usd",0) or 0)!=0:
                 raise CompositionError("CANDIDATE_NONZERO_SPEND:"+cid)
             if not isinstance(entry.get("action_template"),dict):

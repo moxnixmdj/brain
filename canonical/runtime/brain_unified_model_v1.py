@@ -795,6 +795,7 @@ class UnifiedModel:
         capability_id: str | None = None,
         instance_id: str | None = None,
         context_paths: Iterable[str] | None = None,
+        oidc_token: str | None = None,
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
@@ -820,7 +821,8 @@ class UnifiedModel:
         if chosen.startswith("engine:") or chosen.startswith("meta:"):
             return self._dispatch_engine(goal, chosen, inputs, routing)
         return self._execute_capability(
-            goal, chosen, inputs, routing, instance_id, context_paths
+            goal, chosen, inputs, routing, instance_id, context_paths,
+            oidc_token=oidc_token,
         )
 
     # --------------------------------------------------------------- internals
@@ -858,6 +860,7 @@ class UnifiedModel:
         routing: Mapping[str, Any] | None,
         instance_id: str | None,
         context_paths: Iterable[str] | None = None,
+        oidc_token: str | None = None,
     ) -> dict[str, Any]:
         row = self.capabilities[cid]
         # A deliberate omission, recorded so it is not re-tried: refusing here
@@ -903,14 +906,49 @@ class UnifiedModel:
                 routing=routing,
                 capability_id=cid,
             )
+
+        # --- Module hash enforcement at solve boundary ---------------------
+        # Verify the adapter module's content hash against the registry's
+        # declared module_sha256 BEFORE delegating to execution. A mismatch
+        # means the code on disk differs from the verified code — fail closed
+        # at the gate, not inside the adapter.
+        # Only BOUND_CAPABILITY kind carries adapter_module/module_sha256;
+        # receipt-backed capabilities are admitted by execution evidence and
+        # take a different path inside the adapter.
+        if str(row.get("kind", "")) == "BOUND_CAPABILITY":
+            verification = row.get("verification") or {}
+            declared_module_sha = verification.get("module_sha256")
+            if isinstance(declared_module_sha, str) and declared_module_sha:
+                adapter_module = row.get("adapter_module")
+                if adapter_module:
+                    module_file = ROOT / "canonical/runtime/bound_capabilities" / (adapter_module + ".py")
+                    if not module_file.is_file():
+                        return self._failure(
+                            goal,
+                            "CAPABILITY_MODULE_MISSING:" + cid,
+                            routing=routing,
+                            capability_id=cid,
+                        )
+                    actual_module_sha = hashlib.sha256(module_file.read_bytes()).hexdigest()
+                    if actual_module_sha != declared_module_sha:
+                        return self._failure(
+                            goal,
+                            "CAPABILITY_MODULE_HASH_MISMATCH:" + cid,
+                            routing=routing,
+                            capability_id=cid,
+                        )
+
         try:
             from canonical.runtime.verified_bound_capability_execution_adapter_v1 import (
                 execute as execute_bound,
             )
 
+            exec_inputs = dict(inputs)
+            if oidc_token:
+                exec_inputs["oidc_token"] = oidc_token
             raw = execute_bound(
                 cid,
-                inputs=dict(inputs),
+                inputs=exec_inputs,
                 instance_id=instance_id or ("UNIFIED-MODEL-" + cid),
             )
         except Exception as exc:  # the adapter fails closed; so do we

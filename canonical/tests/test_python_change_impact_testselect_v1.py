@@ -239,7 +239,13 @@ class ChangeImpactRegistryContractTests(unittest.TestCase):
 
     def test_the_entry_is_a_verified_bound_capability(self):
         self.assertEqual(self.entry["status"], "VERIFIED_BOUND_CAPABILITY")
-        self.assertEqual(self.entry["provides"], ["python.source.change_impact.test_selection"])
+        self.assertEqual(self.entry["provides"], [
+            "python.source.change_impact.test_selection", CAPABILITY_ID,
+        ])
+        with open(os.path.join(REPO_ROOT, "canonical", "runtime", "BOUND_CAPABILITY_REGISTRY_V1.json"),
+                  "r", encoding="utf-8") as handle:
+            capabilities = json.load(handle)["capabilities"]
+        self.assertIn(CAPABILITY_ID, capabilities["python.software.issue_to_pr.orchestrate.v1"]["requires"])
         self.assertEqual(self.entry["requires"], [])
         self.assertEqual(self.entry["adapter_module"], "python_change_impact_testselect")
         self.assertEqual(self.entry["incremental_spend_usd"], 0)

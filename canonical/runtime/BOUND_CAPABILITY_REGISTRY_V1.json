@@ -58,6 +58,7 @@
       "verification": {
         "independently_verified_by": "archive.verify.tar_gz.gnu",
         "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+        "module_sha256": "d86fc673b2d250b965b33b1db98b551d2c1400311ea28f9911b2d891cce5577f",
         "observed_effect": {
           "member_count": 2,
           "output_sha256": "5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6"
@@ -114,6 +115,7 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "mission_id": "ASTRA-VERIFY-MANIFEST-ARCHIVE-001",
+        "module_sha256": "644aa3bedfe0734eddbdb9a94fa19013d56865e614a6eb0ee69ddd93e7b77dfe",
         "observed_effect": {
           "member_count": 2,
           "verified": true
@@ -205,6 +207,7 @@
         "independent_output_sha256": "c5ab48e8f4b30a1f7946a6a24db16f19e5896b188f19b0cade5636e98dabe768",
         "independent_verified": true,
         "mission_id": "ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4",
+        "module_sha256": "2d3fe3889c6f3cc0b42117809668a63dd7b8f197b9aa4fe47dd1c8f8c4d1ae39",
         "observed_effect": {
           "adapter": "bound_capability_cli",
           "argv": [
@@ -353,6 +356,7 @@
         "independent_output_sha256": "4900161bd3b20d98a23058a557c6ceb3ef2116f0312b39540190fb5b56f70fe9",
         "independent_verified": true,
         "mission_id": "ASTRA-AUTO-VERIFY-NPM-DFINITY-CBOR-B52D51692BC6",
+        "module_sha256": "914b77c8951415571bb763a0ac8e0b330b8254c459847f4dc34b51b6898b90d9",
         "observed_effect": {
           "adapter": "node_library_codec",
           "decode_export": "decode",
@@ -492,6 +496,7 @@
         "independent_output_sha256": "9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e",
         "independent_verified": true,
         "mission_id": "ASTRA-AUTO-VERIFY-NPM-MSGPACK-MSGPACK-69DD66DA69F7",
+        "module_sha256": "914b77c8951415571bb763a0ac8e0b330b8254c459847f4dc34b51b6898b90d9",
         "observed_effect": {
           "adapter": "node_library_codec",
           "decode_export": "decode",
@@ -666,6 +671,7 @@
         "independent_output_sha256": "18ea9363cf47f7a7072b7fd8522e44de4463ecd136a36be405805b89f753b2f8",
         "independent_verified": true,
         "mission_id": "ASTRA-AUTO-VERIFY-PYPI-BSON-MODERN-C0BB873E73B6",
+        "module_sha256": "edddc495d4b6ba9a0e717854b5e5e5fc4c13fd55107577fa3efead25bda8253f",
         "observed_effect": {
           "adapter": "python_library_codec",
           "encode_callable": "dumps",
@@ -798,6 +804,7 @@
         "independent_output_sha256": "9e0e4c4b36b56bfe36758b790eb035dd3fbf9a1b4f3f625999590dd228d4cb6e",
         "independent_verified": true,
         "mission_id": "ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983",
+        "module_sha256": "edddc495d4b6ba9a0e717854b5e5e5fc4c13fd55107577fa3efead25bda8253f",
         "observed_effect": {
           "adapter": "python_library_codec",
           "encode_callable": "packb",
@@ -877,6 +884,7 @@
         "independent_falsification_tests_passed": 14,
         "independently_verified": true,
         "model_dependency_count": 0,
+        "module_sha256": "8d80d6f7c6ad374b18d666ba29d7b89fc57eb008ea8e7f485633e532a3b48826",
         "real_rotated_ocr_smoke_passed": true,
         "receipt_path": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json",
         "verifier_merge_sha": "0d2389934d3fe0a7a89009096bf37e769fdc5515",
@@ -951,6 +959,7 @@
         "independent_falsification_passed": 6,
         "independently_verified": true,
         "model_dependency_count": 0,
+        "module_sha256": "189216cb4043d4c400b55a0f97331a0e7aef4160473e3264b7a0306941fe48e8",
         "receipt_path": "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json",
         "verifier_merge_sha": "757a8a9648c82953238aec6c0e481de99ab98ad4",
         "verifier_pull_request": 2713,
@@ -1025,6 +1034,7 @@
         "independent_falsification_passed": 6,
         "independently_verified": true,
         "model_dependency_count": 0,
+        "module_sha256": "e1d561a7446f5bc67728f22c0621184cc542a4a63567fe731e2bd93c8c34e1b1",
         "receipt_path": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json",
         "verifier_merge_sha": "ed91f366ea9690bcfb4aa8406887155a51c027c8",
         "verifier_pull_request": 2715,
@@ -1103,6 +1113,7 @@
         "independent_test_blob_sha": "d327f22c7d35e754298f477660a140198e042999",
         "independently_verified": true,
         "model_dependency_count": 0,
+        "module_sha256": "7505b1edf9b216aa82d382b75e25710b0ba1ccb06ce03be8e30462eb69125d28",
         "neighboring_regression_tests_passed": 34,
         "receipt_path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_SPRITE_INDEPENDENT_VERIFY_20261011_V1.json",
         "verification_class": "FOCUSED_PLUS_INDEPENDENT_SECOND_CARRIER",
@@ -1168,6 +1179,7 @@
         "heldout_chartography_cases_consumed": 0,
         "independently_verified": true,
         "model_dependency_count": 0,
+        "module_sha256": "6f4b0b8dcea117b114896a3edd55bbcba67f9529e586050ea5b061555b29816e",
         "receipt_path": "canonical/verification/CHART_LEGEND_STYLE_BINDING_V1_VERIFY_20261011.json",
         "verifier_pull_request": 2709,
         "verifier_repository": "moxnixmdj/verification-capsule-runner",
@@ -1233,6 +1245,7 @@
         "exact_module_blob_sha": "258999b07287287db2037af777973d5bbb39116d",
         "geometry_cases_passed": 40,
         "independent_verified": true,
+        "module_sha256": "9bf335cb49804902b9034a6a7b662c04c8207e0b9eaccfd06fceb8652e7fe5bd",
         "receipt_path": "canonical/verification/CHART_RASTER_SCENE_GRAPH_V1_INDEPENDENT_VERIFY_20261011.json",
         "verifier_merge_sha": "f2b87c2491fb826f6e3c1f12d53fc14abda1a96d",
         "verifier_pull_request": 2699,
@@ -1295,6 +1308,7 @@
       "verification": {
         "exact_solver_blob_sha": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
         "independent_verified": true,
+        "module_sha256": "6d1ec1be9f632c925188b2ccacef0853943c8c1738d4a43c5cd24c173a090eb1",
         "public_verifier_run_id": 38147697520,
         "receipt_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
         "verified_case": 2
@@ -1354,6 +1368,7 @@
       "verification": {
         "exact_solver_blob_sha": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
         "independent_verified": true,
+        "module_sha256": "6d1ec1be9f632c925188b2ccacef0853943c8c1738d4a43c5cd24c173a090eb1",
         "public_verifier_run_id": 38147697520,
         "receipt_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
         "verified_case": 1
@@ -1462,6 +1477,7 @@
       "verification": {
         "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
         "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-IMPACT-V1",
+        "module_sha256": "1ea1626238320ccd2c2c5e6121a7345eae9dd8dc4f9127ba11f5045c15adf848",
         "observed_effect": {
           "output_verified": true
         },
@@ -1572,6 +1588,7 @@
       "verification": {
         "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
         "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-INCREMENTAL-INDEX-V1",
+        "module_sha256": "6a667d76b75dac7108e2e7337d401f195cc6a23e4dcdcb7bb485a39319d9600a",
         "observed_effect": {
           "output_verified": true
         },
@@ -1582,10 +1599,11 @@
       "action_template": {
         "args": {
           "capability_id": "code.multilanguage.parse.tree_sitter.v1",
-          "output_path": "${input.output_path}"
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -1611,7 +1629,8 @@
         "error-tolerant"
       ],
       "limitations": [
-        "Uses pinned tree_sitter 0.20.4 + tree_sitter_languages 1.10.2 when available, else falls back to deterministic python ast for python subset. Never invents parses, error-tolerant, incremental-ready."
+        "Requires a caller-declared source root; fails closed on missing substrate, parse errors, no supported files, or a file limit. A Python AST fallback is diagnostic only and cannot establish tree-sitter availability.",
+        "Files in ignored directories and unsupported extensions are out of scope. Definitions are syntactic approximations, not a complete semantic symbol table; the historical receipt does not independently verify the current implementation."
       ],
       "platforms": [
         "linux",
@@ -1620,9 +1639,7 @@
       ],
       "provides": [
         "code.ast.tree_sitter.available",
-        "code.symbols.multilanguage.indexed",
-        "python.source.file.available",
-        "python.test.corpus.available"
+        "code.symbols.multilanguage.indexed"
       ],
       "requires": [],
       "result_fields": [
@@ -1641,14 +1658,54 @@
         "skipped_count"
       ],
       "source": {
-        "module": "tree_sitter",
+        "adapter_path": "canonical/runtime/bound_capabilities/code_multilanguage_tree_sitter_v1.py",
+        "dependency_closure": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "resolver": "pip-download-only-binary",
+          "root_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "root_project": "tree_sitter_languages",
+          "root_version": "1.10.2",
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "source_only_artifacts_allowed": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "bytes": 490490,
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter/0.20.4/json",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "url": "https://files.pythonhosted.org/packages/3f/ce/80b12e0e470bf939dd57507fedad5cdc30e92391703031561e829d6a1819/tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "0.20.4"
+            },
+            {
+              "bytes": 8422544,
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "url": "https://files.pythonhosted.org/packages/96/81/ab4eda8dbd3f736fcc9a508bc69232d3b9076cd46b932d9bf9d49b9a1ec9/tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "licenses": {
+          "tree_sitter": "MIT",
+          "tree_sitter_languages": "Apache-2.0"
+        },
+        "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+        "project": "tree_sitter_languages",
         "type": "pypi",
-        "version_family": ">=0.20.4"
+        "version": "1.10.2",
+        "wheel_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "wheel_sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-CODE-MULTILANGUAGE-PARSE-TREE_SITTER-V1",
+        "module_sha256": "4c32d133dcb517fbcaa2cba347a59b92bec26add776cf0711739c16f62319bd7",
         "observed_effect": {
           "verified": true
         },
@@ -1687,15 +1744,17 @@
         "multi-language"
       ],
       "limitations": [
-        "Candidate-only exact-byte edits bounded by real tree-sitter nodes; fresh matching index and impact artifacts are mandatory.",
-        "The candidate must reparse without syntax errors and pass the selected test command for every replay; original bytes are restored in all cases, and no merge or promotion authority is conferred."
+        "Candidate-only exact-byte edits bounded by real tree-sitter nodes; indexed row hashes and the complete current file set within the bounded indexed root must match, and output may not overwrite indexed source or input artifacts.",
+        "Python candidates require configured pytest on each replay and explicit selected plus inferred indexed test files, each with a reported passing case. Helpers and conftest files are not inferred as test suites. Nonstandard undiscovered names and tests outside the indexed root remain out of scope.",
+        "Non-Python candidates may run an explicit command, but its exit status alone cannot verify a test suite; such candidates return PATCH_ORACLE_UNVERIFIED until a language-specific oracle is available.",
+        "Trials copy the repository without .git or caches, so Git-dependent tests may be unavailable. The copy is not an OS sandbox: test code and symlinks can still access the host; only edited source bytes are checked in the original checkout."
       ],
       "platforms": [
         "linux"
       ],
       "provides": [
         "code.patch.tree_sitter.verified",
-        "code.patch.multilanguage.test_verified"
+        "code.patch.python.pytest_verified"
       ],
       "requires": [
         "code.symbols.tree_sitter.indexed",
@@ -1708,6 +1767,8 @@
         "output_verified",
         "verified",
         "status",
+        "oracle_scope",
+        "candidate_intact_after_runs",
         "source_restored",
         "test_pass_count",
         "unified_diff",
@@ -1759,8 +1820,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
         "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-PATCH-VERIFY-V1",
+        "module_sha256": "943c00ccda642344d352a6600c7e2cd3ca07e4feeffe6f189d0b892ce7ffd821",
         "observed_effect": {
           "output_verified": true
         },
@@ -1853,6 +1916,7 @@
         "independently_verified_by": "decision.synthesis.verify.stdlib",
         "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
         "model_dependency_count": 0,
+        "module_sha256": "4e640a6efb2c8113ad2c62a82b242f223f9aa8f96693b3e3ff2a6ac00c06040f",
         "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd",
         "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
         "public_job_id": 109657545598,
@@ -1941,6 +2005,7 @@
       "verification": {
         "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
         "model_dependency_count": 0,
+        "module_sha256": "aff1219f74880e7da64be48a224c287c2049b5851421423fad45a1ee10692bd3",
         "producer_independent": true,
         "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
         "public_job_id": 109657545598,
@@ -2009,6 +2074,7 @@
         "independent_verified": true,
         "independent_verifier_capability": "pdf.extract.text.pypdf",
         "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
+        "module_sha256": "e2aac635b583e5d2cae4208bb8f63af409858420aaef8f40c6b5ec9c7ab05e07",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json"
       }
     },
@@ -2089,6 +2155,7 @@
           "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-INTENT-CHAIN-001__RECEIPT.json"
         },
         "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+        "module_sha256": "96aefc059312d993196742f02a5e58b33ffe80b81d66a7c9d74cf6423b301748",
         "observed_effect": {
           "output_bytes": 36826,
           "output_path": "canonical/astra_runtime/tmp/DOCX_LIBRARY_VERIFY.docx",
@@ -2166,6 +2233,7 @@
       "verification": {
         "independently_verified_by": "docx.document.verify.intent_ooxml",
         "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+        "module_sha256": "6a530bb74b114cc1b246f15e4323ce2c1747a526385483ddb0455293e7547fe4",
         "observed_effect": {
           "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
           "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
@@ -2233,6 +2301,7 @@
           "source_record_verified": true
         },
         "mission_id": "ASTRA-VERIFY-DOCX-INTENT-CHAIN-001",
+        "module_sha256": "a62189b0628b4d7b5cc404836df548328ff7890c65e3ca62e11e2f5a341af035",
         "observed_effect": {
           "docx_sha256": "e169aa79677b959917095989d5a7387da0d7b4c385f1ee296b5e09af295f5164",
           "intent_path": "canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx.intent.json",
@@ -2295,6 +2364,7 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+        "module_sha256": "a568f5568096e679cc8250859b5491b7c22e50b7e2f1d7ff3d110b5f2cc882fa",
         "observed_effect": {
           "paragraphs_ok": true,
           "producer_sha256": "02c358981319f7dbe12dee7431b4ed88633d093db4aa64ed078c715dc7cee4aa",
@@ -2395,6 +2465,7 @@
         "exact_regression_blob": "590a1e50f11bc2903b56d41a00c5354ec2501c44",
         "independent_fresh_live_generic_v2_status": "PASS",
         "job_id": 109780804595,
+        "module_sha256": "1e8335c57471ff4505a517e005bf67d61057872e89b335e5c9d358b59ea3bc5b",
         "public_run_id": 36682488104
       }
     },
@@ -2499,6 +2570,7 @@
         "exact_regression_blob": "467a9f4f9b835ca8f65fd19b9335770e7b0ef31b",
         "independent_full_surface_cross_domain_status": "PASS",
         "inherited_relation_blob": "d66a7eb30774f66160b698d8082947776888293d",
+        "module_sha256": "925fe0e0260ba1b7355075d76d83ad5a6883406cfebb18769b9106539b18f46d",
         "public_job_id": 109789596373,
         "public_pr": 166,
         "public_repository": "moxnixmdj/verification-capsule-runner",
@@ -2514,13 +2586,16 @@
           "source_path": "${input.source_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
         "type": "invoke_capability"
       },
       "adapter_module": "evidence_oracle_concrete_v1",
+      "provides_as": {
+        "evidence.concrete_contract_violation": "evidence.oracle.independent_second"
+      },
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
@@ -2537,7 +2612,10 @@
         "second"
       ],
       "limitations": [
-        "Second independent oracle via concrete execution (13-sample witness). Complements CrossHair symbolic oracle via Z3. No shared machinery. Deterministic, 0 model, $0."
+        "Finite concrete witnesses for pure unary numeric return expressions using the same restricted AST interpreter as the Hypothesis adapter. Source is never executed; unsupported programs fail closed.",
+        "No counterexample in a finite sample is not proof of correctness. This adapter is not independent of the Hypothesis adapter because they share an interpreter.",
+        "Historical verification metadata applies only to earlier source blobs.",
+        "Function exceptions are inconclusive because exception contracts are not interpreted; no exception is credited as a postcondition violation."
       ],
       "platforms": [
         "linux",
@@ -2545,8 +2623,7 @@
         "darwin"
       ],
       "provides": [
-        "evidence.concrete_contract_violation",
-        "evidence.oracle.independent_second"
+        "evidence.concrete_contract_violation"
       ],
       "requires": [
         "python.source.file.available"
@@ -2561,7 +2638,10 @@
         "violations",
         "verified",
         "model_dependency_count",
-        "incremental_spend_usd"
+        "incremental_spend_usd",
+        "counterexample_found",
+        "proves_absence",
+        "independent_of_hypothesis_adapter"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/evidence_oracle_concrete_v1.py",
@@ -2570,8 +2650,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-EVIDENCE-ORACLE-CONCRETE-EXECUTION-V1",
+        "module_sha256": "952b03d165edb234374323af6f0c25b58c0fa7f3cc43b3150bdceacca36cf20b",
         "observed_effect": {
           "status": "CONTRACT_VIOLATION_FOUND",
           "verified": true
@@ -2589,13 +2671,16 @@
           "source_path": "${input.source_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
         "type": "invoke_capability"
       },
       "adapter_module": "evidence_oracle_hypothesis_v1",
+      "provides_as": {
+        "evidence.property_test.verified": "evidence.hypothesis.property_violation"
+      },
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
@@ -2611,7 +2696,9 @@
         "joss19"
       ],
       "limitations": [
-        "Hypothesis 6.170.12 pinned SHA-256 property-based generative with shrinking, third independent oracle family alongside CrossHair symbolic/Z3 and concrete 13-sample. Derandomized seed 0 deterministic, 0 model, $0."
+        "Hypothesis checks declared pre/postconditions on unary pure numeric return expressions over bounded integer inputs; no arbitrary source execution. Unsupported programs and unavailable Hypothesis fail closed. No counterexample in a finite sample is not proof.",
+        "Counterexamples are returned as data; the planner does not credit a violation effect from a clean property-check action. Historical verification metadata applies only to earlier source blobs.",
+        "Function exceptions are inconclusive because exception contracts are not interpreted; no exception is credited as a postcondition violation."
       ],
       "platforms": [
         "linux",
@@ -2619,7 +2706,6 @@
         "darwin"
       ],
       "provides": [
-        "evidence.hypothesis.property_violation",
         "evidence.property_test.verified"
       ],
       "requires": [
@@ -2635,7 +2721,9 @@
         "hypothesis_available",
         "verified",
         "model_dependency_count",
-        "incremental_spend_usd"
+        "incremental_spend_usd",
+        "status",
+        "proves_absence"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/evidence_oracle_hypothesis_v1.py",
@@ -2644,8 +2732,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-EVIDENCE-ORACLE-HYPOTHESIS-PROPERTY-V1",
+        "module_sha256": "8f7a8c06f11aeebaf93a8ac0db761cadcf1164c49d0d0b5f3f0ef38391bdf940",
         "observed_effect": {
           "checked": 13,
           "hypothesis_available": false,
@@ -2716,6 +2806,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-EXECUTION-PIPELINE-8STAGE-V1",
+        "module_sha256": "89e8ec5420bed4b07af917b90df9b45aafadbf9a53b520ea12e8449b214d512e",
         "observed_effect": {
           "returncode": 0,
           "verified": true
@@ -2790,7 +2881,8 @@
         "kernel_true_spec": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
         "live_binding_test": "canonical/tests/test_finance_saccr_addon_live_v1.py",
         "mission_id": "SACCR-CREDIT-ADDON-LIVE-BINDING-001",
-        "model_dependency_count": 0
+        "model_dependency_count": 0,
+        "module_sha256": "be437f6b4c744a6cf0d8b3b491e4a5512a2379f27f70d0e5ec46f7b310765466"
       }
     },
     "http.json.fetch_from_state": {
@@ -2850,6 +2942,7 @@
         "independent_semantics_equal": true,
         "independent_verifier": "curl",
         "mission_id": "ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001",
+        "module_sha256": "90c7084bc695cbd7f5ef418cd747a760304bb945f530cca01d130a5bcbf4255e",
         "observed_effect": {
           "output_bytes": 9248,
           "output_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
@@ -2917,6 +3010,7 @@
         ],
         "independent_verified": true,
         "mission_id": "ASTRA-VERIFY-ZBAR-MULTIFORMAT-001",
+        "module_sha256": "2d3fe3889c6f3cc0b42117809668a63dd7b8f197b9aa4fe47dd1c8f8c4d1ae39",
         "payload": "PROJECT BRAIN",
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ZBAR-MULTIFORMAT-001__RECEIPT.json"
       }
@@ -2976,6 +3070,7 @@
       "verification": {
         "exact_runtime_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
         "independent_verified": true,
+        "module_sha256": "965fb1725472df013cec377f39b44e97156c065daac9446d476964788dbc394e",
         "receipt_path": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json"
       }
     },
@@ -3045,6 +3140,7 @@
       "verification": {
         "adapter_module": "cli_command",
         "mission_id": "ASTRA-RUNTIME-BOUND-QR-GENERIC-001",
+        "module_sha256": "2d3fe3889c6f3cc0b42117809668a63dd7b8f197b9aa4fe47dd1c8f8c4d1ae39",
         "observed_dependency": {
           "origin": "Ubuntu",
           "packages": [
@@ -3128,6 +3224,7 @@
         "independent_output_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
         "independent_verified": true,
         "mission_id": "ASTRA-VERIFY-JSON-FILE-WRITE-001",
+        "module_sha256": "3b396ce2a8bc96ecbcced275fa1fb89443414c3bdf281adc70375db8e38dfecf",
         "observed_effect": {
           "adapter": "file_write_json",
           "content_sha256": "c6d314954c1cd3e9dfa0aa5a8e20abcd94157e922c50682c6ad9403f778b99ca",
@@ -3224,6 +3321,7 @@
         "independent_verified": true,
         "independent_verifier": "python-stdlib-json",
         "mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
+        "module_sha256": "214ed15f81f2268dfe7f1f5092be65f82be93e9d197648aea0e2ca94dc673bf2",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json"
       }
     },
@@ -3460,6 +3558,7 @@
           "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json"
         ],
         "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001",
+        "module_sha256": "283ba1914e433cb438c1424d739e0ecd0e294567f7d272c22b344a42d82369d6",
         "observed_effect": {
           "verified_statuses": [
             "STALE",
@@ -3537,6 +3636,7 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001",
+        "module_sha256": "283ba1914e433cb438c1424d739e0ecd0e294567f7d272c22b344a42d82369d6",
         "observed_effect": {
           "conflicted_materialized": false,
           "supported_materialized": true
@@ -3656,6 +3756,7 @@
         "inherited_supplier_status": "SymPy 1.14.0 exact-symbolic route independently adjudicated 12/12",
         "mission_id": "PR296-TYPED-SCALAR-EXPRESSION-QUALIFICATION-001",
         "model_dependency_count": 0,
+        "module_sha256": "ae52973a26018a36e3a73bf8e36fe4f4aff49bb6a120f78f0dfd182a9b31ebf7",
         "public_job_id": 109732664034,
         "public_run_id": 36666659921,
         "unsafe_rejection_pass": true
@@ -3692,7 +3793,7 @@
         "fail-closed"
       ],
       "limitations": [
-        "Enumerates every producer×artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
+        "Enumerates every producer\u00d7artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
       ],
       "platforms": [
         "linux",
@@ -3725,6 +3826,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-ORCHESTRATION-BRIDGE-ENUMERATION-V1",
+        "module_sha256": "5c43ef611028bd2b580cefaf1c824ce028e66ef42f66f5e453184316aaa440bc",
         "observed_effect": {
           "bridge_verified": 1,
           "emits_verified": 19,
@@ -3787,6 +3889,7 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
+        "module_sha256": "3b85d4a1358133643b59af7ece083b5715b47b946787828c2d2eb522e4f918c8",
         "observed_dependency": {
           "origin": "Ubuntu",
           "packages": [
@@ -3852,6 +3955,7 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+        "module_sha256": "8d8811df2b10e05493964dd876e142bb3121c07501730f2a489d09b4e5baa962",
         "observed_dependency": {
           "project": "pypdf",
           "version": "6.19.0",
@@ -3951,6 +4055,7 @@
         "incremental_spend_usd": 0,
         "independently_verified_by": "plain_goal.bound_capability.grounding.verify.stdlib",
         "model_dependency_count": 0,
+        "module_sha256": "129c18bef6a3a3ea56fac2617079e8da747c232da58f1e56e765bc505d591fc0",
         "producer_git_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
         "real_task_A_artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3",
         "real_task_A_artifact_id": 11068403761,
@@ -4034,6 +4139,7 @@
         "exact_final_head_validation_run_id": 36646452335,
         "fresh_reuse_B_run_id": 36646400507,
         "model_dependency_count": 0,
+        "module_sha256": "98f6acc71975ed819dc2cad244dbf9184144daaa25b0cc64d9f95e958648dd67",
         "producer_independent": true,
         "real_task_A_run_id": 36646322912,
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
@@ -4115,6 +4221,7 @@
         "first_failure_run_id": 38153554981,
         "focused_tests_passed": 11,
         "independent_verified": true,
+        "module_sha256": "111df4bc48bff43314ec0e3e83fedcce8c9e28a8f362bd04bac79471e600adc4",
         "real_native_formats_passed": [
           "pdf",
           "docx",
@@ -4188,6 +4295,7 @@
         "independent_report_assertion": true,
         "independent_verifier": "curl",
         "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
+        "module_sha256": "2c3202af5cea64547c1e26b865978dcca184151961bf6708498508658df3f069",
         "observed_effect": {
           "artifact_bytes": 395480,
           "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
@@ -4201,12 +4309,13 @@
     "python.contract.check.crosshair.v1": {
       "action_template": {
         "args": {
+          "allow_unsafe_host_execution": "${input.allow_unsafe_host_execution}",
           "capability_id": "python.contract.check.crosshair.v1",
           "output_path": "${input.output_path}",
           "target_path": "${input.target_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -4227,9 +4336,10 @@
         "verification"
       ],
       "limitations": [
-        "Requires the crosshair-tool package; reports ORACLE_INCONCLUSIVE when absent.",
-        "Checks declared postconditions only; cannot invent contracts the code does not state.",
-        "Symbolic execution can be slow on code with unbounded loops or heavy I/O."
+        "CrossHair imports and executes target code as a host process. It is disabled unless allow_unsafe_host_execution is explicitly true; this is not an OS sandbox.",
+        "Only statically observed PEP316 postconditions are checked. No contract or an incomplete, timed-out, unavailable, or changed-input run is inconclusive; no counterexample is not a universal proof.",
+        "Source or plugins can cause external effects, escape process-group cleanup or forge analyzer output. The result is a local observation, not independent attestation.",
+        "Historical verification metadata applies only to earlier source blobs."
       ],
       "platforms": [
         "linux",
@@ -4242,6 +4352,26 @@
       "requires": [
         "python.source.file.available"
       ],
+      "result_fields": [
+        "schema",
+        "oracle",
+        "model_dependency_count",
+        "target",
+        "target_sha256",
+        "declared_postconditions",
+        "status",
+        "violations",
+        "violation_count",
+        "checked_conditions",
+        "returncode",
+        "verified",
+        "proves_absence",
+        "host_execution_is_sandboxed",
+        "independent_attestation",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
       "source": {
         "license": "MIT",
         "project": "crosshair-tool",
@@ -4250,8 +4380,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-CROSSHAIR-CONTRACT-ORACLE-001",
+        "module_sha256": "2112affe2d0510498ca91536ebd8f8b95d6cd509029d4564f0128209d3385674",
         "observed_effect": {
           "model_dependency_count": 0,
           "status": "CONTRACT_VIOLATION_FOUND",
@@ -4262,10 +4394,11 @@
     "python.contract.issue_orchestration.fusion.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.contract.issue_orchestration.fusion.v1"
+          "capability_id": "python.contract.issue_orchestration.fusion.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -4273,6 +4406,7 @@
       },
       "adapter_module": "python_contract_issue_orchestration_fusion_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -4282,7 +4416,8 @@
         "fusion"
       ],
       "limitations": [
-        "Contract gates NL intent before HTN"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -4301,7 +4436,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_contract_issue_orchestration_fusion_v1.py",
@@ -4310,8 +4447,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-CONTRACT-ISSUE-ORCHESTRATION-FUSION-V1",
+        "module_sha256": "28eb4002b97ea1bb35fc1fa5bec46f92fdef09134cc27e01ef3e6284c24b402c",
         "observed_effect": {
           "output_verified": true
         },
@@ -4321,10 +4460,11 @@
     "python.evidence.contract.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.evidence.contract.supercomposer.v1"
+          "capability_id": "python.evidence.contract.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -4332,6 +4472,7 @@
       },
       "adapter_module": "python_evidence_contract_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -4341,7 +4482,8 @@
         "oracle"
       ],
       "limitations": [
-        "Evidence→contract 5-kernel, deterministic"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -4362,7 +4504,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_evidence_contract_supercomposer_v1.py",
@@ -4371,8 +4515,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-EVIDENCE-CONTRACT-SUPERCOMPOSER-V1",
+        "module_sha256": "a030ce488f9e2ad668d8846c36921ad6fba2d9fff212d19969fd0635823ad505",
         "observed_effect": {
           "output_verified": true
         },
@@ -4386,13 +4532,14 @@
           "max_ranked_lines": 100,
           "max_ranked_symbols": 50,
           "max_trace_events": 200000,
+          "max_wall_time_s": 120,
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
           "test_paths": "${input.test_paths}",
           "timeout_s": 20
         },
         "expect": {
-          "field": "output_verified",
+          "field": "pass",
           "type": "field_equals",
           "value": true
         },
@@ -4417,9 +4564,14 @@
       ],
       "limitations": [
         "Ranks suspicious Python lines from failing-vs-passing dynamic execution spectra, failing traceback frames, AST symbol ownership, and bounded backward def-use.",
-        "Requires repository-local Python tests and source; each test path is executed in an isolated child Python process with bounded trace events and timeout.",
+        "Requires repository-local Python tests and source; each test path is executed in a separate, unsandboxed child Python process with bounded trace events and timeout.",
         "Backward def-use is intra-symbol AST evidence, not a complete interprocedural value-provenance or semantic causality proof.",
-        "Read-only localization capability; it does not write patches or confer mergeability, hidden-requirement, FrontierCode score, or acceptance authority."
+        "Read-only localization capability; it does not write patches or confer mergeability, hidden-requirement, FrontierCode score, or acceptance authority.",
+        "Historical verification metadata refers to earlier source blobs; it does not independently verify subsequent edits.",
+        "The shared runner uses real pytest for fixtures/configuration when installed; unavailable, skipped-only, or uncollected tests fail closed. Passing localization requires a failing execution within a ranked source symbol.",
+        "Trace events are bounded and only cover the traced Python process; subprocesses, threads, custom pytest plugins and cross-file session interactions can be missed. An empty or partial trace is not a causal proof.",
+        "A shared 120-second default wall budget bounds subprocess launches across the composition; it is soft because synchronous file operations, in-process work and cleanup cannot be preempted.",
+        "Tests are not OS-sandboxed. Persistent changes to declared test files and explicit repository-local Python argv files are checked and restored; unrelated, transient, outside-workspace or detached-process writes are not contained."
       ],
       "platforms": [
         "linux",
@@ -4468,10 +4620,12 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0,
         "independent_test_count": 7,
         "model_dependency_count": 0,
+        "module_sha256": "a844e89b28f3659eae0879d23967e1ef31790b0c2fff2948922fee38ece14be8",
         "primary_test_count": 7,
         "receipt_path": "canonical/verification/PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1.json",
         "runtime_git_blob_sha": "9a3cd924bd7cdaf6918c6072aebc7c344a69324e",
@@ -4482,10 +4636,11 @@
     "python.fault.patch.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.fault.patch.supercomposer.v1"
+          "capability_id": "python.fault.patch.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -4493,6 +4648,7 @@
       },
       "adapter_module": "python_fault_patch_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -4502,7 +4658,8 @@
         "backward"
       ],
       "limitations": [
-        "Fault→patch 5-kernel, deterministic"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -4523,7 +4680,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_fault_patch_supercomposer_v1.py",
@@ -4532,8 +4691,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-FAULT-PATCH-SUPERCOMPOSER-V1",
+        "module_sha256": "89436f7be61b5c690d3faa6207c387f145c270f7803d7b29422e41ac2930e86d",
         "observed_effect": {
           "output_verified": true
         },
@@ -4543,10 +4704,11 @@
     "python.fault.provenance.fusion.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.fault.provenance.fusion.v1"
+          "capability_id": "python.fault.provenance.fusion.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -4554,6 +4716,7 @@
       },
       "adapter_module": "python_fault_provenance_fusion_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -4563,7 +4726,8 @@
         "localization"
       ],
       "limitations": [
-        "Deterministic fusion of spectrum and provenance, no model"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -4582,7 +4746,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_fault_provenance_fusion_v1.py",
@@ -4591,8 +4757,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-FAULT-PROVENANCE-FUSION-V1",
+        "module_sha256": "08bb5b07ebb47d9e362d35073a40b454397a4338f9c2846b8c6f14cef6baa99f",
         "observed_effect": {
           "output_verified": true
         },
@@ -4605,13 +4773,14 @@
           "capability_id": "python.fault.provenance.interprocedural.value.v1",
           "max_trace_events": 100000,
           "max_value_chars": 120,
+          "max_wall_time_s": 120,
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
           "test_paths": "${input.test_paths}",
           "timeout_s": 20
         },
         "expect": {
-          "field": "output_verified",
+          "field": "pass",
           "type": "field_equals",
           "value": true
         },
@@ -4638,7 +4807,11 @@
         "Records bounded repository-local Python call/return observations and primitive-safe argument/return fingerprints from failing and passing test executions.",
         "Links dynamic call edges to static Python callsite assignment bindings and emits ranked interprocedural value-provenance hypotheses.",
         "Observed argument/return differences are evidence for localization, not a proof of semantic causality or a complete interprocedural def-use graph.",
-        "Does not inspect arbitrary object internal state, does not edit source, and provides no mergeability, hidden-requirement, FrontierCode score, or acceptance authority."
+        "Does not inspect arbitrary object internal state, does not edit source, and provides no mergeability, hidden-requirement, FrontierCode score, or acceptance authority.",
+        "Historical verification metadata refers to earlier source blobs; it does not independently verify subsequent edits.",
+        "Passing requires at least one failing-execution interprocedural hypothesis. Traces do not include subprocesses and are not complete thread, plugin, or semantic coverage.",
+        "A shared 120-second default wall budget bounds subprocess launches across the composition; it is soft because synchronous file operations, in-process work and cleanup cannot be preempted.",
+        "Tests are not OS-sandboxed. Persistent changes to declared test files and explicit repository-local Python argv files are checked and restored; unrelated, transient, outside-workspace or detached-process writes are not contained."
       ],
       "platforms": [
         "linux",
@@ -4685,6 +4858,7 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "exact_branch_layout_combined_replay": "14_OF_14_PASS",
         "exact_branch_layout_replay_test_count": 7,
         "external_capability_provider_count": 0,
@@ -4692,6 +4866,7 @@
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
         "independent_test_count": 7,
         "model_dependency_count": 0,
+        "module_sha256": "e855d5b96e54ed9d94c42cdb90b89bb8faefef64d5f96781b529925eb944946b",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "primary_test_count": 7,
         "runtime_git_blob_sha": "7e9a0201b89b5d2edf4647c868858288fd1a9820",
@@ -4774,6 +4949,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-NLISSUE-001",
+        "module_sha256": "da795434cc2ed8b7dcd595ffb9ac84587660c3cd42adfbea3be6b877e740b5d3",
         "observed_effect": {
           "applied_sites": 2,
           "complete": true,
@@ -4794,10 +4970,11 @@
     "python.orchestration.symbol.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.orchestration.symbol.supercomposer.v1"
+          "capability_id": "python.orchestration.symbol.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -4805,6 +4982,7 @@
       },
       "adapter_module": "python_orchestration_symbol_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -4814,7 +4992,8 @@
         "navigation"
       ],
       "limitations": [
-        "Contract-gated issue → symbol → crossfile"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -4835,7 +5014,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_orchestration_symbol_supercomposer_v1.py",
@@ -4844,8 +5025,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-ORCHESTRATION-SYMBOL-SUPERCOMPOSER-V1",
+        "module_sha256": "0f03b56b0e69b8cd1b599a8908e3ebf29819523fbec933a1c66697b2c6dc9971",
         "observed_effect": {
           "output_verified": true
         },
@@ -4855,10 +5038,11 @@
     "python.patch.review.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.patch.review.supercomposer.v1"
+          "capability_id": "python.patch.review.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -4866,6 +5050,7 @@
       },
       "adapter_module": "python_patch_review_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -4875,7 +5060,8 @@
         "mutation"
       ],
       "limitations": [
-        "Patch→review 5-kernel, deterministic"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -4896,7 +5082,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_patch_review_supercomposer_v1.py",
@@ -4905,8 +5093,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-PATCH-REVIEW-SUPERCOMPOSER-V1",
+        "module_sha256": "f8e2657a15c2e97f983310e7602684d89e04ec9e719f693720e2c27a9788d9b8",
         "observed_effect": {
           "output_verified": true
         },
@@ -4918,6 +5108,7 @@
         "args": {
           "capability_id": "python.patch.search.test_guided.ast.v1",
           "max_candidates": 2000,
+          "max_wall_time_s": 120,
           "output_path": "${input.output_path}",
           "source_path": "${input.source_path}",
           "test_argv": "${input.test_argv}",
@@ -4925,7 +5116,7 @@
           "timeout_s": 60
         },
         "expect": {
-          "field": "output_verified",
+          "field": "pass",
           "type": "field_equals",
           "value": true
         },
@@ -4951,7 +5142,11 @@
         "Requires a failing Python test command as the acceptance oracle; an already-passing baseline fails closed.",
         "Candidate-only: source bytes are restored after every trial and before return; no source write or promotion authority.",
         "No universal patch-search completeness, no multi-edit completeness, no non-Python support, and no semantic-correctness claim beyond the bound test oracle.",
-        "Confers no FrontierCode score or acceptance credit by itself."
+        "Confers no FrontierCode score or acceptance credit by itself.",
+        "Historical verification metadata refers to earlier source blobs; it does not independently verify subsequent edits.",
+        "The default shared runner uses real pytest for fixtures/configuration and requires a passing case for each pytest file; pytest must be installed when required. Custom test commands remain the caller's oracle.",
+        "A soft overall wall budget defaults to 120 seconds (maximum 3600), in addition to the per-test timeout and candidate cap; local execution and filesystem cleanup are not OS-sandboxed or hard-preempted.",
+        "Declared test files and the candidate source are checked after each trial and restored on observed changes; other files, external state, transient modifications, and subprocess effects are not contained."
       ],
       "platforms": [
         "linux",
@@ -4984,7 +5179,9 @@
         "unified_diff",
         "output_path",
         "output_sha256",
-        "output_verified"
+        "output_verified",
+        "max_wall_time_s",
+        "wall_time_budget_exhausted"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
@@ -5003,6 +5200,7 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "discovered_and_repaired_defect": "STALE_PYTHON_BYTECODE_CACHE_ON_SAME_SIZE_RAPID_MUTATIONS",
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0,
@@ -5010,6 +5208,7 @@
         "independent_test_count": 8,
         "local_test_count": 8,
         "model_dependency_count": 0,
+        "module_sha256": "80bda3eac44cd985e6f0354bd2b2c001400426340f388055fe25e8082d971f30",
         "runtime_sha256": "76ba334b9539def530b780c359d62d5ace90590f09c340148cec44f6c0c2c08b",
         "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS"
       }
@@ -5017,10 +5216,11 @@
     "python.pipeline.allowlist_gate.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.pipeline.allowlist_gate.v1"
+          "capability_id": "python.pipeline.allowlist_gate.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -5028,6 +5228,7 @@
       },
       "adapter_module": "python_pipeline_allowlist_gate_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -5037,7 +5238,8 @@
         "gate"
       ],
       "limitations": [
-        "Allowlist gate over 6 diff gates"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -5057,7 +5259,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_pipeline_allowlist_gate_v1.py",
@@ -5066,8 +5270,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-PIPELINE-ALLOWLIST-GATE-V1",
+        "module_sha256": "cd6e3270ca220b1b8a871412234f02320290a9cd4ef19db7c98cfe2aab8b5247",
         "observed_effect": {
           "output_verified": true
         },
@@ -5077,10 +5283,11 @@
     "python.pr.land.composer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.pr.land.composer.v1"
+          "capability_id": "python.pr.land.composer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -5088,6 +5295,7 @@
       },
       "adapter_module": "python_pr_land_composer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -5097,7 +5305,8 @@
         "apply"
       ],
       "limitations": [
-        "Atomic land via temp sibling, restore on fail"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -5117,7 +5326,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_pr_land_composer_v1.py",
@@ -5126,8 +5337,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-PR-LAND-COMPOSER-V1",
+        "module_sha256": "f2a04396969d8fd457aa00ddecd399fbfb29c888a7f379d2b88de784d4fbf8fb",
         "observed_effect": {
           "output_verified": true
         },
@@ -5137,10 +5350,11 @@
     "python.provenance.coupling.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.provenance.coupling.supercomposer.v1"
+          "capability_id": "python.provenance.coupling.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -5148,6 +5362,7 @@
       },
       "adapter_module": "python_provenance_coupling_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -5157,7 +5372,8 @@
         "coupled"
       ],
       "limitations": [
-        "Provenance-guided nonmonotonic coupling"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -5178,7 +5394,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_provenance_coupling_supercomposer_v1.py",
@@ -5187,8 +5405,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-PROVENANCE-COUPLING-SUPERCOMPOSER-V1",
+        "module_sha256": "4a25714669768ffccdb7b7d0c6c82d7aead0acce71c5de5170c1d936f3ceaa16",
         "observed_effect": {
           "output_verified": true
         },
@@ -5274,6 +5494,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-EXTRACT-001",
+        "module_sha256": "bbd2ad949f263ff62953b2e890fe8d99ab6e9bebe0af8723f4d6285a874223d1",
         "observed_effect": {
           "determinism": "two pristine worlds -> byte-identical artifacts and trees",
           "golden": "summarize region 12-17 -> def bands(base) + band = bands(base): inputs [base], outputs [band], module-global SCALE never a parameter, dead writes dropped, suite green post-edit (gate PASS, verified=true), e2e 229 ms",
@@ -5365,6 +5586,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-REFACTOR-001",
+        "module_sha256": "cdbb3c2dabed47b4bd8f23f4462e41521b91e8cb332fff79eeefa2506b560e55",
         "observed_effect": {
           "determinism": "two pristine worlds byte-identical trees and artifacts; rerun refuses PARAM_NOT_FOUND",
           "dynamic": "getattr(core_mod,'describe')(n=k) listed in unknown_sites -> complete=false, bytes untouched, known edits still applied",
@@ -5380,10 +5602,11 @@
     "python.refactor.test_scaffold.fusion.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.refactor.test_scaffold.fusion.v1"
+          "capability_id": "python.refactor.test_scaffold.fusion.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -5391,6 +5614,7 @@
       },
       "adapter_module": "python_refactor_test_scaffold_fusion_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -5400,7 +5624,8 @@
         "transformation"
       ],
       "limitations": [
-        "Stdlib + tree_sitter, no model"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -5419,7 +5644,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_refactor_test_scaffold_fusion_v1.py",
@@ -5428,8 +5655,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-REFACTOR-TEST-SCAFFOLD-FUSION-V1",
+        "module_sha256": "bbead96e1f2f91abebf64a7d2ac7f5e15ddad5ed58981a4ea90af80ff29733f9",
         "observed_effect": {
           "output_verified": true
         },
@@ -5476,9 +5705,11 @@
       ],
       "limitations": [
         "needs git on PATH (git apply --check then --apply); absent -> GIT_UNAVAILABLE refusal, loudly, before anything runs.",
-        "test discovery is the pytest filename convention (test_*.py / *_test.py); suites named otherwise are not discovered and an empty suite is a refusal, not a pass.",
+        "pytest uses the project's configuration, including custom test filenames, for collection. Empty, missing-report, and wholly skipped suites cannot pass; tests_discovered counts conventional filenames while tests_collected counts reported cases.",
         "scratch apply is single-commit text apply; binary diffs and mode-change hunks are out of v1 scope (git apply refuses them as DIFF_DOES_NOT_APPLY).",
-        "runtime verdicts inherit pytest's own environment sensitivity; the gate reports the pytest verdict honestly rather than interpreting it."
+        "the exact captured diff is checked and applied from memory; an output inside the anchor is refused, and changes to the diff or applied target files after the test run cannot pass.",
+        "anchor-local PYTHONPATH entries are redirected to the copy, but editable installs, plugins or tests may still resolve code outside it.",
+        "pytest runs with host privileges, not inside an OS sandbox; configuration, plugins, dependencies and tests can affect coverage and access the host. A green suite does not prove untested behavior."
       ],
       "platforms": [
         "linux",
@@ -5492,14 +5723,22 @@
       "result_fields": [
         "adapter",
         "anchor_path",
+        "applied_files_unchanged",
         "complete",
         "diff_sha256",
+        "failing_tests",
         "gate",
         "output_path",
         "output_sha256",
         "output_verified",
+        "pytest_returncode",
+        "reason",
+        "tests_collected",
         "tests_discovered",
+        "tests_executed",
         "tests_failed",
+        "tests_passed",
+        "tests_skipped",
         "verified"
       ],
       "source": {
@@ -5509,8 +5748,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-APPLYGATE-001",
+        "module_sha256": "06a0b341b0ea956b96d8fa27ea5a89d4eeaf25dfa169c2e45e83df7ea839f3e6",
         "observed_effect": {
           "blind_spot_closed": "rename-only diff: static triage PASS, this gate FAIL with tests/test_core.py named -- the measured reason this capability exists",
           "crown": "natural-language issue -> orchestrator -> static diff triage -> this anchored full-suite apply gate",
@@ -5601,6 +5842,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-REALIZE-001",
+        "module_sha256": "a0230c705094652174d8fdda2b1c1b4549a76ed94bc012c3bd9c2cb9040c948e",
         "observed_effect": {
           "crown": "natural-language issue -> orchestrate -> six review gates -> THIS CAPABILITY ships the result: branch push verified by ls-remote sha equality",
           "golden": "remote ref crown/GH-9900-rename == head_sha 7a7e8438f..., all six review gates PASS, full loop ~1.9 s",
@@ -5649,10 +5891,10 @@
         "source root"
       ],
       "limitations": [
-        "Measures an isolated copy of one repository-local source root; test-side mutations do not alter the measured source.",
-        "Produces content-addressed source snapshot, measurement program, measurement specification, and typed objective fields including tests_pass and python_parse_ok.",
-        "Measurement success is not task acceptance; passing declared tests does not establish complete request semantics or mergeability.",
-        "Python test command only; measured tree size/file count and timeout are bounded."
+        "Runs the declared Python command and independently replays declared files in separate source copies; these copies are not OS sandboxes and tests retain host privileges.",
+        "tests_pass requires a successful command, intact candidate bytes, and non-skipped per-file execution evidence: pytest/JUnit for fixtures, conservative stdlib unittest fallback only without pytest context, or a restricted opcode-traced assertion-script fallback. Unsupported and skipped-only files fail closed.",
+        "Simple assertion scripts bypass pytest startup; other evidence replays may not reproduce custom command setup or plugins. One timeout is shared across command and evidence. Script tracing needs instruction positions, cannot trace child processes, and does not prove meaningful or complete assertions.",
+        "The receipt content-addresses the source snapshot, measurement program, specification, and evidence-parser programs; a hash is not an authenticated signature. Measurement success is not task acceptance or mergeability."
       ],
       "platforms": [
         "linux",
@@ -5689,10 +5931,10 @@
         "modules": [
           "ast",
           "hashlib",
+          "importlib",
           "json",
           "os",
           "pathlib",
-          "re",
           "shutil",
           "subprocess",
           "sys",
@@ -5704,11 +5946,13 @@
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
         "combined_suite_each_carrier": "28_OF_28_PASS",
+        "current_implementation_independently_verified": false,
         "external_general_purpose_model_runtime_dependency_count": 0,
         "focused_measurement_test_count": 7,
         "incremental_spend_usd": 0,
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
         "model_dependency_count": 0,
+        "module_sha256": "345dfb556745ad0d4959e5c00ac4ac21187ac5bd956686d9e51fd3ca323307a7",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "runtime_git_blob_sha": "8f5870418de5396b7ae82fbdceb5c51c70f3104c",
         "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
@@ -5752,10 +5996,10 @@
         "regression"
       ],
       "limitations": [
-        "coverage stage needs coverage.py on the python_executable (PyPI tool, offline-probed); absent -> gate PASS_BLIND recorded loudly after the suite is still proven green, the coverage sweep honestly did not run.",
-        "a failing suite is SUITE_RED, a refusal: coverage under failing tests is untrustworthy data, never produced.",
-        "statement coverage is a floor: a def line counts as executed at import; behavioral adequacy belongs to test-quality capabilities (property/mutation) outside v1.",
-        "test discovery is the pytest filename convention; suites named otherwise are not discovered and an empty suite is a refusal, not a pass."
+        "Requires coverage.py. Configured pytest nodes and known candidate files run together; skipped-only and unobserved source or zero executable lines do not pass. Tool absence is unverified.",
+        "Statement coverage is not behavioral adequacy. Filename-based candidates and pytest configuration may omit other tests; snapshots detect only persistent Python-input changes.",
+        "Tests and coverage run as ordinary host processes, not in an OS sandbox. Output can be spoofed and local results are not independent receipts. Timeouts do not preempt copies or detached descendants.",
+        "Historical verification metadata applies to earlier source blobs."
       ],
       "platforms": [
         "linux",
@@ -5779,7 +6023,8 @@
         "output_sha256",
         "output_verified",
         "tests_discovered",
-        "verified"
+        "verified",
+        "unobserved_changed_files"
       ],
       "source": {
         "module": "coverage",
@@ -5788,8 +6033,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-COVGATE-001",
+        "module_sha256": "09539ec11899890883584ef0ff24c97ff55f205598c3840198e1fa8e22ae3e0f",
         "observed_effect": {
           "blind_leg": "lint PASS, type PASS, suite PASS, coverage FAIL with pkg/util.py:9 named -- ONLY this gate sees the untested changed line",
           "crown": "natural-language issue -> orchestrator diff -> lint triage + type gate -> anchored full-suite -> this coverage gate",
@@ -5807,6 +6054,7 @@
           "capability_id": "python.review.diff_mutation_gate.v1",
           "diff_path": "${input.diff_path}",
           "max_mutants": "${input.max_mutants}",
+          "max_wall_time_s": 120,
           "min_kill_ratio": "${input.min_kill_ratio}",
           "output_path": "${input.output_path}",
           "python_executable": "${input.python_executable}",
@@ -5839,11 +6087,13 @@
         "behavior"
       ],
       "limitations": [
-        "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) — deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
-        "mutants are confined to the diff's hunk new-side lines; the suite's own changed test files are measured, never mutated, and never become mutation targets.",
-        "a red base world refuses (BASE_WORLD_RED): mutants cannot be attributed against a suite that was already green-flavoured broken.",
-        "mutant runs share one wall-clock budget per mutant; a mutant suite timeout is counted as a KILL because the behavioural divergence was observable.",
-        "refusal ladder covers PATH_*, DIFF_EMPTY, DIFF_DOES_NOT_APPLY, GIT_UNAVAILABLE, NO_TESTS_DISCOVERED, NO_MUTABLE_SITES, SYNTAX_ERROR_IN_FILE, SPAN_INTEGRITY, BASE_WORLD_RED, TIMEOUT; no named tests => discovered-suite fallback, never silent PASS."
+        "Uses a limited set of comparison, arithmetic, augmented-assignment, boolean, numeric, and return-None operators on production Python new-side hunk lines. It does not mutate every executable line or prove semantic correctness.",
+        "Requires a nonvacuous green pytest baseline; explicit test files need individual passing-case evidence. A surviving mutant fails the gate; equivalent mutants can survive.",
+        "Each baseline and mutant runs in a fresh copied tree; tests are ordinary subprocesses, not OS-sandboxed, and can access host paths or external state. Nondeterministic failures cannot prove causality.",
+        "Timeouts, infrastructure errors, invalid mutants, a truncated frontier, and an exhausted wall-time budget are inconclusive rather than kills. Copies and cleanup are not preempted by the soft budget.",
+        "The default overall budget is 120 seconds (maximum 3600) and the default mutation cap is 2000. Copying a large tree for each trial can be expensive.",
+        "Historical verification metadata refers to earlier source blobs; it does not independently verify subsequent edits.",
+        "Explicit absolute test paths within the anchor are rebased into each trial; direct test paths outside the anchor are rejected. This is path hygiene, not a process sandbox."
       ],
       "platforms": [
         "linux",
@@ -5861,15 +6111,17 @@
         "mutants_generated",
         "mutants_killed",
         "mutants_survived",
-        "survivors",
         "kill_ratio",
-        "changed_lines_targeted",
         "gate",
         "complete",
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "mutants_inconclusive",
+        "mutation_frontier_truncated",
+        "max_wall_time_s",
+        "wall_time_budget_exhausted"
       ],
       "source": {
         "module": "python stdlib ast/pytest + git",
@@ -5878,8 +6130,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-MUTGATE-001",
+        "module_sha256": "b2c66113ce19680301535594225b0d294d8c2b781a0f8805a54ef4476c065d00",
         "observed_effect": {
           "adversarial": "same fix WITHOUT its tests: survivor witness src/pkg/core.py:13 arith_swap '+'->'-', gate FAIL, kill_ratio 0.875",
           "determinism": "two pristine worlds -> byte-identical artifacts and anchors",
@@ -5899,11 +6153,7 @@
           "bench_path": "${input.bench_path}",
           "capability_id": "python.review.diff_perf_gate.v1",
           "diff_path": "${input.diff_path}",
-          "output_path": "${input.output_path}",
-          "python_executable": "${input.python_executable}",
-          "repeats": "${input.repeats}",
-          "timeout_s": "${input.timeout_s}",
-          "tolerance": "${input.tolerance}"
+          "output_path": "${input.output_path}"
         },
         "expect": {
           "field": "gate",
@@ -5936,7 +6186,8 @@
         "physical timings: artifacts carry raw nanoseconds and are NOT byte-identical; the pinned invariant is verdict stability (same gate on every rerun of a fixed world) plus deterministic verdict recomputation from recorded runs.",
         "best-of-N estimator with an in-child fixed calibrator cancels cross-process site bias; residual shared-box noise floor measured ~0.11 -- declared tolerance bands must sit above it (default 0.10 floor, suite pins use 0.30 explicitly and say why).",
         "needs a benchmark file defining bench(); no benchmark discovery in v1 -- an absent benchmark is a loud refusal, not an inferred one.",
-        "UNCLEAR is an honest third verdict when distributions overlap inside the tolerance band; the gate never coin-flips."
+        "UNCLEAR is an honest third verdict when distributions overlap inside the tolerance band; the gate never coin-flips.",
+        "Benchmark code runs unsandboxed as a host process and may access external files or spoof its output; a local result is not independent attestation and does not establish that the benchmark exercises the changed code. Output is kept outside the anchor, and unique scratch paths avoid deleting caller data."
       ],
       "platforms": [
         "linux",
@@ -5970,8 +6221,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-PERFGATE-001",
+        "module_sha256": "12127cab68c6085bd1ae637e1d9fb98ed6cd967eb0f8a4843c2caf3b8802bad4",
         "observed_effect": {
           "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + this perf gate (full review fan-in)",
           "disjointness_law": "FAIL requires min(patched) > max(anchor); overlapping runs inside the band yield UNCLEAR, never a coin flip",
@@ -6023,7 +6276,9 @@
         "bandit stage needs a bandit-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_BASELINE_ONLY recorded loudly, the security sweep honestly did not run.",
         "only new-side changed line ranges decide blocking; hunk context lines inside a changed hunk share the range (conservatism widens blocking, never narrows a real changed-line finding out of blocking).",
         "policy: HIGH severity blocks; MEDIUM blocks at HIGH confidence; B104-B107 hardcoded-secret family blocks regardless of bandit's LOW label; LOW otherwise advisory.",
-        "static heuristics only: bandit's own false-positive classes are advisory-visible, and absent tool classes (dataflow-level injection) are out of v1 scope."
+        "static heuristics only: bandit's own false-positive classes are advisory-visible, and absent tool classes (dataflow-level injection) are out of v1 scope.",
+        "Only touched Python source is reviewed; no Python changes, analyzer failures, malformed diagnostics and scan errors cannot produce a verified pass.",
+        "Analyzer invocations are not a sandbox. Some tool configurations and plugins may execute code; results are local and not independent attestations. Historical verification metadata applies to earlier source blobs."
       ],
       "platforms": [
         "linux",
@@ -6056,8 +6311,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-SECGATE-001",
+        "module_sha256": "4d71a2ce731b9aa2336e9e583a8d820ccf9284526b033bd9ff65729b278022c4",
         "observed_effect": {
           "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + perf + this security gate (review fan-in complete)",
           "deterministic": "security artifact byte-identical on rerun",
@@ -6110,7 +6367,8 @@
         "ruff stage needs a ruff-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_SYNTAX_ONLY recorded loudly, the F/E/W sweep honestly did not run.",
         "only new-side changed line ranges decide blocking: untouched pre-existing findings are advisory context listed as out_of_scope (never blockers).",
         "isolated ruff run (--isolated, --no-cache): repo lint config is NOT read; zero config law keeps verdicts reproducible.",
-        "v1 reviews unified diffs of .py files; other languages fall through to the syntax baseline silently-listed as non-Python rows."
+        "Only touched Python source is reviewed; no Python changes, analyzer failures, malformed diagnostics and scan errors cannot produce a verified pass.",
+        "Analyzer invocations are not a sandbox. Some tool configurations and plugins may execute code; results are local and not independent attestations. Historical verification metadata applies to earlier source blobs."
       ],
       "platforms": [
         "linux",
@@ -6143,8 +6401,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-DIFFTRIAGE-001",
+        "module_sha256": "2a38e749ac47def7edb6a8f952a227c3e6a8d04d46adf88b1d42776b28dab74b",
         "observed_effect": {
           "chain": "natural-language issue -> orchestrator (apply + tests green) -> produced diff -> this gate",
           "deterministic": "triage artifact byte-identical on rerun",
@@ -6200,7 +6460,8 @@
         "mypy stage needs a mypy-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_BASELINE_ONLY recorded loudly, the type sweep honestly did not run.",
         "only new-side changed line ranges decide blocking: untouched pre-existing findings are advisory context listed as out_of_scope (never blockers).",
         "--follow-imports=silent --ignore-missing-imports: imported modules are trusted silently; cross-module type faults in untouched files are outside this gate's changed-lines law.",
-        "v1 reviews unified diffs of .py files only; non-Python touched rows are skipped by the stage-1/stage-2 machinery."
+        "Only touched Python source is reviewed; no Python changes, analyzer failures, malformed diagnostics and scan errors cannot produce a verified pass.",
+        "Analyzer invocations are not a sandbox. Some tool configurations and plugins may execute code; results are local and not independent attestations. Historical verification metadata applies to earlier source blobs."
       ],
       "platforms": [
         "linux",
@@ -6233,8 +6494,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-TYPEGATE-001",
+        "module_sha256": "3d42ab5fc9d8c3581ee57e3cc09ae4f162fa39cfb21a175e3554efd22da6d4c2",
         "observed_effect": {
           "blind_spot_closed": "lint-clean int+str operand lie: ruff lint gate PASS, this gate FAIL with assignment/operator at pkg/core.py:6 -- measured complementarity",
           "crown": "natural-language issue -> orchestrator diff -> ruff lint triage AND this type gate (review stage pair)",
@@ -6297,8 +6560,10 @@
       "limitations": [
         "requires a JSON task file whose edits are choreograph ops (rename_symbol, move_symbol); free-text issue parsing is a separate concern (refuses TASK_SCHEMA_MISSING fields, never guesses).",
         "move_symbol creates a missing target module by declared intent; multi-line import statements, multi-line decorator spans, and aliased-from-import rewrite shapes fail closed rather than guess.",
-        "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' — edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
-        "writes land only in the named worktree copy; producing the PR itself (git push/gh pr create) is intentionally outside v1."
+        "Impacted tests provide fast feedback; composite verified requires the configured pytest gate and explicit selected and remaining conventional test files, each with a reported passing case on the emitted candidate. Missing pytest, empty files and skipped-only files do not verify.",
+        "Selected test_passed_count and test_failed_count describe fast feedback; indexed_test_* describes the separately run unselected conventional files, and full_test_* describes configured pytest discovery. Conventional candidates are re-scanned, including unparseable files.",
+        "Tests with custom names outside configured discovery are not guaranteed to run. Test subprocesses have host privileges, not an OS sandbox; a green suite does not prove untested behavior.",
+        "the adapter applies edits to the named worktree copy; output/input path overlaps and move targets outside the worktree are refused. Producing the PR itself (git push/gh pr create) is outside v1."
       ],
       "platforms": [
         "linux",
@@ -6317,8 +6582,30 @@
         "adapter",
         "applied_op_count",
         "applied_site_count",
+        "diff_intact_after_test_runs",
         "diff_sha256",
         "edits_verified",
+        "full_test_collected_count",
+        "full_test_executed_count",
+        "full_test_failed_count",
+        "full_test_failing_tests",
+        "full_test_gate",
+        "full_test_gate_evidence",
+        "full_test_gate_sha256",
+        "full_test_passed_count",
+        "full_test_reason",
+        "full_test_skipped_count",
+        "indexed_test_candidate_count",
+        "indexed_test_collected_count",
+        "indexed_test_executed_count",
+        "indexed_test_failed_count",
+        "indexed_test_failing_tests",
+        "indexed_test_gate",
+        "indexed_test_omitted_count",
+        "indexed_test_omitted_paths",
+        "indexed_test_passed_count",
+        "indexed_test_skipped_count",
+        "indexed_test_unexecuted_paths",
         "planned_op_count",
         "pr_intent_verified",
         "refused_op_count",
@@ -6327,6 +6614,8 @@
         "test_passed_count",
         "test_pytest",
         "test_selected_count",
+        "test_selected_status",
+        "test_selected_unexecuted_paths",
         "verified"
       ],
       "source": {
@@ -6336,8 +6625,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-ISSUE2PR-002",
+        "module_sha256": "4810e38513f1786549a2edfda8e1a818fc41206ffcdf1bf234720607061ba7f0",
         "observed_effect": {
           "applied_ops": 1,
           "applied_sites": 3,
@@ -6362,6 +6653,7 @@
       "action_template": {
         "args": {
           "capability_id": "python.software.repair.apply.verified.v1",
+          "max_wall_time_s": 120,
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
           "test_argv": "${input.test_argv}",
@@ -6369,7 +6661,7 @@
           "timeout_s": 60
         },
         "expect": {
-          "field": "output_verified",
+          "field": "applied",
           "type": "field_equals",
           "value": true
         },
@@ -6393,9 +6685,13 @@
       "limitations": [
         "Composes the existing bounded provenance-guided Python repair with a gated write to the real source tree; it does not add any new patch search.",
         "Writes only behind four fail-closed gates: the stated test must fail first, a verified repair must exist, the realized bytes must match the patch's own candidate hash, and the stated test must pass in place afterwards.",
-        "Any gate failing restores every original byte and reports failure, so a pass means the stated test went from failing to passing on the file that is on disk.",
+        "An already-passing stated command returns a no-op pass with applied=false; only applied=true indicates a source write followed by a passing command.",
         "Python only, and the inherited repair search remains bounded to the verified AST mutation/search families; there is no general patch completeness.",
-        "A passing stated test is not proof that the wider program is correct; it certifies only the stated test on the stated source root."
+        "A passing stated test is not proof that the wider program is correct; it certifies only the stated test on the stated source root.",
+        "Historical verification metadata refers to earlier source blobs; it does not independently verify subsequent edits.",
+        "Custom test commands are caller-supplied oracles and are not independently proven nonvacuous. Subprocess execution is not an OS sandbox.",
+        "A shared 120-second default wall budget bounds subprocess launches across the composition; it is soft because synchronous file operations, in-process work and cleanup cannot be preempted.",
+        "Tests are not OS-sandboxed. Persistent changes to declared test files and explicit repository-local Python argv files are checked and restored; unrelated, transient, outside-workspace or detached-process writes are not contained."
       ],
       "platforms": [
         "linux",
@@ -6421,7 +6717,8 @@
         "post_apply_test_returncode",
         "repair_status",
         "output_verified",
-        "detail"
+        "detail",
+        "max_wall_time_s"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
@@ -6442,12 +6739,14 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "exact_two_carrier_replay": "NOT_CLAIMED__SINGLE_CARRIER_SANDBOX_MEASUREMENT_ONLY",
         "external_general_purpose_model_runtime_dependency_count": 0,
         "incremental_spend_usd": 0,
         "independent_sprite": "brain-canonical-repair-apply-verified-20261027-v1",
         "independent_test_count": 13,
         "model_dependency_count": 0,
+        "module_sha256": "aa01db6079bf800ea46e04457237c177796b4ed8833f9a2e47ab30685e92f8a5",
         "status": "SANDBOX_MEASUREMENT_ONLY__NO_TWO_SPRITE_FALSIFICATION_CLAIMED"
       }
     },
@@ -6460,6 +6759,7 @@
           "max_guided_files": 4,
           "max_guided_symbols_per_file": 6,
           "max_pair_candidates": 1000,
+          "max_wall_time_s": 120,
           "mutations_per_file": 24,
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
@@ -6468,7 +6768,7 @@
           "timeout_s": 20
         },
         "expect": {
-          "field": "output_verified",
+          "field": "provenance_guided_verified",
           "type": "field_equals",
           "value": true
         },
@@ -6495,7 +6795,11 @@
         "Combines verified dynamic spectrum localization and bounded interprocedural provenance to restrict an existing two-edit Python repair search.",
         "Can accept a verified guided single edit or a bounded guided coupled pair, with final double replay and source restoration.",
         "Guidance reduction is task-dependent; the capability reports control-vs-guided candidate-space measurements and does not claim guidance always reduces search.",
-        "Search remains bounded to the inherited Python AST mutation basis and does not establish arbitrary patch completeness, hidden requirements, general mergeability, or FrontierCode score authority."
+        "Search remains bounded to the inherited Python AST mutation basis and does not establish arbitrary patch completeness, hidden requirements, general mergeability, or FrontierCode score authority.",
+        "May find a dynamically guided repair without a provenance boost; only provenance_guided_verified=true claims a passing repair with observed provenance guidance.",
+        "A shared 120-second default wall budget bounds subprocess launches across the composition; it is soft because synchronous file operations, in-process work and cleanup cannot be preempted.",
+        "Tests are not OS-sandboxed. Persistent changes to declared test files and explicit repository-local Python argv files are checked and restored; unrelated, transient, outside-workspace or detached-process writes are not contained.",
+        "Unparseable failure scores stay unknown; a nonmonotonic valley is claimed only when the baseline and both individual edit scores are observable."
       ],
       "platforms": [
         "linux",
@@ -6529,7 +6833,10 @@
         "incremental_spend_usd",
         "output_path",
         "output_sha256",
-        "output_verified"
+        "output_verified",
+        "provenance_guidance_applied",
+        "provenance_guided_verified",
+        "max_wall_time_s"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
@@ -6552,12 +6859,14 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "exact_branch_layout_combined_replay": "14_OF_14_PASS",
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0,
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
         "independent_test_count": 7,
         "model_dependency_count": 0,
+        "module_sha256": "741ee477c8521da329fa2e3eb518cfa18e376a4ab339985f27b005948a48a3f3",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "primary_test_count": 7,
         "runtime_git_blob_sha": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
@@ -6574,6 +6883,7 @@
           "max_files": 8,
           "max_pair_candidates": 1200,
           "max_symbols_per_file": 8,
+          "max_wall_time_s": 120,
           "mutations_per_file": 24,
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
@@ -6582,7 +6892,7 @@
           "timeout_s": 20
         },
         "expect": {
-          "field": "output_verified",
+          "field": "crossed_nonmonotonic_valley",
           "type": "field_equals",
           "value": true
         },
@@ -6610,7 +6920,11 @@
         "Ranks files and function/class symbols from traceback, imports, failure text, and line containment; this is stronger localization evidence but not complete semantic causality.",
         "Python only; pair depth, candidate count, file count, symbol count, and timeout are explicitly bounded.",
         "Candidate-only: source bytes are restored before return; no source-write or promotion authority.",
-        "No universal repair completeness, hidden-requirement, mergeability, FrontierCode score, or acceptance claim."
+        "No universal repair completeness, hidden-requirement, mergeability, FrontierCode score, or acceptance claim.",
+        "The strict-progress route can succeed without a coupled nonmonotonic pair; that effect is claimed only when both single-edit scores were observed and crossed_nonmonotonic_valley is true.",
+        "A shared 120-second default wall budget bounds subprocess launches across the composition; it is soft because synchronous file operations, in-process work and cleanup cannot be preempted.",
+        "Tests are not OS-sandboxed. Persistent changes to declared test files and explicit repository-local Python argv files are checked and restored; unrelated, transient, outside-workspace or detached-process writes are not contained.",
+        "Unparseable failure scores stay unknown; a nonmonotonic valley is claimed only when the baseline and both individual edit scores are observable."
       ],
       "platforms": [
         "linux",
@@ -6643,7 +6957,8 @@
         "incremental_spend_usd",
         "output_path",
         "output_sha256",
-        "output_verified"
+        "output_verified",
+        "max_wall_time_s"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
@@ -6662,10 +6977,12 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0,
         "independent_test_count": 8,
         "model_dependency_count": 0,
+        "module_sha256": "b22c3bef4596ebfa3ed9f5e27665bd555234d76afa65353497299eb17b1e6d66",
         "primary_test_count": 8,
         "receipt_path": "canonical/verification/PYTHON_COUPLED_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
         "runtime_git_blob_sha": "34c3e8deac596c8c8790cfffb0586303159590b5",
@@ -6681,6 +6998,7 @@
           "max_files": 12,
           "max_rounds": 6,
           "max_total_candidates": 2000,
+          "max_wall_time_s": 120,
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
           "test_argv": "${input.test_argv}",
@@ -6688,7 +7006,7 @@
           "timeout_s": 30
         },
         "expect": {
-          "field": "output_verified",
+          "field": "pass",
           "type": "field_equals",
           "value": true
         },
@@ -6714,7 +7032,9 @@
         "Bounded deterministic Python AST mutation search only; does not cover non-monotonic coupled edits that require a neutral or temporarily worse intermediate step.",
         "Localization uses traceback paths, test imports, and deterministic repository fallback; this is not general semantic fault localization.",
         "Candidate-only: original source bytes are restored before return and no patch is promoted automatically.",
-        "No non-Python completeness, hidden-requirements guarantee, general mergeability proof, or FrontierCode score credit."
+        "No non-Python completeness, hidden-requirements guarantee, general mergeability proof, or FrontierCode score credit.",
+        "A shared 120-second default wall budget bounds subprocess launches across the composition; it is soft because synchronous file operations, in-process work and cleanup cannot be preempted.",
+        "Tests are not OS-sandboxed. Persistent changes to declared test files and explicit repository-local Python argv files are checked and restored; unrelated, transient, outside-workspace or detached-process writes are not contained."
       ],
       "platforms": [
         "linux",
@@ -6745,7 +7065,8 @@
         "incremental_spend_usd",
         "output_path",
         "output_sha256",
-        "output_verified"
+        "output_verified",
+        "max_wall_time_s"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
@@ -6764,10 +7085,12 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "dependency_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b",
         "external_capability_provider_count": 0,
         "incremental_spend_usd": 0,
         "model_dependency_count": 0,
+        "module_sha256": "8be4b1ddef5abe5abab1cd72d4d3a24e99e91bc90e4fcb7d5251ce7d52afbe74",
         "receipt_path": "canonical/verification/PYTHON_STRICT_PROGRESS_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
         "runtime_git_blob_sha": "352867cf8ce00dab65b17b96d098b6ea4b32f40d",
         "status": "LOCAL_AND_INDEPENDENT_SPRITE_6_OF_6_PASS",
@@ -6780,13 +7103,14 @@
           "capability_id": "python.software.repair.loop.test_guided.ast.v1",
           "max_candidates": 600,
           "max_edits": 6,
+          "max_wall_time_s": 120,
           "output_path": "${input.output_path}",
           "source_paths": "${input.source_paths}",
           "test_paths": "${input.test_paths}",
           "timeout_s": 20
         },
         "expect": {
-          "field": "output_verified",
+          "field": "pass",
           "type": "field_equals",
           "value": true
         },
@@ -6813,7 +7137,11 @@
         "Source localization is limited to explicit source paths and Python modules imported by the supplied tests; this is not general semantic fault localization.",
         "Candidate-only: all source bytes are restored before return and no patch is promoted automatically.",
         "No arbitrary software-repair completeness, no non-Python support, no semantic correctness beyond the supplied test witnesses, and no general mergeability guarantee.",
-        "Confers no FrontierCode score or benchmark acceptance credit by itself."
+        "Confers no FrontierCode score or benchmark acceptance credit by itself.",
+        "Individual test witnesses guide edits; final verification and both replays use the combined test session, and a nonempty patch is required. Cross-file-only failures may still be outside the search basis.",
+        "Historical verification metadata refers to earlier source blobs; it does not independently verify subsequent edits.",
+        "A shared 120-second default wall budget bounds subprocess launches across the composition; it is soft because synchronous file operations, in-process work and cleanup cannot be preempted.",
+        "Tests are not OS-sandboxed. Persistent changes to declared test files and explicit repository-local Python argv files are checked and restored; unrelated, transient, outside-workspace or detached-process writes are not contained."
       ],
       "platforms": [
         "linux",
@@ -6843,7 +7171,8 @@
         "incremental_spend_usd",
         "output_path",
         "output_sha256",
-        "output_verified"
+        "output_verified",
+        "max_wall_time_s"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
@@ -6859,12 +7188,14 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "external_capability_provider_count": 0,
         "focused_test_count": 8,
         "focused_tests_passed": 8,
         "incremental_spend_usd": 0,
         "independent_semantic_verification": false,
         "model_dependency_count": 0,
+        "module_sha256": "7dd1349bc62c533dac8f0c80976cb663af2f49a567e33fd6094d5de96918d96c",
         "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REPAIR_LOOP_V1_FOCUSED_REPLAY_20261011_V1.json",
         "runtime_git_blob_sha": "eaf405b3ea6a387c573f8b3dd5a7197bfa024cd5",
         "status": "EXACT_GIT_BLOB_FOCUSED_REPLAY_PASS",
@@ -6883,7 +7214,7 @@
           "timeout_s": 20
         },
         "expect": {
-          "field": "output_verified",
+          "field": "pass",
           "type": "field_equals",
           "value": true
         },
@@ -6976,6 +7307,7 @@
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
         "independent_test_count": 8,
         "model_dependency_count": 0,
+        "module_sha256": "25672504a0aadd7296b70e5db8cfe5b185a0786c5291f573e1efb44e30e6e128",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "primary_test_count": 8,
         "runtime_git_blob_sha": "0c9578042949e483e00136cd166c9209a110008d",
@@ -6995,7 +7327,7 @@
           "timeout_s": 20
         },
         "expect": {
-          "field": "output_verified",
+          "field": "pass",
           "type": "field_equals",
           "value": true
         },
@@ -7096,6 +7428,7 @@
         "incremental_spend_usd": 0,
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
         "model_dependency_count": 0,
+        "module_sha256": "7674de24ab84e53324322f6ded17462447bd9be8ed3a72592d007c5771bcb6e6",
         "post_merge_current_dependency_replay": "12_OF_12_EACH",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
@@ -7199,6 +7532,7 @@
         "incremental_spend_usd": 0,
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
         "model_dependency_count": 0,
+        "module_sha256": "4054efa46e5e749f3aaa742e5d4d787bc16e539755d7ea2aa38d447a8fa3d9dc",
         "post_merge_current_dependency_replay": "13_OF_13_EACH",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
@@ -7273,6 +7607,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
+        "module_sha256": "f5c5a7bb1dc067b1c06f6e1fe88575946a9c6662998e623bad07d8a8d35f1f7a",
         "observed_effect": {
           "classes": 12,
           "distinct_imported_modules": 41,
@@ -7353,6 +7688,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-CHANGE-IMPACT-001",
+        "module_sha256": "7a728539aba27a47d295d6a38d5a4c630906cae1d83689ecf803cbd9ce3cb2ac",
         "observed_effect": {
           "affected_modules": 4457,
           "candidate_tests": 2096,
@@ -7436,6 +7772,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-CROSSFILE-EDIT-001",
+        "module_sha256": "87b9852cdedd992835727fb0ba9effc80b750d90ad1c21e4e690105f81e2ed3c",
         "observed_effect": {
           "ambiguous_sites": 0,
           "cache_speedup_x": 12.7,
@@ -7526,6 +7863,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001",
+        "module_sha256": "e094ca537a9695a89b69462dec7be6928dfa57fafc33f1b63f889ed91fa14866",
         "observed_effect": {
           "call_edges": 221482,
           "files": 2196,
@@ -7601,6 +7939,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-SYMBOL-RESOLVE-001",
+        "module_sha256": "7d2dabb7f94db714c6a94de8512e48ff059b4da46b3be8a550d186245f9758bf",
         "observed_effect": {
           "builtin": 1,
           "external": 0,
@@ -7618,10 +7957,11 @@
     "python.symbol.resolve.standalone.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.symbol.resolve.standalone.v1"
+          "capability_id": "python.symbol.resolve.standalone.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -7629,6 +7969,7 @@
       },
       "adapter_module": "python_symbol_resolve_standalone_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -7638,7 +7979,8 @@
         "ast"
       ],
       "limitations": [
-        "Stdlib ast + tree-sitter, no LSP"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -7657,7 +7999,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_symbol_resolve_standalone_v1.py",
@@ -7666,8 +8010,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-SYMBOL-RESOLVE-STANDALONE-V1",
+        "module_sha256": "7afa53ae1c91c8e65f5408440d9e5ec5ec0637c74b60d1a7bbf6e8d5d991dbf2",
         "observed_effect": {
           "output_verified": true
         },
@@ -7705,6 +8051,7 @@
       ],
       "limitations": [
         "Never accepts caller-supplied objective fields; fields come only from a validated content-addressed repository measurement receipt.",
+        "A true tests_pass field requires consistent non-vacuous per-file execution evidence; legacy vacuous receipts fail closed. Receipt hashes are not authenticated signatures.",
         "Reuses lossless raw-task obligation accounting and bounded objective acceptance compilation.",
         "Semantic residuals remain explicit and block acceptance; measurement binding does not create missing natural-language semantics.",
         "No general software-engineering completeness, hidden-requirement, FrontierCode score, promotion, or terminal authority."
@@ -7776,6 +8123,7 @@
         "incremental_spend_usd": 0,
         "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
         "model_dependency_count": 0,
+        "module_sha256": "ec7bd38324a83b9de9bb6ed401c6cb3a101670b17cc7c937aa4933b765aabc80",
         "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
         "runtime_git_blob_sha": "36f4d62e6d7c785e7da7ef90b511eafafc4c9919",
         "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
@@ -7787,10 +8135,11 @@
     "python.test.pipeline.verifier.v1": {
       "action_template": {
         "args": {
-          "capability_id": "python.test.pipeline.verifier.v1"
+          "capability_id": "python.test.pipeline.verifier.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -7798,6 +8147,7 @@
       },
       "adapter_module": "python_test_pipeline_verifier_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -7807,7 +8157,8 @@
         "audit"
       ],
       "limitations": [
-        "Never-miss → pipeline → audit → measurement"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -7828,7 +8179,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_test_pipeline_verifier_v1.py",
@@ -7837,8 +8190,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-PYTHON-TEST-PIPELINE-VERIFIER-V1",
+        "module_sha256": "6fe366a830e61d8fab9b7d615aec5e6050c8de235d7cfe0f21bc7d208a201c3f",
         "observed_effect": {
           "output_verified": true
         },
@@ -7895,6 +8250,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
+        "module_sha256": "d644cd5a57b06a8b468795f0aaeaa7a44fa5069d5f0a2746c38697ab0f6542d6",
         "observed_effect": {
           "errors": 0,
           "failed": 0,
@@ -7986,6 +8342,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-TESTGEN-001",
+        "module_sha256": "3321063abb69c11a97d2a8022b0364fbffcd7dd47941473dee60ba5f3767e393",
         "observed_effect": {
           "deterministic": "summary artifact byte-identical on rerun",
           "fixture_derivation": "celsius_to_kelvin(c=1.5); fan_curve(temp=1.5, max_rpm=1); serial_id(zone='s', idx=1); summarize(readings=[1.5])",
@@ -8081,6 +8438,7 @@
         "independent_output_sha256": "cf8aa6bb828d7b0fb3819f9b4254ab772e49afe19dbbe1ff969532705a9ef5d8",
         "independent_verified": true,
         "mission_id": "ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001",
+        "module_sha256": "2d3fe3889c6f3cc0b42117809668a63dd7b8f197b9aa4fe47dd1c8f8c4d1ae39",
         "observed_effect": {
           "adapter": "bound_capability_cli",
           "argv": [
@@ -8102,10 +8460,11 @@
     "software.evidence.synthesis.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.evidence.synthesis.supercomposer.v1"
+          "capability_id": "software.evidence.synthesis.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8113,6 +8472,7 @@
       },
       "adapter_module": "software_evidence_synthesis_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8122,7 +8482,8 @@
         "verbatim"
       ],
       "limitations": [
-        "5-kernel evidence family, deterministic"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -8143,7 +8504,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_evidence_synthesis_supercomposer_v1.py",
@@ -8152,8 +8515,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-SOFTWARE-EVIDENCE-SYNTHESIS-SUPERCOMPOSER-V1",
+        "module_sha256": "9c34588bd7dc59443f7a7d90a02d318451e817f2b03e0e4ac8918b003bfe1d46",
         "observed_effect": {
           "output_verified": true
         },
@@ -8163,10 +8528,11 @@
     "software.hardcore.closing.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.hardcore.closing.supercomposer.v1"
+          "capability_id": "software.hardcore.closing.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8174,6 +8540,7 @@
       },
       "adapter_module": "software_hardcore_closing_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8183,7 +8550,8 @@
         "synthesis"
       ],
       "limitations": [
-        "5-kernel hardcore closing, deterministic"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -8204,7 +8572,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_closing_supercomposer_v1.py",
@@ -8213,8 +8583,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-ULTIMATE-SUPERCOMPOSER-V1",
+        "module_sha256": "906716a7c3134821a77b10cee20084f89a594c99899516c52995aca1fe0338d7",
         "observed_effect": {
           "output_verified": true
         },
@@ -8224,10 +8596,11 @@
     "software.hardcore.final.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.hardcore.final.supercomposer.v1"
+          "capability_id": "software.hardcore.final.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8235,6 +8608,7 @@
       },
       "adapter_module": "software_hardcore_final_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8244,7 +8618,8 @@
         "synthesis"
       ],
       "limitations": [
-        "5-kernel hardcore final, deterministic"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -8265,7 +8640,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_final_supercomposer_v1.py",
@@ -8274,8 +8651,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-FINAL-SUPERCOMPOSER-V1",
+        "module_sha256": "a5a856ec17b42e94ded996d21f0770f607eb36b44059b437d46951456adb212d",
         "observed_effect": {
           "output_verified": true
         },
@@ -8286,10 +8665,20 @@
       "action_template": {
         "args": {
           "capability_id": "software.hardcore.kernel.orchestrate.v1",
-          "output_path": "${input.output_path}"
+          "diff_path": "${input.diff_path}",
+          "max_candidates": "${input.max_candidates}",
+          "output_path": "${input.output_path}",
+          "pr_intent_path": "${input.pr_intent_path}",
+          "source_path": "${input.source_path}",
+          "source_root": "${input.source_root}",
+          "task_path": "${input.task_path}",
+          "test_command": "${input.test_command}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": "${input.timeout_s}",
+          "worktree_path": "${input.worktree_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8297,6 +8686,7 @@
       },
       "adapter_module": "hardcore_software_engineering_orchestrator_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8317,7 +8707,9 @@
         "smartest"
       ],
       "limitations": [
-        "Deterministic harvesting of Brain-owned hidden kernels: CEGIS 24/12, finite grid 100k, pipeline 8-stage, concrete 13-sample, symbol 86k/221k. No model, no spend, fail-closed."
+        "End-to-end SWE repair: test-guided patch search + worktree application + full test gate.",
+        "Verified only when full pytest gate passes on the worktree copy.",
+        "Single-file Python source patching via AST mutations and constant substitution."
       ],
       "platforms": [
         "linux",
@@ -8325,26 +8717,23 @@
         "darwin"
       ],
       "provides": [
-        "software.hardcore.kernel.verified",
-        "python.fault.localization.symbol_ranked",
-        "python.contract.verdict",
-        "evidence.concrete_contract_violation",
-        "software.synthesis.grid_program.exact"
+        "software.hardcore.kernel.verified"
       ],
       "requires": [],
       "result_fields": [
         "adapter",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "cegis_pass",
-        "cegis_classification",
-        "pipeline_verified",
-        "concrete_status",
-        "grid_status",
+        "capability_id",
+        "task_id",
+        "patches_tried",
+        "patches_passing",
+        "applied_op_count",
+        "test_selected_count",
+        "test_passed_count",
+        "test_failed_count",
+        "diff_sha256",
+        "pr_intent_verified",
         "verified",
-        "model_dependency_count",
-        "incremental_spend_usd"
+        "gate"
       ],
       "source": {
         "module": "ast",
@@ -8353,8 +8742,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-SOFTWARE-HARDCORE-KERNEL-ORCHESTRATE-V1",
+        "module_sha256": "2408ae0d8641f8bb98901fa9a21b0b46aeda847ec76c53c452c06c1fbdd4a666",
         "observed_effect": {
           "verified": true
         },
@@ -8365,10 +8756,11 @@
     "software.hardcore.swe.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.hardcore.swe.supercomposer.v1"
+          "capability_id": "software.hardcore.swe.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8376,6 +8768,7 @@
       },
       "adapter_module": "software_hardcore_swe_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8385,7 +8778,8 @@
         "fullstack"
       ],
       "limitations": [
-        "5-kernel supercomposition, deterministic"
+        "Registry-presence inventory only; it does not run a task-bound full-stack SWE composition.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -8415,8 +8809,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-SWE-SUPERCOMPOSER-V1",
+        "module_sha256": "5f4bb6ae012fd3b0bac4a3581eadf042152a0082c3ece0f24ca1f0c7156ed562",
         "observed_effect": {
           "output_verified": true
         },
@@ -8431,7 +8827,7 @@
           "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "patch_verified",
           "type": "field_equals",
           "value": true
         },
@@ -8439,6 +8835,7 @@
       },
       "adapter_module": "software_patch_cegis_z3_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8454,7 +8851,8 @@
         "architecture"
       ],
       "limitations": [
-        "CEGIS(T) loop synthesize→verify (CrossHair symbolic + concrete) → counterexample → resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
+        "Runs bounded architecture search over a declared manifest; it does not synthesize or prove a project patch. An exhausted frontier is not a repair.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux",
@@ -8476,7 +8874,8 @@
         "status",
         "verified",
         "model_dependency_count",
-        "incremental_spend_usd"
+        "incremental_spend_usd",
+        "patch_verified"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
@@ -8485,8 +8884,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-SOFTWARE-PATCH-CEGIS-Z3-V1",
+        "module_sha256": "c0a909271f26ee5498cc4e8be4a843a20117802cc5c154c3872009c19bb88209",
         "observed_effect": {
           "classification": "NEW_PRIMITIVE_REQUIRED",
           "exact_over_declared_frontier": true,
@@ -8504,7 +8905,7 @@
           "source_root": "${input.source_root}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "choreography_verified",
           "type": "field_equals",
           "value": true
         },
@@ -8512,6 +8913,7 @@
       },
       "adapter_module": "software_repair_crossfile_choreograph_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8527,7 +8929,8 @@
         "change-impact"
       ],
       "limitations": [
-        "Cross-file atomic choreography inside repair loop: patch→choreograph via 86k/221k symbol graph→change-impact 2070/2096 slice→dual-oracle verify→gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
+        "Imports choreography, index and impact modules for diagnostic purposes only; no project choreography or atomic cross-file patch is executed.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux",
@@ -8559,8 +8962,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-CHOREOGRAPH-CROSSFILE-V1",
+        "module_sha256": "6040d70b4776b8c39a2b42dc481764af2ef4a047bfa0c2aa55df6c7d99ffde32",
         "observed_effect": {
           "choreography_verified": true,
           "verified": true
@@ -8577,7 +8982,7 @@
           "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8585,6 +8990,7 @@
       },
       "adapter_module": "software_repair_loop_cegis_hypothesis_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8600,7 +9006,8 @@
         "counterexample"
       ],
       "limitations": [
-        "HTN loop: CEGIS(T) 24/12 DPLL(T) → hypothesis 50× → concrete 13 → choreograph 221k → slice 50 → gate — until pass or budget. Loop not DAG. Deterministic 0 model $0."
+        "Diagnostic placeholder: the former default demonstrations were not task-bound. No project repair is currently performed.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux",
@@ -8631,8 +9038,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-LOOP-CEGIS-HYPOTHESIS-V1",
+        "module_sha256": "354e2531ec97855c400b462d6afb014b7880b125f1477875b7b91f39a4b66bcc",
         "observed_effect": {
           "iterations": 1,
           "verified": true
@@ -8644,11 +9053,16 @@
     "software.review.gate.composer.v1": {
       "action_template": {
         "args": {
+          "allow_unsafe_host_execution": "${input.allow_unsafe_host_execution}",
+          "anchor_path": "${input.anchor_path}",
+          "bench_path": "${input.bench_path}",
           "capability_id": "software.review.gate.composer.v1",
-          "output_path": "${input.output_path}"
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "run_tests": "${input.run_tests}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "gates_verified",
           "type": "field_equals",
           "value": true
         },
@@ -8672,7 +9086,11 @@
         "mutation"
       ],
       "limitations": [
-        "Typed 6-gate fan-in after choreography: static+type+coverage+perf+security+mutation must all PASS. Fixes requires=[] fail-open. Deterministic 0 model $0."
+        "Runs the six existing diff review gates on one anchored Python diff only after explicit allow_unsafe_host_execution=true. Without opt-in no project code runs and no gate effect is credited.",
+        "Tests, plugins, configuration and benchmark execute as ordinary host processes, not in an OS sandbox; output may be spoofed and this local fan-in is not an independent attestation.",
+        "Gate coverage, mutation frontier, static analyzers and microbenchmark are bounded heuristics, not proof of behavior or security. Timings and caller-specified tolerance affect the performance result.",
+        "Snapshots reject symlinks and detect persistent input changes, not transient changes or external writes. The wall budget is soft and does not preempt copying, cleanup, or all descendant processes.",
+        "Historical verification metadata applies only to earlier source blobs."
       ],
       "platforms": [
         "linux",
@@ -8683,9 +9101,7 @@
         "software.review.all_gates.verified",
         "software.review.composition.typed"
       ],
-      "requires": [
-        "software.repair.choreography.verified"
-      ],
+      "requires": [],
       "result_fields": [
         "adapter",
         "output_path",
@@ -8694,7 +9110,8 @@
         "verified",
         "gates_verified",
         "model_dependency_count",
-        "incremental_spend_usd"
+        "incremental_spend_usd",
+        "status"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py",
@@ -8703,8 +9120,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-SOFTWARE-REVIEW-GATE-COMPOSER-V1",
+        "module_sha256": "6b51e46826e6c619552c64d3083fde45cbcf2b4b5a3cab7e4d60bd5635ea7cd0",
         "observed_effect": {
           "gates_verified": true,
           "verified": true
@@ -8716,10 +9135,11 @@
     "software.review.synthesis.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.review.synthesis.supercomposer.v1"
+          "capability_id": "software.review.synthesis.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8727,6 +9147,7 @@
       },
       "adapter_module": "software_review_synthesis_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8736,7 +9157,8 @@
         "crossfile"
       ],
       "limitations": [
-        "5-kernel review synthesis, deterministic"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -8757,7 +9179,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py",
@@ -8766,8 +9190,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-SOFTWARE-REVIEW-SYNTHESIS-SUPERCOMPOSER-V1",
+        "module_sha256": "175dbecce00bbf480004e5d78f2cb0032e65ad80cc2caaf5875e48a02dd2d162",
         "observed_effect": {
           "output_verified": true
         },
@@ -8837,6 +9263,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-SOFTWARE-SYNTHESIS-GRID_INDUCTION-V1",
+        "module_sha256": "6b06260459a02a137b44377730bb3bae4e3913ffe41516adeaa3fe6fff673e96",
         "observed_effect": {
           "verified": true
         },
@@ -8847,10 +9274,11 @@
     "software.test.contract.supercomposer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.test.contract.supercomposer.v1"
+          "capability_id": "software.test.contract.supercomposer.v1",
+          "output_path": "${input.output_path}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "verified",
           "type": "field_equals",
           "value": true
         },
@@ -8858,6 +9286,7 @@
       },
       "adapter_module": "software_test_contract_supercomposer_v1",
       "cost": 1,
+      "diagnostic_only": false,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
@@ -8867,7 +9296,8 @@
         "verification"
       ],
       "limitations": [
-        "Dual-oracle → test intelligence → pipeline → provenance coupling"
+        "Registry-presence diagnostic only: it does not execute a task-bound composition and cannot verify project effects.",
+        "Historical verification metadata applies to earlier source blobs; it does not independently verify this diagnostic implementation."
       ],
       "platforms": [
         "linux"
@@ -8888,7 +9318,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
-        "verified"
+        "verified",
+        "status",
+        "registry_components_present"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_test_contract_supercomposer_v1.py",
@@ -8897,8 +9329,10 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
+        "current_implementation_independently_verified": false,
         "independently_verified_by": "hardcore_verify",
         "mission_id": "HARDCORE-VERIFY-SOFTWARE-TEST-CONTRACT-SUPERCOMPOSER-V1",
+        "module_sha256": "8f70d7f6a436c1a666fa2f3415c6e29b625e44bccc2481f944396ff9c118d3e7",
         "observed_effect": {
           "output_verified": true
         },
@@ -8981,6 +9415,7 @@
       "verification": {
         "incremental_spend_usd": 0,
         "model_dependency_count": 0,
+        "module_sha256": "8053587e7eb9e61f9f486f99391ba013bff8f38d10fca954f9f06978161dcd48",
         "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
         "public_head_sha": "25d2bbe6703f745d23b45dab87fd0952aa648324",
         "public_pr": 132,
@@ -9067,6 +9502,7 @@
         "independently_verified": true,
         "independently_verified_by": "canonical/runtime/bound_capabilities/source_candidates_verify_git_index.py (git ls-files + sha256sum)",
         "mission_id": "ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001",
+        "module_sha256": "1bb83d60e8d0fdee7436cb7105d10f4518cf60eba87e28c5ece2b3ba592e8887",
         "observed_effect": {
           "adapter": "source_candidates_enumerate",
           "candidate_count": 400,
@@ -9192,6 +9628,7 @@
         ],
         "model_dependency_count": 0,
         "modern_container_regression_git_blob": "8dc3a5d350173d57f67c8e1ac50ab243d42f2214",
+        "module_sha256": "a90605ed9a6c116455e3040416968aec85311faea640a5af015651f4d17b0005",
         "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
         "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
         "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
@@ -9300,6 +9737,7 @@
         "incremental_spend_usd": 0,
         "independent_oracle": "rank-bm25 0.2.2 BM25Okapi",
         "model_dependency_count": 0,
+        "module_sha256": "809b3a8a8645933b6401017a993389346b310567b0afa9ab65ffccc81803135a",
         "no_overlap_fail_closed": true,
         "public_runner_pr": 143,
         "runner_issue": 144,
@@ -9365,6 +9803,7 @@
         "independent_verifier_package": "sqlite3",
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+        "module_sha256": "290f786fb4e36ec680cc9f1eca157732009a69c4a40dab56819e1d2346b8fcd0",
         "observed_effect": {
           "adapter": "sqlite_table_stdlib",
           "collection_path": [
@@ -9435,6 +9874,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+        "module_sha256": "c67c70439629a3568abbc2db8759719b430169b3ebdad4e8c141b8fad7c7b3fc",
         "observed_effect": {
           "adapter": "sqlite_verify_cli",
           "columns": [
@@ -9539,6 +9979,7 @@
         "independently_verified": true,
         "independently_verified_by": "canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py (git grep -l + sha256sum + jq -S)",
         "mission_id": "ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001",
+        "module_sha256": "5a8e69ca4c6bebeb3dc76a3f4df03979f050425693c06610423cf41b1e7e23cb",
         "observed_effect": {
           "adapter": "decision_evidence_locate",
           "first_decidable_candidate": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
@@ -9622,6 +10063,7 @@
         "independent_test_count": 13,
         "independently_verified": true,
         "model_dependency_count": 0,
+        "module_sha256": "ec6c1fa1bf90c7c12b1b64efdbc7d432aa443ae7ce3c02ad5d477cc9b26004e7",
         "primary_test_count": 13,
         "receipt_path": "canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
         "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
@@ -9715,6 +10157,7 @@
         "incremental_spend_usd": 0,
         "independent_verification_required_for_any_scope_complete_promotion": true,
         "model_dependency_count": 0,
+        "module_sha256": "889378f5933b07c3b9ec989ed8b4fa03d0e16a7350697940cca28b61963a8475",
         "status": "BOUND_WITH_FAIL_CLOSED_REGRESSION_TEST"
       }
     },
@@ -9747,7 +10190,7 @@
         "40x"
       ],
       "limitations": [
-        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop — 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
+        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop \u2014 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
       ],
       "platforms": [
         "linux",
@@ -9779,6 +10222,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "AUTO-VERIFY-TEST-SLICE-NEVER-MISS-V1",
+        "module_sha256": "1f2044a56f7a55030f7c7bb4515ec93c42080c9c47ee177772514af1ce735b13",
         "observed_effect": {
           "never_miss": true,
           "verified": true
@@ -9844,6 +10288,7 @@
         "independent_output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
         "independent_verified": true,
         "mission_id": "ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001",
+        "module_sha256": "81fd5255c3f9d392b4a89406a55304179cc9b17ddaa320f771cd78405fdd838b",
         "observed_effect": {
           "adapter": "file_write_text",
           "content_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
@@ -9926,6 +10371,7 @@
           "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-BROWSER-INTERACTION-001__RECEIPT.json"
         },
         "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+        "module_sha256": "d0942bfe7aef2003bc11b8a16654ddac67de9d94876abee61300b537f97bda63",
         "observed_effect": {
           "latest_stable_python3": "3.14.7",
           "page_title": "Download Python | Python.org",
@@ -9997,6 +10443,7 @@
       "verification": {
         "independent_reference_evidence": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
         "mission_id": "ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001",
+        "module_sha256": "e1313c7dfb680e09f2327f50997b07483cee1bd5d8cc1e41c6ae3d3336b1c856",
         "observed_effect": {
           "adapter": "web_release_verify",
           "claimed_string_present": true,
@@ -10086,6 +10533,7 @@
         "independent_verifier_package": "python3-openpyxl",
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+        "module_sha256": "16169a6890928987de46c00465c0226ed0d3157027de35999e8eaa4f9556172b",
         "observed_effect": {
           "adapter": "xlsx_table_xlsxwriter",
           "collection_path": [
@@ -10167,6 +10615,7 @@
       "verification": {
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+        "module_sha256": "4bb4e14b9d7497ffacbbc86403cd80960ee491e0212dfa037f41c35c90c9ad49",
         "observed_effect": {
           "adapter": "xlsx_verify_openpyxl",
           "columns": [
@@ -10266,6 +10715,7 @@
       "verification": {
         "independent_verifier": "raw_yaml_regex_crosscheck",
         "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+        "module_sha256": "be91f4397dbfafb66a976bc72fbdbc6beba723e63bbd11eb665754d70909ba7c",
         "observed_effect": {
           "input_sha256": "34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac",
           "job_ids": [
@@ -10278,6 +10728,123 @@
           ]
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
+      }
+    },
+    "software.architecture.synthesize.cegis.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.architecture.synthesize.cegis.v1",
+          "manifest_path": "${input.manifest_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "counterexample_guided_causal_architecture_synthesizer_v1",
+      "cost": 1,
+      "entrypoint": "synthesize",
+      "keywords": [
+        "cegis",
+        "synthesize",
+        "architecture",
+        "counterexample",
+        "repair"
+      ],
+      "limitations": [
+        "Deterministic counterexample-guided architecture synthesis, zero model, zero spend."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.architecture.synthesize.cegis.verified",
+        "software.repair.architecture.verified"
+      ],
+      "requires": [],
+      "result_fields": [
+        "pass",
+        "classification",
+        "winner",
+        "architectures_evaluated",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py",
+        "module": "counterexample_guided_causal_architecture_synthesizer_v1",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "test_counterexample_guided_causal_architecture_synthesizer_v1.py",
+        "mission_id": "ASTRA-VERIFY-CEGIS-SYNTHESIZER-001",
+        "module_sha256": "c50bee3aa8ba8b69476c4bc83db57f4e154a1c072097c57be5d0652f7cf512f7",
+        "observed_effect": {
+          "pass": true,
+          "classification": "ARCHITECTURE_FOUND"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CEGIS-SYNTHESIZER-001__RECEIPT.json"
+      }
+    },
+    "autonomous.verified.self.improvement.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "autonomous.verified.self.improvement.v1",
+          "goal": "${input.goal}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "autonomous_verified_self_improvement_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "keywords": [
+        "self-improvement",
+        "autonomous",
+        "repair",
+        "verify"
+      ],
+      "limitations": [
+        "Deterministic self-improvement loop, zero model, zero spend."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "autonomous.self.improvement.verified",
+        "software.repair.self.verified"
+      ],
+      "requires": [],
+      "result_fields": [
+        "verified",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+        "module": "autonomous_verified_self_improvement_v1",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "test_autonomous_verified_self_improvement_v1.py",
+        "mission_id": "ASTRA-VERIFY-SELF-IMPROVEMENT-001",
+        "module_sha256": "b33eedb222fac9583aa179d907d4001c1538837bd022b09197b0607c0fb05a67",
+        "observed_effect": {
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SELF-IMPROVEMENT-001__RECEIPT.json"
       }
     }
   },

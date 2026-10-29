@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bounded donor-free multi-edit Python repair loop V1."""
 from __future__ import annotations
-import ast, hashlib, json, os, pathlib, sys
+import ast, hashlib, json, os, pathlib, shutil, sys, tempfile
 from typing import Any, Mapping
 from canonical.runtime.bound_capabilities import python_test_guided_patch_search_v1 as ptg
 
@@ -37,8 +37,13 @@ def _imports(repo:pathlib.Path, test:pathlib.Path)->list[pathlib.Path]:
             if p.is_file() and repo in p.parents and p!=test and p not in out: out.append(p)
     return out
 
-def _test(repo:pathlib.Path, test:pathlib.Path, timeout:int)->dict[str,Any]:
-    return ptg._run_tests(repo,ptg.suite_argv(sys.executable,test),timeout,ptg._source_env(test))
+def _test(repo:pathlib.Path, test:pathlib.Path, timeout:int,
+          expected:Mapping[pathlib.Path,bytes])->dict[str,Any]:
+    return ptg._run_tests_guarded(repo,ptg.suite_argv(sys.executable,test),timeout,ptg._source_env(test),expected)
+
+def _combined_test(repo:pathlib.Path, tests:list[pathlib.Path], timeout:int,
+                   expected:Mapping[pathlib.Path,bytes])->dict[str,Any]:
+    return ptg._run_tests_guarded(repo,ptg.suite_argv(sys.executable,*tests),timeout,ptg._source_env(*tests),expected)
 
 def _materialize(source:pathlib.Path, tests:list[pathlib.Path], wanted:Mapping[str,Any])->str|None:
     text=source.read_text(encoding="utf-8")
@@ -55,6 +60,7 @@ def _materialize(source:pathlib.Path, tests:list[pathlib.Path], wanted:Mapping[s
 def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
     repo=pathlib.Path(root).resolve()
     if not isinstance(args,Mapping): raise RepairLoopError("ARGS_NOT_OBJECT")
+    budget=ptg.WallBudget(args.get("max_wall_time_s"))
     raw_tests=args.get("test_paths") or []
     if not isinstance(raw_tests,list) or not raw_tests: raise RepairLoopError("TEST_PATHS_REQUIRED")
     tests=[_safe(repo,x) for x in raw_tests]
@@ -75,15 +81,24 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
         for p in _imports(repo,t):
             if p not in sources: sources.append(p)
     if not sources: raise RepairLoopError("NO_LOCALIZED_SOURCE_FILES")
+    if output in tests or output in sources:
+        raise RepairLoopError("OUTPUT_OVERLAPS_INPUT")
+    ptg._reject_output_overlap(output,repo,tests)
 
     originals={p:p.read_bytes() for p in sources}
-    baseline=[_test(repo,t,timeout) for t in tests]
-    if all(r["returncode"]==0 for r in baseline): raise RepairLoopError("BASELINE_ALREADY_PASSES")
+    test_originals={p:p.read_bytes() for p in tests}
+    def expected():return {**test_originals,**{p:p.read_bytes() for p in sources}}
+    baseline=[_test(repo,t,budget.timeout(timeout),expected()) for t in tests]
+    if all(r["returncode"]==0 for r in baseline) and _combined_test(repo,tests,budget.timeout(timeout),expected())["returncode"]==0:
+        raise RepairLoopError("BASELINE_ALREADY_PASSES")
     history=[]; final=False; replays=[]; probes=0
-    probe=(output.parent/(".repair_probe_"+output.name)).resolve()
+    output.parent.mkdir(parents=True,exist_ok=True)
+    probe_dir=pathlib.Path(tempfile.mkdtemp(prefix=".brain-multi-repair-",dir=output.parent))
+    probe=probe_dir/"candidate.json"
     try:
         for cycle in range(1,max_edits+1):
-            failing=[t for t in tests if _test(repo,t,timeout)["returncode"]!=0]
+            if budget.expired():break
+            failing=[t for t in tests if _test(repo,t,budget.timeout(timeout),expected())["returncode"]!=0]
             if not failing:
                 final=True; break
             target=failing[0]
@@ -92,6 +107,7 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
             for p in _imports(repo,target)+sources:
                 if p not in ordered: ordered.append(p)
             for source in ordered:
+                if budget.expired():break
                 try:
                     res=ptg.run({
                         "source_path":str(source.relative_to(repo)),
@@ -100,11 +116,18 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
                         "output_path":str(probe.relative_to(repo)),
                         "timeout_s":timeout,
                         "max_candidates":max_candidates,
+                        "max_wall_time_s":budget.timeout(budget.limit),
                     },repo)
-                except ptg.PatchSearchError:
+                except ptg.WallBudgetExhausted:
+                    break
+                except ptg.PatchSearchError as exc:
+                    if str(exc).startswith(("TEST_OR_SOURCE_MODIFIED", "INPUT_RESTORE_FAILED",
+                                            "TEST_RUNNER_INFRASTRUCTURE")):
+                        raise
                     continue
                 finally:
                     if probe.exists(): probe.unlink()
+                    ptg._check_protected_bytes(test_originals)
                 probes += int(res.get("tested_candidate_count",0))
                 if not res.get("pass"): continue
                 candidate=_materialize(source,[target],res["winning_mutation"])
@@ -122,10 +145,13 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
                 applied=True; break
             if not applied: break
 
-        final=all(_test(repo,t,timeout)["returncode"]==0 for t in tests)
+        # A pytest session can share fixtures/state across files. Individual
+        # witnesses guide edits, but only the combined suite can certify them.
+        final=bool(history) and not budget.expired() and _combined_test(repo,tests,budget.timeout(timeout),expected())["returncode"]==0
         if final:
             for _ in range(2):
-                ok=all(_test(repo,t,timeout)["returncode"]==0 for t in tests)
+                if budget.expired():final=False;break
+                ok=_combined_test(repo,tests,budget.timeout(timeout),expected())["returncode"]==0
                 replays.append({"pass":ok})
                 final=final and ok
         patches=[]
@@ -136,15 +162,17 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
                 if before!=after:
                     rel=str(p.relative_to(repo)).replace("\\","/")
                     patches.append({"source_path":rel,"unified_diff":"".join(difflib.unified_diff(before.splitlines(True),after.splitlines(True),fromfile="a/"+rel,tofile="b/"+rel))})
+            if not patches:final=False
     finally:
         for p,raw in originals.items():
             p.write_bytes(raw); ptg._purge_source_bytecode(p)
-        if probe.exists(): probe.unlink()
+        shutil.rmtree(probe_dir)
 
     result={
         "schema":SCHEMA,
-        "status":"PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND" if final else "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP",
+        "status":"PASS__VERIFIED_MULTI_EDIT_PATCH_FOUND" if final else ("OPEN__WALL_TIME_BUDGET_EXHAUSTED" if budget.expired() else "OPEN__NO_VERIFIED_PATCH_IN_BOUNDED_LOOP"),
         "pass":final,
+        "max_wall_time_s":budget.limit,
         "localized_source_paths":[str(p.relative_to(repo)).replace("\\","/") for p in sources],
         "edits_applied":len(history),
         "repair_history":history,

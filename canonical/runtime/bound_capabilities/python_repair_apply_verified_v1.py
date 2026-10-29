@@ -22,9 +22,11 @@ which fails closed:
    acceptance controller takes, because it is the user's own file and the user's
    own test command.
 
-Any failure at any gate restores every original byte and reports failure.  A
-pass therefore means: the file on disk changed, and the stated test went from
-failing to passing on that file.
+A failed verification after writing restores every original byte. A passing
+stated test may also return a no-op pass with applied=False; only applied=True
+means a repair was written and the stated command changed from red to green.
+A caller-supplied test command is not independently proven nonvacuous, and
+test subprocesses are not OS-sandboxed.
 
 Zero external-model producer cognition.  Zero incremental spend.
 """
@@ -34,8 +36,8 @@ import importlib.util
 import json
 import os
 import pathlib
-import subprocess
 import sys
+import tempfile
 from typing import Any, Mapping
 
 SCHEMA="PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1"
@@ -75,15 +77,21 @@ MAX_TIMEOUT_S=600
 def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes]:
     """Run the stated test command verbatim.  No shell, so nothing is invented."""
     try:
-        proc=subprocess.run(
-            argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
-        )
-    except subprocess.TimeoutExpired:
-        return None,b"TIMEOUT"
+        proc=_REPAIR._PATCH._run_process(cwd,argv,timeout)
     except OSError as exc:
         return None,str(exc).encode("utf-8")[:4096]
-    tail=(proc.stdout or b"")[-2048:]+(proc.stderr or b"")[-2048:]
-    return proc.returncode,tail
+    if proc["timed_out"]:
+        return None,b"TIMEOUT"
+    stdout=proc["stdout"].encode("utf-8","replace")
+    stderr=proc["stderr"].encode("utf-8","replace")
+    tail=stdout[-2048:]+stderr[-2048:]
+    shared_runner=(len(argv)>=3 and argv[1]=="-c"
+                   and argv[2]==_REPAIR._PATCH.SUITE_RUNNER+_REPAIR._PATCH.SUITE_ENTRY)
+    if shared_runner and proc["returncode"]==0 and _REPAIR._PATCH.SUITE_COMPLETION_MARKER.encode() not in stdout.splitlines():
+        return None,b"TEST_RUNNER_COMPLETION_MARKER_MISSING"
+    if shared_runner and proc["returncode"]!=0 and b"_BrainTestRunnerError:" in stderr:
+        return None,b"TEST_RUNNER_INFRASTRUCTURE:"+tail
+    return proc["returncode"],tail
 
 
 def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
@@ -111,18 +119,23 @@ def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
 
 
 def _atomic_write(target:pathlib.Path,data:bytes)->None:
-    tmp=target.with_name(target.name+".brain_apply_tmp")
-    tmp.write_bytes(data)
+    # Never reuse a predictable neighbour: it may be a caller's existing file.
+    tmp=None
     try:
+        with tempfile.NamedTemporaryFile(prefix="."+target.name+".brain-apply-",
+                                         dir=target.parent,delete=False) as stream:
+            tmp=pathlib.Path(stream.name)
+            stream.write(data)
+        os.chmod(tmp,target.stat().st_mode & 0o7777)
         os.replace(tmp,target)
-    except BaseException:
-        tmp.unlink(missing_ok=True)
-        raise
+    finally:
+        if tmp is not None:tmp.unlink(missing_ok=True)
 
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
         raise RepairApplyError("ARGS_NOT_OBJECT")
+    budget=_REPAIR._PATCH.WallBudget(args.get("max_wall_time_s"))
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","."))
     test_paths=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
@@ -132,16 +145,31 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not argv:
         raise RepairApplyError("TEST_ARGV_EMPTY")
     output=_safe_output(repo,args.get("output_path"))
+    oracle_files=set(test_paths)|_REPAIR._PATCH._argv_python_files(repo,argv,source_root)
+    try:
+        _REPAIR._PATCH._reject_output_overlap(output,source_root,oracle_files)
+    except _REPAIR._PATCH.PatchSearchError as exc:
+        raise RepairApplyError(str(exc)) from exc
+    test_originals={path:path.read_bytes() for path in oracle_files}
     timeout=max(1,min(int(args.get("timeout_s",60)),MAX_TIMEOUT_S))
 
     out=_base(args,repo)
+    out["max_wall_time_s"]=budget.limit
     rel_tests,run_argv=_candidate_test_layout(repo,source_root,test_paths,argv)
     if not rel_tests:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
     # GATE 1 -- the stated test must fail on the source as it stands.
-    before_rc,before_tail=_run_test(run_argv,source_root,timeout)
+    try:
+        before_rc,before_tail=_run_test(run_argv,source_root,budget.timeout(timeout))
+    finally:
+        _REPAIR._PATCH._check_protected_bytes(test_originals)
     out["pre_apply_test_returncode"]=before_rc
+    if before_rc is None:
+        out["status"]="FAIL_CLOSED__TEST_RUNNER_UNAVAILABLE_OR_TIMED_OUT"
+        out["detail"]=before_tail.decode("utf-8","replace")[-1024:]
+        _emit(output,out)
+        return out
     if before_rc==0:
         # The sentence asked for the stated test to pass.  It already does, and
         # that was measured rather than assumed, so the outcome the sentence
@@ -154,8 +182,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["output_verified"]=True
         out["status"]="PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR"
         out["detail"]=(
-            "The stated test passes on the current source, measured before any write, "
-            "so the outcome the sentence asked for already holds and no file was changed."
+            "The stated test passes on the current source, so no repair patch was applied. "
+            "Test commands are not OS-isolated."
         )
         _emit(output,out)
         return out
@@ -163,22 +191,33 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     # GATE 2 -- a bounded repair must actually be found and verified.  The
     # engine restores the source itself; only its verified patches are used.
-    intermediate=output.parent/(".apply_repair_"+output.name)
-    repair=_REPAIR.run({
-        "source_root":_rel(repo,source_root) if source_root!=repo else ".",
-        "test_paths":[_rel(repo,p) for p in test_paths],
-        "test_argv":argv,
-        "output_path":_rel(repo,intermediate),
-        "timeout_s":timeout,
-        "max_guided_files":args.get("max_guided_files",4),
-        "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
-        "mutations_per_file":args.get("mutations_per_file",24),
-        "max_pair_candidates":args.get("max_pair_candidates",1000),
-        "max_control_files":args.get("max_control_files",12),
-        "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
-    },repo)
+    output.parent.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".brain-apply-",dir=output.parent) as tmp:
+        intermediate=pathlib.Path(tmp)/"repair.json"
+        try:
+            repair=_REPAIR.run({
+                "source_root":_rel(repo,source_root) if source_root!=repo else ".",
+                "test_paths":[_rel(repo,p) for p in test_paths],
+                "test_argv":argv,
+                "output_path":_rel(repo,intermediate),
+                "timeout_s":timeout,
+                "max_wall_time_s":budget.timeout(budget.limit),
+                "max_guided_files":args.get("max_guided_files",4),
+                "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
+                "mutations_per_file":args.get("mutations_per_file",24),
+                "max_pair_candidates":args.get("max_pair_candidates",1000),
+                "max_control_files":args.get("max_control_files",12),
+                "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
+            },repo)
+        finally:
+            _REPAIR._PATCH._check_protected_bytes(test_originals)
     patches=repair.get("patches") or []
     out["repair_status"]=repair.get("status")
+    if budget.expired():
+        out["status"]="OPEN__WALL_TIME_BUDGET_EXHAUSTED"
+        out["detail"]="The shared soft wall budget was exhausted; no patch was applied."
+        _emit(output,out)
+        return out
     if not isinstance(patches,list) or not patches:
         out["status"]="OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
         out["detail"]="Bounded search exhausted; the source was not modified."
@@ -205,6 +244,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             target.relative_to(source_root)
         except ValueError as exc:
             raise RepairApplyError("PATCH_SOURCE_OUTSIDE_SOURCE_ROOT:"+rel) from exc
+        if target in oracle_files:
+            raise RepairApplyError("PATCH_OVERLAPS_TEST_ORACLE:"+rel)
         if not target.is_file():
             raise RepairApplyError("PATCH_TARGET_MISSING:"+rel)
         before_bytes=target.read_bytes()
@@ -225,8 +266,13 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["files_written"]=written
         out["unified_diffs"]=[row[3] for row in planned]
 
-        # GATE 4 -- the stated test must pass IN PLACE, on the real tree.
-        after_rc,after_tail=_run_test(run_argv,source_root,timeout)
+        # GATE 4 -- the stated test must pass IN PLACE, on the real tree,
+        # without replacing the verified candidate or the declared tests.
+        expected={**test_originals,**{target:after for target,after,_relpath,_diff in planned}}
+        try:
+            after_rc,after_tail=_run_test(run_argv,source_root,budget.timeout(timeout))
+        finally:
+            _REPAIR._PATCH._check_protected_bytes(expected)
         out["post_apply_test_returncode"]=after_rc
         out["post_apply_test_tail"]=after_tail.decode("utf-8","replace")[-1024:]
         if after_rc!=0:

@@ -62,7 +62,7 @@ def _platform_supported(entry):
 
 
 def _zero_spend_verified(entry):
-    if not isinstance(entry,dict):
+    if not isinstance(entry,dict) or entry.get("diagnostic_only") is True:
         return False
     if entry.get("status")!="VERIFIED_BOUND_CAPABILITY":
         return False

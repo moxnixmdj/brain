@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib,importlib.util,json,math,os,pathlib,sys
+import hashlib,importlib.util,json,math,os,pathlib,sys,tempfile
 from typing import Any,Mapping
 SCHEMA="PROJECT_BRAIN_PYTHON_PROVENANCE_GUIDED_COUPLED_REPAIR_V1"
 class GuidedRepairError(RuntimeError): pass
@@ -27,8 +27,8 @@ def _safe_dir(repo,raw):
  if not p.is_dir() or p.is_symlink():raise GuidedRepairError("DIRECTORY_INVALID")
  return p
 
-def _guided_rows(repo,loc,prov,max_files,max_symbols):
- boosts={}
+def _guided_rows(repo,loc,prov,max_files,max_symbols,excluded=()):
+ boosts={};excluded=set(excluded)
  for h in prov.get("interprocedural_hypotheses",[]):
   score=float(h.get("dynamic_score",0) or 0)
   for path,sym in ((h.get("caller_path"),h.get("caller_symbol")),(h.get("callee_path"),h.get("callee_symbol"))):
@@ -38,7 +38,7 @@ def _guided_rows(repo,loc,prov,max_files,max_symbols):
   path=str(s.get("path") or "");sym=str(s.get("symbol") or "")
   if not path or not sym:continue
   p=(repo/path).resolve()
-  if not p.is_file() or repo not in p.parents:continue
+  if not p.is_file() or repo not in p.parents or p in excluded:continue
   base=float(s.get("score",0) or 0);boost=boosts.get((path,sym),0.0)
   row=by.setdefault(path,{"path":p,"rel":path,"score":0.0,"reasons":[],"symbols":[]})
   total=base+(2.0*boost)
@@ -63,6 +63,7 @@ def _pair_space(n):return n*(n-1)//2
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise GuidedRepairError("ARGS_NOT_OBJECT")
+ budget=_PATCH.WallBudget(args.get("max_wall_time_s"))
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
  env=_PATCH._source_env(src)
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
@@ -77,24 +78,31 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  control_symbols=max(max_symbols,min(int(args.get("max_control_symbols_per_file",12)),64))
  out=(repo/str(args.get("output_path") or "")).resolve()
  if out==repo or repo not in out.parents:raise GuidedRepairError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
- base=_PATCH._run_tests(repo,argv,timeout,env)
+ oracle_files=set(tests)|_PATCH._argv_python_files(repo,argv)
+ _PATCH._reject_output_overlap(out,src,oracle_files)
+ test_originals={p:p.read_bytes() for p in oracle_files}
+ base=_PATCH._run_tests_guarded(repo,argv,budget.timeout(timeout),env,test_originals)
  if base.get("timed_out"):raise GuidedRepairError("BASELINE_TIMEOUT")
  if base.get("returncode")==0:raise GuidedRepairError("BASELINE_ALREADY_PASSES")
  base_score=_STRICT._score(base)
- if base_score is None:base_score=1
- temp_loc=out.parent/(".loc_"+out.name);temp_prov=out.parent/(".prov_"+out.name)
- loc_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"output_path":_rel(repo,temp_loc),"timeout_s":timeout,"max_trace_events":args.get("max_trace_events",100000),"max_ranked_lines":args.get("max_ranked_lines",100),"max_ranked_symbols":args.get("max_ranked_symbols",100)}
- prov_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"output_path":_rel(repo,temp_prov),"timeout_s":timeout,"max_trace_events":args.get("max_trace_events",100000),"max_value_chars":args.get("max_value_chars",120)}
- try:
-  loc=_LOC.run(loc_args,repo);prov=_PROV.run(prov_args,repo)
- finally:
-  if temp_loc.exists():temp_loc.unlink()
-  if temp_prov.exists():temp_prov.unlink()
- rows=_guided_rows(repo,loc,prov,max_files,max_symbols)
+ out.parent.mkdir(parents=True,exist_ok=True)
+ with tempfile.TemporaryDirectory(prefix=".brain-guidance-",dir=out.parent) as tmp:
+  temp_loc=pathlib.Path(tmp)/"localization.json";temp_prov=pathlib.Path(tmp)/"provenance.json"
+  loc_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"output_path":_rel(repo,temp_loc),"timeout_s":timeout,"max_trace_events":args.get("max_trace_events",100000),"max_ranked_lines":args.get("max_ranked_lines",100),"max_ranked_symbols":args.get("max_ranked_symbols",100)}
+  prov_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"output_path":_rel(repo,temp_prov),"timeout_s":timeout,"max_trace_events":args.get("max_trace_events",100000),"max_value_chars":args.get("max_value_chars",120)}
+  try:
+   loc_args["max_wall_time_s"]=budget.timeout(budget.limit)
+   loc=_LOC.run(loc_args,repo)
+   if not loc.get("pass"):raise GuidedRepairError("NO_FAILING_SOURCE_LOCALIZATION")
+   prov_args["max_wall_time_s"]=budget.timeout(budget.limit)
+   prov=_PROV.run(prov_args,repo)
+  finally:
+   _PATCH._check_protected_bytes(test_originals)
+ rows=_guided_rows(repo,loc,prov,max_files,max_symbols,oracle_files)
  if not rows:raise GuidedRepairError("GUIDANCE_EMPTY")
  guided_items=_items(rows,tests,per)
  failure_text=_STRICT._text(base)
- control_rows=_COUPLED._localize(repo,src,tests,failure_text,control_files,control_symbols)
+ control_rows=_COUPLED._localize(repo,src,sorted(oracle_files),failure_text,control_files,control_symbols)
  control_items=_items(control_rows,tests,per)
  guidance={
   "guided_file_count":len(rows),
@@ -109,42 +117,36 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  guidance["guidance_reduced_candidate_items"]=guidance["candidate_item_reduction"]>0
  guidance["guidance_reduced_pair_space"]=guidance["pair_space_reduction"]>0
  originals={r["path"]:r["path"].read_bytes() for r in rows}
- single_scores={};tested_single=0
+ single_scores={};tested_single=0;winner=None;winner_mode=None;pair_count=0;crossed=False
  for p,e in guided_items:
+  if budget.expired():break
   cand=_COUPLED._candidate(originals,[(p,e)])
   if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr)
-  if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ss=1
+  rr=_COUPLED._run_candidate(repo,originals,cand,argv,budget.timeout(timeout),env,test_originals);ss=_STRICT._score(rr)
   single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
- winner=None;winner_mode=None;pair_count=0;crossed=False
- for p,e in guided_items:
-  cand=_COUPLED._candidate(originals,[(p,e)])
-  if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr)
-  if rr.get("returncode")==0 and (ss==0 or ss is None):
+  if rr.get("returncode")==0 and ss==0:
    winner=cand;winner_mode="SINGLE_GUIDED";break
  if winner is None:
   for i in range(len(guided_items)):
-   if pair_count>=pair_max:break
+   if pair_count>=pair_max or budget.expired():break
    for j in range(i+1,len(guided_items)):
-    if pair_count>=pair_max:break
+    if pair_count>=pair_max or budget.expired():break
     pair_count+=1;a,b=guided_items[i],guided_items[j]
     cand=_COUPLED._candidate(originals,[a,b])
     if cand is None:continue
-    rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ps=_STRICT._score(rr)
-    if ps is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ps=1
-    if rr.get("returncode")==0 and (ps==0 or ps is None):
+    rr=_COUPLED._run_candidate(repo,originals,cand,argv,budget.timeout(timeout),env,test_originals);ps=_STRICT._score(rr)
+    if rr.get("returncode")==0 and ps==0:
      ka=(a[0],a[1]["start"],a[1]["end"],a[1]["replacement"]);kb=(b[0],b[1]["start"],b[1]["end"],b[1]["replacement"])
-     sa=single_scores.get(ka);sb=single_scores.get(kb);crossed=(sa is None or sa>=base_score) and (sb is None or sb>=base_score)
+     sa=single_scores.get(ka);sb=single_scores.get(kb);crossed=base_score is not None and (sa is not None and sa>=base_score) and (sb is not None and sb>=base_score)
      winner=cand;winner_mode="COUPLED_PAIR_GUIDED";break
    if winner:break
  replay=[]
  if winner:
   ok=True
   for _ in range(2):
-   rr=_COUPLED._run_candidate(repo,originals,winner,argv,timeout,env);rs=_STRICT._score(rr)
+   if budget.expired():ok=False;break
+   rr=_COUPLED._run_candidate(repo,originals,winner,argv,budget.timeout(timeout),env,test_originals);rs=_STRICT._score(rr)
    if rr.get("returncode")==0:rs=0
-   elif rs is None and not rr.get("timed_out"):rs=1
    replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")})
    ok=ok and rr.get("returncode")==0 and rs==0
   if not ok:winner=None
@@ -154,5 +156,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
    patches.append({"source_path":_rel(repo,p),"original_sha256":_sha(originals[p]),"candidate_sha256":_sha(t.encode()),"unified_diff":_COUPLED._diff(repo,p,originals[p],t)})
  restored=all(p.read_bytes()==b for p,b in originals.items())
  if not restored:raise GuidedRepairError("SOURCE_RESTORATION_FAILED")
- result={"schema":SCHEMA,"status":"PASS__PROVENANCE_GUIDED_COUPLED_REPAIR" if winner else "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS","pass":winner is not None,"baseline_failure_score":base_score,"guidance":guidance,"guided_localization":[{"path":r["rel"],"score":r["score"],"reasons":r["reasons"],"symbols":r["symbols"]} for r in rows],"provenance_hypothesis_count":len(prov.get("interprocedural_hypotheses",[])),"single_candidates_tested":tested_single,"pair_candidates_tested":pair_count,"winner_mode":winner_mode,"crossed_nonmonotonic_valley":crossed if winner else False,"verification_replays":replay,"patches":patches,"source_restored":restored,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_GENERAL_SEMANTIC_CAUSALITY_PROOF","NO_CLAIM_GUIDANCE_ALWAYS_REDUCES_SEARCH","NO_ARBITRARY_EDIT_BASIS_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
+ provenance_used=any("INTERPROCEDURAL_PROVENANCE_BOOST" in r["reasons"] for r in rows)
+ provenance_guided_verified=bool(winner and provenance_used)
+ result={"schema":SCHEMA,"status":("PASS__PROVENANCE_GUIDED_COUPLED_REPAIR" if provenance_used else "PASS__DYNAMIC_GUIDED_COUPLED_REPAIR") if winner else "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS","pass":winner is not None,"provenance_guidance_applied":provenance_used,"provenance_guided_verified":provenance_guided_verified,"baseline_failure_score":base_score,"guidance":guidance,"guided_localization":[{"path":r["rel"],"score":r["score"],"reasons":r["reasons"],"symbols":r["symbols"]} for r in rows],"provenance_hypothesis_count":len(prov.get("interprocedural_hypotheses",[])),"single_candidates_tested":tested_single,"pair_candidates_tested":pair_count,"winner_mode":winner_mode,"crossed_nonmonotonic_valley":crossed if winner else False,"verification_replays":replay,"patches":patches,"source_restored":restored,"model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_UNIVERSAL_SOFTWARE_REPAIR_COMPLETENESS","NO_GENERAL_SEMANTIC_CAUSALITY_PROOF","NO_CLAIM_GUIDANCE_ALWAYS_REDUCES_SEARCH","NO_ARBITRARY_EDIT_BASIS_COMPLETENESS","NO_NON_PYTHON_SUPPORT","NO_HIDDEN_REQUIREMENTS_OR_GENERAL_MERGEABILITY_PROOF","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
+ if not winner and budget.expired():result["status"]="OPEN__WALL_TIME_BUDGET_EXHAUSTED"
+ result["max_wall_time_s"]=budget.limit
  out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n");result["output_path"]=_rel(repo,out);result["output_sha256"]=_sha(out.read_bytes());result["output_verified"]=True;return result

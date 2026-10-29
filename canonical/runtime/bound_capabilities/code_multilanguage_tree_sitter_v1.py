@@ -1,161 +1,129 @@
 #!/usr/bin/env python3
-"""Multi-language deterministic parser — tree-sitter harvest, insanely fast.
+"""Parse a caller-declared source tree using Brain's shared tree-sitter kernel.
 
-Why this is the only right way:
-- Python ast parses only Python and fails on syntax errors
-- tree_sitter is incremental, error-tolerant, 8 languages, O(log n) reparse
-- External substrate already pinned with SHA-256 (no new deps, $0)
-  tree_sitter==0.20.4 tree_sitter_languages==1.10.2
-
-This adapter exposes the hidden external kernel as a bound capability so the
-composer can finally route multi-language goals instead of falling back to
-python-only heuristics.
+All supported files in scope are enumerated; exceeding a bound is an error,
+not silent sampling. Reports contain per-file definitions and syntax errors.
+Ignored directories, grammar coverage and resource bounds limit the scope; a
+successful parse is not semantic verification of the program.
 """
 from __future__ import annotations
 
+import ast
 import hashlib
-import json
 import pathlib
-import sys
 from typing import Any
+
+from canonical.runtime import tree_sitter_swe_kernel_v1 as kernel
 
 SCHEMA = "PROJECT_BRAIN_CODE_MULTILANGUAGE_TREE_SITTER_V1"
 CAPABILITY_ID = "code.multilanguage.parse.tree_sitter.v1"
 PROVIDES = ["code.ast.tree_sitter.available", "code.symbols.multilanguage.indexed"]
 REQUIRES: list[str] = []
-
 SUPPORTED_LANGUAGES = ("python", "javascript", "typescript", "rust", "go", "java", "cpp", "yaml")
 
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p = (root / str(raw or "canonical/tmp_tree_sitter.json")).resolve()
-    if p == root or root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True)
-    return p
 
-def _detect_language(path: pathlib.Path) -> str:
-    suf = path.suffix.lower()
-    return {".py": "python", ".js": "javascript", ".ts": "typescript", ".rs": "rust", ".go": "go", ".java": "java", ".cpp": "cpp", ".c": "cpp", ".cc": "cpp", ".yaml": "yaml", ".yml": "yaml"}.get(suf, "unknown")
+def _python_fallback(repo: pathlib.Path, path: pathlib.Path) -> dict[str, Any]:
+    """Produce explicitly partial Python-only diagnostics without tree-sitter."""
+    if path.stat().st_size > kernel.MAX_FILE_BYTES:
+        raise kernel.TreeSitterSWEError("SOURCE_FILE_TOO_LARGE:" + kernel.relative_path(repo, path))
+    raw = path.read_bytes()
+    if len(raw) > kernel.MAX_FILE_BYTES:
+        raise kernel.TreeSitterSWEError("SOURCE_FILE_TOO_LARGE:" + kernel.relative_path(repo, path))
+    tree = ast.parse(raw, filename=str(path))
+    definitions = []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            definitions.append({
+                "name": node.name,
+                "kind": "class" if isinstance(node, ast.ClassDef) else "function",
+                "start_line": node.lineno,
+                "end_line": node.end_lineno,
+            })
+    definitions.sort(key=lambda item: (item["start_line"], item["name"]))
+    return {
+        "path": kernel.relative_path(repo, path), "language": "python",
+        "source_sha256": hashlib.sha256(raw).hexdigest(), "byte_count": len(raw),
+        "has_syntax_error": False, "definitions": definitions,
+        "parser": "python_ast_fallback",
+    }
+
 
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
-    output = _safe_output(repo, args.get("output_path"))
-
-    source_root_raw = args.get("source_root") or "canonical/runtime"
-    source_root = (repo / str(source_root_raw)).resolve()
-    if source_root != repo and repo not in source_root.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    source_root = kernel.safe_path(repo, args.get("source_root"), must_exist=True, allow_root=True)
     if not source_root.is_dir():
-        raise RuntimeError("SOURCE_ROOT_MISSING")
-
-    # Try to use pinned tree_sitter; if not installed, fall back to ast for python subset
-    # This keeps the adapter deterministic and fail-closed, never inventing parses
-    tree_sitter_available = False
-    parsed_count = 0
-    languages_seen: set[str] = set()
-    errors: list[dict] = []
-    symbols: list[dict] = []
-    skipped_count = 0
+        raise kernel.TreeSitterSWEError("SOURCE_ROOT_NOT_DIRECTORY")
+    limit = args.get("max_files", kernel.MAX_FILES)
+    if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= kernel.MAX_FILES:
+        raise kernel.TreeSitterSWEError("MAX_FILES_INVALID")
+    files = kernel.source_files(source_root, max_files=limit)
+    output = kernel.safe_output(repo, args.get("output_path"))
+    # Do not replace a source file or a hard-linked alias, even if the caller
+    # named it as output. Symlink paths are rejected by kernel.safe_output.
+    if (kernel.detect_language(output) or
+            (output.exists() and output.stat().st_nlink > 1)):
+        raise kernel.TreeSitterSWEError("OUTPUT_OVERLAPS_INPUT")
 
     try:
-        from tree_sitter import Language, Parser  # type: ignore
-        # tree_sitter_languages provides prebuilt parsers
-        try:
-            from tree_sitter_languages import get_language as ts_get_language  # type: ignore
-            tree_sitter_available = True
-        except ImportError:
-            tree_sitter_available = False
+        import tree_sitter  # noqa: F401
+        import tree_sitter_languages  # noqa: F401
+        tree_sitter_available = True
     except ImportError:
         tree_sitter_available = False
 
-    files = []
-    for lang in SUPPORTED_LANGUAGES:
-        ext_map = {"python": [".py"], "javascript": [".js"], "typescript": [".ts"], "rust": [".rs"], "go": [".go"], "java": [".java"], "cpp": [".cpp", ".c", ".cc"], "yaml": [".yaml", ".yml"]}
-        for ext in ext_map[lang]:
-            files.extend(sorted(source_root.rglob(f"*{ext}")))
-
-    # Deterministic cap for verification speed — sample 50 files per language family
-    files = sorted(files)[:200]
-
-    for f in files:
-        lang = _detect_language(f)
-        if lang == "unknown":
+    rows: list[dict[str, Any]] = []
+    errors: list[dict[str, str]] = []
+    skipped = 0
+    languages_seen = {kernel.detect_language(path) for path in files}
+    for path in files:
+        language = kernel.detect_language(path)
+        rel = kernel.relative_path(repo, path)
+        if not tree_sitter_available and language != "python":
+            skipped += 1
+            errors.append({"path": rel, "kind": "TREE_SITTER_SUBSTRATE_MISSING"})
             continue
-        languages_seen.add(lang)
         try:
-            raw = f.read_bytes()
-            if not raw.strip():
-                continue
-            if tree_sitter_available:
-                # Use tree_sitter parser for that language — error tolerant
-                try:
-                    parser_lang = ts_get_language(lang if lang != "cpp" else "cpp")
-                    parser = Parser()
-                    parser.set_language(parser_lang)
-                    tree = parser.parse(raw)
-                    # Count named nodes as symbols
-                    has_error = tree.root_node.has_error
-                    parsed_count += 1
-                    symbols.append({"path": str(f.relative_to(repo)), "language": lang, "has_error": has_error, "node_count": tree.root_node.descendant_count})
-                    if has_error:
-                        errors.append({"path": str(f.relative_to(repo)), "kind": "TREE_SITTER_HAS_ERROR"})
-                    continue
-                except Exception as exc:
-                    # Fall back to python ast for python, else record
-                    if lang == "python":
-                        pass
-                    else:
-                        errors.append({"path": str(f.relative_to(repo)), "kind": type(exc).__name__})
-                        continue
-            # Fallback: pure python ast for python only
-            if lang == "python":
-                import ast
-                try:
-                    tree = ast.parse(raw.decode("utf-8", errors="strict"))
-                    funcs = sum(1 for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)))
-                    parsed_count += 1
-                    symbols.append({"path": str(f.relative_to(repo)), "language": lang, "has_error": False, "node_count": funcs})
-                except Exception as exc:
-                    errors.append({"path": str(f.relative_to(repo)), "kind": type(exc).__name__})
-            else:
-                # A missing parser is a blocked input, never a fabricated parse.
-                skipped_count += 1
-                errors.append({"path": str(f.relative_to(repo)), "kind": "TREE_SITTER_SUBSTRATE_MISSING"})
-        except Exception as exc:
-            errors.append({"path": str(f.relative_to(repo)), "kind": type(exc).__name__})
+            if path.stat().st_size > kernel.MAX_FILE_BYTES:
+                raise kernel.TreeSitterSWEError("SOURCE_FILE_TOO_LARGE")
+            row = (kernel.parse_file(repo, path, language) if tree_sitter_available
+                   else _python_fallback(repo, path))
+            rows.append(row)
+            if row["has_syntax_error"]:
+                errors.append({"path": rel, "kind": "TREE_SITTER_HAS_ERROR"})
+        except (OSError, ValueError, SyntaxError, kernel.TreeSitterSWEError) as exc:
+            skipped += 1
+            errors.append({"path": rel, "kind": type(exc).__name__})
 
+    rows.sort(key=lambda row: row["path"])
+    symbol_count = sum(len(row["definitions"]) for row in rows)
+    complete = bool(files) and tree_sitter_available and not errors and len(rows) == len(files)
     artifact = {
-        "schema": SCHEMA,
-        "capability_id": CAPABILITY_ID,
-        "source_root": str(source_root.relative_to(repo)) if source_root != repo else ".",
+        "schema": SCHEMA, "capability_id": CAPABILITY_ID,
+        "source_root": kernel.relative_path(repo, source_root) if source_root != repo else ".",
         "supported_languages": list(SUPPORTED_LANGUAGES),
-        "languages_seen": sorted(languages_seen),
-        "file_count": parsed_count,
-        "symbol_count": len(symbols),
-        "error_count": len(errors),
-        "skipped_count": skipped_count,
+        "languages_seen": sorted(lang for lang in languages_seen if lang),
+        "scope": {"ignored_directories": sorted(kernel.IGNORED_DIRS),
+                  "max_files": limit, "max_file_bytes": kernel.MAX_FILE_BYTES},
+        "files": rows, "errors": errors,
+        "file_count": len(rows), "symbol_count": symbol_count,
+        "error_count": len(errors), "skipped_count": skipped,
         "tree_sitter_available": tree_sitter_available,
-        "substrate": ["tree_sitter==0.20.4", "tree_sitter_languages==1.10.2"],
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0,
-        "verified": parsed_count > 0 and not errors,
+        "substrate": kernel.SUBSTRATE, "complete": complete, "verified": complete,
+        "model_dependency_count": 0, "incremental_spend_usd": 0,
+        "limitations": ["Definitions are syntactic, not a complete semantic symbol table.",
+                        "Ignored directories and unsupported extensions are outside the report's scope."],
     }
-
-    raw_bytes = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
-    output.write_bytes(raw_bytes)
-
+    raw = kernel.canonical_bytes(artifact)
+    output.write_bytes(raw)
+    digest = hashlib.sha256(raw).hexdigest()
+    output_verified = output.read_bytes() == raw
     return {
         "adapter": "code_multilanguage_tree_sitter_v1",
-        "output_path": str(output.relative_to(repo)),
-        "output_sha256": hashlib.sha256(raw_bytes).hexdigest(),
-        "output_verified": artifact["verified"],
-        "file_count": parsed_count,
-        "languages_seen": sorted(languages_seen),
-        "tree_sitter_available": tree_sitter_available,
-        "symbol_count": len(symbols),
-        "error_count": len(errors),
-        "skipped_count": skipped_count,
-        "verified": artifact["verified"],
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0,
+        "output_path": kernel.relative_path(repo, output), "output_sha256": digest,
+        "output_verified": output_verified, "file_count": len(rows),
+        "languages_seen": artifact["languages_seen"],
+        "tree_sitter_available": tree_sitter_available, "symbol_count": symbol_count,
+        "error_count": len(errors), "skipped_count": skipped, "complete": complete,
+        "verified": complete and output_verified,
+        "model_dependency_count": 0, "incremental_spend_usd": 0,
     }

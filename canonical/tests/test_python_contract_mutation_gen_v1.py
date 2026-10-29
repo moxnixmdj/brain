@@ -67,6 +67,7 @@ def test_the_oracle_detects_every_violation_in_a_sample():
             {
                 "target_path": str(path.relative_to(ROOT)),
                 "output_path": str((work / "o.json").relative_to(ROOT)),
+                "allow_unsafe_host_execution": True,
             },
             str(ROOT),
         )

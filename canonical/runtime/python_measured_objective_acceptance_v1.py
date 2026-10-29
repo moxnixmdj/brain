@@ -74,6 +74,34 @@ def _load_receipt(repo: pathlib.Path, raw: Any) -> tuple[dict[str, Any], str]:
         raise MeasuredAcceptanceError("MEASUREMENT_FIELD_SET_MISMATCH")
     if values.get("repository_source_unchanged") is not True:
         raise MeasuredAcceptanceError("MEASUREMENT_SOURCE_UNCHANGED_NOT_PROVED")
+    if values.get("tests_pass") is True:
+        # Older receipts could report a green exit with zero tests (including
+        # skipped pytest fixtures). Do not authorize acceptance from those
+        # receipts without explicit, non-vacuous per-file evidence. This is a
+        # consistency check, not cryptographic authentication of a receipt.
+        evidence = receipt.get("test_evidence")
+        spec = receipt.get("measurement_spec")
+        paths = spec.get("test_paths") if isinstance(spec, dict) else None
+        rows = evidence.get("path_evidence") if isinstance(evidence, dict) else None
+        count = values.get("test_count")
+        allowed = {"PYTEST_JUNIT", "STDLIB_UNITTEST", "ASSERTION_SCRIPT_TRACE"}
+        if (not isinstance(evidence, dict) or evidence.get("oracle_status") != "PASS"
+                or evidence.get("source_intact_after_command") is not True
+                or evidence.get("source_intact_after_evidence") is not True
+                or evidence.get("returncode") != 0 or evidence.get("timed_out") is not False
+                or values.get("test_returncode") != 0
+                or type(count) is not int or count <= 0 or evidence.get("test_count") != count
+                or not isinstance(paths, list) or not paths or any(not isinstance(p, str) for p in paths)
+                or not isinstance(rows, list) or len(rows) != len(paths)):
+            raise MeasuredAcceptanceError("NONVACUOUS_TEST_EVIDENCE_MISSING")
+        if ([row.get("path") if isinstance(row, dict) else None for row in rows] != paths
+                or any(not isinstance(row, dict) or row.get("kind") not in allowed
+                       or type(row.get("executed")) is not int or row["executed"] <= 0
+                       or type(row.get("passed")) is not int or row["passed"] <= 0
+                       or type(row.get("failed")) is not int or row["failed"] != 0
+                       or row["passed"] > row["executed"] or row.get("error") for row in rows)
+                or sum(row["executed"] for row in rows) != count):
+            raise MeasuredAcceptanceError("NONVACUOUS_TEST_EVIDENCE_INCONSISTENT")
     subject = receipt.get("subject")
     if not isinstance(subject, dict) or not isinstance(subject.get("snapshot_sha256"), str):
         raise MeasuredAcceptanceError("MEASUREMENT_SUBJECT_BINDING_MISSING")

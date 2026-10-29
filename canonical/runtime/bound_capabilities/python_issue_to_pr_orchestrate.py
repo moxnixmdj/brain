@@ -10,15 +10,16 @@ instead of four disconnected tools:
       -> cross-file edit plan          (slice 4: python_crossfile_edit_choreograph)
       -> apply plan to a WORKTREE copy (this adapter; source tree is never mutated)
       -> prove application             (re-index + re-plan: fixed point == no-op)
-      -> select minimal tests          (slice 2: python_change_impact_testselect)
-      -> run selected tests            (pytest on the worktree)
-      -> emit unified diff + pr_intent + Merkle receipt (this adapter)
+      -> select tests for fast feedback (slice 2: python_change_impact_testselect)
+      -> apply the diff and run the configured full pytest suite on a clean copy
+         (python_repo_diff_apply_full_testgate)
+      -> emit unified diff + pr_intent + receipt (this adapter)
 
 Correctness laws it refuses to violate:
 
-* NEVER-MUTATE-SOURCE — ``repository_root`` bytes are hashed before/after;
-  any drift is caught and the run FAILS CLOSED.  All edits land in
-  ``worktree_path`` (a byte-copy of ``source_root``).
+* The adapter applies edits only in ``worktree_path`` and checks Python
+  source hashes before and after test execution. The copied tree is not an
+  OS sandbox: tests can still access or modify host files and other processes.
 * COMPLETE-OR-REFUSE — a plan with any AMBIGUOUS_* site or a refused op
   aborts the whole task before any write; the refusals and ambiguous sites
   are reported verbatim (truth over progress).
@@ -31,8 +32,13 @@ Correctness laws it refuses to violate:
   multi-name import splitting, and re-import injection when the defining
   module still references the moved name); any other op refuses with
   UNSUPPORTED_OP_AT_APPLY — listed, never silently skipped.
+* Verification requires both the configured full pytest gate and explicit
+  runs of conventional test files found in the worktree, including tests
+  omitted by selection. Selection is only fast feedback; missing pytest,
+  empty suites, and skipped-only runs cannot establish verification. Custom
+  test names outside discovery and untested behavior remain outside scope.
 * Determinism — same inputs (tree bytes + task) produce byte-identical
-  diff, pr_intent and receipt; proven by pins running the loop twice.
+  diff, pr_intent and receipt when the test results are deterministic.
 
 Inputs (kwargs; every path is confined to the repo by _safe_path):
   task_path      JSON: {"issue_id", "title", "body", "edits": [ops]}
@@ -60,6 +66,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -68,6 +75,9 @@ from canonical.runtime.bound_capabilities import (
 )
 from canonical.runtime.bound_capabilities import (
     python_change_impact_testselect as testselect,
+)
+from canonical.runtime.bound_capabilities import (
+    python_repo_diff_apply_full_testgate as full_testgate,
 )
 
 ARTIFACT_VERSION = 1
@@ -481,24 +491,45 @@ def run(args, root):
     pr_abs = _safe_path(repo, str(args.get("pr_intent_path") or ""))
     timeout_s = int(args.get("timeout_s") or 300)
     python_exe = str(args.get("python_executable") or sys.executable)
-    pytest_version = None
-    probe = subprocess.run([python_exe, "-c",
-                            "import pytest;print(pytest.__version__)"],
-                           capture_output=True, text=True, timeout=min(timeout_s, 60))
-    if probe.returncode == 0:
-        pytest_version = probe.stdout.strip()
-
     # nesting laws — the spoke index scan rglobs its root: any overlap
     # between the source tree, the worktree, or the artifact outputs double-
     # indexes the world and poisons the manifest proof.  Refuse overlap.
     if worktree_abs == source_abs or worktree_abs in source_abs.parents \
             or source_abs in worktree_abs.parents:
         _fail("WORKTREE_OVERLAPS_SOURCE_ROOT")
-    for out_abs, key in ((output_abs, "output_path"), (diff_abs, "diff_path"),
-                         (pr_abs, "pr_intent_path")):
+    artifacts = ((output_abs, "output_path"), (diff_abs, "diff_path"),
+                 (pr_abs, "pr_intent_path"))
+    for index, (out_abs, key) in enumerate(artifacts):
         if out_abs == source_abs or source_abs in out_abs.parents \
                 or out_abs == worktree_abs or worktree_abs in out_abs.parents:
             _fail("ARTIFACT_PATH_OVERLAPS_SOURCE_OR_WORKTREE:" + key)
+        for other_abs, other_key in artifacts[index + 1:]:
+            if out_abs == other_abs or out_abs in other_abs.parents or other_abs in out_abs.parents:
+                _fail("ARTIFACT_PATHS_OVERLAP:" + key + ":" + other_key)
+
+    cached = None
+    if args.get("index_path"):
+        cached = _safe_path(repo, str(args["index_path"]), must_exist=True)
+    for input_abs, key in ((task_path, "task_path"), (cached, "index_path")):
+        if input_abs is None:
+            continue
+        if input_abs == worktree_abs or worktree_abs in input_abs.parents:
+            _fail("INPUT_PATH_OVERLAPS_WORKTREE:" + key)
+        if any(input_abs == out_abs for out_abs, _ in artifacts):
+            _fail("INPUT_PATH_OVERLAPS_ARTIFACT:" + key)
+    for op in edits:
+        if op["op"] == "move_symbol":
+            _safe_path(worktree_abs, str(op.get("to_module") or ""))
+
+    pytest_version = None
+    try:
+        probe = subprocess.run([python_exe, "-c",
+                                "import pytest;print(pytest.__version__)"],
+                               capture_output=True, text=True, timeout=min(timeout_s, 60))
+        if probe.returncode == 0 and probe.stdout.strip():
+            pytest_version = probe.stdout.strip()
+    except (OSError, subprocess.TimeoutExpired):
+        pass
 
     started = time.monotonic()
     before = _tree_manifest(source_abs)
@@ -509,7 +540,7 @@ def run(args, root):
     # create that module: stage the empty file so the planner can index it.
     for op in edits:
         if op["op"] == "move_symbol":
-            tgt = worktree_abs / str(op["to_module"])
+            tgt = _safe_path(worktree_abs, str(op.get("to_module") or ""))
             if not tgt.exists():
                 tgt.parent.mkdir(parents=True, exist_ok=True)
                 tgt.write_text("", encoding="utf-8")
@@ -517,8 +548,7 @@ def run(args, root):
     plan_path = ".orchestrate_plan.json"
     ch_args = {"source_root": ".", "output_path": plan_path,
                "edits_path": None, "edits": json.dumps(edits)}
-    if args.get("index_path"):
-        cached = _safe_path(repo, str(args["index_path"]), must_exist=True)
+    if cached is not None:
         # spoke guards confine reads to their own root: pass the cache into
         # the worktree, reuse through slice-4's validated cache law.
         shutil.copy2(cached, worktree_abs / ".orchestrate_index_cache.json")
@@ -590,18 +620,145 @@ def run(args, root):
     }, worktree_abs)
     selection = json.loads((worktree_abs / ".orchestrate_testselect.json").read_text(encoding="utf-8"))
     selected = sorted(r["path"] for r in (selection.get("tests") or []) if r.get("selected"))
+    # Re-scan conventional names instead of trusting the selection artifact as
+    # a complete list: the AST index omits unparseable files, and a dynamic
+    # dependency can make any unselected test relevant. Custom pytest names
+    # are covered only when configured discovery reaches them.
+    candidates = sorted(
+        str(path.relative_to(worktree_abs)).replace("\\", "/")
+        for path in worktree_abs.rglob("*.py")
+        if path.is_file() and not any(part in _SKIP_DIRS for part in path.relative_to(worktree_abs).parts)
+        and (path.name.startswith("test_") or path.name.endswith("_test.py"))
+    )
+    omitted = sorted(set(candidates) - set(selected))
 
-    # run the selected subset on the worktree
+    # Run selected and remaining candidates in one scratch copy, as separate
+    # pytest invocations. That keeps the fast-feedback result distinct and
+    # avoids repeating the relatively expensive tree copy.
     test_passed, test_failed, run_rc = 0, 0, None
-    if selected and pytest_version:
-        proc = subprocess.run(
-            [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + selected,
-            cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
-        run_rc = proc.returncode
-        m = re.search(r"(\d+) passed", proc.stdout + proc.stderr)
-        test_passed = int(m.group(1)) if m else 0
-        m = re.search(r"(\d+) failed", proc.stdout + proc.stderr)
-        test_failed = int(m.group(1)) if m else 0
+    selected_unexecuted = []
+    selected_ok = True
+    selected_status = ("NO_TESTS_SELECTED" if not selected else
+                       "NOT_RUN" if pytest_version else "UNAVAILABLE")
+    indexed = {"gate": "NO_OMITTED_CANDIDATES" if not omitted else
+               "NOT_RUN" if pytest_version else "UNAVAILABLE",
+               "reason": "", "collected": 0, "executed": 0, "passed": 0,
+               "failed": 0, "skipped": 0, "failing_tests": [], "unexecuted_paths": []}
+    combined = {"oracle_ok": False, "reason": "NOT_RUN"}
+    if pytest_version:
+        output_abs.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix=".brain-selected-", dir=output_abs.parent) as trial_dir:
+            trial = Path(trial_dir) / "worktree"
+            _copy_tree(worktree_abs, trial)
+            env = full_testgate._pytest_env(source_abs, trial, worktree_abs)
+            snapshots = {rel: full_testgate._file_snapshot(trial / rel) for rel in old_new}
+            python_snapshot = full_testgate._python_trial_snapshot(trial, selected + omitted)
+
+            def run_paths(paths):
+                # Bind the trial's edited bytes to the exact emitted diff,
+                # including newly created files, both before and after tests.
+                initial_matches = (all(
+                    snapshots[rel][0] == "file" and snapshots[rel][2] == _sha256(new.encode("utf-8"))
+                    for rel, (_old, new) in old_new.items()
+                ) and full_testgate._python_trial_snapshot(trial, selected + omitted) == python_snapshot)
+                if not initial_matches:
+                    return None, None, "CANDIDATE_CHANGED", paths
+                with tempfile.TemporaryDirectory(prefix=".brain-report-", dir=trial) as report_dir:
+                    report_path = Path(report_dir) / "pytest.xml"
+                    # --junitxml must be relative to cwd so it resolves inside
+                    # the sandbox chroot (cwd is mounted at /project).
+                    report_rel = report_path.relative_to(trial)
+                    try:
+                        proc = full_testgate.test_process._run_process(
+                            trial, [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider",
+                                    "--rootdir=.", "-o", "addopts=", "-o", "junit_family=legacy",
+                                    "--junitxml=" + str(report_rel)] + paths, timeout_s, env)
+                        if proc["timed_out"]:
+                            return None, None, "UNAVAILABLE", paths
+                        report = full_testgate._pytest_report(report_path)
+                        by_file = full_testgate._pytest_file_evidence(report_path, trial, paths)
+                        unexecuted = [path for path in paths if by_file.get(path, {}).get("passed", 0) == 0]
+                        unchanged = (all(full_testgate._file_snapshot(trial / rel) == snapshots[rel]
+                                         for rel in old_new)
+                                     and full_testgate._python_trial_snapshot(trial, selected + omitted) == python_snapshot)
+                        ok = (proc["returncode"] == 0 and report["available"] and unchanged and not unexecuted
+                              and report["passed"] > 0 and report["failed"] == 0 and report["errors"] == 0)
+                        status = ("CANDIDATE_CHANGED" if not unchanged else
+                                  "PASS" if ok else "FAIL" if proc["returncode"] != 0 else "UNAVAILABLE")
+                        return proc["returncode"], report, status, unexecuted
+                    except (OSError, subprocess.TimeoutExpired):
+                        return None, None, "UNAVAILABLE", paths
+
+            if selected:
+                run_rc, report, selected_status, selected_unexecuted = run_paths(selected)
+                selected_ok = selected_status == "PASS"
+                if report:
+                    test_passed = report["passed"]
+                    test_failed = report["failed"] + report["errors"]
+            if omitted and selected_ok:
+                _indexed_rc, report, status, unexecuted = run_paths(omitted)
+                indexed.update({"gate": status, "reason": status, "unexecuted_paths": unexecuted})
+                if report:
+                    indexed.update({key: report[key] for key in ("collected", "executed", "passed", "skipped", "failing_tests")})
+                    indexed["failed"] = report["failed"] + report["errors"]
+            if selected_ok and indexed["gate"] in ("PASS", "NO_OMITTED_CANDIDATES"):
+                # Separate green slices cannot establish shared-session
+                # behavior. Include actual configured node IDs and all known
+                # candidate files in one additional pytest session.
+                combined = full_testgate._pytest_combined_session(
+                    trial, python_exe, env, selected + omitted, timeout_s)
+
+    # The configured full gate is kept separate from the candidate run; a
+    # failing extra test must not mislabel configured discovery as failing.
+    full = {"gate": "UNAVAILABLE", "reason": "PYTEST_UNAVAILABLE",
+            "tests_collected": 0, "tests_executed": 0, "tests_passed": 0, "tests_failed": 0,
+            "tests_skipped": 0, "failing_tests": []}
+    full_evidence = None
+    try:
+        diff_intact = _sha256(diff_abs.read_bytes()) == diff_sha
+    except OSError:
+        diff_intact = False
+    if pytest_version and not selected_ok:
+        reason = ("SELECTED_CANDIDATE_CHANGED" if selected_status == "CANDIDATE_CHANGED"
+                  else "SELECTED_TESTS_NOT_PASSED")
+        full.update({"gate": "NOT_RUN", "reason": reason})
+    elif pytest_version and not diff_intact:
+        full.update({"gate": "NOT_RUN", "reason": "DIFF_CHANGED_BEFORE_FULL_GATE"})
+    elif pytest_version:
+        output_abs.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix=".brain-issue-gate-", dir=output_abs.parent) as gate_dir:
+            gate_output = Path(gate_dir) / "full_testgate.json"
+            try:
+                full = full_testgate.run({
+                    "anchor_path": source_root,
+                    "diff_path": str(args.get("diff_path")),
+                    "output_path": str(gate_output.relative_to(repo)),
+                    "python_executable": python_exe,
+                    "timeout_s": timeout_s,
+                }, repo)
+                evidence_bytes = gate_output.read_bytes()
+                if _sha256(evidence_bytes) != full.get("output_sha256"):
+                    full.update({"gate": "FAIL", "verified": False,
+                                 "reason": "FULL_GATE_ARTIFACT_MISMATCH"})
+                else:
+                    full_evidence = json.loads(evidence_bytes)
+                    if (not isinstance(full_evidence, dict)
+                            or full_evidence.get("diff_sha256") != diff_sha
+                            or full.get("diff_sha256") != diff_sha
+                            or full_evidence.get("gate") != full.get("gate")):
+                        full.update({"gate": "FAIL", "verified": False,
+                                     "reason": "FULL_GATE_EVIDENCE_MISMATCH"})
+            except SystemExit as exc:
+                try:
+                    detail = json.loads(str(exc))
+                except (TypeError, ValueError):
+                    detail = {}
+                full.update({"gate": "UNAVAILABLE",
+                             "reason": str(detail.get("reason") or "FULL_TEST_GATE_REFUSED")})
+            except (OSError, ValueError, subprocess.TimeoutExpired) as exc:
+                full.update({"gate": "UNAVAILABLE", "reason": "FULL_TEST_GATE_" + type(exc).__name__})
+    if _tree_manifest(source_abs) != before:
+        _fail("SOURCE_TREE_MUTATED_DURING_TESTS")
 
     pr_intent = {
         "schema": "pr_intent_v1", "issue_id": issue_id, "title": title,
@@ -613,12 +770,25 @@ def run(args, root):
                      "planned_site_count": plan["planned_site_count"],
                      "complete": plan["complete"]},
             "tests": {"selected": len(selected), "passed": test_passed,
-                      "failed": test_failed, "pytest_rc": run_rc},
+                      "failed": test_failed, "pytest_rc": run_rc,
+                      "selected_status": selected_status,
+                      "indexed_candidate_count": len(candidates), "indexed_omitted_count": len(omitted),
+                      "indexed_gate": indexed["gate"], "indexed_passed": indexed["passed"],
+                      "indexed_failed": indexed["failed"], "indexed_skipped": indexed["skipped"],
+                      "combined_session_pass": combined.get("oracle_ok") is True,
+                      "combined_session_reason": combined.get("reason"),
+                      "full_gate": full.get("gate"), "full_reason": full.get("reason"),
+                      "full_collected": full.get("tests_collected", 0),
+                      "full_executed": full.get("tests_executed", 0),
+                      "full_passed": full.get("tests_passed", 0),
+                      "full_failed": full.get("tests_failed", 0),
+                      "full_skipped": full.get("tests_skipped", 0)},
             "proof": {"fixed_point_verified": True, "diff_sha256": diff_sha},
         },
         "checklist": ["plan complete (zero ambiguous sites)",
                       "apply fixed point proven by re-index",
-                      "minimal test selection executed"],
+                      "configured full test gate: " + str(full.get("gate"))
+                      + "; omitted conventional test gate: " + str(indexed["gate"])],
     }
     pr_abs.parent.mkdir(parents=True, exist_ok=True)
     pr_text = json.dumps(pr_intent, indent=2, ensure_ascii=False) + "\n"
@@ -626,7 +796,16 @@ def run(args, root):
     pr_verified = json.loads(pr_abs.read_text(encoding="utf-8")) == pr_intent
 
     edits_verified = pr_verified and not problems
-    tests_verified = (run_rc == 0) if selected else True
+    try:
+        diff_intact = diff_intact and _sha256(diff_abs.read_bytes()) == diff_sha
+    except OSError:
+        diff_intact = False
+    tests_verified = (diff_intact and selected_ok and indexed["gate"] in ("PASS", "NO_OMITTED_CANDIDATES")
+                      and combined.get("oracle_ok") is True
+                      and full.get("gate") == "PASS" and full.get("verified") is True
+                      and isinstance(full_evidence, dict)
+                      and full.get("diff_sha256") == diff_sha
+                      and int(full.get("tests_passed", 0)) > 0)
     verified = edits_verified and tests_verified
     summary = {
         "adapter": "python_issue_to_pr_orchestrate",
@@ -638,8 +817,33 @@ def run(args, root):
         "test_selected_count": len(selected),
         "test_passed_count": test_passed,
         "test_failed_count": test_failed,
+        "test_selected_status": selected_status,
+        "test_selected_unexecuted_paths": selected_unexecuted,
         "test_pytest": pytest_version or "UNAVAILABLE",
+        "indexed_test_candidate_count": len(candidates),
+        "indexed_test_omitted_count": len(omitted),
+        "indexed_test_omitted_paths": omitted,
+        "indexed_test_unexecuted_paths": indexed["unexecuted_paths"],
+        "indexed_test_gate": indexed["gate"],
+        "indexed_test_collected_count": indexed["collected"],
+        "indexed_test_executed_count": indexed["executed"],
+        "indexed_test_passed_count": indexed["passed"],
+        "indexed_test_failed_count": indexed["failed"],
+        "indexed_test_skipped_count": indexed["skipped"],
+        "indexed_test_failing_tests": indexed["failing_tests"],
+        "combined_test_session": combined,
+        "full_test_gate": full.get("gate"),
+        "full_test_reason": full.get("reason"),
+        "full_test_collected_count": int(full.get("tests_collected", 0)),
+        "full_test_executed_count": int(full.get("tests_executed", 0)),
+        "full_test_passed_count": int(full.get("tests_passed", 0)),
+        "full_test_failed_count": int(full.get("tests_failed", 0)),
+        "full_test_skipped_count": int(full.get("tests_skipped", 0)),
+        "full_test_failing_tests": full.get("failing_tests", []),
+        "full_test_gate_sha256": full.get("output_sha256"),
+        "full_test_gate_evidence": full_evidence,
         "diff_sha256": diff_sha,
+        "diff_intact_after_test_runs": diff_intact,
         "pr_intent_verified": pr_verified,
         "edits_verified": bool(edits_verified),
         "verified": bool(verified),

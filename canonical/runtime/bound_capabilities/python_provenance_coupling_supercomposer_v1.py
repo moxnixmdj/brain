@@ -1,29 +1,92 @@
 #!/usr/bin/env python3
-"""Provenance coupling supercomposer — the only-right-way repair coupling.
+# PROJECT_BRAIN
+"""Real provenance-coupling supercomposer: localize → provenance-guided coupled repair → verify.
 
-Hidden kernels: fault provenance fused + fusion verified + provenance_guided + coupled_candidate + coupled nonmonotonic + interprocedural value provenance + dynamic spectrum.
-Why max: repair coupling was 5 isolated pair-wise hints (dead). This super-composes them: provenance fused → provenance-guided coupled repair → nonmonotonic pair verification, 1 fused coupling table."""
+Delegates to python_dynamic_fault_localizer_v1 and
+python_provenance_guided_coupled_repair_v1 for actual project execution.
+"""
 from __future__ import annotations
-import hashlib, json, pathlib
-from typing import Any
-SCHEMA="PROJECT_BRAIN_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1"
-CAPABILITY_ID="python.provenance.coupling.supercomposer.v1"
-PROVIDES=["python.provenance.coupling.super.verified","python.coupling.intelligence.verified"]
-REQUIRES: list[str]=["python.fault.provenance.fused","python.fault.fusion.verified","python.software.repair.provenance_guided","python.software.repair.coupled_candidate_verified","python.repair.coupled_pair.nonmonotonic"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
+
+import hashlib
+import json
+import pathlib
+from typing import Any, Mapping
+
+from canonical.runtime.bound_capabilities.real_swe_execution_v1 import end_to_end_repair
+
+SCHEMA = 'PROJECT_BRAIN_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1'
+CAPABILITY_ID = 'python.provenance.coupling.supercomposer.v1'
+PROVIDES = ['python.provenance.coupling.super.verified', 'python.coupling.intelligence.verified']
+REQUIRES = ['python.fault.provenance.fused', 'python.fault.fusion.verified',
+            'python.software.repair.provenance_guided',
+            'python.software.repair.coupled_candidate_verified',
+            'python.repair.coupled_pair.nonmonotonic']
+PRODUCERS = ['python.fault.provenance.fusion.v1',
+             'python.fault.provenance.interprocedural.value.v1',
+             'python.fault.localize.dynamic.dataflow.v1',
+             'python.software.repair.guided.provenance.coupled.v1',
+             'python.software.repair.loop.coupled.ast.v1']
+
+
 def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_provenance_coupling_supercomposer.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
-def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
-    repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
-    reg=json.loads((repo/"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
-    all_prov={p for m in reg["capabilities"].values() for p in m.get("provides",[])}
-    required=REQUIRES
-    found={r: (r in all_prov) for r in required}
-    producers=["python.fault.provenance.fusion.v1","python.fault.provenance.interprocedural.value.v1","python.fault.localize.dynamic.dataflow.v1","python.software.repair.guided.provenance.coupled.v1","python.software.repair.loop.coupled.ast.v1"]
-    prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"provenance fused hypothesis table → provenance-guided coupled search → nonmonotonic pair verification, 2× boost preserved","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"python_provenance_coupling_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    p = (root / str(raw or 'canonical/tmp_provenance_coupling_supercomposer.json')).resolve()
+    if p == root or root not in p.parents:
+        raise RuntimeError('PATH_OUTSIDE_REPOSITORY')
+    if p.is_file() and p.suffix == '.py':
+        raise RuntimeError('OUTPUT_OVERLAPS_INPUT')
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
+    repo = pathlib.Path(root).resolve()
+    output = _safe_output(repo, args.get('output_path'))
+
+    source_path = args.get('source_path')
+    test_paths = args.get('test_paths') or []
+    worktree_rel = str(args.get('worktree_path') or 'canonical/tmp_prov_coupling_worktree')
+    diff_rel = str(args.get('diff_path') or 'canonical/tmp_prov_coupling_diff.diff')
+    pr_rel = str(args.get('pr_intent_path') or 'canonical/tmp_prov_coupling_pr.json')
+    timeout_s = int(args.get('timeout_s', 300))
+    max_candidates = int(args.get('max_candidates', 50))
+
+    result = end_to_end_repair(
+        source_root=str(args.get('source_root') or '.'),
+        worktree_path=worktree_rel,
+        source_path=source_path,
+        test_paths=test_paths,
+        output_path=str(output.relative_to(repo)),
+        diff_path=diff_rel,
+        pr_intent_path=pr_rel,
+        timeout_s=timeout_s,
+        max_candidates=max_candidates,
+    )
+
+    artifact = {
+        'schema': SCHEMA,
+        'capability_id': CAPABILITY_ID,
+        'verified': result.get('verified', False),
+        'gate': result.get('gate', 'FAIL'),
+        'patches_tried': result.get('patches_tried', 0),
+        'patches_passing': result.get('patches_passing', 0),
+        'applied_op_count': result.get('applied_op_count', 0),
+        'test_passed_count': result.get('test_passed_count', 0),
+        'test_failed_count': result.get('test_failed_count', 0),
+        'diff_sha256': result.get('diff_sha256', ''),
+        'model_dependency_count': 0,
+        'incremental_spend_usd': 0,
+        'output_path': str(output.relative_to(repo)),
+        'output_verified': True,
+    }
+    raw = json.dumps(artifact, sort_keys=True, separators=(',', ':')).encode()
+    output.write_bytes(raw)
+    artifact['output_sha256'] = hashlib.sha256(raw).hexdigest()
+    return {
+        'adapter': 'python_provenance_coupling_supercomposer_v1',
+        'output_path': str(output.relative_to(repo)),
+        'output_sha256': artifact['output_sha256'],
+        'output_verified': True,
+        'verified': artifact['verified'],
+        'model_dependency_count': 0,
+        'incremental_spend_usd': 0,
+    }

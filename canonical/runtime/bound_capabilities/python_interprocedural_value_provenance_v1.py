@@ -1,5 +1,5 @@
 from __future__ import annotations
-import ast,hashlib,json,math,os,pathlib,subprocess,sys
+import ast,hashlib,json,math,os,pathlib,sys
 from typing import Any,Mapping
 import importlib.util
 def _load_patch():
@@ -40,11 +40,15 @@ def _safe_dir(repo,raw):
 def _trace_one(repo,test,timeout,max_events,max_value_chars,env=None):
  code=_PATCH.SUITE_RUNNER+r'''import hashlib,json,math,pathlib,runpy,sys,traceback
 repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); maxchars=int(sys.argv[4])
-events=[]; seq=0
+events=[]; seq=0; paths={}
 def path_of(frame):
- try:p=pathlib.Path(frame.f_code.co_filename).resolve()
- except Exception:return None
- return p if p.is_file() and repo in p.parents and p.suffix==".py" else None
+ name=frame.f_code.co_filename
+ if name not in paths:
+  try:
+   p=pathlib.Path(name).resolve()
+   paths[name]=p if p.is_file() and repo in p.parents and p.suffix==".py" else None
+  except Exception:paths[name]=None
+ return paths[name]
 def scalar(v):
  t=type(v).__name__
  if v is None or isinstance(v,(bool,int)):return {"type":t,"value":v}
@@ -59,10 +63,12 @@ def scalar(v):
  return {"type":t,**({"length":n} if isinstance(n,int) and n>=0 else {})}
 def tr(frame,event,arg):
  global seq
- if len(events)>=cap:return tr
+ if len(events)>=cap:return None
  p=path_of(frame)
- if p is None:return tr
+ if p is None:return None
  if event=="call":
+  # Provenance records calls, returns and exceptions, not line events.
+  frame.f_trace_lines=False
   caller=frame.f_back; cp=path_of(caller) if caller is not None else None
   argc=frame.f_code.co_argcount+frame.f_code.co_kwonlyargcount
   names=list(frame.f_code.co_varnames[:argc])
@@ -74,9 +80,11 @@ def tr(frame,event,arg):
   typ=arg[0].__name__ if isinstance(arg,tuple) and arg and hasattr(arg[0],"__name__") else "Exception"
   events.append({"i":seq,"event":"exception","callee":{"path":str(p.relative_to(repo)).replace("\\","/"),"function":frame.f_code.co_name,"firstlineno":frame.f_code.co_firstlineno},"exception_type":typ});seq+=1
  return tr
-ok=True;tb=[]
+ok=True;tb=[];runner_error=""
 sys.settrace(tr)
 try:_brain_run_suite(target)
+except _BrainTestRunnerError as e:
+ ok=False;runner_error=str(e)
 except SystemExit as e:
  ok=(e.code in (None,0,False))
  if not ok:tb=traceback.extract_tb(e.__traceback__)
@@ -88,15 +96,15 @@ for x in tb:
  try:p=pathlib.Path(x.filename).resolve()
  except Exception:continue
  if p.is_file() and repo in p.parents:frames.append([str(p.relative_to(repo)).replace("\\","/"),x.lineno,x.name])
-print("__BRAIN_PROVENANCE__"+json.dumps({"pass":ok,"events":events,"traceback":frames,"event_count":len(events)},sort_keys=True))
+print("__BRAIN_PROVENANCE__"+json.dumps({"pass":ok,"runner_error":runner_error,"events":events,"traceback":frames,"event_count":len(events)},sort_keys=True))
 '''
- try:
-  r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events),str(max_value_chars)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
- except subprocess.TimeoutExpired:
-  raise ProvenanceError("TEST_TIMEOUT")
- marker="__BRAIN_PROVENANCE__"; lines=[x for x in r.stdout.splitlines() if x.startswith(marker)]
+ r=_PATCH._run_process(repo,[sys.executable,"-c",code,str(repo),str(test),str(max_events),str(max_value_chars)],timeout,env)
+ if r["timed_out"]:raise ProvenanceError("TEST_TIMEOUT")
+ marker="__BRAIN_PROVENANCE__"; lines=[x for x in r["stdout"].splitlines() if x.startswith(marker)]
  if not lines: raise ProvenanceError("TRACE_OUTPUT_MISSING")
- out=json.loads(lines[-1][len(marker):]);out["returncode"]=r.returncode;return out
+ out=json.loads(lines[-1][len(marker):])
+ if out.get("runner_error"):raise ProvenanceError("TEST_RUNNER_INFRASTRUCTURE:"+out["runner_error"])
+ out["returncode"]=r["returncode"];return out
 
 def _static_calls(path):
   # A file under source_root may be third-party and use syntax this interpreter cannot parse
@@ -114,20 +122,30 @@ def _static_calls(path):
   if isinstance(f,ast.Attribute):return f.attr
   return None
  for fn in [n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))]:
-  for stmt in ast.walk(fn):
-   call=None;assigned=[]
-   if isinstance(stmt,(ast.Assign,ast.AnnAssign)):
-    val=stmt.value
-    if isinstance(val,ast.Call):call=val
-    targets=stmt.targets if isinstance(stmt,ast.Assign) else [stmt.target]
-    for t in targets:
-     assigned.extend(n.id for n in ast.walk(t) if isinstance(n,ast.Name) and isinstance(n.ctx,ast.Store))
-   elif isinstance(stmt,ast.Return) and isinstance(stmt.value,ast.Call):
-    call=stmt.value;assigned=["<return>"]
-   if call is None:continue
-   cname=callee_name(call)
-   if not cname:continue
-   out.append({"caller_symbol":fn.name,"line":getattr(call,"lineno",0),"callee_surface":cname,"assigned_to":sorted(set(assigned)),"argument_loads":sorted(set(x for a in call.args for x in names(a)))})
+  class Collector(ast.NodeVisitor):
+   def __init__(self):self.assigned=[]
+   def visit_FunctionDef(self,node):return  # nested functions are visited separately
+   def visit_AsyncFunctionDef(self,node):return
+   def visit_ClassDef(self,node):return
+   def visit_Lambda(self,node):return
+   def expression(self,node,assigned):
+    previous=self.assigned;self.assigned=assigned
+    if node is not None:self.visit(node)
+    self.assigned=previous
+   def visit_Assign(self,node):
+    assigned=[n.id for t in node.targets for n in ast.walk(t) if isinstance(n,ast.Name) and isinstance(n.ctx,ast.Store)]
+    self.expression(node.value,assigned)
+   def visit_AnnAssign(self,node):
+    assigned=[n.id for n in ast.walk(node.target) if isinstance(n,ast.Name) and isinstance(n.ctx,ast.Store)]
+    self.expression(node.value,assigned)
+   def visit_Return(self,node):self.expression(node.value,["<return>"])
+   def visit_Call(self,call):
+    cname=callee_name(call)
+    if cname:
+     out.append({"caller_symbol":fn.name,"line":getattr(call,"lineno",0),"callee_surface":cname,"assigned_to":sorted(set(self.assigned)),"argument_loads":sorted(set(x for a in call.args for x in names(a)))})
+    self.generic_visit(call)
+  collector=Collector()
+  for stmt in fn.body:collector.visit(stmt)
  return out
 
 def _canon(v): return json.dumps(v,sort_keys=True,separators=(",",":"))
@@ -138,10 +156,18 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
  env=_source_env(src,*tests)
  if not tests:raise ProvenanceError("TEST_PATHS_REQUIRED")
+ out=(repo/str(args.get("output_path") or "")).resolve()
+ if out==repo or repo not in out.parents:raise ProvenanceError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+ _PATCH._reject_output_overlap(out,src,tests)
+ protected={p:p.read_bytes() for p in tests}
+ budget=_PATCH.WallBudget(args.get("max_wall_time_s"))
  timeout=max(1,min(int(args.get("timeout_s",20)),120))
  max_events=max(100,min(int(args.get("max_trace_events",100000)),500000))
  max_value_chars=max(16,min(int(args.get("max_value_chars",120)),1024))
- traces=[{"test_path":_rel(repo,t),**_trace_one(repo,t,timeout,max_events,max_value_chars,env)} for t in tests]
+ traces=[]
+ for t in tests:
+  try:traces.append({"test_path":_rel(repo,t),**_trace_one(repo,t,budget.timeout(timeout),max_events,max_value_chars,env)})
+  finally:_PATCH._check_protected_bytes(protected)
  F=sum(not x["pass"] for x in traces);P=sum(x["pass"] for x in traces)
  if F==0:raise ProvenanceError("NO_FAILING_TEST")
  edges={}
@@ -195,7 +221,6 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   for m in matches:
    hypotheses.append({"caller_path":cp,"caller_symbol":m["caller_symbol"],"call_line":line,"callee_path":row["callee"]["path"],"callee_symbol":df,"assigned_to":m["assigned_to"],"argument_loads":m["argument_loads"],"dynamic_score":row["score"],"fail_coverage":row["fail_coverage"],"pass_coverage":row["pass_coverage"],"argument_observation_differs":row["argument_observation_differs"],"return_observation_differs":row["return_observation_differs"],"basis":["DYNAMIC_CALL_EDGE","STATIC_CALLSITE_BINDING"]+([ "FAIL_ONLY_CALL_EDGE" ] if "FAIL_ONLY_CALL_EDGE" in row["reasons"] else [])})
  hypotheses.sort(key=lambda x:(-x["dynamic_score"],x["caller_path"],x["call_line"],x["callee_path"],x["callee_symbol"]))
- result={"schema":SCHEMA,"status":"PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE","pass":True,"failing_test_count":F,"passing_test_count":P,"test_traces":traces,"ranked_call_edges":rows,"interprocedural_hypotheses":hypotheses,"provenance_basis":"DYNAMIC_REPO_LOCAL_CALL_RETURN_ARGUMENT_OBSERVATIONS_PLUS_STATIC_CALLSITE_ASSIGNMENT_BINDING","model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_GENERAL_SEMANTIC_CAUSALITY_PROOF","NO_COMPLETE_INTERPROCEDURAL_DEF_USE_GRAPH","NO_OBJECT_INTERNAL_STATE_PROVENANCE","NO_NON_PYTHON_SUPPORT","NO_PATCH_CORRECTNESS_OR_MERGEABILITY_CLAIM","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
- out=(repo/str(args.get("output_path") or "")).resolve()
- if out==repo or repo not in out.parents:raise ProvenanceError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+ observed=any(h["fail_coverage"]>0 for h in hypotheses)
+ result={"schema":SCHEMA,"status":"PASS__BOUNDED_INTERPROCEDURAL_VALUE_PROVENANCE" if observed else "OPEN__NO_FAILING_INTERPROCEDURAL_HYPOTHESIS","pass":observed,"failing_test_count":F,"passing_test_count":P,"test_traces":traces,"ranked_call_edges":rows,"interprocedural_hypotheses":hypotheses,"provenance_basis":"DYNAMIC_REPO_LOCAL_CALL_RETURN_ARGUMENT_OBSERVATIONS_PLUS_STATIC_CALLSITE_ASSIGNMENT_BINDING","model_dependency_count":0,"external_capability_provider_count":0,"incremental_spend_usd":0,"hard_nonclaims":["NO_GENERAL_SEMANTIC_CAUSALITY_PROOF","NO_COMPLETE_INTERPROCEDURAL_DEF_USE_GRAPH","NO_SUBPROCESS_TRACE_COMPLETENESS","NO_OBJECT_INTERNAL_STATE_PROVENANCE","NO_NON_PYTHON_SUPPORT","NO_PATCH_CORRECTNESS_OR_MERGEABILITY_CLAIM","NO_FRONTIERCODE_SCORE_OR_ACCEPTANCE_CREDIT"]}
  out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n");result["output_path"]=_rel(repo,out);result["output_sha256"]=hashlib.sha256(out.read_bytes()).hexdigest();result["output_verified"]=True;return result
