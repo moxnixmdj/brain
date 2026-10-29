@@ -193,11 +193,26 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if parent and (pathlib.Path(root) / parent).is_dir():
             out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
                                   "evidence": sources[0]}
-    # A test command slot is satisfied by running the ONE stated test file.
+    # A test command slot is satisfied by running the ONE stated test file -- through
+    # the repository's OWN suite runner, never by executing the file as a script.
+    #
+    # Measured 2026-10-29 on `e2d7981`: `[python, "-B", test_file]` exits 0 having run
+    # NOTHING when the file carries no `__main__` guard (the same trap
+    # `python_test_guided_patch_search_v1.suite_argv` was written for: 695 of 2019
+    # unittest files in this repository have no guard).  A repair loop reads that 0 as
+    # "the stated test already passes", so "the add function in X is broken, fix it so
+    # its tests pass" returned PASS with X byte-identical and its own test red.  The
+    # same adapter, given the loader command line, repaired X in place and verified it
+    # (applied=True, pre_rc=1, post_rc=0).  One rule, one place: the runner the
+    # capability itself uses.
     if "test_argv" in keys and len(tests) == 1:
-        out["test_argv"] = {"value": [sys.executable, "-B", tests[0]],
-                            "rule": ("ARGV_FROM_DISCOVERED_TEST_FILE" if discovered_tests
-                                     else "ARGV_FROM_STATED_TEST_FILE"),
+        from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
+            suite_argv as _suite_argv,
+        )
+        runner = _suite_argv(sys.executable, *tests)
+        out["test_argv"] = {"value": [sys.executable, "-B"] + [str(x) for x in runner[1:]],
+                            "rule": ("ARGV_FROM_DISCOVERED_TEST_FILE_SUITE_RUNNER" if discovered_tests
+                                     else "ARGV_FROM_STATED_TEST_FILE_SUITE_RUNNER"),
                             "evidence": tests[0]}
     if "test_paths" in keys and tests:
         out["test_paths"] = {"value": list(tests),

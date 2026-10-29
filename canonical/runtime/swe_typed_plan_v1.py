@@ -55,12 +55,39 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # (goal triggers, registry-keyword terms to enumerate candidates, required effect token in cid)
     (("caller", "who calls", "call site", "call graph", "find every call"),
      ("caller", "call graph", "who calls"), "symbol"),
+    # A BUG REPORT IS A REPAIR REQUEST.  Measured 2026-10-29: "Bug: <S> add()
+    # returns the wrong value. Failing test: <T>." has no imperative verb, so no
+    # lexical route saw a request for a change: the primary compiler planned
+    # docx.document.create_from_json_record for it (matched on the single token
+    # "value") and the selector's own decisive route picked the repair LOOP, whose
+    # contract is a candidate patch with the source restored -- a PASS over a file
+    # that was still broken.  The effect vocabulary in
+    # capability_selection_retrieval_v1._EFFECT_WORDS has always listed bug/broken/
+    # failing as repair words; what was missing was the same three-part family the
+    # caller-finding route already uses.  The registry's own keyword data then makes
+    # this decisive with no id table: of the four rows whose declared surface
+    # mentions landing a fix, exactly one (python.software.repair.apply.verified.v1)
+    # admits every input the sentence states, and its name carries the effect token.
+    (("bug:", "bug report", "bug in", "broken", "failing test", "test fails",
+      "tests fail", "returns the wrong", "wrong value", "does not pass",
+      "doesn't pass"),
+     ("apply", "land", "write the fix"), "apply"),
 )
 _FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration.verify.")
+
+# A sentence that ASKS ABOUT a defect is not a request to change the file.  The
+# family route is authoritative once it fires, so "Explain the bug in X" would
+# otherwise be answered by editing X -- a change nobody asked for.  Analysis words
+# therefore keep the family route out of the way, and the lexical/typed paths
+# decide (and fail closed) exactly as they did before.
+_ANALYSIS_ONLY_TRIGGERS = ("explain", "describe", "summarise", "summarize",
+                           "diagnose", "why is", "why does", "how does", "review the")
 
 
 def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
     low = str(goal or "").lower()
+    if any(word in low for word in _ANALYSIS_ONLY_TRIGGERS):
+        return None
     for triggers, terms, token in _FAMILIES:
         if any(t in low for t in triggers):
             return terms, token

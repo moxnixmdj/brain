@@ -80,6 +80,9 @@ from canonical.runtime.live_integrated_brain_v1 import (
 )
 from canonical.runtime.lossless_raw_task_contract_v1 import compile_contract
 from canonical.runtime.bound_capabilities import python_repair_measured_acceptance_controller_v1 as _acceptance
+from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
+    is_test_file_name as _is_test_file_name,
+)
 
 SCHEMA = "PROJECT_BRAIN_LIVE_BRAIN_ROUTE_ADMISSION_V1"
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
@@ -1151,7 +1154,12 @@ def promised_artifact_class(errors: list[str]) -> str:
 
 
 
-_REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
+# A rename, a move, an extraction and a reformat are all promises that a file is
+# different afterwards; only repair verbs were read, so a refactor that changed nothing
+# was never checked.  "add"/"insert" are deliberately absent: they are function names
+# far more often than they are instructions.
+_REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct|rename|move|extract|inline|"
+                            r"refactor|reformat)\b", re.IGNORECASE)
 # "a measured acceptance repair report" is a noun phrase naming an artifact,
 # not an instruction to mutate a source file.  A file actually named report.py
 # is still a repair target: the negative lookahead keeps that distinction.
@@ -1168,6 +1176,81 @@ _REPAIR_REPORT_PHRASE_RE = re.compile(
 # purpose: an open rule here would silently drop real instructions.
 _TOOL_NOUNS = ("loop", "search", "tool", "engine", "report", "step", "routine",
                "capability", "pass")
+
+# A bug report states a defect and its witness instead of asking for a verb.
+# "Bug: <src> add() returns the wrong value. Failing test: <test>." promised that
+# <src> would be different afterwards, but there is no repair verb in it, so the
+# promise reader returned nothing, no digest was taken, and a run that did not
+# touch a byte reported PASS while the named test was still red.  Measured
+# 2026-10-29 on e2d7981 with the real runner as the oracle.
+_DEFECT_STATEMENT_RE = re.compile(
+    r"\b(?:bug|broken|defect|regression|returns?\s+the\s+wrong|"
+    r"wrong\s+(?:value|result|answer|output)|failing\s+tests?|test\s+fails|"
+    r"tests?\s+(?:is|are)\s+failing|does\s*n[o']t\s+pass)\b",
+    re.IGNORECASE,
+)
+
+
+def _nearest_source_before(text: str, candidates: list[tuple[str, Any]],
+                           cut: int) -> str | None:
+    """The source file a repair verb governs when the sentence names it FIRST.
+
+    Measured 2026-10-29 on ``e2d7981``: "the add function in <file> is broken, fix
+    it so its tests pass" returned PASS with the file byte-identical and its own
+    test still red.  The promise was never read at all -- the reader only looked for
+    a ``.py`` AFTER the verb, and ordinary English puts the target before it ("the
+    add function in X is broken, fix it").  So the gate that exists to stop a
+    no-op being reported as a repair had nothing to check.
+
+    A witness test is not a promise: "Bug: <test> fails, fix it" names the test the
+    repair must satisfy, not the file that must change, so test names are excluded
+    by the repository's OWN rule (``is_test_file_name``, the same pair
+    ``python_test_audit`` globs on).  Nothing is added when no non-test source is
+    named before the verb: an unstated target keeps failing closed downstream.
+    """
+    best: str | None = None
+    best_at = -1
+    for raw, path in candidates:
+        if _is_test_file_name(path.name):
+            continue
+        for spelling in (raw, str(path)):
+            at = text.rfind(str(spelling), 0, cut)
+            if at > best_at:
+                best_at, best = at, str(raw)
+    return best
+
+
+# A QUESTION IS NOT AN ACTION.  "Explain why the test in <T> fails" promises an ANSWER;
+# nothing on disk has to change, so not one of the artifact / source-change / observation
+# gates can see whether the answer was given.  Measured 2026-10-29: the moment a read
+# request stopped overwriting the file it named -- and therefore stopped failing -- the
+# router answered that sentence with code.impact.tree_sitter.testselect.v1 (test
+# SELECTION) and the door reported PASS with output_verified=True, which is the
+# capability's own goal, not the sentence's.  The sentence's effect is read with one
+# regex and checked against the capability's own declared surface.
+_ANSWER_REQUEST_RE = re.compile(r"\b(?:explain|explanation|diagnose)\b"
+                                r"|\bwhy\s+(?:does|do|is|are|did|would)\b",
+                                re.IGNORECASE)
+_ANSWER_SURFACE_RE = re.compile(r"\b(?:explain\w*|diagnos\w*|fault\w*|locali[sz]\w*"
+                                r"|traceback|cause|root_cause|why)\b", re.IGNORECASE)
+
+
+def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
+    """A sentence that asks WHY must be answered by something that explains.
+
+    Only the sentence and the capability's own declaration are consulted: the capability id,
+    what it says it provides, and its declared keywords.  A capability that neither explains
+    nor localizes is not an answer to a question, whatever its own ``expect`` field says.
+    """
+    if not _ANSWER_REQUEST_RE.search(str(goal or "")):
+        return []
+    cid = str(entry.get("capability_id") or entry.get("id") or "")
+    surface = " ".join([cid,
+                        " ".join(str(x) for x in (entry.get("provides") or [])),
+                        " ".join(str(x) for x in (entry.get("keywords") or []))])
+    if _ANSWER_SURFACE_RE.search(surface):
+        return []
+    return ["STATED_ANSWER_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED")]
 
 
 def _promised_source_files(goal: str) -> list[str]:
@@ -1212,6 +1295,10 @@ def _promised_source_files(goal: str) -> list[str]:
                 if at >= 0 and (best_at is None or at < best_at):
                     best_at = at
                     best = raw
+        if best is None:
+            # English puts the repaired target before the verb as often as after
+            # it.  Read the promise from the sentence, not from word order.
+            best = _nearest_source_before(text, candidates, m.start())
         if best is None or best in out:
             continue
         # A file inside a stated source ROOT is covered by the root rule below.  The
@@ -1222,6 +1309,21 @@ def _promised_source_files(goal: str) -> list[str]:
                for root in _promised_source_roots(text)):
             continue
         out.append(best)
+    if not out and _DEFECT_STATEMENT_RE.search(text):
+        # A sentence that reports a defect and names where it lives ("Bug: X
+        # returns the wrong value") promised that X change, and names its witness
+        # instead of its verb.  Read the promise from the statement rather than
+        # from the grammar: every non-test source the sentence names is a target,
+        # read with the same rules the verb branch uses (test files are witnesses,
+        # files inside a stated root are covered by the root rule).
+        for raw, path in candidates:
+            if _is_test_file_name(path.name):
+                continue
+            if any(str(raw).startswith(root.rstrip("/") + "/")
+                   for root in _promised_source_roots(text)):
+                continue
+            if raw not in out:
+                out.append(raw)
     return out
 
 
@@ -1472,9 +1574,14 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
 _CHANGE_VERB_RE = re.compile(
     r"\b(?:write|create|save|generate|build|add|update|modify|convert|compress|"
     r"repair|fix|patch|correct|commit|rename|move|copy|install|delete|remove|"
-    r"refactor|format|apply|rewrite|replace|edit|produce|emit|make)\b",
+    r"refactor|format|reformat|apply|rewrite|replace|edit|produce|emit|make|"
+    r"regenerate|restructure|in[- ]place)\b",
     re.IGNORECASE)
 _DESTRUCTIVE_VERB_RE = re.compile(r"\b(?:delete|remove|move|rename|relocate|discard)\b", re.IGNORECASE)
+# The words that make a move/rename/deletion about a SYMBOL rather than a file.
+_SYMBOL_OBJECT_RE = re.compile(
+    r"\b(?:function|method|class|symbol|parameter|variable|argument|attribute|"
+    r"constant|import|definition|def)\b", re.IGNORECASE)
 _OBSERVATION_MAX_FILES = 4000
 
 
@@ -1488,6 +1595,31 @@ def _stated_paths(goal: str) -> list[str]:
         if raw not in out:
             out.append(raw)
     return out
+
+
+# A change verb is only an INSTRUCTION when it is used as one.  "Find every caller of the
+# function add in <X>" contains the token "add"; reading that as a promise to change <X>
+# refused the correct answer with NO_OBSERVED_EFFECT (measured 2026-10-29).  The verb is a
+# noun when what follows it is a preposition or a bracket -- "add in", "add(", "insert of" --
+# and an instruction when it takes an object: "Add a test", "fix <X>", "add retry ... to <X>".
+_NON_IMPERATIVE_NEXT_WORDS = frozenset({
+    "in", "of", "on", "at", "for", "with", "to", "from", "by", "as", "that", "which"})
+
+
+def _sentence_promises_a_change(goal: str) -> bool:
+    """Does the sentence USE a change verb, rather than merely contain one?"""
+    text = str(goal or "")
+    for m in _CHANGE_VERB_RE.finditer(text):
+        tail = text[m.end():m.end() + 24].lstrip()
+        if not tail:
+            continue
+        if tail.startswith("("):
+            continue
+        first = tail.split()[0].strip(",.:;").lower()
+        if first in _NON_IMPERATIVE_NEXT_WORDS:
+            continue
+        return True
+    return False
 
 
 def _destructive_targets(goal: str) -> set[str]:
@@ -1519,6 +1651,12 @@ def _destructive_targets(goal: str) -> set[str]:
             if verb in ("move", "rename", "relocate"):
                 tail = text[at + len(raw):at + len(raw) + 40].lstrip().lower()
                 if not (tail.startswith("to ") or tail.startswith("into ")):
+                    continue
+                # The verb must govern the FILE.  "Move the function mul from <A> to <B>"
+                # moves a symbol between modules; licensing <A>'s removal on that basis is
+                # how a PASS was reported while <A> was deleted and the suite imported a
+                # module that no longer existed.  Measured 2026-10-29.
+                if _SYMBOL_OBJECT_RE.search(gap):
                     continue
             out.add(raw)
             break
@@ -1629,8 +1767,15 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
         elif before["parses"].get(raw) and after.get("parses", {}).get(raw) is False:
             errors.append("NAMED_SOURCE_UNPARSEABLE:" + raw)
     if result.get("pass") is True:
-        promised_file = bool(artifacts) or (
-            bool(_CHANGE_VERB_RE.search(str(goal or ""))) and bool(after.get("stated")))
+        # "Find every caller of the function ADD in <X>" carries the token "add", so a bare
+        # change-verb test promised a file change and then refused a correct answer with
+        # NO_OBSERVED_EFFECT.  Measured 2026-10-29: that sentence returned
+        # FAIL_CLOSED__NO_OBSERVED_EFFECT from the symbol index -- the capability that answers
+        # it -- and returned PASS before this, because writing its report over <X> counted as
+        # "something happened".  The promise is read by the one reader that decides what a
+        # sentence promised, not by a token scan of the sentence.
+        promised_file = bool(artifacts) or bool(_promised_source_files(goal)) \
+            or bool(_promised_source_roots(goal)) or _sentence_promises_a_change(goal)
         if promised_file:
             present = any((ROOT / a).is_file() for a in (artifacts or []))
             from canonical.runtime import execute_v1 as _kernel
@@ -2227,6 +2372,17 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = "PROMISED_SOURCE_CHANGE_NOT_APPLIED"
         result["promised_source_change_errors"] = unchanged
+    _answered_by = str(result.get("compiled_capability_id")
+                       or result.get("capability_id") or "")
+    unanswered = stated_answer_errors(
+        normalized, dict(admissible.get(_answered_by) or {})) \
+        if result.get("pass") is True else []
+    if unanswered:
+        result["runtime_status_before_answer_check"] = result.get("status")
+        result["status"] = "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED"
+        result["pass"] = False
+        result["failure_class"] = "STATED_ANSWER_NOT_PROVIDED"
+        result["stated_answer_errors"] = unanswered
     # The third authority: what the filesystem says, not what the tool says.  A
     # run that did nothing, or that removed the file it was asked to edit, has no
     # claim to an exact acceptance no matter how clean its own report is.

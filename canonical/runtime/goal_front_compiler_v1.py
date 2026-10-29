@@ -1401,6 +1401,28 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     return inputs
 
 
+# The capabilities whose OWN CONTRACT is to change a source file.  Read from the entry's
+# declaration -- its id, what it says it produces, and its declared keywords -- never from a
+# table of ids.  A capability that reports ON a file is not one of these, and that is the
+# distinction that matters: the report must not be written over the file it describes.
+_SOURCE_EDITING_SURFACE = re.compile(
+    r"\b(?:repair|patch|edit|refactor|rename|format|reformat|rewrite|apply|fix|"
+    r"move|extract|inline|insert|append|prepend|substitut)\w*\b", re.IGNORECASE)
+
+
+def capability_edits_source(entry: Mapping[str, Any] | None) -> bool:
+    """Does this capability declare that it CHANGES a file, rather than reading one?"""
+    if not isinstance(entry, Mapping):
+        return False
+    surface = " ".join([
+        str(entry.get("capability_id") or entry.get("id") or ""),
+        str(entry.get("adapter_module") or ""),
+        " ".join(str(x) for x in (entry.get("provides") or [])),
+        " ".join(str(x) for x in (entry.get("keywords") or [])),
+    ])
+    return bool(_SOURCE_EDITING_SURFACE.search(surface))
+
+
 def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path, exclude=None, entry: Mapping[str, Any] | None = None,
                              cycle=None, spool=None) -> list[str]:
     """F10: an output path is never one of the action's own input files.
@@ -1424,6 +1446,29 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     # fails closed, so the type is settled here rather than at each call site.
     root = pathlib.Path(root)
     input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k, entry)}
+    # F10b: a sentence that only ASKED about a file may not be handed that file as the
+    # place to put a result.  F10 already covered output==input; it could not see the case
+    # where the only other slot is a DIRECTORY ("source_root"), so nothing collided and the
+    # capability that reports on a file was told to write its report over it.  Measured
+    # 2026-10-29: "Count the functions in <T>/pkg/calc.py" and "Explain the bug in
+    # <T>/pkg/calc.py" both replaced the source with the tool's JSON (32 bytes -> 545), on
+    # requests that asked to READ it, and one of them reported PASS.
+    #
+    # The remedy is F13's, unchanged: a deterministic spool artifact replaces the path the
+    # sentence never nominated as an output.  The guard is scoped by the sentence's own
+    # verbs, so "Reformat <T>/pkg/calc.py in place" keeps writing calc.py.
+    # The first version of F10b asked the SENTENCE ("does it carry a change verb?"), and
+    # that left the destruction open on exactly the sentences that ask for a change: "fix
+    # <S>" carries a change verb and a report capability still wrote its JSON over <S>.
+    # Measured 2026-10-29 across fresh trees: fix <S>, "the test in <T> is failing...",
+    # "add a test for ...", "add retry ... to <S>", "generate tests from the docstrings in
+    # <S>" and "the CI is failing because <T> fails" each destroyed the file they named
+    # (five of six reported FAIL_CLOSED, one reported PASS).  The question is not what the
+    # sentence asks for; it is what the CAPABILITY says it does.  A capability that only
+    # reports on a file may never be handed that file as its output, whatever the sentence
+    # wanted; a capability whose own contract is to edit it may.
+    edits_source = capability_edits_source(entry)
+    stated_existing = set() if edits_source else set(_named_existing_paths(goal, root))
     for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k, entry)]:
         value = str(inputs[key])
         collides = value in input_paths
@@ -1436,7 +1481,21 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
                     raise
                 inputs[key] = _spool_path(key, cycle, spool)
             rebound.append(key)
+        elif value in stated_existing and spool is not None and cycle is not None:
+            # No output was nominated, so nothing the sentence named may be overwritten.
+            inputs[key] = _spool_path(key, cycle, spool)
+            rebound.append(key)
     return rebound
+
+
+def _sentence_asks_for_a_change(sentence: str) -> bool:
+    """Does the sentence ask for anything to be changed?  One vocabulary, one place.
+
+    Imported lazily: this module is imported by the route admission it is asking, so the
+    vocabulary is read at call time rather than at import time.
+    """
+    from canonical.runtime import live_brain_route_admission_v1 as door
+    return bool(door._CHANGE_VERB_RE.search(str(sentence or "")))
 
 
 # ----------------------------------------------------------------------------- routing

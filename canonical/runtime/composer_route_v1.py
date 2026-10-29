@@ -2941,7 +2941,8 @@ def _noun_matched_path(slot: str, paths: Sequence[str], goal: str) -> str | None
 
 def bind(signature: Mapping[str, str], goal: str,
          inputs: Mapping[str, Any] | None = None,
-         produced: Mapping[str, Any] | None = None) -> dict[str, Any]:
+         produced: Mapping[str, Any] | None = None,
+         entry: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Fill each slot with something real, or leave it out and say so."""
     inputs = inputs or {}
     produced = produced or {}
@@ -3105,7 +3106,40 @@ def bind(signature: Mapping[str, str], goal: str,
             body = extract_content(goal)
             if body:
                 args[slot] = body
+    _repoint_an_output_that_is_the_file_the_step_only_reads(args, goal, entry)
     return args
+
+
+def _repoint_an_output_that_is_the_file_the_step_only_reads(
+        args: dict[str, Any], goal: str,
+        entry: Mapping[str, Any] | None = None) -> list[str]:
+    """The composer's call site of F10b, the front compiler's own output rule.
+
+    A sentence that asks a QUESTION about a file must not be handed that file as the place
+    to put a result.  Measured 2026-10-29::
+
+        "Explain the bug in <T>/pkg/calc.py"
+
+    composed ``[code.multilanguage.parse.tree_sitter.v1, python.patch.search...]`` and bound
+    ``output_path = <T>/pkg/calc.py`` -- the only other slot was the DIRECTORY
+    ``source_root``, so F10's output-equals-input test saw no collision -- and the parse
+    adapter wrote its JSON report over the source: 32 bytes -> 545, gone, on a request that
+    asked to read it.
+
+    The rule is not restated here.  ``goal_front_compiler_v1.repair_output_collisions`` is
+    the one implementation of "an output is never a file the sentence only named as an
+    input", and it now covers this case (F10b) with F13's spool remedy.  A guard that fixes
+    one path and leaves its sibling open is not closed, so the composer calls it rather than
+    carrying a second copy.  A sentence that asks for a change is untouched: it gets back
+    the exact binding it had.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as _front
+    taken = {str(v) for v in args.values() if isinstance(v, str) and _pathish(v)}
+    try:
+        return _front.repair_output_collisions(goal, args, _repo_root(), entry=entry,
+                                               cycle=0, spool=taken)
+    except Exception:  # noqa: BLE001 - the guard must never break binding
+        return []
 
 
 def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
@@ -3368,7 +3402,7 @@ def execute_chain(chain: Sequence[str], goal: str,
                                     "promise": "existing_content_kept"},
                     "steps": steps}
         sig = TS.signature(entry)
-        args = bind(sig, goal, inputs, produced)
+        args = bind(sig, goal, inputs, produced, entry=entry)
         # Snapshot what already exists, so this step can only be credited with
         # files it actually created.
         existed_before = {v for v in (_pathish(a) for a in args.values()) if v and _exists_in_repo(v)}

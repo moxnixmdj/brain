@@ -260,7 +260,18 @@ class EffectFamilyEnumerationTests(unittest.TestCase):
         self.assertIs(result.get("pass"), True, result.get("status"))
         self.assertIsNone(result.get("tool_truth_errors"))
         self.assertIsNone(result.get("observed_effect_errors"))
+        # The artifact's PLACE is read from the run, not assumed: an earlier version of this
+        # test looked only inside the user's tree, which is where the report went when the
+        # adapter was writing it over the file the sentence named (measured 2026-10-29).  It
+        # now goes to the spool, so the test follows what the run says it produced -- and the
+        # independent oracle below (the two real callers by name) is unchanged.
         reports = list(base.rglob("*.json"))
+        for row in result.get("execution") or []:
+            produced = str(((row or {}).get("result") or {}).get("output_path") or "")
+            if produced:
+                candidate = ROOT / produced
+                if candidate.is_file():
+                    reports.append(candidate)
         self.assertTrue(reports, "no report artifact was written")
         callers = set()
         for rf in reports:
