@@ -155,6 +155,47 @@ class TheAnswerIsTheEffectTests(unittest.TestCase):
         self.assertIn("impact", cid, cid)
         self.assertIs(result.get("pass"), True, (result.get("status"), cid))
 
+    def test_a_request_whose_state_already_holds_is_answered_not_refused(self):
+        """Idempotency: the baseline run is the proof, so no byte has to move."""
+        base = _tree("already")
+        # calc.py in this fixture is correct and its test passes: nothing to repair.
+        result = door.solve({
+            "task_id": "ALREADY",
+            "goal": "Repair the python source %s so that the unit tests in %s pass."
+                    % (_rel(base / "pkg/calc.py"), _rel(base / "pkg/test_calc.py"))})
+        self.assertIs(result.get("pass"), True, (result.get("status"), result.get("reason")))
+        self.assertIs(result.get("already_satisfied"), True, result.get("status"))
+        self.assertIs(result.get("edited"), False, "nothing may be reported as edited")
+
+    def test_a_repair_that_was_only_reported_is_not_a_repair(self):
+        """FALSE-PASS REGRESSION: source byte-identical + its own test red is not PASS."""
+        base = _tree("report_only")
+        source = base / "pkg/calc.py"
+        source.write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+        before = source.read_bytes()
+        result = door.solve({
+            "task_id": "REPORTONLY",
+            "goal": "Repair the python source %s so that the unit test %s passes, and save the "
+                    "repair report to %s." % (_rel(source), _rel(base / "pkg/test_calc.py"),
+                                              _rel(base / "repair.json"))})
+        self.assertIs(result.get("pass"), False, result.get("status"))
+        self.assertTrue(str(result.get("status")).startswith("FAIL"), result.get("status"))
+        # Independent oracle: the file is exactly as it was found.
+        self.assertEqual(source.read_bytes(), before)
+
+    def test_a_parse_is_not_a_lint(self):
+        """A syntax tree was written; nothing was linted. That is not a lint."""
+        base = WORK / "lint_js"
+        if base.exists():
+            shutil.rmtree(base)
+        base.mkdir(parents=True)
+        (base / "app.js").write_text("export function add(a, b) {\n  return a + b;\n}\n",
+                                     encoding="utf-8")
+        result = door.solve({"task_id": "JSLINT",
+                             "goal": "Lint the javascript file %s." % _rel(base / "app.js")})
+        self.assertIs(result.get("pass"), False, result.get("status"))
+        self.assertNotIn("parse.tree_sitter", str(result.get("compiled_capability_id") or ""))
+
     def test_an_empty_test_selection_is_not_an_answer(self):
         """The sentence asked which tests to run; zero selected is not an answer."""
         base = _tree("empty", tests=False)

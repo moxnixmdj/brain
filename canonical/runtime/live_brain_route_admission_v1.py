@@ -826,6 +826,34 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
                          refusal_payload=dict(_decoded), executor=LOCAL_EXECUTION_PROOF,
                          tool_executed=tool_executed)
+        # "IT ALREADY PASSES" IS AN ANSWER, AND IT IS THE ONE THE REPAIR LOOP ALREADY COMPUTED.
+        #
+        # Every repair adapter refuses with ``BASELINE_ALREADY_PASSES`` when the named test passes
+        # BEFORE any edit (python_software_repair_loop_v1, the iterative and coupled loops, the patch
+        # search, the provenance-guided repair).  The door turned that into
+        # ``FAIL__LIVE_CONTROLLER_EXECUTION`` with the reason buried in the exception: the caller was
+        # told the controller failed, when the machine had just proven the requested end state holds.
+        # Measured 2026-10-30 on the flagship repair route.  The requested post-state is true, so the
+        # request is satisfied -- with the baseline evidence, and with ``edited: false`` so nothing
+        # can read it as a repair that happened.
+        if _ALREADY_SATISFIED_RE.search(str(exc)):
+            return {
+                "schema": LIVE_SCHEMA,
+                "status": "PASS__REQUESTED_STATE_ALREADY_HOLDS",
+                "pass": True,
+                "task_id": task_id,
+                "executed": True,
+                "edited": False,
+                "already_satisfied": True,
+                "compiled_capability_id": selected,
+                "compiler_mode": compiled.get("compiler_mode"),
+                "reason": type(exc).__name__ + ":" + str(exc),
+                "answer_artifact": {"already_satisfied": True, "edited": False,
+                                    "evidence": (type(exc).__name__ + ":" + str(exc))[:300]},
+                "execution_proof_type": LOCAL_EXECUTION_PROOF,
+                "tool_executed": tool_executed,
+                "elapsed_ms": max(0, (perf_counter_ns() - started) // 1_000_000),
+            }
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
                      executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
@@ -1434,6 +1462,18 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
      re.compile(r"\bcallers?\b|\bwho calls\b|\bcall[ _-]?(?:graph|sites?|edges?)\b|"
                 r"\bcallers_of\b", re.IGNORECASE),
      "STATED_CALLER_MAP_NOT_PROVIDED_BY_CAPABILITY"),
+    # A PARSE IS NOT A LINT.  Measured 2026-10-30: "Lint the javascript file <f>." was certified
+    # PASS by code.multilanguage.parse.tree_sitter.v1 -- a syntax tree was written, nothing was
+    # linted, and no rule was ever evaluated.  The accepted artifact was verified as a FILE WRITE;
+    # no gate asked whether the stated effect happened.  The Python rows that really lint declare
+    # it (static_triage / ruff, type_gate / mypy); a language with no linter row now refuses by
+    # name instead of passing on a parse.
+    (re.compile(r"\blint\b|\bformat(?:ting)?\b|\btype[- ]?check\b|\bmypy\b|\bruff\b",
+                re.IGNORECASE),
+     re.compile(r"\blint\w*|\bruff\b|\bflake8\b|\beslint\b|\bpyright\b|\bpylint\b"
+                r"|\bformat\w*|\bblack\b|\bautopep8\b|\bprettier\b|\btype[-_ ]?gate\b"
+                r"|\bmypy\b|\btypec\w*|\bstatic[_ ]?triage\b|\btriage\b", re.IGNORECASE),
+     "STATED_LINT_OR_FORMAT_NOT_PERFORMED_BY_CAPABILITY"),
     # "RUN THE TESTS" REQUIRES SOMETHING TO HAVE RUN.  Measured 2026-10-30: "Run the test suite for
     # <T>" was certified PASS by the same test-selection INDEX that answered the flaky question,
     # while the tree's own suite was never executed -- no return code, no count of tests run, no
@@ -1700,12 +1740,23 @@ def _promised_source_files(goal: str) -> list[str]:
     # after each repair verb, not every source file in the sentence.
     out = []
     for m in _REPAIR_VERB_RE.finditer(text):
-        if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
-            # The next words are "report"/"receipt"/...: the sentence asks for
+        _tail = text[m.end():m.end() + 100]
+        if _REPAIR_REPORT_PHRASE_RE.match(_tail):
+            # The next words are "report"/"receipt"/"...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
             # changed.  Demanding a byte change in the nearest .py witness here
             # made a correct measured-acceptance report fail at the front door.
-            continue
+            #
+            # BUT AN OBJECT ENDS THAT EXEMPTION.  "Repair the python source <X> so that the unit test
+            # <T> passes, and save the repair report to <R>" asks for the source to be repaired AND
+            # for a report of it; the report phrase here sits AFTER the object, and reading it as a
+            # dry-run request certified PASS while <X> was byte-identical and its own test was still
+            # red -- measured 2026-10-30, the one FALSE row left in the matrix.  The exemption is
+            # only for a verb whose object is the report itself ("run the repair loop and save the
+            # report"), so it is granted only when no source file is named between the verb and the
+            # phrase.
+            if not any(str(raw) in text[m.end():m.end() + 100] for raw, _p in candidates):
+                continue
         # "with the test guided repair LOOP", "with AST patch SEARCH": the word is
         # naming a tool, not asking for a change.  Measured on 18ecf7db: that noun
         # match made the sentence's witness tests the repair target, so the goal
@@ -1942,13 +1993,24 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     one sentence be satisfiable at all; the unchanged case still fails closed when
     no stated report carries a patch that applies.
     """
+    # A STATED REPORT IS NOT A LICENCE TO LEAVE THE NAMED SOURCE BROKEN.
+    #
+    # ``_statement_patch_authority`` accepts a patch that the report carries as the delivered change,
+    # which is right when the sentence asks for the PATCH ("run the repair loop and save the report").
+    # It is wrong when the sentence names the source as the object of the repair verb: "Repair the
+    # python source <X> so that the unit test <T> passes, and save the repair report to <R>" asks for
+    # X to be repaired, and a run that finds a verified patch, writes a report and RESTORES X has not
+    # done what was asked.  Measured 2026-10-30: PASS with X byte-identical and its own test still
+    # red -- the last FALSE row in the capability matrix.  The object of the verb is read from the
+    # sentence (same rule the promise itself uses), and it removes the exemption for that file only.
+    _objects = set(_promised_source_files(goal))
     errors = []
     for raw, digest in (before or {}).items():
         now = _source_digest(raw)
         if not now:
             errors.append("PROMISED_SOURCE_UNREADABLE:" + raw)
         elif now == digest:
-            if _statement_patch_authority(raw, artifacts, before_files):
+            if raw not in _objects and _statement_patch_authority(raw, artifacts, before_files):
                 continue
             errors.append("PROMISED_SOURCE_UNCHANGED:" + raw)
     # A stated source ROOT promises that the repair happened somewhere inside it.
@@ -1956,7 +2018,9 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     # one module; requiring nothing would accept a run that touched no file at all.
     for root, files_before in (roots_before or {}).items():
         changed = any(_source_digest(rel) != digest for rel, digest in files_before.items())
-        if changed or _statement_patch_authority(root, artifacts, before_files):
+        _root_is_the_object = any(obj.startswith(str(root).rstrip("/") + "/") for obj in _objects)
+        if changed or (not _root_is_the_object
+                       and _statement_patch_authority(root, artifacts, before_files)):
             continue
         errors.append("PROMISED_SOURCE_UNCHANGED:" + root)
     return errors
@@ -2185,6 +2249,14 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
                                     path, so a goal that only asks for an answer
                                     is not accused of doing nothing.
     """
+    # AN ALREADY-SATISFIED ANSWER *HAS* AN OBSERVATION: THE BASELINE RUN.
+    #
+    # ``NO_OBSERVED_EFFECT`` asks the filesystem whether the promised change happened.  When the
+    # repair loop proved the named test already passes, no byte SHOULD move, and demanding one turns
+    # the machine's best evidence ("the requested end state holds, measured") into a refusal that
+    # contradicts its own artifact.  The exemption is scoped to the flag an adapter sets only after
+    # running the named test to return code 0 before any edit.  The removal/parse checks below still
+    # run: an already-satisfied repair may not have deleted or broken the file it was asked about.
     errors: list[str] = []
     exempt = _destructive_targets(goal)
     for raw in before.get("parses") or {}:
@@ -2194,7 +2266,7 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
             errors.append("NAMED_INPUT_REMOVED:" + raw)
         elif before["parses"].get(raw) and after.get("parses", {}).get(raw) is False:
             errors.append("NAMED_SOURCE_UNPARSEABLE:" + raw)
-    if result.get("pass") is True:
+    if result.get("pass") is True and result.get("already_satisfied") is not True:
         # "Find every caller of the function ADD in <X>" carries the token "add", so a bare
         # change-verb test promised a file change and then refused a correct answer with
         # NO_OBSERVED_EFFECT.  Measured 2026-10-29: that sentence returned
@@ -2548,6 +2620,10 @@ _JUDGED_FAILURE_CLASSES = frozenset({
 # un-retryable", so a decisive typed plan for ``python.review.diff_coverage_gate.v1`` was never
 # allowed to answer, and the caller was told the outcome was unknown when a capability that
 # measures exactly this existed.  A raise is not a side effect; what matters is what landed.
+# The repair adapters' own statement that the requested end state already holds.
+_ALREADY_SATISFIED_RE = re.compile(r"BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|NOTHING_TO_DO",
+                                   re.IGNORECASE)
+
 _COMPOSED_UNVERIFIED_CLASSES = frozenset({"COMPOSED_CHAIN_NOT_VERIFIED",
                                           "STEP_RAISED_OUTCOME_UNKNOWN"})
 _SPOOL_DIR_PREFIX = "canonical/astra_runtime/tmp/"
@@ -3076,12 +3152,35 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = cls
         result["promised_artifact_errors"] = missing
+        # THE RECORD MUST STILL SAY WHAT THE MACHINE LEARNED.
+        #
+        # When the repair loop refused with ``BASELINE_ALREADY_PASSES`` and the sentence ALSO
+        # promised a report, the missing report is a real failure -- but the caller also needs to
+        # know that nothing was repaired because nothing needed repairing.  Measured 2026-10-30:
+        # "Repair <src> so that <test> passes, and save the repair report to <out>" came back as a
+        # bare PROMISED_ARTIFACT_MISSING with ``reason`` None, which reads exactly like a repair that
+        # silently failed.  The facts travel with the verdict; they do not replace it.
+        if result.get("already_satisfied") is True:
+            result["already_satisfied"] = True
+            result["edited"] = False
+            result["failure_reason"] = ("NO_REPAIR_NEEDED__BASELINE_GREEN: " + str(
+                result.get("reason") or "") + " ; promised artifact not written: "
+                + ",".join(missing))
     stated_files = _stated_files(normalized)
     patch_evidence = future_artifacts + [p for p in stated_files if p not in future_artifacts]
+    # AN ALREADY-SATISFIED REQUEST DOES NOT OWE A BYTE CHANGE.
+    #
+    # "Repair <src> so that <test> passes" promises that the end state holds, and a repair verb was
+    # read as a promise that the FILE differs afterwards.  When the named test passed before any
+    # edit, the adapter refuses with ``BASELINE_ALREADY_PASSES`` and the door now reports that as a
+    # satisfied request -- but this check then fired anyway, because no byte had moved, and the
+    # answer became ``PROMISED_SOURCE_CHANGE_NOT_APPLIED``: a refusal that contradicts the baseline
+    # evidence the same run had just collected.  The promise is about the end state; the baseline
+    # run IS the proof of it.
     unchanged = promised_source_change_errors(
         normalized, source_digests_before, patch_evidence,
         roots_before=roots_before, before_files=world_before.get("files")) \
-        if result.get("pass") is True else []
+        if result.get("pass") is True and result.get("already_satisfied") is not True else []
     if unchanged:
         result["runtime_status_before_source_change_check"] = result.get("status")
         result["status"] = "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED"
@@ -3102,9 +3201,17 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     # The third authority: what the filesystem says, not what the tool says.  A
     # run that did nothing, or that removed the file it was asked to edit, has no
     # claim to an exact acceptance no matter how clean its own report is.
+    # AN ALREADY-SATISFIED ANSWER HAS AN OBSERVATION: THE BASELINE RUN.
+    #
+    # ``observed_effect_errors`` asks the filesystem whether the promised change happened.  When the
+    # repair loop proved the named test already passes, no byte SHOULD move, and demanding one turns
+    # the machine's best evidence ("the requested end state holds, measured") into
+    # ``FAIL_CLOSED__NO_OBSERVED_EFFECT`` -- a refusal that contradicts its own artifact.  The
+    # exemption is scoped to that one status: it is set only by an adapter that ran the named test
+    # and got return code 0 before editing anything.
     observed = observed_effect_errors(normalized, world_before, observe_world(normalized),
                                       result, future_artifacts) \
-        if result.get("pass") is True else []
+        if result.get("pass") is True and result.get("already_satisfied") is not True else []
     if observed:
         result["runtime_status_before_observation_check"] = result.get("status")
         cls = observed[0].split(":", 1)[0]

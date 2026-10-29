@@ -354,12 +354,12 @@
       "selected_route": "A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-29T23:09:27Z",
+        "checked_at_utc": "2026-10-29T23:34:36Z",
         "execution_dependencies": [
           {
             "dependency": "local CPython 3.11 interpreter and in-tree suite runner",
             "evidence": [
-              "re-observed now: /usr/bin/python3 reports (3, 11) and the repository suite runner ran test_swe_typed_plan_v1 + test_the_answer_must_be_the_effect_that_was_stated_v1 + test_a_deliverable_is_not_a_measurement_v1 to exit 0 (34 tests) in this sandbox"
+              "re-observed now: /usr/bin/python3 reports (3, 11) and the repository suite runner ran test_swe_typed_plan_v1 (17) + test_the_answer_must_be_the_effect_that_was_stated_v1 (13) to exit 0 in this sandbox"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -374,7 +374,7 @@
           {
             "dependency": "repository tree (live_brain_route_admission_v1, declared_input_derivation_v1, registry)",
             "evidence": [
-              "re-observed now, git hash-object: canonical/runtime/live_brain_route_admission_v1.py=b36c3e0d97c7e7f18f9fd74a7496b98884d87604, canonical/runtime/composer_route_v1.py=c4801057ca624b79a0471b6ba56f2eec77371604, canonical/runtime/documentation_mining_v1.py=e37e380233ae2acc009b20629176404b65c6c69c, canonical/runtime/declared_input_derivation_v1.py=9690db979c558b315df0e4dedf3b52885369336e, canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json=1d61bf5ecacc9c41121448f3438c6340dbc758ca"
+              "re-observed now, git hash-object: canonical/runtime/live_brain_route_admission_v1.py=8628412fbe6c5f0b37f8fa7bd1abb4f83bac4a4a, canonical/runtime/composer_route_v1.py=c4801057ca624b79a0471b6ba56f2eec77371604, canonical/runtime/documentation_mining_v1.py=e37e380233ae2acc009b20629176404b65c6c69c, canonical/runtime/declared_input_derivation_v1.py=9690db979c558b315df0e4dedf3b52885369336e, canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json=1d61bf5ecacc9c41121448f3438c6340dbc758ca"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"

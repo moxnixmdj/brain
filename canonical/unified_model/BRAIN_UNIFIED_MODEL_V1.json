@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fa8d58d7ff041d21aad968948023a10b3dbf8d990e59fba61fba12d3aaf3a9c7"
+  "value": "b1b1d62666b80b2826054ca8d6286a727a7887d8f298ff72a3b9d81774345540"
  },
  "engines": [
   {
@@ -198037,7 +198037,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_STATED_REPAIR_TARGET_NAMED_BEFORE_THE_VERB_IS_STILL_THE_TARGET_V1_20261029_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "7cc04c3d0014c9bd08b196eb3ae2755797d781a29ca32e5f7e4dd8f47d1c5bbe",
+   "sha256": "615ee8ee813528b5dff95d0a4a4cbcee2be716c0e835ba5bb4b278790c186189",
    "status": "",
    "terms": {
     "20261029": 1,
@@ -238269,7 +238269,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "152f7d328735f53ddfd61f4bb6def69bcc116cde5ccf253fe5ad9c4c9944903f",
+   "sha256": "ef211a31181d44e6ab23c1dea2cc6fb47f5c8bb33f4b52465be6ea34b6498c9e",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 68,
    "symbols": [
