@@ -2341,13 +2341,31 @@ def _bm25_rerank(goal,ranked):
         # the verifier (54 against 61).  It separates candidates on exactly the
         # goals where the goal's verb has a declared owner.
         head_verb=(item[5] or {}) if isinstance(item[5],dict) else {}
-        declares_act=1 if head_verb.get("matched_head_verb") else 0
+        declares_act=bool(head_verb.get("matched_head_verb"))
         out.append((declares_act,relevance,score,specificity,cid,item))
-    # The candidate that declares the goal's verb first; then BM25; the pinned
-    # overlap score breaks BM25 ties, then specificity, then identity for
-    # determinism.
-    out.sort(key=lambda x:(-x[0],-x[1],-x[2],-x[3],x[4]))
-    return [x[5] for x in out]
+    # THE ACT WORD PROTECTS AN ADVANTAGE; IT DOES NOT CREATE ONE.
+    #
+    # Declaring the goal's verb may lift a candidate above candidates it already
+    # out-scores, and no further.  Both halves are measured.  On "Audit the python
+    # source tree with an AST." the act-declarer scores 42 against the parser's 30,
+    # so it leads.  On the sentence the reachability instrument builds from
+    # `python.review.diff_mutation_gate.v1` -- "Use behavior coverage diff ..." --
+    # the head verb is the first declaration word, "behavior", which is declared by
+    # `python.software.request.semantic_behavior.compile.v1` at score 25 while the
+    # capability the sentence was built from scores 88.  An unconditional act-first
+    # sort promoted the 25 and cost four capabilities their last route to being
+    # asked (454 reached and bound became 450); this bound costs none of them and
+    # keeps every benchmark gain, because it never promotes a weaker competitor.
+    highest_unflagged=max((row[2] for row in out if not row[0]),default=None)
+    ranked_rows=[]
+    for row in out:
+        leads=row[0] and (highest_unflagged is None or row[2]>=highest_unflagged)
+        ranked_rows.append((0 if leads else 1,row[1],row[2],row[3],row[4],row[5]))
+    # The candidate that declares the goal's verb and out-scores the field first;
+    # then BM25; the pinned overlap score breaks BM25 ties, then specificity, then
+    # identity for determinism.
+    ranked_rows.sort(key=lambda x:(x[0],-x[1],-x[2],-x[3],x[4]))
+    return [x[5] for x in ranked_rows]
 
 
 def _effect_providers(registry):

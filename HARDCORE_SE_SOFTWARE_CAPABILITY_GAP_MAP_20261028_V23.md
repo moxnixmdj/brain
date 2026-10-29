@@ -780,6 +780,19 @@ changed — including the barcode goal (`generate` 21 ahead of the decoder 22) a
 goal (`create` 54 ahead of the verifier 61) that BM25 was installed for, both re-pinned as
 negative controls.
 
+**The law has a bound, and it was found by a measurement that went the wrong way.**
+Declaring the act may lift a candidate above candidates it already out-scores, and no
+further. Unconditional act-first ordering took reachability from 454 to 450: on the
+sentence the instrument builds from `python.review.diff_mutation_gate.v1` — *"Use behavior
+coverage diff …"* — the head verb is the first declaration word, "behavior", declared by
+`python.software.request.semantic_behavior.compile.v1` at score 25, while the capability
+the sentence was built from scores 88 with BM25 relevance 48.6 against 6.7. Four
+capabilities lost their last route to being asked. **The act word protects an advantage;
+it does not create one** — so a flagged candidate leads only when its pinned score is at
+least that of every unflagged candidate. With the bound: 454 reached and bound again, and
+not one benchmark gain lost. Pinned both ways in
+`test_which_stage_decides_the_selection_v1.py`.
+
 **Defect B — `compile_goal` compared the grounded plan with the chained plan without
 asking whether the chained one could run.** "Create an xlsx table from JSON records." and
 "Verify a sqlite table against JSON records." were both answered by `auto.pypi.msgpack` —
@@ -800,10 +813,14 @@ comparison that prefers xlsx 43 to msgpack 7 also prefers a score-25 docx writer
 score-13 consistency assessor — the precise regression the parity suite exists to catch,
 and the reason the score was rejected as the discriminator.
 
-| | canonical | front door | suites (7 files) |
-|---|---|---|---|
-| before | 18 / 23 | 17 / 23 | 33 failed / 155 passed |
-| §7.7 | **22 / 23** | **21 / 23** | **21 failed / 191 passed** |
+| | canonical | front door | suites (7 files) | reachable by vocabulary |
+|---|---|---|---|---|
+| before | 18 / 23 | 17 / 23 | 33 failed / 155 passed | 454 / 1 routed / 1 unreachable |
+| §7.7 | **22 / 23** | **21 / 23** | **21 failed / 191 passed** | **454 / 1 routed / 1 unreachable** |
+
+Reachability is unchanged by construction: §7.6 left 454 of 459 reachable, and the bounded
+act-word rule was required to leave it exactly there — the unbounded version measured 450,
+which is why it was rejected.
 
 Zero new failing node ids against the baseline; 12 baseline failures now pass, and the
 parity pins — which were stale at 22/22 while both paths measured 18/17 — were re-pinned

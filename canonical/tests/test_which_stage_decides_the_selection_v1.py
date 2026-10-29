@@ -122,6 +122,41 @@ class TheRerankCannotOverturnTheActTests(unittest.TestCase):
         self.assertEqual(selected(plan), ["image.qr.generate.qrencode"])
 
 
+class TheActWordProtectsAnAdvantageItDoesNotCreateTests(unittest.TestCase):
+    """The bound on the act-word fix, pinned because it was learned the hard way.
+
+    An unconditional act-first sort also lifted a capability that merely declares the
+    first word of a long declaration-built sentence: on the sentence the reachability
+    instrument builds from `python.review.diff_mutation_gate.v1`, the head verb is
+    "behavior" and `python.software.request.semantic_behavior.compile.v1` declares it
+    at score 25, while the capability the sentence was built from scores 88.  Four
+    capabilities lost their last route to being asked that way (454 reached and bound
+    became 450).  Declaring the act may lift a candidate above candidates it already
+    out-scores, and no further.
+    """
+
+    @staticmethod
+    def _item(cid, score, declares_act):
+        entry = {"action_template": {"type": "invoke_capability", "args": {}},
+                 "keywords": [cid]}
+        evidence = {"matched_identity": [], "matched_head_verb": "audit" if declares_act else None}
+        return (score, 0, cid, entry, {}, evidence, None)
+
+    def test_a_weaker_act_declarer_does_not_outrank_a_stronger_silent_capability(self):
+        ranked = [self._item("silent.strong", 88, False),
+                  self._item("declarer.weak", 25, True),
+                  self._item("silent.mid", 51, False)]
+        out = goal_compiler._bm25_rerank("Use behavior coverage diff", ranked)
+        self.assertEqual(out[0][2], "silent.strong",
+                         "a capability scoring 25 was promoted over one scoring 88")
+
+    def test_an_act_declarer_that_out_scores_the_field_still_leads(self):
+        ranked = [self._item("silent.parser", 30, False),
+                  self._item("declarer.audit", 42, True)]
+        out = goal_compiler._bm25_rerank("Audit the python source tree with an AST.", ranked)
+        self.assertEqual(out[0][2], "declarer.audit")
+
+
 class AnUnexecutablePlanIsNotAnAnswerTests(unittest.TestCase):
     """A dangling producer reference is a plan's missing half, not a plan."""
 
