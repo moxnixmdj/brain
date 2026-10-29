@@ -2409,14 +2409,23 @@ def _bm25_rerank(goal,ranked):
     # sort promoted the 25 and cost four capabilities their last route to being
     # asked (454 reached and bound became 450); this bound costs none of them and
     # keeps every benchmark gain, because it never promotes a weaker competitor.
-    highest_unflagged=max((row[2] for row in out if not row[0]),default=None)
+    return _order_with_act_flag(out)
+
+
+def _order_with_act_flag(rows):
+    """Order (declares_act, relevance, score, specificity, cid, item) rows.
+
+    The candidate that declares the goal's verb AND out-scores every candidate that does
+    not comes first; then BM25; the pinned overlap score breaks BM25 ties, then
+    specificity, then identity for determinism.  A separate function so the law can be
+    pinned on rows whose relevance is chosen rather than measured -- the BM25 weights are
+    corpus statistics and cannot be steered to an interesting shape from a test.
+    """
+    highest_unflagged=max((row[2] for row in rows if not row[0]),default=None)
     ranked_rows=[]
-    for row in out:
+    for row in rows:
         leads=row[0] and (highest_unflagged is None or row[2]>=highest_unflagged)
         ranked_rows.append((0 if leads else 1,row[1],row[2],row[3],row[4],row[5]))
-    # The candidate that declares the goal's verb and out-scores the field first;
-    # then BM25; the pinned overlap score breaks BM25 ties, then specificity, then
-    # identity for determinism.
     ranked_rows.sort(key=lambda x:(x[0],-x[1],-x[2],-x[3],x[4]))
     return [x[5] for x in ranked_rows]
 
