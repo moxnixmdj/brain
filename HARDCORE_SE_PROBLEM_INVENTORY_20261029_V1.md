@@ -260,7 +260,7 @@ story: `software.hardcore.kernel.orchestrate.v1`, `software.repair.loop.cegis_hy
 
 A dangling evidence pointer is not a capability defect; it is an unbacked claim, which is worse.
 
-### P9 — The 21 red tests, in four families (a work queue, not a fog)
+### P9 — The 17 red tests, in four families (a work queue, not a fog)
 
 | family | rows | real cause |
 |---|---|---|
@@ -270,16 +270,38 @@ A dangling evidence pointer is not a capability defect; it is an unbacked claim,
 | stale guard expectations (`R1`/`R3` vs `R12`/`R14`) | 3 | **the guard got better than the pin** — `R12_STATED_ACT_IS_NOT_AN_ACT_THIS_BRAIN_PERFORMS:translate` and `R14_UNHEARD_ACT_WORD:tutorial` are the *correct* verdicts |
 | reachability / parity / rate pins | 6 | measurement pins, deliberately moved |
 
-### P10 — 26 capabilities no sentence can reach
+Counted this session on the six door/compiler suites: **17 failed / 187 passed / 4 skipped**, down from 33 failed on the same set when the session began, with **no new failing id** at any point (`comm -13` of the two sweeps is empty).
 
-**21 have no sentence at all** (the vocabulary builder cannot form one): 8 chart readers, 5
-PDF/DOCX/XLSX/image readers (out of scope), and the hardcore five from P0 plus
-`professional.artifact.visual_observer.v1` and `task.acceptance.objective.lossless.v1`.
+### P10 — TWO capabilities no sentence can reach, and an instrument that hides the verifiers
 
-**5 cannot be reached either way**: `knowledge.json.fetch.external` (contract not stated),
-`plain_goal.bound_capability.grounding.stdlib`, `python.repo.pr_realize.v1`,
-`text.file.write`, `vcs.git.log.v1` (a true homonym: its own keywords carry "commit", so a sentence
-built from its declaration is read as a commit request).
+This section said 26 and it was wrong. Re-measured this session, both modes:
+
+- **Plain sentences** (`signature_goal`, every capability asked with its own declaration words plus
+  one stated value per input): **454 reached and bound, 3 reached only by spelling the internal id,
+  1 routed elsewhere, 1 unreachable** — of 459.
+- **Named sentences** (`named_signature_goal`, `--naming`): **431 / 21 no sentence / 4 unreachable / 3 by name**.
+
+The 21 rows the naming mode cannot form a sentence for are **not 21 unreachable capabilities**. That
+builder ends every sentence with *"and save it to <destination>"*, so a capability that declares no
+output path gets no sentence — and the list is dominated by exactly the shape P0 is about: seven
+verifiers (`archive.verify.tar_gz.gnu`, `decision.synthesis.verify.stdlib`,
+`plain_goal.bound_capability.grounding.verify.stdlib`,
+`sqlite.table.verify_against_json_records`, `xlsx.table.verify_against_json_records`, and the two
+`docx.document.verify.*`) plus sixteen document and image readers that are out of scope. In plain
+mode **every one of the hardcore verifiers is reached and bound**, so the P0 defect was never
+"cannot be asked" — it was "is asked and answers with a different act", which is what the three
+selection fixes closed.
+
+What is left, measured, is small and specific:
+
+| state | capabilities | why |
+|---|---|---|
+| unreachable from any sentence | **2** — `vcs.git.log.v1`, `python.repo.pr_realize.v1` | **homonym pollution**: `vcs.git.log.v1` carries the word "commit" in its own keywords, so a sentence built from its declaration is read as a commit request; `pr_realize` is out-scored by `vcs.git.branch_list.v1` on its own generated sentence |
+| by explicit id only | 3 — `python.contract.issue_orchestration.fusion.v1`, `python.pipeline.allowlist_gate.v1`, `python.refactor.test_scaffold.fusion.v1` | zero-input composers whose prose sentence is answered by `software.repair.loop.cegis_hypothesis.v1` |
+
+The fix for both is the same law as P2 and it is one unit: a capability's **own** keywords must not be
+read as a claim about a *different* act, and a capability that is the sole owner of an act must win its
+own declaration sentence.
 
 ### P1b — Two claims in this document's first version were wrong, and are corrected here
 
