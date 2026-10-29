@@ -694,8 +694,15 @@ def _known_programs() -> frozenset[str]:
     """
     from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
 
-    return frozenset(_accept._READ_ONLY_COMMANDS) | frozenset(
-        _accept._MUTATING_POSTCONDITIONS)
+    # A program the acceptance layer judges BY ITS SUBCOMMAND is judged, and so it belongs in
+    # this set for exactly the reason everything else here does: the set is "programs whose
+    # result a verifier can check", not "programs that take no arguments".  The check itself
+    # stays where it already was (_READ_ONLY_SUBCOMMANDS, consulted by the inspector), so
+    # `git commit` is still unreachable -- it is the PROGRAM that becomes stateable, not every
+    # thing that program can do.
+    return (frozenset(_accept._READ_ONLY_COMMANDS)
+            | frozenset(_accept._MUTATING_POSTCONDITIONS)
+            | frozenset(_accept._READ_ONLY_SUBCOMMANDS))
 
 
 def extract_argv(text: str) -> list[str] | None:

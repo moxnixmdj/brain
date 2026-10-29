@@ -960,6 +960,27 @@ def _asked_to_print_named_lines(tokens: Any) -> bool:
         return any(_TAIL_FROM_A_NAMED_LINE.match(part) for part in parts[1:])
     return False
 
+# A PROGRAM NAME IS NOT A BEHAVIOUR.  `git` is the most common program an engineer runs and it
+# belongs in neither table: `git blame`, `git log`, `git show`, `git diff`, `git status` and
+# `git rev-parse` read the repository and can be re-run and compared, while `git commit`,
+# `git checkout`, `git reset` and `git clean` rewrite it.  Measured 2026-10-29: the sentence
+# `Run the shell command "git diff -- <file>"` routed, bound, and EXECUTED correctly
+# (`PASS__COMPOSER_CHAIN_EXECUTED`, real stdout) and the door then refused it with
+# FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED -- not because anything was wrong, but because the
+# inspector's only question was `program in _READ_ONLY_COMMANDS`.
+#
+# The table below is the existing mechanism, keyed one level deeper, exactly like
+# _SIDE_EFFECTING_FLAGS_BY_PROGRAM keys a program's flags rather than its name.  Everything not
+# listed stays unverifiable, which is the honest default: `git commit` still refuses until a
+# postcondition exists that can look at HEAD.
+_READ_ONLY_SUBCOMMANDS: dict[str, frozenset[str]] = {
+    "git": frozenset({
+        "blame", "log", "show", "diff", "status", "rev-parse", "ls-files", "shortlog",
+        "describe", "cat-file", "grep", "merge-base", "for-each-ref", "diff-tree",
+        "show-ref", "name-rev", "rev-list", "ls-tree", "count-objects", "whatchanged",
+    }),
+}
+
 _READ_ONLY_COMMANDS = frozenset({
     "cat", "head", "tail", "wc", "nl", "sort", "grep", "egrep", "fgrep", "ls",
     "uniq", "tr", "cut", "sha256sum", "md5sum", "stat", "file", "diff", "cmp",
@@ -1524,6 +1545,11 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if any(not tok for tok in tokens):
         return False, "COMMAND_ARGV_HAS_AN_EMPTY_TOKEN", {}
     program = tokens[0].rsplit("/", 1)[-1]
+    # The subcommand is the FIRST non-flag token after the program: `git -C <dir> status` is
+    # still `status`, and `git --version` names no subcommand at all and so stays unverifiable.
+    read_only_program = program in _READ_ONLY_COMMANDS or any(
+        token in _READ_ONLY_SUBCOMMANDS.get(program, ())
+        for token in tokens[1:] if not token.startswith("-"))
     takes_output_flag = any(
         tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=")
         for tok in tokens[1:]) or any(
@@ -1537,7 +1563,7 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if program in ("python3", "python") and len(tokens) == 2 and tokens[1].endswith(".py"):
         if _inside(root, tokens[1]) is None:
             return False, "COMMAND_SCRIPT_OUTSIDE_REPOSITORY", {}
-    elif program not in _READ_ONLY_COMMANDS or takes_output_flag:
+    elif not read_only_program or takes_output_flag:
         # Not re-runnable -- but a command that changes something still makes a
         # promise about the world, and the world is still there to be asked.
         #

@@ -136,7 +136,17 @@ def _derived_index(repo: pathlib.Path, args: dict[str, Any],
                     break
                 common.append(group[0])
             source_root = "/".join(common) or "."
-    index_path = output.parent / (".impact_index_" + output.name)
+    # KEYED BY THE TREE, NOT BY THE REQUEST.
+    #
+    # This was `output.parent / (".impact_index_" + output.name)`, and the output name carries
+    # the TASK ID, so every new question about the same tree rebuilt the whole index.  Measured
+    # 2026-10-29 on this repository: "Which tests are affected if I change <one file>?" cost
+    # 21,404 ms on a cold name and 5,896 ms on a warm one -- the second question about the same
+    # tree paid for the first question's file.  The scope is what the index describes, so the
+    # scope is what it is named after; `code_tree_sitter_incremental_index_v1` is already
+    # incremental by file digest (reused_file_count: 2256), which is what makes reuse safe.
+    _scope_key = kernel.bytes_sha256(source_root.encode("utf-8"))[:16]
+    index_path = output.parent / (".impact_index_" + _scope_key + ".json")
     index_path.parent.mkdir(parents=True, exist_ok=True)
     _index.run({"source_root": source_root,
                 "output_path": kernel.relative_path(repo, index_path)}, repo)
