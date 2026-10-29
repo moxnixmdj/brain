@@ -1,6 +1,6 @@
 # HARDCORE SOFTWARE-ENGINEERING PROBLEM INVENTORY
 
-**Date:** 2026-10-29 · **Branch:** `arena/4ca3a720-brain` · **Tree:** `f73b9692` + working measurements below
+**Date:** 2026-10-29 · **Branch:** `arena/4ca3a720-brain` · **Tree:** `43012dc1`
 **Scope:** the owner's question — *what are all the problems* on the way to the most advanced, fastest
 software engineer. Document, image, chart and PDF families are measured only so the denominator is
 honest; nothing here proposes work on them.
@@ -17,11 +17,29 @@ that no longer reproduces is a bug in this document, not a target. Red is not au
 | 1 | capabilities in the verified registry | **459** | `load_verified_registry(include_extended=True)` |
 | 2 | reachable from ONE plain sentence (vocabulary / by name / routed / unreachable) | **454 / 3 / 1 / 1** | `live_solver_end_to_end_measurement_v1.py --reachability` |
 | 3 | hardcore acts owned by a bound capability | **69 of 135**, 28 named-only, **38 absent** | `hardcore_se_domain_coverage_v1.py` |
-| 4 | fresh goals end to end, in-scope families all-pass | **30 of 36 families**, instance pass rate **0.8333** | `live_solver_end_to_end_measurement_v1.py --per-family 2` |
+| 4 | fresh goals end to end, in-scope families all-pass | **30 of 36 families**, instance pass rate **0.8333** — *2 instances per family is not a rate; see the caveat in P0* | `live_solver_end_to_end_measurement_v1.py --per-family 2` |
 | 5 | benchmark capability selection (canonical / front door) | **22 / 23** · **21 / 23** | `goal_compilation_benchmark_v1` |
 | 6 | evidence blocks: ok / no pointer / dangling | **123 / 34 / 8** | `capability_evidence_probe_v1.py --audit-pointers` |
 | 6b | machine-missing external dependencies | **7** (5 doc/image, 1 data, 1 barcode) | same run, `external_dependency_missing_here` |
-| 7 | red door/compiler tests | **17** in 3 families, **4 skipped** naming a missing dependency (was 33) | `pytest` on the nine suites |
+| 7 | red door/compiler tests | **17**, **4 skipped** naming a missing dependency (was 33 this session) | `pytest` on the six door/compiler suites (17 failed / 187 passed / 4 skipped) |
+
+Per-domain coverage of the 135 hardcore acts (`hardcore_se_domain_coverage_v1.py` — BOUND / total, with
+NAMED-only and ABSENT split):
+
+| domain | bound | named only | absent | domain | bound | named only | absent |
+|---|---|---|---|---|---|---|---|
+| review and delivery flow | 10/17 | 4 | 3 | testing | 6/10 | 3 | 1 |
+| refactoring | 6/14 | 2 | 6 | static analysis | 10/13 | 1 | 2 |
+| dependencies and build | 2/10 | 3 | 5 | dynamic analysis | 5/9 | 2 | 2 |
+| data and persistence | 5/9 | 1 | 3 | security and supply chain | 6/9 | 2 | 1 |
+| services and concurrency | 3/8 | 0 | **5** | review and delivery flow (flow) | 7/8 | 0 | 1 |
+| multi-language | 3/7 | 4 | 0 | infrastructure and delivery | **0/6** | 4 | 2 |
+| performance engineering | 5/6 | 0 | 1 | observability | **0/5** | 2 | 3 |
+| documentation | 1/4 | 0 | 3 | **totals** | **69/135** | 28 | 38 |
+
+Two domains own **nothing** — infrastructure and delivery (0 of 6) and observability (0 of 5) — and
+services/concurrency owns 3 of 8 with 5 acts that do not exist at all. That is where the machine is
+furthest from an engineer, not in the document families.
 
 Tool liveness over 165 capabilities: **0 adapters missing**, 9 adapter import failures (all chart
 raster), **7 machine-missing external dependencies**, 27 executor kernel refusals by source type,
@@ -82,11 +100,36 @@ exist for every capability that claims `output_verified`.
    on the verifier.** The front-door selection rate pin still holds (21 of 23) and the parity suite is
    27 green.
 
-**The residual is the same law one step out, and it is the next unit.** The family draws four real
-phrasings; *"Verify …"* now routes correctly, *"Check the tar.gz archive …"* and *"Audit the tar.gz
-archive …"* still route to the creator, because the verifier declares the act `verify` and not its
-synonyms. That is "one act, one owner" applied to VERBS, and it belongs in one declared place rather
-than in four capability entries.
+3. **A verb has many spellings, and the name rule was reading half a name.** The residual above —
+   *"Check the tar.gz archive …"* and *"Audit …"* reaching the creator — was two defects, both fixed:
+
+   - **The spellings of an act were unknown.** The verifier declares the act `verify` and nothing in
+     the machine knew that check / audit / inspect / validate / confirm name the same act.
+     `_ACT_SYNONYMS` declares those classes and `_declared_act_words` expands them one-directionally,
+     so a capability can only gain a spelling of an act it already declares. Measured:
+     *Audit / Check / Verify / Inspect / Validate* now all route to `archive.verify.tar_gz.gnu`
+     while *Create* still routes to the creator, and the ARCHIVE_VERIFY_GNU family went
+     **4 of 6 → 8 of 8**.
+   - **The name rule read half a name.** `_name_words` drops the verb segment, so the "whole name" of
+     `archive.tar_gz.create_from_manifest` was only its OBJECT {archive, tar, gz, manifest}. A
+     sentence using a different verb was therefore counted as naming the creator and was pinned
+     ABOVE the verifier that declares the verb: *"Verify the tar.gz archive A against the manifest
+     M."* ranked the creator 47 first and the verifier 61 second — the pinned score had already
+     picked the verifier and the name rule inverted it. A rival that declares the sentence's head
+     verb AND outscores a candidate now strips that candidate's name pin — bounded on both sides by
+     measurement: a sentence that opens with a keyword rather than a verb has no rival and keeps
+     every pin, and `python.repo.pr_realize.v1` (72) keeps its pin over `vcs.git.branch_list.v1`
+     (36), which declares the word but cannot outscore it.
+
+   Guards after all three, measured: archive family **1.0 over 8 fresh goals**; benchmark **22/23**;
+   parity **27 passed**; reachability **454 / 3 / 1 / 1**, identical to before, so no capability lost
+   its route; six door/compiler suites **17 failed / 187 passed / 4 skipped** with the same failing
+   ids as the previous sweep and no new ones.
+
+**The residual is now the OBJECT, not the verb.** The archive family is closed; what is left in P0 is
+that the same "one act, one owner" question has no declared answer for object nouns (bundle vs
+archive vs package), which is why the reachability instrument's own generated sentences still read as
+keyword soup rather than a request.
 
 **One measurement caveat.** A whole-corpus run at 2 instances per family is not a rate: in the same
 run `JSON_QUERY_JQ` scored 0 of 2 while a direct reproduction of that exact family goal passes and
@@ -290,7 +333,8 @@ the one that is not.
 |---|---|---|---|---|
 | 1 | **re-inspection lane for every `output_verified` claim** | P0 | the artifact already carries its measurement digest + schema; re-reading it is a second op, no new engine | ~1 unit |
 | 2 | **DAG executor result contract** | P1 (5 rows) | the plan is already correct; the failure is one contract | ~1 unit |
-| 3 | **one act, one owner** (registry law) | P2 | act words already derivable from `provides` + identity | ~0.5 unit |
+| 3 | ~~**one act, one owner** (registry law)~~ **DONE — verbs** | P2 | `_ACT_SYNONYMS` + the name rule; archive family 1.0 over 8, nothing else moved | done |
+| 3b | **one act, one owner for OBJECT nouns** (bundle / archive / package / manifest) | P0, P2 | same law, same place; the verb half is measured, the noun half is not | ~0.5 unit |
 | 4 | **refuse-then-stop** (kill the fall-through) | P3 (1 row, big blast radius) | one branch in admission | ~0.5 unit |
 | 5 | **six missing refactor verbs** on the existing AST engine (extract variable, replace conditional, remove dead imports, split module, encapsulate field, pull-up) | P4 (6 acts) | the engine, the plan shape and the pins already exist — this is the single highest-yield build | ~1 unit |
 | 6 | **`git.merge` + conflict resolve + `cherry_pick` + `worktree` + reflog undo** | P4/P5 (5 acts) | the `vcs_git_v1` adapter family exists; conflicts are text plus a test run | ~1 unit |
