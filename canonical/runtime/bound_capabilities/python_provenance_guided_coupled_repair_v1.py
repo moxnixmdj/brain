@@ -116,7 +116,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  # instead of 40.
  cand_timeout=max(6,min(timeout,int(8*float(base.get("elapsed_s") or 1)+3)))
  import time as _t
- _deadline=args.get("wall_deadline")
+ _wb=args.get("wall_budget_s")
+ _deadline=(_t.monotonic()+float(_wb)) if _wb else None
  def _wall_left():
   return _deadline is None or _t.monotonic()<_deadline
  rows=_guided_rows(repo,loc,prov,max_files,max_symbols)

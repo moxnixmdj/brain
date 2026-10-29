@@ -98,7 +98,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  # Anytime law (L6): count caps are meaningless when one candidate costs a
  # pytest collection -- the deadline stops the search mid-pass, gracefully.
  import time as _t
- _deadline=args.get('wall_deadline')
+ _wb=args.get('wall_budget_s')
+ _deadline=(_t.monotonic()+float(_wb)) if _wb else None
  def _wall_left():
   return _deadline is None or _t.monotonic()<_deadline
  if base.get('timed_out'):raise RepairLoopError('BASELINE_TIMEOUT')

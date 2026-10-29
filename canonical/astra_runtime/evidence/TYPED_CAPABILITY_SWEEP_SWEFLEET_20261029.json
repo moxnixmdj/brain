@@ -5,10 +5,10 @@
  "model_dependency_count": 0,
  "totals": {
   "capabilities": 129,
-  "clean_all_instances_pass": 74,
+  "clean_all_instances_pass": 76,
   "partial_some_instances_fail": 0,
   "broken_every_instance_fails": 31,
-  "could_not_sample": 24
+  "could_not_sample": 22
  },
  "rows": [
   {
@@ -323,7 +323,7 @@
    "errors": {
     "DecisionSynthesisError:DECISION_SCHEMA_INVALID": 2
    },
-   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 384, in run\n    result = synthesize(problem)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 177, in synthesize\n    normalized = _normalize(problem)\n                 ^^^^^^^^^^^^^^^^^^^\nsweep_3342.DecisionSynthesisError: DECISION_SCHEMA_INVALID\n",
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 384, in run\n    result = synthesize(problem)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 177, in synthesize\n    normalized = _normalize(problem)\n                 ^^^^^^^^^^^^^^^^^^^\nsweep_7718.DecisionSynthesisError: DECISION_SCHEMA_INVALID\n",
    "strategy": "schema"
   },
   {
@@ -1202,12 +1202,10 @@
     "test_paths": "PATH_LIST"
    },
    "instances": 2,
-   "executed": 0,
-   "succeeded": 0,
+   "executed": 2,
+   "succeeded": 2,
    "failed": 0,
-   "errors": {
-    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:provenance": 2
-   },
+   "errors": {},
    "sample_error": null
   },
   {
@@ -1234,12 +1232,10 @@
     "test_paths": "PATH_LIST"
    },
    "instances": 2,
-   "executed": 0,
-   "succeeded": 0,
+   "executed": 2,
+   "succeeded": 2,
    "failed": 0,
-   "errors": {
-    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:wall_deadline": 2
-   },
+   "errors": {},
    "sample_error": null
   },
   {

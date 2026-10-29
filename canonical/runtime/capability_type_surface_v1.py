@@ -174,6 +174,8 @@ _EXPLICIT: dict[str, str] = {
     "content": STRING,
     "module_name": STRING,
     "max_mutants": NUMBER,
+    "wall_budget_s": NUMBER,   # relative duration; an absolute timestamp arg
+    "provenance": BOOL,        # opt-in interprocedural phase switch
     "argv": ARGV,                  # general command vector -- the universal
                                    # action primitive in any environment
     "actions": JSON_TEXT,          # browser action script, consumed by
