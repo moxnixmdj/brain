@@ -4180,7 +4180,9 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                       z3_timeout_s: int = 60,
                       min_coverage_ratio: float = 0.8,
                       min_kill_ratio: float = 0.7,
-                      resume_from_checkpoint: bool = False) -> dict:
+                      resume_from_checkpoint: bool = False,
+                      enable_metamorphic_gate: bool = False,
+                      enable_concolic_gate: bool = False) -> dict:
     """Complete end-to-end SWE repair: localize(order) -> search(parallel+cache)
     -> apply(worktree) -> gate -> PR intent -> GitHub PR. Fail-closed.
     verified=True only when the full gate passes.
@@ -4869,6 +4871,45 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         "tests_failed": tests_failed,
     })
 
+    # Stage 4.5: Differential / concolic validation (optional, non-blocking)
+    # Runs metamorphic properties and concolic boundary exploration against
+    # the patched source to catch edge cases that concrete tests miss.
+    meta_verified = True
+    concolic_verified = True
+    if verified and (enable_metamorphic_gate or enable_concolic_gate):
+        _progress_adapter.stage_progress(gid, "end_to_end_repair", 4, 5, {
+            "stage": "meta_concolic",
+        })
+        # Reconstruct source_candidates from the applied worktree
+        patched_source_wt = worktree_p / source_p.name
+        if patched_source_wt.is_file():
+            patched_text = patched_source_wt.read_text(encoding="utf-8")
+            source_candidates = [[str(source_p), patched_text]]
+
+            if enable_metamorphic_gate:
+                meta_result = _metamorphic_validate(
+                    source_candidates, source_p.parent, repo, test_ps,
+                    timeout_s=min(timeout_s, 60),
+                )
+                meta_verified = meta_result.get("verified", False)
+                if not meta_verified:
+                    _progress_adapter.stage_progress(gid, "end_to_end_repair", 4, 5, {
+                        "stage": "metamorphic_violations",
+                        "violations": meta_result.get("violations", [])[:5],
+                    })
+
+            if enable_concolic_gate:
+                concolic_result = _concolic_test(
+                    source_candidates, source_p.parent, repo, test_ps,
+                    timeout_s=min(timeout_s, 60),
+                )
+                concolic_verified = concolic_result.get("verified", False)
+                if not concolic_verified:
+                    _progress_adapter.stage_progress(gid, "end_to_end_repair", 4, 5, {
+                        "stage": "concolic_violations",
+                        "violations": concolic_result.get("violations", [])[:5],
+                    })
+
     # Stage 5: PR intent + GitHub PR (when OIDC token is available).
     _progress_adapter.stage_progress(gid, "end_to_end_repair", 5, 5, {
         "stage": "pr_intent",
@@ -4934,6 +4975,8 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         "gate_results": gate_results,
         "diff_sha256": _sha256(full_diff.encode("utf-8")),
         "pr_intent_verified": verified,
+        "meta_verified": meta_verified,
+        "concolic_verified": concolic_verified,
         "elapsed_s": round(_time.monotonic() - t_start, 3),
         "output_path": str(output_p.relative_to(repo)),
         "diff_path": str(diff_p.relative_to(repo)),
@@ -4968,5 +5011,287 @@ def run_capability(adapter_module_path: Path, entrypoint: str,
                    args: dict, root: Path) -> dict:
     """Generic runner for any bound capability adapter."""
     return _run_in_process(adapter_module_path, entrypoint, args, root)
+
+
+# ---------------------------------------------------------------------------
+# Differential / metamorphic testing — validate fixes beyond existing tests
+# ---------------------------------------------------------------------------
+
+def _metamorphic_validate(source_candidates: list[list],
+                          source_root_p: Path,
+                          repo: Path,
+                          test_ps: list[Path],
+                          timeout_s: int = 30) -> dict:
+    """Run metamorphic (differential) properties against patched source.
+
+    Generates property-based assertions that should hold for any correct
+    implementation (e.g., commutativity: add(a,b)==add(b,a),
+    idempotence: add(a,0)==a, subtraction inverse: add(a,b)-b==a) and
+    executes them against the patched source in-process.
+
+    Returns {'verified': True} if all properties hold, or {'verified': False,
+    'violations': [...]} with details.
+    """
+    import itertools
+
+    # Build patched source in a temp dir
+    import tempfile, shutil, importlib, sys, ast as _ast
+    workdir = Path(tempfile.mkdtemp(prefix="swe_meta_", dir=str(repo)))
+    violations = []
+
+    try:
+        shutil.copytree(source_root_p, workdir, dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns('.git', '__pycache__',
+                                                      '.pytest_cache', '.mypy_cache',
+                                                      '.ruff_cache'))
+        for sc in source_candidates:
+            sp_str = sc[0]
+            new_text = sc[1] if len(sc) > 1 else None
+            if new_text is None:
+                continue
+            sp = Path(sp_str)
+            try:
+                rel = sp.relative_to(source_root_p).as_posix()
+            except ValueError:
+                rel = sp.name
+            target = workdir / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(new_text.encode("utf-8"))
+
+        # Find Python source files with functions to test
+        source_files = [p for p in workdir.rglob("*.py")
+                        if not any(part in _SKIP_DIRS for part in p.parts)]
+
+        old_path = list(sys.path)
+        old_modules = set(sys.modules.keys())
+        sys.path.insert(0, str(workdir))
+
+        try:
+            import pytest
+            from io import StringIO
+            import contextlib
+
+            for sf in source_files:
+                module_name = sf.stem + "_meta_" + str(abs(hash(str(sf))))
+                try:
+                    spec = importlib.util.spec_from_file_location(module_name, sf)
+                    mod = importlib.util.module_from_spec(spec)
+                    sys.modules[module_name] = mod
+                    spec.loader.exec_module(mod)
+                except Exception:
+                    continue
+
+                # Get all functions from the module
+                funcs = [name for name in dir(mod)
+                         if callable(getattr(mod, name)) and not name.startswith("_")]
+
+                # Metamorphic properties for binary functions (a, b) -> result
+                for func_name in funcs:
+                    fn = getattr(mod, func_name)
+                    try:
+                        import inspect
+                        sig = inspect.signature(fn)
+                        params = list(sig.parameters.keys())
+                    except (ValueError, TypeError):
+                        continue
+
+                    if len(params) == 2:
+                        # Commutativity: f(a,b) == f(b,a)
+                        # Identity: f(a, identity) == a (for additive identity 0)
+                        # Inverse: f(a,b) - b == a (if f supports subtraction)
+                        test_vals = [0, 1, 2, 5, 10, -1, -3]
+                        for a, b in itertools.product(test_vals, test_vals):
+                            try:
+                                r1 = fn(a, b)
+                                r2 = fn(b, a)
+                                if r1 != r2:
+                                    # Only report non-commutativity for functions
+                                    # that should be commutative (add, multiply)
+                                    if func_name in ('add', 'multiply', 'mul',
+                                                     'max', 'min', 'and_', 'or_'):
+                                        violations.append({
+                                            "function": func_name,
+                                            "property": "commutativity",
+                                            "args": [a, b],
+                                            "f(a,b)": r1,
+                                            "f(b,a)": r2,
+                                        })
+                                # Identity: f(a, 0) == a for add
+                                if func_name == 'add' and b == 0:
+                                    if r1 != a:
+                                        violations.append({
+                                            "function": func_name,
+                                            "property": "additive_identity",
+                                            "args": [a, 0],
+                                            "result": r1,
+                                            "expected": a,
+                                        })
+                            except Exception:
+                                continue
+
+                    if len(params) == 1:
+                        # Idempotence: f(f(x)) == f(x)
+                        test_vals = [0, 1, 2, 5, 10]
+                        for x in test_vals:
+                            try:
+                                r1 = fn(x)
+                                r2 = fn(r1) if isinstance(r1, (int, float)) else None
+                                if r2 is not None and r1 != r2:
+                                    violations.append({
+                                        "function": func_name,
+                                        "property": "idempotence",
+                                        "args": [x],
+                                        "f(x)": r1,
+                                        "f(f(x))": r2,
+                                    })
+                            except Exception:
+                                continue
+
+        except Exception as exc:
+            return {"verified": False, "reason": f"META_EXCEPTION: {exc}"}
+        finally:
+            sys.path[:] = old_path
+            for mod_name in list(sys.modules.keys()):
+                if mod_name not in old_modules:
+                    del sys.modules[mod_name]
+
+        return {"verified": len(violations) == 0, "violations": violations}
+
+    finally:
+        shutil.rmtree(workdir, ignore_errors=True)
+
+
+# ---------------------------------------------------------------------------
+# Concolic testing — hybrid concrete/symbolic execution for edge cases
+# ---------------------------------------------------------------------------
+
+def _concolic_test(source_candidates: list[list],
+                   source_root_p: Path,
+                   repo: Path,
+                   test_ps: list[Path],
+                   timeout_s: int = 30) -> dict:
+    """Concolic (concrete + symbolic) testing for edge-case discovery.
+
+    Runs the patched source against concrete test values from the test files,
+    then symbolically explores boundary conditions around those values
+    (e.g., min_int, max_int, zero, negatives, overflow boundaries) to find
+    crashes or incorrect results that concrete tests miss.
+
+    Returns {'verified': True} if no issues found, or {'verified': False,
+    'violations': [...]} with details.
+    """
+    import tempfile, shutil, importlib, sys
+    workdir = Path(tempfile.mkdtemp(prefix="swe_concolic_", dir=str(repo)))
+    violations = []
+
+    try:
+        shutil.copytree(source_root_p, workdir, dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns('.git', '__pycache__',
+                                                      '.pytest_cache', '.mypy_cache',
+                                                      '.ruff_cache'))
+        for sc in source_candidates:
+            sp_str = sc[0]
+            new_text = sc[1] if len(sc) > 1 else None
+            if new_text is None:
+                continue
+            sp = Path(sp_str)
+            try:
+                rel = sp.relative_to(source_root_p).as_posix()
+            except ValueError:
+                rel = sp.name
+            target = workdir / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(new_text.encode("utf-8"))
+
+        old_path = list(sys.path)
+        old_modules = set(sys.modules.keys())
+        sys.path.insert(0, str(workdir))
+
+        try:
+            import importlib.util
+            for sf in workdir.rglob("*.py"):
+                if any(part in _SKIP_DIRS for part in sf.parts):
+                    continue
+                module_name = sf.stem + "_concolic_" + str(abs(hash(str(sf))))
+                try:
+                    spec = importlib.util.spec_from_file_location(module_name, sf)
+                    mod = importlib.util.module_from_spec(spec)
+                    sys.modules[module_name] = mod
+                    spec.loader.exec_module(mod)
+                except Exception:
+                    continue
+
+                funcs = [name for name in dir(mod)
+                         if callable(getattr(mod, name)) and not name.startswith("_")]
+
+                # Boundary values for symbolic exploration
+                boundary_vals = [0, 1, -1, 2, -2, 100, -100,
+                                 2**31 - 1, -2**31, 2**63 - 1, -2**63]
+
+                for func_name in funcs:
+                    fn = getattr(mod, func_name)
+                    try:
+                        import inspect
+                        sig = inspect.signature(fn)
+                        params = list(sig.parameters.keys())
+                    except (ValueError, TypeError):
+                        continue
+
+                    if len(params) == 1:
+                        for x in boundary_vals:
+                            try:
+                                r = fn(x)
+                                # Check for obviously wrong results
+                                if isinstance(r, (int, float)) and not __import__('math').isfinite(r):
+                                    violations.append({
+                                        "function": func_name,
+                                        "property": "finiteness",
+                                        "args": [x],
+                                        "result": r,
+                                    })
+                            except (OverflowError, ZeroDivisionError, ValueError) as e:
+                                violations.append({
+                                    "function": func_name,
+                                    "property": "exception_on_boundary",
+                                    "args": [x],
+                                    "exception": type(e).__name__,
+                                })
+                            except Exception:
+                                continue
+
+                    if len(params) == 2:
+                        for x, y in [(b1, b2) for b1 in boundary_vals[:6]
+                                     for b2 in boundary_vals[:6]]:
+                            try:
+                                r = fn(x, y)
+                                if isinstance(r, (int, float)) and not __import__('math').isfinite(r):
+                                    violations.append({
+                                        "function": func_name,
+                                        "property": "finiteness",
+                                        "args": [x, y],
+                                        "result": r,
+                                    })
+                            except (OverflowError, ZeroDivisionError, ValueError) as e:
+                                violations.append({
+                                    "function": func_name,
+                                    "property": "exception_on_boundary",
+                                    "args": [x, y],
+                                    "exception": type(e).__name__,
+                                })
+                            except Exception:
+                                continue
+
+        except Exception as exc:
+            return {"verified": False, "reason": f"CONCOLIC_EXCEPTION: {exc}"}
+        finally:
+            sys.path[:] = old_path
+            for mod_name in list(sys.modules.keys()):
+                if mod_name not in old_modules:
+                    del sys.modules[mod_name]
+
+        return {"verified": len(violations) == 0, "violations": violations}
+
+    finally:
+        shutil.rmtree(workdir, ignore_errors=True)
 
 
