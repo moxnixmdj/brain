@@ -122,6 +122,8 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     def remaining() -> float:
         return (wall - (_time.monotonic() - _t0)) if wall else 1e9
 
+    deadline = (_t0 + wall) if wall else None
+
     rc, text = _suite(repo, argv, timeout, env)
     if rc == 0:
         raise RouterError("BASELINE_ALREADY_PASSES")
@@ -142,6 +144,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             "output_path": _rel(repo, intermediate),
             "timeout_s": timeout,
             "budget": budget,
+            "wall_deadline": deadline,
         }, repo)
     except Exception as exc:
         import traceback as _tb
@@ -169,6 +172,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 "test_argv": argv,
                 "output_path": _rel(repo, cpl),
                 "timeout_s": timeout,
+                "wall_deadline": deadline,
             }, repo)
         except Exception as exc:
             r2 = {"status": type(exc).__name__ + ":" + str(exc)[:120]}
@@ -208,6 +212,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 "test_argv": argv,
                 "output_path": _rel(repo, it),
                 "timeout_s": timeout,
+                "wall_deadline": deadline,
             }, repo)
         except Exception as exc:
             r3 = {"status": type(exc).__name__ + ":" + str(exc)[:120]}

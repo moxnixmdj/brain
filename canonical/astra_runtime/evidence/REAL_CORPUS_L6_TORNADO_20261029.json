@@ -52,5 +52,38 @@
    "WALL: 3 sequential engines need a router deadline; skipped steps are LABELED (SKIPPED_WALL_BUDGET), never silent",
    "RESILIENCE: realize gets one suite retry (wall-pressure transients); suite tail captured in the trace row"
   ]
+ },
+ "round3": {
+  "date": "20261029",
+  "scaleout": {
+   "screened_projects": [
+    "tqdm",
+    "httpie",
+    "PySnooper",
+    "cookiecutter"
+   ],
+   "result": "1 new satisfiable instance (tqdm/9, SI-format bug in _tqdm.py, pytest node)",
+   "corpus_age_bias_measured": "most BugsInPy fixes predate py3.11: tqdm 1,3-8 red-on-baseline but real fix does NOT green (env-drift, honestly rejected by the satisfiability gate); httpie/PySnooper/cookiecutter mostly no-test-command or multi-file patches",
+   "harness": "tools/l6_scale.py -- screens + caches manifest; --measure runs the router on new instances"
+  },
+  "tqdm9": {
+   "repaired": false,
+   "wall": 303.4,
+   "trace": [
+    "cegis_writer ran to deadline",
+    "coupled SKIPPED_WALL_BUDGET",
+    "iterative NO_STRICTLY_IMPROVING_CANDIDATE (deadline-clean exit)"
+   ],
+   "laws": [
+    "anytime deadline architecture: candidate loops check wall_deadline every candidate -- receipts return instead of hangs",
+    "pytest collection (~1-3s/node) makes count caps meaningless; mutant wall = 8x measured baseline now in PGC AND iterative loops"
+   ]
+  },
+  "l6_scoreboard": {
+   "round1": "0/3 (instrument-poisoned: argv slice ate -m)",
+   "round2": "1/3 (tornado/14 REPAIRED, first real fix)",
+   "round3": "1/4 (tqdm/9 added, honest labeled NOT_REPAIRED)",
+   "instances_available": "4 satisfiable (tornado x3, tqdm x1); corpus breadth bounded by 3.11 satisfiability, not by tooling"
+  }
  }
 }

@@ -115,6 +115,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  # the caller timeout): the real suite is ~0.3s here, so mutants die in <=6s
  # instead of 40.
  cand_timeout=max(6,min(timeout,int(8*float(base.get("elapsed_s") or 1)+3)))
+ import time as _t
+ _deadline=args.get("wall_deadline")
+ def _wall_left():
+  return _deadline is None or _t.monotonic()<_deadline
  rows=_guided_rows(repo,loc,prov,max_files,max_symbols)
  for _row in rows:
   _row["focus"]=sorted(_focus.get(_row["rel"],set()))
@@ -138,6 +142,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  originals={r["path"]:r["path"].read_bytes() for r in rows}
  single_scores={};tested_single=0
  for p,e in guided_items:
+  if not _wall_left():break
   cand=_COUPLED._candidate(originals,[(p,e)])
   if cand is None:continue
   rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ss=_STRICT._score(rr)
@@ -145,6 +150,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
  winner=None;winner_mode=None;pair_count=0;crossed=False
  for p,e in guided_items:
+  if not _wall_left():break
   cand=_COUPLED._candidate(originals,[(p,e)])
   if cand is None:continue
   rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ss=_STRICT._score(rr)

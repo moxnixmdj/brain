@@ -80,17 +80,30 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if out==repo or repo not in out.parents:raise RepairLoopError('OUTPUT_PATH_OUTSIDE_REPOSITORY')
  env=_source_env(src)
  base=_PATCH._run_tests(repo,argv,timeout,env);score=_score(base)
+ # Mutant-wall law (L6, faulthandler-proven): candidates probe with a wall
+ # derived from the MEASURED baseline suite time (8x + 3s), not the caller
+ # timeout -- on real pytest nodes (1-3s collection each) hundreds of
+ # candidates at caller timeout is the whole wall gone (measured tqdm/9).
+ cand_timeout=max(6,min(timeout,int(8*float(base.get('elapsed_s') or 1)+3)))
+ # Anytime law (L6): count caps are meaningless when one candidate costs a
+ # pytest collection -- the deadline stops the search mid-pass, gracefully.
+ import time as _t
+ _deadline=args.get('wall_deadline')
+ def _wall_left():
+  return _deadline is None or _t.monotonic()<_deadline
  if base.get('timed_out'):raise RepairLoopError('BASELINE_TIMEOUT')
  if base.get('returncode')==0:raise RepairLoopError('BASELINE_ALREADY_PASSES')
  if score is None:raise RepairLoopError('BASELINE_FAILURE_METRIC_UNPARSEABLE')
  originals={};touched=set();accepted=[];rrecs=[];tested_total=0;final_bytes={};vreplays=[];status='OPEN__NO_COMPLETE_REPAIR_IN_BOUNDED_SEARCH';current=base
  try:
   for ri in range(1,rounds_max+1):
+   if not _wall_left():status='OPEN__WALL_DEADLINE_EXHAUSTED';break
    fs=_files(repo,src,tests,_text(current))[:files_max];best=None;round_tested=0
    for source in fs:
+    if not _wall_left():status='OPEN__WALL_DEADLINE_EXHAUSTED';break
     rem=total_max-tested_total
     if rem<=0:break
-    cand,n=_best(repo,source,tests,argv,timeout,score,min(per,rem),touched,env);tested_total+=n;round_tested+=n
+    cand,n=_best(repo,source,tests,argv,cand_timeout,score,min(per,rem),touched,env);tested_total+=n;round_tested+=n
     if cand is not None:
      best=cand
      break
