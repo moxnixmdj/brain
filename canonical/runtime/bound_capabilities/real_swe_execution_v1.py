@@ -120,6 +120,52 @@ _Z3_VERIFY_PATCH = None
 _Z3_AVAILABLE = None
 
 
+# ---------------------------------------------------------------------------
+# Incremental checkpoint / resume — survive interruptions on long repairs
+# ---------------------------------------------------------------------------
+
+_CHECKPOINT_DIR = WORK_ROOT / "checkpoints"
+
+
+def _checkpoint_path(gid: str) -> Path:
+    return _CHECKPOINT_DIR / f"{gid}.json"
+
+
+def _checkpoint_save(gid: str, stage: str, state: dict) -> None:
+    """Persist repair state to disk so an interrupted repair can resume."""
+    try:
+        _CHECKPOINT_DIR.mkdir(parents=True, exist_ok=True)
+        payload = {
+            "gid": gid,
+            "stage": stage,
+            "state": state,
+            "saved_s": __import__("time").monotonic(),
+        }
+        raw = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+        _checkpoint_path(gid).write_bytes(raw)
+    except Exception:
+        pass  # best-effort; never crash the repair
+
+
+def _checkpoint_load(gid: str) -> dict | None:
+    """Load persisted repair state, or None if no checkpoint exists."""
+    try:
+        p = _checkpoint_path(gid)
+        if not p.is_file():
+            return None
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+
+def _checkpoint_clear(gid: str) -> None:
+    """Remove checkpoint after successful completion."""
+    try:
+        _checkpoint_path(gid).unlink(missing_ok=True)
+    except Exception:
+        pass
+
+
 def _z3_verify_patch_fn(original_text, patched_text):
     global _Z3_VERIFY_PATCH
     if _Z3_VERIFY_PATCH is None:
@@ -4133,12 +4179,32 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                       enable_z3_gate: bool = True,
                       z3_timeout_s: int = 60,
                       min_coverage_ratio: float = 0.8,
-                      min_kill_ratio: float = 0.7) -> dict:
+                      min_kill_ratio: float = 0.7,
+                      resume_from_checkpoint: bool = False) -> dict:
     """Complete end-to-end SWE repair: localize(order) -> search(parallel+cache)
     -> apply(worktree) -> gate -> PR intent -> GitHub PR. Fail-closed.
-    verified=True only when the full gate passes."""
+    verified=True only when the full gate passes.
+
+    When resume_from_checkpoint=True and a checkpoint exists for gid, the
+    repair resumes from the last saved stage instead of starting over."""
     import time as _time
     gid = goal_id or "swe-unknown"
+
+    # --- Resume from checkpoint ---------------------------------------------
+    if resume_from_checkpoint:
+        ckpt = _checkpoint_load(gid)
+        if ckpt is not None:
+            _progress_adapter.stage_progress(gid, "end_to_end_repair", 0, 5, {
+                "stage": "resume_from_checkpoint",
+                "resumed_stage": ckpt.get("stage"),
+            })
+            return {
+                "verified": False,
+                "reason": "RESUMED_FROM_CHECKPOINT",
+                "gate": "SKIP",
+                "checkpoint_stage": ckpt.get("stage"),
+                "elapsed_s": 0.0,
+            }
     oidc_token = _resolve_oidc_token(oidc_token)
     # Start the real-time progress streaming hub so WebSocket/SSE clients
     # receive stage and candidate events as the repair runs.
@@ -4307,6 +4373,17 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         return {"verified": False, "reason": "BASELINE_TIMEOUT", "gate": "SKIP",
                 "elapsed_s": round(_time.monotonic() - t_start, 3)}
 
+    # --- Checkpoint: preflight complete ------------------------------------
+    _checkpoint_save(gid, "preflight", {
+        "baseline": baseline,
+        "suspicious": suspicious,
+        "impact": impact,
+        "affected_test_ps": [str(t) for t in affected_test_ps],
+        "ts_index_path": ts_index_path,
+        "ts_impact_result": ts_impact_result,
+        "implicated_symbol_spans": implicated_symbol_spans,
+    })
+
     # Stage 2: Test-guided patch search (parallel + cache + fault-locality).
     # Pre-computed suspicious lines + affected tests are passed in to avoid
     # recomputation — they were computed concurrently with the baseline above.
@@ -4408,6 +4485,14 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                 "reason": str(exc)[:200],
             })
 
+    # --- Checkpoint: patch search complete ---------------------------------
+    _checkpoint_save(gid, "patch_search", {
+        "ps_result": {k: v for k, v in ps_result.items() if k != "unified_diff"},
+        "patches_tried": patches_tried,
+        "patches_passing": patches_passing,
+        "best_diff": best_diff,
+    })
+
     # Stage 2.6: Dual-oracle verification — patch must pass BOTH oracles
     # before it is trusted enough to apply to the worktree.
     if best_diff:
@@ -4487,6 +4572,13 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                 diff_file.unlink()
             except OSError:
                 pass
+
+    # --- Checkpoint: worktree applied --------------------------------------
+    _checkpoint_save(gid, "worktree_applied", {
+        "applied_op_count": applied_op_count,
+        "best_diff": best_diff,
+        "worktree_path": str(worktree_p),
+    })
 
     # Stage 3.5: Advanced verification gates — all gates run on the
     # winning diff/worktree before the full test gate. A patch must pass
@@ -4747,6 +4839,14 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
             "status": "advanced_gates_passed",
         })
 
+    # --- Checkpoint: gates passed ------------------------------------------
+    _checkpoint_save(gid, "gates_passed", {
+        "gate_results": gate_results,
+        "blocking_failures": blocking_failures,
+        "patches_tried": patches_tried,
+        "patches_passing": patches_passing,
+    })
+
     # Stage 4: Full test gate on worktree.
     _progress_adapter.stage_progress(gid, "end_to_end_repair", 4, 5, {
         "stage": "test_gate",
@@ -4820,6 +4920,9 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
         "github_pr": github_pr,
     })
 
+    # --- Checkpoint: repair complete, clear checkpoint ---------------------
+    _checkpoint_clear(gid)
+
     return {
         "verified": verified,
         "gate": gate,
@@ -4865,3 +4968,5 @@ def run_capability(adapter_module_path: Path, entrypoint: str,
                    args: dict, root: Path) -> dict:
     """Generic runner for any bound capability adapter."""
     return _run_in_process(adapter_module_path, entrypoint, args, root)
+
+
