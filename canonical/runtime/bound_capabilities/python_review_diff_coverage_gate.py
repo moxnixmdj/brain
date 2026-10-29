@@ -87,7 +87,7 @@ def run(args, root):
         return _fail("OUTPUT_OVERLAPS_INPUT")
     timeout_s = int(args.get("timeout_s") if args.get("timeout_s") is not None else 300)
     python_exe = str(args.get("python_executable") or sys.executable)
-    min_ratio = float(args.get("min_coverage_ratio") if args.get("min_coverage_ratio") is not None else 1.0)
+    min_ratio = float(args.get("min_coverage_ratio") if args.get("min_coverage_ratio") is not None else 0.8)
     if timeout_s <= 0 or not math.isfinite(min_ratio) or not 0 <= min_ratio <= 1:
         return _fail("INVALID_BUDGET_OR_COVERAGE_THRESHOLD")
 

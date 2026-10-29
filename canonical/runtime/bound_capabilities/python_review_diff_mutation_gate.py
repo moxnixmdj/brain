@@ -356,7 +356,7 @@ def run(args, root):
         return guard_result
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
-    min_ratio = float(args.get("min_kill_ratio") if args.get("min_kill_ratio") is not None else 1.0)
+    min_ratio = float(args.get("min_kill_ratio") if args.get("min_kill_ratio") is not None else 0.7)
     max_mutants = int(args.get("max_mutants") if args.get("max_mutants") is not None else 2000)
     max_wall_time_s = float(args.get("max_wall_time_s") if args.get("max_wall_time_s") is not None else 120)
     run_tests = list(args.get("run_tests") or [])

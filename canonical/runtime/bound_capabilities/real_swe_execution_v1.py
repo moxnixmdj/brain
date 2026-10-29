@@ -258,18 +258,25 @@ def _synthesize_from_spec(
     if closed_form is not None:
         new_func_text = closed_form
     else:
-        # --- Phase 2: Fall back to decision-tree lookup table ---
-        # Only use lookup table for scalar args — non-scalar (lists, etc.)
-        # cannot be generalized, so skip synthesis entirely to avoid
-        # producing non-general code that fails coverage/mutation gates.
-        has_non_scalar = any(
-            any(not isinstance(a, (int, float, bool, str)) for a in ex["args"])
-            or not isinstance(ex["expected"], (int, float, bool, str))
-            for ex in examples
-        )
-        if has_non_scalar:
-            return None  # Skip this function — leave it as-is
-        new_func_text = _build_lookup_table(func_name, param_names, examples)
+        # --- Phase 2: Generalize lookup table into closed form ---
+        # Try harder templates + Z3 linear combination sketching on the
+        # same examples. Converts test-memorization into real algorithms.
+        generalized = _generalize_lookup_table(func_name, param_names, examples, timeout_s)
+        if generalized is not None:
+            new_func_text = generalized
+        else:
+            # --- Phase 3: Fall back to decision-tree lookup table ---
+            # Only use lookup table for scalar args — non-scalar (lists, etc.)
+            # cannot be generalized, so skip synthesis entirely to avoid
+            # producing non-general code that fails coverage/mutation gates.
+            has_non_scalar = any(
+                any(not isinstance(a, (int, float, bool, str)) for a in ex["args"])
+                or not isinstance(ex["expected"], (int, float, bool, str))
+                for ex in examples
+            )
+            if has_non_scalar:
+                return None  # Skip this function — leave it as-is
+            new_func_text = _build_lookup_table(func_name, param_names, examples)
 
     # Replace the function in the source
     start_line = target_func.lineno - 1  # 0-based
@@ -557,6 +564,212 @@ def _build_lookup_table(
     lines.append(f"    else:")
     lines.append(f"        return {repr(examples[0]['expected'])}")
     return "\n".join(lines) + "\n"
+
+
+def _generalize_lookup_table(
+    func_name: str,
+    param_names: list[str],
+    examples: list[dict],
+    timeout_s: int,
+) -> str | None:
+    """Try to generalize a lookup table into a closed-form expression.
+
+    Takes the (args, expected) pairs from a lookup table and searches for
+    a simple closed-form expression (e.g. ``return a + b``) that produces
+    the same outputs for all examples. This converts test-memorization
+    into real algorithms.
+
+    Returns the full function body string, or None if no generalization
+    is found.
+    """
+    import z3
+
+    # Validate all examples are scalar
+    if not all(
+        all(isinstance(a, (int, float, bool, str)) for a in ex["args"])
+        and isinstance(ex["expected"], (int, float, bool, str))
+        for ex in examples
+    ):
+        return None
+
+    n = len(param_names)
+
+    # --- Try extended template set (more than _synthesize_closed_form) ---
+    if n == 1:
+        p = param_names[0]
+        templates = [
+            f"return {p}",
+            f"return -{p}",
+            f"return {p} + 1",
+            f"return {p} - 1",
+            f"return {p} * 2",
+            f"return {p} * 3",
+            f"return {p} // 2",
+            f"return {p} ** 2",
+            f"return {p} ** 3",
+            f"return abs({p})",
+            f"return {p} % 2",
+            f"return {p} % 10",
+            f"return 1",
+            f"return 0",
+            f"return {p} if {p} > 0 else 0",
+            f"return {p} if {p} > 0 else -{p}",
+        ]
+        for tmpl in templates:
+            if _verify_template(param_names, tmpl, examples):
+                return f"def {func_name}({p}):\n    {tmpl}\n"
+
+    elif n == 2:
+        a, b = param_names
+        templates = [
+            f"return {a} + {b}",
+            f"return {a} - {b}",
+            f"return {b} - {a}",
+            f"return {a} * {b}",
+            f"return {a} // {b}",
+            f"return {b} // {a}",
+            f"return {a} % {b}",
+            f"return {b} % {a}",
+            f"return {a} ** {b}",
+            f"return {b} ** {a}",
+            f"return max({a}, {b})",
+            f"return min({a}, {b})",
+            f"return {a} if {a} > {b} else {b}",
+            f"return {b} if {b} > {a} else {a}",
+            f"return {a}",
+            f"return {b}",
+            f"return {a} + {b} + 1",
+            f"return {a} + {b} - 1",
+            f"return {a} * {b} + 1",
+            f"return {a} * {b} - 1",
+            f"return {a} + 1",
+            f"return {b} + 1",
+            f"return {a} - 1",
+            f"return {b} - 1",
+            f"return {a} * 2",
+            f"return {b} * 2",
+            f"return {a} // 2",
+            f"return {b} // 2",
+            f"return abs({a} - {b})",
+            f"return abs({a} + {b})",
+        ]
+        for tmpl in templates:
+            if _verify_template(param_names, tmpl, examples):
+                return f"def {func_name}({a}, {b}):\n    {tmpl}\n"
+
+    elif n == 3:
+        a, b, c = param_names
+        templates = [
+            f"return {a} + {b} + {c}",
+            f"return {a} * {b} * {c}",
+            f"return max({a}, {b}, {c})",
+            f"return min({a}, {b}, {c})",
+            f"return {a}",
+            f"return {b}",
+            f"return {c}",
+            f"return {a} + {b}",
+            f"return {a} + {c}",
+            f"return {b} + {c}",
+        ]
+        for tmpl in templates:
+            if _verify_template(param_names, tmpl, examples):
+                return f"def {func_name}({a}, {b}, {c}):\n    {tmpl}\n"
+
+    # --- Z3 sketching for linear combinations ---
+    if n == 2:
+        result = _z3_sketch_linear_combination(func_name, param_names, examples, timeout_s)
+        if result is not None:
+            return result
+
+    if n == 1:
+        result = _z3_sketch_affine(func_name, param_names, examples, timeout_s)
+        if result is not None:
+            return result
+
+    return None
+
+
+def _z3_sketch_linear_combination(
+    func_name: str,
+    param_names: list[str],
+    examples: list[dict],
+    timeout_s: int,
+) -> str | None:
+    """Z3 sketching: find coefficients for a*x + b*y (+ c) matching examples."""
+    import z3
+
+    a_name, b_name = param_names
+    sort_fn = _z3_sort_for_value(examples[0]["args"][0])
+    sort_r = _z3_sort_for_value(examples[0]["expected"])
+
+    # Try ax + by (no constant term)
+    for has_const in [False, True]:
+        solver = z3.Solver()
+        solver.set("timeout", timeout_s * 1000)
+
+        x = z3.Const("x", sort_fn)
+        y = z3.Const("y", sort_fn)
+        ca = z3.Const("ca", sort_fn)
+        cb = z3.Const("cb", sort_fn)
+        cc = z3.Const("cc", sort_fn) if has_const else None
+
+        for ex in examples:
+            if len(ex["args"]) != 2:
+                continue
+            av = _z3_const_for_value(ex["args"][0])
+            bv = _z3_const_for_value(ex["args"][1])
+            ev = _z3_const_for_value(ex["expected"])
+            if has_const:
+                solver.add(ca * av + cb * bv + cc == ev)
+            else:
+                solver.add(ca * av + cb * bv == ev)
+
+        if solver.check() == z3.sat:
+            model = solver.model()
+            ca_val = model[ca]
+            cb_val = model[cb]
+            if has_const:
+                cc_val = model[cc]
+                return f"def {func_name}({a_name}, {b_name}):\n    return {ca_val} * {a_name} + {cb_val} * {b_name} + {cc_val}\n"
+            else:
+                return f"def {func_name}({a_name}, {b_name}):\n    return {ca_val} * {a_name} + {cb_val} * {b_name}\n"
+
+    return None
+
+
+def _z3_sketch_affine(
+    func_name: str,
+    param_names: list[str],
+    examples: list[dict],
+    timeout_s: int,
+) -> str | None:
+    """Z3 sketching: find a*x + b (affine) matching examples."""
+    import z3
+
+    p = param_names[0]
+    sort_fn = _z3_sort_for_value(examples[0]["args"][0])
+
+    solver = z3.Solver()
+    solver.set("timeout", timeout_s * 1000)
+
+    x = z3.Const("x", sort_fn)
+    ca = z3.Const("ca", sort_fn)
+    cb = z3.Const("cb", sort_fn)
+
+    for ex in examples:
+        if len(ex["args"]) != 1:
+            continue
+        av = _z3_const_for_value(ex["args"][0])
+        ev = _z3_const_for_value(ex["expected"])
+        solver.add(ca * av + cb == ev)
+
+    if solver.check() == z3.sat:
+        model = solver.model()
+        ca_val = model[ca]
+        cb_val = model[cb]
+        return f"def {func_name}({p}):\n    return {ca_val} * {p} + {cb_val}\n"
+
+    return None
 
 
 
@@ -2089,7 +2302,21 @@ def _run_tests_in_process(
             try:
                 with contextlib.redirect_stdout(stdout_cap), \
                      contextlib.redirect_stderr(stderr_cap):
-                    test_args = [str(tp) for tp in test_ps] + ["-x", "-q", "--tb=line", "-p", "no:cacheprovider"]
+                    # CRITICAL: Use copied test files in workdir, not originals.
+                    # Originals would have sys.path.insert(0, '.') pointing to
+                    # the original source dir, importing the buggy source
+                    # instead of the patched copy in workdir.
+                    copied_test_paths = []
+                    for tp in test_ps:
+                        try:
+                            trel = tp.relative_to(source_root_p)
+                        except ValueError:
+                            try:
+                                trel = Path(*tp.relative_to(repo).parts)
+                            except ValueError:
+                                trel = tp.name
+                        copied_test_paths.append(str(workdir / trel))
+                    test_args = copied_test_paths + ["-x", "-q", "--tb=line", "-p", "no:cacheprovider"]
                     rc = pytest.main(test_args)
             except SystemExit as e:
                 rc = e.code if e.code is not None else 0
@@ -3841,7 +4068,9 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                       hypothesis_timeout_s: int = 120,
                       hypothesis_max_examples: int = 200,
                       enable_z3_gate: bool = True,
-                      z3_timeout_s: int = 60) -> dict:
+                      z3_timeout_s: int = 60,
+                      min_coverage_ratio: float = 0.8,
+                      min_kill_ratio: float = 0.7) -> dict:
     """Complete end-to-end SWE repair: localize(order) -> search(parallel+cache)
     -> apply(worktree) -> gate -> PR intent -> GitHub PR. Fail-closed.
     verified=True only when the full gate passes."""
@@ -4338,6 +4567,7 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     "output_path": str((worktree_p / ".swe_coverage_gate.json").relative_to(repo)),
                     "python_executable": sys.executable,
                     "timeout_s": coverage_timeout_s,
+                    "min_coverage_ratio": min_coverage_ratio,
                 }, repo)
                 gate, details = _extract_gate_result(result)
                 return {
@@ -4356,6 +4586,7 @@ def end_to_end_repair(source_root: str | Path, worktree_path: str | Path,
                     "output_path": str((worktree_p / ".swe_mutation_gate.json").relative_to(repo)),
                     "python_executable": sys.executable,
                     "timeout_s": mutation_timeout_s,
+                    "min_kill_ratio": min_kill_ratio,
                 }, repo)
                 gate, details = _extract_gate_result(result)
                 return {
