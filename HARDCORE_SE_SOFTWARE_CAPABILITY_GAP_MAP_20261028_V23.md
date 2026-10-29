@@ -1,6 +1,6 @@
 # What are all the problems?
 
-**Hardcore software-engineering capability inventory · 2026-10-29 · measured on `arena/4ca3a720-brain` at `d16c84e` + this unit (P5: three binders took turns being the only one consulted)**
+**Hardcore software-engineering capability inventory · 2026-10-29 · measured on `arena/4ca3a720-brain` at `1c29585` + this unit (P5: the bar, the number, and the command nobody quotes)**
 
 _Supersedes `…GAP_MAP_20261028_V22.md`.
 
@@ -663,6 +663,50 @@ test moved: identical 33 failing node ids at `d16c84e` and here, 155 passed on b
   instrument's sentence cannot be built for (chart raster, OCR, document verification). They are
   unaskable **by this instrument**, which is a statement about measurement, not about the machine,
   and they are counted separately for exactly that reason.
+
+### 7.5 The bar, the number, and the command nobody quotes
+
+Five more rows, and every one of them was a rule applied to the wrong object.
+
+1. **A number is a value.** `_stated_in` read strings, lists (from §7.2) and nothing else, so a
+   slot that bound `max_mutants: 8` correctly was refused `named_but_inputs_not_stated`. It reads
+   numbers (as a TOKEN — `3` is inside `30`, and a substring test would have accepted it), flags
+   ("run the tests true") and key/value payloads. Three named rows were this and nothing else.
+2. **A command need not be quoted.** `_stated_command_argv` read only a QUOTED command, so
+   *"run the shell command cat README.md and save the output to `<out>`"* — a sentence a person
+   writes — was unaskable, and the quoted form was the caller doing the machine's work. The bare
+   form is now read after a declared introducer ("the shell command", "the command"),
+   ends at a stated boundary ("and save", "then", "in the…", a full stop), and its first token
+   must be a program `raw_goal_trace_acceptance_v1` already declares as one. It fails closed on
+   "tell me the command is easy".
+3. **The bar for F32 was the wrong object.** F32 refuses a request when the act it names cannot be
+   served — measured on *"Bisect the repository R"* with no predicate, which was answered by a
+   file listing. But its bar was **whatever the pinned compiler happened to pick**:
+   `python.refactor.inline_function.v1` ranked FIRST at 87 and bound every input, while the pinned
+   compiler answered `python.toolchain.ruff_dead_code.v1`; a lower-ranked candidate the sentence
+   never named ("ast") cleared that bar and the request was refused with
+   `source_paths:no_matching_existing_files_named`. The bar is now **the best-ranked capability the
+   sentence can actually be given**, so a nomination can only refuse when nothing better binds.
+   Four rows closed — the three refactor verbs and the chart sibling.
+4. **F33: a name plus a stated contract is the request.** `web.browser.rendered.capture.chromedriver`
+   was refused because the pinned compiler found two capabilities it could not separate for the
+   *rest* of the sentence. Ambiguity among capabilities the caller did not name is not a reason to
+   refuse the one they did. The conditions are strict — routable, every declared input bound, and
+   nothing unstated invented — so it can serve a stated contract and can never rescue an unstated
+   one.
+5. **The instrument asked the wrong sentence, again.** `signature_goal` — the by-vocabulary question
+   — still emitted `argv "value"` for every non-path input: the registry's spelling of the slot,
+   carrying the placeholder "value". Five rows were unaskable for a reason that lived entirely in
+   the question, and the fix is the same one §7.2 made for the named question.
+
+| | by vocabulary | by name |
+|---|---|---|
+| §7.4 | 440 / 11 / 5 / 3 | 427 / 8 / 21 / 3 |
+| §7.5 | **451 / 4 / 1 / 3** | **431 / 5 / 21 / 3** |
+
+Named reach **409 → 431** over four units, vocabulary **436 → 451** of 459, with **0 capabilities
+lost** at any step. Identical 33 failing node ids at `d16c84e` and here, 155 passed on both, and 35
+pins green in the two pin files.
 
 `shell.command.run` and `vcs.git.bisect.v1` are now askable (both are in the 17 above): the
 quoted-command sentence binds `argv`, which is what `_stated_command_argv` already implemented and

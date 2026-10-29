@@ -558,11 +558,85 @@ _COMMAND_QUOTED=re.compile(
     re.IGNORECASE)
 
 
+# WHERE A BARE COMMAND ENDS.  A caller writes "run the shell command cat <file> and save the
+# output to <out>": the command is not quoted, and the sentence says where it stops.  These are
+# the only boundaries that end one -- everything after them is the request's own prose, and
+# everything before them is the command.
+_COMMAND_ENDS = re.compile(
+    r"(?i)\s+(?:and\s+(?:save|write|store|report|put|emit)\b|then\b|in\s+the\b|from\s+the\b"
+    r"|inside\s+the\b|into\s+the\b|at\s+the\b|using\s+the\b)|[.;]\s")
+
+# The programs a bare command may name: the ones this repository already declares as commands,
+# plus the interpreters and build tools the registry's own capability names carry.  A word that
+# is NOT one of these is prose, and a "command" made of prose is a guess.
+_COMMAND_PROGRAMS = frozenset({
+    "python", "python3", "pytest", "pip", "pip3", "git", "make", "npm", "node", "npx", "yarn",
+    "cargo", "rustc", "go", "javac", "java", "mvn", "gradle", "bash", "sh", "zsh", "ruby",
+    "perl", "php", "dotnet", "cmake", "gcc", "clang", "docker", "kubectl", "terraform", "ansible",
+})
+
+
+def _command_programs():
+    """The programs a bare command may name, declared rather than discovered.
+
+    The two tables already exist: `raw_goal_trace_acceptance_v1` declares the read-only commands
+    and the mutating ones, and the composer's `_prose_argv` matches against exactly that union.
+    Reading them here means the compiler and the composer cannot disagree about what a program is.
+    """
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        return frozenset(_accept._READ_ONLY_COMMANDS) | frozenset(_accept._MUTATING_POSTCONDITIONS) | _COMMAND_PROGRAMS
+    except Exception:  # noqa: BLE001 - a missing table leaves the declared set
+        return _COMMAND_PROGRAMS
+
+
+def _bare_command(text):
+    """The command a sentence states WITHOUT quoting it, or None.
+
+    Read only after an introducer that says "a command follows" ("the shell command", "the
+    command", "run", "execute"), and only up to a boundary where the sentence's own prose
+    resumes.  It fails closed twice over: the first token must be a program this repository
+    already declares as one, and the span must end at a stated boundary -- so a sentence that
+    merely contains the word "run" cannot offer a command nobody wrote.
+    """
+    import shlex
+    for match in _COMMAND_INTRODUCED.finditer(text):
+        tail = text[match.end():]
+        head = _COMMAND_ENDS.split(tail, 1)[0].strip()
+        if not head:
+            continue
+        try:
+            parts = shlex.split(head)
+        except ValueError:
+            continue
+        # Trailing punctuation belongs to the sentence, not to the command.
+        parts = [p.strip(",;") for p in parts]
+        parts = [p for p in parts if p]
+        if not parts:
+            continue
+        first = parts[0].lower()
+        if first not in _command_programs():
+            continue
+        return parts
+    return None
+
+
+_COMMAND_INTRODUCED = re.compile(
+    r"(?i)(?:\bshell\s+command|\bthe\s+command|\bcommand\s*:?)\s+(?:the\s+)?")
+
+
 def _stated_command_argv(goal):
-    """The command line the sentence quotes, or None.
+    """The command line the sentence states, or None.
 
     Read only where the sentence INTRODUCES it as a command, and split with shlex so the argv is
     exactly what a shell would receive -- never a prose guess about which words are operands.
+
+    THE QUOTED FORM WINS, and the bare form is read second.  Measured: "Run the shell command
+    `cat README.md` and save the output to <out>" was unaskable, because the command grammar only
+    ever read a QUOTED command and every added quote is the caller doing the machine's work.  The
+    bare form is bounded on both sides -- a declared introducer before it, a stated boundary after
+    it, and a declared program as its first token -- so it can only read a command the sentence
+    actually wrote.
     """
     import shlex
     for match in _COMMAND_QUOTED.finditer(str(goal or "")):
@@ -575,7 +649,7 @@ def _stated_command_argv(goal):
             continue
         if parts:
             return parts
-    return None
+    return _bare_command(str(goal or ""))
 
 
 def _find_suite_argv(mod, _seen=None, _depth=0):

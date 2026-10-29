@@ -589,7 +589,12 @@ def signature_goal(cid: str, entry: Mapping[str, Any], work: Path) -> tuple[str,
             f = work / name
             f.write_bytes(b"fixture"); fixtures.append(f); parts.append(_rel(f))
         else:
-            parts.append(key + ' "value"')
+            # THE SAME STATED VALUE THE NAMED QUESTION USES.  This builder emitted
+            # `argv "value"` for every non-path input -- the registry's spelling of the slot,
+            # which is not a sentence, carrying the placeholder "value", which is not a value.
+            # Measured: `shell.command.run` and `vcs.git.bisect.v1` were reported unaskable by
+            # vocabulary for a reason that lived entirely in the question being asked.
+            parts.append(_stated(key))
     return "Use " + " ".join(words) + " on " + " ".join(parts), fixtures
 
 

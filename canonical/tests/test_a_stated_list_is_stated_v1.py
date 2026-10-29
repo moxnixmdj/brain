@@ -237,3 +237,81 @@ def test_an_output_path_the_pinned_binder_cannot_decide_is_bound_not_dropped(reg
     bound = front.bind_all_inputs(goal, entry, ROOT, cycle=0, spool=set())
     assert "report_path" in bound, bound
     assert bound["report_path"].endswith(".json"), bound
+
+
+# ------------------------------------------------ a value the sentence states need not be a word
+
+def test_a_number_is_stated_as_a_token_not_as_a_substring():
+    """`max_mutants: 8` is stated by "mutants 8" and NOT by "timeout 30".
+
+    Three named rows were refused `named_but_inputs_not_stated` in this exact shape: the number
+    had bound correctly and the "was it stated?" check could not read a non-string.  A substring
+    test would be worse than useless here -- "3" is inside "30".
+    """
+    assert front._stated_in("with the timeout 30 and mutants 8", 8) is True
+    assert front._stated_in("with the timeout 30", 3) is False
+    assert front._stated_in("with the timeout 30", 30) is True
+
+
+def test_a_flag_is_stated_in_words():
+    assert front._stated_in("run the tests true", True) is True
+    assert front._stated_in("run the tests true", False) is False
+
+
+# ------------------------------------------- a command does not have to be quoted to be stated
+
+def test_a_bare_command_binds_argv(registry, work):
+    """"the shell command cat <file> and save the output to <out>" is a stated command.
+
+    The grammar only ever read a QUOTED command, so every added quote was the caller doing the
+    machine's work.  The bare form is bounded on both sides -- a declared introducer before it and
+    a stated boundary after it -- and its first token must be a program this repository already
+    declares as one.
+    """
+    goal = ("Run the shell command cat README.md and save the output to "
+            + rel(work / "reports" / "cat.txt"))
+    (work / "reports").mkdir(exist_ok=True)
+    compiled = front.compile_goal(goal, registry, ROOT)
+    assert compiled["selected_capability"] == "shell.command.run"
+    assert compiled["inputs"]["argv"] == ["cat", "README.md"]
+
+
+def test_a_bare_command_needs_a_declared_program():
+    # "the command is easy" is prose.  Nothing here is an executable, so nothing binds.
+    assert gc._stated_command_argv("Tell me the command is easy and save it") is None
+    assert gc._stated_command_argv("Run the shell command cat README.md and save it") == ["cat", "README.md"]
+    assert gc._stated_command_argv("Bisect the repository R using the command pytest -q t.py") == ["pytest", "-q", "t.py"]
+
+
+# ------------------------------------ the act a sentence names is one it can actually be given
+
+def test_a_better_ranked_capability_that_binds_is_not_refused_as_an_unbound_act(registry, work):
+    """F32's bar is the best capability the sentence can be GIVEN, not the one the body picked.
+
+    Measured: `python.refactor.inline_function.v1` ranked FIRST (87) and bound every declared
+    input, while the pinned compiler answered `python.toolchain.ruff_dead_code.v1`; the bar was
+    that pick's score, so a lower-ranked candidate the sentence never named cleared it on the word
+    "ast" and the request was refused with `GOAL_STATED_ACT_INPUTS_UNBOUND:...:source_paths`.
+    """
+    goal = ("Use a codemod to inline the function add in the python module " + rel(work / "mod.py")
+            + " and save the report to " + rel(work / "reports" / "inline.json"))
+    (work / "reports").mkdir(exist_ok=True)
+    compiled = front.compile_goal(goal, registry, ROOT)
+    assert compiled["selected_capability"] == "python.refactor.inline_function.v1"
+
+
+def test_a_named_capability_with_a_stated_contract_beats_the_body_s_ambiguity(registry, work):
+    """A caller who names a capability AND states its contract asked for it.
+
+    Measured: `web.browser.rendered.capture.chromedriver` was refused because the pinned compiler
+    found two capabilities it could not separate for the REST of the sentence.  Ambiguity among
+    capabilities the caller did not name is not a reason to refuse the one they did.
+    """
+    goal = ("Run the web browser rendered capture chromedriver on "
+            "https://example.org/page and save it to "
+            + rel(work / "reports" / "shot.png"))
+    (work / "reports").mkdir(exist_ok=True)
+    compiled = front.compile_goal(goal, registry, ROOT)
+    assert compiled["selected_capability"] == "web.browser.rendered.capture.chromedriver"
+    rules = (compiled.get("front_compiler") or {}).get("rules_applied") or []
+    assert "F33_NAMED_CONTRACT_BEATS_BODY_AMBIGUITY" in rules, rules

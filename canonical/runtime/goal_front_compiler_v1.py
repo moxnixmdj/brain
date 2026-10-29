@@ -2387,7 +2387,25 @@ def stated_act_unbound(
     registry = dict(admissible)
     text = without_stated_text_value(normalize_goal(str(goal or "")))
     ranked = ranked_candidates(text, registry)
-    winner_score = next((row[0] for row in ranked if row[2] == selected), 0)
+    # THE BAR IS THE BEST CAPABILITY THE SENTENCE CAN ACTUALLY BE GIVEN, not whatever the pinned
+    # compiler happened to pick.  Measured: "Use ast call codemod ... function inline ... on the
+    # python module M" ranked `python.refactor.inline_function.v1` FIRST at 87 and it bound every
+    # declared input, while the pinned compiler answered `python.toolchain.ruff_dead_code.v1`; the
+    # bar was therefore that pick's own score, and `python.software.repair.loop.test_guided.ast.v1`
+    # (50, a candidate the sentence never named as its act) cleared it on the strength of the word
+    # "ast" and the request was REFUSED as `GOAL_STATED_ACT_INPUTS_UNBOUND:...:source_paths`.  A
+    # refusal is for an act the ranking PREFERS and cannot serve; when a better-ranked capability
+    # binds, there is no displacement to refuse and the act the sentence names is serviceable.
+    winner_score = 0
+    for score, _specificity, cid, _evidence in ranked[:8]:
+        entry = registry.get(cid)
+        if not isinstance(entry, Mapping) or not is_plain_goal_routable(entry):
+            continue
+        if _binds(goal, entry, root):
+            winner_score = score
+            break
+    else:
+        winner_score = next((row[0] for row in ranked if row[2] == selected), 0)
     act = ""
     failure: dict[str, Any] | None = None
     for score, _specificity, cid, evidence in ranked[:6]:
@@ -2835,6 +2853,21 @@ def _stated_in(text: str, value: Any) -> bool:
         return bool(stated) and (stated in text or text.strip().startswith(stated))
     if isinstance(value, (list, tuple)):
         return bool(value) and all(_stated_in(text, item) for item in value)
+    if isinstance(value, bool):
+        # "run the tests true" is how a caller states a flag; the bound value is a bool.
+        return any(re.search(r"(?<![A-Za-z0-9_])" + word + r"(?![A-Za-z0-9_])", str(text), re.I)
+                   for word in (("true", "yes") if value else ("false", "no")))
+    if isinstance(value, (int, float)):
+        # A NUMBER IS A VALUE THE SENTENCE STATES, and it has to be read as a TOKEN: a substring
+        # test would accept "3" from "30".  Measured: `python.review.diff_mutation_gate.v1` bound
+        # `max_mutants` to 8 from the sentence's own words and was then refused
+        # `named_but_inputs_not_stated:max_mutants` -- the last three rows of the named residue were
+        # this, and every one of them had bound the number correctly.
+        rendered = ("%d" % value) if float(value).is_integer() else ("%g" % value)
+        return re.search(r"(?<![A-Za-z0-9_.])" + re.escape(rendered) + r"(?![A-Za-z0-9_.])", str(text)) is not None
+    if isinstance(value, Mapping):
+        # A key/value payload is stated when every stated pair is ("variables x=1, y=2").
+        return bool(value) and all(_stated_in(text, k) and _stated_in(text, v) for k, v in value.items())
     return False
 
 
@@ -2945,6 +2978,27 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         _NAMED_EXPECTATION.reset(token)
         _NAMED_ROUTE.reset(rtoken)
     if failure is not None:
+        if expected is not None:
+            # A NAME PLUS A STATED CONTRACT IS THE REQUEST.  The body's failure is about the
+            # candidates IT could not separate -- measured: `text.file.write` named in a sentence
+            # that states both of its declared inputs, refused because the pinned compiler found
+            # `source.candidates.enumerate.stdlib` and `structured.decision.evidence.locate.stdlib`
+            # tied at 5 for the rest of the sentence.  Ambiguity among capabilities the caller did
+            # not name is not a reason to refuse the one they did name.  The conditions are the
+            # strict ones: the capability must be routable, every declared input must bind, and
+            # nothing unstated may have been invented -- so this can serve a request that stated
+            # its contract and can never rescue one that did not.
+            named_entry = (admissible or {}).get(expected) or {}
+            if is_plain_goal_routable(named_entry):
+                try:
+                    named_inputs = bind_all_inputs(goal, named_entry, root, cycle=0, spool=set())
+                except GoalCompilationFailure:
+                    named_inputs = None
+                if named_inputs is not None and not _inputs_not_stated_by(goal, named_inputs):
+                    return _single(expected, named_entry, named_inputs, _EXPLICIT_NAME_SCORE,
+                                   {"rule": "F33_NAMED_CONTRACT_BEATS_BODY_AMBIGUITY",
+                                    "body_failure": str(failure.detail or failure.code)[:200]},
+                                   ["F33_NAMED_CONTRACT_BEATS_BODY_AMBIGUITY"])
         if expected is not None and expected not in str(failure.detail or ""):
             named_entry = (admissible or {}).get(expected) or {}
             gaps = _contract_gaps_for(goal, named_entry, root)
