@@ -1307,6 +1307,21 @@ def _invoke_bound_capability(args):
     fn=getattr(module,str(entry.get("entrypoint") or "run"),None)
     if not callable(fn):
         raise Blocker("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
+    # Write authority, checked BEFORE the adapter runs (measured 2026-10-29).
+    # This kernel and ``live_brain_route_admission_v1.run_adapter_locally`` are the
+    # two places a bound adapter is invoked, so one rule is enforced at both.
+    # Measured: "Who last changed the function line_total in app/service.py?" -- a
+    # READ-ONLY question -- reached python.source.symbols.index.ast through THIS
+    # path with output_path bound to the source it was told to read, and replaced
+    # 358 lines of source with a JSON symbol index.  A Blocker keeps it a typed,
+    # closed refusal.
+    try:
+        from canonical.runtime import write_authority_v1 as _write_authority
+        _write_authority.check(ROOT,call_args,cid)
+    except Blocker:
+        raise
+    except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
+        raise Blocker(str(exc)) from exc
     result=fn(call_args,ROOT)
     if not isinstance(result,dict):
         raise Blocker("BOUND_CAPABILITY_RESULT_INVALID")

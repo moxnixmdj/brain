@@ -28715,16 +28715,16 @@
   "engines": 26,
   "knowledge_documents": 172,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6501,
+  "research_index_records": 6502,
   "routing_tokens": 2105,
   "skills": 18,
   "source_index_entry_points": 423,
-  "source_index_modules": 1889
+  "source_index_modules": 1890
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "51c05792c34a11c576f09e78dfad778e6ba5a6fefa7af557e0977a2c6e1aaeee"
+  "value": "3edc97ee4c92354eaf5a7d74dcf72ff99e6a7655569efc836cd3d96c3e6f9be2"
  },
  "engines": [
   {
@@ -194692,6 +194692,51 @@
    }
   },
   {
+   "action_id": "A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1",
+   "capability": false,
+   "date": "2026-10-29",
+   "id": "research:canonical/action_intents/A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e0a532ff9ffc20517e741597673e9efc654cb7cf7ab7fd3902b770e5058e1ed8",
+   "status": "",
+   "terms": {
+    "20261029": 1,
+    "a_capability_may_not_overwrite_the_file_it_reads_v1_20261029_v1": 1,
+    "able": 1,
+    "asked": 1,
+    "because": 1,
+    "become": 1,
+    "being": 1,
+    "bound": 1,
+    "capabilities": 1,
+    "capability": 2,
+    "declares": 1,
+    "destination": 1,
+    "destroy": 1,
+    "destroys": 1,
+    "engineering": 1,
+    "evidence": 1,
+    "failure": 1,
+    "file": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 1,
+    "handed": 1,
+    "integrate_write_authority_at_the_invocation_choke_points": 1,
+    "invisible": 1,
+    "loss": 1,
+    "may": 1,
+    "named": 1,
+    "no": 1,
+    "not": 1,
+    "read": 2,
+    "so": 2,
+    "software-engineering": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_CAPABILITY_THAT_CANNOT_BE_REINSPECTED_CAN_NEVER_BE_ACCEPTED_V1_20261028_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -208087,7 +208132,7 @@
    "imported_by_count": 4,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/astra_runtime.py",
-   "sha256": "c0a920dabf136beb01d317c6834e5358b7d658325a3bedb5cac560fe7911bad2",
+   "sha256": "40c0ea57a2104656c7ec2f14cd3b36a68d3b96a02b17016131dfb3d1fbc2cf0a",
    "summary": "",
    "symbol_count": 113,
    "symbols": [
@@ -237616,7 +237661,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "ffa5e6c83af8ca560e4abe0692a205dc0df245fd0f2f44b790b32723ccb9f3bb",
+   "sha256": "4dc16863ae459a8a806c20de28712084dbb953783bd6054700e1e8640568fefa",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 57,
    "symbols": [
@@ -275747,6 +275792,45 @@
     "turn": 1,
     "v1": 1,
     "world": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/write_authority_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/write_authority_v1.py",
+   "sha256": "5bea644cdd8a86e43f03a29c85861a0e6df3ae6c02fd13a495517a3954ab2e9e",
+   "summary": "A capability may not write its report over the file it was asked to read.",
+   "symbol_count": 6,
+   "symbols": [
+    "WriteAuthorityViolation",
+    "_as_path",
+    "_inside",
+    "check",
+    "is_source_transformer",
+    "violation"
+   ],
+   "terms": {
+    "as_path": 1,
+    "asked": 1,
+    "authority": 1,
+    "capability": 1,
+    "check": 1,
+    "file": 1,
+    "inside": 1,
+    "is_source_transformer": 1,
+    "may": 1,
+    "not": 1,
+    "over": 1,
+    "read": 1,
+    "report": 1,
+    "v1": 1,
+    "violation": 1,
+    "write": 2,
+    "writeauthorityviolation": 1
    }
   },
   {
