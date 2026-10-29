@@ -2173,9 +2173,37 @@ _JUDGED_FAILURE_CLASSES = frozenset({
     # (``side_effect_landed: UNKNOWN`` in the composer's own record).  Running a different
     # capability on top of that could compound an edit nobody has seen, so it is not a
     # "could not reach it" failure even though it produced no verdict.
-    "COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN", "COMPOSED_CHAIN_NOT_VERIFIED",
+    "COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
     "STEP_RAISED_OUTCOME_UNKNOWN", "COMPOSER_STEP_RAISED",
 })
+# The composer GUESSED a chain, ran it, and then said it could not verify the result
+# (``NO_INDEPENDENT_REINSPECTION_FOR:<cid>``).  Measured 2026-10-29 on "Lint the python file X":
+# the composer reached code.multilanguage.parse.tree_sitter.v1 -- a parser, not a lint gate -- and
+# the door refused with COMPOSED_CHAIN_NOT_VERIFIED while a DECISIVE typed plan for
+# python.review.diff_static_triage.v1 existed.  That is a guess that judged nothing about the
+# request, so a decisive plan may answer it -- but only when the guess touched NOTHING of the
+# caller's: every step completed (nothing raised, no ``side_effect_landed: UNKNOWN``) and every
+# artifact it named lives under this repository's own spool directory.  A chain that wrote inside
+# the tree the request named is a world nobody has seen, and it stays un-retryable.
+_COMPOSED_UNVERIFIED_CLASSES = frozenset({"COMPOSED_CHAIN_NOT_VERIFIED"})
+_SPOOL_DIR_PREFIX = "canonical/astra_runtime/tmp/"
+
+
+def _composed_wrote_only_its_own_scratch(result: Mapping[str, Any]) -> bool:
+    steps = list(((result.get("composer_execution") or {}).get("steps") or []))
+    if not steps:
+        return False
+    for row in steps:
+        if not isinstance(row, Mapping):
+            return False
+        if row.get("adapter_raised") or row.get("side_effect_landed") or row.get("result") is None:
+            return False
+        args = row.get("args") or {}
+        for key in ("output_path", "result_path"):
+            value = args.get(key)
+            if isinstance(value, str) and value.strip() and not value.startswith(_SPOOL_DIR_PREFIX):
+                return False
+    return True
 _JUDGED_EVIDENCE_FIELDS = (
     "tool_truth_errors", "observed_effect_errors", "promised_source_change_errors",
     "promised_artifact_errors", "stated_answer_errors",
@@ -2195,9 +2223,12 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     """
     if result.get("pass") is True:
         return False
-    if str(result.get("failure_class") or "") in _JUDGED_FAILURE_CLASSES:
-        return False
+    failure_class = str(result.get("failure_class") or "")
     if any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS):
+        return False
+    if failure_class in _COMPOSED_UNVERIFIED_CLASSES:
+        return _composed_wrote_only_its_own_scratch(result)
+    if failure_class in _JUDGED_FAILURE_CLASSES:
         return False
     if result.get("executed") is True:
         stated = "%s %s" % (result.get("reason") or "", result.get("failure_reason") or "")

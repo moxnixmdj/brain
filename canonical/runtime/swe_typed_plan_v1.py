@@ -68,6 +68,14 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # this decisive with no id table: of the four rows whose declared surface
     # mentions landing a fix, exactly one (python.software.repair.apply.verified.v1)
     # admits every input the sentence states, and its name carries the effect token.
+    # A TYPE CHECK IS A REVIEW.  Measured 2026-10-29: "Type-check the file X" is an explicit SWE
+    # request (the verb list has it) whose lexical shortlist never proposed the one capability that
+    # does it, while the primary door reached a CONTRACT sampler
+    # (python.contract.check.crosshair.v1).  The declared-input derivation can now hand
+    # python.review.diff_type_gate.v1 the change set it declares, so the family route -- which lets
+    # admit() be the oracle over rows the registry's OWN keywords name -- becomes decisive.
+    (("type-check", "type check", "typecheck", "type checks", "mypy"),
+     ("type_gate", "typecheck", "type check", "type-check", "mypy"), "type"),
     (("bug:", "bug report", "bug in", "broken", "failing test", "test fails",
       "tests fail", "returns the wrong", "wrong value", "does not pass",
       "doesn't pass"),

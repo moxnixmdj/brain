@@ -162,6 +162,70 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     return found
 
 
+# --------------------------------------------------------------------------- #
+# a stated FILE reviewed as a CHANGE SET
+# --------------------------------------------------------------------------- #
+# Measured 2026-10-29, one door call each on a fresh tree::
+#
+#   "Lint <...>/pkg/calc.py"       FAIL_CLOSED__ROUTE_ADMISSION_REJECTED
+#   "Type-check <...>/pkg/calc.py" FAIL_CLOSED__ROUTE_ADMISSION_REJECTED
+#   "Run a security audit on <pkg>" FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED
+#
+# with ``BINDING_REFUSED:diff_path:0_type_compatible_existing_files_named`` underneath.  The
+# review gates (``python.review.diff_static_triage.v1``, ``..._type_gate``, ``..._security_gate``,
+# ``..._coverage_gate``, ``..._mutation_gate``) all declare ``diff_path`` + ``worktree_path``:
+# they review the CHANGED LINES of a change set.  Nothing in the registry produces a change set
+# from a sentence (census over all 419 rows: the only producer is
+# ``python.software.repair.apply.verified.v1``), so 9 capabilities that work are unreachable.
+#
+# A request to review a FILE is a request to review all of it.  The honest change set for it is
+# every line as an ADDITION against an empty baseline -- which is exactly what
+# ``git diff --no-index /dev/null <file>`` writes, and what the gate's own parser already treats
+# as "the whole file is in scope" (``created`` -> ``[(1, 10**9)]``).  Nothing is invented: the
+# content is the file's bytes, the baseline is empty, and the artifact is content-addressed, so
+# the same request always produces the same diff and a second run rewrites nothing.
+_DERIVED_DIR = "canonical/astra_runtime/tmp/derived"
+_MAX_DIFF_BYTES = 1 << 20  # 1 MiB per stated file; beyond that no row (honest refusal)
+
+
+def _stated_change_set(files: list[str], root: pathlib.Path) -> dict[str, Any] | None:
+    """A unified diff in which every line of every stated file is new.  Pure in the bytes."""
+    root = pathlib.Path(root)
+    chunks: list[str] = []
+    for rel in files:
+        try:
+            raw = (root / rel).read_bytes()
+        except OSError:
+            return None
+        if len(raw) > _MAX_DIFF_BYTES:
+            return None
+        try:
+            text = raw.decode("utf-8")
+        except UnicodeDecodeError:
+            return None
+        lines = text.splitlines()
+        chunks.append("--- /dev/null")
+        chunks.append("+++ b/" + rel)
+        chunks.append("@@ -0,0 +1,%d @@" % max(len(lines), 1))
+        chunks.extend("+" + line for line in lines)
+        if text and not text.endswith("\n"):
+            chunks.append("\\ No newline at end of file")
+    if not chunks:
+        return None
+    body = "\n".join(chunks) + "\n"
+    import hashlib
+    rel_out = "%s/stated_%s.diff" % (_DERIVED_DIR, hashlib.sha256(body.encode("utf-8")).hexdigest()[:16])
+    target = root / rel_out
+    try:
+        if not (target.is_file() and target.read_text(encoding="utf-8") == body):
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(body, encoding="utf-8")
+    except OSError:
+        return None
+    return {"value": rel_out, "rule": "DIFF_FROM_STATED_FILES_EVERY_LINE_IS_NEW",
+            "evidence": ",".join(files)}
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -222,6 +286,16 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "source_paths" in keys and sources:
         out["source_paths"] = {"value": list(sources), "rule": "PATH_LIST_FROM_STATED_SOURCE_FILES",
                                "evidence": ",".join(sources)}
+    # A review gate reviews a CHANGE SET; a sentence names FILES.  Every stated .py (a test file
+    # is a legitimate review target too) becomes one change set in which all of it is new, and the
+    # worktree the gate reads the new-side bytes from is the tree the sentence named.
+    stated_python = [f for f in files if f.endswith(".py")]
+    if "diff_path" in keys and "worktree_path" in keys and stated_python:
+        change_set = _stated_change_set(stated_python, root)
+        if change_set is not None:
+            out["diff_path"] = change_set
+            out["worktree_path"] = {"value": ".", "rule": "WORKTREE_IS_THE_TREE_THE_SENTENCE_NAMES",
+                                    "evidence": stated_python[0]}
 
     # A stated source file is the module.  No module => no row (fail closed).
     if "module" in keys and len(sources) == 1 and sources[0].endswith(".py"):

@@ -23,8 +23,8 @@ numbers in the harness because the harness writes them.
 
 ## 0. The answer in one paragraph
 
-Of **47 fresh hardcore software-engineering requests**, the door gives **9 real answers, 1 false
-answer, and 37 honest refusals**, and it destroys nothing. The real ones are a stated broken-function
+Of **47 fresh hardcore software-engineering requests**, the door gives **11 real answers, 1 false
+answer, and 35 honest refusals**, and it destroys nothing. The real ones are a stated broken-function
 repair, a stated bug report, a parameter rename, caller-finding, dead-code finding, change-impact,
 function counting, running a suite, and `git blame`. The one false answer is a repair *report* that
 says a patch was found while the stated test stays red. Every refusal is honest: none of them
@@ -44,68 +44,68 @@ fetched for the extension of a file the request asked to *edit*).
 
 `REAL` = `pass=True` **and** an outside oracle shows the requested effect. `FALSE` = `pass=True` and it does not. `refused` = `pass=False`. `DAMAGE` = it changed a file nobody asked it to change.
 
-**47 requests: REAL 9, FALSE 1, refused 37, DAMAGE 0.** Latency median 92 ms, p90 249 ms, max 1209 ms.
+**47 requests: REAL 11, FALSE 1, refused 35, DAMAGE 0.** Latency median 69 ms, p90 664 ms, max 903 ms.
 
 - **repair** 2/7 real
 - **refactor** 1/7 real
 - **tests** 0/3 real
 - **analysis** 4/8 real
-- **toolchain** 1/6 real
+- **toolchain** 3/6 real
 - **git** 1/4 real
 - **feature** 0/7 real
 - **honesty** 0/5 real
 
 | lane | request | verdict | ms | status |
 |---|---|---|---|---|
-| repair | `fix pkg/calc.py` | refused | 160 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
-| repair | `the add function in pkg/calc.py is broken, fix it so its tests pass` | **REAL** | 901 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| repair | `Bug: pkg/calc.py add() returns the wrong value. Failing test: pkg/test_calc.py.` | **REAL** | 1011 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| repair | `Repair the python source pkg/calc.py so that the unit test pkg/test_calc.py passes, and save the repair report to out.json.` | **FALSE** | 553 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| repair | `the add function in pkg/calc.py and the total function in pkg/util.py are both broken, fix them` | refused | 186 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| repair | `the test in pkg/test_calc.py is failing, make the suite pass` | refused | 65 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` |
-| repair | `fix the bug in pkg/calc.py` | refused | 94 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
-| refactor | `Rename the parameter old_price to price in the python module pkg/util.py and save the report to out.json.` | **REAL** | 1209 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| refactor | `Rename the function add to plus in pkg/mod.py and update every caller.` | refused | 91 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| refactor | `Extract the body of add in pkg/mod.py into a helper function.` | refused | 68 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| refactor | `Move the function mul from pkg/calc.py to pkg/mathx.py.` | refused | 71 | `FAIL_CLOSED__NAMED_INPUT_REMOVED` |
-| refactor | `Add type hints to every function in pkg/calc.py.` | refused | 70 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| refactor | `Replace the magic number 3 in pkg/calc.py with a named constant.` | refused | 80 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| refactor | `Format pkg/calc.py.` | refused | 58 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| tests | `Write a unit test for pkg/calc.py and save it to pkg/test_new.py.` | refused | 239 | `FAIL_CLOSED__PROMISED_ARTIFACT_MISSING` |
-| tests | `Add a test for the case where qty is zero in pkg/util.py.` | refused | 101 | `FAIL_CLOSED__NO_OBSERVED_EFFECT` |
-| tests | `Generate tests from the docstrings in pkg/mod.py.` | refused | 123 | `FAIL__LIVE_CONTROLLER_EXECUTION` |
-| analysis | `Find every caller of the function add in pkg/mod.py.` | **REAL** | 146 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| analysis | `Where is the function mul defined?` | refused | 131 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| analysis | `Find the dead code in pkg.` | **REAL** | 56 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| analysis | `Report the cyclomatic complexity of pkg/mod.py.` | refused | 173 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| analysis | `Which tests are affected if I change pkg/mod.py?` | **REAL** | 48 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| analysis | `Count the functions in pkg/calc.py.` | **REAL** | 57 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| analysis | `Explain the bug in pkg/calc.py.` | refused | 75 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
-| analysis | `Run a security audit on pkg.` | refused | 41 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` |
-| toolchain | `Run the test suite in pkg.` | **REAL** | 99 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
-| toolchain | `Lint pkg/calc.py with ruff.` | refused | 95 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| toolchain | `Type-check pkg/calc.py with mypy.` | refused | 92 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| toolchain | `Create a pyproject.toml for the project in pkg.` | refused | 74 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| toolchain | `Measure the test coverage of pkg.` | refused | 98 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` |
-| toolchain | `Add the dependency requests to the project in pkg.` | refused | 84 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| git | `Commit the current changes in pkg with the message 'fix calc'.` | refused | 110 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| git | `Show the diff of pkg/calc.py.` | refused | 53 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| git | `Create a branch named feature/x.` | refused | 248 | `FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS` |
-| git | `Who last changed line 2 of pkg/calc.py?` | **REAL** | 58 | `PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFI` |
-| feature | `Add a --verbose flag to the CLI in pkg/cli.py.` | refused | 81 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| feature | `Add logging to every function in pkg/mod.py.` | refused | 67 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| feature | `Add retry with backoff to the network call in pkg/http.py.` | refused | 41 | `FAIL_CLOSED__NO_OBSERVED_EFFECT` |
-| feature | `Add a parameter strict to the function total in pkg/util.py.` | refused | 77 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
-| feature | `Implement this issue: add a subtract function to pkg/calc.py with a unit test.` | refused | 70 | `FAIL__LIVE_CONTROLLER_EXECUTION` |
-| feature | `Add a divide function to pkg/calc.py and use it in pkg/service.py.` | refused | 118 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| feature | `The CI is failing because pkg/test_calc.py fails. Fix the build.` | refused | 249 | `FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED` |
-| honesty | `fix pkg/missing.py` | refused | 211 | `FAIL_CLOSED__PROMISED_ARTIFACT_MISSING` |
-| honesty | `Explain the bug in pkg/calc.py.` | refused | 68 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
-| honesty | `fix it` | refused | 130 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
-| honesty | `Delete pkg/legacy.py.` | refused | 67 | `FAIL_CLOSED__NO_OBSERVED_EFFECT` |
-| honesty | `fix it` | refused | 128 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| repair | `fix pkg/calc.py` | refused | 114 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
+| repair | `the add function in pkg/calc.py is broken, fix it so its tests pass` | **REAL** | 664 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| repair | `Bug: pkg/calc.py add() returns the wrong value. Failing test: pkg/test_calc.py.` | **REAL** | 796 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| repair | `Repair the python source pkg/calc.py so that the unit test pkg/test_calc.py passes, and save the repair report to out.json.` | **FALSE** | 400 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| repair | `the add function in pkg/calc.py and the total function in pkg/util.py are both broken, fix them` | refused | 127 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| repair | `the test in pkg/test_calc.py is failing, make the suite pass` | refused | 45 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` |
+| repair | `fix the bug in pkg/calc.py` | refused | 65 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
+| refactor | `Rename the parameter old_price to price in the python module pkg/util.py and save the report to out.json.` | **REAL** | 729 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| refactor | `Rename the function add to plus in pkg/mod.py and update every caller.` | refused | 71 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| refactor | `Extract the body of add in pkg/mod.py into a helper function.` | refused | 53 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| refactor | `Move the function mul from pkg/calc.py to pkg/mathx.py.` | refused | 56 | `FAIL_CLOSED__NAMED_INPUT_REMOVED` |
+| refactor | `Add type hints to every function in pkg/calc.py.` | refused | 50 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| refactor | `Replace the magic number 3 in pkg/calc.py with a named constant.` | refused | 57 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| refactor | `Format pkg/calc.py.` | refused | 41 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| tests | `Write a unit test for pkg/calc.py and save it to pkg/test_new.py.` | refused | 155 | `FAIL_CLOSED__PROMISED_ARTIFACT_MISSING` |
+| tests | `Add a test for the case where qty is zero in pkg/util.py.` | refused | 69 | `FAIL_CLOSED__NO_OBSERVED_EFFECT` |
+| tests | `Generate tests from the docstrings in pkg/mod.py.` | refused | 118 | `FAIL__LIVE_CONTROLLER_EXECUTION` |
+| analysis | `Find every caller of the function add in pkg/mod.py.` | **REAL** | 107 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| analysis | `Where is the function mul defined?` | refused | 86 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| analysis | `Find the dead code in pkg.` | **REAL** | 44 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| analysis | `Report the cyclomatic complexity of pkg/mod.py.` | refused | 112 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| analysis | `Which tests are affected if I change pkg/mod.py?` | **REAL** | 37 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| analysis | `Count the functions in pkg/calc.py.` | **REAL** | 43 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| analysis | `Explain the bug in pkg/calc.py.` | refused | 57 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
+| analysis | `Run a security audit on pkg.` | refused | 30 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` |
+| toolchain | `Run the test suite in pkg.` | **REAL** | 78 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| toolchain | `Lint pkg/calc.py with ruff.` | **REAL** | 136 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| toolchain | `Type-check pkg/calc.py with mypy.` | **REAL** | 673 | `PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VER` |
+| toolchain | `Create a pyproject.toml for the project in pkg.` | refused | 50 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| toolchain | `Measure the test coverage of pkg.` | refused | 73 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` |
+| toolchain | `Add the dependency requests to the project in pkg.` | refused | 56 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| git | `Commit the current changes in pkg with the message 'fix calc'.` | refused | 76 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| git | `Show the diff of pkg/calc.py.` | refused | 38 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| git | `Create a branch named feature/x.` | refused | 155 | `FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS` |
+| git | `Who last changed line 2 of pkg/calc.py?` | **REAL** | 46 | `PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFI` |
+| feature | `Add a --verbose flag to the CLI in pkg/cli.py.` | refused | 54 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| feature | `Add logging to every function in pkg/mod.py.` | refused | 60 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| feature | `Add retry with backoff to the network call in pkg/http.py.` | refused | 32 | `FAIL_CLOSED__NO_OBSERVED_EFFECT` |
+| feature | `Add a parameter strict to the function total in pkg/util.py.` | refused | 49 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` |
+| feature | `Implement this issue: add a subtract function to pkg/calc.py with a unit test.` | refused | 48 | `FAIL__LIVE_CONTROLLER_EXECUTION` |
+| feature | `Add a divide function to pkg/calc.py and use it in pkg/service.py.` | refused | 77 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| feature | `The CI is failing because pkg/test_calc.py fails. Fix the build.` | refused | 903 | `FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED` |
+| honesty | `fix pkg/missing.py` | refused | 140 | `FAIL_CLOSED__PROMISED_ARTIFACT_MISSING` |
+| honesty | `Explain the bug in pkg/calc.py.` | refused | 49 | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` |
+| honesty | `fix it` | refused | 106 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| honesty | `Delete pkg/legacy.py.` | refused | 52 | `FAIL_CLOSED__NO_OBSERVED_EFFECT` |
+| honesty | `fix it` | refused | 86 | `FAIL__RAW_GOAL_COMPILATION_GAP` |
 
-REAL: `fix_target_first`, `bug_report`, `rename_param`, `find_callers`, `dead_code`, `change_impact`, `count_functions`, `run_suite`, `git_blame`
+REAL: `fix_target_first`, `bug_report`, `rename_param`, `find_callers`, `dead_code`, `change_impact`, `count_functions`, `run_suite`, `lint`, `typecheck`, `git_blame`
 
 FALSE: `repair_with_report` (PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXEC)
 
@@ -155,6 +155,24 @@ here — **zero newly red**. `DRIFT_GUARD_PASS`, intent `ok: true`,
    positives (`…into out.gz` → `.gz`, `…to out.json` → `.json`) are untouched because neither names
    an existing file. 3,588 → **152 ms** and 3,491 → **73 ms**; matrix p90 **892 → 249 ms**, worst
    **3,491 → 1,209 ms**, whole matrix **13.7 s → 8.8 s**, with every verdict identical.
+
+5. **Nine second-stage capabilities became reachable from a sentence** (P0-1 of the problem list).
+   `Lint <file>`, `Type-check <file>` and the whole review family declare `diff_path` +
+   `worktree_path` — a **change set** — and nothing in the registry produced one from English, so
+   they refused with `BINDING_REFUSED:diff_path:0_type_compatible_existing_files_named`. The
+   derivation now builds the change set the sentence implies: **every line of the stated file as an
+   addition against an empty baseline** (what `git diff --no-index /dev/null <file>` writes, and what
+   the gate's own parser already treats as "the whole file is in scope"), content-addressed so the
+   same request always yields the same diff and an unchanged file rewrites nothing. `Lint <calc.py>`
+   now runs `python.review.diff_static_triage.v1` (ruff, changed-lines-only) and `Type-check
+   <calc.py>` now runs `python.review.diff_type_gate.v1` (mypy) — **refused → REAL** for both, in
+   ~0.6 s, with the reviewed file byte-identical afterwards.
+   The honesty controls are part of the same commit: a file with an undefined name is **refused**
+   (the gate observes `FAIL`, blocking findings on the changed lines, and the capability's own
+   `expect` is not met), a file with a syntax error is refused whether or not the tool exists (the
+   baseline compile stage is stdlib-only), and when ruff is absent the gate reports
+   `PASS_SYNTAX_ONLY` loudly — which is **not** a pass, so the door refuses rather than certifying a
+   syntax check as a lint.
 
 ---
 

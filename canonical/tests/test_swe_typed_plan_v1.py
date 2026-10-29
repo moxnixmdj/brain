@@ -117,19 +117,37 @@ class TypedPlanEvidenceTests(unittest.TestCase):
         "Type-check the file X" and no-op'd to a PASS with the source unchanged.
         The plan must refuse effect-inconsistent goals so the front door keeps
         its fail-closed verdict.  Independent oracle: the live solve() verdict
-        and the filesystem (source bytes unchanged)."""
+        and the filesystem (source bytes unchanged).
+
+        Re-measured 2026-10-29.  This test used to assert ``build_plan is None`` for both
+        sentences, which was only true while NO capability that type-checks or lints was
+        reachable.  Both now are -- ``python.review.diff_type_gate.v1`` runs mypy and
+        ``python.review.diff_static_triage.v1`` runs ruff, each on the change set the
+        declared-input derivation builds from the stated file -- so the absence is gone and
+        the pin has to name the falsifier it was actually protecting: the plan may never be a
+        capability that does not state the effect, the door may never pass via one, and the
+        file must not be edited by a read-only gate.  The refusal path is still pinned by the
+        negative control at the end (no stated file -> no change set -> no plan).
+        """
         base = _fresh("effect")
         calc = _rel(base / "pkg/calc.py")
-        for goal in ("Type-check the file %s." % calc,
-                     "Lint the file %s." % calc):
-            # plan layer refuses
-            self.assertIsNone(plan.build_plan(goal, ROOT), goal)
-            # and the live door stays fail-closed with no retry credit
+        for goal, effect in (("Type-check the file %s." % calc, "type"),
+                             ("Lint the file %s." % calc, "triage")):
+            chosen = plan.build_plan(goal, ROOT)
+            if chosen is not None:
+                cid = str(chosen[2].get("selected_capability") or "")
+                self.assertIn(effect, cid, (goal, cid))
             result = door.solve({"task_id": "SWE_effect", "goal": goal})
-            self.assertIs(result.get("pass"), False, (goal, result.get("status")))
-            self.assertNotIn("typed_swe_retry", result, goal)
+            if result.get("pass") is True:
+                cid = str(result.get("compiled_capability_id") or "")
+                self.assertIn(effect, cid,
+                              "a PASS that does not come from the stated effect: %s" % cid)
+            # a read-only gate never edits the file it reviews
             self.assertEqual((base / "pkg/calc.py").read_text(),
                              "def add(a, b):\n    return a - b\n", goal)
+        # negative control: with nothing stated there is no change set, so no plan
+        with mock.patch.object(derivation, "stated_existing_files", return_value=[]):
+            self.assertIsNone(plan.build_plan("Type-check the file %s." % calc, ROOT))
 
     def test_refactor_module_is_relative_to_source_root(self):
         """The three refactor adapters resolve ``module`` relative to
