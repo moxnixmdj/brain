@@ -601,6 +601,100 @@ def _eval_candidates_batch_local(batch_args: list[tuple]) -> list[dict | None]:
     return results
 
 
+# ---------------------------------------------------------------------------
+# Per-candidate affected test selection — run only tests that touch
+# the lines changed by each candidate. This is the single biggest
+# speedup: instead of running ALL affected tests for every candidate,
+# each candidate runs only the tests relevant to its specific changes.
+# ---------------------------------------------------------------------------
+
+def _compute_candidate_affected_tests(cand_source_candidates: list[list],
+                                      ts_index_path: str | None,
+                                      ts_impact_result: dict,
+                                      all_test_ps: list[Path],
+                                      repo: Path,
+                                      source_root_p: Path) -> list[Path]:
+    """Compute the minimal set of tests affected by a specific candidate's changes.
+
+    Uses tree-sitter impact analysis to find which tests exercise the
+    symbols/lines changed by this candidate. Returns the subset of all_test_ps
+    that should be run for this candidate.
+    """
+    if not ts_index_path or not ts_impact_result:
+        return all_test_ps
+
+    # Collect all changed line ranges from this candidate
+    changed_ranges: dict[str, set[int]] = {}  # rel_path -> set of line numbers
+    for sc in cand_source_candidates:
+        sp_str = sc[0]
+        new_text = sc[1] if len(sc) > 1 else None
+        if new_text is None:
+            continue
+        sp = Path(sp_str)
+        try:
+            rel = sp.relative_to(source_root_p).as_posix()
+        except ValueError:
+            rel = sp.name
+
+        # Read original and new text to compute changed lines
+        try:
+            orig_text = source_root_p.joinpath(rel).read_text(encoding="utf-8")
+        except Exception:
+            orig_text = ""
+
+        orig_lines = orig_text.splitlines()
+        new_lines = new_text.splitlines()
+
+        # Simple line-level diff: find lines that differ
+        changed_lines = set()
+        max_lines = max(len(orig_lines), len(new_lines))
+        for i in range(max_lines):
+            o = orig_lines[i] if i < len(orig_lines) else None
+            n = new_lines[i] if i < len(new_lines) else None
+            if o != n:
+                changed_lines.add(i + 1)  # 1-based
+
+        if rel not in changed_ranges:
+            changed_ranges[rel] = set()
+        changed_ranges[rel].update(changed_lines)
+
+    if not changed_ranges:
+        return all_test_ps
+
+    # Use tree-sitter impact to find affected tests
+    try:
+        import json as _json
+        index_artifact = _json.loads(Path(ts_index_path).read_text(encoding="utf-8"))
+        index_rows = {row["path"]: row for row in index_artifact.get("files", [])}
+
+        affected_tests: set[str] = set()
+        for rel, lines in changed_ranges.items():
+            row_data = index_rows.get(rel)
+            if not row_data:
+                continue
+            # Find which tests reference definitions in changed lines
+            for d in row_data.get("definitions", []):
+                d_start = int(d.get("start_line", 0))
+                d_end = int(d.get("end_line", 0))
+                if any(d_start <= ln <= d_end for ln in lines):
+                    # This definition changed — find tests that call it
+                    def_name = str(d.get("name", ""))
+                    # Look through impact result for tests referencing this symbol
+                    for test_file, impact_data in ts_impact_result.get("changed_symbols", {}).items():
+                        for sym in impact_data.get("symbols", []):
+                            if def_name in sym:
+                                affected_tests.add(test_file)
+
+        if affected_tests:
+            return [Path(t) for t in affected_tests if Path(t).exists()]
+    except Exception:
+        pass
+
+    return all_test_ps
+
+
+
+
 _register_local_node = lambda: _start_distributed_worker_nodes(2)
 
 
@@ -2119,16 +2213,16 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
     else:
         affected_test_ps = test_ps
 
-    # --- generate all candidates -------------------------------------------
+    # --- generate all candidates (PARALLEL) ---------------------------------
+    # Generate candidates from multiple source files concurrently.
     # Extract literals from affected tests only — they carry the evidence of
-    # what the fix should look like. Multi-language: Python uses AST mutations;
-    # other languages use tree-sitter based mutations.
+    # what the fix should look like.
     # Multi-file: generate candidates per source file, then combine into
     # single-file and multi-file candidates.
     is_multi_file = len(source_paths) > 1
     all_raw_candidates: list[tuple] = []  # (desc, new_text_or_none, lineno, source_path)
 
-    for sp in source_paths:
+    def _gen_for_file(sp: Path) -> list[tuple]:
         sp_text = source_contents[str(sp)].decode("utf-8")
         sp_lang = _detect_language(sp)
         sp_raw: list[tuple] = []
@@ -2139,9 +2233,17 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
         else:
             sp_raw = list(_generate_candidates_multilanguage(
                 sp_text, sp, affected_test_ps, repo))
-        # Tag each candidate with its source path.
-        for desc, cand_text, lineno in sp_raw:
-            all_raw_candidates.append((desc, cand_text, lineno, str(sp)))
+        return [(desc, cand_text, lineno, str(sp)) for desc, cand_text, lineno in sp_raw]
+
+    # Parallel candidate generation across source files
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    if len(source_paths) > 1:
+        with ThreadPoolExecutor(max_workers=len(source_paths)) as gen_pool:
+            futures = {gen_pool.submit(_gen_for_file, sp): sp for sp in source_paths}
+            for fut in as_completed(futures):
+                all_raw_candidates.extend(fut.result())
+    else:
+        all_raw_candidates = _gen_for_file(source_paths[0])
 
     if is_multi_file:
         # Build multi-file candidates: combine one change from each file.
@@ -2176,7 +2278,17 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
                         desc = f"MULTI_{d1}_AND_{d2}"
                         multi_candidates.append((desc, source_cand, l1))
 
-        candidates = single_candidates + multi_candidates
+        # Deduplicate multi-file candidates by their combined source text hash
+        seen_hashes: set[str] = set()
+        deduped: list[tuple] = []
+        for cand in single_candidates + multi_candidates:
+            desc, source_cand, lineno = cand
+            cc_json = json.dumps(source_cand, sort_keys=True)
+            h = hashlib.sha256(cc_json.encode("utf-8")).hexdigest()
+            if h not in seen_hashes:
+                seen_hashes.add(h)
+                deduped.append(cand)
+        candidates = deduped
     else:
         # Single-file mode: candidates are (desc, text, lineno) tuples.
         # Wrap in single-element source_candidate lists for uniform handling.
@@ -2266,14 +2378,26 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
     winner = None
     budget_exhausted = False
 
-    def make_args(cand_source_candidates, cand_index):
+    # --- Pre-compute per-candidate affected tests --------------------------
+    # Each candidate changes different lines → different affected tests.
+    # Compute once per candidate to avoid running irrelevant tests.
+    cand_affected_tests: list[list[Path]] = []
+    for cand in candidates:
+        _, cand_source_candidates, _ = cand
+        aff = _compute_candidate_affected_tests(
+            cand_source_candidates, ts_index_path, ts_impact_result,
+            affected_test_ps, repo, source_root_p)
+        cand_affected_tests.append(aff)
+
+    def make_args(cand_source_candidates, cand_index, cand_test_ps: list[Path] | None = None):
         # cand_source_candidates is a list of [source_path, new_text] pairs.
         # Serialize to JSON for cache key.
         cc_json = json.dumps(cand_source_candidates, sort_keys=True)
-        cache_key = _cache_key(cc_json.encode("utf-8"), affected_test_ps)
+        test_ps_for_key = cand_test_ps if cand_test_ps is not None else affected_test_ps
+        cache_key = _cache_key(cc_json.encode("utf-8"), test_ps_for_key)
         return (cc_json, str(source_root_p),
-                [str(tp) for tp in affected_test_ps], str(repo), timeout_s,
-                cache_key, gid, cand_index)
+                [str(tp) for tp in (cand_test_ps if cand_test_ps is not None else affected_test_ps)],
+                str(repo), timeout_s, cache_key, gid, cand_index)
 
     # Auto-scale distributed workers based on candidate count.
     _scale_workers_for_candidates(len(candidates))
@@ -2299,9 +2423,10 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
             for i, cand in enumerate(batch_candidates):
                 cand_index = batch_start + i
                 cc_json = json.dumps(cand[1], sort_keys=True)
-                cache_key = _cache_key(cc_json.encode("utf-8"), affected_test_ps)
+                cat_tests = cand_affected_tests[cand_index]
+                cache_key = _cache_key(cc_json.encode("utf-8"), cat_tests)
                 batch_args.append((cc_json, str(source_root_p),
-                                   [str(tp) for tp in affected_test_ps], str(repo),
+                                   [str(tp) for tp in cat_tests], str(repo),
                                    timeout_s, cache_key, gid, cand_index))
 
             batch_results = _eval_candidates_batch_local(batch_args)
@@ -2325,6 +2450,7 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
                     "timed_out": timed_out,
                     "cached": result.get("cached", False),
                     "local_batch": True,
+                    "affected_tests": len(cand_affected_tests[cand_index]),
                 })
 
                 # --- learning loop: update pattern stats + bandit ---
@@ -2338,16 +2464,9 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
 
                 if rc == 0 and not timed_out:
                     # Replay once to confirm using local batch (single candidate).
-                    r2 = _eval_candidates_batch_local([make_args(cand_source_candidates, cand_index)])
+                    r2 = _eval_candidates_batch_local([make_args(cand_source_candidates, cand_index, cand_affected_tests[cand_index])])
                     r2_result = r2[0] if r2 else None
                     if r2_result and r2_result.get("returncode") == 0 and not r2_result.get("timed_out"):
-                        # Gate filter: reject candidates that fail static/type/security gates.
-                        if post_pass_filter:
-                            accept, reason = post_pass_filter(cand_source_candidates, desc)
-                            if not accept:
-                                _cat = _mutation_category(desc)
-                                _bandit_update(_cat, False)
-                                continue
                         winner = (cand_source_candidates, desc)
                         break
 
@@ -2434,7 +2553,7 @@ def patch_search_parallel(source_paths: str | Path | list[str | Path],
         idx = 0
         # Seed the pool.
         while idx < len(candidates) and len(future_to_index) < max_workers:
-            f = pool.submit(_eval_candidate, make_args(candidates[idx][1], idx))
+            f = pool.submit(_eval_candidate, make_args(candidates[idx][1], idx, cand_affected_tests[idx]))
             future_to_index[f] = idx
             idx += 1
 

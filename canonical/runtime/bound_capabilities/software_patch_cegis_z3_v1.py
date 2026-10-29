@@ -397,7 +397,7 @@ def _z3_verify_function(original_text: str | None,
     param_names = [a.arg for a in patched_func.args.args]
     z3_vars: dict[str, Any] = {}
     for pname in param_names:
-        ptype = patched_contract['params'].get(pname)
+        ptype = contract['params'].get(pname)
         z3_sort = _py_type_to_z3(ptype, {})
         z3_vars[pname] = z3_sort(pname)
 
