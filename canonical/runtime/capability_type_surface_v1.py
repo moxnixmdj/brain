@@ -176,6 +176,8 @@ _EXPLICIT: dict[str, str] = {
     "max_mutants": NUMBER,
     "wall_budget_s": NUMBER,   # relative duration; an absolute timestamp arg
     "provenance": BOOL,        # opt-in interprocedural phase switch
+    "exec_evidence": "BOOL",
+    "exec_evidence_trace_events": "NUMBER",
     "argv": ARGV,                  # general command vector -- the universal
                                    # action primitive in any environment
     "actions": JSON_TEXT,          # browser action script, consumed by

@@ -121,5 +121,18 @@
   "regression_cycle": "neighborhood family landed -> L5 broke (2 dilution mechanisms found: uniq[:64] value-reclassification + pair-space index-product) -> ladder gate caught it -> fixed by construction -> zero regression restored (writers 100% L1-L5, searchers P100)",
   "tqdm9_remaining_seam": "coupled stage reaches evidence phases but pytest tracebacks name only the TEST file -- source-side focus needs test-execution evidence (trace the failing node once, focus pools on executed lines). This is the LAST named seam to 2/4.",
   "l6_scoreboard": "1/4 (tornado/14) unchanged; all machinery for tqdm/9's decoded fix is IN and verified at L5; one seam remains"
+ },
+ "round7": {
+  "date": "20261030",
+  "headline": "tqdm/9 REPAIRED END-TO-END: route repaired=true independent_replay=true, 129.9s total",
+  "l6_scoreboard": "2/4 (tornado/14 + tqdm/9); misses now: tornado/2 (clause insertion) + tornado/4 (live-server)",
+  "how": "the harvested dynamic fault localizer traced the failing pytest node once; execution-frequency-weighted pools (loop-hot lines outrank incidental lines; inside evidence spans the trace IS the ranker -- static symbol scores ignored); the coordinated-neighborhood phase fired the ratio-0.9995 symbol group = the EXACT decoded real-fix class (1000.0->999.5, 100.0->99.95, 10.0->9.995 in format_sizeof), verified green in-engine 27.9s",
+  "laws_discovered": {
+   "WORLD_CWD": "pytest-style argv paths are world-relative: running the suite from the brain root exits rc=4 (file-not-found) and EVERY candidate reads as a PHANTOM RED -- the engine was blind on pytest suites; fixed at the shared runner (cwd param) + router realize gate + coupled baseline/candidates/replay",
+   "EXECUTION_FREQUENCY_RANKING": "inside evidence spans, pool priority = trace hit-frequency (capped at 8 runs) + focus proximity; static symbol scores are IGNORED there (the scored format_meter symbol let its trivia sites consume the neighborhood reserve ahead of the faulty format_sizeof zone)",
+   "MINIMAL_FIRST_COORDINATION": "symbol-scoped coordinated groups tried before the full set -- a green full-set carrying extra files' edits is a worse repair contract than a green single-function retune",
+   "EVIDENCE_TRACE_BUDGET": "pytest collection burns a 30k tracer cap before the test body; the evidence pass needs its own budget (1e6)"
+  },
+  "verification": "ladder zero-regression (writers 100% L1-L5, searchers P100); fleet 129 swept / 76 clean / 0 partial / 22 unsampled (new args exec_evidence BOOL + exec_evidence_trace_events NUMBER typed same-edit)"
  }
 }

@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_DIFF_SECURITY_GATE_V1",
+  "diff_path": "canonical/astra_runtime/chain_bed/artifacts/chain.diff",
+  "diff_sha256": "1148617a6176791d0784c0494eef1adc5895f4b50ad783fd89f4bda2dc0e0d91",
+  "files_touched": 3,
+  "created_files": [],
+  "syntax_errors": [],
+  "bandit": "bandit 1.9.4",
+  "blocking_findings": [],
+  "advisory_findings": [],
+  "blocking_count": 0,
+  "advisory_count": 0,
+  "gate": "PASS",
+  "gate_law": "PASS needs zero syntax errors AND zero blocking security rows on changed lines with bandit actually running; HIGH severity blocks, MEDIUM blocks at HIGH confidence, LOW is advisory; PASS_BASELINE_ONLY is recorded loudly when the tool is absent; pre-existing findings outside the diff's ranges are context, never blockers",
+  "complete": true
+}

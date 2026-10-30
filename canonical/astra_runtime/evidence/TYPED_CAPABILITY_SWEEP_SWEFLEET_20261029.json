@@ -323,7 +323,7 @@
    "errors": {
     "DecisionSynthesisError:DECISION_SCHEMA_INVALID": 2
    },
-   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 384, in run\n    result = synthesize(problem)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 177, in synthesize\n    normalized = _normalize(problem)\n                 ^^^^^^^^^^^^^^^^^^^\nsweep_255.DecisionSynthesisError: DECISION_SCHEMA_INVALID\n",
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 384, in run\n    result = synthesize(problem)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 177, in synthesize\n    normalized = _normalize(problem)\n                 ^^^^^^^^^^^^^^^^^^^\nsweep_4508.DecisionSynthesisError: DECISION_SCHEMA_INVALID\n",
    "strategy": "schema"
   },
   {

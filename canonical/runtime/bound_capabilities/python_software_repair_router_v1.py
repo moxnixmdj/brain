@@ -53,8 +53,11 @@ def _rel(repo: pathlib.Path, p: pathlib.Path) -> str:
     return str(p.resolve().relative_to(repo))
 
 
-def _suite(repo, argv, timeout, env):
-    d = _PTG._run_tests(repo, [str(x) for x in argv], timeout, env)
+def _suite(repo, argv, timeout, env, cwd=None):
+    # WORLD-CWD LAW (tqdm/9): pytest argv paths are world-relative; the
+    # gate suite must run from the source root or every verification is a
+    # phantom rc=4 red
+    d = _PTG._run_tests(repo, [str(x) for x in argv], timeout, env, cwd=cwd)
     text = (d.get("stdout") or "") + "\n" + (d.get("stderr") or "")
     return int(d["returncode"]), text
 
@@ -111,6 +114,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     # measured world-root env => suite GREEN vs test-dir env => no module
     # named 'tornado'. The test dir stays on the path too (flat layouts).
     env = _PTG._source_env(src_abs, *tests)
+    _src_cwd = src_abs if src_abs != repo.resolve() else None
     budget = max(1, min(int(args.get("budget", 2)), 6))
     # Router wall budget (L6 law: three sequential engines on a real repo
     # exceed any sane caller cap; the deadline is enforced BETWEEN steps and
@@ -126,7 +130,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     def rel_budget() -> float:
         return max(1.0, round(remaining(), 1))
 
-    rc, text = _suite(repo, argv, timeout, env)
+    rc, text = _suite(repo, argv, timeout, env, cwd=_src_cwd)
     if rc == 0:
         raise RouterError("BASELINE_ALREADY_PASSES")
     diagnosis = _diagnose(text, rc)
@@ -165,7 +169,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                         "status": step.get("status"),
                         "verified": step.get("verified"),
                         "at_s": _at()})
-    rc2, _ = _suite(repo, argv, timeout, env)
+    rc2, _ = _suite(repo, argv, timeout, env, cwd=_src_cwd)
     repaired = rc2 == 0
 
     # Ladder step 2: coupled pair engine's patch report, realized here.
@@ -185,6 +189,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 "output_path": _rel(repo, cpl),
                 "timeout_s": timeout,
                 "wall_budget_s": max(20.0, round(remaining() * 0.6, 1)),
+                # pytest tracebacks never name source files: the coupled
+                # stage needs executed-line evidence to focus its pools
+                "exec_evidence": True,
             }, repo)
         except Exception as exc:
             r2 = {"status": type(exc).__name__ + ":" + str(exc)[:120]}
@@ -194,12 +201,12 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                             "patch_count": len(patches)})
         if patches:
             _realize(repo, patches, originals)
-            rc3, tail3 = _suite(repo, argv, timeout, env)
+            rc3, tail3 = _suite(repo, argv, timeout, env, cwd=_src_cwd)
             if rc3 != 0:
                 # one retry: under wall pressure a suite run can time out
                 # (rc=None) or cold-start; the engines replay their winners
                 # for exactly this reason
-                rc3, tail3 = _suite(repo, argv, timeout, env)
+                rc3, tail3 = _suite(repo, argv, timeout, env, cwd=_src_cwd)
             route_trace.append({"step": "coupled_realize",
                                 "suite_rc": rc3,
                                 "tail": tail3[-260:] if rc3 else ""})
@@ -235,9 +242,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                             "patch_count": len(patches)})
         if patches:
             _realize(repo, patches, originals)
-            rc4, _ = _suite(repo, argv, timeout, env)
+            rc4, _ = _suite(repo, argv, timeout, env, cwd=_src_cwd)
             if rc4 != 0:
-                rc4, _ = _suite(repo, argv, timeout, env)
+                rc4, _ = _suite(repo, argv, timeout, env, cwd=_src_cwd)
             route_trace.append({"step": "iterative_realize",
                                 "suite_rc": rc4})
             if rc4 == 0:
@@ -248,7 +255,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
 
     # Final replay: the counterexample check against flaky greens.
     if repaired:
-        rc5, _ = _suite(repo, argv, timeout, env)
+        rc5, _ = _suite(repo, argv, timeout, env, cwd=_src_cwd)
         if rc5 != 0:
             repaired = False
             _revert(originals); originals.clear()

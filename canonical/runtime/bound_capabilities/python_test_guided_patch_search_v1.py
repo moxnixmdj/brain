@@ -33,7 +33,14 @@ def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
-               extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
+               extra_env: Mapping[str, str] | None = None,
+               cwd: pathlib.Path | None = None) -> dict[str, Any]:
+    # ``cwd`` overrides the subprocess working directory. WORLD-CWD LAW
+    # (tqdm/9, measured): pytest-style argv paths are relative to the WORLD
+    # root -- running them from the brain repository root exits rc=4
+    # (file-or-directory-not-found) and every candidate reads as a PHANTOM
+    # red. Suite runs for such suites must execute from the source root.
+
     """Run the test argv and report the outcome.
 
     ``extra_env`` is merged over the inherited environment. It exists because the bound executor
@@ -56,7 +63,7 @@ def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
     started=time.monotonic()
     try:
         env=None if not extra_env else {**os.environ,**{k:str(v) for k,v in extra_env.items()}}
-        proc=subprocess.run(argv,cwd=root,text=True,capture_output=True,timeout=timeout_s,env=env)
+        proc=subprocess.run(argv,cwd=str(cwd) if cwd else root,text=True,capture_output=True,timeout=timeout_s,env=env)
         return {
             "returncode":proc.returncode,
             "stdout":proc.stdout or "",
