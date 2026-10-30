@@ -49,13 +49,45 @@ OUTPUT_SLOTS: tuple[str, ...] = (
     "output_path", "output", "out", "dest", "destination", "report_path", "result_path",
 )
 
-# Slots whose value names something the capability will READ.  A directory here
+# Slots known to name something the capability will READ.  A directory here
 # contains the files as well, which is how ``source_root`` admits ``utils.py``
 # without naming it.
+#
+# This tuple is documentation, not the gate.  Measured on main 88bb18bb: it was
+# the gate, and it was written from the rows someone happened to read, so it
+# admitted nothing that a row spelled differently.  ``changed_paths`` is how
+# ``code.impact.tree_sitter.testselect.v1`` states the files it analyses, and it
+# is not here -- so the one destination the binder had in hand was the file it
+# was asked to analyse, and a 272-byte Python module became a 1076-byte JSON
+# impact report.  Across all 125 rows there are 122 argument names this list
+# cannot name in advance (``diff_path`` x9, ``anchor_path`` x4, ``index_path``
+# x3, ``worktree_path`` x4, ``json_path`` x11, ...).  Enumerating them is a race
+# the guard always loses, so the rule no longer enumerates them: every argument
+# that is not a destination is an input.  That is strictly fewer conditions than
+# the list it replaces.
 SOURCE_SLOTS: tuple[str, ...] = (
     "source_root", "source_path", "source", "input_path", "input", "module",
     "repo_path", "file_path", "test_paths", "test_path", "path",
 )
+
+
+def _input_values(args: Mapping[str, Any]) -> list[tuple[str, Any]]:
+    """Every argument that is not a destination, read from the action itself.
+
+    A destination slot is skipped because it is the thing being written; every
+    other value is offered to the path test, which ignores anything that is not
+    a single-line path-shaped string.  Nothing is guessed about what a slot is
+    for -- the role is decided by whether it is written, not by its name.
+    """
+    values: list[tuple[str, Any]] = []
+    for slot, value in args.items():
+        if str(slot) in OUTPUT_SLOTS:
+            continue
+        if isinstance(value, (list, tuple, set)):
+            values.extend((str(slot), item) for item in value)
+        else:
+            values.append((str(slot), value))
+    return values
 
 # Suffixes that are somebody's source.  A report is never written with one of
 # these names by accident; when it is, the file it replaces is code.
@@ -101,7 +133,11 @@ def violation(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -
     Four conditions, each READ from the action rather than assumed:
       1. some slot names a destination (``output_path`` and friends);
       2. that destination already exists -- a new file cannot destroy anything;
-      3. it is source, by suffix, and / or it sits inside a declared source root;
+      3. it is source, by suffix, and / or it sits inside a path the action also
+         hands the capability (a directory contains its files, which is how
+         ``source_root`` admits ``utils.py`` without naming it) -- and "a path
+         the action also hands the capability" is now READ as *every argument
+         that is not a destination*, never from a list of slot names;
       4. the capability's own id does not say it transforms source.
 
     Anything else returns None, so every route that worked before this runs
@@ -118,13 +154,10 @@ def violation(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -
     if not destinations:
         return None
     sources: list[tuple[str, pathlib.Path]] = []
-    for slot in SOURCE_SLOTS:
-        value = args.get(slot)
-        values = value if isinstance(value, (list, tuple)) else [value]
-        for item in values:
-            p = _as_path(root, item)
-            if p is not None:
-                sources.append((slot, p))
+    for slot, item in _input_values(args):
+        p = _as_path(root, item)
+        if p is not None:
+            sources.append((slot, p))
     for dest_slot, dest in destinations:
         if not dest.is_file():
             continue

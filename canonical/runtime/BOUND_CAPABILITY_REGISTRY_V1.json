@@ -4905,6 +4905,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_test_guided_patch_search_v1",
@@ -5366,9 +5369,9 @@
      "timeout_s": "${input.timeout_s}"
     },
     "expect": {
-     "field": "gate",
+     "field": "complete",
      "type": "field_equals",
-     "value": "PASS"
+     "value": true
     },
     "type": "invoke_capability"
    },
@@ -5396,7 +5399,8 @@
     "only uses that provably resolve to the same binding are renamed; dynamic receivers, getattr dispatch and unattributable attribute sites are listed in unknown_sites and lower complete, never silently edited or dropped.",
     "method renames refuse when a subclass overrides the same name (REFUSE_INHERITED_OVERRIDE) or inherits-and-calls it (REFUSE_INHERITED_USE); super() references are never touched.",
     "locals, parameters and class-level assignments refuse SYMBOL_KIND_UNSUPPORTED (rename_parameter owns params); global/nonlocal declarations on the old name refuse REFUSE_NONLOCAL_OR_GLOBAL.",
-    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly."
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly.",
+    "the action contract is `complete`: every provable site is edited and then re-measured on the post-edit trees, and a surviving provable reference refuses RESIDUAL_REFERENCE before a byte is written; `gate` is PASS only when a named pytest suite ran green, so a no-suite run reports PASS_BLIND and the registry expects complete=true rather than an unreachable gate."
    ],
    "platforms": [
     "linux",
@@ -6440,6 +6444,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_apply_verified_v1",
@@ -6539,6 +6546,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_provenance_guided_coupled_repair_v1",
@@ -6653,6 +6663,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_coupled_software_repair_loop_v1",
@@ -6759,6 +6772,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_iterative_software_repair_loop_v1",
@@ -6944,6 +6960,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_measured_acceptance_controller_v1",
@@ -7056,6 +7075,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_semantic_acceptance_controller_v1",
@@ -7415,6 +7437,74 @@
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CHANGE-IMPACT-001.json"
    }
   },
+  "python.source.complexity.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.complexity.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_complexity",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "quadratic",
+    "complexity",
+    "time complexity",
+    "big o",
+    "loop nest",
+    "nested loops",
+    "asymptotic",
+    "cubic",
+    "quadratic time complexity"
+   ],
+   "limitations": [
+    "Measures loop nesting depth per function; a deepening chain of loops determines the class.",
+    "Reports the published class (O(n^d)) from structure; it does not benchmark."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.quadratic_complexity",
+    "python.source.complexity"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "functions_measured",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "quadratic_symbols",
+    "worst_class",
+    "worst_function",
+    "worst_nesting"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_complexity.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
   "python.source.crossfile_edit.choreograph.v1": {
    "action_template": {
     "args": {
@@ -7497,6 +7587,138 @@
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CROSSFILE-EDIT-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CROSSFILE-EDIT-001.json"
    }
+  },
+  "python.source.dead_code.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.dead_code.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_dead_code",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "never executed",
+    "dead code",
+    "dead function",
+    "unused",
+    "unreachable",
+    "uncalled",
+    "not called",
+    "never called",
+    "which function is never"
+   ],
+   "limitations": [
+    "Reports module-level functions no call edge in the tree names.",
+    "Reads the callers_of map of the verified symbol index; it does not re-parse the tree."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.never_executed",
+    "python.source.dead_code"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "considered_count",
+    "dead_symbols",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "symbol_count"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_dead_code.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.source.secret_scan.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.secret_scan.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_secret_scan",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "secret",
+    "hardcoded",
+    "credential",
+    "api key",
+    "access key",
+    "aws",
+    "token",
+    "leaked",
+    "hardcoded aws access key"
+   ],
+   "limitations": [
+    "Matches published credential shapes (AWS key ids, GitHub/Stripe/Slack tokens, private key headers).",
+    "Reports file, line and signature name; the secret is redacted, never written."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.hardcoded_credential",
+    "python.source.secret_scan"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "files_scanned",
+    "finding_count",
+    "findings",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
   },
   "python.source.symbols.index.ast": {
    "action_template": {
