@@ -296,7 +296,7 @@
       "counterexample_receipts": [
         {
           "path": "canonical/runtime/live_brain_route_admission_v1.py",
-          "git_blob_sha": "61408c9b71348cf20f556f3572e0e0fd360d1f57"
+          "git_blob_sha": "8467adec79ec541a4a4acdde4a3b5d6a6f336553"
         }
       ]
     }
@@ -428,5 +428,11 @@
       }
     },
     "no_promotion": true
+  },
+  "post_main_revalidation": {
+    "unified_model": "Deterministically rebuilt from current merged tree; verifier 33/33 PASS.",
+    "workflow_tests": "137 unittest tests passed in 52.590 s across brain unified model, goal compiler and world binding.",
+    "broader_regressions": "93 passed, 3 failed, 1 skipped in 20.88 s after merging main. Three SWE typed-plan failures: bare fix now succeeds (test expects failure), two human repair phrasings do not both pass, caller-family report refused by write authority. Tests unchanged; no independent verification or full-suite claim.",
+    "scope": "Independent confinement and tree-sitter work saved in external follow-up patch; excluded from this PR to satisfy runtime scope guard."
   }
 }
