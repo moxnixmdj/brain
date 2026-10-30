@@ -5677,6 +5677,53 @@ def _inherit_producer_goal_for_verifier_steps(actions, registry):
     return actions
 
 
+# A clause that asks for a CHANGE may only be served by a capability whose OWN
+# declared effects name a change.  The vocabulary is the row's `provides`
+# tokens, read as words -- no new field, no per-capability table:
+#
+#   python.refactor.rename_symbol                -> refactor
+#   python.source.write.verified_repair_applied  -> write, repair, applied
+#   python.tests.audit                           -> (none)
+#   python.fault.localization.dynamic_spectrum   -> (none)
+#   shell.command.result                         -> (none)
+#   python.source.symbols.index                  -> (none)
+#
+# 22 of the 125 bound rows declare a change effect, and they are the rows that
+# can edit source.  The token was already in the registry; nothing read it as a
+# promise.  Measured on e9861f4, two requests that ask for a change were
+# "satisfied" by rows that declare none and both reported PASS: "Add a
+# parameter qty ... and update every caller" -> a symbol indexer, tree
+# byte-identical; "Delete <b>/prod.db and the app directory" -> shell.command.run,
+# database gone.
+_CHANGE_DEMAND_CLAUSE = re.compile(
+    r"\b(fix|repair|refactor|rename|extract|inline|delete|remove|rewrite|patch|"
+    r"add|update|modify|implement|migrate|resolve|replace|insert|move|split|strip)\b",
+    re.I)
+_CHANGE_EFFECT_WORDS = frozenset({
+    "refactor", "repair", "write", "writes", "written", "apply", "applied",
+    "edit", "edits", "edited", "change", "changes", "changed", "patch", "patched",
+})
+
+
+def _effect_words(entry):
+    words = set()
+    for token in (entry or {}).get("provides") or []:
+        for part in re.split(r"[^a-z0-9]+", str(token).lower()):
+            if part:
+                words.add(part)
+    return words
+
+
+def _serves_a_change(entry):
+    """True when the row's own `provides` tokens name a change to something."""
+    return bool(_effect_words(entry) & _CHANGE_EFFECT_WORDS)
+
+
+def _demands_a_change(clause):
+    """True when the sentence asks for something to be different afterwards."""
+    return bool(_CHANGE_DEMAND_CLAUSE.search(str(clause or "")))
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
