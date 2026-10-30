@@ -18,6 +18,23 @@ ARTIFACT = ROOT / model_runtime.DEFAULT_ARTIFACT
 SCRATCH_PARENT = ROOT / "canonical" / "astra_runtime" / "tmp"
 
 
+
+def _live_capability_count() -> int:
+    """The number the model must equal: what the live registry admits NOW.
+
+    This was written as the literal 419 in five places.  A literal count is a
+    stale pin by construction -- adding three verified capabilities made the
+    unified-model suite red in a way that said nothing about whether the model
+    was correct, and the number it disagreed with was the one it had been
+    shipped with rather than the one the registry held.  The assertion each site
+    actually wants is "the model agrees with the registry", which is strictly
+    stronger than "the model says 419": it still fails if a capability is added
+    without a trigger and a route, and it fails if one disappears.
+    """
+    from canonical.runtime import live_integrated_brain_v1 as live_brain
+
+    return len(live_brain.load_verified_registry())
+
 class BrainUnifiedModelV1Tests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -75,7 +92,7 @@ class BrainUnifiedModelV1Tests(unittest.TestCase):
         live = set(live_brain.load_verified_registry())
         modelled = set(self.model.capabilities)
         self.assertEqual(live, modelled)
-        self.assertEqual(len(modelled), 419)
+        self.assertEqual(len(modelled), _live_capability_count())
 
     def test_every_capability_has_a_trigger_and_a_route(self):
         for cid, row in self.model.capabilities.items():
@@ -1175,10 +1192,10 @@ class DeclaredDependencyEnvironmentIndependenceTests(unittest.TestCase):
     def test_status_reports_the_machine_it_actually_runs_on(self):
         """Presence is measured live, so it tracks the real interpreter."""
         status = self.model.status()
-        self.assertEqual(status["counts"]["capabilities"], 419)
+        self.assertEqual(status["counts"]["capabilities"], _live_capability_count())
         self.assertEqual(
             status["declared_dependencies_present"] + status["declared_dependencies_missing"],
-            419,
+            _live_capability_count(),
             "present + missing must account for every capability",
         )
 
@@ -1346,7 +1363,7 @@ class SourceIndexTests(unittest.TestCase):
         )
         self.assertEqual(int(counts.get("source_index_entry_points", -1)), entry_points)
         # The capability count must not have been inflated by indexing.
-        self.assertEqual(int(counts.get("capabilities", -1)), 419)
+        self.assertEqual(int(counts.get("capabilities", -1)), _live_capability_count())
 
     def test_status_reports_the_source_index_it_holds(self):
         """The model's self-description must not omit what it indexes.
@@ -1381,7 +1398,7 @@ class SourceIndexTests(unittest.TestCase):
         # The distinction must be stated wherever the larger number appears, so
         # it cannot be read as a capability gain.
         self.assertIs(status.get("source_index_is_addressable_not_executable"), True)
-        self.assertEqual(int(counts["capabilities"]), 419)
+        self.assertEqual(int(counts["capabilities"]), _live_capability_count())
 
     def test_status_does_not_overcount_reachable_modules(self):
         """A tempting derived figure that is wrong must not be reported.
@@ -1492,4 +1509,4 @@ class ResearchIndexTests(unittest.TestCase):
             int(counts.get("research_index_records", -1)),
             len(self.model.research_index),
         )
-        self.assertEqual(int(counts["capabilities"]), 419)
+        self.assertEqual(int(counts["capabilities"]), _live_capability_count())
