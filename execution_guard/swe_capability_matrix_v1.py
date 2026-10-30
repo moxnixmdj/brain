@@ -551,10 +551,57 @@ def markdown(rows: list[dict]) -> str:
     return "\n".join(out)
 
 
+
+# WHAT THE REFEREE NEEDS IN ORDER TO BE A REFEREE.
+#
+# Measured 2026-10-30, twice, and both times it cost a wrong conclusion: the same code scored
+# REAL 17 with `ruff`, `mypy`, `bandit` and `coverage` on PATH and REAL 12 without them, because the
+# toolchain lane's capabilities shell out to those binaries and a missing binary is refused before
+# anything is judged.  The number is still honest -- a machine without a compiler cannot lint -- but
+# it is not COMPARABLE, and a comparison is the only thing a referee is for.  Likewise a leftover
+# `spool_*` artifact from an earlier run changed one verdict between two runs of the same commit.
+# So the matrix states its own preconditions before it states a score, and names what a missing
+# tool makes unmeasurable rather than silently counting it as a refusal.
+_TOOLS = ("git", "ruff", "mypy", "bandit", "coverage", "node", "npm", "make", "gcc", "patch")
+_LANE_NEEDS = {"toolchain": ("ruff", "mypy", "bandit", "coverage"),
+               "git": ("git",)}
+
+
+def _preconditions() -> dict:
+    import shutil as _shutil
+    present = {tool: bool(_shutil.which(tool)) for tool in _TOOLS}
+    try:
+        head = subprocess.run(("git", "rev-parse", "--short", "HEAD"), cwd=str(ROOT),
+                              capture_output=True, text=True, timeout=30).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        head = "UNKNOWN"
+    leftovers = sorted(p.name for p in (ROOT / "canonical/astra_runtime/tmp").glob("spool_*")) \
+        if (ROOT / "canonical/astra_runtime/tmp").is_dir() else []
+    return {"head": head, "present": present, "leftovers": leftovers}
+
+
+def _report_preconditions() -> None:
+    pre = _preconditions()
+    missing = [tool for tool, ok in pre["present"].items() if not ok]
+    print("PRECONDITIONS  head=%s  tools_present=%d/%d  spool_leftovers=%d"
+          % (pre["head"], len(pre["present"]) - len(missing), len(pre["present"]),
+             len(pre["leftovers"])))
+    if missing:
+        unmeasurable = [lane for lane, needs in _LANE_NEEDS.items()
+                        if any(tool in missing for tool in needs)]
+        print("  tools_missing:", ",".join(missing),
+              "| unmeasurable lanes:", ",".join(unmeasurable) or "-",
+              "| their refusals are an ENVIRONMENT fact, not a capability fact")
+    if pre["leftovers"]:
+        print("  WARNING: %d leftover spool artifacts; a run must start from a clean scratch "
+              "or two runs are not comparable" % len(pre["leftovers"]))
+
 def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = False) -> int:
     from canonical.runtime import live_brain_route_admission_v1 as door
 
     WORK.mkdir(parents=True, exist_ok=True)
+    if not (as_json or as_markdown):
+        _report_preconditions()
     rows: list[dict] = []
     for spec in CASES:
         if lane and spec["lane"] != lane:
