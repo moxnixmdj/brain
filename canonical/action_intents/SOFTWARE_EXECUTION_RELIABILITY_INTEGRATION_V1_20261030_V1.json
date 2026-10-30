@@ -1,0 +1,432 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1",
+  "action_intent_id": "SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "date": "2026-10-30",
+  "canonical_base_commit": "1531122633f361f328924916c6a943c8cf0b7af7",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Reported software completion can be disconnected from executed tests, fresh source evidence, preserved inputs and actual requested effects.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Reported software completion can be disconnected from executed tests, fresh source evidence, preserved inputs and actual requested effects.",
+  "expected_parent_change": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+  "expected_parent_frontier_change": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+  "stop_condition": "Explicit implementation requests cannot dispatch analysis-only routes, including DAG/composer paths; real existing repair and read-only analysis controls remain operational; report aliases cannot overwrite impact-analysis inputs.",
+  "selected_route": "INTEGRATE_EXISTING_SOFTWARE_EXECUTION_AND_ACCEPTANCE",
+  "route_id": "INTEGRATE_EXISTING_SOFTWARE_EXECUTION_AND_ACCEPTANCE",
+  "explicit_user_authorization": "The user asked to reuse solutions already in Brain, tools, repositories or research and do the optimal work as fast as possible for advanced software engineering.",
+  "benchmark_or_family_rank_authority": false,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Bounded public routing and impact report safety; no arbitrary feature synthesis or global optimality claim.",
+  "measured_effect": "Explicit implementation-to-source-audit false PASS reproduced through solve() before edits; now refused before dispatch. Final focused five-file group 48 passed in 9.84 s; system unittest 12 passed in 0.304 s. Broader groups remain red; no capability promotion or independent verification.",
+  "falsification_condition": "An analysis-only route executes for an explicit implementation request or impact report overwrites source/diff/index.",
+  "load_bearing_primary": {
+    "canonical_base_commit": "1531122633f361f328924916c6a943c8cf0b7af7",
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/1000000",
+    "success_probability_lcb": "1/1000",
+    "wall_clock_cost_ub": 7200,
+    "interpretation": "Conservative planning placeholders, not measured probabilities; task-effect matching is necessary for truthful software completion.",
+    "measured_effect": "Explicit implementation-to-source-audit false PASS reproduced through solve() before edits; now refused before dispatch. Final focused five-file group 48 passed in 9.84 s; system unittest 12 passed in 0.304 s. Broader groups remain red; no capability promotion or independent verification.",
+    "stop_condition": "Explicit implementation requests cannot dispatch analysis-only routes, including DAG/composer paths; real existing repair and read-only analysis controls remain operational; report aliases cannot overwrite impact-analysis inputs."
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
+      "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
+      "canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py",
+      "canonical/runtime/bound_capabilities/python_review_diff_static_triage.py",
+      "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
+      "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+      "canonical/runtime/bound_capabilities/python_symbol_resolve.py",
+      "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+      "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py",
+      "canonical/runtime/composer_route_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/swe_typed_plan_v1.py",
+      "canonical/runtime/write_authority_v1.py",
+      "canonical/tests/test_a_capability_may_not_overwrite_the_file_it_reads_v1.py",
+      "canonical/tests/test_executed_review_gate_composer_v1.py",
+      "canonical/tests/test_python_change_impact_testselect_v1.py",
+      "canonical/tests/test_python_symbol_index_cache_freshness_v1.py",
+      "canonical/tests/test_repair_report_input_preservation_v1.py",
+      "canonical/tests/test_shared_software_test_execution_v1.py",
+      "canonical/tests/test_software_implementation_effect_admission_v1.py",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py",
+      "requirements/software_engineering_kernel_v1.txt"
+    ],
+    "route_class": "ADAPT",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "1531122633f361f328924916c6a943c8cf0b7af7",
+    "real_outcome": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+    "required_capability": "Pre-dispatch task-effect matching and impact-report input preservation.",
+    "obs_goal": {
+      "real_outcome": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "proxy_goals_deleted": [
+        "ANALYSIS_REPORT_AS_FEATURE_IMPLEMENTATION"
+      ],
+      "surviving_necessity": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "external_existing_routes_checked": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "capability_work_deleted": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "surviving_gap": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "delete_bypass_substitute_options": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "surviving_causal_blocker": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Reuse SWE effect-admission boundary and existing check_report primitive.",
+        "Build a new general-purpose synthesizer: not justified by discovered integration defect.",
+        "Allow analysis to stand in for implementation: incorrect task effect."
+      ],
+      "losing_routes_reason": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "adjacent_capabilities_absorbed": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "fresh_reuse_plan": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "search_stop_decision": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "ADAPT",
+      "SUBSTITUTE",
+      "COMPOSE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ANALYSIS_REPORT_AS_FEATURE_IMPLEMENTATION"
+    ],
+    "selected_surviving_route": "INTEGRATE_EXISTING_SOFTWARE_EXECUTION_AND_ACCEPTANCE",
+    "why_selected_route_is_fastest_sufficient": "Bounded pre-dispatch gate and reused report alias check avoid invoking unsuitable tools; no new capability registered.",
+    "expected_parent_level_state_change": "Integrate truthful software execution and acceptance: native test execution, report/input preservation, fresh Python index reuse, executed six-gate review and pre-dispatch implementation-effect admission.",
+    "stop_condition": "Explicit implementation requests cannot dispatch analysis-only routes, including DAG/composer paths; real existing repair and read-only analysis controls remain operational; report aliases cannot overwrite impact-analysis inputs.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-30T12:22:02.989245+00:00",
+      "max_age_hours": 12,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Inspected goal front compiler, live route admission, SWE typed plan effect gate, implementation registry rows and write_authority.check_report.",
+          "Actual public feature probe failed only after executing measurement; source unchanged. Other phrasings compile to audit/test-selection.",
+          "Existing issue-to-PR adapter supports declared rename/move task JSON, not arbitrary feature prose. Existing repair engine searches bounded transformations."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Existing Python path/hash primitives already reused in write_authority; no new external dependency required."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Current local capability registry inspected for declared provides, argument templates and limitations."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Prior turn inspected GitHub metadata for SWE-agent, mini-swe-agent, SWE-ReX, nsjail and SWE-bench; no external code or performance result adopted here."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Find existing implementation, repair, task-effect and write-authority routes."
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Trace public compile/admit/dispatch and DAG/composer fallbacks."
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Reuse installed Brain primitives; no new package supplier needed."
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Use current checkout contracts and reproduce current route choices."
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "unresolved_scope_note": "General feature synthesis and full transactional sandbox integration remain open.",
+      "selected_route": "INTEGRATE_EXISTING_SOFTWARE_EXECUTION_AND_ACCEPTANCE",
+      "incumbent_route": "EXECUTE_ANALYSIS_THEN_REJECT_NO_EFFECT",
+      "challenger_routes": [],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-10-30T12:22:02.989245+00:00",
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_EXISTING_SOFTWARE_EXECUTION_AND_ACCEPTANCE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Existing Brain admission, SWE plan and write authority modules",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-30T12:22:02.989245+00:00",
+            "evidence": [
+              "Modules inspected and actual public compile/solve feature probe executed."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      },
+      "negative_search_summary": "No inspected general feature implementation route accepts arbitrary feature prose; report-only substitution is not a valid substitute. Existing guard and alias mechanisms suffice for this bounded defect."
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-10-30T11:43:28.836333+00:00",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "CONSTRUCTIVE_GAP_ONLY__LOCAL_REGRESSION_MEASUREMENT__NO_ACCEPTANCE_CREDIT",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1",
+      "falsifier_id": "SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1_FALSIFIER",
+      "decisive_question": "An analysis-only route executes for an explicit implementation request or impact report overwrites source/diff/index.",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/live_brain_route_admission_v1.py",
+          "git_blob_sha": "61408c9b71348cf20f556f3572e0e0fd360d1f57"
+        }
+      ]
+    }
+  },
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "local_verification_summary": {
+    "baseline": "Initial public probe selected measurement and rejected after execution; report-writing feature phrasing then reproduced actual false PASS from source audit without implementation. Initial new 8-test run: 7 failed, 1 passed, including 2 missing-helper AttributeErrors; not seven independent behavioral reproductions.",
+    "final": "Focused five-file group: 48 passed in 9.84 s. New 12-method file also passed under system unittest in 0.304 s.",
+    "broader_run_1": "Five files (initial 8 new methods + live admission + SWE typed plan + impact + public repair): 84 passed, 4 failed in 24.20 s. Failures: single-word rule expects R3 but gets R1; two live doors disagree on classify_support; compile-rate expectation 23 vs observed21; impact provides list includes alias.",
+    "broader_run_2": "Four files (10 new methods + composer + SWE typed plan + public repair): 56 passed, 9 failed in 24.23 s. Composer failures: unreachable text routed; supersedes absent; changed success status; gzip/bzip2 discovery/performed-on-file expectations unmet. Not silently skipped or rewritten.",
+    "scope": "Bounded explicit software-implementation imperative grammar; registry material-effect contract is necessary, not sufficient. Positive controls preserve existing repair, audit and impact behavior.",
+    "limitations": [
+      "No arbitrary feature synthesis or full public multi-file feature vertical slice completed.",
+      "Analysis-only selection now refuses rather than automatically inventing an implementation route.",
+      "Legacy run_raw_goal entry is not newly protected by this solve/composer boundary.",
+      "Unknown phrasing outside the bounded imperative grammar may remain unresolved.",
+      "A declared source-writing effect does not prove requested semantics; acceptance still requires stronger task-specific evidence.",
+      "DAG implementation clauses are checked individually; mixed-purpose plan scope is not a universal semantic proof.",
+      "Report identity checks do not provide concurrent filesystem race protection.",
+      "Sandbox/cancellation/transactional delivery integration remains separate work."
+    ]
+  },
+  "scope_reconciliation": {
+    "reason": "Trusted guard allows one action intent and at most 15 sensitive non-intent files; independent confinement and tree-sitter changes deferred rather than weakening that limit.",
+    "deferred_patch": "/home/user/brain-deferred-confinement-treesitter.patch",
+    "retained_work_items": {
+      "EXECUTED_REVIEW_GATE_FANIN_REUSE_V1_20261030_V1": {
+        "summary": "Replace registry-membership review certification with execution of the six existing diff gates on an owned scratch snapshot, bind reports to one diff, and require complete PASS outcomes rather than report-written flags.",
+        "measured_effect": "Real six-gate positive integration passes; weak tests produce surviving mutants and review refusal. Final seven-file gate/composer run: 90 passed, 1 conditional skip in 39.79 s. No formal capability or independent-verification credit.",
+        "local_verification_summary": {
+          "regressions": "Missing inputs, failed/partial/incomplete gate outcomes, wrong diff, report hash/verdict disagreement, absent reports, gate exceptions, hard-link/source overwrite and mutated-diff controls; positive controlled fan-in invokes six delegates.",
+          "actual_tools": "pytest 8.4.2, ruff 0.17.3, mypy 2.4.1, coverage 7.17.0, bandit 1.9.4 installed outside tests in ephemeral venv.",
+          "results": "Final seven-file gate/composer run: 90 passed, 1 skip in 39.79 s. System unittest: 12 total, 10 passed, 2 full-toolchain skips in 0.393 s. Orientation, intent, local admission, static integrity (11 rules, 0 violations) and diff whitespace checks pass.",
+          "integration": "All six real gates passed in independent temp fixture and fixture rooted within the actual checkout. Weak test oracle was rejected by actual mutation survivors.",
+          "performance_fixture_note": "Initial arithmetic-only positive benchmark produced UNCLEAR from physical timing noise. Kept gate threshold unchanged; positive fixture now has an actual substantial speed improvement from sum((a,-b)) to a+b.",
+          "limitations": [
+            "Only this review composer is fixed; other registry-only wrappers remain unresolved.",
+            "No proof of complete software correctness beyond underlying gates.",
+            "Benchmark/test subprocesses are not OS-sandboxed.",
+            "Per-call timeouts are inherited; there is no task-wide hard deadline.",
+            "Registry historical verification receipts are not refreshed or claimed as new independent evidence.",
+            "Natural-language feature implementation misroute remains unresolved."
+          ]
+        }
+      },
+      "PYTHON_SYMBOL_INDEX_CACHE_FRESHNESS_REUSE_V1_20261030_V1": {
+        "summary": "Reuse Python symbol-index enumeration and stored SHA-256 digests to validate cache content and full file membership before change-impact selection, cross-file choreography and symbol resolution, without reparsing unchanged source.",
+        "measured_effect": "Ten new regression methods pass; broader index/consumer/issue-to-PR/tree-sitter group: 89 passed, 2 registry-contract failures. Separate cache/shared-runner/preservation/seeded group: 86 passed. A 200-file local 15-sample comparison measured cached validation median 9.47 ms versus fresh index 27.37 ms. No full-suite or formal capability claim.",
+        "local_verification_summary": {
+          "before": "Eight initial regression methods produced 22 assertion failures including subtests, demonstrating three consumers accepted stale caches.",
+          "after": "Ten new cache regression methods passed; index and consumer group 89 passed, 2 failed in 6.39 s; separate regression and seeded group 86 passed in 26.60 s.",
+          "remaining_failures": [
+            "ChangeImpactRegistryContractTests.test_the_entry_is_a_verified_bound_capability expects only the artifact effect, but registry also includes capability-id alias.",
+            "CrossfileEditRegistryContractTests.test_the_entry_is_a_verified_bound_capability has the corresponding extra-alias mismatch. Registry and those tests are unchanged; no pristine checkout run claimed."
+          ],
+          "performance": "Synthetic 200 Python files, 15 interleaved samples: cached load/content validation median 9.47 ms, fresh indexing median 27.37 ms; local measurement, not general speed frontier.",
+          "limitations": [
+            "Hash validation is not authentication of cached semantic rows.",
+            "Concurrent filesystem mutation is not prevented.",
+            "Dynamic dependency soundness is not established.",
+            "Only change-impact, cross-file choreography and symbol resolution are integrated; other index consumers remain to audit."
+          ]
+        }
+      },
+      "REPORT_SOURCE_ALIAS_REFUSAL_REUSE_V1_20261030_V1": {
+        "summary": "Reuse write_authority_v1 path resolution for explicit JSON-report destinations in patch search and the multi-edit repair loop; refuse source/test aliases before executing tests, including hard links, while leaving legitimate in-place source transformations unchanged.",
+        "measured_effect": "106 focused tests passed with pytest 8.4.2; 58 preservation/seeded tests passed under system unittest. Direct report aliases, symlinks and hard links refuse before tests execute; a separate report permits real repair and preserves input bytes. No formal capability credit.",
+        "local_verification_summary": {
+          "initial_negative_control": "Before implementation the five-method file had 2 subtest failures and 5 errors; refusal did not occur before execution.",
+          "focused_stdlib": "53 total, 40 passed, 13 skipped in 7.982 seconds.",
+          "limitations": [
+            "Only two explicit report producers are integrated.",
+            "This preflight does not prevent concurrent filesystem replacement or sandbox untrusted tests.",
+            "No full-suite, formal capability credit or global optimality claim."
+          ],
+          "focused_pytest_8_4_2": "106 passed in 35.32 seconds, including seeded repair and legacy write-authority controls.",
+          "preservation_and_seeded_stdlib": "58 passed in 11.610 seconds."
+        }
+      },
+      "SHARED_SOFTWARE_ENGINEERING_TEST_EXECUTION_REUSE_V1_20261029_V1": {
+        "summary": "Adapt the shared Python SWE suite runner to native pytest when needed; preserve stdlib-only execution and fail closed when test semantics cannot be provided. Pin the tested pytest runtime and its dependencies in the existing deterministic SWE kernel requirements. Adapt existing tracing to filter non-project frames so native-framework tracing does not spend its deadline resolving every library line.",
+        "measured_effect": "Before implementation the shared runner returned 0 for a fixture suite on which native pytest returned 1. After implementation 30 focused regressions pass under pytest 8.4.2 and 9.2.0, and 96 repair/tracing tests pass under each; 55 relevant unittest tests pass without pytest. The hash-pinned SWE kernel installs on the tested Linux/Python 3.11 environment. Two unrelated existing integration contracts fail and are recorded below. Measurements are local, with no capability, terminal, or independent-verification credit.",
+        "local_verification_summary": {
+          "scope": "Local subprocess, repair, audit, trace and package-install observations; not a full-suite or capability admission result.",
+          "regressions_pytest_8_4_2": "30 passed with plugin autoload disabled; the same 30 passed with the installed SWE kernel and its normal plugin autoload.",
+          "regressions_pytest_9_2_0": "30 passed with plugin autoload disabled.",
+          "no_pytest_regressions": "30 total: 17 passed, 13 framework-dependent tests skipped; python -S controls exercise missing-pytest refusal.",
+          "repair_family_pytest_8_4_2": "96 passed.",
+          "repair_family_pytest_9_2_0": "96 passed, 4 subtests passed.",
+          "stdlib_repair_and_trace": "85 unittest tests total: 72 passed, 13 framework-dependent tests skipped; includes 55 repair/tracing tests.",
+          "audit_measurement_delegation_group": "57 passed, 2 failed; the failures were also reproduced in isolation.",
+          "remaining_integration_failures": [
+            "test_python_repair_apply_verified_v1.py::RepairApplyVerifiedTests::test_missing_test_paths_is_refused_rather_than_guessed expects refusal while the unchanged adapter discovers test files.",
+            "test_suite_argv_delegation_is_followed_v1.py::TestDeepDelegationIsFollowed::test_the_shallow_delegator_still_binds receives test-named source_paths but no test_paths; goal_compiler and the test are unchanged."
+          ],
+          "execution_isolation_note": "A concurrent run of the same existing seeded benchmark file collided over its fixed temporary directories; both versions were rerun sequentially and are reported above.",
+          "package_install": "The complete SWE requirements installed with --require-hashes on Linux/Python 3.11; pytest 8.4.2 and tree-sitter modules imported. Conditional Windows/Python 3.10 dependencies were not executed.",
+          "stdlib_latency": "15 warmed subprocesses: 52.83 ms median, 56.61 ms p90, 87.66 ms max. The earlier pre-change median was 40.57 ms in a separate run; this is not a controlled same-load comparison.",
+          "pytest_latency": "15 interleaved failing-fixture subprocesses: shared runner 235.31 ms median versus direct pytest 233.67 ms, with plugin autoload disabled.",
+          "trace_latency": "Five native-fixture failing traces: fault-localizer 360.63 ms median (5 project events); provenance 328.15 ms median (9 events). An earlier pre-optimization trace took 22.56 s under concurrent load, so those observations are not a controlled speedup estimate.",
+          "limitations": [
+            "Static detection cannot prove it recognizes every dynamically declared pytest feature or third-party plugin; callers can supply explicit test_argv.",
+            "The no-passing-oracle and collection checks contribute a synthetic suite error to the counted summary.",
+            "Passing bound tests is not proof against overfitting, and the subprocess test runner is not an operating-system sandbox.",
+            "No full-suite result, formal capability credit, or globally optimal performance is claimed."
+          ]
+        }
+      },
+      "SOFTWARE_IMPLEMENTATION_EFFECT_ADMISSION_REUSE_V1_20261030_V1": {
+        "summary": "Refuse explicit software implementation requests before dispatch when the selected route only provides analysis/report effects; reuse existing SWE admission and report/source alias protection, preserving valid repair and analysis routes.",
+        "measured_effect": "Explicit implementation-to-source-audit false PASS reproduced through solve() before edits; now refused before dispatch. Final focused five-file group 48 passed in 9.84 s; system unittest 12 passed in 0.304 s. Broader groups remain red; no capability promotion or independent verification.",
+        "local_verification_summary": {
+          "baseline": "Initial public probe selected measurement and rejected after execution; report-writing feature phrasing then reproduced actual false PASS from source audit without implementation. Initial new 8-test run: 7 failed, 1 passed, including 2 missing-helper AttributeErrors; not seven independent behavioral reproductions.",
+          "final": "Focused five-file group: 48 passed in 9.84 s. New 12-method file also passed under system unittest in 0.304 s.",
+          "broader_run_1": "Five files (initial 8 new methods + live admission + SWE typed plan + impact + public repair): 84 passed, 4 failed in 24.20 s. Failures: single-word rule expects R3 but gets R1; two live doors disagree on classify_support; compile-rate expectation 23 vs observed21; impact provides list includes alias.",
+          "broader_run_2": "Four files (10 new methods + composer + SWE typed plan + public repair): 56 passed, 9 failed in 24.23 s. Composer failures: unreachable text routed; supersedes absent; changed success status; gzip/bzip2 discovery/performed-on-file expectations unmet. Not silently skipped or rewritten.",
+          "scope": "Bounded explicit software-implementation imperative grammar; registry material-effect contract is necessary, not sufficient. Positive controls preserve existing repair, audit and impact behavior.",
+          "limitations": [
+            "No arbitrary feature synthesis or full public multi-file feature vertical slice completed.",
+            "Analysis-only selection now refuses rather than automatically inventing an implementation route.",
+            "Legacy run_raw_goal entry is not newly protected by this solve/composer boundary.",
+            "Unknown phrasing outside the bounded imperative grammar may remain unresolved.",
+            "A declared source-writing effect does not prove requested semantics; acceptance still requires stronger task-specific evidence.",
+            "DAG implementation clauses are checked individually; mixed-purpose plan scope is not a universal semantic proof.",
+            "Report identity checks do not provide concurrent filesystem race protection.",
+            "Sandbox/cancellation/transactional delivery integration remains separate work."
+          ]
+        }
+      }
+    },
+    "no_promotion": true
+  }
+}
