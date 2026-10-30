@@ -919,9 +919,31 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # "Remove the duplicate lines from the file X" matched `rm` first -- it is
     # third in this table and the first pattern to match wins -- so teaching
     # `uniq` the word "duplicate" alone would have changed nothing at all.
+    # THE OBJECT OF "REMOVE" DECIDES WHAT IS REMOVED.  Measured 2026-10-30 on a fresh
+    # tree:
+    #
+    #   "Remove the dead code from <pkg>/calc.py."
+    #       -> shell.command.run argv ["rm", "<pkg>/calc.py"]
+    #       -> calc.py DELETED, pass=True, PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE
+    #
+    # The sentence names the file as the place the dead code lives, not as the thing to
+    # delete; `rm` deleted the file and the acceptance layer certified it, because a
+    # deletion is exactly the postcondition `rm` declares.  The noun list above exists
+    # for this reason -- "remove the duplicate LINES from the file X" already refuses --
+    # but it is a list of things inside a file that can be read, and the nouns an
+    # engineer actually uses when asking for a code CHANGE were not in it: dead code,
+    # unused imports, docstrings, comments, whitespace, TODOs, statements, variables.
+    # A content noun between the verb and the path is the sentence saying the FILE
+    # stays; rm may only take a path the sentence makes the direct object of the verb.
+    # Measured after: the sentence refuses (no command is invented), and
+    # "Delete <pkg>/legacy.py" -- where the path IS the object -- still deletes.
     (r"\b(?:remove|delete|erase)\b"
      r"(?![^\n]{0,40}?\b(?:duplicates?|repeated|unique)\b(?!\.\w))"
      r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)"
+     r"(?![^\n]{0,60}?\b(?:dead|unused|unreferenced|unreachable|obsolete|legacy|"
+     r"docstrings?|comments?|whitespace|todos?|imports?|variables?|constants?|"
+     r"functions?|methods?|classes?|statements?|prints?|logging|code|logic|"
+     r"type\s*hints?|annotations?)\b)"
      r"(?![^\n]{0,40}?\bfrom the (?:file|files)\b)",
      "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\b(?:directory|folder)\b", "mkdir",
