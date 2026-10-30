@@ -2545,12 +2545,25 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
                            or st.get("result") is not None)]
         if not dispatched:
             return None
+        # THE COMPOSER'S OWN NAME FOR WHAT HAPPENED SURVIVES THE WRAPPER.
+        #
+        # Every non-passing chain used to be relabelled STEP_RAISED_OUTCOME_UNKNOWN, which says a
+        # step raised and nobody knows what the world looks like.  Measured 2026-10-30: "Find the
+        # root cause of the failure in <file>" ran one step that returned
+        # {"outcome": "UNRESOLVED", "missing_premises": [3 named premises]} and nothing raised, yet
+        # the caller was told the outcome was UNKNOWN -- the one thing the record had just proved it
+        # was not.  A named composer class is carried through; only an unnamed failure keeps the
+        # unknown label.
+        _composer_class = str(executed.get("failure_class") or "").strip()
+        _carried = (_composer_class if _composer_class.startswith("COMPOSED_")
+                    else "STEP_RAISED_OUTCOME_UNKNOWN")
         return {
             "schema": LIVE_SCHEMA,
-            "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+            "status": ("FAIL_CLOSED__" + _carried),
             "pass": False, "task_id": task_id, "goal": goal,
             "executed": True, "execution_proof_type": COMPOSED_EXECUTOR,
-            "failure_class": "STEP_RAISED_OUTCOME_UNKNOWN",
+            "failure_class": _carried,
+            "failed_step": executed.get("failed_step"),
             "steps_dispatched": len(dispatched),
             "adapter_raised": [st.get("adapter_raised") for st in dispatched
                                if st.get("adapter_raised")],
@@ -2726,7 +2739,16 @@ _ALREADY_SATISFIED_RE = re.compile(r"BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|N
                                    re.IGNORECASE)
 
 _COMPOSED_UNVERIFIED_CLASSES = frozenset({"COMPOSED_CHAIN_NOT_VERIFIED",
-                                          "STEP_RAISED_OUTCOME_UNKNOWN"})
+                                          "STEP_RAISED_OUTCOME_UNKNOWN",
+                                          # A step RAN and said it could not answer
+                                          # (``UNRESOLVED``, missing premises, unverified output).
+                                          # Measured 2026-10-30: "Find the root cause of the failure
+                                          # in <file>" ran a theorem assessment that came back
+                                          # UNRESOLVED and the door certified
+                                          # PASS__COMPOSED_CAPABILITY_CHAIN with no diagnosis.
+                                          # The probe that found it is
+                                          # execution_guard/swe_request_probe_v1.py --suite hardcore.
+                                          "COMPOSED_STEP_UNRESOLVED"})
 _SPOOL_DIR_PREFIX = "canonical/astra_runtime/tmp/"
 
 

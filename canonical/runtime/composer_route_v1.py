@@ -3405,6 +3405,51 @@ def _declare_an_exit_status_answer(args: dict[str, Any], argv: Sequence[str]) ->
 # values a later step may bind to.
 _INVOKER_STAMPED_KEYS = ("capability_id", "dependency")
 
+# A step that RAN is not a step that ANSWERED.
+#
+# Measured 2026-10-30 on a fresh tree, over the door:
+#
+#   "Find the root cause of the failure in <pkg>/test_calc.py."
+#     route   terminal.tournament.failure.witness -> terminal.kstar.root.assess.stdlib
+#     step    {"status": "UNRESOLVED", "outcome": "UNRESOLVED",
+#              "missing_premises": [...3 items...], "abc_closed": false}
+#     answer  pass=True, PASS__COMPOSER_CHAIN_EXECUTED, semantic_acceptance_complete=False
+#
+# The step is a theorem assessment from the decision family; it came back UNRESOLVED and named
+# three missing premises.  No diagnosis of the failing test existed anywhere in the answer, yet
+# the chain certified success because every step returned a dict.  "The chain executed" is a
+# statement about this machine, not about the request, so it cannot be the pass.
+#
+# Scoped to what the step itself said: a negative outcome token, a failed verification, or named
+# missing premises.  A step that reports OK, PASS, a created artifact, or nothing at all is
+# untouched.
+_NO_ANSWER_OUTCOME_TOKENS = frozenset({"UNRESOLVED", "UNKNOWN", "INCONCLUSIVE", "UNDETERMINED",
+                                       "REJECTED", "REFUTED", "FAILED", "FAIL"})
+
+
+def _step_says_no_answer(observed: Any) -> str | None:
+    """The reason a step's own record says it produced no answer, or None.
+
+    Reads only what the capability put in its result: ``outcome``/``status``/``verdict`` tokens,
+    an explicit ``output_verified: false``, or a non-empty ``missing_premises`` list.
+    """
+    if not isinstance(observed, Mapping):
+        return None
+    for key in ("outcome", "status", "verdict"):
+        token = str(observed.get(key) or "").strip().upper()
+        if token in _NO_ANSWER_OUTCOME_TOKENS:
+            return "%s=%s" % (key, token)
+    # A step that ran a DELETION reports output_verified=false because the output is absent --
+    # and it also reports output_absent_after_run=true, which is the promise being kept.  Measured
+    # 2026-10-30: "Delete <dir>/legacy.txt." executed `rm`, the file was gone, and this rule
+    # refused the deletion as UNRESOLVED.  Absence the step itself declares is an answer.
+    if observed.get("output_verified") is False and not observed.get("output_absent_after_run"):
+        return "output_verified=false"
+    missing = observed.get("missing_premises")
+    if isinstance(missing, (list, tuple, set, frozenset)) and missing:
+        return "missing_premises=%d" % len(missing)
+    return None
+
 
 _ROLLBACK_PATH_KEYS = ("output_path", "archive_path", "target_path", "path", "dest", "destination",
                        "output", "out", "into", "to", "source_path", "input_path")
@@ -3590,6 +3635,21 @@ def execute_chain(chain: Sequence[str], goal: str,
                 "produced": dict(produced), "created_paths": list(created_paths),
                 "status": "FAIL__COMPOSER_CHAIN_RAN_NO_STEP",
                 "failed_step": {"index": 0, "capability_id": None},
+                "authority": "TYPE_LEVEL_COMPOSITION_EXECUTED_LOCALLY"}
+    # The last step's own verdict is the chain's verdict.  Every step ran; if the one that was
+    # supposed to answer said it could not, the chain produced no answer and must say so instead
+    # of certifying the execution.  Refusing here cannot hide a real answer: a step that answered
+    # carries no negative token, and the failing step is recorded either way.
+    verdict_reason = _step_says_no_answer(steps[-1].get("result"))
+    if verdict_reason is not None:
+        return {"schema": SCHEMA, "pass": False, "goal": goal,
+                "steps": steps, "produced": dict(produced),
+                "created_paths": list(created_paths),
+                "status": "FAIL_CLOSED__COMPOSED_STEP_UNRESOLVED",
+                "failure_class": "COMPOSED_STEP_UNRESOLVED",
+                "failed_step": {"index": steps[-1].get("index"),
+                                "capability_id": steps[-1].get("capability_id"),
+                                "reason": verdict_reason},
                 "authority": "TYPE_LEVEL_COMPOSITION_EXECUTED_LOCALLY"}
     return {"schema": SCHEMA, "pass": True, "goal": goal, "steps": steps,
             "produced": dict(produced), "created_paths": list(created_paths),
