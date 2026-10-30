@@ -1006,6 +1006,15 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
                 parent = str(pathlib.PurePosixPath(paired).parent)
                 if parent not in ("", "."):
                     return parent
+        # Several directories named is not ambiguity when the sentence said which
+        # one is the witness.  Strictly a narrowing: the survivors must be exactly
+        # one, so a sentence that names two SUBJECTS still fails closed exactly as
+        # before.
+        if len(dirs) > 1:
+            witness = gc._witness_directories(goal, paths)
+            survivors = [d for d in dirs if d not in witness]
+            if len(survivors) == 1:
+                return survivors[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(dirs)) + "_existing_directories_named")
     if key in _PATH_LIST_KEYS:
         files = [raw for raw, p in paths if p.is_file()]
