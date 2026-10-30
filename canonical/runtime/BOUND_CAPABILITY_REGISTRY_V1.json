@@ -4905,6 +4905,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_test_guided_patch_search_v1",
@@ -5366,9 +5369,9 @@
      "timeout_s": "${input.timeout_s}"
     },
     "expect": {
-     "field": "gate",
+     "field": "complete",
      "type": "field_equals",
-     "value": "PASS"
+     "value": true
     },
     "type": "invoke_capability"
    },
@@ -5396,7 +5399,8 @@
     "only uses that provably resolve to the same binding are renamed; dynamic receivers, getattr dispatch and unattributable attribute sites are listed in unknown_sites and lower complete, never silently edited or dropped.",
     "method renames refuse when a subclass overrides the same name (REFUSE_INHERITED_OVERRIDE) or inherits-and-calls it (REFUSE_INHERITED_USE); super() references are never touched.",
     "locals, parameters and class-level assignments refuse SYMBOL_KIND_UNSUPPORTED (rename_parameter owns params); global/nonlocal declarations on the old name refuse REFUSE_NONLOCAL_OR_GLOBAL.",
-    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly."
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly.",
+    "the action contract is `complete`: every provable site is edited and then re-measured on the post-edit trees, and a surviving provable reference refuses RESIDUAL_REFERENCE before a byte is written; `gate` is PASS only when a named pytest suite ran green, so a no-suite run reports PASS_BLIND and the registry expects complete=true rather than an unreachable gate."
    ],
    "platforms": [
     "linux",
@@ -6440,6 +6444,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_apply_verified_v1",
@@ -6539,6 +6546,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_provenance_guided_coupled_repair_v1",
@@ -6653,6 +6663,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_coupled_software_repair_loop_v1",
@@ -6759,6 +6772,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_iterative_software_repair_loop_v1",
@@ -6944,6 +6960,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_measured_acceptance_controller_v1",
@@ -7056,6 +7075,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_semantic_acceptance_controller_v1",

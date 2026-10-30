@@ -114,11 +114,14 @@ guessed: a goal that does not state an input fails closed with GOAL_INPUT_BINDIN
 """
 from __future__ import annotations
 
+import ast
 import contextvars
 import json
+import os
 import pathlib
 import re
 import shlex
+import sys
 from typing import Any, Mapping
 
 from canonical.runtime import capability_planner
@@ -690,6 +693,272 @@ def _module_pair_file(entry, paths):
     if len(named) != 1:
         return None
     return named[0]
+
+
+# ---------------------------------------------------------------------- derivation
+#
+# A sentence states what the caller KNOWS.  It cannot state the harness a capability
+# runs on (which interpreter, which timeout), the module a symbol happens to live in,
+# or -- beyond naming it -- the replacement identifier.  Those three are already
+# DECLARED somewhere in the repository: the adapter's own `args.get(k) or <default>`,
+# the package tree under `source_root`, and the sentence's own "to <ident>" clause.
+# Reading a declaration is not guessing, so these three sources are consulted only
+# after the pinned and typed binders have both refused a key: a stated value always
+# wins, and nothing here can override one.
+#
+# Measured before this existed: "Rename the function line_total to item_total in
+# <b>/app and update every caller." scored python.refactor.rename_symbol.v1 at 11,
+# three times the next candidate, and was dropped on
+# ``module:not_stated``/``new_symbol:not_stated``/``run_tests:not_stated``; the
+# capability then never ran and the tree kept its stale references.
+
+_UNKNOWN = object()
+_SAFE_DEFAULT_NAMES = {"sys": sys, "os": os, "pathlib": pathlib, "Path": pathlib.Path,
+                       "re": re, "json": json}
+_SAFE_DEFAULT_BUILTINS = {name: __builtins__[name] if isinstance(__builtins__, dict) else getattr(__builtins__, name)
+                          for name in ("str", "int", "float", "bool", "list", "dict", "set",
+                                       "tuple", "len", "abs", "min", "max", "sorted")}
+_DEFAULT_FORBIDDEN = (ast.Lambda, ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp,
+                      ast.NamedExpr, ast.Await, ast.Yield, ast.YieldFrom, ast.Starred)
+_ADAPTER_DEFAULTS: dict[tuple[str, int], dict[str, Any]] = {}
+
+
+def _args_get_key(node: ast.AST) -> str | None:
+    """``args.get("k")`` -> "k"; anything else -> None."""
+    if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+        return None
+    if node.func.attr != "get" or not isinstance(node.func.value, ast.Name):
+        return None
+    if node.func.value.id != "args" or len(node.args) != 1:
+        return None
+    first = node.args[0]
+    if isinstance(first, ast.Constant) and isinstance(first.value, str):
+        return first.value
+    return None
+
+
+def _declared_default_value(node: ast.AST):
+    """The value an adapter's own fallback expression declares, or ``_UNKNOWN``.
+
+    Only literals, whitelisted names and attribute access on them may be evaluated;
+    ``args.get(k) or ""`` is deliberately NOT a default (that idiom is a required
+    input followed by a loud refusal), and an empty string is never derived.
+    """
+    if any(isinstance(inner, _DEFAULT_FORBIDDEN) for inner in ast.walk(node)):
+        return _UNKNOWN
+    for inner in ast.walk(node):
+        if isinstance(inner, ast.Name) and inner.id not in _SAFE_DEFAULT_NAMES \
+                and inner.id not in _SAFE_DEFAULT_BUILTINS:
+            return _UNKNOWN
+    if sum(1 for _ in ast.walk(node)) > 24:
+        return _UNKNOWN
+    try:
+        value = eval(compile(ast.Expression(body=node), "<declared-default>", "eval"),
+                     {"__builtins__": dict(_SAFE_DEFAULT_BUILTINS)},
+                     dict(_SAFE_DEFAULT_NAMES))
+    except Exception:
+        return _UNKNOWN
+    if isinstance(value, str) and not value:
+        return _UNKNOWN
+    return value
+
+
+def declared_adapter_defaults(entry: Mapping[str, Any] | None) -> dict[str, Any]:
+    """Input keys whose default is written in the capability's OWN adapter source."""
+    if not isinstance(entry, Mapping):
+        return {}
+    module_name = str(entry.get("adapter_module") or "")
+    if not module_name.isidentifier():
+        return {}
+    path = ROOT_FOR_NAMING / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")
+    if not path.is_file():
+        return {}
+    stamp = (str(path), path.stat().st_mtime_ns)
+    cached = _ADAPTER_DEFAULTS.get(stamp)
+    if cached is not None:
+        return cached
+    defaults: dict[str, Any] = {}
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+    except (SyntaxError, UnicodeDecodeError):
+        _ADAPTER_DEFAULTS[stamp] = defaults
+        return defaults
+    entrypoint = str(entry.get("entrypoint") or "run")
+    scopes = [node for node in ast.walk(tree)
+              if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == entrypoint]
+    for scope in scopes or [tree]:
+        for node in ast.walk(scope):
+            if not isinstance(node, ast.BoolOp) or not isinstance(node.op, ast.Or) or len(node.values) != 2:
+                continue
+            key = _args_get_key(node.values[0])
+            if key is None or key in defaults:
+                continue
+            value = _declared_default_value(node.values[1])
+            if value is not _UNKNOWN:
+                defaults[key] = value
+    _ADAPTER_DEFAULTS[stamp] = defaults
+    return defaults
+
+
+_TO_NEW_IDENTIFIER = re.compile(r"\bto\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?")
+_NOT_AN_IDENTIFIER = {"a", "an", "the", "this", "that", "it", "its", "same", "new"}
+
+
+def declared_replacement_identifier(goal: str) -> str | None:
+    """The one identifier the sentence names as the replacement ("... to item_total").
+
+    The sentence states the value; this only reads it.  Two different identifiers
+    naming two different replacements is ambiguity, and ambiguity binds nothing.
+    """
+    found = {m.group(1) for m in _TO_NEW_IDENTIFIER.finditer(str(goal or ""))}
+    found = {name for name in found if name not in _NOT_AN_IDENTIFIER}
+    return found.pop() if len(found) == 1 else None
+
+
+_DEF_NAME = re.compile(r"^[ \t]*(?:async[ \t]+)?(?:def|class)[ \t]+([A-Za-z_][A-Za-z0-9_]*)", re.M)
+
+
+def _defines(text: str, symbol: str) -> bool:
+    """Cheap prefilter: does this source even define/assign the symbol name?"""
+    if not re.search(r"\b" + re.escape(symbol) + r"\b", text):
+        return False
+    return bool(re.search(r"^[ \t]*(?:async[ \t]+)?(?:def|class)[ \t]+" + re.escape(symbol) + r"\b", text, re.M)
+                or re.search(r"^" + re.escape(symbol) + r"[ \t]*(?::[^=\n]+)?=", text, re.M))
+
+
+def defining_module_of_qualname(qualname: str, source_root: str, root: pathlib.Path) -> str | None:
+    """The ONE module under source_root that defines this qualname, or None.
+
+    This is the sibling of ``_module_pair_file``: that rule reads the module name from
+    a sentence that names one .py file, this one reads it from the tree the sentence
+    named.  Two files defining the same symbol is ambiguity, and ambiguity binds
+    nothing.
+    """
+    parts = [p for p in str(qualname or "").split(".") if p]
+    if not parts:
+        return None
+    symbol = parts[-1]
+    scope = parts[:-1]
+    base = pathlib.Path(source_root)
+    if not base.is_absolute():
+        base = pathlib.Path(root) / base
+    if not base.is_dir():
+        return None
+    hits: list[str] = []
+    for path in sorted(base.rglob("*.py")):
+        if "__pycache__" in path.parts:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if not _defines(text, symbol):
+            continue
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        found = False
+        defs = [(node.name, node) for node in tree.body
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))]
+        binds = [node for node in tree.body if isinstance(node, (ast.Assign, ast.AnnAssign))]
+        if scope:
+            outer = [node for name, node in defs if name == scope[0]]
+            for node in outer:
+                if isinstance(node, ast.ClassDef):
+                    found = found or any(isinstance(inner, (ast.FunctionDef, ast.AsyncFunctionDef,
+                                                           ast.ClassDef)) and inner.name == symbol
+                                         for inner in node.body)
+                else:
+                    found = found or any(isinstance(inner, (ast.FunctionDef, ast.AsyncFunctionDef))
+                                         and inner.name == symbol for inner in ast.walk(node))
+        else:
+            found = any(name == symbol for name, _ in defs)
+            if not found:
+                for node in binds:
+                    targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+                    found = found or any(isinstance(t, ast.Name) and t.id == symbol for t in targets)
+        if found:
+            hits.append(path.relative_to(base).as_posix())
+            if len(hits) > 1:
+                return None
+    return hits[0] if len(hits) == 1 else None
+
+
+def _is_referent_key(key: str, entry: Mapping[str, Any] | None) -> bool:
+    """True when the value of this key POINTS AT something (a file, a tree, an artifact).
+
+    A declared default may settle a harness constant, never a referent.  Measured:
+    ``code_multilanguage_tree_sitter_v1`` falls back to ``source_root or
+    "canonical/runtime"``, and deriving that silently indexed a tree the sentence
+    never named instead of refusing.  A referent is stated or it is derived from a
+    stated one (``module`` from ``qualname``+``source_root``); it is never defaulted.
+    """
+    return (key in _PATH_FILE_KEYS or key in _PATH_DIR_KEYS or key in _PATH_LIST_KEYS
+            or key.endswith("_path") or key.endswith("_paths")
+            or _is_output_key(key, entry or {}))
+
+
+def declared_optional_inputs(entry: Mapping[str, Any] | None) -> set[str]:
+    """Input keys the row itself says its adapter can synthesize.
+
+    A placeholder in ``action_template.args`` is a demand on the caller, and a
+    demand the adapter never makes is what kept the repair lane unreachable:
+    seven rows declare ``test_argv``, and every one of their adapters builds
+    that argv from the test paths it already resolved
+    (``argv_or_derived(args.get("test_argv"), sys.executable, *test_paths)``).
+
+    That fallback cannot be read off the adapter's AST without guessing -- a
+    first argument forwarded to a helper is indistinguishable from a value
+    handed to a judge (``verify(args.get("goal"), result, registry)`` is not a
+    derivation) -- so the row declares it, next to the args it declares:
+    ``"optional": ["test_argv"]``.  The binder passes ``None``; the adapter's
+    own ``*_REQUIRED`` refusal remains the only authority on whether the
+    declaration is true, so a row that lies here fails loudly at the call.
+    """
+    template = (entry or {}).get("action_template")
+    if not isinstance(template, Mapping):
+        return set()
+    declared = template.get("optional")
+    if isinstance(declared, str):
+        return {declared}
+    if isinstance(declared, (list, tuple, set)):
+        return {str(key) for key in declared}
+    return set()
+
+
+def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], root: pathlib.Path,
+                           entry: Mapping[str, Any] | None, inputs: dict[str, Any]) -> list[tuple[str, BaseException]]:
+    """Settle refused keys from declarations already in the repository.
+
+    Order matters: the adapter's own defaults and the sentence's own identifier need
+    nothing but themselves, while ``module`` needs the siblings ``qualname`` and
+    ``source_root`` to be bound first.  Anything still unbound is returned to fail
+    closed exactly as before.
+    """
+    defaults = {key: value for key, value in declared_adapter_defaults(entry).items()
+                if not _is_referent_key(key, entry)}
+    optional = declared_optional_inputs(entry)
+    replacement = declared_replacement_identifier(goal)
+    still: list[tuple[str, BaseException]] = []
+    for key, exc in unbound:
+        if key in defaults:
+            inputs[key] = defaults[key]
+        elif key in optional:
+            inputs[key] = None
+        elif key.startswith("new_") and replacement:
+            inputs[key] = replacement
+        else:
+            still.append((key, exc))
+    remaining: list[tuple[str, BaseException]] = []
+    for key, exc in still:
+        if key == "module" and inputs.get("qualname") and inputs.get("source_root"):
+            module = defining_module_of_qualname(str(inputs["qualname"]), str(inputs["source_root"]), root)
+            if module:
+                inputs[key] = module
+                continue
+        remaining.append((key, exc))
+    return remaining
 
 
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
@@ -1438,8 +1707,16 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                     raise type_failure
         if isinstance(inputs.get(key), str) and inputs[key]:
             taken.add(inputs[key])
+    refused: list[tuple[str, BaseException]] = []
     for key in typed_keys:
-        inputs[key] = bind_typed_key(goal, key, root, entry)
+        try:
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+        except GoalCompilationFailure as exc:
+            refused.append((key, exc))
+    if refused:
+        refused = derive_declared_inputs(goal, refused, root, entry, inputs)
+    if refused:
+        raise refused[0][1]
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
                              cycle=cycle, spool=spool)
     return inputs
