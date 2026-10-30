@@ -28713,7 +28713,7 @@
   "bound_capabilities": 125,
   "capabilities": 419,
   "engines": 26,
-  "knowledge_documents": 172,
+  "knowledge_documents": 173,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6506,
   "routing_tokens": 2105,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "394da2731096ccca08868e90059c546fe494f8c151854a157cf00daab2b87c0f"
+  "value": "28d03135c7af4a381c12db5d3385bc33f29da6b9f5e40ad66ac33dc9faafb1ed"
  },
  "engines": [
   {
@@ -39714,6 +39714,87 @@
     "problem",
     "software",
     "stands"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 14630,
+   "headings": [
+    "All the problems — the software-engineering census",
+    "0. The answer in one line",
+    "1. The six defect classes (this is \"all the problems\", structurally)",
+    "A. No owner — the capability does not exist (the ten sentences below)",
+    "B. Owner exists but cannot bind (27 of 125 bound rows are structurally unreachable)",
+    "C. Owner runs and produces no effect (5 failures)",
+    "D. False success — a read-shaped capability satisfies a write-shaped sentence (1 verified, reproduced)",
+    "E. No consequence model — a destructive sentence executes and \"passes\" (1 verified, reproduced)",
+    "F. The ladder's remaining tiers (8 of the 10 original tasks)",
+    "2. The registry, in numbers",
+    "3. What \"most advanced software engineer\" actually requires — and where each piece stands",
+    "4. The fix order — fastest first, measured leverage",
+    "5. What already works and must not be broken",
+    "6. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_ALL_PROBLEMS_20261030_V1.md",
+   "sha256": "a821dd7b9880dfec6ac9b153881def3f559c845355dcb1dd512833b390627f13",
+   "summary": "**Question asked:** what are *all* the problems, for a machine that must be the most advanced, fastest, smartest software engineer — ignoring document/PDF work entirely.",
+   "terms": {
+    "11": 5,
+    "125": 7,
+    "15": 6,
+    "absent": 6,
+    "all": 12,
+    "already": 9,
+    "answer": 5,
+    "artifact": 6,
+    "bisect": 5,
+    "blocked": 5,
+    "cannot": 6,
+    "capability": 5,
+    "change": 6,
+    "class": 5,
+    "code": 5,
+    "conflict": 5,
+    "each": 6,
+    "every": 9,
+    "exists": 6,
+    "fails": 6,
+    "find": 8,
+    "fix": 8,
+    "function": 7,
+    "git": 6,
+    "inline": 6,
+    "measured": 9,
+    "most": 6,
+    "move": 6,
+    "ms": 10,
+    "no": 32,
+    "not": 15,
+    "nothing": 6,
+    "one": 14,
+    "pass": 8,
+    "path": 6,
+    "plus": 6,
+    "repair": 6,
+    "row": 11,
+    "rows": 12,
+    "run": 6,
+    "sentence": 10,
+    "suite": 6,
+    "test": 8,
+    "they": 9,
+    "tree": 12,
+    "true": 6,
+    "would": 6,
+    "write": 6
+   },
+   "title": "All the problems — the software-engineering census",
+   "title_terms": [
+    "all",
+    "census",
+    "problems",
+    "software-engineering"
    ]
   },
   {
@@ -52469,10 +52550,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 942,
+  "included_source_count": 943,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ff9aadeee82568c6ff7c07028595584aefde8b4bde4b2fa2f5837fcec8321015"
+  "source_tree_digest": "acf246e44c76160e217bb1db80741f5608341e4042029ea40580a031ec0be1d1"
  },
  "research_index": [
   {
@@ -231541,9 +231622,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "102a404cf087c4bbda155fa7cd696c35667cc15746916a76ea1d27de31e0f43e",
+   "sha256": "fdc13188f13a720ed60448e04601a10600b0c547cbbd894b6c9691f454158193",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 74,
+   "symbol_count": 75,
    "symbols": [
     "_actions_of",
     "_after_key",

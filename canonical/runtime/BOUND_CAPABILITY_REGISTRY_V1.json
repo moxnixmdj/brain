@@ -4905,6 +4905,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_test_guided_patch_search_v1",
@@ -6441,6 +6444,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_apply_verified_v1",
@@ -6540,6 +6546,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_provenance_guided_coupled_repair_v1",
@@ -6654,6 +6663,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_coupled_software_repair_loop_v1",
@@ -6760,6 +6772,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_iterative_software_repair_loop_v1",
@@ -6945,6 +6960,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_measured_acceptance_controller_v1",
@@ -7057,6 +7075,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_semantic_acceptance_controller_v1",
