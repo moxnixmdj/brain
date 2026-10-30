@@ -491,3 +491,57 @@ correct rename engine, an honest patch search, a typed binder, a composer, a tru
 harness — and today it can reach almost none of them from a human sentence, cannot point them at a
 real project, cannot let them write the change, and reports PASS when the change did not happen.
 Five wiring and authority defects, listed in §9, separate it from the thing the objective asks for.
+
+---
+
+## SHIPPED 2026-10-29 — five of the P0s closed, measured
+
+Branch `arena/b1dd6c2d-brain`, commit after this section. Zero model dependency, zero spend, no
+registry row changed. Six files, each a REUSE of a mechanism already in the repository.
+
+| defect | change | measured |
+|---|---|---|
+| P0-1 import path | `_source_env` now emits each input's **import root** (the first ancestor that is not a package) and, for a directory, the import roots of packages nested one level below it. One helper, 11 consumers, no consumer edited. | repair **1/4 → 4/4** layouts (flat, `pkg/`, `src/app/`, `app/`) |
+| P0-7 argv shape | `test_argv` derivation uses the family's own `suite_argv` loader instead of `[python, -B, file]` | 4/4 layouts now collect the suite; `BASELINE_ALREADY_PASSES` on repo-shaped tests is gone |
+| P0-4 no write | a repair effect prefers `python.software.repair.apply.verified.v1` (writes + re-verifies in place) over the read-only search; admission stays the oracle | source bytes change, `pre_rc 1 → post_rc 0` |
+| P0-4 false PASS | a PASS on a sentence that states its own acceptance is **re-run on the real tree** before it may be reported; if it fails, the decisive typed plan is tried, else `STATED_ACCEPTANCE_NOT_SATISFIED` | repair PASSes with a failing stated acceptance **1 → 0** |
+| P0-5 report clause | an executed **failure** no longer closes the question: a *different* decisive capability may re-enter the whole gate chain; its PASS must survive every gate plus the acceptance | `rename` with a report clause: `pandoc` refusal → **PASS with the file renamed** |
+
+Two more instances of the same import-path defect were found and fixed where they hid correct work:
+`python_repair_apply_verified_v1`'s in-place gate ran the stated test with **no** path
+(`FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY` on a correct patch), and
+`python_software_repair_loop_v1` used the *test's* path instead of the sources'.
+
+**After, same harness, same 18 sentences, same filesystem oracle: 7/18 honest PASS** — 4 in-place
+repairs, 1 rename, 1 symbol index — and **0** repair PASSes with an unchanged source. Repairs are
+real: `def add(a, b): return a - b` becomes `return a + b` and the suite the user named passes.
+
+Regressions: none. Pre-existing fleet-drift failures byte-identical before and after
+(`test_*repair*.py` 186 tests / 6 failures, `r2_v77` 5, the front-compiler import error).
+`test_swe_typed_plan_v1` 17/17, `test_declared_input_derivation_v1` 7/7,
+`test_software_repair_loop_repairs_seeded_bugs_v1` 41/41, `test_*test_audit*.py` 21/21,
+`test_capability_selection_retrieval_v1` 12/12, unified model verifier 33/33 (recompiled),
+drift guard PASS, load-bearing admission PASS, repo integrity guard PASS (0 violations).
+
+One test was **strengthened**, not loosened: `test_a_failing_retry_never_forges_a_pass` used to
+assert "an executed verdict is returned unchanged", which is the routing rule that lost those
+requests. It now asserts the property that matters against the filesystem: a PASS for *fix X* must
+have changed the file and must satisfy the stated acceptance; a refusal must leave the tree
+untouched.
+
+### What is still open (in priority order, unchanged from §9)
+
+1. **P0-6 has no deadline.** A request can still run for days: `run_adapter_locally` has no timeout,
+   `python.tests.audit` can walk a 2 143-file corpus at 180 s/file. This is the next fix and it needs
+   a request-level wall-clock budget plus `RLIMIT_*` in the adapter subprocess.
+2. **P0-3 no project root.** `ROOT` is still a module constant; a project outside `brain/` is still
+   unreachable. Measured after the fixes: `/tmp/outside_project` repair → still refused.
+3. **P0-2 `argv` from prose.** The universal executor is reachable only through a quoted literal, so
+   git/lint/mypy/pdb/cProfile/pytest remain zero capabilities from a sentence (7/18 → the 11 that
+   still fail are mostly this).
+4. **P1-1 composition**, **P1-5 stubs**, **P1-6 zero independent-oracle credit**, **P1-4 fake cost**.
+5. `debug_test` still PASSes through the read-only patch search: the sentence says "debugger" and no
+   effect gate rejects a repair-adjacent verb. Next: an effect gate for *debug/trace/profile*.
+
+The five that were closed were all wiring; the five that remain are equally wiring, and the harness
+in `swe_probe_20261029/` measures them the same way.
