@@ -59,6 +59,76 @@ class TreeSitterSWETests(unittest.TestCase):
             "output_path": "patch.json",
         }
 
+    def test_added_test_invalidates_cached_index_before_selection(self):
+        self.build_index()
+        added = self.repo / "fixture/python/test_new.py"
+        added.write_text("from calc import add\ndef test_new(): assert add(2, 3) == 5\n")
+        with self.assertRaisesRegex(kernel.TreeSitterSWEError, "INDEX_FILESET_STALE"):
+            impact.run({"index_path": "index.json",
+                        "changed_paths": ["fixture/python/calc.py"],
+                        "output_path": "selection.json"}, self.repo)
+        self.assertFalse((self.repo / "selection.json").exists())
+        self.build_index()
+        impact.run({"index_path": "index.json",
+                    "changed_paths": ["fixture/python/calc.py"],
+                    "output_path": "selection.json"}, self.repo)
+        selected = json.loads((self.repo / "selection.json").read_text())
+        self.assertIn("fixture/python/test_new.py", selected["selected_tests"])
+
+    def test_added_source_invalidates_cached_index(self):
+        self.build_index()
+        (self.repo / "fixture/javascript/new.js").write_text("export const fresh = 1;\n")
+        with self.assertRaisesRegex(kernel.TreeSitterSWEError, "INDEX_FILESET_STALE"):
+            kernel.read_index(self.repo, self.repo / "index.json")
+
+    def test_deleted_or_renamed_source_invalidates_cached_index(self):
+        for rename in (False, True):
+            with self.subTest(rename=rename):
+                self.build_index()
+                source = self.repo / "fixture/javascript/math.js"
+                raw = source.read_bytes()
+                destination = source.with_name("renamed.js")
+                try:
+                    if rename:
+                        source.rename(destination)
+                    else:
+                        source.unlink()
+                    with self.assertRaises(kernel.TreeSitterSWEError):
+                        kernel.read_index(self.repo, self.repo / "index.json")
+                finally:
+                    if destination.exists():
+                        destination.unlink()
+                    source.write_bytes(raw)
+
+    def test_new_file_blocks_patch_verification_without_source_changes(self):
+        self.build_selection()
+        source = self.repo / "fixture/python/calc.py"
+        before = source.read_bytes()
+        (source.parent / "new_module.py").write_text("value = 1\n")
+        with self.assertRaisesRegex(kernel.TreeSitterSWEError, "INDEX_FILESET_STALE"):
+            patch.run(self.edit(), self.repo)
+        self.assertEqual(source.read_bytes(), before)
+        self.assertFalse((self.repo / "patch.json").exists())
+
+    def test_duplicate_index_row_is_refused(self):
+        self.build_index()
+        path = self.repo / "index.json"
+        artifact = json.loads(path.read_text())
+        artifact["files"].append(dict(artifact["files"][0]))
+        path.write_text(json.dumps(artifact))
+        with self.assertRaisesRegex(kernel.TreeSitterSWEError, "INDEX_DUPLICATE_PATH"):
+            kernel.read_index(self.repo, path)
+
+    def test_unrelated_report_does_not_invalidate_cached_index(self):
+        self.build_index()
+        (self.repo / "fixture/report.json").write_text("{}")
+        with mock.patch.object(kernel, "parse_file", side_effect=AssertionError("unneeded parse")):
+            artifact = kernel.read_index(self.repo, self.repo / "index.json")
+            rebuilt = self.build_index()
+        self.assertEqual(len(artifact["files"]), 11)
+        self.assertEqual(rebuilt["parsed_file_count"], 0)
+        self.assertEqual(rebuilt["reused_file_count"], 11)
+
     def test_eight_language_index_and_independent_symbol_oracle(self):
         result = self.build_index()
         self.assertTrue(result["output_verified"])

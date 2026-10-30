@@ -344,8 +344,23 @@ def read_index(repo: pathlib.Path, path: pathlib.Path) -> dict[str, Any]:
     rows = artifact.get("files")
     if not isinstance(rows, list) or not rows:
         raise TreeSitterSWEError("INDEX_EMPTY")
+    indexed_paths: set[str] = set()
     for row in rows:
         validate_row(repo, row)
+        name = row["path"]
+        if name in indexed_paths:
+            raise TreeSitterSWEError("INDEX_DUPLICATE_PATH:" + name)
+        indexed_paths.add(name)
+    # Per-row hashes prove freshness only for files the cache already knows.
+    # Reuse the builder's enumeration policy to detect added tests/modules too.
+    # This validates membership, not semantic dependencies or concurrent writes.
+    source_root = safe_path(repo, artifact.get("source_root"), must_exist=True, allow_root=True)
+    current_paths = {relative_path(repo, item) for item in source_files(source_root)}
+    if indexed_paths != current_paths:
+        added = sorted(current_paths - indexed_paths)
+        removed = sorted(indexed_paths - current_paths)
+        raise TreeSitterSWEError("INDEX_FILESET_STALE:added=" + ",".join(added)
+                                 + ";removed=" + ",".join(removed))
     return artifact
 
 

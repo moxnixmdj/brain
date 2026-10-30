@@ -1,0 +1,394 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "SHARED_SOFTWARE_ENGINEERING_TEST_EXECUTION_REUSE_V1_20261029_V1",
+  "action_intent_id": "SHARED_SOFTWARE_ENGINEERING_TEST_EXECUTION_REUSE_V1_20261029_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Adapt the shared Python SWE suite runner to native pytest when needed; preserve stdlib-only execution and fail closed when test semantics cannot be provided. Pin the tested pytest runtime and its dependencies in the existing deterministic SWE kernel requirements. Adapt existing tracing to filter non-project frames so native-framework tracing does not spend its deadline resolving every library line.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "date": "2026-10-29",
+  "canonical_base_commit": "a1f42e955f87850627099be1535f089805313324",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The shared software-engineering suite runner silently omits fixture and parameterized tests, allowing repair, audit, and localization paths to claim success against an incomplete suite.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The shared software-engineering suite runner silently omits fixture and parameterized tests, allowing repair, audit, and localization paths to claim success against an incomplete suite.",
+  "expected_parent_change": "Software-engineering callers sharing suite_argv execute pytest-dependent tests with the actual available framework, retain stdlib execution for compatible tests, and refuse unsupported suites when that framework is unavailable.",
+  "expected_parent_frontier_change": "Software-engineering callers sharing suite_argv execute pytest-dependent tests with the actual available framework, retain stdlib execution for compatible tests, and refuse unsupported suites when that framework is unavailable.",
+  "stop_condition": "Stop when fixture, parameterized, mixed unittest/pytest, unavailable-framework and no-test cases behave truthfully, existing stdlib controls still work, and measured latency and remaining limitations are reported without capability credit.",
+  "selected_route": "ADAPT_SHARED_TEST_EXECUTION_TO_NATIVE_FRAMEWORKS",
+  "route_id": "ADAPT_SHARED_TEST_EXECUTION_TO_NATIVE_FRAMEWORKS",
+  "explicit_user_authorization": "The user asked to reuse solutions already in Brain, tools, repositories or research and do the optimal work as fast as possible for advanced software engineering.",
+  "benchmark_or_family_rank_authority": false,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Highest-leverage candidate among the locally evaluated shared-runner repair routes; not a claim of universal global optimum.",
+  "measured_effect": "Before implementation the shared runner returned 0 for a fixture suite on which native pytest returned 1. After implementation 30 focused regressions pass under pytest 8.4.2 and 9.2.0, and 96 repair/tracing tests pass under each; 55 relevant unittest tests pass without pytest. The hash-pinned SWE kernel installs on the tested Linux/Python 3.11 environment. Two unrelated existing integration contracts fail and are recorded below. Measurements are local, with no capability, terminal, or independent-verification credit.",
+  "falsification_condition": "Any selected failing fixture or parametrized test is missed, unsupported pytest semantics are silently treated as green without pytest, a previously working stdlib control regresses, or the reported counts disagree with observed execution.",
+  "load_bearing_primary": {
+    "canonical_base_commit": "a1f42e955f87850627099be1535f089805313324",
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/1000000",
+    "success_probability_lcb": "1/1000",
+    "wall_clock_cost_ub": 7200,
+    "interpretation": "Conservative planning placeholders, not measured probabilities or evidence of obligation discharge: honest test execution is a prerequisite for evaluating software changes.",
+    "measured_effect": "A native pytest fixture failure that previously returned 0 now returns nonzero, and a real fixture-based repair passes an independent native pytest replay. The local test and latency results are detailed in local_verification_summary; no obligation discharge or acceptance credit is claimed.",
+    "stop_condition": "Stop when fixture, parameterized, mixed unittest/pytest, unavailable-framework and no-test cases behave truthfully, existing stdlib controls still work, and measured latency and remaining limitations are reported without capability credit."
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+      "canonical/tests/test_shared_software_test_execution_v1.py",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
+      "canonical/tests/test_software_repair_loop_repairs_seeded_bugs_v1.py",
+      "requirements/software_engineering_kernel_v1.txt"
+    ],
+    "route_class": "ADAPT",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "a1f42e955f87850627099be1535f089805313324",
+    "real_outcome": "Repair and analysis must execute the real requested software test cases rather than verify an incomplete suite.",
+    "required_capability": "Faithful, efficient native test-framework execution and explicit refusal when unavailable.",
+    "obs_goal": {
+      "real_outcome": "Truthful test execution for real software engineering.",
+      "proxy_goals_deleted": [
+        "TEST_COUNT_OR_EXIT_ZERO_WITHOUT_TEST_EXECUTION"
+      ],
+      "surviving_necessity": "Run framework-supported tests and preserve existing safe stdlib operation."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "Existing suite_argv, unittest loader, native pytest paths, dynamic tracing callers, and repair scorers.",
+      "external_existing_routes_checked": "pytest documentation, package metadata, and community fixture incompatibility.",
+      "capability_work_deleted": "Do not invent a pytest replacement or create a new registered capability.",
+      "surviving_gap": "Native pytest behavior is not connected to the shared test-derived route. The existing trace callbacks also resolve filesystem paths for every framework line and can time out before a simple fixture test completes."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "The failure is in a shared runner used by multiple SWE callers.",
+      "delete_bypass_substitute_options": "Delete loses stdlib support; explicit test_argv bypass does not fix automatic callers; native pytest is already available in suitable environments.",
+      "surviving_causal_blocker": "The shared software-engineering suite runner silently omits fixture and parameterized tests, allowing repair, audit, and localization paths to claim success against an incomplete suite."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Preserve fast stdlib execution where applicable and adapt shared execution to native pytest when required.",
+        "Filter non-project frames at trace entry and cache path decisions, preserving existing project events without tracing framework lines.",
+        "Include hash-pinned pytest in the existing optional SWE kernel installation, without making stdlib-only execution depend on it.",
+        "Native pytest for all paths loses stdlib-only execution.",
+        "Caller-only explicit test_argv leaves default callers unsafe."
+      ],
+      "losing_routes_reason": "Observed fixture omission and missing-system-pytest make both unconditional custom execution and unconditional pytest substitution insufficient.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Run actual pytest and stdlib on passing, failing, parametrized and fixture suites, including no-pytest controls; compare outcomes and executed effects. Exercise actual fault and provenance traces with native pytest, check observed source events and traceback, and measure latency separately from correctness."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "Remove the silent skip of pytest cases in the shared runner.",
+      "adjacent_capabilities_absorbed": "Preserve repair, fault-localization, provenance, audit and existing stdlib routes that use suite_argv.",
+      "fresh_reuse_plan": "Adapt the existing shared runner and reuse pytest already used by bound adapters; do not add a registry capability. Adapt the two existing trace callbacks rather than adding a new instrumentation layer."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "Reuse one baseline probe, the native pytest implementation, and shared runner consumers rather than patching every caller. Cache project-path classification per source filename in each traced child.",
+      "search_stop_decision": "Proceed with the narrow candidate among checked routes; reassess on regression or execution failure.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "ADAPT",
+      "SUBSTITUTE",
+      "COMPOSE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "SILENT_FIXTURE_SKIP"
+    ],
+    "selected_surviving_route": "ADAPT_SHARED_TEST_EXECUTION_TO_NATIVE_FRAMEWORKS",
+    "why_selected_route_is_fastest_sufficient": "One shared adaptation covers many existing callers and avoids loading pytest for simple compatible stdlib suites; claim is limited to evaluated routes.",
+    "expected_parent_level_state_change": "Software-engineering callers sharing suite_argv execute pytest-dependent tests with the actual available framework, retain stdlib execution for compatible tests, and refuse unsupported suites when that framework is unavailable.",
+    "stop_condition": "Stop when fixture, parameterized, mixed unittest/pytest, unavailable-framework and no-test cases behave truthfully, existing stdlib controls still work, and measured latency and remaining limitations are reported without capability credit.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-29T20:43:38Z",
+      "max_age_hours": 12,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "The shared runner and trace callers are in canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py and the dynamic fault-localizer; issue-to-PR and diff-apply already execute native pytest."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://docs.pytest.org/en/6.2.x/fixture.html documents fixture and parameterized execution; https://docs.pytest.org/en/7.1.x/reference/reference.html documents pytest.main and plugin objects."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Direct local baseline: shared runner returned 0 while native pytest returned 1 for a failing tmp_path fixture; twelve pure-unittest runs had 40.57 ms median. PyPI https://pypi.org/pypi/pytest/json returned 9.2.0; local audit installs include 8.4.2 and 9.2.0."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://stackoverflow.com/questions/63720118/pytest-parametrize-i-am-getting-missing-required-positional-arguments illustrates runner/fixture incompatibility."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Search Brain suite_argv consumers and existing native test execution."
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "pytest fixture and parameterization framework documentation."
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "pytest.main in-process test execution and plugin reporting."
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Inspect current pytest release metadata on PyPI and local interpreter availability."
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "unresolved_scope_note": "No unresolved dominator among the routes evaluated for this narrow shared-runner defect; this is not a global optimality claim.",
+      "selected_route": "ADAPT_SHARED_TEST_EXECUTION_TO_NATIVE_FRAMEWORKS",
+      "incumbent_route": "KEEP_CUSTOM_RUNNER",
+      "challenger_routes": [
+        {
+          "route": "KEEP_CUSTOM_RUNNER",
+          "evidence": [
+            "Direct baseline skips a failing tmp_path test and reports zero."
+          ],
+          "qualification_evidence": [
+            "Local subprocess comparison with native pytest"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "MISSES_FIXTURES",
+            "CAPABILITY_STRENGTH": "INCOMPLETE",
+            "WALL_CLOCK": "LOWER_FOR_SIMPLE_TESTS",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "FALSE_PASS",
+            "VERIFIABILITY": "NATIVE_PYTEST_DISAGREES"
+          }
+        },
+        {
+          "route": "REPLACE_EVERY_TEST_WITH_PYTEST",
+          "evidence": [
+            "The current shared runner supports stdlib-only deployments and scripts; global replacement would make them depend on pytest and increase startup cost."
+          ],
+          "qualification_evidence": [
+            "Code inspection and local interpreter without pytest"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "CAN_EXECUTE_NATIVE_PYTEST",
+            "CAPABILITY_STRENGTH": "LOSES_STDLIB_ONLY_ROUTES",
+            "WALL_CLOCK": "MORE_STARTUP_FOR_SIMPLE_SUITES",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "DEPENDENCY_UNAVAILABLE_ON_BASE_INTERPRETER",
+            "VERIFIABILITY": "DIRECT_SUBPROCESS_COMPARISON"
+          }
+        },
+        {
+          "route": "REQUIRE_EVERY_CALLER_TO_SUPPLY_TEST_ARGV",
+          "evidence": [
+            "Eight shared callers derive test commands, and existing invocation already supports explicit argv."
+          ],
+          "qualification_evidence": [
+            "Repository search for suite_argv consumers"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "CORRECT_ONLY_WHEN_CALLER_KNOWS_FRAMEWORK",
+            "CAPABILITY_STRENGTH": "FAILS_AUTOMATIC_GOALS",
+            "WALL_CLOCK": "MANY_BINDINGS",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "OMITS_DEFAULT_PATH",
+            "VERIFIABILITY": "CODE_INSPECTION"
+          }
+        }
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-10-29T20:43:38Z",
+        "max_age_hours": 2,
+        "selected_route": "ADAPT_SHARED_TEST_EXECUTION_TO_NATIVE_FRAMEWORKS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3 standard library",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-29T20:43:38Z",
+            "evidence": [
+              "Python 3.11 executes the current stdlib runner."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "pytest when a selected suite requires pytest features",
+            "kind": "CODE_ARTIFACT",
+            "required": false,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-29T20:43:38Z",
+            "evidence": [
+              "Audit target environments contain pytest 8.4.2 and 9.2.0; a missing runtime framework will be reported, not silently treated as success."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-10-29T20:43:38Z",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "CONSTRUCTIVE_GAP_ONLY__LOCAL_REGRESSION_MEASUREMENT__NO_ACCEPTANCE_CREDIT",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SHARED_SOFTWARE_ENGINEERING_TEST_EXECUTION_REUSE_V1_20261029_V1",
+      "falsifier_id": "SHARED_SOFTWARE_ENGINEERING_TEST_EXECUTION_REUSE_V1_20261029_V1_FALSIFIER",
+      "decisive_question": "Does the shared runner execute and correctly report the real fixture and parameterized tests while preserving the stdlib-only route?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+          "git_blob_sha": "bf83d6c3ef40d35cf20ea4c7c6ebc75621e66c09"
+        },
+        {
+          "path": "canonical/tests/test_python_test_guided_patch_search_v1.py",
+          "git_blob_sha": "0096d9698069dd25abad7fd27dc2c4d6efe128e5"
+        }
+      ]
+    }
+  },
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "local_verification_summary": {
+    "scope": "Local subprocess, repair, audit, trace and package-install observations; not a full-suite or capability admission result.",
+    "regressions_pytest_8_4_2": "30 passed with plugin autoload disabled; the same 30 passed with the installed SWE kernel and its normal plugin autoload.",
+    "regressions_pytest_9_2_0": "30 passed with plugin autoload disabled.",
+    "no_pytest_regressions": "30 total: 17 passed, 13 framework-dependent tests skipped; python -S controls exercise missing-pytest refusal.",
+    "repair_family_pytest_8_4_2": "96 passed.",
+    "repair_family_pytest_9_2_0": "96 passed, 4 subtests passed.",
+    "stdlib_repair_and_trace": "85 unittest tests total: 72 passed, 13 framework-dependent tests skipped; includes 55 repair/tracing tests.",
+    "audit_measurement_delegation_group": "57 passed, 2 failed; the failures were also reproduced in isolation.",
+    "remaining_integration_failures": [
+      "test_python_repair_apply_verified_v1.py::RepairApplyVerifiedTests::test_missing_test_paths_is_refused_rather_than_guessed expects refusal while the unchanged adapter discovers test files.",
+      "test_suite_argv_delegation_is_followed_v1.py::TestDeepDelegationIsFollowed::test_the_shallow_delegator_still_binds receives test-named source_paths but no test_paths; goal_compiler and the test are unchanged."
+    ],
+    "execution_isolation_note": "A concurrent run of the same existing seeded benchmark file collided over its fixed temporary directories; both versions were rerun sequentially and are reported above.",
+    "package_install": "The complete SWE requirements installed with --require-hashes on Linux/Python 3.11; pytest 8.4.2 and tree-sitter modules imported. Conditional Windows/Python 3.10 dependencies were not executed.",
+    "stdlib_latency": "15 warmed subprocesses: 52.83 ms median, 56.61 ms p90, 87.66 ms max. The earlier pre-change median was 40.57 ms in a separate run; this is not a controlled same-load comparison.",
+    "pytest_latency": "15 interleaved failing-fixture subprocesses: shared runner 235.31 ms median versus direct pytest 233.67 ms, with plugin autoload disabled.",
+    "trace_latency": "Five native-fixture failing traces: fault-localizer 360.63 ms median (5 project events); provenance 328.15 ms median (9 events). An earlier pre-optimization trace took 22.56 s under concurrent load, so those observations are not a controlled speedup estimate.",
+    "limitations": [
+      "Static detection cannot prove it recognizes every dynamically declared pytest feature or third-party plugin; callers can supply explicit test_argv.",
+      "The no-passing-oracle and collection checks contribute a synthetic suite error to the counted summary.",
+      "Passing bound tests is not proof against overfitting, and the subprocess test runner is not an operating-system sandbox.",
+      "No full-suite result, formal capability credit, or globally optimal performance is claimed."
+    ]
+  }
+}

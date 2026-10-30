@@ -146,3 +146,29 @@ def check(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -> No
     reason = violation(root, args, capability_id)
     if reason:
         raise WriteAuthorityViolation(reason)
+
+
+def check_report(root: pathlib.Path, destination: Any, inputs: Any) -> None:
+    """Protect explicit report roles, even when the producer edits source.
+
+    Unlike ``check``, this API is called only where the adapter KNOWS it writes
+    a report, not transformed source. Compare filesystem identity as well as
+    resolved names: hard links can share bytes without sharing a pathname.
+    This preflight is not a lock or an OS sandbox; concurrent path replacement
+    still requires isolated, owned workspaces.
+    """
+    root = pathlib.Path(root).resolve()
+    dest = _as_path(root, str(destination))
+    if dest is None:
+        raise WriteAuthorityViolation("REPORT_DESTINATION_INVALID")
+    for raw in inputs:
+        source = _as_path(root, str(raw))
+        if source is None:
+            continue
+        try:
+            aliases = dest == source or (dest.exists() and source.exists()
+                                         and dest.samefile(source))
+        except OSError as exc:
+            raise WriteAuthorityViolation("REPORT_IDENTITY_UNREADABLE") from exc
+        if aliases:
+            raise WriteAuthorityViolation("REPORT_OVERWRITES_INPUT:" + str(source))

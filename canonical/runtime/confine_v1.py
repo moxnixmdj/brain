@@ -58,7 +58,14 @@ address space, file size, process count and descriptors are capped with
 rlimits. Without those, filesystem confinement alone would still let
 one program take the whole machine by forking or allocating.
 
-Limits that remain, stated: this is not a syscall filter. A confined
+Workload capabilities are dropped and no_new_privs is set before execution;
+failed mount setup aborts before the workload runs. This reuses the privilege
+boundary in zero_ambient_namespace_launcher_v1 rather than relying on chroot.
+
+Limits that remain, stated: environment variables are inherited, timeout cleanup
+does not yet guarantee descendant termination, and rlimits are not aggregate
+cgroup budgets. Callers must not pass secrets or treat this as complete hostile
+code containment. This is not a syscall filter. A confined
 program can still execute anything the interpreter can do against the
 operating system it can see, and seccomp -- the thing that would
 actually restrict syscalls -- is not attempted here. What is enforced
@@ -82,6 +89,9 @@ _MOUNTS = ("/usr", "/bin", "/lib", "/lib64")
 _HELPER = r'''
 import os, subprocess, sys
 BASE = sys.argv[1]; PROJ = os.path.realpath(sys.argv[2]); SCRIPT = sys.argv[3]
+# A virtualenv executable path may be outside the mounted system tree. Resolve
+# its interpreter symlink before chroot; this does not expose venv packages.
+PYTHON = os.path.realpath(sys.executable)
 NETWORK = len(sys.argv) > 4 and sys.argv[4] == "1"
 # The program must live INSIDE the chroot. Referencing it by its real
 # path fails: after chroot that path no longer exists, and the run dies
@@ -92,17 +102,16 @@ def m(*a):
     r = subprocess.run(["mount"] + list(a), capture_output=True, text=True)
     if r.returncode:
         sys.stderr.write("mount failed %s: %s\n" % (a, r.stderr.strip()))
-        return False
+        sys.exit(90)
     return True
-if not m("-t", "tmpfs", "none", BASE):
-    sys.exit(90)
+m("--make-rprivate", "/")
+m("-t", "tmpfs", "none", BASE)
 for d in ("project", "work"):
     os.makedirs(BASE + "/" + d.lstrip("/"), exist_ok=True)
 for s in {s for s in __MOUNTS__ if os.path.isdir(s)}:
     os.makedirs(BASE + s, exist_ok=True)
     m("--bind", s, BASE + s)
-    subprocess.run(["mount", "-o", "remount,ro,bind", BASE + s],
-                   capture_output=True)
+    m("-o", "remount,ro,bind", BASE + s)
 m("--bind", PROJ, BASE + "/project")
 # A network namespace is not enough on its own. With no /etc in the
 # chroot there is no resolv.conf, so every name fails to resolve and a
@@ -122,7 +131,7 @@ if NETWORK:
 # Only now, with the project separately mounted, is the root made
 # read-only. Order matters: doing it earlier would freeze the project
 # too, which is exactly how the withdrawn version destroyed work.
-subprocess.run(["mount", "-o", "remount,ro,bind", BASE], capture_output=True)
+m("-o", "remount,ro,bind", BASE)
 # Copied only NOW, after every mount. Earlier it was written into BASE
 # and then the tmpfs was mounted over BASE, hiding it -- the run died
 # with "can't open file /program.py", which reads like the program
@@ -155,7 +164,12 @@ def _limits():
         except Exception:
             pass
 
-r = subprocess.run([sys.executable, "/work" + INSIDE],
+# Reuse the zero-ambient launcher pattern. Namespace uid 0 otherwise retains
+# CAP_SYS_ADMIN and can undo the read-only mounts. Drop capabilities BEFORE
+# workload exec, and prevent gaining privileges through later execs.
+r = subprocess.run(["setpriv", "--no-new-privs", "--bounding-set=-all",
+                    "--inh-caps=-all", "--ambient-caps=-all",
+                    PYTHON, "/work" + INSIDE],
                    capture_output=True, text=True, preexec_fn=_limits)
 sys.stdout.write(r.stdout or "")
 sys.stderr.write(r.stderr or "")
@@ -205,6 +219,11 @@ def run(program: str, root: str, timeout: int = 300,
     if not Path(root).is_dir():
         return {"schema": SCHEMA, "verdict": "INDETERMINATE",
                 "detail": f"{root!r} is not a directory", "exit_status": None}
+    missing = [name for name in ("mount", "setpriv") if shutil.which(name) is None]
+    if missing:
+        return {"schema": SCHEMA, "verdict": "INDETERMINATE",
+                "detail": "confinement prerequisite missing: " + ",".join(missing),
+                "exit_status": None}
     if not available():
         return {"schema": SCHEMA, "verdict": "INDETERMINATE",
                 "detail": "confinement unavailable: "

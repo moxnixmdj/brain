@@ -8674,10 +8674,13 @@
    "action_template": {
     "args": {
      "capability_id": "software.review.gate.composer.v1",
+     "anchor_path": "${input.anchor_path}",
+     "diff_path": "${input.diff_path}",
+     "bench_path": "${input.bench_path}",
      "output_path": "${input.output_path}"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "verified",
      "type": "field_equals",
      "value": true
     },
@@ -8701,7 +8704,7 @@
     "mutation"
    ],
    "limitations": [
-    "Typed 6-gate fan-in after choreography: static+type+coverage+perf+security+mutation must all PASS. Fixes requires=[] fail-open. Deterministic 0 model $0."
+    "Executes six existing Python diff gates in owned scratch paths; full acceptance requires complete PASS outcomes bound to one diff. Needs an anchor, applicable Python diff, benchmark and installed analyzer toolchain. Timing is not deterministic; scratch copies are not an OS sandbox."
    ],
    "platforms": [
     "linux",
