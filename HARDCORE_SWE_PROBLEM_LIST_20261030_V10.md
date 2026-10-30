@@ -244,9 +244,21 @@ number* instead of refusing (cheap, honest, useful).
 *Fix:* the diff-coverage/mutation/security/perf gates already take a diff; a "change set" review that
 runs all four and reports them together is composition, not new capability.
 
-**P-14 · 19 s per caller question, no index cache (S5).** Measured twice today. A repository-scale
-question re-parses everything every time. *Fix:* one content-addressed index keyed by
-(path, mtime, size) — the repo already writes content-addressed artifacts.
+**P-14 · Repository-scale questions had no memory (S5) — CLOSED this round.** Measured on
+`canonical/runtime` (2 255 modules, 596 039 references, 97 623 definitions): the same question on the
+same unchanged tree cost **19.4 s then 16.3 s**, and through the real front door **18 166 ms, 2 397 ms,
+2 390 ms**. The index now keeps the previous artifact's module rows and re-parses only files whose
+bytes changed — the rule the tree-sitter incremental index next door has carried since it was written
+— and it verifies each reuse against the source sha, so a cache hit cannot be a different answer (the
+artifact is byte-identical cold and warm). One edited file re-parses exactly one file. Generated trees
+(`build/`, `__pycache__`, …) are no longer indexed as source.
+*Remaining lever:* the artifact itself is 167 MiB and 596 039 of its rows are raw references; rendering
+it costs ~6 s, so a *changed* tree still pays for a full re-render. The next win is an artifact shaped
+like the question (calls + definitions only), not a faster renderer.
+
+**P-14b · The 167 MiB artifact.** Only `symbols`, `callers_of`, `modules[*].definitions` and
+`modules[*].calls` are read by the consumers in this repo; the 596 039 `references` rows are 60 % of
+the bytes and are re-materialised on every change. *Fix:* measure the readers, then drop or page them.
 
 **P-15 · 27 of 61 refusals are anonymous; nothing learns from one (S5).** The refusal names a class,
 not the capability that would have served it, and no queue records it. *Fix:* refusals already carry
@@ -297,8 +309,10 @@ as P-14, with references.
 | a wrong row answering a repo question | **261 ms** — faster than the right answer | — |
 
 The machine is fast where the work is small and slow exactly where the repository is real, and the
-one thing it does *fast* at scale is answer with the wrong row. Fixing P-14 and P-01 in that order
-turns both halves of that sentence around.
+one thing it does *fast* at scale used to be answering with the wrong row. Both halves of that
+sentence moved this round: the wrong-kind refusals (§2.4) removed the fast wrong answer, and the index
+remembers what it read — **18.2 s → 2.4 s** for the same repository-scale question, byte-identical
+answer, zero new dependencies.
 
 ---
 
@@ -332,6 +346,7 @@ python3 -m pytest -q canonical/tests/test_a_report_is_never_written_over_its_sub
 #   "Split the function mul in <pkg>/calc.py into smaller functions."
 #   "Run the javascript test suite in <dir-with-no-js>."
 #   "Find every caller of the function load_verified_registry in canonical/runtime."
+python3 -m pytest -q canonical/tests/test_the_index_remembers_what_it_already_read_v1.py
 python3 canonical/runtime/verify_brain_unified_model_v1.py          # 33/33
 ```
 
@@ -343,8 +358,9 @@ python3 canonical/runtime/verify_brain_unified_model_v1.py          # 33/33
    the general declaration check (see P-01).
 2. **P-02 + P-03 + P-15** — derivations and contracts for the dead rows, and refusals that name
    them; this converts the census into a work queue.
-3. **P-14 + P-20 + P-24** — one cached, content-addressed index; it makes "fast" true at scale and
-   speeds up everything else.
+3. ~~**P-14**~~ — **done this round** (incremental reuse, verified per source sha). Next: **P-14b**
+   (the 167 MiB artifact) and **P-20/P-24** (share the same index across the session and give it
+   references).
 4. **P-04 + P-05 + P-09** — feature work, test authoring and the six missing refactors: the actual
    engineering.
 5. **P-07 + P-08** — git and the second language.
