@@ -1738,7 +1738,88 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
             continue
         errors.append(code + ":" + (cid or "UNNAMED"))
     errors.extend(stated_application_errors(text, entry))
+    errors.extend(_shape_errors(text, cid, entry, surface))
     return errors
+
+
+# ---------------------------------------------------------------------------------------------
+# THREE SHAPES THAT WERE CERTIFYING WORK NOBODY DID.  All three were measured on 2026-10-30 on
+# ordinary sentences, each returning pass=True with the world unchanged.  The table above could
+# not catch any of them, because each one is not "this effect is unserved" but "this row is the
+# wrong KIND of row for this sentence" -- and a wrong kind of row satisfies its own ``expect``
+# field perfectly well.
+#
+#   1. "Split the function mul in <pkg>/calc.py into smaller functions."
+#        -> python.source.audit.ast (a reader), pass=True, calc.py byte-identical
+#   2. "Find every caller of the function load_verified_registry in canonical/runtime."
+#        -> software.repair.choreograph.crossfile.v1 (a MUTATOR, matching the keyword
+#           "call-graph"), pass=True in 261 ms -- 74x faster than the correct row's 19 259 ms.
+#           The wrong answer was the fast answer.
+#   3. "Run the javascript test suite in <dir>."  (dir contains no JavaScript at all)
+#        -> python.repository.acceptance.measure.v1 (a PYTHON acceptance measurement), pass=True
+#
+# The rules below are about kinds, and each is drawn from declarations the registry already
+# carries: a transform row declares its transform; a mutator declares that it writes; a
+# single-language row names its language.  Nothing here invents a fact about any row.
+# ---------------------------------------------------------------------------------------------
+
+# A CODE TRANSFORM IS NOT A CODE READ.  "split", "inline" and "decompose" are structural edits;
+# the rows that do structural edits declare them in their own ids/provides
+# (``python.refactor.extract_function.v1``, ``...rename_symbol``, ``...rename_parameter``), and a
+# row that merely inventories the tree declares none of them.  A capability that really splits a
+# function is admitted by the same declaration the moment one is bound.
+_TRANSFORM_REQUEST_RE = re.compile(
+    r"\b(?:split|inline|decompose)\b[^.\\n]{0,40}\b(?:function|method|class|module)\b"
+    r"|\b(?:function|method|class)\b[^.\\n]{0,40}\binto (?:smaller|several|multiple|two)\b"
+    r"|\bextract the (?:method|function|class)\b", re.IGNORECASE)
+_TRANSFORM_SURFACE_RE = re.compile(
+    r"\b(?:split|inline|decompos\w*|extract_function|extract\.function)\b", re.IGNORECASE)
+
+# A QUESTION IS NOT ANSWERED BY SOMETHING THAT WRITES.  Measured shape 2 above: a repair
+# choreographer matched the words "call graph" in its own keyword list and certified a read-only
+# caller question without producing a caller map.  A read-only sentence is answered by a row that
+# declares a READING (index, resolve, audit, coverage, mutation, security, triage...); a row whose
+# provides declare a patch, a repair or an applied write is not.
+_READ_ONLY_REQUEST_RE = re.compile(
+    r"^\s*(?:find|list|show|explain|tell|which|who|what|where|when|why|count|summar\w+|"
+    r"describe|identify|report|check whether|is there|are there)\b", re.IGNORECASE)
+_MUTATION_PROVIDES_RE = re.compile(
+    r"\b(?:patch|repair|applied|apply|choreograph\w*|rewr(?:ite|ote)|write)\b", re.IGNORECASE)
+_READ_SURFACE_RE = re.compile(
+    r"\b(?:index|resolve|audit|inventory|callers?|symbols?|coverage|mutation|security|triage|"
+    r"impact|select\w*|measure\w*|report\w*|analy[sz]\w*|scan|explain|summar\w+)\b",
+    re.IGNORECASE)
+
+# A PYTHON ROW CANNOT ANSWER A JAVASCRIPT REQUEST.  Shape 3 above.  Two exemptions, both drawn
+# from the row's own declaration: a row that names the stated language serves it, and a row that
+# runs an arbitrary stated command line (``shell.command.run``) is not a single-language row --
+# ``npm test`` is exactly how a JavaScript suite is run.
+_LANGUAGE_OF_GOAL_RE = re.compile(
+    r"\b(javascript|typescript|js|ts|node|npm|go|golang|rust|cargo|java|gradle|maven|"
+    r"ruby|c\+\+|cpp|clang)\b", re.IGNORECASE)
+_LANGUAGE_SURFACE_RE = re.compile(
+    r"\b(?:javascript|typescript|js|ts|node|npm|go|golang|rust|cargo|java|gradle|maven|ruby|"
+    r"c\+\+|cpp|clang|command)\b", re.IGNORECASE)
+_PYTHON_ONLY_RE = re.compile(r"\bpython\b", re.IGNORECASE)
+
+
+def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -> list[str]:
+    """Refuse the wrong KIND of row -- reader-for-a-transform, writer-for-a-question, python-for-js."""
+    out: list[str] = []
+    if _TRANSFORM_REQUEST_RE.search(text) and not _TRANSFORM_SURFACE_RE.search(
+            " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])):
+        out.append("STATED_CODE_TRANSFORM_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
+    provides = " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])
+    if (_READ_ONLY_REQUEST_RE.search(text)
+            and _MUTATION_PROVIDES_RE.search(provides)
+            and not _READ_SURFACE_RE.search(provides)):
+        out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
+    language = _LANGUAGE_OF_GOAL_RE.search(text)
+    if (language and _PYTHON_ONLY_RE.search(surface)
+            and not _LANGUAGE_SURFACE_RE.search(surface)):
+        out.append("STATED_LANGUAGE_NOT_SERVED_BY_CAPABILITY:%s:%s"
+                   % (language.group(1).lower(), cid or "UNNAMED"))
+    return out
 
 
 def _promised_source_files(goal: str) -> list[str]:
