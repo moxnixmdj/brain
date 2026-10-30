@@ -1,6 +1,6 @@
 # All the problems — the hardcore software-engineering census
 
-**Revision 5.** Measured on `6d172a8` (main), 2026-10-30. Every number below is a measurement from
+**Revision 6.** Measured on `814ae41` (main), 2026-10-30. Every number below is a measurement from
 this tree, not an estimate. §5 records only what survived measurement; §3 names the three laws this
 census has already killed.
 
@@ -147,6 +147,41 @@ exists**: git diff, the named subtree, the registered indexer.
 
 **C. Owner runs and produces no effect.** Five common verbs end as `shell.command.run`.
 
+### 2.3 The analysis lane is not engineering. It is admission. *(new this revision)*
+
+The three families the census scores — *never executed*, *hardcoded secret*, *quadratic* — were
+prototyped against the **existing** `python.source.symbols.index.ast` artifact and the existing
+`callers_of` map it already computes. No new parser, no new primitive:
+
+| query | answer on the census fixture | census oracle | measured |
+|---|---|---|---|
+| which function is never executed | `['audit_total']` | `audit_total` | **1.7 ms** |
+| find the hardcoded AWS key | `app/aws.py:1` | `app/aws.py` | **0.2 ms** |
+| which function is quadratic | `make_dupes` (nesting 2) | ✓ | **0.5 ms** |
+
+All three correct on the first run once the scope was read from the sentence. **1.7 ms, 0.2 ms,
+0.5 ms** against a task family this document has been describing as missing capability since
+revision 2. It is not missing capability. It is missing **admission**: the query exists, the artifact
+exists, and there is no registry row that says the machine can be asked for it.
+
+That moves the bottleneck into the one lane nobody has been looking at, and §2.4 is why.
+
+### 2.4 Nothing in the machine can author a capability about the machine *(new this revision)*
+
+`auto_capability_acquisition.py` routes to four supplier classes: `npm`, `pypi`, `apt`, and a
+content-addressed Python source tree. That is the right machinery for *"give me a barcode decoder"* —
+someone else already wrote it and it can be fetched and verified.
+
+It is structurally incapable of closing §1.1. *"Which function is never executed by these tests"*,
+*"which of these functions is quadratic"*, *"is this call reachable from untrusted input"* are
+**statements about the tree we already hold**. No package supplies them, because the subject is the
+caller's own code. The acquisition engine has no path for that class of gap, and no other component
+does either: 325 missions and 419 rows were all authored by hand.
+
+**This is the real answer to "most advanced software engineer."** The machine can acquire capabilities
+about the *world*. It cannot yet acquire capabilities about *the program in front of it* — which is
+the entire job. Every one of the eleven families in §1.1 sits in that hole, and so will the twelfth.
+
 **D. False success — a read-shaped capability satisfies a write-shaped request.** One instance closed
 this week (`add_parameter`: the source-change promise now reads the edit verbs, not just
 `repair|fix|patch|correct`). The class remains open: nothing declares what *kind* of effect a row has.
@@ -188,17 +223,11 @@ one word with it — a PDF converter, a test auditor, a repo measurer. **An owne
 `security` ends the tie by itself.** Until these families exist, every ranking rule is arithmetic on
 noise.
 
-**② The analysis lane — the only item that raises the pass count.** Three families from §1.1 that the
-census oracle already scores, each answerable as a **query over the symbol index the machine already
-builds** (14.8 s for 2,254 files), not as a new parser:
-- *which function is never executed by the tests* — a defined symbol whose name appears in no file
-  under the test root;
-- *find the hardcoded secret* — a scan over the same byte range for credential-shaped literals;
-- *which function is quadratic* — nesting depth over the index's own line spans.
-
-Each is ≤ 60 lines against the existing index, and each answers in ≤ 60 ms. Measured baselines for the
-same jobs stand at 1.4 ms (taint scan), 52 ms (tree-wide rename), 159 ms (mutation, 2/4), 180 ms
-(bisect, exact commit).
+**② The analysis lane — measured, and it is admission, not engineering (§2.3).** Three queries, run
+against the artifact the machine already builds, returned the right answer on the census fixtures in
+**1.7 ms / 0.2 ms / 0.5 ms**. What is missing is a registry row plus a verification receipt — the
+existing lane (`capability_receipt_lane_v1.py`, 325 missions) already defines how a row is admitted.
+This is the cheapest item on the list and the only one that raises the pass count.
 
 **③ Derive the intermediate artifact (21 rows, §2.2).** `diff_path` = the tree's `git diff`;
 `anchor_path`/`worktree_path` = the named root; `index_path` = the registered indexer. The mechanism
@@ -214,6 +243,13 @@ identity, four times), then diagnosis (`git bisect run`, 180 ms), then concurren
 
 **⑥ The referee (class H).** Put the ordinary-sentence suite in CI as a ratchet against a recorded
 baseline. It is not the most interesting item and it is the reason a regression shipped this week.
+
+**⑦ The acquisition hole (§2.4).** Once ①–⑥ exist, the question that decides whether this machine is
+an *employee* or a *tool* is whether it can author its own next capability about the code in front of
+it. The pieces all exist — 325 missions as templates, `capability_receipt_lane_v1` as the admission
+gate, `_states_an_executable_form` as the door's honesty rule. Nothing connects "a family with zero
+owners" to "a mission, an adapter and a receipt". That connector is the last problem on this list and
+the largest.
 
 ---
 
