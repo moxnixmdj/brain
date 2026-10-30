@@ -262,6 +262,30 @@ def _extract_goal_argument(goal):
 
 def _context_path_for_key(key, context_paths):
     stem=key[:-5].lower() if key.endswith("_path") else key.lower()
+    if str(key).lower().endswith(("_root","_dir")):
+        # A scope slot names a DIRECTORY, and this helper only ever answered
+        # for file-shaped keys -- so every source_root slot of a clause that
+        # named no path fell past inheritance and was completed from the tool's
+        # own working directory.  A named path that carries a suffix is a file,
+        # so its directory is the scope; a named path with no suffix IS the
+        # directory.  Purely syntactic: no filesystem, no cwd, no guess.
+        # A DIRECTORY the request named outranks the parent of an artifact it
+        # produced: ``context_paths`` carries both (the compound loop appends
+        # every step's output), and taking the most recent entry made a scope
+        # resolve to the parent of a report file -- measured, source_root
+        # "canonical/astra_runtime/tmp" for a clause about one fixture.
+        for raw in reversed(list(context_paths or [])):
+            text=str(raw or "").strip()
+            if text and not pathlib.PurePosixPath(text.replace("\\","/")).suffix:
+                return text
+        for raw in reversed(list(context_paths or [])):
+            text=str(raw or "").strip()
+            if not text:
+                continue
+            parent=str(pathlib.PurePosixPath(text.replace("\\","/")).parent)
+            if parent not in ("",".",".."):
+                return parent
+        return None
     suffixes={
         "markdown":{".md",".markdown"},
         "json":{".json"},
@@ -729,6 +753,15 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if len(files)==1 and files[0][1].parent!=rr and rr in files[0][1].parent.parents:
                     result[key]=str(files[0][1].parent.relative_to(rr))
                     continue
+            # The request's own world answers a scope slot too: a compound
+            # sentence's later clause names no directory ("... so they pass"),
+            # and before this hook every such slot fell through to a scan of
+            # the tool's working directory -- measured, source_root
+            # "canonical/tests" inside a sentence about a user fixture.
+            context_scope=_context_path_for_key(key,context_paths)
+            if context_scope is not None and (root_path:=pathlib.Path(root)/context_scope).is_dir():
+                result[key]=context_scope
+                continue
             role_bound=_path_named_by_role(goal,stem,root)
             if role_bound is not None:
                 rp=(rr/role_bound).resolve()
@@ -863,7 +896,160 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     return result
 
 
-def _complete_inputs_via_world_binding(goal, root, cid, entry):
+_REFERENT_PLACEHOLDER_SUFFIXES = ("_path", "_paths", "_root", "_dir", "_file",
+                                 "_worktree", "_anchor", "_manifest")
+
+
+def _is_output_placeholder(key):
+    key = str(key)
+    return key == "output_path" or key.startswith("output")
+
+
+def _is_referent_placeholder(key):
+    """True when this slot NAMES a place (a file, a tree, an artifact).
+
+    The same law the rename binder enforces with ``_is_referent_key``: a
+    referent is stated, or it is derived from a stated one -- it is never
+    defaulted.  A harness constant may be defaulted; a place may not.
+    """
+    key = str(key or "")
+    return key.endswith(_REFERENT_PLACEHOLDER_SUFFIXES) and not _is_output_placeholder(key)
+
+
+def _referents_inside(value, world, root):
+    """True when every referent in `value` lies in the world the request named.
+
+    "Inside" is either direction of containment: the value is under a named
+    path, or it is an ancestor of one.  A sentence that names `<b>/tests`
+    therefore permits `<b>/tests` itself and `<b>` (the tree that holds it) --
+    and nothing else.  `canonical/tests` and `.` are both refused, which is
+    exactly what the measured defects were.
+    """
+    try:
+        rootp = pathlib.Path(root).resolve()
+    except Exception:
+        return False
+    worlds = []
+    for raw in world or []:
+        text = str(raw or "").strip()
+        if not text:
+            continue
+        try:
+            p = pathlib.Path(text)
+            worlds.append((rootp / text).resolve() if not p.is_absolute() else p.resolve())
+        except Exception:
+            continue
+    if not worlds:
+        return False
+    values = value if isinstance(value, (list, tuple)) else [value]
+    for item in values:
+        if not isinstance(item, str) or not item.strip():
+            continue
+        if item.strip() in (".", ".."):
+            return False
+        try:
+            qi = pathlib.Path(item.strip())
+            q = (rootp / item.strip()).resolve() if not qi.is_absolute() else qi.resolve()
+        except Exception:
+            return False
+        # Inside the named world, or exactly ONE step outside it: the tree that
+        # holds what the sentence named ("a root one step away from a named
+        # file", the boundary this completion has always drawn).  Any higher
+        # ancestor is a guess -- measured, "canonical/astra_runtime/tmp" is an
+        # ancestor of every fixture path, so a rule that admitted ancestors
+        # admitted the whole working directory back in.
+        if not any(q == w or w in q.parents or q == w.parent for w in worlds):
+            return False
+    return True
+
+
+_PLACEHOLDER_VALUE = re.compile(r"^\$\{input\.([A-Za-z_][A-Za-z0-9_]*)\}$")
+
+
+def _entry_without_output_slots(entry):
+    """The same row with its OUTPUT placeholders removed, or None if none.
+
+    A producer's output slot is not an input: ``_bind_inputs`` fails closed on
+    it because a goal describes work, not an artifact filename, so asking it to
+    bind a row that also declares ``output_path`` always raises and takes the
+    referents down with it.  ``_bind_producer_inputs`` already masks output
+    slots for exactly this reason; the completion path needs the same mask to
+    bind the REFERENTS from the request's own world before anything is
+    synthesized.
+    """
+    template = (entry or {}).get("action_template")
+    if not isinstance(template, dict):
+        return None
+    args = template.get("args")
+    if not isinstance(args, dict):
+        return None
+    kept, removed = {}, []
+    for key, value in args.items():
+        match = _PLACEHOLDER_VALUE.match(str(value))
+        name = match.group(1) if match else str(key)
+        if _is_output_placeholder(name):
+            removed.append(str(key))
+            continue
+        kept[str(key)] = value
+    if not removed or not kept:
+        return None
+    masked = dict(entry)
+    masked_template = dict(template)
+    masked_template["args"] = kept
+    masked["action_template"] = masked_template
+    return masked
+
+
+def _bind_inputs_tolerant(goal, root, entry, context_paths=None, future_clauses=None,
+                          limit=12):
+    """Bind every slot the sentence (or the world it inherits) states.
+
+    ``_bind_inputs`` fails closed on the FIRST slot it cannot ground and raises,
+    which is right for a caller that needs one complete action -- and wrong for
+    a caller asking "what does this request state?".  There, one harness
+    constant the adapter supplies itself (``pattern``) took every REFERENT down
+    with it, so the referents were never read from the request at all and the
+    row was completed off the filesystem instead.
+
+    This asks the same binder, drops the slot it named, and asks again -- a
+    loop bounded by the number of slots, deterministic, with no side effects.
+    Nothing is invented: a slot that cannot be stated stays absent and the
+    caller still has to fill it or refuse.
+    """
+    masked = dict(entry or {})
+    template = masked.get("action_template")
+    if not isinstance(template, dict):
+        return {}
+    args = dict(template.get("args") or {})
+    bound: dict = {}
+    for _attempt in range(max(1, int(limit))):
+        shadow = dict(masked)
+        shadow_template = dict(template)
+        shadow_template["args"] = dict(args)
+        shadow["action_template"] = shadow_template
+        try:
+            bound = dict(_bind_inputs(goal, root, shadow, context_paths=context_paths,
+                                      future_clauses=future_clauses) or {})
+            return bound
+        except GoalCompilationFailure as exc:
+            detail = str(exc.detail or "")
+            key = detail.split(":", 1)[0].strip()
+            if exc.code != "GOAL_INPUT_BINDING_REQUIRED" or not key:
+                return bound
+            dropped = False
+            for arg_key, value in list(args.items()):
+                match = _PLACEHOLDER_VALUE.match(str(value))
+                if str(arg_key) == key or (match and match.group(1) == key):
+                    args.pop(arg_key)
+                    dropped = True
+                    break
+            if not dropped:
+                return bound
+    return bound
+
+
+def _complete_inputs_via_world_binding(goal, root, cid, entry, context_paths=None,
+                                       future_clauses=None):
     """Fill placeholders `_bind_inputs` could not ground, or return None.
 
     `_bind_inputs` binds what the goal SAYS and is authoritative: when it
@@ -889,7 +1075,9 @@ def _complete_inputs_via_world_binding(goal, root, cid, entry):
         # wrong-extension artifact under an empty slug.
         wb_entry = dict(entry)
         wb_entry.setdefault("capability_id", str(cid))
-        completed = _wb.complete_inputs(goal, root, wb_entry, compiler=sys.modules[__name__])
+        completed = _wb.complete_inputs(goal, root, wb_entry, compiler=sys.modules[__name__],
+                                        context_paths=context_paths,
+                                        future_clauses=future_clauses)
     except Exception:
         return None
     if not isinstance(completed, dict):
@@ -899,6 +1087,37 @@ def _complete_inputs_via_world_binding(goal, root, cid, entry):
     inputs = completed.get("inputs")
     if not isinstance(inputs, dict):
         return None
+    # Bind the REFERENTS from the request's own world first: the row's output
+    # slots are masked so the same binder that serves a stated goal can serve a
+    # clause that states only where it is.  Anything it grounds outranks a
+    # value picked off the filesystem, because a stated (or inherited) referent
+    # is evidence and a scan is not.
+    # A slot's declared SHAPE is not the world's to change.  ``*_paths`` is a
+    # list of paths; the completion filled it with the single path it happened
+    # to choose, so the adapter iterated a string and read its characters.
+    # Measured on 4605d7b: FaultLocalizerError:FILE_INVALID for
+    # "The tests in <b>/tests are failing", with test_paths bound to
+    # canonical/astra_runtime/state/env_toolchain/pytest_run.py -- the brain's
+    # own harness file offered as the test to localise.  One chosen path IS a
+    # one-element list; that is the declared type, not a guess.
+    for key, value in list(inputs.items()):
+        if str(key).endswith("_paths") and isinstance(value, str):
+            inputs[key] = [value] if value.strip() else []
+    # A referent of a clause that names nothing is the referent the REQUEST
+    # named.  Unguarded, the completion scanned the tool's own working
+    # directory: source_root "." (the whole repository), test_paths the pytest
+    # harness, and -- replayed from a historical demonstration --
+    # source_root "canonical/tests" inside a sentence about a user fixture.
+    # The guard is only as strong as the request's own world: a request that
+    # names no path keeps the historical behaviour untouched.
+    world = [str(p) for p in (context_paths or []) if str(p or "").strip()]
+    world.extend(raw for raw, _p in _repo_paths(goal, root))
+    if world:
+        for key, value in list(inputs.items()):
+            if not _is_referent_placeholder(key) or _is_output_placeholder(key):
+                continue
+            if not _referents_inside(value, world, root):
+                return None
     return inputs, completed
 
 
@@ -1593,7 +1812,10 @@ def _rank_bindable_candidates(
             # BIND FIRST, THEN RANK. Ambiguity is frequently an artefact of
             # ranking unbound candidates: several capabilities match the words,
             # but only some can actually be called with what the world offers.
-            completed=_complete_inputs_via_world_binding(goal,root,cid,entry)
+            completed=_complete_inputs_via_world_binding(
+                goal,root,cid,entry,
+                context_paths=context_paths,future_clauses=future_clauses
+            )
             if completed is None:
                 if unbindable_out is not None:
                     unbindable_out.append((score,specificity,cid))
@@ -5677,9 +5899,63 @@ def _inherit_producer_goal_for_verifier_steps(actions, registry):
     return actions
 
 
+# A clause that asks for a CHANGE may only be served by a capability that emits
+# an effect saying it can make one.  The vocabulary is the row's own `provides`
+# tokens, read as words -- no per-capability list, no new field:
+#
+#   python.source.write.verified_repair_applied   -> write, repair, applied
+#   python.refactor.rename_symbol                 -> refactor
+#   python.tests.audit                            -> (none)
+#   python.fault.localization.dynamic_spectrum    -> (none)
+#   shell.command.result                          -> (none)
+#
+# Measured, and the reason this exists: with the referent fix in place,
+# "The tests in <b>/tests are failing. Fix the code so they pass." planned a
+# localise + audit pair, changed nothing, left the suite red, and reported
+# PASS__RAW_GOAL_COMPILED_CONTROLLER_EXECUTED_VERIFIED.  A plan that cannot
+# change bytes must not answer a clause that asks for a change.
+_CHANGE_DEMAND_CLAUSE = re.compile(
+    r"\b(fix|repair|refactor|rename|extract|inline|delete|remove|rewrite|patch)\b", re.I)
+_CHANGE_EFFECT_WORDS = frozenset({
+    "refactor", "repair", "write", "writes", "written", "apply", "applied",
+    "edit", "edits", "edited", "change", "changes", "changed", "patch", "patched",
+})
+
+
+def _effect_words(entry):
+    words = set()
+    for token in (entry or {}).get("provides") or []:
+        for part in re.split(r"[^a-z0-9]+", str(token).lower()):
+            if part:
+                words.add(part)
+    return words
+
+
+def _serves_a_change(entry):
+    return bool(_effect_words(entry) & _CHANGE_EFFECT_WORDS)
+
+
+def _demands_a_change(clause):
+    return bool(_CHANGE_DEMAND_CLAUSE.search(str(clause or "")))
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
+    # The world a clause may be completed from is the world the REQUEST named.
+    # This list used to start empty and only ever accumulate artifacts the
+    # specialised compilers below produced, so a later clause that names
+    # nothing ("... so they pass") had no world to inherit and was completed
+    # off the current working directory.  The paths the request itself states
+    # are already parsed for every clause by ``_repo_paths``; seeding them here
+    # is the same convention ``_compile_python_test_audit`` has always assumed
+    # (it reads roots ending in "/tests" straight out of this list).
+    #
+    # Named paths rank BELOW anything an earlier step produced: an artifact of
+    # this request is more specific than a path the request merely mentioned, so
+    # the two lists stay separate and are joined at the clause that consumes
+    # them (see ``named_context`` below).
+    named_context=[raw for raw,_p in _repo_paths(goal,root)]
     context_paths=[]
     consumed_indices=set()
     proposal_binder=_load_sibling_runtime_module(
@@ -6472,6 +6748,19 @@ def _compile_compound_goal(goal, clauses, registry, root):
             "target_effects":part["target_effects"],
             "score":part["score"],
         })
+    # The honesty gate: a change clause answered by a plan with no change in it.
+    for part in compiled_parts:
+        cid = str(part.get("selected_capability") or "")
+        if not cid or not _demands_a_change(part.get("subgoal")):
+            continue
+        entry = (registry or {}).get(cid) or {}
+        if not entry or _serves_a_change(entry):
+            continue
+        raise GoalCompilationFailure(
+            "GOAL_CHANGE_CLAUSE_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE",
+            json.dumps({"subgoal": part.get("subgoal"), "capability": cid,
+                        "effect_tokens": list(entry.get("provides") or [])}, sort_keys=True)[:400],
+        )
     _inherit_producer_goal_for_verifier_steps(actions, registry)
     actions.append({
         "type":"finish",

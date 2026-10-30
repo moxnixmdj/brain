@@ -746,6 +746,29 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
 def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry: Mapping[str, Any], action: Mapping[str, Any],
                      raw_contract: Mapping[str, Any], started: int) -> dict[str, Any]:
     selected = str(compiled.get("selected_capability") or "")
+    # A sentence that asks for a CHANGE cannot be answered by a capability whose
+    # own declared effects name no change.  The vocabulary is the row's
+    # `provides` tokens, read as words: `python.source.write.verified_repair_applied`
+    # says write/repair/applied; `python.tests.audit` and
+    # `python.fault.localization.dynamic_spectrum` say neither, and `shell.command.result`
+    # says nothing about the tree.  Measured on 4605d7b:
+    #
+    #   "The tests in <b>/tests are failing. Fix the code so they pass."
+    #   -> python.tests.audit.unittest, PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER
+    #      _EXECUTED_AND_VERIFIED, and the suite is still red: the report was
+    #      true about the audit and false about the request.
+    #
+    # This is the gate the front door did not have; it is the same law the
+    # compound compiler now enforces on every one of its steps.
+    if goal_compiler._demands_a_change(goal) and not goal_compiler._serves_a_change(entry):
+        return _fail(task_id, "FAIL_CLOSED__CHANGE_REQUESTED_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE",
+                     "GOAL_CHANGE_CLAUSE_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE", started,
+                     executed=False,
+                     compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                     reason=json.dumps({"capability": selected,
+                                        "effect_tokens": list((entry or {}).get("provides") or [])},
+                                       sort_keys=True)[:400],
+                     executor=LOCAL_EXECUTION_PROOF, tool_executed=False)
     try:
         tool_result = run_adapter_locally(entry, action)
     except Exception as exc:  # noqa: BLE001 - every adapter failure is a closed failure with its reason
@@ -2271,6 +2294,25 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = cls
         result["observed_effect_errors"] = observed
+    # The fourth authority, and the one that was missing: a request that asks for
+    # a CHANGE and leaves the tree byte-identical did not do the work, however
+    # clean every report about it was.  `promised_source_change_errors` only fires
+    # when the request PROMISES a file (a patch, an edit); a sentence that names
+    # no artifact ("Fix the code so they pass") had no promise to check, so a
+    # read-only capability could satisfy it.  Measured on 4605d7b:
+    #
+    #   "The tests in <b>/tests are failing. Fix the code so they pass."
+    #   -> python.tests.audit.unittest, PASS__RAW_GOAL_COMPILED_FRONT_LOCAL
+    #      _ADAPTER_EXECUTED_AND_VERIFIED, suite still red, no byte changed.
+    if result.get("pass") is True and goal_compiler._demands_a_change(normalized):
+        before_files = dict((world_before or {}).get("files") or {})
+        after_files = dict((observe_world(normalized) or {}).get("files") or {})
+        if before_files and before_files == after_files:
+            result["runtime_status_before_change_demand_check"] = result.get("status")
+            result["status"] = "FAIL_CLOSED__CHANGE_REQUESTED_AND_NO_BYTE_CHANGED"
+            result["pass"] = False
+            result["failure_class"] = "CHANGE_REQUESTED_AND_NO_BYTE_CHANGED"
+            result["change_demand_errors"] = ["CHANGE_REQUESTED_AND_NO_BYTE_CHANGED:" + str(len(before_files)) + "_files_identical"]
     result["elapsed_ns"] = perf_counter_ns() - started
     return _close_observations(result, normalized, world_before, future_artifacts)
 

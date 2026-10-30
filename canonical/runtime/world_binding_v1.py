@@ -615,11 +615,17 @@ def _declared_discovery_pattern(cid, entry):
     return str(default) if isinstance(default, str) and default.strip() else None
 
 
-def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
+def complete_inputs(goal, root, entry, compiler=None, goal_paths=None,
+                    context_paths=None, future_clauses=None):
     """Return a full input mapping for `entry`, or report exactly what is missing.
 
     Never returns a partially justified mapping: `missing` names every
     placeholder that could not be grounded, and the caller decides.
+
+    ``context_paths`` is the world the REQUEST named -- the paths a sibling
+    clause of a compound sentence states.  It is handed to the compiler's own
+    binder unchanged so that a clause which names nothing inherits that world
+    instead of being completed off the current working directory.
     """
     root = Path(root) if root is not None else ROOT
     keys = placeholders(entry)
@@ -630,7 +636,9 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     used_compiler = False
     if compiler is not None:
         try:
-            bound = dict(compiler._bind_inputs(goal, root, entry) or {})
+            bound = dict(compiler._bind_inputs(goal, root, entry,
+                                              context_paths=context_paths,
+                                              future_clauses=future_clauses) or {})
             used_compiler = True
         except Exception:
             bound = {}
