@@ -28713,7 +28713,7 @@
   "bound_capabilities": 125,
   "capabilities": 419,
   "engines": 26,
-  "knowledge_documents": 185,
+  "knowledge_documents": 186,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6500,
   "routing_tokens": 2105,
@@ -28724,7 +28724,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fa3647bca7888d6d09f0cc5634060965ecdcd566bda1c7131d5ad9c64f14e8e0"
+  "value": "63154598766a93b9621d544e964d0b436daaa356847e02c277552c02f4de2fc1"
  },
  "engines": [
   {
@@ -40748,6 +40748,94 @@
     "problem",
     "software",
     "v7"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 15192,
+   "headings": [
+    "Hardcore software engineering — the complete problem census (2026-10-30, V8)",
+    "1. Scoreboard",
+    "2. Reach — the request does not arrive at the right capability",
+    "3. Understand — before changing anything",
+    "4. Change — one thing, then many things",
+    "5. Tests — the first act of every change",
+    "6. Debug — the rung senior engineers are paid for",
+    "7. Build, dependency, packaging, CI",
+    "8. Version control and delivery",
+    "9. Performance, concurrency, security",
+    "10. Polyglot",
+    "11. Truth and the referee",
+    "12. Speed",
+    "13. Learning",
+    "14. What already exists (the leverage table)",
+    "15. Fastest correct order",
+    "16. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261030_V8.md",
+   "sha256": "bbd9f65a291fc503e8637e065c9c9d1d3c34995139bc36c8de70c0e27765c870",
+   "summary": "**Scope.** The machine that understands, changes, verifies and ships software. Document, PDF, image, spreadsheet and chart work appears in exactly one role here: as a **wrong destination** the router must refuse. Everything below is judged by three questions only — does it stop the machine from doing hard engineering work, from doing it fast, or from telling the truth about what it did.",
+   "terms": {
+    "17": 6,
+    "18": 6,
+    "46": 8,
+    "add": 6,
+    "already": 6,
+    "answered": 5,
+    "argv": 5,
+    "branch": 5,
+    "build": 7,
+    "canonical": 6,
+    "capability": 6,
+    "change": 6,
+    "cheapest": 5,
+    "ci": 5,
+    "derivation": 6,
+    "every": 8,
+    "execution_guard": 5,
+    "fix": 8,
+    "gap": 5,
+    "gate": 6,
+    "git": 18,
+    "hardcore": 5,
+    "inputs": 8,
+    "machine": 6,
+    "matrix": 5,
+    "measured": 9,
+    "missing": 5,
+    "ms": 12,
+    "no": 26,
+    "not": 13,
+    "nothing": 6,
+    "one": 17,
+    "only": 5,
+    "p50": 5,
+    "path": 6,
+    "python3": 5,
+    "r2": 6,
+    "requests": 8,
+    "row": 10,
+    "rows": 17,
+    "run": 6,
+    "status": 6,
+    "suite": 10,
+    "test": 13,
+    "tests": 8,
+    "tree": 7,
+    "work": 11,
+    "works": 6
+   },
+   "title": "Hardcore software engineering — the complete problem census (2026-10-30, V8)",
+   "title_terms": [
+    "2026-10-30",
+    "census",
+    "complete",
+    "engineering",
+    "hardcore",
+    "problem",
+    "software",
+    "v8"
    ]
   },
   {
@@ -53576,10 +53664,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 955,
+  "included_source_count": 956,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5b5dba3ac96f458bcdf381ac28622e51157c310a4ab7763596af98ad8170f7b8"
+  "source_tree_digest": "10968ea7c1247730beb8a09c4c0bbc1814a347d70d59e6f25563937381b57dd4"
  },
  "research_index": [
   {
@@ -220621,9 +220709,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "5d607358d52b853cadf2c9affe1da4b5d6f8e5b15ca4651d2ee70a791760256e",
+   "sha256": "d30f2e65ba9a3f29e0588d4fa7e06fa2655b565ab997d830ab50865498e5796b",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 57,
+   "symbol_count": 59,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -220646,9 +220734,9 @@
     "_noun_matched_path",
     "_parent_if_directory",
     "_pathish",
+    "_place_a_read_commands_answer",
     "_preceding_words",
-    "_prose_argv",
-    "_prose_count"
+    "_prose_argv"
    ],
    "terms": {
     "candidate_tokens": 1,
@@ -238690,7 +238778,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "289fbc55bbc2ccd4b44fa7d809c1fca1d1b2248b6e5656f9ec20b2647d723fd2",
+   "sha256": "025fb57a4fc72af90184b1159733f52142419985adfc2431ff6ce1090a109a50",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 69,
    "symbols": [
@@ -259442,7 +259530,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "b40b7013b678611f12a0fa22776e6ab46f6e2b09535b104711c768e89606c0ca",
+   "sha256": "410e4850daedae50e9b63876c7d2413a0daae1c782f6d9e8e4747528c47b1519",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
    "symbol_count": 44,
    "symbols": [

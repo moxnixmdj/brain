@@ -2199,9 +2199,28 @@ _NON_IMPERATIVE_NEXT_WORDS = frozenset({
     "in", "of", "on", "at", "for", "with", "to", "from", "by", "as", "that", "which"})
 
 
+_ASKS_A_QUESTION_RE = re.compile(
+    r"^\s*(?:what|which|who|whom|whose|when|where|why|how|does|did|is|are|was|were|"
+    r"has|have|had|can|could|should|would|will)\b", re.IGNORECASE)
+
+
 def _sentence_promises_a_change(goal: str) -> bool:
-    """Does the sentence USE a change verb, rather than merely contain one?"""
+    """Does the sentence USE a change verb, rather than merely contain one?
+
+    A QUESTION ABOUT CHANGES IS NOT A PROMISE TO MAKE ONE.  Measured 2026-10-30:
+    "What changed since the last commit?" ran `git status --porcelain` correctly, printed the
+    changed files, and was then refused FAIL_CLOSED__NO_OBSERVED_EFFECT -- because the noun
+    "commit" at the end of the sentence matched the change-verb table, so the gate demanded that
+    something on disk move.  The sentence asks what moved; it promises nothing.
+
+    Scoped to the shape of the sentence, not to git: an interrogative or a read-only opener never
+    promises a change, whatever change words appear after it.  "Change the parameter x to y",
+    "repair the file", "what does this function return? and then write it to a file" keep their
+    old reading, because the first is an imperative and the second states two requests.
+    """
     text = str(goal or "")
+    if _ASKS_A_QUESTION_RE.match(text) or _READ_ONLY_REQUEST_RE.search(text):
+        return False
     for m in _CHANGE_VERB_RE.finditer(text):
         tail = text[m.end():m.end() + 24].lstrip()
         if not tail:

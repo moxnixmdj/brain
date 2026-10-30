@@ -201,7 +201,11 @@ def hardcore_cases(base: str) -> list[tuple[str, str]]:
         # --- git -------------------------------------------------------------------------
         ("git/commit", "Commit the changes in %s with a descriptive message." % base),
         ("git/branch", "Create the branch feature/x in %s and switch to it." % base),
+        # The three questions the acceptance layer could always verify (`_READ_ONLY_SUBCOMMANDS`)
+        # and no sentence could state until 2026-10-30.
         ("git/status", "What changed in %s since the last commit?" % base),
+        ("git/log", "Show me the recent commits in %s." % base),
+        ("git/diff", "What is the diff of the working tree in %s?" % base),
         ("git/bisect", "Find the commit that broke %s using git bisect." % base),
         ("git/revert", "Revert the last commit in %s." % base),
         ("git/changelog", "Write a changelog entry for the change in %s." % c),

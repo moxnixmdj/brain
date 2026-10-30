@@ -1793,6 +1793,62 @@ _PROVENANCE_RE = re.compile(
     r"|\bcommit\s+(?:that|which)\b|\bhistory\s+of\b", re.IGNORECASE)
 
 
+_REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+_GIT_READ = re.compile(
+    r"\bgit\b|\bcommit(?:s|ted|ting)?\b|\bcommits\b|\buncommitted\b|\bworking tree\b",
+    re.I)
+# Subcommands whose promise cannot be stated yet.  A revert executed as a commit is worse than a
+# revert refused, and `bisect` is a session with state, not a command.
+_GIT_UNSTATABLE = re.compile(
+    r"\b(?:revert|reset|stash|push|pull|merge|rebase|cherry-pick|bisect|blame|"
+    r"who changed|am|--amend)\b", re.I)
+
+
+def git_argv(sentence: str) -> list[str] | None:
+    """The git READ a sentence asks for, or None.
+
+    The acceptance layer already verifies git: ``raw_goal_trace_acceptance_v1._READ_ONLY_SUBCOMMANDS``
+    re-runs `status`, `diff`, `log`, `show`, `blame`, `rev-list`, `merge-base` and compares what
+    comes back.  None of it was reachable, because the prose table had no row that turns "what
+    changed since the last commit?" into an argv -- measured 2026-10-30, it compiled to nothing.
+
+    Scoped to THIS repository.  A sentence naming another repository is refused rather than
+    translated: the shell row binds a sentence's path as the command's output, so
+    `git -C <dir> status` executed correctly and then reported NO_OBSERVED_EFFECT, and
+    `git -C . log` answered about the enclosing repository -- a true statement about the wrong
+    world, which is worse than a refusal.  Cross-repository git waits for a binder that can say
+    "this path is an operand", not for a new capability.
+    """
+    text = str(sentence or "")
+    if not _GIT_READ.search(text) or _GIT_UNSTATABLE.search(text):
+        return None
+    # A trailing full stop is punctuation, not part of a name.  Measured: "Show me the recent
+    # commits in <dir>." yielded the PARENT directory as its only path -- the regex stopped at the
+    # dot -- so the target was never found and the command ran against the enclosing repository,
+    # which is a true answer about the wrong world.
+    named = [cand for cand in extract_paths(re.sub(r"\.(?=\s|$)", " ", text))
+             if (_REPO_ROOT / cand).is_dir()]
+    repos = [cand for cand in named if (_REPO_ROOT / cand / ".git").exists()]
+    others = [cand for cand in named if cand not in repos]
+    if len(repos) > 1 or (repos and others):
+        return None          # a relation between repositories is not a status question
+    if repo_less := [cand for cand in others if cand and cand.rstrip("/.") not in ("", ".")]:
+        # The sentence named a directory that is not a repository: `git status` there is a
+        # statement about the enclosing repository, which is not what was asked.
+        return None
+    target = repos[0] if repos else None
+    prefix = ["git", "-C", target] if target else ["git"]
+    lowered = text.lower()
+    if re.search(r"\b(?:what (?:changed|is different)|uncommitted|not yet committed|"
+                 r"working tree|git status)\b", lowered):
+        return prefix + ["status", "--porcelain"]
+    if re.search(r"\b(?:commit history|recent commits|last commit|git log)\b", lowered):
+        return prefix + ["log", "--oneline", "-n", "20"]
+    if re.search(r"\b(?:diff|what changed)\b", lowered):
+        return prefix + ["diff", "--stat"]
+    return None
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -1802,6 +1858,9 @@ def _prose_argv(sentence: str) -> list[str] | None:
     """
     from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
 
+    _git = git_argv(sentence)
+    if _git is not None:
+        return _git
     if _PROVENANCE_RE.search(str(sentence or "")):
         # No program in the read-only table answers "who changed this line", and the
         # rows below would answer a different question with the same words.  Refuse to
@@ -3205,7 +3264,77 @@ def bind(signature: Mapping[str, str], goal: str,
             if body:
                 args[slot] = body
     _repoint_an_output_that_is_the_file_the_step_only_reads(args, goal, entry)
+    _place_a_read_commands_answer(args, goal, signature)
     return args
+
+
+def _place_a_read_commands_answer(args: dict[str, Any], goal: str,
+                                  signature: Mapping[str, str]) -> None:
+    """An operand of the command is not the destination of its output.
+
+    Measured 2026-10-30, wiring git into the prose table:
+
+        "What changed in <dir> since the last commit?"
+          argv   ["git", "-C", "<dir>", "status", "--porcelain"]     (correct)
+          bound  output_path = "<dir>"                               (the OPERAND)
+          answer FAIL_CLOSED__NO_OBSERVED_EFFECT
+
+    and with no path in the sentence at all ("Show me the recent commits.") the slot was never
+    bound and the chain refused OPEN__COMPOSER_SLOT_UNBOUND before running a command that is
+    entirely readable.
+
+    The rule is the one the acceptance layer already applies to `rm` (``_CONSUMES_AN_OPERAND``),
+    read from the same table instead of written a second time: for a command whose answer is its
+    STDOUT -- every program the read-only table can re-run, and every git subcommand it judges --
+    a path inside the argv is an operand, and a path the sentence never named is not a
+    destination at all.  Either way the answer lands in a deterministic scratch artifact, which is
+    what the caller reads.  A mutating command is untouched: for `rm A` the output IS A, and that
+    is the promise its postcondition checks.
+    """
+    if not any(str(typ or "").upper() == "ARGV" for typ in signature.values()):
+        return
+    argv = extract_argv(goal)
+    if not argv:
+        return
+    program = str(argv[0]).rsplit("/", 1)[-1]
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        # SCOPED TO THE PROGRAMS THAT DECLARE A SUBCOMMAND CONTRACT.  `cat`, `grep`, `sed` bind
+        # their operand as the declared output by long-standing design -- the reading modules pin
+        # that (`a1.txt` stays the bound output of a search in `a1.txt`), and the inspector re-runs
+        # them.  A program in `_READ_ONLY_SUBCOMMANDS` has no such contract: `git status` writes
+        # nothing, and its path is either a target (`-C <dir>`) or no path at all.
+        read_only = any(tok in _accept._READ_ONLY_SUBCOMMANDS.get(program, ())
+                        for tok in argv[1:] if not tok.startswith("-"))
+    except Exception:  # noqa: BLE001 - no table, no rewrite
+        return
+    if not read_only:
+        return
+    # A read-only PROGRAM can still be a write: `sed -i` rewrites its operand, and `sort -o FILE`
+    # writes FILE.  Those commands already have their own declaration path
+    # (``_declare_a_written_output``), and moving their output to scratch would take the write away
+    # from the file the sentence named.  Measured 2026-10-30 across the command-reading modules:
+    # eight write tests went red the moment this rule ignored the flags.
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        _writes = tuple(_accept._SIDE_EFFECTING_FLAGS) + tuple(
+            _accept._SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ()))
+    except Exception:  # noqa: BLE001 - no table, no filtering
+        _writes = ()
+    if any(str(tok) in _writes for tok in argv[1:]):
+        return
+    if str(args.get("write_stdout_to_output") or "").strip().lower() == "true":
+        return    # the sentence already named where its result goes
+    current = args.get("output_path")
+    operands = [str(tok) for tok in argv[1:] if not str(tok).startswith("-")]
+    inside_argv = current is not None and any(str(current) == tok or str(current) in tok
+                                              for tok in operands)
+    if current is None or inside_argv:
+        args["output_path"] = "canonical/astra_runtime/tmp/spool_0_%s_stdout.json" % program
+        # The answer is the command's stdout, and the identical mechanism that puts a read
+        # command's stdout into a destination the sentence named puts it here: the sentence did
+        # not name one, so the destination is the machine's own scratch.
+        args["write_stdout_to_output"] = "true"
 
 
 def _repoint_an_output_that_is_the_file_the_step_only_reads(

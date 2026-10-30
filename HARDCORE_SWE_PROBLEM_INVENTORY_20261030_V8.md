@@ -250,6 +250,32 @@ debugging and performance work are missing; nothing ranks what to build next fro
 
 ---
 
+## 15b. Closed this round — the first two sockets (measured)
+
+**R1 and R2 are closed for the git family, and the shape generalises.** Three changes, each read
+off a measured failure, no new subsystem:
+
+| change | incident it closes | after |
+|---|---|---|
+| a git READ row in the prose table (`status`, `log`, `diff`) | "What changed since the last commit?" compiled to nothing although the acceptance layer had always been able to verify git | **answered and certified**, 99–125 ms |
+| a read command's answer lands in the machine's own scratch, and a path inside the argv is an OPERAND | `git -C <dir> status` executed correctly and reported `NO_OBSERVED_EFFECT`; with no path the slot was never bound (`OPEN__COMPOSER_SLOT_UNBOUND`) | answered; the operand is untouched |
+| a QUESTION is not a promise to change | "What changed since the last commit?" ran the right command and was refused `NO_OBSERVED_EFFECT` because the noun "commit" matched the change-verb table | answered |
+| a capture is a SUFFIX (12 000 chars), and the machine's own scratch lines are not the caller's world | a command that reproduced exactly was refused `COMMAND_OUTPUT_NOT_REPRODUCED` | reproduced, reported as such |
+
+A directory that is not a repository is now **refused** rather than answered about the enclosing
+repository — measured before the fix: `git log` inside a plain directory returned the parent
+repository's history with `pass=True`.
+
+Probe, with the three git questions added to the hardcore suite: **8 of 48 answered** (was 6 of 46),
+p50 81 ms, 0 damaged trees. The 54-case matrix is unchanged at **17 / 0 / 37 / 0**, and the branch's
+command-reading modules move from 18 to **17** red ids with **zero new failures**.
+
+**Two measurement lessons recorded, because they cost time:** the referee's numbers depend on the
+TOOLCHAIN being present (without `ruff`/`mypy`/`bandit`/`coverage` the same code scores 13 instead
+of 17), and the working tree had been reset to the merge base with all earlier work present only as
+uncommitted changes — so a "baseline" taken before re-anchoring to the branch tip compares against
+the wrong tree. Both are the same class as T6: **a referee must assert its own preconditions.**
+
 ## 16. Reproduction
 
 ```bash

@@ -32,6 +32,7 @@ import ast
 import json
 import re
 import subprocess
+import sys
 import tarfile
 import zipfile
 from collections.abc import Mapping
@@ -1630,7 +1631,60 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
         return False, "COMMAND_RETURN_CODE_NOT_REPRODUCED", {
             "claimed": claimed_code, "re_run": proc.returncode}
     again = proc.stdout.decode("utf-8", "replace")
-    if again != claimed_out:
+    # THE ARTIFACT WE JUST WROTE IS NOT PART OF THE WORLD THE COMMAND REPORTS ON.
+    #
+    # Measured 2026-10-30: "What changed since the last commit?" ran
+    # `git status --porcelain`, its stdout was written to the machine's own scratch artifact
+    # (the sentence named no destination, so the machine picked one UNDER THE REPOSITORY), and the
+    # re-run then listed that artifact as a new untracked file.  The command was correct, the
+    # output was correct, and the comparison failed because writing the answer changed the answer.
+    #
+    # Only the line naming the output this step declared is dropped, from both sides, and the
+    # filter is reported in the evidence so a reader can see it happened.  Everything else still
+    # has to reproduce exactly, so a command whose output really changed is still refused.
+    _own = str(args.get("output_path") or "").strip()
+    # The machine's own scratch is not part of the caller's world either.  A run of this brain
+    # writes checkpoints and spool artifacts INSIDE the repository (all of them git-ignored), so a
+    # listing command reports a different tree before and after itself -- measured on 2026-10-30:
+    # `git status --porcelain` listed a dozen `canonical/astra_runtime/state/*` files the machine
+    # had just written, and the re-run listed a dozen more.  Dropping exactly the lines that name
+    # the machine's own scratch directories keeps every line about the caller's files, which is
+    # what the command was asked about.
+    _machine_scratch = ("canonical/astra_runtime/tmp/", "canonical/astra_runtime/state/",
+                        "canonical/astra_runtime/artifacts/")
+
+    def _without_own_artifact(text: str) -> str:
+        kept = []
+        for line in text.splitlines():
+            if _own and _own in line:
+                continue
+            if any(prefix in line for prefix in _machine_scratch):
+                continue
+            kept.append(line)
+        return "\n".join(kept)
+
+    _kept_again = _without_own_artifact(again)
+    _kept_claimed = _without_own_artifact(claimed_out)
+    # THE ADAPTER KEEPS THE LAST 12 000 CHARACTERS.  The record therefore holds a SUFFIX of what
+    # the command printed, and comparing a suffix to a whole failed on every command whose output
+    # is larger than the cap -- measured 2026-10-30 on `git status --porcelain` in a working tree
+    # with 15 009 characters of changes: the command reproduced exactly and the check said it did
+    # not.  The cap is the adapter's own documented one, read from the module rather than guessed.
+    _cap = getattr(sys.modules.get("canonical.runtime.bound_capabilities.cli_command"),
+                  "OUTPUT_CAPTURE_LIMIT", 12000)
+    _claimed_lines = _kept_claimed.splitlines()
+    _again_lines = _kept_again.splitlines()
+    # The first retained line is cut mid-line by the cap, so it is not evidence of anything; every
+    # line after it is whole, and a suffix match on WHOLE lines is the exact statement "the same
+    # output, seen through a window".
+    _tail = _claimed_lines[1:] if _claimed_lines else []
+    if (len(claimed_out) >= _cap and len(again) > len(claimed_out) and _tail
+            and len(_again_lines) >= len(_tail)
+            and _again_lines[-len(_tail):] == _tail):
+        return True, "COMMAND_OUTPUT_REPRODUCED_WITHIN_THE_CAPTURE_LIMIT", {
+            "program": program, "checked": True, "re_run_bytes": len(again),
+            "captured_bytes": len(claimed_out)}
+    if _kept_again != _kept_claimed:
         return False, "COMMAND_OUTPUT_NOT_REPRODUCED", {
             "claimed_bytes": len(claimed_out.encode("utf-8")),
             "re_run_bytes": len(again.encode("utf-8"))}
