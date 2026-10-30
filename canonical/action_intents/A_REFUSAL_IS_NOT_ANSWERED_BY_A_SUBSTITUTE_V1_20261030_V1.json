@@ -1,8 +1,8 @@
 {
- "action_id": "A_CHANGE_MUST_BE_PROMISED_BY_WHAT_RAN_BEFORE_IT_RUNS_V1_20261030_V1",
- "action_intent_id": "A_CHANGE_MUST_BE_PROMISED_BY_WHAT_RAN_BEFORE_IT_RUNS_V1_20261030_V1",
+ "action_id": "A_REFUSAL_IS_NOT_ANSWERED_BY_A_SUBSTITUTE_V1_20261030_V1",
+ "action_intent_id": "A_REFUSAL_IS_NOT_ANSWERED_BY_A_SUBSTITUTE_V1_20261030_V1",
  "action_kind": "FRESH_REUSE",
- "action_summary": "The registry already carries the declaration: 22 of the 125 bound rows name a change in their own `provides` tokens (python.source.write.verified_repair_applied says write/repair/applied, python.refactor.rename_symbol says refactor) and they are exactly the rows that can edit source; python.tests.audit, python.fault.localization.dynamic_spectrum, python.source.symbols.index and shell.command.result name none. Nothing read that as a promise, so two change requests were answered by rows that cannot make one and reported PASS. The law is now enforced at three placements -- before the single-capability adapter, before the composer chain, and at _close_observations, the one exit every route shares -- so a route added later cannot escape it. Measured: the destructive sentence now refuses with prod.db still on disk (it was deleted and reported PASS before), the add-a-parameter sentence no longer passes on an unchanged tree, census 2/28 -> 3/28 (META destructive_refusal now passes), tiers 2/10 unchanged, and the two capabilities that genuinely work are untouched.",
+ "action_summary": "A front-door refusal was answered by a substitute: three sites asked the composer whether a chain could answer a sentence and only the route-admission site required anything of the sentence. Measured on 32a73a0, 19 of 28 census sentences reached the composer, 18 of them had been refused a moment earlier, every one of the 18 reported a failure of the SUBSTITUTE's promise instead of the refusal that had happened, and none of the 18 was a pass. The same door also called a run a pass when a source file the sentence asked to have changed was byte-identical, because it only recognised repair|fix|patch|correct as asking. One helper asks the door's own existing question -- does the sentence state the form to execute? -- and all three composition sites call it; the source-change promise is widened to the ordinary edit verbs with destructive verbs exempt. Measured: five substitutions became FAIL__RAW_GOAL_COMPILATION_GAP, 'Add a parameter qty ... and update every caller' is refused at route admission instead of being served by a symbol indexer over a byte-identical tree, the 394-test ordinary-sentence suite is byte-for-byte identical to e9861f4 (48 failures + 1 error, all pre-existing), census 2/28 with false passes 2 -> 1, tiers 2/10 unchanged, test_goal_compiler 26/26, unified model 33/33. Same change reverts 32a73a0, whose declaration law closed both false passes at the cost of 15 working capabilities (text.file.write declares text.file.available -- a fact that only becomes true by changing the world).",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -27,30 +27,29 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/goal_compiler.py",
    "canonical/runtime/live_brain_route_admission_v1.py",
-   "canonical/tests/test_a_change_must_be_promised_by_what_ran_before_it_runs_v1.py",
+   "canonical/tests/test_a_refusal_is_not_answered_by_a_substitute_v1.py",
    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
-   "hardcore_swe_surface_probe_20261030.py"
+   "HARDCORE_SWE_ALL_PROBLEMS_20261030_V1.md"
   ],
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Nothing in the registry says what KIND of effect a row has, and nothing read the effect a row does declare as a promise. Measured on e9861f4: 'Add a parameter qty ... update every caller' was served by python.source.symbols.index.ast with pass=true and a byte-identical tree, and 'Delete <b>/prod.db and the app directory' ran shell.command.run, deleted the database and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.",
- "canonical_base_commit": "e9861f47e85e2a4ca93399a1d6af3c527c18e7b7",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A front-door refusal was answered by a substitute: three sites asked the composer whether a chain could answer a sentence and only the route-admission site required anything of the sentence. Measured on 32a73a0, 19 of 28 census sentences reached the composer, 18 of them had been refused a moment earlier, every one of the 18 reported a failure of the SUBSTITUTE's promise instead of the refusal that had happened, and none of the 18 was a pass. The same door also called a run a pass when a source file the sentence asked to have changed was byte-identical, because it only recognised repair|fix|patch|correct as asking.",
+ "canonical_base_commit": "32a73a083177fa98521bb6ea3f9f0827239d7bbf",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "Nothing in the registry says what KIND of effect a row has, and nothing read the effect a row does declare as a promise. Measured on e9861f4: 'Add a parameter qty ... update every caller' was served by python.source.symbols.index.ast with pass=true and a byte-identical tree, and 'Delete <b>/prod.db and the app directory' ran shell.command.run, deleted the database and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.",
+ "causal_blocker": "A front-door refusal was answered by a substitute: three sites asked the composer whether a chain could answer a sentence and only the route-admission site required anything of the sentence. Measured on 32a73a0, 19 of 28 census sentences reached the composer, 18 of them had been refused a moment earlier, every one of the 18 reported a failure of the SUBSTITUTE's promise instead of the refusal that had happened, and none of the 18 was a pass. The same door also called a run a pass when a source file the sentence asked to have changed was byte-identical, because it only recognised repair|fix|patch|correct as asking.",
  "date": "2026-10-30",
- "expected_parent_change": "A request that asks for a CHANGE is served only by a capability whose own `provides` tokens name a change, checked before the adapter or the chain runs and again at the one exit every route shares; a change request that reaches only rows declaring none is refused and nothing is destroyed.",
- "expected_parent_frontier_change": "A request that asks for a CHANGE is served only by a capability whose own `provides` tokens name a change, checked before the adapter or the chain runs and again at the one exit every route shares; a change request that reaches only rows declaring none is refused and nothing is destroyed.",
+ "expected_parent_change": "A refusal is not answered by a substitute: every composition site asks whether the sentence states the executable form, and an edit promise is discharged only by a change to the file the sentence named.",
+ "expected_parent_frontier_change": "A refusal is not answered by a substitute: every composition site asks whether the sentence states the executable form, and an edit promise is discharged only by a change to the file the sentence named.",
  "explicit_user_authorization": "Owner standing directive (2026-10-29/30): every listed problem already has a solution somewhere in the repository, its hidden tools or published research; do the optimal fix in the fastest way, only the right way, with no new primitive where an existing mechanism can be wired.",
- "falsification_condition": "FALSIFIED if a capability that really does change source is refused for a change clause, if a change request still reaches a destructive effect before being judged, or if any sentence that asks for no change is affected.",
+ "falsification_condition": "FALSIFIED if any composed chain answers a sentence that states no command line and no payload-with-destination, or if a sentence that names a source file to be edited is reported PASS while that file's bytes are unchanged, or if any of the 394 ordinary-sentence tests changes verdict against e9861f4.",
  "governance_change": false,
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
- "intent": "Wire the three declarations the repository already carries -- the adapter's own harness defaults, the sentence's replacement identifier and the tree's defining module -- into the binder, and give the rename adapter file identity for modules plus a post-edit residual measurement, so the capability that ranks first can actually run.",
+ "intent": "Answer the request the sentence made, not a substitute for it: one grounding condition at every composition site, and the existing source-change promise widened to the verbs an ordinary edit request uses. No new primitive -- both conditions already existed in this file.",
  "load_bearing_primary": {
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4",
@@ -65,25 +64,23 @@
   "success_probability_lcb": 0.95,
   "wall_clock_cost_ub": 1
  },
- "measured_effect": "Surface probe: 2/28 -> 3/28 with ZERO false passes (was 2: add_parameter and destructive_refusal). destructive_refusal: PASS__RAW_GOAL_EXECUTED... with prod.db deleted -> FAIL_CLOSED__CHANGE_REQUESTED_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE with prod.db present. add_parameter: PASS on a byte-identical tree -> FAIL_CLOSED__ROUTE_ADMISSION_REJECTED. Five more change clauses now fail on the declaration instead of after a composed step. Tier probe 2/10 unchanged (T1 rename 341 ms, TS index 14.8 s). test_goal_compiler 26/26 OK; the chain test goes from 2 failures to 1 (the remaining one predates this change). compile+verify 33/33 digest 20963501e5c5f286f757815d95f90406c90049d5a5bdf8fbb3f261effea56a81; repo integrity 17 rules / 0 violations; pin file 5/5 here and red on the base tree.",
+ "measured_effect": "Surface probe 2/28 with false passes 2 -> 1 (add_parameter: PASS on a byte-identical tree -> FAIL_CLOSED__ROUTE_ADMISSION_REJECTED; destructive_refusal remains the one open false pass, recorded in the census as a policy decision). Five requests that were answered by a substitute now report FAIL__RAW_GOAL_COMPILATION_GAP. 394-test ordinary-sentence suite: 48 failures + 1 error on e9861f4 and the same here -- byte-for-byte, measured on both trees. test_goal_compiler 26/26; tiers 2/10 unchanged (rename 812 ms, index 33.6 s under a loaded box); unified model 33/33; pin file 10/10 here, 6 failing on the base tree.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": "The rows' own `provides` tokens as the vocabulary; _close_observations, the existing 'called at every exit' choke point; _fail; the bound registry already loaded by the door; composer_route.route's chain.",
  "progress_evidence_paths": [
-  "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
-  "canonical/runtime/goal_front_compiler_v1.py",
-  "canonical/tests/test_a_rename_resolves_the_module_by_file_not_by_dotted_spelling_v1.py",
-  "canonical/tests/test_the_sentence_the_tree_and_the_adapter_state_what_was_unbound_v1.py",
-  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/tests/test_a_refusal_is_not_answered_by_a_substitute_v1.py",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+  "HARDCORE_SWE_ALL_PROBLEMS_20261030_V1.md"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "e9861f47e85e2a4ca93399a1d6af3c527c18e7b7",
+  "canonical_base_commit": "32a73a083177fa98521bb6ea3f9f0827239d7bbf",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
-   "PASS_ON_A_BYTE_IDENTICAL_TREE__a_write_request_settled_by_a_read_only_capability",
-   "DESTRUCTION_BEFORE_JUDGEMENT__the_effect_ran_and_the_verdict_came_after"
+   "A_REFUSAL_ANSWERED_BY_A_SUBSTITUTE__three_composition_sites_two_conditions",
+   "PASS_ON_A_BYTE_IDENTICAL_TREE__a_write_request_settled_by_a_read_only_capability"
   ],
-  "expected_parent_level_state_change": "A request that asks for a CHANGE is served only by a capability whose own `provides` tokens name a change, checked before the adapter or the chain runs and again at the one exit every route shares; a change request that reaches only rows declaring none is refused and nothing is destroyed.",
+  "expected_parent_level_state_change": "A refusal is not answered by a substitute: every composition site asks whether the sentence states the executable form, and an edit promise is discharged only by a change to the file the sentence named.",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
@@ -210,7 +207,7 @@
      "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
     }
    ],
-   "checked_at_utc": "2026-10-29T23:37:50Z",
+   "checked_at_utc": "2026-10-30T01:48:14Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -253,11 +250,11 @@
     "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
     "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
    ],
-   "selected_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
-   "selected_route_checked_at_utc": "2026-10-29T23:37:50Z",
+   "selected_route": "REUSE_THE_DOORS_OWN_GROUNDING_CONDITION",
+   "selected_route_checked_at_utc": "2026-10-30T01:48:14Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-29T23:37:50Z",
+    "checked_at_utc": "2026-10-30T01:48:14Z",
     "execution_dependencies": [
      {
       "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
@@ -277,7 +274,7 @@
      {
       "dependency": "canonical/runtime/goal_front_compiler_v1.py + bound_capabilities/python_refactor_rename_symbol.py (in-tree)",
       "evidence": [
-       "DIRECT_PROBE: 11 new tests green; tier probe T1 PASS at 338 ms; repo integrity guard 17 rules / 0 violations"
+       "DIRECT_PROBE: pin file 10/10 green; 394-test ordinary-sentence suite identical to e9861f4 (48F + 1E); tier probe T1 rename PASS at 812 ms; unified model 33/33"
       ],
       "evidence_classes": [
        "DIRECT_PROBE",
@@ -294,10 +291,10 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
+    "selected_route": "REUSE_THE_DOORS_OWN_GROUNDING_CONDITION",
     "status": "READY"
    },
-   "selected_surviving_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
+   "selected_surviving_route": "REUSE_THE_DOORS_OWN_GROUNDING_CONDITION",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
@@ -329,14 +326,14 @@
    "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
   ],
-  "selected_surviving_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
+  "selected_surviving_route": "REUSE_THE_DOORS_OWN_GROUNDING_CONDITION",
   "stop_condition": "Ship only the vocabulary the rows already carry and the three placements. Do not add an effect-kind field, do not invent a per-capability table, do not exempt shell.command.run, and do not claim a tier or an obligation this law does not measure. A verdict after a destructive effect is an autopsy: the refusal must come before the call.",
   "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
  },
- "resolution": "Measured reuse slice: no new primitive, no model, no spend, no protected path, no governance change. Two pure predicates in goal_compiler, two readers and three placements in the door, one five-test pin file.",
- "route_id": "REUSE_DECLARED_EFFECT_TOKENS_AS_A_PROMISE",
+ "resolution": "Measured reuse slice: one helper and three call sites in one file, one widened regex plus one exemption in a law that already existed, one ten-test pin file. No new primitive, no model, no spend, no protected path, no governance change.",
+ "route_id": "REUSE_THE_DOORS_OWN_GROUNDING_CONDITION",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "selected_route": "REUSE_DECLARED_EFFECT_TOKENS_AS_A_PROMISE",
+ "selected_route": "REUSE_THE_DOORS_OWN_GROUNDING_CONDITION",
  "stop_condition": "Ship only the vocabulary the rows already carry and the three placements. Do not add an effect-kind field, do not invent a per-capability table, do not exempt shell.command.run, and do not claim a tier or an obligation this law does not measure. A verdict after a destructive effect is an autopsy: the refusal must come before the call.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -369,12 +366,12 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
-     "git_blob_sha": "7941217eed1c50fc0186860ac9ba7eec1537d3ae"
+     "git_blob_sha": "7941217eed1c50fc0186860ac9ba7eec1537d3ae",
+     "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     },
     {
-     "path": "canonical/runtime/live_brain_route_admission_v1.py",
-     "git_blob_sha": "63a896ce703ff9031e20cd5e696dfa510f829fec"
+     "git_blob_sha": "598f5da63282332d86bd8fa81f92cab7e1658b19",
+     "path": "canonical/runtime/live_brain_route_admission_v1.py"
     }
    ],
    "decisive_question": "Is a change request refused before it destroys anything, and does every capability that really edits still pass?",
