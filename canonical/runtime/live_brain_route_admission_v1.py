@@ -1957,6 +1957,73 @@ def _composed_acceptance(goal: str, chain: Any, executed: Mapping[str, Any]) -> 
     return _exact_acceptance(goal, plan, trace, raw_contract)
 
 
+_STATED_REPAIR_WORDS = ("repair", "fix", "fixed", "broken", "bug", "make it pass", "correct the")
+
+
+def stated_acceptance_errors(goal: str) -> list[str]:
+    """The sentence's own acceptance, run on the real tree.  Empty when it holds.
+
+    A verdict that says "repair" is a claim about the world, not about a dict a
+    tool returned.  Measured 2026-10-29 on the canonical repair sentence: the
+    primary path executed a capability whose own hard non-claim is
+    NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY, the source on disk was byte-identical
+    afterwards, ``python -m unittest test_calc`` still failed -- and the door
+    returned PASS__..._EXECUTED_AND_VERIFIED.  Every "repair works" number in this
+    repository inherited that gap.
+
+    So the door asks the tree.  This runs ONLY the stated, already-existing test
+    file, with the same loader argv and the same shared import path every repair
+    capability uses, and it runs ONLY for a sentence that states both a test and a
+    repair effect -- the exact shape whose PASS is a claim about the tree.  A goal
+    that states a report, an index or a diff is untouched: for those the promise
+    is the artifact, and the artifact gates already judge it.
+
+    Cost: one subprocess, bounded by ``timeout_s``.  Zero model, zero spend.
+    """
+    low = str(goal or "").lower()
+    if not any(word in low for word in _STATED_REPAIR_WORDS):
+        return []
+    try:
+        from canonical.runtime import declared_input_derivation_v1 as _derivation
+        from canonical.runtime.bound_capabilities import python_test_guided_patch_search_v1 as _patch
+    except Exception:
+        return []
+    try:
+        files = _derivation.stated_existing_files(goal, ROOT)
+    except Exception:
+        return []
+    tests = [f for f in files if _derivation._TEST_NAME_RE.search(f)]
+    if not tests:
+        return []
+    argv = [str(x) for x in _patch.suite_argv("python3", *tests)]
+    cwd = ROOT
+    # The import path is the PROJECT's, not the test directory's: a suite in
+    # ``tests/`` imports the package it tests from the directory above it, and
+    # that directory is what the repair itself used.  Measured: with the test
+    # directory alone this gate reported a correct, already-applied repair as
+    # "stated acceptance fails" (ModuleNotFoundError: app) after the machine had
+    # in fact fixed the file.  Both stated sides are therefore on the path -- the
+    # sources (whose import root is the directory containing the package) and the
+    # tests (whose own directory makes a sibling module importable).
+    sources = [f for f in files if f.endswith(".py")
+               and not _derivation._TEST_NAME_RE.search(f)]
+    scope = [ROOT / x for x in tests + sources]
+    env = {**_os_environ(), **_patch._source_env(*scope)}
+    try:
+        proc = subprocess.run(argv, cwd=str(cwd), capture_output=True, timeout=180, env=env)
+    except (OSError, subprocess.SubprocessError):
+        return []  # could not measure -> do not invent a verdict here
+    if proc.returncode == 0:
+        return []
+    tail = ((proc.stdout or b"")[-400:] + (proc.stderr or b"")[-400:]).decode("utf-8", "replace")
+    return ["STATED_ACCEPTANCE_FAILS_ON_THE_REAL_TREE:" + ",".join(tests) + "::" + tail[-200:]]
+
+
+def _os_environ() -> dict:
+    import os
+    return dict(os.environ)
+
+
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     """THE live Brain entry, now with a scoped, ambiguity-preserving typed-SWE retry.
 
@@ -1976,37 +2043,86 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     verified non-SWE).  Zero model dependency, zero incremental spend.
     """
     result = _solve_body(request)
-    if result.get("pass") is True or (request or {}).get("_typed_swe_plan") is not None:
+    if (request or {}).get("_typed_swe_plan") is not None:
         return result
+    goal = str((request or {}).get("goal") or "").strip()
+    if result.get("executed") is True and result.get("pass") is not True:
+        # An executed FAILURE is not a closed question.  Measured 2026-10-29:
+        # "Rename the parameter a to x in the module M and save the report to R"
+        # was refused because a PDF converter had "executed" and failed, while
+        # the decisive typed plan for the same sentence named the rename engine,
+        # which performs the edit correctly and writes the report.  The old rule
+        # returned any executed verdict unchanged, so the right capability was
+        # never tried and a report clause was enough to lose the request.
+        #
+        # Nothing is overwritten: the retry must be a DIFFERENT decisive
+        # capability and must pass the entire gate chain, including the stated
+        # acceptance on the real tree.  If it does not, this verdict stands.
+        retry = _typed_retry(request, goal, primary=result,
+                             exclude=result.get("compiled_capability_id"))
+        return retry if retry is not None else result
+    if result.get("pass") is True:
+        # A PASS is a claim about the world.  When the sentence states its own
+        # acceptance (a test file) and a repair effect, the door re-runs that
+        # acceptance on the real tree before it may report one.  If it fails, the
+        # verdict is not "pass with a caveat": the machine tries the decisive
+        # typed plan (which prefers the repair mechanism that WRITES and
+        # re-verifies in place), and if that cannot hold either, the honest
+        # verdict is a refusal that names the acceptance it could not satisfy.
+        if stated_acceptance_errors(goal):
+            typed = _typed_retry(request, goal, primary=result)
+            if typed is not None and typed.get("pass") is True and not stated_acceptance_errors(goal):
+                typed["stated_acceptance"] = "VERIFIED_ON_THE_REAL_TREE_AFTER_TYPED_RETRY"
+                return typed
+            failed = _fail(str(request.get("task_id") or ""), "FAIL_CLOSED",
+                           "STATED_ACCEPTANCE_NOT_SATISFIED", perf_counter_ns(),
+                           reason="STATED_ACCEPTANCE_FAILS_ON_THE_REAL_TREE",
+                           compiled_capability_id=result.get("compiled_capability_id"),
+                           primary_status=result.get("status"),
+                           typed_retry_status=(typed or {}).get("status"))
+            failed["stated_acceptance_errors"] = stated_acceptance_errors(goal)
+            return failed
+        return result
+    return _typed_retry(request, goal, primary=result) or result
     # A retry is only for "could not route/bind yet".  An executed verdict, a
     # genuine adapter fault, or an observation failure already judged the world;
     # a second guess must never overwrite it.
     if result.get("executed") is True:
         return result
-    goal = str((request or {}).get("goal") or "").strip()
+def _typed_retry(request: Mapping[str, Any], goal: str,
+                 primary: Mapping[str, Any] | None = None,
+                 exclude: Any = None) -> dict[str, Any] | None:
+    """One decisive typed re-entry.  ``None`` means "no second opinion exists".
+
+    Used in two places, for two different reasons, with the same rule: the typed
+    selector must be DECISIVE, the plan must re-enter the whole gate chain, and a
+    non-decisive selector returns ``None`` so the caller keeps the verdict it had.
+    """
     try:
         from canonical.runtime import swe_typed_plan_v1 as _typed_plan
         if not _typed_plan.is_swe_request(goal):
-            return result
+            return None
         plan = _typed_plan.build_plan(goal, ROOT)
         if plan is None:  # ambiguous or no bindable proposal -> keep fail-closed
-            return result
+            return None
+        if exclude and plan[2].get("selected_capability") == exclude:
+            return None  # the same capability again is not a second opinion
         retry_request = dict(request)
         retry_request["_typed_swe_plan"] = plan
         retry = _solve_body(retry_request)
         if retry.get("pass") is True:
             retry["typed_swe_retry"] = {
                 "schema": "SWE_TYPED_RETRY_V1",
-                "primary_status": result.get("status"),
+                "primary_status": (primary or {}).get("status"),
                 "selected_capability": plan[2].get("selected_capability"),
                 "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
                 "model_dependency_count": 0,
                 "incremental_spend_usd": 0,
             }
             return retry
+        return None
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
-        pass
-    return result
+        return None
 
 
 def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:

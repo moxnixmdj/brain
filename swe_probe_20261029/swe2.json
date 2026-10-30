@@ -1,0 +1,265 @@
+[
+ {
+  "task": "repair_full",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "python.software.repair.apply.verified.v1",
+  "ms": 1522,
+  "world": {
+   "add_fixed": true,
+   "renamed": false,
+   "new_files": [
+    ".apply_repair_a.json",
+    "__init__.cpython-311.pyc",
+    "a.json",
+    "calc.cpython-311.pyc",
+    "test_calc.cpython-311.pyc"
+   ]
+  },
+  "reason": "None"
+ },
+ {
+  "task": "fix_broken",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "python.software.repair.apply.verified.v1",
+  "ms": 832,
+  "world": {
+   "add_fixed": true,
+   "renamed": false,
+   "new_files": [
+    ".apply_repair_typed_swe_report.json",
+    "__init__.cpython-311.pyc",
+    "calc.cpython-311.pyc",
+    "test_calc.cpython-311.pyc",
+    "typed_swe_report.json"
+   ]
+  },
+  "reason": "None"
+ },
+ {
+  "task": "fix_short",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "python.software.repair.apply.verified.v1",
+  "ms": 739,
+  "world": {
+   "add_fixed": true,
+   "renamed": false,
+   "new_files": [
+    ".apply_repair_typed_swe_report.json",
+    "__init__.cpython-311.pyc",
+    "calc.cpython-311.pyc",
+    "test_calc.cpython-311.pyc",
+    "typed_swe_report.json"
+   ]
+  },
+  "reason": "None"
+ },
+ {
+  "task": "bug_report",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "python.software.repair.apply.verified.v1",
+  "ms": 993,
+  "world": {
+   "add_fixed": true,
+   "renamed": false,
+   "new_files": [
+    "__init__.cpython-311.pyc",
+    "calc.cpython-311.pyc",
+    "test_calc.cpython-311.pyc"
+   ]
+  },
+  "reason": "None"
+ },
+ {
+  "task": "rename_param",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "python.refactor.rename_parameter.v1",
+  "ms": 911,
+  "world": {
+   "add_fixed": false,
+   "renamed": true,
+   "new_files": [
+    "r.json"
+   ]
+  },
+  "reason": "None"
+ },
+ {
+  "task": "rename_calls",
+  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+  "pass_": false,
+  "cap": null,
+  "ms": 183,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "write_test",
+  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+  "pass_": false,
+  "cap": "chart.raster.axis_title_unit_binding.v1",
+  "ms": 115,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "ModuleNotFoundError:No module named 'PIL'"
+ },
+ {
+  "task": "explain_fail",
+  "status": "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
+  "pass_": false,
+  "cap": "code.impact.tree_sitter.testselect.v1",
+  "ms": 53,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "Blocker:OUTPUT_OVERWRITES_A_STATED_SOURCE:output_path=canonical/astra_runtime/tmp/swe2/explain_fail/"
+ },
+ {
+  "task": "find_callers",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "python.source.symbols.index.ast",
+  "ms": 159,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": [
+    "typed_swe_report.json"
+   ]
+  },
+  "reason": "None"
+ },
+ {
+  "task": "extract_fn",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "pass_": false,
+  "cap": "python.software.request.semantic_behavior.compile.v1",
+  "ms": 65,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "type_check",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "pass_": false,
+  "cap": "python.contract.check.crosshair.v1",
+  "ms": 70,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "lint",
+  "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+  "pass_": false,
+  "cap": null,
+  "ms": 140,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "git_log",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "pass_": false,
+  "cap": "python.repository.acceptance.measure.v1",
+  "ms": 137,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "git_commit",
+  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+  "pass_": false,
+  "cap": null,
+  "ms": 282,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "debug_test",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "python.patch.search.test_guided.ast.v1",
+  "ms": 984,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": [
+    "__init__.cpython-311.pyc",
+    "calc.cpython-311.pyc"
+   ]
+  },
+  "reason": "None"
+ },
+ {
+  "task": "profile",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "pass_": false,
+  "cap": "python.software.request.semantic_behavior.compile.v1",
+  "ms": 61,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "multi_file",
+  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+  "pass_": false,
+  "cap": "python.software.repair.loop.test_guided.ast.v1",
+  "ms": 78,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "RepairLoopError:PATH_INVALID:c"
+ },
+ {
+  "task": "dep_add",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "pass_": false,
+  "cap": "finance.saccr.credit.addon.v1",
+  "ms": 171,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ }
+]

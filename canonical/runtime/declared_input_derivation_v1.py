@@ -162,6 +162,57 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     return found
 
 
+def _holds_tests(directory: pathlib.Path) -> bool:
+    """True when ``directory`` itself contains test files, or a ``tests``/``test`` child does.
+
+    Streams and stops at the first hit, so the check costs one ``readdir`` on a real
+    project and nothing more.  It is a fact about the tree, not an inference.
+    """
+    try:
+        for child in directory.iterdir():
+            if child.is_file() and _TEST_NAME_RE.search(child.name):
+                return True
+            if child.is_dir() and child.name in {"tests", "test"}:
+                for inner in child.iterdir():
+                    if inner.is_file() and _TEST_NAME_RE.search(inner.name):
+                        return True
+    except OSError:
+        return False
+    return False
+
+
+def _project_root(root: pathlib.Path, source_rel: str, max_up: int = 3) -> str | None:
+    """The nearest ancestor of a stated source file that also owns its tests.
+
+    A repository's tests are not always beside the code: ``src/app/calc.py`` with
+    ``tests/test_calc.py`` needs the directory that CONTAINS both, because the
+    tools that run the suite require the tests to live under the source root and
+    the tests import the package by its top-level name.  Measured 2026-10-29:
+    with ``source_root`` pinned to the source file's parent, that layout refused
+    with NO_TEST_FILES_UNDER_SOURCE_ROOT and the identical bug repaired in the
+    flat layout.
+
+    The walk is bounded (3 levels), starts at the file's parent, stops at the
+    first ancestor that holds tests, and never leaves the repository.  If the
+    file's own directory already holds tests -- the common case -- this returns
+    that directory and nothing changes.
+    """
+    base = (root / source_rel).parent
+    base_abs = base if base.is_absolute() else (root / base)
+    repo = pathlib.Path(root)
+    for _ in range(max_up + 1):
+        if _holds_tests(base_abs):
+            try:
+                rel = base_abs.resolve().relative_to(repo.resolve())
+            except ValueError:
+                return None
+            return str(rel) if str(rel) != "." else "."
+        if base_abs == repo or repo not in base_abs.parents:
+            return None
+        base_abs = base_abs.parent
+    return None
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -176,29 +227,81 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # the directory is stated evidence, the scan is bounded to that directory,
     # and more than one candidate is still ambiguous (no value is invented).
     discovered_tests = False
+    project_root = _project_root(root, sources[0]) if len(sources) == 1 else None
     if not tests and len(sources) == 1:
-        parent = (pathlib.Path(root) / sources[0]).parent
-        try:
-            found = sorted(p for p in parent.iterdir()
-                           if p.is_file() and _TEST_NAME_RE.search(p.name))
-        except OSError:
-            found = []
+        # Scan the directory that owns the code AND its tests.  When the file's
+        # own directory holds them (the flat layout) project_root is that
+        # directory and this is the same scan as before; in a src/ layout it is
+        # the directory above both, which is the only place the suite can be.
+        scope = [pathlib.Path(root) / project_root] if project_root else []
+        scope.append((pathlib.Path(root) / sources[0]).parent)
+        found = []
+        for parent in scope:
+            if not parent.is_dir():
+                continue
+            try:
+                found = sorted(p for p in parent.iterdir()
+                               if p.is_file() and _TEST_NAME_RE.search(p.name))
+            except OSError:
+                found = []
+            if found:
+                break
+            tests_dir = parent / "tests"
+            if tests_dir.is_dir():
+                try:
+                    inner = sorted(p for p in tests_dir.iterdir()
+                                   if p.is_file() and _TEST_NAME_RE.search(p.name))
+                except OSError:
+                    inner = []
+                if len(inner) == 1:
+                    found = inner
+                    break
         if len(found) == 1:
             tests = [str(found[0].relative_to(pathlib.Path(root)))]
             discovered_tests = True
 
     # A directory slot is satisfied by the parent of the ONE stated source file.
+    # When the stated tests live ABOVE that parent (src/ + tests/), the slot is
+    # satisfied by the nearest ancestor that owns both, because that is the only
+    # directory under which the stated test command can run and be verified.
     if "source_root" in keys and len(sources) == 1:
         parent = str(pathlib.PurePosixPath(sources[0]).parent)
-        if parent and (pathlib.Path(root) / parent).is_dir():
-            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
-                                  "evidence": sources[0]}
+        # Widen ONLY for a contract that consumes tests as well as a source root:
+        # that is the contract in which the tests must live under the root (the
+        # repair appliers run and verify the stated command from it).  A contract
+        # that declares a source root and nothing about tests -- the symbol index,
+        # the refactorers -- names the CODE, and widening it would make the index
+        # sweep the whole project instead of the package.  Measured: widening
+        # unconditionally turned "find every caller" from PASS to fail in the
+        # src/ layout while repairing nothing.
+        needs_tests_under_root = bool({"test_paths", "test_argv"} & keys) and bool(tests)
+        outside = not any(str(pathlib.PurePosixPath(x).parent).startswith(parent) for x in tests)
+        widened = project_root if (needs_tests_under_root and outside) else None
+        value = widened or parent
+        if value and (pathlib.Path(root) / value).is_dir():
+            out["source_root"] = {
+                "value": value,
+                "rule": ("PATH_DIR_FROM_SOURCE_AND_TEST_COMMON_ANCESTOR"
+                         if widened else "PATH_DIR_FROM_STATED_FILE_PARENT"),
+                "evidence": (",".join([sources[0]] + list(tests)) if widened else sources[0]),
+            }
     # A test command slot is satisfied by running the ONE stated test file.
-    if "test_argv" in keys and len(tests) == 1:
-        out["test_argv"] = {"value": [sys.executable, "-B", tests[0]],
-                            "rule": ("ARGV_FROM_DISCOVERED_TEST_FILE" if discovered_tests
-                                     else "ARGV_FROM_STATED_TEST_FILE"),
-                            "evidence": tests[0]}
+    if "test_argv" in keys and tests:
+        # The command must COLLECT the suite, not execute the file.  A test file
+        # without an ``if __name__ == "__main__"`` guard runs nothing when it is
+        # executed and exits 0, which every repair loop in this repository reads
+        # as BASELINE_ALREADY_PASSES -- a false "already passes" for a program
+        # that fails its own test (the shared module measures 695 of 2019 such
+        # files, 34%).  ``suite_argv`` is the loader form the repair family
+        # already uses; this reuses it instead of hand-writing an argv that the
+        # runner cannot see into.  Targets stay repo-relative, exactly as before.
+        from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
+            suite_argv,
+        )
+        out["test_argv"] = {"value": [str(x) for x in suite_argv(sys.executable, *tests)],
+                            "rule": ("ARGV_LOADER_FROM_DISCOVERED_TEST_FILES" if discovered_tests
+                                     else "ARGV_LOADER_FROM_STATED_TEST_FILES"),
+                            "evidence": ",".join(tests)}
     if "test_paths" in keys and tests:
         out["test_paths"] = {"value": list(tests),
                              "rule": ("PATH_LIST_FROM_DISCOVERED_TEST_FILES" if discovered_tests

@@ -329,6 +329,75 @@ def suite_argv(executable: Any, *targets: Any) -> list[str]:
     return [str(executable), "-c", SUITE_RUNNER + SUITE_ENTRY] + [str(x) for x in targets]
 
 
+def _import_root(directory: pathlib.Path) -> pathlib.Path:
+    """The directory a package's own import statement resolves against.
+
+    ``from pkg.calc import add`` must find ``pkg`` *inside* one sys.path entry, and
+    ``from app.calc import add`` must find ``app``.  The entry is therefore the
+    first ancestor that is NOT itself a package -- its own directory name is not
+    importable as a package from inside it.  Walking up while ``__init__.py`` is
+    present is the exact definition of "is this directory a package", so the walk
+    needs no guessing and stops at the first directory that is not one.
+
+    A directory that is not a package (a flat module's own directory, a test
+    directory, the repository root) is already its own import root, so the walk
+    returns it unchanged.  Namespace packages (PEP 420, no ``__init__.py``) are
+    deliberately NOT guessed: the directory is returned as-is, because widening
+    to a parent on a name-only guess would change what sibling imports resolve
+    to for every caller in the repository.
+    """
+    d = directory
+    for _ in range(32):  # bounded: a pathological __init__ chain is not a package
+        if not (d / "__init__.py").is_file():
+            return d
+        if d.parent == d:
+            return d
+        d = d.parent
+    return directory
+
+
+def _child_import_roots(directory: pathlib.Path, limit: int = 64) -> list[pathlib.Path]:
+    """Import roots of packages nested one or two levels BELOW ``directory``.
+
+    ``src/app/calc.py`` is imported as ``app.calc``, so the entry that resolves it
+    is ``src`` -- a child of the project root, not the root itself.  When the
+    project root is what the repair engine is given (because that is the only
+    directory that also contains ``tests/``), the directory a package actually
+    resolves from has to be found, and it is a structural fact about the tree:
+
+      * ``src/`` is not a package (no ``__init__.py``) but ``src/app/`` is, so
+        ``src`` is an import root;
+      * ``app/`` is itself a package, so ``directory`` (its parent) already is one.
+
+    One level is inspected, with a one-level lookahead only for children that are
+    not packages, and the scan stops at ``limit`` entries, so this costs one
+    ``readdir`` on an ordinary project and stays bounded on a large tree.
+    """
+    out: list[pathlib.Path] = []
+    count = 0
+    try:
+        children = list(directory.iterdir())
+    except OSError:
+        return out
+    for child in children:
+        count += 1
+        if count > limit:
+            break
+        if not child.is_dir() or child.name in {"__pycache__", ".git", "node_modules"}:
+            continue
+        if (child / "__init__.py").is_file():
+            continue  # already importable from `directory`
+        try:
+            grandchildren = list(child.iterdir())
+        except OSError:
+            continue
+        for grandchild in grandchildren[:limit]:
+            if grandchild.is_dir() and (grandchild / "__init__.py").is_file():
+                out.append(child)
+                break
+    return out
+
+
 def _source_env(*paths: Any) -> dict[str, str]:
     """PYTHONPATH extended with the directories holding the code under repair.
 
@@ -339,13 +408,33 @@ def _source_env(*paths: Any) -> dict[str, str]:
     accepts a STRICT improvement reports no candidate for any bug. Adding the source directory to
     PYTHONPATH makes the module importable without changing the working directory the caller
     chose, so no other caller's relative paths change meaning.
+
+    Both the directory itself AND its import root are added, because the two
+    statements a normal project writes need different entries: ``import calc``
+    (flat module, entry = the module's directory) and ``from pkg.calc import
+    add`` (package, entry = the directory that CONTAINS ``pkg``).  Measured
+    2026-10-29: with only the directory, the identical bug and the identical test
+    repaired in a flat layout and were unreachable in ``pkg/``, ``src/app/`` and
+    ``app/`` layouts - the baseline and every candidate failed at import with the
+    same ModuleNotFoundError, so no candidate was a strict improvement and the
+    search reported OPEN__NO_VERIFIED_CANDIDATE_IN_BOUNDED_SEARCH for every bug.
+    With the import root, the same three layouts repair.
+
+    This is the one implementation the whole family shares (coupled loop,
+    iterative loop, dynamic fault localizer, provenance tracer, test audit,
+    patch search, apply-verified), so the rule is stated once here.
     """
     dirs: list[str] = []
     for raw in paths:
         q = pathlib.Path(str(raw))
         d = q if q.is_dir() else q.parent
-        if str(d) not in dirs:
-            dirs.append(str(d))
+        for candidate in (d, _import_root(d)):
+            if str(candidate) not in dirs:
+                dirs.append(str(candidate))
+        if q.is_dir():
+            for candidate in _child_import_roots(d):
+                if str(candidate) not in dirs:
+                    dirs.append(str(candidate))
     existing = os.environ.get("PYTHONPATH", "")
     if existing:
         dirs.append(existing)

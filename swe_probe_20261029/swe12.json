@@ -1,0 +1,100 @@
+[
+ {
+  "task": "repair_full",
+  "status": "FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS",
+  "cap": "python.software.repair.loop.test_guided.ast.v1",
+  "ms": 710,
+  "reason": ""
+ },
+ {
+  "task": "fix_broken",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "cap": "python.software.request.semantic_behavior.compile.v1",
+  "ms": 470,
+  "reason": ""
+ },
+ {
+  "task": "fix_short",
+  "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+  "cap": null,
+  "ms": 61,
+  "reason": ""
+ },
+ {
+  "task": "bug_report",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "cap": null,
+  "ms": 806,
+  "reason": ""
+ },
+ {
+  "task": "rename_param",
+  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+  "cap": "document.convert.markdown_pdf.pandoc_weasyprint",
+  "ms": 419,
+  "reason": "Blocker:BOUND_APT_METADATA_NOT_FOUND:pandoc"
+ },
+ {
+  "task": "rename_callsites",
+  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+  "cap": null,
+  "ms": 182,
+  "reason": ""
+ },
+ {
+  "task": "write_unit_test",
+  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+  "cap": "chart.raster.axis_title_unit_binding.v1",
+  "ms": 39,
+  "reason": "ModuleNotFoundError:No module named 'PIL'"
+ },
+ {
+  "task": "explain_fail",
+  "status": "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
+  "cap": "code.impact.tree_sitter.testselect.v1",
+  "ms": 1479,
+  "reason": "Blocker:OUTPUT_OVERWRITES_A_STATED_SOURCE:output_path=canonical/astra_runtime/tmp/swe12/ex"
+ },
+ {
+  "task": "find_callers",
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "cap": "python.source.symbols.index.ast",
+  "ms": 149,
+  "reason": ""
+ },
+ {
+  "task": "refactor_extract",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "cap": "python.software.request.semantic_behavior.compile.v1",
+  "ms": 201,
+  "reason": ""
+ },
+ {
+  "task": "type_check",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "cap": "python.contract.check.crosshair.v1",
+  "ms": 79,
+  "reason": ""
+ },
+ {
+  "task": "lint",
+  "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+  "cap": null,
+  "ms": 68,
+  "reason": ""
+ },
+ {
+  "task": "git_log",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "cap": "python.repository.acceptance.measure.v1",
+  "ms": 138,
+  "reason": ""
+ },
+ {
+  "task": "git_commit",
+  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+  "cap": null,
+  "ms": 288,
+  "reason": ""
+ }
+]

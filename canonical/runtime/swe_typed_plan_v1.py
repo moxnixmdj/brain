@@ -184,6 +184,62 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     return cid, inputs
 
 
+# Measured 2026-10-29.  Three registered capabilities answer the word "repair":
+# the test-guided patch SEARCH (read-only: it restores the source and reports the
+# patch, hard non-claim NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY), the iterative
+# repair LOOP (same non-claim) and ``python.software.repair.apply.verified.v1``,
+# which is the one that WRITES and then re-runs the stated test IN PLACE.  The
+# door's verdict is worded as a repair, so the sentence "fix X so its tests pass"
+# was answered by a capability that found the fix, threw it away, and reported
+# -- and the door returned PASS__..._EXECUTED_AND_VERIFIED while the file on disk
+# was byte-identical and the stated test still failed.  Selecting by which
+# mechanism can COMPLETE the stated effect is the same rule the effect gate
+# already applies one layer up; here it is applied to the choice between three
+# capabilities that share a verb.
+_REPAIR_EFFECT_WORDS = ("repair", "fix", "fixed", "broken", "bug", "correct", "make it pass")
+_APPLYING_REPAIR_CAPABILITY = "python.software.repair.apply.verified.v1"
+
+
+def _states_a_repair(goal: str) -> bool:
+    low = str(goal or "").lower()
+    return any(word in low for word in _REPAIR_EFFECT_WORDS)
+
+
+def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict,
+                               root: pathlib.Path, declared: dict) -> tuple[str, dict]:
+    """Swap a read-only repair for the one that lands the change, when it admits.
+
+    Admission is still the oracle: the applying capability is used only if it
+    binds every declared input from this sentence.  When it does not bind, the
+    caller keeps the capability it already had -- nothing is fabricated, and a
+    sentence that names no test stays on the read-only path exactly as before.
+    """
+    if not _states_a_repair(goal) or cid == _APPLYING_REPAIR_CAPABILITY:
+        return cid, inputs
+    entry = registry.get(_APPLYING_REPAIR_CAPABILITY)
+    if not entry:
+        return cid, inputs
+    try:
+        decision = selection.admit(goal, _APPLYING_REPAIR_CAPABILITY, entry, root,
+                                   declared.get(_APPLYING_REPAIR_CAPABILITY))
+    except Exception:
+        return cid, inputs
+    if not (decision.get("admitted") and decision.get("specific")):
+        return cid, inputs
+    # The applying capability must be able to name a suite to verify against --
+    # stated by the sentence, or discovered in the directory it states.  Without
+    # one there is nothing to prove the write against, and the read-only path is
+    # the honest answer.  This is the same derivation the caller will use, so the
+    # decision is made on exactly the inputs the plan would carry.
+    try:
+        _, values, _ = derivation.binding_view(goal, entry, root)
+    except Exception:
+        return cid, inputs
+    if not (values.get("test_paths") or (decision.get("inputs") or {}).get("test_paths")):
+        return cid, inputs
+    return _APPLYING_REPAIR_CAPABILITY, {**dict(decision.get("inputs") or {}), **values}
+
+
 def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
     """Return ``(registry, admissible, compiled)`` for a DECISIVE typed SWE
     selection, or ``None``.  ``None`` means: not a SWE request, ambiguous, no
@@ -225,6 +281,9 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
                 inputs = dict(decision.get("inputs") or {})
             else:
                 return None  # ambiguity / effect-inconsistent -> refuse
+
+        # The stated effect decides which mechanism answers it (see above).
+        cid, inputs = _prefer_the_writing_repair(goal, cid, inputs, registry, root, declared)
 
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
         entry = dict(admissible.get(cid) or registry.get(cid) or {})
