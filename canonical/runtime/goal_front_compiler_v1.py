@@ -899,6 +899,34 @@ def _is_referent_key(key: str, entry: Mapping[str, Any] | None) -> bool:
             or _is_output_key(key, entry or {}))
 
 
+def declared_optional_inputs(entry: Mapping[str, Any] | None) -> set[str]:
+    """Input keys the row itself says its adapter can synthesize.
+
+    A placeholder in ``action_template.args`` is a demand on the caller, and a
+    demand the adapter never makes is what kept the repair lane unreachable:
+    seven rows declare ``test_argv``, and every one of their adapters builds
+    that argv from the test paths it already resolved
+    (``argv_or_derived(args.get("test_argv"), sys.executable, *test_paths)``).
+
+    That fallback cannot be read off the adapter's AST without guessing -- a
+    first argument forwarded to a helper is indistinguishable from a value
+    handed to a judge (``verify(args.get("goal"), result, registry)`` is not a
+    derivation) -- so the row declares it, next to the args it declares:
+    ``"optional": ["test_argv"]``.  The binder passes ``None``; the adapter's
+    own ``*_REQUIRED`` refusal remains the only authority on whether the
+    declaration is true, so a row that lies here fails loudly at the call.
+    """
+    template = (entry or {}).get("action_template")
+    if not isinstance(template, Mapping):
+        return set()
+    declared = template.get("optional")
+    if isinstance(declared, str):
+        return {declared}
+    if isinstance(declared, (list, tuple, set)):
+        return {str(key) for key in declared}
+    return set()
+
+
 def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], root: pathlib.Path,
                            entry: Mapping[str, Any] | None, inputs: dict[str, Any]) -> list[tuple[str, BaseException]]:
     """Settle refused keys from declarations already in the repository.
@@ -910,11 +938,14 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
     """
     defaults = {key: value for key, value in declared_adapter_defaults(entry).items()
                 if not _is_referent_key(key, entry)}
+    optional = declared_optional_inputs(entry)
     replacement = declared_replacement_identifier(goal)
     still: list[tuple[str, BaseException]] = []
     for key, exc in unbound:
         if key in defaults:
             inputs[key] = defaults[key]
+        elif key in optional:
+            inputs[key] = None
         elif key.startswith("new_") and replacement:
             inputs[key] = replacement
         else:
