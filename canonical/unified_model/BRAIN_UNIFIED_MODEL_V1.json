@@ -28958,7 +28958,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "03ab7dbc05ed10b91fab1d3e69ad8c1a42cb69e05b874f94c3df7b62df72753f"
+  "value": "459e7a5a4ed5247d27dbfd12b38b89dab00c46233ff6d585a588351d6d55243f"
  },
  "engines": [
   {
@@ -202293,7 +202293,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f2499a03b504d7ccdb3d63fe00dba19fba79989c41fb640a5e29d133b8b092ab",
+   "sha256": "58da3331b40a5e468f78b32cf53608def28f47140f5070062d3a69f4d5f2f345",
    "status": "",
    "terms": {
     "20261030": 1,
