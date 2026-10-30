@@ -746,6 +746,20 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
 def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry: Mapping[str, Any], action: Mapping[str, Any],
                      raw_contract: Mapping[str, Any], started: int) -> dict[str, Any]:
     selected = str(compiled.get("selected_capability") or "")
+    # BEFORE the call, because a verdict after a destructive effect is an
+    # autopsy, not a refusal.  Measured on e9861f4: "Delete <b>/prod.db and the
+    # app directory" executed shell.command.run, removed the database, and
+    # reported PASS.  The exit law now makes that a failure, and this makes it
+    # not happen at all.
+    if goal_compiler._demands_a_change(goal) and not goal_compiler._serves_a_change(entry):
+        return _fail(task_id, "FAIL_CLOSED__CHANGE_REQUESTED_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE",
+                     "GOAL_CHANGE_CLAUSE_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE", started,
+                     executed=False, compiled_capability_id=selected,
+                     compiler_mode=compiled.get("compiler_mode"),
+                     reason=json.dumps({"capability": selected,
+                                        "effect_tokens": list((entry or {}).get("provides") or [])},
+                                       sort_keys=True)[:400],
+                     executor=LOCAL_EXECUTION_PROOF, tool_executed=False)
     try:
         tool_result = run_adapter_locally(entry, action)
     except Exception as exc:  # noqa: BLE001 - every adapter failure is a closed failure with its reason
@@ -1672,6 +1686,83 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
     return errors
 
 
+def _executed_capability_ids(result: Mapping[str, Any]) -> list[str]:
+    """Every capability this result says it ran, from every shape it records.
+
+    A pass can come from the single-capability path, the composed chain, the
+    composer route, or the controller, and each of them records the capability
+    somewhere else.  Reading all of them is what lets ONE law hold at the one
+    exit every path shares.
+    """
+    found: list[str] = []
+
+    def add(value):
+        text = str(value or "").strip()
+        if text and text not in found:
+            found.append(text)
+
+    add((result or {}).get("capability_id"))
+    add((result or {}).get("compiled_capability_id"))
+    for row in (result or {}).get("execution") or []:
+        if isinstance(row, Mapping):
+            add(row.get("capability_id"))
+    for key in ("composer_route",):
+        chain = ((result or {}).get(key) or {})
+        if isinstance(chain, Mapping):
+            for cid in chain.get("chain") or []:
+                add(cid)
+    composed = (result or {}).get("composer_execution") or {}
+    if isinstance(composed, Mapping):
+        for step in composed.get("steps") or []:
+            if isinstance(step, Mapping):
+                add(step.get("capability_id"))
+    controller = (result or {}).get("controller_execution") or {}
+    if isinstance(controller, Mapping):
+        for row in controller.get("trace") or []:
+            if isinstance(row, Mapping):
+                plan = row.get("plan") or {}
+                if isinstance(plan, Mapping):
+                    add((plan.get("args") or {}).get("capability_id"))
+    return found
+
+
+def _change_declaration_error(goal: str, result: Mapping[str, Any]) -> str | None:
+    """The request asks for a change and nothing that ran promises one.
+
+    The token is the row's own `provides`, read as words; the registry is read
+    once and cached.  22 of the 125 bound rows name a change, and they are the
+    rows that can edit source -- so "did anything that ran declare a change?"
+    is a question the repository already answers about itself.
+    """
+    if not goal_compiler._demands_a_change(goal):
+        return None
+    executed = _executed_capability_ids(result)
+    if not executed:
+        return "CHANGE_REQUESTED_AND_NOTHING_DECLARED_A_CHANGE"
+    registry = _bound_registry_cached()
+    for cid in executed:
+        if goal_compiler._serves_a_change(registry.get(cid) or {}):
+            return None
+    return "CHANGE_REQUESTED_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE:" + ",".join(executed)[:300]
+
+
+_BOUND_REGISTRY_CACHE: dict[str, dict] = {}
+
+
+def _bound_registry_cached() -> dict:
+    """The bound registry, read once.  A law that costs a file read per call is
+    a law nobody keeps."""
+    if "rows" not in _BOUND_REGISTRY_CACHE:
+        try:
+            import json as _json
+            path = pathlib.Path(ROOT) / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+            _BOUND_REGISTRY_CACHE["rows"] = dict(
+                (_json.loads(path.read_text(encoding="utf-8")) or {}).get("capabilities") or {})
+        except Exception:  # noqa: BLE001 - an unreadable registry must not break the door
+            _BOUND_REGISTRY_CACHE["rows"] = {}
+    return _BOUND_REGISTRY_CACHE["rows"]
+
+
 def _close_observations(result: dict[str, Any], goal: str,
                          before: Mapping[str, Any] | None,
                          artifacts: list[str] | None = None) -> dict[str, Any]:
@@ -1682,7 +1773,22 @@ def _close_observations(result: dict[str, Any], goal: str,
     untouched -- both of them were composed runs.  One function, called at every
     exit, is the only placement that cannot be bypassed by a new early return.
     """
-    if not isinstance(result, dict) or result.get("pass") is not True or before is None:
+    if not isinstance(result, dict) or result.get("pass") is not True:
+        return result
+    # The change-declaration law runs FIRST and needs no `before` world, because
+    # it is a statement about what the capability promised, not about bytes: a
+    # request that asks for a change and was served by rows that declare none is
+    # not a pass, whichever route produced it (single capability, composed chain,
+    # composer route or controller).
+    declaration_error = _change_declaration_error(goal, result)
+    if declaration_error is not None:
+        result["runtime_status_before_change_declaration_check"] = result.get("status")
+        result["status"] = "FAIL_CLOSED__CHANGE_REQUESTED_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE"
+        result["pass"] = False
+        result["failure_class"] = declaration_error.split(":", 1)[0]
+        result["change_declaration_errors"] = [declaration_error]
+        return result
+    if before is None:
         return result
     observed = observed_effect_errors(goal, before, observe_world(goal), result, artifacts)
     if not observed:
@@ -1801,6 +1907,14 @@ def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | Non
         routed = croute.route(goal)
         if not routed.get("pass"):
             return None
+        if goal_compiler._demands_a_change(goal):
+            registry = _bound_registry_cached()
+            chain = [str(c) for c in (routed.get("chain") or [])]
+            if not any(goal_compiler._serves_a_change(registry.get(c) or {}) for c in chain):
+                return _fail(task_id, "FAIL_CLOSED__CHANGE_REQUESTED_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE",
+                             "GOAL_CHANGE_CLAUSE_SERVED_BY_A_CAPABILITY_THAT_CANNOT_CHANGE", started,
+                             executed=False, reason=json.dumps({"chain": chain}, sort_keys=True)[:400],
+                             executor=LOCAL_EXECUTION_PROOF, tool_executed=False)
         executed = croute.execute_chain(routed["chain"], goal)
     except Exception:  # noqa: BLE001 - composition must never break routing
         return None
