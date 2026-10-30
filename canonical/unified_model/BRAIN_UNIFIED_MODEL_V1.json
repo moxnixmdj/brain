@@ -23133,7 +23133,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "0e4f0f520fc019d72722b5b9067ca5851d65228a148b5c04682d2fff6af68d53",
+    "source_sha256": "6dce8d0ce8f4b578ca90cfb6f7934e252fbafd64e63b5d5d4a12b0911f0fbb14",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23369,7 +23369,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
-    "source_sha256": "7e7514167194d201604681064f2847e09f74c7c57aa29950bc9ed38ea2555c0e",
+    "source_sha256": "89ac7f978488624c6e55577b43899d08c98dfdc22cb858699f7ef382894b36a6",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23684,7 +23684,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "6f9109762461e79a080a30780da91cf8eb8e0867fd71e48a69b1a641f1eb1dea",
+    "source_sha256": "383dcbb50939d0213704ffea55134d45ba713624f2056d7f450adc93933ce161",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25505,7 +25505,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-    "source_sha256": "bb3ac83e68b84a8272eb0c4cd3011228cb236bb1e42f0733538f0065b9ffc582",
+    "source_sha256": "34857d62e50e341bdfe66f1855a4b35cbf08ed5e2eb947320e0cbab95eb644e3",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -27457,6 +27457,9 @@
      "hashlib",
      "json",
      "pathlib",
+     "shutil",
+     "subprocess",
+     "tempfile",
      "typing"
     ],
     "declared_dependency_executables": [],
@@ -27467,11 +27470,14 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
+    "anchor_path",
+    "bench_path",
+    "diff_path",
     "output_path"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "verified"
    ],
    "platforms": [
     "darwin",
@@ -27482,7 +27488,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py",
-    "source_sha256": "5935bec788c6672f90f86c937674ec456597c209f0ceb08edcb17d3e805e32d4",
+    "source_sha256": "101e8ce1cc30f8fbdca988e9a7ef256bb849d4a98e5b888ee6af84283db15e30",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -28943,7 +28949,7 @@
   "engines": 26,
   "knowledge_documents": 173,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6509,
+  "research_index_records": 6510,
   "routing_tokens": 2133,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -28952,7 +28958,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "80bc6e2bc6664e1e9341a6917133159ed845bd4967e0aa4413465252e74a3496"
+  "value": "459e7a5a4ed5247d27dbfd12b38b89dab00c46233ff6d585a588351d6d55243f"
  },
  "engines": [
   {
@@ -52881,7 +52887,7 @@
   "included_source_count": 946,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c0e766f4291ce7750d65e4afdce765223807981d6d1a09c45c8cbae4100504f5"
+  "source_tree_digest": "a176aa07b688fcd7c158ffea2945e30e9e40bc1138c36c98b637c5f71e8acb89"
  },
  "research_index": [
   {
@@ -202280,6 +202286,51 @@
    }
   },
   {
+   "action_id": "SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1",
+   "capability": false,
+   "date": "2026-10-30",
+   "id": "research:canonical/action_intents/SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SOFTWARE_EXECUTION_RELIABILITY_INTEGRATION_V1_20261030_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "58da3331b40a5e468f78b32cf53608def28f47140f5070062d3a69f4d5f2f345",
+   "status": "",
+   "terms": {
+    "20261030": 1,
+    "acceptance": 1,
+    "actual": 1,
+    "admission": 1,
+    "completion": 1,
+    "disconnected": 1,
+    "effects": 1,
+    "evidence": 1,
+    "executed": 2,
+    "execution": 3,
+    "fresh": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "implementation-effect": 1,
+    "index": 1,
+    "input": 1,
+    "inputs": 1,
+    "integrate": 1,
+    "integrate_existing_software_execution_and_acceptance": 1,
+    "integration": 1,
+    "native": 1,
+    "pre-dispatch": 1,
+    "preservation": 1,
+    "preserved": 1,
+    "python": 1,
+    "reliability": 1,
+    "report": 1,
+    "reported": 1,
+    "requested": 1,
+    "reuse": 1,
+    "review": 1,
+    "software": 3,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "SOFTWARE_REPAIR_FAMILY_SHARED_SOURCE_ENV_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -211317,7 +211368,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
-   "sha256": "ec04e39e3438f805cc14b1d7b2270cfe5ccb331ee07c8eb8d7be15cbd26fa896",
+   "sha256": "06dfec2022a53a679c86a5afce593f8cf27a3a762a591b75a0d7477db792831d",
    "summary": "Deterministic diff-to-minimal-test-set selection (change impact analysis).",
    "symbol_count": 8,
    "symbols": [
@@ -211357,7 +211408,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
-   "sha256": "87b9852cdedd992835727fb0ba9effc80b750d90ad1c21e4e690105f81e2ed3c",
+   "sha256": "9799e2a6ea1a4dea34eb0209b7a305dd81f1678bdd522a8376176f00b226a32f",
    "summary": "python.source.crossfile_edit.choreograph.v1 — plan cross-file edits.",
    "symbol_count": 11,
    "symbols": [
@@ -212052,16 +212103,17 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "e094ca537a9695a89b69462dec7be6928dfa57fafc33f1b63f889ed91fa14866",
+   "sha256": "b3f736b6e9c739f7aacd919cd899f31ef0e2ceb5520242767f717a7af41c0901",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "symbol_count": 6,
+   "symbol_count": 7,
    "symbols": [
     "_ModuleIndexer",
     "_module_names_prepass",
     "_py_files",
     "_safe_root",
     "_signature",
-    "run"
+    "run",
+    "validate_cached_index"
    ],
    "terms": {
     "ast": 1,
@@ -212078,7 +212130,8 @@
     "signature": 1,
     "source": 1,
     "stdlib": 1,
-    "symbol": 2
+    "symbol": 2,
+    "validate_cached_index": 1
    }
   },
   {
@@ -212113,7 +212166,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_symbol_resolve.py",
-   "sha256": "7d2dabb7f94db714c6a94de8512e48ff059b4da46b3be8a550d186245f9758bf",
+   "sha256": "9604c30d8051851f82e6a604d17360aeb61745e325995ae07a404017e7c790a3",
    "summary": "python.source.symbols.resolve.v1 — resolve a Python name to its definition.",
    "symbol_count": 17,
    "symbols": [
@@ -220328,7 +220381,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "c3bc9a1fa4c8da8ad38ca244d89683b9b1b7d0334d54b05220eb23fa2396f518",
+   "sha256": "359648e8dab60f446497deacae6f1ef277d9eb50da0d45d05caf93c19a5ac230",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 54,
    "symbols": [
@@ -238393,7 +238446,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "506cd9726a10ba699442450edbc1a48908266f520c04b45c4d23f7491c1d6096",
+   "sha256": "be081aebd3847b750be2f45cfa9eeb86853d0491f67be9da1f91952cabdb8ff3",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 58,
    "symbols": [
@@ -267825,9 +267878,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "200b0788aece6e62ed127a3e2d9e7e032514b0ca90c358efad96a1b7060d503c",
+   "sha256": "a2a1df776bbaa5f4d5d3ababcfff5e3ba9197f47cda84dc58e7805b2c5c906b4",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
-   "symbol_count": 8,
+   "symbol_count": 9,
    "symbols": [
     "_effect_consistent",
     "_execution_template",
@@ -267835,6 +267888,7 @@
     "_fresh_output_path",
     "_resolve_family",
     "build_plan",
+    "implementation_effect_error",
     "is_swe_request",
     "plan_report"
    ],
@@ -267848,6 +267902,7 @@
     "fresh_output_path": 1,
     "front": 1,
     "hidden-tool": 1,
+    "implementation_effect_error": 1,
     "is_swe_request": 1,
     "live": 1,
     "plan": 2,
@@ -276534,15 +276589,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/write_authority_v1.py",
-   "sha256": "9c28a235ef1d11ec7d683ad86497aed5f017038467618e60d168a4de3d41e1ee",
+   "sha256": "2b9a8f109bb7e5b5e0299f378bb8d8a93d12554e5a12f4a1caf13c560726e807",
    "summary": "A capability may not write its report over the file it was asked to read.",
-   "symbol_count": 7,
+   "symbol_count": 8,
    "symbols": [
     "WriteAuthorityViolation",
     "_as_path",
     "_input_values",
     "_inside",
     "check",
+    "check_report",
     "is_source_transformer",
     "violation"
    ],
@@ -276552,6 +276608,7 @@
     "authority": 1,
     "capability": 1,
     "check": 1,
+    "check_report": 1,
     "file": 1,
     "input_values": 1,
     "inside": 1,

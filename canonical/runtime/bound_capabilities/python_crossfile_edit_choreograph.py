@@ -31,7 +31,8 @@ why it is in the plan.
 * completeness is claimed only when ambiguous_site_count == 0; otherwise
   ``complete: false`` — truthful over-approximation of risk, never silence.
 * cache law: ``index_path`` may point at a previously built symbol-index
-  artifact; it is validated (schema + totals) and reused byte-losslessly.
+  artifact; its schema, source scope, file membership and source hashes are
+  validated before its semantic records are reused.
   The plan artifact is byte-identical whether the index was fresh-built or
   cached (pin-proven); ``cache_used`` is only in the run() result.
 
@@ -114,6 +115,11 @@ def _load_index(repo, source_abs, cached_index_path, source_root):
                 "cached index invalid: source_root mismatch "
                 f"(cache says {artifact.get('source_root')!r}, query wants {source_root!r})"
             )
+        from canonical.runtime.bound_capabilities.python_source_symbol_index import validate_cached_index
+        try:
+            validate_cached_index(repo, source_abs, artifact)
+        except (RuntimeError, OSError) as exc:
+            _systemic(str(exc))
         return artifact, 1
     import importlib.util
     spec = importlib.util.spec_from_file_location(

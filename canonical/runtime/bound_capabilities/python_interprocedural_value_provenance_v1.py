@@ -40,11 +40,9 @@ def _safe_dir(repo,raw):
 def _trace_one(repo,test,timeout,max_events,max_value_chars,env=None):
  code=_PATCH.SUITE_RUNNER+r'''import hashlib,json,math,pathlib,runpy,sys,traceback
 repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); maxchars=int(sys.argv[4])
-events=[]; seq=0
+events=[]; seq=0; path_cache={}
 def path_of(frame):
- try:p=pathlib.Path(frame.f_code.co_filename).resolve()
- except Exception:return None
- return p if p.is_file() and repo in p.parents and p.suffix==".py" else None
+ return _brain_project_file(frame,repo,path_cache)
 def scalar(v):
  t=type(v).__name__
  if v is None or isinstance(v,(bool,int)):return {"type":t,"value":v}
@@ -59,9 +57,9 @@ def scalar(v):
  return {"type":t,**({"length":n} if isinstance(n,int) and n>=0 else {})}
 def tr(frame,event,arg):
  global seq
- if len(events)>=cap:return tr
+ if len(events)>=cap:return None
  p=path_of(frame)
- if p is None:return tr
+ if p is None:return None
  if event=="call":
   caller=frame.f_back; cp=path_of(caller) if caller is not None else None
   argc=frame.f_code.co_argcount+frame.f_code.co_kwonlyargcount

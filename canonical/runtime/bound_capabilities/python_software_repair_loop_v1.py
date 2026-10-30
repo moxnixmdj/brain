@@ -81,6 +81,8 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
             if p not in sources: sources.append(p)
     if not sources: raise RepairLoopError("NO_LOCALIZED_SOURCE_FILES")
 
+    from canonical.runtime.write_authority_v1 import check_report
+    check_report(repo, output, [*sources, *tests])
     originals={p:p.read_bytes() for p in sources}
     baseline=[_test(repo,t,timeout) for t in tests]
     if all(r["returncode"]==0 for r in baseline): raise RepairLoopError("BASELINE_ALREADY_PASSES")

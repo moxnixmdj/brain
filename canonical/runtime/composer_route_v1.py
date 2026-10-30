@@ -3443,6 +3443,11 @@ def execute_chain(chain: Sequence[str], goal: str,
     from canonical.runtime import live_brain_route_admission_v1 as ra
 
     reg = registry if registry is not None else composer.load_registry()
+    from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+    effect_error = implementation_effect_error(goal, chain, reg)
+    if effect_error:
+        return {"schema": SCHEMA, "pass": False, "goal": goal,
+                "status": "FAIL_CLOSED__" + effect_error, "steps": []}
     steps: list[dict[str, Any]] = []
     produced: dict[str, Any] = {}
     created_paths: list[str] = []

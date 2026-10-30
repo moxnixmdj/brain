@@ -18,6 +18,10 @@ not about the goal:
                                user expects) but the selected capability has no output path
                                input, so it cannot produce it
   R3  WEAK_EVIDENCE            at most one matched prose token: one word is never a goal
+  R10 SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED
+                               an explicit implementation request cannot dispatch a
+                               report-only analysis route. This is a necessary
+                               contract check, not proof of feature correctness.
   R5  TOOL_TRUTH               after execution, a tool result saying ``pass: false`` or a
                                non-success status (OPEN__, UNRESOLVED, FAIL...) can never
                                surface as an overall PASS
@@ -158,6 +162,11 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     entry = registry.get(selected)
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
+    from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+    effect_error = implementation_effect_error(goal, [selected], registry)
+    if effect_error:
+        return {"schema": SCHEMA, "admitted": False, "rule": effect_error,
+                "compiler_mode": mode, "selected_capability": selected}
     # A sentence that states a settled command line states a COMMAND, and a
     # capability that cannot run a command line cannot answer it -- however many
     # of the sentence's words its keywords happen to contain.  The retrieval
@@ -421,6 +430,11 @@ def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any]
         entry = registry.get(cid)
         if not isinstance(entry, Mapping):
             return {**base, "admitted": False, "rule": "DAG_CAPABILITY_NOT_ADMISSIBLE", "dag_steps": rows,
+                    "failed_capability_id": cid}
+        from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+        effect_error = implementation_effect_error(clause, [cid], registry)
+        if effect_error:
+            return {**base, "admitted": False, "rule": effect_error,
                     "failed_capability_id": cid}
         score, _specificity, evidence = front.score_capability(clause, cid, entry)
         matched = set(evidence.get("matched_provides") or []) | set(evidence.get("matched_identity") or []) | set(evidence.get("matched_keywords") or [])
