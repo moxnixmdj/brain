@@ -1,6 +1,6 @@
 # All the problems — the hardcore software-engineering census
 
-**Revision 6.** Measured on `814ae41` (main), 2026-10-30. Every number below is a measurement from
+**Revision 7.** Measured on `ec2f9ec` (main), 2026-10-30. Every number below is a measurement from
 this tree, not an estimate. §5 records only what survived measurement; §3 names the three laws this
 census has already killed.
 
@@ -19,15 +19,19 @@ Authority: none. Credit: 0. Model dependency: 0. Spend: $0.
 
 ## 0. The answer in one line
 
-> **2 of 28.** The machine executes a rename, indexes 2,254 files, and refuses five requests it used
-> to lie about. Everything else it cannot do — and one thing it does that it should not: it deletes a
-> production database when asked, and reports success.
+> **5 of 28.** The machine executes a rename, indexes 2,254 files, refuses five requests it used to lie
+> about, and now answers three analysis questions from artifacts it already builds. Everything else it
+> cannot do — and one thing it does that it should not: it deletes a production database when asked,
+> and reports success.
 
 | works end to end today | measured |
 |---|---|
 | rename a symbol across files, from a sentence | **PASS, 812 ms** — callers edited, imports green, suite green |
 | index the whole runtime | **PASS, 21.3 s** — 2,254 files |
-| refuse a request it cannot serve, and say so | **PASS** — five substitutions became honest `FAIL__RAW_GOAL_COMPILATION_GAP` this week |
+| refuse a request it cannot serve, and say so | **PASS** — five substitutions became honest `FAIL__RAW_GOAL_COMPILATION_GAP` |
+| say which function nothing executes | **PASS, 1.7 ms** — `audit_total`, from the index's own `callers_of` |
+| find a hardcoded credential | **PASS, 0.2 ms** — file + line, secret redacted, never written |
+| say which function is quadratic | **PASS, 0.5 ms** — nesting depth → `O(n^2)` |
 | everything else | refuses, substitutes, or lies |
 
 ---
@@ -50,10 +54,10 @@ Searched across all 419 verified ids, case-insensitive, including keywords and p
 
 | family | owners |
 |---|---|
-| dead code / unused symbol | **0** |
+| dead code / unused symbol | **1** — `python.source.dead_code.v1`, admitted 2026-10-30 |
 | move a symbol between modules | **0** |
-| hardcoded secret scanning | **0** |
-| complexity / quadratic detection | **0** |
+| hardcoded secret scanning | **1** — `python.source.secret_scan.v1`, admitted 2026-10-30 |
+| complexity / quadratic detection | **1** — `python.source.complexity.v1`, admitted 2026-10-30 |
 | merge conflict resolution | **0** |
 | flaky test detection | **0** |
 | git bisect / regression commit | **0** |
@@ -67,7 +71,8 @@ Searched across all 419 verified ids, case-insensitive, including keywords and p
 
 **This is the answer to the question.** The census's 28 tasks are symptoms. The disease is that
 eleven capability families the job is made of were never built, and the two quality gates that *were*
-built cannot be reached.
+built cannot be reached. **Three of the eleven now have an owner**, and each took one query over an
+artifact that already existed — see §2.3 for what that says about the other eight.
 
 ---
 
@@ -164,6 +169,17 @@ All three correct on the first run once the scope was read from the sentence. **
 revision 2. It is not missing capability. It is missing **admission**: the query exists, the artifact
 exists, and there is no registry row that says the machine can be asked for it.
 
+**Admitted in `ec2f9ec`.** Three rows, three adapters, no new parser and no dependency. Census
+**2/28 → 5/28**, the first movement since this document began, with the 394-test ordinary-sentence
+suite byte-for-byte identical to the tree it was built on. Two narrowings made it reachable and both
+are laws, not patches: *"the tests in X"* names the **witness**, not the subject, so two existing
+directories no longer block `source_root`; and *"write its name to P"* is **delivery** of the previous
+answer — anaphoric, so it cannot name a new capability — rather than a second step that fails and
+takes the answer down with it.
+
+That gives the ratio for the remaining eight families: **one query, one row, one adapter, ~0.5 ms.**
+They are not research. They are bookkeeping against artifacts this machine already produces.
+
 That moves the bottleneck into the one lane nobody has been looking at, and §2.4 is why.
 
 ### 2.4 Nothing in the machine can author a capability about the machine *(new this revision)*
@@ -216,18 +232,19 @@ actually serves, every item below is unverifiable at merge time.
 
 Ordered by *measured* leverage, with the arithmetic shown.
 
-**① Build the owners. This is now first, because §2.1 proved the ranking is not the disease.**
+**① Build the owners — in progress, 3 of 11 admitted (`ec2f9ec`).** This is first, because §2.1
+proved the ranking is not the disease.
 The word-suppression rule was built and killed this revision: it moved the false match from `report`
 to `run` and left the false pass standing. A sentence with no owner is answered by whatever row shares
 one word with it — a PDF converter, a test auditor, a repo measurer. **An owner scoring 5 on
 `security` ends the tie by itself.** Until these families exist, every ranking rule is arithmetic on
 noise.
 
-**② The analysis lane — measured, and it is admission, not engineering (§2.3).** Three queries, run
-against the artifact the machine already builds, returned the right answer on the census fixtures in
-**1.7 ms / 0.2 ms / 0.5 ms**. What is missing is a registry row plus a verification receipt — the
-existing lane (`capability_receipt_lane_v1.py`, 325 missions) already defines how a row is admitted.
-This is the cheapest item on the list and the only one that raises the pass count.
+**② Finish the analysis lane — three done, and the shape of the next three is now proven.** Each
+remaining family is a query over an artifact the machine already builds: *unused imports* and
+*unreachable branches* read the same symbol index; *flaky test* and *import cycle* read the same call
+and import edges; *merge conflict* is marker detection over bytes. The per-PR registration limit is
+**3**, so this is a four-PR lane — and it is the only lane that raises the pass count.
 
 **③ Derive the intermediate artifact (21 rows, §2.2).** `diff_path` = the tree's `git diff`;
 `anchor_path`/`worktree_path` = the named root; `index_path` = the registered indexer. The mechanism
