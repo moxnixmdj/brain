@@ -21825,7 +21825,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
-    "source_sha256": "d05b65408adbec3fdab1b39a1e6f1c16ba73f80de73a0f601fbc90fdc263eef8",
+    "source_sha256": "d7aa010514b322a3bbf65ad7c84730a3043ab1a0117ad50a3158b4749dbcede9",
     "source_type": "brain_bound_system_tool"
    },
    "provides": [
@@ -30474,9 +30474,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 211,
+  "knowledge_documents": 212,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6537,
+  "research_index_records": 6538,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30485,7 +30485,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a5ca5fd939ebb67e38d408ff93f22214e9443b545da3e8f299a89ff7cc24f7cd"
+  "value": "017de4616a780811674fe31f0f56b82f4fbad27e2a297eb880c996d6f72d020f"
  },
  "engines": [
   {
@@ -44496,6 +44496,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5708,
+   "headings": [
+    "Hardcore software-engineering problem inventory — V16",
+    "§1 What landed",
+    "§2 RETRACTED: \"build a chain runner\"",
+    "A caution about my own instrument",
+    "§3 The census split: chains are not what refuses the 47",
+    "§4 Still open, unchanged from V15",
+    "§5 The next change, in one sentence"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V16.md",
+   "sha256": "90b7e89f2ad0e0ec1c2e1b50e38693bf746e712d27b32dccbc010fedc096af2e",
+   "summary": "Measured 2026-10-31 on `fabf28c` (branch `arena/14753d8c-brain`). Supersedes V13–V15. This one is short on purpose: it records **one fix that landed** and **three measurements that change what the next session should do**.",
+   "terms": {
+    "13": 3,
+    "18": 3,
+    "22": 2,
+    "47": 5,
+    "84": 3,
+    "already": 7,
+    "answer": 4,
+    "before": 3,
+    "call": 3,
+    "census": 3,
+    "chain": 9,
+    "diff": 7,
+    "each": 3,
+    "empty": 6,
+    "false": 5,
+    "file": 3,
+    "first": 4,
+    "fix": 3,
+    "git": 4,
+    "inputs": 3,
+    "measured": 3,
+    "not": 8,
+    "one": 4,
+    "only": 3,
+    "own": 3,
+    "patch": 7,
+    "produce": 3,
+    "producers": 3,
+    "real": 3,
+    "refused": 5,
+    "refuses": 3,
+    "registry": 3,
+    "requests": 3,
+    "requires": 4,
+    "returns": 4,
+    "row": 11,
+    "rows": 6,
+    "runner": 4,
+    "seed": 4,
+    "selected": 4,
+    "sentence": 3,
+    "so": 5,
+    "step": 5,
+    "still": 3,
+    "token": 5,
+    "v15": 4,
+    "whose": 3,
+    "wiring": 4
+   },
+   "title": "Hardcore software-engineering problem inventory — V16",
+   "title_terms": [
+    "hardcore",
+    "inventory",
+    "problem",
+    "software-engineering",
+    "v16"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23697,
    "headings": [
     "What is actually missing — the complete problem list for a hardcore software engineer",
@@ -58265,10 +58340,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1002,
+  "included_source_count": 1003,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e4432c295994dcbb34ad0cedf410d2cd09f895876dcf92c8ff21248af57ee9a0"
+  "source_tree_digest": "dc5a765e8409d73bbca5de898c38af7766e3256f47988fc068314ab9625daef8"
  },
  "research_index": [
   {
@@ -200184,6 +200259,30 @@
    }
   },
   {
+   "action_id": "AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8f06b762c5b091d21226ebfe2b78ea524bf2ba3ce829cbc08d7c2104bc322d2b",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_reader_whose_answer_is_empty_reported_pass_because_its_declared_expectation_only_checked_that_an_artifact_existed__measured_one_false_in_54_and_zero_of_them_were_visible_to_the_door": 1,
+    "an_empty_diff_is_not_an_answer_v1_20261031_v1": 1,
+    "answer": 1,
+    "diff": 1,
+    "empty": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "reuse_gits_own_no_index_diff_for_an_untracked_target_and_add_a_second_independent_check_that_counted_files_carry_a_hunk": 1,
+    "the_git_diff_reader_answers_for_a_target_git_has_never_seen__and_a_diff_that_counts_files_with_no_hunk_is_refused_by_the_adapter_itself": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "AN_EVERYDAY_SENTENCE_STATES_THE_COUNTING_AND_COLUMN_COMMANDS_IT_MEANS_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -207216,7 +207315,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/NEVER_CERTIFY_A_WRONG_ANSWER_ANSWER_SHAPE_AND_STATED_OPERATION_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "603ffb96f6b95eb818ddf627a4ccb693b81af64268e0b3d52d5317fe23643378",
+   "sha256": "6b358ab8d44234470f62835a9dbb0d54f53182baec933eb7a162b3494ae8ef57",
    "status": "",
    "terms": {
     "10": 3,
