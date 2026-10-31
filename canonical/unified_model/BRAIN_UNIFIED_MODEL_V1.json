@@ -30488,7 +30488,7 @@
   "engines": 26,
   "knowledge_documents": 204,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6523,
+  "research_index_records": 6524,
   "routing_tokens": 2261,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30497,7 +30497,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7d097f1fec4307cb585e86eb23f8b9d29f730d39dacda12dcdf12bb4fd20897e"
+  "value": "f5b7d6727eeb20ee85ce023ecae6636d8e93249c115cf3c45f8dbfff79316948"
  },
  "engines": [
   {
@@ -208734,6 +208734,51 @@
    }
   },
   {
+   "action_id": "THE_SURFACE_THAT_WORKS_KEEPS_WORKING_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/THE_SURFACE_THAT_WORKS_KEEPS_WORKING_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_SURFACE_THAT_WORKS_KEEPS_WORKING_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "baebdbe71abb571d235a90a44b9c83c02a992bea877143c6e12015b4279b6361",
+   "status": "",
+   "terms": {
+    "1.035": 1,
+    "20261031": 1,
+    "25": 1,
+    "27": 1,
+    "28": 2,
+    "6421": 1,
+    "6435": 1,
+    "adapters": 1,
+    "all": 1,
+    "answered": 1,
+    "asked": 1,
+    "asserted": 1,
+    "because": 1,
+    "been": 1,
+    "before": 1,
+    "branch": 1,
+    "but": 1,
+    "capabilities": 1,
+    "capability": 1,
+    "carried": 1,
+    "cd44f98": 1,
+    "census": 1,
+    "creation": 2,
+    "either": 2,
+    "main": 4,
+    "merged": 4,
+    "read": 2,
+    "rules": 2,
+    "still": 2,
+    "test": 3,
+    "v1": 2,
+    "whether": 2
+   }
+  },
+  {
    "action_id": "THE_TEST_CORPUS_AUDIT_COULD_ONLY_REPORT_A_CORPUS_THAT_WAS_ALREADY_GREEN_SO_ITS_PASS_RATE_WAS_ALWAYS_ONE_HUNDRED_PERCENT_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -209846,7 +209891,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/VALID_ARTIFACT_ANSWER_OR_NO_PASS_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "21d8ab0569cc64101319093aa0eeebd338a0e02b0b7333582be1df874adbf852",
+   "sha256": "74883371da089f516f1e19b22749672dce027292d9c3f768707a7edc4eb02dad",
    "status": "",
    "terms": {
     "20261031": 1,

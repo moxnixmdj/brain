@@ -37,7 +37,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_CAPABILITY_THAT_RAN_AND_REPORTED_A_NEGATIVE_OR_ABSENT_VERDICT_WAS_CERTIFIED_PASS__THE_DOOR_ASKED_WHETHER_THE_ROW_HAD_EXECUTED_IT_DID_NOT_ASK_WHETHER_WHAT_THE_SENTENCE_NAMED_HAD_BEEN_ANSWERED__MEASURED_2026_10_31_ON_THREE_MATRIX_ROWS_REVIEW_ANSWERED_BY_A_MUTATOR_THAT_DAMAGED_A_FILE_THE_SENTENCE_ONLY_ASKED_ABOUT__BISECT_WITH_NO_KNOWN_GOOD_SIDE_REPORTING_THE_STARTING_COMMIT__MUTATION_SCORE_MEASURED_2_OF_2_KILLED_AND_GRADED_FALSE_BY_AN_ORACLE_THAT_ONLY_KNEW_ONE_SCHEMA",
-  "canonical_base_commit": "5bc5ab81cae0f08ef68a92afcbf6a6c37deeba41",
+  "canonical_base_commit": "4b1baa2a57c1eac48658c101342fe5d0636c25a5",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -83,7 +83,7 @@
     "canonical/tests/test_a_review_of_a_file_is_a_change_set_of_that_file_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "5bc5ab81cae0f08ef68a92afcbf6a6c37deeba41",
+    "canonical_base_commit": "4b1baa2a57c1eac48658c101342fe5d0636c25a5",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "THE_READ_SOUNDING_WORD_ESCAPE_FOR_A_ROW_THAT_DECLARES_SOURCE_EDITING",
