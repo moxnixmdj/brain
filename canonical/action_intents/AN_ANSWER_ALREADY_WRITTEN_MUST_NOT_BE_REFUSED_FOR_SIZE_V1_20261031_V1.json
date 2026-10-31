@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31",
- "canonical_base_commit": "1f2f1605f084aee80c729e35b2dc763182e604ba",
+ "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -72,7 +72,7 @@
   "hardcore_swe_surface_probe_20261030.py --floor"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "1f2f1605f084aee80c729e35b2dc763182e604ba",
+  "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "REFUSING_A_RUN_BECAUSE_ITS_ARTIFACT_IS_BIGGER_THAN_THE_GATE_S_READ_BUDGET",

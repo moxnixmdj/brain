@@ -222,6 +222,16 @@ def _project(payload: Mapping[str, Any], shape: Mapping[str, Any]) -> tuple[str,
             # `totals.functions = 10` was answering "list the functions" before
             # `files[0].functions = [...]` was looked at.  The path decides, not the leaf.
             under_summary = any(seg in _NON_ANSWER_FIELDS for seg in path.split(".")[:-1])
+            # AN ELEMENT OF A LIST IS NOT THE COLLECTION.  Measured 2026-10-31 (V4 §5):
+            # "Which tests does <f> break" was delivered ``records.0.tests`` = 0 -- the test
+            # count of the FIRST record of an audit, because the walk descended into the list
+            # and matched the noun inside element 0.  A scalar under a numeric segment is one
+            # item of an enumeration, never the enumeration itself; skipping it turns a
+            # certified wrong number into a named refusal (ANSWER_SHAPE_UNSERVED).
+            if (shape.get("kind") == "ENUMERATE"
+                    and not isinstance(value, (Mapping, list, tuple))
+                    and any(seg.isdigit() for seg in path.split(".")[:-1])):
+                continue
             if (low in aliases and low not in _NON_ANSWER_FIELDS and not under_summary
                     and not _COUNT_FIELD.search(low) and _is_answer_value(value)):
                 return path, value
