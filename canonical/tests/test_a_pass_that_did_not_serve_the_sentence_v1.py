@@ -100,22 +100,32 @@ class APartialAnswerIsNotAPassTests(unittest.TestCase):
         shutil.rmtree(BASE, ignore_errors=True)
 
     def test_a_second_effect_the_row_cannot_supply_withholds_the_pass(self):
-        base = _tree("needs_a_test")
-        result = door.solve({
-            "task_id": "PARTIAL_regression_test",
-            "goal": ("The test in %s fails. Fix the bug in %s and add a regression test "
-                     "that would have caught it, then make the whole suite pass."
-                     % (_rel(base / "tests"), _rel(base / "app"))),
-        })
-        self.assertIsNot(result.get("pass"), True,
-                         "a sentence asking for a regression test was certified without one")
-        # The claim is withheld, and it says which effect was not served OR which
-        # capability was refused -- never a bare PASS.
-        named = list(result.get("unserved_effects") or [])
-        named += [str(result.get("status") or "")]
-        named += [str(result.get("failure_class") or "")]
-        self.assertTrue(any("TEST_AUTHORING" in x or "STATED_" in x for x in named),
-                        "the refusal does not name the effect that was not served: %r" % (named,))
+        """End to end through the one exit every route passes.
+
+        The reproduction is the ladder job ``fix_then_regression_test``
+        (``hardcore_swe_surface_probe_20261030.py``): on ``b68f7c7`` that sentence reached
+        ``python.software.repair.apply.verified.v1``, fixed the tree, left the suite green
+        and reported PASS with no test file anywhere.  A hand-built tree does not reach
+        that row (it stops at ``CAPABILITY_RETURNED_A_VERDICT``, measured), so the
+        reproduction lives in the probe; this pins the law it exercises, at the exit.
+        """
+        goal = ("Fix the bug in app and add a regression test that would have caught it, "
+                "then make the whole suite pass.")
+        result = {"pass": True,
+                  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED",
+                  "capability_id": "python.software.repair.apply.verified.v1",
+                  "execution": {"steps": [
+                      {"capability_id": "python.software.repair.apply.verified.v1"}]}}
+        closed = door._close_observations(result, goal, None)
+        self.assertIsNot(closed.get("pass"), True,
+                         "a sentence that asked for a regression test passed without one")
+        self.assertEqual(closed.get("status"), "FAIL_CLOSED__STATED_EFFECT_NOT_PROVIDED_BY_THE_RUN")
+        self.assertEqual(list(closed.get("unserved_effects") or []),
+                         ["STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY"])
+        self.assertTrue(closed.get("work_performed_anyway"),
+                        "work that landed must not be denied")
+        self.assertTrue(str(closed.get("runtime_status_before_effect_check") or "").startswith("PASS__"),
+                        "what the runtime did must stay in the record")
 
     def test_the_check_reads_what_a_row_produces_not_what_it_is_tagged_with(self):
         """The seam: a test-GUIDED repair mentions tests everywhere and supplies none."""
@@ -136,15 +146,51 @@ class APartialAnswerIsNotAPassTests(unittest.TestCase):
             door._enforced_at_exit(goal, [generated], [generated["capability_id"]]), [],
             "the row that does generate tests was refused")
 
+    def test_a_test_file_that_appeared_is_the_effect_however_silent_the_row_is(self):
+        """Measured false negative: the feature row wrote test_total.py and declared nothing."""
+        base = _tree("wrote_a_test")
+        before = {"files": {"%s/app/models.py" % _rel(base): [1, 1]}}
+        (base / "tests/test_total.py").write_text("def test_it():\n    assert True\n", encoding="utf-8")
+        goal = ("Add a function total_cents(item) to %s/app/models.py and add a test for it "
+                "in %s/tests/test_total.py." % (_rel(base), _rel(base)))
+        self.assertEqual(
+            door._enforced_at_exit(goal, [{"provides": ["python.feature.implement_function_spec"]}],
+                                   ["python.feature.implement_function_spec.v1"], before), [],
+            "a test file the run actually wrote was not read as the effect")
+
+    def test_a_row_that_declares_it_synthesizes_the_test_is_not_demoted(self):
+        """The registry declaration outranks every token; a capable row keeps its pass."""
+        goal = "Fix the bug in app and add a regression test that would have caught it."
+        capable = {"provides": ["software.repair.crossfile.choreograph"],
+                   "action_template": {"args": {"synthesize_regression_test": True}}}
+        self.assertEqual(
+            door._enforced_at_exit(goal, [capable],
+                                   ["software.repair.crossfile.choreograph.v1"]), [],
+            "a row that declares synthesize_regression_test was demoted anyway")
+
     def test_the_effect_is_never_enforced_before_the_run(self):
-        """It is an at-exit code, so a sentence that also asks for real work still runs."""
+        """It is an at-exit code: the answer gate may not judge it, the exit must."""
         self.assertIn("STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY",
                       door._EFFECTS_AT_EXIT_CODES)
         goal = "Fix the bug in app and add a regression test that would have caught it."
         repair = {"provides": ["python.software.repair.apply"], "keywords": ["test"]}
-        errors = door.stated_answer_errors(goal, repair, "python.software.repair.apply.verified.v1")
-        self.assertTrue(any(e.split(":", 1)[0] == "STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY"
-                            for e in errors), errors)
+        self.assertEqual(
+            door.stated_answer_errors(goal, repair, "python.software.repair.apply.verified.v1"), [],
+            "the answer gate judged an effect only the exit can see")
+
+    def test_the_plan_is_not_refused_before_the_run_for_the_unserved_effect(self):
+        """Refusal costs the work the sentence also asked for -- measured 27/28 vs 28/28."""
+        from canonical.runtime import swe_typed_plan_v1 as plan
+        goal = ("Fix the bug in app and add a regression test that would have caught it, "
+                "then make the whole suite pass.")
+        self.assertIsNone(
+            plan.implementation_effect_error(goal, ["python.software.repair.apply.verified.v1"], {}),
+            "the plan was refused before the run for an effect the exit now withholds")
+        # The sibling rule in the same block still fires: a query nothing serves is a gap.
+        self.assertEqual(
+            plan.implementation_effect_error(
+                "Find every caller of the function parse in app", ["python.code.index.v1"], {}),
+            "R10_CALLER_QUERY_EFFECT_UNSERVED")
 
     def test_a_sentence_that_asks_for_a_name_is_not_a_request_to_author_a_test(self):
         """Negative control: 'write the test name' asks for a NAME."""

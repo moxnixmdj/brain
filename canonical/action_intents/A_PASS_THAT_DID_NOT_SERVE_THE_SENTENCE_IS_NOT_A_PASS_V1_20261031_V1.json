@@ -34,7 +34,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two effects were asked for, one was delivered, and the single-capability route certified the sentence. Measured on b68f7c7: 'Fix the bug in <D>/app and add a regression test that would have caught it' -> repair.apply.verified -> pass=True, app fixed, suite green, no test file. The composed branch already demoted itself on a False verifier verdict; this route did not. And the answer gate greps the whole row, so a test-GUIDED repair row 'supplies' test authoring by mentioning it -- measured: adding the rule alone changed nothing for that sentence.",
-  "canonical_base_commit": "b68f7c7633cfd3e3f212dcc83bab49f7ca213bf1",
+  "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -50,7 +50,7 @@
   "incremental_spend_usd": 0,
   "intent": "Withhold the claim, keep the work: an effect the run did not serve is named at the exit, never certified.",
   "load_bearing_primary": {
-    "canonical_base_commit": "b68f7c7633cfd3e3f212dcc83bab49f7ca213bf1",
+    "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
     "constructive_gap_for_open_obligation_ids": [
       "AUTOMATIONBENCH_GE_40",
       "CHARTOGRAPHY_TOOLS_GE_89",
@@ -84,7 +84,7 @@
     "canonical/tests/test_a_pass_that_did_not_serve_the_sentence_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "b68f7c7633cfd3e3f212dcc83bab49f7ca213bf1",
+    "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
@@ -410,7 +410,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "39a1057468fd8cf30b55d805c0884a57ae8dc024",
+          "git_blob_sha": "773f3731677727ee1492ba21ebfe64ae0efa8df1",
           "path": "canonical/runtime/capability_selection_retrieval_v1.py"
         },
         {
@@ -418,10 +418,10 @@
           "path": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py"
         }
       ],
-      "decisive_question": "MAY_A_CAPABILITY_BE_ADMITTED_FOR_A_REQUEST_WHEN_ITS_DECLARED_CONTRACT_HAS_NO_SLOT_TO_HOLD_WHAT_THE_SENTENCE_STATES",
-      "falsifier_id": "THE_SAME_SENTENCE_OVER_AN_ABSENT_TARGET_AND_OVER_AN_EXISTING_ONE_REACHES_THE_SAME_WRITER_AND_WRITES_THE_SAME_BYTES",
+      "decisive_question": "MAY_A_RUN_BE_CERTIFIED_FOR_A_SENTENCE_THAT_STATED_TWO_EFFECTS_WHEN_IT_SERVED_ONE",
+      "falsifier_id": "THE_SAME_SENTENCE_OVER_A_TREE_WHERE_THE_SECOND_EFFECT_IS_ALSO_SERVED__IT_MUST_KEEP_ITS_PASS",
       "known_counterexamples_checked": true,
-      "no_known_counterexample_reason": "FIRST_CANDIDATE_WAS_TO_REMOVE_THE_OFFENDING_KEYWORDS_FROM_THE_DOCX_VERIFIER__REJECTED_BECAUSE_IT_WOULD_MOVE_THIS_TIE_AND_LEAVE_THE_CLASS__SECOND_CANDIDATE_WAS_TO_MAKE_THE_ADAPTER_TOLERATE_A_MISSING_SIDECAR__REJECTED_BECAUSE_THE_VERIFIER_REFUSING_IS_CORRECT_AND_THE_DEFECT_IS_THAT_IT_WAS_CHOSEN__THIRD_CANDIDATE_WAS_TO_REQUIRE_THE_SENTENCE_TO_NAME_A_WRITE_CAPABILITY__REJECTED_AS_A_KEYWORD_RULE_OF_THE_KIND_THAT_MEASURABLY_HIJACKS_THE_SCORER__FOURTH_CANDIDATE_WAS_TO_APPLY_THE_RULE_TO_ANY_SENTENCE_WITH_A_PAYLOAD__REJECTED_AS_THE_6119_SHAPE",
+      "no_known_counterexample_reason": "FIRST_CANDIDATE_WAS_TO_REFUSE_BEFORE_THE_RUN__REJECTED_BY_MEASUREMENT:_IT_COST_TWO_JOBS_THEIR_CORRECT_ROUTE_(24/28). SECOND_CANDIDATE_WAS_TO_MATCH_THE_ROW_TEXT_FOR_THE_WORD_TEST__REJECTED_BY_MEASUREMENT:_A_TEST_GUIDED_REPAIR_ROW_MENTIONS_TESTS_AND_WROTE_NONE,_SO_THE_LIE_SURVIVED. THIRD_CANDIDATE_WAS_TO_READ_ONLY_THE_ROW_DECLARATION__REJECTED_BY_MEASUREMENT:_THE_FEATURE_ROW_WROTE_TESTS_TEST_TOTAL.PY,_DECLARED_NO_TEST_EFFECT_AND_WAS_DEMOTED_ON_A_CORRECT_PASS. THE_SURVIVING_RULE_READS_THE_TREE_ITSELF_(A_TEST_FILE_THAT_DID_NOT_EXIST_BEFORE),_THE_REGISTRY_DECLARATION,_AND_WITHHOLDS_ONLY_THE_CLAIM.",
       "proposal_id": "A_REQUEST_ABOUT_A_DIRECTORY_GETS_THE_DIRECTORY_FORM_OF_THE_COMMAND_SO_A_TREE_IS_NO_LONGER_AN_ERROR_V1_20261025_V1"
     }
   },

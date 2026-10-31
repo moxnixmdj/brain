@@ -2156,8 +2156,63 @@ def _supplied_by_any(supplied: "re.Pattern[str]", entries: "Sequence[Mapping[str
     return False
 
 
+# A row can also supply an effect by DECLARING the action argument that produces it.  The
+# registry's own ``action_template.args`` is a stronger statement than any token in a
+# ``provides`` list -- ``software.repair.crossfile.choreograph.v1`` says
+# ``synthesize_regression_test: true`` and never mentions authoring in its effects.  Reading
+# the declaration is how a capable row is spared; reading only tokens is how the single
+# repair row is refused for work it never claimed.
+_EFFECT_CAPABILITY_ARGS: "Mapping[str, str]" = {
+    "STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY": "synthesize_regression_test",
+}
+
+
+def _declares_effect_by_argument(arrays: "Sequence[Mapping[str, Any]]", code: str) -> bool:
+    arg = _EFFECT_CAPABILITY_ARGS.get(code)
+    if not arg:
+        return False
+    for entry in arrays:
+        template = (entry or {}).get("action_template") or {}
+        if isinstance(template, Mapping) and (template.get("args") or {}).get(arg) is True:
+            return True
+    return False
+
+
+# A TEST FILE ON DISK IS THE EFFECT.  A row that writes one usually says nothing about
+# tests in its declaration: measured 2026-10-31, ``python.feature.implement_function_spec.v1``
+# answered "add a function total_cents ... and add a test for it in <p>/tests/test_total.py",
+# wrote ``test_total.py``, and the declaration-reading check demoted a correct PASS.  The
+# contract is what the tree proves, not what the row advertises, so the exit compares the
+# world it observed before the run with the world it observes now.
+_TEST_FILE_SHAPE = re.compile(
+    r"(?:^|/)(?:tests?|specs?)/"
+    r"|(?:^|/)test_[^/]*\.(?:py|js|ts|tsx|rs|go|java|rb|cs)$"
+    r"|(?:^|/)[^/]*[._-]test\.(?:py|js|ts|rs|go|java|rb)$"
+    r"|(?:^|/)[^/]*_spec\.(?:rb|js|ts)$", re.IGNORECASE)
+
+
+def _test_file_appeared(goal: str, before: "Mapping[str, Any] | None") -> bool:
+    """True when a test-shaped file the sentence did not have before now exists."""
+    files_before = (before or {}).get("files")
+    if not isinstance(files_before, Mapping):
+        # Without a before-snapshot nothing can be called NEW; a guess here would either
+        # certify a lie or demote a correct pass.
+        return False
+    try:
+        files_after = observe_world(goal).get("files") or {}
+    except Exception:  # noqa: BLE001 - an unreadable tree is not evidence of a test
+        return False
+    for rel, row in files_after.items():
+        if files_before.get(rel) == row:
+            continue
+        if _TEST_FILE_SHAPE.search(str(rel)):
+            return True
+    return False
+
+
 def _enforced_at_exit(goal: str, entries: "Sequence[Mapping[str, Any]]",
-                      cids: "Sequence[str]") -> list[str]:
+                      cids: "Sequence[str]",
+                      before: "Mapping[str, Any] | None" = None) -> list[str]:
     """The stated effects that no row which RAN can supply.  Read AFTER the run."""
     if not entries:
         return []
@@ -2169,6 +2224,10 @@ def _enforced_at_exit(goal: str, entries: "Sequence[Mapping[str, Any]]",
         if not asked.search(text):
             continue
         if _supplied_by_any(supplied, entries, cids):
+            continue
+        if _declares_effect_by_argument(entries, code):
+            continue
+        if code == "STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY" and _test_file_appeared(goal, before):
             continue
         out.append(code)
     return out
@@ -2197,6 +2256,14 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> 
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
     errors: list[str] = []
     for asked, supplied, code in _STATED_EFFECTS:
+        # An effect enforced at the EXIT is answered by what the run did, which this
+        # function cannot see.  Judging it here refused the whole sentence before the tree
+        # was touched (measured: "add a function ... and add a test for it" lost the
+        # function) and, when it did run, it reported the wrong diagnosis --
+        # ``STATED_ANSWER_NOT_PROVIDED`` where the run had in fact done everything but the
+        # test.  One source of truth: ``_enforced_at_exit``.
+        if code in _EFFECTS_AT_EXIT_CODES:
+            continue
         if not any(not _is_a_premise(text, match.start())
                    for match in _intent_verb_matches(asked, text)) or supplied.search(surface):
             continue
@@ -3224,7 +3291,7 @@ def _close_observations(result: dict[str, Any], goal: str,
     # the false-negative class this door refuses to produce.  What is withheld is the claim.
     if result.get("pass") is True:
         _rows, _cids = _executed_rows(result)
-        _unserved = _enforced_at_exit(goal, _rows, _cids)
+        _unserved = _enforced_at_exit(goal, _rows, _cids, before)
         if _unserved:
             result["runtime_status_before_effect_check"] = result.get("status")
             result["status"] = "FAIL_CLOSED__STATED_EFFECT_NOT_PROVIDED_BY_THE_RUN"
