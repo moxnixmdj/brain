@@ -18,6 +18,10 @@ not about the goal:
                                user expects) but the selected capability has no output path
                                input, so it cannot produce it
   R3  WEAK_EVIDENCE            at most one matched prose token: one word is never a goal
+  R10 SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED
+                               an explicit implementation request cannot dispatch a
+                               report-only analysis route. This is a necessary
+                               contract check, not proof of feature correctness.
   R5  TOOL_TRUTH               after execution, a tool result saying ``pass: false`` or a
                                non-success status (OPEN__, UNRESOLVED, FAIL...) can never
                                surface as an overall PASS
@@ -70,6 +74,7 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime, goal_compiler
+from canonical.runtime import capability_selection_retrieval_v1 as capability_selection
 from canonical.runtime import composer_route_v1 as composer_route
 from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime import live_integrated_brain_v1
@@ -120,11 +125,15 @@ def _future_artifacts(goal: str) -> list[str]:
     correctly selected and executed capability ended in FAIL_CLOSED__PROMISED_ARTIFACT_MISSING
     for 294 of 361 live ids - the R6 gate punishing a capability for the file it must not write.
     """
+    repo_paths = goal_compiler._repo_paths(goal, ROOT)
+    existing_dirs = [p for _r, p in repo_paths if p.is_dir()]
     out = []
-    for raw, path in goal_compiler._repo_paths(goal, ROOT):
+    for raw, path in repo_paths:
         if front._CAPABILITY_ID_SHAPE.fullmatch(str(raw)):
             continue
         if pathlib.Path(raw).suffix and not path.exists():
+            if any((d / raw).exists() for d in existing_dirs):
+                continue
             out.append(raw)
     return out
 
@@ -161,6 +170,11 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     entry = registry.get(selected)
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
+    from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+    effect_error = implementation_effect_error(goal, [selected], registry)
+    if effect_error:
+        return {"schema": SCHEMA, "admitted": False, "rule": effect_error,
+                "compiler_mode": mode, "selected_capability": selected}
     # A sentence that states a settled command line states a COMMAND, and a
     # capability that cannot run a command line cannot answer it -- however many
     # of the sentence's words its keywords happen to contain.  The retrieval
@@ -186,7 +200,9 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {"schema": SCHEMA, "admitted": False,
                 "rule": "WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
                 "compiler_mode": mode, "selected_capability": selected}
-    if composer_route.extract_argv(goal) is not None:
+    if (not capability_selection.is_computed_answer_delivery(goal)
+            and not capability_selection.is_ast_code_edit_request(goal)
+            and composer_route.extract_argv(goal) is not None):
         _slots = {str(k or "").lower() for k in
                   ((entry.get("action_template") or {}).get("args") or {})}
         # A COMMAND slot is a command slot whatever it is called.  Measured on
@@ -271,6 +287,14 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if isinstance(typed, Mapping) and str(typed.get("reason") or "").startswith("BINDING_REFUSED:"):
         base["typed_binding_refused"] = True
         base["typed_binding_reason"] = typed.get("reason")
+        if str(typed.get("reason") or "").startswith("BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD"):
+            return {**base, "admitted": False, "rule": "R11_STATED_PAYLOAD_SLOT_MISSING"}
+    if isinstance(typed, Mapping) and typed.get("reason") in (
+        "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
+        "REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER",
+        "READ_ONLY_QUESTION_CANNOT_MUTATE_SOURCE",
+    ):
+        return {**base, "admitted": False, "rule": "R12_" + str(typed.get("reason"))}
     # Decisive lexical margin (F18), the third way a caller can be explicit without this layer
     # inventing anything: the sentence names one capability so much better than any other that the
     # ranker separates them.  Measured before it was trusted - 295 name-derived goals, threshold
@@ -424,6 +448,11 @@ def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any]
         entry = registry.get(cid)
         if not isinstance(entry, Mapping):
             return {**base, "admitted": False, "rule": "DAG_CAPABILITY_NOT_ADMISSIBLE", "dag_steps": rows,
+                    "failed_capability_id": cid}
+        from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+        effect_error = implementation_effect_error(clause, [cid], registry)
+        if effect_error:
+            return {**base, "admitted": False, "rule": effect_error,
                     "failed_capability_id": cid}
         score, _specificity, evidence = front.score_capability(clause, cid, entry)
         matched = set(evidence.get("matched_provides") or []) | set(evidence.get("matched_identity") or []) | set(evidence.get("matched_keywords") or [])
@@ -735,6 +764,22 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
     call_args = dict(action.get("args") or {})
     call_args.pop("capability_id", None)
+    # Write authority, checked BEFORE the adapter runs (measured 2026-10-29).
+    # Every software-engineering row declares `output_path` and `source_root`; a
+    # goal that names no destination therefore had exactly one stated path in
+    # hand and the report was bound onto the source.  "Fix the ZeroDivisionError
+    # in app/utils.py" replaced 14 lines of source with a parse report (3/3), and
+    # a READ-ONLY question replaced app/service.py with 358 lines of JSON.  This
+    # is the single function every local adapter invocation passes through, so
+    # the rule is enforced once for the door, the composer and every composed
+    # step.  LocalExecutionFailure keeps it a typed, closed refusal.
+    try:
+        from canonical.runtime import write_authority_v1 as _write_authority
+        _write_authority.check(ROOT, call_args, cid)
+    except LocalExecutionFailure:
+        raise
+    except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
+        raise LocalExecutionFailure(str(exc)) from exc
     result = fn(call_args, ROOT)
     if not isinstance(result, dict):
         raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
@@ -1290,6 +1335,21 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     if controller_error == "CONTROL_PLAN_INVALID":
         return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
     if controller_error is not None:
+        # A deliberate refusal is not a controller fault.  Measured on 88bb18bb:
+        # the binder aimed an analyzer's report at the very file it was told to
+        # analyse, write authority stopped it, and the caller was told
+        # FAIL__LIVE_CONTROLLER_EXECUTION -- "execution or verification failure",
+        # which blames the controller and invites a retry of the same action.
+        # The reason string already names the rule, so the status must name it
+        # too: the whole point of refusing is that the caller can tell what
+        # happened without parsing prose.  Same shape as
+        # FAIL_CLOSED__CAPABILITY_EXITED_PROCESS above, which exists for exactly
+        # this reason -- a refusal that is not a fault deserves its own name.
+        if "OUTPUT_OVERWRITES_A_STATED_SOURCE" in str(controller_error):
+            return _fail(task_id, "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
+                         "AN_ACTION_WOULD_OVERWRITE_A_FILE_IT_READS", started, executed=True,
+                         compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"),
+                         reason=controller_error)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
                      compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"), reason=controller_error)
     passed = _controller_passed(controller)
@@ -1372,12 +1432,20 @@ def promised_artifact_class(errors: list[str]) -> str:
 
 
 
-# A rename, a move, an extraction and a reformat are all promises that a file is
-# different afterwards; only repair verbs were read, so a refactor that changed nothing
-# was never checked.  "add"/"insert" are deliberately absent: they are function names
-# far more often than they are instructions.
-_REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct|rename|move|extract|inline|"
-                            r"refactor|reformat)\b", re.IGNORECASE)
+_REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
+# The same promise, in the verbs an ordinary edit request uses.  "Repair X" was
+# only ever one spelling of "make X different"; "Add a parameter to X and update
+# every caller" is the same demand and was not read as one, so the door reported
+# PASS after running a symbol INDEXER over a byte-identical tree.  Measured on
+# 32a73a0: `add_parameter` passed while the fixture's `line_total(item)` still
+# took one argument, so the call the sentence described raised TypeError.
+#
+# Deliberately not the destructive verbs: "delete X.py" promises X is GONE, and
+# "still readable and different" is the wrong test for it.  Removal is already
+# covered by the promised-artifact law and by NAMED_INPUT_REMOVED.
+_EDIT_PROMISE_RE = re.compile(
+    r"\b(?:repair|fix|patch|correct|add|insert|update|modify|replace|rewrite|"
+    r"refactor|extract|inline|rename|split|strip|move|reformat)\b", re.IGNORECASE)
 # "a measured acceptance repair report" is a noun phrase naming an artifact,
 # not an instruction to mutate a source file.  A file actually named report.py
 # is still a repair target: the negative lookahead keeps that distinction.
@@ -1797,6 +1865,29 @@ _TRANSFORM_SURFACE_RE = re.compile(
 _READ_ONLY_REQUEST_RE = re.compile(
     r"^\s*(?:find|list|show|explain|tell|which|who|what|where|when|why|count|summar\w+|"
     r"describe|identify|report|check whether|is there|are there)\b", re.IGNORECASE)
+# A REQUEST TO PLAN IS NOT A REQUEST TO DO.
+#
+# "Plan the rename of the symbol `mul` to `multiply` across <dir>." contains a change verb, so every
+# gate that keys on a change verb fired -- and after the rename writer became reachable (2026-10-31)
+# the sentence EDITED the tree it only asked to be planned.  Measured: `python.refactor.rename_symbol`
+# rewrote pkg/calc.py and pkg/util.py for a request whose own word was "Plan".
+#
+# The registry already distinguishes the two kinds of row (the cross-file choreographer says in its own
+# limitations "Plans, does not apply"), so the sentence only has to say which one it wants.  A plan
+# request is an opener, and it stops being one the moment the same sentence also says to carry it out.
+_PLAN_REQUEST_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:plan|propose|outline|sketch|draft|map out)\b", re.IGNORECASE)
+_PLAN_THEN_DO_RE = re.compile(
+    r"\b(?:then|and|also)\b[^.\n]{0,40}\b(?:apply|implement|execute|perform|carry out|do it)\b",
+    re.IGNORECASE)
+
+
+def _asks_only_for_a_plan(text: str) -> bool:
+    """The sentence asks for the PLAN, not for the change (see the two patterns above)."""
+    sentence = str(text or "")
+    return bool(_PLAN_REQUEST_RE.match(sentence)) and not _PLAN_THEN_DO_RE.search(sentence)
+
+
 _MUTATION_PROVIDES_RE = re.compile(
     r"\b(?:patch|repair|applied|apply|choreograph\w*|rewr(?:ite|ote)|write)\b", re.IGNORECASE)
 _READ_SURFACE_RE = re.compile(
@@ -1845,8 +1936,16 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
             " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])):
         out.append("STATED_CODE_TRANSFORM_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
     provides = " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])
-    if (_READ_ONLY_REQUEST_RE.search(text)
-            and _MUTATION_PROVIDES_RE.search(provides)
+    # The row's OWN declaration decides whether it writes, and ``capability_edits_source`` is the one
+    # predicate that reads it (it is what ``repair_output_collisions`` already uses).  The keyword
+    # regex alone missed a writer whose provides say "single_use_inlined": measured 2026-10-31,
+    # "Find every caller of the function add in <file>" -- a question -- was answered by
+    # ``python.refactor.inline_helper.v1``, which ran, raised TEST_ROOT_MISSING, and cost the caller a
+    # retry; the correct read-only row was one typed selection away.
+    _writes = bool(_MUTATION_PROVIDES_RE.search(provides)) or \
+        bool(front.capability_edits_source(entry))
+    if ((_READ_ONLY_REQUEST_RE.search(text) or _asks_only_for_a_plan(text))
+            and _writes
             and not _READ_SURFACE_RE.search(provides)
             and not _declares_it_does_not_write(entry)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
@@ -1867,6 +1966,19 @@ def _promised_source_files(goal: str) -> list[str]:
     a promised artifact, which R6 already covers.
     """
     text = str(goal or "")
+    # A QUESTION PROMISES NOTHING, WHATEVER VERB IT CONTAINS.
+    #
+    # The verb table below is a list of words, and the words in it are also ordinary nouns and
+    # function names: "Find every caller of the function add in <file>" contains "add", and reading
+    # that as a promise to change <file> refused the correct read-only answer with
+    # PROMISED_SOURCE_UNCHANGED.  Measured 2026-10-31 on the caller question, after the read-only
+    # route started reaching ``python.source.symbols.index.ast``: the right row ran, produced the
+    # callers map, and the door refused because nothing had moved.  The judgment of whether a
+    # sentence promises a change already exists in one place and it reads the SHAPE of the sentence
+    # (an interrogative or a read-only opener never promises a change), so it is asked here rather
+    # than re-implemented: this function's own contract is "files the goal asked to have CHANGED".
+    if not _sentence_promises_a_change(goal):
+        return []
     candidates = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
                   if path.is_file() and path.suffix.lower() == ".py"]
     if not candidates:
@@ -1876,10 +1988,9 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
-    for m in _REPAIR_VERB_RE.finditer(text):
-        _tail = text[m.end():m.end() + 100]
-        if _REPAIR_REPORT_PHRASE_RE.match(_tail):
-            # The next words are "report"/"receipt"/"...: the sentence asks for
+    for m in _EDIT_PROMISE_RE.finditer(text):
+        if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
+            # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
             # changed.  Demanding a byte change in the nearest .py witness here
             # made a correct measured-acceptance report fail at the front door.
@@ -1912,10 +2023,10 @@ def _promised_source_files(goal: str) -> list[str]:
                     best_at = at
                     best = raw
         if best is None:
-            # English puts the repaired target before the verb as often as after
-            # it.  Read the promise from the sentence, not from word order.
+            # English puts the repaired target before the verb as often as after it.
+            # Read the promise from the sentence, not from word order.
             best = _nearest_source_before(text, candidates, m.start())
-        if best is None or best in out:
+        if best is None or best in out or str(best) in _destructive_targets(text):
             continue
         # A file inside a stated source ROOT is covered by the root rule below.  The
         # first .py after the verb in "Repair the python source root <dir> ... with
@@ -1974,10 +2085,12 @@ def _promised_source_roots(goal: str) -> list[str]:
     source the loop had patched sat next to it undischarged.
     """
     text = str(goal or "")
+    if not _sentence_promises_a_change(goal):
+        return []
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
     out = []
-    for m in _REPAIR_VERB_RE.finditer(text):
+    for m in _EDIT_PROMISE_RE.finditer(text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -2134,20 +2247,21 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     #
     # ``_statement_patch_authority`` accepts a patch that the report carries as the delivered change,
     # which is right when the sentence asks for the PATCH ("run the repair loop and save the report").
-    # It is wrong when the sentence names the source as the object of the repair verb: "Repair the
-    # python source <X> so that the unit test <T> passes, and save the repair report to <R>" asks for
-    # X to be repaired, and a run that finds a verified patch, writes a report and RESTORES X has not
-    # done what was asked.  Measured 2026-10-30: PASS with X byte-identical and its own test still
-    # red -- the last FALSE row in the capability matrix.  The object of the verb is read from the
-    # sentence (same rule the promise itself uses), and it removes the exemption for that file only.
-    _objects = set(_promised_source_files(goal))
+    # A version of this gate also refused that exemption whenever the sentence named the source as the
+    # object of the repair verb, which was measured to be both unnecessary and wrong: unnecessary
+    # because a run that only writes a report never has an applicable patch for a source it did not
+    # fix, so the report-only case still fails closed here (measured: the door refuses
+    # test_a_repair_that_was_only_reported_is_not_a_repair with the exemption in place); and wrong
+    # because the six repair families state the source as the object and RESTORE it by contract --
+    # their own oracle requires untouched bytes plus one applicable patch in the stated report, so
+    # the extra rule made the sentence unsatisfiable for every one of them.
     errors = []
     for raw, digest in (before or {}).items():
         now = _source_digest(raw)
         if not now:
             errors.append("PROMISED_SOURCE_UNREADABLE:" + raw)
         elif now == digest:
-            if raw not in _objects and _statement_patch_authority(raw, artifacts, before_files):
+            if _statement_patch_authority(raw, artifacts, before_files):
                 continue
             errors.append("PROMISED_SOURCE_UNCHANGED:" + raw)
     # A stated source ROOT promises that the repair happened somewhere inside it.
@@ -2155,9 +2269,7 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     # one module; requiring nothing would accept a run that touched no file at all.
     for root, files_before in (roots_before or {}).items():
         changed = any(_source_digest(rel) != digest for rel, digest in files_before.items())
-        _root_is_the_object = any(obj.startswith(str(root).rstrip("/") + "/") for obj in _objects)
-        if changed or (not _root_is_the_object
-                       and _statement_patch_authority(root, artifacts, before_files)):
+        if changed or _statement_patch_authority(root, artifacts, before_files):
             continue
         errors.append("PROMISED_SOURCE_UNCHANGED:" + root)
     return errors
@@ -2256,6 +2368,8 @@ def _sentence_promises_a_change(goal: str) -> bool:
     """
     text = str(goal or "")
     if _ASKS_A_QUESTION_RE.match(text) or _READ_ONLY_REQUEST_RE.search(text):
+        return False
+    if _asks_only_for_a_plan(text):
         return False
     for m in _CHANGE_VERB_RE.finditer(text):
         tail = text[m.end():m.end() + 24].lstrip()
@@ -2363,6 +2477,7 @@ def observe_world(goal: str) -> dict[str, Any]:
     existence and parseability checks still run).  Nothing in the answer is the
     tool's own claim.
     """
+    import itertools
     from canonical.runtime import execute_v1 as _kernel
 
     stated = _stated_paths(goal)
@@ -2370,7 +2485,7 @@ def observe_world(goal: str) -> dict[str, Any]:
     walked = []
     for root in _observation_roots(goal):
         try:
-            count = sum(1 for _ in root.rglob("*"))
+            count = sum(1 for _ in itertools.islice(root.rglob("*"), _OBSERVATION_MAX_FILES + 1))
         except OSError:
             continue
         if count > _OBSERVATION_MAX_FILES:
@@ -2381,8 +2496,18 @@ def observe_world(goal: str) -> dict[str, Any]:
     parses: dict[str, bool] = {}
     for raw in stated:
         path = ROOT / raw
-        if path.is_file() and path.suffix.lower() == ".py":
-            parses[raw] = _is_python_code(path.read_text(encoding="utf-8", errors="replace"))
+        if path.is_file():
+            try:
+                st = path.stat()
+                if st.st_size <= 1_048_576:
+                    import hashlib as _hl
+                    files[raw] = (st.st_size, st.st_mtime_ns, st.st_mode, _hl.sha256(path.read_bytes()).hexdigest())
+                else:
+                    files[raw] = (st.st_size, st.st_mtime_ns, st.st_mode)
+            except OSError:
+                pass
+            if path.suffix.lower() == ".py":
+                parses[raw] = _is_python_code(path.read_text(encoding="utf-8", errors="replace"))
     head = _git_head(ROOT / stated[0]) if stated else ""
     return {"files": files, "walks": walked, "parses": parses,
             "git_head": head, "stated": stated}
@@ -2437,9 +2562,39 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
             from canonical.runtime import execute_v1 as _kernel
             moved = _kernel._diff(before.get("files") or {}, after.get("files") or {})["changed"]
             committed = bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")
-            if not (present or moved or committed):
+            stdout_filter_verified = False
+            if not artifacts and isinstance(result.get("composer_execution"), Mapping):
+                steps = list((result.get("composer_execution") or {}).get("steps") or [])
+                ledger = list(((result.get("raw_goal_acceptance") or {}).get("reinspection_ledger")) or [])
+                if (len(steps) == 1
+                        and steps[0].get("capability_id") == "shell.command.run"
+                        and not (steps[0].get("args") or {}).get("write_stdout_to_output")
+                        and not (steps[0].get("args") or {}).get("output_may_be_consumed")
+                        and ledger
+                        and ((ledger[0].get("reinspection") or {}).get("command_re_run") is True)
+                        and ((ledger[0].get("reinspection") or {}).get("program") in {
+                            "grep", "fgrep", "egrep", "sed", "sort", "uniq", "awk", "cut", "tr", "head", "tail", "wc", "cat", "diff", "comm"
+                        })):
+                    stdout_filter_verified = True
+            if not (present or moved or committed or stdout_filter_verified):
                 errors.append("NO_OBSERVED_EFFECT")
     return errors
+
+
+def _blind_change_evidence(result: Mapping[str, Any]) -> list[str]:
+    """Rows whose own verdict says the change was applied but never measured.
+
+    Read from the tool's result, never from its id: ``verified: false`` together with a ``gate`` that
+    begins ``PASS_BLIND`` is the adapter declaring that nothing checked the change.
+    """
+    out: list[str] = []
+    rows = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
+    for row in rows:
+        inner = row.get("result") if isinstance(row.get("result"), Mapping) else {}
+        gate = str(inner.get("gate") or "")
+        if inner.get("verified") is False and gate.upper().startswith("PASS_BLIND"):
+            out.append("%s:%s" % (str(row.get("capability_id") or ""), gate or "VERIFIED_FALSE"))
+    return out
 
 
 def _close_observations(result: dict[str, Any], goal: str,
@@ -2467,6 +2622,26 @@ def _close_observations(result: dict[str, Any], goal: str,
         if _declined:
             result["compiler_detail"] = _declined
             result["refused_stated_command"] = True
+    # A BLIND CHANGE IS NOT A VERIFIED CHANGE, AND THE STATUS MUST NOT SAY IT IS.
+    #
+    # ``python.refactor.rename_symbol.v1`` applies a binding-proved rename and, when the sentence names
+    # no test, reports the truth: ``gate: PASS_BLIND``, ``verified: false``.  The door then stamped
+    # ``PASS__..._EXECUTED_AND_VERIFIED`` over it.  Measured 2026-10-31: "Rename the symbol `mul` to
+    # `multiply` in <dir>." rewrote two files correctly, reported ``verified: false``, and the front
+    # door called it verified -- the same over-claim this file exists to prevent, one layer up.
+    #
+    # The change stands (it happened, and it is proved complete); what is withheld is the word
+    # VERIFIED, which nothing measured.  Refusing instead would deny work that really landed, the
+    # false-negative class this door refuses to produce.
+    if result.get("pass") is True:
+        blind = _blind_change_evidence(result)
+        if blind:
+            result["change_verified"] = False
+            result["blind_change_evidence"] = blind
+            result["status"] = (str(result.get("status") or "")
+                                .replace("_EXECUTED_AND_VERIFIED", "_EXECUTED_APPLIED_UNVERIFIED")
+                                .replace("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+                                         "EXACT_SEMANTIC_ACCEPTANCE_APPLIED_UNVERIFIED"))
     if result.get("pass") is not True or before is None:
         return result
     observed = observed_effect_errors(goal, before, observe_world(goal), result, artifacts)
@@ -2572,6 +2747,45 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     # and the next reader cannot tell a refused goal from an executed one.
     _undo_chain_side_effects(composed, "promised_artifact_missing")
     return composed
+
+
+def _states_an_executable_form(goal: str, admission: Mapping[str, Any] | None = None) -> bool:
+    """Does the sentence itself state the form the work must take?
+
+    This is the one condition under which a chain may answer a refused
+    sentence.  A chain is a SUBSTITUTE for a capability, and the door already
+    holds that a substitute is only honest when the sentence stated what to
+    execute: the command line, or a payload together with where it goes.  Both
+    are re-derived here from the sentence, independently of the chain, so the
+    chain is checked against the request rather than trusted for matching it.
+
+    The rule was written for the route-admission branch and never applied to
+    the other two places composition runs, so the branch that answers a
+    compiler refusal was strictly more permissive than the branch that answers
+    a refused route.  Measured on 32a73a0 over the 28-row surface census: 19
+    sentences reached the composer, 18 of them had been refused a moment
+    earlier, and every one of those 18 ended in a status naming a failure of
+    the SUBSTITUTE's promise -- "PROMISED_ARTIFACT_MISSING" for a path the
+    sentence never asked for -- instead of the refusal that had really
+    happened.  None of the 18 was a pass, so nothing is lost by asking the
+    sentence first.
+
+    "Check the file X" states no command line and no payload, so it keeps
+    failing closed for the reason it always has (#6119).
+    """
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _csr
+        if _csr.is_computed_answer_delivery(goal) or _csr.is_ast_code_edit_request(goal):
+            return False
+        if composer_route.extract_argv(goal) is not None:
+            return True
+        if (composer_route.extract_content(goal) is not None
+                and composer_route.extract_content_destination(goal) is not None):
+            return True
+        return bool((admission or {}).get("typed_binding_refused") is True
+                    and composer_route.extract_content(goal) is not None)
+    except Exception:  # noqa: BLE001 - an unreadable sentence is not grounded
+        return False
 
 
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
@@ -3106,7 +3320,12 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # FAIL_CLOSED__NO_OBSERVED_EFFECT; the same sentence over an already-formatted file was
         # indistinguishable from it.  The main path below has always taken this snapshot first.
         gap_world_before = observe_world(gap_normalized)
-        composed = _try_composed(task_id, goal, started)
+        # A refusal is terminal unless the sentence states the executable form.
+        # This branch used to compose unconditionally, which made it the one
+        # place a refusal could be answered by a substitute -- see
+        # _states_an_executable_form for the measurement.
+        composed = (_try_composed(task_id, goal, started)
+                    if _states_an_executable_form(gap_normalized) else None)
         if composed is not None:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
@@ -3230,35 +3449,10 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # #6119 hazard stays closed for the reason it always has: "Check the
         # file X" states no command line, so extract_argv is None and it keeps
         # failing closed.
-        stated_a_command_line = composer_route.extract_argv(normalized) is not None
-        # The symmetric case, measured.  A sentence can state BOTH a payload and
-        # the path it goes to, and still be refused for a reason that has
-        # nothing to do with the binder -- so this gate, which required
-        # typed_binding_refused, never fired and composition never ran:
-        #
-        #   "Write the text 'PROJECT BRAIN' to the target file X"
-        #       -> FAIL_CLOSED__ROUTE_ADMISSION_REJECTED, zero steps, no verdict
-        #
-        # while the same sentence phrased "to the file X" ran and was verified.
-        # The payload and the destination are both re-derived from the sentence
-        # here, exactly as the command line is, and both are then independently
-        # checked: _payload_runs_to_the_destination refuses a payload the
-        # sentence does not actually run to the destination, and the written
-        # bytes are compared against the sentence rather than the argument.  So
-        # a payload with a stated destination is as grounded as a stated command
-        # line, and refusing it fails a request the machine can do.
-        #
-        # A payload with NO stated destination is deliberately not enough --
-        # that is the #6119 shape, where the only path in the sentence becomes
-        # the destination by default and a file is overwritten by a report about
-        # it.  "Check the file X" states no payload at all, so it keeps failing
-        # closed for the reason it always has.
-        states_a_payload_and_its_destination = (
-            composer_route.extract_content(normalized) is not None
-            and composer_route.extract_content_destination(normalized) is not None)
-        if (stated_a_command_line or states_a_payload_and_its_destination
-                or (admission.get("typed_binding_refused") is True
-                    and composer_route.extract_content(normalized) is not None)):
+        # The same question, now asked once in one place: the two assignments
+        # that used to stand here were this predicate written inline, which is
+        # how the other two composition sites came to be more permissive.
+        if _states_an_executable_form(normalized, admission):
             composed = _try_composed(task_id, goal, started)
             if composed is not None:
                 return _close_observations(
@@ -3342,7 +3536,15 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # matters -- and it is also the moment to try something else, rather
         # than reporting a gap while a chain of capabilities could have
         # produced the thing. Composition is tried here, on the evidence.
-        composed = _try_composed(task_id, goal, started)
+        #
+        # Asked the same question as every other composition site: a run that
+        # already executed is not re-answered by a second chain unless the
+        # sentence states the form to execute.  Without it, a missing promise
+        # bought a fresh dispatch of the same sentence -- work stacked on work,
+        # and the first run's honest failure replaced by the second run's
+        # unrelated status.
+        composed = (_try_composed(task_id, goal, started)
+                    if _states_an_executable_form(normalized, admission) else None)
         if composed is not None:
             composed["memory_recalled"] = [
                 {"id": r.get("id"), "content": r.get("content"),

@@ -114,11 +114,14 @@ guessed: a goal that does not state an input fails closed with GOAL_INPUT_BINDIN
 """
 from __future__ import annotations
 
+import ast
 import contextvars
 import json
+import os
 import pathlib
 import re
 import shlex
+import sys
 from typing import Any, Mapping
 
 from canonical.runtime import capability_planner
@@ -662,6 +665,307 @@ def _kv_pairs(text: str) -> dict[str, float] | None:
     return out or None
 
 
+def _module_pair_file(entry, paths):
+    """The one .py file the sentence names, when the capability takes BOTH halves.
+
+    A capability that declares ``source_root`` and ``module`` wants a directory
+    and a path relative to it.  A sentence names one file.  Both halves come
+    from that file -- its directory is the root and its name is the module -- so
+    neither is invented, but neither can be bound on its own either, and that is
+    exactly what happened: measured on dac97dc, "Extract the function helper from
+    the python file <abs>/calc.py lines 6 to 7 into a new function named
+    helper_body" scored python.refactor.extract_function.v1 at 33, ahead of the
+    next candidate at 4, and was dropped as unbindable on ``module:not_stated``.
+    The sentence was then answered by document.convert.markdown_pdf.pandoc_weasyprint
+    at score 4, which correctly refused a .py file and failed the whole request
+    closed.  The capability itself runs: given the pair it performs the
+    extraction, infers the parameters and the return, and rewrites the caller.
+
+    Returns None unless the capability declares both keys and the sentence names
+    exactly one existing .py file, so nothing else changes what it binds.
+    """
+    if not isinstance(entry, Mapping):
+        return None
+    keys = gc._placeholders(entry.get("action_template") or {})
+    if "source_root" not in keys or "module" not in keys:
+        return None
+    named = [raw for raw, path in paths if path.is_file() and raw.endswith(".py")]
+    if len(named) != 1:
+        return None
+    return named[0]
+
+
+# ---------------------------------------------------------------------- derivation
+#
+# A sentence states what the caller KNOWS.  It cannot state the harness a capability
+# runs on (which interpreter, which timeout), the module a symbol happens to live in,
+# or -- beyond naming it -- the replacement identifier.  Those three are already
+# DECLARED somewhere in the repository: the adapter's own `args.get(k) or <default>`,
+# the package tree under `source_root`, and the sentence's own "to <ident>" clause.
+# Reading a declaration is not guessing, so these three sources are consulted only
+# after the pinned and typed binders have both refused a key: a stated value always
+# wins, and nothing here can override one.
+#
+# Measured before this existed: "Rename the function line_total to item_total in
+# <b>/app and update every caller." scored python.refactor.rename_symbol.v1 at 11,
+# three times the next candidate, and was dropped on
+# ``module:not_stated``/``new_symbol:not_stated``/``run_tests:not_stated``; the
+# capability then never ran and the tree kept its stale references.
+
+_UNKNOWN = object()
+_SAFE_DEFAULT_NAMES = {"sys": sys, "os": os, "pathlib": pathlib, "Path": pathlib.Path,
+                       "re": re, "json": json}
+_SAFE_DEFAULT_BUILTINS = {name: __builtins__[name] if isinstance(__builtins__, dict) else getattr(__builtins__, name)
+                          for name in ("str", "int", "float", "bool", "list", "dict", "set",
+                                       "tuple", "len", "abs", "min", "max", "sorted")}
+_DEFAULT_FORBIDDEN = (ast.Lambda, ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp,
+                      ast.NamedExpr, ast.Await, ast.Yield, ast.YieldFrom, ast.Starred)
+_ADAPTER_DEFAULTS: dict[tuple[str, int], dict[str, Any]] = {}
+
+
+def _args_get_key(node: ast.AST) -> str | None:
+    """``args.get("k")`` -> "k"; anything else -> None."""
+    if not isinstance(node, ast.Call) or not isinstance(node.func, ast.Attribute):
+        return None
+    if node.func.attr != "get" or not isinstance(node.func.value, ast.Name):
+        return None
+    if node.func.value.id != "args" or len(node.args) != 1:
+        return None
+    first = node.args[0]
+    if isinstance(first, ast.Constant) and isinstance(first.value, str):
+        return first.value
+    return None
+
+
+def _declared_default_value(node: ast.AST):
+    """The value an adapter's own fallback expression declares, or ``_UNKNOWN``.
+
+    Only literals, whitelisted names and attribute access on them may be evaluated;
+    ``args.get(k) or ""`` is deliberately NOT a default (that idiom is a required
+    input followed by a loud refusal), and an empty string is never derived.
+    """
+    if any(isinstance(inner, _DEFAULT_FORBIDDEN) for inner in ast.walk(node)):
+        return _UNKNOWN
+    for inner in ast.walk(node):
+        if isinstance(inner, ast.Name) and inner.id not in _SAFE_DEFAULT_NAMES \
+                and inner.id not in _SAFE_DEFAULT_BUILTINS:
+            return _UNKNOWN
+    if sum(1 for _ in ast.walk(node)) > 24:
+        return _UNKNOWN
+    try:
+        value = eval(compile(ast.Expression(body=node), "<declared-default>", "eval"),
+                     {"__builtins__": dict(_SAFE_DEFAULT_BUILTINS)},
+                     dict(_SAFE_DEFAULT_NAMES))
+    except Exception:
+        return _UNKNOWN
+    if isinstance(value, str) and not value:
+        return _UNKNOWN
+    return value
+
+
+def declared_adapter_defaults(entry: Mapping[str, Any] | None) -> dict[str, Any]:
+    """Input keys whose default is written in the capability's OWN adapter source."""
+    if not isinstance(entry, Mapping):
+        return {}
+    module_name = str(entry.get("adapter_module") or "")
+    if not module_name.isidentifier():
+        return {}
+    path = ROOT_FOR_NAMING / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")
+    if not path.is_file():
+        return {}
+    stamp = (str(path), path.stat().st_mtime_ns)
+    cached = _ADAPTER_DEFAULTS.get(stamp)
+    if cached is not None:
+        return cached
+    defaults: dict[str, Any] = {}
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+    except (SyntaxError, UnicodeDecodeError):
+        _ADAPTER_DEFAULTS[stamp] = defaults
+        return defaults
+    entrypoint = str(entry.get("entrypoint") or "run")
+    scopes = [node for node in ast.walk(tree)
+              if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == entrypoint]
+    for scope in scopes or [tree]:
+        for node in ast.walk(scope):
+            if not isinstance(node, ast.BoolOp) or not isinstance(node.op, ast.Or) or len(node.values) != 2:
+                continue
+            key = _args_get_key(node.values[0])
+            if key is None or key in defaults:
+                continue
+            value = _declared_default_value(node.values[1])
+            if value is not _UNKNOWN:
+                defaults[key] = value
+    _ADAPTER_DEFAULTS[stamp] = defaults
+    return defaults
+
+
+_TO_NEW_IDENTIFIER = re.compile(r"\bto\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?")
+_NOT_AN_IDENTIFIER = {"a", "an", "the", "this", "that", "it", "its", "same", "new"}
+
+
+def declared_replacement_identifier(goal: str) -> str | None:
+    """The one identifier the sentence names as the replacement ("... to item_total").
+
+    The sentence states the value; this only reads it.  Two different identifiers
+    naming two different replacements is ambiguity, and ambiguity binds nothing.
+    """
+    found = {m.group(1) for m in _TO_NEW_IDENTIFIER.finditer(str(goal or ""))}
+    found = {name for name in found if name not in _NOT_AN_IDENTIFIER}
+    return found.pop() if len(found) == 1 else None
+
+
+_DEF_NAME = re.compile(r"^[ \t]*(?:async[ \t]+)?(?:def|class)[ \t]+([A-Za-z_][A-Za-z0-9_]*)", re.M)
+
+
+def _defines(text: str, symbol: str) -> bool:
+    """Cheap prefilter: does this source even define/assign the symbol name?"""
+    if not re.search(r"\b" + re.escape(symbol) + r"\b", text):
+        return False
+    return bool(re.search(r"^[ \t]*(?:async[ \t]+)?(?:def|class)[ \t]+" + re.escape(symbol) + r"\b", text, re.M)
+                or re.search(r"^" + re.escape(symbol) + r"[ \t]*(?::[^=\n]+)?=", text, re.M))
+
+
+def defining_module_of_qualname(qualname: str, source_root: str, root: pathlib.Path) -> str | None:
+    """The ONE module under source_root that defines this qualname, or None.
+
+    This is the sibling of ``_module_pair_file``: that rule reads the module name from
+    a sentence that names one .py file, this one reads it from the tree the sentence
+    named.  Two files defining the same symbol is ambiguity, and ambiguity binds
+    nothing.
+    """
+    parts = [p for p in str(qualname or "").split(".") if p]
+    if not parts:
+        return None
+    symbol = parts[-1]
+    scope = parts[:-1]
+    base = pathlib.Path(source_root)
+    if not base.is_absolute():
+        base = pathlib.Path(root) / base
+    if not base.is_dir():
+        return None
+    hits: list[str] = []
+    for path in sorted(base.rglob("*.py")):
+        if "__pycache__" in path.parts:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if not _defines(text, symbol):
+            continue
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        found = False
+        defs = [(node.name, node) for node in tree.body
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))]
+        binds = [node for node in tree.body if isinstance(node, (ast.Assign, ast.AnnAssign))]
+        if scope:
+            outer = [node for name, node in defs if name == scope[0]]
+            for node in outer:
+                if isinstance(node, ast.ClassDef):
+                    found = found or any(isinstance(inner, (ast.FunctionDef, ast.AsyncFunctionDef,
+                                                           ast.ClassDef)) and inner.name == symbol
+                                         for inner in node.body)
+                else:
+                    found = found or any(isinstance(inner, (ast.FunctionDef, ast.AsyncFunctionDef))
+                                         and inner.name == symbol for inner in ast.walk(node))
+        else:
+            found = any(name == symbol for name, _ in defs)
+            if not found:
+                for node in binds:
+                    targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+                    found = found or any(isinstance(t, ast.Name) and t.id == symbol for t in targets)
+        if found:
+            hits.append(path.relative_to(base).as_posix())
+            if len(hits) > 1:
+                return None
+    return hits[0] if len(hits) == 1 else None
+
+
+def _is_referent_key(key: str, entry: Mapping[str, Any] | None) -> bool:
+    """True when the value of this key POINTS AT something (a file, a tree, an artifact).
+
+    A declared default may settle a harness constant, never a referent.  Measured:
+    ``code_multilanguage_tree_sitter_v1`` falls back to ``source_root or
+    "canonical/runtime"``, and deriving that silently indexed a tree the sentence
+    never named instead of refusing.  A referent is stated or it is derived from a
+    stated one (``module`` from ``qualname``+``source_root``); it is never defaulted.
+    """
+    return (key in _PATH_FILE_KEYS or key in _PATH_DIR_KEYS or key in _PATH_LIST_KEYS
+            or key.endswith("_path") or key.endswith("_paths")
+            or _is_output_key(key, entry or {}))
+
+
+def declared_optional_inputs(entry: Mapping[str, Any] | None) -> set[str]:
+    """Input keys the row itself says its adapter can synthesize.
+
+    A placeholder in ``action_template.args`` is a demand on the caller, and a
+    demand the adapter never makes is what kept the repair lane unreachable:
+    seven rows declare ``test_argv``, and every one of their adapters builds
+    that argv from the test paths it already resolved
+    (``argv_or_derived(args.get("test_argv"), sys.executable, *test_paths)``).
+
+    That fallback cannot be read off the adapter's AST without guessing -- a
+    first argument forwarded to a helper is indistinguishable from a value
+    handed to a judge (``verify(args.get("goal"), result, registry)`` is not a
+    derivation) -- so the row declares it, next to the args it declares:
+    ``"optional": ["test_argv"]``.  The binder passes ``None``; the adapter's
+    own ``*_REQUIRED`` refusal remains the only authority on whether the
+    declaration is true, so a row that lies here fails loudly at the call.
+    """
+    template = (entry or {}).get("action_template")
+    if not isinstance(template, Mapping):
+        return set()
+    declared = template.get("optional")
+    if isinstance(declared, str):
+        return {declared}
+    if isinstance(declared, (list, tuple, set)):
+        return {str(key) for key in declared}
+    return set()
+
+
+def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], root: pathlib.Path,
+                           entry: Mapping[str, Any] | None, inputs: dict[str, Any]) -> list[tuple[str, BaseException]]:
+    """Settle refused keys from declarations already in the repository.
+
+    Order matters: the adapter's own defaults and the sentence's own identifier need
+    nothing but themselves, while ``module`` needs the siblings ``qualname`` and
+    ``source_root`` to be bound first.  Anything still unbound is returned to fail
+    closed exactly as before.
+    """
+    defaults = {key: value for key, value in declared_adapter_defaults(entry).items()
+                if not _is_referent_key(key, entry)}
+    optional = declared_optional_inputs(entry)
+    replacement = declared_replacement_identifier(goal)
+    is_extract = bool(re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE))
+    still: list[tuple[str, BaseException]] = []
+    for key, exc in unbound:
+        if key in defaults:
+            inputs[key] = defaults[key]
+        elif key in optional:
+            inputs[key] = None
+        elif key.startswith("new_") and replacement:
+            inputs[key] = replacement
+        elif is_extract and key in ("start_line", "end_line"):
+            inputs[key] = 0
+        elif is_extract and key == "new_name":
+            inputs[key] = "_extracted_helper"
+        else:
+            still.append((key, exc))
+    remaining: list[tuple[str, BaseException]] = []
+    for key, exc in still:
+        if key == "module" and inputs.get("qualname") and inputs.get("source_root"):
+            module = defining_module_of_qualname(str(inputs["qualname"]), str(inputs["source_root"]), root)
+            if module:
+                inputs[key] = module
+                continue
+        remaining.append((key, exc))
+    return remaining
+
+
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
@@ -697,11 +1001,46 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
             files = [raw for raw, p in paths if p.is_file()]
             if len(files) == 1:
                 return files[0]
+        if not dirs:
+            paired = _module_pair_file(entry, paths)
+            if paired is not None:
+                # The scope the caller named is one file, and this capability
+                # takes that file as a pair.  Its directory is the root; the
+                # module key below takes the name.  Both come from the path the
+                # sentence stated.
+                parent = str(pathlib.PurePosixPath(paired).parent)
+                if parent not in ("", "."):
+                    return parent
+        # Several directories named is not ambiguity when the sentence said which
+        # one is the witness.  Strictly a narrowing: the survivors must be exactly
+        # one, so a sentence that names two SUBJECTS still fails closed exactly as
+        # before.
+        if len(dirs) > 1:
+            witness = gc._witness_directories(goal, paths)
+            survivors = [d for d in dirs if d not in witness]
+            if len(survivors) == 1:
+                return survivors[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(dirs)) + "_existing_directories_named")
     if key in _PATH_LIST_KEYS:
         files = [raw for raw, p in paths if p.is_file()]
         if key == "test_paths":
             chosen = [raw for raw in files if re.search(r"(^|/)(test_[^/]*|[^/]*_test)\.py$", raw) or "/tests/" in raw]
+            if not chosen:
+                # When the sentence names a witness test directory ("the test suite in X/tests"),
+                # expand the test modules inside that stated directory rather than refusing.
+                witness_dirs = gc._witness_directories(goal, paths)
+                discovered: list[str] = []
+                for wdir in sorted(witness_dirs):
+                    wpath = (pathlib.Path(root) / wdir).resolve()
+                    if not wpath.is_dir():
+                        continue
+                    for cand in sorted(wpath.rglob("*.py")):
+                        if "__pycache__" in cand.parts:
+                            continue
+                        rel_c = cand.relative_to(pathlib.Path(root).resolve()).as_posix()
+                        if re.search(r"(^|/)(test_[^/]*|[^/]*_test)\.py$", rel_c):
+                            discovered.append(rel_c)
+                chosen = discovered
         elif key == "source_paths":
             chosen = [raw for raw in files if raw.endswith(".py") and not re.search(r"(^|/)(test_[^/]*|[^/]*_test)\.py$", raw)]
         else:
@@ -709,6 +1048,30 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         if chosen:
             return chosen
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":no_matching_existing_files_named")
+    if key == "module":
+        paired = _module_pair_file(entry, paths)
+        if paired is not None:
+            return paired.rsplit("/", 1)[-1]
+    if key == "qualname":
+        paired = _module_pair_file(entry, paths)
+        if paired is not None:
+            try:
+                tree = ast.parse((pathlib.Path(root) / paired).read_text(encoding="utf-8"))
+            except (OSError, SyntaxError, ValueError):
+                tree = None
+            if tree is not None:
+                defined = {
+                    node.name
+                    for node in ast.walk(tree)
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                }
+                mentioned = {
+                    m.group(1)
+                    for m in re.finditer(r"\b(?:from|in|of|function|method|class)\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", str(goal or ""), re.I)
+                    if m.group(1) in defined
+                }
+                if len(mentioned) == 1:
+                    return next(iter(mentioned))
     tails = _after_key(goal, key)
     if not tails:
         if key in _KV_KEYS:
@@ -1037,7 +1400,13 @@ def _bind_output_by_future(goal: str, key: str, root: pathlib.Path, exclude=None
     skip = {str(x) for x in (exclude or [])}
     stem = key[:-5].lower().replace("output_", "") if key != "output_path" else "output"
     wanted = _STEM_SUFFIXES.get(stem)
-    future = [(raw, p) for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists() and raw not in skip]
+    repo_paths = gc._repo_paths(goal, root)
+    existing_dirs = [p for _r, p in repo_paths if p.is_dir()]
+    future = [
+        (raw, p) for raw, p in repo_paths
+        if pathlib.Path(raw).suffix and not p.exists() and raw not in skip
+        and not any((d / raw).exists() for d in existing_dirs)
+    ]
     if wanted:
         future = [(raw, p) for raw, p in future if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted]
     if len(future) == 1:
@@ -1394,8 +1763,16 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                     raise type_failure
         if isinstance(inputs.get(key), str) and inputs[key]:
             taken.add(inputs[key])
+    refused: list[tuple[str, BaseException]] = []
     for key in typed_keys:
-        inputs[key] = bind_typed_key(goal, key, root, entry)
+        try:
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+        except GoalCompilationFailure as exc:
+            refused.append((key, exc))
+    if refused:
+        refused = derive_declared_inputs(goal, refused, root, entry, inputs)
+    if refused:
+        raise refused[0][1]
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
                              cycle=cycle, spool=spool)
     return inputs
@@ -1473,6 +1850,10 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     # fails closed, so the type is settled here rather than at each call site.
     root = pathlib.Path(root)
     input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k, entry)}
+    if inputs.get("source_root") and inputs.get("module"):
+        input_paths.add(str(pathlib.PurePosixPath(str(inputs["source_root"])) / str(inputs["module"])))
+    src_root_abs = (root / str(inputs["source_root"])).resolve() if inputs.get("source_root") else None
+    verb_dest = gc._path_named_after_output_verb(goal, root)
     # F10b: a sentence that only ASKED about a file may not be handed that file as the
     # place to put a result.  F10 already covered output==input; it could not see the case
     # where the only other slot is a DIRECTORY ("source_root"), so nothing collided and the
@@ -1495,11 +1876,28 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     # reports on a file may never be handed that file as its output, whatever the sentence
     # wanted; a capability whose own contract is to edit it may.
     edits_source = capability_edits_source(entry)
+    # ... EXCEPT the path the sentence nominated as the place to put the result.  "save it
+    # to X" names X as the output whether or not an earlier run already created it
+    # (``_path_named_after_output_verb`` says so in its own docstring), so a second run of
+    # an identical archival request must not be re-pointed at a spool file.  Measured
+    # 2026-10-31: without this, the same tar.gz goal passed once and then failed twice with
+    # ``TAR_GZ_OUTPUT_REQUIRED`` -- a capability that works once and then stops working,
+    # which is the exact defect ``test_the_same_goal_runs_three_times_in_a_row`` names.
+    nominated_output = gc._path_named_after_output_verb(goal, root) if not edits_source else None
     stated_existing = set() if edits_source else set(_named_existing_paths(goal, root))
+    if nominated_output:
+        stated_existing.discard(str(nominated_output))
     for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k, entry)]:
         value = str(inputs[key])
-        collides = value in input_paths
-        exists = (root / value).exists()
+        val_abs = (root / value).resolve()
+        exists = val_abs.exists()
+        inside_source_root = (
+            exists
+            and src_root_abs is not None
+            and (val_abs == src_root_abs or src_root_abs in val_abs.parents)
+            and verb_dest != value
+        )
+        collides = value in input_paths or inside_source_root
         # A REPORT IS NEVER WRITTEN ONTO SOURCE BYTES -- not even for a CHANGE request.
         #
         # F10b above protects a file the sentence only READS.  Measured 2026-10-30, the sentence that
@@ -1526,6 +1924,22 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
             try:
                 inputs[key] = _bind_output_by_future(goal, key, root, exclude=exclude)
             except GoalCompilationFailure:
+                if (spool is None or cycle is None) and not edits_source \
+                        and not _future_artifacts(goal, root):
+                    # A REPORTER WHOSE OUTPUT COLLIDES STILL HAS SOMEWHERE TO GO.
+                    #
+                    # Callers that hold no cycle (the pinned ranker's first, world-free pass) used
+                    # to get a raise here, which marked the row UNBINDABLE and let the world-binding
+                    # fallback answer the same sentence -- and that fallback rebuilds the whole
+                    # contract, so it also moved `source_root` from the stated FILE to its parent.
+                    # Measured 2026-10-31 on the capability matrix: "Count the functions in
+                    # <pkg>/calc.py" reached python.source.definition_count.v1 with source_root=<pkg>,
+                    # scanned 8 files and reported 12 definitions for a question about 2 -- PASS on a
+                    # wrong answer.  F13's own remedy, unchanged, keeps the row bindable and the
+                    # scope exactly what the sentence stated.
+                    inputs[key] = _spool_path(key, 0, set())
+                    rebound.append(key)
+                    continue
                 if spool is None or cycle is None or _future_artifacts(goal, root):
                     raise
                 inputs[key] = _spool_path(key, cycle, spool)
@@ -1688,7 +2102,16 @@ def _provides_evidence(goal: str, entry: Mapping[str, Any]) -> int:
 
 
 def _future_artifacts(goal: str, root: pathlib.Path) -> list[str]:
-    return [raw for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists()]
+    repo_paths = gc._repo_paths(goal, root)
+    existing_dirs = [p for _r, p in repo_paths if p.is_dir()]
+    out = []
+    for raw, p in repo_paths:
+        if not pathlib.Path(raw).suffix or p.exists():
+            continue
+        if any((d / raw).exists() for d in existing_dirs):
+            continue
+        out.append(raw)
+    return out
 
 
 def _output_keys(entry: Mapping[str, Any]) -> list[str]:
@@ -1869,12 +2292,48 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
     return None
 
 
+def _deliver_to_previous(clause: str, steps: list[dict[str, Any]], root: pathlib.Path) -> bool:
+    """A delivery clause is the DESTINATION of the previous answer, not a new step.
+
+    "Would the tests in <b>/tests catch a bug introduced in <b>/app? Write yes or
+    no to <b>/answer.json" is one question and one place for the answer.  The DAG
+    planner made two steps of it and handed the second to
+    software.synthesis.grid_induction.v1, which cannot answer a coverage question:
+    measured, the whole run ended FAIL_CLOSED__PROMISED_ARTIFACT_MISSING while the
+    capability that HAD the answer ran successfully and wrote elsewhere.
+
+    Same rule as gc._compile_answer_delivery, at the seam this planner uses: the
+    object is anaphoric ("its name", "the number", "yes or no"), so it cannot name
+    a new subject, and the clause states exactly one path -- the destination.
+    Returns True when the clause was consumed.
+    """
+    if not steps:
+        return False
+    text = str(clause or "")
+    if not gc._DELIVERY_RE.match(text):
+        return False
+    stated = [str(raw) for raw, path in gc._repo_paths(text, root) if not path.is_dir()]
+    if len(stated) != 1:
+        return False
+    previous = steps[-1]
+    entry = previous.get("entry") or {}
+    keys = [k for k in (previous.get("inputs") or {}) if _is_output_key(k, entry)]
+    if not keys:
+        return False
+    previous["inputs"][keys[0]] = stated[0]
+    previous["outputs"] = [(k, str(v)) for k, v in previous["inputs"].items()
+                           if _is_output_key(k, entry) and isinstance(v, str) and v]
+    return True
+
+
 def _dag_steps(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path):
     registry = routable_registry(admissible)
     steps: list[dict[str, Any]] = []
     produced: list[str] = []
     spool: set[str] = set()
     for cycle, clause in enumerate(clauses):
+        if _deliver_to_previous(clause, steps, root):
+            continue
         bound = bind_dag_clause(clause, admissible, root, produced_paths=produced,
                                 cycle=cycle, spool=spool)
         if bound is None:
@@ -1989,6 +2448,16 @@ def plan_capability_dag(goal: str, admissible: Mapping[str, Mapping[str, Any]], 
     earlier step writes, or a contradiction the planner cannot satisfy all fail closed.
     """
     clauses = sentence_clauses(goal)
+    clauses = [
+        c for idx, c in enumerate(clauses)
+        if not (idx > 0 and gc._DELIVERY_RE.match(c))
+    ]
+    if (
+        len(clauses) == 2
+        and re.match(r"^\s*the\s+.+\s+(?:is|are)\s+(?:flaky|failing|broken|slow|quadratic|deprecated)\s*$", clauses[0], re.IGNORECASE)
+        and re.match(r"^\s*(?:fix|repair|resolve|migrate)\b", clauses[1], re.IGNORECASE)
+    ):
+        return None
     if len(clauses) < 2:
         return None
     steps = _dag_steps(clauses, admissible, root)
@@ -2181,6 +2650,32 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     except GoalCompilationFailure as exc:
         compiled, pinned_failure = None, exc
 
+    # Reject bogus compound splits where an observation sentence named a real path
+    # and an anaphoric imperative sentence ("Fix it...", "Migrate it...") had zero
+    # paths so world-binding invented host `source_root` = "." or "canonical/tests".
+    if compiled is not None and compiled.get("compiler_mode") == "DETERMINISTIC_COMPOUND_ACTION_PLAN":
+        _parts = compiled.get("compiled_parts") or []
+        _first_sub = str((_parts[0] or {}).get("subgoal") or (_parts[0] or {}).get("clause") or "") if _parts else ""
+        _second_sub = str((_parts[1] or {}).get("subgoal") or (_parts[1] or {}).get("clause") or "") if len(_parts) >= 2 else ""
+        if (
+            len(_parts) == 2
+            and re.match(r"^\s*the\s+.+\s+(?:is|are)\s+(?:flaky|failing|broken|slow|quadratic|deprecated)\s*$", _first_sub, re.IGNORECASE)
+            and re.match(r"^\s*(?:fix|repair|resolve|migrate)\b", _second_sub, re.IGNORECASE)
+        ):
+            compiled = None
+            pinned_failure = GoalCompilationFailure("OBSERVATION_PLUS_REPAIR_SINGLE_STEP", "declarative_observation_plus_repair")
+        elif len(_parts) >= 2 and gc._repo_paths(_first_sub, root):
+            if any(
+                not gc._repo_paths(str((_p or {}).get("subgoal") or (_p or {}).get("clause") or ""), root)
+                and str(((_p or {}).get("inputs") or {}).get("source_root") or "") in (".", "./", "canonical/tests")
+                for _p in _parts[1:]
+            ):
+                compiled = None
+                pinned_failure = GoalCompilationFailure(
+                    "COMPOUND_CLAUSE_UNSTATED_WORLD_ROOT",
+                    "anaphoric_followup_clause_invented_host_source_root",
+                )
+
     # F5: a literal route captured several sentences -> compile sentence by sentence
     if compiled is not None and compiled.get("compiler_mode") in _LITERAL_MODES:
         clauses = sentence_clauses(text)
@@ -2321,12 +2816,38 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
             # same-score tier stays a tier: within it a sibling may still bind.
             bound: tuple[tuple[int, int, str, dict[str, Any]], dict[str, Any], dict[str, Any]] | None = None
             best_error: GoalCompilationFailure | None = None
+            from canonical.runtime import capability_selection_retrieval_v1 as _csr_ro
+            from canonical.runtime import write_authority_v1 as _wa_ro
+            _text_low = text.lstrip().lower()
+            _read_only_q = (
+                (_csr_ro.is_computed_answer_delivery(text)
+                 or _text_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")))
+                and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", _text_low)
+            )
+            _repair_imperative = (
+                not _read_only_q
+                and not future
+                and bool(re.search(
+                    r"\b(?:(?:fix|repair)\s+(?:the\s+(?:code|bug|race|circular|import|package|module|function)|it\b)"
+                    r"|remove\s+the\s+sql\s+injection|make\s+\w+\s+linearithmic|migrate\s+it\b)",
+                    _text_low,
+                ))
+            )
+            if _repair_imperative and selected and not _wa_ro.is_source_transformer(selected):
+                selected = None
+                single_shape = False
+                compiled = None
+                pinned_failure = GoalCompilationFailure("REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER", "read_only_capability_rejected")
             for tier_index, tier in enumerate(_score_tiers(pool)):
                 tier_error: GoalCompilationFailure | None = None
                 for rank, cand in enumerate(tier):
                     cand_entry = registry[cand[2]]
                     if _is_catch_all(cand_entry):
                         # a capability that binds every sentence is never the decision
+                        continue
+                    if _read_only_q and _wa_ro.is_source_transformer(cand[2]):
+                        continue
+                    if _repair_imperative and not _wa_ro.is_source_transformer(cand[2]):
                         continue
                     try:
                         cand_inputs = bind_all_inputs(text, cand_entry, root, cycle=0, spool=spool)

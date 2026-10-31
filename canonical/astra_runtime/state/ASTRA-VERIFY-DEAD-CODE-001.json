@@ -1,0 +1,9 @@
+{
+ "capability_id": "python.source.dead_code.v1",
+ "independent_verified": true,
+ "mission_id": "ASTRA-VERIFY-DEAD-CODE-001",
+ "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__RECEIPT.json",
+ "receipt_sha256": "5896956b448ff6bee8e98d38244a831e6f06131b1f02f6e372665979e4dafc1b",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_STATE_V1",
+ "verified_at": "2026-10-31T09:09:14Z"
+}

@@ -1,0 +1,19 @@
+{
+  "answer": "no",
+  "answer_scope": "NEGATIVE_IS_PROOF__POSITIVE_IS_NECESSARY_NOT_SUFFICIENT",
+  "bound_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/app",
+  "declared_line_count": 4,
+  "executed_line_count": 3,
+  "schema": "PROJECT_BRAIN_PYTHON_TEST_ADEQUACY_V1",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/app",
+  "suite_passed": true,
+  "target_files": [
+    "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/app/mod.py"
+  ],
+  "test_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/tests",
+  "tests_run": 1,
+  "unexecuted_count": 1,
+  "unexecuted_lines": [
+    9
+  ]
+}

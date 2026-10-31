@@ -1,0 +1,242 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "Run the plain goal bound capability grounding verify stdlib",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/1d934b65bc3f6a29_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "Run the plain goal bound capability grounding verify stdlib",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/1d934b65bc3f6a29_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "broad_objective_decomposition": null,
+        "broad_objective_decomposition_available": false,
+        "candidate_capability_ids": [
+          "terminal.kstar.root.assess.stdlib"
+        ],
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "clauses": [
+          {
+            "candidates": [
+              {
+                "binding_affordance": {
+                  "has_goal_url": false,
+                  "proposal_binding_count": 0,
+                  "proposal_bindings_cover_all_inputs": false,
+                  "url_consumable": false
+                },
+                "capability_id": "terminal.kstar.root.assess.stdlib",
+                "combined_score": 15.172106824925816,
+                "input_bindability": {
+                  "bound_input_keys": [],
+                  "proposal_binding_keys": [],
+                  "verified": true
+                },
+                "lexical": {
+                  "matched_goal_tokens": [
+                    "capability",
+                    "stdlib"
+                  ],
+                  "matched_identity": [
+                    [
+                      "stdlib",
+                      "stdlib"
+                    ]
+                  ],
+                  "matched_keywords": [
+                    [
+                      "capability",
+                      "capability"
+                    ]
+                  ],
+                  "matched_provides": [],
+                  "score": 6
+                },
+                "matched_distinctive_tokens": [
+                  "capability",
+                  "stdlib"
+                ],
+                "provides": [
+                  "terminal.kstar.root.assessment",
+                  "terminal.scope_complete.proof_or_minimum_residual",
+                  "terminal.tournament.failure.witness"
+                ],
+                "requires": [],
+                "similarity": {
+                  "coverage": 0.3333333333333333,
+                  "score": 9.172106824925816,
+                  "sequence_ratio": 0.17210682492581603,
+                  "shared_tokens": [
+                    "capability",
+                    "stdlib"
+                  ]
+                }
+              }
+            ],
+            "constraints": [],
+            "end": 59,
+            "index": 0,
+            "output_contract": {
+              "extensions": [],
+              "paths": []
+            },
+            "rejected_unbindable_candidates": [
+              {
+                "capability_id": "decision.synthesis.typed.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:decision.synthesis.typed.stdlib:input_path:structured.decision_evidence.available"
+              },
+              {
+                "capability_id": "decision.synthesis.verify.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:decision.synthesis.verify.stdlib:input_path:decision.synthesis.typed"
+              },
+              {
+                "capability_id": "evidence.claim_relation.generic_units.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:evidence.claim_relation.generic_units.stdlib:extraction_path:source.evidence.objective_grounded_units"
+              },
+              {
+                "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:evidence.claim_spec.bind.explicit_comparison.stdlib:extraction_path:source.evidence.objective_grounded_units"
+              },
+              {
+                "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:plain_goal.bound_capability.grounding.verify.stdlib:result_path:plain_goal.bound_capability.grounding"
+              },
+              {
+                "capability_id": "python.repository.acceptance.measure.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "shell.command.run",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:argv"
+              },
+              {
+                "capability_id": "source.candidates.enumerate.stdlib",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:source.evidence.extract.objective_grounded.stdlib:input_path:source.objective_relevance.lexical_ranked"
+              },
+              {
+                "capability_id": "structured.decision_evidence.locate.stdlib",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              }
+            ],
+            "start": 0,
+            "status": "UNBOUND_INPUTS_NOT_GROUNDED",
+            "text": "Run the plain goal bound capability grounding verify stdlib"
+          }
+        ],
+        "dependency": {
+          "modules": [
+            "difflib",
+            "hashlib",
+            "json",
+            "re",
+            "pathlib"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "external_discovery_allowed_for_unresolved_only": true,
+        "goal": "Run the plain goal bound capability grounding verify stdlib",
+        "goal_sha256": "1d934b65bc3f6a294076c59f68504abb948ff117c8885718ae0a3eda8abc0671",
+        "grounded_clause_count": 1,
+        "input_contract_bindability_enforced": true,
+        "model_dependency_count": 0,
+        "output_path": "canonical/astra_runtime/tmp/auto_proposal/1d934b65bc3f6a29_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json",
+        "output_sha256": "d19481294752d62582ec1ab015edb70f56c65df26e82eba7b34ee397b6e7ddf0",
+        "output_verified": true,
+        "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+        "unresolved_clause_indexes": [],
+        "whole_goal_external_discovery_forbidden_if_any_bound_grounding": true
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "Run the plain goal bound capability grounding verify stdlib",
+          "result_path": {
+            "$result": {
+              "cycle": 0,
+              "field": "output_path"
+            }
+          }
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "Run the plain goal bound capability grounding verify stdlib",
+          "result_path": "canonical/astra_runtime/tmp/auto_proposal/1d934b65bc3f6a29_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "dependency": {
+          "modules": [
+            "hashlib",
+            "json",
+            "pathlib",
+            "re"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "model_dependency_count": 0,
+        "producer_independent": true,
+        "reason": "STATUS_INVALID",
+        "verified": false
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T19:29:31.846821+00:00",
+  "mission_id": "CTL341",
+  "next_action_index": 3,
+  "plan_sha256": "03e36dce04e2e1b1e00610dcf9b95119d3ca5b9fa6924cb26b8ffca0ff9610cd",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T19:29:31.885270+00:00"
+}

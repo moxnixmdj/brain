@@ -1,0 +1,94 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "query": "MODEL_NON_DEPENDENCE_LAW_V1"
+        },
+        "type": "search_text"
+      },
+      "plan": {
+        "args": {
+          "query": "MODEL_NON_DEPENDENCE_LAW_V1"
+        },
+        "type": "search_text"
+      },
+      "result": {
+        "hits": [
+          "canonical/action_intents/2026-09-30_ACQUIRE_MODEL_INDEPENDENT_EVIDENCE_DECISION_SYNTHESIS_V1B.json",
+          "canonical/action_intents/2026-09-30_ENFORCE_MODEL_INDEPENDENT_COGNITION_V1.json",
+          "canonical/action_intents/2026-09-30_FRESH_PARENT_SERIALIZATION_DECISION_V1.json",
+          "canonical/action_intents/2026-09-30_PROMOTE_OPUS55_CAPABILITY_OWNERSHIP_THEORY_V1.json",
+          "canonical/astra_runtime/missions/ASTRA_RUNTIME_CAPABILITY_GRAPH_PLANNER_001.json",
+          "canonical/astra_runtime/missions/ASTRA_RUNTIME_MODEL_NONDEPENDENCE_REPAIR_001.json",
+          "canonical/astra_runtime/state/ANON_2e9ae57cecaaa16e__goal__CONTROLLER_CHECKPOINT.json",
+          "canonical/astra_runtime/state/ASTRA-RUNTIME-CAPABILITY-GRAPH-PLANNER-001.json",
+          "canonical/astra_runtime/state/ASTRA-RUNTIME-MODEL-NONDEPENDENCE-REPAIR-001.json",
+          "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_B_CLICK_REPAIR_20260930_INPUT.json",
+          "canonical/events/2026-09-21_MODEL_NON_DEPENDENCE_LAW.json",
+          "canonical/regressions/2026-09-30_MODEL_BACKED_COGNITION_MISCLASSIFICATION.json",
+          "canonical/tests/test_agent_orientation_v1.py",
+          "canonical/tests/test_astra_runtime_model_independence.py",
+          "canonical/tests/test_astra_runtime_verification.py",
+          "canonical/tests/test_capability_planner.py",
+          "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+          "canonical/verification/PREWAVE_CONTROLLER_COMPOSITION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json"
+        ],
+        "query": "MODEL_NON_DEPENDENCE_LAW_V1",
+        "truncated": false,
+        "type": "search_text"
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+        },
+        "type": "read_file"
+      },
+      "plan": {
+        "args": {
+          "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md"
+        },
+        "type": "read_file"
+      },
+      "result": {
+        "content": "# Model Non-Dependence Law V1\n\nStatus: SUPERSEDED / DO NOT EXECUTE\n\nSuperseded by:\n- `canonical/laws/MODEL_PROVIDER_RESILIENCE_AND_CAPABILITY_OWNERSHIP_LAW_V2.md`\n- `canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_OWNERSHIP_MISSION_LOCK_V5.md`\n\nCritical correction: model-independence is not a terminal requirement. Models may participate in permanently configured Brain capabilities. The governing distinction is permanent capability ownership versus external/JIT knowledge, with an Opus-5.5-or-better useful-capability acceptance bar.\n",
+        "path": "canonical/laws/MODEL_NON_DEPENDENCE_LAW_V1.md",
+        "truncated": false,
+        "type": "read_file"
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "MODEL_INDEPENDENT_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "MODEL_INDEPENDENT_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "MODEL_INDEPENDENT_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:26:36.262359+00:00",
+  "mission_id": null,
+  "next_action_index": 3,
+  "plan_sha256": "2e9ae57cecaaa16eb83df29ac97f96c7c507c0972677bb9f3d66fd8062d520e7",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "goal",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:26:37.377122+00:00"
+}

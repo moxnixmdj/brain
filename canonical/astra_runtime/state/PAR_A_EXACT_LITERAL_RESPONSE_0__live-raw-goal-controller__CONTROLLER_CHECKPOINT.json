@@ -1,0 +1,33 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "summary": "cqbyy 2159"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "cqbyy 2159"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "cqbyy 2159",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:04:15.427424+00:00",
+  "mission_id": "PAR_A_EXACT_LITERAL_RESPONSE_0",
+  "next_action_index": 1,
+  "plan_sha256": "e91b5bef4e87b4f3371afd2d0f9c48e86db7e7a5d6c645b4d904ba4d3604fae1",
+  "resume_count": 1,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:30:53.125396+00:00"
+}

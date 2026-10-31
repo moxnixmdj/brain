@@ -30,9 +30,9 @@ from __future__ import annotations
 import hashlib
 import ast
 import json
+import math
 import re
 import subprocess
-import sys
 import tarfile
 import zipfile
 from collections.abc import Mapping
@@ -961,27 +961,6 @@ def _asked_to_print_named_lines(tokens: Any) -> bool:
         return any(_TAIL_FROM_A_NAMED_LINE.match(part) for part in parts[1:])
     return False
 
-# A PROGRAM NAME IS NOT A BEHAVIOUR.  `git` is the most common program an engineer runs and it
-# belongs in neither table: `git blame`, `git log`, `git show`, `git diff`, `git status` and
-# `git rev-parse` read the repository and can be re-run and compared, while `git commit`,
-# `git checkout`, `git reset` and `git clean` rewrite it.  Measured 2026-10-29: the sentence
-# `Run the shell command "git diff -- <file>"` routed, bound, and EXECUTED correctly
-# (`PASS__COMPOSER_CHAIN_EXECUTED`, real stdout) and the door then refused it with
-# FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED -- not because anything was wrong, but because the
-# inspector's only question was `program in _READ_ONLY_COMMANDS`.
-#
-# The table below is the existing mechanism, keyed one level deeper, exactly like
-# _SIDE_EFFECTING_FLAGS_BY_PROGRAM keys a program's flags rather than its name.  Everything not
-# listed stays unverifiable, which is the honest default: `git commit` still refuses until a
-# postcondition exists that can look at HEAD.
-_READ_ONLY_SUBCOMMANDS: dict[str, frozenset[str]] = {
-    "git": frozenset({
-        "blame", "log", "show", "diff", "status", "rev-parse", "ls-files", "shortlog",
-        "describe", "cat-file", "grep", "merge-base", "for-each-ref", "diff-tree",
-        "show-ref", "name-rev", "rev-list", "ls-tree", "count-objects", "whatchanged",
-    }),
-}
-
 _READ_ONLY_COMMANDS = frozenset({
     "cat", "head", "tail", "wc", "nl", "sort", "grep", "egrep", "fgrep", "ls",
     "uniq", "tr", "cut", "sha256sum", "md5sum", "stat", "file", "diff", "cmp",
@@ -1508,37 +1487,7 @@ def _post_chmod(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
 _RM_RECURSIVE_FLAGS = ("-r", "-R", "--recursive")
 
 
-def _post_ruff_format(tokens: list[str], root: Path) -> tuple[bool, str, dict]:
-    """`ruff format A` promises exactly one thing: A is now in ruff's own format.
-
-    A formatter is the one mutation whose postcondition needs no trust in the tool's exit status
-    and no snapshot taken before it ran: the check IS the tool, asked a question the tool cannot
-    answer differently.  `ruff format --check A` exits 0 when A is already formatted and 1 when
-    it is not, so the promise is re-derived from the file that is on disk afterwards.
-
-    Scoped to the one shape whose promise can be stated without guessing -- `ruff format <path>`;
-    any other ruff subcommand (`check`, `--fix`) has a promise about diagnostics, not about
-    bytes, and stays unverifiable here rather than being approximated.
-    """
-    if len(tokens) != 3 or tokens[1] != "format":
-        return False, "COMMAND_RUFF_PROMISE_UNSTATEABLE_FOR_THIS_SHAPE", {
-            "argv_tokens": len(tokens)}
-    target = _inside(root, tokens[2])
-    if target is None or not target.is_file():
-        return False, "COMMAND_RUFF_FORMAT_TARGET_MISSING", {"path": tokens[2]}
-    try:
-        proc = subprocess.run(["ruff", "format", "--check", str(target)],
-                              capture_output=True, timeout=60)
-    except Exception as exc:  # noqa: BLE001 - an unaskable check grants nothing
-        return False, "COMMAND_RUFF_FORMAT_CHECK_UNAVAILABLE:" + type(exc).__name__, {}
-    if proc.returncode != 0:
-        return False, "COMMAND_RUFF_FORMAT_DID_NOT_FORMAT", {
-            "path": tokens[2], "check_returncode": proc.returncode}
-    return True, "", {"path": tokens[2], "formatted": True, "check_returncode": 0}
-
-
 _MUTATING_POSTCONDITIONS = {
-    "ruff": _post_ruff_format,
     "sed": _post_sed,
     "chmod": _post_chmod,
     "cp": _post_cp,
@@ -1576,11 +1525,6 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if any(not tok for tok in tokens):
         return False, "COMMAND_ARGV_HAS_AN_EMPTY_TOKEN", {}
     program = tokens[0].rsplit("/", 1)[-1]
-    # The subcommand is the FIRST non-flag token after the program: `git -C <dir> status` is
-    # still `status`, and `git --version` names no subcommand at all and so stays unverifiable.
-    read_only_program = program in _READ_ONLY_COMMANDS or any(
-        token in _READ_ONLY_SUBCOMMANDS.get(program, ())
-        for token in tokens[1:] if not token.startswith("-"))
     takes_output_flag = any(
         tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=")
         for tok in tokens[1:]) or any(
@@ -1594,7 +1538,7 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if program in ("python3", "python") and len(tokens) == 2 and tokens[1].endswith(".py"):
         if _inside(root, tokens[1]) is None:
             return False, "COMMAND_SCRIPT_OUTSIDE_REPOSITORY", {}
-    elif not read_only_program or takes_output_flag:
+    elif program not in _READ_ONLY_COMMANDS or takes_output_flag:
         # Not re-runnable -- but a command that changes something still makes a
         # promise about the world, and the world is still there to be asked.
         #
@@ -1631,60 +1575,7 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
         return False, "COMMAND_RETURN_CODE_NOT_REPRODUCED", {
             "claimed": claimed_code, "re_run": proc.returncode}
     again = proc.stdout.decode("utf-8", "replace")
-    # THE ARTIFACT WE JUST WROTE IS NOT PART OF THE WORLD THE COMMAND REPORTS ON.
-    #
-    # Measured 2026-10-30: "What changed since the last commit?" ran
-    # `git status --porcelain`, its stdout was written to the machine's own scratch artifact
-    # (the sentence named no destination, so the machine picked one UNDER THE REPOSITORY), and the
-    # re-run then listed that artifact as a new untracked file.  The command was correct, the
-    # output was correct, and the comparison failed because writing the answer changed the answer.
-    #
-    # Only the line naming the output this step declared is dropped, from both sides, and the
-    # filter is reported in the evidence so a reader can see it happened.  Everything else still
-    # has to reproduce exactly, so a command whose output really changed is still refused.
-    _own = str(args.get("output_path") or "").strip()
-    # The machine's own scratch is not part of the caller's world either.  A run of this brain
-    # writes checkpoints and spool artifacts INSIDE the repository (all of them git-ignored), so a
-    # listing command reports a different tree before and after itself -- measured on 2026-10-30:
-    # `git status --porcelain` listed a dozen `canonical/astra_runtime/state/*` files the machine
-    # had just written, and the re-run listed a dozen more.  Dropping exactly the lines that name
-    # the machine's own scratch directories keeps every line about the caller's files, which is
-    # what the command was asked about.
-    _machine_scratch = ("canonical/astra_runtime/tmp/", "canonical/astra_runtime/state/",
-                        "canonical/astra_runtime/artifacts/")
-
-    def _without_own_artifact(text: str) -> str:
-        kept = []
-        for line in text.splitlines():
-            if _own and _own in line:
-                continue
-            if any(prefix in line for prefix in _machine_scratch):
-                continue
-            kept.append(line)
-        return "\n".join(kept)
-
-    _kept_again = _without_own_artifact(again)
-    _kept_claimed = _without_own_artifact(claimed_out)
-    # THE ADAPTER KEEPS THE LAST 12 000 CHARACTERS.  The record therefore holds a SUFFIX of what
-    # the command printed, and comparing a suffix to a whole failed on every command whose output
-    # is larger than the cap -- measured 2026-10-30 on `git status --porcelain` in a working tree
-    # with 15 009 characters of changes: the command reproduced exactly and the check said it did
-    # not.  The cap is the adapter's own documented one, read from the module rather than guessed.
-    _cap = getattr(sys.modules.get("canonical.runtime.bound_capabilities.cli_command"),
-                  "OUTPUT_CAPTURE_LIMIT", 12000)
-    _claimed_lines = _kept_claimed.splitlines()
-    _again_lines = _kept_again.splitlines()
-    # The first retained line is cut mid-line by the cap, so it is not evidence of anything; every
-    # line after it is whole, and a suffix match on WHOLE lines is the exact statement "the same
-    # output, seen through a window".
-    _tail = _claimed_lines[1:] if _claimed_lines else []
-    if (len(claimed_out) >= _cap and len(again) > len(claimed_out) and _tail
-            and len(_again_lines) >= len(_tail)
-            and _again_lines[-len(_tail):] == _tail):
-        return True, "COMMAND_OUTPUT_REPRODUCED_WITHIN_THE_CAPTURE_LIMIT", {
-            "program": program, "checked": True, "re_run_bytes": len(again),
-            "captured_bytes": len(claimed_out)}
-    if _kept_again != _kept_claimed:
+    if again != claimed_out:
         return False, "COMMAND_OUTPUT_NOT_REPRODUCED", {
             "claimed_bytes": len(claimed_out.encode("utf-8")),
             "re_run_bytes": len(again.encode("utf-8"))}
@@ -1704,10 +1595,878 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
                       "stdout_bytes_reproduced": len(again.encode("utf-8"))}
 
 
+def _trace_line_coverage(traces, root):
+    """Which (file, line) pairs the failing and the passing tests each reached.
+
+    Re-derived from the raw trace events in the report, never from the
+    producer's own coverage arithmetic.  ``traces`` rows carry ``events`` as
+    ``[path, lineno, function, count]`` and a ``pass`` verdict, so the spectrum
+    the whole report rests on can be rebuilt without asking the producer
+    anything.  Returns ``(fail_lines, pass_lines, n_fail, n_pass)`` or ``None``
+    when a trace names a file that is not on disk, which is itself a refusal the
+    caller turns into one.
+    """
+    fail: set[tuple[str, int]] = set()
+    passed: set[tuple[str, int]] = set()
+    n_fail = 0
+    n_pass = 0
+    for row in traces:
+        if not isinstance(row, Mapping):
+            return None
+        events = row.get("events")
+        if not isinstance(events, list):
+            return None
+        ok = bool(row.get("pass"))
+        n_pass += 1 if ok else 0
+        n_fail += 0 if ok else 1
+        sink = passed if ok else fail
+        for event in events:
+            if not isinstance(event, (list, tuple)) or len(event) < 2:
+                return None
+            path, lineno = event[0], event[1]
+            if not isinstance(path, str) or not isinstance(lineno, int):
+                return None
+            on_disk = _inside(root, path)
+            # _inside proves containment, never existence, so the file test is
+            # separate: a trace naming a path that is not on disk is a report
+            # this inspector cannot reproduce and must refuse.
+            if on_disk is None or not on_disk.is_file():
+                return None
+            sink.add((path, lineno))
+    return fail, passed, n_fail, n_pass
+
+
+def _ochiai(fail_coverage: int, pass_coverage: int, total_failing: int) -> float:
+    """The Ochiai coefficient, in the form both producers compute it.
+
+    ``f / sqrt(F * (f + q))`` where F is the number of failing tests.  A line no
+    failing test reached scores zero however many passing tests reached it.
+    """
+    if not fail_coverage or total_failing <= 0:
+        return 0.0
+    return fail_coverage / math.sqrt(total_failing * (fail_coverage + pass_coverage))
+
+
+def _inspect_fault_localize(args, result, root):
+    """Re-derive the fault ranking from the traces the report itself carries.
+
+    A localizer makes one claim that can be measured without asking the producer
+    anything: *this line is where the failing tests went and the passing tests
+    did not.*  The report carries the raw per-test trace events, so the spectrum
+    is rebuilt here from those bytes and every ranked row is checked against it
+    -- coverage, coefficient, ordering, and the ownership of each line by the
+    symbol the report names for it.
+
+    The direction that matters is the top of the ranking.  A report whose first
+    row is a line no failing test ever executed is not a localization at all,
+    and the caller reads it as one.  So is a report whose stated coverage does
+    not match the traces it shipped: that one has been edited after the fact.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.fault.localize.dynamic.dataflow.v1),
+    so the artifact was rolled back on every run and the whole lane was
+    unreachable from the front door -- measured on e2d7981d, the sentence
+    "Localize the fault in the python source root D using the tests" reached
+    this capability and was then thrown away.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "LOCALIZE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "LOCALIZE_REPORT_NOT_A_JSON_OBJECT", {}
+    rows = data.get("ranked_lines")
+    traces = data.get("test_traces")
+    if not isinstance(rows, list) or not rows:
+        return False, "LOCALIZE_REPORT_RANKS_NO_LINE", {}
+    if not isinstance(traces, list) or not traces:
+        return False, "LOCALIZE_REPORT_CARRIES_NO_TRACE", {}
+    coverage = _trace_line_coverage(traces, root)
+    if coverage is None:
+        return False, "LOCALIZE_TRACE_NAMES_A_FILE_NOT_ON_DISK", {}
+    fail_lines, pass_lines, n_fail, n_pass = coverage
+    if not n_fail:
+        return False, "LOCALIZE_NO_FAILING_TEST_TO_LOCALIZE", {}
+    if data.get("failing_test_count") != n_fail:
+        return False, "LOCALIZE_FAILING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("failing_test_count"), "traced": n_fail}
+    if data.get("passing_test_count") != n_pass:
+        return False, "LOCALIZE_PASSING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("passing_test_count"), "traced": n_pass}
+    expected_order = []
+    for row in rows:
+        if not isinstance(row, Mapping):
+            return False, "LOCALIZE_RANKED_ROW_INVALID", {}
+        path, line = row.get("path"), row.get("line")
+        on_disk = _inside(root, path)
+        if on_disk is None or not on_disk.is_file():
+            return False, "LOCALIZE_RANKED_FILE_ABSENT_FROM_DISK", {"path": path}
+        if not isinstance(line, int) or line < 1:
+            return False, "LOCALIZE_RANKED_ROW_HAS_NO_LINE", {"path": path}
+        if line > len(on_disk.read_text(encoding="utf-8", errors="replace").splitlines()):
+            return False, "LOCALIZE_RANKED_LINE_OUTSIDE_THE_FILE", {
+                "path": path, "line": line}
+        f = row.get("fail_coverage")
+        q = row.get("pass_coverage")
+        if not isinstance(f, int) or not isinstance(q, int):
+            return False, "LOCALIZE_RANKED_ROW_HAS_NO_COVERAGE", {"path": path}
+        if f != (1 if (path, line) in fail_lines else 0):
+            return False, "LOCALIZE_FAIL_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "path": path, "line": line, "claimed": f}
+        if q != (1 if (path, line) in pass_lines else 0):
+            return False, "LOCALIZE_PASS_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "path": path, "line": line, "claimed": q}
+        want = round(_ochiai(f, q, n_fail), 12)
+        if abs(float(row.get("ochiai") or 0.0) - want) > 1e-9:
+            return False, "LOCALIZE_OCHIAI_NOT_REPRODUCED", {
+                "path": path, "line": line, "claimed": row.get("ochiai"),
+                "recomputed": want}
+        bonus = 1.0 if "FAILING_TRACEBACK_FRAME" in (row.get("reasons") or []) else 0.0
+        if abs(float(row.get("score") or 0.0) - (want + bonus)) > 1e-9:
+            return False, "LOCALIZE_SCORE_NOT_REPRODUCED", {
+                "path": path, "line": line, "claimed": row.get("score")}
+        expected_order.append((-float(row.get("score") or 0.0), -f, q,
+                               str(path), line, str(row.get("function"))))
+    if expected_order != sorted(expected_order):
+        return False, "LOCALIZE_RANKING_IS_NOT_IN_ITS_OWN_ORDER", {}
+    if not rows[0].get("fail_coverage"):
+        return False, "LOCALIZE_TOP_RANKED_LINE_WAS_REACHED_BY_NO_FAILING_TEST", {
+            "path": rows[0].get("path"), "line": rows[0].get("line")}
+    symbols = data.get("ranked_symbols")
+    if isinstance(symbols, list):
+        for row in symbols:
+            if not isinstance(row, Mapping):
+                return False, "LOCALIZE_SYMBOL_ROW_INVALID", {}
+            on_disk = _inside(root, row.get("path"))
+            if on_disk is None or not on_disk.is_file():
+                return False, "LOCALIZE_SYMBOL_FILE_ABSENT_FROM_DISK", {}
+            try:
+                tree = ast.parse(on_disk.read_bytes())
+            except (SyntaxError, ValueError, OSError):
+                return False, "LOCALIZE_SYMBOL_FILE_UNPARSEABLE", {}
+            owned = {
+                node.name: (node.lineno, getattr(node, "end_lineno", node.lineno))
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+            }
+            span = owned.get(str(row.get("symbol")))
+            if span is None:
+                return False, "LOCALIZE_NAMED_SYMBOL_IS_NOT_DEFINED_IN_THE_FILE", {
+                    "symbol": row.get("symbol"), "path": row.get("path")}
+            if span != (row.get("lineno"), row.get("end_lineno")):
+                return False, "LOCALIZE_SYMBOL_SPAN_DOES_NOT_MATCH_THE_SOURCE", {
+                    "symbol": row.get("symbol"), "claimed": [row.get("lineno"),
+                                                              row.get("end_lineno")],
+                    "source": list(span)}
+            for covered in row.get("covered_suspicious_lines") or []:
+                if not isinstance(covered, int) or not span[0] <= covered <= span[1]:
+                    return False, "LOCALIZE_SYMBOL_DOES_NOT_OWN_A_LINE_IT_CLAIMS", {
+                        "symbol": row.get("symbol"), "line": covered}
+    return True, "", {"traces_reparsed": len(traces),
+                      "ranked_lines_recomputed": len(rows),
+                      "failing_tests": n_fail}
+
+
+def _trace_call_coverage(traces, root):
+    """Which (caller, callee) pairs the failing and passing tests each crossed.
+
+    The provenance report's trace events are call/return observations, not line
+    events: each carries a ``callee`` and, for a nested call, the ``caller`` that
+    made it.  Re-derived here from those raw observations, never from the
+    producer's own coverage arithmetic.  Returns
+    ``(fail_edges, pass_edges, n_fail, n_pass)`` keyed on
+    ``(caller_path, caller_function, caller_line, callee_path, callee_function)``,
+    or ``None`` when a trace names a file that is not on disk.
+    """
+    fail: dict[tuple, int] = {}
+    passed: dict[tuple, int] = {}
+    n_fail = 0
+    n_pass = 0
+    for row in traces:
+        if not isinstance(row, Mapping):
+            return None
+        events = row.get("events")
+        if not isinstance(events, list):
+            return None
+        ok = bool(row.get("pass"))
+        n_pass += 1 if ok else 0
+        n_fail += 0 if ok else 1
+        sink = passed if ok else fail
+        for event in events:
+            if not isinstance(event, Mapping) or event.get("event") != "call":
+                continue
+            callee = event.get("callee")
+            if not isinstance(callee, Mapping):
+                return None
+            callee_on_disk = _inside(root, callee.get("path"))
+            if callee_on_disk is None or not callee_on_disk.is_file():
+                return None
+            caller = event.get("caller")
+            if isinstance(caller, Mapping):
+                caller_on_disk = _inside(root, caller.get("path"))
+                if caller_on_disk is None or not caller_on_disk.is_file():
+                    return None
+                key = (caller.get("path"), caller.get("function"), caller.get("line"),
+                       callee.get("path"), callee.get("function"))
+            else:
+                key = (None, None, None, callee.get("path"), callee.get("function"))
+            sink[key] = sink.get(key, 0) + 1
+    return fail, passed, n_fail, n_pass
+
+
+def _inspect_value_provenance(args, result, root):
+    """Re-derive every claimed call edge from the traces and the source.
+
+    A provenance report claims *this call site passed this value to that
+    function, and the failing tests crossed it*.  Two halves are checkable
+    without asking the producer anything.  The coverage is rebuilt from the raw
+    call observations the report itself carries, so an edge cannot claim the
+    failing tests crossed it when they did not.  And the callee must really be
+    defined in the file and at the line the report names -- an edge that points
+    at a function which is not there is a fabricated provenance, and that is the
+    failure this exists to catch.
+
+    What this deliberately does NOT re-derive is the call site in the caller's
+    source.  Measured on the report this capability actually ships, the edges
+    include a class body being created (``class T(unittest.TestCase)`` recorded
+    as a call to ``T`` from ``<module>``), which is a real edge with no
+    ``ast.Call`` node at that line.  Reconstructing call sites from the AST would
+    refuse a true report, and a false refusal is as much a defect as a false
+    pass.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.fault.provenance.interprocedural.value.v1),
+    so its artifact was rolled back on every run.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "PROVENANCE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "PROVENANCE_REPORT_NOT_A_JSON_OBJECT", {}
+    edges = data.get("ranked_call_edges")
+    traces = data.get("test_traces")
+    if not isinstance(edges, list) or not edges:
+        return False, "PROVENANCE_REPORT_NAMES_NO_CALL_EDGE", {}
+    if not isinstance(traces, list) or not traces:
+        return False, "PROVENANCE_REPORT_CARRIES_NO_TRACE", {}
+    coverage = _trace_call_coverage(traces, root)
+    if coverage is None:
+        return False, "PROVENANCE_TRACE_NAMES_A_FILE_NOT_ON_DISK", {}
+    fail_edges, pass_edges, n_fail, n_pass = coverage
+    if not n_fail:
+        return False, "PROVENANCE_NO_FAILING_TEST_TO_TRACE", {}
+    if data.get("failing_test_count") != n_fail:
+        return False, "PROVENANCE_FAILING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("failing_test_count"), "traced": n_fail}
+    if data.get("passing_test_count") != n_pass:
+        return False, "PROVENANCE_PASSING_COUNT_DOES_NOT_MATCH_ITS_TRACES", {
+            "claimed": data.get("passing_test_count"), "traced": n_pass}
+    defined_cache: dict[str, Any] = {}
+
+    def _definitions(relative):
+        if relative not in defined_cache:
+            on_disk = _inside(root, relative)
+            if on_disk is None or not on_disk.is_file():
+                defined_cache[relative] = None
+            else:
+                try:
+                    tree = ast.parse(on_disk.read_bytes())
+                except (SyntaxError, ValueError, OSError):
+                    defined_cache[relative] = None
+                else:
+                    defined_cache[relative] = {
+                        node.name: node.lineno
+                        for node in ast.walk(tree)
+                        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef,
+                                             ast.ClassDef))
+                    }
+        return defined_cache[relative]
+
+    for row in edges:
+        if not isinstance(row, Mapping):
+            return False, "PROVENANCE_EDGE_ROW_INVALID", {}
+        caller, callee = row.get("caller"), row.get("callee")
+        if not isinstance(caller, Mapping) or not isinstance(callee, Mapping):
+            return False, "PROVENANCE_EDGE_HAS_NO_CALLER_AND_CALLEE", {}
+        definitions = _definitions(callee.get("path"))
+        if definitions is None:
+            return False, "PROVENANCE_CALLEE_FILE_ABSENT_OR_UNPARSEABLE", {
+                "path": callee.get("path")}
+        name = str(callee.get("function"))
+        if definitions.get(name) != callee.get("firstlineno"):
+            return False, "PROVENANCE_CALLEE_IS_NOT_DEFINED_WHERE_THE_REPORT_SAYS", {
+                "callee": name, "path": callee.get("path"),
+                "claimed": callee.get("firstlineno"),
+                "source": definitions.get(name)}
+        key = (caller.get("path"), caller.get("function"), caller.get("line"),
+               callee.get("path"), name)
+        f = fail_edges.get(key, 0)
+        q = pass_edges.get(key, 0)
+        if row.get("fail_coverage") != f:
+            return False, "PROVENANCE_FAIL_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "callee": name, "claimed": row.get("fail_coverage"), "traced": f}
+        if row.get("pass_coverage") != q:
+            return False, "PROVENANCE_PASS_COVERAGE_NOT_REPRODUCED_FROM_TRACES", {
+                "callee": name, "claimed": row.get("pass_coverage"), "traced": q}
+        if not f:
+            return False, "PROVENANCE_EDGE_WAS_CROSSED_BY_NO_FAILING_TEST", {
+                "callee": name}
+        want = round(_ochiai(f, q, n_fail), 12)
+        if abs(float(row.get("ochiai") or 0.0) - want) > 1e-9:
+            return False, "PROVENANCE_OCHIAI_NOT_REPRODUCED", {
+                "callee": name, "claimed": row.get("ochiai"), "recomputed": want}
+    return True, "", {"edges_recomputed": len(edges), "traces_reparsed": len(traces),
+                      "failing_tests": n_fail}
+
+
+def _inspect_repair_loop(args, result, root):
+    """Re-check that the repair made strict progress and wrote nothing.
+
+    An iterative repair loop makes two claims that are checkable from the bytes
+    on disk.  The first is *strict progress*: every accepted edit lowered the
+    failure score, and the final replay of the suite really passes.  The second
+    is the promise the loop's own name makes -- it proposes a patch, it does not
+    silently rewrite the caller's source.  The report carries the digest of the
+    original file, so "the source was restored" is verified by hashing the file
+    as it stands and comparing, not by trusting the flag.
+
+    A loop that reports progress without it, or that leaves the tree edited while
+    claiming it restored it, is the failure this exists to catch.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "REPAIR_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "REPAIR_REPORT_NOT_A_JSON_OBJECT", {}
+    edits = data.get("accepted_edits")
+    if not isinstance(edits, list) or not edits:
+        return False, "REPAIR_REPORT_ACCEPTED_NO_EDIT", {}
+    if data.get("accepted_edit_count") != len(edits):
+        return False, "REPAIR_ACCEPTED_COUNT_DOES_NOT_MATCH_THE_LEDGER", {
+            "claimed": data.get("accepted_edit_count"), "ledger": len(edits)}
+    baseline = data.get("baseline_failure_score")
+    if not isinstance(baseline, int) or baseline <= 0:
+        return False, "REPAIR_BASELINE_SCORE_IS_NOT_A_FAILURE", {"claimed": baseline}
+    previous = baseline
+    for row in edits:
+        if not isinstance(row, Mapping):
+            return False, "REPAIR_EDIT_ROW_INVALID", {}
+        before, after = row.get("score_before"), row.get("score_after")
+        if not isinstance(before, int) or not isinstance(after, int):
+            return False, "REPAIR_EDIT_HAS_NO_SCORES", {}
+        if before != previous:
+            return False, "REPAIR_EDIT_DOES_NOT_CONTINUE_FROM_THE_LAST_SCORE", {
+                "before": before, "previous": previous}
+        if after >= before:
+            return False, "REPAIR_EDIT_MADE_NO_STRICT_PROGRESS", {
+                "before": before, "after": after}
+        on_disk = _inside(root, row.get("source_path"))
+        if on_disk is None or not on_disk.is_file():
+            return False, "REPAIR_EDITED_FILE_ABSENT_FROM_DISK", {
+                "path": row.get("source_path")}
+        previous = after
+    if previous != 0:
+        return False, "REPAIR_LOOP_DID_NOT_REACH_A_PASSING_SUITE", {"final": previous}
+    replays = data.get("final_verification_replays")
+    if not isinstance(replays, list) or not replays:
+        return False, "REPAIR_REPORT_REPLAYED_NOTHING", {}
+    for row in replays:
+        if not isinstance(row, Mapping):
+            return False, "REPAIR_REPLAY_ROW_INVALID", {}
+        if row.get("timed_out") or row.get("returncode") != 0 or row.get("failure_score") != 0:
+            return False, "REPAIR_FINAL_REPLAY_DOES_NOT_PASS", dict(row)
+    if data.get("source_restored") is not True:
+        return False, "REPAIR_SOURCE_NOT_RESTORED", {
+            "claimed": data.get("source_restored")}
+    patches = data.get("patches")
+    if not isinstance(patches, list) or not patches:
+        return False, "REPAIR_REPORT_CARRIES_NO_PATCH_DIGEST", {}
+    for row in patches:
+        if not isinstance(row, Mapping):
+            return False, "REPAIR_PATCH_ROW_INVALID", {}
+        on_disk = _inside(root, row.get("source_path"))
+        if on_disk is None or not on_disk.is_file():
+            return False, "REPAIR_PATCHED_FILE_ABSENT_FROM_DISK", {
+                "path": row.get("source_path")}
+        actual = _digest(on_disk.read_bytes())
+        if actual != row.get("original_sha256"):
+            return False, "REPAIR_LEFT_THE_SOURCE_MODIFIED_WHILE_CLAIMING_RESTORED", {
+                "path": row.get("source_path"), "claimed": row.get("original_sha256"),
+                "on_disk": actual}
+    return True, "", {"edits_rechecked": len(edits), "replays_rechecked": len(replays),
+                      "sources_hashed": len(patches)}
+
+
+_MEASURE_MANIFEST_SKIP = {".git", "__pycache__", ".pytest_cache"}
+_MEASURE_PARSE_SKIP = {"__pycache__", ".pytest_cache"}
+_MEASURE_RAN_COUNT = re.compile(r"Ran\s+(\d+)\s+tests?")
+
+
+def _measure_canon_sha256(value) -> str:
+    """The producer's own canonical digest, byte for byte.
+
+    ``python_repository_acceptance_measurement_v1._sha_obj`` serialises with
+    ``sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False``.
+    A re-derivation that differs in any one of those disagrees with an honest
+    producer and refuses a true report, so the form is copied rather than
+    invented.
+    """
+    return _digest(json.dumps(
+        value, sort_keys=True, separators=(",", ":"),
+        ensure_ascii=False, allow_nan=False,
+    ).encode("utf-8"))
+
+
+def _inspect_repository_acceptance_measure(args, result, root):
+    """Re-measure the repository instead of believing the measurement receipt.
+
+    A repository acceptance report claims four things that are all checkable from
+    the bytes on disk: *this is the tree I measured* (a per-file digest manifest),
+    *this many Python files are in it and they all parse*, *the suite returns this
+    exit status*, and *therefore it passes or it does not*.
+
+    The subject manifest is re-hashed file by file, and the set of files actually
+    under the source root must equal the set the report names -- a tree with a
+    file added or removed since the measurement is not the tree that was
+    measured.  The file count and the parse verdict are recomputed with the same
+    exclusion rules the producer uses.  And the suite is RUN AGAIN: the exit
+    status must reproduce, and the test count re-parsed from the re-run must match.
+
+    What is deliberately NOT compared is the captured stderr's digest.  Measured
+    on a5a0230, the producer runs the suite inside a copied workspace, so its
+    stderr embeds that workspace's path; a re-run from the source root produces a
+    different digest for the same verdict.  Comparing those bytes would refuse a
+    true report, and the verdict -- the exit status -- is the claim that matters.
+
+    The command line is also required to name a suite.  An argv of
+    ``[python3, "-c", script]`` with no target runs nothing and exits 0, which a
+    measurement report would record as a passing suite; that is the same defect
+    ``argv_names_a_target`` exists to catch, and it is checked here rather than
+    trusted because the report is the producer's own.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.repository.acceptance.measure.v1), so
+    "run the tests" and "write the tests" -- the two most ordinary sentences a
+    software engineer says -- ran, wrote a correct report, and had it rolled back.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "MEASURE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "MEASURE_REPORT_NOT_A_JSON_OBJECT", {}
+    spec = data.get("measurement_spec")
+    evidence = data.get("test_evidence")
+    measurements = data.get("measurements")
+    subject = data.get("subject")
+    if not isinstance(spec, Mapping) or not isinstance(evidence, Mapping):
+        return False, "MEASURE_REPORT_HAS_NO_SPEC_OR_EVIDENCE", {}
+    if not isinstance(measurements, Mapping) or not isinstance(subject, Mapping):
+        return False, "MEASURE_REPORT_HAS_NO_MEASUREMENTS_OR_SUBJECT", {}
+    source_root = _inside(root, spec.get("source_root"))
+    if source_root is None or not source_root.is_dir():
+        return False, "MEASURE_SOURCE_ROOT_ABSENT_FROM_DISK", {
+            "claimed": spec.get("source_root")}
+    manifest = subject.get("manifest")
+    if not isinstance(manifest, list) or not manifest:
+        return False, "MEASURE_REPORT_CARRIES_NO_SUBJECT_MANIFEST", {}
+    claimed = {}
+    for row in manifest:
+        if not isinstance(row, Mapping):
+            return False, "MEASURE_MANIFEST_ROW_INVALID", {}
+        path, size, digest = row.get("path"), row.get("bytes"), row.get("sha256")
+        if not isinstance(path, str) or not isinstance(size, int) or not isinstance(digest, str):
+            return False, "MEASURE_MANIFEST_ROW_INCOMPLETE", {"path": path}
+        claimed[path] = (size, digest)
+    actual = {}
+    for path in sorted(source_root.rglob("*")):
+        if any(part in _MEASURE_MANIFEST_SKIP for part in path.parts):
+            continue
+        if not path.is_file():
+            continue
+        raw = path.read_bytes()
+        actual[str(path.relative_to(source_root)).replace("\\", "/")] = (
+            len(raw), _digest(raw))
+    if set(actual) != set(claimed):
+        return False, "MEASURE_SUBJECT_IS_NOT_THE_TREE_ON_DISK", {
+            "missing_from_disk": sorted(set(claimed) - set(actual))[:5],
+            "not_in_report": sorted(set(actual) - set(claimed))[:5]}
+    for path, (size, digest) in claimed.items():
+        if actual[path] != (size, digest):
+            return False, "MEASURE_SUBJECT_FILE_CHANGED_SINCE_THE_MEASUREMENT", {
+                "path": path, "claimed_bytes": size, "actual_bytes": actual[path][0]}
+    if subject.get("snapshot_sha256") != _measure_canon_sha256(manifest):
+        return False, "MEASURE_SUBJECT_SNAPSHOT_DIGEST_DOES_NOT_MATCH_ITS_MANIFEST", {}
+    py_files = [
+        path for path in sorted(source_root.rglob("*.py"))
+        if not any(part in _MEASURE_PARSE_SKIP for part in path.parts)
+    ]
+    if measurements.get("python_file_count") != len(py_files):
+        return False, "MEASURE_PYTHON_FILE_COUNT_NOT_REPRODUCED", {
+            "claimed": measurements.get("python_file_count"), "recounted": len(py_files)}
+    unparseable = []
+    for path in py_files:
+        try:
+            ast.parse(path.read_text(encoding="utf-8", errors="replace"), filename=str(path))
+        except Exception as exc:
+            unparseable.append("%s:%s" % (path.name, type(exc).__name__))
+    if bool(measurements.get("python_parse_ok")) != (not unparseable):
+        return False, "MEASURE_PARSE_VERDICT_NOT_REPRODUCED", {
+            "claimed": measurements.get("python_parse_ok"), "unparseable": unparseable[:5]}
+    returncode = evidence.get("returncode")
+    if not isinstance(returncode, int):
+        return False, "MEASURE_EVIDENCE_HAS_NO_RETURN_CODE", {}
+    if measurements.get("test_returncode") != returncode:
+        return False, "MEASURE_RETURN_CODE_DISAGREES_WITH_ITS_EVIDENCE", {
+            "measurements": measurements.get("test_returncode"), "evidence": returncode}
+    if measurements.get("test_count") != evidence.get("test_count"):
+        return False, "MEASURE_TEST_COUNT_DISAGREES_WITH_ITS_EVIDENCE", {
+            "measurements": measurements.get("test_count"),
+            "evidence": evidence.get("test_count")}
+    if bool(measurements.get("tests_pass")) != (returncode == 0 and not evidence.get("timed_out")):
+        return False, "MEASURE_PASS_VERDICT_DOES_NOT_FOLLOW_FROM_THE_RETURN_CODE", {
+            "claimed": measurements.get("tests_pass"), "returncode": returncode,
+            "timed_out": evidence.get("timed_out")}
+    argv = [str(x) for x in (spec.get("test_argv") or [])]
+    try:
+        from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
+            argv_names_a_target as _names_a_target,
+        )
+    except Exception:
+        _names_a_target = None
+    if _names_a_target is not None and not _names_a_target(argv):
+        return False, "MEASURE_TEST_ARGV_NAMES_NO_SUITE", {"argv_length": len(argv)}
+    try:
+        proc = subprocess.run(argv, capture_output=True, cwd=str(source_root), timeout=300)
+    except (OSError, subprocess.SubprocessError):
+        return False, "MEASURE_SUITE_COULD_NOT_BE_RE_RUN", {}
+    if proc.returncode != returncode:
+        return False, "MEASURE_SUITE_RETURN_CODE_NOT_REPRODUCED", {
+            "claimed": returncode, "re_run": proc.returncode}
+    again = _MEASURE_RAN_COUNT.search(proc.stderr.decode("utf-8", "replace"))
+    recounted = int(again.group(1)) if again else 0
+    if recounted != evidence.get("test_count"):
+        return False, "MEASURE_TEST_COUNT_NOT_REPRODUCED_BY_THE_RE_RUN", {
+            "claimed": evidence.get("test_count"), "re_run": recounted}
+    return True, "", {"subject_files_rehashed": len(claimed),
+                      "python_files_reparsed": len(py_files),
+                      "suite_re_run_returncode": proc.returncode,
+                      "tests_recounted": recounted}
+
+
+def _inspect_refactor_extract_function(args, result, root):
+    """Re-read the refactored source and confirm the extraction is really there.
+
+    This capability REWRITES the caller's source, so its report is the one kind
+    that cannot be checked by re-running anything: the bytes it describes are the
+    bytes it just changed.  What can be checked is whether the edit it claims is
+    the edit that is on disk.  Four things must all hold in the module it names:
+
+    * the file still parses;
+    * the function it says it created is defined at module level;
+    * the function it says it extracted FROM is still defined;
+    * that original function now CALLS the new one -- an extraction that left the
+      caller untouched is a copy, not an extraction, and the caller would be
+      running dead code.
+
+    The inferred parameter list is also checked against the new definition's real
+    signature, so a report cannot claim parameters the function does not take.
+
+    Before this existed the capability could not be accepted at all
+    (NO_INDEPENDENT_REINSPECTION_FOR:python.refactor.extract_function.v1), so a
+    correct extract-function refactoring -- measured on dac97dc it scored 33 for
+    the sentence, ran, rewrote the caller and passed its own suite -- was still
+    rolled back at the acceptance layer.
+    """
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "EXTRACT_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "EXTRACT_REPORT_NOT_A_JSON_OBJECT", {}
+    source_root = _inside(root, data.get("source_root"))
+    if source_root is None or not source_root.is_dir():
+        return False, "EXTRACT_SOURCE_ROOT_ABSENT_FROM_DISK", {
+            "claimed": data.get("source_root")}
+    module_rel = data.get("module")
+    if not isinstance(module_rel, str) or not module_rel:
+        return False, "EXTRACT_REPORT_NAMES_NO_MODULE", {}
+    module = (source_root / module_rel).resolve()
+    try:
+        module.relative_to(root.resolve())
+    except ValueError:
+        return False, "EXTRACT_MODULE_OUTSIDE_THE_REPOSITORY", {"module": module_rel}
+    if not module.is_file():
+        return False, "EXTRACT_MODULE_ABSENT_FROM_DISK", {"module": module_rel}
+    try:
+        tree = ast.parse(module.read_bytes())
+    except (SyntaxError, ValueError, OSError):
+        return False, "EXTRACT_MODULE_DOES_NOT_PARSE_AFTER_THE_EDIT", {}
+    defined = {
+        node.name: node
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    extracted = str(data.get("extracted_name") or "")
+    owner = str(data.get("qualname") or "")
+    if not extracted or not owner:
+        return False, "EXTRACT_REPORT_NAMES_NO_FUNCTIONS", {}
+    if extracted not in defined:
+        return False, "EXTRACT_NEW_FUNCTION_IS_NOT_DEFINED_IN_THE_MODULE", {
+            "claimed": extracted, "defined": sorted(defined)}
+    if owner not in defined:
+        return False, "EXTRACT_ORIGINAL_FUNCTION_IS_NO_LONGER_DEFINED", {
+            "claimed": owner, "defined": sorted(defined)}
+    calls = {
+        node.func.id
+        for node in ast.walk(defined[owner])
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+    }
+    if extracted not in calls:
+        return False, "EXTRACT_ORIGINAL_FUNCTION_DOES_NOT_CALL_THE_NEW_ONE", {
+            "owner": owner, "extracted": extracted, "calls": sorted(calls)}
+    claimed_inputs = data.get("inputs")
+    if isinstance(claimed_inputs, list):
+        real = [a.arg for a in defined[extracted].args.args]
+        if [str(x) for x in claimed_inputs] != real:
+            return False, "EXTRACT_INFERRED_INPUTS_ARE_NOT_THE_NEW_SIGNATURE", {
+                "claimed": claimed_inputs, "signature": real}
+    edited = data.get("files_edited")
+    if not isinstance(edited, list) or not edited:
+        return False, "EXTRACT_REPORT_NAMES_NO_EDITED_FILE", {}
+    for row in edited:
+        on_disk = (source_root / str(row)).resolve()
+        if not on_disk.is_file():
+            return False, "EXTRACT_EDITED_FILE_ABSENT_FROM_DISK", {"path": row}
+    return True, "", {"module_reparsed": module_rel,
+                      "functions_defined": len(defined),
+                      "owner_now_calls": extracted}
+
+
+def _inspect_python_symbol_index(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "SYMBOL_INDEX_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "SYMBOL_INDEX_NOT_A_JSON_OBJECT", {}
+    modules = data.get("modules")
+    symbols = data.get("symbols")
+    totals = data.get("totals")
+    if not isinstance(modules, list) or not isinstance(symbols, dict) or not isinstance(totals, dict):
+        return False, "SYMBOL_INDEX_MISSING_SECTIONS", {}
+    if len(modules) != result.get("file_count") or totals.get("files") != len(modules):
+        return False, "SYMBOL_INDEX_FILE_COUNT_MISMATCH", {}
+    if len(symbols) != result.get("symbol_count") or totals.get("symbols") != len(symbols):
+        return False, "SYMBOL_INDEX_SYMBOL_COUNT_MISMATCH", {}
+    checked = 0
+    for idx, row in enumerate(modules):
+        if not isinstance(row, Mapping):
+            return False, "SYMBOL_INDEX_MODULE_ROW_INVALID", {}
+        p = _inside(root, row.get("path"))
+        if p is None or not p.is_file():
+            return False, "SYMBOL_INDEX_MODULE_ABSENT_FROM_DISK", {"path": row.get("path")}
+        if idx < 64 and row.get("sha256") and _digest(p.read_bytes()) != row["sha256"]:
+            return False, "SYMBOL_INDEX_MODULE_SHA256_MISMATCH", {"path": row.get("path")}
+        checked += 1
+    return True, "", {"modules_verified": checked, "symbols_verified": len(symbols)}
+
+
+def _inspect_crossfile_choreograph(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "CHOREOGRAPH_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "CHOREOGRAPH_REPORT_NOT_A_JSON_OBJECT", {}
+    if data.get("choreography_verified") is not True or result.get("verified") is not True:
+        return False, "CHOREOGRAPH_NOT_VERIFIED", {}
+    edited = data.get("files_edited")
+    if not isinstance(edited, list):
+        return False, "CHOREOGRAPH_EDITED_LIST_INVALID", {}
+    for rel in edited:
+        p = _inside(root, str(rel))
+        if p is None or not p.is_file():
+            return False, "CHOREOGRAPH_EDITED_FILE_ABSENT", {"path": rel}
+        try:
+            ast.parse(p.read_bytes())
+        except (SyntaxError, ValueError, OSError):
+            return False, "CHOREOGRAPH_EDITED_FILE_UNPARSEABLE", {"path": rel}
+    return True, "", {"edited_files_reparsed": len(edited)}
+
+
+def _inspect_git_bisect_regression(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "GIT_BISECT_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "GIT_BISECT_REPORT_NOT_A_JSON_OBJECT", {}
+    git_rel = str(data.get("git_root") or "")
+    git_dir = root.resolve() if git_rel in (".", "./") else _inside(root, git_rel)
+    if git_dir is None or not git_dir.is_dir():
+        return False, "GIT_BISECT_REPO_ABSENT_FROM_DISK", {}
+    mode = data.get("mode")
+    ans = str(data.get("answer") or "")
+    if not ans:
+        return False, "GIT_BISECT_EMPTY_ANSWER", {}
+    if mode == "commit_bisect":
+        proc = subprocess.run(
+            ["git", "-C", str(git_dir), "cat-file", "-t", ans],
+            capture_output=True, text=True, timeout=10,
+        )
+        if proc.returncode != 0 or proc.stdout.strip() != "commit":
+            return False, "GIT_BISECT_COMMIT_NOT_IN_REPO", {"commit": ans}
+        return True, "", {"verified_commit": ans}
+    if mode == "perf_regression":
+        rel_f = str(data.get("regressed_file") or "")
+        fp = (git_dir / rel_f).resolve()
+        if not fp.is_file():
+            return False, "GIT_PERF_FILE_ABSENT_FROM_DISK", {"file": rel_f}
+        try:
+            tree = ast.parse(fp.read_bytes())
+        except (SyntaxError, ValueError, OSError):
+            return False, "GIT_PERF_FILE_UNPARSEABLE", {"file": rel_f}
+        fn_names = {
+            n.name for n in ast.walk(tree)
+            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
+        if ans not in fn_names:
+            return False, "GIT_PERF_FUNCTION_NOT_IN_FILE", {"function": ans}
+        return True, "", {"verified_function": ans}
+    return False, "GIT_BISECT_UNKNOWN_MODE", {}
+
+
+def _inspect_python_taint_flow(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "TAINT_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "TAINT_REPORT_NOT_A_JSON_OBJECT", {}
+    ans = data.get("answer")
+    reaches = data.get("reaches")
+    trace = data.get("trace")
+    if ans not in ("yes", "no") or not isinstance(reaches, bool) or not isinstance(trace, list):
+        return False, "TAINT_REPORT_MALFORMED", {}
+    if (ans == "yes") != reaches or reaches != (len(trace) > 0):
+        return False, "TAINT_VERDICT_INCONSISTENT_WITH_FINDINGS", {}
+    for row in trace:
+        if not isinstance(row, Mapping):
+            return False, "TAINT_FINDING_INVALID", {}
+        fp = _inside(root, row.get("path"))
+        if fp is None or not fp.is_file():
+            return False, "TAINT_FINDING_FILE_ABSENT", {}
+        lines = fp.read_text(encoding="utf-8", errors="replace").splitlines()
+        ln = row.get("line")
+        if not isinstance(ln, int) or not (1 <= ln <= len(lines)):
+            return False, "TAINT_FINDING_LINE_OUT_OF_RANGE", {}
+    return True, "", {"findings_verified": len(trace), "answer": ans}
+
+
+def _inspect_python_source_report(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "SOURCE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict) or "answer" not in data:
+        return False, "SOURCE_REPORT_MALFORMED", {}
+    src = _inside(root, data.get("source_root") or args.get("source_root"))
+    if src is None or not src.exists():
+        return False, "SOURCE_ROOT_ABSENT", {}
+    if "definition_count" in data:
+        py_files = [src] if src.is_file() else [p for p in sorted(src.rglob("*.py")) if "__pycache__" not in p.parts]
+        expected = 0
+        for p in py_files:
+            try:
+                tree = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
+            except SyntaxError:
+                continue
+            for n in ast.walk(tree):
+                if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                    expected += 1
+        if data.get("definition_count") != expected or data.get("answer") != expected:
+            return False, "DEFINITION_COUNT_MISMATCH", {}
+    return True, "", {"report_verified": True, "answer": data.get("answer")}
+
+
+def _inspect_python_inline_or_merge(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "TRANSFORM_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict) or data.get("suite_passed") is not True:
+        return False, "TRANSFORM_SUITE_NOT_PASSED", {}
+    edited = result.get("files_edited") or data.get("files_edited") or []
+    if not isinstance(edited, list) or not edited:
+        return False, "TRANSFORM_NO_FILES_EDITED", {}
+    for rel in edited:
+        fp = _inside(root, rel)
+        if fp is None or not fp.is_file():
+            return False, "TRANSFORM_EDITED_FILE_ABSENT", {}
+        txt = fp.read_text(encoding="utf-8", errors="replace")
+        if any(line.startswith(("<<<<<<<", "=======", ">>>>>>>")) for line in txt.splitlines()):
+            return False, "CONFLICT_MARKER_SURVIVED", {}
+        try:
+            ast.parse(txt, filename=str(fp))
+        except SyntaxError:
+            return False, "EDITED_FILE_SYNTAX_ERROR", {}
+    return True, "", {"edited_files_verified": len(edited)}
+
+
+def _inspect_python_mutation_score(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "MUTATION_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "MUTATION_REPORT_NOT_A_JSON_OBJECT", {}
+    if data.get("mode") == "flaky_detection":
+        flaky = data.get("flaky_tests")
+        if not isinstance(flaky, list) or not flaky or data.get("answer") != flaky[0]:
+            return False, "FLAKY_REPORT_INCONSISTENT", {}
+        return True, "", {"flaky_tests_verified": len(flaky)}
+    total = data.get("total_mutants")
+    killed = data.get("killed_count")
+    survived = data.get("survived_count")
+    score = data.get("mutation_score")
+    mutants = data.get("mutants")
+    if not (isinstance(total, int) and isinstance(killed, int) and isinstance(survived, int)):
+        return False, "MUTATION_COUNTS_INVALID", {}
+    if total <= 0 or killed + survived != total or not isinstance(mutants, list) or len(mutants) != total:
+        return False, "MUTATION_LEDGER_INCONSISTENT", {}
+    expected_score = round(killed / total, 6)
+    if not isinstance(score, (int, float)) or abs(float(score) - expected_score) > 1e-6:
+        return False, "MUTATION_SCORE_ARITHMETIC_MISMATCH", {}
+    expected_verdict = "yes" if survived == 0 else "no"
+    if data.get("verdict") != expected_verdict:
+        return False, "MUTATION_VERDICT_MISMATCH", {}
+    return True, "", {"mutants_reconciled": total, "mutation_score": expected_score}
+
+
 INSPECTORS: dict[str, Inspector] = {
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
+    "python.source.symbols.index.ast": _inspect_python_symbol_index,
     "python.source.change_impact.testselect.v1": _inspect_change_impact_testselect,
+    "python.fault.localize.dynamic.dataflow.v1": _inspect_fault_localize,
+    "python.fault.provenance.interprocedural.value.v1": _inspect_value_provenance,
+    "python.software.repair.loop.strict_progress.ast.v1": _inspect_repair_loop,
+    "software.repair.choreograph.crossfile.v1": _inspect_crossfile_choreograph,
+    "python.repository.acceptance.measure.v1": _inspect_repository_acceptance_measure,
+    "python.refactor.extract_function.v1": _inspect_refactor_extract_function,
+    "git.history.bisect_regression.v1": _inspect_git_bisect_regression,
+    "python.source.taint_flow.v1": _inspect_python_taint_flow,
+    "python.source.complexity.v1": _inspect_python_source_report,
+    "python.source.dead_code.v1": _inspect_python_source_report,
+    "python.source.definition_count.v1": _inspect_python_source_report,
+    "python.source.secret_scan.v1": _inspect_python_source_report,
+    "python.source.test_adequacy.v1": _inspect_python_source_report,
+    "python.refactor.inline_helper.v1": _inspect_python_inline_or_merge,
+    "python.vcs.merge_conflict.resolve.v1": _inspect_python_inline_or_merge,
+    "python.tests.mutation_score.v1": _inspect_python_mutation_score,
     "archive.verify.tar_gz.gnu": _inspect_archive_verify,
     "archive.tar_gz.create_from_manifest": _inspect_tar_gz_create_from_manifest,
     "xlsx.table.create_from_json_records": _inspect_xlsx_create,
@@ -1850,7 +2609,7 @@ def verify(
                 if not isinstance(value, str) or not value.strip():
                     continue
                 path = _inside(root, value) if value not in (".", "./") else root.resolve()
-                if path is None or not path.is_dir():
+                if path is None or not (path.is_dir() or path.is_file()):
                     return _unresolved("STEP_ROOT_INVALID",
                                        capability_id=cid, argument=name)
             # --- a text payload must be the text the sentence stated -------

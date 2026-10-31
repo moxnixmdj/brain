@@ -1,0 +1,37 @@
+{
+ "adapter_output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/answer.json",
+ "adapter_output_sha256": "3b6c56f79f2f4260c8fe79e0aaa632dcb52273613220ed669c19b78d307d4f8d",
+ "adapter_path": "canonical/runtime/bound_capabilities/python_source_test_adequacy.py",
+ "adapter_self_report": {
+  "output_verified": true,
+  "verified": null
+ },
+ "adapter_sha256": "bb50ac452294b6d50c20a241e77eafb4203deb5eb942ea755375beda84f696b9",
+ "capability_id": "python.source.test_adequacy.v1",
+ "checks": [
+  {
+   "evidence": {
+    "constructed_uncovered_line": 9,
+    "reported_answer": "no",
+    "reported_unexecuted": [
+     9
+    ]
+   },
+   "name": "names the executable line the suite never runs",
+   "ok": true
+  }
+ ],
+ "claim": "names the executable line the suite never runs",
+ "elapsed_s": 0.043,
+ "independence": "the check recomputes the answer from the constructed world with the standard library and never imports the adapter",
+ "independent_verified": true,
+ "inputs": {
+  "output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/answer.json",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/app"
+ },
+ "mission_id": "ASTRA-VERIFY-TEST-ADEQUACY-001",
+ "replay": "python3 canonical/runtime/verify_bound_capability_provenance_v1.py --check",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_V1",
+ "verified_at": "2026-10-31T09:09:15Z",
+ "world": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD"
+}

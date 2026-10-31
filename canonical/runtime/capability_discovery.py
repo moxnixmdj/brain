@@ -621,11 +621,22 @@ def search_apt_packages(effect, limit=12):
     return _legacy_search_apt_packages(effect,limit=limit)
 
 
+_SEMANTIC_FORMAT_WORD=re.compile(r"\b(?:as|into|to|encoded in)\s+([A-Z][A-Z0-9]{1,24})\b")
+
+
 def _requested_output_format_tokens(effect):
     text=re.sub(r"https?://[^\s)\]}>]+"," ",str(effect or ""))
     paths=re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",text)
     out=[]
     common={"json","txt","md","markdown","csv","tsv","html","xml","png","jpg","jpeg","webp","pdf","docx","xlsx","zip","gz","tgz","tar","sqlite","db","sqlite3"}
+    # Named formats outrank artifact suffixes: registries are indexed by the
+    # codec's name (measured 2026-10-28: ``ubjson`` finds six real codec
+    # packages; the suffix ``ubj`` finds junk suppliers that all fail the
+    # contract race).
+    for word in _SEMANTIC_FORMAT_WORD.findall(text):
+        token=word.lower()
+        if token and token not in common and token not in out:
+            out.append(token)
     for raw in paths:
         suffix=pathlib.PurePosixPath(raw.rstrip(".,;:!?)]}")).suffix.lower().lstrip(".")
         if suffix and suffix not in common and suffix not in out:

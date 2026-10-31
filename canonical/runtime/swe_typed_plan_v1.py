@@ -30,6 +30,7 @@ Authority: NONE. Credit: 0. Model dependency: 0. Incremental spend: $0.
 from __future__ import annotations
 
 import pathlib
+import re
 from typing import Any, Mapping
 
 from canonical.runtime import capability_selection_retrieval_v1 as selection
@@ -203,6 +204,44 @@ def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any])
     if not parent or not (root / parent).is_dir():
         return None
     return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
+
+
+def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str, Any]) -> str | None:
+    """A necessary effect check, NOT proof an implementation is correct.
+
+    Scope: explicit implementation imperatives in software requests. Paths and
+    quoted literals are values, not imperative verbs. Report/index/test-selection
+    effects cannot discharge this request even when every input binds. Reuse the
+    front compiler's value stripping and the registry's declared effect contracts.
+    Unknown implementation contracts fail closed; existing acceptance checks must
+    still judge any source-writing route that passes this preflight.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as front
+    prose = front.prose_only(goal).lower()
+    imperative = re.search(
+        r"(?:^|[.;\n]|\bthen\b|\band\b)\s*"
+        r"(?:(?:please|first|next)\s+|(?:can|could|would)\s+you\s+(?:please\s+)?)?"
+        r"(?:implement\b|develop\b|build\b|"
+        r"add\s+(?:(?:a|an|the|new)\s+)*[\w -]{0,60}"
+        r"\b(?:function|method|feature|endpoint|class|api)\b)", prose)
+    software = re.search(r"\b(?:python|software|code|function|method|feature|endpoint|class|api)\b", prose)
+    if not imperative:
+        return None
+    if not software:
+        from canonical.runtime.write_authority_v1 import SOURCE_SUFFIXES
+        software = any(path.suffix.lower() in SOURCE_SUFFIXES
+                       for _raw, path in goal_compiler._repo_paths(goal, live_brain.ROOT))
+    if not software:
+        return None
+    # These are actual registry effect namespaces, not keyword relevance or id
+    # substrings such as 'patch' (which could mean a report-only patch search).
+    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.')
+    for cid in capability_ids:
+        entry = registry.get(str(cid)) or {}
+        if any(any(part in str(effect) for part in material)
+               for effect in entry.get('provides', [])):
+            return None
+    return 'R10_SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED'
 
 
 def _effect_consistent(goal: str, cid: str) -> bool:

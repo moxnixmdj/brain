@@ -103,6 +103,44 @@ def _row_sha(row):
     return hashlib.sha256(json.dumps(body, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
+def validate_cached_index(repo, source_root, artifact):
+    """Validate source identity without reparsing cached semantic records.
+
+    Both parsed and unparseable files belong to the manifest. This detects
+    content/membership drift, not forged semantics or concurrent tree writes.
+    """
+    repo = pathlib.Path(repo).resolve()
+    source_root = pathlib.Path(source_root).resolve()
+    expected = {}
+    for field in ("modules", "unparseable"):
+        rows = artifact.get(field, [])
+        if not isinstance(rows, list):
+            raise RuntimeError("INDEX_CACHE_INVALID_ROWS:" + field)
+        for row in rows:
+            if not isinstance(row, dict):
+                raise RuntimeError("INDEX_CACHE_INVALID_ROW")
+            name, digest = row.get("path"), row.get("sha256")
+            if not isinstance(name, str) or not isinstance(digest, str):
+                raise RuntimeError("INDEX_CACHE_INVALID_ROW")
+            if name in expected:
+                raise RuntimeError("INDEX_CACHE_DUPLICATE_PATH:" + name)
+            expected[name] = digest
+    current = {}
+    for path in _py_files(source_root):
+        if not path.is_file():
+            continue
+        resolved = path.resolve()
+        if repo not in resolved.parents:
+            raise RuntimeError("INDEX_CACHE_PATH_OUTSIDE_REPOSITORY")
+        name = path.relative_to(repo).as_posix()
+        current[name] = path
+    if set(expected) != set(current):
+        raise RuntimeError("INDEX_CACHE_FILESET_STALE")
+    for name, path in current.items():
+        if hashlib.sha256(path.read_bytes()).hexdigest() != expected[name]:
+            raise RuntimeError("INDEX_CACHE_SOURCE_STALE:" + name)
+
+
 def _signature(node):
     args = node.args
     names = [a.arg for a in args.posonlyargs]

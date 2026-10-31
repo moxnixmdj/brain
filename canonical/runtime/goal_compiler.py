@@ -354,6 +354,46 @@ _OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit)\b(?:\s+[A-Za-z0-9_.\-']+){0
 _CLAUSE_BOUNDARY_RE=re.compile(r"[,;]|\band\b|\bthen\b",re.IGNORECASE)
 
 
+# "the tests in X" never names the SUBJECT of a code question; it names the
+# witness that decides the answer.  The distinction already exists elsewhere in
+# this repository -- _promised_source_files skips "the WITNESS test" when it
+# decides which source file a repair verb governs -- and it is the difference
+# between a sentence that names two directories and one that names a
+# directory and its oracle.
+#
+# Measured on 814ae41 + three analysis rows: "Which function in <b>/app is
+# never executed by the tests in <b>/tests?" selected
+# python.source.dead_code.v1 correctly and then failed to bind source_root at
+# all, because the binder saw two existing directories named and refused to
+# guess -- which was right.  The sentence had already said which was which.
+_WITNESS_PHRASE_RE = re.compile(
+    r"\b(?:tests?|suite|test\s+suite)\s+(?:in|under|inside|within|at)\s+",
+    re.IGNORECASE)
+
+
+def _witness_directories(goal, paths):
+    """Paths the sentence names as the WITNESS, not as the subject.
+
+    A witness phrase binds the nearest stated path that follows it.  Only paths
+    that literally appear after the phrase are returned, and only within the same
+    sentence, so nothing is inferred about a path the caller did not place there.
+    """
+    text = str(goal or "")
+    out = set()
+    for m in _WITNESS_PHRASE_RE.finditer(text):
+        best = None
+        for raw, _path in paths:
+            s = str(raw)
+            at = text.find(s, m.end())
+            if at >= 0:
+                cand = (at, -len(s), s)
+                if best is None or cand < best:
+                    best = cand
+        if best is not None:
+            out.add(best[2])
+    return out
+
+
 def _path_named_after_output_verb(goal, root):
     """Return the repository path the goal names as the destination, or None.
 
@@ -381,7 +421,7 @@ def _path_named_after_output_verb(goal, root):
                     continue
                 at=tail.find(spelling)
                 if at>=0:
-                    if best is None or at<best[0]:
+                    if best is None or at<best[0] or (at==best[0] and len(str(raw))>len(str(best[1]))):
                         best=(at,raw)
                     break
         if best is None:
@@ -739,6 +779,23 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if rp.is_file() and rp.parent!=rr and rr in rp.parent.parents:
                     result[key]=str(rp.parent.relative_to(rr))
                     continue
+            # ... UNLESS THE ROW ITSELF SAYS IT TAKES THE FILE.
+            #
+            # ``proposal_bindings`` is where a capability declares the shape of a slot, and the
+            # analysis rows declare ``source_root`` as ``path_file_or_dir``.  Without this the
+            # sentence's one stated file was widened to its parent, the row answered a question
+            # nobody asked, and the answer still counted as a pass.  Measured 2026-10-31 on the
+            # capability matrix: "Count the functions in <pkg>/calc.py" reported 12 definitions
+            # over 8 files for a question about the 2 in one file -- REAL on this branch, FALSE
+            # on origin/main.  Declaration-driven, never global: a row that only says
+            # ``source_root`` (a repair loop, a test runner) still gets the parent.
+            _bindings=entry.get("proposal_bindings") if isinstance(entry,dict) else None
+            _declared=_bindings.get(key) if isinstance(_bindings,dict) else None
+            if isinstance(_declared,dict) and str(_declared.get("type") or "")=="path_file_or_dir":
+                _files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                if len(_files)==1:
+                    result[key]=_files[0][0]
+                    continue
         if key.endswith("_path"):
             stem=key[:-5].lower()
             output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
@@ -988,6 +1045,8 @@ def _nondiscriminating_requires_tokens():
     out = frozenset()
     try:
         path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        if path.is_file() and path.read_bytes()[:1] == b"@":
+            path = path.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
         with open(path, "r", encoding="utf-8") as fh:
             caps = (json.load(fh) or {}).get("capabilities") or {}
         declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]
@@ -5677,6 +5736,62 @@ def _inherit_producer_goal_for_verifier_steps(actions, registry):
     return actions
 
 
+# A clause that only says WHERE the previous answer goes is delivery, not a
+# second task.  The census writes its questions that way, because that is how a
+# person writes them:
+#
+#   "Which function in <b>/app is never executed by the tests in <b>/tests?
+#    Write its name to <b>/answer.json"
+#
+# Measured on 814ae41 + three analysis rows: the first clause reached
+# python.source.dead_code.v1 correctly, and the delivery clause was handed to
+# python.software.request.semantic_behavior.compile.v1 as its own step, which
+# failed, which made the whole run FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS -- for
+# a question the machine had just answered.
+#
+# The object is ANAPHORIC: "its name", "the number", "the file and line".  It
+# does not name a new subject, so it cannot name a new capability.  The
+# vocabulary is closed on purpose, and "report"/"patch" are deliberately absent:
+# "and write the report to R" is a promise the repair lane discharges, and
+# stealing it here would unbind the artifact that gate reads.
+_DELIVERY_RE = re.compile(
+    r"^\s*(?:(?:find|identify|locate|report)\s+(?:it|them)\s+and\s+)?(?:write|save|store|output)\s+"
+    r"(?:(?:its|their|the)\s+)?"
+    r"(?:yes\s+or\s+no|true\s+or\s+false|name|test\s+name|function\s+name|symbol\s+name|"
+    r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
+    r"number|count|result|results|answer|value|values|file\s+and\s+line|"
+    r"path\s+and\s+line|line\s+and\s+file|path|line)\s+to\s+\S+\s*$",
+    re.IGNORECASE)
+
+
+def _compile_answer_delivery(clause, actions, compiled_parts, root):
+    """Point the PREVIOUS step's output at the destination this clause names.
+
+    Returns True when the clause was consumed.  Nothing new is executed: the
+    delivery is the destination of the answer the previous step already
+    produces, which is exactly what a single-capability compile of the same
+    sentence does with ``output_path``.
+    """
+    text = str(clause or "")
+    if not _DELIVERY_RE.match(text):
+        return False
+    if not actions:
+        return False
+    stated = [str(raw) for raw, path in _repo_paths(text, root) if not path.is_dir()]
+    if len(stated) != 1:
+        return False
+    args = actions[-1].get("args")
+    if not isinstance(args, dict) or "output_path" not in args:
+        return False
+    args["output_path"] = stated[0]
+    for part in reversed(compiled_parts):
+        inputs = part.get("inputs")
+        if isinstance(inputs, dict) and "output_path" in inputs:
+            inputs["output_path"] = stated[0]
+            break
+    return True
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -5696,6 +5811,11 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if index in consumed_indices:
             continue
         lower=clause.lower()
+
+        # Delivery of the previous answer is not a second subgoal.
+        if _compile_answer_delivery(clause, actions, compiled_parts, root):
+            consumed_indices.add(index)
+            continue
 
         external_knowledge_fetch=_compile_external_json_knowledge_fetch(clause,len(actions))
         if external_knowledge_fetch is not None:

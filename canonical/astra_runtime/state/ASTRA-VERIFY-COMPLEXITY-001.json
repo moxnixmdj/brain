@@ -1,0 +1,9 @@
+{
+ "capability_id": "python.source.complexity.v1",
+ "independent_verified": true,
+ "mission_id": "ASTRA-VERIFY-COMPLEXITY-001",
+ "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__RECEIPT.json",
+ "receipt_sha256": "319e02661c78f00d7df078739d2c7fdc5a105e1f6e222a71d8f51c15f9d99464",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_STATE_V1",
+ "verified_at": "2026-10-31T09:09:14Z"
+}

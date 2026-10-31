@@ -1,0 +1,131 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "structured.decision_evidence.locate.stdlib",
+          "max_scan": 40000,
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_effect-producer_structured-decision-evidence-locate-stdlib_output-path.json",
+          "search_root": "canonical"
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "structured.decision_evidence.locate.stdlib",
+          "max_scan": 40000,
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_effect-producer_structured-decision-evidence-locate-stdlib_output-path.json",
+          "search_root": "canonical"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "decision_evidence_locate",
+        "alternative_count": 3,
+        "capability_id": "structured.decision_evidence.locate.stdlib",
+        "constraint_count": 6,
+        "dependency": {
+          "modules": [
+            "hashlib",
+            "importlib.util",
+            "json",
+            "pathlib",
+            "sys"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "evidence_count": 4,
+        "incremental_spend_usd": 0,
+        "json_files_scanned": 2622,
+        "model_dependency_count": 0,
+        "output_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_effect-producer_structured-decision-evidence-locate-stdlib_output-path.json",
+        "output_sha256": "817b66999c744d0dfcb206139a472957c6a968c0dfb124edec1f0926358735c9",
+        "output_verified": true,
+        "schema": "PROJECT_BRAIN_DECISION_EVIDENCE_LOCATION_V1",
+        "schema_matches_validated": 1,
+        "source_path": "canonical/astra_runtime/tmp/auto_proposal/d69ad29b168d73ec_effect-producer_structured-decision-evidence-locate-stdlib_output-path.json",
+        "source_sha256": "817b66999c744d0dfcb206139a472957c6a968c0dfb124edec1f0926358735c9",
+        "status": "DECISION_EVIDENCE_LOCATED"
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "input_path": {
+            "$result": {
+              "cycle": 0,
+              "field": "output_path"
+            }
+          },
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_direct-cae11fe04caf193f_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "input_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_effect-producer_structured-decision-evidence-locate-stdlib_output-path.json",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_direct-cae11fe04caf193f_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "evidence_decision_synthesis",
+        "capability_id": "decision.synthesis.typed.stdlib",
+        "decision_confidence": 1.0,
+        "dependency": {
+          "modules": [
+            "json",
+            "hashlib",
+            "math",
+            "pathlib"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "input_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_effect-producer_structured-decision-evidence-locate-stdlib_output-path.json",
+        "model_dependency_count": 0,
+        "output_path": "canonical/astra_runtime/tmp/auto_proposal/7acda1ad812ae349_direct-cae11fe04caf193f_output-path.json",
+        "output_sha256": "455a3d012c29ef9051f3c95c60276dc78e81e0b340738837495b9ebd41b927eb",
+        "output_verified": true,
+        "selected_alternative": "PUBLIC_GITHUB_ACTIONS",
+        "status": "DECIDED"
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:22:20.015353+00:00",
+  "mission_id": "ROLENAMED_e2e21b42fdd9d3_0",
+  "next_action_index": 3,
+  "plan_sha256": "337159e2e5c748a543689d5c3219a4976a83117e9736402470177ec3a3bb9c17",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:22:20.250569+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "answer": 5,
+  "class_count": 2,
+  "definition_count": 5,
+  "files_scanned": 1,
+  "function_count": 3,
+  "schema": "PROJECT_BRAIN_PYTHON_DEFINITION_COUNT_V1",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__WORLD/defs",
+  "unparseable_count": 0
+}

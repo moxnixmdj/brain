@@ -1,0 +1,9 @@
+{
+ "capability_id": "python.source.taint_flow.v1",
+ "independent_verified": true,
+ "mission_id": "ASTRA-VERIFY-TAINT-FLOW-001",
+ "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__RECEIPT.json",
+ "receipt_sha256": "9896b7141ad8bb04c575ec6cbc8991b97e1a3dffa1476c499d12184be726ec88",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_STATE_V1",
+ "verified_at": "2026-10-31T09:09:14Z"
+}

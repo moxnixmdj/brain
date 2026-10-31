@@ -1,0 +1,27 @@
+{
+  "docs": {
+    "helped": 0,
+    "last_seen_utc": "2026-10-31T11:02:26Z",
+    "trials": 32
+  },
+  "github": {
+    "helped": 46,
+    "last_seen_utc": "2026-10-31T11:02:26Z",
+    "trials": 78
+  },
+  "npm": {
+    "helped": 79,
+    "last_seen_utc": "2026-10-31T11:02:26Z",
+    "trials": 79
+  },
+  "pypi": {
+    "helped": 79,
+    "last_seen_utc": "2026-10-31T11:02:26Z",
+    "trials": 79
+  },
+  "web": {
+    "helped": 0,
+    "last_seen_utc": "2026-10-31T11:02:26Z",
+    "trials": 32
+  }
+}

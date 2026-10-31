@@ -21,6 +21,7 @@ if str(ROOT) not in sys.path:
 
 from canonical.runtime import capability_selection_retrieval_v1 as selection  # noqa: E402
 from canonical.runtime import declared_input_derivation_v1 as derivation  # noqa: E402
+from canonical.runtime import goal_compiler  # noqa: E402
 from canonical.runtime.live_integrated_brain_v1 import load_verified_registry  # noqa: E402
 
 WORK = ROOT / "canonical/astra_runtime/tmp/test_declared_derivation"
@@ -129,11 +130,21 @@ class TypedSelectionMeasurementTests(unittest.TestCase):
         self.assertEqual(len(selected), 5)
 
     def test_breaking_the_derivation_breaks_the_selection(self):
-        """Mutation control: with no stated evidence the selector must refuse."""
+        """Mutation control: with no stated evidence the selector must refuse.
+
+        The evidence has TWO readers now, and breaking only one of them proved
+        nothing: the derivation supplies the typed slots, and the sentence's own
+        paths supply the scope.  Measured 2026-10-31: with
+        ``derivation.stated_existing_files`` emptied, a row that declares its
+        ``source_root`` may be a FILE still admitted the request and answered
+        SELECTED -- the control passed a selector that had lost its evidence.
+        Both readers are cut here, which is what "no stated evidence" means.
+        """
         base = _fresh("mutation")
         goal = f"Repair the python source {_rel(base / 'pkg/calc.py')} so that the tests pass."
         registry = dict(load_verified_registry())
-        with mock.patch.object(derivation, "stated_existing_files", return_value=[]):
+        with mock.patch.object(derivation, "stated_existing_files", return_value=[]), \
+                mock.patch.object(goal_compiler, "_repo_paths", return_value=[]):
             decision = selection.select(goal, registry, ROOT, 8)
         self.assertNotEqual(decision.get("status"), "SELECTED", decision)
 

@@ -93,16 +93,33 @@ class TheAnswerIsTheEffectTests(unittest.TestCase):
         self.assertIn("calc.multiply", (base / "pkg/test_calc.py").read_text(encoding="utf-8"))
         self.assertIs(result.get("pass"), True, (result.get("status"), result.get("reason")))
 
-    def test_a_rename_that_cannot_be_verified_writes_nothing(self):
-        """NO TEST, NO WRITE: the blind rename is a dry run, not an edit then a refusal."""
+    def test_a_rename_that_cannot_be_verified_is_never_called_verified(self):
+        """NO TEST, NO CERTIFICATE: the blind rename lands and the result says so.
+
+        This test used to demand that a blind rename write NOTHING, on the ground that
+        an edit the door then refuses is the worst of both.  That ground is gone: the
+        door no longer refuses it (measured 2026-10-31 -- ``PASS__..._EXECUTED_APPLIED_
+        UNVERIFIED``, ``change_verified`` false), so the only remaining question is
+        whether a correct binding-proved rename with no witness should be withheld from
+        a caller who asked for it.  It should not: the rename is proved complete by the
+        residual law, and what is unmeasured is the behaviour, which the payload states
+        in its own words rather than claiming as verified.  So the assertions that
+        matter are: the bytes moved, and nothing anywhere says VERIFIED.
+        """
         base = _tree("blind", tests=False)
         source = base / "pkg/calc.py"
         before = source.read_bytes()
         result = door.solve({
             "task_id": "BLIND",
             "goal": "Rename the symbol `mul` to `multiply` in %s." % _rel(source)})
-        self.assertIs(result.get("pass"), False, result.get("status"))
-        self.assertEqual(source.read_bytes(), before, "a refused rename edited the tree")
+        # the work landed -- a real rename, not a dry run
+        self.assertIn(b"def multiply(", source.read_bytes(), result.get("status"))
+        self.assertNotEqual(source.read_bytes(), before)
+        # ... and not one word of the verdict claims it was measured
+        self.assertIs(result.get("change_verified"), False, result.get("status"))
+        self.assertNotIn("_EXECUTED_AND_VERIFIED", str(result.get("status") or ""))
+        self.assertNotIn("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED", str(result.get("status") or ""))
+        self.assertTrue(result.get("blind_change_evidence"), result.get("status"))
 
     def test_a_structured_refusal_is_reported_in_its_own_words(self):
         """A gate's own JSON reason must reach the caller, not another executor's blocker."""

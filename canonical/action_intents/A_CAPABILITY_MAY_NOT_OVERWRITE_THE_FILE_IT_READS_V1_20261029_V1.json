@@ -1,0 +1,469 @@
+{
+  "action_id": "A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1",
+  "action_intent_id": "A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "A bound capability may no longer write its verified artifact over the file the sentence told it to read. Measured on main e2d7981: \"Fix the ZeroDivisionError in <repo>/app/utils.py.\" replaced 14 lines of source with a tree-sitter parse report (3/3 deterministic) and \"Who last changed the function line_total in <repo>/app/service.py?\" -- a READ-ONLY question -- replaced 358 lines of source with a JSON symbol index; both then reported FAIL_CLOSED with the source gone. The trigger is not the sentence: every software-engineering row declares output_path=${input.output_path} and source_root=${input.source_root}, so a goal that names no destination leaves the binder exactly one stated path -- the source. The repository already states the rule in one direction (goal_compiler._path_named_after_output_verb: a path named as a DESTINATION is never a candidate SOURCE, with canonical/tests/test_output_destination_is_not_an_input_candidate_v1.py); this lands the dual at the two functions every bound adapter is invoked through (live_brain_route_admission_v1.run_adapter_locally and astra_runtime._invoke_bound_capability), so it covers the door, the composer and every composed step without editing 125 registry rows or the per-adapter _safe_output copies. A capability whose own id says it transforms source (rename/refactor/repair/patch/...) may still replace the file it names; the vocabulary is the registry's own effect vocabulary already used by swe_typed_plan_v1._effect_consistent. No new capability, no registry change, no model, no spend, no protected path.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/write_authority_v1.py",
+      "canonical/tests/test_a_capability_may_not_overwrite_the_file_it_reads_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/astra_runtime.py"
+    ],
+    "route_class": "INTEGRATE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A bound software-engineering capability is handed the path the sentence stated as the thing to READ and writes its own structured report there, because the registry declares output_path and source_root and the goal named no destination. The run destroys the user's source and then reports failure, so the loss is invisible in the verdict.",
+  "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A bound software-engineering capability is handed the path the sentence stated as the thing to READ and writes its own structured report there, because the registry declares output_path and source_root and the goal named no destination. The run destroys the user's source and then reports failure, so the loss is invisible in the verdict.",
+  "date": "2026-10-29",
+  "expected_parent_change": "canonical/runtime/write_authority_v1.py refuses an action whose declared output is a file the same action declares as a source, read from the ids own transformer vocabulary; the rule is called before the adapter runs at both invocation points.",
+  "expected_parent_frontier_change": "Software-engineering capabilities stop being able to destroy the file they were asked to read, so their verdicts become usable as evidence of engineering work rather than of file replacement.",
+  "explicit_user_authorization": "Owner standing directive 2026-10-29: all of the listed problems are already solved in the brain, in hidden tools, in repositories or in research papers; do the optimal in the fastest way; everything must be insanely fast, only the right way; the machine must be the most advanced, fastest, smartest software engineer. Zero incremental spend, zero model producer cognition.",
+  "falsification_condition": "FALSIFIED if a source file named by a request is still replaced by a capability report; if the refusal costs a working route (Index the symbols in <dir> and save the index to <out> must still pass); if a source transformer is refused when it replaces the file it names; if a NEW report written beside the source is refused; if the pre-existing failure set of the 13 touched suites differs from pristine main; or if any measured oracle degrades.",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "Every coding obligation is measured by what the machine did to a repository. A run that answers by replacing the repository with its own report cannot be a row in any of them, and worse, it makes the row unreproducible because the fixture is gone. Write authority is therefore substrate for every coding obligation, not a feature.",
+    "measured_effect": "Seven sentences through the live front door on fresh trees: before the change 2 of 7 left a source file replaced by a capability report (Fix the ZeroDivisionError in <repo>/app/utils.py and Who last changed the function line_total in <repo>/app/service.py); after the change 0 of 7, and the four working routes (dependency graph, symbol index, public API audit, run the suite) still pass. 12 new fresh-instance tests pass, including a mutation control that drops the source slots and a negative control that keeps a working index request passing.",
+    "open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "scope_complete_discharge": false,
+    "stop_condition": "STOP when no bound capability can write its artifact over a file the same action reads, when a source transformer and a new report beside the source are both still permitted, and when the failure set of the touched suites is identical on pristine and patched trees.",
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Live front door, fresh trees, filesystem as oracle: source replaced by a capability report fell from 2 of 7 sentences to 0 of 7; working routes 4 of 7 pass both before and after. New suite test_a_capability_may_not_overwrite_the_file_it_reads_v1.py: 12/12 pass, including the door-level end-to-end cases and the mutation control. A/B on 13 existing suites touching output_path and adapter invocation (122 tests): the failure set is IDENTICAL on pristine e2d7981 and on the patched tree (5 pre-existing failures: a_defect_is_never_reported_as_a_refusal, an_output_is_not_a_file_the_caller_must_supply, output_destination_is_not_an_input_candidate x2, bound_capability_evidence_and_kernel_native_dispatch), so the rule costs nothing that was green.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    {
+      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+      "what": "goal_compiler._path_named_after_output_verb already computes the path a sentence names as a DESTINATION, and _repo_paths already classifies stated paths; the dual rule (a stated INPUT is never a destination) reuses that stated-path model rather than inventing a second one."
+    },
+    {
+      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+      "what": "canonical/tests/test_output_destination_is_not_an_input_candidate_v1.py already argues and asserts the rule in one direction; this is the dual, at the invocation layer instead of the candidate layer."
+    },
+    {
+      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+      "what": "swe_typed_plan_v1._fresh_output_path already relocates an output_path bound onto a stated source file, but only from the typed retry; the measured corruption happens on the primary and composed paths, which is why the rule belongs at the invocation choke points."
+    },
+    {
+      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+      "what": "capability_selection_retrieval_v1._EFFECT_WORDS is the registry's own effect vocabulary already reused by swe_typed_plan_v1._effect_consistent; the transformer allowance reads the same vocabulary instead of adding a hand-maintained capability list."
+    },
+    {
+      "commit": "e2d7981d15809e130759a621687ee77e91c1236b",
+      "what": "Every adapter already has a _safe_output that refuses a path outside the repository; this adds the one condition those copies all lack, at a single place, instead of editing 125 rows or N adapters."
+    }
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "dac97dc22f8a1a4b59d3ed705440696883ad9852",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "TRUSTING_THAT_A_DECLARED_OUTPUT_SLOT_IS_SAFE_BECAUSE_IT_IS_DECLARED",
+      "CHECKING_WRITE_AUTHORITY_IN_ONE_INVOCATION_PATH_AND_ASSUMING_THE_OTHER_IS_THE_SAME",
+      "DETECTING_THE_LOSS_AFTER_THE_RUN_AND_CALLING_IT_A_CLOSED_FAILURE",
+      "A_HAND_MAINTAINED_LIST_OF_WHICH_CAPABILITIES_MAY_EDIT_SOURCE"
+    ],
+    "expected_parent_level_state_change": "Software-engineering capabilities stop being able to destroy the file they were asked to read, so their verdicts become usable as evidence of engineering work rather than of file replacement.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "Refusing every output inside a source root loses because writing a NEW report beside the source is an ordinary, desired route (Index the symbols in app and save the index to app/index.json). Detecting the loss afterwards and restoring loses because the report has already been verified and the source is gone in between; a guard that runs before the write is strictly cheaper. Adding a rule per adapter loses because the condition is identical in all of them and there are 125 rows.",
+      "intrinsic_or_path_specific": "Path-specific: one predicate over the action's own slots, called at the two functions every bound adapter is invoked through. No new mechanism, no new dependency, no model.",
+      "surviving_causal_blocker": "A declared output slot was assumed safe because it was declared; nothing compared it to the paths the same action declares as sources."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
+      "existing_inherited_routes_checked": "_fresh_output_path already relocates an output bound onto a stated source, but only in the typed retry; _safe_output in every adapter already refuses paths outside the repository; goal_compiler already computes the stated destination. Each covers part of the condition; none compares output to input.",
+      "external_existing_routes_checked": "No external source was needed. The rule is a comparison of two sets the action already carries.",
+      "surviving_gap": "Nothing compared the action's declared output slots against the paths the same action declares as sources."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "TREATING_A_VERIFIED_ARTIFACT_AS_PROOF_THE_REQUEST_WAS_SERVED",
+        "TREATING_A_CLOSED_VERDICT_AS_PROOF_NOTHING_WAS_LOST",
+        "COUNTING_AN_INDEX_AS_AN_ANSWER_ABOUT_THE_CODE"
+      ],
+      "real_outcome": "The repository after the request is the same repository the request named, and the verdict describes it.",
+      "surviving_necessity": "The user's source has to still exist, because every other capability claim is measured on a tree that this one run can destroy."
+    },
+    "obs_inherited_system": {
+      "inherited_mechanisms_reused": "goal_compiler stated-path model; _safe_output repository confinement; swe_typed_plan_v1._fresh_output_path relocation rule; capability_selection_retrieval_v1._EFFECT_WORDS transformer vocabulary; the two invocation choke points.",
+      "inherited_mechanisms_still_insufficient": "All of them are per-path or per-adapter; none is a relation between the action's inputs and its outputs.",
+      "downstream_work_to_delete_or_supersede": "Nothing downstream is superseded: no capability, registry row or adapter default changes. The per-adapter _safe_output copies stay exactly as they are; they keep refusing paths outside the repository, and this rule adds the one comparison they all lack.",
+      "adjacent_capabilities_absorbed": "None absorbed. swe_typed_plan_v1._fresh_output_path keeps its narrower job (relocating an output inside the typed retry); the rule here covers the primary and composed paths it cannot see.",
+      "fresh_reuse_plan": "REUSE goal_compiler's stated-path model and the registry's own transformer vocabulary; INTEGRATE one predicate at the two functions every bound adapter is invoked through. No new dependency, no new capability row."
+    },
+    "obs_obs": {
+      "measurement_independence": "The oracle is the filesystem: the stated source must be byte-identical afterwards. The test reads the bytes itself, not the adapter's report.",
+      "measurement_that_changed_the_decision": "Before measuring, the typed-retry relocation looked sufficient because an earlier probe repaired the source when a report path was stated. The A/B showed the corruption appears exactly when NO destination is stated, which is why the rule had to move to the invocation layer.",
+      "analysis_steps_deleted_or_cached": "The A/B that isolated the trigger is cached in this intent: corruption appears exactly when the goal states no destination, on the primary and composed paths. A later session does not need to rediscover it.",
+      "search_stop_decision": "Stopped at INTEGRATE because DELETE, BYPASS, REUSE, SUBSTITUTE, WHITE_BOX_HARVEST, COMPOSE and CONFIGURE each failed a measured condition (recorded in losing_routes_reason); INTEGRATE satisfied every one with one predicate and two call sites.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "obs_solution": {
+      "deleted_or_bypassed_paths": [
+        "TRUSTING_THAT_A_DECLARED_OUTPUT_SLOT_IS_SAFE_BECAUSE_IT_IS_DECLARED",
+        "CHECKING_WRITE_AUTHORITY_IN_ONE_INVOCATION_PATH_AND_ASSUMING_THE_OTHER_IS_THE_SAME",
+        "DETECTING_THE_LOSS_AFTER_THE_RUN_AND_CALLING_IT_A_CLOSED_FAILURE",
+        "A_HAND_MAINTAINED_LIST_OF_WHICH_CAPABILITIES_MAY_EDIT_SOURCE"
+      ],
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Refusing every output under a source root loses on a measured working route (a new report beside the source). Restoring after the fact loses because the write has already happened and the bytes are gone. Per-adapter rules lose on duplication across 125 rows. A capability-name allowlist loses because it is hand-maintained and would rot; the transformer vocabulary is already in the registry.",
+      "routes_ranked": [
+        "one predicate at the two invocation choke points wins over per-adapter rules, because the condition is identical in every adapter",
+        "reading the transformer allowance from the capability's own id wins over a hand-maintained allowlist, because the vocabulary already exists and cannot drift from the registry",
+        "refusing only an existing source file wins over refusing the whole source root, because a new report beside the source is a measured working route",
+        "checking before the adapter runs wins over restoring afterwards, because the bytes are already gone when the check runs afterwards"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Not synthetic: the tests read the stated source bytes from the filesystem after the request, and the end-to-end cases go through the live front door. A refusal that also refused the working index route would fail test_an_index_request_that_states_its_report_still_passes."
+    },
+    "prior_routes_considered": [
+      "relocating output_path inside the typed retry (already exists, does not cover the primary path)",
+      "per-adapter _safe_output tightening (125 rows, identical condition)",
+      "restore-after-write (bytes already lost)"
+    ],
+    "real_outcome": "The stated source survives the request, and the verdict describes the repository as well as the report.",
+    "required_capability": "A relation between the action's declared outputs and the paths the same action declares as sources.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "route": "TIGHTEN_THE_TYPED_RETRY_RELOCATION",
+          "evidence": [
+            "measured: with a stated report path the source survives, without one it is replaced -- and the relocation only runs on the typed retry"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: 7 fresh trees through solve(), source bytes read from the filesystem"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "RIGHT_UNTIL_THE_PRIMARY_PATH",
+            "CAPABILITY_STRENGTH": "LESS",
+            "WALL_CLOCK": "IDENTICAL",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "WRONG_AGAIN_AT_THE_NEXT_ROUTE",
+            "VERIFIABILITY": "NOTHING_STRUCTURAL"
+          }
+        },
+        {
+          "route": "REFUSE_EVERY_OUTPUT_INSIDE_A_SOURCE_ROOT",
+          "evidence": [
+            "measured: it would refuse 'Index the symbols in app and save the index to app/index.json', a route that passes today"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: test_an_index_request_that_states_its_report_still_passes"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "OVERBROAD",
+            "CAPABILITY_STRENGTH": "LESS",
+            "WALL_CLOCK": "IDENTICAL",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "COSTS_WORKING_ROUTES",
+            "VERIFIABILITY": "MEASURED_LOSS"
+          }
+        },
+        {
+          "route": "RESTORE_THE_SOURCE_AFTER_A_REFUSAL",
+          "evidence": [
+            "the write has already happened and the bytes are gone; execute_v1._snapshot records only (size, mtime), so it cannot restore content"
+          ],
+          "qualification_evidence": [
+            "CODE_OR_PACKAGE_REGISTRY: canonical/runtime/execute_v1.py:67 returns dict[str, tuple[int,int]]"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "TOO_LATE",
+            "CAPABILITY_STRENGTH": "LESS",
+            "WALL_CLOCK": "SLOWER",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "LOSES_WORK_BETWEEN",
+            "VERIFIABILITY": "NOTHING_STRUCTURAL"
+          }
+        }
+      ],
+      "selected_route_rank": 1,
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-29T19:16:33Z",
+      "max_age_hours": 12,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "goal_compiler._path_named_after_output_verb already computes the path a sentence names as a DESTINATION (canonical/runtime/goal_compiler.py:358)",
+          "canonical/tests/test_output_destination_is_not_an_input_candidate_v1.py already asserts the one-directional rule",
+          "swe_typed_plan_v1._fresh_output_path already relocates an output bound onto a stated source, but only inside the typed retry (canonical/runtime/swe_typed_plan_v1.py:94)",
+          "every bound adapter already has a _safe_output that refuses a path outside the repository"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "CPython shutil documentation: SameFileError is raised if source and destination in copyfile() are the same file (new in 3.4) -- https://docs.python.org/3.10/library/shutil.html",
+          "POSIX sort -o: 'This file can be the same as one of the input files' -- the utility is REQUIRED to handle same-file safely rather than destroy the input"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "measured on this host, python3.11.2: shutil.copyfile(p, p) raises SameFileError; os.path.samefile(p, p) is True",
+          "GNU coreutils sort buffers and writes through a temporary file when --output is one of its inputs"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "shell redirection into an input file destroys it before the program reads it (sort f > f is the canonical example) -- https://stackoverflow.com/questions/29244351/how-to-sort-a-file-in-place",
+          "the accepted remedy in every source is detect-same-file-and-use-a-temporary-file, or refuse -- never write into the input"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "existing mechanism that refuses to overwrite a tool's own input file"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "python shutil SameFileError same source and destination"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "in-place file transform temporary file same path guard"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "sort -o same file temporary file coreutils behaviour"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
+      "incumbent_route": "TIGHTEN_THE_TYPED_RETRY_RELOCATION",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-10-29T19:16:33Z",
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "python3 stdlib pathlib/os.path (samefile semantics)",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-29T19:16:33Z",
+            "evidence": [
+              "DIRECT_PROBE on this host: shutil.copyfile(p,p) raises SameFileError; os.path.samefile(p,p) is True"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "canonical/runtime/write_authority_v1.py",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-29T19:16:33Z",
+            "evidence": [
+              "12/12 fresh-instance tests pass; the module imports with no third-party dependency"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "bound capability registry (read-only for this change)",
+            "kind": "DATA_SOURCE",
+            "required": false,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-29T19:16:33Z",
+            "evidence": [
+              "unchanged by this PR: git diff --stat shows no modification"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    },
+    "route_id": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
+    "routes_considered": [
+      "DELETE the report-writing step",
+      "BYPASS by stating a destination for every request",
+      "REUSE swe_typed_plan_v1._fresh_output_path",
+      "SUBSTITUTE a different executor",
+      "WHITE_BOX_HARVEST an external write-authority implementation",
+      "COMPOSE a guard out of goal_compiler stated-path helpers",
+      "CONFIGURE the adapters' output defaults",
+      "INTEGRATE one predicate at the two invocation choke points"
+    ],
+    "selected_route": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
+    "selected_surviving_route": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
+    "stop_condition": "Ship only the write-authority integration measured here. Do not promote any capability, do not touch the registry or the protected paths, and do not claim credit for any capability.",
+    "why_selected_route_is_fastest_sufficient": "One predicate, two call sites, no new dependency, no registry change, and it covers the door, the composer and every composed step at once."
+  },
+  "resolution": "Pure reuse/integration slice. A new module, write_authority_v1, states the dual of the rule the repository already states in the other direction, and it is called before the adapter runs at both functions every bound adapter is invoked through. Measured: source replacement fell from 2 of 7 sentences to 0 of 7 with the four working routes intact; 12/12 new tests pass; the failure set of the 13 touched suites is identical on pristine and patched trees. No registry change, no new capability, no model, no spend, no protected path.",
+  "route_id": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "INTEGRATE_WRITE_AUTHORITY_AT_THE_INVOCATION_CHOKE_POINTS",
+  "stop_condition": "Ship only the write-authority integration measured here. Do not promote any capability, do not touch the registry or the protected paths, and do not claim credit for any capability.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "weakens_existing_guard": [],
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-10-29T19:16:33Z",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "decisive_question": "Does a bound capability that is handed a stated source file write its own report over that file?",
+      "falsifier_id": "A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1_FALSIFIER",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/live_brain_route_admission_v1.py",
+          "git_blob_sha": "6abd18ccdf596cc39a4a1360bd2cdb7a11ece69a"
+        },
+        {
+          "path": "canonical/runtime/astra_runtime.py",
+          "git_blob_sha": "8f4a4a08b8fc4578fb04388eab0d476c28974dae"
+        },
+        {
+          "path": "canonical/runtime/goal_compiler.py",
+          "git_blob_sha": "ee131fbb40386302e8b897199dd3a559816b267c"
+        },
+        {
+          "path": "canonical/tests/test_output_destination_is_not_an_input_candidate_v1.py",
+          "git_blob_sha": "a6c9c326033ac01c6ce8151890714dca396cfd4c"
+        }
+      ],
+      "proposal_id": "A_CAPABILITY_MAY_NOT_OVERWRITE_THE_FILE_IT_READS_V1_20261029_V1"
+    }
+  }
+}

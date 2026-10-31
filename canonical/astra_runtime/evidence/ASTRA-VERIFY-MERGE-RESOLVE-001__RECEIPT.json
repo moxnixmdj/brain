@@ -1,0 +1,38 @@
+{
+ "adapter_output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__WORLD/answer.json",
+ "adapter_output_sha256": "17b23eb36902bf9d673c01602fdf45dafb6e35e04a30bf1d889798647db96a00",
+ "adapter_path": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py",
+ "adapter_self_report": {
+  "output_verified": true,
+  "verified": null
+ },
+ "adapter_sha256": "5b598aa0b9dc1e0bf9ef4a42ed272e94b8009373cefc3978f7e0e9e2aced000a",
+ "capability_id": "python.vcs.merge_conflict.resolve.v1",
+ "checks": [
+  {
+   "evidence": {
+    "both_conflict_sides_kept": true,
+    "file_parses": true,
+    "markers_left": [],
+    "suite_green_when_the_verifier_ran_it": true,
+    "suite_tail": ".                                                                        [100%]\n1 passed in 0.01s"
+   },
+   "name": "a conflicted file keeps both sides, loses every marker, and the suite goes green",
+   "ok": true
+  }
+ ],
+ "claim": "a conflicted file keeps both sides, loses every marker, and the suite goes green",
+ "elapsed_s": 0.044,
+ "independence": "the check recomputes the answer from the constructed world with the standard library and never imports the adapter",
+ "independent_verified": true,
+ "inputs": {
+  "output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__WORLD/answer.json",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__WORLD/project/app",
+  "timeout_s": 120
+ },
+ "mission_id": "ASTRA-VERIFY-MERGE-RESOLVE-001",
+ "replay": "python3 canonical/runtime/verify_bound_capability_provenance_v1.py --check",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_V1",
+ "verified_at": "2026-10-31T09:09:15Z",
+ "world": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__WORLD"
+}

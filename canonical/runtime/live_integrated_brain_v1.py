@@ -158,14 +158,27 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
 _REGISTRY_CACHE: dict[tuple[int, int, int], dict[str, Mapping[str, Any]]] = {}
 
 
+def _active_registry_path(path: Path | None = None) -> Path:
+    target = path or REGISTRY
+    try:
+        if target.is_file() and target.read_bytes()[:1] == b"@":
+            snap = target.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+            if snap.is_file():
+                return snap
+    except OSError:
+        pass
+    return target
+
+
 def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
     # Parsing 1.06 MB of JSON on every solve() was the dominant cost (864 KB of it inventory
     # that is ~98% filtered away).  Memoise on the mtimes that can change the answer.
     # The evidence directory's mtime is in the token because verification records appear
     # there long after the projection is written: without it the cache returned a stale
     # 67 after a record was stamped in-process. One stat, not a directory scan.
+    reg_file = _active_registry_path(REGISTRY)
     evidence_dir = ROOT / "canonical/astra_runtime/evidence"
-    token = (REGISTRY.stat().st_mtime_ns,
+    token = (reg_file.stat().st_mtime_ns,
              (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").stat().st_mtime_ns
              if (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").is_file() else 0,
              PROJECTION.stat().st_mtime_ns if PROJECTION.is_file() else 0,
@@ -173,7 +186,7 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
     if include_extended and token in _REGISTRY_CACHE:
         return dict(_REGISTRY_CACHE[token])
 
-    doc = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    doc = json.loads(reg_file.read_text(encoding="utf-8"))
     if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_SCHEMA_INVALID")
     raw = doc.get("capabilities")

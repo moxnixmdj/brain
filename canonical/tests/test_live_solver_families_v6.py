@@ -23,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-from execution_guard import live_solver_families_v6 as v6  # noqa: E402
+from execution_guard import live_solver_families_v6_coupled as v6  # noqa: E402
 
 
 class CoupledBugConstruction(unittest.TestCase):
@@ -87,7 +87,7 @@ class CoupledBugConstruction(unittest.TestCase):
 class FamilyContract(unittest.TestCase):
     def test_both_families_are_registered(self):
         self.assertEqual(
-            set(v6.GENERATORS_V6),
+            set(v6.GENERATORS_V6_COUPLED),
             {"PYTHON_REPAIR_COUPLED_AST", "PYTHON_REPAIR_COUPLED_PROV"},
         )
 
@@ -101,7 +101,7 @@ class FamilyContract(unittest.TestCase):
           baseline that trivially 'passes'.
         """
         for seed in (5, 6, 7):
-            for name, gen in v6.GENERATORS_V6.items():
+            for name, gen in v6.GENERATORS_V6_COUPLED.items():
                 with self.subTest(name=name, seed=seed):
                     work = ROOT / "canonical/astra_runtime/tmp/fam6_unit_contract"
                     shutil.rmtree(work, ignore_errors=True)

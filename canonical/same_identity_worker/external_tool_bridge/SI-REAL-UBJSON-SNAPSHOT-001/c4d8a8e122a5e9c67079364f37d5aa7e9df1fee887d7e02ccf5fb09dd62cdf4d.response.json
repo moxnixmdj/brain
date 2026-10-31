@@ -1,0 +1,1 @@
+{"agent_id":"SUPERWORKER-UNIFIED-1","error":"URLError:<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>","kind":"urlopen","request_sha256":"c4d8a8e122a5e9c67079364f37d5aa7e9df1fee887d7e02ccf5fb09dd62cdf4d","schema":"PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1","status":"error","task_id":"SI-REAL-UBJSON-SNAPSHOT-001"}

@@ -86,10 +86,83 @@ def _sha256(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
+def _splice_file(path: Path, b: bytes, edits, new: str) -> bytes:
+    """Rewrite exact identifier spans in one file, offset-sorted per line.
+
+    Module level so the splice can be replaced in a test: ``complete`` is a
+    measurement over the POST-edit trees, and the only way to prove that
+    measurement can fail is to make a splice not land.
+    """
+    lines = b.decode("utf-8").splitlines(keepends=True)
+    out_lines = []
+    by_line = {}
+    for (ln, col, name) in edits:
+        by_line.setdefault(ln, []).append((col, name))
+    for i, raw in enumerate(lines, start=1):
+        if i not in by_line:
+            out_lines.append(raw)
+            continue
+        row = raw
+        for col, name in sorted(by_line[i], key=lambda e: e[0],
+                                reverse=True):
+            seg = row[col:col + len(name)]
+            if seg != name:
+                _fail("SPAN_INTEGRITY:" + f"{path.name}:{i}:{col}")
+            before = row[col - 1] if col > 0 else ""
+            after = row[col + len(name)] if col + len(name) < len(row) else ""
+            if before.isalnum() or before == "_":
+                _fail("SPAN_INTEGRITY:left_boundary")
+            if after.isalnum() or after == "_":
+                _fail("SPAN_INTEGRITY:right_boundary")
+            row = row[:col] + new + row[col + len(name):]
+        out_lines.append(row)
+    return "".join(out_lines).encode("utf-8")
+
+
 def _modname_of(rel: str) -> str:
     noext = rel[:-3] if rel.endswith(".py") else rel
     parts = [p for p in noext.split("/") if p != "__init__"]
     return ".".join(parts)
+
+
+def _module_files(all_py, src_abs) -> dict:
+    """dotted module name relative to source_root -> the files spelling it."""
+    index: dict = {}
+    for path in all_py:
+        index.setdefault(_modname_of(path.relative_to(src_abs).as_posix()),
+                         set()).add(path)
+    return index
+
+
+def _package_of(path, src_abs) -> str:
+    """The dotted package a module's relative imports resolve against."""
+    rel = path.relative_to(src_abs).as_posix()
+    name = _modname_of(rel)
+    if rel.endswith("__init__.py"):
+        return name
+    return name.rpartition(".")[0]
+
+
+def _resolve_module(index, module: str, level: int, package: str):
+    """Files an import spelling provably denotes, or the empty set.
+
+    ``source_root`` may sit BELOW the import root (``.../app`` while callers
+    write ``from app.models import x``), so identity is resolved on dotted
+    SEGMENT suffixes, most specific first: ``app.models`` finds ``models.py``
+    and ``mymodels`` never does.  ``level`` resolves ``from . import x``.
+    """
+    if level:
+        parts = [p for p in package.split(".") if p]
+        name = ".".join([p for p in parts[: len(parts) - (level - 1)]
+                         + [module or ""] if p])
+    else:
+        name = module or ""
+    segs = [s for s in name.split(".") if s]
+    for i in range(len(segs)):
+        hit = index.get(".".join(segs[i:]))
+        if hit:
+            return hit
+    return frozenset()
 
 
 def _params_of(fn):
@@ -182,15 +255,16 @@ def _resolve_def(tree, parts: list[str]):
 
 
 def _import_table(tree):
-    """localalias -> (module, imported_name|None)."""
+    """localalias -> (module, imported_name|None, relative_level)."""
     binding = {}
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for a in node.names:
-                binding[a.asname or a.name.split(".")[0]] = (a.name, None)
+                binding[a.asname or a.name.split(".")[0]] = (a.name, None, 0)
         elif isinstance(node, ast.ImportFrom):
             for a in node.names:
-                binding[a.asname or a.name] = (node.module or "", a.name)
+                binding[a.asname or a.name] = (node.module or "", a.name,
+                                               int(node.level or 0))
     return binding
 
 
@@ -260,10 +334,9 @@ def run(args, root):
 
     parts = [p for p in qualname.split(".") if p]
     old = parts[-1]
-    target_mod = _modname_of(module_rel)
-
     all_py = sorted(p for p in src_abs.rglob("*.py")
                     if "__pycache__" not in p.parts)
+    mod_files = _module_files(all_py, src_abs)
     originals = {p: p.read_bytes() for p in all_py}
     parsed = {}
     for path in all_py:
@@ -336,12 +409,89 @@ def run(args, root):
                 _fail("REFUSE_NONLOCAL_OR_GLOBAL:" + old + " in " + rel)
 
     # ---------------------------------------------------------- edit harvest
+    def _targets(module, level, package):
+        """True when an import spelling provably denotes OUR module file."""
+        return module_abs in _resolve_module(mod_files, module, level, package)
+
+    def _cross_sites(tree, package, bindings, lines, rel):
+        """Provable cross-module references to the old symbol in one file.
+
+        File identity (never a dotted-string guess) decides what is ours, so
+        the same function is both the harvest and the post-edit residual
+        measurement: after the splice it must find NOTHING.
+        """
+        edits, unknown = [], []
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Name) and node.id == old:
+                hit = bindings.get(old)
+                if hit and hit[1] == old and _targets(hit[0], hit[2], package):
+                    edits.append((node.lineno, node.col_offset, old))
+            elif isinstance(node, ast.Attribute) and node.attr == old:
+                v = node.value
+                if isinstance(v, ast.Name):
+                    hit = bindings.get(v.id)
+                    if hit and hit[1] is None and _targets(hit[0], hit[2],
+                                                           package):
+                        # import M [as alias]; alias.old(...)
+                        edits.append((node.lineno,
+                                      node.col_offset + len(v.id) + 1, old))
+                    elif hit and hit[1] is not None and _targets(
+                            (hit[0] + "." if hit[0] else "") + hit[1],
+                            hit[2], package):
+                        # from PKG import M; M.old(...) — M is our module
+                        edits.append((node.lineno,
+                                      node.col_offset + len(v.id) + 1, old))
+                    elif not hit:
+                        unknown.append({"file": rel, "line": node.lineno,
+                                        "rule": "unresolvable module receiver"})
+        # the import lines themselves (rewrite the imported NAME token)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and _targets(
+                    node.module or "", int(node.level or 0), package):
+                for a in node.names:
+                    if a.name == old and a.asname is None:
+                        ln = node.lineno
+                        col = _name_col(lines[ln - 1], "import", old)
+                        edits.append((ln, col, old))
+                    elif a.name == new and a.asname == new:
+                        # `from m import new as new` -- nothing to edit, and not
+                        # a collision.  Two ways this shape is reached: the
+                        # residual law below re-harvests the POST-edit trees, so
+                        # it reads `from pkg.core import apex as apex` as the very
+                        # state this rename produced (measured 2026-10-31 in the
+                        # merge of #6340: the re-harvest refused the golden rename
+                        # with NEW_NAME_COLLIDES:apex (import alias) on every
+                        # world where the symbol was also aliased); or the module
+                        # imported the new name redundantly, which the defining
+                        # module's own NEW_NAME_COLLIDES check already refuses.
+                        continue
+                    elif a.name == old and a.asname == old:
+                        _fail("ALIAS_BINDING_SAME_NAME:" + str(node.lineno))
+                    elif a.asname == new and a.name != old:
+                        # another symbol imported AS the new name: after the
+                        # rename this module binds `new` to something else
+                        # while edited uses spell `new` for ours.
+                        _fail("NEW_NAME_COLLIDES:" + new + " (import alias)")
+                    elif a.name == old and a.asname == new:
+                        # `from m import old as new`: after renaming the name
+                        # token the alias spells `new as new` and still
+                        # resolves to this symbol — legal, allow.
+                        ln = node.lineno
+                        col = _name_col(lines[ln - 1], "import", old)
+                        edits.append((ln, col, old))
+                    elif a.name == old and a.asname:
+                        # `from m import old as x`: alias x stays x.
+                        ln = node.lineno
+                        col = _name_col(lines[ln - 1], "import", old)
+                        edits.append((ln, col, old))
+        return edits, unknown
+
     def_node_line = None
     for path, tree in parsed.items():
         rel = path.relative_to(src_abs).as_posix()
-        this_mod = _modname_of(rel)
         edits = []
         bindings = _import_table(tree)
+        package = _package_of(path, src_abs)
         lines = originals[path].decode("utf-8").splitlines()
 
         if path == module_abs:
@@ -393,53 +543,9 @@ def run(args, root):
                                         shadowed_keeps, collisions)
                 # the def-name edit itself was already recorded; dedupe later
         elif cross:
-            # cross-file: provable same-symbol uses
-            for node in ast.walk(tree):
-                if isinstance(node, ast.Name) and node.id == old:
-                    hit = bindings.get(old)
-                    if hit and hit == (target_mod, old):
-                        edits.append((node.lineno, node.col_offset, old))
-                elif isinstance(node, ast.Attribute) and node.attr == old:
-                    v = node.value
-                    if isinstance(v, ast.Name):
-                        hit = bindings.get(v.id)
-                        if hit and hit[0] == target_mod and hit[1] is None:
-                            # import target_mod [as alias]; alias.old(...)
-                            edits.append((node.lineno,
-                                          node.col_offset + len(v.id) + 1, old))
-                        elif not hit:
-                            unknown_sites.append(
-                                {"file": rel, "line": node.lineno,
-                                 "rule": "unresolvable module receiver"})
-            # the import lines themselves (rewrite the imported NAME token)
-            for node in ast.walk(tree):
-                if isinstance(node, ast.ImportFrom) and \
-                        (node.module or "") == target_mod:
-                    for a in node.names:
-                        if a.name == old and a.asname is None:
-                            ln = node.lineno
-                            col = _name_col(lines[ln - 1], "import", old)
-                            edits.append((ln, col, old))
-                        elif a.name == old and a.asname == old:
-                            _fail("ALIAS_BINDING_SAME_NAME:" +
-                                  str(node.lineno))
-                        elif a.asname == new and a.name != old:
-                            # another symbol imported AS the new name: after the
-                            # rename this module would bind `new` to something
-                            # else while edited uses spell `new` for ours.
-                            _fail("NEW_NAME_COLLIDES:" + new + " (import alias)")
-                        elif a.name == old and a.asname == new:
-                            # `from m import old as new`: after renaming the
-                            # name token the alias spells `new as new` and
-                            # keeps resolving to this symbol — legal, allow.
-                            ln = node.lineno
-                            col = _name_col(lines[ln - 1], "import", old)
-                            edits.append((ln, col, old))
-                        elif a.name == old and a.asname:
-                            # `from m import old as x`: alias x stays x.
-                            ln = node.lineno
-                            col = _name_col(lines[ln - 1], "import", old)
-                            edits.append((ln, col, old))
+            ce, cu = _cross_sites(tree, package, bindings, lines, rel)
+            edits.extend(ce)
+            unknown_sites.extend(cu)
         # getattr dynamic dispatch (any file)
         for node in ast.walk(tree):
             if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) \
@@ -458,88 +564,38 @@ def run(args, root):
     if not per_file_edits:
         _fail("SYMBOL_NOT_FOUND:no_editable_sites")
 
-    # ---------------------------------------------------------- splice
-    def _splice_file(path: Path, b: bytes, edits):
-        lines = b.decode("utf-8").splitlines(keepends=True)
-        out_lines = []
-        by_line = {}
-        for (ln, col, name) in edits:
-            by_line.setdefault(ln, []).append((col, name))
-        for i, raw in enumerate(lines, start=1):
-            if i not in by_line:
-                out_lines.append(raw)
-                continue
-            row = raw
-            for col, name in sorted(by_line[i], key=lambda e: e[0],
-                                    reverse=True):
-                seg = row[col:col + len(name)]
-                if seg != name:
-                    _fail("SPAN_INTEGRITY:" + f"{path.name}:{i}:{col}")
-                before = row[col - 1] if col > 0 else ""
-                after = row[col + len(name)] if col + len(name) < len(row) else ""
-                if before.isalnum() or before == "_":
-                    _fail("SPAN_INTEGRITY:left_boundary")
-                if after.isalnum() or after == "_":
-                    _fail("SPAN_INTEGRITY:right_boundary")
-                row = row[:col] + new + row[col + len(name):]
-            out_lines.append(row)
-        return "".join(out_lines).encode("utf-8")
-
     applied = {}
     for path, edits in per_file_edits.items():
-        after = _splice_file(path, originals[path], edits)
+        after = _splice_file(path, originals[path], edits, new)
         try:
             ast.parse(after.decode("utf-8"), filename=path.name)
         except SyntaxError as exc:
             _fail("SYNTAX_ERROR_AFTER_EDIT:" + str(exc))
         applied[path] = after
 
-    unknown_sites.sort(key=lambda r: (r["file"], r["line"]))
-    complete = not unknown_sites
-    seen_shadows = {}
-    for s in shadowed_keeps:
-        seen_shadows.setdefault((s["line"], s["scope"], s["rule"]), s)
-    shadowed_rows = [seen_shadows[k] for k in sorted(seen_shadows)]
-
-    # NO TEST, NO WRITE.
-    #
-    # The edits used to land first and the verdict came after, so ``PASS_BLIND`` -- which the front
-    # door's contract (``gate == PASS``) refuses -- arrived only once the files had already been
-    # rewritten.  Measured 2026-10-30: "Rename the symbol `mul` to `multiply` in <file>" on a tree
-    # with no test beside it renamed the module and then reported a closed failure; the caller was
-    # told nothing had happened to a file that had been edited.  The patch is fully computed and
-    # syntax-checked above, so the honest blind answer is a DRY RUN: the verdict, the edit count and
-    # the sites are reported, and ``applied`` says nothing was written.
-    if not run_tests:
-        out = {
-            "schema": SCHEMA,
-            "adapter": "python_refactor_rename_symbol",
-            "capability": "python.refactor.rename_symbol.v1",
-            "module": module_rel,
-            "qualname": qualname,
-            "old_symbol": old,
-            "new_symbol": new,
-            "symbol_kind": kind,
-            "edit_count": sum(len(v) for v in per_file_edits.values()),
-            "files_edited": [],
-            "files_that_would_be_edited": sorted(p.relative_to(src_abs).as_posix()
-                                                 for p in applied),
-            "unknown_sites": unknown_sites,
-            "shadowed_keeps": shadowed_rows,
-            "gate": "PASS_BLIND_DRY_RUN",
-            "complete": not unknown_sites,
-            "verified": False,
-            "applied": False,
-            "reason": "NO_TEST_CAN_VERIFY_THE_RENAME",
-        }
-        out_abs.parent.mkdir(parents=True, exist_ok=True)
-        out_abs.write_text(json.dumps(out, indent=1, sort_keys=True, default=list) + "\n",
-                           encoding="utf-8")
-        final = dict(out)
-        final["output_path"] = out_rel
-        final["output_sha256"] = hashlib.sha256(out_abs.read_bytes()).hexdigest()
-        final["output_verified"] = True
-        return final
+    # ------------------------------------------------ residual law (pre-write)
+    # `complete` is a claim about the WHOLE tree, so measure it: re-run the
+    # harvest over the post-edit trees and refuse if it still finds a provable
+    # reference.  Without this an import spelling the harvest mis-resolved
+    # would be reported "complete" and silently left stale.
+    post = dict(parsed)
+    for path, b in applied.items():
+        post[path] = ast.parse(b.decode("utf-8"), filename=str(path))
+    residual = []
+    for path, tree in post.items():
+        if path == module_abs:
+            continue        # same-file law incl. shadowed keeps: see harvest
+        lines = (applied.get(path) or originals[path]).decode(
+            "utf-8").splitlines()
+        re_edits, _ = _cross_sites(tree, _package_of(path, src_abs),
+                                   _import_table(tree), lines,
+                                   path.relative_to(src_abs).as_posix())
+        residual.extend((path.relative_to(src_abs).as_posix(), ln)
+                        for ln, _col, _name in re_edits)
+    if residual:
+        residual.sort()
+        _fail("RESIDUAL_REFERENCE:" + ",".join(
+            f"{f}:{ln}" for f, ln in residual[:8]))
 
     for path, b in applied.items():
         path.write_bytes(b)
@@ -560,6 +616,12 @@ def run(args, root):
     else:
         gate = "PASS_BLIND"
 
+    unknown_sites.sort(key=lambda r: (r["file"], r["line"]))
+    complete = not unknown_sites
+    seen_shadows = {}
+    for s in shadowed_keeps:
+        seen_shadows.setdefault((s["line"], s["scope"], s["rule"]), s)
+    shadowed_rows = [seen_shadows[k] for k in sorted(seen_shadows)]
     out = {
         "schema": SCHEMA,
         "adapter": "python_refactor_rename_symbol",

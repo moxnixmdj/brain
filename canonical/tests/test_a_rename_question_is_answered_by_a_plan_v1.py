@@ -137,11 +137,16 @@ class ARenameQuestionIsAnsweredByAPlan(unittest.TestCase):
         kinds = sorted(site["kind"] for site in plan["plans"][0]["sites"])
         self.assertEqual(kinds, ["DEFINITION", "IMPORT_SITE", "REFERENCE"])
 
-    def test_the_planning_phrasing_reaches_the_same_row(self):
+    def test_the_planning_phrasing_reaches_the_same_row_and_changes_nothing(self):
         goal = "Plan the rename of the symbol `mul` to `multiply` across %s." % TREE
         result = door.solve({"task_id": "rename_plan", "goal": goal})
         self.assertTrue(result.get("pass"), result.get("status"))
         self.assertEqual(result.get("compiled_capability_id"), PLANNER)
+        # A request to PLAN is not a request to DO.  Measured 2026-10-31: once the rename WRITER
+        # became reachable, this sentence (whose own word is "Plan") rewrote both modules.
+        self.assertEqual((ROOT / TREE / "pkg" / "calc.py").read_text(encoding="utf-8"), CALC)
+        self.assertIn("from pkg.calc import mul",
+                      (ROOT / TREE / "pkg" / "util.py").read_text(encoding="utf-8"))
 
     # ---------------------------------------------------------------- 3. the exemptions
     def test_only_a_row_that_declares_it_does_not_write_is_exempt_from_the_byte_gate(self):
@@ -158,13 +163,27 @@ class ARenameQuestionIsAnsweredByAPlan(unittest.TestCase):
         self.assertTrue(door._sentence_promises_a_change(
             "Rename the symbol `mul` to `multiply` in %s." % TREE))
 
-    def test_an_imperative_rename_is_not_satisfied_by_a_plan(self):
+    def test_an_imperative_rename_is_performed_by_the_writer_and_never_called_verified(self):
+        """An imperative is a promise of bytes, and only the WRITER may answer it.
+
+        Two over-claims are refused here.  When only the planner existed, the imperative was refused
+        PROMISED_SOURCE_CHANGE_NOT_APPLIED -- a plan is not the change.  Now that the writer answers,
+        the change really lands, and the remaining hazard is the opposite one: with no test named the
+        adapter reports ``gate: PASS_BLIND, verified: false``, so the door must not stamp VERIFIED.
+        """
         goal = "Rename the symbol `mul` to `multiply` in %s." % TREE
         result = door.solve({"task_id": "rename_imperative", "goal": goal})
-        self.assertFalse(result.get("pass"), result.get("status"))
-        self.assertEqual(result.get("failure_class"), "PROMISED_SOURCE_CHANGE_NOT_APPLIED")
-        # The named tree is byte-identical: nothing was renamed, and nothing claims otherwise.
-        self.assertEqual((ROOT / TREE / "pkg" / "calc.py").read_text(encoding="utf-8"), CALC)
+        self.assertEqual(result.get("compiled_capability_id"),
+                         "python.refactor.rename_symbol.v1")
+        self.assertTrue(result.get("pass"), result.get("status"))
+        # The promise is discharged: the symbol really was renamed, in both files.
+        self.assertIn("def multiply(", (ROOT / TREE / "pkg" / "calc.py").read_text(encoding="utf-8"))
+        self.assertIn("from pkg.calc import multiply",
+                      (ROOT / TREE / "pkg" / "util.py").read_text(encoding="utf-8"))
+        # And nothing measured it, so nothing may call it verified.
+        self.assertIs(result.get("change_verified"), False)
+        self.assertNotIn("AND_VERIFIED", str(result.get("status")))
+        self.assertIn("APPLIED_UNVERIFIED", str(result.get("status")))
 
     # ---------------------------------------------------------------- 4. the truth rule
     def test_a_plan_that_planned_nothing_and_refused_its_only_op_is_not_an_answer(self):
