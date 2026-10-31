@@ -9834,6 +9834,245 @@
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1.json"
       }
     },
+    "software.test.contract.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.test.contract.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_test_contract_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "test",
+        "contract",
+        "supercomposer",
+        "verification"
+      ],
+      "limitations": [
+        "Dual-oracle \u2192 test intelligence \u2192 pipeline \u2192 provenance coupling"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.test.contract.verified",
+        "software.verification.super.verified"
+      ],
+      "requires": [
+        "evidence.concrete_contract_violation",
+        "evidence.property_test.verified",
+        "python.test.intelligence.verified",
+        "python.test.pipeline.verified",
+        "python.provenance.coupling.super.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_test_contract_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-TEST-CONTRACT-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_TEST_CONTRACT_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "source.authority.identity.ror": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.authority.identity.ror",
+          "discovery_path": "${input.discovery_path}",
+          "max_candidates": 12,
+          "output_path": "${input.output_path}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "source_authority_binding_ror",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "authority",
+        "identity",
+        "organization",
+        "ror",
+        "domain",
+        "host",
+        "research",
+        "funding",
+        "provenance"
+      ],
+      "limitations": [
+        "VERIFIED means only exact candidate-domain to one active ROR organization identity binding.",
+        "No parent-domain inference and no fuzzy identity matching.",
+        "Unsupported, unavailable, or ambiguous domains fail closed.",
+        "Does not establish primary-source status, objective relevance, factual correctness, evidence sufficiency, or claim endorsement."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "source.authority.host_organization_identity"
+      ],
+      "requires": [
+        "source.candidate.provenance.verified"
+      ],
+      "result_fields": [
+        "status",
+        "verified_candidate_count",
+        "verified_candidates",
+        "authority_claim_scope",
+        "primary_source_verification",
+        "relevance_verification",
+        "evidence_sufficiency_verification",
+        "output_path",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/source_authority_binding_ror.py",
+        "external_registry": "ROR v2 API",
+        "modules": [
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "incremental_spend_usd": 0,
+        "model_dependency_count": 0,
+        "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+        "public_head_sha": "25d2bbe6703f745d23b45dab87fd0952aa648324",
+        "public_pr": 132,
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_run_id": 36676947006,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS"
+      }
+    },
+    "source.candidates.enumerate.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.candidates.enumerate.stdlib",
+          "glob": "**/*.py",
+          "objective": "${input.goal}",
+          "output_path": "${input.output_path}",
+          "search_root": "canonical/runtime"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "source_candidates_enumerate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "candidates",
+        "enumerate",
+        "corpus",
+        "evidence",
+        "files",
+        "discovery",
+        "repository",
+        "rank",
+        "bm25"
+      ],
+      "limitations": [
+        "Enumerates paths and bounded text snippets only; it does not score, select, or rank. Ranking stays with source.objective_relevance.rank.bm25.",
+        "Lexical corpus only. Emits no semantic, authority, or correctness claim.",
+        "Fails closed with SOURCE_CANDIDATES_NONE_FOUND when the glob matches no file, so an empty corpus can never be mistaken for a ranked result.",
+        "search_root and glob are literal parts of this capability's identity, per capability_selection_retrieval_v1._arg_names; the objective is bound from ${input.goal}, which goal_compiler._bind_inputs fills with the full sentence."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "source.candidates.available"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "candidate_count",
+        "glob",
+        "model_dependency_count",
+        "output_path",
+        "output_verified",
+        "search_root",
+        "status"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
+        "algorithm": "Deterministic sorted directory walk with bounded snippet extraction",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier": "source_candidates_verify_git_index",
+        "independent_verifier_binaries": [
+          "git ls-files",
+          "sha256sum"
+        ],
+        "independently_verified": true,
+        "independently_verified_by": "canonical/runtime/bound_capabilities/source_candidates_verify_git_index.py (git ls-files + sha256sum)",
+        "mission_id": "ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001",
+        "observed_effect": {
+          "adapter": "source_candidates_enumerate",
+          "candidate_count": 400,
+          "digest_mismatches": 0,
+          "enumeration_path": "canonical/astra_runtime/tmp/INDEP_VERIFY_SOURCE_CANDIDATES.json",
+          "enumeration_sha256": "1677c459c1b04b68ad59aff69e17deb69deb05f11c39e566b35625ff215e6eb2",
+          "independent_digest_source": "sha256sum (coreutils)",
+          "independent_enumeration_source": "git ls-files (git index)",
+          "output_verified": true,
+          "set_mismatches": 0,
+          "verified": true
+        },
+        "producer_independent": true,
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001__RESULT.json"
+      }
+    },
     "git.repository.operate.v1": {
       "action_template": {
         "args": {
