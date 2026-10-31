@@ -2,7 +2,7 @@
  "action_id": "THE_LIVE_REGISTRY_IS_THE_CAPABILITY_SET_NOT_A_PROJECTION_V1_20261031_V1",
  "action_intent_id": "THE_LIVE_REGISTRY_IS_THE_CAPABILITY_SET_NOT_A_PROJECTION_V1_20261031_V1",
  "action_kind": "FRESH_REUSE",
- "action_summary": "The file load_verified_registry() reads first was a 33-row truncation of its own 140-row snapshot (434 with the extended registry), and nothing objected. Restore the tree's own pointer idiom ('@' -> snapshot, astra_runtime.py:660, capability_type_surface_v1.py:33) and pin the RELATION, not a count: the committed file is the pointer or a projection at least as complete as the snapshot it stands for, every snapshot capability is reachable through the loader, and the rows the census counts by name are among them.",
+ "action_summary": "load_verified_registry now treats the snapshot as a FLOOR: a projection may add or redefine an entry, it may never remove one, and the snapshot's curated copy wins a collision. Pinned as a relation, never as a count.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -27,25 +27,25 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/runtime/live_integrated_brain_v1.py",
    "canonical/tests/test_the_live_registry_is_not_a_truncation_v1.py"
   ],
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The machine could report PASS on 25 of 28 hardcore SWE tasks only when the loader happened to resolve the snapshot; on main (521f1d5) the same 28 tasks read 2/28 because the live registry held 33 of 434 capabilities and a truncated registry is indistinguishable from a complete one.",
- "canonical_base_commit": "270dad3e0a5f169d8da0fc2ee86fdd90ef139ccb",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A projection the loader reads first could DELETE 65 of the snapshot's 140 rows (and 359 of 434 reachable capabilities) without any guard noticing; the 28-task hardcore SWE census read 5/28 instead of 25/28.",
+ "canonical_base_commit": "c6bfe7bfbc539ed054db2dfc55796aa6fb4cffc5",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "The machine could report PASS on 25 of 28 hardcore SWE tasks only when the loader happened to resolve the snapshot; on main (521f1d5) the same 28 tasks read 2/28 because the live registry held 33 of 434 capabilities and a truncated registry is indistinguishable from a complete one.",
+ "causal_blocker": "A projection the loader reads first could DELETE 65 of the snapshot's 140 rows (and 359 of 434 reachable capabilities) without any guard noticing; the 28-task hardcore SWE census read 5/28 instead of 25/28.",
  "date": "2026-10-31",
- "expected_parent_change": "hardcore_swe_surface_probe_20261030.py on 521f1d5: 2/28 -> 25/28 with the pointer restored (rename_symbol PASS 134 ms, move_function PASS 145 ms, count_functions PASS 81 ms, sql_injection PASS 302 ms); reachable capabilities 33 -> 434; the new pin suite is 3/3 on the fix and 3/3 red on the 33-row file.",
- "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py on 521f1d5: 2/28 -> 25/28 with the pointer restored (rename_symbol PASS 134 ms, move_function PASS 145 ms, count_functions PASS 81 ms, sql_injection PASS 302 ms); reachable capabilities 33 -> 434; the new pin suite is 3/3 on the fix and 3/3 red on the 33-row file.",
+ "expected_parent_change": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
+ "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
  "explicit_user_authorization": "Owner instruction this session, verbatim and repeated: all of the problems are already solved in the brain, so the fix wires what the repository already has -- the symbol index the adapter already builds, the overlap law the adapter already enforces, the unittest module _render_module already emits -- instead of inventing policy or adding a dependency. Owner instruction to focus on hardcore software engineering: this is the capability that writes tests. Owner instruction to do the optimal in the fastest way and only the right way. Owner instruction that all tests must be extremely hard and only truthful: five of the seven new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed.",
  "falsification_condition": "Re-run hardcore_swe_surface_probe_20261030.py on main and on this branch: if this branch is not strictly ahead on the 28 tasks, or if the new pin suite passes against the 33-row registry, this action is falsified.",
  "governance_change": true,
- "governance_change_summary": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json is the registry the loader reads first. What changed is its CONTENT, not a guard: it was a 33-capability projection that silently shadowed 401 capabilities its own snapshot defines, and it is the '@' pointer the tree's loader already follows. No refusal is relaxed; the pin suite only refuses a projection that drops rows the snapshot holds.",
+ "governance_change_summary": "canonical/runtime/live_integrated_brain_v1.py is the capability loader. What changed is which rows exist: a regenerated projection could silently delete capabilities its own snapshot defines. The loader now unions the snapshot as a floor (projection rows may add, never remove; the snapshot's curated copy wins a collision). No refusal is relaxed and no check is skipped -- the pin suite only refuses a registry that loses rows.",
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "intent": "Advance hardcore deterministic SWE capability breadth and sub-second execution speed using pure Python stdlib AST, graph, and git primitives plus independent byte-level acceptance inspectors.",
@@ -67,21 +67,21 @@
   "success_probability_lcb": "1/2",
   "wall_clock_cost_ub": 1
  },
- "measured_effect": "hardcore_swe_surface_probe_20261030.py on 521f1d5: 2/28 -> 25/28 with the pointer restored (rename_symbol PASS 134 ms, move_function PASS 145 ms, count_functions PASS 81 ms, sql_injection PASS 302 ms); reachable capabilities 33 -> 434; the new pin suite is 3/3 on the fix and 3/3 red on the 33-row file.",
+ "measured_effect": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": "The pointer idiom already implemented by _active_registry_path and astra_runtime.py:660; the snapshot the loader resolves to; the surface probe's own oracle set as the measurement.",
  "progress_evidence_paths": [
-  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+  "canonical/runtime/live_integrated_brain_v1.py",
   "canonical/tests/test_the_live_registry_is_not_a_truncation_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "270dad3e0a5f169d8da0fc2ee86fdd90ef139ccb",
+  "canonical_base_commit": "c6bfe7bfbc539ed054db2dfc55796aa6fb4cffc5",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
    "DELIVERY_TREATED_AS_A_SECOND_TASK__the_answer_clause_bound_to_an_unrelated_writer"
   ],
-  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py on 521f1d5: 2/28 -> 25/28 with the pointer restored (rename_symbol PASS 134 ms, move_function PASS 145 ms, count_functions PASS 81 ms, sql_injection PASS 302 ms); reachable capabilities 33 -> 434; the new pin suite is 3/3 on the fix and 3/3 red on the 33-row file.",
+  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
@@ -140,7 +140,7 @@
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "The fixture trees are tiny by construction, but the referee is real: a tree-wide grep for the old name, a real package import and a real unittest run, plus an A/B against a pristine HEAD worktree with the same fixtures"
   },
-  "real_outcome": "hardcore_swe_surface_probe_20261030.py on 521f1d5: 2/28 -> 25/28 with the pointer restored (rename_symbol PASS 134 ms, move_function PASS 145 ms, count_functions PASS 81 ms, sql_injection PASS 302 ms); reachable capabilities 33 -> 434; the new pin suite is 3/3 on the fix and 3/3 red on the 33-row file.",
+  "real_outcome": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
   "required_capability": "REUSE_FILE_IDENTITY_FOR_CROSS_MODULE_EDITS_AND_READ_DECLARED_INPUTS_BEFORE_REFUSING",
   "route_frontier": {
    "challenger_routes": [
