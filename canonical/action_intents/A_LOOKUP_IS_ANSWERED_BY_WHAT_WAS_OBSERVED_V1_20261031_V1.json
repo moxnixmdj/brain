@@ -1,0 +1,421 @@
+{
+ "action_id": "A_LOOKUP_IS_ANSWERED_BY_WHAT_WAS_OBSERVED_V1_20261031_V1",
+ "action_intent_id": "A_LOOKUP_IS_ANSWERED_BY_WHAT_WAS_OBSERVED_V1_20261031_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Hand over the observation a row already made when the sentence asks for a state rather than a collection: a PASS that delivered nothing answers with the row's observed_effect, and never with a manufactured value.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
+ "date": "2026-10-31",
+ "intent": "Hand over the observation a row already made when the sentence asks for a state rather than a collection: a PASS that delivered nothing answers with the row's observed_effect, and never with a manufactured value.",
+ "causal_blocker": "A PASS can carry no answer at all. asked() returns None for a state question -- the pinned law test_a_lookup_and_a_count_are_not_enumerations requires that 'Show the status of the working tree' is not an enumeration -- and deliver() returned [] for every None shape, so the answer the row had already produced was never handed over: measured 2026-10-31 on 35f9464, that sentence PASSed on git.repository.operate.v1 with answer: null while the row's own result held observed_effect {op: status, branch: arena/80891605-brain, entry_count: 0, staged: 0, unstaged: 0, untracked: 0}, and the same held for 'Show me the diff', 'Which branch am I on' and 'What is the git status'. Six of the 61 sentences in the V4 baseline are this class: the work ran, the answer existed, and the caller received nothing.",
+ "measured_effect": "Four state questions that returned PASS with answer: null on 35f9464 now return the observation the row made, under the existing PROJECT_BRAIN_ANSWER_SHAPE_V1 envelope with noun=observation and field=observed_effect: 'Show the status of the working tree' (branch, entry_count 0, staged 0), 'Show me the diff', 'Which branch am I on', 'What is the git status'. No verdict moved: all four still PASS in 0.4 s or less, 'List the functions in <f>' still delivers its function list, 'Show the last three git commits' still delivers its three rows, the two pinned neighbours of the shape gate are unchanged (test_the_answer_must_be_the_answer_v1: 17 tests OK), and the seven refusal families from PR #6498 are untouched (test_a_certificate_requires_the_work_v1: 9 tests OK). Six new law tests in canonical/tests/test_a_lookup_is_answered_by_what_was_observed_v1.py run in 0.001 s.",
+ "expected_parent_frontier_change": "Every PASS now carries either the collection the sentence named, the observation the row made, or a named refusal -- never silence.",
+ "expected_parent_change": "Every PASS now carries either the collection the sentence named, the observation the row made, or a named refusal -- never silence.",
+ "stop_condition": "Stop when the six new law tests are green, the four state questions return an answer instead of null, and the two pinned shape/certificate test modules are unchanged.",
+ "falsification_condition": "Re-run the four state questions through live_brain_route_admission_v1.solve: any answer: null on a PASS that observed_effect can answer, any replaced answer, or any change to the verdicts of the nine sentences measured in PR #6498 falsifies this intent.",
+ "prior_work_reused": "answer_shape_v1's existing envelope, _bounded() bound, asked() classification and the door's single exit _close_observations; git.repository.operate.v1's existing observed_effect field (it already emits op/branch/entry_count/staged for every op). No new capability, adapter, registry row, schema or verifier.",
+ "progress_evidence_paths": [
+  "canonical/tests/test_a_lookup_is_answered_by_what_was_observed_v1.py"
+ ],
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work.' and, on scope: 'hardcore software engineering only; PDF/DOCX/XLSX work is not to be counted or pursued', with the target stated as 'the most advanced, fastest, smartest software engineer'. Zero spend, no external model, fail closed.",
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "governance_change": false,
+ "weakens_existing_guard": false,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "user_authorized_governance_change": false,
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "load_bearing_primary": {
+  "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "4/13",
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1,
+  "stop_condition": "Stop when the six new law tests are green, the four state questions return an answer instead of null, and the two pinned shape/certificate test modules are unchanged.",
+  "measured_effect": "Four state questions that returned PASS with answer: null on 35f9464 now return the observation the row made, under the existing PROJECT_BRAIN_ANSWER_SHAPE_V1 envelope with noun=observation and field=observed_effect: 'Show the status of the working tree' (branch, entry_count 0, staged 0), 'Show me the diff', 'Which branch am I on', 'What is the git status'. No verdict moved: all four still PASS in 0.4 s or less, 'List the functions in <f>' still delivers its function list, 'Show the last three git commits' still delivers its three rows, the two pinned neighbours of the shape gate are unchanged (test_the_answer_must_be_the_answer_v1: 17 tests OK), and the seven refusal families from PR #6498 are untouched (test_a_certificate_requires_the_work_v1: 9 tests OK). Six new law tests in canonical/tests/test_a_lookup_is_answered_by_what_was_observed_v1.py run in 0.001 s.",
+  "interpretation": "A caller that receives PASS with no payload cannot use the door, whatever the capability underneath: the coding obligations are read through this exit, and six of the 61 baseline sentences were answered by nothing."
+ },
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/answer_shape_v1.py",
+   "canonical/runtime/declared_input_derivation_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "SWE_FIXES_20261031_V1.md"
+  ],
+  "route_class": "INTEGRATE",
+  "selected_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN"
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
+  "real_outcome": "Four state questions that returned PASS with answer: null on 35f9464 now return the observation the row made, under the existing PROJECT_BRAIN_ANSWER_SHAPE_V1 envelope with noun=observation and field=observed_effect: 'Show the status of the working tree' (branch, entry_count 0, staged 0), 'Show me the diff', 'Which branch am I on', 'What is the git status'. No verdict moved: all four still PASS in 0.4 s or less, 'List the functions in <f>' still delivers its function list, 'Show the last three git commits' still delivers its three rows, the two pinned neighbours of the shape gate are unchanged (test_the_answer_must_be_the_answer_v1: 17 tests OK), and the seven refusal families from PR #6498 are untouched (test_a_certificate_requires_the_work_v1: 9 tests OK). Six new law tests in canonical/tests/test_a_lookup_is_answered_by_what_was_observed_v1.py run in 0.001 s.",
+  "required_capability": "A projection at the door's single exit that reads the row's own observation when the sentence asks for no collection. It is an internal invariant over data the repository already produces; no external capability is involved.",
+  "proxy_goals_deleted": [
+   "Making the caller read the artifact after a PASS: refused, the door delivers it.",
+   "Adding an adapter or a registry row per wrongly-answered sentence: refused, projection reads the artifact that already exists.",
+   "A second git operation vocabulary: refused, git's own subcommand list and the row's own OPS tuple are the vocabulary."
+  ],
+  "surviving_necessity": "The producer of a result and the consumer of a sentence are two different components, and only a gate at their junction can compare them.",
+  "obs_goal": {
+   "real_outcome": "Four state questions that returned PASS with answer: null on 35f9464 now return the observation the row made, under the existing PROJECT_BRAIN_ANSWER_SHAPE_V1 envelope with noun=observation and field=observed_effect: 'Show the status of the working tree' (branch, entry_count 0, staged 0), 'Show me the diff', 'Which branch am I on', 'What is the git status'. No verdict moved: all four still PASS in 0.4 s or less, 'List the functions in <f>' still delivers its function list, 'Show the last three git commits' still delivers its three rows, the two pinned neighbours of the shape gate are unchanged (test_the_answer_must_be_the_answer_v1: 17 tests OK), and the seven refusal families from PR #6498 are untouched (test_a_certificate_requires_the_work_v1: 9 tests OK). Six new law tests in canonical/tests/test_a_lookup_is_answered_by_what_was_observed_v1.py run in 0.001 s.",
+   "proxy_goals_deleted": [
+    "Inventing a new answer schema for state questions: refused, the existing envelope is reused.",
+    "Treating a state question as an enumeration to make the projection fire: refused, the pinned law forbids it.",
+    "Refusing a PASS because its answer was missing: refused, the answer exists and refusing it would deny correct work."
+   ],
+   "surviving_necessity": "The row that observes and the caller that reads are different components; only the junction can hand the observation across."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/answer_shape_v1.py already projects rows into PROJECT_BRAIN_ANSWER_SHAPE_V1 and already bounds the payload with _bounded().",
+    "canonical/runtime/live_brain_route_admission_v1._close_observations is the single exit every route passes through; PR #6498 already places the shape gate there.",
+    "canonical/runtime/bound_capabilities/git_repository_operate.py already emits observed_effect for every op (status/diff/branch/log)."
+   ],
+   "external_existing_routes_checked": [
+    "jsonschema/pydantic validate presence and type and raise; none of them decides which field answers a sentence, so none delivers a lookup.",
+    "JMESPath/glom/jsonpath-ng extract by an expression the caller must already know; the projection stays in answer_shape_v1.",
+    "GroundEval (2026) scores an answer against fetched artifacts offline; it is an evaluator, not a producer-path delivery step."
+   ],
+   "capability_work_deleted": [
+    "A per-sentence answer schema registry: deleted, the envelope is one shape.",
+    "A second call to the adapter to fetch the answer: deleted, the row's result is read in place."
+   ],
+   "surviving_gap": "One delivery step at the exit, which is what this change adds."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "INTRINSIC",
+   "delete_bypass_substitute_options": [
+    "DELETE: nothing to delete -- the answer was never produced by the wrong path, it simply was not handed over.",
+    "BYPASS: routing state questions to a different adapter would duplicate work the executed row already did.",
+    "REUSE: reuse the row's observed_effect, which every git op already emits.",
+    "SUBSTITUTE: no substitute -- refusing a correct PASS would be the false-negative class the door forbids.",
+    "INTEGRATE: place the delivery inside the existing deliver() call at the single exit."
+   ],
+   "surviving_causal_blocker": "A PASS can carry no answer at all. asked() returns None for a state question -- the pinned law test_a_lookup_and_a_count_are_not_enumerations requires that 'Show the status of the working tree' is not an enumeration -- and deliver() returned [] for every None shape, so the answer the row had already produced was never handed over: measured 2026-10-31 on 35f9464, that sentence PASSed on git.repository.operate.v1 with answer: null while the row's own result held observed_effect {op: status, branch: arena/80891605-brain, entry_count: 0, staged: 0, unstaged: 0, untracked: 0}, and the same held for 'Show me the diff', 'Which branch am I on' and 'What is the git status'. Six of the 61 sentences in the V4 baseline are this class: the work ran, the answer existed, and the caller received nothing."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "REUSE: read observed_effect from the row already in the result (SELECTED)",
+    "REFUSE: demote a PASS whose answer is missing -- rejected, the answer is present and the work is correct",
+    "WIDEN asked(): classify a state question as an enumeration -- rejected, the pinned law forbids it"
+   ],
+   "losing_routes_reason": "Widening asked() breaks a pinned law and REFUSE denies correct work; reading the observation changes no verdict and no classification.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the sentence plus the row result the door already holds: the test feeds the exact status payload measured on 35f9464 and asserts the caller receives it."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [],
+   "adjacent_capabilities_absorbed": [],
+   "fresh_reuse_plan": "Reuse answer_shape_v1 (envelope, bound, classification), the door's exit, and git.repository.operate.v1's observed_effect; add one function and one call site."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "The nine sentences of PR #6498 are not re-measured for each edit: four state questions plus the two pinned modules are the measurement."
+   ],
+   "search_stop_decision": "Stopped when the four state questions delivered and the 55 tests touching the exit stayed green.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "REUSE_THE_ROWS_OBSERVED_EFFECT_AT_THE_EXISTING_EXIT_SELECTED",
+   "REFUSE_A_PASS_WITHOUT_AN_ANSWER_REJECTED",
+   "WIDEN_ASKED_TO_CLASSIFY_STATE_QUESTIONS_AS_ENUMERATIONS_REJECTED"
+  ],
+  "deleted_or_bypassed_paths": [
+   "a PASS delivered with answer: null while its row held observed_effect"
+  ],
+  "selected_surviving_route": "ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED",
+  "why_selected_route_is_fastest_sufficient": "It reads a field the executed row already wrote, in the function that already runs at the single exit, with the envelope and bound that already exist: no new I/O, no second execution, no new schema. The four measured sentences answer in 0.4 s or less.",
+  "expected_parent_level_state_change": "Every PASS now carries either the collection the sentence named, the observation the row made, or a named refusal -- never silence.",
+  "stop_condition": "Stop when the six new law tests are green, the four state questions return an answer instead of null, and the two pinned shape/certificate test modules are unchanged.",
+  "route_frontier": {
+   "discovery_required": true,
+   "incumbent_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
+   "checked_at_utc": "2026-10-31T19:34:26Z",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/answer_shape_v1.py: deliver() returned [] whenever asked() returned None, and asked() is pinned by the law test_a_lookup_and_a_count_are_not_enumerations.",
+     "canonical/runtime/bound_capabilities/git_repository_operate.py: every op emits observed_effect {op, branch, entry_count, staged, unstaged, untracked}.",
+     "measured 2026-10-31 on 35f9464: 'Show the status of the working tree', 'Show me the diff', 'Which branch am I on' and 'What is the git status' all PASS with answer: null (live_brain_route_admission_v1.solve, 0.4 s each).",
+     "PR #6498 measurement: the six wrong PASSes now fail closed and the two correct neighbours keep their payloads; this change touches neither."
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.pydantic.dev/latest/concepts/json_schema/ -- validation proves presence and type; it does not choose the field that answers a sentence.",
+     "https://json-schema.org/understanding-json-schema/reference/object#required -- required fields are declared by the schema author, not inferred from a question."
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/jsonschema/json -- jsonschema 4.26.0, requires_python >=3.10.",
+     "https://pypi.org/pypi/jmespath/json -- jmespath 1.1.0, requires_python >=3.9."
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/html/2606.22737v2 -- GroundEval scores an answer against artifacts the agent fetched; an offline evaluator, not a delivery step.",
+     "https://medium.com/@pvginkel/my-ai-workflow-part-5-grounding-cite-or-dont-claim-8ee3f438ce49 -- 'cite or don't claim': the evidence must travel in the answer.",
+     "https://github.com/OmAr-Kader/apis-response-validator -- schema-driven response validator; requires the schema, so it cannot answer an unclassified question."
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "validate API response contains collection not count answer shape check library"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "JMESPath glom jsonpath-ng projection library select nested field python pypi"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "runtime schema validation python jsonschema pydantic check required field present before returning result"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 new release grounded answer verification agent output must cite artifact field"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "challenger_routes": [
+    {
+     "route": "JSONSCHEMA_OR_PYDANTIC_VALIDATION_OF_THE_RESULT_DICT",
+     "evidence": [
+      "https://pypi.org/pypi/jsonschema/json 4.26.0",
+      "https://docs.pydantic.dev/latest/concepts/json_schema/"
+     ],
+     "qualification_evidence": [
+      "jsonschema 4.26.0 is installed-checkable from pypi.org and validates a declared schema deterministically"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY",
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "It answers 'does this payload match the schema I declared', never 'does this payload answer the sentence'.",
+      "CAPABILITY_STRENGTH": "Needs one schema per sentence shape, which is the vocabulary this change already owns.",
+      "WALL_CLOCK": "Comparable on a hot dict, but the schema has to be derived from the sentence first.",
+      "INCREMENTAL_COST": "Adds a third-party dependency to a zero-dependency, zero-spend producer path.",
+      "RELIABILITY": "Deterministic, but vacuous without the sentence mapping.",
+      "VERIFIABILITY": "Its own errors are precise; they cannot name the missing collection."
+     }
+    },
+    {
+     "route": "JMESPATH_OR_GLOM_PROJECTION_OF_THE_ARTIFACT",
+     "evidence": [
+      "https://pypi.org/pypi/jmespath/json 1.1.0",
+      "https://pypi.org/pypi/glom/json 25.12.0",
+      "https://jmespath.org/specification.html"
+     ],
+     "qualification_evidence": [
+      "jmespath 1.1.0 and glom 25.12.0 both project a caller-supplied path over nested JSON"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY",
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Correct on the path it is given; choosing the path from the sentence is exactly the remaining problem.",
+      "CAPABILITY_STRENGTH": "Strictly narrower: no notion of a noun, an alias table, or a refusal reason.",
+      "WALL_CLOCK": "Microseconds for a compiled expression, but the expression is per-sentence work.",
+      "INCREMENTAL_COST": "Third-party dependency for a 40-line breadth-first lookup.",
+      "RELIABILITY": "Deterministic; adds an install requirement to every environment.",
+      "VERIFIABILITY": "Returns the wrong thing silently when the path misses, where the gate must refuse."
+     }
+    },
+    {
+     "route": "GROUNDEVAL_STYLE_DETERMINISTIC_TRACE_AND_ARTIFACT_SCORING",
+     "evidence": [
+      "https://arxiv.org/html/2606.22737v2"
+     ],
+     "qualification_evidence": [
+      "GroundEval reports deterministic scoring of what an agent fetched, cited and returned, with no judge model"
+     ],
+     "qualification_evidence_classes": [
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Strong on 'did the agent use the artifact', silent on 'is the payload the answer'.",
+      "CAPABILITY_STRENGTH": "An evaluation harness with its own domain configuration, not a runtime gate.",
+      "WALL_CLOCK": "Offline batch, not per-request.",
+      "INCREMENTAL_COST": "A framework plus a question corpus to sit in the producer path.",
+      "RELIABILITY": "Good for audits; would not run on every solve.",
+      "VERIFIABILITY": "Independent by construction, which is why it is useful as an auditor rather than as the gate."
+     }
+    }
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-10-31T19:34:26Z",
+    "max_age_hours": 2,
+    "selected_route": "ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPYTHON_STDLIB_RE_AST_JSON",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "status": "READY",
+      "observed_at_utc": "2026-10-31T19:34:26Z",
+      "evidence": [
+       "DIRECT_PROBE: python3 ast.parse + re.compile on the four edited files"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL"
+     },
+     {
+      "dependency": "WORKING_TREE_AT_canonical/runtime",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "status": "READY",
+      "observed_at_utc": "2026-10-31T19:34:26Z",
+      "evidence": [
+       "DIRECT_PROBE: ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED imported and called; four state questions now return an observation"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL"
+     },
+     {
+      "dependency": "UNITTEST",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "status": "READY",
+      "observed_at_utc": "2026-10-31T19:34:26Z",
+      "evidence": [
+       "DIRECT_PROBE: canonical.tests.test_a_lookup_is_answered_by_what_was_observed_v1 ran 6 tests OK in 0.001 s"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL"
+     }
+    ],
+    "execution_dependencies_complete": true
+   }
+  },
+  "selected_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN"
+ },
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A PASS can carry no answer at all. asked() returns None for a state question -- the pinned law test_a_lookup_and_a_count_are_not_enumerations requires that 'Show the status of the working tree' is not an enumeration -- and deliver() returned [] for every None shape, so the answer the row had already produced was never handed over: measured 2026-10-31 on 35f9464, that sentence PASSed on git.repository.operate.v1 with answer: null while the row's own result held observed_effect {op: status, branch: arena/80891605-brain, entry_count: 0, staged: 0, unstaged: 0, untracked: 0}, and the same held for 'Show me the diff', 'Which branch am I on' and 'What is the git status'. Six of the 61 sentences in the V4 baseline are this class: the work ran, the answer existed, and the caller received nothing.",
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_GDPVAL_GE_1846",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "AUTOMATIONBENCH_GE_40",
+   "HLE_TOOLS_GE_67_7",
+   "TB_SCIENCE_GE_58_7",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+  ],
+  "proof_state_reachability": "DIRECT_PROBE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_ON_SANDBOX_MEASUREMENT_ONLY__NO_TERMINAL_OR_FAMILY_CREDIT_IS_CLAIMED",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "NEVER_CERTIFY_A_WRONG_ANSWER_ANSWER_SHAPE_AND_STATED_OPERATION_V1_20261031_V1",
+   "falsifier_id": "A_SENTENCE_THAT_ASKS_FOR_MEMBERS_OR_FOR_A_REWRITE_STILL_RECEIVES_A_PASS_CARRYING_A_COUNT_OR_A_READ",
+   "decisive_question": "MAY_A_DOOR_CERTIFY_A_PASS_WHOSE_PAYLOAD_DOES_NOT_ANSWER_THE_SENTENCE_OR_WHOSE_OPERATION_IS_NOT_THE_ONE_THAT_WAS_STATED",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THREE_CANDIDATE_RULES_WERE_CHECKED_AND_REJECTED_BEFORE_THE_SHIPPED_ONE: A_NAIVE_NOUN_TABLE_ORDER_ANSWERED_WHICH_COMMIT_BROKE_THE_TESTS_ABOUT_TESTS_AND_WOULD_HAVE_BROKEN_ONE_OF_THE_FIVE_CORRECT_ANSWERS__A_BARE_FIND_AS_AN_ENUMERATING_VERB_REFUSED_FIND_THE_FAULT_IN_THE_FILE___AND_TREATING_EVERY_GIT_SUBCOMMAND_AS_THE_OPERATION_BROKE_SHOW_THE_LAST_THREE_GIT_COMMITS_BECAUSE_SHOW_MEANS_LOG_THERE__EACH_REJECTION_IS_MEASURED_IN_SWE_FIXES_20261031_V1_MD_AND_EACH_LEAVES_A_TEST_IN_CANONICAL_TESTS"
+  }
+ },
+ "route_id": "ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED"
+}
