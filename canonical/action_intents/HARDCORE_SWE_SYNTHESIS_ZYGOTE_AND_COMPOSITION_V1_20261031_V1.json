@@ -47,7 +47,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::On 35f946411c, swe_advanced_probe_v1 served 2/49 requests (0/39 writes) because polyglot/build/CI, Python e-graph/concurrency/test-authoring/structural-refactor, and diagnostic/profiling/coverage/ADR lanes lacked bound role-separated adapters, while python_source_symbol_index missed os import for parallel cold indexing and serialized module rows twice.",
-  "canonical_base_commit": "150d3ff4e587c713bf9ad0c805b8d1253e75b201",
+  "canonical_base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -62,7 +62,7 @@
   "incremental_spend_usd": 0,
   "intent": "Advance hardcore deterministic SWE capability breadth and sub-second execution speed using pure Python stdlib AST, graph, and git primitives plus independent byte-level acceptance inspectors.",
   "load_bearing_primary": {
-    "canonical_base_commit": "150d3ff4e587c713bf9ad0c805b8d1253e75b201",
+    "canonical_base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_TB4_GE_66_4",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -97,8 +97,8 @@
     "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
   ],
   "recursive_obs": {
-    "base_commit": "150d3ff4e587c713bf9ad0c805b8d1253e75b201",
-    "canonical_base_commit": "150d3ff4e587c713bf9ad0c805b8d1253e75b201",
+    "base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
+    "canonical_base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
@@ -231,7 +231,7 @@
           "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
         }
       ],
-      "checked_at_utc": "2026-10-31T19:20:26Z",
+      "checked_at_utc": "2026-10-31T19:35:19Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -275,10 +275,10 @@
         "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
       ],
       "selected_route": "REUSE_THE_SYMBOL_INDEX_AND_THE_ISSUER_PUBLISHED_CREDENTIAL_SHAPES",
-      "selected_route_checked_at_utc": "2026-10-31T19:20:26Z",
+      "selected_route_checked_at_utc": "2026-10-31T19:35:19Z",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-10-31T19:20:26Z",
+        "checked_at_utc": "2026-10-31T19:35:19Z",
         "execution_dependencies": [
           {
             "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
@@ -290,7 +290,7 @@
             ],
             "evidence_scope": "LOCAL",
             "kind": "LOCAL_RUNTIME",
-            "observed_at_utc": "2026-10-31T19:20:26Z",
+            "observed_at_utc": "2026-10-31T19:35:19Z",
             "required": true,
             "scope": "GLOBAL",
             "status": "READY",
@@ -307,7 +307,7 @@
             ],
             "evidence_scope": "LOCAL",
             "kind": "CODE_ARTIFACT",
-            "observed_at_utc": "2026-10-31T19:20:26Z",
+            "observed_at_utc": "2026-10-31T19:35:19Z",
             "required": true,
             "scope": "LOCAL",
             "status": "READY",
@@ -415,7 +415,7 @@
           "path": "canonical/runtime/bound_capabilities/python_refactor_rename_parameter.py"
         },
         {
-          "git_blob_sha": "5b5b2c317583fa0376245a01987abd33dbb63ba3",
+          "git_blob_sha": "ac07efe6f627845e08f838eae28bd507a225b212",
           "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py"
         }
       ],

@@ -30818,7 +30818,7 @@
   "engines": 26,
   "knowledge_documents": 219,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6549,
+  "research_index_records": 6551,
   "routing_tokens": 2320,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30827,7 +30827,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "06d121bca95dc06cb50a244ccc0f3d825bcce5d22c376e0d2111aa3dcce5941f"
+  "value": "a20cf8d523bb4db3303af04b815b4f3d733774b1967ba6bacc1ab5d29e53d93c"
  },
  "engines": [
   {
@@ -201290,6 +201290,33 @@
    }
   },
   {
+   "action_id": "AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "539076bebc85d33ef4cda450ae3d8081a92f2a3fc02f4d9b14e25ff2b60bbc97",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "already": 1,
+    "an_answer_already_written_must_not_be_refused_for_size_v1_20261031_v1": 1,
+    "answer": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "not": 1,
+    "over_the_cap_the_gate_decodes_the_artifact_s_leading_top_level_members_inside_a_small_budget_and_stops_at_the_first_member_that_does_not_fit_each_value_decoded_whole_or_not_at_all__and_the_symbol_index_finds_the_rows_a_sibling_artifact_for_the_same_source_root_already_proved_with_the_same_per_file_sha256_check_that_a_fresh_parse_passes": 1,
+    "read_the_section_the_answer_is_in_and_key_the_index_cache_by_the_tree": 1,
+    "refused": 1,
+    "size": 1,
+    "the_gate_refused_an_answer_it_had_already_written__python_source_symbol_index_writes_105_8_mb_for_canonical_runtime_while_the_callers_answer_is_1_47_mb_and_is_the_first_top_level_member__max_artifact_bytes_16_mb_refused_the_whole_run_with_artifact_too_large_so_find_the_callers_of_binding_view_in_canonical_runtime_cost_16_5_to_18_7_seconds_and_failed_while_the_same_sentence_about_one_file_answered_in_293_ms__and_the_index_cache_was_keyed_by_the_request_artifact_path_because_the_door_names_each_artifact_after_the_request_so_no_two_sentences_ever_reused_one_tree_measured_2026_10_31": 1,
+    "v1": 2,
+    "written": 1
+   }
+  },
+  {
    "action_id": "AN_APPEND_IS_SERVED_AND_A_DIRECTORY_IS_NAMED_BY_THE_SENTENCE_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -207624,7 +207651,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "752951106b96e2e6682c502e76f9d2a2ae4e70887e4aaa43ad66339496ea5a2d",
+   "sha256": "2cba49292bdc178660943235b27a304d276e8d7aefc166b5c7b6cdfe1b43b540",
    "status": "",
    "terms": {
     "10": 2,
@@ -210951,6 +210978,31 @@
     "two_measured_lies_stop_being_credited__a_composed_goal_that_did_nothing_and_a_composed_goal_that_deleted_the_file_it_was_asked_to_edit__while_the_repair_that_really_works_still_passes_and_the_out_of_scope_fail_closed_rate_goes_from_19_of_20_to_20_of_20": 1,
     "v1": 1,
     "word": 1
+   }
+  },
+  {
+   "action_id": "THE_FUNCTION_NAME_IS_THE_ONE_THE_FILE_DEFINES_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/THE_FUNCTION_NAME_IS_THE_ONE_THE_FILE_DEFINES_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_FUNCTION_NAME_IS_THE_ONE_THE_FILE_DEFINES_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "80f509993460148483d8695978e056d4b4867cd46183fae9c3304d85b39975d9",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "defines": 1,
+    "every_name_the_sentence_puts_beside_the_word_function_is_a_candidate_in_either_word_order_and_the_file_s_own_ast_keeps_the_one_it_defines__a_name_the_file_does_not_define_is_not_evidence_and_two_proven_names_are_still_ambiguous__no_adjective_list": 1,
+    "file": 1,
+    "function": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "name": 1,
+    "one": 1,
+    "read_the_section_the_answer_is_in_and_key_the_index_cache_by_the_tree": 1,
+    "the_derivation_read_the_word_beside_the_noun_as_the_noun__rename_the_public_function_total_in_canonical_runtime_util_py_to_sum_all_was_refused_r3_weak_evidence_because_qualname_was_derived_as_public_the_grammar_knew_only_name_function_and_the_file_defines_only_total__the_row_python_refactor_rename_symbol_v1_exists_and_serves_the_same_sentence_about_one_file__measured_2026_10_31_advanced_sentence_35": 1,
+    "the_function_name_is_the_one_the_file_defines_v1_20261031_v1": 1,
+    "v1": 2
    }
   },
   {
@@ -216533,9 +216585,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "387616aa0b72acdd9177b99abf157802c2fdb2d385353f55da754c52d2f707b0",
+   "sha256": "dc6f801bafa2f8c791aadad6a56dafc15aae8aa10155c160e9a28bcb39e86654",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "_artifact_path",
     "_bounded",
@@ -216543,6 +216595,7 @@
     "_narrow",
     "_project",
     "_read_artifact",
+    "_read_sections",
     "asked",
     "deliver",
     "main"
@@ -216562,6 +216615,7 @@
     "place": 1,
     "project": 1,
     "read_artifact": 1,
+    "read_sections": 1,
     "refuse": 1,
     "return": 1,
     "shape": 1,
@@ -220511,17 +220565,19 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "a6b4990e2aea93cbd0453a47b29cfd82981fd4f4a5077bf603e8d51a70fc7fb0",
+   "sha256": "d985563840067fb77e8629ba0ff1b881526672e6399d4df3dd25357afe950ebe",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "symbol_count": 12,
+   "symbol_count": 14,
    "symbols": [
     "_ModuleIndexer",
     "_cached_modules",
+    "_cached_modules_for_tree",
     "_collect_index_parts",
     "_module_names_prepass",
     "_parse_single_module_worker",
     "_py_files",
     "_row_sha",
+    "_rows_from_artifact",
     "_safe_root",
     "_signature",
     "build_index",
@@ -220532,6 +220588,7 @@
     "ast": 1,
     "build_index": 1,
     "cached_modules": 1,
+    "cached_modules_for_tree": 1,
     "collect_index_parts": 1,
     "deterministic": 1,
     "index": 2,
@@ -220542,6 +220599,7 @@
     "python": 2,
     "repository-local": 1,
     "row_sha": 1,
+    "rows_from_artifact": 1,
     "run": 1,
     "safe_root": 1,
     "semantic": 1,
@@ -232809,7 +232867,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "a2ce7ea72f28c4af99b0821a5e723edb736e46135dc31ee83f42ed95c57df5ed",
+   "sha256": "8cb0459af4369bd86c9b2179695561f0aa74278a0965f42e8495b1c2a156f093",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 20,
    "symbols": [

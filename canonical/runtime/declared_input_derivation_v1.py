@@ -1351,10 +1351,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                     break
     if "qualname" in keys and len(sources) == 1 and sources[0].endswith(".py"):
         wanted_param = (pairs[0][0] if len(pairs) == 1 else None)
+        # TWO GRAMMARS, ONE PROOF.  "the total function" and "the public function total"
+        # both name a function, and neither word order is the decisive one.  Every name the
+        # sentence puts beside the word "function" is a candidate; the file's own AST then
+        # decides, because a name the file does not define is not evidence of which function
+        # the sentence means.  No adjective list is needed: the proof rejects it anyway.
+        #
+        # Measured 2026-10-31, advanced sentence 35: "Rename the public function total in
+        # <pkg>/util.py to sum_all across the repository" read "public" as the function name
+        # (the grammar only knew "<name> function"), defined_fns contains only "total", and
+        # the proven reading was never tried -- the rename row that exists and works on one
+        # file was refused BINDING_REFUSED:qualname:not_stated.
         wanted_fn = None
-        fn_match = re.search(r"\b(?:the\s+)?([A-Za-z_][A-Za-z0-9_]*)\s+function\b", str(goal or ""), re.I)
-        if fn_match and fn_match.group(1).lower() not in ("the", "a", "an", "python", "target", "helper", "existing", "this", "each", "every"):
-            wanted_fn = fn_match.group(1)
+        named_fns: list[str] = []
+        for _pattern in (r"\b(?:the\s+)?([A-Za-z_][A-Za-z0-9_]*)\s+function\b",
+                         r"\b(?:function|method)\s+([A-Za-z_][A-Za-z0-9_]*)\b"):
+            for _match in re.finditer(_pattern, str(goal or ""), re.I):
+                if _match.group(1) not in named_fns:
+                    named_fns.append(_match.group(1))
         tree = _tree_of(root, sources[0])
         if tree.body:
             method_quals: list[tuple[str, ast.FunctionDef | ast.AsyncFunctionDef]] = []
@@ -1366,6 +1380,9 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                         if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
                             method_quals.append((f"{top.name}.{sub.name}", sub))
             defined_fns = {q for q, _ in method_quals} | {n.name for _, n in method_quals}
+            proven = [n for n in named_fns if n in defined_fns]
+            if len(proven) == 1:
+                wanted_fn = proven[0]
             if not wanted_fn:
                 dotted_hits = {
                     m.group(1)

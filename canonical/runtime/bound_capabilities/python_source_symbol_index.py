@@ -90,6 +90,11 @@ def _cached_modules(output):
         old = json.loads(output.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return {}
+    return _rows_from_artifact(old)
+
+
+def _rows_from_artifact(old) -> dict:
+    """Module rows an already-verified index artifact proved, by path."""
     if not isinstance(old, dict) or old.get("schema") != "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1":
         return {}
     # The SOURCE is the authority, not the cache.  Every row reused below is
@@ -110,6 +115,42 @@ def _cached_modules(output):
 # The last artifact read, as it described the tree: what a run needs to know to
 # decide whether the file on disk is still the artifact it would write.
 _CACHE_META: dict = {"source_root": "", "unparseable": []}
+
+
+def _cached_modules_for_tree(output, source_root_rel, limit=3):
+    """The rows an artifact for THIS TREE already proved, when this run has none of its own.
+
+    THE CACHE KEY WAS THE ONE THING A CALLER COULD NOT REPEAT.  Measured 2026-10-31 on
+    34f867a: the door names each request's artifact after the request, so two different
+    sentences about ``canonical/runtime`` asked for two different files, ``_cached_modules``
+    found nothing for either, and each re-parsed 2 287 files -- 15.5 s, for an answer that
+    occupied 1.5 MB of a 105.8 MB artifact.  The previous request's artifact is on disk beside
+    this one and describes the same tree.
+
+    Nothing is trusted on the strength of being nearby: the artifact must declare this
+    ``source_root`` and this schema, only the newest few are considered, and every row offered
+    is then checked against the sha256 of the file's current bytes inside the caller -- the same
+    check a fresh parse passes.  The source stays the authority; this only finds the rows.
+    """
+    try:
+        siblings = sorted(
+            (p for p in output.parent.glob("*.json") if p != output and p.is_file()),
+            key=lambda p: p.stat().st_mtime_ns, reverse=True)[:max(1, int(limit))]
+    except OSError:
+        return {}
+    for candidate in siblings:
+        try:
+            old = json.loads(candidate.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(old, dict):
+            continue
+        if str(old.get("source_root") or "") != str(source_root_rel):
+            continue
+        rows = _rows_from_artifact(old)
+        if rows:
+            return rows
+    return {}
 
 
 def _row_sha(row):
@@ -554,10 +595,9 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
-    cached = _cached_modules(output)
-    report, reused = _collect_index_parts(
-        source_root.relative_to(repo).as_posix(), repo, cached, json_only=True
-    )
+    source_root_rel = source_root.relative_to(repo).as_posix()
+    cached = _cached_modules(output) or _cached_modules_for_tree(output, source_root_rel)
+    report, reused = _collect_index_parts(source_root_rel, repo, cached, json_only=True)
     modules = report["modules"]
     unparseable = report["unparseable"]
     symbols = report["symbols"]
