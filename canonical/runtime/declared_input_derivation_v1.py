@@ -51,6 +51,31 @@ SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
 _FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
 # "<noun> <name>" -- "the function line_total", "the class Cart".  The name is
 # read off the sentence and then PROVED against the file's own AST.
+# The CREATION grammar, in one place.  "Add a function total_cents(item) to <path>
+# that returns price_cents * qty, export it from <path>, and add a test for it in
+# <path>" spells every slot it needs: a name, a parameter list, the expression it
+# returns, and the three files.  Each is read VERBATIM; a parameter list that is
+# not a list of identifiers, or an expression that does not parse, yields no
+# value and the binder refuses instead of synthesising something the sentence did
+# not say.
+_ADDED_FUNCTION = re.compile(r"\bfunction\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)", re.I)
+_RETURNS_EXPR = re.compile(r"\breturns?\s+(.+?)\s*(?:,|\.\s|$)", re.I)
+_EXPORT_FROM = re.compile(r"\bexports?\b[^.\n]{0,40}?\bfrom\s+([^\s,;]+)", re.I)
+_CREATED_TEST = re.compile(
+    r"\badd(?:s|ing)?\s+(?:a|an|the)?\s*tests?\b[^.\n]{0,50}?\bin\s+([^\s,;]+)", re.I)
+# The gate for every rule below that fills a slot for a function the sentence ASKS
+# FOR: an ordinary sentence that merely mentions "the function line_total" must
+# gain no slot it did not state.  Measured 2026-10-31: without the gate, five
+# test-selection rows bound `symbol` on a repair sentence and the selector became
+# ambiguous where it selected one relevant capability.
+_CREATES_A_FUNCTION = re.compile(
+    r"\b(?:add|create|write|implement|define)\w*\b[^.\n]{0,60}?\bfunction\b", re.I)
+# "Add a parameter qty with a default value to the function line_total".
+_ADDED_PARAM = re.compile(
+    r"\b(?:add|insert|give)\w*\b[^.\n]{0,80}?\bparameters?\s+"
+    r"(?:named\s+)?[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", re.I)
+
+
 _NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 # ONLY configuration knobs may be defaulted away.  A path/root/argv/dir/file
@@ -88,6 +113,13 @@ _SWE_VERBS = (
     "linearithmic", "unused", "race condition", "are failing",
     "security gate", "type gate", "coverage gate", "mutation gate", "perf gate", "static triage",
     "changed lines", "synthesize",
+    # The other half of software work: CREATING.  A request to add a function and
+    # test it is software engineering with a stated signature, expression and
+    # files, and the derivations below fill those slots from exactly that
+    # evidence.  Measured 2026-10-31: without these phrases the feature request
+    # was not SWE in scope at all, so the contract was never derived and the
+    # capability that exists for it could not be reached.
+    "add a function", "export it from", "add a test for", "add a parameter",
 )
 
 
@@ -206,6 +238,56 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
             found.setdefault(key.value, f"{rel}:{node.lineno}")
     _ADAPTER_DEFAULTS_CACHE[cache_key] = found
     return dict(found)
+
+
+def _holds_tests(directory: pathlib.Path) -> bool:
+    """True when ``directory`` itself contains test files, or a ``tests``/``test`` child does.
+
+    Streams and stops at the first hit, so the check costs one ``readdir`` on a real
+    project and nothing more.  It is a fact about the tree, not an inference.
+    """
+    try:
+        for child in directory.iterdir():
+            if child.is_file() and _TEST_NAME_RE.search(child.name):
+                return True
+            if child.is_dir() and child.name in {"tests", "test"}:
+                for inner in child.iterdir():
+                    if inner.is_file() and _TEST_NAME_RE.search(inner.name):
+                        return True
+    except OSError:
+        return False
+    return False
+
+
+def _project_root(root: pathlib.Path, source_rel: str, max_up: int = 3) -> str | None:
+    """The nearest ancestor of a stated source file that also owns its tests.
+
+    A repository's tests are not always beside the code: ``src/app/calc.py`` with
+    ``tests/test_calc.py`` needs the directory that CONTAINS both, because the
+    tools that run the suite require the tests to live under the source root and
+    the tests import the package by its top-level name.  Measured 2026-10-29:
+    with ``source_root`` pinned to the source file's parent, that layout refused
+    with NO_TEST_FILES_UNDER_SOURCE_ROOT and the identical bug repaired in the
+    flat layout.
+
+    The walk is bounded (3 levels), starts at the file's parent, stops at the
+    first ancestor that holds tests, and never leaves the repository.  If the
+    file's own directory already holds tests -- the common case -- this returns
+    that directory and nothing changes.
+    """
+    base = (pathlib.Path(root) / source_rel).parent
+    repo = pathlib.Path(root)
+    for _ in range(max_up + 1):
+        if _holds_tests(base):
+            try:
+                rel = base.resolve().relative_to(repo.resolve())
+            except ValueError:
+                return None
+            return str(rel) if str(rel) != "." else "."
+        if base == repo or repo not in base.parents:
+            return None
+        base = base.parent
+    return None
 
 
 def _tree_of(root: pathlib.Path, rel: str) -> ast.Module:
@@ -445,7 +527,19 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "source_root" in keys and len(sources) == 1:
         parent = str(pathlib.PurePosixPath(sources[0]).parent)
         if parent and (pathlib.Path(root) / parent).is_dir():
-            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
+            rule = "PATH_DIR_FROM_STATED_FILE_PARENT"
+            # src-layout: ``src/app/calc.py`` whose tests live in ``tests/`` needs the
+            # directory that CONTAINS both, or the suite cannot import the package by
+            # its top-level name and a correct repair reads as red.  Bounded to three
+            # ancestors and only taken when the stated file's own directory holds no
+            # tests, so a package layout is untouched.
+            # Only a contract that consumes tests needs a test-owning ancestor.
+            # A read-only index must not expand one stated file into the repo.
+            needs_tests = bool(keys & {"test_paths", "test_argv", "test_path", "test_file"})
+            widened = _project_root(pathlib.Path(root), sources[0]) if needs_tests else None
+            if widened and widened != parent:
+                parent, rule = widened, "PATH_DIR_NEAREST_ANCESTOR_THAT_OWNS_THE_TESTS"
+            out["source_root"] = {"value": parent, "rule": rule,
                                   "evidence": sources[0]}
     # The same rule for SEVERAL stated files, but ONLY when the sentence already
     # gave them ROLES ("from A to B"): the directory that holds both ends of a
@@ -614,6 +708,125 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if value:
                 out["message"] = {"value": value, "rule": "MESSAGE_FROM_STATED_QUOTED_TEXT",
                                   "evidence": value[:48]}
+
+    # ---- the creation grammar ------------------------------------------------
+    # A function the sentence asks to CREATE has no definition to be proved
+    # against -- that is the point of an add.  Its name is read off the one
+    # "function name(args)" phrase and must NOT already exist in any stated file:
+    # a name that is already defined is a rename or an edit, not an addition.
+    if ({"symbol", "new_symbol", "function_name", "new_function"} & keys
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(fn_phrases) == 1:
+            _name = fn_phrases[0][0]
+            _existing = set()
+            for _f in [f for f in sources if f.endswith(".py")]:
+                _ft = _tree_of(root, _f)
+                if _ft is None:
+                    continue
+                _existing |= {n.name for n in ast.walk(_ft)
+                              if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+            if _NAME_RE.match(_name) and _name not in _existing:
+                for key in ({"symbol", "new_symbol", "function_name", "new_function"} & keys):
+                    if key not in out:
+                        out[key] = {"value": _name, "rule": "CREATED_FUNCTION_NAME_STATED",
+                                    "evidence": _name}
+    # DESTINATION GRAMMAR: "Add a function f to <path>" names the one file the
+    # addition goes INTO even when the same sentence names other files for other
+    # roles ("export it from <path2>", "add a test for it in <path3>").  The role
+    # word is the evidence: exactly one STATED source file is the operand of
+    # "to".  Without this the row refused BINDING_REFUSED:module:not_stated on the
+    # very sentence written for it, because the one-file rule only fires when one
+    # file is stated.
+    _py_stated = [f for f in sources if f.endswith(".py")]
+    if ("module" in keys and "module" not in out and len(_py_stated) > 1
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        _to_hits = [m.group(1).rstrip(".,;:") for m in
+                    re.finditer(r"\bto\s+([^\s,;]+)", str(goal or ""), re.I)]
+        _exact = [h for h in _to_hits if h in _py_stated]
+        if len(_exact) == 1:
+            out["module"] = {"value": _exact[0], "rule": "MODULE_FROM_STATED_TO_TARGET",
+                             "evidence": _exact[0]}
+    # The export target is the file the sentence says to export FROM, matched
+    # against the files it actually states.
+    if "export_module" in keys and "export_module" not in out:
+        _stated_all = set(stated_existing_files(str(goal or ""), pathlib.Path(root)))
+        _exp = [m.group(1).rstrip(".,;:") for m in _EXPORT_FROM.finditer(str(goal or ""))]
+        _exp = [h for h in _exp if h in _stated_all]
+        if len(_exp) == 1:
+            out["export_module"] = {"value": _exp[0], "rule": "EXPORT_TARGET_STATED",
+                                    "evidence": _exp[0]}
+    # The signature and the returned expression, read off the one "function
+    # name(args)" phrase and the one "returns X" phrase, verbatim.
+    if (({"params", "parameters"} & keys) or ({"body", "expression", "returns"} & keys)) \
+            and _CREATES_A_FUNCTION.search(str(goal or "")):
+        _fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(_fn_phrases) == 1:
+            _fname, _raw_params = _fn_phrases[0]
+            _params = [t.strip() for t in _raw_params.split(",") if t.strip()]
+            if all(_NAME_RE.match(t) for t in _params):
+                for key in ({"params", "parameters"} & keys):
+                    out[key] = {"value": _params, "rule": "PARAMS_FROM_STATED_SIGNATURE",
+                                "evidence": "%s(%s)" % (_fname, _raw_params.strip())}
+                for key in ({"body", "expression", "returns"} & keys):
+                    _rets = [r.strip() for r in _RETURNS_EXPR.findall(str(goal or "")) if r.strip()]
+                    if len(_rets) == 1:
+                        try:
+                            ast.parse("_ = (" + _rets[0] + ")", mode="exec")
+                        except SyntaxError:
+                            continue
+                        out[key] = {"value": _rets[0], "rule": "EXPRESSION_STATED_VERBATIM",
+                                    "evidence": _rets[0]}
+    # The TEST FILE a feature request is told to create does not exist yet, so it
+    # can never be in stated_existing_files -- and the slot is still stated.
+    if ({"test_paths", "test_path", "test_file"} & keys):
+        _created = [c.rstrip(".,;:") for c in _CREATED_TEST.findall(str(goal or ""))]
+        _created = [c for c in _created if c.endswith(".py")]
+        if len(set(_created)) == 1:
+            for key in ({"test_paths", "test_path", "test_file"} & keys):
+                if key not in out:
+                    value = [_created[0]] if key == "test_paths" else _created[0]
+                    out[key] = {"value": value, "rule": "CREATED_TEST_PATH_STATED",
+                                "evidence": _created[0]}
+    # A tree to edit, when the sentence names the module the addition goes INTO
+    # and other files for other roles: that module's own directory is the root
+    # the operation is confined to.
+    if ("source_root" in keys and "source_root" not in out and "module" in out
+            and str((out.get("module") or {}).get("rule") or "") == "MODULE_FROM_STATED_TO_TARGET"):
+        _parent = str(pathlib.PurePosixPath(str(out["module"]["value"])).parent)
+        if _parent and (pathlib.Path(root) / _parent).is_dir():
+            out["source_root"] = {"value": _parent, "rule": "PATH_DIR_FROM_STATED_MODULE",
+                                  "evidence": str(out["module"]["value"])}
+    # An ADDED parameter is a name the sentence states and the stated function
+    # does NOT already declare, which is what makes it an addition rather than a
+    # rename.  Both halves are stated evidence: the name from the one
+    # add-parameter phrase, the function from the symbol/qualname proofs above,
+    # and the check is the parameter list the file really has.
+    if "new_param" in keys and "new_param" not in out:
+        _added = [n for n in dict.fromkeys(_ADDED_PARAM.findall(str(goal or "")))
+                  if _NAME_RE.match(n)]
+        _host = str((out.get("symbol") or out.get("qualname") or {}).get("value") or "")
+        if len(_added) == 1 and _host:
+            for _f in [f for f in sources if f.endswith(".py")]:
+                _tf = _tree_of(root, _f)
+                if _tf is None:
+                    continue
+                for _node in ast.walk(_tf):
+                    if not isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    if _node.name != _host.split(".")[-1]:
+                        continue
+                    _declared = [x.arg for x in (list(_node.args.args)
+                                                 + list(_node.args.kwonlyargs)
+                                                 + list(getattr(_node.args, "posonlyargs", []) or []))]
+                    if _added[0] in _declared:
+                        break
+                    out["new_param"] = {"value": _added[0],
+                                        "rule": "ADDED_PARAM_STATED_AND_NOT_DECLARED",
+                                        "evidence": "%s:%s" % (_f, _host)}
+                    break
+                if "new_param" in out:
+                    break
 
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file

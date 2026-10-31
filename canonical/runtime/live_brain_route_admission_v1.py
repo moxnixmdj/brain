@@ -1365,6 +1365,20 @@ _REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
 _EDIT_PROMISE_RE = re.compile(
     r"\b(?:repair|fix|patch|correct|add|insert|update|modify|replace|rewrite|"
     r"refactor|extract|inline|rename|split|strip)\b", re.IGNORECASE)
+# ...and the verb must be used AS A VERB.  `add`, `move` and `split` are also the
+# names of functions, and English says so in front of a name.  Measured: without
+# this, "Find every caller of the function add in <pkg/mod.py>" -- a question
+# that promises nothing about any file's bytes -- matched `add`, demanded mod.py
+# change, and refused a run that had answered correctly with a callers report.
+# So a match is a promise only when it is not naming a symbol (def/class/
+# function/method/named/called/parameter/argument/variable/symbol/module/file
+# immediately before it) and is not a call (`add(`).
+_NAME_INTRODUCTION_RE = re.compile(
+    r"(?:\b(?:def|class|function|method|parameter|argument|variable|symbol|"
+    r"attribute|field|module|file|named|called|helper)\s+(?:of\s+|the\s+)*)$",
+    re.IGNORECASE)
+
+
 # "a measured acceptance repair report" is a noun phrase naming an artifact,
 # not an instruction to mutate a source file.  A file actually named report.py
 # is still a repair target: the negative lookahead keeps that distinction.
@@ -1393,6 +1407,12 @@ def _intent_verb_matches(pattern, text: str):
     """
     roles = front._role_phrases("qualname") + front._role_phrases("function")
     for match in pattern.finditer(text):
+        # A verb immediately followed by "(" is a CALL, not an instruction:
+        # "Explain what add(1, 2) does in X.py" asks a question about a call site
+        # and promises nothing about X.py's bytes.  Measured: without this the
+        # sentence demanded the file change and refused a correct answer.
+        if text[match.end():match.end() + 1] == "(":
+            continue
         named = front._role_anchored(text, match.group(0), roles, index=match.start())
         # Keep the supported name boundary narrow: "function add in X" names
         # add, whereas "make the function add a parameter" still requests an
@@ -2513,7 +2533,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 # rules. Use it before ANY lexical dispatch, even when the raw
                 # id looks compatible: its output may still bind onto source.
                 if selected and (_typed_plan._family_terms(prose) is not None
-                                 or not _typed_plan._effect_consistent(prose, selected)):
+                                 or not _typed_plan._effect_consistent(
+                                     prose, selected, (context[0] or {}).get(selected))):
                     corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
                     if corrected is None:
                         # Structured obligations are unbound regardless of which
@@ -2565,6 +2586,26 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 "incremental_spend_usd": 0,
             }
             return retry
+        # The retry may not REPLACE this verdict, but the reason it was refused is
+        # the most readable sentence in the run: the primary status here is a
+        # routing failure ("R3_WEAK_EVIDENCE" naming a DOCX converter), while the
+        # retry reached the capability the sentence named and was stopped by a
+        # gate with a real reason. Measured: "Add a parameter qty ... update every
+        # caller" refused correctly and told the caller only about the DOCX
+        # converter, discarding PROMISED_SOURCE_CHANGE_NOT_APPLIED: app/models.py.
+        if retry.get("pass") is not True:
+            result["typed_swe_retry_refusal"] = {
+                "schema": "SWE_TYPED_RETRY_REFUSAL_V1",
+                "primary_status": result.get("status"),
+                "status": retry.get("status"),
+                "failure_class": retry.get("failure_class"),
+                "selected_capability": plan[2].get("selected_capability"),
+                "compiled_capability_id": retry.get("compiled_capability_id"),
+                "promised_source_change_errors": retry.get("promised_source_change_errors"),
+                "observed_effect_errors": retry.get("observed_effect_errors"),
+                "promised_artifact_errors": retry.get("promised_artifact_errors"),
+                "model_dependency_count": 0,
+            }
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
         pass
     return result

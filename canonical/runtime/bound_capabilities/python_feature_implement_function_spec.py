@@ -510,6 +510,17 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "verified": True,
         "output_verified": True,
     }
+    # The report is not source.  When the binder hands this run the same path it
+    # just wrote as the target module, the test file or the package __init__, the
+    # report must move aside instead of overwriting the work: measured
+    # 2026-10-31, output_path and test_path both bound tests/test_total.py on
+    # "Add a function total_cents(item) ... and add a test for it in
+    # tests/test_total.py", so the generated test was replaced by this JSON and
+    # the run still reported output_verified=true for a suite that could not
+    # import.  A report that eats its own artifact is the worst class of pass.
+    _written = {target_file, test_file, init_file}
+    if out_path in _written:
+        out_path = out_path.with_name(out_path.stem + ".report.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     raw = (json.dumps(report, indent=2, sort_keys=True) + "\n").encode("utf-8")
     out_path.write_bytes(raw)

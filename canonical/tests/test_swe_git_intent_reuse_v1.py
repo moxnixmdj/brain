@@ -88,3 +88,16 @@ def test_commit_message_words_do_not_select_extra_operations(message):
 
 def test_repository_context_inside_payload_does_not_authorize_commit():
     assert derivation.stated_git_operations("Commit the transaction with payload 'git'") == ()
+
+
+def test_index_contract_does_not_expand_source_scope_to_unrelated_ancestor_tests():
+    import tempfile
+    parent = ROOT / "canonical/astra_runtime/tmp"
+    parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="intent-source-scope-", dir=parent) as raw:
+        source = Path(raw) / "m.py"
+        source.write_text("def f():\n    return 1\n")
+        rel = source.relative_to(ROOT).as_posix()
+        plan = typed.build_plan("Find every caller of the function f in " + rel, ROOT)
+        assert plan is not None
+        assert plan[2]["inputs"]["source_root"] == source.parent.relative_to(ROOT).as_posix()
