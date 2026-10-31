@@ -220,29 +220,78 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                     lambda n: ast.UnaryOp(op=ast.Not(),operand=n)
                 )
 
-"""Child-side source injected into every traced suite execution.
+"""Child-side suite execution shared by repair, measurement and tracing.
 
-runpy.run_path(..., run_name="__main__") only executes the tests when the file carries that guard.
-34% of the unittest files in this repository (695 of 2019, measured) do not, because they are meant
-to be collected by a runner. For those the traced child produced no failures at all, so the caller
-raised NO_FAILING_TEST and the whole localization-and-repair chain was dead on a third of the corpus.
-
-A second shape is not a unittest suite at all: 710 files in this repository hold 3880 bare
-``def test_*`` functions in the pytest style, from which the unittest loader collects nothing. The
-runpy fallback executes the module but never enters a function body, so those tests were invisible
-too. They are wrapped in unittest.FunctionTestCase, the standard library type built for exactly
-that, so they run through the same runner and produce the same parseable summary. A function that
-requires an argument is skipped rather than guessed at, and a module with neither shape still falls
-back to runpy.
-
-Loading the module and running the collected suite works for both shapes, and the first failure is
-re-raised with its original traceback so the caller can still rank the lines that actually executed.
-The suite is run through unittest.TextTestRunner so the child still prints the standard summary and
-FAIL:/ERROR: lines, which is what the repair loops parse to score a baseline; the first failure is
-then re-raised so a tracing caller can still rank the lines that executed. Files that are not
-unittest suites fall back to runpy, so nothing that worked before changes.
+Plain unittest suites keep their fast stdlib path. Pytest-style suites are run
+by the real framework when available; fixtures, parametrization, configuration
+and test classes are not reimplemented or silently skipped. When pytest is
+needed but unavailable the run fails closed. Simple bare functions still work
+without pytest. The first real failure retains its traceback for the localizer,
+and the pytest reporter emits the same counted summary consumed by existing
+repair and audit code. This is test execution, not an OS security sandbox.
 """
-SUITE_RUNNER = """import importlib.util,inspect,unittest
+SUITE_RUNNER = r'''import ast,importlib.util,inspect,os,pathlib,runpy,sys,time,tokenize,unittest
+
+def _brain_suite_shape(target):
+ with tokenize.open(str(target)) as source:tree=ast.parse(source.read(),filename=str(target))
+ prefer_pytest=False
+ require_pytest=bool(os.environ.get("PYTEST_ADDOPTS") or os.environ.get("PYTEST_PLUGINS"))
+ script=False
+ for parent in (target.parent,*target.parent.parents):
+  if (parent/"conftest.py").is_file() or (parent/"pytest.ini").is_file() or (parent/".pytest.ini").is_file():
+   require_pytest=True
+  for name,markers in (("pyproject.toml",("[tool.pytest",)),("setup.cfg",("[tool:pytest]",)),("tox.ini",("[pytest]",))):
+   config=parent/name
+   if config.is_file():
+    try: content=config.read_text(encoding="utf-8")
+    except (OSError,UnicodeError): require_pytest=True;continue
+    if any(marker in content for marker in markers):require_pytest=True
+ for node in ast.walk(tree):
+  if isinstance(node,ast.Name) and node.id in ("pytest","pytestmark","pytest_plugins"):require_pytest=True
+  if isinstance(node,ast.Import) and any(a.name.split(".")[0]=="pytest" for a in node.names):require_pytest=True
+  if isinstance(node,ast.ImportFrom) and (node.module or "").split(".")[0]=="pytest":require_pytest=True
+ unittest_modules=set();unittest_cases=set();case_names={"TestCase","IsolatedAsyncioTestCase"}
+ for node in tree.body:
+  if isinstance(node,ast.Import):
+   unittest_modules.update(a.asname or a.name for a in node.names if a.name=="unittest")
+  elif isinstance(node,ast.ImportFrom) and node.module in ("unittest","unittest.case","unittest.async_case"):
+   for alias in node.names:
+    if alias.name=="*":unittest_cases.update(case_names)
+    elif alias.name in case_names:unittest_cases.add(alias.asname or alias.name)
+ for node in tree.body:
+  if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name.startswith("test_"):
+   prefer_pytest=True
+   args=node.args
+   if (isinstance(node,ast.AsyncFunctionDef) or node.decorator_list or args.posonlyargs or args.args
+       or args.kwonlyargs or args.vararg or args.kwarg or any(isinstance(x,(ast.Yield,ast.YieldFrom)) for x in ast.walk(node))):
+    require_pytest=True
+  elif isinstance(node,ast.ClassDef):
+   unittest_base=any((isinstance(b,ast.Name) and b.id in unittest_cases) or
+                     (isinstance(b,ast.Attribute) and b.attr in case_names and
+                      isinstance(b.value,ast.Name) and b.value.id in unittest_modules) for b in node.bases)
+   if unittest_base:unittest_cases.add(node.name)
+   elif node.name.startswith("Test"):require_pytest=True
+  elif isinstance(node,ast.Assert):script=True
+  elif isinstance(node,ast.If):
+   names={x.id for x in ast.walk(node.test) if isinstance(x,ast.Name)}
+   values={x.value for x in ast.walk(node.test) if isinstance(x,ast.Constant) and isinstance(x.value,str)}
+   if "__name__" in names and "__main__" in values:script=True
+ return prefer_pytest,require_pytest,script
+
+def _brain_project_file(frame,root,cache):
+ if frame is None:return None
+ filename=frame.f_code.co_filename
+ if filename.startswith("<") and filename.endswith(">"):return None
+ try:cwd=os.getcwd() if not os.path.isabs(filename) else None
+ except OSError:return None
+ key=(filename,cwd)
+ if key not in cache:
+  try:
+   path=pathlib.Path(filename).resolve()
+   cache[key]=path if path.is_file() and root in path.parents and path.suffix==".py" else None
+  except (OSError,ValueError):cache[key]=None
+ return cache[key]
+
 def _brain_bare_functions(mod):
  out=[]
  for name in sorted(vars(mod)):
@@ -250,43 +299,144 @@ def _brain_bare_functions(mod):
   fn=vars(mod)[name]
   if not callable(fn):continue
   try:params=list(inspect.signature(fn).parameters.values())
-  except (TypeError,ValueError):continue
-  needs=[p for p in params if p.default is p.empty and p.kind in (p.POSITIONAL_ONLY,p.POSITIONAL_OR_KEYWORD)]
-  if needs:continue
+  except (TypeError,ValueError):raise RuntimeError("UNSUPPORTED_TEST_SIGNATURE:"+name)
+  needs=[p for p in params if p.default is p.empty and p.kind in (p.POSITIONAL_ONLY,p.POSITIONAL_OR_KEYWORD,p.KEYWORD_ONLY)]
+  if needs:raise RuntimeError("PYTEST_REQUIRED:"+name)
   out.append((name,fn))
  return out
-def _brain_run_suite(target):
- import runpy,sys
- _d=str(target.resolve().parent)
- if _d not in sys.path:sys.path.insert(0,_d)
+
+def _brain_reraise_failure(exc,tb):
+ # Re-raising SystemExit(0) would turn a failed test or aborted collection
+ # into a successful process while still printing a failure summary.
+ if isinstance(exc,SystemExit) and exc.code in (None,0):
+  raise AssertionError("TEST_RAISED_SYSTEM_EXIT_ZERO").with_traceback(tb) from exc
+ raise exc.with_traceback(tb)
+
+def _brain_run_stdlib(target,script):
+ directory=str(target.resolve().parent)
+ if directory not in sys.path:sys.path.insert(0,directory)
  spec=importlib.util.spec_from_file_location("__brain_suite__",str(target))
  mod=importlib.util.module_from_spec(spec);sys.modules["__brain_suite__"]=mod
  spec.loader.exec_module(mod)
  suite=unittest.TestLoader().loadTestsFromModule(mod)
+ for _,fn in _brain_bare_functions(mod):suite.addTest(unittest.FunctionTestCase(fn))
  if suite.countTestCases()==0:
-  bare=_brain_bare_functions(mod)
-  if not bare:
-   runpy.run_path(str(target),run_name="__main__");return
-  suite=unittest.TestSuite(unittest.FunctionTestCase(fn) for _,fn in bare)
+  if not script:raise RuntimeError("NO_TESTS_COLLECTED:"+str(target))
+  try:runpy.run_path(str(target),run_name="__main__")
+  except SystemExit as exc:
+   if exc.code not in (None,0):raise
+  return
  class _R(unittest.TestResult):
-  def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None
+  def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None;self.no_passing=False
   def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err
   def addError(self,test,err):unittest.TestResult.addError(self,test,err);self.err=err
+  def stopTestRun(self):
+   unittest.TestResult.stopTestRun(self)
+   # Existing consumers understand skipped, not unittest's expected-failure label.
+   self.skipped.extend((test,"expected failure") for test,_ in self.expectedFailures)
+   self.expectedFailures.clear()
+   self.errors.extend((test,"unexpected success") for test in self.unexpectedSuccesses)
+   self.unexpectedSuccesses.clear()
+   if self.testsRun and self.testsRun==len(self.skipped):
+    self.no_passing=True;self.testsRun+=1;self.errors.append((None,"no passing tests executed"))
  res=unittest.TextTestRunner(stream=sys.stderr,resultclass=_R).run(suite)
  if not res.wasSuccessful():
-  if res.err:raise res.err[1].with_traceback(res.err[2])
+  if res.err:_brain_reraise_failure(res.err[1],res.err[2])
+  if res.no_passing:raise RuntimeError("NO_PASSING_TESTS_EXECUTED")
   raise AssertionError("SUITE_FAILED_WITHOUT_EXCEPTION_INFO")
-"""
 
+def _brain_run_pytest(targets,shapes):
+ import pytest
+ class _Report:
+  def __init__(self):
+   self.nodes=set();self.collected_files=set();self.selected_files=set()
+   self.passed=0;self.failed=0;self.errors=0;self.skipped=0;self.exception=None
+  def _file(self,item):
+   path=getattr(item,"path",None) or getattr(item,"fspath",None)
+   return pathlib.Path(str(path)).resolve() if path is not None else None
+  def pytest_itemcollected(self,item):
+   self.collected_files.add(self._file(item))
+  def pytest_collection_finish(self,session):
+   self.selected_files.update(self._file(item) for item in session.items)
+  @pytest.hookimpl(hookwrapper=True)
+  def pytest_runtest_makereport(self,item,call):
+   outcome=yield
+   report=outcome.get_result()
+   if report.failed and call.excinfo and self.exception is None:
+    self.exception=(call.excinfo.value,call.excinfo.tb)
+  def pytest_runtest_logreport(self,report):
+   if report.when=="call":
+    self.nodes.add(report.nodeid)
+    if report.failed:self.failed+=1
+    elif report.skipped:self.skipped+=1
+    elif report.passed:self.passed+=1
+   elif report.when=="setup" and (report.failed or report.skipped):
+    self.nodes.add(report.nodeid)
+    if report.failed:self.errors+=1
+    else:self.skipped+=1
+   elif report.when=="teardown" and report.failed:self.errors+=1
+  def pytest_collectreport(self,report):
+   if report.failed:self.errors+=1
+ report=_Report();started=time.monotonic()
+ status=int(pytest.main(["-q","-p","no:cacheprovider"]+[str(t) for t in targets],plugins=[report]))
+ if status in (0,5) and not report.errors:
+  for target,shape in zip(targets,shapes):
+   if target in report.selected_files:continue
+   if shape[2] and target not in report.collected_files:
+    # Pytest imports a script but does not execute its __main__ guard.
+    try:runpy.run_path(str(target),run_name="__main__")
+    except BaseException as exc:
+     if isinstance(exc,SystemExit) and exc.code in (None,0):report.passed+=1;continue
+     report.errors+=1;status=1
+     if report.exception is None:report.exception=(exc,exc.__traceback__)
+    else:report.passed+=1
+   else:
+    sys.stderr.write("NO_TESTS_COLLECTED_IN_TARGET:"+str(target)+"\n")
+    report.errors+=1;status=1
+  if status==5 and report.passed and not report.errors:status=0
+ if status==0 and report.passed==0:
+  sys.stderr.write("NO_PASSING_TESTS_EXECUTED\n")
+  status=1;report.errors+=1
+ if status and not (report.failed or report.errors):report.errors+=1
+ # Collection, teardown and no-passing-oracle failures can add suite-level
+ # errors beyond the number of collected test nodes.
+ count=max(len(report.nodes),report.passed+report.failed+report.errors+report.skipped)
+ sys.stderr.write("Ran %d test%s in %.3fs\n\n"%(count,"" if count==1 else "s",time.monotonic()-started))
+ parts=[]
+ if report.failed:parts.append("failures=%d"%report.failed)
+ if report.errors:parts.append("errors=%d"%report.errors)
+ if report.skipped:parts.append("skipped=%d"%report.skipped)
+ sys.stderr.write(("FAILED" if status else "OK")+(" ("+", ".join(parts)+")" if parts else "")+"\n")
+ if status:
+  if report.exception:
+   exc,tb=report.exception
+   _brain_reraise_failure(exc,tb)
+  raise RuntimeError("PYTEST_EXECUTION_FAILED:"+str(status))
+
+def _brain_run_suites(targets):
+ targets=[pathlib.Path(t).resolve() for t in targets]
+ if not targets:raise RuntimeError("NO_TESTS_COLLECTED")
+ shapes=[_brain_suite_shape(t) for t in targets]
+ try:has_pytest=importlib.util.find_spec("pytest") is not None
+ except (ImportError,ValueError):has_pytest=False
+ if any(shape[1] for shape in shapes) and not has_pytest:
+  raise RuntimeError("PYTEST_REQUIRED:"+", ".join(str(t) for t,s in zip(targets,shapes) if s[1]))
+ if has_pytest and any(shape[0] or shape[1] for shape in shapes):
+  _brain_run_pytest(targets,shapes);return
+ errors=[]
+ for target,shape in zip(targets,shapes):
+  try:_brain_run_stdlib(target,shape[2])
+  except BaseException as exc:errors.append(exc)
+ if errors:_brain_reraise_failure(errors[0],errors[0].__traceback__)
+
+def _brain_run_suite(target):
+ _brain_run_suites([target])
+'''
 
 
 SUITE_ENTRY = (
     "import pathlib,sys\n"
-    "_errs=[]\n"
-    "for _t in sys.argv[1:]:\n"
-    " try:_brain_run_suite(pathlib.Path(_t).resolve())\n"
-    " except BaseException as _e:_errs.append(_e)\n"
-    "if _errs:raise _errs[0]\n"
+    "_brain_run_suites([pathlib.Path(_t).resolve() for _t in sys.argv[1:]])\n"
 )
 
 
@@ -294,17 +444,13 @@ def argv_names_a_target(argv: Any) -> bool:
     """True when a command line actually names a test suite to run.
 
     The runner ``suite_argv`` generates reads its targets from ``sys.argv[1:]``,
-    so ``[executable, "-c", script]`` names nothing at all: it executes zero
-    suites and exits 0.  A repair loop reads that exit status as
-    BASELINE_ALREADY_PASSES, which is a false "already passes" for a program
-    that fails its own test -- measured on e2d7981d for "Run the iterative
-    repair loop on the python source root D using the tests", where the bound
-    ``test_argv`` carried no target, the loop raised BASELINE_ALREADY_PASSES
-    against a suite that really was failing, and the whole lane was unreachable.
+    so ``[executable, "-c", script]`` names no suite. An older runner returned
+    zero for that command, causing a false BASELINE_ALREADY_PASSES result. The
+    runner now fails closed, and this check also lets callers derive the actual
+    discovered targets instead of retaining an empty command.
 
-    A caller-supplied command line is worth keeping only when it really does
-    name something to run.  Targets follow the ``-c`` script when there is one,
-    and otherwise any non-flag element after the executable is a target.
+    Targets follow the ``-c`` script when there is one; otherwise any non-flag
+    element after the executable is treated as a target.
     """
     items = [str(x) for x in (argv or [])]
     if not items:
@@ -328,18 +474,14 @@ def argv_or_derived(supplied: Any, executable: Any, *targets: Any) -> list[str]:
 
 
 def suite_argv(executable: Any, *targets: Any) -> list[str]:
-    """A command line that runs suites through the loader instead of executing the files.
+    """Run named suites with the applicable framework and a counted result.
 
-    Running a test file as a script only starts the tests when the file carries a __main__ guard, and
-    34% of the unittest files in this repository (695 of 2019, measured) do not, because they are
-    written to be collected by a runner. Such a run executes nothing and exits 0, which a repair loop
-    reads as BASELINE_ALREADY_PASSES - a false "already passes" for a program that fails its own test.
-    Delegating to SUITE_RUNNER collects the tests the way a real runner does and falls back to runpy
-    for files that are not unittest suites, so the shape of the file stops deciding whether a
-    capability can see its failures.
-
-    Every suite named is run and the first failure is re-raised, so a baseline over several files
-    fails if any one of them fails, which is what a repair loop needs.
+    Unittest suites and simple bare functions retain a stdlib-only path. When
+    installed, pytest collects pytest-style suites together, including fixtures,
+    parametrization and project configuration. Without pytest, suites requiring
+    it fail explicitly instead of skipping cases and reporting success. A file
+    without tests or an explicit script oracle and a command with no targets
+    fail closed. Failures retain their tracebacks for localization.
     """
     return [str(executable), "-c", SUITE_RUNNER + SUITE_ENTRY] + [str(x) for x in targets]
 
@@ -473,6 +615,8 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     output=(repo/str(args.get("output_path") or "")).resolve()
     if output==repo or repo not in output.parents:
         raise PatchSearchError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+    from canonical.runtime.write_authority_v1 import check_report
+    check_report(repo, output, [source, *tests])
     original_bytes=source.read_bytes()
     try:
         source_text=original_bytes.decode("utf-8")
