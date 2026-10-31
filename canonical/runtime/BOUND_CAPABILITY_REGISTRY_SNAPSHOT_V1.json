@@ -7092,6 +7092,7 @@
           "capability_id": "python.software.repair.apply.verified.v1",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
+          "synthesize_regression_test": "${input.synthesize_regression_test}",
           "test_argv": "${input.test_argv}",
           "test_paths": "${input.test_paths}",
           "timeout_s": 60
@@ -7102,7 +7103,8 @@
           "value": true
         },
         "optional": [
-          "test_argv"
+          "test_argv",
+          "synthesize_regression_test"
         ],
         "type": "invoke_capability"
       },
@@ -10279,7 +10281,8 @@
         "software.concurrency.race.condition.fix",
         "security.sql.injection.remove",
         "performance.quadratic.linearithmic.optimize",
-        "dependency.deprecated.inspect.migrate"
+        "dependency.deprecated.inspect.migrate",
+        "source.repair.applied"
       ],
       "requires": [
         "python.fault.localization.symbol_ranked",

@@ -995,6 +995,98 @@ def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
         raise LocalExecutionFailure("ACTION_EXPECTATION_FAILED:" + field + ":OBSERVED=" + observed[:800] + ((":REASON=" + reason) if reason else ""))
 
 
+def _materialize_upstream_swe_chain(cid: str, entry: Mapping[str, Any], call_args: dict[str, Any]) -> None:
+    """Resolve missing requires ∩ provides upstream artifacts via capability_planner + live_capability_composition_v1."""
+    reqs = {str(r) for r in (entry.get("requires") or []) if str(r).strip()}
+    if not reqs:
+        return
+    src_root = call_args.get("source_root")
+    if not isinstance(src_root, str) or not src_root.strip():
+        return
+    needs_index = "index_path" in call_args and (
+        not call_args.get("index_path") or not (ROOT / str(call_args["index_path"])).is_file()
+    )
+    needs_sel = "selection_path" in call_args and (
+        not call_args.get("selection_path") or not (ROOT / str(call_args["selection_path"])).is_file()
+    )
+    if not (needs_index or needs_sel):
+        return
+    from canonical.runtime import capability_planner as _cp
+    from canonical.runtime import live_capability_composition_v1 as _lcc
+
+    reg = load_verified_registry()
+    is_ts = cid.startswith("code.") or any("tree_sitter" in r or "multilanguage" in r for r in reqs)
+    idx_cid = "code.index.tree_sitter.incremental.v1" if is_ts else "python.source.symbols.index.ast"
+    sel_cid = "code.impact.tree_sitter.testselect.v1" if is_ts else "python.source.change_impact.testselect.v1"
+    if idx_cid not in reg:
+        return
+    import hashlib
+    tag = hashlib.sha256((cid + "\0" + src_root).encode("utf-8")).hexdigest()[:12]
+    spool_dir = "canonical/astra_runtime/tmp/chain_spool"
+    (ROOT / spool_dir).mkdir(parents=True, exist_ok=True)
+    idx_out = f"{spool_dir}/{tag}_index.json"
+    sel_out = f"{spool_dir}/{tag}_selection.json"
+
+    target_effects: list[str] = []
+    caps_problem: list[dict[str, Any]] = []
+    if needs_index or needs_sel:
+        idx_entry = reg[idx_cid]
+        idx_provs = [str(p) for p in (idx_entry.get("provides") or [])] or [idx_cid]
+        caps_problem.append({
+            "id": idx_cid,
+            "requires": [],
+            "provides": idx_provs,
+            "cost": 1,
+            "result_fields": ["output_path"],
+            "action": {"type": "invoke_capability", "args": {"capability_id": idx_cid, "source_root": src_root, "output_path": idx_out}},
+        })
+        if needs_index:
+            target_effects.append(idx_provs[0])
+    if needs_sel and sel_cid in reg and call_args.get("changed_paths"):
+        sel_entry = reg[sel_cid]
+        sel_provs = [str(p) for p in (sel_entry.get("provides") or [])] or [sel_cid]
+        idx_prov = caps_problem[0]["provides"][0]
+        caps_problem.append({
+            "id": sel_cid,
+            "requires": [idx_prov],
+            "provides": sel_provs,
+            "cost": 1,
+            "result_fields": ["output_path"],
+            "action": {
+                "type": "invoke_capability",
+                "args": {
+                    "capability_id": sel_cid,
+                    "source_root": src_root,
+                    "index_path": idx_out,
+                    "changed_paths": call_args["changed_paths"],
+                    "output_path": sel_out,
+                },
+            },
+        })
+        target_effects.append(sel_provs[0])
+    if not target_effects:
+        return
+    plan = _cp.plan_actions({"initial_facts": [], "target_effects": target_effects, "capabilities": caps_problem})
+    nodes = []
+    for i, step in enumerate(plan.get("steps") or []):
+        scid = step["capability_id"]
+        sargs = dict((step.get("action") or {}).get("args") or {})
+        if i > 0 and "index_path" in sargs:
+            sargs["index_path"] = {"$ref": "steps.step0.output_path"}
+        nodes.append({"id": f"step{i}", "capability_id": scid, "payload": sargs})
+    if not nodes:
+        return
+    comp_res = _lcc.execute_composition(
+        {"nodes": nodes, "inputs": {}},
+        executor=lambda step_cid, payload: run_adapter_locally(reg[step_cid], {"args": dict(payload), "expect": (reg[step_cid].get("action_template") or {}).get("expect")}),
+    )
+    if comp_res.get("verified") is True:
+        if needs_index and (ROOT / idx_out).is_file():
+            call_args["index_path"] = idx_out
+        if needs_sel and (ROOT / sel_out).is_file():
+            call_args["selection_path"] = sel_out
+
+
 def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> dict[str, Any]:
     """E1: execute one bound adapter the way the kernel would, for source types the kernel refuses.
 
@@ -1037,6 +1129,10 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     # is the single function every local adapter invocation passes through, so
     # the rule is enforced once for the door, the composer and every composed
     # step.  LocalExecutionFailure keeps it a typed, closed refusal.
+    try:
+        _materialize_upstream_swe_chain(cid, entry, call_args)
+    except Exception:  # noqa: BLE001 - upstream chain failure falls through to normal fail-closed check
+        pass
     try:
         from canonical.runtime import write_authority_v1 as _write_authority
         _write_authority.check(ROOT, call_args, cid)
@@ -1083,6 +1179,14 @@ def _empty_test_selection(goal: str, result: Mapping[str, Any]) -> bool:
 def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry: Mapping[str, Any], action: Mapping[str, Any],
                      raw_contract: Mapping[str, Any], started: int) -> dict[str, Any]:
     selected = str(compiled.get("selected_capability") or "")
+    _comp_inputs = compiled.get("inputs") if isinstance(compiled.get("inputs"), Mapping) else {}
+    _tmpl_args = ((entry.get("action_template") or {}).get("args") or {}) if isinstance(entry.get("action_template"), Mapping) else {}
+    if _comp_inputs and _tmpl_args and isinstance(action.get("args"), Mapping):
+        _merged_args = dict(action["args"])
+        for _ik, _iv in _comp_inputs.items():
+            if _ik in _tmpl_args and (_ik not in _merged_args or _merged_args.get(_ik) is None):
+                _merged_args[_ik] = _iv
+        action = {**action, "args": _merged_args}
     try:
         tool_result = run_adapter_locally(entry, action)
         if isinstance(tool_result, Mapping) and _empty_test_selection(goal, tool_result):
@@ -1976,6 +2080,58 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
                 r"\b(?:impact|affected)[ ._-]+tests?\b",
                 re.IGNORECASE),
      "STATED_CHANGE_IMPACT_NOT_ANSWERED_BY_CAPABILITY"),
+    # A DEFINITION COUNT IS NOT A PROFILE.  Measured 2026-10-31: with the five magnet rows
+    # removed from the registry, python.source.definition_count.v1 became the top row and
+    # answered "Profile <f> and tell me which function is the hot spot" with PASS -- a count of
+    # definitions, no timing, no samples, no hot spot named.  The same row then answered three
+    # more sentences of the same shape (see the three entries below).  A profile is a MEASUREMENT
+    # OVER TIME; the rows that take one say so in what they provide (cProfile, py-spy, scalene,
+    # a hotspot), and nothing in the registry declares it today -- so the honest outcome is a
+    # NAMED refusal rather than a count wearing the word "profile".
+    (re.compile(r"\bprofile\b|\bprofiler\b|\bprofil(?:e|ing)\b[^.\n]{0,40}"
+                r"\b(?:function|code|program|script|module|file)\b"
+                r"|\bhot[ _-]?spots?\b|\bbottleneck\b"
+                r"|\bwhich\s+(?:function|line|call)\b[^.\n]{0,40}\b(?:slowest|hottest|expensive)\b",
+                re.IGNORECASE),
+     re.compile(r"\bprofil(?:e|er|ing|ed)\b|cprofile|py[ _-]?spy|scalene|hot[ _-]?spot|bottleneck",
+                re.IGNORECASE),
+     "STATED_PROFILE_NOT_TAKEN_BY_CAPABILITY"),
+    # AN OPTIMISATION IS A CHANGE, NOT A DESCRIPTION.  Measured 2026-10-31: "Optimise the function
+    # total in <f>; it is too slow on large inputs" was answered PASS by the same definition
+    # counter.  Nothing was changed and nothing was measured.  The rows that really optimise
+    # declare the transformation they perform (the crossfile repair row provides
+    # ``performance.quadratic.linearithmic.optimize``); a row that only DESCRIBES performance
+    # (a diff perf gate reports a comparison) does not make the change, so it is not named here.
+    (re.compile(r"\boptimis(?:e|es|ed|ing)\b|\boptimiz(?:e|es|ed|ing)\b"
+                r"|\bspeed\s+(?:it|this|that)\s+up\b|\btoo\s+slow\b"
+                r"|\bmake\s+(?:it|this|that)\s+(?:faster|quicker)\b",
+                re.IGNORECASE),
+     re.compile(r"optimi[sz]\w*|quadratic|linearithmic|memo[is]\w*",
+                re.IGNORECASE),
+     "STATED_OPTIMISATION_NOT_PERFORMED_BY_CAPABILITY"),
+    # A SUMMARY IS NOT A THREAD.  Measured 2026-10-31: "Make the function total in <f> release the
+    # GIL while summing" was answered PASS by the definition counter.  ``release the GIL``,
+    # a thread pool, parallelism, a lock and a race condition are all statements about
+    # CONCURRENT EXECUTION, and a row that reports definitions has not touched one.
+    (re.compile(r"\brelease\s+the\s+gil\b|\bgil\b"
+                r"|\bthread[ _-]?pool\b|\bmulti[ _-]?thread\w*\b"
+                r"|\bparallel(?:ise|ize|ism|ly)?\b|\bconcurren\w*\b"
+                r"|\brace\s+condition\b|\bdeadlock\b|\bdata\s+race\b"
+                r"|\basync(?:hronous(?:ly)?)?\b|\bawait\b",
+                re.IGNORECASE),
+     re.compile(r"concurr\w*|thread|parallel|\brace\b|\bgil\b|async|mutex|deadlock|"
+                r"lock|synchron",
+                re.IGNORECASE),
+     "STATED_CONCURRENCY_NOT_ADDRESSED_BY_CAPABILITY"),
+    # FUZZING IS EXECUTION UNDER GENERATED INPUTS.  Measured 2026-10-31: "Fuzz the function add in
+    # <f> for integer overflow" was answered PASS by the definition counter -- nothing was
+    # generated, nothing was run, no input was tried.  Property-based testing is the same demand
+    # with a different generator, and the row that supplies it exists and declares it
+    # (evidence.oracle.hypothesis_property.v1 provides ``evidence.hypothesis.property_violation``).
+    (re.compile(r"\bfuzz(?:er|ing|ed)?\b|\bproperty[ _-]based\b|\bgenerative\s+testing\b",
+                re.IGNORECASE),
+     re.compile(r"fuzz|hypoth|property", re.IGNORECASE),
+     "STATED_FUZZ_OR_PROPERTY_RUN_NOT_PERFORMED_BY_CAPABILITY"),
 )
 
 
@@ -2418,6 +2574,14 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
     if _TRANSFORM_REQUEST_RE.search(text) and not _TRANSFORM_SURFACE_RE.search(
             " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])):
         out.append("STATED_CODE_TRANSFORM_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
+    if (re.search(r"\b(?:show|display|print|extract|locate|where\s+is|find)\s+(?:me\s+)?(?:the\s+)?definition\s+of\b",
+                  text, re.IGNORECASE)
+            and not re.search(r"\b(?:count|how\s+many|number\s+of)\b", text, re.IGNORECASE)
+            and cid == "python.source.definition_count.v1"):
+        out.append("STATED_EXTRACTION_ANSWERED_BY_A_COUNTER:" + cid)
+    if (re.search(r"\b(?:duplicat(?:ed|e|ion)|code\s+clones?)\b", text, re.IGNORECASE)
+            and not re.search(r"\b(?:duplicat\w*|clone)\b", surface, re.IGNORECASE)):
+        out.append("STATED_DUPLICATION_ANALYSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
     provides = " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])
     # The row's OWN declaration decides whether it writes, and ``capability_edits_source`` is the one
     # predicate that reads it (it is what ``repair_output_collisions`` already uses).  The keyword
@@ -4475,6 +4639,30 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = "STATED_ANSWER_NOT_PROVIDED"
         result["stated_answer_errors"] = unanswered
+    if result.get("pass") is True and (
+        _answered_by == "plain_goal.bound_capability.grounding.verify.stdlib"
+        or "plain_goal.bound_capability.grounding.verify.stdlib" in (result.get("selected_plan") or [])
+    ):
+        _all_rows = list(result.get("execution") or []) + list(((result.get("controller_execution") or {}).get("trace")) or [])
+        for _row in _all_rows:
+            if not isinstance(_row, Mapping):
+                continue
+            _rplan = _row.get("plan") if isinstance(_row.get("plan"), Mapping) else {}
+            _rinp = (_rplan.get("args") or {}).get("inputs") if isinstance(_rplan.get("args"), Mapping) else {}
+            _op = str((_rinp or {}).get("result_path") or ((_row.get("result") or {}).get("output_path") if isinstance(_row.get("result"), Mapping) else "") or "")
+            if _op and (ROOT / _op).is_file() and "grounding" not in normalized.lower():
+                try:
+                    _gdoc = json.loads((ROOT / _op).read_text(encoding="utf-8"))
+                    if _gdoc.get("grounded_clause_count") == 0 or any(
+                        isinstance(_c, Mapping) and str(_c.get("status") or "").startswith(("UNBOUND_", "UNRESOLVED"))
+                        for _c in (_gdoc.get("clauses") or [])
+                    ):
+                        result["runtime_status_before_grounding_check"] = result.get("status")
+                        result["status"] = "FAIL_CLOSED__GROUNDING_ARTIFACT_REPORTED_UNGROUNDED"
+                        result["pass"] = False
+                        result["failure_class"] = "GROUNDING_ARTIFACT_REPORTED_UNGROUNDED"
+                except Exception:  # noqa: BLE001
+                    pass
     # The third authority: what the filesystem says, not what the tool says.  A
     # run that did nothing, or that removed the file it was asked to edit, has no
     # claim to an exact acceptance no matter how clean its own report is.
