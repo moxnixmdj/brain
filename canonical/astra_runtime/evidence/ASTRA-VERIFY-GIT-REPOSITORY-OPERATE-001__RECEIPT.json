@@ -1,0 +1,94 @@
+{
+ "authority": "NONE",
+ "capability_id": "git.repository.operate.v1",
+ "carrier": "SANDBOX",
+ "credit": "0",
+ "honest_scope": [
+  "This receipt is a measurement produced in the sandbox by the same session that wrote the adapter; it is not independent verification by a different producer.",
+  "The independence it records is between two MECHANISMS inside the run (the operation and its plumbing cross-check), which is the same standard archive_verify_gnu_tar.py uses.",
+  "No capability credit, benchmark credit, ownership credit or terminal credit is claimed or implied."
+ ],
+ "incremental_spend_usd": 0,
+ "independent_check": {
+  "disagreements": 0,
+  "mechanism": "each operation's rows were re-derived by a DIFFERENT git plumbing command than the one that produced them",
+  "pairs": {
+   "blame": "git blame --line-porcelain vs git merge-base --is-ancestor",
+   "branch": "git for-each-ref vs git rev-parse <branch>",
+   "commit": "git commit vs git cat-file -t on the new object",
+   "diff": "git diff --numstat vs the patch text git diff",
+   "log": "git log vs git rev-list --max-count",
+   "show": "git show vs git cat-file -t",
+   "status": "git status --porcelain vs git diff --name-only HEAD"
+  }
+ },
+ "instance": {
+  "commits": 3,
+  "description": "hermetic repository built by the verifier: 2 commits, 1 staged modification, 1 untracked file",
+  "files": 3
+ },
+ "mission_id": "ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001",
+ "model_dependency_count": 0,
+ "observed_effect": {
+  "blame": {
+   "distinct_commits": 2,
+   "history_depth": 2,
+   "line_count": 2,
+   "op": "blame",
+   "target": "pkg/calc.py",
+   "uncommitted_lines": 0,
+   "unreachable": []
+  },
+  "branch": {
+   "branch_count": 1,
+   "current": "main",
+   "head_sha": "e1a9f3bd767c30cf47b4150f80ac09e7bc0c6e05",
+   "op": "branch"
+  },
+  "commit": {
+   "commit_sha": "a2ad8d4ac6656673efa845fcbc82f7725ac0c225",
+   "history_depth": 3,
+   "object_type": "commit",
+   "op": "commit",
+   "parent_sha": "e1a9f3bd767c30cf47b4150f80ac09e7bc0c6e05",
+   "subject": "add mean helper"
+  },
+  "diff": {
+   "file_count": 1,
+   "head_sha": "e1a9f3bd767c30cf47b4150f80ac09e7bc0c6e05",
+   "op": "diff",
+   "patch_bytes": 315,
+   "target": ""
+  },
+  "log": {
+   "commit_count": 2,
+   "head_sha": "e1a9f3bd767c30cf47b4150f80ac09e7bc0c6e05",
+   "limit": 3,
+   "oldest_sha": "f41133d30bf2a4cf0123524c63534d71fca33d4f",
+   "op": "log"
+  },
+  "show": {
+   "body_bytes": 68,
+   "object_type": "commit",
+   "op": "show",
+   "rev": "HEAD",
+   "sha": "e1a9f3bd767c30cf47b4150f80ac09e7bc0c6e05"
+  },
+  "status": {
+   "branch": "main",
+   "entry_count": 2,
+   "head_sha": "e1a9f3bd767c30cf47b4150f80ac09e7bc0c6e05",
+   "op": "status",
+   "staged": 1,
+   "tracked_changed": 1,
+   "unstaged": 0,
+   "untracked": 1
+  }
+ },
+ "oracle": "the git CLI, invoked by canonical/tests/test_git_repository_operate_v1.py, which recomputes every row from the repository itself",
+ "schema": "PROJECT_BRAIN_CAPABILITY_VERIFICATION_RECEIPT_V1",
+ "test_result": "16 passed",
+ "test_suite": "canonical/tests/test_git_repository_operate_v1.py",
+ "verified_commit": "5d2b0cfaf5ef73b7682d891b3513edae20b339a6",
+ "verified_on": "2026-10-29"
+}

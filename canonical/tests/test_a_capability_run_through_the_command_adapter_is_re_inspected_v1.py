@@ -142,10 +142,13 @@ class TestEndToEndAFamilyMemberIsCertified(unittest.TestCase):
         certified = 0
         checked = 0
         for cid in auto[:12]:
-            stem = re.sub(r"\.py\.auto\.v\d+$", "", cid.rsplit("/", 1)[-1])
-            stem = stem.replace("_", " ").replace(".", " ")
+            # The goal names the capability id: these rows are keyed by the path
+            # of a source file, and admission refuses one unless the sentence
+            # names that path or that id (a file name's words are not evidence
+            # about the goal).  What this test judges -- whether a passing
+            # command-lane capability reaches exact acceptance -- is unchanged.
             result = solve({"task_id": "FAMILY_%s" % cid.replace(".", "_")[:40],
-                            "goal": "Run the %s." % stem})
+                            "goal": "Run the %s." % cid})
             if result.get("pass") is not True:
                 continue
             checked += 1

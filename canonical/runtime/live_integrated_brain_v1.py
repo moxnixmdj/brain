@@ -186,11 +186,23 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
     doc = json.loads(reg_file.read_text(encoding="utf-8"))
     if doc.get("schema") not in ("PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1", "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1"):
         raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_SCHEMA_INVALID")
-    raw = dict(doc.get("capabilities") or {})
-    if snap_file.is_file() and snap_file != reg_file:
-        snap_doc = json.loads(snap_file.read_text(encoding="utf-8"))
-        if isinstance(snap_doc.get("capabilities"), Mapping):
-            raw.update(snap_doc["capabilities"])
+    raw = doc.get("capabilities")
+    if not isinstance(raw, Mapping):
+        raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_INVALID")
+    # A PROJECTION MAY ADD OR UPDATE A ROW; IT MAY NEVER DELETE ONE.
+    # The snapshot is therefore the FLOOR: everything it defines is
+    # present, and the snapshot wins collisions over older regenerated projections.
+    merged: dict[str, Any] = {}
+    snap_path = reg_file.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+    if snap_path.is_file() and snap_path != reg_file:
+        try:
+            snap_doc = json.loads(snap_path.read_text(encoding="utf-8"))
+            snap_rows = snap_doc.get("capabilities") if isinstance(snap_doc, dict) else None
+            if isinstance(snap_rows, Mapping):
+                merged.update(snap_rows)
+        except (OSError, ValueError):
+            pass
+    raw = {**raw, **merged}
     out: dict[str, Mapping[str, Any]] = {}
     for cid, entry in raw.items():
         if not isinstance(cid, str) or not isinstance(entry, Mapping):

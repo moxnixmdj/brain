@@ -92,11 +92,23 @@ class TestTheToolOwnExplanationReachesTheFailureReasonV1(unittest.TestCase):
                          "TOOL_REPORTED_NON_SUCCESS_STATUS:x.y.z:FAIL_CLOSED:V3_INPUT_REQUIRED")
 
     def test_real_capabilities_name_their_own_cause_end_to_end(self) -> None:
-        """Drives the real registry; the count is 0 on cc3bd40."""
+        """Drives the real registry; the count is 0 on cc3bd40.
+
+        The goal names the capability rather than describing it in prose.  The
+        three fixtures are inventory rows keyed by the PATH of a source file
+        (`...auto.v1`), and admission now requires the sentence to name that path
+        or that id: a filename's words are not evidence about the goal, and the
+        row's own tests pin the refusal
+        (`INVENTORY_FILE_IS_NOT_A_CAPABILITY_UNLESS_THE_SENTENCE_NAMES_IT`).
+        Prose wording therefore no longer reaches the capability at all -- the
+        goal is refused before anything runs, which has no cause to report.  The
+        law this test states is unchanged: when a capability DOES run and says
+        no, its own cause must reach the caller.
+        """
         named = 0
-        for index, (cid, prose) in enumerate(sorted(_PROSE.items())):
+        for index, cid in enumerate(sorted(_PROSE)):
             result = solve({"task_id": "TOOLCAUSE%02d" % index,
-                            "goal": "Run the %s." % prose})
+                            "goal": "Run the %s." % cid})
             self.assertIsNot(result.get("pass"), True,
                              "%s unexpectedly passed; pick another example" % cid)
             reason = failure_reason(result)
