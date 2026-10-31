@@ -134,3 +134,8 @@ Integration: main advanced to `6c6c5df48cd96802ace3e9e5266c9493cca92bfc`
 controls unchanged; regenerate the combined model through the official compiler.
 The earlier baseline comparison above remains bound to its explicitly stated
 `2e9b6427` tree, not relabeled as a measurement of the newer base.
+
+Second integration: main advanced to `9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c`
+(PR6486 requirement-effect declarations and route-admission negative controls).
+Retain those changes and the matrix guard unchanged, rebind the intent and
+regenerate the combined model officially. No earlier baseline result is relabeled.

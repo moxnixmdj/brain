@@ -23807,7 +23807,7 @@
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
    "requires": [
-    "python.source.symbols.index.ast"
+    "python.source.symbol_index"
    ],
    "route": {
     "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
@@ -24575,7 +24575,7 @@
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
    "requires": [
-    "python.source.symbols.index.ast"
+    "python.source.symbol_index"
    ],
    "route": {
     "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
@@ -25721,7 +25721,7 @@
    "requires": [
     "python.source.change_impact.testselect.v1",
     "python.source.crossfile_edit.choreograph.v1",
-    "python.source.symbols.index.ast"
+    "python.source.symbol_index"
    ],
    "route": {
     "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
@@ -27575,8 +27575,7 @@
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
    "requires": [
     "code.symbols.multilanguage.indexed",
-    "python.source.symbol_index",
-    "python.source.symbols.index.ast"
+    "python.source.symbol_index"
    ],
    "route": {
     "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
@@ -27946,7 +27945,7 @@
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
    "requires": [
-    "python.source.symbols.index.ast"
+    "python.source.symbol_index"
    ],
    "route": {
     "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
@@ -28824,7 +28823,7 @@
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
    "requires": [
     "python.fault.localization.symbol_ranked",
-    "python.source.symbols.index.ast"
+    "python.source.symbol_index"
    ],
    "route": {
     "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
@@ -30479,7 +30478,7 @@
   "engines": 26,
   "knowledge_documents": 216,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6544,
+  "research_index_records": 6545,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30488,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "042bcb69005dd407ce5c35df2b4574be28bb2a977de530f3a674768fa866d52a"
+  "value": "ee32456af57a5f98697bdf546c891f620d6729e8584f1bcdcf757f8f0d4fbbe0"
  },
  "engines": [
   {
@@ -58322,7 +58321,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 9195,
+   "bytes": 9514,
    "headings": [
     "SWE derivation content cache — local engineering evidence",
     "Reuse and mechanism",
@@ -58334,14 +58333,14 @@
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_CONTENT_CACHE_20261031.md",
-   "sha256": "e0481514ea79a469234384945adb127fb1f5cc32ce0feb2c974ca75081665a70",
+   "sha256": "4e0ab2ab5d09e58879d8157c7aaace45c6a75fc649937ab91c4ea60a5663a916",
    "summary": "Date: 2026-10-31. Baseline: `2e9b6427a1d5d7e22610810efd71e052fc343c4d` (main including PR6485). Scope: shared source evidence in `canonical/runtime/declared_input_derivation_v1.py` only, plus regressions, admission metadata and the official regenerated model projection.",
    "terms": {
     "12": 3,
     "24": 3,
     "after": 5,
     "ast": 7,
-    "baseline": 4,
+    "baseline": 5,
     "before": 6,
     "bound": 3,
     "bounded": 3,
@@ -58350,7 +58349,7 @@
     "canonical": 26,
     "cold": 4,
     "comparison": 4,
-    "controls": 5,
+    "controls": 6,
     "current": 4,
     "default": 3,
     "derivation": 4,
@@ -58363,11 +58362,11 @@
     "final": 3,
     "freshness": 3,
     "github": 3,
-    "main": 3,
+    "main": 4,
     "metadata": 3,
-    "model": 5,
+    "model": 6,
     "new": 4,
-    "no": 8,
+    "no": 9,
     "not": 15,
     "official": 3,
     "pair": 5,
@@ -58383,7 +58382,7 @@
     "test_real_caller_request_executes_index_without_modifying_source": 6,
     "test_swe_family_effect_filter_v1.py": 7,
     "tests": 30,
-    "unchanged": 6,
+    "unchanged": 7,
     "warm": 5
    },
    "title": "SWE derivation content cache — local engineering evidence",
@@ -58662,7 +58661,7 @@
   "included_source_count": 1007,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e87f1ace97042c7df75725e49eef8f427dddb5b99542c6ec949ca6d2f98e9add"
+  "source_tree_digest": "a579f4ca442bcf74bdcdf780d0cd82453277e3990b7f343391b8761fbacc7028"
  },
  "research_index": [
   {
@@ -208769,6 +208768,31 @@
    }
   },
   {
+   "action_id": "REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8c15c1b19718b48231a2d8855fbe5d321d4d0d60a4485c8fa036646f94080271",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_row_could_declare_as_its_requirement_the_name_of_another_row_and_no_check_compared_a_requirement_against_what_the_registry_publishes__six_swe_rows_required_the_capability_id_python_source_symbols_index_ast_which_is_not_an_effect_while_that_row_publishes_python_source_symbol_index__including_the_most_selected_row_in_the_advanced_census__and_the_only_false_row_in_the_54_case_matrix_was_a_fixture_with_no_diff_to_show_measured_2026_10_31": 1,
+    "effect": 1,
+    "every_requirement_that_spells_a_capability_id_must_be_a_token_that_id_publishes_as_a_law_test_over_the_shipped_registries__the_git_lane_measures_a_diff_that_exists_because_the_fixture_has_a_repository_and_an_uncommitted_edit__and_an_artifact_is_parsed_only_when_the_sentence_states_the_answer_being_checked": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "names": 1,
+    "not": 1,
+    "repair_the_declared_graph_with_a_law_over_the_registry_s_own_names": 1,
+    "requirement": 1,
+    "requirement_names_an_effect_not_a_row_v1_20261031_v1": 1,
+    "row": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "2026-10-10",
@@ -209457,7 +209481,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SWE_CONTENT_ADDRESSED_DERIVATION_CACHE_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "4f4298ad7d7ba4a96627998e8c63abc331d654a082eab235ab980eef03be0198",
+   "sha256": "eca2f63de7f1fe300d75fa2225e09c4eea65831f736446de2bff0bb375d5f708",
    "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
    "terms": {
     "20261031": 1,
@@ -245970,7 +245994,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "ca5976a9af41ac7293f8798a2391a39c832e134b3d3d75cc76fffc90b24644a2",
+   "sha256": "5737687d5ee17a8e31f07a8821451dfa3b72e9b23e05c27c899b55efb32156dd",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 99,
    "symbols": [

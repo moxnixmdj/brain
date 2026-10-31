@@ -4,7 +4,7 @@
   "action_intent_id": "SWE_CONTENT_ADDRESSED_DERIVATION_CACHE_20261031_V1",
   "date": "2026-10-31",
   "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
-  "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+  "canonical_base_commit": "9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -58,7 +58,7 @@
     "incremental_spend_usd": 0
   },
   "load_bearing_primary": {
-    "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+    "canonical_base_commit": "9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c",
     "open_obligation_ids": [],
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
@@ -77,7 +77,7 @@
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Adapter-default and source-AST derivation caches can reuse stale evidence after equal-size source edits with preserved modification times.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+    "canonical_base_commit": "9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c",
     "real_outcome": "Make SWE derivation evidence follow the bytes actually parsed, share AST work between existing consumers, and retain bounded warm reuse without weakening admission. No capability, benchmark, family or terminal credit.",
     "required_capability": "Fresh reusable source evidence for typed SWE derivation",
     "selected_surviving_route": "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE",
@@ -169,7 +169,7 @@
     },
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-10-31T18:19:18.532858+00:00",
+      "checked_at_utc": "2026-10-31T18:23:29.236247+00:00",
       "max_age_hours": 24,
       "incumbent_route": "Metadata-keyed derivation caches",
       "selected_route": "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE",
@@ -209,7 +209,7 @@
         },
         {
           "intent": "RECENCY_OR_NEW_RELEASE",
-          "query": "git fetch origin main and inspect Wave1 integration at 6c6c5df48cd96802ace3e9e5266c9493cca92bfc"
+          "query": "git fetch origin main and inspect Wave1 integration at 9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c"
         }
       ],
       "comparison_dimensions": [
@@ -230,7 +230,7 @@
       "challenger_routes": [],
       "selected_route_preflight": {
         "selected_route": "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE",
-        "checked_at_utc": "2026-10-31T18:19:18.532858+00:00",
+        "checked_at_utc": "2026-10-31T18:23:29.236247+00:00",
         "max_age_hours": 2,
         "status": "READY",
         "all_required_dependencies_ready": true,
@@ -245,7 +245,7 @@
             "scope": "LOCAL",
             "evidence_scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-10-31T18:19:18.532858+00:00",
+            "observed_at_utc": "2026-10-31T18:23:29.236247+00:00",
             "evidence": [
               "Fresh virtualenv installed pytest, hypothesis, jsonschema, z3-solver and pinned tree-sitter validation wheels. No new runtime dependency."
             ],
@@ -261,7 +261,7 @@
             "scope": "LOCAL",
             "evidence_scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-10-31T18:19:18.532858+00:00",
+            "observed_at_utc": "2026-10-31T18:23:29.236247+00:00",
             "evidence": [
               "canonical/runtime/declared_input_derivation_v1.py",
               "canonical/runtime/bound_capabilities/python_source_symbol_index.py"
@@ -278,7 +278,7 @@
             "scope": "ACCOUNT_SPECIFIC",
             "evidence_scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-10-31T18:19:18.532858+00:00",
+            "observed_at_utc": "2026-10-31T18:23:29.236247+00:00",
             "evidence": [
               "Authenticated GitHub contents/search API and bounded origin/main fetch succeeded; future CI capacity not guaranteed."
             ],
@@ -333,5 +333,5 @@
       ]
     }
   },
-  "integration_note": "Integrated current-main PR6489 undeclared-effect refusal guard unchanged. Cache source and tests have no conflict; regenerate combined model with official compiler. Baseline comparison in the evidence report remains explicitly bound to the earlier 2e9b642 tree."
+  "integration_note": "Retained current-main PR6485, PR6489 undeclared-effect refusal guard and PR6486 declared-effect requirements unchanged. Cache source and tests have no conflict; regenerate combined model officially. Earlier wider baseline remains explicitly bound to 2e9b642."
 }
