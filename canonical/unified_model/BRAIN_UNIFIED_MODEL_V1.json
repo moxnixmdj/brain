@@ -30487,9 +30487,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 205,
+  "knowledge_documents": 206,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6528,
+  "research_index_records": 6529,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c75f6728e59c3f0d0de7aa947ed7cffeb2f5534202748a3fb49db2b2a70691fd"
+  "value": "284a4178f07c108cc13c24fa75e8002d0f0898cd39afdb1b8ffb11ba45fce41d"
  },
  "engines": [
   {
@@ -44139,6 +44139,91 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 29056,
+   "headings": [
+    "Every hardcore-SWE problem, measured on `f333567` (V12)",
+    "0. The answer in one paragraph",
+    "1. What was measured",
+    "1.1 The 54-case matrix — ordinary team work",
+    "1.2 The 49-request advanced census — the actual product question",
+    "1.3 Registry composition — where the capability budget actually went",
+    "1.4 The machine's own verification is not green",
+    "2. The problems",
+    "2.1 The five magnets are one problem, not five",
+    "2.2 The derivation holes are one class too",
+    "2.3 The absent domains are the product",
+    "3. The full advanced census (49 requests, verbatim)",
+    "4. What this means for \"the most advanced software engineer\"",
+    "5. The order that buys the most capability per hour",
+    "6. What is already *not* a problem (do not spend hours here)",
+    "7. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V12.md",
+   "sha256": "e76bed4a056908dfb654639da8cfe318828531c5e015c0057bf5b1c0b1b57d63",
+   "summary": "Everything below is a measurement on this tree at commit `f333567`, made by two instruments: the 54-case capability matrix (`execution_guard/swe_capability_matrix_v1.py`) and a new 49-request advanced census (`execution_guard/swe_advanced_probe_v1.py`, added with this document). Where a number comes from somewhere else it says so. Nothing here is a projection.",
+   "terms": {
+    "17": 8,
+    "24": 8,
+    "49": 9,
+    "adapter": 9,
+    "add": 18,
+    "advanced": 8,
+    "all": 8,
+    "already": 18,
+    "answer": 10,
+    "branch": 8,
+    "build": 15,
+    "calc.py": 11,
+    "cannot": 10,
+    "capability": 15,
+    "census": 38,
+    "ci": 23,
+    "commit": 14,
+    "derivation": 9,
+    "design": 14,
+    "every": 10,
+    "file": 11,
+    "function": 21,
+    "git": 15,
+    "live_controller_execution": 19,
+    "machine": 10,
+    "medium": 10,
+    "no": 25,
+    "not": 26,
+    "one": 16,
+    "pkg": 26,
+    "product": 15,
+    "raw_goal_to_executable_contract_gap": 9,
+    "real": 10,
+    "refactor": 9,
+    "refused": 55,
+    "requests": 13,
+    "review": 12,
+    "route_admission_rejected": 10,
+    "row": 28,
+    "rows": 24,
+    "selection": 11,
+    "served": 9,
+    "small": 10,
+    "test": 17,
+    "tests": 23,
+    "total": 10,
+    "tree": 46,
+    "two": 10
+   },
+   "title": "Every hardcore-SWE problem, measured on `f333567` (V12)",
+   "title_terms": [
+    "every",
+    "f333567",
+    "hardcore-swe",
+    "measured",
+    "problem",
+    "v12"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23697,
    "headings": [
     "What is actually missing — the complete problem list for a hardcore software engineer",
@@ -57751,10 +57836,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 994,
+  "included_source_count": 995,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c0a120578766f752a4885d82a0a32815704409b5927888b8d4a93b9895a09d90"
+  "source_tree_digest": "44cdec1739ce032f2c3467496372d6d6c1f3456c23d58bbd1cccdc4aafb6c932"
  },
  "research_index": [
   {
@@ -199484,6 +199569,31 @@
     "semantic": 1,
     "v1": 1,
     "v16": 1
+   }
+  },
+  {
+   "action_id": "ADVANCED_SWE_CENSUS_AND_MAGNET_TRIAGE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/ADVANCED_SWE_CENSUS_AND_MAGNET_TRIAGE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ADVANCED_SWE_CENSUS_AND_MAGNET_TRIAGE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d5006f1a1d86df3d85ef6a76f063f9859a44ca4a47b719e7d70a1f70f106d235",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "advanced": 1,
+    "advanced_swe_census_and_magnet_triage_v1_20261031_v1": 1,
+    "census": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "magnet": 1,
+    "measure_the_advanced_surface_with_a_census_instrument_and_rank_the_problems_by_evidence__reuse_the_existing_family_table_derivation_table_and_adapter_refusal_vocabulary_as_the_fix_list": 1,
+    "swe": 1,
+    "the_advanced_census_is_a_repeatable_instrument__the_two_damage_reports_that_contradicted_their_own_oracles_are_corrected__and_the_problem_set_is_ranked_by_evidence_instead_of_by_recency": 1,
+    "the_matrix_measures_only_the_sentences_somebody_wrote_cases_for_so_a_good_matrix_coexisted_with_a_machine_that_cannot_do_advanced_software_work__measured_49_advanced_requests_served_2_with_24_of_the_49_landing_on_five_magnet_rows_and_eight_domains_having_zero_rows_of_440": 1,
+    "triage": 1,
+    "v1": 2
    }
   },
   {
