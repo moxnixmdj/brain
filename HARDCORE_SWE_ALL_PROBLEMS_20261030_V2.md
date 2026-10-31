@@ -460,3 +460,47 @@ router picks a DOCX writer for a Python edit because only lexical overlap decide
 exact door are currently unenforced.
 
 ---
+
+---
+
+## 12. The merge, and what main's churn cost (2026-10-31, later)
+
+Merging `main` (which moved four times during this work) replaced most of the files this branch had
+fixed. Measured before and after, on the same 18 sentences:
+
+| tree | 18 human sentences | `test_swe_typed_plan_v1` |
+|---|---|---|
+| this branch at `282a5f4` | **8/18** | 17/17 |
+| `origin/main` at `99db201` | **4/18** | 12/17 (5 red) |
+| after the merge + the restorations below | **5/18** | 15/17 (2 red) |
+
+So the merge did not lose anything main still had — main had already lost it. Two of this branch's
+fixes had been dropped by later changes on main, and both are restored here because the measurement says
+so:
+
+* **`_prefer_the_writing_repair`** (deleted from `swe_typed_plan_v1` on main): three capabilities answer
+  the word *repair* — a test-guided patch **search**, an iterative **loop** (both read-only, both restore
+  the source and report `NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY`), and `python.software.repair.apply
+  .verified.v1`, which writes and re-runs the stated test in place.  Without the preference the sentence
+  is answered by a mechanism that finds the fix and throws it away.  Restoring it: **3 family tests red →
+  green, `find_callers` restored**.
+* **`_project_root` / `_holds_tests`** (gone from `declared_input_derivation_v1` on main): main pins
+  `source_root` to the stated file's parent, so a `src/` layout whose tests live in `tests/` cannot import
+  the package and a correct repair reads as red.
+
+And one addition that is now shared rather than local: a verb immediately followed by `(` is a **call**,
+not an instruction (`_intent_verb_matches`), so *"Explain what `add(1, 2)` does in X.py"* is a question.
+
+**Still red after the merge, and why** — the rest of main's regression, recorded rather than hidden:
+
+* `repair_full` — `TOOL_REPORTED_NON_SUCCESS` after 13.8 s in `python.software.repair.loop.coupled.ast`;
+* `bug_report` — `ROUTE_ADMISSION_REJECTED` (no owner);
+* `explain_fail` — `TOOL_REPORTED_NON_SUCCESS` in `python.patch.search.test_guided.ast.v1`;
+* `debug_test` — routed to `python.tests.mutation_score.v1` (it now asks for a mutation score);
+* `test_a_failing_retry_never_forges_a_pass`, `test_rename_family_passes_honestly_through_the_live_door`
+  — still red on main's own suite.
+
+**What the merge gained**, and it is real: `python.source.definition_count.v1` now answers *"count the
+function definitions"* with `PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` instead of
+writing an index, `git_log` passes, and the two edit-lies stay dead with the *correct* refusal
+(`FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED` on `symbols.index.ast`), not a lucky miss.
