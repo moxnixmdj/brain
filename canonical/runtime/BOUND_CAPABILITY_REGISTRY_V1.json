@@ -1362,10 +1362,10 @@
   "code.impact.tree_sitter.testselect.v1": {
    "action_template": {
     "args": {
-          "capability_id": "code.impact.tree_sitter.testselect.v1",
-          "changed_paths": "${input.changed_paths}",
-          "output_path": "${input.output_path}"
-        },
+     "capability_id": "code.impact.tree_sitter.testselect.v1",
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -3692,7 +3692,7 @@
     "fail-closed"
    ],
    "limitations": [
-    "Enumerates every producer×artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
+    "Enumerates every producer\u00d7artifact execution, keeps EMITS_VERIFIED survivors with independent stdlib byte-oracle. Heals 80% dead/73% missing without editing 89 producers. Deterministic, $0, 0 model."
    ],
    "platforms": [
     "linux",
@@ -4341,7 +4341,7 @@
     "oracle"
    ],
    "limitations": [
-    "Evidence→contract 5-kernel, deterministic"
+    "Evidence\u2192contract 5-kernel, deterministic"
    ],
    "platforms": [
     "linux"
@@ -4402,7 +4402,26 @@
    "cost": 1,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": ["python", "fault", "localization", "dynamic", "trace", "coverage", "spectrum", "ochiai", "symbol", "dataflow", "def-use", "localize", "localizer", "localizing", "localize the fault", "fault localizer", "localize the failing test", "spectrum-based fault localization"],
+   "keywords": [
+    "python",
+    "fault",
+    "localization",
+    "dynamic",
+    "trace",
+    "coverage",
+    "spectrum",
+    "ochiai",
+    "symbol",
+    "dataflow",
+    "def-use",
+    "localize",
+    "localizer",
+    "localizing",
+    "localize the fault",
+    "fault localizer",
+    "localize the failing test",
+    "spectrum-based fault localization"
+   ],
    "limitations": [
     "Ranks suspicious Python lines from failing-vs-passing dynamic execution spectra, failing traceback frames, AST symbol ownership, and bounded backward def-use.",
     "Requires repository-local Python tests and source; each test path is executed in an isolated child Python process with bounded trace events and timeout.",
@@ -4490,7 +4509,7 @@
     "backward"
    ],
    "limitations": [
-    "Fault→patch 5-kernel, deterministic"
+    "Fault\u2192patch 5-kernel, deterministic"
    ],
    "platforms": [
     "linux"
@@ -4609,7 +4628,25 @@
    "cost": 1,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": ["python", "fault", "provenance", "interprocedural", "call", "return", "argument", "value", "dynamic", "dataflow", "callsite", "value provenance", "trace the value", "tracing", "provenance trace", "trace the provenance", "where does this value come from"],
+   "keywords": [
+    "python",
+    "fault",
+    "provenance",
+    "interprocedural",
+    "call",
+    "return",
+    "argument",
+    "value",
+    "dynamic",
+    "dataflow",
+    "callsite",
+    "value provenance",
+    "trace the value",
+    "tracing",
+    "provenance trace",
+    "trace the provenance",
+    "where does this value come from"
+   ],
    "limitations": [
     "Records bounded repository-local Python call/return observations and primitive-safe argument/return fingerprints from failing and passing test executions.",
     "Links dynamic call edges to static Python callsite assignment bindings and emits ranked interprocedural value-provenance hypotheses.",
@@ -4721,6 +4758,24 @@
     "windows",
     "darwin"
    ],
+   "proposal_bindings": {
+    "index_path": {
+     "container": "scalar",
+     "effect": "python.source.symbols.index.ast",
+     "field": "output_path",
+     "type": "effect_result"
+    },
+    "issue_path": {
+     "type": "path_file_or_dir"
+    },
+    "output_path": {
+     "suffix": ".json",
+     "type": "auto_path"
+    },
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
    "provides": [
     "python.issue.natural_language.edit_intent"
    ],
@@ -4790,7 +4845,7 @@
     "navigation"
    ],
    "limitations": [
-    "Contract-gated issue → symbol → crossfile"
+    "Contract-gated issue \u2192 symbol \u2192 crossfile"
    ],
    "platforms": [
     "linux"
@@ -4851,7 +4906,7 @@
     "mutation"
    ],
    "limitations": [
-    "Patch→review 5-kernel, deterministic"
+    "Patch\u2192review 5-kernel, deterministic"
    ],
    "platforms": [
     "linux"
@@ -4999,7 +5054,7 @@
      "capability_id": "python.pipeline.allowlist_gate.v1"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "verified",
      "type": "field_equals",
      "value": true
     },
@@ -5059,7 +5114,7 @@
      "capability_id": "python.pr.land.composer.v1"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "verified",
      "type": "field_equals",
      "value": true
     },
@@ -5177,17 +5232,17 @@
   "python.refactor.extract_function.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.refactor.extract_function.v1",
-          "end_line": "${input.end_line}",
-          "module": "${input.module}",
-          "new_name": "${input.new_name}",
-          "output_path": "${input.output_path}",
-          "qualname": "${input.qualname}",
-          "run_tests": [],
-          "source_root": "${input.source_root}",
-          "start_line": "${input.start_line}",
-          "timeout_s": 300
-        },
+     "capability_id": "python.refactor.extract_function.v1",
+     "end_line": "${input.end_line}",
+     "module": "${input.module}",
+     "new_name": "${input.new_name}",
+     "output_path": "${input.output_path}",
+     "qualname": "${input.qualname}",
+     "run_tests": [],
+     "source_root": "${input.source_root}",
+     "start_line": "${input.start_line}",
+     "timeout_s": 300
+    },
     "expect": {
      "field": "gate",
      "type": "field_equals",
@@ -5241,7 +5296,8 @@
     "output_sha256",
     "output_verified",
     "outputs",
-    "verified"
+    "verified",
+    "execution_diagnostics"
    ],
    "source": {
     "module": "python stdlib ast",
@@ -5503,12 +5559,12 @@
     "independently_verified": true,
     "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
     "observed_effect": {
-     "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
-     "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
-     "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
-     "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical",
      "determinism": "two pristine worlds -> byte-identical trees and artifacts; string literals and substring-carriers (topper, \"top of \") never edited",
-     "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files"
+     "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files",
+     "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
+     "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
+     "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
+     "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical"
     },
     "pin_green": "18/18 rename-symbol pins green",
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
@@ -5751,11 +5807,11 @@
   "python.repository.acceptance.measure.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.repository.acceptance.measure.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "timeout_s": 60
-        },
+     "capability_id": "python.repository.acceptance.measure.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -5974,7 +6030,7 @@
     "behavior"
    ],
    "limitations": [
-    "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) — deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
+    "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) \u2014 deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
     "mutants are confined to the diff's hunk new-side lines; the suite's own changed test files are measured, never mutated, and never become mutation targets.",
     "a red base world refuses (BASE_WORLD_RED): mutants cannot be attributed against a suite that was already green-flavoured broken.",
     "mutant runs share one wall-clock budget per mutant; a mutant suite timeout is counted as a KILL because the behavioural divergence was observable.",
@@ -6432,7 +6488,7 @@
    "limitations": [
     "requires a JSON task file whose edits are choreograph ops (rename_symbol, move_symbol); free-text issue parsing is a separate concern (refuses TASK_SCHEMA_MISSING fields, never guesses).",
     "move_symbol creates a missing target module by declared intent; multi-line import statements, multi-line decorator spans, and aliased-from-import rewrite shapes fail closed rather than guess.",
-    "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' — edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
+    "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' \u2014 edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
     "writes land only in the named worktree copy; producing the PR itself (git push/gh pr create) is intentionally outside v1."
    ],
    "platforms": [
@@ -6711,17 +6767,17 @@
   "python.software.repair.loop.coupled.ast.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.software.repair.loop.coupled.ast.v1",
-          "max_files": 8,
-          "max_pair_candidates": 1200,
-          "max_symbols_per_file": 8,
-          "mutations_per_file": 24,
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 20
-        },
+     "capability_id": "python.software.repair.loop.coupled.ast.v1",
+     "max_files": 8,
+     "max_pair_candidates": 1200,
+     "max_symbols_per_file": 8,
+     "mutations_per_file": 24,
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "test_argv": "${input.test_argv}",
+     "test_paths": "${input.test_paths}",
+     "timeout_s": 20
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -6845,7 +6901,22 @@
    "cost": 2,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": ["python", "software", "repair", "strict-progress", "multi-round", "multi-file", "tests", "counterexample", "ast", "iterative", "iterative repair", "iterative software repair loop", "repair loop", "repair the source iteratively"],
+   "keywords": [
+    "python",
+    "software",
+    "repair",
+    "strict-progress",
+    "multi-round",
+    "multi-file",
+    "tests",
+    "counterexample",
+    "ast",
+    "iterative",
+    "iterative repair",
+    "iterative software repair loop",
+    "repair loop",
+    "repair the source iteratively"
+   ],
    "limitations": [
     "Accepts only edits that strictly reduce the parsed failing-test count and can continue while other failures in the same test command remain.",
     "Bounded deterministic Python AST mutation search only; does not cover non-monotonic coupled edits that require a neutral or temporarily worse intermediate step.",
@@ -7148,7 +7219,22 @@
    "cost": 1,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": ["python", "software", "repair", "semantic", "acceptance", "raw-task", "scope", "file", "content-addressed", "candidate", "verification", "semantic acceptance controller", "acceptance controller", "semantic acceptance of the repair"],
+   "keywords": [
+    "python",
+    "software",
+    "repair",
+    "semantic",
+    "acceptance",
+    "raw-task",
+    "scope",
+    "file",
+    "content-addressed",
+    "candidate",
+    "verification",
+    "semantic acceptance controller",
+    "acceptance controller",
+    "semantic acceptance of the repair"
+   ],
    "limitations": [
     "Extends verified V8 bounded Python repair with content-addressed repository measurement plus complete lossless obligation accounting across measured objective routes and explicit source-grounded semantic cells.",
     "Supported semantic cells are bounded to exact file content presence/absence, file existence/absence, Python parse, unchanged-path, and allowed-changed-path directives.",
@@ -7417,11 +7503,11 @@
   "python.source.change_impact.testselect.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.source.change_impact.testselect.v1",
-          "changed_paths": "${input.changed_paths}",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.source.change_impact.testselect.v1",
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7572,11 +7658,11 @@
   "python.source.crossfile_edit.choreograph.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.source.crossfile_edit.choreograph.v1",
-          "edits_path": "${input.edits_path}",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.source.crossfile_edit.choreograph.v1",
+     "edits_path": "${input.edits_path}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7891,6 +7977,10 @@
     "darwin"
    ],
    "proposal_bindings": {
+    "output_path": {
+     "suffix": ".json",
+     "type": "auto_path"
+    },
     "source_root": {
      "type": "path_file_or_dir"
     }
@@ -8342,7 +8432,7 @@
     "slice"
    ],
    "limitations": [
-    "Never-miss → pipeline → audit → measurement"
+    "Never-miss \u2192 pipeline \u2192 audit \u2192 measurement"
    ],
    "platforms": [
     "linux"
@@ -8400,7 +8490,26 @@
    "cost": 2,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": ["audit", "count", "failed", "passed", "passes", "python", "skipped", "tests", "unit", "unittest", "corpus", "pass rate", "pass_rate", "rate report", "test corpus", "audit the test corpus", "audit the tests", "auditing"],
+   "keywords": [
+    "audit",
+    "count",
+    "failed",
+    "passed",
+    "passes",
+    "python",
+    "skipped",
+    "tests",
+    "unit",
+    "unittest",
+    "corpus",
+    "pass rate",
+    "pass_rate",
+    "rate report",
+    "test corpus",
+    "audit the test corpus",
+    "audit the tests",
+    "auditing"
+   ],
    "platforms": [
     "linux",
     "windows",
@@ -8434,10 +8543,10 @@
   "python.tests.generate.scaffold.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.tests.generate.scaffold.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.tests.generate.scaffold.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "verified",
      "type": "field_equals",
@@ -8808,7 +8917,7 @@
      "capability_id": "software.hardcore.final.supercomposer.v1"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "verified",
      "type": "field_equals",
      "value": true
     },
@@ -9035,7 +9144,7 @@
     "architecture"
    ],
    "limitations": [
-    "CEGIS(T) loop synthesize→verify (CrossHair symbolic + concrete) → counterexample → resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
+    "CEGIS(T) loop synthesize\u2192verify (CrossHair symbolic + concrete) \u2192 counterexample \u2192 resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
    ],
    "platforms": [
     "linux",
@@ -9085,7 +9194,7 @@
      "source_root": "${input.source_root}"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "verified",
      "type": "field_equals",
      "value": true
     },
@@ -9108,7 +9217,7 @@
     "change-impact"
    ],
    "limitations": [
-    "Cross-file atomic choreography inside repair loop: patch→choreograph via 86k/221k symbol graph→change-impact 2070/2096 slice→dual-oracle verify→gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
+    "Metadata-only inventory of registered cross-file planning, symbol-index and change-impact kernels. No repair search, edit planning, source publication, test execution or multi-file atomicity is performed by this wrapper. Diagnostic output_verified is not execution verification. Use existing real planner or native verified repair delivery for actual work; historical registration receipts do not establish execution on a current request."
    ],
    "platforms": [
     "linux",
@@ -9181,7 +9290,7 @@
     "counterexample"
    ],
    "limitations": [
-    "HTN loop: CEGIS(T) 24/12 DPLL(T) → hypothesis 50× → concrete 13 → choreograph 221k → slice 50 → gate — until pass or budget. Loop not DAG. Deterministic 0 model $0."
+    "HTN loop: CEGIS(T) 24/12 DPLL(T) \u2192 hypothesis 50\u00d7 \u2192 concrete 13 \u2192 choreograph 221k \u2192 slice 50 \u2192 gate \u2014 until pass or budget. Loop not DAG. Deterministic 0 model $0."
    ],
    "platforms": [
     "linux",
@@ -9225,10 +9334,10 @@
   "software.review.gate.composer.v1": {
    "action_template": {
     "args": {
-     "capability_id": "software.review.gate.composer.v1",
      "anchor_path": "${input.anchor_path}",
-     "diff_path": "${input.diff_path}",
      "bench_path": "${input.bench_path}",
+     "capability_id": "software.review.gate.composer.v1",
+     "diff_path": "${input.diff_path}",
      "output_path": "${input.output_path}"
     },
     "expect": {
@@ -9303,7 +9412,7 @@
      "capability_id": "software.review.synthesis.supercomposer.v1"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "verified",
      "type": "field_equals",
      "value": true
     },
@@ -9451,7 +9560,7 @@
     "verification"
    ],
    "limitations": [
-    "Dual-oracle → test intelligence → pipeline → provenance coupling"
+    "Dual-oracle \u2192 test intelligence \u2192 pipeline \u2192 provenance coupling"
    ],
    "platforms": [
     "linux"
@@ -10306,7 +10415,9 @@
    "action_template": {
     "args": {
      "capability_id": "test.slice.never_miss.v1",
-     "output_path": "${input.output_path}"
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
     },
     "expect": {
      "field": "output_verified",
@@ -10322,16 +10433,17 @@
    "keywords": [
     "test",
     "slice",
-    "never-miss",
     "change-impact",
-    "2070",
-    "2096",
-    "honest",
-    "minimal",
-    "40x"
+    "selection",
+    "affected",
+    "python",
+    "AST"
    ],
    "limitations": [
-    "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop — 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
+    "Compatibility entrypoint delegates to the existing AST change-impact selector with real source_root and changed_paths operands.",
+    "Returns the kernel selection report, actual candidate/selected counts and reasons; does not execute tests.",
+    "No fixed speedup, global minimum or universal no-miss guarantee. Static import/call analysis retains the kernel limitations.",
+    "Historical verification metadata predates this delegation and is not evidence for the current implementation."
    ],
    "platforms": [
     "linux",
@@ -10339,20 +10451,22 @@
     "darwin"
    ],
    "provides": [
-    "test.slice.never_miss.verified",
-    "test.selection.minimal"
+    "python.source.change_impact.test_selection",
+    "python.source.change_impact.testselect.v1"
    ],
-   "requires": [
-    "python.source.change_impact.test_selection"
-   ],
+   "requires": [],
    "result_fields": [
     "adapter",
+    "affected_module_count",
+    "candidate_test_count",
+    "changed_file_count",
+    "changed_symbol_count",
+    "ignored_non_python_count",
     "output_path",
     "output_sha256",
     "output_verified",
-    "verified",
-    "model_dependency_count",
-    "incremental_spend_usd"
+    "selected_test_count",
+    "unknown_symbol_module_count"
    ],
    "source": {
     "adapter_path": "canonical/runtime/bound_capabilities/test_slice_never_miss_v1.py",

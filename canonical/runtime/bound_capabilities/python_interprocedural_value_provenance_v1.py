@@ -1,5 +1,5 @@
 from __future__ import annotations
-import ast,hashlib,json,math,os,pathlib,subprocess,sys
+import ast,hashlib,json,math,os,pathlib,sys
 from typing import Any,Mapping
 import importlib.util
 def _load_patch():
@@ -39,6 +39,7 @@ def _safe_dir(repo,raw):
 
 def _trace_one(repo,test,timeout,max_events,max_value_chars,env=None):
  code=_PATCH.SUITE_RUNNER+r'''import hashlib,json,math,pathlib,runpy,sys,traceback
+result_path=pathlib.Path(sys.argv[-1])
 repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); maxchars=int(sys.argv[4])
 events=[]; seq=0; path_cache={}
 def path_of(frame):
@@ -86,15 +87,11 @@ for x in tb:
  try:p=pathlib.Path(x.filename).resolve()
  except Exception:continue
  if p.is_file() and repo in p.parents:frames.append([str(p.relative_to(repo)).replace("\\","/"),x.lineno,x.name])
-print("__BRAIN_PROVENANCE__"+json.dumps({"pass":ok,"events":events,"traceback":frames,"event_count":len(events)},sort_keys=True))
+result_path.write_text(json.dumps({"pass":ok,"events":events,"traceback":frames,"event_count":len(events)},sort_keys=True),encoding="utf-8")
 '''
- try:
-  r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events),str(max_value_chars)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
- except subprocess.TimeoutExpired:
-  raise ProvenanceError("TEST_TIMEOUT")
- marker="__BRAIN_PROVENANCE__"; lines=[x for x in r.stdout.splitlines() if x.startswith(marker)]
- if not lines: raise ProvenanceError("TRACE_OUTPUT_MISSING")
- out=json.loads(lines[-1][len(marker):]);out["returncode"]=r.returncode;return out
+ # Reuse supervised execution and the private, bounded result channel.
+ try:return _PATCH._run_trace(repo,[sys.executable,"-c",code,str(repo),str(test),str(max_events),str(max_value_chars)],timeout,env)
+ except _PATCH.PatchSearchError as exc:raise ProvenanceError(str(exc)) from exc
 
 def _static_calls(path):
   # A file under source_root may be third-party and use syntax this interpreter cannot parse

@@ -48,6 +48,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from canonical.runtime.write_authority_v1 import check_review_inputs
 
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
     _parse_diff_ranges,
@@ -102,12 +103,8 @@ def run(args, root):
 
     # -- stage 1: baseline parse of every touched .py ---------------------
     syntax_errors = []
-    files_on_disk = {}
-    for rel in sorted(py_changed):
-        target = worktree_abs / rel
-        if not target.is_file():
-            _fail("TOUCHED_FILE_MISSING_IN_WORKTREE:" + rel)
-        files_on_disk[rel] = target
+    files_on_disk = check_review_inputs(repo, worktree_abs, diff_abs, out_abs, py_changed, _fail)
+    for rel, target in files_on_disk.items():
         try:
             ast.parse(target.read_text(encoding="utf-8"), filename=rel)
         except SyntaxError as exc:

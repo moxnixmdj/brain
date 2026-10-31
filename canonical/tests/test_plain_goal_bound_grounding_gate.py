@@ -52,7 +52,9 @@ class PlainGoalGroundingGateTests(unittest.TestCase):
 
     def test_grounding_helper_persists_auditable_evidence(self):
         mission={"mission_id":"TEST-BOUND-GROUNDING-EVIDENCE"}
-        goal="Create a DOCX document report."
+        # A stated literal URL exercises an actually bindable route; an
+        # underspecified document request is not evidence of grounded work.
+        goal="Fetch JSON from https://example.invalid/data.json."
         path=ROOT/"astra_runtime"/"evidence"/"TEST-BOUND-GROUNDING-EVIDENCE__BOUND_CAPABILITY_GROUNDING.json"
         path.unlink(missing_ok=True)
         self.addCleanup(lambda:path.unlink(missing_ok=True))

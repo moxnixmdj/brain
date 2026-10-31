@@ -800,7 +800,7 @@ def declared_adapter_defaults(entry: Mapping[str, Any] | None) -> dict[str, Any]
     return defaults
 
 
-_TO_NEW_IDENTIFIER = re.compile(r"\bto\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?")
+_TO_NEW_IDENTIFIER = re.compile(r"\bto\s+[`\"']?([^\s`\"']+)[`\"']?")
 _NOT_AN_IDENTIFIER = {"a", "an", "the", "this", "that", "it", "its", "same", "new"}
 
 
@@ -810,8 +810,10 @@ def declared_replacement_identifier(goal: str) -> str | None:
     The sentence states the value; this only reads it.  Two different identifiers
     naming two different replacements is ambiguity, and ambiguity binds nothing.
     """
-    found = {m.group(1) for m in _TO_NEW_IDENTIFIER.finditer(str(goal or ""))}
-    found = {name for name in found if name not in _NOT_AN_IDENTIFIER}
+    # Consume the full spelling before validation: an ASCII prefix is not
+    # the requested identifier. Python handles Unicode identifier categories.
+    found = {m.group(1).rstrip(".,;:!?") for m in _TO_NEW_IDENTIFIER.finditer(str(goal or ""))}
+    found = {name for name in found if name.isidentifier() and name not in _NOT_AN_IDENTIFIER}
     return found.pop() if len(found) == 1 else None
 
 
@@ -964,6 +966,13 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
+    bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
+    if (isinstance(bindings, Mapping) and isinstance(bindings.get(key), Mapping)
+            and bindings[key].get("type") == "path_file_or_dir"):
+        # A replay's existing report is still a destination, not a second
+        # possible source. Reuse the established role filter, not suffix guesses.
+        destinations = _named_output_destinations(goal, entry, input_keys(entry), root)
+        paths = [(raw, path) for raw, path in paths if raw not in destinations]
     if key in _PATH_FILE_KEYS:
         files = [raw for raw, p in paths if p.is_file()]
         if len(files) == 1:
@@ -1336,17 +1345,18 @@ def _named_output_destinations(
         phrases = _role_phrases(key)
         if not phrases:
             continue
-        for raw, _path in gc._repo_paths(goal, root):
-            # Every mention, not just the first.  _role_anchored judges the text before the
-            # occurrence it finds, so a path the sentence mentions twice - once as the source
-            # and once as the destination - would be judged only at its first mention and the
-            # destination role would be missed entirely.
-            index = str(goal or "").find(raw)
-            while index >= 0:
-                if _role_anchored(goal, raw, phrases, index=index):
-                    named.add(raw)
-                    break
-                index = str(goal or "").find(raw, index + 1)
+        for raw, path in gc._repo_paths(goal, root):
+            # Judge every mention and both repository-relative/absolute spellings.
+            # The opening quote introduces a value, not a different path role.
+            text=str(goal or "")
+            for spelling in {raw,str(path)}:
+                index=text.find(spelling)
+                while index>=0:
+                    anchor=index-1 if index and text[index-1] in _QUOTE_OPEN else index
+                    if _role_anchored(text,spelling,phrases,index=anchor):
+                        named.add(raw)
+                        break
+                    index=text.find(spelling,index+1)
     return named
 
 
@@ -2666,11 +2676,21 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
 
         _declared = _sel.declarations(root).get(selected)
         _names = _sel.required_input_names(admissible.get(selected) or {}, _declared)
-        if _names and not _sel.is_specific(_names):
+        task_text = _IDENTIFIER_TOKEN_RE.sub(" ", prose_only(text))
+        prose_score, _, _ = score_capability(task_text, selected, admissible.get(selected) or {})
+        operand_only_pick = prose_score <= 0
+        if (_names and not _sel.is_specific(_names)) or operand_only_pick:
+            # Binding a file is not evidence of the requested operation. A
+            # pick supported only by path/function operands may yield to the unique,
+            # receipt-backed typed selection, just like a syntactic catch-all.
+            # Prose-supported selections and ambiguous retrieval stay untouched.
             displaced = _retrieval_first_selection(text, admissible, root, rules)
             if displaced is not None:
                 displaced["match_evidence"]["displaced_pinned_selection"] = selected
-                displaced["match_evidence"]["displaced_catch_all_inputs"] = _names
+                if operand_only_pick:
+                    displaced["match_evidence"]["displaced_operand_only_selection"] = True
+                else:
+                    displaced["match_evidence"]["displaced_catch_all_inputs"] = _names
                 return displaced
 
     if single_shape and isinstance(compiled.get("inputs"), dict):

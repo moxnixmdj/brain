@@ -29,6 +29,12 @@ ALL file bytes are restored and the adapter refuses
 TESTS_RED_AFTER_EDIT with the failing pytest tail as evidence.  A rename
 that cannot prove green is not a rename.
 
+Replacement identifiers are NFKC-normalized like Python AST bindings before
+validation/collision checks; the canonical name is emitted and reported.
+Original-source spans retain exact-preimage guards. Compiler symbol tables
+refuse replacement capture in the target scope and nested scopes where the old
+parameter is free; unrelated nested bindings do not block the rename.
+
 Inputs (kwargs, repo-confined):
   source_root      tree to edit IN PLACE (crown worktree convention)
   module           posix path of the defining module, e.g. "pkg/core.py"
@@ -51,9 +57,10 @@ import ast
 import hashlib
 import json
 import keyword as pykeyword
-import os
-import subprocess
+import stat
 import sys
+import symtable
+import unicodedata
 from pathlib import Path
 
 SCHEMA = "PROJECT_BRAIN_REFACTOR_RENAME_PARAMETER_V1"
@@ -120,6 +127,39 @@ def _binds_name(node, name: str) -> bool:
             if isinstance(n, ast.Name) and n.id == name:
                 return True
     return False
+
+
+def _refuse_replacement_capture(raw: bytes, path: Path, fn, old: str, new: str) -> None:
+    """Reuse Python's compiler scopes, not a second binding classifier.
+
+    Any existing use/binding of the new name in the target could be shadowed.
+    Descend only where the old parameter is free: an unrelated nested scope,
+    or one with its own old parameter, must not block a safe outer rename.
+    """
+    try:
+        module = symtable.symtable(raw.decode("utf-8"), str(path), "exec")
+    except SyntaxError as exc:
+        _fail("SYNTAX_ERROR_IN_FILE:" + str(path) + ":" + str(exc))
+    pending = [module]
+    matches = []
+    while pending:
+        scope = pending.pop()
+        if scope.get_name() == fn.name and scope.get_lineno() == fn.lineno:
+            matches.append(scope)
+        pending.extend(scope.get_children())
+    if len(matches) != 1:
+        _fail("PARAMETER_SCOPE_NOT_UNIQUE:" + fn.name)
+    target = matches[0]
+    if new in target.get_identifiers():
+        _fail("NEW_PARAM_NAME_CAPTURED:" + new + ":" + target.get_name())
+    pending = list(target.get_children())
+    while pending:
+        scope = pending.pop()
+        if old not in scope.get_identifiers() or not scope.lookup(old).is_free():
+            continue
+        if new in scope.get_identifiers():
+            _fail("NEW_PARAM_NAME_CAPTURED:" + new + ":" + scope.get_name())
+        pending.extend(scope.get_children())
 
 
 def _collect_body_renames(fn, name: str, new: str, shadowed: list) -> list:
@@ -238,7 +278,8 @@ def run(args, root):
         _fail("MODULE_MUST_BE_PY")
     qualname = str(args.get("qualname") or "")
     old = str(args.get("old_param") or "")
-    new = str(args.get("new_param") or "")
+    # Match Python AST binding names before keyword and collision checks.
+    new = unicodedata.normalize("NFKC", str(args.get("new_param") or ""))
     for nm, label in ((new, "new_param"),):
         if not nm.isidentifier() or pykeyword.iskeyword(nm):
             _fail("INVALID_IDENTIFIER:" + label)
@@ -253,6 +294,9 @@ def run(args, root):
 
     all_py = sorted(p for p in src_abs.rglob("*.py") if "__pycache__" not in p.parts)
     originals = {p: p.read_bytes() for p in all_py}
+    modes = {p: stat.S_IMODE(p.stat().st_mode) for p in all_py}
+    from canonical.runtime.write_authority_v1 import check_report
+    check_report(repo, out_abs, originals)
 
     per_file_edits = {}
     unknown_sites = []
@@ -297,6 +341,7 @@ def run(args, root):
                 for d in ast.walk(fn):
                     if isinstance(d, (ast.Global, ast.Nonlocal)) and old in d.names:
                         _fail("REFUSE_NONLOCAL_OR_GLOBAL:" + old)
+                _refuse_replacement_capture(originals[path], path, fn, old, new)
                 target_arg = next(p for p in params if p.arg == old)
                 edits.append((target_arg.lineno, target_arg.col_offset, old, new))
                 edits += [(ln, col, o, n) for (ln, col, o) in
@@ -319,94 +364,105 @@ def run(args, root):
 
     complete = len(unknown_sites) == 0
 
-    # apply edits (offset-descending per file)
+    # Validate every splice before publishing any file.
+    applied = {}
     files_edited = sorted(p.relative_to(src_abs).as_posix() for p in per_file_edits)
     edit_rows = []
     for path, edits in per_file_edits.items():
         rel = path.relative_to(src_abs).as_posix()
-        text = originals[path].decode("utf-8")
+        # AST columns are UTF-8 byte offsets, as in patch-search _byte_offset.
+        # Keep the existing prefix table to avoid rescanning lines per edit.
+        data = originals[path]
         pos_map = [0]
-        for ln in text.splitlines(keepends=True):
+        for ln in data.splitlines(keepends=True):
             pos_map.append(pos_map[-1] + len(ln))
         for lineno, col, old_t, new_t in sorted(edits, key=lambda e: (e[0], e[1]), reverse=True):
             off = pos_map[lineno - 1] + col
-            if text[off:off + len(old_t)] != old_t:
+            old_bytes, new_bytes = old_t.encode("utf-8"), new_t.encode("utf-8")
+            if data[off:off + len(old_bytes)] != old_bytes:
                 _fail("SPAN_INTEGRITY:" + rel + ":" + str(lineno) + ":" + str(col))
-            text = text[:off] + new_t + text[off + len(old_t):]
+            data = data[:off] + new_bytes + data[off + len(old_bytes):]
             edit_rows.append({"file": rel, "line": lineno, "from": old_t, "to": new_t})
-        path.write_text(text, encoding="utf-8")
+        applied[path] = data
 
-    # verification loop: named tests must stay green, else full rollback
-    evidence = {"run_tests": run_tests}
-    gate = "PASS"
-    if run_tests:
-        env = dict(os.environ)
-        env["PYTHONDONTWRITEBYTECODE"] = "1"
-        try:
-            proc = subprocess.run([python_exe, "-m", "pytest", "-q",
-                                   "-p", "no:cacheprovider"] + run_tests,
-                                  cwd=src_abs, capture_output=True, text=True,
-                                  timeout=timeout_s, env=env)
-        except subprocess.TimeoutExpired:
-            for pth, b in originals.items():
-                pth.write_bytes(b)
-            _fail("TIMEOUT:edits fully rolled back")
-        evidence["pytest_rc"] = proc.returncode
-        evidence["pytest_tail"] = proc.stdout.strip().splitlines()[-3:]
-        if proc.returncode != 0:
-            for pth, b in originals.items():
-                pth.write_bytes(b)
-            _fail("TESTS_RED_AFTER_EDIT:edits fully rolled back:" +
-                  ";".join((proc.stdout.strip().splitlines() or ["<no output>"])[-2:])[:300])
+    # Reuse native delivery rather than creating another publication/runner law.
+    from canonical.runtime.bound_capabilities import python_repair_apply_verified_v1 as delivery
+    try:
+        for path, data in applied.items():
+            delivery._atomic_write(path, data, mode=modes[path])
+            delivery._REPAIR._PATCH._purge_source_bytecode(path)
+
+        evidence = {"run_tests": run_tests}
         gate = "PASS"
-        verified = True
-    else:
-        verified = False  # loudly partial: bytes rewritten without proof
+        verified = False
+        if run_tests:
+            proc = delivery._REPAIR._PATCH._run_tests(
+                src_abs, [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"]
+                + run_tests, timeout_s, extra_env={"PYTHONDONTWRITEBYTECODE": "1"})
+            if proc["timed_out"]:
+                _fail("TIMEOUT:edits fully rolled back")
+            evidence["pytest_rc"] = proc["returncode"]
+            evidence["pytest_tail"] = proc["stdout"].strip().splitlines()[-3:]
+            if proc["returncode"] != 0:
+                _fail("TESTS_RED_AFTER_EDIT:edits fully rolled back:" +
+                      ";".join((proc["stdout"].strip().splitlines() or ["<no output>"])[-2:])[:300])
+            verified = True
 
-    artifact = {
-        "schema": SCHEMA,
-        "source_root": src_rel,
-        "module": module_rel,
-        "target_module": target_mod,
-        "qualname": qualname,
-        "old_param": old,
-        "new_param": new,
-        "edit_count": len(edit_rows),
-        "files_edited": files_edited,
-        "edits": sorted(edit_rows, key=lambda r: (r["file"], r["line"])),
-        "unknown_sites": sorted(unknown_sites, key=lambda r: (r["file"], r["line"])),
-        "shadowed_keeps": sorted(shadowed_keeps, key=lambda r: (r["line"], r["scope"])),
-        "positional_callsites_untouched": positional_untouched,
-        "verification": evidence,
-        "gate": gate,
-        "law": ("definition + body + resolvable keyword call sites renamed in one "
-                "in-place pass; scoping/shadowing respected byte-exactly; dynamic "
-                "receivers list and lower complete, never silently dropped; named "
-                "tests run post-edit and a red suite rolls the whole edit back"),
-        "complete": complete,
-    }
-    out_abs.parent.mkdir(parents=True, exist_ok=True)
-    text = json.dumps(artifact, indent=2, ensure_ascii=False) + "\n"
-    out_abs.write_text(text, encoding="utf-8")
-    out_verified = json.loads(out_abs.read_text(encoding="utf-8")) == artifact
+        changed = [p.relative_to(src_abs).as_posix() for p, original in originals.items()
+                   if not delivery._source_matches(p, applied.get(p, original), modes[p])]
+        if changed:
+            _fail("SOURCE_CHANGED_AFTER_VERIFICATION:" + ",".join(changed))
 
-    return {
-        "adapter": "python_refactor_rename_parameter",
-        "module": module_rel,
-        "qualname": qualname,
-        "old_param": old,
-        "new_param": new,
-        "edit_count": len(edit_rows),
-        "files_edited": len(files_edited),
-        "unknown_sites": len(unknown_sites),
-        "shadowed_keeps": len(shadowed_keeps),
-        "gate": gate,
-        "complete": complete,
-        "output_path": out_rel,
-        "output_sha256": _sha256(text.encode("utf-8")),
-        "output_verified": out_verified,
-        "verified": bool(verified),
-    }
+        artifact = {
+            "schema": SCHEMA,
+            "source_root": src_rel,
+            "module": module_rel,
+            "target_module": target_mod,
+            "qualname": qualname,
+            "old_param": old,
+            "new_param": new,
+            "edit_count": len(edit_rows),
+            "files_edited": files_edited,
+            "edits": sorted(edit_rows, key=lambda r: (r["file"], r["line"])),
+            "unknown_sites": sorted(unknown_sites, key=lambda r: (r["file"], r["line"])),
+            "shadowed_keeps": sorted(shadowed_keeps, key=lambda r: (r["line"], r["scope"])),
+            "positional_callsites_untouched": positional_untouched,
+            "verification": evidence,
+            "gate": gate,
+            "law": ("definition + body + resolvable keyword call sites renamed in one "
+                    "in-place pass; scoping/shadowing respected byte-exactly; dynamic "
+                    "receivers list and lower complete, never silently dropped; named "
+                    "tests run post-edit and a red suite rolls the whole edit back"),
+            "complete": complete,
+        }
+        out_abs.parent.mkdir(parents=True, exist_ok=True)
+        text = json.dumps(artifact, indent=2, ensure_ascii=False) + "\n"
+        report_mode = stat.S_IMODE(out_abs.stat().st_mode) if out_abs.is_file() else 0o644
+        delivery._atomic_write(out_abs, text.encode("utf-8"), mode=report_mode)
+        out_verified = json.loads(out_abs.read_text(encoding="utf-8")) == artifact
+        if not out_verified:
+            _fail("REPORT_READBACK_FAILED")
+
+        return {
+            "adapter": "python_refactor_rename_parameter",
+            "module": module_rel,
+            "qualname": qualname,
+            "old_param": old,
+            "new_param": new,
+            "edit_count": len(edit_rows),
+            "files_edited": len(files_edited),
+            "unknown_sites": len(unknown_sites),
+            "shadowed_keeps": len(shadowed_keeps),
+            "gate": gate,
+            "complete": complete,
+            "output_path": out_rel,
+            "output_sha256": _sha256(text.encode("utf-8")),
+            "output_verified": out_verified,
+            "verified": bool(verified),
+        }
+    except BaseException:
+        delivery._restore_sources(originals, modes)
+        raise
 
 
 if __name__ == "__main__":

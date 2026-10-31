@@ -210,7 +210,10 @@ class SymbolIndexRegistryContractTests(unittest.TestCase):
 
     def test_the_entry_is_a_verified_bound_capability(self):
         self.assertEqual(self.entry["status"], "VERIFIED_BOUND_CAPABILITY")
-        self.assertEqual(self.entry["provides"], ["python.source.symbol_index"])
+        # Both declared effects denote the existing index artifact; the
+        # canonical effect is consumed by the actual index-to-intent chain.
+        self.assertEqual(self.entry["provides"],
+                         ["python.source.symbol_index", "python.source.symbols.index.ast"])
         self.assertEqual(self.entry["requires"], [])
         self.assertEqual(self.entry["adapter_module"], "python_source_symbol_index")
         self.assertEqual(self.entry["incremental_spend_usd"], 0)

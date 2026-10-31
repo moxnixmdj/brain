@@ -21394,10 +21394,9 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "concrete_execution_oracle",
+     "ast",
      "hashlib",
      "hypothesis",
-     "inspect",
      "json",
      "pathlib",
      "typing"
@@ -21427,7 +21426,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/evidence_oracle_hypothesis_v1.py",
-    "source_sha256": "b1629033d239f27cc9a61875f4d2af1ebec5820d14cbc6ecc8bf993be9144a32",
+    "source_sha256": "bdaad434fad30f459adeaae66ee8377d09c67bf2e8b856579a33749032182036",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -22604,7 +22603,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
-    "source_sha256": "9dbd8855499fa94c03f680a26ceba3939773efaa4b2c79890ee20ede72269ced",
+    "source_sha256": "87818d10caa915795648820d27e17528d2a07264e68e7a74d78118944ca45a98",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23103,7 +23102,6 @@
      "math",
      "os",
      "pathlib",
-     "subprocess",
      "sys",
      "textwrap",
      "typing"
@@ -23133,7 +23131,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "6dce8d0ce8f4b578ca90cfb6f7934e252fbafd64e63b5d5d4a12b0911f0fbb14",
+    "source_sha256": "a844b94172edd6e437bf08ea8794d4c0fce6a059955cdf3c831edd956d4e689e",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23340,7 +23338,6 @@
      "math",
      "os",
      "pathlib",
-     "subprocess",
      "sys",
      "typing"
     ],
@@ -23369,7 +23366,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
-    "source_sha256": "89ac7f978488624c6e55577b43899d08c98dfdc22cb858699f7ef382894b36a6",
+    "source_sha256": "0ecbe0066e509985cf34ffea88a811852374f379b22757852a41f011d09137fc",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23653,8 +23650,12 @@
      "json",
      "os",
      "pathlib",
+     "selectors",
+     "signal",
+     "stat",
      "subprocess",
      "sys",
+     "tempfile",
      "time",
      "typing"
     ],
@@ -23684,7 +23685,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "383dcbb50939d0213704ffea55134d45ba713624f2056d7f450adc93933ce161",
+    "source_sha256": "204cbb57981ecca2ab75c049b3f9382a3644ac9574bd41793da3cdd1fc1e2d9f",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23734,7 +23735,6 @@
    "declared_dependencies": {
     "declared_dependencies_checked": [
      "ast",
-     "hashlib",
      "json",
      "pathlib",
      "typing"
@@ -23749,7 +23749,7 @@
    "input_names": [],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "verified"
    ],
    "platforms": [
     "linux"
@@ -23758,7 +23758,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_pipeline_allowlist_gate_v1.py",
-    "source_sha256": "39655f667ff8d6d3fb206c0d4b93719887e6c3fbc74567fb9d748ba7e20ea2b6",
+    "source_sha256": "9dfb4752b8d8e8b8900fe70d52e1dc8abfe827fd25ef5bf614c40ef532af2730",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23805,7 +23805,6 @@
    "declared_dependencies": {
     "declared_dependencies_checked": [
      "ast",
-     "hashlib",
      "json",
      "pathlib",
      "typing"
@@ -23820,7 +23819,7 @@
    "input_names": [],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "verified"
    ],
    "platforms": [
     "linux"
@@ -23829,7 +23828,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_pr_land_composer_v1.py",
-    "source_sha256": "2f0a108d8071ce5479f6624eef0c4e2711014043271470d3477ccc1a32f16219",
+    "source_sha256": "ba948e35a8563ab782e760a54274f2cddef1fbe21695fbdf344d717b29ef9948",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24516,10 +24515,8 @@
      "pathlib",
      "re",
      "shutil",
-     "subprocess",
      "sys",
      "tempfile",
-     "time",
      "typing"
     ],
     "declared_dependency_executables": [],
@@ -24546,7 +24543,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
-    "source_sha256": "e57c10eaac49cf6ea9252d5f1db7d407eb25462c1d8020d9f583ea4592165a88",
+    "source_sha256": "41a63540ca6ee27b57cffb8fd6c77e64945ceae6edd93dedf9a7cd860924861d",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25197,8 +25194,9 @@
      "json",
      "os",
      "pathlib",
-     "subprocess",
+     "stat",
      "sys",
+     "tempfile",
      "typing"
     ],
     "declared_dependency_executables": [],
@@ -25227,7 +25225,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "7d9b45a1854496d89ac8a511b202b3c4855d8fde4d0f6623e8069e8144a098f3",
+    "source_sha256": "b55cbf572c5e7e98c183bff7941aaeb68cfa00a30874ecb54713e96ad32f154e",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25315,7 +25313,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "444c489f301e1eb3c751e3be21b812c9733ea203eada144a74604fee51b8405e",
+    "source_sha256": "6ee83e29f613b4495c0d673d18805c5a5b8af47d9c3eea15a97db87462d49db1",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25676,7 +25674,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-    "source_sha256": "169e5e0769b1c70acd3c1e77cec957fb15cd8c10b0f774fb3665117b03cff536",
+    "source_sha256": "b04f08e0fa00056a30c90dffff2906475c9575f8ed33aaa7947a89b700ffbf0d",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25845,7 +25843,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
-    "source_sha256": "4054efa46e5e749f3aaa742e5d4d787bc16e539755d7ea2aa38d447a8fa3d9dc",
+    "source_sha256": "423903c5e1c6d64e935145377b84ba1bf28f809517331a2431db1b3102465a4c",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -27384,7 +27382,6 @@
    "declared_dependencies": {
     "declared_dependencies_checked": [
      "ast",
-     "hashlib",
      "json",
      "pathlib",
      "typing"
@@ -27399,7 +27396,7 @@
    "input_names": [],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "verified"
    ],
    "platforms": [
     "linux"
@@ -27408,7 +27405,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_hardcore_final_supercomposer_v1.py",
-    "source_sha256": "43fe28ed0fb8aeb1c5f00e5bf57e22a1f366006422404d12ca2e9f9569c77bff",
+    "source_sha256": "ac581d2095fad703c578a40424848d45c294b11ace05ce340880a574b66ed3a8",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -27641,7 +27638,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
-    "source_sha256": "fbc45b16dd568059b53d85b209fc5322711d2309dda4e8683c70f75e70f1ada0",
+    "source_sha256": "b7c2535f06e37c1132398b43fd45fd37eb26c1c40647c0f0cafec0f3436dcc54",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -27689,7 +27686,6 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "hashlib",
      "json",
      "pathlib",
      "typing"
@@ -27707,7 +27703,7 @@
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "verified"
    ],
    "platforms": [
     "darwin",
@@ -27718,7 +27714,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "7a8b6e4094579b2fd04e96ac40455bb0f33f5a42fc759747df255cdd1286ac55",
+    "source_sha256": "922977ab94cd75b6ddb39eaf6450dbe02811432be4000fe0ef1f6315b3ab1f7a",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -27767,7 +27763,6 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "hashlib",
      "json",
      "pathlib",
      "typing"
@@ -27796,7 +27791,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py",
-    "source_sha256": "e6c0570df043917ded13389b8c1ae6ae3a09ed15de1eb5cfa11dcf932ade32b8",
+    "source_sha256": "db3d9dd835dcae0968f7c65666350822405b8134e0124db0a91dc291dd012e6a",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -27930,7 +27925,6 @@
    "declared_dependencies": {
     "declared_dependencies_checked": [
      "ast",
-     "hashlib",
      "json",
      "pathlib",
      "typing"
@@ -27945,7 +27939,7 @@
    "input_names": [],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
-    "output_verified"
+    "verified"
    ],
    "platforms": [
     "linux"
@@ -27954,7 +27948,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py",
-    "source_sha256": "030e905be1c7464e788d4f88fb5ffd9cd6e7860fcea167f4f8552ac613aed28e",
+    "source_sha256": "31a2edba1ae36526f34cbf9c03fd01339136c19be163ad7bc8ad9485153adb53",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28825,12 +28819,7 @@
    "adapter_module": "test_slice_never_miss_v1",
    "cost": 1,
    "declared_dependencies": {
-    "declared_dependencies_checked": [
-     "hashlib",
-     "json",
-     "pathlib",
-     "typing"
-    ],
+    "declared_dependencies_checked": [],
     "declared_dependency_executables": [],
     "kind": "PYTHON_SOURCE"
    },
@@ -28839,7 +28828,9 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "output_path"
+    "changed_paths",
+    "output_path",
+    "source_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28854,17 +28845,15 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/test_slice_never_miss_v1.py",
-    "source_sha256": "b71e43ae40508af8444d51b408865fc191c68ad20194e02c4721f8b301e2197d",
+    "source_sha256": "64da6efbc46a9395e1a0749f743327246b62cf101b8857a2ba5d2e4680f1680e",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
-    "test.selection.minimal",
-    "test.slice.never_miss.verified"
+    "python.source.change_impact.test_selection",
+    "python.source.change_impact.testselect.v1"
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
-   "requires": [
-    "python.source.change_impact.test_selection"
-   ],
+   "requires": [],
    "route": {
     "authority": "LIVE_VERIFIED_REGISTRY_RECHECKED_AT_CALL_TIME",
     "call": "execute(capability_id, inputs=..., instance_id=...)",
@@ -28874,19 +28863,17 @@
    "triggers": [
     "test",
     "slice",
-    "never-miss",
     "change-impact",
-    "2070",
-    "2096",
-    "honest",
-    "minimal",
-    "40x",
+    "selection",
+    "affected",
+    "python",
+    "ast",
     "never_miss",
     "v1",
-    "never",
-    "miss",
-    "verified",
-    "selection"
+    "source",
+    "change",
+    "impact",
+    "testselect"
    ],
    "verification": {
     "evidence_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json",
@@ -29339,16 +29326,16 @@
   "engines": 26,
   "knowledge_documents": 173,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6513,
-  "routing_tokens": 2172,
+  "research_index_records": 6515,
+  "routing_tokens": 2166,
   "skills": 18,
   "source_index_entry_points": 423,
-  "source_index_modules": 1890
+  "source_index_modules": 1891
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "12c67e3102bd72fd52eb9a69675c28736c836ee956e93ccbe92beaf7a592fb0a"
+  "value": "7cf79ab8b5ce08f1a3c82483382f53b8c75550f6ad12d99933beac235104415d"
  },
  "engines": [
   {
@@ -29837,12 +29824,6 @@
    "13": {
     "canonical/runtime/escape_progress_13_route_manifest_v1.py.auto.v1": 455.0
    },
-   "2070": {
-    "test.slice.never_miss.v1": 455.0
-   },
-   "2096": {
-    "test.slice.never_miss.v1": 455.0
-   },
    "26": {
     "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1": 228.5,
     "canonical/runtime/current_26_zero_reality_frontier_v2.py.auto.v1": 228.5,
@@ -29853,9 +29834,6 @@
    },
    "30": {
     "canonical/runtime/current_30_obligation_pointer_verifier.py.auto.v1": 455.0
-   },
-   "40x": {
-    "test.slice.never_miss.v1": 455.0
    },
    "50x": {
     "evidence.oracle.hypothesis_property.v1": 455.0
@@ -29981,7 +29959,8 @@
     "canonical/runtime/p3_real_context_v3_admission_v9.py.auto.v1": 71.692308
    },
    "affected": {
-    "python.source.change_impact.testselect.v1": 455.0
+    "python.source.change_impact.testselect.v1": 304.0,
+    "test.slice.never_miss.v1": 304.0
    },
    "against": {
     "sqlite.table.verify_against_json_records": 304.0,
@@ -30087,17 +30066,18 @@
     "terminal.kstar.root.assess.stdlib": 304.0
    },
    "ast": {
-    "code.multilanguage.parse.tree_sitter.v1": 77.5,
-    "python.patch.search.test_guided.ast.v1": 77.5,
-    "python.refactor.extract_function.v1": 77.5,
-    "python.refactor.rename_parameter.v1": 77.5,
-    "python.refactor.rename_symbol.v1": 77.5,
-    "python.software.repair.loop.coupled.ast.v1": 77.5,
-    "python.software.repair.loop.strict_progress.ast.v1": 77.5,
-    "python.software.repair.loop.test_guided.ast.v1": 77.5,
-    "python.source.audit.ast": 77.5,
-    "python.source.symbols.index.ast": 77.5,
-    "python.symbol.resolve.standalone.v1": 77.5
+    "code.multilanguage.parse.tree_sitter.v1": 71.692308,
+    "python.patch.search.test_guided.ast.v1": 71.692308,
+    "python.refactor.extract_function.v1": 71.692308,
+    "python.refactor.rename_parameter.v1": 71.692308,
+    "python.refactor.rename_symbol.v1": 71.692308,
+    "python.software.repair.loop.coupled.ast.v1": 71.692308,
+    "python.software.repair.loop.strict_progress.ast.v1": 71.692308,
+    "python.software.repair.loop.test_guided.ast.v1": 71.692308,
+    "python.source.audit.ast": 71.692308,
+    "python.source.symbols.index.ast": 71.692308,
+    "python.symbol.resolve.standalone.v1": 71.692308,
+    "test.slice.never_miss.v1": 71.692308
    },
    "astra": {
     "canonical/runtime/openai_math_astra_calibration_guard_v1.py.auto.v1": 455.0
@@ -32156,8 +32136,9 @@
     "engine:CERTIFIED_ROUTE": 1820.0
    },
    "change": {
-    "code.impact.tree_sitter.testselect.v1": 304.0,
-    "python.source.change_impact.testselect.v1": 304.0
+    "code.impact.tree_sitter.testselect.v1": 228.5,
+    "python.source.change_impact.testselect.v1": 228.5,
+    "test.slice.never_miss.v1": 228.5
    },
    "change-impact": {
     "software.hardcore.kernel.orchestrate.v1": 228.5,
@@ -34007,9 +33988,6 @@
    "hitting": {
     "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1": 455.0
    },
-   "honest": {
-    "test.slice.never_miss.v1": 455.0
-   },
    "honesty": {
     "canonical/runtime/honesty_root3_shared_boundary_reduction_v1.py.auto.v1": 228.5,
     "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py.auto.v1": 228.5,
@@ -34100,9 +34078,10 @@
     "image.qr.generate.qrencode": 2730.0
    },
    "impact": {
-    "code.impact.tree_sitter.testselect.v1": 228.5,
-    "python.source.change_impact.testselect.v1": 228.5,
-    "python.source.crossfile_edit.choreograph.v1": 228.5
+    "code.impact.tree_sitter.testselect.v1": 183.2,
+    "python.source.change_impact.testselect.v1": 183.2,
+    "python.source.crossfile_edit.choreograph.v1": 183.2,
+    "test.slice.never_miss.v1": 183.2
    },
    "impacted": {
     "python.source.change_impact.testselect.v1": 455.0
@@ -35057,8 +35036,7 @@
     "canonical/runtime/bytes_microkernel_v3_task_generator_v1.py.auto.v1": 455.0
    },
    "minimal": {
-    "python.source.change_impact.testselect.v1": 304.0,
-    "test.slice.never_miss.v1": 304.0
+    "python.source.change_impact.testselect.v1": 455.0
    },
    "minimum": {
     "canonical/runtime/livebench_pointwise_minimum_cut_v1.py.auto.v1": 153.0,
@@ -35066,9 +35044,6 @@
     "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1": 153.0,
     "canonical/runtime/terminal_minimum_causal_depth_guard_v1.py.auto.v1": 153.0,
     "terminal.kstar.root.assess.stdlib": 153.0
-   },
-   "miss": {
-    "test.slice.never_miss.v1": 455.0
    },
    "mission": {
     "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1": 455.0
@@ -35180,11 +35155,7 @@
     "python.source.complexity.v1": 682.5
    },
    "never": {
-    "python.source.dead_code.v1": 456.0,
-    "test.slice.never_miss.v1": 304.0
-   },
-   "never-miss": {
-    "test.slice.never_miss.v1": 455.0
+    "python.source.dead_code.v1": 682.5
    },
    "never_miss": {
     "test.slice.never_miss.v1": 455.0
@@ -36577,63 +36548,64 @@
     "python.repo.diff_apply_full_testgate.v1": 455.0
    },
    "python": {
-    "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1": 17.62069,
-    "code.multilanguage.parse.tree_sitter.v1": 17.62069,
-    "python.contract.check.crosshair.v1": 17.62069,
-    "python.contract.issue_orchestration.fusion.v1": 17.62069,
-    "python.evidence.contract.supercomposer.v1": 17.62069,
-    "python.fault.localize.dynamic.dataflow.v1": 17.62069,
-    "python.fault.patch.supercomposer.v1": 17.62069,
-    "python.fault.provenance.fusion.v1": 17.62069,
-    "python.fault.provenance.interprocedural.value.v1": 17.62069,
-    "python.issue.natural_language.parse_edit_intent.v1": 17.62069,
-    "python.orchestration.symbol.supercomposer.v1": 17.62069,
-    "python.patch.review.supercomposer.v1": 17.62069,
-    "python.patch.search.test_guided.ast.v1": 17.62069,
-    "python.pipeline.allowlist_gate.v1": 17.62069,
-    "python.pr.land.composer.v1": 17.62069,
-    "python.provenance.coupling.supercomposer.v1": 17.62069,
-    "python.refactor.extract_function.v1": 17.62069,
-    "python.refactor.inline_helper.v1": 17.62069,
-    "python.refactor.rename_parameter.v1": 17.62069,
-    "python.refactor.rename_symbol.v1": 17.62069,
-    "python.refactor.test_scaffold.fusion.v1": 17.62069,
-    "python.repo.diff_apply_full_testgate.v1": 17.62069,
-    "python.repo.pr_realize.v1": 17.62069,
-    "python.repository.acceptance.measure.v1": 17.62069,
-    "python.review.diff_coverage_gate.v1": 17.62069,
-    "python.review.diff_mutation_gate.v1": 17.62069,
-    "python.review.diff_perf_gate.v1": 17.62069,
-    "python.review.diff_security_gate.v1": 17.62069,
-    "python.review.diff_static_triage.v1": 17.62069,
-    "python.review.diff_type_gate.v1": 17.62069,
-    "python.software.issue_to_pr.orchestrate.v1": 17.62069,
-    "python.software.repair.apply.verified.v1": 17.62069,
-    "python.software.repair.guided.provenance.coupled.v1": 17.62069,
-    "python.software.repair.loop.coupled.ast.v1": 17.62069,
-    "python.software.repair.loop.strict_progress.ast.v1": 17.62069,
-    "python.software.repair.loop.test_guided.ast.v1": 17.62069,
-    "python.software.repair.measured_acceptance.v1": 17.62069,
-    "python.software.repair.semantic_acceptance.v1": 17.62069,
-    "python.software.request.semantic_behavior.compile.v1": 17.62069,
-    "python.source.audit.ast": 17.62069,
-    "python.source.change_impact.testselect.v1": 17.62069,
-    "python.source.complexity.v1": 17.62069,
-    "python.source.crossfile_edit.choreograph.v1": 17.62069,
-    "python.source.dead_code.v1": 17.62069,
-    "python.source.definition_count.v1": 17.62069,
-    "python.source.secret_scan.v1": 17.62069,
-    "python.source.symbols.index.ast": 17.62069,
-    "python.source.symbols.resolve.v1": 17.62069,
-    "python.source.taint_flow.v1": 17.62069,
-    "python.source.test_adequacy.v1": 17.62069,
-    "python.symbol.resolve.standalone.v1": 17.62069,
-    "python.task.acceptance.measured.objective.v1": 17.62069,
-    "python.test.pipeline.verifier.v1": 17.62069,
-    "python.tests.audit.unittest": 17.62069,
-    "python.tests.generate.scaffold.v1": 17.62069,
-    "python.vcs.merge_conflict.resolve.v1": 17.62069,
-    "software.hardcore.kernel.orchestrate.v1": 17.62069
+    "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1": 17.355932,
+    "code.multilanguage.parse.tree_sitter.v1": 17.355932,
+    "python.contract.check.crosshair.v1": 17.355932,
+    "python.contract.issue_orchestration.fusion.v1": 17.355932,
+    "python.evidence.contract.supercomposer.v1": 17.355932,
+    "python.fault.localize.dynamic.dataflow.v1": 17.355932,
+    "python.fault.patch.supercomposer.v1": 17.355932,
+    "python.fault.provenance.fusion.v1": 17.355932,
+    "python.fault.provenance.interprocedural.value.v1": 17.355932,
+    "python.issue.natural_language.parse_edit_intent.v1": 17.355932,
+    "python.orchestration.symbol.supercomposer.v1": 17.355932,
+    "python.patch.review.supercomposer.v1": 17.355932,
+    "python.patch.search.test_guided.ast.v1": 17.355932,
+    "python.pipeline.allowlist_gate.v1": 17.355932,
+    "python.pr.land.composer.v1": 17.355932,
+    "python.provenance.coupling.supercomposer.v1": 17.355932,
+    "python.refactor.extract_function.v1": 17.355932,
+    "python.refactor.inline_helper.v1": 17.355932,
+    "python.refactor.rename_parameter.v1": 17.355932,
+    "python.refactor.rename_symbol.v1": 17.355932,
+    "python.refactor.test_scaffold.fusion.v1": 17.355932,
+    "python.repo.diff_apply_full_testgate.v1": 17.355932,
+    "python.repo.pr_realize.v1": 17.355932,
+    "python.repository.acceptance.measure.v1": 17.355932,
+    "python.review.diff_coverage_gate.v1": 17.355932,
+    "python.review.diff_mutation_gate.v1": 17.355932,
+    "python.review.diff_perf_gate.v1": 17.355932,
+    "python.review.diff_security_gate.v1": 17.355932,
+    "python.review.diff_static_triage.v1": 17.355932,
+    "python.review.diff_type_gate.v1": 17.355932,
+    "python.software.issue_to_pr.orchestrate.v1": 17.355932,
+    "python.software.repair.apply.verified.v1": 17.355932,
+    "python.software.repair.guided.provenance.coupled.v1": 17.355932,
+    "python.software.repair.loop.coupled.ast.v1": 17.355932,
+    "python.software.repair.loop.strict_progress.ast.v1": 17.355932,
+    "python.software.repair.loop.test_guided.ast.v1": 17.355932,
+    "python.software.repair.measured_acceptance.v1": 17.355932,
+    "python.software.repair.semantic_acceptance.v1": 17.355932,
+    "python.software.request.semantic_behavior.compile.v1": 17.355932,
+    "python.source.audit.ast": 17.355932,
+    "python.source.change_impact.testselect.v1": 17.355932,
+    "python.source.complexity.v1": 17.355932,
+    "python.source.crossfile_edit.choreograph.v1": 17.355932,
+    "python.source.dead_code.v1": 17.355932,
+    "python.source.definition_count.v1": 17.355932,
+    "python.source.secret_scan.v1": 17.355932,
+    "python.source.symbols.index.ast": 17.355932,
+    "python.source.symbols.resolve.v1": 17.355932,
+    "python.source.taint_flow.v1": 17.355932,
+    "python.source.test_adequacy.v1": 17.355932,
+    "python.symbol.resolve.standalone.v1": 17.355932,
+    "python.task.acceptance.measured.objective.v1": 17.355932,
+    "python.test.pipeline.verifier.v1": 17.355932,
+    "python.tests.audit.unittest": 17.355932,
+    "python.tests.generate.scaffold.v1": 17.355932,
+    "python.vcs.merge_conflict.resolve.v1": 17.355932,
+    "software.hardcore.kernel.orchestrate.v1": 17.355932,
+    "test.slice.never_miss.v1": 17.355932
    },
    "python.contract.check.crosshair.v1": {
     "python.contract.check.crosshair.v1": 2730.0
@@ -38237,32 +38209,33 @@
     "python.review.diff_type_gate.v1": 455.0
    },
    "source": {
-    "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1": 35.555556,
-    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 35.555556,
-    "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1": 35.555556,
-    "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1": 35.555556,
-    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1": 35.555556,
-    "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1": 35.555556,
-    "code.multilanguage.parse.tree_sitter.v1": 35.555556,
-    "python.repository.acceptance.measure.v1": 53.333333,
-    "python.software.repair.apply.verified.v1": 35.555556,
-    "python.software.repair.loop.strict_progress.ast.v1": 53.333333,
-    "python.source.audit.ast": 35.555556,
-    "python.source.change_impact.testselect.v1": 35.555556,
-    "python.source.complexity.v1": 35.555556,
-    "python.source.crossfile_edit.choreograph.v1": 35.555556,
-    "python.source.dead_code.v1": 35.555556,
-    "python.source.definition_count.v1": 35.555556,
-    "python.source.secret_scan.v1": 35.555556,
-    "python.source.symbols.index.ast": 35.555556,
-    "python.source.symbols.resolve.v1": 35.555556,
-    "python.source.taint_flow.v1": 53.333333,
-    "python.source.test_adequacy.v1": 35.555556,
-    "python.vcs.merge_conflict.resolve.v1": 35.555556,
-    "source.authority.identity.ror": 35.555556,
-    "source.candidates.enumerate.stdlib": 35.555556,
-    "source.evidence.extract.objective_grounded.stdlib": 35.555556,
-    "source.objective_relevance.rank.bm25": 35.555556
+    "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1": 34.357143,
+    "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1": 34.357143,
+    "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1": 34.357143,
+    "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1": 34.357143,
+    "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1": 34.357143,
+    "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1": 34.357143,
+    "code.multilanguage.parse.tree_sitter.v1": 34.357143,
+    "python.repository.acceptance.measure.v1": 51.535714,
+    "python.software.repair.apply.verified.v1": 34.357143,
+    "python.software.repair.loop.strict_progress.ast.v1": 51.535714,
+    "python.source.audit.ast": 34.357143,
+    "python.source.change_impact.testselect.v1": 34.357143,
+    "python.source.complexity.v1": 34.357143,
+    "python.source.crossfile_edit.choreograph.v1": 34.357143,
+    "python.source.dead_code.v1": 34.357143,
+    "python.source.definition_count.v1": 34.357143,
+    "python.source.secret_scan.v1": 34.357143,
+    "python.source.symbols.index.ast": 34.357143,
+    "python.source.symbols.resolve.v1": 34.357143,
+    "python.source.taint_flow.v1": 51.535714,
+    "python.source.test_adequacy.v1": 34.357143,
+    "python.vcs.merge_conflict.resolve.v1": 34.357143,
+    "source.authority.identity.ror": 34.357143,
+    "source.candidates.enumerate.stdlib": 34.357143,
+    "source.evidence.extract.objective_grounded.stdlib": 34.357143,
+    "source.objective_relevance.rank.bm25": 34.357143,
+    "test.slice.never_miss.v1": 34.357143
    },
    "source.authority.identity.ror": {
     "source.authority.identity.ror": 2730.0
@@ -38847,8 +38820,9 @@
     "python.tests.generate.scaffold.v1": 115.25
    },
    "testselect": {
-    "code.impact.tree_sitter.testselect.v1": 304.0,
-    "python.source.change_impact.testselect.v1": 304.0
+    "code.impact.tree_sitter.testselect.v1": 228.5,
+    "python.source.change_impact.testselect.v1": 228.5,
+    "test.slice.never_miss.v1": 228.5
    },
    "text": {
     "evidence.claim_relation.generic_units.stdlib": 131.428571,
@@ -39767,47 +39741,46 @@
     "software.test.contract.supercomposer.v1": 102.666667
    },
    "verified": {
-    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1": 23.571429,
-    "code.impact.tree_sitter.testselect.v1": 23.571429,
-    "code.index.tree_sitter.incremental.v1": 23.571429,
-    "code.patch.tree_sitter.verify.v1": 23.571429,
-    "decision.synthesis.verify.stdlib": 23.571429,
-    "evidence.oracle.hypothesis_property.v1": 23.571429,
-    "knowledge.status.assert": 23.571429,
-    "orchestration.verify.bridge_enumeration.v1": 23.571429,
-    "plain_goal.bound_capability.grounding.verify.stdlib": 23.571429,
-    "python.contract.issue_orchestration.fusion.v1": 23.571429,
-    "python.evidence.contract.supercomposer.v1": 23.571429,
-    "python.fault.patch.supercomposer.v1": 23.571429,
-    "python.fault.provenance.fusion.v1": 23.571429,
-    "python.orchestration.symbol.supercomposer.v1": 23.571429,
-    "python.patch.review.supercomposer.v1": 23.571429,
-    "python.patch.search.test_guided.ast.v1": 23.571429,
-    "python.pipeline.allowlist_gate.v1": 23.571429,
-    "python.pr.land.composer.v1": 23.571429,
-    "python.provenance.coupling.supercomposer.v1": 23.571429,
-    "python.refactor.test_scaffold.fusion.v1": 23.571429,
-    "python.software.repair.apply.verified.v1": 35.357143,
-    "python.software.repair.guided.provenance.coupled.v1": 23.571429,
-    "python.software.repair.loop.coupled.ast.v1": 23.571429,
-    "python.software.repair.loop.strict_progress.ast.v1": 23.571429,
-    "python.software.repair.loop.test_guided.ast.v1": 23.571429,
-    "python.software.repair.measured_acceptance.v1": 23.571429,
-    "python.software.repair.semantic_acceptance.v1": 23.571429,
-    "python.symbol.resolve.standalone.v1": 23.571429,
-    "python.test.pipeline.verifier.v1": 23.571429,
-    "software.evidence.synthesis.supercomposer.v1": 23.571429,
-    "software.hardcore.closing.supercomposer.v1": 23.571429,
-    "software.hardcore.final.supercomposer.v1": 23.571429,
-    "software.hardcore.kernel.orchestrate.v1": 23.571429,
-    "software.hardcore.swe.supercomposer.v1": 23.571429,
-    "software.patch.synthesize.cegis.z3.v1": 23.571429,
-    "software.repair.choreograph.crossfile.v1": 23.571429,
-    "software.repair.loop.cegis_hypothesis.v1": 23.571429,
-    "software.review.gate.composer.v1": 23.571429,
-    "software.review.synthesis.supercomposer.v1": 23.571429,
-    "software.test.contract.supercomposer.v1": 23.571429,
-    "test.slice.never_miss.v1": 23.571429
+    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1": 24.097561,
+    "code.impact.tree_sitter.testselect.v1": 24.097561,
+    "code.index.tree_sitter.incremental.v1": 24.097561,
+    "code.patch.tree_sitter.verify.v1": 24.097561,
+    "decision.synthesis.verify.stdlib": 24.097561,
+    "evidence.oracle.hypothesis_property.v1": 24.097561,
+    "knowledge.status.assert": 24.097561,
+    "orchestration.verify.bridge_enumeration.v1": 24.097561,
+    "plain_goal.bound_capability.grounding.verify.stdlib": 24.097561,
+    "python.contract.issue_orchestration.fusion.v1": 24.097561,
+    "python.evidence.contract.supercomposer.v1": 24.097561,
+    "python.fault.patch.supercomposer.v1": 24.097561,
+    "python.fault.provenance.fusion.v1": 24.097561,
+    "python.orchestration.symbol.supercomposer.v1": 24.097561,
+    "python.patch.review.supercomposer.v1": 24.097561,
+    "python.patch.search.test_guided.ast.v1": 24.097561,
+    "python.pipeline.allowlist_gate.v1": 24.097561,
+    "python.pr.land.composer.v1": 24.097561,
+    "python.provenance.coupling.supercomposer.v1": 24.097561,
+    "python.refactor.test_scaffold.fusion.v1": 24.097561,
+    "python.software.repair.apply.verified.v1": 36.146341,
+    "python.software.repair.guided.provenance.coupled.v1": 24.097561,
+    "python.software.repair.loop.coupled.ast.v1": 24.097561,
+    "python.software.repair.loop.strict_progress.ast.v1": 24.097561,
+    "python.software.repair.loop.test_guided.ast.v1": 24.097561,
+    "python.software.repair.measured_acceptance.v1": 24.097561,
+    "python.software.repair.semantic_acceptance.v1": 24.097561,
+    "python.symbol.resolve.standalone.v1": 24.097561,
+    "python.test.pipeline.verifier.v1": 24.097561,
+    "software.evidence.synthesis.supercomposer.v1": 24.097561,
+    "software.hardcore.closing.supercomposer.v1": 24.097561,
+    "software.hardcore.final.supercomposer.v1": 24.097561,
+    "software.hardcore.kernel.orchestrate.v1": 24.097561,
+    "software.hardcore.swe.supercomposer.v1": 24.097561,
+    "software.patch.synthesize.cegis.z3.v1": 24.097561,
+    "software.repair.choreograph.crossfile.v1": 24.097561,
+    "software.repair.loop.cegis_hypothesis.v1": 24.097561,
+    "software.review.gate.composer.v1": 24.097561,
+    "software.review.synthesis.supercomposer.v1": 24.097561,
+    "software.test.contract.supercomposer.v1": 24.097561
    },
    "verifier": {
     "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1": 24.097561,
@@ -53440,7 +53413,7 @@
   "included_source_count": 951,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d064cacaad9e1722291fb242ed1088522d2fdfd2ccf129d20207a6fdec680f40"
+  "source_tree_digest": "59d279006ed7c8debf19517437321c30463deb7c6bc8a75183e45848ea437e21"
  },
  "research_index": [
   {
@@ -169402,6 +169375,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-10-30",
+   "id": "research:canonical/verification/SWE_EXECUTION_BOUNDARY_LOCAL_MEASUREMENT_20261030_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SWE_EXECUTION_BOUNDARY_LOCAL_MEASUREMENT_20261030_V1.json",
+   "schema": "PROJECT_BRAIN_LOCAL_SWE_EXECUTION_BOUNDARY_MEASUREMENT_V1",
+   "sha256": "7eb9307198dcdcc78960d9a8f9f5ba918a6bd9e1f2e8aafc6e8991ae4f6333dc",
+   "status": "",
+   "terms": {
+    "20261030": 1,
+    "boundary": 1,
+    "execution": 1,
+    "local": 1,
+    "measurement": 1,
+    "swe": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_PUBLIC_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -203407,6 +203400,51 @@
    }
   },
   {
+   "action_id": "SWE_WRITE_PREFLIGHT_TYPED_RETRY_REUSE_V1_20261030_V1",
+   "capability": false,
+   "date": "2026-10-30",
+   "id": "research:canonical/action_intents/SWE_WRITE_PREFLIGHT_TYPED_RETRY_REUSE_V1_20261030_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SWE_WRITE_PREFLIGHT_TYPED_RETRY_REUSE_V1_20261030_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ec2d32a12380a4a989070b6831b831267e3a64019c06e0829e7e56ecb356cc97",
+   "status": "",
+   "terms": {
+    "20261030": 1,
+    "actual": 2,
+    "after": 1,
+    "before": 1,
+    "bound": 1,
+    "break": 1,
+    "completion": 1,
+    "dispatch": 2,
+    "during": 1,
+    "evidence": 1,
+    "execution": 3,
+    "existing": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "identities": 1,
+    "identity": 1,
+    "integrity": 1,
+    "lifetimes": 1,
+    "mechanisms": 1,
+    "not": 1,
+    "outcomes": 1,
+    "owned-process-group": 1,
+    "phases": 1,
+    "preflight": 1,
+    "preserve": 1,
+    "report": 3,
+    "retries": 1,
+    "retry": 1,
+    "reuse": 2,
+    "reuse_swe_execution_boundaries": 1,
+    "source": 3,
+    "swe": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -211374,7 +211412,7 @@
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
    "id": "source:canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
-   "imported_by_count": 2,
+   "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
    "sha256": "f37063bbcfcb9e0250e3b037bc687f1c48855ac099be68749d25b340ccf73b73",
@@ -211679,7 +211717,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
-   "sha256": "f6fcafcfccce822b4c7afccdebdeee094975442378c244bb53d4b3ea055404a3",
+   "sha256": "ab8cdd9c6c38ec36387a0d466e4c9621f8a8d6a82bbcf1e706b647811aae336f",
    "summary": "Independent structural verifier for grounded executable composition.",
    "symbol_count": 7,
    "symbols": [
@@ -212175,7 +212213,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_issue_nl_parse_edit_intent.py",
-   "sha256": "da795434cc2ed8b7dcd595ffb9ac84587660c3cd42adfbea3be6b877e740b5d3",
+   "sha256": "c20115d7eba3d150645607a2f141ba84d2f94b0a9f0d38c5fbd555a8e28d8d92",
    "summary": "python.issue.natural_language.parse_edit_intent.v1 — issue prose -> edit ops.",
    "symbol_count": 10,
    "symbols": [
@@ -212290,7 +212328,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
-   "sha256": "ab7037bce8fe91052a48f7358a9687575c3e6678f8811375465da75f928326e8",
+   "sha256": "a8cda3680d10468a750541bb5e274ac750430891a8157f599ccf1added31ec84",
    "summary": "python.refactor.extract_function.v1 — scope-aware statement-block",
    "symbol_count": 8,
    "symbols": [
@@ -212329,9 +212367,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_rename_parameter.py",
-   "sha256": "cdbb3c2dabed47b4bd8f23f4462e41521b91e8cb332fff79eeefa2506b560e55",
+   "sha256": "14a35fb3fd755fb624d03f53a32c611b7fa907f65006d4fb8f603b6ca06f8b66",
    "summary": "python.refactor.rename_parameter.v1 — scope-aware parameter rename with",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "_binds_name",
     "_collect_body_renames",
@@ -212339,6 +212377,7 @@
     "_modname_of",
     "_module_callsites",
     "_params_of",
+    "_refuse_replacement_capture",
     "_safe_path",
     "_sha256",
     "run"
@@ -212354,6 +212393,7 @@
     "python": 1,
     "python.refactor.rename_parameter.v1": 1,
     "refactor": 1,
+    "refuse_replacement_capture": 1,
     "rename": 2,
     "run": 1,
     "safe_path": 1,
@@ -212369,7 +212409,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
-   "sha256": "ae3597e01b9a02652ceb55319d32dc4e5ac21b7f7885ab77cd3900d10d41bccf",
+   "sha256": "4b5d8ecc73d16ac58bafc7fded4539a5852ca877861df0a9a7a56c3d024cfef0",
    "summary": "python.refactor.rename_symbol.v1 — rename ANY def-sited symbol with",
    "symbol_count": 16,
    "symbols": [
@@ -212655,7 +212695,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_security_gate.py",
-   "sha256": "44c9c630a3303280d96227bb2482411b2899620c2bcb04da845b54f09bc25ca7",
+   "sha256": "e913f7a5842f00e672e1e5ddf609dbac228a786846b3631224334984560bd909",
    "summary": "python.review.diff_security_gate.v1 — security triage on changed lines.",
    "symbol_count": 6,
    "symbols": [
@@ -212692,7 +212732,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_static_triage.py",
-   "sha256": "90c2af1fd382e102d78f593a47dc01af937b4aaa61f37f8f0be7a2d2be4e7a99",
+   "sha256": "407e413af6a1dacccdf913fb0d381b8d2269637d42d6b1e1f7c9582c6b1ec2cb",
    "summary": "python.review.diff_static_triage.v1 — the review gate on the produced diff.",
    "symbol_count": 6,
    "symbols": [
@@ -212728,7 +212768,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_type_gate.py",
-   "sha256": "22b73dd4bdc499c1d7fc77893df013c4373d96bcda6d33030413f04cb706d4ce",
+   "sha256": "c7008055c8d2b775552ea46affbfdac099cc2bc4f8c8e778fb7d98db732cc166",
    "summary": "python.review.diff_type_gate.v1 — the type-soundness gate on the diff.",
    "symbol_count": 5,
    "symbols": [
@@ -212791,7 +212831,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "b3f736b6e9c739f7aacd919cd899f31ef0e2ceb5520242767f717a7af41c0901",
+   "sha256": "2b8b154b712a49caaa56a8c575b015db3260234a7887c79ce8acc5da6ed35574",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
    "symbol_count": 7,
    "symbols": [
@@ -212910,7 +212950,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_test_audit.py",
-   "sha256": "d644cd5a57b06a8b468795f0aaeaa7a44fa5069d5f0a2746c38697ab0f6542d6",
+   "sha256": "e0423395cf1caa1dee1a508c7860d0a1fdb3d88aafe4561d4bf970fcf7b7eeeb",
    "summary": "Deterministic repository-local Python test-corpus execution audit.",
    "symbol_count": 6,
    "symbols": [
@@ -218735,7 +218775,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_proposal_generators.py",
-   "sha256": "dd44ced72823bd90c8f5defa8e9c5e22c96ac844742df2f9031147e84331614a",
+   "sha256": "8664d4f717ee36685d59d3bf505fac29433a5a7cf564bef6461c6278c9dc9c3a",
    "summary": "Fail-closed proposal generators for verified Project Brain capabilities.",
    "symbol_count": 20,
    "symbols": [
@@ -218903,7 +218943,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
-   "sha256": "68ebc4ae7f08b616f087403275d51d6eaea1044f3896d94084d6a4e46c577885",
+   "sha256": "8c8d0888c8e76838daff1c886f076509fc699d4ae631b651cc43d9e30eed8413",
    "summary": "One sentence selects one capability: retrieval PROPOSES, typed admission DISPOSES.",
    "symbol_count": 25,
    "symbols": [
@@ -221069,7 +221109,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "359648e8dab60f446497deacae6f1ef277d9eb50da0d45d05caf93c19a5ac230",
+   "sha256": "41f04daa75e1f9cc27a030720a649a417f0d7c50d48fa3abdf80b7aad81c5462",
    "summary": "Routing a sentence to a typed capability chain.",
    "symbol_count": 54,
    "symbols": [
@@ -221510,6 +221550,32 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/composition_inventory_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/composition_inventory_v1.py",
+   "sha256": "902ada572c26509f7e3cff7d5264c268a44b79466026b81738e8bce8e07c7112",
+   "summary": "Shared reporting boundary for metadata-only composition inventories.",
+   "symbol_count": 1,
+   "symbols": [
+    "write_inventory_report"
+   ],
+   "terms": {
+    "boundary": 1,
+    "composition": 2,
+    "inventories": 1,
+    "inventory": 1,
+    "metadata-only": 1,
+    "reporting": 1,
+    "shared": 1,
+    "v1": 1,
+    "write_inventory_report": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/composition_state_capsule_guard_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -221874,7 +221940,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confine_v1.py",
-   "sha256": "96258d5a47369bc0db672869802a67cbae68b6f7fe1519585ab74a752806f4d4",
+   "sha256": "2caca10dafc3f10b994aac9518934804ad06ab1c1b32ffe7859e65ecd510c53f",
    "summary": "Real confinement: only the project is writable.",
    "symbol_count": 2,
    "symbols": [
@@ -224973,7 +225039,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "9fedefab270634f2cd8dbd976574c763a13551726201aaa38ae03f7fc12fcae3",
+   "sha256": "fe7f8ceb0750689bb0152446aa16654f3b9c9cac083cfb181131e16fc607d34d",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 5,
    "symbols": [
@@ -227765,7 +227831,7 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/execute_v1.py",
-   "sha256": "a98765a8190a6a98246f120e1a678f33f67e44f2d84d9ad664ef3dfc0caf20ad",
+   "sha256": "ce7f665bc7b56ac2b9a3ebb8c8908760a7d87aa1063801d452c1d81a60bbb587",
    "summary": "The general action: run a program, then prove what it did.",
    "symbol_count": 10,
    "symbols": [
@@ -232720,7 +232786,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "bc04418cc3aa8355e256a052b7d3ca674b45399bf8206fad12d82e6d19c1b844",
+   "sha256": "b6d01d704d111ede14af10f7f6cb8706f0de4ef942dce82560dee1c78349b05d",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 132,
    "symbols": [
@@ -232826,7 +232892,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "04964aee0288240ec01c2a6448389a2733f700ffadd83e006a1d493c40d8f86c",
+   "sha256": "7d45c52d54c7928a4415f8aa8c64fa81512857d7ddead03d6a71e37ab842d12b",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 76,
    "symbols": [
@@ -239134,9 +239200,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "be081aebd3847b750be2f45cfa9eeb86853d0491f67be9da1f91952cabdb8ff3",
+   "sha256": "7be9f8bfa9e4f349027bc8278a6f38c009d35c9e33941af5845f97d95a327a87",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 58,
+   "symbol_count": 59,
    "symbols": [
     "LocalExecutionFailure",
     "_check_expectation",
@@ -239149,6 +239215,7 @@
     "_dag_result",
     "_dag_rows",
     "_destructive_targets",
+    "_edit_promise_matches",
     "_exact_acceptance",
     "_execute",
     "_execute_capability_dag",
@@ -239160,8 +239227,7 @@
     "_is_executable",
     "_is_python_code",
     "_named_executable",
-    "_observation_roots",
-    "_output_keys"
+    "_observation_roots"
    ],
    "terms": {
     "admission": 2,
@@ -259886,9 +259952,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
-   "sha256": "cd207d0d658c7c6115f79567b5fd9c9e532467f9145f41f3797970e275edfaad",
+   "sha256": "a0cb314457ea51b79918df1e3363897f0ade645309c178f69beff7127b14e88f",
    "summary": "Generic raw-goal acceptance: every claimed effect is re-opened from disk.",
-   "symbol_count": 52,
+   "symbol_count": 54,
    "symbols": [
     "_STATES_A_COMMAND",
     "_action_rows",
@@ -268566,7 +268632,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "a2a1df776bbaa5f4d5d3ababcfff5e3ba9197f47cda84dc58e7805b2c5c906b4",
+   "sha256": "cd9d2bc40cedfe22e82b08d49b477f548268969196b2965ffc5f48b3ed4f1c26",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 9,
    "symbols": [
@@ -277277,16 +277343,18 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/write_authority_v1.py",
-   "sha256": "2b9a8f109bb7e5b5e0299f378bb8d8a93d12554e5a12f4a1caf13c560726e807",
+   "sha256": "7d00d69b2d2793a97be2120b69b99a33614710b49cbcaaf2a79c0f785d58b16a",
    "summary": "A capability may not write its report over the file it was asked to read.",
-   "symbol_count": 8,
+   "symbol_count": 10,
    "symbols": [
     "WriteAuthorityViolation",
     "_as_path",
+    "_directory_source_files",
     "_input_values",
     "_inside",
     "check",
     "check_report",
+    "check_review_inputs",
     "is_source_transformer",
     "violation"
    ],
@@ -277297,6 +277365,8 @@
     "capability": 1,
     "check": 1,
     "check_report": 1,
+    "check_review_inputs": 1,
+    "directory_source_files": 1,
     "file": 1,
     "input_values": 1,
     "inside": 1,
@@ -277359,20 +277429,24 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
-   "sha256": "bee3c54df2e412ad8430f5eac38ead214739704c924bdffaf5229245fae27792",
+   "sha256": "9a203909f402d3c56aace2db44ed30c3e25d86170d033a18fc19a211356964bd",
    "summary": "",
-   "symbol_count": 5,
+   "symbol_count": 7,
    "symbols": [
     "NamespaceConfinementError",
     "_inside_mounts",
+    "canonical_environment",
     "canonical_policy",
+    "isolated_environment",
     "policy_sha256",
     "run_confined"
    ],
    "terms": {
     "ambient": 1,
+    "canonical_environment": 1,
     "canonical_policy": 1,
     "inside_mounts": 1,
+    "isolated_environment": 1,
     "launcher": 1,
     "namespace": 1,
     "namespaceconfinementerror": 1,

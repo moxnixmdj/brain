@@ -202,11 +202,34 @@ class RepairApplyVerifiedTests(unittest.TestCase):
                                  out["pre_apply_test_returncode"],out["post_apply_test_returncode"]))
         self.assertEqual(verdicts[0],verdicts[1])
 
-    def test_missing_test_paths_is_refused_rather_than_guessed(self):
+    def test_missing_test_paths_reuses_discovery_and_really_repairs(self):
+        # The shared discovery implementation superseded the old mandatory-path
+        # contract. Absence of an argument is not absence of a real test corpus.
+        import subprocess
         td,root=self.fixture()
         with td:
-            with self.assertRaisesRegex(applyv1.RepairApplyError,"TEST_PATHS_REQUIRED"):
+            oracle=(root/"test_all.py").read_bytes()
+            out=applyv1.run({"source_root":".","output_path":"r.json"},root)
+            self.assertEqual(out["test_paths_source"],"discovered_under_source_root")
+            self.assertTrue(out["applied"],out)
+            self.assertEqual(out["pre_apply_test_returncode"],1)
+            self.assertEqual(out["post_apply_test_returncode"],0)
+            self.assertEqual((root/"m.py").read_bytes(),b"def f(x):\n    return x <= 3\n")
+            self.assertEqual((root/"test_all.py").read_bytes(),oracle)
+            fresh=subprocess.run([sys.executable,"-B","test_all.py"],cwd=root,
+                                 capture_output=True,timeout=10,check=False)
+            self.assertEqual(fresh.returncode,0,fresh.stderr)
+
+    def test_missing_corpus_is_refused_without_writing_source_or_report(self):
+        td,root=self.fixture()
+        with td:
+            (root/"test_all.py").unlink()
+            before=(root/"m.py").read_bytes()
+            with self.assertRaisesRegex(applyv1.RepairApplyError,
+                                        "^NO_TEST_FILES_UNDER_SOURCE_ROOT$"):
                 applyv1.run({"source_root":".","output_path":"r.json"},root)
+            self.assertEqual((root/"m.py").read_bytes(),before)
+            self.assertFalse((root/"r.json").exists())
 
 
 if __name__=="__main__":

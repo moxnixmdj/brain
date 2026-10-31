@@ -41,7 +41,8 @@ Inputs (kwargs, repo-confined):
   python_executable, timeout_s
 
 result_fields: adapter, complete, edit_count, files_edited, inputs, outputs,
-extracted_name, output_path, output_sha256, output_verified, verified.
+extracted_name, output_path, output_sha256, output_verified, verified,
+execution_diagnostics (raw runner output, outside the deterministic artifact).
 """
 
 from __future__ import annotations
@@ -430,6 +431,7 @@ def run(args, root):
     module_abs.write_text(new_text, encoding="utf-8")
 
     evidence = {"run_tests": run_tests}
+    execution_diagnostics = None
     gate = "PASS"
     if run_tests:
         env = {"PYTHONDONTWRITEBYTECODE": "1"}
@@ -444,7 +446,11 @@ def run(args, root):
             module_abs.write_bytes(original_bytes)
             _fail("TIMEOUT:extraction fully rolled back")
         evidence["pytest_rc"] = proc.returncode
-        evidence["pytest_tail"] = proc.stdout.strip().splitlines()[-3:]
+        # Logs describe this execution, not the deterministic transformation.
+        # Preserve them in the returned result rather than hashing wall-clock
+        # timing and arbitrary application output into the semantic artifact.
+        execution_diagnostics = {"returncode": proc.returncode,
+                                 "stdout": proc.stdout, "stderr": proc.stderr}
         if proc.returncode != 0:
             module_abs.write_bytes(original_bytes)
             _fail("TESTS_RED_AFTER_EDIT:extraction fully rolled back:" +
@@ -489,6 +495,7 @@ def run(args, root):
         "output_sha256": _sha256(text_out.encode("utf-8")),
         "output_verified": json.loads(out_abs.read_text(encoding="utf-8")) == artifact,
         "verified": verified,
+        "execution_diagnostics": execution_diagnostics,
     }
 
 

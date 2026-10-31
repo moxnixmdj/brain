@@ -180,12 +180,20 @@ class LiveFrontDoorRetryTests(unittest.TestCase):
         """Where the adapter itself cannot do the job, the door stays fail-closed.
         The Point: the retry must not convert an honest adapter fault into credit."""
         base = _fresh("honest_fail")
-        # Bare "fix X": primary executes a composed chain (executed=True), so the
-        # conservative guard must NOT re-run anything; verdict stays fail-closed.
-        goal = "fix %s" % _rel(base / "pkg/calc.py")
+        # The old subtraction fixture is now genuinely repaired by the existing
+        # apply adapter. Use an unconditional raise outside its bounded edit
+        # vocabulary so this remains a real negative control, not a demand that
+        # a working repair be refused. Failed dispatched retries must be reported.
+        source = base / "pkg/calc.py"
+        broken = 'def add(a, b):\n    raise RuntimeError("outside bounded repair vocabulary")\n'
+        source.write_text(broken, encoding="utf-8")
+        goal = "fix %s" % _rel(source)
         result = door.solve({"task_id": "SWE_honest", "goal": goal})
         self.assertIs(result.get("pass"), False)
-        self.assertNotIn("typed_swe_retry", result)
+        self.assertIs(result.get("executed"), True)
+        self.assertEqual(result["typed_swe_retry"]["selected_capability"],
+                         "python.software.repair.apply.verified.v1")
+        self.assertEqual(source.read_text(encoding="utf-8"), broken)
 
     def test_non_swe_front_door_refusals_are_byte_for_byte_unchanged(self):
         """The three pinned regression goals are non-SWE: retry never fires."""

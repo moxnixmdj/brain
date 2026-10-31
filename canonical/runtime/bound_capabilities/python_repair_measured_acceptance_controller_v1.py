@@ -145,16 +145,18 @@ def _candidate_test_layout(
                 candidate=(repo/raw).resolve()
             elif raw.is_absolute():
                 candidate=raw.resolve()
-            on_disk=candidate.is_file()
+            on_disk=candidate.is_file() or candidate.is_dir()
         except OSError:
             # A test argv token is a command argument, not necessarily a path.
             # ``python3 -c '<harness program>'`` carries a whole test runner in
             # ONE token, and stat() on that name fails with ENAMETOOLONG, which
             # Path.is_file() re-raises instead of answering False.  Such a token
-            # is not a file inside the source root, so it must pass through
+            # is not an existing file/directory inside the source root, so it must pass through
             # verbatim -- exactly as every other non-file token does -- rather
             # than abort the measurement.
             on_disk=False
+        # Directory arguments (e.g. unittest discover -s SRC/tests) need
+        # the same relocation as files when executing a copied candidate.
         if on_disk and (candidate==source_root or source_root in candidate.parents):
             rewritten.append(_rel(source_root,candidate))
         else:

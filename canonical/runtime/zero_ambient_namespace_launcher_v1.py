@@ -5,6 +5,8 @@ from typing import Any
 
 SCHEMA='PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1'
 _ALLOWED_ENV={'LANG','LC_ALL','TZ','PYTHONHASHSEED','PYTHONDONTWRITEBYTECODE'}
+# Privileged setup tools come from system directories, never caller PATH.
+_SYSTEM_TOOL_PATH='/usr/bin:/bin:/usr/sbin:/sbin'
 
 class NamespaceConfinementError(ValueError): pass
 
@@ -21,6 +23,25 @@ def _inside_mounts(path:pathlib.Path)->list[str]:
         if mp!=target and mp.startswith(target.rstrip('/')+'/'): hits.append(mp)
     return sorted(set(hits))
 
+def canonical_environment(env_raw:Mapping[str,Any]|None=None)->dict[str,str]:
+    """Validate explicitly supplied values using the existing workload allowlist."""
+    if env_raw is None: env_raw={}
+    if not isinstance(env_raw,Mapping): raise NamespaceConfinementError('ENV_NOT_OBJECT')
+    env={}
+    for k0,v0 in env_raw.items():
+        k=str(k0); v=str(v0)
+        if k not in _ALLOWED_ENV: raise NamespaceConfinementError('ENV_NAME_NOT_ALLOWLISTED:'+k)
+        if '\x00' in v or len(v)>512: raise NamespaceConfinementError('ENV_VALUE_INVALID:'+k)
+        env[k]=v
+    return env
+
+def isolated_environment(*,home:str='/tmp',env:Mapping[str,Any]|None=None)->dict[str,str]:
+    """Minimal subprocess environment: never inherit caller credentials/startup paths."""
+    if not isinstance(home,str) or not home.startswith('/') or '\x00' in home:
+        raise NamespaceConfinementError('HOME_INVALID')
+    return {'PATH':'/usr/bin:/bin','HOME':home,'PYTHONDONTWRITEBYTECODE':'1',
+            **canonical_environment(env)}
+
 def canonical_policy(policy:Mapping[str,Any])->dict[str,Any]:
     if not isinstance(policy,Mapping): raise NamespaceConfinementError('POLICY_NOT_OBJECT')
     argv_raw=policy.get('argv')
@@ -34,14 +55,7 @@ def canonical_policy(policy:Mapping[str,Any])->dict[str,Any]:
     if not input_dir.is_dir(): raise NamespaceConfinementError('INPUT_DIR_REQUIRED')
     nested=_inside_mounts(input_dir)
     if nested: raise NamespaceConfinementError('INPUT_DIR_HAS_NESTED_MOUNTS:'+','.join(nested))
-    env_raw=policy.get('env') or {}
-    if not isinstance(env_raw,Mapping): raise NamespaceConfinementError('ENV_NOT_OBJECT')
-    env={}
-    for k0,v0 in env_raw.items():
-        k=str(k0); v=str(v0)
-        if k not in _ALLOWED_ENV: raise NamespaceConfinementError('ENV_NAME_NOT_ALLOWLISTED:'+k)
-        if '\x00' in v or len(v)>512: raise NamespaceConfinementError('ENV_VALUE_INVALID:'+k)
-        env[k]=v
+    env=canonical_environment(policy.get('env') or {})
     lim=policy.get('limits') or {}
     if not isinstance(lim,Mapping): raise NamespaceConfinementError('LIMITS_NOT_OBJECT')
     pids=int(lim.get('pids',32)); memory_mb=int(lim.get('memory_mb',256)); cpu_seconds=int(lim.get('cpu_seconds',2))
@@ -96,7 +110,7 @@ exec "$CHROOT_BIN" "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_
 def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     p=canonical_policy(policy); lim=p['limits']
     required_names=['unshare','mount','chroot','setpriv','ip','bash','env']
-    resolved={name:shutil.which(name) for name in required_names}
+    resolved={name:shutil.which(name,path=_SYSTEM_TOOL_PATH) for name in required_names}
     missing=[name for name,path in resolved.items() if not path]
     if missing: raise NamespaceConfinementError('HOST_PRIMITIVE_MISSING:'+','.join(missing))
     root=tempfile.mkdtemp(prefix='brain-ns-membrane-'); os.chown(root,p['host_uid'],p['host_gid'])
@@ -116,7 +130,7 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
                 broker.append(b)
         except OSError: pass
     th=threading.Thread(target=reader,daemon=True); th.start()
-    env={'BROKER_FD':str(child.fileno()),'PYTHONDONTWRITEBYTECODE':'1'}
+    env={'PATH':_SYSTEM_TOOL_PATH,'BROKER_FD':str(child.fileno()),'PYTHONDONTWRITEBYTECODE':'1'}
     for k,v in p['env'].items(): env[k]=v
     cmd=[resolved['unshare'],'--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts',resolved['bash'],'-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),resolved['setpriv'],'--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all',resolved['env'],'-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
     for k,v in p['env'].items(): cmd.append(k+'='+v)

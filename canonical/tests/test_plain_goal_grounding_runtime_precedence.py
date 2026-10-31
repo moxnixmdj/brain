@@ -64,7 +64,7 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
         ok,reason=verifier.verify(goal,result,registry)
         self.assertTrue(ok,reason)
 
-    def test_existing_bound_grounding_blocks_external_supplier_discovery(self):
+    def test_unbound_match_does_not_block_external_supplier_discovery(self):
         registry={
             "python.tests.audit.unittest":{
                 "status":"VERIFIED_BOUND_CAPABILITY",
@@ -92,12 +92,12 @@ class PlainGoalGroundingRuntimePrecedenceTests(unittest.TestCase):
                         runtime,
                         "_load_auto_capability_acquisition",
                         side_effect=AssertionError(
-                            "external acquisition must not be reached after bound grounding"
+                            "discovery reached for unbound match"
                         ),
                     ):
                         with self.assertRaisesRegex(
-                            runtime.Blocker,
-                            "BOUND_CAPABILITY_GROUNDING_AVAILABLE_COMPOSITION_(REQUIRED|BLOCKED)",
+                            AssertionError,
+                            "discovery reached for unbound match",
                         ):
                             runtime.run_goal(step,mission)
         finally:

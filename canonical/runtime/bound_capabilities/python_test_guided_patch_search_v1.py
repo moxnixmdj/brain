@@ -14,12 +14,15 @@ Candidate-only search over one repository-local Python source file. The runtime:
 No model calls, network calls, package installation, or canonical source writes.
 """
 from __future__ import annotations
-import ast, difflib, hashlib, importlib.util, json, os, pathlib, subprocess, sys, time
+import ast, difflib, hashlib, importlib.util, json, os, pathlib, selectors, signal, stat, subprocess, sys, tempfile, time
 from typing import Any, Iterable, Mapping
 
 SCHEMA="PROJECT_BRAIN_PYTHON_TEST_GUIDED_PATCH_SEARCH_V1"
 
 class PatchSearchError(RuntimeError): pass
+
+# Match the existing namespace broker's bounded aggregate-payload policy.
+MAX_TEST_OUTPUT_BYTES = 8_000_000
 
 def _safe_file(root: pathlib.Path, raw: Any, *, suffix: str|None=None) -> pathlib.Path:
     p=(root/str(raw or "")).resolve()
@@ -34,7 +37,14 @@ def _sha(data: bytes) -> str:
 
 def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
                extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
-    """Run the test argv and report the outcome.
+    """Run noninteractive test argv with bounded cleanup and report the outcome.
+
+    POSIX commands get an owned session; ordinary descendants are terminated on
+    completion, timeout or interruption. Escaped sessions and supervisor SIGKILL
+    require stronger isolation. Other platforms retain direct-process cleanup.
+    Pipe draining is bounded separately, and incomplete diagnostics are explicit.
+    POSIX retained stdout+stderr bytes have a shared cap; overflow raises a named
+    failure after cleanup, never a truncated success. Non-POSIX capture is unchanged.
 
     ``extra_env`` is merged over the inherited environment. It exists because the bound executor
     calls every adapter with the REPOSITORY ROOT as ``root``, and the subprocess inherits that as
@@ -54,24 +64,169 @@ def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
     if exe not in allowed:
         raise PatchSearchError("TEST_EXECUTABLE_NOT_PYTHON")
     started=time.monotonic()
+    env=None if not extra_env else {**os.environ,**{k:str(v) for k,v in extra_env.items()}}
+    grouped = os.name == 'posix'
+    # Reuse zero_ambient_namespace_launcher_v1's owned-session/killpg pattern.
+    # This controls ordinary descendants, NOT setsid escapes or hostile code.
+    # POSIX pipes are drained incrementally before decoding, with an aggregate
+    # budget, using the standard library rather than another process manager.
+    capture = ({'bufsize': 0} if grouped else
+               {'text': True, 'encoding': 'utf-8', 'errors': 'replace'})
+    proc=subprocess.Popen(argv,cwd=root,stdout=subprocess.PIPE,
+                          stderr=subprocess.PIPE,stdin=subprocess.DEVNULL,
+                          env=env,start_new_session=grouped,**capture)
+    timed_out=False
+    output_incomplete=False
+    stdout=stderr=''
+
+    def stop_owned():
+        try:
+            if grouped:
+                os.killpg(proc.pid,signal.SIGKILL)
+            elif proc.poll() is None:
+                proc.kill()
+        except ProcessLookupError:
+            pass
+
     try:
-        env=None if not extra_env else {**os.environ,**{k:str(v) for k,v in extra_env.items()}}
-        proc=subprocess.run(argv,cwd=root,text=True,capture_output=True,timeout=timeout_s,env=env)
-        return {
-            "returncode":proc.returncode,
-            "stdout":proc.stdout or "",
-            "stderr":proc.stderr or "",
-            "elapsed_s":round(time.monotonic()-started,6),
-            "timed_out":False,
-        }
-    except subprocess.TimeoutExpired as exc:
-        return {
-            "returncode":None,
-            "stdout":exc.stdout or "",
-            "stderr":exc.stderr or "",
-            "elapsed_s":round(time.monotonic()-started,6),
-            "timed_out":True,
-        }
+        if grouped:
+            buffers = {'stdout': bytearray(), 'stderr': bytearray()}
+            total = 0
+            deadline = started + timeout_s
+            drain_deadline = None
+            with selectors.DefaultSelector() as selector:
+                for name, pipe in (('stdout', proc.stdout), ('stderr', proc.stderr)):
+                    os.set_blocking(pipe.fileno(), False)
+                    selector.register(pipe.fileno(), selectors.EVENT_READ, name)
+                while selector.get_map() or proc.poll() is None:
+                    now = time.monotonic()
+                    if drain_deadline is None:
+                        if proc.poll() is not None:
+                            # Parent completion, not EOF from all descendants,
+                            # ends the test. Clean inherited-pipe holders now.
+                            stop_owned()
+                            drain_deadline = now + 1
+                        elif now >= deadline:
+                            timed_out = True
+                            stop_owned()
+                            drain_deadline = now + 1
+                    elif now >= drain_deadline:
+                        output_incomplete = bool(selector.get_map()) or proc.poll() is None
+                        break
+                    remaining = max(0, (drain_deadline or deadline) - now)
+                    if not selector.get_map():
+                        try:
+                            proc.wait(timeout=remaining)
+                        except subprocess.TimeoutExpired:
+                            pass
+                        continue
+                    for key, _ in selector.select(timeout=min(.05, remaining)):
+                        try:
+                            chunk = os.read(key.fd, 65536)
+                        except BlockingIOError:
+                            continue
+                        if not chunk:
+                            selector.unregister(key.fd)
+                            continue
+                        total += len(chunk)
+                        if total > MAX_TEST_OUTPUT_BYTES:
+                            # Never turn truncated output into a passing test.
+                            # The enclosing finally still owns process cleanup.
+                            raise PatchSearchError('TEST_OUTPUT_LIMIT_EXCEEDED')
+                        buffers[key.data].extend(chunk)
+            stdout, stderr = bytes(buffers['stdout']), bytes(buffers['stderr'])
+        else:
+            try:
+                stdout,stderr=proc.communicate(timeout=timeout_s)
+            except subprocess.TimeoutExpired:
+                timed_out=True
+                stop_owned()
+                try:
+                    stdout,stderr=proc.communicate(timeout=1)
+                except subprocess.TimeoutExpired as exc:
+                    # A detached descendant may retain a pipe. Do not turn the
+                    # timeout into an unbounded drain; retain partial diagnostics.
+                    output_incomplete=True
+                    stdout=exc.stdout or ''
+                    stderr=exc.stderr or ''
+    finally:
+        # Also clean silent background children after success/failure and when
+        # the caller interrupts us. SIGKILL of this supervisor cannot run finally.
+        stop_owned()
+        try:
+            proc.wait(timeout=1)
+        except subprocess.TimeoutExpired:
+            output_incomplete=True
+        for pipe in (proc.stdout,proc.stderr):
+            if pipe is not None:
+                pipe.close()
+    return {
+        'returncode':None if timed_out else proc.returncode,
+        'stdout':(stdout.decode('utf-8','replace') if isinstance(stdout,bytes) else stdout or '').replace('\r\n','\n').replace('\r','\n'),
+        'stderr':(stderr.decode('utf-8','replace') if isinstance(stderr,bytes) else stderr or '').replace('\r\n','\n').replace('\r','\n'),
+        'elapsed_s':round(time.monotonic()-started,6),
+        'timed_out':timed_out,
+        'process_cleanup_scope':'POSIX_PROCESS_GROUP' if grouped else 'DIRECT_PROCESS_ONLY',
+        'output_incomplete':output_incomplete,
+        'output_capture_scope':'BOUNDED_POSIX_PIPES' if grouped else 'UNBOUNDED_NON_POSIX_COMMUNICATE',
+        'output_limit_bytes':MAX_TEST_OUTPUT_BYTES if grouped else None,
+        # Preserve raw accounting before UTF-8 replacement/newline normalization.
+        'captured_output_bytes':total if grouped else None,
+    }
+
+
+def _run_trace(root: pathlib.Path, argv: list[str], timeout_s: int,
+               extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
+    """Read a trace result separately from suite-controlled stdout/stderr.
+
+    The wrapper receives an owned temporary result path as its last argument.
+    Reuse _run_tests for all process supervision. A bounded regular-file read
+    prevents transport confusion and unbounded result retention; it is NOT an
+    authentication boundary against code executing inside that same wrapper.
+    """
+    with tempfile.TemporaryDirectory(prefix='brain_trace_result_') as scratch:
+        path = pathlib.Path(scratch) / 'result.json'
+        run = _run_tests(root, [*argv, str(path)], timeout_s, extra_env)
+        if run['timed_out']:
+            raise PatchSearchError('TEST_TIMEOUT')
+        # POSIX diagnostics and structured result share the existing raw budget.
+        # Non-POSIX diagnostics retain their explicitly unbounded legacy scope;
+        # the separate artifact read is nevertheless bounded on every platform.
+        remaining = MAX_TEST_OUTPUT_BYTES - (run['captured_output_bytes'] or 0)
+        try:
+            flags = os.O_RDONLY | getattr(os, 'O_NONBLOCK', 0) | getattr(os, 'O_NOFOLLOW', 0)
+            if path.is_symlink():
+                raise PatchSearchError('TRACE_OUTPUT_INVALID')
+            fd = os.open(path, flags)
+            try:
+                info = os.fstat(fd)
+                if not stat.S_ISREG(info.st_mode):
+                    raise PatchSearchError('TRACE_OUTPUT_INVALID')
+                if info.st_size > remaining:
+                    raise PatchSearchError('TEST_OUTPUT_LIMIT_EXCEEDED')
+                # Keep descriptor ownership explicit even if fdopen rejects it.
+                with os.fdopen(fd, 'rb', closefd=False) as stream:
+                    payload = stream.read(remaining + 1)
+            finally:
+                os.close(fd)
+        except FileNotFoundError as exc:
+            raise PatchSearchError('TRACE_OUTPUT_MISSING') from exc
+        except OSError as exc:
+            raise PatchSearchError('TRACE_OUTPUT_INVALID') from exc
+        if len(payload) > remaining:
+            raise PatchSearchError('TEST_OUTPUT_LIMIT_EXCEEDED')
+        try:
+            result = json.loads(payload.decode('utf-8'))
+        except (UnicodeError, ValueError, RecursionError) as exc:
+            raise PatchSearchError('TRACE_OUTPUT_INVALID') from exc
+        if (not isinstance(result, dict) or type(result.get('pass')) is not bool
+                or not isinstance(result.get('events'), list)
+                or not isinstance(result.get('traceback'), list)
+                or type(result.get('event_count')) is not int
+                or result['event_count'] < 0):
+            raise PatchSearchError('TRACE_OUTPUT_INVALID')
+        result['returncode'] = run['returncode']
+        return result
 
 def _test_literals(paths: Iterable[pathlib.Path]) -> tuple[list[Any], list[str]]:
     nums=set()
@@ -273,7 +428,24 @@ def _brain_project_file(frame,root,cache):
  if key not in cache:
   try:
    path=pathlib.Path(filename).resolve()
-   cache[key]=path if path.is_file() and root in path.parents and path.suffix==".py" else None
+   libraries_key=("runtime_site_libraries",root,None)
+   if libraries_key not in cache:
+    # Discovery's directory-name blacklist also excludes build/env source.
+    # Trace only excludes actual interpreter installation roots, discovered by
+    # Python itself. Cache once; keep an explicitly selected library root visible.
+    import site
+    locations=list(site.getsitepackages())
+    if site.ENABLE_USER_SITE:
+     user=site.getusersitepackages()
+     locations.extend([user] if isinstance(user,str) else user or [])
+    libraries=[]
+    for location in locations:
+     try:library=pathlib.Path(location).resolve()
+     except (OSError,ValueError):continue
+     if root in library.parents:libraries.append(library)
+    cache[libraries_key]=tuple(libraries)
+   library_frame=any(library==path or library in path.parents for library in cache[libraries_key])
+   cache[key]=path if not library_frame and path.is_file() and root in path.parents and path.suffix==".py" else None
   except (OSError,ValueError):cache[key]=None
  return cache[key]
 
@@ -307,10 +479,13 @@ def _brain_run_stdlib(target,script):
  for _,fn in _brain_bare_functions(mod):suite.addTest(unittest.FunctionTestCase(fn))
  if suite.countTestCases()==0:
   if not script:raise RuntimeError("NO_TESTS_COLLECTED:"+str(target))
-  try:runpy.run_path(str(target),run_name="__main__")
-  except SystemExit as exc:
-   if exc.code not in (None,0):raise
-  return
+  # A script is one oracle, not one case per assertion. Reuse unittest's
+  # accounting and failure reporting instead of returning without a summary.
+  def _script_oracle():
+   try:runpy.run_path(str(target),run_name="__main__")
+   except SystemExit as exc:
+    if exc.code not in (None,0):raise
+  suite.addTest(unittest.FunctionTestCase(_script_oracle))
  class _R(unittest.TestResult):
   def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None;self.no_passing=False
   def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err

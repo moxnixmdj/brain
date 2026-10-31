@@ -729,7 +729,8 @@ def _effect_winner(goal: str, admitted: list[dict[str, Any]],
     broken ONLY by the retrieval shortlist order (never by the margin alone).
     An unstated effect or an unresolved tie returns None.
     """
-    text = str(goal or "").lower()
+    from canonical.runtime import goal_front_compiler_v1 as front
+    text = front.prose_only(goal).lower()
     preferred: list[str] = []
     for verbs, effects in _EFFECT_WORDS:
         if any(verb in text for verb in verbs):

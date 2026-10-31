@@ -15,10 +15,8 @@ import os
 import pathlib
 import re
 import shutil
-import subprocess
 import sys
 import tempfile
-import time
 from typing import Any, Mapping
 import importlib.util
 
@@ -244,36 +242,21 @@ def _run_tests(workspace: pathlib.Path, argv: list[str], timeout_s: int) -> dict
     env = dict(os.environ)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONHASHSEED"] = "0"
-    started = time.monotonic()
     try:
-        proc = subprocess.run(
-            argv,
-            cwd=workspace,
-            text=True,
-            capture_output=True,
-            timeout=timeout_s,
-            env=env,
-        )
-        return {
-            "returncode": int(proc.returncode),
-            "timed_out": False,
-            "elapsed_s": round(time.monotonic() - started, 6),
-            "stdout": proc.stdout or "",
-            "stderr": proc.stderr or "",
-        }
-    except subprocess.TimeoutExpired as exc:
-        return {
-            "returncode": 124,
-            "timed_out": True,
-            "elapsed_s": round(time.monotonic() - started, 6),
-            "stdout": exc.stdout or "",
-            "stderr": exc.stderr or "",
-        }
+        result = _PATCH._run_tests(workspace, argv, timeout_s, env)
+    except _PATCH.PatchSearchError as exc:
+        raise MeasurementError(str(exc)) from exc
+    # Keep the measurement's published integer timeout convention; the shared
+    # runner uses None when no actual parent exit verdict was observed.
+    if result["timed_out"]:
+        result["returncode"] = 124
+    return result
 
 
 def _test_count(text: str) -> int:
-    m = re.search(r"Ran\s+(\d+)\s+tests?", text)
-    return int(m.group(1)) if m else 0
+    # The shared stdlib runner emits one summary per named suite/script.
+    # Taking only the first silently loses subsequent executed cases.
+    return sum(int(n) for n in re.findall(r"^Ran\s+(\d+)\s+tests?\b", text, re.MULTILINE))
 
 
 def _copy_source(source_root: pathlib.Path, workspace: pathlib.Path) -> None:
@@ -306,6 +289,12 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
     before_manifest, before_sha = _tree_manifest(
         source_root, max_files=max_files, max_bytes=max_bytes
     )
+
+    # A report is not a source transformation. Protect every measured input,
+    # including non-code data and differently named hardlinks, before running
+    # tests or publishing an artifact. Reuse the existing identity preflight.
+    from canonical.runtime.write_authority_v1 import check_report
+    check_report(repo, output, (source_root / row["path"] for row in before_manifest))
 
     with tempfile.TemporaryDirectory(prefix="brain-measure-") as td:
         workspace = pathlib.Path(td) / "workspace"

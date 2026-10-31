@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Hardcore final supercomposer — only-right-way synthesis final.
+"""Registry inventory only; execution and task verification are not implemented.
 
-Hidden kernels: hardcore swe composed + fullstack + architect synthesize cegis + patch synthesize cegis proven + grid program exact.
-Why max: hardcore synthesis was 5 isolated verifiers (dead). This super-composes them: CEGIS architect → CEGIS patch → grid 100k → hardcore composed/fullstack → final SWE engineer."""
+Producer/token presence is diagnostic, not proof of review, synthesis,
+allowlisting or landing. Do not use this adapter to certify those effects.
+"""
 from __future__ import annotations
-import hashlib, json, pathlib
+import json, pathlib
+from canonical.runtime.composition_inventory_v1 import write_inventory_report
 from typing import Any
 SCHEMA="PROJECT_BRAIN_SOFTWARE_HARDCORE_FINAL_SUPERCOMPOSER_V1"
 CAPABILITY_ID="software.hardcore.final.supercomposer.v1"
@@ -23,7 +25,6 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     found={r: (r in all_prov) for r in required}
     producers=["software.hardcore.swe.supercomposer.v1","software.patch.synthesize.cegis.z3.v1","software.synthesis.grid_induction.v1","software.hardcore.kernel.orchestrate.v1"]
     prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"CEGIS architect → CEGIS patch proven → grid 100k → hardcore composed/fullstack → final synthesis verified","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_hardcore_final_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    inventory_ready=all(found.values()) and all(prod_found.values())
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"planned_composition":"CEGIS architect → CEGIS patch proven → grid 100k → hardcore composed/fullstack → planned final synthesis","inventory_ready":inventory_ready,"model_dependency_count":0,"incremental_spend_usd":0}
+    return write_inventory_report(repo, output, artifact, "software_hardcore_final_supercomposer_v1")

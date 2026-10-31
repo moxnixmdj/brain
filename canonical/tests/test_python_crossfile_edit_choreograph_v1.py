@@ -276,7 +276,10 @@ class CrossfileEditRegistryContractTests(unittest.TestCase):
         self.assertEqual(entry["status"], "VERIFIED_BOUND_CAPABILITY")
         self.assertEqual(entry["adapter_module"], "python_crossfile_edit_choreograph")
         self.assertEqual(entry["entrypoint"], "run")
-        self.assertEqual(entry["provides"], ["python.source.crossfile_edit.choreography"])
+        # Both effects are already declared by the live registry. Keep exact
+        # equality: additional undeclared aliases must still fail this contract.
+        self.assertEqual(entry["provides"], ["python.source.crossfile_edit.choreography",
+                                             "python.source.crossfile_edit.choreograph.v1"])
         self.assertEqual(entry["requires"], [])
         self.assertEqual(entry["incremental_spend_usd"], 0)
 

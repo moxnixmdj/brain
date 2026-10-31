@@ -34,6 +34,7 @@ import math
 import re
 import subprocess
 import tarfile
+import types
 import zipfile
 from collections.abc import Mapping
 from pathlib import Path
@@ -995,6 +996,23 @@ _SIDE_EFFECTING_FLAGS = ("-o", "--output")
 _SIDE_EFFECTING_FLAGS_BY_PROGRAM = {"sed": ("-i", "--in-place")}
 
 
+def command_has_output_flags(argv) -> bool:
+    """The existing inspector's conservative side-effect flag classification."""
+    if not argv:
+        return False
+    program = str(argv[0]).rsplit("/", 1)[-1]
+    return any(
+        str(tok) in _SIDE_EFFECTING_FLAGS or str(tok).startswith("--output=")
+        or str(tok) in _SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ())
+        for tok in argv[1:])
+
+
+def command_is_read_only(argv) -> bool:
+    """Share inspector classification, not execution permission or sandboxing."""
+    return bool(argv and str(argv[0]).rsplit("/", 1)[-1] in _READ_ONLY_COMMANDS
+                and not command_has_output_flags(argv))
+
+
 # --- postconditions for commands that change something ---------------------
 # A mutating command cannot be checked by running it again, and the temptation is
 # to fall back on its returncode -- which is the producer grading its own work.
@@ -1525,11 +1543,7 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
     if any(not tok for tok in tokens):
         return False, "COMMAND_ARGV_HAS_AN_EMPTY_TOKEN", {}
     program = tokens[0].rsplit("/", 1)[-1]
-    takes_output_flag = any(
-        tok in _SIDE_EFFECTING_FLAGS or tok.startswith("--output=")
-        for tok in tokens[1:]) or any(
-        tok in _SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ())
-        for tok in tokens[1:])
+    takes_output_flag = command_has_output_flags(tokens)
     # An interpreter is not read-only in general, and it is not being treated as
     # one here.  What is allowed is the one shape the receipt-backed rows all
     # have -- ["python3", "<a .py file inside this repository>"] -- which is
@@ -1775,7 +1789,7 @@ def _trace_call_coverage(traces, root):
     made it.  Re-derived here from those raw observations, never from the
     producer's own coverage arithmetic.  Returns
     ``(fail_edges, pass_edges, n_fail, n_pass)`` keyed on
-    ``(caller_path, caller_function, caller_line, callee_path, callee_function)``,
+    ``(caller_path, caller_function, caller_line, callee_path, callee_function, firstlineno)``,
     or ``None`` when a trace names a file that is not on disk.
     """
     fail: dict[tuple, int] = {}
@@ -1798,6 +1812,8 @@ def _trace_call_coverage(traces, root):
             callee = event.get("callee")
             if not isinstance(callee, Mapping):
                 return None
+            if type(callee.get("firstlineno")) is not int:
+                return None
             callee_on_disk = _inside(root, callee.get("path"))
             if callee_on_disk is None or not callee_on_disk.is_file():
                 return None
@@ -1807,9 +1823,10 @@ def _trace_call_coverage(traces, root):
                 if caller_on_disk is None or not caller_on_disk.is_file():
                     return None
                 key = (caller.get("path"), caller.get("function"), caller.get("line"),
-                       callee.get("path"), callee.get("function"))
+                       callee.get("path"), callee.get("function"), callee.get("firstlineno"))
             else:
-                key = (None, None, None, callee.get("path"), callee.get("function"))
+                key = (None, None, None, callee.get("path"), callee.get("function"),
+                       callee.get("firstlineno"))
             sink[key] = sink.get(key, 0) + 1
     return fail, passed, n_fail, n_pass
 
@@ -1871,15 +1888,23 @@ def _inspect_value_provenance(args, result, root):
                 defined_cache[relative] = None
             else:
                 try:
-                    tree = ast.parse(on_disk.read_bytes())
-                except (SyntaxError, ValueError, OSError):
+                    # Reuse Python's own source-to-code mapping without running
+                    # the source. AST def lines differ from decorated code starts
+                    # and cannot describe anonymous code or repeated names.
+                    program = compile(on_disk.read_bytes(), str(on_disk), "exec",
+                                      dont_inherit=True)
+                except (SyntaxError, ValueError, OSError, RecursionError):
                     defined_cache[relative] = None
                 else:
+                    definitions = {}
+                    pending = [program]
+                    while pending:
+                        code = pending.pop()
+                        definitions.setdefault(code.co_name, set()).add(code.co_firstlineno)
+                        pending.extend(value for value in code.co_consts
+                                       if isinstance(value, types.CodeType))
                     defined_cache[relative] = {
-                        node.name: node.lineno
-                        for node in ast.walk(tree)
-                        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef,
-                                             ast.ClassDef))
+                        name: tuple(sorted(lines)) for name, lines in definitions.items()
                     }
         return defined_cache[relative]
 
@@ -1894,13 +1919,14 @@ def _inspect_value_provenance(args, result, root):
             return False, "PROVENANCE_CALLEE_FILE_ABSENT_OR_UNPARSEABLE", {
                 "path": callee.get("path")}
         name = str(callee.get("function"))
-        if definitions.get(name) != callee.get("firstlineno"):
+        lines = definitions.get(name, ())
+        if type(callee.get("firstlineno")) is not int or callee.get("firstlineno") not in lines:
             return False, "PROVENANCE_CALLEE_IS_NOT_DEFINED_WHERE_THE_REPORT_SAYS", {
                 "callee": name, "path": callee.get("path"),
                 "claimed": callee.get("firstlineno"),
-                "source": definitions.get(name)}
+                "source": lines[0] if len(lines) == 1 else list(lines) or None}
         key = (caller.get("path"), caller.get("function"), caller.get("line"),
-               callee.get("path"), name)
+               callee.get("path"), name, callee.get("firstlineno"))
         f = fail_edges.get(key, 0)
         q = pass_edges.get(key, 0)
         if row.get("fail_coverage") != f:

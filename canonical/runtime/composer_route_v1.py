@@ -183,7 +183,8 @@ def _contradicts_the_stated_payload(goal: str, token: str) -> bool:
     return not re.search(r"\bjson\b", str(prose), re.I)
 
 
-def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]:
+def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None,
+                     registry: Mapping[str, Any] | None = None) -> list[str]:
     """Tokens the goal might be asking for, best guess first.
 
     Scored on the request's PROSE, never on the values it carries -- the same rule the
@@ -203,7 +204,8 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     from canonical.runtime import capability_composer_v1 as composer
     from canonical.runtime import goal_front_compiler_v1 as front
 
-    g = g if g is not None else composer.graph()
+    reg = registry if registry is not None else composer.load_registry()
+    g = g if g is not None else composer.graph(registry=reg)
     # Scored on the request's PROSE, never on the values it carries -- the rule
     # the front compiler already applies as F8/F25.  An earlier revision also
     # subtracted the payload returned by ``extract_content``, on the theory that
@@ -216,8 +218,6 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
         return []
     provided: set[str] = set()
     extra: dict[str, set[str]] = {}
-    from canonical.runtime import capability_composer_v1 as composer
-    reg = composer.load_registry()
     for cid, node in g.items():
         entry = reg.get(cid) or {}
         words_for = set(words(cid))
@@ -269,7 +269,10 @@ def route(goal: str, seed: Sequence[str] | None = None,
     """
     from canonical.runtime import capability_composer_v1 as composer
 
-    g = g if g is not None else composer.graph()
+    # One fresh registry snapshot per request, not a cross-request cache.
+    # Reuse graph/ranker injection to avoid redundant parsing and mixed views.
+    reg = composer.load_registry()
+    g = g if g is not None else composer.graph(registry=reg)
     ext = sorted(composer.external_tokens(g))
     have = list(seed) if seed is not None else list(ext)
     tried: list[dict[str, Any]] = []
@@ -281,7 +284,6 @@ def route(goal: str, seed: Sequence[str] | None = None,
     # order is unchanged and the comment now says what the code does.
     stated_command = extract_argv(goal)
     if stated_command is not None:
-        reg = composer.load_registry()
         for cid, node in g.items():
             entry = reg.get(cid)
             if not isinstance(entry, Mapping):
@@ -307,11 +309,21 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "status": "PASS__COMPOSER_ROUTE_FOUND",
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
 
-    for token in candidate_tokens(goal, g)[:max_candidates]:
+    for token in candidate_tokens(goal, g, registry=reg)[:max_candidates]:
         chain = composer.plan(have, token, g)
         tried.append({"token": token, "reachable": chain is not None,
                       "chain": chain})
         if chain:
+            # Type reachability does not prove this is the requested operation.
+            # Reuse the live gate's weak-evidence rule, not a second lexical
+            # policy. Only R3 applies here: operand binding and execution are
+            # still separate from this type-level planning API.
+            from canonical.runtime import live_brain_route_admission_v1 as admission
+            intent = admission.route_admission(
+                goal, {"selected_capability": chain[-1]}, reg)
+            if intent.get("rule") == "R3_WEAK_EVIDENCE":
+                tried[-1]["intent_admission"] = intent
+                continue
             return {"schema": SCHEMA, "pass": True, "goal": goal,
                     "token": token, "chain": list(chain), "tried": tried,
                     "status": "PASS__COMPOSER_ROUTE_FOUND",
@@ -737,10 +749,15 @@ def extract_argv(text: str) -> list[str] | None:
     # command.  Measured 2026-10-27: this was one of three reasons the whole repair
     # family scored 0/50 on the public runner.  The quotes are the sentence telling
     # us where the command ends; ignoring them was reading around the evidence.
-    quoted = re.search(r"\b(?:shell\s+|cli\s+|terminal\s+)?command\s+"
-                       r"(?:to\s+run\s+|line\s+)?[\"\'](.+?)[\"\']", sentence, re.I)
-    if quoted:
-        body = quoted.group(1).strip()
+    quoted_prefix = re.search(r"\b(?:shell\s+|cli\s+|terminal\s+)?command\s+"
+                              r"(?:to\s+run\s+|line\s+)?(?=[\"\'])", sentence, re.I)
+    if quoted_prefix:
+        # The shared delimiter matcher preserves opposite quotes inside a
+        # Python -c argument instead of truncating the stated command there.
+        quoted = _QUOTED.match(sentence, quoted_prefix.end())
+        if quoted is None:
+            return None
+        body = quoted.group(2).strip()
         if body:
             try:
                 parts = shlex.split(body)
@@ -895,6 +912,9 @@ _INSIDE_THE_FILE_NOUNS = (
     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix|"
     r"duplicate|duplicates|repeat|repeats|repeated"
 )
+
+# Shared requested-object grammar: reading contents is not finding file names.
+_CONTENTS_OF = re.compile(r"\bcontents?\b[^\n]{0,20}?\bof\b")
 
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Synonyms measured rather than guessed: "duplicate the file a as b" bound
@@ -1162,7 +1182,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"(?![^\n]{0,120}?\blines?\b[^\n]{0,80}?\b(?:contain|includ|match|hold)\w*\b)"
      r"\b(?:read|show|display|print|cat)\b[^.\n]{0,40}?\bfile\b"
      r"|\boutput\b(?!\s+file\b)[^.\n]{0,40}?\bfile\b"
-     r"|\bcontents?\b[^\n]{0,20}?\bof\b", "cat", _no_flags, 1),
+     r"|" + _CONTENTS_OF.pattern, "cat", _no_flags, 1),
 )
 
 # A command whose first operand is NOT a path but a value the sentence states.
@@ -1171,6 +1191,15 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
 # re-derives the whole argv from the sentence.  Requiring BOTH a quoted pattern
 # and exactly one path is what keeps this from guessing -- a search that states
 # no pattern binds nothing, because an invented pattern is an invented answer.
+_ASKS_WHICH_FILES = re.compile(
+    # The requested object is files, not "what is DIFFERENT between files".
+    r"\b(?:which|what)\b(?:\s+(?:are|is|of|the|these|those|all))*\s+files?\b"
+    # The existing cat grammar owns "show the CONTENTS of the file ...".
+    r"|\b(?:list|show|print)\b(?![^\n]{0,40}?" + _CONTENTS_OF.pattern + r")"
+    r"[^\n]{0,30}?\bfiles?\b[^\n]{0,40}?\b(?:contain|contains"
+    r"|containing|hold|holds|holding|include|includes|including)\b")
+
+
 _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
     # fgrep is tried first: a sentence that asks for literal or exact text is
     # asking for a FIXED STRING, and handing that to `grep` would let a dot or a
@@ -1221,9 +1250,7 @@ _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
     # reaches grep, LINES falls through to the rule that prints lines and a COUNT
     # falls through to the rule that counts.  Measured all three.
     (r"^(?![^\n]*\b(?:which|what|how many|show|list|print|count|number)\b"
-     r"[^\n]{0,30}?\blines?\b)"
-     r"[^\n]*\bfiles?\b[^\n]{0,40}?\b(?:contain|contains|containing|hold|holds"
-     r"|holding|include|includes|including)\b", "grep"),
+     r"[^\n]{0,30}?\blines?\b)[^\n]*(?:" + _ASKS_WHICH_FILES.pattern + ")", "grep"),
 )
 
 _COUNT_RE = re.compile(r"\bfirst\s+(\d+)\b|\b(\d+)\s+lines?\b")
@@ -1739,10 +1766,6 @@ _RECURSIVE_REQUEST = re.compile(
 # is grep's own answer to exactly that question.  Deliberately keyed on the noun
 # the sentence asks about, never on the verb, so "Search the directory D for
 # 'gamma'" keeps printing the lines it has always printed.
-_ASKS_WHICH_FILES = re.compile(
-    r"\b(?:which|what)\b[^\n]{0,30}?\bfiles?\b"
-    r"|\b(?:list|show|print)\b[^\n]{0,30}?\bfiles?\b[^\n]{0,40}?\b(?:contain|contains"
-    r"|containing|hold|holds|holding|include|includes|including)\b")
 # The exclusion is the part that makes `-l` safe, and it is a SEPARATE search on
 # the whole sentence rather than a lookahead inside the one above: a lookahead in
 # a `re.search` pattern is evaluated at whatever position the match happens to
@@ -2495,16 +2518,19 @@ def _prose_argv(sentence: str) -> list[str] | None:
         _masked = _mask_a_quoted_value(sentence, _asked[0])
         _operands = extract_paths(_masked)
         if len(_operands) == 1:
-            if re.search(r"\b(?:%s)\b" % _WC_QTY, text):
+            question_text = text
+            for span in _QUOTED_SPAN.finditer(text):
+                question_text = question_text.replace(span.group(0), " " * len(span.group(0)))
+            if re.search(r"\b(?:%s)\b" % _WC_QTY, question_text):
                 return ["grep", "-c", _asked[0], str(_operands[0])]
-            if re.search(r"\b(?:which|what|where)\b|\bnumber\b", text):
+            if re.search(r"\b(?:which|what|where)\b|\bnumber\b", question_text):
                 return ["grep", "-n", _asked[0], str(_operands[0])]
             # A yes-or-no question.  Its answer is the exit status, and the
             # acceptance layer already enumerates which codes are answers for
             # grep -- 0 and 1, and never 2, which means trouble.  Nothing new is
             # trusted here: the table, the declaration and the adapter's
             # handling of it all already existed; only the sentence was missing.
-            if re.search(r"\b(?:does|did|is|are|whether)\b", text) or text.rstrip().endswith("?"):
+            if re.search(r"\b(?:does|did|is|are|whether)\b", question_text) or question_text.rstrip().endswith("?"):
                 return ["grep", "-q", _asked[0], str(_operands[0])]
     # Singular "line", so "the first 3 lines" stays with `head`, which is the
     # command that means it, and only "the third line" comes here.
@@ -3230,23 +3256,11 @@ def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
     program = str(argv[0]).rsplit("/", 1)[-1]
     try:
         from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
-        read_only = program in _accept._READ_ONLY_COMMANDS
+        read_only = _accept.command_is_read_only(argv)
         consumes = program in _accept._CONSUMES_AN_OPERAND
     except Exception:  # noqa: BLE001 - no table, no declaration
         return
     if not read_only or consumes:
-        return
-    try:
-        _by_program = _accept._SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ())
-    except Exception:  # noqa: BLE001 - no table, no restriction to apply
-        _by_program = ()
-    if any(str(tok) in _accept._SIDE_EFFECTING_FLAGS or str(tok) in _by_program
-           for tok in argv[1:]):
-        # The command already writes the file itself, so its stdout is not the
-        # result -- for `sed -i` it is empty, and writing that over the operand
-        # would truncate a file the command had just finished rewriting.
-        # Measured before this guard: `sed -i '$a date' X` was handed
-        # write_stdout_to_output="true" on exactly those terms.
         return
     named = extract_paths(sentence)
     if not named:

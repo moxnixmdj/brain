@@ -11,6 +11,7 @@ from canonical.runtime.bound_capabilities import python_source_symbol_index as i
 from canonical.runtime.bound_capabilities import python_change_impact_testselect as impact
 from canonical.runtime.bound_capabilities import python_crossfile_edit_choreograph as choreography
 from canonical.runtime.bound_capabilities import python_symbol_resolve as resolver
+from canonical.runtime.bound_capabilities import python_issue_nl_parse_edit_intent as intent
 
 
 class PythonCacheFreshnessTests(unittest.TestCase):
@@ -35,6 +36,7 @@ class PythonCacheFreshnessTests(unittest.TestCase):
             lambda: impact._load_index(self.root, self.src, self.root, self.cache),
             lambda: choreography._load_index(self.root, self.src, self.cache, 'src'),
             lambda: resolver._load_index(self.root, self.src, self.root, self.cache),
+            lambda: intent._load_index(self.root, self.src, 'src', self.cache),
         )
 
     def assert_stale(self):

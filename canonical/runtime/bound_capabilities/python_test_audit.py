@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Deterministic repository-local Python test-corpus execution audit."""
 from __future__ import annotations
-import hashlib, importlib.util, json, pathlib, re, subprocess, sys, time
+import hashlib, importlib.util, json, pathlib, re, sys, time
 
 
 def _load_patch_search():
@@ -133,25 +133,22 @@ def run(args, root):
             # measured) do not. Such a run exits 0 having executed nothing, so the audit counted
             # zero tests and zero failures for the file - a failing test became invisible rather
             # than red, which understates the whole corpus health report.
-            proc=subprocess.run(_PATCH.suite_argv(sys.executable,path),cwd=repo,text=True,
-                                capture_output=True,timeout=timeout_s,
-                                env=_PATCH._source_env(path))
-            returncode=proc.returncode
-            combined=(proc.stdout or "")+"\n"+(proc.stderr or "")
-        except subprocess.TimeoutExpired as exc:
-            # A file that hangs is a red file, not a reason to abandon the
-            # report. An unhandled TimeoutExpired here used to kill the whole
-            # audit partway through the corpus, which is the same defect as
-            # aborting on the first failure, one layer down.
-            #
-            # TimeoutExpired carries the partial buffers as BYTES even though
-            # the run was opened with text=True, because communicate() joins
-            # them before decoding. Concatenating them onto a string raises,
-            # so decode defensively rather than trusting the mode.
-            timed_out=True
+            proc=_PATCH._run_tests(repo,_PATCH.suite_argv(sys.executable,path),
+                                   timeout_s,_PATCH._source_env(path))
+            timed_out=proc["timed_out"]
+            returncode=-1 if timed_out else proc["returncode"]
+            combined=_text(proc["stdout"])+"\n"+_text(proc["stderr"])
+            if timed_out:
+                combined+="\nTIMED_OUT_AFTER_"+str(timeout_s)+"s"
+        except _PATCH.PatchSearchError as exc:
+            # This is a corpus report, not a green-only executor. A supervised
+            # budget refusal is one red file unit; preserve the reason, then
+            # continue to the remaining files. Unexpected runner errors still
+            # propagate rather than being disguised as ordinary test failures.
+            if str(exc)!="TEST_OUTPUT_LIMIT_EXCEEDED":
+                raise
             returncode=-1
-            combined=(_text(exc.stdout)+"\n"+_text(exc.stderr)
-                      +"\nTIMED_OUT_AFTER_"+str(timeout_s)+"s")
+            combined=str(exc)
         elapsed=round(time.monotonic()-started,6)
         ran,passed,failures,errors,skipped,reported_duration,crashed=_counts(
             combined,returncode if returncode is not None else 1)
