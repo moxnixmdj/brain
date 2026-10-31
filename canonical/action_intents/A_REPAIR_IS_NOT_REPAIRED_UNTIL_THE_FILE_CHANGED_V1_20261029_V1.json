@@ -38,7 +38,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The repair family's shared import path named only the source file's directory, so a package-layout suite died at import before any assertion ran; baseline and every candidate then scored identically and no candidate was a strict improvement. The same defect in three more places hid correct repairs, and the door accepted a read-only mechanism's report as a repair.",
- "canonical_base_commit": "59a593ca9094ecd7c31b02f83b05c9d27636a181",
+ "canonical_base_commit": "44d05b9403d4a08a38e9860f86717f768efa14e7",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +52,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "59a593ca9094ecd7c31b02f83b05c9d27636a181",
+  "canonical_base_commit": "44d05b9403d4a08a38e9860f86717f768efa14e7",
   "constructive_gap_for_open_obligation_ids": [
    "CODING_FRONTIERCODE_GE_54_4",
    "CODING_TB4_GE_66_4"
@@ -83,7 +83,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "59a593ca9094ecd7c31b02f83b05c9d27636a181",
+  "canonical_base_commit": "44d05b9403d4a08a38e9860f86717f768efa14e7",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "RETURNING_ANY_EXECUTED_VERDICT_UNCHANGED",
@@ -303,7 +303,7 @@
      "route": "WIDEN_THE_ACCEPTANCE_TOLERANCE"
     }
    ],
-   "checked_at_utc": "2026-10-31T14:06:11Z",
+   "checked_at_utc": "2026-10-31T14:08:27Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -367,7 +367,7 @@
    "selected_route_checked_at_utc": "2026-10-30T00:32:14Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T14:06:11Z",
+    "checked_at_utc": "2026-10-31T14:08:27Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -491,7 +491,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-31T14:06:11Z",
+  "checked_at_utc": "2026-10-31T14:08:27Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
@@ -531,15 +531,15 @@
      "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py"
     },
     {
-     "git_blob_sha": "73ce46502e08bde1a4d2c4ece8947ebc6bca0f70",
+     "git_blob_sha": "f6ecbd590eebfcfcc15a53173ea18a166f355266",
      "path": "canonical/runtime/declared_input_derivation_v1.py"
     },
     {
-     "git_blob_sha": "67c3c80d0a8cdb5299b5a970cd859905a330d85c",
+     "git_blob_sha": "58564e53ac0071aa25f141faa28175eaac317b74",
      "path": "canonical/runtime/swe_typed_plan_v1.py"
     },
     {
-     "git_blob_sha": "35bc0f586b7b3f544a0af2fe1f0c6626c8111d8d",
+     "git_blob_sha": "1403656988519dc2177fbe674e821fe8bdd5b305",
      "path": "canonical/runtime/live_brain_route_admission_v1.py"
     },
     {
