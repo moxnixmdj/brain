@@ -2537,6 +2537,283 @@
         "receipt_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
         "verified_case": 2
       }
+    },
+    "chart.read.legend_linear_intersection.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "chart.read.legend_linear_intersection.v1",
+          "path": "${input.path}",
+          "prompt": "${input.prompt}"
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "chartography_deterministic_professional_v1",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "legend",
+        "line",
+        "series",
+        "intersection",
+        "axis"
+      ],
+      "limitations": [
+        "Verified only for the declared legend-coded approximately linear multi-series family.",
+        "Requires supported numeric axes and prompt semantics.",
+        "No Chartography score or broader chart-format authority."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "chart.answer.legend_linear_intersection"
+      ],
+      "requires": [
+        "image.file.available",
+        "chart.question.legend_linear_intersection.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/chartography_deterministic_professional_v1.py",
+        "bounded_learned_components": [
+          "image.extract.ocr.tesseract"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "solver_path": "canonical/runtime/chartography_deterministic_professional_solver_v1.py",
+        "type": "brain_native_deterministic"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_solver_blob_sha": "3c3280b4baf6f77bc4fee32d503114d8b199374d",
+        "independent_verified": true,
+        "public_verifier_run_id": 38147697520,
+        "receipt_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
+        "verified_case": 1
+      }
+    },
+    "code.impact.tree_sitter.testselect.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.impact.tree_sitter.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_tree_sitter_impact_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "code",
+        "impact",
+        "test",
+        "selection",
+        "tree-sitter",
+        "dependencies",
+        "change",
+        "slice"
+      ],
+      "limitations": [
+        "Selects from tests present in a fresh tree-sitter index; explicit test_paths may widen the candidate set.",
+        "Static and textual dependency evidence is an over-approximation, not a proof about arbitrary reflection or external build plugins; unresolved local imports, changed syntax errors, or an empty reachable set select every candidate test."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "code.impact.test_selection.verified",
+        "code.test.slice.tree_sitter"
+      ],
+      "requires": [
+        "code.symbols.tree_sitter.indexed"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "selected_test_count",
+        "candidate_test_count",
+        "affected_file_count",
+        "fallback_count",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/code_tree_sitter_impact_v1.py",
+        "dependency_closure": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "resolver": "pip-download-only-binary",
+          "root_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "root_project": "tree_sitter_languages",
+          "root_version": "1.10.2",
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "source_only_artifacts_allowed": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "bytes": 490490,
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter/0.20.4/json",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "url": "https://files.pythonhosted.org/packages/3f/ce/80b12e0e470bf939dd57507fedad5cdc30e92391703031561e829d6a1819/tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "0.20.4"
+            },
+            {
+              "bytes": 8422544,
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "url": "https://files.pythonhosted.org/packages/96/81/ab4eda8dbd3f736fcc9a508bc69232d3b9076cd46b932d9bf9d49b9a1ec9/tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "licenses": {
+          "tree_sitter": "MIT",
+          "tree_sitter_languages": "Apache-2.0"
+        },
+        "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+        "project": "tree_sitter_languages",
+        "type": "pypi",
+        "version": "1.10.2",
+        "wheel_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "wheel_sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
+        "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-IMPACT-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_IMPACT_V1_V1.json"
+      }
+    },
+    "code.index.tree_sitter.incremental.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.index.tree_sitter.incremental.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_tree_sitter_incremental_index_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "code",
+        "index",
+        "tree-sitter",
+        "incremental",
+        "symbols",
+        "references",
+        "multi-language"
+      ],
+      "limitations": [
+        "Repository-local index for Python, JavaScript, TypeScript, Rust, Go, Java, C++, and YAML using the pinned tree-sitter substrate.",
+        "Warm reuse requires matching source and row hashes; syntax errors are reported per file, and missing parsers fail closed."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "code.symbols.tree_sitter.indexed",
+        "code.references.tree_sitter.indexed",
+        "code.index.incremental.verified"
+      ],
+      "requires": [
+        "code.ast.tree_sitter.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "file_count",
+        "definition_count",
+        "reference_count",
+        "syntax_error_count",
+        "parsed_file_count",
+        "reused_file_count",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/code_tree_sitter_incremental_index_v1.py",
+        "dependency_closure": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "resolver": "pip-download-only-binary",
+          "root_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "root_project": "tree_sitter_languages",
+          "root_version": "1.10.2",
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "source_only_artifacts_allowed": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "bytes": 490490,
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter/0.20.4/json",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "url": "https://files.pythonhosted.org/packages/3f/ce/80b12e0e470bf939dd57507fedad5cdc30e92391703031561e829d6a1819/tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "0.20.4"
+            },
+            {
+              "bytes": 8422544,
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "url": "https://files.pythonhosted.org/packages/96/81/ab4eda8dbd3f736fcc9a508bc69232d3b9076cd46b932d9bf9d49b9a1ec9/tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "licenses": {
+          "tree_sitter": "MIT",
+          "tree_sitter_languages": "Apache-2.0"
+        },
+        "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+        "project": "tree_sitter_languages",
+        "type": "pypi",
+        "version": "1.10.2",
+        "wheel_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "wheel_sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
+        "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-INCREMENTAL-INDEX-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_INCREMENTAL_INDEX_V1_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
