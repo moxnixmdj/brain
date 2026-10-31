@@ -354,5 +354,10 @@
         }
       ]
     }
+  },
+  "additional_integration": {
+    "shared_binding_fix": "Reuse output-role/claimed-path machinery; a destination cannot become an input scope, independent of argument order.",
+    "measurement": "Local expanded current-tree run: 571 passed, 6 failed, 947 subtests passed; all original 166 cases and all 137 model/compiler tests pass.",
+    "authority": "NONE; sandbox measurement, no independent capability credit"
   }
 }

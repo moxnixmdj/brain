@@ -46,8 +46,8 @@ was corrected to the stricter exact-file contract. Another test now requires
 pre-execution parameter-route correction and explicitly forbids a fictitious
 retry; its original refusal/supersession controls remain in place.
 
-Final expanded run: **432 passed, 6 failed, 42 subtests passed**, 8 deprecation
-warnings, 122.66 s; 38 modules, 438 ordinary cases. All **17 new joint-contract
+Final expanded run: **571 passed, 6 failed, 947 subtests passed**, 12 deprecation
+warnings, 163.87 s; 41 modules, 577 ordinary cases. All **19 new joint-contract
 controls** pass. This is not a whole-repository green result. The six unresolved
 compatibility failures are listed below rather than weakened or hidden.
 
@@ -121,7 +121,10 @@ python3 -m pytest -q \
   canonical/tests/test_the_stated_swe_surface_stays_reached_v1.py \
   canonical/tests/test_a_bisect_materialises_only_the_named_tree_v1.py \
   canonical/tests/test_the_answer_must_be_the_effect_that_was_stated_v1.py \
-  canonical/tests/test_the_rename_answers_the_object_the_sentence_names_v1.py --tb=short
+  canonical/tests/test_the_rename_answers_the_object_the_sentence_names_v1.py \
+  canonical/tests/test_brain_unified_model_v1.py \
+  canonical/tests/test_goal_compiler.py \
+  canonical/tests/test_goal_compiler_world_binding_v1.py --tb=short
 ```
 
 The original cohort comprises `test_swe_acceptance_boundaries_20261031_v1`,
@@ -150,12 +153,12 @@ Two neighboring change-impact tests were reading an old shared
 `spool_0_output.json` even though the current request produced its own report.
 They now require the actual test-selector execution, read the returned path and
 check its SHA-256 before checking selected/candidate tests. The assertions still
-require the module's test to be found. Both pass, along with the 17 joint controls.
+require the module's test to be found. Both pass, along with the 19 joint controls.
 
 During the in-progress main merge, the existing Git diff verifier refused the
 staged action-intent rename (`INDEPENDENT_CHECK_DISAGREES` on brace-form rename
 output). This is a remaining adapter limitation; no refusal was overridden.
-Completing the merge removed that transient tree state; the final 438-case run
+Completing the merge removed that transient tree state; the final 577-case run
 includes both public Git reads passing and all 166 original case identities passing.
 
 ## Compiled-model and admission checks
@@ -168,9 +171,21 @@ assumptions from measured confidence bounds. Current-base load-bearing/orientati
 and hierarchy/OBS/blocker-lease checks pass locally; the final signed referee
 must still judge the exact pushed head before landing.
 
-The final 438-case engineering run exercised commit `01f0fd4a`, including main
+The final 577-case engineering run exercised commit `cb21400a`, including main
 `9f808230`. Retained its new object-role checks at typed admission and at the
 execution exit; preserved our independent generic-path admission restriction.
 All seven incoming object-role cases pass. Also retained the inventory/probe
 additions and corrected caller-damage allowance from main `57edfa44`.
 Model and admission checks were refreshed for the resulting current base.
+
+## Existing-output source-role regression
+
+The CI model verifier itself passed 33/33, but its subsequent 137-test
+model/compiler suite exposed a shared binding bug: an existing report destination
+could fill a `source_root` input and make an audit row steal a compound transform.
+The raw binder now reuses its output-role/claimed-path machinery to exclude a
+stated destination from scope candidates, and rejects a scope equal to a bound
+output regardless of slot order. No document-specific route was added.
+Two fresh file/directory controls require refusal and pair it with a real-source
+positive case. All **137 model/compiler tests now pass** inside the final expanded
+run, with the original six SWE compatibility failures still reported above.
