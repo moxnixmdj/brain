@@ -201,3 +201,21 @@ def test_a_question_about_a_failed_suite_does_not_claim_the_repair_family():
     hit = planner._family_hits("The test suite in pkg fails. Which function is at fault? "
                                "Write its name to answer.json")
     assert hit is None or hit[2] not in {"apply", "repair"}
+
+
+@pytest.mark.parametrize("directory", [False, True])
+def test_an_existing_report_destination_cannot_supply_an_input_scope(tmp_path, directory):
+    from canonical.runtime import goal_compiler as compiler
+    (tmp_path / "pkg").mkdir()
+    output = tmp_path / "pkg/audit.json"
+    output.mkdir() if directory else output.write_text("{}")
+    entry = {"action_template": {"args": {"source_root": "${input.source_root}",
+                                          "output_path": "${input.output_path}"}},
+             "proposal_bindings": {"source_root": {"type": "path_file_or_dir"}}}
+    with pytest.raises(compiler.GoalCompilationFailure):
+        compiler._bind_inputs("Create pkg/audit.json from that report", tmp_path, entry)
+    source = tmp_path / "pkg/calc.py"
+    source.write_text("def real_source():\n    return 1\n")
+    inputs = compiler._bind_inputs("Audit pkg/calc.py and save the report to pkg/audit.json", tmp_path, entry)
+    assert inputs["source_root"] == "pkg/calc.py"
+    assert inputs["output_path"] == "pkg/audit.json"

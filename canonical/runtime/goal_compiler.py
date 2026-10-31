@@ -634,6 +634,7 @@ def _adapter_default_argv(entry, root, targets):
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
+    output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
     if not keys:
         return {}
     paths=_repo_paths(goal,root)
@@ -749,6 +750,10 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             # lower-scoring candidate happened to bind -- which is how an
             # AST-audit goal ended up selecting a semantic-behaviour compiler
             # that scored 15 against the audit capability's 35.
+            # An existing destination is still a destination, not an input scope.
+            # Reuse the role detector already used for test lists/argv above.
+            _scope_output=_path_named_after_output_verb(goal,root)
+            _scope_paths=[(raw,p) for raw,p in paths if raw!=_scope_output]
             stem=key[:-5].lower()
             rr=pathlib.Path(root).resolve()
             # The sentence has to give a path this role before it is used.
@@ -759,7 +764,7 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             # belonged to the markdown-to-PDF capability.
             named=bool(re.search(
                 r"\b"+re.escape(str(stem).replace("_"," "))+r"\b",str(goal),re.IGNORECASE))
-            dirs=[(raw,p) for raw,p in paths if p.is_dir()]
+            dirs=[(raw,p) for raw,p in _scope_paths if p.is_dir()]
             matching=[raw for raw,p in dirs if not stem or stem in raw.lower()]
             if len(matching)==1:
                 result[key]=matching[0]
@@ -770,12 +775,12 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if named:
                 # The sentence gave a path this role, so the parent of the one
                 # file it names is the root that file lives under.
-                files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                files=[(raw,fp) for raw,fp in _scope_paths if fp.is_file()]
                 if len(files)==1 and files[0][1].parent!=rr and rr in files[0][1].parent.parents:
                     result[key]=str(files[0][1].parent.relative_to(rr))
                     continue
             role_bound=_path_named_by_role(goal,stem,root)
-            if role_bound is not None:
+            if role_bound is not None and role_bound!=_scope_output:
                 rp=(rr/role_bound).resolve()
                 if rp.is_dir():
                     result[key]=role_bound
@@ -797,13 +802,12 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             _bindings=entry.get("proposal_bindings") if isinstance(entry,dict) else None
             _declared=_bindings.get(key) if isinstance(_bindings,dict) else None
             if isinstance(_declared,dict) and str(_declared.get("type") or "")=="path_file_or_dir":
-                _files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                _files=[(raw,fp) for raw,fp in _scope_paths if fp.is_file()]
                 if len(_files)==1:
                     result[key]=_files[0][0]
                     continue
         if key.endswith("_path"):
             stem=key[:-5].lower()
-            output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
             if key.startswith("output_") or stem in output_stems:
                 # Future outputs may not exist. Prefer type-compatible paths
                 # explicitly named by the goal so multiple outputs can bind
@@ -922,6 +926,13 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     result[key]=existing[0][0]
                     continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
+    # Slot order cannot make a declared destination into an input scope.
+    destinations=_claimed_paths({k:v for k,v in result.items()
+        if k.endswith("_path") and (k.startswith("output_") or k[:-5] in output_stems)})
+    for key,value in result.items():
+        if key.endswith(("_root","_dir")) and isinstance(value,str) and value in destinations:
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",
+                                         "scope_is_output_destination:"+key)
     return result
 
 
