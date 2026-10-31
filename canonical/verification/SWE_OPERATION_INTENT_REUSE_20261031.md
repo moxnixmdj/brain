@@ -37,3 +37,10 @@ Main subsequently advanced to `09867fd76b3f658b3e19da81576e634b370aa912`, adding
 Intermediate validation during the unresolved merge reported **70 passed, 8 failed, 7 subtests passed, 70.55 s**: seven caller-report checks exposed a widened source root, and a real Git diff could not execute against the unmerged index. An actual trace showed a single owned fixture's symbol query expanding to `canonical`, writing its report there and scanning unrelated code. This was not treated as passing caller qualification.
 
 The root widening now applies only when the declared contract actually consumes test paths/argv; the existing src-layout repair discovery is retained, but an index-only query keeps the stated file's own directory. A new strict source-root regression is added. After completing the merge, focused validation passed **75/75 in 3.14 s** and public structured-contract validation passed **30/30 in 12.56 s**. The final integrated result and regenerated artifact are reported on PR #6446.
+
+
+## Final validation and upstream test repair
+
+Updated-base ten-module validation passed **182 tests and 7 subtests, 6 warnings, 43.41 s**, including the new source-scope control and incoming mutation-verb controls. The regenerated model diagnostic passed **33/33**, and the local integrity guard passed **17 rules with zero violations**.
+
+Main then advanced to `bf2d1e5a3223bbb97477a72c79ba4fe985c08d23`, changing only upstream tests, an action-intent record and its generated model. Production runtime and previously tested modules are unchanged. This update also repairs the previously corrupt derivation test file. The restored derivation tests and added report/source-preservation tests passed **10/10 in 1.12 s** on the combined tree. The earlier collection error is retained above as history, not claimed to remain unresolved. The artifact is regenerated again rather than hand-merging generated hashes; final digest/check/merge identity is recorded on PR #6446.
