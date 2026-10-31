@@ -4,7 +4,7 @@
   "action_intent_id": "SWE_REUSE_FIRST_INTEGRATION_BUNDLE_20261031_V1",
   "date": "2026-10-31",
   "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
-  "canonical_base_commit": "34124aa59c506b85da4b8fa2c2318c0cd61b9d8d",
+  "canonical_base_commit": "a35ff463fcc21a47bb487161d8264fa572b3914b",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -64,7 +64,7 @@
     "incremental_spend_usd": 0
   },
   "load_bearing_primary": {
-    "canonical_base_commit": "34124aa59c506b85da4b8fa2c2318c0cd61b9d8d",
+    "canonical_base_commit": "a35ff463fcc21a47bb487161d8264fa572b3914b",
     "open_obligation_ids": [],
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
@@ -83,7 +83,7 @@
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Integrate source-scoped fault localization and scope-aware security aliases; prevent destructive scaffold output overlap and reject untrusted semantic index caches using existing path, hashing and derivation mechanisms.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "34124aa59c506b85da4b8fa2c2318c0cd61b9d8d",
+    "canonical_base_commit": "a35ff463fcc21a47bb487161d8264fa572b3914b",
     "real_outcome": "Reuse Brain qualified-name helpers and CPython symbol tables to normalize stable module-level imports for existing security rules, without executing scanned code or adding a dependency.",
     "required_capability": "Safe bounded SWE evidence collection, import qualification, scaffold output and semantic cache reuse",
     "selected_surviving_route": "INTEGRATE_EXISTING_PATH_CONFINEMENT_HASHING_AND_SOURCE_DERIVATION",
@@ -177,7 +177,7 @@
     },
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-10-31T19:53:20.490911+00:00",
+      "checked_at_utc": "2026-10-31T20:03:56.445842+00:00",
       "max_age_hours": 24,
       "incumbent_route": "Prior local source/security integrations plus unsafe scaffold overlap and untrusted persisted index reuse",
       "selected_route": "INTEGRATE_EXISTING_PATH_CONFINEMENT_HASHING_AND_SOURCE_DERIVATION",
@@ -243,7 +243,7 @@
       "challenger_routes": [],
       "selected_route_preflight": {
         "selected_route": "INTEGRATE_EXISTING_PATH_CONFINEMENT_HASHING_AND_SOURCE_DERIVATION",
-        "checked_at_utc": "2026-10-31T19:53:20.490911+00:00",
+        "checked_at_utc": "2026-10-31T20:03:56.445842+00:00",
         "max_age_hours": 2,
         "status": "READY",
         "all_required_dependencies_ready": true,
@@ -347,5 +347,6 @@
     }
   },
   "implementation_provenance": "Externally agent-assisted engineering and local producer-run controls, not autonomous Brain capability evidence. Original per-change intents and measurements preserved; no capability/benchmark/ownership/promotion/terminal credit.",
-  "integration_falsifier_followup": "PR6506 surface census exposed a source/test-role binding error: tests/__init__.py counted as application scope while a distinct application directory was explicitly stated. Reuse existing stated-directory and witness-directory evidence to bind the unique non-test source; preserve ambiguity refusal. No floor or localizer weakening."
+  "integration_falsifier_followup": "PR6506 surface census exposed a source/test-role binding error: tests/__init__.py counted as application scope while a distinct application directory was explicitly stated. Reuse existing stated-directory and witness-directory evidence to bind the unique non-test source; preserve ambiguity refusal. No floor or localizer weakening.",
+  "upstream_reconciliation": "Rebound only integration/admission metadata to a35ff463fcc21a47bb487161d8264fa572b3914b after incoming PR6505 added a measured inventory and generated model. Original per-change and baseline measurements retain their original bases. No overlapping runtime fix."
 }
