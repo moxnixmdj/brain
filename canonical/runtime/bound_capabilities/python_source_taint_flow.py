@@ -3,8 +3,9 @@
 
 "Does untrusted input from parse_request in <b>/app/handler.py reach exec? Write
 yes or no to <b>/answer.json" is a dataflow question, and the whole answer sits
-in one `ast` pass over the tree the sentence names.  No dependency to install,
-no process to start.  Measured on the census fixture: 1.1 ms, exact.
+using name-based AST summaries over the tree the sentence names. Summaries
+are iterated for at most 12 rounds; no source program or subprocess is executed.
+This is a bounded static analysis, not a security proof.
 
 The rule, stated precisely because a security answer that over-claims is worse
 than no answer:
@@ -137,26 +138,133 @@ def _returns_expr(fn):
             yield node.value
 
 
-def _flows_taint(expr, tainted: set[str], taint_returning: set[str]) -> bool:
-    """Does this expression carry an untrusted value we can see?"""
-    for node in ast.walk(expr):
-        if isinstance(node, ast.Name) and node.id in tainted:
+# Scalar coercions and shell quoting have different security contexts.  HTML,
+# URL and shell escaping must never erase taint headed for Python execution.
+_SCALAR_SANITIZERS = frozenset({"int", "float", "bool", "len", "ord", "hash"})
+
+
+def _sanitizers_for_sinks(parsed, sink_name: str) -> frozenset[str]:
+    sinks = {sink_name} if sink_name else {
+        _dotted(node) for _path, tree in parsed for node in ast.walk(tree)
+        if isinstance(node, ast.Call) and _call_name(node) in _SINKS
+    }
+    # With mixed/unknown contexts keep taint conservatively.  Only the qualified
+    # shlex spelling is recognized; a function merely named quote is no proof.
+    if sinks and sinks <= {"os.system", "os.popen", "system", "popen"}:
+        return _SCALAR_SANITIZERS | {"shlex.quote"}
+    return _SCALAR_SANITIZERS
+
+
+def _flows_taint(
+    expr,
+    tainted: set[str],
+    taint_returning: set[str],
+    param_to_return: dict[str, set[int]] | None = None,
+    sanitizers: frozenset[str] = _SCALAR_SANITIZERS,
+) -> bool:
+    """Does this expression carry an untrusted value we can see (stopping at sanitizers)?"""
+    if expr is None:
+        return False
+    if isinstance(expr, ast.Name):
+        return expr.id in tainted
+    if isinstance(expr, ast.Call):
+        called = _call_name(expr)
+        dotted = _dotted(expr)
+        if (dotted in sanitizers and
+                (not param_to_return or called not in param_to_return)):
+            return False
+        if called in taint_returning:
             return True
-        if isinstance(node, ast.Call):
-            called = _call_name(node)
-            if called in taint_returning:
-                return True
-            if isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name):
-                # a method ON an untrusted object: payload.get(...)
-                if node.func.value.id in tainted:
-                    return True
-        if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name):
-            if node.value.id in tainted:
-                return True
-        if isinstance(node, ast.Subscript) and isinstance(node.value, ast.Name):
-            if node.value.id in tainted:
-                return True
-    return False
+        if isinstance(expr.func, ast.Attribute) and _flows_taint(expr.func.value, tainted, taint_returning, param_to_return, sanitizers):
+            return True
+        if param_to_return is not None and called in param_to_return:
+            p_idxs = param_to_return[called]
+            return any(
+                idx < len(expr.args) and _flows_taint(expr.args[idx], tainted, taint_returning, param_to_return, sanitizers)
+                for idx in p_idxs
+            )
+        return any(
+            _flows_taint(a, tainted, taint_returning, param_to_return, sanitizers)
+            for a in list(expr.args) + [k.value for k in expr.keywords if k.value is not None]
+        )
+    if isinstance(expr, ast.Attribute):
+        return _flows_taint(expr.value, tainted, taint_returning, param_to_return, sanitizers)
+    if isinstance(expr, ast.Subscript):
+        return _flows_taint(expr.value, tainted, taint_returning, param_to_return, sanitizers)
+    return any(_flows_taint(child, tainted, taint_returning, param_to_return, sanitizers) for child in ast.iter_child_nodes(expr))
+
+
+def _ordered_params(fn) -> list[str]:
+    a = fn.args
+    return [x.arg for x in list(a.posonlyargs) + list(a.args)]
+
+
+def _compute_interprocedural_summaries(
+    parsed: list[tuple[pathlib.Path, ast.AST]],
+    sink_name: str,
+    sanitizers: frozenset[str],
+) -> tuple[dict[str, set[int]], dict[str, dict[int, str]]]:
+    """Fixed-point interprocedural summaries:
+      - param_to_return[fn_name] = parameter indices whose taint reaches `return` unsanitized
+      - param_to_sink[fn_name]   = {param_idx: concrete_sink_name} reaching a sink directly or transitively
+    """
+    fn_defs: list[tuple[str, ast.AST, list[str]]] = []
+    for _path, tree in parsed:
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                fn_defs.append((node.name, node, _ordered_params(node)))
+
+    param_to_return: dict[str, set[int]] = {name: set() for name, _, _ in fn_defs}
+    param_to_sink: dict[str, dict[int, str]] = {name: {} for name, _, _ in fn_defs}
+
+    changed = True
+    rounds = 0
+    while changed and rounds < 12:
+        changed = False
+        rounds += 1
+        for name, fn_node, p_list in fn_defs:
+            for idx, p_name in enumerate(p_list):
+                tainted = {p_name}
+                for st in ast.walk(fn_node):
+                    if isinstance(st, ast.Assign) and _flows_taint(st.value, tainted, set(), param_to_return, sanitizers):
+                        for tgt in st.targets:
+                            for sub in ast.walk(tgt):
+                                if isinstance(sub, ast.Name):
+                                    tainted.add(sub.id)
+                    elif isinstance(st, (ast.AnnAssign, ast.AugAssign)):
+                        val = getattr(st, "value", None)
+                        if val is not None and _flows_taint(val, tainted, set(), param_to_return, sanitizers):
+                            for sub in ast.walk(st.target):
+                                if isinstance(sub, ast.Name):
+                                    tainted.add(sub.id)
+                for ret_e in _returns_expr(fn_node):
+                    if idx not in param_to_return[name] and _flows_taint(ret_e, tainted, set(), param_to_return, sanitizers):
+                        param_to_return[name].add(idx)
+                        changed = True
+                if idx not in param_to_sink[name]:
+                    for st in ast.walk(fn_node):
+                        if not isinstance(st, ast.Call):
+                            continue
+                        called = _call_name(st)
+                        dotted = _dotted(st)
+                        is_direct_sink = (
+                            (called == sink_name or dotted == sink_name)
+                            if sink_name
+                            else (called in _SINKS or dotted.rsplit(".", 1)[-1] in _SINKS)
+                        )
+                        if is_direct_sink and _flows_taint(st, tainted, set(), param_to_return, sanitizers):
+                            param_to_sink[name][idx] = dotted or called
+                            changed = True
+                            break
+                        if called in param_to_sink and param_to_sink[called]:
+                            for c_idx, c_sink in param_to_sink[called].items():
+                                if c_idx < len(st.args) and _flows_taint(st.args[c_idx], tainted, set(), param_to_return, sanitizers):
+                                    param_to_sink[name][idx] = c_sink
+                                    changed = True
+                                    break
+                            if idx in param_to_sink[name]:
+                                break
+    return param_to_return, param_to_sink
 
 
 def _sink_label(named: str, traced: list[dict]) -> str:
@@ -218,15 +326,30 @@ def run(args, root):
             sources_found.append({"path": _rel(repo, path),
                                   "function": node.name,
                                   "params": sorted(_params(node))})
-    if source_fn in taint_returning:
-        # one hop: functions returning a call to a tainted-returning function
-        for path, tree in parsed:
-            for node in ast.walk(tree):
-                if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                    continue
-                for expr in _returns_expr(node):
-                    if _flows_taint(expr, set(), taint_returning):
-                        taint_returning.add(node.name)
+    sanitizers = _sanitizers_for_sinks(parsed, sink_name)
+    param_to_return, param_to_sink = _compute_interprocedural_summaries(parsed, sink_name, sanitizers)
+
+    if taint_returning:
+        # Fixed-point closure: functions returning tainted values across arbitrary call depth
+        fp_changed = True
+        while fp_changed:
+            fp_changed = False
+            for path, tree in parsed:
+                for node in ast.walk(tree):
+                    if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) or node.name in taint_returning:
+                        continue
+                    local_tainted: set[str] = set()
+                    for st in ast.walk(node):
+                        if isinstance(st, ast.Assign) and _flows_taint(st.value, local_tainted, taint_returning, param_to_return, sanitizers):
+                            for tgt in st.targets:
+                                for sub in ast.walk(tgt):
+                                    if isinstance(sub, ast.Name):
+                                        local_tainted.add(sub.id)
+                    for expr in _returns_expr(node):
+                        if _flows_taint(expr, local_tainted, taint_returning, param_to_return, sanitizers):
+                            taint_returning.add(node.name)
+                            fp_changed = True
+                            break
 
     traced = []
     reached = False
@@ -235,40 +358,61 @@ def run(args, root):
         for fn in ast.walk(tree):
             if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue
-            tainted = set(_params(fn)) if fn.name in taint_returning else set()
-            for node in ast.walk(fn):
-                if isinstance(node, ast.Assign):
-                    if _flows_taint(node.value, tainted, taint_returning):
-                        for target in node.targets:
-                            for t in ast.walk(target):
+            # Only seed function parameters as tainted on TRUE source functions,
+            # not intermediate helpers that merely call a source with no args.
+            source_fn_names = {row["function"] for row in sources_found}
+            tainted = set(_params(fn)) if fn.name in source_fn_names else set()
+            # Two-pass local propagation inside `fn` so out-of-order ast.walk doesn't miss sequential assignments
+            for _ in range(2):
+                for node in ast.walk(fn):
+                    if isinstance(node, ast.Assign):
+                        if _flows_taint(node.value, tainted, taint_returning, param_to_return, sanitizers):
+                            for target in node.targets:
+                                for t in ast.walk(target):
+                                    if isinstance(t, ast.Name):
+                                        tainted.add(t.id)
+                    elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
+                        value = getattr(node, "value", None)
+                        if value is not None and _flows_taint(value, tainted, taint_returning, param_to_return, sanitizers):
+                            for t in ast.walk(node.target):
                                 if isinstance(t, ast.Name):
                                     tainted.add(t.id)
-                elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
-                    value = getattr(node, "value", None)
-                    if value is not None and _flows_taint(value, tainted, taint_returning):
-                        for t in ast.walk(node.target):
-                            if isinstance(t, ast.Name):
-                                tainted.add(t.id)
-                elif isinstance(node, ast.Call):
-                    called = _call_name(node)
-                    dotted = _dotted(node)
-                    if sink_name:
-                        if called != sink_name and dotted != sink_name:
-                            continue
-                    elif called not in _SINKS and dotted.rsplit(".", 1)[-1] not in _SINKS:
-                        continue
-                    if not _flows_taint(node, tainted, taint_returning):
-                        continue
+            for node in ast.walk(fn):
+                if not isinstance(node, ast.Call):
+                    continue
+                called = _call_name(node)
+                dotted = _dotted(node)
+                is_direct_sink = (
+                    (called == sink_name or dotted == sink_name)
+                    if sink_name
+                    else (called in _SINKS or dotted.rsplit(".", 1)[-1] in _SINKS)
+                )
+                if is_direct_sink and _flows_taint(node, tainted, taint_returning, param_to_return, sanitizers):
                     reached = True
                     entry = {"path": _rel(repo, path), "line": node.lineno,
-                             "function": fn.name, "sink": _dotted(node) or called,
+                             "function": fn.name, "sink": dotted or called,
                              "tainted_names": sorted(tainted)[:12]}
                     traced.append(entry)
                     finding = finding or entry
+                    continue
+                # Interprocedural sink reach: callee forwards arg `c_idx` into a sink!
+                if called in param_to_sink and param_to_sink[called] and called != fn.name:
+                    for c_idx, c_sink in param_to_sink[called].items():
+                        if c_idx < len(node.args) and _flows_taint(node.args[c_idx], tainted, taint_returning, param_to_return, sanitizers):
+                            reached = True
+                            entry = {"path": _rel(repo, path), "line": node.lineno,
+                                     "function": fn.name, "sink": c_sink,
+                                     "via_callee": called,
+                                     "tainted_names": sorted(tainted)[:12]}
+                            traced.append(entry)
+                            finding = finding or entry
+                            break
 
     answer = "yes" if reached else "no"
     report = {
         "schema": SCHEMA,
+        "analysis_model": "BOUNDED_NAME_BASED_DATAFLOW",
+        "is_security_proof": False,
         "source_root": _rel(repo, source_root),
         "source_function": _source_label(source_fn, sources_found),
         "source_functions": sorted({row["function"] for row in sources_found}),
@@ -279,12 +423,18 @@ def run(args, root):
         "trace": traced,
         "finding_count": len(traced),
         "files_scanned": scanned,
+        "unparseable_count": scanned - len(parsed),
+        "limitations": ["Name-based call resolution, not full Python dispatch",
+                        "Interprocedural summaries bounded to 12 rounds",
+                        "A negative answer is not a proof of security"],
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     raw = (json.dumps(report, indent=2, sort_keys=True) + "\n").encode("utf-8")
     output.write_bytes(raw)
     return {
         "adapter": "python_source_taint_flow",
+        "analysis_model": "BOUNDED_NAME_BASED_DATAFLOW",
+        "is_security_proof": False,
         "answer": answer,
         "reaches": reached,
         "source_function": _source_label(source_fn, sources_found),

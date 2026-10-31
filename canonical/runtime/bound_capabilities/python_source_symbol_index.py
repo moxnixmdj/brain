@@ -358,14 +358,11 @@ def _module_names_prepass(tree):
     return names
 
 
-def run(args, root):
+def _collect_index_parts(source_root_arg, root, cached=None):
+    """Request-local index construction shared by staged workflows and the adapter."""
     repo = pathlib.Path(root).resolve()
-    source_root = _safe_root(repo, args.get("source_root", "canonical/runtime"))
-    output = (repo / str(args.get("output_path") or "")).resolve()
-    if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-
-    cached = _cached_modules(output)
+    source_root = _safe_root(repo, source_root_arg)
+    cached = cached or {}
     modules = []
     unparseable = []
     reused = 0
@@ -450,6 +447,30 @@ def run(args, root):
             "call_edges": call_edge_total,
         },
     }
+    return report, reused
+
+
+def build_index(source_root, root):
+    """Build the ordinary index without publishing a report or modifying sources."""
+    report, _ = _collect_index_parts(source_root, root)
+    return report
+
+
+def run(args, root):
+    repo = pathlib.Path(root).resolve()
+    source_root = _safe_root(repo, args.get("source_root", "canonical/runtime"))
+    output = (repo / str(args.get("output_path") or "")).resolve()
+    if output == repo or repo not in output.parents:
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+
+    cached = _cached_modules(output)
+    report, reused = _collect_index_parts(source_root.relative_to(repo).as_posix(), repo, cached)
+    modules = report["modules"]
+    unparseable = report["unparseable"]
+    symbols = report["symbols"]
+    callers_of = report["callers_of"]
+    reference_total = report["totals"]["references"]
+    call_edge_total = report["totals"]["call_edges"]
     unchanged = (reused == len(modules) and output.is_file()
                  and _CACHE_META.get("source_root") == str(source_root.relative_to(repo)).replace("\\", "/")
                  and list(_CACHE_META.get("unparseable") or []) == unparseable)

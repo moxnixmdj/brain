@@ -385,10 +385,13 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         "        suite = unittest.TestLoader().discover(start_dir=str(tdir), top_level_dir=top)\n"
         "        res = unittest.TestResult()\n"
         "        suite.run(res)\n"
-        "        total_ran += res.testsRun\n"
+        "        total_ran += max(0, res.testsRun - len(res.skipped))\n"
         "        if res.failures or res.errors:\n"
         "            print(json.dumps({'ok': False, 'ran': res.testsRun, 'err': str((res.failures + res.errors)[0][1])[-240:]}))\n"
         "            raise SystemExit(1)\n"
+        "if total_ran <= 0:\n"
+        "    print(json.dumps({'ok': False, 'ran': 0, 'err': 'NO_TESTS_EXECUTED'}))\n"
+        "    raise SystemExit(1)\n"
         "print(json.dumps({'ok': True, 'ran': total_ran}))\n"
     )
     env = dict(os.environ)
@@ -406,9 +409,12 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         return False, 0, (proc.stderr or proc.stdout)[-300:]
     try:
         info = json.loads(proc.stdout.strip().splitlines()[-1])
-        return bool(info.get("ok")), int(info.get("ran") or 0), ""
-    except Exception:
-        return True, 0, ""
+        ran = info.get("ran")
+        if info.get("ok") is not True or type(ran) is not int or ran <= 0:
+            return False, 0, "NO_TESTS_EXECUTED_OR_INVALID_VERIFICATION"
+        return True, ran, ""
+    except (ValueError, TypeError, IndexError, AttributeError):
+        return False, 0, "VERIFICATION_EVIDENCE_INVALID"
 
 
 def _purge_pyc(path: pathlib.Path) -> None:
