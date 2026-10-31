@@ -1719,6 +1719,19 @@ def _joint_role_binding(goal: str, pending: list[str], root: pathlib.Path, taken
     return assignment
 
 
+# A ROUTE THAT NEEDS RESCUING MUST NOT DISPLACE ONE THAT BINDS ON THE SENTENCE ITSELF.
+#
+# ``derive_declared_inputs`` settles a still-unbound key from ``declared_input_derivation_v1``.  It
+# is the right LAST resort and the wrong FIRST choice: measured 2026-10-31 on the merged tree, it
+# let ``python.software.repair.loop.strict_progress.ast.v1`` bind a sentence whose own contract
+# selects ``...loop.test_guided.ast.v1`` (and that row then had no ``source_paths`` to report), and
+# it let a score-4 row answer a performance review that the perf gate was ranked first for.  So the
+# compile is TWO PASSES: every candidate first on the sentence's own evidence, and the rescue only
+# when no candidate binds at all.  The flag is read at the one site that can rescue, and defaults to
+# OFF so every direct call (tests, selection, the DAG planner) sees the unrescued contract.
+_DECLARED_RESCUE = {"enabled": False}
+
+
 def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None,
                     produced_paths=None, cycle=None, spool=None,
                     allow_declared_rescue: bool = True) -> dict[str, Any]:
@@ -1828,7 +1841,7 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             inputs[key] = bind_typed_key(goal, key, root, entry)
         except GoalCompilationFailure as exc:
             refused.append((key, exc))
-    if refused and allow_declared_rescue:
+    if refused and allow_declared_rescue and _DECLARED_RESCUE["enabled"]:
         refused = derive_declared_inputs(goal, refused, root, entry, inputs)
     if refused:
         raise refused[0][1]
@@ -3106,6 +3119,14 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     token = _NAMED_EXPECTATION.set(None)
     rtoken = _NAMED_ROUTE.set(None)
     failure = None
+    # PASS 1: every candidate on the sentence's OWN evidence.  PASS 2 (only if nothing binds):
+    # the same compile with the declared-input rescue enabled.  A rescue decides a sentence no
+    # contract can bind; it never outranks a row that binds.  Measured on the merged tree: with the
+    # rescue on from the start, ``...loop.strict_progress.ast.v1`` took a sentence whose contract
+    # selects ``...loop.test_guided.ast.v1`` (and could not report source_paths), and a score-4
+    # suite runner took "Run a performance review of <file>" from the perf gate.
+    was_enabled = _DECLARED_RESCUE["enabled"]
+    _DECLARED_RESCUE["enabled"] = False
     try:
         compiled = _compile_goal_body(goal, admissible, root)
     except GoalCompilationFailure as exc:
@@ -3121,6 +3142,23 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         route = _NAMED_ROUTE.get()
         _NAMED_EXPECTATION.reset(token)
         _NAMED_ROUTE.reset(rtoken)
+    if compiled is None and failure is not None and not was_enabled:
+        # PASS 2 -- the same sentence, the same gate chain, with the last-resort derivation on.
+        token = _NAMED_EXPECTATION.set(None)
+        rtoken = _NAMED_ROUTE.set(None)
+        _DECLARED_RESCUE["enabled"] = True
+        try:
+            compiled = _compile_goal_body(goal, admissible, root)
+            failure = None
+        except GoalCompilationFailure as exc:
+            failure = exc
+            compiled = None
+        finally:
+            expected = _NAMED_EXPECTATION.get()
+            route = _NAMED_ROUTE.get()
+            _NAMED_EXPECTATION.reset(token)
+            _NAMED_ROUTE.reset(rtoken)
+            _DECLARED_RESCUE["enabled"] = was_enabled
     if failure is not None:
         if expected is not None and expected not in str(failure.detail or ""):
             named_entry = (admissible or {}).get(expected) or {}
