@@ -303,7 +303,7 @@
      "route": "WIDEN_THE_ACCEPTANCE_TOLERANCE"
     }
    ],
-   "checked_at_utc": "2026-10-31T14:14:34Z",
+   "checked_at_utc": "2026-10-31T14:16:36Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -367,7 +367,7 @@
    "selected_route_checked_at_utc": "2026-10-30T00:32:14Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T14:14:34Z",
+    "checked_at_utc": "2026-10-31T14:16:36Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -491,7 +491,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-31T14:14:34Z",
+  "checked_at_utc": "2026-10-31T14:16:36Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
