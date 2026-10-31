@@ -7869,6 +7869,237 @@
         "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
         "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165"
       }
+    },
+    "python.source.audit.ast": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.audit.ast",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_audit",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "source",
+        "audit",
+        "imports",
+        "functions",
+        "classes",
+        "sha256"
+      ],
+      "limitations": [
+        "Audits repository-local Python files using the Python standard-library AST parser.",
+        "Reports top-level imports, functions, and classes only."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.audit"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "class_count",
+        "distinct_imported_module_count",
+        "file_count",
+        "function_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "unparseable_count",
+        "unparseable_paths"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001",
+        "observed_effect": {
+          "classes": 12,
+          "distinct_imported_modules": 41,
+          "files": 26,
+          "functions": 151
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001.json"
+      }
+    },
+    "python.source.change_impact.testselect.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.change_impact.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_change_impact_testselect",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "change",
+        "impact",
+        "diff",
+        "test",
+        "selection",
+        "blame",
+        "callers",
+        "affected",
+        "minimal",
+        "fast",
+        "changed",
+        "select",
+        "tests",
+        "impacted",
+        "which tests"
+      ],
+      "limitations": [
+        "Diff input is unified diff or an explicit changed-path list (paths imply module-wide change).",
+        "Selection is never-miss with carried evidence: same-named definitions across modules widen selection, they never omit."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.change_impact.test_selection",
+        "python.source.change_impact.testselect.v1"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "affected_module_count",
+        "candidate_test_count",
+        "changed_file_count",
+        "changed_symbol_count",
+        "ignored_non_python_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "selected_test_count",
+        "unknown_symbol_module_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CHANGE-IMPACT-001",
+        "observed_effect": {
+          "affected_modules": 4457,
+          "candidate_tests": 2096,
+          "changed_files": 1,
+          "changed_module": "canonical/runtime/capability_planner.py",
+          "changed_symbols": 75,
+          "selected_tests": 2070,
+          "source_root": "canonical",
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CHANGE-IMPACT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CHANGE-IMPACT-001.json"
+      }
+    },
+    "python.source.complexity.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.complexity.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_complexity",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "quadratic",
+        "complexity",
+        "time complexity",
+        "big o",
+        "loop nest",
+        "nested loops",
+        "asymptotic",
+        "cubic",
+        "quadratic time complexity"
+      ],
+      "limitations": [
+        "Measures loop nesting depth per function; a deepening chain of loops determines the class.",
+        "Reports the published class (O(n^d)) from structure; it does not benchmark."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.quadratic_complexity",
+        "python.source.complexity"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "functions_measured",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "quadratic_symbols",
+        "worst_class",
+        "worst_function",
+        "worst_nesting"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_complexity.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
