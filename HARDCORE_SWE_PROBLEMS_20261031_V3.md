@@ -463,3 +463,111 @@ substrate.
 **Until (1) and (3) land, no number this project reports about itself can be trusted**: it can
 still answer a question it did not understand and call it verified (seven times in 62), and a
 benchmark run can still corrupt the tree it is measuring.
+
+---
+
+## §11. Second pass, same day, `main @ b68f7c7` — the two boards, and four seams this report does not name
+
+Everything below was re-measured after this report was written, on a copy of `main @ b68f7c7`
+(clean at start), with the same filesystem oracle. It does not contradict §1; it explains it.
+
+### 11.1 There are two boards and both are true
+
+| board | sentences | correct |
+|---|---|---|
+| this report's prose corpus | 62 | **5** |
+| curated fixture ladder (`hardcore_swe_surface_probe_20261030.py`) | 28 | **26** |
+| ordinary sentences, `pkg/test_*.py` layout (`swe_probe_20261029/swe_probe.py`) | 18 | **3** |
+| same sentences, sibling `tests/` layout | 18 | **3** |
+
+The same machine scores 93 % when the sentence names a fixture it was built for and 17 % when a
+human writes the sentence. That gap is the headline, and it is a **routing and admission** gap,
+not a capability gap: `extract_function`, `rename_parameter`, `fix_race`, `git log`, `find_callers`
+all execute correctly when they are reached. The machine's depth is real; its *interface* is not.
+
+### 11.2 A three-clause request is answered by one capability, and certified
+
+Measured, deterministic, filesystem oracle:
+
+```
+"The test in <D>/tests fails.  Fix the bug in <D>/app and add a regression test that would
+ have caught it, then make the whole suite pass."
+  -> python.software.repair.apply.verified.v1
+  -> PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS…
+  -> tree: app fixed, suite green, **no new test file**   (new_test_files: [])
+```
+
+The fix landed; the second clause was silently dropped; the report says PASS. Note the doors this
+sentence passes through:
+
+* `goal_compiler.compile_goal` **refuses it correctly**:
+  `GOAL_COMPILATION_SUBGOAL_UNRESOLVED:{clauses:[…3…], index:2, cause:GOAL_COMPILATION_AMBIGUOUS}`;
+* `goal_front_compiler_v1.compile_goal` — the compiler the door actually calls through
+  `compile_against_live_registry` — answers it with one capability and no clause accounting.
+
+**This repository has two compilers with different laws, and the door uses the one without the
+clause-coverage law.** Clause coverage exists (`_validate_compiled_clause_coverage`,
+`_attribute_chained_parts_to_clauses`) and is applied only on the compound path.
+
+### 11.3 The answer gate asks the whole row, so "test-guided" reads as "writes tests"
+
+`stated_answer_errors` decides whether a row may answer a stated effect by running the supplied
+regex over `str(entry)`. `python.software.repair.apply.verified.v1` is a **test-guided** repair: the
+word "test" occurs throughout its row. So:
+
+* adding an honest `STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY` rule to `_STATED_EFFECTS`
+  (measured, 2026-10-31) **does not stop §11.2** — the gate matches the word "test" in the repair
+  row's own text and admits it;
+* the same addition *did* change which rows the shortlist narrows to, moving `write_test` from a
+  chart capability to `test.slice.never_miss.v1` — still wrong, differently.
+
+Any fix here must read what the row **provides** (`provides` / `target_effects` / `result_fields`),
+not the row's prose. `declared_effect_ids` already states this law — "what it produces outranks what
+it is tagged with" — and the answer gate has not adopted it.
+
+### 11.4 `pass: true` is a weaker claim than its name
+
+Measured on a PASS:
+
+```
+status  PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED
+pass    True
+raw_goal_acceptance.status                  RAW_GOAL_ACCEPTANCE_UNRESOLVED
+raw_goal_acceptance.semantic_acceptance_complete  False
+```
+
+The status string is honest and the boolean is not. Every consumer that reads `pass` — including
+every probe in this report — is reading "executed and locally verified", never "accepted". Either
+the boolean becomes `pass and semantic_acceptance_complete`, or the field is renamed; a certificate
+that says PASS in one field and UNRESOLVED in the next is a certificate no referee can trust.
+
+### 11.5 No wall-clock authority anywhere, quantified
+
+`canonical/runtime`: **194** `subprocess.run(...)` call sites without a `timeout=`, against **9**
+mentions of `RLIMIT_*` in the whole tree. §5 measured the symptom (4 sentences hanging 180 s); this
+is the cause: the budget is not missing from one path, it is absent from the layer.
+
+### 11.6 Two registries, and nothing declares what it does
+
+* live `BOUND_CAPABILITY_REGISTRY_V1.json`: **138** rows; snapshot: **145**;
+* snapshot-only: `git.history.bisect_regression`, `python.feature.implement_function_spec`,
+  `python.refactor.add_parameter`, `python.refactor.move_function`, `python.refactor.move_symbol`,
+  `python.source.add_function`, `python.source.add_parameter`, `python.tests.mutation_score`;
+  live-only: `git.repository.operate`;
+* **0 of 145** rows declare an effect kind.
+
+With no effect vocabulary a router can only count words, which is why `write_test` reached a chart
+row, `profile` reaches `python.source.dead_code`, `debug_test` reaches `python.tests.mutation_score`,
+and a destructive sentence was refused by luck.
+
+### 11.7 Fix order, revised
+
+1. **One compiler, or a coverage gate on the door** (§11.2) — a dropped clause must never be a PASS.
+2. **The answer gate reads `provides`, not the row blob** (§11.3) — this is the seam that lets a
+   wrong family answer with authority.
+3. **`pass` means accepted** (§11.4) — one boolean, honestly computed.
+4. **One registry, generated and verified** (§11.6) — plus a declared effect kind per row, which is
+   the only vocabulary that lets routing stop counting words.
+5. **A deadline at the process layer** (§11.5) — 194 call sites; a default timeout is one edit.
+
+Items 1–3 are small and reduce certified wrong answers directly. Items 4–5 are the structural work.
