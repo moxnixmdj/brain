@@ -705,6 +705,28 @@ def _known_programs() -> frozenset[str]:
             | frozenset(_accept._READ_ONLY_SUBCOMMANDS))
 
 
+def stated_command_refusal(text: str) -> str | None:
+    """The NAMED reason no command is stated for this sentence, when there is one.
+
+    A refusal that says only "the promised artifact is missing" is a refusal that hides its own cause:
+    measured 2026-10-30, "Move the module <p>/pkg/util.py to <p>/pkg/helpers/util.py and update the
+    imports." came back ``FAIL_CLOSED__PROMISED_ARTIFACT_MISSING`` over a tree that nothing had
+    touched, which reads exactly like a move that silently failed.  The cause is a decision made here,
+    so it is reported here -- one rule, one text, two callers.
+    """
+    paths = extract_paths(str(text or ""))
+    if len(paths) < 2 or not str(paths[0]).endswith(".py"):
+        return None
+    if not re.search(r"\b(?:move|rename)\b", str(text or ""), re.IGNORECASE):
+        return None
+    broken = importers_of_a_moved_module(str(paths[0]), str(paths[1]), _REPO_ROOT)
+    if not broken:
+        return None
+    return ("MODULE_MOVE_WOULD_ORPHAN_IMPORTERS:" + ",".join(broken[:3])
+            + " -- the move and the import rewrite are two effects and one file command"
+              " produces only the first, so nothing was executed")
+
+
 def extract_argv(text: str) -> list[str] | None:
     """The command line the sentence states, token by token, or None.
 
@@ -1368,6 +1390,87 @@ def _reserved_for_the_report(sentence: str) -> set[str]:
                      r"\b(?:to|into|at)\b[^\n]{0,8}$", text[:where], re.IGNORECASE):
             reserved.add(str(path))
     return reserved
+
+
+def _mv_inside(root: pathlib.Path, relative: str) -> pathlib.Path | None:
+    """Resolve a repository-relative path, refusing anything outside the repository."""
+    if not isinstance(relative, str) or not relative.strip():
+        return None
+    candidate = (root / relative).resolve()
+    try:
+        candidate.relative_to(root.resolve())
+    except ValueError:
+        return None
+    return candidate
+
+
+def _dotted_module(path: pathlib.Path, project: pathlib.Path) -> str:
+    rel = path.relative_to(project).as_posix()
+    if rel.endswith("/__init__.py"):
+        rel = rel[: -len("/__init__.py")]
+    elif rel.endswith(".py"):
+        rel = rel[:-3]
+    return rel.replace("/", ".")
+
+
+def importers_of_a_moved_module(source_token: str, destination_token: str,
+                                root: pathlib.Path) -> list[str]:
+    """Repository-relative .py files that still import the OLD dotted path of a moved module.
+
+    Empty when the command is not a single-file move of a Python module, when the old path carried no
+    module name worth checking, or when every importer was updated -- in which case the move really is
+    complete and the caller's postcondition stands.
+    """
+    src = _mv_inside(root, source_token)
+    dst = _mv_inside(root, destination_token)
+    if src is None or dst is None or not source_token.endswith(".py"):
+        return []
+    project = src.parent
+    for _ in range(8):
+        if any((project / marker).exists() for marker in
+               ("pyproject.toml", "setup.py", "setup.cfg", ".git")):
+            break
+        if project == root or project.parent == project:
+            project = root
+            break
+        project = project.parent
+    try:
+        src.relative_to(project)
+    except ValueError:
+        return []
+    old = _dotted_module(src, project)
+    leaf = old.rsplit(".", 1)[-1]
+    parent_pkg = old.rsplit(".", 1)[0] if "." in old else ""
+    if not leaf:
+        return []
+    # `from <old> import ...`, `import <old>`, and `from <parent> import <leaf>` all bind the module.
+    pattern = re.compile(
+        r"^\s*(?:from\s+" + re.escape(old) + r"\s+import\b"
+        r"|import\s+" + re.escape(old) + r"\b"
+        + (r"|from\s+" + re.escape(parent_pkg) + r"\s+import\s+[^\n]*\b" + re.escape(leaf) + r"\b"
+           if parent_pkg else r"") + r")", re.MULTILINE)
+    hits: list[str] = []
+    scanned = 0
+    skip = {"__pycache__", ".git", ".venv", "venv", "node_modules", ".mypy_cache", "site-packages"}
+    for candidate in project.rglob("*.py"):
+        if any(part in skip for part in candidate.parts):
+            continue
+        scanned += 1
+        if scanned > 5000:
+            break
+        try:
+            resolved = candidate.resolve()
+        except OSError:
+            continue
+        if resolved in (src.resolve(), dst.resolve()):
+            continue
+        try:
+            text = candidate.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if pattern.search(text):
+            hits.append(str(candidate.relative_to(root)))
+    return sorted(hits)
 
 
 def _states_a_destination_for_the_result(sentence: str, dest: Any) -> bool:
@@ -2815,6 +2918,27 @@ def _prose_argv(sentence: str) -> list[str] | None:
         if program in {"mv", "cp", "rm"} and re.search(
                 r"\b(?:function|method|class|symbol|parameter|argument|definition|fn)\b",
                 text) and not re.search(r"\bfiles?\b|\bdirector(?:y|ies)\b", text):
+            return None
+        # A MODULE MOVE THAT LEAVES ITS IMPORTERS BEHIND IS NOT A MOVE, AND IT MUST NOT RUN.
+        #
+        # Measured 2026-10-30 on the frontier probe -- the sentence every engineer types before a
+        # refactor:
+        #
+        #   "Move the module <p>/pkg/util.py to <p>/pkg/helpers/util.py and update the imports."
+        #       -> bound `mv <p>/pkg/util.py <p>/pkg/helpers/util.py`, ran it, and certified
+        #          PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED
+        #       -> `pkg/uses_util.py` still said `from pkg.util import total`
+        #       -> `import pkg.uses_util` now raised ModuleNotFoundError: No module named 'pkg.util'
+        #
+        # The mv itself is true and the tree is broken: the sentence names two effects (the move AND
+        # the imports) and this program can produce only the first.  The obligation is read from the
+        # disk -- no remaining .py file in the moved module's own project may import the old dotted
+        # path -- and the refusal comes BEFORE the command runs, exactly like the rule above: the
+        # same measurement proved that refusing AFTER the mv is worse than useless, because the
+        # rollback deletes the destination and leaves the source gone.  Nothing is executed here.
+        if (program == "mv" and len(paths) == 2
+                and str(paths[0]).endswith(".py")
+                and importers_of_a_moved_module(str(paths[0]), str(paths[1]), _REPO_ROOT)):
             return None
         if program == "cut":
             if re.search(r"\bcharacters?\b", text):

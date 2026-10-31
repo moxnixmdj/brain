@@ -2452,7 +2452,22 @@ def _close_observations(result: dict[str, Any], goal: str,
     untouched -- both of them were composed runs.  One function, called at every
     exit, is the only placement that cannot be bypassed by a new early return.
     """
-    if not isinstance(result, dict) or result.get("pass") is not True or before is None:
+    if not isinstance(result, dict):
+        return result
+    # A REFUSAL MUST NAME ITS CAUSE, and this is the one place every exit passes through.  When the
+    # composer declined to state a command it made a decision; reporting that as
+    # ``PROMISED_ARTIFACT_MISSING`` over a tree nothing touched reads exactly like a move that
+    # silently failed.  Measured 2026-10-30 on "Move the module <p> to <p>/helpers/x.py and update the
+    # imports.": the refusal was right, the reason was a lie about why.
+    if result.get("pass") is not True and not result.get("compiler_detail"):
+        try:
+            _declined = composer_route.stated_command_refusal(goal)
+        except Exception:  # noqa: BLE001 - a diagnosis must never break the verdict
+            _declined = None
+        if _declined:
+            result["compiler_detail"] = _declined
+            result["refused_stated_command"] = True
+    if result.get("pass") is not True or before is None:
         return result
     observed = observed_effect_errors(goal, before, observe_world(goal), result, artifacts)
     if not observed:

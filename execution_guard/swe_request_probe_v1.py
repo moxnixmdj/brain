@@ -14,9 +14,15 @@ four things that decide whether the machine is any good at hard software work:
     ms       how long a human waits
 
 ``--suite sentence`` (28 cases, one shared tree) asks whether ordinary advanced requests land.
-``--suite hardcore`` (44 cases, a FRESH tree per case, so no case can be credited with another's
+``--suite hardcore`` (49 cases, a FRESH tree per case, so no case can be credited with another's
 damage) asks the harder question: git, build, packaging, dependencies, debugging, refactoring
 beyond rename, test authoring, review, performance and polyglot work.
+``--suite frontier`` (43 cases, fresh tree per case) instruments the domains NO earlier suite asked
+about at all -- the work that separates a senior engineer from a code-completion service: release
+engineering (versioning, lockfiles, SBOM), CI authoring, data and schema migration, HTTP/API
+design, concurrency and memory, property and golden tests, repo-wide type coverage, PR review and
+description, secret and traversal hardening, structured logging and metrics, and ports to
+TypeScript, Go and Rust.
 
 A ``pass=True`` with ``touched=False`` is not automatically a false pass: "run the test suite"
 and "find every caller" state effects that change no source.  It is the cases whose stated effect
@@ -26,7 +32,8 @@ world does not support.
 Usage::
 
     python3 execution_guard/swe_request_probe_v1.py                    # 28 sentences
-    python3 execution_guard/swe_request_probe_v1.py --suite hardcore    # 44 hardcore requests
+    python3 execution_guard/swe_request_probe_v1.py --suite hardcore    # 49 hardcore requests
+    python3 execution_guard/swe_request_probe_v1.py --suite frontier    # 43 unmeasured domains
     python3 execution_guard/swe_request_probe_v1.py --suite hardcore --json
 """
 from __future__ import annotations
@@ -228,6 +235,124 @@ def hardcore_cases(base: str) -> list[tuple[str, str]]:
     ]
 
 
+FRONTIER_TREE = "canonical/astra_runtime/tmp/swe_frontier_probe"
+
+REQUIREMENTS = "requests==2.25.1\nflask==1.1.2\n"
+CONFIG_JSON = '{"retries": 3, "timeout_s": 0, "endpoint": "/v1/add"}\n'
+RUN_LOG = ("2026-10-30 10:00:01 INFO  start\n"
+           "2026-10-30 10:00:02 ERROR ZeroDivisionError: division by zero at util.py:4\n")
+MODELS_PY = "class User:\n    def __init__(self, name):\n        self.name = name\n"
+USES_UTIL = "from pkg.util import total\n\n\ndef report(xs):\n    return total(xs)\n"
+
+
+def build_frontier() -> str:
+    """The hardcore tree plus what release, data, API and observability work touches: a lockfile
+    to pin, a config to validate, a log with a real exception in it, a schema module and two
+    commits of history."""
+    base = ROOT / FRONTIER_TREE
+    shutil.rmtree(base, ignore_errors=True)
+    (base / "pkg").mkdir(parents=True)
+    (base / "web").mkdir()
+    (base / "migrations").mkdir()
+    (base / "pkg" / "__init__.py").write_text("", encoding="utf-8")
+    (base / "pkg" / "calc.py").write_text(CALC, encoding="utf-8")
+    (base / "pkg" / "util.py").write_text(UTIL, encoding="utf-8")
+    (base / "pkg" / "test_calc.py").write_text(TEST_CALC, encoding="utf-8")
+    (base / "pkg" / "models.py").write_text(MODELS_PY, encoding="utf-8")
+    # A module that USES another one.  Without it the frontier's move case measured nothing: a move
+    # of a module nobody imports really is complete, and the hazard (a move that leaves importers
+    # pointing at the old dotted path) was invisible to the instrument.
+    (base / "pkg" / "uses_util.py").write_text(USES_UTIL, encoding="utf-8")
+    (base / "web" / "app.js").write_text(APP_JS, encoding="utf-8")
+    (base / "web" / "app.test.js").write_text(JS_TEST, encoding="utf-8")
+    (base / "web" / "package.json").write_text(PACKAGE_JSON, encoding="utf-8")
+    (base / "pyproject.toml").write_text(PYPROJECT, encoding="utf-8")
+    (base / "Makefile").write_text(MAKEFILE, encoding="utf-8")
+    (base / "README.md").write_text(README, encoding="utf-8")
+    (base / "requirements.txt").write_text(REQUIREMENTS, encoding="utf-8")
+    (base / "config.json").write_text(CONFIG_JSON, encoding="utf-8")
+    (base / "run.log").write_text(RUN_LOG, encoding="utf-8")
+    _git(base, "init", "-q", "-b", "main")
+    _git(base, "add", "-A")
+    _git(base, "commit", "-qm", "initial import")
+    (base / "pkg" / "calc.py").write_text(CALC + "\n\ndef sub(a, b):\n    return a - b\n",
+                                          encoding="utf-8")
+    _git(base, "add", "-A")
+    _git(base, "commit", "-qm", "add sub")
+    return FRONTIER_TREE
+
+
+def frontier_cases(base: str) -> list[tuple[str, str]]:
+    """The advanced-engineering domains no earlier suite asked about."""
+    c = base + "/pkg/calc.py"
+    u = base + "/pkg/util.py"
+    t = base + "/pkg/test_calc.py"
+    m = base + "/pkg/models.py"
+    js = base + "/web/app.js"
+    py = base + "/pyproject.toml"
+    cfg = base + "/config.json"
+    log = base + "/run.log"
+    return [
+        # --- release engineering -----------------------------------------------------------
+        ("release/version", "Bump the version to 1.1.0 in %s and write the release notes." % py),
+        ("release/lock", "Pin the dependencies in %s/requirements.txt and produce a lock file." % base),
+        ("release/sbom", "Generate a software bill of materials for %s." % base),
+        ("release/audit", "Audit %s for dependencies with known vulnerabilities." % base),
+        # --- CI ----------------------------------------------------------------------------
+        ("ci/workflow", "Add a CI workflow to %s that runs the tests and the type checker." % base),
+        ("ci/matrix", "Set up a CI matrix in %s for Python 3.10, 3.11 and 3.12." % base),
+        # --- data and schema ----------------------------------------------------------------
+        ("data/migration", "Add a database migration to %s/migrations creating a users table." % base),
+        ("data/model", "Model the users table as a SQLAlchemy model in %s." % m),
+        ("data/validate", "Validate %s against a JSON schema and report every violation." % cfg),
+        # --- HTTP and API -------------------------------------------------------------------
+        ("api/endpoint", "Add a FastAPI endpoint /health to %s that returns ok." % c),
+        ("api/client", "Write a client for the endpoint in %s with retries and timeouts." % c),
+        ("api/contract", "Check that the OpenAPI schema in %s matches the handlers." % base),
+        # --- concurrency, memory, performance -----------------------------------------------
+        ("perf/memory", "Find and fix the memory leak in %s." % u),
+        ("perf/async", "Make the function total in %s asynchronous without changing behaviour." % u),
+        ("perf/benchmark", "Add a benchmark for the function mul in %s and record the baseline." % c),
+        ("perf/optimise_hot", "Optimise the hot loop in %s and prove it is not slower." % u),
+        # --- tests beyond unit --------------------------------------------------------------
+        ("test/property", "Write property-based tests for the function mul in %s." % c),
+        ("test/golden", "Add golden-file tests for the command line interface in %s." % base),
+        ("test/parallel", "Make the test suite in %s run in parallel." % base),
+        ("test/raise_to", "Raise the coverage of %s to 90%% by writing the missing tests." % u),
+        # --- refactoring beyond rename -------------------------------------------------------
+        ("refactor/inline_fn", "Inline the function add in %s into its only caller." % c),
+        ("refactor/move_module", "Move the module %s to %s/pkg/helpers/util.py and update the imports." % (u, base)),
+        ("refactor/split_file", "Split %s into one module per concern without changing behaviour." % c),
+        ("refactor/type_repo", "Add type hints to the package in %s and make mypy pass." % base),
+        # --- debugging ----------------------------------------------------------------------
+        ("debug/log", "Find the cause of the exception in the log %s." % log),
+        ("debug/root_cause", "Find the root cause of the failure in %s." % t),
+        ("debug/bisect", "Find the commit that broke %s using git bisect." % c),
+        ("debug/trace_value", "Trace why the function total in %s returns the wrong value for an empty list." % u),
+        # --- git and pull requests -----------------------------------------------------------
+        ("git/rebase", "Rebase the branch feature/x onto main in %s." % base),
+        ("git/worktree", "Create a git worktree for the branch fix/y in %s." % base),
+        ("git/cherry_pick", "Cherry-pick the commit that added sub in %s onto the branch main." % base),
+        ("pr/review", "Review the pull request in %s that changes %s." % (base, c)),
+        ("pr/description", "Write the pull request description for the changes in %s." % base),
+        # --- security ------------------------------------------------------------------------
+        ("sec/traversal", "Harden %s against path traversal." % u),
+        ("sec/secrets", "Check %s for committed secrets." % base),
+        # --- observability --------------------------------------------------------------------
+        ("obs/logging", "Add structured logging to %s." % u),
+        ("obs/metrics", "Add a counter metric for every call to mul in %s." % c),
+        # --- polyglot --------------------------------------------------------------------------
+        ("poly/ts_types", "Add TypeScript type declarations for %s." % js),
+        ("poly/go_port", "Port the function add in %s to Go." % c),
+        ("poly/rust_port", "Port the function add in %s to Rust." % c),
+        # --- long horizon ----------------------------------------------------------------------
+        ("feature/multi_file", "Implement a subtract function in %s with tests and update %s to use it."
+         % (c, u)),
+        ("feature/safe_refactor", "Refactor %s so mul uses a shared helper, keeping every test green." % c),
+        ("maint/dead_code_repo", "Remove all dead code from %s and keep the suite green." % base),
+    ]
+
+
 def _md5(path: pathlib.Path) -> str:
     try:
         return hashlib.md5(path.read_bytes()).hexdigest()[:8]
@@ -249,12 +374,17 @@ def run(suite: str = "sentence", as_json: bool = False) -> int:
         base = build()
         watched = ROOT / base / "pkg" / "calc.py"
         plan = [(name, goal, None) for name, goal in cases(base)]
+    elif suite == "frontier":
+        plan = [(name, goal, "frontier") for name, goal in frontier_cases(FRONTIER_TREE)]
+        base = None
     else:
         plan = [(name, goal, True) for name, goal in hardcore_cases(HARD_TREE)]
         base = None
 
     for name, goal, rebuild in plan:
-        if rebuild:
+        if rebuild == "frontier":
+            base = build_frontier()
+        elif rebuild:
             base = build_hardcore()
         watched = ROOT / base / "pkg" / "calc.py"
         before = _md5(watched)
@@ -293,7 +423,7 @@ def run(suite: str = "sentence", as_json: bool = False) -> int:
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--suite", choices=("sentence", "hardcore"), default="sentence")
+    ap.add_argument("--suite", choices=("sentence", "hardcore", "frontier"), default="sentence")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
     sys.exit(run(args.suite, args.json))

@@ -1423,6 +1423,33 @@ def capability_edits_source(entry: Mapping[str, Any] | None) -> bool:
     return bool(_SOURCE_EDITING_SURFACE.search(surface))
 
 
+_MOVE_VERB_RE = re.compile(r"\b(?:move|rename|relocate|copy|mv|cp)\b", re.IGNORECASE)
+def _stated_move_destinations(goal: str) -> set[str]:
+    """Paths the sentence nominated as where a MOVED or COPIED file goes.
+
+    Distinct from "a file to write": "Write these lines of Python to <X>.py" nominates X as an output
+    and must be written exactly there (pinned by
+    ``test_an_ordinary_sentence_runs_the_command_it_states_v1``).  "Move the module <A> to <B>" nominates
+    B as the future home of SOURCE, and no report may be written onto it.
+    """
+    text = str(goal or "")
+    out: set[str] = set()
+    for match in _MOVE_VERB_RE.finditer(text):
+        for candidate in re.findall(r"[\w.\-/]+\.(?:py|js|jsx|ts|tsx|rs|go|java|c|h|cpp|rb)", text[match.end():]):
+            out.add(candidate)
+            out.add(candidate.strip(".,;:"))
+    for match in re.finditer(r"\b(?:to|into)\s+([\w.\-/]+\.(?:py|js|jsx|ts|tsx|rs|go|java|c|h|cpp|rb))",
+                             text):
+        out.add(match.group(1))
+    return out
+
+
+# Files whose bytes are SOURCE.  A row that only reports on source is never handed one of these as
+# the place to write its report; the list is the languages this repository already serves.
+_SOURCE_SUFFIXES = (".py", ".js", ".jsx", ".ts", ".tsx", ".rs", ".go", ".java", ".c", ".h", ".cpp",
+                    ".hpp", ".rb", ".cs", ".kt", ".php", ".swift", ".mjs", ".cjs")
+
+
 def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path, exclude=None, entry: Mapping[str, Any] | None = None,
                              cycle=None, spool=None) -> list[str]:
     """F10: an output path is never one of the action's own input files.
@@ -1473,6 +1500,28 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         value = str(inputs[key])
         collides = value in input_paths
         exists = (root / value).exists()
+        # A REPORT IS NEVER WRITTEN ONTO SOURCE BYTES -- not even for a CHANGE request.
+        #
+        # F10b above protects a file the sentence only READS.  Measured 2026-10-30, the sentence that
+        # needs the protection most is one that asks for a change:
+        #
+        #   "Move the module <p>/pkg/calc.py to <p>/pkg/helpers/calc.py and update the imports."
+        #       -> refused before the mv ran (a module move that leaves importers behind is not a move)
+        #       -> the next lane bound python.source.audit.ast with
+        #          output_path = <p>/pkg/helpers/calc.py   <- the path the sentence reserved for SOURCE
+        #       -> the auditor created that directory and wrote a 633-byte JSON report there
+        #
+        # The caller's tree came back with a refusal AND a JSON file where the module was going to be.
+        # A source path named in a source-changing request is an OPERAND; it is never where a report
+        # goes.  The discriminator is the one already used here: does the CAPABILITY edit source?  A
+        # row that only reports on source may not be handed a source file as its output, whatever the
+        # sentence wanted, and the remedy is F13's unchanged.
+        if (not edits_source and value.endswith(_SOURCE_SUFFIXES)
+                and value in _stated_move_destinations(goal)
+                and spool is not None and cycle is not None):
+            inputs[key] = _spool_path(key, cycle, spool)
+            rebound.append(key)
+            continue
         if collides or (exists and len([p for p in _future_artifacts(goal, root) if p not in {str(x) for x in (exclude or [])}]) == 1):
             try:
                 inputs[key] = _bind_output_by_future(goal, key, root, exclude=exclude)
