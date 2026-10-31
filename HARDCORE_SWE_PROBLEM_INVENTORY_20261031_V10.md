@@ -352,3 +352,73 @@ len(swe)                                             # 64
 ```
 
 *Authority: NONE — sandbox measurement, not independent verification.*
+
+---
+
+## 9. V10.1 addendum — the last FALSE row is closed (2026-10-31, branch `arena/47739ce8-brain`)
+
+H11 in §6 was the sharpest honesty defect left: **a proposer passed as a repair**. Measured on the
+54-case matrix, verbatim:
+
+```
+goal    "Repair the python source <pkg>/calc.py so that the unit test <pkg>/test_calc.py passes,
+         and save the repair report to <pkg>/out.json."
+answer  python.patch.search.test_guided.ast.v1 -> PASS__VERIFIED_CANDIDATE_PATCH_FOUND
+door    PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED
+world   <pkg>/calc.py BYTE-IDENTICAL to how it was found            (FALSE)
+```
+
+The row is not lying: it says in its own registry `limitations` that *"source bytes are restored
+after every trial and before return; no source write or promotion authority"*. It is a **proposer**.
+The door was asking the sentence's *effect* and its *contract*, and never its **authority**.
+
+The fix is one rule, read from the row's own declaration, applied at the three places a verdict is
+formed — no new subsystem, no id table:
+
+1. `write_authority_v1.declares_no_source_write_authority(entry)` / `cannot_perform_the_stated_change`
+   — the authority is read from `limitations`, never from the id (`is_source_transformer` reads the
+   id, and `python.patch.search...` contains "patch", which is why it was called a transformer).
+   The sentence half is the door's own `sentence_promises_a_change`, so a *question about* a change
+   is still not a promise to make one.
+2. `capability_selection_retrieval_v1.admit` refuses a declared candidate-only row for a
+   change-promising sentence (`CANDIDATE_ONLY_ROW_DECLARES_NO_SOURCE_WRITE_AUTHORITY`) — which is
+   what lets the typed selector reach `python.software.repair.apply.verified.v1`, the row that binds
+   the identical inputs and *applies* the verified repair.
+3. `live_brain_route_admission_v1` asks it **before the run** (the same place the answer gate is
+   asked), so the refusal costs nothing and does not set `executed: True` — the one flag that
+   forbade the scoped typed retry from reaching the applier.
+
+Two further defects surfaced while wiring it, both closed in the same module:
+
+* the applier reported a green baseline only in `status`; it now says `already_satisfied: true` /
+  `edited: false` in the vocabulary the door already honours, and the door lifts that flag from a
+  PASS — so the idempotent sentence ("repair this, it is already green") stays a PASS with
+  `edited: false` instead of becoming `PROMISED_SOURCE_CHANGE_NOT_APPLIED`;
+* an `already_satisfied` claim over a source that **does not parse** is empty (the green suite never
+  imported it): it is now `FAIL_CLOSED__NAMED_SOURCE_UNPARSEABLE`, named per file.
+
+Measured after the change, same machine, tree cleared of `tmp/frontier_matrix` first:
+
+| instrument | before | after |
+|---|---|---|
+| `swe_capability_matrix_v1.py` | 54 → 11 REAL / **1 FALSE** / 42 REFUSED / 0 DAMAGED | 54 → **12 REAL / 0 FALSE / 42 REFUSED / 0 DAMAGED** |
+| repair class | 4/7 REAL | **5/7 REAL** (`repair_with_report` now applied=true, source_restored=false, file really changed) |
+| latency | median 66 ms, p90 545, max 1040 | median 60 ms, p90 629, max 1095 |
+| `verify_brain_unified_model_v1.py` | 33/33, AUTHORITY NONE | 33/33, AUTHORITY NONE |
+| `verify_bound_capability_provenance_v1.py --check` | 0 unproven of 133 | 0 unproven of 133 |
+
+Regression pins: `canonical/tests/test_a_proposer_is_not_a_repair_v1.py` (7 tests: the declaration
+set, the question-vs-promise split, the selector, the end-to-end repair on a broken tree, the
+idempotent green tree, the unparseable source). Whole-repository sweep over the 106 modules that
+touch these paths: **39 failures, the same 39 node ids as `origin/main`'s tree** — no new red.
+
+Reproduction:
+
+```bash
+python3 execution_guard/swe_capability_matrix_v1.py                 # 54 -> 12/0/42/0
+python3 -m pytest -q canonical/tests/test_a_proposer_is_not_a_repair_v1.py
+python3 canonical/runtime/verify_bound_capability_provenance_v1.py --check
+python3 canonical/runtime/verify_brain_unified_model_v1.py          # 33/33
+```
+
+*Authority: NONE — sandbox measurement, not independent verification.*

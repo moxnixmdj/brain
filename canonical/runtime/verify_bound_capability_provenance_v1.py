@@ -317,12 +317,28 @@ def check_complexity(world: pathlib.Path, report: dict) -> tuple[bool, dict]:
                         child, (ast.For, ast.AsyncFor, ast.While)) else level
                     best = max(best, depth(child, step))
                 return best
-            truth[node.name] = {"nesting": depth(node), "lineno": node.lineno}
+            # ... and McCabe's number, recomputed here from the decision nodes so the
+            # check does not share a line of code with the adapter it is checking.
+            decisions = 1
+            for child in ast.walk(node):
+                if child is node:
+                    continue
+                if isinstance(child, (ast.If, ast.For, ast.AsyncFor, ast.While,
+                                      ast.ExceptHandler, ast.With, ast.AsyncWith,
+                                      ast.Assert, ast.IfExp, ast.comprehension)):
+                    decisions += 1
+                elif isinstance(child, ast.BoolOp):
+                    decisions += max(0, len(child.values) - 1)
+            truth[node.name] = {"nesting": depth(node), "lineno": node.lineno,
+                                "cyclomatic": decisions}
     measured = {row.get("name"): row for row in (report.get("functions") or [])}
     ok = (set(measured) == set(truth)
           and all(measured[name].get("nesting") == truth[name]["nesting"]
                   and measured[name].get("lineno") == truth[name]["lineno"]
+                  and measured[name].get("cyclomatic_complexity") == truth[name]["cyclomatic"]
                   for name in truth)
+          and report.get("cyclomatic_complexity") == max(
+              row["cyclomatic"] for row in truth.values())
           and truth["nested"]["nesting"] > truth["flat"]["nesting"] == 0
           and report.get("answer") == "nested"
           and report.get("functions_measured") == len(truth) == 2)
@@ -511,7 +527,8 @@ ROWS = {
     "python.source.complexity.v1": {
         "mission": "ASTRA-VERIFY-COMPLEXITY-001", "slug": "complexity",
         "build": build_complexity, "check": check_complexity,
-        "claim": "ranks functions by nesting depth and names the worst one",
+        "claim": ("ranks functions by loop-nesting depth and by McCabe's cyclomatic number, "
+                  "both recomputed from the tree"),
     },
     "python.source.dead_code.v1": {
         "mission": "ASTRA-VERIFY-DEAD-CODE-001", "slug": "dead_code",

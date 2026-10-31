@@ -127,6 +127,41 @@ def is_source_transformer(capability_id: str) -> bool:
     return any(token in low for token in _TRANSFORMERS)
 
 
+def declares_no_source_write_authority(entry: Mapping[str, Any] | None) -> bool:
+    """Does the row's OWN declaration say it will not write the source it was given?
+
+    ``is_source_transformer`` above reads the id, and an id is a name: ``python.patch.search.
+    test_guided.ast.v1`` contains "patch" and is therefore "a transformer", while its own registry
+    row says, verbatim, *"Candidate-only: source bytes are restored after every trial and before
+    return; no source write or promotion authority"*.  It is a PROPOSER.  When such a row is the
+    terminal answer to "repair <src> so that <test> passes", the machine reports a verified
+    candidate and the file is untouched -- measured 2026-10-31, the last FALSE row on the
+    capability matrix.  The declaration decides, never the name.
+    """
+    text = " ".join(str(x) for x in ((entry or {}).get("limitations") or [])).lower()
+    return ("no source write" in text or "no write or promotion" in text
+            or "source bytes are restored" in text)
+
+
+def cannot_perform_the_stated_change(goal: str, entry: Mapping[str, Any] | None,
+                                     capability_id: str = "") -> str | None:
+    """A reason when the sentence promises a change this row declares it cannot make.
+
+    Both halves are read, never assumed: the sentence through the door's own reader of imperatives
+    (``sentence_promises_a_change`` -- a question about a change is not a promise to make one), and
+    the row through its own ``limitations``.  A plan for a question, and a reader for a question,
+    are untouched.  Returned as a token so every caller refuses in the same words.
+    """
+    if not declares_no_source_write_authority(entry):
+        return None
+    from canonical.runtime import live_brain_route_admission_v1 as _door
+    if not _door.sentence_promises_a_change(goal):
+        return None
+    return ("CANDIDATE_ONLY_ROW_DECLARES_NO_SOURCE_WRITE_AUTHORITY:"
+            + str(capability_id or (entry or {}).get("capability_id")
+                  or (entry or {}).get("id") or "UNNAMED"))
+
+
 def violation(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -> str | None:
     """Return a refusal reason when this action would overwrite a file it reads.
 

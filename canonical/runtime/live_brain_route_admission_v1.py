@@ -960,6 +960,19 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
         "routing_success_authority": False,
         "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0, "benchmark_specific": False, "terminal_credit_delta": 0,
     }
+    # A PASS THAT SAYS NOTHING HAD TO CHANGE MUST SAY SO AT THE TOP, TOO.
+    #
+    # ``already_satisfied`` / ``edited`` are the door's own words for "the requested state already
+    # held, nothing was written", and the source-change gate reads them from HERE, not from the
+    # adapter's payload.  An adapter that measured a green baseline and reported it inside
+    # ``result`` was therefore read as a repair that had silently failed (measured 2026-10-31 on the
+    # idempotent repair sentence).  Lifted only from a PASS, and only when the adapter says it, so
+    # nothing is invented and no failing run can borrow the flag.
+    if out.get("pass") is True and isinstance(tool_result, Mapping) \
+            and tool_result.get("already_satisfied") is True:
+        out["already_satisfied"] = True
+        # The adapter's own word for whether anything was written; never inferred from the flag.
+        out["edited"] = tool_result.get("applied") is True
     out.update(_exact_acceptance(goal, compiled, _trace, raw_contract))
     if out["semantic_acceptance_complete"]:
         out["status"] = "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"
@@ -1929,6 +1942,22 @@ def _declares_it_does_not_write(entry: Mapping[str, Any]) -> bool:
         or "no mutation" in text or "read-only" in text)
 
 
+def _declares_no_source_write_authority(entry: Mapping[str, Any]) -> bool:
+    """Does the row's own registry declaration say it will not write the source?
+
+    A THIRD declaration, distinct from "this row plans": a candidate search states
+    *"Candidate-only: source bytes are restored after every trial and before return; no
+    source write or promotion authority"*.  That row can produce a correct patch and
+    still not be the repair, so its report may not discharge a promise to repair the
+    named source.  Kept apart from ``_declares_it_does_not_write`` on purpose: the
+    planner exemption answers "is this row a plan", this one answers "may this row's
+    artifact stand in for bytes", and one predicate serving two questions is how the
+    first one got widened by mistake.
+    """
+    from canonical.runtime import write_authority_v1 as _wa
+    return _wa.declares_no_source_write_authority(entry)
+
+
 def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -> list[str]:
     """Refuse the wrong KIND of row -- reader-for-a-transform, writer-for-a-question, python-for-js."""
     out: list[str] = []
@@ -2352,7 +2381,7 @@ _ASKS_A_QUESTION_RE = re.compile(
     r"has|have|had|can|could|should|would|will)\b", re.IGNORECASE)
 
 
-def _sentence_promises_a_change(goal: str) -> bool:
+def sentence_promises_a_change(goal: str) -> bool:
     """Does the sentence USE a change verb, rather than merely contain one?
 
     A QUESTION ABOUT CHANGES IS NOT A PROMISE TO MAKE ONE.  Measured 2026-10-30:
@@ -2382,6 +2411,13 @@ def _sentence_promises_a_change(goal: str) -> bool:
             continue
         return True
     return False
+
+
+# The private spelling stays: it is what this module's call sites and two pinned tests use, and a
+# second implementation of "does this sentence promise a change" is exactly the drift this file has
+# spent its life closing.  The public name exists because ``write_authority_v1`` has to read the
+# same sentence to decide whether a candidate-only row may answer it.
+_sentence_promises_a_change = sentence_promises_a_change
 
 
 def _destructive_targets(goal: str) -> set[str]:
@@ -3100,6 +3136,20 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
                                      if field != "stated_answer_errors"))
     if _only_answer_gate:
         return True
+    # ... and the same reading for the OTHER pre-execution judgement: "this row declares it cannot
+    # write, so it cannot perform the change the sentence asks for" is a statement about the ROW.
+    # Nothing ran; the tree is exactly as it was found; a decisive typed plan that binds the same
+    # stated inputs is the evidence that a row with the authority exists.  Measured 2026-10-31:
+    # with the source-change authority asked before the run, "Repair <src> so that <test> passes,
+    # and save the report to <out>" refuses without executing, the retry runs the applier, the file
+    # is repaired, and the report the sentence asked for is written by the run that repaired it.
+    _only_authority_gate = (result.get("executed") is not True
+                            and result.get("refused_before_execution") is True
+                            and bool(result.get("stated_authority_errors"))
+                            and not any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS
+                                        if field != "stated_answer_errors"))
+    if _only_authority_gate and not result.get("stated_answer_errors"):
+        return True
     # A REFUSAL THAT MEASURED THE TREE UNCHANGED IS NOT A VERDICT ABOUT THE TREE.
     #
     # ``PROMISED_SOURCE_CHANGE_NOT_APPLIED`` is in the judged set because a repair loop that
@@ -3476,6 +3526,39 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         refused["stated_answer_errors"] = declared_answer_errors
         refused["refused_before_execution"] = True
         return refused
+    # THE AUTHORITY THE SENTENCE DEMANDS IS ASKED BEFORE THE RUN, LIKE THE ANSWER IS.
+    #
+    # The refusal directly above asks the row whether it can supply what the sentence asked to be
+    # TOLD.  A sentence that asks for a CHANGE asks something the row can just as well fail to
+    # hold: ``python.patch.search.test_guided.ast.v1`` declares, in its own registry row,
+    # *"Candidate-only: source bytes are restored after every trial and before return; no source
+    # write or promotion authority"* -- it is a PROPOSER.  Ranked against
+    # "Repair the python source <pkg>/calc.py so that the unit test <pkg>/test_calc.py passes", it
+    # scores 29 and binds (it takes exactly the source and the test), so it wins the sentence and
+    # the run returns a verified CANDIDATE while the file is untouched.  Refusing after the run
+    # (``PROMISED_SOURCE_CHANGE_NOT_APPLIED``) is honest but late: it burns the run, and -- the
+    # measured cost -- it sets ``executed: True``, which is exactly the flag that forbids the
+    # scoped typed-SWE retry from reaching the row that DOES write.  Measured 2026-10-31: the
+    # same sentence "fix <the same calc.py>" reaches
+    # ``python.software.repair.apply.verified.v1`` through the typed plan and really repairs the
+    # file (``applied: true, source_restored: false``).  Asked before the run, the gap costs
+    # nothing and the retry is free to answer it, which is what the pre-execution answer gate
+    # above already relies on.
+    #
+    # Scoped to a row that declares no source-write authority and a sentence that promises a
+    # change: a plan for a question, and a reader for a question, are untouched.
+    _declared_entry = dict(admissible.get(_declared) or {})
+    if (_declared_entry and _sentence_promises_a_change(normalized)
+            and _declares_no_source_write_authority(_declared_entry)):
+        refused = _fail(
+            task_id, "FAIL_CLOSED__STATED_SOURCE_CHANGE_NOT_PERFORMABLE_BY_CAPABILITY",
+            "STATED_SOURCE_CHANGE_NOT_PERFORMABLE_BY_CAPABILITY:%s:the_row_declares_no_source_"
+            "write_authority_and_the_sentence_promises_a_change" % _declared,
+            started, compiled_capability_id=_declared, executed=False)
+        refused["refused_before_execution"] = True
+        refused["stated_authority_errors"] = [
+            "STATED_SOURCE_CHANGE_NOT_PERFORMABLE_BY_CAPABILITY:" + _declared]
+        return refused
     promised_sources = _promised_source_files(normalized)
     source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
     promised_roots = _promised_source_roots(normalized)
@@ -3580,6 +3663,26 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
             result["failure_reason"] = ("NO_REPAIR_NEEDED__BASELINE_GREEN: " + str(
                 result.get("reason") or "") + " ; promised artifact not written: "
                 + ",".join(missing))
+    # AN ALREADY-SATISFIED ANSWER CANNOT REST ON A SOURCE THAT DOES NOT PARSE.
+    #
+    # ``already_satisfied`` says "the outcome the sentence asked for already holds, measured
+    # before any write".  That is true of a repair whose named test is green; it is EMPTY when the
+    # source the sentence named is not valid Python and the green suite never imports it.  The
+    # gate above (``observed_effect_errors``) only compares a file's parseability BEFORE and AFTER,
+    # so a file that never parsed is invisible to it and the pass stands.  Measured 2026-10-31,
+    # by wiring the applier in: "Repair <pkg>/broken.py so that its tests pass" -- broken.py is
+    # ``def oops(:``, the stated test file imports ``calc`` and passes -- came back
+    # PASS__..._EXECUTED_AND_VERIFIED with the broken file untouched.  Nothing was repaired and
+    # nothing proved the file could ever run.  The refusal names the file.
+    if result.get("already_satisfied") is True and _sentence_promises_a_change(normalized):
+        _unparseable = [raw for raw, ok in (world_before.get("parses") or {}).items() if ok is False]
+        if _unparseable:
+            result["runtime_status_before_unparseable_check"] = result.get("status")
+            result["status"] = "FAIL_CLOSED__NAMED_SOURCE_UNPARSEABLE"
+            result["pass"] = False
+            result["failure_class"] = "NAMED_SOURCE_UNPARSEABLE"
+            result["already_satisfied"] = False
+            result["unparseable_sources"] = sorted(_unparseable)
     stated_files = _stated_files(normalized)
     patch_evidence = future_artifacts + [p for p in stated_files if p not in future_artifacts]
     # AN ALREADY-SATISFIED REQUEST DOES NOT OWE A BYTE CHANGE.
@@ -3610,13 +3713,29 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     # refused when only a plan was produced.
     _answered_by = str(result.get("compiled_capability_id")
                        or result.get("capability_id") or "")
-    _row_does_not_write = _declares_it_does_not_write(dict(admissible.get(_answered_by) or {}))
+    _answered_entry = dict(admissible.get(_answered_by) or {})
+    _row_does_not_write = _declares_it_does_not_write(_answered_entry)
+    # A ROW THAT DECLARES IT DOES NOT WRITE CANNOT DISCHARGE A PROMISE TO WRITE.
+    #
+    # ``_statement_patch_authority`` lets a stated report stand in for the change, which is right
+    # for a repair loop that computed a verified patch and restored the source BY CONTRACT.  It is
+    # wrong when the row says, in its own artifact, ``NO_SOURCE_WRITE_OR_PROMOTION_AUTHORITY``:
+    # measured 2026-10-31 on the capability matrix, "Repair the python source X so that the unit
+    # test T passes, and save the repair report to out.json" was answered by
+    # python.patch.search.test_guided.ast.v1, which found a verified candidate, wrote the report,
+    # restored X and reported PASS -- the one FALSE row left, and it passed ONLY because the
+    # sentence named a report.  The same sentence without the report clause already refused.
+    # The row's declaration is read, never its id, and a request that promises no change (a plan)
+    # is untouched: it was never asking for bytes.
+    _change_promised = _sentence_promises_a_change(normalized)
+    _no_write_authority = (_declares_no_source_write_authority(_answered_entry)
+                           or _row_does_not_write)
+    _evidence_for_gate = [] if (_no_write_authority and _change_promised) else patch_evidence
     unchanged = promised_source_change_errors(
-        normalized, source_digests_before, patch_evidence,
+        normalized, source_digests_before, _evidence_for_gate,
         roots_before=roots_before, before_files=world_before.get("files")) \
         if (result.get("pass") is True and result.get("already_satisfied") is not True
-            and not (_row_does_not_write
-                     and not _sentence_promises_a_change(normalized))) else []
+            and not (_no_write_authority and not _change_promised)) else []
     if unchanged:
         result["runtime_status_before_source_change_check"] = result.get("status")
         result["status"] = "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED"

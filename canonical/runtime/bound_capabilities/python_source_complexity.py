@@ -63,6 +63,31 @@ def _nesting(node: ast.AST) -> int:
     return best
 
 
+_DECISIONS = (ast.If, ast.For, ast.AsyncFor, ast.While, ast.ExceptHandler,
+              ast.With, ast.AsyncWith, ast.Assert, ast.IfExp, ast.comprehension)
+
+
+def _cyclomatic(node) -> int:
+    """McCabe's number, from the decisions the function itself contains.
+
+    The row's published metric was loop-chain DEPTH, which answers a different
+    question ("how deep") from the one the sentence asks ("cyclomatic complexity"):
+    measured 2026-10-31, "Report the cyclomatic complexity of <pkg>/mod.py" was
+    answered with a nesting depth and counted as a pass.  Two numbers, both true,
+    so the row now carries both -- and the `and`/`or` / `else` paths are counted
+    where they occur, which is what makes the number McCabe's rather than a guess.
+    """
+    count = 1
+    for child in ast.walk(node):
+        if child is node:
+            continue
+        if isinstance(child, _DECISIONS):
+            count += 1
+        elif isinstance(child, ast.BoolOp):
+            count += max(0, len(child.values) - 1)
+    return count
+
+
 def _files(root: pathlib.Path):
     if root.is_file():
         yield root
@@ -97,6 +122,7 @@ def run(args, root):
                 "path": _rel(repo, path),
                 "name": node.name,
                 "nesting": depth,
+                "cyclomatic_complexity": _cyclomatic(node),
                 "complexity_class": _class_for(depth),
                 "lineno": getattr(node, "lineno", 0),
             })
@@ -105,6 +131,9 @@ def run(args, root):
     measured.sort(key=lambda r: (-r["nesting"], r["path"], r["name"]))
     worst = measured[0] if measured else None
     quadratic = [r["name"] for r in measured if r["nesting"] >= 2]
+    by_cyclomatic = sorted(measured, key=lambda r: (-r["cyclomatic_complexity"],
+                                                    r["path"], r["name"]))
+    worst_cyclomatic = by_cyclomatic[0] if by_cyclomatic else None
     report = {
         "schema": SCHEMA,
         "source_root": _rel(repo, source_root),
@@ -113,6 +142,10 @@ def run(args, root):
         "worst_nesting": (worst["nesting"] if worst else 0),
         "worst_class": (worst["complexity_class"] if worst else "O(1)"),
         "quadratic_symbols": quadratic,
+        "worst_cyclomatic": worst_cyclomatic,
+        "cyclomatic_complexity": (worst_cyclomatic["cyclomatic_complexity"]
+                                  if worst_cyclomatic else 0),
+        "total_cyclomatic": sum(r["cyclomatic_complexity"] for r in measured),
         "functions_measured": len(measured),
         "unparseable_count": unparseable,
         "functions": measured,
@@ -128,6 +161,10 @@ def run(args, root):
         "worst_nesting": report["worst_nesting"],
         "worst_class": report["worst_class"],
         "quadratic_symbols": quadratic,
+        "worst_cyclomatic": worst_cyclomatic,
+        "cyclomatic_complexity": (worst_cyclomatic["cyclomatic_complexity"]
+                                  if worst_cyclomatic else 0),
+        "total_cyclomatic": sum(r["cyclomatic_complexity"] for r in measured),
         "functions_measured": len(measured),
         "output_path": _rel(repo, output),
         "output_sha256": hashlib.sha256(raw).hexdigest(),

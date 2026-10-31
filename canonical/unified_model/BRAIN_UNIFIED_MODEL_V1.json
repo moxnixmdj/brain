@@ -25227,7 +25227,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "7d9b45a1854496d89ac8a511b202b3c4855d8fde4d0f6623e8069e8144a098f3",
+    "source_sha256": "636077ec2be3653a9e949c1f49578494f87dae1ad38780c0e295d4722045b167",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -26070,7 +26070,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_source_complexity.py",
-    "source_sha256": "6b412807ba5a2bea4373eadab1f18be93f20bffceed6d0624ee50882e0856669",
+    "source_sha256": "b15689be367b6152b91070764a133f1ba405d89b21d78a8a12e503aa287a8114",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -26102,7 +26102,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "319e02661c78f00d7df078739d2c7fdc5a105e1f6e222a71d8f51c15f9d99464",
+    "evidence_sha256": "a60c4932a2af624b93f75807997a00c6bc87dc1360cd895fa7e5c23e3d942b1f",
     "independent_verification_evident": true,
     "mission_id": "ASTRA-VERIFY-COMPLEXITY-001",
     "module_sha256": null,
@@ -29361,7 +29361,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "591a8c99f0b3cd71bf7feefd7959ce65448de1af6107d87046c2efa624c3615c"
+  "value": "217fc61509fa343a7c9b29ff73c251a9264b093a5e2e457769eb59f3a9dbce50"
  },
  "engines": [
   {
@@ -54742,7 +54742,7 @@
   "included_source_count": 974,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1feaf61b54e83e4fc08fff5ff6f47ccafa3e9fe68441d05cfca1a822e7be2d58"
+  "source_tree_digest": "a41a57b5cb6e534f20ce3af80ea8f22525e85df6ec0b1fb59207ba92ff64497b"
  },
  "research_index": [
   {
@@ -220554,7 +220554,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
-   "sha256": "a5834f22a0de6a1922bf711bb451d64af8da3862a8a326379c389e804238707c",
+   "sha256": "cd49da750b108585ef3be4b235c0cf199f74abcf01ecb8636a2909a9faaa2815",
    "summary": "One sentence selects one capability: retrieval PROPOSES, typed admission DISPOSES.",
    "symbol_count": 27,
    "symbols": [
@@ -240795,9 +240795,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "0d84c9bf348ce1257aa1e4e1cfaa0170731bc5546842fa2b657a03cb018687c8",
+   "sha256": "5faecada6cd342602728b1a35e9b8ba3393887e2b2571746e79f69bf675ea42f",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 73,
+   "symbol_count": 74,
    "symbols": [
     "LocalExecutionFailure",
     "_asks_only_for_a_plan",
@@ -240816,13 +240816,13 @@
     "_decisive_typed_plan",
     "_declared_surface",
     "_declares_it_does_not_write",
+    "_declares_no_source_write_authority",
     "_destructive_targets",
     "_empty_test_selection",
     "_exact_acceptance",
     "_execute",
     "_execute_capability_dag",
-    "_execute_locally",
-    "_fail"
+    "_execute_locally"
    ],
    "terms": {
     "admission": 2,
@@ -278391,7 +278391,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/verify_bound_capability_provenance_v1.py",
-   "sha256": "0321017c85ed9bf5508d3b39c1f79facb51b0c3c7dc1e6de9f0d2e71696dff2f",
+   "sha256": "07c5857bdad185497a13ab4247bfce814b5a6cdd5cd14f7857830cbf9386ffcd",
    "summary": "Provenance for bound capability rows -- re-derivable, not asserted.",
    "symbol_count": 30,
    "symbols": [
@@ -279225,16 +279225,18 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/write_authority_v1.py",
-   "sha256": "2b9a8f109bb7e5b5e0299f378bb8d8a93d12554e5a12f4a1caf13c560726e807",
+   "sha256": "4fc9e41151237d7ed2882dda9bc8e5e02716492abac67984c16c73e7ffffcf5f",
    "summary": "A capability may not write its report over the file it was asked to read.",
-   "symbol_count": 8,
+   "symbol_count": 10,
    "symbols": [
     "WriteAuthorityViolation",
     "_as_path",
     "_input_values",
     "_inside",
+    "cannot_perform_the_stated_change",
     "check",
     "check_report",
+    "declares_no_source_write_authority",
     "is_source_transformer",
     "violation"
    ],
@@ -279242,9 +279244,11 @@
     "as_path": 1,
     "asked": 1,
     "authority": 1,
+    "cannot_perform_the_stated_change": 1,
     "capability": 1,
     "check": 1,
     "check_report": 1,
+    "declares_no_source_write_authority": 1,
     "file": 1,
     "input_values": 1,
     "inside": 1,

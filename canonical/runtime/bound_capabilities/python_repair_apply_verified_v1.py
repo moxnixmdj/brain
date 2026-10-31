@@ -189,6 +189,16 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         # cannot be read as "I changed something".
         out["pass"]=True
         out["output_verified"]=True
+        # SAY THE FACT IN THE VOCABULARY THE DOOR ALREADY HONOURS.  ``already_satisfied`` is how
+        # every repair loop in this repository reports a green baseline (the door maps
+        # ``BASELINE_ALREADY_PASSES`` onto it), and a request whose post-state already holds owes no
+        # byte change.  This adapter measured exactly that -- ``applied`` false, ``files_written``
+        # empty, ``pre_apply_test_returncode`` 0 -- and stated it only in ``status``, so the door's
+        # source-change gate read the unchanged file as a promise it had failed to keep: measured
+        # 2026-10-31, the idempotent sentence "Repair <src> so that the unit tests in <t> pass" on an
+        # already-green tree came back FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED.
+        out["already_satisfied"]=True
+        out["edited"]=False
         out["status"]="PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR"
         out["detail"]=(
             "The stated test passes on the current source, measured before any write, "
