@@ -11275,7 +11275,8 @@
         "args": {
           "capability_id": "git.repository.operate.v1",
           "limit": "${input.limit}",
-          "op": "${input.op}"
+          "op": "${input.op}",
+          "message": "${input.message}"
         },
         "expect": {
           "field": "output_verified",
