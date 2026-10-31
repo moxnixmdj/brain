@@ -1011,6 +1011,14 @@ _PROVED_BY_THE_TREE = frozenset({
     "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
     "PATH_DIR_FROM_STATED_FILE_PARENT",
     "PATH_DIR_COMMON_TO_STATED_FILES",
+    # One addition, for the creation grammar, and it is the same KIND of proof --
+    # checked against the stated file's own bytes: the function exists in that
+    # file AND does not already declare the name, which is what makes it an
+    # ADDITION rather than a rename.  Measured 2026-10-31: without it "Add a
+    # parameter qty with a default value to the function line_total in
+    # app/models.py" could not bind new_param at the pinned door and a helper
+    # inliner answered it instead -- the substitution this gate exists to stop.
+    "ADDED_PARAM_STATED_AND_NOT_DECLARED",
 })
 
 
@@ -1826,6 +1834,7 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         if isinstance(inputs.get(key), str) and inputs[key]:
             taken.add(inputs[key])
     refused: list[tuple[str, BaseException]] = []
+    refused: list[tuple[str, BaseException]] = []
     for key in typed_keys:
         try:
             inputs[key] = bind_typed_key(goal, key, root, entry)
@@ -2141,7 +2150,23 @@ def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, 
     # own signature sentence in favour of a specific sibling, which is a misroute, not a fix.  So a
     # retrieved selection is accepted only when it is DERIVED EVIDENCE - a capability the pinned
     # path structurally cannot propose.
-    if entry.get("capability_source") != "receipt_projection":
+    # The gate is EVIDENCE, not provenance: a receipt projection is one way a
+    # capability is invisible to the pinned scorer, and a snapshot row whose
+    # declared slots are DERIVED FROM THE SENTENCE is the other.  Measured
+    # 2026-10-31: "Add a function total_cents(item) to app/models.py that returns
+    # price_cents * qty, export it from app/__init__.py, and add a test for it in
+    # tests/test_total.py" is a sentence whose signature, expression, module,
+    # export target and test path are all stated; the row that serves it
+    # (python.source.add_function.v1) admits under typed admission with six
+    # derived values, and was still unreachable because the pinned scorer's
+    # binder cannot fill a slot from derivation.  A lexical near-miss has
+    # derived_count 0 and is still refused here, which is what keeps this from
+    # displacing a capability's own signature sentence.
+    _derived = 0
+    for row in decision.get("admissions") or []:
+        if row.get("capability_id") == cid:
+            _derived = int(((row.get("derivation") or {}).get("derived_count")) or 0)
+    if entry.get("capability_source") != "receipt_projection" and _derived <= 0:
         return None
     proposals = decision.get("proposals") or []
     score = int(round(float((proposals[0] if proposals else {}).get("lexical_relevance_score") or 0)))
