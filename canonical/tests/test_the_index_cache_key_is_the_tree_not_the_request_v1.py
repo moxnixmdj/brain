@@ -55,11 +55,12 @@ class TheCacheFindsTheTree(unittest.TestCase):
             os.utime(path, ns=(stamp, stamp))
         return path
 
-    def test_a_sibling_for_the_same_tree_supplies_its_rows(self) -> None:
+    def test_a_sibling_without_producer_provenance_supplies_no_rows(self) -> None:
         rows = [{"path": "canonical/runtime/a.py", "sha256": "0" * 64}]
         self._write("other_request.json", _artifact("canonical/runtime", rows))
         found = index._cached_modules_for_tree(self.requested, "canonical/runtime")
-        self.assertEqual(found, {"canonical/runtime/a.py": rows[0]})
+        # Synthetic persisted metadata is not evidence this producer derived it.
+        self.assertEqual(found, {})
 
     def test_a_sibling_for_a_different_tree_is_ignored(self) -> None:
         rows = [{"path": "elsewhere/a.py", "sha256": "0" * 64}]

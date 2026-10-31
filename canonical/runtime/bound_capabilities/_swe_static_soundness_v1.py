@@ -20,7 +20,11 @@ import pathlib
 import re
 import subprocess
 import sys
+import symtable
 from typing import Any
+from collections import deque
+
+from canonical.runtime.root3_runtime_process_universe_v2 import _aliases, _qname
 
 _BUILTINS = frozenset(dir(builtins)) | {
     "__file__", "__name__", "__doc__", "__package__", "__all__", "__annotations__", "__spec__", "__loader__",
@@ -1182,9 +1186,177 @@ def typecheck_python_source(text: str, rel_path: str) -> list[dict[str, Any]]:
     return sorted(dedup.values(), key=lambda r: (r["file"], int(r["line"]), r["code"]))
 
 
+def _security_import_names(tree: ast.Module, text: str, filename: str) -> dict[ast.Name, str | None]:
+    """Qualify stable module imports only; retain legacy spelling heuristics elsewhere.
+
+    CPython decides lexical scope. We do not infer dynamic imports, arbitrary
+    assignments or function-local import values, and never execute subject code.
+    """
+    direct = [node for node in tree.body if isinstance(node, ast.Import) or
+              isinstance(node, ast.ImportFrom) and node.level == 0]
+    aliases = _aliases(ast.Module(body=direct, type_ignores=[]))
+    roots = {"os", "pickle", "cPickle", "dill", "marshal", "yaml", "hashlib", "builtins"}
+    # Identity mappings already work through the legacy direct-spelling rules.
+    # Avoid another parse and scope walk for ordinary, unaliased module imports.
+    aliases = {name: target for name, target in aliases.items()
+               if name != target and target.split(".")[0] in roots}
+    if not aliases:
+        return {}
+    try:
+        module = symtable.symtable(text, filename, "exec")
+    except SyntaxError:
+        return {}  # Preserve the existing AST-only checks on incomplete programs.
+
+    # A conditional/relative import or star import must not silently replace a
+    # top-level binding. Do not collect imports from unrelated function scopes.
+    bindings: dict[str, set[str]] = {}
+    wildcard = False
+
+    class Imports(ast.NodeVisitor):
+        def visit_Import(self, node):
+            self.record(node)
+
+        def visit_ImportFrom(self, node):
+            nonlocal wildcard
+            if any(alias.name == "*" for alias in node.names):
+                wildcard = True
+            self.record(node)
+
+        def record(self, node):
+            for name, target in _aliases(ast.Module(body=[node], type_ignores=[])).items():
+                if isinstance(node, ast.ImportFrom) and node.level:
+                    target = "." * node.level + target
+                bindings.setdefault(name, set()).add(target)
+
+        def visit_FunctionDef(self, node):
+            pass
+
+        visit_AsyncFunctionDef = visit_FunctionDef
+        visit_ClassDef = visit_FunctionDef
+        visit_Lambda = visit_FunctionDef
+
+    Imports().visit(tree)
+    global_writes = set()
+    pending = list(module.get_children())
+    while pending:
+        child = pending.pop()
+        pending.extend(child.get_children())
+        global_writes.update(symbol.get_name() for symbol in child.get_symbols()
+                             if symbol.is_global() and (symbol.is_assigned() or symbol.is_imported()))
+    stable = {name: target for name, target in aliases.items()
+              if not wildcard and len(bindings.get(name, ())) == 1
+              and not module.lookup(name).is_assigned() and name not in global_writes}
+    if not stable:
+        return {}
+    resolved: dict[ast.Name, str | None] = {}
+
+    class Names(ast.NodeVisitor):
+        def __init__(self):
+            self.table = module
+            self.children = {}
+
+        def enter(self, node, name, body):
+            parent = self.table
+            if parent is None:
+                child = None
+            else:
+                parent_id = parent.get_id()
+                if parent_id not in self.children:
+                    index = {}
+                    for item in parent.get_children():
+                        index.setdefault((item.get_name(), item.get_lineno()), deque()).append(item)
+                    self.children[parent_id] = index
+                matches = self.children[parent_id].get((name, node.lineno))
+                child = matches.popleft() if matches else None
+            self.table = child
+            for item in body:
+                self.visit(item)
+            self.table = parent
+
+        def visit_Name(self, node):
+            if not isinstance(node.ctx, ast.Load) or node.id not in stable:
+                return
+            if self.table is None:
+                resolved[node] = None
+                return
+            # Class bodies use LOAD_NAME and can fall back to globals before
+            # class assignment. Leave their legacy heuristic unchanged.
+            if self.table.get_type() == "class":
+                return
+            try:
+                symbol = self.table.lookup(node.id)
+            except KeyError:
+                resolved[node] = None
+                return
+            resolved[node] = stable[node.id] if symbol.is_global() else None
+
+        def visit_FunctionDef(self, node):
+            for expression in node.args.defaults + node.args.kw_defaults:
+                if expression is not None:
+                    self.visit(expression)
+            for arg in (*node.args.posonlyargs, *node.args.args, node.args.vararg,
+                        node.args.kwarg, *node.args.kwonlyargs):
+                if arg is not None and arg.annotation is not None:
+                    self.visit(arg.annotation)
+            if node.returns is not None:
+                self.visit(node.returns)
+            for expression in node.decorator_list:
+                self.visit(expression)
+            self.enter(node, node.name, node.body)
+
+        visit_AsyncFunctionDef = visit_FunctionDef
+
+        def visit_Lambda(self, node):
+            for expression in node.args.defaults + node.args.kw_defaults:
+                if expression is not None:
+                    self.visit(expression)
+            self.enter(node, "lambda", [node.body])
+
+        def visit_ClassDef(self, node):
+            for expression in node.bases + [kw.value for kw in node.keywords] + node.decorator_list:
+                self.visit(expression)
+            self.enter(node, node.name, node.body)
+
+        def comprehension(self, node, name, values):
+            self.visit(node.generators[0].iter)  # evaluated in the enclosing scope
+            body = [node.generators[0].target, *node.generators[0].ifs]
+            for generator in node.generators[1:]:
+                body.extend([generator.iter, generator.target, *generator.ifs])
+            self.enter(node, name, [*body, *values])
+
+        def visit_ListComp(self, node):
+            self.comprehension(node, "listcomp", [node.elt])
+
+        def visit_SetComp(self, node):
+            self.comprehension(node, "setcomp", [node.elt])
+
+        def visit_DictComp(self, node):
+            # CPython's symbol-table pass visits the value before the key,
+            # unlike execution order. Same-line lambdas must match that order.
+            self.comprehension(node, "dictcomp", [node.value, node.key])
+
+        def visit_GeneratorExp(self, node):
+            self.comprehension(node, "genexpr", [node.elt])
+
+    Names().visit(tree)
+    return resolved
+
+
+def _security_qualified_name(node: ast.AST, names: dict[ast.Name, str | None]) -> str | None:
+    root = node
+    while isinstance(root, ast.Attribute):
+        root = root.value
+    if isinstance(root, ast.Name):
+        target = names.get(root)
+        if target is not None:
+            return _qname(node, {root.id: target})
+    return _qname(node, {})  # Do not remove legacy direct-spelling checks.
+
+
 def security_scan_python_source(text: str, rel_path: str) -> list[dict[str, Any]]:
-    """Deterministic Bandit-equivalent AST + secret scanner emitting B-coded security rows."""
+    """Bounded AST security patterns and secret signatures, not Bandit equivalence."""
     tree = ast.parse(text, filename=rel_path)
+    names = _security_import_names(tree, text, rel_path)
     rows: list[dict[str, Any]] = []
 
     for node in ast.walk(tree):
@@ -1230,73 +1402,31 @@ def security_scan_python_source(text: str, rel_path: str) -> list[dict[str, Any]
                         "confidence": "MEDIUM",
                         "message": f"Possible hardcoded password passed to argument '{kw.arg}'.",
                     })
-            if isinstance(node.func, ast.Name):
-                if node.func.id == "eval":
-                    rows.append({
-                        "file": rel_path,
-                        "line": int(node.lineno),
-                        "test_id": "B307",
-                        "severity": "MEDIUM",
-                        "confidence": "HIGH",
-                        "message": "Use of possibly insecure function eval() - consider ast.literal_eval.",
-                    })
-                elif node.func.id == "exec":
-                    rows.append({
-                        "file": rel_path,
-                        "line": int(node.lineno),
-                        "test_id": "B102",
-                        "severity": "MEDIUM",
-                        "confidence": "HIGH",
-                        "message": "Use of exec detected.",
-                    })
-            elif isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name):
-                mod_n, attr_n = node.func.value.id, node.func.attr
-                if mod_n == "os" and attr_n in ("system", "popen"):
-                    rows.append({
-                        "file": rel_path,
-                        "line": int(node.lineno),
-                        "test_id": "B605",
-                        "severity": "HIGH",
-                        "confidence": "HIGH",
-                        "message": f"Starting a process with a shell via os.{attr_n}.",
-                    })
-                elif mod_n in ("pickle", "cPickle", "dill", "marshal") and attr_n in ("load", "loads"):
-                    rows.append({
-                        "file": rel_path,
-                        "line": int(node.lineno),
-                        "test_id": "B301",
-                        "severity": "MEDIUM",
-                        "confidence": "HIGH",
-                        "message": f"Pickle deserialization via {mod_n}.{attr_n} can be unsafe.",
-                    })
-                elif mod_n == "yaml" and attr_n == "load":
-                    has_safe_loader = any(
-                        kw.arg == "Loader" and "Safe" in ast.unparse(kw.value)
-                        for kw in node.keywords
-                    )
-                    if not has_safe_loader:
-                        rows.append({
-                            "file": rel_path,
-                            "line": int(node.lineno),
-                            "test_id": "B506",
-                            "severity": "MEDIUM",
-                            "confidence": "HIGH",
-                            "message": "Use of unsafe yaml.load without SafeLoader.",
-                        })
-                elif mod_n == "hashlib" and attr_n in ("md5", "sha1"):
-                    used_sec_false = any(
-                        kw.arg == "usedforsecurity" and isinstance(kw.value, ast.Constant) and kw.value.value is False
-                        for kw in node.keywords
-                    )
-                    if not used_sec_false:
-                        rows.append({
-                            "file": rel_path,
-                            "line": int(node.lineno),
-                            "test_id": "B324",
-                            "severity": "HIGH",
-                            "confidence": "HIGH",
-                            "message": f"Use of weak cryptographic hash {attr_n}.",
-                        })
+            qualified = _security_qualified_name(node.func, names)
+            mod_n, _, attr_n = (qualified or "").rpartition(".")
+            rule = None
+            if qualified in {"eval", "builtins.eval"}:
+                rule = ("B307", "MEDIUM", "Use of possibly insecure function eval() - consider ast.literal_eval.")
+            elif qualified in {"exec", "builtins.exec"}:
+                rule = ("B102", "MEDIUM", "Use of exec detected.")
+            elif mod_n == "os" and attr_n in {"system", "popen"}:
+                rule = ("B605", "HIGH", f"Starting a process with a shell via os.{attr_n}.")
+            elif mod_n in {"pickle", "cPickle", "dill", "marshal"} and attr_n in {"load", "loads"}:
+                rule = ("B301", "MEDIUM", f"Pickle deserialization via {mod_n}.{attr_n} can be unsafe.")
+            elif mod_n == "yaml" and attr_n == "load":
+                safe = any(kw.arg == "Loader" and _security_qualified_name(kw.value, names)
+                           in {"yaml.SafeLoader", "yaml.CSafeLoader"} for kw in node.keywords)
+                if not safe:
+                    rule = ("B506", "MEDIUM", "Use of unsafe yaml.load without SafeLoader.")
+            elif mod_n == "hashlib" and attr_n in {"md5", "sha1"}:
+                exempt = any(kw.arg == "usedforsecurity" and isinstance(kw.value, ast.Constant)
+                             and kw.value.value is False for kw in node.keywords)
+                if not exempt:
+                    rule = ("B324", "HIGH", f"Use of weak cryptographic hash {attr_n}.")
+            if rule is not None:
+                code, severity, message = rule
+                rows.append({"file": rel_path, "line": int(node.lineno), "test_id": code,
+                             "severity": severity, "confidence": "HIGH", "message": message})
         # B105: hardcoded password/secret assignment
         elif isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str) and node.value.value:
             for t in node.targets:

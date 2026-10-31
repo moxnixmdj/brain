@@ -140,7 +140,7 @@ def _derive_call_from_ast(fn_node: ast.FunctionDef | ast.AsyncFunctionDef) -> tu
         lit, _note = _fixture_for(shim)
         if lit is None:
             return None, [_note]
-        fixtures.append(f"{param.arg}={lit}")
+        fixtures.append(lit if i < len(a.posonlyargs) else f"{param.arg}={lit}")
     return f"{name}({', '.join(fixtures)})", fixtures
 
 
@@ -223,6 +223,14 @@ def run(args, root):
     # information the caller had; it was a projection of the tree.
     timeout_s = int(args.get("timeout_s") or 120)
     python_exe = str(args.get("python_executable") or sys.executable)
+    gen_rel = str(args.get("generated_tests_root") or "") or str(
+        Path("generated_tests") / source_abs.resolve().name
+    )
+    gen_abs = _safe_path(repo, gen_rel)
+    out_abs = _safe_path(repo, str(args.get("output_path") or ""))
+    for pth, key in ((gen_abs, "generated_tests_root"), (out_abs, "output_path")):
+        if pth == source_abs or source_abs in pth.parents or pth in source_abs.parents:
+            _fail("PATH_OVERLAPS_SOURCE_ROOT:" + key)
     cached = _safe_path(repo, str(args["index_path"]), must_exist=True) if args.get("index_path") else None
     index, cache_used = _load_index(source_abs, cached, source_root)
     tgt_rel = str(args.get("targets_path") or "")
@@ -247,14 +255,6 @@ def run(args, root):
         if not isinstance(t, dict) or not t.get("module"):
             _fail("TARGET_SCHEMA_MISSING:module")
 
-    gen_rel = str(args.get("generated_tests_root") or "") or str(
-        Path("generated_tests") / source_abs.resolve().name
-    )
-    gen_abs = _safe_path(repo, gen_rel)
-    out_abs = _safe_path(repo, str(args.get("output_path") or ""))
-    for pth, key in ((gen_abs, "generated_tests_root"), (out_abs, "output_path")):
-        if pth == source_abs or source_abs in pth.parents:
-            _fail("PATH_OVERLAPS_SOURCE_ROOT:" + key)
     manifest_before = _tree_manifest(source_abs)
     mods = {}
     for row in index.get("modules") or []:

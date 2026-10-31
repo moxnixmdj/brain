@@ -1,0 +1,346 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SWE_SOURCE_SCOPED_LOCALIZATION_20261031_V1",
+  "action_intent_id": "SWE_SOURCE_SCOPED_LOCALIZATION_20261031_V1",
+  "date": "2026-10-31",
+  "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
+  "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "FRESH_REUSE",
+  "causal_blocker": "Fault localization ranks repository-local dependencies outside the declared application as faults and allows irrelevant trace events to exhaust its budget.",
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Measured fault-localization evidence scope and trace-budget efficiency, not all advanced-SWE gaps",
+  "action_summary": "Reuse existing application membership, source-index exclusions, test naming and tracing machinery to require failing execution of declared application source for localization; avoid irrelevant trace work.",
+  "expected_parent_frontier_change": "Reuse existing application membership, source-index exclusions, test naming and tracing machinery to require failing execution of declared application source for localization; avoid irrelevant trace work.",
+  "stop_condition": "Stop when real-subprocess scope/noise/pass-only controls pass and neighboring localization/repair tests introduce no failures against baseline, without weakening assertions, bounded before/after cost is measured, and the official model plus local integrity/admission checks pass. No automatic merge or capability promotion.",
+  "explicit_user_authorization": "User requested reuse of existing Brain/internet mechanisms and fastest correct implementation.",
+  "record_scope": "Bounded integration of already-owned source selection and fault-localization machinery",
+  "benchmark_or_family_rank_authority": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "progress_evidence_paths": [
+    "canonical/tests/test_fault_localization_source_scope_v1.py",
+    "canonical/verification/SWE_SOURCE_SCOPED_LOCALIZATION_20261031.md"
+  ],
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "route_class": "INTEGRATE",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/tests/test_fault_localization_source_scope_v1.py",
+      "canonical/verification/SWE_SOURCE_SCOPED_LOCALIZATION_20261031.md"
+    ],
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "load_bearing_primary": {
+    "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 1800,
+    "units": "seconds scheduling estimate for implementation and validation; CI availability unknown",
+    "interpretation": "Conservative subjective scheduling assumptions only, not statistical confidence bounds, benchmark evidence or capability qualification. Existing repair guidance becomes source-scoped. All frozen obligations remain open; zero benchmark/family/terminal credit.",
+    "stop_condition": "Stop when real-subprocess scope/noise/pass-only controls pass and neighboring localization/repair tests introduce no failures against baseline, without weakening assertions, bounded before/after cost is measured, and the official model plus local integrity/admission checks pass. No automatic merge or capability promotion."
+  },
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Fault localization ranks repository-local dependencies outside the declared application as faults and allows irrelevant trace events to exhaust its budget.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+    "real_outcome": "Reuse existing application membership, source-index exclusions, test naming and tracing machinery to require failing execution of declared application source for localization; avoid irrelevant trace work.",
+    "required_capability": "Source-scoped dynamic localization for the existing Python repair lanes",
+    "selected_surviving_route": "INTEGRATE_EXISTING_APPLICATION_MEMBERSHIP_IN_TRACE_AND_RANKING",
+    "why_selected_route_is_fastest_sufficient": "Reuse _app_paths, shared source enumeration, test-file classification and the existing tracer. Filter before recording events so irrelevant code cannot consume the cap; avoid a new analyzer or dependency. Measure the actual improvement, not a global optimum claim.",
+    "expected_parent_level_state_change": "Reuse existing application membership, source-index exclusions, test naming and tracing machinery to require failing execution of declared application source for localization; avoid irrelevant trace work.",
+    "stop_condition": "Stop when real-subprocess scope/noise/pass-only controls pass and neighboring localization/repair tests introduce no failures against baseline, without weakening assertions, bounded before/after cost is measured, and the official model plus local integrity/admission checks pass. No automatic merge or capability promotion.",
+    "routes_considered": [
+      "Keep repository-wide trace/ranking",
+      "Filter only the final report",
+      "INTEGRATE_EXISTING_APPLICATION_MEMBERSHIP_IN_TRACE_AND_RANKING"
+    ],
+    "deleted_or_bypassed_paths": [
+      "No external debugger or package",
+      "No new registry row or self-promotion",
+      "Do not reland the already-merged cache fix"
+    ],
+    "obs_goal": {
+      "real_outcome": "Reuse existing application membership, source-index exclusions, test naming and tracing machinery to require failing execution of declared application source for localization; avoid irrelevant trace work.",
+      "proxy_goals_deleted": [
+        "More traces are not better guidance",
+        "Do not optimize a misleading PASS"
+      ],
+      "surviving_necessity": "The real adapter returned PASS with .venv/_distutils_hack lines for a test that executes no declared application code."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "python_dynamic_fault_localizer_v1._app_paths and _trace_one",
+        "python_source_symbol_index._py_files uses shared IGNORED_DIRS",
+        "python_test_corpus_discovery_v1.is_test_file_name",
+        "Existing bare/unittest/pytest suite runner and repair consumers"
+      ],
+      "external_existing_routes_checked": [
+        "CPython Lib/trace.py _Ignore.names source inspected: cached module/directory exclusion before trace collection",
+        "GitHub repository discovery surfaced edwingl10/fault-localization and sunbugs/coverage-sbfl; metadata only, no qualified replacement or imported donor code"
+      ],
+      "capability_work_deleted": [
+        "No replacement spectrum analyzer",
+        "No new test runner or dependency"
+      ],
+      "surviving_gap": "Fault localization ranks repository-local dependencies outside the declared application as faults and allows irrelevant trace events to exhaust its budget."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Integration-specific: application membership already exists but is not enforced in collection/ranking",
+      "delete_bypass_substitute_options": [
+        "Remove irrelevant event collection",
+        "Reuse the existing source/test policies",
+        "Filter final ranking only, which leaves cap exhaustion and trace cost"
+      ],
+      "surviving_causal_blocker": "Fault localization ranks repository-local dependencies outside the declared application as faults and allows irrelevant trace events to exhaust its budget."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "INTEGRATE_EXISTING_APPLICATION_MEMBERSHIP_IN_TRACE_AND_RANKING",
+        "Filter only the final report",
+        "Keep repository-wide trace/ranking"
+      ],
+      "losing_routes_reason": "Final-only filtering cannot recover application events lost after irrelevant code exhausts the cap. Retaining repository-wide scope reproduces false guidance. Existing membership and source exclusions remove the need for another engine.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Real subprocesses and fixture code execute under the real tracer; independent fixture expectations identify allowed paths and executed functions. Include application-free failures, pass-only evidence, ignored environments, arbitrary test names, sibling-prefix scope, cap exhaustion and positive repair controls. Local engineering tests, not independent capability certification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Ranking of nonapplication lines",
+        "Irrelevant source trace events and serialized trace payload"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Existing Python fault localization and repair guidance"
+      ],
+      "fresh_reuse_plan": "Retain suite runner, score formula and repair engines. Run current-tree controls, baseline timings and official compiler/verifier."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reuse existing source membership once per run",
+        "Avoid repeating dependency traversal or adding an external runtime"
+      ],
+      "search_stop_decision": "Current source has both the needed exclusion policy and application membership. Connect them to the existing tracer; public repository discovery did not qualify an alternative that deletes this integration step.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-31T18:51:19.626679+00:00",
+      "max_age_hours": 24,
+      "incumbent_route": "Repository-wide localization evidence",
+      "selected_route": "INTEGRATE_EXISTING_APPLICATION_MEMBERSHIP_IN_TRACE_AND_RANKING",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "BROAD_WEB_OR_COMMUNITY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
+          "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+          "canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/python/cpython/blob/main/Lib/trace.py ; _Ignore.names source read via GitHub contents API"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://api.github.com/search/repositories?q=python+fault+localization+coverage&per_page=2 ; discovery metadata only"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Public GitHub discovery: edwingl10/fault-localization and sunbugs/coverage-sbfl; neither qualified or imported."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "python fault localization coverage repositories"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "CPython Lib/trace.py _Ignore.names"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Brain _app_paths _py_files IGNORED_DIRS _brain_project_file"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Fresh origin/main 43676be3a788257eb70edfe36b27f470d6b33edf and current source/fixtures"
+        }
+      ],
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "challenger_routes": [],
+      "selected_route_preflight": {
+        "selected_route": "INTEGRATE_EXISTING_APPLICATION_MEMBERSHIP_IN_TRACE_AND_RANKING",
+        "checked_at_utc": "2026-10-31T18:51:19.626679+00:00",
+        "max_age_hours": 2,
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11 and existing local test environment",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T18:51:19.626679+00:00",
+            "evidence": [
+              "Existing .venv Python and freshly executed audit tests/tracer; no new runtime package required."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Current Brain source enumeration, test classification and tracer",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T18:51:19.626679+00:00",
+            "evidence": [
+              "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
+              "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+              "canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "GitHub discovery/source API",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T18:51:19.626679+00:00",
+            "evidence": [
+              "Authenticated GitHub source/search requests and git fetch origin/main succeeded. PR/merge is not part of this bounded implementation authorization."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      },
+      "negative_search_summary": "Brain already owns the source enumeration, test classification and tracer. CPython confirms early exclusion as a standard mechanism; public repository hits were discovery metadata only, not qualified competitors. No literature survey or global optimality claim."
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "NO_DISCHARGE_CLAIM__existing repair guidance becomes scoped to the requested application; no target benchmark or terminal obligation discharged.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SWE_SOURCE_SCOPED_LOCALIZATION_20261031_V1",
+      "falsifier_id": "DEPENDENCY_OR_PASS_ONLY_EXECUTION_MUST_NOT_BECOME_APPLICATION_FAULT_EVIDENCE",
+      "decisive_question": "Does localization require failing execution of declared application files while unrelated code cannot exhaust its event budget?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
+          "git_blob_sha": "87c1d16bf5fcbfe56e770d94e3cef463fb1beec3"
+        },
+        {
+          "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+          "git_blob_sha": "5b5b2c317583fa0376245a01987abd33dbb63ba3"
+        },
+        {
+          "path": "canonical/tests/test_the_suite_runs_where_the_imports_point_v1.py",
+          "git_blob_sha": "ec05d19108b806545e4b409f500168d7a176c9d6"
+        }
+      ]
+    }
+  },
+  "validation_note": "Current-tree seven-module baseline: 10 failed, 42 passed; patched: 1 failed, 51 passed. All eleven new controls and four existing package-root/empty-localization controls pass. Existing shared-code ranking heuristic failure remains unchanged and is explicitly documented. No claim of general causal-debugging proof."
+}

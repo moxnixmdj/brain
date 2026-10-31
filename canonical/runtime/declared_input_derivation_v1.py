@@ -781,7 +781,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # role and a read-only file/directory scope must never be displaced.
     from canonical.runtime import goal_compiler as _scope_gc
     _explicit_source = _scope_gc._path_named_by_role(goal, "source", root)
+    _stated_sources = []
+    if ("source_root" in keys and tests and not sources
+            and keys & {"test_paths", "test_path", "test_file", "test_argv", "run_tests"}):
+        # Reuse the existing path-role evidence: the named test/witness directory
+        # is not the separately named application directory. Never infer source
+        # from tests/__init__.py when the request already names its source scope.
+        _paths = _scope_gc._repo_paths(str(goal or ""), pathlib.Path(root))
+        _witnesses = _scope_gc._witness_directories(str(goal or ""), _paths)
+        _test_owners = {str(pathlib.PurePosixPath(t).parent) for t in tests}
+        _stated_sources = [d for d in _stated_directories(goal, root)
+                           if d not in _witnesses and d not in _test_owners
+                           and pathlib.PurePosixPath(d).name not in {"tests", "test"}]
+        if len(_stated_sources) == 1 and not _explicit_source:
+            out["source_root"] = {"value": _stated_sources[0],
+                                  "rule": "PATH_DIR_FROM_STATED_SOURCE_DIR",
+                                  "evidence": _stated_sources[0]}
     if ("source_root" in keys and tests and not sources and not _explicit_source
+            and not _stated_sources and "source_root" not in out
             and keys & {"test_paths", "test_path", "test_file", "test_argv", "run_tests"}):
         _owners = {str(pathlib.PurePosixPath(t).parent) for t in tests}
         if len(_owners) == 1:

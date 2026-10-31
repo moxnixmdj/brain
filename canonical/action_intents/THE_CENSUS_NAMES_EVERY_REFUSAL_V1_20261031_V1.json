@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CENSUS_REPORTED_THE_FAILURE_FAMILY_AND_NEVER_THE_CAUSE_THE_DOOR_ALREADY_RETURNS_AND_IT_ASKED_SEVEN_HISTORY_SENTENCES_OF_DIRECTORIES_WITH_NO_HISTORY__MEASURED_2026_10_31_TEN_DIFFERENT_FAILURES_READ_AS_LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE_AND_THREE_HISTORY_SENTENCES_READ_AS_NAMED_TEST_NOT_IN_GIT_HISTORY_WHICH_IS_A_FACT_ABOUT_THE_FIXTURE",
- "canonical_base_commit": "a35ff463fcc21a47bb487161d8264fa572b3914b",
+ "canonical_base_commit": "a21af57a90b4979c09e807967c0033906e68df92",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -71,7 +71,7 @@
   "canonical/tests/test_the_census_names_every_refusal_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "a35ff463fcc21a47bb487161d8264fa572b3914b",
+  "canonical_base_commit": "a21af57a90b4979c09e807967c0033906e68df92",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "REPORTING_FAILURE_CLASS_WITHOUT_FAILURE_CAUSE",
