@@ -3102,6 +3102,241 @@
         "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
         "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS"
       }
+    },
+    "decision.synthesis.verify.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "decision.synthesis.verify.stdlib",
+          "input_path": "${input.input_path}",
+          "result_path": "${input.result_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "evidence_decision_verify",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "decision",
+        "verify",
+        "independent",
+        "evidence",
+        "synthesis",
+        "audit",
+        "trace"
+      ],
+      "limitations": [
+        "Verifies the typed-decision result by recomputing decision-relevant values without importing the producer module.",
+        "Input and result must be repository-local JSON."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "input_path": {
+          "container": "scalar",
+          "effect": "decision.synthesis.typed",
+          "field": "input_path",
+          "type": "effect_result"
+        },
+        "result_path": {
+          "container": "scalar",
+          "effect": "decision.synthesis.typed",
+          "field": "output_path",
+          "type": "effect_result"
+        }
+      },
+      "provides": [
+        "decision.synthesis.verified"
+      ],
+      "requires": [
+        "decision.synthesis.typed"
+      ],
+      "result_fields": [
+        "verified",
+        "reason",
+        "status",
+        "selected_alternative"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_verify.py",
+        "modules": [
+          "json",
+          "hashlib",
+          "math",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+        "model_dependency_count": 0,
+        "producer_independent": true,
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "public_job_id": 109657545598,
+        "public_run_id": 36642428325,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS",
+        "verifier_git_blob": "63cf325320c7b91bf48ea2f2769c999c5a090929"
+      }
+    },
+    "document.convert.markdown_pdf.pandoc_weasyprint": {
+      "action_template": {
+        "args": {
+          "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+          "markdown_path": "${input.markdown_path}",
+          "output_path": "${input.output_path}",
+          "timeout_s": 120
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "pandoc_weasyprint",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "markdown",
+        "pdf",
+        "convert",
+        "document",
+        "report"
+      ],
+      "limitations": [
+        "Verified route is repository-local Markdown input to PDF output using WeasyPrint as Pandoc PDF engine."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "document.convert.markdown_pdf"
+      ],
+      "requires": [
+        "markdown.file.available"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "pandoc",
+            "sha256": "021cf93191aea780c273e82ca3ab575b1522992705b6c28e350aa502573a27b5",
+            "version": "3.1.3+ds-2"
+          },
+          {
+            "name": "weasyprint",
+            "sha256": "79a1303592e2882ff58fb58658c6ae70f925ce335c6342cb1e778ed049514981",
+            "version": "61.1-1"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verified": true,
+        "independent_verifier_capability": "pdf.extract.text.pypdf",
+        "mission_id": "ASTRA-VERIFY-MARKDOWN-PDF-001",
+        "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MARKDOWN-PDF-001__INDEPENDENT.json"
+      }
+    },
+    "docx.document.create.python_docx": {
+      "acquisition_evidence": {
+        "description": "library for creating and updating Microsoft Word files (Python 3)",
+        "discovery_source": "APT_CATALOG",
+        "integration_friction": 2,
+        "mission_id": "ASTRA-DOCX-SUPPLIER-DIAG-001"
+      },
+      "action_template": {
+        "args": {
+          "capability_id": "docx.document.create.python_docx",
+          "factory": "Document",
+          "goal": "${input.goal}",
+          "module": "docx",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_document_builder",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "word",
+        "title",
+        "paragraph",
+        "table",
+        "create"
+      ],
+      "limitations": [
+        "Bound to the pinned Ubuntu python3-docx package discovered from the live DOCX capability gap.",
+        "Current contract family builds one title, paragraphs, and tabular rows from a deterministic goal specification."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "docx.document.create"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "document_spec",
+        "intent_path",
+        "intent_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-docx",
+            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
+            "version": "1.1.0+dfsg-2"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "docx.document.verify.ooxml",
+        "intent_sidecar_extension": {
+          "independently_reparsed": true,
+          "mission_id": "ASTRA-VERIFY-DOCX-INTENT-CHAIN-001",
+          "raw_intent_persisted": true,
+          "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-INTENT-CHAIN-001__RECEIPT.json"
+        },
+        "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+        "observed_effect": {
+          "output_bytes": 36826,
+          "output_path": "canonical/astra_runtime/tmp/DOCX_LIBRARY_VERIFY.docx",
+          "output_sha256": "02c358981319f7dbe12dee7431b4ed88633d093db4aa64ed078c715dc7cee4aa",
+          "paragraph": "Verified cross-tool composition",
+          "table_rows": 3,
+          "title": "Project Brain Report"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
