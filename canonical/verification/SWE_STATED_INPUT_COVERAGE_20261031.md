@@ -127,3 +127,29 @@ These post-integration measurements do not constitute a rerun of the entire
 45-module expanded cohort. Its nine residual failures above remain explicitly
 open. Signed remote repository-integrity admission is required separately before
 landing; no local run can manufacture that signature.
+
+## Second incoming-main integration: answer shape and empty results
+
+Main advanced to `d0763bf8` (PR6465) during landing. Its answer-shape and
+stated-Git-operation guards were retained. Fresh validation exposed one concrete
+integration failure: **327 passed, 1 failed, 905 subtests passed in 66.95 s**;
+`test_swe_family_effect_filter_v1::test_actual_empty_caller_set_is_not_invented`
+was refused by the new answer projector.
+
+The projector used positive cardinality to recognize an answering collection.
+It now accepts a *present* empty map/list/tuple, so an analysis that really found
+no callers can return that answer. It still refuses an absent answering field;
+a scalar `caller_count: 0` does not invent an empty collection. Three additional
+controls cover present empty maps, present empty lists and missing collections.
+This is a narrow integration correction, not a bypass of the incoming guard.
+
+Final current-main validation after that correction:
+
+- Original SWE cohort, model/compiler, all **15 new controls**, and both incoming
+  answer-shape/stated-operation suites: **331 passed, 905 subtests passed,
+  71.23 s**, 8 deprecation warnings.
+- Focused empty-answer integration controls: **49 passed, 1.81 s** (overlap).
+- Fresh official combined-model verifier: **33/33 passed**; digest
+  `cc1690d071e7f83968b76f5c8fd8bb9586d7f59731b8180b2351a426c99ccd4a`.
+- The broader 45-module residual list is still the earlier scoped measurement;
+  it has not been silently relabeled as a final whole-repository run.

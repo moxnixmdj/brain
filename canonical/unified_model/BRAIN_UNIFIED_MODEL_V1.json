@@ -30485,7 +30485,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6c33d557980776fc80466fe5e9d4937ac480dc8aec3a47183d08cf84f43902e6"
+  "value": "cc1690d071e7f83968b76f5c8fd8bb9586d7f59731b8180b2351a426c99ccd4a"
  },
  "engines": [
   {
@@ -58315,7 +58315,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 7777,
+   "bytes": 8681,
    "headings": [
     "Complete stated-file binding before SWE selection — 2026-10-31",
     "Observed defect and bounded repair",
@@ -58324,61 +58324,62 @@
     "Regression controls",
     "Reproduce",
     "Completed local validation before incoming-main integration",
-    "Incoming-main integration validation"
+    "Incoming-main integration validation",
+    "Second incoming-main integration: answer shape and empty results"
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_STATED_INPUT_COVERAGE_20261031.md",
-   "sha256": "ad9cc0155874e114b830a2098b315e577760e4b74bb8c5271bf6cfae8054cac6",
+   "sha256": "0a54c390abc72e13404d0c05acb477407d53be33e34f6956dc03b3be42a2bf06",
    "summary": "Authority: NONE. Local sandbox regressions, not independent capability qualification, benchmark/family promotion, or terminal progress certification. Base: `fabf28c4ba5c947ad0341c083a2ae64db11aaaab` (merged PR6463).",
    "terms": {
     "12": 4,
     "33": 4,
     "45-module": 3,
-    "adapter": 3,
     "admission": 5,
-    "after": 3,
     "all": 4,
     "before": 5,
     "binding": 5,
-    "bound": 3,
     "canonical": 4,
-    "capability": 3,
-    "change": 3,
     "cohort": 6,
     "compiler": 7,
     "complete": 7,
-    "controls": 5,
+    "controls": 6,
     "coverage": 4,
+    "empty": 5,
     "exact": 4,
     "existing": 12,
     "expanded": 5,
-    "failed": 5,
+    "failed": 6,
     "failures": 4,
     "files": 5,
-    "focused": 3,
+    "integration": 6,
     "invocation": 5,
     "invoker": 4,
     "local": 6,
     "model": 6,
     "module": 7,
-    "new": 5,
-    "no": 6,
-    "not": 14,
+    "new": 6,
+    "no": 7,
+    "not": 16,
     "official": 5,
     "parser": 4,
-    "passed": 13,
+    "passed": 15,
     "public": 4,
     "python": 4,
     "registry": 4,
     "relative": 4,
     "remain": 4,
     "result": 4,
+    "retained": 4,
     "scope": 4,
     "selection": 4,
+    "subtests": 4,
     "swe": 4,
     "test_live_brain_route_admission_v1": 6,
     "tests": 6,
-    "unchanged": 5
+    "unchanged": 5,
+    "validation": 4,
+    "were": 4
    },
    "title": "Complete stated-file binding before SWE selection — 2026-10-31",
    "title_terms": [
@@ -58421,7 +58422,7 @@
   "included_source_count": 1004,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5188b120e7f59611777e6bd02d04755889f29cb7cb4b59402ac723562468209a"
+  "source_tree_digest": "15a4b2a8e3b8fb14df59070e876eb057226ce211f6ffbcb5656e186eb3607f7f"
  },
  "research_index": [
   {
@@ -209166,7 +209167,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SWE_STATED_INPUT_COVERAGE_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "eed23c8e2229961703313f19c17b2fe4eb3ee183bcd3dc4bd9df37db574f2051",
+   "sha256": "888473a3a444998ed1e0d54acb6f4bb313fd6194ea97bca1e4db0de3cbd1eace",
    "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
    "terms": {
     "20261031": 1,
@@ -215077,7 +215078,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "0b94ceb19c25a031d2dbfb810761d4f31442d8abec703b1f9fe1b7ad15ee4180",
+   "sha256": "d23cf70c34acd8172bc1cf6c1146ddf0b1b1502861a7bb3bc5287256729c71d1",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
    "symbol_count": 9,
    "symbols": [

@@ -142,5 +142,33 @@ class StatedInputCoverageTests(unittest.TestCase):
             goal, {"source_root": MODULE, "output_path": self.rel(self.output)}, ROOT), [])
 
 
+class EmptyAnswerCollectionIntegrationTests(unittest.TestCase):
+    """Incoming answer-shape admission must retain real zero-cardinality answers."""
+
+    def check_projection(self, payload):
+        from canonical.runtime import answer_shape_v1 as shape
+        result = {"execution": [{"capability_id": INDEX, "result": payload}]}
+        errors = shape.deliver("Find every caller of the function add", result, ROOT)
+        return result, errors
+
+    def test_present_empty_caller_map_is_delivered_not_invented(self):
+        result, errors = self.check_projection({"callers_of": {}})
+        self.assertEqual(errors, [])
+        self.assertEqual(result["answer"]["value"], {})
+        self.assertEqual(result["answer"]["count"], 0)
+        self.assertEqual(result["answer"]["field"], "callers_of")
+
+    def test_present_empty_caller_list_is_delivered(self):
+        result, errors = self.check_projection({"callers": []})
+        self.assertEqual(errors, [])
+        self.assertEqual(result["answer"]["value"], [])
+        self.assertEqual(result["answer"]["count"], 0)
+
+    def test_absent_collection_is_still_refused_even_when_the_count_is_zero(self):
+        result, errors = self.check_projection({"caller_count": 0})
+        self.assertEqual(errors, ["ANSWER_SHAPE_UNSERVED:" + INDEX + ":caller:NO_MATCHING_FIELD"])
+        self.assertNotIn("answer", result)
+
+
 if __name__ == "__main__":
     unittest.main()

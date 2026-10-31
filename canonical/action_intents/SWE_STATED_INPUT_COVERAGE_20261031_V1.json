@@ -324,9 +324,18 @@
         {
           "path": "canonical/tests/test_capability_selection_retrieval_v1.py",
           "git_blob_sha": "bdf4f7e6a8e91f205d31c0fae94acc9ff32502e6"
+        },
+        {
+          "path": "canonical/tests/test_swe_family_effect_filter_v1.py",
+          "git_blob_sha": "c34f55533b5689e21b3fd055ef8c19cf651b1b9e"
         }
       ]
     }
   },
-  "integration_note": "Preserved incoming PR6479 empty-diff semantics, PR6481 inventory V16 and PR6465 answer-shape/stated-Git-operation safeguards unchanged. Refreshed base to d0763bf8; regenerate combined model officially."
+  "integration_note": "Preserved incoming PR6479 empty-diff semantics, PR6481 inventory V16 and PR6465 answer-shape/stated-Git-operation safeguards unchanged. Refreshed base to d0763bf8; regenerate combined model officially.",
+  "incoming_main_counterexample": {
+    "observation": "After integrating PR6465, current-tree core/model/new controls measured 327 passed, 1 failed, 905 subtests passed in 66.95s. The existing actual-empty-caller test fails because the new answer projector treats an explicitly present empty collection as missing.",
+    "bounded_integration": "Retain answer-shape gate; recognize present empty maps/lists as valid collection values, without inventing a missing field. Add empty-map/list/missing-field controls. No adapter, capability or promotion change.",
+    "evidence_path": "canonical/tests/test_swe_family_effect_filter_v1.py"
+  }
 }
