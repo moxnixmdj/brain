@@ -1,0 +1,229 @@
+{
+  "action_id": "ADVANCED_SWE_CENSUS_AND_MAGNET_TRIAGE_V1_20261031_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "action_summary": "THE ORDINARY-WORK MATRIX AND THE ADVANCED CENSUS DISAGREE, AND THE CENSUS IS THE PRODUCT. The 54-case matrix is 17 REAL / 0 FALSE / 0 DAMAGED at a 172 ms median; a new 49-request census of advanced software work -- C/C++/Rust/Go/Java, build, CI, performance, concurrency, test authoring, git surgery, design -- serves 2, one of them wrongly. Five rows absorb 24 of the 49 selections and then refuse their own inputs, and whole domains have zero rows of 440. The census is now an instrument in the tree so the number is repeatable, and the two matrix cases whose own sentences authorise the files they change no longer report damage.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "execution_guard/swe_advanced_probe_v1.py",
+      "execution_guard/swe_capability_matrix_v1.py",
+      "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V12.md",
+      "canonical/action_intents/ADVANCED_SWE_CENSUS_AND_MAGNET_TRIAGE_V1_20261031_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_MATRIX_MEASURES_ONLY_THE_SENTENCES_SOMEBODY_WROTE_CASES_FOR_SO_A_GOOD_MATRIX_COEXISTED_WITH_A_MACHINE_THAT_CANNOT_DO_ADVANCED_SOFTWARE_WORK__MEASURED_49_ADVANCED_REQUESTS_SERVED_2_WITH_24_OF_THE_49_LANDING_ON_FIVE_MAGNET_ROWS_AND_EIGHT_DOMAINS_HAVING_ZERO_ROWS_OF_440",
+  "canonical_base_commit": "f333567dd1a50aa0d18b583cb340765e9086f021",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_MATRIX_MEASURES_ONLY_THE_SENTENCES_SOMEBODY_WROTE_CASES_FOR_SO_A_GOOD_MATRIX_COEXISTED_WITH_A_MACHINE_THAT_CANNOT_DO_ADVANCED_SOFTWARE_WORK__MEASURED_49_ADVANCED_REQUESTS_SERVED_2_WITH_24_OF_THE_49_LANDING_ON_FIVE_MAGNET_ROWS_AND_EIGHT_DOMAINS_HAVING_ZERO_ROWS_OF_440",
+  "date": "2026-10-31",
+  "expected_parent_change": "THE_ADVANCED_CENSUS_IS_A_REPEATABLE_INSTRUMENT__THE_TWO_DAMAGE_REPORTS_THAT_CONTRADICTED_THEIR_OWN_ORACLES_ARE_CORRECTED__AND_THE_PROBLEM_SET_IS_RANKED_BY_EVIDENCE_INSTEAD_OF_BY_RECENCY",
+  "expected_parent_frontier_change": "THE_ADVANCED_CENSUS_IS_A_REPEATABLE_INSTRUMENT__THE_TWO_DAMAGE_REPORTS_THAT_CONTRADICTED_THEIR_OWN_ORACLES_ARE_CORRECTED__AND_THE_PROBLEM_SET_IS_RANKED_BY_EVIDENCE_INSTEAD_OF_BY_RECENCY",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. And merge all of your work.\"",
+  "falsification_condition": "RUN_THE_CENSUS_AND_SEE_MORE_THAN_A_HANDFUL_SERVED__OR_FIND_C_ROWS_THAT_THE_REGISTRY_SCAN_MISSED__OR_SHOW_THAT_A_MAGNET_ROW_ANSWERS_ITS_OWN_EFFECT_CORRECTLY",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "execution_guard/swe_capability_matrix_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/runtime/swe_typed_plan_v1.py",
+    "canonical/runtime/declared_input_derivation_v1.py",
+    "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V11.md"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "f333567dd1a50aa0d18b583cb340765e9086f021",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "ASSUMING_17_REAL_MEANS_THE_MACHINE_IS_BROADLY_CAPABLE",
+      "REPORTING_DAMAGE_FOR_A_FILE_THE_SENTENCE_ITSELF_AUTHORISED",
+      "COUNTING_A_DOCUMENT_FORMAT_ROW_AS_SOFTWARE_CAPABILITY"
+    ],
+    "expected_parent_level_state_change": "THE_ADVANCED_CENSUS_IS_A_REPEATABLE_INSTRUMENT__THE_TWO_DAMAGE_REPORTS_THAT_CONTRADICTED_THEIR_OWN_ORACLES_ARE_CORRECTED__AND_THE_PROBLEM_SET_IS_RANKED_BY_EVIDENCE_INSTEAD_OF_BY_RECENCY",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_CENSUS_RESTORES_THE_STATE_WHERE_A_17_OF_54_MATRIX_READS_AS_BROAD_CAPABILITY",
+      "intrinsic_or_path_specific": "GENERAL__THE_CENSUS_IS_SENTENCES_AND_DOOR_CALLS__ONLY_THE_PROBLEM_SET_IS_SPECIFIC_TO_THIS_TREE_AND_THAT_IS_WHAT_A_RANKED_FIX_LIST_NEEDS",
+      "surviving_causal_blocker": "THE_MATRIX_MEASURES_ONLY_THE_SENTENCES_SOMEBODY_WROTE_CASES_FOR_SO_A_GOOD_MATRIX_COEXISTED_WITH_A_MACHINE_THAT_CANNOT_DO_ADVANCED_SOFTWARE_WORK__MEASURED_49_ADVANCED_REQUESTS_SERVED_2_WITH_24_OF_THE_49_LANDING_ON_FIVE_MAGNET_ROWS_AND_EIGHT_DOMAINS_HAVING_ZERO_ROWS_OF_440"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_CAPABILITY_WAS_WRITTEN__THE_CENSUS_MEASURES_THE_EXISTING_ONES_AND_THE_TWO_MATRIX_CORRECTIONS_DECLARE_WHAT_THEIR_SENTENCES_ALREADY_AUTHORISED",
+      "existing_inherited_routes_checked": [
+        "swe_capability_matrix_v1",
+        "live_brain_route_admission_v1",
+        "swe_typed_plan_v1._resolve_family",
+        "declared_input_derivation_v1",
+        "load_verified_registry"
+      ],
+      "external_existing_routes_checked": "None needed: the census drives the same front door every other request uses.",
+      "surviving_gap": "EIGHT_DOMAINS_WITH_ZERO_ROWS__THAT_IS_THE_BUILDING_WORK_AND_THE_DOCUMENT_RANKS_IT"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_MATRIX_REAL_COUNT",
+        "COUNTING_REGISTRY_ROWS_AS_CAPABILITY",
+        "CALLING_A_PASS_AN_ANSWER"
+      ],
+      "real_outcome": "The repository can now answer, from one command, what an advanced software engineer would ask for and what the machine actually does with it -- and the answer names the five magnets, the six derivation holes, the seven broken adapters and the eight absent domains instead of guessing.",
+      "surviving_necessity": "A machine that is measured only on the sentences it already answers will look finished forever; the census is the first measurement that can say what it cannot do at all."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_SHAPE_RULE_THE_EXISTING_EXIT_AND_THE_EXISTING_ORACLE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_440_ROW_DOMAIN_SCAN_AND_THE_REFUSAL_HISTOGRAM_WERE_COMPUTED_ONCE_AND_ARE_RECORDED_IN_THE_DOCUMENT",
+      "search_stop_decision": "STOPPED_AT_49_REQUESTS_BECAUSE_EVERY_AXIS_ALREADY_SHOWED_A_DISTINCT_CAUSE_CLASS_AND_A_LONGER_CENSUS_WOULD_PRINT_THE_SAME_FIVE_MAGNETS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "An oracle per request is the right end state but takes months; the census buys the same information -- which row answers, whether it is the right kind, what it says when it fails -- in one pass.",
+      "routes_ranked": [
+        "CENSUS_THE_DOOR__SELECTED",
+        "SECOND_MATRIX_WITH_ORACLES",
+        "REGISTRY_KEYWORD_SURVEY",
+        "TRUST_THE_MATRIX"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "PARTIAL__THE_CENSUS_HAS_NO_PER_REQUEST_ORACLE_AND_SAYS_SO__IT_PRINTS_THE_SELECTED_ROW_SO_A_WRONG_ANSWER_IS_VISIBLE_AND_ONE_WAS_CAUGHT_THAT_WAY"
+    },
+    "real_outcome": "The repository can now answer, from one command, what an advanced software engineer would ask for and what the machine actually does with it -- and the answer names the five magnets, the six derivation holes, the seven broken adapters and the eight absent domains instead of guessing.",
+    "required_capability": "A_CENSUS_THAT_MEASURES_THE_WORK_THE_MATRIX_NEVER_ASKED_FOR",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The requests and the door are both in this repository; no external route can change the measurement."
+    },
+    "routes_considered": [
+      "TRUST_THE_MATRIX_AND_THE_REGISTRY_COUNT__THE_DEFECT",
+      "WRITE_A_SECOND_MATRIX_WITH_ORACLES__MONTHS_FOR_A_PROBLEM_SET",
+      "SURVEY_THE_REGISTRY_BY_KEYWORD__AN_OPINION_WITH_A_COUNT",
+      "CENSUS_THE_DOOR_WITH_ADVANCED_REQUESTS_AND_PRINT_THE_ANSWERING_ROW__CHOSEN"
+    ],
+    "selected_route": "DECLARE_THE_ARTIFACT_A_CAPABILITY_REALLY_EMITS_SO_THE_PLANNER_CAN_CHAIN_IT_TO_THE_VERIFIER_THAT_ALREADY_REQUIRES_THAT_TYPE",
+    "selected_surviving_route": "MEASURE_THE_ADVANCED_SURFACE_WITH_A_CENSUS_INSTRUMENT_AND_RANK_THE_PROBLEMS_BY_EVIDENCE__REUSE_THE_EXISTING_FAMILY_TABLE_DERIVATION_TABLE_AND_ADAPTER_REFUSAL_VOCABULARY_AS_THE_FIX_LIST",
+    "stop_condition": "CENSUS_49_REQUESTS_2_SERVED_REPRODUCIBLE_VIA_ONE_COMMAND__MATRIX_17_REAL_0_FALSE_0_DAMAGED_172MS_MEDIAN__EVERY_PROBLEM_IN_THE_DOCUMENT_CARRIES_A_MEASURED_CAUSE__UNIFIED_MODEL_VERIFIER_33_OF_33",
+    "why_selected_route_is_fastest_sufficient": "A probe census costs one door call per request and no new subsystem; every alternative -- a second matrix, a hand-written gap list, a survey of the registry -- either repeats the same defect (only measuring what was written down) or produces an opinion. The census costs 11 seconds end to end and prints the row that answered, so a wrong answer cannot hide behind a pass."
+  },
+  "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "MEASURE_THE_ADVANCED_SURFACE_WITH_A_CENSUS_INSTRUMENT_AND_RANK_THE_PROBLEMS_BY_EVIDENCE__REUSE_THE_EXISTING_FAMILY_TABLE_DERIVATION_TABLE_AND_ADAPTER_REFUSAL_VOCABULARY_AS_THE_FIX_LIST",
+  "stop_condition": "CENSUS_49_REQUESTS_2_SERVED_REPRODUCIBLE_VIA_ONE_COMMAND__MATRIX_17_REAL_0_FALSE_0_DAMAGED_172MS_MEDIAN__EVERY_PROBLEM_IN_THE_DOCUMENT_CARRIES_A_MEASURED_CAUSE__UNIFIED_MODEL_VERIFIER_33_OF_33",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__THREE_PREDICATES_IN_EXISTING_GATES_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "e643fe66eec8d718ecae5a993fd82fbdcdc470ea",
+          "note": "Base blob: the matrix that measured 17 REAL and could not see that 47 of 49 advanced requests are refused.",
+          "path": "execution_guard/swe_capability_matrix_v1.py"
+        }
+      ],
+      "decisive_question": "IS_THE_MACHINE_THAT_SCORES_17_OF_54_ON_ORDINARY_WORK_ABLE_TO_DO_THE_WORK_AN_ADVANCED_ENGINEER_IS_GIVEN",
+      "falsifier_id": "RUN_THE_CENSUS_AND_SEE_BROAD_COVERAGE",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_WROTE_THE_PROBE_AD_HOC_IN_TMP_AND_THE_NUMBER_WAS_NOT_REPEATABLE_BY_ANYONE_ELSE__CORRECTED_TO_AN_INSTRUMENT_IN_THE_TREE_WITH_A_FIXTURE_AND_A_JSON_OUTPUT__SECOND_ATTEMPT_TREATED_SERVED_AS_CORRECT_AND_THE_CENSUS_CAUGHT_A_SECRET_SCANNER_ANSWERING_AN_API_DESIGN_REVIEW__CORRECTED_TO_PRINT_THE_SELECTED_ROW_AND_SAY_IN_THE_DOCSTRING_THAT_SERVED_MEANS_PASS_WITH_NO_UNAUTHORISED_EDIT",
+      "proposal_id": "ADVANCED_SWE_CENSUS_AND_MAGNET_TRIAGE_V1_20261031_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. Two damage reports are corrected because the request's own sentence authorised the file (rename_symbol: 'update every caller'; add_parameter: 'in the function total in <file>'), which is what the allow list exists to declare; every other file still counts, and the matrix now reports 0 DAMAGED with those two cases REAL instead of DAMAGED."
+}

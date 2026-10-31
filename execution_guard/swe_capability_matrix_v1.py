@@ -250,10 +250,17 @@ case("rename_param", lambda b: "Rename the parameter old_price to price in the p
      "save the report to %s." % (rel(b, "pkg/util.py"), rel(b, "out.json")),
      lambda b, r: "def total(price, qty)" in text_of(b / "pkg/util.py"), "refactor",
      allow=("util.py",))
+# THE SENTENCE AUTHORISES THE CALLERS IT NAMES.
+#
+# Measured 2026-10-31: "Rename the function add to plus in <mod.py> and update every caller"
+# renamed in both files and the oracle -- which requires the caller to change -- passed, while the
+# damage rule reported the caller file as a file nobody asked for.  The oracle and the damage rule
+# cannot both be right: when the sentence says "update every caller", a caller changing is the
+# request, not the damage.
 case("rename_symbol", lambda b: "Rename the function add to plus in %s and update every caller."
      % rel(b, "pkg/mod.py"),
      lambda b, r: "def plus(" in text_of(b / "pkg/mod.py") and "plus" in text_of(b / "pkg/service.py"),
-     "refactor")
+     "refactor", allow=("mod.py", "service.py"))
 case("extract_function", lambda b: "Extract the body of add in %s into a helper function."
      % rel(b, "pkg/mod.py"),
      lambda b, r: parses(b / "pkg/mod.py") and text_of(b / "pkg/mod.py").count("def ") >= 4, "refactor")
