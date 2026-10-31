@@ -167,10 +167,11 @@ def asked(goal: str) -> dict[str, Any] | None:
 
 
 def _is_answer_value(value: Any) -> bool:
-    if isinstance(value, Mapping):
-        return bool(value)
-    if isinstance(value, (list, tuple)):
-        return len(value) > 0
+    # Presence of the answering field, not positive cardinality, is evidence:
+    # an analysis can legitimately find no callers/imports/functions.  A missing
+    # field is still refused by _project; do not turn a present empty set into one.
+    if isinstance(value, (Mapping, list, tuple)):
+        return True
     if isinstance(value, str):
         return bool(value.strip())
     return isinstance(value, (int, float)) and not isinstance(value, bool)
