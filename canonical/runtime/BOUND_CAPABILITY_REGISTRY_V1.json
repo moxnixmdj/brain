@@ -2814,6 +2814,294 @@
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_INCREMENTAL_INDEX_V1_V1.json"
       }
+    },
+    "code.multilanguage.parse.tree_sitter.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.multilanguage.parse.tree_sitter.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_multilanguage_tree_sitter_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "tree-sitter",
+        "parse",
+        "multilanguage",
+        "python",
+        "javascript",
+        "typescript",
+        "rust",
+        "go",
+        "java",
+        "cpp",
+        "yaml",
+        "incremental",
+        "error-tolerant"
+      ],
+      "limitations": [
+        "Uses pinned tree_sitter 0.20.4 + tree_sitter_languages 1.10.2 when available, else falls back to deterministic python ast for python subset. Never invents parses, error-tolerant, incremental-ready."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "code.ast.tree_sitter.available",
+        "code.symbols.multilanguage.indexed",
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "file_count",
+        "languages_seen",
+        "tree_sitter_available",
+        "symbol_count",
+        "error_count",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd",
+        "skipped_count"
+      ],
+      "source": {
+        "module": "tree_sitter",
+        "type": "pypi",
+        "version_family": ">=0.20.4"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-CODE-MULTILANGUAGE-PARSE-TREE_SITTER-V1",
+        "observed_effect": {
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1.json"
+      }
+    },
+    "code.patch.tree_sitter.verify.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.patch.tree_sitter.verify.v1",
+          "edits": "${input.edits}",
+          "index_path": "${input.index_path}",
+          "output_path": "${input.output_path}",
+          "selection_path": "${input.selection_path}",
+          "test_cwd": "${input.test_cwd}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_tree_sitter_patch_verify_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "code",
+        "patch",
+        "tree-sitter",
+        "verify",
+        "test",
+        "exact-span",
+        "multi-language"
+      ],
+      "limitations": [
+        "Candidate-only exact-byte edits bounded by real tree-sitter nodes; fresh matching index and impact artifacts are mandatory.",
+        "The candidate must reparse without syntax errors and pass the selected test command for every replay; original bytes are restored in all cases, and no merge or promotion authority is conferred."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "code.patch.tree_sitter.verified",
+        "code.patch.multilanguage.test_verified"
+      ],
+      "requires": [
+        "code.symbols.tree_sitter.indexed",
+        "code.impact.test_selection.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "status",
+        "source_restored",
+        "test_pass_count",
+        "unified_diff",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/code_tree_sitter_patch_verify_v1.py",
+        "dependency_closure": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "resolver": "pip-download-only-binary",
+          "root_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "root_project": "tree_sitter_languages",
+          "root_version": "1.10.2",
+          "schema": "PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+          "source_only_artifacts_allowed": false,
+          "wheel_count": 2,
+          "wheels": [
+            {
+              "bytes": 490490,
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter/0.20.4/json",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "url": "https://files.pythonhosted.org/packages/3f/ce/80b12e0e470bf939dd57507fedad5cdc30e92391703031561e829d6a1819/tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "0.20.4"
+            },
+            {
+              "bytes": 8422544,
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "url": "https://files.pythonhosted.org/packages/96/81/ab4eda8dbd3f736fcc9a508bc69232d3b9076cd46b932d9bf9d49b9a1ec9/tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "licenses": {
+          "tree_sitter": "MIT",
+          "tree_sitter_languages": "Apache-2.0"
+        },
+        "metadata_url": "https://pypi.org/pypi/tree_sitter_languages/1.10.2/json",
+        "project": "tree_sitter_languages",
+        "type": "pypi",
+        "version": "1.10.2",
+        "wheel_filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "wheel_sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "canonical.tests.test_code_tree_sitter_swe_v1",
+        "mission_id": "HARDCORE-VERIFY-CODE-TREE-SITTER-PATCH-VERIFY-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_PATCH_VERIFY_V1_V1.json"
+      }
+    },
+    "decision.synthesis.typed.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "decision.synthesis.typed.stdlib",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "evidence_decision_synthesis",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "decision",
+        "evidence",
+        "synthesis",
+        "support",
+        "contradiction",
+        "constraint",
+        "uncertainty",
+        "conflict",
+        "provenance",
+        "trace",
+        "terminal",
+        "rank"
+      ],
+      "limitations": [
+        "Consumes already-typed decision evidence; it does not interpret arbitrary natural language.",
+        "Hard constraints must be explicitly represented as SATISFIED, VIOLATED, or UNKNOWN.",
+        "Evidence relations are explicit SUPPORTS or CONTRADICTS and duplicate independence groups are not double-counted."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "input_path": {
+          "container": "scalar",
+          "effect": "structured.decision_evidence.available",
+          "field": "output_path",
+          "type": "effect_result"
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        }
+      },
+      "provides": [
+        "decision.synthesis.typed"
+      ],
+      "requires": [
+        "structured.decision_evidence.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "decision_confidence",
+        "input_path",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "selected_alternative",
+        "status"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
+        "modules": [
+          "json",
+          "hashlib",
+          "math",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "decision.synthesis.verify.stdlib",
+        "mission_id": "ASTRA-MODEL-INDEPENDENT-EVIDENCE-DECISION-REAL-TASKS-001",
+        "model_dependency_count": 0,
+        "producer_git_blob": "7690b26800b2701dac9e187a92c5561d79d831dd",
+        "public_head_sha": "c96efa66a27a32169a074993b2a39f4ebf6e2d4a",
+        "public_job_id": 109657545598,
+        "public_run_id": 36642428325,
+        "real_tasks": [
+          "REAL-TASK-A-ZERO-SPEND-CARRIER-20260930",
+          "REAL-TASK-B-CLICK-REPAIR-ROUTE-20260930"
+        ],
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
