@@ -384,5 +384,50 @@
     ]
    }
   }
+ },
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The door's result is a summary and the answer is in the artifact, and nothing reconciled them: measured 2026-10-31 on 62 human sentences, 7 of the 12 PASSes were wrong, 5 of them a count returned for a request to extract (caller_index_size: 8, function_count: 10, distinct_imported_module_count: 5) while the exact bytes sat in the artifact. Separately the binder read noun phrases instead of verbs, so 'Reset the working tree to HEAD~1' bound op=status and PASSed for that row declares it has no reset.",
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_GDPVAL_GE_1846",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "AUTOMATIONBENCH_GE_40",
+   "HLE_TOOLS_GE_67_7",
+   "TB_SCIENCE_GE_58_7",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+  ],
+  "proof_state_reachability": "DIRECT_PROBE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_ON_SANDBOX_MEASUREMENT_ONLY__NO_TERMINAL_OR_FAMILY_CREDIT_IS_CLAIMED",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "NEVER_CERTIFY_A_WRONG_ANSWER_ANSWER_SHAPE_AND_STATED_OPERATION_V1_20261031_V1",
+   "falsifier_id": "A_SENTENCE_THAT_ASKS_FOR_MEMBERS_OR_FOR_A_REWRITE_STILL_RECEIVES_A_PASS_CARRYING_A_COUNT_OR_A_READ",
+   "decisive_question": "MAY_A_DOOR_CERTIFY_A_PASS_WHOSE_PAYLOAD_DOES_NOT_ANSWER_THE_SENTENCE_OR_WHOSE_OPERATION_IS_NOT_THE_ONE_THAT_WAS_STATED",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THREE_CANDIDATE_RULES_WERE_CHECKED_AND_REJECTED_BEFORE_THE_SHIPPED_ONE: A_NAIVE_NOUN_TABLE_ORDER_ANSWERED_WHICH_COMMIT_BROKE_THE_TESTS_ABOUT_TESTS_AND_WOULD_HAVE_BROKEN_ONE_OF_THE_FIVE_CORRECT_ANSWERS__A_BARE_FIND_AS_AN_ENUMERATING_VERB_REFUSED_FIND_THE_FAULT_IN_THE_FILE___AND_TREATING_EVERY_GIT_SUBCOMMAND_AS_THE_OPERATION_BROKE_SHOW_THE_LAST_THREE_GIT_COMMITS_BECAUSE_SHOW_MEANS_LOG_THERE__EACH_REJECTION_IS_MEASURED_IN_SWE_FIXES_20261031_V1_MD_AND_EACH_LEAVES_A_TEST_IN_CANONICAL_TESTS"
+  }
  }
 }
