@@ -1955,9 +1955,22 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> 
     surface = " ".join([cid,
                         " ".join(str(x) for x in (entry.get("provides") or [])),
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
+    # A STATED EFFECT IS ASKED FOR BY THE CLAUSE THAT CARRIES THE REQUEST.
+    #
+    # "Add a parameter qty with a default value to the function line_total in <f> and update
+    # every caller so behaviour is unchanged" mentions a caller, and the caller-map gate read
+    # that noun as "tell me who the callers are" -- so the row that EXTENDS the signature and
+    # rewrites the call sites was refused with STATED_CALLER_MAP_NOT_PROVIDED_BY_CAPABILITY
+    # before it could run.  Measured 2026-10-31.  The map is a request made by the clause that
+    # asks it ("find every caller", "who calls"); a noun in a subordinate instruction is the
+    # OBJECT of that instruction.  Reuses the governing-clause law the typed selector applies,
+    # so there is one reading of "what did this sentence ask for" in the tree.
+    from canonical.runtime.swe_typed_plan_v1 import _governing_clause as _clause_of
+    head = _clause_of(text.lower())
     errors: list[str] = []
     for asked, supplied, code in _STATED_EFFECTS:
-        if not asked.search(text) or supplied.search(surface):
+        probe = head if code.startswith("STATED_CALLER_MAP") else text.lower()
+        if not asked.search(probe) or supplied.search(surface):
             continue
         errors.append(code + ":" + (cid or "UNNAMED"))
     errors.extend(stated_application_errors(text, entry))
@@ -3456,6 +3469,23 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     if failure_class in _JUDGED_FAILURE_CLASSES:
         return False
     if result.get("executed") is True:
+        # AN "EXECUTED" ATTEMPT WITH NO EXECUTION RECORD EXECUTED NOTHING.
+        #
+        # ``executed`` says the controller was invoked; ``execution`` is the record of what
+        # actually ran, and the block above has already established that no honesty gate
+        # spoke.  Measured 2026-10-31 on two sentences: "Resolve the merge conflict in
+        # <file> keeping both changes" was routed to a mutation score, which raised
+        # SyntaxError on the conflicted file, and "Rename the function line_total to
+        # item_total in <dir> and update every caller" was routed to a PARAMETER rename,
+        # which refused PARAM_NOT_FOUND.  Both reported executed:True with execution == []
+        # and not one judged-evidence field set: neither capability produced an artifact,
+        # moved a byte, or said anything about the tree.  The refusal is a statement about
+        # the ROW that was asked, and the decisive typed plan already names the row the
+        # sentence describes.  The retry re-enters the SAME gate chain, and the verdict the
+        # caller receives is the retry's own -- failure included.  Nothing is widened.
+        if not result.get("execution") and not any(result.get(field)
+                                                   for field in _JUDGED_EVIDENCE_FIELDS):
+            return True
         stated = "%s %s" % (result.get("reason") or "", result.get("failure_reason") or "")
         return bool(_PRECONDITION_BLOCKER_RE.search(stated))
     return True
