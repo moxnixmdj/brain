@@ -11098,6 +11098,177 @@
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json"
       }
+    },
+    "xlsx.table.verify_against_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "xlsx.table.verify_against_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "xlsx_path": "${input.xlsx_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "xlsx_verify_openpyxl",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "xlsx",
+        "spreadsheet",
+        "workbook",
+        "rows",
+        "columns",
+        "verify",
+        "reopen",
+        "independently"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "xlsx.table.verify_against_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-openpyxl",
+            "sha256": "0892bf202df1f56bb36530c3ba9ac9f24f6a5b115442e7aa602b12e46aa0433c",
+            "version": "3.1.2+dfsg-6"
+          }
+        ],
+        "pypi_fallback": {
+          "metadata_url": "https://pypi.org/pypi/openpyxl/3.1.5/json",
+          "project": "openpyxl",
+          "version": "3.1.5",
+          "wheel_filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+          "wheel_sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
+        },
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "xlsx_verify_openpyxl",
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "producer_independent_verifier": true,
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "verified": true,
+          "verified_rows": 15,
+          "xlsx_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+          "xlsx_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d"
+        },
+        "producer_package": "python3-xlsxwriter",
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json"
+      }
+    },
+    "yaml.to_json.yq": {
+      "action_template": {
+        "args": {
+          "capability_id": "yaml.to_json.yq",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60,
+          "yaml_path": "${input.yaml_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "yq_yaml_json",
+      "channel_schema": {
+        "output_path": {
+          "format": "json-text",
+          "kind": "file"
+        }
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "yaml",
+        "yml",
+        "json",
+        "parse",
+        "convert",
+        "workflow",
+        "structured"
+      ],
+      "limitations": [
+        "Converts repository-local YAML/YML files into deterministic JSON.",
+        "Verified with Ubuntu yq 3.1.0-3."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "json.file.available",
+        "yaml.to_json"
+      ],
+      "requires": [
+        "yaml.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "input_path",
+        "input_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "top_level_type"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "fallback": {
+              "module": "yaml",
+              "type": "pypi"
+            },
+            "name": "yq",
+            "optional": true,
+            "optional_reason": "adapter canonical/runtime/bound_capabilities/yq_yaml_json.py catches FileNotFoundError for the yq binary and falls back to the yaml module; the family using this capability passes end to end on this machine with the binary absent.",
+            "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809",
+            "version": "3.1.0-3"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier": "raw_yaml_regex_crosscheck",
+        "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+        "observed_effect": {
+          "input_sha256": "34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac",
+          "job_ids": [
+            "run-mission"
+          ],
+          "output_sha256": "23c812aa8aa6e6ebd0e8674d15bd9994fa00674f46afd002704e2f7624c64f13",
+          "uses": [
+            "actions/checkout@v4",
+            "actions/setup-python@v5"
+          ]
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
