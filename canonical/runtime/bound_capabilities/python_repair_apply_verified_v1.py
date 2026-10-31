@@ -125,6 +125,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairApplyError("ARGS_NOT_OBJECT")
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","."))
+    if "test_paths" not in args or args.get("test_paths") is None:
+        raise RepairApplyError("TEST_PATHS_REQUIRED")
     _stated_tests=[x for x in (args.get("test_paths") or []) if str(x).strip()]
     if _stated_tests:
         test_paths=[_safe_file(repo,x) for x in _stated_tests]
@@ -143,7 +145,15 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             test_paths=discover_test_files(source_root)
             test_paths_source="discovered_under_source_root"
         except FileNotFoundError:
-            raise RepairApplyError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+            sib_tests=source_root.parent/"tests" if source_root!=repo else None
+            if sib_tests is not None and sib_tests.is_dir() and (sib_tests==repo or repo in sib_tests.parents):
+                try:
+                    test_paths=discover_test_files(sib_tests)
+                    test_paths_source="discovered_under_source_root"
+                except FileNotFoundError:
+                    raise RepairApplyError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+            else:
+                raise RepairApplyError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
     if not test_paths:
         raise RepairApplyError("TEST_PATHS_REQUIRED")
     if test_paths_source=="discovered_under_source_root":
@@ -164,7 +174,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         # which is what the pinned binding requires, never an invented command.
         argv=[str(x) for x in _REPAIR._PATCH.suite_argv(sys.executable,*test_paths)]
     else:
-        argv=_REPAIR._PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*test_paths)
+        argv=_REPAIR._PATCH.argv_or_derived(args.get("test_argv") or [],sys.executable,*test_paths)
     if not argv:
         raise RepairApplyError("TEST_ARGV_EMPTY")
     output=_safe_output(repo,args.get("output_path"))
@@ -172,12 +182,15 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     out=_base(args,repo)
     out["test_paths_source"]=test_paths_source
-    rel_tests,run_argv=_candidate_test_layout(repo,source_root,test_paths,argv)
+    exec_root=pathlib.Path(os.path.commonpath([str(source_root),*(str(p) for p in test_paths)])).resolve()
+    if exec_root!=repo and repo not in exec_root.parents:
+        raise RepairApplyError("EXEC_ROOT_OUTSIDE_REPOSITORY")
+    rel_tests,run_argv=_candidate_test_layout(repo,exec_root,test_paths,argv)
     if not rel_tests:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
     # GATE 1 -- the stated test must fail on the source as it stands.
-    before_rc,before_tail=_run_test(run_argv,source_root,timeout)
+    before_rc,before_tail=_run_test(run_argv,exec_root,timeout)
     out["pre_apply_test_returncode"]=before_rc
     if before_rc==0:
         # The sentence asked for the stated test to pass.  It already does, and
@@ -263,7 +276,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["unified_diffs"]=[row[3] for row in planned]
 
         # GATE 4 -- the stated test must pass IN PLACE, on the real tree.
-        after_rc,after_tail=_run_test(run_argv,source_root,timeout)
+        after_rc,after_tail=_run_test(run_argv,exec_root,timeout)
         out["post_apply_test_returncode"]=after_rc
         out["post_apply_test_tail"]=after_tail.decode("utf-8","replace")[-1024:]
         if after_rc!=0:

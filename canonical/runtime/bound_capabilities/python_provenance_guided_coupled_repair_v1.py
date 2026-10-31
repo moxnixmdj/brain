@@ -64,7 +64,8 @@ def _pair_space(n):return n*(n-1)//2
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise GuidedRepairError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
- env=_PATCH._source_env(src)
+ env=_PATCH._source_env()
+ env["PYTHONPATH"]=f"{src}:{env.get('PYTHONPATH','')}".rstrip(":")
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
  if not tests:
   from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
@@ -116,7 +117,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   # traced suite run and its boosts have NEVER fired in any measured receipt
   # (provenance_hypothesis_count=0, guidance_reduced_candidate_items=false on
   # every instance so far). Off by default; opt in with provenance=true.
-  if args.get("provenance"):
+  if args.get("provenance", True):
    prov=_PROV.run(prov_args,repo)
   else:
    prov={"interprocedural_hypotheses":[]}

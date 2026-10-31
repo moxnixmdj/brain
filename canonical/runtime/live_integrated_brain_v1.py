@@ -171,14 +171,11 @@ def _active_registry_path(path: Path | None = None) -> Path:
 
 
 def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[str, Any]]:
-    # Parsing 1.06 MB of JSON on every solve() was the dominant cost (864 KB of it inventory
-    # that is ~98% filtered away).  Memoise on the mtimes that can change the answer.
-    # The evidence directory's mtime is in the token because verification records appear
-    # there long after the projection is written: without it the cache returned a stale
-    # 67 after a record was stamped in-process. One stat, not a directory scan.
     reg_file = _active_registry_path(REGISTRY)
+    snap_file = REGISTRY.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
     evidence_dir = ROOT / "canonical/astra_runtime/evidence"
-    token = (reg_file.stat().st_mtime_ns,
+    token = (reg_file.stat().st_mtime_ns if reg_file.is_file() else 0,
+             snap_file.stat().st_mtime_ns if snap_file.is_file() else 0,
              (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").stat().st_mtime_ns
              if (ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json").is_file() else 0,
              PROJECTION.stat().st_mtime_ns if PROJECTION.is_file() else 0,
@@ -187,11 +184,13 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
         return dict(_REGISTRY_CACHE[token])
 
     doc = json.loads(reg_file.read_text(encoding="utf-8"))
-    if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
+    if doc.get("schema") not in ("PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1", "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1"):
         raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_SCHEMA_INVALID")
-    raw = doc.get("capabilities")
-    if not isinstance(raw, Mapping):
-        raise LiveBrainError("BOUND_CAPABILITY_REGISTRY_INVALID")
+    raw = dict(doc.get("capabilities") or {})
+    if snap_file.is_file() and snap_file != reg_file:
+        snap_doc = json.loads(snap_file.read_text(encoding="utf-8"))
+        if isinstance(snap_doc.get("capabilities"), Mapping):
+            raw.update(snap_doc["capabilities"])
     out: dict[str, Mapping[str, Any]] = {}
     for cid, entry in raw.items():
         if not isinstance(cid, str) or not isinstance(entry, Mapping):

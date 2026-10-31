@@ -35,12 +35,24 @@ def _load_registry() -> tuple[Mapping[str, Any], str]:
     # The checked-out Git commit already binds code and registry atomically.
     # Bind the compiled problem to those exact current registry bytes instead of
     # requiring a second manually-updated blob constant that goes stale.
-    raw = (ROOT / REGISTRY_PATH).read_bytes()
+    reg_path = ROOT / REGISTRY_PATH
+    raw = reg_path.read_bytes()
+    if not raw.lstrip().startswith(b"{"):
+        snap = reg_path.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+        if snap.is_file():
+            raw = snap.read_bytes()
     actual = _git_blob(raw)
     doc = json.loads(raw.decode("utf-8"))
-    if doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
+    if doc.get("schema") not in (
+        "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1",
+        "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1",
+    ):
         raise BoundProblemError("BOUND_REGISTRY_SCHEMA_INVALID")
-    caps = doc.get("capabilities")
+    caps = dict(doc.get("capabilities") or {})
+    snap = reg_path.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+    if snap.is_file():
+        sdoc = json.loads(snap.read_text(encoding="utf-8"))
+        caps.update(sdoc.get("capabilities") or {})
     if not isinstance(caps, Mapping) or not caps:
         raise BoundProblemError("BOUND_REGISTRY_CAPABILITIES_INVALID")
     return caps, actual

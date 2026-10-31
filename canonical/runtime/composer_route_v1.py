@@ -2814,6 +2814,11 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, *_cut_flags(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
+        if program == "rm" and re.search(
+            r"\band\s+(?:the\s+|a\s+)?[A-Za-z0-9_./-]+\s+(?:directory|folder|file|database)\b",
+            sentence, re.IGNORECASE,
+        ):
+            return None
         if (program == "rm" and _DIRECTORY_REQUEST.search(text)
                 and not re.search(r"\bfiles?\b|\*|\bnamed\b|\bpattern\b", text)):
             # The same reading `cp` already makes: a sentence that says

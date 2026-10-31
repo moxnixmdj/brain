@@ -264,6 +264,69 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                 yield tkey,_descriptor(test,"ADD_NOT","condition -> not condition"),(
                     lambda n: ast.UnaryOp(op=ast.Not(),operand=n)
                 )
+        # GUARD / CLAUSE / BOUNDARY FAMILY (NOPOL / SPR / Plastic Surgery):
+        # Kept strictly in `family="guard_clause"` so `legacy` and `neighborhood`
+        # candidate budgets and pair-space indices remain 100% invariant.
+        if isinstance(node,ast.Call) and isinstance(node.func,ast.Name):
+            _fn_swaps={"min":"max","max":"min","any":"all","all":"any"}
+            _swap=_fn_swaps.get(node.func.id)
+            if _swap:
+                sig=(key,"guard_call",_swap)
+                if sig not in seen:
+                    seen.add(sig)
+                    yield key,_descriptor(node,"CALL_FUNC_SWAP",f"{node.func.id}->{_swap}","guard_clause"),(
+                        lambda n,_swap=_swap: ast.Call(func=ast.Name(id=_swap,ctx=ast.Load()),args=n.args,keywords=n.keywords)
+                    )
+            if node.func.id=="range" and len(node.args)==1:
+                arg0=node.args[0]
+                if isinstance(arg0,ast.BinOp) and isinstance(arg0.op,ast.Sub) and isinstance(arg0.right,ast.Constant) and arg0.right.value==1:
+                    sig=(key,"guard_range","drop_minus1")
+                    if sig not in seen:
+                        seen.add(sig)
+                        yield key,_descriptor(node,"RANGE_BOUND_ADJUST","range(n-1)->range(n)","guard_clause"),(
+                            lambda n: ast.Call(func=n.func,args=[n.args[0].left],keywords=n.keywords)
+                        )
+                else:
+                    sig=(key,"guard_range","add_plus1")
+                    if sig not in seen:
+                        seen.add(sig)
+                        yield key,_descriptor(node,"RANGE_BOUND_ADJUST","range(n)->range(n+1)","guard_clause"),(
+                            lambda n: ast.Call(func=n.func,args=[ast.BinOp(left=n.args[0],op=ast.Add(),right=ast.Constant(value=1))],keywords=n.keywords)
+                        )
+        if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)):
+            _params=[a.arg for a in (*node.args.posonlyargs,*node.args.args) if a.arg not in ("self","cls")]
+            for sub in ast.walk(node):
+                if isinstance(sub,ast.Return) and sub.value is not None and not isinstance(sub.value,ast.IfExp):
+                    rval=sub.value
+                    rkey=_node_key(rval)
+                    # Division zero-denominator guard: `return a / b` -> `return (0 if b == 0 else a / b)`
+                    if isinstance(rval,ast.BinOp) and isinstance(rval.op,(ast.Div,ast.FloorDiv,ast.Mod)) and isinstance(rval.right,ast.Name):
+                        dname=rval.right.id
+                        sig=(rkey,"guard_div0",dname)
+                        if sig not in seen:
+                            seen.add(sig)
+                            yield rkey,_descriptor(rval,"GUARD_DIV_ZERO",f"0 if {dname}==0 else expr","guard_clause"),(
+                                lambda n,dname=dname: ast.IfExp(
+                                    test=ast.Compare(left=ast.Name(id=dname,ctx=ast.Load()),ops=[ast.Eq()],comparators=[ast.Constant(value=0)]),
+                                    body=ast.Constant(value=0),
+                                    orelse=n,
+                                )
+                            )
+                    # Null / empty precondition guards on first parameter (NOPOL angelic precondition)
+                    if _params:
+                        p0=_params[0]
+                        for tag,cond_fn,sent in (
+                            ("none_none",lambda p=p0: ast.Compare(left=ast.Name(id=p,ctx=ast.Load()),ops=[ast.Is()],comparators=[ast.Constant(value=None)]),ast.Constant(value=None)),
+                            ("none_zero",lambda p=p0: ast.Compare(left=ast.Name(id=p,ctx=ast.Load()),ops=[ast.Is()],comparators=[ast.Constant(value=None)]),ast.Constant(value=0)),
+                            ("empty_zero",lambda p=p0: ast.UnaryOp(op=ast.Not(),operand=ast.Name(id=p,ctx=ast.Load())),ast.Constant(value=0)),
+                            ("empty_str",lambda p=p0: ast.UnaryOp(op=ast.Not(),operand=ast.Name(id=p,ctx=ast.Load())),ast.Constant(value="")),
+                        ):
+                            sig=(rkey,"guard_ret",p0,tag)
+                            if sig not in seen:
+                                seen.add(sig)
+                                yield rkey,_descriptor(rval,"GUARD_PRECONDITION",f"{p0}:{tag}","guard_clause"),(
+                                    lambda n,cf=cond_fn,sv=sent: ast.IfExp(test=cf(),body=sv,orelse=n)
+                                )
 
 """Child-side suite execution shared by repair, measurement and tracing.
 

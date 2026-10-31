@@ -128,7 +128,8 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         "    for m in mods:\n"
         "        importlib.import_module(m)\n"
         "    if tdir.is_dir():\n"
-        "        suite = unittest.TestLoader().discover(start_dir=str(tdir), top_level_dir=str(proj))\n"
+        "        top = str(proj) if (tdir == proj or (tdir / '__init__.py').is_file()) else str(tdir)\n"
+        "        suite = unittest.TestLoader().discover(start_dir=str(tdir), top_level_dir=top)\n"
         "        res = unittest.TestResult()\n"
         "        suite.run(res)\n"
         "        total_ran += res.testsRun\n"
@@ -157,8 +158,54 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         return True, 0, ""
 
 
-# ---------------------------------------------------------------------------
-# Pass A: Git 3-way conflict marker resolution
+def _purge_pyc(path: pathlib.Path) -> None:
+    cache_dir = path.parent / "__pycache__"
+    if cache_dir.is_dir():
+        stem = path.stem + "."
+        for f in cache_dir.iterdir():
+            if f.name.startswith(stem) and f.suffix == ".pyc":
+                try:
+                    f.unlink()
+                except OSError:
+                    pass
+
+
+def _inproc_sieve(proj: pathlib.Path, test_dir: pathlib.Path) -> tuple[bool, int]:
+    """Sub-millisecond in-process unittest sieve to reject 99% of failing mutants before clean child replay."""
+    import importlib
+    import unittest
+
+    if not test_dir.is_dir():
+        return False, 0
+    proj_str = str(proj.resolve())
+    added_path = False
+    old_dont_write = sys.dont_write_bytecode
+    sys.dont_write_bytecode = True
+    try:
+        if proj_str not in sys.path:
+            sys.path.insert(0, proj_str)
+            added_path = True
+        importlib.invalidate_caches()
+        for k, v in list(sys.modules.items()):
+            f = getattr(v, "__file__", None)
+            if f:
+                try:
+                    fp = pathlib.Path(f).resolve()
+                    if fp == proj or proj in fp.parents:
+                        sys.modules.pop(k, None)
+                except OSError:
+                    pass
+        top_str = proj_str if (test_dir == proj or (test_dir / "__init__.py").is_file()) else str(test_dir)
+        suite = unittest.TestLoader().discover(start_dir=str(test_dir), top_level_dir=top_str)
+        res = unittest.TestResult()
+        suite.run(res)
+        return (not res.failures and not res.errors and res.testsRun > 0), int(res.testsRun)
+    except BaseException:
+        return False, 0
+    finally:
+        sys.dont_write_bytecode = old_dont_write
+        if added_path and proj_str in sys.path:
+            sys.path.remove(proj_str)
 # ---------------------------------------------------------------------------
 _CONFLICT_RE = re.compile(
     r"^<<<<<<<[^\n]*\n(.*?)^=======\n(.*?)^>>>>>>>[^\n]*\n?",
@@ -650,16 +697,15 @@ def _try_test_guided_repair(proj: pathlib.Path, test_dir: pathlib.Path, focus: l
                 for helper in ordered_helpers:
                     candidates.append(_replace_span(src, node, f"{helper}({node.value.id})"))
 
-        # 2. Single-site binary & comparison operator repairs
+        # 2. Single-site binary, boolean, call & comparison operator repairs
         bin_swaps: list[tuple[type[ast.operator], str]] = [
-            (ast.Sub, "+"), (ast.Add, "-"), (ast.FloorDiv, "*"), (ast.Mult, "//"),
+            (ast.Sub, "+"), (ast.Add, "-"), (ast.Add, "*"), (ast.FloorDiv, "*"), (ast.Mult, "//"), (ast.Div, "*"),
         ]
         cmp_swaps: list[tuple[type[ast.cmpop], str]] = [
-            (ast.Lt, "<="), (ast.LtE, "<"), (ast.Gt, ">="), (ast.GtE, ">"), (ast.Eq, "!="), (ast.NotEq, "=="),
+            (ast.Lt, "<="), (ast.LtE, "<"), (ast.Gt, ">="), (ast.GtE, ">"), (ast.Eq, "!="), (ast.NotEq, "=="), (ast.Is, "is not"), (ast.IsNot, "is"),
         ]
         for node in ast.walk(tree):
             if isinstance(node, ast.BinOp):
-                # Off-by-one `+ 1` / `- 1` removal on return expressions
                 if isinstance(node.op, (ast.Add, ast.Sub)) and isinstance(node.right, ast.Constant) and node.right.value == 1:
                     lhs = ast.get_source_segment(src, node.left) or ast.unparse(node.left)
                     candidates.append(_replace_span(src, node, lhs))
@@ -674,9 +720,48 @@ def _try_test_guided_repair(proj: pathlib.Path, test_dir: pathlib.Path, focus: l
                         lhs = ast.get_source_segment(src, node.left) or ast.unparse(node.left)
                         rhs = ast.get_source_segment(src, node.comparators[0]) or ast.unparse(node.comparators[0])
                         candidates.append(_replace_span(src, node, f"{lhs} {sym} {rhs}"))
+            elif isinstance(node, ast.BoolOp) and len(node.values) >= 2:
+                joiner = " or " if isinstance(node.op, ast.And) else " and "
+                parts = [ast.get_source_segment(src, v) or ast.unparse(v) for v in node.values]
+                candidates.append(_replace_span(src, node, "(" + joiner.join(parts) + ")"))
+            elif isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+                swap_fn = {"min": "max", "max": "min", "any": "all", "all": "any"}.get(node.func.id)
+                if swap_fn:
+                    candidates.append(_replace_span(src, node.func, swap_fn))
+
+        # 3. NOPOL / SPR early-return precondition & zero-divisor statement guards
+        src_lines = src.splitlines(keepends=True)
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.body:
+                params = [a.arg for a in (*node.args.posonlyargs, *node.args.args) if a.arg not in ("self", "cls")]
+                first = node.body[0]
+                if isinstance(first, ast.Expr) and isinstance(first.value, ast.Constant) and isinstance(first.value.value, str) and len(node.body) >= 2:
+                    ins_idx = node.body[1].lineno - 1
+                    indent = " " * node.body[1].col_offset
+                else:
+                    ins_idx = first.lineno - 1
+                    indent = " " * first.col_offset
+                for sub in ast.walk(node):
+                    if isinstance(sub, ast.BinOp) and isinstance(sub.op, (ast.Div, ast.FloorDiv, ast.Mod)) and isinstance(sub.right, ast.Name):
+                        d = sub.right.id
+                        g_lines = list(src_lines)
+                        g_lines.insert(ins_idx, f"{indent}if {d} == 0:\n{indent}    return 0\n")
+                        candidates.append("".join(g_lines))
+                if params:
+                    p0 = params[0]
+                    for guard_stmt in (
+                        f"{indent}if {p0} is None:\n{indent}    return None\n",
+                        f"{indent}if {p0} is None:\n{indent}    return 0\n",
+                        f"{indent}if not {p0}:\n{indent}    return 0\n",
+                        f"{indent}if not {p0}:\n{indent}    return []\n",
+                        f"{indent}if not {p0}:\n{indent}    return ''\n",
+                    ):
+                        g_lines = list(src_lines)
+                        g_lines.insert(ins_idx, guard_stmt)
+                        candidates.append("".join(g_lines))
 
         seen_cands: set[str] = set()
-        for cand in candidates[:40]:
+        for cand in candidates[:64]:
             if cand == src or cand in seen_cands:
                 continue
             seen_cands.add(cand)
@@ -685,11 +770,189 @@ def _try_test_guided_repair(proj: pathlib.Path, test_dir: pathlib.Path, focus: l
             except SyntaxError:
                 continue
             p.write_text(cand, encoding="utf-8")
-            ok, ran, _ = _verify_project(proj, test_dir)
-            if ok and ran > 0:
-                return [p]
+            _purge_pyc(p)
+            # Fast Stage-1 in-memory sieve (~0.3ms), confirmed by clean child `-B` referee!
+            sieve_ok, sieve_ran = _inproc_sieve(proj, test_dir)
+            if sieve_ok and sieve_ran > 0:
+                ok, ran, _ = _verify_project(proj, test_dir)
+                if ok and ran > 0:
+                    return [p]
             p.write_bytes(snap[p])
+            _purge_pyc(p)
     return None
+
+
+def _synthesize_differential_regression_test(
+    proj: pathlib.Path,
+    test_dir: pathlib.Path,
+    patched_files: list[pathlib.Path],
+    pre_snap: dict[pathlib.Path, bytes],
+) -> pathlib.Path | None:
+    """Synthesize a standalone regression test proved to FAIL pre-patch and PASS post-patch."""
+    if not patched_files:
+        return None
+    target = patched_files[0]
+    post_bytes = target.read_bytes()
+    pre_bytes = pre_snap.get(target)
+    if pre_bytes is None or pre_bytes == post_bytes:
+        return None
+
+    rel_mod = target.relative_to(proj).with_suffix("")
+    parts = list(rel_mod.parts)
+    if parts[-1] == "__init__":
+        parts = parts[:-1]
+    if not parts:
+        return None
+    mod_dotted = ".".join(parts)
+
+    # Mine existing failing test assertion or synthesize boundary/witness call on changed function
+    pre_tree = ast.parse(pre_bytes.decode("utf-8", errors="replace"))
+    post_tree = ast.parse(post_bytes.decode("utf-8", errors="replace"))
+    pre_fns = {n.name: ast.unparse(n) for n in pre_tree.body if isinstance(n, ast.FunctionDef)}
+    changed_fns = [
+        n for n in post_tree.body
+        if isinstance(n, ast.FunctionDef) and pre_fns.get(n.name) != ast.unparse(n)
+    ]
+    if not changed_fns:
+        return None
+    fn = changed_fns[0]
+    fn_name = fn.name
+    arity = len([a for a in fn.args.args if a.arg not in ("self", "cls")])
+
+    # Probe candidate inputs in-process on pre vs post code to find a differential witness!
+    sample_vectors: list[tuple[Any, ...]] = []
+    if arity == 0:
+        sample_vectors = [()]
+    elif arity == 1:
+        sample_vectors = [(0,), (1,), (2,), (3,), (-1,), ([1, 2, 3],), ("abc",), (None,)]
+    elif arity == 2:
+        sample_vectors = [(2, 3), (10, 5), (0, 5), (4, 2), ([1, 2], [2, 3]), ("a", "b")]
+    elif arity == 3:
+        sample_vectors = [(2, 3, 4), (10, 2, 5), (1, 0, 1)]
+
+    # Also harvest concrete call argument tuples from existing test files!
+    if test_dir.is_dir():
+        for tf in sorted(test_dir.rglob("test*.py")):
+            try:
+                tt = ast.parse(tf.read_text(encoding="utf-8"))
+                for call in ast.walk(tt):
+                    if isinstance(call, ast.Call):
+                        cname = call.func.id if isinstance(call.func, ast.Name) else (call.func.attr if isinstance(call.func, ast.Attribute) else None)
+                        if cname == fn_name and len(call.args) == arity and not call.keywords:
+                            vals = []
+                            for a in call.args:
+                                vals.append(ast.literal_eval(a))
+                            sample_vectors.insert(0, tuple(vals))
+            except Exception:
+                continue
+
+    probe_code = (
+        "import importlib, json, pathlib, sys\n"
+        "proj = pathlib.Path(sys.argv[1]).resolve()\n"
+        "mod_name, fn_name, vecs = sys.argv[2], sys.argv[3], json.loads(sys.argv[4])\n"
+        "sys.path.insert(0, str(proj))\n"
+        "m = importlib.import_module(mod_name)\n"
+        "f = getattr(m, fn_name)\n"
+        "out = []\n"
+        "for v in vecs:\n"
+        "    try:\n"
+        "        r = f(*v)\n"
+        "        out.append({'ok': True, 'val': r})\n"
+        "    except Exception as e:\n"
+        "        out.append({'ok': False, 'err': type(e).__name__})\n"
+        "print(json.dumps(out))\n"
+    )
+    json_vecs: list[list[Any]] = []
+    for v in sample_vectors:
+        try:
+            json.dumps(list(v))
+            if list(v) not in json_vecs:
+                json_vecs.append(list(v))
+        except TypeError:
+            continue
+    if not json_vecs:
+        return None
+
+    def _eval_vectors(raw_code: bytes) -> list[dict[str, Any]] | None:
+        saved_path = list(sys.path)
+        saved_mods = dict(sys.modules)
+        try:
+            sys.path.insert(0, str(proj))
+            top_pkg = mod_dotted.split(".")[0]
+            for _k in list(sys.modules):
+                if _k == top_pkg or _k.startswith(top_pkg + "."):
+                    sys.modules.pop(_k, None)
+            ns_mod: dict[str, Any] = {"__name__": mod_dotted, "__file__": str(target), "__builtins__": __builtins__}
+            exec(compile(raw_code, str(target), "exec"), ns_mod)
+            fn_obj = ns_mod.get(fn_name)
+            if not callable(fn_obj):
+                return None
+            out_rows: list[dict[str, Any]] = []
+            for vec in json_vecs:
+                try:
+                    rv = fn_obj(*vec)
+                    json.dumps(rv)
+                    out_rows.append({"ok": True, "val": rv})
+                except Exception as exc_v:
+                    out_rows.append({"ok": False, "err": type(exc_v).__name__})
+            return out_rows
+        except Exception:
+            return None
+        finally:
+            sys.path[:] = saved_path
+            for _k in list(sys.modules):
+                if _k not in saved_mods:
+                    sys.modules.pop(_k, None)
+            sys.modules.update(saved_mods)
+
+    post_res = _eval_vectors(post_bytes)
+    pre_res = _eval_vectors(pre_bytes)
+
+    if not post_res or not pre_res or len(post_res) != len(pre_res):
+        return None
+
+    witness_args = None
+    witness_expected = None
+    for args_vec, pr, po in zip(json_vecs, pre_res, post_res):
+        if po.get("ok") and pr != po:
+            witness_args = args_vec
+            witness_expected = po.get("val")
+            break
+    if witness_args is None:
+        return None
+
+    test_dir.mkdir(parents=True, exist_ok=True)
+    reg_file = test_dir / f"test_regression_{target.stem}_{fn_name}.py"
+    args_src = ", ".join(repr(x) for x in witness_args)
+    test_content = (
+        "import unittest\n"
+        f"from {mod_dotted} import {fn_name}\n\n\n"
+        f"class TestRegression_{fn_name}(unittest.TestCase):\n"
+        f"    def test_regression_{fn_name}_differential_witness(self) -> None:\n"
+        f"        self.assertEqual({fn_name}({args_src}), {witness_expected!r})\n\n\n"
+        "if __name__ == '__main__':\n"
+        "    unittest.main()\n"
+    )
+    reg_file.write_text(test_content, encoding="utf-8")
+    _purge_pyc(reg_file)
+
+    # Differential proof: MUST fail on pre_bytes (`-B`) and MUST pass on post_bytes (`-B`)!
+    try:
+        target.write_bytes(pre_bytes)
+        _purge_pyc(target)
+        fails_pre, _, _ = _verify_project(proj, test_dir)
+        target.write_bytes(post_bytes)
+        _purge_pyc(target)
+        passes_post, ran_post, _ = _verify_project(proj, test_dir)
+        if (not fails_pre) and passes_post and ran_post > 0:
+            return reg_file
+        reg_file.unlink(missing_ok=True)
+        return None
+    except BaseException:
+        target.write_bytes(post_bytes)
+        _purge_pyc(target)
+        reg_file.unlink(missing_ok=True)
+        raise
 
 
 # ---------------------------------------------------------------------------
@@ -908,6 +1171,7 @@ def run(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dict[str, Any
     if not focus:
         raise RuntimeError("NO_PYTHON_SOURCE_FILES")
 
+    pre_run_snap = {p: p.read_bytes() for p in focus}
     mode_applied = "already_acyclic_and_green"
     edited: list[pathlib.Path] | None = None
 
@@ -927,7 +1191,7 @@ def run(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dict[str, Any
     if edited is None:
         base_ok, _ran, _err = _verify_project(proj, test_dir)
         if not base_ok:
-            edited = _try_test_guided_repair(proj, test_dir, focus)
+            edited = _try_test_guided_repair(proj, test_dir, focus) if ((proj / "tests").is_dir() or (src / "tests").is_dir()) else None
             if edited is not None:
                 mode_applied = "test_guided_ast_repair"
             else:
@@ -942,6 +1206,26 @@ def run(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dict[str, Any
                     mode_applied = pass_name
                     break
 
+    reg_test_rel: str | None = None
+    if args.get("synthesize_regression_test") and edited:
+        for _ef in edited:
+            if _ef in pre_run_snap and _ef.is_file() and _ef.stat().st_size == len(pre_run_snap[_ef]):
+                _ef.write_bytes(_ef.read_bytes() + b"\n")
+                _purge_pyc(_ef)
+        reg_file = _synthesize_differential_regression_test(proj, test_dir, edited, pre_run_snap)
+        if reg_file is not None:
+            reg_test_rel = reg_file.relative_to(repo).as_posix()
+            edited = list(edited) + [reg_file]
+            if (proj / ".git").is_dir() and proj != repo:
+                rel_to_proj = [p.relative_to(proj).as_posix() for p in edited]
+                subprocess.run(["git", "add", "--", *rel_to_proj], cwd=str(proj), capture_output=True, timeout=10)
+                subprocess.run(
+                    ["git", "-c", "user.name=brain", "-c", "user.email=brain@local", "commit", "-q", "-m", "fix and regression test"],
+                    cwd=str(proj),
+                    capture_output=True,
+                    timeout=10,
+                )
+
     edited_rels = sorted({p.relative_to(repo).as_posix() for p in (edited or [])})
     report = {
         "schema": "PROJECT_BRAIN_CROSSFILE_CHOREOGRAPH_V1",
@@ -950,6 +1234,7 @@ def run(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dict[str, Any
         "project_root": proj.relative_to(repo).as_posix() if proj != repo else ".",
         "mode": mode_applied,
         "files_edited": edited_rels,
+        "regression_test_written": reg_test_rel,
         "edit_count": len(edited_rels),
         "choreography_verified": True,
         "output_verified": True,

@@ -27,6 +27,43 @@ import pathlib
 SCHEMA = "PROJECT_BRAIN_PYTHON_DEFINITION_COUNT_V1"
 
 _FUNCS = (ast.FunctionDef, ast.AsyncFunctionDef)
+_DEF_COUNT_CACHE: dict[tuple[str, int, int], tuple[int, int, int]] = {}
+
+
+def _count_stmts(stmts: list[ast.stmt]) -> tuple[int, int]:
+    fn_c = 0
+    cls_c = 0
+    stack: list[list[ast.stmt]] = [stmts]
+    while stack:
+        block = stack.pop()
+        for node in block:
+            if isinstance(node, _FUNCS):
+                fn_c += 1
+                stack.append(node.body)
+            elif isinstance(node, ast.ClassDef):
+                cls_c += 1
+                stack.append(node.body)
+            else:
+                body = getattr(node, "body", None)
+                if isinstance(body, list):
+                    stack.append(body)
+                orelse = getattr(node, "orelse", None)
+                if isinstance(orelse, list) and orelse:
+                    stack.append(orelse)
+                finalbody = getattr(node, "finalbody", None)
+                if isinstance(finalbody, list) and finalbody:
+                    stack.append(finalbody)
+                handlers = getattr(node, "handlers", None)
+                if isinstance(handlers, list):
+                    for h in handlers:
+                        if isinstance(getattr(h, "body", None), list):
+                            stack.append(h.body)
+                cases = getattr(node, "cases", None)
+                if isinstance(cases, list):
+                    for c in cases:
+                        if isinstance(getattr(c, "body", None), list):
+                            stack.append(c.body)
+    return fn_c, cls_c
 
 
 def _safe_root(repo: pathlib.Path, raw) -> pathlib.Path:
@@ -63,19 +100,52 @@ def run(args, root):
     classes = 0
     scanned = 0
     unparseable = 0
+    import pickle, tempfile
+    disk_cache_path = pathlib.Path(tempfile.gettempdir()) / (
+        "brain_def_count_v1_" + hashlib.sha256(str(source_root).encode("utf-8")).hexdigest()[:16] + ".pkl"
+    )
+    if not _DEF_COUNT_CACHE and disk_cache_path.is_file():
+        try:
+            loaded = pickle.loads(disk_cache_path.read_bytes())
+            if isinstance(loaded, dict):
+                _DEF_COUNT_CACHE.update(loaded)
+        except Exception:
+            pass
+    cache_dirty = False
     for path in _files(source_root):
         scanned += 1
         try:
-            tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"),
-                             filename=str(path))
-        except (SyntaxError, ValueError):
+            st = path.stat()
+            ckey = (str(path), st.st_mtime_ns, st.st_size)
+        except OSError:
             unparseable += 1
             continue
-        for node in ast.walk(tree):
-            if isinstance(node, _FUNCS):
-                functions += 1
-            elif isinstance(node, ast.ClassDef):
-                classes += 1
+        hit = _DEF_COUNT_CACHE.get(ckey)
+        if hit is not None:
+            f_i, c_i, u_i = hit
+            functions += f_i
+            classes += c_i
+            unparseable += u_i
+            continue
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"),
+                             filename=str(path))
+            f_i, c_i = _count_stmts(tree.body)
+            u_i = 0
+        except (SyntaxError, ValueError):
+            f_i, c_i, u_i = 0, 0, 1
+        if len(_DEF_COUNT_CACHE) > 8192:
+            _DEF_COUNT_CACHE.clear()
+        _DEF_COUNT_CACHE[ckey] = (f_i, c_i, u_i)
+        cache_dirty = True
+        functions += f_i
+        classes += c_i
+        unparseable += u_i
+    if cache_dirty and scanned >= 32:
+        try:
+            disk_cache_path.write_bytes(pickle.dumps(_DEF_COUNT_CACHE, protocol=pickle.HIGHEST_PROTOCOL))
+        except Exception:
+            pass
 
     total = functions + classes
     report = {

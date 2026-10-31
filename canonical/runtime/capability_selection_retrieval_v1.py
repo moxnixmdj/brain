@@ -522,6 +522,7 @@ _COMPUTED_ANSWER_DELIVERY_RE = re.compile(
     r"|(?:its|their|the)\s+(?:name|test\s+name|function\s+name|symbol\s+name|"
     r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
     r"number|count|result|results|answer|value|values|"
+    r"(?:repair\s+)?report|receipt|index|output|"
     r"file\s+and\s+line|path\s+and\s+line|line\s+and\s+file))"
     r"\s+(?:to|into|in|at)\s+\S+\s*[.!?]?\s*$",
     re.IGNORECASE,
@@ -657,7 +658,7 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     if (
         not is_computed_answer_delivery(goal)
         and re.search(
-            r"\b(?:(?:fix|repair)\s+(?:the\s+(?:code|bug|race|circular|import|package|module|function)|it\b)"
+            r"\b(?:(?:fix|repair)\s+(?:the\s+(?:python\s+source|source|file|code|bug|race|circular|import|package|module|function)|it\b)"
             r"|remove\s+the\s+sql\s+injection|make\s+\w+\s+linearithmic|migrate\s+it\b)",
             _goal_low,
         )
@@ -788,8 +789,13 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
 _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("rename",), ("rename",)),
     (("extract",), ("extract",)),
+    (("move the function", "move a function", "move function", "relocate the function"), ("move_function",)),
+    (("move the class", "move a class", "move symbol", "relocate symbol"), ("move_symbol",)),
+    (("add a parameter", "add parameter"), ("add_parameter",)),
+    (("add a function", "implement a function", "implement function", "create a function"), ("implement_function_spec",)),
     (("repair", "fix", "broken", "failing"), ("repair", "patch", "choreograph")),
-    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition"), ("choreograph",)),
+    (("bug:", "returns the wrong"), ("repair", "patch", "fault")),
+    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition", "regression test"), ("choreograph",)),
     (("scaffold", "generate test"), ("scaffold", "generate")),
     (("audit", "count the functions"), ("audit",)),
     (("review", "lint", "type-check", "typecheck"), ("review",)),

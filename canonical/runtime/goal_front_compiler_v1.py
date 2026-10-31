@@ -298,7 +298,17 @@ _BOOL_KEYS = {"authoritative"}
 _ARGV_KEYS = {"test_argv"}
 _JSON_OR_TEXT_KEYS = {"spec", "objective"}
 _KV_KEYS = {"variables"}
-# The keys that ASK for a version, so a bare version token is their value and not a name
+_WORD_PLURAL_RE_CACHE: dict[str, re.Pattern[str]] = {}
+_VERSION_TOKEN_FIND_RE = re.compile(r"\bv(\d+)\b", re.IGNORECASE)
+
+
+def _word_plural_re(w: str) -> re.Pattern[str]:
+    key = w.lower()
+    pat = _WORD_PLURAL_RE_CACHE.get(key)
+    if pat is None:
+        pat = re.compile(r"\b" + re.escape(key) + r"s?\b", re.IGNORECASE)
+        _WORD_PLURAL_RE_CACHE[key] = pat
+    return pat
 # fragment.  Measured over the live registry: 55 distinct input keys, and exactly one of
 # them denotes a version - `version_field` on `web.release.verify.independent_http`.
 _VERSION_KEYS = {"version_field", "version"}
@@ -467,12 +477,15 @@ def request_states_the_capability_name(text: str, cid: str) -> bool:
         # generator documents this rule for the retrieval path: "the version is
         # part of the name, because the retrieval path separates a capability's
         # version siblings only when the request states the version."
-        stated = re.findall(r"\bv(\d+)\b", prose, re.IGNORECASE)
+        prose_low = prose.lower()
+        if any(w.lower() not in prose_low for w in words):
+            return False
+        stated = _VERSION_TOKEN_FIND_RE.findall(prose)
         if stated and sorted("v" + x for x in stated) != sorted(stem_versions):
             return False
         last = -1
         for w in words:
-            m = re.search(r"\b" + re.escape(w) + r"s?\b", prose, re.IGNORECASE)
+            m = _word_plural_re(w).search(prose)
             if m is None or m.start() < last:
                 return False
             last = m.end()
@@ -1011,6 +1024,29 @@ _PROVED_BY_THE_TREE = frozenset({
     "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
     "PATH_DIR_FROM_STATED_FILE_PARENT",
     "PATH_DIR_COMMON_TO_STATED_FILES",
+    "MODULE_UNIQUE_SYMBOL_DEF_IN_STATED_DIR",
+    "QUALNAME_UNIQUE_SYMBOL_DEF_IN_STATED_DIR",
+    "PATH_DIR_FROM_STATED_SOURCE_DIR",
+    "DIFF_PATH_MATERIALIZED_FROM_STATED_GIT_TREE",
+    "ANCHOR_PATH_FROM_STATED_GIT_TREE",
+    "WORKTREE_PATH_FROM_STATED_GIT_TREE",
+    "CHANGED_PATHS_FROM_STATED_GIT_TREE",
+    "SOURCE_ROOT_FROM_STATED_GIT_TREE",
+    "REGRESSION_TEST_REQUESTED",
+    "MOVE_SYMBOL_STATED",
+    "MOVE_SOURCE_MODULE_STATED",
+    "MOVE_TARGET_MODULE_STATED",
+    "MOVE_SOURCE_ROOT_FROM_SOURCE_MODULE",
+    "ADD_PARAMETER_NAME_STATED",
+    "ADD_PARAMETER_DEFAULT_STATED",
+    "SPEC_FUNCTION_NAME_STATED",
+    "SPEC_SIGNATURE_STATED",
+    "SPEC_TARGET_MODULE_STATED",
+    "SPEC_RETURN_EXPR_STATED",
+    "SPEC_SOURCE_ROOT_FROM_TARGET_MODULE",
+    "SPEC_INIT_PATH_STATED",
+    "SPEC_EXPORT_REQUESTED",
+    "SPEC_TEST_PATH_STATED",
 })
 
 

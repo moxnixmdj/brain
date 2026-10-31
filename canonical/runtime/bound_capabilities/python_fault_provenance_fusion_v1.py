@@ -17,12 +17,21 @@ def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
     p.parent.mkdir(parents=True, exist_ok=True); return p
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
-    reg=json.loads((repo/"canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text())
+    from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import (
+        analyze_python_static_soundness,
+        load_active_bound_registry,
+    )
+    reg=load_active_bound_registry(repo)
+    _static_check=None
+    if args.get("source_root"):
+        _sr=(repo/str(args["source_root"])).resolve()
+        if (_sr==repo or repo in _sr.parents) and _sr.exists():
+            _static_check=analyze_python_static_soundness(repo, _sr)
     required=REQUIRES
     found={r: (r in {p for m in reg["capabilities"].values() for p in m.get("provides",[])}) for r in required}
     # also verify the two producer caps are present
     producers=["python.fault.localize.dynamic.dataflow.v1","python.fault.provenance.interprocedural.value.v1"]
     producers_found={c: c in reg["capabilities"] for c in producers}
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":producers_found,"fusion":"symbol_ranked × provenance_boost → fused hypothesis table","verified":all(found.values()) and all(producers_found.values()),"model_dependency_count":0,"incremental_spend_usd":0}
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":producers_found,"fusion":"symbol_ranked × provenance_boost → fused hypothesis table","verified":all(found.values()) and all(producers_found.values()),"model_dependency_count":0,"static_soundness":_static_check,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
     return {"adapter":"python_fault_provenance_fusion_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":artifact["verified"],"verified":artifact["verified"],"found":found,"model_dependency_count":0,"incremental_spend_usd":0}

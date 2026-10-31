@@ -54,6 +54,14 @@ SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
 
 _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # (goal triggers, registry-keyword terms to enumerate candidates, required effect token in cid)
+    (("move the function", "move the class", "move symbol", "relocate function", "relocate class"),
+     ("move_symbol", "relocate symbol"), "move_symbol"),
+    (("add a parameter", "add parameter", "new parameter"),
+     ("add_parameter", "signature evolution"), "add_parameter"),
+    (("add a function", "implement a function", "implement function", "create a function"),
+     ("implement_function_spec", "function specification"), "implement_function_spec"),
+    (("regression test that would have caught", "add a regression test"),
+     ("python.tests.regression.synthesized",), "choreograph"),
     (("caller", "who calls", "call site", "call graph", "find every call"),
      ("caller", "call graph", "who calls"), "symbol"),
 )
@@ -63,6 +71,8 @@ _FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration
 def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
     low = str(goal or "").lower()
     for triggers, terms, token in _FAMILIES:
+        if token == "symbol" and ("update every caller" in low or "rename " in low):
+            continue
         if any(t in low for t in triggers):
             return terms, token
     return None
@@ -78,7 +88,8 @@ def is_swe_request(goal: str) -> bool:
     return _family_terms(goal) is not None
 
 
-def _execution_template(entry: Mapping[str, Any], removed: set[str]) -> dict[str, Any]:
+def _execution_template(entry: Mapping[str, Any], removed: set[str],
+                        extra_inputs: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Copy the adapter's declared template, dropping ONLY adapter-defaulted
     ``${input.*}`` placeholders.  Slots with a bound value (including derived
     ones) are kept so the adapter still receives them at run time."""
@@ -88,24 +99,24 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str]) -> dict[str
         value = args[key]
         if key in removed and isinstance(value, str) and "${input." in value:
             args.pop(key, None)
+    if extra_inputs and extra_inputs.get("synthesize_regression_test") is True:
+        args["synthesize_regression_test"] = True
     template["args"] = args
     return template
 
 
 def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any]) -> str | None:
-    """If ``output_path`` was bound onto a stated source file, relocate it to a
+    """If ``output_path`` was bound onto a stated source/test file, relocate it to a
     fresh report path in the stated source directory.  Never overwrite a source.
-
-    Evidence: the stated source directory (or the parent of the single stated
-    source file).  Deterministic name; the promised-artifact gate independently
-    checks that the file is non-empty, so inventing a passing path proves nothing.
     """
     stated = set(derivation.stated_existing_files(goal, root))
     current = inputs.get("output_path")
-    if not isinstance(current, str) or current not in stated:
+    if not isinstance(current, str):
         return None
-    # Only a file the sentence treats as code is a dangerous output target.
-    if not current.endswith((".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb")):
+    is_code_suffix = current.endswith((".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb"))
+    if not is_code_suffix:
+        return None
+    if current not in stated and not current.endswith(".py"):
         return None
     source_root = inputs.get("source_root")
     if isinstance(source_root, str) and source_root and (root / source_root).is_dir():
@@ -129,6 +140,16 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
     """
     from canonical.runtime import goal_front_compiler_v1 as front
     prose = front.prose_only(goal).lower()
+    if re.search(r"\b(?:find\s+every\s+caller|who\s+calls)\b", prose):
+        if not any("symbol" in str(c).lower() for c in capability_ids):
+            return "R10_CALLER_QUERY_EFFECT_UNSERVED"
+    if re.search(r"\badd\s+(?:a\s+)?regression\s+test\b", prose) and re.search(r"\b(?:fix|repair)\b", prose):
+        has_reg_cap = any(
+            (((registry.get(str(c)) or {}).get("action_template") or {}).get("args") or {}).get("synthesize_regression_test") is True
+            for c in capability_ids
+        )
+        if not has_reg_cap:
+            return "R10_REGRESSION_TEST_EFFECT_UNSERVED"
     imperative = re.search(
         r"(?:^|[.;\n]|\bthen\b|\band\b)\s*"
         r"(?:(?:please|first|next)\s+|(?:can|could|would)\s+you\s+(?:please\s+)?)?"
@@ -146,7 +167,7 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
         return None
     # These are actual registry effect namespaces, not keyword relevance or id
     # substrings such as 'patch' (which could mean a report-only patch search).
-    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.')
+    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.', '.feature.implement.')
     for cid in capability_ids:
         entry = registry.get(str(cid)) or {}
         if any(any(part in str(effect) for part in material)
@@ -214,12 +235,11 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         except Exception:
             continue
         if decision.get("admitted") and decision.get("specific"):
-            admitted.append((cid, dict(decision.get("inputs") or {})))
+            if token in cid.lower():
+                admitted.append((cid, dict(decision.get("inputs") or {})))
     if len(admitted) != 1:
         return None  # ambiguous / none -> fail closed
     cid, inputs = admitted[0]
-    if token not in cid.lower():
-        return None  # effect-inconsistent -> no false PASS
     return cid, inputs
 
 
@@ -292,7 +312,7 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
             inputs["module"] = mod[len(sr.rstrip("/")) + 1:]
 
         exec_entry = dict(entry)
-        exec_entry["action_template"] = _execution_template(entry, removed)
+        exec_entry["action_template"] = _execution_template(entry, removed, inputs)
         admissible[cid] = exec_entry
 
         # Prefer the real compiled shape when the lexical compiler can produce
@@ -308,10 +328,11 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
                 "score": 0, "match_evidence": {}, "initial_facts": {},
                 "finish_summary": "RAW_GOAL_COMPLETE",
             }
+        compiled["capabilities"] = [cid]
         compiled["selected_capability"] = cid
         compiled["inputs"] = inputs
         compiled["compiler_mode"] = "SWE_TYPED_PLAN_V1"
-        compiled.setdefault("target_effects", list(entry.get("provides") or []) or [cid])
+        compiled["target_effects"] = list(entry.get("provides") or []) or [cid]
         compiled.pop("capability_dag", None)
         compiled.pop("controller_actions", None)
         return (registry, admissible, compiled)

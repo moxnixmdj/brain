@@ -331,7 +331,13 @@ def signature(entry: Mapping[str, Any]) -> dict[str, str]:
 
 
 def load_registry(path: str | Path | None = None) -> dict[str, Any]:
-    return json.loads(Path(path or REGISTRY).read_text(encoding="utf-8"))["capabilities"]
+    p = Path(path or REGISTRY)
+    caps = dict(json.loads(p.read_text(encoding="utf-8"))["capabilities"])
+    if path is None:
+        snap = p.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+        if snap.is_file() and snap != p:
+            caps.update(json.loads(snap.read_text(encoding="utf-8")).get("capabilities") or {})
+    return caps
 
 
 def signatures(registry: Mapping[str, Any] | None = None) -> dict[str, dict[str, str]]:

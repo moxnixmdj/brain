@@ -98,11 +98,18 @@ def _binder():
 
 
 def load_registry():
-    doc = json.loads((ROOT / REGISTRY_PATH).read_text(encoding="utf-8"))
+    reg_file = ROOT / REGISTRY_PATH
+    snap = reg_file.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+    txt = reg_file.read_text(encoding="utf-8") if reg_file.is_file() else ""
+    if not txt.lstrip().startswith("{") and snap.is_file():
+        txt = snap.read_text(encoding="utf-8")
+    doc = json.loads(txt)
     caps = doc.get("capabilities")
     if not isinstance(caps, dict) or not caps:
         raise RuntimeError("REGISTRY_INVALID")
     caps = dict(caps)
+    if snap.is_file():
+        caps.update(json.loads(snap.read_text(encoding="utf-8")).get("capabilities") or {})
     # CAPABILITIES THE MACHINE ADMITTED ITSELF.
     #
     # Union, not modification: a forged capability stands or falls on the

@@ -135,17 +135,20 @@ def _sha(value: Any) -> str:
 
 def _load_registry() -> tuple[bytes, Mapping[str, Any], Mapping[str, Any]]:
     target = REGISTRY_PATH
+    snap = target.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
     raw = target.read_bytes()
-    if raw[:1] == b"@":
-        snap = target.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
-        if snap.is_file():
-            raw = snap.read_bytes()
-    doc = json.loads(raw.decode("utf-8"))
-    if not isinstance(doc, Mapping) or doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
+    if raw[:1] == b"@" and snap.is_file():
+        raw = snap.read_bytes()
+    doc = dict(json.loads(raw.decode("utf-8")))
+    if doc.get("schema") not in ("PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1", "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1"):
         raise BoundExecutionError("BOUND_CAPABILITY_REGISTRY_INVALID")
-    caps = doc.get("capabilities")
-    if not isinstance(caps, Mapping):
+    caps = dict(doc.get("capabilities") or {})
+    if snap.is_file() and target == REGISTRY_PATH:
+        sdoc = json.loads(snap.read_text(encoding="utf-8"))
+        caps.update(sdoc.get("capabilities") or {})
+    if not isinstance(caps, Mapping) or not caps:
         raise BoundExecutionError("BOUND_CAPABILITY_REGISTRY_CAPABILITIES_INVALID")
+    doc["capabilities"] = caps
     return raw, doc, caps
 
 

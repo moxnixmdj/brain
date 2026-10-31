@@ -287,7 +287,20 @@ def run(args, root):
     originals.setdefault(dst_path, dst_path.read_bytes())
     src_path.write_text(src_new, encoding="utf-8")
     dst_now = dst_path.read_text(encoding="utf-8")
-    dst_new = dst_now.rstrip("\n") + "\n\n\n" + block
+    dst_tree_now = ast.parse(dst_now, filename=str(dst_path))
+    dst_scope_now = _module_scope(dst_tree_now)
+    src_defs_after = _module_scope(ast.parse(src_new, filename=str(src_path)))
+    def_locals = {n.id for n in ast.walk(definition) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)}
+    def_locals.update(a.arg for a in list(definition.args.posonlyargs) + list(definition.args.args) + list(definition.args.kwonlyargs))
+    if definition.args.vararg:
+        def_locals.add(definition.args.vararg.arg)
+    if definition.args.kwarg:
+        def_locals.add(definition.args.kwarg.arg)
+    def_used = {n.id for n in ast.walk(definition) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)}
+    needed_helpers = sorted((def_used - def_locals - {name} - dst_scope_now) & src_defs_after)
+    helper_imp = f"from {src_module} import {', '.join(needed_helpers)}\n" if needed_helpers else ""
+    dst_base = (helper_imp + dst_now) if helper_imp else dst_now
+    dst_new = dst_base.rstrip("\n") + "\n\n\n" + block
     try:
         ast.parse(dst_new, filename=str(dst_path))
     except SyntaxError as exc:

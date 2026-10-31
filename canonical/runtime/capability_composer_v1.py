@@ -138,7 +138,14 @@ def verified_emits_report(
 # --------------------------------------------------------------------------- #
 def load_registry(path: str | Path | None = None) -> dict[str, Any]:
     p = Path(path) if path else REGISTRY
-    return json.loads(p.read_text(encoding="utf-8"))["capabilities"]
+    snap = p.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+    txt = p.read_text(encoding="utf-8") if p.is_file() else ""
+    if path is None and not txt.lstrip().startswith("{") and snap.is_file():
+        txt = snap.read_text(encoding="utf-8")
+    caps = dict(json.loads(txt)["capabilities"])
+    if path is None and snap.is_file():
+        caps.update(json.loads(snap.read_text(encoding="utf-8")).get("capabilities") or {})
+    return caps
 
 
 def graph(registry: Mapping[str, Any] | None = None,
