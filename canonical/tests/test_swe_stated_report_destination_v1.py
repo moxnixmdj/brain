@@ -20,10 +20,10 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
 @pytest.fixture
-def project():
+def project(request):
     parent = ROOT / "canonical/astra_runtime/tmp"
     parent.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="stated-report-", dir=parent) as raw:
+    with tempfile.TemporaryDirectory(prefix=getattr(request, "param", "stated-report-"), dir=parent) as raw:
         root = pathlib.Path(raw)
         (root / "m.py").write_text('def f(x):\n    """post: _ == (x <= 3)"""\n    return x < 3\n')
         (root / "test_all.py").write_text(
@@ -96,3 +96,21 @@ def test_destination_role_does_not_belong_to_a_prefix_of_the_path(project, suffi
     # terminates the sentence, whereas a dot followed by an extension does not.
     goal += f" then save the report to {short}."
     assert front._named_output_destinations(goal, entry, ("output_path",), ROOT) == {short, longer}
+
+
+@pytest.mark.parametrize("project", [
+    "stated-report-v2-", "stated-report-v6ns-", "stated-report-v17-",
+], indirect=True)
+def test_path_version_tokens_do_not_request_a_different_capability(project):
+    root, goal = project
+    plan = typed.build_plan(goal, ROOT)
+    assert plan is not None
+    assert plan[2]["selected_capability"] == "python.software.repair.measured_acceptance.v1"
+    assert plan[2]["inputs"]["output_path"] == (root / "report.json").relative_to(ROOT).as_posix()
+    result = door.solve({"task_id": "VERSION_IN_PATH_" + uuid.uuid4().hex,
+                         "goal": goal,
+                         "contract_checks": [{"source_path": "m.py", "max_examples": 20}]})
+    assert result["pass"] is True, result
+    assert result["structured_contract_acceptance_complete"] is True, result
+    assert (root / "report.json").is_file()
+    assert (root / "test-executions.txt").read_text() == "executed"

@@ -65,9 +65,17 @@ This evidence does not authorize bypassing the referee. A fresh signed SUCCESS f
 
 ## Late reliability observation
 
-A later 74-case smoke run on the rung-57 integrated registry produced **73 passed, 1 failed, 11.86 s**. The failure was the *initial positive request* in `test_reinspection_rejects_tampered_real_report[different_bounds]`, before tampering: it refused with `CONTRACT_CHECKS_UNBOUND`, selected the measurement-only primary, and did not execute. This resembles the previously documented intermittent false refusal; this work does **not** claim to have explained or eliminated it.
+A later 74-case smoke run on the rung-57 integrated registry produced **73 passed, 1 failed, 11.86 s**. The failure was the *initial positive request* in `test_reinspection_rejects_tampered_real_report[different_bounds]`, before tampering: it refused with `CONTRACT_CHECKS_UNBOUND`, selected the measurement-only primary, and did not execute. At that stage the refusal remained unexplained; no claim of elimination was made.
 
 An additional 80-case pure-planning probe did not reproduce the refusal. A subsequent **64/64 actual positive public requests passed in 50.455 s** on fresh temporary sources, but that passing probe does not cancel the failed smoke observation or prove the flake fixed. No speculative routing change or outcome-tolerant assertion was introduced to make it disappear.
+
+### Deterministic version-in-data diagnosis and repair
+
+A later 326-case integrated run produced **325 passed, 1 failed, 12 subtests passed, 94.09 s**. The failure was `test_typed_binding_preserves_stated_report_path[False-False]` on a temporary directory ending `stated-report-v6ns4f4k`. Recreating that exact owned source/test fixture reproduced the refusal without executing or mocking the planner. A read-only Python trace showed F27 interpreting the directory's `v6` three times as requested capability versions and excluding the actual v1 repair capability.
+
+Three deterministic fresh-directory controls (`v2`, `v6ns`, `v17`) all failed before the fix. The repair reuses `goal_front_compiler_v1.prose_only` at the existing F27 version boundary: task-data paths, URLs and quoted payloads cannot request a different capability version. Actual explicit prose versions still exclude their siblings. No rank threshold, registry entry, adapter verdict or test assertion was weakened.
+
+Afterward the exact previously failing path produced a real typed plan. The complete destination module passed **16/16 in 5.29 s**, including actual public repairs on all three version-bearing paths. Explicit-version/data-boundary controls passed **7/7 in 0.52 s**. This establishes and fixes the captured version-in-path cause, not every possible false refusal; the earlier pre-tamper refusal lacks sufficient captured input to assign its cause definitively.
 
 ## Limits
 
