@@ -6789,6 +6789,239 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-RENAMESYM-001.json"
       }
+    },
+    "python.refactor.test_scaffold.fusion.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.test_scaffold.fusion.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_refactor_test_scaffold_fusion_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "refactor",
+        "scaffold",
+        "transformation"
+      ],
+      "limitations": [
+        "Stdlib + tree_sitter, no model"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.transformation.fused.verified",
+        "python.edit.primitive.fused"
+      ],
+      "requires": [
+        "python.refactor.rename_parameter",
+        "python.tests.generate.scaffold",
+        "python.source.audit"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_refactor_test_scaffold_fusion_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-REFACTOR-TEST-SCAFFOLD-FUSION-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_REFACTOR_TEST_SCAFFOLD_FUSION_V1_V1.json"
+      }
+    },
+    "python.repo.diff_apply_full_testgate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "capability_id": "python.repo.diff_apply_full_testgate.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repo_diff_apply_full_testgate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repo",
+        "diff",
+        "apply",
+        "full",
+        "test",
+        "suite",
+        "gate",
+        "integration",
+        "pre-merge",
+        "pytest",
+        "anchor",
+        "regression",
+        "pull request",
+        "pr"
+      ],
+      "limitations": [
+        "needs git on PATH (git apply --check then --apply); absent -> GIT_UNAVAILABLE refusal, loudly, before anything runs.",
+        "test discovery is the pytest filename convention (test_*.py / *_test.py); suites named otherwise are not discovered and an empty suite is a refusal, not a pass.",
+        "scratch apply is single-commit text apply; binary diffs and mode-change hunks are out of v1 scope (git apply refuses them as DIFF_DOES_NOT_APPLY).",
+        "runtime verdicts inherit pytest's own environment sensitivity; the gate reports the pytest verdict honestly rather than interpreting it."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repo.diff_apply_full_testgate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "complete",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "tests_discovered",
+        "tests_failed",
+        "verified"
+      ],
+      "source": {
+        "module": "git",
+        "type": "system_tool",
+        "version_family": ">=2.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-APPLYGATE-001",
+        "observed_effect": {
+          "blind_spot_closed": "rename-only diff: static triage PASS, this gate FAIL with tests/test_core.py named -- the measured reason this capability exists",
+          "crown": "natural-language issue -> orchestrator -> static diff triage -> this anchored full-suite apply gate",
+          "deterministic": "applygate artifact byte-identical on rerun; anchor tree hash-identical before/after",
+          "golden": "gate PASS, 1 test file green, full 4-stage chain 474-538 ms",
+          "sabotage_both": "unused-import edit: F401 blocks statically AND this gate fails at runtime"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-APPLYGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-APPLYGATE-001.json"
+      }
+    },
+    "python.repo.pr_realize.v1": {
+      "action_template": {
+        "args": {
+          "apply_directory": "${input.apply_directory}",
+          "base_branch": "${input.base_branch}",
+          "branch_name": "${input.branch_name}",
+          "capability_id": "python.repo.pr_realize.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "pr_intent_path": "${input.pr_intent_path}",
+          "repo_path": "${input.repo_path}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "push_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repo_pr_realize",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repo",
+        "pull request",
+        "pr",
+        "realize",
+        "forge",
+        "push",
+        "branch",
+        "commit",
+        "ship",
+        "deploy",
+        "git",
+        "verify",
+        "ls-remote"
+      ],
+      "limitations": [
+        "pushes to the repo's configured origin only; forge PR-OPEN (the web/API step after the push) is deliberately out of v1 scope -- the branch on the forge with a verified sha IS the realized intent.",
+        "commit identity and dates are pinned inputs so the sha is a pure content function; a rerun of the same world is idempotent (already_realized, no force-push) and post-rerun receipts are byte-identical.",
+        "staging is restricted to diff-touched paths; crown bookkeeping files (the diff itself, intents, receipts) never enter the commit.",
+        "requires git an origin remote; bogus diffs, empty diffs, non-git trees, and branch-name injection are all named pre-action refusals; a remote sha mismatch after push fails the receipt loudly."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repo.pr_realize"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "already_realized",
+        "branch_name",
+        "complete",
+        "gate",
+        "head_sha",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "push_verified",
+        "pushed",
+        "remote_ref",
+        "verified"
+      ],
+      "source": {
+        "module": "git",
+        "type": "system_tool",
+        "version_family": ">=2.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-REALIZE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrate -> six review gates -> THIS CAPABILITY ships the result: branch push verified by ls-remote sha equality",
+          "golden": "remote ref crown/GH-9900-rename == head_sha 7a7e8438f..., all six review gates PASS, full loop ~1.9 s",
+          "hermetic": "local bare repo as origin: full push/verify semantics, zero network",
+          "idempotent": "rerun: identical head sha, already_realized=true, no force-push, receipts equal on all post-world rows"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REALIZE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REALIZE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
