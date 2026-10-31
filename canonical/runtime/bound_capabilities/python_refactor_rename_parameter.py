@@ -163,34 +163,34 @@ def _collect_body_renames(fn, name: str, new: str, shadowed: list) -> list:
     return edits
 
 
-def _module_callsites(tree, target_mod: str, target_sym: str,
-                      old: str, is_same_module: bool):
+def _module_callsites(tree, target_mod: str, target_sym: str, old: str, is_same_module: bool, owner_cls: str = ""):
     """Return (edits, unknown_rows, positional_count) of keyword call-site
-    renames (kw.arg == old) to calls resolving to (target_mod, target_sym)."""
-    # import tables
-    binding = {}       # localalias -> (module, attr)
+    renames (kw.arg == old) to calls resolving to (target_mod, target_sym).
+    """
+    binding, inst_vars = {}, ({"self"} if (is_same_module and owner_cls) else set())
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
-            for a in node.names:
-                binding[a.asname or a.name.split(".")[0]] = (a.name, None)
+            for a in node.names: binding[a.asname or a.name.split(".")[0]] = (a.name, None)
         elif isinstance(node, ast.ImportFrom):
-            for a in node.names:
-                binding[a.asname or a.name] = (node.module or "", a.name)
+            for a in node.names: binding[a.asname or a.name] = (node.module or "", a.name)
+        elif owner_cls and isinstance(node, ast.Assign) and isinstance(node.value, ast.Call):
+            cf = node.value.func
+            if (isinstance(cf, ast.Name) and cf.id == owner_cls) or (isinstance(cf, ast.Attribute) and cf.attr == owner_cls):
+                inst_vars.update(t.id for t in node.targets if isinstance(t, ast.Name))
+        elif owner_cls and isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name) and isinstance(node.annotation, ast.Name) and node.annotation.id == owner_cls:
+            inst_vars.add(node.target.id)
 
     def resolves(func) -> bool:
         if isinstance(func, ast.Name):
-            if is_same_module and func.id == target_sym and func.id not in binding:
-                return True
-            hit = binding.get(func.id)
-            return bool(hit and hit == (target_mod, target_sym))
-        if isinstance(func, ast.Attribute):
+            return True if (is_same_module and not owner_cls and func.id == target_sym and func.id not in binding) else bool(binding.get(func.id) == (target_mod, target_sym))
+        if isinstance(func, ast.Attribute) and func.attr == target_sym:
             v = func.value
+            if owner_cls and isinstance(v, ast.Call) and ((isinstance(v.func, ast.Name) and v.func.id == owner_cls) or (isinstance(v.func, ast.Attribute) and v.func.attr == owner_cls)):
+                return True
             if isinstance(v, ast.Name):
+                if owner_cls and v.id in inst_vars: return True
                 hit = binding.get(v.id)
-                # import pkg.core [as c]; from pkg import core
-                return bool(hit and hit[0] == target_mod and
-                            (hit[1] is None or hit[1] == target_mod.split(".")[-1]) and
-                            func.attr == target_sym)
+                return bool(hit and hit[0] == target_mod and (hit[1] is None or hit[1] == target_mod.split(".")[-1]))
         return False
 
     def unknown_receiver(func) -> bool:
@@ -283,7 +283,7 @@ def run(args, root):
                     fn = None
                     break
                 fn = hit[0]
-                found_defs += len(hit)
+                found_defs += (len(hit) if not cursor else 0)
                 if len(hit) > 1:
                     _fail("MULTI_DEFINITION:" + qualname)
                 nodes = fn.body
@@ -304,7 +304,7 @@ def run(args, root):
                           for n in (new,)]
         # call sites everywhere
         e2, unk, posc = _module_callsites(tree, target_mod, parts[-1],
-                                          old, this_mod == target_mod)
+                                          old, this_mod == target_mod, parts[-2] if len(parts) >= 2 else "")
         edits += [(ln, col, o, new) for (ln, col, o) in e2]
         for u in unk:
             unknown_sites.append({"file": rel, **u})
@@ -336,15 +336,14 @@ def run(args, root):
             edit_rows.append({"file": rel, "line": lineno, "from": old_t, "to": new_t})
         path.write_text(text, encoding="utf-8")
 
-    # verification loop: named tests must stay green, else full rollback
+    _tcmd = ([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests) if __import__("importlib.util").util.find_spec("pytest") else ([python_exe, "-B", "-c", "import importlib.util,pathlib,sys,unittest;ok=True\nfor f in sys.argv[1:]:\n p=pathlib.Path(f).resolve();sys.path.insert(0,str(p.parent));sys.path.insert(0,'.');s=importlib.util.spec_from_file_location(p.stem,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);r=unittest.TestResult();unittest.defaultTestLoader.loadTestsFromModule(m).run(r);ok=ok and r.wasSuccessful()\n for k,v in list(vars(m).items()):\n  if k.startswith('test_') and callable(v):v()\nsys.exit(0 if ok else 1)"] + run_tests)
     evidence = {"run_tests": run_tests}
     gate = "PASS"
     if run_tests:
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         try:
-            proc = subprocess.run([python_exe, "-m", "pytest", "-q",
-                                   "-p", "no:cacheprovider"] + run_tests,
+            proc = subprocess.run(_tcmd,
                                   cwd=src_abs, capture_output=True, text=True,
                                   timeout=timeout_s, env=env)
         except subprocess.TimeoutExpired:

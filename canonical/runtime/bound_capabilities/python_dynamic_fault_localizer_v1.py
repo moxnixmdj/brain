@@ -33,16 +33,17 @@ def _safe_dir(repo,raw):
  return p
 def _trace_file_cases(repo,test,timeout,max_events,env=None):
  code=_PATCH.SUITE_RUNNER+r'''import importlib.util,inspect,json,pathlib,runpy,sys,traceback,unittest
-repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); path_cache={}
+repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); path_cache={}; code_rel={}
 def _make_tracer(seen, counter):
  def tr(frame,event,arg):
   if counter[0]>=cap:return None
-  p=_brain_project_file(frame,repo,path_cache)
-  if p is None:return None
-  if event=="line":
-   rel=str(p.relative_to(repo)).replace("\\","/"); key=(rel,frame.f_lineno,frame.f_code.co_name)
-   seen[key]=seen.get(key,0)+1;counter[0]+=1
-  return tr
+  co=frame.f_code; rel=code_rel.get(co,False)
+  if rel is False: p=_brain_project_file(frame,repo,path_cache); rel=(str(p.relative_to(repo)).replace("\\","/") if p is not None else None); code_rel[co]=rel
+  if rel is None:return None
+  def lntr(f,ev,a):
+   if ev=="line": k=(rel,f.f_lineno,co.co_name); c=seen.get(k,0); seen[k]=c+1; counter[0]+=(1 if c<256 else 0); return (lntr if counter[0]<cap and c<1024 else None)
+   return tr(f,ev,a)
+  return lntr
  return tr
 def _pack(ok, seen, counter, tb):
  return {"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":counter[0]}
