@@ -963,7 +963,55 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
                 inputs[key] = module
                 continue
         remaining.append((key, exc))
+    # The typed-admission door already settles exactly this class of key: a
+    # STATED file determines the module it spells, the directory that holds it,
+    # and the symbol the sentence names -- each PROVED against the file's AST
+    # (declared_input_derivation_v1).  Measured: "Move the function line_total
+    # from <b>/app/models.py to <b>/app/service.py" ranked
+    # python.refactor.move_function.v1 first at 34 against 8 for the runner-up,
+    # then the front binder refused it with to_module:not_stated: two doors, one
+    # gate, and only one of them could bind the sentence.  Asking the same
+    # evidence module here is what makes the two doors agree; it can only settle
+    # a key that is still unbound, so every binding that worked before is kept
+    # byte for byte.
+    if remaining:
+        try:
+            from canonical.runtime import declared_input_derivation_v1 as _derivation
+            _evidence = (_derivation.derive(goal, entry or {}, root)
+                         if _derivation.is_swe_request(goal) else {})
+        except Exception:  # noqa: BLE001 - derivation is advisory; a fault keeps the refusal
+            _evidence = {}
+        settled: list[tuple[str, BaseException]] = []
+        for key, exc in remaining:
+            row = _evidence.get(key) or {}
+            value = row.get("value")
+            # Only a value PROVED AGAINST THE TREE is taken here, never one read
+            # off the sentence's word order.  Measured: a blanket hook let
+            # `python.refactor.rename_parameter.v1` bind `old_param` on "Rename the
+            # function line_total to item_total", so a FUNCTION rename was answered
+            # by a parameter renamer -- the same substitution the gate above exists
+            # to stop.  The proofs that survive are the ones whose evidence is a
+            # file this sentence stated.
+            if value is None or str(row.get("rule") or "") not in _PROVED_BY_THE_TREE:
+                settled.append((key, exc))
+                continue
+            inputs[key] = value
+        remaining = settled
     return remaining
+
+
+# Derivations whose value is CHECKED against a stated file (its AST, or the path
+# itself) rather than parsed out of the sentence.  A front-door binding may only
+# rest on one of these.
+_PROVED_BY_THE_TREE = frozenset({
+    "MODULE_FROM_STATED_SOURCE_FILE",
+    "MODULE_FROM_STATED_FROM_PATH",
+    "TARGET_MODULE_FROM_STATED_TO_PATH",
+    "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+    "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
+    "PATH_DIR_FROM_STATED_FILE_PARENT",
+    "PATH_DIR_COMMON_TO_STATED_FILES",
+})
 
 
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):

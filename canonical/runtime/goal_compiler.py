@@ -6527,6 +6527,35 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     json.dumps({"index":index,"subgoal":clause,"rejected_capability":cid},sort_keys=True)
                 )
         runtime_inputs=part["inputs"]
+        # A clause that states no path cannot rebind the subject.  Measured: "The
+        # query in <b>/app/db.py is built with string formatting.  Remove the SQL
+        # injection ..." planned two steps, and the second -- which names no path
+        # at all -- rebound source_root to ".", pointing the repair at the whole
+        # repository.  It then rewrote a module of THIS tree: a sentence about a
+        # fixture edited the machine's own source.
+        if actions and not list(_repo_paths(clause, root)):
+            # (1) The previous step's own subject, when it has one.
+            previous_inputs = (compiled_parts[-1].get("inputs") or {})
+            # (2) Failing that, the subject the SENTENCE stated in another
+            # clause: a repair step may only ever be aimed at the paths the
+            # request itself named, never at the compiler's default ".".
+            # Measured: the second clause of the SQL sentence carries no path,
+            # bound `source_root: "."`, and a run against that plan wrote a
+            # generated test into the REPOSITORY ROOT -- a sentence about a
+            # fixture reached the machine's own tree.
+            stated = [raw for raw, _p in _repo_paths(goal, root)]
+            stated_dirs = sorted({str(pathlib.PurePosixPath(raw).parent) for raw in stated})
+            stated_dir = stated_dirs[0] if len(stated_dirs) == 1 and stated_dirs[0] != "." else None
+            for key, value in list(runtime_inputs.items()):
+                if not str(key).endswith(("_root", "_path", "_paths")):
+                    continue
+                if value not in ("", ".", "./"):
+                    continue
+                inherited = previous_inputs.get(key)
+                if isinstance(inherited, str) and inherited not in ("", ".", "./"):
+                    runtime_inputs[key] = inherited
+                elif stated_dir and str(key).endswith("_root"):
+                    runtime_inputs[key] = stated_dir
         if not isinstance(runtime_inputs,dict):
             # A compiled part with no input mapping is a compiler defect, not a
             # missing value. Fail closed with a named reason: dereferencing it

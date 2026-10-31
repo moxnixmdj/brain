@@ -5549,6 +5549,74 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
     },
+    "python.refactor.move_function.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.move_function.v1",
+          "module": "${input.module}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "symbol": "${input.symbol}",
+          "timeout_s": 60,
+          "to_module": "${input.to_module}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_move_function",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "move a function",
+        "move the function",
+        "move function",
+        "relocate the function",
+        "relocate function",
+        "move symbol",
+        "cross-file relocation",
+        "relocation of a definition"
+      ],
+      "limitations": [
+        "Cuts the definition's own ast span and appends it to the target module; every `from <old> import <name>` is rewritten, and the old and new modules drop it.",
+        "Refuses a target that already defines the name, a same-module move, and any import statement it cannot find verbatim.",
+        "Kept only if the old module no longer defines it, no stale import survives anywhere, and the suite is green; otherwise every original byte is restored."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.move_function",
+        "python.refactor.symbol.relocated"
+      ],
+      "requires": [
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "symbol",
+        "from_module",
+        "to_module",
+        "caller_rewrites",
+        "files_edited",
+        "suite_passed",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_function.py",
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
     "python.refactor.rename_parameter.v1": {
       "action_template": {
         "args": {
@@ -5724,12 +5792,12 @@
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
         "observed_effect": {
-          "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
-          "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
-          "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
-          "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical",
           "determinism": "two pristine worlds -> byte-identical trees and artifacts; string literals and substring-carriers (topper, \"top of \") never edited",
-          "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files"
+          "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files",
+          "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
+          "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
+          "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
+          "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical"
         },
         "pin_green": "18/18 rename-symbol pins green",
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
@@ -7362,13 +7430,13 @@
     "python.software.repair.route.v1": {
       "action_template": {
         "args": {
+          "budget": "${input.budget}",
           "capability_id": "python.software.repair.route.v1",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
-          "test_paths": "${input.test_paths}",
           "test_argv": "${input.test_argv}",
-          "timeout_s": "${input.timeout_s}",
-          "budget": "${input.budget}"
+          "test_paths": "${input.test_paths}",
+          "timeout_s": "${input.timeout_s}"
         },
         "expect": {
           "field": "output_verified",
@@ -8712,12 +8780,12 @@
       "action_template": {
         "args": {
           "capability_id": "python.tests.advance.mutation_kill.v1",
+          "max_mutants": "${input.max_mutants}",
+          "module_name": "${input.module_name}",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
-          "module_name": "${input.module_name}",
           "time_budget_s": "${input.time_budget_s}",
-          "timeout_s": "${input.timeout_s}",
-          "max_mutants": "${input.max_mutants}"
+          "timeout_s": "${input.timeout_s}"
         },
         "expect": {
           "field": "output_verified",
@@ -9012,12 +9080,12 @@
     "python.tests.synthesize.pynguin.v1": {
       "action_template": {
         "args": {
+          "algorithm": "${input.algorithm}",
           "capability_id": "python.tests.synthesize.pynguin.v1",
           "output_path": "${input.output_path}",
+          "search_seed": "${input.search_seed}",
           "source_root": "${input.source_root}",
-          "time_budget_s": "${input.time_budget_s}",
-          "algorithm": "${input.algorithm}",
-          "search_seed": "${input.search_seed}"
+          "time_budget_s": "${input.time_budget_s}"
         },
         "expect": {
           "field": "output_verified",
@@ -9812,10 +9880,10 @@
     "software.review.gate.composer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.review.gate.composer.v1",
           "anchor_path": "${input.anchor_path}",
-          "diff_path": "${input.diff_path}",
           "bench_path": "${input.bench_path}",
+          "capability_id": "software.review.gate.composer.v1",
+          "diff_path": "${input.diff_path}",
           "output_path": "${input.output_path}"
         },
         "expect": {
