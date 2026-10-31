@@ -1028,6 +1028,8 @@ def _nondiscriminating_requires_tokens():
     out = frozenset()
     try:
         path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        if path.is_file() and path.read_bytes()[:1] == b"@":
+            path = path.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
         with open(path, "r", encoding="utf-8") as fh:
             caps = (json.load(fh) or {}).get("capabilities") or {}
         declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]

@@ -27,6 +27,11 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+   "canonical/runtime/astra_runtime.py",
+   "canonical/runtime/live_integrated_brain_v1.py",
+   "canonical/runtime/capability_type_surface_v1.py",
+   "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
    "canonical/runtime/world_probe_v1.py",
    "canonical/runtime/world_binding_v1.py",
    "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
@@ -42,7 +47,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Live SWE execution on 524ebc9 spent ~1.6 s per solve() rescanning unchanged world_probe/world_binding trees, ran python_source_symbol_index sequentially in 19.7 s, evaluated gap_world_before after composed execution, and misrouted anaphoric answer-delivery and imperative/read-only SWE requests.",
- "canonical_base_commit": "524ebc993e0d189c1316af4b9a9f111c8bcaf869",
+ "canonical_base_commit": "3f73327b15f06380bf7225f5e924df8a459891f8",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +57,7 @@
  "expected_parent_frontier_change": "Nine of ten advanced SWE tiers and 23/28 surface SWE tasks execute deterministically at sub-second latency with independent raw_goal_trace_acceptance_v1 re-inspection.",
  "explicit_user_authorization": "Owner standing directive (2026-10-29/30): every listed problem already has a solution somewhere in the repository, its hidden tools or published research; do the optimal fix in the fastest way, only the right way, with no new primitive where an existing mechanism can be wired.",
  "falsification_condition": "FALSIFIED if any of the 5 new/upgraded capability inspectors accepts a tampered report, if source-mutating adapters run on read-only questions or broad repo roots, if MAX_NEW_CAPABILITIES_PER_PR exceeds 3, or if unified model verification drops below 33/33.",
- "governance_change": false,
+ "governance_change": true,
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "intent": "Advance hardcore deterministic SWE capability breadth and sub-second execution speed using pure Python stdlib AST, graph, and git primitives plus independent byte-level acceptance inspectors.",
@@ -74,6 +79,11 @@
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": "The rows' own `provides` tokens as the vocabulary; _close_observations, the existing 'called at every exit' choke point; _fail; the bound registry already loaded by the door; composer_route.route's chain.",
  "progress_evidence_paths": [
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+  "canonical/runtime/astra_runtime.py",
+  "canonical/runtime/live_integrated_brain_v1.py",
+  "canonical/runtime/capability_type_surface_v1.py",
+  "canonical/runtime/verified_bound_capability_execution_adapter_v1.py",
   "canonical/runtime/world_probe_v1.py",
   "canonical/runtime/world_binding_v1.py",
   "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
@@ -86,7 +96,7 @@
   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "524ebc993e0d189c1316af4b9a9f111c8bcaf869",
+  "canonical_base_commit": "3f73327b15f06380bf7225f5e924df8a459891f8",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",

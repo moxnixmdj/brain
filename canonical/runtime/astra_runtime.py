@@ -657,6 +657,8 @@ def _safe_repo_mutation_path(raw):
 
 def _load_bound_capability_registry():
     path=ROOT/"canonical"/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json"
+    if path.is_file() and path.read_bytes()[:1]==b"@":
+        path=path.parent/"BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
     data=readj(path)
     if data.get("schema")!="PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
