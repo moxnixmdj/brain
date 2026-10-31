@@ -3337,6 +3337,212 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json"
       }
+    },
+    "docx.document.create_from_json_record": {
+      "action_template": {
+        "args": {
+          "capability_id": "docx.document.create_from_json_record",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "docx_report_from_json",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "report",
+        "json",
+        "record",
+        "normalized",
+        "field",
+        "value",
+        "table",
+        "create"
+      ],
+      "limitations": [
+        "Consumes exactly one unambiguous structured JSON record containing all requested fields.",
+        "Builds a two-column field/value report by composing the independently verified DOCX producer."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "docx.document.create_from_json_record"
+      ],
+      "requires": [
+        "structured.json.available"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-docx",
+            "sha256": "8dec367f86be44b86bb3c7329ccc6af165854008fd23e185f44500ece39bdb80",
+            "version": "1.1.0+dfsg-2"
+          }
+        ],
+        "pypi_fallback": {
+          "metadata_url": "https://pypi.org/pypi/python-docx/1.2.0/json",
+          "project": "python-docx",
+          "version": "1.2.0",
+          "wheel_filename": "python_docx-1.2.0-py3-none-any.whl",
+          "wheel_sha256": "3fd478f3250fbbbfd3b94fe1e985955737c145627498896a8a6bf81f4baf66c7"
+        },
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "docx.document.verify.intent_ooxml",
+        "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+        "observed_effect": {
+          "output_path": "canonical/astra_runtime/tmp/DOCX_JSON_ROUNDTRIP_VERIFY.docx",
+          "output_sha256": "ebd1ca200e7aed9befb0cdd78ebb099014c289b8774d743e52b0a6e34543dc25",
+          "rows": 4,
+          "title": "Browser Submission Report"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+        "source_record_verified": true
+      }
+    },
+    "docx.document.verify.intent_ooxml": {
+      "action_template": {
+        "args": {
+          "capability_id": "docx.document.verify.intent_ooxml",
+          "path": "${input.docx_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "docx_verify_ooxml_intent",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "word",
+        "verify",
+        "reopen",
+        "independent",
+        "content",
+        "exact"
+      ],
+      "limitations": [
+        "Requires the producer's repository-local raw-intent sidecar beside the DOCX.",
+        "Derives expected semantics from the raw creation goal independently of the producer's parsed document_spec."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "docx.document.verify"
+      ],
+      "requires": [],
+      "source": {
+        "modules": [
+          "zipfile",
+          "xml.etree.ElementTree"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "json_record_extension": {
+          "mission_id": "ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001",
+          "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+          "source_json_reopened": true,
+          "source_record_verified": true
+        },
+        "mission_id": "ASTRA-VERIFY-DOCX-INTENT-CHAIN-001",
+        "observed_effect": {
+          "docx_sha256": "e169aa79677b959917095989d5a7387da0d7b4c385f1ee296b5e09af295f5164",
+          "intent_path": "canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx.intent.json",
+          "paragraphs_ok": true,
+          "table_ok": true,
+          "title_ok": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-INTENT-CHAIN-001__RECEIPT.json"
+      }
+    },
+    "docx.document.verify.ooxml": {
+      "action_template": {
+        "args": {
+          "capability_id": "docx.document.verify.ooxml",
+          "expected": "${input.expected_structure}",
+          "path": "${input.document_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "docx_verify_ooxml",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "docx",
+        "document",
+        "word",
+        "ooxml",
+        "verify",
+        "reopen",
+        "independent",
+        "table"
+      ],
+      "limitations": [
+        "Verifies repository-local DOCX semantic content by parsing word/document.xml with Python stdlib only.",
+        "Checks exact expected title, paragraph strings, and complete table rows."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "docx.document.verify"
+      ],
+      "requires": [],
+      "source": {
+        "modules": [
+          "zipfile",
+          "xml.etree.ElementTree"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001",
+        "observed_effect": {
+          "paragraphs_ok": true,
+          "producer_sha256": "02c358981319f7dbe12dee7431b4ed88633d093db4aa64ed078c715dc7cee4aa",
+          "table_ok": true,
+          "title_ok": true,
+          "verified": true
+        },
+        "producer_independent": true,
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
