@@ -33,7 +33,7 @@
     "route_class": "INTEGRATE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A row that edits a SYMBOL answers a sentence about a PARAMETER",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL admits a row when the sentence supplies its declared inputs, and that contract binds a SIBLING row perfectly: qualname=norm,new_symbol=value is complete -- for a sentence about a parameter. Measured 3/3 on f333567: 'Rename the parameter text to value in the python module <D>/app/models.py.' ran python.refactor.rename_symbol.v1, renamed the FUNCTION, and reported PASS. Six unrelated words ('and save the report to <D>/r.json') made the correct row run.",
   "canonical_base_commit": "57edfa446c33c7b3908b00253e2ee4d056452caf",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
@@ -132,10 +132,13 @@
       ],
       "deletion_first_order_applied": [
         "DELETE",
-        "REUSE",
         "BYPASS",
+        "REUSE",
         "SUBSTITUTE",
-        "CONFIGURE"
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
       ],
       "implementation_still_necessary": true,
       "losing_routes_reason": "Inspecting the file after the fact needs a second oracle per object kind and still passes a wrong edit of the same kind; a route table duplicates the registry's own slot names.",
@@ -418,8 +421,8 @@
       "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
     ],
     "selected_route": "A_YES_OR_NO_QUESTION_IS_ANSWERED_BY_THE_EXIT_STATUS_THE_VERIFIER_ALREADY_ENUMERATED_V1_20261025_V1",
-    "selected_surviving_route": "READ_A_PREMISE_AS_A_PREMISE",
-    "stop_condition": "Stop when both suites are green and the census is not lower.",
+    "selected_surviving_route": "READ_THE_OBJECT_ROLE_AT_ADMISSION_AND_AT_THE_EXIT",
+    "stop_condition": "Stop when both measured sentences answer the stated object and the 28-task census is not lower.",
     "why_selected_route_is_fastest_sufficient": "Two rules in the prose table, placed after the rules for a count and for a line number so those keep their sentences, and one flag on cmp.  The dominant alternative was a new answer type for yes-or-no questions, rejected because the exit status already is that answer and is already enumerated, declared, carried to the adapter and reproduced by the inspector -- building a second mechanism would have added a way to be trusted where none was needed.  Plain `cmp` was rejected on measurement, not preference: on identical files it exits 0 with empty stdout and the adapter raises."
   },
   "refusal_or_stop_condition": "Stop when both measured sentences answer the stated object and the 28-task census is not lower.",
