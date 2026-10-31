@@ -10844,6 +10844,260 @@
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001__text.file.write__AUTO_VERIFY.json"
       }
+    },
+    "web.browser.rendered.capture.chromedriver": {
+      "action_template": {
+        "args": {
+          "capability_id": "web.browser.rendered.capture.chromedriver",
+          "result_path": "${input.result_path}",
+          "screenshot_path": "${input.screenshot_path}",
+          "url": "${input.url}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "browser_chromedriver",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "browser",
+        "web",
+        "rendered",
+        "navigate",
+        "open",
+        "page",
+        "screenshot",
+        "url",
+        "website",
+        "interact",
+        "form",
+        "type",
+        "enter",
+        "select",
+        "choose",
+        "check",
+        "click",
+        "submit"
+      ],
+      "limitations": [
+        "Requires a compatible local Chrome/Chromium binary and Chromedriver.",
+        "Captures one rendered page, visible text, title, final URL, result JSON, and a bounded full-page screenshot.",
+        "Verified interaction extension supports declarative set_text, select_option, check, click, submit, and bounded wait actions."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "web.browser.rendered.capture",
+        "web.browser.rendered.interact"
+      ],
+      "requires": [],
+      "source": {
+        "executable": "chromedriver",
+        "type": "system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "interaction_extension": {
+          "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+          "observed_effect": {
+            "actions_completed": 4,
+            "final_url": "https://httpbin.org/post",
+            "independently_checked_post_submit_state": true,
+            "submitted_customer_name": "PROJECT BRAIN",
+            "submitted_size": "medium",
+            "submitted_topping": "bacon"
+          },
+          "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-BROWSER-INTERACTION-001__RECEIPT.json"
+        },
+        "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+        "observed_effect": {
+          "latest_stable_python3": "3.14.7",
+          "page_title": "Download Python | Python.org",
+          "rendered": true,
+          "screenshot_bytes": 885055,
+          "screenshot_sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b"
+        },
+        "producer_independent_verifier": true,
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
+      }
+    },
+    "web.release.verify.independent_http": {
+      "action_template": {
+        "args": {
+          "capability_id": "web.release.verify.independent_http",
+          "major": "${input.major}",
+          "max_bytes": 3000000,
+          "product": "${input.product}",
+          "result_path": "${input.result_path}",
+          "timeout_s": 30,
+          "version_field": "${input.version_field}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "web_release_verify",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "web",
+        "release",
+        "version",
+        "latest",
+        "stable",
+        "verify",
+        "independent",
+        "official",
+        "http"
+      ],
+      "limitations": [
+        "Verifies semantic versions exposed in an official HTTPS page's visible text.",
+        "Current verified contract targets major.minor.patch release strings and compares against a claimed field in repository-local JSON."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "web.release.verify.current"
+      ],
+      "requires": [
+        "structured.release_claim.available"
+      ],
+      "source": {
+        "modules": [
+          "urllib.request",
+          "html.parser",
+          "gzip"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_reference_evidence": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
+        "mission_id": "ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001",
+        "observed_effect": {
+          "adapter": "web_release_verify",
+          "claimed_string_present": true,
+          "claimed_version": "3.14.7",
+          "final_url": "https://www.python.org/downloads/",
+          "major": "3",
+          "observed_text_evidence": "Python 3.14.7",
+          "observed_version": "3.14.7",
+          "parser": "html.parser",
+          "producer_independent_verifier": true,
+          "product": "Python",
+          "response_bytes": 215042,
+          "source_url": "https://www.python.org/downloads/",
+          "transport": "urllib.request",
+          "verified": true,
+          "version_field": "latest_stable_python3"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001__RESULT.json"
+      }
+    },
+    "xlsx.table.create_from_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "xlsx.table.create_from_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "xlsx_table_xlsxwriter",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "xlsx",
+        "spreadsheet",
+        "workbook",
+        "rows",
+        "columns",
+        "create"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "xlsx.table.create_from_json_records"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "status_value"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-xlsxwriter",
+            "sha256": "234db5c80ba8d2eaf9933a95566f81a86aa01bb15b884f2ee6c932847e58bfd2",
+            "version": "3.1.9-1"
+          }
+        ],
+        "pypi_fallback": {
+          "metadata_url": "https://pypi.org/pypi/xlsxwriter/3.2.9/json",
+          "project": "xlsxwriter",
+          "version": "3.2.9",
+          "wheel_filename": "xlsxwriter-3.2.9-py3-none-any.whl",
+          "wheel_sha256": "9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3"
+        },
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier_package": "python3-openpyxl",
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "xlsx_table_xlsxwriter",
+          "collection_path": [
+            "capabilities"
+          ],
+          "column_count": 5,
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "output_bytes": 6061,
+          "output_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+          "output_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d",
+          "output_verified": true,
+          "row_count": 15,
+          "status_value": "VERIFIED_BOUND_CAPABILITY"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
