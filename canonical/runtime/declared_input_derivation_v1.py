@@ -1157,8 +1157,6 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 out["old_param"] = {"value": old, "rule": "RENAME_OLD_NAME_STATED", "evidence": old}
             if "old_symbol" in keys:
                 out["old_symbol"] = {"value": old, "rule": "RENAME_OLD_NAME_STATED", "evidence": old}
-            if "qualname" in keys and "rename_symbol" in str((entry.get("action_template") or {}).get("args", {}).get("capability_id") or ""):
-                out["qualname"] = {"value": old, "rule": "RENAME_QUALNAME_STATED", "evidence": old}
             for key in ("new_param", "new_symbol", "new_name"):
                 if key in keys:
                     out[key] = {"value": new, "rule": "RENAME_NEW_NAME_STATED", "evidence": new}

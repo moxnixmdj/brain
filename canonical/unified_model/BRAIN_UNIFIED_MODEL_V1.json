@@ -30827,7 +30827,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a20cf8d523bb4db3303af04b815b4f3d733774b1967ba6bacc1ab5d29e53d93c"
+  "value": "deb581538c282a80777a5b8f98b68cfa0ebb8258fd38aead22cc12ba07d730f7"
  },
  "engines": [
   {
@@ -232867,7 +232867,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "8cb0459af4369bd86c9b2179695561f0aa74278a0965f42e8495b1c2a156f093",
+   "sha256": "01e944201599e00731059e99a0d2a51e440d49de9f83784f0417a39f7e4bfdaf",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 20,
    "symbols": [
