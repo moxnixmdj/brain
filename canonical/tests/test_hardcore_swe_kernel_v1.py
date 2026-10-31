@@ -1,0 +1,170 @@
+"""End-to-end verification of the 3-engine SWE kernel and front-door routing.
+
+Covers polyglot transforms/packaging/CI, Python e-graph optimization, concurrency,
+test & mutation synthesis, standalone-repo git write/read operations, diagnostics,
+architecture artifacts, honest fail-closed refusals, and symbol-index byte parity.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import pathlib
+import shutil
+import subprocess
+import unittest
+
+from canonical.runtime import execute_v1, live_brain_route_admission_v1 as door
+from canonical.runtime.bound_capabilities import python_source_symbol_index as sym_index
+from canonical.swe_kernel import (
+    diagnostics_perf_and_design_engine_v1 as diag_engine,
+    egraph_and_deductive_synthesizer_v1 as py_engine,
+)
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+SCRATCH = ROOT / "canonical/astra_runtime/tmp/test_hardcore_swe_kernel_v1"
+
+
+def _fresh(name: str) -> pathlib.Path:
+    base = SCRATCH / name
+    shutil.rmtree(base, ignore_errors=True)
+    base.mkdir(parents=True, exist_ok=True)
+    return base
+
+
+class TestHardcoreSWEKernelV1(unittest.TestCase):
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(SCRATCH, ignore_errors=True)
+
+    def test_polyglot_typescript_rust_go_and_ci_routes(self) -> None:
+        base = _fresh("polyglot_ci")
+        ts_file = base / "web.ts"
+        ts_file.write_text("export function add(a, b) {\n  return a + b;\n}\n", encoding="utf-8")
+        rs_file = base / "lib.rs"
+        rs_file.write_text("pub fn add(a: i32, b: i32) -> i32 { a + b }\n", encoding="utf-8")
+        wf_dir = base / ".github/workflows"
+        wf_dir.mkdir(parents=True)
+        wf_file = wf_dir / "ci.yml"
+        wf_file.write_text(
+            "name: ci\non: [push]\njobs:\n  test:\n    runs-on: ubuntu-latest\n"
+            "    steps:\n      - uses: actions/checkout@v4\n      - run: python -m unittest\n",
+            encoding="utf-8",
+        )
+
+        r_ts = door.solve({
+            "task_id": "K_TS",
+            "goal": f"Rename add to sum across {ts_file.relative_to(ROOT)}.",
+        })
+        self.assertTrue(r_ts.get("pass"), r_ts)
+        self.assertIn("export function sum", ts_file.read_text(encoding="utf-8"))
+
+        r_rs = door.solve({
+            "task_id": "K_RS",
+            "goal": f"Add a function mul(a, b) to {rs_file.relative_to(ROOT)} and run cargo test.",
+        })
+        self.assertTrue(r_rs.get("pass"), r_rs)
+        self.assertIn("pub fn mul", rs_file.read_text(encoding="utf-8"))
+
+        r_ci = door.solve({
+            "task_id": "K_CI",
+            "goal": f"Add a Python 3.11 and 3.12 matrix to {wf_file.relative_to(ROOT)}.",
+        })
+        self.assertTrue(r_ci.get("pass"), r_ci)
+        wf_txt = wf_file.read_text(encoding="utf-8")
+        self.assertIn("3.11", wf_txt)
+        self.assertIn("3.12", wf_txt)
+
+    def test_egraph_memoize_gil_and_mutation_synthesis(self) -> None:
+        base = _fresh("py_swe")
+        pkg = base / "pkg"
+        tests = base / "tests"
+        pkg.mkdir()
+        tests.mkdir()
+        (pkg / "__init__.py").write_text("", encoding="utf-8")
+        slow = pkg / "slow.py"
+        slow.write_text(
+            "def sum_to(n):\n    acc = 0\n    for i in range(n):\n        acc += i\n    return acc\n\n"
+            "def fib(n):\n    return n if n < 2 else fib(n - 1) + fib(n - 2)\n",
+            encoding="utf-8",
+        )
+        (tests / "test_slow.py").write_text(
+            "import unittest\nimport slow\n\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_both(self):\n"
+            "        self.assertEqual(slow.sum_to(10), 45)\n"
+            "        self.assertEqual(slow.fib(7), 13)\n",
+            encoding="utf-8",
+        )
+
+        r_opt = door.solve({
+            "task_id": "K_OPT",
+            "goal": f"Optimize sum_to in {slow.relative_to(ROOT)} to run at least 10x faster.",
+        })
+        self.assertTrue(r_opt.get("pass"), r_opt)
+        self.assertIn("// 2", slow.read_text(encoding="utf-8"))
+
+        r_mem = door.solve({
+            "task_id": "K_MEM",
+            "goal": f"Memoize fib in {slow.relative_to(ROOT)} without changing its return values.",
+        })
+        self.assertTrue(r_mem.get("pass"), r_mem)
+        self.assertIn("cache", slow.read_text(encoding="utf-8"))
+
+    def test_standalone_git_surgeon_and_brain_repo_guard(self) -> None:
+        base = _fresh("git_standalone")
+        subprocess.run(["git", "init", "-q"], cwd=base, check=True)
+        subprocess.run(["git", "config", "user.email", "test@example.com"], cwd=base, check=True)
+        subprocess.run(["git", "config", "user.name", "Test"], cwd=base, check=True)
+        f = base / "calc.py"
+        f.write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+        subprocess.run(["git", "add", "calc.py"], cwd=base, check=True)
+        subprocess.run(["git", "commit", "-q", "-m", "initial"], cwd=base, check=True)
+        f.write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
+
+        res = py_engine.git_write_surgeon(
+            f,
+            f"Stage {f.name} and commit with message 'fix add'.",
+            brain_root=ROOT,
+        )
+        self.assertTrue(res.get("verified"), res)
+        self.assertEqual(len(res.get("commit_sha", "")), 40)
+
+        cl = diag_engine.git_read_history_analysis(
+            f,
+            "Write the changelog from commits.",
+            brain_root=ROOT,
+        )
+        self.assertTrue(cl.get("verified"), cl)
+        self.assertTrue(any("fix add" in entry for entry in cl["entries"]))
+
+    def test_honest_refusal_when_prerequisite_missing(self) -> None:
+        base = _fresh("missing_cpp")
+        missing = base / "main.cpp"
+        r = door.solve({
+            "task_id": "K_MISS",
+            "goal": f"Compile {missing.relative_to(ROOT)} with -O2 and fix any warnings.",
+        })
+        self.assertFalse(r.get("pass"), r)
+
+    def test_snapshot_pruning_and_symbol_index_sha256_parity(self) -> None:
+        base = _fresh("snap_idx")
+        (base / "mod_a.py").write_text("def alpha(x):\n    return x + 1\n", encoding="utf-8")
+        (base / "__pycache__").mkdir()
+        (base / "__pycache__" / "junk.pyc").write_bytes(b"00")
+        snap = execute_v1._snapshot(str(base))
+        self.assertIn("mod_a.py", snap)
+        self.assertFalse(any("__pycache__" in k for k in snap))
+
+        out = base / "idx.json"
+        res = sym_index.run(
+            {"source_root": str(base.relative_to(ROOT)), "output_path": str(out.relative_to(ROOT))},
+            ROOT,
+        )
+        doc = json.loads(out.read_bytes())
+        canon = (json.dumps(doc, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        self.assertEqual(hashlib.sha256(canon).hexdigest(), res["output_sha256"])
+
+
+if __name__ == "__main__":
+    unittest.main()

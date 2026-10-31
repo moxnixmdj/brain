@@ -64,21 +64,37 @@ WRONG_RESULT = "WRONG_RESULT"
 VACUOUS_CHECK = "VACUOUS_CHECK"
 
 
-def _snapshot(root: str) -> dict[str, tuple[int, int]]:
+_SKIP_DIRS = frozenset({".git", "node_modules", "__pycache__", ".brain_venv"})
+
+
+def _snapshot(root: str, max_entries: int | None = None) -> dict[str, tuple[int, int]]:
     """Path -> (size, mtime). Read by the kernel, not reported."""
     base = Path(root)
     out: dict[str, tuple[int, int]] = {}
     if not base.is_dir():
         return out
-    for path in base.rglob("*"):
-        rel = path.relative_to(base).as_posix()
-        parts = rel.split("/")
-        if any(p in (".git", "node_modules", "__pycache__", ".brain_venv")
-               for p in parts):
-            continue
+    stack: list[tuple[str, str]] = [(str(base), "")]
+    while stack:
+        abs_dir, rel_prefix = stack.pop()
         try:
-            st = path.stat()
-            out[rel] = (st.st_size, st.st_mtime_ns)
+            with os.scandir(abs_dir) as it:
+                for entry in it:
+                    name = entry.name
+                    if name in _SKIP_DIRS:
+                        continue
+                    rel = f"{rel_prefix}/{name}" if rel_prefix else name
+                    try:
+                        if entry.is_dir(follow_symlinks=False):
+                            stack.append((entry.path, rel))
+                            st = entry.stat(follow_symlinks=False)
+                            out[rel] = (st.st_size, st.st_mtime_ns)
+                        else:
+                            st = entry.stat(follow_symlinks=False)
+                            out[rel] = (st.st_size, st.st_mtime_ns)
+                    except OSError:
+                        continue
+                    if max_entries is not None and len(out) > max_entries:
+                        return out
         except OSError:
             continue
     return out

@@ -14,6 +14,7 @@ import ast
 import builtins
 import hashlib
 import json
+import os
 import pathlib
 
 _BUILTIN_NAMES = frozenset(dir(builtins))
@@ -49,9 +50,22 @@ def _py_files(source_root):
     if source_root.is_file():
         return [source_root]
     from canonical.runtime.tree_sitter_swe_kernel_v1 import IGNORED_DIRS  # stdlib-only module
-    return sorted(path for path in source_root.rglob("*.py")
-                  if not any(part in IGNORED_DIRS
-                             for part in path.relative_to(source_root).parts))
+    found: list[pathlib.Path] = []
+    stack = [source_root]
+    while stack:
+        cur = stack.pop()
+        try:
+            with os.scandir(cur) as it:
+                for entry in it:
+                    name = entry.name
+                    if entry.is_dir(follow_symlinks=False):
+                        if name not in IGNORED_DIRS:
+                            stack.append(pathlib.Path(entry.path))
+                    elif name.endswith(".py") and entry.is_file(follow_symlinks=False):
+                        found.append(pathlib.Path(entry.path))
+        except OSError:
+            continue
+    return sorted(found)
 
 
 def _cached_modules(output):
@@ -163,35 +177,48 @@ class _ModuleIndexer(ast.NodeVisitor):
         self.imports = []              # {module, names}
         self.module_names = set()      # module-level bound names
         self._scope_stack = []         # [{"qualname": str, "locals": set}]
+        self._cur_ctx = "<module>"
+        self._cur_parent = ""
 
     # -- scopes -----------------------------------------------------------
     def _push_scope(self, qualname, is_class=False):
         self._scope_stack.append({"qualname": qualname, "locals": set(), "class": is_class})
+        joined = ".".join(s["qualname"] for s in self._scope_stack)
+        self._cur_ctx = joined
+        self._cur_parent = joined
 
     def _pop_scope(self):
         self._scope_stack.pop()
+        if not self._scope_stack:
+            self._cur_ctx = "<module>"
+            self._cur_parent = ""
+        else:
+            joined = ".".join(s["qualname"] for s in self._scope_stack)
+            self._cur_ctx = joined
+            self._cur_parent = joined
 
     def _context(self):
-        if not self._scope_stack:
-            return "<module>"
-        return ".".join(s["qualname"] for s in self._scope_stack)
+        return self._cur_ctx
 
     def _parent_qual(self):
-        return ".".join(s["qualname"] for s in self._scope_stack if s["qualname"] != "<module>")
+        return self._cur_parent
 
     # -- definitions ------------------------------------------------------
     def _define(self, name, kind, node, extra=None):
-        parent = self._parent_qual()
+        parent = self._cur_parent
         qual = (parent + "." + name) if parent else name
-        row = {
-            "name": name,
-            "qualname": qual,
+        base_row = {
+            "end_lineno": getattr(node, "end_lineno", node.lineno),
             "kind": kind,
             "lineno": node.lineno,
-            "end_lineno": getattr(node, "end_lineno", node.lineno),
+            "name": name,
+            "qualname": qual,
         }
         if extra:
-            row.update(extra)
+            base_row.update(extra)
+            row = {k: base_row[k] for k in sorted(base_row)}
+        else:
+            row = base_row
         self.definitions.append(row)
         if not self._scope_stack:
             self.module_names.add(name)
@@ -203,16 +230,16 @@ class _ModuleIndexer(ast.NodeVisitor):
         names = sorted(a.name for a in node.names)
         for a in node.names:
             self.module_names.add((a.asname or a.name.split(".")[0]))
-        self.imports.append({"module": ".".join(names), "names": names, "form": "import"})
+        self.imports.append({"form": "import", "module": ".".join(names), "names": names})
 
     def visit_ImportFrom(self, node):
         names = sorted(a.name for a in node.names)
         for a in node.names:
             self.module_names.add(a.asname or a.name)
         self.imports.append({
+            "form": "from",
             "module": str(node.module or ""),
             "names": names,
-            "form": "from",
         })
 
     def visit_ClassDef(self, node):
@@ -302,18 +329,30 @@ class _ModuleIndexer(ast.NodeVisitor):
 
     def visit_Name(self, node):
         if isinstance(node.ctx, ast.Load):
+            name = node.id
+            res = None
+            for scope in reversed(self._scope_stack):
+                if name in scope["locals"]:
+                    res = "local"
+                    break
+            if res is None:
+                if name in self.module_names:
+                    res = "module"
+                elif name in _BUILTIN_NAMES:
+                    res = "builtin"
+                else:
+                    res = "unknown"
             self.references.append({
-                "name": node.id,
-                "lineno": node.lineno,
                 "col": node.col_offset,
-                "context": self._context(),
-                "resolution": self._resolve(node.id),
+                "context": self._cur_ctx,
+                "lineno": node.lineno,
+                "name": name,
+                "resolution": res,
             })
-        self.generic_visit(node)
 
     # -- call edges ---------------------------------------------------------
     def visit_Call(self, node):
-        caller = self._context()
+        caller = self._cur_ctx
         func = node.func
         callee = None
         if isinstance(func, ast.Name):
@@ -322,8 +361,8 @@ class _ModuleIndexer(ast.NodeVisitor):
             callee = func.attr
         if callee:
             self.calls.append({
-                "caller": caller,
                 "callee": callee,
+                "caller": caller,
                 "lineno": node.lineno,
             })
         self.generic_visit(node)
@@ -360,33 +399,56 @@ def _module_names_prepass(tree):
 
 def _parse_single_module_worker(item):
     """Top-level worker for parallel cold AST indexing on large trees."""
-    rel, sha, path_str = item
+    rel, sha, path_str, json_only = item
     try:
         raw = pathlib.Path(path_str).read_bytes()
         tree = ast.parse(raw.decode("utf-8"), filename=path_str)
     except Exception as exc:
         return ("err", {
+            "detail": str(exc)[:400],
+            "error": type(exc).__name__,
             "path": rel,
             "sha256": sha,
-            "error": type(exc).__name__,
-            "detail": str(exc)[:400],
         })
     indexer = _ModuleIndexer()
     indexer.module_names |= _module_names_prepass(tree)
     indexer.visit(tree)
-    row = {
-        "path": rel,
-        "sha256": sha,
+    calls = sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"]))
+    definitions = sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"]))
+    references = sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"]))
+    body = {
+        "calls": calls,
+        "definitions": definitions,
         "imports": indexer.imports,
-        "definitions": sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"])),
-        "references": sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"])),
-        "calls": sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"])),
+        "path": rel,
+        "references": references,
+        "sha256": sha,
     }
-    row["row_sha256"] = _row_sha(row)
+    body_json = json.dumps(body, separators=(",", ":"))
+    row_sha = hashlib.sha256(body_json.encode("utf-8")).hexdigest()
+    if json_only:
+        suffix = f',"sha256":"{sha}"}}'
+        row_json = body_json[:-len(suffix)] + f',"row_sha256":"{row_sha}"' + suffix
+        return ("ok_json", {
+            "path": rel,
+            "definitions": definitions,
+            "calls": calls,
+            "ref_count": len(references),
+            "row_json": row_json,
+        })
+    row = {
+        "calls": calls,
+        "definitions": definitions,
+        "imports": indexer.imports,
+        "path": rel,
+        "references": references,
+        "row_sha256": row_sha,
+        "sha256": sha,
+    }
     return ("ok", row)
 
 
-def _collect_index_parts(source_root_arg, root, cached=None):
+def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False):
     """Request-local index construction shared by staged workflows and the adapter."""
     repo = pathlib.Path(root).resolve()
     source_root = _safe_root(repo, source_root_arg)
@@ -405,14 +467,12 @@ def _collect_index_parts(source_root_arg, root, cached=None):
         sha = hashlib.sha256(raw).hexdigest()
         old = cached.get(rel)
         if old is not None and old.get("sha256") == sha:
-            # The file's bytes are the ones this row was built from, and the row
-            # itself verified.  Re-deriving it would produce exactly this row.
             modules_by_rel[rel] = old
             ordered_rels.append(rel)
             reused += 1
             continue
         ordered_rels.append(rel)
-        to_parse.append((rel, sha, str(path)))
+        to_parse.append((rel, sha, str(path), json_only))
 
     use_mp = False
     if len(to_parse) >= 64:
@@ -431,7 +491,7 @@ def _collect_index_parts(source_root_arg, root, cached=None):
         results = [_parse_single_module_worker(item) for item in to_parse]
 
     for kind, payload in results:
-        if kind == "ok":
+        if kind in ("ok", "ok_json"):
             modules_by_rel[payload["path"]] = payload
         else:
             unparseable.append(payload)
@@ -450,40 +510,40 @@ def _collect_index_parts(source_root_arg, root, cached=None):
         for d in row["definitions"]:
             qual = rel.replace("/", ".").removesuffix(".py") + ":" + d["qualname"]
             symbols[qual] = {
+                "end_lineno": d["end_lineno"],
+                "kind": d["kind"],
+                "lineno": d["lineno"],
                 "module": rel,
                 "name": d["name"],
                 "qualname": d["qualname"],
-                "kind": d["kind"],
-                "lineno": d["lineno"],
-                "end_lineno": d["end_lineno"],
             }
         for c in row["calls"]:
             if c["caller"] != "<module>":
                 callers_of.setdefault(c["callee"], set()).add(c["caller"])
-        reference_total += len(row["references"])
+        reference_total += row["ref_count"] if "ref_count" in row else len(row["references"])
         call_edge_total += len(row["calls"])
 
     report = {
+        "callers_of": {k: sorted(v) for k, v in sorted(callers_of.items())},
+        "modules": modules,
         "schema": "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1",
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
-        "modules": modules,
-        "symbols": symbols,
-        "callers_of": {k: sorted(v) for k, v in sorted(callers_of.items())},
-        "unparseable": unparseable,
+        "symbols": {k: symbols[k] for k in sorted(symbols)},
         "totals": {
-            "files": len(modules),
-            "unparseable": len(unparseable),
-            "symbols": len(symbols),
-            "references": reference_total,
             "call_edges": call_edge_total,
+            "files": len(modules),
+            "references": reference_total,
+            "symbols": len(symbols),
+            "unparseable": len(unparseable),
         },
+        "unparseable": unparseable,
     }
     return report, reused
 
 
 def build_index(source_root, root):
     """Build the ordinary index without publishing a report or modifying sources."""
-    report, _ = _collect_index_parts(source_root, root)
+    report, _ = _collect_index_parts(source_root, root, json_only=False)
     return report
 
 
@@ -495,7 +555,9 @@ def run(args, root):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
     cached = _cached_modules(output)
-    report, reused = _collect_index_parts(source_root.relative_to(repo).as_posix(), repo, cached)
+    report, reused = _collect_index_parts(
+        source_root.relative_to(repo).as_posix(), repo, cached, json_only=True
+    )
     modules = report["modules"]
     unparseable = report["unparseable"]
     symbols = report["symbols"]
@@ -506,13 +568,25 @@ def run(args, root):
                  and _CACHE_META.get("source_root") == str(source_root.relative_to(repo)).replace("\\", "/")
                  and list(_CACHE_META.get("unparseable") or []) == unparseable)
     if unchanged:
-        # Every module came from this file and the source root is the one it
-        # describes, so the bytes on disk ARE the artifact this run would write.
-        # Re-rendering 167 MiB to prove it was measured at 1.2 s per question.
         data = output.read_bytes()
     else:
         output.parent.mkdir(parents=True, exist_ok=True)
-        raw_bytes = (json.dumps(report, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        row_jsons = [
+            m["row_json"] if "row_json" in m else json.dumps(m, sort_keys=True, separators=(",", ":"))
+            for m in modules
+        ]
+        head_part = '{"callers_of":' + json.dumps(callers_of, separators=(",", ":")) + ',"modules":['
+        tail_obj = {
+            "schema": report["schema"],
+            "source_root": report["source_root"],
+            "symbols": symbols,
+            "totals": report["totals"],
+            "unparseable": [
+                {k: u[k] for k in sorted(u)} for u in unparseable
+            ],
+        }
+        tail_part = "]," + json.dumps(tail_obj, separators=(",", ":"))[1:] + "\n"
+        raw_bytes = (head_part + ",".join(row_jsons) + tail_part).encode("utf-8")
         output.write_bytes(raw_bytes)
         data = raw_bytes
     return {

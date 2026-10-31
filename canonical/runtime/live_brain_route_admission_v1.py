@@ -2513,6 +2513,9 @@ _REVIEW_REQUEST_RE = re.compile(
 def _asks_only_for_a_plan(text: str) -> bool:
     """The sentence asks for the PLAN, not for the change (see the two patterns above)."""
     sentence = str(text or "")
+    if re.match(r"^\s*(?:please\s+)?design\b", sentence, re.IGNORECASE):
+        if not goal_compiler._repo_paths(sentence, ROOT) and not _future_artifacts(sentence):
+            return True
     return bool(_PLAN_REQUEST_RE.match(sentence)) and not _PLAN_THEN_DO_RE.search(sentence)
 
 
@@ -2638,6 +2641,9 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
     if (re.search(r"\b(?:duplicat(?:ed|e|ion)|code\s+clones?)\b", text, re.IGNORECASE)
             and not re.search(r"\b(?:duplicat\w*|clone)\b", surface, re.IGNORECASE)):
         out.append("STATED_DUPLICATION_ANALYSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
+    if (re.match(r"^\s*(?:please\s+)?lint\b", text, re.IGNORECASE)
+            and not re.search(r"\b(?:lint|ruff|flake8|eslint)\b", surface, re.IGNORECASE)):
+        out.append("STATED_LINT_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
     provides = " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])
     # The row's OWN declaration decides whether it writes, and ``capability_edits_source`` is the one
     # predicate that reads it (it is what ``repair_output_collisions`` already uses).  The keyword
@@ -2741,6 +2747,12 @@ def _promised_source_files(goal: str) -> list[str]:
         # the source it repaired was correctly restored.
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
+        if m.group(0).lower() == "add" and re.match(
+            r"^\s+(?:a\s+|an\s+)?(?:unit\s+|property[- ]based\s+|regression\s+)?tests?\s+(?:for|that)\b",
+            text[m.end():m.end() + 56],
+            re.IGNORECASE,
+        ):
+            continue
         best = None
         best_at = None
         for raw, path in candidates:
@@ -2819,6 +2831,12 @@ def _promised_source_roots(goal: str) -> list[str]:
     out = []
     for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
+            continue
+        if m.group(0).lower() == "add" and re.match(
+            r"^\s+(?:the\s+|a\s+)?dependenc",
+            text[m.end():m.end() + 36],
+            re.IGNORECASE,
+        ):
             continue
         best_raw, best_path, best_pos = None, None, None
         for raw, path in paths:
@@ -3234,6 +3252,41 @@ def _destructive_targets(goal: str) -> set[str]:
 def _git_head(path: Path) -> str:
     """The commit this path's repository is on, or '' when it is not one."""
     try:
+        cur = path.resolve()
+        if cur.is_file():
+            cur = cur.parent
+        git_dir: Path | None = None
+        for d in (cur, *cur.parents):
+            cand = d / ".git"
+            if cand.is_dir():
+                git_dir = cand
+                break
+            if cand.is_file():
+                txt = cand.read_text(encoding="utf-8").strip()
+                if txt.startswith("gitdir:"):
+                    gd = (d / txt.split(":", 1)[1].strip()).resolve()
+                    if gd.is_dir():
+                        git_dir = gd
+                        break
+        if git_dir is None:
+            return ""
+        head_txt = (git_dir / "HEAD").read_text(encoding="utf-8").strip()
+        if re.fullmatch(r"[0-9a-f]{40}", head_txt):
+            return head_txt
+        if head_txt.startswith("ref:"):
+            ref_rel = head_txt.split(":", 1)[1].strip()
+            ref_file = git_dir / ref_rel
+            if ref_file.is_file():
+                sha = ref_file.read_text(encoding="utf-8").strip()
+                if re.fullmatch(r"[0-9a-f]{40}", sha):
+                    return sha
+            packed = git_dir / "packed-refs"
+            if packed.is_file():
+                for ln in packed.read_text(encoding="utf-8").splitlines():
+                    if ln and not ln.startswith(("#", "^")):
+                        parts = ln.split()
+                        if len(parts) >= 2 and parts[1] == ref_rel:
+                            return parts[0]
         proc = subprocess.run(["git", "-C", str(path), "rev-parse", "HEAD"],
                               capture_output=True, text=True, timeout=10)
         return proc.stdout.strip() if proc.returncode == 0 else ""
@@ -3271,6 +3324,10 @@ def _observation_roots(goal: str) -> list[Path]:
             parent = parent.parent
         if parent not in roots:
             roots.append(parent)
+        if parent != ROOT and parent.parent != ROOT:
+            sibling_tests = parent.parent / "tests"
+            if sibling_tests.is_dir() and sibling_tests not in roots:
+                roots.append(sibling_tests)
     # never walk a directory twice: a root that contains another root is dropped
     return [r for r in roots if not any(o != r and r in o.parents for o in roots)]
 
@@ -3290,15 +3347,14 @@ def observe_world(goal: str) -> dict[str, Any]:
     files: dict[str, tuple[int, int]] = {}
     walked = []
     for root in _observation_roots(goal):
-        try:
-            count = sum(1 for _ in itertools.islice(root.rglob("*"), _OBSERVATION_MAX_FILES + 1))
-        except OSError:
+        snap = _kernel._snapshot(str(root), max_entries=_OBSERVATION_MAX_FILES)
+        if len(snap) > _OBSERVATION_MAX_FILES:
             continue
-        if count > _OBSERVATION_MAX_FILES:
-            continue
-        walked.append(str(root.relative_to(ROOT)) if root != ROOT else ".")
-        for rel, stat_row in _kernel._snapshot(str(root)).items():
-            files[str(Path(root, rel).relative_to(ROOT))] = stat_row
+        rel_root = str(root.relative_to(ROOT)) if root != ROOT else "."
+        walked.append(rel_root)
+        prefix = "" if rel_root == "." else rel_root + "/"
+        for rel, stat_row in snap.items():
+            files[prefix + rel] = stat_row
     parses: dict[str, bool] = {}
     for raw in stated:
         path = ROOT / raw
@@ -4246,7 +4302,18 @@ def _typed_plan_is_stated(request: Any) -> bool:
         # an effect family, the row that DECLARES that family is the answer; the family's own
         # plan then runs through the same gate chain, so nothing is skipped by being first.
         token = _typed.stated_family_token(goal)
-        if token in (_typed.GIT_FAMILY_TOKEN, "extract", "security", "coverage", "mutation", "perf"):
+        if token in (
+            _typed.GIT_FAMILY_TOKEN,
+            "extract",
+            "security",
+            "coverage",
+            "mutation",
+            "perf",
+            "lint",
+            "polyglot.transform_and_verify",
+            "swe.transform_and_synthesize",
+            "diagnose_and_architect",
+        ):
             return True
         # The CHANGE-SET QUESTION, and only that shape.  Measured 2026-10-31: "Which files must
         # change to rename the symbol `mul` to `multiply` in <dir>?" was answered by a definitions
@@ -5227,7 +5294,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                                    else "STATED_SWE_EFFECT_UNSERVED")
                         return _fail(str((request or {}).get("task_id") or ""),
                                      "FAIL_CLOSED__" + failure, failure, perf_counter_ns(),
-                                     compiled_capability_id=selected, executed=False,
+                                     compiled_capability_id=(None if failure == "STATED_SWE_EFFECT_UNSERVED" else selected),
+                                     executed=False,
                                      stated_answer_errors=stated_answer_errors(
                                          goal, (context[0] or {}).get(selected) or {}, selected))
                     if corrected is not None:

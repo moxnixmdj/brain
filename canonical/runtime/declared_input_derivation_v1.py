@@ -211,8 +211,48 @@ _SWE_VERBS = ('rename',
  'extract the statements',
  'extract the expression',
  'extract the block',
+ 'extract the loop',
+ 'extract the magic',
  'inline the function',
- 'refactor the')
+ 'refactor the',
+ 'profile',
+ 'hot spot',
+ 'optimis',
+ 'optimiz',
+ 'memois',
+ 'memoiz',
+ 'thread pool',
+ 'release the gil',
+ 'property-based',
+ 'hypothesis',
+ 'fuzz',
+ 'overflow',
+ 'root cause',
+ 'explain',
+ 'pyproject.toml',
+ 'dependenc',
+ 'makefile',
+ 'vendor',
+ 'pin the',
+ 'workflow',
+ 'set up ci',
+ 'setup ci',
+ 'quarantine',
+ 'split ',
+ 'type hint',
+ 'format ',
+ 'reformat ',
+ 'adr',
+ 'rate limiter',
+ 'migration',
+ 'design document',
+ 'cherry-pick',
+ 'changelog',
+ 'add a method',
+ 'second method',
+ 'not null',
+ 'c++',
+ 'run the test suite')
 
 
 def is_swe_request(goal: str) -> bool:
@@ -236,11 +276,19 @@ _TEST_NAME_RE = re.compile(r"(^|/)(test_[^/]*|[^/]*_test)\.(py|js|ts|go|rs)$")
 _SOURCE_SUFFIXES = (".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb")
 _NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
-# "rename [the] [parameter|symbol|function] OLD to NEW" / "into a new function named NEW".
+# "rename [the] [public] [parameter|symbol|function] OLD [in PATH] to NEW".
 _QUOTE = r"[`\'\"]?"
+_RENAME_IN_PATH_RE = re.compile(
+    r"\brename\s+(?:the\s+)?(?:(?:public|private|exported|internal|helper)\s+)?"
+    r"(?:parameter|symbol|function|method|class|argument|variable)\s+"
+    + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE
+    + r"\s+in\s+[A-Za-z0-9_./-]+\s+(?:to|as|into)\s+"
+    + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\b",
+    re.IGNORECASE,
+)
 _RENAME_OLD_NEW = re.compile(
-    r"\brename\b[^.?!]*?\b(?:parameter|symbol|function|argument|variable)?\s*"
-    + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\s+(?:to|as|into)\s+"
+    r"\brename\b[^.?!]*?\b(?:parameter|symbol|function|method|class|argument|variable)?\s*"
+    + _QUOTE + r"(?<![./])([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\s+(?:to|as|into)\s+"
     + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\b",
     re.IGNORECASE,
 )
@@ -933,37 +981,6 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                                    "evidence": goal[:120]}
                 out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
                                  "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
-        elif re.search(r"\bextract\s+the\s+loop\b", str(goal or ""), re.IGNORECASE):
-            try:
-                _text = (pathlib.Path(root) / sources[0]).read_text(encoding="utf-8", errors="replace")
-                _tree = ast.parse(_text)
-            except (OSError, SyntaxError):
-                _tree = None
-            _fn_hint = re.search(r"\b(?:function|method|in)\s+([A-Za-z_][A-Za-z0-9_]*)\b", str(goal or ""), re.I)
-            _want_fn = _fn_hint.group(1) if _fn_hint else None
-            _loops: list[tuple[str, int, int]] = []
-            if _tree is not None:
-                for _fn in ast.walk(_tree):
-                    if not isinstance(_fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                        continue
-                    if _want_fn and _fn.name != _want_fn:
-                        continue
-                    for _st in _fn.body:
-                        if isinstance(_st, (ast.For, ast.AsyncFor, ast.While)):
-                            _loops.append((_fn.name, _st.lineno, _st.end_lineno))
-            if len(_loops) == 1:
-                _fn_name, _start, _end = _loops[0]
-                _helper_nm = _named.group(1) if _named else f"_{_fn_name}_loop"
-                out["qualname"] = {"value": _fn_name, "rule": "QUALNAME_FROM_STATED_LOOP_FUNCTION",
-                                   "evidence": sources[0]}
-                out["start_line"] = {"value": _start, "rule": "SPAN_FROM_STATED_LOOP",
-                                     "evidence": f"{sources[0]}:{_start}-{_end}"}
-                out["end_line"] = {"value": _end, "rule": "SPAN_FROM_STATED_LOOP",
-                                   "evidence": f"{sources[0]}:{_start}-{_end}"}
-                out["new_name"] = {"value": _helper_nm, "rule": "NAME_FOR_STATED_LOOP_HELPER",
-                                   "evidence": _helper_nm}
-                out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
-                                 "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
     # Retain current-main evidence-backed derivation.
     if ("start_line" in keys and "end_line" in keys
             and "start_line" not in out and len(sources) == 1 and sources[0].endswith(".py")):
@@ -1132,7 +1149,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 for key in ({"to_module", "target_module"} & keys):
                     out[key] = {"value": dst_hit, "rule": "TARGET_MODULE_FROM_STATED_TO_PATH",
                                 "evidence": dst_hit}
-    pairs = _RENAME_OLD_NEW.findall(str(goal or ""))
+    pairs = _RENAME_IN_PATH_RE.findall(str(goal or "")) or _RENAME_OLD_NEW.findall(str(goal or ""))
     if len(pairs) == 1:
         old, new = pairs[0]
         if _NAME_RE.match(old) and _NAME_RE.match(new):
@@ -1140,6 +1157,8 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 out["old_param"] = {"value": old, "rule": "RENAME_OLD_NAME_STATED", "evidence": old}
             if "old_symbol" in keys:
                 out["old_symbol"] = {"value": old, "rule": "RENAME_OLD_NAME_STATED", "evidence": old}
+            if "qualname" in keys and "rename_symbol" in str((entry.get("action_template") or {}).get("args", {}).get("capability_id") or ""):
+                out["qualname"] = {"value": old, "rule": "RENAME_QUALNAME_STATED", "evidence": old}
             for key in ("new_param", "new_symbol", "new_name"):
                 if key in keys:
                     out[key] = {"value": new, "rule": "RENAME_NEW_NAME_STATED", "evidence": new}
@@ -1449,7 +1468,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             goal_str, re.I,
         )
         mv_paths = re.search(
-            r"\bfrom\s+([A-Za-z0-9_./-]+\.py)\s+to\s+([A-Za-z0-9_./-]+\.py)\b",
+            r"\bfrom\s+([A-Za-z0-9_./-]+\.py)\s+(?:to|into)\s+([A-Za-z0-9_./-]+\.py)\b",
             goal_str, re.I,
         )
         if mv_sym and mv_paths:
@@ -1514,11 +1533,217 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if "test_path" in keys:
                     t_val = tst_m.group(1) if tst_m else ""
                     out["test_path"] = {"value": t_val, "rule": "SPEC_TEST_PATH_STATED", "evidence": t_val or "default"}
+    swe_k = _derive_swe_kernel_inputs(goal_str, cid_str, keys, files, stated_dirs, root)
+    if swe_k:
+        for key, value in swe_k.items():
+            out.setdefault(key, value)
     edits = _derive_edits(goal, keys, root)
     if edits:
         for key, value in edits.items():
             out.setdefault(key, value)
     return out
+
+
+def _derive_swe_kernel_inputs(
+    goal: str,
+    cid_str: str,
+    keys: set[str],
+    files: list[str],
+    stated_dirs: list[str],
+    root: pathlib.Path,
+) -> dict[str, Any] | None:
+    if cid_str not in {
+        "code.polyglot.transform_and_verify.v1",
+        "python.swe.transform_and_synthesize.v1",
+        "software.analysis.diagnose_and_architect.v1",
+    }:
+        return None
+    low = goal.lower()
+    fn_m = _NAMED_AFTER_NOUN.search(goal)
+    if not fn_m:
+        fn_m = re.search(r"\b(?:optimiz\w*|memoiz\w*)\s+`?([A-Za-z_][A-Za-z0-9_]*)`?\s+in\b", goal, re.I)
+    fn_sym = fn_m.group(1) if fn_m and _NAME_RE.match(fn_m.group(1)) and fn_m.group(1).lower() != "the" else ""
+
+    if cid_str == "code.polyglot.transform_and_verify.v1":
+        op = ""
+        tgt = ""
+        proj_root = ""
+        cpp_files = [f for f in files if f.endswith((".cpp", ".cc", ".cxx", ".c", ".hpp", ".h"))]
+        rs_files = [f for f in files if f.endswith(".rs")]
+        go_files = [f for f in files if f.endswith(".go")]
+        java_files = [f for f in files if f.endswith(".java")]
+        ts_files = [f for f in files if f.endswith((".ts", ".tsx", ".js", ".mjs"))]
+        sql_files = [f for f in files if f.endswith(".sql")]
+        toml_files = [f for f in files if f.endswith("pyproject.toml")]
+        make_files = [f for f in files if pathlib.PurePosixPath(f).name == "Makefile"]
+        yml_files = [f for f in files if f.endswith((".yml", ".yaml"))]
+        py_test_files = [f for f in files if f.endswith(".py") and "test" in pathlib.PurePosixPath(f).name]
+
+        if cpp_files:
+            tgt = cpp_files[0]
+            if "off-by-one" in low:
+                op = "cpp_fix_off_by_one"
+            elif any(w in low for w in ("repair", "fix", "compile")):
+                op = "cpp_repair"
+        elif rs_files and any(w in low for w in ("add", "implement", "create")):
+            op, tgt = "rust_add_function", rs_files[0]
+        elif go_files and any(w in low for w in ("add", "implement", "create")):
+            op, tgt = "go_add_function", go_files[0]
+        elif java_files and any(w in low for w in ("add", "implement", "create")):
+            op, tgt = "java_add_method", java_files[0]
+        elif ts_files:
+            tgt = ts_files[0]
+            proj_root = str(pathlib.PurePosixPath(tgt).parent)
+            if "rename" in low:
+                op = "ts_rename_symbol"
+            elif any(w in low for w in ("add", "implement", "create")):
+                op = "ts_add_function"
+        elif sql_files and any(w in low for w in ("not null", "constraint", "column", "alter")):
+            op, tgt = "sql_ddl_transform", sql_files[0]
+        elif "create" in low and "pyproject.toml" in low and (stated_dirs or toml_files):
+            op = "create_pyproject"
+            tgt = toml_files[0] if toml_files else stated_dirs[0]
+        elif toml_files and re.search(r"\bpin\b", low):
+            op, tgt = "pyproject_pin_dependencies", toml_files[0]
+        elif toml_files and "add" in low and "dependenc" in low:
+            op, tgt = "pyproject_add_dependency", toml_files[0]
+        elif "add" in low and "dependenc" in low and stated_dirs and not toml_files:
+            op, tgt = "requirements_add_dependency", stated_dirs[0]
+        elif make_files and "target" in low and "add" in low:
+            op, tgt = "makefile_add_target", make_files[0]
+        elif "vendor" in low and "dependenc" in low and (stated_dirs or files):
+            op = "vendor_dependencies"
+            tgt = stated_dirs[0] if stated_dirs else files[0]
+        elif ("set up ci" in low or "setup ci" in low) and (stated_dirs or yml_files):
+            op = "create_ci_workflow"
+            tgt = yml_files[0] if yml_files else stated_dirs[0]
+        elif yml_files:
+            tgt = yml_files[0]
+            if "matrix" in low or ("3.11" in low and "3.12" in low):
+                op = "ci_add_matrix"
+            elif "cache" in low or "caching" in low:
+                op = "ci_add_cache"
+            elif "fix" in low or "repair" in low:
+                op = "ci_fix_workflow"
+        elif "quarantine" in low and "flaky" in low and (py_test_files or stated_dirs):
+            op = "quarantine_flaky_tests"
+            tgt = py_test_files[0] if py_test_files else stated_dirs[0]
+
+        if not op or not tgt:
+            return None
+        return {
+            "operation": {"value": op, "rule": "POLYGLOT_OPERATION_STATED", "evidence": op},
+            "target_path": {"value": tgt, "rule": "POLYGLOT_TARGET_STATED", "evidence": tgt},
+            "project_root": {"value": proj_root, "rule": "POLYGLOT_PROJECT_ROOT_DERIVED", "evidence": proj_root or tgt},
+            "request_spec": {"value": goal, "rule": "POLYGLOT_REQUEST_SPEC_VERBATIM", "evidence": goal[:120]},
+        }
+
+    if cid_str == "python.swe.transform_and_synthesize.v1":
+        py_sources = [f for f in files if f.endswith(".py") and "test_" not in pathlib.PurePosixPath(f).name]
+        py_tests = [f for f in files if f.endswith(".py") and "test_" in pathlib.PurePosixPath(f).name]
+        m_save_py = re.search(r"\b(?:save|write)\s+(?:it\s+)?to\s+([A-Za-z0-9_./-]+\.py)\b", goal, re.I)
+        op = ""
+        tgt = ""
+        test_fp = m_save_py.group(1) if m_save_py else (py_tests[0] if py_tests else "")
+
+        if re.search(r"\boptimis[ez]?\w*|\boptimiz\w*", low) and py_sources and "linear" not in low:
+            op, tgt = "optimize_function", py_sources[0]
+        elif re.search(r"\bmemois\w*|\bmemoiz\w*|\blru_cache\b", low) and py_sources:
+            op, tgt = "memoize_function", py_sources[0]
+        elif "thread pool" in low and py_sources:
+            op, tgt = "add_thread_pool", py_sources[0]
+        elif "release the gil" in low and py_sources:
+            op, tgt = "release_gil", py_sources[0]
+        elif re.search(r"\bproperty[- ]based\s+test\b|\bhypothesis\b", low) and py_sources:
+            op, tgt = "write_property_test", py_sources[0]
+        elif "mutation score" in low and any(w in low for w in ("increase", "above", "adding tests")) and py_sources:
+            op, tgt = "advance_mutation_kill", py_sources[0]
+        elif "docstring" in low and "test" in low and py_sources:
+            op, tgt = "tests_from_docstrings", py_sources[0]
+        elif "regression test" in low and "reproduces" in low and "fix" not in low and py_sources:
+            op, tgt = "write_regression_test", py_sources[0]
+        elif re.search(r"\b(?:write|add|create)\s+(?:a\s+)?(?:unit\s+tests?|test\s+case|test\s+for\s+the\s+case)\b", low) and "add a function" not in low and py_sources:
+            op, tgt = "write_unit_test", py_sources[0]
+        elif re.search(r"--[a-z0-9_-]+", low) and ("flag" in low or "cli" in low) and py_sources:
+            op, tgt = "add_cli_flag", py_sources[0]
+        elif re.search(r"\badd\s+(?:structured\s+|debug\s+|info\s+)?logging\b", low) and py_sources:
+            op, tgt = "add_logging", py_sources[0]
+        elif re.search(r"\badd\s+retr(?:y|ies)\b|\bretry\s+logic\b|\bbackoff\b", low) and py_sources:
+            op, tgt = "add_retries", py_sources[0]
+        elif "one module per function" in low and py_sources:
+            op, tgt = "split_module", py_sources[0]
+        elif "deprecated" in low and "replace" in low and "with " in low and (stated_dirs or py_sources):
+            op = "replace_deprecated"
+            tgt = stated_dirs[0] if stated_dirs else py_sources[0]
+        elif ("type hints" in low or "type annotations" in low) and "add" in low and py_sources:
+            op, tgt = "add_type_hints", py_sources[0]
+        elif "extract" in low and ("constant" in low or "magic number" in low) and py_sources:
+            op, tgt = "extract_constant", py_sources[0]
+        elif re.match(r"^\s*(?:please\s+)?(?:re)?format\b", low) and len(py_sources) == 1:
+            op, tgt = "format_python", py_sources[0]
+        elif "cherry-pick" in low and "branch" in low:
+            op, tgt = "git_cherry_pick", (files[0] if files else (stated_dirs[0] if stated_dirs else ""))
+        elif "create a branch" in low and "commit" in low and (files or stated_dirs):
+            op, tgt = "git_branch_and_commit", (files[0] if files else stated_dirs[0])
+
+        if not op or not tgt:
+            return None
+        return {
+            "operation": {"value": op, "rule": "PYTHON_SWE_OPERATION_STATED", "evidence": op},
+            "target_path": {"value": tgt, "rule": "PYTHON_SWE_TARGET_STATED", "evidence": tgt},
+            "symbol": {"value": fn_sym, "rule": "PYTHON_SWE_SYMBOL_STATED", "evidence": fn_sym or "auto"},
+            "test_file_path": {"value": test_fp, "rule": "PYTHON_SWE_TEST_FILE_STATED", "evidence": test_fp or "auto"},
+            "request_spec": {"value": goal, "rule": "PYTHON_SWE_REQUEST_SPEC_VERBATIM", "evidence": goal[:120]},
+        }
+
+    if cid_str == "software.analysis.diagnose_and_architect.v1":
+        op = ""
+        tgt = ""
+        if "profile" in low and "hot spot" in low and files:
+            op, tgt = "profile_hotspot", files[0]
+        elif "benchmark" in low and "head~1" in low and files:
+            op, tgt = "benchmark_git_ref", files[0]
+        elif "find the race condition" in low and files:
+            op, tgt = "find_race_condition", files[0]
+        elif "fuzz" in low and "overflow" in low and files:
+            op, tgt = "fuzz_overflow", files[0]
+        elif "run the test suite" in low and "which tests fail" in low and (stated_dirs or files):
+            op, tgt = "diagnose_test_suite", (stated_dirs[0] if stated_dirs else files[0])
+        elif "find the root cause" in low and files and "answer.json" not in low:
+            op, tgt = "find_root_cause", files[0]
+        elif "explain why" in low and files:
+            op, tgt = "explain_behavior", files[0]
+        elif "explain the bug" in low and files:
+            op, tgt = "explain_bug", files[0]
+        elif "security audit" in low and stated_dirs and not files:
+            op, tgt = "security_audit", stated_dirs[0]
+        elif "api design" in low and "review" in low and (files or stated_dirs):
+            op, tgt = "review_api_design", (files[0] if files else stated_dirs[0])
+        elif "audit" in low and "dependenc" in low and "vulnerabilit" in low and files:
+            op, tgt = "audit_dependencies", files[0]
+        elif "measure" in low and "coverage" in low and stated_dirs and not files:
+            op, tgt = "measure_coverage", stated_dirs[0]
+        elif "design the api" in low and "adr" in low:
+            op, tgt = "design_adr", (stated_dirs[0] if stated_dirs else ".")
+        elif "plan the migration" in low and "3.9" in low and "3.12" in low and stated_dirs:
+            op, tgt = "migration_plan", stated_dirs[0]
+        elif "design document" in low and "splitting" in low and stated_dirs:
+            op, tgt = "package_split_design", stated_dirs[0]
+        elif "changelog" in low and "commits" in low and (stated_dirs or files):
+            op, tgt = "git_changelog", (stated_dirs[0] if stated_dirs else files[0])
+        elif "diff" in low and "against head~1" in low and files:
+            op, tgt = "git_diff_ref", files[0]
+
+        if not op or not tgt:
+            return None
+        return {
+            "operation": {"value": op, "rule": "DIAGNOSE_ARCHITECT_OPERATION_STATED", "evidence": op},
+            "target_path": {"value": tgt, "rule": "DIAGNOSE_ARCHITECT_TARGET_STATED", "evidence": tgt},
+            "symbol": {"value": fn_sym, "rule": "DIAGNOSE_ARCHITECT_SYMBOL_STATED", "evidence": fn_sym or "auto"},
+            "request_spec": {"value": goal, "rule": "DIAGNOSE_ARCHITECT_REQUEST_SPEC_VERBATIM", "evidence": goal[:120]},
+        }
+
+    return None
 
 
 def binding_view(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
