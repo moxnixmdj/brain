@@ -9230,6 +9230,2045 @@
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001__shell.command.run__AUTO_VERIFY.json"
       }
+    },
+    "software.evidence.synthesis.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.evidence.synthesis.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_evidence_synthesis_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "synthesis",
+        "supercomposer",
+        "verbatim"
+      ],
+      "limitations": [
+        "5-kernel evidence family, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "evidence.synthesis.super.verified",
+        "evidence.evidence.family.super.verified"
+      ],
+      "requires": [
+        "evidence.claim.exact_quoted_bound",
+        "evidence.claim.exact_text_support",
+        "evidence.claim_spec.explicit_bounded",
+        "evidence.numeric_relation.objective_bound",
+        "source.evidence.verbatim_provenance_bound"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_evidence_synthesis_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-EVIDENCE-SYNTHESIS-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_EVIDENCE_SYNTHESIS_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.hardcore.closing.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.closing.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_hardcore_closing_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "closing",
+        "supercomposer",
+        "synthesis"
+      ],
+      "limitations": [
+        "5-kernel hardcore closing, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.hardcore.closing.verified",
+        "software.hardcore.closing.synthesis.verified"
+      ],
+      "requires": [
+        "software.hardcore.final.verified",
+        "software.hardcore.final.synthesis.verified",
+        "software.repair.synthesis.triad_proven",
+        "software.test.contract.verified",
+        "software.verification.super.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_closing_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-ULTIMATE-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.hardcore.final.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.final.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_hardcore_final_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "final",
+        "supercomposer",
+        "synthesis"
+      ],
+      "limitations": [
+        "5-kernel hardcore final, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.hardcore.final.verified",
+        "software.hardcore.final.synthesis.verified"
+      ],
+      "requires": [
+        "software.hardcore.swe.composed.verified",
+        "software.hardcore.swe.fullstack.verified",
+        "software.architect.synthesize.cegis.verified",
+        "software.patch.synthesize.cegis.proven",
+        "software.synthesis.grid_program.exact"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_final_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-FINAL-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_FINAL_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.hardcore.kernel.orchestrate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.kernel.orchestrate.v1",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "hardcore_software_engineering_orchestrator_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "software",
+        "engineering",
+        "deterministic",
+        "kernel",
+        "orchestrate",
+        "cegis",
+        "grid",
+        "pipeline",
+        "concrete",
+        "symbol",
+        "crossfile",
+        "change-impact",
+        "fastest",
+        "smartest"
+      ],
+      "limitations": [
+        "Deterministic harvesting of Brain-owned hidden kernels: CEGIS 24/12, finite grid 100k, pipeline 8-stage, concrete 13-sample, symbol 86k/221k. No model, no spend, fail-closed."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.hardcore.kernel.verified",
+        "python.fault.localization.symbol_ranked",
+        "python.contract.verdict",
+        "evidence.concrete_contract_violation",
+        "software.synthesis.grid_program.exact"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "cegis_pass",
+        "cegis_classification",
+        "pipeline_verified",
+        "concrete_status",
+        "grid_status",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "brain_native_deterministic_composition",
+        "version_family": ">=3.11"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-HARDCORE-KERNEL-ORCHESTRATE-V1",
+        "observed_effect": {
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_KERNEL_ORCHESTRATE_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_HARDCORE_KERNEL_ORCHESTRATE_V1.json"
+      }
+    },
+    "software.hardcore.swe.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.swe.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_hardcore_swe_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "swe",
+        "supercomposer",
+        "fullstack"
+      ],
+      "limitations": [
+        "5-kernel supercomposition, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.hardcore.swe.composed.verified",
+        "software.hardcore.swe.fullstack.verified"
+      ],
+      "requires": [
+        "python.pipeline.allowlist.verified",
+        "python.pr.land.verified",
+        "python.transformation.fused.verified",
+        "software.hardcore.kernel.verified",
+        "software.repair.loop.cegis_verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_swe_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-SWE-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.patch.synthesize.cegis.z3.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.patch.synthesize.cegis.z3.v1",
+          "manifest": "${input.manifest}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_patch_cegis_z3_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "software",
+        "patch",
+        "cegis",
+        "z3",
+        "synthesize",
+        "counterexample",
+        "dpll",
+        "theory",
+        "solver",
+        "architecture"
+      ],
+      "limitations": [
+        "CEGIS(T) loop synthesize\u2192verify (CrossHair symbolic + concrete) \u2192 counterexample \u2192 resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.patch.synthesize.cegis.proven",
+        "software.architect.synthesize.cegis.verified"
+      ],
+      "requires": [
+        "python.fault.localization.symbol_ranked"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "status",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-PATCH-CEGIS-Z3-V1",
+        "observed_effect": {
+          "classification": "NEW_PRIMITIVE_REQUIRED",
+          "exact_over_declared_frontier": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_PATCH_CEGIS_Z3_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_PATCH_CEGIS_Z3_V1.json"
+      }
+    },
+    "software.review.gate.composer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.review.gate.composer.v1",
+          "anchor_path": "${input.anchor_path}",
+          "diff_path": "${input.diff_path}",
+          "bench_path": "${input.bench_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_review_gate_composer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "software",
+        "review",
+        "gate",
+        "composer",
+        "fan-in",
+        "ruff",
+        "mypy",
+        "coverage",
+        "perf",
+        "bandit",
+        "mutation"
+      ],
+      "limitations": [
+        "Executes six existing Python diff gates in owned scratch paths; full acceptance requires complete PASS outcomes bound to one diff. Needs an anchor, applicable Python diff, benchmark and installed analyzer toolchain. Timing is not deterministic; scratch copies are not an OS sandbox."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.review.all_gates.verified",
+        "software.review.composition.typed"
+      ],
+      "requires": [
+        "software.repair.choreography.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "gates_verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-REVIEW-GATE-COMPOSER-V1",
+        "observed_effect": {
+          "gates_verified": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json"
+      }
+    },
+    "software.review.synthesis.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.review.synthesis.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_review_synthesis_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "review",
+        "synthesis",
+        "supercomposer",
+        "crossfile"
+      ],
+      "limitations": [
+        "5-kernel review synthesis, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.review.synthesis.super.verified",
+        "software.review.synthesis.fullstack.verified"
+      ],
+      "requires": [
+        "software.review.all_gates.verified",
+        "software.review.composition.typed",
+        "python.review.composition.allowlist_verified",
+        "python.pr.composition.verified",
+        "software.patch.crossfile.atomic"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-REVIEW-SYNTHESIS-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_SYNTHESIS_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.synthesis.grid_induction.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.synthesis.grid_induction.v1",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_synthesis_grid_induction_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "grid",
+        "synthesis",
+        "induction",
+        "program",
+        "bounded",
+        "deterministic",
+        "arc",
+        "cegis",
+        "no-beam-prune",
+        "equality"
+      ],
+      "limitations": [
+        "Searches every well-typed program through max_depth within declared operator registry, preserves equal-minimum ambiguity, no beam pruning, zero model."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.synthesis.grid_program.exact"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "status",
+        "candidates_evaluated",
+        "program_count",
+        "minimum_cost",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "module": "finite_grid_program_inducer",
+        "type": "brain_owned_deterministic",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-SYNTHESIS-GRID_INDUCTION-V1",
+        "observed_effect": {
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1.json"
+      }
+    },
+    "software.test.contract.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.test.contract.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_test_contract_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "test",
+        "contract",
+        "supercomposer",
+        "verification"
+      ],
+      "limitations": [
+        "Dual-oracle \u2192 test intelligence \u2192 pipeline \u2192 provenance coupling"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.test.contract.verified",
+        "software.verification.super.verified"
+      ],
+      "requires": [
+        "evidence.concrete_contract_violation",
+        "evidence.property_test.verified",
+        "python.test.intelligence.verified",
+        "python.test.pipeline.verified",
+        "python.provenance.coupling.super.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_test_contract_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-TEST-CONTRACT-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_TEST_CONTRACT_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "source.authority.identity.ror": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.authority.identity.ror",
+          "discovery_path": "${input.discovery_path}",
+          "max_candidates": 12,
+          "output_path": "${input.output_path}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "source_authority_binding_ror",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "authority",
+        "identity",
+        "organization",
+        "ror",
+        "domain",
+        "host",
+        "research",
+        "funding",
+        "provenance"
+      ],
+      "limitations": [
+        "VERIFIED means only exact candidate-domain to one active ROR organization identity binding.",
+        "No parent-domain inference and no fuzzy identity matching.",
+        "Unsupported, unavailable, or ambiguous domains fail closed.",
+        "Does not establish primary-source status, objective relevance, factual correctness, evidence sufficiency, or claim endorsement."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "source.authority.host_organization_identity"
+      ],
+      "requires": [
+        "source.candidate.provenance.verified"
+      ],
+      "result_fields": [
+        "status",
+        "verified_candidate_count",
+        "verified_candidates",
+        "authority_claim_scope",
+        "primary_source_verification",
+        "relevance_verification",
+        "evidence_sufficiency_verification",
+        "output_path",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/source_authority_binding_ror.py",
+        "external_registry": "ROR v2 API",
+        "modules": [
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "incremental_spend_usd": 0,
+        "model_dependency_count": 0,
+        "producer_git_blob": "9396ff7169b274af9bbfbe736e004587631e3b05",
+        "public_head_sha": "25d2bbe6703f745d23b45dab87fd0952aa648324",
+        "public_pr": 132,
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_run_id": 36676947006,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
+        "status": "INDEPENDENT_REMOTE_VERIFICATION_PASS"
+      }
+    },
+    "source.candidates.enumerate.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.candidates.enumerate.stdlib",
+          "glob": "**/*.py",
+          "objective": "${input.goal}",
+          "output_path": "${input.output_path}",
+          "search_root": "canonical/runtime"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "source_candidates_enumerate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "candidates",
+        "enumerate",
+        "corpus",
+        "evidence",
+        "files",
+        "discovery",
+        "repository",
+        "rank",
+        "bm25"
+      ],
+      "limitations": [
+        "Enumerates paths and bounded text snippets only; it does not score, select, or rank. Ranking stays with source.objective_relevance.rank.bm25.",
+        "Lexical corpus only. Emits no semantic, authority, or correctness claim.",
+        "Fails closed with SOURCE_CANDIDATES_NONE_FOUND when the glob matches no file, so an empty corpus can never be mistaken for a ranked result.",
+        "search_root and glob are literal parts of this capability's identity, per capability_selection_retrieval_v1._arg_names; the objective is bound from ${input.goal}, which goal_compiler._bind_inputs fills with the full sentence."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "source.candidates.available"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "candidate_count",
+        "glob",
+        "model_dependency_count",
+        "output_path",
+        "output_verified",
+        "search_root",
+        "status"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/source_candidates_enumerate.py",
+        "algorithm": "Deterministic sorted directory walk with bounded snippet extraction",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier": "source_candidates_verify_git_index",
+        "independent_verifier_binaries": [
+          "git ls-files",
+          "sha256sum"
+        ],
+        "independently_verified": true,
+        "independently_verified_by": "canonical/runtime/bound_capabilities/source_candidates_verify_git_index.py (git ls-files + sha256sum)",
+        "mission_id": "ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001",
+        "observed_effect": {
+          "adapter": "source_candidates_enumerate",
+          "candidate_count": 400,
+          "digest_mismatches": 0,
+          "enumeration_path": "canonical/astra_runtime/tmp/INDEP_VERIFY_SOURCE_CANDIDATES.json",
+          "enumeration_sha256": "1677c459c1b04b68ad59aff69e17deb69deb05f11c39e566b35625ff215e6eb2",
+          "independent_digest_source": "sha256sum (coreutils)",
+          "independent_enumeration_source": "git ls-files (git index)",
+          "output_verified": true,
+          "set_mismatches": 0,
+          "verified": true
+        },
+        "producer_independent": true,
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001__RESULT.json"
+      }
+    },
+    "source.evidence.extract.objective_grounded.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+          "input_path": "${input.input_path}",
+          "max_units": 10,
+          "output_path": "${input.output_path}",
+          "timeout": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "objective_evidence_unit_extract",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "evidence",
+        "extract",
+        "objective",
+        "grounded",
+        "verbatim",
+        "provenance",
+        "bm25",
+        "relevance",
+        "hash",
+        "offset",
+        "research"
+      ],
+      "limitations": [
+        "Requires a live-retrieval provenance receipt and independently-qualified objective-relevance receipt bound to the same candidate.",
+        "Fresh retrieval must resolve to the exact admitted source URL; source identity drift fails closed.",
+        "ROR/organization identity is optional metadata and is not an admission prerequisite.",
+        "Proves verbatim objective-grounded evidence units only; support, entailment, factual correctness, causality, quality, sufficiency, and independence remain unverified."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "input_path": {
+          "container": "scalar",
+          "effect": "source.objective_relevance.lexical_ranked",
+          "field": "output_path",
+          "type": "effect_result"
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        }
+      },
+      "provides": [
+        "source.evidence.objective_grounded_units",
+        "source.evidence.verbatim_provenance_bound"
+      ],
+      "requires": [
+        "source.candidate.provenance.verified",
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "result_fields": [
+        "status",
+        "evidence_extraction_status",
+        "source_url",
+        "page_raw_sha256",
+        "visible_text_sha256",
+        "evidence_unit_count",
+        "evidence_units",
+        "claim_relation_status",
+        "factual_correctness_status",
+        "evidence_sufficiency_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py",
+        "modules": [
+          "hashlib",
+          "html",
+          "ipaddress",
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request",
+          "html.parser"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+        "artifact_id": 11081458134,
+        "current_authority": "VERIFIED",
+        "exact_runner_blob_match": true,
+        "incremental_spend_usd": 0,
+        "independent_refetch_oracle": true,
+        "live_domains": [
+          "sqlite.org",
+          "rfc-editor.org"
+        ],
+        "model_dependency_count": 0,
+        "modern_container_regression_git_blob": "8dc3a5d350173d57f67c8e1ac50ab243d42f2214",
+        "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+        "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+        "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+        "public_job_id": 109777319500,
+        "public_pr": 159,
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_run_id": 36681368306,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+        "ror_admission_required": false,
+        "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR"
+      }
+    },
+    "source.objective_relevance.rank.bm25": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.objective_relevance.rank.bm25",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "objective_relevance_bm25",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "objective",
+        "relevance",
+        "rank",
+        "bm25",
+        "evidence",
+        "candidate",
+        "lexical",
+        "research"
+      ],
+      "limitations": [
+        "Ranks lexical relevance only; does not prove semantic entailment.",
+        "Does not establish primary-source status, authority, factual correctness, or evidence sufficiency.",
+        "Fails closed when the objective has no discriminative tokens or candidates contain no overlapping lexical evidence.",
+        "Designed for small candidate sets emitted by the qualified open research source frontend."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "input_path": {
+          "container": "scalar",
+          "effect": "source.candidates.available",
+          "field": "output_path",
+          "type": "effect_result"
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        }
+      },
+      "provides": [
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "requires": [
+        "source.candidates.available"
+      ],
+      "result_fields": [
+        "status",
+        "relevance_claim_scope",
+        "top_candidate_original_index",
+        "ranked_candidates",
+        "semantic_entailment_status",
+        "primary_source_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+        "algorithm": "BM25 Robertson/Sparck Jones positive-IDF variant",
+        "modules": [
+          "json",
+          "math",
+          "pathlib",
+          "re"
+        ],
+        "parameters": {
+          "b": 0.75,
+          "k1": 1.5,
+          "title_weight_approximation": 2
+        },
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "domains": [
+          "AEROSPACE",
+          "DATABASE_SYSTEMS",
+          "CLIMATE_SCIENCE"
+        ],
+        "exact_producer_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+        "incremental_spend_usd": 0,
+        "independent_oracle": "rank-bm25 0.2.2 BM25Okapi",
+        "model_dependency_count": 0,
+        "no_overlap_fail_closed": true,
+        "public_runner_pr": 143,
+        "runner_issue": 144,
+        "status": "INDEPENDENT_PUBLIC_CROSS_DOMAIN_QUALIFICATION_PASS",
+        "workflow_run_id": 36678278264
+      }
+    },
+    "sqlite.table.create_from_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "sqlite.table.create_from_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "sqlite_table_stdlib",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "sqlite",
+        "database",
+        "table",
+        "rows",
+        "columns",
+        "create"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "sqlite.table.create_from_json_records"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "sqlite_version",
+        "status_value",
+        "table_name"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
+        "module": "sqlite3",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier_package": "sqlite3",
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "sqlite_table_stdlib",
+          "collection_path": [
+            "capabilities"
+          ],
+          "column_count": 5,
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "output_bytes": 8192,
+          "output_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
+          "output_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
+          "output_verified": true,
+          "row_count": 17,
+          "sqlite_version": "3.45.1",
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "table_name": "verified_capabilities"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
+      }
+    },
+    "sqlite.table.verify_against_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "sqlite.table.verify_against_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "sqlite_path": "${input.sqlite_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "sqlite_verify_cli",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "sqlite",
+        "database",
+        "table",
+        "rows",
+        "columns",
+        "verify",
+        "query",
+        "independently"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "sqlite.table.verify_against_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+        "module": "sqlite3",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "sqlite_verify_cli",
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "producer_independent_verifier": true,
+          "sqlite_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
+          "sqlite_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "table_name": "verified_capabilities",
+          "verified": true,
+          "verified_rows": 17
+        },
+        "producer_source": "python_stdlib:sqlite3",
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
+      }
+    },
+    "structured.decision_evidence.locate.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "structured.decision_evidence.locate.stdlib",
+          "max_scan": 40000,
+          "output_path": "${input.output_path}",
+          "search_root": "canonical"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "decision_evidence_locate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "decision",
+        "evidence",
+        "typed",
+        "problem",
+        "locate",
+        "synthesis",
+        "alternatives",
+        "constraints"
+      ],
+      "limitations": [
+        "Locates and validates a typed decision problem already in the tree; it does not synthesise alternatives, constraint states, or confidence values.",
+        "Admits only problems for which evidence_decision_synthesis.synthesize returns DECIDED, so an undecidable or malformed problem is never emitted.",
+        "First validated match in sorted order wins; it does not rank candidate problems by relevance to a goal."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "structured.decision_evidence.available"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "alternative_count",
+        "constraint_count",
+        "evidence_count",
+        "json_files_scanned",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "schema_matches_validated",
+        "source_path",
+        "source_sha256",
+        "status"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/decision_evidence_locate.py",
+        "algorithm": "Deterministic sorted walk admitting only files the consumer's own synthesize() decides",
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "pathlib",
+          "sys"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "adapter_path": "canonical/runtime/bound_capabilities/decision_evidence_locate.py",
+        "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001__RESULT.json",
+        "independent_verifier": "decision_evidence_locate_verify",
+        "independent_verifier_binaries": [
+          "git grep -l",
+          "sha256sum",
+          "jq -S"
+        ],
+        "independently_verified": true,
+        "independently_verified_by": "canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py (git grep -l + sha256sum + jq -S)",
+        "mission_id": "ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001",
+        "observed_effect": {
+          "adapter": "decision_evidence_locate",
+          "first_decidable_candidate": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+          "git_schema_candidate_count": 29,
+          "independent_canonicalisation_source": "jq -S (jq binary)",
+          "independent_digest_source": "sha256sum (coreutils)",
+          "independent_enumeration_source": "git grep -l (git content search)",
+          "mismatches": [],
+          "output_sha256": "817b66999c744d0dfcb206139a472957c6a968c0dfb124edec1f0926358735c9",
+          "output_verified": true,
+          "source_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+          "source_sha256": "1775f1694ba0e6e3b464a9e73e21387fab2d530ecfd5c866bea677cbda759c5d",
+          "verified": true
+        },
+        "type": "adapter_self_check"
+      }
+    },
+    "task.acceptance.objective.lossless.v1": {
+      "action_template": {
+        "args": {
+          "candidate_response": "${input.candidate_response}",
+          "capability_id": "task.acceptance.objective.lossless.v1",
+          "raw_task_text": "${input.raw_task_text}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "raw_task_objective_acceptance_executor_v1_run",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "acceptance",
+        "raw task",
+        "specification",
+        "objective",
+        "verifier",
+        "semantic residual",
+        "software"
+      ],
+      "limitations": [
+        "Preserves every non-whitespace raw-task segment and executes only source-grounded objective acceptance routes already supported by the Brain.",
+        "Any semantic residual blocks candidate acceptance and acceptance-stop authorization.",
+        "Direct candidate fields are inputs to typed predicates and are not by themselves independently measured or content-addressed observations.",
+        "Existing tests, builder success, or candidate evidence cannot substitute for unresolved raw-request semantics.",
+        "No general natural-language semantic completeness, general V6 closure, benchmark score, or terminal authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "raw_task.objective_acceptance.model",
+        "raw_task.objective_acceptance.verdict",
+        "raw_task.semantic_residual.ids"
+      ],
+      "requires": [
+        "raw_task.text.available",
+        "candidate.response_or_fields.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/raw_task_objective_acceptance_executor_v1_run.py",
+        "donor_capabilities": [
+          "lossless_raw_task_contract_v1",
+          "raw_task_acceptance_residual_localizer_v1",
+          "instruction_constraint_compiler_v1",
+          "source_aligned_acceptance_program_v1",
+          "typed_acceptance_program_v1"
+        ],
+        "type": "brain_owned_python_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_test_count": 13,
+        "independently_verified": true,
+        "model_dependency_count": 0,
+        "primary_test_count": 13,
+        "receipt_path": "canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
+        "test_git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4"
+      }
+    },
+    "terminal.kstar.root.assess.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "terminal.kstar.root.assess.stdlib"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "terminal_kstar_root_assess",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "terminal",
+        "kstar",
+        "scope",
+        "complete",
+        "proof",
+        "brain",
+        "opus",
+        "capability",
+        "falsify",
+        "tournament",
+        "policy",
+        "adequacy",
+        "discriminator",
+        "generator",
+        "basis",
+        "transform",
+        "runtime",
+        "ownership",
+        "residual",
+        "counterexample",
+        "evidence",
+        "reuse",
+        "universal",
+        "cover",
+        "context",
+        "semantic",
+        "composition"
+      ],
+      "limitations": [
+        "Thin deterministic adapter over current canonical terminal authority and U frontier; does not invent proof premises.",
+        "Writes SCOPE_COMPLETE_PROOF only when every load-bearing universal predicate is already proved in current canonical truth; otherwise writes UNRESOLVED with exact missing premises.",
+        "Never edits terminal authority, terminal manifest, ownership state, or promotion state."
+      ],
+      "plain_goal_routable": false,
+      "plain_goal_routable_reason": "Takes no input: the assessment is derived entirely from canonical authority files, so no sentence can supply an operand. It is deliberately NOT reachable from a plain goal. Giving it an input placeholder to raise the reachability count was tried and reverted on 2026-10-17: its 30-case keyword set then matched out-of-scope prose and broke the out-of-scope fail-closed rate (1.0 -> 0.967). Fail-closed truth outranks the reachability count. Invoke it directly, or through a multi-step plan that binds it explicitly.",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "terminal.kstar.root.assessment",
+        "terminal.scope_complete.proof_or_minimum_residual",
+        "terminal.tournament.failure.witness"
+      ],
+      "requires": [],
+      "result_fields": [
+        "status",
+        "outcome",
+        "result_path",
+        "output_verified",
+        "u_empty",
+        "abc_closed",
+        "missing_premises",
+        "model_dependency_count"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "incremental_spend_usd": 0,
+        "independent_verification_required_for_any_scope_complete_promotion": true,
+        "model_dependency_count": 0,
+        "status": "BOUND_WITH_FAIL_CLOSED_REGRESSION_TEST"
+      }
+    },
+    "test.slice.never_miss.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "test.slice.never_miss.v1",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "test_slice_never_miss_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "test",
+        "slice",
+        "never-miss",
+        "change-impact",
+        "2070",
+        "2096",
+        "honest",
+        "minimal",
+        "40x"
+      ],
+      "limitations": [
+        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop \u2014 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "test.slice.never_miss.verified",
+        "test.selection.minimal"
+      ],
+      "requires": [
+        "python.source.change_impact.test_selection"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/test_slice_never_miss_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-TEST-SLICE-NEVER-MISS-V1",
+        "observed_effect": {
+          "never_miss": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_TEST_SLICE_NEVER_MISS_V1.json"
+      }
+    },
+    "text.file.write": {
+      "action_template": {
+        "args": {
+          "capability_id": "text.file.write",
+          "content": "${input.content}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "file_write_text",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "write",
+        "text",
+        "file",
+        "create",
+        "save",
+        "content",
+        "output"
+      ],
+      "limitations": [
+        "Writes UTF-8 text to one repository-local file.",
+        "The written bytes are read back and compared before the step is reported as done."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "text.file.available"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "content_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_write_text.py",
+        "modules": []
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "autonomous_acquisition": true,
+        "independent_output_bytes": 74,
+        "independent_output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+        "independent_verified": true,
+        "mission_id": "ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001",
+        "observed_effect": {
+          "adapter": "file_write_text",
+          "content_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+          "output_bytes": 74,
+          "output_path": "canonical/astra_runtime/tmp/tfw_verify/TEXT_FILE_WRITE_PROOF.txt",
+          "output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+          "output_verified": true
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001__text.file.write__AUTO_VERIFY.json"
+      }
+    },
+    "web.browser.rendered.capture.chromedriver": {
+      "action_template": {
+        "args": {
+          "capability_id": "web.browser.rendered.capture.chromedriver",
+          "result_path": "${input.result_path}",
+          "screenshot_path": "${input.screenshot_path}",
+          "url": "${input.url}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "browser_chromedriver",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "browser",
+        "web",
+        "rendered",
+        "navigate",
+        "open",
+        "page",
+        "screenshot",
+        "url",
+        "website",
+        "interact",
+        "form",
+        "type",
+        "enter",
+        "select",
+        "choose",
+        "check",
+        "click",
+        "submit"
+      ],
+      "limitations": [
+        "Requires a compatible local Chrome/Chromium binary and Chromedriver.",
+        "Captures one rendered page, visible text, title, final URL, result JSON, and a bounded full-page screenshot.",
+        "Verified interaction extension supports declarative set_text, select_option, check, click, submit, and bounded wait actions."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "web.browser.rendered.capture",
+        "web.browser.rendered.interact"
+      ],
+      "requires": [],
+      "source": {
+        "executable": "chromedriver",
+        "type": "system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "interaction_extension": {
+          "mission_id": "ASTRA-VERIFY-BROWSER-INTERACTION-001",
+          "observed_effect": {
+            "actions_completed": 4,
+            "final_url": "https://httpbin.org/post",
+            "independently_checked_post_submit_state": true,
+            "submitted_customer_name": "PROJECT BRAIN",
+            "submitted_size": "medium",
+            "submitted_topping": "bacon"
+          },
+          "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-BROWSER-INTERACTION-001__RECEIPT.json"
+        },
+        "mission_id": "ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001",
+        "observed_effect": {
+          "latest_stable_python3": "3.14.7",
+          "page_title": "Download Python | Python.org",
+          "rendered": true,
+          "screenshot_bytes": 885055,
+          "screenshot_sha256": "f549568c9bcb3869e88c3b16f3d6f304e0ac0292be088fb4dcd67364c389101b"
+        },
+        "producer_independent_verifier": true,
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json"
+      }
+    },
+    "web.release.verify.independent_http": {
+      "action_template": {
+        "args": {
+          "capability_id": "web.release.verify.independent_http",
+          "major": "${input.major}",
+          "max_bytes": 3000000,
+          "product": "${input.product}",
+          "result_path": "${input.result_path}",
+          "timeout_s": 30,
+          "version_field": "${input.version_field}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "web_release_verify",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "web",
+        "release",
+        "version",
+        "latest",
+        "stable",
+        "verify",
+        "independent",
+        "official",
+        "http"
+      ],
+      "limitations": [
+        "Verifies semantic versions exposed in an official HTTPS page's visible text.",
+        "Current verified contract targets major.minor.patch release strings and compares against a claimed field in repository-local JSON."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "web.release.verify.current"
+      ],
+      "requires": [
+        "structured.release_claim.available"
+      ],
+      "source": {
+        "modules": [
+          "urllib.request",
+          "html.parser",
+          "gzip"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_reference_evidence": "canonical/astra_runtime/evidence/ASTRA-BROWSER-PYTHON-RELEASE-VERIFY-001__RESULT.json",
+        "mission_id": "ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001",
+        "observed_effect": {
+          "adapter": "web_release_verify",
+          "claimed_string_present": true,
+          "claimed_version": "3.14.7",
+          "final_url": "https://www.python.org/downloads/",
+          "major": "3",
+          "observed_text_evidence": "Python 3.14.7",
+          "observed_version": "3.14.7",
+          "parser": "html.parser",
+          "producer_independent_verifier": true,
+          "product": "Python",
+          "response_bytes": 215042,
+          "source_url": "https://www.python.org/downloads/",
+          "transport": "urllib.request",
+          "verified": true,
+          "version_field": "latest_stable_python3"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-WEB-RELEASE-VERIFIER-VERIFY-001__RESULT.json"
+      }
+    },
+    "xlsx.table.create_from_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "xlsx.table.create_from_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "xlsx_table_xlsxwriter",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "xlsx",
+        "spreadsheet",
+        "workbook",
+        "rows",
+        "columns",
+        "create"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "xlsx.table.create_from_json_records"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "status_value"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-xlsxwriter",
+            "sha256": "234db5c80ba8d2eaf9933a95566f81a86aa01bb15b884f2ee6c932847e58bfd2",
+            "version": "3.1.9-1"
+          }
+        ],
+        "pypi_fallback": {
+          "metadata_url": "https://pypi.org/pypi/xlsxwriter/3.2.9/json",
+          "project": "xlsxwriter",
+          "version": "3.2.9",
+          "wheel_filename": "xlsxwriter-3.2.9-py3-none-any.whl",
+          "wheel_sha256": "9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3"
+        },
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier_package": "python3-openpyxl",
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "xlsx_table_xlsxwriter",
+          "collection_path": [
+            "capabilities"
+          ],
+          "column_count": 5,
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "output_bytes": 6061,
+          "output_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+          "output_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d",
+          "output_verified": true,
+          "row_count": 15,
+          "status_value": "VERIFIED_BOUND_CAPABILITY"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json"
+      }
+    },
+    "xlsx.table.verify_against_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "xlsx.table.verify_against_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "xlsx_path": "${input.xlsx_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "xlsx_verify_openpyxl",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "xlsx",
+        "spreadsheet",
+        "workbook",
+        "rows",
+        "columns",
+        "verify",
+        "reopen",
+        "independently"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "xlsx.table.verify_against_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "python3-openpyxl",
+            "sha256": "0892bf202df1f56bb36530c3ba9ac9f24f6a5b115442e7aa602b12e46aa0433c",
+            "version": "3.1.2+dfsg-6"
+          }
+        ],
+        "pypi_fallback": {
+          "metadata_url": "https://pypi.org/pypi/openpyxl/3.1.5/json",
+          "project": "openpyxl",
+          "version": "3.1.5",
+          "wheel_filename": "openpyxl-3.1.5-py2.py3-none-any.whl",
+          "wheel_sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"
+        },
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "xlsx_verify_openpyxl",
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "producer_independent_verifier": true,
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "verified": true,
+          "verified_rows": 15,
+          "xlsx_path": "canonical/astra_runtime/tmp/XLSX_LIBRARY_ROUNDTRIP_VERIFY.xlsx",
+          "xlsx_sha256": "1574856b2a7f81cdbd09e2a1d5ecd2f3e732af557c1c31461840e7870c1d532d"
+        },
+        "producer_package": "python3-xlsxwriter",
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-XLSX-LIBRARY-ROUNDTRIP-002__RESULT.json"
+      }
+    },
+    "yaml.to_json.yq": {
+      "action_template": {
+        "args": {
+          "capability_id": "yaml.to_json.yq",
+          "output_path": "${input.output_path}",
+          "timeout_s": 60,
+          "yaml_path": "${input.yaml_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "yq_yaml_json",
+      "channel_schema": {
+        "output_path": {
+          "format": "json-text",
+          "kind": "file"
+        }
+      },
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "yaml",
+        "yml",
+        "json",
+        "parse",
+        "convert",
+        "workflow",
+        "structured"
+      ],
+      "limitations": [
+        "Converts repository-local YAML/YML files into deterministic JSON.",
+        "Verified with Ubuntu yq 3.1.0-3."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "json.file.available",
+        "yaml.to_json"
+      ],
+      "requires": [
+        "yaml.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "input_path",
+        "input_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "top_level_type"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "fallback": {
+              "module": "yaml",
+              "type": "pypi"
+            },
+            "name": "yq",
+            "optional": true,
+            "optional_reason": "adapter canonical/runtime/bound_capabilities/yq_yaml_json.py catches FileNotFoundError for the yq binary and falls back to the yaml module; the family using this capability passes end to end on this machine with the binary absent.",
+            "sha256": "ef935e2b644e6c70ed080396dbe3d93330d1482fd9ce6f34813bdcf3616cb809",
+            "version": "3.1.0-3"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier": "raw_yaml_regex_crosscheck",
+        "mission_id": "ASTRA-VERIFY-YAML-JSON-YQ-001",
+        "observed_effect": {
+          "input_sha256": "34ec38e5e55a2fc3e2661fe52eb84b0eaf61b09126729180ffbc22eb068f46ac",
+          "job_ids": [
+            "run-mission"
+          ],
+          "output_sha256": "23c812aa8aa6e6ebd0e8674d15bd9994fa00674f46afd002704e2f7624c64f13",
+          "uses": [
+            "actions/checkout@v4",
+            "actions/setup-python@v5"
+          ]
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
