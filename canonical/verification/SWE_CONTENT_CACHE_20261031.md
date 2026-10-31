@@ -157,3 +157,14 @@ the new answer/suite controls with cache/index/model tests and officially
 regenerate the combined model. Earlier timing and broad comparison numbers
 remain measurements of the explicitly identified earlier source, not the
 subsequently edited repair adapter or newly integrated answer projection.
+
+Final expanded 15-module integration run on the combined `34f867a9` tree:
+**250 passed, 1 failed, 931 subtests passed**, four deprecation warnings,
+41.93 s. The incoming test
+`test_the_suite_runs_where_the_imports_point_v1.py::TheSuiteRunsWhereTheImportsPointTests::test_an_empty_localization_is_not_a_pass`
+expects a localizer refusal but receives no exception in this environment.
+Openly restoring only the derivation runtime to unchanged main and rerunning
+that control reproduced **1 failed in 0.28 s**, then the cache patch was
+reapplied. This is a confirmed incoming failure, not claimed fixed or hidden,
+and not justification to broaden this cache integration into a localizer rewrite.
+The other incoming package-root/answer controls and all 12 cache controls passed.
