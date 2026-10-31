@@ -268,33 +268,56 @@ def stated_existing_files(goal: str, root: pathlib.Path) -> list[str]:
     return out
 
 
-_ADAPTER_DEFAULTS_CACHE: dict[tuple[str, int, int, str], dict[str, str]] = {}
-_PARSED_TREE_CACHE: dict[tuple[str, int, int], ast.Module] = {}
+# Source metadata is not content identity: tools can preserve size and mtime.
+# Retain only the latest content for each path/context, with bounded entry counts.
+_DERIVATION_CACHE_LIMIT = 512
+_ADAPTER_DEFAULTS_CACHE: dict[tuple[str, str], tuple[str, dict[str, str]]] = {}
+_PARSED_TREE_CACHE: dict[str, tuple[str, ast.Module]] = {}
+
+
+def _remember_source(cache: dict, key: Any, value: Any) -> None:
+    cache[key] = value
+    while len(cache) > _DERIVATION_CACHE_LIMIT:
+        cache.pop(next(iter(cache), None), None)
+
+
+def _parsed_source(path: pathlib.Path, source: bytes, digest: str) -> ast.Module:
+    """Share one parse of exactly the bytes whose digest validated this request."""
+    key = str(path)
+    cached = _PARSED_TREE_CACHE.get(key)
+    if cached is not None and cached[0] == digest:
+        return cached[1]
+    # Strict decoding: replacement characters cannot prove executable defaults.
+    tree = ast.parse(source.decode("utf-8"))
+    _remember_source(_PARSED_TREE_CACHE, key, (digest, tree))
+    return tree
 
 
 def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, str]:
-    """Keys the adapter itself defaults, proved from its source AST (O(|AST|) + mtime-memoized)."""
+    """Keys the adapter itself defaults, proved from its content-memoized source AST."""
     from canonical.runtime import capability_type_surface_v1 as surface
 
     try:
         adapter = surface.resolve_adapter(entry, root)
     except Exception:
         return {}
-    if adapter is None or not adapter.is_file():
+    if adapter is None:
         return {}
     try:
-        st = adapter.stat()
+        adapter = adapter.resolve()
+        source = adapter.read_bytes()
+        digest = hashlib.sha256(source).hexdigest()
         root_resolved = pathlib.Path(root).resolve()
-        cache_key = (str(adapter), st.st_mtime_ns, st.st_size, str(root_resolved))
+        cache_key = (str(adapter), str(root_resolved))
     except OSError:
         return {}
     cached = _ADAPTER_DEFAULTS_CACHE.get(cache_key)
-    if cached is not None:
-        return dict(cached)
+    if cached is not None and cached[0] == digest:
+        return dict(cached[1])
     try:
-        tree = ast.parse(adapter.read_text(encoding="utf-8", errors="replace"))
-    except (OSError, SyntaxError, ValueError):
-        _ADAPTER_DEFAULTS_CACHE[cache_key] = {}
+        tree = _parsed_source(adapter, source, digest)
+    except (SyntaxError, ValueError):
+        _remember_source(_ADAPTER_DEFAULTS_CACHE, cache_key, (digest, {}))
         return {}
 
     # Single O(|AST|) prepass collecting nodes guarded by BoolOp(Or) or If.test.
@@ -313,9 +336,7 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
         rel = adapter.name
 
     found: dict[str, str] = {}
-    nodes = list(ast.walk(tree))
-    parents = {child: parent for parent in nodes for child in ast.iter_child_nodes(parent)}
-    for node in nodes:
+    for node in ast.walk(tree):
         if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
                 and node.func.attr == "get" and node.args):
             continue
@@ -330,7 +351,7 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
         if guarded and key.value in _CONFIGURATION_SLOTS \
                 and not any(word in low for word in ("output", "result", "report")):
             found.setdefault(key.value, f"{rel}:{node.lineno}")
-    _ADAPTER_DEFAULTS_CACHE[cache_key] = found
+    _remember_source(_ADAPTER_DEFAULTS_CACHE, cache_key, (digest, found))
     return dict(found)
 
 
@@ -385,19 +406,11 @@ def _project_root(root: pathlib.Path, source_rel: str, max_up: int = 3) -> str |
 
 
 def _tree_of(root: pathlib.Path, rel: str) -> ast.Module:
-    """The parsed module (mtime-memoized), or an empty module when unreadable."""
+    """The content-memoized module, or an empty module when unreadable/invalid."""
     try:
-        p = (pathlib.Path(root) / rel).resolve()
-        st = p.stat()
-        key = (str(p), st.st_mtime_ns, st.st_size)
-        cached = _PARSED_TREE_CACHE.get(key)
-        if cached is not None:
-            return cached
-        mod = ast.parse(p.read_text(encoding="utf-8"))
-        if len(_PARSED_TREE_CACHE) > 512:
-            _PARSED_TREE_CACHE.clear()
-        _PARSED_TREE_CACHE[key] = mod
-        return mod
+        path = (pathlib.Path(root) / rel).resolve()
+        source = path.read_bytes()
+        return _parsed_source(path, source, hashlib.sha256(source).hexdigest())
     except (OSError, SyntaxError, ValueError):
         return ast.Module(body=[], type_ignores=[])
 # Ordered: the first rule whose pattern matches decides, and the caller still
