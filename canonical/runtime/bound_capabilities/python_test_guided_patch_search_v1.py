@@ -167,8 +167,101 @@ def _node_key(node: ast.AST) -> tuple:
         getattr(node,"end_lineno",None),getattr(node,"end_col_offset",None),
     )
 
-def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals: list[str]):
+def _declared_fields(tree: ast.AST) -> list[str]:
+    """Every field a class in this module declares about its own instances.
+
+    A dataclass annotation, a ``self.x = ...`` assignment and a ``__slots__``
+    entry declare the same fact and are read the same way.  This is the only
+    type information a repair search needs for the dropped-operand family: the
+    fields of the object an expression is projecting, taken from the module
+    itself rather than from a curated list.
+    """
+    fields: list[str] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ClassDef):
+            continue
+        for stmt in node.body:
+            if isinstance(stmt, ast.AnnAssign) and isinstance(stmt.target, ast.Name):
+                if stmt.target.id not in fields:
+                    fields.append(stmt.target.id)
+            if isinstance(stmt, ast.Assign) and any(
+                    isinstance(t, ast.Name) and t.id == "__slots__" for t in stmt.targets):
+                for el in getattr(stmt.value, "elts", ()):
+                    if isinstance(el, ast.Constant) and isinstance(el.value, str) \
+                            and el.value not in fields:
+                        fields.append(el.value)
+        for sub in ast.walk(node):
+            if not isinstance(sub, (ast.Assign, ast.AnnAssign)):
+                continue
+            targets = list(sub.targets) if isinstance(sub, ast.Assign) else [sub.target]
+            for target in targets:
+                if isinstance(target, ast.Attribute) and isinstance(target.value, ast.Name) \
+                        and target.value.id == "self" and target.attr not in fields:
+                    fields.append(target.attr)
+    return fields
+
+
+def _read_attributes(tree: ast.AST) -> list[str]:
+    """Attribute names this module reads on objects, minus the ones it calls.
+
+    Same-file evidence for the same fact `_declared_fields` reads when the class
+    happens to live in the file: `item.price_cents * item.qty` in `line_total`
+    says `qty` is a field of the thing `cart_total` also iterates, even though
+    the class is in another module and no annotation connects them.  Called
+    attribute names (methods) are dropped -- a bound method is not an operand.
+    """
+    called = {n.func.attr for n in ast.walk(tree)
+              if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)}
+    out: list[str] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Attribute) and isinstance(node.ctx, ast.Load) \
+                and node.attr not in called and node.attr not in out:
+            out.append(node.attr)
+    return out
+
+
+def _imported_fields(tree: ast.AST, source_path: Any) -> list[str]:
+    """Declared fields of the modules this one imports by name.
+
+    The class a bug's operand belongs to frequently lives one module over
+    (`from app.models import Item`), so the fields `_declared_fields` would read
+    on the spot are one import away.  Resolving import -> file -> declarations is
+    static, needs no execution, and stays inside the source root: parents are
+    walked from the file upward and the first existing module wins.
+    """
+    if source_path is None:
+        return []
+    path = pathlib.Path(str(source_path))
+    out: list[str] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ImportFrom) or node.level or not node.module:
+            continue
+        parts = node.module.split(".")
+        for parent in list(path.parents)[:8]:
+            hit = parent.joinpath(*parts).with_suffix(".py")
+            if not hit.is_file():
+                continue
+            try:
+                other = ast.parse(hit.read_text(encoding="utf-8"), filename=str(hit))
+            except (SyntaxError, ValueError, OSError, UnicodeDecodeError):
+                break
+            for name in _declared_fields(other):
+                if name not in out:
+                    out.append(name)
+            break
+    return out
+
+
+def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals: list[str],
+                    source_path: Any = None):
     seen=set()
+    _fields=_declared_fields(tree)
+    for _a in _read_attributes(tree):
+        if _a not in _fields:
+            _fields.append(_a)
+    for _a in _imported_fields(tree, source_path):
+        if _a not in _fields:
+            _fields.append(_a)
     for node in _locations(tree):
         key=_node_key(node)
         if isinstance(node,ast.Compare) and len(node.ops)==1:
@@ -197,6 +290,38 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                 seen.add(sig)
                 yield key,_descriptor(node,"BINOP_SWAP",type(node.op).__name__+"->"+newtyp.__name__),(
                     lambda n,newtyp=newtyp: ast.BinOp(left=n.left,op=newtyp(),right=n.right)
+                )
+        # DROPPED OPERAND -- the exact dual of BINOP_SWAP, and the second half of
+        # the same injected-defect class.  The repo already records that "the
+        # canonical injected-operator defect is + where * belongs"; a *removed*
+        # operator is that defect seen from the other side: `total += price * qty`
+        # arrives as `total += price`, and no swap can put the missing operand
+        # back because there is no node left to swap.  Measured 2026-10-31 on a
+        # cart-total regression: 74 candidates, not one of them touches the line
+        # (`i.price_cents` -> `i.price_cents * i.qty` is outside the grammar), so
+        # three escalated engines burned 105 s and every one of them was right to
+        # report OPEN -- the search space, not the search, was the ceiling.
+        #
+        # The operand pool is the module's own declared fields (see
+        # `_declared_fields`), never a hardcoded list: whatever fields the class
+        # declares are exactly the tokens such a bug drops.  Bounded at 4 fields
+        # per site and kept in its own family so no legacy single-site candidate
+        # is ever displaced from its budget.
+        if len(_fields)>=2 and isinstance(node,ast.Attribute) and isinstance(node.ctx,ast.Load) \
+                and isinstance(node.value,ast.Name) and node.attr in _fields:
+            _base=node.value.id
+            for _other in [f for f in _fields if f!=node.attr][:4]:
+                sig=(key,"dropped",_other)
+                if sig in seen: continue
+                seen.add(sig)
+                yield key,_descriptor(
+                    node,"DROPPED_OPERAND",
+                    f"{_base}.{node.attr} -> {_base}.{node.attr} * {_base}.{_other}",
+                    "dropped_operand"),(
+                    lambda n,_other=_other,_base=_base: ast.BinOp(
+                        left=n,op=ast.Mult(),
+                        right=ast.Attribute(value=ast.Name(id=_base,ctx=ast.Load()),
+                                            attr=_other,ctx=ast.Load()))
                 )
         if isinstance(node,ast.Constant):
             value=node.value
@@ -768,19 +893,25 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     legacy_tested=0
     neigh_tested=0
     NEIGH_RESERVE=6  # own budget; legacy slots untouched (zero dilution)
+    DROPPED_RESERVE=8  # same law for the dropped-operand family
+    dropped_tested=0
     try:
-        for key,desc,replacer in _candidate_specs(tree,nums,strings):
+        for key,desc,replacer in _candidate_specs(tree,nums,strings,source):
             if desc.get("family")=="neighborhood":
                 if neigh_tested>=NEIGH_RESERVE:
                     continue
                 neigh_tested+=1
+            elif desc.get("family")=="dropped_operand":
+                if dropped_tested>=DROPPED_RESERVE:
+                    continue
+                dropped_tested+=1
             elif legacy_tested>=max_candidates:
-                continue  # keep scanning: neighborhood reserve must stay reachable
+                continue  # keep scanning: every family reserve must stay reachable
             candidate=renderer.render(key,replacer)
             if candidate is None or candidate==source_text:
                 continue
             tested+=1
-            if desc.get("family")!="neighborhood":
+            if desc.get("family") not in ("neighborhood","dropped_operand"):
                 legacy_tested+=1
             source.write_text(candidate,encoding="utf-8")
             _purge_source_bytecode(source)

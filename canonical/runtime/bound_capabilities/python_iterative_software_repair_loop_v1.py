@@ -67,7 +67,7 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None):
  # before reaching any line the stack names. Near-focus candidates first.
  fl=set(focus or ())
  specs=[]
- for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
+ for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings,source):
   line=desc.get('lineno') or 0
   near=1 if not fl else 0 if any(abs(line-f)<=3 for f in fl) else 1
   specs.append((near,line,key,desc,replacer))

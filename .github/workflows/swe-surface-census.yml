@@ -1,0 +1,87 @@
+name: swe-surface-census
+
+# THE CENSUS IS THE ONLY THING THAT MEASURES WHAT THE MACHINE CAN ACTUALLY DO.
+#
+# `hardcore_swe_surface_probe_20261030.py` runs 28 ordinary software-engineering
+# sentences through the live front door against freshly built fixtures and checks
+# each result with an INDEPENDENT oracle -- a suite run, a behaviour table, a
+# revert-and-rerun, a ten-run race replay. It is the instrument every runtime law
+# in this repository was measured against.
+#
+# Nothing ran it. Measured 2026-10-31: 0 of 321 workflows executed the census, and
+# main lost laws twice while every check stayed green. A number nobody runs is a
+# number nobody can regress against, so this workflow runs it and refuses to go
+# below the count main has already reached.
+#
+# The floor is not a target and not a score: it is the surface that exists today.
+# When a change raises it, raise the floor in the same pull request -- that is the
+# only way the guard keeps meaning what it says.
+#
+# There is deliberately NO paths filter. Every capability row, the derivation of
+# its inputs, the front door that admits it and the adapters that execute it are
+# in scope, and a filter would miss exactly the change that breaks one of them.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      floor:
+        description: "Minimum number of the 28 sentences that must reach a verified outcome"
+        required: false
+        default: "25"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: swe-surface-census-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run the hardcore SWE surface census
+        shell: bash
+        run: |
+          FLOOR="${{ github.event.inputs.floor }}"
+          FLOOR="${FLOOR:-25}"
+          python hardcore_swe_surface_probe_20261030.py \
+            --jobs 4 --json /tmp/census.json --floor "$FLOOR" 2>&1 | tee /tmp/census.log
+
+      - name: Publish the failing sentences to the pull request
+        if: failure() && github.event_name == 'pull_request'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo 'The SWE surface census fell below the floor.'
+            echo
+            echo '```'
+            tail -60 /tmp/census.log 2>/dev/null || echo 'no log'
+            echo '```'
+            echo
+            echo 'Each failing row is a sentence the machine can no longer complete. Fix the'
+            echo 'capability, or lower the floor in the same pull request and say why.'
+          } > /tmp/comment.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swe-surface-census
+          path: |
+            /tmp/census.json
+            /tmp/census.log
+          if-no-files-found: ignore

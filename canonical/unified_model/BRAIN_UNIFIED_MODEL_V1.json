@@ -23385,7 +23385,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "6dce8d0ce8f4b578ca90cfb6f7934e252fbafd64e63b5d5d4a12b0911f0fbb14",
+    "source_sha256": "c43a6cfa0129240d217b5f0fbf97ea52d96f8a2697480d3d324f14c0d141d163",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24030,7 +24030,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "f61c434659c8e518e62cbcc7654cb74bd797ca9816fa809c037dde2b95874d21",
+    "source_sha256": "f30733a3f7217142967384ffe61d2805e905c67df41af1fe812dfc6ce1258835",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25975,7 +25975,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "68989753b37aba7a27cc58138ed0ca35b5bab14240e4dcc09d1557ab485470c2",
+    "source_sha256": "324e7266815bd87b61d431b12ec7cd681b0e9bff3d8a4586ea08a60a458bc5d7",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -26067,7 +26067,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "44259fa9c082b25884e5814913fbd616bb91771705b8283934916b07fb460f4b",
+    "source_sha256": "4ccd5208eb3930f7a32391c24a4fb1600f02edc34a83c23c2fb31153047af23a",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30470,7 +30470,7 @@
   "engines": 26,
   "knowledge_documents": 206,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6531,
+  "research_index_records": 6534,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30479,7 +30479,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "56ce890f63f33dfb99f982bc312e68e59dc7fa14efa05842d4446aa0aaf9fb73"
+  "value": "d76caa4502f5a69b607e20a082ca5c6b7d1d6302b224c024401336c0b8b6d5db"
  },
  "engines": [
   {
@@ -57823,7 +57823,7 @@
   "included_source_count": 995,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "feeb1ffd1d5354752c93d9f708b915d3ccd4d185a7ef261fc475f0368184297e"
+  "source_tree_digest": "aec7b550e3753e2244db2f7fdc887feec99a228a8328664d3728595cf7e1747b"
  },
  "research_index": [
   {
@@ -200407,6 +200407,51 @@
    }
   },
   {
+   "action_id": "A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "83a72a6e4369526ac0bf455ea7e50074a2a085b526fef20b556bcb2e90dcb6c5",
+   "status": "",
+   "terms": {
+    "10": 1,
+    "18": 1,
+    "2-sentence": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "25": 1,
+    "28": 2,
+    "321": 1,
+    "68": 1,
+    "a_census_that_cannot_fail_is_not_a_gate_v1_20261031_v1": 1,
+    "after": 1,
+    "against": 1,
+    "anything": 1,
+    "artifact": 1,
+    "being": 1,
+    "builds": 1,
+    "but": 1,
+    "census": 4,
+    "every": 2,
+    "exits": 2,
+    "fix_race": 2,
+    "floor": 3,
+    "green": 2,
+    "measured": 2,
+    "nobody": 2,
+    "not": 3,
+    "now": 2,
+    "number": 2,
+    "runs": 2,
+    "tests": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -201293,6 +201338,51 @@
     "v1": 2,
     "value": 3,
     "whole": 4
+   }
+  },
+  {
+   "action_id": "A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dd6ca6f79f8d894773119777a79a171ccd5541c645dcf4d191d4f1b60c9d1940",
+   "status": "",
+   "terms": {
+    "18": 3,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 1,
+    "9f808230": 1,
+    "a_git_question_is_not_a_tail_command_v1_20261031_v1": 1,
+    "absent": 1,
+    "adapter": 1,
+    "again": 1,
+    "answered": 1,
+    "because": 2,
+    "bound": 4,
+    "commits": 3,
+    "count": 2,
+    "directory": 2,
+    "file": 2,
+    "git": 9,
+    "last": 6,
+    "lines": 3,
+    "longer": 2,
+    "measured": 2,
+    "no": 3,
+    "not": 2,
+    "output": 2,
+    "question": 2,
+    "read": 3,
+    "sentence": 2,
+    "show": 3,
+    "tail": 6,
+    "three": 7,
+    "v1": 2
    }
   },
   {
@@ -202372,6 +202462,51 @@
     "repair": 6,
     "says": 2,
     "sentence": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "678af6c3a3c27269094d3c3ca55bf09cfb65d18264f0a460804069e08ea1766a",
+   "status": "",
+   "terms": {
+    "105": 1,
+    "18": 1,
+    "2.6": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 1,
+    "3.3": 1,
+    "46": 1,
+    "68": 1,
+    "74": 1,
+    "a_repair_search_must_contain_the_defect_v1_20261031_v1": 1,
+    "above": 1,
+    "adding": 1,
+    "correct": 2,
+    "failing": 2,
+    "fixture": 3,
+    "green": 2,
+    "no": 3,
+    "not": 4,
+    "now": 2,
+    "one": 3,
+    "oracle": 2,
+    "own": 3,
+    "repair": 6,
+    "reported": 2,
+    "routing": 2,
+    "search": 2,
+    "so": 3,
+    "test": 3,
+    "tests": 6,
     "v1": 2
    }
   },
@@ -210203,7 +210338,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/UNIVERSAL_STDLIB_SWE_REVIEW_GATES_AND_TYPED_FILE_DISAMBIGUATION_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "c96bc23fcd4573fc5fbe190b873e64458416a5118853f9186b55e2813b7b76e9",
+   "sha256": "38fb97eac476137e13dd6e7fb7f424465d429aec55744a18f09c2ab959aabe80",
    "status": "",
    "terms": {
     "17": 1,
@@ -226359,9 +226494,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "4c04b0083f11dc927059551728bd8ceea364620e0b4e8d4a92827a903016efb7",
+   "sha256": "985afe097d5a1ae32927eeea2a3f4dc259d1124783f9db152c9b36cfd2a4133f",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 63,
+   "symbol_count": 64,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -226375,6 +226510,7 @@
     "_dotted_module",
     "_exists_in_repo",
     "_fully_bound_contract_tokens",
+    "_git_domain",
     "_head_flags",
     "_is_directory_in_repo",
     "_is_repository_path",
@@ -226385,8 +226521,7 @@
     "_no_flags",
     "_noun_matched_path",
     "_parent_if_directory",
-    "_pathish",
-    "_place_a_read_commands_answer"
+    "_pathish"
    ],
    "terms": {
     "candidate_tokens": 1,
@@ -230367,7 +230502,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "a845ae87946e179562c3c3c2997c55c12f45037d25e65cdd286f5eea712d92fc",
+   "sha256": "6d3e37f5ab646aa6ef8e7e4a79c718ec01f626dd43e9ed80969294dda35a0c72",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 13,
    "symbols": [
