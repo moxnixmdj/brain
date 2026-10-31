@@ -30493,7 +30493,7 @@
   "engines": 26,
   "knowledge_documents": 207,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6533,
+  "research_index_records": 6534,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30502,7 +30502,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f93959eaea4a00e1b2ad87c299f66f0e78994b42d310bbb77b9ad1aaaed8ebfd"
+  "value": "5bce96c4a5f628c525953447a3a5fb86859a94fc62f38e0eb936d310ac91e98e"
  },
  "engines": [
   {
@@ -200510,6 +200510,51 @@
    }
   },
   {
+   "action_id": "A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "83a72a6e4369526ac0bf455ea7e50074a2a085b526fef20b556bcb2e90dcb6c5",
+   "status": "",
+   "terms": {
+    "10": 1,
+    "18": 1,
+    "2-sentence": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "25": 1,
+    "28": 2,
+    "321": 1,
+    "68": 1,
+    "a_census_that_cannot_fail_is_not_a_gate_v1_20261031_v1": 1,
+    "after": 1,
+    "against": 1,
+    "anything": 1,
+    "artifact": 1,
+    "being": 1,
+    "builds": 1,
+    "but": 1,
+    "census": 4,
+    "every": 2,
+    "exits": 2,
+    "fix_race": 2,
+    "floor": 3,
+    "green": 2,
+    "measured": 2,
+    "nobody": 2,
+    "not": 3,
+    "now": 2,
+    "number": 2,
+    "runs": 2,
+    "tests": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -208467,7 +208512,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "a533ce964395bf116b08a8b4390cd95c598b5961385f67c69ff01fc5b3ae1322",
+   "sha256": "0fb8912966a07035676285c61cdce30308afa3a27d280f01ea81dbbd2cd96783",
    "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
    "terms": {
     "166-case": 1,
@@ -230543,7 +230588,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "6ae80f7b08a9623494440296baf09fd81fa607285f4dc4cbc05739df46fbe47a",
+   "sha256": "0e4016df8aacfa7c036292e27ea478a7709aa490b1afbb2d2f861a46fa868c8c",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 16,
    "symbols": [
