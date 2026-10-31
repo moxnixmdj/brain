@@ -30470,7 +30470,7 @@
   "engines": 26,
   "knowledge_documents": 208,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6534,
+  "research_index_records": 6535,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30479,7 +30479,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2bde53cdd5f8d574804f6fbc77624e4d884ee6561d10a33cb1b70a593c074787"
+  "value": "0f4600c2f4e91914f691d40e14b8157c7d37f9562160b8c3fb6b76368d33fefd"
  },
  "engines": [
   {
@@ -201789,6 +201789,51 @@
    }
   },
   {
+   "action_id": "A_PATH_IS_NOT_PROSE_WHEN_THE_COMPILER_SCORES_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_PATH_IS_NOT_PROSE_WHEN_THE_COMPILER_SCORES_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_PATH_IS_NOT_PROSE_WHEN_THE_COMPILER_SCORES_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "030d56c8da262e1fb20891b9ea2a057428e35b82d1ed14d3dbe7eb18430b85f0",
+   "status": "",
+   "terms": {
+    "137": 2,
+    "18": 2,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 2,
+    "a_path_is_not_prose_when_the_compiler_scores_v1_20261031_v1": 1,
+    "alone": 1,
+    "ambiguous": 1,
+    "audit": 2,
+    "because": 2,
+    "both": 1,
+    "capability_audit.pdf": 1,
+    "ci": 1,
+    "clause": 2,
+    "compiler": 3,
+    "composer": 2,
+    "compound": 1,
+    "contains": 1,
+    "create": 1,
+    "decided": 1,
+    "document.convert.markdown_pdf.pandoc_weasyprint": 1,
+    "existed": 1,
+    "filename": 3,
+    "not": 2,
+    "prose": 2,
+    "python.source.audit.ast": 2,
+    "scores": 2,
+    "sentence": 2,
+    "stay": 2,
+    "tests": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_PATH_WRITTEN_ABSOLUTE_OR_WITH_A_LEADING_DOT_SLASH_NAMES_THE_FILE_IT_STATES_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -238445,9 +238490,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "c1e5c6d6afe03eef130d6d9c1cf6fc9a5e8b86dfb246061796f6c1fcda18c4ad",
+   "sha256": "1402cb1b5adad8e516b5ae1c7c55a24323c66d93d18721b524cc917c20b0c3b4",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 132,
+   "symbol_count": 133,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
