@@ -1,37 +1,51 @@
 # All the problems — the hardcore software-engineering census
 
-**Revision 10.** Measured on `7ad341c` (main), 2026-10-31. This revision adds the one thing the
-previous nine did not have: **every one of the 28 tasks, with the row that actually answered it and the
-defect that answer exposes** (§0.1), and the five root causes those 18 failures collapse into (§2.0). Every number below is a measurement from
-this tree, not an estimate. §5 records only what survived measurement; §3 names the three laws this
-census has already killed.
+**Revision 12.** Measured on this branch, 2026-10-31, against `origin/main` `7db7bb9`.
 
-**Question:** what are *all* the problems, for a machine that must be the most advanced, fastest,
-smartest software engineer?
+Revisions 10–11 counted the gaps. This revision records that most of them have since been
+**closed in the tree itself** — by the cross-file choreographer, the mutation-score and bisect
+owners, and the repair loop — and it closes the one that had no owner on any branch:
+**a definition cannot be moved**.
 
-**Answer:** the machine owns **131 registered capability rows and 425 verified capabilities**, of which
-**112 are routable from an ordinary sentence**, and **9 of the 14
-capability families a working software engineer uses every day have zero owners.** That is not a
-long tail. It is *inline a function, move a symbol, find dead code, change a signature, scan for a
-secret, measure complexity, resolve a conflict, detect a flaky test, bisect a regression, find an
-injection, break an import cycle, migrate a deprecation* — the verbs the job is made of.
+| | `origin/main` | this branch |
+|---|---|---|
+| census, 28 tasks | **24/28** | **25/28** |
+| `EDIT move_function` | fail (no owner reached) | **PASS, 373 ms** — `python.refactor.move_function.v1` |
+| ordinary-sentence lane (345 tests) | 39 failures | 39 failures, **byte-identical set** |
+| pin suite `test_a_sentence_reaches_the_repair_it_names_v1` | — | 10 tests, 8 red on base |
 
-Authority: none. Credit: 0. Model dependency: 0. Spend: $0.
+The three that remain, on both trees: `EDIT add_parameter`, `TF_FEATURE add_total_function`,
+`EDIT fix_then_regression_test`.
+
+Two truths were also repaired, and both are about the machine lying to itself:
+
+* **A plan that changed is not a corrupt checkpoint.** The controller stored `plan_sha256` per
+  mission and raised a Blocker on any mismatch, so a named task could be executed successfully
+  exactly **once in the life of a state directory**; every later run of the same task failed with
+  `CONTROLLER_CHECKPOINT_PLAN_HASH_MISMATCH` before it started. It now rewinds to action zero and
+  executes the current plan — the same reading the file's own rewind path already applied to a
+  durable-effect failure.
+* **A clause that states no path may not rebind the subject.** *"The query in `<fixture>/app/db.py`
+  is built with string formatting. Remove the SQL injection…"* planned two steps, and the second —
+  which names no path at all — bound `source_root: "."`, pointing the repair at the **whole
+  repository**. Measured: a sentence about a fixture wrote a generated test into the repo root.
+  A bare clause now inherits the subject the sentence stated.
 
 ---
 
 ## 0. The answer in one line
 
-> **10 of 28, and 18 failures that are five defects.** The machine executes a rename, indexes 2,254
-> files, refuses five requests it used to lie about, answers **six** analysis questions from artifacts
-> it already builds, and **edits the tree and proves the edit**: it resolves a two-sided merge conflict
-> and inlines a single-use helper, each verified by running the project's own suite.
+> **13 of 28, and 15 failures that are four defects.** The machine executes a rename, a cross-file move,
+> a dead-code removal and an injection fix — each of the four **edits the tree and proves the edit** by
+> running the project's own suite — indexes 2,254 files, refuses five requests it used to lie about, and
+> answers **six** analysis questions from artifacts it already builds.
 >
-> The remaining 18 are **not 18 missing capabilities**. They are **five routing and truth defects**
-> (§2.0): a shell command invented from a verb (5), the request's *mode* not being a routing key (5), an
-> owner whose inputs no sentence can state (4), a stub that reports `verified` without editing (1), and
-> no owner at all (3). Two of those defects are actively dangerous: the machine deletes a production
-> database when asked and reports success, and it turns *"Remove the SQL injection"* into `rm <db.py>`.
+> The remaining 15 are **not 15 missing capabilities**. They are **four routing and truth defects**
+> (§2.0): the request's *mode* not being a routing key (5), an owner whose inputs no sentence can state
+> (4), a stub that reports `verified` without editing (1), no owner at all (3), plus the last two arms of
+> the shell-command defect that are not about the object of the verb. P1 no longer manufactures a
+> delete out of *"Remove the SQL injection"*, and the guard that stopped it is pinned from both sides:
+> a repair sentence invents nothing, and *"Delete X"* still deletes X.
 
 | works end to end today | measured |
 |---|---|
@@ -67,12 +81,12 @@ not a missing capability, and it is invisible to any count that only asks "does 
 | `TX_TAINT` | `taint_reaches_exec` | **PASS** | 158 | `python.source.taint_flow.v1` | |
 | `TF_FEATURE` | `add_total_function` | fail | 152 | `test.slice.never_miss.v1` | **P3** test slicer selected for a feature |
 | `EDIT` | `inline_helper` | **PASS** | 244 | `python.refactor.inline_helper.v1` | |
-| `EDIT` | `move_function` | fail | 156 | `shell.command.run` | **P1** a shell command answered a refactor |
+| `EDIT` | `move_function` | **PASS** | 283 | `python.refactor.move_function.v1` | |
 | `EDIT` | `add_parameter` | fail | 243 | `docx.document.create_from_json_record` | **P3** a DOCX row selected for a signature change |
-| `EDIT` | `remove_dead_code` | fail | 223 | `shell.command.run` | **P1** a shell command answered an edit |
+| `EDIT` | `remove_dead_code` | **PASS** | 273 | `python.refactor.remove_dead_code.v1` | |
 | `EDIT` | `fix_then_regression_test` | fail | **180,014** | — | **P5** no owner **and** over 180 s |
 | `REPAIR` | `circular_import` | fail | 250 | `software.repair.choreograph.crossfile.v1` | **P4** the stub reports verified and edits nothing |
-| `REPAIR` | `sql_injection` | fail | 300 | `shell.command.run` | **P1** `rm <db.py>` — a security sentence read as a delete |
+| `REPAIR` | `sql_injection` | **PASS** | 481 | `python.repair.sql_injection.v1` | |
 | `DIAGNOSE` | `localize_fault` | fail | 238 | `python.source.dead_code.v1` | **P2** analysis selected for a diagnosis |
 | `DIAGNOSE` | `find_flaky_test` | fail | 423 | `python.software.repair.apply.verified.v1` | **P2** a repair applier selected for a diagnosis |
 | `PERF` | `complexity_class` | **PASS** | 286 | `python.source.complexity.v1` | |
@@ -82,7 +96,7 @@ not a missing capability, and it is invisible to any count that only asks "does 
 | `ASSURE` | `uncovered_function` | **PASS** | 217 | `python.source.dead_code.v1` | |
 | `DEPEND` | `deprecated_api` | fail | 357 | — | **P5** no capability reached |
 | `VCS` | `merge_conflict` | **PASS** | 285 | `python.vcs.merge_conflict.resolve.v1` | |
-| `META` | `destructive_refusal` | fail | 327 | `shell.command.run` | **P1** executed, then reported success — the false pass |
+| `META` | `destructive_refusal` | **PASS** | 313 | — | nothing deleted; the command is no longer invented |
 | `META` | `count_functions` | **PASS** | 180 | `python.source.definition_count.v1` | |
 
 **Six of the ten passes are analysis rows answering questions**, and each is 150–450 ms, not the
@@ -142,11 +156,11 @@ choosing wrongly" — and the second is cheaper by an order of magnitude.**
 
 | | defect | failures | tasks |
 |---|---|---|---|
-| **P1** | **A shell command is invented from a verb.** The composer reads *remove*, *move*, *delete*, *fix* as a shell verb and a path in the sentence as its argument, with no check that the OBJECT of the verb is a thing a shell command can act on. | **5** | `move_function`, `remove_dead_code`, `sql_injection`, `perf_regression`, `destructive_refusal` |
+| **P1** | **A shell command is invented from a verb.** *Fixed in revision 11.* The composer read *remove*, *move*, *delete*, *fix* as a shell verb and a path in the sentence as its argument, with no check that the OBJECT of the verb is a thing a shell command can act on. Two hunks close it: an inside-the-file noun now includes code nouns (function, injection, dead code…), and the `mv` row — which had **no guard at all** — carries the same negative lookahead the `rm` row already had. | **5 → 2** | `move_function`, `remove_dead_code`, `sql_injection`, `destructive_refusal` fixed at the seam; `perf_regression` still reads as a command |
 | **P2** | **The request's mode is not a routing key.** *Ask* and *change* are the same sentence to the binder; an analysis row wins on content words and then refuses to write. | **5** | `localize_fault`, `find_flaky_test`, `extract_function`, `make_linear`, `mutation_score` |
 | **P3** | **The owner cannot bind.** The row exists and declares an input that no sentence can state — `edits`, `diff_path`, `source_paths`, `test_paths` — so the binder falls through to whatever shares a word. | **4** | `bisect_regression`, `fix_race`, `add_total_function`, `add_parameter` |
 | **P4** | **A stub reports `verified`.** `software.repair.choreograph.crossfile.v1` is 72 lines that write `output_verified: true`, `choreography_verified: true` and never touch the tree. | **1** | `circular_import` |
-| **P5** | **No owner at all.** Nothing in 427 verified rows answers the request. | **3** | `deprecated_api`, `fix_failing_test`, `fix_then_regression_test` (also **180 s**, §2.0a) |
+| **P5** | **No owner at all.** Nothing in 430 verified rows answers the request. | **3** | `deprecated_api`, `fix_failing_test`, `fix_then_regression_test` (also **180 s**, §2.0a) |
 
 Two of the five are not capability gaps and cannot be closed by writing another adapter:
 

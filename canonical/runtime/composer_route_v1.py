@@ -893,7 +893,26 @@ _INSIDE_THE_FILE_NOUNS = (
     r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
     r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix|"
-    r"duplicate|duplicates|repeat|repeats|repeated"
+    r"duplicate|duplicates|repeat|repeats|repeated|"
+    # CODE nouns.  The list above was written for text, and the same rule was
+    # never applied to the other thing this machine edits.  Measured on the
+    # census: "Remove the SQL injection while keeping the behaviour identical"
+    # bound `rm <b>/app/db.py` -- the deletion of the file that CONTAINS the
+    # vulnerability, certified, for a request to fix it.  "Remove the unused
+    # function legacy_total and every unused import from <b>/app" bound `rm -r
+    # <b>/app`: the whole package, because the sentence named a directory.
+    # A noun that names something INSIDE a file is the sentence saying the
+    # object of the verb is a part, and a part is edited, never deleted.
+    r"function|functions|class|classes|method|methods|def|defs|symbol|symbols|"
+    r"identifier|identifiers|import|imports|variable|variables|parameter|"
+    r"parameters|argument|arguments|constant|constants|helper|helpers|"
+    r"module|modules|package|packages|injection|injections|vulnerability|"
+    r"vulnerabilities|exploit|bug|bugs|defect|defects|error|errors|issue|"
+    r"issues|code|codesnippet|logic|type|types|annotation|annotations|"
+    r"signature|signatures|returncode|branch|branches|loop|loops|lambda|"
+    r"decorator|decorators|docstring|docstrings|todo|todos|warning|warnings|"
+    r"deprecation|deprecations|api|apis|call|caller|callers|usage|usages|"
+    r"semicolon|semicolons|whitespace|trailing|leading|license|licence"
 )
 
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
@@ -908,7 +927,13 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # None, which ends the search.  The whole table was abandoned on a word that
     # meant "repeated", not "make a second copy".
     (r"\b(?:copy|duplicate)\b(?![^\n]{0,20}?\blines?\b)", "cp", _no_flags, 2),
-    (r"\b(?:move|rename)\b", "mv", _no_flags, 2),
+    # The same rule as `rm`, and it was simply absent here.  Measured: "Move the
+    # function line_total from A to B and update every caller" bound
+    # `mv A B`, which overwrites module B with module A -- the exact opposite of
+    # moving one function between them, and unrecoverable.
+    (r"\b(?:move|rename)\b"
+     r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)",
+     "mv", _no_flags, 2),
     # "Erase the file X" measured to bind nothing.  The negative lookahead is
     # scoped to exactly one claim: removing LINES that are duplicated is a
     # filter over a file that stays, not a deletion of it.  Measured without it,
