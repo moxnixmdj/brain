@@ -113,10 +113,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  # positive whose guidance is worth nothing.  The evidence is the tree: a source root that is a
  # PACKAGE (it has __init__.py) whose parent holds the tests.  Appended LAST so it can never
  # shadow a directory that was already resolved (the one measured shadowing risk in _source_env).
- _proj=src.parent
- if (src/"__init__.py").is_file() and (_proj/"tests").is_dir():
-  _existing=env.get("PYTHONPATH","")
-  env=dict(env); env["PYTHONPATH"]=(_existing+os.pathsep+str(_proj)) if _existing else str(_proj)
+ # The project root the suite imports through is derived by the SHARED rule in the patch
+ # module (`_source_env`), from the imports the test files actually write -- one implementation,
+ # so the localizer and the repair engine can never disagree about where the code lives.
  if not tests:raise FaultLocalizerError("TEST_PATHS_REQUIRED")
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_events=max(100,min(int(args.get("max_trace_events",200000)),1000000));max_lines=max(1,min(int(args.get("max_ranked_lines",100)),1000));max_symbols=max(1,min(int(args.get("max_ranked_symbols",50)),500))
  traces=[]
@@ -134,8 +133,34 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if not tr["pass"]:
    tbset.update(tuple(x) for x in tr.get("traceback",[]))
    _order=[tuple(x) for x in tr.get("order",[])]
-   for _k in reversed(_order):
-    if _k[0] in _app_paths:last_lines.add(_k);break
+   # WITHIN THE FAILING TEST, NOT AT THE END OF THE PROCESS.  unittest keeps going after a
+   # failure, so the process's last application line belongs to whichever test ran last.  The
+   # trace already separates the tests: every test-file frame whose function is a test method
+   # opens a window, and the traceback names the one that failed.  Take the last application
+   # line inside THAT window; fall back to the process-wide last line only when the trace cannot
+   # attribute one (a module-level failure, an import error).
+   _tp=str(tr.get("test_path") or "")
+   _failing=[str(x[2]) for x in tr.get("traceback",[]) if len(x)>2 and str(x[2]).startswith("test")]
+   _win=None;_last_in={}
+   for _k in _order:
+    if _k[0]==_tp and str(_k[2]).startswith("test"):
+     _win=str(_k[2]);_last_in.setdefault(_win,None)
+    if _k[0] in _app_paths:
+     if _win is None:_last_in.setdefault(None,None)
+     _last_in[_win if _win is not None else None]=_k
+   _picked=_last_in.get(_failing[-1]) if _failing else None
+   if _picked is None:
+    _picked=next((v for v in reversed(_last_in.values()) if v),None)
+   if _picked:last_lines.add(_picked)
+ # THE FRAME BEATS THE HEURISTIC.  `last_lines` is the last application line executed in the
+ # PROCESS, and a test file with more than one test keeps running after the failing one:
+ # measured 2026-10-31 (`fix_broken`, suite = test_add [fails] then test_mul [passes] in one
+ # file), the last executed application line was inside `mul`, so the +2.0 bonus ranked `mul`
+ # ABOVE the line the traceback names in `add` -- and the guided repair then searched the
+ # wrong function.  When a traceback frame names an application line, that line is evidence;
+ # the last-line heuristic is only a fallback for runs that produce no such frame.
+ _tb_app={k for k in tbset if k[0] in _app_paths}
+ _use_last=not _tb_app
  ranked=[]
  for (rel,line,func),c in line_counts.items():
   p=(repo/rel).resolve()
@@ -145,9 +170,16 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if f and not q:reasons.append("FAIL_ONLY_EXECUTION")
   if q:reasons.append("PASSING_TEST_OVERLAP")
   if (rel,line,func) in tbset:score+=1.0;reasons.append("FAILING_TRACEBACK_FRAME")
-  if (rel,line,func) in last_lines:score+=2.0;reasons.append("LAST_EXECUTED_LINE_IN_FAILING_RUN")
+  if _use_last and (rel,line,func) in last_lines:score+=2.0;reasons.append("LAST_EXECUTED_LINE_IN_FAILING_RUN")
   ranked.append({"path":rel,"line":line,"function":func,"fail_coverage":f,"pass_coverage":q,"ochiai":round(score-(1.0 if "FAILING_TRACEBACK_FRAME" in reasons else 0.0),12),"score":round(score,12),"reasons":reasons})
  ranked.sort(key=lambda x:(-x["score"],-x["fail_coverage"],x["pass_coverage"],x["path"],x["line"],x["function"]))
+ # AN EMPTY LOCALIZATION IS NOT A PASS.  The same measured run above reported
+ # PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION with ranked_lines == [] and
+ # ranked_symbols == []: a consumer cannot tell that from a localization that found the
+ # fault, and the repair engine downstream turned it into GUIDANCE_EMPTY.  A run that
+ # executed no application line has localized nothing, and must say so.
+ if not ranked:
+  raise FaultLocalizerError("NO_LOCALIZED_LINE_FROM_THE_FAILING_RUN")
  ranked=ranked[:max_lines]
  files=sorted({x["path"] for x in ranked})
  symbols=[]

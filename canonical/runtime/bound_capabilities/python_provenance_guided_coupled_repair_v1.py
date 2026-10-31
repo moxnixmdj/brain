@@ -64,14 +64,19 @@ def _pair_space(n):return n*(n-1)//2
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise GuidedRepairError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
- env=_PATCH._source_env()
- env["PYTHONPATH"]=f"{src}:{env.get('PYTHONPATH','')}".rstrip(":")
+ # THE SHARED IMPORT ENVIRONMENT, FROM THE TESTS' OWN IMPORTS.  This line used to build
+ # PYTHONPATH from the source directory alone, so a package-rooted suite (`from pkg.calc
+ # import add` next to <d>/pkg/test_calc.py) died on its import line in EVERY candidate run:
+ # the baseline and every mutant scored identically and a one-operator bug (`return a - b`)
+ # came back as OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS.  Measured 2026-10-31 on the
+ # 18-sentence probe.  `_source_env` now derives the project root from the imports.
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
  if not tests:
   from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
   try:tests=discover_test_files(src)
   except FileNotFoundError:raise GuidedRepairError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  if not tests:raise GuidedRepairError("TEST_PATHS_REQUIRED")
+ env=_PATCH._source_env(src,*tests)
  argv=_PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*tests)
  timeout=max(1,min(int(args.get("timeout_s",20)),120))
  import time as _t
