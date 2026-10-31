@@ -33,7 +33,7 @@
     "route_class": "INTEGRATE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A git question was translated into a file command, and a stated count was overridden by a default",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Three readings were wrong at once, measured 2026-10-31 on 9f808230: 'Show the last three git commits in <other repo>.' bound `tail -n 2 <that directory>`; '... and save the list to X' bound `tail -n 2 X` -- the last two lines of the output file; and 'Show the last three lines of <file>.' bound `tail -n 2` because _COUNT_RE read digits only and _prose_count fell back to its default of 2 over a count the sentence had stated. Routing git through the generic shell row is unusable in principle: `git` is absent from raw_goal_trace_acceptance_v1._READ_ONLY_COMMANDS, so the adapter is never told to write stdout to the bound output (CLI_EXPECTED_OUTPUT_MISSING) and no git postcondition exists to judge the run.",
   "canonical_base_commit": "9f808230890332e75643b6bfafce3352749ed9ba",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
