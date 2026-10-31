@@ -1,0 +1,16 @@
+{
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "kind": "urlopen",
+  "payload": {
+    "data_b64": null,
+    "headers": {
+      "User-agent": "ProjectBrain-NpmAcquisition/1"
+    },
+    "method": "GET",
+    "timeout_s": 20,
+    "url": "https://registry.npmjs.org/node-ubjson-bin/1.0.0"
+  },
+  "request_sha256": "ff49ea6107d3a674d085453708ef4a254feabc7c5ca7ed2ad6fcbcd18bda3143",
+  "schema": "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1",
+  "task_id": "SI-REAL-UBJSON-SNAPSHOT-001"
+}

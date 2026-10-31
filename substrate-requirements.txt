@@ -1,0 +1,13 @@
+# The sandbox substrate: pip installs outside /home/user EVAPORATE between
+# turns (measured twice: tree_sitter generation mismatch broke 3 tree-sitter
+# capabilities; missing mypy/ruff/bandit degraded the chain gates to
+# PASS_BASELINE_ONLY). Pinned to the exact generation the capabilities were
+# harvested and verified against. One command restores:
+#   pip install --break-system-packages -r substrate-requirements.txt
+tree_sitter==0.21.3
+tree_sitter_languages==1.10.2
+mypy
+ruff
+bandit
+coverage
+pytest

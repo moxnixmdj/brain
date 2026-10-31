@@ -21,12 +21,16 @@ from canonical.runtime import zero_ambient_namespace_launcher_v1 as ns
 SCHEMA = "PROJECT_BRAIN_ROOT3_READ_ONLY_LOCAL_FILE_QUERY_EXECUTOR_V1"
 EFFECT_CLASS = "READ_ONLY_DECLARED_QUERY"
 
+# Site keys follow the CURRENT verified source lines (V2 registry lineage);
+# semantic profiles are unchanged from the original 18-site verification.
+# The sqlite CLI profile was discharged on #6300: the capability now queries
+# through the same libsqlite3 via the stdlib sqlite3 module in-process, so no
+# child-process site remains for it.
 SUPPORTED = {
-    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 32, "subprocess.run"): "TAR_LIST",
+    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 53, "subprocess.run"): "TAR_LIST",
     ("canonical/runtime/bound_capabilities/jq_query.py", 41, "subprocess.run"): "JQ",
     ("canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py", 44, "subprocess.run"): "TESSERACT_STDOUT",
-    ("canonical/runtime/bound_capabilities/sqlite_verify_cli.py", 66, "subprocess.run"): "SQLITE_READ",
-    ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 21, "subprocess.run"): "YQ",
+    ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 23, "subprocess.run"): "YQ",
 }
 
 JQ_FORBIDDEN = (
@@ -271,7 +275,7 @@ def _run_confined_with_popen(policy: Mapping[str, Any], popen_impl: Callable[...
     p = ns.canonical_policy(policy)
     lim = p["limits"]
     required_names = ["unshare", "mount", "chroot", "setpriv", "ip", "bash", "env"]
-    resolved = {name: shutil.which(name) for name in required_names}
+    resolved = {name: ns.resolve_system_binary(name) for name in required_names}
     missing = [name for name, path in resolved.items() if not path]
     if missing:
         raise ReadOnlyQueryDenied("HOST_PRIMITIVE_MISSING:" + ",".join(missing))

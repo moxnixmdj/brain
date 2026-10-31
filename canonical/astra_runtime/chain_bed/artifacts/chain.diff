@@ -1,0 +1,30 @@
+--- a/calc.py
++++ b/calc.py
+@@ -1,4 +1,4 @@
+-def compute_total(items):
++def weighted_total(items):
+     return sum(x * 2 for x in items)
+ 
+ 
+--- a/test_calc.py
++++ b/test_calc.py
+@@ -1,7 +1,7 @@
+ import unittest
+-from calc import compute_total
++from calc import weighted_total
+ 
+ 
+ class TestTotal(unittest.TestCase):
+     def test_doubled_total(self):
+-        self.assertEqual(compute_total([1, 2, 3]), 12)
++        self.assertEqual(weighted_total([1, 2, 3]), 12)
+--- a/user_mod.py
++++ b/user_mod.py
+@@ -1,5 +1,5 @@
+-from calc import compute_total
++from calc import weighted_total
+ 
+ 
+ def twice(items):
+-    return compute_total(items) * 2
++    return weighted_total(items) * 2

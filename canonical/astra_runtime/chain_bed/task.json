@@ -1,0 +1,1 @@
+{"issue_id": "CHAIN-001", "title": "Rename compute_total to weighted_total", "edits": [{"op": "rename_symbol", "module": "calc.py", "name": "compute_total", "new_name": "weighted_total"}]}

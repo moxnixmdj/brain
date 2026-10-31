@@ -1,0 +1,34 @@
+{
+  "schema": "pr_intent_v1",
+  "issue_id": "CHAIN-001",
+  "title": "Rename compute_total to weighted_total",
+  "base": "main",
+  "body": {
+    "summary": "",
+    "changed_files": [
+      "calc.py",
+      "test_calc.py",
+      "user_mod.py"
+    ],
+    "plan": {
+      "planned_op_count": 1,
+      "planned_site_count": 5,
+      "complete": true
+    },
+    "tests": {
+      "selected": 1,
+      "passed": 1,
+      "failed": 0,
+      "pytest_rc": 0
+    },
+    "proof": {
+      "fixed_point_verified": true,
+      "diff_sha256": "1148617a6176791d0784c0494eef1adc5895f4b50ad783fd89f4bda2dc0e0d91"
+    }
+  },
+  "checklist": [
+    "plan complete (zero ambiguous sites)",
+    "apply fixed point proven by re-index",
+    "minimal test selection executed"
+  ]
+}

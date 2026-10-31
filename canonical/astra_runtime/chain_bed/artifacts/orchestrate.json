@@ -1,0 +1,16 @@
+{
+  "adapter": "python_issue_to_pr_orchestrate",
+  "task_id": "CHAIN-001",
+  "planned_op_count": 1,
+  "applied_op_count": 1,
+  "refused_op_count": 0,
+  "applied_site_count": 5,
+  "test_selected_count": 1,
+  "test_passed_count": 1,
+  "test_failed_count": 0,
+  "test_pytest": "9.2.0",
+  "diff_sha256": "1148617a6176791d0784c0494eef1adc5895f4b50ad783fd89f4bda2dc0e0d91",
+  "pr_intent_verified": true,
+  "edits_verified": true,
+  "verified": true
+}

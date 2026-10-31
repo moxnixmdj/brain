@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_SWE_CHAIN_PROOF_V1",
+  "stages": {
+    "orchestrate": {
+      "verified": true,
+      "edits_verified": true,
+      "applied_site_count": 5
+    },
+    "gate_type": {
+      "verified": true,
+      "gate": "PASS"
+    },
+    "gate_static": {
+      "verified": true,
+      "gate": "PASS"
+    },
+    "gate_security": {
+      "verified": true,
+      "gate": "PASS"
+    },
+    "pr_realize": {
+      "verified": true,
+      "push_verified": true,
+      "pushed_or_already_realized": true
+    }
+  },
+  "seconds": 4.785,
+  "model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "chain_verified": true
+}

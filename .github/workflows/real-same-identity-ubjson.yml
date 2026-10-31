@@ -56,6 +56,44 @@ jobs:
           assert actual==expected
           PY
 
+      - name: Stamp the byte-pinned mission's OBS sidecar
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python - <<'PY'
+          import hashlib, json, pathlib
+          root = pathlib.Path(".")
+          def sha256(rel):
+              return hashlib.sha256((root/rel).read_bytes()).hexdigest()
+          mission_rel = 'canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json'
+          generation = json.loads((root/'canonical/CANONICAL_POINTER.json').read_text()).get('canonical_generation')
+          deps = [
+            ('ASTRA_RUNTIME','EXECUTION_SURFACE','canonical/runtime/astra_runtime.py'),
+            ('EXTERNAL_TOOL_RELAY','EXECUTION_SURFACE','canonical/runtime/external_tool_relay.py'),
+            ('SAME_IDENTITY_SUPERVISOR','EXECUTION_SURFACE','canonical/runtime/same_identity_supervisor.py'),
+            ('NPM_CODEC_RUNNER','EXECUTION_SURFACE','canonical/runtime/node_codec_runner.js'),
+          ]
+          obs = {
+            'schema':'PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1','status':'CURRENT','canonical_generation':generation,
+            'canonical_state_dependencies':[
+              {'path':'canonical/CANONICAL_POINTER.json','sha256':sha256('canonical/CANONICAL_POINTER.json')},
+              {'path':'canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json','sha256':sha256('canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json')},
+              {'path':'canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json','sha256':sha256('canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json')}],
+            'dependency_inventory_complete':True,'material_world_state_dependencies_complete':True,'information_boundary_complete':True,
+            # JIT acquisition IS the mission: the workflow exists to prove same-identity
+            # capability acquisition, so discovery stays open; cognition stays forbidden.
+            'information_policy':{'mode':'OPEN_DISCOVERY','allowed_exact_sources':[],'allowed_external_tool_kinds':[]},
+            'unknown_material_dependencies':[],'stale_authority_absent':True,'valid_proof_action_priority':True,
+            'obs_layers_current':{'goal':True,'capability':True,'blocker':True,'solution':True,'verification':True,'inherited_system':True,'obs_process':True},
+            'dependencies':[{'dependency_id':did,'class':cls,'material':True,'volatility':'STATIC','scope':'GLOBAL','status':'READY','evidence':[path]} for did,cls,path in deps]}
+          sidecar = root/(mission_rel + '.continuous_obs.json')
+          sidecar.write_text(json.dumps(obs,indent=2,sort_keys=True)+'\n')
+          from canonical.runtime import continuous_obs_runtime as obsr
+          verdict = obsr.validate_context(obs, root=root.resolve())
+          assert verdict.get('pass'), verdict.get('errors')
+          print({'obs_sidecar': str(sidecar), 'pass': True})
+          PY
+
       - name: Run same worker with concurrent bounded relay
         shell: bash
         run: |
@@ -77,6 +115,7 @@ jobs:
           bridge.mkdir(parents=True,exist_ok=True)
           relay_log=pathlib.Path('REAL_UBJSON_RELAY.jsonl')
           transcript=[]
+          os.environ['PYTHONPATH']=str(pathlib.Path.cwd())
           completed=False
 
           def relay_loop():
@@ -112,6 +151,7 @@ jobs:
               # not by repeatedly restarting ASTRA.
               for iteration in range(1,5):
                   env=os.environ.copy()
+                  env['PYTHONPATH']=str(pathlib.Path.cwd())
                   env['PROJECT_BRAIN_EXTERNAL_TOOL_WAIT_SECONDS']='90'
                   worker=subprocess.Popen(
                       [sys.executable,'canonical/runtime/same_identity_supervisor.py','--task',task],

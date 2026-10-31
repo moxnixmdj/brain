@@ -97,6 +97,41 @@ def _read_json(path: pathlib.Path) -> dict[str, Any]:
     return value
 
 
+def _obs_context_for_mission(
+    root: pathlib.Path, mission: pathlib.Path, mission_doc: dict[str, Any]
+) -> Any:
+    """Resolved continuous-OBS context for a mission (fail-closed).
+
+    Three channels, in authority order:
+
+    * the mission embeds the context itself;
+    * the mission pins its bytes
+      (``constraints.originating_mission_must_remain_byte_identical`` -- measured
+      fleet-wide on the UBJSON canonical-snapshot mission, whose checked-in
+      sha256 the CI mission workflow asserts) so the context MUST arrive beside
+      it, not inside: a runtime-stamped sibling
+      ``<mission>.continuous_obs.json`` bound to the same mission bytes by the
+      producer of that run;
+    * otherwise the mission is unbound and validation sees
+      ``CONTINUOUS_OBS_CONTEXT_MISSING`` exactly as before -- no context is
+      invented here.
+
+    Measured 2026-10-27: with both channels absent every run of this mission
+    failed exit-1-family at claim time before any capability ran
+    (30/30 workflow runs since 2026-10-23).
+    """
+    if "continuous_obs" in mission_doc:
+        return mission_doc.get("continuous_obs")
+    sidecar = mission.with_suffix(mission.suffix + ".continuous_obs.json")
+    if sidecar.is_file():
+        try:
+            return _read_json(sidecar)
+        except (SupervisorError, OSError, json.JSONDecodeError):
+            # A sidecar we cannot read IS a missing context, not a pass.
+            return None
+    return None
+
+
 def _write_json_atomic(path: pathlib.Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_name(path.name + ".tmp")
@@ -288,7 +323,7 @@ def claim_task(
     mission_doc = _read_json(mission)
     if "continuous_obs" in mission_doc or (root / "canonical/CANONICAL_POINTER.json").is_file():
         obs_verdict = continuous_obs_runtime.validate_context(
-            mission_doc.get("continuous_obs"),
+            _obs_context_for_mission(root, mission, mission_doc),
             root=root,
         )
         if not obs_verdict.get("pass"):
@@ -330,7 +365,7 @@ def choose_causally_ready_task(
             mission_doc = _read_json(mission)
             if "continuous_obs" in mission_doc or (root / "canonical/CANONICAL_POINTER.json").is_file():
                 obs_verdict = continuous_obs_runtime.validate_context(
-                    mission_doc.get("continuous_obs"),
+                    _obs_context_for_mission(root, mission, mission_doc),
                     root=root,
                 )
             else:
@@ -407,7 +442,7 @@ def execute_claimed_task(
     mission_doc = _read_json(mission)
     if "continuous_obs" in mission_doc or (root / "canonical/CANONICAL_POINTER.json").is_file():
         obs_verdict = continuous_obs_runtime.validate_context(
-            mission_doc.get("continuous_obs"),
+            _obs_context_for_mission(root, mission, mission_doc),
             root=root,
         )
         if not obs_verdict.get("pass"):
