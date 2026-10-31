@@ -176,14 +176,38 @@ _ANALYSIS_ONLY_TRIGGERS = ("explain", "describe", "summarise", "summarize",
                            "diagnose", "why is", "why does", "how does", "review the")
 
 
-def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
+# A coordinating junction starts a NEW clause, and a family trigger inside a
+# subordinate clause is not what the sentence asked for.  Measured 2026-10-31:
+# "Add a parameter qty with a default value to the function line_total in X and
+# update every caller so behaviour is unchanged" contains "caller", so the caller
+# family claimed AUTHORITY over an add-a-parameter request and the symbol index
+# was executed for a signature change.  The sentence's own governing clause
+# decides its effect.
+_CLAUSE_BREAK = re.compile(r"(?:[.;!?]|,\s*$|\s+(?:and|then|so|but)\s+)", re.I)
+
+
+def _governing_clause(text: str) -> str:
+    """The clause that carries the sentence's request (its first clause)."""
+    parts = [part for part in _CLAUSE_BREAK.split(str(text or "")) if part and part.strip()]
+    return parts[0] if parts else ""
+
+
+def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | None:
+    """(trigger phrases the sentence states, candidate terms, effect token)."""
     low = str(goal or "").lower()
     if any(word in low for word in _ANALYSIS_ONLY_TRIGGERS):
         return None
+    head = _governing_clause(low)
     for triggers, terms, token in _FAMILIES:
-        if any(t in low for t in triggers):
-            return terms, token
+        hits = tuple(t for t in triggers if t in head)
+        if hits:
+            return hits, terms, token
     return None
+
+
+def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
+    hit = _family_hits(goal)
+    return (hit[1], hit[2]) if hit else None
 
 
 def is_swe_request(goal: str) -> bool:
@@ -273,7 +297,7 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
     return 'R10_SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED'
 
 
-def _effect_consistent(goal: str, cid: str) -> bool:
+def _effect_consistent(goal: str, cid: str, entry: Mapping[str, Any] | None = None) -> bool:
     """Reuse the selector's OWN E30 effect vocabulary as an admission gate.
 
     Measured 2026-10-27: ``select`` admits by DECLARED-INPUT CONTRACT, not by
@@ -286,13 +310,61 @@ def _effect_consistent(goal: str, cid: str) -> bool:
     """
     text = str(goal or "").lower()
     stated: list[str] = []
+    phrases: list[str] = []
     for verbs, effects in selection._EFFECT_WORDS:
-        if any(verb in text for verb in verbs):
+        hit = [verb for verb in verbs if verb in text]
+        if hit:
             stated.extend(effects)
+            phrases.extend(hit)
     if not stated:
         return True
-    low = str(cid or "").lower()
-    return any(effect in low for effect in set(stated))
+    low = _row_surface(cid, entry)
+    if any(effect in low for effect in set(stated)):
+        return True
+    # ... or the row DECLARES the stated phrase itself.  _EFFECT_WORDS is a
+    # curated verb->effect table and a curated table goes stale: it maps "merge
+    # conflict" to {choreograph}, so python.vcs.merge_conflict.resolve.v1 -- whose
+    # own keywords say "merge conflict", "keep both changes", "unmerged" -- was
+    # judged effect-INCONSISTENT with the sentence it exists for, and the front
+    # compiler's already-correct selection was refused.  A row's declared surface
+    # is its own statement of the effect it serves.
+    return any(len(phrase) > 3 and phrase in low for phrase in set(phrases))
+
+
+def _row_surface(cid: str, entry: Mapping[str, Any] | None = None) -> str:
+    """What the row itself says it does: its id plus its declared surface."""
+    parts = [str(cid or "").lower()]
+    if isinstance(entry, Mapping):
+        parts.extend(map(str, (entry.get("keywords") or [])))
+        parts.extend(map(str, (entry.get("provides") or [])))
+    return " ".join(parts).lower()
+
+
+def _phrase_rivals(goal: str, triggers, token: str, registry: Mapping[str, Any]) -> set[str]:
+    """Rows that DECLARE a multi-word phrase of the sentence holding a trigger.
+
+    Pure data: every phrase comes from a registry row's own keywords/provides and
+    the trigger words come from ``_FAMILIES``.  Measured 2026-10-31: "Inline the
+    single-use helper _price_with_tax in X into its only caller" contains
+    "caller", so the caller family claimed authority and the symbol index (a
+    report) was executed for a refactor.  The inliner's own keyword "only caller"
+    states what the sentence asks for.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as front
+    prose = front.prose_only(str(goal or "")).lower()
+    rivals: set[str] = set()
+    for cid, entry in registry.items():
+        if token in str(cid).lower():
+            continue
+        for phrase in list(entry.get("keywords") or []) + list(entry.get("provides") or []):
+            words = str(phrase).lower().split()
+            if len(words) < 2:
+                continue
+            joined = " ".join(words)
+            if any(t in joined for t in triggers) and joined in prose:
+                rivals.add(str(cid))
+                break
+    return rivals
 
 
 def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
@@ -310,10 +382,10 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     callers_of map.  test-gen/lint/typecheck/extract enumerate to zero-or-many
     admitted and therefore stay honestly fail-closed (no false PASS).
     """
-    fam = _family_terms(goal)
+    fam = _family_hits(goal)
     if fam is None:
         return None
-    terms, token = fam
+    triggers, terms, token = fam
     candidates: list[str] = []
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
@@ -338,6 +410,19 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     candidates = [cid for cid in candidates if token in str(cid).lower()]
     if not candidates:
         return None
+    rivals = _phrase_rivals(goal, triggers, token, registry)
+    if rivals:
+        rival_hits: list[tuple[str, dict]] = []
+        for cid in sorted(rivals):
+            try:
+                decision = selection.admit(goal, cid, registry[cid], root, declared.get(cid))
+            except Exception:
+                continue
+            if decision.get("admitted") and decision.get("specific"):
+                rival_hits.append((cid, dict(decision.get("inputs") or {})))
+        if len(rival_hits) == 1:
+            return rival_hits[0]
+        return None  # two declared phrases, or an unbound one -> fail closed
     admitted: list[tuple[str, dict]] = []
     for cid in candidates:
         try:
@@ -389,8 +474,9 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         else:
             # Route 1: the existing decisive typed selection (repair/rename/etc).
             decision = selection.select(goal, registry, root, 8)
-            if (decision.get("status") == "SELECTED" and decision.get("selected_capability")
-                    and _effect_consistent(goal, str(decision.get("selected_capability")))):
+            chosen = str(decision.get("selected_capability") or "")
+            if (decision.get("status") == "SELECTED" and chosen
+                    and _effect_consistent(goal, chosen, registry.get(chosen))):
                 cid = str(decision.get("selected_capability"))
                 inputs = dict(decision.get("inputs") or {})
             else:
