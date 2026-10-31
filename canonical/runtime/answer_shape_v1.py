@@ -281,6 +281,63 @@ def _bounded(value: Any, limit: int = 50) -> Any:
     return value
 
 
+# A LOOKUP IS ANSWERED BY WHAT THE ROW OBSERVED.  ``asked()`` deliberately returns None for
+# a state question -- "Show the status of the working tree" is not a collection, and the law
+# ``test_a_lookup_and_a_count_are_not_enumerations`` pins that.  But returning None also meant
+# returning nothing at all: measured 2026-10-31, that sentence PASSed on
+# ``git.repository.operate.v1`` with ``answer: null`` while the row's ``observed_effect`` held
+# ``{op: status, branch: ..., entry_count: 0, staged: 0}`` -- the answer was produced and then
+# dropped on the floor.  That is the "correct but no answer" class (6 of 61 in the V4 baseline),
+# and the fix is not a new taxonomy: every row already states what it observed, so a PASS that
+# answered nothing hands over that statement.
+_OBSERVATION_FIELDS: tuple[str, ...] = ("observed_effect", "observation", "state", "snapshot")
+
+
+def _observation_hit(inner: Mapping[str, Any]) -> tuple[str, Mapping[str, Any]] | None:
+    for field in _OBSERVATION_FIELDS:
+        value = inner.get(field)
+        if isinstance(value, Mapping) and value:
+            return field, value
+    return None
+
+
+def deliver_observation(result: "dict[str, Any]") -> list[str]:
+    """Hand over what a row observed when the sentence asked no collection.
+
+    Only called when the result already PASSed and nothing has been delivered, so it can add
+    an answer but never replace one, and it never changes a verdict.
+    """
+    if result.get("answer") is not None:
+        return []
+    rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
+    if not rows:
+        for step in ((result.get("composer_execution") or {}).get("steps") or []):
+            if isinstance(step, Mapping) and isinstance(step.get("result"), Mapping):
+                rows.append({"capability_id": step.get("capability_id"), "result": step["result"]})
+    for row in rows:
+        inner = row.get("result") if isinstance(row.get("result"), Mapping) else None
+        if inner is None:
+            continue
+        hit = _observation_hit(inner)
+        if hit is None:
+            continue
+        field, value = hit
+        count = len(value)
+        shown = _bounded(dict(value))
+        shown_len = len(shown) if isinstance(shown, (Mapping, list, tuple)) else 1
+        result["answer"] = {
+            "schema": SCHEMA,
+            "noun": "observation",
+            "field": field,
+            "source": "result",
+            "count": count,
+            "value": shown,
+            "truncated": shown_len < count,
+        }
+        return []
+    return []
+
+
 def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = None) -> list[str]:
     """Deliver the answer the sentence asked for, or say why it cannot be delivered.
 
@@ -290,7 +347,7 @@ def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = No
     """
     shape = asked(goal)
     if shape is None:
-        return []
+        return deliver_observation(result)  # type: ignore[arg-type]
     rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
     if not rows:
         for step in ((result.get("composer_execution") or {}).get("steps") or []):
