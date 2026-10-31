@@ -10072,6 +10072,313 @@
         "producer_independent": true,
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SOURCE-CANDIDATES-GIT-INDEX-001__RESULT.json"
       }
+    },
+    "source.evidence.extract.objective_grounded.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+          "input_path": "${input.input_path}",
+          "max_units": 10,
+          "output_path": "${input.output_path}",
+          "timeout": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "objective_evidence_unit_extract",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "evidence",
+        "extract",
+        "objective",
+        "grounded",
+        "verbatim",
+        "provenance",
+        "bm25",
+        "relevance",
+        "hash",
+        "offset",
+        "research"
+      ],
+      "limitations": [
+        "Requires a live-retrieval provenance receipt and independently-qualified objective-relevance receipt bound to the same candidate.",
+        "Fresh retrieval must resolve to the exact admitted source URL; source identity drift fails closed.",
+        "ROR/organization identity is optional metadata and is not an admission prerequisite.",
+        "Proves verbatim objective-grounded evidence units only; support, entailment, factual correctness, causality, quality, sufficiency, and independence remain unverified."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "input_path": {
+          "container": "scalar",
+          "effect": "source.objective_relevance.lexical_ranked",
+          "field": "output_path",
+          "type": "effect_result"
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        }
+      },
+      "provides": [
+        "source.evidence.objective_grounded_units",
+        "source.evidence.verbatim_provenance_bound"
+      ],
+      "requires": [
+        "source.candidate.provenance.verified",
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "result_fields": [
+        "status",
+        "evidence_extraction_status",
+        "source_url",
+        "page_raw_sha256",
+        "visible_text_sha256",
+        "evidence_unit_count",
+        "evidence_units",
+        "claim_relation_status",
+        "factual_correctness_status",
+        "evidence_sufficiency_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_evidence_unit_extract.py",
+        "modules": [
+          "hashlib",
+          "html",
+          "ipaddress",
+          "json",
+          "pathlib",
+          "re",
+          "urllib.parse",
+          "urllib.request",
+          "html.parser"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "artifact_digest": "sha256:5711d014ef9b444eb8eba57d36c929843cec81b3f9feba633f0fd43f20b67887",
+        "artifact_id": 11081458134,
+        "current_authority": "VERIFIED",
+        "exact_runner_blob_match": true,
+        "incremental_spend_usd": 0,
+        "independent_refetch_oracle": true,
+        "live_domains": [
+          "sqlite.org",
+          "rfc-editor.org"
+        ],
+        "model_dependency_count": 0,
+        "modern_container_regression_git_blob": "8dc3a5d350173d57f67c8e1ac50ab243d42f2214",
+        "parent_frontend_git_blob": "46fe82d74a35d9318a134fb95e1d5cecfc2dd485",
+        "preserved_falsification": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_FALSIFICATION_20260930_V1.json",
+        "producer_git_blob": "fc45fb583f6aeac91f7c88f918644c38fbc70e34",
+        "public_job_id": 109777319500,
+        "public_pr": 159,
+        "public_repository": "moxnixmdj/verification-capsule-runner",
+        "public_run_id": 36681368306,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+        "ror_admission_required": false,
+        "status": "REQUALIFIED_AFTER_MODERN_CONTAINER_REPAIR"
+      }
+    },
+    "source.objective_relevance.rank.bm25": {
+      "action_template": {
+        "args": {
+          "capability_id": "source.objective_relevance.rank.bm25",
+          "input_path": "${input.input_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "objective_relevance_bm25",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "source",
+        "objective",
+        "relevance",
+        "rank",
+        "bm25",
+        "evidence",
+        "candidate",
+        "lexical",
+        "research"
+      ],
+      "limitations": [
+        "Ranks lexical relevance only; does not prove semantic entailment.",
+        "Does not establish primary-source status, authority, factual correctness, or evidence sufficiency.",
+        "Fails closed when the objective has no discriminative tokens or candidates contain no overlapping lexical evidence.",
+        "Designed for small candidate sets emitted by the qualified open research source frontend."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "input_path": {
+          "container": "scalar",
+          "effect": "source.candidates.available",
+          "field": "output_path",
+          "type": "effect_result"
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        }
+      },
+      "provides": [
+        "source.objective_relevance.lexical_ranked"
+      ],
+      "requires": [
+        "source.candidates.available"
+      ],
+      "result_fields": [
+        "status",
+        "relevance_claim_scope",
+        "top_candidate_original_index",
+        "ranked_candidates",
+        "semantic_entailment_status",
+        "primary_source_status",
+        "model_dependency_count",
+        "output_path",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py",
+        "algorithm": "BM25 Robertson/Sparck Jones positive-IDF variant",
+        "modules": [
+          "json",
+          "math",
+          "pathlib",
+          "re"
+        ],
+        "parameters": {
+          "b": 0.75,
+          "k1": 1.5,
+          "title_weight_approximation": 2
+        },
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "domains": [
+          "AEROSPACE",
+          "DATABASE_SYSTEMS",
+          "CLIMATE_SCIENCE"
+        ],
+        "exact_producer_blob": "95d2b6bac6f6ffb5db97526407fcd22cbcc6c790",
+        "incremental_spend_usd": 0,
+        "independent_oracle": "rank-bm25 0.2.2 BM25Okapi",
+        "model_dependency_count": 0,
+        "no_overlap_fail_closed": true,
+        "public_runner_pr": 143,
+        "runner_issue": 144,
+        "status": "INDEPENDENT_PUBLIC_CROSS_DOMAIN_QUALIFICATION_PASS",
+        "workflow_run_id": 36678278264
+      }
+    },
+    "sqlite.table.create_from_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "sqlite.table.create_from_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "sqlite_table_stdlib",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "sqlite",
+        "database",
+        "table",
+        "rows",
+        "columns",
+        "create"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "sqlite.table.create_from_json_records"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "collection_path",
+        "column_count",
+        "columns",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "row_count",
+        "sqlite_version",
+        "status_value",
+        "table_name"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py",
+        "module": "sqlite3",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verifier_package": "sqlite3",
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "sqlite_table_stdlib",
+          "collection_path": [
+            "capabilities"
+          ],
+          "column_count": 5,
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "output_bytes": 8192,
+          "output_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
+          "output_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
+          "output_verified": true,
+          "row_count": 17,
+          "sqlite_version": "3.45.1",
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "table_name": "verified_capabilities"
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
