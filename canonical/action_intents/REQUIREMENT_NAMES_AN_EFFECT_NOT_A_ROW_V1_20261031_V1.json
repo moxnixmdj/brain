@@ -9,10 +9,18 @@
   "conversation_memory_is_authority": false,
   "incremental_spend_usd": 0,
   "laws_read_this_session": [
-   "AGENTS.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md"
+   "AGENTS.md"
   ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "producer_cognition_model_dependency_count": 0,
@@ -22,7 +30,8 @@
    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
    "execution_guard/swe_capability_matrix_v1.py",
    "canonical/runtime/live_brain_route_admission_v1.py"
-  ]
+  ],
+  "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_ROW_COULD_DECLARE_AS_ITS_REQUIREMENT_THE_NAME_OF_ANOTHER_ROW_AND_NO_CHECK_COMPARED_A_REQUIREMENT_AGAINST_WHAT_THE_REGISTRY_PUBLISHES__SIX_SWE_ROWS_REQUIRED_THE_CAPABILITY_ID_python_source_symbols_index_ast_WHICH_IS_NOT_AN_EFFECT_WHILE_THAT_ROW_PUBLISHES_python_source_symbol_index__INCLUDING_THE_MOST_SELECTED_ROW_IN_THE_ADVANCED_CENSUS__AND_THE_ONLY_FALSE_ROW_IN_THE_54_CASE_MATRIX_WAS_A_FIXTURE_WITH_NO_DIFF_TO_SHOW_MEASURED_2026_10_31",
@@ -46,11 +55,11 @@
    "CODING_TB4_GE_66_4"
   ],
   "expected_obligation_discharge_lcb": 0,
-  "expected_obligation_unlock_lcb": "0/13",
-  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_THE_DECLARED_INPUT_GRAPH_IS_NOW_TRUE_AND_A_FALSE_MATRIX_ROW_CAN_NO_LONGER_BE_MISTAKEN_FOR_A_CAPABILITY_LIMIT",
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_ADVANCED_CENSUS_DID_NOT_MOVE_2_OF_49_BEFORE_AND_AFTER_THE_SIX_STRING_REPAIR_BECAUSE_THE_DOOR_DOES_NOT_YET_WALK_requires__THE_YIELD_IS_THAT_A_DECLARED_REQUIREMENT_NOW_NAMES_SOMETHING_SOME_ROW_PUBLISHES_AND_A_FALSE_MATRIX_ROW_NO_LONGER_HIDES_A_FIXTURE_GAP_WHICH_IS_THE_CONDITION_FOR_ANY_CODING_NUMBER_TO_MEAN_ANYTHING",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "success_probability_lcb": 0.9,
+  "success_probability_lcb": 0.5,
   "wall_clock_cost_ub": 1
  },
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
