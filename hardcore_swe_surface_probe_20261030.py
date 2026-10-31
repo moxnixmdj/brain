@@ -243,6 +243,13 @@ def fx_move(tag):
 """Models."""
 
 
+class Item:
+    def __init__(self, name, price_cents, qty=1):
+        self.name = name
+        self.price_cents = price_cents
+        self.qty = qty
+
+
 def line_total(item):
     return item.price_cents * item.qty
 '''),
@@ -255,8 +262,25 @@ def cart_total(items):
     return sum(line_total(i) for i in items)
 '''),
         "tests/__init__.py": "",
-        "tests/test_service.py": CART_TEST.replace(
-            "from app.models import Item\n", "from app.models import Item\n"),
+        # This fixture's subject is `cart_total` over `Item`s.  It used to ship
+        # CART_TEST, which also imports `apply_discount` -- a function this tree
+        # never defines -- so the baseline suite failed with ImportError and the
+        # oracle could not be satisfied by ANY edit.  Measured, red before any
+        # change.  The witness must exercise the subject and nothing else.
+        "tests/test_service.py": py('''
+import unittest
+from app.models import Item
+from app.service import cart_total
+
+
+class T(unittest.TestCase):
+    def test_total(self):
+        self.assertEqual(cart_total([Item("a", 100, 2), Item("b", 250, 1)]), 450)
+
+
+if __name__ == "__main__":
+    unittest.main()
+'''),
     }), None
 
 
@@ -280,6 +304,13 @@ def fx_signature(tag):
         "app/__init__.py": "",
         "app/models.py": py('''
 """Models."""
+
+
+class Item:
+    def __init__(self, name, price_cents, qty=1):
+        self.name = name
+        self.price_cents = price_cents
+        self.qty = qty
 
 
 def line_total(item):
@@ -336,6 +367,13 @@ def fx_deadcode(tag):
         "app/models.py": py('''
 """Models."""
 import json
+
+
+class Item:
+    def __init__(self, name, price_cents, qty=1):
+        self.name = name
+        self.price_cents = price_cents
+        self.qty = qty
 
 
 def line_total(item):
