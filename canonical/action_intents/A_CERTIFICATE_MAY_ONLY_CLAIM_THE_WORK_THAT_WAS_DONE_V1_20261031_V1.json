@@ -7,7 +7,7 @@
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+ "canonical_base_commit": "1f2f1605f084aee80c729e35b2dc763182e604ba",
  "date": "2026-10-31",
  "intent": "Refuse a certificate when the work it names did not happen: a measurement may not answer a run of a named file or an analysis, a completeness claim needs a scope that can contain the answer, an enumeration is never a scalar from inside a list, a diagnosis is not a test selection, and a gate that names an unavailable checker is not complete.",
  "causal_blocker": "A run is certified by an artifact that measures instead of executing, a completeness claim is certified over a scope of one file, and an enumeration is answered by a scalar taken from the first record: measured 2026-10-31 on current main, six of seventeen PASSes were wrong -- 'Run the script <f>', 'Run a static analysis pass on <dir>' and 'Run the tests in <t>' were all answered by python.repository.acceptance.measure.v1, whose own artifact reports test_count 0, tests_pass false, terminal_authority false and hard_nonclaims[0] == MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE; 'Find every caller of build_plan in <f>' was answered by an index over <f> alone (1 of 7 call sites) with 'truncated': false; 'Which tests does <f> break' delivered the integer 0 from records.0.tests; and 'Check for security vulnerabilities in <f>' called itself complete with bandit absent.",
@@ -30,7 +30,7 @@
  "user_authorized_governance_change": false,
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "load_bearing_primary": {
-  "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+  "canonical_base_commit": "1f2f1605f084aee80c729e35b2dc763182e604ba",
   "open_obligation_ids": [],
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
@@ -80,7 +80,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+  "canonical_base_commit": "1f2f1605f084aee80c729e35b2dc763182e604ba",
   "real_outcome": "Six sentences that returned PASS with wrong or empty answers now fail closed and name the reason: 'Run the tests in canonical/tests/test_swe_typed_plan_v1.py' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.2 s (was PASS in 8.7 s); 'Run the script canonical/runtime/goal_compilation_benchmark_v1.py' FAIL_CLOSED__ROUTE_ADMISSION_REJECTED; 'Run a static analysis pass on canonical/runtime' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.6 s (was PASS in 9.6 s); 'Find every caller of build_plan in <f>' FAIL_CLOSED__ANSWER_SCOPE_UNPROVEN naming SEARCH_SCOPE_IS_THE_STATED_FILE; 'Which tests does <f> break' FAIL_CLOSED__ANSWER_SHAPE_UNSERVED instead of delivering 0; 'Find the fault in <f>' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED instead of a test selection. The two neighbours that were already correct still pass with their payloads ('List the functions', 'Show the last three git commits'), and the repository's own pinned laws still hold (a security review of a clean file is a review; a measurement may answer 'run the test suite in <dir>'). Nine law tests in canonical/tests/test_a_certificate_requires_the_work_v1.py run in 0.5 s.",
   "required_capability": "Answer-shape reconciliation at the door's single exit, and an operation binding that reads the sentence's verb instead of its nouns. Both are internal invariants over data the repository already has; neither is an external capability.",
   "proxy_goals_deleted": [

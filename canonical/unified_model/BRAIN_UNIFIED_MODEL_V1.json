@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6c96f280fdf2f136e6837c22d556e152f92517dc8491a413cb0814c6f6b664fe"
+  "value": "f1efddd2f95b86f6885df5459ff123beeeb1b7048fc1bfbe39ada66607a75561"
  },
  "engines": [
   {
@@ -201597,7 +201597,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_CERTIFICATE_MAY_ONLY_CLAIM_THE_WORK_THAT_WAS_DONE_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8c9b905e4caf305fdf56c687be5640e407606b684cfbc2478227fae5eddcc69e",
+   "sha256": "b4e8ab6c3788f6e5d47cb019c1613538dfc50b96e1f5c64ffb8cf75cf144f214",
    "status": "",
    "terms": {
     "2026-10-31": 1,
