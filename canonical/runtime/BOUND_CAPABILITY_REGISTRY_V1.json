@@ -4971,6 +4971,651 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_ORCHESTRATION_BRIDGE_ENUMERATION_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_ORCHESTRATION_BRIDGE_ENUMERATION_V1.json"
       }
+    },
+    "pdf.extract.ocr.tesseract": {
+      "action_template": {
+        "args": {
+          "capability_id": "pdf.extract.ocr.tesseract",
+          "dpi": 300,
+          "language": "eng",
+          "max_pages": 50,
+          "path": "${input.pdf_path}"
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "pdf_ocr_tesseract",
+      "cost": 2,
+      "discovery_evidence": "canonical/astra_runtime/evidence/ASTRA-CAPABILITY-DISCOVERY-APT-OCR-001__PACKAGES.json",
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "limitations": [
+        "Requires a Linux substrate with apt and sudo rights for first-time package installation.",
+        "Uses English OCR data in the verified configuration.",
+        "Accuracy depends on raster quality and source image quality."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "pdf.extract.ocr"
+      ],
+      "requires": [
+        "pdf.file.image_only.available"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "tesseract-ocr",
+            "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77",
+            "version": "5.3.4-1build5"
+          },
+          {
+            "name": "poppler-utils",
+            "sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4",
+            "version": "24.02.0-1ubuntu9.9"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
+        "observed_dependency": {
+          "origin": "Ubuntu",
+          "packages": [
+            {
+              "name": "tesseract-ocr",
+              "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77",
+              "version": "5.3.4-1build5"
+            },
+            {
+              "name": "poppler-utils",
+              "sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4",
+              "version": "24.02.0-1ubuntu9.9"
+            }
+          ]
+        },
+        "observed_effect": {
+          "pages_processed": 1,
+          "text": "TEST ULF TEST",
+          "text_sha256": "a7eaa8c1ba48058257dbcb0129019957b0d7f6844dee72447a926125fdff2d77"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-OCR-001.json"
+      }
+    },
+    "pdf.extract.text.pypdf": {
+      "action_template": {
+        "args": {
+          "capability_id": "pdf.extract.text.pypdf",
+          "max_pages": 200,
+          "path": "${input.pdf_path}"
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "pdf_pypdf",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "limitations": [
+        "Extracts existing PDF text layers; does not perform OCR on image-only/scanned pages.",
+        "Input paths are restricted to the Project Brain repository checkout.",
+        "Large uncompressed PDF content streams can require substantial memory."
+      ],
+      "provides": [
+        "pdf.extract.text"
+      ],
+      "requires": [
+        "pdf.file.available"
+      ],
+      "source": {
+        "license": "BSD-3-Clause",
+        "metadata_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+        "project": "pypdf",
+        "trusted_publishing": true,
+        "type": "pypi",
+        "version": "6.19.0",
+        "wheel_filename": "pypdf-6.19.0-py3-none-any.whl",
+        "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+        "observed_dependency": {
+          "project": "pypdf",
+          "version": "6.19.0",
+          "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        },
+        "observed_effect": {
+          "extracted_text": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED",
+          "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json",
+        "workflow_run_id": 36060830384
+      }
+    },
+    "plain_goal.bound_capability.grounding.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "${input.goal}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "plain_goal_bound_grounding",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "plain",
+        "goal",
+        "grounding",
+        "bound",
+        "capability",
+        "semantic",
+        "existing",
+        "registry",
+        "reuse",
+        "ambiguity"
+      ],
+      "limitations": [
+        "Grounds only to capabilities already marked VERIFIED_BOUND_CAPABILITY in the canonical registry.",
+        "Preserves multiple plausible matches as AMBIGUOUS_BOUNDED and leaves unsupported clauses UNRESOLVED.",
+        "Does not plan, execute, acquire suppliers, or treat constraint-only vocabulary as capability evidence.",
+        "External discovery remains allowed only for unresolved clauses after bound grounding."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "plain_goal.bound_capability.grounding"
+      ],
+      "requires": [],
+      "result_fields": [
+        "broad_objective_decomposition",
+        "broad_objective_decomposition_available",
+        "candidate_capability_ids",
+        "clauses",
+        "external_discovery_allowed_for_unresolved_only",
+        "goal",
+        "goal_sha256",
+        "grounded_clause_count",
+        "input_contract_bindability_enforced",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "unresolved_clause_indexes",
+        "whole_goal_external_discovery_forbidden_if_any_bound_grounding"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+        "modules": [
+          "difflib",
+          "hashlib",
+          "json",
+          "re",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "astra_runtime_integration_blob": "801d226ab589595f376da54833de6b925ff96f15",
+        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
+        "exact_final_head_validation_artifact_id": 11068728150,
+        "exact_final_head_validation_run_id": 36646452335,
+        "fresh_reuse_B_artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48",
+        "fresh_reuse_B_artifact_id": 11067819136,
+        "fresh_reuse_B_run_id": 36646400507,
+        "incremental_spend_usd": 0,
+        "independently_verified_by": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "model_dependency_count": 0,
+        "producer_git_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
+        "real_task_A_artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3",
+        "real_task_A_artifact_id": 11068403761,
+        "real_task_A_run_id": 36646322912,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+        "regression_run_id": 36646224008
+      }
+    },
+    "plain_goal.bound_capability.grounding.verify.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "${input.goal}",
+          "result_path": "${input.result_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "plain_goal_bound_grounding_verify",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "plain",
+        "goal",
+        "grounding",
+        "verify",
+        "independent",
+        "bound",
+        "capability",
+        "registry",
+        "evidence"
+      ],
+      "limitations": [
+        "Verifies grounding structure, goal hash, candidate registry status, zero-spend status, clause-supported match evidence, ambiguity cardinality, and discovery policy.",
+        "Does not import the producer module."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "result_path": {
+          "container": "scalar",
+          "effect": "plain_goal.bound_capability.grounding",
+          "field": "output_path",
+          "type": "effect_result"
+        }
+      },
+      "provides": [
+        "plain_goal.bound_capability.grounding.verified"
+      ],
+      "requires": [
+        "plain_goal.bound_capability.grounding"
+      ],
+      "result_fields": [
+        "verified",
+        "reason",
+        "producer_independent",
+        "model_dependency_count"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib",
+          "re"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
+        "exact_final_head_validation_artifact_id": 11068728150,
+        "exact_final_head_validation_run_id": 36646452335,
+        "fresh_reuse_B_run_id": 36646400507,
+        "model_dependency_count": 0,
+        "producer_independent": true,
+        "real_task_A_run_id": 36646322912,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+        "regression_run_id": 36646224008,
+        "verifier_git_blob": "d4aa64dc995845fcf8045f14f476f84b7f1d9cb8"
+      }
+    },
+    "professional.artifact.visual_observer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "professional.artifact.visual_observer.v1",
+          "path": "${input.path}"
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "professional_artifact_visual_observer_v1",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "professional",
+        "artifact",
+        "visual",
+        "render",
+        "readability",
+        "crop",
+        "overlap",
+        "blank",
+        "docx",
+        "pptx",
+        "xlsx",
+        "pdf"
+      ],
+      "limitations": [
+        "Verified only for bounded objective rendered-page technical observation: blankness, required text presence, OCR-confidence robustness, hard-crop text contact, and major OCR-line overlap.",
+        "PDF/DOCX/PPTX/XLSX real composition was independently verified; PNG/JPG/JPEG are code-supported but were not part of the real native-format public replay.",
+        "No holistic aesthetic-quality authority, semantic relevance/correctness authority, owner-evaluator containment, normative aggregation closure, benchmark-score authority, or terminal authority.",
+        "English positioned OCR is bound to the pinned Tesseract 5.3.4 dependency surface; dependency drift fails closed."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "professional.artifact.visual.technical_observation"
+      ],
+      "requires": [
+        "artifact.file.available"
+      ],
+      "result_fields": [
+        "pass",
+        "status",
+        "page_count",
+        "pages",
+        "source_sha256"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/professional_artifact_visual_observer_v1.py",
+        "composed_verified_substrates": [
+          "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+          "image.extract.ocr.tesseract.positioned.tsv"
+        ],
+        "exact_adapter_git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063",
+        "external_general_purpose_model_runtime_dependency_count": 0
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "artifact_digest": "sha256:356b4375e669286466f9381c29b4e2fcff110a121d67d8bc93a4b081d5364124",
+        "artifact_id": 11707950964,
+        "benchmark_cases_consumed": 0,
+        "causal_repair_verified": true,
+        "exact_runtime_git_blob_sha": "27be857789160e6971fb4d20265eae30468ea063",
+        "exact_test_git_blob_sha": "24db6f10c71df9ec20ca34ac6bd6a64b90c89ce1",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "first_failure_run_id": 38153554981,
+        "focused_tests_passed": 11,
+        "independent_verified": true,
+        "real_native_formats_passed": [
+          "pdf",
+          "docx",
+          "pptx",
+          "xlsx"
+        ],
+        "receipt_path": "canonical/verification/PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_V1_VERIFY_20261011.json",
+        "verifier_pull_request": 2716,
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "workflow_job_id": 114512510133,
+        "workflow_run_id": 38153807927
+      }
+    },
+    "pypi.provenance.audit_live_artifact": {
+      "action_template": {
+        "args": {
+          "capability_id": "pypi.provenance.audit_live_artifact",
+          "max_bytes": 20000000,
+          "metadata_path": "${input.metadata_path}",
+          "report_path": "${input.report_path}",
+          "selection_path": "${input.selection_path}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "pypi_provenance_audit",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "verify",
+        "pypi",
+        "wheel",
+        "artifact",
+        "download",
+        "sha256",
+        "hash",
+        "metadata",
+        "provenance",
+        "live"
+      ],
+      "limitations": [
+        "Supports canonical records whose source type is pypi and names an exact wheel filename/hash.",
+        "Uses authoritative live PyPI JSON metadata and downloads the exact recorded wheel over HTTPS.",
+        "Produces a report; final acceptance should be performed by a separate verifier."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "pypi.provenance.audit_live_artifact"
+      ],
+      "requires": [
+        "pypi.selection.available",
+        "pypi.live_metadata.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/pypi_provenance_audit.py",
+        "module": "urllib.request",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_report_assertion": true,
+        "independent_verifier": "curl",
+        "mission_id": "ASTRA-VERIFY-PYPI-PROVENANCE-001",
+        "observed_effect": {
+          "artifact_bytes": 395480,
+          "downloaded_artifact_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+          "live_metadata_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14",
+          "project": "pypdf",
+          "recorded_hash": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYPI-PROVENANCE-001__RECEIPT.json"
+      }
+    },
+    "python.contract.check.crosshair.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.contract.check.crosshair.v1",
+          "output_path": "${input.output_path}",
+          "target_path": "${input.target_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "crosshair_contract_oracle",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "contract",
+        "symbolic",
+        "smt",
+        "oracle",
+        "crosshair",
+        "counterexample",
+        "verification"
+      ],
+      "limitations": [
+        "Requires the crosshair-tool package; reports ORACLE_INCONCLUSIVE when absent.",
+        "Checks declared postconditions only; cannot invent contracts the code does not state.",
+        "Symbolic execution can be slow on code with unbounded loops or heavy I/O."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.contract.verdict"
+      ],
+      "requires": [
+        "python.source.file.available"
+      ],
+      "source": {
+        "license": "MIT",
+        "project": "crosshair-tool",
+        "type": "pypi",
+        "version": "0.0.109"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CROSSHAIR-CONTRACT-ORACLE-001",
+        "observed_effect": {
+          "model_dependency_count": 0,
+          "status": "CONTRACT_VIOLATION_FOUND",
+          "violations_found": 2
+        }
+      }
+    },
+    "python.contract.issue_orchestration.fusion.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.contract.issue_orchestration.fusion.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_contract_issue_orchestration_fusion_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "contract",
+        "issue",
+        "orchestration",
+        "fusion"
+      ],
+      "limitations": [
+        "Contract gates NL intent before HTN"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.orchestration.fused.verified",
+        "python.contract.issue.composition.verified"
+      ],
+      "requires": [
+        "python.contract.verdict",
+        "python.issue.natural_language.edit_intent",
+        "python.software.issue_to_pr.orchestration"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_contract_issue_orchestration_fusion_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-CONTRACT-ISSUE-ORCHESTRATION-FUSION-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1_V1.json"
+      }
+    },
+    "python.evidence.contract.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.evidence.contract.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_evidence_contract_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "contract",
+        "supercomposer",
+        "oracle"
+      ],
+      "limitations": [
+        "Evidence\u2192contract 5-kernel, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.evidence.contract.super.verified",
+        "python.evidence.contract.family.verified"
+      ],
+      "requires": [
+        "evidence.evidence.family.super.verified",
+        "evidence.synthesis.super.verified",
+        "evidence.hypothesis.property_violation",
+        "evidence.oracle.independent_second",
+        "python.contract.issue.composition.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_evidence_contract_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-EVIDENCE-CONTRACT-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_EVIDENCE_CONTRACT_SUPERCOMPOSER_V1_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
