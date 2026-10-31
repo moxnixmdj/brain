@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31",
- "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+ "canonical_base_commit": "1f2f1605f084aee80c729e35b2dc763182e604ba",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -72,7 +72,7 @@
   "hardcore_swe_surface_probe_20261030.py --floor"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+  "canonical_base_commit": "1f2f1605f084aee80c729e35b2dc763182e604ba",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "REFUSING_A_RUN_BECAUSE_ITS_ARTIFACT_IS_BIGGER_THAN_THE_GATE_S_READ_BUDGET",
@@ -154,7 +154,8 @@
   ],
   "selected_route": "DECODE_THE_LEADING_TOP_LEVEL_MEMBERS_OF_AN_OVER_CAP_ARTIFACT_AND_KEY_THE_INDEX_CACHE_BY_THE_TREE",
   "selected_surviving_route": "READ_THE_SECTION_THE_ANSWER_IS_IN__FIND_THE_ROWS_A_SIBLING_ARTIFACT_FOR_THE_SAME_TREE_PROVED__AND_GIVE_THE_ADVANCED_CENSUS_A_FLOOR",
-  "stop_condition": "CALLERS_ON_A_DIRECTORY_PASSES_WITH_THE_EXACT_ANSWER_5_7_S_WARM_AND_4_3_S_ON_A_NARROWER_TREE__CROSS_GOAL_TREE_REUSE_15_5_S_TO_3_5_S__MATRIX_54_CASES_22_REAL_0_FALSE_0_DAMAGED_MEDIAN_85_5_MS__SURFACE_CENSUS_28_OF_28__ADVANCED_CENSUS_3_OF_49_UNCHANGED_BY_THIS_CHANGE_AND_MEASURED_AS_SUCH__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE__CAPABILITY_SUITE_20_RED_NOT_21_AND_NONE_NEW"
+  "stop_condition": "CALLERS_ON_A_DIRECTORY_PASSES_WITH_THE_EXACT_ANSWER_5_7_S_WARM_AND_4_3_S_ON_A_NARROWER_TREE__CROSS_GOAL_TREE_REUSE_15_5_S_TO_3_5_S__MATRIX_54_CASES_22_REAL_0_FALSE_0_DAMAGED_MEDIAN_85_5_MS__SURFACE_CENSUS_28_OF_28__ADVANCED_CENSUS_3_OF_49_UNCHANGED_BY_THIS_CHANGE_AND_MEASURED_AS_SUCH__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE__CAPABILITY_SUITE_20_RED_NOT_21_AND_NONE_NEW",
+  "why_selected_route_is_fastest_sufficient": "The bounded read costs 101 ms on a 105.8 MB artifact against 1.31 s for a full parse and 1.5 GB of RSS, and it answers the sentence instead of refusing it. Raising the cap would pay the whole file every time; a second summary artifact would be a new format to keep in sync and a second 105 MB write per tree; a blacklist of large capabilities would be a list that ages. The cache fallback costs one directory listing and reuses rows the tree already proved, so a second sentence about the same tree costs 3.5 s instead of 15.5 s."
  },
  "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",

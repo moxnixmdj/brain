@@ -30478,7 +30478,7 @@
   "engines": 26,
   "knowledge_documents": 219,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6547,
+  "research_index_records": 6548,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f38c5d73fe08ffbbb1f33ea03b9dc7211483b4fe064ffb4fad69ecd0eda7b4aa"
+  "value": "55327c6c9b74a9eea3d6e785d8b7b8b23e9a97be0a57a2413fe152ced2d26920"
  },
  "engines": [
   {
@@ -200693,6 +200693,33 @@
    }
   },
   {
+   "action_id": "AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d31a3f115e7104235346a098a95886f8e7410c93676b1642458fd1cde0aec171",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "already": 1,
+    "an_answer_already_written_must_not_be_refused_for_size_v1_20261031_v1": 1,
+    "answer": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "not": 1,
+    "over_the_cap_the_gate_decodes_the_artifact_s_leading_top_level_members_inside_a_small_budget_and_stops_at_the_first_member_that_does_not_fit_each_value_decoded_whole_or_not_at_all__and_the_symbol_index_finds_the_rows_a_sibling_artifact_for_the_same_source_root_already_proved_with_the_same_per_file_sha256_check_that_a_fresh_parse_passes": 1,
+    "read_the_section_the_answer_is_in_and_key_the_index_cache_by_the_tree": 1,
+    "refused": 1,
+    "size": 1,
+    "the_gate_refused_an_answer_it_had_already_written__python_source_symbol_index_writes_105_8_mb_for_canonical_runtime_while_the_callers_answer_is_1_47_mb_and_is_the_first_top_level_member__max_artifact_bytes_16_mb_refused_the_whole_run_with_artifact_too_large_so_find_the_callers_of_binding_view_in_canonical_runtime_cost_16_5_to_18_7_seconds_and_failed_while_the_same_sentence_about_one_file_answered_in_293_ms__and_the_index_cache_was_keyed_by_the_request_artifact_path_because_the_door_names_each_artifact_after_the_request_so_no_two_sentences_ever_reused_one_tree_measured_2026_10_31": 1,
+    "v1": 2,
+    "written": 1
+   }
+  },
+  {
    "action_id": "AN_APPEND_IS_SERVED_AND_A_DIRECTORY_IS_NAMED_BY_THE_SENTENCE_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -215846,9 +215873,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "44f22ae3f986277b16d1e7e3e62cdebbe78e691edcb8a57561370f4af925005e",
+   "sha256": "a653b10eb59bfb14e14ee4269118edbb41b44dc867e6391aa96084e0faf1aa70",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "_artifact_path",
     "_bounded",
@@ -215856,6 +215883,7 @@
     "_narrow",
     "_project",
     "_read_artifact",
+    "_read_sections",
     "asked",
     "deliver",
     "main"
@@ -215875,6 +215903,7 @@
     "place": 1,
     "project": 1,
     "read_artifact": 1,
+    "read_sections": 1,
     "refuse": 1,
     "return": 1,
     "shape": 1,
@@ -219824,17 +219853,19 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "69ceb008f2a02bc58256c3676d08487885976b303efc77edbf3b5a6ae4a6734f",
+   "sha256": "df7a91e609ac37ebf945ba16a6d8066d70f09a0def042f450fd7e92e3cb8a69f",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "symbol_count": 12,
+   "symbol_count": 14,
    "symbols": [
     "_ModuleIndexer",
     "_cached_modules",
+    "_cached_modules_for_tree",
     "_collect_index_parts",
     "_module_names_prepass",
     "_parse_single_module_worker",
     "_py_files",
     "_row_sha",
+    "_rows_from_artifact",
     "_safe_root",
     "_signature",
     "build_index",
@@ -219845,6 +219876,7 @@
     "ast": 1,
     "build_index": 1,
     "cached_modules": 1,
+    "cached_modules_for_tree": 1,
     "collect_index_parts": 1,
     "deterministic": 1,
     "index": 2,
@@ -219855,6 +219887,7 @@
     "python": 2,
     "repository-local": 1,
     "row_sha": 1,
+    "rows_from_artifact": 1,
     "run": 1,
     "safe_root": 1,
     "semantic": 1,
