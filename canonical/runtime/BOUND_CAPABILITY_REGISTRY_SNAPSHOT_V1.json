@@ -2973,6 +2973,98 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
     },
+    "git.repository.operate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "git.repository.operate.v1",
+          "limit": "${input.limit}",
+          "message": "${input.message}",
+          "op": "${input.op}",
+          "repo_root": "${input.repo_root}",
+          "target": "${input.target}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "git_repository_operate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "git",
+        "commit",
+        "log",
+        "history",
+        "diff",
+        "status",
+        "blame",
+        "branch",
+        "show",
+        "repository",
+        "revision",
+        "staged"
+      ],
+      "limitations": [
+        "Seven declared operations only (log, status, diff, show, blame, branch, commit); the sentence chooses the operation, never the argv, and any other operation is refused by name.",
+        "Reads plus one write (commit --no-verify). No push, rebase, merge, reset or history rewrite.",
+        "Every reported effect is re-derived by a second git plumbing mechanism; a disagreement is a refusal, not a warning.",
+        "Repository-local only: repo_root must resolve inside the calling root."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "git.repository.operate",
+        "git.history.read",
+        "git.working_tree.inspect",
+        "git.commit.create"
+      ],
+      "requires": [
+        "git.repository.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "capability",
+        "head_sha",
+        "incremental_spend_usd",
+        "model_dependency_count",
+        "observed_effect",
+        "op",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "repo_root",
+        "row_count",
+        "rows"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
+        "adapter_sha256": "b0115970ddd67e689391a75fce1e0a424df835e7fb3920c66e86e103866bc166",
+        "engine": "git",
+        "type": "brain_bound_system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "authority": "NONE",
+        "carrier": "SANDBOX",
+        "independent_mechanism": "each operation's reported effect is re-derived by a different git command than the one that produced it",
+        "independent_verified_by": "git plumbing: rev-parse, rev-list, cat-file, merge-base, symbolic-ref",
+        "mission_id": "ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001",
+        "observed_effect": {
+          "blame_lines": 2,
+          "commit_sha_measured": "a2ad8d4ac665",
+          "commits_read": 2,
+          "independent_mechanism_disagreements": 0,
+          "operations_measured": 7,
+          "patch_bytes": 315
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001__RECEIPT.json"
+      }
+    },
     "http.json.fetch_from_state": {
       "action_template": {
         "args": {
@@ -8296,13 +8388,18 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
+        "cyclomatic_complexity",
         "functions_measured",
+        "is_asymptotic_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "quadratic_symbols",
+        "total_cyclomatic",
         "worst_class",
+        "worst_cyclomatic",
         "worst_function",
         "worst_nesting"
       ],
@@ -8587,11 +8684,37 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+        "adapter_sha256": "726e06b24589f3451c3a9626e1d75e9cd30747d5531266e8ec4615b203d7b79d",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SECRET-SCAN-001",
+        "observed_effect": {
+          "adapter_sha256": "7830d7eb02be5b0019efc9ca2aeace66f33d1d57106061e773907a9dc01919c5",
+          "checks": {
+            "constructed_line": 4,
+            "reported": [
+              {
+                "line": 4,
+                "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets/config.py",
+                "redacted": "AKIA\u202620",
+                "signature": "aws_access_key_id"
+              }
+            ],
+            "secret_echoed_in_report": false
+          },
+          "claim": "finds a published credential shape at its real line and never echoes it",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECRET-SCAN-001.json"
+      }
     },
     "python.source.symbols.index.ast": {
       "action_template": {
@@ -8661,7 +8784,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
+        "parsed_module_count",
         "reference_count",
+        "reused_module_count",
         "symbol_count",
         "unparseable_count",
         "unparseable_paths"
@@ -8816,24 +8941,49 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
         "finding",
         "finding_count",
+        "is_security_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "reaches",
         "sink",
         "source_function",
+        "source_functions",
+        "source_root",
         "trace"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
+        "adapter_sha256": "c494fa06f4078cdeb7bce26b86d2e462c3bf9305938d32a5714b69524bd35d17",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TAINT-FLOW-001",
+        "observed_effect": {
+          "adapter_sha256": "d0106e401d0138ca416b9a8707a3952813eae11209b8acef7357608a08298502",
+          "checks": {
+            "clean_world_answer": "no",
+            "constructed_sink": "os.system",
+            "constructed_source": "json.loads(raw) on a parameter",
+            "control_world_is_taint_free_by_construction": true,
+            "reported_answer": "yes"
+          },
+          "claim": "traces an input boundary to a shell sink, and says no when it does not",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TAINT-FLOW-001.json"
+      }
     },
     "python.source.test_adequacy.v1": {
       "action_template": {
@@ -10126,6 +10276,7 @@
       "provides": [
         "software.repair.choreography.verified",
         "software.patch.crossfile.atomic",
+        "software.source.write.crossfile",
         "software.concurrency.race.condition.fix",
         "security.sql.injection.remove",
         "performance.quadratic.linearithmic.optimize",

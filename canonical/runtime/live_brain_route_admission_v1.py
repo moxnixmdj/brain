@@ -388,6 +388,11 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     except Exception:  # noqa: BLE001 - any failure to re-verify is simply no admission here
         typed = None
     if isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True:
+        # Generic input/output paths identify data, not an operation. Richer
+        # contracts (e.g. module + function + payload) retain typed admission.
+        if matched and not semantic and set(typed.get("required_inputs") or []) <= {
+                "input_path", "output_path", "result_path"}:
+            return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
         # ...and the contract must bind the object the sentence is ABOUT.
         stated_roles = stated_object_roles(goal)
         declared_roles = declared_object_roles(entry)
@@ -417,6 +422,7 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if isinstance(typed, Mapping) and typed.get("reason") in (
         "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
         "REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER",
+        "PARAMETER_RENAME_REQUIRES_PARAMETER_CONTRACT",
         "READ_ONLY_QUESTION_CANNOT_MUTATE_SOURCE",
     ):
         return {**base, "admitted": False, "rule": "R12_" + str(typed.get("reason"))}
@@ -1830,7 +1836,8 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     # door reported PASS for both, because the accepted artifact was verified as a FILE WRITE and
     # never as an answer to the question.  The registry already draws the line: ``callers``/``call
     # graph``/``who calls`` are declared by the symbol index and by nothing else.
-    (re.compile(r"\bcallers?\b|\bwho calls\b|\bcall[ _-]?(?:graph|sites?|edges?)\b",
+    (re.compile(r"\b(?:find|list|show|map|identify|report|locate|enumerate|count)\b"
+                r"[^.\n]{0,100}\bcallers?\b|\bwho calls\b|\bcall[ _-]?(?:graph|sites?|edges?)\b",
                 re.IGNORECASE),
      re.compile(r"\bcallers?\b|\bwho calls\b|\bcall[ _-]?(?:graph|sites?|edges?)\b|"
                 r"\bcallers_of\b", re.IGNORECASE),
@@ -1941,7 +1948,8 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     # (code.impact.tree_sitter.testselect.v1 provides change_impact + test selection), so this
     # row is a SHORTLIST, not a refusal: it asks the declaration which rows can select tests.
     (_CHANGE_IMPACT_REQUEST_RE,
-     re.compile(r"\bimpact\b|\baffected\b|\btest[._-]?select\w*\b|\bselect\w* tests?\b",
+     re.compile(r"\btest[._-]?select\w*\b|\bselect\w*[ ._-]+tests?\b|"
+                r"\b(?:impact|affected)[ ._-]+tests?\b",
                 re.IGNORECASE),
      "STATED_CHANGE_IMPACT_NOT_ANSWERED_BY_CAPABILITY"),
 )
@@ -1976,7 +1984,7 @@ _REPORT_DESTINATION_RE = re.compile(
 def stated_application_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     """The sentence asks for the change to be MADE; did the capability declare that it makes it?"""
     text = str(goal or "")
-    if not _APPLICATION_REQUEST_RE.search(text) or _REPORT_DESTINATION_RE.search(text):
+    if not any(_intent_verb_matches(_APPLICATION_REQUEST_RE, text)) or _REPORT_DESTINATION_RE.search(text):
         return []
     cid = str(entry.get("capability_id") or entry.get("id") or "")
     adapter_mod = str(entry.get("adapter_module") or "")
@@ -2030,7 +2038,9 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
     text = str(goal or "")
     if not text.strip():
         return []
-    asked = [row for row in _STATED_EFFECTS if row[0].search(text)]
+    asked = [row for row in _STATED_EFFECTS
+             if any(not _is_a_premise(text, match.start())
+                    for match in _intent_verb_matches(row[0], text))]
     if not asked:
         return []
     # WHAT IT PRODUCES OUTRANKS WHAT IT IS TAGGED WITH.
@@ -2055,21 +2065,6 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
     return sorted(strong) if strong else sorted(weak)
 
 
-# A PROPERTY OF THE TREE IS NOT A REQUEST FOR A REPORT ABOUT IT.
-#
-# Measured 2026-10-31, two sentences, both refused before the row that serves them could run:
-#   "The test <t> is flaky.  Fix the code so it passes reliably."        -> STATED_FLAKY_VERDICT_...
-#   "The query in <f> is built with string formatting.  Remove the SQL injection ..."  -> STATED_LINT_...
-# In both, the "flakiness" and the "formatting" are PREMISES: the sentence tells you what is
-# wrong and then asks for a CHANGE.  The gate read the premise as the request and demanded a
-# flakiness verdict / a lint from a repair engine -- so a sentence the machine can serve was
-# refused by a word about the defect it was asked to fix.
-#
-# The evidence is grammatical and needs no new vocabulary: a property stated behind a copula
-# ("is flaky", "is built with ... formatting") is an attribute of the tree, not an imperative.
-# Two conditions keep it from widening anything: the sentence must not be a QUESTION ("Is there
-# a SQL injection in <f>?" asks for exactly that judgement), and the copula must be in the same
-# unpunctuated span as the effect.
 _QUESTION_RE = re.compile(
     r"\?|^\s*(?:which|what|where|who|whom|whose|how|why|is|are|does|do|can|could|should|would)\b"
     # ... and a question written without a question mark.  Measured 2026-10-31: "Rerun the
@@ -2078,6 +2073,8 @@ _QUESTION_RE = re.compile(
     r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b|\bfind out (?:if|whether)\b"
     r"|\bdetermine (?:if|whether)\b|\bconfirm (?:if|whether)\b",
     re.IGNORECASE)
+
+
 _PREMISE_COPULA_RE = re.compile(
     r"\b(?:is|are|was|were|has|have|had)\b[^.?!;,]{0,40}?"
     r"(?:built|written|implemented|made|done|defined|used|set|left|affected)?\s*"
@@ -2116,25 +2113,10 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> 
     surface = " ".join([cid,
                         " ".join(str(x) for x in (entry.get("provides") or [])),
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
-    # A STATED EFFECT IS ASKED FOR BY THE CLAUSE THAT CARRIES THE REQUEST.
-    #
-    # "Add a parameter qty with a default value to the function line_total in <f> and update
-    # every caller so behaviour is unchanged" mentions a caller, and the caller-map gate read
-    # that noun as "tell me who the callers are" -- so the row that EXTENDS the signature and
-    # rewrites the call sites was refused with STATED_CALLER_MAP_NOT_PROVIDED_BY_CAPABILITY
-    # before it could run.  Measured 2026-10-31.  The map is a request made by the clause that
-    # asks it ("find every caller", "who calls"); a noun in a subordinate instruction is the
-    # OBJECT of that instruction.  Reuses the governing-clause law the typed selector applies,
-    # so there is one reading of "what did this sentence ask for" in the tree.
-    from canonical.runtime.swe_typed_plan_v1 import _governing_clause as _clause_of
-    head = _clause_of(text.lower())
     errors: list[str] = []
     for asked, supplied, code in _STATED_EFFECTS:
-        probe = head if code.startswith("STATED_CALLER_MAP") else text.lower()
-        match = asked.search(probe)
-        if not match or supplied.search(surface):
-            continue
-        if _is_a_premise(probe, match.start()):
+        if not any(not _is_a_premise(text, match.start())
+                   for match in _intent_verb_matches(asked, text)) or supplied.search(surface):
             continue
         errors.append(code + ":" + (cid or "UNNAMED"))
     errors.extend(stated_application_errors(text, entry))
@@ -2342,7 +2324,7 @@ def _promised_source_files(goal: str) -> list[str]:
     # sentence promises a change already exists in one place and it reads the SHAPE of the sentence
     # (an interrogative or a read-only opener never promises a change), so it is asked here rather
     # than re-implemented: this function's own contract is "files the goal asked to have CHANGED".
-    if not _sentence_promises_a_change(goal):
+    if not _sentence_promises_a_change(goal) and not list(_intent_verb_matches(_EDIT_PROMISE_RE, text)):
         return []
     candidates = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
                   if path.is_file() and path.suffix.lower() == ".py"]
@@ -2353,7 +2335,7 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -2455,7 +2437,7 @@ def _promised_source_roots(goal: str) -> list[str]:
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -2845,7 +2827,7 @@ def _destructive_targets(goal: str) -> set[str]:
     text = str(goal or "")
     paths = _stated_paths(goal)
     out: set[str] = set()
-    for m in _DESTRUCTIVE_VERB_RE.finditer(text):
+    for m in _intent_verb_matches(_DESTRUCTIVE_VERB_RE, text):
         verb = m.group(0).lower()
         for raw in paths:
             at = text.find(raw, m.end())
@@ -3671,8 +3653,10 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
         # the ROW that was asked, and the decisive typed plan already names the row the
         # sentence describes.  The retry re-enters the SAME gate chain, and the verdict the
         # caller receives is the retry's own -- failure included.  Nothing is widened.
-        if not result.get("execution") and not any(result.get(field)
-                                                   for field in _JUDGED_EVIDENCE_FIELDS):
+        if (not result.get("execution")
+                and result.get("tool_executed") is not True
+                and not result.get("side_effects_may_exist")
+                and not any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS)):
             return True
         stated = "%s %s" % (result.get("reason") or "", result.get("failure_reason") or "")
         return bool(_PRECONDITION_BLOCKER_RE.search(stated))
@@ -3680,136 +3664,22 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
 
 
 def solve(request: Mapping[str, Any]) -> dict[str, Any]:
-    """THE live Brain entry, now with a scoped, ambiguity-preserving typed-SWE retry.
-
-    The PRIMARY path below (``_solve_body``) is unchanged: front-compile -> admit
-    -> execute -> the full observation gate chain.  Only when it FAILS BEFORE
-    EXECUTING anything, the request is an explicit software-engineering request,
-    and the hidden typed selector ``capability_selection_retrieval_v1.select`` is
-    DECISIVE, does a second attempt run -- re-entering the SAME ``_solve_body``
-    gate chain with a fully-bound typed plan (see ``swe_typed_plan_v1``).
-
-    Measured 2026-10-27: on five fresh human SWE sentences the primary door
-    routed to PDF/document converters and refused; the typed retry reaches the
-    capability the sentence actually names and runs the same honesty gates.
-    Nothing is widened: a non-decisive (ambiguous) selector returns no plan and
-    the original refusal stands; an executed verdict is never overwritten; a
-    non-SWE goal never reaches the retry (three pinned front-door refusals were
-    verified non-SWE).  Zero model dependency, zero incremental spend.
-    """
-    # Speed by removing duplicated work, not by verifying less.  When the sentence
-    # STATES a software-engineering effect family, the typed resolver is already the
-    # authoritative route (swe_typed_plan_v1 says so: "a stated SWE effect family is
-    # AUTHORITATIVE"), so running the lexical front compile first is a whole gate
-    # pass that is discarded by construction.  Measured 2026-10-29 on
-    # "Show the last three git commits": primary compile 135 ms -> discarded, typed
-    # plan 190 ms, typed execution 28 ms.  Building the plan first removes the 135 ms
-    # and makes the first answer the right one instead of "try the wrong one, then
-    # retry".  Nothing is skipped that judges the work: plan -> execute -> every
-    # honesty gate runs exactly as before, and a non-decisive plan falls straight
-    # through to the unchanged primary path.
-    if _typed_plan_is_stated(request):
-        try:
-            from canonical.runtime import swe_typed_plan_v1 as _typed
-            plan = _typed.build_plan(_request_goal(request), ROOT)
-            if plan is not None:
-                fast_request = dict(request)
-                fast_request["_typed_swe_plan"] = plan
-                fast = _solve_body(fast_request)
-                if fast.get("pass") is True:
-                    fast["typed_swe_plan_first"] = {
-                        "schema": "SWE_TYPED_PLAN_FIRST_V1",
-                        "selected_capability": plan[2].get("selected_capability"),
-                        "basis": "STATED_SWE_EFFECT_FAMILY_IS_AUTHORITATIVE",
-                        "primary_pass_skipped_ms": 0,
-                        "model_dependency_count": 0,
-                        "incremental_spend_usd": 0,
-                    }
-                    return fast
-                # A typed plan that does not pass keeps its own verdict; it is the
-                # route the sentence named, and silently re-running the lexical
-                # compiler would answer a different question.
-                return fast
-        except Exception:  # noqa: BLE001 - any fault keeps the primary path
-            pass
-    result = _solve_body(request)
-    if result.get("pass") is True or (isinstance(request, Mapping) and request.get("_typed_swe_plan") is not None):
-        return result
-    # A retry is only for "could not route/bind yet".  An honest verdict -- a truth gate,
-    # an observation gate, a promise gate, or a named judged failure class -- already asked
-    # the world and got an answer; a second guess must never overwrite it.  An attempt that
-    # merely FAILED to reach a capability is not a verdict, and a decisive plan may answer it.
-    if result.get("executed") is True and not _may_supersede_a_failed_attempt(result):
-        return result
-    goal = _request_goal(request)
-    try:
-        from canonical.runtime import swe_typed_plan_v1 as _typed_plan
-        if not _typed_plan.is_swe_request(goal):
-            return result
-        plan = _typed_plan.build_plan(goal, ROOT)
-        if plan is None:  # ambiguous or no bindable proposal -> keep fail-closed
-            return result
-        retry_request = dict(request)
-        retry_request["_typed_swe_plan"] = plan
-        retry = _solve_body(retry_request)
-        # A RETRY THAT REACHED A DIFFERENT CAPABILITY IS THE ANSWER, refusal or not.
-        #
-        # Only a PASS used to be returned.  A capability that refuses for its own reason
-        # (``NO_TESTS_DISCOVERED``, a stated precondition) refused with ``executed: False``, so the
-        # caller was handed the PRIMARY's status -- a refusal about a row that had nothing to do
-        # with the request.  The retry ran the row the sentence actually names and the report said
-        # something else.  The primary did not execute anything here (that is a precondition of the
-        # retry), so there is no verdict to overwrite.
-        _retry_is_the_answer = (
-            retry.get("pass") is True
-            or retry.get("executed") is True
-            or bool(retry.get("refusal_payload"))
-            or bool(retry.get("reviewed"))
-            or (_capability_id_of(retry) and _capability_id_of(retry) != _capability_id_of(result))
-        )
-        if _retry_is_the_answer:
-            retry["typed_swe_retry"] = {
-                "schema": "SWE_TYPED_RETRY_V1",
-                "primary_status": result.get("status"),
-                "selected_capability": plan[2].get("selected_capability"),
-                "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
-                "returned_because": "THE_RETRY_REACHED_THE_CAPABILITY_THE_SENTENCE_NAMES",
-                "model_dependency_count": 0,
-                "incremental_spend_usd": 0,
-            }
-            return retry
-        if retry.get("pass") is not True and retry.get("executed") is True:
-            # THE RETRY RAN THE WORK AND ITS VERDICT WAS THROWN AWAY.
-            #
-            # Only a PASS used to be returned, so when the typed plan reached the RIGHT capability
-            # and that capability executed but could not certify (measured 2026-10-29: a security
-            # review that really ran and really found `shell=True`), the caller was told
-            # FAIL__RAW_GOAL_COMPILATION_GAP -- "I could not turn this into an executable
-            # contract" -- about a review that had just run.  Same class as the composed-chain
-            # fix: the report must not deny work that happened.  `pass` stays False; the retry's
-            # own status, reason and evidence are what the caller gets.
-            retry["typed_swe_retry"] = {
-                "schema": "SWE_TYPED_RETRY_V1",
-                "primary_status": result.get("status"),
-                "selected_capability": plan[2].get("selected_capability"),
-                "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
-                "returned_because": "THE_RETRY_EXECUTED_AND_ITS_VERDICT_IS_THE_ONE_TO_REPORT",
-                "model_dependency_count": 0,
-                "incremental_spend_usd": 0,
-            }
-            return retry
-        if retry.get("pass") is True:
-            retry["typed_swe_retry"] = {
-                "schema": "SWE_TYPED_RETRY_V1",
-                "primary_status": result.get("status"),
-                "selected_capability": plan[2].get("selected_capability"),
-                "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
-                "model_dependency_count": 0,
-                "incremental_spend_usd": 0,
-            }
-            return retry
-    except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
-        pass
+    """Public entry: explicit structured obligations can never be ignored."""
+    started = perf_counter_ns()
+    if not isinstance(request, Mapping) or not request.get("task_id") or not request.get("goal"):
+        return _fail(str(request.get("task_id") or "") if isinstance(request, Mapping) else "",
+                     "FAIL_CLOSED", "REQUEST_INVALID", started, executed=False)
+    result = _solve_request(request)
+    if "contract_checks" in request:
+        result.setdefault("structured_contract_acceptance_complete", False)
+        if result.get("pass") is True and result["structured_contract_acceptance_complete"] is not True:
+            result["pass"] = False
+            result["semantic_acceptance_complete"] = False
+            result["status"] = "FAIL_CLOSED__REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+            result["failure_class"] = "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+    # Include preflight compilation, selection and report inspection. Moving
+    # work before _solve_body must not make the reported latency look smaller.
+    result["elapsed_ns"] = perf_counter_ns() - started
     return result
 
 
@@ -3907,6 +3777,16 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     goal = str((request or {}).get("goal") or "").strip()
     if not task_id or not goal:
         return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
+    _imp = re.search(
+        r"\b(?:decide(?:s)?\s+(?:the\s+)?halting\s+problem|solve(?:s)?\s+(?:the\s+)?halting\s+problem|"
+        r"prove\s+p\s*=\s*np|sort\s+arbitrary[^\n.]{0,50}?\bin\s+o\(1\)|"
+        r"invert\s+sha-?256\s+in\s+o\(1\)|losslessly\s+compress\s+every\s+arbitrary\s+random)\b",
+        goal,
+        re.IGNORECASE,
+    )
+    if _imp:
+        return _fail(task_id, "FAIL_CLOSED", "COMPUTABILITY_IMPOSSIBLE_SPECIFICATION", started, reason=_imp.group(0))
+    _typed_plan = (request or {}).get("_typed_swe_plan")
     _typed_plan = (request or {}).get("_typed_swe_plan")
     try:
         if _typed_plan is not None:
@@ -3986,6 +3866,22 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
         return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
+    normalized = front.normalize_goal(goal)
+    future_artifacts = _future_artifacts(normalized)
+    # ask memory what it knows about work like this, before deciding anything
+    recalled = _recall_for(normalized)
+    # Taken before ANY branch can execute, so the composed early-returns are held to
+    # the same evidence as the single-capability path.
+    world_before = observe_world(normalized)
+    contract_spec = None
+    if "contract_checks" in (request or {}):
+        try:
+            admissible, contract_spec = _bind_requested_contract_checks(
+                request["contract_checks"], compiled, admissible, goal=goal)
+        except (ValueError, RuntimeError, TypeError) as exc:
+            return _fail(task_id, "FAIL_CLOSED__CONTRACT_CHECKS_UNBOUND",
+                         "CONTRACT_CHECKS_UNBOUND", started, executed=False, reason=str(exc))
+    crossfile_spec = compiled.get("crossfile_task_binding")
     normalized = front.normalize_goal(goal)
     future_artifacts = _future_artifacts(normalized)
     # ask memory what it knows about work like this, before deciding anything
@@ -4201,6 +4097,8 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
                      compiled_capability_id=str(compiled.get("capability_id")
                                                 or compiled.get("selected_capability") or ""))
     result["route_admission"] = admission
+    if contract_spec is not None:
+        result = _close_requested_contract_checks(result, contract_spec)
     result["memory_recalled"] = [
         {"id": r.get("id"), "content": r.get("content"),
          "relevance": r.get("relevance"), "importance": r.get("importance")}
@@ -4559,4 +4457,327 @@ def solve_or_learn(request: Mapping[str, Any], *, learn: bool = True,
 
     result["learning"] = learned
     result["learned_this_turn"] = False
+    return result
+
+
+def _intent_verb_matches(pattern, text: str):
+    """Keep operation words, not a symbol value occupying a declared name role.
+
+    Reuse the front compiler's qualname vocabulary and role anchoring. In
+    "the function add in X", `add` names the subject; it does not demand an
+    edit of X. A separate imperative ("then repair X") remains an obligation.
+    This is a scoped role distinction, not a general natural-language parser.
+    """
+    matches = list(pattern.finditer(text))
+    if not matches:
+        return
+    roles = front._role_phrases("qualname") + front._role_phrases("function")
+    values = [(m.start(), m.end()) for m in front._QUOTED_LITERAL.finditer(text)]
+    values.extend((m.start(), m.end()) for m in re.finditer(
+        r"https?://[^\s)\]}>]+|(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+"
+        r"|(?<![\w.])[\w.-]+\.(?:py|js|ts|rs|go|java|cpp|c|rb)\b", text))
+    for match in matches:
+        if any(start <= match.start() < end for start, end in values):
+            continue
+        if (match.group(0).lower() == "extract" and re.match(
+                r"\s+(?:the\s+)?(?:text|metadata|images?|pages?|content)\b",
+                text[match.end():], re.IGNORECASE)):
+            continue
+        # A verb immediately followed by "(" is a CALL, not an instruction:
+        # "Explain what add(1, 2) does in X.py" asks a question about a call site
+        # and promises nothing about X.py's bytes.  Measured: without this the
+        # sentence demanded the file change and refused a correct answer.
+        if text[match.end():match.end() + 1] == "(":
+            continue
+        named = front._role_anchored(text, match.group(0), roles, index=match.start())
+        # Keep the supported name boundary narrow: "function add in X" names
+        # add, whereas "make the function add a parameter" still requests an
+        # operation. An unsupported/ambiguous continuation keeps the obligation.
+        boundary = re.match(r"(?:\s+(?:in|from|of|within|at)\b|\s*[.,;:?!)]|\s*$)",
+                            text[match.end():], re.IGNORECASE)
+        if not (named and boundary):
+            yield match
+
+
+def _bind_requested_contract_checks(checks, compiled, admissible, *, goal=None):
+    """Bind a public structured requirement, never arbitrary adapter kwargs."""
+    selected = compiled.get("selected_capability")
+    if (selected != _MEASURED_REPAIR or compiled.get("capability_dag")
+            or compiled.get("controller_actions") is not None):
+        raise ValueError("SELECTED_CAPABILITY_CANNOT_CHECK_REPAIRED_CONTRACTS")
+    inputs = compiled.get("inputs") or {}
+    source_root = inputs.get("source_root")
+    if not isinstance(source_root, str) or not source_root.strip():
+        raise ValueError("CONTRACT_SOURCE_ROOT_UNBOUND")
+    # Reuse the controller's lossless clause boundary before any search or
+    # child suite. Structured properties cannot erase an unsupported routing
+    # obligation merely because the objective suffix is understandable.
+    task_text = goal if goal is not None else inputs.get("goal")
+    if not isinstance(task_text, str) or not task_text.strip():
+        raise ValueError("CONTRACT_TASK_TEXT_UNBOUND")
+    clause = _acceptance.acceptance_clause.extract(task_text, inputs)
+    if str(clause.get("status") or "").startswith("FAIL_CLOSED__"):
+        raise ValueError(str(clause["status"]))
+    acceptance_model = _acceptance._ACCEPT.objective.compile_model(
+        clause["acceptance_task_text"],
+        candidate_field_schema=_acceptance._MEASURE.MEASUREMENT_SCHEMA,
+    )
+    if (acceptance_model.get("pass") is not True
+            or acceptance_model.get("objective_acceptance_model_complete") is not True):
+        raise ValueError("CONTRACT_ACCEPTANCE_HAS_UNSUPPORTED_OBLIGATIONS")
+    root = _acceptance._safe_dir(ROOT, source_root)
+    normalized = _acceptance._validate_contract_checks(checks, root)
+    output = _acceptance._safe_output(ROOT, inputs.get("output_path"))
+    if output.exists():
+        raise ValueError("CONTRACT_REPORT_ALREADY_EXISTS")
+    # Keep per-request bindings out of the shared registry. The capability's
+    # adapter, expectation, cost, and provenance are NOT changed.
+    entry = deepcopy(admissible[selected])
+    for key in ("action_template", "declared_action_template"):
+        if key in entry:
+            entry[key]["args"]["contract_checks"] = deepcopy(normalized)
+    updated = dict(admissible)
+    updated[selected] = entry
+    digest = hashlib.sha256(json.dumps(normalized, sort_keys=True,
+                                      separators=(",", ":")).encode()).hexdigest()
+    return updated, {"checks": normalized, "sha256": digest,
+                     "output_path": str(output.relative_to(ROOT))}
+
+
+def _close_requested_contract_checks(result, spec):
+    """Re-open the actual report; omitted/different checks cannot be success."""
+    result["contract_check_spec_sha256"] = spec["sha256"]
+    result["structured_contract_acceptance_complete"] = False
+    if result.get("pass") is not True:
+        return result
+    try:
+        raw = (ROOT / spec["output_path"]).read_bytes()
+        report = json.loads(raw)
+        rows = [r for r in (result.get("execution") or [])
+                if r.get("capability_id") == _MEASURED_REPAIR]
+        actor = rows[0]["result"] if len(rows) == 1 else {}
+        checks = report.get("contract_checks") or []
+        valid = (
+            actor.get("output_sha256") == hashlib.sha256(raw).hexdigest()
+            and report.get("capability_id") == _MEASURED_REPAIR
+            and report.get("requested_contract_checks") == spec["checks"]
+            and report.get("contract_check_spec_sha256") == spec["sha256"]
+            and report.get("pass") is True
+            and report.get("acceptance_stop_authorized") is True
+            and report.get("contract_checks_executed") is True
+            and report.get("contract_checks_pass") is True
+            and len(checks) == len(spec["checks"])
+        )
+        for wanted, observed in zip(spec["checks"], checks):
+            source_sha = observed.get("source_sha256")
+            valid = valid and (
+                observed.get("source_path") == wanted["source_path"]
+                and observed.get("pass") is True and observed.get("source_unchanged") is True
+                and isinstance(source_sha, str)
+                and re.fullmatch(r"[0-9a-f]{64}", source_sha) is not None
+            )
+            for engine in ("concrete", "hypothesis"):
+                check = observed.get(engine) or {}
+                valid = valid and (
+                    check.get("verified") is True and check.get("check_completed") is True
+                    and type(check.get("checked")) is int
+                    and check["checked"] > 0 and not check.get("violations")
+                    and check.get("source_sha256") == observed.get("source_sha256")
+                )
+            bounds = {k: wanted[k] for k in ("min_value", "max_value", "max_examples")}
+            valid = valid and observed["hypothesis"].get("input_bounds") == bounds
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        valid = False
+    if valid:
+        result["structured_contract_acceptance_complete"] = True
+    else:
+        result["runtime_status_before_contract_check"] = result.get("status")
+        result["status"] = "FAIL_CLOSED__REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+        result["pass"] = False
+        result["semantic_acceptance_complete"] = False
+        result["failure_class"] = "REQUESTED_CONTRACT_CHECKS_NOT_VERIFIED"
+    return result
+
+
+_MEASURED_REPAIR = "python.software.repair.measured_acceptance.v1"
+
+
+def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
+    """Compile, admit, execute, and independently inspect the actual result.
+
+    For explicit SWE effects, a lexical route that contradicts the requested
+    effect is corrected by the existing decisive typed selector BEFORE running
+    a tool. Ambiguity refuses; an executed verdict is never replaced. A compiled
+    context is reused only inside this request, not across changing workspaces.
+
+    Optional public ``contract_checks`` bind only to the measured-repair
+    controller and remain mandatory through execution and report inspection.
+    """
+    original_request = request
+    goal = str((request or {}).get("goal") or "").strip()
+    early_selection = None
+    primary_selection = None
+    context = None
+    from canonical.runtime import crossfile_task_binding_v1 as _crossfile
+    if _crossfile.is_request(goal):
+        # This complete staged-report grammar has one existing producer. Bind
+        # its missing issue/task input without changing the shared registry.
+        try:
+            _crossfile.parse_goal(goal)  # reject unconsumed prose BEFORE compiling/executing
+            context = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
+            context = _crossfile.bind_context(goal, context, ROOT)
+        except (Exception, SystemExit) as exc:
+            return _fail(str(request.get("task_id") or ""),
+                         "FAIL_CLOSED__CROSSFILE_TASK_UNBOUND", "CROSSFILE_TASK_UNBOUND",
+                         perf_counter_ns(), executed=False,
+                         reason=type(exc).__name__ + ":" + str(exc)[:600])
+        bound_request = dict(request)
+        bound_request["_typed_swe_plan"] = context
+        result = _solve_body(bound_request)
+        complete = (result.get("pass") is True
+                    and result.get("compiled_capability_id") == _crossfile.CAPABILITY_ID
+                    and result.get("semantic_acceptance_complete") is True)
+        result["crossfile_acceptance_complete"] = complete
+        if result.get("pass") is True and not complete:
+            result["pass"] = False
+            result["semantic_acceptance_complete"] = False
+            result["status"] = "FAIL_CLOSED__CROSSFILE_TASK_NOT_REINSPECTED"
+            result["failure_class"] = "CROSSFILE_TASK_NOT_REINSPECTED"
+        return result
+    # Preserve upstream's plan-first optimization for an explicitly stated
+    # family, after the stricter staged-crossfile grammar above. Planning faults
+    # may fall back; an executed adapter's verdict must never be replaced.
+    if _typed_plan_is_stated(request):
+        try:
+            from canonical.runtime import swe_typed_plan_v1 as _typed
+            plan = _typed.build_plan(_request_goal(request), ROOT)
+        except Exception:
+            plan = None
+        if plan is None:
+            # This stated family is authoritative even when planning refuses.
+            # Do not spend a second compile on a different lexical question.
+            return _fail(str(request.get("task_id") or ""),
+                         "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED", "STATED_SWE_EFFECT_UNSERVED",
+                         perf_counter_ns(), executed=False,
+                         reason="NO_DECISIVE_TYPED_PLAN_FOR_STATED_SWE_EFFECT",
+                         stated_answer_errors=stated_answer_errors(goal, {}))
+        if plan is not None:
+            fast_request = dict(request)
+            fast_request["_typed_swe_plan"] = plan
+            fast = _solve_body(fast_request)
+            if fast.get("pass") is True:
+                fast["typed_swe_plan_first"] = {
+                    "schema": "SWE_TYPED_PLAN_FIRST_V1",
+                    "selected_capability": plan[2].get("selected_capability"),
+                    "basis": "STATED_SWE_EFFECT_FAMILY_IS_AUTHORITATIVE",
+                    "primary_pass_skipped_ms": 0,
+                    "model_dependency_count": 0,
+                    "incremental_spend_usd": 0,
+                }
+            return fast
+    # Reuse the compiler result within this request only. Never cache mutable
+    # task evidence across calls. Correct a contradicted SWE effect BEFORE a
+    # measurement-only/wrong-domain tool is allowed to execute.
+    if not (request or {}).get("_typed_swe_plan") and goal:
+        from canonical.runtime import swe_typed_plan_v1 as _typed_plan
+        prose = front.prose_only(goal)
+        if _typed_plan.is_swe_request(prose):
+            try:
+                context = live_integrated_brain_v1.compile_against_live_registry(goal, ROOT)
+            except Exception:
+                # _solve_body preserves the established diagnostic/error shape.
+                context = None
+            if context is not None:
+                selected = str(context[2].get("selected_capability") or "")
+                primary_selection = {
+                    "primary_capability": selected,
+                    "selected_capability": selected,
+                    "basis": "PRIMARY_COMPILATION_REUSED_BEFORE_EXECUTION",
+                }
+                # An explicit family has its own decisive resolver and binding
+                # rules. Use it before ANY lexical dispatch, even when the raw
+                # id looks compatible: its output may still bind onto source.
+                contradicted = bool(selected and (
+                    _typed_plan._family_terms(prose) is not None
+                    or not _typed_plan._effect_consistent(
+                        prose, selected, (context[0] or {}).get(selected))))
+                compound = not selected and bool(context[2].get("compiled_parts"))
+                if contradicted or compound:
+                    corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
+                    if corrected is None and contradicted:
+                        # Structured obligations are unbound regardless of which
+                        # lexical route happened to fail first. Preserve that
+                        # public refusal contract across route-selection drift.
+                        failure = ("CONTRACT_CHECKS_UNBOUND" if "contract_checks" in request
+                                   else "STATED_SWE_EFFECT_UNSERVED")
+                        return _fail(str((request or {}).get("task_id") or ""),
+                                     "FAIL_CLOSED__" + failure, failure, perf_counter_ns(),
+                                     compiled_capability_id=selected, executed=False,
+                                     stated_answer_errors=stated_answer_errors(
+                                         goal, (context[0] or {}).get(selected) or {}, selected))
+                    if corrected is not None:
+                        early_selection = {"primary_capability": selected,
+                                           "selected_capability": corrected[2]["selected_capability"],
+                                           "basis": "DECISIVE_TYPED_SELECTION_BEFORE_EXECUTION",
+                                           "model_dependency_count": 0}
+                        context = corrected
+                request = dict(request)
+                request["_typed_swe_plan"] = context
+    result = _solve_body(request)
+    if primary_selection is not None:
+        result["typed_swe_selection"] = primary_selection
+    if early_selection is not None:
+        result["typed_swe_selection"] = early_selection
+        # The actual selected adapter's verdict is final, including failures.
+        return result
+    if result.get("pass") is True or (original_request or {}).get("_typed_swe_plan") is not None:
+        return result
+    # A retry is only for "could not route/bind yet".  An executed verdict, a
+    # genuine adapter fault, or an observation failure already judged the world;
+    # a second guess must never overwrite it.
+    if (result.get("executed") is True and not _may_supersede_a_failed_attempt(result)) or result.get("failure_class") == "CONTRACT_CHECKS_UNBOUND":
+        return result
+    goal = _request_goal(request)
+    try:
+        from canonical.runtime import swe_typed_plan_v1 as _typed_plan
+        if not _typed_plan.is_swe_request(goal):
+            return result
+        plan = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
+        if plan is None:  # ambiguous or no bindable proposal -> keep fail-closed
+            return result
+        retry_request = dict(original_request)
+        retry_request["_typed_swe_plan"] = plan
+        retry = _solve_body(retry_request)
+        if retry.get("pass") is True or retry.get("executed") is True or retry.get("refusal_payload") or retry.get("reviewed") or (_capability_id_of(retry) and _capability_id_of(retry) != _capability_id_of(result)):
+            retry["typed_swe_retry"] = {
+                "schema": "SWE_TYPED_RETRY_V1",
+                "primary_status": result.get("status"),
+                "selected_capability": plan[2].get("selected_capability"),
+                "admission_basis": "DECISIVE_TYPED_SELECTION_REENTERED_FULL_GATE_CHAIN",
+                "model_dependency_count": 0,
+                "incremental_spend_usd": 0,
+            }
+            return retry
+        # The retry may not REPLACE this verdict, but the reason it was refused is
+        # the most readable sentence in the run: the primary status here is a
+        # routing failure ("R3_WEAK_EVIDENCE" naming a DOCX converter), while the
+        # retry reached the capability the sentence named and was stopped by a
+        # gate with a real reason. Measured: "Add a parameter qty ... update every
+        # caller" refused correctly and told the caller only about the DOCX
+        # converter, discarding PROMISED_SOURCE_CHANGE_NOT_APPLIED: app/models.py.
+        if retry.get("pass") is not True:
+            result["typed_swe_retry_refusal"] = {
+                "schema": "SWE_TYPED_RETRY_REFUSAL_V1",
+                "primary_status": result.get("status"),
+                "status": retry.get("status"),
+                "failure_class": retry.get("failure_class"),
+                "selected_capability": plan[2].get("selected_capability"),
+                "compiled_capability_id": retry.get("compiled_capability_id"),
+                "promised_source_change_errors": retry.get("promised_source_change_errors"),
+                "observed_effect_errors": retry.get("observed_effect_errors"),
+                "promised_artifact_errors": retry.get("promised_artifact_errors"),
+                "model_dependency_count": 0,
+            }
+    except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
+        pass
     return result

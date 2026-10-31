@@ -86,9 +86,13 @@ class TheDoorReachesThePlanItAlreadyHad(unittest.TestCase):
                          % result.get("status"))
         self.assertIn("def total(price, qty)", body)
         self.assertIs(result.get("pass"), True, result.get("status"))
-        retry = result.get("typed_swe_retry") or {}
-        self.assertEqual(retry.get("selected_capability"), "python.refactor.rename_parameter.v1")
-        self.assertEqual(retry.get("model_dependency_count"), 0)
+        # Correct the contradicted lexical choice before it can execute; a
+        # second attempt is unnecessary and must not be reported as having run.
+        selection = result.get("typed_swe_selection") or {}
+        self.assertEqual(selection.get("selected_capability"), "python.refactor.rename_parameter.v1")
+        self.assertEqual(selection.get("basis"), "DECISIVE_TYPED_SELECTION_BEFORE_EXECUTION")
+        self.assertEqual(selection.get("model_dependency_count"), 0)
+        self.assertNotIn("typed_swe_retry", result)
 
     def test_an_honest_refusal_is_not_overwritten_by_a_retry(self):
         base = _fresh("audit")

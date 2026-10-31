@@ -634,6 +634,7 @@ def _adapter_default_argv(entry, root, targets):
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
+    output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
     if not keys:
         return {}
     paths=_repo_paths(goal,root)
@@ -749,6 +750,10 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             # lower-scoring candidate happened to bind -- which is how an
             # AST-audit goal ended up selecting a semantic-behaviour compiler
             # that scored 15 against the audit capability's 35.
+            # An existing destination is still a destination, not an input scope.
+            # Reuse the role detector already used for test lists/argv above.
+            _scope_output=_path_named_after_output_verb(goal,root)
+            _scope_paths=[(raw,p) for raw,p in paths if raw!=_scope_output]
             stem=key[:-5].lower()
             rr=pathlib.Path(root).resolve()
             # The sentence has to give a path this role before it is used.
@@ -759,7 +764,11 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             # belonged to the markdown-to-PDF capability.
             named=bool(re.search(
                 r"\b"+re.escape(str(stem).replace("_"," "))+r"\b",str(goal),re.IGNORECASE))
-            dirs=[(raw,p) for raw,p in paths if p.is_dir()]
+            dirs=[(raw,p) for raw,p in _scope_paths if p.is_dir()]
+            exact_file=_declared_exact_file_scope(entry,key,_scope_paths)
+            if exact_file is not None:
+                result[key]=exact_file
+                continue
             matching=[raw for raw,p in dirs if not stem or stem in raw.lower()]
             if len(matching)==1:
                 result[key]=matching[0]
@@ -770,12 +779,12 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if named:
                 # The sentence gave a path this role, so the parent of the one
                 # file it names is the root that file lives under.
-                files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                files=[(raw,fp) for raw,fp in _scope_paths if fp.is_file()]
                 if len(files)==1 and files[0][1].parent!=rr and rr in files[0][1].parent.parents:
                     result[key]=str(files[0][1].parent.relative_to(rr))
                     continue
             role_bound=_path_named_by_role(goal,stem,root)
-            if role_bound is not None:
+            if role_bound is not None and role_bound!=_scope_output:
                 rp=(rr/role_bound).resolve()
                 if rp.is_dir():
                     result[key]=role_bound
@@ -784,34 +793,8 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if rp.is_file() and rp.parent!=rr and rr in rp.parent.parents:
                     result[key]=str(rp.parent.relative_to(rr))
                     continue
-            # ... UNLESS THE ROW ITSELF SAYS IT TAKES THE FILE.
-            #
-            # ``proposal_bindings`` is where a capability declares the shape of a slot, and the
-            # analysis rows declare ``source_root`` as ``path_file_or_dir``.  Without this the
-            # sentence's one stated file was widened to its parent, the row answered a question
-            # nobody asked, and the answer still counted as a pass.  Measured 2026-10-31 on the
-            # capability matrix: "Count the functions in <pkg>/calc.py" reported 12 definitions
-            # over 8 files for a question about the 2 in one file -- REAL on this branch, FALSE
-            # on origin/main.  Declaration-driven, never global: a row that only says
-            # ``source_root`` (a repair loop, a test runner) still gets the parent.
-            _bindings=entry.get("proposal_bindings") if isinstance(entry,dict) else None
-            _declared=_bindings.get(key) if isinstance(_bindings,dict) else None
-            if isinstance(_declared,dict) and str(_declared.get("type") or "")=="path_file_or_dir":
-                _is_py_cap=(
-                    str(entry.get("adapter_module") or "").startswith("python_")
-                    or any(str(p).startswith("python.") for p in (entry.get("provides") or []))
-                )
-                _files=[
-                    (raw,fp) for raw,fp in paths
-                    if fp.is_file()
-                    and (not _is_py_cap or fp.suffix.lower() in {".py",".pyi"})
-                ]
-                if len(_files)==1:
-                    result[key]=_files[0][0]
-                    continue
         if key.endswith("_path"):
             stem=key[:-5].lower()
-            output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}
             if key.startswith("output_") or stem in output_stems:
                 # Future outputs may not exist. Prefer type-compatible paths
                 # explicitly named by the goal so multiple outputs can bind
@@ -930,7 +913,32 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     result[key]=existing[0][0]
                     continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
+    # Slot order cannot make a declared destination into an input scope.
+    destinations=_claimed_paths({k:v for k,v in result.items()
+        if k.endswith("_path") and (k.startswith("output_") or k[:-5] in output_stems)})
+    for key,value in result.items():
+        if key.endswith(("_root","_dir")) and isinstance(value,str) and value in destinations:
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",
+                                         "scope_is_output_destination:"+key)
     return result
+
+
+def _declared_exact_file_scope(entry, key, paths):
+    """A file-or-directory declaration preserves the one stated file, before parent inference.
+
+    Shared by the compiler and its world-binding fallback. Output destinations
+    must be removed by the caller; directory-only contracts keep their semantics.
+    """
+    binding=(entry.get("proposal_bindings") or {}).get(key)
+    if not isinstance(binding,dict) or binding.get("type")!="path_file_or_dir":
+        return None
+    python_cap=(str(entry.get("adapter_module") or "").startswith("python_")
+                or any(str(p).startswith("python.") for p in entry.get("provides",[])))
+    files=[raw for raw,p in paths if p.is_file()
+           and (not python_cap or p.suffix.lower() in {".py",".pyi"})]
+    if len(files)==1 and not any(p.is_dir() for _,p in paths):
+        return files[0]
+    return None
 
 
 def _complete_inputs_via_world_binding(goal, root, cid, entry):

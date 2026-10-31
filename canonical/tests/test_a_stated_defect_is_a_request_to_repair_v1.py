@@ -86,7 +86,7 @@ class ADefectIsReadAsARepairRequest(unittest.TestCase):
         base = _fresh("family")
         terms = typed_plan._family_terms(_bug_report(base))
         self.assertIsNotNone(terms, "a stated defect is a SWE repair request")
-        self.assertEqual(terms[1], "apply",
+        self.assertEqual(terms[1], "repair",
                          "the effect token is the one that lands the change")
 
     def test_a_question_about_the_defect_is_not_a_request_to_change_it(self):

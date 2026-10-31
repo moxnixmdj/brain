@@ -2912,7 +2912,10 @@
         "args": {
           "capability_id": "git.repository.operate.v1",
           "limit": "${input.limit}",
-          "op": "${input.op}"
+          "message": "${input.message}",
+          "op": "${input.op}",
+          "repo_root": "${input.repo_root}",
+          "target": "${input.target}"
         },
         "expect": {
           "field": "output_verified",
@@ -7909,13 +7912,18 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
+        "cyclomatic_complexity",
         "functions_measured",
+        "is_asymptotic_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "quadratic_symbols",
+        "total_cyclomatic",
         "worst_class",
+        "worst_cyclomatic",
         "worst_function",
         "worst_nesting"
       ],
@@ -8365,7 +8373,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
+        "parsed_module_count",
         "reference_count",
+        "reused_module_count",
         "symbol_count",
         "unparseable_count",
         "unparseable_paths"
@@ -8520,15 +8530,19 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
         "finding",
         "finding_count",
+        "is_security_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "reaches",
         "sink",
         "source_function",
+        "source_functions",
+        "source_root",
         "trace"
       ],
       "source": {
@@ -9791,7 +9805,8 @@
       ],
       "provides": [
         "software.repair.choreography.verified",
-        "software.patch.crossfile.atomic"
+        "software.patch.crossfile.atomic",
+        "software.source.write.crossfile"
       ],
       "requires": [
         "python.fault.localization.symbol_ranked",

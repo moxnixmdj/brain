@@ -60,14 +60,14 @@ class TheVerbIsTheOperation(unittest.TestCase):
             "Commit the transaction to the database": "commit",
         }
         for goal, verb in cases.items():
-            self.assertEqual(derivation.stated_git_operation(goal), verb, goal)
+            self.assertEqual(derivation.stated_git_operation_verb(goal), verb, goal)
         # A question, a lookup, and a path do not state an operation at all.
         for goal in ("Which commit broke the tests",
                      "Find every caller of build_plan in pkg/x.py",
                      "List the branches",
                      "Explain why the push failed",
                      "pkg/x.py is broken"):
-            self.assertIsNone(derivation.stated_git_operation(goal), goal)
+            self.assertIsNone(derivation.stated_git_operation_verb(goal), goal)
 
     def test_a_rewrite_verb_binds_itself_not_the_noun_phrase_beside_it(self) -> None:
         entry = _entry()
