@@ -51,6 +51,8 @@ The integrated 16-module run also passed all **299 cases in 97.38 seconds** on t
 
 Main then advanced to rung 54 (`7502e90b`), again changing only the registry. All three original navigation restorations are now upstream; this branch adds **zero registry declarations** relative to that base. Post-update smoke passed **74/74 in 11.70 s**. The full 299-case run above was not rerun after this final registry-only update. The regenerated artifact covers the current registry, not the earlier smaller catalog.
 
+Before the landing attempt, registry-only restoration continued through rung 56 (`5eb63865`). The registry was proven semantically identical to upstream and its exact upstream serialization was retained, removing formatting churn and future artificial merge conflicts. All original branch work is preserved. Subsequent registry refreshes are identified by the PR head/base and regenerated artifact; the full 299-case results above remain measurements of their stated earlier registry versions.
+
 ## Corrected landing diagnosis
 
 The live GitHub branch-rules endpoint `repos/moxnixmdj/brain/rules/branches/main` declares the signed `referee/repo-integrity-guard` as its required status check, with strict up-to-date enforcement and a pull-request requirement. The local missing-intent and scope diagnostics remain failures, but they are not listed as required status checks by that endpoint. Earlier statements that they necessarily prevent any normal GitHub merge were too strong.
