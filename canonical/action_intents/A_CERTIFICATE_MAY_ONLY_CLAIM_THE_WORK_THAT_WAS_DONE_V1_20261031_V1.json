@@ -75,7 +75,8 @@
    "canonical/runtime/live_brain_route_admission_v1.py",
    "SWE_FIXES_20261031_V1.md"
   ],
-  "route_class": "INTEGRATE"
+  "route_class": "INTEGRATE",
+  "selected_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN"
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
@@ -181,14 +182,14 @@
    "count-only PASS for an enumeration",
    "read operation certified for a rewrite verb the row does not declare"
   ],
-  "selected_surviving_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
+  "selected_surviving_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN",
   "why_selected_route_is_fastest_sufficient": "It uses four facts the repository already has -- the artifact the adapter wrote and hashed, the row's own OPS tuple, git's own verb list, and the door's existing status-rewrite at its single exit -- costs 7-21 us per sentence, adds no dependency, and converts five wrong passes into the real answer and four into the row's own refusal.",
   "expected_parent_level_state_change": "No certificate without the work: the door refuses an execution request answered by a measurement, a completeness claim over a single-file scope, an enumeration answered by a scalar, and a diagnosis answered by a test selection; the security gate stops claiming completeness when bandit is absent.",
   "stop_condition": "Stop when the 13 new tests are green, the seven measured sentences behave as stated, the unified model recompiles byte-identically, and both pre-existing red sets are unchanged.",
   "route_frontier": {
    "discovery_required": true,
    "incumbent_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
-   "checked_at_utc": "2026-10-31T16:21:44Z",
+   "checked_at_utc": "2026-10-31T19:02:36Z",
    "max_age_hours": 24,
    "source_classes_checked": [
     "BRAIN_INHERITED",
@@ -323,64 +324,67 @@
     }
    ],
    "unresolved_plausible_dominators": [],
-   "selected_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
+   "selected_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN",
    "selected_route_preflight": {
-    "selected_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
-    "checked_at_utc": "2026-10-31T16:21:44Z",
+    "checked_at_utc": "2026-10-31T19:02:36Z",
     "max_age_hours": 2,
+    "selected_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN",
     "status": "READY",
     "all_required_dependencies_ready": true,
-    "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "execution_dependencies": [
      {
-      "dependency": "python3 (CPython 3.11.2) in the sandbox",
-      "kind": "LOCAL_RUNTIME",
+      "dependency": "CPYTHON_STDLIB_RE_AST_JSON",
+      "kind": "RUNTIME",
       "required": true,
-      "volatility": "STATIC",
+      "volatility": "STABLE",
       "scope": "LOCAL",
-      "evidence_scope": "LOCAL",
       "status": "READY",
+      "observed_at_utc": "2026-10-31T19:02:36Z",
       "evidence": [
-       "python3 -VV reports CPython 3.11.2 in this workspace"
+       "DIRECT_PROBE: python3 ast.parse + re.compile on the four edited files"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
-      ]
+      ],
+      "evidence_scope": "LOCAL"
      },
      {
-      "dependency": "canonical/runtime/answer_shape_v1.py and its two call sites",
-      "kind": "CODE_ARTIFACT",
+      "dependency": "WORKING_TREE_AT_canonical/runtime",
+      "kind": "SOURCE_TREE",
       "required": true,
-      "volatility": "STATIC",
+      "volatility": "STABLE",
       "scope": "LOCAL",
-      "evidence_scope": "LOCAL",
       "status": "READY",
+      "observed_at_utc": "2026-10-31T19:02:36Z",
       "evidence": [
-       "13 tests in canonical/tests run green in 0.084 s on this tree"
+       "DIRECT_PROBE: REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN imported and called; six refusals reproduced"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
-      ]
+      ],
+      "evidence_scope": "LOCAL"
      },
      {
-      "dependency": "git.repository.operate.v1 OPS tuple",
-      "kind": "CODE_ARTIFACT",
+      "dependency": "UNITTEST",
+      "kind": "RUNTIME",
       "required": true,
-      "volatility": "STATIC",
+      "volatility": "STABLE",
       "scope": "LOCAL",
-      "evidence_scope": "LOCAL",
       "status": "READY",
+      "observed_at_utc": "2026-10-31T19:02:36Z",
       "evidence": [
-       "test_a_read_cannot_be_a_rewrite_v1 asserts OP_NOT_DECLARED:reset/push/stash/revert:declared=log,status,diff,show,blame,branch,commit"
+       "DIRECT_PROBE: canonical.tests.test_a_certificate_requires_the_work_v1 ran 9 tests OK in 0.5 s"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
-      ]
+      ],
+      "evidence_scope": "LOCAL"
      }
     ]
    }
-  }
+  },
+  "selected_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN"
  },
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A run is certified by an artifact that measures instead of executing, a completeness claim is certified over a scope of one file, and an enumeration is answered by a scalar taken from the first record: measured 2026-10-31 on current main, six of seventeen PASSes were wrong -- 'Run the script <f>', 'Run a static analysis pass on <dir>' and 'Run the tests in <t>' were all answered by python.repository.acceptance.measure.v1, whose own artifact reports test_count 0, tests_pass false, terminal_authority false and hard_nonclaims[0] == MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE; 'Find every caller of build_plan in <f>' was answered by an index over <f> alone (1 of 7 call sites) with 'truncated': false; 'Which tests does <f> break' delivered the integer 0 from records.0.tests; and 'Check for security vulnerabilities in <f>' called itself complete with bandit absent.",
  "v22_prewrite_admission": {
@@ -426,5 +430,6 @@
    "counterexample_receipts": [],
    "no_known_counterexample_reason": "THREE_CANDIDATE_RULES_WERE_CHECKED_AND_REJECTED_BEFORE_THE_SHIPPED_ONE: A_NAIVE_NOUN_TABLE_ORDER_ANSWERED_WHICH_COMMIT_BROKE_THE_TESTS_ABOUT_TESTS_AND_WOULD_HAVE_BROKEN_ONE_OF_THE_FIVE_CORRECT_ANSWERS__A_BARE_FIND_AS_AN_ENUMERATING_VERB_REFUSED_FIND_THE_FAULT_IN_THE_FILE___AND_TREATING_EVERY_GIT_SUBCOMMAND_AS_THE_OPERATION_BROKE_SHOW_THE_LAST_THREE_GIT_COMMITS_BECAUSE_SHOW_MEANS_LOG_THERE__EACH_REJECTION_IS_MEASURED_IN_SWE_FIXES_20261031_V1_MD_AND_EACH_LEAVES_A_TEST_IN_CANONICAL_TESTS"
   }
- }
+ },
+ "route_id": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN"
 }
