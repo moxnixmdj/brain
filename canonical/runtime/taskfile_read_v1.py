@@ -27,6 +27,7 @@ safety property of this module.
 from __future__ import annotations
 
 import json
+import os
 import re
 import shlex
 from pathlib import Path
@@ -220,7 +221,7 @@ def read_tasks(root: str) -> list[dict]:
                       "origin": origin, "risk": risk_of(str(cmd))})
 
     candidates = []
-    for dirpath, dirnames, filenames in __import__("os").walk(rootp):
+    for dirpath, dirnames, filenames in os.walk(rootp):
         dirnames[:] = [d for d in dirnames
                        if d not in {".git", "__pycache__", "node_modules",
                                     ".venv", ".pytest_cache"}]

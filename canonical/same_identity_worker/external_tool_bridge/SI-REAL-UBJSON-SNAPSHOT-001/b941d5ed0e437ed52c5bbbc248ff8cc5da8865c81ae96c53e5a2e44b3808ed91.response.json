@@ -1,0 +1,1 @@
+{"agent_id":"SUPERWORKER-UNIFIED-1","kind":"package_name_search","request_sha256":"b941d5ed0e437ed52c5bbbc248ff8cc5da8865c81ae96c53e5a2e44b3808ed91","result":{"names":["py-ubjson","ubjsonstream","simpleubjson","parse-subjson","slubjsonlinkcheck"]},"schema":"PROJECT_BRAIN_EXTERNAL_TOOL_RESPONSE_V1","status":"ok","task_id":"SI-REAL-UBJSON-SNAPSHOT-001"}

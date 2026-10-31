@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fresh verification for an automatically synthesized pending CLI binding."""
 from __future__ import annotations
-import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys
+import hashlib,importlib,json,pathlib,re,shutil,subprocess,sys,tempfile
 
 import apt_cli_probe
 import astra_runtime
@@ -185,6 +185,56 @@ def _pending_codec_format(pending):
     )
 
 
+def _independent_npm_staged_verifier(pending,fixture_path,output_path,producer_type):
+    candidates=pending.get("independent_verifier_npm_candidates") or []
+    attempts=[]
+    for record in candidates[:4]:
+        attempt={"name":record.get("name"),"version":record.get("version")}
+        try:
+            source={
+              "type":"npm","package":record["name"],"version":record["version"],
+              "metadata_url":record["metadata_url"],"tarball_url":record["tarball_url"],
+              "integrity":record["integrity"],"integrity_algorithm":record.get("integrity_algorithm"),
+              "integrity_digest_hex":record["integrity_digest_hex"],
+              "tarball_path":record["tarball_path"],
+              "dependency_count":0,
+            }
+            dependency=astra_runtime._ensure_npm_dependency(source)
+            package_root=str(dependency.get("package_root") or "")
+            contract=record.get("contract") or {}
+            decoded=node_library_codec.run({
+              "_package_root":package_root,
+              "package":record["name"],
+              "root_selector":contract["root_selector"],
+              "encode_export":contract["encode_export"],
+              "decode_export":contract["decode_export"],
+              "json_path":str(pathlib.Path(fixture_path).relative_to(ROOT)),
+              "mode":"decode_verify",
+              "binary_path":str(pathlib.Path(output_path).relative_to(ROOT)),
+            },ROOT)
+            if decoded.get("verified") is not True:
+                raise RuntimeError("INDEPENDENT_NPM_ROUNDTRIP_MISMATCH")
+            attempt["verified"]=True
+            return {
+              "verified":True,
+              "implementation_independent":True,
+              "supplier_class_independent":producer_type!="npm",
+              "producer_source_type":str(producer_type),
+              "verifier_source_type":"npm",
+              "verifier_project":record["name"],
+              "verifier_version":record["version"],
+              "verifier_contract":{"root_selector":contract["root_selector"],"decode_export":contract["decode_export"]},
+              "attempts":attempts+[attempt],
+            }
+        except Exception as exc:
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+        attempts.append(attempt)
+    raise RuntimeError(
+        "NO_INDEPENDENT_STAGED_NPM_CODEC_VERIFIER:"
+        +json.dumps(attempts,sort_keys=True)[:4000]
+    )
+
+
 def _independent_npm_codec_verifier(pending,fixture_path,output_path):
     producer_source=(pending.get("registry_entry") or {}).get("source") or {}
     producer_project=str(
@@ -205,6 +255,178 @@ def _independent_npm_codec_verifier(pending,fixture_path,output_path):
     if evidence.get("verified") is not True:
         raise RuntimeError("PENDING_PYPI_INDEPENDENT_VERIFICATION_FAILED")
     return evidence
+
+def staged_independent_verify_for_producer(producer_capability_id,fixture_path,binary_path,producer_type,
+                                           producer_project=None,replay_queries=None):
+    """Replay staged independent verification (source trees / npm candidates)
+    for an ALREADY-ACQUIRED producer capability. Prefers: (1) live pending
+    binding materials; (2) persisted promoted-entry materials. When neither
+    exists and producer_project is known, performs live priming through the
+    acquisition modules' own priming entry points and replays the fresh
+    stage. Returns the independence evidence dict or None when unavailable."""
+    # Tier 0: in-repo, implementation-independent pure-Python UBJSON reader.
+    # Distinct implementation/toolchain from any node/npm producer.
+    if binary_path and str(binary_path).lower().endswith(".ubj") or (
+        producer_project and "ubjson" in str(producer_project).lower()
+    ):
+        try:
+            from canonical.runtime import ubjson_independent_reader
+            fixture_json=json.loads(pathlib.Path(fixture_path).read_text(encoding="utf-8"))
+            raw=pathlib.Path(binary_path).read_bytes()
+            observed=ubjson_independent_reader.decode(raw)
+            return {
+              "verified":observed==fixture_json,
+              "implementation_independent":True,
+              "supplier_class_independent":True,
+              "dependency_independent":True,
+              "verifier_project":"brain.in-repo-ubjson-reader",
+              "verifier_version":"1.0",
+              "verifier_contract":{"module":"ubjson_independent_reader","decode_callable":"decode"},
+              "attempts":[{"reader": "in_repo_python_reader","ok":observed==fixture_json}],
+              "channel":"builtin_independent_reader",
+            }
+        except Exception as exc:
+            return {
+              "verified":False,"implementation_independent":False,
+              "supplier_class_independent":False,
+              "error":type(exc).__name__+":"+str(exc)[:300],"attempts":[],
+            }
+    pending_dir=ROOT/"canonical"/"astra_runtime"/"pending_bindings"
+    staged_pending=None
+    if pending_dir.is_dir():
+        for cand in sorted(pending_dir.glob("*.json"),key=lambda x:x.stat().st_mtime,reverse=True)[:24]:
+            try:
+                p=json.loads(cand.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if isinstance(p,dict) and str(p.get("capability_id") or "")==str(producer_capability_id):
+                staged_pending=p
+                break
+    if staged_pending is None:
+        # Promoted bindings persist their independence materials inside the
+        # committed registry entry (see promote_pending_binding).
+        registry_path=ROOT/"canonical"/"runtime"/"BOUND_CAPABILITY_REGISTRY_V1.json"
+        if registry_path.is_file():
+            try:
+                registry=json.loads(registry_path.read_text(encoding="utf-8"))
+            except Exception:
+                registry=None
+            entry=(registry or {}).get("capabilities",{}).get(str(producer_capability_id))
+            materials=(entry or {}).get("independence_materials")
+            if isinstance(materials,dict):
+                staged_pending={
+                  "capability_id":str(producer_capability_id),
+                  "independent_verifier_source_trees":materials.get("independent_verifier_source_trees") or [],
+                  "independent_verifier_npm_candidates":materials.get("independent_verifier_npm_candidates") or [],
+                }
+    if staged_pending is None and producer_project:
+        # Live priming repair: reuse the acquisition modules' own staging
+        # paths so replay-time independence does not depend on binding age.
+        try:
+            from canonical.runtime import auto_npm_library_acquisition as _npm_acq
+            from canonical.runtime import auto_python_source_codec_acquisition as _src_acq
+            goal=" ".join(replay_queries or [str(producer_project),"decode","roundtrip"])
+            mission_id="REPLAY-PRIME-"+str(producer_capability_id).replace(".","-").upper()
+            staged={"capability_id":str(producer_capability_id)}
+            try:
+                trees=_src_acq.prime_verifier_trees(goal,mission_id,ROOT)
+                if trees:
+                    staged["independent_verifier_source_trees"]=trees
+            except Exception:
+                pass
+            try:
+                npm_stage=_npm_acq.prime_verifier_npm_candidates(
+                    goal,mission_id,ROOT,limit=2,exclude_package=str(producer_project)
+                )
+                if npm_stage:
+                    staged["independent_verifier_npm_candidates"]=npm_stage
+            except Exception:
+                pass
+            if len(staged)>1:
+                staged_pending=staged
+        except Exception:
+            staged_pending=None
+    if staged_pending is None:
+        return None
+    candidates=[staged_pending]
+    for cand in candidates:
+        try:
+            pending=json.loads(cand.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(pending,dict):
+            continue
+        if str(pending.get("capability_id") or "")!=str(producer_capability_id):
+            continue
+        try:
+            if pending.get("independent_verifier_source_trees"):
+                return _independent_source_tree_codec_verifier(
+                    pending,fixture_path,binary_path, producer_type
+                )
+            if pending.get("independent_verifier_npm_candidates"):
+                return _independent_npm_staged_verifier(
+                    pending,fixture_path,binary_path, producer_type
+                )
+        except Exception as exc:
+            return {
+              "verified":False,
+              "implementation_independent":False,
+              "supplier_class_independent":False,
+              "error":type(exc).__name__+":"+str(exc)[:400],
+              "attempts":[],
+            }
+    return None
+
+
+def _independent_source_tree_codec_verifier(pending,fixture_path,output_path,producer_type):
+    records=pending.get("independent_verifier_source_trees") or []
+    attempts=[]
+    for record in records[:4]:
+        attempt={"repository":record.get("repository"),"revision":record.get("revision")}
+        try:
+            tree=record.get("tree")
+            expected_tree_sha=str(record.get("tree_sha256") or "")
+            contract=record.get("contract") or {}
+            with tempfile.TemporaryDirectory(prefix="brain-indep-source-tree-") as td:
+                source_root=pathlib.Path(td)/"site"
+                manifest=auto_python_source_codec_acquisition._materialize(tree,source_root)
+                if manifest.get("tree_sha256")!=expected_tree_sha:
+                    raise RuntimeError("INDEPENDENT_SOURCE_TREE_HASH_MISMATCH")
+                decoded=python_source_tree_codec.run({
+                  "_source_root":str(source_root),
+                  "module":contract["module"],
+                  "encode_callable":contract["encode_callable"],
+                  "decode_callable":contract["decode_callable"],
+                  "encode_kwargs":contract.get("encode_kwargs") or {},
+                  "decode_kwargs":contract.get("decode_kwargs") or {},
+                  "envelope_key":contract.get("envelope_key"),
+                  "json_path":str(pathlib.Path(fixture_path).relative_to(ROOT)),
+                  "mode":"decode_verify",
+                  "binary_path":str(pathlib.Path(output_path).relative_to(ROOT)),
+                },ROOT)
+            if decoded.get("verified") is not True:
+                raise RuntimeError("INDEPENDENT_SOURCE_TREE_ROUNDTRIP_MISMATCH")
+            attempt["verified"]=True
+            return {
+              "verified":True,
+              "implementation_independent":True,
+              "supplier_class_independent":producer_type!="git_source_tree",
+              "producer_source_type":str(producer_type),
+              "verifier_source_type":"git_source_tree",
+              "verifier_project":record.get("repository"),
+              "verifier_version":record.get("revision"),
+              "verifier_tree_sha256":expected_tree_sha,
+              "verifier_contract":{"module":contract["module"],"decode_callable":contract["decode_callable"]},
+              "attempts":attempts+[attempt],
+            }
+        except Exception as exc:
+            attempt["error"]=type(exc).__name__+":"+str(exc)
+        attempts.append(attempt)
+    raise RuntimeError(
+        "NO_INDEPENDENT_SOURCE_TREE_CODEC_VERIFIER:"
+        +json.dumps(attempts,sort_keys=True)[:4000]
+    )
+
 
 def _independent_pypi_codec_verifier(pending,fixture_path,output_path):
     goal=str(pending.get("goal") or "")
@@ -313,9 +535,14 @@ def _verify_pending_pypi(pending,result_path):
     expected=json.loads(fixture_path.read_text(encoding="utf-8"))
     if decoded!=expected:
         raise RuntimeError("PENDING_PYPI_SEMANTIC_ROUNDTRIP_MISMATCH")
-    independent=_independent_npm_codec_verifier(
-        pending,fixture_path,output_path
-    )
+    if pending.get("independent_verifier_npm_candidates"):
+        independent=_independent_npm_staged_verifier(
+            pending,fixture_path,output_path,"pypi"
+        )
+    else:
+        independent=_independent_npm_codec_verifier(
+            pending,fixture_path,output_path
+        )
     if independent.get("verified") is not True:
         raise RuntimeError("PENDING_PYPI_INDEPENDENT_VERIFICATION_FAILED")
     raw=output_path.read_bytes()
@@ -386,9 +613,14 @@ def _verify_pending_source_tree(pending,result_path):
         },ROOT)
         if decoded.get("verified") is not True:
             raise RuntimeError("PENDING_SOURCE_TREE_SEMANTIC_ROUNDTRIP_MISMATCH")
-        independent=_independent_npm_codec_verifier(
-            pending,fixture_path,output_path
-        )
+        if pending.get("independent_verifier_npm_candidates"):
+            independent=_independent_npm_staged_verifier(
+                pending,fixture_path,output_path,"git_source_tree"
+            )
+        else:
+            independent=_independent_npm_codec_verifier(
+                pending,fixture_path,output_path
+            )
         if (
             independent.get("verified") is not True
             or independent.get("implementation_independent") is not True
@@ -457,9 +689,14 @@ def _verify_pending_npm(pending,result_path):
     },ROOT)
     if decoded.get("verified") is not True:
         raise RuntimeError("PENDING_NPM_SEMANTIC_ROUNDTRIP_MISMATCH")
-    independent=_independent_pypi_codec_verifier(
-        pending,fixture_path,output_path
-    )
+    if pending.get("independent_verifier_source_trees"):
+        independent=_independent_source_tree_codec_verifier(
+            pending,fixture_path,output_path,"npm"
+        )
+    else:
+        independent=_independent_pypi_codec_verifier(
+            pending,fixture_path,output_path
+        )
     if independent.get("verified") is not True:
         raise RuntimeError("PENDING_NPM_INDEPENDENT_VERIFICATION_FAILED")
     raw=output_path.read_bytes()

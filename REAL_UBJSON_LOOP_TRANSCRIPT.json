@@ -1,0 +1,18 @@
+[
+  {
+    "iteration": 1,
+    "relay_alive": true,
+    "relay_exitcode": null,
+    "returncode": 75,
+    "stderr_tail": "",
+    "stdout_tail": "{\"agent_id\": \"SUPERWORKER-UNIFIED-1\", \"incremental_spend_usd\": 0, \"mission_sha256\": \"f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166\", \"p_real_claim\": 0, \"promotion_claim\": false, \"same_identity_bound\": true, \"schema\": \"PROJECT_BRAIN_SAME_IDENTITY_EXECUTION_RECEIPT_V1\", \"status\": \"CHECKPOINTED_RELAUNCH_REQUIRED\", \"task_id\": \"SI-REAL-UBJSON-SNAPSHOT-001\", \"task_sha256\": \"418cd22fca5fc75c432e5f6b15884835140f6620e92a39a7a39a6389725473ee\"}\n"
+  },
+  {
+    "iteration": 2,
+    "relay_alive": true,
+    "relay_exitcode": null,
+    "returncode": 3,
+    "stderr_tail": "",
+    "stdout_tail": "{\"agent_id\": \"SUPERWORKER-UNIFIED-1\", \"checkpoint_count\": 1, \"incremental_spend_usd\": 0, \"lease_id_sha256\": \"11b65862226ed82fb7d8831d716f20069bc25557076b1c29011b479239c05044\", \"lease_owner\": \"SUPERWORKER-UNIFIED-1\", \"mission_path\": \"canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json\", \"mission_sha256\": \"f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166\", \"p_real_claim\": 0, \"promotion_claim\": false, \"runtime_attempt_count\": 1, \"runtime_command\": [\"/usr/bin/python3\", \"canonical/runtime/root3_production_astra_launcher_v1.py\", \"canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json\"], \"runtime_returncode\": 3, \"same_identity_bound\": true, \"schema\": \"PROJECT_BRAIN_SAME_IDENTITY_EXECUTION_RECEIPT_V1\", \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\", \"stdout_sha256\": \"e487e89ddfbf1746df336018b75d19df94c9b8bda28034a0a33085b4b9fbbe53\", \"task_id\": \"SI-REAL-UBJSON-SNAPSHOT-001\", \"task_sha256\": \"418cd22fca5fc75c432e5f6b15884835140f6620e92a39a7a39a6389725473ee\", \"terminal_state\": \"BLOCKED\"}\n"
+  }
+]
