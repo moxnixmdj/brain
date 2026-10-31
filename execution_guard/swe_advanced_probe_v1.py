@@ -7,10 +7,10 @@ engineer is actually asked to do -- systems languages, build systems, CI, perfor
 concurrency, test authoring, git surgery, design -- because a matrix only measures the
 sentences somebody wrote cases for.
 
-This instrument writes those sentences and records what happens. It is a CENSUS, not a
-gate:
+This instrument writes those sentences and records what happens.
 
-* it always exits 0, because the number it prints is the finding;
+* it prints the finding and exits 0 -- unless a floor was asked for and not met, because a
+  census nothing can regress is a number nobody fixes (see ``--floor``);
 * it has no per-request oracle, so ``SERVED`` means exactly "came back ``pass: true`` and
   edited nothing the sentence did not name". A wrong answer in the right shape is visible
   only in the ``selected`` column -- that is why the column is printed. The 2026-10-31
@@ -23,6 +23,7 @@ Usage::
     python3 execution_guard/swe_advanced_probe_v1.py            # the full census
     python3 execution_guard/swe_advanced_probe_v1.py --axis perf
     python3 execution_guard/swe_advanced_probe_v1.py --json /tmp/census.json
+    python3 execution_guard/swe_advanced_probe_v1.py --floor 3 --summary "$GITHUB_STEP_SUMMARY"
 
 Authority: NONE. This is a single-machine measurement of one tree at one commit.
 """
@@ -173,10 +174,73 @@ def census(axis_filter: str | None = None) -> list[dict]:
     return rows
 
 
+def summary(path: str, rows: list[dict], served: int, floor: int | None,
+            floor_met: bool) -> None:
+    """Append the census to a markdown file (``$GITHUB_STEP_SUMMARY`` takes this as-is)."""
+    out: list[str] = []
+    out.append("### Advanced SWE census")
+    out.append("")
+    total = len(rows)
+    head = "**SERVED %d / %d**" % (served, total)
+    if floor is not None:
+        head += " -- floor %d %s" % (floor, "met" if floor_met else "**NOT MET**")
+    out.append(head)
+    out.append("")
+    out.append("| axis | served | total |")
+    out.append("| --- | ---: | ---: |")
+    by_axis: dict[str, list[int]] = collections.OrderedDict()
+    for row in rows:
+        by_axis.setdefault(row["axis"], [0, 0])
+        by_axis[row["axis"]][1] += 1
+        by_axis[row["axis"]][0] += 1 if row["served"] else 0
+    for axis, (ok, n) in by_axis.items():
+        out.append("| %s | %d | %d |" % (axis, ok, n))
+    out.append("")
+    refused = [r for r in rows if not r["served"]]
+    counts = collections.Counter(
+        (str(r.get("refusal") or "").split(":")[0] or str(r.get("status") or "UNNAMED"))
+        for r in refused)
+    out.append("Refused, by cause (%d):" % len(refused))
+    out.append("")
+    out.append("| count | cause |")
+    out.append("| ---: | --- |")
+    for cause, count in counts.most_common():
+        out.append("| %d | `%s` |" % (count, cause.replace("|", "/")[:160]))
+    out.append("")
+    if refused:
+        out.append("<details><summary>every refused sentence</summary>")
+        out.append("")
+        out.append("| # | axis | sentence | status |")
+        out.append("| ---: | --- | --- | --- |")
+        for r in refused:
+            cell = r["goal"].replace("|", "/")
+            out.append("| %d | %s | %s | `%s` |"
+                       % (r["n"], r["axis"], cell[:160],
+                          str(r.get("status") or "-").replace("|", "/")[:80]))
+        out.append("")
+        out.append("</details>")
+        out.append("")
+    with open(path, "a", encoding="utf-8") as handle:
+        handle.write("\n".join(out) + "\n")
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--axis", default=None)
     ap.add_argument("--json", default=None)
+    # A FLOOR, SO THE NUMBER CANNOT SILENTLY STAY WHERE IT IS.
+    #
+    # This instrument was written to always exit 0 and it does: it is a census, not a gate.
+    # Measured 2026-10-31 on 34f867a: it reported SERVED 2 of 49 across three inventories
+    # and two weeks while every check in the repository stayed green, because no workflow ran
+    # it and nothing could fail.  The surface census next door already has this argument and
+    # the difference is visible in its numbers (23 -> 25 -> 28 once it became a gate).
+    # The floor is the count that exists today, not a target; when a change raises it, raise
+    # the floor in the same pull request.
+    ap.add_argument("--floor", type=int, default=None)
+    # The census already knows the refusal taxonomy, so the histogram belongs here rather
+    # than in a YAML heredoc that can only guess at the field names.
+    ap.add_argument("--summary", default=None, help="append a markdown census to this file")
     ns = ap.parse_args(argv)
 
     rows = census(ns.axis)
@@ -197,7 +261,14 @@ def main(argv: list[str] | None = None) -> int:
     if ns.json:
         pathlib.Path(ns.json).write_text(json.dumps(rows, indent=1) + "\n", encoding="utf-8")
         print("WROTE", ns.json)
+    floor_met = ns.floor is None or served >= ns.floor
+    if ns.summary:
+        summary(ns.summary, rows, served, ns.floor, floor_met)
+        print("WROTE", ns.summary)
     print("AUTHORITY NONE -- single-machine census, not independent verification")
+    if not floor_met:
+        print("SERVED FLOOR NOT MET: %d < %d" % (served, ns.floor))
+        return 1
     return 0
 
 
