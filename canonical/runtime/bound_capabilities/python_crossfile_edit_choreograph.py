@@ -56,8 +56,22 @@ NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 
 def _systemic(message):
-    print(json.dumps({"error": ADAPTER_ERROR, "error_kind": "systemic", "message": message}))
-    raise SystemExit(1)
+    # A STRUCTURED REFUSAL MUST CARRY ITS REASON TO THE CALLER.
+    #
+    # This printed the reason to stdout and then raised an EMPTY ``SystemExit(1)``.
+    # A CLI reader saw the JSON and was fine; the in-process door parses
+    # ``str(exc)`` for ``{"error": true, "reason": ...}`` and got the string "1",
+    # so it could only report the blind ``CAPABILITY_EXITED_PROCESS:1``.
+    # Measured 2026-10-31 on probe 48 of the advanced census: a plan request was
+    # answered by this adapter and refused with no reason at all, while the
+    # adapter had already written one.  The stdout write is kept (the CLI
+    # contract), and the same reason now travels on the exception where the
+    # in-process caller can read it.
+    payload = {"error": ADAPTER_ERROR, "error_kind": "systemic", "message": message}
+    print(json.dumps(payload))
+    raise SystemExit(json.dumps({"error": True,
+                                 "reason": ADAPTER_ERROR + ":" + str(message)[:300],
+                                 "error_kind": "systemic", "message": message}))
 
 
 SPOOL_PREFIX = "canonical/astra_runtime/tmp/"
