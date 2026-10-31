@@ -14,7 +14,7 @@ Candidate-only search over one repository-local Python source file. The runtime:
 No model calls, network calls, package installation, or canonical source writes.
 """
 from __future__ import annotations
-import ast, difflib, hashlib, importlib.util, json, os, pathlib, subprocess, sys, time
+import ast, copy, difflib, hashlib, importlib.util, json, os, pathlib, re, subprocess, sys, time
 from typing import Any, Iterable, Mapping
 
 SCHEMA="PROJECT_BRAIN_PYTHON_TEST_GUIDED_PATCH_SEARCH_V1"
@@ -79,6 +79,21 @@ def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
             "elapsed_s":round(time.monotonic()-started,6),
             "timed_out":True,
         }
+
+def pytest_summary(text: str) -> dict[str, int] | None:
+    """Read the final supported pytest summary; this is not attestation."""
+    for line in reversed(text.splitlines()):
+        summary = line.strip().strip("= ")
+        if (re.match(r"^\d+ (?:passed|failed|skipped|xfailed|xpassed|errors?)\b", summary)
+                and re.search(r"\bin \d+(?:\.\d+)?s\b", summary)):
+            counts = {}
+            for n, outcome in re.findall(
+                    r"(\d+) (passed|failed|xfailed|xpassed|errors?)(?=,|\s+in\b|$)", summary):
+                key = "errors" if outcome in ("error", "errors") else outcome
+                counts[key] = counts.get(key, 0) + int(n)
+            return counts
+    return None
+
 
 def _test_literals(paths: Iterable[pathlib.Path]) -> tuple[list[Any], list[str]]:
     nums=set()
@@ -639,14 +654,15 @@ def _source_env(*paths: Any) -> dict[str, str]:
         d = q if q.is_dir() else q.parent
         if str(d) not in dirs:
             dirs.append(str(d))
-        # NO package-dir walk here, reverted with evidence: intermediate
-        # __init__.py parents on sys.path SHADOW STDLIB MODULES -- the
-        # tornado package dir made `import locale` resolve to
-        # tornado/locale.py inside gettext (measured: AttributeError
-        # locale.normalize in-run, absent standalone). Package-rooted test
-        # imports are satisfied by the WORLD ROOT, which callers already
-        # pass as source_root; the rc=2/zero-failing-tests symptom this walk
-        # once chased turned out to be the harness slicing -m off the argv.
+        if (d / "__init__.py").is_file():
+            pkg = d
+            while (pkg.parent / "__init__.py").is_file():
+                pkg = pkg.parent
+            wroot = pkg.parent
+            if str(wroot) not in dirs and not any(
+                f.stem in sys.stdlib_module_names for f in wroot.glob("*.py")
+            ):
+                dirs.append(str(wroot))
     existing = os.environ.get("PYTHONPATH", "")
     if existing:
         dirs.append(existing)
@@ -656,29 +672,64 @@ def _source_env(*paths: Any) -> dict[str, str]:
 def _byte_offset(lines: list[bytes], lineno: int, col: int) -> int:
     return sum(len(x) for x in lines[:lineno-1]) + col
 
-def _render_candidate(source_text: str, key, replacer) -> str|None:
-    tree=ast.parse(source_text)
-    target=None
-    for node in ast.walk(tree):
-        if _node_key(node)==key:
-            target=node
-            break
-    if target is None:
+def _replacement_span(raw, lines, target, replacer, offsets=None):
+    """Shared byte-splice primitive, extracted from the coupled repair engine."""
+    if target is None or any(getattr(target, name, None) is None for name in
+                             ("lineno", "col_offset", "end_lineno", "end_col_offset")):
         return None
-    if None in (
-        getattr(target,"lineno",None),getattr(target,"col_offset",None),
-        getattr(target,"end_lineno",None),getattr(target,"end_col_offset",None)
-    ):
-        return None
-    replacement=replacer(target)
+    # Replacers may mutate their argument. Never lend out the indexed subtree.
+    replacement = replacer(copy.deepcopy(target))
     ast.fix_missing_locations(replacement)
-    replacement_text=ast.unparse(replacement)
-    raw=source_text.encode("utf-8")
-    lines=raw.splitlines(keepends=True)
-    start=_byte_offset(lines,target.lineno,target.col_offset)
-    end=_byte_offset(lines,target.end_lineno,target.end_col_offset)
-    candidate=raw[:start]+replacement_text.encode("utf-8")+raw[end:]
-    return candidate.decode("utf-8")
+    data = ast.unparse(replacement).encode("utf-8")
+    start = (offsets[target.lineno - 1] + target.col_offset if offsets is not None
+             else _byte_offset(lines, target.lineno, target.col_offset))
+    end = (offsets[target.end_lineno - 1] + target.end_col_offset if offsets is not None
+           else _byte_offset(lines, target.end_lineno, target.end_col_offset))
+    return start, end, data
+
+
+class _CandidateRenderer:
+    """Request-local source index; caches syntax, never execution/acceptance."""
+    def __init__(self, source_text, tree=None):
+        self.raw = source_text.encode("utf-8")
+        self.lines = self.raw.splitlines(keepends=True)
+        self.offsets = [0]
+        for line in self.lines:
+            self.offsets.append(self.offsets[-1] + len(line))
+        self.nodes = {}
+        for node in ast.walk(ast.parse(source_text) if tree is None else tree):
+            self.nodes.setdefault(_node_key(node), node)
+
+    def span(self, key, replacer):
+        return _replacement_span(self.raw, self.lines, self.nodes.get(key), replacer, self.offsets)
+
+    def render(self, key, replacer):
+        span = self.span(key, replacer)
+        if span is None:
+            return None
+        start, end, data = span
+        return (self.raw[:start] + data + self.raw[end:]).decode("utf-8")
+
+    def edit(self, key, desc, replacer):
+        span = self.span(key, replacer)
+        if span is None:
+            return None
+        start, end, data = span
+        if self.raw[start:end] == data:
+            return None
+        return {"start": start, "end": end, "replacement": data, "mutation": desc}
+
+
+def _render_candidate(source_text: str, key, replacer) -> str|None:
+    # One-off callers need no complete index. Search loops reuse a renderer.
+    tree = ast.parse(source_text)
+    target = next((node for node in ast.walk(tree) if _node_key(node) == key), None)
+    raw = source_text.encode("utf-8")
+    span = _replacement_span(raw, raw.splitlines(keepends=True), target, replacer)
+    if span is None:
+        return None
+    start, end, data = span
+    return (raw[:start] + data + raw[end:]).decode("utf-8")
 
 def _purge_source_bytecode(source: pathlib.Path) -> None:
     try:
@@ -782,6 +833,15 @@ def _structural_candidate_specs(source_text: str, tree: ast.AST) -> list[tuple[s
                 if cand:
                     add_text(cand, node, "RANGE_STOP_PLUS_ONE", "range(a, b) -> range(a, b + 1)")
 
+        # 3b. Extraneous binary operand projection (expr +/- k -> expr)
+        if isinstance(node, ast.BinOp):
+            cand_l = _render_candidate(source_text, key, lambda n: n.left)
+            if cand_l:
+                add_text(cand_l, node, "BINOP_LEFT_PROJECTION", "lhs op rhs -> lhs")
+            cand_r = _render_candidate(source_text, key, lambda n: n.right)
+            if cand_r:
+                add_text(cand_r, node, "BINOP_RIGHT_PROJECTION", "lhs op rhs -> rhs")
+
         # 4. Function entry guard synthesis (None / empty early-return or ValueError)
         if isinstance(node, ast.FunctionDef) and node.body and node.args.args:
             params = [a.arg for a in node.args.args if a.arg not in ("self", "cls")]
@@ -856,6 +916,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
         raise PatchSearchError("BASELINE_TIMEOUT")
     nums,strings=_test_literals(tests)
     tree=ast.parse(source_text,filename=str(source))
+    renderer=_CandidateRenderer(source_text, tree)
     attempts=[]
     winner=None
     tested=0
@@ -864,7 +925,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     NEIGH_RESERVE=6  # own budget; legacy slots untouched (zero dilution)
     STRUCT_RESERVE=16  # SPR structural clause budget; zero legacy dilution
 
-    # Materialize bounded candidate queue in deterministic stream order
+    # Materialize bounded candidate queue in deterministic stream order using _CandidateRenderer
     queued: list[tuple[str, dict[str, Any]]] = []
     for key,desc,replacer in _candidate_specs(tree,nums,strings):
         if desc.get("family")=="neighborhood":
@@ -873,7 +934,7 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
             neigh_tested+=1
         elif legacy_tested>=max_candidates:
             continue  # keep scanning: neighborhood reserve must stay reachable
-        candidate=_render_candidate(source_text,key,replacer)
+        candidate=renderer.render(key,replacer)
         if candidate is None or candidate==source_text:
             continue
         if desc.get("family")!="neighborhood":

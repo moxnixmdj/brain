@@ -48,6 +48,16 @@ SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
 _FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
 # "<noun> <name>" -- "the function line_total", "the class Cart".  The name is
 # read off the sentence and then PROVED against the file's own AST.
+_CREATES_A_FUNCTION = re.compile(
+    r"\b(?:add|create|write|implement|define)\w*\b[^.\n]{0,60}?\bfunction\b", re.I)
+_CREATED_TEST = re.compile(
+    r"\badd(?:s|ing)?\s+(?:a|an|the)?\s*tests?\b[^.\n]{0,50}?\bin\s+([^\s,;]+)", re.I)
+_ADDED_FUNCTION = re.compile(r"\bfunction\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)", re.I)
+_RETURNS_EXPR = re.compile(r"\breturns?\s+(.+?)\s*(?:,|\.\s|$)", re.I)
+_EXPORT_FROM = re.compile(r"\bexports?\b[^.\n]{0,40}?\bfrom\s+([^\s,;]+)", re.I)
+_ADDED_PARAM = re.compile(
+    r"\b(?:add|insert|give)\w*\b[^.!\n]{0,80}?\bparameters?\s+"
+    r"(?:named\s+)?[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", re.I)
 _NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 # ONLY configuration knobs may be defaulted away.  A path/root/argv/dir/file
@@ -82,6 +92,7 @@ _SWE_VERBS = (
     "circular import", "import cycle", "bisect", "slower", "mutation", "taint", "untrusted",
     "flaky", "intermittently", "deprecated", "sql injection",
     "linearithmic", "unused", "race condition", "are failing",
+    "add a function", "export it from", "add a test for",
 )
 
 
@@ -157,7 +168,9 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     except (OSError, SyntaxError, ValueError):
         return {}
     found: dict[str, str] = {}
-    for node in ast.walk(tree):
+    nodes = list(ast.walk(tree))
+    parents = {child: parent for parent in nodes for child in ast.iter_child_nodes(parent)}
+    for node in nodes:
         if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
                 and node.func.attr == "get" and node.args):
             continue
@@ -170,13 +183,15 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
         # A default is proved by: a second positional arg, an `or` fallback on
         # this very call, or an `if args.get(key)` guard (presence-optional).
         guarded = len(node.args) >= 2
-        for parent in ast.walk(tree):
+        child = node
+        parent = parents.get(child)
+        while not guarded and parent is not None:
             if isinstance(parent, ast.BoolOp) and isinstance(parent.op, ast.Or) and node in parent.values:
                 guarded = True
-                break
-            if isinstance(parent, ast.If) and node in ast.walk(parent.test):
+            if isinstance(parent, ast.If) and child is parent.test:
                 guarded = True
-                break
+            child = parent
+            parent = parents.get(child)
         # Scope is declaration-driven: only a proven configuration knob, never
         # an output (the stated destination is the acceptance promise) and never
         # a semantic path/root/argv slot.
@@ -683,6 +698,133 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if value is not None:
                 out["limit"] = {"value": value, "rule": "LIMIT_FROM_STATED_COUNT",
                                 "evidence": token}
+
+    # Added parameter & stated function-creation derivations (checked against AST & stated paths).
+    if "new_param" in keys and "new_param" not in out:
+        added = _ADDED_PARAM.findall(str(goal or ""))
+        added = [n for n in dict.fromkeys(added) if _NAME_RE.match(n)]
+        host = str((out.get("symbol") or out.get("qualname") or {}).get("value") or "")
+        if len(added) == 1 and host:
+            for f in [f for f in sources if f.endswith(".py")]:
+                tree_of_f = _tree_of(root, f)
+                for node in ast.walk(tree_of_f) if tree_of_f is not None else []:
+                    if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    if node.name != host.split(".")[-1]:
+                        continue
+                    declared = [x.arg for x in (list(node.args.args)
+                                                + list(node.args.kwonlyargs)
+                                                + list(getattr(node.args, "posonlyargs", []) or []))]
+                    if added[0] in declared:
+                        break
+                    out["new_param"] = {"value": added[0], "rule": "ADDED_PARAM_STATED_AND_NOT_DECLARED",
+                                        "evidence": "%s:%s" % (f, host)}
+                    break
+                if "new_param" in out:
+                    break
+
+    py_stated = [f for f in sources if f.endswith(".py")]
+    if ("module" in keys and "module" not in out and len(py_stated) > 1
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        to_hits = [m.group(1).rstrip(".,;:") for m in
+                   re.finditer(r"\bto\s+([^\s,;]+)", str(goal or ""), re.I)]
+        exact = [h for h in to_hits if h in py_stated]
+        if len(exact) == 1:
+            out["module"] = {"value": exact[0], "rule": "MODULE_FROM_STATED_TO_TARGET",
+                             "evidence": exact[0]}
+    if ({"symbol", "new_symbol", "function_name", "new_function"} & keys
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(fn_phrases) == 1:
+            name = fn_phrases[0][0]
+            existing = set()
+            for f in [f for f in sources if f.endswith(".py")]:
+                f_tree = _tree_of(root, f)
+                if f_tree is None:
+                    continue
+                existing |= {n.name for n in ast.walk(f_tree)
+                             if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+            if _NAME_RE.match(name) and name not in existing:
+                for key in ({"symbol", "new_symbol", "function_name", "new_function"} & keys):
+                    if key not in out:
+                        out[key] = {"value": name, "rule": "CREATED_FUNCTION_NAME_STATED",
+                                    "evidence": name}
+    if ("source_root" in keys and "source_root" not in out and "module" in out
+            and str((out.get("module") or {}).get("rule") or "") == "MODULE_FROM_STATED_TO_TARGET"):
+        parent = str(pathlib.PurePosixPath(str(out["module"]["value"])).parent)
+        if parent and (pathlib.Path(root) / parent).is_dir():
+            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_MODULE",
+                                  "evidence": str(out["module"]["value"])}
+    if ({"test_paths", "test_path", "test_file"} & keys):
+        created = _CREATED_TEST.findall(str(goal or ""))
+        created = [c.rstrip(".,;:") for c in created]
+        created = [c for c in created if c.endswith(".py")]
+        if len(set(created)) == 1:
+            for key in ({"test_paths", "test_path", "test_file"} & keys):
+                if key not in out:
+                    value = [created[0]] if key == "test_paths" else created[0]
+                    out[key] = {"value": value, "rule": "CREATED_TEST_PATH_STATED",
+                                "evidence": created[0]}
+    if "export_module" in keys and "export_module" not in out:
+        stated = set(stated_existing_files(str(goal or ""), pathlib.Path(root)))
+        hits = [m.group(1).rstrip(".,;:") for m in
+                _EXPORT_FROM.finditer(str(goal or ""))]
+        hits = [h for h in hits if h in stated]
+        if len(hits) == 1:
+            out["export_module"] = {"value": hits[0], "rule": "EXPORT_TARGET_STATED",
+                                    "evidence": hits[0]}
+    if (({"params", "parameters"} & keys) or ({"body", "expression", "returns"} & keys)) \
+            and _CREATES_A_FUNCTION.search(str(goal or "")):
+        fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(fn_phrases) == 1:
+            fname, raw_params = fn_phrases[0]
+            params = [t.strip() for t in raw_params.split(",") if t.strip()]
+            if all(_NAME_RE.match(t) for t in params):
+                for key in ({"params", "parameters"} & keys):
+                    out[key] = {"value": params, "rule": "PARAMS_FROM_STATED_SIGNATURE",
+                                "evidence": "%s(%s)" % (fname, raw_params.strip())}
+                for key in ({"body", "expression", "returns"} & keys):
+                    rets = _RETURNS_EXPR.findall(str(goal or ""))
+                    rets = [r.strip() for r in rets if r.strip()]
+                    if len(rets) == 1:
+                        try:
+                            ast.parse("_ = (" + rets[0] + ")", mode="exec")
+                        except SyntaxError:
+                            continue
+                        out[key] = {"value": rets[0], "rule": "EXPRESSION_STATED_VERBATIM",
+                                    "evidence": rets[0]}
+
+    # A commit message is the caller's OWN words, so it is copied, never
+    # invented.  Two proofs, both from the sentence:
+    #   * an operation other than `commit` has no message at all -- the slot is
+    #     declared by the row because ONE operation needs it, so deriving "not
+    #     applicable" from the operation is a proof, not a default;
+    #   * `commit` takes the quoted literal after "message", or the single quoted
+    #     literal of the sentence.
+    # Measured on main after the git capability landed: the row declares the slot
+    # but the surface only binds what derivation supplies, so without this the
+    # operation was refused as BINDING_REFUSED:message:not_stated for EVERY git
+    # sentence, including the ones that never commit anything.  The commit
+    # sentence in the other direction bound op=commit and then died in the adapter
+    # with COMMIT_REQUIRES_A_STATED_MESSAGE -- the operation was unreachable
+    # through the door while the grammar said it was bindable.
+    if "message" in keys:
+        text = str(goal or "")
+        op_value = (out.get("op") or {}).get("value")
+        if op_value and op_value != "commit":
+            out["message"] = {"value": "", "rule": "MESSAGE_NOT_APPLICABLE_TO_THIS_OPERATION",
+                              "evidence": op_value}
+        else:
+            m = re.search(r"\bmessage\b\s*(?:is|of|:|=|saying|say|reads)?\s*"
+                          r"[`\"'](.+?)[`\"']", text, re.I | re.S)
+            value = m.group(1).strip() if m else None
+            if value is None and op_value == "commit":
+                quoted = [q.strip() for q in re.findall(r"[`\"'](.+?)[`\"']", text) if q.strip()]
+                if len(quoted) == 1:
+                    value = quoted[0]
+            if value:
+                out["message"] = {"value": value, "rule": "MESSAGE_FROM_STATED_QUOTED_TEXT",
+                                  "evidence": value[:48]}
 
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file

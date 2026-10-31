@@ -1049,6 +1049,14 @@ _PROVED_BY_THE_TREE = frozenset({
     "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
     "PATH_DIR_FROM_STATED_FILE_PARENT",
     "PATH_DIR_COMMON_TO_STATED_FILES",
+    # One addition, for the creation grammar, and it is the same KIND of proof --
+    # checked against the stated file's own bytes: the function exists in that
+    # file AND does not already declare the name, which is what makes it an
+    # ADDITION rather than a rename.  Measured 2026-10-31: without it "Add a
+    # parameter qty with a default value to the function line_total in
+    # app/models.py" could not bind new_param at the pinned door and a helper
+    # inliner answered it instead -- the substitution this gate exists to stop.
+    "ADDED_PARAM_STATED_AND_NOT_DECLARED",
 })
 
 
@@ -1633,6 +1641,13 @@ def _role_anchored(goal: str, raw: str, phrases, index: int | None = None) -> bo
         index = text.find(raw)
     if index < 0:
         return False
+    # A stated directory/file may first occur as a PREFIX of another path:
+    # "report to src/report.json for the source root src". That first "src"
+    # is not a destination occurrence of the directory. A trailing sentence
+    # period is punctuation, but /child, _suffix and .extension continue a path.
+    end = index + len(raw)
+    if re.match(r"[A-Za-z0-9_/-]|\.[A-Za-z0-9_.-]", text[end:]):
+        return False
     before = text[:index]
     filler = r"(?:\s+(?:" + "|".join(_ROLE_FILLERS) + r"))?"
     for phrase in phrases:
@@ -1777,7 +1792,11 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     pinned_keys = [k for k in keys if k not in declared_selectors and (k in ("text", "goal", "url") or k.endswith("_path"))]
     typed_keys = [k for k in keys if k not in pinned_keys]
     inputs: dict[str, Any] = {}
-    taken: set[str] = set()
+    # A destination is not a source on ANY binding path, including a successful
+    # pinned binding and joint-role elimination (not just the type fallback).
+    # Compute once per binding, reusing the existing role detector.
+    named_destinations = _named_output_destinations(goal, entry, keys, root)
+    taken: set[str] = set(named_destinations)
     pending_input_paths: list[str] = []
     for key in pinned_keys:
         shadow = dict(entry)
@@ -1786,6 +1805,9 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             bound_val = gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses)
             val = bound_val.get(key)
             if key.endswith("_path") and not _is_output_key(key, entry) and val:
+                if val in named_destinations:
+                    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",
+                                                 "input_is_stated_destination:" + key)
                 stem = key[:-5].lower()
                 wanted = _STEM_SUFFIXES.get(stem)
                 if wanted and pathlib.PurePosixPath(val).suffix.lower() not in wanted:
@@ -1836,10 +1858,10 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             try:
                 inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
             except GoalCompilationFailure:
-                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | _named_output_destinations(goal, entry, keys, root))
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | named_destinations)
         else:
             try:
-                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | _named_output_destinations(goal, entry, keys, root))
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | named_destinations)
             except GoalCompilationFailure as type_failure:
                 if not produced_paths:
                     raise
@@ -2169,7 +2191,23 @@ def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, 
     # own signature sentence in favour of a specific sibling, which is a misroute, not a fix.  So a
     # retrieved selection is accepted only when it is DERIVED EVIDENCE - a capability the pinned
     # path structurally cannot propose.
-    if entry.get("capability_source") != "receipt_projection":
+    # The gate is EVIDENCE, not provenance: a receipt projection is one way a
+    # capability is invisible to the pinned scorer, and a snapshot row whose
+    # declared slots are DERIVED FROM THE SENTENCE is the other.  Measured
+    # 2026-10-31: "Add a function total_cents(item) to app/models.py that returns
+    # price_cents * qty, export it from app/__init__.py, and add a test for it in
+    # tests/test_total.py" is a sentence whose signature, expression, module,
+    # export target and test path are all stated; the row that serves it
+    # (python.source.add_function.v1) admits under typed admission with six
+    # derived values, and was still unreachable because the pinned scorer's
+    # binder cannot fill a slot from derivation.  A lexical near-miss has
+    # derived_count 0 and is still refused here, which is what keeps this from
+    # displacing a capability's own signature sentence.
+    _derived = 0
+    for row in decision.get("admissions") or []:
+        if row.get("capability_id") == cid:
+            _derived = int(((row.get("derivation") or {}).get("derived_count")) or 0)
+    if entry.get("capability_source") != "receipt_projection" and _derived <= 0:
         return None
     proposals = decision.get("proposals") or []
     score = int(round(float((proposals[0] if proposals else {}).get("lexical_relevance_score") or 0)))

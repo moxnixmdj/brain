@@ -295,7 +295,9 @@ def request_excluded_proposals(goal: str,
     excluded: list[dict[str, Any]] = []
     if not proposals:
         return proposals, excluded
-    stated_versions = _version_sequence(goal)
+    # F27 constrains requested capability versions, not versions inside path,
+    # URL or payload VALUES. Reuse the same intent/data boundary as F8/F25.
+    stated_versions = _version_sequence(front.prose_only(goal))
     stated_words = _request_words(goal)
     names = {p["capability_id"]: _name_words(p["capability_id"]) for p in proposals}
 
@@ -820,14 +822,14 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
 
 _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("rename",), ("rename",)),
-    (("add parameter", "add a parameter", "add an optional parameter", "add optional parameter", "add argument"), ("rename_parameter",)),
+    (("add parameter", "add a parameter", "add an optional parameter", "add optional parameter", "add argument"), ("add_parameter", "rename_parameter")),
     (("move function", "move the function", "move helper", "move the helper"), ("move_function",)),
     (("move symbol", "move class"), ("move_function", "extract_function")),
     (("extract",), ("extract",)),
-    (("synthesize", "implement ", "add a function", "add a total function", "total function", "write a function"), ("synthesize_function", "synthesize")),
+    (("synthesize", "implement ", "add a function", "add a total function", "total function", "write a function"), ("add_function", "synthesize_function", "synthesize")),
     (("regression test",), ("synthesize_function",)),
     (("repair", "fix", "broken", "failing"), ("repair.apply", "repair", "patch", "choreograph")),
-    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition", "circular import", "import cycle"), ("choreograph", "crossfile")),
+    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition", "circular import", "import cycle"), ("merge_conflict", "choreograph", "crossfile")),
     (("change impact", "impacted test", "which tests"), ("change_impact", "testselect")),
     (("scaffold", "generate test"), ("scaffold", "generate")),
     (("audit", "count the functions"), ("audit",)),

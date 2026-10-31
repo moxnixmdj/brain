@@ -1,22 +1,95 @@
 #!/usr/bin/env python3
-"""Software repair loop — CEGIS+hypothesis HTN loop, only-right-way.
+"""Bounded repair with distinct structured-contract and in-place fixture modes.
 
-Hidden kernels harvested: CEGIS(T) 321L + hypothesis 6.170.12 + concrete 13 + CrossHair Z3 +
-symbol 86k/221k + change-impact 2070/2096 + crossfile + pipeline 8-stage.
-Why max: repair is loop not DAG. Synthesize→verify triad→counterexample→resynthesize until pass or budget. No blind search.
+Requests containing task_text or contract_checks retain the task-bound controller:
+provenance-guided synthesis, isolated realization, concrete/Hypothesis checks of
+that same candidate, measured acceptance, and source restoration. Such requests
+never fall back to a weaker mode on malformed input or failed acceptance.
+
+Source/test-only requests retain upstream fixture CEGIS: bounded synthesis,
+realization in the stated source tree, suite verification and counterexample
+escalation. This mode can mutate source and is not a structured-contract proof.
+Budget-only invocation still fails closed; registry presence is not task success.
+The compatibility identifiers do not imply universal synthesis or semantic proof.
 """
 from __future__ import annotations
+
+import hashlib
+import json
+import pathlib
+from typing import Any
+
+SCHEMA = "PROJECT_BRAIN_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1"
+CAPABILITY_ID = "software.repair.loop.cegis_hypothesis.v1"
+PROVIDES = ["software.repair.loop.cegis_verified", "software.repair.synthesis.triad_proven"]
+REQUIRES = ["python.fault.localization.symbol_ranked"]
+
+
+def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
+    p = (root / str(raw or "canonical/tmp_repair_loop_cegis.json")).resolve()
+    if p == root or root not in p.parents:
+        raise ValueError("PATH_OUTSIDE_REPOSITORY")
+    if p.exists():
+        raise ValueError("OUTPUT_ALREADY_EXISTS")
+    return p
+
+
+def _run_task_bound(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
+    budget = args.get("budget", 3)
+    if type(budget) is not int or not 1 <= budget <= 100:
+        raise ValueError("BUDGET_MUST_BE_POSITIVE_BOUNDED_INTEGER")
+    if not isinstance(args.get("source_root"), str) or not args["source_root"].strip():
+        raise ValueError("SOURCE_ROOT_REQUIRED")
+    if not isinstance(args.get("task_text"), str) or not args["task_text"].strip():
+        raise ValueError("TASK_TEXT_REQUIRED")
+    checks = args.get("contract_checks")
+    if not isinstance(checks, list) or not checks or len(checks) > 16:
+        raise ValueError("CONTRACT_CHECKS_REQUIRED")
+    repo = pathlib.Path(root).resolve()
+    output = _safe_output(repo, args.get("output_path"))
+    from canonical.runtime.bound_capabilities import python_repair_measured_acceptance_controller_v1 as controller
+
+    # Unique scratch prevents collisions between concurrent calls and leaves no
+    # stale intermediate report to be mistaken for evidence from this attempt.
+    import tempfile
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".repair-check-", dir=output.parent) as td:
+        forwarded = dict(args)
+        forwarded.pop("budget", None)
+        forwarded["output_path"] = str((pathlib.Path(td) / "measured.json").relative_to(repo))
+        measured = controller.run(forwarded, repo)
+    accepted = (
+        measured.get("pass") is True
+        and measured.get("acceptance_stop_authorized") is True
+        and measured.get("source_restored") is True
+        and measured.get("contract_checks_pass") is True
+        and bool(measured.get("contract_checks"))
+        and bool(measured.get("patches"))
+    )
+    artifact = {
+        "schema": SCHEMA, "capability_id": CAPABILITY_ID,
+        "status": "PASS__TASK_BOUND_REPAIR_CHECKED" if accepted else "OPEN__TASK_BOUND_REPAIR_NOT_ACCEPTED",
+        "pass": accepted, "verified": accepted, "iterations": 1, "budget": budget,
+        "verification_mode": "REALIZED_PATCH_MEASURED_TESTS_AND_FINITE_CONTRACT_SAMPLES",
+        "measurement": {k: v for k, v in measured.items()
+                        if k not in {"output_path", "output_sha256", "output_verified"}},
+        "source_restored": measured.get("source_restored") is True,
+        "patches": measured.get("patches", []) if accepted else [],
+        "independent_semantic_oracle_credit": False,
+        "model_dependency_count": 0, "incremental_spend_usd": 0,
+    }
+    raw = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
+    with output.open("xb") as stream:
+        stream.write(raw)
+    return {**artifact, "adapter": "software_repair_loop_cegis_hypothesis_v1",
+            "output_path": str(output.relative_to(repo)),
+            "output_sha256": hashlib.sha256(raw).hexdigest(),
+            "output_verified": accepted}
+
+
+# Upstream bounded fixture escalation, separate from structured-contract mode.
 import hashlib, json, pathlib, sys
 from typing import Any
-SCHEMA="PROJECT_BRAIN_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1"
-CAPABILITY_ID="software.repair.loop.cegis_hypothesis.v1"
-PROVIDES=["software.repair.loop.cegis_verified","software.repair.synthesis.triad_proven"]
-REQUIRES: list[str]=["python.fault.localization.symbol_ranked"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_repair_loop_cegis.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
 def _load(path:pathlib.Path,name:str):
     import importlib.util
     spec=importlib.util.spec_from_file_location(name,path)
@@ -37,7 +110,7 @@ def _run_suite(repo,test_argv,timeout,env=None):
                              env if env is not None else _PGC._PATCH._source_env())
     return int(d["returncode"]),(d.get("stdout") or "")+"\n"+(d.get("stderr") or "")
 
-def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
+def _run_fixture(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     """CEGIS repair loop, de-stubbed (ladder receipt REPAIR_DEPTH_LADDER_20261029
     caught this loop returning verified=True without ever passing source/test
     paths to its engines).
@@ -186,3 +259,16 @@ def _run_manifest_mode(args,repo,output):
               "model_dependency_count":0,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
     return {"adapter":"software_repair_loop_cegis_hypothesis_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":True,"status":"MANIFEST_MODE_NO_FIXTURE_VERIFIED","verified":artifact["verified"],"iterations":len(cegis_iterations),"model_dependency_count":0,"incremental_spend_usd":0}
+
+
+def run(args, root):
+    budget = args.get("budget", 3)
+    if type(budget) is not int or not 1 <= budget <= 100:
+        raise ValueError("BUDGET_MUST_BE_POSITIVE_BOUNDED_INTEGER")
+    if not isinstance(args.get("source_root"), str) or not args["source_root"].strip():
+        raise ValueError("SOURCE_ROOT_REQUIRED")
+    if "contract_checks" in args or "task_text" in args:
+        return _run_task_bound(args, root)
+    if not args.get("test_paths"):
+        raise ValueError("TEST_PATHS_REQUIRED")
+    return _run_fixture(args, root)

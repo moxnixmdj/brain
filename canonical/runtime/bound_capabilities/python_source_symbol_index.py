@@ -421,24 +421,22 @@ def _index_one_file(task: tuple[str, str] | tuple[str, str, bytes, str]) -> tupl
     return res
 
 
-def run(args, root):
-    repo = pathlib.Path(root).resolve()
-    source_root = _safe_root(repo, args.get("source_root", "canonical/runtime"))
-    output = (repo / str(args.get("output_path") or "")).resolve()
-    if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+def build_index(source_root, root):
+    """Build a source-relative index without writing a probe into the source.
 
+    The run adapter below serializes this same object. Callers can bind the
+    result to a request-local cache without risking fixed probe-file collisions.
+    """
+def _compute_tree_key(source_root: pathlib.Path, repo: pathlib.Path) -> tuple[list[tuple[str, str, bytes, str]], tuple[str, tuple[tuple[str, str], ...]], pathlib.Path]:
     file_blobs: list[tuple[str, str, bytes, str]] = []
     for path in _py_files(source_root):
         if path.is_file():
             raw = path.read_bytes()
             rel = str(path.relative_to(repo)).replace("\\", "/")
             file_blobs.append((str(path), rel, raw, hashlib.sha256(raw).hexdigest()))
-
     rel_source_root = str(source_root.relative_to(repo)).replace("\\", "/")
     manifest_pairs = tuple((rel, sha) for _p, rel, _raw, sha in file_blobs)
     tree_key = (rel_source_root, manifest_pairs)
-    cached_tree = _TREE_PAYLOAD_CACHE.get(tree_key)
     tree_digest_h = hashlib.sha256(rel_source_root.encode("utf-8"))
     for rel, sha in manifest_pairs:
         tree_digest_h.update(b"\0")
@@ -446,26 +444,10 @@ def run(args, root):
         tree_digest_h.update(b":")
         tree_digest_h.update(sha.encode("ascii"))
     tree_cache_file = _DISK_CACHE_ROOT / "t" / f"{tree_digest_h.hexdigest()}.m"
-    if cached_tree is None and tree_cache_file.is_file():
-        try:
-            cached_tree = marshal.loads(tree_cache_file.read_bytes())
-            if len(_TREE_PAYLOAD_CACHE) >= 64:
-                _TREE_PAYLOAD_CACHE.clear()
-            _TREE_PAYLOAD_CACHE[tree_key] = cached_tree
-        except Exception:
-            cached_tree = None
-    if cached_tree is not None:
-        payload, summary_meta = cached_tree
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_bytes(payload)
-        data = output.read_bytes()
-        return {
-            **summary_meta,
-            "output_path": str(output.relative_to(repo)).replace("\\", "/"),
-            "output_sha256": hashlib.sha256(data).hexdigest(),
-            "output_verified": True,
-        }
+    return file_blobs, tree_key, tree_cache_file
 
+
+def _build_index_from_blobs(source_root: pathlib.Path, repo: pathlib.Path, file_blobs: list[tuple[str, str, bytes, str]]) -> dict:
     modules = []
     unparseable = []
     symbols = {}
@@ -477,9 +459,6 @@ def run(args, root):
 
     for ok, item in outcomes:
         if not ok:
-            # Same law as the audit: a file that will not parse is a FINDING
-            # to report, never an excuse to hide the rest of the tree behind
-            # a tool-looking exception.
             unparseable.append(item)
             continue
         rel = item["path"]
@@ -506,7 +485,7 @@ def run(args, root):
     if not modules and not unparseable:
         raise RuntimeError("PYTHON_INDEX_EMPTY")
 
-    report = {
+    return {
         "schema": "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1",
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
         "modules": modules,
@@ -521,19 +500,55 @@ def run(args, root):
             "call_edges": call_edge_total,
         },
     }
-    output.parent.mkdir(parents=True, exist_ok=True)
-    # Compact C-encoder JSON (separators=(",", ":")) keeps output 100% deterministic
-    # while running ~15x faster than pure-Python indented formatting on 2,000+ file trees.
+
+
+def build_index(source_root, root):
+    """Build a source-relative index without writing a probe into the source."""
+    repo = pathlib.Path(root).resolve()
+    src = _safe_root(repo, source_root)
+    file_blobs, _tree_key, _tree_cache_file = _compute_tree_key(src, repo)
+    return _build_index_from_blobs(src, repo, file_blobs)
+
+
+def run(args, root):
+    repo = pathlib.Path(root).resolve()
+    src = _safe_root(repo, args.get("source_root", "canonical/runtime"))
+    output = (repo / str(args.get("output_path") or "")).resolve()
+    if output == repo or repo not in output.parents:
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    file_blobs, tree_key, tree_cache_file = _compute_tree_key(src, repo)
+    cached_tree = _TREE_PAYLOAD_CACHE.get(tree_key)
+    if cached_tree is None and tree_cache_file.is_file():
+        try:
+            cached_tree = marshal.loads(tree_cache_file.read_bytes())
+            if len(_TREE_PAYLOAD_CACHE) >= 64:
+                _TREE_PAYLOAD_CACHE.clear()
+            _TREE_PAYLOAD_CACHE[tree_key] = cached_tree
+        except Exception:
+            cached_tree = None
+    if cached_tree is not None:
+        payload, summary_meta = cached_tree
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_bytes(payload)
+        data = output.read_bytes()
+        return {
+            **summary_meta,
+            "output_path": str(output.relative_to(repo)).replace("\\", "/"),
+            "output_sha256": hashlib.sha256(data).hexdigest(),
+            "output_verified": True,
+        }
+
+    report = _build_index_from_blobs(src, repo, file_blobs)
     payload = (json.dumps(report, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
     summary_meta = {
         "adapter": "python_source_symbol_index",
-        "file_count": len(modules),
-        "unparseable_count": len(unparseable),
-        "unparseable_paths": [u["path"] for u in unparseable][:20],
-        "symbol_count": len(symbols),
-        "reference_count": reference_total,
-        "call_edge_count": call_edge_total,
-        "caller_index_size": len(callers_of),
+        "file_count": report["totals"]["files"],
+        "unparseable_count": report["totals"]["unparseable"],
+        "unparseable_paths": [u["path"] for u in report["unparseable"]][:20],
+        "symbol_count": report["totals"]["symbols"],
+        "reference_count": report["totals"]["references"],
+        "call_edge_count": report["totals"]["call_edges"],
+        "caller_index_size": len(report["callers_of"]),
     }
     if len(_TREE_PAYLOAD_CACHE) >= 64:
         _TREE_PAYLOAD_CACHE.clear()

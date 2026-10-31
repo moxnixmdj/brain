@@ -1038,3 +1038,23 @@ def test_f26_a_multi_step_request_forwards_the_producers_artifact():
     edges = dag["artifact_edges"]
     assert len(edges) == 1 and edges[0]["producer_cycle"] == 0 and edges[0]["consumer_cycle"] == 1
     assert edges[0]["input_key"] == "metadata_path"
+
+
+@pytest.mark.parametrize("data", [
+    "using canonical/tmp/project-v6/output.json",
+    "from https://example.invalid/v6/input.json",
+    "with payload 'v6'",
+])
+@pytest.mark.parametrize("explicit_version", [False, True])
+def test_f27_task_data_versions_are_not_requested_capability_versions(data, explicit_version):
+    from canonical.runtime import capability_selection_retrieval_v1 as sel
+    proposals = [{"capability_id": f"canonical/runtime/composition_cross_step_no_bypass_audit_v{v}.py.auto.v1",
+                  "lexical_relevance_score": 46.0} for v in (1, 2)]
+    goal = "Run the composition cross step no bypass audit"
+    if explicit_version:
+        goal += " v2"
+    kept, excluded = sel.request_excluded_proposals(goal + " " + data, proposals)
+    assert kept == (proposals[1:] if explicit_version else proposals)
+    assert len(excluded) == (1 if explicit_version else 0)
+    if explicit_version:
+        assert excluded[0]["requested_versions"] == ["v2"]

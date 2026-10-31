@@ -102,11 +102,12 @@ def _edit(text,key,desc,replacer):
  for n in ast.walk(tree):
   if _PATCH._node_key(n)==key:target=n;break
  if target is None:return None
- vals=(getattr(target,"lineno",None),getattr(target,"col_offset",None),getattr(target,"end_lineno",None),getattr(target,"end_col_offset",None))
- if any(v is None for v in vals):return None
- repl=replacer(target);ast.fix_missing_locations(repl);rb=ast.unparse(repl).encode()
- raw=text.encode();lines=raw.splitlines(keepends=True)
- start=_PATCH._byte_offset(lines,target.lineno,target.col_offset);end=_PATCH._byte_offset(lines,target.end_lineno,target.end_col_offset)
+ return _edit_node(text.encode(),text.encode().splitlines(keepends=True),target,desc,replacer)
+def _edit_node(raw,lines,target,desc,replacer):
+ # Compatibility entry; all engines now share the same replacement primitive.
+ span=_PATCH._replacement_span(raw,lines,target,replacer)
+ if span is None:return None
+ start,end,rb=span
  if raw[start:end]==rb:return None
  return {"start":start,"end":end,"replacement":rb,"mutation":desc}
 def _pool(row,tests,per_file):
@@ -118,6 +119,7 @@ def _pool(row,tests,per_file):
  ranges=[(s["lineno"],s["end_lineno"],s["score"]) for s in row["symbols"] if s["score"]>0]
  focus=set(row.get("focus") or ())
  out=[]
+ renderer=_PATCH._CandidateRenderer(text,tree)
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
   line=desc.get("lineno") or 0
   sym_score=max([score for a,b,score in ranges if a<=line<=b] or [0])
@@ -139,7 +141,7 @@ def _pool(row,tests,per_file):
    # traceback-frame proximity dominates: a site ON/next-to a line the
    # stack names is the evidence-first candidate, not early-line trivia
    priority=sym_score+(10000 if focus_near else 0)
-  e=_edit(text,key,desc,replacer)
+  e=renderer.edit(key,desc,replacer)
   if e is not None:
    e["family"]=desc.get("family") or "legacy"
    if desc.get("ratio"):e["ratio"]=desc["ratio"]

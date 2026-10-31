@@ -2912,6 +2912,7 @@
         "args": {
           "capability_id": "git.repository.operate.v1",
           "limit": "${input.limit}",
+          "message": "${input.message}",
           "op": "${input.op}"
         },
         "expect": {

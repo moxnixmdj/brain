@@ -22,6 +22,7 @@ import tempfile
 from typing import Any, Mapping
 
 from canonical.runtime import acceptance_clause_v1 as acceptance_clause
+from canonical.runtime.swe_task_artifacts_v1 import fresh_output, publish_report
 
 SCHEMA="PROJECT_BRAIN_PYTHON_REPAIR_MEASURED_ACCEPTANCE_CONTROLLER_V1"
 CAPABILITY_ID="python.software.repair.measured_acceptance.v1"
@@ -145,12 +146,12 @@ def _candidate_test_layout(
                 candidate=(repo/raw).resolve()
             elif raw.is_absolute():
                 candidate=raw.resolve()
-            on_disk=candidate.is_file()
+            on_disk=candidate.is_file() or candidate.is_dir()
         except OSError:
             # A test argv token is a command argument, not necessarily a path.
             # ``python3 -c '<harness program>'`` carries a whole test runner in
             # ONE token, and stat() on that name fails with ENAMETOOLONG, which
-            # Path.is_file() re-raises instead of answering False.  Such a token
+            # Path.is_file()/is_dir() re-raise instead of answering False.  Such a token
             # is not a file inside the source root, so it must pass through
             # verbatim -- exactly as every other non-file token does -- rather
             # than abort the measurement.
@@ -206,11 +207,156 @@ def _realize_candidate(
         })
     return realized
 
+def _validate_contract_checks(checks, source_root):
+    """Reject malformed requests before spending time on repair search."""
+    from canonical.runtime.bound_capabilities import evidence_oracle_hypothesis_v1 as oracle
+    if not isinstance(checks, list) or not checks or len(checks) > 16:
+        raise RepairAcceptanceError("CONTRACT_CHECKS_INVALID")
+    validated = []
+    allowed = {"source_path", "timeout_s", "max_examples", "min_value", "max_value"}
+    for check in checks:
+        if not isinstance(check, Mapping) or set(check) - allowed:
+            raise RepairAcceptanceError("CONTRACT_CHECK_INVALID")
+        path = (source_root / str(check.get("source_path") or "")).resolve()
+        if source_root not in path.parents or not path.is_file() or path.suffix != ".py":
+            raise RepairAcceptanceError("CONTRACT_SOURCE_INVALID")
+        limits = {
+            "timeout_s": oracle._integer(check, "timeout_s", 10, 1, 120),
+            "max_examples": oracle._integer(check, "max_examples", 50, 1, 5000),
+            "min_value": oracle._integer(check, "min_value", -100, -(2**63), 2**63 - 1),
+            "max_value": oracle._integer(check, "max_value", 100, -(2**63), 2**63 - 1),
+        }
+        if limits["min_value"] > limits["max_value"]:
+            raise RepairAcceptanceError("CONTRACT_INTEGER_RANGE_INVALID")
+        validated.append({"source_path": str(path.relative_to(source_root)), **limits})
+    return validated
+
+
+def _check_candidate_contracts(checks, candidate_root, temp_root):
+    """Check the realized candidate, never the original source or a demo.
+
+    These two input enumerators share a contract evaluator. This is additional
+    concrete/property evidence, not a claim of independent semantic oracles.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    from canonical.runtime.bound_capabilities import evidence_oracle_concrete_v1 as concrete
+    from canonical.runtime.bound_capabilities import evidence_oracle_hypothesis_v1 as hypothesis
+
+    if not isinstance(checks, list) or not checks or len(checks) > 16:
+        raise RepairAcceptanceError("CONTRACT_CHECKS_INVALID")
+    records = []
+    with ThreadPoolExecutor(max_workers=2) as workers:
+        for index, check in enumerate(checks):
+            if not isinstance(check, Mapping):
+                raise RepairAcceptanceError("CONTRACT_CHECK_INVALID")
+            path = (candidate_root / str(check.get("source_path") or "")).resolve()
+            if candidate_root not in path.parents or not path.is_file() or path.suffix != ".py":
+                raise RepairAcceptanceError("CONTRACT_SOURCE_INVALID")
+            source_sha = _sha(path.read_bytes())
+            common = {"source_path": _rel(temp_root, path),
+                      "timeout_s": check.get("timeout_s", 10)}
+            cargs = {**common, "output_path": f"contracts/{index}_concrete.json"}
+            hargs = {**common, "output_path": f"contracts/{index}_hypothesis.json"}
+            for key in ("max_examples", "min_value", "max_value"):
+                if key in check:
+                    hargs[key] = check[key]
+            cf = workers.submit(concrete.run, cargs, temp_root)
+            hf = workers.submit(hypothesis.run, hargs, temp_root)
+            c, h = cf.result(), hf.result()
+            unchanged = source_sha == _sha(path.read_bytes())
+            passed = unchanged and all(
+                r.get("check_completed") is True and r.get("verified") is True
+                and r.get("checked", 0) > 0 and not r.get("violations")
+                and r.get("source_sha256") == source_sha for r in (c, h)
+            )
+            records.append({"source_path": str(path.relative_to(candidate_root)),
+                            "source_sha256": source_sha, "source_unchanged": unchanged,
+                            "pass": passed,
+                            "concrete": {k: v for k, v in c.items() if k != "output_path"},
+                            "hypothesis": {k: v for k, v in h.items() if k != "output_path"}})
+    return records
+
+
+def _run_search(args, repair_args, repo, source_root, scratch):
+    """Coordinate existing engines; exhaustion is not an execution failure.
+
+    No catches convert crashes/replay failures into another search attempt.
+    All branch results must restore the same source and explicit test inputs.
+    """
+    strategy = args.get("repair_strategy", "guided")
+    if strategy not in ("guided", "iterative_then_guided"):
+        raise RepairAcceptanceError("REPAIR_STRATEGY_UNSUPPORTED")
+    attempts = []
+    if strategy == "iterative_then_guided":
+        from canonical.runtime.canonical_tree_attestation_v1 import tree_manifest
+        # Ignore only this owned path, not every directory sharing its basename.
+        owned_prefix = (scratch.relative_to(source_root).as_posix() + "/"
+                        if scratch.is_relative_to(source_root) else None)
+
+        def source_manifest():
+            manifest = tree_manifest(source_root)
+            return manifest, [row for row in manifest["files"]
+                              if owned_prefix is None or not row["path"].startswith(owned_prefix)]
+
+        before, before_files = source_manifest()
+        if before["pass"] is not True:
+            raise RepairAcceptanceError("PORTFOLIO_SOURCE_TREE_INVALID")
+        tests = {path: _sha((repo / path).read_bytes()) for path in repair_args["test_paths"]}
+
+        def check_restored(result):
+            after, after_files = source_manifest()
+            if (result.get("source_restored") is not True or after["pass"] is not True
+                    or after_files != before_files
+                    or any(_sha((repo / path).read_bytes()) != sha for path, sha in tests.items())):
+                raise RepairAcceptanceError("PORTFOLIO_INPUT_DRIFT")
+
+        iterative_args = {key: repair_args[key] for key in
+                          ("source_root", "test_paths", "test_argv", "timeout_s")}
+        iterative_args.update({"output_path": _rel(repo, scratch / "iterative.json"),
+                              "max_rounds": args.get("iterative_max_rounds", 6),
+                              "max_files": args.get("max_guided_files", 4),
+                              "max_candidates_per_file": args.get("iterative_candidates_per_file", 24),
+                              "max_total_candidates": args.get("iterative_max_candidates", 128)})
+        iterative = _REPAIR._STRICT.run(iterative_args, repo)
+        check_restored(iterative)
+        attempts.append({"engine": "iterative", "status": iterative["status"],
+                         "pass": iterative["pass"], "tested_candidate_count": iterative["tested_candidate_count"]})
+        if iterative.get("pass") is True:
+            if (iterative["status"] != "PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND"
+                    or len(iterative.get("final_verification_replays", [])) != 2
+                    or any(r.get("returncode") != 0 or r.get("timed_out") is not False
+                           for r in iterative["final_verification_replays"])):
+                raise RepairAcceptanceError("ITERATIVE_REPLAY_NOT_VERIFIED")
+            return {**iterative, "winner_mode": "ITERATIVE_STRICT_PROGRESS",
+                    "verification_replays": iterative["final_verification_replays"],
+                    "search_attempts": attempts}
+        if iterative["status"] not in ("OPEN__NO_STRICTLY_IMPROVING_CANDIDATE",
+                                       "OPEN__NO_COMPLETE_REPAIR_IN_BOUNDED_SEARCH"):
+            raise RepairAcceptanceError("ITERATIVE_SEARCH_DID_NOT_EXHAUST_NORMALLY")
+
+    guided = _REPAIR.run(repair_args, repo)
+    if strategy == "iterative_then_guided":
+        check_restored(guided)
+    attempts.append({"engine": "guided", "status": guided["status"], "pass": guided["pass"],
+                     "single_candidates_tested": guided["single_candidates_tested"],
+                     "pair_candidates_tested": guided["pair_candidates_tested"]})
+    return {**guided, "search_attempts": attempts}
+
+
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not isinstance(args,Mapping):
         raise RepairAcceptanceError("ARGS_NOT_OBJECT")
+    strategy = args.get("repair_strategy", "guided")
+    if strategy not in ("guided", "iterative_then_guided"):
+        raise RepairAcceptanceError("REPAIR_STRATEGY_UNSUPPORTED")
+    for key, maximum in (("iterative_max_rounds", 20), ("iterative_candidates_per_file", 5000),
+                         ("iterative_max_candidates", 50000)):
+        if key in args and (type(args[key]) is not int or not 1 <= args[key] <= maximum):
+            raise RepairAcceptanceError("ITERATIVE_LIMIT_INVALID:" + key)
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","."))
+    contract_checks = (_validate_contract_checks(args["contract_checks"], source_root)
+                       if "contract_checks" in args else None)
     test_paths=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
     if not test_paths:
         from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
@@ -233,13 +379,17 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not task_text:
         raise RepairAcceptanceError("TASK_TEXT_REQUIRED")
     output=_safe_output(repo,args.get("output_path"))
+    try:
+        fresh_output(repo, args.get("output_path"), "")
+    except ValueError as exc:
+        raise RepairAcceptanceError(str(exc)) from exc
     timeout=max(1,min(int(args.get("timeout_s",20)),120))
-    intermediate=output.parent/(".v8_repair_"+output.name)
+    output.parent.mkdir(parents=True, exist_ok=True)
     repair_args={
         "source_root":_rel(repo,source_root) if source_root!=repo else ".",
         "test_paths":[_rel(repo,p) for p in test_paths],
         "test_argv":argv,
-        "output_path":_rel(repo,intermediate),
+
         "timeout_s":timeout,
         "max_guided_files":args.get("max_guided_files",4),
         "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
@@ -248,11 +398,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         "max_control_files":args.get("max_control_files",12),
         "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
     }
-    try:
-        repair=_REPAIR.run(repair_args,repo)
-    finally:
-        if intermediate.exists():
-            intermediate.unlink()
+    with tempfile.TemporaryDirectory(prefix=".repair-search-", dir=output.parent) as temporary:
+        scratch = pathlib.Path(temporary)
+        repair_args["output_path"] = _rel(repo, scratch / "guided.json")
+        repair = _run_search(args, repair_args, repo, source_root, scratch)
     if repair.get("source_restored") is not True:
         raise RepairAcceptanceError("REPAIR_SOURCE_RESTORATION_NOT_PROVED")
     if repair.get("pass") is not True:
@@ -274,6 +423,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             temp_root=pathlib.Path(td)
             candidate_root=temp_root/"candidate"
             realized=_realize_candidate(repo,source_root,patches,candidate_root)
+            contract_results = (_check_candidate_contracts(contract_checks, candidate_root, temp_root)
+                                if contract_checks is not None else [])
+            contracts_pass = (bool(contract_results) and all(r["pass"] for r in contract_results)
+                              if contract_checks is not None else True)
             measurement=_MEASURE.run({
                 "source_root":"candidate",
                 "test_paths":rel_tests,
@@ -287,15 +440,26 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
                 root=temp_root,
                 response_text=(str(args["response_text"]) if args.get("response_text") is not None else None),
             )
-            accepted=acceptance.get("acceptance_stop_authorized") is True
+            accepted=acceptance.get("acceptance_stop_authorized") is True and contracts_pass
             result={
                 "schema":SCHEMA,"capability_id":CAPABILITY_ID,
-                "status":"PASS__REPAIR_REALIZED_MEASURED_AND_ACCEPTED" if accepted else "OPEN__REPAIR_FOUND_BUT_MEASURED_ACCEPTANCE_NOT_CLEARED",
+                "status":("PASS__REPAIR_REALIZED_MEASURED_AND_ACCEPTED" if accepted else
+                          "OPEN__REPAIR_FOUND_BUT_CONTRACT_CHECKS_NOT_CLEARED" if not contracts_pass else
+                          "OPEN__REPAIR_FOUND_BUT_MEASURED_ACCEPTANCE_NOT_CLEARED"),
                 "pass":accepted,"repair_pass":True,
                 "acceptance_stop_authorized":accepted,
                 "repair_status":repair.get("status"),
                 "winner_mode":repair.get("winner_mode"),
+                "repair_search":{key:repair.get(key) for key in (
+                    "single_candidates_tested", "pair_candidates_tested", "verification_replays",
+                    "provenance_hypothesis_count", "crossed_nonmonotonic_valley", "guidance",
+                    "rounds", "accepted_edit_count", "tested_candidate_count", "search_attempts")},
                 "realized_patches":realized,
+                "patches":patches if accepted else [],
+                "contract_checks":contract_results,
+                "contract_checks_pass":contracts_pass if contract_checks is not None else None,
+                "contract_checks_executed":bool(contract_results),
+                "independent_semantic_oracle_credit":False,
                 "candidate_subject_snapshot_sha256":(measurement.get("subject") or {}).get("snapshot_sha256"),
                 "measurement_receipt_payload_sha256":measurement.get("receipt_payload_sha256"),
                 "measurement_program_sha256":measurement.get("measurement_program_sha256"),
@@ -316,12 +480,15 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
                     "NO_FRONTIERCODE_SCORE_OR_TERMINAL_CREDIT",
                 ],
             }
-    output.parent.mkdir(parents=True,exist_ok=True)
-    output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
-    raw=output.read_bytes()
-    return {
-        **result,
-        "output_path":_rel(repo,output),
-        "output_sha256":_sha(raw),
-        "output_verified":True,
-    }
+    result["repair_strategy"] = strategy
+    result["requested_contract_checks"] = contract_checks
+    result["contract_check_spec_sha256"] = (
+        _sha(json.dumps(contract_checks, sort_keys=True, separators=(",", ":")).encode())
+        if contract_checks is not None else None)
+    try:
+        published = publish_report(repo, output, result)
+    except FileExistsError as exc:
+        raise RepairAcceptanceError("OUTPUT_ALREADY_EXISTS") from exc
+    # This controller's legacy field describes the artifact, not task success.
+    # Preserve it without marking an intact failed-search report as accepted.
+    return {**published, "output_verified": published["artifact_integrity_verified"]}
