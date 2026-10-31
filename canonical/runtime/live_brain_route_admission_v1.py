@@ -1976,7 +1976,12 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     # no gate asked whether the stated effect happened.  The Python rows that really lint declare
     # it (static_triage / ruff, type_gate / mypy); a language with no linter row now refuses by
     # name instead of passing on a parse.
-    (re.compile(r"\blint\b|\bformat(?:ting)?\b|\btype[- ]?check\b|\bmypy\b|\bruff\b",
+    # ``static analysis`` is how an engineer names the same demand without saying "lint".
+    # Measured 2026-10-31 (V4 §2): "Run a static analysis pass on canonical/runtime" was
+    # routed on the single token ``pass`` to python.tests.audit.unittest -- which ran a test
+    # corpus and certified it, having analysed nothing.
+    (re.compile(r"\blint\b|\bformat(?:ting)?\b|\btype[- ]?check\b|\bmypy\b|\bruff\b"
+                r"|\bstatic\s+analysis\b|\banalysis\s+pass\b",
                 re.IGNORECASE),
      re.compile(r"\blint\w*|\bruff\b|\bflake8\b|\beslint\b|\bpyright\b|\bpylint\b"
                 r"|\bformat\w*|\bblack\b|\bautopep8\b|\bprettier\b|\btype[-_ ]?gate\b"
@@ -2568,6 +2573,57 @@ def _declares_no_source_write_authority(entry: Mapping[str, Any]) -> bool:
     return _wa.declares_no_source_write_authority(entry)
 
 
+# A MEASUREMENT IS NOT A RUN, AND A NAME IS NOT AN EFFECT.
+#
+# Measured 2026-10-31 (V4 §2, §3) on three sentences in a 61-sentence corpus:
+#
+#     "Run the script canonical/runtime/goal_compilation_benchmark_v1.py"     -> PASS
+#     "Run a static analysis pass on canonical/runtime"                       -> PASS
+#     "Run the tests in canonical/tests/test_swe_typed_plan_v1.py"            -> PASS
+#
+# all three answered by ``python.repository.acceptance.measure.v1``.  That row hashes a tree and
+# reports what it measured, and it says so itself: ``hard_nonclaims[0]`` is
+# ``MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE``, ``terminal_authority`` is false, and the run's
+# ``test_evidence`` carries ``test_count: 0, returncode: 1``.  Nothing in it executes the named
+# script or the named test file.
+#
+# It was admitted because the surface this door reads included the capability ID -- and that id
+# contains the word ``acceptance``, which is a token in the supplied-side regex for
+# ``STATED_TEST_RUN_NOT_EXECUTED_BY_CAPABILITY``.  So the row that says "I am not a test run"
+# satisfied the rule written to catch exactly that.  What a row PRODUCES is its ``provides``; an
+# id is what somebody called it.  Only the declaration is read here, and a measurement that
+# declares no execution result cannot answer a sentence whose own verb is execute.
+_RUN_REQUEST_RE = re.compile(r"^\s*(?:please\s+|now\s+|kindly\s+|can\s+you\s+|could\s+you\s+"
+                             r"|would\s+you\s+|i\s+want\s+you\s+to\s+)*(?:re)?(?:run|execute|exec)\b",
+                             re.IGNORECASE)
+_MEASUREMENT_SURFACE_RE = re.compile(r"\bmeasur\w*|content[._-]addressed|\bacceptance\b", re.IGNORECASE)
+# A repository measurement may legitimately answer "run the test suite in <dir>": it does run a
+# declared command there and report whether the tree is green (pinned by
+# test_a_deliverable_is_not_a_measurement_v1).  It provably cannot run ONE named file, and it
+# performs no analysis.  Those two subjects, and only those, are refused.
+_SUBJECT_FILE_RE = re.compile(
+    r"\b[\w./-]*[\w-]\.(?:py|pyw|sh|bash|js|mjs|cjs|ts|rb|go|rs|java|pl|php)\b", re.IGNORECASE)
+_ANALYSIS_SURFACE_RE = re.compile(
+    r"\bstatic\s+analysis\b|\banaly[sz]e\b|\banalysis\b|\blint\b|\btype[ _-]?check\b",
+    re.IGNORECASE)
+_EXECUTION_SURFACE_RE = re.compile(
+    r"\brun\w*|\bexecut\w*|\bsuite\b|\bpytest\b|\bunittest\b|\bcommand\b|\bprocess\b"
+    r"|\blaunch\w*|\brecords\b|\bexit[._-]?code\b|\breturncode\b|\bshell\b", re.IGNORECASE)
+
+# A DIAGNOSIS IS NOT A TEST SELECTION.
+#
+# Measured in the same run: "Find the fault in <f> that makes the test fail" was answered by
+# ``code.impact.tree_sitter.testselect.v1`` (``selected_test_count: 1``, ``affected_file_count:
+# 173``) -- a list of tests to run, with nothing localized -- and certified.  The repository
+# contains a fault localizer (``python_dynamic_fault_localizer_v1``, Ochiai ranking) and a
+# provenance tracer; neither is reachable, and a selector must not stand in for them.
+_DIAGNOSE_REQUEST_RE = re.compile(
+    r"\bfault\b|\broot[ _-]?cause\b|\bwhy\s+(?:does|did|is|are|do)\b"
+    r"|\blocali[sz]e\b|\bdiagnos\w*\b|\bblames?\b", re.IGNORECASE)
+_DIAGNOSE_SURFACE_RE = re.compile(
+    r"fault|locali[sz]|diagnos|debug|root[._-]?cause|ochiai|trace|blame", re.IGNORECASE)
+
+
 def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -> list[str]:
     """Refuse the wrong KIND of row -- reader-for-a-transform, writer-for-a-question, python-for-js."""
     out: list[str] = []
@@ -2614,6 +2670,17 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
             and not _LANGUAGE_SURFACE_RE.search(surface)):
         out.append("STATED_LANGUAGE_NOT_SERVED_BY_CAPABILITY:%s:%s"
                    % (language.group(1).lower(), cid or "UNNAMED"))
+    # Read the row's DECLARATION, never its id or its keywords: both are names, and a name is
+    # how the measurement row above came to satisfy the test-run rule it contradicts.
+    declaration = " ".join([str(x) for x in (entry.get("provides") or [])]
+                           + [str(x) for x in (entry.get("target_effects") or [])]
+                           + [str(x) for x in (entry.get("result_fields") or [])])
+    if (_RUN_REQUEST_RE.search(text) and _MEASUREMENT_SURFACE_RE.search(declaration)
+            and not _EXECUTION_SURFACE_RE.search(declaration)
+            and (_SUBJECT_FILE_RE.search(text) or _ANALYSIS_SURFACE_RE.search(text))):
+        out.append("STATED_EXECUTION_ANSWERED_BY_A_MEASUREMENT:" + (cid or "UNNAMED"))
+    if _DIAGNOSE_REQUEST_RE.search(text) and not _DIAGNOSE_SURFACE_RE.search(declaration):
+        out.append("STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
     return out
 
 
@@ -3364,6 +3431,49 @@ def _written_artifacts(result: Mapping[str, Any]) -> list[dict[str, Any]]:
     return docs
 
 
+# AN "EVERY X" ANSWER MUST BE ABLE TO CONTAIN EVERY X.
+#
+# Measured 2026-10-31 (V4 §4): "Find every caller of build_plan in
+# canonical/runtime/swe_typed_plan_v1.py" was answered by an index whose ``source_root`` was
+# **that same file**, so ``callers_of["build_plan"]`` held the one call site inside it
+# (``["plan_report"]``) and the delivered answer said ``count: 1, truncated: false``.  The truth
+# is seven call sites in five modules (astra_runtime.py, python_crossfile_edit_choreograph.py,
+# live_brain_route_admission_v1.py x4, root3_declared_artifact_finalizer_v1.py, and line 683 of
+# the file itself).  A search that looked only inside the defining file has not established a
+# completeness claim, whatever its rows say, so the claim is withheld and named.
+_REFERENCE_COMPLETENESS_RE = re.compile(
+    r"\b(?:every|all)\s+(?:the\s+)?(?:callers?|call\s*sites?|references?|readers?|importers?)\b"
+    r"|\bwho\s+calls\b|\bwhich\s+(?:modules?|files?)\s+import\b"
+    r"|\bevery\s+place\s+that\s+(?:reads|uses|calls)\b",
+    re.IGNORECASE)
+
+
+def _scope_claim_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
+    """Refuse a completeness claim the searched scope cannot support.
+
+    Cheap to answer: the sentence is read first and the artifacts only when it asks for a
+    complete enumeration.
+    """
+    text = str(goal or "")
+    if not _REFERENCE_COMPLETENESS_RE.search(text):
+        return []
+    for doc in _written_artifacts(result):
+        if not isinstance(doc, Mapping):
+            continue
+        scope = doc.get("source_root") or doc.get("scope") or doc.get("root")
+        if not isinstance(scope, str) or not scope.strip():
+            continue
+        totals = doc.get("totals") if isinstance(doc.get("totals"), Mapping) else {}
+        files = totals.get("files") if isinstance(totals, Mapping) else None
+        if not isinstance(files, int):
+            files = doc.get("parsed_file_count") or doc.get("file_count")
+        # A single-file scope is the one case that is provably too small to answer "every X":
+        # a call site can live in any other module, and one file is not the codebase.
+        if scope.strip().endswith((".py", ".pyw")) and files in (None, 1, 0):
+            return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
+    return []
+
+
 def stated_answer_payload_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
     """The answer the sentence named, checked against the artifact the run wrote.
 
@@ -3493,6 +3603,15 @@ def _close_observations(result: dict[str, Any], goal: str,
             result["pass"] = False
             result["failure_class"] = "STATED_ANSWER_NOT_PROVIDED"
             result["stated_answer_payload_errors"] = unanswered_payload
+            return result
+    if result.get("pass") is True:
+        unproven_scope = _scope_claim_errors(goal, result)
+        if unproven_scope:
+            result["runtime_status_before_scope_check"] = result.get("status")
+            result["status"] = "FAIL_CLOSED__ANSWER_SCOPE_UNPROVEN"
+            result["pass"] = False
+            result["failure_class"] = "ANSWER_SCOPE_UNPROVEN"
+            result["unproven_scope"] = unproven_scope
             return result
     # THE ANSWER MUST BE THE ANSWER.  A PASS whose payload cannot answer the sentence is a
     # wrong answer with a certificate on it, and this is the one exit every path passes

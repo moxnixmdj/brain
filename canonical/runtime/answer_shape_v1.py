@@ -53,10 +53,19 @@ from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_ANSWER_SHAPE_V1"
 
-# An artifact bigger than this is not read to answer a sentence.  ``code.index`` writes 108 MB
-# for this repository; loading it costs ~2 s and 1.5 GB of RSS to look for a field that is not
-# there.  Over the cap the run is refused with its reason rather than paid for.
+# An artifact bigger than this is not read WHOLE to answer a sentence.  ``code.index`` writes
+# 108 MB for this repository; loading it costs ~2 s and 1.5 GB of RSS to look for a field that is
+# not there.  Over the cap the gate reads the artifact's LEADING TOP-LEVEL MEMBERS inside
+# MAX_SECTION_BYTES and stops at the first member that does not fit (see ``_read_sections``).
 MAX_ARTIFACT_BYTES = 16 * 1024 * 1024
+# How much of an over-cap artifact is read.  Measured 2026-10-31 on 34f867a:
+# ``python.source.symbols.index.ast`` writes **105.8 MB** for ``canonical/runtime``, of which
+# ``callers_of`` -- the field a caller question asks for -- is **1.47 MB** and is the FIRST
+# top-level member.  The gate refused the whole run with ARTIFACT_TOO_LARGE, so the machine
+# computed the answer, wrote it to disk, and threw it away: 16.5-18.7 s to a refusal, while the
+# same sentence about one file was answered in 293 ms.  A size cap must stop the gate paying for
+# a 108 MB parse to find nothing; it must not stop it paying for the 1.5 MB it needs.
+MAX_SECTION_BYTES = 8 * 1024 * 1024
 # Projection never walks more than this many containers.  The shapes in this repository are
 # three levels deep (files[].functions, modules[].calls, callers_of[k]); a deeper walk would be
 # a search, and a search is not a projection.
@@ -213,6 +222,16 @@ def _project(payload: Mapping[str, Any], shape: Mapping[str, Any]) -> tuple[str,
             # `totals.functions = 10` was answering "list the functions" before
             # `files[0].functions = [...]` was looked at.  The path decides, not the leaf.
             under_summary = any(seg in _NON_ANSWER_FIELDS for seg in path.split(".")[:-1])
+            # AN ELEMENT OF A LIST IS NOT THE COLLECTION.  Measured 2026-10-31 (V4 §5):
+            # "Which tests does <f> break" was delivered ``records.0.tests`` = 0 -- the test
+            # count of the FIRST record of an audit, because the walk descended into the list
+            # and matched the noun inside element 0.  A scalar under a numeric segment is one
+            # item of an enumeration, never the enumeration itself; skipping it turns a
+            # certified wrong number into a named refusal (ANSWER_SHAPE_UNSERVED).
+            if (shape.get("kind") == "ENUMERATE"
+                    and not isinstance(value, (Mapping, list, tuple))
+                    and any(seg.isdigit() for seg in path.split(".")[:-1])):
+                continue
             if (low in aliases and low not in _NON_ANSWER_FIELDS and not under_summary
                     and not _COUNT_FIELD.search(low) and _is_answer_value(value)):
                 return path, value
@@ -229,6 +248,64 @@ def _artifact_path(inner: Mapping[str, Any]) -> pathlib.Path | None:
     return None
 
 
+def _read_sections(path: pathlib.Path, budget: int = MAX_SECTION_BYTES) -> tuple[Any, str | None]:
+    """The leading top-level members of a JSON object that fit inside ``budget`` bytes.
+
+    What comes back is byte-identical to those members in the file: each value is decoded
+    whole with ``json.JSONDecoder.raw_decode`` or not at all, so nothing is sampled, guessed
+    or truncated inside a value.  The walk stops at the first member whose value runs past
+    the budget, which is why the order of the file matters -- a writer that sorts its keys
+    puts a compact answer section before a bulk one, and ``python_source_symbol_index`` does.
+
+    When no member fits, the caller's original refusal stands: an artifact the gate cannot
+    read is still an artifact it will not answer from.
+    """
+    try:
+        with path.open("rb") as handle:
+            raw = handle.read(budget)
+    except OSError as exc:
+        return None, "ARTIFACT_UNREADABLE:" + type(exc).__name__
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        # A budget cut through a multi-byte character says nothing about the artifact.
+        text = raw.decode("utf-8", errors="ignore")
+    decoder = json.JSONDecoder()
+    index = text.find("{")
+    if index < 0:
+        return None, "ARTIFACT_NOT_A_JSON_OBJECT"
+    index += 1
+    end = len(text)
+    out: dict[str, Any] = {}
+    while index < end:
+        while index < end and text[index] in " \t\r\n,":
+            index += 1
+        if index >= end or text[index] == "}":
+            break
+        if text[index] != '"':
+            break
+        try:
+            key, index = decoder.raw_decode(text, index)
+        except ValueError:
+            break
+        while index < end and text[index] in " \t\r\n":
+            index += 1
+        if index >= end or text[index] != ":":
+            break
+        index += 1
+        while index < end and text[index] in " \t\r\n":
+            index += 1
+        try:
+            value, index = decoder.raw_decode(text, index)
+        except ValueError:
+            # This member did not fit.  Everything decoded before it is still exact.
+            break
+        out[str(key)] = value
+    if not out:
+        return None, "ARTIFACT_TOO_LARGE"
+    return out, None
+
+
 def _read_artifact(path: pathlib.Path, root: pathlib.Path | None) -> tuple[Any, str | None]:
     """The parsed artifact, or a reason it could not be used."""
     try:
@@ -239,7 +316,7 @@ def _read_artifact(path: pathlib.Path, root: pathlib.Path | None) -> tuple[Any, 
             return None, "ARTIFACT_MISSING"
         size = resolved.stat().st_size
         if size > MAX_ARTIFACT_BYTES:
-            return None, "ARTIFACT_TOO_LARGE:%d" % size
+            return _read_sections(resolved)
         return json.loads(resolved.read_text(encoding="utf-8", errors="replace")), None
     except (OSError, ValueError) as exc:
         return None, "ARTIFACT_UNREADABLE:" + type(exc).__name__
@@ -271,6 +348,63 @@ def _bounded(value: Any, limit: int = 50) -> Any:
     return value
 
 
+# A LOOKUP IS ANSWERED BY WHAT THE ROW OBSERVED.  ``asked()`` deliberately returns None for
+# a state question -- "Show the status of the working tree" is not a collection, and the law
+# ``test_a_lookup_and_a_count_are_not_enumerations`` pins that.  But returning None also meant
+# returning nothing at all: measured 2026-10-31, that sentence PASSed on
+# ``git.repository.operate.v1`` with ``answer: null`` while the row's ``observed_effect`` held
+# ``{op: status, branch: ..., entry_count: 0, staged: 0}`` -- the answer was produced and then
+# dropped on the floor.  That is the "correct but no answer" class (6 of 61 in the V4 baseline),
+# and the fix is not a new taxonomy: every row already states what it observed, so a PASS that
+# answered nothing hands over that statement.
+_OBSERVATION_FIELDS: tuple[str, ...] = ("observed_effect", "observation", "state", "snapshot")
+
+
+def _observation_hit(inner: Mapping[str, Any]) -> tuple[str, Mapping[str, Any]] | None:
+    for field in _OBSERVATION_FIELDS:
+        value = inner.get(field)
+        if isinstance(value, Mapping) and value:
+            return field, value
+    return None
+
+
+def deliver_observation(result: "dict[str, Any]") -> list[str]:
+    """Hand over what a row observed when the sentence asked no collection.
+
+    Only called when the result already PASSed and nothing has been delivered, so it can add
+    an answer but never replace one, and it never changes a verdict.
+    """
+    if result.get("answer") is not None:
+        return []
+    rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
+    if not rows:
+        for step in ((result.get("composer_execution") or {}).get("steps") or []):
+            if isinstance(step, Mapping) and isinstance(step.get("result"), Mapping):
+                rows.append({"capability_id": step.get("capability_id"), "result": step["result"]})
+    for row in rows:
+        inner = row.get("result") if isinstance(row.get("result"), Mapping) else None
+        if inner is None:
+            continue
+        hit = _observation_hit(inner)
+        if hit is None:
+            continue
+        field, value = hit
+        count = len(value)
+        shown = _bounded(dict(value))
+        shown_len = len(shown) if isinstance(shown, (Mapping, list, tuple)) else 1
+        result["answer"] = {
+            "schema": SCHEMA,
+            "noun": "observation",
+            "field": field,
+            "source": "result",
+            "count": count,
+            "value": shown,
+            "truncated": shown_len < count,
+        }
+        return []
+    return []
+
+
 def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = None) -> list[str]:
     """Deliver the answer the sentence asked for, or say why it cannot be delivered.
 
@@ -280,7 +414,7 @@ def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = No
     """
     shape = asked(goal)
     if shape is None:
-        return []
+        return deliver_observation(result)  # type: ignore[arg-type]
     rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
     if not rows:
         for step in ((result.get("composer_execution") or {}).get("steps") or []):

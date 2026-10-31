@@ -1,13 +1,24 @@
-# The sandbox substrate: pip installs outside /home/user EVAPORATE between
-# turns (measured twice: tree_sitter generation mismatch broke 3 tree-sitter
-# capabilities; missing mypy/ruff/bandit degraded the chain gates to
-# PASS_BASELINE_ONLY). Pinned to the exact generation the capabilities were
-# harvested and verified against. One command restores:
-#   pip install --break-system-packages -r substrate-requirements.txt
-tree_sitter==0.21.3
-tree_sitter_languages==1.10.2
-mypy
-ruff
-bandit
-coverage
-pytest
+# REVIEW-GATE TOOLS ONLY.  Everything else lives in the pinned, hashed manifest.
+#
+# `requirements/software_engineering_kernel_v1.txt` pins the kernel substrate by exact version and
+# SHA-256 (tree_sitter, tree_sitter_languages, hypothesis, crosshair-tool, z3-solver, pytest, ...).
+# This file adds the four tools the review gates drive and the kernel does not need:
+# python.review.diff_static_triage.v1 (ruff), python.review.diff_type_gate.v1 (mypy),
+# python.review.diff_security_gate.v1 (bandit), and the mutation/coverage lane (coverage).
+#
+# TWO FILES, NEVER ONE: pip switches the WHOLE install set into `--require-hashes` mode as soon as
+# any line carries a hash, so a single file that mixes the hashed manifest with unpinned extras is
+# not installable at all.  Measured 2026-10-31 on 5ad1222: `pip install -r substrate-requirements.txt`
+# failed with "In --require-hashes mode, all requirements must have their versions pinned with ==",
+# and the sandbox went from 6 of 10 tools to 0 of 10.  The restore step is therefore explicit and
+# sequential, and it verifies itself afterwards:
+#
+#   python3 scripts/restore_substrate_v1.py
+#
+# Versions are exact because the matrix measures these tools by name and a resolver choosing a
+# different major would change a verdict.  They are not hashed because they are not the security
+# boundary; the kernel substrate is.
+mypy==2.4.1
+ruff==0.17.3
+bandit==1.9.4
+coverage==7.17.0

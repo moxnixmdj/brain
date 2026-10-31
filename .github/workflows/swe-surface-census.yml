@@ -17,6 +17,9 @@ name: swe-surface-census
 # When a change raises it, raise the floor in the same pull request -- that is the
 # only way the guard keeps meaning what it says.
 #
+# 2026-10-31: 25 -> 28. The census reached 28/28 on this tree, so "every sentence the
+# machine could already complete" is now all 28 of them.
+#
 # There is deliberately NO paths filter. Every capability row, the derivation of
 # its inputs, the front door that admits it and the adapters that execute it are
 # in scope, and a filter would miss exactly the change that breaks one of them.
@@ -30,7 +33,7 @@ on:
       floor:
         description: "Minimum number of the 28 sentences that must reach a verified outcome"
         required: false
-        default: "25"
+        default: "28"
 
 permissions:
   contents: read
@@ -54,7 +57,7 @@ jobs:
         shell: bash
         run: |
           FLOOR="${{ github.event.inputs.floor }}"
-          FLOOR="${FLOOR:-25}"
+          FLOOR="${FLOOR:-28}"
           python hardcore_swe_surface_probe_20261030.py \
             --jobs 4 --json /tmp/census.json --floor "$FLOOR" 2>&1 | tee /tmp/census.log
 
