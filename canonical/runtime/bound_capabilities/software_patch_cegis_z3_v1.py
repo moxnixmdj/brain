@@ -65,7 +65,8 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
     ]
 
     for src_file in py_sources:
-        orig_text = src_file.read_text(encoding="utf-8")
+        original_bytes = src_file.read_bytes()
+        orig_text = original_bytes.decode("utf-8")
         try:
             tree = ast.parse(orig_text)
         except SyntaxError:
@@ -103,13 +104,20 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
                 ast.parse(cand_text)
             except SyntaxError:
                 continue
+            accepted = False
             try:
                 src_file.write_text(cand_text, encoding="utf-8")
+                # Equal-sized edits can otherwise reuse the baseline's timestamp
+                # based pyc. Reuse the test-guided search's invalidation boundary.
+                patch_mod._purge_source_bytecode(src_file)
                 post_run = patch_mod._run_tests(repo, argv, timeout, env)
+                accepted = (post_run.get("returncode") == 0
+                            and not post_run.get("timed_out", False))
             finally:
-                if not args.get("apply_in_place"):
-                    src_file.write_text(orig_text, encoding="utf-8")
-            if int(post_run.get("returncode", 1)) == 0:
+                if not (accepted and args.get("apply_in_place")):
+                    src_file.write_bytes(original_bytes)
+                patch_mod._purge_source_bytecode(src_file)
+            if accepted:
                 rel_src = src_file.relative_to(repo).as_posix()
                 udiff = "".join(
                     difflib.unified_diff(
