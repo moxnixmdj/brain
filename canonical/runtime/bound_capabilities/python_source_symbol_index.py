@@ -54,41 +54,47 @@ def _py_files(source_root):
                              for part in path.relative_to(source_root).parts))
 
 
+# Process-local attestations of bytes this producer actually derived. Neither a
+# source digest nor a self-reported row digest authenticates persisted semantics.
+# New processes rederive once; warm requests and sibling outputs retain reuse.
+_TRUSTED_OUTPUTS: dict[str, str] = {}
+
+
+def _remember_output(output, data):
+    digest = hashlib.sha256(data).hexdigest()
+    key = str(output)
+    _TRUSTED_OUTPUTS.pop(key, None)
+    _TRUSTED_OUTPUTS[key] = digest
+    while len(_TRUSTED_OUTPUTS) > 128:
+        _TRUSTED_OUTPUTS.pop(next(iter(_TRUSTED_OUTPUTS)))
+    return digest
+
+
 def _cached_modules(output):
-    """Module rows a previous run of this same index already proved, by path.
-
-    THE INDEX HAD NO MEMORY.  Measured 2026-10-30 on ``canonical/runtime``:
-    2 255 modules, 596 039 references, 97 623 definitions -- 19.4 s cold and
-    16.3 s for the SAME question on the SAME unchanged tree, because every file
-    was re-parsed and every reference re-materialised for an answer the previous
-    run had already written to disk.  The tree-sitter incremental index next door
-    has carried the fix since it was written: keep the previous artifact's rows,
-    verify each one, and re-parse only the files whose bytes actually changed.
-    This is that rule, on the same verification, for the Python index.
-
-    A row is reused only when its source sha256 matches the file on disk AND the
-    row's own sha256 verifies, so a hand-edited or truncated artifact cannot feed
-    a stale definition into a rename.
-    """
-    if not output.is_file():
+    """Reuse persisted rows only when their exact bytes have producer provenance."""
+    _CACHE_META.clear()
+    expected = _TRUSTED_OUTPUTS.get(str(output))
+    if expected is None or not output.is_file():
         return {}
     try:
-        old = json.loads(output.read_text(encoding="utf-8"))
+        data = output.read_bytes()
+        digest = hashlib.sha256(data).hexdigest()
+        if expected != digest:
+            return {}
+        old = json.loads(data)
     except (OSError, ValueError):
         return {}
-    return _rows_from_artifact(old)
+    rows = _rows_from_artifact(old)
+    _CACHE_META.update(output_path=str(output), digest=digest)
+    return rows
 
 
 def _rows_from_artifact(old) -> dict:
     """Module rows an already-verified index artifact proved, by path."""
     if not isinstance(old, dict) or old.get("schema") != "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1":
         return {}
-    # The SOURCE is the authority, not the cache.  Every row reused below is
-    # checked against the sha256 of the file's current bytes, so a stale row can
-    # only survive if the file it describes is byte-identical -- in which case a
-    # fresh parse would produce that same row.  Re-hashing each row here was
-    # measured at 5.6 s over 2 255 modules (the artifact is 167 MiB) and bought
-    # nothing a content-addressed cache needs.
+    # Called only after exact artifact bytes are authenticated by this producer.
+    # Current source bytes are checked separately before any row can be reused.
     reusable = {}
     for row in old.get("modules") or []:
         if isinstance(row, dict):
@@ -125,16 +131,8 @@ def _cached_modules_for_tree(output, source_root_rel, limit=3):
     except OSError:
         return {}
     for candidate in siblings:
-        try:
-            old = json.loads(candidate.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            continue
-        if not isinstance(old, dict):
-            continue
-        if str(old.get("source_root") or "") != str(source_root_rel):
-            continue
-        rows = _rows_from_artifact(old)
-        if rows:
+        rows = _cached_modules(candidate)
+        if rows and _CACHE_META.get("source_root") == str(source_root_rel):
             return rows
     return {}
 
@@ -145,10 +143,11 @@ def _row_sha(row):
 
 
 def validate_cached_index(repo, source_root, artifact):
-    """Validate source identity without reparsing cached semantic records.
+    """Validate current source identity and the provenance of cached semantics.
 
-    Both parsed and unparseable files belong to the manifest. This detects
-    content/membership drift, not forged semantics or concurrent tree writes.
+    Known producer bytes avoid rederivation. Unknown dictionaries must exactly
+    match a fresh derivation; checksums alone are not authenticity evidence.
+    This is not a source snapshot or a concurrent-writer isolation boundary.
     """
     repo = pathlib.Path(repo).resolve()
     source_root = pathlib.Path(source_root).resolve()
@@ -180,6 +179,13 @@ def validate_cached_index(repo, source_root, artifact):
     for name, path in current.items():
         if hashlib.sha256(path.read_bytes()).hexdigest() != expected[name]:
             raise RuntimeError("INDEX_CACHE_SOURCE_STALE:" + name)
+
+    canonical = (json.dumps(artifact, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    digest = hashlib.sha256(canonical).hexdigest()
+    if digest not in _TRUSTED_OUTPUTS.values():
+        if artifact != build_index(source_root, repo):
+            raise RuntimeError("INDEX_CACHE_DERIVATION_UNTRUSTED")
+
 
 
 def _signature(node):
@@ -545,22 +551,19 @@ def run(args, root):
     reference_total = report["totals"]["references"]
     call_edge_total = report["totals"]["call_edges"]
     unchanged = (reused == len(modules) and output.is_file()
+                 and _CACHE_META.get("output_path") == str(output)
                  and _CACHE_META.get("source_root") == str(source_root.relative_to(repo)).replace("\\", "/")
                  and list(_CACHE_META.get("unparseable") or []) == unparseable)
-    if unchanged:
-        # Every module came from this file and the source root is the one it
-        # describes, so the bytes on disk ARE the artifact this run would write.
-        # Re-rendering 167 MiB to prove it was measured at 1.2 s per question.
-        data = output.read_bytes()
-    else:
+    data = output.read_bytes() if unchanged else None
+    if data is None or hashlib.sha256(data).hexdigest() != _CACHE_META.get("digest"):
         output.parent.mkdir(parents=True, exist_ok=True)
-        raw_bytes = (json.dumps(report, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
-        output.write_bytes(raw_bytes)
-        data = raw_bytes
+        data = (json.dumps(report, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        output.write_bytes(data)
+    output_sha = _remember_output(output, data)
     return {
         "adapter": "python_source_symbol_index",
         "output_path": str(output.relative_to(repo)).replace("\\", "/"),
-        "output_sha256": hashlib.sha256(data).hexdigest(),
+        "output_sha256": output_sha,
         "output_verified": True,
         "file_count": len(modules),
         "unparseable_count": len(unparseable),
