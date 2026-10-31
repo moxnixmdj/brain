@@ -1,0 +1,216 @@
+{
+  "action_id": "A_REQUEST_IS_NOT_DAMAGE_V1_20261031_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "action_summary": "THE HARNESS CALLED A CORRECT RUN DAMAGE. python.refactor.add_parameter.v1 added the parameter the sentence asked for, the oracle agreed, and the case still reported DAMAGED because its matrix entry carried no allow list -- so the one file the goal named counted as a file nobody asked for. One line, in the same place every repair case has said this since the lane existed.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "execution_guard/swe_capability_matrix_v1.py",
+      "canonical/action_intents/A_REQUEST_IS_NOT_DAMAGE_V1_20261031_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_DAMAGE_ORACLE_ASKED_WHETHER_A_FILE_CHANGED_WITHOUT_ASKING_WHETHER_THE_REQUEST_NAMED_THAT_FILE__MEASURED_2026_10_31_ON_add_parameter_WHICH_REAL_AND_DAMAGED_IN_THE_SAME_ROW",
+  "canonical_base_commit": "d669df4cef9a756cb58cd791e7d3827ea397da29",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_DAMAGE_ORACLE_ASKED_WHETHER_A_FILE_CHANGED_WITHOUT_ASKING_WHETHER_THE_REQUEST_NAMED_THAT_FILE__MEASURED_2026_10_31_ON_add_parameter_WHICH_REAL_AND_DAMAGED_IN_THE_SAME_ROW",
+  "date": "2026-10-31",
+  "expected_parent_change": "THE_CASE_DECLARES_THE_FILE_ITS_OWN_SENTENCE_ASKS_TO_CHANGE__AS_THE_REPAIR_CASES_ALWAYS_HAVE",
+  "expected_parent_frontier_change": "THE_CASE_DECLARES_THE_FILE_ITS_OWN_SENTENCE_ASKS_TO_CHANGE__AS_THE_REPAIR_CASES_ALWAYS_HAVE",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. And merge all of your work.\"",
+  "falsification_condition": "REMOVE_THE_ALLOW_LIST_AND_THE_SAME_CORRECT_RUN_IS_REPORTED_DAMAGED_AGAIN",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "execution_guard/swe_capability_matrix_v1.py",
+    "canonical/action_intents/A_BISECT_COSTS_THE_TREE_IT_NAMES_V1_20261031_V1.json"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "d669df4cef9a756cb58cd791e7d3827ea397da29",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "ASSUMING_AN_EMPTY_ALLOW_LIST_MEANS_NOBODY_ALLOWED_ANYTHING"
+    ],
+    "expected_parent_level_state_change": "THE_CASE_DECLARES_THE_FILE_ITS_OWN_SENTENCE_ASKS_TO_CHANGE__AS_THE_REPAIR_CASES_ALWAYS_HAVE",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "REVERTING_RESTORES_A_FALSE_DAMAGE_REPORT_OVER_A_CORRECT_RUN",
+      "intrinsic_or_path_specific": "GENERAL__ANY_CASE_WHOSE_SENTENCE_NAMES_A_FILE_TO_CHANGE_MUST_DECLARE_IT",
+      "surviving_causal_blocker": "THE_DAMAGE_ORACLE_ASKED_WHETHER_A_FILE_CHANGED_WITHOUT_ASKING_WHETHER_THE_REQUEST_NAMED_THAT_FILE__MEASURED_2026_10_31_ON_add_parameter_WHICH_REAL_AND_DAMAGED_IN_THE_SAME_ROW"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_CAPABILITY_TOUCHED__ONE_MATRIX_ENTRY_DECLARES_WHAT_ITS_SENTENCE_ASKS_FOR",
+      "existing_inherited_routes_checked": [
+        "swe_capability_matrix_v1",
+        "live_brain_route_admission_v1"
+      ],
+      "external_existing_routes_checked": "None needed: the allow list is in the harness.",
+      "surviving_gap": "None for this case; the other forty-odd cases already declare their targets or touch nothing."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "COUNTING_A_CORRECT_RUN_AS_DAMAGE",
+        "RAISING_REAL_BY_LOWERING_THE_DAMAGE_BAR"
+      ],
+      "real_outcome": "A run that does exactly what the sentence asked is scored REAL and not DAMAGED.",
+      "surviving_necessity": "The damage oracle exists to catch a file nobody asked for; the sentence named this file, so the oracle was answering the wrong question for exactly one case."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_SHAPE_RULE_THE_EXISTING_EXIT_AND_THE_EXISTING_ORACLE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_DAMAGE_DIAGNOSIS_WAS_ONE_RUN_THAT_PRINTED_THE_CHANGED_PATH_AND_THE_ALLOW_LIST",
+      "search_stop_decision": "STOPPED_WHEN_THE_ONLY_DAMAGED_ROW_WAS_ONE_WHOSE_OWN_SENTENCE_NAMED_THE_CHANGED_FILE"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": false,
+      "losing_routes_reason": "Two of the three either duplicate an existing fact or remove the check.",
+      "routes_ranked": [
+        "DECLARE_THE_NAMED_FILE_IN_ALLOW__SELECTED",
+        "PARSE_THE_GOAL_IN_THE_ORACLE__SECOND_AUTHORITY",
+        "EXEMPT_THE_CASE__HIDES_DAMAGE"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_MATRIX_RUNS_THE_CASE_AND_DIFFS_THE_TREE_IT_NAMED"
+    },
+    "real_outcome": "A run that does exactly what the sentence asked is scored REAL and not DAMAGED.",
+    "required_capability": "A_DAMAGE_ORACLE_THAT_READS_THE_REQUEST",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The harness already owns the allow list; nothing outside the tree decides it."
+    },
+    "routes_considered": [
+      "TEACH_THE_DAMAGE_ORACLE_TO_PARSE_THE_GOAL__SECOND_AUTHORITY_FOR_ONE_FACT",
+      "EXEMPT_THE_CASE_FROM_DAMAGE_DETECTION__HIDES_REAL_DAMAGE",
+      "DECLARE_THE_NAMED_FILE_IN_ALLOW__CHOSEN"
+    ],
+    "selected_route": "DECLARE_THE_ARTIFACT_A_CAPABILITY_REALLY_EMITS_SO_THE_PLANNER_CAN_CHAIN_IT_TO_THE_VERIFIER_THAT_ALREADY_REQUIRES_THAT_TYPE",
+    "selected_surviving_route": "NAME_THE_FILE_THE_SENTENCE_NAMES_IN_THE_ALLOW_LIST_THE_HARNESS_ALREADY_HAS",
+    "stop_condition": "MATRIX_54_CASES_15_REAL_0_FALSE_39_REFUSED_0_DAMAGED_MEDIAN_272MS__UNIFIED_MODEL_VERIFIER_33_OF_33",
+    "why_selected_route_is_fastest_sufficient": "The allow list already exists and is already used by every repair case; teaching the damage oracle to parse intent would be a second, weaker version of the same fact."
+  },
+  "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "NAME_THE_FILE_THE_SENTENCE_NAMES_IN_THE_ALLOW_LIST_THE_HARNESS_ALREADY_HAS",
+  "stop_condition": "MATRIX_54_CASES_15_REAL_0_FALSE_39_REFUSED_0_DAMAGED_MEDIAN_272MS__UNIFIED_MODEL_VERIFIER_33_OF_33",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__THREE_PREDICATES_IN_EXISTING_GATES_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "49ca3c09e25fa160d411f17d937c4434891fba23",
+          "note": "Base blob: at this blob the add_parameter case carries no allow list, so the file its own sentence names counts as damage.",
+          "path": "execution_guard/swe_capability_matrix_v1.py"
+        }
+      ],
+      "decisive_question": "CAN_A_RUN_THAT_DID_EXACTLY_WHAT_WAS_ASKED_BE_SCORED_AS_DAMAGE",
+      "falsifier_id": "REMOVE_THE_ALLOW_LIST_AND_THE_FALSE_DAMAGE_RETURNS",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_CONSIDERED_TEACHING_THE_DAMAGE_ORACLE_TO_PARSE_THE_GOAL__REJECTED_BECAUSE_THE_ALLOW_LIST_IS_ALREADY_THE_DECLARATION_OF_THAT_FACT_AND_TWO_AUTHORITIES_FOR_ONE_FACT_IS_THE_DEFECT_THIS_REPOSITORY_KEEPS_FINDING",
+      "proposal_id": "A_REQUEST_IS_NOT_DAMAGE_V1_20261031_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened: the damage oracle keeps checking every other file, and the case still fails if the row touches anything the sentence did not name."
+}

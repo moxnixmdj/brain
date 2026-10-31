@@ -270,3 +270,33 @@ Per-case status table, verbatim: `/tmp/matrix_now.txt` (this run) — the same 5
 each, with the refusal that names what is missing.
 
 *Authority: NONE — sandbox measurement, not independent verification.*
+
+---
+
+## 10. Session landings, 2026-10-31 afternoon (three merged pulls)
+
+Main moved under this document while it was being written: the pointer-poison restoration ladder
+finished, so the whole 138-row registry this branch needed is now on `main`, and the sibling pulls
+landed `git.history.bisect_regression.v1`, `python.refactor.move_function.v1` and
+`python.tests.mutation_score.v1`. Nothing here re-registers a row; every fix below is a predicate in
+a file that already existed.
+
+| PR | merged as | what changed |
+|---|---|---|
+| #6452 | `b0784a5d` | **the door reads the verdict it asked for**: a review is a question (a row that declares `capability_edits_source` cannot answer it, whatever its `provides` say); `_close_observations` refuses a bisect artifact with no known-good commit; the matrix mutation oracle accepts either measuring shape but never a self-report; refusals name the row |
+| #6456 | `d669df4c` | **a bisect costs the tree it names**: one `git worktree` + incremental `reset --hard` instead of a per-request 35.5 s clone of 241 MB, the suite run at the named path, and a named refusal (`NAMED_TEST_NOT_IN_GIT_HISTORY`) instead of an answer borrowed from the repository's own history |
+| #6458 | `f4a35dd5` | **a request is not damage**: `add_parameter` named the file it wanted changed and was scored DAMAGED for changing it; the `allow` list is the harness's declaration of that fact |
+
+**Matrix, 54 cases:** `13 REAL / 3 FALSE / 38 REFUSED / 1 DAMAGED` at session start →
+`15 REAL / 0 FALSE / 39 REFUSED / 0 DAMAGED`, median 230 ms, p90 1.06 s, max latency 34.5 s → 2.2 s.
+The three FALSE rows each kept their measurement and lost the lie: `security_review` and
+`bisect_regression` are now honest refusals with a reason (`bandit` absent in this environment;
+git does not track the scratch test tree), `mutation_score` is REAL on the score it really measured.
+
+**Gates on `main` after the three merges:** unified model `33/33 PASS` / `AUTHORITY NONE`;
+`add_parameter` and `perf_review` REAL; 23 new tests green in 1.7 s. The one CI job still red is
+`verify-brain-unified-model-v1`'s suite step, on
+`test_goal_compiler::test_compound_goal_compiles_full_verified_audit_pipeline`, which fails
+identically on `main` without these changes (measured on a clean `origin/main` worktree).
+
+*Authority: NONE — sandbox measurement, not independent verification.*

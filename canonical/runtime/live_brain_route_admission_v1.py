@@ -3463,6 +3463,23 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     if failure_class in _JUDGED_FAILURE_CLASSES:
         return False
     if result.get("executed") is True:
+        # AN "EXECUTED" ATTEMPT WITH NO EXECUTION RECORD EXECUTED NOTHING.
+        #
+        # ``executed`` says the controller was invoked; ``execution`` is the record of what
+        # actually ran, and the block above has already established that no honesty gate
+        # spoke.  Measured 2026-10-31 on two sentences: "Resolve the merge conflict in
+        # <file> keeping both changes" was routed to a mutation score, which raised
+        # SyntaxError on the conflicted file, and "Rename the function line_total to
+        # item_total in <dir> and update every caller" was routed to a PARAMETER rename,
+        # which refused PARAM_NOT_FOUND.  Both reported executed:True with execution == []
+        # and not one judged-evidence field set: neither capability produced an artifact,
+        # moved a byte, or said anything about the tree.  The refusal is a statement about
+        # the ROW that was asked, and the decisive typed plan already names the row the
+        # sentence describes.  The retry re-enters the SAME gate chain, and the verdict the
+        # caller receives is the retry's own -- failure included.  Nothing is widened.
+        if not result.get("execution") and not any(result.get(field)
+                                                   for field in _JUDGED_EVIDENCE_FIELDS):
+            return True
         stated = "%s %s" % (result.get("reason") or "", result.get("failure_reason") or "")
         return bool(_PRECONDITION_BLOCKER_RE.search(stated))
     return True
