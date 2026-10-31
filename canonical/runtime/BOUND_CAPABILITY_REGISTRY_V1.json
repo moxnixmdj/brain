@@ -4971,6 +4971,231 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_ORCHESTRATION_BRIDGE_ENUMERATION_V1_V1.json",
         "state_path": "canonical/astra_runtime/state/HARDCORE_ORCHESTRATION_BRIDGE_ENUMERATION_V1.json"
       }
+    },
+    "pdf.extract.ocr.tesseract": {
+      "action_template": {
+        "args": {
+          "capability_id": "pdf.extract.ocr.tesseract",
+          "dpi": 300,
+          "language": "eng",
+          "max_pages": 50,
+          "path": "${input.pdf_path}"
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "pdf_ocr_tesseract",
+      "cost": 2,
+      "discovery_evidence": "canonical/astra_runtime/evidence/ASTRA-CAPABILITY-DISCOVERY-APT-OCR-001__PACKAGES.json",
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "limitations": [
+        "Requires a Linux substrate with apt and sudo rights for first-time package installation.",
+        "Uses English OCR data in the verified configuration.",
+        "Accuracy depends on raster quality and source image quality."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "pdf.extract.ocr"
+      ],
+      "requires": [
+        "pdf.file.image_only.available"
+      ],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "tesseract-ocr",
+            "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77",
+            "version": "5.3.4-1build5"
+          },
+          {
+            "name": "poppler-utils",
+            "sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4",
+            "version": "24.02.0-1ubuntu9.9"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-BOUND-PDF-OCR-001",
+        "observed_dependency": {
+          "origin": "Ubuntu",
+          "packages": [
+            {
+              "name": "tesseract-ocr",
+              "sha256": "2dfac382d77215aee0c3de4a2a2205505d5f2195e72e79b54ad32154fc08da77",
+              "version": "5.3.4-1build5"
+            },
+            {
+              "name": "poppler-utils",
+              "sha256": "fb936375b183a9d8ecb5b1fc5665a44110ca130c445946fb575c0b800b1dc0f4",
+              "version": "24.02.0-1ubuntu9.9"
+            }
+          ]
+        },
+        "observed_effect": {
+          "pages_processed": 1,
+          "text": "TEST ULF TEST",
+          "text_sha256": "a7eaa8c1ba48058257dbcb0129019957b0d7f6844dee72447a926125fdff2d77"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-OCR-001.json"
+      }
+    },
+    "pdf.extract.text.pypdf": {
+      "action_template": {
+        "args": {
+          "capability_id": "pdf.extract.text.pypdf",
+          "max_pages": 200,
+          "path": "${input.pdf_path}"
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "pdf_pypdf",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "limitations": [
+        "Extracts existing PDF text layers; does not perform OCR on image-only/scanned pages.",
+        "Input paths are restricted to the Project Brain repository checkout.",
+        "Large uncompressed PDF content streams can require substantial memory."
+      ],
+      "provides": [
+        "pdf.extract.text"
+      ],
+      "requires": [
+        "pdf.file.available"
+      ],
+      "source": {
+        "license": "BSD-3-Clause",
+        "metadata_url": "https://pypi.org/pypi/pypdf/6.19.0/json",
+        "project": "pypdf",
+        "trusted_publishing": true,
+        "type": "pypi",
+        "version": "6.19.0",
+        "wheel_filename": "pypdf-6.19.0-py3-none-any.whl",
+        "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-BOUND-PDF-TEXT-001",
+        "observed_dependency": {
+          "project": "pypdf",
+          "version": "6.19.0",
+          "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        },
+        "observed_effect": {
+          "extracted_text": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED",
+          "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-RUNTIME-BOUND-PDF-TEXT-001.json",
+        "workflow_run_id": 36060830384
+      }
+    },
+    "plain_goal.bound_capability.grounding.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "${input.goal}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "plain_goal_bound_grounding",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "plain",
+        "goal",
+        "grounding",
+        "bound",
+        "capability",
+        "semantic",
+        "existing",
+        "registry",
+        "reuse",
+        "ambiguity"
+      ],
+      "limitations": [
+        "Grounds only to capabilities already marked VERIFIED_BOUND_CAPABILITY in the canonical registry.",
+        "Preserves multiple plausible matches as AMBIGUOUS_BOUNDED and leaves unsupported clauses UNRESOLVED.",
+        "Does not plan, execute, acquire suppliers, or treat constraint-only vocabulary as capability evidence.",
+        "External discovery remains allowed only for unresolved clauses after bound grounding."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "plain_goal.bound_capability.grounding"
+      ],
+      "requires": [],
+      "result_fields": [
+        "broad_objective_decomposition",
+        "broad_objective_decomposition_available",
+        "candidate_capability_ids",
+        "clauses",
+        "external_discovery_allowed_for_unresolved_only",
+        "goal",
+        "goal_sha256",
+        "grounded_clause_count",
+        "input_contract_bindability_enforced",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "unresolved_clause_indexes",
+        "whole_goal_external_discovery_forbidden_if_any_bound_grounding"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+        "modules": [
+          "difflib",
+          "hashlib",
+          "json",
+          "re",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "astra_runtime_integration_blob": "801d226ab589595f376da54833de6b925ff96f15",
+        "exact_final_head_validation_artifact_digest": "sha256:3969e625a3239fed6fc5abdf3f6d3992b1685202e20bc8ef402cab194b7963b9",
+        "exact_final_head_validation_artifact_id": 11068728150,
+        "exact_final_head_validation_run_id": 36646452335,
+        "fresh_reuse_B_artifact_digest": "sha256:4b12f80bb0cf68539ede066a66a9aa0a81310374f9bc03aaa52d379678772d48",
+        "fresh_reuse_B_artifact_id": 11067819136,
+        "fresh_reuse_B_run_id": 36646400507,
+        "incremental_spend_usd": 0,
+        "independently_verified_by": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "model_dependency_count": 0,
+        "producer_git_blob": "00f5d0c1c742f444ad876103f251bb4476017dc1",
+        "real_task_A_artifact_digest": "sha256:a46ae56de001b9cb3f4d4b544914672556b67bd5f5597cf8ca4bad71e52b60f3",
+        "real_task_A_artifact_id": 11068403761,
+        "real_task_A_run_id": 36646322912,
+        "receipt_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+        "regression_run_id": 36646224008
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
