@@ -10278,6 +10278,10 @@
         "software.repair.choreography.verified",
         "software.patch.crossfile.atomic",
         "software.source.write.crossfile",
+        "software.concurrency.race.condition.fix",
+        "security.sql.injection.remove",
+        "performance.quadratic.linearithmic.optimize",
+        "dependency.deprecated.inspect.migrate",
         "source.repair.applied"
       ],
       "requires": [

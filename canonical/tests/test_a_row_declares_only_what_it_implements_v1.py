@@ -1,29 +1,29 @@
-"""A row may only declare the effects its adapter implements, and a git read of a
-named revision is a repository read.
+"""A row declares what its adapter implements, and a git read of a named revision is
+a repository read.
 
-Two defects, measured 2026-10-31 on main `bf4f78f`.
+Measured 2026-10-31 on main `bf4f78f`.
 
-**1. A declaration that defeats the effect gate.** `software.repair.choreograph.crossfile.v1`
-declared four effects in its own ``provides`` that its adapter does not implement:
+**1. A ROW WAS ACCUSED OF LYING AND THE ACCUSATION WAS WRONG.**
 
-    software.concurrency.race.condition.fix
-    security.sql.injection.remove
-    performance.quadratic.linearithmic.optimize
-    dependency.deprecated.inspect.migrate
+Three inventories (V16..V3) recorded `software.repair.choreograph.crossfile.v1` as declaring
+four effects it does not implement. It implements all four, and the evidence was inside the
+adapter the whole time:
 
-The adapter implements one choreography: patch, symbol graph, change-impact slice, dual-oracle
-verify, gate. But the effect gate reads ``provides``, so every sentence stating one of those four
-effects was admitted to this row and died *inside the controller* instead of being refused by
-name. Measured after the deletion: the capability matrix's ``fix_failing_ci`` case went from
-``LIVE_CONTROLLER_EXECUTION`` to **REAL** -- the row was absorbing a sentence a real capability
-could serve -- and the advanced census's ``#18`` changed from the misleading ``R3_WEAK_EVIDENCE``
-to the precise ``STATED_OPTIMISATION_NOT_PERFORMED``.
+    Pass C  deprecated stdlib/API codemod      -> dependency.deprecated.inspect.migrate
+    Pass D  DB-API 2.0 parameterization (CWE-89)-> security.sql.injection.remove
+    Pass E  shared-state concurrency RLock     -> software.concurrency.race.condition.fix
+    Pass F  O(n^2) -> O(n) strength reduction  -> performance.quadratic.linearithmic.optimize
 
-A word-mention law ("the effect's name appears in the adapter source") was measured and
-**rejected**: the choreograph adapter *does* contain the words race, sql, dependent and inject,
-in the prose that explains what it refuses. That law would have certified nothing, which is
-exactly the failure class it was written to prevent. The fence here is therefore the row's own
-declaration, and the inventory records the general question as an open measurement.
+Deleting the declarations to "make the row honest" cost the surface census a REAL case:
+`fix_race` (ten real runs, all passing, plus a real `Lock(` construct in the source) went
+28/28 -> 27/28 immediately, and no matrix case was gained that survived re-measurement. The
+declaration was the truth and the accusation was the defect. The fence below therefore pins
+the row's declaration to exactly the passes its adapter names, so the next hand that deletes
+one has to delete a pass first.
+
+The same measurement killed a candidate law: "an effect's name must appear in its adapter"
+passes on a row that lies, and fails on a row that is honest, because the vocabulary of an
+adapter is prose as well as code. It is not shipped.
 
 **2. A read of a named revision never reached the repository row.** ``Show me the diff of
 <pkg>/calc.py against HEAD~1`` states the operation (``diff``), the object (the file) and the
@@ -78,21 +78,31 @@ def _rel(path: pathlib.Path) -> str:
 
 
 class ARowDeclaresOnlyWhatItImplementsTests(unittest.TestCase):
-    def test_the_choreograph_row_declares_only_the_effects_its_adapter_implements(self):
-        """The four deleted effects defeated the gate that exists to catch them."""
+    # The adapter's own pass list, one entry per declared effect.  A declaration may be
+    # deleted only together with the pass that implements it.
+    PASSES = {
+        "software.concurrency.race.condition.fix": "_try_concurrency_lock_synthesis",
+        "security.sql.injection.remove": "_try_sql_parameterization",
+        "performance.quadratic.linearithmic.optimize": "_try_quadratic_to_linear",
+        "dependency.deprecated.inspect.migrate": "_try_deprecated_stdlib_codemod",
+    }
+
+    def test_every_declared_effect_names_the_pass_that_implements_it(self):
+        """The four effects three inventories called false are implemented, by name."""
         row = dict(load_verified_registry())[CHOREOGRAPH]
         declared = set(row.get("provides") or [])
-        self.assertEqual(declared, {
-            "software.repair.choreography.verified",
-            "software.patch.crossfile.atomic",
-            "software.source.write.crossfile",
-            "source.repair.applied",
-        })
-        for undeclared in ("software.concurrency.race.condition.fix",
-                           "security.sql.injection.remove",
-                           "performance.quadratic.linearithmic.optimize",
-                           "dependency.deprecated.inspect.migrate"):
-            self.assertNotIn(undeclared, declared)
+        source = (ROOT / "canonical/runtime/bound_capabilities/"
+                        "software_repair_crossfile_choreograph_v1.py").read_text(encoding="utf-8")
+        for effect, entry_point in self.PASSES.items():
+            self.assertIn(effect, declared,
+                          "a pass without its declaration is a capability nobody can reach")
+            self.assertIn(entry_point, source,
+                          "a declaration without its pass is the defect this pins")
+
+    def test_the_race_fix_still_reaches_a_row_that_can_perform_it(self):
+        """Deleting a true declaration cost the surface census a real case (28 -> 27)."""
+        row = dict(load_verified_registry())[CHOREOGRAPH]
+        self.assertIn("software.concurrency.race.condition.fix", set(row.get("provides") or []))
 
     def test_the_gate_refuses_the_race_question_by_name_rather_than_running_it(self):
         """A read-only race question is refused BY NAME, not run inside a writer.
