@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "09146dff7b605c3aa6dc1cebaa8ce9a31330bec5058384a78a201bda49165379"
+  "value": "6f903abe97c6c094c940a039d809d5207a2af3a4eac74f7e2d9c5ffd5eabbd8e"
  },
  "engines": [
   {
@@ -42356,7 +42356,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 25878,
+   "bytes": 25893,
    "headings": [
     "Every hardcore software-engineering problem, measured",
     "§0 The answer in one paragraph",
@@ -42375,12 +42375,11 @@
    ],
    "kind": "DOCUMENT",
    "path": "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md",
-   "sha256": "d3907a931da97027d459245d1456b4dcc3149d6593664a1abe4c37267028efb4",
-   "summary": "Measured 2026-10-31 on main `bbc00a7` with the substrate restored (`scripts/restore_substrate_v1.py`). Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md` records one round of repairs; this document is the whole problem list, ordered so that the next hour of work buys the most capability. Nothing here is a wish — every number is a measur",
+   "sha256": "054c90be50453acd5d807e02d6184f0db601b808d4cfc50f7667dda1ae94e74b",
+   "summary": "Measured 2026-10-31 on main `b37f118` with the substrate restored (`scripts/restore_substrate_v1.py`). Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md` records one round of repairs; this document is the whole problem list, ordered so that the next hour of work buys the most capability. Nothing here is a wish — every number is a measur",
    "terms": {
     "10": 13,
-    "22": 9,
-    "23": 8,
+    "23": 11,
     "49": 13,
     "absent": 9,
     "add": 19,
@@ -42407,6 +42406,7 @@
     "nothing": 8,
     "one": 14,
     "package": 9,
+    "perf": 8,
     "pkg": 29,
     "polyglot": 10,
     "real": 15,
@@ -59314,7 +59314,7 @@
   "included_source_count": 1015,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3f2b4515bb0f7c0f3ea369edbf883d38a8de2b95f0d53f478fb6ed36918c0a2d"
+  "source_tree_digest": "eac845ed4b812d465c8eb606efb548bbf2a0ebfbfe7e6a492ec241324935f9e6"
  },
  "research_index": [
   {
