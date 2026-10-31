@@ -755,9 +755,12 @@ def check_negative_controls(
         )
     )
 
+    # This is a missing-input control, not an unavailable-capability control.
+    # Use the registered symbol index; fresh execution checks above still
+    # independently report unavailable audit/test/SQLite workflows as failures.
     missing = model.solve(
-        "audit python source structure",
-        capability_id="python.source.audit.ast",
+        "index python source symbols",
+        capability_id="python.source.symbols.index.ast",
         inputs={},
     )
     cases.append(

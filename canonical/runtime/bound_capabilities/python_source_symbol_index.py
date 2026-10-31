@@ -334,12 +334,14 @@ def _index_batch(tasks: list[tuple[str, str]]) -> list[tuple[bool, dict]]:
     return [_index_one_file(t) for t in tasks]
 
 
-def run(args, root):
+def build_index(source_root, root):
+    """Build a source-relative index without writing a probe into the source.
+
+    The run adapter below serializes this same object. Callers can bind the
+    result to a request-local cache without risking fixed probe-file collisions.
+    """
     repo = pathlib.Path(root).resolve()
-    source_root = _safe_root(repo, args.get("source_root", "canonical/runtime"))
-    output = (repo / str(args.get("output_path") or "")).resolve()
-    if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    source_root = _safe_root(repo, source_root)
 
     tasks = [
         (str(path), str(path.relative_to(repo)).replace("\\", "/"))
@@ -414,6 +416,15 @@ def run(args, root):
             "call_edges": call_edge_total,
         },
     }
+    return report
+
+
+def run(args, root):
+    repo = pathlib.Path(root).resolve()
+    output = (repo / str(args.get("output_path") or "")).resolve()
+    if output == repo or repo not in output.parents:
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    report = build_index(args.get("source_root", "canonical/runtime"), repo)
     output.parent.mkdir(parents=True, exist_ok=True)
     # Compact C-encoder JSON (separators=(",", ":")) keeps output 100% deterministic
     # while running ~15x faster than pure-Python indented formatting on 2,000+ file trees.
@@ -425,11 +436,11 @@ def run(args, root):
         "output_path": str(output.relative_to(repo)).replace("\\", "/"),
         "output_sha256": hashlib.sha256(data).hexdigest(),
         "output_verified": True,
-        "file_count": len(modules),
-        "unparseable_count": len(unparseable),
-        "unparseable_paths": [u["path"] for u in unparseable][:20],
-        "symbol_count": len(symbols),
-        "reference_count": reference_total,
-        "call_edge_count": call_edge_total,
-        "caller_index_size": len(callers_of),
+        "file_count": report["totals"]["files"],
+        "unparseable_count": report["totals"]["unparseable"],
+        "unparseable_paths": [u["path"] for u in report["unparseable"]][:20],
+        "symbol_count": report["totals"]["symbols"],
+        "reference_count": report["totals"]["references"],
+        "call_edge_count": report["totals"]["call_edges"],
+        "caller_index_size": len(report["callers_of"]),
     }

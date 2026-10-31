@@ -272,8 +272,13 @@ def _run_tests(workspace: pathlib.Path, argv: list[str], timeout_s: int) -> dict
 
 
 def _test_count(text: str) -> int:
-    m = re.search(r"Ran\s+(\d+)\s+tests?", text)
-    return int(m.group(1)) if m else 0
+    # Counts are runner-summary observations, not independent test attestation.
+    # Prefer the final pytest summary; do not count subtests or skipped cases
+    # again as primary executed tests. Plain assertion scripts remain unknown.
+    counts = _PATCH.pytest_summary(text)
+    if counts is not None:
+        return sum(counts.values())
+    return sum(int(n) for n in re.findall(r"(?m)^Ran\s+(\d+)\s+tests?\b", text))
 
 
 def _copy_source(source_root: pathlib.Path, workspace: pathlib.Path) -> None:

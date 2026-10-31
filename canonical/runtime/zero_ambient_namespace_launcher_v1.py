@@ -1,5 +1,5 @@
 from __future__ import annotations
-import hashlib, json, math, os, pathlib, shutil, socket, subprocess, tempfile, threading, time
+import hashlib, json, math, os, pathlib, shutil, socket, stat, subprocess, tempfile, threading, time
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -60,6 +60,10 @@ def canonical_policy(policy:Mapping[str,Any])->dict[str,Any]:
         if k not in _ALLOWED_ENV: raise NamespaceConfinementError('ENV_NAME_NOT_ALLOWLISTED:'+k)
         if '\x00' in v or len(v)>512: raise NamespaceConfinementError('ENV_VALUE_INVALID:'+k)
         env[k]=v
+    expose_null_device=policy.get('expose_null_device',False)
+    if type(expose_null_device) is not bool: raise NamespaceConfinementError('NULL_DEVICE_POLICY_MUST_BE_BOOLEAN')
+    expose_runtime_devices=policy.get('expose_runtime_devices',False)
+    if type(expose_runtime_devices) is not bool: raise NamespaceConfinementError('RUNTIME_DEVICE_POLICY_MUST_BE_BOOLEAN')
     lim=policy.get('limits') or {}
     if not isinstance(lim,Mapping): raise NamespaceConfinementError('LIMITS_NOT_OBJECT')
     pids=int(lim.get('pids',32)); memory_mb=int(lim.get('memory_mb',256)); cpu_seconds=int(lim.get('cpu_seconds',2))
@@ -91,17 +95,23 @@ def canonical_policy(policy:Mapping[str,Any])->dict[str,Any]:
         if host_uid is not None and int(host_uid)!=os.geteuid(): raise NamespaceConfinementError('HOST_UID_MUST_EQUAL_CURRENT_NONROOT_UID')
         if host_gid is not None and int(host_gid)!=os.getegid(): raise NamespaceConfinementError('HOST_GID_MUST_EQUAL_CURRENT_NONROOT_GID')
         host_uid=os.geteuid(); host_gid=os.getegid()
-    return {'schema':SCHEMA,'argv':argv,'input_dir':str(input_dir),'env':dict(sorted(env.items())),'host_uid':host_uid,'host_gid':host_gid,'limits':{'pids':pids,'memory_mb':memory_mb,'cpu_seconds':cpu_seconds,'wallclock_s':wallclock_s,'scratch_mb':scratch_mb,'max_file_mb':max_file_mb,'nofile':nofile,'broker_max_bytes':broker_max_bytes},'authority':{'network':'PRIVATE_NAMESPACE_LOOPBACK_ONLY','host_filesystem':'READ_ONLY_SYSTEM_AND_SINGLE_INPUT_BIND_ONLY','linux_capabilities':'DROPPED_BEFORE_WORKLOAD','privilege_escalation':'DENY_NO_NEW_PRIVILEGES','host_pid_namespace':'DENY','host_ipc_namespace':'DENY','host_uts_namespace':'DENY','mutable_storage':'READ_ONLY_PRIVATE_ROOT_PLUS_WRITABLE_PRIVATE_TMPFS_TMP_AND_WORK_ONLY','material_effect_channel':'ONE_INHERITED_BROKER_FD_ONLY'}}
+    return {'schema':SCHEMA,'argv':argv,'input_dir':str(input_dir),'env':dict(sorted(env.items())),'expose_null_device':expose_null_device,'expose_runtime_devices':expose_runtime_devices,'host_uid':host_uid,'host_gid':host_gid,'limits':{'pids':pids,'memory_mb':memory_mb,'cpu_seconds':cpu_seconds,'wallclock_s':wallclock_s,'scratch_mb':scratch_mb,'max_file_mb':max_file_mb,'nofile':nofile,'broker_max_bytes':broker_max_bytes},'authority':{'network':'PRIVATE_NAMESPACE_LOOPBACK_ONLY','host_filesystem':('READ_ONLY_SYSTEM_INPUT_RUNTIME_DEVICES_AND_PRIVATE_PROC' if expose_runtime_devices else ('READ_ONLY_SYSTEM_SINGLE_INPUT_AND_NULL_DEVICE_ONLY' if expose_null_device else 'READ_ONLY_SYSTEM_AND_SINGLE_INPUT_BIND_ONLY')),'linux_capabilities':'DROPPED_BEFORE_WORKLOAD','privilege_escalation':'DENY_NO_NEW_PRIVILEGES','host_pid_namespace':'DENY','host_ipc_namespace':'DENY','host_uts_namespace':'DENY','mutable_storage':'READ_ONLY_PRIVATE_ROOT_PLUS_WRITABLE_PRIVATE_TMPFS_TMP_AND_WORK_ONLY','material_effect_channel':'ONE_INHERITED_BROKER_FD_ONLY'}}
 
 def policy_sha256(policy:Mapping[str,Any])->str:
     p=canonical_policy(policy)
     return hashlib.sha256(json.dumps(p,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
 _SETUP=r'''set -euo pipefail
-ROOT="$1"; INPUT="$2"; BROKER="$3"; MEM_KB="$4"; CPU_S="$5"; FILE_KB="$6"; NOFILE="$7"; PIDS="$8"; SCRATCH_MB="$9"; shift 9
+ROOT="$1"; INPUT="$2"; BROKER="$3"; MEM_KB="$4"; CPU_S="$5"; FILE_KB="$6"; NOFILE="$7"; PIDS="$8"; SCRATCH_MB="$9"; NULL_DEVICE="${10}"; RUNTIME_DEVICES="${11}"; shift 11
 mount --make-rprivate /
 mount -t tmpfs -o size=64m,nosuid,nodev tmpfs "$ROOT"
-mkdir -p "$ROOT/dev" "$ROOT/proc" "$ROOT/usr" "$ROOT/bin" "$ROOT/lib" "$ROOT/lib64" "$ROOT/tmp" "$ROOT/work" "$ROOT/input"
+mkdir -p "$ROOT/usr" "$ROOT/bin" "$ROOT/lib" "$ROOT/lib64" "$ROOT/tmp" "$ROOT/work" "$ROOT/input"
+if [ "$RUNTIME_DEVICES" = 1 ]; then
+  mkdir "$ROOT/dev" "$ROOT/proc"
+  for dev in null zero urandom random; do touch "$ROOT/dev/$dev"; done
+elif [ "$NULL_DEVICE" = 1 ]; then
+  mkdir "$ROOT/dev"; touch "$ROOT/dev/null"
+fi
 for d in /usr /bin /lib /lib64; do
   [ -e "$d" ] || continue
   base="${d#/}"
@@ -110,7 +120,6 @@ done
 # Empty device mountpoints must exist before the whole-root self-remount
 # turns the tmpfs read-only; the actual device binds happen AFTER it so they
 # do not inherit ro (measured 2026-10-28).
-for dev in null zero urandom random; do : > "$ROOT/dev/$dev" 2>/dev/null || true; done
 mount --bind "$ROOT" "$ROOT"
 mount -o remount,bind,ro "$ROOT"
 for d in /usr /bin /lib /lib64; do
@@ -119,21 +128,31 @@ for d in /usr /bin /lib /lib64; do
   mount --bind "$d" "$ROOT$d"
   mount -o remount,bind,ro,nosuid,nodev "$ROOT$d"
 done
-for dev in null zero; do [ -e "/dev/$dev" ] && mount --bind "/dev/$dev" "$ROOT/dev/$dev"; done
-for dev in urandom random; do
-  [ -e "/dev/$dev" ] || continue
-  mount --bind "/dev/$dev" "$ROOT/dev/$dev"
-  mount -o remount,bind,ro "$ROOT/dev/$dev"
-done
-[ -e /proc/self/mountinfo ] && mount -t proc proc "$ROOT/proc"
+if [ "$RUNTIME_DEVICES" = 1 ]; then
+  for dev in null zero urandom random; do
+    mount --bind "/dev/$dev" "$ROOT/dev/$dev"
+    if [ "$dev" = null ] || [ "$dev" = zero ]; then
+      mount -o remount,bind,nosuid,noexec "$ROOT/dev/$dev"
+    else
+      mount -o remount,bind,ro,nosuid,noexec "$ROOT/dev/$dev"
+    fi
+  done
+  mount -t proc -o ro,nosuid,nodev,noexec proc "$ROOT/proc"
+elif [ "$NULL_DEVICE" = 1 ]; then
+  mount --bind /dev/null "$ROOT/dev/null"
+  mount -o remount,bind,ro,nosuid,noexec "$ROOT/dev/null"
+fi
 mount --bind "$INPUT" "$ROOT/input"
 mount -o remount,bind,ro,nosuid,nodev "$ROOT/input"
 mount -t tmpfs -o size="${SCRATCH_MB}m",nosuid,nodev,noexec tmpfs "$ROOT/tmp"
 mount -t tmpfs -o size="${SCRATCH_MB}m",nosuid,nodev tmpfs "$ROOT/work"
-IP_BIN="$(command -v ip)"; CHROOT_BIN="$(command -v chroot || command -v /usr/sbin/chroot || command -v /sbin/chroot)"
+IP_BIN="$(command -v ip)"; PYTHON_BIN="$(command -v python3)"
 "$IP_BIN" link set lo up
 ulimit -t "$CPU_S"; ulimit -v "$MEM_KB"; ulimit -f "$FILE_KB"; ulimit -n "$NOFILE"; ulimit -u "$PIDS"
-exec "$CHROOT_BIN" "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
+# Enter the same root with the syscall; minimal hosts need no chroot utility.
+# Reset cwd before exec so it cannot retain a directory outside the new root.
+# The trusted setup still execs setpriv before any workload code is executed.
+exec "$PYTHON_BIN" -I -c 'import os,sys; os.chroot(sys.argv[1]); os.chdir("/"); os.execv(sys.argv[2],sys.argv[2:])' "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
 '''
 
 
@@ -155,10 +174,14 @@ def resolve_system_binary(name):
 
 def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     p=canonical_policy(policy); lim=p['limits']
-    required_names=['unshare','mount','chroot','setpriv','ip','bash','env']
+    required_names=['unshare','mount','python3','setpriv','ip','bash','env']
     resolved={name:resolve_system_binary(name) for name in required_names}
     missing=[name for name,path in resolved.items() if not path]
     if missing: raise NamespaceConfinementError('HOST_PRIMITIVE_MISSING:'+','.join(missing))
+    if p['expose_null_device']:
+        device=os.stat('/dev/null')
+        if not stat.S_ISCHR(device.st_mode) or (os.major(device.st_rdev),os.minor(device.st_rdev))!=(1,3):
+            raise NamespaceConfinementError('HOST_NULL_DEVICE_INVALID')
     root=tempfile.mkdtemp(prefix='brain-ns-membrane-'); os.chown(root,p['host_uid'],p['host_gid'])
     parent,child=socket.socketpair(); broker=[]; overflow=[False]
     def reader():
@@ -178,7 +201,7 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     th=threading.Thread(target=reader,daemon=True); th.start()
     env={'BROKER_FD':str(child.fileno()),'PYTHONDONTWRITEBYTECODE':'1'}
     for k,v in p['env'].items(): env[k]=v
-    cmd=[resolved['unshare'],'--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts',resolved['bash'],'-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),resolved['setpriv'],'--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all',resolved['env'],'-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
+    cmd=[resolved['unshare'],'--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts',resolved['bash'],'-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),str(int(p['expose_null_device'])),str(int(p['expose_runtime_devices'])),resolved['setpriv'],'--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all',resolved['env'],'-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
     for k,v in p['env'].items(): cmd.append(k+'='+v)
     cmd += p['argv']
     popen_kw={'stdin':subprocess.DEVNULL,'stdout':subprocess.DEVNULL,'stderr':subprocess.DEVNULL,'pass_fds':(child.fileno(),),'env':env,'start_new_session':True}
