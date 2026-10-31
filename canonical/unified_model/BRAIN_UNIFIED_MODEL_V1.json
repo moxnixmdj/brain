@@ -30474,9 +30474,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 214,
+  "knowledge_documents": 215,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6541,
+  "research_index_records": 6542,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30485,7 +30485,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f7eb0d0a8e441c7544db1842d496c67b83b7c59a0fb391de2a13fbbd264a66cd"
+  "value": "325c1bcf197bff0293b6c2f9683fb5581b49158be5565ebb39fe0c7f76f901fa"
  },
  "engines": [
   {
@@ -44655,6 +44655,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5623,
+   "headings": [
+    "Hardcore software-engineering problem inventory — V18",
+    "§0 The answer in one paragraph",
+    "§1 Measurements on `75ea4ec`",
+    "§2 What the four rows say, and why each is a distinct effect",
+    "§3 The neighbours the gate must not touch (pinned)",
+    "§4 Still open, in the order the measurements now support",
+    "§5 Pre-existing reds (verified by stashing this change)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V18.md",
+   "sha256": "38f3ec2f546f654a6037c74ec880a6328418eabdf78829543f2b1d66e6446c82",
+   "summary": "Measured 2026-10-31 on `75ea4ec` (branch `arena/42d647fc-brain`). Supersedes V17. V17 named the next change and this document records it landing.",
+   "terms": {
+    "10": 2,
+    "14": 2,
+    "19": 2,
+    "22": 2,
+    "47": 3,
+    "49": 2,
+    "75ea4ec": 2,
+    "add": 2,
+    "admitted": 5,
+    "advanced": 2,
+    "after": 3,
+    "all": 2,
+    "already": 2,
+    "answer": 3,
+    "because": 2,
+    "before": 3,
+    "capability": 2,
+    "case": 2,
+    "census": 3,
+    "change": 5,
+    "containment": 3,
+    "each": 3,
+    "effect": 3,
+    "four": 4,
+    "function": 6,
+    "gate": 7,
+    "gil": 3,
+    "magnet": 3,
+    "matrix": 4,
+    "ms": 5,
+    "named": 3,
+    "not": 9,
+    "now": 5,
+    "one": 3,
+    "pass": 6,
+    "performance": 3,
+    "profile": 3,
+    "real": 4,
+    "refused": 3,
+    "removed": 3,
+    "requests": 3,
+    "row": 7,
+    "rows": 6,
+    "served": 6,
+    "so": 3,
+    "still": 3,
+    "v17": 4,
+    "wrong": 5
+   },
+   "title": "Hardcore software-engineering problem inventory — V18",
+   "title_terms": [
+    "hardcore",
+    "inventory",
+    "problem",
+    "software-engineering",
+    "v18"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23697,
    "headings": [
     "What is actually missing — the complete problem list for a hardcore software engineer",
@@ -58503,10 +58578,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1005,
+  "included_source_count": 1006,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "02e042240c1c9a373d031ece7f90a3fc447ea1f8a0d92f51863dc6d73c6591c9"
+  "source_tree_digest": "380c743f57047780c553d6c865a54d7407dd9bc0b10a75508067ba8383afe801"
  },
  "research_index": [
   {
@@ -200422,6 +200497,31 @@
    }
   },
   {
+   "action_id": "AN_EFFECT_NOBODY_DECLARES_MUST_BE_SERVED_BY_NOBODY_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/AN_EFFECT_NOBODY_DECLARES_MUST_BE_SERVED_BY_NOBODY_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_EFFECT_NOBODY_DECLARES_MUST_BE_SERVED_BY_NOBODY_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "64d072d4569f0a04cabbae2e1c10368062c613dbbb322bbf61973b401efd4edf",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_sentence_stating_an_effect_no_row_declares_was_answered_by_the_best_lexical_match_and_certified_pass__measured_4_of_6_served_answers_wrong_once_the_magnets_were_out_of_the_way": 1,
+    "add_four_rows_to_the_stated_effects_table_that_the_answer_gate_already_reads_and_pin_the_neighbours_it_must_not_touch": 1,
+    "an_effect_nobody_declares_must_be_served_by_nobody_v1_20261031_v1": 1,
+    "declares": 1,
+    "effect": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "nobody": 2,
+    "profiling_optimisation_concurrency_and_fuzzing_are_named_effects__a_row_that_declares_none_of_them_is_refused_by_name_instead_of_counting_definitions_and_passing": 1,
+    "served": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -245693,7 +245793,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "71f399a7ac6f3c646d4e9a762e3fa74c88698566f0098771abc16e53f0569699",
+   "sha256": "2744767468d6cbb638d784672f98b8010b6957475bbc50061279f8520770f981",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 98,
    "symbols": [

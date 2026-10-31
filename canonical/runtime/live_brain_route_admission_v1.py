@@ -1976,6 +1976,58 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
                 r"\b(?:impact|affected)[ ._-]+tests?\b",
                 re.IGNORECASE),
      "STATED_CHANGE_IMPACT_NOT_ANSWERED_BY_CAPABILITY"),
+    # A DEFINITION COUNT IS NOT A PROFILE.  Measured 2026-10-31: with the five magnet rows
+    # removed from the registry, python.source.definition_count.v1 became the top row and
+    # answered "Profile <f> and tell me which function is the hot spot" with PASS -- a count of
+    # definitions, no timing, no samples, no hot spot named.  The same row then answered three
+    # more sentences of the same shape (see the three entries below).  A profile is a MEASUREMENT
+    # OVER TIME; the rows that take one say so in what they provide (cProfile, py-spy, scalene,
+    # a hotspot), and nothing in the registry declares it today -- so the honest outcome is a
+    # NAMED refusal rather than a count wearing the word "profile".
+    (re.compile(r"\bprofile\b|\bprofiler\b|\bprofil(?:e|ing)\b[^.\n]{0,40}"
+                r"\b(?:function|code|program|script|module|file)\b"
+                r"|\bhot[ _-]?spots?\b|\bbottleneck\b"
+                r"|\bwhich\s+(?:function|line|call)\b[^.\n]{0,40}\b(?:slowest|hottest|expensive)\b",
+                re.IGNORECASE),
+     re.compile(r"\bprofil(?:e|er|ing|ed)\b|cprofile|py[ _-]?spy|scalene|hot[ _-]?spot|bottleneck",
+                re.IGNORECASE),
+     "STATED_PROFILE_NOT_TAKEN_BY_CAPABILITY"),
+    # AN OPTIMISATION IS A CHANGE, NOT A DESCRIPTION.  Measured 2026-10-31: "Optimise the function
+    # total in <f>; it is too slow on large inputs" was answered PASS by the same definition
+    # counter.  Nothing was changed and nothing was measured.  The rows that really optimise
+    # declare the transformation they perform (the crossfile repair row provides
+    # ``performance.quadratic.linearithmic.optimize``); a row that only DESCRIBES performance
+    # (a diff perf gate reports a comparison) does not make the change, so it is not named here.
+    (re.compile(r"\boptimis(?:e|es|ed|ing)\b|\boptimiz(?:e|es|ed|ing)\b"
+                r"|\bspeed\s+(?:it|this|that)\s+up\b|\btoo\s+slow\b"
+                r"|\bmake\s+(?:it|this|that)\s+(?:faster|quicker)\b",
+                re.IGNORECASE),
+     re.compile(r"optimi[sz]\w*|quadratic|linearithmic|memo[is]\w*",
+                re.IGNORECASE),
+     "STATED_OPTIMISATION_NOT_PERFORMED_BY_CAPABILITY"),
+    # A SUMMARY IS NOT A THREAD.  Measured 2026-10-31: "Make the function total in <f> release the
+    # GIL while summing" was answered PASS by the definition counter.  ``release the GIL``,
+    # a thread pool, parallelism, a lock and a race condition are all statements about
+    # CONCURRENT EXECUTION, and a row that reports definitions has not touched one.
+    (re.compile(r"\brelease\s+the\s+gil\b|\bgil\b"
+                r"|\bthread[ _-]?pool\b|\bmulti[ _-]?thread\w*\b"
+                r"|\bparallel(?:ise|ize|ism|ly)?\b|\bconcurren\w*\b"
+                r"|\brace\s+condition\b|\bdeadlock\b|\bdata\s+race\b"
+                r"|\basync(?:hronous(?:ly)?)?\b|\bawait\b",
+                re.IGNORECASE),
+     re.compile(r"concurr\w*|thread|parallel|\brace\b|\bgil\b|async|mutex|deadlock|"
+                r"lock|synchron",
+                re.IGNORECASE),
+     "STATED_CONCURRENCY_NOT_ADDRESSED_BY_CAPABILITY"),
+    # FUZZING IS EXECUTION UNDER GENERATED INPUTS.  Measured 2026-10-31: "Fuzz the function add in
+    # <f> for integer overflow" was answered PASS by the definition counter -- nothing was
+    # generated, nothing was run, no input was tried.  Property-based testing is the same demand
+    # with a different generator, and the row that supplies it exists and declares it
+    # (evidence.oracle.hypothesis_property.v1 provides ``evidence.hypothesis.property_violation``).
+    (re.compile(r"\bfuzz(?:er|ing|ed)?\b|\bproperty[ _-]based\b|\bgenerative\s+testing\b",
+                re.IGNORECASE),
+     re.compile(r"fuzz|hypoth|property", re.IGNORECASE),
+     "STATED_FUZZ_OR_PROPERTY_RUN_NOT_PERFORMED_BY_CAPABILITY"),
 )
 
 
