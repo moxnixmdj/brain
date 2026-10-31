@@ -1,1 +1,1963 @@
-@canonical/astra_runtime/evidence/TYPED_CAPABILITY_SWEEP_SWEFLEET_20261029.json
+{
+ "schema": "PROJECT_BRAIN_TYPED_CAPABILITY_SWEEP_V1",
+ "instances_per_capability": 2,
+ "seed": 51966,
+ "model_dependency_count": 0,
+ "totals": {
+  "capabilities": 136,
+  "clean_all_instances_pass": 78,
+  "partial_some_instances_fail": 0,
+  "broken_every_instance_fails": 34,
+  "could_not_sample": 24
+ },
+ "rows": [
+  {
+   "capability_id": "archive.tar_gz.create_from_manifest",
+   "signature": {
+    "manifest_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:TAR_GZ_OUTPUT_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/archive_tarfile.py\", line 49, in run\n    raise RuntimeError(\"TAR_GZ_OUTPUT_REQUIRED\")\nRuntimeError: TAR_GZ_OUTPUT_REQUIRED\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "archive.verify.tar_gz.gnu",
+   "signature": {
+    "archive_path": "PATH_FILE",
+    "manifest_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:MANIFEST_RECORDS_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py\", line 51, in run\n    expected=[str(manifest_path.relative_to(root))]+_manifest_paths(manifest)\n                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py\", line 32, in _manifest_paths\n    raise RuntimeError(\"MANIFEST_RECORDS_REQUIRED\")\nRuntimeError: MANIFEST_RECORDS_REQUIRED\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "auto.apt.zint",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "text": "STRING"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:exit_status_is_the_answer": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "auto.npm.dfinity-cbor",
+   "signature": {
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:NODE_CODEC_PACKAGE_ROOT_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/node_library_codec.py\", line 34, in run\n    raise RuntimeError(\"NODE_CODEC_PACKAGE_ROOT_REQUIRED\")\nRuntimeError: NODE_CODEC_PACKAGE_ROOT_REQUIRED\n"
+  },
+  {
+   "capability_id": "auto.npm.msgpack-msgpack",
+   "signature": {
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:NODE_CODEC_PACKAGE_ROOT_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/node_library_codec.py\", line 34, in run\n    raise RuntimeError(\"NODE_CODEC_PACKAGE_ROOT_REQUIRED\")\nRuntimeError: NODE_CODEC_PACKAGE_ROOT_REQUIRED\n"
+  },
+  {
+   "capability_id": "auto.pypi.bson-modern",
+   "signature": {
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "ModuleNotFoundError:No module named 'bson'": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/python_library_codec.py\", line 74, in run\n    module=importlib.import_module(module_name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/importlib/__init__.py\", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'bson'\n"
+  },
+  {
+   "capability_id": "auto.pypi.msgpack",
+   "signature": {
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "ModuleNotFoundError:No module named 'msgpack'": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/python_library_codec.py\", line 74, in run\n    module=importlib.import_module(module_name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/importlib/__init__.py\", line 126, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'msgpack'\n"
+  },
+  {
+   "capability_id": "chart.raster.axis_title_unit_binding.v1",
+   "signature": {
+    "path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "chart.raster.curve_value_query.v1",
+   "signature": {
+    "label": "STRING",
+    "path": "PATH_FILE",
+    "x_value": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "chart.raster.curve_x_at_y_query.v1",
+   "signature": {
+    "label": "STRING",
+    "path": "PATH_FILE",
+    "y_value": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+   "signature": {
+    "path": "PATH_FILE",
+    "x_value": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "chart.raster.legend_style_binding.v1",
+   "signature": {
+    "path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "chart.raster.scene_graph.v1",
+   "signature": {
+    "path": "PATH_FILE",
+    "x_ticks": "PAIR_LIST",
+    "y_ticks": "PAIR_LIST"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "chart.read.binary_phase_solvus.v1",
+   "signature": {
+    "path": "PATH_FILE",
+    "prompt": "STRING"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "chart.read.legend_linear_intersection.v1",
+   "signature": {
+    "path": "PATH_FILE",
+    "prompt": "STRING"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "code.impact.tree_sitter.testselect.v1",
+   "signature": {
+    "changed_paths": "PATH_LIST",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "code.index.tree_sitter.incremental.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "code.multilanguage.parse.tree_sitter.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "code.patch.tree_sitter.verify.v1",
+   "signature": {
+    "edits": "UNKNOWN",
+    "index_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "selection_path": "PATH_FILE",
+    "test_cwd": "UNKNOWN"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "decision.synthesis.typed.stdlib",
+   "signature": {
+    "input_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "DecisionSynthesisError:DECISION_SCHEMA_INVALID": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 384, in run\n    result = synthesize(problem)\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_synthesis.py\", line 177, in synthesize\n    normalized = _normalize(problem)\n                 ^^^^^^^^^^^^^^^^^^^\nsweep_161.DecisionSynthesisError: DECISION_SCHEMA_INVALID\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "decision.synthesis.verify.stdlib",
+   "signature": {
+    "input_path": "PATH_FILE",
+    "result_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:DECISION_VERIFIER_INPUT_MISSING": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/evidence_decision_verify.py\", line 138, in run\n    raise RuntimeError(\"DECISION_VERIFIER_INPUT_MISSING\")\nRuntimeError: DECISION_VERIFIER_INPUT_MISSING\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "document.convert.markdown_pdf.pandoc_weasyprint",
+   "signature": {
+    "markdown_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:PDF_OUTPUT_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/pandoc_weasyprint.py\", line 21, in run\n    raise RuntimeError(\"PDF_OUTPUT_REQUIRED\")\nRuntimeError: PDF_OUTPUT_REQUIRED\n"
+  },
+  {
+   "capability_id": "docx.document.create.python_docx",
+   "signature": {
+    "goal": "STRING",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:DOCUMENT_SPEC_UNRESOLVED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/python_document_builder.py\", line 61, in run\n    spec=_parse_spec(goal)\n         ^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/python_document_builder.py\", line 28, in _parse_spec\n    raise RuntimeError(\"DOCUMENT_SPEC_UNRESOLVED\")\nRuntimeError: DOCUMENT_SPEC_UNRESOLVED\n"
+  },
+  {
+   "capability_id": "docx.document.create_from_json_record",
+   "signature": {
+    "goal": "STRING",
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:JSON_DOCX_SPEC_UNRESOLVED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/docx_report_from_json.py\", line 42, in run\n    title,paragraph,headers,fields=_spec(goal); record=_record(json.loads(source.read_text(encoding=\"utf-8\")),fields)\n                                   ^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/docx_report_from_json.py\", line 21, in _spec\n    if not tm or not pm or not hm: raise RuntimeError(\"JSON_DOCX_SPEC_UNRESOLVED\")\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: JSON_DOCX_SPEC_UNRESOLVED\n"
+  },
+  {
+   "capability_id": "docx.document.verify.intent_ooxml",
+   "signature": {
+    "docx_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:DOCX_INTENT_SIDECAR_MISSING": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/docx_verify_ooxml_intent.py\", line 79, in run\n    raise RuntimeError(\"DOCX_INTENT_SIDECAR_MISSING\")\nRuntimeError: DOCX_INTENT_SIDECAR_MISSING\n"
+  },
+  {
+   "capability_id": "docx.document.verify.ooxml",
+   "signature": {
+    "document_path": "PATH_FILE",
+    "expected_structure": "JSON_TEXT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:DOCX_EXPECTED_STRUCTURE_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/docx_verify_ooxml.py\", line 25, in run\n    raise RuntimeError(\"DOCX_EXPECTED_STRUCTURE_REQUIRED\")\nRuntimeError: DOCX_EXPECTED_STRUCTURE_REQUIRED\n"
+  },
+  {
+   "capability_id": "evidence.claim_relation.generic_units.stdlib",
+   "signature": {
+    "extraction_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "spec": "JSON_TEXT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "ValueError:EXTRACTION_SCHEMA_INVALID": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py\", line 270, in run\n    result=evaluate(extraction,spec)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py\", line 161, in evaluate\n    units=_validated_units(extraction)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: EXTRACTION_SCHEMA_INVALID\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+   "signature": {
+    "extraction_path": "PATH_FILE",
+    "objective": "JSON_TEXT",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "evidence.oracle.concrete_execution.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source": "UNKNOWN",
+    "source_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:source": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "evidence.oracle.hypothesis_property.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source": "UNKNOWN",
+    "source_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:source": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "execution.pipeline.8stage.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "stages": "UNKNOWN"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:stages": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "finance.saccr.credit.addon.v1",
+   "signature": {
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "http.json.fetch_from_state",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_json_path": "PATH_FILE",
+    "url_key": "STRING"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:URL_KEY_NOT_UNIQUE:0": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/http_json_fetch.py\", line 38, in run\n    raise RuntimeError(\"URL_KEY_NOT_UNIQUE:\"+str(len(hits)))\nRuntimeError: URL_KEY_NOT_UNIQUE:0\n"
+  },
+  {
+   "capability_id": "image.code.decode.zbarimg",
+   "signature": {
+    "path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:exit_status_is_the_answer": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "image.extract.ocr.tesseract",
+   "signature": {
+    "path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "FileNotFoundError:[Errno 2] No such file or directory: 'tesseract'": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/image_ocr_tesseract.py\", line 91, in run\n    dependency=verify_dependency_surface()\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/image_ocr_tesseract.py\", line 45, in verify_dependency_surface\n    version_line=_run_text([\"tesseract\",\"--version\"]).splitlines()[0].strip()\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'tesseract'\n"
+  },
+  {
+   "capability_id": "image.qr.generate.qrencode",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "text": "STRING"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:exit_status_is_the_answer": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "json.file.write",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "spec": "JSON_TEXT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "json.query.jq",
+   "signature": {
+    "jq_filter": "STRING",
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:JQ_FAILED:jq: error: oscar/0 is not defined at <top-level>, line 1:": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/jq_query.py\", line 46, in run\n    raise RuntimeError(\"JQ_FAILED:\"+proc.stderr[-1600:])\nRuntimeError: JQ_FAILED:jq: error: oscar/0 is not defined at <top-level>, line 1:\noscar\njq: 1 compile error\n\n"
+  },
+  {
+   "capability_id": "knowledge.consistency.assess",
+   "signature": {
+    "evidence_paths": "PATH_LIST",
+    "max_age_s": "NUMBER",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "NO_ADAPTER_RESOLVABLE": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "knowledge.json.fetch.external",
+   "signature": {
+    "authoritative": "BOOL",
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "url": "STRING"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "NO_ADAPTER_RESOLVABLE": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "knowledge.status.assert",
+   "signature": {
+    "candidate_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'source_candidate_provenance_verify'"
+  },
+  {
+   "capability_id": "knowledge.support.materialize",
+   "signature": {
+    "candidate_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "verification_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'source_candidate_provenance_verify'"
+  },
+  {
+   "capability_id": "math.numeric_expression.sympy",
+   "signature": {
+    "expression": "STRING",
+    "output_path": "PATH_OUTPUT",
+    "variables": "KV"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'sympy'"
+  },
+  {
+   "capability_id": "orchestration.verify.bridge_enumeration.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "registry": "UNKNOWN"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:registry": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "pdf.extract.ocr.tesseract",
+   "signature": {
+    "pdf_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "FileNotFoundError:[Errno 2] No such file or directory: 'pdftoppm'": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py\", line 29, in run\n    render=subprocess.run(\n           ^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'pdftoppm'\n"
+  },
+  {
+   "capability_id": "pdf.extract.text.pypdf",
+   "signature": {
+    "pdf_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "PdfStreamError:Stream has ended unexpectedly": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/pdf_pypdf.py\", line 24, in run\n    reader=PdfReader(str(src))\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/dist-packages/pypdf/_reader.py\", line 151, in __init__\n    self._initialize_stream(stream)\npypdf.errors.PdfStreamError: Stream has ended unexpectedly\n"
+  },
+  {
+   "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+   "signature": {
+    "goal": "STRING",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+   "signature": {
+    "goal": "STRING",
+    "result_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "FileNotFoundError:[Errno 2] No such file or directory: '/home/user/brain/canonical/astra_runtime/tmp/typed_sweep/plain_goal_bound_capabili": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/plain_goal_bound_grounding_verify.py\", line 75, in run\n    result=json.loads(result_path.read_text(encoding=\"utf-8\"))\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/pathlib.py\", line 1059, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors) as f:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/home/user/brain/canonical/astra_runtime/tmp/typed_sweep/plain_goal_bound_capability_grounding_verify_stdlib/o434102896.txt'\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "professional.artifact.visual_observer.v1",
+   "signature": {
+    "path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "ADAPTER_IMPORT_FAILED:ModuleNotFoundError": 2
+   },
+   "sample_error": "No module named 'PIL'"
+  },
+  {
+   "capability_id": "pypi.provenance.audit_live_artifact",
+   "signature": {
+    "metadata_path": "PATH_FILE",
+    "report_path": "PATH_OUTPUT",
+    "selection_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:PYPI_SOURCE_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/pypi_provenance_audit.py\", line 31, in run\n    raise RuntimeError(\"PYPI_SOURCE_REQUIRED\")\nRuntimeError: PYPI_SOURCE_REQUIRED\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "python.contract.check.crosshair.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "target_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.contract.issue_orchestration.fusion.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.evidence.contract.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.fault.patch.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.fault.provenance.fusion.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.fault.provenance.interprocedural.value.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.issue.natural_language.parse_edit_intent.v1",
+   "signature": {
+    "index_path": "PATH_FILE",
+    "issue_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.orchestration.symbol.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.patch.review.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.patch.search.test_guided.ast.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_path": "PATH_FILE",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.pipeline.allowlist_gate.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.pr.land.composer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.provenance.coupling.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.refactor.extract_function.v1",
+   "signature": {
+    "end_line": "UNKNOWN",
+    "module": "UNKNOWN",
+    "new_name": "UNKNOWN",
+    "output_path": "PATH_OUTPUT",
+    "qualname": "UNKNOWN",
+    "source_root": "PATH_DIR",
+    "start_line": "UNKNOWN"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.refactor.inline_helper.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:helper_name": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.refactor.rename_parameter.v1",
+   "signature": {
+    "module": "UNKNOWN",
+    "new_param": "UNKNOWN",
+    "old_param": "UNKNOWN",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "qualname": "UNKNOWN",
+    "run_tests": "UNKNOWN",
+    "source_root": "PATH_DIR",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.refactor.rename_symbol.v1",
+   "signature": {
+    "module": "UNKNOWN",
+    "new_symbol": "UNKNOWN",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "qualname": "UNKNOWN",
+    "run_tests": "UNKNOWN",
+    "source_root": "PATH_DIR",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.refactor.test_scaffold.fusion.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.repo.diff_apply_full_testgate.v1",
+   "signature": {
+    "anchor_path": "PATH_FILE",
+    "diff_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.repo.pr_realize.v1",
+   "signature": {
+    "apply_directory": "UNKNOWN",
+    "base_branch": "UNKNOWN",
+    "branch_name": "UNKNOWN",
+    "diff_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "pr_intent_path": "PATH_FILE",
+    "repo_path": "PATH_FILE",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.repository.acceptance.measure.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.review.diff_coverage_gate.v1",
+   "signature": {
+    "anchor_path": "PATH_FILE",
+    "diff_path": "PATH_FILE",
+    "min_coverage_ratio": "UNKNOWN",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.review.diff_mutation_gate.v1",
+   "signature": {
+    "anchor_path": "PATH_FILE",
+    "diff_path": "PATH_FILE",
+    "max_mutants": "NUMBER",
+    "min_kill_ratio": "UNKNOWN",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "run_tests": "UNKNOWN",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.review.diff_perf_gate.v1",
+   "signature": {
+    "anchor_path": "PATH_FILE",
+    "bench_path": "PATH_FILE",
+    "diff_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "repeats": "UNKNOWN",
+    "timeout_s": "NUMBER",
+    "tolerance": "UNKNOWN"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.review.diff_security_gate.v1",
+   "signature": {
+    "diff_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "timeout_s": "NUMBER",
+    "worktree_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.review.diff_static_triage.v1",
+   "signature": {
+    "diff_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "timeout_s": "NUMBER",
+    "worktree_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.review.diff_type_gate.v1",
+   "signature": {
+    "diff_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "python_executable": "UNKNOWN",
+    "timeout_s": "NUMBER",
+    "worktree_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.issue_to_pr.orchestrate.v1",
+   "signature": {
+    "diff_path": "PATH_FILE",
+    "index_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "pr_intent_path": "PATH_FILE",
+    "python_executable": "UNKNOWN",
+    "source_root": "PATH_DIR",
+    "task_path": "PATH_FILE",
+    "timeout_s": "NUMBER",
+    "worktree_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.apply.verified.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.loop.coupled.ast.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_paths": "PATH_LIST",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.measured_acceptance.v1",
+   "signature": {
+    "goal": "STRING",
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.route.v1",
+   "signature": {
+    "budget": "NUMBER",
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.repair.semantic_acceptance.v1",
+   "signature": {
+    "goal": "STRING",
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "test_argv": "ARGV",
+    "test_paths": "PATH_LIST"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.software.request.semantic_behavior.compile.v1",
+   "signature": {
+    "goal": "STRING",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.audit.ast",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.change_impact.testselect.v1",
+   "signature": {
+    "changed_paths": "PATH_LIST",
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:CHANGED_PYTHON_MODULE_NOT_INDEXED:calc.py": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/python_change_impact_testselect.py\", line 340, in run\n    raise RuntimeError(\"CHANGED_PYTHON_MODULE_NOT_INDEXED:\" + \",\".join(unknown))\nRuntimeError: CHANGED_PYTHON_MODULE_NOT_INDEXED:calc.py\n"
+  },
+  {
+   "capability_id": "python.source.complexity.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.crossfile_edit.choreograph.v1",
+   "signature": {
+    "edits_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.dead_code.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.definition_count.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.secret_scan.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.symbols.index.ast",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.symbols.resolve.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "queries": "UNKNOWN",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.taint_flow.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:sink": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.source.test_adequacy.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:TEST_ROOT_MISSING": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/python_source_test_adequacy.py\", line 118, in run\n    raise RuntimeError(\"TEST_ROOT_MISSING\")\nRuntimeError: TEST_ROOT_MISSING\n"
+  },
+  {
+   "capability_id": "python.symbol.resolve.standalone.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.task.acceptance.measured.objective.v1",
+   "signature": {
+    "goal": "STRING",
+    "measurement_receipt_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.test.pipeline.verifier.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.tests.advance.mutation_kill.v1",
+   "signature": {
+    "max_mutants": "NUMBER",
+    "module_name": "STRING",
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR",
+    "time_budget_s": "NUMBER",
+    "timeout_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.tests.audit.unittest",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "pattern": "STRING",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.tests.generate.scaffold.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.tests.synthesize.pynguin.v1",
+   "signature": {
+    "algorithm": "UNKNOWN",
+    "output_path": "PATH_OUTPUT",
+    "search_seed": "UNKNOWN",
+    "source_root": "PATH_DIR",
+    "time_budget_s": "NUMBER"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "python.vcs.merge_conflict.resolve.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:TEST_ROOT_MISSING": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/python_source_merge_resolve.py\", line 140, in run\n    raise RuntimeError(\"TEST_ROOT_MISSING\")\nRuntimeError: TEST_ROOT_MISSING\n"
+  },
+  {
+   "capability_id": "shell.command.run",
+   "signature": {
+    "argv": "ARGV",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 0,
+   "succeeded": 0,
+   "failed": 0,
+   "errors": {
+    "SAMPLING_FAILED:NO_SAMPLER_FOR_TYPE:UNKNOWN:exit_status_is_the_answer": 2
+   },
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.evidence.synthesis.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.hardcore.closing.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.hardcore.final.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.hardcore.kernel.orchestrate.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.hardcore.swe.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.patch.synthesize.cegis.z3.v1",
+   "signature": {
+    "manifest": "UNKNOWN",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.repair.choreograph.crossfile.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "source_root": "PATH_DIR"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:CHOREOGRAPHY_REPAIR_UNRESOLVED:File \"/home/user/brain/canonical/astra_runtime/tmp/typed_sweep/software_repair_choreograp": 1,
+    "RuntimeError:CHOREOGRAPHY_REPAIR_UNRESOLVED::": 1
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py\", line 934, in run\n    raise RuntimeError(\"CHOREOGRAPHY_REPAIR_UNRESOLVED:\" + _err[:200])\nRuntimeError: CHOREOGRAPHY_REPAIR_UNRESOLVED:File \"/home/user/brain/canonical/astra_runtime/tmp/typed_sweep/software_repair_choreograph_crossfile_v1/repo983550010/coupled_184573_hshx/test_calc_acudq_coupled.py\", line 4, in <module>\n    assert m.\n"
+  },
+  {
+   "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+   "signature": {
+    "budget": "NUMBER",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:MISSING_REQUIRED_ARGUMENTS": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py\", line 65, in run\n    return _run_manifest_mode(args,repo,output)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py\", line 179, in _run_manifest_mode\n    r4=choreo_mod.run({\"output_path\": f\"canonical/tmp_loop_choreo_{i}.json\"}, repo)\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: MISSING_REQUIRED_ARGUMENTS\n"
+  },
+  {
+   "capability_id": "software.review.gate.composer.v1",
+   "signature": {
+    "anchor_path": "PATH_FILE",
+    "bench_path": "PATH_FILE",
+    "diff_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.review.synthesis.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.synthesis.grid_induction.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "software.test.contract.supercomposer.v1",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "source.authority.identity.ror",
+   "signature": {
+    "discovery_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "source.candidates.enumerate.stdlib",
+   "signature": {
+    "goal": "STRING",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:JSON_OUTPUT_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/source_candidates_enumerate.py\", line 52, in run\n    raise RuntimeError(\"JSON_OUTPUT_REQUIRED\")\nRuntimeError: JSON_OUTPUT_REQUIRED\n"
+  },
+  {
+   "capability_id": "source.evidence.extract.objective_grounded.stdlib",
+   "signature": {
+    "input_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "source.objective_relevance.rank.bm25",
+   "signature": {
+    "input_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "sqlite.table.create_from_json_records",
+   "signature": {
+    "goal": "STRING",
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:SQLITE_COLUMNS_UNRESOLVED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/sqlite_table_stdlib.py\", line 171, in run\n    cols=_columns(goal)\n         ^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/sqlite_table_stdlib.py\", line 120, in _columns\n    raise RuntimeError(\"SQLITE_COLUMNS_UNRESOLVED\")\nRuntimeError: SQLITE_COLUMNS_UNRESOLVED\n"
+  },
+  {
+   "capability_id": "sqlite.table.verify_against_json_records",
+   "signature": {
+    "goal": "STRING",
+    "json_path": "PATH_FILE",
+    "sqlite_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "DatabaseError:file is not a database": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/sqlite_verify_cli.py\", line 180, in run\n    tables=_run_json(\n           ^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/sqlite_verify_cli.py\", line 168, in _run_json\n    cur.execute(sql)\nsqlite3.DatabaseError: file is not a database\n"
+  },
+  {
+   "capability_id": "structured.decision_evidence.locate.stdlib",
+   "signature": {
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:JSON_OUTPUT_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/decision_evidence_locate.py\", line 83, in run\n    raise RuntimeError(\"JSON_OUTPUT_REQUIRED\")\nRuntimeError: JSON_OUTPUT_REQUIRED\n"
+  },
+  {
+   "capability_id": "task.acceptance.objective.lossless.v1",
+   "signature": {
+    "candidate_response": "STRING",
+    "raw_task_text": "STRING"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "terminal.kstar.root.assess.stdlib",
+   "signature": {},
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "test.slice.never_miss.v1",
+   "signature": {
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "text.file.write",
+   "signature": {
+    "content": "STRING",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "web.browser.rendered.capture.chromedriver",
+   "signature": {
+    "result_path": "PATH_OUTPUT",
+    "screenshot_path": "PATH_OUTPUT",
+    "url": "STRING"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:BROWSER_URL_INVALID": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/browser_chromedriver.py\", line 44, in run\n    raise RuntimeError(\"BROWSER_URL_INVALID\")\nRuntimeError: BROWSER_URL_INVALID\n"
+  },
+  {
+   "capability_id": "web.release.verify.independent_http",
+   "signature": {
+    "major": "NUMBER",
+    "product": "STRING",
+    "result_path": "PATH_OUTPUT",
+    "version_field": "STRING"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:RELEASE_RESULT_JSON_MISSING": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/web_release_verify.py\", line 59, in run\n    raise RuntimeError(\"RELEASE_RESULT_JSON_MISSING\")\nRuntimeError: RELEASE_RESULT_JSON_MISSING\n",
+   "strategy": "schema"
+  },
+  {
+   "capability_id": "xlsx.table.create_from_json_records",
+   "signature": {
+    "goal": "STRING",
+    "json_path": "PATH_FILE",
+    "output_path": "PATH_OUTPUT"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 2,
+   "failed": 0,
+   "errors": {},
+   "sample_error": null
+  },
+  {
+   "capability_id": "xlsx.table.verify_against_json_records",
+   "signature": {
+    "goal": "STRING",
+    "json_path": "PATH_FILE",
+    "xlsx_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "ModuleNotFoundError:No module named 'openpyxl'": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py\", line 17, in _import_openpyxl\n    import openpyxl\nModuleNotFoundError: No module named 'openpyxl'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py\", line 119, in run\n    openpyxl=_import_openpyxl()\n             ^^^^^^^^^^^^^^^^^^\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py\", line 23, in _import_openpyxl\n    import openpyxl\nModuleNotFoundError: No module named 'openpy"
+  },
+  {
+   "capability_id": "yaml.to_json.yq",
+   "signature": {
+    "output_path": "PATH_OUTPUT",
+    "yaml_path": "PATH_FILE"
+   },
+   "instances": 2,
+   "executed": 2,
+   "succeeded": 0,
+   "failed": 2,
+   "errors": {
+    "RuntimeError:JSON_OUTPUT_REQUIRED": 2
+   },
+   "sample_error": "Traceback (most recent call last):\n  File \"/home/user/brain/execution_guard/typed_capability_sweep_v1.py\", line 724, in sweep_one\n    fn(dict(args), str(ROOT))\n  File \"/home/user/brain/canonical/runtime/bound_capabilities/yq_yaml_json.py\", line 20, in run\n    raise RuntimeError(\"JSON_OUTPUT_REQUIRED\")\nRuntimeError: JSON_OUTPUT_REQUIRED\n"
+  }
+ ]
+}
