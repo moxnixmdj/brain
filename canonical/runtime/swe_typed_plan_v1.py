@@ -131,6 +131,12 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         hits = tuple(t for t in triggers if t in head)
         if hits:
             return hits, terms, token
+    # Unqualified repository reads use the existing operation grammar, not
+    # broad nouns such as "status" inside deployment questions or task data.
+    if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"
+                    r"(?:me\s+)?(?:the\s+)?(?:diff|status|history|current\s+branch)[.?!]*", prose.lower().strip()):
+        if len(derivation.stated_git_operations(goal)) == 1:
+            return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
     return None
 
 
@@ -332,6 +338,9 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     if fam is None:
         return None
     triggers, terms, token = fam
+    operations = derivation.stated_git_operations(goal) if token == GIT_FAMILY_TOKEN else ()
+    if len(operations) > 1 or (operations and re.search(r"\bbisect\b", front.prose_only(goal), re.I)):
+        return None  # a history noun must not turn a bisection into a log read
     candidates: list[str] = []
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
@@ -343,6 +352,13 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         # tools became bindable, and wasted their contract-binding work.
         if token not in cid.lower():
             continue
+        if operations:
+            contract = selection.contract_of(entry, declared.get(cid))
+            args = contract.get("args", {}) if isinstance(contract, Mapping) else {}
+            # A specific operation needs an operation-bearing contract. A
+            # bisector's bindable source_root alone cannot answer "git blame".
+            if "op" not in args:
+                continue
         surface = " ".join(map(str, (entry.get("keywords") or []) +
                                (entry.get("provides") or []))) + " " + cid
         low = surface.lower()
@@ -358,7 +374,7 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     # change gate.  The inliner's own keyword "only caller" states what the
     # sentence asks for.  Enumerate that DECLARED-phrase evidence first, admit it
     # with the same oracle, and only an unambiguous admission wins.
-    rivals = _phrase_rivals(goal, triggers, token, registry)
+    rivals = _phrase_rivals(goal, triggers, token, registry) if not operations else set()
     if rivals:
         rival_hits: list[tuple[str, dict]] = []
         for cid in sorted(rivals):
@@ -379,7 +395,8 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
             decision = selection.admit(goal, cid, registry[cid], root, declared.get(cid))
         except Exception:
             continue
-        if decision.get("admitted") and decision.get("specific"):
+        if (decision.get("admitted") and decision.get("specific")
+                and (not operations or (decision.get("inputs") or {}).get("op") == operations[0])):
             admitted.append((cid, dict(decision.get("inputs") or {})))
     if len(admitted) != 1:
         return None  # ambiguous / none -> fail closed

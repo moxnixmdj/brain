@@ -405,11 +405,11 @@
       "chosen_candidate": "UPGRADE_SWE_REPAIR_REFACTOR_FAULT_ADAPTERS_AND_ADD_DETERMINISTIC_GIT_BISECT_AND_AST_MUTATION_TESTING",
       "counterexample_receipts": [
         {
-          "git_blob_sha": "70c10e92bf5cb160e7c4879b50c95c4792d49c7f",
+          "git_blob_sha": "95bad7bf130466a02f36de2f7f1cc1de8d4be476",
           "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py"
         },
         {
-          "git_blob_sha": "58ff46e7a7a478499631246dcbdf97ae41bd04d4",
+          "git_blob_sha": "a8e8598eeaef6ea3f2e92b302b902eb9f1da4db3",
           "path": "canonical/runtime/bound_capabilities/python_refactor_rename_parameter.py"
         },
         {

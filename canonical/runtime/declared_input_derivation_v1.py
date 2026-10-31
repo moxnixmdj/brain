@@ -116,8 +116,7 @@ def is_swe_request(goal: str) -> bool:
     text = str(goal or "").lower()
     if any(verb in text for verb in _SWE_VERBS):
         return True
-    return len([name for name, pattern in _GIT_OPERATION_GRAMMAR
-                if pattern.search(text)]) == 1
+    return len(stated_git_operations(goal)) == 1
 
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
 _TEST_NAME_RE = re.compile(r"(^|/)(test_[^/]*|[^/]*_test)\.(py|js|ts|go|rs)$")
@@ -450,6 +449,16 @@ def _materialize_git_diff_for_dir(root: pathlib.Path, rel_dir: str) -> tuple[str
     return spool_rel, changed_rel
 
 
+def stated_git_operations(goal: str) -> tuple[str, ...]:
+    """Reuse the operation grammar on intent, never on paths or literal payloads."""
+    from canonical.runtime import goal_front_compiler_v1 as front
+    prose = front.prose_only(goal)
+    stated = tuple(name for name, pattern in _GIT_OPERATION_GRAMMAR if pattern.search(prose))
+    if stated == ("commit",) and not _REPOSITORY_CONTEXT.search(prose):
+        return ()
+    return stated
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -503,7 +512,10 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             # its top-level name and a correct repair reads as red.  Bounded to three
             # ancestors and only taken when the stated file's own directory holds no
             # tests, so a package layout is untouched.
-            widened = _project_root(pathlib.Path(root), sources[0])
+            # Only a contract that consumes tests needs a test-owning ancestor.
+            # A read-only index must not expand one stated file into the repo.
+            needs_tests = bool(keys & {"test_paths", "test_argv", "test_path", "test_file"})
+            widened = _project_root(pathlib.Path(root), sources[0]) if needs_tests else None
             if widened and widened != parent:
                 parent, rule = widened, "PATH_DIR_NEAREST_ANCESTOR_THAT_OWNS_THE_TESTS"
             out["source_root"] = {"value": parent, "rule": rule,
@@ -873,10 +885,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 out[key] = {"value": proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
                             "evidence": f"{proved[0][0]}:{proved[0][1]}"}
     if "op" in keys:
-        stated = [name for name, pattern in _GIT_OPERATION_GRAMMAR
-                  if pattern.search(str(goal or ""))]
-        if stated == ["commit"] and not _REPOSITORY_CONTEXT.search(str(goal or "")):
-            stated = []
+        stated = stated_git_operations(goal)
         if len(stated) == 1:
             out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
                          "evidence": stated[0]}

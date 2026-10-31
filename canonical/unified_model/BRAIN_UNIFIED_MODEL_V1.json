@@ -26660,7 +26660,7 @@
    "verification": {
     "evidence_path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "00f6262235c3db18361be59b03228c0d21fd1a93e902973c9cdbdc008f6b8589",
+    "evidence_sha256": "6add96a57c8735a4fc7f9f5211c78106f203693fe272c961694de2bbce119e02",
     "independent_verification_evident": true,
     "mission_id": "HARDCORE-SWE-SYNTH-001",
     "module_sha256": null,
@@ -30596,9 +30596,9 @@
   "bound_capabilities": 147,
   "capabilities": 441,
   "engines": 26,
-  "knowledge_documents": 187,
+  "knowledge_documents": 188,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6521,
+  "research_index_records": 6522,
   "routing_tokens": 2268,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30607,7 +30607,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4f0fd18357d1d200d8a22e805ca900fcd7126feb575bd73fa03dd737e4e568d8"
+  "value": "cf3ad95df24401b496f47a1171023ccbc6be2580b68e1e45544c558a6f9f603a"
  },
  "engines": [
   {
@@ -56350,6 +56350,81 @@
     "heartbeat",
     "live"
    ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5905,
+   "headings": [
+    "Reuse engineering operation intent — 2026-10-31",
+    "Scope",
+    "Existing machinery reused",
+    "Actual results",
+    "Adverse observations retained",
+    "Concurrent main integration",
+    "Final validation and upstream test repair"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/SWE_OPERATION_INTENT_REUSE_20261031.md",
+   "sha256": "56b08ddfe9a010451ef69c21850813f4558aa4ff42f48a97893051e5437ffcdc",
+   "summary": "Base: `59a593ca9094ecd7c31b02f83b05c9d27636a181`. Upstream synthesis, static-soundness, polyglot and network-mediation work is integrated, not reimplemented. This change adds no registry rows, providers, terminal credit, policies or runtime model calls.",
+   "terms": {
+    "10": 2,
+    "30": 2,
+    "33": 2,
+    "actual": 6,
+    "added": 3,
+    "authorship": 3,
+    "before": 3,
+    "branch": 3,
+    "caller": 5,
+    "cannot": 3,
+    "code": 3,
+    "contract": 4,
+    "controls": 5,
+    "execution": 4,
+    "existing": 8,
+    "failed": 3,
+    "file": 4,
+    "final": 5,
+    "function": 3,
+    "generated": 3,
+    "git": 6,
+    "history": 3,
+    "integrated": 4,
+    "intent": 3,
+    "main": 3,
+    "merge": 4,
+    "model": 5,
+    "new": 3,
+    "no": 5,
+    "not": 12,
+    "operation": 5,
+    "passed": 12,
+    "pr": 3,
+    "primary": 3,
+    "production": 3,
+    "public": 3,
+    "real": 3,
+    "regenerated": 3,
+    "rename": 3,
+    "reported": 3,
+    "repository": 3,
+    "retained": 4,
+    "stated": 3,
+    "test": 6,
+    "tests": 5,
+    "unchanged": 3,
+    "upstream": 7,
+    "validation": 5
+   },
+   "title": "Reuse engineering operation intent — 2026-10-31",
+   "title_terms": [
+    "2026-10-31",
+    "engineering",
+    "intent",
+    "operation",
+    "reuse"
+   ]
   }
  ],
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
@@ -56378,10 +56453,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 978,
+  "included_source_count": 979,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "00d1846652fd330309af11ac1c2f89c69766c6862892754c525ae2357360731f"
+  "source_tree_digest": "feaf988997835dbf44374335e9ad44361cc2a66ef29fd4acf342bfa09cd19b38"
  },
  "research_index": [
   {
@@ -203967,7 +204042,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "00f6262235c3db18361be59b03228c0d21fd1a93e902973c9cdbdc008f6b8589",
+   "sha256": "6add96a57c8735a4fc7f9f5211c78106f203693fe272c961694de2bbce119e02",
    "status": "",
    "terms": {
     "1.31": 1,
@@ -206046,6 +206121,51 @@
     "reuse": 1,
     "scheduler": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "REUSE_SWE_OPERATION_INTENT_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/REUSE_SWE_OPERATION_INTENT_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REUSE_SWE_OPERATION_INTENT_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "acc7b50a6981b970bf0ed1c5736bdf13a54aa89749652d534cd6642159e8ed96",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "authoritative": 1,
+    "authorship": 1,
+    "bindable": 1,
+    "bisectors": 1,
+    "broad": 1,
+    "caller": 1,
+    "checks": 1,
+    "competed": 1,
+    "contaminated": 1,
+    "derivation": 1,
+    "did": 1,
+    "enter": 1,
+    "family": 1,
+    "git": 1,
+    "hid": 1,
+    "inside": 1,
+    "intent": 1,
+    "name": 1,
+    "not": 1,
+    "obligations": 1,
+    "operation": 2,
+    "operations": 1,
+    "queries": 1,
+    "reads": 1,
+    "real": 1,
+    "rejected": 1,
+    "reuse": 1,
+    "reuse_swe_operation_intent_20261031_v1": 1,
+    "short": 1,
+    "source-edit": 1,
+    "swe": 1
    }
   },
   {
@@ -228559,9 +228679,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "fd6b2baa950d79846c96e152e8a3ad032462333a37ae72b7c73d93c90382c008",
+   "sha256": "56a8216921c12ded5b50f68a18b3a37a40c0a91fb919d06a933dd3fd384187da",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
     "_git_head_tree_blobs",
     "_holds_tests",
@@ -228573,7 +228693,8 @@
     "binding_view",
     "derive",
     "is_swe_request",
-    "stated_existing_files"
+    "stated_existing_files",
+    "stated_git_operations"
    ],
    "terms": {
     "adapter_defaulted_keys": 1,
@@ -228594,6 +228715,7 @@
     "read_git_loose_obj": 1,
     "sentences": 1,
     "stated_existing_files": 1,
+    "stated_git_operations": 1,
     "tree_of": 1,
     "typed": 1,
     "v1": 1
@@ -242732,7 +242854,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "821f85a9252f61b836864928389c71a0205c103cc22ba11407c834ae887662b8",
+   "sha256": "42d157cc5f2695c06315c4e8ebb85ac1a3c85838ac07d6e19b37847af0b9c7aa",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 70,
    "symbols": [
@@ -272410,7 +272532,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "fa76bdb52389f35c0c1a5b7f714271f47286689e36794587323b5bc5edce02f6",
+   "sha256": "4c6143483730e939d4f43bdc9b44cc388fd0d536c7590adeedc549bfbe0e2536",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 16,
    "symbols": [

@@ -2517,6 +2517,13 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             plan = _typed.build_plan(_request_goal(request), ROOT)
         except Exception:
             plan = None
+        if plan is None:
+            # This stated family is authoritative even when planning refuses.
+            # Do not spend a second compile on a different lexical question.
+            return _fail(str(request.get("task_id") or ""),
+                         "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED", "STATED_SWE_EFFECT_UNSERVED",
+                         perf_counter_ns(), executed=False,
+                         reason="NO_DECISIVE_TYPED_PLAN_FOR_STATED_GIT_EFFECT")
         if plan is not None:
             fast_request = dict(request)
             fast_request["_typed_swe_plan"] = plan
