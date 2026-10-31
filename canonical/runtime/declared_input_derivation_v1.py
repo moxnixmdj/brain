@@ -75,6 +75,7 @@ _SWE_VERBS = (
     "inline", "single-use", "single use", "merge conflict", "conflict", "unmerged",
     "injection", "parameterize", "parameterized", "sql", "dead code", "unused import",
     "remove the unused", "move the function", "add a parameter", "caller",
+    "circular import", "import cycle", "break the cycle", "thread-safe",
 )
 
 
@@ -193,9 +194,26 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                            if p.is_file() and _TEST_NAME_RE.search(p.name))
         except OSError:
             found = []
+        if not found and (parent.parent / "tests").is_dir():
+            try:
+                found = sorted(p for p in (parent.parent / "tests").rglob("*.py")
+                               if p.is_file() and _TEST_NAME_RE.search(p.name))
+            except OSError:
+                found = []
         if len(found) == 1:
             tests = [str(found[0].relative_to(pathlib.Path(root)))]
             discovered_tests = True
+
+    if "origin_path" in keys and "target_module_path" in keys and len(sources) == 2:
+        g_text = str(goal or "")
+        from_hits = [s for s in sources if re.search(r"\bfrom\s+(?:the\s+file\s+)?" + re.escape(s), g_text, re.I)]
+        to_hits = [s for s in sources if re.search(r"\b(?:to|into)\s+(?:the\s+file\s+)?" + re.escape(s), g_text, re.I)]
+        if len(from_hits) == 1 and len(to_hits) == 1 and from_hits[0] != to_hits[0]:
+            out["origin_path"] = {"value": from_hits[0], "rule": "ORIGIN_PATH_FROM_ROLE", "evidence": from_hits[0]}
+            out["target_module_path"] = {"value": to_hits[0], "rule": "TARGET_MODULE_PATH_FROM_ROLE", "evidence": to_hits[0]}
+            fn_m = re.search(r"\b(?:function|method|class|symbol|helper)\s+([A-Za-z_][A-Za-z0-9_]*)\b", g_text, re.I)
+            if "qualname" in keys and fn_m:
+                out["qualname"] = {"value": fn_m.group(1), "rule": "QUALNAME_FROM_MOVE_CLAUSE", "evidence": fn_m.group(1)}
 
     # A directory slot is satisfied by the parent of the ONE stated source file.
     if "source_root" in keys and len(sources) == 1:

@@ -101,7 +101,7 @@ SOURCE_SUFFIXES: tuple[str, ...] = (
 # names.  Read from the id, never asserted about particular rows.
 _TRANSFORMERS: tuple[str, ...] = (
     "edit", "repair", "refactor", "rename", "patch", "apply", "fix", "rewrite",
-    "transform", "migrate", "format", "generate", "scaffold", "synthes",
+    "transform", "migrate", "format", "generate", "scaffold", "synthes", "resolve",
 )
 
 

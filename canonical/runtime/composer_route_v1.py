@@ -654,6 +654,15 @@ def extract_content_destination(text: str) -> str | None:
     return None
 
 
+_ANAPHORIC_DELIVERY_BODY = re.compile(
+    r"^(?:yes or no|true or false|"
+    r"(?:its|their|the)\s+(?:[a-z]+\s+)?(?:name|names|id|sha|score|number|count|"
+    r"result|results|answer|value|values|file and line|path and line|line and file|path|line))"
+    r"(?:\s*\([^)]*\))?$",
+    re.I,
+)
+
+
 def extract_content(text: str) -> str | None:
     """What the goal asks to be written, when it says.
 
@@ -663,11 +672,15 @@ def extract_content(text: str) -> str | None:
     """
     sentence = str(text or "")
     for table in (_CONTENT, _CONTENT_FALLBACK):
-        for pat in table:
+        for idx, pat in enumerate(table):
             m = pat.search(sentence)
             if not m:
                 continue
-            body = m.group(1).strip().strip("'\"")
+            raw = m.group(1).strip()
+            quoted = len(raw) >= 2 and raw[0] == raw[-1] and raw[0] in "'\""
+            body = raw.strip("'\"")
+            if idx == 1 and not quoted and _ANAPHORIC_DELIVERY_BODY.fullmatch(body):
+                continue
             if body:
                 # The payload is delivered VERBATIM.  This used to strip a leading
                 # "the"/"a"/"an", on the reasoning that an article is grammar rather
@@ -893,7 +906,17 @@ _INSIDE_THE_FILE_NOUNS = (
     r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
     r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix|"
-    r"duplicate|duplicates|repeat|repeats|repeated"
+    r"duplicate|duplicates|repeat|repeats|repeated|"
+    r"function|functions|method|methods|class|classes|symbol|symbols|helper|helpers|"
+    r"import|imports|parameter|parameters|argument|arguments|variable|variables|"
+    r"constant|constants|definition|definitions|dead\s+code|injection|injections|"
+    r"vulnerability|vulnerabilities|bug|bugs|defect|defects|cycle|cycles|conflict|conflicts|race"
+)
+
+_CODE_ENTITY_OBJECT = (
+    r"(?![^\n]{0,30}?\b(?:the\s+|a\s+|an\s+)?"
+    r"(?:unused\s+|single[- ]use\s+|private\s+|public\s+|helper\s+)*"
+    r"(?:function|method|class|symbol|helper|parameter|argument|variable|constant|import|definition)s?\b)"
 )
 
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
@@ -908,7 +931,7 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # None, which ends the search.  The whole table was abandoned on a word that
     # meant "repeated", not "make a second copy".
     (r"\b(?:copy|duplicate)\b(?![^\n]{0,20}?\blines?\b)", "cp", _no_flags, 2),
-    (r"\b(?:move|rename)\b", "mv", _no_flags, 2),
+    (r"\b(?:move|rename)\b" + _CODE_ENTITY_OBJECT, "mv", _no_flags, 2),
     # "Erase the file X" measured to bind nothing.  The negative lookahead is
     # scoped to exactly one claim: removing LINES that are duplicated is a
     # filter over a file that stays, not a deletion of it.  Measured without it,
@@ -2791,19 +2814,12 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, "-r", str(paths[0]), str(paths[1])]
         if (program == "rm" and _DIRECTORY_REQUEST.search(text)
                 and not re.search(r"\bfiles?\b|\*|\bnamed\b|\bpattern\b", text)):
-            # The same reading `cp` already makes: a sentence that says
-            # "directory" is asking about a tree, and plain `rm` on a directory
-            # fails.  Measured, "Delete the directory D" bound `rm D` and came
-            # back COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN -- the vaguest report
-            # there is -- over a directory that was still standing.
-            #
-            # Scoped here to a sentence that mentions no file at all.  Without
-            # the guard, "Delete the files named '*.log' in the directory D"
-            # matched -- it says "directory", and paths[0] is the DIRECTORY -- so
-            # it bound `rm -r D` and deleted every file in the tree, certifying
-            # the deletion of files the sentence never named.  A sentence about
-            # files inside a directory belongs to the set expansion, which
-            # deletes exactly the names the pattern matched.
+            # A coordinated deletion ("Delete prod.db and the app directory")
+            # mentions "directory" while resolving only the regular file operand;
+            # attaching `-r` to that file deletes half the request and lies about
+            # the rest.  Refuse when the sole resolved operand is an existing file.
+            if not _is_directory_in_repo(str(paths[0])) and (_repo_root() / str(paths[0])).is_file():
+                return None
             return [program, "-r", str(paths[0])]
         if program == "ls" and _EVERY_FILE.search(text) and not _LISTING_REQUEST.search(text):
             # `ls` answers "what files are here", never "what is IN them".  Its

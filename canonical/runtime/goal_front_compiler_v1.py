@@ -237,7 +237,8 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     # so it handed `total_of` -- the NEW name -- to the slot that asks WHICH
     # function to extract, and the adapter failed SYMBOL_NOT_FOUND:total_of.
     # "the function" is the phrasing that names the operand.
-    "qualname": ("the function", "qualname", "the symbol"),
+    "qualname": ("the function", "qualname", "the symbol", "the class", "the method"),
+    "old_param": ("the parameter", "parameter", "old_param", "param"),
     "objective": ("objective", "claim"),
     "spec": ("spec", "specification", "relation spec"),
     "product": ("product",),
@@ -255,6 +256,8 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "result_path": ("result", "claim", "release claim"),
     "report_path": ("report",),
     "source_json_path": ("source json", "state json"),
+    "origin_path": ("from", "from module", "from the file"),
+    "target_module_path": ("to", "into", "to module", "to the file"),
 }
 # changed_paths belongs here because the adapter demands a list -- it rejects a
 # bare string with CHANGE_IMPACT_INPUT_REQUIRED -- while the sentence that states
@@ -1652,6 +1655,12 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         try:
             bound_val = gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses)
             val = bound_val.get(key)
+            if key.endswith("_path") and _is_output_key(key, entry) and isinstance(val, str) and val:
+                paired_mod = _module_pair_file(entry, gc._repo_paths(goal, root))
+                if (paired_mod and val == paired_mod
+                        and val not in _named_output_destinations(goal, entry, [key], root)):
+                    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",
+                                                 "output_collides_with_paired_module:" + key)
             if key.endswith("_path") and not _is_output_key(key, entry) and val:
                 stem = key[:-5].lower()
                 wanted = _STEM_SUFFIXES.get(stem)
@@ -2030,6 +2039,27 @@ def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, 
 _LITERAL_MODES = {"DETERMINISTIC_LITERAL_JSON_RECORDS", "DETERMINISTIC_EXACT_LITERAL_RESPONSE"}
 
 
+_DECLARATIVE_SUBJECT_RE = re.compile(
+    r"^\s*(?:"
+    r"(?:[Tt]he|[Aa]|[Aa]n|[Oo]ne|[Ss]ome|[Ee]very|[Ee]ach|[Tt]his|[Tt]hat|[Tt]hese|[Tt]hose)\s+\w|"
+    r"[A-Z][a-z]+ing\s+|"
+    r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)+\s+|"
+    r"[A-Za-z_]*_[A-Za-z0-9_]*\s+"
+    r")"
+)
+_INDICATIVE_VERB_RE = re.compile(
+    r"\b(?:is|are|was|were|has|have|raises|throws|fails|loses|takes|made|makes|causes|returns|produces)\b",
+    re.I,
+)
+
+
+def _is_declarative_premise(clause: str) -> bool:
+    """A statement of existing program state ('The query in X is...', 'Importing X raises...')
+    supplies context for the following imperative; it is not an action step of its own."""
+    body = str(clause or "").strip()
+    return bool(_DECLARATIVE_SUBJECT_RE.match(body) and _INDICATIVE_VERB_RE.search(body))
+
+
 def sentence_clauses(text: str) -> list[str]:
     parts = re.split(r"(?<=[.!?])\s+(?=[A-Z])|\b[Tt]hen\b", " ".join(str(text or "").split()))
     return [part.strip(" .,;") for part in parts if part and part.strip(" .,;")]
@@ -2249,6 +2279,8 @@ def plan_capability_dag(goal: str, admissible: Mapping[str, Mapping[str, Any]], 
     clauses = sentence_clauses(goal)
     if len(clauses) < 2:
         return None
+    if len([c for c in clauses if not _is_declarative_premise(c)]) < 2:
+        return None
     steps = _dag_steps(clauses, admissible, root)
     if steps is None or len(steps) < 2:
         return None
@@ -2455,6 +2487,15 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
         planned_dag["capability_dag"]["front_compiler"] = {"schema": SCHEMA, "rules_applied": list(rules)}
         return planned_dag
 
+    if (compiled is not None
+            and compiled.get("compiler_mode") not in ("DETERMINISTIC_VERIFIED_CAPABILITY_MATCH", *_LITERAL_MODES)):
+        comp_clauses = list(compiled.get("clauses") or [])
+        if (len(comp_clauses) >= 2
+                and any(_is_declarative_premise(c) for c in comp_clauses[:-1])
+                and len([c for c in comp_clauses if not _is_declarative_premise(c)]) <= 1):
+            rules.append("F32_DECLARATIVE_PREMISE_NOT_COMPOUND_STEP")
+            compiled = None
+
     selected = (compiled or {}).get("selected_capability") if compiled else None
     single_shape = bool(compiled) and compiled.get("compiler_mode") == "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH" and selected
 
@@ -2555,9 +2596,12 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
         # taken the named capability out of the decidable set.  The converse is
         # the same rule and it is what keeps "Run the thing." refused: a VERB is
         # not a name, so a zero-input tool that is not named stays undecidable.
+        from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
         selectable = [
             c for c in ranked
-            if c[2] in decidable or request_names_capability_id(text, c[2])
+            if (c[2] in decidable or request_names_capability_id(text, c[2]))
+            and (future or request_names_capability_id(text, c[2])
+                 or implementation_effect_error(text, [c[2]], registry) is None)
         ]
         # F3: a goal that names a file to be produced is served by a tool that can write a file
         preferred = [c for c in selectable if _output_keys(registry[c[2]])] if future else []

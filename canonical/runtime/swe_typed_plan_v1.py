@@ -136,23 +136,59 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
         r"add\s+(?:(?:a|an|the|new)\s+)*[\w -]{0,60}"
         r"\b(?:function|method|feature|endpoint|class|api)\b)", prose)
     software = re.search(r"\b(?:python|software|code|function|method|feature|endpoint|class|api)\b", prose)
-    if not imperative:
-        return None
-    if not software:
+    if imperative and not software:
         from canonical.runtime.write_authority_v1 import SOURCE_SUFFIXES
         software = any(path.suffix.lower() in SOURCE_SUFFIXES
                        for _raw, path in goal_compiler._repo_paths(goal, live_brain.ROOT))
-    if not software:
-        return None
     # These are actual registry effect namespaces, not keyword relevance or id
     # substrings such as 'patch' (which could mean a report-only patch search).
     material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.')
+    if imperative and software:
+        for cid in capability_ids:
+            entry = registry.get(str(cid)) or {}
+            if any(any(part in str(effect) for part in material)
+                   for effect in entry.get('provides', [])):
+                return None
+        return 'R10_SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED'
+
+    if "?" in str(goal or ""):
+        return None
+    repo_paths = list(goal_compiler._repo_paths(goal, live_brain.ROOT))
+    if any(pathlib.Path(raw).suffix and not path.exists() for raw, path in repo_paths):
+        return None
+    has_py_target = any(
+        (path.is_file() and path.suffix.lower() == ".py")
+        or (path.is_dir() and any(path.rglob("*.py")))
+        for _raw, path in repo_paths
+    )
+    if not has_py_target:
+        return None
+    in_place_edit = re.search(
+        r"(?:^|[.;\n]|\bthen\b|\band\b)\s*(?:(?:please|first|next)\s+)?"
+        r"(?:"
+        r"extract\s+(?:the\s+)?[\w -]{1,50}\bfrom\b|"
+        r"inline\s+(?:the\s+)?|"
+        r"move\s+(?:the\s+)?(?:function|method|class|symbol|helper)\b|"
+        r"remove\s+(?:the\s+)?(?:sql\s+injection|unused\s+(?:function|import|code)|dead\s+code)\b|"
+        r"break\s+(?:the\s+)?(?:circular\s+import|import\s+cycle|cycle)\b|"
+        r"resolve\s+(?:the\s+)?merge\s+conflict\b|"
+        r"make\s+\S+\s+(?:linear|linearithmic|constant|faster|subquadratic|thread[- ]safe)\b"
+        r")",
+        prose,
+    )
+    if not in_place_edit:
+        return None
+    edit_tokens = ("refactor", "repair", "edit", "choreograph", "resolve", "format", "migrate")
+    edit_effects = (".source.write.", ".refactor.", ".edit.", ".repair.", ".choreograph.", ".merge_conflict.")
     for cid in capability_ids:
+        cid_s = str(cid).lower()
         entry = registry.get(str(cid)) or {}
-        if any(any(part in str(effect) for part in material)
-               for effect in entry.get('provides', [])):
+        if any(tok in cid_s for tok in edit_tokens):
             return None
-    return 'R10_SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED'
+        if any(any(part in str(effect) for part in edit_effects)
+               for effect in entry.get("provides", [])):
+            return None
+    return "R11_READ_ONLY_CAPABILITY_FOR_SOURCE_EDIT"
 
 
 def _effect_consistent(goal: str, cid: str) -> bool:

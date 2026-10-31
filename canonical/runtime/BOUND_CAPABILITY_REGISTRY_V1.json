@@ -5328,6 +5328,199 @@
    },
    "status": "VERIFIED_BOUND_CAPABILITY"
   },
+  "python.refactor.move_symbol.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.move_symbol.v1",
+     "origin_path": "${input.origin_path}",
+     "output_path": "${input.output_path}",
+     "qualname": "${input.qualname}",
+     "target_module_path": "${input.target_module_path}",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_move_symbol",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "move the function",
+    "move function",
+    "move symbol",
+    "move the class",
+    "relocate function",
+    "update every caller",
+    "move"
+   ],
+   "limitations": [
+    "Moves a top-level function or class from origin_path to target_module_path, propagates required imports, and rewrites caller imports across the enclosing project.",
+    "Refuses target collisions and cyclic mutual top-level dependencies; verifies bidirectional fresh imports and unittest suite with full byte rollback."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.move_symbol",
+    "python.source.crossfile.symbol_relocated"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "qualname",
+    "origin_path",
+    "target_module_path",
+    "files_edited",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
+    "type": "brain_native_deterministic_composition"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.refactor.remove_dead_code.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.remove_dead_code.v1",
+     "module": "${input.module}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "optional": [
+     "module"
+    ],
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_remove_dead_code",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "remove the unused function",
+    "unused function",
+    "unused import",
+    "every unused import",
+    "remove dead code",
+    "dead code",
+    "prune unused"
+   ],
+   "limitations": [
+    "Removes unreferenced top-level functions (excluding __init__.py re-exports, __all__ entries, dunders, main, and decorated functions) and unused module-level imports across source_root checked against the enclosing project.",
+    "Verifies fresh module imports and unittest suite, rolling back every byte on failure."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.dead_code.removed",
+    "python.refactor.unused_imports.removed"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "files_edited",
+    "removed_functions",
+    "removed_imports",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_remove_dead_code.py",
+    "type": "brain_native_deterministic_composition"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.repair.sql_parameterize.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.repair.sql_parameterize.v1",
+     "module": "${input.module}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "optional": [
+     "module"
+    ],
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_sql_parameterize",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "sql injection",
+    "remove the sql injection",
+    "parameterize",
+    "parameterized query",
+    "string formatting",
+    "query",
+    "execute",
+    "db",
+    "sql",
+    "injection"
+   ],
+   "limitations": [
+    "Parameterizes interpolated SQL string literals passed to <cursor>.execute(query) (%-formatting, f-strings, str.format, and + concatenation); refuses dynamic SQL identifier splicing (FROM/JOIN/TABLE/ORDER BY).",
+    "Selects '?' when sqlite3 is imported and '%s' otherwise; verifies fresh module imports and unittest suite, rolling back every byte on failure."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.repair.sql_parameterized",
+    "python.security.sql_injection.removed"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "files_edited",
+    "parameterized_count",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified",
+    "model_dependency_count",
+    "incremental_spend_usd"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_sql_parameterize.py",
+    "type": "brain_native_deterministic_composition"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
   "python.refactor.rename_parameter.v1": {
    "action_template": {
     "args": {
@@ -9105,10 +9298,16 @@
     "multi-file",
     "import closure",
     "call-graph",
-    "change-impact"
+    "change-impact",
+    "circular import",
+    "import cycle",
+    "cyclic import",
+    "break the cycle",
+    "importerror"
    ],
    "limitations": [
-    "Cross-file atomic choreography inside repair loop: patch→choreograph via 86k/221k symbol graph→change-impact 2070/2096 slice→dual-oracle verify→gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
+    "Breaks top-level Python circular imports only when every imported binding on a cycle edge is strictly function/method-body-local (never used at module load, class header, decorator, default argument, evaluated annotation, __all__, or external re-export).",
+    "Verifies bidirectional fresh-interpreter imports and the project unittest suite; restores every original byte on failure."
    ],
    "platforms": [
     "linux",

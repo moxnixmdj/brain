@@ -283,11 +283,11 @@ def run(args, root):
                     fn = None
                     break
                 fn = hit[0]
-                found_defs += len(hit)
                 if len(hit) > 1:
                     _fail("MULTI_DEFINITION:" + qualname)
                 nodes = fn.body
             if fn and isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                found_defs += 1
                 params = _params_of(fn)
                 names = [p.arg for p in params]
                 if old not in names:

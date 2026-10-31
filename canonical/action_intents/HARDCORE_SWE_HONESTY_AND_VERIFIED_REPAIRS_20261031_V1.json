@@ -1,0 +1,383 @@
+{
+ "action_id": "HARDCORE_SWE_HONESTY_AND_VERIFIED_REPAIRS_20261031_V1",
+ "action_intent_id": "HARDCORE_SWE_HONESTY_AND_VERIFIED_REPAIRS_20261031_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Close the P1/P2/P4 SWE routing-and-honesty defects, restore 38 ordinary-sentence capabilities broken by post-execution world observation, upgrade the theater stub software.repair.choreograph.crossfile.v1 into a real AST circular-import resolver, and land three verified AST+unittest-referee SWE adapters (python.repair.sql_parameterize.v1, python.refactor.move_symbol.v1, python.refactor.remove_dead_code.v1). Hardcore SWE surface census advances 10/28 -> 15/28 with 0 false passes (destructive_refusal closed), REPAIR 0/2 -> 2/2, EDIT 1/5 -> 3/5, META 1/2 -> 2/2, and goal_compilation_benchmark_v1 preserved at 19/23.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/composer_route_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/runtime/goal_front_compiler_v1.py",
+   "canonical/runtime/swe_typed_plan_v1.py",
+   "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+   "canonical/runtime/bound_capabilities/python_source_sql_parameterize.py",
+   "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
+   "canonical/runtime/bound_capabilities/python_source_remove_dead_code.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/tests/test_swe_honesty_and_verified_repairs_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Five composer shell-invention bugs turned SWE code-edit requests into destructive shell commands (mv/rm/grep/partial rm -r), post-execution world observation broke 38 ordinary-sentence commands, declarative-premise sentences split into bogus compound plans, and circular_import, sql_injection, move_function, and remove_dead_code lacked real AST-plus-referee execution.",
+ "canonical_base_commit": "524ebc993e0d189c1316af4b9a9f111c8bcaf869",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Five composer shell-invention bugs turned SWE code-edit requests into destructive shell commands (mv/rm/grep/partial rm -r), post-execution world observation broke 38 ordinary-sentence commands, declarative-premise sentences split into bogus compound plans, and circular_import, sql_injection, move_function, and remove_dead_code lacked real AST-plus-referee execution.",
+ "date": "2026-10-31",
+ "expected_parent_change": "SWE sentences no longer decay into destructive shell commands or read-only substitutes; declarative-premise prompts compile as single-action contracts; and circular-import resolution, SQL parameterization, cross-module symbol relocation, and project-wide dead-code/unused-import removal execute via exact AST span splicing proved by fresh imports and unittest discovery with atomic byte rollback.",
+ "expected_parent_frontier_change": "SWE sentences no longer decay into destructive shell commands or read-only substitutes; declarative-premise prompts compile as single-action contracts; and circular-import resolution, SQL parameterization, cross-module symbol relocation, and project-wide dead-code/unused-import removal execute via exact AST span splicing proved by fresh imports and unittest discovery with atomic byte rollback.",
+ "explicit_user_authorization": "Owner directive (2026-10-31): focus strictly on hardcore advanced software engineering capabilities, build the fastest smartest software engineering substrate, and merge all verified work to main.",
+ "falsification_condition": "FALSIFIED if any of the 5 P1 SWE goals extracts a shell argv, if destructive_refusal deletes prod.db, if software.repair.choreograph.crossfile.v1 returns verified=True on an acyclic tree, if SQL identifier splicing is parameterized instead of refused, if any adapter leaves modified bytes after a red suite, or if unified-model verification drops below 33/33.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intent": "Eliminate destructive shell hijacks and theater stubs in the SWE lane while landing four real, referee-verified multi-file/AST transformations within the 3-new-capability PR ceiling.",
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "Stopping shell destruction on SWE sentences and replacing stub repairs with AST+referee transformations directly expands verified multi-file coding capability toward the three open coding obligations.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Hardcore SWE census 10/28 -> 15/28 (0 false passes; REPAIR 0/2 -> 2/2, EDIT 1/5 -> 3/5, META 1/2 -> 2/2); 38 ordinary-sentence tests restored green; 7/7 new SWE honesty & repair pin suites green in 0.90s; goal_compilation_benchmark_v1 19/23; unified model 33/33.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": "goal_front_compiler_v1 F23 role-anchored binding and optional-slot declarations; swe_typed_plan_v1 implementation_effect_error gate; write_authority_v1 source-transformer classification; python_refactor_rename_parameter dotted-qualname AST walker; stdlib ast + unittest discovery referee.",
+ "progress_evidence_paths": [
+  "canonical/runtime/composer_route_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/runtime/goal_front_compiler_v1.py",
+  "canonical/runtime/swe_typed_plan_v1.py",
+  "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+  "canonical/runtime/bound_capabilities/python_source_sql_parameterize.py",
+  "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
+  "canonical/runtime/bound_capabilities/python_source_remove_dead_code.py",
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+  "canonical/tests/test_swe_honesty_and_verified_repairs_v1.py",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "524ebc993e0d189c1316af4b9a9f111c8bcaf869",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "THEATER_CHOREOGRAPH_STUB__verified=True without reading or editing source_root",
+   "SHELL_DESTRUCTION_ON_SWE_PROSE__mv/rm/grep/partial rm -r claiming code-entity edits",
+   "PREMISE_SENTENCE_COMPOUND_SPLIT__declarative state sentences treated as imperative steps"
+  ],
+  "expected_parent_level_state_change": "SWE sentences no longer decay into destructive shell commands or read-only substitutes; declarative-premise prompts compile as single-action contracts; and circular-import resolution, SQL parameterization, cross-module symbol relocation, and project-wide dead-code/unused-import removal execute via exact AST span splicing proved by fresh imports and unittest discovery with atomic byte rollback.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETE_STUB_CHOREOGRAPHY__GUARD_SHELL_GRAMMAR_BY_OBJECT_SORT__REUSE_F23_AND_AST_SPLICE_REFEREE",
+   "intrinsic_or_path_specific": "Intrinsic: SWE edits require AST scope/import awareness plus an execution referee, while shell verbs must respect code-entity vs file-entity sorts.",
+   "surviving_causal_blocker": "Five composer shell-invention bugs turned SWE code-edit requests into destructive shell commands (mv/rm/grep/partial rm -r), post-execution world observation broke 38 ordinary-sentence commands, declarative-premise sentences split into bogus compound plans, and circular_import, sql_injection, move_function, and remove_dead_code lacked real AST-plus-referee execution."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "Zero external parsers or codemod packages installed; upgraded existing software.repair.choreograph.crossfile.v1 in place so 4 SWE capabilities ship within 3 new registry rows.",
+   "existing_inherited_routes_checked": "Checked python_refactor_rename_symbol, python_refactor_rename_parameter (fixed its Class.method MULTI_DEFINITION counter bug), python_source_inline_helper, and software_repair_crossfile_choreograph_v1.",
+   "external_existing_routes_checked": "Evaluated rope, libcst, autoflake, and sqlglot; stdlib ast exact-span splicing preserves formatting/comments byte-for-byte with zero install overhead and sub-second execution.",
+   "surviving_gap": "Fault localization, flaky-test detection, git-bisect attribution, concurrency lock synthesis, and algorithmic complexity rewrite remain open for subsequent slices."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "REPORT_ONLY_SUBSTITUTES_FOR_SOURCE_EDITS",
+    "BLIND_CHOREOGRAPHY_VERIFIED_TRUE_WITHOUT_TREE_MUTATION",
+    "PARTIAL_DESTRUCTIVE_RM_ON_UNRESOLVED_CONJUNCTION"
+   ],
+   "real_outcome": "Hardcore SWE surface census 10/28 -> 15/28 with 0 false passes; 38 ordinary-sentence tests restored; unified model 33/33.",
+   "surviving_necessity": "Independent subprocess import checks and unittest suites verify every source mutation; rollbacks restore exact SHA-256 bytes on any failure."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "Upgraded software.repair.choreograph.crossfile.v1 in place while preserving its declared result_fields and requires.",
+   "downstream_work_to_delete_or_supersede": "Supersedes stubbed choreography and unblocks SQL parameterization previously held back by composer rm hijacking.",
+   "fresh_reuse_plan": "Reuse F23 role-anchored binding, optional module pairing, and atomic AST+unittest referee across remaining SWE edit/repair tiers."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Single AST pass per candidate module and bounded unittest run on project root.",
+   "search_stop_decision": "Stop cleanly at 3 new registry rows (MAX_NEW_CAPABILITIES_PER_PR = 3) + 1 upgraded stub = +5 live census tasks."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "implementation_still_necessary_reason": "Stdlib ast span splicing, importlib subprocess checks, F23 role binding, and unittest discovery already exist in Python/repo and are composed directly.",
+   "losing_routes_reason": "Whole-file ast.unparse destroys formatting/comments; third-party codemod engines add dependencies and violate byte preservation outside edited spans.",
+   "routes_ranked": [
+    "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE__SELECTED",
+    "WHOLE_MODULE_AST_UNPARSE_REWRITE",
+    "LIBCST_EXTERNAL_CODEMOD_ENGINE",
+    "ROPE_PROJECT_REFACTOR_LIBRARY"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Verified against both hardcore_swe_surface_probe_20261030.py independent behavioural oracles and dedicated negative/rollback falsification tests."
+  },
+  "real_outcome": "Hardcore SWE surface census 10/28 -> 15/28 (0 false passes); 38 ordinary-sentence tests restored; 7/7 new SWE pin suites green; unified model 33/33.",
+  "required_capability": "HONEST_MODE_ROUTING_AND_AST_SPAN_REPAIR_WITH_REFEREE_ROLLBACK",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "BROAD_REFACTOR_SET",
+      "CORRECTNESS": "CONFIG_DEPENDENT",
+      "INCREMENTAL_COST": "EXTERNAL_DEPENDENCY",
+      "RELIABILITY": "REFORMATS_UNTOUCHED_LINES",
+      "VERIFIABILITY": "INDIRECT",
+      "WALL_CLOCK": "SLOWER_PROJECT_INDEXING"
+     },
+     "evidence": [
+      "rope indexes a .ropeproject workspace and reformats touched statements rather than splicing exact AST spans"
+     ],
+     "qualification_evidence": [
+      "checked rope architecture against byte-preservation requirement"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ROPE_PROJECT_REFACTOR_LIBRARY"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "FULL_CST",
+      "CORRECTNESS": "HIGH",
+      "INCREMENTAL_COST": "EXTERNAL_DEPENDENCY",
+      "RELIABILITY": "GOOD",
+      "VERIFIABILITY": "GOOD",
+      "WALL_CLOCK": "SLOWER_PARSE_PER_FILE"
+     },
+     "evidence": [
+      "libcst adds an external parser dependency where Python 3.11 stdlib ast already carries exact lineno/end_lineno/col_offset/end_col_offset"
+     ],
+     "qualification_evidence": [
+      "measured stdlib ast span splicing at <750 ms end-to-end including subprocess unittest referee"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "LIBCST_EXTERNAL_CODEMOD_ENGINE"
+    }
+   ],
+   "checked_at_utc": "2026-10-31T10:04:54Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "COMPOSER_SHELL_FALLBACK_AND_STUB_CHOREOGRAPHER",
+   "max_age_hours": 24,
+   "negative_search_summary": "No external dependency outperforms Python 3.11 stdlib ast span splicing + fresh subprocess import + unittest discovery for exact byte-preserving local/cross-file repairs.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python ast circular import cycle deferral cross-file symbol move"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "libcst rope autoflake python refactoring libraries"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "db-api 2.0 pep 249 parameterized execute placeholder sqlite3 pyformat"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "python 3.11 ast end_lineno end_col_offset exact source span splice"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE__SELECTED",
+    "WHOLE_MODULE_AST_UNPARSE_REWRITE",
+    "LIBCST_EXTERNAL_CODEMOD_ENGINE",
+    "ROPE_PROJECT_REFACTOR_LIBRARY"
+   ],
+   "selected_route": "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE",
+   "selected_route_checked_at_utc": "2026-10-31T10:04:54Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-31T10:04:54Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 stdlib (ast, hashlib, importlib, json, pathlib, re, subprocess, unittest)",
+      "evidence": [
+       "DIRECT_PROBE: verified live across 28 hardcore SWE tasks and 480+ unittest pins this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/{composer_route_v1,goal_front_compiler_v1,live_brain_route_admission_v1,swe_typed_plan_v1}.py",
+      "evidence": [
+       "DIRECT_PROBE: P1 5/5 shell hijacks closed, 15/28 SWE surface green, 0 false passes"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE",
+    "status": "READY"
+   },
+   "selected_surviving_route": "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "goal_front_compiler_v1 F23 role-anchored binding and _module_pair_file",
+     "python_source_inline_helper and python_refactor_rename_parameter atomic rollback referee pattern"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "OWASP SQL Injection Prevention: parameterize value expressions only, refuse dynamic identifier interpolation"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "rope and libcst evaluated against zero-dependency byte-preservation requirement"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "PEP 249 (Python DB-API 2.0) qmark/format paramstyles and docs.python.org/3/library/ast.html source spans"
+    ]
+   },
+   "stop_condition": "Respect MAX_NEW_CAPABILITIES_PER_PR = 3 strictly; restore every original byte on any import or unittest failure; recompile BRAIN_UNIFIED_MODEL_V1.json last.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "Single-pass stdlib AST span splicing + subprocess import + unittest discovery completes each multi-file edit and referee proof in 500-750 ms with zero external dependencies and zero model spend."
+  },
+  "routes_considered": [
+   "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE__SELECTED",
+   "WHOLE_MODULE_AST_UNPARSE_REWRITE",
+   "LIBCST_EXTERNAL_CODEMOD_ENGINE",
+   "ROPE_PROJECT_REFACTOR_LIBRARY"
+  ],
+  "selected_surviving_route": "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE",
+  "stop_condition": "Respect MAX_NEW_CAPABILITIES_PER_PR = 3 strictly; restore every original byte on any import or unittest failure; recompile BRAIN_UNIFIED_MODEL_V1.json last.",
+  "why_selected_route_is_fastest_sufficient": "Single-pass stdlib AST span splicing + subprocess import + unittest discovery completes each multi-file edit and referee proof in 500-750 ms with zero external dependencies and zero model spend."
+ },
+ "resolution": "Closed all 5 P1 shell-composer hijacks (including the destructive_refusal false pass), restored 38 ordinary-sentence commands, added declarative-premise & source-edit mode compilation, upgraded software.repair.choreograph.crossfile.v1 into a real import-cycle breaker, and added 3 verified AST+referee SWE capabilities.",
+ "route_id": "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REUSE_STDLIB_AST_SPAN_SPLICE_AND_UNITTEST_REFEREE",
+ "stop_condition": "Respect MAX_NEW_CAPABILITIES_PER_PR = 3 strictly; restore every original byte on any import or unittest failure; recompile BRAIN_UNIFIED_MODEL_V1.json last.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "DIRECT_PROBE__Hardcore SWE census 10/28 -> 15/28 (0 false passes), 7/7 new SWE honesty & repair pin suites green.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "62d4b45f589af6f61ba18156e7649c6e127a9332",
+     "path": "canonical/runtime/composer_route_v1.py"
+    },
+    {
+     "git_blob_sha": "5ee986181790b70fa317e8c0e05480859dfb2cc5",
+     "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py"
+    },
+    {
+     "git_blob_sha": "4dea3691ab5e46ce1893f2c1f5b6e9f694dbf058",
+     "path": "canonical/runtime/live_brain_route_admission_v1.py"
+    }
+   ],
+   "decisive_question": "Does the SWE lane execute real referee-verified AST transformations and refuse partial/unowned edits, or does it invoke destructive shell commands and stub reports?",
+   "falsifier_id": "F_SHELL_HIJACK_AND_CHOREOGRAPH_STUB_20261031",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "P_HONEST_SWE_ROUTING_AND_AST_REFEREE_REPAIRS_20261031"
+  }
+ },
+ "weakens_existing_guard": false
+}

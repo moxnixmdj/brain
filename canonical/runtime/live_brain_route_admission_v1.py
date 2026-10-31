@@ -1111,7 +1111,7 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         # this reason -- a refusal that is not a fault deserves its own name.
         if "OUTPUT_OVERWRITES_A_STATED_SOURCE" in str(controller_error):
             return _fail(task_id, "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
-                         "AN_ACTION_WOULD_OVERWRITE_A_FILE_IT_READS", started, executed=True,
+                         "AN_ACTION_WOULD_OVERWRITE_A_FILE_IT_READS", started, executed=False,
                          compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"),
                          reason=controller_error)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
@@ -1687,9 +1687,12 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
         elif before["parses"].get(raw) and after.get("parses", {}).get(raw) is False:
             errors.append("NAMED_SOURCE_UNPARSEABLE:" + raw)
     if result.get("pass") is True:
+        prose = str(goal or "")
+        for raw_path in (after.get("stated") or ()):
+            prose = prose.replace(str(raw_path), " ")
         promised_file = bool(artifacts) or (
-            bool(_CHANGE_VERB_RE.search(str(goal or ""))) and bool(after.get("stated")))
-        if promised_file:
+            bool(_CHANGE_VERB_RE.search(prose)) and bool(after.get("stated")))
+        if promised_file and not _verified_non_content_shell_effect(result, artifacts):
             present = any((ROOT / a).is_file() for a in (artifacts or []))
             from canonical.runtime import execute_v1 as _kernel
             moved = _kernel._diff(before.get("files") or {}, after.get("files") or {})["changed"]
@@ -1697,6 +1700,41 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
             if not (present or moved or committed):
                 errors.append("NO_OBSERVED_EFFECT")
     return errors
+
+
+def _verified_non_content_shell_effect(result: Mapping[str, Any],
+                                       artifacts: list[str] | None) -> bool:
+    """Read-only stdout filters and chmod leave file bytes untouched by design."""
+    if artifacts or result.get("semantic_acceptance_complete") is not True:
+        return False
+    from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+    argvs: list[list[Any]] = []
+    rows = result.get("execution")
+    if isinstance(rows, list) and rows:
+        for row in rows:
+            if not isinstance(row, Mapping) or row.get("capability_id") != "shell.command.run":
+                return False
+            argv = ((row.get("action") or {}).get("args") or {}).get("argv")
+            if not isinstance(argv, list) or not argv:
+                return False
+            argvs.append(argv)
+    else:
+        croute = result.get("composer_route")
+        if not isinstance(croute, Mapping) or croute.get("chain") != ["shell.command.run"]:
+            return False
+        for item in croute.get("tried") or ():
+            if isinstance(item, Mapping) and isinstance(item.get("stated_command_line"), list):
+                argvs.append(item["stated_command_line"])
+    if not argvs:
+        return False
+    for argv in argvs:
+        prog = pathlib.PurePosixPath(str(argv[0])).name
+        if prog == "chmod":
+            continue
+        if prog in _accept._READ_ONLY_COMMANDS and "-i" not in argv:
+            continue
+        return False
+    return True
 
 
 def _close_observations(result: dict[str, Any], goal: str,
@@ -2107,6 +2145,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # _execute; this branch did not.
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
+        gap_world_before = observe_world(gap_normalized)
         # A refusal is terminal unless the sentence states the executable form.
         # This branch used to compose unconditionally, which made it the one
         # place a refusal could be answered by a substitute -- see
@@ -2116,7 +2155,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         if composed is not None:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
-                gap_normalized, observe_world(gap_normalized), gap_future_artifacts)
+                gap_normalized, gap_world_before, gap_future_artifacts)
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
