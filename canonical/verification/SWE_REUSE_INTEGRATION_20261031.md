@@ -8,7 +8,7 @@ repository integrity separately; it does not turn a failing test into a pass.
 
 Reused existing Brain implementations discovered at `cd44f98`, then integrated
 rather than restoring old modules wholesale. Merged current main through
-`57edfa446c33c7b3908b00253e2ee4d056452caf`; preserved its bisect materialization
+`9f808230890332e75643b6bfafce3352749ed9ba`; preserved its bisect materialization
 limits, request-role rules and guarded retry behavior. Runtime and tests import
 only current-tree source, never the discovery copies.
 
@@ -46,8 +46,8 @@ was corrected to the stricter exact-file contract. Another test now requires
 pre-execution parameter-route correction and explicitly forbids a fictitious
 retry; its original refusal/supersession controls remain in place.
 
-Final expanded run: **425 passed, 6 failed, 40 subtests passed**, 8 deprecation
-warnings, 119.92 s; 37 modules, 431 ordinary cases. All **17 new joint-contract
+Final expanded run: **432 passed, 6 failed, 42 subtests passed**, 8 deprecation
+warnings, 122.66 s; 38 modules, 438 ordinary cases. All **17 new joint-contract
 controls** pass. This is not a whole-repository green result. The six unresolved
 compatibility failures are listed below rather than weakened or hidden.
 
@@ -120,7 +120,8 @@ python3 -m pytest -q \
   canonical/tests/test_the_index_remembers_what_it_already_read_v1.py \
   canonical/tests/test_the_stated_swe_surface_stays_reached_v1.py \
   canonical/tests/test_a_bisect_materialises_only_the_named_tree_v1.py \
-  canonical/tests/test_the_answer_must_be_the_effect_that_was_stated_v1.py --tb=short
+  canonical/tests/test_the_answer_must_be_the_effect_that_was_stated_v1.py \
+  canonical/tests/test_the_rename_answers_the_object_the_sentence_names_v1.py --tb=short
 ```
 
 The original cohort comprises `test_swe_acceptance_boundaries_20261031_v1`,
@@ -154,7 +155,7 @@ require the module's test to be found. Both pass, along with the 17 joint contro
 During the in-progress main merge, the existing Git diff verifier refused the
 staged action-intent rename (`INDEPENDENT_CHECK_DISAGREES` on brace-form rename
 output). This is a remaining adapter limitation; no refusal was overridden.
-Completing the merge removed that transient tree state; the final 431-case run
+Completing the merge removed that transient tree state; the final 438-case run
 includes both public Git reads passing and all 166 original case identities passing.
 
 ## Compiled-model and admission checks
@@ -167,7 +168,9 @@ assumptions from measured confidence bounds. Current-base load-bearing/orientati
 and hierarchy/OBS/blocker-lease checks pass locally; the final signed referee
 must still judge the exact pushed head before landing.
 
-The 431-case engineering run exercised commit `baddd26c`. Subsequently retained
-main `57edfa44`'s inventory/probe additions and corrected caller-damage allowance;
-that merge adds no runtime or test-source changes. The model and admission
-checks were regenerated/refreshed for the resulting current base.
+The final 438-case engineering run exercised commit `01f0fd4a`, including main
+`9f808230`. Retained its new object-role checks at typed admission and at the
+execution exit; preserved our independent generic-path admission restriction.
+All seven incoming object-role cases pass. Also retained the inventory/probe
+additions and corrected caller-damage allowance from main `57edfa44`.
+Model and admission checks were refreshed for the resulting current base.
