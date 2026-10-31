@@ -10617,6 +10617,233 @@
         "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
         "test_git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4"
       }
+    },
+    "terminal.kstar.root.assess.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "terminal.kstar.root.assess.stdlib"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "terminal_kstar_root_assess",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "terminal",
+        "kstar",
+        "scope",
+        "complete",
+        "proof",
+        "brain",
+        "opus",
+        "capability",
+        "falsify",
+        "tournament",
+        "policy",
+        "adequacy",
+        "discriminator",
+        "generator",
+        "basis",
+        "transform",
+        "runtime",
+        "ownership",
+        "residual",
+        "counterexample",
+        "evidence",
+        "reuse",
+        "universal",
+        "cover",
+        "context",
+        "semantic",
+        "composition"
+      ],
+      "limitations": [
+        "Thin deterministic adapter over current canonical terminal authority and U frontier; does not invent proof premises.",
+        "Writes SCOPE_COMPLETE_PROOF only when every load-bearing universal predicate is already proved in current canonical truth; otherwise writes UNRESOLVED with exact missing premises.",
+        "Never edits terminal authority, terminal manifest, ownership state, or promotion state."
+      ],
+      "plain_goal_routable": false,
+      "plain_goal_routable_reason": "Takes no input: the assessment is derived entirely from canonical authority files, so no sentence can supply an operand. It is deliberately NOT reachable from a plain goal. Giving it an input placeholder to raise the reachability count was tried and reverted on 2026-10-17: its 30-case keyword set then matched out-of-scope prose and broke the out-of-scope fail-closed rate (1.0 -> 0.967). Fail-closed truth outranks the reachability count. Invoke it directly, or through a multi-step plan that binds it explicitly.",
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "terminal.kstar.root.assessment",
+        "terminal.scope_complete.proof_or_minimum_residual",
+        "terminal.tournament.failure.witness"
+      ],
+      "requires": [],
+      "result_fields": [
+        "status",
+        "outcome",
+        "result_path",
+        "output_verified",
+        "u_empty",
+        "abc_closed",
+        "missing_premises",
+        "model_dependency_count"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/terminal_kstar_root_assess.py",
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "incremental_spend_usd": 0,
+        "independent_verification_required_for_any_scope_complete_promotion": true,
+        "model_dependency_count": 0,
+        "status": "BOUND_WITH_FAIL_CLOSED_REGRESSION_TEST"
+      }
+    },
+    "test.slice.never_miss.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "test.slice.never_miss.v1",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "test_slice_never_miss_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "test",
+        "slice",
+        "never-miss",
+        "change-impact",
+        "2070",
+        "2096",
+        "honest",
+        "minimal",
+        "40x"
+      ],
+      "limitations": [
+        "Change-impact 2070/2096 never-miss as mandatory slicer for every repair loop \u2014 50 not 2000 tests, 40x speedup, still never-miss (same-named widen never omit). Deterministic 0 model $0."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "test.slice.never_miss.verified",
+        "test.selection.minimal"
+      ],
+      "requires": [
+        "python.source.change_impact.test_selection"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/test_slice_never_miss_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-TEST-SLICE-NEVER-MISS-V1",
+        "observed_effect": {
+          "never_miss": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_TEST_SLICE_NEVER_MISS_V1.json"
+      }
+    },
+    "text.file.write": {
+      "action_template": {
+        "args": {
+          "capability_id": "text.file.write",
+          "content": "${input.content}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "file_write_text",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "write",
+        "text",
+        "file",
+        "create",
+        "save",
+        "content",
+        "output"
+      ],
+      "limitations": [
+        "Writes UTF-8 text to one repository-local file.",
+        "The written bytes are read back and compared before the step is reported as done."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "text.file.available"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "content_sha256",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/file_write_text.py",
+        "modules": []
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "autonomous_acquisition": true,
+        "independent_output_bytes": 74,
+        "independent_output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+        "independent_verified": true,
+        "mission_id": "ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001",
+        "observed_effect": {
+          "adapter": "file_write_text",
+          "content_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+          "output_bytes": 74,
+          "output_path": "canonical/astra_runtime/tmp/tfw_verify/TEXT_FILE_WRITE_PROOF.txt",
+          "output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+          "output_verified": true
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001__text.file.write__AUTO_VERIFY.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
