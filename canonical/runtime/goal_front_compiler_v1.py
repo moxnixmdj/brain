@@ -2101,12 +2101,48 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
     return None
 
 
+def _deliver_to_previous(clause: str, steps: list[dict[str, Any]], root: pathlib.Path) -> bool:
+    """A delivery clause is the DESTINATION of the previous answer, not a new step.
+
+    "Would the tests in <b>/tests catch a bug introduced in <b>/app? Write yes or
+    no to <b>/answer.json" is one question and one place for the answer.  The DAG
+    planner made two steps of it and handed the second to
+    software.synthesis.grid_induction.v1, which cannot answer a coverage question:
+    measured, the whole run ended FAIL_CLOSED__PROMISED_ARTIFACT_MISSING while the
+    capability that HAD the answer ran successfully and wrote elsewhere.
+
+    Same rule as gc._compile_answer_delivery, at the seam this planner uses: the
+    object is anaphoric ("its name", "the number", "yes or no"), so it cannot name
+    a new subject, and the clause states exactly one path -- the destination.
+    Returns True when the clause was consumed.
+    """
+    if not steps:
+        return False
+    text = str(clause or "")
+    if not gc._DELIVERY_RE.match(text):
+        return False
+    stated = [str(raw) for raw, path in gc._repo_paths(text, root) if not path.is_dir()]
+    if len(stated) != 1:
+        return False
+    previous = steps[-1]
+    entry = previous.get("entry") or {}
+    keys = [k for k in (previous.get("inputs") or {}) if _is_output_key(k, entry)]
+    if not keys:
+        return False
+    previous["inputs"][keys[0]] = stated[0]
+    previous["outputs"] = [(k, str(v)) for k, v in previous["inputs"].items()
+                           if _is_output_key(k, entry) and isinstance(v, str) and v]
+    return True
+
+
 def _dag_steps(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path):
     registry = routable_registry(admissible)
     steps: list[dict[str, Any]] = []
     produced: list[str] = []
     spool: set[str] = set()
     for cycle, clause in enumerate(clauses):
+        if _deliver_to_previous(clause, steps, root):
+            continue
         bound = bind_dag_clause(clause, admissible, root, produced_paths=produced,
                                 cycle=cycle, spool=spool)
         if bound is None:

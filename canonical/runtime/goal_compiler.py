@@ -381,12 +381,18 @@ def _witness_directories(goal, paths):
     text = str(goal or "")
     out = set()
     for m in _WITNESS_PHRASE_RE.finditer(text):
-        tail = text[m.end():]
-        stop = re.search(r"[.;?]|\band\b|\bthen\b", tail, re.IGNORECASE)
-        window = tail[:stop.start()] if stop else tail[:120]
+        # The NEAREST path after the phrase, never every path in a window.
+        # Measured: "Would the tests in <b>/tests catch a bug introduced in
+        # <b>/app?" has no clause boundary between the two, so a window swallowed
+        # BOTH and the binder lost its subject as well -- the same defect, in the
+        # other direction.
+        best, best_at = None, None
         for raw, _path in paths:
-            if str(raw) in window:
-                out.add(str(raw))
+            at = text.find(str(raw), m.end())
+            if at >= 0 and (best_at is None or at < best_at):
+                best, best_at = str(raw), at
+        if best is not None:
+            out.add(best)
     return out
 
 
@@ -5741,9 +5747,9 @@ def _inherit_producer_goal_for_verifier_steps(actions, registry):
 # "and write the report to R" is a promise the repair lane discharges, and
 # stealing it here would unbind the artifact that gate reads.
 _DELIVERY_RE = re.compile(
-    r"^\s*(?:write|save|store|output)\s+(?:its|their|the)\s+"
-    r"(?:name|number|count|result|results|answer|value|values|file and line|"
-    r"path and line|line and file)\s+to\s+\S+\s*$",
+    r"^\s*(?:write|save|store|output)\s+(?:(?:its|their|the)\s+)?"
+    r"(?:yes or no|true or false|name|number|count|result|results|answer|value|values|"
+    r"file and line|path and line|line and file|path|line)\s+to\s+\S+\s*$",
     re.IGNORECASE)
 
 

@@ -65,6 +65,16 @@ _SWE_VERBS = (
     "rename", "repair", "fix", "bug", "broken", "refactor", "extract function",
     "lint", "type-check", "typecheck", "review", "localize", "traceback",
     "scaffold", "generate test", "failing test", "unit test", "patch",
+    # The verbs the job is made of that were missing.  Measured: "Inline the
+    # single-use helper ...", "Remove the SQL injection ..." and "Resolve the merge
+    # conflict ..." are ordinary software-engineering sentences, and every one of
+    # them was refused the derivation path -- so a row that exists could never be
+    # reached by the sentence that names it.  This list is only a GATE (does this
+    # request belong on the typed SWE path at all); a listed verb still binds
+    # nothing by itself, and ambiguity still yields no value.
+    "inline", "single-use", "single use", "merge conflict", "conflict", "unmerged",
+    "injection", "parameterize", "parameterized", "sql", "dead code", "unused import",
+    "remove the unused", "move the function", "add a parameter", "caller",
 )
 
 

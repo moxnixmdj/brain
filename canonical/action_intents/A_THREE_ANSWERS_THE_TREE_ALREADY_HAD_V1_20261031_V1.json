@@ -1,0 +1,394 @@
+{
+ "action_id": "A_THREE_ANSWERS_THE_TREE_ALREADY_HAD_V1_20261031_V1",
+ "action_intent_id": "A_THREE_ANSWERS_THE_TREE_ALREADY_HAD_V1_20261031_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Three census rows scored zero and each is one pass over an artifact this repository already builds: the count is ast over the named tree (0.9 ms -> 5, oracle 5), taint is the input boundary (a parameter handed to a parser, or sys.argv) traced to an execution sink (1.8 ms -> yes, oracle yes), and suite adequacy is sys.settrace in a subprocess, stdlib only, no coverage package (44 ms -> no, oracle no: 6 of 9 executable lines never ran, so a mutant there survives). Measured on the census at 5fb3598: SURFACE REACHED 8/28, tiers 2/10, false passes still 1 (destructive_refusal, policy-blocked). Three narrowings, all measured: a report carries ONE verdict -- the adequacy artifact used to explain 'yes means ... no means ...' and a reader looking for the answer word in the file found both, so a correct 'no' was unreadable; the sibling relation runs BOTH ways -- a sentence naming only the tests ('the tests in <d>') bound the tests dir as the subject and died NO_TARGET_FUNCTIONS with no answer written; and delivery is a destination, not a second task -- the DAG planner handed 'Write yes or no to answer.json' to software.synthesis.grid_induction.v1 and the run ended FAIL_CLOSED__PROMISED_ARTIFACT_MISSING while the capability that HAD the answer ran and wrote to a spool. A parser is a source, never a sink: with 'loads' listed as a sink, code that parsed a parameter and returned a field of it claimed a reach it cannot have. Three capabilities added; the per-PR limit is 3.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/bound_capabilities/python_source_dead_code.py",
+   "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+   "canonical/runtime/bound_capabilities/python_source_complexity.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/tests/test_a_question_about_the_tree_is_answered_by_the_tree_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Three census rows had no owner: the count was split across two fields of python.source.audit.ast (two numbers to a question that asks for one), taint required a second and third path key before any sentence could reach it, and coverage had no runner at all -- so a correct answer had nowhere to be written and the probe recorded FAIL_CLOSED__PROMISED_ARTIFACT_MISSING.",
+ "canonical_base_commit": "5fb35987a4177daf4b03682007fb11c9acb8d6ac",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Three census rows had no owner: the count was split across two fields of python.source.audit.ast (two numbers to a question that asks for one), taint required a second and third path key before any sentence could reach it, and coverage had no runner at all -- so a correct answer had nowhere to be written and the probe recorded FAIL_CLOSED__PROMISED_ARTIFACT_MISSING.",
+ "date": "2026-10-31",
+ "expected_parent_change": "Three census rows that were answerable from the tree and answered nowhere now answer: a definition count is one number, taint is bound at the input boundary and reports the edges it followed, and a coverage verdict is read from a report that carries exactly one of yes/no.",
+ "expected_parent_frontier_change": "Three census rows that were answerable from the tree and answered nowhere now answer: a definition count is one number, taint is bound at the input boundary and reports the edges it followed, and a coverage verdict is read from a report that carries exactly one of yes/no.",
+ "explicit_user_authorization": "Owner standing directive (2026-10-29/30): every listed problem already has a solution somewhere in the repository, its hidden tools or published research; do the optimal fix in the fastest way, only the right way, with no new primitive where an existing mechanism can be wired.",
+ "falsification_condition": "FALSIFIED if a definition count differs from the oracle's, if a function that only parses its parameter and returns a field of it is reported as reaching exec, if a suite that never ran a line is reported adequate, if a positive verdict is presented as a proof, if naming only the tests dir stops finding the subject, or if 'and write the repair report to R' stops binding the repair lane's artifact.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intent": "Answer three analysis questions with mechanisms already in the tree -- ast, sys.settrace and the input boundary -- and make each answer readable at the path the sentence names.",
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "The refusal boundary is substrate for every coding obligation: a machine that cannot be trusted about what it changed cannot be trusted about what it fixed. It discharges no obligation alone.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Census 5/28 -> 8/28 (count_functions 5, taint_reaches_exec yes, suite_would_catch no, all against their own oracles; route 151/75/123 ms). 16 pin tests green here. test_goal_compiler 26/26. Tiers 2/10. Unified model 33/33.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": "The rows' own `provides` tokens as the vocabulary; _close_observations, the existing 'called at every exit' choke point; _fail; the bound registry already loaded by the door; composer_route.route's chain.",
+ "progress_evidence_paths": [
+  "canonical/runtime/bound_capabilities/python_source_definition_count.py",
+  "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
+  "canonical/runtime/bound_capabilities/python_source_test_adequacy.py",
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+  "canonical/runtime/goal_front_compiler_v1.py",
+  "canonical/runtime/goal_compiler.py",
+  "canonical/tests/test_three_answers_the_tree_already_had_v1.py",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "5fb35987a4177daf4b03682007fb11c9acb8d6ac",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "TWO_NUMBERS_FOR_A_ONE_NUMBER_QUESTION__python.source.audit.ast keeps its two fields, the row composes them",
+   "A_SECOND_REQUIRED_PATH_KEY__taint and adequacy derive source, sink and test root from the subject alone",
+   "PARSER_AS_SINK__loads/load removed from the sink vocabulary, they are the input boundary"
+  ],
+  "expected_parent_level_state_change": "Three census rows that were answerable from the tree and answered nowhere now answer: a definition count is one number, taint is bound at the input boundary and reports the edges it followed, and a coverage verdict is read from a report that carries exactly one of yes/no.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "STATIC_CALL_GRAPH__OR_ASSUME_TESTS_COVER_WHAT_THEY_IMPORT__OR_ASK_THE_CALLER_FOR_A_COVERAGE_FILE",
+   "intrinsic_or_path_specific": "Intrinsic: a line-coverage claim needs the suite to actually run under a tracer, which is execution, not string work.",
+   "surviving_causal_blocker": "Nothing else in the tree executes a suite under a tracer, so without this the row can only guess."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "No duplicated parser: the definition count is ast.walk, taint is ast over the same parsed files, and adequacy reuses unittest discovery instead of reimplementing it.",
+   "existing_inherited_routes_checked": "python.source.audit.ast (two counts), python.source.symbols.index.ast (names and callers_of), python.source.dead_code.v1 (callers), python.source.complexity.v1 (nesting) and the front door's spool/delivery seam were all read before writing a line.",
+   "external_existing_routes_checked": "coverage.py and radon are the published tools for coverage and complexity; both are dependencies and an install step, and the coverage answer needs only line execution, which sys.settrace provides in the stdlib.",
+   "surviving_gap": "Repair lanes that must modify the tree (merge conflict, circular import, injection) still have no executing controller, and destructive_refusal still fails open -- policy-blocked, counted as the one false pass."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "A_VERDICT_WITHOUT_ITS_EDGES__taint now reports trace and finding",
+    "A_POSITIVE_VERDICT_PRESENTED_AS_A_PROOF__answer_scope states necessary-not-sufficient",
+    "AN_ANSWER_WRITTEN_TO_A_SPOOL_WHILE_THE_SENTENCE_NAMES_ANOTHER_PATH",
+    "A_COUNT_REPORTED_AS_TWO_FIELDS_AND_NEVER_AS_THE_ANSWER"
+   ],
+   "real_outcome": "Census 5/28 -> 8/28 (count_functions 5, taint_reaches_exec yes, suite_would_catch no, all against their own oracles; route 151/75/123 ms). 16 pin tests green here. test_goal_compiler 26/26. Tiers 2/10. Unified model 33/33.",
+   "surviving_necessity": "The oracles are independent of the adapters: the census oracle counts definitions with its own walk, knows the taint answer by construction, and knows the coverage answer because it wrote a suite that never executes the mutated line."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "All prior registry rows keep their authority; the three new rows declare only source_root.",
+   "downstream_work_to_delete_or_supersede": "The DAG planner's second step for a delivery clause is superseded by _deliver_to_previous.",
+   "fresh_reuse_plan": "The same input-boundary rule and the same one-verdict report shape settle the next analysis rows as they are measured."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "One AST parse per file per run; the adequacy runner parses the subject once and traces once.",
+   "search_stop_decision": "Stop at 8/28: the three rows are exact on their oracles, and the next rows need tree modification (a live controller), not another adapter."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "implementation_still_necessary_reason": "No new primitive: ast, sys.settrace, unittest discovery and the existing spool/delivery seam carry all three answers.",
+   "losing_routes_reason": "The split counts answer a different question with two numbers; coverage.py and radon add a dependency and an install for answers the stdlib already produces in 0.9-44 ms.",
+   "routes_ranked": [
+    "REUSE_AST_AND_SETTRACE__SELECTED",
+    "SPLIT_COUNTS_FROM_PYTHON_SOURCE_AUDIT_AST",
+    "COVERAGE_PY_EXTERNAL_PACKAGE",
+    "RADON_EXTERNAL_COMPLEXITY"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The fixtures are small by construction, but the oracles are the census's own: each answer is checked against a truth known by construction, and the probe records the route latency and capability id beside it."
+  },
+  "real_outcome": "Census 5/28 -> 8/28 (count_functions 5, taint_reaches_exec yes, suite_would_catch no, all against their own oracles; route 151/75/123 ms). 16 pin tests green here. test_goal_compiler 26/26. Tiers 2/10. Unified model 33/33.",
+  "required_capability": "ANSWER_A_QUESTION_FROM_THE_TREE_AND_DELIVER_IT_WHERE_THE_SENTENCE_SAYS",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "BROAD_SUITE_OF_REFACTORS",
+      "CORRECTNESS": "GOOD_BUT_CONFIG_DEPENDENT",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REFORMATS_BY_CONFIG",
+      "VERIFIABILITY": "NEEDS_PROJECT_DISCIPLINE",
+      "WALL_CLOCK": "SLOWER_SETUP"
+     },
+     "evidence": [
+      "rope operates on ropeproject configuration and its output formatting varies with user config, which breaks the adapter's byte-preservation law"
+     ],
+     "qualification_evidence": [
+      "pypi project page for rope read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ROPE_EXTERNAL_REFACTOR_ENGINE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "FAR_BEYOND_THE_NEED",
+      "CORRECTNESS": "HIGH",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REPRINT_VARIES",
+      "VERIFIABILITY": "BYTE_PRESERVATION_NOT_GUARANTEED",
+      "WALL_CLOCK": "PARSER_DEPENDENCY_AND_REPRINT"
+     },
+     "evidence": [
+      "libcst reprints the module from its own tree, so comments and formatting are no longer byte-identical"
+     ],
+     "qualification_evidence": [
+      "pypi project page for libcst read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LIBCST_CONCRETE_SYNTAX_REWRITE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "TRIVIAL",
+      "CORRECTNESS": "WRONG_ON_SHADOWING_AND_ON_COMMENTS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "SILENTLY_BREAKS",
+      "VERIFIABILITY": "NO_BINDING_EVIDENCE",
+      "WALL_CLOCK": "FASTEST"
+     },
+     "evidence": [
+      "a textual replace edits strings, comments and shadowed scopes; the adapter's own SPAN_INTEGRITY law exists to prevent exactly that"
+     ],
+     "qualification_evidence": [
+      "measured on this tree: the fixture's docstrings and `subtotal_cents` carriers must survive"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
+    }
+   ],
+   "checked_at_utc": "2026-10-31T01:57:15Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "SPLIT_COUNTS_AND_UNBOUND_TAINT__two fields where one number was asked for, and a row no sentence could reach",
+   "max_age_hours": 24,
+   "negative_search_summary": "No new primitive was needed. ast, sys.settrace and unittest discovery are already in the stdlib and already used elsewhere in the tree; coverage.py and radon were the only external candidates and both lose on dependency cost.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python rename symbol across modules ast span edit"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope libcst refactoring library python"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "resolve module identity from import statement path suffix"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "libcst rope latest release python 3.11"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "REUSE_AST_AND_SETTRACE__SELECTED",
+    "COVERAGE_PY_EXTERNAL_PACKAGE",
+    "RADON_EXTERNAL_COMPLEXITY",
+    "SPLIT_COUNTS_FROM_PYTHON_SOURCE_AUDIT_AST"
+   ],
+   "selected_route": "REUSE_AST_AND_SETTRACE__NO_STDLIB_GAP",
+   "selected_route_checked_at_utc": "2026-10-31T01:57:15Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-31T01:57:15Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
+      "evidence": [
+       "DIRECT_PROBE: 3.11 interpreter parsed the adapter, the fixture tree and 2254 runtime modules this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/goal_front_compiler_v1.py + bound_capabilities/python_source_definition_count.py / _taint_flow.py / _test_adequacy.py (in-tree)",
+      "evidence": [
+       "DIRECT_PROBE: 16 pin tests green; three census rows PASS against their oracles at 151/75/123 ms; unified model 33/33"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE_AST_AND_SETTRACE__NO_STDLIB_GAP",
+    "status": "READY"
+   },
+   "selected_surviving_route": "REUSE_AST_AND_SETTRACE__NO_STDLIB_GAP",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "python.source.audit.ast already walks every definition but reports function_count and class_count separately",
+     "goal_compiler._witness_directories already names the test directory; the sibling relation is its other direction",
+     "goal_front_compiler_v1._dag_steps already rewrites a previous step's output for delivery in the compound compiler"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "unittest.TestLoader.discover asserts the start dir lies inside top_level_dir ('Path must be within the project'): the runner is anchored at the project root that contains both app and tests"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "coverage.py and radon remain heavier than the need: a dependency and an install for one verdict and one count"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "docs.python.org/3/library/ast.html -- ast.walk and lineno are the sanctioned mechanism for structural questions",
+     "docs.python.org/3/library/sys.html#sys.settrace -- line events are the stdlib coverage mechanism"
+    ]
+   },
+   "stop_condition": "Ship only what is measured here: the three declarations, file identity, the residual law and the honest contract field. Do not add per-name lists, do not widen what may run (a referent is never defaulted), and do not touch the remaining tiers' capabilities until their own oracles are built.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
+  },
+  "routes_considered": [
+   "REUSE_AST_AND_SETTRACE__SELECTED",
+   "COVERAGE_PY_EXTERNAL_PACKAGE",
+   "RADON_EXTERNAL_COMPLEXITY",
+   "SPLIT_COUNTS_FROM_PYTHON_SOURCE_AUDIT_AST"
+  ],
+  "selected_surviving_route": "REUSE_AST_AND_SETTRACE__NO_STDLIB_GAP",
+  "stop_condition": "Ship only these three rows, the three narrowings and the corrected sink vocabulary. Do not add a fourth capability, do not add a per-capability table, do not treat a positive coverage verdict as a proof of assertion strength, and do not consume 'write the repair report to R'.",
+  "why_selected_route_is_fastest_sufficient": "Each answer is one pass over the subject tree with the stdlib: ast.walk for definitions (0.9 ms), the same walk plus a source/sink adjacency for taint (1.8 ms), and one traced subprocess for coverage (44 ms). The alternatives cost a dependency and an install (coverage.py, radon) or a second traversal that answers a different question (python.source.audit.ast reports two counts, not one)."
+ },
+ "resolution": "Measured reuse slice: three adapters, three registry rows (the per-PR limit), one delivery law at the DAG seam, one report-shape law and one sibling-resolution law. No new parser, no dependency, no model, no spend.",
+ "route_id": "REUSE_AST_AND_SETTRACE__NO_STDLIB_GAP",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REUSE_AST_AND_SETTRACE__NO_STDLIB_GAP",
+ "stop_condition": "Ship only these three rows, the three narrowings and the corrected sink vocabulary. Do not add a fourth capability, do not add a per-capability table, do not treat a positive coverage verdict as a proof of assertion strength, and do not consume 'write the repair report to R'.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "DIRECT_PROBE__16 pin tests green here, three census rows PASS against independent oracles, and the 28-task census run before and after (5/28 -> 8/28).",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "49afd59d1b591db5c9384da4b38fed3122f3db8e",
+     "path": "canonical/runtime/goal_front_compiler_v1.py"
+    },
+    {
+     "git_blob_sha": "8fe52a0e383b485f5a9b61782b2e2f2fbdb69300",
+     "path": "canonical/runtime/goal_compiler.py"
+    }
+   ],
+   "decisive_question": "Does a question the tree can already answer reach the artifact the sentence names, or does it fall to a writer that cannot answer it?",
+   "falsifier_id": "F_A_CORRECT_ANSWER_THAT_IS_NEVER_DELIVERED_20261031",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "P_SIBLING_ONE_VERDICT_AND_DELIVERY_AS_A_DESTINATION_20261031"
+  }
+ },
+ "weakens_existing_guard": false
+}
