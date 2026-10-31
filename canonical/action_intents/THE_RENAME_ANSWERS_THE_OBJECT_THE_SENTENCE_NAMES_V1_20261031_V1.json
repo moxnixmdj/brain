@@ -1,0 +1,488 @@
+{
+  "action_id": "THE_RENAME_ANSWERS_THE_OBJECT_THE_SENTENCE_NAMES_V1_20261031_V1",
+  "action_intent_id": "THE_RENAME_ANSWERS_THE_OBJECT_THE_SENTENCE_NAMES_V1_20261031_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "live_brain_route_admission_v1.py: the object role is now read off the sentence's noun and off the row's own declared slots, so a row that edits a SYMBOL cannot answer a sentence about a PARAMETER. Refused at admission and again at the exit (OBJECT_ROLE_MISMATCH); the refusal falls into the existing decisive-retry discipline, which names the row for the object the sentence states.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/swe_typed_plan_v1.py"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A row that edits a SYMBOL answers a sentence about a PARAMETER",
+  "canonical_base_commit": "57edfa446c33c7b3908b00253e2ee4d056452caf",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL admits a row when the sentence supplies its declared inputs, and that contract binds a SIBLING row perfectly: qualname=norm,new_symbol=value is complete -- for a sentence about a parameter. Measured 3/3 on f333567: 'Rename the parameter text to value in the python module <D>/app/models.py.' ran python.refactor.rename_symbol.v1, renamed the FUNCTION, and reported PASS. Six unrelated words ('and save the report to <D>/r.json') made the correct row run.",
+  "date": "2026-10-31",
+  "expected_parent_change": "Census stays 22/28 with 0 false PASS, and the one lie that a byte-change gate could not see is gone: the parameter sentence now runs python.refactor.rename_parameter.v1 and produces 'def norm(value, scale=1)' (2/2, with and without the report clause), the function sentence is unchanged, and class/method/local renames refuse honestly instead of editing a different object. The 18-sentence set goes 2/18 -> 3/18 in both the pkg/test_*.py and tests/test_*.py layouts.",
+  "expected_parent_frontier_change": "Census stays 22/28 with 0 false PASS, and the one lie that a byte-change gate could not see is gone: the parameter sentence now runs python.refactor.rename_parameter.v1 and produces 'def norm(value, scale=1)' (2/2, with and without the report clause), the function sentence is unchanged, and class/method/local renames refuse honestly instead of editing a different object. The 18-sentence set goes 2/18 -> 3/18 in both the pkg/test_*.py and tests/test_*.py layouts.",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake, focus on hardcore software engineering. Owner instruction, real now not fake: the promise is claimed at the strength tee actually guarantees and not one step further, and the bytes are tied to the command by the producer's own digest rather than assumed. Owner standing instruction repeated six times: the perfect solution already exists in the brain, so _post_tee joins a table that already judged five commands by their effect and needs no new mechanism. Owner instruction that all tests must be extremely hard and only truthful: seven of the nine new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed, no protected path touched.",
+  "falsification_condition": "Re-run the measured pair: if the parameter sentence reaches rename_symbol.v1 and the file shows 'def value(text, scale=1)', or if the function sentence stops renaming the function, or if the 28-task census drops, this action was wrong.",
+  "governance_change": false,
+  "governance_change_summary": "No guard, law, gate, tolerance or referee is touched. The object roles are read from slot names the registry rows already declare and from the sentence's own noun; nothing is added to the registry and no refusal is widened.",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intent": "Read the object role the sentence states and the object role the row declares, and refuse a PASS whose row edits a different kind of object than the sentence is about.",
+  "load_bearing_primary": {
+    "canonical_base_commit": "57edfa446c33c7b3908b00253e2ee4d056452caf",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "A_PASS_FROM_A_ROW_THAT_EDITS_A_DIFFERENT_KIND_OF_OBJECT_IS_NOT_A_PASS",
+    "measured_effect": "Census stays 22/28 with 0 false PASS, and the one lie that a byte-change gate could not see is gone: the parameter sentence now runs python.refactor.rename_parameter.v1 and produces 'def norm(value, scale=1)' (2/2, with and without the report clause), the function sentence is unchanged, and class/method/local renames refuse honestly instead of editing a different object. The 18-sentence set goes 2/18 -> 3/18 in both the pkg/test_*.py and tests/test_*.py layouts.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "stop_condition": "Stop when the measured pair both answer the stated object and the 28-task census is not lower.",
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Census stays 22/28 with 0 false PASS, and the one lie that a byte-change gate could not see is gone: the parameter sentence now runs python.refactor.rename_parameter.v1 and produces 'def norm(value, scale=1)' (2/2, with and without the report clause), the function sentence is unchanged, and class/method/local renames refuse honestly instead of editing a different object. The 18-sentence set goes 2/18 -> 3/18 in both the pkg/test_*.py and tests/test_*.py layouts.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": "The door's existing admission predicate, its typed-admission branch, its decisive-retry discipline and its tool-truth exit were reused entire. No new adapter, verifier, table or vocabulary: two slot-name classes and one noun class over rows that already declare them.",
+  "progress_evidence_paths": [
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/tests/test_the_rename_answers_the_object_the_sentence_names_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "57edfa446c33c7b3908b00253e2ee4d056452caf",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
+      "DECLARING_PYTHON_STDLIB_FOR_A_CAPABILITY_WHOSE_ADAPTER_DOES_NOT_IN_FACT_FALL_BACK",
+      "REMOVING_THE_HASH_PINNED_APT_CLAIM_FROM_ANY_OTHER_CAPABILITY",
+      "WEAKENING_THE_STDLIB_PROBE_SO_A_MISSING_MODULE_COULD_PASS"
+    ],
+    "expected_parent_level_state_change": "Census stays 22/28 with 0 false PASS, and the one lie that a byte-change gate could not see is gone: the parameter sentence now runs python.refactor.rename_parameter.v1 and produces 'def norm(value, scale=1)' (2/2, with and without the report clause), the function sentence is unchanged, and class/method/local renames refuse honestly instead of editing a different object. The 18-sentence set goes 2/18 -> 3/18 in both the pkg/test_*.py and tests/test_*.py layouts.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THE_BYTE_GATE_WOULD_LOSE_THE_ONLY_TRUTH_THAT_FILE_CHANGED; WIDENING_THE_GATE_TO_ACCEPT_ANY_EDIT_WOULD_ACCEPT_THE_WRONG_EDIT; A_REGEX_OVER_THE_SENTENCE_ALONE_WOULD_HAVE_SWALLOWED_THE_FIRST_PATH_SEGMENT_AFTER_THE_NOUN_AND_BOUND_BOTH_ROLES_AT_ONCE (measured, fixed by requiring a non-path continuation).",
+      "intrinsic_or_path_specific": "Path-specific: one admission predicate and one exit check, with no change to any adapter, registry row or verifier.",
+      "surviving_causal_blocker": "The contract predicate compares argument VALUES, never object KINDS, so a sibling row was indistinguishable from the intended one."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_ADAPTER_NO_NEW_VERIFIER_NO_NEW_REGISTRY_ROW",
+      "existing_inherited_routes_checked": "route_admission's declare-contract predicate, typed_swe_retry_refusal and build_plan were each driven directly on main; build_plan already returned rename_parameter.v1 for BOTH phrasings, so the knowledge existed at the plan layer and was never consulted by the admission layer.",
+      "external_existing_routes_checked": "rope 1.15.0 (pypi) ships rope/refactor/rename.py with a distinct parameter rename, and libcst 1.9.0 codemods rename by qualified name; both settle the same question by naming the object, not by diffing the file. Neither is imported here.",
+      "surviving_gap": "The six remaining census failures are capability depth, not object role: extract_function (REGION_INVALID), three repair rows (LIVE_CONTROLLER_EXECUTION), sql_injection (CAPABILITY_DAG_RESULT_INVALID), localize_fault (no row reached)."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "PATCHING_THE_BYTE_CHANGE_GATE_TO_LOOK_INSIDE_THE_FILE",
+        "ADDING_A_PARAMETER_SPECIFIC_ROUTE_TABLE",
+        "RE_PROBING_THE_TWO_SENTENCES_BY_HAND_FOR_A_THIRD_TIME"
+      ],
+      "real_outcome": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
+      "surviving_necessity": "The exit truth was a byte comparison of the named file; no gate could tell which object inside the file moved, so the decision had to be made where the object role is known."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "The typed plan's own object knowledge (build_plan already distinguished the two rows) now reaches admission and the exit.",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "Reuse the declare-contract predicate, the typed admission branch and the decisive-retry discipline; add the object-role reading and one refusal class."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_TWO_PHRASINGS_WERE_MEASURED_ONCE_ON_A_COPY_AND_THE_WHOLE_28_TASK_AND_18_SENTENCE_SUITES_WERE_RUN_ONCE_BEFORE_AND_ONCE_AFTER",
+      "search_stop_decision": "Stop: rope and libcst both name the object explicitly, and the in-repo plan layer already did; nothing left to discover."
+    },
+    "obs_solution": {
+      "deleted_or_bypassed_paths": [
+        "PATCHING_THE_BYTE_CHANGE_GATE",
+        "ADDING_A_PARAMETER_SPECIFIC_ROUTE_TABLE",
+        "MAKING_THE_RETRY_UNCONDITIONAL"
+      ],
+      "deletion_first_order_applied": [
+        "DELETE",
+        "REUSE",
+        "BYPASS",
+        "SUBSTITUTE",
+        "CONFIGURE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Inspecting the file after the fact needs a second oracle per object kind and still passes a wrong edit of the same kind; a route table duplicates the registry's own slot names.",
+      "routes_ranked": [
+        "reading the role off the sentence's noun and the row's declared slots (selected: 22/28 held, 0 false PASS left)",
+        "patching the byte gate to inspect the file (rejected: no gate can tell which object moved)",
+        "a parameter-specific route table (rejected: duplicates what the rows already declare)",
+        "routing the parameter sentence to build_plan only (rejected: leaves every other object kind unguarded)"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Not synthetic: the oracle is the file's text and the tree, read by the probe after the call -- 'def norm(value, scale=1)' versus 'def value(text, scale=1)'."
+    },
+    "prior_routes_considered": [
+      "EDIT_THE_BYTE_CHANGE_GATE",
+      "ADD_A_PARAMETER_ROUTE_TABLE",
+      "MAKE_THE_TYPED_RETRY_UNCONDITIONAL",
+      "READ_THE_OBJECT_ROLE_AT_ADMISSION_AND_AT_EXIT"
+    ],
+    "real_outcome": "A rename answers the object the sentence names: parameter -> rename_parameter.v1 editing the parameter, function -> rename_symbol.v1 editing the function, and an object the rows cannot edit is refused rather than answered with a different object.",
+    "required_capability": "READ_THE_OBJECT_ROLE_OFF_THE_SENTENCE_AND_THE_ROW_SLOTS",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "COVERS_EVERY_OBJECT_KIND_THE_ROWS_DECLARE",
+            "CORRECTNESS": "STOPS_THE_WRONG_ROW_BEFORE_IT_RUNS",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "SOLE_GUARD_LEAVES_ROUTES_THAT_BYPASS_ADMISSION",
+            "VERIFIABILITY": "EASILY_PINNED_BY_THE_TWO_SENTENCES",
+            "WALL_CLOCK": "ONE_REGEX_PER_CALL"
+          },
+          "evidence": [
+            "measured: parameter sentence rerouted to rename_parameter.v1 with a correct edit"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: 3/3 before, 2/2 after on the measured pair"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "READ_THE_OBJECT_ROLE_AT_ADMISSION"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NEEDS_A_SECOND_ORACLE_PER_KIND",
+            "CORRECTNESS": "CANNOT_TELL_WHICH_OBJECT_MOVED",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "PASSES_A_WRONG_EDIT_OF_THE_SAME_KIND",
+            "VERIFIABILITY": "ORACLE_MUST_MIRROR_EVERY_REFACTORING",
+            "WALL_CLOCK": "PARSES_THE_FILE_AGAIN"
+          },
+          "evidence": [
+            "the measured false PASS edited the named file and changed its bytes"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the byte-change gate was green on the wrong edit"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "INSPECT_THE_FILE_AFTER_THE_EDIT"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "DUPLICATES_THE_REGISTRY",
+            "CORRECTNESS": "SOLVES_ONE_OBJECT_KIND_ONLY",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "DRIFTS_FROM_THE_ROWS_IT_COPIES",
+            "VERIFIABILITY": "TWO_PLACES_TO_KEEP_TRUE",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "the rows already declare old_param/new_param, so the table would restate them"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the snapshot registry's two rows carry the distinguishing slots"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "A_PARAMETER_SPECIFIC_ROUTE_TABLE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "NO_COVERAGE_OF_OTHER_ENTRY_ROUTES",
+            "CORRECTNESS": "PLAN_IS_CORRECT_BUT_UNREACHED",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "A_FAILED_ATTEMPT_IS_ONLY_RETRIED_WHEN_IT_MAY_SUPERSEDE",
+            "VERIFIABILITY": "THE_MEASURED_PAIR_STAYS_WRONG",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "build_plan returned rename_parameter.v1 for both phrasings while the door returned rename_symbol.v1"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: build_plan and solve() disagreed on main"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "RELY_ON_BUILD_PLAN_ALONE"
+        }
+      ],
+      "checked_at_utc": "2026-10-31T15:49:11Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "BIND_THE_SENTENCE_TO_A_ROW_BY_ARGUMENT_VALUE_ONLY",
+      "max_age_hours": 24,
+      "negative_search_summary": "No package answers 'which kind of object does this sentence rename' for a front door that must also refuse; rope and libcst are editors driven by an explicit object argument, which is exactly the datum this fix reads off the sentence instead.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "python refactoring library rename parameter vs rename function"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "rope libcst which renames a parameter across a project"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "how a rename refactoring decides which object to rename"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "rope 1.15.0 libcst 1.9.0 parameter rename"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "routes_considered": [
+        "BIND_THE_SENTENCE_TO_A_ROW_BY_ARGUMENT_VALUE_ONLY",
+        "READ_THE_OBJECT_ROLE_AT_ADMISSION",
+        "READ_THE_OBJECT_ROLE_AT_THE_EXIT",
+        "INSPECT_THE_FILE_AFTER_THE_EDIT",
+        "A_PARAMETER_SPECIFIC_ROUTE_TABLE",
+        "RELY_ON_BUILD_PLAN_ALONE",
+        "DISABLE_THE_CONTRACT_PREDICATE"
+      ],
+      "selected_route": "READ_THE_OBJECT_ROLE_AT_ADMISSION_AND_AT_THE_EXIT",
+      "selected_route_checked_at_utc": "2026-10-31T15:49:11Z",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-31T15:49:11Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 interpreter in the workspace",
+            "evidence": [
+              "python3 -m unittest ran the new suite: 7 tests OK"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the repository checkout and its git history",
+            "evidence": [
+              "git rev-parse origin/main and git merge --no-edit both ran this session"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the adapter path's own file writes",
+            "evidence": [
+              "the measured run wrote def norm(value, scale=1) into the copy's app/models.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "READ_THE_OBJECT_ROLE_AT_ADMISSION_AND_AT_THE_EXIT",
+        "status": "READY"
+      },
+      "selected_surviving_route": "READ_THE_OBJECT_ROLE_AT_ADMISSION_AND_AT_THE_EXIT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/live_brain_route_admission_v1.py:route_admission's DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL",
+          "canonical/runtime/swe_typed_plan_v1.py:build_plan returned rename_parameter.v1 for both phrasings on main",
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json: the two rows declare old_param/new_param versus qualname/new_symbol"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "IDE rename refactorings (pyright/jedi-backed editors) key on the symbol kind, not on the file's changed bytes"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pypi.org/pypi/rope 1.15.0 ('a python refactoring library'), pypi.org/pypi/libcst 1.9.0 (codemods rename by qualified name)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "github.com/python-rope/rope/blob/master/rope/refactor/rename.py: a parameter rename is a distinct operation from a name rename"
+        ]
+      },
+      "stop_condition": "Stop when both measured sentences answer the stated object and the 28-task census is not lower.",
+      "unresolved_plausible_dominators": [],
+      "why_selected_route_is_fastest_sufficient": "IT_READS_A_DATUM_BOTH_SIDES_ALREADY_CARRY__THE_SENTENCES_NOUN_AND_THE_ROWS_SLOT_NAMES__NEEDS_NO_ADAPTER_OR_REGISTRY_CHANGE__AND_IS_MEASURED_TO_LEAVE_THE_28_TASK_CENSUS_AT_22_WITH_FALSE_PASSES_AT_ZERO"
+    },
+    "routes_considered": [
+      "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+      "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+      "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+      "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+      "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED",
+      "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+      "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
+      "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
+      "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
+      "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
+      "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
+      "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
+      "PYTHON_STDLIB_DECLARATION_ENFORCED_NO_EXTERNAL_BINARY_V1_20261023_V1",
+      "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
+      "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
+      "PATH_ROLE_EXCLUSIVITY_ONE_PATH_ONE_ROLE_V1_20261023_V1",
+      "PLURAL_ROLE_WORD_BINDS_A_LIST_OF_PATHS_V1_20261023_V1",
+      "SUITE_ARGV_DELEGATION_FOLLOWED_TO_ANY_DEPTH_V1_20261023_V1",
+      "NEAREST_ROLE_WORD_OWNS_THE_PATH_V1_20261023_V1",
+      "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
+      "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
+      "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+      "WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1",
+      "THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1",
+      "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
+      "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
+      "A_COMMAND_IS_VERIFIED_BY_RUNNING_IT_AGAIN_V1_20261024_V1",
+      "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
+      "ONE_RUNNER_SERVES_294_CAPABILITIES_SO_ONE_INSPECTOR_RE_INSPECTS_ALL_OF_THEM_V1_20261024_V1",
+      "A_PROMISE_ABOUT_A_FILE_IS_READ_BEFORE_THE_WORK_V1_20261024_V1",
+      "A_PROMISED_FILE_IS_NON_EMPTY_ONLY_WHEN_THE_SENTENCE_PROMISED_CONTENT_V1_20261024_V1",
+      "A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1",
+      "A_DIRECTORY_IS_A_REAL_ARTIFACT_AND_A_PATH_NEEDS_NO_EXTENSION_V1_20261024_V1",
+      "A_BINDERS_REFUSAL_MAY_REFUTE_A_SELECTION_AND_MAY_NOT_OPEN_A_WRITE_V1_20261024_V1",
+      "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
+      "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
+      "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
+    ],
+    "selected_route": "A_YES_OR_NO_QUESTION_IS_ANSWERED_BY_THE_EXIT_STATUS_THE_VERIFIER_ALREADY_ENUMERATED_V1_20261025_V1",
+    "selected_surviving_route": "READ_A_PREMISE_AS_A_PREMISE",
+    "stop_condition": "Stop when both suites are green and the census is not lower.",
+    "why_selected_route_is_fastest_sufficient": "Two rules in the prose table, placed after the rules for a count and for a line number so those keep their sentences, and one flag on cmp.  The dominant alternative was a new answer type for yes-or-no questions, rejected because the exit status already is that answer and is already enumerated, declared, carried to the adapter and reproduced by the inspector -- building a second mechanism would have added a way to be trusted where none was needed.  Plain `cmp` was rejected on measurement, not preference: on identical files it exits 0 with empty stdout and the adapter raises."
+  },
+  "refusal_or_stop_condition": "Stop when both measured sentences answer the stated object and the 28-task census is not lower.",
+  "resolution": "Two refusals were already honest (class, method) and stay; the local-variable sentence still has no capability and still refuses for that reason.",
+  "route_id": "READ_A_PREMISE_AS_A_PREMISE",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "READ_THE_OBJECT_ROLE_AT_ADMISSION_AND_AT_THE_EXIT",
+  "stop_condition": "Stop when both measured sentences answer the stated object and the 28-task census is not lower.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "39a1057468fd8cf30b55d805c0884a57ae8dc024",
+          "path": "canonical/runtime/capability_selection_retrieval_v1.py"
+        },
+        {
+          "git_blob_sha": "0ff8be78e7d525c3a2dc9588ebd0413da4e11dd3",
+          "path": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py"
+        }
+      ],
+      "decisive_question": "MAY_A_CAPABILITY_BE_ADMITTED_FOR_A_REQUEST_WHEN_ITS_DECLARED_CONTRACT_HAS_NO_SLOT_TO_HOLD_WHAT_THE_SENTENCE_STATES",
+      "falsifier_id": "THE_SAME_SENTENCE_OVER_AN_ABSENT_TARGET_AND_OVER_AN_EXISTING_ONE_REACHES_THE_SAME_WRITER_AND_WRITES_THE_SAME_BYTES",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_CANDIDATE_WAS_TO_REMOVE_THE_OFFENDING_KEYWORDS_FROM_THE_DOCX_VERIFIER__REJECTED_BECAUSE_IT_WOULD_MOVE_THIS_TIE_AND_LEAVE_THE_CLASS__SECOND_CANDIDATE_WAS_TO_MAKE_THE_ADAPTER_TOLERATE_A_MISSING_SIDECAR__REJECTED_BECAUSE_THE_VERIFIER_REFUSING_IS_CORRECT_AND_THE_DEFECT_IS_THAT_IT_WAS_CHOSEN__THIRD_CANDIDATE_WAS_TO_REQUIRE_THE_SENTENCE_TO_NAME_A_WRITE_CAPABILITY__REJECTED_AS_A_KEYWORD_RULE_OF_THE_KIND_THAT_MEASURABLY_HIJACKS_THE_SCORER__FOURTH_CANDIDATE_WAS_TO_APPLY_THE_RULE_TO_ANY_SENTENCE_WITH_A_PAYLOAD__REJECTED_AS_THE_6119_SHAPE",
+      "proposal_id": "A_REQUEST_ABOUT_A_DIRECTORY_GETS_THE_DIRECTORY_FORM_OF_THE_COMMAND_SO_A_TREE_IS_NO_LONGER_AN_ERROR_V1_20261025_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
