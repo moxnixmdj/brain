@@ -928,7 +928,8 @@ def declared_optional_inputs(entry: Mapping[str, Any] | None) -> set[str]:
 
 
 def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], root: pathlib.Path,
-                           entry: Mapping[str, Any] | None, inputs: dict[str, Any]) -> list[tuple[str, BaseException]]:
+                           entry: Mapping[str, Any] | None, inputs: dict[str, Any],
+                           allow_inferred_referent: bool = False) -> list[tuple[str, BaseException]]:
     """Settle refused keys from declarations already in the repository.
 
     Order matters: the adapter's own defaults and the sentence's own identifier need
@@ -995,6 +996,9 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
             if value is None or str(row.get("rule") or "") not in _PROVED_BY_THE_TREE:
                 settled.append((key, exc))
                 continue
+            if str(row.get("rule")) in _INFERRED_REFERENT_RULES and not allow_inferred_referent:
+                settled.append((key, exc))
+                continue
             inputs[key] = value
         remaining = settled
     return remaining
@@ -1009,6 +1013,16 @@ _PROVED_BY_THE_TREE = frozenset({
     "TARGET_MODULE_FROM_STATED_TO_PATH",
     "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
     "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
+    "PATH_DIR_FROM_STATED_FILE_PARENT",
+    "PATH_DIR_COMMON_TO_STATED_FILES",
+})
+
+# The two proofs that produce a referent the sentence never named: a directory read
+# off the parent of a stated file, or the directory two stated files have in common.
+# Both are sound as evidence about the tree and both are a guess about the REQUEST,
+# so the front door takes them only when no candidate could bind the sentence
+# without them (the rescue in ``compile_goal``), never to decide between candidates.
+_INFERRED_REFERENT_RULES = frozenset({
     "PATH_DIR_FROM_STATED_FILE_PARENT",
     "PATH_DIR_COMMON_TO_STATED_FILES",
 })
@@ -1841,8 +1855,19 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             inputs[key] = bind_typed_key(goal, key, root, entry)
         except GoalCompilationFailure as exc:
             refused.append((key, exc))
-    if refused and allow_declared_rescue and _DECLARED_RESCUE["enabled"]:
-        refused = derive_declared_inputs(goal, refused, root, entry, inputs)
+    if refused:
+        # The settle pass reads declarations the repository ALREADY carries, and a
+        # key it fills is one the binder has just refused -- it can never overwrite
+        # a binding.  Two of its rules are different in kind: they INVENT a referent
+        # (a directory read off the parent of a stated file), and an invented
+        # `source_root` is what let a patch-search row outrank the repair the
+        # contract had selected (measured 2026-10-31, the last FALSE row).  Those
+        # two stay behind the rescue gate; every other rule -- the adapter's own
+        # harness defaults, the replacement identifier the sentence states, the
+        # module the stated tree PROVES defines the stated symbol -- settles always.
+        rescue = bool(allow_declared_rescue and _DECLARED_RESCUE["enabled"])
+        refused = derive_declared_inputs(goal, refused, root, entry, inputs,
+                                         allow_inferred_referent=rescue)
     if refused:
         raise refused[0][1]
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,

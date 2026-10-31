@@ -1734,21 +1734,6 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
                 r"|\bformat\w*|\bblack\b|\bautopep8\b|\bprettier\b|\btype[-_ ]?gate\b"
                 r"|\bmypy\b|\btypec\w*|\bstatic[_ ]?triage\b|\btriage\b", re.IGNORECASE),
      "STATED_LINT_OR_FORMAT_NOT_PERFORMED_BY_CAPABILITY"),
-    # "RUN THE TESTS" REQUIRES SOMETHING TO HAVE RUN.  Measured 2026-10-30: "Run the test suite for
-    # <T>" was certified PASS by the same test-selection INDEX that answered the flaky question,
-    # while the tree's own suite was never executed -- no return code, no count of tests run, no
-    # timing.  A selection is a plan to run; the sentence asks for the run.  The row that runs tests
-    # says so in what it provides (a runner, a suite, pytest/unittest, a measured acceptance), which
-    # is the same declaration test the other rows use.
-    # The verb must be the REQUEST.  "Set up CI to run the tests in <dir>" contains "run the tests"
-    # and asks for a workflow file; anchoring the verb at the start of the sentence keeps the CI
-    # sentence on the CI side (measured: an unanchored trigger refused a real CI row).
-    (re.compile(r"^\s*(?:please\s+|now\s+|can you\s+)*(?:re)?run\b[^.\n]{0,40}"
-                r"\b(?:tests?|suite|pytest)\b|^\s*(?:please\s+)?(?:re)?execute\b[^.\n]{0,30}"
-                r"\btests?\b|^\s*(?:run|rerun)\s+the\s+tests?\b", re.IGNORECASE),
-     re.compile(r"\brun\w*|\bsuite\b|\bpytest\b|\bunittest\b|\bacceptance\b|\bexecut\w*"
-                r"|\bharness\b|\bdriver\b", re.IGNORECASE),
-     "STATED_TEST_RUN_NOT_EXECUTED_BY_CAPABILITY"),
     # A VERDICT ABOUT FLAKINESS IS NOT A TEST SELECTION.  Measured 2026-10-30 on this repository:
     # "Rerun the failing test <T> three times and tell me if it is flaky" was certified
     # PASS__RAW_GOAL_..._EXACT_SEMANTIC_ACCEPTANCE by code.impact.tree_sitter.testselect.v1 -- a
@@ -1772,6 +1757,21 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
      re.compile(r"\bdebug\w*|\bpdb\b|\bbreakpoint|\bframe\b|\btraceback\b",
                 re.IGNORECASE),
      "STATED_DEBUGGER_FRAME_NOT_PROVIDED_BY_CAPABILITY"),
+    # "RUN THE TESTS" REQUIRES SOMETHING TO HAVE RUN.  Measured 2026-10-30: "Run the test suite for
+    # <T>" was certified PASS by the same test-selection INDEX that answered the flaky question,
+    # while the tree's own suite was never executed -- no return code, no count of tests run, no
+    # timing.  A selection is a plan to run; the sentence asks for the run.  The row that runs tests
+    # says so in what it provides (a runner, a suite, pytest/unittest, a measured acceptance), which
+    # is the same declaration test the other rows use.
+    # The verb must be the REQUEST.  "Set up CI to run the tests in <dir>" contains "run the tests"
+    # and asks for a workflow file; anchoring the verb at the start of the sentence keeps the CI
+    # sentence on the CI side (measured: an unanchored trigger refused a real CI row).
+    (re.compile(r"^\s*(?:please\s+|now\s+|can you\s+)*(?:re)?run\b[^.\n]{0,40}"
+                r"\b(?:tests?|suite|pytest)\b|^\s*(?:please\s+)?(?:re)?execute\b[^.\n]{0,30}"
+                r"\btests?\b|^\s*(?:run|rerun)\s+the\s+tests?\b", re.IGNORECASE),
+     re.compile(r"\brun\w*|\bsuite\b|\bpytest\b|\bunittest\b|\bacceptance\b|\bexecut\w*"
+                r"|\bharness\b|\bdriver\b", re.IGNORECASE),
+     "STATED_TEST_RUN_NOT_EXECUTED_BY_CAPABILITY"),
     # DEAD CODE.  Nothing in the registry declares it, so this gate's honest outcome today is a
     # refusal -- which is the point: before it, an indexer that lists every definition was certified
     # as "the dead code" because the definition it named appeared in the artifact.  A capability that
@@ -1820,28 +1820,6 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
      re.compile(r"\bci\b|continuous[ _-]?integration|github[ _-]?actions?|workflow|"
                 r"\bci[._-]?config\b", re.IGNORECASE),
      "STATED_CI_SETUP_NOT_PROVIDED_BY_CAPABILITY"),
-    # A TEST SELECTION IS NOT A FLAKINESS VERDICT.  Measured 2026-10-30 on a fresh tree:
-    # "Rerun the failing test <T> three times and tell me if it is flaky." returned PASS with
-    # code.impact.tree_sitter.testselect.v1, which named <T> as a candidate test once.  Nothing
-    # was run three times, no outcome was compared, and no flakiness was decided.  Zero of 125
-    # routable rows declare flakiness (census over id+provides+keywords), so the honest end state
-    # is a refusal -- and a capability that DOES classify flaky tests is admitted by the same
-    # declaration the moment one is bound.
-    (re.compile(r"\bflaky\b|\bflakiness\b|\bintermittent\w*\b|\bnondeterministic\b|"
-                r"\bnondeterminism\b|\bflake\b", re.IGNORECASE),
-     re.compile(r"flak|intermittent|nondetermin", re.IGNORECASE),
-     "STATED_FLAKY_VERDICT_NOT_PROVIDED_BY_CAPABILITY"),
-    # A DEBUGGER IS NOT AN INDEX.  Measured 2026-10-30: "Attach a debugger to the failing test
-    # <T> and show me the frame where it breaks." returned PASS with the same test selection --
-    # no process was debugged, no breakpoint was set, no frame was read.  Zero of 125 routable
-    # rows declare a debugger, a breakpoint or a frame (census), so this is a refusal until one
-    # does; ``python.fault.localize.*`` rows are NOT admitted by it, because localising a fault
-    # from a traceback is a different effect from pausing a process and reading its frame.
-    (re.compile(r"\bdebugger\b|\bbreakpoint\b|\b(?:pdb|gdb|lldb)\b|\bstack frame\b|"
-                r"\bframe where\b|\bthe frame\b", re.IGNORECASE),
-     re.compile(r"\bdebugger\b|\bbreakpoint\b|\b(?:pdb|gdb|lldb)\b|\bstack frame\b",
-                re.IGNORECASE),
-     "STATED_DEBUGGER_FRAME_NOT_PROVIDED_BY_CAPABILITY"),
     # WHICH TESTS A CHANGE BREAKS IS A TEST SELECTION, NOT A REPOSITORY MEASUREMENT.  Measured
     # 2026-10-30: "Which tests do I need to run after changing <f>?" returned PASS from
     # python.repository.acceptance.measure.v1, which ran the repository's suite and reported
@@ -3563,6 +3541,15 @@ def _request_goal(request: Any) -> str:
     return str(request or "").strip()
 
 
+# A question that states the change set it wants planned: "which files must change ...",
+# "what has to change ...", "the sites that must change ...".
+_CHANGE_SET_QUESTION = re.compile(
+    r"\bwhich\s+files?\b[^?\n]{0,60}\b(?:must|need\s+to|have\s+to|should)\s+change\b"
+    r"|\bfiles?\s+must\s+change\b|\bwhat\s+(?:has|needs?)\s+to\s+change\b"
+    r"|\bsites?\b[^?\n]{0,40}\b(?:must|need\s+to)\s+change\b",
+    re.IGNORECASE)
+
+
 def _typed_plan_is_stated(request: Any) -> bool:
     """True when the sentence STATES one of the SWE effect families by name.
 
@@ -3582,7 +3569,24 @@ def _typed_plan_is_stated(request: Any) -> bool:
         # been doing work the typed plan relies on.  A speed change may not alter a
         # verdict, so the family that has no primary route to lose (there was no git
         # capability at all before this session) is the only one that skips it.
-        return _typed.stated_family_token(goal) == _typed.GIT_FAMILY_TOKEN
+        # The CHANGE-SET family joins git for the same measured reason: the question is
+        # "which files must change to rename ...", exactly one row declares the change set
+        # (``python.source.crossfile_edit.choreograph.v1``, keywords cross-file/choreograph/
+        # plan), and measured 2026-10-31 the lexical pass answered it with a definitions index
+        # -- PASS, and not one file the rename touches in the artifact.  When a sentence names
+        # an effect family, the row that DECLARES that family is the answer; the family's own
+        # plan then runs through the same gate chain, so nothing is skipped by being first.
+        token = _typed.stated_family_token(goal)
+        if token == _typed.GIT_FAMILY_TOKEN:
+            return True
+        # The CHANGE-SET QUESTION, and only that shape.  Measured 2026-10-31: "Which files must
+        # change to rename the symbol `mul` to `multiply` in <dir>?" was answered by a definitions
+        # index -- PASS, and not one file the rename touches named.  A stated change-set question
+        # has exactly one declaring row (the planner), so it may run first.  Scoped to the question
+        # and not to the family: running the planner first for an IMPERATIVE rename changed two
+        # pinned verdicts (front-door/canonical parity, path-style routing), and a speed path may
+        # not move a verdict.
+        return token == "crossfile_edit" and bool(_CHANGE_SET_QUESTION.search(goal))
     except Exception:  # noqa: BLE001
         return False
 
