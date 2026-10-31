@@ -139,3 +139,14 @@ Second integration: main advanced to `9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c`
 (PR6486 requirement-effect declarations and route-admission negative controls).
 Retain those changes and the matrix guard unchanged, rebind the intent and
 regenerate the combined model officially. No earlier baseline result is relabeled.
+
+The second integration run measured **242 passed, 1 failed, 931 subtests**:
+PR6486 renamed the index's provided effect but duplicated it in the live
+registry, while the snapshot already had one canonical effect and the older
+exact registry test still expected the intentionally removed row-id alias. A
+new uniqueness/no-row-id control failed on the incoming duplicate (**2 != 1**).
+Normalize the live duplicate to match the already-canonical snapshot and change
+the existing exact assertion to the now-declared single canonical effect.
+This is an explicit contract migration plus a stronger invariant, not restoring
+the obsolete alias, loosening the test, changing runtime effects or promoting
+a capability. The snapshot itself needs no change.

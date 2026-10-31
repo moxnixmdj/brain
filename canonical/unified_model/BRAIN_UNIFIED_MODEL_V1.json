@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ee32456af57a5f98697bdf546c891f620d6729e8584f1bcdcf757f8f0d4fbbe0"
+  "value": "81d45b14b82f12e90af28329f7d158ee72bfaca557f6ce7853377bb326a98c78"
  },
  "engines": [
   {
@@ -58321,7 +58321,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 9514,
+   "bytes": 10260,
    "headings": [
     "SWE derivation content cache — local engineering evidence",
     "Reuse and mechanism",
@@ -58333,7 +58333,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_CONTENT_CACHE_20261031.md",
-   "sha256": "4e0ab2ab5d09e58879d8157c7aaace45c6a75fc649937ab91c4ea60a5663a916",
+   "sha256": "06173085364c35f42ab04eff185f7b1edb9e2c213c4ab6d85c231a60e7edfc99",
    "summary": "Date: 2026-10-31. Baseline: `2e9b6427a1d5d7e22610810efd71e052fc343c4d` (main including PR6485). Scope: shared source evidence in `canonical/runtime/declared_input_derivation_v1.py` only, plus regressions, admission metadata and the official regenerated model projection.",
    "terms": {
     "12": 3,
@@ -58346,7 +58346,8 @@
     "bounded": 3,
     "bytes": 6,
     "cache": 5,
-    "canonical": 26,
+    "canonical": 28,
+    "change": 4,
     "cold": 4,
     "comparison": 4,
     "controls": 6,
@@ -58354,30 +58355,29 @@
     "default": 3,
     "derivation": 4,
     "edits": 4,
+    "effect": 3,
     "every": 3,
     "evidence": 7,
-    "existing": 6,
-    "failed": 3,
+    "exact": 3,
+    "existing": 7,
+    "failed": 5,
     "files": 3,
     "final": 3,
     "freshness": 3,
     "github": 3,
     "main": 4,
-    "metadata": 3,
     "model": 6,
-    "new": 4,
-    "no": 9,
-    "not": 15,
-    "official": 3,
+    "new": 5,
+    "no": 10,
+    "not": 16,
     "pair": 5,
-    "passed": 7,
-    "per": 3,
+    "passed": 8,
     "real": 4,
-    "remove": 3,
-    "repository": 3,
-    "run": 4,
-    "runtime": 6,
+    "run": 5,
+    "runtime": 7,
+    "snapshot": 4,
     "source": 6,
+    "subtests": 4,
     "test_goal_front_compiler_v1.py": 15,
     "test_real_caller_request_executes_index_without_modifying_source": 6,
     "test_swe_family_effect_filter_v1.py": 7,
@@ -58661,7 +58661,7 @@
   "included_source_count": 1007,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a579f4ca442bcf74bdcdf780d0cd82453277e3990b7f343391b8761fbacc7028"
+  "source_tree_digest": "fe0c97d8555ab683d11b67d2ad8eeb691a32215b5a8fb12679355b2d69e30506"
  },
  "research_index": [
   {
@@ -209481,7 +209481,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SWE_CONTENT_ADDRESSED_DERIVATION_CACHE_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "eca2f63de7f1fe300d75fa2225e09c4eea65831f736446de2bff0bb375d5f708",
+   "sha256": "ec788903e0ec4f703c6fbd86e573fcfcd0eca5633a74d9fea3fd9e6a8639d9be",
    "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
    "terms": {
     "20261031": 1,

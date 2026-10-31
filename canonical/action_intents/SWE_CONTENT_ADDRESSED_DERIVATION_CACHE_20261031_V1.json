@@ -333,5 +333,5 @@
       ]
     }
   },
-  "integration_note": "Retained current-main PR6485, PR6489 undeclared-effect refusal guard and PR6486 declared-effect requirements unchanged. Cache source and tests have no conflict; regenerate combined model officially. Earlier wider baseline remains explicitly bound to 2e9b642."
+  "integration_note": "Retained current-main PR6485, PR6489 undeclared-effect refusal guard and PR6486 declared-effect requirements unchanged. Cache source and tests have no conflict; regenerate combined model officially. Earlier wider baseline remains explicitly bound to 2e9b642. Integration run on 9e6a366 measured 242 passed, 1 failed, 931 subtests: incoming PR6486 renamed the index effect but left it duplicated and its old registry test expecting the removed row-id alias. Normalize the live registry duplicate to the already-canonical snapshot, retain the new effect semantics, update the exact contract assertion and add a uniqueness/no-row-id negative control; no new effect or capability."
 }

@@ -8363,7 +8363,6 @@
         }
       },
       "provides": [
-        "python.source.symbol_index",
         "python.source.symbol_index"
       ],
       "requires": [],
