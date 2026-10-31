@@ -26583,7 +26583,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
-    "source_sha256": "d0106e401d0138ca416b9a8707a3952813eae11209b8acef7357608a08298502",
+    "source_sha256": "76631d479fd76fdda7650a3283008a4ef53cd4ac26f9ca2794a3ec1b887c3d67",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -29339,7 +29339,7 @@
   "engines": 26,
   "knowledge_documents": 173,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6513,
+  "research_index_records": 6514,
   "routing_tokens": 2172,
   "skills": 18,
   "source_index_entry_points": 423,
@@ -29348,7 +29348,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "12c67e3102bd72fd52eb9a69675c28736c836ee956e93ccbe92beaf7a592fb0a"
+  "value": "63f937d785858bc515098149aa754bb5bb67f82c5738236b808e3accbcebc715"
  },
  "engines": [
   {
@@ -53440,7 +53440,7 @@
   "included_source_count": 951,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d064cacaad9e1722291fb242ed1088522d2fdfd2ccf129d20207a6fdec680f40"
+  "source_tree_digest": "bac28a03a42b73e9773d24c5177c3c851260d98b2ea103b65ccaee7236106900"
  },
  "research_index": [
   {
@@ -200749,6 +200749,51 @@
    }
   },
   {
+   "action_id": "HARDCORE_SWE_SPEED_AND_ADMISSION_CLOSURE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/HARDCORE_SWE_SPEED_AND_ADMISSION_CLOSURE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/HARDCORE_SWE_SPEED_AND_ADMISSION_CLOSURE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ba7c457dfc693d7d1906e8f764d885c8dca7e89433d2e9395651872a4b4b01bf",
+   "status": "",
+   "terms": {
+    "1.6": 1,
+    "19.7": 1,
+    "20261031": 1,
+    "23": 1,
+    "28": 1,
+    "524ebc9": 1,
+    "admission": 1,
+    "advanced": 1,
+    "after": 1,
+    "anaphoric": 1,
+    "answer-delivery": 1,
+    "closure": 1,
+    "composed": 1,
+    "deterministically": 1,
+    "evaluated": 1,
+    "execute": 1,
+    "execution": 2,
+    "gap_world_before": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hardcore": 1,
+    "hardcore_swe_speed_and_admission_closure_v1_20261031_v1": 1,
+    "imperative": 1,
+    "independent": 1,
+    "latency": 1,
+    "live": 1,
+    "misrouted": 1,
+    "nine": 1,
+    "per": 1,
+    "python_source_symbol_index": 1,
+    "ran": 1,
+    "swe": 5,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "HARVEST_CEGIS_HYPOTHESIS_AND_CROSSFILE_CHOREOGRAPHY_AS_HARDCORE_SWE_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27T15:10:00.000000Z",
@@ -212791,11 +212836,13 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "b3f736b6e9c739f7aacd919cd899f31ef0e2ceb5520242767f717a7af41c0901",
+   "sha256": "59c3ff8d9cd02cb5ac181b892a8f034c5d0df5af3d77987915bd6d96dca235fe",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "symbol_count": 7,
+   "symbol_count": 9,
    "symbols": [
     "_ModuleIndexer",
+    "_index_batch",
+    "_index_one_file",
     "_module_names_prepass",
     "_py_files",
     "_safe_root",
@@ -212807,6 +212854,8 @@
     "ast": 1,
     "deterministic": 1,
     "index": 2,
+    "index_batch": 1,
+    "index_one_file": 1,
     "module_names_prepass": 1,
     "moduleindexer": 1,
     "py_files": 1,
@@ -218903,9 +218952,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
-   "sha256": "68ebc4ae7f08b616f087403275d51d6eaea1044f3896d94084d6a4e46c577885",
+   "sha256": "a5834f22a0de6a1922bf711bb451d64af8da3862a8a326379c389e804238707c",
    "summary": "One sentence selects one capability: retrieval PROPOSES, typed admission DISPOSES.",
-   "symbol_count": 25,
+   "symbol_count": 27,
    "symbols": [
     "_arg_names",
     "_effect_winner",
@@ -218922,15 +218971,15 @@
     "contract_of",
     "declarations",
     "document",
+    "is_ast_code_edit_request",
+    "is_computed_answer_delivery",
     "is_specific",
     "margin_verdict",
     "request_excluded_proposals",
     "request_may_select",
     "request_names_capability",
     "required_input_names",
-    "run",
-    "runs_as_stated",
-    "select"
+    "run"
    ],
    "terms": {
     "admission": 1,
@@ -218941,8 +218990,9 @@
     "declarations": 1,
     "disposes": 1,
     "document": 1,
-    "effect_winner": 1,
     "expectation_compatible": 1,
+    "is_ast_code_edit_request": 1,
+    "is_computed_answer_delivery": 1,
     "is_executable": 1,
     "is_specific": 1,
     "margin_verdict": 1,
@@ -218956,7 +219006,6 @@
     "required_input_names": 1,
     "retrieval": 2,
     "runs_as_stated": 1,
-    "select": 1,
     "selection": 1,
     "selects": 1,
     "sentence": 1,
@@ -224973,7 +225022,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "9fedefab270634f2cd8dbd976574c763a13551726201aaa38ae03f7fc12fcae3",
+   "sha256": "71ff9a63f80d67520571a6179c5b6dbd6a3a3470fce78fc13b44db76a5756819",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 5,
    "symbols": [
@@ -232720,7 +232769,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "bc04418cc3aa8355e256a052b7d3ca674b45399bf8206fad12d82e6d19c1b844",
+   "sha256": "bcbf1da69cd91287f938491da9ebcb6a5a8e75d7e9ff58af1708a5a0ee854e9b",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 132,
    "symbols": [
@@ -232826,7 +232875,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "04964aee0288240ec01c2a6448389a2733f700ffadd83e006a1d493c40d8f86c",
+   "sha256": "a492341b41e8e00fb5e070978d09ed7a68221918884fc7a00494b6619d00748a",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 76,
    "symbols": [
@@ -239134,7 +239183,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "be081aebd3847b750be2f45cfa9eeb86853d0491f67be9da1f91952cabdb8ff3",
+   "sha256": "3d7ee406a86840fc8152ba9d25ecc1b6f7726ecd534a23de0aebdd73ac9e5af6",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 58,
    "symbols": [
@@ -277145,7 +277194,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_binding_v1.py",
-   "sha256": "be1071065d00b945242000976c253efe438e4ee172a6215a8a3325be330610a0",
+   "sha256": "2a319ef9d9d7b86e0b0c5af62ea098285e3d59a8c30ef8cc65ce18ff18394863",
    "summary": "Complete a capability's inputs when the goal does not state all of them.",
    "symbol_count": 22,
    "symbols": [
@@ -277215,9 +277264,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_probe_v1.py",
-   "sha256": "888cf69209b13672c294ba5397224e3bc7aecd38ba6ca34903d5cc16cf66b315",
+   "sha256": "ee5c448151a2df436962e661688f71f7f8bc4e2a7642db56e810ca02abf544bc",
    "summary": "Perception: turn the machine's actual state into established facts.",
-   "symbol_count": 18,
+   "symbol_count": 19,
    "symbols": [
     "_decide_bootstrap",
     "_decide_file",
@@ -277229,6 +277278,7 @@
     "_is_input_position",
     "_kinds_of",
     "_matches_kind",
+    "_matching_files",
     "_subjects",
     "established_facts",
     "goal_kind_contradiction",
@@ -277257,6 +277307,7 @@
     "kinds_of": 1,
     "machine": 1,
     "matches_kind": 1,
+    "matching_files": 1,
     "needed_effects": 1,
     "orphan_preconditions": 1,
     "perception": 1,

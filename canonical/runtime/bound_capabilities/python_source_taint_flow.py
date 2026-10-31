@@ -137,26 +137,36 @@ def _returns_expr(fn):
             yield node.value
 
 
+_SANITIZERS = frozenset({
+    "quote", "escape", "int", "float", "bool", "len", "ord", "hash",
+    "shlex.quote", "html.escape", "urllib.parse.quote", "urllib.parse.quote_plus",
+})
+
+
 def _flows_taint(expr, tainted: set[str], taint_returning: set[str]) -> bool:
-    """Does this expression carry an untrusted value we can see?"""
-    for node in ast.walk(expr):
-        if isinstance(node, ast.Name) and node.id in tainted:
+    """Does this expression carry an untrusted value we can see (stopping at sanitizers)?"""
+    if expr is None:
+        return False
+    if isinstance(expr, ast.Name):
+        return expr.id in tainted
+    if isinstance(expr, ast.Call):
+        called = _call_name(expr)
+        dotted = _dotted(expr)
+        if called in _SANITIZERS or dotted in _SANITIZERS:
+            return False
+        if called in taint_returning:
             return True
-        if isinstance(node, ast.Call):
-            called = _call_name(node)
-            if called in taint_returning:
-                return True
-            if isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name):
-                # a method ON an untrusted object: payload.get(...)
-                if node.func.value.id in tainted:
-                    return True
-        if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name):
-            if node.value.id in tainted:
-                return True
-        if isinstance(node, ast.Subscript) and isinstance(node.value, ast.Name):
-            if node.value.id in tainted:
-                return True
-    return False
+        if isinstance(expr.func, ast.Attribute) and _flows_taint(expr.func.value, tainted, taint_returning):
+            return True
+        return any(
+            _flows_taint(a, tainted, taint_returning)
+            for a in list(expr.args) + [k.value for k in expr.keywords if k.value is not None]
+        )
+    if isinstance(expr, ast.Attribute):
+        return _flows_taint(expr.value, tainted, taint_returning)
+    if isinstance(expr, ast.Subscript):
+        return _flows_taint(expr.value, tainted, taint_returning)
+    return any(_flows_taint(child, tainted, taint_returning) for child in ast.iter_child_nodes(expr))
 
 
 def _sink_label(named: str, traced: list[dict]) -> str:
