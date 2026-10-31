@@ -8741,6 +8741,246 @@
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_SYMBOL_RESOLVE_STANDALONE_V1_V1.json"
       }
+    },
+    "python.task.acceptance.measured.objective.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.task.acceptance.measured.objective.v1",
+          "measurement_receipt_path": "${input.measurement_receipt_path}",
+          "output_path": "${input.output_path}",
+          "task_text": "${input.goal}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_measured_objective_acceptance_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "task",
+        "acceptance",
+        "measurement",
+        "objective",
+        "raw-task",
+        "receipt",
+        "verification"
+      ],
+      "limitations": [
+        "Never accepts caller-supplied objective fields; fields come only from a validated content-addressed repository measurement receipt.",
+        "Reuses lossless raw-task obligation accounting and bounded objective acceptance compilation.",
+        "Semantic residuals remain explicit and block acceptance; measurement binding does not create missing natural-language semantics.",
+        "No general software-engineering completeness, hidden-requirement, FrontierCode score, promotion, or terminal authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "measurement_receipt_path": {
+          "container": "scalar",
+          "effect": "python.repository.acceptance.measurement.content_addressed",
+          "field": "output_path",
+          "type": "effect_result"
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        }
+      },
+      "provides": [
+        "task.acceptance.objective.measurement_bound"
+      ],
+      "requires": [
+        "python.repository.acceptance.measurement.content_addressed"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "candidate_accepted",
+        "acceptance_stop_authorized",
+        "measurement_bound",
+        "measurement_receipt_file_sha256",
+        "measurement_receipt_payload_sha256",
+        "subject_snapshot_sha256",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "objective_result",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/python_measured_objective_acceptance_v1.py",
+        "composed_capabilities": [
+          "python.repository.acceptance.measure.v1"
+        ],
+        "composed_runtime": [
+          "canonical/runtime/raw_task_objective_acceptance_executor_v1.py",
+          "canonical/runtime/lossless_raw_task_contract_v1.py",
+          "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py"
+        ],
+        "modules": [
+          "hashlib",
+          "json",
+          "pathlib"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "combined_suite_each_carrier": "28_OF_28_PASS",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "focused_measured_acceptance_test_count": 8,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "model_dependency_count": 0,
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "runtime_git_blob_sha": "36f4d62e6d7c785e7da7ef90b511eafafc4c9919",
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "4402a85ca8fc4b6f35c16b76d5b637bdf0d32f5b",
+        "v6_independent_replay": "13_OF_13_PASS",
+        "v6_runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b"
+      }
+    },
+    "python.test.pipeline.verifier.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.test.pipeline.verifier.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_test_pipeline_verifier_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "test",
+        "pipeline",
+        "slice"
+      ],
+      "limitations": [
+        "Never-miss \u2192 pipeline \u2192 audit \u2192 measurement"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.test.pipeline.verified",
+        "python.test.intelligence.verified"
+      ],
+      "requires": [
+        "test.slice.never_miss.verified",
+        "test.selection.minimal",
+        "execution.pipeline.completed",
+        "python.test.measurement.objective",
+        "python.tests.audit"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_test_pipeline_verifier_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-TEST-PIPELINE-VERIFIER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_TEST_PIPELINE_VERIFIER_V1_V1.json"
+      }
+    },
+    "python.tests.audit.unittest": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.tests.audit.unittest",
+          "output_path": "${input.output_path}",
+          "pattern": "${input.pattern}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 180
+        },
+        "expect": {
+          "field": "report_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_test_audit",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "audit",
+        "count",
+        "failed",
+        "passed",
+        "passes",
+        "python",
+        "skipped",
+        "tests",
+        "unit",
+        "unittest",
+        "corpus",
+        "pass rate",
+        "pass_rate",
+        "rate report",
+        "test corpus",
+        "audit the test corpus",
+        "audit the tests",
+        "auditing"
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.tests.audit"
+      ],
+      "requires": [],
+      "source": {
+        "module": "unittest",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PYTHON-TEST-AUDIT-005",
+        "observed_effect": {
+          "errors": 0,
+          "failed": 0,
+          "files": 8,
+          "passed": 41,
+          "skipped": 0,
+          "tests": 41
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
