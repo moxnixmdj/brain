@@ -30489,7 +30489,7 @@
   "engines": 26,
   "knowledge_documents": 207,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6533,
+  "research_index_records": 6534,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "40e1a81b85300d62043f3e3f7d522cd7aa68763a535afea91f500146471d6226"
+  "value": "ddfbb9b5c96b8362315dd0022c579fb71e88d82be3753f6f4987dc44f8568e91"
  },
  "engines": [
   {
@@ -206811,6 +206811,51 @@
     "one": 1,
     "source": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "NEVER_CERTIFY_A_WRONG_ANSWER_ANSWER_SHAPE_AND_STATED_OPERATION_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/NEVER_CERTIFY_A_WRONG_ANSWER_ANSWER_SHAPE_AND_STATED_OPERATION_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/NEVER_CERTIFY_A_WRONG_ANSWER_ANSWER_SHAPE_AND_STATED_OPERATION_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f9c4636d7de3902ebc6d85bb207f2319580bc38bd8d665053eb06b71d684ee13",
+   "status": "",
+   "terms": {
+    "10": 3,
+    "answer": 5,
+    "artifact": 3,
+    "branch": 4,
+    "build_plan": 2,
+    "caller_index_size": 2,
+    "canonical": 3,
+    "changes": 2,
+    "commit": 5,
+    "commits": 2,
+    "count": 2,
+    "diff": 2,
+    "distinct_imported_module_count": 2,
+    "door": 2,
+    "find": 2,
+    "function_count": 2,
+    "head": 2,
+    "instead": 5,
+    "last": 3,
+    "list": 2,
+    "log": 4,
+    "now": 3,
+    "op": 5,
+    "pass": 5,
+    "reset": 4,
+    "returns": 3,
+    "show": 5,
+    "status": 6,
+    "tests": 3,
+    "tree": 5,
+    "working": 4,
+    "wrong": 3
    }
   },
   {
