@@ -61,6 +61,7 @@ _CONFIGURATION_SLOTS = frozenset({
     # default -- yet the binder demanded the number be spoken in the sentence, so
     # "measure the test coverage of <file>" could not bind a gate that defaults it.
     "min_coverage_ratio", "min_kill_ratio", "max_mutants", "repeats", "tolerance",
+    "limit",
 })
 
 # Scope, measured not assumed: typed-admission pins for receipt-projected
@@ -107,9 +108,21 @@ _SWE_VERBS = (
 
 
 def is_swe_request(goal: str) -> bool:
-    """An explicit software-engineering request, not a generic module call."""
+    """An explicit software-engineering request, not a generic module call.
+
+    A stated git OPERATION counts on its own.  "Show the last three git commits"
+    contains none of the repair verbs, so derivation was skipped and the one slot
+    that has to come from the sentence (`op`) was never derived -- the capability
+    was enumerated, admitted as a candidate, and then refused on
+    ``BINDING_REFUSED:op:not_stated``.  The test is the grammar itself, not a
+    second word list, and it is exact: zero or two stated operations is not a
+    request for one operation, so neither derives anything.
+    """
     text = str(goal or "").lower()
-    return any(verb in text for verb in _SWE_VERBS)
+    if any(verb in text for verb in _SWE_VERBS):
+        return True
+    return len([name for name, pattern in _GIT_OPERATION_GRAMMAR
+                if pattern.search(text)]) == 1
 
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
 _TEST_NAME_RE = re.compile(r"(^|/)(test_[^/]*|[^/]*_test)\.(py|js|ts|go|rs)$")
@@ -442,6 +455,54 @@ def _tree_of(root: pathlib.Path, rel: str):
         return ast.parse((pathlib.Path(root) / rel).read_text(encoding="utf-8"))
     except (OSError, SyntaxError, ValueError):
         return ast.Module(body=[], type_ignores=[])
+# Ordered: the first rule whose pattern matches decides, and the caller still
+# refuses when two DIFFERENT operations match, so order only resolves the cases
+# where one verb is a strict refinement of another.
+# Words that make a commit sentence about a REPOSITORY rather than about a
+# database transaction, a purchase or a promise.
+# ("commit" itself is deliberately absent: it would make the test always true.)
+_REPOSITORY_CONTEXT = re.compile(
+    r"\bgit\b|\bstaged\b|\bchanges?\b|\bworking\s+tree\b|\bbranch(?:es)?\b"
+    r"|\brepo(?:sitory)?\b|\buncommitted\b|\bhistory\b", re.I)
+
+
+_COUNT_WORDS = {w: i for i, w in enumerate(
+    ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+     "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+     "sixteen", "seventeen", "eighteen", "nineteen", "twenty"), start=0)}
+
+_STATED_COUNT = re.compile(
+    r"\b(\d{1,3}|" + "|".join(sorted(_COUNT_WORDS, key=len, reverse=True)) + r")\s+"
+    # up to three words may sit between the count and what it counts: "the last
+    # three GIT commits" says three, not twenty.
+    r"(?:[\w-]+\s+){0,3}(?:commits?|entries|rows|lines?|branches?)\b", re.IGNORECASE)
+
+
+_GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
+    (name, re.compile(pattern, re.I)) for name, pattern in (
+        # history: an explicit git log, the word history, or "the last N commits"
+        ("log", r"\bgit\s+log\b|\bhistory\b|\b(?:last|recent|latest|first)"
+                r"(?:\s+\w+){0,3}\s+commits?\b"),
+        # a status question about the working tree
+        ("status", r"\bgit\s+status\b|\bworking\s+tree\b|\buncommitted\b|\bstatus\b"),
+        ("diff", r"\bgit\s+diff\b|\bdiff\b"),
+        ("blame", r"\bblame\b|\bwho\s+wrote\b|\bwho\s+touched\b"),
+        # An imperative or a question about branches -- never the bare noun.
+        # Measured 2026-10-29: with `\bbranch(?:es)?\b`, "Branch out the new feature
+        # into three modules" bound op=branch and returned PASS for a `git branch`
+        # listing.  A metaphor is not a repository operation, and an enumerated
+        # operation set is only as good as the grammar that admits to it.
+        ("branch", r"\b(?:list|show|print|git)\s+(?:me\s+)?(?:the\s+|all\s+)?branches?\b"
+                   r"|\bbranches\b|\bcurrent\s+branch\b|\bwhich\s+branch\b"),
+        # one commit's contents: "show the commit", "git show"
+        ("show", r"\bshow\s+(?:the\s+|a\s+|that\s+)?commit\b|\bgit\s+show\b"),
+        # an imperative to record a change.  Anchored or object-bearing ON PURPOSE:
+        # a bare \bcommit\b also matches "show the commit", which would turn one
+        # unambiguous sentence into an ambiguous two-operation match.
+        ("commit", r"^\s*(?:\w+\s+)?commit\b|\bgit\s+commit\b"
+                   r"|\bcommit\s+(?:the|all|these|this|that|staged|everything|it)\b"),
+    )
+)
 
 
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
@@ -803,6 +864,64 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         for lkey in ("start_line", "end_line"):
             if lkey in keys and lkey not in out:
                 out[lkey] = {"value": 0, "rule": "EXTRACT_AUTO_SLICE_REGION", "evidence": "extract"}
+
+    # A symbol slot is PROVED the same way a qualname is, and for the same reason:
+    # "Move the function line_total ..." states the name AFTER the noun, so the
+    # qualname grammar above ("the <name> function") reads nothing and the move
+    # row refused with BINDING_REFUSED:symbol:not_stated.  Exactly one identifier
+    # must follow the noun AND be defined at module scope in the stated file.
+    py_named = [f for f in sources if f.endswith(".py")]
+    if ({"symbol", "name"} & keys) and py_named:
+        nouns = _NAMED_AFTER_NOUN.findall(str(goal or ""))
+        candidates = [n for n in dict.fromkeys(nouns) if _NAME_RE.match(n)]
+        # A move states TWO files and only one of them DEFINES the name; the
+        # proof is "defined at module scope in exactly one stated file", which is
+        # strictly stronger than "in the one stated file".
+        proved = [(f, _node.name) for f in py_named
+                  for _node in (getattr(_tree_of(root, f), "body", []) or [])
+                  if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                  and _node.name in candidates]
+        if len(proved) == 1:
+            for key in ({"symbol", "name"} & keys):
+                out[key] = {"value": proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+                            "evidence": f"{proved[0][0]}:{proved[0][1]}"}
+    # A repository operation is STATED by its verb, and only one operation may
+    # match.  Measured 2026-10-29: `git.repository.operate.v1` declares an `op`
+    # slot because a shell pass-through would be a shell, not a capability -- the
+    # sentence chooses WHICH git operation, never the argv.  The rules are ordered
+    # most-specific-first so that "Show the last three git commits" binds `log`
+    # (commits of a history) rather than `show` (one commit's contents); an
+    # ambiguous sentence binds nothing and the binder refuses, which is the whole
+    # point of an enumerated operation set.
+    if "op" in keys:
+        stated = [name for name, pattern in _GIT_OPERATION_GRAMMAR
+                  if pattern.search(str(goal or ""))]
+        # The one DESTRUCTIVE operation needs repository context, not just a verb.
+        # Measured 2026-10-29: "Commit the transaction to the database" matched the
+        # commit grammar.  Reading the wrong repository is a wrong answer; creating
+        # a commit in it is a wrong change, so the bar is higher: the sentence must
+        # say where it is committing (git, staged, changes, working tree, branch,
+        # repo) or no operation is derived at all.
+        if stated == ["commit"] and not _REPOSITORY_CONTEXT.search(str(goal or "")):
+            stated = []
+        if len(stated) == 1:
+            out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
+                         "evidence": stated[0]}
+
+    # A stated COUNT is the limit the sentence asked for: "the last three git
+    # commits" is a request for three rows, and answering it with twenty is a
+    # different answer.  Only an explicit number word or digit counts, and only
+    # next to the noun it counts, so "three regions" never becomes a limit.
+    if "limit" in keys:
+        m = _STATED_COUNT.search(str(goal or ""))
+        if m:
+            token = m.group(1).lower()
+            value = _COUNT_WORDS.get(token)
+            if value is None and token.isdigit():
+                value = int(token)
+            if value is not None:
+                out["limit"] = {"value": value, "rule": "LIMIT_FROM_STATED_COUNT",
+                                "evidence": token}
 
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file
