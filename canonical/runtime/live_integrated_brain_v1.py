@@ -442,19 +442,39 @@ def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
             except goal_compiler.GoalCompilationFailure:
                 compiled = None
             if compiled is not None:
+                _out_v = goal_compiler._path_named_after_output_verb(goal, base)
+                _st_files = {raw for raw, p in goal_compiler._repo_paths(goal, base) if p.is_file() and raw != _out_v}
+                _c_inp = compiled.get("inputs") if isinstance(compiled.get("inputs"), Mapping) else {}
+                _bd_files = {str(v) for v in _c_inp.values() if isinstance(v, str) and v in _st_files}
+                if len(_st_files) >= 2 and len(_bd_files) < len(_st_files):
+                    compiled = None
+            if compiled is not None:
                 _row = str(compiled.get("selected_capability") or "")
                 _extra = derived_by_row.get(_row) or {}
                 if _extra:
                     _inputs = dict(compiled.get("inputs") or {})
                     for _key, _value in _extra.items():
                         _bound = _inputs.get(_key)
-                        if _key not in _inputs or (isinstance(_value, list)
+                        if _key not in _inputs or _bound is None or (isinstance(_value, list)
                                                    and not isinstance(_bound, list)):
                             _inputs[_key] = _value
                     compiled["inputs"] = _inputs
                     compiled["derived_inputs"] = sorted(_extra)
                 return registry, kept_declared, compiled
-    return registry, admissible, goal_front_compiler_v1.compile_goal(goal, admissible, base)
+    _fb_compiled = goal_front_compiler_v1.compile_goal(goal, admissible, base)
+    try:
+        from canonical.runtime import declared_input_derivation_v1 as _derivation_fb
+        _fb_row = str(_fb_compiled.get("selected_capability") or "")
+        if _fb_row and _fb_row in admissible and _derivation_fb.is_swe_request(goal):
+            _, _fb_vals, _ = _derivation_fb.binding_view(goal, admissible[_fb_row], base)
+            if _fb_vals and "synthesize_regression_test" in _fb_vals:
+                _fb_inp = dict(_fb_compiled.get("inputs") or {})
+                if _fb_inp.get("synthesize_regression_test") is None:
+                    _fb_inp["synthesize_regression_test"] = _fb_vals["synthesize_regression_test"]
+                    _fb_compiled["inputs"] = _fb_inp
+    except Exception:  # noqa: BLE001
+        pass
+    return registry, admissible, _fb_compiled
 
 
 def compile_capability_graph(
@@ -1083,6 +1103,27 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
                             "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_"
                             "ACCEPTANCE_VERIFIED"
                         )
+                    for _trow in trace:
+                        _tres = _trow.get("result") if isinstance(_trow, Mapping) else None
+                        _tplan = _trow.get("plan") if isinstance(_trow, Mapping) else None
+                        _tcid = (
+                            str((_tres or {}).get("capability_id") or ((_tplan or {}).get("args") or {}).get("capability_id") or "")
+                        )
+                        if _tcid == "plain_goal.bound_capability.grounding.verify.stdlib":
+                            _tinputs = ((_tplan or {}).get("args") or {}).get("inputs") if isinstance((_tplan or {}).get("args"), Mapping) else {}
+                            _top = str((_tinputs or {}).get("result_path") or (_tres or {}).get("output_path") or "")
+                            if _top and (ROOT / _top).is_file() and "grounding" not in goal.lower():
+                                try:
+                                    _tgdoc = json.loads((ROOT / _top).read_text(encoding="utf-8"))
+                                    if _tgdoc.get("grounded_clause_count") == 0 or any(
+                                        isinstance(_tc, Mapping) and str(_tc.get("status") or "").startswith(("UNBOUND_", "UNRESOLVED"))
+                                        for _tc in (_tgdoc.get("clauses") or [])
+                                    ):
+                                        compound_result["status"] = "FAIL_CLOSED__GROUNDING_ARTIFACT_REPORTED_UNGROUNDED"
+                                        compound_result["pass"] = False
+                                        compound_result["failure_class"] = "GROUNDING_ARTIFACT_REPORTED_UNGROUNDED"
+                                except Exception:  # noqa: BLE001
+                                    pass
             return compound_result
 
         selected = str(compiled.get("selected_capability") or "").strip()
@@ -1338,6 +1379,28 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
                 == result["raw_acceptance_obligation_count"]
         )
         result["elapsed_ns"] = perf_counter_ns() - started
+        if result.get("pass") is True:
+            from canonical.runtime.live_brain_route_admission_v1 import stated_answer_errors as _sae
+            _ans_cid = str(selected or (result.get("selected_plan") or [""])[0] or "")
+            _unans = _sae(goal, dict(admissible.get(_ans_cid) or {}), _ans_cid) if _ans_cid else []
+            if _unans:
+                result["status"] = "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED"
+                result["pass"] = False
+                result["failure_class"] = "STATED_ANSWER_NOT_PROVIDED"
+                result["stated_answer_errors"] = _unans
+            elif _ans_cid == "plain_goal.bound_capability.grounding.verify.stdlib":
+                for _erow in (result.get("execution") or []):
+                    _eop = str(((_erow or {}).get("result") or {}).get("output_path") or "")
+                    if _eop and (ROOT / _eop).is_file():
+                        try:
+                            _egdoc = json.loads((ROOT / _eop).read_text(encoding="utf-8"))
+                            if any(isinstance(_ec, Mapping) and str(_ec.get("status") or "").startswith("UNBOUND_")
+                                   for _ec in (_egdoc.get("clauses") or [])):
+                                result["status"] = "FAIL_CLOSED__GROUNDING_ARTIFACT_REPORTED_UNGROUNDED"
+                                result["pass"] = False
+                                result["failure_class"] = "GROUNDING_ARTIFACT_REPORTED_UNGROUNDED"
+                        except Exception:  # noqa: BLE001
+                            pass
         if result.get("pass") is True:
             result["status"] = (
                 "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"

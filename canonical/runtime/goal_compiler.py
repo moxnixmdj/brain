@@ -932,13 +932,16 @@ def _declared_exact_file_scope(entry, key, paths):
     binding=(entry.get("proposal_bindings") or {}).get(key)
     if not isinstance(binding,dict) or binding.get("type")!="path_file_or_dir":
         return None
+    if any(p.is_dir() for _,p in paths):
+        return None
+    all_files=[(raw,p) for raw,p in paths if p.is_file()]
+    if len(all_files)!=1:
+        return None
     python_cap=(str(entry.get("adapter_module") or "").startswith("python_")
                 or any(str(p).startswith("python.") for p in entry.get("provides",[])))
-    files=[raw for raw,p in paths if p.is_file()
-           and (not python_cap or p.suffix.lower() in {".py",".pyi"})]
-    if len(files)==1 and not any(p.is_dir() for _,p in paths):
-        return files[0]
-    return None
+    if python_cap and all_files[0][1].suffix.lower() not in {".py",".pyi"}:
+        return None
+    return all_files[0][0]
 
 
 def _complete_inputs_via_world_binding(goal, root, cid, entry):

@@ -201,6 +201,18 @@ def _op_status(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
 
 def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     target = _target(args, cwd)
+    if target:
+        in_index = subprocess.run([*_BASE, "ls-files", "--error-unmatch", "--", target],
+                                  cwd=str(cwd), capture_output=True, text=True,
+                                  env={**os.environ, **_ENV}, timeout=15).returncode == 0
+        if not in_index:
+            prefix = _git(cwd, "rev-parse", "--show-prefix", check=False).strip()
+            repo_rel = (prefix + target).lstrip("/")
+            in_head = subprocess.run([*_BASE, "cat-file", "-e", "HEAD:" + repo_rel],
+                                     cwd=str(cwd), capture_output=True, text=True,
+                                     env={**os.environ, **_ENV}, timeout=15).returncode == 0
+            if not in_head:
+                _fail("DIFF_TARGET_NOT_TRACKED_IN_GIT:" + target)
     spec = ["diff", "--numstat", "HEAD", "--"] + ([target] if target else [])
     raw = _git(cwd, *spec, check=False)
     rows = []

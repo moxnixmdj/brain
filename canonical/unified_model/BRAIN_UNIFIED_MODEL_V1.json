@@ -21825,7 +21825,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
-    "source_sha256": "d05b65408adbec3fdab1b39a1e6f1c16ba73f80de73a0f601fbc90fdc263eef8",
+    "source_sha256": "0957e5e0c37a60456d24617ba71287f281b8b910262717bd0f9e64ef74bd69ac",
     "source_type": "brain_bound_system_tool"
    },
    "provides": [
@@ -25785,6 +25785,7 @@
    "input_names": [
     "output_path",
     "source_root",
+    "synthesize_regression_test",
     "test_argv",
     "test_paths"
    ],
@@ -25801,7 +25802,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "507a70bd08bff4c11df82afcf4fa395fb8868caba882ff59533cb9ec1be9cd79",
+    "source_sha256": "8737118fdf6625d1ecb49c7dd598ccc51e4665db3922730491d1e09562e43e1d",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -26667,7 +26668,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
-    "source_sha256": "b69e9f0f090a98a7bed61fa4cd19563890e6eb6ca2eda78e87591f747af20f30",
+    "source_sha256": "5f73aaa5acb00ca0bedee1a967f7fbdb9325076aaf30faf1ed3595569bd7190d",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -28807,7 +28808,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "f0dd0c0421df2f11e675385a4cd1619e12d5658254e37a6de2ff664ad9f46135",
+    "source_sha256": "d0d2c25071a4ba4aa142d577fb4b112180d7ce8d5213d45c57b3e9953863d4a0",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -28817,7 +28818,8 @@
     "software.concurrency.race.condition.fix",
     "software.patch.crossfile.atomic",
     "software.repair.choreography.verified",
-    "software.source.write.crossfile"
+    "software.source.write.crossfile",
+    "source.repair.applied"
    ],
    "registry_status": "VERIFIED_BOUND_CAPABILITY",
    "requires": [
@@ -28882,7 +28884,8 @@
     "performance",
     "quadratic",
     "optimize",
-    "dependency"
+    "dependency",
+    "applied"
    ],
    "verification": {
     "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CHOREOGRAPH_V1_V1.json",
@@ -30476,7 +30479,7 @@
   "engines": 26,
   "knowledge_documents": 210,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6536,
+  "research_index_records": 6537,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30485,7 +30488,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "260d9a1ff4cb856051b464430fe7bfa63db7a59a955f82c0829e5f146e032de8"
+  "value": "a549d154b4d18b305e5023910081ee3080c7d6285e575486116e820862be45a5"
  },
  "engines": [
   {
@@ -31186,7 +31189,8 @@
     "python.source.secret_scan.v1": 702.0
    },
    "applied": {
-    "python.software.repair.apply.verified.v1": 468.0
+    "python.software.repair.apply.verified.v1": 312.666667,
+    "software.repair.choreograph.crossfile.v1": 312.666667
    },
    "apply": {
     "python.pr.land.composer.v1": 188.4,
@@ -58192,7 +58196,7 @@
   "included_source_count": 1001,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "27ce68e12a9b4e52ce5bda87457675bcbef32de04617f732928cf0c7b1bb6a92"
+  "source_tree_digest": "c346ce5bce63f936ef6370d95a15e81a76284ce47b82c3aeba82f9ef1f6fd97b"
  },
  "research_index": [
   {
@@ -208861,6 +208865,51 @@
    }
   },
   {
+   "action_id": "SWE_WAVE1_HONESTY_SPEED_REPAIR_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/SWE_WAVE1_HONESTY_SPEED_REPAIR_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SWE_WAVE1_HONESTY_SPEED_REPAIR_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "3d71f7ed93b4eb519b3b6f44d28ab0e4c8e0a5b16220994c2400f0a3f4a30084",
+   "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
+   "terms": {
+    "18": 1,
+    "2.8x": 1,
+    "2000+": 1,
+    "20261031": 1,
+    "21": 1,
+    "28": 2,
+    "acceptance": 1,
+    "ast": 2,
+    "benchmark": 1,
+    "capability_planner": 1,
+    "chain": 2,
+    "child-process": 1,
+    "cli.py": 1,
+    "cold": 2,
+    "completeness": 1,
+    "counter-vs-extraction": 1,
+    "credit": 1,
+    "cut": 1,
+    "damaged": 1,
+    "degraded": 1,
+    "diff": 1,
+    "eliminate": 1,
+    "existing": 1,
+    "false": 3,
+    "honesty": 2,
+    "indexing": 2,
+    "pkg": 2,
+    "pre-materialization": 2,
+    "repair": 3,
+    "speed": 2,
+    "swe": 3,
+    "via": 2
+   }
+  },
+  {
    "action_id": "TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -218203,7 +218252,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
-   "sha256": "02c0e7192bb7ba63f7cac1804768f1de0a1a6533c3b217edc986b955ee1338df",
+   "sha256": "b0f3b3e4e5e0ff2a83612b8e9ead8388f1cb9c250f1fb79190151d46d81f4841",
    "summary": "python.refactor.rename_symbol.v1 — rename ANY def-sited symbol with",
    "symbol_count": 18,
    "symbols": [
@@ -218669,14 +218718,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
-   "sha256": "c04caedb622c8addbed5e38b3eb5e6c519b793b473375f6a130cfc0ff2477ec9",
+   "sha256": "69ceb008f2a02bc58256c3676d08487885976b303efc77edbf3b5a6ae4a6734f",
    "summary": "Deterministic repository-local Python semantic symbol index (stdlib ast).",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
     "_ModuleIndexer",
     "_cached_modules",
     "_collect_index_parts",
     "_module_names_prepass",
+    "_parse_single_module_worker",
     "_py_files",
     "_row_sha",
     "_safe_root",
@@ -218694,6 +218744,7 @@
     "index": 2,
     "module_names_prepass": 1,
     "moduleindexer": 1,
+    "parse_single_module_worker": 1,
     "py_files": 1,
     "python": 2,
     "repository-local": 1,
@@ -218798,7 +218849,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_test_audit.py",
-   "sha256": "d644cd5a57b06a8b468795f0aaeaa7a44fa5069d5f0a2746c38697ab0f6542d6",
+   "sha256": "e66f88122fc9bb438378293da6c163a9cbb0f49a7e799a3c8338e207b766d7dd",
    "summary": "Deterministic repository-local Python test-corpus execution audit.",
    "symbol_count": 6,
    "symbols": [
@@ -230965,7 +231016,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "b45281eda92c4dc1e372522f8a275eed6f74c7d01f7f214fe160522bebb4a5f9",
+   "sha256": "adef52e247ea21ab0c58aa1f906e7b72f03878cdd4c62778637be89815d4b553",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 16,
    "symbols": [
@@ -238736,7 +238787,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "bb256366613bfb05aeb4a3297c31af1745f7f34950bb6a5ddc2c519ab57471d8",
+   "sha256": "8e17c4f5d880f5e5c7918f1f062df486e821ab53aff13e352d0996559360d378",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 134,
    "symbols": [
@@ -238842,7 +238893,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "3b2f323c0caeba59449300c430a8dafa51d4790b26b8891f27123eff66c733b1",
+   "sha256": "9b46909e30404c15aae2c8c128155890abbfd445614a8467856534966498b54e",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 80,
    "symbols": [
@@ -245150,9 +245201,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "92035295c7739962f26a49e3a696f9da4da3eac0f0efb673bde6c88d5650085e",
+   "sha256": "0800154c4d2dd433368c53eebbd8f4f167a18a84431d18f76c3ede37bfa96af0",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 93,
+   "symbol_count": 94,
    "symbols": [
     "LocalExecutionFailure",
     "_asks_only_for_a_plan",
@@ -245412,7 +245463,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_integrated_brain_v1.py",
-   "sha256": "7987670248beafd90a34adcddb18b9c714adace64b59b7c7707e73a80b10786b",
+   "sha256": "584bf1879d7990a5afd3d3681d99fb275a3aacd484ddb59e3cbf0df2735f3413",
    "summary": "Live integrated Brain V1.",
    "symbol_count": 28,
    "symbols": [
@@ -274828,7 +274879,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "94647115309fc794ed2aff1455386940b00bd53765c3a9f47609b75b978f37c3",
+   "sha256": "bfa7c01f511263a60648062ef107a71fef3fa18575e0c9f98f5fc6ac9fa3e763",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 16,
    "symbols": [

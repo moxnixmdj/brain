@@ -564,10 +564,18 @@ def _materialize_git_diff_for_dir(root: pathlib.Path, rel_dir: str) -> tuple[str
     return spool_rel, changed_rel
 
 
+_UNSUPPORTED_GIT_REWRITE_RE = re.compile(
+    r"\b(?:revert|reset|rebase|cherry-pick|cherry\s+pick|stash|amend|squash|tag|changelog)\b",
+    re.IGNORECASE,
+)
+
+
 def stated_git_operations(goal: str) -> tuple[str, ...]:
     """Reuse the operation grammar on intent, never on paths or literal payloads."""
     from canonical.runtime import goal_front_compiler_v1 as front
     prose = front.prose_only(goal)
+    if _UNSUPPORTED_GIT_REWRITE_RE.search(prose):
+        return ()
     stated = tuple(name for name, pattern in _GIT_OPERATION_GRAMMAR if pattern.search(prose))
     if stated == ("commit",) and not _REPOSITORY_CONTEXT.search(prose):
         return ()
@@ -611,6 +619,18 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if len(found) == 1:
             tests = [str(found[0].relative_to(pathlib.Path(root)))]
             discovered_tests = True
+    if not tests and len(sources) > 1 and re.search(r"\bboth\b", str(goal or ""), re.I):
+        _s_parents = {str(pathlib.PurePosixPath(s).parent) for s in sources}
+        if len(_s_parents) == 1:
+            _pdir = pathlib.Path(root) / next(iter(_s_parents))
+            try:
+                found = sorted(p for p in _pdir.iterdir()
+                               if p.is_file() and _TEST_NAME_RE.search(p.name))
+            except OSError:
+                found = []
+            if len(found) == 1:
+                tests = [str(found[0].relative_to(pathlib.Path(root)))]
+                discovered_tests = True
     # Retain current-main evidence-backed derivation.
     if not tests:
         _stated = _stated_directories(goal, root)
@@ -667,7 +687,8 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # source_root:0_existing_directories_named.  A sentence that merely lists two
     # files derives nothing -- that is a pinned law
     # (test_two_source_files_are_ambiguous_and_derive_nothing), and it stays.
-    elif "source_root" in keys and len(sources) > 1 and _FROM_TO.search(str(goal or "")):
+    elif "source_root" in keys and len(sources) > 1 and (
+            _FROM_TO.search(str(goal or "")) or re.search(r"\bboth\b", str(goal or ""), re.I)):
         parents = [str(pathlib.PurePosixPath(f).parent) for f in sources]
         common = parents[0] if len(set(parents)) == 1 else None
         if common is None:
@@ -1289,7 +1310,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if "choreograph" not in cid_str or re.search(r"\b(?:regression\s+test|race\s+condition|are\s+failing|circular\s+import|unused)\b", goal_str, re.I):
                 out["source_root"] = {"value": chosen_sr, "rule": "PATH_DIR_FROM_STATED_SOURCE_DIR",
                                       "evidence": src_dirs[0]}
-    if "choreograph" in cid_str and re.search(r"\bregression\s+test\b", goal_str, re.I):
+    if ("synthesize_regression_test" in keys or "choreograph" in cid_str) and re.search(r"\bregression\s+test\b", goal_str, re.I):
         out["synthesize_regression_test"] = {
             "value": True, "rule": "REGRESSION_TEST_REQUESTED", "evidence": "regression test",
         }

@@ -1,0 +1,358 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SWE_WAVE1_HONESTY_SPEED_REPAIR_20261031_V1",
+  "action_intent_id": "SWE_WAVE1_HONESTY_SPEED_REPAIR_20261031_V1",
+  "date": "2026-10-31",
+  "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
+  "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "FRESH_REUSE",
+  "causal_blocker": "Untracked git diff targets, counter-vs-extraction and ungrounded-clause false passes, child-process stdlib shadowing (pkg/http.py, pkg/cli.py), unpropagated regression-test synthesis flags on python.software.repair.apply.verified.v1, sequential cold AST indexing on 2000+ modules, and missing requires-provides chain pre-materialization degraded SWE honesty, speed, and repair completeness.",
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Among the measured Wave 1 SWE honesty, speed, repair, and composition defects on fabf28c4, compared with inventing duplicate repair/index engines or working on non-SWE document tasks; not a universal optimum.",
+  "action_summary": "WAVE1_SWE_HONESTY_GATES_PARALLEL_AST_INDEX_STDLIB_ISOLATION_AND_REGRESSION_REPAIR_REUSE",
+  "expected_parent_frontier_change": "Eliminate measured SWE false positives (swe_capability_matrix_v1 FALSE 1 -> 0, REAL 18 -> 21, repair 5/7 -> 7/7, DAMAGED 0), reach 28/28 on hardcore_swe_surface_probe_20261030 via existing _synthesize_differential_regression_test reuse, cut whole-runtime cold AST indexing latency ~2.8x via ProcessPoolExecutor, and wire capability_planner + live_capability_composition_v1 chain pre-materialization. Zero benchmark, acceptance, family, ownership or terminal credit is requested.",
+  "stop_condition": "Stop Wave 1 after all unit/regression controls pass, swe_capability_matrix_v1 reports 0 FALSE / 0 DAMAGED with 7/7 repair, hardcore_swe_surface_probe_20261030 reaches 28/28, the unified model verifies, and the signed referee admits the head.",
+  "explicit_user_authorization": "All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers\u2026 Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work.",
+  "record_scope": "Wave 1 SWE integration and truthfulness/speed hardening on fabf28c4; zero credit claimed.",
+  "benchmark_or_family_rank_authority": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "progress_evidence_paths": [
+    "canonical/tests/test_swe_wave1_honesty_speed_and_repair_v1.py"
+  ],
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "route_class": "INTEGRATE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/tests/test_swe_wave1_honesty_speed_and_repair_v1.py"
+    ],
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "load_bearing_primary": {
+    "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 1800,
+    "units": "seconds for Wave 1 integration and verification",
+    "interpretation": "Conservative subjective scheduling assumptions only, NOT statistically established confidence bounds and NOT benchmark measurements. Zero benchmark/family/terminal credit.",
+    "stop_condition": "Stop Wave 1 after all unit/regression controls pass, swe_capability_matrix_v1 reports 0 FALSE / 0 DAMAGED with 7/7 repair, hardcore_swe_surface_probe_20261030 reaches 28/28, the unified model verifies, and the signed referee admits the head."
+  },
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Untracked git diff targets, counter-vs-extraction and ungrounded-clause false passes, child-process stdlib shadowing (pkg/http.py, pkg/cli.py), unpropagated regression-test synthesis flags on python.software.repair.apply.verified.v1, sequential cold AST indexing on 2000+ modules, and missing requires-provides chain pre-materialization degraded SWE honesty, speed, and repair completeness.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+    "real_outcome": "Eliminate measured SWE false positives (swe_capability_matrix_v1 FALSE 1 -> 0, REAL 18 -> 21, repair 5/7 -> 7/7, DAMAGED 0), reach 28/28 on hardcore_swe_surface_probe_20261030 via existing _synthesize_differential_regression_test reuse, cut whole-runtime cold AST indexing latency ~2.8x via ProcessPoolExecutor, and wire capability_planner + live_capability_composition_v1 chain pre-materialization. Zero benchmark, acceptance, family, ownership or terminal credit is requested.",
+    "required_capability": "Truthful, fast, stdlib-isolated SWE repair, indexing, and composition over owned Brain kernels",
+    "selected_surviving_route": "WAVE1_SWE_HONESTY_GATES_PARALLEL_AST_INDEX_STDLIB_ISOLATION_AND_REGRESSION_REPAIR_REUSE",
+    "why_selected_route_is_fastest_sufficient": "Directly reuses software_repair_crossfile_choreograph_v1._synthesize_differential_regression_test, capability_planner.plan_actions, live_capability_composition_v1.execute_composition, and stdlib concurrent.futures.ProcessPoolExecutor with zero new capability IDs and zero external dependencies.",
+    "expected_parent_level_state_change": "Eliminate measured SWE false positives (swe_capability_matrix_v1 FALSE 1 -> 0, REAL 18 -> 21, repair 5/7 -> 7/7, DAMAGED 0), reach 28/28 on hardcore_swe_surface_probe_20261030 via existing _synthesize_differential_regression_test reuse, cut whole-runtime cold AST indexing latency ~2.8x via ProcessPoolExecutor, and wire capability_planner + live_capability_composition_v1 chain pre-materialization. Zero benchmark, acceptance, family, ownership or terminal credit is requested.",
+    "stop_condition": "Stop Wave 1 after all unit/regression controls pass, swe_capability_matrix_v1 reports 0 FALSE / 0 DAMAGED with 7/7 repair, hardcore_swe_surface_probe_20261030 reaches 28/28, the unified model verifies, and the signed referee admits the head.",
+    "routes_considered": [
+      "WAVE1_SWE_HONESTY_GATES_PARALLEL_AST_INDEX_STDLIB_ISOLATION_AND_REGRESSION_REPAIR_REUSE",
+      "WRITE_DUPLICATE_REGRESSION_SYNTHESIZER_AND_EXTERNAL_INDEX_DAEMON"
+    ],
+    "deleted_or_bypassed_paths": [
+      "Removed stdout JSON print inside python_refactor_rename_symbol.run()",
+      "Relocated typed_swe_report.json from working tree into canonical/astra_runtime/tmp/typed_swe_reports/",
+      "Avoided writing a second regression-test synthesizer by importing _synthesize_differential_regression_test"
+    ],
+    "obs_goal": {
+      "real_outcome": "Eliminate measured SWE false positives (swe_capability_matrix_v1 FALSE 1 -> 0, REAL 18 -> 21, repair 5/7 -> 7/7, DAMAGED 0), reach 28/28 on hardcore_swe_surface_probe_20261030 via existing _synthesize_differential_regression_test reuse, cut whole-runtime cold AST indexing latency ~2.8x via ProcessPoolExecutor, and wire capability_planner + live_capability_composition_v1 chain pre-materialization. Zero benchmark, acceptance, family, ownership or terminal credit is requested.",
+      "proxy_goals_deleted": [
+        "No PDF/office capability work",
+        "No benchmark/terminal credit edits"
+      ],
+      "surviving_necessity": "User explicitly requested fixing hardcore advanced SWE problems optimally and fast by reusing Brain solutions and merging all work."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "software_repair_crossfile_choreograph_v1._synthesize_differential_regression_test",
+        "capability_planner.py and live_capability_composition_v1.py",
+        "live_brain_route_admission_v1.stated_answer_errors",
+        "python_source_symbol_index._collect_index_parts"
+      ],
+      "external_existing_routes_checked": [
+        "Python 3.11 stdlib -P / PYTHONSAFEPATH and importlib.util.spec_from_file_location",
+        "PyPI/GitHub AST indexers (ctags/scip-python) checked; stdlib ProcessPoolExecutor preserves exact AST schema and row_sha256"
+      ],
+      "capability_work_deleted": [
+        "Zero new capability IDs in Wave 1",
+        "Zero external runtime dependencies"
+      ],
+      "surviving_gap": "Untracked git diff targets, counter/duplication/ungrounded false passes, child-process stdlib shadowing, unpropagated synthesize_regression_test, sequential cold AST indexing, and unbound upstream index/selection chains."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific wiring, subprocess sys.path ordering, and missing post-execution/shape predicates.",
+      "delete_bypass_substitute_options": [
+        "Delete stdout print in rename_symbol",
+        "Reuse _synthesize_differential_regression_test",
+        "Isolate child python with -P and PYTHONSAFEPATH=1"
+      ],
+      "surviving_causal_blocker": "Untracked git diff targets, counter-vs-extraction and ungrounded-clause false passes, child-process stdlib shadowing (pkg/http.py, pkg/cli.py), unpropagated regression-test synthesis flags on python.software.repair.apply.verified.v1, sequential cold AST indexing on 2000+ modules, and missing requires-provides chain pre-materialization degraded SWE honesty, speed, and repair completeness."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "WAVE1_SWE_HONESTY_GATES_PARALLEL_AST_INDEX_STDLIB_ISOLATION_AND_REGRESSION_REPAIR_REUSE",
+        "WRITE_DUPLICATE_REGRESSION_SYNTHESIZER_AND_EXTERNAL_INDEX_DAEMON"
+      ],
+      "losing_routes_reason": "External index daemons alter row_sha256 contracts and add process lifecycle state; stdlib ProcessPoolExecutor + existing Brain planners/synthesizers preserve byte-exact schemas with zero dependencies.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Verified via swe_capability_matrix_v1.py, hardcore_swe_surface_probe_20261030.py, verify_bound_capability_provenance_v1.py, and test_swe_wave1_honesty_speed_and_repair_v1.py."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Do not duplicate differential regression-test synthesis or DAG composition"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "python.software.repair.apply.verified.v1 reuses _synthesize_differential_regression_test",
+        "run_adapter_locally pre-materializes upstream index_path and selection_path via capability_planner + live_capability_composition_v1"
+      ],
+      "fresh_reuse_plan": "Land Wave 1 cleanly on main first so Wave 2 and Wave 3 new SWE capabilities build directly on clean honesty gates, stdlib isolation, and chain pre-materialization."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Reused V15/V14 diagnostics and direct targeted fixtures rather than full-package cProfile runs"
+      ],
+      "search_stop_decision": "Existing Brain mechanisms and stdlib -P / ProcessPoolExecutor resolve all Wave 1 blockers with zero external packages.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-31T17:47:49.765271+00:00",
+      "max_age_hours": 24,
+      "incumbent_route": "Disconnected SWE route on fabf28c4 with 1 FALSE matrix case and 27/28 surface reachability",
+      "selected_route": "WAVE1_SWE_HONESTY_GATES_PARALLEL_AST_INDEX_STDLIB_ISOLATION_AND_REGRESSION_REPAIR_REUSE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "BROAD_WEB_OR_COMMUNITY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py (_synthesize_differential_regression_test), capability_planner.py, live_capability_composition_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/python/cpython/blob/main/Doc/using/cmdline.rst (-P / PYTHONSAFEPATH stdlib path isolation)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI/stdlib concurrent.futures ProcessPoolExecutor and git ls-files/cat-file CLI contracts"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://github.com/sourcegraph/scip-python evaluated as alternative symbol indexer; disqualified because Brain consumers pin PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1 row_sha256"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "parallel Python AST symbol indexing and differential regression test synthesis"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "CPython cmdline -P PYTHONSAFEPATH and importlib spec_from_file_location"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Brain _synthesize_differential_regression_test, capability_planner, live_capability_composition_v1"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "git fetch origin main; verified HEAD fabf28c4ba5c947ad0341c083a2ae64db11aaaab"
+        }
+      ],
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "challenger_routes": [
+        {
+          "route": "EXTERNAL_SCIP_PYTHON_INDEXER_REPLACEMENT",
+          "evidence": [
+            "https://github.com/sourcegraph/scip-python provides external Python symbol indexing"
+          ],
+          "qualification_evidence": [
+            "Requires Node/external toolchain not present in sandbox and does not emit PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1 row_sha256 digests pinned by freshness tests."
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Stdlib ProcessPoolExecutor preserves exact AST semantics and row_sha256 freshness pins (14/14 index tests pass).",
+            "CAPABILITY_STRENGTH": "Covers 2000+ module runtime indexing in ~9.3s.",
+            "WALL_CLOCK": "~2.8x faster than sequential baseline with zero external setup.",
+            "INCREMENTAL_COST": "Zero spend and zero external dependencies.",
+            "RELIABILITY": "Deterministic sorted module ordering and warm-cache row reuse preserved.",
+            "VERIFIABILITY": "Verified by existing cache-freshness and provenance suites."
+          }
+        }
+      ],
+      "selected_route_preflight": {
+        "selected_route": "WAVE1_SWE_HONESTY_GATES_PARALLEL_AST_INDEX_STDLIB_ISOLATION_AND_REGRESSION_REPAIR_REUSE",
+        "checked_at_utc": "2026-10-31T17:47:49.765271+00:00",
+        "max_age_hours": 2,
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Local Python 3.11 and Git 2.39.5",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T17:47:49.765271+00:00",
+            "evidence": [
+              "6/6 Wave 1 unittest cases pass; 28/28 hardcore surface probes pass; 21/54 matrix REAL with 0 FALSE / 0 DAMAGED."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Current Brain source, registries, guards and unified model compiler",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T17:47:49.765271+00:00",
+            "evidence": [
+              "canonical/tests/test_swe_wave1_honesty_speed_and_repair_v1.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Authenticated GitHub PR/push/check API",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T17:47:49.765271+00:00",
+            "evidence": [
+              "git fetch origin main succeeded against fabf28c4ba5c947ad0341c083a2ae64db11aaaab."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "NO_DISCHARGE_CLAIM__existing SWE repair, refactoring, indexing, and composition routes hardened with zero credit claimed.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SWE_WAVE1_HONESTY_SPEED_REPAIR_20261031_V1",
+      "falsifier_id": "UNTRACKED_DIFF_OR_WRONG_SHAPE_ANSWER_OR_STDLIB_SHADOW_MUST_NOT_FALSE_PASS_OR_ABORT_REPAIR",
+      "decisive_question": "Does isolating child-process stdlib imports, gating untracked diffs and wrong-shape answers, and wiring existing regression-test synthesis eliminate SWE false passes while reaching 7/7 matrix repairs and 28/28 surface probes?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
+          "git_blob_sha": "2ef856b40ebb6fedf23bae01e39cea7ca05b0dee"
+        },
+        {
+          "path": "canonical/runtime/live_brain_route_admission_v1.py",
+          "git_blob_sha": "cd474b45a26f0f6d0c99d8b616c7d4d7ee1aadd2"
+        },
+        {
+          "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+          "git_blob_sha": "e1e6aa314b85093fd66903d4e2d635ae05069fcf"
+        }
+      ]
+    }
+  }
+}

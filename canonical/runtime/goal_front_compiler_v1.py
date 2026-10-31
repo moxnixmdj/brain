@@ -3100,17 +3100,26 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     # its chance to re-bind a ranked candidate (that is what keeps the reachability results that
     # depended on F1 intact) and it never fires when admission is ambiguous, so an unclear sentence
     # still fails closed instead of being guessed.
-    if single_shape and selected:
+    if selected:
         from canonical.runtime import capability_selection_retrieval_v1 as _sel
+        from canonical.runtime import goal_compiler as _gc_f17
 
         _declared = _sel.declarations(root).get(selected)
-        _names = _sel.required_input_names(admissible.get(selected) or {}, _declared)
-        if _names and not _sel.is_specific(_names):
+        _names = _sel.required_input_names(admissible.get(selected) or {}, _declared) if single_shape else []
+        _out_verb = _gc_f17._path_named_after_output_verb(text, root)
+        _stated_files = {raw for raw, p in _gc_f17._repo_paths(text, root) if p.is_file() and raw != _out_verb}
+        _sel_inputs = compiled.get("inputs") if isinstance(compiled.get("inputs"), Mapping) else {}
+        _bound_files = {str(v) for v in _sel_inputs.values() if isinstance(v, str) and v in _stated_files}
+        _partial_file_bind = len(_stated_files) >= 2 and len(_bound_files) < len(_stated_files)
+        if (_names and not _sel.is_specific(_names)) or _partial_file_bind:
             displaced = _retrieval_first_selection(text, admissible, root, rules)
             if displaced is not None:
-                displaced["match_evidence"]["displaced_pinned_selection"] = selected
-                displaced["match_evidence"]["displaced_catch_all_inputs"] = _names
-                return displaced
+                _disp_inputs = displaced.get("inputs") if isinstance(displaced.get("inputs"), Mapping) else {}
+                _disp_files = {str(v) for v in _disp_inputs.values() if isinstance(v, str) and v in _stated_files}
+                if (_names and not _sel.is_specific(_names)) or len(_disp_files) > len(_bound_files):
+                    displaced["match_evidence"]["displaced_pinned_selection"] = selected
+                    displaced["match_evidence"]["displaced_catch_all_inputs"] = _names
+                    return displaced
 
     if single_shape and isinstance(compiled.get("inputs"), dict):
         if repair_output_collisions(text, compiled["inputs"], root, entry=registry.get(selected),
