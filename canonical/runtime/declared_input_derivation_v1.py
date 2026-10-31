@@ -679,12 +679,17 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             out["source_root"] = {"value": common, "rule": "PATH_DIR_COMMON_TO_STATED_FILES",
                                   "evidence": ",".join(sources)}
     # Retain current-main evidence-backed derivation.
-    if "source_root" in keys and tests and not sources:
+    # Test-owner inference is for test-consuming rows only. An explicit source
+    # role and a read-only file/directory scope must never be displaced.
+    from canonical.runtime import goal_compiler as _scope_gc
+    _explicit_source = _scope_gc._path_named_by_role(goal, "source", root)
+    if ("source_root" in keys and tests and not sources and not _explicit_source
+            and keys & {"test_paths", "test_path", "test_file", "test_argv", "run_tests"}):
         _owners = {str(pathlib.PurePosixPath(t).parent) for t in tests}
         if len(_owners) == 1:
             _owner = next(iter(_owners))
-            _walk = pathlib.PurePosixPath(_owner).parent
-            for _ in range(3):
+            _walk = pathlib.PurePosixPath(_owner)
+            for _ in range(4):
                 if not _walk.name:
                     break
                 _walk_abs = pathlib.Path(root) / str(_walk)

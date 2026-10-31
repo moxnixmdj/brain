@@ -219,3 +219,17 @@ def test_an_existing_report_destination_cannot_supply_an_input_scope(tmp_path, d
     inputs = compiler._bind_inputs("Audit pkg/calc.py and save the report to pkg/audit.json", tmp_path, entry)
     assert inputs["source_root"] == "pkg/calc.py"
     assert inputs["output_path"] == "pkg/audit.json"
+
+
+def test_test_owner_inference_cannot_widen_a_read_only_file_scope(tmp_path):
+    from canonical.runtime import declared_input_derivation_v1 as derivation
+    from canonical.runtime import goal_front_compiler_v1 as front
+    (tmp_path / "pkg/tests").mkdir(parents=True)
+    (tmp_path / "pkg/tests/test_calc.py").write_text("def test_calc():\n    pass\n")
+    (tmp_path / "pkg/app.py").write_text("def unrelated():\n    pass\n")
+    entry = {"action_template": {"args": {"source_root": "${input.source_root}",
+                                          "output_path": "${input.output_path}"}},
+             "proposal_bindings": {"source_root": {"type": "path_file_or_dir"}}}
+    goal = "Count the functions in pkg/tests/test_calc.py"
+    assert "source_root" not in derivation.derive(goal, entry, tmp_path)
+    assert front.bind_typed_key(goal, "source_root", tmp_path, entry) == "pkg/tests/test_calc.py"
