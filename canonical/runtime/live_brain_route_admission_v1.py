@@ -492,6 +492,20 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
             errors.append("TOOL_REPORTED_PASS_FALSE:" + str(row.get("capability_id")))
         elif status.startswith(_NON_SUCCESS_PREFIXES):
             errors.append("TOOL_REPORTED_NON_SUCCESS_STATUS:" + str(row.get("capability_id")) + ":" + status[:48])
+        # A PLAN THAT PLANNED NOTHING AND REFUSED ITS ONLY OP IS NOT AN ANSWER.
+        #
+        # ``python.source.crossfile_edit.choreograph.v1`` reports ``output_verified: true`` because it
+        # did verify the artifact it wrote -- and that artifact was a plan with one refusal and zero
+        # planned sites.  Measured 2026-10-30, before its ``edits_path`` was derived correctly: the
+        # sentence "Which files must change to rename the symbol `mul` ..." returned pass=True with
+        # ``affected_file_count: 0`` and ``refusals: [{refusal: "MODULE_NOT_IN_INDEX:pkg/calc.py"}]``.
+        # The tool's own counts are the evidence; read them.
+        planned = inner.get("planned_op_count")
+        refused = inner.get("refused_op_count")
+        if (isinstance(planned, int) and isinstance(refused, int)
+                and refused > 0 and planned == 0):
+            errors.append("TOOL_PLANNED_NOTHING_AND_REFUSED:"
+                          + str(row.get("capability_id")) + ":refused=" + str(refused))
     return errors
 
 
@@ -1803,6 +1817,27 @@ _LANGUAGE_SURFACE_RE = re.compile(
 _PYTHON_ONLY_RE = re.compile(r"\bpython\b", re.IGNORECASE)
 
 
+def _declares_it_does_not_write(entry: Mapping[str, Any]) -> bool:
+    """Does the row's OWN declaration say it plans instead of applying?
+
+    The writer-for-a-question rule reads the row's name and its ``provides``, and the word
+    "choreograph" is enough to call a row a mutator.  That is right for
+    ``software.repair.choreograph.crossfile.v1`` -- a repair choreographer that rewrites sources --
+    and wrong for ``python.source.crossfile_edit.choreograph.v1``, whose registry row states, in its
+    own ``limitations``: *"Plans, does not apply: mutation of sources is a separate concern."*
+    Measured 2026-10-30: the planner was refused
+    ``STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER`` for the question it exists to answer
+    ("Which files must change to rename …").
+
+    The exemption is READ FROM THE REGISTRY, never inferred from the id, and it is narrow: the row
+    must say both that it plans and that it does not apply.
+    """
+    text = " ".join(str(x) for x in (entry.get("limitations") or [])).lower()
+    return ("plans" in text or "plan," in text) and (
+        "does not apply" in text or "does not mutate" in text
+        or "no mutation" in text or "read-only" in text)
+
+
 def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -> list[str]:
     """Refuse the wrong KIND of row -- reader-for-a-transform, writer-for-a-question, python-for-js."""
     out: list[str] = []
@@ -1812,7 +1847,8 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
     provides = " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])
     if (_READ_ONLY_REQUEST_RE.search(text)
             and _MUTATION_PROVIDES_RE.search(provides)
-            and not _READ_SURFACE_RE.search(provides)):
+            and not _READ_SURFACE_RE.search(provides)
+            and not _declares_it_does_not_write(entry)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
     language = _LANGUAGE_OF_GOAL_RE.search(text)
     if (language and _PYTHON_ONLY_RE.search(surface)
@@ -3338,18 +3374,38 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     # answer became ``PROMISED_SOURCE_CHANGE_NOT_APPLIED``: a refusal that contradicts the baseline
     # evidence the same run had just collected.  The promise is about the end state; the baseline
     # run IS the proof of it.
+    # A ROW THAT DECLARES IT DOES NOT WRITE OWES NO BYTE CHANGE.
+    #
+    # The promise above is read from the SENTENCE ("rename ... in <dir>" contains a change verb), and
+    # the sentence is right: a rename, once performed, does change bytes.  But the row that answers
+    # it may not be the row that performs it.  ``python.source.crossfile_edit.choreograph.v1`` says
+    # in its own registry row that it *"Plans, does not apply: mutation of sources is a separate
+    # concern"*, and the question "Which files must change to rename the symbol `mul`" is answered by
+    # the PLAN, not by the edit.  Measured 2026-10-30: the planner executed, planned every site, and
+    # the door then refused PROMISED_SOURCE_UNCHANGED:<dir> -- demanding the filesystem move because
+    # the question was about a change.  What such a row owes is its own artifact, which
+    # ``promised_artifact_errors`` and the observation gate still judge.
+    #
+    # Read from the registry's own declaration (same narrow test as the writer-for-a-question rule),
+    # never from the id, and never when the row is silent.  The exemption is exactly the pair
+    # (row plans only, sentence does not demand the change be made): a sentence that DOES demand it
+    # -- "Rename `mul` to `multiply` in <dir>", an imperative -- keeps the byte gate and is still
+    # refused when only a plan was produced.
+    _answered_by = str(result.get("compiled_capability_id")
+                       or result.get("capability_id") or "")
+    _row_does_not_write = _declares_it_does_not_write(dict(admissible.get(_answered_by) or {}))
     unchanged = promised_source_change_errors(
         normalized, source_digests_before, patch_evidence,
         roots_before=roots_before, before_files=world_before.get("files")) \
-        if result.get("pass") is True and result.get("already_satisfied") is not True else []
+        if (result.get("pass") is True and result.get("already_satisfied") is not True
+            and not (_row_does_not_write
+                     and not _sentence_promises_a_change(normalized))) else []
     if unchanged:
         result["runtime_status_before_source_change_check"] = result.get("status")
         result["status"] = "FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED"
         result["pass"] = False
         result["failure_class"] = "PROMISED_SOURCE_CHANGE_NOT_APPLIED"
         result["promised_source_change_errors"] = unchanged
-    _answered_by = str(result.get("compiled_capability_id")
-                       or result.get("capability_id") or "")
     unanswered = stated_answer_errors(
         normalized, dict(admissible.get(_answered_by) or {})) \
         if result.get("pass") is True else []

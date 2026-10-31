@@ -211,3 +211,46 @@ python3 -m pytest -q canonical/tests/test_a_question_about_the_repository_is_ans
 ```
 
 *Authority: NONE — sandbox measurement, not independent verification.*
+
+---
+
+## 11. Addendum, measured after the `edits_path` wire (branch `arena/47739ce8-brain`)
+
+Item 1 of §9 is done.  `declared_input_derivation_v1` now proves the cross-file edit set — the stated
+rename pair, the single stated directory as `source_root`, and the ONE module under it that really
+defines the symbol (`ast`, module scope; zero or several defining modules derive nothing) — and writes
+it content-addressed to `canonical/astra_runtime/tmp/derived/edits_<sha16>.json`.
+
+Three defects had to be fixed before the sentence could be answered, each found by measuring, not by
+reading:
+
+1. **The op's `module` must be the repository-relative path**, not the path under `source_root`: the
+   consumer compares it against the symbol index's own `path` column.  First derivation emitted
+   `pkg/calc.py`, the plan refused its only op `MODULE_NOT_IN_INDEX:pkg/calc.py`.
+2. **A question is not a writer's job — and not a promise.**  "Which files must change to rename…"
+   was refused `STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER` for the planner whose own registry
+   row says *"Plans, does not apply"*; the exemption is read from that declaration (exactly one row in
+   the registry matches), never from an id.  The byte gate then refused `PROMISED_SOURCE_UNCHANGED`,
+   demanding the tree move for a question about moving it.
+3. **A plan that planned nothing and refused its only op is not an answer**, whatever
+   `output_verified` says — `TOOL_PLANNED_NOTHING_AND_REFUSED` is now a truth-check error.  Before
+   this, the refused plan certified PASS with `affected_file_count: 0`.
+
+An IMPERATIVE rename keeps the old reading: "Rename the symbol `mul` to `multiply` in <dir>" still
+fails `PROMISED_SOURCE_CHANGE_NOT_APPLIED` when only a plan came back, because the sentence demands
+the change, not the plan.  Wiring that to `python.refactor.rename_symbol.v1` (which does write, and
+whose `module`+`qualname`+`new_symbol` are derivable from the same evidence) is §9 item 5.
+
+| instrument | before | after |
+|---|---|---|
+| `swe_request_probe_v1.py --suite hardcore` | 9 of 48 | **10 of 49** (`refactor/rename_plan` added and answered) |
+| `swe_request_probe_v1.py` | 6 of 28 | 6 of 28 (no regression) |
+| `swe_capability_matrix_v1.py` | 17/0/37/0 | 17/0/37/0 (no regression) |
+| `verify_brain_unified_model_v1.py` | 33/33 | 33/33 |
+| new pinning tests | — | 7, `canonical/tests/test_a_rename_question_is_answered_by_a_plan_v1.py` |
+
+The answer is a real one, not a certificate: for the fixture tree the plan reports
+`planned_op_count 1`, `refused_op_count 0`, `affected_file_count 2`, `ambiguous_site_count 0`, and its
+sites are `DEFINITION pkg/calc.py:1`, `IMPORT_SITE pkg/util.py`, `REFERENCE pkg/util.py:5`.
+
+*Authority: NONE — sandbox measurement, not independent verification.*

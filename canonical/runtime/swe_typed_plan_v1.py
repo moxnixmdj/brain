@@ -108,6 +108,25 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # hand it the whole coordinate (module, qualname, statement span, new name, run_tests), so the
     # family becomes decisive on admission exactly like the review gates and the type check.
     (("extract", "into a new function", "pull out into"), ("extract", "refactor"), "extract"),
+    # WHAT A RENAME REALLY TOUCHES IS THE QUESTION BEFORE THE RENAME.
+    #
+    # `python.source.crossfile_edit.choreograph.v1` plans every site a checked-in change must touch
+    # -- the thing grep gets wrong.  Its `edits_path` had no producer anywhere in the pipeline, so
+    # measured 2026-10-30 all three ordinary sentences for it refused:
+    #
+    #   "Which files must change to rename the symbol `mul` to `multiply` in <dir>?"
+    #        -> software.repair.choreograph.crossfile.v1, a MUTATOR, refused for answering a
+    #           read-only question with a writer
+    #   "Plan the rename of ..." -> the symbol index, refused PROMISED_SOURCE_CHANGE_NOT_APPLIED
+    #
+    # `declared_input_derivation_v1` can now prove the whole contract (the stated rename pair, the
+    # stated directory as source_root, and the ONE module under it that really defines the symbol),
+    # so the family route becomes decisive on admission exactly like the review gates above.  The
+    # token is `crossfile_edit`, which only the PLANNER carries -- the repair choreographer shares
+    # the words "crossfile"/"choreograph" and would otherwise make the family ambiguous.
+    (("which files must change", "what has to change", "what must change", "files must change",
+      "sites must change", "cross-file", "crossfile", "plan the rename"),
+     ("cross-file", "choreograph", "plan"), "crossfile_edit"),
     (("test coverage", "coverage"), ("coverage",), "coverage"),
     (("security issue", "security review", "security audit", "security scan",
       "vulnerab", "check for security"), ("security", "vulnerab", "bandit"), "security"),

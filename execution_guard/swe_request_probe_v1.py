@@ -177,6 +177,11 @@ def hardcore_cases(base: str) -> list[tuple[str, str]]:
         ("refactor/dedupe", "Remove the duplicated logic between %s and %s." % (c, u)),
         ("refactor/drop_dead", "Remove the dead code from %s." % c),
         ("refactor/rename_repo", "Rename the symbol `mul` to `multiply` everywhere in %s." % repo),
+        # The question a rename is asked BEFORE it is made.  Measured 2026-10-30: this phrasing had
+        # no lane -- the read-only question was routed to a mutator and refused
+        # STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER, while the planner that answers it
+        # (``python.source.crossfile_edit.choreograph.v1``) had no producer for its ``edits_path``.
+        ("refactor/rename_plan", "Which files must change to rename the symbol `mul` to `multiply` in %s?" % repo),
         ("refactor/type_hints", "Add type hints to every function in %s and make mypy pass." % c),
         ("refactor/split_module", "Split %s into two modules without changing behaviour." % c),
         # --- tests ----------------------------------------------------------------------

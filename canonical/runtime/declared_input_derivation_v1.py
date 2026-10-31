@@ -36,6 +36,8 @@ Zero model, zero network, zero spend.  It changes no registry row and no kernel.
 from __future__ import annotations
 
 import ast
+import hashlib
+import json
 import pathlib
 import re
 import sys
@@ -294,6 +296,119 @@ def _stated_change_set(files: list[str], root: pathlib.Path,
     return {"value": rel_out, "rule": "DIFF_FROM_STATED_FILES_EVERY_LINE_IS_NEW",
             "evidence": ",".join(files)}
 
+
+
+# ---------------------------------------------------------------------------------------------
+# A CROSS-FILE EDIT PLAN IS A VALUE THE SENTENCE AND THE TREE TOGETHER PROVE.
+#
+# `python.source.crossfile_edit.choreograph.v1` is the one capability that answers "what does
+# renaming this symbol really touch" -- the question grep gets wrong and the step every engineer
+# takes before a rename.  It declares `edits_path`, `source_root` and `output_path`, and nothing in
+# the pipeline ever produced an `edits_path`, so measured 2026-10-30 the three ordinary sentences
+# for it all refused:
+#
+#   "Which files must change to rename the symbol `mul` to `multiply` in <dir>?"
+#        -> software.repair.choreograph.crossfile.v1 (a MUTATOR), refused as a writer answering
+#           a read-only question
+#   "Plan the rename of the symbol `mul` to `multiply` across <dir>."
+#        -> python.source.symbols.index.ast, refused PROMISED_SOURCE_CHANGE_NOT_APPLIED
+#
+# The op is not invented.  Every field is proved: the two names are STATED (the same rename
+# grammar the refactor rows already use), the source root is a STATED directory, and the MODULE is
+# the one file under it that really defines the symbol -- parsed, never guessed.  Zero matches or
+# several matches yield no value, so the slot stays unbound and the capability keeps failing
+# closed.  The file is written into the machine's own scratch, content-addressed like every other
+# derived value, so the same sentence always produces the same bytes.
+# ---------------------------------------------------------------------------------------------
+_EDITS_DIR = "canonical/astra_runtime/tmp/derived"
+_MAX_SCAN_FILES = 4000
+
+
+def _stated_directories(goal: str, root: pathlib.Path) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for match in _PATH_RE.finditer(str(goal or "")):
+        raw = match.group(0).rstrip(".,;:)\"'")
+        if raw in seen:
+            continue
+        seen.add(raw)
+        try:
+            candidate = (pathlib.Path(root) / raw).resolve()
+            base = pathlib.Path(root).resolve()
+        except (OSError, ValueError):
+            continue
+        if candidate.is_dir() and (candidate == base or base in candidate.parents):
+            out.append(raw)
+    return out
+
+
+def _defining_module(source_root: str, symbol: str, root: pathlib.Path) -> str | None:
+    """The ONE module under source_root that defines `symbol` at module scope, or None."""
+    base = pathlib.Path(root) / source_root
+    found: list[str] = []
+    scanned = 0
+    for path in sorted(base.rglob("*.py")):
+        if any(part in ("__pycache__", ".git") for part in path.parts):
+            continue
+        scanned += 1
+        if scanned > _MAX_SCAN_FILES:
+            return None
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+        except (OSError, SyntaxError, ValueError):
+            continue
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) \
+                    and node.name == symbol:
+                found.append(path.relative_to(base).as_posix())
+                break
+        if len(found) > 1:
+            return None
+    return found[0] if len(found) == 1 else None
+
+
+def _derive_edits(goal: str, keys: set[str], root: pathlib.Path) -> dict[str, Any] | None:
+    """`edits_path` (and the `source_root` it is relative to) for a stated rename."""
+    if "edits_path" not in keys:
+        return None
+    pairs = _RENAME_OLD_NEW.findall(str(goal or ""))
+    if len(pairs) != 1:
+        return None
+    old, new = pairs[0]
+    if not (_NAME_RE.match(old) and _NAME_RE.match(new)) or old == new:
+        return None
+    directories = _stated_directories(goal, root)
+    if len(directories) != 1:
+        return None
+    source_root = directories[0]
+    inner = _defining_module(source_root, old, root)
+    if inner is None:
+        return None
+    # The op's ``module`` is the file's REPOSITORY-relative path, not its path under source_root: the
+    # consumer compares it against the symbol index's own ``path`` column, and that index is built
+    # with ``source_root`` as a subdirectory of the repository (measured: rows read
+    # ``canonical/astra_runtime/tmp/xf/pkg/calc.py``).  Emitting the inner path produced
+    # ``MODULE_NOT_IN_INDEX:pkg/calc.py`` and a plan that refused its only op.
+    module = source_root.rstrip("/") + "/" + inner if source_root.strip("./") else inner
+    body = json.dumps([{"op": "rename_symbol", "module": module, "name": old,
+                        "new_name": new}], indent=1, sort_keys=True) + "\n"
+    digest = hashlib.sha256(body.encode("utf-8")).hexdigest()[:16]
+    rel_out = f"{_EDITS_DIR}/edits_{digest}.json"
+    target = pathlib.Path(root) / rel_out
+    try:
+        if not (target.is_file() and target.read_text(encoding="utf-8") == body):
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(body, encoding="utf-8")
+    except OSError:
+        return None
+    derived: dict[str, Any] = {
+        "edits_path": {"value": rel_out, "rule": "EDITS_FROM_STATED_RENAME_AND_PROVED_MODULE",
+                       "evidence": f"{module}:{old}->{new}"}}
+    if "source_root" in keys:
+        derived["source_root"] = {"value": source_root,
+                                  "rule": "SOURCE_ROOT_FROM_STATED_DIRECTORY",
+                                  "evidence": source_root}
+    return derived
 
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
@@ -589,6 +704,11 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if len(set(matches)) == 1:
                 out["qualname"] = {"value": matches[0], "rule": "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
                                    "evidence": f"{sources[0]}:{matches[0]}"}
+    # The cross-file edit plan: last, so every value above keeps its own precedence.
+    edits = _derive_edits(goal, keys, root)
+    if edits:
+        for key, value in edits.items():
+            out.setdefault(key, value)
     return out
 
 
