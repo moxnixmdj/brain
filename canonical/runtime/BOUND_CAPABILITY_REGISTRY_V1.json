@@ -2914,7 +2914,8 @@
           "limit": "${input.limit}",
           "message": "${input.message}",
           "op": "${input.op}",
-          "repo_root": "${input.repo_root}"
+          "repo_root": "${input.repo_root}",
+          "target": "${input.target}"
         },
         "expect": {
           "field": "output_verified",

@@ -186,7 +186,8 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
     # Unqualified repository reads use the existing operation grammar, not
     # broad nouns such as "status" inside deployment questions or task data.
     if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"
-                    r"(?:me\s+)?(?:the\s+)?(?:diff|status|history|current\s+branch)[.?!]*", prose.lower().strip()):
+                    r"(?:me\s+)?(?:the\s+)?(?:diff|status|history|current\s+branch)"
+                    r"(?:\s+(?:of|for|in|under|at)\s*)?[.?!]*", head.strip()):
         if len(derivation.stated_git_operations(goal)) == 1:
             return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
     return None

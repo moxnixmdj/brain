@@ -346,11 +346,11 @@
       "counterexample_receipts": [
         {
           "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-          "git_blob_sha": "cc16fb560ca32883900fb39c295268f638a9b6b3"
+          "git_blob_sha": "627692e9e3c7e00ceac82cbfb4d0dbd15d3eb142"
         },
         {
           "path": "canonical/runtime/live_brain_route_admission_v1.py",
-          "git_blob_sha": "f7ffdc42168a8223f72dabec48581a4b05b45a5d"
+          "git_blob_sha": "984327eb4d3a0b2d8c9f4b57b8be23e37a37be32"
         }
       ]
     }
@@ -364,6 +364,7 @@
     "scope_inference_guard": "Test-owner inference is confined to test-consuming rows; explicit source roles and read-only file scope are preserved. Joint/declared/stated-report suites: 43 passed.",
     "final_current_main_measurement": "Main 04b6cbb8 retained unchanged. Current core/repair search: 205 passed, including all original166 and all20joint controls. Surface census: 27/28 reached, floor25 unchanged. No terminal/benchmark credit.",
     "final_inventory_preservation": "Preserved main b68f7c7633 inventories V14 and V15 unchanged. Incoming diff is two Markdown inventories and the generated model only; no runtime source changed. Regenerated combined model; 137 compiler/model tests passed before this documentation-only integration.",
-    "intent_scope_repair": "Retained main e25e8b5c92, including path-as-data scoring and static soundness changes. Reused prose_only for repair promotion, declaration-aware exact scope across compiler/world fallback, existing repository-root adapter argument, and counted SUITE_RUNNER for native verification. Eleven new tests include real isolated Git commits, non-repository refusal, scope ambiguity, exact-file counts and real pytest skip/parametrize behavior. Latest focused51 passed. No universal/general capability or terminal credit."
+    "intent_scope_repair": "Retained main e25e8b5c92, including path-as-data scoring and static soundness changes. Reused prose_only for repair promotion, declaration-aware exact scope across compiler/world fallback, existing repository-root adapter argument, and counted SUITE_RUNNER for native verification. Eleven new tests include real isolated Git commits, non-repository refusal, scope ambiguity, exact-file counts and real pytest skip/parametrize behavior. Latest focused51 passed. No universal/general capability or terminal credit.",
+    "final_followup": "Scoped Git diff now passes the existing adapter target argument and returns actual patch bytes. Twelve new regressions; latest intent/Git/shared-suite controls69 passed. Previous expanded SWE480:471 passed9 failed; original166 allpass. Model/compiler137 allpass; surface27/28. These are scoped local measurements, not general SWE or terminal credit."
   }
 }

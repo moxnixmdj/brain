@@ -261,3 +261,44 @@ The latest focused run (new11, joint20, stated-report17, stated-defect3) measure
 as passing evidence. Historical 577-case and 205-case measurements above keep
 their original source attribution; a fresh expanded run is required for the
 final source, and no whole-repository green claim is made.
+
+## Final measured breadth and landing follow-up
+
+On the integrated runtime at `87603b52c9` (and subsequent documentation-only
+main inventory merge): expanded SWE **471 passed / 9 failed**, 42 subtests,
+134.85 s, across 480 cases. All **166 original cohort identities passed**.
+Separately, the model/compiler cohort passed **137/137** with 905 subtests.
+The independent-outcome surface census remains **27/28**, floor25 unchanged.
+The ordinary matrix measured 18 REAL / 1 FALSE / 35 refused / zero damaged;
+count_functions is REAL and the non-repository git_commit request safely refuses.
+The remaining matrix flag is git_diff; its fixture is ignored/untracked in the
+outer repository, so a nonempty tracked diff is not a valid universal oracle.
+It also exposed the missing target argument. That argument is now bound using
+the existing adapter; a real nested tracked-repository regression compares the
+actual returned patch against independent `git diff` and excludes its changed
+sibling. The final additional run is **69 passed in 18.07 s**, including all
+**12 new intent/scope/framework regressions**, Git controls and shared suite tests.
+These supplemental checks do not silently reassign the earlier480-case scope.
+
+Remaining expanded-run failures (not a whole-repository green result):
+- `canonical.tests.test_a_question_about_one_source_file_is_answered_about_that_file_v1.AQuestionAboutOneFileIsAnsweredAboutThatFileTests::test_the_audit_reports_that_file_and_not_its_siblings`
+- `canonical.tests.test_capability_selection_retrieval_v1.FrontCompilerIntegrationTests::test_the_structured_sentence_selects_the_invoker`
+- `canonical.tests.test_capability_selection_retrieval_v1.GoalDrivenSelectionTests::test_a_plain_sentence_is_planned_executed_and_reverified_with_a_real_result`
+- `canonical.tests.test_live_brain_route_admission_v1::test_path_token_only_match_is_rejected_before_execution`
+- `canonical.tests.test_live_brain_route_admission_v1::test_single_word_evidence_is_rejected`
+- `canonical.tests.test_live_brain_route_admission_v1::test_a_source_root_key_binds_from_the_goal`
+- `canonical.tests.test_live_brain_route_admission_v1::test_both_live_doors_give_the_same_verdict_on_one_sentence`
+- `canonical.tests.test_live_brain_route_admission_v1::test_r9_does_not_move_the_compile_or_selection_rates`
+- `canonical.tests.test_live_brain_route_admission_v1::test_a_no_op_goal_is_refused_at_the_door_and_a_real_repair_is_not`
+
+The extra compatibility failures include stricter early path-only rejection,
+a stale parent-scope expectation, and the structured module-invocation routing
+case. No blanket baseline attribution is made. Same-identity UBJSON mission CI
+still fails in its concurrent worker/relay stage; its relay/compiler unit checks
+pass, but the mission cause remains undiagnosed. The long heartbeat is tracked
+separately. Neither is represented as successful by these local measurements.
+
+The drift guard correctly rejected stale *base-tree* counterexample blob IDs
+after newer main changed their source. Rebound the existing references to actual
+blobs on current base b68f7c7633; no guard, authority, receipt content or floor
+was weakened or fabricated.

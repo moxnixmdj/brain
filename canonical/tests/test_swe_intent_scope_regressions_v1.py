@@ -130,3 +130,33 @@ def test_native_verification_counts_actual_parameterized_passes(tmp_path):
     passed, ran, reason = native._verify_project(tmp_path, tmp_path)
     assert passed is True, reason
     assert ran == 2
+
+
+def test_public_git_diff_reads_only_the_named_tracked_file():
+    parent = ROOT / 'canonical/astra_runtime/tmp'
+    parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='diff-intent-', dir=parent) as raw:
+        repo = Path(raw)
+        def git(*args):
+            return subprocess.check_output(['git', '-C', str(repo), *args], text=True).strip()
+        git('init', '-q', '--initial-branch=arena/1e5b1d49-brain')
+        git('config', 'user.name', 'Fixture')
+        git('config', 'user.email', 'fixture@example.invalid')
+        for name in ('one.py', 'two.py'):
+            (repo / name).write_text('value = 1\n')
+        git('add', '.')
+        git('commit', '-qm', 'fixture baseline')
+        for name in ('one.py', 'two.py'):
+            (repo / name).write_text('value = 2\n')
+        target = repo / 'one.py'
+        result = door.solve({'task_id': 'FILE_DIFF_' + uuid.uuid4().hex,
+                             'goal': f'Show the diff of {target.relative_to(ROOT).as_posix()}.'})
+        assert result['pass'] is True, result
+        row = result['execution'][0]
+        assert row['capability_id'] == 'git.repository.operate.v1'
+        artifact = json.loads((ROOT / row['result']['output_path']).read_text())
+        assert artifact['repo_root'] == repo.relative_to(ROOT).as_posix()
+        assert [r['path'] for r in artifact['rows']] == ['one.py']
+        patch = artifact['observed_effect']['patch']
+        assert patch.strip() == git('-c', 'core.abbrev=40', 'diff', 'HEAD', '--', 'one.py')
+        assert 'two.py' not in patch

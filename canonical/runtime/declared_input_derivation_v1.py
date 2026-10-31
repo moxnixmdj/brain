@@ -1026,18 +1026,37 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                             "evidence": f"{proved[0][0]}:{proved[0][1]}"}
     if "repo_root" in keys and stated_git_operations(goal):
         directories = _stated_directories(goal, root)
+        destination = _scope_gc._path_named_after_output_verb(goal, root)
+        subjects = [f for f in files if f != destination]
+        scope = None
         if len(directories) == 1:
-            out["repo_root"] = {"value": directories[0],
-                                "rule": "REPOSITORY_IS_THE_STATED_DIRECTORY",
-                                "evidence": directories[0]}
+            scope = directories[0]
         elif not directories:
-            # Unqualified Git operations concern the current checkout. A file-
-            # scoped commit is not an authorization to commit its whole parent.
-            commit_files = files if stated_git_operations(goal) == ("commit",) else []
-            scope = commit_files[0] if commit_files else "."
-            out["repo_root"] = {"value": scope,
-                                "rule": "STATED_FILE_OR_CURRENT_GIT_REPOSITORY",
+            if subjects and stated_git_operations(goal) == ("commit",):
+                # File-scoped commits are not whole-parent commit authority.
+                scope = subjects[0]
+            elif len(subjects) == 1:
+                owner = (pathlib.Path(root) / subjects[0]).resolve().parent
+                while owner != pathlib.Path(root).resolve() and not (owner / ".git").exists():
+                    owner = owner.parent
+                scope = owner.relative_to(pathlib.Path(root).resolve()).as_posix()
+            elif not subjects:
+                scope = "."  # unqualified operation on the current checkout
+        if scope is not None:
+            out["repo_root"] = {"value": scope, "rule": "STATED_OR_CURRENT_GIT_REPOSITORY",
                                 "evidence": scope}
+            if "target" in keys:
+                if len(subjects) == 1:
+                    try:
+                        target = (pathlib.Path(root) / subjects[0]).resolve().relative_to(
+                            (pathlib.Path(root) / scope).resolve()).as_posix()
+                    except ValueError:
+                        target = subjects[0]  # the adapter independently rejects outside scope
+                    out["target"] = {"value": target, "rule": "GIT_TARGET_IS_THE_STATED_FILE",
+                                     "evidence": subjects[0]}
+                elif not subjects:
+                    out["target"] = {"value": "", "rule": "UNQUALIFIED_REPOSITORY_OPERATION",
+                                     "evidence": scope}
     if "op" in keys:
         stated = stated_git_operations(goal)
         if len(stated) == 1:
