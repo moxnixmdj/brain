@@ -23385,7 +23385,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "6dce8d0ce8f4b578ca90cfb6f7934e252fbafd64e63b5d5d4a12b0911f0fbb14",
+    "source_sha256": "c43a6cfa0129240d217b5f0fbf97ea52d96f8a2697480d3d324f14c0d141d163",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24030,7 +24030,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "f61c434659c8e518e62cbcc7654cb74bd797ca9816fa809c037dde2b95874d21",
+    "source_sha256": "f30733a3f7217142967384ffe61d2805e905c67df41af1fe812dfc6ce1258835",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25994,7 +25994,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "68989753b37aba7a27cc58138ed0ca35b5bab14240e4dcc09d1557ab485470c2",
+    "source_sha256": "324e7266815bd87b61d431b12ec7cd681b0e9bff3d8a4586ea08a60a458bc5d7",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -26086,7 +26086,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "44259fa9c082b25884e5814913fbd616bb91771705b8283934916b07fb460f4b",
+    "source_sha256": "4ccd5208eb3930f7a32391c24a4fb1600f02edc34a83c23c2fb31153047af23a",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30489,7 +30489,7 @@
   "engines": 26,
   "knowledge_documents": 206,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6531,
+  "research_index_records": 6532,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ed636f60823d80f491d69401abc58c81d8f911fab7c2ecce3610965adb69a586"
+  "value": "8e3a939d108c3e28e39087c125c44cfbe1c80526f56bcc0128401e51786e5507"
  },
  "engines": [
   {
@@ -57842,7 +57842,7 @@
   "included_source_count": 995,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "43bd9512fcba2ffdab57f4c251278d6a0cc71987c3bc3921d2f5bc83938fd9c0"
+  "source_tree_digest": "6a2bb0acdc9e44d5499762a63ebf74753a57613e266f743109de30e6fc7992fd"
  },
  "research_index": [
   {
@@ -202440,6 +202440,51 @@
    }
   },
   {
+   "action_id": "A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "678af6c3a3c27269094d3c3ca55bf09cfb65d18264f0a460804069e08ea1766a",
+   "status": "",
+   "terms": {
+    "105": 1,
+    "18": 1,
+    "2.6": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 1,
+    "3.3": 1,
+    "46": 1,
+    "68": 1,
+    "74": 1,
+    "a_repair_search_must_contain_the_defect_v1_20261031_v1": 1,
+    "above": 1,
+    "adding": 1,
+    "correct": 2,
+    "failing": 2,
+    "fixture": 3,
+    "green": 2,
+    "no": 3,
+    "not": 4,
+    "now": 2,
+    "one": 3,
+    "oracle": 2,
+    "own": 3,
+    "repair": 6,
+    "reported": 2,
+    "routing": 2,
+    "search": 2,
+    "so": 3,
+    "test": 3,
+    "tests": 6,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_REPAIR_SENTENCE_THAT_NAMES_NO_TEST_STILL_REPAIRS_THE_SOURCE_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -230365,7 +230410,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "d49d4fa431d143c00f5d26e8b289d03b80ef631d5083f457045da9d8f575bf9a",
+   "sha256": "313783bb81b71327467c0521401ab2e4f18b74e9588b8988df8247cd6916de5e",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 10,
    "symbols": [
