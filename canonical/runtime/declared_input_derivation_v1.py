@@ -220,6 +220,56 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     return dict(found)
 
 
+def _holds_tests(directory: pathlib.Path) -> bool:
+    """True when ``directory`` itself contains test files, or a ``tests``/``test`` child does.
+
+    Streams and stops at the first hit, so the check costs one ``readdir`` on a real
+    project and nothing more.  It is a fact about the tree, not an inference.
+    """
+    try:
+        for child in directory.iterdir():
+            if child.is_file() and _TEST_NAME_RE.search(child.name):
+                return True
+            if child.is_dir() and child.name in {"tests", "test"}:
+                for inner in child.iterdir():
+                    if inner.is_file() and _TEST_NAME_RE.search(inner.name):
+                        return True
+    except OSError:
+        return False
+    return False
+
+
+def _project_root(root: pathlib.Path, source_rel: str, max_up: int = 3) -> str | None:
+    """The nearest ancestor of a stated source file that also owns its tests.
+
+    A repository's tests are not always beside the code: ``src/app/calc.py`` with
+    ``tests/test_calc.py`` needs the directory that CONTAINS both, because the
+    tools that run the suite require the tests to live under the source root and
+    the tests import the package by its top-level name.  Measured 2026-10-29:
+    with ``source_root`` pinned to the source file's parent, that layout refused
+    with NO_TEST_FILES_UNDER_SOURCE_ROOT and the identical bug repaired in the
+    flat layout.
+
+    The walk is bounded (3 levels), starts at the file's parent, stops at the
+    first ancestor that holds tests, and never leaves the repository.  If the
+    file's own directory already holds tests -- the common case -- this returns
+    that directory and nothing changes.
+    """
+    base = (pathlib.Path(root) / source_rel).parent
+    repo = pathlib.Path(root)
+    for _ in range(max_up + 1):
+        if _holds_tests(base):
+            try:
+                rel = base.resolve().relative_to(repo.resolve())
+            except ValueError:
+                return None
+            return str(rel) if str(rel) != "." else "."
+        if base == repo or repo not in base.parents:
+            return None
+        base = base.parent
+    return None
+
+
 def _tree_of(root: pathlib.Path, rel: str) -> ast.Module:
     """The parsed module (mtime-memoized), or an empty module when unreadable."""
     try:
@@ -447,7 +497,16 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "source_root" in keys and len(sources) == 1:
         parent = str(pathlib.PurePosixPath(sources[0]).parent)
         if parent and (pathlib.Path(root) / parent).is_dir():
-            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
+            rule = "PATH_DIR_FROM_STATED_FILE_PARENT"
+            # src-layout: ``src/app/calc.py`` whose tests live in ``tests/`` needs the
+            # directory that CONTAINS both, or the suite cannot import the package by
+            # its top-level name and a correct repair reads as red.  Bounded to three
+            # ancestors and only taken when the stated file's own directory holds no
+            # tests, so a package layout is untouched.
+            widened = _project_root(pathlib.Path(root), sources[0])
+            if widened and widened != parent:
+                parent, rule = widened, "PATH_DIR_NEAREST_ANCESTOR_THAT_OWNS_THE_TESTS"
+            out["source_root"] = {"value": parent, "rule": rule,
                                   "evidence": sources[0]}
     # The same rule for SEVERAL stated files, but ONLY when the sentence already
     # gave them ROLES ("from A to B"): the directory that holds both ends of a

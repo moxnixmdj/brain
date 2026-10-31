@@ -73,10 +73,22 @@ MAX_TIMEOUT_S=600
 
 
 def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes]:
-    """Run the stated test command verbatim.  No shell, so nothing is invented."""
+    """Run the stated test command verbatim.  No shell, so nothing is invented.
+
+    The command line is the caller's; the IMPORT PATH is the tree's.  Measured
+    2026-10-29: without the shared ``_source_env`` the gate that matters most --
+    "the stated test passes IN PLACE, against the real source tree, after the
+    write" -- could not run at all in a package layout.  The patch was found, the
+    bytes were written, and the in-place verification then failed with the same
+    ModuleNotFoundError the pre-apply gate had seen, so ``from pkg.calc import
+    add`` was reported as FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY
+    even though the candidate was correct.  One environment, one definition,
+    shared with every other member of the repair family.
+    """
     try:
         proc=subprocess.run(
             argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
+            env={**os.environ,**_REPAIR._PATCH._source_env(cwd)},
         )
     except subprocess.TimeoutExpired:
         return None,b"TIMEOUT"
