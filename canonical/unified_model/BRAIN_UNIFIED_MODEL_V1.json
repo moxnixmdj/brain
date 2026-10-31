@@ -30489,7 +30489,7 @@
   "engines": 26,
   "knowledge_documents": 205,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6526,
+  "research_index_records": 6527,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6741be517f0383c8e5fdc8f9449802c05f7f283bccd276e36151278f1f439528"
+  "value": "f9bf68c48fbc355ac309cb99e7de578ebef9bdbf11b81bdef1e9e6c03120de5f"
  },
  "engines": [
   {
@@ -202413,6 +202413,29 @@
     "tree": 4,
     "v1": 2,
     "whether": 2
+   }
+  },
+  {
+   "action_id": "A_REQUEST_IS_NOT_DAMAGE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_REQUEST_IS_NOT_DAMAGE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REQUEST_IS_NOT_DAMAGE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5b7d78bb1ec54bccd12f0e2e937fa196bf3c84ddc85c5aa7298ad6adc1828c39",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_request_is_not_damage_v1_20261031_v1": 1,
+    "damage": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "name_the_file_the_sentence_names_in_the_allow_list_the_harness_already_has": 1,
+    "not": 1,
+    "request": 1,
+    "the_case_declares_the_file_its_own_sentence_asks_to_change__as_the_repair_cases_always_have": 1,
+    "the_damage_oracle_asked_whether_a_file_changed_without_asking_whether_the_request_named_that_file__measured_2026_10_31_on_add_parameter_which_real_and_damaged_in_the_same_row": 1,
+    "v1": 2
    }
   },
   {
