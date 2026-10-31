@@ -12,9 +12,13 @@ from __future__ import annotations
 
 import ast
 import builtins
+import collections
 import hashlib
 import json
+import os
 import pathlib
+
+from canonical.swe_kernel import parallel_fork_map
 
 _BUILTIN_NAMES = frozenset(dir(builtins))
 
@@ -49,24 +53,43 @@ def _py_files(source_root):
     if source_root.is_file():
         return [source_root]
     from canonical.runtime.tree_sitter_swe_kernel_v1 import IGNORED_DIRS  # stdlib-only module
-    return sorted(path for path in source_root.rglob("*.py")
-                  if not any(part in IGNORED_DIRS
-                             for part in path.relative_to(source_root).parts))
+    found: list[pathlib.Path] = []
+    stack = [source_root]
+    while stack:
+        cur = stack.pop()
+        try:
+            with os.scandir(cur) as it:
+                for entry in it:
+                    name = entry.name
+                    if entry.is_dir(follow_symlinks=False):
+                        if name not in IGNORED_DIRS:
+                            stack.append(pathlib.Path(entry.path))
+                    elif name.endswith(".py") and entry.is_file(follow_symlinks=False):
+                        found.append(pathlib.Path(entry.path))
+        except OSError:
+            continue
+    return sorted(found)
 
 
 # Process-local attestations of bytes this producer actually derived. Neither a
 # source digest nor a self-reported row digest authenticates persisted semantics.
 # New processes rederive once; warm requests and sibling outputs retain reuse.
 _TRUSTED_OUTPUTS: dict[str, str] = {}
+_TRUSTED_DIGEST_ROWS: dict[str, tuple[dict, str, list]] = {}
 
 
-def _remember_output(output, data):
+def _remember_output(output, data, *, fast_rows=None, source_root_rel="", unparseable=None):
     digest = hashlib.sha256(data).hexdigest()
     key = str(output)
     _TRUSTED_OUTPUTS.pop(key, None)
     _TRUSTED_OUTPUTS[key] = digest
     while len(_TRUSTED_OUTPUTS) > 128:
         _TRUSTED_OUTPUTS.pop(next(iter(_TRUSTED_OUTPUTS)))
+    if fast_rows is not None:
+        _TRUSTED_DIGEST_ROWS.pop(digest, None)
+        _TRUSTED_DIGEST_ROWS[digest] = (fast_rows, str(source_root_rel), list(unparseable or []))
+        while len(_TRUSTED_DIGEST_ROWS) > 16:
+            _TRUSTED_DIGEST_ROWS.pop(next(iter(_TRUSTED_DIGEST_ROWS)))
     return digest
 
 
@@ -81,6 +104,11 @@ def _cached_modules(output):
         digest = hashlib.sha256(data).hexdigest()
         if expected != digest:
             return {}
+        fast = _TRUSTED_DIGEST_ROWS.get(digest)
+        if fast is not None:
+            rows, sr_rel, unp = fast
+            _CACHE_META.update(output_path=str(output), digest=digest, source_root=sr_rel, unparseable=list(unp))
+            return rows
         old = json.loads(data)
     except (OSError, ValueError):
         return {}
@@ -210,56 +238,83 @@ class _ModuleIndexer(ast.NodeVisitor):
         self.imports = []              # {module, names}
         self.module_names = set()      # module-level bound names
         self._scope_stack = []         # [{"qualname": str, "locals": set}]
+        self._local_counts = collections.Counter()
+        self._cur_ctx = "<module>"
+        self._cur_parent = ""
 
     # -- scopes -----------------------------------------------------------
     def _push_scope(self, qualname, is_class=False):
         self._scope_stack.append({"qualname": qualname, "locals": set(), "class": is_class})
+        joined = ".".join(s["qualname"] for s in self._scope_stack)
+        self._cur_ctx = joined
+        self._cur_parent = joined
 
     def _pop_scope(self):
-        self._scope_stack.pop()
+        popped = self._scope_stack.pop()
+        lc = self._local_counts
+        for nm in popped["locals"]:
+            c = lc[nm] - 1
+            if c <= 0:
+                del lc[nm]
+            else:
+                lc[nm] = c
+        if not self._scope_stack:
+            self._cur_ctx = "<module>"
+            self._cur_parent = ""
+        else:
+            joined = ".".join(s["qualname"] for s in self._scope_stack)
+            self._cur_ctx = joined
+            self._cur_parent = joined
+
+    def _add_local(self, name: str) -> None:
+        top = self._scope_stack[-1]["locals"]
+        if name not in top:
+            top.add(name)
+            self._local_counts[name] += 1
 
     def _context(self):
-        if not self._scope_stack:
-            return "<module>"
-        return ".".join(s["qualname"] for s in self._scope_stack)
+        return self._cur_ctx
 
     def _parent_qual(self):
-        return ".".join(s["qualname"] for s in self._scope_stack if s["qualname"] != "<module>")
+        return self._cur_parent
 
     # -- definitions ------------------------------------------------------
     def _define(self, name, kind, node, extra=None):
-        parent = self._parent_qual()
+        parent = self._cur_parent
         qual = (parent + "." + name) if parent else name
-        row = {
-            "name": name,
-            "qualname": qual,
+        base_row = {
+            "end_lineno": getattr(node, "end_lineno", node.lineno),
             "kind": kind,
             "lineno": node.lineno,
-            "end_lineno": getattr(node, "end_lineno", node.lineno),
+            "name": name,
+            "qualname": qual,
         }
         if extra:
-            row.update(extra)
+            base_row.update(extra)
+            row = {k: base_row[k] for k in sorted(base_row)}
+        else:
+            row = base_row
         self.definitions.append(row)
         if not self._scope_stack:
             self.module_names.add(name)
         else:
-            self._scope_stack[-1]["locals"].add(name)
+            self._add_local(name)
         return qual
 
     def visit_Import(self, node):
         names = sorted(a.name for a in node.names)
         for a in node.names:
             self.module_names.add((a.asname or a.name.split(".")[0]))
-        self.imports.append({"module": ".".join(names), "names": names, "form": "import"})
+        self.imports.append({"form": "import", "module": ".".join(names), "names": names})
 
     def visit_ImportFrom(self, node):
         names = sorted(a.name for a in node.names)
         for a in node.names:
             self.module_names.add(a.asname or a.name)
         self.imports.append({
+            "form": "from",
             "module": str(node.module or ""),
             "names": names,
-            "form": "from",
         })
 
     def visit_ClassDef(self, node):
@@ -281,7 +336,7 @@ class _ModuleIndexer(ast.NodeVisitor):
         })
         self._push_scope(node.name)
         for arg in _signature(node):
-            self._scope_stack[-1]["locals"].add(arg.lstrip("*"))
+            self._add_local(arg.lstrip("*"))
         self.generic_visit(node)
         self._pop_scope()
 
@@ -293,10 +348,16 @@ class _ModuleIndexer(ast.NodeVisitor):
 
     # -- bindings ---------------------------------------------------------
     def _bind_target(self, target):
+        if isinstance(target, ast.Name):
+            if self._scope_stack:
+                self._add_local(target.id)
+            else:
+                self.module_names.add(target.id)
+            return
         for node in ast.walk(target):
             if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)):
                 if self._scope_stack:
-                    self._scope_stack[-1]["locals"].add(node.id)
+                    self._add_local(node.id)
                 else:
                     self.module_names.add(node.id)
 
@@ -331,16 +392,15 @@ class _ModuleIndexer(ast.NodeVisitor):
     def visit_ExceptHandler(self, node):
         if node.name:
             if self._scope_stack:
-                self._scope_stack[-1]["locals"].add(node.name)
+                self._add_local(node.name)
             else:
                 self.module_names.add(node.name)
         self.generic_visit(node)
 
     # -- references ---------------------------------------------------------
     def _resolve(self, name):
-        for scope in reversed(self._scope_stack):
-            if name in scope["locals"]:
-                return "local"
+        if name in self._local_counts:
+            return "local"
         if name in self.module_names:
             return "module"
         if name in _BUILTIN_NAMES:
@@ -349,31 +409,67 @@ class _ModuleIndexer(ast.NodeVisitor):
 
     def visit_Name(self, node):
         if isinstance(node.ctx, ast.Load):
+            name = node.id
+            if name in self._local_counts:
+                res = "local"
+            elif name in self.module_names:
+                res = "module"
+            elif name in _BUILTIN_NAMES:
+                res = "builtin"
+            else:
+                res = "unknown"
             self.references.append({
-                "name": node.id,
-                "lineno": node.lineno,
                 "col": node.col_offset,
-                "context": self._context(),
-                "resolution": self._resolve(node.id),
+                "context": self._cur_ctx,
+                "lineno": node.lineno,
+                "name": name,
+                "resolution": res,
             })
-        self.generic_visit(node)
 
     # -- call edges ---------------------------------------------------------
     def visit_Call(self, node):
-        caller = self._context()
+        caller = self._cur_ctx
         func = node.func
-        callee = None
         if isinstance(func, ast.Name):
-            callee = func.id
+            self.calls.append({"callee": func.id, "caller": caller, "lineno": node.lineno})
         elif isinstance(func, ast.Attribute):
-            callee = func.attr
-        if callee:
-            self.calls.append({
-                "caller": caller,
-                "callee": callee,
-                "lineno": node.lineno,
-            })
+            self.calls.append({"callee": func.attr, "caller": caller, "lineno": node.lineno})
         self.generic_visit(node)
+
+    def generic_visit(self, node):
+        visit = self.visit
+        for fname in node._fields:
+            field_val = getattr(node, fname, None)
+            if isinstance(field_val, list):
+                for item in field_val:
+                    if isinstance(item, ast.AST):
+                        visit(item)
+            elif isinstance(field_val, ast.AST):
+                visit(field_val)
+
+    def visit(self, node):
+        fn = _VISITOR_TABLE.get(type(node))
+        if fn is not None:
+            fn(self, node)
+        else:
+            self.generic_visit(node)
+
+
+_VISITOR_TABLE = {
+    ast.Name: _ModuleIndexer.visit_Name,
+    ast.Call: _ModuleIndexer.visit_Call,
+    ast.Assign: _ModuleIndexer.visit_Assign,
+    ast.AnnAssign: _ModuleIndexer.visit_AnnAssign,
+    ast.AugAssign: _ModuleIndexer.visit_AugAssign,
+    ast.For: _ModuleIndexer.visit_For,
+    ast.With: _ModuleIndexer.visit_With,
+    ast.ExceptHandler: _ModuleIndexer.visit_ExceptHandler,
+    ast.FunctionDef: _ModuleIndexer.visit_FunctionDef,
+    ast.AsyncFunctionDef: _ModuleIndexer.visit_AsyncFunctionDef,
+    ast.ClassDef: _ModuleIndexer.visit_ClassDef,
+    ast.Import: _ModuleIndexer.visit_Import,
+    ast.ImportFrom: _ModuleIndexer.visit_ImportFrom,
+}
 
 
 def _module_names_prepass(tree):
@@ -407,36 +503,61 @@ def _module_names_prepass(tree):
 
 def _parse_single_module_worker(item):
     """Top-level worker for parallel cold AST indexing on large trees."""
-    rel, sha, path_str = item
+    rel, sha, path_str, json_only = item
     try:
         raw = pathlib.Path(path_str).read_bytes()
         tree = ast.parse(raw.decode("utf-8"), filename=path_str)
     except Exception as exc:
         return ("err", {
+            "detail": str(exc)[:400],
+            "error": type(exc).__name__,
             "path": rel,
             "sha256": sha,
-            "error": type(exc).__name__,
-            "detail": str(exc)[:400],
         })
     indexer = _ModuleIndexer()
     indexer.module_names |= _module_names_prepass(tree)
     indexer.visit(tree)
-    row = {
-        "path": rel,
-        "sha256": sha,
+    calls = sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"]))
+    definitions = sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"]))
+    references = sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"]))
+    body = {
+        "calls": calls,
+        "definitions": definitions,
         "imports": indexer.imports,
-        "definitions": sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"])),
-        "references": sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"])),
-        "calls": sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"])),
+        "path": rel,
+        "references": references,
+        "sha256": sha,
     }
-    row["row_sha256"] = _row_sha(row)
+    body_json = json.dumps(body, separators=(",", ":"))
+    row_sha = hashlib.sha256(body_json.encode("utf-8")).hexdigest()
+    if json_only:
+        suffix = f',"sha256":"{sha}"}}'
+        row_json = body_json[:-len(suffix)] + f',"row_sha256":"{row_sha}"' + suffix
+        return ("ok_json", {
+            "path": rel,
+            "sha256": sha,
+            "definitions": definitions,
+            "calls": calls,
+            "ref_count": len(references),
+            "row_json": row_json,
+        })
+    row = {
+        "calls": calls,
+        "definitions": definitions,
+        "imports": indexer.imports,
+        "path": rel,
+        "references": references,
+        "row_sha256": row_sha,
+        "sha256": sha,
+    }
     return ("ok", row)
 
 
-def _collect_index_parts(source_root_arg, root, cached=None):
+def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False, cached_loader=None):
     """Request-local index construction shared by staged workflows and the adapter."""
     repo = pathlib.Path(root).resolve()
     source_root = _safe_root(repo, source_root_arg)
+    cached_loaded = cached is not None
     cached = cached or {}
     modules_by_rel = {}
     ordered_rels = []
@@ -450,35 +571,22 @@ def _collect_index_parts(source_root_arg, root, cached=None):
         raw = path.read_bytes()
         rel = str(path.relative_to(repo)).replace("\\", "/")
         sha = hashlib.sha256(raw).hexdigest()
+        if not cached_loaded and cached_loader is not None:
+            cached = cached_loader() or {}
+            cached_loaded = True
         old = cached.get(rel)
         if old is not None and old.get("sha256") == sha:
-            # The file's bytes are the ones this row was built from, and the row
-            # itself verified.  Re-deriving it would produce exactly this row.
             modules_by_rel[rel] = old
             ordered_rels.append(rel)
             reused += 1
             continue
         ordered_rels.append(rel)
-        to_parse.append((rel, sha, str(path)))
+        to_parse.append((rel, sha, str(path), json_only))
 
-    use_mp = False
-    if len(to_parse) >= 64:
-        try:
-            import multiprocessing
-            use_mp = not multiprocessing.current_process().daemon and (os.cpu_count() or 1) > 1
-        except Exception:
-            use_mp = False
+    results = parallel_fork_map(_parse_single_module_worker, to_parse, min_items=64)
 
-    if use_mp:
-        from concurrent.futures import ProcessPoolExecutor
-        workers = min(os.cpu_count() or 4, 8)
-        with ProcessPoolExecutor(max_workers=workers) as ex:
-            results = list(ex.map(_parse_single_module_worker, to_parse, chunksize=max(8, len(to_parse) // (workers * 4))))
-    else:
-        results = [_parse_single_module_worker(item) for item in to_parse]
-
-    for kind, payload in results:
-        if kind == "ok":
+    for (_rel_item, _sha_item, _, _jo_item), (kind, payload) in zip(to_parse, results):
+        if kind in ("ok", "ok_json"):
             modules_by_rel[payload["path"]] = payload
         else:
             unparseable.append(payload)
@@ -497,40 +605,40 @@ def _collect_index_parts(source_root_arg, root, cached=None):
         for d in row["definitions"]:
             qual = rel.replace("/", ".").removesuffix(".py") + ":" + d["qualname"]
             symbols[qual] = {
+                "end_lineno": d["end_lineno"],
+                "kind": d["kind"],
+                "lineno": d["lineno"],
                 "module": rel,
                 "name": d["name"],
                 "qualname": d["qualname"],
-                "kind": d["kind"],
-                "lineno": d["lineno"],
-                "end_lineno": d["end_lineno"],
             }
         for c in row["calls"]:
             if c["caller"] != "<module>":
                 callers_of.setdefault(c["callee"], set()).add(c["caller"])
-        reference_total += len(row["references"])
+        reference_total += row["ref_count"] if "ref_count" in row else len(row["references"])
         call_edge_total += len(row["calls"])
 
     report = {
+        "callers_of": {k: sorted(v) for k, v in sorted(callers_of.items())},
+        "modules": modules,
         "schema": "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1",
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
-        "modules": modules,
-        "symbols": symbols,
-        "callers_of": {k: sorted(v) for k, v in sorted(callers_of.items())},
-        "unparseable": unparseable,
+        "symbols": {k: symbols[k] for k in sorted(symbols)},
         "totals": {
-            "files": len(modules),
-            "unparseable": len(unparseable),
-            "symbols": len(symbols),
-            "references": reference_total,
             "call_edges": call_edge_total,
+            "files": len(modules),
+            "references": reference_total,
+            "symbols": len(symbols),
+            "unparseable": len(unparseable),
         },
+        "unparseable": unparseable,
     }
     return report, reused
 
 
 def build_index(source_root, root):
     """Build the ordinary index without publishing a report or modifying sources."""
-    report, _ = _collect_index_parts(source_root, root)
+    report, _ = _collect_index_parts(source_root, root, json_only=False)
     return report
 
 
@@ -542,8 +650,12 @@ def run(args, root):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
     source_root_rel = source_root.relative_to(repo).as_posix()
-    cached = _cached_modules(output) or _cached_modules_for_tree(output, source_root_rel)
-    report, reused = _collect_index_parts(source_root_rel, repo, cached)
+    report, reused = _collect_index_parts(
+        source_root_rel,
+        repo,
+        json_only=True,
+        cached_loader=lambda: _cached_modules(output) or _cached_modules_for_tree(output, source_root_rel),
+    )
     modules = report["modules"]
     unparseable = report["unparseable"]
     symbols = report["symbols"]
@@ -557,9 +669,30 @@ def run(args, root):
     data = output.read_bytes() if unchanged else None
     if data is None or hashlib.sha256(data).hexdigest() != _CACHE_META.get("digest"):
         output.parent.mkdir(parents=True, exist_ok=True)
-        data = (json.dumps(report, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        row_jsons = [
+            m["row_json"] if "row_json" in m else json.dumps(m, sort_keys=True, separators=(",", ":"))
+            for m in modules
+        ]
+        head_part = '{"callers_of":' + json.dumps(callers_of, separators=(",", ":")) + ',"modules":['
+        tail_obj = {
+            "schema": report["schema"],
+            "source_root": report["source_root"],
+            "symbols": symbols,
+            "totals": report["totals"],
+            "unparseable": [
+                {k: u[k] for k in sorted(u)} for u in unparseable
+            ],
+        }
+        tail_part = "]," + json.dumps(tail_obj, separators=(",", ":"))[1:] + "\n"
+        data = (head_part + ",".join(row_jsons) + tail_part).encode("utf-8")
         output.write_bytes(data)
-    output_sha = _remember_output(output, data)
+    output_sha = _remember_output(
+        output,
+        data,
+        fast_rows={m["path"]: m for m in modules},
+        source_root_rel=report["source_root"],
+        unparseable=unparseable,
+    )
     return {
         "adapter": "python_source_symbol_index",
         "output_path": str(output.relative_to(repo)).replace("\\", "/"),

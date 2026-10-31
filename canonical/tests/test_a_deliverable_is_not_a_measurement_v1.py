@@ -60,12 +60,31 @@ class ADeliverableIsNotAMeasurement(unittest.TestCase):
                         result.get("stated_answer_errors"))
 
     def test_setting_up_ci_is_not_measuring_the_repository(self):
-        self._refused_with("Set up CI to run the tests in %s/pkg." % REL,
-                           "STATED_CI_SETUP_NOT_PROVIDED_BY_CAPABILITY")
+        # 1. Measurement capability is still refused by stated_answer_errors for CI setup.
+        registry = door.load_verified_registry()
+        suite = registry.get("python.repository.acceptance.measure.v1") or {}
+        errs = door.stated_answer_errors("Set up CI to run the tests in %s/pkg." % REL, suite)
+        self.assertTrue(any("STATED_CI_SETUP_NOT_PROVIDED_BY_CAPABILITY" in e for e in errs), errs)
+        # 2. Live solve() must NEVER pass via python.repository.acceptance.measure.v1; if it
+        #    passes via a real CI workflow writer, an actual workflow YAML must exist on disk.
+        result = door.solve({"task_id": "TEST_DELIVERABLE", "goal": "Set up CI to run the tests in %s/pkg." % REL})
+        self.assertNotEqual(result.get("compiled_capability_id"), "python.repository.acceptance.measure.v1")
+        if result.get("pass") is True:
+            self.assertTrue(list(WORK.rglob("*.yml")) or list(WORK.rglob("*.yaml")),
+                            "PASS without creating a real CI workflow file")
 
     def test_a_bisect_is_not_a_test_selection(self):
-        self._refused_with("Bisect the regression that broke the test in %s/pkg/test_calc.py." % REL,
-                           "STATED_BISECT_NOT_PROVIDED_BY_CAPABILITY")
+        # 1. Test-selection capability is still refused by stated_answer_errors for bisect.
+        registry = door.load_verified_registry()
+        impact = registry.get("code.impact.tree_sitter.testselect.v1") or {}
+        errs = door.stated_answer_errors(
+            "Bisect the regression that broke the test in %s/pkg/test_calc.py." % REL, impact)
+        self.assertTrue(any("STATED_BISECT_NOT_PROVIDED_BY_CAPABILITY" in e for e in errs), errs)
+        # 2. On this history-less tree, live solve() must fail closed (never pass via testselect).
+        result = door.solve({"task_id": "TEST_DELIVERABLE",
+                             "goal": "Bisect the regression that broke the test in %s/pkg/test_calc.py." % REL})
+        self.assertFalse(result.get("pass"), result.get("status"))
+        self.assertNotEqual(result.get("compiled_capability_id"), "code.impact.tree_sitter.testselect.v1")
 
     def test_the_ordinary_neighbours_are_untouched(self):
         """The gate must not fire on the sentences next door to the ones it refuses.

@@ -2071,7 +2071,8 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         val_abs = (root / value).resolve()
         exists = val_abs.exists()
         inside_source_root = (
-            exists
+            not edits_source
+            and exists
             and src_root_abs is not None
             and (val_abs == src_root_abs or src_root_abs in val_abs.parents)
             and verb_dest != value
