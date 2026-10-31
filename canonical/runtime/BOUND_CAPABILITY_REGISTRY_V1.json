@@ -6176,9 +6176,9 @@
         "verified"
       ],
       "source": {
-        "module": "coverage",
-        "type": "pypi",
-        "version_family": ">=7.0"
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -6444,9 +6444,9 @@
         "verified"
       ],
       "source": {
-        "module": "bandit",
-        "type": "pypi",
-        "version_family": ">=1.7"
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -8273,6 +8273,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+        "adapter_sha256": "726e06b24589f3451c3a9626e1d75e9cd30747d5531266e8ec4615b203d7b79d",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
@@ -8532,6 +8533,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
+        "adapter_sha256": "c494fa06f4078cdeb7bce26b86d2e462c3bf9305938d32a5714b69524bd35d17",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
