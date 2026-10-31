@@ -975,8 +975,22 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if _src_tree is not None:
             _defined = {n.name for n in ast.walk(_src_tree)
                         if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+            # THE HOST IS NAMED BY A ROLE PHRASE, NOT ONLY BY "in <name>".
+            #
+            # Measured 2026-10-31 on the advanced census, request 38: "Extract the loop in
+            # the function total in <f> into a helper."  The only phrase pattern was
+            # ``(?:from|in|of)\s+<name>``, which reads "in the" and answers "the" -- not a
+            # function -- so no host was found, no span was derived, and the door refused
+            # the request REGION_INVALID.  The engine was never the problem: called with
+            # qualname=total, lines 3-4 it returns gate PASS and one edit.  An engineer
+            # names the host with its role ("the function total", "the method area"), which
+            # is the same role vocabulary the front compiler already anchors on, so it is
+            # read here too.
             _phrases = [m.group(1) for m in re.finditer(
                 r"\b(?:from|in|of)\s+([A-Za-z_][A-Za-z0-9_]*)", str(goal or ""), re.I)]
+            _phrases += [m.group(1) for m in re.finditer(
+                r"\b(?:function|method|def|routine)\s+`?([A-Za-z_][A-Za-z0-9_]*)",
+                str(goal or ""), re.I)]
             _hosts = [n for n in dict.fromkeys(_phrases) if n in _defined]
             _host = _hosts[0] if len(_hosts) == 1 else ""
             _fn = None
@@ -989,6 +1003,34 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                            + list(getattr(_fn.args, "posonlyargs", []))}
                 _module_names = {t.id for n in _src_tree.body if isinstance(n, ast.Assign)
                                  for t in n.targets if isinstance(t, ast.Name)}
+                # A STATED REGION KIND OUTRANKS A GUESSED BLOCK.
+                #
+                # When the sentence names the region ("the loop", "the for loop"), the span
+                # it asks for is the statement of that kind, and the self-contained-block
+                # search below would otherwise return a WIDER run that starts earlier (for
+                # "the loop in total" it picks the accumulator assignment as well, and the
+                # adapter refuses a span that begins before the loop).  Only the single
+                # statement counts: two loops in the host is ambiguity, not a choice.
+                _wants_loop = bool(re.search(
+                    r"\b(?:the\s+)?(?:for|while)?\s*loop\b|\biteration\b", str(goal or ""), re.I))
+                if _wants_loop:
+                    _loops = [st for st in ast.walk(_fn)
+                              if isinstance(st, (ast.For, ast.AsyncFor, ast.While))]
+                    if len(_loops) == 1:
+                        _only = _loops[0]
+                        out["qualname"] = {"value": _host, "rule": "QUALNAME_FROM_ENCLOSING_FUNCTION",
+                                           "evidence": sources[0]}
+                        out["start_line"] = {"value": _only.lineno,
+                                             "rule": "SPAN_IS_THE_STATED_REGION_KIND",
+                                             "evidence": "%s:%d-%d loop" % (_host, _only.lineno,
+                                                                            _only.end_lineno)}
+                        out["end_line"] = {"value": _only.end_lineno,
+                                           "rule": "SPAN_IS_THE_STATED_REGION_KIND",
+                                           "evidence": _host}
+                        if "module" in keys and "module" not in out:
+                            out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                             "rule": "MODULE_IS_THE_STATED_FILE",
+                                             "evidence": sources[0]}
                 _body = [st for st in _fn.body if isinstance(st, ast.stmt)]
                 _blocked = (ast.Return, ast.Raise, ast.Break, ast.Continue, ast.Yield,
                             ast.Global, ast.Nonlocal, ast.FunctionDef, ast.AsyncFunctionDef,

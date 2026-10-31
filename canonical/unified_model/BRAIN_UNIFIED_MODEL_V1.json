@@ -30476,9 +30476,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 217,
+  "knowledge_documents": 218,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6546,
+  "research_index_records": 6547,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2259797ca8b4fa7975dcdf8c8cbadff7596c131d0b0f5cc1992a2274f0d8fc47"
+  "value": "8361e8e47e866b53137992b5295f475786dab2a23f7ba4c488ea5ce6623735b4"
  },
  "engines": [
   {
@@ -44827,6 +44827,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 4791,
+   "headings": [
+    "Hardcore software-engineering problem inventory — V19",
+    "§0 The answer in one paragraph",
+    "§1 Measurements on `9e6a366` + this change",
+    "§2 What the two rules are",
+    "§3 The neighbours the rules must not touch (pinned)",
+    "§4 Still open, in the order the measurements now support",
+    "§5 Pre-existing reds (unchanged, verified again here)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md",
+   "sha256": "4c1cf539765c99585fd688d4df2ed3fb13cc9a970ab9121e448fdc19c5533b2a",
+   "summary": "Measured 2026-10-31 on `9e6a366` (branch `arena/26b6e2d4-brain`). Supersedes V18. V18 said containment was safe to attempt; this document records the first containment that *served* instead of merely refusing.",
+   "terms": {
+    "22": 2,
+    "35": 2,
+    "38": 2,
+    "60": 4,
+    "68": 2,
+    "9e6a366": 2,
+    "adapter": 4,
+    "advanced": 2,
+    "any": 2,
+    "before": 3,
+    "derivation": 4,
+    "end_line": 3,
+    "extract": 4,
+    "first": 3,
+    "helper": 4,
+    "host": 7,
+    "kind": 5,
+    "loop": 5,
+    "matrix": 4,
+    "ms": 4,
+    "names": 4,
+    "new": 3,
+    "no": 6,
+    "none": 3,
+    "not": 8,
+    "nothing": 3,
+    "now": 4,
+    "one": 4,
+    "only": 3,
+    "own": 3,
+    "real": 3,
+    "refuse": 3,
+    "refused": 4,
+    "region": 7,
+    "region_invalid": 3,
+    "request": 3,
+    "requests": 4,
+    "role": 3,
+    "rules": 3,
+    "sentence": 4,
+    "served": 4,
+    "start_line": 3,
+    "stated": 3,
+    "statement": 4,
+    "still": 4,
+    "total": 3,
+    "two": 5,
+    "unchanged": 5
+   },
+   "title": "Hardcore software-engineering problem inventory — V19",
+   "title_terms": [
+    "hardcore",
+    "inventory",
+    "problem",
+    "software-engineering",
+    "v19"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23697,
    "headings": [
     "What is actually missing — the complete problem list for a hardcore software engineer",
@@ -58752,10 +58827,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1008,
+  "included_source_count": 1009,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "51b8396fff14a8510fdefa0519f899c0d6ff0a74a93ad71dca289b5ca175a771"
+  "source_tree_digest": "7d1e1e562dd5e9be3b3a70601f9f20ea389ab3fc3d263f73f0497b51c60cc75c"
  },
  "research_index": [
   {
@@ -202727,6 +202802,29 @@
    }
   },
   {
+   "action_id": "A_PLACEHOLDER_IS_NOT_A_STATEMENT_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_PLACEHOLDER_IS_NOT_A_STATEMENT_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_PLACEHOLDER_IS_NOT_A_STATEMENT_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "71a957e8b9c3853bc3da0a65675e292ef55b5ce0c7a53ca031c39118a036b940",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_placeholder_is_not_a_statement_v1_20261031_v1": 1,
+    "a_region_the_sentence_states_is_asked_for_from_the_derivation_before_any_placeholder_is_written_and_a_host_named_by_a_role_phrase_or_a_region_named_by_its_kind_is_read_from_the_stated_file_s_ast": 1,
+    "an_extract_request_refused_region_invalid_because_the_front_binder_wrote_the_literal_0_into_start_line_and_end_line_before_anything_asked_declared_input_derivation_v1_and_the_derivation_could_not_read_a_host_named_by_a_role_phrase_the_function_total_nor_a_region_named_by_its_kind_the_loop__measured_2026_10_31_advanced_census_request_38_sentence_states_a_region_the_repository_proves_and_the_door_refused_it": 1,
+    "ask_the_proof_before_writing_the_placeholder_and_read_the_region_the_sentence_names": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "placeholder": 1,
+    "statement": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_PREMISE_IS_NOT_A_REQUEST_AND_A_QUESTION_IS_NOT_A_REPAIR_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -231942,7 +232040,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "8f096daa8514811569ff176ae43d2d7fd8ac83d12b99dcda2cb3490535a445de",
+   "sha256": "7645370313d25090da8ce485a4755fe4431394feff81d98bbfda8e8528e78758",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 19,
    "symbols": [
@@ -239825,7 +239923,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "472c8baab57d6886e785cb30d43b07b3089f88b358ef842389729f26a58ae825",
+   "sha256": "14391f0cb32b9f11fa65ee2f129e844d6df36f15004d508a01991014ffa1f5cd",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 81,
    "symbols": [
