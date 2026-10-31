@@ -1934,7 +1934,15 @@
         "write",
         "repair",
         "refactor",
-        "apply"
+        "apply",
+        "wheel",
+        "lock",
+        "sbom",
+        "bill of materials",
+        "release notes",
+        "port",
+        "declarations",
+        "pull request"
       ],
       "limitations": [
         "Compiler-, CST-, SQLite-, TOML-, Make-, and YAML-verified polyglot code, packaging, and CI workflow transformer; refuses closed when no applicable defect/transform exists or verification fails."
@@ -1967,6 +1975,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
+        "adapter_sha256": "829fc1cafab57053df9ed8e2562b25fbc72ae7582c773212a8506d252bfae38f",
         "type": "brain_native_deterministic_composition",
         "version_family": "v1"
       },
@@ -8771,7 +8780,7 @@
           "request_spec": "${input.request_spec}",
           "symbol": "${input.symbol}",
           "target_path": "${input.target_path}",
-          "test_file_path": "${input.test_file_path}"
+          "test_target": "${input.test_target}"
         },
         "expect": {
           "field": "output_verified",
@@ -8812,7 +8821,26 @@
         "write",
         "edit",
         "refactor",
-        "apply"
+        "apply",
+        "lint",
+        "ruff",
+        "mypy",
+        "typecheck",
+        "coverage",
+        "benchmark",
+        "parallel",
+        "async",
+        "asynchronous",
+        "split",
+        "worktree",
+        "revert",
+        "rebase",
+        "sqlalchemy",
+        "fastapi",
+        "endpoint",
+        "client",
+        "traversal",
+        "metric"
       ],
       "limitations": [
         "Python source, test, concurrency, performance, structural refactoring, and standalone-git writer verified by AST re-parse, behavioral equivalence, and clean subprocess test execution with rollback."
@@ -8829,6 +8857,7 @@
         "python.tests.generate.author",
         "python.source.format.ast_verified",
         "python.refactor.structural.module",
+        "python.refactor.dead.unused.remove",
         "git.branch.operate"
       ],
       "requires": [],
@@ -8843,6 +8872,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_swe_transform_and_synthesize_v1.py",
+        "adapter_sha256": "a2138982e4f3ccc73d90b38f47e7cf6b963265bf5abe389eb6bbea416cc6b620",
         "type": "brain_native_deterministic_composition",
         "version_family": "v1"
       },
@@ -9607,7 +9637,16 @@
         "suite",
         "run",
         "unittest",
-        "security"
+        "security",
+        "debugger",
+        "frame",
+        "traceback",
+        "dead",
+        "unused",
+        "schema",
+        "log",
+        "pull request",
+        "trace"
       ],
       "limitations": [
         "Read-only diagnostic, profiling, security, coverage, and architecture document producer; never modifies existing source files in place."
@@ -9626,7 +9665,11 @@
         "software.analysis.coverage.measured",
         "software.analysis.architecture.adr_and_migration",
         "software.analysis.git.blame_and_changelog",
-        "software.analysis.suite.runner_verdict"
+        "software.analysis.suite.runner_verdict",
+        "software.analysis.dead.unused.find",
+        "software.analysis.lint.static_triage",
+        "software.analysis.mutation.score",
+        "javascript.tests.run.execution"
       ],
       "requires": [],
       "result_fields": [
@@ -9634,12 +9677,21 @@
         "verified",
         "gate",
         "operation",
+        "records",
+        "exit_code",
+        "tests",
+        "passed",
+        "failed",
+        "functions",
+        "files",
+        "dead_symbols",
         "output_path",
         "output_sha256",
         "output_verified"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py",
+        "adapter_sha256": "66966e76fd7e87234da8013be866e392a194adaa503e6872c6931d8df51c3e20",
         "type": "brain_native_deterministic_composition",
         "version_family": "v1"
       },

@@ -2,7 +2,7 @@
   "action_id": "HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1",
   "action_intent_id": "HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1",
   "action_kind": "FRESH_REUSE",
-  "action_summary": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance gates, prune observe_world with os.scandir and pure-Python .git/HEAD lookup, and fix parallel pre-sorted JSON assembly in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 2/49 -> 34/49 served; swe_capability_matrix_v1 34/54 REAL, 0 FALSE, 0 DAMAGED (median 63 ms); advanced_swe_probe_20261030 10/10 (TS_SCALE 21.4s -> 7.2s); hardcore_swe_surface_probe_20261030 28/28.",
+  "action_summary": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance/scope gates and differential test invariance, prune observe_world with os.scandir and pure-Python .git/HEAD+refs lookup, and accelerate parallel pre-sorted JSON assembly + digest-authenticated row reuse in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 36/49 served (100% of valid probes; #33 refused closed with TARGET_SYMBOL_COLLISION:add); swe_capability_matrix_v1 44/54 REAL, 0 FALSE, 0 DAMAGED (median 94 ms); swe_request_probe_v1 18/28 sentence, 36/49 hardcore, and 36/43 frontier (83.7%, up from 4/43 on main; 0 refused-but-tree-dirty across all 3 suites; frontier p50 82 ms); python_source_symbol_index on canonical/runtime (2,292 files): cold 5.77 s, warm sibling 1.61 s (sha_eq=True); 121/121 SWE and \u00a76 law tests passed.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -41,20 +41,22 @@
       "canonical/runtime/raw_goal_trace_acceptance_v1.py",
       "canonical/runtime/execute_v1.py",
       "canonical/tests/test_hardcore_swe_kernel_v1.py",
-      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
+      "execution_guard/swe_capability_matrix_v1.py"
     ],
     "route_class": "COMPOSE"
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::On 35f946411c, swe_advanced_probe_v1 served 2/49 requests (0/39 writes) because polyglot/build/CI, Python e-graph/concurrency/test-authoring/structural-refactor, and diagnostic/profiling/coverage/ADR lanes lacked bound role-separated adapters, while python_source_symbol_index missed os import for parallel cold indexing and serialized module rows twice.",
-  "canonical_base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
+  "canonical_base_commit": "bf4f78f6b6eb0b2bae1c1892772b66ce6e37365e",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "On 35f946411c, swe_advanced_probe_v1 served 2/49 requests (0/39 writes) because polyglot/build/CI, Python e-graph/concurrency/test-authoring/structural-refactor, and diagnostic/profiling/coverage/ADR lanes lacked bound role-separated adapters, while python_source_symbol_index missed os import for parallel cold indexing and serialized module rows twice.",
   "date": "2026-10-31",
-  "expected_parent_change": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance gates, prune observe_world with os.scandir and pure-Python .git/HEAD lookup, and fix parallel pre-sorted JSON assembly in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 2/49 -> 34/49 served; swe_capability_matrix_v1 34/54 REAL, 0 FALSE, 0 DAMAGED (median 63 ms); advanced_swe_probe_20261030 10/10 (TS_SCALE 21.4s -> 7.2s); hardcore_swe_surface_probe_20261030 28/28.",
-  "expected_parent_frontier_change": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance gates, prune observe_world with os.scandir and pure-Python .git/HEAD lookup, and fix parallel pre-sorted JSON assembly in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 2/49 -> 34/49 served; swe_capability_matrix_v1 34/54 REAL, 0 FALSE, 0 DAMAGED (median 63 ms); advanced_swe_probe_20261030 10/10 (TS_SCALE 21.4s -> 7.2s); hardcore_swe_surface_probe_20261030 28/28.",
+  "expected_parent_change": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance/scope gates and differential test invariance, prune observe_world with os.scandir and pure-Python .git/HEAD+refs lookup, and accelerate parallel pre-sorted JSON assembly + digest-authenticated row reuse in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 36/49 served (100% of valid probes; #33 refused closed with TARGET_SYMBOL_COLLISION:add); swe_capability_matrix_v1 44/54 REAL, 0 FALSE, 0 DAMAGED (median 94 ms); swe_request_probe_v1 18/28 sentence, 36/49 hardcore, and 36/43 frontier (83.7%, up from 4/43 on main; 0 refused-but-tree-dirty across all 3 suites; frontier p50 82 ms); python_source_symbol_index on canonical/runtime (2,292 files): cold 5.77 s, warm sibling 1.61 s (sha_eq=True); 121/121 SWE and \u00a76 law tests passed.",
+  "expected_parent_frontier_change": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance/scope gates and differential test invariance, prune observe_world with os.scandir and pure-Python .git/HEAD+refs lookup, and accelerate parallel pre-sorted JSON assembly + digest-authenticated row reuse in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 36/49 served (100% of valid probes; #33 refused closed with TARGET_SYMBOL_COLLISION:add); swe_capability_matrix_v1 44/54 REAL, 0 FALSE, 0 DAMAGED (median 94 ms); swe_request_probe_v1 18/28 sentence, 36/49 hardcore, and 36/43 frontier (83.7%, up from 4/43 on main; 0 refused-but-tree-dirty across all 3 suites; frontier p50 82 ms); python_source_symbol_index on canonical/runtime (2,292 files): cold 5.77 s, warm sibling 1.61 s (sha_eq=True); 121/121 SWE and \u00a76 law tests passed.",
   "explicit_user_authorization": "Owner standing directive (2026-10-29/30): every listed problem already has a solution somewhere in the repository, its hidden tools or published research; do the optimal fix in the fastest way, only the right way, with no new primitive where an existing mechanism can be wired.",
   "falsification_condition": "FALSIFIED if any of the 5 new/upgraded capability inspectors accepts a tampered report, if source-mutating adapters run on read-only questions or broad repo roots, if MAX_NEW_CAPABILITIES_PER_PR exceeds 3, or if unified model verification drops below 33/33.",
   "governance_change": false,
@@ -62,7 +64,7 @@
   "incremental_spend_usd": 0,
   "intent": "Advance hardcore deterministic SWE capability breadth and sub-second execution speed using pure Python stdlib AST, graph, and git primitives plus independent byte-level acceptance inspectors.",
   "load_bearing_primary": {
-    "canonical_base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
+    "canonical_base_commit": "bf4f78f6b6eb0b2bae1c1892772b66ce6e37365e",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_TB4_GE_66_4",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -76,7 +78,7 @@
     "success_probability_lcb": 0.95,
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance gates, prune observe_world with os.scandir and pure-Python .git/HEAD lookup, and fix parallel pre-sorted JSON assembly in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 2/49 -> 34/49 served; swe_capability_matrix_v1 34/54 REAL, 0 FALSE, 0 DAMAGED (median 63 ms); advanced_swe_probe_20261030 10/10 (TS_SCALE 21.4s -> 7.2s); hardcore_swe_surface_probe_20261030 28/28.",
+  "measured_effect": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance/scope gates and differential test invariance, prune observe_world with os.scandir and pure-Python .git/HEAD+refs lookup, and accelerate parallel pre-sorted JSON assembly + digest-authenticated row reuse in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 36/49 served (100% of valid probes; #33 refused closed with TARGET_SYMBOL_COLLISION:add); swe_capability_matrix_v1 44/54 REAL, 0 FALSE, 0 DAMAGED (median 94 ms); swe_request_probe_v1 18/28 sentence, 36/49 hardcore, and 36/43 frontier (83.7%, up from 4/43 on main; 0 refused-but-tree-dirty across all 3 suites; frontier p50 82 ms); python_source_symbol_index on canonical/runtime (2,292 files): cold 5.77 s, warm sibling 1.61 s (sha_eq=True); 121/121 SWE and \u00a76 law tests passed.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": "The rows' own `provides` tokens as the vocabulary; _close_observations, the existing 'called at every exit' choke point; _fail; the bound registry already loaded by the door; composer_route.route's chain.",
   "progress_evidence_paths": [
@@ -94,17 +96,19 @@
     "canonical/runtime/raw_goal_trace_acceptance_v1.py",
     "canonical/runtime/execute_v1.py",
     "canonical/tests/test_hardcore_swe_kernel_v1.py",
-    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+    "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
+    "execution_guard/swe_capability_matrix_v1.py"
   ],
   "recursive_obs": {
-    "base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
-    "canonical_base_commit": "5ad1222dd3f811cf382ff2a7fb473ac97142c723",
+    "base_commit": "bf4f78f6b6eb0b2bae1c1892772b66ce6e37365e",
+    "canonical_base_commit": "bf4f78f6b6eb0b2bae1c1892772b66ce6e37365e",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
       "DELIVERY_TREATED_AS_A_SECOND_TASK__the_answer_clause_bound_to_an_unrelated_writer"
     ],
-    "expected_parent_level_state_change": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance gates, prune observe_world with os.scandir and pure-Python .git/HEAD lookup, and fix parallel pre-sorted JSON assembly in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 2/49 -> 34/49 served; swe_capability_matrix_v1 34/54 REAL, 0 FALSE, 0 DAMAGED (median 63 ms); advanced_swe_probe_20261030 10/10 (TS_SCALE 21.4s -> 7.2s); hardcore_swe_surface_probe_20261030 28/28.",
+    "expected_parent_level_state_change": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance/scope gates and differential test invariance, prune observe_world with os.scandir and pure-Python .git/HEAD+refs lookup, and accelerate parallel pre-sorted JSON assembly + digest-authenticated row reuse in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 36/49 served (100% of valid probes; #33 refused closed with TARGET_SYMBOL_COLLISION:add); swe_capability_matrix_v1 44/54 REAL, 0 FALSE, 0 DAMAGED (median 94 ms); swe_request_probe_v1 18/28 sentence, 36/49 hardcore, and 36/43 frontier (83.7%, up from 4/43 on main; 0 refused-but-tree-dirty across all 3 suites; frontier p50 82 ms); python_source_symbol_index on canonical/runtime (2,292 files): cold 5.77 s, warm sibling 1.61 s (sha_eq=True); 121/121 SWE and \u00a76 law tests passed.",
     "iteration_limit": 4,
     "obs_blocker": {
       "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
@@ -163,7 +167,7 @@
       "existing_oracle_considered": true,
       "synthetic_verification_necessity": "The fixture trees are tiny by construction, but the referee is real: a tree-wide grep for the old name, a real package import and a real unittest run, plus an A/B against a pristine HEAD worktree with the same fixtures"
     },
-    "real_outcome": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance gates, prune observe_world with os.scandir and pure-Python .git/HEAD lookup, and fix parallel pre-sorted JSON assembly in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 2/49 -> 34/49 served; swe_capability_matrix_v1 34/54 REAL, 0 FALSE, 0 DAMAGED (median 63 ms); advanced_swe_probe_20261030 10/10 (TS_SCALE 21.4s -> 7.2s); hardcore_swe_surface_probe_20261030 28/28.",
+    "real_outcome": "Add 3 role-separated deterministic SWE bound capabilities (code.polyglot.transform_and_verify.v1, python.swe.transform_and_synthesize.v1, software.analysis.diagnose_and_architect.v1; 3 <= 3 cap) backed by canonical/swe_kernel/, wire typed derivation/plan/trace-acceptance/scope gates and differential test invariance, prune observe_world with os.scandir and pure-Python .git/HEAD+refs lookup, and accelerate parallel pre-sorted JSON assembly + digest-authenticated row reuse in python_source_symbol_index. Single-machine local measurements (authority NONE): swe_advanced_probe_v1 36/49 served (100% of valid probes; #33 refused closed with TARGET_SYMBOL_COLLISION:add); swe_capability_matrix_v1 44/54 REAL, 0 FALSE, 0 DAMAGED (median 94 ms); swe_request_probe_v1 18/28 sentence, 36/49 hardcore, and 36/43 frontier (83.7%, up from 4/43 on main; 0 refused-but-tree-dirty across all 3 suites; frontier p50 82 ms); python_source_symbol_index on canonical/runtime (2,292 files): cold 5.77 s, warm sibling 1.61 s (sha_eq=True); 121/121 SWE and \u00a76 law tests passed.",
     "required_capability": "REUSE_FILE_IDENTITY_FOR_CROSS_MODULE_EDITS_AND_READ_DECLARED_INPUTS_BEFORE_REFUSING",
     "route_frontier": {
       "challenger_routes": [
@@ -415,7 +419,7 @@
           "path": "canonical/runtime/bound_capabilities/python_refactor_rename_parameter.py"
         },
         {
-          "git_blob_sha": "ac07efe6f627845e08f838eae28bd507a225b212",
+          "git_blob_sha": "a24b7413840b0d4cffe981cda6c97110915c61cf",
           "path": "canonical/runtime/bound_capabilities/python_source_symbol_index.py"
         }
       ],

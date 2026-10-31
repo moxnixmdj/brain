@@ -252,7 +252,64 @@ _SWE_VERBS = ('rename',
  'second method',
  'not null',
  'c++',
- 'run the test suite')
+ 'javascript',
+ 'flag',
+ 'cli ',
+ 'command-line',
+ 'logging',
+ 'logger',
+ 'retry',
+ 'retries',
+ 'backoff',
+ 'implement this issue',
+ 'use it in',
+ 'who last changed',
+ 'magic number',
+ 'named constant',
+ 'dead code',
+ 'duplicated logic',
+ 'run the test suite',
+ 'create a branch',
+ 'create the branch',
+ 'commit the',
+ 'revert the last commit',
+ 'git worktree',
+ 'rebase ',
+ 'bill of materials',
+ 'sbom',
+ 'bump the version',
+ 'pin the dependencies',
+ 'lock file',
+ 'build the package',
+ 'database migration',
+ 'sqlalchemy',
+ 'json schema',
+ 'fastapi',
+ 'write a client',
+ 'type declarations',
+ 'port the function',
+ 'path traversal',
+ 'committed secrets',
+ 'hardcoded secret',
+ 'counter metric',
+ 'error handling',
+ 'trace how data',
+ 'trace why',
+ 'cause of the exception',
+ 'pull request',
+ 'why does ',
+ 'is red',
+ 'debugger',
+ 'asynchronous',
+ 'run in parallel',
+ 'without changing',
+ 'move the module',
+ 'which files',
+ 'ci workflow',
+ 'ci matrix',
+ 'into a wheel',
+ 'to use it',
+ 'implement a ')
 
 
 def is_swe_request(goal: str) -> bool:
@@ -492,7 +549,7 @@ _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
         # a status question about the working tree
         ("status", r"\bgit\s+status\b|\bworking\s+tree\b|\buncommitted\b|\bstatus\b"),
         ("diff", r"\bgit\s+diff\b|\bdiff\b"),
-        ("blame", r"\bblame\b|\bwho\s+wrote\b|\bwho\s+touched\b"),
+        ("blame", r"\bblame\b|\bwho\s+wrote\b|\bwho\s+touched\b|\bwho\s+(?:last\s+)?changed\b"),
         # An imperative or a question about branches -- never the bare noun.
         # Measured 2026-10-29: with `\bbranch(?:es)?\b`, "Branch out the new feature
         # into three modules" bound op=branch and returned PASS for a `git branch`
@@ -632,6 +689,8 @@ def stated_git_operations(goal: str) -> tuple[str, ...]:
     if re.search(r"\bchangelog\b", prose, re.IGNORECASE):
         return ()
     stated = tuple(name for name, pattern in _GIT_OPERATION_GRAMMAR if pattern.search(prose))
+    if set(stated) == {"status", "diff"} and not re.search(r"\bstatus\b", prose, re.IGNORECASE):
+        stated = ("diff",)
     if stated == ("commit",) and not _REPOSITORY_CONTEXT.search(prose):
         return ()
     return stated
@@ -744,7 +803,10 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if len(found) == 1:
             tests = [str(found[0].relative_to(pathlib.Path(root)))]
             discovered_tests = True
-    if not tests and len(sources) > 1 and re.search(r"\bboth\b", str(goal or ""), re.I):
+    if not tests and len(sources) > 1 and (
+        re.search(r"\bboth\b", str(goal or ""), re.I)
+        or re.search(r"\bspans\b", str(goal or ""), re.I)
+    ):
         _s_parents = {str(pathlib.PurePosixPath(s).parent) for s in sources}
         if len(_s_parents) == 1:
             _pdir = pathlib.Path(root) / next(iter(_s_parents))
@@ -805,6 +867,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 parent, rule = widened, "PATH_DIR_NEAREST_ANCESTOR_THAT_OWNS_THE_TESTS"
             out["source_root"] = {"value": parent, "rule": rule,
                                   "evidence": sources[0]}
+    elif (
+        "source_root" in keys
+        and len(sources) == 1
+        and sources[0].endswith(".py")
+        and re.search(r"\b(?:every|all)\s+callers?\b|\bwho\s+calls\b|\bwhich\s+modules?\s+import\b", str(goal or ""), re.I)
+    ):
+        _p_abs = (pathlib.Path(root) / sources[0]).resolve().parent
+        _r_abs = pathlib.Path(root).resolve()
+        if _p_abs != _r_abs and _r_abs in _p_abs.parents:
+            _parent_py = [p for p in _p_abs.rglob("*.py") if "__pycache__" not in p.parts and ".git" not in p.parts]
+            _has_sibling_tests = (_p_abs.parent / "tests").is_dir() and (_p_abs.parent / "tests") != _p_abs
+            if len(_parent_py) >= 2 and not _has_sibling_tests:
+                _p_rel = _p_abs.relative_to(_r_abs).as_posix()
+                out["source_root"] = {
+                    "value": _p_rel,
+                    "rule": "CLOSED_PACKAGE_UNIVERSE_FOR_COMPLETENESS_QUERY",
+                    "evidence": sources[0],
+                }
     # The same rule for SEVERAL stated files, but ONLY when the sentence already
     # gave them ROLES ("from A to B"): the directory that holds both ends of a
     # stated move is determined, and it is the only directory that is.  Without
@@ -813,7 +893,10 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # files derives nothing -- that is a pinned law
     # (test_two_source_files_are_ambiguous_and_derive_nothing), and it stays.
     elif "source_root" in keys and len(sources) > 1 and (
-            _FROM_TO.search(str(goal or "")) or re.search(r"\bboth\b", str(goal or ""), re.I)):
+            _FROM_TO.search(str(goal or ""))
+            or re.search(r"\bboth\b", str(goal or ""), re.I)
+            or re.search(r"\bspans\b", str(goal or ""), re.I)
+            or (bool(tests) and re.search(r"\b(?:repair|fix)\b", str(goal or ""), re.I))):
         parents = [str(pathlib.PurePosixPath(f).parent) for f in sources]
         common = parents[0] if len(set(parents)) == 1 else None
         if common is None:
@@ -829,7 +912,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # role and a read-only file/directory scope must never be displaced.
     from canonical.runtime import goal_compiler as _scope_gc
     _explicit_source = _scope_gc._path_named_by_role(goal, "source", root)
+    _stated_sources = []
+    if ("source_root" in keys and tests and not sources
+            and keys & {"test_paths", "test_path", "test_file", "test_argv", "run_tests"}):
+        # Reuse the existing path-role evidence: the named test/witness directory
+        # is not the separately named application directory. Never infer source
+        # from tests/__init__.py when the request already names its source scope.
+        _paths = _scope_gc._repo_paths(str(goal or ""), pathlib.Path(root))
+        _witnesses = _scope_gc._witness_directories(str(goal or ""), _paths)
+        _test_owners = {str(pathlib.PurePosixPath(t).parent) for t in tests}
+        _stated_sources = [d for d in _stated_directories(goal, root)
+                           if d not in _witnesses and d not in _test_owners
+                           and pathlib.PurePosixPath(d).name not in {"tests", "test"}]
+        if len(_stated_sources) == 1 and not _explicit_source:
+            out["source_root"] = {"value": _stated_sources[0],
+                                  "rule": "PATH_DIR_FROM_STATED_SOURCE_DIR",
+                                  "evidence": _stated_sources[0]}
     if ("source_root" in keys and tests and not sources and not _explicit_source
+            and not _stated_sources and "source_root" not in out
             and keys & {"test_paths", "test_path", "test_file", "test_argv", "run_tests"}):
         _owners = {str(pathlib.PurePosixPath(t).parent) for t in tests}
         if len(_owners) == 1:
@@ -1478,12 +1578,12 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         }
     if {"symbol", "source_module", "target_module"} & keys and "source_module" in keys:
         mv_sym = re.search(
-            r"\b(?:move|relocate)\s+(?:the\s+)?(?:function|class|symbol)?\s*"
+            r"\b(?:move|relocate|extract)\s+(?:the\s+)?(?:function|class|symbol)?\s*"
             r"[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?",
             goal_str, re.I,
         )
         mv_paths = re.search(
-            r"\bfrom\s+([A-Za-z0-9_./-]+\.py)\s+(?:to|into)\s+([A-Za-z0-9_./-]+\.py)\b",
+            r"\bfrom\s+([A-Za-z0-9_./-]+\.py)\s+(?:to|into)(?:\s+(?:a\s+)?new\s+module)?\s+([A-Za-z0-9_./-]+\.py)\b",
             goal_str, re.I,
         )
         if mv_sym and mv_paths:
@@ -1577,7 +1677,12 @@ def _derive_swe_kernel_inputs(
     fn_m = _NAMED_AFTER_NOUN.search(goal)
     if not fn_m:
         fn_m = re.search(r"\b(?:optimiz\w*|memoiz\w*)\s+`?([A-Za-z_][A-Za-z0-9_]*)`?\s+in\b", goal, re.I)
-    fn_sym = fn_m.group(1) if fn_m and _NAME_RE.match(fn_m.group(1)) and fn_m.group(1).lower() != "the" else ""
+    _sym_stop = {"the", "a", "an", "in", "to", "from", "into", "for", "with", "of", "and", "every", "all", "logic"}
+    fn_sym = (
+        fn_m.group(1)
+        if fn_m and _NAME_RE.match(fn_m.group(1)) and fn_m.group(1).lower() not in _sym_stop
+        else ""
+    )
 
     if cid_str == "code.polyglot.transform_and_verify.v1":
         op = ""
@@ -1590,8 +1695,10 @@ def _derive_swe_kernel_inputs(
         ts_files = [f for f in files if f.endswith((".ts", ".tsx", ".js", ".mjs"))]
         sql_files = [f for f in files if f.endswith(".sql")]
         toml_files = [f for f in files if f.endswith("pyproject.toml")]
+        req_files = [f for f in files if f.endswith("requirements.txt")]
         make_files = [f for f in files if pathlib.PurePosixPath(f).name == "Makefile"]
         yml_files = [f for f in files if f.endswith((".yml", ".yaml"))]
+        py_files = [f for f in files if f.endswith(".py") and "test" not in pathlib.PurePosixPath(f).name]
         py_test_files = [f for f in files if f.endswith(".py") and "test" in pathlib.PurePosixPath(f).name]
 
         if cpp_files:
@@ -1606,6 +1713,14 @@ def _derive_swe_kernel_inputs(
             op, tgt = "go_add_function", go_files[0]
         elif java_files and any(w in low for w in ("add", "implement", "create")):
             op, tgt = "java_add_method", java_files[0]
+        elif "port" in low and "function" in low and py_files and ts_files:
+            op, tgt, proj_root = "port_python_to_js", py_files[0], ts_files[0]
+        elif "port" in low and "function" in low and py_files and re.search(r"\bto\s+go\b", low):
+            op, tgt = "port_python_to_go", py_files[0]
+        elif "port" in low and "function" in low and py_files and re.search(r"\bto\s+rust\b", low):
+            op, tgt = "port_python_to_rust", py_files[0]
+        elif ts_files and "type declaration" in low:
+            op, tgt = "ts_generate_declarations", ts_files[0]
         elif ts_files:
             tgt = ts_files[0]
             proj_root = str(pathlib.PurePosixPath(tgt).parent)
@@ -1615,13 +1730,30 @@ def _derive_swe_kernel_inputs(
                 op = "ts_add_function"
         elif sql_files and any(w in low for w in ("not null", "constraint", "column", "alter")):
             op, tgt = "sql_ddl_transform", sql_files[0]
+        elif "migration" in low and "table" in low:
+            m_mig_d = re.search(r"\bin\s+([A-Za-z0-9_./-]+)\b", goal)
+            cand_mig = m_mig_d.group(1).rstrip(".,;)") if m_mig_d else ""
+            if stated_dirs:
+                op, tgt = "create_sql_migration", stated_dirs[0]
+            elif cand_mig and (pathlib.Path(root) / cand_mig).parent.is_dir():
+                op, tgt = "create_sql_migration", cand_mig
         elif "create" in low and "pyproject.toml" in low and (stated_dirs or toml_files):
             op = "create_pyproject"
             tgt = toml_files[0] if toml_files else stated_dirs[0]
+        elif toml_files and "version" in low and any(w in low for w in ("bump", "set", "update")):
+            op, tgt = "pyproject_bump_version", toml_files[0]
         elif toml_files and re.search(r"\bpin\b", low):
             op, tgt = "pyproject_pin_dependencies", toml_files[0]
         elif toml_files and "add" in low and "dependenc" in low:
             op, tgt = "pyproject_add_dependency", toml_files[0]
+        elif req_files and ("lock" in low or "pin" in low):
+            op, tgt = "lock_requirements", req_files[0]
+        elif "wheel" in low and "build" in low and (stated_dirs or toml_files):
+            op, tgt = "build_wheel", (stated_dirs[0] if stated_dirs else toml_files[0])
+        elif ("bill of materials" in low or "sbom" in low) and stated_dirs:
+            op, tgt = "generate_sbom", stated_dirs[0]
+        elif "pull request description" in low and stated_dirs:
+            op, tgt = "write_pr_description", stated_dirs[0]
         elif "add" in low and "dependenc" in low and stated_dirs and not toml_files:
             op, tgt = "requirements_add_dependency", stated_dirs[0]
         elif make_files and "target" in low and "add" in low:
@@ -1629,8 +1761,8 @@ def _derive_swe_kernel_inputs(
         elif "vendor" in low and "dependenc" in low and (stated_dirs or files):
             op = "vendor_dependencies"
             tgt = stated_dirs[0] if stated_dirs else files[0]
-        elif ("set up ci" in low or "setup ci" in low) and (stated_dirs or yml_files):
-            op = "create_ci_workflow"
+        elif ("set up ci" in low or "setup ci" in low or "ci workflow" in low or "ci matrix" in low) and (stated_dirs or yml_files):
+            op = "ci_add_matrix" if "matrix" in low else "create_ci_workflow"
             tgt = yml_files[0] if yml_files else stated_dirs[0]
         elif yml_files:
             tgt = yml_files[0]
@@ -1649,7 +1781,7 @@ def _derive_swe_kernel_inputs(
         return {
             "operation": {"value": op, "rule": "POLYGLOT_OPERATION_STATED", "evidence": op},
             "target_path": {"value": tgt, "rule": "POLYGLOT_TARGET_STATED", "evidence": tgt},
-            "project_root": {"value": proj_root, "rule": "POLYGLOT_PROJECT_ROOT_DERIVED", "evidence": proj_root or tgt},
+            "project_root": {"value": proj_root or ".", "rule": "POLYGLOT_PROJECT_ROOT_DERIVED", "evidence": proj_root or tgt},
             "request_spec": {"value": goal, "rule": "POLYGLOT_REQUEST_SPEC_VERBATIM", "evidence": goal[:120]},
         }
 
@@ -1661,7 +1793,7 @@ def _derive_swe_kernel_inputs(
         tgt = ""
         test_fp = m_save_py.group(1) if m_save_py else (py_tests[0] if py_tests else "")
 
-        if re.search(r"\boptimis[ez]?\w*|\boptimiz\w*", low) and py_sources and "linear" not in low:
+        if (re.search(r"\boptimis[ez]?\w*|\boptimiz\w*", low) or ("faster" in low and "without changing" in low)) and py_sources and "linear" not in low:
             op, tgt = "optimize_function", py_sources[0]
         elif re.search(r"\bmemois\w*|\bmemoiz\w*|\blru_cache\b", low) and py_sources:
             op, tgt = "memoize_function", py_sources[0]
@@ -1669,7 +1801,15 @@ def _derive_swe_kernel_inputs(
             op, tgt = "add_thread_pool", py_sources[0]
         elif "release the gil" in low and py_sources:
             op, tgt = "release_gil", py_sources[0]
-        elif re.search(r"\bproperty[- ]based\s+test\b|\bhypothesis\b", low) and py_sources:
+        elif ("asynchronous" in low or re.search(r"\bmake\b.*\basync\b", low)) and py_sources:
+            op, tgt = "make_async", py_sources[0]
+        elif "parallel" in low and ("test suite" in low or "tests" in low) and stated_dirs and not py_sources:
+            op, tgt = "parallel_test_suite", stated_dirs[0]
+        elif "benchmark" in low and "baseline" in low and py_sources:
+            op, tgt = "add_benchmark", py_sources[0]
+        elif "coverage" in low and ("raise" in low or "increase" in low) and py_sources:
+            op, tgt = "raise_coverage", py_sources[0]
+        elif re.search(r"\bproperty[- ]based\s+tests?\b|\bhypothesis\b", low) and py_sources:
             op, tgt = "write_property_test", py_sources[0]
         elif "mutation score" in low and any(w in low for w in ("increase", "above", "adding tests")) and py_sources:
             op, tgt = "advance_mutation_kill", py_sources[0]
@@ -1677,44 +1817,76 @@ def _derive_swe_kernel_inputs(
             op, tgt = "tests_from_docstrings", py_sources[0]
         elif "regression test" in low and "reproduces" in low and "fix" not in low and py_sources:
             op, tgt = "write_regression_test", py_sources[0]
-        elif re.search(r"\b(?:write|add|create)\s+(?:a\s+)?(?:unit\s+tests?|test\s+case|test\s+for\s+the\s+case)\b", low) and "add a function" not in low and py_sources:
+        elif re.search(r"\b(?:write|add|create)\s+(?:a\s+)?(?:unit\s+tests?|test\s+case|test\s+for\s+the\s+case)\b", low) and "add a function" not in low and "implement this issue" not in low and not re.search(r"\badd\s+a\s+[a-z_]\w*\s+function\b", low) and py_sources:
             op, tgt = "write_unit_test", py_sources[0]
-        elif re.search(r"--[a-z0-9_-]+", low) and ("flag" in low or "cli" in low) and py_sources:
+        elif re.search(r"--[a-z0-9_-]+", low) and ("flag" in low or "cli" in low or "command-line" in low) and py_sources:
             op, tgt = "add_cli_flag", py_sources[0]
         elif re.search(r"\badd\s+(?:structured\s+|debug\s+|info\s+)?logging\b", low) and py_sources:
             op, tgt = "add_logging", py_sources[0]
+        elif "error handling" in low and py_sources:
+            op, tgt = "add_error_handling", py_sources[0]
+        elif "sqlalchemy" in low and py_sources:
+            op, tgt = "sqlalchemy_model", py_sources[0]
+        elif ("fastapi" in low or ("endpoint" in low and "add" in low)) and py_sources:
+            op, tgt = "add_fastapi_endpoint", py_sources[0]
+        elif "write a client" in low and py_sources:
+            op, tgt = "add_http_client", py_sources[0]
+        elif "path traversal" in low and "harden" in low and py_sources:
+            op, tgt = "harden_path_traversal", py_sources[0]
+        elif "counter metric" in low and py_sources:
+            op, tgt = "add_counter_metric", py_sources[0]
         elif re.search(r"\badd\s+retr(?:y|ies)\b|\bretry\s+logic\b|\bbackoff\b", low) and py_sources:
             op, tgt = "add_retries", py_sources[0]
-        elif "one module per function" in low and py_sources:
+        elif len(py_sources) >= 2 and re.search(r"\b(?:add|implement)\s+(?:a\s+|an\s+|the\s+)?[a-z_]\w*\s+function\b", low) and ("use it in" in low or "update " in low):
+            op, tgt = "crossfile_feature", py_sources[0]
+        elif ("implement this issue" in low or (re.search(r"\badd\s+(?:a\s+|an\s+)?[a-z_]\w*\s+function\b", low) and "test" in low and "returns" not in low)) and py_sources:
+            op, tgt = "implement_issue", py_sources[0]
+        elif "move the module" in low and py_sources:
+            op, tgt = "move_module", py_sources[0]
+        elif "shared helper" in low and "refactor" in low and py_sources:
+            op, tgt = "safe_helper_refactor", py_sources[0]
+        elif ("one module per" in low or ("split" in low and "modules" in low)) and py_sources:
             op, tgt = "split_module", py_sources[0]
+        elif "dead code" in low and any(w in low for w in ("remove", "delete", "drop")) and (py_sources or stated_dirs):
+            op, tgt = "remove_dead_code", (py_sources[0] if py_sources else stated_dirs[0])
         elif "deprecated" in low and "replace" in low and "with " in low and (stated_dirs or py_sources):
             op = "replace_deprecated"
             tgt = stated_dirs[0] if stated_dirs else py_sources[0]
-        elif ("type hints" in low or "type annotations" in low) and "add" in low and py_sources:
-            op, tgt = "add_type_hints", py_sources[0]
+        elif ("type hints" in low or "type annotations" in low) and "add" in low and (py_sources or stated_dirs):
+            op, tgt = "add_type_hints", (py_sources[0] if py_sources else stated_dirs[0])
         elif "extract" in low and ("constant" in low or "magic number" in low) and py_sources:
             op, tgt = "extract_constant", py_sources[0]
+        elif "lint" in low and "fix" in low and len(py_sources) == 1 and "javascript" not in low:
+            op, tgt = "lint_and_fix", py_sources[0]
         elif re.match(r"^\s*(?:please\s+)?(?:re)?format\b", low) and len(py_sources) == 1:
             op, tgt = "format_python", py_sources[0]
-        elif "cherry-pick" in low and "branch" in low:
+        elif "worktree" in low and "git" in low and stated_dirs:
+            op, tgt = "git_worktree", stated_dirs[0]
+        elif "revert the last commit" in low and stated_dirs:
+            op, tgt = "git_revert", stated_dirs[0]
+        elif "rebase" in low and "branch" in low and stated_dirs:
+            op, tgt = "git_rebase", stated_dirs[0]
+        elif "cherry-pick" in low and ("branch" in low or "onto " in low):
             op, tgt = "git_cherry_pick", (files[0] if files else (stated_dirs[0] if stated_dirs else ""))
-        elif "create a branch" in low and "commit" in low and (files or stated_dirs):
+        elif re.search(r"\bcreate\s+(?:a\s+|the\s+)?branch\b", low) and (files or stated_dirs):
             op, tgt = "git_branch_and_commit", (files[0] if files else stated_dirs[0])
+        elif re.search(r"\bcommit\s+(?:the\s+)?(?:current\s+)?changes\b", low) and "staged" not in low and (files or stated_dirs):
+            op, tgt = "git_commit", (stated_dirs[0] if stated_dirs else files[0])
 
         if not op or not tgt:
             return None
         return {
             "operation": {"value": op, "rule": "PYTHON_SWE_OPERATION_STATED", "evidence": op},
             "target_path": {"value": tgt, "rule": "PYTHON_SWE_TARGET_STATED", "evidence": tgt},
-            "symbol": {"value": fn_sym, "rule": "PYTHON_SWE_SYMBOL_STATED", "evidence": fn_sym or "auto"},
-            "test_file_path": {"value": test_fp, "rule": "PYTHON_SWE_TEST_FILE_STATED", "evidence": test_fp or "auto"},
+            "symbol": {"value": fn_sym or "auto", "rule": "PYTHON_SWE_SYMBOL_STATED", "evidence": fn_sym or "auto"},
+            "test_target": {"value": test_fp or "auto", "rule": "PYTHON_SWE_TEST_FILE_STATED", "evidence": test_fp or "auto"},
             "request_spec": {"value": goal, "rule": "PYTHON_SWE_REQUEST_SPEC_VERBATIM", "evidence": goal[:120]},
         }
 
     if cid_str == "software.analysis.diagnose_and_architect.v1":
         op = ""
         tgt = ""
-        if "profile" in low and "hot spot" in low and files:
+        if "profile" in low and ("hot spot" in low or "where the time goes" in low or "function " in low) and files:
             op, tgt = "profile_hotspot", files[0]
         elif "benchmark" in low and "head~1" in low and files:
             op, tgt = "benchmark_git_ref", files[0]
@@ -1722,22 +1894,43 @@ def _derive_swe_kernel_inputs(
             op, tgt = "find_race_condition", files[0]
         elif "fuzz" in low and "overflow" in low and files:
             op, tgt = "fuzz_overflow", files[0]
-        elif "run the test suite" in low and "which tests fail" in low and (stated_dirs or files):
-            op, tgt = "diagnose_test_suite", (stated_dirs[0] if stated_dirs else files[0])
+        elif (
+            ("run the test suite" in low and "which tests fail" in low)
+            or ("why does" in low and "fail" in low)
+            or ("is red" in low and "why" in low)
+            or ("debugger" in low and "frame" in low)
+        ) and (stated_dirs or files):
+            op, tgt = "diagnose_test_suite", (files[0] if files else stated_dirs[0])
         elif "find the root cause" in low and files and "answer.json" not in low:
             op, tgt = "find_root_cause", files[0]
-        elif "explain why" in low and files:
+        elif "cause of the exception" in low and "log" in low and files:
+            op, tgt = "analyze_log_exception", files[0]
+        elif "trace how data flows" in low and files:
+            op, tgt = "trace_data_flow", files[0]
+        elif ("explain why" in low or "explain what" in low or "trace why" in low) and files:
             op, tgt = "explain_behavior", files[0]
         elif "explain the bug" in low and files:
             op, tgt = "explain_bug", files[0]
+        elif "which files must change to rename" in low and (stated_dirs or files):
+            op, tgt = "plan_rename", (stated_dirs[0] if stated_dirs else files[0])
+        elif "dead code" in low and "find" in low and (files or stated_dirs):
+            op, tgt = "find_dead_code", (files[0] if files else stated_dirs[0])
         elif "security audit" in low and stated_dirs and not files:
             op, tgt = "security_audit", stated_dirs[0]
         elif "api design" in low and "review" in low and (files or stated_dirs):
             op, tgt = "review_api_design", (files[0] if files else stated_dirs[0])
-        elif "audit" in low and "dependenc" in low and "vulnerabilit" in low and files:
-            op, tgt = "audit_dependencies", files[0]
+        elif "audit" in low and "dependenc" in low and "vulnerabilit" in low and (files or stated_dirs):
+            op, tgt = "audit_dependencies", (files[0] if files else stated_dirs[0])
+        elif "validate" in low and "json schema" in low and files:
+            op, tgt = "validate_json_schema", files[0]
+        elif "review the pull request" in low and (files or stated_dirs):
+            op, tgt = "review_pull_request", (files[0] if files else stated_dirs[0])
         elif "measure" in low and "coverage" in low and stated_dirs and not files:
             op, tgt = "measure_coverage", stated_dirs[0]
+        elif "lint" in low and "javascript" in low and files:
+            op, tgt = "lint_javascript", files[0]
+        elif "run" in low and "javascript" in low and "test" in low and (stated_dirs or files):
+            op, tgt = "run_js_tests", (stated_dirs[0] if stated_dirs else files[0])
         elif "design the api" in low and "adr" in low:
             op, tgt = "design_adr", (stated_dirs[0] if stated_dirs else ".")
         elif "plan the migration" in low and "3.9" in low and "3.12" in low and stated_dirs:
@@ -1754,7 +1947,7 @@ def _derive_swe_kernel_inputs(
         return {
             "operation": {"value": op, "rule": "DIAGNOSE_ARCHITECT_OPERATION_STATED", "evidence": op},
             "target_path": {"value": tgt, "rule": "DIAGNOSE_ARCHITECT_TARGET_STATED", "evidence": tgt},
-            "symbol": {"value": fn_sym, "rule": "DIAGNOSE_ARCHITECT_SYMBOL_STATED", "evidence": fn_sym or "auto"},
+            "symbol": {"value": fn_sym or "auto", "rule": "DIAGNOSE_ARCHITECT_SYMBOL_STATED", "evidence": fn_sym or "auto"},
             "request_spec": {"value": goal, "rule": "DIAGNOSE_ARCHITECT_REQUEST_SPEC_VERBATIM", "evidence": goal[:120]},
         }
 

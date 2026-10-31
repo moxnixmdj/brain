@@ -133,6 +133,9 @@ _FAMILIES = (
    'blame',
    'branches',
    'who wrote',
+   'who last changed',
+   'who changed',
+   'who touched',
    'working tree',
    'staged changes'),
   ('git', 'commit', 'history', 'repository'),
@@ -224,33 +227,119 @@ _ASKED_RE = re.compile(
 def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | None:
     """(the trigger phrases the sentence states, candidate terms, effect token)."""
     raw_low = str(goal or "").lower()
+    if any(p in raw_low for p in (
+        "ast patch search", "patch search", "repair loop", "coupled ", "strict progress", "provenance guided"
+    )):
+        return None
     if "find the root cause" in raw_low and "answer.json" not in raw_low:
         return ("find the root cause",), ("diagnose", "root_cause"), "diagnose_and_architect"
-    if "profile " in raw_low and "hot spot" in raw_low:
+    if "cause of the exception" in raw_low and "log" in raw_low:
+        return ("log exception",), ("diagnose", "root_cause"), "diagnose_and_architect"
+    if "profile " in raw_low and ("hot spot" in raw_low or "where the time goes" in raw_low):
         return ("profile",), ("diagnose", "hotspot"), "diagnose_and_architect"
+    if ("why does " in raw_low and " fail" in raw_low) or ("is red" in raw_low and "find out why" in raw_low) or ("debugger" in raw_low and "frame" in raw_low):
+        return ("diagnose_suite",), ("diagnose", "runner_verdict"), "diagnose_and_architect"
+    if "trace how data flows" in raw_low or "trace why " in raw_low:
+        return ("trace",), ("diagnose", "root_cause"), "diagnose_and_architect"
+    if "which files must change to rename" in raw_low:
+        return ("rename_plan",), ("diagnose",), "diagnose_and_architect"
+    if re.search(r"^\s*find\s+(?:the\s+)?dead\s+code\b", raw_low):
+        return ("find_dead_code",), ("diagnose", "dead"), "diagnose_and_architect"
+    if "audit " in raw_low and "dependenc" in raw_low and "vulnerabilit" in raw_low:
+        return ("audit",), ("vulnerability_audit", "diagnose"), "diagnose_and_architect"
+    if "validate " in raw_low and "json schema" in raw_low:
+        return ("json_schema",), ("diagnose", "schema"), "diagnose_and_architect"
+    if "review the pull request" in raw_low:
+        return ("pr_review",), ("diagnose", "pull request"), "diagnose_and_architect"
+    if "committed secrets" in raw_low or "hardcoded secret" in raw_low:
+        return ("secret_scan",), ("secret_scan", "secret"), "secret"
     if "explain the bug" in raw_low:
         return ("explain the bug",), ("diagnose", "root_cause"), "diagnose_and_architect"
+    if "explain what " in raw_low and ".py" in raw_low:
+        return ("explain what",), ("diagnose", "root_cause"), "diagnose_and_architect"
+    if "lint" in raw_low and "javascript" in raw_low:
+        return ("lint javascript",), ("diagnose", "static_triage"), "diagnose_and_architect"
+    if "run" in raw_low and "javascript" in raw_low and "test" in raw_low:
+        return ("run javascript test",), ("diagnose", "runner_verdict"), "diagnose_and_architect"
     if "design the api" in raw_low and "adr" in raw_low:
         return ("design the api",), ("diagnose", "adr_and_migration"), "diagnose_and_architect"
     if "design document" in raw_low and "splitting" in raw_low:
         return ("design document",), ("diagnose", "adr_and_migration"), "diagnose_and_architect"
     if "increase the mutation score" in raw_low:
         return ("increase the mutation score",), ("swe_transform",), "swe.transform_and_synthesize"
-    if re.search(r"\boptimiz\w*\s+(?:the\s+)?(?:hot\s+function\s+)?[A-Za-z_]\w*\s+in\b", raw_low):
+    if (
+        re.search(r"\boptimis[ez]?\w*|\boptimiz\w*", raw_low)
+        or ("faster" in raw_low and "without changing" in raw_low)
+    ) and ".py" in raw_low and "linear" not in raw_low:
         return ("optimize",), ("swe_transform",), "swe.transform_and_synthesize"
+    if ("asynchronous" in raw_low or re.search(r"\bmake\b.*\basync\b", raw_low)) and ".py" in raw_low:
+        return ("make_async",), ("swe_transform",), "swe.transform_and_synthesize"
+    if "parallel" in raw_low and ("test suite" in raw_low or "tests" in raw_low):
+        return ("parallel_tests",), ("swe_transform",), "swe.transform_and_synthesize"
+    if "benchmark" in raw_low and "baseline" in raw_low and ".py" in raw_low:
+        return ("add_benchmark",), ("swe_transform",), "swe.transform_and_synthesize"
+    if "coverage" in raw_low and ("raise" in raw_low or "increase" in raw_low) and ".py" in raw_low:
+        return ("raise_coverage",), ("swe_transform",), "swe.transform_and_synthesize"
+    if re.search(r"\bproperty[- ]based\s+tests?\b|\bhypothesis\b", raw_low) and ".py" in raw_low:
+        return ("write_property_test",), ("swe_transform",), "swe.transform_and_synthesize"
+    if re.search(r"^\s*write\s+a\s+unit\s+test\b", raw_low) and ".py" in raw_low:
+        return ("write_unit_test",), ("swe_transform",), "swe.transform_and_synthesize"
     if "add a test for the case" in raw_low:
         return ("add a test for the case",), ("swe_transform",), "swe.transform_and_synthesize"
-    if "add the dependency " in raw_low and "pyproject.toml" not in raw_low:
-        return ("add the dependency",), ("polyglot",), "polyglot.transform_and_verify"
+    if "implement this issue" in raw_low:
+        return ("implement this issue",), ("swe_transform",), "swe.transform_and_synthesize"
+    if re.search(r"\b(?:add|implement)\s+(?:a\s+|an\s+)?[a-z_]\w*\s+function\b", raw_low) and (
+        "use it in" in raw_low or ("with tests" in raw_low and "update " in raw_low)
+    ):
+        return ("crossfile_feature",), ("swe_transform",), "swe.transform_and_synthesize"
+    if re.search(
+        r"\b(?:add\s+(?:structured\s+|debug\s+|info\s+)?logging|add\s+retr(?:y|ies)|retry\s+logic|with\s+backoff|"
+        r"add\s+error\s+handling|sqlalchemy\s+model|fastapi\s+endpoint|write\s+a\s+client|path\s+traversal|counter\s+metric)\b",
+        raw_low,
+    ):
+        return ("swe_feature",), ("swe_transform",), "swe.transform_and_synthesize"
+    if (
+        "move the module " in raw_low
+        or ("shared helper" in raw_low and "refactor " in raw_low)
+        or ("split " in raw_low and ("one module per" in raw_low or "into two modules" in raw_low))
+        or ("add type hints" in raw_low)
+        or ("lint " in raw_low and "fix what it reports" in raw_low)
+    ):
+        return ("swe_refactor",), ("swe_transform",), "swe.transform_and_synthesize"
+    if re.search(r"\b(?:remove|delete|drop)\s+(?:the\s+|all\s+)?dead\s+code\b", raw_low):
+        return ("remove_dead_code",), ("swe_transform", "dead_code"), "swe.transform_and_synthesize"
+    if re.search(r"\b(?:extract|move)\s+(?:the\s+)?(?:function\s+|class\s+|symbol\s+)?\w+\s+from\s+\S+\.py\s+(?:into|to)(?:\s+(?:a\s+)?new\s+module)?\s+\S+\.py", raw_low):
+        return ("move_symbol",), ("move_symbol", "relocate symbol"), "move_symbol"
+    if (
+        (re.search(r"\bcommit\s+(?:the\s+)?(?:current\s+)?changes\s+(?:in|to)\s+\S+", raw_low) and "staged" not in raw_low)
+        or re.search(r"\bcreate\s+(?:a\s+|the\s+)?branch\s+(?:named\s+)?\S+\s+(?:in\s+\S+|and\s+commit\s+\S+)", raw_low)
+        or ("git worktree" in raw_low)
+        or ("revert the last commit" in raw_low)
+        or ("rebase the branch" in raw_low)
+        or ("cherry-pick " in raw_low and ("onto " in raw_low or "new branch" in raw_low))
+    ):
+        return ("git_worktree_write",), ("swe_transform", "branch.operate"), "swe.transform_and_synthesize"
+    if (
+        ("add the dependency " in raw_low and "pyproject.toml" not in raw_low)
+        or ("into a wheel" in raw_low and "build " in raw_low)
+        or ("requirements.txt" in raw_low and ("lock file" in raw_low or "pin " in raw_low))
+        or ("bill of materials" in raw_low or "sbom" in raw_low)
+        or ("pull request description" in raw_low)
+        or ("ci workflow" in raw_low or "ci matrix" in raw_low or "set up ci" in raw_low or "setup ci" in raw_low)
+        or ("database migration" in raw_low)
+        or ("type declarations" in raw_low)
+        or (re.search(r"\bport\s+(?:the\s+)?function\b", raw_low) is not None)
+    ):
+        return ("polyglot_build_release",), ("polyglot",), "polyglot.transform_and_verify"
     # Direct path-suffix dispatch for polyglot / Makefile / pyproject / workflow writes
     if any(ext in raw_low for ext in (".cpp", ".cc", ".rs", ".go", ".java", ".ts", ".sql", "pyproject.toml", "makefile", ".github/workflows/")):
         if any(w in raw_low for w in ("audit ", "vulnerabilit", "review ")):
             return ("audit",), ("vulnerability_audit", "diagnose"), "diagnose_and_architect"
-        if any(w in raw_low for w in ("fix", "repair", "add", "create", "rename", "pin", "make the ci")):
+        if any(w in raw_low for w in ("fix", "repair", "add", "create", "rename", "pin", "bump", "make the ci")):
             return ("polyglot_path",), ("polyglot", "pyproject", "makefile", "workflow"), "polyglot.transform_and_verify"
     if re.match(r"^\s*(?:please\s+)?(?:re)?format\s+\S+\.py\b", raw_low):
         return ("format",), ("format.ast_verified", "swe_transform"), "swe.transform_and_synthesize"
-    if re.search(r"--[a-z0-9_-]+", raw_low) and ("flag" in raw_low or "cli" in raw_low):
+    if re.search(r"--[a-z0-9_-]+", raw_low) and ("flag" in raw_low or "cli" in raw_low or "command-line" in raw_low):
         return ("cli flag",), ("swe_transform",), "swe.transform_and_synthesize"
     # Paths and quoted values are task data, not evidence of an effect family.
     prose = front.prose_only(str(goal or ""))
@@ -274,7 +363,8 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
     # Unqualified repository reads use the existing operation grammar, not
     # broad nouns such as "status" inside deployment questions or task data.
     if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"
-                    r"(?:me\s+)?(?:the\s+)?(?:diff|status|history|current\s+branch)"
+                    r"(?:me\s+)?(?:the\s+)?(?:uncommitted\s+)?(?:diff|status|history|current\s+branch)"
+                    r"(?:\s+of\s+the\s+working\s+tree)?"
                     r"(?:\s+(?:of|for|in|under|at)\s*)?[.?!]*", head.strip()):
         if len(derivation.stated_git_operations(goal)) == 1:
             return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
@@ -552,12 +642,18 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
                 continue
             if decision.get("admitted") and decision.get("specific"):
                 rival_hits.append((cid, dict(decision.get("inputs") or {})))
+        if any(c == "python.refactor.move_symbol.v1" for c, _ in admitted):
+            rival_hits = [(c, inp) for c, inp in rival_hits if c != "python.refactor.move_function.v1"]
         if len(rival_hits) == 1:
             return rival_hits[0]
         if len(rival_hits) > 1:
             return None  # two declared phrases could be the request -> refuse
         if not admitted:
             return None  # the declared phrase is the subject and nothing in-family bound
+    if len(admitted) > 1:
+        cids_set = {c for c, _ in admitted}
+        if "python.refactor.move_symbol.v1" in cids_set and "python.refactor.move_function.v1" in cids_set:
+            admitted = [(c, inp) for c, inp in admitted if c != "python.refactor.move_function.v1"]
     if len(admitted) > 1:
         stated_py = {
             p for p in derivation.stated_existing_files(goal, root)
@@ -566,7 +662,7 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         if stated_py:
             exact_file_admitted = [
                 (cid, inp) for cid, inp in admitted
-                if "diff_path" in inp or "module" in inp
+                if "diff_path" in inp or "module" in inp or "from_file" in inp or "source_module" in inp
             ]
             if len(exact_file_admitted) == 1:
                 admitted = exact_file_admitted
@@ -641,6 +737,43 @@ def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict
     return _APPLYING_REPAIR_CAPABILITY, {**dict(decision.get("inputs") or {}), **values}
 
 
+_PLAN_REG_CACHE: dict[str, Any] = {}
+
+
+def _fast_verified_registry_and_decls(root: pathlib.Path, compiled_context=None) -> tuple[dict, Any]:
+    reg_file = root / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    ev_dir = root / "canonical/astra_runtime/evidence"
+    try:
+        key = (
+            str(root.resolve()),
+            reg_file.stat().st_mtime_ns,
+            reg_file.stat().st_size,
+            ev_dir.stat().st_mtime_ns if ev_dir.is_dir() else 0,
+            id(live_brain.load_verified_registry),
+        )
+    except OSError:
+        key = None
+    if compiled_context is not None:
+        reg = dict(compiled_context[0])
+        if key is not None and _PLAN_REG_CACHE.get("decl_key") == key[:3]:
+            return reg, _PLAN_REG_CACHE["decls"]
+        decls = selection.declarations(root)
+        if key is not None:
+            _PLAN_REG_CACHE["decl_key"] = key[:3]
+            _PLAN_REG_CACHE["decls"] = decls
+        return reg, decls
+    if key is not None and _PLAN_REG_CACHE.get("reg_key") == key:
+        return dict(_PLAN_REG_CACHE["reg"]), _PLAN_REG_CACHE["decls"]
+    reg = dict(live_brain.load_verified_registry())
+    decls = selection.declarations(root)
+    if key is not None:
+        _PLAN_REG_CACHE["reg_key"] = key
+        _PLAN_REG_CACHE["reg"] = reg
+        _PLAN_REG_CACHE["decl_key"] = key[:3]
+        _PLAN_REG_CACHE["decls"] = decls
+    return dict(reg), decls
+
+
 def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, dict, dict] | None:
     """Return ``(registry, admissible, compiled)`` for a DECISIVE typed SWE
     selection, or ``None``.  ``None`` means: not a SWE request, ambiguous, no
@@ -656,9 +789,7 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
     if not is_swe_request(goal):
         return None
     try:
-        registry = (dict(compiled_context[0]) if compiled_context is not None
-                    else dict(live_brain.load_verified_registry()))
-        declared = selection.declarations(root)
+        registry, declared = _fast_verified_registry_and_decls(root, compiled_context)
         cid = ""
         inputs: dict = {}
 

@@ -36,7 +36,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if not op or not target_raw or not out_raw:
         raise RuntimeError("POLYGLOT_MISSING_REQUIRED_ARGUMENTS")
 
-    must_exist = op not in {"create_pyproject", "create_ci_workflow"}
+    must_exist = op not in {"create_pyproject", "create_ci_workflow", "create_sql_migration"}
     target = _safe_path(repo, target_raw, must_exist=must_exist)
     out_path = _safe_path(repo, out_raw, must_exist=False)
 
@@ -50,11 +50,11 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         res = engine.java_transform_and_verify(target, goal_spec)
     elif op in {"ts_rename_symbol", "ts_add_function"}:
         proj_raw = str(args.get("project_root") or "").strip()
-        proj_dir = _safe_path(repo, proj_raw, must_exist=True) if proj_raw else target.parent
+        proj_dir = _safe_path(repo, proj_raw, must_exist=True) if proj_raw and proj_raw not in {".", "auto"} else target.parent
         res = engine.ts_transform_and_verify(target, goal_spec, project_root=proj_dir)
     elif op == "sql_ddl_transform":
         res = engine.sql_transform_and_verify(target, goal_spec)
-    elif op in {"create_pyproject", "pyproject_add_dependency", "pyproject_pin_dependencies", "requirements_add_dependency"}:
+    elif op in {"create_pyproject", "pyproject_add_dependency", "pyproject_pin_dependencies", "pyproject_bump_version", "requirements_add_dependency"}:
         if op == "requirements_add_dependency":
             import re as _re
             m_req = _re.search(r"\bdependency\s+`?([A-Za-z0-9_.-]+(?:[><=~!]+[0-9A-Za-z_.*+-]+)?)`?", goal_spec, _re.IGNORECASE)
@@ -92,7 +92,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             raise RuntimeError("POLYGLOT_REFUSED:NO_DECLARED_DEPENDENCY_TO_VENDOR")
         res = engine.vendor_dependencies_and_verify(proj_dir, goal_spec)
     elif op in {"create_ci_workflow", "ci_fix_workflow", "ci_add_matrix", "ci_add_cache"}:
-        if op == "create_ci_workflow" and target.is_dir():
+        if target.is_dir():
             proj_dir = target.parent if target.name in {"tests", "pkg", "app", "src"} else target
             target = proj_dir / ".github" / "workflows" / "ci.yml"
         else:
@@ -100,6 +100,22 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         res = engine.ci_workflow_transform_and_verify(target, goal_spec, project_dir=proj_dir)
     elif op == "quarantine_flaky_tests":
         res = engine.quarantine_flaky_tests(target)
+    elif op == "build_wheel":
+        res = engine.build_wheel_and_verify(target, goal_spec)
+    elif op == "lock_requirements":
+        res = engine.lock_requirements_and_verify(target, goal_spec)
+    elif op == "create_sql_migration":
+        res = engine.sql_migration_create_and_verify(target, goal_spec)
+    elif op == "generate_sbom":
+        res = engine.generate_cyclonedx_sbom_and_verify(target, goal_spec)
+    elif op == "write_pr_description":
+        res = engine.write_pr_description_and_verify(target, goal_spec)
+    elif op in {"ts_generate_declarations", "port_python_to_js", "port_python_to_go", "port_python_to_rust"}:
+        proj_raw = str(args.get("project_root") or "").strip()
+        dest_p = None
+        if op == "port_python_to_js" and proj_raw and proj_raw not in {".", "auto"} and proj_raw.endswith((".js", ".mjs")):
+            dest_p = _safe_path(repo, proj_raw, must_exist=False)
+        res = engine.polyglot_port_and_dts_verify(target, goal_spec, dest_path=dest_p)
     else:
         raise RuntimeError("POLYGLOT_UNSUPPORTED_OPERATION:" + op)
 

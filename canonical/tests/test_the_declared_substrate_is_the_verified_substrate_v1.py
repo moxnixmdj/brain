@@ -71,8 +71,33 @@ class TheKernelManifestNamesTheGenerationTheKernelWasVerifiedAgainst(unittest.Te
 
 
 class TheBootstrapDoesNotCompeteWithTheManifest(unittest.TestCase):
-    def test_bootstrap_includes_the_pinned_manifest(self) -> None:
-        self.assertIn("requirements/software_engineering_kernel_v1.txt", _includes(BOOTSTRAP))
+    def test_the_restore_step_installs_both_files_in_order(self) -> None:
+        """One entry point, two files, hashed first.
+
+        pip switches the WHOLE set into --require-hashes mode as soon as any line carries a hash, so a
+        single file that mixes the hashed manifest with unhashed tools is not installable at all.
+        Measured 2026-10-31 on 5ad1222: that mix made `pip install -r substrate-requirements.txt`
+        refuse outright and took the image from 6 of 10 tools to 0 of 10.
+        """
+        script = (ROOT / "scripts/restore_substrate_v1.py").read_text(encoding="utf-8")
+        self.assertIn("software_engineering_kernel_v1.txt", script)
+        self.assertIn("substrate-requirements.txt", script)
+        self.assertLess(script.index("install(KERNEL_MANIFEST)"),
+                        script.index("install(REVIEW_TOOLS)"),
+                        "the hashed manifest must be installed before the unhashed tools")
+
+    def test_no_file_mixes_hashed_and_unhashed_requirements(self) -> None:
+        for path in (KERNEL_MANIFEST, BOOTSTRAP):
+            hashed = any("--hash=" in line for line in path.read_text(encoding="utf-8").splitlines())
+            pinned = bool(_pins(path))
+            if hashed:
+                for line in path.read_text(encoding="utf-8").splitlines():
+                    text = line.split("#", 1)[0].strip().rstrip("\\").strip()
+                    if not text or text.startswith("-") or "--hash=" in text:
+                        continue
+                    self.assertRegex(text, r"^[A-Za-z0-9_.\-]+==",
+                                     "%s mixes hash mode with an unpinned line: %r" % (path.name, line))
+            self.assertTrue(pinned, "%s pins nothing" % path.name)
 
     def test_bootstrap_pins_nothing_the_manifest_already_pins(self) -> None:
         """Two files may not both decide a version; that is how the drift happened."""
@@ -80,8 +105,11 @@ class TheBootstrapDoesNotCompeteWithTheManifest(unittest.TestCase):
         bootstrap = _pins(BOOTSTRAP)
         contested = sorted(set(bootstrap) & set(manifest))
         self.assertEqual(contested, [], "bootstrap re-pins: %s" % contested)
+        # A pin in the bootstrap is fine when the manifest does not decide that name; it must be an
+        # EXACT pin, because the matrix measures these tools by name and a resolver choosing another
+        # major changes a verdict.
         for name, version in bootstrap.items():
-            self.assertEqual(version.strip(), "", "bootstrap hard-pins %s" % name)
+            self.assertRegex(version, r"^[0-9]", "bootstrap must pin %s exactly, got %r" % (name, version))
 
     def test_bootstrap_declares_the_linters_the_matrix_measures(self) -> None:
         text = BOOTSTRAP.read_text(encoding="utf-8").lower()

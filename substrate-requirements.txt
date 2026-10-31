@@ -1,28 +1,24 @@
-# THE BOOTSTRAP IS NOT A SECOND SOURCE OF TRUTH.
+# REVIEW-GATE TOOLS ONLY.  Everything else lives in the pinned, hashed manifest.
 #
-# This file used to pin its own versions: tree_sitter==0.21.3 alongside a kernel
-# that was harvested and verified against 0.20.4 (canonical/runtime/
-# tree_sitter_swe_kernel_v1.py, SUBSTRATE), and it named none of hypothesis,
-# crosshair-tool or z3-solver, which requirements/software_engineering_kernel_v1.txt
-# pins by exact version and SHA-256.  Measured 2026-10-31 on 1f2f160: installing
-# this file alone left 6 of 10 tools present, so the matrix reported the toolchain
-# lane unmeasurable and two capability cases (lint, typecheck) could not run at
-# all; installing the pinned kernel manifest instead took the matrix from
-# 22 REAL to 24 REAL with no change to any row.
+# `requirements/software_engineering_kernel_v1.txt` pins the kernel substrate by exact version and
+# SHA-256 (tree_sitter, tree_sitter_languages, hypothesis, crosshair-tool, z3-solver, pytest, ...).
+# This file adds the four tools the review gates drive and the kernel does not need:
+# python.review.diff_static_triage.v1 (ruff), python.review.diff_type_gate.v1 (mypy),
+# python.review.diff_security_gate.v1 (bandit), and the mutation/coverage lane (coverage).
 #
-# So the versions live in exactly one place -- the pinned, hashed kernel manifest --
-# and this file only adds the linters the kernel does not need but the review gates
-# do.  The drift is now a test:
-# canonical/tests/test_the_declared_substrate_is_the_verified_substrate_v1.py.
+# TWO FILES, NEVER ONE: pip switches the WHOLE install set into `--require-hashes` mode as soon as
+# any line carries a hash, so a single file that mixes the hashed manifest with unpinned extras is
+# not installable at all.  Measured 2026-10-31 on 5ad1222: `pip install -r substrate-requirements.txt`
+# failed with "In --require-hashes mode, all requirements must have their versions pinned with ==",
+# and the sandbox went from 6 of 10 tools to 0 of 10.  The restore step is therefore explicit and
+# sequential, and it verifies itself afterwards:
 #
-# One command restores the substrate (pip installs outside /home/user evaporate
-# between turns, measured twice):
-#   pip install --break-system-packages -r substrate-requirements.txt
--r requirements/software_engineering_kernel_v1.txt
-
-# Review-gate tools.  The kernel does not need them; python.review.diff_static_triage.v1,
-# python.review.diff_type_gate.v1, python.review.diff_security_gate.v1 and the mutation lane do.
-mypy
-ruff
-bandit
-coverage
+#   python3 scripts/restore_substrate_v1.py
+#
+# Versions are exact because the matrix measures these tools by name and a resolver choosing a
+# different major would change a verdict.  They are not hashed because they are not the security
+# boundary; the kernel substrate is.
+mypy==2.4.1
+ruff==0.17.3
+bandit==1.9.4
+coverage==7.17.0

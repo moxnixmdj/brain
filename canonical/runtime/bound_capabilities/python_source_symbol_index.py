@@ -12,12 +12,14 @@ from __future__ import annotations
 
 import ast
 import builtins
+import collections
 import hashlib
 import json
 import os
 import pathlib
 
 _BUILTIN_NAMES = frozenset(dir(builtins))
+_IN_MEM_ROW_CACHE: dict[tuple[str, str, bool], dict] = {}
 
 
 def _safe_root(root, raw):
@@ -68,41 +70,58 @@ def _py_files(source_root):
     return sorted(found)
 
 
+# Process-local attestations of bytes this producer actually derived. Neither a
+# source digest nor a self-reported row digest authenticates persisted semantics.
+# New processes rederive once; warm requests and sibling outputs retain reuse.
+_TRUSTED_OUTPUTS: dict[str, str] = {}
+_TRUSTED_DIGEST_ROWS: dict[str, tuple[dict, str, list]] = {}
+
+
+def _remember_output(output, data, *, fast_rows=None, source_root_rel="", unparseable=None):
+    digest = hashlib.sha256(data).hexdigest()
+    key = str(output)
+    _TRUSTED_OUTPUTS.pop(key, None)
+    _TRUSTED_OUTPUTS[key] = digest
+    while len(_TRUSTED_OUTPUTS) > 128:
+        _TRUSTED_OUTPUTS.pop(next(iter(_TRUSTED_OUTPUTS)))
+    if fast_rows is not None:
+        _TRUSTED_DIGEST_ROWS.pop(digest, None)
+        _TRUSTED_DIGEST_ROWS[digest] = (fast_rows, str(source_root_rel), list(unparseable or []))
+        while len(_TRUSTED_DIGEST_ROWS) > 16:
+            _TRUSTED_DIGEST_ROWS.pop(next(iter(_TRUSTED_DIGEST_ROWS)))
+    return digest
+
+
 def _cached_modules(output):
-    """Module rows a previous run of this same index already proved, by path.
-
-    THE INDEX HAD NO MEMORY.  Measured 2026-10-30 on ``canonical/runtime``:
-    2 255 modules, 596 039 references, 97 623 definitions -- 19.4 s cold and
-    16.3 s for the SAME question on the SAME unchanged tree, because every file
-    was re-parsed and every reference re-materialised for an answer the previous
-    run had already written to disk.  The tree-sitter incremental index next door
-    has carried the fix since it was written: keep the previous artifact's rows,
-    verify each one, and re-parse only the files whose bytes actually changed.
-    This is that rule, on the same verification, for the Python index.
-
-    A row is reused only when its source sha256 matches the file on disk AND the
-    row's own sha256 verifies, so a hand-edited or truncated artifact cannot feed
-    a stale definition into a rename.
-    """
-    if not output.is_file():
+    """Reuse persisted rows only when their exact bytes have producer provenance."""
+    _CACHE_META.clear()
+    expected = _TRUSTED_OUTPUTS.get(str(output))
+    if expected is None or not output.is_file():
         return {}
     try:
-        old = json.loads(output.read_text(encoding="utf-8"))
+        data = output.read_bytes()
+        digest = hashlib.sha256(data).hexdigest()
+        if expected != digest:
+            return {}
+        fast = _TRUSTED_DIGEST_ROWS.get(digest)
+        if fast is not None:
+            rows, sr_rel, unp = fast
+            _CACHE_META.update(output_path=str(output), digest=digest, source_root=sr_rel, unparseable=list(unp))
+            return rows
+        old = json.loads(data)
     except (OSError, ValueError):
         return {}
-    return _rows_from_artifact(old)
+    rows = _rows_from_artifact(old)
+    _CACHE_META.update(output_path=str(output), digest=digest)
+    return rows
 
 
 def _rows_from_artifact(old) -> dict:
     """Module rows an already-verified index artifact proved, by path."""
     if not isinstance(old, dict) or old.get("schema") != "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1":
         return {}
-    # The SOURCE is the authority, not the cache.  Every row reused below is
-    # checked against the sha256 of the file's current bytes, so a stale row can
-    # only survive if the file it describes is byte-identical -- in which case a
-    # fresh parse would produce that same row.  Re-hashing each row here was
-    # measured at 5.6 s over 2 255 modules (the artifact is 167 MiB) and bought
-    # nothing a content-addressed cache needs.
+    # Called only after exact artifact bytes are authenticated by this producer.
+    # Current source bytes are checked separately before any row can be reused.
     reusable = {}
     for row in old.get("modules") or []:
         if isinstance(row, dict):
@@ -139,16 +158,8 @@ def _cached_modules_for_tree(output, source_root_rel, limit=3):
     except OSError:
         return {}
     for candidate in siblings:
-        try:
-            old = json.loads(candidate.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            continue
-        if not isinstance(old, dict):
-            continue
-        if str(old.get("source_root") or "") != str(source_root_rel):
-            continue
-        rows = _rows_from_artifact(old)
-        if rows:
+        rows = _cached_modules(candidate)
+        if rows and _CACHE_META.get("source_root") == str(source_root_rel):
             return rows
     return {}
 
@@ -159,10 +170,11 @@ def _row_sha(row):
 
 
 def validate_cached_index(repo, source_root, artifact):
-    """Validate source identity without reparsing cached semantic records.
+    """Validate current source identity and the provenance of cached semantics.
 
-    Both parsed and unparseable files belong to the manifest. This detects
-    content/membership drift, not forged semantics or concurrent tree writes.
+    Known producer bytes avoid rederivation. Unknown dictionaries must exactly
+    match a fresh derivation; checksums alone are not authenticity evidence.
+    This is not a source snapshot or a concurrent-writer isolation boundary.
     """
     repo = pathlib.Path(repo).resolve()
     source_root = pathlib.Path(source_root).resolve()
@@ -195,6 +207,13 @@ def validate_cached_index(repo, source_root, artifact):
         if hashlib.sha256(path.read_bytes()).hexdigest() != expected[name]:
             raise RuntimeError("INDEX_CACHE_SOURCE_STALE:" + name)
 
+    canonical = (json.dumps(artifact, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    digest = hashlib.sha256(canonical).hexdigest()
+    if digest not in _TRUSTED_OUTPUTS.values():
+        if artifact != build_index(source_root, repo):
+            raise RuntimeError("INDEX_CACHE_DERIVATION_UNTRUSTED")
+
+
 
 def _signature(node):
     args = node.args
@@ -218,6 +237,7 @@ class _ModuleIndexer(ast.NodeVisitor):
         self.imports = []              # {module, names}
         self.module_names = set()      # module-level bound names
         self._scope_stack = []         # [{"qualname": str, "locals": set}]
+        self._local_counts = collections.Counter()
         self._cur_ctx = "<module>"
         self._cur_parent = ""
 
@@ -229,7 +249,14 @@ class _ModuleIndexer(ast.NodeVisitor):
         self._cur_parent = joined
 
     def _pop_scope(self):
-        self._scope_stack.pop()
+        popped = self._scope_stack.pop()
+        lc = self._local_counts
+        for nm in popped["locals"]:
+            c = lc[nm] - 1
+            if c <= 0:
+                del lc[nm]
+            else:
+                lc[nm] = c
         if not self._scope_stack:
             self._cur_ctx = "<module>"
             self._cur_parent = ""
@@ -237,6 +264,12 @@ class _ModuleIndexer(ast.NodeVisitor):
             joined = ".".join(s["qualname"] for s in self._scope_stack)
             self._cur_ctx = joined
             self._cur_parent = joined
+
+    def _add_local(self, name: str) -> None:
+        top = self._scope_stack[-1]["locals"]
+        if name not in top:
+            top.add(name)
+            self._local_counts[name] += 1
 
     def _context(self):
         return self._cur_ctx
@@ -264,7 +297,7 @@ class _ModuleIndexer(ast.NodeVisitor):
         if not self._scope_stack:
             self.module_names.add(name)
         else:
-            self._scope_stack[-1]["locals"].add(name)
+            self._add_local(name)
         return qual
 
     def visit_Import(self, node):
@@ -302,7 +335,7 @@ class _ModuleIndexer(ast.NodeVisitor):
         })
         self._push_scope(node.name)
         for arg in _signature(node):
-            self._scope_stack[-1]["locals"].add(arg.lstrip("*"))
+            self._add_local(arg.lstrip("*"))
         self.generic_visit(node)
         self._pop_scope()
 
@@ -314,10 +347,16 @@ class _ModuleIndexer(ast.NodeVisitor):
 
     # -- bindings ---------------------------------------------------------
     def _bind_target(self, target):
+        if isinstance(target, ast.Name):
+            if self._scope_stack:
+                self._add_local(target.id)
+            else:
+                self.module_names.add(target.id)
+            return
         for node in ast.walk(target):
             if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)):
                 if self._scope_stack:
-                    self._scope_stack[-1]["locals"].add(node.id)
+                    self._add_local(node.id)
                 else:
                     self.module_names.add(node.id)
 
@@ -352,16 +391,15 @@ class _ModuleIndexer(ast.NodeVisitor):
     def visit_ExceptHandler(self, node):
         if node.name:
             if self._scope_stack:
-                self._scope_stack[-1]["locals"].add(node.name)
+                self._add_local(node.name)
             else:
                 self.module_names.add(node.name)
         self.generic_visit(node)
 
     # -- references ---------------------------------------------------------
     def _resolve(self, name):
-        for scope in reversed(self._scope_stack):
-            if name in scope["locals"]:
-                return "local"
+        if name in self._local_counts:
+            return "local"
         if name in self.module_names:
             return "module"
         if name in _BUILTIN_NAMES:
@@ -371,18 +409,14 @@ class _ModuleIndexer(ast.NodeVisitor):
     def visit_Name(self, node):
         if isinstance(node.ctx, ast.Load):
             name = node.id
-            res = None
-            for scope in reversed(self._scope_stack):
-                if name in scope["locals"]:
-                    res = "local"
-                    break
-            if res is None:
-                if name in self.module_names:
-                    res = "module"
-                elif name in _BUILTIN_NAMES:
-                    res = "builtin"
-                else:
-                    res = "unknown"
+            if name in self._local_counts:
+                res = "local"
+            elif name in self.module_names:
+                res = "module"
+            elif name in _BUILTIN_NAMES:
+                res = "builtin"
+            else:
+                res = "unknown"
             self.references.append({
                 "col": node.col_offset,
                 "context": self._cur_ctx,
@@ -395,18 +429,46 @@ class _ModuleIndexer(ast.NodeVisitor):
     def visit_Call(self, node):
         caller = self._cur_ctx
         func = node.func
-        callee = None
         if isinstance(func, ast.Name):
-            callee = func.id
+            self.calls.append({"callee": func.id, "caller": caller, "lineno": node.lineno})
         elif isinstance(func, ast.Attribute):
-            callee = func.attr
-        if callee:
-            self.calls.append({
-                "callee": callee,
-                "caller": caller,
-                "lineno": node.lineno,
-            })
+            self.calls.append({"callee": func.attr, "caller": caller, "lineno": node.lineno})
         self.generic_visit(node)
+
+    def generic_visit(self, node):
+        visit = self.visit
+        for fname in node._fields:
+            field_val = getattr(node, fname, None)
+            if isinstance(field_val, list):
+                for item in field_val:
+                    if isinstance(item, ast.AST):
+                        visit(item)
+            elif isinstance(field_val, ast.AST):
+                visit(field_val)
+
+    def visit(self, node):
+        fn = _VISITOR_TABLE.get(type(node))
+        if fn is not None:
+            fn(self, node)
+        else:
+            self.generic_visit(node)
+
+
+_VISITOR_TABLE = {
+    ast.Name: _ModuleIndexer.visit_Name,
+    ast.Call: _ModuleIndexer.visit_Call,
+    ast.Assign: _ModuleIndexer.visit_Assign,
+    ast.AnnAssign: _ModuleIndexer.visit_AnnAssign,
+    ast.AugAssign: _ModuleIndexer.visit_AugAssign,
+    ast.For: _ModuleIndexer.visit_For,
+    ast.With: _ModuleIndexer.visit_With,
+    ast.ExceptHandler: _ModuleIndexer.visit_ExceptHandler,
+    ast.FunctionDef: _ModuleIndexer.visit_FunctionDef,
+    ast.AsyncFunctionDef: _ModuleIndexer.visit_AsyncFunctionDef,
+    ast.ClassDef: _ModuleIndexer.visit_ClassDef,
+    ast.Import: _ModuleIndexer.visit_Import,
+    ast.ImportFrom: _ModuleIndexer.visit_ImportFrom,
+}
 
 
 def _module_names_prepass(tree):
@@ -472,6 +534,7 @@ def _parse_single_module_worker(item):
         row_json = body_json[:-len(suffix)] + f',"row_sha256":"{row_sha}"' + suffix
         return ("ok_json", {
             "path": rel,
+            "sha256": sha,
             "definitions": definitions,
             "calls": calls,
             "ref_count": len(references),
@@ -489,10 +552,11 @@ def _parse_single_module_worker(item):
     return ("ok", row)
 
 
-def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False):
+def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False, cached_loader=None):
     """Request-local index construction shared by staged workflows and the adapter."""
     repo = pathlib.Path(root).resolve()
     source_root = _safe_root(repo, source_root_arg)
+    cached_loaded = cached is not None
     cached = cached or {}
     modules_by_rel = {}
     ordered_rels = []
@@ -506,6 +570,9 @@ def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False)
         raw = path.read_bytes()
         rel = str(path.relative_to(repo)).replace("\\", "/")
         sha = hashlib.sha256(raw).hexdigest()
+        if not cached_loaded and cached_loader is not None:
+            cached = cached_loader() or {}
+            cached_loaded = True
         old = cached.get(rel)
         if old is not None and old.get("sha256") == sha:
             modules_by_rel[rel] = old
@@ -524,14 +591,16 @@ def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False)
             use_mp = False
 
     if use_mp:
+        import multiprocessing
         from concurrent.futures import ProcessPoolExecutor
         workers = min(os.cpu_count() or 4, 8)
-        with ProcessPoolExecutor(max_workers=workers) as ex:
-            results = list(ex.map(_parse_single_module_worker, to_parse, chunksize=max(8, len(to_parse) // (workers * 4))))
+        mp_ctx = multiprocessing.get_context("fork") if "fork" in multiprocessing.get_all_start_methods() else None
+        with ProcessPoolExecutor(max_workers=workers, mp_context=mp_ctx) as ex:
+            results = list(ex.map(_parse_single_module_worker, to_parse, chunksize=max(16, len(to_parse) // (workers * 4))))
     else:
         results = [_parse_single_module_worker(item) for item in to_parse]
 
-    for kind, payload in results:
+    for (_rel_item, _sha_item, _, _jo_item), (kind, payload) in zip(to_parse, results):
         if kind in ("ok", "ok_json"):
             modules_by_rel[payload["path"]] = payload
         else:
@@ -596,8 +665,12 @@ def run(args, root):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
     source_root_rel = source_root.relative_to(repo).as_posix()
-    cached = _cached_modules(output) or _cached_modules_for_tree(output, source_root_rel)
-    report, reused = _collect_index_parts(source_root_rel, repo, cached, json_only=True)
+    report, reused = _collect_index_parts(
+        source_root_rel,
+        repo,
+        json_only=True,
+        cached_loader=lambda: _cached_modules(output) or _cached_modules_for_tree(output, source_root_rel),
+    )
     modules = report["modules"]
     unparseable = report["unparseable"]
     symbols = report["symbols"]
@@ -605,11 +678,11 @@ def run(args, root):
     reference_total = report["totals"]["references"]
     call_edge_total = report["totals"]["call_edges"]
     unchanged = (reused == len(modules) and output.is_file()
+                 and _CACHE_META.get("output_path") == str(output)
                  and _CACHE_META.get("source_root") == str(source_root.relative_to(repo)).replace("\\", "/")
                  and list(_CACHE_META.get("unparseable") or []) == unparseable)
-    if unchanged:
-        data = output.read_bytes()
-    else:
+    data = output.read_bytes() if unchanged else None
+    if data is None or hashlib.sha256(data).hexdigest() != _CACHE_META.get("digest"):
         output.parent.mkdir(parents=True, exist_ok=True)
         row_jsons = [
             m["row_json"] if "row_json" in m else json.dumps(m, sort_keys=True, separators=(",", ":"))
@@ -626,13 +699,19 @@ def run(args, root):
             ],
         }
         tail_part = "]," + json.dumps(tail_obj, separators=(",", ":"))[1:] + "\n"
-        raw_bytes = (head_part + ",".join(row_jsons) + tail_part).encode("utf-8")
-        output.write_bytes(raw_bytes)
-        data = raw_bytes
+        data = (head_part + ",".join(row_jsons) + tail_part).encode("utf-8")
+        output.write_bytes(data)
+    output_sha = _remember_output(
+        output,
+        data,
+        fast_rows={m["path"]: m for m in modules},
+        source_root_rel=report["source_root"],
+        unparseable=unparseable,
+    )
     return {
         "adapter": "python_source_symbol_index",
         "output_path": str(output.relative_to(repo)).replace("\\", "/"),
-        "output_sha256": hashlib.sha256(data).hexdigest(),
+        "output_sha256": output_sha,
         "output_verified": True,
         "file_count": len(modules),
         "unparseable_count": len(unparseable),

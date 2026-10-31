@@ -1948,7 +1948,7 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     # PRODUCTION of a test.  The ASKED side may not be "write the test NAME": "Find the
     # flaky test and write the test name to <answer.json>" asks for a name, and was read
     # as a request to author one.
-    (re.compile(r"\b(?:write|add|create|generate|author|produce|scaffold)\b[^.;]{0,48}?"
+    (re.compile(r"\b(?:write|add|create|generate|author|produce|scaffold)\b(?!\s*\()[^.;]{0,48}?"
                 r"\b(?:unit\s+|regression\s+|integration\s+|property[- ]based\s+)?"
                 r"(?:tests?|specs?|test\s+suite|test\s+file)\b"
                 r"(?!\s*(?:name|names|id|ids|list|path|paths|output|result|results|"
@@ -2465,7 +2465,7 @@ _TRANSFORM_REQUEST_RE = re.compile(
     r"|\b(?:function|method|class)\b[^.\\n]{0,40}\binto (?:smaller|several|multiple|two)\b"
     r"|\bextract the (?:method|function|class)\b", re.IGNORECASE)
 _TRANSFORM_SURFACE_RE = re.compile(
-    r"\b(?:split|inline|decompos\w*|extract_function|extract\.function)\b", re.IGNORECASE)
+    r"\b(?:split|inline|decompos\w*|extract_function|extract\.function|move_symbol|move_function|move\.symbol)\b", re.IGNORECASE)
 
 # A QUESTION IS NOT ANSWERED BY SOMETHING THAT WRITES.  Measured shape 2 above: a repair
 # choreographer matched the words "call graph" in its own keyword list and certified a read-only
@@ -2683,7 +2683,8 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
                            + [str(x) for x in (entry.get("result_fields") or [])])
     if (_RUN_REQUEST_RE.search(text) and _MEASUREMENT_SURFACE_RE.search(declaration)
             and not _EXECUTION_SURFACE_RE.search(declaration)
-            and (_SUBJECT_FILE_RE.search(text) or _ANALYSIS_SURFACE_RE.search(text))):
+            and (_SUBJECT_FILE_RE.search(text) or _ANALYSIS_SURFACE_RE.search(text)
+                 or "`" in text or re.search(r"\bmake\s+\w+", text, re.IGNORECASE))):
         out.append("STATED_EXECUTION_ANSWERED_BY_A_MEASUREMENT:" + (cid or "UNNAMED"))
     if _DIAGNOSE_REQUEST_RE.search(text) and not _DIAGNOSE_SURFACE_RE.search(declaration):
         out.append("STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
@@ -2748,7 +2749,7 @@ def _promised_source_files(goal: str) -> list[str]:
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         if m.group(0).lower() == "add" and re.match(
-            r"^\s+(?:a\s+|an\s+)?(?:unit\s+|property[- ]based\s+|regression\s+)?tests?\s+(?:for|that)\b",
+            r"^\s+(?:a\s+|an\s+)?(?:unit\s+|property[- ]based\s+|regression\s+)?(?:tests?|benchmarks?)\s+(?:for|that)\b",
             text[m.end():m.end() + 56],
             re.IGNORECASE,
         ):
@@ -3029,11 +3030,21 @@ def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None,
     return False
 
 
-def _py_files_under(root: str, limit: int = 50) -> list[str]:
+_ROOT_SOURCE_SUFFIXES = (
+    ".py", ".yml", ".yaml", ".sql", ".toml", ".ts", ".tsx", ".js", ".mjs",
+    ".go", ".rs", ".java", ".cpp", ".cc", ".c", ".h", ".hpp", ".md", ".txt",
+)
+
+
+def _py_files_under(root: str, limit: int = 80) -> list[str]:
     base = ROOT / root
     out: list[str] = []
     try:
-        for path in sorted(base.rglob("*.py")):
+        for path in sorted(base.rglob("*")):
+            if not path.is_file() or "__pycache__" in path.parts or ".git" in path.parts:
+                continue
+            if path.suffix.lower() not in _ROOT_SOURCE_SUFFIXES and path.name != "Makefile":
+                continue
             out.append(str(path.relative_to(ROOT)))
             if len(out) >= limit:
                 break
@@ -3085,7 +3096,11 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     # Requiring every file in the tree to change would refuse a correct repair of
     # one module; requiring nothing would accept a run that touched no file at all.
     for root, files_before in (roots_before or {}).items():
-        changed = any(_source_digest(rel) != digest for rel, digest in files_before.items())
+        files_now = _py_files_under(root)
+        changed = (
+            set(files_now) != set(files_before)
+            or any(_source_digest(rel) != digest for rel, digest in files_before.items())
+        )
         if changed or _statement_patch_authority(root, artifacts, before_files, goal):
             continue
         errors.append("PROMISED_SOURCE_UNCHANGED:" + root)
@@ -3294,6 +3309,49 @@ def _git_head(path: Path) -> str:
         return ""
 
 
+def _git_refs_state(path: Path) -> str:
+    try:
+        if not path.exists():
+            return ""
+        cur = path.resolve()
+        if cur.is_file():
+            cur = cur.parent
+        git_dir: Path | None = None
+        for d in (cur, *cur.parents):
+            cand = d / ".git"
+            if cand.is_dir():
+                git_dir = cand
+                break
+            if cand.is_file():
+                txt = cand.read_text(encoding="utf-8").strip()
+                if txt.startswith("gitdir:"):
+                    gd = (d / txt.split(":", 1)[1].strip()).resolve()
+                    if gd.is_dir():
+                        git_dir = gd
+                        break
+        if git_dir is None:
+            return ""
+        parts: list[str] = []
+        head_f = git_dir / "HEAD"
+        if head_f.is_file():
+            parts.append("HEAD=" + head_f.read_text(encoding="utf-8", errors="replace").strip())
+        heads_dir = git_dir / "refs" / "heads"
+        if heads_dir.is_dir():
+            for rf in sorted(heads_dir.rglob("*")):
+                if rf.is_file():
+                    parts.append(
+                        "ref:" + rf.relative_to(heads_dir).as_posix() + "=" + rf.read_text(encoding="utf-8", errors="replace").strip()
+                    )
+        wt_dir = git_dir / "worktrees"
+        if wt_dir.is_dir():
+            for wf in sorted(wt_dir.iterdir()):
+                if wf.is_dir():
+                    parts.append("wt:" + wf.name)
+        return "|".join(parts)
+    except Exception:
+        return ""
+
+
 def _is_python_code(text: str) -> bool:
     """Is this still source, or has a JSON report been written over it?
 
@@ -3370,9 +3428,11 @@ def observe_world(goal: str) -> dict[str, Any]:
                 pass
             if path.suffix.lower() == ".py":
                 parses[raw] = _is_python_code(path.read_text(encoding="utf-8", errors="replace"))
-    head = _git_head(ROOT / stated[0]) if stated else ""
+    existing_stated = [s for s in stated if (ROOT / s).exists()]
+    head = _git_head(ROOT / existing_stated[0]) if existing_stated else ""
+    git_refs = _git_refs_state(ROOT / existing_stated[0]) if existing_stated else ""
     return {"files": files, "walks": walked, "parses": parses,
-            "git_head": head, "stated": stated}
+            "git_head": head, "git_refs": git_refs, "stated": stated}
 
 
 def observed_effect_errors(goal: str, before: Mapping[str, Any],
@@ -3423,7 +3483,9 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
             present = any((ROOT / a).is_file() for a in (artifacts or []))
             from canonical.runtime import execute_v1 as _kernel
             moved = _kernel._diff(before.get("files") or {}, after.get("files") or {})["changed"]
-            committed = bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")
+            committed = (bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")) or (
+                bool(after.get("git_refs")) and after.get("git_refs") != before.get("git_refs")
+            )
             stdout_filter_verified = False
             if not artifacts and isinstance(result.get("composer_execution"), Mapping):
                 steps = list((result.get("composer_execution") or {}).get("steps") or [])
@@ -3524,9 +3586,14 @@ def _scope_claim_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
         if not isinstance(files, int):
             files = doc.get("parsed_file_count") or doc.get("file_count")
         # A single-file scope is the one case that is provably too small to answer "every X":
-        # a call site can live in any other module, and one file is not the codebase.
+        # a call site can live in any other module, and one file is not the codebase -- unless
+        # that single file IS the only Python module in its package and parent directory.
         if scope.strip().endswith((".py", ".pyw")) and files in (None, 1, 0):
-            return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
+            scope_p = (ROOT / scope.strip()).resolve()
+            parent_py = list(scope_p.parent.glob("*.py")) if scope_p.parent.is_dir() else []
+            upper_py = list(scope_p.parent.parent.glob("*.py")) if scope_p.parent.parent.is_dir() else []
+            if len(parent_py) != 1 or len(upper_py) > 0:
+                return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
     return []
 
 
@@ -5283,7 +5350,10 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     _typed_plan._family_terms(prose) is not None
                     or not _typed_plan._effect_consistent(
                         prose, selected, (context[0] or {}).get(selected))))
-                compound = not selected and bool(context[2].get("compiled_parts"))
+                compound = not selected and (
+                    bool(context[2].get("compiled_parts"))
+                    or _typed_plan._family_terms(prose) is not None
+                )
                 if contradicted or compound:
                     corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
                     if corrected is None and contradicted:

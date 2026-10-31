@@ -144,9 +144,10 @@ class ASubstituteCheckerIsNotAGate(unittest.TestCase):
     def test_the_security_gate_does_not_certify_a_substitute(self):
         try:
             import bandit  # noqa: F401
-            self.skipTest("bandit is installed: the gate ran its declared checker")
         except Exception:  # noqa: BLE001 - absence is the condition under test
             pass
+        else:
+            self.skipTest("bandit is installed: the gate ran its declared checker")
         adapter = ROOT / "canonical/runtime/bound_capabilities/python_review_diff_security_gate.py"
         spec = __import__("importlib.util", fromlist=["spec"]).spec_from_file_location(
             "law_security_gate", adapter)

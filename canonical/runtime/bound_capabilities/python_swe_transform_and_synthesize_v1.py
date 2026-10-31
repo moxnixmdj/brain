@@ -33,15 +33,28 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     target_raw = str(args.get("target_path") or "").strip()
     out_raw = str(args.get("output_path") or "").strip()
     goal_spec = str(args.get("request_spec") or op).strip()
-    fn_name = str(args.get("symbol") or "").strip() or None
+    fn_raw = str(args.get("symbol") or "").strip()
+    fn_name = None if fn_raw in {"", "auto"} else fn_raw
 
     if not op or not target_raw or not out_raw:
         raise RuntimeError("PYTHON_SWE_MISSING_REQUIRED_ARGUMENTS")
 
     target = _safe_path(repo, target_raw, must_exist=True)
     out_path = _safe_path(repo, out_raw, must_exist=False)
-    test_raw = str(args.get("test_file_path") or "").strip()
-    explicit_test = _safe_path(repo, test_raw, must_exist=False) if test_raw else None
+    test_raw = str(args.get("test_target") or args.get("test_file_path") or "").strip()
+    explicit_test = _safe_path(repo, test_raw, must_exist=False) if test_raw and test_raw != "auto" else None
+    sec_raw = str(args.get("secondary_path") or "").strip()
+    secondary_target = _safe_path(repo, sec_raw, must_exist=True) if sec_raw else None
+    if secondary_target is None and op == "crossfile_feature":
+        for cand_py in __import__("re").findall(r"[A-Za-z0-9_./-]+\.py", goal_spec):
+            if cand_py != target_raw:
+                try:
+                    cp = _safe_path(repo, cand_py, must_exist=True)
+                    if cp != target and not cp.name.startswith("test_"):
+                        secondary_target = cp
+                        break
+                except RuntimeError:
+                    continue
 
     if op == "optimize_function":
         res = engine.egraph_optimize_function(target, fn_name=fn_name)
@@ -51,13 +64,24 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         res = engine.add_thread_pool_parallel(target, fn_name=fn_name)
     elif op == "release_gil":
         res = engine.release_gil_sum_kernel(target, fn_name=fn_name)
-    elif op in {"write_unit_test", "write_property_test", "write_regression_test", "advance_mutation_kill", "tests_from_docstrings"}:
+    elif op in {
+        "write_unit_test", "write_property_test", "write_regression_test",
+        "advance_mutation_kill", "tests_from_docstrings", "raise_coverage",
+        "add_benchmark", "parallel_test_suite",
+    }:
         res = engine.author_verified_tests(target, goal_spec, explicit_test_path=explicit_test, fn_name=fn_name)
-    elif op in {"add_cli_flag", "add_logging", "add_retries"}:
-        res = engine.synthesize_feature_transform(target, goal_spec)
-    elif op in {"split_module", "replace_deprecated", "add_type_hints", "extract_constant", "format_python"}:
+    elif op in {
+        "add_cli_flag", "add_logging", "add_retries", "implement_issue", "crossfile_feature",
+        "add_error_handling", "sqlalchemy_model", "add_fastapi_endpoint", "add_http_client",
+        "harden_path_traversal", "add_counter_metric", "make_async",
+    }:
+        res = engine.synthesize_feature_transform(target, goal_spec, secondary_target=secondary_target)
+    elif op in {
+        "split_module", "replace_deprecated", "add_type_hints", "extract_constant",
+        "format_python", "remove_dead_code", "lint_and_fix", "move_module", "safe_helper_refactor",
+    }:
         res = engine.structural_refactor_python(target, goal_spec)
-    elif op in {"git_commit", "git_branch_and_commit", "git_cherry_pick"}:
+    elif op in {"git_commit", "git_branch_and_commit", "git_cherry_pick", "git_worktree", "git_revert", "git_rebase"}:
         res = engine.git_write_surgeon(target, goal_spec, brain_root=repo)
     else:
         raise RuntimeError("PYTHON_SWE_UNSUPPORTED_OPERATION:" + op)

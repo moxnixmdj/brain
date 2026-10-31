@@ -33,7 +33,8 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     target_raw = str(args.get("target_path") or "").strip()
     out_raw = str(args.get("output_path") or "").strip()
     goal_spec = str(args.get("request_spec") or op).strip()
-    fn_name = str(args.get("symbol") or "").strip() or None
+    fn_raw = str(args.get("symbol") or "").strip()
+    fn_name = None if fn_raw in {"", "auto"} else fn_raw
 
     if not op or not out_raw:
         raise RuntimeError("DIAGNOSE_ARCHITECT_MISSING_REQUIRED_ARGUMENTS")
@@ -87,10 +88,46 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         if target is None:
             raise RuntimeError("COVERAGE_TARGET_MISSING")
         res = engine.measure_package_coverage(target)
+    elif op == "find_dead_code":
+        if target is None:
+            raise RuntimeError("DEAD_CODE_TARGET_MISSING")
+        res = engine.find_dead_code_symbols(target)
+    elif op == "measure_mutation_score":
+        if target is None:
+            raise RuntimeError("MUTATION_TARGET_MISSING")
+        res = engine.measure_module_mutation_score(target)
+    elif op == "lint_javascript":
+        if target is None:
+            raise RuntimeError("JS_LINT_TARGET_MISSING")
+        res = engine.lint_javascript_file(target)
+    elif op == "run_js_tests":
+        if target is None:
+            raise RuntimeError("JS_TEST_TARGET_MISSING")
+        res = engine.run_javascript_test_suite(target)
     elif op in {"design_adr", "migration_plan", "package_split_design"}:
         res = engine.synthesize_architecture_artifact(target, goal_spec)
     elif op in {"git_changelog", "git_diff_ref", "git_blame_line"}:
         res = engine.git_read_history_analysis(target, goal_spec, brain_root=repo)
+    elif op == "trace_data_flow":
+        if target is None:
+            raise RuntimeError("TRACE_FLOW_TARGET_MISSING")
+        res = engine.trace_intermodule_data_flow(target, goal_spec)
+    elif op == "plan_rename":
+        if target is None:
+            raise RuntimeError("PLAN_RENAME_TARGET_MISSING")
+        res = engine.plan_rename_files(target, fn_name, goal_spec, repo_root=repo)
+    elif op == "validate_json_schema":
+        if target is None:
+            raise RuntimeError("JSON_SCHEMA_TARGET_MISSING")
+        res = engine.validate_json_config_schema(target, goal_spec)
+    elif op == "analyze_log_exception":
+        if target is None:
+            raise RuntimeError("LOG_TARGET_MISSING")
+        res = engine.analyze_log_exception(target, goal_spec)
+    elif op == "review_pull_request":
+        if target is None:
+            raise RuntimeError("PR_REVIEW_TARGET_MISSING")
+        res = engine.review_pull_request_changes(target, goal_spec, brain_root=repo)
     else:
         raise RuntimeError("DIAGNOSE_ARCHITECT_UNSUPPORTED_OPERATION:" + op)
 
