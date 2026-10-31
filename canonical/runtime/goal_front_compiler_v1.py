@@ -955,6 +955,29 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
     optional = declared_optional_inputs(entry)
     replacement = declared_replacement_identifier(goal)
     is_extract = bool(re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE))
+    _evidence_cache: dict[str, Any] = {}
+
+    def _derived_value(key: str) -> Any:
+        """The value the SENTENCE proves for ``key``, or None.  One derivation per call, cached.
+
+        A placeholder is the LAST resort, never the first.  Measured 2026-10-31 on the advanced
+        census, request 38 -- "Extract the loop in the function total in <f> into a helper" -- the
+        branch below filled ``start_line``/``end_line`` with the literal ``0`` BEFORE anything
+        asked ``declared_input_derivation_v1``, and the region the sentence states (the single
+        loop, lines 3-4) was therefore thrown away before the adapter ever saw it.  The adapter
+        then refused ``REGION_INVALID`` on a request whose region the repository could prove.  The
+        proof is asked FIRST here; ``0`` is written only when the sentence really states no region,
+        and the adapter's own contract still fails closed on it.
+        """
+        if "all" not in _evidence_cache:
+            try:
+                from canonical.runtime import declared_input_derivation_v1 as _d
+                _evidence_cache["all"] = (_d.derive(goal, entry or {}, root)
+                                          if _d.is_swe_request(goal) else {})
+            except Exception:  # noqa: BLE001 - derivation is advisory; a fault keeps the placeholder
+                _evidence_cache["all"] = {}
+        return (_evidence_cache["all"].get(key) or {}).get("value")
+
     still: list[tuple[str, BaseException]] = []
     for key, exc in unbound:
         if key in defaults:
@@ -964,7 +987,8 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
         elif key.startswith("new_") and replacement:
             inputs[key] = replacement
         elif is_extract and key in ("start_line", "end_line"):
-            inputs[key] = 0
+            proven = _derived_value(key)
+            inputs[key] = proven if isinstance(proven, int) and proven >= 1 else 0
         elif is_extract and key == "new_name":
             inputs[key] = "_extracted_helper"
         else:
