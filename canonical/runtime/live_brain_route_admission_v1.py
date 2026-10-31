@@ -2398,13 +2398,13 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # The same question, now asked once in one place: the two assignments
         # that used to stand here were this predicate written inline, which is
         # how the other two composition sites came to be more permissive.
-        if (contract_spec is None and crossfile_spec is None
-                and _states_an_executable_form(normalized, admission)):
-            composed = _try_composed(task_id, goal, started)
-            if composed is not None:
-                return _close_observations(
-                    _composed_holds_up(composed, normalized, future_artifacts),
-                    normalized, world_before, future_artifacts)
+        if contract_spec is None and crossfile_spec is None:
+            if _states_an_executable_form(normalized, admission):
+                composed = _try_composed(task_id, goal, started)
+                if composed is not None:
+                    return _close_observations(
+                        _composed_holds_up(composed, normalized, future_artifacts),
+                        normalized, world_before, future_artifacts)
         return _fail(task_id, "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
                      "ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")), started, **_extra)
     promised_sources = _promised_source_files(normalized)
