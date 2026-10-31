@@ -7,7 +7,7 @@
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "04b6cbb8329507cbd139b7df2038c0eb2c56c237",
+ "canonical_base_commit": "ecfc9fb0aa7735a51c189434f6854bda0f9f5e59",
  "date": "2026-10-31",
  "intent": "A certified PASS must carry the answer the sentence asked for, and a read must never stand in for the rewrite it was asked for.",
  "causal_blocker": "The door's result is a summary and the answer is in the artifact, and nothing reconciled them: measured 2026-10-31 on 62 human sentences, 7 of the 12 PASSes were wrong, 5 of them a count returned for a request to extract (caller_index_size: 8, function_count: 10, distinct_imported_module_count: 5) while the exact bytes sat in the artifact. Separately the binder read noun phrases instead of verbs, so 'Reset the working tree to HEAD~1' bound op=status and PASSed for that row declares it has no reset.",
@@ -33,7 +33,7 @@
  "user_authorized_governance_change": false,
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "load_bearing_primary": {
-  "canonical_base_commit": "04b6cbb8329507cbd139b7df2038c0eb2c56c237",
+  "canonical_base_commit": "ecfc9fb0aa7735a51c189434f6854bda0f9f5e59",
   "open_obligation_ids": [],
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
@@ -82,7 +82,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "04b6cbb8329507cbd139b7df2038c0eb2c56c237",
+  "canonical_base_commit": "ecfc9fb0aa7735a51c189434f6854bda0f9f5e59",
   "real_outcome": "A PASS from live_brain_route_admission_v1.solve carries the answer the sentence asked for, or it does not happen: five measured count-instead-of-collection passes and four measured read-certified-as-rewrite passes are now either the real collection or a named refusal.",
   "required_capability": "Answer-shape reconciliation at the door's single exit, and an operation binding that reads the sentence's verb instead of its nouns. Both are internal invariants over data the repository already has; neither is an external capability.",
   "proxy_goals_deleted": [
