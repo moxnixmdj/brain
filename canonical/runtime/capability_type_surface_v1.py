@@ -30,6 +30,8 @@ from typing import Any, Callable, Mapping
 
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_TYPE_SURFACE_V1"
 REGISTRY = Path(__file__).resolve().parents[0] / "BOUND_CAPABILITY_REGISTRY_V1.json"
+if REGISTRY.is_file() and REGISTRY.read_bytes()[:1] == b"@":
+    REGISTRY = REGISTRY.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
 
 # --------------------------------------------------------------------------------- type universe
 

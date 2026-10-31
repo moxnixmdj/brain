@@ -60,21 +60,17 @@ _CONFIGURATION_SLOTS = frozenset({
 # applied to every goal.  Only an explicit software-engineering request to a
 # software-engineering capability takes this path; everything else keeps the
 # byte-for-byte original admission gate.
-SWE_CID_PREFIXES = ("python.", "code.", "software.", "evidence.oracle.", "orchestration.verify.")
+SWE_CID_PREFIXES = ("python.", "code.", "software.", "git.", "evidence.oracle.", "orchestration.verify.")
 _SWE_VERBS = (
-    "rename", "repair", "fix", "bug", "broken", "refactor", "extract function",
-    "lint", "type-check", "typecheck", "review", "localize", "traceback",
+    "rename", "repair", "fix", "bug", "broken", "broke", "refactor", "extract ", "extract function",
+    "lint", "type-check", "typecheck", "review", "localize", "fault", "traceback",
     "scaffold", "generate test", "failing test", "unit test", "patch",
-    # The verbs the job is made of that were missing.  Measured: "Inline the
-    # single-use helper ...", "Remove the SQL injection ..." and "Resolve the merge
-    # conflict ..." are ordinary software-engineering sentences, and every one of
-    # them was refused the derivation path -- so a row that exists could never be
-    # reached by the sentence that names it.  This list is only a GATE (does this
-    # request belong on the typed SWE path at all); a listed verb still binds
-    # nothing by itself, and ambiguity still yields no value.
     "inline", "single-use", "single use", "merge conflict", "conflict", "unmerged",
     "injection", "parameterize", "parameterized", "sql", "dead code", "unused import",
     "remove the unused", "move the function", "add a parameter", "caller",
+    "circular import", "import cycle", "bisect", "slower", "mutation", "taint", "untrusted",
+    "flaky", "intermittently", "deprecated", "sql injection",
+    "linearithmic", "unused", "race condition", "are failing",
 )
 
 
@@ -186,6 +182,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # the directory is stated evidence, the scan is bounded to that directory,
     # and more than one candidate is still ambiguous (no value is invented).
     discovered_tests = False
+    if not tests:
+        try:
+            from canonical.runtime import goal_compiler as _gc
+            repo_paths = _gc._repo_paths(str(goal or ""), pathlib.Path(root))
+            witness_dirs = _gc._witness_directories(str(goal or ""), repo_paths)
+        except Exception:
+            witness_dirs = set()
+        if witness_dirs:
+            w_found: list[str] = []
+            for wdir in sorted(witness_dirs):
+                wp = (pathlib.Path(root) / wdir).resolve()
+                if wp.is_dir():
+                    for p in sorted(wp.rglob("*.py")):
+                        if "__pycache__" not in p.parts and _TEST_NAME_RE.search(p.name):
+                            w_found.append(p.relative_to(pathlib.Path(root).resolve()).as_posix())
+            if w_found:
+                tests = w_found
+                discovered_tests = True
     if not tests and len(sources) == 1:
         parent = (pathlib.Path(root) / sources[0]).parent
         try:
@@ -240,6 +254,13 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             for key in ("new_param", "new_symbol", "new_name"):
                 if key in keys:
                     out[key] = {"value": named[0], "rule": "NEW_NAME_STATED", "evidence": named[0]}
+        elif re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
+            if "new_name" in keys:
+                out["new_name"] = {"value": "_extracted_helper", "rule": "EXTRACT_DEFAULT_HELPER_NAME", "evidence": "extract"}
+    if re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
+        for lkey in ("start_line", "end_line"):
+            if lkey in keys and lkey not in out:
+                out[lkey] = {"value": 0, "rule": "EXTRACT_AUTO_SLICE_REGION", "evidence": "extract"}
 
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file
@@ -256,6 +277,19 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         except (OSError, SyntaxError, ValueError):
             tree = None
         if tree is not None:
+            defined_fns = {
+                node.name
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            }
+            if not wanted_fn and not wanted_param:
+                preps = {
+                    m.group(1)
+                    for m in re.finditer(r"\b(?:from|in|of|function|method)\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", str(goal or ""), re.I)
+                    if m.group(1) in defined_fns
+                }
+                if len(preps) == 1:
+                    wanted_fn = next(iter(preps))
             matches: list[str] = []
             for node in ast.walk(tree):
                 if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):

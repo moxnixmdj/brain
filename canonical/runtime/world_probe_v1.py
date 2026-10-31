@@ -131,6 +131,7 @@ def _decide_bootstrap(effect, root, goal_paths):
 
 
 _INDEX_CACHE: dict[str, list[str]] = {}
+_MATCH_CACHE: dict[tuple[int, str], list[str]] = {}
 
 
 def _index(root: Path) -> list[str]:
@@ -157,8 +158,27 @@ def _index(root: Path) -> list[str]:
                         found.append(os.path.relpath(entry.path, str(root)))
         except OSError:
             continue
+    found.sort()
     _INDEX_CACHE[key] = found
     return found
+
+
+def _matching_files(root: Path, subject: str) -> list[str]:
+    """Pre-sorted paths under ``root`` matching ``_FILE_KINDS[subject]``, memoized per index."""
+    spec = _FILE_KINDS.get(subject)
+    if spec is None:
+        return []
+    idx = _index(root)
+    ck = (id(idx), subject)
+    hit = _MATCH_CACHE.get(ck)
+    if hit is not None:
+        return hit
+    suffixes, substrings = spec
+    matched = [rel for rel in idx if _matches_kind(rel, suffixes, substrings)]
+    if len(_MATCH_CACHE) > 1024:
+        _MATCH_CACHE.clear()
+    _MATCH_CACHE[ck] = matched
+    return matched
 
 
 def _subjects(effect: str) -> list[str]:
@@ -192,9 +212,9 @@ def _decide_file(subject, goal_paths, root):
     for rel in goal_paths:
         if _matches_kind(rel, suffixes, substrings):
             return {"true": True, "how": "goal_path", "evidence": rel}
-    for rel in _index(root):
-        if _matches_kind(rel, suffixes, substrings):
-            return {"true": True, "how": "tree_scan", "evidence": rel}
+    matched = _matching_files(root, subject)
+    if matched:
+        return {"true": True, "how": "tree_scan", "evidence": matched[0]}
     return {"true": False, "how": "no_matching_file", "evidence": None}
 
 

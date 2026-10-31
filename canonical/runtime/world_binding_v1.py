@@ -344,6 +344,9 @@ def _first_with_records(rel_paths, root):
     return None
 
 
+_WORLD_KIND_HIT_CACHE: dict[tuple[int, str, str], str | None] = {}
+
+
 def _world_path_for(name, cid, root):
     """Find the file the world already has, when the goal never named it.
 
@@ -362,20 +365,33 @@ def _world_path_for(name, cid, root):
     the pick.
     """
     from canonical.runtime import world_probe_v1 as WP
+    idx = WP._index(root)
+    root_s = str(root)
     # The placeholder's own name is the stronger signal: `manifest_path`
     # must never be satisfied by the .tar.gz the capability also mentions.
     for keys in (WP.kind_keys_for(str(name)), WP.kind_keys_for(str(cid))):
         for key in sorted(keys):
-            suffixes, substrings = WP._FILE_KINDS[key]
-            ordered = [rel for rel in sorted(WP._index(root))
-                       if WP._matches_kind(rel, suffixes, substrings)]
-            if not ordered:
+            ck = (id(idx), root_s, key)
+            if ck in _WORLD_KIND_HIT_CACHE:
+                cached = _WORLD_KIND_HIT_CACHE[ck]
+                if cached is not None:
+                    return cached
                 continue
+            ordered = WP._matching_files(root, key)
+            if not ordered:
+                if len(_WORLD_KIND_HIT_CACHE) > 1024:
+                    _WORLD_KIND_HIT_CACHE.clear()
+                _WORLD_KIND_HIT_CACHE[ck] = None
+                continue
+            picked = ordered[0]
             if key in _STRUCTURED_KINDS:
                 with_records = _first_with_records(ordered, root)
                 if with_records is not None:
-                    return with_records
-            return ordered[0]
+                    picked = with_records
+            if len(_WORLD_KIND_HIT_CACHE) > 1024:
+                _WORLD_KIND_HIT_CACHE.clear()
+            _WORLD_KIND_HIT_CACHE[ck] = picked
+            return picked
     return None
 
 
