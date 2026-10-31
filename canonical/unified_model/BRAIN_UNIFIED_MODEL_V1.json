@@ -24342,13 +24342,16 @@
     "default value",
     "signature extend",
     "argument",
-    "caller",
     "behaviour unchanged",
+    "parameter",
+    "parameters",
+    "default",
+    "signature",
+    "optional",
     "python",
     "refactor",
     "add_parameter",
     "v1",
-    "signature",
     "extend"
    ],
    "verification": {
@@ -30486,8 +30489,8 @@
   "engines": 26,
   "knowledge_documents": 205,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6524,
-  "routing_tokens": 2261,
+  "research_index_records": 6525,
+  "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
   "source_index_modules": 1904
@@ -30495,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "45adf4f78681922e04c314b90d22d58e930b48b960fcaa8a4c919548dcabdf84"
+  "value": "0906058ad6b60288821d834e55648eac51a0fe6beb141353cba4e5561b73a16b"
  },
  "engines": [
   {
@@ -32045,8 +32048,7 @@
     "python.source.dead_code.v1": 702.0
    },
    "caller": {
-    "python.refactor.add_parameter.v1": 312.666667,
-    "python.refactor.inline_helper.v1": 469.0
+    "python.refactor.inline_helper.v1": 702.0
    },
    "callers": {
     "python.refactor.move_symbol.v1": 352.5,
@@ -37096,6 +37098,9 @@
    },
    "parameterize": {
     "python.source.add_parameter.v1": 702.0
+   },
+   "parameters": {
+    "python.refactor.add_parameter.v1": 468.0
    },
    "parametric": {
     "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py.auto.v1": 312.666667,
@@ -208414,6 +208419,51 @@
    }
   },
   {
+   "action_id": "THE_LAWS_MAIN_LOST_TWICE_ARE_BACK_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-25",
+   "id": "research:canonical/action_intents/THE_LAWS_MAIN_LOST_TWICE_ARE_BACK_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_LAWS_MAIN_LOST_TWICE_ARE_BACK_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d9f0488f23a5078e774165717fd369bf61345fd6fc3d1d4d06321099227118e0",
+   "status": "",
+   "terms": {
+    "06e9364": 1,
+    "17": 2,
+    "18": 1,
+    "20261031": 1,
+    "28": 3,
+    "6435": 1,
+    "adapter": 1,
+    "adapters": 1,
+    "add_parameter": 1,
+    "back": 1,
+    "before": 1,
+    "class": 1,
+    "correct": 1,
+    "create-a-function": 1,
+    "dropped": 1,
+    "execution": 1,
+    "exist": 1,
+    "extract_function": 1,
+    "failures": 1,
+    "files": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hardcore_swe_surface_probe_20261030.py": 1,
+    "i.e": 1,
+    "intents": 1,
+    "jobs": 1,
+    "law": 1,
+    "lost": 2,
+    "main": 3,
+    "routing": 3,
+    "two": 2,
+    "v1": 2,
+    "were": 2
+   }
+  },
+  {
    "action_id": "THE_LINES_THAT_REPEAT_ARE_NOT_THE_LINES_THAT_DO_NOT_AND_A_COUNT_OF_A_FILTERED_SET_IS_NOT_THE_FILE_LENGTH_V1_20261026_V1",
    "capability": false,
    "date": "2026-10-26",
@@ -230019,7 +230069,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "c96d8c35f99e2ab03215f82e413670b0a6f0f0068c935727b3a80bf0a5afeca0",
+   "sha256": "d49d4fa431d143c00f5d26e8b289d03b80ef631d5083f457045da9d8f575bf9a",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 10,
    "symbols": [
@@ -273870,15 +273920,19 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "343f2231b898125d4c5fcc673f4fa910909b7c2a5834e3e644ee701acebddcff",
+   "sha256": "f84ef101ff8f25534f5ccde19d7616e9dd214eae9746319307eba6b28ce39d6b",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
-   "symbol_count": 10,
+   "symbol_count": 14,
    "symbols": [
     "_effect_consistent",
     "_execution_template",
+    "_family_hits",
     "_family_terms",
     "_fresh_output_path",
+    "_governing_clause",
+    "_phrase_rivals",
     "_resolve_family",
+    "_row_surface",
     "build_plan",
     "implementation_effect_error",
     "is_swe_request",
@@ -273891,16 +273945,20 @@
     "effect_consistent": 1,
     "execution": 1,
     "execution_template": 1,
+    "family_hits": 1,
     "family_terms": 1,
     "fresh_output_path": 1,
     "front": 1,
+    "governing_clause": 1,
     "hidden-tool": 1,
     "implementation_effect_error": 1,
     "is_swe_request": 1,
     "live": 1,
+    "phrase_rivals": 1,
     "plan": 2,
     "plan_report": 1,
     "resolve_family": 1,
+    "row_surface": 1,
     "scoped": 1,
     "stated_family_token": 1,
     "swe": 1,
