@@ -3477,8 +3477,10 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
         # the ROW that was asked, and the decisive typed plan already names the row the
         # sentence describes.  The retry re-enters the SAME gate chain, and the verdict the
         # caller receives is the retry's own -- failure included.  Nothing is widened.
-        if not result.get("execution") and not any(result.get(field)
-                                                   for field in _JUDGED_EVIDENCE_FIELDS):
+        if (not result.get("execution")
+                and result.get("tool_executed") is not True
+                and not result.get("side_effects_may_exist")
+                and not any(result.get(field) for field in _JUDGED_EVIDENCE_FIELDS)):
             return True
         stated = "%s %s" % (result.get("reason") or "", result.get("failure_reason") or "")
         return bool(_PRECONDITION_BLOCKER_RE.search(stated))

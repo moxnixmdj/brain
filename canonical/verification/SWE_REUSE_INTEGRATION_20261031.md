@@ -1,0 +1,145 @@
+# SWE mechanism reuse and current-main integration — 2026-10-31
+
+Local sandbox measurement; authority NONE. This report is not a terminal-goal
+claim or an independent runtime-verification receipt. The signed referee judges
+repository integrity separately; it does not turn a failing test into a pass.
+
+## Changes
+
+Reused existing Brain implementations discovered at `cd44f98`, then integrated
+rather than restoring old modules wholesale. Merged current main through
+`f333567dd1a50aa0d18b583cb340765e9086f021`; preserved its bisect materialization
+limits, request-role rules and guarded retry behavior. Runtime and tests import
+only current-tree source, never the discovery copies.
+
+* Restored interprocedural taint summaries and helper-to-sink propagation.
+  Restricted shell quoting to shell contexts; HTML/URL/shell escaping cannot
+  erase taint headed for Python execution. Defined functions named `int` do not
+  receive the built-in coercion exemption.
+* Combined interprocedural structural cost estimates with the current
+  cyclomatic metric. Reports explicitly say the estimates are **not asymptotic
+  proofs**: two recursive call sites alone do not establish an exponential
+  recurrence. Taint reports likewise say they are not security proofs.
+* Restored pure, request-local `build_index` by sharing the current index engine.
+  Retained content/row-hash validation, incremental reuse, file-only scope and
+  ignored generated directories. No historical pickle/stat-only/worker cache.
+* Integrated typed-family routing, quoted Git-message roles, explicit destination
+  preservation, local report allocation, structured contract checks and staged
+  cross-file binding into the current gate chain. Plans never execute adapters.
+  Parameter renames cannot silently select a function/symbol rename.
+* Removed recovered extraction defaults that invented a helper name or zero
+  line bounds. Stated spans remain the binder's evidence.
+* Tightened native in-place cross-file verification: zero tests, all-skipped
+  tests and malformed verification evidence cannot certify a repair. Its actual
+  source-writing behavior is now declared in both registry views. A missing
+  execution-row list cannot erase `tool_executed` or possible-side-effect facts
+  and buy a second execution.
+* Synchronized existing result contracts and the existing Git message slot.
+  No capability IDs, terminal authority, protected policy or verifier was added.
+
+## Measurements
+
+The original 10-module cohort on main `b0784a5d` measured **65 failed, 101 passed**
+(39.45 s). The same 166 case identities now measure **166 passed, zero failed**
+inside the final current-tree run. One stale parent-directory scope expectation
+was corrected to the stricter exact-file contract. Another test now requires
+pre-execution parameter-route correction and explicitly forbids a fictitious
+retry; its original refusal/supersession controls remain in place.
+
+Final expanded run: **407 passed, 6 failed, 40 subtests passed**, 8 deprecation
+warnings, 83.81 s; 36 modules, 413 ordinary cases. All **12 new joint-contract
+controls** pass. This is not a whole-repository green result. The six unresolved
+compatibility failures are listed below rather than weakened or hidden.
+
+| Index measurement, five fresh 200-file trees | Median |
+|---|---:|
+| Cold | 32.511 ms |
+| Warm, identical output digest | 7.360 ms |
+| Warm modules parsed / reused | 0 / 200 |
+
+This demonstrates preservation of the existing warm cache (about 4.42x on this
+fixture), not a universal speedup or a new cache invention. Timings are local,
+not an independent benchmark. A broader 120-module/1,723-case attempt was stopped
+during a registry-wide controller exercise; it has no completed-suite verdict.
+
+## Unresolved compatibility checks
+
+* `canonical.tests.test_a_question_about_one_source_file_is_answered_about_that_file_v1.AQuestionAboutOneFileIsAnsweredAboutThatFileTests::test_the_audit_reports_that_file_and_not_its_siblings`
+* `canonical.tests.test_capability_selection_retrieval_v1.GoalDrivenSelectionTests::test_a_plain_sentence_is_planned_executed_and_reverified_with_a_real_result`
+* `canonical.tests.test_live_brain_route_admission_v1::test_single_word_evidence_is_rejected`
+* `canonical.tests.test_live_brain_route_admission_v1::test_both_live_doors_give_the_same_verdict_on_one_sentence`
+* `canonical.tests.test_live_brain_route_admission_v1::test_r9_does_not_move_the_compile_or_selection_rates`
+* `canonical.tests.test_live_brain_route_admission_v1::test_a_no_op_goal_is_refused_at_the_door_and_a_real_repair_is_not`
+
+These cover an audit-vs-definition-count identity expectation, module-call
+routing, a compiler-count census and pinned refusal classifications. Some are
+interface drift; no blanket pre-existing-failure claim is made without a
+matched baseline. Exact file-scope/caller, review non-mutation, cache freshness,
+structured acceptance, staged rollback and retry boundaries are exercised by
+the passing controls. Four older audit-identity assertions also remain failing
+in `test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py`;
+the extraction end-to-end case in that module was separately repaired and passes.
+
+## Reproduce the expanded current-tree run
+
+```bash
+python3 -m pytest -q \
+  canonical/tests/test_a_bisect_without_a_known_good_commit_is_not_certified_v1.py \
+  canonical/tests/test_a_failed_attempt_is_not_a_verdict_v1.py \
+  canonical/tests/test_a_mutation_score_is_measured_not_asserted_v1.py \
+  canonical/tests/test_a_question_about_one_source_file_is_answered_about_that_file_v1.py \
+  canonical/tests/test_a_refusal_is_not_answered_by_a_substitute_v1.py \
+  canonical/tests/test_a_refused_request_leaves_the_tree_alone_v1.py \
+  canonical/tests/test_a_rename_question_is_answered_by_a_plan_v1.py \
+  canonical/tests/test_a_repair_is_an_edit_and_a_referee_v1.py \
+  canonical/tests/test_a_report_is_never_written_over_its_subject_v1.py \
+  canonical/tests/test_a_report_never_replaces_a_source_file_v1.py \
+  canonical/tests/test_a_review_is_not_answered_by_a_mutator_v1.py \
+  canonical/tests/test_a_search_never_runs_when_the_target_is_already_there_v1.py \
+  canonical/tests/test_a_sentence_reaches_the_repair_it_names_v1.py \
+  canonical/tests/test_a_stated_defect_is_a_request_to_repair_v1.py \
+  canonical/tests/test_a_stated_effect_is_answered_by_a_capability_that_declares_it_v1.py \
+  canonical/tests/test_a_stated_function_is_written_wired_and_tested_v1.py \
+  canonical/tests/test_adapter_default_ast_walk_v1.py \
+  canonical/tests/test_capability_selection_retrieval_v1.py \
+  canonical/tests/test_declared_input_derivation_v1.py \
+  canonical/tests/test_hardcore_swe_capabilities_20261031_v1.py \
+  canonical/tests/test_hardcore_swe_capabilities_and_speed_v1.py \
+  canonical/tests/test_live_brain_route_admission_v1.py \
+  canonical/tests/test_python_source_symbol_index_v1.py \
+  canonical/tests/test_python_symbol_index_cache_freshness_v1.py \
+  canonical/tests/test_software_implementation_effect_admission_v1.py \
+  canonical/tests/test_swe_acceptance_boundaries_20261031_v1.py \
+  canonical/tests/test_swe_family_effect_filter_v1.py \
+  canonical/tests/test_swe_git_intent_reuse_v1.py \
+  canonical/tests/test_swe_main_integration_v1.py \
+  canonical/tests/test_swe_reuse_joint_contracts_v1.py \
+  canonical/tests/test_swe_stated_report_destination_v1.py \
+  canonical/tests/test_swe_typed_plan_v1.py \
+  canonical/tests/test_task_bound_crossfile_workflow_v1.py \
+  canonical/tests/test_the_index_remembers_what_it_already_read_v1.py \
+  canonical/tests/test_the_stated_swe_surface_stays_reached_v1.py \
+  canonical/tests/test_a_bisect_materialises_only_the_named_tree_v1.py --tb=short
+```
+
+The original cohort comprises `test_swe_acceptance_boundaries_20261031_v1`,
+`test_hardcore_swe_capabilities_20261031_v1`, `test_task_bound_crossfile_workflow_v1`,
+`test_swe_git_intent_reuse_v1`, `test_swe_family_effect_filter_v1`,
+`test_swe_stated_report_destination_v1`, `test_swe_typed_plan_v1`,
+`test_declared_input_derivation_v1`, `test_a_report_never_replaces_a_source_file_v1`
+and `test_the_stated_swe_surface_stays_reached_v1` under `canonical/tests/`.
+
+## Limits
+
+Static summaries are bounded/name-based, not full Python dispatch analysis.
+Structural complexity assumes a unit-cost loop model and does not solve arbitrary
+recurrences. Native in-place repair is not a full filesystem transaction or a
+sandbox. The passing fixtures do not prove general semantic correctness, global
+optimality, universal speed, or completion of the project's terminal goal.
+
+## Compiled-model check
+
+Regenerated the unified model with the official compiler and ran
+`python3 -m canonical.runtime.verify_brain_unified_model_v1` on fresh instances:
+**33/33 passed**, including six execution cases and five negative controls.
+This local verifier result is distinct from the signed repository-integrity check.

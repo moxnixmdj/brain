@@ -158,3 +158,13 @@ def test_native_crossfile_repair_needs_non_skipped_executed_tests(tmp_path, suit
         crossfile.run({"source_root": "project", "output_path": "report.json"}, tmp_path)
     assert module.read_bytes() == original
     assert not (tmp_path / "report.json").exists()
+
+
+@pytest.mark.parametrize("execution_fact", ["tool_executed", "side_effects_may_exist"])
+def test_missing_execution_rows_do_not_erase_a_known_execution(execution_fact):
+    from canonical.runtime import live_brain_route_admission_v1 as door
+
+    result = {"pass": False, "executed": True, "execution": [], execution_fact: True,
+              "failure_class": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE",
+              "reason": "RuntimeError:CHOREOGRAPHY_REPAIR_UNRESOLVED"}
+    assert door._may_supersede_a_failed_attempt(result) is False
