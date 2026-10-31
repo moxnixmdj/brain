@@ -204,3 +204,26 @@ def test_complete_declarations_and_clean_static_check_still_are_not_delivery(wor
     assert result["workflow_executed"] is False
     assert result["verified"] is False
     assert result["output_verified"] is False
+
+
+def test_acceptance_cannot_mutate_the_candidate_it_certifies(work):
+    module, original, args = _fixture(work,
+        "    def test_mutating_acceptance(self):\n"
+        "        if f(3) != 0:\n"
+        "            import candidate, pathlib\n"
+        "            pathlib.Path(candidate.__file__).write_text('def f(x):\\n    return 999\\n')\n")
+    result = cegis.run(args, ROOT)
+    assert result["verified"] is False
+    assert module.read_bytes() == original
+
+
+def test_source_symlink_cannot_promote_outside_declared_root(work):
+    module, original, args = _fixture(work)
+    outside = work / "outside.py"
+    outside.write_bytes(original)
+    module.unlink()
+    module.symlink_to(outside)
+    with pytest.raises(RuntimeError, match="CEGIS_SOURCE_OUTSIDE_DECLARED_ROOT"):
+        cegis.run(args, ROOT)
+    assert outside.read_bytes() == original
+    assert module.is_symlink()

@@ -72,6 +72,8 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
     ]
 
     for src_file in py_sources:
+        if src_file.is_symlink() or src_root not in src_file.resolve().parents:
+            raise RuntimeError("CEGIS_SOURCE_OUTSIDE_DECLARED_ROOT")
         original_bytes = src_file.read_bytes()
         orig_text = original_bytes.decode("utf-8")
         try:
@@ -119,7 +121,8 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
                 patch_mod._purge_source_bytecode(src_file)
                 post_run = patch_mod._run_tests(repo, argv, timeout, env)
                 accepted = (post_run.get("returncode") == 0
-                            and not post_run.get("timed_out", False))
+                            and not post_run.get("timed_out", False)
+                            and src_file.read_bytes() == cand_text.encode("utf-8"))
             finally:
                 # Trials never promote source. run() owns promotion and rolls
                 # it back even if publishing the acceptance report fails.
