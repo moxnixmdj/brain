@@ -183,6 +183,23 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         hits = tuple(t for t in triggers if t in head)
         if hits:
             return hits, terms, token
+    # A READ OF A NAMED REVISION IS A REPOSITORY READ.
+    #
+    # Measured 2026-10-31, advanced sentence 44: "Show me the diff of <pkg>/calc.py against
+    # HEAD~1." states the operation (`diff`, in the grammar's own words), states the object
+    # (the file) and states the revision.  The read-detection below could never see it: the
+    # path is a VALUE and F8/F25 remove it from the head before this function looks, so what
+    # remained was "show me the diff of against HEAD~1" and the fullmatch failed on the
+    # revision phrase.  The sentence then reached `git.repository.operate.v1` -- whose OPS
+    # tuple is exactly (log, status, diff, show, blame, branch, commit) and which derives
+    # op, repo_root and target from these very bytes -- was outscored by six `diff_*_gate`
+    # rows that only share the noun, and compiled to nothing (RAW_GOAL_COMPILATION_GAP).
+    # The revision is git's vocabulary, not this file's: HEAD~N/HEAD^N is a fact the sentence
+    # states, and a read opener is the same closed list used below.
+    if (re.match(r"(?:please\s+)?(?:show|list|print|display|give|what\s+is)\s+", head.strip())
+            and len(derivation.stated_git_operations(goal)) == 1
+            and re.search(r"\bhead[~^]\d*\b|\brevision\b", head, re.I)):
+        return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
     # Unqualified repository reads use the existing operation grammar, not
     # broad nouns such as "status" inside deployment questions or task data.
     if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"

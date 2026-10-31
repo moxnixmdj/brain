@@ -30478,7 +30478,7 @@
   "engines": 26,
   "knowledge_documents": 224,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6557,
+  "research_index_records": 6558,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6f903abe97c6c094c940a039d809d5207a2af3a4eac74f7e2d9c5ffd5eabbd8e"
+  "value": "27639e5db942591c4df4db536415226c631271d99170b1dbfd859d6001883455"
  },
  "engines": [
   {
@@ -204126,6 +204126,30 @@
    }
   },
   {
+   "action_id": "A_READ_OF_A_NAMED_REVISION_IS_A_REPOSITORY_READ_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_READ_OF_A_NAMED_REVISION_IS_A_REPOSITORY_READ_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_READ_OF_A_NAMED_REVISION_IS_A_REPOSITORY_READ_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dfadb921f1b5d1785c928b63ab30a56428ac4f660907139c93cc4feae583c5d1",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_read_of_a_named_revision_is_a_repository_read_v1_20261031_v1": 1,
+    "a_read_of_a_named_revision_never_reached_the_repository_row_whose_own_ops_tuple_contains_diff_and_three_inventories_accused_a_row_of_declaring_four_effects_it_does_not_implement_while_its_adapter_has_a_pass_for_every_one_of_them__measured_2026_10_31_on_bf4f78f": 1,
+    "a_read_opener_with_one_stated_git_operation_and_a_stated_revision_is_a_repository_read_and_the_four_choreography_effects_are_pinned_to_the_four_passes_that_implement_them_so_the_accusation_cannot_be_repeated_without_deleting_a_pass": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "named": 1,
+    "read": 2,
+    "read_the_section_the_answer_is_in_and_key_the_index_cache_by_the_tree": 1,
+    "repository": 1,
+    "revision": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_REFUSAL_IS_NOT_ANSWERED_BY_A_SUBSTITUTE_V1_20261030_V1",
    "capability": false,
    "date": "2026-10-30",
@@ -276757,7 +276781,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "457ebe3a1e6c15664fa928d81292e89c6bdb7cb5b924f4a6633a348b1234a7ad",
+   "sha256": "b3a1356b5453fc067836d4028f56a2ef4cb85e7474613f78b7a745d713d8646a",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 16,
    "symbols": [
