@@ -9628,6 +9628,212 @@
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_PATCH_CEGIS_Z3_V1.json"
       }
     },
+    "software.review.gate.composer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.review.gate.composer.v1",
+          "anchor_path": "${input.anchor_path}",
+          "diff_path": "${input.diff_path}",
+          "bench_path": "${input.bench_path}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_review_gate_composer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "software",
+        "review",
+        "gate",
+        "composer",
+        "fan-in",
+        "ruff",
+        "mypy",
+        "coverage",
+        "perf",
+        "bandit",
+        "mutation"
+      ],
+      "limitations": [
+        "Executes six existing Python diff gates in owned scratch paths; full acceptance requires complete PASS outcomes bound to one diff. Needs an anchor, applicable Python diff, benchmark and installed analyzer toolchain. Timing is not deterministic; scratch copies are not an OS sandbox."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.review.all_gates.verified",
+        "software.review.composition.typed"
+      ],
+      "requires": [
+        "software.repair.choreography.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "gates_verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_review_gate_composer_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-REVIEW-GATE-COMPOSER-V1",
+        "observed_effect": {
+          "gates_verified": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json"
+      }
+    },
+    "software.review.synthesis.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.review.synthesis.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_review_synthesis_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "review",
+        "synthesis",
+        "supercomposer",
+        "crossfile"
+      ],
+      "limitations": [
+        "5-kernel review synthesis, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.review.synthesis.super.verified",
+        "software.review.synthesis.fullstack.verified"
+      ],
+      "requires": [
+        "software.review.all_gates.verified",
+        "software.review.composition.typed",
+        "python.review.composition.allowlist_verified",
+        "python.pr.composition.verified",
+        "software.patch.crossfile.atomic"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-REVIEW-SYNTHESIS-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_SYNTHESIS_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.synthesis.grid_induction.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.synthesis.grid_induction.v1",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_synthesis_grid_induction_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "grid",
+        "synthesis",
+        "induction",
+        "program",
+        "bounded",
+        "deterministic",
+        "arc",
+        "cegis",
+        "no-beam-prune",
+        "equality"
+      ],
+      "limitations": [
+        "Searches every well-typed program through max_depth within declared operator registry, preserves equal-minimum ambiguity, no beam pruning, zero model."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.synthesis.grid_program.exact"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "status",
+        "candidates_evaluated",
+        "program_count",
+        "minimum_cost",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "module": "finite_grid_program_inducer",
+        "type": "brain_owned_deterministic",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-SYNTHESIS-GRID_INDUCTION-V1",
+        "observed_effect": {
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1.json"
+      }
+    },
     "git.repository.operate.v1": {
       "action_template": {
         "args": {
