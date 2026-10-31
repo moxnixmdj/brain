@@ -4464,6 +4464,248 @@
         "mission_id": "ASTRA-VERIFY-JQ-STRUCTURED-DATA-001",
         "verification_evidence": "canonical/astra_runtime/evidence/ASTRA-VERIFY-JQ-STRUCTURED-DATA-001__INDEPENDENT.json"
       }
+    },
+    "knowledge.consistency.assess": {
+      "action_template": {
+        "args": {
+          "evidence_paths": "${input.evidence_paths}",
+          "max_age_s": "${input.max_age_s}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "status",
+          "type": "field_nonempty"
+        },
+        "type": "assess_knowledge_consistency"
+      },
+      "adapter_module": "runtime_native_action",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "knowledge",
+        "consistency",
+        "corroboration",
+        "conflict",
+        "freshness",
+        "assessment"
+      ],
+      "limitations": [
+        "Requires one or more provenance-bearing knowledge evidence artifacts.",
+        "A caller that needs multiple independent observations must instantiate repeated requirements explicitly."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "evidence_paths": {
+          "container": "list",
+          "effect": "knowledge.observation.available",
+          "field": "output_path",
+          "type": "effect_result"
+        },
+        "max_age_s": {
+          "type": "literal",
+          "value": null
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        }
+      },
+      "provides": [
+        "knowledge.assessment.available"
+      ],
+      "requires": [
+        "knowledge.observation.available"
+      ],
+      "result_fields": [
+        "verified",
+        "status",
+        "evidence_count",
+        "fresh_evidence_count",
+        "distinct_fresh_values",
+        "output_path"
+      ],
+      "source": {
+        "action_type": "assess_knowledge_consistency",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "type": "runtime_native"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "additional_receipts": [
+          "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001__RECEIPT.json",
+          "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001__RECEIPT.json"
+        ],
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001",
+        "observed_effect": {
+          "statuses": [
+            "SUPPORTED",
+            "CONFLICTED",
+            "STALE"
+          ]
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json"
+      }
+    },
+    "knowledge.json.fetch.external": {
+      "action_template": {
+        "args": {
+          "authoritative": "${input.authoritative}",
+          "json_path": "${input.json_path}",
+          "max_bytes": 1000000,
+          "output_path": "${input.output_path}",
+          "timeout_s": 20,
+          "url": "${input.url}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "fetch_json_knowledge"
+      },
+      "adapter_module": "runtime_native_action",
+      "cost": 1,
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "knowledge",
+        "json",
+        "fetch",
+        "external",
+        "evidence",
+        "observation"
+      ],
+      "limitations": [
+        "Source must be reachable over HTTP(S) and return JSON.",
+        "This capability records provenance but does not by itself establish corroboration."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "authoritative": {
+          "type": "literal",
+          "value": false
+        },
+        "json_path": {
+          "type": "literal",
+          "value": []
+        },
+        "output_path": {
+          "suffix": ".json",
+          "type": "auto_path"
+        },
+        "url": {
+          "type": "goal_url"
+        }
+      },
+      "provides": [
+        "knowledge.observation.available"
+      ],
+      "requires": [
+        "network.http.available"
+      ],
+      "result_fields": [
+        "verified",
+        "output_path",
+        "body_sha256",
+        "json_path",
+        "value",
+        "final_url",
+        "duration_s"
+      ],
+      "source": {
+        "action_type": "fetch_json_knowledge",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "type": "runtime_native"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001",
+        "observed_effect": {
+          "assessment_status": "SUPPORTED",
+          "live_external_observations": 2
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001__RECEIPT.json"
+      }
+    },
+    "knowledge.status.assert": {
+      "action_template": {
+        "args": {
+          "candidate_path": "${input.candidate_path}",
+          "capability_id": "knowledge.status.assert",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "assert_knowledge_status"
+      },
+      "adapter_module": "knowledge_status_adapter",
+      "cost": 1,
+      "entrypoint": "run_assert",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "knowledge",
+        "status",
+        "verify",
+        "assert",
+        "epistemic"
+      ],
+      "limitations": [
+        "Verifies an assessment status; it does not make unsupported knowledge actionable."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "assessment_path": {
+          "container": "scalar",
+          "effect": "knowledge.assessment.available",
+          "field": "output_path",
+          "type": "effect_result"
+        }
+      },
+      "provides": [
+        "knowledge.status.verified"
+      ],
+      "requires": [
+        "knowledge.assessment.available"
+      ],
+      "result_fields": [
+        "verified",
+        "observed_status",
+        "expected_status",
+        "assessment_path"
+      ],
+      "source": {
+        "action_type": "assert_knowledge_status",
+        "runtime_path": "canonical/runtime/astra_runtime.py",
+        "type": "runtime_native"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "additional_receipts": [
+          "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json"
+        ],
+        "mission_id": "ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001",
+        "observed_effect": {
+          "verified_statuses": [
+            "STALE",
+            "CONFLICTED"
+          ]
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001__RECEIPT.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
