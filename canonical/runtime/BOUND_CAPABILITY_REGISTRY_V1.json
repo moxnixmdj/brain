@@ -8542,6 +8542,205 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
       }
+    },
+    "python.source.taint_flow.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.taint_flow.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_taint_flow",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "taint",
+        "untrusted input",
+        "untrusted",
+        "reach",
+        "reaches",
+        "exec",
+        "eval",
+        "injection",
+        "data flow",
+        "source to sink",
+        "does untrusted input"
+      ],
+      "limitations": [
+        "Sources are the input boundary (a parameter handed to json.loads/input/sys.argv).",
+        "A no means no path this analysis can see; the report carries the edges it followed."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.taint_reaches_sink",
+        "python.source.taint_flow"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "finding",
+        "finding_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "reaches",
+        "sink",
+        "source_function",
+        "trace"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.source.test_adequacy.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.test_adequacy.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_test_adequacy",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "would the tests catch",
+        "catch a bug",
+        "adequacy",
+        "adequate",
+        "strong enough",
+        "would the suite catch",
+        "tests catch a bug",
+        "mutation"
+      ],
+      "limitations": [
+        "Runs the suite once under sys.settrace; no coverage package and no dependency.",
+        "No is a proof (an unexecuted line cannot be caught); yes is a necessary condition only."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.suite_adequacy",
+        "python.source.test_adequacy"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "answer_scope",
+        "declared_line_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "suite_passed",
+        "test_root",
+        "tests_run",
+        "unexecuted_count",
+        "unexecuted_lines"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_test_adequacy.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.symbol.resolve.standalone.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.symbol.resolve.standalone.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_symbol_resolve_standalone_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "symbol",
+        "resolve",
+        "navigation",
+        "ast"
+      ],
+      "limitations": [
+        "Stdlib ast + tree-sitter, no LSP"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.symbol.resolve.standalone.verified",
+        "python.symbol.navigation.verified"
+      ],
+      "requires": [
+        "python.source.symbol_index",
+        "python.source.symbols.index.ast",
+        "code.symbols.multilanguage.indexed"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_symbol_resolve_standalone_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-SYMBOL-RESOLVE-STANDALONE-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_SYMBOL_RESOLVE_STANDALONE_V1_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
