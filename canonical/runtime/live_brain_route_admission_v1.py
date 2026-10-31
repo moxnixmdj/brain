@@ -2873,6 +2873,30 @@ def _close_observations(result: dict[str, Any], goal: str,
                                 .replace("_EXECUTED_AND_VERIFIED", "_EXECUTED_APPLIED_UNVERIFIED")
                                 .replace("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
                                          "EXACT_SEMANTIC_ACCEPTANCE_APPLIED_UNVERIFIED"))
+    # THE ANSWER MUST BE THE ANSWER.  A PASS whose payload cannot answer the sentence is a
+    # wrong answer with a certificate on it, and this is the one exit every path passes
+    # through, so the reconciliation lives here.
+    #
+    # Measured 2026-10-31 on 62 human sentences: 7 of the 12 PASSes were wrong, and 5 of those
+    # asked for a collection and got a count -- `caller_index_size: 8` for "find every caller",
+    # `function_count: 10` for "list the functions", `distinct_imported_module_count: 5` for
+    # "show the imports".  Twice the exact bytes were on disk in the artifact, hashed and
+    # verified, and then discarded (answer_shape_v1).  The capability was right; only delivery
+    # was missing.  So a failure here is never "the tool lied" -- it is "this result does not
+    # answer this sentence", and it is named that way.
+    answer_errors: list[str] = []
+    if result.get("pass") is True:
+        try:
+            from canonical.runtime import answer_shape_v1 as _answer_shape
+            answer_errors = _answer_shape.deliver(goal, result, ROOT)
+        except Exception:  # noqa: BLE001 - a projection fault must never change a verdict
+            answer_errors = []
+    if answer_errors:
+        result["runtime_status_before_answer_shape_check"] = result.get("status")
+        result["pass"] = False
+        result["status"] = "FAIL_CLOSED__ANSWER_SHAPE_UNSERVED"
+        result["failure_class"] = "ANSWER_SHAPE_UNSERVED"
+        result["answer_shape_errors"] = answer_errors
     if result.get("pass") is not True or before is None:
         return result
     observed = observed_effect_errors(goal, before, observe_world(goal), result, artifacts)

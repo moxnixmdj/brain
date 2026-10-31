@@ -504,6 +504,76 @@ _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
     )
 )
 
+# git's own subcommand vocabulary (`git help -a`, main porcelain commands, git 2.39.5).
+# It is here only to answer "is this leading word an OPERATION?"; a word that is not in
+# it is a verb of the request's own ("find", "explain", "rename") and changes nothing.
+_GIT_SUBCOMMANDS = frozenset("""
+add am archive bisect blame branch bundle checkout cherry-pick citool clean clone commit
+describe diff fetch format-patch gc grep gui init log maintenance merge mv notes pull push
+range-diff rebase reset restore revert rm shortlog show sparse-checkout stash status
+submodule switch tag worktree
+""".split())
+
+
+# THE VERB IS THE OPERATION.  A NOUN PHRASE IN THE SENTENCE IS NOT A SUBSTITUTE FOR IT.
+#
+# Measured 2026-10-31 on `main` 4b1baa2, through ``live_brain_route_admission_v1.solve``:
+#
+#     "Reset the working tree to HEAD~1"        -> PASS, op=status
+#     "Stash the working tree changes"          -> PASS, op=status
+#     "Push the current branch to origin"       -> PASS, op=branch
+#
+# Every one of the three asks for a repository operation the row's own ``limitations``
+# declare it does not have -- *"Reads plus one write (commit --no-verify).  No push,
+# rebase, merge, reset or history rewrite."* -- and every one of them passed, because
+# the binder matched the words *"working tree"* / *"branch"* to the status and branch
+# grammars while the sentence's own verb named an operation that has no implementation
+# here.  The row ALREADY refuses an operation it does not declare, by name
+# (``OP_NOT_DECLARED:<op>:declared=...``); the binder pre-empted that refusal by binding
+# a different operation, and the door certified a read as a change.
+#
+# So the stated verb is bound even when the row cannot perform it.  A read verb
+# ("show", "list", "print") still leaves the grammar free to read the object phrase --
+# *"Show the last three git commits"* states `show` and means `log` -- while a verb that
+# CHANGES the repository is never re-read as a question about it.
+#
+# The operations the grammar already reads, derived from it so the two cannot drift.
+_GIT_GRAMMAR_OPS = frozenset(name for name, _pattern in _GIT_OPERATION_GRAMMAR)
+_GIT_WRITE_SUBCOMMANDS = frozenset("""
+add am apply checkout cherry-pick clean clone commit fetch gc init merge mv pull push
+rebase reset restore revert rm stash switch tag worktree
+""".split())
+
+# Openers that carry no verb of their own.  Bounded and exact: the sentence's first
+# remaining word is the imperative, or nothing is read.
+_LEADING_OPENER = re.compile(
+    r"^\s*(?:please|kindly|now|then|also|and|so|ok|okay|could\s+you|can\s+you|would\s+you"
+    r"|will\s+you|i\s+want\s+you\s+to|i\s+need\s+you\s+to|go\s+ahead\s+and|let'?s)\b[\s,]*",
+    re.I,
+)
+
+
+def stated_git_operation(goal: str) -> str | None:
+    """The repository operation the sentence's own IMPERATIVE names, if it names one.
+
+    ``None`` when the leading word is not a git subcommand at all -- a question
+    ("Which commit broke the tests"), a read ("Find every caller ..."), or a goal whose
+    first word is a path.  The vocabulary is git's, not this file's: ``git help -a``,
+    main porcelain commands.  Whether the chosen row can perform the operation is a
+    separate question, answered by the row's own ``OPS`` tuple at execution time.
+    """
+    text = str(goal or "")
+    for _ in range(4):
+        stripped = _LEADING_OPENER.sub("", text, count=1)
+        if stripped == text:
+            break
+        text = stripped
+    match = re.match(r"([A-Za-z][A-Za-z-]*)", text)
+    if match is None:
+        return None
+    verb = match.group(1).lower()
+    return verb if verb in _GIT_SUBCOMMANDS else None
+
 
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
@@ -909,6 +979,15 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "op" in keys:
         stated = [name for name, pattern in _GIT_OPERATION_GRAMMAR
                   if pattern.search(str(goal or ""))]
+        # The sentence's own verb decides what operation it asks for; the noun phrases
+        # only get to choose WHEN the verb is a read.  "Reset the working tree to HEAD~1"
+        # states `reset`, not `status` -- binding `status` because the words "working
+        # tree" appear is how a read gets certified as a change (measured 2026-10-31;
+        # see the table above).  Only an operation the grammar does NOT already read may
+        # override it, so an operation that works today keeps its reading byte for byte.
+        _stated_verb = stated_git_operation(goal)
+        if _stated_verb in _GIT_WRITE_SUBCOMMANDS and _stated_verb not in _GIT_GRAMMAR_OPS:
+            stated = [_stated_verb]
         # The one DESTRUCTIVE operation needs repository context, not just a verb.
         # Measured 2026-10-29: "Commit the transaction to the database" matched the
         # commit grammar.  Reading the wrong repository is a wrong answer; creating

@@ -30491,13 +30491,13 @@
   "research_index_records": 6523,
   "routing_tokens": 2261,
   "skills": 18,
-  "source_index_entry_points": 428,
-  "source_index_modules": 1904
+  "source_index_entry_points": 429,
+  "source_index_modules": 1905
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ccde48782bd0371698ea9d8a0eca3b88c64a3f2419bec8982a17cd2621b6f9aa"
+  "value": "9bb06bd865212f747e437bae246e94fee43e3ffe015638f4d11f689ea7e110ff"
  },
  "engines": [
   {
@@ -213709,6 +213709,49 @@
    "capability": false,
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
+   "id": "source:canonical/runtime/answer_shape_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/answer_shape_v1.py",
+   "sha256": "0b94ceb19c25a031d2dbfb810761d4f31442d8abec703b1f9fe1b7ad15ee4180",
+   "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
+   "symbol_count": 9,
+   "symbols": [
+    "_artifact_path",
+    "_bounded",
+    "_is_answer_value",
+    "_narrow",
+    "_project",
+    "_read_artifact",
+    "asked",
+    "deliver",
+    "main"
+   ],
+   "terms": {
+    "answer": 2,
+    "artifact": 1,
+    "artifact_path": 1,
+    "asked": 1,
+    "bounded": 1,
+    "count": 1,
+    "deliver": 2,
+    "is_answer_value": 1,
+    "main": 1,
+    "narrow": 1,
+    "never": 1,
+    "place": 1,
+    "project": 1,
+    "read_artifact": 1,
+    "refuse": 1,
+    "return": 1,
+    "shape": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
    "id": "source:canonical/runtime/anytime_validity_v1.py",
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -229919,9 +229962,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "c96d8c35f99e2ab03215f82e413670b0a6f0f0068c935727b3a80bf0a5afeca0",
+   "sha256": "58894d00dc8b8918620657bcc4860625553b10bdf187cb793b444fb54592f03f",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 10,
+   "symbol_count": 11,
    "symbols": [
     "_defining_module",
     "_derive_edits",
@@ -229932,7 +229975,8 @@
     "binding_view",
     "derive",
     "is_swe_request",
-    "stated_existing_files"
+    "stated_existing_files",
+    "stated_git_operation"
    ],
    "terms": {
     "adapter_defaulted_keys": 1,
@@ -229952,6 +229996,7 @@
     "stated_change_set": 1,
     "stated_directories": 1,
     "stated_existing_files": 1,
+    "stated_git_operation": 1,
     "tree_of": 1,
     "typed": 1,
     "v1": 1
@@ -244092,7 +244137,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "edfd51caa6289db72095814a95e47545786e34e5fd062bf60570414a38b0b3c3",
+   "sha256": "bbabc9da38c3793e14b25d78512e08f19eee57bd76cf8260963953e9e1cf10fd",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 82,
    "symbols": [
