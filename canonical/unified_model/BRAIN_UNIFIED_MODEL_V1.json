@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "abb4b8f81deb15c16957ac162ffd69aa2f366f2ecfd091b21dfe4a08e32c2945"
+  "value": "ec5e2338b61c1d84f3a9dc1a1ef3345f08b523f74082bfd7a43fc4cedfb4d7ba"
  },
  "engines": [
   {
@@ -169075,7 +169075,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "2f72d16faf4924a93232a54b17a4650580eb4dabd9a3900ec4f73c8931a737b0",
+   "sha256": "15322ec0f9fa4a40fbb67dafe5fffd07ff38813ed289bf5bd4ad6b542d3b678c",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -200608,7 +200608,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_REPAIR_IS_NOT_REPAIRED_UNTIL_THE_FILE_CHANGED_V1_20261029_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "060b689b4198405a965dd3ea11b4431352c90cf4d07ddf0835b08bac0284c23f",
+   "sha256": "1ec155ff65988e9b5b6dfc8b5cab839ef2e6c70fdf786d69dcf4a6a9610ffa43",
    "status": "",
    "terms": {
     "20261029": 1,
