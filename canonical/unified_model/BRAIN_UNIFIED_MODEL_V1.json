@@ -30827,7 +30827,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f219fe1a94cb6e0c2b203e5e415401a970f6195bec12d7b8f575415d0790de82"
+  "value": "06d121bca95dc06cb50a244ccc0f3d825bcce5d22c376e0d2111aa3dcce5941f"
  },
  "engines": [
   {
@@ -207624,7 +207624,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "cf880e636cc7ac4e4ec31d35acc04f6dcaffd3389f9d42a0ed559f4cfede99f5",
+   "sha256": "752951106b96e2e6682c502e76f9d2a2ae4e70887e4aaa43ad66339496ea5a2d",
    "status": "",
    "terms": {
     "10": 2,
