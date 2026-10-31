@@ -36,7 +36,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_REFUSAL_THAT_PRINTS_ITS_REASON_AND_RAISES_AN_EMPTY_EXCEPTION_IS_INDISTINGUISHABLE_FROM_A_CRASH__MEASURED_ONE_BLIND_CAPABILITY_EXITED_PROCESS_IN_49_AND_THE_REASON_WAS_SITTING_ON_STDOUT",
-  "canonical_base_commit": "d0763bf85def917bdd1d5ab08900814065090a2d",
+  "canonical_base_commit": "52fdbe2f17b60143f764ce661935c33bdbb2b310",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -82,7 +82,7 @@
     "execution_guard/swe_advanced_probe_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "d0763bf85def917bdd1d5ab08900814065090a2d",
+    "canonical_base_commit": "52fdbe2f17b60143f764ce661935c33bdbb2b310",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "PRINTING_A_REASON_TO_STDOUT_AND_EXPECTING_THE_CALLER_TO_READ_IT",
