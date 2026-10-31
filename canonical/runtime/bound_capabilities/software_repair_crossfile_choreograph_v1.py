@@ -364,49 +364,30 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         if parts:
             mod_names.append(".".join(parts))
 
-    checker = (
-        "import importlib, importlib.util, inspect, json, pathlib, sys, traceback, unittest\n"
+    # Reuse the counted framework-aware executor used by repair and tracing.
+    # Calling bare functions ourselves ignores pytest skip/fixture/parametrize
+    # semantics and can certify an all-skipped suite as a successful repair.
+    from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import SUITE_RUNNER
+    checker = SUITE_RUNNER + (
+        "import importlib, json\n"
         "proj = pathlib.Path(sys.argv[1]).resolve()\n"
         "tdir = pathlib.Path(sys.argv[2]).resolve()\n"
         "repeats = int(sys.argv[3])\n"
         "mods = json.loads(sys.argv[4])\n"
         "sys.argv[:] = [sys.argv[0]]\n"
         "sys.path.insert(0, str(proj))\n"
-        "for m in mods:\n"
-        "    importlib.import_module(m)\n"
+        "targets = [p for p in sorted(tdir.rglob('*.py')) if '__pycache__' not in p.parts and (p.name.startswith('test_') or p.name.endswith('_test.py'))]\n"
         "total_ran = 0\n"
         "for _ in range(repeats):\n"
         "    for k, v in list(sys.modules.items()):\n"
         "        f = getattr(v, '__file__', None)\n"
-        "        if f:\n"
-        "            fp = pathlib.Path(f).resolve()\n"
-        "            if fp == proj or proj in fp.parents:\n"
-        "                sys.modules.pop(k, None)\n"
+        "        if f and proj in pathlib.Path(f).resolve().parents:\n"
+        "            sys.modules.pop(k, None)\n"
         "    for m in mods:\n"
         "        importlib.import_module(m)\n"
-        "    if tdir.is_dir():\n"
-        "        top = str(proj) if (tdir == proj or (tdir / '__init__.py').is_file()) else str(tdir)\n"
-        "        suite = unittest.TestLoader().discover(start_dir=str(tdir), top_level_dir=top)\n"
-        "        res = unittest.TestResult()\n"
-        "        suite.run(res)\n"
-        "        total_ran += res.testsRun\n"
-        "        if res.failures or res.errors:\n"
-        "            print(json.dumps({'ok': False, 'ran': res.testsRun, 'err': str((res.failures + res.errors)[0][1])[-240:]}))\n"
-        "            raise SystemExit(1)\n"
-        "        for idx, tp in enumerate(sorted(tdir.rglob('*.py'))):\n"
-        "            if '__pycache__' in tp.parts or not (tp.name.startswith('test_') or tp.name.endswith('_test.py')):\n"
-        "                continue\n"
-        "            spec = importlib.util.spec_from_file_location(f'_plain_t_{idx}_{tp.stem}', tp)\n"
-        "            tm = importlib.util.module_from_spec(spec)\n"
-        "            spec.loader.exec_module(tm)\n"
-        "            for fn_name, fn_obj in list(vars(tm).items()):\n"
-        "                if fn_name.startswith('test_') and inspect.isfunction(fn_obj):\n"
-        "                    try:\n"
-        "                        fn_obj()\n"
-        "                        total_ran += 1\n"
-        "                    except BaseException:\n"
-        "                        print(json.dumps({'ok': False, 'ran': total_ran, 'err': traceback.format_exc()[-240:]}))\n"
-        "                        raise SystemExit(1)\n"
+        "    total_ran += _brain_run_suites(targets)\n"
+        "if total_ran <= 0:\n"
+        "    raise RuntimeError('NO_TESTS_EXECUTED')\n"
         "print(json.dumps({'ok': True, 'ran': total_ran}))\n"
     )
     env = dict(os.environ)
@@ -424,9 +405,12 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         return False, 0, (proc.stderr or proc.stdout)[-300:]
     try:
         info = json.loads(proc.stdout.strip().splitlines()[-1])
-        return bool(info.get("ok")), int(info.get("ran") or 0), ""
-    except Exception:
-        return True, 0, ""
+        ran = info.get("ran")
+        if info.get("ok") is not True or type(ran) is not int or ran <= 0:
+            return False, 0, "NO_TESTS_EXECUTED_OR_INVALID_VERIFICATION"
+        return True, ran, ""
+    except (ValueError, TypeError, IndexError, AttributeError):
+        return False, 0, "VERIFICATION_EVIDENCE_INVALID"
 
 
 def _purge_pyc(path: pathlib.Path) -> None:

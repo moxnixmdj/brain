@@ -573,7 +573,7 @@ def _brain_run_stdlib(target,script):
   try:runpy.run_path(str(target),run_name="__main__")
   except SystemExit as exc:
    if exc.code not in (None,0):raise
-  return
+  return 1
  class _R(unittest.TestResult):
   def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None;self.no_passing=False
   def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err
@@ -592,6 +592,7 @@ def _brain_run_stdlib(target,script):
   if res.err:_brain_reraise_failure(res.err[1],res.err[2])
   if res.no_passing:raise RuntimeError("NO_PASSING_TESTS_EXECUTED")
   raise AssertionError("SUITE_FAILED_WITHOUT_EXCEPTION_INFO")
+ return res.testsRun-len(res.skipped)
 
 def _brain_run_pytest(targets,shapes):
  import pytest
@@ -660,6 +661,7 @@ def _brain_run_pytest(targets,shapes):
    exc,tb=report.exception
    _brain_reraise_failure(exc,tb)
   raise RuntimeError("PYTEST_EXECUTION_FAILED:"+str(status))
+ return report.passed
 
 def _brain_run_suites(targets):
  targets=[pathlib.Path(t).resolve() for t in targets]
@@ -670,12 +672,13 @@ def _brain_run_suites(targets):
  if any(shape[1] for shape in shapes) and not has_pytest:
   raise RuntimeError("PYTEST_REQUIRED:"+", ".join(str(t) for t,s in zip(targets,shapes) if s[1]))
  if has_pytest and any(shape[0] or shape[1] for shape in shapes):
-  _brain_run_pytest(targets,shapes);return
- errors=[]
+  return _brain_run_pytest(targets,shapes)
+ errors=[];passed=0
  for target,shape in zip(targets,shapes):
-  try:_brain_run_stdlib(target,shape[2])
+  try:passed+=_brain_run_stdlib(target,shape[2])
   except BaseException as exc:errors.append(exc)
  if errors:_brain_reraise_failure(errors[0],errors[0].__traceback__)
+ return passed
 
 def _brain_run_suite(target):
  _brain_run_suites([target])

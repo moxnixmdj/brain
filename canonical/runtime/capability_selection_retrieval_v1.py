@@ -640,6 +640,14 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     if not request_may_select(goal, cid, required):
         return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
                 "required_inputs": required}
+    # A symbol rename cannot substitute for a parameter rename: both can bind
+    # a function qualname, but only one contract carries the old parameter.
+    if (re.search(r"^\s*(?:please\s+)?rename\s+(?:the\s+)?(?:parameter|argument)\b",
+                  front.prose_only(str(goal or "")), re.IGNORECASE)
+            and not {"old_param", "new_param"}.issubset(required)):
+        return {"capability_id": cid, "admitted": False,
+                "reason": "PARAMETER_RENAME_REQUIRES_PARAMETER_CONTRACT",
+                "required_inputs": required}
     _goal_low = str(goal or "").lstrip().lower()
     if cid == "python.source.definition_count.v1" and not re.search(
         r"\b(?:functions?|classes|class|methods?|definitions?|symbols?)\b", _goal_low
@@ -805,7 +813,11 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     # Blast radius measured over a 77-sentence ordinary-phrasing corpus: this
     # rule changes exactly three routes, and all three were already failing.
     # No working route moves.
-    if _states_a_command_the_sentence_maps_to(goal):
+    # An enum operation contract already carries a proved repository operation.
+    # Words inside its quoted message must not demand a second argv contract.
+    operation_bound = (cid.startswith("git.") and "op" in required
+                       and _derived_values.get("op") is not None)
+    if _states_a_command_the_sentence_maps_to(goal) and not operation_bound:
         # Imported privately and locally: `admit` imports the type surface under
         # the name _TS further down, which makes _TS a local for the WHOLE
         # function.  Naming it here raised UnboundLocalError on every capability
