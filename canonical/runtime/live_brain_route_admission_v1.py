@@ -51,8 +51,8 @@ not about the goal:
                                every file the request promises must be written by some step of the
                                DAG; a promise no step serves is refused before anything runs
 
-Every rejection is a FAIL_CLOSED result with the evidence attached; nothing is executed,
-so no side effect happens.  ``solve`` is THE live entry (one mouth): front-compile
+Admission rejections happen before execution; execution failures can follow side effects
+and are reported accordingly. ``solve`` is THE live entry (one mouth): front-compile
 (``goal_front_compiler_v1`` - corrects the pinned compiler's measured defects and binds every
 registry input from an explicit grammar) -> admit -> execute through the same controller
 calls ``run_raw_goal`` makes -> tool-truth check -> promised-artifact check.
@@ -689,6 +689,10 @@ class LocalExecutionFailure(RuntimeError):
     pass
 
 
+class LocalAdapterExecutionFailure(LocalExecutionFailure):
+    """A local adapter was loaded or invoked before it failed."""
+
+
 def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
     """The kernel's expectation semantics (field_nonempty / field_contains / field_equals)."""
     if expect is None:
@@ -736,15 +740,6 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     path = (ROOT / declared).resolve() if declared else (ROOT / "canonical" / "runtime" / "bound_capabilities" / (module_name + ".py")).resolve()
     if ROOT.resolve() not in path.parents or not path.is_file() or path.suffix != ".py":
         raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_MISSING:" + declared)
-    spec = importlib.util.spec_from_file_location("project_brain_front_local_" + module_name, path)
-    if spec is None or spec.loader is None:
-        raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
-    if not callable(fn):
-        raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
     call_args = dict(action.get("args") or {})
     call_args.pop("capability_id", None)
     # Write authority, checked BEFORE the adapter runs (measured 2026-10-29).
@@ -763,13 +758,69 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise
     except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
         raise LocalExecutionFailure(str(exc)) from exc
-    result = fn(call_args, ROOT)
-    if not isinstance(result, dict):
-        raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
-    result.setdefault("capability_id", cid)
-    result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
-    _check_expectation(action.get("expect"), result)
-    return result
+    spec = importlib.util.spec_from_file_location("project_brain_front_local_" + module_name, path)
+    if spec is None or spec.loader is None:
+        raise LocalExecutionFailure("BOUND_CAPABILITY_ADAPTER_LOAD_FAILED")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    try:
+        spec.loader.exec_module(module)
+        fn = getattr(module, str(entry.get("entrypoint") or "run"), None)
+        if not callable(fn):
+            raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
+    except LocalExecutionFailure as exc:
+        # Module loading itself executes code and may already have side effects.
+        raise LocalAdapterExecutionFailure(str(exc)) from exc
+    try:
+        if cid == "software.repair.choreograph.crossfile.v1":
+            # Compose around the pinned adapter; do not alter its registered bytes.
+            expected_path = (ROOT / "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py").resolve()
+            if (module_name != "software_repair_crossfile_choreograph_v1" or path != expected_path
+                    or str(entry.get("entrypoint") or "run") != "run"):
+                raise LocalExecutionFailure("CROSSFILE_ADAPTER_IDENTITY_MISMATCH")
+            from canonical.runtime import swe_live_repair_verification_v1 as repair_check
+            try:
+                result = repair_check.run(module, fn, call_args, ROOT)
+            except Exception as exc:  # Adapter or tests may already have changed the project.
+                raise LocalExecutionFailure(
+                    "CROSSFILE_CHECK_FAILED;PROJECT_EFFECTS_MAY_REMAIN:" + type(exc).__name__ + ":" + str(exc)
+                ) from exc
+        elif cid == "python.source.taint_flow.v1":
+            # Preserve the pinned adapter and withhold its known-unsound
+            # cross-context sanitizer negatives on the local route.
+            expected_path = (ROOT / "canonical/runtime/bound_capabilities/python_source_taint_flow.py").resolve()
+            if (module_name != "python_source_taint_flow" or path != expected_path
+                    or str(entry.get("entrypoint") or "run") != "run"):
+                raise LocalExecutionFailure("TAINT_ADAPTER_IDENTITY_MISMATCH")
+            from canonical.runtime import swe_live_taint_context_guard_v1 as taint_guard
+            try:
+                result = taint_guard.run(module, fn, call_args, ROOT)
+            except Exception as exc:
+                raise LocalExecutionFailure("TAINT_CONTEXT_CHECK_FAILED:" + type(exc).__name__ + ":" + str(exc)) from exc
+        elif cid == "python.source.test_adequacy.v1":
+            # The pinned adapter loses file identity when it unions line numbers.
+            # Refuse the affected multi-file shape rather than emit a false verdict.
+            expected_path = (ROOT / "canonical/runtime/bound_capabilities/python_source_test_adequacy.py").resolve()
+            if (module_name != "python_source_test_adequacy" or path != expected_path
+                    or str(entry.get("entrypoint") or "run") != "run"):
+                raise LocalExecutionFailure("ADEQUACY_ADAPTER_IDENTITY_MISMATCH")
+            from canonical.runtime import swe_live_adequacy_guard_v1 as adequacy_guard
+            try:
+                adequacy_guard.require_single_target_file(module, call_args, ROOT)
+            except Exception as exc:
+                raise LocalExecutionFailure("ADEQUACY_PREFLIGHT_FAILED:" + type(exc).__name__ + ":" + str(exc)) from exc
+            result = fn(call_args, ROOT)
+        else:
+            result = fn(call_args, ROOT)
+        if not isinstance(result, dict):
+            raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
+        result.setdefault("capability_id", cid)
+        result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
+        _check_expectation(action.get("expect"), result)
+        return result
+    except LocalExecutionFailure as exc:
+        # Failures after invocation cannot be treated as pre-execution refusals.
+        raise LocalAdapterExecutionFailure(str(exc)) from exc
 
 
 def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry: Mapping[str, Any], action: Mapping[str, Any],
@@ -778,7 +829,7 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
     try:
         tool_result = run_adapter_locally(entry, action)
     except Exception as exc:  # noqa: BLE001 - every adapter failure is a closed failure with its reason
-        tool_executed = not isinstance(exc, LocalExecutionFailure) or "ACTION_EXPECTATION_FAILED" in str(exc)
+        tool_executed = isinstance(exc, LocalAdapterExecutionFailure) or not isinstance(exc, LocalExecutionFailure)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
                      compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"), reason=type(exc).__name__ + ":" + str(exc),
                      executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
@@ -954,14 +1005,15 @@ def _dag_rows(steps: list[Mapping[str, Any]], records: list[Mapping[str, Any]], 
 
 def _dag_result(task_id: str, goal: str, compiled: Mapping[str, Any], raw_contract: Mapping[str, Any], executor: str,
                 rows: list[dict[str, Any]], passed: bool, started: int, controller: Any = None,
-                checkpoint: Mapping[str, Any] | None = None, reason: Any = None) -> dict[str, Any]:
+                checkpoint: Mapping[str, Any] | None = None, reason: Any = None,
+                executed: bool = True) -> dict[str, Any]:
     cids = [str(step.get("capability_id")) for step in ((compiled.get("capability_dag") or {}).get("steps") or []) if isinstance(step, Mapping)]
     checkpoint = dict(checkpoint or {})
     out = {
         "schema": LIVE_SCHEMA,
         "status": ("PASS__CAPABILITY_DAG_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED" if passed
                    else "FAIL__CAPABILITY_DAG_RESULT_INVALID"),
-        "pass": passed, "task_id": task_id, "executed": True, "raw_goal": goal,
+        "pass": passed, "task_id": task_id, "executed": executed, "raw_goal": goal,
         "raw_goal_sha256": raw_contract["task_sha256"], "raw_task_contract_sha256": raw_contract["task_contract_sha256"],
         "raw_acceptance_obligation_count": len(raw_contract["acceptance_contract"]["obligations"]),
         "compiler_mode": compiled.get("compiler_mode"), "compiled_capability_id": None,
@@ -997,6 +1049,7 @@ def execute_capability_plan_locally(task_id: str, goal: str, compiled: Mapping[s
     steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
     rows: list[dict[str, Any]] = []
     results: list[Mapping[str, Any]] = []
+    executed_any = False
     for index, step in enumerate(steps):
         cid = str(step.get("capability_id") or "")
         entry = admissible.get(cid)
@@ -1004,7 +1057,7 @@ def execute_capability_plan_locally(task_id: str, goal: str, compiled: Mapping[s
             rows.append({"cycle": index, "capability_id": cid, "pass": False, "status": "FAIL__CAPABILITY_DAG_STEP_NOT_ADMISSIBLE",
                          "result": None, "execution_proof_type": DAG_LOCAL_EXECUTOR})
             return _dag_result(task_id, goal, compiled, raw_contract, DAG_LOCAL_EXECUTOR, rows, False, started,
-                               reason="DAG_CAPABILITY_NOT_ADMISSIBLE:" + cid)
+                               reason="DAG_CAPABILITY_NOT_ADMISSIBLE:" + cid, executed=executed_any)
         try:
             action = _resolve_plan_refs(deepcopy(step.get("action") or {}), results)
             step_result = run_adapter_locally(entry, action)
@@ -1012,8 +1065,12 @@ def execute_capability_plan_locally(task_id: str, goal: str, compiled: Mapping[s
             rows.append({"cycle": index, "capability_id": cid, "pass": False, "status": "FAIL__FRONT_LAYER_LOCAL_CAPABILITY_ACTION",
                          "result": None, "plan_action": dict(step.get("action") or {}), "execution_proof_type": DAG_LOCAL_EXECUTOR,
                          "reason": type(exc).__name__ + ":" + str(exc)[:1200]})
+            may_have_executed = (isinstance(exc, LocalAdapterExecutionFailure)
+                                 or not isinstance(exc, LocalExecutionFailure))
             return _dag_result(task_id, goal, compiled, raw_contract, DAG_LOCAL_EXECUTOR, rows, False, started,
-                               reason=type(exc).__name__ + ":" + str(exc))
+                               reason=type(exc).__name__ + ":" + str(exc),
+                               executed=executed_any or may_have_executed)
+        executed_any = True
         results.append(step_result)
         rows.append({"cycle": index, "capability_id": cid, "pass": True, "status": "PASS__FRONT_LAYER_LOCAL_CAPABILITY_ACTION",
                      "result": dict(step_result), "plan_action": dict(step.get("action") or {}),
@@ -1036,7 +1093,10 @@ def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any]
     dag = compiled.get("capability_dag") or {}
     steps = [step for step in (dag.get("steps") or []) if isinstance(step, Mapping)]
     local_res = execute_capability_plan_locally(task_id, goal, compiled, admissible, raw_contract, started)
-    if local_res.get("pass") is True:
+    if local_res.get("pass") is True or local_res.get("executed") is True:
+        # Retrying the whole plan could repeat a successful step or a failed
+        # adapter that already changed the world. Only pre-execution refusals
+        # may fall through to the kernel.
         return local_res
     executor = dag_executor(compiled, admissible)
     if executor == DAG_LOCAL_EXECUTOR:
@@ -1102,7 +1162,9 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
         if kernel_refuses(admissible[selected]):
             return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         local_res = _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
-        if local_res.get("pass") is True:
+        if local_res.get("pass") is True or local_res.get("executed") is True:
+            # Once local code ran, retrying through the controller can repeat
+            # writes, commands or external effects. Preserve the first verdict.
             return local_res
         reason_str = str(local_res.get("reason") or "")
         if "MISMATCH" in reason_str or "ACTION_EXPECTATION_FAILED" in reason_str:
@@ -2166,6 +2228,17 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
         return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
     normalized = front.normalize_goal(goal)
+    # The primary compiler can bind an unqualified project-relative input as a
+    # report destination. Apply the typed SWE planner's existing input/report
+    # relocation before admission and execution, not just on the fallback path.
+    # A stated report destination is preserved by the relocation helper.
+    if isinstance(compiled.get("inputs"), Mapping):
+        from canonical.runtime import swe_typed_plan_v1 as _swe_plan
+        if _swe_plan.is_swe_request(normalized):
+            relocated = _swe_plan._fresh_output_path(normalized, ROOT, compiled["inputs"])
+            if relocated:
+                compiled = dict(compiled)
+                compiled["inputs"] = {**compiled["inputs"], "output_path": relocated}
     future_artifacts = _future_artifacts(normalized)
     # ask memory what it knows about work like this, before deciding anything
     recalled = _recall_for(normalized)

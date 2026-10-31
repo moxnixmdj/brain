@@ -100,21 +100,47 @@ def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any])
     source file).  Deterministic name; the promised-artifact gate independently
     checks that the file is non-empty, so inventing a passing path proves nothing.
     """
+    root = pathlib.Path(root).resolve()
     stated = set(derivation.stated_existing_files(goal, root))
     current = inputs.get("output_path")
-    if not isinstance(current, str) or current not in stated:
+    if not isinstance(current, str):
         return None
-    # Only a file the sentence treats as code is a dangerous output target.
+    # Respect a destination explicitly named by the request, even if it is code.
+    if goal_compiler._path_named_after_output_verb(goal, root) == current:
+        return None
     if not current.endswith((".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb")):
         return None
     source_root = inputs.get("source_root")
-    if isinstance(source_root, str) and source_root and (root / source_root).is_dir():
-        parent = source_root
-    else:
-        parent = str(pathlib.PurePosixPath(current).parent)
-    if not parent or not (root / parent).is_dir():
+    source = (root / source_root).resolve() if isinstance(source_root, str) and source_root else None
+    # A path such as tests/test_x.py may be relative to the named project,
+    # not to Brain's root.  Only use a real file under the stated directory or
+    # its parent as evidence; never infer an arbitrary nonexistent input.
+    relative_input = False
+    if source is not None and source.is_dir() and (source == root or root in source.parents):
+        raw = pathlib.Path(current)
+        if not raw.is_absolute() and ".." not in raw.parts:
+            for base in (source, source.parent):
+                candidate = (base / raw).resolve()
+                if (base == root or root in base.parents) and base in candidate.parents and candidate.is_file():
+                    relative_input = True
+                    break
+    if current not in stated and not relative_input:
         return None
-    return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
+    if source is not None and source.is_dir() and (source == root or root in source.parents):
+        parent = source
+    else:
+        parent = (root / pathlib.PurePosixPath(current).parent).resolve()
+    if not parent.is_dir() or (parent != root and root not in parent.parents):
+        return None
+    # Do not overwrite a previous report. This is a preflight, not a substitute
+    # for isolated workspaces or an atomic file reservation.
+    index = 0
+    while True:
+        name = "typed_swe_report.json" if index == 0 else f"typed_swe_report_{index}.json"
+        candidate = parent / name
+        if not candidate.exists() and not candidate.is_symlink():
+            return candidate.relative_to(root).as_posix()
+        index += 1
 
 
 def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str, Any]) -> str | None:
