@@ -28,11 +28,14 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if not files:
         raise kernel.TreeSitterSWEError("NO_SUPPORTED_SOURCE_FILES")
 
+    context = kernel.analysis_context()
+    context_sha = kernel.json_sha256(context)
     cached: dict[str, dict[str, Any]] = {}
     if output.is_file():
         try:
             old = json.loads(output.read_text(encoding="utf-8"))
-            if old.get("schema") == SCHEMA:
+            if (old.get("schema") == SCHEMA and old.get("analysis_context") == context
+                    and old.get("analysis_context_sha256") == context_sha):
                 for row in old.get("files") or []:
                     body = {key: value for key, value in row.items() if key != "row_sha256"}
                     if row.get("row_sha256") == kernel.json_sha256(body):
@@ -44,13 +47,18 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     reused = 0
     for path in files:
         rel = kernel.relative_path(repo, path)
-        source_sha = kernel.bytes_sha256(path.read_bytes())
+        raw = path.read_bytes()
         old = cached.get(rel)
-        if old and old.get("source_sha256") == source_sha and old.get("language") == kernel.detect_language(path):
+        if old is not None:
+            try:
+                kernel.validate_row(repo, old, raw=raw)
+            except kernel.TreeSitterSWEError:
+                old = None
+        if old is not None:
             rows.append(old)
             reused += 1
         else:
-            rows.append(kernel.parse_file(repo, path))
+            rows.append(kernel.parse_file(repo, path, raw=raw))
     rows.sort(key=lambda row: row["path"])
     definitions = sum(len(row["definitions"]) for row in rows)
     references = sum(len(row["references"]) for row in rows)
@@ -60,6 +68,8 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "capability_id": CAPABILITY_ID,
         "source_root": kernel.relative_path(repo, source_root) if source_root != repo else ".",
         "substrate": kernel.SUBSTRATE,
+        "analysis_context": context,
+        "analysis_context_sha256": context_sha,
         "files": rows,
         "totals": {
             "files": len(rows),
@@ -73,6 +83,8 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
     }
+    if kernel.analysis_context() != context:
+        raise kernel.TreeSitterSWEError("ANALYSIS_CONTEXT_CHANGED_DURING_INDEX")
     digest = kernel.write_artifact(output, artifact)
     return {
         "adapter": "code_tree_sitter_incremental_index_v1",

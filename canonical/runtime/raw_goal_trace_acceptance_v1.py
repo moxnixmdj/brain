@@ -2245,7 +2245,13 @@ def _inspect_refactor_extract_function(args, result, root):
                       "owner_now_calls": extracted}
 
 
+def _inspect_crossfile_report(args, result, root):
+    from canonical.runtime.crossfile_report_verification_v1 import inspect_report
+    return inspect_report(args, result, root)
+
+
 INSPECTORS: dict[str, Inspector] = {
+    "software.repair.choreograph.crossfile.v1": _inspect_crossfile_report,
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
     "python.source.change_impact.testselect.v1": _inspect_change_impact_testselect,
@@ -2360,6 +2366,10 @@ def verify(
         # --- every path must be real, every declared digest must match -----
         for row in rows:
             cid = row["args"].get("capability_id")
+            if cid == "software.repair.choreograph.crossfile.v1":
+                from canonical.runtime.crossfile_task_binding_v1 import goal_matches_args
+                if not goal_matches_args(goal, row["args"]):
+                    return _unresolved("CROSSFILE_ARGUMENTS_DO_NOT_MATCH_THE_COMPLETE_REQUEST")
             consumed = _verified_consumed_paths(row["args"], root)
             for name in _PATH_ARGS:
                 value = row["args"].get(name)

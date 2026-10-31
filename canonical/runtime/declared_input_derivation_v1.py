@@ -128,7 +128,9 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     except (OSError, SyntaxError, ValueError):
         return {}
     found: dict[str, str] = {}
-    for node in ast.walk(tree):
+    nodes = list(ast.walk(tree))
+    parents = {child: parent for parent in nodes for child in ast.iter_child_nodes(parent)}
+    for node in nodes:
         if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
                 and node.func.attr == "get" and node.args):
             continue
@@ -141,13 +143,15 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
         # A default is proved by: a second positional arg, an `or` fallback on
         # this very call, or an `if args.get(key)` guard (presence-optional).
         guarded = len(node.args) >= 2
-        for parent in ast.walk(tree):
+        child = node
+        parent = parents.get(child)
+        while not guarded and parent is not None:
             if isinstance(parent, ast.BoolOp) and isinstance(parent.op, ast.Or) and node in parent.values:
                 guarded = True
-                break
-            if isinstance(parent, ast.If) and node in ast.walk(parent.test):
+            if isinstance(parent, ast.If) and child is parent.test:
                 guarded = True
-                break
+            child = parent
+            parent = parents.get(child)
         # Scope is declaration-driven: only a proven configuration knob, never
         # an output (the stated destination is the acceptance promise) and never
         # a semantic path/root/argv slot.

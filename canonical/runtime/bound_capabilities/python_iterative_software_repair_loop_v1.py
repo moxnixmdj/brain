@@ -26,7 +26,12 @@ def _score(r):
  if m:
   n=sum(int(v) for _,v in re.findall(r'(failures|errors)=(\d+)',m.group(1)))
   if n:return n
- n=len(re.findall(r'(?m)^(?:FAIL|ERROR):\s',t));return n or None
+ n=len(re.findall(r'(?m)^(?:FAIL|ERROR):\s',t))
+ if n:return n
+ summary=_PATCH.pytest_summary(t)
+ if summary is not None and r.get('returncode')==1:
+  return summary.get('failed',0)+summary.get('errors',0) or None
+ return None
 def _files(repo,root,tests,failure):
  ts={p.resolve() for p in tests};out=[];seen=set()
  def add(p):
@@ -55,12 +60,18 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched,env):
  cur=source.read_bytes()
  try:text=cur.decode();tree=ast.parse(text)
  except Exception:return None,0
+ renderer=_PATCH._CandidateRenderer(text,tree)
  nums,strings=_PATCH._test_literals(tests);best=None;tested=0
  for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
   if tested>=limit:break
-  cand=_PATCH._render_candidate(text,key,replacer)
+  cand=renderer.render(key,replacer)
   if not cand or cand==text:continue
-  tested+=1;source.write_text(cand);_purge(set(touched)|{source});r=_PATCH._run_tests(repo,argv,timeout,env);source.write_bytes(cur);_purge(set(touched)|{source});s=_score(r)
+  tested+=1
+  try:
+   source.write_text(cand);_purge(set(touched)|{source});r=_PATCH._run_tests(repo,argv,timeout,env)
+  finally:
+   source.write_bytes(cur);_purge(set(touched)|{source})
+  s=_score(r)
   if s is None or s>=score:continue
   rec={'source':source,'bytes':cand.encode(),'score':s,'mutation':desc,'sha256':_sha(cand.encode())}
   return rec,tested

@@ -184,7 +184,7 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     return cid, inputs
 
 
-def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
+def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, dict, dict] | None:
     """Return ``(registry, admissible, compiled)`` for a DECISIVE typed SWE
     selection, or ``None``.  ``None`` means: not a SWE request, ambiguous, no
     bindable proposal, effect-inconsistent, or any fault — the caller keeps its
@@ -199,7 +199,8 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
     if not is_swe_request(goal):
         return None
     try:
-        registry = dict(live_brain.load_verified_registry())
+        registry = (dict(compiled_context[0]) if compiled_context is not None
+                    else dict(live_brain.load_verified_registry()))
         declared = selection.declarations(root)
         cid = ""
         inputs: dict = {}
@@ -261,7 +262,10 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         # lossless raw-task contract reads); fall back to a synthetic single-
         # capability plan when the compiler raised (the short-sentence case).
         try:
-            _, _, real = live_brain.compile_against_live_registry(goal, root)
+            if compiled_context is None:
+                _, _, real = live_brain.compile_against_live_registry(goal, root)
+            else:
+                real = compiled_context[2]
             compiled = dict(real)
         except Exception:
             compiled = {
@@ -272,7 +276,15 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         compiled["selected_capability"] = cid
         compiled["inputs"] = inputs
         compiled["compiler_mode"] = "SWE_TYPED_PLAN_V1"
-        compiled.setdefault("target_effects", list(entry.get("provides") or []) or [cid])
+        # The original lexical plan may describe a DIFFERENT capability. Its
+        # effects and evidence cannot follow a corrected typed selection.
+        compiled["target_effects"] = list(entry.get("provides") or []) or [cid]
+        compiled["initial_facts"] = list(entry.get("requires") or [])
+        compiled["compiled_parts"] = []
+        compiled["capabilities"] = [cid]
+        score, _, evidence = goal_compiler._score(goal, cid, entry)
+        compiled["score"] = score
+        compiled["match_evidence"] = evidence
         compiled.pop("capability_dag", None)
         compiled.pop("controller_actions", None)
         return (registry, admissible, compiled)
