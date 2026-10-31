@@ -356,8 +356,16 @@ case("add_logging", lambda b: "Add logging to every function in %s." % rel(b, "p
      lambda b, r: "logging" in text_of(b / "pkg/mod.py"), "feature")
 case("add_retries", lambda b: "Add retry with backoff to the network call in %s."
      % rel(b, "pkg/http.py"), lambda b, r: "retry" in text_of(b / "pkg/http.py").lower(), "feature")
+# THE REQUEST NAMES THE FILE IT WANTS CHANGED, SO THAT FILE IS NOT DAMAGE.
+#
+# Measured 2026-10-31: python.refactor.add_parameter.v1 did exactly what the sentence asked --
+# it added `strict` to `total` in the named file and the oracle passed -- and the run was
+# reported DAMAGED because the case carried no `allow` list, so the one file the goal named
+# counted as a file nobody asked for.  The allow list is the place that says "the request
+# itself asks for this"; the repair cases have used it since the lane existed.
 case("add_parameter", lambda b: "Add a parameter strict to the function total in %s."
-     % rel(b, "pkg/util.py"), lambda b, r: "strict" in text_of(b / "pkg/util.py"), "feature")
+     % rel(b, "pkg/util.py"), lambda b, r: "strict" in text_of(b / "pkg/util.py"), "feature",
+     allow=("util.py",))
 case("implement_issue", lambda b: "Implement this issue: add a subtract function to %s with a unit "
      "test." % rel(b, "pkg/calc.py"), lambda b, r: "def subtract" in text_of(b / "pkg/calc.py"),
      "feature")
