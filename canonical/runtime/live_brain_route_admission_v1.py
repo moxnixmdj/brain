@@ -172,6 +172,11 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if effect_error:
         return {"schema": SCHEMA, "admitted": False, "rule": effect_error,
                 "compiler_mode": mode, "selected_capability": selected}
+    if selected.startswith(("software.repair.", "python.software.repair.")) and len(
+        re.findall(r"[A-Za-z_]+", front.prose_only(goal))
+    ) < 2:
+        return {"schema": SCHEMA, "admitted": False, "rule": "UNDERSPECIFIED_BARE_REPAIR_VERB",
+                "compiler_mode": mode, "selected_capability": selected}
     # An inventory row is keyed by the path of a file in THIS repository, so it can
     # only be chosen by a sentence that names that file.  Lexical overlap with a
     # filename is not evidence about the goal: it is evidence that the filename
@@ -460,6 +465,11 @@ def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any]
         entry = registry.get(cid)
         if not isinstance(entry, Mapping):
             return {**base, "admitted": False, "rule": "DAG_CAPABILITY_NOT_ADMISSIBLE", "dag_steps": rows,
+                    "failed_capability_id": cid}
+        if cid.startswith(("software.repair.", "python.software.repair.")) and len(
+            re.findall(r"[A-Za-z_]+", front.prose_only(goal))
+        ) < 2:
+            return {**base, "admitted": False, "rule": "DAG_UNDERSPECIFIED_BARE_REPAIR_VERB", "dag_steps": rows,
                     "failed_capability_id": cid}
         from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
         effect_error = implementation_effect_error(clause, [cid], registry)
@@ -1441,7 +1451,16 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
+    _ro_q = bool(
+        re.match(r"^\s*(?:find|who|which|what|count|list|locate|show|measure)\b", text, re.I)
+        and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", text, re.I)
+    )
+    if _ro_q:
+        return []
     for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
+        if re.search(r"\b(?:function|method|class|symbol|def|parameter|variable|helper|named|called)\s+$",
+                     text[max(0, m.start() - 28):m.start()], re.IGNORECASE):
+            continue
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -2136,6 +2155,15 @@ def _states_an_executable_form(goal: str, admission: Mapping[str, Any] | None = 
         from canonical.runtime import capability_selection_retrieval_v1 as _csr
         if _csr.is_computed_answer_delivery(goal) or _csr.is_ast_code_edit_request(goal):
             return False
+        if (
+            not re.search(r"\bshell\s+command\b", goal, re.I)
+            and re.search(r"\b(?:delete|remove|erase)\b", goal, re.I)
+            and (
+                re.search(r"\.(?:db|sqlite|sqlite3)\b", goal, re.I)
+                or re.search(r"\band\s+(?:the\s+)?\w+\s+directory\b", goal, re.I)
+            )
+        ):
+            return False
         if composer_route.extract_argv(goal) is not None:
             return True
         if (composer_route.extract_content(goal) is not None
@@ -2510,6 +2538,22 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     "incremental_spend_usd": 0,
                 }
             return fast
+    if goal:
+        _imp_early = re.search(
+            r"\b(?:decide(?:s)?\s+(?:the\s+)?halting\s+problem|solve(?:s)?\s+(?:the\s+)?halting\s+problem|"
+            r"prove\s+p\s*=\s*np|sort\s+arbitrary[^\n.]{0,50}?\bin\s+o\(1\)|"
+            r"invert\s+sha-?256\s+in\s+o\(1\)|losslessly\s+compress\s+every\s+arbitrary\s+random)\b",
+            goal,
+            re.IGNORECASE,
+        )
+        if _imp_early:
+            return _fail(
+                str((request or {}).get("task_id") or ""),
+                "FAIL_CLOSED",
+                "COMPUTABILITY_IMPOSSIBLE_SPECIFICATION",
+                perf_counter_ns(),
+                reason=_imp_early.group(0),
+            )
     # Reuse the compiler result within this request only. Never cache mutable
     # task evidence across calls. Correct a contradicted SWE effect BEFORE a
     # measurement-only/wrong-domain tool is allowed to execute.
@@ -2532,9 +2576,29 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 # An explicit family has its own decisive resolver and binding
                 # rules. Use it before ANY lexical dispatch, even when the raw
                 # id looks compatible: its output may still bind onto source.
-                if selected and (_typed_plan._family_terms(prose) is not None
-                                 or not _typed_plan._effect_consistent(
-                                     prose, selected, (context[0] or {}).get(selected))):
+                # Note: an edit sentence mentioning "and update every caller" is
+                # NOT a read-only symbol/caller query.
+                from canonical.runtime import capability_selection_retrieval_v1 as _csr_edit
+                _fam_hit = _typed_plan._family_terms(prose)
+                _suppress_symbol_family = bool(
+                    _fam_hit is not None
+                    and _fam_hit[1] == "symbol"
+                    and (
+                        _csr_edit.is_ast_code_edit_request(goal)
+                        or selected.startswith(("python.refactor.", "python.software.", "python.source.add_function", "python.feature."))
+                    )
+                )
+                if _suppress_symbol_family:
+                    _fam_hit = None
+                if selected and (
+                    _fam_hit is not None
+                    or (
+                        not _suppress_symbol_family
+                        and not _typed_plan._effect_consistent(
+                            prose, selected, (context[0] or {}).get(selected)
+                        )
+                    )
+                ):
                     corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
                     if corrected is None:
                         # Structured obligations are unbound regardless of which
@@ -2568,6 +2632,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     goal = _request_goal(request)
     try:
         from canonical.runtime import swe_typed_plan_v1 as _typed_plan
+        if len(re.findall(r"[A-Za-z_]+", front.prose_only(goal))) < 2:
+            return result
         if not _typed_plan.is_swe_request(goal):
             return result
         plan = _typed_plan.build_plan(goal, ROOT, compiled_context=context)

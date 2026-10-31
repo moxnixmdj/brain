@@ -853,10 +853,15 @@ def _try_sql_parameterization(proj: pathlib.Path, test_dir: pathlib.Path, focus:
 # ---------------------------------------------------------------------------
 def _try_concurrency_lock_synthesis(proj: pathlib.Path, test_dir: pathlib.Path, focus: list[pathlib.Path]) -> list[pathlib.Path] | None:
     snap = {p: p.read_bytes() for p in focus}
+    suite_has_threads = any(
+        "threading" in tp.read_text(encoding="utf-8", errors="ignore")
+        or "ThreadPoolExecutor" in tp.read_text(encoding="utf-8", errors="ignore")
+        for tp in (sorted(test_dir.rglob("*.py")) if test_dir.is_dir() else [])
+    )
     edited: list[pathlib.Path] = []
     for p in focus:
         src = snap[p].decode("utf-8", errors="replace")
-        if "threading" not in src or re.search(r"\b(?:R?Lock|Semaphore|Condition)\s*\(", src):
+        if ("threading" not in src and not suite_has_threads) or re.search(r"\b(?:R?Lock|Semaphore|Condition)\s*\(", src):
             continue
         try:
             tree = ast.parse(src)
@@ -1424,6 +1429,15 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if not focus:
         raise RuntimeError("NO_PYTHON_SOURCE_FILES")
 
+    goal_low = str(args.get("goal") or "").lower()
+    want_reg_test = (
+        str(args.get("operation") or "") == "fix_then_regression_test"
+        or bool(args.get("regression_test_file") or args.get("regression_test_path"))
+        or ("regression test" in goal_low and any(w in goal_low for w in ("fix", "repair", "bug", "patch")))
+    )
+    if want_reg_test:
+        return _run_fix_then_regression_test(repo, src, proj, test_dir, focus, out, args)
+
     pre_run_snap = {p: p.read_bytes() for p in focus}
     mode_applied = "already_acyclic_and_green"
     edited: list[pathlib.Path] | None = None
@@ -1444,7 +1458,7 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if edited is None:
         base_ok, _ran, _err = _verify_project(proj, test_dir)
         if not base_ok:
-            edited = _try_test_guided_repair(proj, test_dir, focus) if ((proj / "tests").is_dir() or (src / "tests").is_dir()) else None
+            edited = _try_test_guided_repair(proj, test_dir, focus) if any(test_dir.rglob("test_*.py")) else None
             if edited is not None:
                 mode_applied = "test_guided_ast_repair"
             else:
@@ -1504,6 +1518,335 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
         "mode": mode_applied,
         "output_path": out.relative_to(repo).as_posix(),
         "output_sha256": sha,
+        "output_verified": True,
+        "verified": True,
+    }
+
+
+def _apply_unified_diff_text(orig: str, udiff: str) -> str | None:
+    src_lines = orig.splitlines(keepends=True)
+    out_lines: list[str] = []
+    src_idx = 0
+    diff_lines = udiff.splitlines(keepends=True)
+    i = 0
+    while i < len(diff_lines) and not diff_lines[i].startswith("@@"):
+        i += 1
+    while i < len(diff_lines):
+        hdr = diff_lines[i]
+        m = re.match(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@", hdr)
+        if not m:
+            return None
+        old_start = int(m.group(1)) - 1
+        out_lines.extend(src_lines[src_idx:old_start])
+        src_idx = old_start
+        i += 1
+        while i < len(diff_lines) and not diff_lines[i].startswith("@@"):
+            dl = diff_lines[i]
+            if dl.startswith(" "):
+                out_lines.append(src_lines[src_idx])
+                src_idx += 1
+            elif dl.startswith("-"):
+                src_idx += 1
+            elif dl.startswith("+"):
+                out_lines.append(dl[1:])
+            i += 1
+    out_lines.extend(src_lines[src_idx:])
+    return "".join(out_lines)
+
+
+def _find_differential_witness(
+    buggy_src: str,
+    fixed_src: str,
+    proj: pathlib.Path,
+    mod_dot: str,
+) -> tuple[str, tuple[Any, ...], Any] | None:
+    """Find (fn_name, args_tuple, expected_val) where buggy_src fails/differs and fixed_src succeeds."""
+    b_tree = ast.parse(buggy_src)
+    f_tree = ast.parse(fixed_src)
+    b_fns = {n.name: n for n in b_tree.body if isinstance(n, ast.FunctionDef)}
+    f_fns = {n.name: n for n in f_tree.body if isinstance(n, ast.FunctionDef)}
+    changed_fns = [
+        name for name, fn_node in f_fns.items()
+        if name in b_fns and ast.dump(b_fns[name]) != ast.dump(fn_node)
+    ]
+    if not changed_fns:
+        changed_fns = list(f_fns.keys())
+
+    # Mine candidate constants from AST (prioritize realistic scalars + None/empty boundaries!)
+    consts: list[Any] = [10, 1, 0, -1, 2, None, 100, 0.5, "", "a", [], [1, 2], {}, {"a": 1}, True, False, 3, 5]
+    for node in ast.walk(f_tree):
+        if isinstance(node, ast.Constant) and isinstance(node.value, (int, float, str)):
+            if node.value not in consts and len(consts) < 40:
+                consts.append(node.value)
+            if isinstance(node.value, int) and not isinstance(node.value, bool):
+                for delta in (-1, 1):
+                    if (node.value + delta) not in consts:
+                        consts.append(node.value + delta)
+
+    b_ns: dict[str, Any] = {"__name__": mod_dot}
+    f_ns: dict[str, Any] = {"__name__": mod_dot}
+    old_sys_path = list(sys.path)
+    sys.path.insert(0, str(proj))
+    try:
+        exec(compile(buggy_src, "<buggy>", "exec"), b_ns)  # noqa: S102
+        exec(compile(fixed_src, "<fixed>", "exec"), f_ns)  # noqa: S102
+    except Exception:
+        return None
+    finally:
+        sys.path[:] = old_sys_path
+
+    for fn_name in changed_fns:
+        bfn = b_ns.get(fn_name)
+        ffn = f_ns.get(fn_name)
+        if not callable(bfn) or not callable(ffn):
+            continue
+        arity = len(f_fns[fn_name].args.args)
+        defaults_n = len(f_fns[fn_name].args.defaults)
+        min_arity = max(0, arity - defaults_n)
+        arg_tuples: list[tuple[Any, ...]] = []
+        if min_arity == 0:
+            arg_tuples.append(())
+        if min_arity <= 1 <= arity:
+            arg_tuples.extend((c,) for c in consts[:28])
+        if min_arity <= 2 <= arity:
+            small = consts[:14]
+            arg_tuples.extend((a, b) for a in small for b in small)
+        if min_arity <= 3 <= arity:
+            tiny = consts[:7]
+            arg_tuples.extend((a, b, c) for a in tiny for b in tiny for c in tiny)
+
+        for call_args in arg_tuples:
+            try:
+                f_val = ffn(*call_args)
+            except Exception:
+                continue
+            # Ensure f_val is cleanly literal-representable
+            if not isinstance(f_val, (int, float, str, bool, type(None), list, tuple, dict, set)):
+                continue
+            try:
+                b_raised = False
+                b_val = bfn(*call_args)
+            except Exception:
+                b_raised = True
+                b_val = None
+            if b_raised or type(b_val) is not type(f_val) or b_val != f_val:
+                return fn_name, call_args, f_val
+    return None
+
+
+def _run_fix_then_regression_test(
+    repo: pathlib.Path,
+    src: pathlib.Path,
+    proj: pathlib.Path,
+    test_dir: pathlib.Path,
+    focus: list[pathlib.Path],
+    out: pathlib.Path,
+    args: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Closed-loop repair + differential regression test synthesis proven RED pre-fix & GREEN post-fix."""
+    from canonical.runtime.bound_capabilities import (
+        python_coupled_software_repair_loop_v1 as coupled_loop,
+        python_test_guided_patch_search_v1 as ptg,
+    )
+    from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+
+    buggy_snap = {p: p.read_bytes() for p in focus}
+    try:
+        existing_tests = list(discover_test_files(proj))
+    except FileNotFoundError:
+        existing_tests = []
+    orig_test_snap = {t: t.read_bytes() for t in existing_tests}
+
+    reg_raw = str(args.get("regression_test_file") or args.get("regression_test_path") or "").strip()
+    if reg_raw:
+        reg_file = _safe_path(repo, reg_raw)
+    elif existing_tests:
+        reg_file = existing_tests[0]
+    else:
+        test_dir.mkdir(parents=True, exist_ok=True)
+        reg_file = test_dir / f"test_regression_{focus[0].stem}.py"
+
+    reg_existed = reg_file.is_file()
+    reg_orig_bytes = reg_file.read_bytes() if reg_existed else b""
+
+    try:
+        base_ok, _ran, _err = _verify_project(proj, test_dir)
+        repaired_files: list[pathlib.Path] = []
+        tmp_rep = out.parent / f".choreo_sub_{os.getpid()}.json"
+        tmp_rep.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            if not base_ok:
+                # 1a. Fast in-RAM batch + SPR structural patch search first when focus is small
+                if existing_tests and len(focus) <= 3:
+                    for p in focus:
+                        try:
+                            pres = ptg.run({
+                                "source_path": p.relative_to(repo).as_posix(),
+                                "test_paths": [t.relative_to(repo).as_posix() for t in existing_tests],
+                                "output_path": tmp_rep.relative_to(repo).as_posix(),
+                            }, repo)
+                            if pres.get("pass") and pres.get("unified_diff"):
+                                patched_txt = _apply_unified_diff_text(
+                                    buggy_snap[p].decode("utf-8"), pres["unified_diff"]
+                                )
+                                if patched_txt is not None:
+                                    p.write_text(patched_txt, encoding="utf-8")
+                                    ok_now, _, _ = _verify_project(proj, test_dir)
+                                    if ok_now:
+                                        repaired_files = [p]
+                                        break
+                                p.write_bytes(buggy_snap[p])
+                        except Exception:
+                            p.write_bytes(buggy_snap[p])
+                # 1b. Coupled multi-file / multi-site repair loop
+                if not repaired_files and existing_tests:
+                    try:
+                        cres = coupled_loop.run({
+                            "source_root": proj.relative_to(repo).as_posix(),
+                            "test_paths": [t.relative_to(repo).as_posix() for t in existing_tests],
+                            "output_path": tmp_rep.relative_to(repo).as_posix(),
+                            "apply": True,
+                        }, repo)
+                        if cres.get("pass") and cres.get("patches"):
+                            for prow in cres["patches"]:
+                                sp_abs = (repo / prow["source_path"]).resolve()
+                                if sp_abs in buggy_snap:
+                                    patched_c = _apply_unified_diff_text(
+                                        buggy_snap[sp_abs].decode("utf-8"), prow["unified_diff"]
+                                    )
+                                    if patched_c is not None:
+                                        sp_abs.write_text(patched_c, encoding="utf-8")
+                            if _verify_project(proj, test_dir)[0]:
+                                repaired_files = [p for p in focus if p.read_bytes() != buggy_snap[p]]
+                            else:
+                                for p, b in buggy_snap.items():
+                                    p.write_bytes(b)
+                    except Exception:
+                        for p, b in buggy_snap.items():
+                            p.write_bytes(b)
+                # 1c. Fallback to choreograph's built-in passes
+                if not repaired_files:
+                    fb_ed = _try_test_guided_repair(proj, test_dir, focus)
+                    if fb_ed:
+                        repaired_files = fb_ed
+            else:
+                # Suite currently green: probe for unhandled crash on boundary inputs (None, [], 0)
+                for p in focus:
+                    src_txt = buggy_snap[p].decode("utf-8")
+                    for _, cand_desc in ptg._structural_candidate_specs(src_txt, ast.parse(src_txt)):
+                        pass
+                    for cand_txt, _cd in ptg._structural_candidate_specs(src_txt, ast.parse(src_txt)):
+                        rel_mod = ".".join(p.relative_to(proj).with_suffix("").parts)
+                        wit = _find_differential_witness(src_txt, cand_txt, proj, rel_mod)
+                        if wit is not None:
+                            p.write_text(cand_txt, encoding="utf-8")
+                            if _verify_project(proj, test_dir)[0]:
+                                repaired_files = [p]
+                                break
+                            p.write_bytes(buggy_snap[p])
+                    if repaired_files:
+                        break
+        finally:
+            tmp_rep.unlink(missing_ok=True)
+
+        if not repaired_files:
+            raise RuntimeError("FIX_THEN_REGRESSION_TEST_REPAIR_UNRESOLVED")
+
+        fixed_snap = {p: p.read_bytes() for p in focus}
+        target_p = repaired_files[0]
+        rel_mod = ".".join(target_p.relative_to(proj).with_suffix("").parts)
+        witness = _find_differential_witness(
+            buggy_snap[target_p].decode("utf-8"),
+            fixed_snap[target_p].decode("utf-8"),
+            proj,
+            rel_mod,
+        )
+        if witness is None:
+            raise RuntimeError("DIFFERENTIAL_WITNESS_NOT_FOUND")
+        fn_name, call_args, exp_val = witness
+        args_src = ", ".join(repr(a) for a in call_args)
+        test_cls_name = f"TestRegression_{fn_name}_{hashlib.sha256(args_src.encode()).hexdigest()[:6]}"
+        test_method = (
+            f"\n\nclass {test_cls_name}(unittest.TestCase):\n"
+            f"    def test_differential_regression_{fn_name}(self):\n"
+            f"        from {rel_mod} import {fn_name}\n"
+            f"        self.assertEqual({fn_name}({args_src}), {exp_val!r})\n"
+        )
+        if reg_existed:
+            cur_reg = reg_orig_bytes.decode("utf-8")
+            prefix = "" if "import unittest" in cur_reg else "import unittest\n"
+            new_reg_text = prefix + cur_reg.rstrip() + test_method
+        else:
+            new_reg_text = "import unittest\n" + test_method.lstrip("\n")
+        ast.parse(new_reg_text)
+        reg_file.parent.mkdir(parents=True, exist_ok=True)
+        reg_file.write_text(new_reg_text, encoding="utf-8")
+
+        # DIFFERENTIAL PROOF STEP A: Must FAIL (RED) on pre-fix buggy source!
+        for p in focus:
+            p.write_bytes(buggy_snap[p])
+            ptg._purge_source_bytecode(p)
+        ptg._purge_source_bytecode(reg_file)
+        t_env = ptg._source_env(proj, target_p, reg_file)
+        red_res = ptg._run_tests(repo, ptg.suite_argv(sys.executable, reg_file), 30, t_env)
+        if red_res["returncode"] == 0:
+            raise RuntimeError("REGRESSION_TEST_DID_NOT_FAIL_ON_BUGGY_SOURCE")
+
+        # DIFFERENTIAL PROOF STEP B: Must PASS (GREEN) on post-fix repaired source across full suite!
+        for p in focus:
+            p.write_bytes(fixed_snap[p])
+            ptg._purge_source_bytecode(p)
+        all_suite_files = sorted({*existing_tests, reg_file})
+        green_res = ptg._run_tests(repo, ptg.suite_argv(sys.executable, *all_suite_files), 30, t_env)
+        if green_res["returncode"] != 0 or green_res["timed_out"]:
+            raise RuntimeError("POST_FIX_SUITE_FAILED_WITH_REGRESSION_TEST")
+    except Exception:
+        for p, b in buggy_snap.items():
+            p.write_bytes(b)
+        for t, b in orig_test_snap.items():
+            t.write_bytes(b)
+        if reg_existed:
+            reg_file.write_bytes(reg_orig_bytes)
+        else:
+            reg_file.unlink(missing_ok=True)
+        raise
+
+    edited_rels = sorted({
+        *(p.relative_to(repo).as_posix() for p in repaired_files),
+        reg_file.relative_to(repo).as_posix(),
+    })
+    diff_proof = {
+        "target_function": fn_name,
+        "distinguishing_args": [repr(a) for a in call_args],
+        "expected_output": repr(exp_val),
+        "regression_test_file": reg_file.relative_to(repo).as_posix(),
+        "red_on_buggy_returncode": int(red_res["returncode"] or 1),
+        "green_on_fixed_returncode": int(green_res["returncode"]),
+    }
+    report = {
+        "schema": "PROJECT_BRAIN_CROSSFILE_CHOREOGRAPH_V1",
+        "adapter": "software_repair_crossfile_choreograph_v1",
+        "source_root": src.relative_to(repo).as_posix() if src != repo else ".",
+        "project_root": proj.relative_to(repo).as_posix() if proj != repo else ".",
+        "mode": "fix_then_regression_test",
+        "files_edited": edited_rels,
+        "edit_count": len(edited_rels),
+        "differential_regression_proof": diff_proof,
+        "choreography_verified": True,
+        "output_verified": True,
+    }
+    out.parent.mkdir(parents=True, exist_ok=True)
+    payload = (json.dumps(report, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    out.write_bytes(payload)
+    return {
+        "adapter": "software_repair_crossfile_choreograph_v1",
+        "choreography_verified": True,
+        "edit_count": len(edited_rels),
+        "files_edited": edited_rels,
+        "mode": "fix_then_regression_test",
+        "differential_regression_proof": diff_proof,
+        "output_path": out.relative_to(repo).as_posix(),
+        "output_sha256": hashlib.sha256(payload).hexdigest(),
         "output_verified": True,
         "verified": True,
     }

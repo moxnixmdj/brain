@@ -51,31 +51,16 @@ SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
 _FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
 # "<noun> <name>" -- "the function line_total", "the class Cart".  The name is
 # read off the sentence and then PROVED against the file's own AST.
-# The CREATION grammar, in one place.  "Add a function total_cents(item) to <path>
-# that returns price_cents * qty, export it from <path>, and add a test for it in
-# <path>" spells every slot it needs: a name, a parameter list, the expression it
-# returns, and the three files.  Each is read VERBATIM; a parameter list that is
-# not a list of identifiers, or an expression that does not parse, yields no
-# value and the binder refuses instead of synthesising something the sentence did
-# not say.
 _ADDED_FUNCTION = re.compile(r"\bfunction\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)", re.I)
 _RETURNS_EXPR = re.compile(r"\breturns?\s+(.+?)\s*(?:,|\.\s|$)", re.I)
 _EXPORT_FROM = re.compile(r"\bexports?\b[^.\n]{0,40}?\bfrom\s+([^\s,;]+)", re.I)
 _CREATED_TEST = re.compile(
     r"\badd(?:s|ing)?\s+(?:a|an|the)?\s*tests?\b[^.\n]{0,50}?\bin\s+([^\s,;]+)", re.I)
-# The gate for every rule below that fills a slot for a function the sentence ASKS
-# FOR: an ordinary sentence that merely mentions "the function line_total" must
-# gain no slot it did not state.  Measured 2026-10-31: without the gate, five
-# test-selection rows bound `symbol` on a repair sentence and the selector became
-# ambiguous where it selected one relevant capability.
 _CREATES_A_FUNCTION = re.compile(
     r"\b(?:add|create|write|implement|define)\w*\b[^.\n]{0,60}?\bfunction\b", re.I)
-# "Add a parameter qty with a default value to the function line_total".
 _ADDED_PARAM = re.compile(
-    r"\b(?:add|insert|give)\w*\b[^.\n]{0,80}?\bparameters?\s+"
+    r"\b(?:add|insert|give)\w*\b[^.!\n]{0,80}?\bparameters?\s+"
     r"(?:named\s+)?[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", re.I)
-
-
 _NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 # ONLY configuration knobs may be defaulted away.  A path/root/argv/dir/file
@@ -105,21 +90,15 @@ _SWE_VERBS = (
     "scaffold", "generate test", "failing test", "unit test", "patch",
     "inline", "single-use", "single use", "merge conflict", "conflict", "unmerged",
     "injection", "parameterize", "parameterized", "sql", "dead code", "unused import",
-    "remove the unused", "move the function", "move the class", "move symbol",
-    "add a parameter", "add parameter", "add a function", "implement a function",
-    "implement function", "create a function", "regression test", "caller",
+    "remove the unused", "move the function", "move function", "move the class", "move symbol", "move helper",
+    "add a parameter", "add parameter", "add an optional parameter", "add optional parameter", "add argument",
+    "implement ", "synthesize ", "synthesize", "add a function", "add a total function", "total function", "write a function",
+    "implement a function", "implement function", "create a function", "regression test", "caller",
     "circular import", "import cycle", "bisect", "slower", "mutation", "taint", "untrusted",
     "flaky", "intermittently", "deprecated", "sql injection",
     "linearithmic", "unused", "race condition", "are failing",
     "security gate", "type gate", "coverage gate", "mutation gate", "perf gate", "static triage",
-    "changed lines", "synthesize",
-    # The other half of software work: CREATING.  A request to add a function and
-    # test it is software engineering with a stated signature, expression and
-    # files, and the derivations below fill those slots from exactly that
-    # evidence.  Measured 2026-10-31: without these phrases the feature request
-    # was not SWE in scope at all, so the contract was never derived and the
-    # capability that exists for it could not be reached.
-    "add a function", "export it from", "add a test for", "add a parameter",
+    "changed lines", "export it from", "add a test for",
 )
 
 
@@ -507,7 +486,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 wp = (pathlib.Path(root) / wdir).resolve()
                 if wp.is_dir():
                     for p in sorted(wp.rglob("*.py")):
-                        if "__pycache__" not in p.parts and _TEST_NAME_RE.search(p.name):
+                        if "__pycache__" not in p.parts and p.name != "__init__.py" and _TEST_NAME_RE.search(p.name):
                             w_found.append(p.relative_to(pathlib.Path(root).resolve()).as_posix())
             if w_found:
                 tests = w_found
@@ -561,7 +540,14 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                                   "evidence": ",".join(sources)}
     # A test command slot is satisfied by running the ONE stated test file.
     if "test_argv" in keys and len(tests) == 1:
-        out["test_argv"] = {"value": [sys.executable, "-B", tests[0]],
+        t_abs = (pathlib.Path(root) / tests[0]).resolve()
+        t_txt = t_abs.read_text(encoding="utf-8", errors="ignore") if t_abs.is_file() else ""
+        if "TestCase" in t_txt and "unittest.main" not in t_txt:
+            from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import suite_argv as _s_argv
+            argv_val = _s_argv(sys.executable, t_abs)
+        else:
+            argv_val = [sys.executable, "-B", tests[0]]
+        out["test_argv"] = {"value": argv_val,
                             "rule": ("ARGV_FROM_DISCOVERED_TEST_FILE" if discovered_tests
                                      else "ARGV_FROM_STATED_TEST_FILE"),
                             "evidence": tests[0]}
@@ -574,9 +560,14 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         out["source_paths"] = {"value": list(sources), "rule": "PATH_LIST_FROM_STATED_SOURCE_FILES",
                                "evidence": ",".join(sources)}
 
-    # A stated source file is the module.  No module => no row (fail closed).
+    # A stated source file is the module (relative to source_root when source_root is derived).
     if "module" in keys and len(sources) == 1 and sources[0].endswith(".py"):
-        out["module"] = {"value": sources[0], "rule": "MODULE_FROM_STATED_SOURCE_FILE",
+        mod_val = sources[0]
+        if "source_root" in out:
+            sr_val = str(out["source_root"]["value"]).rstrip("/")
+            if sr_val and mod_val.startswith(sr_val + "/"):
+                mod_val = mod_val[len(sr_val) + 1:]
+        out["module"] = {"value": mod_val, "rule": "MODULE_FROM_STATED_SOURCE_FILE",
                          "evidence": sources[0]}
     # MOVE GRAMMAR: two stated source files with the roles "from A to B" name a
     # SENDER and a RECEIVER, and the sentence says which is which.  Measured:
@@ -602,8 +593,207 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 for key in ({"to_module", "target_module"} & keys):
                     out[key] = {"value": dst_hit, "rule": "TARGET_MODULE_FROM_STATED_TO_PATH",
                                 "evidence": dst_hit}
+
+    goal_str = str(goal or "")
+    goal_low = goal_str.lower()
+
+    if "goal" in keys:
+        out["goal"] = {"value": goal_str, "rule": "GOAL_TEXT_FORWARDED", "evidence": "goal"}
+
+    # Cross-file move_symbol grammar on extract_function.v1 (`qualname` in keys)
+    move_m = re.search(
+        r"\bmove\b[^.?!]*?\bfrom\s+([A-Za-z0-9_./-]+\.py)\s+(?:to|into)\s+([A-Za-z0-9_./-]+\.py)",
+        goal_str, re.IGNORECASE,
+    )
+    if move_m and "to_module" in keys and "qualname" in keys:
+        orig_raw, dest_raw = move_m.group(1), move_m.group(2)
+        orig_abs = (pathlib.Path(root) / orig_raw).resolve()
+        dest_abs = (pathlib.Path(root) / dest_raw).resolve()
+        repo_abs = pathlib.Path(root).resolve()
+        if orig_abs.is_file() and repo_abs in orig_abs.parents and repo_abs in dest_abs.parents:
+            common_abs = pathlib.Path(os.path.commonpath([str(orig_abs.parent), str(dest_abs.parent)]))
+            while (common_abs / "__init__.py").is_file() and common_abs != repo_abs and (common_abs.parent == repo_abs or repo_abs in common_abs.parent.parents):
+                common_abs = common_abs.parent
+            if common_abs == repo_abs or repo_abs in common_abs.parents:
+                sr_rel = "." if common_abs == repo_abs else common_abs.relative_to(repo_abs).as_posix()
+                mod_rel_m = orig_abs.relative_to(common_abs).as_posix()
+                dest_rel_m = dest_abs.relative_to(common_abs).as_posix()
+                out["source_root"] = {"value": sr_rel, "rule": "MOVE_COMMON_SOURCE_ROOT", "evidence": orig_raw}
+                out["module"] = {"value": mod_rel_m, "rule": "MOVE_ORIGIN_MODULE_STATED", "evidence": orig_raw}
+                out["to_module"] = {"value": dest_rel_m, "rule": "MOVE_DEST_MODULE_STATED", "evidence": dest_raw}
+                for lkey in ("start_line", "end_line"):
+                    if lkey in keys:
+                        out[lkey] = {"value": 0, "rule": "MOVE_WHOLE_SYMBOL_SPAN", "evidence": "move"}
+                try:
+                    otree = ast.parse(orig_abs.read_text(encoding="utf-8"))
+                    odefs = {n.name for n in otree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))}
+                except Exception:
+                    odefs = set()
+                mentioned_syms = [s for s in odefs if re.search(r"\b" + re.escape(s) + r"\b", goal_str)]
+                if len(mentioned_syms) == 1:
+                    sym = mentioned_syms[0]
+                    if "qualname" in keys:
+                        out["qualname"] = {"value": sym, "rule": "MOVE_SYMBOL_PROVED_IN_ORIGIN", "evidence": sym}
+                    if "new_name" in keys:
+                        out["new_name"] = {"value": sym, "rule": "MOVE_PRESERVES_SYMBOL_NAME", "evidence": sym}
+    elif "to_module" in keys and "to_module" not in out:
+        out["to_module"] = {"value": "", "rule": "EXTRACT_IN_MODULE_DEFAULT", "evidence": "no_move"}
+        span_m = re.search(r"\blines?\s+(\d+)\s*(?:to|through|-|\.\.)\s*(\d+)\b", goal_str, re.IGNORECASE)
+        if span_m:
+            if "start_line" in keys:
+                out["start_line"] = {"value": int(span_m.group(1)), "rule": "EXTRACT_START_LINE_STATED", "evidence": span_m.group(0)}
+            if "end_line" in keys:
+                out["end_line"] = {"value": int(span_m.group(2)), "rule": "EXTRACT_END_LINE_STATED", "evidence": span_m.group(0)}
+        helper_m = re.search(
+            r"\b(?:into|as)\s+(?:(?:a|an|new|extracted|helper|function|method|named|called)\s+)*[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?",
+            goal_str, re.IGNORECASE,
+        )
+        if helper_m and "new_name" in keys and _NAME_RE.match(helper_m.group(1)):
+            out["new_name"] = {"value": helper_m.group(1), "rule": "EXTRACT_NEW_NAME_STATED", "evidence": helper_m.group(1)}
+
+    # Add-parameter grammar: "add [an] [optional] parameter NAME[=DEFAULT] to FN ..."
+    add_p_m = re.search(
+        r"\badd\s+(?:an?\s+)?(?:optional\s+|keyword\s+|default\s+)*(?:parameter|argument|param|arg)\s+"
+        r"[`\"']?([A-Za-z_][A-Za-z0-9_]*)(?:\s*=\s*([^`\"'\s,;)]+))?[`\"']?",
+        goal_str, re.IGNORECASE,
+    )
+    if add_p_m and "old_param" in keys and "new_param" in keys:
+        p_name = add_p_m.group(1)
+        def_val = add_p_m.group(2)
+        if not def_val:
+            dm = re.search(r"\bdefault(?:ing)?\s+(?:to|of|=)\s*[`\"']?([^`\"'\s,;).]+)[`\"']?", goal_str, re.IGNORECASE)
+            def_val = dm.group(1) if dm else "None"
+        if _NAME_RE.match(p_name):
+            out["old_param"] = {"value": "", "rule": "ADD_PARAM_EMPTY_OLD", "evidence": "add_parameter"}
+            out["new_param"] = {"value": p_name, "rule": "ADD_PARAM_NAME_STATED", "evidence": p_name}
+            if "operation" in keys:
+                out["operation"] = {"value": "add_parameter", "rule": "ADD_PARAM_OPERATION", "evidence": "add"}
+            if "default_expr" in keys:
+                out["default_expr"] = {"value": def_val, "rule": "ADD_PARAM_DEFAULT", "evidence": def_val}
+            if len(sources) == 1 and sources[0].endswith(".py") and "source_root" in keys and "module" in keys:
+                s_abs = (pathlib.Path(root) / sources[0]).resolve()
+                repo_r = pathlib.Path(root).resolve()
+                pkg_r = s_abs.parent
+                while (pkg_r / "__init__.py").is_file() and pkg_r != repo_r and (pkg_r.parent == repo_r or repo_r in pkg_r.parent.parents):
+                    pkg_r = pkg_r.parent
+                if pkg_r != s_abs.parent and (pkg_r == repo_r or repo_r in pkg_r.parents):
+                    out["source_root"] = {"value": "." if pkg_r == repo_r else pkg_r.relative_to(repo_r).as_posix(), "rule": "ADD_PARAM_PACKAGE_ROOT", "evidence": sources[0]}
+                    out["module"] = {"value": s_abs.relative_to(pkg_r).as_posix(), "rule": "ADD_PARAM_PACKAGE_MODULE", "evidence": sources[0]}
+    else:
+        if "operation" in keys and "old_param" in keys:
+            out["operation"] = {"value": "", "rule": "RENAME_PARAM_DEFAULT_OPERATION", "evidence": "rename"}
+        if "default_expr" in keys:
+            out["default_expr"] = {"value": "None", "rule": "RENAME_PARAM_UNUSED_DEFAULT", "evidence": "None"}
+
+    # Greenfield / total-function synthesis + fix_then_regression_test slots (`python.software.synthesize_function.v1`)
+    reg_test_intent = "regression test" in goal_low
+    synth_intent = bool(
+        re.search(
+            r"\b(?:implement|synthesize|total\s+function|"
+            r"(?:write|add|create)\s+a\s+(?:total\s+|pure\s+|helper\s+|new\s+)*function)\b",
+            goal_low,
+        )
+        and not re.search(r"\b(?:broken|bug|caller|callers|who\s+calls|rename|extract|move)\b", goal_low)
+    )
+    if (synth_intent or reg_test_intent) and "target_file" in keys:
+        non_init_sources = [s for s in sources if s.endswith(".py") and pathlib.PurePosixPath(s).name != "__init__.py"]
+        if len(non_init_sources) == 1:
+            out["target_file"] = {"value": non_init_sources[0], "rule": "TARGET_FILE_FROM_STATED_SOURCE", "evidence": non_init_sources[0]}
+            if "source_root" in keys and "source_root" not in out:
+                t_abs_s = (pathlib.Path(root) / non_init_sources[0]).resolve()
+                repo_r = pathlib.Path(root).resolve()
+                pkg_r = t_abs_s.parent
+                while (pkg_r / "__init__.py").is_file() and pkg_r != repo_r and (pkg_r.parent == repo_r or repo_r in pkg_r.parent.parents):
+                    pkg_r = pkg_r.parent
+                out["source_root"] = {
+                    "value": "." if pkg_r == repo_r else pkg_r.relative_to(repo_r).as_posix(),
+                    "rule": "SOURCE_ROOT_FROM_STATED_TARGET_PACKAGE",
+                    "evidence": non_init_sources[0],
+                }
+        else:
+            raw_pys = [
+                m.group(0).rstrip(".,;:)\"'")
+                for m in _PATH_RE.finditer(goal_str)
+                if m.group(0).rstrip(".,;:)\"'").endswith(".py")
+                and pathlib.PurePosixPath(m.group(0).rstrip(".,;:)\"'")).name != "__init__.py"
+                and not _TEST_NAME_RE.search(m.group(0).rstrip(".,;:)\"'"))
+            ]
+            if len(raw_pys) == 1:
+                cand_t = (pathlib.Path(root) / raw_pys[0]).resolve()
+                if pathlib.Path(root).resolve() in cand_t.parents:
+                    out["target_file"] = {"value": raw_pys[0], "rule": "TARGET_FILE_TO_CREATE_STATED", "evidence": raw_pys[0]}
+                    if "source_root" in keys and "source_root" not in out and cand_t.parent.is_dir():
+                        out["source_root"] = {
+                            "value": cand_t.parent.relative_to(pathlib.Path(root).resolve()).as_posix(),
+                            "rule": "SOURCE_ROOT_FROM_NEW_TARGET_PARENT",
+                            "evidence": raw_pys[0],
+                        }
+            elif reg_test_intent:
+                repo_r = pathlib.Path(root).resolve()
+                stated_dirs: list[pathlib.Path] = []
+                for m in _PATH_RE.finditer(goal_str):
+                    raw_d = m.group(0).rstrip(".,;:)\"'")
+                    dp = (repo_r / raw_d).resolve()
+                    if dp.is_dir() and repo_r in dp.parents and dp.name not in ("tests", "test") and dp not in stated_dirs:
+                        stated_dirs.append(dp)
+                if len(stated_dirs) == 1:
+                    prod_cands = [
+                        p for p in sorted(stated_dirs[0].rglob("*.py"))
+                        if "__pycache__" not in p.parts and ".git" not in p.parts
+                        and p.name != "__init__.py" and not _TEST_NAME_RE.search(p.name)
+                    ]
+                    if len(prod_cands) == 1:
+                        rel_prod = prod_cands[0].relative_to(repo_r).as_posix()
+                        out["target_file"] = {"value": rel_prod, "rule": "TARGET_FILE_UNIQUE_IN_STATED_DIR", "evidence": rel_prod}
+                        if "source_root" in keys:
+                            out["source_root"] = {
+                                "value": stated_dirs[0].relative_to(repo_r).as_posix(),
+                                "rule": "SOURCE_ROOT_STATED_DIR",
+                                "evidence": stated_dirs[0].relative_to(repo_r).as_posix(),
+                            }
+        if synth_intent and "test_paths" in keys and "test_paths" not in out:
+            fut_tests = [
+                m.group(0).rstrip(".,;:)\"'")
+                for m in _PATH_RE.finditer(goal_str)
+                if m.group(0).rstrip(".,;:)\"'").endswith(".py")
+                and _TEST_NAME_RE.search(m.group(0).rstrip(".,;:)\"'"))
+            ]
+            if fut_tests:
+                out["test_paths"] = {"value": fut_tests, "rule": "FUTURE_TEST_PATHS_STATED", "evidence": ",".join(fut_tests)}
+    if reg_test_intent and "function_name" in keys and "target_file" in keys:
+        out["function_name"] = {"value": "", "rule": "REGRESSION_TEST_MODE_NO_FN_REQUIRED", "evidence": "regression test"}
+        if "operation" in keys:
+            out["operation"] = {"value": "fix_then_regression_test", "rule": "FIX_THEN_REGRESSION_TEST_STATED", "evidence": "regression test"}
+        if "regression_test_file" in keys:
+            reg_pys = [
+                m.group(0).rstrip(".,;:)\"'")
+                for m in _PATH_RE.finditer(goal_str)
+                if m.group(0).rstrip(".,;:)\"'").endswith(".py")
+                and "regression" in m.group(0).lower()
+            ]
+            out["regression_test_file"] = {
+                "value": reg_pys[0] if len(reg_pys) == 1 else "",
+                "rule": "REGRESSION_TEST_PATH_DERIVED",
+                "evidence": reg_pys[0] if len(reg_pys) == 1 else "auto_in_test_dir",
+            }
+    elif synth_intent and "function_name" in keys:
+        if "operation" in keys:
+            out["operation"] = {"value": "synthesize_function", "rule": "SYNTH_FUNCTION_MODE", "evidence": "synthesize"}
+        if "regression_test_file" in keys:
+            out["regression_test_file"] = {"value": "", "rule": "NO_REGRESSION_TEST_REQUESTED", "evidence": "none"}
+        fn_s = re.search(
+            r"\b(?:implement|write|add|create|synthesize|define)\s+(?:a\s+)?(?:total\s+|pure\s+|helper\s+)*"
+            r"(?:function|def|method)\s+(?:named\s+|called\s+)?[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?",
+            goal_str, re.IGNORECASE,
+        )
+        if not fn_s:
+            fn_s = re.search(r"\bdef\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(", goal_str)
+        if fn_s and _NAME_RE.match(fn_s.group(1)):
+            out["function_name"] = {"value": fn_s.group(1), "rule": "SYNTH_FUNCTION_NAME_STATED", "evidence": fn_s.group(1)}
+        elif tests:
+            out["function_name"] = {"value": "", "rule": "SYNTH_FUNCTION_FROM_TEST_IMPORTS", "evidence": "auto_from_tests"}
     # Rename grammar: BOTH names must be stated, and exactly one pair may match.
-    pairs = _RENAME_OLD_NEW.findall(str(goal or ""))
+    pairs = ([] if add_p_m else _RENAME_OLD_NEW.findall(str(goal or "")))
     if len(pairs) == 1:
         old, new = pairs[0]
         if _NAME_RE.match(old) and _NAME_RE.match(new):
@@ -621,12 +811,61 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if key in keys:
                     out[key] = {"value": named[0], "rule": "NEW_NAME_STATED", "evidence": named[0]}
         elif re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
-            if "new_name" in keys:
+            if "new_name" in keys and "new_name" not in out:
                 out["new_name"] = {"value": "_extracted_helper", "rule": "EXTRACT_DEFAULT_HELPER_NAME", "evidence": "extract"}
     if re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
         for lkey in ("start_line", "end_line"):
             if lkey in keys and lkey not in out:
                 out[lkey] = {"value": 0, "rule": "EXTRACT_AUTO_SLICE_REGION", "evidence": "extract"}
+
+    # When renaming a symbol across a stated directory (`in pkg/app`) without naming a `.py` file,
+    # prove the unique `.py` module in that directory that defines `old_symbol`.
+    if "module" in keys and "module" not in out and not sources and len(pairs) == 1:
+        old_sym = pairs[0][0]
+        repo_r = pathlib.Path(root).resolve()
+        stated_dirs_r: list[pathlib.Path] = []
+        for m in _PATH_RE.finditer(goal_str):
+            raw_d = m.group(0).rstrip(".,;:)\"'")
+            dp = (repo_r / raw_d).resolve()
+            if dp.is_dir() and repo_r in dp.parents and dp not in stated_dirs_r:
+                stated_dirs_r.append(dp)
+        if len(stated_dirs_r) == 1 and _NAME_RE.match(old_sym):
+            def_files: list[pathlib.Path] = []
+            for py_f in sorted(stated_dirs_r[0].rglob("*.py")):
+                if "__pycache__" in py_f.parts or ".git" in py_f.parts:
+                    continue
+                try:
+                    pt = ast.parse(py_f.read_text(encoding="utf-8"))
+                except Exception:
+                    continue
+                for nd in pt.body:
+                    if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and nd.name == old_sym:
+                        def_files.append(py_f)
+                        break
+                    if isinstance(nd, ast.Assign) and any(isinstance(t, ast.Name) and t.id == old_sym for t in nd.targets):
+                        def_files.append(py_f)
+                        break
+            if len(def_files) == 1:
+                pkg_r = stated_dirs_r[0]
+                while (pkg_r / "__init__.py").is_file() and pkg_r != repo_r and (pkg_r.parent == repo_r or repo_r in pkg_r.parent.parents):
+                    pkg_r = pkg_r.parent
+                if "source_root" in keys:
+                    out["source_root"] = {
+                        "value": "." if pkg_r == repo_r else pkg_r.relative_to(repo_r).as_posix(),
+                        "rule": "RENAME_SYMBOL_PACKAGE_ROOT_PROVED",
+                        "evidence": def_files[0].relative_to(repo_r).as_posix(),
+                    }
+                out["module"] = {
+                    "value": def_files[0].relative_to(pkg_r).as_posix(),
+                    "rule": "MODULE_PROVED_UNIQUE_SYMBOL_IN_STATED_DIR",
+                    "evidence": f"{def_files[0].relative_to(repo_r).as_posix()}:{old_sym}",
+                }
+                if "qualname" in keys and "qualname" not in out:
+                    out["qualname"] = {
+                        "value": old_sym,
+                        "rule": "QUALNAME_PROVED_UNIQUE_SYMBOL_IN_STATED_DIR",
+                        "evidence": f"{def_files[0].relative_to(repo_r).as_posix()}:{old_sym}",
+                    }
 
     # A symbol slot is PROVED the same way a qualname is, and for the same reason:
     # "Move the function line_total ..." states the name AFTER the noun, so the
@@ -637,9 +876,6 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if ({"symbol", "name"} & keys) and py_named:
         nouns = _NAMED_AFTER_NOUN.findall(str(goal or ""))
         candidates = [n for n in dict.fromkeys(nouns) if _NAME_RE.match(n)]
-        # A move states TWO files and only one of them DEFINES the name; the
-        # proof is "defined at module scope in exactly one stated file", which is
-        # strictly stronger than "in the one stated file".
         proved = [(f, _node.name) for f in py_named
                   for _node in (getattr(_tree_of(root, f), "body", []) or [])
                   if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
@@ -648,24 +884,12 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             for key in ({"symbol", "name"} & keys):
                 out[key] = {"value": proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
                             "evidence": f"{proved[0][0]}:{proved[0][1]}"}
-    # A repository operation is STATED by its verb, and only one operation may
-    # match.  Measured 2026-10-29: `git.repository.operate.v1` declares an `op`
-    # slot because a shell pass-through would be a shell, not a capability -- the
-    # sentence chooses WHICH git operation, never the argv.  The rules are ordered
-    # most-specific-first so that "Show the last three git commits" binds `log`
-    # (commits of a history) rather than `show` (one commit's contents); an
-    # ambiguous sentence binds nothing and the binder refuses, which is the whole
-    # point of an enumerated operation set.
     if "op" in keys:
         stated = stated_git_operations(goal)
         if len(stated) == 1:
             out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
                          "evidence": stated[0]}
 
-    # A stated COUNT is the limit the sentence asked for: "the last three git
-    # commits" is a request for three rows, and answering it with twenty is a
-    # different answer.  Only an explicit number word or digit counts, and only
-    # next to the noun it counts, so "three regions" never becomes a limit.
     if "limit" in keys:
         m = _STATED_COUNT.search(str(goal or ""))
         if m:
@@ -676,6 +900,101 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if value is not None:
                 out["limit"] = {"value": value, "rule": "LIMIT_FROM_STATED_COUNT",
                                 "evidence": token}
+
+    # Added parameter & stated function-creation derivations (checked against AST & stated paths).
+    if "new_param" in keys and "new_param" not in out:
+        added = _ADDED_PARAM.findall(str(goal or ""))
+        added = [n for n in dict.fromkeys(added) if _NAME_RE.match(n)]
+        host = str((out.get("symbol") or out.get("qualname") or {}).get("value") or "")
+        if len(added) == 1 and host:
+            for f in [f for f in sources if f.endswith(".py")]:
+                tree_of_f = _tree_of(root, f)
+                for node in ast.walk(tree_of_f) if tree_of_f is not None else []:
+                    if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    if node.name != host.split(".")[-1]:
+                        continue
+                    declared = [x.arg for x in (list(node.args.args)
+                                                + list(node.args.kwonlyargs)
+                                                + list(getattr(node.args, "posonlyargs", []) or []))]
+                    if added[0] in declared:
+                        break
+                    out["new_param"] = {"value": added[0], "rule": "ADDED_PARAM_STATED_AND_NOT_DECLARED",
+                                        "evidence": "%s:%s" % (f, host)}
+                    break
+                if "new_param" in out:
+                    break
+
+    py_stated = [f for f in sources if f.endswith(".py")]
+    if ("module" in keys and "module" not in out and len(py_stated) > 1
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        to_hits = [m.group(1).rstrip(".,;:") for m in
+                   re.finditer(r"\bto\s+([^\s,;]+)", str(goal or ""), re.I)]
+        exact = [h for h in to_hits if h in py_stated]
+        if len(exact) == 1:
+            out["module"] = {"value": exact[0], "rule": "MODULE_FROM_STATED_TO_TARGET",
+                             "evidence": exact[0]}
+    if ({"symbol", "new_symbol", "function_name", "new_function"} & keys
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(fn_phrases) == 1:
+            name = fn_phrases[0][0]
+            existing = set()
+            for f in [f for f in sources if f.endswith(".py")]:
+                f_tree = _tree_of(root, f)
+                if f_tree is None:
+                    continue
+                existing |= {n.name for n in ast.walk(f_tree)
+                             if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+            if _NAME_RE.match(name) and name not in existing:
+                for key in ({"symbol", "new_symbol", "function_name", "new_function"} & keys):
+                    if key not in out:
+                        out[key] = {"value": name, "rule": "CREATED_FUNCTION_NAME_STATED",
+                                    "evidence": name}
+    if ("source_root" in keys and "source_root" not in out and "module" in out
+            and str((out.get("module") or {}).get("rule") or "") == "MODULE_FROM_STATED_TO_TARGET"):
+        parent = str(pathlib.PurePosixPath(str(out["module"]["value"])).parent)
+        if parent and (pathlib.Path(root) / parent).is_dir():
+            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_MODULE",
+                                  "evidence": str(out["module"]["value"])}
+    if ({"test_paths", "test_path", "test_file"} & keys):
+        created = _CREATED_TEST.findall(str(goal or ""))
+        created = [c.rstrip(".,;:") for c in created]
+        created = [c for c in created if c.endswith(".py")]
+        if len(set(created)) == 1:
+            for key in ({"test_paths", "test_path", "test_file"} & keys):
+                if key not in out:
+                    value = [created[0]] if key == "test_paths" else created[0]
+                    out[key] = {"value": value, "rule": "CREATED_TEST_PATH_STATED",
+                                "evidence": created[0]}
+    if "export_module" in keys and "export_module" not in out:
+        stated = set(stated_existing_files(str(goal or ""), pathlib.Path(root)))
+        hits = [m.group(1).rstrip(".,;:") for m in
+                _EXPORT_FROM.finditer(str(goal or ""))]
+        hits = [h for h in hits if h in stated]
+        if len(hits) == 1:
+            out["export_module"] = {"value": hits[0], "rule": "EXPORT_TARGET_STATED",
+                                    "evidence": hits[0]}
+    if (({"params", "parameters"} & keys) or ({"body", "expression", "returns"} & keys)) \
+            and _CREATES_A_FUNCTION.search(str(goal or "")):
+        fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(fn_phrases) == 1:
+            fname, raw_params = fn_phrases[0]
+            params = [t.strip() for t in raw_params.split(",") if t.strip()]
+            if all(_NAME_RE.match(t) for t in params):
+                for key in ({"params", "parameters"} & keys):
+                    out[key] = {"value": params, "rule": "PARAMS_FROM_STATED_SIGNATURE",
+                                "evidence": "%s(%s)" % (fname, raw_params.strip())}
+                for key in ({"body", "expression", "returns"} & keys):
+                    rets = _RETURNS_EXPR.findall(str(goal or ""))
+                    rets = [r.strip() for r in rets if r.strip()]
+                    if len(rets) == 1:
+                        try:
+                            ast.parse("_ = (" + rets[0] + ")", mode="exec")
+                        except SyntaxError:
+                            continue
+                        out[key] = {"value": rets[0], "rule": "EXPRESSION_STATED_VERBATIM",
+                                    "evidence": rets[0]}
 
     # A commit message is the caller's OWN words, so it is copied, never
     # invented.  Two proofs, both from the sentence:
@@ -832,7 +1151,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # If the request names a parameter/symbol, exactly one function in that file
     # must declare it; if the request names a function, exactly one must match.
     # Anything else (zero or several) yields no value and the binder refuses.
-    if "qualname" in keys and len(sources) == 1 and sources[0].endswith(".py"):
+    if "qualname" in keys and "qualname" not in out and len(sources) == 1 and sources[0].endswith(".py"):
         wanted_param = (pairs[0][0] if len(pairs) == 1 else None)
         wanted_fn = None
         fn_match = re.search(r"\b(?:the\s+)?([A-Za-z_][A-Za-z0-9_]*)\s+function\b", str(goal or ""), re.I)
@@ -865,6 +1184,8 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 }
                 if len(preps) == 1:
                     wanted_fn = next(iter(preps))
+                elif len(defined_fns) == 1 and (add_p_m or re.search(r"\bextract\b", goal_str, re.I)):
+                    wanted_fn = next(iter(defined_fns))
             matches: list[str] = []
             for qname, node in method_quals:
                 arg_names = [a.arg for a in (list(node.args.args) + list(node.args.kwonlyargs))]

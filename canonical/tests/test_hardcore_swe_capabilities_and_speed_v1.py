@@ -257,6 +257,193 @@ class HardcoreSweCapabilitiesAndSpeedTests(unittest.TestCase):
         self.assertTrue(res.get("pass"), res)
         self.assertLess(elapsed_ms, 900.0, f"Expected <900ms warm solve, got {elapsed_ms:.1f}ms")
 
+    def test_program_synthesis_total_function_and_feature_export(self) -> None:
+        # 1. Test-driven STUN + exception-guard synthesis (`safe_mean`)
+        d1 = self.scratch / "synth_mean"
+        d1.mkdir(parents=True)
+        (d1 / "stats.py").write_text("# stats\n", encoding="utf-8")
+        (d1 / "test_stats.py").write_text(
+            "import unittest\nfrom stats import safe_mean\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_ok(self):\n"
+            "        self.assertEqual(safe_mean([2, 4, 6]), 4.0)\n"
+            "        self.assertEqual(safe_mean([10, 20]), 15.0)\n"
+            "    def test_bad(self):\n"
+            "        with self.assertRaises(ValueError): safe_mean([])\n"
+            "        with self.assertRaises(ValueError): safe_mean([True, 1])\n",
+            encoding="utf-8",
+        )
+        r1 = door.solve({
+            "task_id": "UT_SYNTH_1",
+            "goal": f"Implement a total function safe_mean in {self._rel(d1 / 'stats.py')} so {self._rel(d1 / 'test_stats.py')} passes and save the report to {self._rel(d1 / 'out.json')}.",
+        })
+        self.assertTrue(r1.get("pass"), r1)
+
+        # 2. Spec-grounded class-attribute feature synthesis + __init__.py export + test generation
+        d2 = self.scratch / "synth_feat"
+        (d2 / "app").mkdir(parents=True)
+        (d2 / "tests").mkdir(parents=True)
+        (d2 / "app/__init__.py").write_text("", encoding="utf-8")
+        (d2 / "tests/__init__.py").write_text("", encoding="utf-8")
+        (d2 / "app/models.py").write_text(
+            "class Item:\n"
+            "    def __init__(self, name, price_cents, qty=1):\n"
+            "        self.name = name\n        self.price_cents = price_cents\n        self.qty = qty\n",
+            encoding="utf-8",
+        )
+        (d2 / "tests/test_models.py").write_text(
+            "import unittest\nfrom app.models import Item\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_i(self): self.assertEqual(Item('x', 50, 2).price_cents, 50)\n",
+            encoding="utf-8",
+        )
+        r2 = door.solve({
+            "task_id": "UT_SYNTH_2",
+            "goal": (
+                f"Add a function total_cents(item) to {self._rel(d2 / 'app/models.py')} that returns price_cents * qty, "
+                f"export it from {self._rel(d2 / 'app/__init__.py')}, and add a test for it in {self._rel(d2 / 'tests/test_total.py')}"
+            ),
+        })
+        self.assertTrue(r2.get("pass"), r2)
+        self.assertTrue((d2 / "tests/test_total.py").is_file())
+        self.assertIn("total_cents", (d2 / "app/__init__.py").read_text(encoding="utf-8"))
+
+    def test_move_function_add_parameter_and_fix_then_regression_test(self) -> None:
+        # 1. Cross-file move_function into existing caller module (stripping self-import)
+        dm = self.scratch / "move_fn"
+        (dm / "app").mkdir(parents=True)
+        (dm / "tests").mkdir(parents=True)
+        (dm / "app/__init__.py").write_text("", encoding="utf-8")
+        (dm / "tests/__init__.py").write_text("", encoding="utf-8")
+        (dm / "app/models.py").write_text(
+            "class Item:\n"
+            "    def __init__(self, price_cents, qty=1):\n"
+            "        self.price_cents = price_cents\n        self.qty = qty\n\n"
+            "def line_total(item):\n    return item.price_cents * item.qty\n",
+            encoding="utf-8",
+        )
+        (dm / "app/service.py").write_text(
+            "from app.models import line_total\n\n"
+            "def cart_total(items):\n    return sum(line_total(i) for i in items)\n",
+            encoding="utf-8",
+        )
+        (dm / "tests/test_service.py").write_text(
+            "import unittest\nfrom app.models import Item\nfrom app.service import cart_total\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_t(self): self.assertEqual(cart_total([Item(100, 2)]), 200)\n",
+            encoding="utf-8",
+        )
+        rm = door.solve({
+            "task_id": "UT_MOVE",
+            "goal": f"Move the function line_total from {self._rel(dm / 'app/models.py')} to {self._rel(dm / 'app/service.py')} and update every caller.",
+        })
+        self.assertTrue(rm.get("pass"), rm)
+        self.assertNotIn("def line_total", (dm / "app/models.py").read_text(encoding="utf-8"))
+        self.assertIn("def line_total", (dm / "app/service.py").read_text(encoding="utf-8"))
+        self.assertNotIn("from app.models import line_total", (dm / "app/service.py").read_text(encoding="utf-8"))
+
+        # 2. Cross-file add_parameter with attribute-override default
+        dp = self.scratch / "add_p"
+        (dp / "app").mkdir(parents=True)
+        (dp / "tests").mkdir(parents=True)
+        (dp / "app/__init__.py").write_text("", encoding="utf-8")
+        (dp / "tests/__init__.py").write_text("", encoding="utf-8")
+        (dp / "app/models.py").write_text(
+            "class Item:\n"
+            "    def __init__(self, price_cents, qty=1):\n"
+            "        self.price_cents = price_cents\n        self.qty = qty\n\n"
+            "def line_total(item):\n    return item.price_cents * item.qty\n",
+            encoding="utf-8",
+        )
+        (dp / "tests/test_m.py").write_text(
+            "import unittest\nfrom app.models import Item, line_total\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_lt(self): self.assertEqual(line_total(Item(100, 2)), 200)\n",
+            encoding="utf-8",
+        )
+        rp = door.solve({
+            "task_id": "UT_ADDP",
+            "goal": f"Add a parameter qty with a default value to the function line_total in {self._rel(dp / 'app/models.py')} and update every caller so behaviour is unchanged.",
+        })
+        self.assertTrue(rp.get("pass"), rp)
+        chk = subprocess.run(
+            [sys.executable, "-c", "from app.models import Item, line_total; i=Item(100,2); assert line_total(i)==200 and line_total(i,3)==300"],
+            cwd=str(dp), capture_output=True, text=True, timeout=15,
+        )
+        self.assertEqual(chk.returncode, 0, chk.stderr)
+
+        # 3. Fix bug + differential regression test synthesis
+        dr = self.scratch / "fix_reg"
+        dr.mkdir(parents=True)
+        (dr / "discounts.py").write_text(
+            "def apply_coupon(total, coupon):\n"
+            "    if coupon.percent > 0:\n        return total * (100 - coupon.percent) / 100.0\n"
+            "    return total\n",
+            encoding="utf-8",
+        )
+        (dr / "test_discounts.py").write_text(
+            "import unittest\nfrom discounts import apply_coupon\n"
+            "class C:\n    def __init__(self, p): self.percent = p\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_ok(self): self.assertEqual(apply_coupon(200.0, C(25)), 150.0)\n"
+            "    def test_none(self): self.assertEqual(apply_coupon(200.0, None), 200.0)\n",
+            encoding="utf-8",
+        )
+        rr = door.solve({
+            "task_id": "UT_FIXREG",
+            "goal": f"Fix the bug in {self._rel(dr / 'discounts.py')} and add a regression test in {self._rel(dr / 'test_regression_discounts.py')} and save the report to {self._rel(dr / 'out.json')}.",
+        })
+        self.assertTrue(rr.get("pass"), rr)
+        self.assertTrue((dr / "test_regression_discounts.py").is_file())
+
+    def test_dynamic_fault_localizer_and_multilanguage_supercomposer(self) -> None:
+        from canonical.runtime.bound_capabilities import (
+            code_multilanguage_tree_sitter_v1,
+            python_dynamic_fault_localizer_v1,
+            software_hardcore_swe_supercomposer_v1,
+        )
+        df = self.scratch / "dyn_fl"
+        (df / "app").mkdir(parents=True)
+        (df / "tests").mkdir(parents=True)
+        (df / "app/__init__.py").write_text("", encoding="utf-8")
+        (df / "tests/__init__.py").write_text("", encoding="utf-8")
+        (df / "app/mathx.py").write_text(
+            "def ok_helper(v):\n    return v * 2\n\n"
+            "def buggy_tax(v):\n    return ok_helper(v) - 999\n",
+            encoding="utf-8",
+        )
+        (df / "tests/test_mathx.py").write_text(
+            "import unittest\nfrom app.mathx import buggy_tax, ok_helper\n"
+            "class T(unittest.TestCase):\n"
+            "    def test_ok(self): self.assertEqual(ok_helper(5), 10)\n"
+            "    def test_b(self): self.assertEqual(buggy_tax(10), 20)\n",
+            encoding="utf-8",
+        )
+        fl_res = python_dynamic_fault_localizer_v1.run(
+            {"source_root": self._rel(df / "app"), "output_path": self._rel(df / "fl.json")},
+            _ROOT,
+        )
+        self.assertTrue(fl_res["output_verified"])
+        self.assertEqual(fl_res["answer"], "buggy_tax")
+
+        ml = self.scratch / "multi_lang"
+        ml.mkdir(parents=True)
+        (ml / "lib.rs").write_text("pub fn add(a: i32, b: i32) -> i32 { a + b }\n", encoding="utf-8")
+        (ml / "mod.py").write_text("def py_add(a, b):\n    return a + b\n", encoding="utf-8")
+        ts_res = code_multilanguage_tree_sitter_v1.run(
+            {"source_root": self._rel(ml), "output_path": self._rel(ml / "ts.json")},
+            _ROOT,
+        )
+        self.assertTrue(ts_res["output_verified"])
+        self.assertGreaterEqual(ts_res["symbol_count"], 2)
+
+        sc_res = software_hardcore_swe_supercomposer_v1.run(
+            {"source_root": self._rel(df / "app"), "output_path": self._rel(df / "sc.json")},
+            _ROOT,
+        )
+        self.assertTrue(sc_res["output_verified"])
+        self.assertTrue(sc_res["verified"])
+
 
 if __name__ == "__main__":
     unittest.main()

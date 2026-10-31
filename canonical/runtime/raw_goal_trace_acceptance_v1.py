@@ -2193,6 +2193,33 @@ def _inspect_refactor_extract_function(args, result, root):
     module_rel = data.get("module")
     if not isinstance(module_rel, str) or not module_rel:
         return False, "EXTRACT_REPORT_NAMES_NO_MODULE", {}
+    if data.get("operation") == "move_symbol":
+        orig_mod = _inside(root, module_rel) or (source_root / module_rel).resolve()
+        dest_rel = str(data.get("to_module") or "")
+        dest_mod = _inside(root, dest_rel) or ((source_root / dest_rel).resolve() if dest_rel else None)
+        sym = str(data.get("qualname") or "")
+        if orig_mod is None or not orig_mod.is_file() or dest_mod is None or not dest_mod.is_file() or not sym:
+            return False, "MOVE_SYMBOL_FILES_ABSENT_FROM_DISK", {}
+        try:
+            orig_tree = ast.parse(orig_mod.read_bytes())
+            dest_tree = ast.parse(dest_mod.read_bytes())
+        except (SyntaxError, ValueError, OSError):
+            return False, "MOVE_SYMBOL_MODULE_UNPARSEABLE", {}
+        orig_defs = {n.name for n in orig_tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))}
+        dest_defs = {n.name for n in dest_tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))}
+        if sym in orig_defs:
+            return False, "MOVE_SYMBOL_STILL_DEFINED_IN_ORIGIN", {"symbol": sym}
+        if sym not in dest_defs:
+            return False, "MOVE_SYMBOL_NOT_DEFINED_IN_DESTINATION", {"symbol": sym}
+        for c_rel in data.get("rewritten_callers") or []:
+            cp = _inside(root, str(c_rel))
+            if cp is None or not cp.is_file():
+                return False, "MOVE_CALLER_ABSENT_FROM_DISK", {"path": c_rel}
+            try:
+                ast.parse(cp.read_bytes())
+            except (SyntaxError, ValueError, OSError):
+                return False, "MOVE_CALLER_UNPARSEABLE", {"path": c_rel}
+        return True, "", {"moved_symbol": sym, "destination_reparsed": dest_rel}
     module = (source_root / module_rel).resolve()
     try:
         module.relative_to(root.resolve())
@@ -2301,7 +2328,119 @@ def _inspect_crossfile_choreograph(args, result, root):
             ast.parse(p.read_bytes())
         except (SyntaxError, ValueError, OSError):
             return False, "CHOREOGRAPH_EDITED_FILE_UNPARSEABLE", {"path": rel}
+    if data.get("mode") == "fix_then_regression_test":
+        proof = data.get("differential_regression_proof")
+        if not isinstance(proof, dict):
+            return False, "REGRESSION_PROOF_MISSING", {}
+        if int(proof.get("red_on_buggy_returncode") or 0) == 0 or int(proof.get("green_on_fixed_returncode", 1)) != 0:
+            return False, "DIFFERENTIAL_REGRESSION_ORACLE_INVALID", {}
+        rfile = _inside(root, str(proof.get("regression_test_file") or ""))
+        if rfile is None or not rfile.is_file():
+            return False, "REGRESSION_TEST_FILE_ABSENT", {}
+        rtree = ast.parse(rfile.read_bytes())
+        has_test = any(isinstance(n, ast.FunctionDef) and n.name.startswith("test_") for n in ast.walk(rtree))
+        if not has_test:
+            return False, "REGRESSION_TEST_CONTAINS_NO_TEST_FUNCTION", {}
     return True, "", {"edited_files_reparsed": len(edited)}
+
+
+def _inspect_refactor_rename_parameter(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "RENAME_PARAM_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict) or data.get("gate") != "PASS":
+        return False, "RENAME_PARAM_GATE_NOT_PASS", {}
+    src_root = _inside(root, data.get("source_root"))
+    mod_rel = str(data.get("module") or "")
+    if src_root is None or not src_root.is_dir() or not mod_rel:
+        return False, "RENAME_PARAM_SOURCE_ROOT_INVALID", {}
+    mod_path = (src_root / mod_rel).resolve()
+    if not mod_path.is_file():
+        return False, "RENAME_PARAM_MODULE_ABSENT", {}
+    try:
+        tree = ast.parse(mod_path.read_bytes())
+    except (SyntaxError, ValueError, OSError):
+        return False, "RENAME_PARAM_MODULE_UNPARSEABLE", {}
+    qparts = [p for p in str(data.get("qualname") or "").split(".") if p]
+    new_p = str(data.get("new_param") or "")
+    old_p = str(data.get("old_param") or "")
+    scope = tree.body
+    fn = None
+    for part in qparts:
+        hit = next((n for n in scope if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and n.name == part), None)
+        if hit is None:
+            return False, "RENAME_PARAM_QUALNAME_MISSING", {}
+        fn = hit
+        scope = hit.body
+    if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+        return False, "RENAME_PARAM_TARGET_NOT_FUNCTION", {}
+    param_names = [a.arg for a in [*fn.args.posonlyargs, *fn.args.args, *fn.args.kwonlyargs]]
+    if new_p not in param_names:
+        return False, "NEW_PARAM_NOT_IN_SIGNATURE_ON_DISK", {"params": param_names}
+    if old_p and old_p in param_names:
+        return False, "OLD_PARAM_STILL_IN_SIGNATURE_ON_DISK", {"params": param_names}
+    return True, "", {"module_reparsed": mod_rel, "signature_params": param_names}
+
+
+def _inspect_program_synthesizer(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "SYNTH_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "SYNTH_REPORT_INVALID", {}
+    if data.get("mode") == "fix_then_regression_test":
+        return _inspect_crossfile_choreograph(args, result, root)
+    if data.get("verified") is not True or result.get("verified") is not True:
+        return False, "SYNTH_NOT_VERIFIED", {}
+    tpath = _inside(root, data.get("target_file"))
+    fn_name = str(data.get("function_name") or "")
+    if tpath is None or not tpath.is_file() or not fn_name:
+        return False, "SYNTH_TARGET_FILE_ABSENT", {}
+    raw = tpath.read_bytes()
+    if data.get("target_sha256") and _digest(raw) != data["target_sha256"]:
+        return False, "SYNTH_TARGET_SHA256_MISMATCH", {}
+    try:
+        tree = ast.parse(raw)
+    except (SyntaxError, ValueError, OSError):
+        return False, "SYNTH_TARGET_UNPARSEABLE", {}
+    defined = {n.name for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    if fn_name not in defined:
+        return False, "SYNTH_FUNCTION_NOT_DEFINED_ON_DISK", {"wanted": fn_name}
+    return True, "", {"target_reparsed": str(data.get("target_file")), "function_verified": fn_name}
+
+
+def _inspect_multilanguage_parse(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "ML_PARSE_REPORT_ABSENT", {}
+    data = _json(out)
+    if not isinstance(data, dict) or data.get("verified") is not True:
+        return False, "ML_PARSE_NOT_VERIFIED", {}
+    files = data.get("files")
+    if not isinstance(files, list) or len(files) != result.get("file_count"):
+        return False, "ML_PARSE_FILE_COUNT_MISMATCH", {}
+    for row in files[:32]:
+        fp = _inside(root, row.get("path"))
+        if fp is None or not fp.is_file():
+            return False, "ML_PARSE_SOURCE_ABSENT", {}
+    return True, "", {"files_reverified": len(files)}
+
+
+def _inspect_swe_supercomposer(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "SUPERCOMPOSER_REPORT_ABSENT", {}
+    data = _json(out)
+    if not isinstance(data, dict) or data.get("verified") is not True:
+        return False, "SUPERCOMPOSER_NOT_VERIFIED", {}
+    for rel in data.get("files_edited") or []:
+        fp = _inside(root, str(rel))
+        if fp is None or not fp.is_file():
+            return False, "SUPERCOMPOSER_EDITED_FILE_ABSENT", {}
+        ast.parse(fp.read_bytes())
+    return True, "", {"verified": True}
 
 
 def _inspect_git_bisect_regression(args, result, root):
@@ -2581,12 +2720,15 @@ INSPECTORS: dict[str, Inspector] = {
     "python.software.repair.loop.strict_progress.ast.v1": _inspect_repair_loop,
     "python.repository.acceptance.measure.v1": _inspect_repository_acceptance_measure,
     "python.refactor.extract_function.v1": _inspect_refactor_extract_function,
-    "python.refactor.rename_parameter.v1": _inspect_rename_parameter,
+    "python.refactor.rename_parameter.v1": _inspect_refactor_rename_parameter,
     "python.refactor.rename_symbol.v1": _inspect_rename_parameter,
     "python.refactor.move_function.v1": _inspect_python_inline_or_merge,
     "python.refactor.move_symbol.v1": _inspect_move_symbol,
     "python.refactor.add_parameter.v1": _inspect_add_parameter,
     "python.feature.implement_function_spec.v1": _inspect_implement_function_spec,
+    "python.software.synthesize_function.v1": _inspect_program_synthesizer,
+    "code.multilanguage.parse.tree_sitter.v1": _inspect_multilanguage_parse,
+    "software.hardcore.swe.supercomposer.v1": _inspect_swe_supercomposer,
     "git.history.bisect_regression.v1": _inspect_git_bisect_regression,
     "python.source.taint_flow.v1": _inspect_python_taint_flow,
     "python.source.complexity.v1": _inspect_python_source_report,
