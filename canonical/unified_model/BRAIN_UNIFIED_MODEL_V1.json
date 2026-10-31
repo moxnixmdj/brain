@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e212bc923c7474429fe1dd8927630905735f6aa0393464173cd6e1b71cf3207e"
+  "value": "b97b9ef99f075e7af8cc1bb4a9722b4405e050abcf50efa6d1a7424b623f1a64"
  },
  "engines": [
   {
@@ -200700,7 +200700,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "222343de716e02a5bdbdaba5098ada0a1c5e505818629c355bdf11fc61cdc0c4",
+   "sha256": "539076bebc85d33ef4cda450ae3d8081a92f2a3fc02f4d9b14e25ff2b60bbc97",
    "status": "",
    "terms": {
     "20261031": 1,
