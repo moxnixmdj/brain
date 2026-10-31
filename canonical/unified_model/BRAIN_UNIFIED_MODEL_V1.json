@@ -23388,7 +23388,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "c43a6cfa0129240d217b5f0fbf97ea52d96f8a2697480d3d324f14c0d141d163",
+    "source_sha256": "70aa8a0f94c1223de91de8971853e22997fb995c391bf3271cd21e86c7c258ba",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24033,7 +24033,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "d70b5aa94954fde631f837294d54cb65aa4e963118e34244aac033b48b1cb129",
+    "source_sha256": "71a31b6484e85b944e8653443aec6de7630fa7f7765c91cab002898cc71abd28",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25802,7 +25802,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "8737118fdf6625d1ecb49c7dd598ccc51e4665db3922730491d1e09562e43e1d",
+    "source_sha256": "d33cead3fb9b5cf7ed10e35c47fe3b25a74069b2f52ed1b5d5ef76d12b686624",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25892,7 +25892,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "0fe6e0bf64383f74e24bee0e2d59d5cc5d3f307d39e437a0ceb4c3185d1cf7c4",
+    "source_sha256": "b51bfa2427e49e8c121bf8809f3b412a25b5ed182958b6c332499597f979a04c",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30479,7 +30479,7 @@
   "engines": 26,
   "knowledge_documents": 214,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6542,
+  "research_index_records": 6543,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30488,7 +30488,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "20755303d31b5b718e377445aa6bdfa7e8eed7c9d2a65875f42af77819522b8b"
+  "value": "cd1968aa239461f5662817bac2e370828e241cf55ad6043289feacf5e1849f53"
  },
  "engines": [
   {
@@ -58510,7 +58510,7 @@
   "included_source_count": 1005,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d282e0886cfd38a045efc612eaee34e6a2c910352cad68da54faced24ec85364"
+  "source_tree_digest": "ce4da2f8905c39405a013252e10f3862f058dcb90c2ef0418bdee94867b85cdd"
  },
  "research_index": [
   {
@@ -208303,6 +208303,51 @@
    }
   },
   {
+   "action_id": "READ_THE_ARTIFACT_NOT_THE_BOOKKEEPING_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/READ_THE_ARTIFACT_NOT_THE_BOOKKEEPING_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/READ_THE_ARTIFACT_NOT_THE_BOOKKEEPING_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c29a7997464a9a1e9e1a87f38b35767cf68ed024fe38a4f57ef95ac82381245e",
+   "status": "",
+   "terms": {
+    "18": 3,
+    "20261031": 1,
+    "23": 1,
+    "27": 1,
+    "28": 2,
+    "28-task": 1,
+    "after": 1,
+    "already": 1,
+    "answer": 2,
+    "apart": 1,
+    "artifact": 2,
+    "asks": 1,
+    "before": 1,
+    "boards": 1,
+    "bookkeeping": 1,
+    "both": 3,
+    "bug_report": 1,
+    "change": 1,
+    "confident": 1,
+    "correct": 1,
+    "cwd": 1,
+    "derive_the_environment_and_the_shape_from_the_artifact": 1,
+    "derived": 1,
+    "ladder": 2,
+    "not": 3,
+    "nothing": 3,
+    "one": 2,
+    "pass": 3,
+    "return": 2,
+    "sentence": 2,
+    "suite": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "RECEIPT_ANCHORED_VERIFICATION_AND_KERNEL_NATIVE_DISPATCH_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -215281,7 +215326,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "d23cf70c34acd8172bc1cf6c1146ddf0b1b1502861a7bb3bc5287256729c71d1",
+   "sha256": "44f22ae3f986277b16d1e7e3e62cdebbe78e691edcb8a57561370f4af925005e",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
    "symbol_count": 9,
    "symbols": [
