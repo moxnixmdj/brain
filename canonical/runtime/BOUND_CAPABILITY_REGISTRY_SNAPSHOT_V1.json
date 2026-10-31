@@ -2907,6 +2907,72 @@
         "model_dependency_count": 0
       }
     },
+    "git.history.bisect_regression.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "git.history.bisect_regression.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "git_bisect_regression",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "bisect",
+        "commit",
+        "broke",
+        "commit id",
+        "regression",
+        "head",
+        "slower",
+        "much slower",
+        "got much slower",
+        "between head",
+        "git history"
+      ],
+      "limitations": [
+        "Binary-searches git commit history in an isolated scratch clone when HEAD tests fail; attributes per-function complexity and runtime regressions between HEAD~1 and HEAD when HEAD tests pass.",
+        "Requires a local git repository within the workspace; never mutates the caller's working tree."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "git.history.bisect_regression",
+        "git.history.perf_attribution"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "mode",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/git_bisect_regression.py",
+        "module": "subprocess",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
     "http.json.fetch_from_state": {
       "action_template": {
         "args": {
@@ -8870,6 +8936,78 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
       }
+    },
+    "python.tests.mutation_score.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.tests.mutation_score.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_tests_mutation_score",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "mutation",
+        "mutation score",
+        "how strong the tests",
+        "strong the tests",
+        "catch a bug",
+        "would the tests",
+        "mutant",
+        "test adequacy",
+        "flaky",
+        "intermittently",
+        "fails intermittently",
+        "one test"
+      ],
+      "limitations": [
+        "Evaluates first-order ROR/AOR/LCR/SVR AST mutants in an isolated scratch tree using a single batched unittest worker.",
+        "Requires baseline tests to pass before measuring mutant survival."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.tests.mutation_score",
+        "python.tests.adequacy_oracle",
+        "python.tests.flaky_detection"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "killed_count",
+        "mutation_score",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "survived_count",
+        "total_mutants",
+        "verdict"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_tests_mutation_score.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
     },
     "python.tests.synthesize.pynguin.v1": {
       "action_template": {
