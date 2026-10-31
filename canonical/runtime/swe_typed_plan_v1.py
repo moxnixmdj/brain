@@ -74,7 +74,6 @@ _FAMILIES = (
   'polyglot.transform_and_verify'),
  (('profile ',
    'hot spot',
-   'find the race condition',
    'fuzz the function',
    'tell me which tests fail',
    'find the root cause',
@@ -85,8 +84,7 @@ _FAMILIES = (
    'write an adr',
    'plan the migration',
    'design document for splitting',
-   'changelog entry',
-   'against head~1'),
+   'changelog entry'),
   ('diagnose', 'hotspot', 'api_design', 'adr_and_migration', 'vulnerability_audit', 'blame_and_changelog', 'runner_verdict'),
   'diagnose_and_architect'),
  (('optimise the function',
@@ -233,6 +231,11 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return None
     if "find the root cause" in raw_low and "answer.json" not in raw_low:
         return ("find the root cause",), ("diagnose", "root_cause"), "diagnose_and_architect"
+    if "find the race condition" in raw_low:
+        _root_p = pathlib.Path(__file__).resolve().parents[2]
+        _rfiles = [p for p in re.findall(r"[A-Za-z0-9_./-]+\.py\b", str(goal or "")) if (_root_p / p).is_file()]
+        if _rfiles and any(w in (_root_p / _rfiles[0]).read_text(encoding="utf-8", errors="replace") for w in ("threading", "Thread", "asyncio")):
+            return ("find the race condition",), ("diagnose",), "diagnose_and_architect"
     if "cause of the exception" in raw_low and "log" in raw_low:
         return ("log exception",), ("diagnose", "root_cause"), "diagnose_and_architect"
     if "profile " in raw_low and ("hot spot" in raw_low or "where the time goes" in raw_low):
@@ -282,7 +285,7 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return ("raise_coverage",), ("swe_transform",), "swe.transform_and_synthesize"
     if re.search(r"\bproperty[- ]based\s+tests?\b|\bhypothesis\b", raw_low) and ".py" in raw_low:
         return ("write_property_test",), ("swe_transform",), "swe.transform_and_synthesize"
-    if re.search(r"^\s*write\s+a\s+unit\s+test\b", raw_low) and ".py" in raw_low:
+    if re.search(r"^\s*write\s+(?:a\s+)?unit\s+tests?\b", raw_low) and ".py" in raw_low:
         return ("write_unit_test",), ("swe_transform",), "swe.transform_and_synthesize"
     if "add a test for the case" in raw_low:
         return ("add a test for the case",), ("swe_transform",), "swe.transform_and_synthesize"
@@ -300,6 +303,7 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return ("swe_feature",), ("swe_transform",), "swe.transform_and_synthesize"
     if (
         "move the module " in raw_low
+        or ("magic number" in raw_low)
         or ("shared helper" in raw_low and "refactor " in raw_low)
         or ("split " in raw_low and ("one module per" in raw_low or "into two modules" in raw_low))
         or ("add type hints" in raw_low)
@@ -360,6 +364,23 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         hits = tuple(t for t in triggers if t in head)
         if hits:
             return hits, terms, token
+    # A READ OF A NAMED REVISION IS A REPOSITORY READ.
+    #
+    # Measured 2026-10-31, advanced sentence 44: "Show me the diff of <pkg>/calc.py against
+    # HEAD~1." states the operation (`diff`, in the grammar's own words), states the object
+    # (the file) and states the revision.  The read-detection below could never see it: the
+    # path is a VALUE and F8/F25 remove it from the head before this function looks, so what
+    # remained was "show me the diff of against HEAD~1" and the fullmatch failed on the
+    # revision phrase.  The sentence then reached `git.repository.operate.v1` -- whose OPS
+    # tuple is exactly (log, status, diff, show, blame, branch, commit) and which derives
+    # op, repo_root and target from these very bytes -- was outscored by six `diff_*_gate`
+    # rows that only share the noun, and compiled to nothing (RAW_GOAL_COMPILATION_GAP).
+    # The revision is git's vocabulary, not this file's: HEAD~N/HEAD^N is a fact the sentence
+    # states, and a read opener is the same closed list used below.
+    if (re.match(r"(?:please\s+)?(?:show|list|print|display|give|what\s+is)\s+", head.strip())
+            and len(derivation.stated_git_operations(goal)) == 1
+            and re.search(r"\bhead[~^]\d*\b|\brevision\b", head, re.I)):
+        return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
     # Unqualified repository reads use the existing operation grammar, not
     # broad nouns such as "status" inside deployment questions or task data.
     if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"

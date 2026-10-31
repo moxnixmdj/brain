@@ -18,8 +18,9 @@ import json
 import os
 import pathlib
 
+from canonical.swe_kernel import parallel_fork_map
+
 _BUILTIN_NAMES = frozenset(dir(builtins))
-_IN_MEM_ROW_CACHE: dict[tuple[str, str, bool], dict] = {}
 
 
 def _safe_root(root, raw):
@@ -582,23 +583,7 @@ def _collect_index_parts(source_root_arg, root, cached=None, *, json_only=False,
         ordered_rels.append(rel)
         to_parse.append((rel, sha, str(path), json_only))
 
-    use_mp = False
-    if len(to_parse) >= 64:
-        try:
-            import multiprocessing
-            use_mp = not multiprocessing.current_process().daemon and (os.cpu_count() or 1) > 1
-        except Exception:
-            use_mp = False
-
-    if use_mp:
-        import multiprocessing
-        from concurrent.futures import ProcessPoolExecutor
-        workers = min(os.cpu_count() or 4, 8)
-        mp_ctx = multiprocessing.get_context("fork") if "fork" in multiprocessing.get_all_start_methods() else None
-        with ProcessPoolExecutor(max_workers=workers, mp_context=mp_ctx) as ex:
-            results = list(ex.map(_parse_single_module_worker, to_parse, chunksize=max(16, len(to_parse) // (workers * 4))))
-    else:
-        results = [_parse_single_module_worker(item) for item in to_parse]
+    results = parallel_fork_map(_parse_single_module_worker, to_parse, min_items=64)
 
     for (_rel_item, _sha_item, _, _jo_item), (kind, payload) in zip(to_parse, results):
         if kind in ("ok", "ok_json"):

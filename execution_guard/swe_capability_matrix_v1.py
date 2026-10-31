@@ -536,15 +536,42 @@ def _mutation_score_measured(b: pathlib.Path, r: dict) -> bool:
 
 
 def _perf_gate_compared_both_sides(b: pathlib.Path, r: dict) -> bool:
-    """A perf verdict from two measured medians -- not from one side and an assumption."""
+    """A perf verdict from two measured medians -- not from one side and an assumption.
+
+    THE ORACLE WAS ASKING FOR A CERTAINTY THE REVIEW MAY HONESTLY REFUSE TO GIVE.
+
+    This function's own docstring names the property it wants: a verdict from TWO measured sides.
+    It then required ``gate == "PASS"``.  The gate emits three verdicts -- PASS, FAIL, and UNCLEAR --
+    and UNCLEAR is its documented answer when the two distributions overlap inside the tolerance
+    band: it measured both sides, and the difference is within noise.  That is a correct review
+    of a no-op change, and it was being scored as if the capability had not run.
+
+    Measured 2026-10-31 on bbc00a7: the same case, unchanged tree, gave 22 REAL once and 23 six
+    times, and the flickering case was this one -- ``perf_review`` refused with
+    REVIEW_RAN_AND_RETURNED_A_VERDICT.  Seven isolated runs of the same sentence passed, and the
+    artifacts measured ratios of 0.90 / 0.98 / 0.99 / 1.01 against a 1.10 limit: the band is
+    real, and contention occasionally pushes a run over it.  So the flake was the ORACLE
+    measuring the box's load, not the capability.
+
+    The replacement is strictly STRONGER about evidence and looser about verdict: the artifact
+    must be complete, must carry at least three timed runs on BOTH sides, and must report a
+    verdict the gate can actually reach.  FAIL is still refused -- a claimed regression on an
+    unchanged file is a false alarm, not a review.
+    """
     for doc in _artifacts(r):
         if doc.get("schema") != "PROJECT_BRAIN_DIFF_PERF_GATE_V1":
             continue
-        if doc.get("gate") != "PASS":
+        if doc.get("complete") is not True:
             continue
-        if isinstance(doc.get("anchor_median_ns"), (int, float)) \
-                and isinstance(doc.get("patched_median_ns"), (int, float)):
-            return True
+        if doc.get("gate") not in {"PASS", "UNCLEAR"}:
+            continue
+        if not all(isinstance(doc.get(k), (int, float))
+                   for k in ("anchor_median_ns", "patched_median_ns")):
+            continue
+        # Evidence that BOTH sides were actually timed, not asserted.
+        if len(doc.get("anchor_runs_ns") or []) < 3 or len(doc.get("patched_runs_ns") or []) < 3:
+            continue
+        return True
     return False
 
 

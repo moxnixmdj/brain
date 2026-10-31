@@ -450,6 +450,12 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if futures and not output_keys:
         return {**base, "admitted": False, "rule": "R2_OUTPUT_ARTIFACT_UNSERVED"}
     if len(semantic) <= 1:
+        # ...unless the binder already knows WHY: then the string is the slot, not a verdict on
+        # the sentence.  Same refusal, same place in the chain, a cause the caller can act on.
+        if base.get("typed_binding_refused") and score > 0:
+            _slot = str(base.get("typed_binding_reason") or "").split(":")
+            return {**base, "admitted": False,
+                    "rule": "R13_DECLARED_INPUT_UNBINDABLE" + (":" + _slot[1] if len(_slot) > 1 else "")}
         return {**base, "admitted": False, "rule": "R3_WEAK_EVIDENCE"}
     # R9: a capability that consumes a FILE cannot run on a request that names no file.  Measured:
     # `extract text from a pdf file` selected pdf.extract.text.pypdf, whose only declared input is
@@ -2345,6 +2351,11 @@ def _declares_effect_by_argument(arrays: "Sequence[Mapping[str, Any]]", code: st
 # wrote ``test_total.py``, and the declaration-reading check demoted a correct PASS.  The
 # contract is what the tree proves, not what the row advertises, so the exit compares the
 # world it observed before the run with the world it observes now.
+# The suffixes this repository already treats as source (``goal_front_compiler`` uses the same
+# set when it decides a report may not be written over the file it describes).
+_NAMED_SUBJECT_SOURCE_SUFFIXES = (".py", ".js", ".jsx", ".ts", ".tsx", ".rs", ".go", ".java",
+                                  ".c", ".h", ".cpp", ".hpp", ".rb", ".cs", ".kt", ".php",
+                                  ".swift", ".mjs", ".cjs")
 _TEST_FILE_SHAPE = re.compile(
     r"(?:^|/)(?:tests?|specs?)/"
     r"|(?:^|/)test_[^/]*\.(?:py|js|ts|tsx|rs|go|java|rb|cs)$"
@@ -3479,10 +3490,14 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
         # sentence promised, not by a token scan of the sentence.
         promised_file = bool(artifacts) or bool(_promised_source_files(goal)) \
             or bool(_promised_source_roots(goal)) or _sentence_promises_a_change(goal)
+        from canonical.runtime import execute_v1 as _kernel
+        _moved_rows = _kernel._diff(before.get("files") or {}, after.get("files") or {})
+        # ``changed`` is a BOOL ("did anything move"), not a list: three of the site's own
+        # callers were passing it around as if it were paths.  The paths are here.
+        _moved_paths = list(_moved_rows.get("added") or []) + list(_moved_rows.get("modified") or [])
         if promised_file:
             present = any((ROOT / a).is_file() for a in (artifacts or []))
-            from canonical.runtime import execute_v1 as _kernel
-            moved = _kernel._diff(before.get("files") or {}, after.get("files") or {})["changed"]
+            moved = bool(_moved_rows.get("changed"))
             committed = (bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")) or (
                 bool(after.get("git_refs")) and after.get("git_refs") != before.get("git_refs")
             )
@@ -3502,7 +3517,65 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
                     stdout_filter_verified = True
             if not (present or moved or committed or stdout_filter_verified):
                 errors.append("NO_OBSERVED_EFFECT")
+        # NOT NESTED UNDER THE PROMISE.  A sentence whose verb is not in the change-verb table is
+        # exactly where this fires -- "Optimise the function total in <f>; it is too slow on large
+        # inputs" promises a change and none of its words say so -- so the check reads the ROW's
+        # declaration (does it edit source?) and the run's own movement, never the sentence's verb.
+        if _moved_paths:
+            rows, _cids = _executed_rows(result)
+            if any(front.capability_edits_source(row) for row in rows):
+                outside = _effect_landed_outside_the_named_subject(goal, _moved_paths, artifacts)
+                if outside:
+                    errors.append(outside)
     return errors
+
+
+def _effect_landed_outside_the_named_subject(goal: str, moved: "Sequence[str]",
+                                             artifacts: "list[str] | None" = None) -> str:
+    """The run edited something, but not the file the sentence named.
+
+    Measured 2026-10-31 on the advanced census.  ``software.repair.crossfile.choreograph`` was
+    handed ``pkg/`` (the tree holding the file the sentence named) and ran the only pass it could
+    find a use for -- dead-code pruning -- so ``pkg/mod.py`` and ``pkg/service.py`` were rewritten
+    and ``pkg/util.py``, the file the sentence was ABOUT, kept its exact bytes.  The door certified
+    PASS for "Optimise the function total in <pkg>/util.py; it is too slow on large inputs" and for
+    "Make the function total in <pkg>/util.py release the GIL while summing": ``output_verified``
+    true, stated effect untouched.  That is the defect class this file exists to refuse -- a run
+    that happened being reported as the run that was asked for.
+
+    Read structurally, from facts already on hand:
+      * the sentence names at least one file that EXISTS (a named path to be created is not a
+        subject, it is an output),
+      * the run moved at least one file, and none of the moved files is one of those,
+      * the movement includes a source file that is not a test -- a regression test the same
+        sentence asked for is not an edit of the subject, and neither is a report artifact.
+
+    A run that only writes its report, only creates tests, or changes nothing at all is untouched
+    by this rule; so is a sentence that names no existing file.
+    """
+    artifacts = [str(a) for a in (artifacts or [])]
+    # A NAMED TEST IS A WITNESS, NOT THE SUBJECT OF A SOURCE EDIT.  "The test in <pkg>/test_calc.py
+    # is failing, make the suite pass" names the test to run; the edit belongs in the source it
+    # exercises, and refusing that repair would be the false-negative class this door refuses to
+    # produce (measured: the capability matrix's `repair_test_file` lane).
+    # A cross-language port, TypeScript declaration generation, benchmark harness creation,
+    # or module relocation reads or relocates the named source file and writes the requested sibling destination.
+    if re.search(r"\bport\b|\btype\s+declarations?\b|\bmove\s+(?:the\s+)?module\b|\badd\s+a\s+benchmark\b", str(goal or ""), re.I):
+        return ""
+    named = [raw for raw in _stated_paths(goal)
+             if (ROOT / raw).is_file() and not _TEST_FILE_SHAPE.search(raw)]
+    if not named:
+        return ""
+    moved = [str(m) for m in moved]
+    if not moved or any(m in named for m in moved):
+        return ""
+    source_moves = [m for m in moved
+                    if m.lower().endswith(_NAMED_SUBJECT_SOURCE_SUFFIXES)
+                    and not _TEST_FILE_SHAPE.search(m)
+                    and m not in artifacts]
+    if not source_moves:
+        return ""
+    return "EDITS_LANDED_OUTSIDE_THE_NAMED_SUBJECT:" + ",".join(sorted(source_moves)[:3])
 
 
 def _blind_change_evidence(result: Mapping[str, Any]) -> list[str]:

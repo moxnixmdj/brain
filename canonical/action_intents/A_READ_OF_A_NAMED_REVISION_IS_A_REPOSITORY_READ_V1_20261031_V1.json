@@ -1,0 +1,205 @@
+{
+ "action_id": "A_READ_OF_A_NAMED_REVISION_IS_A_REPOSITORY_READ_V1_20261031_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "THE GATE REFUSED AN ANSWER THE MACHINE HAD ALREADY WRITTEN. The symbol index emits a 105.8 MB artifact for canonical/runtime in which the callers answer is 1.47 MB, and the answer gate's 16 MB cap refused the whole run -- 16.5-18.7 s to ARTIFACT_TOO_LARGE while the same sentence about one file answered in 293 ms. The index's own cache, meanwhile, was keyed by the request's artifact path, which the door makes unique per request, so no two sentences about one tree ever shared work. Neither fix is a new primitive: the gate already projects and bounds an answer, and the index already had a sha256-verified row cache looking for a key a caller could repeat.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "route_class": "REUSE",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/swe_typed_plan_v1.py",
+   "canonical/tests/test_a_row_declares_only_what_it_implements_v1.py",
+   ".github/workflows/swe-advanced-census.yml"
+  ]
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_READ_OF_A_NAMED_REVISION_NEVER_REACHED_THE_REPOSITORY_ROW_WHOSE_OWN_OPS_TUPLE_CONTAINS_DIFF_AND_THREE_INVENTORIES_ACCUSED_A_ROW_OF_DECLARING_FOUR_EFFECTS_IT_DOES_NOT_IMPLEMENT_WHILE_ITS_ADAPTER_HAS_A_PASS_FOR_EVERY_ONE_OF_THEM__MEASURED_2026_10_31_ON_bf4f78f",
+ "canonical_base_commit": "96e97b1b894aa1244e7a099036f98149b7a99c91",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A_READ_OF_A_NAMED_REVISION_NEVER_REACHED_THE_REPOSITORY_ROW_WHOSE_OWN_OPS_TUPLE_CONTAINS_DIFF_AND_THREE_INVENTORIES_ACCUSED_A_ROW_OF_DECLARING_FOUR_EFFECTS_IT_DOES_NOT_IMPLEMENT_WHILE_ITS_ADAPTER_HAS_A_PASS_FOR_EVERY_ONE_OF_THEM__MEASURED_2026_10_31_ON_bf4f78f",
+ "date": "2026-10-31",
+ "expected_parent_change": "A_READ_OPENER_WITH_ONE_STATED_GIT_OPERATION_AND_A_STATED_REVISION_IS_A_REPOSITORY_READ_AND_THE_FOUR_CHOREOGRAPHY_EFFECTS_ARE_PINNED_TO_THE_FOUR_PASSES_THAT_IMPLEMENT_THEM_SO_THE_ACCUSATION_CANNOT_BE_REPEATED_WITHOUT_DELETING_A_PASS",
+ "expected_parent_frontier_change": "A_READ_OPENER_WITH_ONE_STATED_GIT_OPERATION_AND_A_STATED_REVISION_IS_A_REPOSITORY_READ_AND_THE_FOUR_CHOREOGRAPHY_EFFECTS_ARE_PINNED_TO_THE_FOUR_PASSES_THAT_IMPLEMENT_THEM_SO_THE_ACCUSATION_CANNOT_BE_REPEATED_WITHOUT_DELETING_A_PASS",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
+ "falsification_condition": "REMOVE_THE_REVISION_RULE_AND_SEE_SENTENCE_44_RETURN_TO_RAW_GOAL_COMPILATION_GAP__DELETE_ONE_OF_THE_FOUR_PASSES_AND_SEE_ITS_DECLARATION_TEST_FAIL__DELETE_ONLY_THE_DECLARATION_AND_SEE_THE_SURFACE_CENSUS_FALL_TO_27",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_ROW_CAN_NO_LONGER_CLAIM_AN_EFFECT_IT_CANNOT_PERFORM_AND_A_GIT_READ_REACHES_GIT",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.5,
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/swe_typed_plan_v1.py",
+  "canonical/runtime/declared_input_derivation_v1.py",
+  "canonical/runtime/bound_capabilities/git_repository_operate.py",
+  "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+  "execution_guard/swe_advanced_probe_v1.py",
+  "hardcore_swe_surface_probe_20261030.py",
+  "execution_guard/swe_capability_matrix_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "96e97b1b894aa1244e7a099036f98149b7a99c91",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "A_READ_DETECTION_THAT_COULD_NOT_SEE_A_STATED_REVISION",
+   "A_FALSE_ACCUSATION_THAT_COST_A_REAL_SURFACE_CASE",
+   "A_WORD_MENTION_LAW_THAT_PASSES_ON_THE_ADAPTER_THAT_WAS_ACCUSED"
+  ],
+  "expected_parent_level_state_change": "A_READ_OPENER_WITH_ONE_STATED_GIT_OPERATION_AND_A_STATED_REVISION_IS_A_REPOSITORY_READ_AND_THE_FOUR_CHOREOGRAPHY_EFFECTS_ARE_PINNED_TO_THE_FOUR_PASSES_THAT_IMPLEMENT_THEM_SO_THE_ACCUSATION_CANNOT_BE_REPEATED_WITHOUT_DELETING_A_PASS",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "REVERTING_EITHER_HALF_RETURNS_A_CORRECT_ANSWER_TO_A_REFUSAL_OR_THE_TREE_TO_A_COLD_REPARSE",
+   "intrinsic_or_path_specific": "GENERAL__THE_GATE_RULE_IS_ABOUT_ANY_OVER_CAP_JSON_OBJECT_AND_THE_CACHE_RULE_IS_ABOUT_ANY_TREE_A_SIBLING_DESCRIBES",
+   "surviving_causal_blocker": "THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_REGISTRY_ROW__THE_FIX_IS_A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_ARGUMENT",
+   "existing_inherited_routes_checked": [
+    "answer_shape_v1",
+    "python_source_symbol_index",
+    "validate_cached_index",
+    "hardcore_swe_surface_probe_20261030.py",
+    "swe_capability_matrix_v1"
+   ],
+   "external_existing_routes_checked": "None needed: both mechanisms already existed in the tree.",
+   "surviving_gap": "ADVANCED_CENSUS_IS_STILL_5_OF_49__THIS_CHANGE_MOVES_ONE_SENTENCE_AND_CORRECTS_ONE_FALSE_CLAIM_IN_THE_INVENTORY"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_MATRIX_REAL_COUNT",
+    "TURNING_REFUSALS_INTO_PASSES"
+   ],
+   "real_outcome": "Show me the diff of <file> against HEAD~1 returns the diff from the repository row instead of compiling to nothing, and the four choreography effects are now pinned to the four adapter passes that implement them so no inventory can delete a true declaration again without deleting a pass.",
+   "surviving_necessity": "The machine could only answer 'who calls X' for a single file; for a tree it computed the answer and discarded it."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_EXISTING_PROJECTION_THE_EXISTING_SHA256_ROW_CACHE_AND_THE_EXISTING_FLOOR_IDIOM"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "ONE_A_B_MATRIX_RUN_WITH_THE_CHANGE_STASHED_TO_SEPARATE_THIS_CHANGE_FROM_MAIN_MOVING",
+   "search_stop_decision": "STOPPED_AFTER_THE_INSTRUMENT_REFUTED_THE_LEDGER__THE_SURFACE_FLOOR_IS_WHAT_CAUGHT_IT_AND_THAT_IS_RECORDED_AS_THE_REASON_THE_FLOOR_EXISTS"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "losing_routes_reason": "Deleting the declarations was measured and cost a real surface case while gaining nothing that survived re-measurement; the passes already exist; and the word-mention law passes on a lying adapter and fails on an honest one.",
+   "routes_ranked": [
+    "RECOGNISE_A_STATED_REVISION_AND_PIN_THE_DECLARATIONS_TO_THEIR_PASSES__SELECTED",
+    "DELETE_FOUR_DECLARATIONS_AS_THE_LEDGER_SAID__TRIED_AND_REVERTED_SURFACE_28_TO_27",
+    "IMPLEMENT_RACE_SQL_OPTIMISATION_AND_MIGRATION__ALREADY_IMPLEMENTED_AS_PASSES_C_TO_F",
+    "ADD_A_WORD_MENTION_LAW__MEASURED_AND_REJECTED"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_DIFF_IS_VERIFIED_BY_THE_GIT_BINARY_AND_THE_RACE_FIX_BY_TEN_REAL_RUNS_PLUS_A_LOCK_CONSTRUCT_IN_THE_SOURCE"
+  },
+  "real_outcome": "Find the callers of binding_view in canonical/runtime delivers ['_execute', '_prefer_the_writing_repair', 'admit', 'build_plan', 'compile_against_live_registry'] instead of refusing for size.",
+  "required_capability": "A_GATE_THAT_READS_THE_ANSWER_IT_ASKED_FOR_AND_A_CACHE_KEYED_BY_WHAT_IT_DESCRIBES",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Both the defect and the false accusation are in this repository."
+  },
+  "routes_considered": [
+   "RAISE_THE_CAP__PAYS_FOR_THE_WHOLE_PARSE",
+   "NEW_SUMMARY_FORMAT__TWO_THINGS_TO_KEEP_IN_SYNC",
+   "BOUNDED_SECTION_READ_AND_TREE_KEYED_CACHE__CHOSEN"
+  ],
+  "selected_route": "RECOGNISE_A_STATED_REVISION_AND_PIN_THE_DECLARATIONS_TO_THEIR_PASSES",
+  "selected_surviving_route": "RECOGNISE_A_STATED_REVISION_AND_PIN_THE_DECLARATIONS_TO_THEIR_PASSES",
+  "stop_condition": "ADVANCED_CENSUS_4_TO_5_OF_49_SENTENCE_44_SERVED_BY_git_repository_operate_v1__SURFACE_28_OF_28_WITH_AND_WITHOUT__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__THE_DELETION_WAS_TRIED_AND_REVERTED_AFTER_THE_SURFACE_CENSUS_FELL_28_TO_27_when_race_condition_fix_was_removed_AND_A_MATRIX_GAIN_THAT_DID_NOT_SURVIVE_RE_MEASUREMENT__SEVEN_NEW_TESTS_PASS",
+  "why_selected_route_is_fastest_sufficient": "One regex clause and seven tests; the census re-measures in six seconds and the surface census in thirty. The deletion experiment cost one CI cycle and produced the correction, which is the cheapest possible way to falsify a claim three inventories had repeated."
+ },
+ "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "READ_THE_SECTION_THE_ANSWER_IS_IN_AND_KEY_THE_INDEX_CACHE_BY_THE_TREE",
+ "stop_condition": "ADVANCED_CENSUS_4_TO_5_OF_49_SENTENCE_44_SERVED_BY_git_repository_operate_v1__SURFACE_28_OF_28_WITH_AND_WITHOUT__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__THE_DELETION_WAS_TRIED_AND_REVERTED_AFTER_THE_SURFACE_CENSUS_FELL_28_TO_27_when_race_condition_fix_was_removed_AND_A_MATRIX_GAIN_THAT_DID_NOT_SURVIVE_RE_MEASUREMENT__SEVEN_NEW_TESTS_PASS",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "DOES_A_ROW_S_DECLARED_EFFECT_SET_EQUAL_WHAT_ITS_ADAPTER_IMPLEMENTS_AND_DOES_A_STATED_REVISION_REACH_THE_OPERATION_BEARING_ROW",
+   "falsifier_id": "RESTORE_THE_FOUR_EFFECTS_AND_SEE_THE_MATRIX_LOSE_A_REAL_ROW",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
+   "proposal_id": "A_ROW_DECLARES_ONLY_WHAT_IT_IMPLEMENTS_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. The registry is unchanged from main; a read-only race question is still refused by name; the repository row still refuses anything outside its OPS; the census floor rises 4 -> 5; and the surface floor stays 28, which is what refuted the deletion.",
+ "action_intent_path": null,
+ "real_outcome": "Show me the diff of <file> against HEAD~1 returns the diff from the repository row instead of compiling to nothing, and the four choreography effects are now pinned to the four adapter passes that implement them so no inventory can delete a true declaration again without deleting a pass.",
+ "required_capability": "A_FAMILY_RULE_KEYED_ON_THE_STATED_OPERATION_AND_A_DECLARATION_PINNED_TO_ITS_IMPLEMENTATION"
+}

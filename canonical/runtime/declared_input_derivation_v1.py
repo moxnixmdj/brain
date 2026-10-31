@@ -213,12 +213,11 @@ _SWE_VERBS = ('rename',
  'extract the block',
  'extract the loop',
  'extract the magic',
+ 'magic number',
  'inline the function',
  'refactor the',
  'profile',
  'hot spot',
- 'optimis',
- 'optimiz',
  'memois',
  'memoiz',
  'thread pool',
@@ -1854,7 +1853,7 @@ def _derive_swe_kernel_inputs(
             tgt = stated_dirs[0] if stated_dirs else py_sources[0]
         elif ("type hints" in low or "type annotations" in low) and "add" in low and (py_sources or stated_dirs):
             op, tgt = "add_type_hints", (py_sources[0] if py_sources else stated_dirs[0])
-        elif "extract" in low and ("constant" in low or "magic number" in low) and py_sources:
+        elif ("extract" in low or "replace" in low) and ("constant" in low or "magic number" in low) and py_sources:
             op, tgt = "extract_constant", py_sources[0]
         elif "lint" in low and "fix" in low and len(py_sources) == 1 and "javascript" not in low:
             op, tgt = "lint_and_fix", py_sources[0]
@@ -1890,7 +1889,10 @@ def _derive_swe_kernel_inputs(
             op, tgt = "profile_hotspot", files[0]
         elif "benchmark" in low and "head~1" in low and files:
             op, tgt = "benchmark_git_ref", files[0]
-        elif "find the race condition" in low and files:
+        elif "find the race condition" in low and files and (root / files[0]).is_file() and any(
+            w in (root / files[0]).read_text(encoding="utf-8", errors="replace")
+            for w in ("threading", "Thread", "asyncio")
+        ):
             op, tgt = "find_race_condition", files[0]
         elif "fuzz" in low and "overflow" in low and files:
             op, tgt = "fuzz_overflow", files[0]
@@ -1939,8 +1941,6 @@ def _derive_swe_kernel_inputs(
             op, tgt = "package_split_design", stated_dirs[0]
         elif "changelog" in low and "commits" in low and (stated_dirs or files):
             op, tgt = "git_changelog", (stated_dirs[0] if stated_dirs else files[0])
-        elif "diff" in low and "against head~1" in low and files:
-            op, tgt = "git_diff_ref", files[0]
 
         if not op or not tgt:
             return None

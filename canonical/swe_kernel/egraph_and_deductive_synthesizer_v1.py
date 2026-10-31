@@ -1917,8 +1917,8 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
             "target_sha256": _sha256_bytes(first_th.read_bytes()),
         }
 
-    # 4. Extract constant (`extract the magic number ... into a named constant`)
-    if "constant" in low and "extract" in low and target.is_file():
+    # 4. Extract constant (`extract/replace the magic number ... into/with a named constant`)
+    if ("constant" in low or "magic number" in low) and ("extract" in low or "replace" in low) and target.is_file():
         original = target.read_text(encoding="utf-8")
         tree = ast.parse(original)
         m_cname = re.search(r"\b(?:named|as|into|to)\s+`?([A-Z][A-Z0-9_]+)`?", goal)
