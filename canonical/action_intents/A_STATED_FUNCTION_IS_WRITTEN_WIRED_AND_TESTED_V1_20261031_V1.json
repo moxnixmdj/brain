@@ -1,8 +1,8 @@
 {
- "action_id": "A_SECOND_OBJECT_IS_NOT_SILENTLY_DROPPED_V1_20261031_V1",
- "action_intent_id": "A_SECOND_OBJECT_IS_NOT_SILENTLY_DROPPED_V1_20261031_V1",
+ "action_id": "A_STATED_FUNCTION_IS_WRITTEN_WIRED_AND_TESTED_V1_20261031_V1",
+ "action_intent_id": "A_STATED_FUNCTION_IS_WRITTEN_WIRED_AND_TESTED_V1_20261031_V1",
  "action_kind": "FRESH_REUSE",
- "action_summary": "_PROSE_COMMAND's arity rule bound the objects of a prose command but not the COUNT: a row with arity one took the first path and dropped a second object stated as a noun phrase. The arity rule's dual now refuses a sentence that names a conjunction-headed second directory, folder or tree object, so nothing is deleted unless every named object is served.",
+ "action_summary": "Two capabilities now serve the creation grammar by reusing what the tree already had: the scope-aware signature edit (an optional parameter whose default IS the value the body already read, so no call site changes) and a stated-specification function writer (signature, expression, module, export and test path read from the sentence; free names proved to be the class's own attributes; the test's expectation evaluated from the specification). Derivation gained three stated-evidence rules and one slot; the front layer may now select a snapshot row whose slots the SENTENCE derived.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -27,30 +27,34 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/composer_route_v1.py",
-   "canonical/tests/test_a_second_object_is_not_silently_dropped_v1.py"
+   "canonical/runtime/bound_capabilities/python_refactor_add_parameter.py",
+   "canonical/runtime/bound_capabilities/python_source_add_function.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+   "canonical/runtime/declared_input_derivation_v1.py",
+   "canonical/runtime/goal_front_compiler_v1.py",
+   "canonical/tests/test_a_stated_function_is_written_wired_and_tested_v1.py"
   ],
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A prose delete naming TWO objects was executed as a command over ONE of them: \"Delete <b>/prod.db and the app directory\" bound `rm -r <b>/prod.db`, destroyed the database, left the directory standing, and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. A command that serves half of a two-object sentence and certifies it as the whole request is the destructive form of an unobserved effect: the effect was observed, irreversible, and only half of what was asked.",
- "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two ordinary creation requests were unserved: 'Add a parameter qty with a default value to the function line_total ...' was routed to python.refactor.inline_helper.v1 (the call line_total(item, 3) still raised TypeError) and 'Add a function total_cents(item) ... export it ... add a test ...' was refused at route admission with nothing written. The machine could edit code that already existed and could not create code the sentence fully specified.",
+ "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "A prose delete naming TWO objects was executed as a command over ONE of them: \"Delete <b>/prod.db and the app directory\" bound `rm -r <b>/prod.db`, destroyed the database, left the directory standing, and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. A command that serves half of a two-object sentence and certifies it as the whole request is the destructive form of an unobserved effect: the effect was observed, irreversible, and only half of what was asked.",
+ "causal_blocker": "Two ordinary creation requests were unserved: 'Add a parameter qty with a default value to the function line_total ...' was routed to python.refactor.inline_helper.v1 (the call line_total(item, 3) still raised TypeError) and 'Add a function total_cents(item) ... export it ... add a test ...' was refused at route admission with nothing written. The machine could edit code that already existed and could not create code the sentence fully specified.",
  "date": "2026-10-31",
- "expected_parent_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
- "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+ "expected_parent_change": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
+ "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
  "explicit_user_authorization": "Owner instruction this session, verbatim and repeated: all of the problems are already solved in the brain, so the fix wires what the repository already has -- the symbol index the adapter already builds, the overlap law the adapter already enforces, the unittest module _render_module already emits -- instead of inventing policy or adding a dependency. Owner instruction to focus on hardcore software engineering: this is the capability that writes tests. Owner instruction to do the optimal in the fastest way and only the right way. Owner instruction that all tests must be extremely hard and only truthful: five of the seven new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed.",
- "falsification_condition": "Re-run the tag on main and on this branch. If the baseline does not destroy the fixture and report the pair as verified, or if this branch refuses the single-object forms 'Delete the directory D' and 'Delete the file X', the law is wrong.",
+ "falsification_condition": "Re-run both tags on main and on this branch. If the baseline does not fail them, or if the new pin suite is not red on the baseline, the law is wrong.",
  "governance_change": true,
- "governance_change_summary": "canonical/runtime/composer_route_v1.py decides which prose sentence becomes a shell command. It now also refuses a delete whose second named object it cannot serve. No capability is granted anything new: the change only removes an execution path, and the two single-object forms are pinned as still binding.",
+ "governance_change_summary": "Two new bound capabilities, three derivation rules and one admission gate. The gate only ADMITS a retrieved snapshot row when the sentence's own stated evidence filled its slots (derived_count > 0); a lexical near-miss still cannot displace anything, and the pinned selection measurements are unchanged.",
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
- "intent": "Stop an irreversible command that serves one of two named objects and certifies the pair: the arity rule must count objects as well as bind them.",
+ "intent": "Serve creation requests the sentence fully specifies instead of inlining, refusing, or answering with a different capability.",
  "load_bearing_primary": {
-  "canonical_base_commit": "4a936b1064d26490f23d1d94b88a91538d8c4379",
+  "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4",
    "CODING_FRONTIERCODE_GE_54_4",
@@ -60,28 +64,32 @@
   "expected_obligation_unlock_lcb": "1/13",
   "highest_leverage_now": true,
   "interpretation": "A capability that could delete now declines a sentence it cannot serve whole, and the refusal is measured by a filesystem oracle rather than by its own report.",
-  "measured_effect": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+  "measured_effect": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+  "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
   "success_probability_lcb": "1/2",
   "wall_clock_cost_ub": 1
  },
- "measured_effect": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+ "measured_effect": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "prior_work_reused": "The arity rule already in _PROSE_COMMAND, the _INSIDE_THE_FILE_NOUNS table that already keeps a delete off a part of a file, and the rm -r promotion comment that already recorded 'a set expansion turns one wrong deletion into a whole directory of them'.",
+ "prior_work_reused": "python_refactor_rename_parameter's span-integrity/rollback discipline, the existing symbol and module derivations, declared_input_derivation's shadow-contract binding, and F17 (retrieval proposes, typed admission disposes) rather than any new primitive.",
  "progress_evidence_paths": [
-  "canonical/runtime/composer_route_v1.py",
-  "canonical/tests/test_a_second_object_is_not_silently_dropped_v1.py"
+  "canonical/runtime/bound_capabilities/python_refactor_add_parameter.py",
+  "canonical/runtime/bound_capabilities/python_source_add_function.py",
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+  "canonical/runtime/declared_input_derivation_v1.py",
+  "canonical/runtime/goal_front_compiler_v1.py",
+  "canonical/tests/test_a_stated_function_is_written_wired_and_tested_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
+  "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
    "DELIVERY_TREATED_AS_A_SECOND_TASK__the_answer_clause_bound_to_an_unrelated_writer"
   ],
-  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
@@ -92,7 +100,7 @@
    "capability_work_deleted": "the string comparison of module names and the assertion-style `complete` were deleted, not bypassed",
    "existing_inherited_routes_checked": "span splice + SPAN_INTEGRITY, from-import name-token rewrite, shadowed-scope keeps, _modname_of, the parsed-file set and the post-splice ast.parse were all reused unchanged",
    "external_existing_routes_checked": "rope and libcst rejected for byte-preservation and dependency cost; textual replace rejected for correctness",
-   "surviving_gap": "The remaining creation-vs-mutation trio: add_parameter, add_total_function, fix_then_regression_test."
+   "surviving_gap": "fix_then_regression_test: a repair chained to a regression test that would have caught the bug."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -100,7 +108,7 @@
     "TREATING_THE_TOP_RANKED_CAPABILITY_AS_THE_ONE_THAT_RAN",
     "TREATING_AN_EMPTY_unknown_sites_LIST_AS_PROOF_THE_TREE_IS_CLEAN"
    ],
-   "real_outcome": "The two-object delete no longer binds a command at all; the probe's filesystem oracle sees prod.db survive, and the single-object forms still delete exactly what they name.",
+   "real_outcome": "Both sentences now execute a capability that writes the code they describe, and each run is judged by an oracle that runs the code (200/300) or reads the written test file and the package export (12).",
    "surviving_necessity": "The tier oracle is independent of the adapter: it greps the whole tree for the old name, imports the package and runs the unittest suite, so a report that lies cannot pass it."
   },
   "obs_inherited_system": {
@@ -140,8 +148,8 @@
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "The fixture trees are tiny by construction, but the referee is real: a tree-wide grep for the old name, a real package import and a real unittest run, plus an A/B against a pristine HEAD worktree with the same fixtures"
   },
-  "real_outcome": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
-  "required_capability": "REUSE_THE_ARITY_RULE_AS_A_COUNT_OF_NAMED_OBJECTS",
+  "real_outcome": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
+  "required_capability": "REUSE_THE_SIGNATURE_EDIT_AND_THE_STATED_SPECIFICATION_WRITER",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -208,7 +216,7 @@
      "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
     }
    ],
-   "checked_at_utc": "2026-10-31T13:26:42Z",
+   "checked_at_utc": "2026-10-31T13:41:11Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -251,11 +259,11 @@
     "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
     "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
    ],
-   "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
-   "selected_route_checked_at_utc": "2026-10-31T13:26:42Z",
+   "selected_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
+   "selected_route_checked_at_utc": "2026-10-31T13:41:11Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T13:26:42Z",
+    "checked_at_utc": "2026-10-31T13:41:11Z",
     "execution_dependencies": [
      {
       "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
@@ -292,10 +300,10 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+    "selected_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
     "status": "READY"
    },
-   "selected_surviving_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+   "selected_surviving_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
@@ -317,7 +325,7 @@
      "docs.python.org/3.10/library/ast.html -- ast.parse + lineno/col_offset are the sanctioned mechanism for span-exact edits; no third-party parser is required"
     ]
    },
-   "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+   "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
    "unresolved_plausible_dominators": [],
    "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
   },
@@ -327,16 +335,16 @@
    "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
   ],
-  "selected_surviving_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
-  "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+  "selected_surviving_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
+  "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
   "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
  },
- "refusal_or_stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
- "resolution": "One shape added to composer_route_v1 (a conjunction followed by a noun phrase whose head is a directory/folder/tree), applied to the rm row before its -r promotion. Single-object deletes are untouched and pinned.",
- "route_id": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+ "refusal_or_stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
+ "resolution": "canonical/runtime/bound_capabilities/python_refactor_add_parameter.py and python_source_add_function.py, two registry rows, three derivation rules in declared_input_derivation_v1.py, and the F17 evidence gate in goal_front_compiler_v1.py.",
+ "route_id": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
- "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+ "selected_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
+ "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "user_authorized_governance_change": true,

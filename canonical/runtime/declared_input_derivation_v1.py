@@ -48,6 +48,31 @@ SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
 _FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
 # "<noun> <name>" -- "the function line_total", "the class Cart".  The name is
 # read off the sentence and then PROVED against the file's own AST.
+# "Add a function total_cents(item) to <path> that returns price_cents * qty".
+# The signature and the expression are not inferred: the sentence spells a name,
+# its parameter list and the value it returns, and each is read verbatim.  A
+# parameter list that is not a list of identifiers, or an expression that does
+# not parse, yields no value -- the binder then refuses instead of synthesising
+# something the sentence did not say.
+# The add-a-function grammar, in one place: every rule below that fills a slot
+# for a function the sentence ASKS FOR is gated on this, so an ordinary sentence
+# that merely mentions "the function line_total" never gains a slot it did not
+# state.  Measured 2026-10-31: without the gate, five test-selection rows bound
+# `symbol` on a repair sentence and the selector became ambiguous where it used
+# to select one relevant capability.
+_CREATES_A_FUNCTION = re.compile(
+    r"\b(?:add|create|write|implement|define)\w*\b[^.\n]{0,60}?\bfunction\b", re.I)
+
+
+_CREATED_TEST = re.compile(
+    r"\badd(?:s|ing)?\s+(?:a|an|the)?\s*tests?\b[^.\n]{0,50}?\bin\s+([^\s,;]+)", re.I)
+
+
+_ADDED_FUNCTION = re.compile(r"\bfunction\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)", re.I)
+_RETURNS_EXPR = re.compile(r"\breturns?\s+(.+?)\s*(?:,|\.\s|$)", re.I)
+_EXPORT_FROM = re.compile(r"\bexports?\b[^.\n]{0,40}?\bfrom\s+([^\s,;]+)", re.I)
+
+
 _NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 # ONLY configuration knobs may be defaulted away.  A path/root/argv/dir/file
@@ -79,6 +104,14 @@ _SWE_VERBS = (
     "circular import", "import cycle", "bisect", "slower", "mutation", "taint", "untrusted",
     "flaky", "intermittently", "deprecated", "sql injection",
     "linearithmic", "unused", "race condition", "are failing",
+    # The same reading for the other half of software work: CREATING.  A request
+    # to add a function and test it is software engineering with a stated
+    # signature, a stated expression and stated files, and the derivations below
+    # fill those slots from exactly that evidence.  Measured 2026-10-31: without
+    # these three phrases the feature request was not SWE in scope at all, so the
+    # contract was never derived and the capability that exists for it could not
+    # be reached.
+    "add a function", "export it from", "add a test for",
 )
 
 
@@ -110,6 +143,11 @@ _RENAME_OLD_NEW = re.compile(
     r"([A-Za-z_][A-Za-z0-9_]*)\s+(?:to|as|into)\s+([A-Za-z_][A-Za-z0-9_]*)\b",
     re.IGNORECASE,
 )
+_ADDED_PARAM = re.compile(
+    r"\b(?:add|insert|give)\w*\b[^.!\n]{0,80}?\bparameters?\s+"
+    r"(?:named\s+)?[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", re.I)
+
+
 _NAMED_NEW = re.compile(
     r"\b(?:new\s+(?:function|parameter|symbol|name)\s+named|named)\s+"
     r"([A-Za-z_][A-Za-z0-9_]*)\b", re.IGNORECASE,
@@ -441,6 +479,130 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if value is not None:
                 out["limit"] = {"value": value, "rule": "LIMIT_FROM_STATED_COUNT",
                                 "evidence": token}
+
+    # An ADDED parameter is a name the sentence states -- "Add a parameter qty
+    # with a default value to the function line_total" -- and the function it
+    # names does NOT already declare, which is what makes it an addition rather
+    # than a rename.  Both halves are read from stated evidence: the name from
+    # the one add-parameter phrase, the function from the symbol/qualname rules
+    # above (parsed out of the stated file), and the check is the parameter list
+    # the file really has.  A sentence naming two candidates, or a name the
+    # function already declares, yields no value and the binder refuses.
+    if "new_param" in keys and "new_param" not in out:
+        added = _ADDED_PARAM.findall(str(goal or ""))
+        added = [n for n in dict.fromkeys(added) if _NAME_RE.match(n)]
+        host = str((out.get("symbol") or out.get("qualname") or {}).get("value") or "")
+        if len(added) == 1 and host:
+            for f in [f for f in sources if f.endswith(".py")]:
+                tree_of_f = _tree_of(root, f)
+                for node in ast.walk(tree_of_f) if tree_of_f is not None else []:
+                    if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    if node.name != host.split(".")[-1]:
+                        continue
+                    declared = [x.arg for x in (list(node.args.args)
+                                                + list(node.args.kwonlyargs)
+                                                + list(getattr(node.args, "posonlyargs", []) or []))]
+                    if added[0] in declared:
+                        break  # already declared: not an ADDITION
+                    out["new_param"] = {"value": added[0], "rule": "ADDED_PARAM_STATED_AND_NOT_DECLARED",
+                                        "evidence": "%s:%s" % (f, host)}
+                    break
+                if "new_param" in out:
+                    break
+
+    # DESTINATION GRAMMAR.  "Add a function f to <path>" names the one file the
+    # addition goes INTO even when the same sentence names other files for other
+    # roles ("export it from <path2>", "add a test for it in <path3>").  The role
+    # word is the evidence: exactly one STATED source file is the operand of
+    # "to".  Without this the add-a-function row refused
+    # BINDING_REFUSED:module:not_stated on the very sentence written for it,
+    # because the one-file rule above only fires when one file is stated.
+    py_stated = [f for f in sources if f.endswith(".py")]
+    if ("module" in keys and "module" not in out and len(py_stated) > 1
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        to_hits = [m.group(1).rstrip(".,;:") for m in
+                   re.finditer(r"\bto\s+([^\s,;]+)", str(goal or ""), re.I)]
+        exact = [h for h in to_hits if h in py_stated]
+        if len(exact) == 1:
+            out["module"] = {"value": exact[0], "rule": "MODULE_FROM_STATED_TO_TARGET",
+                             "evidence": exact[0]}
+    # THE NAME OF A FUNCTION THE SENTENCE ASKS TO CREATE has no definition to be
+    # proved against -- that is the point of an ADD.  It is read off the one
+    # "function name(args)" phrase, and it must NOT already exist in any stated
+    # file: a name that is already defined is a rename or an edit, not an
+    # addition, and binding it here would let this row claim that work.
+    if ({"symbol", "new_symbol", "function_name", "new_function"} & keys
+            and _CREATES_A_FUNCTION.search(str(goal or ""))):
+        fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(fn_phrases) == 1:
+            name = fn_phrases[0][0]
+            existing = set()
+            for f in [f for f in sources if f.endswith(".py")]:
+                f_tree = _tree_of(root, f)
+                if f_tree is None:
+                    continue
+                existing |= {n.name for n in ast.walk(f_tree)
+                             if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+            if _NAME_RE.match(name) and name not in existing:
+                for key in ({"symbol", "new_symbol", "function_name", "new_function"} & keys):
+                    if key not in out:
+                        out[key] = {"value": name, "rule": "CREATED_FUNCTION_NAME_STATED",
+                                    "evidence": name}
+    # A tree to edit, when the sentence names the module the addition goes INTO
+    # and other files for other roles: the module's own directory is the root the
+    # operation is confined to.
+    if ("source_root" in keys and "source_root" not in out and "module" in out
+            and str((out.get("module") or {}).get("rule") or "") == "MODULE_FROM_STATED_TO_TARGET"):
+        parent = str(pathlib.PurePosixPath(str(out["module"]["value"])).parent)
+        if parent and (pathlib.Path(root) / parent).is_dir():
+            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_MODULE",
+                                  "evidence": str(out["module"]["value"])}
+    # The TEST FILE a feature request is told to create does not exist yet, so it
+    # can never be in stated_existing_files -- and the slot is still stated: "add
+    # a test for it in tests/test_total.py" names the path.  Read verbatim, and
+    # only from that phrase.
+    if ({"test_paths", "test_path", "test_file"} & keys):
+        created = _CREATED_TEST.findall(str(goal or ""))
+        created = [c.rstrip(".,;:") for c in created]
+        created = [c for c in created if c.endswith(".py")]
+        if len(set(created)) == 1:
+            for key in ({"test_paths", "test_path", "test_file"} & keys):
+                if key not in out:
+                    value = [created[0]] if key == "test_paths" else created[0]
+                    out[key] = {"value": value, "rule": "CREATED_TEST_PATH_STATED",
+                                "evidence": created[0]}
+    # The export target is the file the sentence says to export FROM.
+    if "export_module" in keys and "export_module" not in out:
+        stated = set(stated_existing_files(str(goal or ""), pathlib.Path(root)))
+        hits = [m.group(1).rstrip(".,;:") for m in
+                _EXPORT_FROM.finditer(str(goal or ""))]
+        hits = [h for h in hits if h in stated]
+        if len(hits) == 1:
+            out["export_module"] = {"value": hits[0], "rule": "EXPORT_TARGET_STATED",
+                                    "evidence": hits[0]}
+    # The signature and the returned expression, read off the one "function
+    # name(args)" phrase and the one "returns X" phrase, verbatim.
+    if (({"params", "parameters"} & keys) or ({"body", "expression", "returns"} & keys)) \
+            and _CREATES_A_FUNCTION.search(str(goal or "")):
+        fn_phrases = _ADDED_FUNCTION.findall(str(goal or ""))
+        if len(fn_phrases) == 1:
+            fname, raw_params = fn_phrases[0]
+            params = [t.strip() for t in raw_params.split(",") if t.strip()]
+            if all(_NAME_RE.match(t) for t in params):
+                for key in ({"params", "parameters"} & keys):
+                    out[key] = {"value": params, "rule": "PARAMS_FROM_STATED_SIGNATURE",
+                                "evidence": "%s(%s)" % (fname, raw_params.strip())}
+                for key in ({"body", "expression", "returns"} & keys):
+                    rets = _RETURNS_EXPR.findall(str(goal or ""))
+                    rets = [r.strip() for r in rets if r.strip()]
+                    if len(rets) == 1:
+                        try:
+                            ast.parse("_ = (" + rets[0] + ")", mode="exec")
+                        except SyntaxError:
+                            continue
+                        out[key] = {"value": rets[0], "rule": "EXPRESSION_STATED_VERBATIM",
+                                    "evidence": rets[0]}
 
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file
