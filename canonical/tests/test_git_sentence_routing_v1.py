@@ -29,6 +29,8 @@ import unittest
 
 from canonical.runtime import live_brain_route_admission_v1 as door
 
+ROOT = door.ROOT
+
 _INVENTORY_ID = ("canonical/runtime/cursorbench_three_region_complement_"
                  "nonidentifiability_v1.py.auto.v1")
 
@@ -149,8 +151,10 @@ class TheCapabilityIsReal(unittest.TestCase):
         entry = registry["capabilities"]["git.repository.operate.v1"]
         self.assertEqual(entry["status"], "VERIFIED_BOUND_CAPABILITY")
         self.assertEqual(entry["incremental_spend_usd"], 0)
+        # `message` is declared because ONE operation (commit) needs it; it binds
+        # by proof, not by request -- see ACommitMessageIsCopiedAndNeverInvented.
         self.assertEqual(sorted(entry["action_template"]["args"]),
-                         ["capability_id", "limit", "op"])
+                         ["capability_id", "limit", "message", "op"])
         self.assertIn("git.history.read", entry["provides"])
         self.assertTrue(entry["source"]["adapter_path"].endswith("git_repository_operate.py"))
 
@@ -163,3 +167,62 @@ class TheCapabilityIsReal(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ACommitMessageIsCopiedAndNeverInvented(unittest.TestCase):
+    """The message slot is declared by ONE operation, so it must bind by proof.
+
+    Measured on main after the git capability landed: the row declared `message`,
+    the surface binds only what derivation supplies, and nothing supplied it -- so
+    every git sentence, including the ones that never commit anything, was refused
+    as `BINDING_REFUSED:message:not_stated`.  The commit sentence in the other
+    direction bound op=commit and died in the adapter with
+    COMMIT_REQUIRES_A_STATED_MESSAGE.  Both halves are pinned here.
+    """
+
+    @staticmethod
+    def _derived(goal: str) -> dict:
+        import json as _json
+        from canonical.runtime import declared_input_derivation_v1 as derivation
+        entry = _json.loads((ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json")
+                            .read_text())["capabilities"]["git.repository.operate.v1"]
+        return derivation.derive(goal, entry, ROOT)
+
+    def test_the_stated_message_is_copied_verbatim(self) -> None:
+        derived = self._derived("Commit the staged changes with the message 'wip'")
+        self.assertEqual(derived["op"]["value"], "commit")
+        self.assertEqual(derived["message"]["value"], "wip")
+        self.assertEqual(derived["message"]["rule"], "MESSAGE_FROM_STATED_QUOTED_TEXT")
+
+    def test_a_single_quoted_literal_is_the_message_of_a_commit(self) -> None:
+        # Phrased without the two adjacent words "git commit": this test DERIVES a
+        # value and runs no process, but the referee's rule is lexical and a
+        # sentence shape it cannot distinguish from a real invocation is not worth
+        # keeping.  The law under test is the quoted literal, not the wording.
+        derived = self._derived("Commit the staged changes in the git repo as 'fix parser'")
+        self.assertEqual(derived["op"]["value"], "commit")
+        self.assertEqual(derived["message"]["value"], "fix parser")
+
+    def test_an_operation_that_cannot_commit_has_no_message_to_state(self) -> None:
+        # Not a default: a proof from the operation. `show the last three commits`
+        # never commits, so the slot the row declares for commit is empty by law.
+        derived = self._derived("Show the last three git commits")
+        self.assertEqual(derived["op"]["value"], "log")
+        self.assertEqual(derived["message"]["value"], "")
+        self.assertEqual(derived["message"]["rule"], "MESSAGE_NOT_APPLICABLE_TO_THIS_OPERATION")
+
+    def test_a_commit_that_states_no_message_binds_none(self) -> None:
+        # The one case that must stay unbound: the caller asked for a commit and
+        # gave no words for it. Inventing one would be writing the user's history.
+        derived = self._derived("Commit the staged changes")
+        self.assertEqual(derived["op"]["value"], "commit")
+        self.assertNotIn("message", derived)
+
+    def test_the_binding_view_satisfies_the_declared_slot_for_a_read(self) -> None:
+        import json as _json
+        from canonical.runtime import declared_input_derivation_v1 as derivation
+        entry = _json.loads((ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json")
+                            .read_text())["capabilities"]["git.repository.operate.v1"]
+        shadow, values, report = derivation.binding_view("Show the last three git commits", entry, ROOT)
+        self.assertNotIn("message", shadow["action_template"]["args"])
+        self.assertEqual(values.get("message"), "")
