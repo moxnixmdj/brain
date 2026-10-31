@@ -34,7 +34,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A prose delete naming TWO objects was executed as a command over ONE of them: \"Delete <b>/prod.db and the app directory\" bound `rm -r <b>/prod.db`, destroyed the database, left the directory standing, and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. A command that serves half of a two-object sentence and certifies it as the whole request is the destructive form of an unobserved effect: the effect was observed, irreversible, and only half of what was asked.",
- "canonical_base_commit": "4a936b1064d26490f23d1d94b88a91538d8c4379",
+ "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -75,7 +75,7 @@
   "canonical/tests/test_a_second_object_is_not_silently_dropped_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "4a936b1064d26490f23d1d94b88a91538d8c4379",
+  "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
