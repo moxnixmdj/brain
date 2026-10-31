@@ -73,6 +73,8 @@ from canonical.runtime.bound_capabilities.python_review_diff_static_triage impor
     _parse_diff_ranges,
 )
 
+from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import universal_test_argv
+
 SCHEMA = "PROJECT_BRAIN_DIFF_MUTATION_GATE_V1"
 
 # ---------------------------------------------------------------- mutators
@@ -317,11 +319,12 @@ def run(args, root):
         env["PYTHONPATH"] = os.pathsep.join(
             sorted({str((scratch / p).parent.resolve()) for p in py_changed}))
 
-        base = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests,
+        test_cmd = universal_test_argv(python_exe, run_tests)
+        base = subprocess.run(test_cmd,
                               cwd=scratch, capture_output=True, text=True, timeout=timeout_s, env=env)
         if base.returncode != 0:
             _fail("BASE_WORLD_RED:" +
-                  ";".join((base.stdout.strip().splitlines() or ["<no output>"])[-2:])[:300])
+                  ";".join(((base.stdout + "\n" + base.stderr).strip().splitlines() or ["<no output>"])[-2:])[:300])
 
         # post-apply per-file changed lines (new-side ranges), clamped to
         # the file's true extent — created-file hunks (`-0,0`) arrive with a
@@ -370,7 +373,7 @@ def run(args, root):
                 _fail("SPAN_INTEGRITY:" + m["file"] + ":" + str(m["line"]))
             target.write_text(mutated, encoding="utf-8")
             try:
-                r = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests,
+                r = subprocess.run(test_cmd,
                                    cwd=scratch, capture_output=True, text=True,
                                    timeout=timeout_s, env=env)
                 if r.returncode == 0:
