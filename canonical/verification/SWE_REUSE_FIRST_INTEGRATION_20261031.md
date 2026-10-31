@@ -117,3 +117,28 @@ no exhaustive research-paper survey or globally best-route claim.
 Publication is authorized, but main admission still requires actual green signed
 checks and an explicit PR-number merge. No self-signed remote check or bypass is
 permitted. Open engineering gaps remain open after this bounded delivery.
+
+## Remote falsifier follow-up: explicit application/test directory roles
+
+The first PR6506 head passed the signed referee and other verification gates, but
+its surface census correctly failed **27/28** on localization. This was not bypassed,
+rerun as a flaky result or addressed by lowering the floor. Reproduction showed
+`declared_input_derivation` binding the test package (its `__init__.py` counted as
+code) instead of the separately stated application directory. The strict
+localizer then correctly refused: NO_LOCALIZED_LINE_FROM_THE_FAILING_RUN.
+
+Reuse existing stated-directory, witness-directory and test-discovery evidence.
+For a test-consuming contract, a unique explicitly stated non-witness/non-test
+directory binds source_root before test-owner inference. Multiple such directories
+remain ambiguous, rather than arbitrarily selecting one. No localizer score,
+source-membership filter, acceptance assertion or census floor changed.
+
+New source/test-role controls: **5 failed, 1 passed -> 6 passed**. Existing declared
+input controls plus those six: **13 passed**, 1.06 s. Actual full surface census
+with the unchanged floor: **28/28**, including real localization output.
+
+Seven-module follow-up neighbors: **143 passed, 1 failed**, 6.21 s. The failure is
+`EffectFamilyEnumerationTests::test_caller_family_passes_with_a_real_callers_of_artifact`
+with ANSWER_SCOPE_UNPROVEN. Openly reversing only this binding patch reproduced
+that same failure (**1 failed**, 0.54 s), then the patch was reapplied. This is an
+additional observed pre-existing residual, not hidden or attributed to this fix.

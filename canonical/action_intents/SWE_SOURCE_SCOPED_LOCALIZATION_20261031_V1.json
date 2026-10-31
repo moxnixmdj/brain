@@ -29,7 +29,8 @@
     "canonical/tests/test_swe_safe_reuse_integration_v1.py",
     "canonical/verification/SWE_REUSE_FIRST_INTEGRATION_20261031.md",
     "canonical/verification/SWE_SOURCE_SCOPED_LOCALIZATION_20261031.md",
-    "canonical/verification/SWE_SECURITY_IMPORT_ALIASES_20261031.md"
+    "canonical/verification/SWE_SECURITY_IMPORT_ALIASES_20261031.md",
+    "canonical/tests/test_diagnosis_source_and_test_roles_v1.py"
   ],
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -56,7 +57,8 @@
       "canonical/tests/test_swe_safe_reuse_integration_v1.py",
       "canonical/verification/SWE_REUSE_FIRST_INTEGRATION_20261031.md",
       "canonical/verification/SWE_SOURCE_SCOPED_LOCALIZATION_20261031.md",
-      "canonical/verification/SWE_SECURITY_IMPORT_ALIASES_20261031.md"
+      "canonical/verification/SWE_SECURITY_IMPORT_ALIASES_20261031.md",
+      "canonical/tests/test_diagnosis_source_and_test_roles_v1.py"
     ],
     "producer_cognition_model_dependency_count": 0,
     "incremental_spend_usd": 0
@@ -344,5 +346,6 @@
       ]
     }
   },
-  "implementation_provenance": "Externally agent-assisted engineering and local producer-run controls, not autonomous Brain capability evidence. Original per-change intents and measurements preserved; no capability/benchmark/ownership/promotion/terminal credit."
+  "implementation_provenance": "Externally agent-assisted engineering and local producer-run controls, not autonomous Brain capability evidence. Original per-change intents and measurements preserved; no capability/benchmark/ownership/promotion/terminal credit.",
+  "integration_falsifier_followup": "PR6506 surface census exposed a source/test-role binding error: tests/__init__.py counted as application scope while a distinct application directory was explicitly stated. Reuse existing stated-directory and witness-directory evidence to bind the unique non-test source; preserve ambiguity refusal. No floor or localizer weakening."
 }
