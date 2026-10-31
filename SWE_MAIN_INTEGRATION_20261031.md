@@ -2,7 +2,7 @@
 
 ## Status
 
-All accumulated work is preserved on `arena/4b31f8b6-brain`, with main integrated through `270dad3e0a5f169d8da0fc2ee86fdd90ef139ccb`. This is **not a claim that PR #6341 has landed**. Required admission checks reject the missing action intent and the broad accumulated scope. No policy bypass, protected-file edit, or relabeling as governance was performed.
+All accumulated work is preserved on `arena/4b31f8b6-brain`, with main integrated through `f4b04d0c`. This is **not a claim that PR #6341 has landed**. Required admission checks reject the missing action intent and the broad accumulated scope. No policy bypass, protected-file edit, or relabeling as governance was performed.
 
 ## Reuse and integration
 
@@ -37,12 +37,16 @@ Four unresolved regression cases:
 
 The first pre-restoration run was **225 passed, 28 failed**, 97.95 seconds. It exposed missing registry declarations and obsolete pre-neighborhood test expectations; it is not an equal-configuration performance baseline. No overall speedup is claimed.
 
+## Concurrent main update
+
+While validation ran, main advanced from `270dad3e` to `f4b04d0c` (restoration rung 46). That update was also integrated; its sole registry conflict was resolved by preserving every new upstream declaration plus the same three navigation restorations. A fresh post-update smoke run covering callers, destinations, symbol-index contracts and all ten new integration cases passed **59/59 in 2.83 seconds**. The full 292-case result above was measured before this final registry-only main update, not rerun afterward.
+
 ## Compiled artifact
 
 Regenerated using `canonical/runtime/compile_brain_unified_model_v1.py`:
 
-- Digest: `2038c534aa5a086667c823173ce052a3c266ebcccf8602dd698b3298647abf06`
-- 364 capabilities: 69 bound, 295 receipt-backed.
+- Digest: `fff19c485d3275483162d5dea5c1a6c62013485f2482cc62446e6a6eeb09e486`
+- 376 capabilities: 81 bound, 295 receipt-backed.
 - Compiler serialization/reload digest check passed.
 - Full model verification **did not complete**: the negative-control driver requests `python.source.audit.ast`, absent from the current registry/model, and raises `CAPABILITY_NOT_IN_MODEL`. No fresh 33/33 claim is made. Restoring a fourth declaration in this PR would violate the registration limit.
 
