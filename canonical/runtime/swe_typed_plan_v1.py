@@ -30,6 +30,7 @@ Authority: NONE. Credit: 0. Model dependency: 0. Incremental spend: $0.
 from __future__ import annotations
 
 import pathlib
+import re
 from typing import Any, Mapping
 
 from canonical.runtime import capability_selection_retrieval_v1 as selection
@@ -39,10 +40,42 @@ from canonical.runtime import live_integrated_brain_v1 as live_brain
 
 SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
 
+# Hidden-tool wiring, measured 2026-10-28.  Human SWE sentences name an EFFECT
+# ("find every caller", "extract the function", "lint", "type-check").  The
+# capabilities that serve those effects already exist in the registry and bind
+# and execute honestly (e.g. python.source.symbols.index.ast produces a real
+# ``callers_of`` map), but the lexical BM25 shortlist buries them under path-
+# named and wrong-domain rows, and the narrow SWE verb list never lets the typed
+# retry fire for them.  §9 of COMPOSITION_LEVERAGE: when a relation can't be
+# derived from names, ENUMERATE the candidate space and let execution/admission
+# be the oracle.  Candidates are derived from the registry's OWN declared
+# keywords (data-driven, not a hardcoded id table); ``admit()`` stays the oracle;
+# EXACTLY ONE admitted+specific candidate is decisive; ambiguity => fail closed.
+
+_FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
+    # (goal triggers, registry-keyword terms to enumerate candidates, required effect token in cid)
+    (("caller", "who calls", "call site", "call graph", "find every call"),
+     ("caller", "call graph", "who calls"), "symbol"),
+)
+_FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration.verify.")
+
+
+def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
+    low = str(goal or "").lower()
+    for triggers, terms, token in _FAMILIES:
+        if any(t in low for t in triggers):
+            return terms, token
+    return None
+
 
 def is_swe_request(goal: str) -> bool:
-    """True only for an explicit software-engineering request (not a module call)."""
-    return derivation.is_swe_request(goal)
+    """An explicit software-engineering request: the base verb list OR a stated
+    SWE effect family (caller-finding etc.).  Broadening is confined to the typed
+    RETRY path; the pinned lexical compiler and the ``executed`` guard are
+    untouched.  Verified: the three pinned front-door refusals stay non-SWE."""
+    if derivation.is_swe_request(goal):
+        return True
+    return _family_terms(goal) is not None
 
 
 def _execution_template(entry: Mapping[str, Any], removed: set[str]) -> dict[str, Any]:
@@ -84,6 +117,44 @@ def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any])
     return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
 
 
+def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str, Any]) -> str | None:
+    """A necessary effect check, NOT proof an implementation is correct.
+
+    Scope: explicit implementation imperatives in software requests. Paths and
+    quoted literals are values, not imperative verbs. Report/index/test-selection
+    effects cannot discharge this request even when every input binds. Reuse the
+    front compiler's value stripping and the registry's declared effect contracts.
+    Unknown implementation contracts fail closed; existing acceptance checks must
+    still judge any source-writing route that passes this preflight.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as front
+    prose = front.prose_only(goal).lower()
+    imperative = re.search(
+        r"(?:^|[.;\n]|\bthen\b|\band\b)\s*"
+        r"(?:(?:please|first|next)\s+|(?:can|could|would)\s+you\s+(?:please\s+)?)?"
+        r"(?:implement\b|develop\b|build\b|"
+        r"add\s+(?:(?:a|an|the|new)\s+)*[\w -]{0,60}"
+        r"\b(?:function|method|feature|endpoint|class|api)\b)", prose)
+    software = re.search(r"\b(?:python|software|code|function|method|feature|endpoint|class|api)\b", prose)
+    if not imperative:
+        return None
+    if not software:
+        from canonical.runtime.write_authority_v1 import SOURCE_SUFFIXES
+        software = any(path.suffix.lower() in SOURCE_SUFFIXES
+                       for _raw, path in goal_compiler._repo_paths(goal, live_brain.ROOT))
+    if not software:
+        return None
+    # These are actual registry effect namespaces, not keyword relevance or id
+    # substrings such as 'patch' (which could mean a report-only patch search).
+    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.')
+    for cid in capability_ids:
+        entry = registry.get(str(cid)) or {}
+        if any(any(part in str(effect) for part in material)
+               for effect in entry.get('provides', [])):
+            return None
+    return 'R10_SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED'
+
+
 def _effect_consistent(goal: str, cid: str) -> bool:
     """Reuse the selector's OWN E30 effect vocabulary as an admission gate.
 
@@ -106,30 +177,98 @@ def _effect_consistent(goal: str, cid: str) -> bool:
     return any(effect in low for effect in set(stated))
 
 
+def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
+                    declared: dict) -> tuple[str, dict] | None:
+    """Enumerate hidden capabilities matching the goal's SWE effect (by the
+    registry's OWN keywords), and let ``admit()`` -- the existing typed-contract
+    binder -- be the oracle.  DECISIVE only when EXACTLY ONE candidate is
+    admitted+specific AND its name states the effect.  Ambiguity or zero =>
+    None (fail closed).  This never fabricates a capability: every candidate is
+    a real registry row that must bind every declared input from the sentence.
+
+    Measured 2026-10-28: "Find every caller of the function add in X" enumerates
+    {symbol.index.ast, change_impact.testselect}; only symbol.index.ast admits
+    (specific) and names the effect -> decisive, and its artifact is a REAL
+    callers_of map.  test-gen/lint/typecheck/extract enumerate to zero-or-many
+    admitted and therefore stay honestly fail-closed (no false PASS).
+    """
+    fam = _family_terms(goal)
+    if fam is None:
+        return None
+    terms, token = fam
+    candidates: list[str] = []
+    for cid, entry in sorted(registry.items()):
+        if not cid.startswith(_FAMILY_SWE_PREFIXES):
+            continue
+        surface = " ".join(map(str, (entry.get("keywords") or []) +
+                               (entry.get("provides") or []))) + " " + cid
+        low = surface.lower()
+        if any(term in low for term in terms):
+            candidates.append(cid)
+    if not candidates:
+        return None
+    admitted: list[tuple[str, dict]] = []
+    for cid in candidates:
+        try:
+            decision = selection.admit(goal, cid, registry[cid], root, declared.get(cid))
+        except Exception:
+            continue
+        if decision.get("admitted") and decision.get("specific"):
+            admitted.append((cid, dict(decision.get("inputs") or {})))
+    if len(admitted) != 1:
+        return None  # ambiguous / none -> fail closed
+    cid, inputs = admitted[0]
+    if token not in cid.lower():
+        return None  # effect-inconsistent -> no false PASS
+    return cid, inputs
+
+
 def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
     """Return ``(registry, admissible, compiled)`` for a DECISIVE typed SWE
     selection, or ``None``.  ``None`` means: not a SWE request, ambiguous, no
     bindable proposal, effect-inconsistent, or any fault — the caller keeps its
-    original fail-closed verdict.  Ambiguity is never silently resolved."""
+    original fail-closed verdict.  Ambiguity is never silently resolved.
+
+    Two decisive routes, both reusing hidden in-repo machinery:
+      * select(): the typed shortlist+admit+E30 path (repair/rename/review).
+      * _resolve_family(): enumerate-and-let-admission-be-oracle (§9), for SWE
+        effect families the lexical shortlist buries (caller-finding, etc.).
+    """
     root = pathlib.Path(root)
     if not is_swe_request(goal):
         return None
     try:
         registry = dict(live_brain.load_verified_registry())
-        decision = selection.select(goal, registry, root, 8)
-        if decision.get("status") != "SELECTED":
-            return None  # ambiguity / no admitted proposal -> refuse
-        cid = str(decision.get("selected_capability") or "")
-        if not cid:
-            return None
-        if not _effect_consistent(goal, cid):
-            return None  # stated effect != selected capability -> no false PASS
+        declared = selection.declarations(root)
+        cid = ""
+        inputs: dict = {}
+
+        fam_terms = _family_terms(goal)
+        if fam_terms is not None:
+            # A stated SWE effect family is AUTHORITATIVE: the effect-keyed
+            # enumerate-and-admit resolver decides (§9).  Measured: letting the
+            # lexical select() run first on these goals is nondeterministic —
+            # with other tree state it returned an unrelated testselect
+            # capability instead of the symbol index.  Family resolver only:
+            # decisive single admission, or fail closed.  No second guess.
+            fam = _resolve_family(goal, root, registry, declared)
+            if fam is None:
+                return None
+            cid, inputs = fam
+        else:
+            # Route 1: the existing decisive typed selection (repair/rename/etc).
+            decision = selection.select(goal, registry, root, 8)
+            if (decision.get("status") == "SELECTED" and decision.get("selected_capability")
+                    and _effect_consistent(goal, str(decision.get("selected_capability")))):
+                cid = str(decision.get("selected_capability"))
+                inputs = dict(decision.get("inputs") or {})
+            else:
+                return None  # ambiguity / effect-inconsistent -> refuse
+
         admissible = goal_compiler._platform_admissible_registry(dict(registry))
         entry = dict(admissible.get(cid) or registry.get(cid) or {})
         if not entry:
             return None
-
-        inputs = dict(decision.get("inputs") or {})
         shadow, values, report = derivation.binding_view(goal, entry, root)
         inputs = {**inputs, **values}
         removed = set((report.get("adapter_defaulted") or {}).keys())

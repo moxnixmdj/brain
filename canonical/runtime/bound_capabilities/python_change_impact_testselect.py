@@ -74,6 +74,8 @@ def _load_index(repo, source_root, work, cached_index_path=None):
             raise RuntimeError("INDEX_CACHE_INVALID")
         if str(artifact.get("source_root")) != str(source_root.relative_to(repo)):
             raise RuntimeError("INDEX_CACHE_SOURCE_ROOT_MISMATCH")
+        from canonical.runtime.bound_capabilities.python_source_symbol_index import validate_cached_index
+        validate_cached_index(repo, source_root, artifact)
         return artifact, {"cache_used": 1}
     spec = importlib.util.spec_from_file_location(
         "python_source_symbol_index_sibling",
@@ -225,6 +227,17 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
+    # Refuse source/report aliases before parsing inputs or creating scratch.
+    # Reuse the existing symlink/hardlink-aware authority boundary. The index
+    # reads Python files; diff and cached index are additional explicit inputs.
+    from canonical.runtime.write_authority_v1 import SOURCE_SUFFIXES, check_report
+    protected = list(source_root.rglob('*.py'))
+    protected.extend(_safe_path(repo, args[key]) for key in ('diff_path', 'index_path')
+                     if args.get(key))
+    check_report(repo, output, protected)
+    if output.suffix.lower() in SOURCE_SUFFIXES:
+        raise RuntimeError("REPORT_DESTINATION_IS_SOURCE")
+
     diff_path = str(args.get("diff_path") or "")
     changed_paths = args.get("changed_paths")
     if diff_path:
@@ -237,8 +250,19 @@ def run(args, root):
         # An explicit path list cannot know line ranges: whole-module change.
         changed = {}
         for raw in changed_paths:
-            _safe_path(repo, raw)  # containment is law even for reads
-            changed[str(raw)] = [(1, 10**9)]
+            p = _safe_path(repo, raw)  # containment is law even for reads
+            # KEY THE CHANGE THE WAY THE INDEX IS KEYED.  The index holds
+            # repo-relative posix paths and ``_changed_symbols`` looks the
+            # changed file up in it by that key; storing ``str(raw)`` verbatim
+            # meant an ABSOLUTE path -- which is what the composer binds -- never
+            # matched, every changed module came back MODULE_NOT_INDEXED, and the
+            # report said selected_tests: [] with candidate_test_count: 2.  An
+            # empty selection a caller reads as "nothing to run" is worse than a
+            # refusal: it is a green light to skip the tests that cover the
+            # change.  Measured on main: a change to calc.py that
+            # tests/test_calc.py imports selected zero tests.
+            rel = str(p.relative_to(repo)).replace("\\", "/")
+            changed[rel] = [(1, 10**9)]
         changed_source = "changed_paths"
     else:
         raise RuntimeError("CHANGE_IMPACT_INPUT_REQUIRED")
@@ -305,6 +329,15 @@ def run(args, root):
         p for p, row in changed_symbols.items()
         if row["reason"] == "MODULE_NOT_INDEXED"
     )
+    if unknown and not selected:
+        # A changed Python module the index does not carry is not a module
+        # nothing depends on -- it is a module this run could not reason about.
+        # Reporting selected_tests: [] there is the same lie as a green empty
+        # suite: the caller skips the tests that cover the change and believes
+        # it was told they were unaffected.  The tree-sitter selector resolves
+        # the same import correctly, so the honest answer is to refuse and let
+        # the next capability be tried, not to certify an empty selection.
+        raise RuntimeError("CHANGED_PYTHON_MODULE_NOT_INDEXED:" + ",".join(unknown))
     report = {
         "schema": "PROJECT_BRAIN_CHANGE_IMPACT_TEST_SELECTION_V1",
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),

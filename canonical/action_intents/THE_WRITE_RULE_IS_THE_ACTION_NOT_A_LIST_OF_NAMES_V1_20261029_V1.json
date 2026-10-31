@@ -1,0 +1,419 @@
+{
+ "action_id": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1",
+ "action_intent_id": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "The write-authority rule merged in #6313 read 'what is this capability asked to read' from a fixed tuple of eighteen slot names. code.impact.tree_sitter.testselect.v1 states its inputs in `changed_paths`, which the tuple does not name, so the rule ran, returned None, and a 272-byte Python module became a 1076-byte JSON impact report. The fix is fewer conditions, not more.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "AGENTS.md",
+   "README.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/FAIL_CLOSED_MISTAKE_IMMUNITY_LAW_V1.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/GOAL_HIERARCHY_AND_DRIFT_IMMUNITY_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "canonical/laws/TRUTH_FIRST_AND_NO_DUPLICATE_EXECUTION_LAW_V1.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V1.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/runtime/write_authority_v1.py"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/write_authority_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/tests/test_the_write_rule_is_not_a_list_of_slot_names_v1.py"
+  ],
+  "route_class": "INTEGRATE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A guard that enumerates the slot names it defends is a race it always loses. write_authority_v1 read its inputs from a fixed tuple of eighteen names, and code.impact.tree_sitter.testselect.v1 states them in `changed_paths`, which the tuple does not name -- so the guard ran, returned None, and a 272-byte module became a 1076-byte JSON report in four separate requests. The registry uses 122 other argument names no such tuple can name in advance.",
+ "canonical_base_commit": "a1f42e955f87850627099be1535f089805313324",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A guard that enumerates the slot names it defends is a race it always loses. write_authority_v1 read its inputs from a fixed tuple of eighteen names, and code.impact.tree_sitter.testselect.v1 states them in `changed_paths`, which the tuple does not name -- so the guard ran, returned None, and a 272-byte module became a 1076-byte JSON report in four separate requests. The registry uses 122 other argument names no such tuple can name in advance.",
+ "date": "2026-10-29",
+ "expected_parent_change": "One rule function now reads its inputs from the action instead of from a list, and one status name separates a deliberate refusal from a controller fault. No capability, adapter or registry row added.",
+ "expected_parent_frontier_change": "Any analyzer may be aimed at a named source without destroying it, and a refusal is legible without parsing prose, which is what the routing work in the rest of the inventory needs before it can be measured honestly.",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way.'",
+ "falsification_condition": "False if any of the four measured sentences (scaffold, reproduce, regression_test, blame) again leaves a .py file byte-changed after the request, or if any door test that passed on 88bb18b fails on this branch.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "canonical_base_commit": "a1f42e955f87850627099be1535f089805313324",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "3/13",
+  "interpretation": "A coding score is a count of tasks completed on a tree. A tree that loses a source file to a report mid-request cannot be scored at all, so preserving the tree is a precondition for every coding obligation rather than a fraction of one. Unlocking, not discharging: nothing here claims a task was solved.",
+  "measured_effect": "4 of 97 measured sentences destroyed a .py source file on 88bb18b; 0 of 97 do on this branch, and 7 now change status to name the refusal that stopped them (6 typed as WRITE_AUTHORITY_REFUSED, 1 through the composed path).",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "stop_condition": "STOP when no request in the 97-sentence software battery leaves a file it named byte-changed without having been asked to change it, and every such refusal is reported under its own status.",
+  "success_probability_lcb": "9/10",
+  "wall_clock_cost_ub": 2
+ },
+ "measured_effect": "97-sentence software battery, same instrument and machine, 10-way, before -> after on this branch: source .py files destroyed 4 (scaffold, reproduce, regression_test, move_fn) -> 0; passes 17 -> 17 (none lost, none gained); strict pass-and-acceptance 9 -> 9. Six sentences that reported FAIL__LIVE_CONTROLLER_EXECUTION over a policy refusal now report FAIL_CLOSED__WRITE_AUTHORITY_REFUSED (scaffold, reproduce, regression_test, blame, find_class, test_js); a seventh, move_fn, had its destructive binding stopped by the same rule and is reported through the composed path as FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN because a composed step, not the controller, raised.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  {
+   "commit": "88bb18bbe3bc45c79f73ee89e5fdc7d5d80607cd",
+   "what": "write_authority_v1.py from PR #6313 -- the rule, its two invocation points and its 12-test suite. This change edits that rule's input reading and adds no new mechanism."
+  }
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "a1f42e955f87850627099be1535f089805313324",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "SOURCE_SLOTS_AS_THE_GATE",
+   "CHECKING_shell.command.run_LIKE_AN_UNCLASSIFIED_TRANSFORMER"
+  ],
+  "expected_parent_level_state_change": "Any analyzer may be aimed at a named source without destroying it, and a refusal is legible without parsing prose, which is what the routing work in the rest of the inventory needs before it can be measured honestly.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "Deleting the rule returns to the measured destruction. Bypassing it at the adapter is 94 adapters with a write call. Substituting a per-capability allow-list is the same tuple, renamed.",
+   "intrinsic_or_path_specific": "Path specific: one list in one function. The defect class it belongs to -- an enumerated whitelist standing in for a structural rule -- is the same class the census named in the routing table.",
+   "surviving_causal_blocker": "write_authority_v1.SOURCE_SLOTS held eighteen names while the rows use 140."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
+   "existing_inherited_routes_checked": "write_authority_v1.violation() already existed and was already called at both invocation points; the defect was its input set, not its presence. The status vocabulary already had a precedent for a typed refusal, FAIL_CLOSED__CAPABILITY_EXITED_PROCESS, so no new reporting mechanism was needed.",
+   "external_existing_routes_checked": "None needed. The rule is a comparison of two path sets inside one process; stdlib pathlib and the repository's own effect vocabulary already express it.",
+   "surviving_gap": "Which arguments are read and which are written is a property of the action, so it must be read from the action rather than declared in a table that goes stale."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "DEFENDING_THE_SLOT_NAMES_SOMEONE_HAPPENED_TO_READ",
+    "REPORTING_A_POLICY_REFUSAL_AS_A_CONTROLLER_FAULT"
+   ],
+   "real_outcome": "No request leaves a source file byte-changed unless the sentence asked for a change.",
+   "surviving_necessity": "The binder will keep aiming reports at sources; the guard has to see the source however the row spells it, and the caller has to be able to tell a refusal from a fault."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "The rule now covers every analyzer row without any of them being edited.",
+   "downstream_work_to_delete_or_supersede": "None. No registry row, no adapter and no test was superseded.",
+   "fresh_reuse_plan": "Reuse write_authority_v1 and the existing status vocabulary; add one test file."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "affected_layers_only_on_revalidation_reading": "Only the rule, one status name, the new test file and the regenerated unified model were revalidated; no registry row, adapter or unrelated suite was touched.",
+   "analysis_steps_deleted_or_cached": "The before/after battery and the 689-test A/B were each run once and diffed, not re-derived.",
+   "search_stop_decision": "Stopped when the live arguments of the failing request were read out of the running guard, not after reading all 125 rows."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "deletion_first_order_reading": "DELETE removes the enumeration; REUSE is the existing rule and its two call sites; nothing had to be substituted or composed, and only one name was integrated.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Route 2 is the same race with a longer list. Route 3 duplicates the rule at every adapter and leaves the next adapter to forget it.",
+   "routes_ranked": [
+    "DELETE: the eighteen-name tuple is removed; the rule reads every non-destination argument as an input",
+    "REUSE: write_authority_v1 itself, its two invocation points, and the status vocabulary that already had FAIL_CLOSED__CAPABILITY_EXITED_PROCESS as a typed refusal",
+    "INTEGRATE: one status name, FAIL_CLOSED__WRITE_AUTHORITY_REFUSED, so the door reports the refusal as a refusal"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "direct_real_effect_verification_considered_because": "The filesystem is the oracle: the census hashes every file before and after each request and a source_lost row is a destroyed .py. Four such rows on 88bb18b, zero on this branch.",
+   "existing_oracle_considered": true,
+   "existing_oracle_considered_because": "The 689-test door corpus and the 97-sentence battery both predate this change and were re-run, not replaced.",
+   "synthetic_verification_necessity": "NONE. Both oracles predate this change."
+  },
+  "real_outcome": "A request cannot destroy the file it named, whatever the argument is called, and a refusal says so in its status instead of blaming the controller.",
+  "required_capability": "The write-authority rule already present on main, its input set read from the action.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME",
+      "CORRECTNESS": "WRONG_AT_THE_NEXT_ROW",
+      "INCREMENTAL_COST": "GROWS_WITH_THE_REGISTRY",
+      "RELIABILITY": "FAILS_OPEN_AGAIN",
+      "VERIFIABILITY": "NOTHING_STRUCTURAL",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "the same rule with a longer list"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: the 122 names are counted from the 125 action templates; the next row added to the registry brings a 123rd and the rule returns None again for it."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ADD changed_paths AND THE OTHER 121 NAMES TO SOURCE_SLOTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "LESS",
+      "CORRECTNESS": "SAME",
+      "INCREMENTAL_COST": "HIGH",
+      "RELIABILITY": "WORSE",
+      "VERIFIABILITY": "PER_ADAPTER",
+      "WALL_CLOCK": "SLOWER"
+     },
+     "evidence": [
+      "94 registry adapters contain a write call"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: 94 adapters carry a write call and 2 invocation kernels already call the rule; placing the same test in 94 places is 94 chances to omit it, and the census measured two kernels were enough."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "REFUSE IN EACH OF THE 94 ADAPTERS THAT WRITE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SAME",
+      "CORRECTNESS": "REOPENS_THE_HOLE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "FAILS_OPEN",
+      "VERIFIABILITY": "NONE",
+      "WALL_CLOCK": "IDENTICAL"
+     },
+     "evidence": [
+      "the shell runner was refused on the move_fn sentence"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: the sentence asked to move a FUNCTION and update imports; binding a shell mv is the structurally wrong capability, so the refusal is correct and exempting the runner would restore the destruction the rule exists to stop."
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "MAKE shell.command.run A SOURCE TRANSFORMER SO IT MAY ALWAYS WRITE"
+    }
+   ],
+   "checked_at_utc": "2026-10-29T22:04:58Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "SOURCE_SLOTS_AS_THE_GATE",
+   "max_age_hours": 12,
+   "negative_search_summary": "Three challengers were qualified and all three lose on the same dimension: they close the instance and leave the class.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "guard that whitelists argument names versus structural rule for which arguments are inputs"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "coreutils sort -o FILE FILE staging through a temporary file instead of truncating in place"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "detect that a tool would overwrite the file it reads before the write happens"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "python 3.11 pathlib Path.suffix and is_file behaviour"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-29T22:04:58Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local CPython 3.11 runtime",
+      "evidence": [
+       "python3 --version reported by the interpreter running the census and the door tests"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the git checkout at 88bb18b",
+      "evidence": [
+       "git rev-parse 88bb18b resolves and git status shows the branch based on it"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the bound capability registry",
+      "evidence": [
+       "BOUND_CAPABILITY_REGISTRY_V1.json parsed: 125 rows"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 1,
+    "selected_route": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/write_authority_v1.py at 88bb18b -- the rule, its docstring and its eighteen-name tuple",
+     "canonical/runtime/live_brain_route_admission_v1.py:1310 and run_adapter_locally -- both invocation points",
+     "canonical/tests/test_a_capability_may_not_overwrite_the_file_it_reads_v1.py -- the 12 tests that passed while the hole was open"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "unix.stackexchange.com 'why does sort have an -o option' -- sort -o FILE FILE is legal because it stages through a temp file, while 'sort f > f' truncates first: the same responsibility boundary, solved once in coreutils"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "BOUND_CAPABILITY_REGISTRY_V1.json action templates -- 122 argument names the tuple cannot name, counted from the rows"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "docs.python.org/3/library/pathlib.html -- Path.is_file()/suffix, the only primitives the rule needs",
+     "docs.python.org/3/library/shutil.html -- SameFileError: a tool must not copy a file onto itself, the same duty in another stdlib module"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "ADD changed_paths TO SOURCE_SLOTS",
+   "REFUSE IN EACH ADAPTER",
+   "READ EVERY NON-DESTINATION ARGUMENT AS AN INPUT"
+  ],
+  "selected_route": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1",
+  "selected_surviving_route": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1",
+  "stop_condition": "STOP when no request in the 97-sentence software battery leaves a file it named byte-changed without having been asked to change it, and every such refusal is reported under its own status.",
+  "why_selected_route_is_fastest_sufficient": "It is the only route that closes the class rather than the instance, it costs one function and no new lookup, and it is strictly fewer conditions than the tuple it replaces."
+ },
+ "resolution": "No new mechanism. The rule's input set is read from the action instead of from a list of names, and a deliberate refusal gains its own status name.",
+ "route_id": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "stop_condition": "STOP when no request in the 97-sentence software battery leaves a file it named byte-changed without having been asked to change it, and every such refusal is reported under its own status.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-10-29T22:04:58Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__AN_EXISTING_VERIFIED_GUARD_GAINS_A_STRUCTURAL_INPUT_READ_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_reasons": {
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json": "The 122 argument names the action templates use that the tuple cannot name, counted from the rows themselves.",
+    "canonical/runtime/write_authority_v1.py": "The rule itself, at the base commit: SOURCE_SLOTS holds eighteen names and does not hold changed_paths. A direct probe of violation() with the exact live arguments returns None.",
+    "canonical/tests/test_a_capability_may_not_overwrite_the_file_it_reads_v1.py": "The 12-test suite from #6313, green on this base while the hole is open: it asserts the rule catches source_root-shaped inputs and never exercises a slot the tuple does not name."
+   },
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "53cf10b89f3622bc2d0ed8dd510ba8ce90b6162b",
+     "path": "canonical/runtime/write_authority_v1.py"
+    },
+    {
+     "git_blob_sha": "b14a291be5a08bf9eb83390b6afbc9e92885aaae",
+     "path": "canonical/tests/test_a_capability_may_not_overwrite_the_file_it_reads_v1.py"
+    },
+    {
+     "git_blob_sha": "1d61bf5ecacc9c41121448f3438c6340dbc758ca",
+     "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    }
+   ],
+   "decisive_question": "Does the guard see the source when the row spells it `changed_paths` instead of `source_root`?",
+   "falsifier_id": "SOURCE_FILE_BYTE_IDENTICAL_AFTER_A_REQUEST_THAT_DID_NOT_ASK_TO_CHANGE_IT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": null,
+   "proposal_id": "THE_WRITE_RULE_IS_THE_ACTION_NOT_A_LIST_OF_NAMES_V1_20261029_V1"
+  }
+ },
+ "weakens_existing_guard": false
+}

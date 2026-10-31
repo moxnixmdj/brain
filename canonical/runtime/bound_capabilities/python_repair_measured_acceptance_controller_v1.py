@@ -211,10 +211,16 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairAcceptanceError("ARGS_NOT_OBJECT")
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","."))
-    test_paths=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+    test_paths=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
+    if not test_paths:
+        from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+        try:
+            test_paths=discover_test_files(source_root)
+        except FileNotFoundError:
+            raise RepairAcceptanceError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
     if not test_paths:
         raise RepairAcceptanceError("TEST_PATHS_REQUIRED")
-    argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
+    argv=_REPAIR._PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*test_paths)
     task_text=str(args.get("task_text") or "").strip()
     if not task_text:
         raise RepairAcceptanceError("TASK_TEXT_REQUIRED")

@@ -1476,11 +1476,10 @@
   "code.impact.tree_sitter.testselect.v1": {
    "action_template": {
     "args": {
-     "capability_id": "code.impact.tree_sitter.testselect.v1",
-     "changed_paths": "${input.changed_paths}",
-     "index_path": "${input.index_path}",
-     "output_path": "${input.output_path}"
-    },
+          "capability_id": "code.impact.tree_sitter.testselect.v1",
+          "changed_paths": "${input.changed_paths}",
+          "output_path": "${input.output_path}"
+        },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -4517,19 +4516,7 @@
    "cost": 1,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": [
-    "python",
-    "fault",
-    "localization",
-    "dynamic",
-    "trace",
-    "coverage",
-    "spectrum",
-    "ochiai",
-    "symbol",
-    "dataflow",
-    "def-use"
-   ],
+   "keywords": ["python", "fault", "localization", "dynamic", "trace", "coverage", "spectrum", "ochiai", "symbol", "dataflow", "def-use", "localize", "localizer", "localizing", "localize the fault", "fault localizer", "localize the failing test", "spectrum-based fault localization"],
    "limitations": [
     "Ranks suspicious Python lines from failing-vs-passing dynamic execution spectra, failing traceback frames, AST symbol ownership, and bounded backward def-use.",
     "Requires repository-local Python tests and source; each test path is executed in an isolated child Python process with bounded trace events and timeout.",
@@ -4736,19 +4723,7 @@
    "cost": 1,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": [
-    "python",
-    "fault",
-    "provenance",
-    "interprocedural",
-    "call",
-    "return",
-    "argument",
-    "value",
-    "dynamic",
-    "dataflow",
-    "callsite"
-   ],
+   "keywords": ["python", "fault", "provenance", "interprocedural", "call", "return", "argument", "value", "dynamic", "dataflow", "callsite", "value provenance", "trace the value", "tracing", "provenance trace", "trace the provenance", "where does this value come from"],
    "limitations": [
     "Records bounded repository-local Python call/return observations and primitive-safe argument/return fingerprints from failing and passing test executions.",
     "Links dynamic call edges to static Python callsite assignment bindings and emits ranked interprocedural value-provenance hypotheses.",
@@ -5044,6 +5019,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_test_guided_patch_search_v1",
@@ -5400,6 +5378,70 @@
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-EXTRACT-001.json"
    }
   },
+  "python.refactor.inline_helper.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.inline_helper.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_inline_helper",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "inline",
+    "inline the helper",
+    "single-use",
+    "single use",
+    "helper",
+    "only caller",
+    "call site",
+    "refactor",
+    "expand function",
+    "inline function"
+   ],
+   "limitations": [
+    "Inlines a module-level function that ends in a single return and has exactly ONE call site in the subject; 'single-use' is read as that property of the tree, never as a hint.",
+    "Refuses a call whose argument is not re-evaluable (a call, lambda, await or comprehension): substituting it twice would run it twice.",
+    "Kept only if the helper's name survives nowhere and the suite is green."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.inline_helper",
+    "python.refactor.single_use_inlined"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "helper",
+    "inlined_expression",
+    "edits",
+    "files_edited",
+    "suite_passed",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_inline_helper.py",
+    "type": "brain_native_deterministic_composition"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
   "python.refactor.rename_parameter.v1": {
    "action_template": {
     "args": {
@@ -5505,9 +5547,9 @@
      "timeout_s": "${input.timeout_s}"
     },
     "expect": {
-     "field": "gate",
+     "field": "complete",
      "type": "field_equals",
-     "value": "PASS"
+     "value": true
     },
     "type": "invoke_capability"
    },
@@ -5535,7 +5577,8 @@
     "only uses that provably resolve to the same binding are renamed; dynamic receivers, getattr dispatch and unattributable attribute sites are listed in unknown_sites and lower complete, never silently edited or dropped.",
     "method renames refuse when a subclass overrides the same name (REFUSE_INHERITED_OVERRIDE) or inherits-and-calls it (REFUSE_INHERITED_USE); super() references are never touched.",
     "locals, parameters and class-level assignments refuse SYMBOL_KIND_UNSUPPORTED (rename_parameter owns params); global/nonlocal declarations on the old name refuse REFUSE_NONLOCAL_OR_GLOBAL.",
-    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly."
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly.",
+    "the action contract is `complete`: every provable site is edited and then re-measured on the post-edit trees, and a surviving provable reference refuses RESIDUAL_REFERENCE before a byte is written; `gate` is PASS only when a named pytest suite ran green, so a no-suite run reports PASS_BLIND and the registry expects complete=true rather than an unreachable gate."
    ],
    "platforms": [
     "linux",
@@ -6579,6 +6622,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_apply_verified_v1",
@@ -6678,6 +6724,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_provenance_guided_coupled_repair_v1",
@@ -6792,6 +6841,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_coupled_software_repair_loop_v1",
@@ -6898,23 +6950,16 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_iterative_software_repair_loop_v1",
    "cost": 2,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": [
-    "python",
-    "software",
-    "repair",
-    "strict-progress",
-    "multi-round",
-    "multi-file",
-    "tests",
-    "counterexample",
-    "ast"
-   ],
+   "keywords": ["python", "software", "repair", "strict-progress", "multi-round", "multi-file", "tests", "counterexample", "ast", "iterative", "iterative repair", "iterative software repair loop", "repair loop", "repair the source iteratively"],
    "limitations": [
     "Accepts only edits that strictly reduce the parsed failing-test count and can continue while other failures in the same test command remain.",
     "Bounded deterministic Python AST mutation search only; does not cover non-monotonic coupled edits that require a neutral or temporarily worse intermediate step.",
@@ -7093,6 +7138,9 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_measured_acceptance_controller_v1",
@@ -7205,25 +7253,16 @@
      "type": "field_equals",
      "value": true
     },
+    "optional": [
+     "test_argv"
+    ],
     "type": "invoke_capability"
    },
    "adapter_module": "python_repair_semantic_acceptance_controller_v1",
    "cost": 1,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": [
-    "python",
-    "software",
-    "repair",
-    "semantic",
-    "acceptance",
-    "raw-task",
-    "scope",
-    "file",
-    "content-addressed",
-    "candidate",
-    "verification"
-   ],
+   "keywords": ["python", "software", "repair", "semantic", "acceptance", "raw-task", "scope", "file", "content-addressed", "candidate", "verification", "semantic acceptance controller", "acceptance controller", "semantic acceptance of the repair"],
    "limitations": [
     "Extends verified V8 bounded Python repair with content-addressed repository measurement plus complete lossless obligation accounting across measured objective routes and explicit source-grounded semantic cells.",
     "Supported semantic cells are bounded to exact file content presence/absence, file existence/absence, Python parse, unchanged-path, and allowed-changed-path directives.",
@@ -7576,6 +7615,74 @@
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CHANGE-IMPACT-001.json"
    }
   },
+  "python.source.complexity.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.complexity.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_complexity",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "quadratic",
+    "complexity",
+    "time complexity",
+    "big o",
+    "loop nest",
+    "nested loops",
+    "asymptotic",
+    "cubic",
+    "quadratic time complexity"
+   ],
+   "limitations": [
+    "Measures loop nesting depth per function; a deepening chain of loops determines the class.",
+    "Reports the published class (O(n^d)) from structure; it does not benchmark."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.quadratic_complexity",
+    "python.source.complexity"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "functions_measured",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "quadratic_symbols",
+    "worst_class",
+    "worst_function",
+    "worst_nesting"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_complexity.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
   "python.source.crossfile_edit.choreograph.v1": {
    "action_template": {
     "args": {
@@ -7658,6 +7765,202 @@
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CROSSFILE-EDIT-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CROSSFILE-EDIT-001.json"
    }
+  },
+  "python.source.dead_code.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.dead_code.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_dead_code",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "never executed",
+    "dead code",
+    "dead function",
+    "unused",
+    "unreachable",
+    "uncalled",
+    "not called",
+    "never called",
+    "which function is never"
+   ],
+   "limitations": [
+    "Reports module-level functions no call edge in the tree names.",
+    "Reads the callers_of map of the verified symbol index; it does not re-parse the tree."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.never_executed",
+    "python.source.dead_code"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "considered_count",
+    "dead_symbols",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "symbol_count"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_dead_code.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.source.definition_count.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.definition_count.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_definition_count",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "count",
+    "definitions",
+    "functions",
+    "classes",
+    "how many",
+    "number of functions",
+    "count the function and class definitions"
+   ],
+   "limitations": [
+    "Counts every def, async def and class at any depth; a method is a definition.",
+    "Counts structure only; it does not say whether a definition is reachable."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.definition_count"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "class_count",
+    "definition_count",
+    "files_scanned",
+    "function_count",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_definition_count.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.source.secret_scan.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.secret_scan.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_secret_scan",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "secret",
+    "hardcoded",
+    "credential",
+    "api key",
+    "access key",
+    "aws",
+    "token",
+    "leaked",
+    "hardcoded aws access key"
+   ],
+   "limitations": [
+    "Matches published credential shapes (AWS key ids, GitHub/Stripe/Slack tokens, private key headers).",
+    "Reports file, line and signature name; the secret is redacted, never written."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.hardcoded_credential",
+    "python.source.secret_scan"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "files_scanned",
+    "finding_count",
+    "findings",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
   },
   "python.source.symbols.index.ast": {
    "action_template": {
@@ -7821,6 +8124,146 @@
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
    }
+  },
+  "python.source.taint_flow.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.taint_flow.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_taint_flow",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "taint",
+    "untrusted input",
+    "untrusted",
+    "reach",
+    "reaches",
+    "exec",
+    "eval",
+    "injection",
+    "data flow",
+    "source to sink",
+    "does untrusted input"
+   ],
+   "limitations": [
+    "Sources are the input boundary (a parameter handed to json.loads/input/sys.argv).",
+    "A no means no path this analysis can see; the report carries the edges it followed."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.taint_reaches_sink",
+    "python.source.taint_flow"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "finding",
+    "finding_count",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "reaches",
+    "sink",
+    "source_function",
+    "trace"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
+  "python.source.test_adequacy.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.source.test_adequacy.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_test_adequacy",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "would the tests catch",
+    "catch a bug",
+    "adequacy",
+    "adequate",
+    "strong enough",
+    "would the suite catch",
+    "tests catch a bug",
+    "mutation"
+   ],
+   "limitations": [
+    "Runs the suite once under sys.settrace; no coverage package and no dependency.",
+    "No is a proof (an unexecuted line cannot be caught); yes is a necessary condition only."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.suite_adequacy",
+    "python.source.test_adequacy"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "answer_scope",
+    "declared_line_count",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "suite_passed",
+    "test_root",
+    "tests_run",
+    "unexecuted_count",
+    "unexecuted_lines"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_test_adequacy.py",
+    "module": "ast",
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
   },
   "python.symbol.resolve.standalone.v1": {
    "action_template": {
@@ -8071,22 +8514,7 @@
    "cost": 2,
    "entrypoint": "run",
    "incremental_spend_usd": 0,
-   "keywords": [
-    "audit",
-    "count",
-    "failed",
-    "passed",
-    "passes",
-    "python",
-    "skipped",
-    "tests",
-    "unit",
-    "unittest",
-    "corpus",
-    "pass rate",
-    "pass_rate",
-    "rate report"
-   ],
+   "keywords": ["audit", "count", "failed", "passed", "passes", "python", "skipped", "tests", "unit", "unittest", "corpus", "pass rate", "pass_rate", "rate report", "test corpus", "audit the test corpus", "audit the tests", "auditing"],
    "platforms": [
     "linux",
     "windows",
@@ -8205,6 +8633,68 @@
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
    }
+  },
+  "python.vcs.merge_conflict.resolve.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.vcs.merge_conflict.resolve.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_merge_resolve",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "merge conflict",
+    "conflict",
+    "conflicted",
+    "conflict markers",
+    "merge",
+    "resolve the conflict",
+    "keep both changes",
+    "both sides",
+    "unmerged"
+   ],
+   "limitations": [
+    "Resolves a TWO-SIDED conflict as the union of its sides, in order, when the sentence says both changes are kept.",
+    "Refuses a diff3 base section (|||||||): there the union is not stated and is not guessed.",
+    "Kept only if no marker survives, the file parses and the suite is green."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.vcs.merge_conflict.resolved",
+    "python.source.conflict.free"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "resolved",
+    "resolved_file_count",
+    "files_edited",
+    "suite_passed",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py",
+    "type": "brain_native_deterministic_composition"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
   },
   "shell.command.run": {
    "action_template": {
@@ -8850,10 +9340,13 @@
    "action_template": {
     "args": {
      "capability_id": "software.review.gate.composer.v1",
+     "anchor_path": "${input.anchor_path}",
+     "diff_path": "${input.diff_path}",
+     "bench_path": "${input.bench_path}",
      "output_path": "${input.output_path}"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "verified",
      "type": "field_equals",
      "value": true
     },
@@ -8877,7 +9370,7 @@
     "mutation"
    ],
    "limitations": [
-    "Typed 6-gate fan-in after choreography: static+type+coverage+perf+security+mutation must all PASS. Fixes requires=[] fail-open. Deterministic 0 model $0."
+    "Executes six existing Python diff gates in owned scratch paths; full acceptance requires complete PASS outcomes bound to one diff. Needs an anchor, applicable Python diff, benchmark and installed analyzer toolchain. Timing is not deterministic; scratch copies are not an OS sandbox."
    ],
    "platforms": [
     "linux",

@@ -1,0 +1,382 @@
+{
+ "action_id": "THE_FAILURES_ARE_FIVE_DEFECTS_NOT_EIGHTEEN_GAPS_V1_20261031_V1",
+ "action_intent_id": "THE_FAILURES_ARE_FIVE_DEFECTS_NOT_EIGHTEEN_GAPS_V1_20261031_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Revision 10 of the census, plus the referee repair that makes it readable. The new section lists all 28 tasks with the capability that ACTUALLY answered each and the defect that answer exposes: 10 pass, 18 fail, and the 18 are 5 defects, not 18 missing capabilities. P1 a shell command is invented from a verb, with no check that the verb's OBJECT is something a command can act on -- 5 rows including the only false pass, and the reason the already-written SQL adapter is withheld ('Remove the SQL injection' becomes `rm <db.py>`). P2 the request's mode (ask vs change) is not a routing key -- 5 rows answered by an analyser. P3 the owner exists and declares an artifact no sentence can state -- 4 rows. P4 a stub reports verified and edits nothing -- 1 row. P5 no owner -- 3 rows. Also measured: routing costs 99% of every wall clock (a 0.2-2 ms adapter answers in 150-450 ms); one task produced no verdict at all in 180 s; and three fixtures (fx_move, fx_deadcode, fx_signature) shipped tests that import a class the code never defines, so their baseline suite was red before any edit and a perfect repair scored the same as a broken one. Those three are repaired here and the census is unchanged at 10/28 -- the rows still fail, now for the real reason. No capability is added and no score is claimed.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/bound_capabilities/python_source_dead_code.py",
+   "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+   "canonical/runtime/bound_capabilities/python_source_complexity.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/tests/test_a_question_about_the_tree_is_answered_by_the_tree_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The census counted passes and failures but never recorded WHICH row answered. Without that column the 18 failures looked like 18 capability gaps, and the fix order put 'build more owners' first -- while 15 of the 18 are rows that exist and lose, rows that cannot bind, or a row that lies. The document was prescribing the expensive fix for the cheap problem.",
+ "canonical_base_commit": "7ad341c64f5c432ba9f82ec24278d8f82dfdccee",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The census counted passes and failures but never recorded WHICH row answered. Without that column the 18 failures looked like 18 capability gaps, and the fix order put 'build more owners' first -- while 15 of the 18 are rows that exist and lose, rows that cannot bind, or a row that lies. The document was prescribing the expensive fix for the cheap problem.",
+ "date": "2026-10-31",
+ "expected_parent_change": "The census answers its own question for the first time: every one of the 28 tasks is listed with the row that actually answered it, and the 18 failures collapse into five defects -- a shell command invented from a verb (5), mode not being a routing key (5), an owner whose inputs no sentence can state (4), a stub that reports verified (1), and no owner (3). Three fixtures that could not pass whoever fixed the code are repaired, so a failure now means what it says.",
+ "expected_parent_frontier_change": "The census answers its own question for the first time: every one of the 28 tasks is listed with the row that actually answered it, and the 18 failures collapse into five defects -- a shell command invented from a verb (5), mode not being a routing key (5), an owner whose inputs no sentence can state (4), a stub that reports verified (1), and no owner (3). Three fixtures that could not pass whoever fixed the code are repaired, so a failure now means what it says.",
+ "explicit_user_authorization": "Owner standing directive (2026-10-29/30): every listed problem already has a solution somewhere in the repository, its hidden tools or published research; do the optimal fix in the fastest way, only the right way, with no new primitive where an existing mechanism can be wired.",
+ "falsification_condition": "FALSIFIED if any row in the 0.1 table disagrees with a fresh probe run, if the three repaired fixtures still have a red baseline, if the score changes because a fixture was repaired, or if a defect count in 2.0 does not equal the failures it lists.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intent": "Answer 'what are all the problems' with a measurement rather than an inventory: every task, the row that answered it, the defect, and the count per defect.",
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "The refusal boundary is substrate for every coding obligation: a machine that cannot be trusted about what it changed cannot be trusted about what it fixed. It discharges no obligation alone.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Census unchanged at 10/28, tiers 3/10, so no score is claimed by this PR. Three fixtures now have a green baseline (fx_move, fx_deadcode, fx_signature) where before them a correct fix could not pass; the three rows still fail and now fail for the routed reason. 427 verified rows, 133 registered, 114 routable.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": "The rows' own `provides` tokens as the vocabulary; _close_observations, the existing 'called at every exit' choke point; _fail; the bound registry already loaded by the door; composer_route.route's chain.",
+ "progress_evidence_paths": [
+  "HARDCORE_SWE_ALL_PROBLEMS_20261030_V1.md",
+  "hardcore_swe_surface_probe_20261030.py",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "7ad341c64f5c432ba9f82ec24278d8f82dfdccee",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "AN_INVENTORY_READ_AS_A_DIAGNOSIS__the table shows 15 of 18 failures are not missing rows",
+   "A_BASELINE_RED_FIXTURE_READ_AS_A_FAILED_REPAIR__three repaired"
+  ],
+  "expected_parent_level_state_change": "The census answers its own question for the first time: every one of the 28 tasks is listed with the row that actually answered it, and the 18 failures collapse into five defects -- a shell command invented from a verb (5), mode not being a routing key (5), an owner whose inputs no sentence can state (4), a stub that reports verified (1), and no owner (3). Three fixtures that could not pass whoever fixed the code are repaired, so a failure now means what it says.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "TRUST_THE_HEADLINE__OR_COUNT_FAMILIES_WITHOUT_RUNNING_THEM",
+   "intrinsic_or_path_specific": "Intrinsic: the answering row is a property of this machine and no outside source supplies it.",
+   "surviving_causal_blocker": "Nothing else records selection, so without this column the fix order is a guess."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "no capability work in this PR; three broken fixtures were repaired instead.",
+   "existing_inherited_routes_checked": "the probe JSON already carried ok, reached, status and ms for every row; the document printed only the score.",
+   "external_existing_routes_checked": "none needed: this is a measurement of this tree by this tree.",
+   "surviving_gap": "the five defects in 2.0 remain open, in the order 4 lists."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "A FAILURE COUNT PRESENTED AS A GAP COUNT",
+    "A FIX ORDER ARGUED FROM THE HEADLINE INSTEAD OF THE TABLE",
+    "A BENCHMARK WHOSE BASELINE IS ALREADY RED"
+   ],
+   "real_outcome": "Census unchanged at 10/28, tiers 3/10, so no score is claimed by this PR. Three fixtures now have a green baseline (fx_move, fx_deadcode, fx_signature) where before them a correct fix could not pass; the three rows still fail and now fail for the routed reason. 427 verified rows, 133 registered, 114 routable.",
+   "surviving_necessity": "Every number in the table comes from one probe run on 7ad341c; the defect counts are a partition of the 18 failures and sum to 18."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "no capability touched.",
+   "downstream_work_to_delete_or_supersede": "revision 9's fix order, which put 'build the owners' first.",
+   "fresh_reuse_plan": "the next PR should start from 4\u2460 (object-checked command inference) because 3 rows are already written and measured."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "one probe run supplies every number in the table.",
+   "search_stop_decision": "Stop at publication: the measurement is complete and no score moved."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "implementation_still_necessary_reason": "The data was already in the probe output; the repair is a projection and three fixture definitions.",
+   "losing_routes_reason": "Building owners first adds rows to a race 15 failures already lose; word suppression was tried in rev 7 and moved the false match rather than removing it.",
+   "routes_ranked": [
+    "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM__SELECTED",
+    "BUILD_MORE_OWNERS_FIRST",
+    "FIX_THE_RANKING_HEURISTIC_BY_SUPPRESSING_A_WORD"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The table is regenerated from one probe run; the fixture repair is checked by running each baseline suite green."
+  },
+  "real_outcome": "Census unchanged at 10/28, tiers 3/10, so no score is claimed by this PR. Three fixtures now have a green baseline (fx_move, fx_deadcode, fx_signature) where before them a correct fix could not pass; the three rows still fail and now fail for the routed reason. 427 verified rows, 133 registered, 114 routable.",
+  "required_capability": "RECORD_WHICH_ROW_ANSWERED_AND_COUNT_DEFECTS_NOT_GAPS",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "BROAD_SUITE_OF_REFACTORS",
+      "CORRECTNESS": "GOOD_BUT_CONFIG_DEPENDENT",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REFORMATS_BY_CONFIG",
+      "VERIFIABILITY": "NEEDS_PROJECT_DISCIPLINE",
+      "WALL_CLOCK": "SLOWER_SETUP"
+     },
+     "evidence": [
+      "rope operates on ropeproject configuration and its output formatting varies with user config, which breaks the adapter's byte-preservation law"
+     ],
+     "qualification_evidence": [
+      "pypi project page for rope read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ROPE_EXTERNAL_REFACTOR_ENGINE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "FAR_BEYOND_THE_NEED",
+      "CORRECTNESS": "HIGH",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REPRINT_VARIES",
+      "VERIFIABILITY": "BYTE_PRESERVATION_NOT_GUARANTEED",
+      "WALL_CLOCK": "PARSER_DEPENDENCY_AND_REPRINT"
+     },
+     "evidence": [
+      "libcst reprints the module from its own tree, so comments and formatting are no longer byte-identical"
+     ],
+     "qualification_evidence": [
+      "pypi project page for libcst read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LIBCST_CONCRETE_SYNTAX_REWRITE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "TRIVIAL",
+      "CORRECTNESS": "WRONG_ON_SHADOWING_AND_ON_COMMENTS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "SILENTLY_BREAKS",
+      "VERIFIABILITY": "NO_BINDING_EVIDENCE",
+      "WALL_CLOCK": "FASTEST"
+     },
+     "evidence": [
+      "a textual replace edits strings, comments and shadowed scopes; the adapter's own SPAN_INTEGRITY law exists to prevent exactly that"
+     ],
+     "qualification_evidence": [
+      "measured on this tree: the fixture's docstrings and `subtotal_cents` carriers must survive"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
+    }
+   ],
+   "checked_at_utc": "2026-10-31T08:04:16Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "AN_INVENTORY_PRESENTED_AS_A_DIAGNOSIS",
+   "max_age_hours": 24,
+   "negative_search_summary": "No new mechanism: the probe already emitted the answering row and the document discarded it.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python rename symbol across modules ast span edit"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope libcst refactoring library python"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "resolve module identity from import statement path suffix"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "libcst rope latest release python 3.11"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM__SELECTED",
+    "BUILD_MORE_OWNERS_FIRST",
+    "FIX_THE_RANKING_HEURISTIC_BY_SUPPRESSING_A_WORD"
+   ],
+   "selected_route": "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM",
+   "selected_route_checked_at_utc": "2026-10-31T08:04:16Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-31T08:04:16Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
+      "evidence": [
+       "DIRECT_PROBE: 3.11 interpreter parsed the adapter, the fixture tree and 2254 runtime modules this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "hardcore_swe_surface_probe_20261030.py + HARDCORE_SWE_ALL_PROBLEMS_20261030_V1.md (in-tree)",
+      "evidence": [
+       "DIRECT_PROBE: 28 rows, 10 pass, 18 fail, defect counts sum to 18; six fixture baselines green"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM",
+    "status": "READY"
+   },
+   "selected_surviving_route": "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "the probe's JSON already carries ok/reached/status/ms per row",
+     "canonical/runtime/bound_capabilities/* already declare provides/result_fields, which is what a mode key would read"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "none: the subject is this tree"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "none consulted for this measurement"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "docs.python.org/3/library/ast.html -- span edits used by the two shipped repair rows"
+    ]
+   },
+   "stop_condition": "Ship only what is measured here: the three declarations, file identity, the residual law and the honest contract field. Do not add per-name lists, do not widen what may run (a referent is never defaulted), and do not touch the remaining tiers' capabilities until their own oracles are built.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
+  },
+  "routes_considered": [
+   "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM__SELECTED",
+   "BUILD_MORE_OWNERS_FIRST",
+   "FIX_THE_RANKING_HEURISTIC_BY_SUPPRESSING_A_WORD"
+  ],
+  "selected_surviving_route": "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM",
+  "stop_condition": "Publish the measurement and repair the referee. Do not add a capability, do not reorder the fix plan without a count, and do not claim a pass this document did not earn.",
+  "why_selected_route_is_fastest_sufficient": "The probe already computed the answering capability for all 28 rows; the document simply did not print it. One run produces the whole table, and the projection from it (5 defects, counts sum to 18) is arithmetic anyone can re-derive."
+ },
+ "resolution": "Census revision 10 (new sections 0.1, 2.0, 3, and a reordered fix order) and three repaired fixtures. No adapter, no registry row, no capability claim.",
+ "route_id": "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "MEASURE_THE_28_ROWS_INSTEAD_OF_COUNTING_THEM",
+ "stop_condition": "Publish the measurement and repair the referee. Do not add a capability, do not reorder the fix plan without a count, and do not claim a pass this document did not earn.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "DIRECT_PROBE__28-row table regenerated from one run on 7ad341c; score unchanged at 10/28; three baselines green.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "09e51c4879c4c5b7c0c3cd527c22cd7365bf868c",
+     "path": "hardcore_swe_surface_probe_20261030.py"
+    },
+    {
+     "git_blob_sha": "d9f693ca41428a87e0de31d919692314479f7446",
+     "path": "HARDCORE_SWE_ALL_PROBLEMS_20261030_V1.md"
+    }
+   ],
+   "decisive_question": "Are the 18 failures missing capabilities, or rows that lose a selection race?",
+   "falsifier_id": "F_A_GAP_INVENTORY_THAT_HIDES_A_ROUTING_DEFECT_20261031",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "P_COUNT_DEFECTS_BY_THE_ROW_THAT_ANSWERED_20261031"
+  }
+ },
+ "weakens_existing_guard": false
+}

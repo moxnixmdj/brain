@@ -65,9 +65,13 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise GuidedRepairError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
  env=_PATCH._source_env(src)
- tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+ tests=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
+ if not tests:
+  from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+  try:tests=discover_test_files(src)
+  except FileNotFoundError:raise GuidedRepairError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  if not tests:raise GuidedRepairError("TEST_PATHS_REQUIRED")
- argv=[str(x) for x in (args.get("test_argv") or _PATCH.suite_argv(sys.executable,*tests))]
+ argv=_PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*tests)
  timeout=max(1,min(int(args.get("timeout_s",20)),120))
  import time as _t
  _wb=args.get("wall_budget_s")

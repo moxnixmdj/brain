@@ -18,6 +18,10 @@ not about the goal:
                                user expects) but the selected capability has no output path
                                input, so it cannot produce it
   R3  WEAK_EVIDENCE            at most one matched prose token: one word is never a goal
+  R10 SOFTWARE_IMPLEMENTATION_EFFECT_UNSERVED
+                               an explicit implementation request cannot dispatch a
+                               report-only analysis route. This is a necessary
+                               contract check, not proof of feature correctness.
   R5  TOOL_TRUTH               after execution, a tool result saying ``pass: false`` or a
                                non-success status (OPEN__, UNRESOLVED, FAIL...) can never
                                surface as an overall PASS
@@ -158,6 +162,11 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     entry = registry.get(selected)
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
+    from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+    effect_error = implementation_effect_error(goal, [selected], registry)
+    if effect_error:
+        return {"schema": SCHEMA, "admitted": False, "rule": effect_error,
+                "compiler_mode": mode, "selected_capability": selected}
     # A sentence that states a settled command line states a COMMAND, and a
     # capability that cannot run a command line cannot answer it -- however many
     # of the sentence's words its keywords happen to contain.  The retrieval
@@ -421,6 +430,11 @@ def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any]
         entry = registry.get(cid)
         if not isinstance(entry, Mapping):
             return {**base, "admitted": False, "rule": "DAG_CAPABILITY_NOT_ADMISSIBLE", "dag_steps": rows,
+                    "failed_capability_id": cid}
+        from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+        effect_error = implementation_effect_error(clause, [cid], registry)
+        if effect_error:
+            return {**base, "admitted": False, "rule": effect_error,
                     "failed_capability_id": cid}
         score, _specificity, evidence = front.score_capability(clause, cid, entry)
         matched = set(evidence.get("matched_provides") or []) | set(evidence.get("matched_identity") or []) | set(evidence.get("matched_keywords") or [])
@@ -718,6 +732,22 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
     call_args = dict(action.get("args") or {})
     call_args.pop("capability_id", None)
+    # Write authority, checked BEFORE the adapter runs (measured 2026-10-29).
+    # Every software-engineering row declares `output_path` and `source_root`; a
+    # goal that names no destination therefore had exactly one stated path in
+    # hand and the report was bound onto the source.  "Fix the ZeroDivisionError
+    # in app/utils.py" replaced 14 lines of source with a parse report (3/3), and
+    # a READ-ONLY question replaced app/service.py with 358 lines of JSON.  This
+    # is the single function every local adapter invocation passes through, so
+    # the rule is enforced once for the door, the composer and every composed
+    # step.  LocalExecutionFailure keeps it a typed, closed refusal.
+    try:
+        from canonical.runtime import write_authority_v1 as _write_authority
+        _write_authority.check(ROOT, call_args, cid)
+    except LocalExecutionFailure:
+        raise
+    except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
+        raise LocalExecutionFailure(str(exc)) from exc
     result = fn(call_args, ROOT)
     if not isinstance(result, dict):
         raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
@@ -1069,6 +1099,21 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
     if controller_error == "CONTROL_PLAN_INVALID":
         return _fail(task_id, "FAIL__COMPILED_CONTROL_PLAN_INVALID", "LIVE_RUNTIME_COMPOSITION_CONTRACT_INVALID", started, compiler_mode=compiled.get("compiler_mode"))
     if controller_error is not None:
+        # A deliberate refusal is not a controller fault.  Measured on 88bb18bb:
+        # the binder aimed an analyzer's report at the very file it was told to
+        # analyse, write authority stopped it, and the caller was told
+        # FAIL__LIVE_CONTROLLER_EXECUTION -- "execution or verification failure",
+        # which blames the controller and invites a retry of the same action.
+        # The reason string already names the rule, so the status must name it
+        # too: the whole point of refusing is that the caller can tell what
+        # happened without parsing prose.  Same shape as
+        # FAIL_CLOSED__CAPABILITY_EXITED_PROCESS above, which exists for exactly
+        # this reason -- a refusal that is not a fault deserves its own name.
+        if "OUTPUT_OVERWRITES_A_STATED_SOURCE" in str(controller_error):
+            return _fail(task_id, "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
+                         "AN_ACTION_WOULD_OVERWRITE_A_FILE_IT_READS", started, executed=True,
+                         compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"),
+                         reason=controller_error)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=True,
                      compiled_capability_id=selected or None, compiler_mode=compiled.get("compiler_mode"), reason=controller_error)
     passed = _controller_passed(controller)
@@ -1152,6 +1197,19 @@ def promised_artifact_class(errors: list[str]) -> str:
 
 
 _REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
+# The same promise, in the verbs an ordinary edit request uses.  "Repair X" was
+# only ever one spelling of "make X different"; "Add a parameter to X and update
+# every caller" is the same demand and was not read as one, so the door reported
+# PASS after running a symbol INDEXER over a byte-identical tree.  Measured on
+# 32a73a0: `add_parameter` passed while the fixture's `line_total(item)` still
+# took one argument, so the call the sentence described raised TypeError.
+#
+# Deliberately not the destructive verbs: "delete X.py" promises X is GONE, and
+# "still readable and different" is the wrong test for it.  Removal is already
+# covered by the promised-artifact law and by NAMED_INPUT_REMOVED.
+_EDIT_PROMISE_RE = re.compile(
+    r"\b(?:repair|fix|patch|correct|add|insert|update|modify|replace|rewrite|"
+    r"refactor|extract|inline|rename|split|strip)\b", re.IGNORECASE)
 # "a measured acceptance repair report" is a noun phrase naming an artifact,
 # not an instruction to mutate a source file.  A file actually named report.py
 # is still a repair target: the negative lookahead keeps that distinction.
@@ -1188,7 +1246,7 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
-    for m in _REPAIR_VERB_RE.finditer(text):
+    for m in _EDIT_PROMISE_RE.finditer(text):
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -1212,7 +1270,7 @@ def _promised_source_files(goal: str) -> list[str]:
                 if at >= 0 and (best_at is None or at < best_at):
                     best_at = at
                     best = raw
-        if best is None or best in out:
+        if best is None or best in out or str(best) in _destructive_targets(text):
             continue
         # A file inside a stated source ROOT is covered by the root rule below.  The
         # first .py after the verb in "Repair the python source root <dir> ... with
@@ -1259,7 +1317,7 @@ def _promised_source_roots(goal: str) -> list[str]:
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
     out = []
-    for m in _REPAIR_VERB_RE.finditer(text):
+    for m in _EDIT_PROMISE_RE.finditer(text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -1758,6 +1816,42 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     return composed
 
 
+def _states_an_executable_form(goal: str, admission: Mapping[str, Any] | None = None) -> bool:
+    """Does the sentence itself state the form the work must take?
+
+    This is the one condition under which a chain may answer a refused
+    sentence.  A chain is a SUBSTITUTE for a capability, and the door already
+    holds that a substitute is only honest when the sentence stated what to
+    execute: the command line, or a payload together with where it goes.  Both
+    are re-derived here from the sentence, independently of the chain, so the
+    chain is checked against the request rather than trusted for matching it.
+
+    The rule was written for the route-admission branch and never applied to
+    the other two places composition runs, so the branch that answers a
+    compiler refusal was strictly more permissive than the branch that answers
+    a refused route.  Measured on 32a73a0 over the 28-row surface census: 19
+    sentences reached the composer, 18 of them had been refused a moment
+    earlier, and every one of those 18 ended in a status naming a failure of
+    the SUBSTITUTE's promise -- "PROMISED_ARTIFACT_MISSING" for a path the
+    sentence never asked for -- instead of the refusal that had really
+    happened.  None of the 18 was a pass, so nothing is lost by asking the
+    sentence first.
+
+    "Check the file X" states no command line and no payload, so it keeps
+    failing closed for the reason it always has (#6119).
+    """
+    try:
+        if composer_route.extract_argv(goal) is not None:
+            return True
+        if (composer_route.extract_content(goal) is not None
+                and composer_route.extract_content_destination(goal) is not None):
+            return True
+        return bool((admission or {}).get("typed_binding_refused") is True
+                    and composer_route.extract_content(goal) is not None)
+    except Exception:  # noqa: BLE001 - an unreadable sentence is not grounded
+        return False
+
+
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
     """Close a goal by chaining capabilities, when no single one matches.
 
@@ -2013,7 +2107,12 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # _execute; this branch did not.
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
-        composed = _try_composed(task_id, goal, started)
+        # A refusal is terminal unless the sentence states the executable form.
+        # This branch used to compose unconditionally, which made it the one
+        # place a refusal could be answered by a substitute -- see
+        # _states_an_executable_form for the measurement.
+        composed = (_try_composed(task_id, goal, started)
+                    if _states_an_executable_form(gap_normalized) else None)
         if composed is not None:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
@@ -2118,35 +2217,10 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # #6119 hazard stays closed for the reason it always has: "Check the
         # file X" states no command line, so extract_argv is None and it keeps
         # failing closed.
-        stated_a_command_line = composer_route.extract_argv(normalized) is not None
-        # The symmetric case, measured.  A sentence can state BOTH a payload and
-        # the path it goes to, and still be refused for a reason that has
-        # nothing to do with the binder -- so this gate, which required
-        # typed_binding_refused, never fired and composition never ran:
-        #
-        #   "Write the text 'PROJECT BRAIN' to the target file X"
-        #       -> FAIL_CLOSED__ROUTE_ADMISSION_REJECTED, zero steps, no verdict
-        #
-        # while the same sentence phrased "to the file X" ran and was verified.
-        # The payload and the destination are both re-derived from the sentence
-        # here, exactly as the command line is, and both are then independently
-        # checked: _payload_runs_to_the_destination refuses a payload the
-        # sentence does not actually run to the destination, and the written
-        # bytes are compared against the sentence rather than the argument.  So
-        # a payload with a stated destination is as grounded as a stated command
-        # line, and refusing it fails a request the machine can do.
-        #
-        # A payload with NO stated destination is deliberately not enough --
-        # that is the #6119 shape, where the only path in the sentence becomes
-        # the destination by default and a file is overwritten by a report about
-        # it.  "Check the file X" states no payload at all, so it keeps failing
-        # closed for the reason it always has.
-        states_a_payload_and_its_destination = (
-            composer_route.extract_content(normalized) is not None
-            and composer_route.extract_content_destination(normalized) is not None)
-        if (stated_a_command_line or states_a_payload_and_its_destination
-                or (admission.get("typed_binding_refused") is True
-                    and composer_route.extract_content(normalized) is not None)):
+        # The same question, now asked once in one place: the two assignments
+        # that used to stand here were this predicate written inline, which is
+        # how the other two composition sites came to be more permissive.
+        if _states_an_executable_form(normalized, admission):
             composed = _try_composed(task_id, goal, started)
             if composed is not None:
                 return _close_observations(
@@ -2193,7 +2267,15 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # matters -- and it is also the moment to try something else, rather
         # than reporting a gap while a chain of capabilities could have
         # produced the thing. Composition is tried here, on the evidence.
-        composed = _try_composed(task_id, goal, started)
+        #
+        # Asked the same question as every other composition site: a run that
+        # already executed is not re-answered by a second chain unless the
+        # sentence states the form to execute.  Without it, a missing promise
+        # bought a fresh dispatch of the same sentence -- work stacked on work,
+        # and the first run's honest failure replaced by the second run's
+        # unrelated status.
+        composed = (_try_composed(task_id, goal, started)
+                    if _states_an_executable_form(normalized, admission) else None)
         if composed is not None:
             composed["memory_recalled"] = [
                 {"id": r.get("id"), "content": r.get("content"),

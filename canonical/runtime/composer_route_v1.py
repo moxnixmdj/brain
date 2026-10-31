@@ -429,7 +429,16 @@ _NUM = re.compile(r"-?\d+(?:\.\d+)?")
 # that already found its paths can change.  The same idiom this file already uses
 # for _CONTENT_FALLBACK: a fallback that is never reached first cannot alter a
 # sentence that already worked.
-_DIRPATH = re.compile(r"\b(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_-]+(?![.\w-])")
+# `_EXT` already consumes a leading slash, because "/" is inside its character
+# class, so an absolute FILE survives extraction intact.  This class deliberately
+# excludes "/" -- a run of "segment/" -- so the same absolute DIRECTORY came out
+# missing its leading slash: "/home/user/brain/canonical/x" was read as
+# "home/user/brain/canonical/x", which is a repository-relative path that points
+# nowhere on disk.  The command then ran with cwd at the repository root and
+# reported "No such file or directory" for a directory that exists.  Restoring
+# the one character `_EXT` already keeps makes the two agree, and it is the
+# token the sentence actually said.
+_DIRPATH = re.compile(r"/?\b(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_-]+(?![.\w-])")
 
 
 def extract_paths(text: str) -> list[str]:
@@ -1075,8 +1084,18 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # bound `ls` on a file.
     (r"\bbase ?name\b", "basename", _no_flags, 1),
     (r"\b(?:directory name|parent directory)\b", "dirname", _no_flags, 1),
-    (r"\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b"
-     r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b", "ls", _no_flags, 1),
+    # A sentence that asks which files CONTAIN some stated text is a narrower
+    # claim than a general listing of a directory, so by this table's own order
+    # rule it must not be caught here.  "Show which files in the directory D
+    # contain 'gamma'" bound `ls D` and was certified pass=True with a list of
+    # names -- a perfectly reproducible answer to a question nobody asked, since
+    # not one of those names says whether the file holds the text.  The content
+    # words are the evidence; "the files named '*.log' in D" states none, so the
+    # recursive walk that sentence binds is untouched.
+    (r"(?![^\n]*\b(?:contain|contains|containing|contained|hold|holds|holding"
+     r"|include|includes|including)\b)"
+     r"(?:\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b"
+     r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b)", "ls", _no_flags, 1),
     (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
     (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
     # The pattern is deliberately narrow.  The PROGRAM is called `file`, and the
@@ -1183,6 +1202,28 @@ _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
     (r"\bregex\b|\bregular expression\b|\bextended (?:pattern|regex|search)\b"
      r"|\bpattern\b[^\n]{0,30}?\b(?:match|search)\b", "egrep"),
     (r"\b(?:grep|search|find)\b", "grep"),
+    # "Which files in the directory D contain 'gamma'" is the same question as
+    # "Search the directory D for 'gamma'" written without a search verb, and two
+    # ways of writing one question must bind one operation.  It sits after the
+    # fgrep and egrep rows on purpose: a sentence that calls its own text exact,
+    # literal or a regular expression has said which program answers, and that
+    # evidence outranks the shape of the question.
+    # Both arms key on FILES as the noun the sentence asks about, never on a
+    # content word alone: "How many lines in the file X contain 'gamma'" holds
+    # the words "file" and "contain" too, and a row keyed on those two stole the
+    # sentence away from the count it was measured to bind.  Measured both ways.
+    # The `^` is load-bearing.  A row pattern is consumed by `re.search`, which
+    # tries every start position, so a bare leading lookahead only guards the
+    # position the match happens to begin at: "(?!...lines...)...file...contain"
+    # still matched "Which lines in the file X contain 'gamma'" by starting at the
+    # word "file", because `files?` matches the singular.  Anchored at the start,
+    # the lookahead reads the whole sentence and the asked noun decides: FILES
+    # reaches grep, LINES falls through to the rule that prints lines and a COUNT
+    # falls through to the rule that counts.  Measured all three.
+    (r"^(?![^\n]*\b(?:which|what|how many|show|list|print|count|number)\b"
+     r"[^\n]{0,30}?\blines?\b)"
+     r"[^\n]*\bfiles?\b[^\n]{0,40}?\b(?:contain|contains|containing|hold|holds"
+     r"|holding|include|includes|including)\b", "grep"),
 )
 
 _COUNT_RE = re.compile(r"\bfirst\s+(\d+)\b|\b(\d+)\s+lines?\b")
@@ -1692,6 +1733,26 @@ _DIRECTORY_REQUEST = re.compile(r"\bdirector(?:y|ies)\b|\bfolders?\b")
 _RECURSIVE_REQUEST = re.compile(
     r"\bfiles?\b[^\n]{0,20}?\bin the\b[^\n]{0,20}?\bdirector(?:y|ies)\b"
     r"|\ball the files\b|\bevery file\b|\beach file\b")
+# "Which files hold the text" asks for NAMES; "which lines hold the text" asks
+# for the lines themselves.  `grep -r` prints "path:line:text", which answers the
+# second and only implies the first, so a question about files gets `-l`, which
+# is grep's own answer to exactly that question.  Deliberately keyed on the noun
+# the sentence asks about, never on the verb, so "Search the directory D for
+# 'gamma'" keeps printing the lines it has always printed.
+_ASKS_WHICH_FILES = re.compile(
+    r"\b(?:which|what)\b[^\n]{0,30}?\bfiles?\b"
+    r"|\b(?:list|show|print)\b[^\n]{0,30}?\bfiles?\b[^\n]{0,40}?\b(?:contain|contains"
+    r"|containing|hold|holds|holding|include|includes|including)\b")
+# The exclusion is the part that makes `-l` safe, and it is a SEPARATE search on
+# the whole sentence rather than a lookahead inside the one above: a lookahead in
+# a `re.search` pattern is evaluated at whatever position the match happens to
+# start from, so "(?!...lines...)...file...contain" still matched "Which lines in
+# the file X contain 'gamma'" by starting at the word "file".  Measured: that
+# sentence bound `grep -l` and answered with the file's name, certified all the
+# same, having lost the one thing it was asked for.
+_ASKS_ABOUT_LINES = re.compile(
+    r"\b(?:which|what|how many|show|list|print|count|number)\b"
+    r"[^\n]{0,30}?\blines?\b")
 _FIND_SUFFIX = re.compile(r"\bend(?:s|ing)?\s+with\s+([^\s,]+)")
 _FIND_PREFIX = re.compile(r"\b(?:start|begin)(?:s|ing)?\s+with\s+([^\s,]+)")
 # "all the .log files in the directory D" names a SET of files by pattern, which
@@ -2340,15 +2401,49 @@ def _prose_argv(sentence: str) -> list[str] | None:
         # it, which is the same evidence that made it the pattern.
         operand_paths = paths
         if value:
-            operand_paths = extract_paths(str(sentence).replace(str(value), " "))
+            # Mask the value where the CALLER delimited it, not every place its
+            # text happens to occur.  Replacing the bare text also blanks it
+            # inside a path that contains the word being searched, and the path
+            # then no longer exists: "Search the file /repo/gammaq/x.txt for
+            # 'gamma'" ran on "/repo/ q/x.txt" and failed with "No such file or
+            # directory", while "which files in /repo/gammaq contain 'gamma'"
+            # silently searched /repo instead -- one directory up, over the whole
+            # tree -- and was certified all the same.  A repository whose own
+            # name is the word under search hits this on the first sentence.
+            # When the sentence stated no delimited value there is nothing
+            # safer to remove, so the bare text is masked exactly as before.
+            masked = str(sentence)
+            delimited = False
+            for quoted in ("'%s'" % value, '"%s"' % value):
+                if quoted in masked:
+                    masked = masked.replace(quoted, " ")
+                    delimited = True
+            if not delimited:
+                masked = masked.replace(str(value), " ")
+            operand_paths = extract_paths(masked)
         if not value or len(operand_paths) != 1:
             # A pattern the sentence did not state, or more than one file to
             # search in: refuse rather than complete the command by guessing.
             return None
         # "Search the files in the directory X for ..." is a search of a tree,
         # and `grep` on a directory without -r is an error, not an answer.
-        extra = ["-r"] if _RECURSIVE_REQUEST.search(text) else []
-        return [program, *extra, str(value), str(operand_paths[0])]
+        #
+        # The sentence's own words are only half the evidence.  "Search the
+        # directory D for 'gamma'" never says "files ... in the ... directory",
+        # so the phrase rule above missed it and grep ran on a folder:
+        # "grep: <D>: Is a directory", reported as CLI_COMMAND_FAILED for a
+        # sentence the machine understood perfectly.  Whether the operand IS a
+        # directory is a fact about the disk, and `_is_directory_in_repo` already
+        # answers it for the slots that need the same fact.  Asking the disk
+        # cannot over-reach the way a phrase can: a single file is never a
+        # directory, so nothing that already searched one file changes.
+        target = str(operand_paths[0])
+        extra = ["-r"] if (
+            _RECURSIVE_REQUEST.search(text) or _is_directory_in_repo(target)
+        ) else []
+        if _ASKS_WHICH_FILES.search(text) and not _ASKS_ABOUT_LINES.search(text):
+            extra.append("-l")
+        return [program, *extra, str(value), target]
     # A sentence that asks for ONE line, for a COUNT of the lines holding some
     # text, or for the NUMBER of a line, names a part of the file rather than
     # the file.  Falling through to `cat` or `wc -l` then answers a different
@@ -3348,6 +3443,11 @@ def execute_chain(chain: Sequence[str], goal: str,
     from canonical.runtime import live_brain_route_admission_v1 as ra
 
     reg = registry if registry is not None else composer.load_registry()
+    from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+    effect_error = implementation_effect_error(goal, chain, reg)
+    if effect_error:
+        return {"schema": SCHEMA, "pass": False, "goal": goal,
+                "status": "FAIL_CLOSED__" + effect_error, "steps": []}
     steps: list[dict[str, Any]] = []
     produced: dict[str, Any] = {}
     created_paths: list[str] = []

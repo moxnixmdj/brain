@@ -79,10 +79,58 @@ def _changed_inputs(repo: pathlib.Path, args: dict[str, Any]) -> dict[str, list[
     return {path: [] for path in sorted(set(changed_paths))}
 
 
+def _derived_index(repo: pathlib.Path, args: dict[str, Any],
+                   output: pathlib.Path) -> pathlib.Path:
+    """Build the index this capability declares it requires, from the tree.
+
+    ``REQUIRES`` above already names ``code.symbols.tree_sitter.indexed``, and
+    ``code.index.tree_sitter.incremental.v1`` already provides it.  The
+    dependency was declared and never executed, so ``index_path`` was a required
+    input that no sentence can state -- which is not a caller obligation.  When
+    the adapter can obtain the data from data it already has, the input is
+    derivable and must be derived; that is the same rule by which ``test_argv``
+    is the adapter's own ``suite_argv`` rather than something the sentence
+    invents.
+
+    The scope is the smallest directory containing every changed file.  That is
+    not a guess: ``run`` below raises ``CHANGED_FILE_NOT_INDEXED`` for any
+    changed file the index does not carry, so a smaller tree cannot work, and a
+    stated ``source_root`` always wins over it.
+    """
+    from canonical.runtime.bound_capabilities import code_tree_sitter_incremental_index_v1 as _index
+
+    stated_root = args.get("source_root")
+    if stated_root:
+        source_root = str(stated_root)
+    else:
+        changed = _changed_inputs(repo, args)
+        parents = {str(pathlib.PurePosixPath(p).parent) for p in changed}
+        source_root = "."
+        if parents:
+            parts = [p.split("/") for p in sorted(parents)]
+            common: list[str] = []
+            for group in zip(*parts):
+                if len(set(group)) != 1:
+                    break
+                common.append(group[0])
+            source_root = "/".join(common) or "."
+    index_path = output.parent / (".impact_index_" + output.name)
+    index_path.parent.mkdir(parents=True, exist_ok=True)
+    _index.run({"source_root": source_root,
+                "output_path": kernel.relative_path(repo, index_path)}, repo)
+    return index_path
+
+
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     output = kernel.safe_output(repo, args.get("output_path"))
-    index_path = kernel.safe_path(repo, args.get("index_path"), must_exist=True)
+    stated_index = args.get("index_path")
+    if stated_index:
+        index_path = kernel.safe_path(repo, stated_index, must_exist=True)
+        index_source = "stated"
+    else:
+        index_path = _derived_index(repo, args, output)
+        index_source = "derived_under_changed_paths"
     index = kernel.read_index(repo, index_path)
     rows = {row["path"]: row for row in index["files"]}
     source_root = str(index.get("source_root") or ".")
@@ -182,6 +230,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "schema": SCHEMA,
         "capability_id": CAPABILITY_ID,
         "index_path": kernel.relative_path(repo, index_path),
+        "index_source": index_source,
         "index_sha256": kernel.bytes_sha256(index_path.read_bytes()),
         "source_root": source_root,
         "changed_files": sorted(changed),

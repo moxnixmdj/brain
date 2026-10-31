@@ -55,8 +55,13 @@ def _materialize(source:pathlib.Path, tests:list[pathlib.Path], wanted:Mapping[s
 def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
     repo=pathlib.Path(root).resolve()
     if not isinstance(args,Mapping): raise RepairLoopError("ARGS_NOT_OBJECT")
-    raw_tests=args.get("test_paths") or []
-    if not isinstance(raw_tests,list) or not raw_tests: raise RepairLoopError("TEST_PATHS_REQUIRED")
+    raw_tests=[x for x in (args.get("test_paths") or []) if str(x).strip()]
+    if not isinstance(raw_tests,list): raise RepairLoopError("TEST_PATHS_REQUIRED")
+    if not raw_tests:
+        from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_paths
+        try: raw_tests=discover_test_paths(repo/str(args.get("source_root") or "."))
+        except FileNotFoundError: raise RepairLoopError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+    if not raw_tests: raise RepairLoopError("TEST_PATHS_REQUIRED")
     tests=[_safe(repo,x) for x in raw_tests]
     explicit=args.get("source_paths")
     if explicit is not None and not isinstance(explicit,list): raise RepairLoopError("SOURCE_PATHS_NOT_LIST")
@@ -76,6 +81,8 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
             if p not in sources: sources.append(p)
     if not sources: raise RepairLoopError("NO_LOCALIZED_SOURCE_FILES")
 
+    from canonical.runtime.write_authority_v1 import check_report
+    check_report(repo, output, [*sources, *tests])
     originals={p:p.read_bytes() for p in sources}
     baseline=[_test(repo,t,timeout) for t in tests]
     if all(r["returncode"]==0 for r in baseline): raise RepairLoopError("BASELINE_ALREADY_PASSES")

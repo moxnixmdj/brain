@@ -33,13 +33,13 @@ def _safe_dir(repo,raw):
  return p
 def _trace_one(repo,test,timeout,max_events,env=None):
  code=_PATCH.SUITE_RUNNER+r'''import json,pathlib,runpy,sys,traceback
-repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); seen={}; events=0
+repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); seen={}; events=0; path_cache={}
 def tr(frame,event,arg):
  global events
- if event!="line" or events>=cap:return tr
- try:p=pathlib.Path(frame.f_code.co_filename).resolve()
- except Exception:return tr
- if p.is_file() and repo in p.parents and p.suffix==".py":
+ if events>=cap:return None
+ p=_brain_project_file(frame,repo,path_cache)
+ if p is None:return None
+ if event=="line":
   rel=str(p.relative_to(repo)).replace("\\","/"); key=(rel,frame.f_lineno,frame.f_code.co_name)
   seen[key]=seen.get(key,0)+1;events+=1
  return tr
@@ -94,7 +94,14 @@ def _line_names(path):
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise FaultLocalizerError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
- tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+ tests=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
+ if not tests:
+  # Which files are tests is a fact about the tree, not something the sentence
+  # has to enumerate. Discovery must run BEFORE _source_env, which takes the
+  # tests as arguments.
+  from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+  try:tests=discover_test_files(src)
+  except FileNotFoundError:raise FaultLocalizerError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  env=_source_env(src,*tests)
  if not tests:raise FaultLocalizerError("TEST_PATHS_REQUIRED")
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_events=max(100,min(int(args.get("max_trace_events",200000)),1000000));max_lines=max(1,min(int(args.get("max_ranked_lines",100)),1000));max_symbols=max(1,min(int(args.get("max_ranked_symbols",50)),500))
