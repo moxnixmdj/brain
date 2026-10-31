@@ -50,6 +50,8 @@ from canonical.runtime.bound_capabilities.python_review_diff_static_triage impor
     _parse_diff_ranges,
 )
 
+from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import python_interpreter_works, security_scan_python_source
+
 SCHEMA = "PROJECT_BRAIN_DIFF_SECURITY_GATE_V1"
 
 
@@ -158,6 +160,25 @@ def run(args, root):
                             "severity": str(row.get("issue_severity") or ""),
                             "confidence": str(row.get("issue_confidence") or ""),
                             "message": str(row.get("issue_text") or "")[:300]}
+                    if _in_ranges(changed[rel], line):
+                        (blocking if _is_blocking(item["severity"], item["confidence"],
+                                                  item["test_id"])
+                         else advisory).append(item)
+                    else:
+                        advisory.append({**item, "out_of_scope": "preexisting"})
+    elif python_interpreter_works(python_exe, timeout_s):
+        bandit_version = f"brain-ast-security-v1 (python {sys.version_info.major}.{sys.version_info.minor})"
+        if not syntax_errors:
+            for rel in sorted(files_on_disk):
+                src_text = files_on_disk[rel].read_text(encoding="utf-8", errors="replace")
+                for r in security_scan_python_source(src_text, rel):
+                    line = int(r["line"])
+                    item = {"file": rel,
+                            "line": line,
+                            "test_id": str(r["test_id"]),
+                            "severity": str(r["severity"]),
+                            "confidence": str(r["confidence"]),
+                            "message": str(r["message"])[:300]}
                     if _in_ranges(changed[rel], line):
                         (blocking if _is_blocking(item["severity"], item["confidence"],
                                                   item["test_id"])

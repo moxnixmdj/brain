@@ -108,7 +108,9 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # route had no row for the effect.  Measured 2026-10-30.  The declared-input derivation can now
     # hand it the whole coordinate (module, qualname, statement span, new name, run_tests), so the
     # family becomes decisive on admission exactly like the review gates and the type check.
-    (("extract", "into a new function", "pull out into"), ("extract", "refactor"), "extract"),
+    (("extract function", "extract method", "extract the statement", "extract the statements",
+      "extract the expression", "extract the block", "extract the function",
+      "into a new function", "into a function", "pull out into"), ("extract", "refactor"), "extract"),
     # WHAT A RENAME REALLY TOUCHES IS THE QUESTION BEFORE THE RENAME.
     #
     # `python.source.crossfile_edit.choreograph.v1` plans every site a checked-in change must touch
@@ -183,7 +185,7 @@ _ANALYSIS_ONLY_TRIGGERS = ("explain", "describe", "summarise", "summarize",
 # family claimed AUTHORITY over an add-a-parameter request and the symbol index
 # was executed for a signature change.  The sentence's own governing clause
 # decides its effect.
-_CLAUSE_BREAK = re.compile(r"(?:[.;!?]|,\s*$|\s+(?:and|then|so|but)\s+)", re.I)
+_CLAUSE_BREAK = re.compile(r"(?:\.(?=\s|$)|[;!?]|,\s*$|\s+(?:and|then|so|but)\s+)", re.I)
 
 
 def _governing_clause(text: str) -> str:
@@ -450,6 +452,18 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
             continue
         if decision.get("admitted") and decision.get("specific"):
             admitted.append((cid, dict(decision.get("inputs") or {})))
+    if len(admitted) > 1:
+        stated_py = {
+            p for p in derivation.stated_existing_files(goal, root)
+            if p.endswith(".py")
+        }
+        if stated_py:
+            exact_file_admitted = [
+                (cid, inp) for cid, inp in admitted
+                if "diff_path" in inp or "module" in inp
+            ]
+            if len(exact_file_admitted) == 1:
+                admitted = exact_file_admitted
     if len(admitted) != 1:
         return None  # ambiguous / none -> fail closed
     cid, inputs = admitted[0]

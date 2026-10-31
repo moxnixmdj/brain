@@ -57,6 +57,8 @@ from canonical.runtime.bound_capabilities.python_review_diff_static_triage impor
     _parse_diff_ranges,
 )
 
+from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import has_pytest, measure_coverage_stdlib, python_interpreter_works, universal_test_argv
+
 SCHEMA = "PROJECT_BRAIN_DIFF_COVERAGE_GATE_V1"
 
 
@@ -111,7 +113,9 @@ def run(args, root):
         _fail("GIT_UNAVAILABLE")
     cov_probe = subprocess.run([python_exe, "-m", "coverage", "--version"],
                                capture_output=True, text=True, timeout=min(timeout_s, 30))
-    coverage_on = cov_probe.returncode == 0 and "overage" in cov_probe.stdout
+    native_cov_on = cov_probe.returncode == 0 and "overage" in cov_probe.stdout and has_pytest(python_exe, timeout_s)
+    stdlib_cov_on = (not native_cov_on) and python_interpreter_works(python_exe, timeout_s)
+    coverage_on = native_cov_on or stdlib_cov_on
 
     scratch = out_abs.parent / ("_cov_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
     if scratch.exists():
@@ -140,8 +144,7 @@ def run(args, root):
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         if not coverage_on:
             # still prove the suite green so the partial gate is honest
-            only = subprocess.run([python_exe, "-m", "pytest", "-q",
-                                   "-p", "no:cacheprovider"], cwd=scratch,
+            only = subprocess.run(universal_test_argv(python_exe), cwd=scratch,
                                   capture_output=True, text=True,
                                   timeout=timeout_s, env=env)
             suite_green = only.returncode == 0
@@ -150,23 +153,34 @@ def run(args, root):
             executable_changed = 0
             gate = "FAIL" if not suite_green else "PASS_BLIND"
         else:
-            try:
-                suite = subprocess.run([python_exe, "-m", "coverage", "run",
-                                        "-m", "pytest", "-q", "-p", "no:cacheprovider"],
-                                       cwd=scratch, capture_output=True, text=True,
-                                       timeout=timeout_s, env=env)
-            except subprocess.TimeoutExpired:
-                _fail("TIMEOUT")
-            suite_green = suite.returncode == 0
-            if not suite_green:
-                _fail("SUITE_RED:coverage under a failing suite is untrustworthy evidence")
             jf = scratch / "_cov.json"
-            rep = subprocess.run([python_exe, "-m", "coverage", "json",
-                                  "-o", str(jf), "--quiet"],
-                                 cwd=scratch, capture_output=True, text=True,
-                                 timeout=min(timeout_s, 120), env=env)
-            if rep.returncode != 0 or not jf.is_file():
-                _fail("COVERAGE_JSON_FAILED")
+            if native_cov_on:
+                try:
+                    suite = subprocess.run([python_exe, "-m", "coverage", "run",
+                                            "-m", "pytest", "-q", "-p", "no:cacheprovider"],
+                                           cwd=scratch, capture_output=True, text=True,
+                                           timeout=timeout_s, env=env)
+                except subprocess.TimeoutExpired:
+                    _fail("TIMEOUT")
+                suite_green = suite.returncode == 0
+                if not suite_green:
+                    _fail("SUITE_RED:coverage under a failing suite is untrustworthy evidence")
+                rep = subprocess.run([python_exe, "-m", "coverage", "json",
+                                      "-o", str(jf), "--quiet"],
+                                     cwd=scratch, capture_output=True, text=True,
+                                     timeout=min(timeout_s, 120), env=env)
+                if rep.returncode != 0 or not jf.is_file():
+                    _fail("COVERAGE_JSON_FAILED")
+            else:
+                try:
+                    suite = measure_coverage_stdlib(python_exe, scratch, jf, timeout_s=timeout_s, env=env)
+                except subprocess.TimeoutExpired:
+                    _fail("TIMEOUT")
+                suite_green = suite.returncode == 0
+                if not suite_green:
+                    _fail("SUITE_RED:coverage under a failing suite is untrustworthy evidence")
+                if not jf.is_file():
+                    _fail("COVERAGE_JSON_FAILED")
             try:
                 doc = json.loads(jf.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
