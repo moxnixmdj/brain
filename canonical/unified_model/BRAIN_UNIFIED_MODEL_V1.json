@@ -30224,7 +30224,7 @@
   "bound_capabilities": 143,
   "capabilities": 437,
   "engines": 26,
-  "knowledge_documents": 186,
+  "knowledge_documents": 187,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6518,
   "routing_tokens": 2251,
@@ -30235,7 +30235,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "76467c1597501388b67ef19902b423155d88e9f475eaf0a3cebb2d7565a3a846"
+  "value": "b43e029f15620d71d2dbbd3cdff5584e04e56f443037d8f663bf6c92ba7c0a58"
  },
  "engines": [
   {
@@ -42236,6 +42236,88 @@
     "machine",
     "problem",
     "software"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 19395,
+   "headings": [
+    "The hardcore-SWE gap, measured — 2026-10-31",
+    "§1. The one table that matters",
+    "§2. P0 — a wrong capability still returns PASS with \"exact semantic acceptance\"",
+    "Root cause: ambiguity in the right resolver is resolved by the wrong one",
+    "The second half: contracts too weak to be specific",
+    "§3. P0 — the door has two failure surfaces, and one of them is an exception",
+    "raises GoalCompilationFailure: GOAL_INPUT_BINDING_REQUIRED:limit",
+    "at goal_compiler.py:1169 in _render_template",
+    "§4. P0 — the machine owns dynamic analysis and cannot reach it",
+    "§5. P1 — selection picks capabilities that cannot run, and the cost is paid in wall-clock",
+    "§6. P1 — the binding layer loses information the sentence already gave",
+    "§7. P1 — \"fastest\" is unimplementable: no cost, latency or size model",
+    "§8. P1 — the suite is not a gate",
+    "§9. What is fixed, and what the previous report got wrong",
+    "§10. The fix order (damage per unit of work)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEMS_20261031_V2.md",
+   "sha256": "fec2d502e8316ac3d8acc6fc577b76ca3de1a068544598d3c8a11045da92af91",
+   "summary": "**Tree:** `main` @ `c233580` (clean). **Method:** every number below was produced by running this tree, today. Nothing is carried over from the 2026-10-29 report without re-measuring it, and two claims from that report are **corrected** here (see §9).",
+   "terms": {
+    "14": 6,
+    "437": 9,
+    "all": 6,
+    "answer": 7,
+    "because": 11,
+    "cannot": 10,
+    "canonical": 14,
+    "capabilities": 11,
+    "capability": 20,
+    "commit": 8,
+    "correct": 7,
+    "cost": 11,
+    "coverage": 9,
+    "diff": 14,
+    "door": 9,
+    "every": 11,
+    "exists": 8,
+    "fail": 17,
+    "family": 7,
+    "file": 18,
+    "gate": 9,
+    "git": 8,
+    "lint": 8,
+    "machine": 7,
+    "no": 22,
+    "none": 8,
+    "not": 24,
+    "nothing": 10,
+    "one": 12,
+    "only": 8,
+    "pass": 16,
+    "path": 14,
+    "question": 11,
+    "report": 11,
+    "row": 9,
+    "rows": 10,
+    "run": 8,
+    "runtime": 10,
+    "sentence": 25,
+    "show": 7,
+    "swe_typed_plan_v1.py": 9,
+    "test": 9,
+    "tests": 8,
+    "three": 7,
+    "tree": 10,
+    "true": 9,
+    "two": 8,
+    "wrong": 12
+   },
+   "title": "The hardcore-SWE gap, measured — 2026-10-31",
+   "title_terms": [
+    "2026-10-31",
+    "gap",
+    "hardcore-swe",
+    "measured"
    ]
   },
   {
@@ -55816,10 +55898,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 972,
+  "included_source_count": 973,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a34e61e50dd9a3772229cd2c0963209af5798c684960c20ac7e62c3f1c2c272e"
+  "source_tree_digest": "fc3be65212cdd314b33407f271fd36a219ac81c17cff1af2e343c6939e20581a"
  },
  "research_index": [
   {
@@ -200195,7 +200277,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_REPAIR_IS_NOT_REPAIRED_UNTIL_THE_FILE_CHANGED_V1_20261029_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "cd002513e7fb78c54d09a99c01c0b2c5ac866cd406baf7f23b50aea721dd98d8",
+   "sha256": "10fb56901a00bcac6125350187ca53a9e2ac27b64bf0bec2dc14f83c7c8a78fc",
    "status": "",
    "terms": {
     "20261029": 1,
