@@ -22,10 +22,31 @@
     "canonical/verification/SWE_OPERATION_INTENT_REUSE_20261031.md"
   ],
   "measured_effect": {
-    "initial_new_test_baseline": {"passed": 6, "failed": 9, "seconds": 1.34},
-    "focused_final": {"passed": 74, "failed": 0, "seconds": 3.07},
-    "integrated_before_role_repair": {"passed": 174, "failed": 3, "seconds": 43.31},
-    "integrated_final": {"passed": 177, "failed": 0, "seconds": 43.04}
+    "initial_new_test_baseline": {
+      "passed": 6,
+      "failed": 9,
+      "seconds": 1.34
+    },
+    "focused_final": {
+      "passed": 74,
+      "failed": 0,
+      "seconds": 3.07
+    },
+    "integrated_before_role_repair": {
+      "passed": 174,
+      "failed": 3,
+      "seconds": 43.31
+    },
+    "integrated_final": {
+      "passed": 177,
+      "failed": 0,
+      "seconds": 43.04
+    },
+    "updated_base_focused": {
+      "passed": 75,
+      "failed": 0,
+      "seconds": 3.14
+    }
   },
   "falsification_condition": "A short read fails to execute the real Git adapter, a value supplies operation or commit authority, an ambiguous operation reaches primary execution, a bindable bisector competes with ordinary operation input contracts, or the existing caller/source-obligation regressions recur.",
   "scope_complete_discharge": false,
@@ -39,5 +60,7 @@
     "Authorship operation selection does not add missing target or line-range transport to the public contract.",
     "An existing derivation test file contains JSON rather than executable Python and fails collection.",
     "No claim of complete repository correctness, universal speed optimality or general software-engineering qualification."
-  ]
+  ],
+  "integrated_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
+  "subsequent_reuse": "Retain upstream governing-clause/rival-phrase semantics; constrain source-root expansion to contracts consuming tests rather than widening read-only indexing to unrelated ancestor tests."
 }

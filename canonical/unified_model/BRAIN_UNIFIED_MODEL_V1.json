@@ -30487,9 +30487,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 187,
+  "knowledge_documents": 188,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6519,
+  "research_index_records": 6520,
   "routing_tokens": 2261,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "67f5c74687f56346900f978ccf9149cde4e35f5ab11c4403f4450f0729185aaa"
+  "value": "cec61920b73cbe59cc15b8e338111f8cffb2129b539af79c937ea744ac426946"
  },
  "engines": [
   {
@@ -56201,6 +56201,80 @@
     "heartbeat",
     "live"
    ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 4934,
+   "headings": [
+    "Reuse engineering operation intent — 2026-10-31",
+    "Scope",
+    "Existing machinery reused",
+    "Actual results",
+    "Adverse observations retained",
+    "Concurrent main integration"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/SWE_OPERATION_INTENT_REUSE_20261031.md",
+   "sha256": "36e080a496c9c0b7f065cbf164d29661e04e149236f57dc228bb78a8f9be64f7",
+   "summary": "Base: `59a593ca9094ecd7c31b02f83b05c9d27636a181`. Upstream synthesis, static-soundness, polyglot and network-mediation work is integrated, not reimplemented. This change adds no registry rows, providers, terminal credit, policies or runtime model calls.",
+   "terms": {
+    "30": 2,
+    "75": 2,
+    "actual": 6,
+    "add": 2,
+    "added": 2,
+    "after": 2,
+    "afterward": 2,
+    "applies": 2,
+    "assertions": 2,
+    "authority": 2,
+    "authorship": 3,
+    "base": 2,
+    "before": 3,
+    "branch": 3,
+    "caller": 5,
+    "cannot": 3,
+    "canonical": 2,
+    "checks": 2,
+    "code": 3,
+    "contract": 4,
+    "controls": 4,
+    "declared": 2,
+    "execution": 4,
+    "existing": 8,
+    "failed": 3,
+    "file": 3,
+    "final": 3,
+    "function": 3,
+    "git": 6,
+    "integrated": 4,
+    "intent": 3,
+    "merge": 3,
+    "model": 3,
+    "no": 5,
+    "not": 11,
+    "operation": 5,
+    "passed": 8,
+    "primary": 3,
+    "public": 3,
+    "real": 3,
+    "rename": 3,
+    "reported": 3,
+    "repository": 3,
+    "retained": 3,
+    "stated": 3,
+    "test": 4,
+    "upstream": 5,
+    "validation": 3
+   },
+   "title": "Reuse engineering operation intent — 2026-10-31",
+   "title_terms": [
+    "2026-10-31",
+    "engineering",
+    "intent",
+    "operation",
+    "reuse"
+   ]
   }
  ],
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
@@ -56229,10 +56303,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 976,
+  "included_source_count": 977,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3ea7a53579afe0422bb273726c15419c36af4ae80fd412664d9b07cbe9e9b14d"
+  "source_tree_digest": "052b564d88a75a1cab532838dd7a9ba7dfa7b071697056bc5a35f9da30506366"
  },
  "research_index": [
   {
@@ -205810,6 +205884,51 @@
    }
   },
   {
+   "action_id": "REUSE_SWE_OPERATION_INTENT_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/REUSE_SWE_OPERATION_INTENT_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REUSE_SWE_OPERATION_INTENT_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "efe591eee3df45d0d07e1f5a7e916a8da4de0f5e8e448238ee9ad00cbc058cf1",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "authoritative": 1,
+    "authorship": 1,
+    "bindable": 1,
+    "bisectors": 1,
+    "broad": 1,
+    "caller": 1,
+    "checks": 1,
+    "competed": 1,
+    "contaminated": 1,
+    "derivation": 1,
+    "did": 1,
+    "enter": 1,
+    "family": 1,
+    "git": 1,
+    "hid": 1,
+    "inside": 1,
+    "intent": 1,
+    "name": 1,
+    "not": 1,
+    "obligations": 1,
+    "operation": 2,
+    "operations": 1,
+    "queries": 1,
+    "reads": 1,
+    "real": 1,
+    "rejected": 1,
+    "reuse": 1,
+    "reuse_swe_operation_intent_20261031_v1": 1,
+    "short": 1,
+    "source-edit": 1,
+    "swe": 1
+   }
+  },
+  {
    "action_id": "ROOT2-CLOSURE-CONTROLLER-V2-20261004",
    "capability": false,
    "date": "",
@@ -228308,9 +228427,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "69c473e1177d615c402dfe40ed0b0a5147c37ec77453363a90ee384d99a633dd",
+   "sha256": "f23d262f4accf202133fb8d750e00ac9b2d6b002cb9086e39176cb177df5c587",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
     "_git_head_tree_blobs",
     "_holds_tests",
@@ -228322,7 +228441,8 @@
     "binding_view",
     "derive",
     "is_swe_request",
-    "stated_existing_files"
+    "stated_existing_files",
+    "stated_git_operations"
    ],
    "terms": {
     "adapter_defaulted_keys": 1,
@@ -228343,6 +228463,7 @@
     "read_git_loose_obj": 1,
     "sentences": 1,
     "stated_existing_files": 1,
+    "stated_git_operations": 1,
     "tree_of": 1,
     "typed": 1,
     "v1": 1
@@ -242481,7 +242602,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "d3ded61dddea61c67aec670413e1b1c6c0b960c7574386d55a450b52d7d5ddf1",
+   "sha256": "b0d9e7d6f7bcbe8882db6a7e0aa92fdd16a6bccd674ebbf8efbc4efb0cdaf368",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 70,
    "symbols": [
@@ -272159,7 +272280,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "fa76bdb52389f35c0c1a5b7f714271f47286689e36794587323b5bc5edce02f6",
+   "sha256": "4c6143483730e939d4f43bdc9b44cc388fd0d536c7590adeedc549bfbe0e2536",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 16,
    "symbols": [

@@ -28,3 +28,12 @@ These timings are scoped test durations, not a controlled speedup benchmark. Avo
 Correctly selecting the Git authorship operator does not complete missing target/line-range transport through the public contract. No authorship delivery claim is made. Broader compiler, production, resource and unfamiliar-repository qualifications remain open.
 
 Model diagnostics, fresh signed referee, actual final head/base and merge outcome are recorded on this session's PR. The generated model is recompiled from the actual combined tree. This is producer-run sandbox evidence, not independent capability verification or terminal authority.
+
+
+## Concurrent main integration
+
+Main subsequently advanced to `09867fd76b3f658b3e19da81576e634b370aa912`, adding governing-clause and repair-flow improvements. These are retained. The short Git-read recognizer now feeds the upstream three-part family-hit contract; ordinary Git operation contracts cannot be bypassed by the upstream rival-phrase path. The newer governing-clause implementation supersedes this branch's interim narrow rename check.
+
+Intermediate validation during the unresolved merge reported **70 passed, 8 failed, 7 subtests passed, 70.55 s**: seven caller-report checks exposed a widened source root, and a real Git diff could not execute against the unmerged index. An actual trace showed a single owned fixture's symbol query expanding to `canonical`, writing its report there and scanning unrelated code. This was not treated as passing caller qualification.
+
+The root widening now applies only when the declared contract actually consumes test paths/argv; the existing src-layout repair discovery is retained, but an index-only query keeps the stated file's own directory. A new strict source-root regression is added. After completing the merge, focused validation passed **75/75 in 3.14 s** and public structured-contract validation passed **30/30 in 12.56 s**. The final integrated result and regenerated artifact are reported on PR #6446.
