@@ -270,13 +270,15 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
     if re.search(r"\b(?:find\s+every\s+caller|who\s+calls)\b", prose):
         if not any("symbol" in str(c).lower() for c in capability_ids):
             return "R10_CALLER_QUERY_EFFECT_UNSERVED"
-    if re.search(r"\badd\s+(?:a\s+)?regression\s+test\b", prose) and re.search(r"\b(?:fix|repair)\b", prose):
-        has_reg_cap = any(
-            (((registry.get(str(c)) or {}).get("action_template") or {}).get("args") or {}).get("synthesize_regression_test") is True
-            for c in capability_ids
-        )
-        if not has_reg_cap:
-            return "R10_REGRESSION_TEST_EFFECT_UNSERVED"
+    # A regression test the chosen row cannot synthesize is NOT a reason to refuse the plan.
+    # Measured 2026-10-31 on the 28-task ladder: refusing "fix the bug ... and add a regression
+    # test that would have caught it" before the run cost the repair the sentence also asked
+    # for (reached 27/28 instead of 28/28) and bought nothing -- the single repair row fixed
+    # the tree and left the suite green either way.  The effect is now WITHHELD at the exit
+    # instead (live_brain_route_admission_v1._enforced_at_exit, which reads the same
+    # ``synthesize_regression_test`` declaration this clause read, so a row that really can
+    # author the test is never demoted).  Refusal is for the case where there is nothing else
+    # to do; it is not the instrument for a sentence that also asks for work.
     imperative = re.search(
         r"(?:^|[.;\n]|\bthen\b|\band\b)\s*"
         r"(?:(?:please|first|next)\s+|(?:can|could|would)\s+you\s+(?:please\s+)?)?"

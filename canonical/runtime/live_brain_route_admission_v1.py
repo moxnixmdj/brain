@@ -1829,6 +1829,30 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     (re.compile(r"\b(?:test\s+)?coverage\b", re.IGNORECASE),
      re.compile(r"coverage", re.IGNORECASE),
      "STATED_COVERAGE_NOT_MEASURED_BY_CAPABILITY"),
+    # WRITING A TEST IS NOT FIXING ONE, AND A TEST'S NAME IS NOT A TEST.
+    #
+    # Measured 2026-10-31 on b68f7c7:
+    #
+    #   "The test in <D>/tests fails.  Fix the bug in <D>/app and add a regression test
+    #    that would have caught it, then make the whole suite pass."
+    #       -> python.software.repair.apply.verified.v1 -> PASS, tree: app fixed, suite
+    #          green, and NO new test file.  The clause was dropped and certified.
+    #
+    # The SUPPLIED side may not be the word "test": a test-GUIDED repair row mentions
+    # tests everywhere -- measured, that is exactly why a supplied regex of `test` admits
+    # python.software.repair.apply.verified and the lie survives.  It must name the
+    # PRODUCTION of a test.  The ASKED side may not be "write the test NAME": "Find the
+    # flaky test and write the test name to <answer.json>" asks for a name, and was read
+    # as a request to author one.
+    (re.compile(r"\b(?:write|add|create|generate|author|produce|scaffold)\b[^.;]{0,48}?"
+                r"\b(?:unit\s+|regression\s+|integration\s+|property[- ]based\s+)?"
+                r"(?:tests?|specs?|test\s+suite|test\s+file)\b"
+                r"(?!\s*(?:name|names|id|ids|list|path|paths|output|result|results|"
+                r"status|report|count|number)\b)", re.IGNORECASE),
+     re.compile(r"\btests?[._]?(?:generate|generation|scaffold|author\w*|write|create)\w*"
+                r"|\bgenerate[._]?tests?\b|\btest[._]scaffold\w*|\bscaffold\w*"
+                r"|\bwrite[._]tests?\b|\bcreate[._]tests?\b", re.IGNORECASE),
+     "STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY"),
     # A CALLER MAP IS NOT A PARSE.  Measured 2026-10-29 on this repository: the SAME sentence
     # "Find every caller of the function <f> in <dir>" is answered by python.source.symbols.index.ast
     # (a real ``callers_of`` map) on a 3-file tree and by code.index.tree_sitter.incremental.v1 (a
@@ -2038,9 +2062,14 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
     text = str(goal or "")
     if not text.strip():
         return []
+    # An effect enforced at the EXIT may not narrow the shortlist: the sentence that asks
+    # for it asks for other work too (measured: "add a function ... and add a test for it"
+    # lost the row that adds the function when this narrowed on the test clause), and
+    # narrowing is a statement about WHO SHOULD ANSWER, not about what counts as done.
     asked = [row for row in _STATED_EFFECTS
-             if any(not _is_a_premise(text, match.start())
-                    for match in _intent_verb_matches(row[0], text))]
+             if row[2] not in _EFFECTS_AT_EXIT_CODES
+             and any(not _is_a_premise(text, match.start())
+                     for match in _intent_verb_matches(row[0], text))]
     if not asked:
         return []
     # WHAT IT PRODUCES OUTRANKS WHAT IT IS TAGGED WITH.
@@ -2092,6 +2121,118 @@ def _is_a_premise(text: str, start: int) -> bool:
     return bool(_PREMISE_COPULA_RE.search(head))
 
 
+# AN EFFECT THE RUN MAY STILL LEARN IT MISSED.
+#
+# A stated effect is normally a reason to refuse BEFORE the row touches the tree: a
+# capability that cannot answer must not touch it.  These are the effects where that is
+# wrong, because the sentence asks for the effect AND for other work the row can do --
+# refusing the whole sentence denies work that was requested and made.  They are enforced
+# at the EXIT instead (`_close_observations`): the verdict is "done, and not fully served",
+# the work stands, and the claim is honest.
+_EFFECTS_AT_EXIT_CODES = frozenset({
+    "STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY",
+})
+
+
+def _supplied_by_any(supplied: "re.Pattern[str]", entries: "Sequence[Mapping[str, Any]]",
+                     cids: "Sequence[str]") -> bool:
+    """True when some row that RAN declares the effect it produced.
+
+    What a row PRODUCES outranks what it is tagged with -- the same law
+    ``declared_effect_ids`` states -- so the test is made against the id, its
+    ``provides``, its ``target_effects`` and its ``result_fields``, and never against the
+    whole row text (where a test-GUIDED repair mentions tests everywhere).
+    """
+    for entry, cid in zip(entries, cids):
+        entry = entry or {}
+        surface = " ".join([
+            str(cid or ""),
+            " ".join(str(x) for x in (entry.get("provides") or [])),
+            " ".join(str(x) for x in (entry.get("target_effects") or [])),
+            " ".join(str(x) for x in (entry.get("result_fields") or [])),
+        ])
+        if supplied.search(surface):
+            return True
+    return False
+
+
+# A row can also supply an effect by DECLARING the action argument that produces it.  The
+# registry's own ``action_template.args`` is a stronger statement than any token in a
+# ``provides`` list -- ``software.repair.crossfile.choreograph.v1`` says
+# ``synthesize_regression_test: true`` and never mentions authoring in its effects.  Reading
+# the declaration is how a capable row is spared; reading only tokens is how the single
+# repair row is refused for work it never claimed.
+_EFFECT_CAPABILITY_ARGS: "Mapping[str, str]" = {
+    "STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY": "synthesize_regression_test",
+}
+
+
+def _declares_effect_by_argument(arrays: "Sequence[Mapping[str, Any]]", code: str) -> bool:
+    arg = _EFFECT_CAPABILITY_ARGS.get(code)
+    if not arg:
+        return False
+    for entry in arrays:
+        template = (entry or {}).get("action_template") or {}
+        if isinstance(template, Mapping) and (template.get("args") or {}).get(arg) is True:
+            return True
+    return False
+
+
+# A TEST FILE ON DISK IS THE EFFECT.  A row that writes one usually says nothing about
+# tests in its declaration: measured 2026-10-31, ``python.feature.implement_function_spec.v1``
+# answered "add a function total_cents ... and add a test for it in <p>/tests/test_total.py",
+# wrote ``test_total.py``, and the declaration-reading check demoted a correct PASS.  The
+# contract is what the tree proves, not what the row advertises, so the exit compares the
+# world it observed before the run with the world it observes now.
+_TEST_FILE_SHAPE = re.compile(
+    r"(?:^|/)(?:tests?|specs?)/"
+    r"|(?:^|/)test_[^/]*\.(?:py|js|ts|tsx|rs|go|java|rb|cs)$"
+    r"|(?:^|/)[^/]*[._-]test\.(?:py|js|ts|rs|go|java|rb)$"
+    r"|(?:^|/)[^/]*_spec\.(?:rb|js|ts)$", re.IGNORECASE)
+
+
+def _test_file_appeared(goal: str, before: "Mapping[str, Any] | None") -> bool:
+    """True when a test-shaped file the sentence did not have before now exists."""
+    files_before = (before or {}).get("files")
+    if not isinstance(files_before, Mapping):
+        # Without a before-snapshot nothing can be called NEW; a guess here would either
+        # certify a lie or demote a correct pass.
+        return False
+    try:
+        files_after = observe_world(goal).get("files") or {}
+    except Exception:  # noqa: BLE001 - an unreadable tree is not evidence of a test
+        return False
+    for rel, row in files_after.items():
+        if files_before.get(rel) == row:
+            continue
+        if _TEST_FILE_SHAPE.search(str(rel)):
+            return True
+    return False
+
+
+def _enforced_at_exit(goal: str, entries: "Sequence[Mapping[str, Any]]",
+                      cids: "Sequence[str]",
+                      before: "Mapping[str, Any] | None" = None) -> list[str]:
+    """The stated effects that no row which RAN can supply.  Read AFTER the run."""
+    if not entries:
+        return []
+    text = str(goal or "").lower()
+    out: list[str] = []
+    for asked, supplied, code in _STATED_EFFECTS:
+        if code not in _EFFECTS_AT_EXIT_CODES:
+            continue
+        if not asked.search(text):
+            continue
+        if _supplied_by_any(supplied, entries, cids):
+            continue
+        if _declares_effect_by_argument(entries, code):
+            continue
+        if code == "STATED_TEST_AUTHORING_NOT_PROVIDED_BY_CAPABILITY" and _test_file_appeared(goal, before):
+            continue
+        out.append(code)
+    return out
+
+
 def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> list[str]:
     """A sentence that asks for X must be answered by something that declares X.
 
@@ -2115,6 +2256,14 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> 
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
     errors: list[str] = []
     for asked, supplied, code in _STATED_EFFECTS:
+        # An effect enforced at the EXIT is answered by what the run did, which this
+        # function cannot see.  Judging it here refused the whole sentence before the tree
+        # was touched (measured: "add a function ... and add a test for it" lost the
+        # function) and, when it did run, it reported the wrong diagnosis --
+        # ``STATED_ANSWER_NOT_PROVIDED`` where the run had in fact done everything but the
+        # test.  One source of truth: ``_enforced_at_exit``.
+        if code in _EFFECTS_AT_EXIT_CODES:
+            continue
         if not any(not _is_a_premise(text, match.start())
                    for match in _intent_verb_matches(asked, text)) or supplied.search(surface):
             continue
@@ -3069,6 +3218,30 @@ def stated_answer_payload_errors(goal: str, result: Mapping[str, Any]) -> list[s
     return []
 
 
+def _executed_rows(result: Mapping[str, Any]) -> tuple[list[dict[str, Any]], list[str]]:
+    """The capabilities that actually ran, with the registry row for each."""
+    cids: list[str] = []
+    for step in (result.get("execution") or []):
+        if isinstance(step, Mapping) and step.get("capability_id"):
+            cids.append(str(step["capability_id"]))
+    for step in ((result.get("composer_execution") or {}).get("steps") or []):
+        if isinstance(step, Mapping) and step.get("capability_id"):
+            cids.append(str(step["capability_id"]))
+    single = result.get("compiled_capability_id") or result.get("capability_id")
+    if single and not cids:
+        cids.append(str(single))
+    seen: set[str] = set()
+    unique = [c for c in cids if not (c in seen or seen.add(c))]
+    if not unique:
+        return [], []
+    try:
+        import canonical.runtime.live_integrated_brain_v1 as _live
+        registry = _live.load_verified_registry()
+    except Exception:  # noqa: BLE001 - a registry fault must not invent a verdict
+        return [], []
+    return [dict(registry.get(c) or {}) for c in unique], unique
+
+
 def _close_observations(result: dict[str, Any], goal: str,
                          before: Mapping[str, Any] | None,
                          artifacts: list[str] | None = None) -> dict[str, Any]:
@@ -3105,6 +3278,27 @@ def _close_observations(result: dict[str, Any], goal: str,
     # The change stands (it happened, and it is proved complete); what is withheld is the word
     # VERIFIED, which nothing measured.  Refusing instead would deny work that really landed, the
     # false-negative class this door refuses to produce.
+    # A PASS THAT DID NOT SERVE THE SENTENCE IS NOT A PASS.
+    #
+    # The composed branch already read its verifier's verdict and demoted itself when the
+    # verdict was False (`FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED`); the single-capability
+    # path did not, so a sentence with two effects could be answered by one and certified.
+    # Measured 2026-10-31 on b68f7c7: "Fix the bug in <D>/app and add a regression test that
+    # would have caught it, then make the whole suite pass" -> repair.apply.verified ->
+    # pass=True, app fixed, suite green, and no test file anywhere.
+    #
+    # The work is NOT undone: it happened, the sentence asked for it, and denying it would be
+    # the false-negative class this door refuses to produce.  What is withheld is the claim.
+    if result.get("pass") is True:
+        _rows, _cids = _executed_rows(result)
+        _unserved = _enforced_at_exit(goal, _rows, _cids, before)
+        if _unserved:
+            result["runtime_status_before_effect_check"] = result.get("status")
+            result["status"] = "FAIL_CLOSED__STATED_EFFECT_NOT_PROVIDED_BY_THE_RUN"
+            result["pass"] = False
+            result["failure_class"] = "STATED_EFFECT_NOT_PROVIDED_BY_THE_RUN"
+            result["unserved_effects"] = _unserved
+            result["work_performed_anyway"] = True
     if result.get("pass") is True:
         blind = _blind_change_evidence(result)
         if blind:
@@ -4015,8 +4209,9 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     _declared = str(compiled.get("capability_id") or compiled.get("selected_capability") or "")
     # Only a capability that was actually about to run can be refused for not answering: with no
     # compiled capability there is no claim to reject, and the request keeps its own refusal.
-    declared_answer_errors = (stated_answer_errors(normalized, dict(admissible.get(_declared) or {}),
-                                                   _declared)
+    declared_answer_errors = ([e for e in stated_answer_errors(
+        normalized, dict(admissible.get(_declared) or {}), _declared)
+        if e.split(":", 1)[0] not in _EFFECTS_AT_EXIT_CODES]
                               if _declared else [])
     if declared_answer_errors:
         refused = _fail(task_id, "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
