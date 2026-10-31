@@ -30478,7 +30478,7 @@
   "engines": 26,
   "knowledge_documents": 219,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6549,
+  "research_index_records": 6550,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b97b9ef99f075e7af8cc1bb4a9722b4405e050abcf50efa6d1a7424b623f1a64"
+  "value": "8fec03aebecbb244d9edf978d6d5d39f8647ff8f98c8dfb80a367e7e9bc6483d"
  },
  "engines": [
   {
@@ -210339,6 +210339,31 @@
    }
   },
   {
+   "action_id": "THE_FUNCTION_NAME_IS_THE_ONE_THE_FILE_DEFINES_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/THE_FUNCTION_NAME_IS_THE_ONE_THE_FILE_DEFINES_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_FUNCTION_NAME_IS_THE_ONE_THE_FILE_DEFINES_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "80f509993460148483d8695978e056d4b4867cd46183fae9c3304d85b39975d9",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "defines": 1,
+    "every_name_the_sentence_puts_beside_the_word_function_is_a_candidate_in_either_word_order_and_the_file_s_own_ast_keeps_the_one_it_defines__a_name_the_file_does_not_define_is_not_evidence_and_two_proven_names_are_still_ambiguous__no_adjective_list": 1,
+    "file": 1,
+    "function": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "name": 1,
+    "one": 1,
+    "read_the_section_the_answer_is_in_and_key_the_index_cache_by_the_tree": 1,
+    "the_derivation_read_the_word_beside_the_noun_as_the_noun__rename_the_public_function_total_in_canonical_runtime_util_py_to_sum_all_was_refused_r3_weak_evidence_because_qualname_was_derived_as_public_the_grammar_knew_only_name_function_and_the_file_defines_only_total__the_row_python_refactor_rename_symbol_v1_exists_and_serves_the_same_sentence_about_one_file__measured_2026_10_31_advanced_sentence_35": 1,
+    "the_function_name_is_the_one_the_file_defines_v1_20261031_v1": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "THE_INSTRUMENT_WAS_CALIBRATED_AND_POINTED_AT_THE_WRONG_THING_V1_20261026_V1",
    "capability": false,
    "date": "2026-10-26T15:42:35Z",
@@ -232200,7 +232225,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "7645370313d25090da8ce485a4755fe4431394feff81d98bbfda8e8528e78758",
+   "sha256": "32aab35f81edef3acf30707bb321d25478bf8adb031a65489d72f68da043d0ba",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 19,
    "symbols": [
