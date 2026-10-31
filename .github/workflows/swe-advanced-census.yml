@@ -1,0 +1,93 @@
+name: swe-advanced-census
+
+# THE ADVANCED LANE IS THE ONLY THING THAT MEASURES THE PRODUCT.
+#
+# `execution_guard/swe_advanced_probe_v1.py` runs 49 advanced software-engineering requests
+# -- polyglot, build, CI, performance, concurrency, test authoring, debugging, refactoring,
+# review, git surgery, design -- through the live front door and records which reached a
+# verified outcome and which refused, by name.
+#
+# Nothing ran it. Measured 2026-10-31 on 34f867a: it reported SERVED 2 of 49 across three
+# inventories and two weeks while every workflow in the repository stayed green. The surface
+# census next door became a gate at floor 25 on 2026-10-31 and went 25 -> 28. A number that
+# nobody can regress is a number nobody fixes.
+#
+# The floor is the count that exists today, not a target. When a change raises it, raise the
+# floor in the same pull request -- that is the only way the guard keeps meaning what it says.
+#
+# There is deliberately NO paths filter: every capability row, its input derivation, the door
+# that admits it and the adapter that executes it are in scope, and a filter would miss
+# exactly the change that breaks one of them.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      floor:
+        description: "Minimum number of the 49 advanced requests that must reach a verified outcome"
+        required: false
+        default: "3"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: swe-advanced-census-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  advanced:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run the advanced SWE census
+        shell: bash
+        run: |
+          FLOOR="${{ github.event.inputs.floor }}"
+          FLOOR="${FLOOR:-3}"
+          python execution_guard/swe_advanced_probe_v1.py \
+            --json /tmp/advanced.json --floor "$FLOOR" 2>&1 | tee /tmp/advanced.log
+
+      - name: Name every refusal in the job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "### Advanced SWE census"
+            echo
+            echo '```'
+            grep -E "REQUESTS|served [0-9]+/|SERVED FLOOR" /tmp/advanced.log || true
+            echo
+            echo "Refused, by cause:"
+            python3 - <<'PY'
+            import collections, json, pathlib
+            path = pathlib.Path("/tmp/advanced.json")
+            if not path.is_file():
+                raise SystemExit(0)
+            rows = json.loads(path.read_text(encoding="utf-8"))
+            counts = collections.Counter(
+                str(row.get("refusal") or "").split(":")[0] for row in rows
+                if not row.get("served"))
+            for cause, count in counts.most_common():
+                print(f"  {count:3d}  {cause or 'UNNAMED'}")
+            PY
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the census
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: swe-advanced-census
+          path: |
+            /tmp/advanced.json
+            /tmp/advanced.log
+          if-no-files-found: warn

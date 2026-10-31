@@ -177,6 +177,16 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--axis", default=None)
     ap.add_argument("--json", default=None)
+    # A FLOOR, SO THE NUMBER CANNOT SILENTLY STAY WHERE IT IS.
+    #
+    # This instrument was written to always exit 0 and it does: it is a census, not a gate.
+    # Measured 2026-10-31 on 34f867a: it reported SERVED 2 of 49 across three inventories
+    # and two weeks while every check in the repository stayed green, because no workflow ran
+    # it and nothing could fail.  The surface census next door already has this argument and
+    # the difference is visible in its numbers (23 -> 25 -> 28 once it became a gate).
+    # The floor is the count that exists today, not a target; when a change raises it, raise
+    # the floor in the same pull request.
+    ap.add_argument("--floor", type=int, default=None)
     ns = ap.parse_args(argv)
 
     rows = census(ns.axis)
@@ -198,6 +208,9 @@ def main(argv: list[str] | None = None) -> int:
         pathlib.Path(ns.json).write_text(json.dumps(rows, indent=1) + "\n", encoding="utf-8")
         print("WROTE", ns.json)
     print("AUTHORITY NONE -- single-machine census, not independent verification")
+    if ns.floor is not None and served < ns.floor:
+        print("SERVED FLOOR NOT MET: %d < %d" % (served, ns.floor))
+        return 1
     return 0
 
 

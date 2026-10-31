@@ -1,0 +1,201 @@
+{
+ "action_id": "AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "THE GATE REFUSED AN ANSWER THE MACHINE HAD ALREADY WRITTEN. The symbol index emits a 105.8 MB artifact for canonical/runtime in which the callers answer is 1.47 MB, and the answer gate's 16 MB cap refused the whole run -- 16.5-18.7 s to ARTIFACT_TOO_LARGE while the same sentence about one file answered in 293 ms. The index's own cache, meanwhile, was keyed by the request's artifact path, which the door makes unique per request, so no two sentences about one tree ever shared work. Neither fix is a new primitive: the gate already projects and bounds an answer, and the index already had a sha256-verified row cache looking for a key a caller could repeat.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "route_class": "REUSE",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/answer_shape_v1.py",
+   "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+   "canonical/tests/test_a_large_artifact_is_read_by_section_v1.py",
+   "canonical/tests/test_the_index_cache_key_is_the_tree_not_the_request_v1.py",
+   ".github/workflows/swe-advanced-census.yml"
+  ]
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31",
+ "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31",
+ "date": "2026-10-31",
+ "expected_parent_change": "OVER_THE_CAP_THE_GATE_DECODES_THE_ARTIFACT_S_LEADING_TOP_LEVEL_MEMBERS_INSIDE_A_SMALL_BUDGET_AND_STOPS_AT_THE_FIRST_MEMBER_THAT_DOES_NOT_FIT_EACH_VALUE_DECODED_WHOLE_OR_NOT_AT_ALL__AND_THE_SYMBOL_INDEX_FINDS_THE_ROWS_A_SIBLING_ARTIFACT_FOR_THE_SAME_source_root_ALREADY_PROVED_WITH_THE_SAME_PER_FILE_SHA256_CHECK_THAT_A_FRESH_PARSE_PASSES",
+ "expected_parent_frontier_change": "OVER_THE_CAP_THE_GATE_DECODES_THE_ARTIFACT_S_LEADING_TOP_LEVEL_MEMBERS_INSIDE_A_SMALL_BUDGET_AND_STOPS_AT_THE_FIRST_MEMBER_THAT_DOES_NOT_FIT_EACH_VALUE_DECODED_WHOLE_OR_NOT_AT_ALL__AND_THE_SYMBOL_INDEX_FINDS_THE_ROWS_A_SIBLING_ARTIFACT_FOR_THE_SAME_source_root_ALREADY_PROVED_WITH_THE_SAME_PER_FILE_SHA256_CHECK_THAT_A_FRESH_PARSE_PASSES",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
+ "falsification_condition": "LOWER_MAX_SECTION_BYTES_TO_ZERO_AND_SEE_THE_CALLERS_SENTENCE_RETURN_TO_ARTIFACT_TOO_LARGE__POINT_THE_SIBLING_CACHE_AT_A_DIFFERENT_source_root_AND_SEE_THE_INDEX_REPARSE_ALL_2287_MODULES__PUT_A_STALE_ROW_IN_A_SIBLING_AND_SEE_THE_SHA256_CHECK_REPARSE_IT",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_CORRECT_ANSWER_IS_NO_LONGER_DESTROYED_BY_ITS_OWN_SIZE_AND_THAT_TWO_SENTENCES_ABOUT_ONE_TREE_SHARE_THE_WORK_ONE_OF_THEM_DID",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.5,
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/answer_shape_v1.py",
+  "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+  "canonical/runtime/bound_capabilities/python_source_symbol_index.validate_cached_index",
+  ".github/workflows/swe-surface-census.yml",
+  "hardcore_swe_surface_probe_20261030.py --floor"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "REFUSING_A_RUN_BECAUSE_ITS_ARTIFACT_IS_BIGGER_THAN_THE_GATE_S_READ_BUDGET",
+   "A_CACHE_KEYED_BY_A_PATH_THAT_IS_UNIQUE_PER_REQUEST",
+   "AN_INSTRUMENT_THAT_ALWAYS_EXITS_ZERO"
+  ],
+  "expected_parent_level_state_change": "OVER_THE_CAP_THE_GATE_DECODES_THE_ARTIFACT_S_LEADING_TOP_LEVEL_MEMBERS_INSIDE_A_SMALL_BUDGET_AND_STOPS_AT_THE_FIRST_MEMBER_THAT_DOES_NOT_FIT_EACH_VALUE_DECODED_WHOLE_OR_NOT_AT_ALL__AND_THE_SYMBOL_INDEX_FINDS_THE_ROWS_A_SIBLING_ARTIFACT_FOR_THE_SAME_source_root_ALREADY_PROVED_WITH_THE_SAME_PER_FILE_SHA256_CHECK_THAT_A_FRESH_PARSE_PASSES",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "REVERTING_EITHER_HALF_RETURNS_A_CORRECT_ANSWER_TO_A_REFUSAL_OR_THE_TREE_TO_A_COLD_REPARSE",
+   "intrinsic_or_path_specific": "GENERAL__THE_GATE_RULE_IS_ABOUT_ANY_OVER_CAP_JSON_OBJECT_AND_THE_CACHE_RULE_IS_ABOUT_ANY_TREE_A_SIBLING_DESCRIBES",
+   "surviving_causal_blocker": "THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_REGISTRY_ROW__THE_FIX_IS_A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_ARGUMENT",
+   "existing_inherited_routes_checked": [
+    "answer_shape_v1",
+    "python_source_symbol_index",
+    "validate_cached_index",
+    "hardcore_swe_surface_probe_20261030.py",
+    "swe_capability_matrix_v1"
+   ],
+   "external_existing_routes_checked": "None needed: both mechanisms already existed in the tree.",
+   "surviving_gap": "THE_ADVANCED_CENSUS_IS_STILL_3_OF_49__THIS_CHANGE_DOES_NOT_MOVE_IT_AND_SAYS_SO"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_MATRIX_REAL_COUNT",
+    "TURNING_REFUSALS_INTO_PASSES"
+   ],
+   "real_outcome": "A callers question about a real tree is answered with the exact caller list instead of being refused for size, and a second question about the same tree does not re-parse it.",
+   "surviving_necessity": "The machine could only answer 'who calls X' for a single file; for a tree it computed the answer and discarded it."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_EXISTING_PROJECTION_THE_EXISTING_SHA256_ROW_CACHE_AND_THE_EXISTING_FLOOR_IDIOM"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "ONE_DOOR_CALL_PER_SENTENCE__ONE_PROBE_RUN_PER_INSTRUMENT__THE_ADVANCED_PROBE_WAS_RUN_TWICE_ONCE_WITH_AND_ONCE_WITHOUT_THE_CHANGE_TO_ATTRIBUTE_THE_THIRD_SERVED_ROW_TO_THE_MERGE_RATHER_THAN_TO_THIS_CHANGE",
+   "search_stop_decision": "STOPPED_AT_THE_THREE_DEFECTS_THAT_ARE_EXACTLY_MEASURABLE__THE_REMAINING_46_REFUSALS_NEED_CAPABILITY_ROWS_FOR_DOMAINS_THAT_HAVE_NONE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "losing_routes_reason": "Raising the cap would pay 1.5 GB of RSS for a 108 MB parse; a new cache directory would add a second 105 MB file per tree.",
+   "routes_ranked": [
+    "READ_THE_SECTION_THE_ANSWER_IS_IN__SELECTED",
+    "RAISE_MAX_ARTIFACT_BYTES__PAYS_FOR_THE_WHOLE_FILE",
+    "WRITE_A_SECOND_SUMMARY_ARTIFACT__A_NEW_FORMAT_TO_KEEP_IN_SYNC",
+    "BLACKLIST_LARGE_CAPABILITIES__A_LIST_THAT_AGES"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_CALLERS_SENTENCE_RUNS_ON_THE_REAL_RUNTIME_AND_ITS_ANSWER_IS_THE_FILE_S_OWN_caller_list"
+  },
+  "real_outcome": "Find the callers of binding_view in canonical/runtime delivers ['_execute', '_prefer_the_writing_repair', 'admit', 'build_plan', 'compile_against_live_registry'] instead of refusing for size.",
+  "required_capability": "A_GATE_THAT_READS_THE_ANSWER_IT_ASKED_FOR_AND_A_CACHE_KEYED_BY_WHAT_IT_DESCRIBES",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Both defects are in this repository and were measured on this tree."
+  },
+  "routes_considered": [
+   "RAISE_THE_CAP__PAYS_FOR_THE_WHOLE_PARSE",
+   "NEW_SUMMARY_FORMAT__TWO_THINGS_TO_KEEP_IN_SYNC",
+   "BOUNDED_SECTION_READ_AND_TREE_KEYED_CACHE__CHOSEN"
+  ],
+  "selected_route": "DECODE_THE_LEADING_TOP_LEVEL_MEMBERS_OF_AN_OVER_CAP_ARTIFACT_AND_KEY_THE_INDEX_CACHE_BY_THE_TREE",
+  "selected_surviving_route": "READ_THE_SECTION_THE_ANSWER_IS_IN__FIND_THE_ROWS_A_SIBLING_ARTIFACT_FOR_THE_SAME_TREE_PROVED__AND_GIVE_THE_ADVANCED_CENSUS_A_FLOOR",
+  "stop_condition": "CALLERS_ON_A_DIRECTORY_PASSES_WITH_THE_EXACT_ANSWER_5_7_S_WARM_AND_4_3_S_ON_A_NARROWER_TREE__CROSS_GOAL_TREE_REUSE_15_5_S_TO_3_5_S__MATRIX_54_CASES_22_REAL_0_FALSE_0_DAMAGED_MEDIAN_85_5_MS__SURFACE_CENSUS_28_OF_28__ADVANCED_CENSUS_3_OF_49_UNCHANGED_BY_THIS_CHANGE_AND_MEASURED_AS_SUCH__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE__CAPABILITY_SUITE_20_RED_NOT_21_AND_NONE_NEW"
+ },
+ "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "READ_THE_SECTION_THE_ANSWER_IS_IN_AND_KEY_THE_INDEX_CACHE_BY_THE_TREE",
+ "stop_condition": "CALLERS_ON_A_DIRECTORY_PASSES_WITH_THE_EXACT_ANSWER_5_7_S_WARM_AND_4_3_S_ON_A_NARROWER_TREE__CROSS_GOAL_TREE_REUSE_15_5_S_TO_3_5_S__MATRIX_54_CASES_22_REAL_0_FALSE_0_DAMAGED_MEDIAN_85_5_MS__SURFACE_CENSUS_28_OF_28__ADVANCED_CENSUS_3_OF_49_UNCHANGED_BY_THIS_CHANGE_AND_MEASURED_AS_SUCH__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE__CAPABILITY_SUITE_20_RED_NOT_21_AND_NONE_NEW",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "CAN_THE_GATE_ANSWER_FROM_AN_ARTIFACT_LARGER_THAN_ITS_READ_BUDGET_WITHOUT_READING_THE_WHOLE_THING",
+   "falsifier_id": "SET_THE_SECTION_BUDGET_TO_ZERO_AND_SEE_THE_REFUSAL_RETURN",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
+   "proposal_id": "AN_ANSWER_ALREADY_WRITTEN_MUST_NOT_BE_REFUSED_FOR_SIZE_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. The size cap still refuses an artifact whose leading members the gate cannot decode, still refuses a non-object artifact, and still refuses one outside the repository -- all three are pinned by tests that already existed and by the new ones. The cache fallback only FINDS candidate rows; each is still checked against the sha256 of the file's current bytes before reuse, which is the check a fresh parse passes. The advanced census gains a floor argument whose default preserves today's behaviour exactly."
+}
