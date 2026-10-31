@@ -84,7 +84,8 @@ class DerivationEvidenceTests(unittest.TestCase):
         self.assertEqual(d["new_param"]["rule"], "RENAME_NEW_NAME_STATED")
 
     def test_adapter_defaults_are_proved_from_the_adapter_ast(self):
-        registry = json.loads((ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text())["capabilities"]
+        from canonical.runtime.live_integrated_brain_v1 import _active_registry_path
+        registry = json.loads(_active_registry_path(ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_text())["capabilities"]
         entry = registry["python.refactor.rename_parameter.v1"]
         defaults = derivation.adapter_defaulted_keys(entry, ROOT)
         self.assertIn("python_executable", defaults)

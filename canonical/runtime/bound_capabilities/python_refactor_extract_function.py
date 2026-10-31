@@ -188,6 +188,7 @@ def run(args, root):
         _fail("MODULE_MUST_BE_PY")
     module_abs = _safe_path(src_abs, module_rel, must_exist=True)
     qualname = str(args.get("qualname") or "")
+    if str(args.get("to_module") or args.get("dest_file") or "").strip(): return _run_move_symbol(args, repo, src_rel, module_rel, qualname, str(args.get("to_module") or args.get("dest_file") or "").strip())
     raw_new_name = args.get("new_name")
     new_name = str(raw_new_name if raw_new_name is not None else "")
     new_name_was_defaulted = new_name in ("", "_extracted_helper")
@@ -499,10 +500,8 @@ def run(args, root):
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         py_roots = [str(src_abs)]
-        if (src_abs / "__init__.py").is_file() and (src_abs.parent == repo or repo in src_abs.parent.parents):
-            py_roots.insert(0, str(src_abs.parent))
-        if env.get("PYTHONPATH"):
-            py_roots.append(env["PYTHONPATH"])
+        if (src_abs / "__init__.py").is_file() and (src_abs.parent == repo or repo in src_abs.parent.parents): py_roots.insert(0, str(src_abs.parent))
+        if env.get("PYTHONPATH"): py_roots.append(env["PYTHONPATH"])
         env["PYTHONPATH"] = os.pathsep.join(py_roots)
         try:
             proc = subprocess.run(verify_argv,
@@ -558,6 +557,354 @@ def run(args, root):
         "output_verified": json.loads(out_abs.read_text(encoding="utf-8")) == artifact,
         "verified": verified,
     }
+
+
+def _dotted_from_root(base_root: Path, file_abs: Path) -> str:
+    rel = file_abs.relative_to(base_root).as_posix()
+    if rel.endswith("/__init__.py"):
+        rel = rel[:-len("/__init__.py")]
+    elif rel.endswith(".py"):
+        rel = rel[:-3]
+    return rel.replace("/", ".")
+
+
+def _run_move_symbol(
+    args: dict,
+    repo: Path,
+    src_rel: str,
+    module_rel: str,
+    qualname: str,
+    to_module_raw: str,
+) -> dict:
+    """Cross-file move_symbol refactoring with dependency carry-over, caller import rewrite, and rollback."""
+    import re
+    out_rel = str(args.get("output_path") or "canonical/astra_runtime/tmp/move_symbol_report.json").strip()
+    out_abs = _safe_path(repo, out_rel)
+    src_abs = _safe_path(repo, src_rel, must_exist=True) if src_rel else repo
+    if src_abs.is_file():
+        src_abs = src_abs.parent
+
+    def _resolve_mod(raw_p: str, *, allow_new: bool) -> Path:
+        cand = (src_abs / raw_p).resolve()
+        if cand != repo and repo in cand.parents and (cand.is_file() or allow_new):
+            if allow_new or cand.is_file():
+                return cand
+        cand2 = (repo / raw_p).resolve()
+        if cand2 == repo or repo not in cand2.parents:
+            _fail("PATH_OUTSIDE_REPOSITORY:" + raw_p)
+        return cand2
+
+    origin_abs = _resolve_mod(module_rel, allow_new=False)
+    if not origin_abs.is_file() or origin_abs.suffix != ".py":
+        _fail("ORIGIN_MODULE_MISSING:" + module_rel)
+    dest_abs = _resolve_mod(to_module_raw, allow_new=True)
+    if dest_abs.suffix != ".py":
+        _fail("DEST_MODULE_NOT_PYTHON:" + to_module_raw)
+    if dest_abs == origin_abs:
+        _fail("DEST_EQUALS_ORIGIN:" + to_module_raw)
+
+    if not qualname or not qualname.isidentifier() or keyword.iskeyword(qualname):
+        _fail("INVALID_MOVE_SYMBOL_NAME:" + repr(qualname))
+
+    # Determine Python import root (walk above package __init__.py if inside package)
+    imp_root = src_abs
+    while (imp_root / "__init__.py").is_file() and imp_root.parent != repo.parent and (imp_root.parent == repo or repo in imp_root.parent.parents):
+        imp_root = imp_root.parent
+    if imp_root not in origin_abs.parents:
+        imp_root = origin_abs.parent
+    if imp_root not in dest_abs.parents:
+        imp_root = repo
+
+    origin_dot = _dotted_from_root(imp_root, origin_abs)
+    dest_dot = _dotted_from_root(imp_root, dest_abs)
+    origin_short = origin_abs.stem
+    dest_short = dest_abs.stem
+
+    origin_text = origin_abs.read_text(encoding="utf-8")
+    origin_lines = origin_text.splitlines(keepends=True)
+    origin_tree = ast.parse(origin_text, filename=str(origin_abs))
+
+    target_node = None
+    for n in origin_tree.body:
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and n.name == qualname:
+            target_node = n
+            break
+    if target_node is None:
+        _fail("SYMBOL_NOT_FOUND_AT_MODULE_SCOPE:" + qualname)
+
+    start_ln = target_node.decorator_list[0].lineno if target_node.decorator_list else target_node.lineno
+    end_ln = getattr(target_node, "end_lineno", target_node.lineno)
+    block_text = "".join(origin_lines[start_ln - 1:end_ln])
+    block_tree = ast.parse(block_text)
+
+    dest_existed = dest_abs.is_file()
+    dest_before = dest_abs.read_bytes() if dest_existed else b""
+    dest_text = dest_before.decode("utf-8") if dest_existed else ""
+    dest_tree = ast.parse(dest_text) if dest_text.strip() else ast.Module(body=[], type_ignores=[])
+    dest_defs = {
+        n.name for n in dest_tree.body
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+    }
+    if qualname in dest_defs:
+        _fail("NAME_COLLISION_TARGET_MODULE:" + qualname)
+
+    # Collect names loaded by moved symbol vs origin imports & sibling definitions
+    loaded_in_block = {
+        sub.id for sub in ast.walk(block_tree)
+        if isinstance(sub, ast.Name) and isinstance(sub.ctx, ast.Load)
+    }
+    local_in_block: set[str] = {qualname}
+    for sub in ast.walk(block_tree):
+        if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            a = sub.args
+            local_in_block.update(x.arg for x in [*a.posonlyargs, *a.args, *a.kwonlyargs])
+            if a.vararg:
+                local_in_block.add(a.vararg.arg)
+            if a.kwarg:
+                local_in_block.add(a.kwarg.arg)
+        elif isinstance(sub, ast.Name) and isinstance(sub.ctx, ast.Store):
+            local_in_block.add(sub.id)
+    free_loads = loaded_in_block - local_in_block
+
+    carried_import_lines: list[str] = []
+    sibling_defs_needed: list[str] = []
+    for n in origin_tree.body:
+        if n is target_node:
+            continue
+        if isinstance(n, ast.Import):
+            used_aliases = [a for a in n.names if (a.asname or a.name.split(".")[0]) in free_loads]
+            if used_aliases:
+                parts = [f"{a.name} as {a.asname}" if a.asname else a.name for a in used_aliases]
+                carried_import_lines.append(f"import {', '.join(parts)}\n")
+        elif isinstance(n, ast.ImportFrom) and n.module:
+            used_aliases = [a for a in n.names if (a.asname or a.name) in free_loads]
+            if used_aliases:
+                dots = "." * (n.level or 0)
+                parts = [f"{a.name} as {a.asname}" if a.asname else a.name for a in used_aliases]
+                carried_import_lines.append(f"from {dots}{n.module} import {', '.join(parts)}\n")
+        elif isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and n.name in free_loads:
+            sibling_defs_needed.append(n.name)
+        elif isinstance(n, ast.Assign):
+            for t in n.targets:
+                if isinstance(t, ast.Name) and t.id in free_loads and t.id not in sibling_defs_needed:
+                    sibling_defs_needed.append(t.id)
+
+    if sibling_defs_needed:
+        carried_import_lines.append(f"from {origin_dot} import {', '.join(sorted(sibling_defs_needed))}\n")
+
+    # Cut block from origin; if origin still references `qualname`, inject re-import from dest_dot
+    rem_text = "".join(origin_lines[:start_ln - 1] + origin_lines[end_ln:])
+    rem_text = re.sub(r"\n{3,}", "\n\n", rem_text)
+    if rem_text and not rem_text.endswith("\n"):
+        rem_text += "\n"
+    rem_tree = ast.parse(rem_text) if rem_text.strip() else ast.Module(body=[], type_ignores=[])
+    origin_still_loads = any(
+        isinstance(sub, ast.Name) and sub.id == qualname and isinstance(sub.ctx, ast.Load)
+        for sub in ast.walk(rem_tree)
+    )
+    if origin_still_loads:
+        rlines = rem_text.splitlines(keepends=True)
+        ins_at = 0
+        for idx_l, ln in enumerate(rlines):
+            if ln.startswith(("import ", "from ")):
+                ins_at = idx_l + 1
+        rlines.insert(ins_at, f"from {dest_dot} import {qualname}\n")
+        rem_text = "".join(rlines)
+
+    # Build new destination module text (strip any stale import of `qualname` from origin inside dest itself)
+    if dest_text.strip():
+        try:
+            dtree_pre = ast.parse(dest_text)
+            dlines_pre = dest_text.splitlines(keepends=True)
+            self_imp_edits: list[tuple[int, int, list[str]]] = []
+            for dn in dtree_pre.body:
+                if isinstance(dn, ast.ImportFrom) and dn.module:
+                    if dn.module in {origin_dot, origin_short} or dn.module.endswith("." + origin_short):
+                        rem_aliases = [a for a in dn.names if a.name != qualname]
+                        if len(rem_aliases) != len(dn.names):
+                            dots = "." * (dn.level or 0)
+                            if rem_aliases:
+                                keep_s = ", ".join(f"{a.name} as {a.asname}" if a.asname else a.name for a in rem_aliases)
+                                self_imp_edits.append((dn.lineno, getattr(dn, "end_lineno", dn.lineno), [f"from {dots}{dn.module} import {keep_s}\n"]))
+                            else:
+                                self_imp_edits.append((dn.lineno, getattr(dn, "end_lineno", dn.lineno), []))
+            for s_l, e_l, r_l in sorted(self_imp_edits, key=lambda x: x[0], reverse=True):
+                dlines_pre[s_l - 1:e_l] = r_l
+            dest_text = "".join(dlines_pre)
+        except SyntaxError:
+            pass
+    dlines = dest_text.splitlines(keepends=True)
+    ins_at = 0
+    existing_stripped = {ln.strip() for ln in dlines}
+    for idx_l, ln in enumerate(dlines):
+        if ln.startswith(("import ", "from ")):
+            ins_at = idx_l + 1
+    for imp_ln in carried_import_lines:
+        if imp_ln.strip() not in existing_stripped:
+            dlines.insert(ins_at, imp_ln)
+            ins_at += 1
+            existing_stripped.add(imp_ln.strip())
+    new_dest_base = "".join(dlines)
+    if new_dest_base.strip():
+        new_dest_text = new_dest_base.rstrip("\n") + "\n\n" + block_text.rstrip("\n") + "\n"
+    else:
+        new_dest_text = block_text.rstrip("\n") + "\n"
+    ast.parse(new_dest_text)
+    ast.parse(rem_text)
+
+    # Scan caller files in imp_root (and sibling tests/) to rewrite `from <origin> import <qualname>`
+    scan_roots = {src_abs, imp_root}
+    if (src_abs.parent == repo or repo in src_abs.parent.parents) and (src_abs.parent / "tests").is_dir():
+        scan_roots.add(src_abs.parent / "tests")
+    candidate_py_files: set[Path] = set()
+    for sr in scan_roots:
+        if sr in (repo / "canonical", repo / "canonical" / "runtime"):
+            continue
+        if sr == repo:
+            # Avoid scanning entire brain repo if caller passed root; scan origin/dest parents
+            for sub_r in {origin_abs.parent, dest_abs.parent}:
+                if sub_r != repo:
+                    candidate_py_files.update(p for p in sub_r.rglob("*.py") if "__pycache__" not in p.parts)
+        else:
+            candidate_py_files.update(p for p in sr.rglob("*.py") if "__pycache__" not in p.parts)
+
+    backups: dict[Path, bytes | None] = {
+        origin_abs: origin_text.encode("utf-8"),
+        dest_abs: dest_before if dest_existed else None,
+    }
+    rewritten_callers: list[str] = []
+    matching_mod_names = {origin_dot, origin_short}
+
+    try:
+        origin_abs.write_text(rem_text, encoding="utf-8")
+        dest_abs.parent.mkdir(parents=True, exist_ok=True)
+        dest_abs.write_text(new_dest_text, encoding="utf-8")
+
+        for cfile in sorted(candidate_py_files):
+            if cfile in (origin_abs, dest_abs) or not cfile.is_file():
+                continue
+            try:
+                ctext = cfile.read_text(encoding="utf-8")
+                ctree = ast.parse(ctext, filename=str(cfile))
+            except (OSError, SyntaxError, UnicodeDecodeError):
+                continue
+            clines = ctext.splitlines(keepends=True)
+            edits_here: list[tuple[int, int, list[str]]] = []
+            for n in ctree.body:
+                if not isinstance(n, ast.ImportFrom) or not n.module:
+                    continue
+                if n.module not in matching_mod_names and not n.module.endswith("." + origin_short):
+                    continue
+                matched = [a for a in n.names if a.name == qualname]
+                if not matched:
+                    continue
+                others = [a for a in n.names if a.name != qualname]
+                replacement_target_mod = dest_short if (n.module == origin_short and n.level == 0 and origin_abs.parent == dest_abs.parent) else dest_dot
+                dots = "." * (n.level or 0)
+                if n.level and origin_abs.parent == dest_abs.parent:
+                    replacement_target_mod = dest_short
+                moved_parts = [f"{a.name} as {a.asname}" if a.asname else a.name for a in matched]
+                new_stmts = [f"from {dots}{replacement_target_mod} import {', '.join(moved_parts)}\n"]
+                if others:
+                    other_parts = [f"{a.name} as {a.asname}" if a.asname else a.name for a in others]
+                    new_stmts.append(f"from {dots}{n.module} import {', '.join(other_parts)}\n")
+                edits_here.append((n.lineno, getattr(n, "end_lineno", n.lineno), new_stmts))
+            if edits_here:
+                backups[cfile] = ctext.encode("utf-8")
+                for s_ln, e_ln, repl_lines in sorted(edits_here, key=lambda x: x[0], reverse=True):
+                    clines[s_ln - 1:e_ln] = repl_lines
+                updated_caller = "".join(clines)
+                ast.parse(updated_caller)
+                cfile.write_text(updated_caller, encoding="utf-8")
+                rewritten_callers.append(cfile.relative_to(repo).as_posix())
+
+        # Discover and run test suite via shared runner (0 extra subprocess sites)
+        from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+        from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
+            _purge_source_bytecode, _run_tests, _source_env, suite_argv,
+        )
+        for touched_p in backups:
+            if touched_p.is_file():
+                _purge_source_bytecode(touched_p)
+
+        explicit_tests = [
+            _safe_path(repo, str(t), must_exist=True) for t in (args.get("run_tests") or args.get("test_paths") or [])
+            if str(t).strip()
+        ]
+        if not explicit_tests:
+            for probe_dir in (src_abs, imp_root, origin_abs.parent):
+                if probe_dir == repo:
+                    continue
+                try:
+                    explicit_tests = list(discover_test_files(probe_dir))
+                    if explicit_tests:
+                        break
+                except FileNotFoundError:
+                    continue
+        verified = False
+        gate = "SKIPPED_NO_TESTS"
+        evidence: dict = {}
+        if explicit_tests:
+            t_argv = suite_argv(sys.executable, *explicit_tests)
+            t_env = _source_env(imp_root, origin_abs, dest_abs, *explicit_tests)
+            tres = _run_tests(repo, t_argv, int(args.get("timeout_s") or 60), t_env)
+            evidence = {
+                "returncode": tres["returncode"],
+                "timed_out": tres["timed_out"],
+                "elapsed_s": tres["elapsed_s"],
+            }
+            if tres["returncode"] != 0 or tres["timed_out"]:
+                raise RuntimeError("POST_MOVE_TESTS_FAILED:" + (tres.get("stderr") or "")[-240:])
+            verified = True
+            gate = "PASS"
+    except Exception as exc:
+        for p_path, old_b in backups.items():
+            if old_b is None:
+                p_path.unlink(missing_ok=True)
+            else:
+                p_path.write_bytes(old_b)
+        _fail(str(exc))
+
+    files_edited = [
+        origin_abs.relative_to(repo).as_posix(),
+        dest_abs.relative_to(repo).as_posix(),
+        *rewritten_callers,
+    ]
+    artifact = {
+        "schema": SCHEMA,
+        "operation": "move_symbol",
+        "source_root": src_rel,
+        "module": origin_abs.relative_to(repo).as_posix(),
+        "to_module": dest_abs.relative_to(repo).as_posix(),
+        "qualname": qualname,
+        "extracted_name": qualname,
+        "rewritten_callers": rewritten_callers,
+        "edit_count": len(files_edited),
+        "files_edited": files_edited,
+        "verification": evidence,
+        "gate": gate,
+        "complete": True,
+    }
+    out_abs.parent.mkdir(parents=True, exist_ok=True)
+    text_out = json.dumps(artifact, indent=2, ensure_ascii=False) + "\n"
+    out_abs.write_text(text_out, encoding="utf-8")
+    return {
+        "adapter": "python_refactor_extract_function",
+        "operation": "move_symbol",
+        "qualname": qualname,
+        "extracted_name": qualname,
+        "to_module": dest_abs.relative_to(repo).as_posix(),
+        "rewritten_callers": rewritten_callers,
+        "edit_count": len(files_edited),
+        "files_edited": files_edited,
+        "gate": gate,
+        "complete": True,
+        "output_path": out_abs.relative_to(repo).as_posix(),
+        "output_sha256": _sha256(text_out.encode("utf-8")),
+        "output_verified": True,
+        "verified": verified,
+    }
+
 
 
 if __name__ == "__main__":

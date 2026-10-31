@@ -31,19 +31,72 @@ def _safe_dir(repo,raw):
  if p!=repo and repo not in p.parents: raise FaultLocalizerError("PATH_OUTSIDE_REPOSITORY")
  if not p.is_dir() or p.is_symlink(): raise FaultLocalizerError("DIRECTORY_INVALID")
  return p
-def _trace_file_cases(repo,test,timeout,max_events,env=None):
+def _trace_file_cases(repo,test,timeout,max_events,env=None,trace_root=None):
+ troot=pathlib.Path(trace_root).resolve() if trace_root else repo
  code=_PATCH.SUITE_RUNNER+r'''import importlib.util,inspect,json,pathlib,runpy,sys,traceback,unittest
-repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); path_cache={}
-def _make_tracer(seen, counter):
- def tr(frame,event,arg):
-  if counter[0]>=cap:return None
-  p=_brain_project_file(frame,repo,path_cache)
-  if p is None:return None
-  if event=="line":
-   rel=str(p.relative_to(repo)).replace("\\","/"); key=(rel,frame.f_lineno,frame.f_code.co_name)
-   seen[key]=seen.get(key,0)+1;counter[0]+=1
-  return tr
- return tr
+repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); troot=pathlib.Path(sys.argv[4]).resolve(); path_cache={}
+def _rel_if_in_scope(filename):
+ if not filename or (filename.startswith("<") and filename.endswith(">")):return None
+ if filename in path_cache:return path_cache[filename]
+ try:
+  p=pathlib.Path(filename).resolve()
+  ok=p.is_file() and p.suffix==".py" and (p==troot or troot in p.parents) and (repo in p.parents)
+  rel=str(p.relative_to(repo)).replace("\\","/") if ok else None
+ except (OSError,ValueError):
+  rel=None
+ path_cache[filename]=rel
+ return rel
+
+class _FastLineRecorder:
+ """PEP 669 sys.monitoring zero-overhead line recorder with sys.settrace fallback."""
+ def __init__(self, seen, counter):
+  self.seen=seen; self.counter=counter; self.mon_id=None
+ def __enter__(self):
+  mon=getattr(sys,"monitoring",None)
+  if mon is not None:
+   for tid in (3,4,2):
+    try:
+     if mon.get_tool(tid) is None:
+      mon.use_tool_id(tid,"brain_fl_v1")
+      self.mon_id=tid; break
+    except ValueError:
+     continue
+  if self.mon_id is not None:
+   DISABLE=mon.DISABLE
+   seen=self.seen; counter=self.counter
+   def _on_line(code_obj, line_no):
+    if counter[0]>=cap:return DISABLE
+    rel=_rel_if_in_scope(code_obj.co_filename)
+    if rel is None:return DISABLE
+    key=(rel,line_no,code_obj.co_name)
+    seen[key]=seen.get(key,0)+1; counter[0]+=1
+   mon.register_callback(self.mon_id, mon.events.LINE, _on_line)
+   mon.set_events(self.mon_id, mon.events.LINE)
+  else:
+   seen=self.seen; counter=self.counter
+   def _tr(frame,event,arg):
+    if counter[0]>=cap:return None
+    rel=_rel_if_in_scope(frame.f_code.co_filename)
+    if rel is None:return None
+    if event=="line":
+     key=(rel,frame.f_lineno,frame.f_code.co_name)
+     seen[key]=seen.get(key,0)+1;counter[0]+=1
+    return _tr
+   sys.settrace(_tr)
+  return self
+ def __exit__(self, exc_type, exc, tb):
+  if self.mon_id is not None:
+   mon=sys.monitoring
+   try:
+    mon.set_events(self.mon_id, 0)
+    mon.register_callback(self.mon_id, mon.events.LINE, None)
+    mon.free_tool_id(self.mon_id)
+   except Exception:
+    pass
+  else:
+   sys.settrace(None)
+  return False
+
 def _pack(ok, seen, counter, tb):
  return {"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":counter[0]}
 
@@ -55,82 +108,73 @@ except SyntaxError:_ttree=None
 _has_structured_cases=False
 if _ttree is not None:
  for _n in _ttree.body:
-  if isinstance(_n,_ast.ClassDef) and any(isinstance(_d,_ast.FunctionDef) and _d.name.startswith("test") for _d in _n.body):
+  if isinstance(_n,_ast.ClassDef) and any(isinstance(_d,(_ast.FunctionDef,_ast.AsyncFunctionDef)) and _d.name.startswith("test") for _d in _n.body):
    _has_structured_cases=True;break
-  if isinstance(_n,_ast.FunctionDef) and _n.name.startswith("test_"):
+  if isinstance(_n,(_ast.FunctionDef,_ast.AsyncFunctionDef)) and _n.name.startswith("test_"):
    _has_structured_cases=True;break
 
 loader=unittest.TestLoader()
 mod_cases=[]
 load_seen={};load_cnt=[0];load_tb=[];load_ok=True
 if _has_structured_cases:
- sys.settrace(_make_tracer(load_seen,load_cnt))
- try:
-  spec=importlib.util.spec_from_file_location("_brain_tmod_"+target.stem,str(target))
-  mod=importlib.util.module_from_spec(spec)
-  sys.modules[spec.name]=mod
-  spec.loader.exec_module(mod)
-  suite=loader.loadTestsFromModule(mod)
-  def _iter_cases(s):
-   for item in s:
-    if isinstance(item,unittest.TestSuite):yield from _iter_cases(item)
-    else:yield item
-  mod_cases=list(_iter_cases(suite))
-  if not mod_cases:
-   for name,obj in sorted(vars(mod).items()):
-    if name.startswith("test_") and callable(obj) and not inspect.isclass(obj):
-     mod_cases.append(("fn",name,obj))
- except SystemExit as e:
-  load_ok=(e.code in (None,0,False))
-  if not load_ok:load_tb=traceback.extract_tb(e.__traceback__)
- except BaseException as e:
-  load_ok=False;load_tb=traceback.extract_tb(e.__traceback__)
- finally:
-  sys.settrace(None)
+ with _FastLineRecorder(load_seen,load_cnt):
+  try:
+   spec=importlib.util.spec_from_file_location("_brain_tmod_"+target.stem,str(target))
+   mod=importlib.util.module_from_spec(spec)
+   sys.modules[spec.name]=mod
+   spec.loader.exec_module(mod)
+   suite=loader.loadTestsFromModule(mod)
+   def _iter_cases(s):
+    for item in s:
+     if isinstance(item,unittest.TestSuite):yield from _iter_cases(item)
+     else:yield item
+   mod_cases=list(_iter_cases(suite))
+   if not mod_cases:
+    for name,obj in sorted(vars(mod).items()):
+     if name.startswith("test_") and callable(obj) and not inspect.isclass(obj):
+      mod_cases.append(("fn",name,obj))
+  except SystemExit as e:
+   load_ok=(e.code in (None,0,False))
+   if not load_ok:load_tb=traceback.extract_tb(e.__traceback__)
+  except BaseException as e:
+   load_ok=False;load_tb=traceback.extract_tb(e.__traceback__)
 
 if not load_ok:
  rows.append(_pack(False,load_seen,load_cnt,load_tb))
 elif len(mod_cases)>=1:
  for item in mod_cases:
   seen={};cnt=[0];tb=[];ok=True
-  sys.settrace(_make_tracer(seen,cnt))
+  with _FastLineRecorder(seen,cnt):
+   try:
+    if isinstance(item,tuple) and item[0]=="fn":
+     item[2]()
+    else:
+     res=unittest.TestResult()
+     item.run(res)
+     if res.failures or res.errors:
+      ok=False
+      try:item.debug()
+      except BaseException as de:tb=traceback.extract_tb(de.__traceback__)
+   except SystemExit as e:
+    ok=(e.code in (None,0,False))
+    if not ok:tb=traceback.extract_tb(e.__traceback__)
+   except BaseException as e:
+    ok=False;tb=traceback.extract_tb(e.__traceback__)
+  rows.append(_pack(ok,seen,cnt,tb))
+else:
+ seen={};cnt=[0];tb=[];ok=True
+ with _FastLineRecorder(seen,cnt):
   try:
-   if isinstance(item,tuple) and item[0]=="fn":
-    item[2]()
-   else:
-    res=unittest.TestResult()
-    item.run(res)
-    if res.failures or res.errors:
-     ok=False
-     for _tc,err_txt in (res.failures+res.errors):
-      pass
-     # Re-invoke debug() under trace when failed to capture exact failing traceback frames
-     try:item.debug()
-     except BaseException as de:tb=traceback.extract_tb(de.__traceback__)
+   _brain_run_suite(target)
   except SystemExit as e:
    ok=(e.code in (None,0,False))
    if not ok:tb=traceback.extract_tb(e.__traceback__)
   except BaseException as e:
    ok=False;tb=traceback.extract_tb(e.__traceback__)
-  finally:
-   sys.settrace(None)
-  rows.append(_pack(ok,seen,cnt,tb))
-else:
- # Plain top-level script test (e.g. bare `assert ...` module)
- seen={};cnt=[0];tb=[];ok=True
- sys.settrace(_make_tracer(seen,cnt))
- try:
-  _brain_run_suite(target)
- except SystemExit as e:
-  ok=(e.code in (None,0,False))
-  if not ok:tb=traceback.extract_tb(e.__traceback__)
- except BaseException as e:
-  ok=False;tb=traceback.extract_tb(e.__traceback__)
- finally:sys.settrace(None)
  rows.append(_pack(ok,seen,cnt,tb))
 print("__BRAIN_TRACE__"+json.dumps(rows,sort_keys=True))
 '''
- try:r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
+ try:r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events),str(troot)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
  except subprocess.TimeoutExpired:raise FaultLocalizerError("TEST_TIMEOUT")
  marker="__BRAIN_TRACE__"; lines=[x for x in r.stdout.splitlines() if x.startswith(marker)]
  if not lines: raise FaultLocalizerError("TRACE_OUTPUT_MISSING")
@@ -190,36 +234,92 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_events=max(100,min(int(args.get("max_trace_events",200000)),1000000));max_lines=max(1,min(int(args.get("max_ranked_lines",100)),1000));max_symbols=max(1,min(int(args.get("max_ranked_symbols",50)),500))
  traces=[]
  for t in tests:
-  for row in _trace_file_cases(repo,t,timeout,max_events,env):
+  for row in _trace_file_cases(repo,t,timeout,max_events,env,trace_root=src):
    traces.append({"test_path":_rel(repo,t),**row})
  F=sum(not x["pass"] for x in traces);P=sum(x["pass"] for x in traces)
  if F==0:raise FaultLocalizerError("NO_FAILING_TEST")
- fail_covered_set=set()
- pass_covered_set=set()
+ fail_counts={}
+ pass_counts={}
  func_by_loc={}
  tbset=set()
  for tr in traces:
-  covered=set((a,b,c) for a,b,c,_ in tr["events"])
-  for rel,line,func in covered:
+  covered_locs=set()
+  for rel,line,func,_ in tr["events"]:
    func_by_loc.setdefault((rel,line),set()).add(func)
-   (pass_covered_set if tr["pass"] else fail_covered_set).add((rel,line))
+   covered_locs.add((rel,line))
+  target_counts=pass_counts if tr["pass"] else fail_counts
+  for loc in covered_locs:
+   target_counts[loc]=target_counts.get(loc,0)+1
   if not tr["pass"]:
    tbset.update(tuple(x) for x in tr.get("traceback",[]))
+
+ # Precompute per-file line loads/stores and control-dependence spans for backward PDG boost
+ file_pdg_cache={}
+ def _pdg_info(rel_path):
+  if rel_path not in file_pdg_cache:
+   ap=(repo/rel_path).resolve()
+   ln_names=_line_names(ap)
+   defs_list=_defs_and_lines(ap)
+   ctrl_spans=[]
+   try:
+    ptree=ast.parse(ap.read_text(encoding="utf-8"),filename=str(ap))
+    for cn in ast.walk(ptree):
+     if isinstance(cn,(ast.If,ast.While)) and hasattr(cn,"lineno"):
+      ctrl_spans.append((cn.lineno,getattr(cn,"end_lineno",cn.lineno)))
+   except (SyntaxError,ValueError,UnicodeDecodeError,OSError):
+    pass
+   file_pdg_cache[rel_path]=(ln_names,defs_list,ctrl_spans)
+  return file_pdg_cache[rel_path]
+
+ # Identify seed fault lines (traceback frames + fail-only lines + controlling ifs) and 2-hop backward def-use
+ seed_vars_by_file_func={}
+ all_locs=set(fail_counts)|set(pass_counts)
+ for (rel,line) in sorted(all_locs):
+  ef=fail_counts.get((rel,line),0)
+  ep=pass_counts.get((rel,line),0)
+  if not ef:continue
+  funcs=func_by_loc.get((rel,line),{"<module>"})
+  ln_names,_defs,ctrl_spans=_pdg_info(rel)
+  controls_fail=any(cl==line and any((rel,sl) in fail_counts and pass_counts.get((rel,sl),0)==0 for sl in range(cl+1,ce+1)) for cl,ce in ctrl_spans)
+  is_seed=(ep==0) or controls_fail or any((rel,line,fn) in tbset for fn in funcs)
+  if is_seed:
+   loaded=ln_names.get(line,{}).get("loads",[])
+   for fn in funcs:
+    seed_vars_by_file_func.setdefault((rel,fn),set()).update(loaded)
+ # 2-hop transitive backward data-dependence closure within each (file, func)
+ for _hop in range(2):
+  for (rel,line) in sorted(all_locs):
+   if not fail_counts.get((rel,line),0):continue
+   ln_names,_defs,_ctrl=_pdg_info(rel)
+   rec=ln_names.get(line,{})
+   st=set(rec.get("stores",[]))
+   if not st:continue
+   for fn in func_by_loc.get((rel,line),{"<module>"}):
+    sv=seed_vars_by_file_func.get((rel,fn))
+    if sv and (st & sv):
+     sv.update(rec.get("loads",[]))
+
  ranked=[]
- all_locs=fail_covered_set|pass_covered_set
  for (rel,line) in sorted(all_locs):
   p=(repo/rel).resolve()
   if p==repo or repo not in p.parents or not p.is_file() or p.suffix!=".py" or p.name.startswith("test_") or "/tests/" in ("/"+rel):continue
-  f=1 if (rel,line) in fail_covered_set else 0
+  f=fail_counts.get((rel,line),0)
   if not f:continue
-  q=1 if (rel,line) in pass_covered_set else 0
+  q=pass_counts.get((rel,line),0)
+  ln_names,_defs,ctrl_spans=_pdg_info(rel)
+  stores_here=set(ln_names.get(line,{}).get("stores",[]))
   for func in sorted(func_by_loc.get((rel,line),{"<module>"})):
-   score=(f/math.sqrt(F*(f+q))) if f else 0.0
+   och=(f/math.sqrt(F*(f+q))) if f else 0.0
+   score=och
    reasons=[]
    if f and not q:reasons.append("FAIL_ONLY_EXECUTION")
    if q:reasons.append("PASSING_TEST_OVERLAP")
    if (rel,line,func) in tbset:score+=1.0;reasons.append("FAILING_TRACEBACK_FRAME")
-   ranked.append({"path":rel,"line":line,"function":func,"fail_coverage":f,"pass_coverage":q,"ochiai":round(score-(1.0 if "FAILING_TRACEBACK_FRAME" in reasons else 0.0),12),"score":round(score,12),"reasons":reasons})
+   if stores_here & seed_vars_by_file_func.get((rel,func),set()):
+    score+=0.15;reasons.append("BACKWARD_PDG_DEF_USE")
+   if any(cl==line and any((rel,sl) in fail_counts and pass_counts.get((rel,sl),0)==0 for sl in range(cl+1,ce+1)) for cl,ce in ctrl_spans):
+    score+=0.1;reasons.append("CONTROL_DEPENDENCE_SLICE")
+   ranked.append({"path":rel,"line":line,"function":func,"fail_coverage":f,"pass_coverage":q,"ochiai":round(och,12),"score":round(score,12),"reasons":reasons})
  ranked.sort(key=lambda x:(-x["score"],-x["fail_coverage"],x["pass_coverage"],x["path"],x["line"],x["function"]))
  ranked=ranked[:max_lines]
  files=sorted({x["path"] for x in ranked})

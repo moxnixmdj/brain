@@ -1261,7 +1261,15 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
+    _ro_q = bool(
+        re.match(r"^\s*(?:find|who|which|what|count|list|locate|show|measure)\b", text, re.I)
+        and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", text, re.I)
+    )
+    if _ro_q:
+        return []
     for m in _EDIT_PROMISE_RE.finditer(text):
+        if re.search(r"\b(?:function|method|symbol|class|def|named|called)\s+$", text[max(0, m.start() - 24):m.start()], re.I):
+            continue
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -2092,6 +2100,8 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     goal = str((request or {}).get("goal") or "").strip()
     try:
         from canonical.runtime import swe_typed_plan_v1 as _typed_plan
+        if len(re.findall(r"[A-Za-z_]+", front.prose_only(goal))) < 2:
+            return result
         if not _typed_plan.is_swe_request(goal):
             return result
         plan = _typed_plan.build_plan(goal, ROOT)

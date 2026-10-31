@@ -5407,7 +5407,8 @@
           "run_tests": [],
           "source_root": "${input.source_root}",
           "start_line": "${input.start_line}",
-          "timeout_s": 300
+          "timeout_s": 300,
+          "to_module": "${input.to_module}"
         },
         "expect": {
           "field": "gate",
@@ -5432,7 +5433,18 @@
         "dedent",
         "inputs outputs inference",
         "semantic edit",
-        "codemod"
+        "codemod",
+        "move function",
+        "move the function",
+        "move symbol",
+        "move helper",
+        "move class",
+        "move",
+        "module",
+        "helper",
+        "lines",
+        "extract",
+        "into"
       ],
       "limitations": [
         "region bytes move verbatim and dedent exactly 4: comments and formatting inside the region are byte-carried, never reprinted; the extracted def parse-checks BEFORE the file is touched and the rebuilt module parse-checks before it is written.",
@@ -5553,9 +5565,11 @@
       "action_template": {
         "args": {
           "capability_id": "python.refactor.rename_parameter.v1",
+          "default_expr": "${input.default_expr}",
           "module": "${input.module}",
           "new_param": "${input.new_param}",
           "old_param": "${input.old_param}",
+          "operation": "${input.operation}",
           "output_path": "${input.output_path}",
           "python_executable": "${input.python_executable}",
           "qualname": "${input.qualname}",
@@ -5586,7 +5600,16 @@
         "kwargs",
         "signature",
         "semantic edit",
-        "codemod"
+        "codemod",
+        "add parameter",
+        "add a parameter",
+        "add argument",
+        "optional parameter",
+        "default parameter",
+        "add",
+        "optional",
+        "default",
+        "argument"
       ],
       "limitations": [
         "edits identifiers, never strings or formatting: comment/docstring words byte-preserved; all splices are byte-integrity-checked at exact identifier spans (SPAN_INTEGRITY refusal).",
@@ -5724,12 +5747,12 @@
         "independently_verified": true,
         "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
         "observed_effect": {
-          "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
-          "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
-          "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
-          "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical",
           "determinism": "two pristine worlds -> byte-identical trees and artifacts; string literals and substring-carriers (topper, \"top of \") never edited",
-          "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files"
+          "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files",
+          "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
+          "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
+          "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
+          "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical"
         },
         "pin_green": "18/18 rename-symbol pins green",
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
@@ -7362,13 +7385,13 @@
     "python.software.repair.route.v1": {
       "action_template": {
         "args": {
+          "budget": "${input.budget}",
           "capability_id": "python.software.repair.route.v1",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
-          "test_paths": "${input.test_paths}",
           "test_argv": "${input.test_argv}",
-          "timeout_s": "${input.timeout_s}",
-          "budget": "${input.budget}"
+          "test_paths": "${input.test_paths}",
+          "timeout_s": "${input.timeout_s}"
         },
         "expect": {
           "field": "output_verified",
@@ -7656,6 +7679,106 @@
         "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
         "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
         "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165"
+      }
+    },
+    "python.software.synthesize_function.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.synthesize_function.v1",
+          "function_name": "${input.function_name}",
+          "goal": "${input.goal}",
+          "operation": "${input.operation}",
+          "output_path": "${input.output_path}",
+          "regression_test_file": "${input.regression_test_file}",
+          "source_root": "${input.source_root}",
+          "target_file": "${input.target_file}",
+          "test_paths": "${input.test_paths}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_program_synthesizer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "synthesize",
+        "implement",
+        "write function",
+        "add function",
+        "add a function",
+        "total function",
+        "feature",
+        "program synthesis",
+        "stun",
+        "bottom-up",
+        "specification",
+        "regression test",
+        "add a regression test",
+        "fix and add test",
+        "function",
+        "regression",
+        "test",
+        "fix",
+        "bug",
+        "total",
+        "export",
+        "returns",
+        "add",
+        "models"
+      ],
+      "limitations": [
+        "Synthesizes total Python functions from test-suite I/O + exception contracts and explicit domain guards using bottom-up observational-equivalence enumeration, exact affine/multivariate Gaussian elimination, and STUN conditional branch unification.",
+        "Fails closed and restores target module bytes on any failing test or unsatisfiable contract."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.function.synthesized",
+        "python.source.feature.synthesized",
+        "python.source.write.synthesized_function"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "capability_id",
+        "exception_contract_count",
+        "files_edited",
+        "function_name",
+        "incremental_spend_usd",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "parameters",
+        "positive_example_count",
+        "target_file",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_program_synthesizer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "HARDCORE-SWE-SYNTH-001",
+        "observed_effect": {
+          "total_function_synthesis": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1.json",
+        "state_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
       }
     },
     "python.source.audit.ast": {
@@ -8712,12 +8835,12 @@
       "action_template": {
         "args": {
           "capability_id": "python.tests.advance.mutation_kill.v1",
+          "max_mutants": "${input.max_mutants}",
+          "module_name": "${input.module_name}",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
-          "module_name": "${input.module_name}",
           "time_budget_s": "${input.time_budget_s}",
-          "timeout_s": "${input.timeout_s}",
-          "max_mutants": "${input.max_mutants}"
+          "timeout_s": "${input.timeout_s}"
         },
         "expect": {
           "field": "output_verified",
@@ -9012,12 +9135,12 @@
     "python.tests.synthesize.pynguin.v1": {
       "action_template": {
         "args": {
+          "algorithm": "${input.algorithm}",
           "capability_id": "python.tests.synthesize.pynguin.v1",
           "output_path": "${input.output_path}",
+          "search_seed": "${input.search_seed}",
           "source_root": "${input.source_root}",
-          "time_budget_s": "${input.time_budget_s}",
-          "algorithm": "${input.algorithm}",
-          "search_seed": "${input.search_seed}"
+          "time_budget_s": "${input.time_budget_s}"
         },
         "expect": {
           "field": "output_verified",
@@ -9812,10 +9935,10 @@
     "software.review.gate.composer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.review.gate.composer.v1",
           "anchor_path": "${input.anchor_path}",
-          "diff_path": "${input.diff_path}",
           "bench_path": "${input.bench_path}",
+          "capability_id": "software.review.gate.composer.v1",
+          "diff_path": "${input.diff_path}",
           "output_path": "${input.output_path}"
         },
         "expect": {

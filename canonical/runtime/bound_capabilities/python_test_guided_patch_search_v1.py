@@ -484,6 +484,97 @@ SUITE_ENTRY = (
     "_brain_run_suites([pathlib.Path(_t).resolve() for _t in sys.argv[1:]])\n"
 )
 
+BATCH_SUITE_ENTRY = r'''
+import importlib.machinery, io, json, linecache, os, pathlib, signal, sys, time
+
+class _BrainCandTimeout(BaseException):
+ pass
+
+def _brain_batch_main():
+ manifest_path = pathlib.Path(sys.argv[1]).resolve()
+ payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+ source_abs = str(pathlib.Path(payload["source_path"]).resolve())
+ targets = [pathlib.Path(t).resolve() for t in payload["test_paths"]]
+ per_timeout = float(payload.get("per_candidate_timeout_s", 5.0))
+ max_winners = int(payload.get("max_winners", 3))
+ evict_dirs = tuple(str(pathlib.Path(d).resolve()) for d in payload.get("evict_dirs", []))
+ orig_get_code = importlib.machinery.SourceFileLoader.get_code
+ orig_get_data = importlib.machinery.SourceFileLoader.get_data
+ current_bytes = [None]
+ sys.dont_write_bytecode = True
+
+ def _patched_get_data(self, path):
+  if current_bytes[0] is not None and os.path.abspath(path) == source_abs:
+   return current_bytes[0]
+  return orig_get_data(self, path)
+
+ def _patched_get_code(self, fullname):
+  if current_bytes[0] is not None and os.path.abspath(self.get_filename(fullname)) == source_abs:
+   return compile(current_bytes[0], source_abs, "exec", dont_inherit=True)
+  return orig_get_code(self, fullname)
+
+ importlib.machinery.SourceFileLoader.get_data = _patched_get_data
+ importlib.machinery.SourceFileLoader.get_code = _patched_get_code
+ has_timer = hasattr(signal, "setitimer") and hasattr(signal, "SIGALRM")
+ if has_timer:
+  signal.signal(signal.SIGALRM, lambda _s, _f: (_ for _ in ()).throw(_BrainCandTimeout()))
+
+ results = []
+ winners = 0
+ real_stdout, real_stderr = sys.stdout, sys.stderr
+ for item in payload["candidates"]:
+  idx = item["index"]
+  cand_text = item["source"]
+  current_bytes[0] = cand_text.encode("utf-8")
+  linecache.cache[source_abs] = (
+   len(cand_text), None, cand_text.splitlines(True), source_abs
+  )
+  for mname, mod in list(sys.modules.items()):
+   mfile = getattr(mod, "__file__", None)
+   if not mfile:
+    continue
+   amf = os.path.abspath(mfile)
+   if amf == source_abs or any(amf == rt or amf.startswith(rt + os.sep) for rt in evict_dirs):
+    sys.modules.pop(mname, None)
+  t0 = time.monotonic()
+  timed_out = False
+  rc = 0
+  sink = io.StringIO()
+  sys.stdout = sink
+  sys.stderr = sink
+  try:
+   if has_timer:
+    signal.setitimer(signal.ITIMER_REAL, per_timeout)
+   _brain_run_suites(targets)
+  except _BrainCandTimeout:
+   timed_out = True
+   rc = None
+  except SystemExit as exc:
+   rc = 0 if exc.code in (None, 0) else 1
+  except BaseException:
+   rc = 1
+  finally:
+   if has_timer:
+    signal.setitimer(signal.ITIMER_REAL, 0.0)
+   sys.stdout = real_stdout
+   sys.stderr = real_stderr
+  results.append({
+   "index": idx,
+   "returncode": rc,
+   "timed_out": timed_out,
+   "elapsed_s": round(time.monotonic() - t0, 6),
+  })
+  if rc == 0 and not timed_out:
+   winners += 1
+   if winners >= max_winners:
+    break
+ real_stdout.write(json.dumps({"results": results}) + "\n")
+ real_stdout.flush()
+
+_brain_batch_main()
+'''
+
+
 
 def argv_names_a_target(argv: Any) -> bool:
     """True when a command line actually names a test suite to run.
@@ -605,6 +696,123 @@ def _diff(rel: str, before: str, after: str) -> str:
         fromfile="a/"+rel,tofile="b/"+rel
     ))
 
+
+def _structural_candidate_specs(source_text: str, tree: ast.AST) -> list[tuple[str, dict[str, Any]]]:
+    """SPR/Prophet-inspired structural clause candidates (isolated reserve, zero legacy dilution)."""
+    out: list[tuple[str, dict[str, Any]]] = []
+    seen_texts: set[str] = {source_text}
+
+    def add_text(cand_str: str, node: ast.AST, kind: str, detail: str) -> None:
+        if not cand_str or cand_str in seen_texts:
+            return
+        try:
+            ast.parse(cand_str)
+        except SyntaxError:
+            return
+        seen_texts.add(cand_str)
+        out.append((cand_str, _descriptor(node, kind, detail, family="structural")))
+
+    for node in _locations(tree):
+        key = _node_key(node)
+        # 1. Subscript d[k] -> d.get(k) safe lookup (prevents KeyError crashes)
+        if isinstance(node, ast.Subscript) and isinstance(node.ctx, ast.Load) and not isinstance(node.slice, ast.Slice):
+            cand = _render_candidate(
+                source_text, key,
+                lambda n: ast.Call(
+                    func=ast.Attribute(value=n.value, attr="get", ctx=ast.Load()),
+                    args=[n.slice], keywords=[],
+                ),
+            )
+            if cand:
+                add_text(cand, node, "SUBSCRIPT_TO_DICT_GET", "d[k] -> d.get(k)")
+
+        # 2. Condition clause projection & null-guard tightening (SPR condition refinement)
+        if isinstance(node, ast.BoolOp) and len(node.values) >= 2:
+            for idx in range(len(node.values)):
+                cand = _render_candidate(source_text, key, lambda n, idx=idx: n.values[idx])
+                if cand:
+                    add_text(cand, node, "BOOL_CLAUSE_PROJECT", f"keep clause {idx}")
+        if isinstance(node, ast.If):
+            tkey = _node_key(node.test)
+            # Null-guard conjunction if condition touches `obj.attr` or `len(obj)`
+            guarded_names: list[str] = []
+            for sub in ast.walk(node.test):
+                if isinstance(sub, ast.Attribute) and isinstance(sub.value, ast.Name) and sub.value.id != "self":
+                    if sub.value.id not in guarded_names:
+                        guarded_names.append(sub.value.id)
+                elif isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id == "len" and sub.args and isinstance(sub.args[0], ast.Name):
+                    if sub.args[0].id not in guarded_names:
+                        guarded_names.append(sub.args[0].id)
+            for gname in guarded_names[:2]:
+                cand = _render_candidate(
+                    source_text, tkey,
+                    lambda n, gname=gname: ast.BoolOp(
+                        op=ast.And(),
+                        values=[
+                            ast.Compare(left=ast.Name(id=gname, ctx=ast.Load()), ops=[ast.IsNot()], comparators=[ast.Constant(value=None)]),
+                            n,
+                        ],
+                    ),
+                )
+                if cand:
+                    add_text(cand, node.test, "CONDITION_NULL_GUARD", f"{gname} is not None and cond")
+
+        # 3. Off-by-one range(n) -> range(n + 1) / range(1, n + 1)
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "range":
+            if len(node.args) == 1:
+                cand = _render_candidate(
+                    source_text, key,
+                    lambda n: ast.Call(
+                        func=n.func,
+                        args=[ast.BinOp(left=n.args[0], op=ast.Add(), right=ast.Constant(value=1))],
+                        keywords=n.keywords,
+                    ),
+                )
+                if cand:
+                    add_text(cand, node, "RANGE_UPPER_INCLUSIVE", "range(n) -> range(n + 1)")
+            elif len(node.args) == 2:
+                cand = _render_candidate(
+                    source_text, key,
+                    lambda n: ast.Call(
+                        func=n.func,
+                        args=[n.args[0], ast.BinOp(left=n.args[1], op=ast.Add(), right=ast.Constant(value=1))],
+                        keywords=n.keywords,
+                    ),
+                )
+                if cand:
+                    add_text(cand, node, "RANGE_STOP_PLUS_ONE", "range(a, b) -> range(a, b + 1)")
+
+        # 4. Function entry guard synthesis (None / empty early-return or ValueError)
+        if isinstance(node, ast.FunctionDef) and node.body and node.args.args:
+            params = [a.arg for a in node.args.args if a.arg not in ("self", "cls")]
+            if params:
+                p0 = params[0]
+                lines = source_text.splitlines(keepends=True)
+                first_stmt = node.body[0]
+                if isinstance(first_stmt, ast.Expr) and isinstance(first_stmt.value, ast.Constant) and isinstance(first_stmt.value.value, str) and len(node.body) > 1:
+                    first_stmt = node.body[1]
+                indent = " " * getattr(first_stmt, "col_offset", 4)
+                ins_line = getattr(first_stmt, "lineno", node.lineno + 1) - 1
+                for g_kind, g_stmt in (
+                    ("GUARD_NONE_RETURN_NONE", f"{indent}if {p0} is None:\n{indent}    return None\n"),
+                    ("GUARD_EMPTY_RETURN_ZERO", f"{indent}if isinstance({p0}, (list, tuple, str, dict, set)) and len({p0}) == 0:\n{indent}    return 0\n"),
+                    ("GUARD_NONE_RAISE_VALUE_ERROR", f"{indent}if {p0} is None:\n{indent}    raise ValueError('None not allowed')\n"),
+                ):
+                    cand = "".join(lines[:ins_line]) + g_stmt + "".join(lines[ins_line:])
+                    add_text(cand, node, g_kind, f"entry guard on {p0}")
+        if len(out) >= 24:
+            break
+    return out
+
+
+def _is_standard_suite_argv(argv: list[str]) -> bool:
+    return (
+        len(argv) >= 4
+        and argv[1] == "-c"
+        and argv[2] == SUITE_RUNNER + SUITE_ENTRY
+    )
+
+
 def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     repo=pathlib.Path(root).resolve()
     if not isinstance(args,Mapping):
@@ -654,51 +862,145 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     legacy_tested=0
     neigh_tested=0
     NEIGH_RESERVE=6  # own budget; legacy slots untouched (zero dilution)
-    try:
-        for key,desc,replacer in _candidate_specs(tree,nums,strings):
-            if desc.get("family")=="neighborhood":
-                if neigh_tested>=NEIGH_RESERVE:
-                    continue
-                neigh_tested+=1
-            elif legacy_tested>=max_candidates:
-                continue  # keep scanning: neighborhood reserve must stay reachable
-            candidate=_render_candidate(source_text,key,replacer)
-            if candidate is None or candidate==source_text:
+    STRUCT_RESERVE=16  # SPR structural clause budget; zero legacy dilution
+
+    # Materialize bounded candidate queue in deterministic stream order
+    queued: list[tuple[str, dict[str, Any]]] = []
+    for key,desc,replacer in _candidate_specs(tree,nums,strings):
+        if desc.get("family")=="neighborhood":
+            if neigh_tested>=NEIGH_RESERVE:
                 continue
-            tested+=1
-            if desc.get("family")!="neighborhood":
-                legacy_tested+=1
-            source.write_text(candidate,encoding="utf-8")
+            neigh_tested+=1
+        elif legacy_tested>=max_candidates:
+            continue  # keep scanning: neighborhood reserve must stay reachable
+        candidate=_render_candidate(source_text,key,replacer)
+        if candidate is None or candidate==source_text:
+            continue
+        if desc.get("family")!="neighborhood":
+            legacy_tested+=1
+        queued.append((candidate, desc))
+
+    for sc_text, sc_desc in _structural_candidate_specs(source_text, tree)[:STRUCT_RESERVE]:
+        queued.append((sc_text, sc_desc))
+
+    def _verify_on_disk(cand_text: str) -> tuple[bool, list[dict[str, Any]]]:
+        replay_list=[]
+        all_ok=True
+        for _ in range(2):
+            source.write_text(cand_text,encoding="utf-8")
             _purge_source_bytecode(source)
-            result=_run_tests(repo,argv,timeout_s,env)
+            rr=_run_tests(repo,argv,timeout_s,env)
             source.write_bytes(original_bytes)
             _purge_source_bytecode(source)
-            attempts.append({
-                "index":tested,
-                "mutation":desc,
-                "candidate_sha256":_sha(candidate.encode("utf-8")),
-                "returncode":result["returncode"],
-                "timed_out":result["timed_out"],
-                "elapsed_s":result["elapsed_s"],
+            replay_list.append({
+                "returncode":rr["returncode"],
+                "timed_out":rr["timed_out"],
+                "elapsed_s":rr["elapsed_s"],
             })
-            if result["returncode"]==0 and not result["timed_out"]:
-                replay=[]
-                ok=True
-                for _ in range(2):
-                    source.write_text(candidate,encoding="utf-8")
-                    _purge_source_bytecode(source)
-                    rr=_run_tests(repo,argv,timeout_s,env)
-                    source.write_bytes(original_bytes)
-                    _purge_source_bytecode(source)
-                    replay.append({
-                        "returncode":rr["returncode"],
-                        "timed_out":rr["timed_out"],
-                        "elapsed_s":rr["elapsed_s"],
-                    })
-                    ok=ok and rr["returncode"]==0 and not rr["timed_out"]
-                if ok:
-                    winner=(candidate,desc,replay)
-                    break
+            all_ok=all_ok and rr["returncode"]==0 and not rr["timed_out"]
+        return all_ok, replay_list
+
+    try:
+        if queued and _is_standard_suite_argv(argv):
+            # Mutant-schemata single-process in-RAM batch fast path (1 subprocess per chunk
+            # instead of 1 per mutant; full 2x cold subprocess replay confirms any winner).
+            evict_dirs = sorted({str(source.parent.resolve()), *[str(t.parent.resolve()) for t in tests]})
+            per_cand_t = max(1.0, min(float(timeout_s), max(3.0, float(baseline["elapsed_s"]) * 4.0 + 1.5)))
+            chunk_size = 48
+            manifest_dir = output.parent
+            manifest_dir.mkdir(parents=True, exist_ok=True)
+            manifest_file = manifest_dir / f".patch_batch_{os.getpid()}.json"
+            try:
+                for start_i in range(0, len(queued), chunk_size):
+                    chunk = queued[start_i:start_i + chunk_size]
+                    manifest_payload = {
+                        "source_path": str(source),
+                        "test_paths": [str(t) for t in tests],
+                        "per_candidate_timeout_s": per_cand_t,
+                        "max_winners": 3,
+                        "evict_dirs": evict_dirs,
+                        "candidates": [
+                            {"index": start_i + off + 1, "source": c_txt}
+                            for off, (c_txt, _d) in enumerate(chunk)
+                        ],
+                    }
+                    manifest_file.write_text(json.dumps(manifest_payload), encoding="utf-8")
+                    batch_argv = [str(sys.executable), "-c", SUITE_RUNNER + BATCH_SUITE_ENTRY, str(manifest_file)]
+                    batch_timeout = min(300, max(timeout_s, int(per_cand_t * len(chunk)) + 10))
+                    bres = _run_tests(repo, batch_argv, batch_timeout, env)
+                    parsed_rows = None
+                    if bres["returncode"] == 0 and not bres["timed_out"]:
+                        lines_out = [ln for ln in (bres["stdout"] or "").splitlines() if ln.strip()]
+                        if lines_out:
+                            try:
+                                parsed_rows = json.loads(lines_out[-1]).get("results")
+                            except Exception:
+                                parsed_rows = None
+                    if not isinstance(parsed_rows, list):
+                        # Fallback to cold per-candidate evaluation on this chunk
+                        for c_txt, desc in chunk:
+                            tested += 1
+                            source.write_text(c_txt, encoding="utf-8")
+                            _purge_source_bytecode(source)
+                            result = _run_tests(repo, argv, timeout_s, env)
+                            source.write_bytes(original_bytes)
+                            _purge_source_bytecode(source)
+                            attempts.append({
+                                "index": tested,
+                                "mutation": desc,
+                                "candidate_sha256": _sha(c_txt.encode("utf-8")),
+                                "returncode": result["returncode"],
+                                "timed_out": result["timed_out"],
+                                "elapsed_s": result["elapsed_s"],
+                            })
+                            if result["returncode"] == 0 and not result["timed_out"]:
+                                ok, replay = _verify_on_disk(c_txt)
+                                if ok:
+                                    winner = (c_txt, desc, replay)
+                                    break
+                    else:
+                        for row in parsed_rows:
+                            idx1 = int(row["index"])
+                            c_txt, desc = queued[idx1 - 1]
+                            tested += 1
+                            attempts.append({
+                                "index": tested,
+                                "mutation": desc,
+                                "candidate_sha256": _sha(c_txt.encode("utf-8")),
+                                "returncode": row["returncode"],
+                                "timed_out": row["timed_out"],
+                                "elapsed_s": row["elapsed_s"],
+                            })
+                            if row["returncode"] == 0 and not row["timed_out"]:
+                                ok, replay = _verify_on_disk(c_txt)
+                                if ok:
+                                    winner = (c_txt, desc, replay)
+                                    break
+                    if winner is not None:
+                        break
+            finally:
+                manifest_file.unlink(missing_ok=True)
+        else:
+            for candidate, desc in queued:
+                tested+=1
+                source.write_text(candidate,encoding="utf-8")
+                _purge_source_bytecode(source)
+                result=_run_tests(repo,argv,timeout_s,env)
+                source.write_bytes(original_bytes)
+                _purge_source_bytecode(source)
+                attempts.append({
+                    "index":tested,
+                    "mutation":desc,
+                    "candidate_sha256":_sha(candidate.encode("utf-8")),
+                    "returncode":result["returncode"],
+                    "timed_out":result["timed_out"],
+                    "elapsed_s":result["elapsed_s"],
+                })
+                if result["returncode"]==0 and not result["timed_out"]:
+                    ok, replay = _verify_on_disk(candidate)
+                    if ok:
+                        winner=(candidate,desc,replay)
+                        break
     finally:
         source.write_bytes(original_bytes)
         _purge_source_bytecode(source)

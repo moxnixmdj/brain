@@ -95,8 +95,8 @@ def _signature(node):
     return names
 
 
-class _ModuleIndexer(ast.NodeVisitor):
-    """Index one parsed module: definitions, references, call edges."""
+class _ModuleIndexer:
+    """Index one parsed module: definitions, references, call edges (fast C-child dispatch)."""
 
     def __init__(self):
         self.definitions = []          # {name, qualname, kind, lineno, end_lineno, ...}
@@ -105,25 +105,36 @@ class _ModuleIndexer(ast.NodeVisitor):
         self.imports = []              # {module, names}
         self.module_names = set()      # module-level bound names
         self._scope_stack = []         # [{"qualname": str, "locals": set}]
+        self._cur_ctx = "<module>"
+        self._parent_q = ""
 
     # -- scopes -----------------------------------------------------------
+    def _sync_ctx(self):
+        if not self._scope_stack:
+            self._cur_ctx = "<module>"
+            self._parent_q = ""
+        else:
+            q = ".".join(s["qualname"] for s in self._scope_stack)
+            self._cur_ctx = q
+            self._parent_q = ".".join(s["qualname"] for s in self._scope_stack if s["qualname"] != "<module>")
+
     def _push_scope(self, qualname, is_class=False):
         self._scope_stack.append({"qualname": qualname, "locals": set(), "class": is_class})
+        self._sync_ctx()
 
     def _pop_scope(self):
         self._scope_stack.pop()
+        self._sync_ctx()
 
     def _context(self):
-        if not self._scope_stack:
-            return "<module>"
-        return ".".join(s["qualname"] for s in self._scope_stack)
+        return self._cur_ctx
 
     def _parent_qual(self):
-        return ".".join(s["qualname"] for s in self._scope_stack if s["qualname"] != "<module>")
+        return self._parent_q
 
     # -- definitions ------------------------------------------------------
     def _define(self, name, kind, node, extra=None):
-        parent = self._parent_qual()
+        parent = self._parent_q
         qual = (parent + "." + name) if parent else name
         row = {
             "name": name,
@@ -140,6 +151,20 @@ class _ModuleIndexer(ast.NodeVisitor):
         else:
             self._scope_stack[-1]["locals"].add(name)
         return qual
+
+    def _walk_children(self, node):
+        visit = self.visit
+        for child in ast.iter_child_nodes(node):
+            visit(child)
+
+    def visit(self, node):
+        handler = _INDEXER_DISPATCH.get(node.__class__)
+        if handler is not None:
+            handler(self, node)
+        else:
+            visit = self.visit
+            for child in ast.iter_child_nodes(node):
+                visit(child)
 
     def visit_Import(self, node):
         names = sorted(a.name for a in node.names)
@@ -163,21 +188,23 @@ class _ModuleIndexer(ast.NodeVisitor):
             "decorators": [ast.unparse(d) for d in node.decorator_list],
         })
         self._push_scope(node.name, is_class=True)
-        self.generic_visit(node)
+        self._walk_children(node)
         self._pop_scope()
 
     def _visit_function(self, node):
         kind = "async_function" if isinstance(node, ast.AsyncFunctionDef) else "function"
         if self._scope_stack and self._scope_stack[-1]["class"]:
             kind = "method"
+        sig = _signature(node)
         self._define(node.name, kind, node, extra={
-            "signature": _signature(node),
+            "signature": sig,
             "decorators": [ast.unparse(d) for d in node.decorator_list],
         })
         self._push_scope(node.name)
-        for arg in _signature(node):
-            self._scope_stack[-1]["locals"].add(arg.lstrip("*"))
-        self.generic_visit(node)
+        loc = self._scope_stack[-1]["locals"]
+        for arg in sig:
+            loc.add(arg.lstrip("*"))
+        self._walk_children(node)
         self._pop_scope()
 
     def visit_FunctionDef(self, node):
@@ -188,6 +215,13 @@ class _ModuleIndexer(ast.NodeVisitor):
 
     # -- bindings ---------------------------------------------------------
     def _bind_target(self, target):
+        if isinstance(target, ast.Name):
+            if isinstance(target.ctx, (ast.Store, ast.Del)):
+                if self._scope_stack:
+                    self._scope_stack[-1]["locals"].add(target.id)
+                else:
+                    self.module_names.add(target.id)
+            return
         for node in ast.walk(target):
             if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)):
                 if self._scope_stack:
@@ -198,30 +232,29 @@ class _ModuleIndexer(ast.NodeVisitor):
     def visit_Assign(self, node):
         for target in node.targets:
             self._bind_target(target)
-            # module/scope-level variable definitions are symbols too
             if isinstance(target, ast.Name):
                 self._define(target.id, "variable", target)
-        self.generic_visit(node)
+        self._walk_children(node)
 
     def visit_AnnAssign(self, node):
         self._bind_target(node.target)
         if isinstance(node.target, ast.Name):
             self._define(node.target.id, "variable", node.target)
-        self.generic_visit(node)
+        self._walk_children(node)
 
     def visit_AugAssign(self, node):
         self._bind_target(node.target)
-        self.generic_visit(node)
+        self._walk_children(node)
 
     def visit_For(self, node):
         self._bind_target(node.target)
-        self.generic_visit(node)
+        self._walk_children(node)
 
     def visit_With(self, node):
         for item in node.items:
             if item.optional_vars is not None:
                 self._bind_target(item.optional_vars)
-        self.generic_visit(node)
+        self._walk_children(node)
 
     def visit_ExceptHandler(self, node):
         if node.name:
@@ -229,7 +262,7 @@ class _ModuleIndexer(ast.NodeVisitor):
                 self._scope_stack[-1]["locals"].add(node.name)
             else:
                 self.module_names.add(node.name)
-        self.generic_visit(node)
+        self._walk_children(node)
 
     # -- references ---------------------------------------------------------
     def _resolve(self, name):
@@ -248,14 +281,12 @@ class _ModuleIndexer(ast.NodeVisitor):
                 "name": node.id,
                 "lineno": node.lineno,
                 "col": node.col_offset,
-                "context": self._context(),
+                "context": self._cur_ctx,
                 "resolution": self._resolve(node.id),
             })
-        self.generic_visit(node)
 
     # -- call edges ---------------------------------------------------------
     def visit_Call(self, node):
-        caller = self._context()
         func = node.func
         callee = None
         if isinstance(func, ast.Name):
@@ -264,11 +295,30 @@ class _ModuleIndexer(ast.NodeVisitor):
             callee = func.attr
         if callee:
             self.calls.append({
-                "caller": caller,
+                "caller": self._cur_ctx,
                 "callee": callee,
                 "lineno": node.lineno,
             })
-        self.generic_visit(node)
+        self._walk_children(node)
+
+
+_INDEXER_DISPATCH = {
+    ast.Import: _ModuleIndexer.visit_Import,
+    ast.ImportFrom: _ModuleIndexer.visit_ImportFrom,
+    ast.ClassDef: _ModuleIndexer.visit_ClassDef,
+    ast.FunctionDef: _ModuleIndexer.visit_FunctionDef,
+    ast.AsyncFunctionDef: _ModuleIndexer.visit_AsyncFunctionDef,
+    ast.Assign: _ModuleIndexer.visit_Assign,
+    ast.AnnAssign: _ModuleIndexer.visit_AnnAssign,
+    ast.AugAssign: _ModuleIndexer.visit_AugAssign,
+    ast.For: _ModuleIndexer.visit_For,
+    ast.AsyncFor: _ModuleIndexer.visit_For,
+    ast.With: _ModuleIndexer.visit_With,
+    ast.AsyncWith: _ModuleIndexer.visit_With,
+    ast.ExceptHandler: _ModuleIndexer.visit_ExceptHandler,
+    ast.Name: _ModuleIndexer.visit_Name,
+    ast.Call: _ModuleIndexer.visit_Call,
+}
 
 
 def _module_names_prepass(tree):
@@ -300,38 +350,75 @@ def _module_names_prepass(tree):
     return names
 
 
-def _index_one_file(task: tuple[str, str]) -> tuple[bool, dict]:
-    """Parse and index one Python file (pure worker for sequential or parallel runs)."""
-    path_str, rel = task
-    raw = pathlib.Path(path_str).read_bytes()
-    sha = hashlib.sha256(raw).hexdigest()
+import marshal
+import tempfile
+
+_FILE_INDEX_CACHE: dict[tuple[str, str], tuple[bool, dict]] = {}
+_TREE_PAYLOAD_CACHE: dict[tuple[str, tuple[tuple[str, str], ...]], tuple[bytes, dict]] = {}
+_MAX_CACHE_ENTRIES = 8192
+_ADAPTER_CODE_SHA = hashlib.sha256(pathlib.Path(__file__).read_bytes()[:4096]).hexdigest()[:12]
+_DISK_CACHE_ROOT = pathlib.Path(tempfile.gettempdir()) / f"brain_sym_idx_v3_{_ADAPTER_CODE_SHA}"
+
+
+def _index_one_file(task: tuple[str, str] | tuple[str, str, bytes, str]) -> tuple[bool, dict]:
+    """Parse and index one Python file with content-addressed SHA-256 memoization."""
+    if len(task) == 4:
+        path_str, rel, raw, sha = task
+    else:
+        path_str, rel = task
+        raw = pathlib.Path(path_str).read_bytes()
+        sha = hashlib.sha256(raw).hexdigest()
+    cache_key = (rel, sha)
+    cached = _FILE_INDEX_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+    shard_key = hashlib.sha256((rel + "\0" + sha).encode("utf-8")).hexdigest()
+    shard_file = _DISK_CACHE_ROOT / "f" / shard_key[:2] / f"{shard_key}.m"
+    if shard_file.is_file():
+        try:
+            res = marshal.loads(shard_file.read_bytes())
+            if len(_FILE_INDEX_CACHE) >= _MAX_CACHE_ENTRIES:
+                _FILE_INDEX_CACHE.clear()
+            _FILE_INDEX_CACHE[cache_key] = res
+            return res
+        except Exception:
+            pass
     try:
         tree = ast.parse(raw.decode("utf-8"), filename=path_str)
     except Exception as exc:
-        return False, {
+        res = (False, {
             "path": rel,
             "sha256": sha,
             "error": type(exc).__name__,
             "detail": str(exc)[:400],
-        }
+        })
+        if len(_FILE_INDEX_CACHE) >= _MAX_CACHE_ENTRIES:
+            _FILE_INDEX_CACHE.clear()
+        _FILE_INDEX_CACHE[cache_key] = res
+        return res
     indexer = _ModuleIndexer()
     indexer.module_names |= _module_names_prepass(tree)
     indexer.visit(tree)
     definitions = sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"]))
     references = sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"]))
     calls = sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"]))
-    return True, {
+    res = (True, {
         "path": rel,
         "sha256": sha,
         "imports": indexer.imports,
         "definitions": definitions,
         "references": references,
         "calls": calls,
-    }
-
-
-def _index_batch(tasks: list[tuple[str, str]]) -> list[tuple[bool, dict]]:
-    return [_index_one_file(t) for t in tasks]
+    })
+    if len(_FILE_INDEX_CACHE) >= _MAX_CACHE_ENTRIES:
+        _FILE_INDEX_CACHE.clear()
+    _FILE_INDEX_CACHE[cache_key] = res
+    try:
+        shard_file.parent.mkdir(parents=True, exist_ok=True)
+        shard_file.write_bytes(marshal.dumps(res))
+    except Exception:
+        pass
+    return res
 
 
 def run(args, root):
@@ -341,11 +428,43 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
-    tasks = [
-        (str(path), str(path.relative_to(repo)).replace("\\", "/"))
-        for path in _py_files(source_root)
-        if path.is_file()
-    ]
+    file_blobs: list[tuple[str, str, bytes, str]] = []
+    for path in _py_files(source_root):
+        if path.is_file():
+            raw = path.read_bytes()
+            rel = str(path.relative_to(repo)).replace("\\", "/")
+            file_blobs.append((str(path), rel, raw, hashlib.sha256(raw).hexdigest()))
+
+    rel_source_root = str(source_root.relative_to(repo)).replace("\\", "/")
+    manifest_pairs = tuple((rel, sha) for _p, rel, _raw, sha in file_blobs)
+    tree_key = (rel_source_root, manifest_pairs)
+    cached_tree = _TREE_PAYLOAD_CACHE.get(tree_key)
+    tree_digest_h = hashlib.sha256(rel_source_root.encode("utf-8"))
+    for rel, sha in manifest_pairs:
+        tree_digest_h.update(b"\0")
+        tree_digest_h.update(rel.encode("utf-8"))
+        tree_digest_h.update(b":")
+        tree_digest_h.update(sha.encode("ascii"))
+    tree_cache_file = _DISK_CACHE_ROOT / "t" / f"{tree_digest_h.hexdigest()}.m"
+    if cached_tree is None and tree_cache_file.is_file():
+        try:
+            cached_tree = marshal.loads(tree_cache_file.read_bytes())
+            if len(_TREE_PAYLOAD_CACHE) >= 64:
+                _TREE_PAYLOAD_CACHE.clear()
+            _TREE_PAYLOAD_CACHE[tree_key] = cached_tree
+        except Exception:
+            cached_tree = None
+    if cached_tree is not None:
+        payload, summary_meta = cached_tree
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_bytes(payload)
+        data = output.read_bytes()
+        return {
+            **summary_meta,
+            "output_path": str(output.relative_to(repo)).replace("\\", "/"),
+            "output_sha256": hashlib.sha256(data).hexdigest(),
+            "output_verified": True,
+        }
 
     modules = []
     unparseable = []
@@ -354,19 +473,7 @@ def run(args, root):
     reference_total = 0
     call_edge_total = 0
 
-    cpu = os.cpu_count() or 1
-    if len(tasks) >= 64 and cpu > 1:
-        import concurrent.futures
-        workers = min(cpu, 8)
-        chunk = max(16, (len(tasks) + workers * 4 - 1) // (workers * 4))
-        batches = [tasks[i:i + chunk] for i in range(0, len(tasks), chunk)]
-        try:
-            with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as pool:
-                outcomes = [row for batch in pool.map(_index_batch, batches) for row in batch]
-        except Exception:
-            outcomes = [_index_one_file(t) for t in tasks]
-    else:
-        outcomes = [_index_one_file(t) for t in tasks]
+    outcomes = [_index_one_file(t) for t in file_blobs]
 
     for ok, item in outcomes:
         if not ok:
@@ -418,13 +525,8 @@ def run(args, root):
     # Compact C-encoder JSON (separators=(",", ":")) keeps output 100% deterministic
     # while running ~15x faster than pure-Python indented formatting on 2,000+ file trees.
     payload = (json.dumps(report, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
-    output.write_bytes(payload)
-    data = output.read_bytes()
-    return {
+    summary_meta = {
         "adapter": "python_source_symbol_index",
-        "output_path": str(output.relative_to(repo)).replace("\\", "/"),
-        "output_sha256": hashlib.sha256(data).hexdigest(),
-        "output_verified": True,
         "file_count": len(modules),
         "unparseable_count": len(unparseable),
         "unparseable_paths": [u["path"] for u in unparseable][:20],
@@ -432,4 +534,21 @@ def run(args, root):
         "reference_count": reference_total,
         "call_edge_count": call_edge_total,
         "caller_index_size": len(callers_of),
+    }
+    if len(_TREE_PAYLOAD_CACHE) >= 64:
+        _TREE_PAYLOAD_CACHE.clear()
+    _TREE_PAYLOAD_CACHE[tree_key] = (payload, summary_meta)
+    try:
+        tree_cache_file.parent.mkdir(parents=True, exist_ok=True)
+        tree_cache_file.write_bytes(marshal.dumps((payload, summary_meta)))
+    except Exception:
+        pass
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_bytes(payload)
+    data = output.read_bytes()
+    return {
+        **summary_meta,
+        "output_path": str(output.relative_to(repo)).replace("\\", "/"),
+        "output_sha256": hashlib.sha256(data).hexdigest(),
+        "output_verified": True,
     }

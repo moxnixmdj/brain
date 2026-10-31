@@ -521,7 +521,7 @@ _COMPUTED_ANSWER_DELIVERY_RE = re.compile(
     r"(?:(?:yes\s+or\s+no|true\s+or\s+false)"
     r"|(?:its|their|the)\s+(?:name|test\s+name|function\s+name|symbol\s+name|"
     r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
-    r"number|count|result|results|answer|value|values|"
+    r"number|count|result|results|report|reports|summary|answer|value|values|"
     r"file\s+and\s+line|path\s+and\s+line|line\s+and\s+file))"
     r"\s+(?:to|into|in|at)\s+\S+\s*[.!?]?\s*$",
     re.IGNORECASE,
@@ -638,16 +638,40 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
         return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
                 "required_inputs": required}
     _goal_low = str(goal or "").lstrip().lower()
-    if cid == "python.source.definition_count.v1" and not re.search(
-        r"\b(?:functions?|classes|class|methods?|definitions?|symbols?)\b", _goal_low
+    if cid == "python.source.definition_count.v1" and (
+        "python file " in _goal_low
+        or not re.search(r"\b(?:functions?|classes|class|methods?|definitions?|symbols?)\b", _goal_low)
     ):
         return {"capability_id": cid, "admitted": False,
                 "reason": "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
                 "required_inputs": required}
+    if cid == "python.refactor.rename_parameter.v1" and not re.search(
+        r"\b(?:param\w*|arg\w*)\b", _goal_low
+    ):
+        return {"capability_id": cid, "admitted": False,
+                "reason": "RENAME_PARAMETER_REQUIRES_PARAMETER_OR_ARGUMENT_SUBJECT",
+                "required_inputs": required}
+    if cid == "python.source.dead_code.v1" and not re.search(
+        r"\b(?:dead|unused|unreferenced|unreachable)\b", _goal_low
+    ):
+        return {"capability_id": cid, "admitted": False,
+                "reason": "DEAD_CODE_REQUIRES_DEAD_OR_UNUSED_SUBJECT",
+                "required_inputs": required}
+    if "testselect" in cid and re.search(
+        r"\b(?:caller|callers|who\s+calls|call\s+graph|call\s+site)\b", _goal_low
+    ) and not re.search(r"\b(?:tests?|impact\w*|chang\w*)\b", _goal_low):
+        return {"capability_id": cid, "admitted": False,
+                "reason": "TESTSELECT_REQUIRES_TEST_OR_IMPACT_SUBJECT",
+                "required_inputs": required}
     if (
         (is_computed_answer_delivery(goal)
-         or _goal_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")))
-        and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", _goal_low)
+         or _goal_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ", "find ", "locate ")))
+        and not re.search(
+            r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace|implement|synthesize|create|"
+            r"remove|optimize|parameterize|migrate|linearithmic|"
+            r"add\s+(?:a|an|optional|parameter|argument|function|method|total))\b",
+            _goal_low,
+        )
     ):
         from canonical.runtime import write_authority_v1 as _wa
         if _wa.is_source_transformer(cid):
@@ -787,13 +811,18 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
 
 _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("rename",), ("rename",)),
+    (("add parameter", "add a parameter", "add an optional parameter", "add optional parameter", "add argument"), ("rename_parameter",)),
+    (("move function", "move the function", "move helper", "move the helper", "move symbol", "move class"), ("extract_function",)),
     (("extract",), ("extract",)),
-    (("repair", "fix", "broken", "failing"), ("repair", "patch", "choreograph")),
-    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition"), ("choreograph",)),
+    (("synthesize", "implement ", "add a function", "add a total function", "total function", "write a function"), ("synthesize_function", "synthesize")),
+    (("regression test",), ("synthesize_function",)),
+    (("repair", "fix", "broken", "failing"), ("repair.apply", "repair", "patch", "choreograph")),
+    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition", "circular import", "import cycle"), ("choreograph", "crossfile")),
+    (("change impact", "impacted test", "which tests"), ("change_impact", "testselect")),
     (("scaffold", "generate test"), ("scaffold", "generate")),
     (("audit", "count the functions"), ("audit",)),
     (("review", "lint", "type-check", "typecheck"), ("review",)),
-    (("localize", "traceback", "at fault"), ("fault", "localize")),
+    (("localize", "traceback", "at fault", "bug:", "failing test"), ("localize", "fault")),
     (("mutation", "catch a bug", "would the tests", "strong the tests", "intermittently"), ("mutation",)),
     (("taint", "untrusted"), ("taint", "security")),
     (("bisect", "broke", "got much slower", "between head"), ("bisect", "regression")),
@@ -801,7 +830,7 @@ _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
 
 
 _NOUN_WORDS = ("parameter", "symbol", "function", "test", "loop", "crossfile",
-               "diff", "patch", "scaffold", "fault", "provenance", "review")
+               "diff", "patch", "scaffold", "fault", "provenance", "review", "synthesize")
 
 
 def _effect_winner(goal: str, admitted: list[dict[str, Any]],
@@ -813,7 +842,8 @@ def _effect_winner(goal: str, admitted: list[dict[str, Any]],
     broken ONLY by the retrieval shortlist order (never by the margin alone).
     An unstated effect or an unresolved tie returns None.
     """
-    text = str(goal or "").lower()
+    from canonical.runtime import goal_front_compiler_v1 as _front_prose
+    text = _front_prose.prose_only(str(goal or "")).lower()
     preferred: list[str] = []
     for verbs, effects in _EFFECT_WORDS:
         if any(verb in text for verb in verbs):

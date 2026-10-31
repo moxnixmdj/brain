@@ -687,9 +687,20 @@ def _module_pair_file(entry, paths):
     if not isinstance(entry, Mapping):
         return None
     keys = gc._placeholders(entry.get("action_template") or {})
-    if "source_root" not in keys or "module" not in keys:
+    if "source_root" not in keys or ("module" not in keys and "target_file" not in keys):
         return None
     named = [raw for raw, path in paths if path.is_file() and raw.endswith(".py")]
+    if len(named) > 1:
+        non_test = [
+            r for r in named
+            if not re.search(r"(^|/)(test_[^/]*|[^/]*_test)\.py$", r) and "/tests/" not in r
+        ]
+        if len(non_test) > 1 and "target_file" in keys:
+            non_init = [r for r in non_test if not r.endswith("/__init__.py") and r != "__init__.py"]
+            if len(non_init) == 1:
+                non_test = non_init
+        if len(non_test) == 1:
+            named = non_test
     if len(named) != 1:
         return None
     return named[0]
@@ -963,6 +974,46 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
                 inputs[key] = module
                 continue
         remaining.append((key, exc))
+    if isinstance(entry, Mapping):
+        cid = str(((entry.get("action_template") or {}).get("args") or {}).get("capability_id") or "")
+        if cid in (
+            "python.software.synthesize_function.v1",
+            "python.refactor.extract_function.v1",
+            "python.refactor.rename_parameter.v1",
+            "python.refactor.rename_symbol.v1",
+        ) and (remaining or cid in ("python.refactor.extract_function.v1", "python.refactor.rename_symbol.v1", "python.refactor.rename_parameter.v1")):
+            from canonical.runtime import declared_input_derivation_v1 as _swed
+            if _swed.is_swe_request(goal):
+                swe_derived = _swed.derive(goal, entry, pathlib.Path(root))
+                final_rem: list[tuple[str, BaseException]] = []
+                for key, exc in remaining:
+                    if key in swe_derived:
+                        val = swe_derived[key]["value"]
+                        if key == "module" and isinstance(val, str) and inputs.get("source_root"):
+                            sr_p = str(inputs["source_root"]).rstrip("/")
+                            if sr_p and val.startswith(sr_p + "/"):
+                                val = val[len(sr_p) + 1:]
+                        inputs[key] = val
+                    else:
+                        final_rem.append((key, exc))
+                if "new_name" in swe_derived and swe_derived["new_name"].get("rule") == "EXTRACT_NEW_NAME_STATED":
+                    inputs["new_name"] = swe_derived["new_name"]["value"]
+                elif "new_name" in swe_derived and inputs.get("new_name") in (None, "", "helper", "function", "method"):
+                    inputs["new_name"] = swe_derived["new_name"]["value"]
+                if "to_module" in swe_derived:
+                    if swe_derived["to_module"]["value"] and "source_root" in swe_derived and "module" in swe_derived:
+                        inputs["source_root"] = swe_derived["source_root"]["value"]
+                        inputs["module"] = swe_derived["module"]["value"]
+                        inputs["to_module"] = swe_derived["to_module"]["value"]
+                    elif swe_derived["to_module"].get("rule") == "EXTRACT_IN_MODULE_DEFAULT":
+                        inputs["to_module"] = ""
+                if swe_derived.get("source_root", {}).get("rule") in ("RENAME_SYMBOL_PACKAGE_ROOT_PROVED", "ADD_PARAM_PACKAGE_ROOT"):
+                    inputs["source_root"] = swe_derived["source_root"]["value"]
+                    if "module" in swe_derived:
+                        inputs["module"] = swe_derived["module"]["value"]
+                    if "qualname" in swe_derived:
+                        inputs["qualname"] = swe_derived["qualname"]["value"]
+                remaining = final_rem
     return remaining
 
 
@@ -1769,12 +1820,16 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             inputs[key] = bind_typed_key(goal, key, root, entry)
         except GoalCompilationFailure as exc:
             refused.append((key, exc))
-    if refused:
+    if refused or ("new_name" in typed_keys) or ("old_symbol" in typed_keys) or ("old_param" in typed_keys):
         refused = derive_declared_inputs(goal, refused, root, entry, inputs)
     if refused:
         raise refused[0][1]
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
                              cycle=cycle, spool=spool)
+    if isinstance(entry, Mapping):
+        _cid_out = str(((entry.get("action_template") or {}).get("args") or {}).get("capability_id") or "")
+        if _cid_out == "python.software.synthesize_function.v1" and str(inputs.get("output_path") or "").endswith(".py"):
+            inputs["output_path"] = "canonical/astra_runtime/tmp/spool_0_output.json"
     return inputs
 
 
@@ -2687,15 +2742,20 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
             _text_low = text.lstrip().lower()
             _read_only_q = (
                 (_csr_ro.is_computed_answer_delivery(text)
-                 or _text_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")))
-                and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", _text_low)
+                 or _text_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ", "find ", "locate ")))
+                and not re.search(
+                    r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace|implement|synthesize|create|"
+                    r"remove|optimize|parameterize|migrate|linearithmic|"
+                    r"add\s+(?:a|an|optional|parameter|argument|function|method|total))\b",
+                    _text_low,
+                )
             )
             _repair_imperative = (
                 not _read_only_q
                 and not future
                 and bool(re.search(
-                    r"\b(?:(?:fix|repair)\s+(?:the\s+(?:code|bug|race|circular|import|package|module|function)|it\b)"
-                    r"|remove\s+the\s+sql\s+injection|make\s+\w+\s+linearithmic|migrate\s+it\b)",
+                    r"\b(?:(?:fix|repair)\s+(?:the\s+(?:python\s+source|source|code|bug|race|circular|import|package|module|function)|it\b)"
+                    r"|remove\s+the\s+sql\s+injection|linearithmic|migrate\s+it\b)",
                     _text_low,
                 ))
             )
@@ -2711,9 +2771,17 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
                     if _is_catch_all(cand_entry):
                         # a capability that binds every sentence is never the decision
                         continue
+                    if cand[2] == "python.source.definition_count.v1" and "python file " in _text_low:
+                        continue
+                    if cand[2] == "python.refactor.rename_parameter.v1" and not re.search(r"\b(?:param\w*|arg\w*)\b", _text_low):
+                        continue
                     if _read_only_q and _wa_ro.is_source_transformer(cand[2]):
                         continue
-                    if _repair_imperative and not _wa_ro.is_source_transformer(cand[2]):
+                    if _repair_imperative and (
+                        not _wa_ro.is_source_transformer(cand[2])
+                        or cand[2] == "python.patch.search.test_guided.ast.v1"
+                        or cand[2].startswith("python.software.repair.loop.")
+                    ):
                         continue
                     try:
                         cand_inputs = bind_all_inputs(text, cand_entry, root, cycle=0, spool=spool)
