@@ -1,0 +1,23 @@
+{
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "kind": "pypi_wheel_closure",
+  "payload": {
+    "candidate_wheels": [
+      {
+        "filename": "slubjsonlinkcheck-0.9.0-py3-none-any.whl",
+        "python_version": "py3",
+        "sha256": "da66e19dd44cafd2c2ae5c1218f550bdd95cd0713bdda4cfac19cf134289c2c1",
+        "size": 12851,
+        "url": "https://files.pythonhosted.org/packages/fc/76/068a96508d2793611376c1c78193256028a65ae2fbcd4736b785c2c8245d/slubjsonlinkcheck-0.9.0-py3-none-any.whl"
+      }
+    ],
+    "max_total_bytes": 160000000,
+    "max_wheels": 32,
+    "metadata_url": "https://pypi.org/pypi/slubjsonlinkcheck/0.9.0/json",
+    "project": "slubjsonlinkcheck",
+    "version": "0.9.0"
+  },
+  "request_sha256": "a1705711bed5cbf573117d27159cf534d38cae4744831fa6991e4d7e8853c6d0",
+  "schema": "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1",
+  "task_id": "SI-REAL-UBJSON-SNAPSHOT-001"
+}

@@ -217,7 +217,88 @@ def _finalize_wheel_closure(wheels,target,name,version,resolver):
     }
     lock_sha=hashlib.sha256(json.dumps(lock,sort_keys=True,separators=(",",":")).encode()).hexdigest()
     lock["closure_sha256"]=lock_sha
+    # Persist a replay record so an offline verification child can rebuild the
+    # same closure from the on-disk probe wheels without any metadata fetch.
+    stage_record={
+      "schema":"PROJECT_BRAIN_PYPI_LOCAL_WHEEL_CLOSURE_REPLAY_V1",
+      "root_project":roots[0]["project"],"root_version":roots[0]["version"],
+      "root_filename":roots[0]["filename"],
+      "wheels":[{"filename":w["filename"],"sha256":w["sha256"]} for w in closure],
+      "closure_sha256":lock_sha,
+    }
+    record_name=re.sub(r"[-_.]+","-",name).lower()+"-"+version+".lock.json"
+    try:
+        (target/record_name).write_text(
+            json.dumps(stage_record,sort_keys=True,separators=(",",":"))+"\n",
+            encoding="utf-8"
+        )
+    except Exception as exc:
+        raise AutoPyPIAcquisitionFailure("PYPI_LOCAL_CLOSURE_RECORD_WRITE_FAILED",str(exc)) from exc
     return {"root":roots[0],"wheels":verified,"lock":lock}
+
+
+def _materialize_local_wheel_closure(candidate,target):
+    """Rebuild a closure from the on-disk probe-wheel cache if a replay record
+    exists and every wheel's sha256 matches; offline-safe (no metadata fetch).
+    Returns None when nothing valid is staged."""
+    name=str(candidate.get("project") or candidate.get("name") or "")
+    version=str(candidate.get("version") or "")
+    record_name=re.sub(r"[-_.]+","-",name).lower()+"-"+version+".lock.json"
+    record_path=target/record_name
+    if not record_path.is_file():
+        return None
+    try:
+        record=json.loads(record_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    if record.get("schema")!="PROJECT_BRAIN_PYPI_LOCAL_WHEEL_CLOSURE_REPLAY_V1":
+        return None
+    if record.get("root_project")!=name or record.get("root_version")!=version:
+        return None
+    wheels=[]
+    for item in record.get("wheels") or []:
+        filename=str(item.get("filename") or "")
+        expected=str(item.get("sha256") or "")
+        wheel_path=target/filename
+        if not wheel_path.is_file():
+            return None
+        raw=wheel_path.read_bytes()
+        if len(raw)>160_000_000:
+            return None
+        if hashlib.sha256(raw).hexdigest().lower()!=expected:
+            return None
+        parsed=_wheel_identity(wheel_path)
+        if not parsed:
+            return None
+        project,wver=parsed
+        wheels.append({
+          "project":project,"version":wver,"filename":filename,
+          "sha256":expected,"path":str(wheel_path),
+        })
+    if not wheels:
+        return None
+    normalized_root=re.sub(r"[-_.]+","-",name).lower()
+    roots=[x for x in wheels if re.sub(r"[-_.]+","-",x["project"]).lower()==normalized_root and x["version"]==version]
+    if len(roots)!=1:
+        return None
+    closure=sorted(
+        [{k:v for k,v in x.items() if k!="path"} for x in wheels],
+        key=lambda x:(re.sub(r"[-_.]+","-",x["project"]).lower(),x["version"],x["filename"])
+    )
+    lock={
+      "schema":"PROJECT_BRAIN_PYPI_WHEEL_CLOSURE_V1",
+      "root_project":record["root_project"],"root_version":record["root_version"],
+      "root_filename":record["root_filename"],
+      "wheel_count":len(closure),"wheels":closure,
+      "source_only_artifacts_allowed":False,
+      "resolver":"local-replay-pinned",
+      "network_required_for_install":False,
+    }
+    lock_sha=hashlib.sha256(json.dumps(lock,sort_keys=True,separators=(",",":")).encode()).hexdigest()
+    lock["closure_sha256"]=lock_sha
+    if str(record.get("closure_sha256") or "")!=lock_sha:
+        return None
+    return {"root":roots[0],"wheels":wheels,"lock":lock}
 
 
 def _materialize_external_wheel_closure(candidate,root,target):
@@ -274,6 +355,9 @@ def _download_compatible_wheel_closure(candidate,root):
     external=_materialize_external_wheel_closure(candidate,root,target)
     if external is not None:
         return external
+    local=_materialize_local_wheel_closure(candidate,target)
+    if local is not None:
+        return local
     with tempfile.TemporaryDirectory(prefix="brain-pypi-wheel-closure-") as td:
         proc=subprocess.run(
             [
@@ -484,10 +568,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "steps":[
         {"id":"verify-pending-python-codec","adapter":"shell",
          "command":f"set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
-         "verify":{"type":"stdout_contains","text":"PENDING_PYPI_BINDING_EFFECT_VERIFIED"}},
-        {"id":"promote-and-replay","adapter":"shell",
-         "command":f"set -euo pipefail\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
-         "verify":{"type":"stdout_contains","text":"PENDING_CAPABILITY_PROMOTED"}}
+         "verify":{"type":"stdout_contains","text":"PENDING_PYPI_BINDING_EFFECT_VERIFIED"}}
       ],
       "constraints":{"incremental_spend_usd":0,"model_controller_required":False,
                      "fresh_verification_invocation_required":True,"allow_registry_mutation":True,
@@ -496,6 +577,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
     vp=root/vm_rel
     if vp.exists(): raise AutoPyPIAcquisitionFailure("VERIFICATION_MISSION_ALREADY_EXISTS",vm_rel)
     vp.write_text(json.dumps(verifier,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    from canonical.runtime import auto_capability_acquisition as _aca
+    _aca.propagate_obs_sidecar_for_generated_mission(root, mission_path, vm_rel)
     return {"status":"ACQUISITION_DISPATCHED","supplier_class":"pypi_python_library","capability_id":cap_id,
             "supplier":project,"pending_binding_path":pending_rel,"verification_mission_path":vm_rel,
             "verification_mission_id":verify_mid,"keywords":keywords,"acquisition_evidence_path":diag_rel}

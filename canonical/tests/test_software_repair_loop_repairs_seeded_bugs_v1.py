@@ -663,9 +663,9 @@ class PytestStyleSuiteTests(unittest.TestCase):
       python.fault.localize.dynamic.dataflow.v1      NO_FAILING_TEST
       python.software.repair.loop.strict_progress    BASELINE_ALREADY_PASSES
 
-    The functions are now wrapped in unittest.FunctionTestCase, the standard library type built for
-    exactly that, so they run through the same runner and print the same summary the auditor and the
-    repair scorers parse. A function needing an argument is skipped rather than guessed at.
+    Simple functions can run through unittest when pytest is absent. When pytest is available,
+    its native collector executes fixture and parametrized cases and reports the counts consumed by
+    the auditor and repair scorers. Without pytest, a fixture-dependent suite must fail closed.
     """
 
     @classmethod
@@ -755,8 +755,8 @@ class PytestStyleSuiteTests(unittest.TestCase):
             if result is not None:
                 self.assertFalse(result.get("pass"), cid + " fabricated a repair for correct code")
 
-    def test_a_function_needing_an_argument_is_skipped_not_guessed(self):
-        """A fixture-parameterised test must not be called with a fabricated argument."""
+    def test_a_fixture_is_executed_by_pytest_or_the_suite_fails_closed(self):
+        """A fixture-dependent case must not disappear from a clean audit."""
         work = self._seed_pytest(
             "pyt_fixture", "def add(a, b):\n    return a + b\n",
             "import calc\n\n\ndef test_with_fixture(tmp_path):\n    assert calc.add(1, 1) == 2\n\n\n"
@@ -764,8 +764,12 @@ class PytestStyleSuiteTests(unittest.TestCase):
         r = runtime._invoke_bound_capability({
             "capability_id": "python.tests.audit.unittest", "source_root": str(work),
             "test_paths": [str(work / "test_calc.py")], "output_path": str(work / "a.json")})
-        self.assertEqual(r.get("test_count"), 1, "the fixture-parameterised function must be skipped")
-        self.assertEqual(r.get("error_count"), 0, "skipping must not be recorded as an error")
+        if importlib.util.find_spec("pytest") is not None:
+            self.assertEqual(r.get("test_count"), 2, "both tests must actually be collected")
+            self.assertEqual(r.get("error_count"), 0)
+        else:
+            self.assertEqual(r.get("test_count"), 0)
+            self.assertEqual(r.get("crashed_count"), 1, "missing pytest must fail closed")
 
 
 PEP695 = "from typing import Literal\n\ntype ReasoningEffort = Literal[\"none\", \"low\", \"high\"]\n"

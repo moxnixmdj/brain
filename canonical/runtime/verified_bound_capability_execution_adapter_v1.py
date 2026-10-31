@@ -134,7 +134,12 @@ def _sha(value: Any) -> str:
 
 
 def _load_registry() -> tuple[bytes, Mapping[str, Any], Mapping[str, Any]]:
-    raw = REGISTRY_PATH.read_bytes()
+    target = REGISTRY_PATH
+    raw = target.read_bytes()
+    if raw[:1] == b"@":
+        snap = target.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+        if snap.is_file():
+            raw = snap.read_bytes()
     doc = json.loads(raw.decode("utf-8"))
     if not isinstance(doc, Mapping) or doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
         raise BoundExecutionError("BOUND_CAPABILITY_REGISTRY_INVALID")

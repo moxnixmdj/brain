@@ -74,6 +74,8 @@ def _load_index(repo, source_root, work, cached_index_path=None):
             raise RuntimeError("INDEX_CACHE_INVALID")
         if str(artifact.get("source_root")) != str(source_root.relative_to(repo)):
             raise RuntimeError("INDEX_CACHE_SOURCE_ROOT_MISMATCH")
+        from canonical.runtime.bound_capabilities.python_source_symbol_index import validate_cached_index
+        validate_cached_index(repo, source_root, artifact)
         return artifact, {"cache_used": 1}
     spec = importlib.util.spec_from_file_location(
         "python_source_symbol_index_sibling",
@@ -224,6 +226,17 @@ def run(args, root):
     output = (repo / out_rel).resolve()
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+
+    # Refuse source/report aliases before parsing inputs or creating scratch.
+    # Reuse the existing symlink/hardlink-aware authority boundary. The index
+    # reads Python files; diff and cached index are additional explicit inputs.
+    from canonical.runtime.write_authority_v1 import SOURCE_SUFFIXES, check_report
+    protected = list(source_root.rglob('*.py'))
+    protected.extend(_safe_path(repo, args[key]) for key in ('diff_path', 'index_path')
+                     if args.get(key))
+    check_report(repo, output, protected)
+    if output.suffix.lower() in SOURCE_SUFFIXES:
+        raise RuntimeError("REPORT_DESTINATION_IS_SOURCE")
 
     diff_path = str(args.get("diff_path") or "")
     changed_paths = args.get("changed_paths")

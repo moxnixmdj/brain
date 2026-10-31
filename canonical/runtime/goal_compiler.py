@@ -354,6 +354,46 @@ _OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit)\b(?:\s+[A-Za-z0-9_.\-']+){0
 _CLAUSE_BOUNDARY_RE=re.compile(r"[,;]|\band\b|\bthen\b",re.IGNORECASE)
 
 
+# "the tests in X" never names the SUBJECT of a code question; it names the
+# witness that decides the answer.  The distinction already exists elsewhere in
+# this repository -- _promised_source_files skips "the WITNESS test" when it
+# decides which source file a repair verb governs -- and it is the difference
+# between a sentence that names two directories and one that names a
+# directory and its oracle.
+#
+# Measured on 814ae41 + three analysis rows: "Which function in <b>/app is
+# never executed by the tests in <b>/tests?" selected
+# python.source.dead_code.v1 correctly and then failed to bind source_root at
+# all, because the binder saw two existing directories named and refused to
+# guess -- which was right.  The sentence had already said which was which.
+_WITNESS_PHRASE_RE = re.compile(
+    r"\b(?:tests?|suite|test\s+suite)\s+(?:in|under|inside|within|at)\s+",
+    re.IGNORECASE)
+
+
+def _witness_directories(goal, paths):
+    """Paths the sentence names as the WITNESS, not as the subject.
+
+    A witness phrase binds the nearest stated path that follows it.  Only paths
+    that literally appear after the phrase are returned, and only within the same
+    sentence, so nothing is inferred about a path the caller did not place there.
+    """
+    text = str(goal or "")
+    out = set()
+    for m in _WITNESS_PHRASE_RE.finditer(text):
+        best = None
+        for raw, _path in paths:
+            s = str(raw)
+            at = text.find(s, m.end())
+            if at >= 0:
+                cand = (at, -len(s), s)
+                if best is None or cand < best:
+                    best = cand
+        if best is not None:
+            out.add(best[2])
+    return out
+
+
 def _path_named_after_output_verb(goal, root):
     """Return the repository path the goal names as the destination, or None.
 
@@ -381,7 +421,7 @@ def _path_named_after_output_verb(goal, root):
                     continue
                 at=tail.find(spelling)
                 if at>=0:
-                    if best is None or at<best[0]:
+                    if best is None or at<best[0] or (at==best[0] and len(str(raw))>len(str(best[1]))):
                         best=(at,raw)
                     break
         if best is None:
@@ -988,6 +1028,8 @@ def _nondiscriminating_requires_tokens():
     out = frozenset()
     try:
         path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        if path.is_file() and path.read_bytes()[:1] == b"@":
+            path = path.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
         with open(path, "r", encoding="utf-8") as fh:
             caps = (json.load(fh) or {}).get("capabilities") or {}
         declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]
@@ -5677,6 +5719,62 @@ def _inherit_producer_goal_for_verifier_steps(actions, registry):
     return actions
 
 
+# A clause that only says WHERE the previous answer goes is delivery, not a
+# second task.  The census writes its questions that way, because that is how a
+# person writes them:
+#
+#   "Which function in <b>/app is never executed by the tests in <b>/tests?
+#    Write its name to <b>/answer.json"
+#
+# Measured on 814ae41 + three analysis rows: the first clause reached
+# python.source.dead_code.v1 correctly, and the delivery clause was handed to
+# python.software.request.semantic_behavior.compile.v1 as its own step, which
+# failed, which made the whole run FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS -- for
+# a question the machine had just answered.
+#
+# The object is ANAPHORIC: "its name", "the number", "the file and line".  It
+# does not name a new subject, so it cannot name a new capability.  The
+# vocabulary is closed on purpose, and "report"/"patch" are deliberately absent:
+# "and write the report to R" is a promise the repair lane discharges, and
+# stealing it here would unbind the artifact that gate reads.
+_DELIVERY_RE = re.compile(
+    r"^\s*(?:(?:find|identify|locate|report)\s+(?:it|them)\s+and\s+)?(?:write|save|store|output)\s+"
+    r"(?:(?:its|their|the)\s+)?"
+    r"(?:yes\s+or\s+no|true\s+or\s+false|name|test\s+name|function\s+name|symbol\s+name|"
+    r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
+    r"number|count|result|results|answer|value|values|file\s+and\s+line|"
+    r"path\s+and\s+line|line\s+and\s+file|path|line)\s+to\s+\S+\s*$",
+    re.IGNORECASE)
+
+
+def _compile_answer_delivery(clause, actions, compiled_parts, root):
+    """Point the PREVIOUS step's output at the destination this clause names.
+
+    Returns True when the clause was consumed.  Nothing new is executed: the
+    delivery is the destination of the answer the previous step already
+    produces, which is exactly what a single-capability compile of the same
+    sentence does with ``output_path``.
+    """
+    text = str(clause or "")
+    if not _DELIVERY_RE.match(text):
+        return False
+    if not actions:
+        return False
+    stated = [str(raw) for raw, path in _repo_paths(text, root) if not path.is_dir()]
+    if len(stated) != 1:
+        return False
+    args = actions[-1].get("args")
+    if not isinstance(args, dict) or "output_path" not in args:
+        return False
+    args["output_path"] = stated[0]
+    for part in reversed(compiled_parts):
+        inputs = part.get("inputs")
+        if isinstance(inputs, dict) and "output_path" in inputs:
+            inputs["output_path"] = stated[0]
+            break
+    return True
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -5696,6 +5794,11 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if index in consumed_indices:
             continue
         lower=clause.lower()
+
+        # Delivery of the previous answer is not a second subgoal.
+        if _compile_answer_delivery(clause, actions, compiled_parts, root):
+            consumed_indices.add(index)
+            continue
 
         external_knowledge_fetch=_compile_external_json_knowledge_fetch(clause,len(actions))
         if external_knowledge_fetch is not None:
@@ -6424,6 +6527,35 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     json.dumps({"index":index,"subgoal":clause,"rejected_capability":cid},sort_keys=True)
                 )
         runtime_inputs=part["inputs"]
+        # A clause that states no path cannot rebind the subject.  Measured: "The
+        # query in <b>/app/db.py is built with string formatting.  Remove the SQL
+        # injection ..." planned two steps, and the second -- which names no path
+        # at all -- rebound source_root to ".", pointing the repair at the whole
+        # repository.  It then rewrote a module of THIS tree: a sentence about a
+        # fixture edited the machine's own source.
+        if actions and not list(_repo_paths(clause, root)):
+            # (1) The previous step's own subject, when it has one.
+            previous_inputs = (compiled_parts[-1].get("inputs") or {})
+            # (2) Failing that, the subject the SENTENCE stated in another
+            # clause: a repair step may only ever be aimed at the paths the
+            # request itself named, never at the compiler's default ".".
+            # Measured: the second clause of the SQL sentence carries no path,
+            # bound `source_root: "."`, and a run against that plan wrote a
+            # generated test into the REPOSITORY ROOT -- a sentence about a
+            # fixture reached the machine's own tree.
+            stated = [raw for raw, _p in _repo_paths(goal, root)]
+            stated_dirs = sorted({str(pathlib.PurePosixPath(raw).parent) for raw in stated})
+            stated_dir = stated_dirs[0] if len(stated_dirs) == 1 and stated_dirs[0] != "." else None
+            for key, value in list(runtime_inputs.items()):
+                if not str(key).endswith(("_root", "_path", "_paths")):
+                    continue
+                if value not in ("", ".", "./"):
+                    continue
+                inherited = previous_inputs.get(key)
+                if isinstance(inherited, str) and inherited not in ("", ".", "./"):
+                    runtime_inputs[key] = inherited
+                elif stated_dir and str(key).endswith("_root"):
+                    runtime_inputs[key] = stated_dir
         if not isinstance(runtime_inputs,dict):
             # A compiled part with no input mapping is a compiler defect, not a
             # missing value. Fail closed with a named reason: dereferencing it

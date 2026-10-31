@@ -485,6 +485,19 @@ def _is_executable(entry: Mapping[str, Any]) -> bool:
 _PAYLOAD_SLOT_KINDS = frozenset({"STRING", "JSON_TEXT", "UNKNOWN"})
 
 
+_AST_CODE_EDIT_RE = re.compile(
+    r"\b(?:remove|delete|eliminate)\s+(?:the\s+|every\s+|all\s+|any\s+)?"
+    r"(?:unused\s+)?(?:functions?|methods?|imports?|dead\s+code|sql\s+injection|injection|vulnerabilit(?:y|ies))\b"
+    r"|\bmove\s+(?:the\s+)?(?:functions?|methods?|classes?|helpers?|symbols?|definitions?)\b",
+    re.IGNORECASE,
+)
+
+
+def is_ast_code_edit_request(goal: Any) -> bool:
+    """True when ``remove`` / ``move`` names an AST code symbol or vulnerability rather than a file."""
+    return bool(_AST_CODE_EDIT_RE.search(str(goal or "")))
+
+
 def _states_a_command_the_sentence_maps_to(goal: Any) -> bool:
     """True when the sentence names an operation that maps to one real program.
 
@@ -492,11 +505,46 @@ def _states_a_command_the_sentence_maps_to(goal: Any) -> bool:
     settled argv or None, and it refuses on ambiguity by construction -- so this
     reads the same fact the route does rather than re-deriving it.
     """
+    if is_computed_answer_delivery(goal) or is_ast_code_edit_request(goal):
+        return False
     try:
         from canonical.runtime import composer_route_v1 as _cr
         return _cr._prose_argv(str(goal or "")) is not None
     except Exception:  # noqa: BLE001 - an unreadable sentence states no command
         return False
+
+
+_COMPUTED_ANSWER_DELIVERY_RE = re.compile(
+    r"(?:[?.!;]\s*|\b(?:and|then)\s+)"
+    r"(?:(?:find|identify|locate|report)\s+(?:it|them)\s+and\s+)?"
+    r"(?:write|save|store|output)\s+"
+    r"(?:(?:yes\s+or\s+no|true\s+or\s+false)"
+    r"|(?:its|their|the)\s+(?:name|test\s+name|function\s+name|symbol\s+name|"
+    r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
+    r"number|count|result|results|answer|value|values|"
+    r"file\s+and\s+line|path\s+and\s+line|line\s+and\s+file))"
+    r"\s+(?:to|into|in|at)\s+\S+\s*[.!?]?\s*$",
+    re.IGNORECASE,
+)
+
+
+def is_computed_answer_delivery(goal: Any) -> bool:
+    """True when a trailing ``write <anaphoric-answer> to <path>`` delivers a prior clause's answer.
+
+    "Write the content 'PROJECT BRAIN' to out.txt" states literal text to write.
+    "Which function in X/app is at fault? Write its name to X/answer.json" asks a
+    question and names where the computed answer goes; ``its name`` is anaphoric,
+    never literal bytes to put on disk.  Requiring both a non-empty preceding
+    clause and an unquoted closed-vocabulary answer noun leaves every literal
+    write untouched.
+    """
+    text = str(goal or "").strip()
+    if not text or "'" in text or '"' in text:
+        return False
+    m = _COMPUTED_ANSWER_DELIVERY_RE.search(text)
+    if not m:
+        return False
+    return bool(text[:m.start()].strip())
 
 
 def _states_a_payload_and_its_destination(goal: Any) -> bool:
@@ -508,6 +556,8 @@ def _states_a_payload_and_its_destination(goal: Any) -> bool:
     path in the sentence becomes the destination by default and a file is
     overwritten by a report about it.
     """
+    if is_computed_answer_delivery(goal):
+        return False
     try:
         from canonical.runtime import composer_route_v1 as _cr
     except Exception:  # noqa: BLE001 - no composer, no claim to make
@@ -587,6 +637,36 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     if not request_may_select(goal, cid, required):
         return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
                 "required_inputs": required}
+    _goal_low = str(goal or "").lstrip().lower()
+    if cid == "python.source.definition_count.v1" and not re.search(
+        r"\b(?:functions?|classes|class|methods?|definitions?|symbols?)\b", _goal_low
+    ):
+        return {"capability_id": cid, "admitted": False,
+                "reason": "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
+                "required_inputs": required}
+    if (
+        (is_computed_answer_delivery(goal)
+         or _goal_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")))
+        and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", _goal_low)
+    ):
+        from canonical.runtime import write_authority_v1 as _wa
+        if _wa.is_source_transformer(cid):
+            return {"capability_id": cid, "admitted": False,
+                    "reason": "READ_ONLY_QUESTION_CANNOT_MUTATE_SOURCE",
+                    "required_inputs": required}
+    if (
+        not is_computed_answer_delivery(goal)
+        and re.search(
+            r"\b(?:(?:fix|repair)\s+(?:the\s+(?:code|bug|race|circular|import|package|module|function)|it\b)"
+            r"|remove\s+the\s+sql\s+injection|make\s+\w+\s+linearithmic|migrate\s+it\b)",
+            _goal_low,
+        )
+    ):
+        from canonical.runtime import write_authority_v1 as _wa
+        if not _wa.is_source_transformer(cid):
+            return {"capability_id": cid, "admitted": False,
+                    "reason": "REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER",
+                    "required_inputs": required}
     # A write request must be answered by something that can hold the text.
     #
     # Measured: "Write the content 'PROJECT BRAIN' to the output path <f>" was
@@ -617,7 +697,16 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
                     "reason": "BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:"
                               + ",".join(sorted(kinds))[:120],
                     "required_inputs": required}
-    if not front.is_plain_goal_routable({"action_template": _bind_contract}):
+    # F4 asks a question about the CAPABILITY ("does this tool take any input?"),
+    # not about the goal, so it must be answered on the DECLARED contract.  The
+    # shadow entry deliberately drops every slot the adapter defaults or the
+    # sentence derives -- its job is to decide what the binder still has to be
+    # asked -- and using it here made F4 refuse exactly the capabilities whose
+    # sentence-supplied slot is derived: measured 2026-10-29,
+    # "Show the last three git commits" derived `op` from its own verb, the shadow
+    # was left with no placeholders, and admit() answered
+    # NO_DECLARED_INPUT_CONTRACT for a capability that declares one.
+    if not front.is_plain_goal_routable({"action_template": contract}):
         return {"capability_id": cid, "admitted": False, "reason": "NO_DECLARED_INPUT_CONTRACT",
                 "required_inputs": required}
     conflict = _expectation_compatible(cid, entry, declared)
@@ -708,11 +797,15 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
 _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("rename",), ("rename",)),
     (("extract",), ("extract",)),
-    (("repair", "fix", "broken", "bug", "failing"), ("repair", "patch")),
+    (("repair", "fix", "broken", "failing"), ("repair", "patch", "choreograph")),
+    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition"), ("choreograph",)),
     (("scaffold", "generate test"), ("scaffold", "generate")),
     (("audit", "count the functions"), ("audit",)),
     (("review", "lint", "type-check", "typecheck"), ("review",)),
-    (("localize", "traceback"), ("fault", "localize")),
+    (("localize", "traceback", "at fault"), ("fault", "localize")),
+    (("mutation", "catch a bug", "would the tests", "strong the tests", "intermittently"), ("mutation",)),
+    (("taint", "untrusted"), ("taint", "security")),
+    (("bisect", "broke", "got much slower", "between head"), ("bisect", "regression")),
 )
 
 

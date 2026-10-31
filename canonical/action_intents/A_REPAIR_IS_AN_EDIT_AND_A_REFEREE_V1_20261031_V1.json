@@ -1,0 +1,389 @@
+{
+ "action_id": "A_REPAIR_IS_AN_EDIT_AND_A_REFEREE_V1_20261031_V1",
+ "action_intent_id": "A_REPAIR_IS_AN_EDIT_AND_A_REFEREE_V1_20261031_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Two census rows that require the machine to MODIFY the tree now land: merge_conflict (union of both sides in order, refused when a diff3 base section means the union is not stated; markers gone, module parses, suite green, 125-189 ms) and inline_helper (a helper is single-use iff exactly one call site reaches it -- measured, selecting on 'ends in a single return' also matched the caller; argument substitution refuses a call/lambda/await/comprehension because duplicating it would run it twice; helper gone nowhere, suite green, 101-109 ms). Census 8/28 -> 10/28, tiers 2/10, false passes still 1 (destructive_refusal). Both adapters restore every original byte before returning failure. A third row -- sql_injection -- was built and measured at the adapter level (41.8 ms, oracle exact) and is deliberately NOT shipped: the composer claims that clause first and turns 'Remove the SQL injection' into `rm <db.py>`, so the row is unreachable and a security sentence is a delete. That finding is the next fix, not this PR.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/bound_capabilities/python_source_dead_code.py",
+   "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+   "canonical/runtime/bound_capabilities/python_source_complexity.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/tests/test_a_question_about_the_tree_is_answered_by_the_tree_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The analysis lane could answer but not act: nothing in the tree could write bytes and then prove the write, so every repair row ended in FAIL__LIVE_CONTROLLER_EXECUTION or was answered by a read-only substitute.",
+ "canonical_base_commit": "6a47f756e5368513cf8b50f2933c61cfbd7f45c2",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The analysis lane could answer but not act: nothing in the tree could write bytes and then prove the write, so every repair row ended in FAIL__LIVE_CONTROLLER_EXECUTION or was answered by a read-only substitute.",
+ "date": "2026-10-31",
+ "expected_parent_change": "A repair is an edit plus a referee: the machine writes to the tree -- resolves a stated two-sided merge conflict as the union of its sides, and inlines a single-use helper by substituting its arguments -- and proves each edit by running the project's own suite, restoring every original byte on failure.",
+ "expected_parent_frontier_change": "A repair is an edit plus a referee: the machine writes to the tree -- resolves a stated two-sided merge conflict as the union of its sides, and inlines a single-use helper by substituting its arguments -- and proves each edit by running the project's own suite, restoring every original byte on failure.",
+ "explicit_user_authorization": "Owner standing directive (2026-10-29/30): every listed problem already has a solution somewhere in the repository, its hidden tools or published research; do the optimal fix in the fastest way, only the right way, with no new primitive where an existing mechanism can be wired.",
+ "falsification_condition": "FALSIFIED if a union leaves a marker behind, if a diff3 base section is guessed instead of refused, if a helper with two call sites is inlined, if a non-re-evaluable argument is substituted twice, if any adapter leaves the tree modified after reporting failure, or if an edit is reported successful without the suite having run.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intent": "Give the machine the step it has never had: an edit that lands on disk, and a referee that proves it. Every analysis row answers a question; a repair must change bytes and survive the suite.",
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "The refusal boundary is substrate for every coding obligation: a machine that cannot be trusted about what it changed cannot be trusted about what it fixed. It discharges no obligation alone.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Census 8/28 -> 10/28 (merge_conflict 125-189 ms, inline_helper 101-109 ms, both against their own oracles). 12 pin tests green here, red on base. 67 tests across the four lane files. Unified model 33/33.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": "The rows' own `provides` tokens as the vocabulary; _close_observations, the existing 'called at every exit' choke point; _fail; the bound registry already loaded by the door; composer_route.route's chain.",
+ "progress_evidence_paths": [
+  "canonical/runtime/bound_capabilities/python_source_merge_resolve.py",
+  "canonical/runtime/bound_capabilities/python_source_inline_helper.py",
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+  "canonical/runtime/declared_input_derivation_v1.py",
+  "canonical/tests/test_a_repair_is_an_edit_and_a_referee_v1.py",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "6a47f756e5368513cf8b50f2933c61cfbd7f45c2",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "A_SHAPE_HEURISTIC_FOR_SINGLE_USE__the call-site count decides",
+   "A_FATAL_MISMATCH_ON_A_STALE_CHECKPOINT__the tree is not left poisoned",
+   "AN_ASSERTED_EDIT__the suite is the referee, the report is only a record"
+  ],
+  "expected_parent_level_state_change": "A repair is an edit plus a referee: the machine writes to the tree -- resolves a stated two-sided merge conflict as the union of its sides, and inlines a single-use helper by substituting its arguments -- and proves each edit by running the project's own suite, restoring every original byte on failure.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "ASSERT_THE_EDIT_IN_THE_REPORT__OR_SKIP_THE_SUITE__OR_ANSWER_WITH_A_READ_ONLY_SUBSTITUTE",
+   "intrinsic_or_path_specific": "Intrinsic: a repair is a write plus a referee, and neither existed.",
+   "surviving_causal_blocker": "Nothing else in the tree writes bytes and then runs the suite, so every repair row could only be described."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "No second analysis: the merge adapter reads markers, the inline adapter reads call sites, and both let `unittest` be the referee.",
+   "existing_inherited_routes_checked": "python_crossfile_edit_choreograph.build_plan already plans rename/move sites and was read first; python_refactor_rename_symbol._splice_file already splices exact identifier spans; software_repair_crossfile_choreograph_v1 was checked and is a stub that asserts output_verified without touching the tree.",
+   "external_existing_routes_checked": "rope and libcst (published refactoring engines) reprint the module, which breaks byte preservation; both were already rejected on this tree for the same reason.",
+   "surviving_gap": "circular_import, sql_injection and the remaining repair families still have no reachable execution; sql_injection is blocked by the composer turning 'Remove the SQL injection' into `rm <db.py>`."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "AN_EDIT_REPORTED_WITHOUT_RUNNING_THE_TESTS",
+    "A_CONFLICT_RESOLVED_BY_CHOOSING_ONE_SIDE",
+    "A_HELPER_INLINED_BY_SHAPE_RATHER_THAN_BY_CALL_COUNT"
+   ],
+   "real_outcome": "Census 8/28 -> 10/28 (merge_conflict 125-189 ms, inline_helper 101-109 ms, both against their own oracles). 12 pin tests green here, red on base. 67 tests across the four lane files. Unified model 33/33.",
+   "surviving_necessity": "The oracles are independent of the adapters: they re-read the file for markers and helper names, import the package and run the suite."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "All prior registry rows keep their authority; both new rows declare only source_root.",
+   "downstream_work_to_delete_or_supersede": "The stub choreographer's verified=True without an edit is superseded as a route for these two rows.",
+   "fresh_reuse_plan": "The same splice+referee kernel settles move, add_parameter and remove_dead_code once their fixtures can pass."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "One parse per file; one suite run per edit.",
+   "search_stop_decision": "Stop at 10/28: the two rows are exact, and the SQL row is blocked by a composer defect rather than by a missing adapter."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "implementation_still_necessary_reason": "ast span splicing and unittest discovery already exist and were reused unchanged.",
+   "losing_routes_reason": "A whole-module unparse reformats every byte and a codemod dependency costs an install for a 100 ms edit.",
+   "routes_ranked": [
+    "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE__SELECTED",
+    "RESTAMP_THE_FILE_WITH_AST_UNPARSE",
+    "ROPE_EXTERNAL_REFACTOR_ENGINE",
+    "LIB_CST_CONCRETE_SYNTAX_REWRITE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The fixtures are small by construction; the oracles re-read the tree, import the package and run its suite, so a report that lies cannot pass."
+  },
+  "real_outcome": "Census 8/28 -> 10/28 (merge_conflict 125-189 ms, inline_helper 101-109 ms, both against their own oracles). 12 pin tests green here, red on base. 67 tests across the four lane files. Unified model 33/33.",
+  "required_capability": "WRITE_THE_EDIT_AND_PROVE_IT_WITH_THE_PROJECTS_OWN_SUITE",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "BROAD_SUITE_OF_REFACTORS",
+      "CORRECTNESS": "GOOD_BUT_CONFIG_DEPENDENT",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REFORMATS_BY_CONFIG",
+      "VERIFIABILITY": "NEEDS_PROJECT_DISCIPLINE",
+      "WALL_CLOCK": "SLOWER_SETUP"
+     },
+     "evidence": [
+      "rope operates on ropeproject configuration and its output formatting varies with user config, which breaks the adapter's byte-preservation law"
+     ],
+     "qualification_evidence": [
+      "pypi project page for rope read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ROPE_EXTERNAL_REFACTOR_ENGINE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "FAR_BEYOND_THE_NEED",
+      "CORRECTNESS": "HIGH",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REPRINT_VARIES",
+      "VERIFIABILITY": "BYTE_PRESERVATION_NOT_GUARANTEED",
+      "WALL_CLOCK": "PARSER_DEPENDENCY_AND_REPRINT"
+     },
+     "evidence": [
+      "libcst reprints the module from its own tree, so comments and formatting are no longer byte-identical"
+     ],
+     "qualification_evidence": [
+      "pypi project page for libcst read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LIBCST_CONCRETE_SYNTAX_REWRITE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "TRIVIAL",
+      "CORRECTNESS": "WRONG_ON_SHADOWING_AND_ON_COMMENTS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "SILENTLY_BREAKS",
+      "VERIFIABILITY": "NO_BINDING_EVIDENCE",
+      "WALL_CLOCK": "FASTEST"
+     },
+     "evidence": [
+      "a textual replace edits strings, comments and shadowed scopes; the adapter's own SPAN_INTEGRITY law exists to prevent exactly that"
+     ],
+     "qualification_evidence": [
+      "measured on this tree: the fixture's docstrings and `subtotal_cents` carriers must survive"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
+    }
+   ],
+   "checked_at_utc": "2026-10-31T03:01:19Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "A_READ_ONLY_SUBSTITUTE_OR_A_STUB_THAT_ASSERTS_THE_EDIT",
+   "max_age_hours": 24,
+   "negative_search_summary": "No new primitive: ast positions, a line splice and unittest discovery are stdlib and already used in this tree.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python rename symbol across modules ast span edit"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope libcst refactoring library python"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "resolve module identity from import statement path suffix"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "libcst rope latest release python 3.11"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE__SELECTED",
+    "RESTAMP_THE_FILE_WITH_AST_UNPARSE",
+    "ROPE_EXTERNAL_REFACTOR_ENGINE",
+    "LIB_CST_CONCRETE_SYNTAX_REWRITE"
+   ],
+   "selected_route": "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE",
+   "selected_route_checked_at_utc": "2026-10-31T03:01:19Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-31T03:01:19Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
+      "evidence": [
+       "DIRECT_PROBE: 3.11 interpreter parsed the adapter, the fixture tree and 2254 runtime modules this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py / _inline_helper.py (in-tree)",
+      "evidence": [
+       "DIRECT_PROBE: 12 pin tests green; 10/28 census; unified model 33/33"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE",
+    "status": "READY"
+   },
+   "selected_surviving_route": "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "python_crossfile_edit_choreograph.build_plan already plans exact edit sites",
+     "python_refactor_rename_symbol._splice_file already splices an identifier span byte-exactly"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "git's own merge model: a two-sided conflict is resolved by taking both sides; a diff3 base section is a third input"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "rope and libcst reprint the module; byte preservation is not guaranteed"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "docs.python.org/3/library/ast.html -- lineno/col_offset/end_* are the sanctioned span mechanism"
+    ]
+   },
+   "stop_condition": "Ship only what is measured here: the three declarations, file identity, the residual law and the honest contract field. Do not add per-name lists, do not widen what may run (a referent is never defaulted), and do not touch the remaining tiers' capabilities until their own oracles are built.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
+  },
+  "routes_considered": [
+   "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE__SELECTED",
+   "RESTAMP_THE_FILE_WITH_AST_UNPARSE",
+   "ROPE_EXTERNAL_REFACTOR_ENGINE",
+   "LIB_CST_CONCRETE_SYNTAX_REWRITE"
+  ],
+  "selected_surviving_route": "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE",
+  "stop_condition": "Ship only these two rows and the verb widening. Do not ship the SQL row while the composer answers it with `rm`. Do not add a per-capability table. Every failure path must restore every original byte.",
+  "why_selected_route_is_fastest_sufficient": "One ast pass to find the exact spans, one splice, one unittest run: 125-189 ms and 101-109 ms end to end, no dependency and no reformatting. ast.unparse of the whole module was rejected (it reprints a file nobody can review) and a codemod dependency was rejected (cost, and the byte-preservation law)."
+ },
+ "resolution": "Measured reuse slice: two adapters over ast plus the project's own unittest discovery, two registry rows (limit 3), one verb-list widening so the sentences reach the typed path. No new parser, no dependency, no model, no spend.",
+ "route_id": "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REUSE_AST_SPLICE_PLUS_THE_PROJECTS_OWN_SUITE",
+ "stop_condition": "Ship only these two rows and the verb widening. Do not ship the SQL row while the composer answers it with `rm`. Do not add a per-capability table. Every failure path must restore every original byte.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "DIRECT_PROBE__12 pin tests green here and red on base, census 8/28 -> 10/28.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "5ee986181790b70fa317e8c0e05480859dfb2cc5",
+     "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py"
+    },
+    {
+     "git_blob_sha": "ed6ef0645a52c31ec82e6e4be0e7523f165a2d8b",
+     "path": "canonical/runtime/goal_front_compiler_v1.py"
+    }
+   ],
+   "decisive_question": "Can the machine change the tree and prove the change, or can it only describe it?",
+   "falsifier_id": "F_AN_EDIT_WITHOUT_A_REFEREE_20261031",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "P_WRITE_THEN_RUN_THE_PROJECTS_OWN_SUITE_20261031"
+  }
+ },
+ "weakens_existing_guard": false
+}

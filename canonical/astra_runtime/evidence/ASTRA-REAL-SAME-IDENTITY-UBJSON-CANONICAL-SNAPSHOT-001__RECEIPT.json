@@ -1,0 +1,13 @@
+{
+  "completed_at_utc": "2026-10-28T20:14:51.404094+00:00",
+  "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_REAL_SAME_IDENTITY_UBJSON_CANONICAL_SNAPSHOT_001.json",
+  "mission_sha256": "f0773c75d92335e35b7b91d6d0eb8b72b5ea1f8cc3fbd9ea7ff13d0af8856166",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "5756238cbeec364626fd621fc02feb8f35138336a520f7848a2a62df2cbf859e",
+  "status": "COMPLETE",
+  "steps_completed": 1,
+  "supervisor_agent_id": "SUPERWORKER-UNIFIED-1",
+  "supervisor_task_id": "SI-REAL-UBJSON-SNAPSHOT-001"
+}

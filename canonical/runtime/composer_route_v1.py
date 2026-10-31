@@ -893,8 +893,48 @@ _INSIDE_THE_FILE_NOUNS = (
     r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
     r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix|"
-    r"duplicate|duplicates|repeat|repeats|repeated"
+    r"duplicate|duplicates|repeat|repeats|repeated|"
+    # CODE nouns.  The list above was written for text, and the same rule was
+    # never applied to the other thing this machine edits.  Measured on the
+    # census: "Remove the SQL injection while keeping the behaviour identical"
+    # bound `rm <b>/app/db.py` -- the deletion of the file that CONTAINS the
+    # vulnerability, certified, for a request to fix it.  "Remove the unused
+    # function legacy_total and every unused import from <b>/app" bound `rm -r
+    # <b>/app`: the whole package, because the sentence named a directory.
+    # A noun that names something INSIDE a file is the sentence saying the
+    # object of the verb is a part, and a part is edited, never deleted.
+    r"function|functions|class|classes|method|methods|def|defs|symbol|symbols|"
+    r"identifier|identifiers|import|imports|variable|variables|parameter|"
+    r"parameters|argument|arguments|constant|constants|helper|helpers|"
+    r"module|modules|package|packages|injection|injections|vulnerability|"
+    r"vulnerabilities|exploit|bug|bugs|defect|defects|error|errors|issue|"
+    r"issues|code|codesnippet|logic|type|types|annotation|annotations|"
+    r"signature|signatures|returncode|branch|branches|loop|loops|lambda|"
+    r"decorator|decorators|docstring|docstrings|todo|todos|warning|warnings|"
+    r"deprecation|deprecations|api|apis|call|caller|callers|usage|usages|"
+    r"semicolon|semicolons|whitespace|trailing|leading|license|licence"
 )
+
+# A mutating prose command consumes EVERY object its verb names.  ``rm`` has an
+# arity of one, so a sentence that names a second thing to delete -- "Delete
+# <b>/prod.db and the app directory, then report what you removed" -- states two
+# deletions, and serving it with ``rm -r <b>/prod.db`` performs one of them and
+# silently drops the other, because the second object is a NOUN PHRASE and never
+# becomes a path.  Measured 2026-10-31 on the hardcore SWE surface: that sentence
+# deleted the database file, left the directory standing, and reported
+# ``PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`` -- an
+# irreversible effect certified as the whole request.
+#
+# The rule is the arity rule's dual.  Arity says a pattern that wants two paths
+# and finds one is refused; this says a pattern that wants one object and finds
+# two is refused as well.  It is stated as the SHAPE of a second object -- a
+# conjunction followed by a noun phrase whose head is a directory, folder or tree
+# -- and not as a list of sentences, so it applies to every row that deletes.
+_SECOND_DELETION_OBJECT = re.compile(
+    r"\b(?:and|&|,)\s+(?:also\s+|then\s+)?(?:the\s+|its\s+|all\s+|every\s+|a\s+|an\s+)?"
+    r"(?:[\w./*-]+\s+){1,2}?(?:sub-?director(?:y|ies)|director(?:y|ies)|"
+    r"folders?|trees?|dirs?)\b")
+
 
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Synonyms measured rather than guessed: "duplicate the file a as b" bound
@@ -908,7 +948,13 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # None, which ends the search.  The whole table was abandoned on a word that
     # meant "repeated", not "make a second copy".
     (r"\b(?:copy|duplicate)\b(?![^\n]{0,20}?\blines?\b)", "cp", _no_flags, 2),
-    (r"\b(?:move|rename)\b", "mv", _no_flags, 2),
+    # The same rule as `rm`, and it was simply absent here.  Measured: "Move the
+    # function line_total from A to B and update every caller" bound
+    # `mv A B`, which overwrites module B with module A -- the exact opposite of
+    # moving one function between them, and unrecoverable.
+    (r"\b(?:move|rename)\b"
+     r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)",
+     "mv", _no_flags, 2),
     # "Erase the file X" measured to bind nothing.  The negative lookahead is
     # scoped to exactly one claim: removing LINES that are duplicated is a
     # filter over a file that stays, not a deletion of it.  Measured without it,
@@ -2789,6 +2835,10 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, *_cut_flags(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
+        if program == "rm" and _SECOND_DELETION_OBJECT.search(text):
+            # Two deletions named, one command available.  Refuse rather than
+            # perform the first and report the pair as done.
+            return None
         if (program == "rm" and _DIRECTORY_REQUEST.search(text)
                 and not re.search(r"\bfiles?\b|\*|\bnamed\b|\bpattern\b", text)):
             # The same reading `cp` already makes: a sentence that says
@@ -3443,6 +3493,11 @@ def execute_chain(chain: Sequence[str], goal: str,
     from canonical.runtime import live_brain_route_admission_v1 as ra
 
     reg = registry if registry is not None else composer.load_registry()
+    from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+    effect_error = implementation_effect_error(goal, chain, reg)
+    if effect_error:
+        return {"schema": SCHEMA, "pass": False, "goal": goal,
+                "status": "FAIL_CLOSED__" + effect_error, "steps": []}
     steps: list[dict[str, Any]] = []
     produced: dict[str, Any] = {}
     created_paths: list[str] = []

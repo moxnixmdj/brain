@@ -36,12 +36,19 @@ Zero model, zero network, zero spend.  It changes no registry row and no kernel.
 from __future__ import annotations
 
 import ast
+import os
 import pathlib
 import re
 import sys
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
+# "from <A> to <B>" -- the two halves are bounded by another role word or the end
+# of the clause, so the pair is read off the sentence, never assembled.
+_FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
+# "<noun> <name>" -- "the function line_total", "the class Cart".  The name is
+# read off the sentence and then PROVED against the file's own AST.
+_NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 # ONLY configuration knobs may be defaulted away.  A path/root/argv/dir/file
 # slot is SEMANTIC: even when the adapter has a fallback, dropping it let the
@@ -53,6 +60,7 @@ _CONFIGURATION_SLOTS = frozenset({
     "max_candidates", "max_total_candidates", "max_candidates_per_file",
     "max_edits", "max_pair_candidates", "max_symbols_per_file",
     "mutations_per_file", "pattern", "budget", "top_k", "seed", "verbose", "strict",
+    "limit",
 })
 
 # Scope, measured not assumed: typed-admission pins for receipt-projected
@@ -60,18 +68,36 @@ _CONFIGURATION_SLOTS = frozenset({
 # applied to every goal.  Only an explicit software-engineering request to a
 # software-engineering capability takes this path; everything else keeps the
 # byte-for-byte original admission gate.
-SWE_CID_PREFIXES = ("python.", "code.", "software.", "evidence.oracle.", "orchestration.verify.")
+SWE_CID_PREFIXES = ("python.", "code.", "software.", "git.", "evidence.oracle.", "orchestration.verify.")
 _SWE_VERBS = (
-    "rename", "repair", "fix", "bug", "broken", "refactor", "extract function",
-    "lint", "type-check", "typecheck", "review", "localize", "traceback",
+    "rename", "repair", "fix", "bug", "broken", "broke", "refactor", "extract ", "extract function",
+    "lint", "type-check", "typecheck", "review", "localize", "fault", "traceback",
     "scaffold", "generate test", "failing test", "unit test", "patch",
+    "inline", "single-use", "single use", "merge conflict", "conflict", "unmerged",
+    "injection", "parameterize", "parameterized", "sql", "dead code", "unused import",
+    "remove the unused", "move the function", "add a parameter", "caller",
+    "circular import", "import cycle", "bisect", "slower", "mutation", "taint", "untrusted",
+    "flaky", "intermittently", "deprecated", "sql injection",
+    "linearithmic", "unused", "race condition", "are failing",
 )
 
 
 def is_swe_request(goal: str) -> bool:
-    """An explicit software-engineering request, not a generic module call."""
+    """An explicit software-engineering request, not a generic module call.
+
+    A stated git OPERATION counts on its own.  "Show the last three git commits"
+    contains none of the repair verbs, so derivation was skipped and the one slot
+    that has to come from the sentence (`op`) was never derived -- the capability
+    was enumerated, admitted as a candidate, and then refused on
+    ``BINDING_REFUSED:op:not_stated``.  The test is the grammar itself, not a
+    second word list, and it is exact: zero or two stated operations is not a
+    request for one operation, so neither derives anything.
+    """
     text = str(goal or "").lower()
-    return any(verb in text for verb in _SWE_VERBS)
+    if any(verb in text for verb in _SWE_VERBS):
+        return True
+    return len([name for name, pattern in _GIT_OPERATION_GRAMMAR
+                if pattern.search(text)]) == 1
 
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
 _TEST_NAME_RE = re.compile(r"(^|/)(test_[^/]*|[^/]*_test)\.(py|js|ts|go|rs)$")
@@ -162,55 +188,64 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     return found
 
 
-def _holds_tests(directory: pathlib.Path) -> bool:
-    """True when ``directory`` itself contains test files, or a ``tests``/``test`` child does.
+def _tree_of(root: pathlib.Path, rel: str):
+    """The parsed module, or an empty module when it cannot be read.
 
-    Streams and stops at the first hit, so the check costs one ``readdir`` on a real
-    project and nothing more.  It is a fact about the tree, not an inference.
+    An unreadable stated file proves nothing, so the proof above simply yields no
+    candidate -- the same fail-closed reading the qualname rule uses.
     """
     try:
-        for child in directory.iterdir():
-            if child.is_file() and _TEST_NAME_RE.search(child.name):
-                return True
-            if child.is_dir() and child.name in {"tests", "test"}:
-                for inner in child.iterdir():
-                    if inner.is_file() and _TEST_NAME_RE.search(inner.name):
-                        return True
-    except OSError:
-        return False
-    return False
+        return ast.parse((pathlib.Path(root) / rel).read_text(encoding="utf-8"))
+    except (OSError, SyntaxError, ValueError):
+        return ast.Module(body=[], type_ignores=[])
+# Ordered: the first rule whose pattern matches decides, and the caller still
+# refuses when two DIFFERENT operations match, so order only resolves the cases
+# where one verb is a strict refinement of another.
+# Words that make a commit sentence about a REPOSITORY rather than about a
+# database transaction, a purchase or a promise.
+# ("commit" itself is deliberately absent: it would make the test always true.)
+_REPOSITORY_CONTEXT = re.compile(
+    r"\bgit\b|\bstaged\b|\bchanges?\b|\bworking\s+tree\b|\bbranch(?:es)?\b"
+    r"|\brepo(?:sitory)?\b|\buncommitted\b|\bhistory\b", re.I)
 
 
-def _project_root(root: pathlib.Path, source_rel: str, max_up: int = 3) -> str | None:
-    """The nearest ancestor of a stated source file that also owns its tests.
+_COUNT_WORDS = {w: i for i, w in enumerate(
+    ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+     "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+     "sixteen", "seventeen", "eighteen", "nineteen", "twenty"), start=0)}
 
-    A repository's tests are not always beside the code: ``src/app/calc.py`` with
-    ``tests/test_calc.py`` needs the directory that CONTAINS both, because the
-    tools that run the suite require the tests to live under the source root and
-    the tests import the package by its top-level name.  Measured 2026-10-29:
-    with ``source_root`` pinned to the source file's parent, that layout refused
-    with NO_TEST_FILES_UNDER_SOURCE_ROOT and the identical bug repaired in the
-    flat layout.
+_STATED_COUNT = re.compile(
+    r"\b(\d{1,3}|" + "|".join(sorted(_COUNT_WORDS, key=len, reverse=True)) + r")\s+"
+    # up to three words may sit between the count and what it counts: "the last
+    # three GIT commits" says three, not twenty.
+    r"(?:[\w-]+\s+){0,3}(?:commits?|entries|rows|lines?|branches?)\b", re.IGNORECASE)
 
-    The walk is bounded (3 levels), starts at the file's parent, stops at the
-    first ancestor that holds tests, and never leaves the repository.  If the
-    file's own directory already holds tests -- the common case -- this returns
-    that directory and nothing changes.
-    """
-    base = (root / source_rel).parent
-    base_abs = base if base.is_absolute() else (root / base)
-    repo = pathlib.Path(root)
-    for _ in range(max_up + 1):
-        if _holds_tests(base_abs):
-            try:
-                rel = base_abs.resolve().relative_to(repo.resolve())
-            except ValueError:
-                return None
-            return str(rel) if str(rel) != "." else "."
-        if base_abs == repo or repo not in base_abs.parents:
-            return None
-        base_abs = base_abs.parent
-    return None
+
+_GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
+    (name, re.compile(pattern, re.I)) for name, pattern in (
+        # history: an explicit git log, the word history, or "the last N commits"
+        ("log", r"\bgit\s+log\b|\bhistory\b|\b(?:last|recent|latest|first)"
+                r"(?:\s+\w+){0,3}\s+commits?\b"),
+        # a status question about the working tree
+        ("status", r"\bgit\s+status\b|\bworking\s+tree\b|\buncommitted\b|\bstatus\b"),
+        ("diff", r"\bgit\s+diff\b|\bdiff\b"),
+        ("blame", r"\bblame\b|\bwho\s+wrote\b|\bwho\s+touched\b"),
+        # An imperative or a question about branches -- never the bare noun.
+        # Measured 2026-10-29: with `\bbranch(?:es)?\b`, "Branch out the new feature
+        # into three modules" bound op=branch and returned PASS for a `git branch`
+        # listing.  A metaphor is not a repository operation, and an enumerated
+        # operation set is only as good as the grammar that admits to it.
+        ("branch", r"\b(?:list|show|print|git)\s+(?:me\s+)?(?:the\s+|all\s+)?branches?\b"
+                   r"|\bbranches\b|\bcurrent\s+branch\b|\bwhich\s+branch\b"),
+        # one commit's contents: "show the commit", "git show"
+        ("show", r"\bshow\s+(?:the\s+|a\s+|that\s+)?commit\b|\bgit\s+show\b"),
+        # an imperative to record a change.  Anchored or object-bearing ON PURPOSE:
+        # a bare \bcommit\b also matches "show the commit", which would turn one
+        # unambiguous sentence into an ambiguous two-operation match.
+        ("commit", r"^\s*(?:\w+\s+)?commit\b|\bgit\s+commit\b"
+                   r"|\bcommit\s+(?:the|all|these|this|that|staged|everything|it)\b"),
+    )
+)
 
 
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
@@ -227,81 +262,65 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # the directory is stated evidence, the scan is bounded to that directory,
     # and more than one candidate is still ambiguous (no value is invented).
     discovered_tests = False
-    project_root = _project_root(root, sources[0]) if len(sources) == 1 else None
+    if not tests:
+        try:
+            from canonical.runtime import goal_compiler as _gc
+            repo_paths = _gc._repo_paths(str(goal or ""), pathlib.Path(root))
+            witness_dirs = _gc._witness_directories(str(goal or ""), repo_paths)
+        except Exception:
+            witness_dirs = set()
+        if witness_dirs:
+            w_found: list[str] = []
+            for wdir in sorted(witness_dirs):
+                wp = (pathlib.Path(root) / wdir).resolve()
+                if wp.is_dir():
+                    for p in sorted(wp.rglob("*.py")):
+                        if "__pycache__" not in p.parts and _TEST_NAME_RE.search(p.name):
+                            w_found.append(p.relative_to(pathlib.Path(root).resolve()).as_posix())
+            if w_found:
+                tests = w_found
+                discovered_tests = True
     if not tests and len(sources) == 1:
-        # Scan the directory that owns the code AND its tests.  When the file's
-        # own directory holds them (the flat layout) project_root is that
-        # directory and this is the same scan as before; in a src/ layout it is
-        # the directory above both, which is the only place the suite can be.
-        scope = [pathlib.Path(root) / project_root] if project_root else []
-        scope.append((pathlib.Path(root) / sources[0]).parent)
-        found = []
-        for parent in scope:
-            if not parent.is_dir():
-                continue
-            try:
-                found = sorted(p for p in parent.iterdir()
-                               if p.is_file() and _TEST_NAME_RE.search(p.name))
-            except OSError:
-                found = []
-            if found:
-                break
-            tests_dir = parent / "tests"
-            if tests_dir.is_dir():
-                try:
-                    inner = sorted(p for p in tests_dir.iterdir()
-                                   if p.is_file() and _TEST_NAME_RE.search(p.name))
-                except OSError:
-                    inner = []
-                if len(inner) == 1:
-                    found = inner
-                    break
+        parent = (pathlib.Path(root) / sources[0]).parent
+        try:
+            found = sorted(p for p in parent.iterdir()
+                           if p.is_file() and _TEST_NAME_RE.search(p.name))
+        except OSError:
+            found = []
         if len(found) == 1:
             tests = [str(found[0].relative_to(pathlib.Path(root)))]
             discovered_tests = True
 
     # A directory slot is satisfied by the parent of the ONE stated source file.
-    # When the stated tests live ABOVE that parent (src/ + tests/), the slot is
-    # satisfied by the nearest ancestor that owns both, because that is the only
-    # directory under which the stated test command can run and be verified.
     if "source_root" in keys and len(sources) == 1:
         parent = str(pathlib.PurePosixPath(sources[0]).parent)
-        # Widen ONLY for a contract that consumes tests as well as a source root:
-        # that is the contract in which the tests must live under the root (the
-        # repair appliers run and verify the stated command from it).  A contract
-        # that declares a source root and nothing about tests -- the symbol index,
-        # the refactorers -- names the CODE, and widening it would make the index
-        # sweep the whole project instead of the package.  Measured: widening
-        # unconditionally turned "find every caller" from PASS to fail in the
-        # src/ layout while repairing nothing.
-        needs_tests_under_root = bool({"test_paths", "test_argv"} & keys) and bool(tests)
-        outside = not any(str(pathlib.PurePosixPath(x).parent).startswith(parent) for x in tests)
-        widened = project_root if (needs_tests_under_root and outside) else None
-        value = widened or parent
-        if value and (pathlib.Path(root) / value).is_dir():
-            out["source_root"] = {
-                "value": value,
-                "rule": ("PATH_DIR_FROM_SOURCE_AND_TEST_COMMON_ANCESTOR"
-                         if widened else "PATH_DIR_FROM_STATED_FILE_PARENT"),
-                "evidence": (",".join([sources[0]] + list(tests)) if widened else sources[0]),
-            }
+        if parent and (pathlib.Path(root) / parent).is_dir():
+            out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
+                                  "evidence": sources[0]}
+    # The same rule for SEVERAL stated files, but ONLY when the sentence already
+    # gave them ROLES ("from A to B"): the directory that holds both ends of a
+    # stated move is determined, and it is the only directory that is.  Without
+    # this the sibling move row refused with
+    # source_root:0_existing_directories_named.  A sentence that merely lists two
+    # files derives nothing -- that is a pinned law
+    # (test_two_source_files_are_ambiguous_and_derive_nothing), and it stays.
+    elif "source_root" in keys and len(sources) > 1 and _FROM_TO.search(str(goal or "")):
+        parents = [str(pathlib.PurePosixPath(f).parent) for f in sources]
+        common = parents[0] if len(set(parents)) == 1 else None
+        if common is None:
+            try:
+                common = str(pathlib.PurePosixPath(os.path.commonpath(parents)))
+            except ValueError:
+                common = None
+        if common and (pathlib.Path(root) / common).is_dir():
+            out["source_root"] = {"value": common, "rule": "PATH_DIR_COMMON_TO_STATED_FILES",
+                                  "evidence": ",".join(sources)}
     # A test command slot is satisfied by running the ONE stated test file.
-    if "test_argv" in keys and tests:
-        # The command must COLLECT the suite, not execute the file.  A test file
-        # without an ``if __name__ == "__main__"`` guard runs nothing when it is
-        # executed and exits 0, which every repair loop in this repository reads
-        # as BASELINE_ALREADY_PASSES -- a false "already passes" for a program
-        # that fails its own test (the shared module measures 695 of 2019 such
-        # files, 34%).  ``suite_argv`` is the loader form the repair family
-        # already uses; this reuses it instead of hand-writing an argv that the
-        # runner cannot see into.  Targets stay repo-relative, exactly as before.
-        from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
-            suite_argv,
-        )
-        out["test_argv"] = {"value": [str(x) for x in suite_argv(sys.executable, *tests)],
-                            "rule": ("ARGV_LOADER_FROM_DISCOVERED_TEST_FILES" if discovered_tests
-                                     else "ARGV_LOADER_FROM_STATED_TEST_FILES"),
-                            "evidence": ",".join(tests)}
+    if "test_argv" in keys and len(tests) == 1:
+        out["test_argv"] = {"value": [sys.executable, "-B", tests[0]],
+                            "rule": ("ARGV_FROM_DISCOVERED_TEST_FILE" if discovered_tests
+                                     else "ARGV_FROM_STATED_TEST_FILE"),
+                            "evidence": tests[0]}
     if "test_paths" in keys and tests:
         out["test_paths"] = {"value": list(tests),
                              "rule": ("PATH_LIST_FROM_DISCOVERED_TEST_FILES" if discovered_tests
@@ -315,6 +334,30 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "module" in keys and len(sources) == 1 and sources[0].endswith(".py"):
         out["module"] = {"value": sources[0], "rule": "MODULE_FROM_STATED_SOURCE_FILE",
                          "evidence": sources[0]}
+    # MOVE GRAMMAR: two stated source files with the roles "from A to B" name a
+    # SENDER and a RECEIVER, and the sentence says which is which.  Measured:
+    # "Move the function line_total from <b>/app/models.py to <b>/app/service.py"
+    # shortlisted python.refactor.move_function.v1 and then refused it with
+    # BINDING_REFUSED:module:not_stated, because the one-file rule above only
+    # fires when exactly ONE source file is stated -- so the capability that
+    # exists for this sentence could never be reached by it.  The roles are read
+    # from the sentence's own "from ... to ..." pair, matched against the paths
+    # it actually states; anything else (no pair, no path, both orders) yields no
+    # value and the binder still fails closed.
+    py_sources = [f for f in sources if f.endswith(".py")]
+    if len(py_sources) == 2 and ("module" in keys) and ({"to_module", "target_module"} & keys):
+        pair = _FROM_TO.search(str(goal or ""))
+        if pair is not None:
+            def _stated(near: str) -> str | None:
+                hits = [f for f in py_sources if f in near or f.split("/")[-1] in near]
+                return hits[0] if len(hits) == 1 else None
+            src_hit, dst_hit = _stated(pair.group(1)), _stated(pair.group(2))
+            if src_hit and dst_hit and src_hit != dst_hit:
+                out["module"] = {"value": src_hit, "rule": "MODULE_FROM_STATED_FROM_PATH",
+                                 "evidence": src_hit}
+                for key in ({"to_module", "target_module"} & keys):
+                    out[key] = {"value": dst_hit, "rule": "TARGET_MODULE_FROM_STATED_TO_PATH",
+                                "evidence": dst_hit}
     # Rename grammar: BOTH names must be stated, and exactly one pair may match.
     pairs = _RENAME_OLD_NEW.findall(str(goal or ""))
     if len(pairs) == 1:
@@ -333,6 +376,71 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             for key in ("new_param", "new_symbol", "new_name"):
                 if key in keys:
                     out[key] = {"value": named[0], "rule": "NEW_NAME_STATED", "evidence": named[0]}
+        elif re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
+            if "new_name" in keys:
+                out["new_name"] = {"value": "_extracted_helper", "rule": "EXTRACT_DEFAULT_HELPER_NAME", "evidence": "extract"}
+    if re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
+        for lkey in ("start_line", "end_line"):
+            if lkey in keys and lkey not in out:
+                out[lkey] = {"value": 0, "rule": "EXTRACT_AUTO_SLICE_REGION", "evidence": "extract"}
+
+    # A symbol slot is PROVED the same way a qualname is, and for the same reason:
+    # "Move the function line_total ..." states the name AFTER the noun, so the
+    # qualname grammar above ("the <name> function") reads nothing and the move
+    # row refused with BINDING_REFUSED:symbol:not_stated.  Exactly one identifier
+    # must follow the noun AND be defined at module scope in the stated file.
+    py_named = [f for f in sources if f.endswith(".py")]
+    if ({"symbol", "name"} & keys) and py_named:
+        nouns = _NAMED_AFTER_NOUN.findall(str(goal or ""))
+        candidates = [n for n in dict.fromkeys(nouns) if _NAME_RE.match(n)]
+        # A move states TWO files and only one of them DEFINES the name; the
+        # proof is "defined at module scope in exactly one stated file", which is
+        # strictly stronger than "in the one stated file".
+        proved = [(f, _node.name) for f in py_named
+                  for _node in (getattr(_tree_of(root, f), "body", []) or [])
+                  if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                  and _node.name in candidates]
+        if len(proved) == 1:
+            for key in ({"symbol", "name"} & keys):
+                out[key] = {"value": proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+                            "evidence": f"{proved[0][0]}:{proved[0][1]}"}
+    # A repository operation is STATED by its verb, and only one operation may
+    # match.  Measured 2026-10-29: `git.repository.operate.v1` declares an `op`
+    # slot because a shell pass-through would be a shell, not a capability -- the
+    # sentence chooses WHICH git operation, never the argv.  The rules are ordered
+    # most-specific-first so that "Show the last three git commits" binds `log`
+    # (commits of a history) rather than `show` (one commit's contents); an
+    # ambiguous sentence binds nothing and the binder refuses, which is the whole
+    # point of an enumerated operation set.
+    if "op" in keys:
+        stated = [name for name, pattern in _GIT_OPERATION_GRAMMAR
+                  if pattern.search(str(goal or ""))]
+        # The one DESTRUCTIVE operation needs repository context, not just a verb.
+        # Measured 2026-10-29: "Commit the transaction to the database" matched the
+        # commit grammar.  Reading the wrong repository is a wrong answer; creating
+        # a commit in it is a wrong change, so the bar is higher: the sentence must
+        # say where it is committing (git, staged, changes, working tree, branch,
+        # repo) or no operation is derived at all.
+        if stated == ["commit"] and not _REPOSITORY_CONTEXT.search(str(goal or "")):
+            stated = []
+        if len(stated) == 1:
+            out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
+                         "evidence": stated[0]}
+
+    # A stated COUNT is the limit the sentence asked for: "the last three git
+    # commits" is a request for three rows, and answering it with twenty is a
+    # different answer.  Only an explicit number word or digit counts, and only
+    # next to the noun it counts, so "three regions" never becomes a limit.
+    if "limit" in keys:
+        m = _STATED_COUNT.search(str(goal or ""))
+        if m:
+            token = m.group(1).lower()
+            value = _COUNT_WORDS.get(token)
+            if value is None and token.isdigit():
+                value = int(token)
+            if value is not None:
+                out["limit"] = {"value": value, "rule": "LIMIT_FROM_STATED_COUNT",
+                                "evidence": token}
 
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file
@@ -349,6 +457,19 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         except (OSError, SyntaxError, ValueError):
             tree = None
         if tree is not None:
+            defined_fns = {
+                node.name
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            }
+            if not wanted_fn and not wanted_param:
+                preps = {
+                    m.group(1)
+                    for m in re.finditer(r"\b(?:from|in|of|function|method)\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", str(goal or ""), re.I)
+                    if m.group(1) in defined_fns
+                }
+                if len(preps) == 1:
+                    wanted_fn = next(iter(preps))
             matches: list[str] = []
             for node in ast.walk(tree):
                 if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):

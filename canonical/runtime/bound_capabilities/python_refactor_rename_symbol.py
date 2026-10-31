@@ -297,6 +297,59 @@ def _collect_edits_in_scope(node, old: str, new: str, edits: list,
     process(node, top=True)
 
 
+
+def _module_bindings(tree):
+    """local name -> the absolute module path that name denotes.
+
+    ``import a.b`` binds ``a`` to package ``a`` and makes ``a.b`` reachable by an
+    attribute walk, so the attribute chain spells the module path directly.
+    ``import a.b as c`` binds one local name to the complete path, and
+    ``from pkg import mod`` binds ``mod`` to ``pkg.mod``.  Both therefore resolve
+    to ``base`` plus whatever attribute names follow the head.  Relative imports
+    are not resolved: their base package is the file's own, so a chain through
+    one is not PROVABLE and must not be edited or refused on.
+    """
+    out = {}
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for a in node.names:
+                if a.asname:
+                    out[a.asname] = a.name
+                else:
+                    out[a.name.split(".")[0]] = a.name.split(".")[0]
+        elif isinstance(node, ast.ImportFrom):
+            if getattr(node, "level", 0) or not node.module:
+                continue
+            for a in node.names:
+                if a.name == "*":
+                    continue
+                out[a.asname or a.name] = node.module + "." + a.name
+    return out
+
+
+_UNBOUND = "__UNBOUND__"
+
+
+def _receiver_module(value, modbindings):
+    """The module path an attribute receiver provably denotes.
+
+    ``__UNBOUND__`` when the chain's head name has no module binding,
+    ``None`` when the receiver is not a static name/attribute chain (a call, a
+    subscript, ...) and therefore nothing can be proved about it.
+    """
+    chain, nd = [], value
+    while isinstance(nd, ast.Attribute):
+        chain.append(nd.attr)
+        nd = nd.value
+    if not isinstance(nd, ast.Name):
+        return None
+    chain.append(nd.id)
+    chain.reverse()
+    base = modbindings.get(chain[0])
+    if base is None:
+        return _UNBOUND
+    return ".".join([base] + chain[1:])
+
 def _name_col(line_text: str, keyword: str, name: str) -> int:
     """Column of `name` in a def/class line: search after the keyword."""
     idx = line_text.find(keyword)
@@ -428,7 +481,25 @@ def run(args, root):
                     edits.append((node.lineno, node.col_offset, old))
             elif isinstance(node, ast.Attribute) and node.attr == old:
                 v = node.value
-                if isinstance(v, ast.Name):
+                if not isinstance(v, ast.Name):
+                    # A DOTTED receiver spells the module path directly: after
+                    # `import app.core` the site `app.core.old(...)` names this
+                    # module, and after `from app import core` the site
+                    # `core.old(...)` does.  Requiring a bare Name receiver
+                    # dropped every one of those SILENTLY while the artifact
+                    # said complete=true, and the tree then raised
+                    # AttributeError on the untouched call site (measured
+                    # 2026-10-29).  Resolution is by import binding only: a
+                    # chain whose head has no module binding is not provable
+                    # and is reported, never edited.
+                    chain = _receiver_module(v, _module_bindings(tree))
+                    if chain == _UNBOUND:
+                        unknown.append({"file": rel, "line": node.lineno,
+                                        "rule": "unresolvable module receiver"})
+                    elif chain is not None and _targets(chain, 0, package):
+                        edits.append((node.lineno,
+                                      node.end_col_offset - len(old), old))
+                elif isinstance(v, ast.Name):
                     hit = bindings.get(v.id)
                     if hit and hit[1] is None and _targets(hit[0], hit[2],
                                                            package):
@@ -584,6 +655,29 @@ def run(args, root):
         residual.sort()
         _fail("RESIDUAL_REFERENCE:" + ",".join(
             f"{f}:{ln}" for f, ln in residual[:8]))
+
+    # ------------------------------------------- dangling-member law (pre-write)
+    # `_cross_sites` harvests only the kinds it can rename across files
+    # (FUNCTION / CLASS / MODULE_BINDING).  A METHOD is renamed in its own class
+    # body, so a site in another module that spells the member through a receiver
+    # that PROVABLY resolves to this class -- `Meter.bands(Meter(), 4)` after
+    # `from app.meter import Meter` -- is not harvested by anything.  It used to
+    # be dropped silently and the artifact still said gate=PASS (measured
+    # 2026-10-29; the tree then raised AttributeError at that call site).  The law
+    # is the same one the residual check states -- no provable reference to the
+    # old symbol survives -- so it is checked the same way and with the same
+    # consequence: refuse, and write not one byte.
+    dotted = "/".join(module_abs.relative_to(src_abs).with_suffix("").parts).replace("/", ".")
+    container = dotted + "." + parts[-2] if kind == "METHOD" else dotted
+    dangling = []
+    for path, tree in post.items():
+        fresh_bindings = _module_bindings(tree)
+        for nd in ast.walk(tree):
+            if isinstance(nd, ast.Attribute) and nd.attr == old and \
+                    _receiver_module(nd.value, fresh_bindings) == container:
+                dangling.append(path.relative_to(src_abs).as_posix() + ":" + str(nd.lineno))
+    if dangling:
+        _fail("DANGLING_REFERENCE_AFTER_EDIT:" + ",".join(sorted(dangling)[:6]))
 
     for path, b in applied.items():
         path.write_bytes(b)

@@ -940,6 +940,7 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
                 if not _is_referent_key(key, entry)}
     optional = declared_optional_inputs(entry)
     replacement = declared_replacement_identifier(goal)
+    is_extract = bool(re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE))
     still: list[tuple[str, BaseException]] = []
     for key, exc in unbound:
         if key in defaults:
@@ -948,6 +949,10 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
             inputs[key] = None
         elif key.startswith("new_") and replacement:
             inputs[key] = replacement
+        elif is_extract and key in ("start_line", "end_line"):
+            inputs[key] = 0
+        elif is_extract and key == "new_name":
+            inputs[key] = "_extracted_helper"
         else:
             still.append((key, exc))
     remaining: list[tuple[str, BaseException]] = []
@@ -958,7 +963,55 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
                 inputs[key] = module
                 continue
         remaining.append((key, exc))
+    # The typed-admission door already settles exactly this class of key: a
+    # STATED file determines the module it spells, the directory that holds it,
+    # and the symbol the sentence names -- each PROVED against the file's AST
+    # (declared_input_derivation_v1).  Measured: "Move the function line_total
+    # from <b>/app/models.py to <b>/app/service.py" ranked
+    # python.refactor.move_function.v1 first at 34 against 8 for the runner-up,
+    # then the front binder refused it with to_module:not_stated: two doors, one
+    # gate, and only one of them could bind the sentence.  Asking the same
+    # evidence module here is what makes the two doors agree; it can only settle
+    # a key that is still unbound, so every binding that worked before is kept
+    # byte for byte.
+    if remaining:
+        try:
+            from canonical.runtime import declared_input_derivation_v1 as _derivation
+            _evidence = (_derivation.derive(goal, entry or {}, root)
+                         if _derivation.is_swe_request(goal) else {})
+        except Exception:  # noqa: BLE001 - derivation is advisory; a fault keeps the refusal
+            _evidence = {}
+        settled: list[tuple[str, BaseException]] = []
+        for key, exc in remaining:
+            row = _evidence.get(key) or {}
+            value = row.get("value")
+            # Only a value PROVED AGAINST THE TREE is taken here, never one read
+            # off the sentence's word order.  Measured: a blanket hook let
+            # `python.refactor.rename_parameter.v1` bind `old_param` on "Rename the
+            # function line_total to item_total", so a FUNCTION rename was answered
+            # by a parameter renamer -- the same substitution the gate above exists
+            # to stop.  The proofs that survive are the ones whose evidence is a
+            # file this sentence stated.
+            if value is None or str(row.get("rule") or "") not in _PROVED_BY_THE_TREE:
+                settled.append((key, exc))
+                continue
+            inputs[key] = value
+        remaining = settled
     return remaining
+
+
+# Derivations whose value is CHECKED against a stated file (its AST, or the path
+# itself) rather than parsed out of the sentence.  A front-door binding may only
+# rest on one of these.
+_PROVED_BY_THE_TREE = frozenset({
+    "MODULE_FROM_STATED_SOURCE_FILE",
+    "MODULE_FROM_STATED_FROM_PATH",
+    "TARGET_MODULE_FROM_STATED_TO_PATH",
+    "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+    "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
+    "PATH_DIR_FROM_STATED_FILE_PARENT",
+    "PATH_DIR_COMMON_TO_STATED_FILES",
+})
 
 
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
@@ -1006,11 +1059,36 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
                 parent = str(pathlib.PurePosixPath(paired).parent)
                 if parent not in ("", "."):
                     return parent
+        # Several directories named is not ambiguity when the sentence said which
+        # one is the witness.  Strictly a narrowing: the survivors must be exactly
+        # one, so a sentence that names two SUBJECTS still fails closed exactly as
+        # before.
+        if len(dirs) > 1:
+            witness = gc._witness_directories(goal, paths)
+            survivors = [d for d in dirs if d not in witness]
+            if len(survivors) == 1:
+                return survivors[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(dirs)) + "_existing_directories_named")
     if key in _PATH_LIST_KEYS:
         files = [raw for raw, p in paths if p.is_file()]
         if key == "test_paths":
             chosen = [raw for raw in files if re.search(r"(^|/)(test_[^/]*|[^/]*_test)\.py$", raw) or "/tests/" in raw]
+            if not chosen:
+                # When the sentence names a witness test directory ("the test suite in X/tests"),
+                # expand the test modules inside that stated directory rather than refusing.
+                witness_dirs = gc._witness_directories(goal, paths)
+                discovered: list[str] = []
+                for wdir in sorted(witness_dirs):
+                    wpath = (pathlib.Path(root) / wdir).resolve()
+                    if not wpath.is_dir():
+                        continue
+                    for cand in sorted(wpath.rglob("*.py")):
+                        if "__pycache__" in cand.parts:
+                            continue
+                        rel_c = cand.relative_to(pathlib.Path(root).resolve()).as_posix()
+                        if re.search(r"(^|/)(test_[^/]*|[^/]*_test)\.py$", rel_c):
+                            discovered.append(rel_c)
+                chosen = discovered
         elif key == "source_paths":
             chosen = [raw for raw in files if raw.endswith(".py") and not re.search(r"(^|/)(test_[^/]*|[^/]*_test)\.py$", raw)]
         else:
@@ -1022,6 +1100,26 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         paired = _module_pair_file(entry, paths)
         if paired is not None:
             return paired.rsplit("/", 1)[-1]
+    if key == "qualname":
+        paired = _module_pair_file(entry, paths)
+        if paired is not None:
+            try:
+                tree = ast.parse((pathlib.Path(root) / paired).read_text(encoding="utf-8"))
+            except (OSError, SyntaxError, ValueError):
+                tree = None
+            if tree is not None:
+                defined = {
+                    node.name
+                    for node in ast.walk(tree)
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                }
+                mentioned = {
+                    m.group(1)
+                    for m in re.finditer(r"\b(?:from|in|of|function|method|class)\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", str(goal or ""), re.I)
+                    if m.group(1) in defined
+                }
+                if len(mentioned) == 1:
+                    return next(iter(mentioned))
     tails = _after_key(goal, key)
     if not tails:
         if key in _KV_KEYS:
@@ -1350,7 +1448,13 @@ def _bind_output_by_future(goal: str, key: str, root: pathlib.Path, exclude=None
     skip = {str(x) for x in (exclude or [])}
     stem = key[:-5].lower().replace("output_", "") if key != "output_path" else "output"
     wanted = _STEM_SUFFIXES.get(stem)
-    future = [(raw, p) for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists() and raw not in skip]
+    repo_paths = gc._repo_paths(goal, root)
+    existing_dirs = [p for _r, p in repo_paths if p.is_dir()]
+    future = [
+        (raw, p) for raw, p in repo_paths
+        if pathlib.Path(raw).suffix and not p.exists() and raw not in skip
+        and not any((d / raw).exists() for d in existing_dirs)
+    ]
     if wanted:
         future = [(raw, p) for raw, p in future if "".join(p.suffixes[-2:]).lower() in wanted or p.suffix.lower() in wanted]
     if len(future) == 1:
@@ -1745,10 +1849,21 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     # fails closed, so the type is settled here rather than at each call site.
     root = pathlib.Path(root)
     input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k, entry)}
+    if inputs.get("source_root") and inputs.get("module"):
+        input_paths.add(str(pathlib.PurePosixPath(str(inputs["source_root"])) / str(inputs["module"])))
+    src_root_abs = (root / str(inputs["source_root"])).resolve() if inputs.get("source_root") else None
+    verb_dest = gc._path_named_after_output_verb(goal, root)
     for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k, entry)]:
         value = str(inputs[key])
-        collides = value in input_paths
-        exists = (root / value).exists()
+        val_abs = (root / value).resolve()
+        exists = val_abs.exists()
+        inside_source_root = (
+            exists
+            and src_root_abs is not None
+            and (val_abs == src_root_abs or src_root_abs in val_abs.parents)
+            and verb_dest != value
+        )
+        collides = value in input_paths or inside_source_root
         if collides or (exists and len([p for p in _future_artifacts(goal, root) if p not in {str(x) for x in (exclude or [])}]) == 1):
             try:
                 inputs[key] = _bind_output_by_future(goal, key, root, exclude=exclude)
@@ -1901,7 +2016,16 @@ def _provides_evidence(goal: str, entry: Mapping[str, Any]) -> int:
 
 
 def _future_artifacts(goal: str, root: pathlib.Path) -> list[str]:
-    return [raw for raw, p in gc._repo_paths(goal, root) if pathlib.Path(raw).suffix and not p.exists()]
+    repo_paths = gc._repo_paths(goal, root)
+    existing_dirs = [p for _r, p in repo_paths if p.is_dir()]
+    out = []
+    for raw, p in repo_paths:
+        if not pathlib.Path(raw).suffix or p.exists():
+            continue
+        if any((d / raw).exists() for d in existing_dirs):
+            continue
+        out.append(raw)
+    return out
 
 
 def _output_keys(entry: Mapping[str, Any]) -> list[str]:
@@ -2082,12 +2206,48 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
     return None
 
 
+def _deliver_to_previous(clause: str, steps: list[dict[str, Any]], root: pathlib.Path) -> bool:
+    """A delivery clause is the DESTINATION of the previous answer, not a new step.
+
+    "Would the tests in <b>/tests catch a bug introduced in <b>/app? Write yes or
+    no to <b>/answer.json" is one question and one place for the answer.  The DAG
+    planner made two steps of it and handed the second to
+    software.synthesis.grid_induction.v1, which cannot answer a coverage question:
+    measured, the whole run ended FAIL_CLOSED__PROMISED_ARTIFACT_MISSING while the
+    capability that HAD the answer ran successfully and wrote elsewhere.
+
+    Same rule as gc._compile_answer_delivery, at the seam this planner uses: the
+    object is anaphoric ("its name", "the number", "yes or no"), so it cannot name
+    a new subject, and the clause states exactly one path -- the destination.
+    Returns True when the clause was consumed.
+    """
+    if not steps:
+        return False
+    text = str(clause or "")
+    if not gc._DELIVERY_RE.match(text):
+        return False
+    stated = [str(raw) for raw, path in gc._repo_paths(text, root) if not path.is_dir()]
+    if len(stated) != 1:
+        return False
+    previous = steps[-1]
+    entry = previous.get("entry") or {}
+    keys = [k for k in (previous.get("inputs") or {}) if _is_output_key(k, entry)]
+    if not keys:
+        return False
+    previous["inputs"][keys[0]] = stated[0]
+    previous["outputs"] = [(k, str(v)) for k, v in previous["inputs"].items()
+                           if _is_output_key(k, entry) and isinstance(v, str) and v]
+    return True
+
+
 def _dag_steps(clauses: list[str], admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path):
     registry = routable_registry(admissible)
     steps: list[dict[str, Any]] = []
     produced: list[str] = []
     spool: set[str] = set()
     for cycle, clause in enumerate(clauses):
+        if _deliver_to_previous(clause, steps, root):
+            continue
         bound = bind_dag_clause(clause, admissible, root, produced_paths=produced,
                                 cycle=cycle, spool=spool)
         if bound is None:
@@ -2202,6 +2362,16 @@ def plan_capability_dag(goal: str, admissible: Mapping[str, Mapping[str, Any]], 
     earlier step writes, or a contradiction the planner cannot satisfy all fail closed.
     """
     clauses = sentence_clauses(goal)
+    clauses = [
+        c for idx, c in enumerate(clauses)
+        if not (idx > 0 and gc._DELIVERY_RE.match(c))
+    ]
+    if (
+        len(clauses) == 2
+        and re.match(r"^\s*the\s+.+\s+(?:is|are)\s+(?:flaky|failing|broken|slow|quadratic|deprecated)\s*$", clauses[0], re.IGNORECASE)
+        and re.match(r"^\s*(?:fix|repair|resolve|migrate)\b", clauses[1], re.IGNORECASE)
+    ):
+        return None
     if len(clauses) < 2:
         return None
     steps = _dag_steps(clauses, admissible, root)
@@ -2394,6 +2564,32 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     except GoalCompilationFailure as exc:
         compiled, pinned_failure = None, exc
 
+    # Reject bogus compound splits where an observation sentence named a real path
+    # and an anaphoric imperative sentence ("Fix it...", "Migrate it...") had zero
+    # paths so world-binding invented host `source_root` = "." or "canonical/tests".
+    if compiled is not None and compiled.get("compiler_mode") == "DETERMINISTIC_COMPOUND_ACTION_PLAN":
+        _parts = compiled.get("compiled_parts") or []
+        _first_sub = str((_parts[0] or {}).get("subgoal") or (_parts[0] or {}).get("clause") or "") if _parts else ""
+        _second_sub = str((_parts[1] or {}).get("subgoal") or (_parts[1] or {}).get("clause") or "") if len(_parts) >= 2 else ""
+        if (
+            len(_parts) == 2
+            and re.match(r"^\s*the\s+.+\s+(?:is|are)\s+(?:flaky|failing|broken|slow|quadratic|deprecated)\s*$", _first_sub, re.IGNORECASE)
+            and re.match(r"^\s*(?:fix|repair|resolve|migrate)\b", _second_sub, re.IGNORECASE)
+        ):
+            compiled = None
+            pinned_failure = GoalCompilationFailure("OBSERVATION_PLUS_REPAIR_SINGLE_STEP", "declarative_observation_plus_repair")
+        elif len(_parts) >= 2 and gc._repo_paths(_first_sub, root):
+            if any(
+                not gc._repo_paths(str((_p or {}).get("subgoal") or (_p or {}).get("clause") or ""), root)
+                and str(((_p or {}).get("inputs") or {}).get("source_root") or "") in (".", "./", "canonical/tests")
+                for _p in _parts[1:]
+            ):
+                compiled = None
+                pinned_failure = GoalCompilationFailure(
+                    "COMPOUND_CLAUSE_UNSTATED_WORLD_ROOT",
+                    "anaphoric_followup_clause_invented_host_source_root",
+                )
+
     # F5: a literal route captured several sentences -> compile sentence by sentence
     if compiled is not None and compiled.get("compiler_mode") in _LITERAL_MODES:
         clauses = sentence_clauses(text)
@@ -2534,12 +2730,38 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
             # same-score tier stays a tier: within it a sibling may still bind.
             bound: tuple[tuple[int, int, str, dict[str, Any]], dict[str, Any], dict[str, Any]] | None = None
             best_error: GoalCompilationFailure | None = None
+            from canonical.runtime import capability_selection_retrieval_v1 as _csr_ro
+            from canonical.runtime import write_authority_v1 as _wa_ro
+            _text_low = text.lstrip().lower()
+            _read_only_q = (
+                (_csr_ro.is_computed_answer_delivery(text)
+                 or _text_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")))
+                and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", _text_low)
+            )
+            _repair_imperative = (
+                not _read_only_q
+                and not future
+                and bool(re.search(
+                    r"\b(?:(?:fix|repair)\s+(?:the\s+(?:code|bug|race|circular|import|package|module|function)|it\b)"
+                    r"|remove\s+the\s+sql\s+injection|make\s+\w+\s+linearithmic|migrate\s+it\b)",
+                    _text_low,
+                ))
+            )
+            if _repair_imperative and selected and not _wa_ro.is_source_transformer(selected):
+                selected = None
+                single_shape = False
+                compiled = None
+                pinned_failure = GoalCompilationFailure("REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER", "read_only_capability_rejected")
             for tier_index, tier in enumerate(_score_tiers(pool)):
                 tier_error: GoalCompilationFailure | None = None
                 for rank, cand in enumerate(tier):
                     cand_entry = registry[cand[2]]
                     if _is_catch_all(cand_entry):
                         # a capability that binds every sentence is never the decision
+                        continue
+                    if _read_only_q and _wa_ro.is_source_transformer(cand[2]):
+                        continue
+                    if _repair_imperative and not _wa_ro.is_source_transformer(cand[2]):
                         continue
                     try:
                         cand_inputs = bind_all_inputs(text, cand_entry, root, cycle=0, spool=spool)

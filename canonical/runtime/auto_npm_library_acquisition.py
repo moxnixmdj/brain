@@ -53,9 +53,85 @@ def _repo_paths(text):
     return re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+",str(text or ""))
 
 
+_SEMANTIC_FORMAT_WORD=re.compile(r"\b(?:as|into|to|encoded in)\s+([A-Z][A-Z0-9]{1,24})\b")
+
+
+def _primed_source_verifiers(goal,mission_id,root):
+    # The live instance (with the astra-bridged provider registered) is the
+    # bare-key sys.modules entry loaded by auto_capability_acquisition; the
+    # canonical-namespace import would mint a second instance with no provider.
+    mod=sys.modules.get("auto_python_source_codec_acquisition")
+    if mod is None or not hasattr(mod,"prime_verifier_trees"):
+        from canonical.runtime import auto_python_source_codec_acquisition as mod
+    return mod.prime_verifier_trees(goal,mission_id,root,limit=3)
+
+
+def _prime_debug():
+    mod=sys.modules.get("auto_python_source_codec_acquisition")
+    bare=mod is not None and hasattr(mod,"prime_verifier_trees")
+    provider=bool(getattr(mod,"_EXTERNAL_SOURCE_TREE_PROVIDER",None)) if bare else None
+    return {"bare_module":bare,"provider_live":provider}
+
+
+def prime_verifier_npm_candidates(goal,mission_id,root,limit=2,exclude_package=""):
+    """Materialize npm probe-stage tarballs + contracts for independent
+    verifier replay (offline in the verification child). Raises nothing."""
+    out=[]
+    try:
+        candidates=_search_registry(goal,limit=30)
+    except Exception:
+        return out
+    for raw in candidates[:12]:
+        if len(out)>=limit:
+            break
+        try:
+            candidate=_metadata(raw)
+            pkg=str(candidate.get("package") or "")
+            if exclude_package and pkg==exclude_package:
+                continue
+            from canonical.runtime import npm_package_utils
+            if int(candidate.get("dependency_count") or 0)!=0:
+                continue
+            fetched=npm_package_utils.fetch_verified_tarball(
+                pkg,candidate["version"],candidate["tarball_url"],candidate["integrity"]
+            )
+            stable_dir=pathlib.Path(root)/"canonical"/"astra_runtime"/"tmp"/"npm_probe_packages"
+            stable_dir.mkdir(parents=True,exist_ok=True)
+            stable=stable_dir/(_slug(pkg)+"-"+candidate["version"]+"-"+fetched["digest_hex"][:16]+".tgz")
+            stable.write_bytes(fetched["raw"])
+            contract=_probe_contract({**candidate},root)
+            out.append({
+              "name":pkg,"version":candidate["version"],
+              "metadata_url":candidate["metadata_url"],"tarball_url":candidate["tarball_url"],
+              "integrity":candidate["integrity"],"integrity_algorithm":fetched["algorithm"],
+              "integrity_digest_hex":fetched["digest_hex"],
+              "tarball_path":str(stable.relative_to(root)),
+              "dependency_count":0,
+              "contract":{
+                "root_selector":contract["root_selector"],
+                "encode_export":contract["encode_export"],
+                "decode_export":contract["decode_export"],
+                "loader":contract.get("loader"),
+              },
+            })
+        except Exception:
+            continue
+    return out
+
+
 def _format_tokens(goal):
     common={"json","txt","md","markdown","csv","tsv","html","xml","png","jpg","jpeg","webp","pdf","docx","xlsx","zip","gz","tgz","tar","sqlite","db","sqlite3"}
     out=[]
+    # Registries index codecs by the NAMED format, not by an artifact suffix.
+    # Measured 2026-10-28 on the UBJSON mission: ``ubjson`` yields the six
+    # real UBJSON codec packages on npm; the artifact suffix ``ubj`` yields
+    # only ``bjd``/``jda`` -- wrong supplier candidates, guaranteed contract
+    # failure downstream. Semantic format names ("encode ... as UBJSON")
+    # therefore rank FIRST; suffixes remain as the conservative fallback.
+    for word in _SEMANTIC_FORMAT_WORD.findall(str(goal or "")):
+        token = word.lower()
+        if token and token not in common and token not in out:
+            out.append(token)
     for raw in _repo_paths(goal):
         suffix=pathlib.PurePosixPath(raw.rstrip(".,;:!?)]}")).suffix.lower().lstrip(".")
         if suffix and suffix not in common and suffix not in out:
@@ -214,6 +290,12 @@ def _probe_contract(candidate,root):
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     root=pathlib.Path(root).resolve()
     origin_mission_sha256=_origin_mission_sha256(root,mission_path)
+    try:
+        (root/"canonical"/"astra_runtime"/"tmp").mkdir(parents=True,exist_ok=True)
+        (root/"canonical"/"astra_runtime"/"tmp"/"dispatch_trace.jsonl").open("a").write(
+            json.dumps({"on":"npm.dispatch.enter","mid":mission_id})+"\n")
+    except Exception:
+        pass
     if not supports_effect(goal):
         raise AutoNpmAcquisitionFailure("NPM_CONTRACT_CLASS_UNSUPPORTED")
     candidates=_search_registry(goal,limit=30)
@@ -247,6 +329,10 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
             "NO_COMPATIBLE_NPM_LIBRARY_CONTRACT",
             json.dumps([{"name":(x.get("supplier") or {}).get("name"),"error":x.get("error")} for x in diagnostic["attempts"]],sort_keys=True)[:4000]
         )
+    try:
+        (root/"canonical"/"astra_runtime"/"tmp"/"dispatch_trace.jsonl").open("a").write(json.dumps({"on":"npm.post_contract"})+"\n")
+    except Exception:
+        pass
     diagnostic.update({"status":"CONTRACT_INFERRED","selected_supplier":{k:v for k,v in selected.items() if k!="package_json"},"contract":contract})
     diag_path.write_text(json.dumps(diagnostic,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     package=selected["package"]; version=selected["version"]; slug=_slug(package)
@@ -262,6 +348,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "metadata_url":selected["metadata_url"],"tarball_url":selected["tarball_url"],
       "integrity":selected["integrity"],"integrity_algorithm":contract["integrity_algorithm"],
       "integrity_digest_hex":contract["integrity_digest_hex"],
+      "tarball_path":contract["tarball_path"],
       "dependency_count":0,"license":selected.get("license"),
     }
     entry={
@@ -285,6 +372,10 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
         "supplier_score":selected.get("score"),"contract":contract
       }
     }
+    try:
+        (root/"canonical"/"astra_runtime"/"tmp"/"dispatch_trace.jsonl").open("a").write(json.dumps({"on":"npm.pre_entry_build"})+"\n")
+    except Exception:
+        pass
     fingerprint=hashlib.sha256((mission_id+"\n"+cap_id+"\n"+json.dumps(contract,sort_keys=True)).encode()).hexdigest()[:12]
     pending_rel=f"canonical/astra_runtime/pending_bindings/{mission_id}__{slug}__{fingerprint}.json"
     verify_rel=f"canonical/astra_runtime/evidence/{mission_id}__{slug}__{fingerprint}__AUTO_VERIFY.json"
@@ -299,19 +390,36 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       "registry_entry":entry,"verification_mission_id":verify_mid,
       "verification_result_path":verify_rel,"status":"PENDING_INDEPENDENT_VERIFICATION"
     }
+    try:
+        pending["_prime_debug"]=_prime_debug()
+        primed=_primed_source_verifiers(goal,mission_id,root)
+    except Exception as exc:
+        try:
+            import traceback as _tb
+            (root/"canonical"/"astra_runtime"/"tmp"/"dispatch_trace.jsonl").open("a").write(json.dumps({"on":"npm.prime_failed","error":type(exc).__name__+":"+str(exc)[:300],"tb":_tb.format_exc()[-800:]})+"\n")
+        except Exception:
+            pass
+        primed=[]
+    staged=[x for x in primed if isinstance(x,dict) and x.get("tree") is not None]
+    if staged:
+        pending["independent_verifier_source_trees"]=staged
+    priming_errors=[x.get("_prime_error") for x in primed if isinstance(x,dict) and x.get("_prime_error")]
+    if priming_errors and not pending.get("independent_verifier_source_trees"):
+        pending["independent_verifier_prime_errors"]=priming_errors[:3]
+    try:
+        (root/"canonical"/"astra_runtime"/"tmp"/"dispatch_trace.jsonl").open("a").write(json.dumps({"on":"npm.pre_pending_write"})+"\n")
+    except Exception:
+        pass
     pp=root/pending_rel; pp.parent.mkdir(parents=True,exist_ok=True)
     pp.write_text(json.dumps(pending,indent=2,sort_keys=True)+"\n",encoding="utf-8")
     verifier={
       "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1","mission_id":verify_mid,
-      "purpose":"Fresh Node.js semantic round-trip verification and promotion of an automatically synthesized npm codec binding.",
-      "goal":"Verify the pending npm JavaScript codec in fresh Node.js processes, promote only after exact semantic equality, then replay the originating mission.",
+      "purpose":"Fresh Node.js semantic round-trip verification of an automatically synthesized npm codec binding. Promotion is committed by the outer acquisition context after this mission completes.",
+      "goal":"Verify the pending npm JavaScript codec in fresh Node.js processes with an independent supplier-class verifier; exact semantic equality required.",
       "steps":[
         {"id":"verify-pending-node-codec","adapter":"shell",
          "command":f"set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
-         "verify":{"type":"stdout_contains","text":"PENDING_NPM_BINDING_EFFECT_VERIFIED"}},
-        {"id":"promote-and-replay","adapter":"shell",
-         "command":f"set -euo pipefail\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
-         "verify":{"type":"stdout_contains","text":"PENDING_CAPABILITY_PROMOTED"}}
+         "verify":{"type":"stdout_contains","text":"PENDING_NPM_BINDING_EFFECT_VERIFIED"}}
       ],
       "constraints":{
         "incremental_spend_usd":0,"model_controller_required":False,
@@ -320,10 +428,27 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
       }
     }
     vm_rel=f"canonical/astra_runtime/missions/{verify_mid.replace('-','_')}.json"
+    try:
+        (root/"canonical"/"astra_runtime"/"tmp"/"dispatch_trace.jsonl").open("a").write(json.dumps({"on":"npm.pre_verify_mission_write"})+"\n")
+    except Exception:
+        pass
     vp=root/vm_rel
+    encoded=json.dumps(verifier,indent=2,sort_keys=True)+"\n"
     if vp.exists():
-        raise AutoNpmAcquisitionFailure("VERIFICATION_MISSION_ALREADY_EXISTS",vm_rel)
-    vp.write_text(json.dumps(verifier,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+        try:
+            existing=json.loads(vp.read_text(encoding="utf-8"))
+        except Exception as exc:
+            raise AutoNpmAcquisitionFailure("VERIFICATION_MISSION_EXISTING_INVALID",vm_rel) from exc
+        if existing!=verifier:
+            raise AutoNpmAcquisitionFailure("VERIFICATION_MISSION_ALREADY_EXISTS",vm_rel)
+    else:
+        vp.write_text(encoded,encoding="utf-8")
+    from canonical.runtime import auto_capability_acquisition as _aca
+    _aca.propagate_obs_sidecar_for_generated_mission(root, mission_path, vm_rel)
+    try:
+        (root/"canonical"/"astra_runtime"/"tmp"/"dispatch_trace.jsonl").open("a").write(json.dumps({"on":"npm.dispatched"})+"\n")
+    except Exception:
+        pass
     return {
       "status":"ACQUISITION_DISPATCHED","supplier_class":"npm_javascript_library",
       "capability_id":cap_id,"supplier":package,"pending_binding_path":pending_rel,

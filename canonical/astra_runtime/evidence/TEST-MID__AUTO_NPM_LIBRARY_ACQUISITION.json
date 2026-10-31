@@ -1,0 +1,213 @@
+{
+  "attempts": [
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:ubjson:dependencies:[\"long\", \"strtok\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "Universal Binary JSON packer/unpacker for Node.js",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://github.com/Sannis/node-ubjson/issues",
+          "homepage": "http://sannis.github.com/node-ubjson",
+          "npm": "https://www.npmjs.com/package/ubjson",
+          "repository": "git://github.com/Sannis/node-ubjson.git"
+        },
+        "name": "ubjson",
+        "package": "ubjson",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 180,
+        "version": "0.0.8"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:@cloudpss/ubjson:dependencies:[\"rxjs\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "Opinionated UBJSON encoder/decoder for CloudPSS.",
+        "format": "ubjson",
+        "links": {
+          "npm": "https://www.npmjs.com/package/@cloudpss/ubjson"
+        },
+        "name": "@cloudpss/ubjson",
+        "package": "@cloudpss/ubjson",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 150,
+        "version": "0.6.41"
+      }
+    },
+    {
+      "error": "BoundCodecChildDenied:CONFINEMENT_BROKER_PAYLOAD_INVALID",
+      "metadata": {
+        "dependency_count": 0,
+        "description": "Lightweight, quick and dirty UBJSON encoder/decoder for the browser and node.js.",
+        "engines": null,
+        "format": "ubjson",
+        "integrity": "sha512-2Vi46ct3IWzh8eAz9IZ0NulIRtJbGgJDppatJvufB0fHwasRSfklBoQrVrCutF24fSuRvTvZVebjtcIHOxvzWw==",
+        "license": "MIT",
+        "links": {
+          "bugs": "https://bitbucket.org/shelacek/ubjson/issues",
+          "homepage": "https://bitbucket.org/shelacek/ubjson",
+          "npm": "https://www.npmjs.com/package/@shelacek/ubjson",
+          "repository": "git+https://shelacek@bitbucket.org/shelacek/ubjson.git"
+        },
+        "metadata_url": "https://registry.npmjs.org/%40shelacek%2Fubjson/1.1.1",
+        "name": "@shelacek/ubjson",
+        "package": "@shelacek/ubjson",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 150,
+        "tarball_url": "https://registry.npmjs.org/@shelacek/ubjson/-/ubjson-1.1.1.tgz",
+        "version": "1.1.1"
+      },
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "Lightweight, quick and dirty UBJSON encoder/decoder for the browser and node.js.",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://bitbucket.org/shelacek/ubjson/issues",
+          "homepage": "https://bitbucket.org/shelacek/ubjson",
+          "npm": "https://www.npmjs.com/package/@shelacek/ubjson",
+          "repository": "git+https://shelacek@bitbucket.org/shelacek/ubjson.git"
+        },
+        "name": "@shelacek/ubjson",
+        "package": "@shelacek/ubjson",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 150,
+        "version": "1.1.1"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:ubjson-stream:dependencies:[\"concat-stream\", \"duplexify\", \"ndjson\", \"optimist\", \"through2\", \"ubjson\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "ubjson cli tool",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://github.com/jbenet/node-ubjson-bin/issues",
+          "homepage": "https://github.com/jbenet/node-ubjson-stream",
+          "npm": "https://www.npmjs.com/package/ubjson-stream",
+          "repository": "https://github.com/jbenet/node-ubjson-bin.git"
+        },
+        "name": "ubjson-stream",
+        "package": "ubjson-stream",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 150,
+        "version": "1.1.0"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:majo-ubjson:dependencies:[\"@shelacek/ubjson\", \"fp-sac\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "Practical ubjson. Wrapper around @shelacek/ubjson with nice defaults.",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://gitlab.com/GrosSacASac/majo-ubjson/issues",
+          "homepage": "https://gitlab.com/GrosSacASac/majo-ubjson#readme",
+          "npm": "https://www.npmjs.com/package/majo-ubjson",
+          "repository": "git+ssh://git@gitlab.com/GrosSacASac/majo-ubjson.git"
+        },
+        "name": "majo-ubjson",
+        "package": "majo-ubjson",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 130,
+        "version": "1.1.2"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:node-ubjson-bin:dependencies:[\"concat-stream\", \"ndjson\", \"optimist\", \"through2\", \"ubjson\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "ubjson cli tool",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://github.com/jbenet/node-ubjson-bin/issues",
+          "homepage": "https://github.com/jbenet/node-ubjson-bin",
+          "npm": "https://www.npmjs.com/package/node-ubjson-bin",
+          "repository": "https://github.com/jbenet/node-ubjson-bin.git"
+        },
+        "name": "node-ubjson-bin",
+        "package": "node-ubjson-bin",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 130,
+        "version": "1.0.0"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:@cloudpss/ubrpc:dependencies:[\"@cloudpss/fetch\", \"@cloudpss/ubjson\", \"rxjs\", \"uuid\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "Rpc server/client build on websocket and ubjson, supports bidirectional calls, async iterators and observables.",
+        "format": "ubjson",
+        "links": {
+          "npm": "https://www.npmjs.com/package/@cloudpss/ubrpc"
+        },
+        "name": "@cloudpss/ubrpc",
+        "package": "@cloudpss/ubrpc",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 30,
+        "version": "0.6.41"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:@jsonjoy.com/json-pack:dependencies:[\"@jsonjoy.com/base64\", \"@jsonjoy.com/buffers\", \"@jsonjoy.com/codegen\", \"@jsonjoy.com/fs-node\", \"@jsonjoy.com/fs-node-utils\", \"@jsonjoy.com/json-pointer\", \"@jsonjoy.com/util\", \"hyperdyperid\", \"thingies\", \"tree-dump\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "High-performance JSON serialization library",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://github.com/streamich/json-joy/issues",
+          "homepage": "https://github.com/streamich/json-joy/packages/json-pack",
+          "npm": "https://www.npmjs.com/package/@jsonjoy.com/json-pack",
+          "repository": "git+https://github.com/streamich/json-joy.git"
+        },
+        "name": "@jsonjoy.com/json-pack",
+        "package": "@jsonjoy.com/json-pack",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 30,
+        "version": "18.30.0"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:bjd:dependencies:[\"buffer\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "js-bjata is a lightweight Binary JData (BJData) encoder and decoder for JavaScript and NodeJS",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://github.com/NeuroJSON/js-bjdata/issues",
+          "homepage": "http://neurojson.org",
+          "npm": "https://www.npmjs.com/package/bjd",
+          "repository": "git+https://github.com/NeuroJSON/js-bjdata.git"
+        },
+        "name": "bjd",
+        "package": "bjd",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 30,
+        "version": "0.3.2"
+      }
+    },
+    {
+      "error": "AutoNpmAcquisitionFailure:NPM_RUNTIME_DEPENDENCIES_UNSUPPORTED:jda:dependencies:[\"atob\", \"btoa\", \"numjs\", \"pako\"]",
+      "status": "CONTRACT_REJECTED",
+      "supplier": {
+        "description": "JSData is a lightweight JData annotation encoder and decoder for JavaScript and NodeJS",
+        "format": "ubjson",
+        "links": {
+          "bugs": "https://github.com/NeuroJSON/jsdata/issues",
+          "homepage": "https://neurojson.org",
+          "npm": "https://www.npmjs.com/package/jda",
+          "repository": "git+https://github.com/NeuroJSON/jsdata.git"
+        },
+        "name": "jda",
+        "package": "jda",
+        "registry_search_url": "https://registry.npmjs.org/-/v1/search?text=ubjson&size=30",
+        "score": 30,
+        "version": "0.4.0"
+      }
+    }
+  ],
+  "goal": "Decode `canonical/astra_runtime/missions/snapshots/SI_REAL_UBJSON_SNAPSHOT_001.payload.ubj`, repair `canonical/astra_runtime/missions/snapshots/expected_output_ubj_baseline.json`, and encode the repaired JSON as UBJSON, saving the byte-identical artifact to the output path.",
+  "mission_id": "TEST-MID",
+  "schema": "PROJECT_BRAIN_AUTO_NPM_LIBRARY_ACQUISITION_V1",
+  "status": "NO_COMPATIBLE_CONTRACT"
+}
