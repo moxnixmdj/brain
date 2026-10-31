@@ -7819,6 +7819,285 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
     },
+    "python.source.crossfile_edit.choreograph.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.crossfile_edit.choreograph.v1",
+          "edits_path": "${input.edits_path}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_crossfile_edit_choreograph",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "edit",
+        "rename",
+        "move",
+        "refactor",
+        "cross-file",
+        "choreograph",
+        "plan",
+        "collision",
+        "impact"
+      ],
+      "limitations": [
+        "Plans, does not apply: mutation of sources is a separate concern.",
+        "complete=true only at zero ambiguous sites; plain-import attribute use and unknown-resolution loads are listed, never silently dropped (index retains no asname and no attribute loads in v1)."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.crossfile_edit.choreography",
+        "python.source.crossfile_edit.choreograph.v1"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "affected_file_count",
+        "ambiguous_site_count",
+        "cache_used",
+        "edit_op_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "planned_op_count",
+        "planned_site_count",
+        "refused_op_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CROSSFILE-EDIT-001",
+        "observed_effect": {
+          "ambiguous_sites": 0,
+          "cache_speedup_x": 12.7,
+          "cached_seconds": 1.98,
+          "complete": true,
+          "edit": "rename_symbol Capability -> PlanningCapability in canonical/runtime/capability_planner.py",
+          "fresh_seconds": 25.2,
+          "planned_sites": 2,
+          "plans_byte_identical": true,
+          "source_root": "canonical",
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CROSSFILE-EDIT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-CROSSFILE-EDIT-001.json"
+      }
+    },
+    "python.source.dead_code.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.dead_code.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_dead_code",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "never executed",
+        "dead code",
+        "dead function",
+        "unused",
+        "unreachable",
+        "uncalled",
+        "not called",
+        "never called",
+        "which function is never"
+      ],
+      "limitations": [
+        "Reports module-level functions no call edge in the tree names.",
+        "Reads the callers_of map of the verified symbol index; it does not re-parse the tree."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.never_executed",
+        "python.source.dead_code"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "considered_count",
+        "dead_symbols",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "symbol_count"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_dead_code.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.source.definition_count.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.definition_count.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_definition_count",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "count",
+        "definitions",
+        "functions",
+        "classes",
+        "how many",
+        "number of functions",
+        "count the function and class definitions"
+      ],
+      "limitations": [
+        "Counts every def, async def and class at any depth; a method is a definition.",
+        "Counts structure only; it does not say whether a definition is reachable."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.definition_count"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "class_count",
+        "definition_count",
+        "files_scanned",
+        "function_count",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_definition_count.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.source.secret_scan.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.secret_scan.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_secret_scan",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "secret",
+        "hardcoded",
+        "credential",
+        "api key",
+        "access key",
+        "aws",
+        "token",
+        "leaked",
+        "hardcoded aws access key"
+      ],
+      "limitations": [
+        "Matches published credential shapes (AWS key ids, GitHub/Stripe/Slack tokens, private key headers).",
+        "Reports file, line and signature name; the secret is redacted, never written."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.hardcoded_credential",
+        "python.source.secret_scan"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "files_scanned",
+        "finding_count",
+        "findings",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
     "python.source.symbols.index.ast": {
       "action_template": {
         "args": {
@@ -7902,6 +8181,84 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001.json"
+      }
+    },
+    "python.source.symbols.resolve.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.symbols.resolve.v1",
+          "output_path": "${input.output_path}",
+          "queries": "${input.queries}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_symbol_resolve",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "resolve",
+        "definition",
+        "reference",
+        "import",
+        "alias",
+        "cross",
+        "module",
+        "symbol",
+        "lookup"
+      ],
+      "limitations": [
+        "Resolution is truthful, not omniscient: MULTI_HOME lists every candidate, EXTERNAL/BUILTIN declare their lane, UNRESOLVED carries its reason.",
+        "Dynamic receiver objects are not traced; dotted references walk module/class structure only."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.symbols.resolve"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "external_count",
+        "multi_home_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "query_count",
+        "resolved_count",
+        "unresolved_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SYMBOL-RESOLVE-001",
+        "observed_effect": {
+          "builtin": 1,
+          "external": 0,
+          "multi_home": 1,
+          "queries": 4,
+          "resolved": 2,
+          "source_root": "canonical",
+          "unresolved": 0,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
       }
     },
     "python.tests.advance.mutation_kill.v1": {
