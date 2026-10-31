@@ -4974,7 +4974,25 @@ def _load_controller_checkpoint(step,mission,actions):
     if data.get("schema")!="PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1":
         raise Blocker("CONTROLLER_CHECKPOINT_SCHEMA_INVALID")
     if data.get("plan_sha256")!=plan_sha:
-        raise Blocker("CONTROLLER_CHECKPOINT_PLAN_HASH_MISMATCH")
+        # A checkpoint is the memory of ONE plan.  When the plan has changed --
+        # because the caller re-ran the same named task after the machine got
+        # better -- the recorded actions are not steps of this plan, and resuming
+        # at `next_action_index` would execute a different action than the one it
+        # counted.  Measured: re-running any task whose plan changed failed with a
+        # hard CONTROLLER_CHECKPOINT_PLAN_HASH_MISMATCH, so a named task could be
+        # run successfully exactly once in the life of a state directory.
+        #
+        # The safe reading is the one the rewind mechanism below already
+        # implements for a stale action record: keep the file, keep the count, and
+        # execute from the beginning.  That is strictly safer than resuming and it
+        # is not a lost continuation -- a completed action for a different plan was
+        # never a continuation of this one.
+        data["completed_actions"]=[]
+        data["next_action_index"]=0
+        data["rewind_count"]=int(data.get("rewind_count") or 0)+1
+        data["last_rewound_from_action_index"]=len(actions)
+        data["last_rewind_reason"]="PLAN_CHANGED"
+        data["plan_sha256"]=plan_sha
     completed=data.get("completed_actions")
     if not isinstance(completed,list) or len(completed)>len(actions):
         raise Blocker("CONTROLLER_CHECKPOINT_TRACE_INVALID")
