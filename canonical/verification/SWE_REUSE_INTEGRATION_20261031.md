@@ -8,7 +8,7 @@ repository integrity separately; it does not turn a failing test into a pass.
 
 Reused existing Brain implementations discovered at `cd44f98`, then integrated
 rather than restoring old modules wholesale. Merged current main through
-`f333567dd1a50aa0d18b583cb340765e9086f021`; preserved its bisect materialization
+`f8d64a9bd4e1def57573c71a5ff450ba9c0474e6`; preserved its bisect materialization
 limits, request-role rules and guarded retry behavior. Runtime and tests import
 only current-tree source, never the discovery copies.
 
@@ -46,12 +46,12 @@ was corrected to the stricter exact-file contract. Another test now requires
 pre-execution parameter-route correction and explicitly forbids a fictitious
 retry; its original refusal/supersession controls remain in place.
 
-Final expanded run: **407 passed, 6 failed, 40 subtests passed**, 8 deprecation
-warnings, 83.81 s; 36 modules, 413 ordinary cases. All **12 new joint-contract
+Final expanded run: **425 passed, 6 failed, 40 subtests passed**, 8 deprecation
+warnings, 119.92 s; 37 modules, 431 ordinary cases. All **17 new joint-contract
 controls** pass. This is not a whole-repository green result. The six unresolved
 compatibility failures are listed below rather than weakened or hidden.
 
-| Index measurement, five fresh 200-file trees | Median |
+| Index measurement, five 200-file trials | Median |
 |---|---:|
 | Cold | 32.511 ms |
 | Warm, identical output digest | 7.360 ms |
@@ -59,7 +59,7 @@ compatibility failures are listed below rather than weakened or hidden.
 
 This demonstrates preservation of the existing warm cache (about 4.42x on this
 fixture), not a universal speedup or a new cache invention. Timings are local,
-not an independent benchmark. A broader 120-module/1,723-case attempt was stopped
+not an independent benchmark. A broader 1,723-case attempt was stopped
 during a registry-wide controller exercise; it has no completed-suite verdict.
 
 ## Unresolved compatibility checks
@@ -119,7 +119,8 @@ python3 -m pytest -q \
   canonical/tests/test_task_bound_crossfile_workflow_v1.py \
   canonical/tests/test_the_index_remembers_what_it_already_read_v1.py \
   canonical/tests/test_the_stated_swe_surface_stays_reached_v1.py \
-  canonical/tests/test_a_bisect_materialises_only_the_named_tree_v1.py --tb=short
+  canonical/tests/test_a_bisect_materialises_only_the_named_tree_v1.py \
+  canonical/tests/test_the_answer_must_be_the_effect_that_was_stated_v1.py --tb=short
 ```
 
 The original cohort comprises `test_swe_acceptance_boundaries_20261031_v1`,
@@ -137,9 +138,31 @@ recurrences. Native in-place repair is not a full filesystem transaction or a
 sandbox. The passing fixtures do not prove general semantic correctness, global
 optimality, universal speed, or completion of the project's terminal goal.
 
-## Compiled-model check
+## Latest-main integration and report provenance
 
-Regenerated the unified model with the official compiler and ran
-`python3 -m canonical.runtime.verify_brain_unified_model_v1` on fresh instances:
-**33/33 passed**, including six execution cases and five negative controls.
-This local verifier result is distinct from the signed repository-integrity check.
+Retained main's premise-versus-request and question-versus-repair distinctions,
+including indirect questions. Applied the premise distinction consistently to
+both effect shortlisting and the answer gate. Test selection now requires a
+selection effect: a generic impact index alone is not an answer naming tests.
+
+Two neighboring change-impact tests were reading an old shared
+`spool_0_output.json` even though the current request produced its own report.
+They now require the actual test-selector execution, read the returned path and
+check its SHA-256 before checking selected/candidate tests. The assertions still
+require the module's test to be found. Both pass, along with the 17 joint controls.
+
+During the in-progress main merge, the existing Git diff verifier refused the
+staged action-intent rename (`INDEPENDENT_CHECK_DISAGREES` on brace-form rename
+output). This is a remaining adapter limitation; no refusal was overridden.
+Completing the merge removed that transient tree state; the final 431-case run
+includes both public Git reads passing and all 166 original case identities passing.
+
+## Compiled-model and admission checks
+
+Regenerated the unified model with the official compiler and ran the existing
+verifier on fresh instances: **33/33 passed**, including six execution cases and
+five negative controls. This local result is not an independent capability receipt.
+The action intent requests zero credit and distinguishes its subjective scheduling
+assumptions from measured confidence bounds. Current-base load-bearing/orientation
+and hierarchy/OBS/blocker-lease checks pass locally; the final signed referee
+must still judge the exact pushed head before landing.
