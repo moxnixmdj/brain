@@ -159,7 +159,18 @@ def asked(goal: str) -> dict[str, Any] | None:
         token = hit.group(1)
         plural = bool(re.search(r"(s|es)$", token, re.I)) or token.lower() in {
             "call", "call site", "dead code", "copy-paste"}
-        explicit = bool(re.search(r"\b(list|enumerate|name|find\s+(every|all))\b", text, re.I))
+        # "WRITE ITS NAME TO <file>" IS NOT "NAME THEM".  The bare word `name` was read as an
+        # imperative to enumerate, so "Which function in <d>/app is at fault? Write its name to
+        # <d>/answer.json" was classified ENUMERATE (aliases functions/function_names/defs) while
+        # the adapter answered with a single `answer` field.  The artifact was on disk and held the
+        # right value; the gate refused it with ANSWER_SHAPE_UNSERVED:NO_MATCHING_FIELD.  Measured
+        # 2026-10-31 on four ladder jobs (localize_fault, find_flaky_test, uncovered_function,
+        # perf_regression): four correct answers reported as refusals.  An enumeration is asked for
+        # by a PLURAL object ("write the names"), by "name them/each/all", or by an explicit
+        # list/every verb -- never by the singular noun phrase "its name".
+        explicit = bool(re.search(
+            r"\b(?:list|enumerate|name\s+(?:them|each|all)|"
+            r"(?:find|show|collect|write)\s+(?:every|all))\b", text, re.I))
         if plural or explicit or noun in {"caller", "duplicate", "dead", "definition"}:
             return {"schema": SCHEMA, "kind": "ENUMERATE", "noun": noun, "token": token,
                     "aliases": list(_ALIASES.get(noun, ())), "verb": verb.group(0).lower()}

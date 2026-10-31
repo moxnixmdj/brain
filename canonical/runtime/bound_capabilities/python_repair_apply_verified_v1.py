@@ -72,7 +72,7 @@ _candidate_test_layout=_CTRL._candidate_test_layout
 MAX_TIMEOUT_S=600
 
 
-def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes]:
+def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int,env_paths:tuple=())->tuple[int|None,bytes]:
     """Run the stated test command verbatim.  No shell, so nothing is invented.
 
     The command line is the caller's; the IMPORT PATH is the tree's.  Measured
@@ -88,7 +88,7 @@ def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes
     try:
         proc=subprocess.run(
             argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
-            env={**os.environ,**_REPAIR._PATCH._source_env(cwd)},
+            env={**os.environ,**_REPAIR._PATCH._source_env(*(env_paths or (cwd,)))},
         )
     except subprocess.TimeoutExpired:
         return None,b"TIMEOUT"
@@ -202,7 +202,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
     # GATE 1 -- the stated test must fail on the source as it stands.
-    before_rc,before_tail=_run_test(run_argv,exec_root,timeout)
+    env_paths=(source_root,*test_paths)
+    before_rc,before_tail=_run_test(run_argv,exec_root,timeout,env_paths)
     out["pre_apply_test_returncode"]=before_rc
     if before_rc==0:
         # The sentence asked for the stated test to pass.  It already does, and
@@ -298,7 +299,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["unified_diffs"]=[row[3] for row in planned]
 
         # GATE 4 -- the stated test must pass IN PLACE, on the real tree.
-        after_rc,after_tail=_run_test(run_argv,exec_root,timeout)
+        after_rc,after_tail=_run_test(run_argv,exec_root,timeout,env_paths)
         out["post_apply_test_returncode"]=after_rc
         out["post_apply_test_tail"]=after_tail.decode("utf-8","replace")[-1024:]
         if after_rc!=0:

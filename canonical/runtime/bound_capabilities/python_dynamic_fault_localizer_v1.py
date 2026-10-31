@@ -134,8 +134,26 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if not tr["pass"]:
    tbset.update(tuple(x) for x in tr.get("traceback",[]))
    _order=[tuple(x) for x in tr.get("order",[])]
-   for _k in reversed(_order):
-    if _k[0] in _app_paths:last_lines.add(_k);break
+   # WITHIN THE FAILING TEST, NOT AT THE END OF THE PROCESS.  unittest keeps going after a
+   # failure, so the process's last application line belongs to whichever test ran last.
+   # Measured 2026-10-31 (`fix_broken`: test_add fails, test_mul passes, one file): the +2.0
+   # "last executed line" bonus ranked `mul` ABOVE the line the failing test exercises, and the
+   # guided search then mutated the function that was already correct.  The trace already
+   # separates the tests -- every test-file frame whose function is a test method opens a window,
+   # and the traceback names the one that failed.  Fall back to the process-wide last line only
+   # when the trace cannot attribute one (module-level or import failure).
+   _tp=str(tr.get("test_path") or "")
+   _failing=[str(x[2]) for x in tr.get("traceback",[]) if len(x)>2 and str(x[2]).startswith("test")]
+   _win=None;_last_in={}
+   for _k in _order:
+    if _k[0]==_tp and str(_k[2]).startswith("test"):
+     _win=str(_k[2]);_last_in.setdefault(_win,None)
+    if _k[0] in _app_paths:
+     _last_in[_win if _win is not None else None]=_k
+   _picked=_last_in.get(_failing[-1]) if _failing else None
+   if _picked is None:
+    _picked=next((v for v in reversed(list(_last_in.values())) if v),None)
+   if _picked:last_lines.add(_picked)
  ranked=[]
  for (rel,line,func),c in line_counts.items():
   p=(repo/rel).resolve()
@@ -148,6 +166,13 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if (rel,line,func) in last_lines:score+=2.0;reasons.append("LAST_EXECUTED_LINE_IN_FAILING_RUN")
   ranked.append({"path":rel,"line":line,"function":func,"fail_coverage":f,"pass_coverage":q,"ochiai":round(score-(1.0 if "FAILING_TRACEBACK_FRAME" in reasons else 0.0),12),"score":round(score,12),"reasons":reasons})
  ranked.sort(key=lambda x:(-x["score"],-x["fail_coverage"],x["pass_coverage"],x["path"],x["line"],x["function"]))
+ # AN EMPTY LOCALIZATION IS NOT A PASS.  Measured 2026-10-31: this adapter returned
+ # PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION with ranked_lines == [] and ranked_symbols == []
+ # while every test died on its own import line -- a consumer cannot tell that from a
+ # localization that found the fault, and the repair engine downstream turned it into
+ # GUIDANCE_EMPTY.  A run that executed no application line has localized nothing.
+ if not ranked:
+  raise FaultLocalizerError("NO_LOCALIZED_LINE_FROM_THE_FAILING_RUN")
  ranked=ranked[:max_lines]
  files=sorted({x["path"] for x in ranked})
  symbols=[]
