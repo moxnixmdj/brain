@@ -8,7 +8,7 @@ repository integrity separately; it does not turn a failing test into a pass.
 
 Reused existing Brain implementations discovered at `cd44f98`, then integrated
 rather than restoring old modules wholesale. Merged current main through
-`f8d64a9bd4e1def57573c71a5ff450ba9c0474e6`; preserved its bisect materialization
+`57edfa446c33c7b3908b00253e2ee4d056452caf`; preserved its bisect materialization
 limits, request-role rules and guarded retry behavior. Runtime and tests import
 only current-tree source, never the discovery copies.
 
@@ -166,3 +166,8 @@ The action intent requests zero credit and distinguishes its subjective scheduli
 assumptions from measured confidence bounds. Current-base load-bearing/orientation
 and hierarchy/OBS/blocker-lease checks pass locally; the final signed referee
 must still judge the exact pushed head before landing.
+
+The 431-case engineering run exercised commit `baddd26c`. Subsequently retained
+main `57edfa44`'s inventory/probe additions and corrected caller-damage allowance;
+that merge adds no runtime or test-source changes. The model and admission
+checks were regenerated/refreshed for the resulting current base.
