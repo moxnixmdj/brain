@@ -1,0 +1,48 @@
+{
+  "answer": "nested",
+  "cyclomatic_complexity": 5,
+  "functions": [
+    {
+      "complexity_class": "O(n^2)",
+      "cyclomatic_complexity": 5,
+      "lineno": 8,
+      "name": "nested",
+      "nesting": 2,
+      "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/complex/mod.py"
+    },
+    {
+      "complexity_class": "O(1)",
+      "cyclomatic_complexity": 1,
+      "lineno": 4,
+      "name": "flat",
+      "nesting": 0,
+      "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/complex/mod.py"
+    }
+  ],
+  "functions_measured": 2,
+  "quadratic_symbols": [
+    "nested"
+  ],
+  "schema": "PROJECT_BRAIN_PYTHON_COMPLEXITY_V1",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/complex",
+  "total_cyclomatic": 6,
+  "unparseable_count": 0,
+  "worst_class": "O(n^2)",
+  "worst_cyclomatic": {
+    "complexity_class": "O(n^2)",
+    "cyclomatic_complexity": 5,
+    "lineno": 8,
+    "name": "nested",
+    "nesting": 2,
+    "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/complex/mod.py"
+  },
+  "worst_function": {
+    "complexity_class": "O(n^2)",
+    "cyclomatic_complexity": 5,
+    "lineno": 8,
+    "name": "nested",
+    "nesting": 2,
+    "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/complex/mod.py"
+  },
+  "worst_nesting": 2
+}

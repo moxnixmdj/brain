@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-24T23:03:57.796847+00:00",
+  "mission_id": "ASTRA-AUTO-VERIFY-ZINT-85BC9CD2C9A4",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_ZINT_85BC9CD2C9A4.json",
+  "mission_sha256": "845f0a6245f9803853b90d8507a11e3c1d4bc96b2236b7a822a4d052e2905c5b",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "148bf3388f8584a7a941b48a4b4ecfd33fccf018b9fbe7ede51fb949fba84df3",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

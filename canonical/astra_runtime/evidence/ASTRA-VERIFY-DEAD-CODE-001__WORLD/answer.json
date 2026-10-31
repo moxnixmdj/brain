@@ -1,0 +1,11 @@
+{
+  "answer": "report",
+  "considered_count": 3,
+  "dead_symbols": [
+    "report",
+    "unused_helper"
+  ],
+  "schema": "PROJECT_BRAIN_PYTHON_DEAD_CODE_V1",
+  "scope_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__WORLD",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__WORLD/project"
+}

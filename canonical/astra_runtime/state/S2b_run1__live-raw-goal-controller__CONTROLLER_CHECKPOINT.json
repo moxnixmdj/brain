@@ -1,0 +1,101 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "code.impact.tree_sitter.testselect.v1",
+          "changed_paths": [
+            "canonical/runtime/declared_input_derivation_v1.py"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/spool_0_output.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "code.impact.tree_sitter.testselect.v1",
+          "changed_paths": [
+            "canonical/runtime/declared_input_derivation_v1.py"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/spool_0_output.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "code_tree_sitter_impact_v1",
+        "affected_file_count": 133,
+        "candidate_test_count": 15,
+        "capability_id": "code.impact.tree_sitter.testselect.v1",
+        "dependency": {
+          "closure_sha256": "aa6f8fde9ca370703204ac2ef4e109d32624f9fafe925e0af7b56e2bebd65d13",
+          "dependency_wheel_count": 2,
+          "project": "tree_sitter_languages",
+          "status": "INSTALLED_VERIFIED",
+          "version": "1.10.2",
+          "wheels": [
+            {
+              "filename": "tree_sitter-0.20.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "project": "tree_sitter",
+              "sha256": "527ca72c6a8f60fa719af37fa86f58b7ad0e07b8f74d1c1c7e926c5c888a7e6b",
+              "version": "0.20.4"
+            },
+            {
+              "filename": "tree_sitter_languages-1.10.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+              "project": "tree_sitter_languages",
+              "sha256": "9ae34ac314a7170be24998a0f994c1ac80761d8d4bd126af27ee53a023d3b849",
+              "version": "1.10.2"
+            }
+          ]
+        },
+        "fallback_count": 1,
+        "incremental_spend_usd": 0,
+        "model_dependency_count": 0,
+        "output_path": "canonical/astra_runtime/tmp/spool_0_output.json",
+        "output_sha256": "a783e4e17bd2aea41e657ae31187997e15028dec230742ab0a106d6f721ed578",
+        "output_verified": true,
+        "selected_test_count": 15,
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T21:18:31.858866+00:00",
+  "mission_id": "S2b_run1",
+  "next_action_index": 2,
+  "plan_sha256": "a23328cf77d0d798611b7bf8d1a7dd691bfe2476a968344079e6be511c698e91",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T21:19:02.055405+00:00"
+}

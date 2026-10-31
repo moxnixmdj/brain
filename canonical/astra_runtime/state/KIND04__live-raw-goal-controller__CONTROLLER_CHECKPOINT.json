@@ -1,0 +1,92 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "auto.npm.msgpack-msgpack",
+          "decode_export": "decode",
+          "encode_export": "encode",
+          "json_path": "canonical/astra_runtime/tmp/defect_kind_probe/sample.json",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/3f744c98477cb7f2_direct-5f60eee7c92ff9b9_output-path.msgpack",
+          "package": "@msgpack/msgpack",
+          "root_selector": "module"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "auto.npm.msgpack-msgpack",
+          "decode_export": "decode",
+          "encode_export": "encode",
+          "json_path": "canonical/astra_runtime/tmp/defect_kind_probe/sample.json",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/3f744c98477cb7f2_direct-5f60eee7c92ff9b9_output-path.msgpack",
+          "package": "@msgpack/msgpack",
+          "root_selector": "module"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "node_library_codec",
+        "capability_id": "auto.npm.msgpack-msgpack",
+        "decode_export": "decode",
+        "dependency": {
+          "digest_hex": "e3b5c88b3b3d5d95efb89828689508136945a080fcba0bdcd23cd21cff8fb5f93c9d36e747c83bf3cc2fe3c374dcac7452402fe79f47591437cb33a0ce544d50",
+          "integrity": "sha512-47XIizs9XZXvuJgoaJUIE2lFoID8ugvc0jzSHP+Ptfk8nTbnR8g788wv48N03Kx0UkAv559HWRQ3yzOgzlRNUA==",
+          "package": "@msgpack/msgpack",
+          "package_root": "/home/user/brain/canonical/astra_runtime/tmp/npm_bound/msgpack_msgpack__3.1.3__20d4b6b0ddbc18fe/package",
+          "status": "ALREADY_MATERIALIZED",
+          "version": "3.1.3"
+        },
+        "encode_export": "encode",
+        "output_bytes": 30,
+        "output_path": "canonical/astra_runtime/tmp/auto_proposal/3f744c98477cb7f2_direct-5f60eee7c92ff9b9_output-path.msgpack",
+        "output_sha256": "da5ad96b16c2ed5c59ec5bdf5cab6dd1875af6d1daa7647f4a254e8a032de4b3",
+        "output_verified": true,
+        "source_path": "canonical/astra_runtime/tmp/defect_kind_probe/sample.json"
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:43:26.910904+00:00",
+  "last_rewind_reason": "DURABLE_EFFECT_INVALID_OR_MISSING",
+  "last_rewound_from_action_index": 0,
+  "mission_id": "KIND04",
+  "next_action_index": 2,
+  "plan_sha256": "ad706be8045428868a23c6bdbe1f6f87e55972f09567dda75b6aede0f31795cd",
+  "resume_count": 28,
+  "rewind_count": 3,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-30T00:04:43.817869+00:00"
+}

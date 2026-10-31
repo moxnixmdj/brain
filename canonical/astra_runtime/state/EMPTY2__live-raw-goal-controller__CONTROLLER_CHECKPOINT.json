@@ -1,0 +1,91 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "python.source.change_impact.testselect.v1",
+          "changed_paths": [
+            "canonical/astra_runtime/tmp/m1/cov/calc.py"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/spool_0_output.json",
+          "source_root": "canonical/astra_runtime/tmp/m1/cov"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "python.source.change_impact.testselect.v1",
+          "changed_paths": [
+            "canonical/astra_runtime/tmp/m1/cov/calc.py"
+          ],
+          "output_path": "canonical/astra_runtime/tmp/spool_0_output.json",
+          "source_root": "canonical/astra_runtime/tmp/m1/cov"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "python_change_impact_testselect",
+        "affected_module_count": 2,
+        "candidate_test_count": 0,
+        "capability_id": "python.source.change_impact.testselect.v1",
+        "changed_file_count": 1,
+        "changed_symbol_count": 3,
+        "dependency": {
+          "module": "ast",
+          "modules": [
+            "ast"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "ignored_non_python_count": 0,
+        "output_path": "canonical/astra_runtime/tmp/spool_0_output.json",
+        "output_sha256": "8e3460c9ec7db582791dbf5fbff12cb56754dc56410e19f06411206bfb427c31",
+        "output_verified": true,
+        "selected_test_count": 0,
+        "unknown_symbol_module_count": 0
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T22:25:19.313400+00:00",
+  "mission_id": "EMPTY2",
+  "next_action_index": 2,
+  "plan_sha256": "d3e14153f47a69a9b47c13ed1948cb19b010be7d7f30ab831e1a980725dab244",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T22:25:19.325978+00:00"
+}

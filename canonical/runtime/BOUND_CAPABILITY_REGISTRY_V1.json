@@ -1,1129 +1,5 @@
 {
   "capabilities": {
-    "python.software.repair.apply.verified.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.apply.verified.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 60
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "optional": [
-          "test_argv"
-        ],
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_repair_apply_verified_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "apply the repair",
-        "apply the patch",
-        "apply the verified repair",
-        "apply the fix",
-        "land the patch",
-        "land the fix",
-        "write the fix",
-        "apply in place",
-        "make the test pass"
-      ],
-      "limitations": [
-        "Composes the existing bounded provenance-guided Python repair with a gated write to the real source tree; it does not add any new patch search.",
-        "Writes only behind four fail-closed gates: the stated test must fail first, a verified repair must exist, the realized bytes must match the patch's own candidate hash, and the stated test must pass in place afterwards.",
-        "Any gate failing restores every original byte and reports failure, so a pass means the stated test went from failing to passing on the file that is on disk.",
-        "Python only, and the inherited repair search remains bounded to the verified AST mutation/search families; there is no general patch completeness.",
-        "A passing stated test is not proof that the wider program is correct; it certifies only the stated test on the stated source root."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.software.repair.apply.verified",
-        "python.source.write.verified_repair_applied"
-      ],
-      "requires": [
-        "python.source.file.available",
-        "python.test.corpus.available"
-      ],
-      "result_fields": [
-        "status",
-        "pass",
-        "applied",
-        "source_restored",
-        "files_written",
-        "unified_diffs",
-        "pre_apply_test_returncode",
-        "post_apply_test_returncode",
-        "repair_status",
-        "output_verified",
-        "detail"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-        "composed_capabilities": [
-          "python.software.repair.guided.provenance.coupled.v1",
-          "python.software.repair.measured_acceptance.v1"
-        ],
-        "modules": [
-          "importlib.util",
-          "json",
-          "os",
-          "pathlib",
-          "subprocess",
-          "sys",
-          "typing"
-        ],
-        "type": "python_stdlib_composition"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "exact_two_carrier_replay": "NOT_CLAIMED__SINGLE_CARRIER_SANDBOX_MEASUREMENT_ONLY",
-        "external_general_purpose_model_runtime_dependency_count": 0,
-        "incremental_spend_usd": 0,
-        "independent_sprite": "brain-canonical-repair-apply-verified-20261027-v1",
-        "independent_test_count": 13,
-        "model_dependency_count": 0,
-        "status": "SANDBOX_MEASUREMENT_ONLY__NO_TWO_SPRITE_FALSIFICATION_CLAIMED"
-      }
-    },
-    "python.software.repair.guided.provenance.coupled.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.guided.provenance.coupled.v1",
-          "max_control_files": 12,
-          "max_control_symbols_per_file": 12,
-          "max_guided_files": 4,
-          "max_guided_symbols_per_file": 6,
-          "max_pair_candidates": 1000,
-          "mutations_per_file": 24,
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 20
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "optional": [
-          "test_argv"
-        ],
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_provenance_guided_coupled_repair_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "software",
-        "repair",
-        "guided",
-        "provenance",
-        "dynamic",
-        "localization",
-        "coupled",
-        "patch",
-        "search",
-        "fault"
-      ],
-      "limitations": [
-        "Combines verified dynamic spectrum localization and bounded interprocedural provenance to restrict an existing two-edit Python repair search.",
-        "Can accept a verified guided single edit or a bounded guided coupled pair, with final double replay and source restoration.",
-        "Guidance reduction is task-dependent; the capability reports control-vs-guided candidate-space measurements and does not claim guidance always reduces search.",
-        "Search remains bounded to the inherited Python AST mutation basis and does not establish arbitrary patch completeness, hidden requirements, general mergeability, or FrontierCode score authority."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.software.repair.provenance_guided",
-        "python.software.repair.coupled_candidate_verified"
-      ],
-      "requires": [
-        "python.source.file.available",
-        "python.test.corpus.available"
-      ],
-      "result_fields": [
-        "status",
-        "pass",
-        "baseline_failure_score",
-        "guidance",
-        "guided_localization",
-        "provenance_hypothesis_count",
-        "single_candidates_tested",
-        "pair_candidates_tested",
-        "winner_mode",
-        "crossed_nonmonotonic_valley",
-        "verification_replays",
-        "patches",
-        "source_restored",
-        "model_dependency_count",
-        "external_capability_provider_count",
-        "incremental_spend_usd",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-        "composed_capabilities": [
-          "python.patch.search.test_guided.ast.v1",
-          "python.software.repair.loop.coupled.ast.v1",
-          "python.fault.localize.dynamic.dataflow.v1",
-          "python.fault.provenance.interprocedural.value.v1"
-        ],
-        "modules": [
-          "hashlib",
-          "importlib.util",
-          "json",
-          "math",
-          "os",
-          "pathlib",
-          "sys"
-        ],
-        "type": "python_stdlib_composition"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "exact_branch_layout_combined_replay": "14_OF_14_PASS",
-        "external_capability_provider_count": 0,
-        "incremental_spend_usd": 0,
-        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
-        "independent_test_count": 7,
-        "model_dependency_count": 0,
-        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
-        "primary_test_count": 7,
-        "runtime_git_blob_sha": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
-        "runtime_sha256": "111e1a5c30a529a0e0ab2b727c74313b9b2b1875348cc11fae12690f91b15324",
-        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
-        "test_git_blob_sha": "4702f3d252e6047cfadc28a1e3363357e0541ec7",
-        "test_sha256": "f4f133f246f1e6adf37225b0f5acad1bf3fc375b8dc0a74ebbed37b2f9df8149"
-      }
-    },
-    "python.software.repair.loop.coupled.ast.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.loop.coupled.ast.v1",
-          "max_files": 8,
-          "max_pair_candidates": 1200,
-          "max_symbols_per_file": 8,
-          "mutations_per_file": 24,
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 20
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "optional": [
-          "test_argv"
-        ],
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_coupled_software_repair_loop_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "repair",
-        "patch",
-        "coupled",
-        "nonmonotonic",
-        "multi-edit",
-        "fault",
-        "localization",
-        "symbol",
-        "test"
-      ],
-      "limitations": [
-        "Reuses the strict-progress repair route first, then searches bounded AST-mutation pairs when no strictly improving route closes the task.",
-        "Can cross a two-edit non-monotonic valley without retaining either unverified intermediate edit.",
-        "Ranks files and function/class symbols from traceback, imports, failure text, and line containment; this is stronger localization evidence but not complete semantic causality.",
-        "Python only; pair depth, candidate count, file count, symbol count, and timeout are explicitly bounded.",
-        "Candidate-only: source bytes are restored before return; no source-write or promotion authority.",
-        "No universal repair completeness, hidden-requirement, mergeability, FrontierCode score, or acceptance claim."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.patch.candidate.test_verified",
-        "python.repair.coupled_pair.nonmonotonic",
-        "python.fault.localization.symbol_ranked"
-      ],
-      "requires": [
-        "python.source.file.available",
-        "python.test.corpus.available"
-      ],
-      "result_fields": [
-        "status",
-        "pass",
-        "route",
-        "baseline_failure_score",
-        "localization_candidates",
-        "single_candidates_tested",
-        "pair_candidates_tested",
-        "crossed_nonmonotonic_valley",
-        "verification_replays",
-        "patches",
-        "source_restored",
-        "model_dependency_count",
-        "external_capability_provider_count",
-        "incremental_spend_usd",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-        "modules": [
-          "ast",
-          "difflib",
-          "hashlib",
-          "importlib.util",
-          "json",
-          "os",
-          "pathlib",
-          "re",
-          "sys"
-        ],
-        "type": "python_stdlib"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "external_capability_provider_count": 0,
-        "incremental_spend_usd": 0,
-        "independent_test_count": 8,
-        "model_dependency_count": 0,
-        "primary_test_count": 8,
-        "receipt_path": "canonical/verification/PYTHON_COUPLED_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
-        "runtime_git_blob_sha": "34c3e8deac596c8c8790cfffb0586303159590b5",
-        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
-        "test_git_blob_sha": "04f1fb30e99b888fb3cf177e790f50e268ec3e88"
-      }
-    },
-    "python.software.repair.loop.strict_progress.ast.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
-          "max_candidates_per_file": 250,
-          "max_files": 12,
-          "max_rounds": 6,
-          "max_total_candidates": 2000,
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 30
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "optional": [
-          "test_argv"
-        ],
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_iterative_software_repair_loop_v1",
-      "cost": 2,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "software",
-        "repair",
-        "strict-progress",
-        "multi-round",
-        "multi-file",
-        "tests",
-        "counterexample",
-        "ast",
-        "iterative",
-        "iterative repair",
-        "iterative software repair loop",
-        "repair loop",
-        "repair the source iteratively"
-      ],
-      "limitations": [
-        "Accepts only edits that strictly reduce the parsed failing-test count and can continue while other failures in the same test command remain.",
-        "Bounded deterministic Python AST mutation search only; does not cover non-monotonic coupled edits that require a neutral or temporarily worse intermediate step.",
-        "Localization uses traceback paths, test imports, and deterministic repository fallback; this is not general semantic fault localization.",
-        "Candidate-only: original source bytes are restored before return and no patch is promoted automatically.",
-        "No non-Python completeness, hidden-requirements guarantee, general mergeability proof, or FrontierCode score credit."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.patch.candidate.strict_progress.multi_round.test_verified"
-      ],
-      "requires": [
-        "python.source.file.available",
-        "python.test.corpus.available",
-        "python.patch.search.test_guided.ast.v1"
-      ],
-      "result_fields": [
-        "status",
-        "pass",
-        "baseline_failure_score",
-        "rounds",
-        "accepted_edit_count",
-        "accepted_edits",
-        "tested_candidate_count",
-        "final_verification_replays",
-        "patches",
-        "source_restored",
-        "model_dependency_count",
-        "external_capability_provider_count",
-        "incremental_spend_usd",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-        "composed_capability": "python.patch.search.test_guided.ast.v1",
-        "modules": [
-          "ast",
-          "difflib",
-          "hashlib",
-          "importlib.util",
-          "json",
-          "pathlib",
-          "re",
-          "sys"
-        ],
-        "type": "python_stdlib_composition"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "dependency_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b",
-        "external_capability_provider_count": 0,
-        "incremental_spend_usd": 0,
-        "model_dependency_count": 0,
-        "receipt_path": "canonical/verification/PYTHON_STRICT_PROGRESS_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
-        "runtime_git_blob_sha": "352867cf8ce00dab65b17b96d098b6ea4b32f40d",
-        "status": "LOCAL_AND_INDEPENDENT_SPRITE_6_OF_6_PASS",
-        "test_git_blob_sha": "1828328eeb385e379f8d6f3d2cff17dc1e3e3e54"
-      }
-    },
-    "python.software.repair.loop.test_guided.ast.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.loop.test_guided.ast.v1",
-          "max_candidates": 600,
-          "max_edits": 6,
-          "output_path": "${input.output_path}",
-          "source_paths": "${input.source_paths}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 20
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_software_repair_loop_v1",
-      "cost": 2,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "software",
-        "repair",
-        "patch",
-        "multi-edit",
-        "multi-file",
-        "tests",
-        "counterexample",
-        "ast"
-      ],
-      "limitations": [
-        "Composes the verified deterministic single-edit Python AST patch-search primitive across separate failing Python test witnesses.",
-        "Supports bounded sequential edits across one or more repository-local Python files when individual failing test files provide sufficient acceptance oracles.",
-        "Source localization is limited to explicit source paths and Python modules imported by the supplied tests; this is not general semantic fault localization.",
-        "Candidate-only: all source bytes are restored before return and no patch is promoted automatically.",
-        "No arbitrary software-repair completeness, no non-Python support, no semantic correctness beyond the supplied test witnesses, and no general mergeability guarantee.",
-        "Confers no FrontierCode score or benchmark acceptance credit by itself."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.patch.candidate.multi_edit.test_verified"
-      ],
-      "requires": [
-        "python.source.file.available",
-        "python.test.corpus.available",
-        "python.patch.search.test_guided.ast.v1"
-      ],
-      "result_fields": [
-        "status",
-        "pass",
-        "localized_source_paths",
-        "edits_applied",
-        "repair_history",
-        "tested_candidate_count",
-        "verification_replays",
-        "patches",
-        "source_restored",
-        "model_dependency_count",
-        "external_capability_provider_count",
-        "incremental_spend_usd",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
-        "composed_capability": "python.patch.search.test_guided.ast.v1",
-        "modules": [
-          "ast",
-          "hashlib",
-          "json",
-          "pathlib",
-          "sys"
-        ],
-        "type": "python_stdlib_composition"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "external_capability_provider_count": 0,
-        "focused_test_count": 8,
-        "focused_tests_passed": 8,
-        "incremental_spend_usd": 0,
-        "independent_semantic_verification": false,
-        "model_dependency_count": 0,
-        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REPAIR_LOOP_V1_FOCUSED_REPLAY_20261011_V1.json",
-        "runtime_git_blob_sha": "eaf405b3ea6a387c573f8b3dd5a7197bfa024cd5",
-        "status": "EXACT_GIT_BLOB_FOCUSED_REPLAY_PASS",
-        "test_git_blob_sha": "59ec47e0392fbb32567f5c32567373bd039f6cc7"
-      }
-    },
-    "python.software.repair.measured_acceptance.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.measured_acceptance.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "task_text": "${input.goal}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 20
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "optional": [
-          "test_argv"
-        ],
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_repair_measured_acceptance_controller_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "software",
-        "repair",
-        "measured",
-        "acceptance",
-        "content-addressed",
-        "candidate",
-        "verification",
-        "atomic",
-        "patch"
-      ],
-      "limitations": [
-        "Composes verified provenance-guided bounded Python repair with isolated candidate realization, content-addressed repository measurement, and measurement-bound objective raw-task acceptance.",
-        "Repair patches are realized only in a temporary copied source root; candidate hashes and patch source hashes are verified and original source bytes remain restored.",
-        "Acceptance stop is authorized only for raw-task obligations that compile to the existing bounded objective acceptance routes; semantic residual obligations still block success.",
-        "Python only and inherited repair search remains bounded to the verified AST mutation/search families; no arbitrary patch completeness.",
-        "Passing measured tests does not establish hidden requirements, general mergeability, or FrontierCode score authority."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.software.repair.measured_acceptance",
-        "python.patch.candidate.objective_acceptance_verified"
-      ],
-      "requires": [
-        "python.source.file.available",
-        "python.test.corpus.available"
-      ],
-      "result_fields": [
-        "status",
-        "pass",
-        "repair_pass",
-        "acceptance_stop_authorized",
-        "repair_status",
-        "winner_mode",
-        "realized_patches",
-        "candidate_subject_snapshot_sha256",
-        "measurement_receipt_payload_sha256",
-        "measurement_program_sha256",
-        "measurement_spec_sha256",
-        "measured_fields",
-        "acceptance_status",
-        "semantic_residual_obligation_ids",
-        "source_restored",
-        "model_dependency_count",
-        "external_general_purpose_model_runtime_dependency_count",
-        "incremental_spend_usd",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
-        "composed_capabilities": [
-          "python.software.repair.guided.provenance.coupled.v1",
-          "python.repository.acceptance.measure.v1",
-          "python.task.acceptance.measured.objective.v1"
-        ],
-        "modules": [
-          "hashlib",
-          "importlib.util",
-          "json",
-          "os",
-          "pathlib",
-          "re",
-          "shutil",
-          "sys",
-          "tempfile"
-        ],
-        "type": "python_stdlib_composition"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "exact_two_carrier_replay": "8_OF_8_EACH",
-        "external_general_purpose_model_runtime_dependency_count": 0,
-        "incremental_spend_usd": 0,
-        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
-        "independent_test_count": 8,
-        "model_dependency_count": 0,
-        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
-        "primary_test_count": 8,
-        "runtime_git_blob_sha": "0c9578042949e483e00136cd166c9209a110008d",
-        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
-        "test_git_blob_sha": "7cd60d37aa8e10496fa9ae9a0c73484bd2609d5a"
-      }
-    },
-    "python.software.repair.route.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.route.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "test_paths": "${input.test_paths}",
-          "test_argv": "${input.test_argv}",
-          "timeout_s": "${input.timeout_s}",
-          "budget": "${input.budget}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_software_repair_router_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "repair",
-        "route",
-        "router",
-        "bug",
-        "class",
-        "diagnose",
-        "escalate",
-        "realize"
-      ],
-      "limitations": [
-        "Diagnoses bug class, routes the repair-engine ladder, realizes reporter patches, replays. verified = measured suite outcome. Ladder feature map consumer (REPAIR_DEPTH_LADDER_20261029)."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "python.software.repair.routed_verified"
-      ],
-      "requires": [
-        "python.source.file.available"
-      ],
-      "result_fields": [
-        "adapter",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "verified",
-        "repaired",
-        "route_trace",
-        "model_dependency_count",
-        "incremental_spend_usd"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_software_repair_router_v1.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified": false,
-        "mission_id": "AUTO-VERIFY-PYTHON_SOFTWARE_REPAIR_ROUTER_V1",
-        "observed_effect": {},
-        "receipt_path": "",
-        "state_path": ""
-      }
-    },
-    "python.software.repair.semantic_acceptance.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.repair.semantic_acceptance.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "task_text": "${input.goal}",
-          "test_argv": "${input.test_argv}",
-          "test_paths": "${input.test_paths}",
-          "timeout_s": 20
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "optional": [
-          "test_argv"
-        ],
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_repair_semantic_acceptance_controller_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "software",
-        "repair",
-        "semantic",
-        "acceptance",
-        "raw-task",
-        "scope",
-        "file",
-        "content-addressed",
-        "candidate",
-        "verification",
-        "semantic acceptance controller",
-        "acceptance controller",
-        "semantic acceptance of the repair"
-      ],
-      "limitations": [
-        "Extends verified V8 bounded Python repair with content-addressed repository measurement plus complete lossless obligation accounting across measured objective routes and explicit source-grounded semantic cells.",
-        "Supported semantic cells are bounded to exact file content presence/absence, file existence/absence, Python parse, unchanged-path, and allowed-changed-path directives.",
-        "Unrecognized or ambiguous raw-task segments remain explicit blocking residuals; the runtime does not guess their meaning.",
-        "Python only and inherited repair search remains bounded; no arbitrary patch depth, hidden-requirement coverage, cross-language generalization, general mergeability, or FrontierCode score authority."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.software.repair.semantic_acceptance",
-        "python.patch.candidate.semantic_acceptance_verified"
-      ],
-      "requires": [
-        "python.source.file.available",
-        "python.test.corpus.available"
-      ],
-      "result_fields": [
-        "status",
-        "pass",
-        "repair_pass",
-        "acceptance_stop_authorized",
-        "repair_status",
-        "winner_mode",
-        "realized_patches",
-        "baseline_snapshot_sha256",
-        "candidate_subject_snapshot_sha256",
-        "measurement_receipt_payload_sha256",
-        "measurement_program_sha256",
-        "measurement_spec_sha256",
-        "measured_fields",
-        "acceptance_status",
-        "acceptance_payload_sha256",
-        "objective_route_obligation_ids",
-        "semantic_residual_obligation_ids",
-        "unbound_obligation_ids",
-        "failed_obligation_ids",
-        "obligation_results",
-        "source_restored",
-        "model_dependency_count",
-        "external_general_purpose_model_runtime_dependency_count",
-        "incremental_spend_usd",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
-        "composed_capabilities": [
-          "python.software.repair.measured_acceptance.v1",
-          "python.repository.acceptance.measure.v1",
-          "python.task.acceptance.measured.objective.v1"
-        ],
-        "composed_runtime": [
-          "canonical/runtime/python_request_acceptance_union_v1.py",
-          "canonical/runtime/bound_capabilities/python_request_semantic_acceptance_cells_v1.py"
-        ],
-        "modules": [
-          "hashlib",
-          "json",
-          "os",
-          "pathlib",
-          "sys",
-          "tempfile"
-        ],
-        "type": "python_stdlib_composition"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "acceptance_union_git_blob_sha": "5080a04c1e00428816046bae45afe209184244fd",
-        "current_coupled_repair_dependency_git_blob_sha": "ab626e85d9075a4c0d3490e2774ac9fb6d2ccdfd",
-        "exact_two_carrier_replay": "12_OF_12_EACH",
-        "external_general_purpose_model_runtime_dependency_count": 0,
-        "incremental_spend_usd": 0,
-        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
-        "model_dependency_count": 0,
-        "post_merge_current_dependency_replay": "12_OF_12_EACH",
-        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
-        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
-        "runtime_git_blob_sha": "85b517117d537990bf3d7ae8205c8c71bc264a76",
-        "semantic_cells_git_blob_sha": "7358dcd9fbcca68724c72b53411628fceb9a96d0",
-        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
-        "test_git_blob_sha": "bf34315417e67b129b2e1999e04ff89019f62c39"
-      }
-    },
-    "python.tests.advance.mutation_kill.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.tests.advance.mutation_kill.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "module_name": "${input.module_name}",
-          "time_budget_s": "${input.time_budget_s}",
-          "timeout_s": "${input.timeout_s}",
-          "max_mutants": "${input.max_mutants}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_tests_advance_mutation_kill_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "mutation",
-        "amplification",
-        "test",
-        "survivor",
-        "kill",
-        "pynguin",
-        "score"
-      ],
-      "limitations": [
-        "Composes mutation gate x Pynguin: measures kill_before, synthesizes green regression tests on the post-diff world, measures kill_after. verified = tests execute AND non-worsening kill. Amplification loop of REPAIR_DEPTH program."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "python.tests.amplified.mutation_scored"
-      ],
-      "requires": [
-        "python.source.file.available"
-      ],
-      "result_fields": [
-        "adapter",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "verified",
-        "amplified",
-        "kill_before",
-        "kill_after",
-        "tests_generated",
-        "model_dependency_count",
-        "incremental_spend_usd"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_tests_advance_mutation_kill_v1.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified": false,
-        "mission_id": "AUTO-VERIFY-PYTHON-TESTS-ADVANCE-MUTATION-KILL-V1",
-        "observed_effect": {},
-        "receipt_path": "",
-        "state_path": ""
-      }
-    },
-    "python.tests.synthesize.pynguin.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.tests.synthesize.pynguin.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}",
-          "time_budget_s": "${input.time_budget_s}",
-          "algorithm": "${input.algorithm}",
-          "search_seed": "${input.search_seed}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_tests_synthesize_pynguin_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "pynguin",
-        "test",
-        "synthesis",
-        "generate",
-        "search",
-        "property",
-        "suite"
-      ],
-      "limitations": [
-        "Pynguin whole-suite synthesis; verdict = generated suite EXECUTES against the real module. Generator side of the mutation-survivor kill loop."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "python.tests.synthesized.executing"
-      ],
-      "requires": [
-        "python.source.file.available"
-      ],
-      "result_fields": [
-        "adapter",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "verified",
-        "tests_generated",
-        "tests_execute",
-        "model_dependency_count",
-        "incremental_spend_usd"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_tests_synthesize_pynguin_v1.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified": false,
-        "mission_id": "AUTO-VERIFY-PYTHON_TESTS_SYNTHESIZE_PYNGUIN_V1",
-        "observed_effect": {},
-        "receipt_path": "",
-        "state_path": ""
-      }
-    },
-    "software.repair.choreograph.crossfile.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "software.repair.choreograph.crossfile.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "software_repair_crossfile_choreograph_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "software",
-        "repair",
-        "choreograph",
-        "crossfile",
-        "cross-file",
-        "atomic",
-        "multi-file",
-        "import closure",
-        "call-graph",
-        "change-impact"
-      ],
-      "limitations": [
-        "Cross-file atomic choreography inside repair loop: patch\u2192choreograph via 86k/221k symbol graph\u2192change-impact 2070/2096 slice\u2192dual-oracle verify\u2192gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "software.repair.choreography.verified",
-        "software.patch.crossfile.atomic"
-      ],
-      "requires": [
-        "python.fault.localization.symbol_ranked",
-        "python.source.symbols.index.ast"
-      ],
-      "result_fields": [
-        "adapter",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "verified",
-        "choreography_verified",
-        "model_dependency_count",
-        "incremental_spend_usd"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified": true,
-        "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-CHOREOGRAPH-CROSSFILE-V1",
-        "observed_effect": {
-          "choreography_verified": true,
-          "verified": true
-        },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CHOREOGRAPH_V1_V1.json",
-        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_CHOREOGRAPH_V1.json"
-      }
-    },
-    "software.repair.loop.cegis_hypothesis.v1": {
-      "action_template": {
-        "args": {
-          "budget": "${input.budget}",
-          "capability_id": "software.repair.loop.cegis_hypothesis.v1",
-          "output_path": "${input.output_path}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "software_repair_loop_cegis_hypothesis_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "software",
-        "repair",
-        "loop",
-        "cegis",
-        "hypothesis",
-        "htn",
-        "triad",
-        "choreograph",
-        "htn",
-        "counterexample"
-      ],
-      "limitations": [
-        "HTN loop: CEGIS(T) 24/12 DPLL(T) \u2192 hypothesis 50\u00d7 \u2192 concrete 13 \u2192 choreograph 221k \u2192 slice 50 \u2192 gate \u2014 until pass or budget. Loop not DAG. Deterministic 0 model $0."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "software.repair.loop.cegis_verified",
-        "software.repair.synthesis.triad_proven"
-      ],
-      "requires": [
-        "python.fault.localization.symbol_ranked"
-      ],
-      "result_fields": [
-        "adapter",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "verified",
-        "iterations",
-        "model_dependency_count",
-        "incremental_spend_usd"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified": true,
-        "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-LOOP-CEGIS-HYPOTHESIS-V1",
-        "observed_effect": {
-          "iterations": 1,
-          "verified": true
-        },
-        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
-        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json"
-      }
-    },
     "archive.tar_gz.create_from_manifest": {
       "action_template": {
         "args": {
@@ -4031,6 +2907,95 @@
         "model_dependency_count": 0
       }
     },
+    "git.repository.operate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "git.repository.operate.v1",
+          "limit": "${input.limit}",
+          "op": "${input.op}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "git_repository_operate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "git",
+        "commit",
+        "log",
+        "history",
+        "diff",
+        "status",
+        "blame",
+        "branch",
+        "show",
+        "repository",
+        "revision",
+        "staged"
+      ],
+      "limitations": [
+        "Seven declared operations only (log, status, diff, show, blame, branch, commit); the sentence chooses the operation, never the argv, and any other operation is refused by name.",
+        "Reads plus one write (commit --no-verify). No push, rebase, merge, reset or history rewrite.",
+        "Every reported effect is re-derived by a second git plumbing mechanism; a disagreement is a refusal, not a warning.",
+        "Repository-local only: repo_root must resolve inside the calling root."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "git.repository.operate",
+        "git.history.read",
+        "git.working_tree.inspect",
+        "git.commit.create"
+      ],
+      "requires": [
+        "git.repository.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "capability",
+        "head_sha",
+        "incremental_spend_usd",
+        "model_dependency_count",
+        "observed_effect",
+        "op",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "repo_root",
+        "row_count",
+        "rows"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
+        "adapter_sha256": "b0115970ddd67e689391a75fce1e0a424df835e7fb3920c66e86e103866bc166",
+        "engine": "git",
+        "type": "brain_bound_system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "authority": "NONE",
+        "carrier": "SANDBOX",
+        "independent_mechanism": "each operation's reported effect is re-derived by a different git command than the one that produced it",
+        "independent_verified_by": "git plumbing: rev-parse, rev-list, cat-file, merge-base, symbolic-ref",
+        "mission_id": "ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001",
+        "observed_effect": {
+          "blame_lines": 2,
+          "commit_sha_measured": "a2ad8d4ac665",
+          "commits_read": 2,
+          "independent_mechanism_disagreements": 0,
+          "operations_measured": 7,
+          "patch_bytes": 315
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001__RECEIPT.json"
+      }
+    },
     "http.json.fetch_from_state": {
       "action_template": {
         "args": {
@@ -6601,7 +5566,26 @@
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_inline_helper.py",
         "type": "brain_native_deterministic_composition"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-INLINE-HELPER-001",
+        "observed_effect": {
+          "adapter_sha256": "dc86634f97730d1c5bb5dddac71c28d571d7b462e465c97da9fa387e8bfd3d03",
+          "checks": {
+            "file_parses": true,
+            "helper_name_survived": [],
+            "suite_green_when_the_verifier_ran_it": true,
+            "suite_tail": ".                                                                        [100%]\n1 passed in 0.01s"
+          },
+          "claim": "a single-use helper becomes its body; the name survives nowhere; the suite stays green",
+          "elapsed_s": 0.047,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-INLINE-HELPER-001.json"
+      }
     },
     "python.refactor.rename_parameter.v1": {
       "action_template": {
@@ -7768,6 +6752,848 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-ISSUE2PR-002.json"
       }
     },
+    "python.software.repair.apply.verified.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.apply.verified.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "optional": [
+          "test_argv"
+        ],
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repair_apply_verified_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "apply the repair",
+        "apply the patch",
+        "apply the verified repair",
+        "apply the fix",
+        "land the patch",
+        "land the fix",
+        "write the fix",
+        "apply in place",
+        "make the test pass"
+      ],
+      "limitations": [
+        "Composes the existing bounded provenance-guided Python repair with a gated write to the real source tree; it does not add any new patch search.",
+        "Writes only behind four fail-closed gates: the stated test must fail first, a verified repair must exist, the realized bytes must match the patch's own candidate hash, and the stated test must pass in place afterwards.",
+        "Any gate failing restores every original byte and reports failure, so a pass means the stated test went from failing to passing on the file that is on disk.",
+        "Python only, and the inherited repair search remains bounded to the verified AST mutation/search families; there is no general patch completeness.",
+        "A passing stated test is not proof that the wider program is correct; it certifies only the stated test on the stated source root."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.repair.apply.verified",
+        "python.source.write.verified_repair_applied"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "applied",
+        "source_restored",
+        "files_written",
+        "unified_diffs",
+        "pre_apply_test_returncode",
+        "post_apply_test_returncode",
+        "repair_status",
+        "output_verified",
+        "detail"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+        "composed_capabilities": [
+          "python.software.repair.guided.provenance.coupled.v1",
+          "python.software.repair.measured_acceptance.v1"
+        ],
+        "modules": [
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "subprocess",
+          "sys",
+          "typing"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_two_carrier_replay": "NOT_CLAIMED__SINGLE_CARRIER_SANDBOX_MEASUREMENT_ONLY",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-repair-apply-verified-20261027-v1",
+        "independent_test_count": 13,
+        "model_dependency_count": 0,
+        "status": "SANDBOX_MEASUREMENT_ONLY__NO_TWO_SPRITE_FALSIFICATION_CLAIMED"
+      }
+    },
+    "python.software.repair.guided.provenance.coupled.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+          "max_control_files": 12,
+          "max_control_symbols_per_file": 12,
+          "max_guided_files": 4,
+          "max_guided_symbols_per_file": 6,
+          "max_pair_candidates": 1000,
+          "mutations_per_file": 24,
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "optional": [
+          "test_argv"
+        ],
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_provenance_guided_coupled_repair_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "guided",
+        "provenance",
+        "dynamic",
+        "localization",
+        "coupled",
+        "patch",
+        "search",
+        "fault"
+      ],
+      "limitations": [
+        "Combines verified dynamic spectrum localization and bounded interprocedural provenance to restrict an existing two-edit Python repair search.",
+        "Can accept a verified guided single edit or a bounded guided coupled pair, with final double replay and source restoration.",
+        "Guidance reduction is task-dependent; the capability reports control-vs-guided candidate-space measurements and does not claim guidance always reduces search.",
+        "Search remains bounded to the inherited Python AST mutation basis and does not establish arbitrary patch completeness, hidden requirements, general mergeability, or FrontierCode score authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.repair.provenance_guided",
+        "python.software.repair.coupled_candidate_verified"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "baseline_failure_score",
+        "guidance",
+        "guided_localization",
+        "provenance_hypothesis_count",
+        "single_candidates_tested",
+        "pair_candidates_tested",
+        "winner_mode",
+        "crossed_nonmonotonic_valley",
+        "verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
+        "composed_capabilities": [
+          "python.patch.search.test_guided.ast.v1",
+          "python.software.repair.loop.coupled.ast.v1",
+          "python.fault.localize.dynamic.dataflow.v1",
+          "python.fault.provenance.interprocedural.value.v1"
+        ],
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "math",
+          "os",
+          "pathlib",
+          "sys"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_branch_layout_combined_replay": "14_OF_14_PASS",
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "independent_test_count": 7,
+        "model_dependency_count": 0,
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "primary_test_count": 7,
+        "runtime_git_blob_sha": "0b779992f229dbe27f665a8f68c89cbb5a39fc28",
+        "runtime_sha256": "111e1a5c30a529a0e0ab2b727c74313b9b2b1875348cc11fae12690f91b15324",
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "4702f3d252e6047cfadc28a1e3363357e0541ec7",
+        "test_sha256": "f4f133f246f1e6adf37225b0f5acad1bf3fc375b8dc0a74ebbed37b2f9df8149"
+      }
+    },
+    "python.software.repair.loop.coupled.ast.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.loop.coupled.ast.v1",
+          "max_files": 8,
+          "max_pair_candidates": 1200,
+          "max_symbols_per_file": 8,
+          "mutations_per_file": 24,
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "optional": [
+          "test_argv"
+        ],
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_coupled_software_repair_loop_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repair",
+        "patch",
+        "coupled",
+        "nonmonotonic",
+        "multi-edit",
+        "fault",
+        "localization",
+        "symbol",
+        "test"
+      ],
+      "limitations": [
+        "Reuses the strict-progress repair route first, then searches bounded AST-mutation pairs when no strictly improving route closes the task.",
+        "Can cross a two-edit non-monotonic valley without retaining either unverified intermediate edit.",
+        "Ranks files and function/class symbols from traceback, imports, failure text, and line containment; this is stronger localization evidence but not complete semantic causality.",
+        "Python only; pair depth, candidate count, file count, symbol count, and timeout are explicitly bounded.",
+        "Candidate-only: source bytes are restored before return; no source-write or promotion authority.",
+        "No universal repair completeness, hidden-requirement, mergeability, FrontierCode score, or acceptance claim."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.patch.candidate.test_verified",
+        "python.repair.coupled_pair.nonmonotonic",
+        "python.fault.localization.symbol_ranked"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "route",
+        "baseline_failure_score",
+        "localization_candidates",
+        "single_candidates_tested",
+        "pair_candidates_tested",
+        "crossed_nonmonotonic_valley",
+        "verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "sys"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_test_count": 8,
+        "model_dependency_count": 0,
+        "primary_test_count": 8,
+        "receipt_path": "canonical/verification/PYTHON_COUPLED_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "34c3e8deac596c8c8790cfffb0586303159590b5",
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "04f1fb30e99b888fb3cf177e790f50e268ec3e88"
+      }
+    },
+    "python.software.repair.loop.strict_progress.ast.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+          "max_candidates_per_file": 250,
+          "max_files": 12,
+          "max_rounds": 6,
+          "max_total_candidates": 2000,
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 30
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "optional": [
+          "test_argv"
+        ],
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_iterative_software_repair_loop_v1",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "strict-progress",
+        "multi-round",
+        "multi-file",
+        "tests",
+        "counterexample",
+        "ast",
+        "iterative",
+        "iterative repair",
+        "iterative software repair loop",
+        "repair loop",
+        "repair the source iteratively"
+      ],
+      "limitations": [
+        "Accepts only edits that strictly reduce the parsed failing-test count and can continue while other failures in the same test command remain.",
+        "Bounded deterministic Python AST mutation search only; does not cover non-monotonic coupled edits that require a neutral or temporarily worse intermediate step.",
+        "Localization uses traceback paths, test imports, and deterministic repository fallback; this is not general semantic fault localization.",
+        "Candidate-only: original source bytes are restored before return and no patch is promoted automatically.",
+        "No non-Python completeness, hidden-requirements guarantee, general mergeability proof, or FrontierCode score credit."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.patch.candidate.strict_progress.multi_round.test_verified"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available",
+        "python.patch.search.test_guided.ast.v1"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "baseline_failure_score",
+        "rounds",
+        "accepted_edit_count",
+        "accepted_edits",
+        "tested_candidate_count",
+        "final_verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
+        "composed_capability": "python.patch.search.test_guided.ast.v1",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "importlib.util",
+          "json",
+          "pathlib",
+          "re",
+          "sys"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "dependency_git_blob_sha": "9bd33aca208fca26270765e18b3563abcf841e0b",
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "model_dependency_count": 0,
+        "receipt_path": "canonical/verification/PYTHON_STRICT_PROGRESS_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "352867cf8ce00dab65b17b96d098b6ea4b32f40d",
+        "status": "LOCAL_AND_INDEPENDENT_SPRITE_6_OF_6_PASS",
+        "test_git_blob_sha": "1828328eeb385e379f8d6f3d2cff17dc1e3e3e54"
+      }
+    },
+    "python.software.repair.loop.test_guided.ast.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+          "max_candidates": 600,
+          "max_edits": 6,
+          "output_path": "${input.output_path}",
+          "source_paths": "${input.source_paths}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_software_repair_loop_v1",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "patch",
+        "multi-edit",
+        "multi-file",
+        "tests",
+        "counterexample",
+        "ast"
+      ],
+      "limitations": [
+        "Composes the verified deterministic single-edit Python AST patch-search primitive across separate failing Python test witnesses.",
+        "Supports bounded sequential edits across one or more repository-local Python files when individual failing test files provide sufficient acceptance oracles.",
+        "Source localization is limited to explicit source paths and Python modules imported by the supplied tests; this is not general semantic fault localization.",
+        "Candidate-only: all source bytes are restored before return and no patch is promoted automatically.",
+        "No arbitrary software-repair completeness, no non-Python support, no semantic correctness beyond the supplied test witnesses, and no general mergeability guarantee.",
+        "Confers no FrontierCode score or benchmark acceptance credit by itself."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.patch.candidate.multi_edit.test_verified"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available",
+        "python.patch.search.test_guided.ast.v1"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "localized_source_paths",
+        "edits_applied",
+        "repair_history",
+        "tested_candidate_count",
+        "verification_replays",
+        "patches",
+        "source_restored",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_software_repair_loop_v1.py",
+        "composed_capability": "python.patch.search.test_guided.ast.v1",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "pathlib",
+          "sys"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "external_capability_provider_count": 0,
+        "focused_test_count": 8,
+        "focused_tests_passed": 8,
+        "incremental_spend_usd": 0,
+        "independent_semantic_verification": false,
+        "model_dependency_count": 0,
+        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REPAIR_LOOP_V1_FOCUSED_REPLAY_20261011_V1.json",
+        "runtime_git_blob_sha": "eaf405b3ea6a387c573f8b3dd5a7197bfa024cd5",
+        "status": "EXACT_GIT_BLOB_FOCUSED_REPLAY_PASS",
+        "test_git_blob_sha": "59ec47e0392fbb32567f5c32567373bd039f6cc7"
+      }
+    },
+    "python.software.repair.measured_acceptance.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.measured_acceptance.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "task_text": "${input.goal}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "optional": [
+          "test_argv"
+        ],
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repair_measured_acceptance_controller_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "measured",
+        "acceptance",
+        "content-addressed",
+        "candidate",
+        "verification",
+        "atomic",
+        "patch"
+      ],
+      "limitations": [
+        "Composes verified provenance-guided bounded Python repair with isolated candidate realization, content-addressed repository measurement, and measurement-bound objective raw-task acceptance.",
+        "Repair patches are realized only in a temporary copied source root; candidate hashes and patch source hashes are verified and original source bytes remain restored.",
+        "Acceptance stop is authorized only for raw-task obligations that compile to the existing bounded objective acceptance routes; semantic residual obligations still block success.",
+        "Python only and inherited repair search remains bounded to the verified AST mutation/search families; no arbitrary patch completeness.",
+        "Passing measured tests does not establish hidden requirements, general mergeability, or FrontierCode score authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.repair.measured_acceptance",
+        "python.patch.candidate.objective_acceptance_verified"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "repair_pass",
+        "acceptance_stop_authorized",
+        "repair_status",
+        "winner_mode",
+        "realized_patches",
+        "candidate_subject_snapshot_sha256",
+        "measurement_receipt_payload_sha256",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "measured_fields",
+        "acceptance_status",
+        "semantic_residual_obligation_ids",
+        "source_restored",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
+        "composed_capabilities": [
+          "python.software.repair.guided.provenance.coupled.v1",
+          "python.repository.acceptance.measure.v1",
+          "python.task.acceptance.measured.objective.v1"
+        ],
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "shutil",
+          "sys",
+          "tempfile"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_two_carrier_replay": "8_OF_8_EACH",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "independent_test_count": 8,
+        "model_dependency_count": 0,
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "primary_test_count": 8,
+        "runtime_git_blob_sha": "0c9578042949e483e00136cd166c9209a110008d",
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "7cd60d37aa8e10496fa9ae9a0c73484bd2609d5a"
+      }
+    },
+    "python.software.repair.route.v1": {
+      "action_template": {
+        "args": {
+          "budget": "${input.budget}",
+          "capability_id": "python.software.repair.route.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_software_repair_router_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "repair",
+        "route",
+        "router",
+        "bug",
+        "class",
+        "diagnose",
+        "escalate",
+        "realize"
+      ],
+      "limitations": [
+        "Diagnoses bug class, routes the repair-engine ladder, realizes reporter patches, replays. verified = measured suite outcome. Ladder feature map consumer (REPAIR_DEPTH_LADDER_20261029)."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.software.repair.routed_verified"
+      ],
+      "requires": [
+        "python.source.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "repaired",
+        "route_trace",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_software_repair_router_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": false,
+        "mission_id": "AUTO-VERIFY-PYTHON_SOFTWARE_REPAIR_ROUTER_V1",
+        "observed_effect": {},
+        "receipt_path": "",
+        "state_path": ""
+      }
+    },
+    "python.software.repair.semantic_acceptance.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.repair.semantic_acceptance.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "task_text": "${input.goal}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "optional": [
+          "test_argv"
+        ],
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repair_semantic_acceptance_controller_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "software",
+        "repair",
+        "semantic",
+        "acceptance",
+        "raw-task",
+        "scope",
+        "file",
+        "content-addressed",
+        "candidate",
+        "verification",
+        "semantic acceptance controller",
+        "acceptance controller",
+        "semantic acceptance of the repair"
+      ],
+      "limitations": [
+        "Extends verified V8 bounded Python repair with content-addressed repository measurement plus complete lossless obligation accounting across measured objective routes and explicit source-grounded semantic cells.",
+        "Supported semantic cells are bounded to exact file content presence/absence, file existence/absence, Python parse, unchanged-path, and allowed-changed-path directives.",
+        "Unrecognized or ambiguous raw-task segments remain explicit blocking residuals; the runtime does not guess their meaning.",
+        "Python only and inherited repair search remains bounded; no arbitrary patch depth, hidden-requirement coverage, cross-language generalization, general mergeability, or FrontierCode score authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.repair.semantic_acceptance",
+        "python.patch.candidate.semantic_acceptance_verified"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "repair_pass",
+        "acceptance_stop_authorized",
+        "repair_status",
+        "winner_mode",
+        "realized_patches",
+        "baseline_snapshot_sha256",
+        "candidate_subject_snapshot_sha256",
+        "measurement_receipt_payload_sha256",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "measured_fields",
+        "acceptance_status",
+        "acceptance_payload_sha256",
+        "objective_route_obligation_ids",
+        "semantic_residual_obligation_ids",
+        "unbound_obligation_ids",
+        "failed_obligation_ids",
+        "obligation_results",
+        "source_restored",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repair_semantic_acceptance_controller_v1.py",
+        "composed_capabilities": [
+          "python.software.repair.measured_acceptance.v1",
+          "python.repository.acceptance.measure.v1",
+          "python.task.acceptance.measured.objective.v1"
+        ],
+        "composed_runtime": [
+          "canonical/runtime/python_request_acceptance_union_v1.py",
+          "canonical/runtime/bound_capabilities/python_request_semantic_acceptance_cells_v1.py"
+        ],
+        "modules": [
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "sys",
+          "tempfile"
+        ],
+        "type": "python_stdlib_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "acceptance_union_git_blob_sha": "5080a04c1e00428816046bae45afe209184244fd",
+        "current_coupled_repair_dependency_git_blob_sha": "ab626e85d9075a4c0d3490e2774ac9fb6d2ccdfd",
+        "exact_two_carrier_replay": "12_OF_12_EACH",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "model_dependency_count": 0,
+        "post_merge_current_dependency_replay": "12_OF_12_EACH",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "85b517117d537990bf3d7ae8205c8c71bc264a76",
+        "semantic_cells_git_blob_sha": "7358dcd9fbcca68724c72b53411628fceb9a96d0",
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "bf34315417e67b129b2e1999e04ff89019f62c39"
+      }
+    },
     "python.software.request.semantic_behavior.compile.v1": {
       "action_template": {
         "args": {
@@ -8099,7 +7925,36 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-COMPLEXITY-001",
+        "observed_effect": {
+          "adapter_sha256": "b15689be367b6152b91070764a133f1ba405d89b21d78a8a12e503aa287a8114",
+          "checks": {
+            "constructed": {
+              "flat": {
+                "cyclomatic": 1,
+                "lineno": 4,
+                "nesting": 0
+              },
+              "nested": {
+                "cyclomatic": 5,
+                "lineno": 8,
+                "nesting": 2
+              }
+            },
+            "reported_functions": 2,
+            "reported_worst": "nested"
+          },
+          "claim": "ranks functions by loop-nesting depth and by McCabe's cyclomatic number, both recomputed from the tree",
+          "elapsed_s": 0.004,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-COMPLEXITY-001.json"
+      }
     },
     "python.source.crossfile_edit.choreograph.v1": {
       "action_template": {
@@ -8248,7 +8103,29 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-DEAD-CODE-001",
+        "observed_effect": {
+          "adapter_sha256": "181dd7c72ae6a7c1d11b077b8bf0e6ea6f40de6401c2d6b58e46346a14e645a8",
+          "checks": {
+            "considered_count": 3,
+            "constructed_dead": "unused_helper",
+            "constructed_live": "used_helper",
+            "reported_dead": [
+              "report",
+              "unused_helper"
+            ]
+          },
+          "claim": "separates a helper with no caller from one with a caller",
+          "elapsed_s": 0.009,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DEAD-CODE-001.json"
+      }
     },
     "python.source.definition_count.v1": {
       "action_template": {
@@ -8312,7 +8189,29 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-DEFINITION-COUNT-001",
+        "observed_effect": {
+          "adapter_sha256": "7fb153f60172f69f18c1e17854ce92a8357ec129e8c4bf686967f08b7510508b",
+          "checks": {
+            "constructed_classes": 2,
+            "constructed_functions": 3,
+            "reported": {
+              "class_count": 2,
+              "definition_count": 5,
+              "function_count": 3
+            }
+          },
+          "claim": "counts every function and class in a tree, by ast, exactly",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DEFINITION-COUNT-001.json"
+      }
     },
     "python.source.secret_scan.v1": {
       "action_template": {
@@ -8378,7 +8277,32 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SECRET-SCAN-001",
+        "observed_effect": {
+          "adapter_sha256": "7830d7eb02be5b0019efc9ca2aeace66f33d1d57106061e773907a9dc01919c5",
+          "checks": {
+            "constructed_line": 4,
+            "reported": [
+              {
+                "line": 4,
+                "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets/config.py",
+                "redacted": "AKIA\u202620",
+                "signature": "aws_access_key_id"
+              }
+            ],
+            "secret_echoed_in_report": false
+          },
+          "claim": "finds a published credential shape at its real line and never echoes it",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECRET-SCAN-001.json"
+      }
     },
     "python.source.symbols.index.ast": {
       "action_template": {
@@ -8612,7 +8536,27 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TAINT-FLOW-001",
+        "observed_effect": {
+          "adapter_sha256": "d0106e401d0138ca416b9a8707a3952813eae11209b8acef7357608a08298502",
+          "checks": {
+            "clean_world_answer": "no",
+            "constructed_sink": "os.system",
+            "constructed_source": "json.loads(raw) on a parameter",
+            "control_world_is_taint_free_by_construction": true,
+            "reported_answer": "yes"
+          },
+          "claim": "traces an input boundary to a shell sink, and says no when it does not",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TAINT-FLOW-001.json"
+      }
     },
     "python.source.test_adequacy.v1": {
       "action_template": {
@@ -8681,7 +8625,27 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TEST-ADEQUACY-001",
+        "observed_effect": {
+          "adapter_sha256": "bb50ac452294b6d50c20a241e77eafb4203deb5eb942ea755375beda84f696b9",
+          "checks": {
+            "constructed_uncovered_line": 9,
+            "reported_answer": "no",
+            "reported_unexecuted": [
+              9
+            ]
+          },
+          "claim": "names the executable line the suite never runs",
+          "elapsed_s": 0.043,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TEST-ADEQUACY-001.json"
+      }
     },
     "python.symbol.resolve.standalone.v1": {
       "action_template": {
@@ -8912,6 +8876,76 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_TEST_PIPELINE_VERIFIER_V1_V1.json"
       }
     },
+    "python.tests.advance.mutation_kill.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.tests.advance.mutation_kill.v1",
+          "max_mutants": "${input.max_mutants}",
+          "module_name": "${input.module_name}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "time_budget_s": "${input.time_budget_s}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_tests_advance_mutation_kill_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "mutation",
+        "amplification",
+        "test",
+        "survivor",
+        "kill",
+        "pynguin",
+        "score"
+      ],
+      "limitations": [
+        "Composes mutation gate x Pynguin: measures kill_before, synthesizes green regression tests on the post-diff world, measures kill_after. verified = tests execute AND non-worsening kill. Amplification loop of REPAIR_DEPTH program."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.tests.amplified.mutation_scored"
+      ],
+      "requires": [
+        "python.source.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "amplified",
+        "kill_before",
+        "kill_after",
+        "tests_generated",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_tests_advance_mutation_kill_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": false,
+        "mission_id": "AUTO-VERIFY-PYTHON-TESTS-ADVANCE-MUTATION-KILL-V1",
+        "observed_effect": {},
+        "receipt_path": "",
+        "state_path": ""
+      }
+    },
     "python.tests.audit.unittest": {
       "action_template": {
         "args": {
@@ -9071,6 +9105,73 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
       }
     },
+    "python.tests.synthesize.pynguin.v1": {
+      "action_template": {
+        "args": {
+          "algorithm": "${input.algorithm}",
+          "capability_id": "python.tests.synthesize.pynguin.v1",
+          "output_path": "${input.output_path}",
+          "search_seed": "${input.search_seed}",
+          "source_root": "${input.source_root}",
+          "time_budget_s": "${input.time_budget_s}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_tests_synthesize_pynguin_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "pynguin",
+        "test",
+        "synthesis",
+        "generate",
+        "search",
+        "property",
+        "suite"
+      ],
+      "limitations": [
+        "Pynguin whole-suite synthesis; verdict = generated suite EXECUTES against the real module. Generator side of the mutation-survivor kill loop."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.tests.synthesized.executing"
+      ],
+      "requires": [
+        "python.source.file.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "tests_generated",
+        "tests_execute",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_tests_synthesize_pynguin_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": false,
+        "mission_id": "AUTO-VERIFY-PYTHON_TESTS_SYNTHESIZE_PYNGUIN_V1",
+        "observed_effect": {},
+        "receipt_path": "",
+        "state_path": ""
+      }
+    },
     "python.vcs.merge_conflict.resolve.v1": {
       "action_template": {
         "args": {
@@ -9131,7 +9232,27 @@
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py",
         "type": "brain_native_deterministic_composition"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-MERGE-RESOLVE-001",
+        "observed_effect": {
+          "adapter_sha256": "5b598aa0b9dc1e0bf9ef4a42ed272e94b8009373cefc3978f7e0e9e2aced000a",
+          "checks": {
+            "both_conflict_sides_kept": true,
+            "file_parses": true,
+            "markers_left": [],
+            "suite_green_when_the_verifier_ran_it": true,
+            "suite_tail": ".                                                                        [100%]\n1 passed in 0.01s"
+          },
+          "claim": "a conflicted file keeps both sides, loses every marker, and the suite goes green",
+          "elapsed_s": 0.044,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MERGE-RESOLVE-001.json"
+      }
     },
     "shell.command.run": {
       "action_template": {
@@ -9628,13 +9749,158 @@
         "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_PATCH_CEGIS_Z3_V1.json"
       }
     },
+    "software.repair.choreograph.crossfile.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.repair.choreograph.crossfile.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_repair_crossfile_choreograph_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "software",
+        "repair",
+        "choreograph",
+        "crossfile",
+        "cross-file",
+        "atomic",
+        "multi-file",
+        "import closure",
+        "call-graph",
+        "change-impact"
+      ],
+      "limitations": [
+        "Cross-file atomic choreography inside repair loop: patch\u2192choreograph via 86k/221k symbol graph\u2192change-impact 2070/2096 slice\u2192dual-oracle verify\u2192gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.repair.choreography.verified",
+        "software.patch.crossfile.atomic"
+      ],
+      "requires": [
+        "python.fault.localization.symbol_ranked",
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "choreography_verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-CHOREOGRAPH-CROSSFILE-V1",
+        "observed_effect": {
+          "choreography_verified": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CHOREOGRAPH_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_CHOREOGRAPH_V1.json"
+      }
+    },
+    "software.repair.loop.cegis_hypothesis.v1": {
+      "action_template": {
+        "args": {
+          "budget": "${input.budget}",
+          "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_repair_loop_cegis_hypothesis_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "software",
+        "repair",
+        "loop",
+        "cegis",
+        "hypothesis",
+        "htn",
+        "triad",
+        "choreograph",
+        "htn",
+        "counterexample"
+      ],
+      "limitations": [
+        "HTN loop: CEGIS(T) 24/12 DPLL(T) \u2192 hypothesis 50\u00d7 \u2192 concrete 13 \u2192 choreograph 221k \u2192 slice 50 \u2192 gate \u2014 until pass or budget. Loop not DAG. Deterministic 0 model $0."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.repair.loop.cegis_verified",
+        "software.repair.synthesis.triad_proven"
+      ],
+      "requires": [
+        "python.fault.localization.symbol_ranked"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified",
+        "iterations",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_repair_loop_cegis_hypothesis_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-REPAIR-LOOP-CEGIS-HYPOTHESIS-V1",
+        "observed_effect": {
+          "iterations": 1,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json"
+      }
+    },
     "software.review.gate.composer.v1": {
       "action_template": {
         "args": {
-          "capability_id": "software.review.gate.composer.v1",
           "anchor_path": "${input.anchor_path}",
-          "diff_path": "${input.diff_path}",
           "bench_path": "${input.bench_path}",
+          "capability_id": "software.review.gate.composer.v1",
+          "diff_path": "${input.diff_path}",
           "output_path": "${input.output_path}"
         },
         "expect": {
@@ -11268,96 +11534,6 @@
           ]
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
-      }
-    },
-    "git.repository.operate.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "git.repository.operate.v1",
-          "limit": "${input.limit}",
-          "op": "${input.op}",
-          "message": "${input.message}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "git_repository_operate",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "git",
-        "commit",
-        "log",
-        "history",
-        "diff",
-        "status",
-        "blame",
-        "branch",
-        "show",
-        "repository",
-        "revision",
-        "staged"
-      ],
-      "limitations": [
-        "Seven declared operations only (log, status, diff, show, blame, branch, commit); the sentence chooses the operation, never the argv, and any other operation is refused by name.",
-        "Reads plus one write (commit --no-verify). No push, rebase, merge, reset or history rewrite.",
-        "Every reported effect is re-derived by a second git plumbing mechanism; a disagreement is a refusal, not a warning.",
-        "Repository-local only: repo_root must resolve inside the calling root."
-      ],
-      "platforms": [
-        "linux"
-      ],
-      "provides": [
-        "git.repository.operate",
-        "git.history.read",
-        "git.working_tree.inspect",
-        "git.commit.create"
-      ],
-      "requires": [
-        "git.repository.available"
-      ],
-      "result_fields": [
-        "adapter",
-        "capability",
-        "head_sha",
-        "incremental_spend_usd",
-        "model_dependency_count",
-        "observed_effect",
-        "op",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "repo_root",
-        "row_count",
-        "rows"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
-        "adapter_sha256": "b0115970ddd67e689391a75fce1e0a424df835e7fb3920c66e86e103866bc166",
-        "engine": "git",
-        "type": "brain_bound_system_tool"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independent_verified_by": "git plumbing: rev-parse, rev-list, cat-file, merge-base, symbolic-ref",
-        "independent_mechanism": "each operation's reported effect is re-derived by a different git command than the one that produced it",
-        "mission_id": "ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001",
-        "observed_effect": {
-          "operations_measured": 7,
-          "commits_read": 2,
-          "patch_bytes": 315,
-          "blame_lines": 2,
-          "commit_sha_measured": "a2ad8d4ac665",
-          "independent_mechanism_disagreements": 0
-        },
-        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001__RECEIPT.json",
-        "authority": "NONE",
-        "carrier": "SANDBOX"
       }
     }
   },

@@ -941,7 +941,8 @@ def declared_optional_inputs(entry: Mapping[str, Any] | None) -> set[str]:
 
 
 def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], root: pathlib.Path,
-                           entry: Mapping[str, Any] | None, inputs: dict[str, Any]) -> list[tuple[str, BaseException]]:
+                           entry: Mapping[str, Any] | None, inputs: dict[str, Any],
+                           allow_inferred_referent: bool = False) -> list[tuple[str, BaseException]]:
     """Settle refused keys from declarations already in the repository.
 
     Order matters: the adapter's own defaults and the sentence's own identifier need
@@ -1008,6 +1009,9 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
             if value is None or str(row.get("rule") or "") not in _PROVED_BY_THE_TREE:
                 settled.append((key, exc))
                 continue
+            if str(row.get("rule")) in _INFERRED_REFERENT_RULES and not allow_inferred_referent:
+                settled.append((key, exc))
+                continue
             inputs[key] = value
         remaining = settled
     return remaining
@@ -1048,6 +1052,22 @@ _PROVED_BY_THE_TREE = frozenset({
     "SPEC_EXPORT_REQUESTED",
     "SPEC_TEST_PATH_STATED",
     "ADDED_PARAM_STATED_AND_NOT_DECLARED",
+})
+
+# The two proofs that produce a referent the sentence never named: a directory read
+# off the parent of a stated file, or the directory two stated files have in common.
+# Both are sound as evidence about the tree and both are a guess about the REQUEST,
+# so the front door takes them only when no candidate could bind the sentence
+# without them (the rescue in ``compile_goal``), never to decide between candidates.
+_INFERRED_REFERENT_RULES = frozenset({
+    # A single stated file's PARENT is a guess about which tree the caller meant: the
+    # 2026-10-31 false PASS came from exactly this rule (a patch-search row was handed the
+    # directory the source happened to sit in).  Gated.
+    "PATH_DIR_FROM_STATED_FILE_PARENT",
+    # NOT gated: the one directory that contains EVERY stated file is a fact about the
+    # sentence, not an invention -- "move f from a/models.py to a/service.py" names no
+    # directory and still states exactly one.  Gating it cost the symbol mover its source
+    # root and sent the same sentence to a repair choreographer.
 })
 
 
@@ -1763,8 +1783,22 @@ def _joint_role_binding(goal: str, pending: list[str], root: pathlib.Path, taken
     return assignment
 
 
+# A ROUTE THAT NEEDS RESCUING MUST NOT DISPLACE ONE THAT BINDS ON THE SENTENCE ITSELF.
+#
+# ``derive_declared_inputs`` settles a still-unbound key from ``declared_input_derivation_v1``.  It
+# is the right LAST resort and the wrong FIRST choice: measured 2026-10-31 on the merged tree, it
+# let ``python.software.repair.loop.strict_progress.ast.v1`` bind a sentence whose own contract
+# selects ``...loop.test_guided.ast.v1`` (and that row then had no ``source_paths`` to report), and
+# it let a score-4 row answer a performance review that the perf gate was ranked first for.  So the
+# compile is TWO PASSES: every candidate first on the sentence's own evidence, and the rescue only
+# when no candidate binds at all.  The flag is read at the one site that can rescue, and defaults to
+# OFF so every direct call (tests, selection, the DAG planner) sees the unrescued contract.
+_DECLARED_RESCUE = {"enabled": False}
+
+
 def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None,
-                    produced_paths=None, cycle=None, spool=None) -> dict[str, Any]:
+                    produced_paths=None, cycle=None, spool=None,
+                    allow_declared_rescue: bool = True) -> dict[str, Any]:
     """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses.
 
     ``produced_paths`` (F12) is the set of artifacts earlier steps of the same multi-step request
@@ -1774,6 +1808,16 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     sentence and no earlier step produces it, a deterministic spool path is assigned instead of
     failing closed.  Passing ``spool=None`` keeps the original fail-closed behaviour, which is what
     every caller outside the DAG planner does.
+
+    ``allow_declared_rescue`` gates the LAST-RESORT derivation hook in ``derive_declared_inputs``
+    (the one that settles a still-unbound key from ``declared_input_derivation_v1``).  A walk over
+    ranked candidates passes True only for its OWN FIRST candidate, because a rescue may decide the
+    top candidate and must never displace it: measured 2026-10-31 on the capability matrix, "Run a
+    performance review of <pkg>/calc.py" ranked python.review.diff_perf_gate.v1 first at 15, the
+    gate could not bind, and a row SEVEN places down the list --
+    python.repository.acceptance.measure.v1 at score 4, on the single word "review" -- was rescued
+    into binding source_root and answered a performance review with a whole-suite measurement.
+    FALSE on the matrix, and the previous route (software.review.gate.composer.v1) was correct.
     """
     keys = input_keys(entry)
     # F20: a ``*_path`` key whose OWN registry entry declares it a literal list value is a
@@ -1870,12 +1914,72 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         except GoalCompilationFailure as exc:
             refused.append((key, exc))
     if refused:
-        refused = derive_declared_inputs(goal, refused, root, entry, inputs)
+        # The settle pass reads declarations the repository ALREADY carries, and a
+        # key it fills is one the binder has just refused -- it can never overwrite
+        # a binding.  Two of its rules are different in kind: they INVENT a referent
+        # (a directory read off the parent of a stated file), and an invented
+        # `source_root` is what let a patch-search row outrank the repair the
+        # contract had selected (measured 2026-10-31, the last FALSE row).  Those
+        # two stay behind the rescue gate; every other rule -- the adapter's own
+        # harness defaults, the replacement identifier the sentence states, the
+        # module the stated tree PROVES defines the stated symbol -- settles always.
+        rescue = bool(allow_declared_rescue and _DECLARED_RESCUE["enabled"])
+        refused = derive_declared_inputs(goal, refused, root, entry, inputs,
+                                         allow_inferred_referent=rescue)
     if refused:
         raise refused[0][1]
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
                              cycle=cycle, spool=spool)
     return inputs
+
+
+# The capabilities whose OWN CONTRACT is to change a source file.  Read from the entry's
+# declaration -- its id, what it says it produces, and its declared keywords -- never from a
+# table of ids.  A capability that reports ON a file is not one of these, and that is the
+# distinction that matters: the report must not be written over the file it describes.
+_SOURCE_EDITING_SURFACE = re.compile(
+    r"\b(?:repair|patch|edit|refactor|rename|format|reformat|rewrite|apply|fix|"
+    r"move|extract|inline|insert|append|prepend|substitut)\w*\b", re.IGNORECASE)
+
+
+def capability_edits_source(entry: Mapping[str, Any] | None) -> bool:
+    """Does this capability declare that it CHANGES a file, rather than reading one?"""
+    if not isinstance(entry, Mapping):
+        return False
+    surface = " ".join([
+        str(entry.get("capability_id") or entry.get("id") or ""),
+        str(entry.get("adapter_module") or ""),
+        " ".join(str(x) for x in (entry.get("provides") or [])),
+        " ".join(str(x) for x in (entry.get("keywords") or [])),
+    ])
+    return bool(_SOURCE_EDITING_SURFACE.search(surface))
+
+
+_MOVE_VERB_RE = re.compile(r"\b(?:move|rename|relocate|copy|mv|cp)\b", re.IGNORECASE)
+def _stated_move_destinations(goal: str) -> set[str]:
+    """Paths the sentence nominated as where a MOVED or COPIED file goes.
+
+    Distinct from "a file to write": "Write these lines of Python to <X>.py" nominates X as an output
+    and must be written exactly there (pinned by
+    ``test_an_ordinary_sentence_runs_the_command_it_states_v1``).  "Move the module <A> to <B>" nominates
+    B as the future home of SOURCE, and no report may be written onto it.
+    """
+    text = str(goal or "")
+    out: set[str] = set()
+    for match in _MOVE_VERB_RE.finditer(text):
+        for candidate in re.findall(r"[\w.\-/]+\.(?:py|js|jsx|ts|tsx|rs|go|java|c|h|cpp|rb)", text[match.end():]):
+            out.add(candidate)
+            out.add(candidate.strip(".,;:"))
+    for match in re.finditer(r"\b(?:to|into)\s+([\w.\-/]+\.(?:py|js|jsx|ts|tsx|rs|go|java|c|h|cpp|rb))",
+                             text):
+        out.add(match.group(1))
+    return out
+
+
+# Files whose bytes are SOURCE.  A row that only reports on source is never handed one of these as
+# the place to write its report; the list is the languages this repository already serves.
+_SOURCE_SUFFIXES = (".py", ".js", ".jsx", ".ts", ".tsx", ".rs", ".go", ".java", ".c", ".h", ".cpp",
+                    ".hpp", ".rb", ".cs", ".kt", ".php", ".swift", ".mjs", ".cjs")
 
 
 def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Path, exclude=None, entry: Mapping[str, Any] | None = None,
@@ -1905,6 +2009,39 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         input_paths.add(str(pathlib.PurePosixPath(str(inputs["source_root"])) / str(inputs["module"])))
     src_root_abs = (root / str(inputs["source_root"])).resolve() if inputs.get("source_root") else None
     verb_dest = gc._path_named_after_output_verb(goal, root)
+    # F10b: a sentence that only ASKED about a file may not be handed that file as the
+    # place to put a result.  F10 already covered output==input; it could not see the case
+    # where the only other slot is a DIRECTORY ("source_root"), so nothing collided and the
+    # capability that reports on a file was told to write its report over it.  Measured
+    # 2026-10-29: "Count the functions in <T>/pkg/calc.py" and "Explain the bug in
+    # <T>/pkg/calc.py" both replaced the source with the tool's JSON (32 bytes -> 545), on
+    # requests that asked to READ it, and one of them reported PASS.
+    #
+    # The remedy is F13's, unchanged: a deterministic spool artifact replaces the path the
+    # sentence never nominated as an output.  The guard is scoped by the sentence's own
+    # verbs, so "Reformat <T>/pkg/calc.py in place" keeps writing calc.py.
+    # The first version of F10b asked the SENTENCE ("does it carry a change verb?"), and
+    # that left the destruction open on exactly the sentences that ask for a change: "fix
+    # <S>" carries a change verb and a report capability still wrote its JSON over <S>.
+    # Measured 2026-10-29 across fresh trees: fix <S>, "the test in <T> is failing...",
+    # "add a test for ...", "add retry ... to <S>", "generate tests from the docstrings in
+    # <S>" and "the CI is failing because <T> fails" each destroyed the file they named
+    # (five of six reported FAIL_CLOSED, one reported PASS).  The question is not what the
+    # sentence asks for; it is what the CAPABILITY says it does.  A capability that only
+    # reports on a file may never be handed that file as its output, whatever the sentence
+    # wanted; a capability whose own contract is to edit it may.
+    edits_source = capability_edits_source(entry)
+    # ... EXCEPT the path the sentence nominated as the place to put the result.  "save it
+    # to X" names X as the output whether or not an earlier run already created it
+    # (``_path_named_after_output_verb`` says so in its own docstring), so a second run of
+    # an identical archival request must not be re-pointed at a spool file.  Measured
+    # 2026-10-31: without this, the same tar.gz goal passed once and then failed twice with
+    # ``TAR_GZ_OUTPUT_REQUIRED`` -- a capability that works once and then stops working,
+    # which is the exact defect ``test_the_same_goal_runs_three_times_in_a_row`` names.
+    nominated_output = gc._path_named_after_output_verb(goal, root) if not edits_source else None
+    stated_existing = set() if edits_source else set(_named_existing_paths(goal, root))
+    if nominated_output:
+        stated_existing.discard(str(nominated_output))
     for key in [k for k in inputs if k.endswith("_path") and _is_output_key(k, entry)]:
         value = str(inputs[key])
         val_abs = (root / value).resolve()
@@ -1916,15 +2053,67 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
             and verb_dest != value
         )
         collides = value in input_paths or inside_source_root
+        # A REPORT IS NEVER WRITTEN ONTO SOURCE BYTES -- not even for a CHANGE request.
+        #
+        # F10b above protects a file the sentence only READS.  Measured 2026-10-30, the sentence that
+        # needs the protection most is one that asks for a change:
+        #
+        #   "Move the module <p>/pkg/calc.py to <p>/pkg/helpers/calc.py and update the imports."
+        #       -> refused before the mv ran (a module move that leaves importers behind is not a move)
+        #       -> the next lane bound python.source.audit.ast with
+        #          output_path = <p>/pkg/helpers/calc.py   <- the path the sentence reserved for SOURCE
+        #       -> the auditor created that directory and wrote a 633-byte JSON report there
+        #
+        # The caller's tree came back with a refusal AND a JSON file where the module was going to be.
+        # A source path named in a source-changing request is an OPERAND; it is never where a report
+        # goes.  The discriminator is the one already used here: does the CAPABILITY edit source?  A
+        # row that only reports on source may not be handed a source file as its output, whatever the
+        # sentence wanted, and the remedy is F13's unchanged.
+        if (not edits_source and value.endswith(_SOURCE_SUFFIXES)
+                and value in _stated_move_destinations(goal)
+                and spool is not None and cycle is not None):
+            inputs[key] = _spool_path(key, cycle, spool)
+            rebound.append(key)
+            continue
         if collides or (exists and len([p for p in _future_artifacts(goal, root) if p not in {str(x) for x in (exclude or [])}]) == 1):
             try:
                 inputs[key] = _bind_output_by_future(goal, key, root, exclude=exclude)
             except GoalCompilationFailure:
+                if (spool is None or cycle is None) and not edits_source \
+                        and not _future_artifacts(goal, root):
+                    # A REPORTER WHOSE OUTPUT COLLIDES STILL HAS SOMEWHERE TO GO.
+                    #
+                    # Callers that hold no cycle (the pinned ranker's first, world-free pass) used
+                    # to get a raise here, which marked the row UNBINDABLE and let the world-binding
+                    # fallback answer the same sentence -- and that fallback rebuilds the whole
+                    # contract, so it also moved `source_root` from the stated FILE to its parent.
+                    # Measured 2026-10-31 on the capability matrix: "Count the functions in
+                    # <pkg>/calc.py" reached python.source.definition_count.v1 with source_root=<pkg>,
+                    # scanned 8 files and reported 12 definitions for a question about 2 -- PASS on a
+                    # wrong answer.  F13's own remedy, unchanged, keeps the row bindable and the
+                    # scope exactly what the sentence stated.
+                    inputs[key] = _spool_path(key, 0, set())
+                    rebound.append(key)
+                    continue
                 if spool is None or cycle is None or _future_artifacts(goal, root):
                     raise
                 inputs[key] = _spool_path(key, cycle, spool)
             rebound.append(key)
+        elif value in stated_existing and spool is not None and cycle is not None:
+            # No output was nominated, so nothing the sentence named may be overwritten.
+            inputs[key] = _spool_path(key, cycle, spool)
+            rebound.append(key)
     return rebound
+
+
+def _sentence_asks_for_a_change(sentence: str) -> bool:
+    """Does the sentence ask for anything to be changed?  One vocabulary, one place.
+
+    Imported lazily: this module is imported by the route admission it is asking, so the
+    vocabulary is read at call time rather than at import time.
+    """
+    from canonical.runtime import live_brain_route_admission_v1 as door
+    return bool(door._CHANGE_VERB_RE.search(str(sentence or "")))
 
 
 # ----------------------------------------------------------------------------- routing
@@ -2259,11 +2448,14 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
     ``None`` when no bound capability serves the clause - never a weaker guess.
     """
     registry = routable_registry(admissible)
+    _seen_any = False
     for score, specificity, cid, evidence in ranked_candidates(clause, registry):
+        _rank_here, _seen_any = _seen_any, True
         entry = registry[cid]
         try:
             inputs = bind_all_inputs(clause, entry, root, produced_paths=produced_paths,
-                                     cycle=cycle, spool=spool)
+                                     cycle=cycle, spool=spool,
+                                     allow_declared_rescue=not _seen_any)
         except GoalCompilationFailure:
             continue
         if _claiming_earlier_artifact(inputs, produced_paths, entry):
@@ -2832,7 +3024,9 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
                     if _repair_imperative and not _wa_ro.is_source_transformer(cand[2]):
                         continue
                     try:
-                        cand_inputs = bind_all_inputs(text, cand_entry, root, cycle=0, spool=spool)
+                        cand_inputs = bind_all_inputs(
+                            text, cand_entry, root, cycle=0, spool=spool,
+                            allow_declared_rescue=(rank == 0 and tier_index == 0))
                     except GoalCompilationFailure as exc:
                         if _failure_is_unstated(exc):
                             if best_error is None:
@@ -3024,6 +3218,14 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     token = _NAMED_EXPECTATION.set(None)
     rtoken = _NAMED_ROUTE.set(None)
     failure = None
+    # PASS 1: every candidate on the sentence's OWN evidence.  PASS 2 (only if nothing binds):
+    # the same compile with the declared-input rescue enabled.  A rescue decides a sentence no
+    # contract can bind; it never outranks a row that binds.  Measured on the merged tree: with the
+    # rescue on from the start, ``...loop.strict_progress.ast.v1`` took a sentence whose contract
+    # selects ``...loop.test_guided.ast.v1`` (and could not report source_paths), and a score-4
+    # suite runner took "Run a performance review of <file>" from the perf gate.
+    was_enabled = _DECLARED_RESCUE["enabled"]
+    _DECLARED_RESCUE["enabled"] = False
     try:
         compiled = _compile_goal_body(goal, admissible, root)
     except GoalCompilationFailure as exc:
@@ -3039,6 +3241,23 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         route = _NAMED_ROUTE.get()
         _NAMED_EXPECTATION.reset(token)
         _NAMED_ROUTE.reset(rtoken)
+    if compiled is None and failure is not None and not was_enabled:
+        # PASS 2 -- the same sentence, the same gate chain, with the last-resort derivation on.
+        token = _NAMED_EXPECTATION.set(None)
+        rtoken = _NAMED_ROUTE.set(None)
+        _DECLARED_RESCUE["enabled"] = True
+        try:
+            compiled = _compile_goal_body(goal, admissible, root)
+            failure = None
+        except GoalCompilationFailure as exc:
+            failure = exc
+            compiled = None
+        finally:
+            expected = _NAMED_EXPECTATION.get()
+            route = _NAMED_ROUTE.get()
+            _NAMED_EXPECTATION.reset(token)
+            _NAMED_ROUTE.reset(rtoken)
+            _DECLARED_RESCUE["enabled"] = was_enabled
     if failure is not None:
         if expected is not None and expected not in str(failure.detail or ""):
             named_entry = (admissible or {}).get(expected) or {}

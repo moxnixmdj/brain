@@ -1,0 +1,46 @@
+{
+ "adapter_output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/answer.json",
+ "adapter_output_sha256": "cad54be19c7e5fa3ed9e53980189f2c8ebdaaef652cd3ceb515c89d0c14c49bb",
+ "adapter_path": "canonical/runtime/bound_capabilities/python_source_complexity.py",
+ "adapter_self_report": {
+  "output_verified": true,
+  "verified": null
+ },
+ "adapter_sha256": "b15689be367b6152b91070764a133f1ba405d89b21d78a8a12e503aa287a8114",
+ "capability_id": "python.source.complexity.v1",
+ "checks": [
+  {
+   "evidence": {
+    "constructed": {
+     "flat": {
+      "cyclomatic": 1,
+      "lineno": 4,
+      "nesting": 0
+     },
+     "nested": {
+      "cyclomatic": 5,
+      "lineno": 8,
+      "nesting": 2
+     }
+    },
+    "reported_functions": 2,
+    "reported_worst": "nested"
+   },
+   "name": "ranks functions by loop-nesting depth and by McCabe's cyclomatic number, both recomputed from the tree",
+   "ok": true
+  }
+ ],
+ "claim": "ranks functions by loop-nesting depth and by McCabe's cyclomatic number, both recomputed from the tree",
+ "elapsed_s": 0.004,
+ "independence": "the check recomputes the answer from the constructed world with the standard library and never imports the adapter",
+ "independent_verified": true,
+ "inputs": {
+  "output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/answer.json",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD/complex"
+ },
+ "mission_id": "ASTRA-VERIFY-COMPLEXITY-001",
+ "replay": "python3 canonical/runtime/verify_bound_capability_provenance_v1.py --check",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_V1",
+ "verified_at": "2026-10-31T12:17:15Z",
+ "world": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__WORLD"
+}

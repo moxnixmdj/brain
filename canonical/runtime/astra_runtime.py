@@ -737,6 +737,85 @@ _PIP_ENV = dict(os.environ)
 _PIP_ENV["PIP_BREAK_SYSTEM_PACKAGES"] = "1"
 
 
+def _version_family_satisfied(observed: str, family: str) -> bool | None:
+    """True/False for a comparable declaration, None when nothing can be compared.
+
+    Only the operators the registry actually writes are honoured; anything else is
+    "cannot compare", which never blocks and never counts as a satisfied family.
+    """
+    observed = str(observed or "").strip()
+    family = str(family or "").strip()
+    if not observed or not family:
+        return None
+    def _key(text: str) -> tuple:
+        parts = []
+        for chunk in text.split("."):
+            digits = "".join(ch for ch in chunk if ch.isdigit())
+            parts.append(int(digits) if digits else 0)
+        return tuple(parts)
+    for op in (">=", "<=", "==", ">", "<"):
+        if family.startswith(op):
+            bound = family[len(op):].strip()
+            if not bound:
+                return None
+            try:
+                left, right = _key(observed), _key(bound)
+            except Exception:  # noqa: BLE001 - unparsable version is not evidence
+                return None
+            width = max(len(left), len(right))
+            left += (0,) * (width - len(left))
+            right += (0,) * (width - len(right))
+            return {">=": left >= right, "<=": left <= right, "==": left == right,
+                    ">": left > right, "<": left < right}[op]
+    return None
+
+
+def _pypi_module_already_present(source):
+    """A dependency the machine already holds is a fact, not something to acquire.
+
+    This is ``_already_present_dependency``'s rule applied to the pypi declarations: the apt
+    path has always asked the machine before the package database, and the pypi path never did.
+    It demanded a pinned ``project`` + ``version`` + wheel closure and raised
+    ``BOUND_PYPI_SOURCE_INCOMPLETE`` otherwise -- so a capability whose substrate is already
+    importable was refused for lacking an acquisition record nobody needed.
+
+    Measured 2026-10-29: ``python.review.diff_coverage_gate.v1`` declares
+    ``{"module": "coverage", "type": "pypi", "version_family": ">=7.0"}``.  ``coverage`` 7.17.0
+    was importable and the gate bound every input of "measure the test coverage of <file>", and
+    the request still died with ``Blocker:BOUND_PYPI_SOURCE_INCOMPLETE`` -- there is no
+    ``project`` and no pinned wheel in that row.  Acquisition is NOT weakened: an absent module
+    returns None and the pinned path runs exactly as before, refusing honestly when the row
+    carries no pin.  A declared ``version_family`` that is comparable and unsatisfied is a
+    refusal, not a silent pass.
+    """
+    module = str(source.get("module") or "").strip()
+    if not module:
+        return None
+    # A prose substrate ("python stdlib ast/pytest + git") is not an import; those rows declare
+    # a different ``type`` and must not be probed here.
+    if " " in module or "/" in module or not module.replace("_", "").replace(".", "").isalnum():
+        return None
+    try:
+        spec = importlib.util.find_spec(module)
+    except Exception:  # noqa: BLE001 - an unimportable name is simply absent
+        return None
+    if spec is None:
+        return None
+    version = ""
+    for candidate in (module, module.replace("_", "-"), module.split(".")[0]):
+        try:
+            version = str(importlib.metadata.version(candidate))
+            break
+        except Exception:  # noqa: BLE001 - the distribution may have another name
+            continue
+    family = str(source.get("version_family") or "")
+    if _version_family_satisfied(version, family) is False:
+        raise Blocker("BOUND_PYPI_VERSION_FAMILY_UNSATISFIED:" + module + ":" + version)
+    return {"status": "ALREADY_PRESENT_FEATURE_PROBED", "acquired": False, "type": "pypi",
+            "module": module, "version": version, "version_family": family,
+            "origin": str(getattr(spec, "origin", "") or "")}
+
+
 def _ensure_pypi_dependency(source):
     name=str(source.get("project") or "").strip()
     version=str(source.get("version") or "").strip()
@@ -1116,6 +1195,24 @@ def _ensure_local_dependency(source):
         if len(set(modules))!=len(modules):
             raise Blocker("BOUND_PYTHON_STDLIB_MODULES_DUPLICATE")
         verified=[]
+        # "stdlib" IS THE INTERPRETER, NOT A MODULE.
+        #
+        # A ``python_stdlib`` declaration may name the standard library itself rather than a
+        # module inside it -- one row does exactly that
+        # (``python.review.diff_perf_gate.v1``: ``{"module": "stdlib", "type": "python_stdlib"}``).
+        # Probing it as an import name is a category error and blocked a working capability with
+        # BOUND_PYTHON_STDLIB_MODULE_MISSING:stdlib (measured 2026-10-29, after the perf gate
+        # bound every one of its inputs).  The stdlib is present exactly when this interpreter
+        # runs, which it demonstrably does; the evidence records that instead of a spec.
+        if [m.lower() for m in modules] == ["stdlib"]:
+            return {
+              "status":"LOCAL_VERIFIED",
+              "type":"python_stdlib",
+              "modules":["stdlib"],
+              "module":"stdlib",
+              "python_version":sys.version.split()[0],
+              "resolution":"THE_INTERPRETER_ITSELF",
+            }
         for module in modules:
             if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.]*",module):
                 raise Blocker("BOUND_PYTHON_STDLIB_MODULE_INVALID:"+module)
@@ -1363,7 +1460,9 @@ def _invoke_bound_capability(args):
     call_args.pop("capability_id",None)
     dependency=None
     if source.get("type")=="pypi":
-        dependency=_ensure_pypi_dependency(source)
+        # Feature probe first (see _pypi_module_already_present): an importable substrate is a
+        # fact about the machine, and acquisition is only for what is genuinely absent.
+        dependency=_pypi_module_already_present(source) or _ensure_pypi_dependency(source)
     elif source.get("type")=="npm":
         dependency=_ensure_npm_dependency(source)
         call_args["_package_root"]=dependency.get("package_root")

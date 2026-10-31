@@ -1,0 +1,13 @@
+{
+ "learned": {
+  ".js": {
+   "goal": "Explain what canonical/astra_runtime/tmp/v10/app.js exports.",
+   "learned_at": 1793318443.040615,
+   "module": "json",
+   "origin": "documentation",
+   "source": "import json\nprint(json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}]))\n",
+   "verified_sha256": "53d743629cc2fcfd2e3f3936957c89919e16ce502060c437e742db08253f7704"
+  }
+ },
+ "schema": "PROJECT_BRAIN_DOCUMENTATION_MINING_V1"
+}

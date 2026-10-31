@@ -310,6 +310,37 @@ def _with_declared_contract(entry: Mapping[str, Any], declared: Any) -> dict[str
                 json.dumps(template, sort_keys=True, default=str).encode("utf-8")).hexdigest()}
 
 
+_PENDING_PROMOTION_STATUSES = frozenset({"RECEIPT_BACKED_PENDING_PROMOTION"})
+
+
+def is_verified_entry(entry: Mapping[str, Any] | None) -> bool:
+    """May this registry row be ROUTED and EXECUTED, or is it only an inventory record?
+
+    The loader returns two populations, and until now the door could not tell them apart.
+    Measured 2026-10-29 on this repository: 293 of the 419 rows this view carries are
+    ``*.py.auto.v1`` inventory records with ``status: RECEIPT_BACKED_PENDING_PROMOTION`` and
+    **0** of them declare ``verification.verified: true`` -- and the door executed one anyway.
+    "Show the last 3 lines of the file <X>" bound
+    ``canonical/runtime/professional_quality_declared_system_subject_verify_v1.py.auto.v1``
+    -- a repository verification script that merely shares the word "declared" with the path
+    in the sentence -- ran it, and certified
+    ``PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`` with
+    ``semantic_acceptance_complete: true`` because that row's whole expectation is
+    ``returncode == 0``.  The answer was a script's exit status.
+
+    The rule is the registry's own declaration, not a list of ids: a row may be routed when
+    it is a VERIFIED_BOUND_CAPABILITY or when it carries ``verified: true``.  Everything else
+    is discoverable, which is what "pending promotion" means, and discovery is not an answer.
+    """
+    if not isinstance(entry, Mapping):
+        return False
+    verification = entry.get("verification")
+    if isinstance(verification, Mapping) and verification.get("verified") is True:
+        return True
+    status = str(entry.get("status") or "")
+    return status == "VERIFIED_BOUND_CAPABILITY" and status not in _PENDING_PROMOTION_STATUSES
+
+
 def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
         dict[str, Mapping[str, Any]], dict[str, Mapping[str, Any]], dict[str, Any]]:
     """The front-door policy in ONE place: THE verified registry, its platform-admissible
@@ -326,7 +357,103 @@ def compile_against_live_registry(goal: str, root: Any = None) -> tuple[
     """
     base = Path(root) if root is not None else ROOT
     registry = load_verified_registry(include_extended=True)
-    admissible = goal_compiler._platform_admissible_registry(dict(registry))
+    rows = dict(registry)
+    routable = {cid: entry for cid, entry in rows.items() if is_verified_entry(entry)}
+    # A PENDING-PROMOTION ROW IS ADDRESSABLE BY ITS NAME AND NOT BY ITS WORDS.
+    #
+    # Filtering every unverified row out would break a contract this repository states in
+    # canonical/tests/test_live_brain_route_admission_v1.py:587 -- "run <receipt-backed id>"
+    # must be admitted and executed, because a sentence that NAMES a capability is stating
+    # its identity, not asking the ranker to guess.  What must not happen is the guess: the
+    # same population ranked a verification script for "Show the last 3 lines of <file>"
+    # because the script's id shares the word "declared" with the path.
+    #
+    # So the sentence decides: a row whose id the sentence contains verbatim is routable;
+    # every other pending row is an inventory record.  One substring test, no id list.
+    named_here = {cid: entry for cid, entry in rows.items()
+                  if not is_verified_entry(entry) and cid and cid in str(goal or "")}
+    admissible = goal_compiler._platform_admissible_registry({**routable, **named_here})
+    # ASK WHAT CAN ANSWER BEFORE ASKING WHAT RANKS BEST.
+    #
+    # Measured 2026-10-29: the ranker returns a top-1 over 125 rows for every sentence, so 7 of
+    # 18 advanced refusals named a capability from an unrelated family, and two PASSED on one.  A
+    # sentence that states an effect (a security review, a coverage measurement, a caller map)
+    # has a smaller, declarable answer set: the rows whose own `provides`/`keywords` say they can
+    # supply it.  _STATED_EFFECTS already holds that data -- the answer gate uses it to REFUSE a
+    # capability that cannot -- so the same table, asked one step earlier, narrows the registry
+    # the compiler sees.  Rows the sentence names verbatim are always kept (identity is not a
+    # guess), and an empty answer set narrows nothing, because then nothing declares the effect
+    # and the gate's refusal is the honest outcome.
+    try:
+        from canonical.runtime import live_brain_route_admission_v1 as _door
+        declared = set(_door.declared_effect_ids(goal, admissible))
+    except Exception:  # noqa: BLE001 - a filter that cannot run must not change the answer
+        declared = set()
+    if declared:
+        kept = {cid: entry for cid, entry in admissible.items()
+                if cid in declared or (cid and cid in str(goal or ""))}
+        # THE BINDER MUST NOT BE ASKED FOR WHAT THE SENTENCE ALREADY PROVES.
+        #
+        # ``declared_input_derivation_v1`` exists because a sentence states a slot's value in a
+        # different SHAPE than the capability declares (a file where the row wants its directory, a
+        # list of changed paths where the binder reads one).  The typed-admission path has always
+        # compiled against ``binding_view``'s shadow; the PRIMARY compiler did not, so a correctly
+        # shortlisted row failed at COMPILE time:
+        #
+        #   "Which tests do I need to run after changing <f>?" -> kept = [change_impact, ...] ->
+        #   GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:...:source_root:0_existing_directories_named
+        #
+        # and the request fell through to a guessed chain.  Compiled against the shadow, the same
+        # row binds, and the proven values are merged back into the plan (they are the sentence's
+        # own evidence, each carrying its rule).
+        derived_by_row: dict[str, dict[str, Any]] = {}
+        kept_declared = kept  # the REAL entries: the shadow below is a compile-time view only
+        shadow = kept
+        try:
+            from canonical.runtime import declared_input_derivation_v1 as _derivation
+            if kept and _derivation.is_swe_request(goal):
+                shadow: dict[str, Any] = {}
+                for cid, entry in kept.items():
+                    if not str(cid).startswith(_derivation.SWE_CID_PREFIXES):
+                        shadow[cid] = entry
+                        continue
+                    try:
+                        view, values, _report = _derivation.binding_view(goal, entry, ROOT)
+                    except Exception:  # noqa: BLE001 - a derivation fault keeps the row as declared
+                        shadow[cid] = entry
+                        continue
+                    derived_by_row[str(cid)] = values
+                    shadow[cid] = view
+        except Exception:  # noqa: BLE001 - import fault keeps the old compile
+            derived_by_row = {}
+        if kept and len(kept) < len(admissible):
+            # A SHORTLIST MAY NARROW WHAT IS PREFERRED; IT MAY NEVER MAKE THE ANSWER WORSE.
+            #
+            # The declared rows are a preference about who should answer, not a closure that may
+            # turn a routable sentence into a compile gap.  Measured 2026-10-29: "Set up CI to run
+            # the tests in <pkg>" declares an effect no row produces, yet a row whose keywords
+            # merely overlap ("workflow") was kept, the narrowed registry could not bind the
+            # sentence's inputs, compilation raised, and an honest pre-execution refusal
+            # (FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED) became a guessed chain that raised
+            # (FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN).  So: narrow, and on failure
+            # compile exactly as before.  The refusal this sentence deserves then returns unchanged.
+            try:
+                compiled = goal_front_compiler_v1.compile_goal(goal, shadow, base)
+            except goal_compiler.GoalCompilationFailure:
+                compiled = None
+            if compiled is not None:
+                _row = str(compiled.get("selected_capability") or "")
+                _extra = derived_by_row.get(_row) or {}
+                if _extra:
+                    _inputs = dict(compiled.get("inputs") or {})
+                    for _key, _value in _extra.items():
+                        _bound = _inputs.get(_key)
+                        if _key not in _inputs or (isinstance(_value, list)
+                                                   and not isinstance(_bound, list)):
+                            _inputs[_key] = _value
+                    compiled["inputs"] = _inputs
+                    compiled["derived_inputs"] = sorted(_extra)
+                return registry, kept_declared, compiled
     return registry, admissible, goal_front_compiler_v1.compile_goal(goal, admissible, base)
 
 

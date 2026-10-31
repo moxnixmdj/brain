@@ -703,8 +703,37 @@ def _known_programs() -> frozenset[str]:
     """
     from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
 
-    return frozenset(_accept._READ_ONLY_COMMANDS) | frozenset(
-        _accept._MUTATING_POSTCONDITIONS)
+    # A program the acceptance layer judges BY ITS SUBCOMMAND is judged, and so it belongs in
+    # this set for exactly the reason everything else here does: the set is "programs whose
+    # result a verifier can check", not "programs that take no arguments".  The check itself
+    # stays where it already was (_READ_ONLY_SUBCOMMANDS, consulted by the inspector), so
+    # `git commit` is still unreachable -- it is the PROGRAM that becomes stateable, not every
+    # thing that program can do.
+    return (frozenset(_accept._READ_ONLY_COMMANDS)
+            | frozenset(_accept._MUTATING_POSTCONDITIONS)
+            | frozenset(getattr(_accept, "_READ_ONLY_SUBCOMMANDS", {})))
+
+
+def stated_command_refusal(text: str) -> str | None:
+    """The NAMED reason no command is stated for this sentence, when there is one.
+
+    A refusal that says only "the promised artifact is missing" is a refusal that hides its own cause:
+    measured 2026-10-30, "Move the module <p>/pkg/util.py to <p>/pkg/helpers/util.py and update the
+    imports." came back ``FAIL_CLOSED__PROMISED_ARTIFACT_MISSING`` over a tree that nothing had
+    touched, which reads exactly like a move that silently failed.  The cause is a decision made here,
+    so it is reported here -- one rule, one text, two callers.
+    """
+    paths = extract_paths(str(text or ""))
+    if len(paths) < 2 or not str(paths[0]).endswith(".py"):
+        return None
+    if not re.search(r"\b(?:move|rename)\b", str(text or ""), re.IGNORECASE):
+        return None
+    broken = importers_of_a_moved_module(str(paths[0]), str(paths[1]), _REPO_ROOT)
+    if not broken:
+        return None
+    return ("MODULE_MOVE_WOULD_ORPHAN_IMPORTERS:" + ",".join(broken[:3])
+            + " -- the move and the import rewrite are two effects and one file command"
+              " produces only the first, so nothing was executed")
 
 
 def extract_argv(text: str) -> list[str] | None:
@@ -871,6 +900,12 @@ def _tail_flags(n: int) -> list[str]:
     return ["-n", str(n)]
 
 
+def _ruff_format_flags(_n: int) -> list[str]:
+    # The subcommand is part of the command line, not a default the adapter may pick: the
+    # acceptance layer's postcondition is stated for `ruff format A` and for nothing else.
+    return ["format"]
+
+
 # The units `wc` counts, and the words that say something is being counted.
 # Defined once so the three `wc` rules cannot drift apart from each other.
 _WC_QTY = r"count|counts|counting|how many|number of|total|tally"
@@ -952,8 +987,22 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # function line_total from A to B and update every caller" bound
     # `mv A B`, which overwrites module B with module A -- the exact opposite of
     # moving one function between them, and unrecoverable.
+    #
+    # A NOUN THE SENTENCE LEAVES UNNAMED IS THE FILE ITSELF, NOT AN OBJECT INSIDE ONE.
+    #
+    # The vocabulary above names things that live INSIDE a file, and the reading that followed from
+    # it was "a sentence containing one of these words is not a file move".  What decides it is not
+    # the noun but whether the sentence gives the noun a NAME: "move the function line_total from A
+    # to B" names an object inside a file, while "move the module <pkg>/models.py to
+    # <pkg>/domain/models.py" names nothing after the noun -- the module IS the path, and the move
+    # is an ordinary file move the machine performs correctly.  (The table is matched with the
+    # paths masked out, so at this site the path is a gap, never a token: the discriminator has to be
+    # the identifier that follows a noun, or its absence.)  Measured on merging this rule: without
+    # the distinction two pinned tests in test_a_module_move_needs_its_importers_v1 went red.
     (r"\b(?:move|rename)\b"
-     r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)",
+     r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b"
+     r"(?=\s+(?!(?:to|from|into|in|and|or|with|while|then|that|which|so|as)\b)"
+     r"[A-Za-z_][A-Za-z0-9_]*\b))",
      "mv", _no_flags, 2),
     # "Erase the file X" measured to bind nothing.  The negative lookahead is
     # scoped to exactly one claim: removing LINES that are duplicated is a
@@ -961,9 +1010,31 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # "Remove the duplicate lines from the file X" matched `rm` first -- it is
     # third in this table and the first pattern to match wins -- so teaching
     # `uniq` the word "duplicate" alone would have changed nothing at all.
+    # THE OBJECT OF "REMOVE" DECIDES WHAT IS REMOVED.  Measured 2026-10-30 on a fresh
+    # tree:
+    #
+    #   "Remove the dead code from <pkg>/calc.py."
+    #       -> shell.command.run argv ["rm", "<pkg>/calc.py"]
+    #       -> calc.py DELETED, pass=True, PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE
+    #
+    # The sentence names the file as the place the dead code lives, not as the thing to
+    # delete; `rm` deleted the file and the acceptance layer certified it, because a
+    # deletion is exactly the postcondition `rm` declares.  The noun list above exists
+    # for this reason -- "remove the duplicate LINES from the file X" already refuses --
+    # but it is a list of things inside a file that can be read, and the nouns an
+    # engineer actually uses when asking for a code CHANGE were not in it: dead code,
+    # unused imports, docstrings, comments, whitespace, TODOs, statements, variables.
+    # A content noun between the verb and the path is the sentence saying the FILE
+    # stays; rm may only take a path the sentence makes the direct object of the verb.
+    # Measured after: the sentence refuses (no command is invented), and
+    # "Delete <pkg>/legacy.py" -- where the path IS the object -- still deletes.
     (r"\b(?:remove|delete|erase)\b"
      r"(?![^\n]{0,40}?\b(?:duplicates?|repeated|unique)\b(?!\.\w))"
      r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)"
+     r"(?![^\n]{0,60}?\b(?:dead|unused|unreferenced|unreachable|obsolete|legacy|"
+     r"docstrings?|comments?|whitespace|todos?|imports?|variables?|constants?|"
+     r"functions?|methods?|classes?|statements?|prints?|logging|code|logic|"
+     r"type\s*hints?|annotations?)\b)"
      r"(?![^\n]{0,40}?\bfrom the (?:file|files)\b)",
      "rm", _no_flags, 1),
     (r"\b(?:create|make)\b[^.\n]{0,40}?\b(?:directory|folder)\b", "mkdir",
@@ -1172,6 +1243,23 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     (r"\bcmp\b|\bbyte[ -]for[ -]byte\b|\bbyte[ -]by[ -]byte\b|\bidentical bytes\b|\bthe same bytes\b",
      "cmp", _no_flags, 2),
     (r"\bdiff\b|\bcompare\b|\bdiffer\w*\b", "diff", _no_flags, 2),
+    # A FORMATTER IS A PROGRAM THE VERIFIER CAN JUDGE.  `ruff` joined
+    # _MUTATING_POSTCONDITIONS with a check that re-derives the promise from the file on disk
+    # (`ruff format --check A`), which is what makes it admissible here at all: this table only
+    # ever routes to a program whose result the acceptance layer can check afterwards.
+    # The pattern names the NOUN the sentence is about -- python/source/file/module/code -- and
+    # never the bare word, because "convert to markdown format" mentions a format without asking
+    # for one to be applied.  Arity 1, so a sentence that names no file is refused rather than
+    # formatted at a guessed destination.
+    # The verb has to LEAD.  Paths are masked out of the text before this table runs, so
+    # "Format <path>." is the string "format ." -- there is no noun left to anchor on, and a
+    # pattern that looked for one refused the shortest, plainest way to ask.  A leading verb is
+    # also what keeps a CONVERSION out: "Convert the file to markdown format" mentions the word
+    # and asks for something else, so the negative lookahead refuses any sentence that names a
+    # destination format.
+    (r"^\s*(?:please\s+|now\s+)?(?:re)?format(?:s|ted|ting)?\b"
+     r"(?![^\n]*\b(?:to|into|as)\s+(?:markdown|md|pdf|docx|html|csv|json|xml|yaml|text|table)\b)",
+     "ruff", _ruff_format_flags, 1),
     # `stat` is deliberately ABSENT, and it was measured
     # rather than assumed:
     #
@@ -1403,6 +1491,87 @@ def _reserved_for_the_report(sentence: str) -> set[str]:
                      r"\b(?:to|into|at)\b[^\n]{0,8}$", text[:where], re.IGNORECASE):
             reserved.add(str(path))
     return reserved
+
+
+def _mv_inside(root: pathlib.Path, relative: str) -> pathlib.Path | None:
+    """Resolve a repository-relative path, refusing anything outside the repository."""
+    if not isinstance(relative, str) or not relative.strip():
+        return None
+    candidate = (root / relative).resolve()
+    try:
+        candidate.relative_to(root.resolve())
+    except ValueError:
+        return None
+    return candidate
+
+
+def _dotted_module(path: pathlib.Path, project: pathlib.Path) -> str:
+    rel = path.relative_to(project).as_posix()
+    if rel.endswith("/__init__.py"):
+        rel = rel[: -len("/__init__.py")]
+    elif rel.endswith(".py"):
+        rel = rel[:-3]
+    return rel.replace("/", ".")
+
+
+def importers_of_a_moved_module(source_token: str, destination_token: str,
+                                root: pathlib.Path) -> list[str]:
+    """Repository-relative .py files that still import the OLD dotted path of a moved module.
+
+    Empty when the command is not a single-file move of a Python module, when the old path carried no
+    module name worth checking, or when every importer was updated -- in which case the move really is
+    complete and the caller's postcondition stands.
+    """
+    src = _mv_inside(root, source_token)
+    dst = _mv_inside(root, destination_token)
+    if src is None or dst is None or not source_token.endswith(".py"):
+        return []
+    project = src.parent
+    for _ in range(8):
+        if any((project / marker).exists() for marker in
+               ("pyproject.toml", "setup.py", "setup.cfg", ".git")):
+            break
+        if project == root or project.parent == project:
+            project = root
+            break
+        project = project.parent
+    try:
+        src.relative_to(project)
+    except ValueError:
+        return []
+    old = _dotted_module(src, project)
+    leaf = old.rsplit(".", 1)[-1]
+    parent_pkg = old.rsplit(".", 1)[0] if "." in old else ""
+    if not leaf:
+        return []
+    # `from <old> import ...`, `import <old>`, and `from <parent> import <leaf>` all bind the module.
+    pattern = re.compile(
+        r"^\s*(?:from\s+" + re.escape(old) + r"\s+import\b"
+        r"|import\s+" + re.escape(old) + r"\b"
+        + (r"|from\s+" + re.escape(parent_pkg) + r"\s+import\s+[^\n]*\b" + re.escape(leaf) + r"\b"
+           if parent_pkg else r"") + r")", re.MULTILINE)
+    hits: list[str] = []
+    scanned = 0
+    skip = {"__pycache__", ".git", ".venv", "venv", "node_modules", ".mypy_cache", "site-packages"}
+    for candidate in project.rglob("*.py"):
+        if any(part in skip for part in candidate.parts):
+            continue
+        scanned += 1
+        if scanned > 5000:
+            break
+        try:
+            resolved = candidate.resolve()
+        except OSError:
+            continue
+        if resolved in (src.resolve(), dst.resolve()):
+            continue
+        try:
+            text = candidate.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if pattern.search(text):
+            hits.append(str(candidate.relative_to(root)))
+    return sorted(hits)
 
 
 def _states_a_destination_for_the_result(sentence: str, dest: Any) -> bool:
@@ -1824,6 +1993,86 @@ _LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
 _BARE_NOUN_PHRASE = re.compile(r"^\s*(?:the|a|an)\b")
 
 
+# A QUESTION ABOUT WHO CHANGED A LINE IS NOT A REQUEST FOR ITS TEXT.
+#
+# Measured 2026-10-29 on this repository, real tree: "Who last changed line 2 of
+# canonical/runtime/declared_input_derivation_v1.py?" bound the `tail` row below
+# ("last ... line"), which the table read as "the last line", and the door returned
+# PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED with
+# semantic_acceptance_complete: true for `tail -n 1 <the file>` -- a one-line answer,
+# no commit, no author, and the file itself declared as the output.  The sentence asks
+# a question about HISTORY; no program in the read-only table answers it.  Worse, the
+# next thing the table could reach was the file's own digest as "verification".
+#
+# The refusal is the honest end state, and it is the same one the answer gate already
+# takes: nothing bound declares provenance, so the sentence cannot be answered here.
+# A sentence that quotes a command line still wins -- that path is checked before this
+# one, and quoting `git blame -L2,2 -- f` is the sentence stating the command.
+_PROVENANCE_RE = re.compile(
+    r"\b(?:who|whom|which|what)\b[^.\n]{0,40}?\b(?:changed|wrote|authored|committed|"
+    r"introduced|added|removed|deleted|touched|blame[ds]?)\b"
+    r"|\bwhen\s+(?:was|did)\b[^.\n]{0,40}?\b(?:change|changed|written|added)\b"
+    r"|\b(?:last|most\s+recently)\s+changed\b|\bchanged\s+line\b"
+    r"|\bgit\s+(?:blame|log|show|diff|rev-parse|shortlog)\b"
+    r"|\bcommit\s+(?:that|which)\b|\bhistory\s+of\b", re.IGNORECASE)
+
+
+_REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+_GIT_READ = re.compile(
+    r"\bgit\b|\bcommit(?:s|ted|ting)?\b|\bcommits\b|\buncommitted\b|\bworking tree\b",
+    re.I)
+# Subcommands whose promise cannot be stated yet.  A revert executed as a commit is worse than a
+# revert refused, and `bisect` is a session with state, not a command.
+_GIT_UNSTATABLE = re.compile(
+    r"\b(?:revert|reset|stash|push|pull|merge|rebase|cherry-pick|bisect|blame|"
+    r"who changed|am|--amend)\b", re.I)
+
+
+def git_argv(sentence: str) -> list[str] | None:
+    """The git READ a sentence asks for, or None.
+
+    The acceptance layer already verifies git: ``raw_goal_trace_acceptance_v1._READ_ONLY_SUBCOMMANDS``
+    re-runs `status`, `diff`, `log`, `show`, `blame`, `rev-list`, `merge-base` and compares what
+    comes back.  None of it was reachable, because the prose table had no row that turns "what
+    changed since the last commit?" into an argv -- measured 2026-10-30, it compiled to nothing.
+
+    Scoped to THIS repository.  A sentence naming another repository is refused rather than
+    translated: the shell row binds a sentence's path as the command's output, so
+    `git -C <dir> status` executed correctly and then reported NO_OBSERVED_EFFECT, and
+    `git -C . log` answered about the enclosing repository -- a true statement about the wrong
+    world, which is worse than a refusal.  Cross-repository git waits for a binder that can say
+    "this path is an operand", not for a new capability.
+    """
+    text = str(sentence or "")
+    if not _GIT_READ.search(text) or _GIT_UNSTATABLE.search(text):
+        return None
+    # A trailing full stop is punctuation, not part of a name.  Measured: "Show me the recent
+    # commits in <dir>." yielded the PARENT directory as its only path -- the regex stopped at the
+    # dot -- so the target was never found and the command ran against the enclosing repository,
+    # which is a true answer about the wrong world.
+    named = [cand for cand in extract_paths(re.sub(r"\.(?=\s|$)", " ", text))
+             if (_REPO_ROOT / cand).is_dir()]
+    repos = [cand for cand in named if (_REPO_ROOT / cand / ".git").exists()]
+    others = [cand for cand in named if cand not in repos]
+    if len(repos) > 1 or (repos and others):
+        return None          # a relation between repositories is not a status question
+    if repo_less := [cand for cand in others if cand and cand.rstrip("/.") not in ("", ".")]:
+        # The sentence named a directory that is not a repository: `git status` there is a
+        # statement about the enclosing repository, which is not what was asked.
+        return None
+    target = repos[0] if repos else None
+    prefix = ["git", "-C", target] if target else ["git"]
+    lowered = text.lower()
+    if re.search(r"\b(?:what (?:changed|is different)|uncommitted|not yet committed|"
+                 r"working tree|git status)\b", lowered):
+        return prefix + ["status", "--porcelain"]
+    if re.search(r"\b(?:commit history|recent commits|last commit|git log)\b", lowered):
+        return prefix + ["log", "--oneline", "-n", "20"]
+    if re.search(r"\b(?:diff|what changed)\b", lowered):
+        return prefix + ["diff", "--stat"]
+    return None
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -1832,6 +2081,15 @@ def _prose_argv(sentence: str) -> list[str] | None:
     would be an invented destination, and an invented operand is executed.
     """
     from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+
+    _git = git_argv(sentence)
+    if _git is not None:
+        return _git
+    if _PROVENANCE_RE.search(str(sentence or "")):
+        # No program in the read-only table answers "who changed this line", and the
+        # rows below would answer a different question with the same words.  Refuse to
+        # translate rather than translate wrongly.
+        return None
 
     known = set(_accept._READ_ONLY_COMMANDS) | set(_accept._MUTATING_POSTCONDITIONS)
     mutating = set(_accept._MUTATING_POSTCONDITIONS)
@@ -2800,6 +3058,43 @@ def _prose_argv(sentence: str) -> list[str] | None:
                     # numbers fit.
                     return None
         paths = operands
+        # A FILE COMMAND CANNOT MOVE A DEFINITION, AND IT MUST NOT TRY.
+        #
+        # Measured 2026-10-30 on a fresh tree: "Move the function mul from <calc.py> into a new
+        # module <ops.py>." bound `mv <calc.py> <ops.py>`, which OVERWROTE ops.py with calc.py's
+        # bytes and DELETED calc.py -- and then the door, seeing that a file the sentence named was
+        # gone, refused with FAIL_CLOSED__NAMED_INPUT_REMOVED.  The report was honest about the
+        # damage and the damage was still done: the caller's source was destroyed by a request the
+        # machine declined to answer.  A sentence that names a DEFINITION (the function / method /
+        # class / symbol / parameter <name>) is asking for a code transformation; `mv`, `cp` and
+        # `rm` operate on FILES, so none of them can be the answer, and the refusal must come
+        # BEFORE the command runs.  This is the same discipline as the two plain writers above,
+        # applied to the three commands that can destroy a file outright.
+        if program in {"mv", "cp", "rm"} and re.search(
+                r"\b(?:function|method|class|symbol|parameter|argument|definition|fn)\b",
+                text) and not re.search(r"\bfiles?\b|\bdirector(?:y|ies)\b", text):
+            return None
+        # A MODULE MOVE THAT LEAVES ITS IMPORTERS BEHIND IS NOT A MOVE, AND IT MUST NOT RUN.
+        #
+        # Measured 2026-10-30 on the frontier probe -- the sentence every engineer types before a
+        # refactor:
+        #
+        #   "Move the module <p>/pkg/util.py to <p>/pkg/helpers/util.py and update the imports."
+        #       -> bound `mv <p>/pkg/util.py <p>/pkg/helpers/util.py`, ran it, and certified
+        #          PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED
+        #       -> `pkg/uses_util.py` still said `from pkg.util import total`
+        #       -> `import pkg.uses_util` now raised ModuleNotFoundError: No module named 'pkg.util'
+        #
+        # The mv itself is true and the tree is broken: the sentence names two effects (the move AND
+        # the imports) and this program can produce only the first.  The obligation is read from the
+        # disk -- no remaining .py file in the moved module's own project may import the old dotted
+        # path -- and the refusal comes BEFORE the command runs, exactly like the rule above: the
+        # same measurement proved that refusing AFTER the mv is worse than useless, because the
+        # rollback deletes the destination and leaves the source gone.  Nothing is executed here.
+        if (program == "mv" and len(paths) == 2
+                and str(paths[0]).endswith(".py")
+                and importers_of_a_moved_module(str(paths[0]), str(paths[1]), _REPO_ROOT)):
+            return None
         if program == "cut":
             if re.search(r"\bcharacters?\b", text):
                 # How MANY characters, not which one.  `_prose_count` reads the
@@ -3086,7 +3381,8 @@ def _noun_matched_path(slot: str, paths: Sequence[str], goal: str) -> str | None
 
 def bind(signature: Mapping[str, str], goal: str,
          inputs: Mapping[str, Any] | None = None,
-         produced: Mapping[str, Any] | None = None) -> dict[str, Any]:
+         produced: Mapping[str, Any] | None = None,
+         entry: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Fill each slot with something real, or leave it out and say so."""
     inputs = inputs or {}
     produced = produced or {}
@@ -3250,7 +3546,111 @@ def bind(signature: Mapping[str, str], goal: str,
             body = extract_content(goal)
             if body:
                 args[slot] = body
+    _repoint_an_output_that_is_the_file_the_step_only_reads(args, goal, entry)
+    _place_a_read_commands_answer(args, goal, signature)
     return args
+
+
+def _place_a_read_commands_answer(args: dict[str, Any], goal: str,
+                                  signature: Mapping[str, str]) -> None:
+    """An operand of the command is not the destination of its output.
+
+    Measured 2026-10-30, wiring git into the prose table:
+
+        "What changed in <dir> since the last commit?"
+          argv   ["git", "-C", "<dir>", "status", "--porcelain"]     (correct)
+          bound  output_path = "<dir>"                               (the OPERAND)
+          answer FAIL_CLOSED__NO_OBSERVED_EFFECT
+
+    and with no path in the sentence at all ("Show me the recent commits.") the slot was never
+    bound and the chain refused OPEN__COMPOSER_SLOT_UNBOUND before running a command that is
+    entirely readable.
+
+    The rule is the one the acceptance layer already applies to `rm` (``_CONSUMES_AN_OPERAND``),
+    read from the same table instead of written a second time: for a command whose answer is its
+    STDOUT -- every program the read-only table can re-run, and every git subcommand it judges --
+    a path inside the argv is an operand, and a path the sentence never named is not a
+    destination at all.  Either way the answer lands in a deterministic scratch artifact, which is
+    what the caller reads.  A mutating command is untouched: for `rm A` the output IS A, and that
+    is the promise its postcondition checks.
+    """
+    if not any(str(typ or "").upper() == "ARGV" for typ in signature.values()):
+        return
+    argv = extract_argv(goal)
+    if not argv:
+        return
+    program = str(argv[0]).rsplit("/", 1)[-1]
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        # SCOPED TO THE PROGRAMS THAT DECLARE A SUBCOMMAND CONTRACT.  `cat`, `grep`, `sed` bind
+        # their operand as the declared output by long-standing design -- the reading modules pin
+        # that (`a1.txt` stays the bound output of a search in `a1.txt`), and the inspector re-runs
+        # them.  A program in `_READ_ONLY_SUBCOMMANDS` has no such contract: `git status` writes
+        # nothing, and its path is either a target (`-C <dir>`) or no path at all.
+        read_only = any(tok in getattr(_accept, "_READ_ONLY_SUBCOMMANDS", {}).get(program, ())
+                        for tok in argv[1:] if not tok.startswith("-"))
+    except Exception:  # noqa: BLE001 - no table, no rewrite
+        return
+    if not read_only:
+        return
+    # A read-only PROGRAM can still be a write: `sed -i` rewrites its operand, and `sort -o FILE`
+    # writes FILE.  Those commands already have their own declaration path
+    # (``_declare_a_written_output``), and moving their output to scratch would take the write away
+    # from the file the sentence named.  Measured 2026-10-30 across the command-reading modules:
+    # eight write tests went red the moment this rule ignored the flags.
+    try:
+        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+        _writes = tuple(_accept._SIDE_EFFECTING_FLAGS) + tuple(
+            _accept._SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ()))
+    except Exception:  # noqa: BLE001 - no table, no filtering
+        _writes = ()
+    if any(str(tok) in _writes for tok in argv[1:]):
+        return
+    if str(args.get("write_stdout_to_output") or "").strip().lower() == "true":
+        return    # the sentence already named where its result goes
+    current = args.get("output_path")
+    operands = [str(tok) for tok in argv[1:] if not str(tok).startswith("-")]
+    inside_argv = current is not None and any(str(current) == tok or str(current) in tok
+                                              for tok in operands)
+    if current is None or inside_argv:
+        args["output_path"] = "canonical/astra_runtime/tmp/spool_0_%s_stdout.json" % program
+        # The answer is the command's stdout, and the identical mechanism that puts a read
+        # command's stdout into a destination the sentence named puts it here: the sentence did
+        # not name one, so the destination is the machine's own scratch.
+        args["write_stdout_to_output"] = "true"
+
+
+def _repoint_an_output_that_is_the_file_the_step_only_reads(
+        args: dict[str, Any], goal: str,
+        entry: Mapping[str, Any] | None = None) -> list[str]:
+    """The composer's call site of F10b, the front compiler's own output rule.
+
+    A sentence that asks a QUESTION about a file must not be handed that file as the place
+    to put a result.  Measured 2026-10-29::
+
+        "Explain the bug in <T>/pkg/calc.py"
+
+    composed ``[code.multilanguage.parse.tree_sitter.v1, python.patch.search...]`` and bound
+    ``output_path = <T>/pkg/calc.py`` -- the only other slot was the DIRECTORY
+    ``source_root``, so F10's output-equals-input test saw no collision -- and the parse
+    adapter wrote its JSON report over the source: 32 bytes -> 545, gone, on a request that
+    asked to read it.
+
+    The rule is not restated here.  ``goal_front_compiler_v1.repair_output_collisions`` is
+    the one implementation of "an output is never a file the sentence only named as an
+    input", and it now covers this case (F10b) with F13's spool remedy.  A guard that fixes
+    one path and leaves its sibling open is not closed, so the composer calls it rather than
+    carrying a second copy.  A sentence that asks for a change is untouched: it gets back
+    the exact binding it had.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as _front
+    taken = {str(v) for v in args.values() if isinstance(v, str) and _pathish(v)}
+    try:
+        rebound = _front.repair_output_collisions(goal, args, _repo_root(), entry=entry,
+                                                  cycle=0, spool=taken)
+    except Exception:  # noqa: BLE001 - the guard must never break binding
+        rebound = []
+    return rebound
 
 
 def _declare_a_written_output(args: dict[str, Any], argv: Sequence[str],
@@ -3418,6 +3818,51 @@ def _declare_an_exit_status_answer(args: dict[str, Any], argv: Sequence[str]) ->
 # values a later step may bind to.
 _INVOKER_STAMPED_KEYS = ("capability_id", "dependency")
 
+# A step that RAN is not a step that ANSWERED.
+#
+# Measured 2026-10-30 on a fresh tree, over the door:
+#
+#   "Find the root cause of the failure in <pkg>/test_calc.py."
+#     route   terminal.tournament.failure.witness -> terminal.kstar.root.assess.stdlib
+#     step    {"status": "UNRESOLVED", "outcome": "UNRESOLVED",
+#              "missing_premises": [...3 items...], "abc_closed": false}
+#     answer  pass=True, PASS__COMPOSER_CHAIN_EXECUTED, semantic_acceptance_complete=False
+#
+# The step is a theorem assessment from the decision family; it came back UNRESOLVED and named
+# three missing premises.  No diagnosis of the failing test existed anywhere in the answer, yet
+# the chain certified success because every step returned a dict.  "The chain executed" is a
+# statement about this machine, not about the request, so it cannot be the pass.
+#
+# Scoped to what the step itself said: a negative outcome token, a failed verification, or named
+# missing premises.  A step that reports OK, PASS, a created artifact, or nothing at all is
+# untouched.
+_NO_ANSWER_OUTCOME_TOKENS = frozenset({"UNRESOLVED", "UNKNOWN", "INCONCLUSIVE", "UNDETERMINED",
+                                       "REJECTED", "REFUTED", "FAILED", "FAIL"})
+
+
+def _step_says_no_answer(observed: Any) -> str | None:
+    """The reason a step's own record says it produced no answer, or None.
+
+    Reads only what the capability put in its result: ``outcome``/``status``/``verdict`` tokens,
+    an explicit ``output_verified: false``, or a non-empty ``missing_premises`` list.
+    """
+    if not isinstance(observed, Mapping):
+        return None
+    for key in ("outcome", "status", "verdict"):
+        token = str(observed.get(key) or "").strip().upper()
+        if token in _NO_ANSWER_OUTCOME_TOKENS:
+            return "%s=%s" % (key, token)
+    # A step that ran a DELETION reports output_verified=false because the output is absent --
+    # and it also reports output_absent_after_run=true, which is the promise being kept.  Measured
+    # 2026-10-30: "Delete <dir>/legacy.txt." executed `rm`, the file was gone, and this rule
+    # refused the deletion as UNRESOLVED.  Absence the step itself declares is an answer.
+    if observed.get("output_verified") is False and not observed.get("output_absent_after_run"):
+        return "output_verified=false"
+    missing = observed.get("missing_premises")
+    if isinstance(missing, (list, tuple, set, frozenset)) and missing:
+        return "missing_premises=%d" % len(missing)
+    return None
+
 
 _ROLLBACK_PATH_KEYS = ("output_path", "archive_path", "target_path", "path", "dest", "destination",
                        "output", "out", "into", "to", "source_path", "input_path")
@@ -3518,7 +3963,7 @@ def execute_chain(chain: Sequence[str], goal: str,
                                     "promise": "existing_content_kept"},
                     "steps": steps}
         sig = TS.signature(entry)
-        args = bind(sig, goal, inputs, produced)
+        args = bind(sig, goal, inputs, produced, entry=entry)
         # Snapshot what already exists, so this step can only be credited with
         # files it actually created.
         existed_before = {v for v in (_pathish(a) for a in args.values()) if v and _exists_in_repo(v)}
@@ -3532,7 +3977,11 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "steps": steps}
         try:
             result = ra.run_adapter_locally(entry, {"args": dict(args)})
-        except Exception as exc:  # noqa: BLE001 - a step failure is data
+        # ``SystemExit`` too: an adapter that refuses with ``raise SystemExit(1)`` has still
+        # refused, and the record this branch writes ("side_effect_landed": UNKNOWN) is exactly
+        # the truth about it.  Without this the step killed the caller instead (measured
+        # 2026-10-29 on python_crossfile_edit_choreograph.py).
+        except (Exception, SystemExit) as exc:  # noqa: BLE001 - a step failure is data
             # The adapter dispatches the command and only THEN checks its own
             # expectations, so it can raise after the work has already landed.
             # For `rm A` the file is deleted and only then does the output check
@@ -3604,6 +4053,21 @@ def execute_chain(chain: Sequence[str], goal: str,
                 "produced": dict(produced), "created_paths": list(created_paths),
                 "status": "FAIL__COMPOSER_CHAIN_RAN_NO_STEP",
                 "failed_step": {"index": 0, "capability_id": None},
+                "authority": "TYPE_LEVEL_COMPOSITION_EXECUTED_LOCALLY"}
+    # The last step's own verdict is the chain's verdict.  Every step ran; if the one that was
+    # supposed to answer said it could not, the chain produced no answer and must say so instead
+    # of certifying the execution.  Refusing here cannot hide a real answer: a step that answered
+    # carries no negative token, and the failing step is recorded either way.
+    verdict_reason = _step_says_no_answer(steps[-1].get("result"))
+    if verdict_reason is not None:
+        return {"schema": SCHEMA, "pass": False, "goal": goal,
+                "steps": steps, "produced": dict(produced),
+                "created_paths": list(created_paths),
+                "status": "FAIL_CLOSED__COMPOSED_STEP_UNRESOLVED",
+                "failure_class": "COMPOSED_STEP_UNRESOLVED",
+                "failed_step": {"index": steps[-1].get("index"),
+                                "capability_id": steps[-1].get("capability_id"),
+                                "reason": verdict_reason},
                 "authority": "TYPE_LEVEL_COMPOSITION_EXECUTED_LOCALLY"}
     return {"schema": SCHEMA, "pass": True, "goal": goal, "steps": steps,
             "produced": dict(produced), "created_paths": list(created_paths),

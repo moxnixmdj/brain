@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T18:37:08.504946+00:00",
+  "mission_id": "ASTRA-AUTO-VERIFY-PYPI-MSGPACK-9F0974D98983",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_PYPI_MSGPACK_9F0974D98983.json",
+  "mission_sha256": "f2e381174d91f2120b111626a2a7803d2648eabf84ff7cc2bfbc658c5fbce0c3",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "ba4c61f10ad9fc747c2b152edc04dec356cdf2901ad95d59bb2761701274ee86",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

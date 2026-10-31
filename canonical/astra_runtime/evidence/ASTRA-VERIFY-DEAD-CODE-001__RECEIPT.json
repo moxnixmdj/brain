@@ -1,0 +1,39 @@
+{
+ "adapter_output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__WORLD/answer.json",
+ "adapter_output_sha256": "172bc4fb9c398e7138605a13de68e9d1081a98d5b71f60c9d2048811480e4348",
+ "adapter_path": "canonical/runtime/bound_capabilities/python_source_dead_code.py",
+ "adapter_self_report": {
+  "output_verified": true,
+  "verified": null
+ },
+ "adapter_sha256": "181dd7c72ae6a7c1d11b077b8bf0e6ea6f40de6401c2d6b58e46346a14e645a8",
+ "capability_id": "python.source.dead_code.v1",
+ "checks": [
+  {
+   "evidence": {
+    "considered_count": 3,
+    "constructed_dead": "unused_helper",
+    "constructed_live": "used_helper",
+    "reported_dead": [
+     "report",
+     "unused_helper"
+    ]
+   },
+   "name": "separates a helper with no caller from one with a caller",
+   "ok": true
+  }
+ ],
+ "claim": "separates a helper with no caller from one with a caller",
+ "elapsed_s": 0.009,
+ "independence": "the check recomputes the answer from the constructed world with the standard library and never imports the adapter",
+ "independent_verified": true,
+ "inputs": {
+  "output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__WORLD/answer.json",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__WORLD/project"
+ },
+ "mission_id": "ASTRA-VERIFY-DEAD-CODE-001",
+ "replay": "python3 canonical/runtime/verify_bound_capability_provenance_v1.py --check",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_V1",
+ "verified_at": "2026-10-31T09:09:14Z",
+ "world": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__WORLD"
+}
