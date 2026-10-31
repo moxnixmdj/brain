@@ -4898,72 +4898,6 @@
         "test_sha256": "94bb177c68eb1a48402b43e50108d4ebdada336763417ea5ff38b41e9bc19cbb"
       }
     },
-    "python.feature.implement_function_spec.v1": {
-      "action_template": {
-        "args": {
-          "body_expr": "${input.body_expr}",
-          "capability_id": "python.feature.implement_function_spec.v1",
-          "export_in_init": "${input.export_in_init}",
-          "function_name": "${input.function_name}",
-          "init_path": "${input.init_path}",
-          "output_path": "${input.output_path}",
-          "signature": "${input.signature}",
-          "source_root": "${input.source_root}",
-          "target_module": "${input.target_module}",
-          "test_path": "${input.test_path}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_feature_implement_function_spec",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "feature",
-        "implement_function_spec",
-        "function specification",
-        "add function",
-        "implement function",
-        "export",
-        "unit test"
-      ],
-      "limitations": [
-        "Synthesizes a deterministic Python function from an explicit signature and return expression specification, resolves receiver attributes against domain classes, updates __init__.py exports, generates unit tests, and verifies via unittest discovery with atomic rollback."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.feature.implement.function_spec",
-        "python.source.write.function_spec"
-      ],
-      "requires": [],
-      "result_fields": [
-        "adapter",
-        "verified",
-        "gate",
-        "function_name",
-        "target_module",
-        "files_edited",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_feature_implement_function_spec.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY"
-    },
     "python.issue.natural_language.parse_edit_intent.v1": {
       "action_template": {
         "args": {
@@ -5465,64 +5399,79 @@
       "action_template": {
         "args": {
           "capability_id": "python.refactor.add_parameter.v1",
-          "default_expr": "${input.default_expr}",
           "module": "${input.module}",
+          "new_param": "${input.new_param}",
           "output_path": "${input.output_path}",
-          "param_name": "${input.param_name}",
-          "qualname": "${input.qualname}",
-          "source_root": "${input.source_root}"
+          "run_tests": "${input.run_tests}",
+          "source_root": "${input.source_root}",
+          "symbol": "${input.symbol}"
         },
         "expect": {
-          "field": "output_verified",
+          "field": "gate",
           "type": "field_equals",
-          "value": true
+          "value": "PASS"
         },
         "type": "invoke_capability"
       },
-      "adapter_module": "python_source_add_parameter",
+      "adapter_module": "python_refactor_add_parameter",
       "cost": 1,
       "entrypoint": "run",
       "incremental_spend_usd": 0,
       "keywords": [
-        "python",
-        "refactor",
-        "add_parameter",
-        "signature evolution",
-        "add parameter",
+        "optional parameter",
         "default value",
-        "parameterize function",
-        "ast"
+        "signature extend",
+        "argument",
+        "caller",
+        "behaviour unchanged"
       ],
       "limitations": [
-        "Adds a defaulted parameter to a Python function or Class.method signature, lifts matching receiver attribute accesses safely when default is None, verifies caller arity compatibility and AST soundness, and rolls back atomically on test failure."
+        "adds ONE optional parameter whose default is the value the body already read; it does not choose a numeric default from arithmetic the sentence never stated.",
+        "nested scopes are not rewritten: a nested function/lambda that rebinds or reads the same attribute name is left byte-identical.",
+        "call sites are deliberately untouched because an optional parameter keeps arity; a request that makes an existing argument REQUIRED is a different capability."
       ],
       "platforms": [
         "linux",
-        "windows",
-        "darwin"
+        "darwin",
+        "win32"
       ],
       "provides": [
-        "python.refactor.add_parameter",
-        "python.source.write.add_parameter"
+        "python.refactor.signature_extend"
       ],
       "requires": [],
       "result_fields": [
         "adapter",
-        "verified",
-        "gate",
-        "qualname",
-        "param_name",
+        "symbol",
+        "new_param",
+        "default",
+        "edit_count",
+        "reads_shadowed",
         "files_edited",
+        "call_sites_need_no_edit",
+        "gate",
+        "complete",
         "output_path",
         "output_sha256",
-        "output_verified"
+        "output_verified",
+        "verified"
       ],
       "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
+        "module": "python stdlib ast/tokenize",
+        "type": "runtime",
+        "version_family": ">=3.8"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-ADD-PARAM-001",
+        "observed_effect": {
+          "behaviour_preserved": "the unmodified caller path computes the same value after the edit (measured: default 200, explicit 300 on the census fixture)",
+          "override": "passing the parameter changes exactly the value the body used, and nothing else",
+          "rollback": "a red suite restores the original bytes in full (TESTS_RED_AFTER_EDIT)",
+          "span_integrity": "every splice is checked against the bytes it replaces"
+        },
+        "pin_green": "5/5 canonical.tests.test_an_added_parameter_defaults_to_what_the_body_read_v1"
+      }
     },
     "python.refactor.extract_function.v1": {
       "action_template": {
@@ -5743,70 +5692,6 @@
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_function.py",
         "type": "brain_native_deterministic_composition"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY"
-    },
-    "python.refactor.move_symbol.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.refactor.move_symbol.v1",
-          "output_path": "${input.output_path}",
-          "source_module": "${input.source_module}",
-          "source_root": "${input.source_root}",
-          "symbol": "${input.symbol}",
-          "target_module": "${input.target_module}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_source_move_symbol",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "refactor",
-        "move_symbol",
-        "relocate symbol",
-        "move function",
-        "move class",
-        "update callers",
-        "import closure",
-        "ast"
-      ],
-      "limitations": [
-        "Moves top-level Python function or class definitions across modules, carries exclusive private helper transitive closure, rewrites project-wide imports and __all__, checks AST soundness, and rolls back atomically on test failure."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.refactor.move_symbol",
-        "python.source.write.move_symbol"
-      ],
-      "requires": [],
-      "result_fields": [
-        "adapter",
-        "verified",
-        "gate",
-        "symbol",
-        "source_module",
-        "target_module",
-        "files_edited",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
     },
@@ -7008,11 +6893,7 @@
         "land the fix",
         "write the fix",
         "apply in place",
-        "make the test pass",
-        "fix the failing test",
-        "failing test",
-        "python source root",
-        "fix"
+        "make the test pass"
       ],
       "limitations": [
         "Composes the existing bounded provenance-guided Python repair with a gated write to the real source tree; it does not add any new patch search.",
@@ -7030,7 +6911,10 @@
         "python.software.repair.apply.verified",
         "python.source.write.verified_repair_applied"
       ],
-      "requires": [],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
       "result_fields": [
         "status",
         "pass",
@@ -7918,6 +7802,88 @@
         "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
         "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
         "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165"
+      }
+    },
+    "python.source.add_function.v1": {
+      "action_template": {
+        "args": {
+          "body": "${input.body}",
+          "capability_id": "python.source.add_function.v1",
+          "export_module": "${input.export_module}",
+          "module": "${input.module}",
+          "output_path": "${input.output_path}",
+          "params": "${input.params}",
+          "source_root": "${input.source_root}",
+          "symbol": "${input.symbol}",
+          "test_paths": "${input.test_paths}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_add_function",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "create a function",
+        "new function",
+        "export it from",
+        "signature",
+        "specification",
+        "scaffold",
+        "function definition"
+      ],
+      "limitations": [
+        "the body is the ONE expression the sentence states, read verbatim; it is not a synthesiser for behaviour the sentence leaves unspecified",
+        "free names must be attributes of exactly one class in the stated module; anything else is refused rather than written as a name that would raise at call time",
+        "the generated test builds the instance without running __init__ so it never invents values for constructor arguments the sentence did not mention"
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "win32"
+      ],
+      "provides": [
+        "python.source.write.function_definition"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "module",
+        "symbol",
+        "params",
+        "body",
+        "export_module",
+        "test_path",
+        "free_names_resolved",
+        "suite_rc",
+        "gate",
+        "complete",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "module": "python stdlib ast",
+        "type": "runtime",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-ADD-FUNCTION-001",
+        "observed_effect": {
+          "behaviour": "the oracle call returns the stated expression's value under the probe's own attribute values (measured: 12)",
+          "export_wired": "the exported name imports from the stated package",
+          "rollback": "a red suite restores every byte of every file the adapter touched",
+          "test_green": "unittest discover over the stated test directory passes after the writes"
+        },
+        "pin_green": "6/6 canonical.tests.test_a_stated_function_is_written_wired_and_tested_v1"
       }
     },
     "python.source.audit.ast": {
@@ -9950,9 +9916,7 @@
         "condition",
         "concurrency",
         "thread",
-        "synchronization",
-        "regression test",
-        "crossfile_choreograph"
+        "synchronization"
       ],
       "limitations": [
         "Cross-file atomic choreography inside repair loop: patch\u2192choreograph via 86k/221k symbol graph\u2192change-impact 2070/2096 slice\u2192dual-oracle verify\u2192gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
@@ -9968,8 +9932,7 @@
         "software.concurrency.race.condition.fix",
         "security.sql.injection.remove",
         "performance.quadratic.linearithmic.optimize",
-        "dependency.deprecated.inspect.migrate",
-        "python.tests.regression.synthesized"
+        "dependency.deprecated.inspect.migrate"
       ],
       "requires": [
         "python.fault.localization.symbol_ranked",
@@ -11715,6 +11678,199 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
+    },
+    "python.refactor.move_symbol.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.move_symbol.v1",
+          "output_path": "${input.output_path}",
+          "source_module": "${input.source_module}",
+          "source_root": "${input.source_root}",
+          "symbol": "${input.symbol}",
+          "target_module": "${input.target_module}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_move_symbol",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "move_symbol",
+        "relocate symbol",
+        "move function",
+        "move class",
+        "update callers",
+        "import closure",
+        "ast"
+      ],
+      "limitations": [
+        "Moves top-level Python function or class definitions across modules, carries exclusive private helper transitive closure, rewrites project-wide imports and __all__, checks AST soundness, and rolls back atomically on test failure."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.move_symbol",
+        "python.source.write.move_symbol"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "symbol",
+        "source_module",
+        "target_module",
+        "files_edited",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.feature.implement_function_spec.v1": {
+      "action_template": {
+        "args": {
+          "body_expr": "${input.body_expr}",
+          "capability_id": "python.feature.implement_function_spec.v1",
+          "export_in_init": "${input.export_in_init}",
+          "function_name": "${input.function_name}",
+          "init_path": "${input.init_path}",
+          "output_path": "${input.output_path}",
+          "signature": "${input.signature}",
+          "source_root": "${input.source_root}",
+          "target_module": "${input.target_module}",
+          "test_path": "${input.test_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_feature_implement_function_spec",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "feature",
+        "implement_function_spec",
+        "function specification",
+        "add function",
+        "implement function",
+        "export",
+        "unit test"
+      ],
+      "limitations": [
+        "Synthesizes a deterministic Python function from an explicit signature and return expression specification, resolves receiver attributes against domain classes, updates __init__.py exports, generates unit tests, and verifies via unittest discovery with atomic rollback."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.feature.implement.function_spec",
+        "python.source.write.function_spec"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "function_name",
+        "target_module",
+        "files_edited",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_feature_implement_function_spec.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.source.add_parameter.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.add_parameter.v1",
+          "default_expr": "${input.default_expr}",
+          "module": "${input.module}",
+          "output_path": "${input.output_path}",
+          "param_name": "${input.param_name}",
+          "qualname": "${input.qualname}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_add_parameter",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "add_parameter",
+        "signature evolution",
+        "add parameter",
+        "default value",
+        "parameterize function",
+        "ast"
+      ],
+      "limitations": [
+        "Adds a defaulted parameter to a Python function or Class.method signature, lifts matching receiver attribute accesses safely when default is None, verifies caller arity compatibility and AST soundness, and rolls back atomically on test failure."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.add_parameter",
+        "python.source.write.add_parameter"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "qualname",
+        "param_name",
+        "files_edited",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
