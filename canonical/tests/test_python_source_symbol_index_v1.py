@@ -210,10 +210,17 @@ class SymbolIndexRegistryContractTests(unittest.TestCase):
 
     def test_the_entry_is_a_verified_bound_capability(self):
         self.assertEqual(self.entry["status"], "VERIFIED_BOUND_CAPABILITY")
-        self.assertEqual(self.entry["provides"], ["python.source.symbol_index", "python.source.symbols.index.ast"])
+        # PR6486 intentionally distinguishes declared effects from row identities.
+        # Keep an exact contract: one canonical effect, no duplicate or row-id alias.
+        self.assertEqual(self.entry["provides"], ["python.source.symbol_index"])
         self.assertEqual(self.entry["requires"], [])
         self.assertEqual(self.entry["adapter_module"], "python_source_symbol_index")
         self.assertEqual(self.entry["incremental_spend_usd"], 0)
+
+    def test_provided_effects_are_unique_and_not_the_capability_identity(self):
+        effects = self.entry["provides"]
+        self.assertEqual(len(effects), len(set(effects)))
+        self.assertNotIn("python.source.symbols.index.ast", effects)
 
     def test_every_declared_result_field_is_actually_returned(self):
         work = tempfile.mkdtemp(prefix="symindex-contract-")

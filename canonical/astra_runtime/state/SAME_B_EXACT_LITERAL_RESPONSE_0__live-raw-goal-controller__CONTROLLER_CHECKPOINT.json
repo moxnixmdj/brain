@@ -1,0 +1,33 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "summary": "ffddz 8907"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "ffddz 8907"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "ffddz 8907",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:04:13.868301+00:00",
+  "mission_id": "SAME_B_EXACT_LITERAL_RESPONSE_0",
+  "next_action_index": 1,
+  "plan_sha256": "441cf42636484227f79adb7226b8aad97d0fc475ce17d1cc0a0bbc63895eeef8",
+  "resume_count": 1,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:30:51.684736+00:00"
+}

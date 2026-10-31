@@ -1,25 +1,15 @@
 #!/usr/bin/env python3
-"""python.source.complexity.v1 — which function carries the deepest loop nest.
+"""Structural cost estimates, interprocedural loop depth and cyclomatic metrics.
 
-"Which function in <b>/app has quadratic time complexity? Write its name to
-<b>/answer.json" is answered by the standard library: a loop inside a loop is
-quadratic in the size of the iterated collection, a loop inside three loops is
-cubic, and nesting depth over the AST is the measurement that says so without
-running anything.  Measured on the census fixture: 0.5 ms, exact.
+Loop depth is propagated through statically named calls under a unit-cost model
+in which each loop has O(n) iterations. Self-recursion is classified by call-site
+count: multiple sites produce a branching-recursion heuristic, not a solved
+recurrence. Constant bounds, argument shrinkage, mutual recursion, dynamic
+Python dispatch and duplicate function names can invalidate these estimates.
 
-Why nesting rather than ``radon``: rank is a closed-form sum over branches and
-loops, which is a fine reviewer heuristic and a poor answer to "which function is
-quadratic".  Two nested loops over the same sequence is quadratic whatever the
-branch count, and a function with twelve ``if``s and one loop is linear.  The
-question names a complexity CLASS, so the measurement is the thing that
-determines the class.
-
-The reported class is the published table (loop nesting -> O(n^d)); it is not
-estimated from input sizes, and no benchmark is run, so the answer is exact and
-takes microseconds instead of minutes.
-
-result_fields: adapter, source_root, answer, worst_function, worst_nesting,
-worst_class, functions_measured, output_path, output_sha256, output_verified.
+The report explicitly distinguishes this structural heuristic from an
+asymptotic proof. Cyclomatic complexity remains a separate branch metric.
+No benchmark or source execution is performed.
 """
 from __future__ import annotations
 
@@ -63,6 +53,31 @@ def _nesting(node: ast.AST) -> int:
     return best
 
 
+_DECISIONS = (ast.If, ast.For, ast.AsyncFor, ast.While, ast.ExceptHandler,
+              ast.With, ast.AsyncWith, ast.Assert, ast.IfExp, ast.comprehension)
+
+
+def _cyclomatic(node) -> int:
+    """McCabe's number, from the decisions the function itself contains.
+
+    The row's published metric was loop-chain DEPTH, which answers a different
+    question ("how deep") from the one the sentence asks ("cyclomatic complexity"):
+    measured 2026-10-31, "Report the cyclomatic complexity of <pkg>/mod.py" was
+    answered with a nesting depth and counted as a pass.  Two numbers, both true,
+    so the row now carries both -- and the `and`/`or` / `else` paths are counted
+    where they occur, which is what makes the number McCabe's rather than a guess.
+    """
+    count = 1
+    for child in ast.walk(node):
+        if child is node:
+            continue
+        if isinstance(child, _DECISIONS):
+            count += 1
+        elif isinstance(child, ast.BoolOp):
+            count += max(0, len(child.values) - 1)
+    return count
+
+
 def _files(root: pathlib.Path):
     if root.is_file():
         yield root
@@ -96,6 +111,7 @@ def run(args, root):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
     raw_fns: list[tuple[str, str, int, int, list[tuple[str, int]]]] = []
+    cyclomatic = {}
     unparseable = 0
     for path in _files(source_root):
         try:
@@ -108,6 +124,7 @@ def run(args, root):
         for node in tree.body:
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue
+            cyclomatic[(rel_p, node.name)] = _cyclomatic(node)
             raw_fns.append((
                 rel_p,
                 node.name,
@@ -152,8 +169,12 @@ def run(args, root):
             "path": rel_p,
             "name": fname,
             "local_nesting": ldepth,
+            "cyclomatic_complexity": cyclomatic[(rel_p, fname)],
             "nesting": depth,
             "complexity_class": c_cls,
+            "recursion_model": ("BRANCHING_CALL_SITE_HEURISTIC" if fname in rec_class
+                                else "SINGLE_CALL_SITE_HEURISTIC" if any(c == fname for c, _ in _calls)
+                                else "NO_SELF_RECURSION"),
             "lineno": lineno,
         })
 
@@ -161,14 +182,24 @@ def run(args, root):
     measured.sort(key=lambda r: (-r["nesting"], r["path"], r["name"]))
     worst = measured[0] if measured else None
     quadratic = [r["name"] for r in measured if r["nesting"] >= 2]
+    by_cyclomatic = sorted(measured, key=lambda r: (-r["cyclomatic_complexity"], r["path"], r["name"]))
+    worst_cyclomatic = by_cyclomatic[0] if by_cyclomatic else None
     report = {
         "schema": SCHEMA,
+        "analysis_model": "STRUCTURAL_UNIT_COST_HEURISTIC",
+        "is_asymptotic_proof": False,
+        "assumptions": ["Each loop has O(n) iterations and unit-cost local operations",
+                        "Calls are resolved by static function name",
+                        "Recursive call-site count is not a solved recurrence"],
         "source_root": _rel(repo, source_root),
         "answer": (worst["name"] if worst else ""),
         "worst_function": worst,
         "worst_nesting": (worst["nesting"] if worst else 0),
         "worst_class": (worst["complexity_class"] if worst else "O(1)"),
         "quadratic_symbols": quadratic,
+        "worst_cyclomatic": worst_cyclomatic,
+        "cyclomatic_complexity": worst_cyclomatic["cyclomatic_complexity"] if worst_cyclomatic else 0,
+        "total_cyclomatic": sum(r["cyclomatic_complexity"] for r in measured),
         "functions_measured": len(measured),
         "unparseable_count": unparseable,
         "functions": measured,
@@ -178,12 +209,17 @@ def run(args, root):
     output.write_bytes(raw)
     return {
         "adapter": "python_source_complexity",
+        "analysis_model": "STRUCTURAL_UNIT_COST_HEURISTIC",
+        "is_asymptotic_proof": False,
         "source_root": report["source_root"],
         "answer": report["answer"],
         "worst_function": worst,
         "worst_nesting": report["worst_nesting"],
         "worst_class": report["worst_class"],
         "quadratic_symbols": quadratic,
+        "worst_cyclomatic": worst_cyclomatic,
+        "cyclomatic_complexity": worst_cyclomatic["cyclomatic_complexity"] if worst_cyclomatic else 0,
+        "total_cyclomatic": sum(r["cyclomatic_complexity"] for r in measured),
         "functions_measured": len(measured),
         "output_path": _rel(repo, output),
         "output_sha256": hashlib.sha256(raw).hexdigest(),

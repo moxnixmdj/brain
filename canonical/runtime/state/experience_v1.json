@@ -75,8 +75,10 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1792323284.1871977,
+   "last_seen": 1793467005.282255,
    "observations": [
+    1,
+    1,
     1,
     1,
     1,
@@ -460,8 +462,10 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1793136154.1977654,
+   "last_seen": 1793463544.4852138,
    "observations": [
+    1,
+    1,
     1,
     1,
     1,

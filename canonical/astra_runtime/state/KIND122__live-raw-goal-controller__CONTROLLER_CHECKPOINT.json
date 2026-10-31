@@ -1,0 +1,89 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "xlsx.table.create_from_json_records",
+          "goal": "canonical/astra_runtime/tmp/defect_kind_probe/sample.json with json path canonical/astra_runtime/tmp/defect_kind_probe/sample.json",
+          "json_path": "canonical/astra_runtime/tmp/defect_kind_probe/sample.json",
+          "output_path": "canonical/astra_runtime/tmp/spool_0_output.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "xlsx.table.create_from_json_records",
+          "goal": "canonical/astra_runtime/tmp/defect_kind_probe/sample.json with json path canonical/astra_runtime/tmp/defect_kind_probe/sample.json",
+          "json_path": "canonical/astra_runtime/tmp/defect_kind_probe/sample.json",
+          "output_path": "canonical/astra_runtime/tmp/spool_0_output.json"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "xlsx_table_xlsxwriter",
+        "capability_id": "xlsx.table.create_from_json_records",
+        "collection_path": [],
+        "column_count": 3,
+        "columns": [
+          "id",
+          "name",
+          "status"
+        ],
+        "dependency": {
+          "acquired_via": "PINNED_PYPI_FALLBACK_FOR_APT_DECLARED_PURE_PYTHON_PACKAGE",
+          "apt_package_declared": "python3-xlsxwriter",
+          "project": "xlsxwriter",
+          "status": "INSTALLED_VERIFIED",
+          "version": "3.2.9",
+          "wheel_sha256": "9a5db42bc5dff014806c58a20b9eae7322a134abb6fce3c92c181bfb275ec5b3"
+        },
+        "output_bytes": 5310,
+        "output_path": "canonical/astra_runtime/tmp/spool_0_output.json",
+        "output_sha256": "0017cd16a9a9fa046843bf5e63d0914d97e00d85ed5d1b877fc8e670e1e82dcf",
+        "output_verified": true,
+        "row_count": 1,
+        "status_value": "PASS"
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T23:44:20.613875+00:00",
+  "mission_id": "KIND122",
+  "next_action_index": 2,
+  "plan_sha256": "e9a35edb264445a3105c82aa23d34471de098f936b799ec88032e55e97fefcbc",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T23:44:21.288301+00:00"
+}

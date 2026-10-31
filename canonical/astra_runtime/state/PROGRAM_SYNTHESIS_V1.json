@@ -3,17 +3,17 @@
   ".gz": {
    "effect": "ROUND_TRIP_OK",
    "goal": "compress notes.txt into notes.txt.gz with gzip",
-   "learned_at": 1793451895.3226423,
+   "learned_at": 1793264487.099126,
    "name": "gzip_module",
-   "source": "import gzip\ngzip.open('/tmp/brain-synth-d5fpe5xu/out.gz', 'wt', encoding='utf-8').write('brain-synthesis-sample')\n",
-   "verified_sha256": "7d65b1d42f6ebfebda8bc43970f042b736ac620d943a799bfce8af2d0b47dc24"
+   "source": "import gzip\ngzip.open('/tmp/brain-synth-pyblv9zf/out.gz', 'wt', encoding='utf-8').write('brain-synthesis-sample')\n",
+   "verified_sha256": "6d1106103194d9c9c309ac0ec2fa09ee86025babd94fdd12d7375391f9910431"
   },
   ".txt": {
    "effect": "ROUND_TRIP_OK",
    "goal": "run shell command echo hello and write the output to out.txt",
-   "learned_at": 1793451901.1479669,
+   "learned_at": 1793264493.896278,
    "name": "plain_write",
-   "source": "open('/tmp/brain-synth-rwpme9wp/out.txt', 'w', encoding='utf-8').write('brain-synthesis-sample')\n",
+   "source": "open('/tmp/brain-synth-uq1dz4wl/out.txt', 'w', encoding='utf-8').write('brain-synthesis-sample')\n",
    "verified_sha256": "9c606c4015e9198ff6583b3e92c30c006e9e5eabe0457127ae1b74d60efc3a76"
   }
  },

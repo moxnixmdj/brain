@@ -1,0 +1,9 @@
+{
+ "capability_id": "python.source.definition_count.v1",
+ "independent_verified": true,
+ "mission_id": "ASTRA-VERIFY-DEFINITION-COUNT-001",
+ "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__RECEIPT.json",
+ "receipt_sha256": "1cdd7bdc7b36840f4f0ac426973bf35fa6ef63636c8a3eb43efe6a389339ffa4",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_STATE_V1",
+ "verified_at": "2026-10-31T09:09:14Z"
+}

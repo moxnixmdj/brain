@@ -57,6 +57,8 @@ from canonical.runtime.bound_capabilities.python_review_diff_static_triage impor
     _parse_diff_ranges,
 )
 
+from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import has_pytest, measure_coverage_stdlib, python_interpreter_works, universal_test_argv
+
 SCHEMA = "PROJECT_BRAIN_DIFF_COVERAGE_GATE_V1"
 
 
@@ -111,7 +113,9 @@ def run(args, root):
         _fail("GIT_UNAVAILABLE")
     cov_probe = subprocess.run([python_exe, "-m", "coverage", "--version"],
                                capture_output=True, text=True, timeout=min(timeout_s, 30))
-    coverage_on = cov_probe.returncode == 0 and "overage" in cov_probe.stdout
+    native_cov_on = cov_probe.returncode == 0 and "overage" in cov_probe.stdout and has_pytest(python_exe, timeout_s)
+    stdlib_cov_on = (not native_cov_on) and python_interpreter_works(python_exe, timeout_s)
+    coverage_on = native_cov_on or stdlib_cov_on
 
     scratch = out_abs.parent / ("_cov_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
     if scratch.exists():
@@ -140,8 +144,7 @@ def run(args, root):
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         if not coverage_on:
             # still prove the suite green so the partial gate is honest
-            only = subprocess.run([python_exe, "-m", "pytest", "-q",
-                                   "-p", "no:cacheprovider"], cwd=scratch,
+            only = subprocess.run(universal_test_argv(python_exe), cwd=scratch,
                                   capture_output=True, text=True,
                                   timeout=timeout_s, env=env)
             suite_green = only.returncode == 0
@@ -150,29 +153,41 @@ def run(args, root):
             executable_changed = 0
             gate = "FAIL" if not suite_green else "PASS_BLIND"
         else:
-            try:
-                suite = subprocess.run([python_exe, "-m", "coverage", "run",
-                                        "-m", "pytest", "-q", "-p", "no:cacheprovider"],
-                                       cwd=scratch, capture_output=True, text=True,
-                                       timeout=timeout_s, env=env)
-            except subprocess.TimeoutExpired:
-                _fail("TIMEOUT")
-            suite_green = suite.returncode == 0
-            if not suite_green:
-                _fail("SUITE_RED:coverage under a failing suite is untrustworthy evidence")
             jf = scratch / "_cov.json"
-            rep = subprocess.run([python_exe, "-m", "coverage", "json",
-                                  "-o", str(jf), "--quiet"],
-                                 cwd=scratch, capture_output=True, text=True,
-                                 timeout=min(timeout_s, 120), env=env)
-            if rep.returncode != 0 or not jf.is_file():
-                _fail("COVERAGE_JSON_FAILED")
+            if native_cov_on:
+                try:
+                    suite = subprocess.run([python_exe, "-m", "coverage", "run",
+                                            "-m", "pytest", "-q", "-p", "no:cacheprovider"],
+                                           cwd=scratch, capture_output=True, text=True,
+                                           timeout=timeout_s, env=env)
+                except subprocess.TimeoutExpired:
+                    _fail("TIMEOUT")
+                suite_green = suite.returncode == 0
+                if not suite_green:
+                    _fail("SUITE_RED:coverage under a failing suite is untrustworthy evidence")
+                rep = subprocess.run([python_exe, "-m", "coverage", "json",
+                                      "-o", str(jf), "--quiet"],
+                                     cwd=scratch, capture_output=True, text=True,
+                                     timeout=min(timeout_s, 120), env=env)
+                if rep.returncode != 0 or not jf.is_file():
+                    _fail("COVERAGE_JSON_FAILED")
+            else:
+                try:
+                    suite = measure_coverage_stdlib(python_exe, scratch, jf, timeout_s=timeout_s, env=env)
+                except subprocess.TimeoutExpired:
+                    _fail("TIMEOUT")
+                suite_green = suite.returncode == 0
+                if not suite_green:
+                    _fail("SUITE_RED:coverage under a failing suite is untrustworthy evidence")
+                if not jf.is_file():
+                    _fail("COVERAGE_JSON_FAILED")
             try:
                 doc = json.loads(jf.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
                 _fail("COVERAGE_JSON_NOT_JSON")
             miss_rows = []
             executable_changed = 0
+            unmatched = []
             files = doc.get("files") or {}
             norm = {k.replace("\\", "/"): v for k, v in files.items()}
             for rel in sorted(py_changed):
@@ -182,6 +197,15 @@ def run(args, root):
                         row = v
                         break
                 if row is None:
+                    # THE ONE DIRECTION A MEASUREMENT MUST NEVER GO.
+                    #
+                    # A changed file the coverage report does not mention has NOT been measured,
+                    # and the arithmetic below turned that into ``ratio = 1.0`` for zero
+                    # executable lines -- a PASS over nothing.  Measured 2026-10-29: a diff
+                    # planted one directory too deep, so the suite imported a different copy of
+                    # the module; the gate reported PASS / diff_covered_ratio 1.0 with
+                    # diff_executable_lines 0.  Zero lines is not full coverage.
+                    unmatched.append(rel)
                     continue
                 executable = set(row.get("executed_lines") or []) | set(row.get("missing_lines") or [])
                 for start, end in py_changed[rel]:
@@ -190,9 +214,16 @@ def run(args, root):
                             executable_changed += 1
                             if ln in set(row.get("missing_lines") or []):
                                 miss_rows.append({"file": rel, "line": ln})
-            ratio = 1.0 if executable_changed == 0 else (
-                (executable_changed - len(miss_rows)) / executable_changed)
-            gate = "PASS" if ratio >= min_ratio else "FAIL"
+            if unmatched:
+                _fail("DIFF_FILES_NOT_IN_COVERAGE_REPORT:" + ",".join(sorted(unmatched))[:300])
+            if executable_changed == 0:
+                # The suite ran and the diff applies, but no changed line is executable, so the
+                # ratio below is vacuously 1.0.  Reported as its own verdict, never as PASS.
+                gate = "NOTHING_EXECUTABLE_CHANGED"
+                ratio = None
+            else:
+                ratio = (executable_changed - len(miss_rows)) / executable_changed
+                gate = "PASS" if ratio >= min_ratio else "FAIL"
     finally:
         if scratch.exists():
             shutil.rmtree(scratch, ignore_errors=True)

@@ -2973,6 +2973,98 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
     },
+    "git.repository.operate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "git.repository.operate.v1",
+          "limit": "${input.limit}",
+          "message": "${input.message}",
+          "op": "${input.op}",
+          "repo_root": "${input.repo_root}",
+          "target": "${input.target}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "git_repository_operate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "git",
+        "commit",
+        "log",
+        "history",
+        "diff",
+        "status",
+        "blame",
+        "branch",
+        "show",
+        "repository",
+        "revision",
+        "staged"
+      ],
+      "limitations": [
+        "Seven declared operations only (log, status, diff, show, blame, branch, commit); the sentence chooses the operation, never the argv, and any other operation is refused by name.",
+        "Reads plus one write (commit --no-verify). No push, rebase, merge, reset or history rewrite.",
+        "Every reported effect is re-derived by a second git plumbing mechanism; a disagreement is a refusal, not a warning.",
+        "Repository-local only: repo_root must resolve inside the calling root."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "git.repository.operate",
+        "git.history.read",
+        "git.working_tree.inspect",
+        "git.commit.create"
+      ],
+      "requires": [
+        "git.repository.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "capability",
+        "head_sha",
+        "incremental_spend_usd",
+        "model_dependency_count",
+        "observed_effect",
+        "op",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "repo_root",
+        "row_count",
+        "rows"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
+        "adapter_sha256": "b0115970ddd67e689391a75fce1e0a424df835e7fb3920c66e86e103866bc166",
+        "engine": "git",
+        "type": "brain_bound_system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "authority": "NONE",
+        "carrier": "SANDBOX",
+        "independent_mechanism": "each operation's reported effect is re-derived by a different git command than the one that produced it",
+        "independent_verified_by": "git plumbing: rev-parse, rev-list, cat-file, merge-base, symbolic-ref",
+        "mission_id": "ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001",
+        "observed_effect": {
+          "blame_lines": 2,
+          "commit_sha_measured": "a2ad8d4ac665",
+          "commits_read": 2,
+          "independent_mechanism_disagreements": 0,
+          "operations_measured": 7,
+          "patch_bytes": 315
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001__RECEIPT.json"
+      }
+    },
     "http.json.fetch_from_state": {
       "action_template": {
         "args": {
@@ -4898,6 +4990,72 @@
         "test_sha256": "94bb177c68eb1a48402b43e50108d4ebdada336763417ea5ff38b41e9bc19cbb"
       }
     },
+    "python.feature.implement_function_spec.v1": {
+      "action_template": {
+        "args": {
+          "body_expr": "${input.body_expr}",
+          "capability_id": "python.feature.implement_function_spec.v1",
+          "export_in_init": "${input.export_in_init}",
+          "function_name": "${input.function_name}",
+          "init_path": "${input.init_path}",
+          "output_path": "${input.output_path}",
+          "signature": "${input.signature}",
+          "source_root": "${input.source_root}",
+          "target_module": "${input.target_module}",
+          "test_path": "${input.test_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_feature_implement_function_spec",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "feature",
+        "implement_function_spec",
+        "function specification",
+        "add function",
+        "implement function",
+        "export",
+        "unit test"
+      ],
+      "limitations": [
+        "Synthesizes a deterministic Python function from an explicit signature and return expression specification, resolves receiver attributes against domain classes, updates __init__.py exports, generates unit tests, and verifies via unittest discovery with atomic rollback."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.feature.implement.function_spec",
+        "python.source.write.function_spec"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "function_name",
+        "target_module",
+        "files_edited",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_feature_implement_function_spec.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
     "python.issue.natural_language.parse_edit_intent.v1": {
       "action_template": {
         "args": {
@@ -4946,7 +5104,7 @@
         "python.issue.natural_language.edit_intent"
       ],
       "requires": [
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -5422,8 +5580,12 @@
         "default value",
         "signature extend",
         "argument",
-        "caller",
-        "behaviour unchanged"
+        "behaviour unchanged",
+        "parameter",
+        "parameters",
+        "default",
+        "signature",
+        "optional"
       ],
       "limitations": [
         "adds ONE optional parameter whose default is the value the body already read; it does not choose a numeric default from arithmetic the sentence never stated.",
@@ -5674,7 +5836,7 @@
         "python.refactor.symbol.relocated"
       ],
       "requires": [
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -5692,6 +5854,70 @@
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_function.py",
         "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.refactor.move_symbol.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.move_symbol.v1",
+          "output_path": "${input.output_path}",
+          "source_module": "${input.source_module}",
+          "source_root": "${input.source_root}",
+          "symbol": "${input.symbol}",
+          "target_module": "${input.target_module}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_move_symbol",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "move_symbol",
+        "relocate symbol",
+        "move function",
+        "move class",
+        "update callers",
+        "import closure",
+        "ast"
+      ],
+      "limitations": [
+        "Moves top-level Python function or class definitions across modules, carries exclusive private helper transitive closure, rewrites project-wide imports and __all__, checks AST soundness, and rolls back atomically on test failure."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.move_symbol",
+        "python.source.write.move_symbol"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "symbol",
+        "source_module",
+        "target_module",
+        "files_edited",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
     },
@@ -6284,9 +6510,9 @@
         "verified"
       ],
       "source": {
-        "module": "coverage",
-        "type": "pypi",
-        "version_family": ">=7.0"
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -6552,9 +6778,9 @@
         "verified"
       ],
       "source": {
-        "module": "bandit",
-        "type": "pypi",
-        "version_family": ">=1.7"
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -6813,7 +7039,7 @@
       "requires": [
         "python.source.crossfile_edit.choreograph.v1",
         "python.source.change_impact.testselect.v1",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -6866,6 +7092,7 @@
           "capability_id": "python.software.repair.apply.verified.v1",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
+          "synthesize_regression_test": "${input.synthesize_regression_test}",
           "test_argv": "${input.test_argv}",
           "test_paths": "${input.test_paths}",
           "timeout_s": 60
@@ -6876,7 +7103,8 @@
           "value": true
         },
         "optional": [
-          "test_argv"
+          "test_argv",
+          "synthesize_regression_test"
         ],
         "type": "invoke_capability"
       },
@@ -7886,6 +8114,69 @@
         "pin_green": "6/6 canonical.tests.test_a_stated_function_is_written_wired_and_tested_v1"
       }
     },
+    "python.source.add_parameter.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.add_parameter.v1",
+          "default_expr": "${input.default_expr}",
+          "module": "${input.module}",
+          "output_path": "${input.output_path}",
+          "param_name": "${input.param_name}",
+          "qualname": "${input.qualname}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_add_parameter",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "add_parameter",
+        "signature evolution",
+        "add parameter",
+        "default value",
+        "parameterize function",
+        "ast"
+      ],
+      "limitations": [
+        "Adds a defaulted parameter to a Python function or Class.method signature, lifts matching receiver attribute accesses safely when default is None, verifies caller arity compatibility and AST soundness, and rolls back atomically on test failure."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.add_parameter",
+        "python.source.write.add_parameter"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "qualname",
+        "param_name",
+        "files_edited",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
     "python.source.audit.ast": {
       "action_template": {
         "args": {
@@ -8099,13 +8390,18 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
+        "cyclomatic_complexity",
         "functions_measured",
+        "is_asymptotic_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "quadratic_symbols",
+        "total_cyclomatic",
         "worst_class",
+        "worst_cyclomatic",
         "worst_function",
         "worst_nesting"
       ],
@@ -8390,11 +8686,37 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+        "adapter_sha256": "726e06b24589f3451c3a9626e1d75e9cd30747d5531266e8ec4615b203d7b79d",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SECRET-SCAN-001",
+        "observed_effect": {
+          "adapter_sha256": "7830d7eb02be5b0019efc9ca2aeace66f33d1d57106061e773907a9dc01919c5",
+          "checks": {
+            "constructed_line": 4,
+            "reported": [
+              {
+                "line": 4,
+                "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets/config.py",
+                "redacted": "AKIA\u202620",
+                "signature": "aws_access_key_id"
+              }
+            ],
+            "secret_echoed_in_report": false
+          },
+          "claim": "finds a published credential shape at its real line and never echoes it",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECRET-SCAN-001.json"
+      }
     },
     "python.source.symbols.index.ast": {
       "action_template": {
@@ -8464,7 +8786,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
+        "parsed_module_count",
         "reference_count",
+        "reused_module_count",
         "symbol_count",
         "unparseable_count",
         "unparseable_paths"
@@ -8619,24 +8943,49 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
         "finding",
         "finding_count",
+        "is_security_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "reaches",
         "sink",
         "source_function",
+        "source_functions",
+        "source_root",
         "trace"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
+        "adapter_sha256": "c494fa06f4078cdeb7bce26b86d2e462c3bf9305938d32a5714b69524bd35d17",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TAINT-FLOW-001",
+        "observed_effect": {
+          "adapter_sha256": "d0106e401d0138ca416b9a8707a3952813eae11209b8acef7357608a08298502",
+          "checks": {
+            "clean_world_answer": "no",
+            "constructed_sink": "os.system",
+            "constructed_source": "json.loads(raw) on a parameter",
+            "control_world_is_taint_free_by_construction": true,
+            "reported_answer": "yes"
+          },
+          "claim": "traces an input boundary to a shell sink, and says no when it does not",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TAINT-FLOW-001.json"
+      }
     },
     "python.source.test_adequacy.v1": {
       "action_template": {
@@ -8741,7 +9090,6 @@
       ],
       "requires": [
         "python.source.symbol_index",
-        "python.source.symbols.index.ast",
         "code.symbols.multilanguage.indexed"
       ],
       "result_fields": [
@@ -9125,7 +9473,7 @@
         "python.tests.generate.scaffold"
       ],
       "requires": [
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -9929,14 +10277,16 @@
       "provides": [
         "software.repair.choreography.verified",
         "software.patch.crossfile.atomic",
+        "software.source.write.crossfile",
         "software.concurrency.race.condition.fix",
         "security.sql.injection.remove",
         "performance.quadratic.linearithmic.optimize",
-        "dependency.deprecated.inspect.migrate"
+        "dependency.deprecated.inspect.migrate",
+        "source.repair.applied"
       ],
       "requires": [
         "python.fault.localization.symbol_ranked",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -11678,199 +12028,6 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
-    },
-    "python.refactor.move_symbol.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.refactor.move_symbol.v1",
-          "output_path": "${input.output_path}",
-          "source_module": "${input.source_module}",
-          "source_root": "${input.source_root}",
-          "symbol": "${input.symbol}",
-          "target_module": "${input.target_module}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_source_move_symbol",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "refactor",
-        "move_symbol",
-        "relocate symbol",
-        "move function",
-        "move class",
-        "update callers",
-        "import closure",
-        "ast"
-      ],
-      "limitations": [
-        "Moves top-level Python function or class definitions across modules, carries exclusive private helper transitive closure, rewrites project-wide imports and __all__, checks AST soundness, and rolls back atomically on test failure."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.refactor.move_symbol",
-        "python.source.write.move_symbol"
-      ],
-      "requires": [],
-      "result_fields": [
-        "adapter",
-        "verified",
-        "gate",
-        "symbol",
-        "source_module",
-        "target_module",
-        "files_edited",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_symbol.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY"
-    },
-    "python.feature.implement_function_spec.v1": {
-      "action_template": {
-        "args": {
-          "body_expr": "${input.body_expr}",
-          "capability_id": "python.feature.implement_function_spec.v1",
-          "export_in_init": "${input.export_in_init}",
-          "function_name": "${input.function_name}",
-          "init_path": "${input.init_path}",
-          "output_path": "${input.output_path}",
-          "signature": "${input.signature}",
-          "source_root": "${input.source_root}",
-          "target_module": "${input.target_module}",
-          "test_path": "${input.test_path}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_feature_implement_function_spec",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "feature",
-        "implement_function_spec",
-        "function specification",
-        "add function",
-        "implement function",
-        "export",
-        "unit test"
-      ],
-      "limitations": [
-        "Synthesizes a deterministic Python function from an explicit signature and return expression specification, resolves receiver attributes against domain classes, updates __init__.py exports, generates unit tests, and verifies via unittest discovery with atomic rollback."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.feature.implement.function_spec",
-        "python.source.write.function_spec"
-      ],
-      "requires": [],
-      "result_fields": [
-        "adapter",
-        "verified",
-        "gate",
-        "function_name",
-        "target_module",
-        "files_edited",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_feature_implement_function_spec.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY"
-    },
-    "python.source.add_parameter.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.source.add_parameter.v1",
-          "default_expr": "${input.default_expr}",
-          "module": "${input.module}",
-          "output_path": "${input.output_path}",
-          "param_name": "${input.param_name}",
-          "qualname": "${input.qualname}",
-          "source_root": "${input.source_root}"
-        },
-        "expect": {
-          "field": "output_verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_source_add_parameter",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "refactor",
-        "add_parameter",
-        "signature evolution",
-        "add parameter",
-        "default value",
-        "parameterize function",
-        "ast"
-      ],
-      "limitations": [
-        "Adds a defaulted parameter to a Python function or Class.method signature, lifts matching receiver attribute accesses safely when default is None, verifies caller arity compatibility and AST soundness, and rolls back atomically on test failure."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.refactor.add_parameter",
-        "python.source.write.add_parameter"
-      ],
-      "requires": [],
-      "result_fields": [
-        "adapter",
-        "verified",
-        "gate",
-        "qualname",
-        "param_name",
-        "files_edited",
-        "output_path",
-        "output_sha256",
-        "output_verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
-        "type": "brain_native_deterministic_composition",
-        "version_family": "v1"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY"
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

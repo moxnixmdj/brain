@@ -100,4 +100,6 @@ def test_index_contract_does_not_expand_source_scope_to_unrelated_ancestor_tests
         rel = source.relative_to(ROOT).as_posix()
         plan = typed.build_plan("Find every caller of the function f in " + rel, ROOT)
         assert plan is not None
-        assert plan[2]["inputs"]["source_root"] == source.parent.relative_to(ROOT).as_posix()
+        # The newer path_file_or_dir contract preserves the exact named file,
+        # which is narrower than even its parent and excludes ancestor tests.
+        assert plan[2]["inputs"]["source_root"] == source.relative_to(ROOT).as_posix()

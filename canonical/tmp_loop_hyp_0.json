@@ -1,0 +1,1 @@
+{"capability_id":"evidence.oracle.hypothesis_property.v1","checked":13,"hypothesis_available":false,"incremental_spend_usd":0,"model_dependency_count":0,"schema":"PROJECT_BRAIN_EVIDENCE_ORACLE_HYPOTHESIS_V1","source_excerpt":"def f(x):\n    \"\"\"post: _ >= 0\"\"\"\n    return abs(x)\n","verified":true,"violations":[]}

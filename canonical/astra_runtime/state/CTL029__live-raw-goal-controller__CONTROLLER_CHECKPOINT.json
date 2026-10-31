@@ -1,0 +1,474 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "Run the coding static verified capability route theorem v1",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/560d4d0a0ee31304_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "Run the coding static verified capability route theorem v1",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/560d4d0a0ee31304_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "broad_objective_decomposition": null,
+        "broad_objective_decomposition_available": false,
+        "candidate_capability_ids": [
+          "terminal.kstar.root.assess.stdlib"
+        ],
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "clauses": [
+          {
+            "candidates": [
+              {
+                "binding_affordance": {
+                  "has_goal_url": false,
+                  "proposal_binding_count": 0,
+                  "proposal_bindings_cover_all_inputs": false,
+                  "url_consumable": false
+                },
+                "capability_id": "terminal.kstar.root.assess.stdlib",
+                "combined_score": 8.709580838323353,
+                "input_bindability": {
+                  "bound_input_keys": [],
+                  "proposal_binding_keys": [],
+                  "verified": true
+                },
+                "lexical": {
+                  "matched_goal_tokens": [
+                    "capability"
+                  ],
+                  "matched_identity": [],
+                  "matched_keywords": [
+                    [
+                      "capability",
+                      "capability"
+                    ]
+                  ],
+                  "matched_provides": [],
+                  "score": 4
+                },
+                "matched_distinctive_tokens": [
+                  "capability"
+                ],
+                "provides": [
+                  "terminal.kstar.root.assessment",
+                  "terminal.scope_complete.proof_or_minimum_residual",
+                  "terminal.tournament.failure.witness"
+                ],
+                "requires": [],
+                "similarity": {
+                  "coverage": 0.16666666666666666,
+                  "score": 4.709580838323353,
+                  "sequence_ratio": 0.20958083832335328,
+                  "shared_tokens": [
+                    "capability"
+                  ]
+                }
+              }
+            ],
+            "constraints": [],
+            "end": 58,
+            "index": 0,
+            "output_contract": {
+              "extensions": [],
+              "paths": []
+            },
+            "rejected_unbindable_candidates": [
+              {
+                "capability_id": "chart.raster.axis_title_unit_binding.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+              },
+              {
+                "capability_id": "chart.raster.curve_value_query.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:label"
+              },
+              {
+                "capability_id": "chart.raster.curve_x_at_y_query.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:label"
+              },
+              {
+                "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+              },
+              {
+                "capability_id": "chart.raster.legend_style_binding.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+              },
+              {
+                "capability_id": "chart.raster.scene_graph.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+              },
+              {
+                "capability_id": "chart.read.binary_phase_solvus.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+              },
+              {
+                "capability_id": "chart.read.legend_linear_intersection.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+              },
+              {
+                "capability_id": "code.impact.tree_sitter.testselect.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:changed_paths"
+              },
+              {
+                "capability_id": "code.index.tree_sitter.incremental.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "code.multilanguage.parse.tree_sitter.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "code.patch.tree_sitter.verify.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:edits"
+              },
+              {
+                "capability_id": "evidence.oracle.concrete_execution.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "evidence.oracle.hypothesis_property.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "execution.pipeline.8stage.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "finance.saccr.credit.addon.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:json_path"
+              },
+              {
+                "capability_id": "orchestration.verify.bridge_enumeration.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:plain_goal.bound_capability.grounding.verify.stdlib:result_path:plain_goal.bound_capability.grounding"
+              },
+              {
+                "capability_id": "professional.artifact.visual_observer.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:path"
+              },
+              {
+                "capability_id": "python.contract.check.crosshair.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.fault.localize.dynamic.dataflow.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.fault.provenance.interprocedural.value.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.issue.natural_language.parse_edit_intent.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:index_path"
+              },
+              {
+                "capability_id": "python.patch.search.test_guided.ast.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.refactor.extract_function.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:end_line"
+              },
+              {
+                "capability_id": "python.refactor.inline_helper.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.refactor.rename_parameter.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:module"
+              },
+              {
+                "capability_id": "python.refactor.rename_symbol.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:module"
+              },
+              {
+                "capability_id": "python.repo.diff_apply_full_testgate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:anchor_path"
+              },
+              {
+                "capability_id": "python.repo.pr_realize.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:apply_directory"
+              },
+              {
+                "capability_id": "python.repository.acceptance.measure.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.review.diff_coverage_gate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:anchor_path"
+              },
+              {
+                "capability_id": "python.review.diff_mutation_gate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:anchor_path"
+              },
+              {
+                "capability_id": "python.review.diff_perf_gate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:anchor_path"
+              },
+              {
+                "capability_id": "python.review.diff_security_gate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:diff_path"
+              },
+              {
+                "capability_id": "python.review.diff_static_triage.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:diff_path"
+              },
+              {
+                "capability_id": "python.review.diff_type_gate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:diff_path"
+              },
+              {
+                "capability_id": "python.software.issue_to_pr.orchestrate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:diff_path"
+              },
+              {
+                "capability_id": "python.software.repair.apply.verified.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.software.repair.guided.provenance.coupled.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.software.repair.loop.coupled.ast.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.software.repair.loop.strict_progress.ast.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.software.repair.loop.test_guided.ast.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.software.repair.measured_acceptance.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.software.repair.route.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:budget"
+              },
+              {
+                "capability_id": "python.software.repair.semantic_acceptance.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.software.request.semantic_behavior.compile.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.change_impact.testselect.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:changed_paths"
+              },
+              {
+                "capability_id": "python.source.complexity.v1",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.complexity.v1:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.crossfile_edit.choreograph.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:edits_path"
+              },
+              {
+                "capability_id": "python.source.dead_code.v1",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.dead_code.v1:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.definition_count.v1",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.definition_count.v1:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.secret_scan.v1",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.secret_scan.v1:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.symbols.resolve.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.taint_flow.v1",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.taint_flow.v1:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.test_adequacy.v1",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.test_adequacy.v1:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.task.acceptance.measured.objective.v1",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:python.task.acceptance.measured.objective.v1:measurement_receipt_path:python.repository.acceptance.measurement.content_addressed"
+              },
+              {
+                "capability_id": "python.tests.advance.mutation_kill.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:max_mutants"
+              },
+              {
+                "capability_id": "python.tests.generate.scaffold.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.tests.synthesize.pynguin.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:algorithm"
+              },
+              {
+                "capability_id": "python.vcs.merge_conflict.resolve.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "shell.command.run",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:argv"
+              },
+              {
+                "capability_id": "software.hardcore.kernel.orchestrate.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "software.patch.synthesize.cegis.z3.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:manifest"
+              },
+              {
+                "capability_id": "software.repair.choreograph.crossfile.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "software.repair.loop.cegis_hypothesis.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:budget"
+              },
+              {
+                "capability_id": "software.review.gate.composer.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:anchor_path"
+              },
+              {
+                "capability_id": "software.synthesis.grid_induction.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "task.acceptance.objective.lossless.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:candidate_response"
+              },
+              {
+                "capability_id": "test.slice.never_miss.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              }
+            ],
+            "start": 0,
+            "status": "UNBOUND_INPUTS_NOT_GROUNDED",
+            "text": "Run the coding static verified capability route theorem v1"
+          }
+        ],
+        "dependency": {
+          "modules": [
+            "difflib",
+            "hashlib",
+            "json",
+            "re",
+            "pathlib"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "external_discovery_allowed_for_unresolved_only": true,
+        "goal": "Run the coding static verified capability route theorem v1",
+        "goal_sha256": "560d4d0a0ee3130417d445d8a251b010869e606f7cb06f4de9b8ae568f6965fe",
+        "grounded_clause_count": 1,
+        "input_contract_bindability_enforced": true,
+        "model_dependency_count": 0,
+        "output_path": "canonical/astra_runtime/tmp/auto_proposal/560d4d0a0ee31304_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json",
+        "output_sha256": "d405b9dd31068f1f6bec237802d6fabf29e75b9b4ad04d9a9f1b867d65e61021",
+        "output_verified": true,
+        "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+        "unresolved_clause_indexes": [],
+        "whole_goal_external_discovery_forbidden_if_any_bound_grounding": true
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "Run the coding static verified capability route theorem v1",
+          "result_path": {
+            "$result": {
+              "cycle": 0,
+              "field": "output_path"
+            }
+          }
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "Run the coding static verified capability route theorem v1",
+          "result_path": "canonical/astra_runtime/tmp/auto_proposal/560d4d0a0ee31304_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "dependency": {
+          "modules": [
+            "hashlib",
+            "json",
+            "pathlib",
+            "re"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "model_dependency_count": 0,
+        "producer_independent": true,
+        "reason": "STATUS_INVALID",
+        "verified": false
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-31T12:43:58.239815+00:00",
+  "mission_id": "CTL029",
+  "next_action_index": 3,
+  "plan_sha256": "ddddf3543c447564a6e9602e59e408cc83efc4b621200f42fe6529248d6b06c5",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-31T12:43:58.285335+00:00"
+}

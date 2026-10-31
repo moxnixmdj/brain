@@ -523,8 +523,8 @@ _COMPUTED_ANSWER_DELIVERY_RE = re.compile(
     r"(?:(?:yes\s+or\s+no|true\s+or\s+false)"
     r"|(?:its|their|the)\s+(?:name|test\s+name|function\s+name|symbol\s+name|"
     r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
-    r"number|count|result|results|summary|answer|value|values|"
-    r"(?:repair\s+)?report|reports|receipt|index|output|"
+    r"number|count|result|results|answer|value|values|"
+    r"(?:repair\s+)?report|receipt|index|output|"
     r"file\s+and\s+line|path\s+and\s+line|line\s+and\s+file))"
     r"\s+(?:to|into|in|at)\s+\S+\s*[.!?]?\s*$",
     re.IGNORECASE,
@@ -640,41 +640,25 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     if not request_may_select(goal, cid, required):
         return {"capability_id": cid, "admitted": False, "reason": "REQUEST_DOES_NOT_NAME_CAPABILITY",
                 "required_inputs": required}
+    # A symbol rename cannot substitute for a parameter rename: both can bind
+    # a function qualname, but only one contract carries the old parameter.
+    if (re.search(r"^\s*(?:please\s+)?rename\s+(?:the\s+)?(?:parameter|argument)\b",
+                  front.prose_only(str(goal or "")), re.IGNORECASE)
+            and not {"old_param", "new_param"}.issubset(required)):
+        return {"capability_id": cid, "admitted": False,
+                "reason": "PARAMETER_RENAME_REQUIRES_PARAMETER_CONTRACT",
+                "required_inputs": required}
     _goal_low = str(goal or "").lstrip().lower()
-    if cid == "python.source.definition_count.v1" and (
-        "python file " in _goal_low
-        or not re.search(r"\b(?:functions?|classes|class|methods?|definitions?|symbols?)\b", _goal_low)
+    if cid == "python.source.definition_count.v1" and not re.search(
+        r"\b(?:functions?|classes|class|methods?|definitions?|symbols?)\b", _goal_low
     ):
         return {"capability_id": cid, "admitted": False,
                 "reason": "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
                 "required_inputs": required}
-    if cid == "python.refactor.rename_parameter.v1" and not re.search(
-        r"\b(?:param\w*|arg\w*)\b", _goal_low
-    ):
-        return {"capability_id": cid, "admitted": False,
-                "reason": "RENAME_PARAMETER_REQUIRES_PARAMETER_OR_ARGUMENT_SUBJECT",
-                "required_inputs": required}
-    if cid == "python.source.dead_code.v1" and not re.search(
-        r"\b(?:dead|unused|unreferenced|unreachable)\b", _goal_low
-    ):
-        return {"capability_id": cid, "admitted": False,
-                "reason": "DEAD_CODE_REQUIRES_DEAD_OR_UNUSED_SUBJECT",
-                "required_inputs": required}
-    if "testselect" in cid and re.search(
-        r"\b(?:caller|callers|who\s+calls|call\s+graph|call\s+site)\b", _goal_low
-    ) and not re.search(r"\b(?:tests?|impact\w*|chang\w*)\b", _goal_low):
-        return {"capability_id": cid, "admitted": False,
-                "reason": "TESTSELECT_REQUIRES_TEST_OR_IMPACT_SUBJECT",
-                "required_inputs": required}
     if (
         (is_computed_answer_delivery(goal)
-         or _goal_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ", "find ", "locate ")))
-        and not re.search(
-            r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace|implement|synthesize|create|"
-            r"remove|optimize|parameterize|migrate|linearithmic|"
-            r"add\s+(?:a|an|optional|parameter|argument|function|method|total))\b",
-            _goal_low,
-        )
+         or _goal_low.startswith(("would ", "does ", "do ", "is ", "are ", "which ", "what ", "how ", "who ", "count ", "measure ")))
+        and not re.search(r"\b(?:fix|repair|rename|refactor|patch|extract|inline|move|replace)\b", _goal_low)
     ):
         from canonical.runtime import write_authority_v1 as _wa
         if _wa.is_source_transformer(cid):
@@ -724,6 +708,32 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
                     "reason": "BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:"
                               + ",".join(sorted(kinds))[:120],
                     "required_inputs": required}
+    # A ROW THAT DECLARES IT CANNOT WRITE MAY NOT BE THE TERMINAL ANSWER TO A CHANGE.
+    #
+    # Measured 2026-10-31: "Repair the python source <pkg>/calc.py so that the unit test
+    # <pkg>/test_calc.py passes, and save the repair report to <out>.json" shortlisted
+    # ``python.patch.search.test_guided.ast.v1`` (and its three ``repair.loop.*`` siblings at the
+    # same score) because the sentence names a source and a test, which is exactly the pair they
+    # take.  All four declare, in their own registry rows, that the source bytes are RESTORED after
+    # every trial and that they hold "no source write or promotion authority": they find a patch,
+    # they do not repair.  So the terminal answer was a verified CANDIDATE over an untouched file
+    # -- the last FALSE row on the capability matrix.  Every other reading of the sentence holds:
+    # the effect word ("repair"), the contract, the binding.  What was missing was the AUTHORITY.
+    #
+    # Reading the declaration, not the id (``is_source_transformer`` reads the id, and
+    # "python.patch.search..." contains "patch"): the same module holds both readers, and the
+    # sentence reader is the door's own, so a question about a change is still not a promise to
+    # make one.  Refusing the candidate here is what lets the typed selector reach
+    # ``python.software.repair.apply.verified.v1``, which binds the identical inputs and applies
+    # the verified repair (measured: applied true, files_written <pkg>/calc.py).
+    try:
+        from canonical.runtime import write_authority_v1 as _wa
+        _authority = _wa.cannot_perform_the_stated_change(goal, entry, cid)
+    except Exception:  # noqa: BLE001 - an unreadable declaration refuses nothing
+        _authority = None
+    if _authority:
+        return {"capability_id": cid, "admitted": False, "reason": _authority,
+                "required_inputs": required}
     # F4 asks a question about the CAPABILITY ("does this tool take any input?"),
     # not about the goal, so it must be answered on the DECLARED contract.  The
     # shadow entry deliberately drops every slot the adapter defaults or the
@@ -803,7 +813,11 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     # Blast radius measured over a 77-sentence ordinary-phrasing corpus: this
     # rule changes exactly three routes, and all three were already failing.
     # No working route moves.
-    if _states_a_command_the_sentence_maps_to(goal):
+    # An enum operation contract already carries a proved repository operation.
+    # Words inside its quoted message must not demand a second argv contract.
+    operation_bound = (cid.startswith("git.") and "op" in required
+                       and _derived_values.get("op") is not None)
+    if _states_a_command_the_sentence_maps_to(goal) and not operation_bound:
         # Imported privately and locally: `admit` imports the type surface under
         # the name _TS further down, which makes _TS a local for the WHOLE
         # function.  Naming it here raised UnboundLocalError on every capability
@@ -823,20 +837,18 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
 
 _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("rename",), ("rename",)),
-    (("add parameter", "add a parameter", "add an optional parameter", "add optional parameter", "add argument"), ("add_parameter", "rename_parameter")),
-    (("move function", "move the function", "move a function", "relocate the function", "move helper", "move the helper"), ("move_function",)),
-    (("move the class", "move a class", "move symbol", "move class", "relocate symbol"), ("move_symbol", "move_function", "extract_function")),
     (("extract",), ("extract",)),
-    (("synthesize", "implement ", "add a function", "add a total function", "total function", "write a function", "implement a function", "implement function", "create a function"), ("add_function", "implement_function_spec", "synthesize_function", "synthesize")),
-    (("regression test",), ("synthesize_function", "choreograph")),
-    (("repair", "fix", "broken", "failing"), ("repair.apply", "repair", "patch", "choreograph")),
+    (("move the function", "move a function", "move function", "relocate the function"), ("move_function",)),
+    (("move the class", "move a class", "move symbol", "relocate symbol"), ("move_symbol",)),
+    (("add a parameter", "add parameter"), ("add_parameter",)),
+    (("add a function", "implement a function", "implement function", "create a function"), ("implement_function_spec",)),
+    (("repair", "fix", "broken", "failing"), ("repair", "patch", "choreograph")),
     (("bug:", "returns the wrong"), ("repair", "patch", "fault")),
-    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition", "circular import", "import cycle"), ("merge_conflict", "choreograph", "crossfile")),
-    (("change impact", "impacted test", "which tests"), ("change_impact", "testselect")),
+    (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition", "regression test"), ("choreograph",)),
     (("scaffold", "generate test"), ("scaffold", "generate")),
     (("audit", "count the functions"), ("audit",)),
     (("review", "lint", "type-check", "typecheck"), ("review",)),
-    (("localize", "traceback", "at fault", "bug:", "failing test"), ("localize", "fault")),
+    (("localize", "traceback", "at fault"), ("fault", "localize")),
     (("mutation", "catch a bug", "would the tests", "strong the tests", "intermittently"), ("mutation",)),
     (("taint", "untrusted"), ("taint", "security")),
     (("bisect", "broke", "got much slower", "between head"), ("bisect", "regression")),
@@ -844,7 +856,7 @@ _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
 
 
 _NOUN_WORDS = ("parameter", "symbol", "function", "test", "loop", "crossfile",
-               "diff", "patch", "scaffold", "fault", "provenance", "review", "synthesize")
+               "diff", "patch", "scaffold", "fault", "provenance", "review")
 
 
 def _effect_winner(goal: str, admitted: list[dict[str, Any]],
@@ -856,8 +868,7 @@ def _effect_winner(goal: str, admitted: list[dict[str, Any]],
     broken ONLY by the retrieval shortlist order (never by the margin alone).
     An unstated effect or an unresolved tie returns None.
     """
-    from canonical.runtime import goal_front_compiler_v1 as _front_prose
-    text = _front_prose.prose_only(str(goal or "")).lower()
+    text = str(goal or "").lower()
     preferred: list[str] = []
     for verbs, effects in _EFFECT_WORDS:
         if any(verb in text for verb in verbs):

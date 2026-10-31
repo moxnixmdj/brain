@@ -1,0 +1,13 @@
+{
+  "answer": "no",
+  "files_scanned": 1,
+  "finding_count": 0,
+  "reaches": false,
+  "schema": "PROJECT_BRAIN_PYTHON_TAINT_FLOW_V1",
+  "sink": "NO_SINK_REACHED",
+  "source_definition": [],
+  "source_function": "",
+  "source_functions": [],
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__WORLD/clean",
+  "trace": []
+}

@@ -2913,7 +2913,9 @@
           "capability_id": "git.repository.operate.v1",
           "limit": "${input.limit}",
           "message": "${input.message}",
-          "op": "${input.op}"
+          "op": "${input.op}",
+          "repo_root": "${input.repo_root}",
+          "target": "${input.target}"
         },
         "expect": {
           "field": "output_verified",
@@ -4966,7 +4968,7 @@
         "python.issue.natural_language.edit_intent"
       ],
       "requires": [
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -5427,8 +5429,7 @@
           "run_tests": [],
           "source_root": "${input.source_root}",
           "start_line": "${input.start_line}",
-          "timeout_s": 300,
-          "to_module": "${input.to_module}"
+          "timeout_s": 300
         },
         "expect": {
           "field": "gate",
@@ -5453,18 +5454,7 @@
         "dedent",
         "inputs outputs inference",
         "semantic edit",
-        "codemod",
-        "move function",
-        "move the function",
-        "move symbol",
-        "move helper",
-        "move class",
-        "move",
-        "module",
-        "helper",
-        "lines",
-        "extract",
-        "into"
+        "codemod"
       ],
       "limitations": [
         "region bytes move verbatim and dedent exactly 4: comments and formatting inside the region are byte-carried, never reprinted; the extracted def parse-checks BEFORE the file is touched and the rebuilt module parse-checks before it is written.",
@@ -5579,17 +5569,34 @@
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_inline_helper.py",
         "type": "brain_native_deterministic_composition"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-INLINE-HELPER-001",
+        "observed_effect": {
+          "adapter_sha256": "dc86634f97730d1c5bb5dddac71c28d571d7b462e465c97da9fa387e8bfd3d03",
+          "checks": {
+            "file_parses": true,
+            "helper_name_survived": [],
+            "suite_green_when_the_verifier_ran_it": true,
+            "suite_tail": ".                                                                        [100%]\n1 passed in 0.01s"
+          },
+          "claim": "a single-use helper becomes its body; the name survives nowhere; the suite stays green",
+          "elapsed_s": 0.047,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-INLINE-HELPER-001.json"
+      }
     },
     "python.refactor.rename_parameter.v1": {
       "action_template": {
         "args": {
           "capability_id": "python.refactor.rename_parameter.v1",
-          "default_expr": "${input.default_expr}",
           "module": "${input.module}",
           "new_param": "${input.new_param}",
           "old_param": "${input.old_param}",
-          "operation": "${input.operation}",
           "output_path": "${input.output_path}",
           "python_executable": "${input.python_executable}",
           "qualname": "${input.qualname}",
@@ -5620,16 +5627,7 @@
         "kwargs",
         "signature",
         "semantic edit",
-        "codemod",
-        "add parameter",
-        "add a parameter",
-        "add argument",
-        "optional parameter",
-        "default parameter",
-        "add",
-        "optional",
-        "default",
-        "argument"
+        "codemod"
       ],
       "limitations": [
         "edits identifiers, never strings or formatting: comment/docstring words byte-preserved; all splices are byte-integrity-checked at exact identifier spans (SPAN_INTEGRITY refusal).",
@@ -6181,9 +6179,9 @@
         "verified"
       ],
       "source": {
-        "module": "coverage",
-        "type": "pypi",
-        "version_family": ">=7.0"
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -6449,9 +6447,9 @@
         "verified"
       ],
       "source": {
-        "module": "bandit",
-        "type": "pypi",
-        "version_family": ">=1.7"
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {
@@ -6710,7 +6708,7 @@
       "requires": [
         "python.source.crossfile_edit.choreograph.v1",
         "python.source.change_impact.testselect.v1",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -6763,6 +6761,7 @@
           "capability_id": "python.software.repair.apply.verified.v1",
           "output_path": "${input.output_path}",
           "source_root": "${input.source_root}",
+          "synthesize_regression_test": "${input.synthesize_regression_test}",
           "test_argv": "${input.test_argv}",
           "test_paths": "${input.test_paths}",
           "timeout_s": 60
@@ -6773,7 +6772,8 @@
           "value": true
         },
         "optional": [
-          "test_argv"
+          "test_argv",
+          "synthesize_regression_test"
         ],
         "type": "invoke_capability"
       },
@@ -7701,107 +7701,6 @@
         "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165"
       }
     },
-    "python.software.synthesize_function.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.synthesize_function.v1",
-          "function_name": "${input.function_name}",
-          "goal": "${input.goal}",
-          "operation": "${input.operation}",
-          "output_path": "${input.output_path}",
-          "regression_test_file": "${input.regression_test_file}",
-          "source_root": "${input.source_root}",
-          "synthesize_regression_test": true,
-          "target_file": "${input.target_file}",
-          "test_paths": "${input.test_paths}"
-        },
-        "expect": {
-          "field": "verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_program_synthesizer_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "synthesize",
-        "implement",
-        "write function",
-        "add function",
-        "add a function",
-        "total function",
-        "feature",
-        "program synthesis",
-        "stun",
-        "bottom-up",
-        "specification",
-        "regression test",
-        "add a regression test",
-        "fix and add test",
-        "function",
-        "regression",
-        "test",
-        "fix",
-        "bug",
-        "total",
-        "export",
-        "returns",
-        "add",
-        "models"
-      ],
-      "limitations": [
-        "Synthesizes total Python functions from test-suite I/O + exception contracts and explicit domain guards using bottom-up observational-equivalence enumeration, exact affine/multivariate Gaussian elimination, and STUN conditional branch unification.",
-        "Fails closed and restores target module bytes on any failing test or unsatisfiable contract."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.software.function.synthesized",
-        "python.source.feature.synthesized",
-        "python.source.write.synthesized_function"
-      ],
-      "requires": [],
-      "result_fields": [
-        "adapter",
-        "capability_id",
-        "exception_contract_count",
-        "files_edited",
-        "function_name",
-        "incremental_spend_usd",
-        "model_dependency_count",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "parameters",
-        "positive_example_count",
-        "target_file",
-        "verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_program_synthesizer_v1.py",
-        "module": "ast",
-        "type": "python_stdlib",
-        "version_family": "3.x"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified": true,
-        "mission_id": "HARDCORE-SWE-SYNTH-001",
-        "observed_effect": {
-          "total_function_synthesis": true,
-          "verified": true
-        },
-        "receipt_path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1.json",
-        "state_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
-      }
-    },
     "python.source.audit.ast": {
       "action_template": {
         "args": {
@@ -8015,13 +7914,18 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
+        "cyclomatic_complexity",
         "functions_measured",
+        "is_asymptotic_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "quadratic_symbols",
+        "total_cyclomatic",
         "worst_class",
+        "worst_cyclomatic",
         "worst_function",
         "worst_nesting"
       ],
@@ -8031,7 +7935,36 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-COMPLEXITY-001",
+        "observed_effect": {
+          "adapter_sha256": "b15689be367b6152b91070764a133f1ba405d89b21d78a8a12e503aa287a8114",
+          "checks": {
+            "constructed": {
+              "flat": {
+                "cyclomatic": 1,
+                "lineno": 4,
+                "nesting": 0
+              },
+              "nested": {
+                "cyclomatic": 5,
+                "lineno": 8,
+                "nesting": 2
+              }
+            },
+            "reported_functions": 2,
+            "reported_worst": "nested"
+          },
+          "claim": "ranks functions by loop-nesting depth and by McCabe's cyclomatic number, both recomputed from the tree",
+          "elapsed_s": 0.004,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COMPLEXITY-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-COMPLEXITY-001.json"
+      }
     },
     "python.source.crossfile_edit.choreograph.v1": {
       "action_template": {
@@ -8180,7 +8113,29 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-DEAD-CODE-001",
+        "observed_effect": {
+          "adapter_sha256": "181dd7c72ae6a7c1d11b077b8bf0e6ea6f40de6401c2d6b58e46346a14e645a8",
+          "checks": {
+            "considered_count": 3,
+            "constructed_dead": "unused_helper",
+            "constructed_live": "used_helper",
+            "reported_dead": [
+              "report",
+              "unused_helper"
+            ]
+          },
+          "claim": "separates a helper with no caller from one with a caller",
+          "elapsed_s": 0.009,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEAD-CODE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DEAD-CODE-001.json"
+      }
     },
     "python.source.definition_count.v1": {
       "action_template": {
@@ -8244,7 +8199,29 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-DEFINITION-COUNT-001",
+        "observed_effect": {
+          "adapter_sha256": "7fb153f60172f69f18c1e17854ce92a8357ec129e8c4bf686967f08b7510508b",
+          "checks": {
+            "constructed_classes": 2,
+            "constructed_functions": 3,
+            "reported": {
+              "class_count": 2,
+              "definition_count": 5,
+              "function_count": 3
+            }
+          },
+          "claim": "counts every function and class in a tree, by ast, exactly",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DEFINITION-COUNT-001.json"
+      }
     },
     "python.source.secret_scan.v1": {
       "action_template": {
@@ -8306,11 +8283,37 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+        "adapter_sha256": "726e06b24589f3451c3a9626e1d75e9cd30747d5531266e8ec4615b203d7b79d",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SECRET-SCAN-001",
+        "observed_effect": {
+          "adapter_sha256": "7830d7eb02be5b0019efc9ca2aeace66f33d1d57106061e773907a9dc01919c5",
+          "checks": {
+            "constructed_line": 4,
+            "reported": [
+              {
+                "line": 4,
+                "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets/config.py",
+                "redacted": "AKIA\u202620",
+                "signature": "aws_access_key_id"
+              }
+            ],
+            "secret_echoed_in_report": false
+          },
+          "claim": "finds a published credential shape at its real line and never echoes it",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECRET-SCAN-001.json"
+      }
     },
     "python.source.symbols.index.ast": {
       "action_template": {
@@ -8360,8 +8363,7 @@
         }
       },
       "provides": [
-        "python.source.symbol_index",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "requires": [],
       "result_fields": [
@@ -8372,7 +8374,9 @@
         "output_path",
         "output_sha256",
         "output_verified",
+        "parsed_module_count",
         "reference_count",
+        "reused_module_count",
         "symbol_count",
         "unparseable_count",
         "unparseable_paths"
@@ -8527,24 +8531,49 @@
       "requires": [],
       "result_fields": [
         "adapter",
+        "analysis_model",
         "answer",
         "finding",
         "finding_count",
+        "is_security_proof",
         "output_path",
         "output_sha256",
         "output_verified",
         "reaches",
         "sink",
         "source_function",
+        "source_functions",
+        "source_root",
         "trace"
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
+        "adapter_sha256": "c494fa06f4078cdeb7bce26b86d2e462c3bf9305938d32a5714b69524bd35d17",
         "module": "ast",
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TAINT-FLOW-001",
+        "observed_effect": {
+          "adapter_sha256": "d0106e401d0138ca416b9a8707a3952813eae11209b8acef7357608a08298502",
+          "checks": {
+            "clean_world_answer": "no",
+            "constructed_sink": "os.system",
+            "constructed_source": "json.loads(raw) on a parameter",
+            "control_world_is_taint_free_by_construction": true,
+            "reported_answer": "yes"
+          },
+          "claim": "traces an input boundary to a shell sink, and says no when it does not",
+          "elapsed_s": 0.003,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TAINT-FLOW-001.json"
+      }
     },
     "python.source.test_adequacy.v1": {
       "action_template": {
@@ -8613,7 +8642,27 @@
         "type": "python_stdlib",
         "version_family": "3.x"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TEST-ADEQUACY-001",
+        "observed_effect": {
+          "adapter_sha256": "bb50ac452294b6d50c20a241e77eafb4203deb5eb942ea755375beda84f696b9",
+          "checks": {
+            "constructed_uncovered_line": 9,
+            "reported_answer": "no",
+            "reported_unexecuted": [
+              9
+            ]
+          },
+          "claim": "names the executable line the suite never runs",
+          "elapsed_s": 0.043,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TEST-ADEQUACY-001.json"
+      }
     },
     "python.symbol.resolve.standalone.v1": {
       "action_template": {
@@ -8649,7 +8698,6 @@
       ],
       "requires": [
         "python.source.symbol_index",
-        "python.source.symbols.index.ast",
         "code.symbols.multilanguage.indexed"
       ],
       "result_fields": [
@@ -9033,7 +9081,7 @@
         "python.tests.generate.scaffold"
       ],
       "requires": [
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -9200,7 +9248,27 @@
         "adapter_path": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py",
         "type": "brain_native_deterministic_composition"
       },
-      "status": "VERIFIED_BOUND_CAPABILITY"
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-MERGE-RESOLVE-001",
+        "observed_effect": {
+          "adapter_sha256": "5b598aa0b9dc1e0bf9ef4a42ed272e94b8009373cefc3978f7e0e9e2aced000a",
+          "checks": {
+            "both_conflict_sides_kept": true,
+            "file_parses": true,
+            "markers_left": [],
+            "suite_green_when_the_verifier_ran_it": true,
+            "suite_tail": ".                                                                        [100%]\n1 passed in 0.01s"
+          },
+          "claim": "a conflicted file keeps both sides, loses every marker, and the suite goes green",
+          "elapsed_s": 0.044,
+          "verified": true
+        },
+        "provenance": "canonical/runtime/verify_bound_capability_provenance_v1.py --check re-derives the claim from a constructed world with no adapter in the loop",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MERGE-RESOLVE-001.json"
+      }
     },
     "shell.command.run": {
       "action_template": {
@@ -9737,11 +9805,13 @@
       ],
       "provides": [
         "software.repair.choreography.verified",
-        "software.patch.crossfile.atomic"
+        "software.patch.crossfile.atomic",
+        "software.source.write.crossfile",
+        "source.repair.applied"
       ],
       "requires": [
         "python.fault.localization.symbol_ranked",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",

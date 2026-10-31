@@ -167,8 +167,101 @@ def _node_key(node: ast.AST) -> tuple:
         getattr(node,"end_lineno",None),getattr(node,"end_col_offset",None),
     )
 
-def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals: list[str]):
+def _declared_fields(tree: ast.AST) -> list[str]:
+    """Every field a class in this module declares about its own instances.
+
+    A dataclass annotation, a ``self.x = ...`` assignment and a ``__slots__``
+    entry declare the same fact and are read the same way.  This is the only
+    type information a repair search needs for the dropped-operand family: the
+    fields of the object an expression is projecting, taken from the module
+    itself rather than from a curated list.
+    """
+    fields: list[str] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ClassDef):
+            continue
+        for stmt in node.body:
+            if isinstance(stmt, ast.AnnAssign) and isinstance(stmt.target, ast.Name):
+                if stmt.target.id not in fields:
+                    fields.append(stmt.target.id)
+            if isinstance(stmt, ast.Assign) and any(
+                    isinstance(t, ast.Name) and t.id == "__slots__" for t in stmt.targets):
+                for el in getattr(stmt.value, "elts", ()):
+                    if isinstance(el, ast.Constant) and isinstance(el.value, str) \
+                            and el.value not in fields:
+                        fields.append(el.value)
+        for sub in ast.walk(node):
+            if not isinstance(sub, (ast.Assign, ast.AnnAssign)):
+                continue
+            targets = list(sub.targets) if isinstance(sub, ast.Assign) else [sub.target]
+            for target in targets:
+                if isinstance(target, ast.Attribute) and isinstance(target.value, ast.Name) \
+                        and target.value.id == "self" and target.attr not in fields:
+                    fields.append(target.attr)
+    return fields
+
+
+def _read_attributes(tree: ast.AST) -> list[str]:
+    """Attribute names this module reads on objects, minus the ones it calls.
+
+    Same-file evidence for the same fact `_declared_fields` reads when the class
+    happens to live in the file: `item.price_cents * item.qty` in `line_total`
+    says `qty` is a field of the thing `cart_total` also iterates, even though
+    the class is in another module and no annotation connects them.  Called
+    attribute names (methods) are dropped -- a bound method is not an operand.
+    """
+    called = {n.func.attr for n in ast.walk(tree)
+              if isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)}
+    out: list[str] = []
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Attribute) and isinstance(node.ctx, ast.Load) \
+                and node.attr not in called and node.attr not in out:
+            out.append(node.attr)
+    return out
+
+
+def _imported_fields(tree: ast.AST, source_path: Any) -> list[str]:
+    """Declared fields of the modules this one imports by name.
+
+    The class a bug's operand belongs to frequently lives one module over
+    (`from app.models import Item`), so the fields `_declared_fields` would read
+    on the spot are one import away.  Resolving import -> file -> declarations is
+    static, needs no execution, and stays inside the source root: parents are
+    walked from the file upward and the first existing module wins.
+    """
+    if source_path is None:
+        return []
+    path = pathlib.Path(str(source_path))
+    out: list[str] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ImportFrom) or node.level or not node.module:
+            continue
+        parts = node.module.split(".")
+        for parent in list(path.parents)[:8]:
+            hit = parent.joinpath(*parts).with_suffix(".py")
+            if not hit.is_file():
+                continue
+            try:
+                other = ast.parse(hit.read_text(encoding="utf-8"), filename=str(hit))
+            except (SyntaxError, ValueError, OSError, UnicodeDecodeError):
+                break
+            for name in _declared_fields(other):
+                if name not in out:
+                    out.append(name)
+            break
+    return out
+
+
+def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals: list[str],
+                    source_path: Any = None):
     seen=set()
+    _fields=_declared_fields(tree)
+    for _a in _read_attributes(tree):
+        if _a not in _fields:
+            _fields.append(_a)
+    for _a in _imported_fields(tree, source_path):
+        if _a not in _fields:
+            _fields.append(_a)
     for node in _locations(tree):
         key=_node_key(node)
         if isinstance(node,ast.Compare) and len(node.ops)==1:
@@ -197,6 +290,38 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                 seen.add(sig)
                 yield key,_descriptor(node,"BINOP_SWAP",type(node.op).__name__+"->"+newtyp.__name__),(
                     lambda n,newtyp=newtyp: ast.BinOp(left=n.left,op=newtyp(),right=n.right)
+                )
+        # DROPPED OPERAND -- the exact dual of BINOP_SWAP, and the second half of
+        # the same injected-defect class.  The repo already records that "the
+        # canonical injected-operator defect is + where * belongs"; a *removed*
+        # operator is that defect seen from the other side: `total += price * qty`
+        # arrives as `total += price`, and no swap can put the missing operand
+        # back because there is no node left to swap.  Measured 2026-10-31 on a
+        # cart-total regression: 74 candidates, not one of them touches the line
+        # (`i.price_cents` -> `i.price_cents * i.qty` is outside the grammar), so
+        # three escalated engines burned 105 s and every one of them was right to
+        # report OPEN -- the search space, not the search, was the ceiling.
+        #
+        # The operand pool is the module's own declared fields (see
+        # `_declared_fields`), never a hardcoded list: whatever fields the class
+        # declares are exactly the tokens such a bug drops.  Bounded at 4 fields
+        # per site and kept in its own family so no legacy single-site candidate
+        # is ever displaced from its budget.
+        if len(_fields)>=2 and isinstance(node,ast.Attribute) and isinstance(node.ctx,ast.Load) \
+                and isinstance(node.value,ast.Name) and node.attr in _fields:
+            _base=node.value.id
+            for _other in [f for f in _fields if f!=node.attr][:4]:
+                sig=(key,"dropped",_other)
+                if sig in seen: continue
+                seen.add(sig)
+                yield key,_descriptor(
+                    node,"DROPPED_OPERAND",
+                    f"{_base}.{node.attr} -> {_base}.{node.attr} * {_base}.{_other}",
+                    "dropped_operand"),(
+                    lambda n,_other=_other,_base=_base: ast.BinOp(
+                        left=n,op=ast.Mult(),
+                        right=ast.Attribute(value=ast.Name(id=_base,ctx=ast.Load()),
+                                            attr=_other,ctx=ast.Load()))
                 )
         if isinstance(node,ast.Constant):
             value=node.value
@@ -448,7 +573,7 @@ def _brain_run_stdlib(target,script):
   try:runpy.run_path(str(target),run_name="__main__")
   except SystemExit as exc:
    if exc.code not in (None,0):raise
-  return
+  return 1
  class _R(unittest.TestResult):
   def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None;self.no_passing=False
   def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err
@@ -467,6 +592,7 @@ def _brain_run_stdlib(target,script):
   if res.err:_brain_reraise_failure(res.err[1],res.err[2])
   if res.no_passing:raise RuntimeError("NO_PASSING_TESTS_EXECUTED")
   raise AssertionError("SUITE_FAILED_WITHOUT_EXCEPTION_INFO")
+ return res.testsRun-len(res.skipped)
 
 def _brain_run_pytest(targets,shapes):
  import pytest
@@ -535,6 +661,7 @@ def _brain_run_pytest(targets,shapes):
    exc,tb=report.exception
    _brain_reraise_failure(exc,tb)
   raise RuntimeError("PYTEST_EXECUTION_FAILED:"+str(status))
+ return report.passed
 
 def _brain_run_suites(targets):
  targets=[pathlib.Path(t).resolve() for t in targets]
@@ -545,12 +672,13 @@ def _brain_run_suites(targets):
  if any(shape[1] for shape in shapes) and not has_pytest:
   raise RuntimeError("PYTEST_REQUIRED:"+", ".join(str(t) for t,s in zip(targets,shapes) if s[1]))
  if has_pytest and any(shape[0] or shape[1] for shape in shapes):
-  _brain_run_pytest(targets,shapes);return
- errors=[]
+  return _brain_run_pytest(targets,shapes)
+ errors=[];passed=0
  for target,shape in zip(targets,shapes):
-  try:_brain_run_stdlib(target,shape[2])
+  try:passed+=_brain_run_stdlib(target,shape[2])
   except BaseException as exc:errors.append(exc)
  if errors:_brain_reraise_failure(errors[0],errors[0].__traceback__)
+ return passed
 
 def _brain_run_suite(target):
  _brain_run_suites([target])
@@ -561,97 +689,6 @@ SUITE_ENTRY = (
     "import pathlib,sys\n"
     "_brain_run_suites([pathlib.Path(_t).resolve() for _t in sys.argv[1:]])\n"
 )
-
-BATCH_SUITE_ENTRY = r'''
-import importlib.machinery, io, json, linecache, os, pathlib, signal, sys, time
-
-class _BrainCandTimeout(BaseException):
- pass
-
-def _brain_batch_main():
- manifest_path = pathlib.Path(sys.argv[1]).resolve()
- payload = json.loads(manifest_path.read_text(encoding="utf-8"))
- source_abs = str(pathlib.Path(payload["source_path"]).resolve())
- targets = [pathlib.Path(t).resolve() for t in payload["test_paths"]]
- per_timeout = float(payload.get("per_candidate_timeout_s", 5.0))
- max_winners = int(payload.get("max_winners", 3))
- evict_dirs = tuple(str(pathlib.Path(d).resolve()) for d in payload.get("evict_dirs", []))
- orig_get_code = importlib.machinery.SourceFileLoader.get_code
- orig_get_data = importlib.machinery.SourceFileLoader.get_data
- current_bytes = [None]
- sys.dont_write_bytecode = True
-
- def _patched_get_data(self, path):
-  if current_bytes[0] is not None and os.path.abspath(path) == source_abs:
-   return current_bytes[0]
-  return orig_get_data(self, path)
-
- def _patched_get_code(self, fullname):
-  if current_bytes[0] is not None and os.path.abspath(self.get_filename(fullname)) == source_abs:
-   return compile(current_bytes[0], source_abs, "exec", dont_inherit=True)
-  return orig_get_code(self, fullname)
-
- importlib.machinery.SourceFileLoader.get_data = _patched_get_data
- importlib.machinery.SourceFileLoader.get_code = _patched_get_code
- has_timer = hasattr(signal, "setitimer") and hasattr(signal, "SIGALRM")
- if has_timer:
-  signal.signal(signal.SIGALRM, lambda _s, _f: (_ for _ in ()).throw(_BrainCandTimeout()))
-
- results = []
- winners = 0
- real_stdout, real_stderr = sys.stdout, sys.stderr
- for item in payload["candidates"]:
-  idx = item["index"]
-  cand_text = item["source"]
-  current_bytes[0] = cand_text.encode("utf-8")
-  linecache.cache[source_abs] = (
-   len(cand_text), None, cand_text.splitlines(True), source_abs
-  )
-  for mname, mod in list(sys.modules.items()):
-   mfile = getattr(mod, "__file__", None)
-   if not mfile:
-    continue
-   amf = os.path.abspath(mfile)
-   if amf == source_abs or any(amf == rt or amf.startswith(rt + os.sep) for rt in evict_dirs):
-    sys.modules.pop(mname, None)
-  t0 = time.monotonic()
-  timed_out = False
-  rc = 0
-  sink = io.StringIO()
-  sys.stdout = sink
-  sys.stderr = sink
-  try:
-   if has_timer:
-    signal.setitimer(signal.ITIMER_REAL, per_timeout)
-   _brain_run_suites(targets)
-  except _BrainCandTimeout:
-   timed_out = True
-   rc = None
-  except SystemExit as exc:
-   rc = 0 if exc.code in (None, 0) else 1
-  except BaseException:
-   rc = 1
-  finally:
-   if has_timer:
-    signal.setitimer(signal.ITIMER_REAL, 0.0)
-   sys.stdout = real_stdout
-   sys.stderr = real_stderr
-  results.append({
-   "index": idx,
-   "returncode": rc,
-   "timed_out": timed_out,
-   "elapsed_s": round(time.monotonic() - t0, 6),
-  })
-  if rc == 0 and not timed_out:
-   winners += 1
-   if winners >= max_winners:
-    break
- real_stdout.write(json.dumps({"results": results}) + "\n")
- real_stdout.flush()
-
-_brain_batch_main()
-'''
-
 
 
 def argv_names_a_target(argv: Any) -> bool:
@@ -717,19 +754,70 @@ def _source_env(*paths: Any) -> dict[str, str]:
         d = q if q.is_dir() else q.parent
         if str(d) not in dirs:
             dirs.append(str(d))
-        if (d / "__init__.py").is_file():
-            pkg = d
-            while (pkg.parent / "__init__.py").is_file():
-                pkg = pkg.parent
-            wroot = pkg.parent
-            if str(wroot) not in dirs and not any(
-                f.stem in sys.stdlib_module_names for f in wroot.glob("*.py")
-            ):
-                dirs.append(str(wroot))
+        # NO package-dir walk here, reverted with evidence: intermediate
+        # __init__.py parents on sys.path SHADOW STDLIB MODULES -- the
+        # tornado package dir made `import locale` resolve to
+        # tornado/locale.py inside gettext (measured: AttributeError
+        # locale.normalize in-run, absent standalone). Package-rooted test
+        # imports are satisfied by the WORLD ROOT, which callers already
+        # pass as source_root; the rc=2/zero-failing-tests symptom this walk
+        # once chased turned out to be the harness slicing -m off the argv.
+    # THE PROJECT ROOT THE TESTS IMPORT THROUGH, DERIVED FROM THE IMPORTS THEMSELVES.
+    #
+    # Measured 2026-10-31 on the 18-sentence probe (`fix_broken`, fixture <d>/pkg with
+    # <d>/pkg/test_calc.py doing `from pkg.calc import add`): the source dir alone was on
+    # PYTHONPATH, so every candidate run died on the test file's import line, every candidate
+    # scored the same as the baseline, and the bounded search reported no verified repair for a
+    # one-token bug (`return a - b`).  The same defect made the localizer report PASS with an
+    # empty ranking.
+    #
+    # The fix must NOT put a package directory on sys.path -- that was reverted above with a
+    # measured shadowing receipt (tornado's dir made `import locale` resolve to
+    # tornado/locale.py).  So take the top-level names the test files actually import, and add
+    # the ancestor directory that CONTAINS that package.  A parent directory containing `pkg/`
+    # is the layout every project uses; it cannot shadow a stdlib module the way `pkg/` itself
+    # can, and every name is read from the suite rather than guessed from a directory walk.
+    dirs.extend(_import_root_dirs(dirs, [str(x) for x in paths]))
     existing = os.environ.get("PYTHONPATH", "")
     if existing:
         dirs.append(existing)
     return {"PYTHONPATH": os.pathsep.join(dirs)}
+
+
+def _import_root_dirs(dirs: list[str], paths: list[str]) -> list[str]:
+    """Directories that make the modules the tests import importable. Bounded, import-derived."""
+    import ast as _ast
+    import sys as _sys
+    names: set[str] = set()
+    for raw in paths:
+        q = pathlib.Path(raw)
+        if q.suffix != ".py" or not q.is_file():
+            continue
+        try:
+            tree = _ast.parse(q.read_text(encoding="utf-8"), filename=str(q))
+        except (SyntaxError, ValueError, UnicodeDecodeError, OSError):
+            continue
+        for node in _ast.walk(tree):
+            if isinstance(node, _ast.Import):
+                for alias in node.names:
+                    names.add(alias.name.split(".")[0])
+            elif isinstance(node, _ast.ImportFrom) and not node.level and node.module:
+                names.add(node.module.split(".")[0])
+    known = getattr(_sys, "stdlib_module_names", frozenset())
+    names = {n for n in names if n and n not in known}
+    if not names:
+        return []
+    roots: list[str] = []
+    for d in dirs:
+        p = pathlib.Path(d)
+        for _ in range(8):
+            p = p.parent
+            if p == p.parent:
+                break
+            if any((p / n / "__init__.py").is_file() for n in names) and str(p) not in roots:
+                roots.append(str(p))
+                break
+    return roots
 
 
 def _byte_offset(lines: list[bytes], lineno: int, col: int) -> int:
@@ -810,132 +898,6 @@ def _diff(rel: str, before: str, after: str) -> str:
         fromfile="a/"+rel,tofile="b/"+rel
     ))
 
-
-def _structural_candidate_specs(source_text: str, tree: ast.AST) -> list[tuple[str, dict[str, Any]]]:
-    """SPR/Prophet-inspired structural clause candidates (isolated reserve, zero legacy dilution)."""
-    out: list[tuple[str, dict[str, Any]]] = []
-    seen_texts: set[str] = {source_text}
-
-    def add_text(cand_str: str, node: ast.AST, kind: str, detail: str) -> None:
-        if not cand_str or cand_str in seen_texts:
-            return
-        try:
-            ast.parse(cand_str)
-        except SyntaxError:
-            return
-        seen_texts.add(cand_str)
-        out.append((cand_str, _descriptor(node, kind, detail, family="structural")))
-
-    for node in _locations(tree):
-        key = _node_key(node)
-        # 1. Subscript d[k] -> d.get(k) safe lookup (prevents KeyError crashes)
-        if isinstance(node, ast.Subscript) and isinstance(node.ctx, ast.Load) and not isinstance(node.slice, ast.Slice):
-            cand = _render_candidate(
-                source_text, key,
-                lambda n: ast.Call(
-                    func=ast.Attribute(value=n.value, attr="get", ctx=ast.Load()),
-                    args=[n.slice], keywords=[],
-                ),
-            )
-            if cand:
-                add_text(cand, node, "SUBSCRIPT_TO_DICT_GET", "d[k] -> d.get(k)")
-
-        # 2. Condition clause projection & null-guard tightening (SPR condition refinement)
-        if isinstance(node, ast.BoolOp) and len(node.values) >= 2:
-            for idx in range(len(node.values)):
-                cand = _render_candidate(source_text, key, lambda n, idx=idx: n.values[idx])
-                if cand:
-                    add_text(cand, node, "BOOL_CLAUSE_PROJECT", f"keep clause {idx}")
-        if isinstance(node, ast.If):
-            tkey = _node_key(node.test)
-            # Null-guard conjunction if condition touches `obj.attr` or `len(obj)`
-            guarded_names: list[str] = []
-            for sub in ast.walk(node.test):
-                if isinstance(sub, ast.Attribute) and isinstance(sub.value, ast.Name) and sub.value.id != "self":
-                    if sub.value.id not in guarded_names:
-                        guarded_names.append(sub.value.id)
-                elif isinstance(sub, ast.Call) and isinstance(sub.func, ast.Name) and sub.func.id == "len" and sub.args and isinstance(sub.args[0], ast.Name):
-                    if sub.args[0].id not in guarded_names:
-                        guarded_names.append(sub.args[0].id)
-            for gname in guarded_names[:2]:
-                cand = _render_candidate(
-                    source_text, tkey,
-                    lambda n, gname=gname: ast.BoolOp(
-                        op=ast.And(),
-                        values=[
-                            ast.Compare(left=ast.Name(id=gname, ctx=ast.Load()), ops=[ast.IsNot()], comparators=[ast.Constant(value=None)]),
-                            n,
-                        ],
-                    ),
-                )
-                if cand:
-                    add_text(cand, node.test, "CONDITION_NULL_GUARD", f"{gname} is not None and cond")
-
-        # 3. Off-by-one range(n) -> range(n + 1) / range(1, n + 1)
-        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "range":
-            if len(node.args) == 1:
-                cand = _render_candidate(
-                    source_text, key,
-                    lambda n: ast.Call(
-                        func=n.func,
-                        args=[ast.BinOp(left=n.args[0], op=ast.Add(), right=ast.Constant(value=1))],
-                        keywords=n.keywords,
-                    ),
-                )
-                if cand:
-                    add_text(cand, node, "RANGE_UPPER_INCLUSIVE", "range(n) -> range(n + 1)")
-            elif len(node.args) == 2:
-                cand = _render_candidate(
-                    source_text, key,
-                    lambda n: ast.Call(
-                        func=n.func,
-                        args=[n.args[0], ast.BinOp(left=n.args[1], op=ast.Add(), right=ast.Constant(value=1))],
-                        keywords=n.keywords,
-                    ),
-                )
-                if cand:
-                    add_text(cand, node, "RANGE_STOP_PLUS_ONE", "range(a, b) -> range(a, b + 1)")
-
-        # 3b. Extraneous binary operand projection (expr +/- k -> expr)
-        if isinstance(node, ast.BinOp):
-            cand_l = _render_candidate(source_text, key, lambda n: n.left)
-            if cand_l:
-                add_text(cand_l, node, "BINOP_LEFT_PROJECTION", "lhs op rhs -> lhs")
-            cand_r = _render_candidate(source_text, key, lambda n: n.right)
-            if cand_r:
-                add_text(cand_r, node, "BINOP_RIGHT_PROJECTION", "lhs op rhs -> rhs")
-
-        # 4. Function entry guard synthesis (None / empty early-return or ValueError)
-        if isinstance(node, ast.FunctionDef) and node.body and node.args.args:
-            params = [a.arg for a in node.args.args if a.arg not in ("self", "cls")]
-            if params:
-                p0 = params[0]
-                lines = source_text.splitlines(keepends=True)
-                first_stmt = node.body[0]
-                if isinstance(first_stmt, ast.Expr) and isinstance(first_stmt.value, ast.Constant) and isinstance(first_stmt.value.value, str) and len(node.body) > 1:
-                    first_stmt = node.body[1]
-                indent = " " * getattr(first_stmt, "col_offset", 4)
-                ins_line = getattr(first_stmt, "lineno", node.lineno + 1) - 1
-                for g_kind, g_stmt in (
-                    ("GUARD_NONE_RETURN_NONE", f"{indent}if {p0} is None:\n{indent}    return None\n"),
-                    ("GUARD_EMPTY_RETURN_ZERO", f"{indent}if isinstance({p0}, (list, tuple, str, dict, set)) and len({p0}) == 0:\n{indent}    return 0\n"),
-                    ("GUARD_NONE_RAISE_VALUE_ERROR", f"{indent}if {p0} is None:\n{indent}    raise ValueError('None not allowed')\n"),
-                ):
-                    cand = "".join(lines[:ins_line]) + g_stmt + "".join(lines[ins_line:])
-                    add_text(cand, node, g_kind, f"entry guard on {p0}")
-        if len(out) >= 24:
-            break
-    return out
-
-
-def _is_standard_suite_argv(argv: list[str]) -> bool:
-    return (
-        len(argv) >= 4
-        and argv[1] == "-c"
-        and argv[2] == SUITE_RUNNER + SUITE_ENTRY
-    )
-
-
 def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     repo=pathlib.Path(root).resolve()
     if not isinstance(args,Mapping):
@@ -986,145 +948,57 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     legacy_tested=0
     neigh_tested=0
     NEIGH_RESERVE=6  # own budget; legacy slots untouched (zero dilution)
-    STRUCT_RESERVE=16  # SPR structural clause budget; zero legacy dilution
-
-    # Materialize bounded candidate queue in deterministic stream order using _CandidateRenderer
-    queued: list[tuple[str, dict[str, Any]]] = []
-    for key,desc,replacer in _candidate_specs(tree,nums,strings):
-        if desc.get("family")=="neighborhood":
-            if neigh_tested>=NEIGH_RESERVE:
+    DROPPED_RESERVE=8  # same law for the dropped-operand family
+    dropped_tested=0
+    try:
+        for key,desc,replacer in _candidate_specs(tree,nums,strings,source):
+            if desc.get("family")=="neighborhood":
+                if neigh_tested>=NEIGH_RESERVE:
+                    continue
+                neigh_tested+=1
+            elif desc.get("family")=="dropped_operand":
+                if dropped_tested>=DROPPED_RESERVE:
+                    continue
+                dropped_tested+=1
+            elif legacy_tested>=max_candidates:
+                continue  # keep scanning: every family reserve must stay reachable
+            candidate=renderer.render(key,replacer)
+            if candidate is None or candidate==source_text:
                 continue
-            neigh_tested+=1
-        elif legacy_tested>=max_candidates:
-            continue  # keep scanning: neighborhood reserve must stay reachable
-        candidate=renderer.render(key,replacer)
-        if candidate is None or candidate==source_text:
-            continue
-        if desc.get("family")!="neighborhood":
-            legacy_tested+=1
-        queued.append((candidate, desc))
-
-    for sc_text, sc_desc in _structural_candidate_specs(source_text, tree)[:STRUCT_RESERVE]:
-        queued.append((sc_text, sc_desc))
-
-    def _verify_on_disk(cand_text: str) -> tuple[bool, list[dict[str, Any]]]:
-        replay_list=[]
-        all_ok=True
-        for _ in range(2):
-            source.write_text(cand_text,encoding="utf-8")
+            tested+=1
+            if desc.get("family") not in ("neighborhood","dropped_operand"):
+                legacy_tested+=1
+            source.write_text(candidate,encoding="utf-8")
             _purge_source_bytecode(source)
-            rr=_run_tests(repo,argv,timeout_s,env)
+            result=_run_tests(repo,argv,timeout_s,env)
             source.write_bytes(original_bytes)
             _purge_source_bytecode(source)
-            replay_list.append({
-                "returncode":rr["returncode"],
-                "timed_out":rr["timed_out"],
-                "elapsed_s":rr["elapsed_s"],
+            attempts.append({
+                "index":tested,
+                "mutation":desc,
+                "candidate_sha256":_sha(candidate.encode("utf-8")),
+                "returncode":result["returncode"],
+                "timed_out":result["timed_out"],
+                "elapsed_s":result["elapsed_s"],
             })
-            all_ok=all_ok and rr["returncode"]==0 and not rr["timed_out"]
-        return all_ok, replay_list
-
-    try:
-        if queued and _is_standard_suite_argv(argv):
-            # Mutant-schemata single-process in-RAM batch fast path (1 subprocess per chunk
-            # instead of 1 per mutant; full 2x cold subprocess replay confirms any winner).
-            evict_dirs = sorted({str(source.parent.resolve()), *[str(t.parent.resolve()) for t in tests]})
-            per_cand_t = max(1.0, min(float(timeout_s), max(3.0, float(baseline["elapsed_s"]) * 4.0 + 1.5)))
-            chunk_size = 48
-            manifest_dir = output.parent
-            manifest_dir.mkdir(parents=True, exist_ok=True)
-            manifest_file = manifest_dir / f".patch_batch_{os.getpid()}.json"
-            try:
-                for start_i in range(0, len(queued), chunk_size):
-                    chunk = queued[start_i:start_i + chunk_size]
-                    manifest_payload = {
-                        "source_path": str(source),
-                        "test_paths": [str(t) for t in tests],
-                        "per_candidate_timeout_s": per_cand_t,
-                        "max_winners": 3,
-                        "evict_dirs": evict_dirs,
-                        "candidates": [
-                            {"index": start_i + off + 1, "source": c_txt}
-                            for off, (c_txt, _d) in enumerate(chunk)
-                        ],
-                    }
-                    manifest_file.write_text(json.dumps(manifest_payload), encoding="utf-8")
-                    batch_argv = [str(sys.executable), "-c", SUITE_RUNNER + BATCH_SUITE_ENTRY, str(manifest_file)]
-                    batch_timeout = min(300, max(timeout_s, int(per_cand_t * len(chunk)) + 10))
-                    bres = _run_tests(repo, batch_argv, batch_timeout, env)
-                    parsed_rows = None
-                    if bres["returncode"] == 0 and not bres["timed_out"]:
-                        lines_out = [ln for ln in (bres["stdout"] or "").splitlines() if ln.strip()]
-                        if lines_out:
-                            try:
-                                parsed_rows = json.loads(lines_out[-1]).get("results")
-                            except Exception:
-                                parsed_rows = None
-                    if not isinstance(parsed_rows, list):
-                        # Fallback to cold per-candidate evaluation on this chunk
-                        for c_txt, desc in chunk:
-                            tested += 1
-                            source.write_text(c_txt, encoding="utf-8")
-                            _purge_source_bytecode(source)
-                            result = _run_tests(repo, argv, timeout_s, env)
-                            source.write_bytes(original_bytes)
-                            _purge_source_bytecode(source)
-                            attempts.append({
-                                "index": tested,
-                                "mutation": desc,
-                                "candidate_sha256": _sha(c_txt.encode("utf-8")),
-                                "returncode": result["returncode"],
-                                "timed_out": result["timed_out"],
-                                "elapsed_s": result["elapsed_s"],
-                            })
-                            if result["returncode"] == 0 and not result["timed_out"]:
-                                ok, replay = _verify_on_disk(c_txt)
-                                if ok:
-                                    winner = (c_txt, desc, replay)
-                                    break
-                    else:
-                        for row in parsed_rows:
-                            idx1 = int(row["index"])
-                            c_txt, desc = queued[idx1 - 1]
-                            tested += 1
-                            attempts.append({
-                                "index": tested,
-                                "mutation": desc,
-                                "candidate_sha256": _sha(c_txt.encode("utf-8")),
-                                "returncode": row["returncode"],
-                                "timed_out": row["timed_out"],
-                                "elapsed_s": row["elapsed_s"],
-                            })
-                            if row["returncode"] == 0 and not row["timed_out"]:
-                                ok, replay = _verify_on_disk(c_txt)
-                                if ok:
-                                    winner = (c_txt, desc, replay)
-                                    break
-                    if winner is not None:
-                        break
-            finally:
-                manifest_file.unlink(missing_ok=True)
-        else:
-            for candidate, desc in queued:
-                tested+=1
-                source.write_text(candidate,encoding="utf-8")
-                _purge_source_bytecode(source)
-                result=_run_tests(repo,argv,timeout_s,env)
-                source.write_bytes(original_bytes)
-                _purge_source_bytecode(source)
-                attempts.append({
-                    "index":tested,
-                    "mutation":desc,
-                    "candidate_sha256":_sha(candidate.encode("utf-8")),
-                    "returncode":result["returncode"],
-                    "timed_out":result["timed_out"],
-                    "elapsed_s":result["elapsed_s"],
-                })
-                if result["returncode"]==0 and not result["timed_out"]:
-                    ok, replay = _verify_on_disk(candidate)
-                    if ok:
-                        winner=(candidate,desc,replay)
-                        break
+            if result["returncode"]==0 and not result["timed_out"]:
+                replay=[]
+                ok=True
+                for _ in range(2):
+                    source.write_text(candidate,encoding="utf-8")
+                    _purge_source_bytecode(source)
+                    rr=_run_tests(repo,argv,timeout_s,env)
+                    source.write_bytes(original_bytes)
+                    _purge_source_bytecode(source)
+                    replay.append({
+                        "returncode":rr["returncode"],
+                        "timed_out":rr["timed_out"],
+                        "elapsed_s":rr["elapsed_s"],
+                    })
+                    ok=ok and rr["returncode"]==0 and not rr["timed_out"]
+                if ok:
+                    winner=(candidate,desc,replay)
+                    break
     finally:
         source.write_bytes(original_bytes)
         _purge_source_bytecode(source)

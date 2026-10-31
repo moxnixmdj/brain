@@ -56,8 +56,45 @@ NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 
 def _systemic(message):
-    print(json.dumps({"error": ADAPTER_ERROR, "error_kind": "systemic", "message": message}))
-    raise SystemExit(1)
+    # A STRUCTURED REFUSAL MUST CARRY ITS REASON TO THE CALLER.
+    #
+    # This printed the reason to stdout and then raised an EMPTY ``SystemExit(1)``.
+    # A CLI reader saw the JSON and was fine; the in-process door parses
+    # ``str(exc)`` for ``{"error": true, "reason": ...}`` and got the string "1",
+    # so it could only report the blind ``CAPABILITY_EXITED_PROCESS:1``.
+    # Measured 2026-10-31 on probe 48 of the advanced census: a plan request was
+    # answered by this adapter and refused with no reason at all, while the
+    # adapter had already written one.  The stdout write is kept (the CLI
+    # contract), and the same reason now travels on the exception where the
+    # in-process caller can read it.
+    payload = {"error": ADAPTER_ERROR, "error_kind": "systemic", "message": message}
+    print(json.dumps(payload))
+    raise SystemExit(json.dumps({"error": True,
+                                 "reason": ADAPTER_ERROR + ":" + str(message)[:300],
+                                 "error_kind": "systemic", "message": message}))
+
+
+SPOOL_PREFIX = "canonical/astra_runtime/tmp/"
+
+
+def _is_machine_spool(value):
+    """Is this path one of OUR OWN intermediate artifacts?
+
+    The DAG planner synthesises spool paths for slots a sentence does not name
+    (``goal_front_compiler_v1._spool_path``), and it makes them deterministic on purpose: the same
+    request always spools to the same place.  The consequence, measured 2026-10-30, is that the
+    SECOND request needing that slot dies on the first one's leftovers::
+
+        {"error": "EDIT_PLAN_INPUT_INVALID", "error_kind": "systemic",
+         "message": "output already exists: canonical/astra_runtime/tmp/spool_0_output.json"}
+
+    That is the machine refusing to write its own scratch, and it surfaced as a raw error on
+    stdout in 2 of 46 advanced requests.  A spool artifact is scratch by construction, so a new
+    run may replace the bytes of a previous run.  Every other path keeps the existing rule: an
+    output that already exists is somebody's file and is never overwritten.
+    """
+    rel = str(value or "").replace("\\", "/")
+    return rel.startswith(SPOOL_PREFIX) and rel.rsplit("/", 1)[-1].startswith("spool_")
 
 
 def _safe_path(root, value, allow_overwrite=False, must_exist=False):
@@ -362,7 +399,8 @@ def run(args, root):
     args = dict(args or {})
     repo = Path(root).resolve()
     source_root = str(args.get("source_root") or ".")
-    output_path = _safe_path(str(repo), args.get("output_path"))
+    output_path = _safe_path(str(repo), args.get("output_path"),
+                             allow_overwrite=_is_machine_spool(args.get("output_path")))
     source_abs = _safe_path(str(repo), source_root, must_exist=True)
     if not source_abs.is_dir():
         _systemic(f"source_root is not a directory: {source_root}")

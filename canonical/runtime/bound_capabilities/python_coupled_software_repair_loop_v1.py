@@ -120,7 +120,7 @@ def _pool(row,tests,per_file):
  focus=set(row.get("focus") or ())
  out=[]
  renderer=_PATCH._CandidateRenderer(text,tree)
- for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings):
+ for key,desc,replacer in _PATCH._candidate_specs(tree,nums,strings,p):
   line=desc.get("lineno") or 0
   sym_score=max([score for a,b,score in ranges if a<=line<=b] or [0])
   focus_near=any(a<=line<=b for a,b in ((n,n) for n in focus)) or \
@@ -154,10 +154,15 @@ def _pool(row,tests,per_file):
  # the pair loop enumerates the index product of the flattened pool under
  # pair_max -- extra entries there push the winning pair past the cap
  # (the L5 (Add->+,Add->+) repair fell outside 1000).
- legacy=[e for _,e in out if e.get("family") not in ("neighborhood","guard_clause")][:per_file]
+ legacy=[e for _,e in out if e.get("family") not in ("neighborhood","guard_clause","dropped_operand")][:per_file]
  neigh=[e for _,e in out if e.get("family")=="neighborhood"][:9]
  guards=[e for _,e in out if e.get("family")=="guard_clause"][:12]
- return legacy+neigh+guards
+ # DROPPED-OPERAND RESERVE: a *removed* operand (`price` for `price * qty`) has
+ # no node to swap, so it is reachable only through this family.  Its own slots,
+ # appended -- legacy indices, pair-space membership and every existing budget
+ # stay byte-identical to what the ladder receipts measured.
+ dropped=[e for _,e in out if e.get("family")=="dropped_operand"][:8]
+ return legacy+neigh+guards+dropped
 def _apply(text,edits):
  raw=text.encode(); es=sorted(edits,key=lambda e:(e["start"],e["end"]));last=-1
  for e in es:
@@ -298,7 +303,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   originals={r["path"]:r["path"].read_bytes() for r in loc}
   pools={r["path"]:_pool(r,tests,per) for r in loc}
   items=[(r["path"],e) for r in loc for e in pools[r["path"]]]
-  items_pairs=[it for it in items if it[1].get("family")!="neighborhood"]
+  # pair space stays legacy+guard exactly as measured: a new family may add
+  # single-site candidates, never re-index the product the pair loop walks.
+  items_pairs=[it for it in items if it[1].get("family") not in ("neighborhood","dropped_operand")]
   winner=None;winner_items=None;pair_count=0;crossed=False
   # COORDINATED-NEIGHBORHOOD PHASE FIRST (decoded tqdm/9 class): a real
   # boundary fix retunes a FAMILY of thresholds with the SAME multiplier

@@ -1,0 +1,487 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "inputs": {
+            "goal": "Compile a plain goal into a bound capability",
+            "output_path": "canonical/astra_runtime/tmp/brain_out__plain_goal_bound_capability_grounding_stdlib__88e4e864d2.json"
+          },
+          "instance_id": "plain_goal.bound_capability.grounding.stdlib",
+          "provides": [
+            "plain_goal.bound_capability.grounding"
+          ],
+          "requires": [],
+          "result_fields": [
+            "broad_objective_decomposition",
+            "broad_objective_decomposition_available",
+            "candidate_capability_ids",
+            "clauses",
+            "external_discovery_allowed_for_unresolved_only",
+            "goal",
+            "goal_sha256",
+            "grounded_clause_count",
+            "input_contract_bindability_enforced",
+            "model_dependency_count",
+            "output_path",
+            "output_sha256",
+            "output_verified",
+            "unresolved_clause_indexes",
+            "whole_goal_external_discovery_forbidden_if_any_bound_grounding"
+          ]
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "inputs": {
+            "goal": "Compile a plain goal into a bound capability",
+            "output_path": "canonical/astra_runtime/tmp/brain_out__plain_goal_bound_capability_grounding_stdlib__88e4e864d2.json"
+          },
+          "instance_id": "plain_goal.bound_capability.grounding.stdlib",
+          "provides": [
+            "plain_goal.bound_capability.grounding"
+          ],
+          "requires": [],
+          "result_fields": [
+            "broad_objective_decomposition",
+            "broad_objective_decomposition_available",
+            "candidate_capability_ids",
+            "clauses",
+            "external_discovery_allowed_for_unresolved_only",
+            "goal",
+            "goal_sha256",
+            "grounded_clause_count",
+            "input_contract_bindability_enforced",
+            "model_dependency_count",
+            "output_path",
+            "output_sha256",
+            "output_verified",
+            "unresolved_clause_indexes",
+            "whole_goal_external_discovery_forbidden_if_any_bound_grounding"
+          ]
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "result": {
+        "capability_credit_delta": 0,
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "composition_capsule_head_hash": "f29642a6ff7d72b42f4133ea1ec76d5fa12dda527afeaad51e76afd81ab3d3a2",
+        "execution_trace": {
+          "trace": [
+            {
+              "cycle": 0,
+              "plan": {
+                "args": {
+                  "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                  "goal": "Compile a plain goal into a bound capability",
+                  "output_path": "canonical/astra_runtime/tmp/brain_out__plain_goal_bound_capability_grounding_stdlib__88e4e864d2.json"
+                },
+                "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                "expect": {
+                  "field": "output_verified",
+                  "type": "field_equals",
+                  "value": true
+                },
+                "type": "invoke_capability"
+              },
+              "result": {
+                "broad_objective_decomposition": null,
+                "broad_objective_decomposition_available": false,
+                "candidate_capability_ids": [
+                  "terminal.kstar.root.assess.stdlib"
+                ],
+                "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                "clauses": [
+                  {
+                    "candidates": [
+                      {
+                        "binding_affordance": {
+                          "has_goal_url": false,
+                          "proposal_binding_count": 0,
+                          "proposal_bindings_cover_all_inputs": false,
+                          "url_consumable": false
+                        },
+                        "capability_id": "terminal.kstar.root.assess.stdlib",
+                        "combined_score": 8.922839506172838,
+                        "input_bindability": {
+                          "bound_input_keys": [],
+                          "proposal_binding_keys": [],
+                          "verified": true
+                        },
+                        "lexical": {
+                          "matched_goal_tokens": [
+                            "capability"
+                          ],
+                          "matched_identity": [],
+                          "matched_keywords": [
+                            [
+                              "capability",
+                              "capability"
+                            ]
+                          ],
+                          "matched_provides": [],
+                          "score": 4
+                        },
+                        "matched_distinctive_tokens": [
+                          "capability"
+                        ],
+                        "provides": [
+                          "terminal.kstar.root.assessment",
+                          "terminal.scope_complete.proof_or_minimum_residual",
+                          "terminal.tournament.failure.witness"
+                        ],
+                        "requires": [],
+                        "similarity": {
+                          "coverage": 0.25,
+                          "score": 4.922839506172839,
+                          "sequence_ratio": 0.1728395061728395,
+                          "shared_tokens": [
+                            "capability"
+                          ]
+                        }
+                      }
+                    ],
+                    "constraints": [],
+                    "end": 44,
+                    "index": 0,
+                    "output_contract": {
+                      "extensions": [],
+                      "paths": []
+                    },
+                    "rejected_unbindable_candidates": [
+                      {
+                        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                        "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+                      },
+                      {
+                        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+                        "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:plain_goal.bound_capability.grounding.verify.stdlib:result_path:plain_goal.bound_capability.grounding"
+                      },
+                      {
+                        "capability_id": "python.software.request.semantic_behavior.compile.v1",
+                        "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+                      }
+                    ],
+                    "start": 0,
+                    "status": "UNBOUND_INPUTS_NOT_GROUNDED",
+                    "text": "Compile a plain goal into a bound capability"
+                  }
+                ],
+                "dependency": {
+                  "modules": [
+                    "difflib",
+                    "hashlib",
+                    "json",
+                    "re",
+                    "pathlib"
+                  ],
+                  "python_version": "3.11.2",
+                  "status": "LOCAL_VERIFIED",
+                  "type": "python_stdlib"
+                },
+                "external_discovery_allowed_for_unresolved_only": true,
+                "goal": "Compile a plain goal into a bound capability",
+                "goal_sha256": "8999f288a640ff1f987cb452f85766630ec22b7ad78e2773033f731dd2100164",
+                "grounded_clause_count": 1,
+                "input_contract_bindability_enforced": true,
+                "model_dependency_count": 0,
+                "output_path": "canonical/astra_runtime/tmp/brain_out__plain_goal_bound_capability_grounding_stdlib__88e4e864d2.json",
+                "output_sha256": "3df2cbf455714eb32f7cc92220bdf910f82ec44529d78bff26ad7ec32243cd52",
+                "output_verified": true,
+                "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+                "unresolved_clause_indexes": [],
+                "whole_goal_external_discovery_forbidden_if_any_bound_grounding": true
+              }
+            },
+            {
+              "cycle": 1,
+              "plan": {
+                "args": {
+                  "summary": "verified promoted bound capability execution"
+                },
+                "type": "finish",
+                "why": "All target effects have an executable minimum-cost capability plan."
+              },
+              "result": {
+                "summary": "verified promoted bound capability execution"
+              }
+            }
+          ]
+        },
+        "execution_verification": {
+          "detail": {
+            "acceptance_credit_delta": 0,
+            "all_declared_runtime_preconditions_have_prior_or_initial_witnesses": true,
+            "all_explicit_cross_role_result_edges_are_backward_and_declared": true,
+            "all_planned_nonfinish_actions_have_runtime_expectation_witnesses": true,
+            "all_target_effects_have_witnesses": true,
+            "capsule": {
+              "genesis_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+              "head_hash": "f29642a6ff7d72b42f4133ea1ec76d5fa12dda527afeaad51e76afd81ab3d3a2",
+              "records": [
+                {
+                  "action_ref": "f7c9015a66b67e751f5415ad53b9d4da7b665f32df5fafd603bd8de29b7033e6",
+                  "evidence_refs": [
+                    "result_sha256:ebdf825a81d224443ab2fba55681b028d8637438facd145ff026bab30e5f8328"
+                  ],
+                  "index": 0,
+                  "input_bindings": {},
+                  "lineage": {
+                    "effect:plain_goal.bound_capability.grounding": [
+                      "evidence:result_sha256:ebdf825a81d224443ab2fba55681b028d8637438facd145ff026bab30e5f8328",
+                      "action:f7c9015a66b67e751f5415ad53b9d4da7b665f32df5fafd603bd8de29b7033e6"
+                    ]
+                  },
+                  "parent_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+                  "producer": "plain_goal.bound_capability.grounding.stdlib",
+                  "provides": [
+                    "effect:plain_goal.bound_capability.grounding"
+                  ],
+                  "record_hash": "f29642a6ff7d72b42f4133ea1ec76d5fa12dda527afeaad51e76afd81ab3d3a2",
+                  "requires": [],
+                  "value_hashes": {
+                    "effect:plain_goal.bound_capability.grounding": "66fc488554583dc22b9e21db9fd7c0c234edac6e0dc9b164eb51da28dfef4c01"
+                  },
+                  "values": {
+                    "effect:plain_goal.bound_capability.grounding": {
+                      "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                      "cycle": 0,
+                      "effect": "plain_goal.bound_capability.grounding",
+                      "expectation": {
+                        "field": "output_verified",
+                        "type": "field_equals",
+                        "value": true
+                      },
+                      "raw_action_sha256": "f7c9015a66b67e751f5415ad53b9d4da7b665f32df5fafd603bd8de29b7033e6",
+                      "resolved_action_sha256": "f7c9015a66b67e751f5415ad53b9d4da7b665f32df5fafd603bd8de29b7033e6",
+                      "result_sha256": "ebdf825a81d224443ab2fba55681b028d8637438facd145ff026bab30e5f8328"
+                    }
+                  }
+                }
+              ],
+              "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_V1"
+            },
+            "capsule_head_hash": "f29642a6ff7d72b42f4133ea1ec76d5fa12dda527afeaad51e76afd81ab3d3a2",
+            "capsule_record_count": 1,
+            "explicit_result_edge_count": 0,
+            "initial_fact_count": 0,
+            "plan_capability_count": 1,
+            "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_TRACE_CAPSULE_V1",
+            "status": "PASS",
+            "target_effect_count": 1,
+            "trace_action_count": 2,
+            "transition_receipts": [
+              {
+                "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                "capsule_head_hash": "f29642a6ff7d72b42f4133ea1ec76d5fa12dda527afeaad51e76afd81ab3d3a2",
+                "cycle": 0,
+                "explicit_result_edges": [],
+                "provides": [
+                  "plain_goal.bound_capability.grounding"
+                ],
+                "raw_action_sha256": "f7c9015a66b67e751f5415ad53b9d4da7b665f32df5fafd603bd8de29b7033e6",
+                "requirement_witnesses": {},
+                "requires": [],
+                "resolved_action_sha256": "f7c9015a66b67e751f5415ad53b9d4da7b665f32df5fafd603bd8de29b7033e6",
+                "result_sha256": "ebdf825a81d224443ab2fba55681b028d8637438facd145ff026bab30e5f8328"
+              }
+            ]
+          },
+          "execution_authority": false,
+          "pass": true,
+          "proof_digest": "679635af81c30064dc3012c4512ddb63b0ecdf795a856a3ca85c3db0d949ac63",
+          "reason": null,
+          "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_EXECUTION_VERIFIER_V1",
+          "status": "VERIFIED",
+          "terminal_authority": false,
+          "verified_output": {
+            "all_target_effects_have_witnesses": true,
+            "capsule_head_hash": "f29642a6ff7d72b42f4133ea1ec76d5fa12dda527afeaad51e76afd81ab3d3a2",
+            "capsule_record_count": 1,
+            "plan_capability_count": 1
+          }
+        },
+        "incremental_spend_usd": 0,
+        "inputs_sha256": "da37beb0fb35acc148c393b6ca708a15719701b7a441597be4ef8d8eea8760f2",
+        "instance_id": "plain_goal.bound_capability.grounding.stdlib",
+        "ownership_credit_delta": 0,
+        "pass": true,
+        "provides": [
+          "plain_goal.bound_capability.grounding"
+        ],
+        "registry_entry_sha256": "251801c77d60c2960d3ea71a2e1e2ebf09f5b685a85aca499f02f3ed641ed06c",
+        "registry_file_sha256": "d3397b5e90e8c500ff9b0e59207463ca92dd236f8ed26db20a5496f56b41b573",
+        "rendered_action": {
+          "args": {
+            "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+            "goal": "Compile a plain goal into a bound capability",
+            "output_path": "canonical/astra_runtime/tmp/brain_out__plain_goal_bound_capability_grounding_stdlib__88e4e864d2.json"
+          },
+          "expect": {
+            "field": "output_verified",
+            "type": "field_equals",
+            "value": true
+          },
+          "type": "invoke_capability"
+        },
+        "rendered_action_sha256": "09497b5b8e15aaf0e9179b9daf930a7643651fe0ef30854a49d197f56fadab2a",
+        "requires": [],
+        "result": {
+          "broad_objective_decomposition": null,
+          "broad_objective_decomposition_available": false,
+          "candidate_capability_ids": [
+            "terminal.kstar.root.assess.stdlib"
+          ],
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "clauses": [
+            {
+              "candidates": [
+                {
+                  "binding_affordance": {
+                    "has_goal_url": false,
+                    "proposal_binding_count": 0,
+                    "proposal_bindings_cover_all_inputs": false,
+                    "url_consumable": false
+                  },
+                  "capability_id": "terminal.kstar.root.assess.stdlib",
+                  "combined_score": 8.922839506172838,
+                  "input_bindability": {
+                    "bound_input_keys": [],
+                    "proposal_binding_keys": [],
+                    "verified": true
+                  },
+                  "lexical": {
+                    "matched_goal_tokens": [
+                      "capability"
+                    ],
+                    "matched_identity": [],
+                    "matched_keywords": [
+                      [
+                        "capability",
+                        "capability"
+                      ]
+                    ],
+                    "matched_provides": [],
+                    "score": 4
+                  },
+                  "matched_distinctive_tokens": [
+                    "capability"
+                  ],
+                  "provides": [
+                    "terminal.kstar.root.assessment",
+                    "terminal.scope_complete.proof_or_minimum_residual",
+                    "terminal.tournament.failure.witness"
+                  ],
+                  "requires": [],
+                  "similarity": {
+                    "coverage": 0.25,
+                    "score": 4.922839506172839,
+                    "sequence_ratio": 0.1728395061728395,
+                    "shared_tokens": [
+                      "capability"
+                    ]
+                  }
+                }
+              ],
+              "constraints": [],
+              "end": 44,
+              "index": 0,
+              "output_contract": {
+                "extensions": [],
+                "paths": []
+              },
+              "rejected_unbindable_candidates": [
+                {
+                  "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                  "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+                },
+                {
+                  "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+                  "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:plain_goal.bound_capability.grounding.verify.stdlib:result_path:plain_goal.bound_capability.grounding"
+                },
+                {
+                  "capability_id": "python.software.request.semantic_behavior.compile.v1",
+                  "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+                }
+              ],
+              "start": 0,
+              "status": "UNBOUND_INPUTS_NOT_GROUNDED",
+              "text": "Compile a plain goal into a bound capability"
+            }
+          ],
+          "dependency": {
+            "modules": [
+              "difflib",
+              "hashlib",
+              "json",
+              "re",
+              "pathlib"
+            ],
+            "python_version": "3.11.2",
+            "status": "LOCAL_VERIFIED",
+            "type": "python_stdlib"
+          },
+          "external_discovery_allowed_for_unresolved_only": true,
+          "goal": "Compile a plain goal into a bound capability",
+          "goal_sha256": "8999f288a640ff1f987cb452f85766630ec22b7ad78e2773033f731dd2100164",
+          "grounded_clause_count": 1,
+          "input_contract_bindability_enforced": true,
+          "model_dependency_count": 0,
+          "output_path": "canonical/astra_runtime/tmp/brain_out__plain_goal_bound_capability_grounding_stdlib__88e4e864d2.json",
+          "output_sha256": "3df2cbf455714eb32f7cc92220bdf910f82ec44529d78bff26ad7ec32243cd52",
+          "output_verified": true,
+          "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+          "unresolved_clause_indexes": [],
+          "whole_goal_external_discovery_forbidden_if_any_bound_grounding": true
+        },
+        "result_fields": [
+          "broad_objective_decomposition",
+          "broad_objective_decomposition_available",
+          "candidate_capability_ids",
+          "clauses",
+          "external_discovery_allowed_for_unresolved_only",
+          "goal",
+          "goal_sha256",
+          "grounded_clause_count",
+          "input_contract_bindability_enforced",
+          "model_dependency_count",
+          "output_path",
+          "output_sha256",
+          "output_verified",
+          "unresolved_clause_indexes",
+          "whole_goal_external_discovery_forbidden_if_any_bound_grounding"
+        ],
+        "result_sha256": "ebdf825a81d224443ab2fba55681b028d8637438facd145ff026bab30e5f8328",
+        "schema": "PROJECT_BRAIN_VERIFIED_BOUND_CAPABILITY_EXECUTION_ADAPTER_V1",
+        "search_or_pending_binding_execution_allowed": false,
+        "semantic_boundary": "PROVES_EXECUTION_OF_THE_PROMOTED_REGISTRY_CONTRACT_AND_DECLARED_EXPECTATION;HIGHER_LEVEL_TASK_EFFECT_MEANING_REQUIRES_SEPARATE_AUTHENTICATION",
+        "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+        "terminal_authority": false
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:04:04.381918+00:00",
+  "mission_id": "REASON_BENCH_GROUNDING_AND_VERIFY_0a84236e",
+  "next_action_index": 1,
+  "plan_sha256": "bca4266e166eb03e59fa105986fbe7c889f1cff7ed55db783070f99a0560e558",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "IN_PROGRESS",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:04:04.410159+00:00"
+}

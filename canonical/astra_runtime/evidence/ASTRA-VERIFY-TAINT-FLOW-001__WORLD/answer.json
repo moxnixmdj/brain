@@ -1,0 +1,35 @@
+{
+  "answer": "yes",
+  "files_scanned": 1,
+  "finding_count": 1,
+  "reaches": true,
+  "schema": "PROJECT_BRAIN_PYTHON_TAINT_FLOW_V1",
+  "sink": "os.system",
+  "source_definition": [
+    {
+      "function": "handle",
+      "params": [
+        "raw"
+      ],
+      "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__WORLD/taint/app.py"
+    }
+  ],
+  "source_function": "handle",
+  "source_functions": [
+    "handle"
+  ],
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__WORLD/taint",
+  "trace": [
+    {
+      "function": "handle",
+      "line": 10,
+      "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__WORLD/taint/app.py",
+      "sink": "os.system",
+      "tainted_names": [
+        "name",
+        "payload",
+        "raw"
+      ]
+    }
+  ]
+}

@@ -100,6 +100,38 @@ class GitRepositoryOperateTest(unittest.TestCase):
                                         "removed": int(numstat[1])}])
         self.assertEqual(art["observed_effect"]["patch_bytes"] > 0, True)
 
+    # ---------------------------------------------------- an untracked target
+    # "Show the diff of <file>" answers a question about a file that git may not
+    # know yet.  ``git diff HEAD -- <untracked>`` is EMPTY by design, and an empty
+    # patch returned as the answer is a PASS over nothing.  Measured 2026-10-31 on
+    # fabf28c: the request was served with ``row_count: 0`` and the empty-string
+    # digest, and the 54-case capability matrix scored ``git_diff`` FALSE -- the
+    # only false PASS in the matrix.  The difference between nothing and a new file
+    # is a fact, and git states it with ``--no-index``.
+    def test_an_untracked_target_still_has_a_diff(self):
+        (self.repo / "fresh.py").write_text("def mul(a, b):\n    return a * b\n")
+        art = self._run(op="diff", target="fresh.py")
+        self.assertFalse(art["observed_effect"]["tracked"])
+        self.assertEqual(art["row_count"], 1)
+        self.assertGreater(art["observed_effect"]["patch_bytes"], 0)
+        self.assertIn("@@", art["observed_effect"]["patch"])
+        self.assertIn("new file mode", art["observed_effect"]["patch"])
+        # the oracle is the CLI run by this test, not the adapter: git's own
+        # --no-index numstat must agree on how many lines the file adds.
+        proc = subprocess.run(["git", "diff", "--no-index", "--numstat", "--",
+                               "/dev/null", "fresh.py"],
+                              cwd=self.repo, capture_output=True, text=True,
+                              env=GIT_ENV, timeout=120)
+        self.assertEqual(art["rows"][0]["added"], int(proc.stdout.split("\t")[0]))
+
+    def test_an_unchanged_tracked_target_is_an_honest_empty_diff(self):
+        """The fix may not turn "nothing changed" into an invented patch."""
+        art = self._run(op="diff", target="calc.py")
+        self.assertTrue(art["observed_effect"]["tracked"])
+        self.assertEqual(art["row_count"], 0)
+        self.assertEqual(art["observed_effect"]["patch_bytes"], 0)
+        self.assertNotIn("@@", art["observed_effect"]["patch"])
+
     def test_branch_agrees_with_the_git_cli(self):
         _git(self.repo, "branch", "feature")
         art = self._run(op="branch")

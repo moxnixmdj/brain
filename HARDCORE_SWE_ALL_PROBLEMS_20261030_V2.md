@@ -504,3 +504,123 @@ not an instruction (`_intent_verb_matches`), so *"Explain what `add(1, 2)` does 
 function definitions"* with `PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` instead of
 writing an index, `git_log` passes, and the two edit-lies stay dead with the *correct* refusal
 (`FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED` on `symbols.index.ast`), not a lucky miss.
+
+---
+
+## 13. After the merge: what main already fixed, and the one leak with its exact line
+
+Merged into `main` as PR #6323 (`09867fd`).  Re-measured on the merged tree the same day, same oracle,
+same fixtures (`swe_probe_20261030/ab_lie.py`):
+
+| sentence | before this work | on the merged tree |
+|---|---|---|
+| *Inline the function `line_total` into its caller* | **PASS, file unchanged** | `FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED` on `python.source.symbols.index.ast` |
+| *Inline the single-use helper `_price_with_tax`* | **PASS, file unchanged** | `FAIL__LIVE_CONTROLLER_EXECUTION` on `python.refactor.inline_helper.v1` (a real inline row now exists) |
+| *Add a parameter `qty` … update every caller* | **PASS, file unchanged** | **PASS, and the file really changed** — `python.source.add_parameter.v1` |
+| *Count the function definitions* | PASS, wrote an index into the package | **PASS, the number is the answer** — `python.source.definition_count.v1` |
+
+So the two lies are gone and the two questions now have owners.  Two capabilities this census listed as
+*"no owner"* (`inline`, `add parameter`, `count`) arrived in `main` from parallel work while this document
+was being written — which is the strongest evidence for its own thesis: the verbs were missing, not the
+machinery.
+
+**The leak, located.**  Every refused sentence still leaves a report inside the caller's project.  It is
+not the adapter's doing: `canonical/runtime/swe_typed_plan_v1.py:191`
+
+```python
+return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
+```
+
+`_fresh_output_path` exists to stop a report being written OVER a stated source — correct — but it
+relocates the report *into the stated source directory*, one level ABOVE the subtree the observation gate
+walks (`app/` for a sentence naming `app/service.py`, so `<project>/typed_swe_report.json` is invisible to
+it).  A refusal therefore reports `pass: false` and leaves a file the caller never asked for, with
+`side_effects_may_exist` unset.
+
+The fix is one line's worth of intent but not one line of code, and it is NOT applied here: the report
+destination is asserted by `canonical/tests/test_swe_typed_plan_v1.py` ("a report artifact was written"
+under the fixture), so moving the default into an intermediate spool changes a pinned contract.  That is a
+decision for the owner, and the census records it rather than deciding it.
+
+**Measured cost of main's churn, for the record:** 18 human sentences went **8/18 (this branch at
+`282a5f4`) → 4/18 (main `99db201`) → 5/18 (after restoring two dropped fixes)**.  The four sentences main
+lost (`repair_full`, `bug_report`, `explain_fail`, `debug_test`) are named with their failing capability in
+§12; none of them was lost by the merge.
+
+---
+
+## 14. 2026-10-31 (later still): measured again on main `f333567`
+
+Same harnesses, same oracles, run on a **copy** of the merged tree so the repository stayed clean.
+
+| measurement | 30 Oct | 31 Oct on `main` |
+|---|---|---|
+| 28 hardcore tasks | 2/28 | **22/28**, **0 false PASS** |
+| 10-tier ladder | 2/10 | 10/10 |
+| 18 ordinary sentences (`pkg/test_*.py` layout) | 8/18 | **3/18** |
+| 18 ordinary sentences (`tests/test_*.py` layout) | — | **3/18** (the layout gap of §12 closed) |
+| median task latency | 565 ms | **1 089 ms** (max 26.8 s: `index_whole_runtime` cold) |
+
+The six that fail are named with their row: `extract_function` (`REFUSED_REGION_…`), `fix_failing_test`
+and `fix_then_regression_test` (`LIVE_CONTROLLER_EXECUTION` on `repair.apply.verified`), `fix_race`
+(`STATED_ANSWER_NOT_PROVIDED`), `localize_fault` (`ROUTE_ADMISSION_REJECTED`, no row reached),
+`sql_injection` (`CAPABILITY_DAG_RESULT_INVALID`).
+
+### The lie that was still there — and is now closed
+
+3/3, deterministic:
+
+```
+"Rename the parameter text to value in the python module <D>/app/models.py."
+  -> python.refactor.rename_symbol.v1 -> PASS -> def value(text, scale=1)
+```
+
+The **function** was renamed for a sentence about a **parameter**: the parameter kept its name, the caller
+still passed positionally, and the module's public name changed.  Add six words — *"and save the report to
+`<D>/r.json`"* — and the correct row ran.  Every byte-level gate passed, because the named file's bytes
+did change.
+
+**Cause.** `route_admission`'s `DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL` admits a row when the
+sentence supplies its declared inputs.  It binds a *sibling* row perfectly: `qualname=norm,
+new_symbol=value` is a complete contract — for the wrong kind of object.
+
+**Fix (this branch).** The object role is read off the sentence's noun and off the row's own declared
+slots — nothing invented:
+
+| sentence says | row declares | verdict |
+|---|---|---|
+| `parameter` / `argument` | `old_param`, `new_param` | admitted |
+| `function` / `method` / `class` / `symbol` | `qualname`, `new_symbol` | admitted |
+| `local variable` / `variable` | local slots | admitted |
+| `parameter` | `qualname`, `new_symbol` | **`OBJECT_ROLE_MISMATCH`, refused** |
+
+Applied twice: at admission (so the wrong route is never chosen) and at the exit (so a PASS reached by any
+other route — an explicit capability id, a decisive lexical margin — is not reported).  A refused PASS
+then falls into the existing decisive-retry discipline, which names the row for the object the sentence
+states.
+
+**Measured.** Parameter rename: wrong row + wrong edit → **`rename_parameter.v1`, `def norm(value, scale=1)`**,
+with and without the report clause, 2/2.  Function rename unchanged.  Class/method/local renames refuse
+honestly instead of editing something else.  28-task suite **22/28 → 22/28, nothing lost, nothing gained**;
+18 sentences **2/18 → 3/18** on both layouts.  Pinned by
+`canonical/tests/test_the_rename_answers_the_object_the_sentence_names_v1.py` — 6 assertions red on the
+old code.
+
+### Still open (measured today, not fixed)
+
+1. **Two registries.** `BOUND_CAPABILITY_REGISTRY_V1.json` has 138 rows, `BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json`
+   has 145, and `astra_runtime.py:661`, `goal_compiler.py:1036`, `availability_v1.py:61` all read the
+   snapshot.  Rows exclusive to the snapshot: `move`, `move_symbol`, `bisect_regression`, `mutation_score`,
+   `add_parameter`, `add_function`, `feature.implement_function_spec`.  Exclusive to the live file:
+   `git.repository.operate.v1` — which is why *"Show the last three git commits"* refuses **both** ways:
+   in the repo (`NOT_A_GIT_REPOSITORY:.`) and in a real git project
+   (`NO_DECISIVE_TYPED_PLAN_FOR_STATED_GIT_EFFECT`).  Any audit that reads one file is wrong; my own
+   earlier census was.
+2. **No deadline.** `grep` finds no timeout, no `RLIMIT_*`, no process-group kill on the adapter path.
+   `python_test_audit.py:115` still defaults `source_root="canonical/tests"`.
+3. **Six lanes with no row**: lint, debugger, profiler, signature change, dependency migration, race
+   analysis.  4 of the 18 sentences die on these or on absent tooling (crosshair).
+4. **Router still decides by tokens**: *"rename the function add"* → `inline_helper`; *"write a unit
+   test"* → `repository.acceptance.measure`; *"profile"* → `dead_code`; *"debug"* → `mutation_score`.
+5. **The destructive sentence is still refused by luck** — it routed to a PDF converter
+   (`document.convert.markdown_pdf.pandoc_weasyprint`), not by a consequence model.

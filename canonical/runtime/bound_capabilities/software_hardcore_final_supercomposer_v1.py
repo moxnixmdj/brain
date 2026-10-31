@@ -1,38 +1,59 @@
 #!/usr/bin/env python3
-"""Hardcore final supercomposer — only-right-way synthesis final.
+"""Inspect final SWE composition declarations, without claiming workflow delivery.
 
-Hidden kernels: hardcore swe composed + fullstack + architect synthesize cegis + patch synthesize cegis proven + grid program exact.
-Why max: hardcore synthesis was 5 isolated verifiers (dead). This super-composes them: CEGIS architect → CEGIS patch → grid 100k → hardcore composed/fullstack → final SWE engineer."""
+Reuse the declarations-only boundary of software_hardcore_swe_supercomposer_v1:
+producer availability and static preflight are not execution or acceptance of
+an advertised multi-stage workflow. No capability authority is created here.
+"""
 from __future__ import annotations
-import hashlib, json, pathlib
+
+import pathlib
 from typing import Any
-SCHEMA="PROJECT_BRAIN_SOFTWARE_HARDCORE_FINAL_SUPERCOMPOSER_V1"
-CAPABILITY_ID="software.hardcore.final.supercomposer.v1"
-PROVIDES=["software.hardcore.final.verified","software.hardcore.final.synthesis.verified"]
-REQUIRES: list[str]=["software.hardcore.swe.composed.verified","software.hardcore.swe.fullstack.verified","software.architect.synthesize.cegis.verified","software.patch.synthesize.cegis.proven","software.synthesis.grid_program.exact"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_hardcore_final_supercomposer.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
+
+from canonical.runtime.swe_task_artifacts_v1 import fresh_output, publish_report
+
+SCHEMA = "PROJECT_BRAIN_SOFTWARE_HARDCORE_FINAL_SUPERCOMPOSER_V1"
+CAPABILITY_ID = "software.hardcore.final.supercomposer.v1"
+PROVIDES = ["software.hardcore.final.verified", "software.hardcore.final.synthesis.verified"]
+REQUIRES: list[str] = [
+    "software.hardcore.swe.composed.verified", "software.hardcore.swe.fullstack.verified",
+    "software.architect.synthesize.cegis.verified", "software.patch.synthesize.cegis.proven",
+    "software.synthesis.grid_program.exact",
+]
+REPO = pathlib.Path(__file__).resolve().parents[3]
+
+
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
-    repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
     from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import (
-        analyze_python_static_soundness,
-        load_active_bound_registry,
+        analyze_python_static_soundness, load_active_bound_registry,
     )
-    reg=load_active_bound_registry(repo)
-    _static_check=None
+
+    repo = pathlib.Path(root).resolve()
+    output = fresh_output(repo, args.get("output_path"), "canonical/tmp_hardcore_final_supercomposer.json")
+    reg = load_active_bound_registry(repo)
+    static_check = None
     if args.get("source_root"):
-        _sr=(repo/str(args["source_root"])).resolve()
-        if (_sr==repo or repo in _sr.parents) and _sr.exists():
-            _static_check=analyze_python_static_soundness(repo, _sr)
-    all_prov={p for m in reg["capabilities"].values() for p in m.get("provides",[])}
-    required=REQUIRES
-    found={r: (r in all_prov) for r in required}
-    producers=["software.hardcore.swe.supercomposer.v1","software.patch.synthesize.cegis.z3.v1","software.synthesis.grid_induction.v1","software.hardcore.kernel.orchestrate.v1"]
-    prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and (_static_check is None or _static_check["sound"]) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"CEGIS architect → CEGIS patch proven → grid 100k → hardcore composed/fullstack → final synthesis verified","verified":verified,"model_dependency_count":0,"static_soundness":_static_check,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_hardcore_final_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+        source = (repo / str(args["source_root"])).resolve()
+        if source != repo and repo not in source.parents:
+            raise ValueError("PATH_OUTSIDE_REPOSITORY")
+        if not source.exists():
+            raise ValueError("SOURCE_ROOT_MISSING")
+        static_check = analyze_python_static_soundness(repo, source)
+    all_provides = {p for row in reg["capabilities"].values() for p in row.get("provides", [])}
+    found = {required: required in all_provides for required in REQUIRES}
+    producers = [
+        "software.hardcore.swe.supercomposer.v1", "software.patch.synthesize.cegis.z3.v1",
+        "software.synthesis.grid_induction.v1", "software.hardcore.kernel.orchestrate.v1",
+    ]
+    producer_found = {cid: cid in reg["capabilities"] for cid in producers}
+    artifact = {
+        "schema": SCHEMA, "capability_id": CAPABILITY_ID,
+        "adapter": "software_hardcore_final_supercomposer_v1",
+        "required_tokens": REQUIRES, "found": found, "producers": producer_found,
+        "declarations_resolve": all(found.values()) and all(producer_found.values()),
+        "workflow_executed": False, "verification_scope": "DECLARATIONS_ONLY",
+        "status": "OPEN__DECLARATIONS_ONLY_NOT_SOFTWARE_DELIVERY",
+        "pass": False, "verified": False, "static_soundness": static_check,
+        "model_dependency_count": 0, "incremental_spend_usd": 0,
+    }
+    return publish_report(repo, output, artifact)

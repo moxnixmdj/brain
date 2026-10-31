@@ -1,0 +1,33 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "summary": "ngyqxi dut mmmult 6099"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "ngyqxi dut mmmult 6099"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "ngyqxi dut mmmult 6099",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:04:10.914120+00:00",
+  "mission_id": "SEED_A_EXACT_LITERAL_RESPONSE_0",
+  "next_action_index": 1,
+  "plan_sha256": "c8ba47795db46f4982ab7f435acfe94a500968de7932bae1edef6e07a4933c32",
+  "resume_count": 1,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:30:48.883730+00:00"
+}

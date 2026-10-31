@@ -1,0 +1,337 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SWE_CONTENT_ADDRESSED_DERIVATION_CACHE_20261031_V1",
+  "action_intent_id": "SWE_CONTENT_ADDRESSED_DERIVATION_CACHE_20261031_V1",
+  "date": "2026-10-31",
+  "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
+  "canonical_base_commit": "34f867a9d0b057d2bd9fcef1167c31d251b13f75",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "FRESH_REUSE",
+  "causal_blocker": "Adapter-default and source-AST derivation caches can reuse stale evidence after equal-size source edits with preserved modification times.",
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Shared SWE derivation cache correctness and parse reuse; no global optimality claim",
+  "action_summary": "Make SWE derivation evidence follow the bytes actually parsed, share AST work between existing consumers, and retain bounded warm reuse without weakening admission. No capability, benchmark, family or terminal credit.",
+  "expected_parent_frontier_change": "Make SWE derivation evidence follow the bytes actually parsed, share AST work between existing consumers, and retain bounded warm reuse without weakening admission. No capability, benchmark, family or terminal credit.",
+  "stop_condition": "Stop after timestamp-preserving edit, deletion, malformed-source, bounded-cache and warm-parse controls pass and neighboring suites introduce no failures versus the unchanged runtime, the final model verifies, and signed exact-head repository admission passes. Report residual failures and measured overhead honestly.",
+  "explicit_user_authorization": "User requested reuse of existing Brain/internet mechanisms, fastest correct execution, and merge all work.",
+  "record_scope": "Bounded shared-cache reliability integration after fresh failure localization",
+  "benchmark_or_family_rank_authority": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "progress_evidence_paths": [
+    "canonical/tests/test_derivation_content_cache_v1.py",
+    "canonical/verification/SWE_CONTENT_CACHE_20261031.md"
+  ],
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "route_class": "INTEGRATE",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/tests/test_derivation_content_cache_v1.py",
+      "canonical/verification/SWE_CONTENT_CACHE_20261031.md"
+    ],
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "load_bearing_primary": {
+    "canonical_base_commit": "34f867a9d0b057d2bd9fcef1167c31d251b13f75",
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 1800,
+    "units": "seconds scheduling estimate for implementation and validation; CI availability unknown",
+    "interpretation": "Conservative subjective scheduling assumptions only, NOT statistically established confidence bounds and NOT benchmark measurements. An expected reusable coding-evidence reliability unlock motivates the integration; all actual frozen obligations remain open. Zero benchmark/family/terminal credit. The local regression results do not establish a benchmark success probability.",
+    "stop_condition": "Stop after timestamp-preserving edit, deletion, malformed-source, bounded-cache and warm-parse controls pass and neighboring suites introduce no failures versus the unchanged runtime, the final model verifies, and signed exact-head repository admission passes. Report residual failures and measured overhead honestly."
+  },
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Adapter-default and source-AST derivation caches can reuse stale evidence after equal-size source edits with preserved modification times.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "34f867a9d0b057d2bd9fcef1167c31d251b13f75",
+    "real_outcome": "Make SWE derivation evidence follow the bytes actually parsed, share AST work between existing consumers, and retain bounded warm reuse without weakening admission. No capability, benchmark, family or terminal credit.",
+    "required_capability": "Fresh reusable source evidence for typed SWE derivation",
+    "selected_surviving_route": "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE",
+    "why_selected_route_is_fastest_sufficient": "Reuse the symbol-index content-hash freshness rule, hashlib and the existing AST memoization rather than add a parser or dependency. Sharing one content-bound parse avoids duplicate cold parsing. Compare warm overhead explicitly; not a global optimum claim.",
+    "expected_parent_level_state_change": "Make SWE derivation evidence follow the bytes actually parsed, share AST work between existing consumers, and retain bounded warm reuse without weakening admission. No capability, benchmark, family or terminal credit.",
+    "stop_condition": "Stop after timestamp-preserving edit, deletion, malformed-source, bounded-cache and warm-parse controls pass and neighboring suites introduce no failures versus the unchanged runtime, the final model verifies, and signed exact-head repository admission passes. Report residual failures and measured overhead honestly.",
+    "routes_considered": [
+      "Delete derivation caching",
+      "Retain metadata-only caching",
+      "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "No new analyzer, parser, runtime dependency, registry row or guard bypass"
+    ],
+    "obs_goal": {
+      "real_outcome": "Make SWE derivation evidence follow the bytes actually parsed, share AST work between existing consumers, and retain bounded warm reuse without weakening admission. No capability, benchmark, family or terminal credit.",
+      "proxy_goals_deleted": [
+        "No document capability expansion",
+        "No scoreboard edits"
+      ],
+      "surviving_necessity": "Stale source-derived contracts affect typed SWE admission and source-symbol evidence."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "python_source_symbol_index validates current source bytes with SHA256",
+        "Existing derivation default detector and _tree_of AST caches",
+        "Existing same-size/mtime index freshness regression"
+      ],
+      "external_existing_routes_checked": [
+        "CPython linecache.py inspected via GitHub API; metadata-based caching does not close this counterexample",
+        "GitHub repository search python ast cache sha256 returned no repository results"
+      ],
+      "capability_work_deleted": [
+        "No external cache library",
+        "No replacement analyzer"
+      ],
+      "surviving_gap": "Adapter-default and source-AST derivation caches can reuse stale evidence after equal-size source edits with preserved modification times."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific evidence-cache invalidation failure, not missing static analysis",
+      "delete_bypass_substitute_options": [
+        "Delete caching, correct but repeats parses",
+        "Add metadata, not direct source-byte evidence",
+        "Reuse existing content freshness with shared AST memoization"
+      ],
+      "surviving_causal_blocker": "Adapter-default and source-AST derivation caches can reuse stale evidence after equal-size source edits with preserved modification times."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE",
+        "Delete derivation caching",
+        "Retain metadata-only caching"
+      ],
+      "losing_routes_reason": "Metadata-only route fails the preserved-mtime counterexample; deleting cache loses existing warm parse reuse. Content validation is already used by Brain source-index consumers.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Real filesystem edits preserving size/mtime, fresh uncached AST and existing differential default reference (same-parser local regression, not independent qualification), profile-observed parse counts, deletion and replacement controls. Measure cold/warm time and output equality before/after. Local regressions, not independent capability qualification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Duplicate cold parse for defaults and source AST",
+        "Unbounded revision accumulation in adapter-default cache"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Current default evidence and symbol/source AST derivation"
+      ],
+      "fresh_reuse_plan": "Retain the current detector and callers; share content-bound parse/cache machinery and existing current-tree compiler tests."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "No repeated rebuild of existing engines",
+        "No external runtime service"
+      ],
+      "search_stop_decision": "The existing content-validated index already demonstrates the necessary freshness rule. The bounded failure requires connecting it to derivation; external cache replacement adds no necessary behavior.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-31T18:30:56.539837+00:00",
+      "max_age_hours": 24,
+      "incumbent_route": "Metadata-keyed derivation caches",
+      "selected_route": "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "BROAD_WEB_OR_COMMUNITY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+          "canonical/tests/test_python_symbol_index_cache_freshness_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/python/cpython/blob/main/Lib/linecache.py ; source excerpt inspected via GitHub API"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://api.github.com/search/repositories?q=python+ast+cache+sha256&per_page=2 ; no repository results"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "GitHub public repository discovery python ast cache sha256 returned no candidates; no community source qualified or imported."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "GitHub repositories python ast cache sha256"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "CPython Lib/linecache.py source via GitHub contents API"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Brain source SHA256 freshness and AST memoization/default detector"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "git fetch origin main and inspect Wave1 integration at 34f867a9d0b057d2bd9fcef1167c31d251b13f75"
+        }
+      ],
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "challenger_routes": [],
+      "selected_route_preflight": {
+        "selected_route": "ADAPT_EXISTING_CONTENT_FRESHNESS_TO_SHARED_DERIVATION_AST_CACHE",
+        "checked_at_utc": "2026-10-31T18:30:56.539837+00:00",
+        "max_age_hours": 2,
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Local Python 3.11, pytest, Hypothesis and current validation dependencies",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T18:30:56.539837+00:00",
+            "evidence": [
+              "Fresh virtualenv installed pytest, hypothesis, jsonschema, z3-solver and pinned tree-sitter validation wheels. No new runtime dependency."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Current Brain source, registries, guards and official model compiler/verifier",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T18:30:56.539837+00:00",
+            "evidence": [
+              "canonical/runtime/declared_input_derivation_v1.py",
+              "canonical/runtime/bound_capabilities/python_source_symbol_index.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Authenticated GitHub PR/push/check API",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T18:30:56.539837+00:00",
+            "evidence": [
+              "Authenticated GitHub contents/search API and bounded origin/main fetch succeeded; future CI capacity not guaranteed."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      },
+      "negative_search_summary": "Existing Brain content-hash validation closes the localized invalidation class. CPython linecache is metadata-based and not a drop-in content validator; GitHub python ast cache sha256 repository search returned no results. No external package required."
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "NO_DISCHARGE_CLAIM__fresh derivation evidence prevents stale contract/symbol reuse; no benchmark or terminal obligation is discharged.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SWE_CONTENT_ADDRESSED_DERIVATION_CACHE_20261031_V1",
+      "falsifier_id": "EQUAL_SIZE_PRESERVED_MTIME_EDIT_MUST_NOT_REUSE_OLD_DERIVATION",
+      "decisive_question": "Do defaults and source AST evidence match fresh source bytes while warm unchanged requests avoid AST parsing?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/declared_input_derivation_v1.py",
+          "git_blob_sha": "4447a7280ddb5257dd278737b86ed43c4b993ff9"
+        },
+        {
+          "path": "canonical/tests/test_python_symbol_index_cache_freshness_v1.py",
+          "git_blob_sha": "354f29955f6f8ab5d79e73dec287b4d7d972f867"
+        }
+      ]
+    }
+  },
+  "integration_note": "Retained current-main PR6485, PR6489 undeclared-effect refusal guard and PR6486 declared-effect requirements unchanged. Cache source and tests have no conflict; regenerate combined model officially. Earlier wider baseline remains explicitly bound to 2e9b642. Integration run on 9e6a366 measured 242 passed, 1 failed, 931 subtests: incoming PR6486 renamed the index effect but left it duplicated and its old registry test expecting the removed row-id alias. Normalize the live registry duplicate to the already-canonical snapshot, retain the new effect semantics, update the exact contract assertion and add a uniqueness/no-row-id negative control; no new effect or capability. Retain newer main PR6490 package-root/answer-artifact fixes and PR6492 audit report unchanged; final model regenerated from combined tree. Historical comparisons and microbenchmark remain bound to the earlier measured sources. Expanded final integration: 250 passed, 1 incoming localizer control failed, 931 subtests. Restoring unchanged-main derivation runtime reproduced that exact incoming failure. No cache-induced failure; retain the honest residual and do not rewrite the localizer or weaken its test."
+}

@@ -53,36 +53,80 @@ SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
 # keywords (data-driven, not a hardcoded id table); ``admit()`` stays the oracle;
 # EXACTLY ONE admitted+specific candidate is decisive; ambiguity => fail closed.
 
-_FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
-    # (goal triggers, registry-keyword terms to enumerate candidates, required effect token in cid)
-    (("move the function", "move the class", "move symbol", "relocate function", "relocate class"),
-     ("move_symbol", "relocate symbol"), "move_symbol"),
-    (("add a parameter", "add parameter", "new parameter"),
-     ("add_parameter", "signature evolution"), "source.add_parameter"),
-    (("add a function", "implement a function", "implement function", "create a function"),
-     ("implement_function_spec", "function specification"), "implement_function_spec"),
-    (("regression test that would have caught", "add a regression test"),
-     ("python.tests.regression.synthesized",), "choreograph"),
-    (("caller", "who calls", "call site", "call graph", "find every call"),
-     ("caller", "call graph", "who calls"), "symbol"),
-    # Measured 2026-10-29: "Show the last three git commits" is the plainest thing a
-    # software engineer asks, and the machine had no git capability at all -- it
-    # returned PASS through an inventory row (see live_brain_route_admission_v1.
-    # inventory_source_path).  The capability now exists (git.repository.operate.v1);
-    # this entry is what lets a stated git OPERATION reach it, by the same
-    # enumerate-and-let-admission-be-the-oracle route the caller family uses.
-    # Triggers are deliberately narrow.  Measured 2026-10-29: with a bare "branch"
-    # trigger, "Branch out the new feature into three modules" bound op=branch and
-    # returned PASS for a `git branch` listing -- a false PASS of exactly the class
-    # this file exists to remove.  A metaphor is not a repository operation, so the
-    # trigger is the PLURAL noun or the explicit command, never the bare verb.
-    (("git", "commit the", "last commit", "commits", "blame", "branches",
-      "who wrote", "working tree", "staged changes"),
-     ("git", "commit", "history", "repository"), "git"),
-)
+_FAMILIES = ((('move the function', 'move the class', 'move symbol', 'relocate function', 'relocate class'),
+  ('move_symbol', 'relocate symbol'),
+  'move_symbol'),
+ (('add a parameter', 'add parameter', 'new parameter'),
+  ('add_parameter', 'signature evolution'),
+  'source.add_parameter'),
+ (('add a function', 'implement a function', 'implement function', 'create a function'),
+  ('implement_function_spec', 'function specification'),
+  'implement_function_spec'),
+ (('regression test that would have caught', 'add a regression test'),
+  ('python.tests.regression.synthesized',),
+  'choreograph'),
+ (('caller', 'who calls', 'call site', 'call graph', 'find every call'),
+  ('caller', 'call graph', 'who calls'),
+  'symbol'),
+ (('git',
+   'commit the',
+   'last commit',
+   'commits',
+   'blame',
+   'branches',
+   'who wrote',
+   'working tree',
+   'staged changes'),
+  ('git', 'commit', 'history', 'repository'),
+  'git'),
+ (('type-check', 'type check', 'typecheck', 'type checks', 'mypy'),
+  ('type_gate', 'typecheck', 'type check', 'type-check', 'mypy'),
+  'type'),
+ (('bug:',
+   'bug report',
+   'bug in',
+   'broken',
+   'failing test',
+   'test fails',
+   'tests fail',
+   'returns the wrong',
+   'wrong value',
+   'does not pass',
+   "doesn't pass"),
+  ('apply the repair', 'repair.apply', 'verified_repair_applied', 'write the fix'),
+  'repair'),
+ (('into a new function', 'pull out into'), ('extract', 'refactor'), 'extract'),
+ (('which files must change',
+   'what has to change',
+   'what must change',
+   'files must change',
+   'sites must change',
+   'cross-file',
+   'crossfile',
+   'plan the rename'),
+  ('cross-file', 'choreograph', 'plan'),
+  'crossfile_edit'),
+ (('test coverage', 'coverage'), ('coverage',), 'coverage'),
+ (('security issue',
+   'security review',
+   'security audit',
+   'security scan',
+   'vulnerab',
+   'check for security'),
+  ('security', 'vulnerab', 'bandit'),
+  'security'),
+ (('mutation score', 'mutation test', 'mutants', 'mutation coverage'),
+  ('mutation', 'mutant'),
+  'mutation'),
+ (('performance regression', 'performance review', 'benchmark', 'slower than', 'timing regression'),
+  ('performance', 'perf', 'benchmark'),
+  'perf'))
 _FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration.verify.",
                         "git.")
 
+
+_ANALYSIS_ONLY_TRIGGERS = ("explain", "describe", "summarise", "summarize",
+                           "diagnose", "why is", "why does", "how does", "review the")
 
 GIT_FAMILY_TOKEN = "git"
 
@@ -102,12 +146,10 @@ def stated_family_token(goal: str) -> str | None:
 # subordinate clause is not what the sentence asked for.  Measured 2026-10-31:
 # "Add a parameter qty with a default value to the function line_total in X and
 # update every caller so behaviour is unchanged" contains "caller", so the caller
-# family claimed AUTHORITY over an add-a-parameter request, its single admitted
-# candidate was the symbol index, and R10 then rejected the plan because a
-# caller inventory does not deliver a signature change -- 4 of 28 tasks that a
-# lower-bound reading of the same registry does serve.  The triggering noun is
-# in the second clause: the sentence's own governing clause decides its effect.
-_CLAUSE_BREAK = re.compile(r"(?:[.;!?]|,\s*$|\s+(?:and|then|so|but)\s+)", re.I)
+# family claimed AUTHORITY over an add-a-parameter request and the symbol index
+# was executed for a signature change.  The sentence's own governing clause
+# decides its effect.
+_CLAUSE_BREAK = re.compile(r"(?:\.(?=\s|$)|[;!?]|,\s*$|\s+(?:and|then|so|but)\s+)", re.I)
 
 
 def _governing_clause(text: str) -> str:
@@ -116,12 +158,22 @@ def _governing_clause(text: str) -> str:
     return parts[0] if parts else ""
 
 
+_ASKED_RE = re.compile(
+    r"\?|(?:^|[.;]\s*)(?:which|what|where|who|whom|whose|how|why|is|are|does|do)\b"
+    r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b", re.IGNORECASE)
+
+
 def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | None:
     """(the trigger phrases the sentence states, candidate terms, effect token)."""
     # Paths and quoted values are task data, not evidence of an effect family.
     prose = front.prose_only(str(goal or ""))
     head = _governing_clause(prose.lower())
+    if any(word in head for word in _ANALYSIS_ONLY_TRIGGERS):
+        return None
     for triggers, terms, token in _FAMILIES:
+        # Keep the current-main question/repair distinction under our apply name.
+        if token in {"repair", "apply"} and _ASKED_RE.search(prose):
+            continue
         # A guard that names "update every caller" and "rename " by hand is a
         # curated condition on the sentences this file must generalise over; the
         # governing clause decides it for every family and every sentence:
@@ -134,9 +186,14 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
     # Unqualified repository reads use the existing operation grammar, not
     # broad nouns such as "status" inside deployment questions or task data.
     if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"
-                    r"(?:me\s+)?(?:the\s+)?(?:diff|status|history|current\s+branch)[.?!]*", prose.lower().strip()):
+                    r"(?:me\s+)?(?:the\s+)?(?:diff|status|history|current\s+branch)"
+                    r"(?:\s+(?:of|for|in|under|at)\s*)?[.?!]*", head.strip()):
         if len(derivation.stated_git_operations(goal)) == 1:
             return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
+    # Direct bare repair imperative ("fix <pkg/calc.py>") where prose_only leaves only "fix"/"repair".
+    if re.fullmatch(r"(?:please\s+)?(?:fix|repair)\s*(?:the\s+(?:bug|code|function|module|file)s?\s*(?:in)?)?[.!]*",
+                    head.strip()):
+        return ("fix",), ("apply the repair", "repair.apply", "verified_repair_applied", "write the fix"), "repair"
     return None
 
 
@@ -167,7 +224,7 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str],
         if key in removed and isinstance(value, str) and "${input." in value:
             args.pop(key, None)
     if extra_inputs and extra_inputs.get("synthesize_regression_test") is True:
-        args["synthesize_regression_test"] = True
+        args["synthesize_regression_test"] = "${input.synthesize_regression_test}"
     template["args"] = args
     return template
 
@@ -182,19 +239,26 @@ def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any])
     """
     stated = set(derivation.stated_existing_files(goal, root))
     current = inputs.get("output_path")
-    if not isinstance(current, str) or current not in stated:
+    if not isinstance(current, str):
+        return None
+    spooled = bool(re.fullmatch(r"canonical/astra_runtime/tmp/spool_\d+_output\.json", current))
+    if current not in stated and not spooled:
         return None
     # Only a file the sentence treats as code is a dangerous output target.
-    if not current.endswith((".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb")):
+    if not spooled and not current.endswith((".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb")):
         return None
     source_root = inputs.get("source_root")
     if isinstance(source_root, str) and source_root and (root / source_root).is_dir():
         parent = source_root
     else:
-        parent = str(pathlib.PurePosixPath(current).parent)
+        named_sources = [p for p in stated if p.endswith(".py")]
+        parent = (str(pathlib.PurePosixPath(named_sources[0]).parent) if spooled and len(named_sources) == 1
+                  else str(pathlib.PurePosixPath(current).parent))
     if not parent or not (root / parent).is_dir():
         return None
-    return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
+    import hashlib
+    digest = hashlib.sha256((str(goal or "") + "\0" + parent).encode("utf-8")).hexdigest()[:12]
+    return f"canonical/astra_runtime/tmp/typed_swe_reports/{digest}_typed_swe_report.json"
 
 
 def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str, Any]) -> str | None:
@@ -212,13 +276,15 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
     if re.search(r"\b(?:find\s+every\s+caller|who\s+calls)\b", prose):
         if not any("symbol" in str(c).lower() for c in capability_ids):
             return "R10_CALLER_QUERY_EFFECT_UNSERVED"
-    if re.search(r"\badd\s+(?:a\s+)?regression\s+test\b", prose) and re.search(r"\b(?:fix|repair)\b", prose):
-        has_reg_cap = any(
-            (((registry.get(str(c)) or {}).get("action_template") or {}).get("args") or {}).get("synthesize_regression_test") is True
-            for c in capability_ids
-        )
-        if not has_reg_cap:
-            return "R10_REGRESSION_TEST_EFFECT_UNSERVED"
+    # A regression test the chosen row cannot synthesize is NOT a reason to refuse the plan.
+    # Measured 2026-10-31 on the 28-task ladder: refusing "fix the bug ... and add a regression
+    # test that would have caught it" before the run cost the repair the sentence also asked
+    # for (reached 27/28 instead of 28/28) and bought nothing -- the single repair row fixed
+    # the tree and left the suite green either way.  The effect is now WITHHELD at the exit
+    # instead (live_brain_route_admission_v1._enforced_at_exit, which reads the same
+    # ``synthesize_regression_test`` declaration this clause read, so a row that really can
+    # author the test is never demoted).  Refusal is for the case where there is nothing else
+    # to do; it is not the instrument for a sentence that also asks for work.
     imperative = re.search(
         r"(?:^|[.;\n]|\bthen\b|\band\b)\s*"
         r"(?:(?:please|first|next)\s+|(?:can|could|would)\s+you\s+(?:please\s+)?)?"
@@ -341,6 +407,8 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     operations = derivation.stated_git_operations(goal) if token == GIT_FAMILY_TOKEN else ()
     if len(operations) > 1 or (operations and re.search(r"\bbisect\b", front.prose_only(goal), re.I)):
         return None  # a history noun must not turn a bisection into a log read
+    if operations and len(derivation._stated_directories(goal, root)) > 1:
+        return None  # an optional repository slot must never erase scope ambiguity
     candidates: list[str] = []
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
@@ -398,6 +466,18 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         if (decision.get("admitted") and decision.get("specific")
                 and (not operations or (decision.get("inputs") or {}).get("op") == operations[0])):
             admitted.append((cid, dict(decision.get("inputs") or {})))
+    if len(admitted) > 1:
+        stated_py = {
+            p for p in derivation.stated_existing_files(goal, root)
+            if p.endswith(".py")
+        }
+        if stated_py:
+            exact_file_admitted = [
+                (cid, inp) for cid, inp in admitted
+                if "diff_path" in inp or "module" in inp
+            ]
+            if len(exact_file_admitted) == 1:
+                admitted = exact_file_admitted
     if len(admitted) != 1:
         return None  # ambiguous / none -> fail closed
     cid, inputs = admitted[0]
@@ -423,8 +503,9 @@ _APPLYING_REPAIR_CAPABILITY = "python.software.repair.apply.verified.v1"
 
 
 def _states_a_repair(goal: str) -> bool:
-    low = str(goal or "").lower()
-    return any(word in low for word in _REPAIR_EFFECT_WORDS)
+    low = front.prose_only(str(goal or "")).lower()
+    return any(re.search(r"\b" + re.escape(word) + r"\b", low)
+               for word in _REPAIR_EFFECT_WORDS)
 
 
 def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict,
@@ -436,7 +517,12 @@ def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict
     caller keeps the capability it already had -- nothing is fabricated, and a
     sentence that names no test stays on the read-only path exactly as before.
     """
-    if not _states_a_repair(goal) or cid == _APPLYING_REPAIR_CAPABILITY:
+    # This optimization promotes a repair search, never a different operation.
+    # Quoted messages and path components cannot authorize a source write.
+    effects = (registry.get(cid) or {}).get("provides") or []
+    repair_contract = any("repair" in str(e) or "patch.candidate" in str(e)
+                          or "patch.search" in str(e) for e in effects)
+    if not repair_contract or not _states_a_repair(goal) or cid == _APPLYING_REPAIR_CAPABILITY:
         return cid, inputs
     entry = registry.get(_APPLYING_REPAIR_CAPABILITY)
     if not entry:

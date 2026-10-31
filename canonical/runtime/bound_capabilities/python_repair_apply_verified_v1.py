@@ -72,7 +72,7 @@ _candidate_test_layout=_CTRL._candidate_test_layout
 MAX_TIMEOUT_S=600
 
 
-def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes]:
+def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int,env_paths:tuple=())->tuple[int|None,bytes]:
     """Run the stated test command verbatim.  No shell, so nothing is invented.
 
     The command line is the caller's; the IMPORT PATH is the tree's.  Measured
@@ -88,7 +88,7 @@ def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes
     try:
         proc=subprocess.run(
             argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
-            env={**os.environ,**_REPAIR._PATCH._source_env(cwd)},
+            env={**os.environ,**_REPAIR._PATCH._source_env(*(env_paths or (cwd,)))},
         )
     except subprocess.TimeoutExpired:
         return None,b"TIMEOUT"
@@ -202,7 +202,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
     # GATE 1 -- the stated test must fail on the source as it stands.
-    before_rc,before_tail=_run_test(run_argv,exec_root,timeout)
+    env_paths=(source_root,*test_paths)
+    before_rc,before_tail=_run_test(run_argv,exec_root,timeout,env_paths)
     out["pre_apply_test_returncode"]=before_rc
     if before_rc==0:
         # The sentence asked for the stated test to pass.  It already does, and
@@ -214,6 +215,16 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         # cannot be read as "I changed something".
         out["pass"]=True
         out["output_verified"]=True
+        # SAY THE FACT IN THE VOCABULARY THE DOOR ALREADY HONOURS.  ``already_satisfied`` is how
+        # every repair loop in this repository reports a green baseline (the door maps
+        # ``BASELINE_ALREADY_PASSES`` onto it), and a request whose post-state already holds owes no
+        # byte change.  This adapter measured exactly that -- ``applied`` false, ``files_written``
+        # empty, ``pre_apply_test_returncode`` 0 -- and stated it only in ``status``, so the door's
+        # source-change gate read the unchanged file as a promise it had failed to keep: measured
+        # 2026-10-31, the idempotent sentence "Repair <src> so that the unit tests in <t> pass" on an
+        # already-green tree came back FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED.
+        out["already_satisfied"]=True
+        out["edited"]=False
         out["status"]="PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR"
         out["detail"]=(
             "The stated test passes on the current source, measured before any write, "
@@ -227,7 +238,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     # engine restores the source itself; only its verified patches are used.
     intermediate=output.parent/(".apply_repair_"+output.name)
     repair=_REPAIR.run({
-        "source_root":_rel(repo,source_root) if source_root!=repo else ".",
+        "source_root":_rel(repo,exec_root) if exec_root!=repo else ".",
         "test_paths":[_rel(repo,p) for p in test_paths],
         "test_argv":argv,
         "output_path":_rel(repo,intermediate),
@@ -288,7 +299,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["unified_diffs"]=[row[3] for row in planned]
 
         # GATE 4 -- the stated test must pass IN PLACE, on the real tree.
-        after_rc,after_tail=_run_test(run_argv,exec_root,timeout)
+        after_rc,after_tail=_run_test(run_argv,exec_root,timeout,env_paths)
         out["post_apply_test_returncode"]=after_rc
         out["post_apply_test_tail"]=after_tail.decode("utf-8","replace")[-1024:]
         if after_rc!=0:
@@ -309,6 +320,28 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     out["applied"]=True
     out["source_restored"]=False
+    if bool(args.get("synthesize_regression_test")) and planned and test_paths:
+        from canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1 import (
+            _synthesize_differential_regression_test,
+        )
+        edited_targets=[t for t,_,_,_ in planned]
+        for _ef in edited_targets:
+            if _ef in originals and _ef.is_file() and _ef.stat().st_size==len(originals[_ef]):
+                _ef.write_bytes(_ef.read_bytes()+b"\n")
+        reg_file=_synthesize_differential_regression_test(
+            exec_root,test_paths[0].parent,edited_targets,originals
+        )
+        if reg_file is not None and reg_file.is_file():
+            reg_rel=_rel(repo,reg_file)
+            out["regression_test_written"]=reg_rel
+            out["files_written"]=list(out.get("files_written") or [])+[reg_rel]
+            if (exec_root/".git").is_dir() and exec_root!=repo:
+                rel_to_proj=[p.relative_to(exec_root).as_posix() for p in [*edited_targets,reg_file]]
+                subprocess.run(["git","add","--",*rel_to_proj],cwd=str(exec_root),capture_output=True,timeout=10)
+                subprocess.run(
+                    ["git","-c","user.name=brain","-c","user.email=brain@local","commit","-q","-m","fix and regression test"],
+                    cwd=str(exec_root),capture_output=True,timeout=10,
+                )
     out["pass"]=True
     out["output_verified"]=True
     out["status"]="PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE"
