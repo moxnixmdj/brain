@@ -56,24 +56,74 @@ def load_active_bound_registry(repo: pathlib.Path) -> dict[str, Any]:
     return doc
 
 
-def _matches_prim_annotation(ann_str: str, val: Any) -> bool:
-    ann = ann_str.strip()
-    if "Any" in ann or "|" in ann or "Optional" in ann or "Union" in ann:
-        if val is None and ("None" in ann or "Optional" in ann):
+def _matches_prim_annotation(ann_str: str, val: Any) -> bool | None:
+    """Match supported literal annotations without executing annotation code.
+
+    None means unknown, NOT valid. Union alternatives use three-valued OR so
+    an unsupported alias cannot become either a false rejection or a proof.
+    """
+    try:
+        annotation = ast.parse(ann_str.strip(), mode="eval").body
+    except (SyntaxError, ValueError):
+        return None
+
+    def name(node: ast.AST) -> str:
+        if isinstance(node, ast.Name):
+            return node.id
+        if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name):
+            if node.value.id in {"typing", "typing_extensions", "builtins"}:
+                return node.attr
+        return ""
+
+    def union(results: list[bool | None]) -> bool | None:
+        if any(result is True for result in results):
             return True
-        for base, types in _PRIM_MAP.items():
-            if base in ann and isinstance(val, types):
-                if base == "int" and isinstance(val, bool):
-                    continue
-                return True
-        return True
-    base = ann.split("[", 1)[0].strip()
-    allowed = _PRIM_MAP.get(base)
-    if allowed is None:
-        return True
-    if base in ("int", "float") and isinstance(val, bool):
-        return False
-    return isinstance(val, allowed)
+        return None if any(result is None for result in results) else False
+
+    def match(node: ast.AST, depth: int = 0) -> bool | None:
+        if depth > 16:
+            return None
+        if isinstance(node, ast.Constant):
+            if node.value is None:
+                return val is None
+            if isinstance(node.value, str):
+                try:
+                    return match(ast.parse(node.value, mode="eval").body, depth + 1)
+                except (SyntaxError, ValueError):
+                    return None
+            return None
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.BitOr):
+            return union([match(node.left, depth + 1), match(node.right, depth + 1)])
+        kind = name(node)
+        if kind == "Any":
+            return True
+        if isinstance(node, ast.Subscript):
+            kind = name(node.value)
+            parts = list(node.slice.elts) if isinstance(node.slice, ast.Tuple) else [node.slice]
+            if kind == "Optional" and len(parts) == 1:
+                return True if val is None else match(parts[0], depth + 1)
+            if kind == "Union":
+                return union([match(part, depth + 1) for part in parts])
+            if kind == "Annotated" and parts:
+                return match(parts[0], depth + 1)
+            if kind == "Literal":
+                try:
+                    literals = [ast.literal_eval(part) for part in parts]
+                except (ValueError, TypeError, SyntaxError):
+                    return None
+                return any(type(val) is type(literal) and val == literal for literal in literals)
+            # Generic container element checking is outside this literal checker.
+            # A wrong outer type can be rejected, but matching it is not proof.
+            allowed = _PRIM_MAP.get(kind)
+            return False if allowed is not None and not isinstance(val, allowed) else None
+        allowed = _PRIM_MAP.get(kind)
+        if allowed is None:
+            return None
+        if kind in {"int", "float"} and isinstance(val, bool):
+            return False
+        return isinstance(val, allowed)
+
+    return match(annotation)
 
 
 def _sig_spec(fn: ast.FunctionDef | ast.AsyncFunctionDef, is_method: bool = False) -> dict[str, Any]:
@@ -288,7 +338,12 @@ def analyze_python_module_ast(tree: ast.Module, rel_path: str) -> list[dict[str,
         def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
             if node.value is not None and isinstance(node.value, ast.Constant):
                 ann = ast.unparse(node.annotation)
-                if not _matches_prim_annotation(ann, node.value.value):
+                compatible = _matches_prim_annotation(ann, node.value.value)
+                if compatible is None:
+                    findings.append({"file": rel_path, "line": node.lineno,
+                                     "code": "ANNOTATION_NOT_CHECKED", "severity": "warning",
+                                     "message": f"Literal annotation '{ann}' is outside supported checks."})
+                if compatible is False:
                     findings.append({
                         "file": rel_path,
                         "line": node.lineno,
@@ -302,7 +357,12 @@ def analyze_python_module_ast(tree: ast.Module, rel_path: str) -> list[dict[str,
             if self.ret_ann_stack and self.ret_ann_stack[-1] is not None:
                 ann = self.ret_ann_stack[-1]
                 val = node.value.value if isinstance(node.value, ast.Constant) else (None if node.value is None else ...)
-                if val is not ... and not _matches_prim_annotation(ann, val):
+                compatible = _matches_prim_annotation(ann, val) if val is not ... else True
+                if compatible is None:
+                    findings.append({"file": rel_path, "line": node.lineno,
+                                     "code": "ANNOTATION_NOT_CHECKED", "severity": "warning",
+                                     "message": f"Return annotation '{ann}' is outside supported checks."})
+                if compatible is False:
                     findings.append({
                         "file": rel_path,
                         "line": node.lineno,
@@ -418,7 +478,8 @@ def analyze_python_static_soundness(
     max_files: int = 100,
 ) -> dict[str, Any]:
     target = source_root if source_root is not None else repo
-    py_files = [target] if target.is_file() else sorted(target.rglob("*.py"))[:max_files]
+    discovered = [target] if target.is_file() else sorted(target.rglob("*.py"))
+    py_files = discovered[:max(0, max_files)]
     errors: list[dict[str, Any]] = []
     warnings: list[dict[str, Any]] = []
     checked = 0
@@ -443,11 +504,19 @@ def analyze_python_static_soundness(
                 errors.append(item)
             else:
                 warnings.append(item)
+    complete = checked > 0 and len(discovered) == checked
+    annotations_complete = not any(item["code"] == "ANNOTATION_NOT_CHECKED" for item in warnings)
     return {
+        "verification_scope": "BOUNDED_PYTHON_AST_CHECKS",
+        "semantic_correctness_verified": False,
+        "analysis_complete": complete,
+        "annotation_checks_complete": annotations_complete,
+        "files_discovered": len(discovered),
+        "files_omitted": len(discovered) - checked,
         "files_checked": checked,
         "error_count": len(errors),
         "warning_count": len(warnings),
         "errors": errors,
         "warnings": warnings,
-        "sound": len(errors) == 0,
+        "sound": len(errors) == 0 and complete and annotations_complete,
     }

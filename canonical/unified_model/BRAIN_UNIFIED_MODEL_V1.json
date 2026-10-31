@@ -28475,8 +28475,6 @@
    "declared_dependencies": {
     "declared_dependencies_checked": [
      "ast",
-     "hashlib",
-     "json",
      "pathlib",
      "typing"
     ],
@@ -28499,7 +28497,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_hardcore_final_supercomposer_v1.py",
-    "source_sha256": "5671abbc83d4b9e41c37d1f06ef8b67595ebf6607644c9544ad2797a03c526e9",
+    "source_sha256": "02510a390bf9cd970bce815173bbd2636e598410729dfae8a549707e0b9d0f27",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28734,7 +28732,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
-    "source_sha256": "e6ac1177177e5500a879aac3d8c67c146d632b90129ac5fff6eb8ce4b27e9e90",
+    "source_sha256": "8cb2cdfbb0bd3a3efa52c3e628d337af85b322b35081e8c3ec0d9ec38d0e328d",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30486,7 +30484,7 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 204,
+  "knowledge_documents": 205,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6523,
   "routing_tokens": 2261,
@@ -30497,7 +30495,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ccde48782bd0371698ea9d8a0eca3b88c64a3f2419bec8982a17cd2621b6f9aa"
+  "value": "d24bf56b4f6151e34c1d566e5ee4f25bcb6000f88d10bf6687b123859caf1841"
  },
  "engines": [
   {
@@ -57570,6 +57568,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6918,
+   "headings": [
+    "SWE acceptance-boundary repairs — 2026-10-31",
+    "Scope and reuse",
+    "Changes",
+    "Source CEGIS",
+    "Literal annotation checks",
+    "Final composition wrapper",
+    "Measurements",
+    "Integration failures that remain open",
+    "Final focused and model checks",
+    "Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/SWE_ACCEPTANCE_BOUNDARIES_20261031.md",
+   "sha256": "0922e580ae8a725e05ecb03931be570315d0676db9b3993cc786925679c4c94a",
+   "summary": "This is a focused repair, not a claim that all advanced engineering gaps are closed. No capability rows, terminal predicates, protected policies, or workflows are changed. The final integrated base is `4b1baa2a57c1eac48658c101342fe5d0636c25a5`.",
+   "terms": {
+    "33": 3,
+    "acceptance": 4,
+    "acceptance-boundary": 3,
+    "after": 3,
+    "all": 3,
+    "annotation": 3,
+    "ast": 3,
+    "baseline": 3,
+    "broader": 4,
+    "candidate": 7,
+    "cannot": 3,
+    "capability": 3,
+    "checks": 6,
+    "claim": 5,
+    "controls": 7,
+    "declared": 3,
+    "destinations": 3,
+    "existing": 4,
+    "failed": 3,
+    "failures": 3,
+    "false": 3,
+    "final": 5,
+    "focused": 5,
+    "integration": 3,
+    "integrity": 3,
+    "literal": 4,
+    "main": 4,
+    "modules": 3,
+    "new": 3,
+    "no": 8,
+    "not": 12,
+    "only": 3,
+    "passed": 7,
+    "promotion": 3,
+    "rather": 3,
+    "real": 3,
+    "regression": 3,
+    "remain": 3,
+    "repair": 4,
+    "report": 4,
+    "repository": 3,
+    "run": 5,
+    "scope": 3,
+    "source": 11,
+    "tests": 4,
+    "than": 3,
+    "were": 4,
+    "workflow": 4
+   },
+   "title": "SWE acceptance-boundary repairs — 2026-10-31",
+   "title_terms": [
+    "2026-10-31",
+    "acceptance-boundary",
+    "repairs",
+    "swe"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5905,
    "headings": [
     "Reuse engineering operation intent — 2026-10-31",
@@ -57670,10 +57745,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 993,
+  "included_source_count": 994,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5b872aad261010e834fccac86bd273996a2d653076a38585733d853012da226f"
+  "source_tree_digest": "34278746bc49ab141f300cc214bb0141d2d89328f32298dc058e6cc628a5a25a"
  },
  "research_index": [
   {
@@ -215868,7 +215943,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/_swe_static_soundness_v1.py",
-   "sha256": "8642e00c85ad538c926009fbe1711ae174cf6a3ae2dea53e8633c82ed678c23e",
+   "sha256": "1cbe9639eb3c54b64946851d484ff12ab190c0a8247481ffd99db13d3fad5a4d",
    "summary": "Shared active-registry loader and deterministic stdlib Python static/type/security analyzer.",
    "symbol_count": 7,
    "symbols": [
