@@ -150,3 +150,10 @@ the existing exact assertion to the now-declared single canonical effect.
 This is an explicit contract migration plus a stronger invariant, not restoring
 the obsolete alias, loosening the test, changing runtime effects or promoting
 a capability. The snapshot itself needs no change.
+
+Third integration: retain main `34f867a9d0b057d2bd9fcef1167c31d251b13f75`
+(PR6490 package-root and answer-artifact fixes, PR6492 audit) unchanged. Run
+the new answer/suite controls with cache/index/model tests and officially
+regenerate the combined model. Earlier timing and broad comparison numbers
+remain measurements of the explicitly identified earlier source, not the
+subsequently edited repair adapter or newly integrated answer projection.

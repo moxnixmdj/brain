@@ -762,10 +762,62 @@ def _source_env(*paths: Any) -> dict[str, str]:
         # imports are satisfied by the WORLD ROOT, which callers already
         # pass as source_root; the rc=2/zero-failing-tests symptom this walk
         # once chased turned out to be the harness slicing -m off the argv.
+    # THE PROJECT ROOT THE TESTS IMPORT THROUGH, DERIVED FROM THE IMPORTS THEMSELVES.
+    #
+    # Measured 2026-10-31 on the 18-sentence probe (`fix_broken`, fixture <d>/pkg with
+    # <d>/pkg/test_calc.py doing `from pkg.calc import add`): the source dir alone was on
+    # PYTHONPATH, so every candidate run died on the test file's import line, every candidate
+    # scored the same as the baseline, and the bounded search reported no verified repair for a
+    # one-token bug (`return a - b`).  The same defect made the localizer report PASS with an
+    # empty ranking.
+    #
+    # The fix must NOT put a package directory on sys.path -- that was reverted above with a
+    # measured shadowing receipt (tornado's dir made `import locale` resolve to
+    # tornado/locale.py).  So take the top-level names the test files actually import, and add
+    # the ancestor directory that CONTAINS that package.  A parent directory containing `pkg/`
+    # is the layout every project uses; it cannot shadow a stdlib module the way `pkg/` itself
+    # can, and every name is read from the suite rather than guessed from a directory walk.
+    dirs.extend(_import_root_dirs(dirs, [str(x) for x in paths]))
     existing = os.environ.get("PYTHONPATH", "")
     if existing:
         dirs.append(existing)
     return {"PYTHONPATH": os.pathsep.join(dirs)}
+
+
+def _import_root_dirs(dirs: list[str], paths: list[str]) -> list[str]:
+    """Directories that make the modules the tests import importable. Bounded, import-derived."""
+    import ast as _ast
+    import sys as _sys
+    names: set[str] = set()
+    for raw in paths:
+        q = pathlib.Path(raw)
+        if q.suffix != ".py" or not q.is_file():
+            continue
+        try:
+            tree = _ast.parse(q.read_text(encoding="utf-8"), filename=str(q))
+        except (SyntaxError, ValueError, UnicodeDecodeError, OSError):
+            continue
+        for node in _ast.walk(tree):
+            if isinstance(node, _ast.Import):
+                for alias in node.names:
+                    names.add(alias.name.split(".")[0])
+            elif isinstance(node, _ast.ImportFrom) and not node.level and node.module:
+                names.add(node.module.split(".")[0])
+    known = getattr(_sys, "stdlib_module_names", frozenset())
+    names = {n for n in names if n and n not in known}
+    if not names:
+        return []
+    roots: list[str] = []
+    for d in dirs:
+        p = pathlib.Path(d)
+        for _ in range(8):
+            p = p.parent
+            if p == p.parent:
+                break
+            if any((p / n / "__init__.py").is_file() for n in names) and str(p) not in roots:
+                roots.append(str(p))
+                break
+    return roots
 
 
 def _byte_offset(lines: list[bytes], lineno: int, col: int) -> int:
