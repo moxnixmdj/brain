@@ -1258,6 +1258,12 @@ def main():
     ap.add_argument("--jobs", type=int, default=5)
     ap.add_argument("--only", default="")
     ap.add_argument("--json", default="")
+    # A CENSUS THAT CANNOT FAIL IS NOT A GATE.  Every run of this file printed its count and
+    # exited 0, so nothing in CI could hold main to the surface it had already reached -- and
+    # main lost two laws to that silence.  The floor is the count the run must not fall below;
+    # the failing tags are printed with the reason the probe itself recorded, because a guard
+    # whose failure cannot be read cannot be fixed.
+    ap.add_argument("--floor", type=int, default=0)
     ns = ap.parse_args()
     if ns.worker is not None:
         print(json.dumps(adv.run_probe(ns.worker)))
@@ -1285,7 +1291,16 @@ def main():
         fams[r["tier"]] = (ok + (1 if r["ok"] else 0), tot + 1)
     for fam, (ok, tot) in fams.items():
         print(f"  {fam:<10} {ok}/{tot}")
-    print(f"SURFACE REACHED {sum(1 for r in rows if r['ok'])}/{len(rows)}")
+    reached = sum(1 for r in rows if r["ok"])
+    print(f"SURFACE REACHED {reached}/{len(rows)}")
+    if ns.floor and reached < ns.floor:
+        print(f"SURFACE FLOOR NOT MET: {reached} < {ns.floor}")
+        for r in rows:
+            if r["ok"]:
+                continue
+            print(f" - {r['tag']}: {str(r['status'])[:70]} | "
+                  f"{json.dumps(r.get('detail'), default=str)[:200]}")
+        return 1
     return 0
 
 
