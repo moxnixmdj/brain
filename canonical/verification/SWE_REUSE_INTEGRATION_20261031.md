@@ -8,7 +8,7 @@ repository integrity separately; it does not turn a failing test into a pass.
 
 Reused existing Brain implementations discovered at `cd44f98`, then integrated
 rather than restoring old modules wholesale. Merged current main through
-`95e70a3134969fc28fb8a8c9fb4a548ee52a8fa0`; preserved its bisect materialization
+`04b6cbb8329507cbd139b7df2038c0eb2c56c237`; preserved its bisect materialization
 limits, request-role rules and guarded retry behavior. Runtime and tests import
 only current-tree source, never the discovery copies.
 
@@ -203,3 +203,25 @@ span can also come from the new unique self-contained data-flow block heuristic.
 That heuristic is not a proof of arbitrary prose meaning. Zero line sentinels and
 invented helper names stay removed. Derivation/joint/Git-question controls:
 **32 passed**. This supplements the earlier 577-case measurement.
+
+## Final current-main controls and census
+
+Retained main `04b6cbb8`'s new census gate unchanged. The incoming test-owner
+inference initially displaced explicit source roots and broke five original
+stated-report cases. Fixed the integration at the evidence boundary: inference
+is confined to test-consuming rows, preserves an explicit source role, and
+starts with the test-owning directory itself before trying ancestors. A new
+read-only test-file control forbids widening to the source tree.
+
+On merged commit `6f187586`: **205 passed**, 38.15 s, including all original
+166 cases, **20 joint controls**, and coupled/test-guided repair tests.
+The live surface census then measured **27/28 reached** with `--jobs 4 --floor 25`;
+only `fix_then_regression_test` remains unreached. The floor was not lowered.
+These current-main checks supplement the earlier 577-case run, not replace or
+retroactively change its six failures or its count of 19 joint controls.
+
+CI on the earlier head also passed the signed referee, admission and structural
+checks. Its non-required same-identity UBJSON mission failed in the worker/relay
+step after its relay/compiler unit checks passed; the cause is not attributed
+without a diagnostic trace. The long heartbeat is not represented as completed.
+The final head must obtain its own signed verdict and model/compiler CI result.
