@@ -6538,6 +6538,1037 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-EXTRACT-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-EXTRACT-001.json"
       }
+    },
+    "python.refactor.inline_helper.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.inline_helper.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_inline_helper",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "inline",
+        "inline the helper",
+        "single-use",
+        "single use",
+        "helper",
+        "only caller",
+        "call site",
+        "refactor",
+        "expand function",
+        "inline function"
+      ],
+      "limitations": [
+        "Inlines a module-level function that ends in a single return and has exactly ONE call site in the subject; 'single-use' is read as that property of the tree, never as a hint.",
+        "Refuses a call whose argument is not re-evaluable (a call, lambda, await or comprehension): substituting it twice would run it twice.",
+        "Kept only if the helper's name survives nowhere and the suite is green."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.inline_helper",
+        "python.refactor.single_use_inlined"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "helper",
+        "inlined_expression",
+        "edits",
+        "files_edited",
+        "suite_passed",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_inline_helper.py",
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.refactor.rename_parameter.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.rename_parameter.v1",
+          "module": "${input.module}",
+          "new_param": "${input.new_param}",
+          "old_param": "${input.old_param}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "qualname": "${input.qualname}",
+          "run_tests": "${input.run_tests}",
+          "source_root": "${input.source_root}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_refactor_rename_parameter",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "rename",
+        "parameter",
+        "ast",
+        "scope",
+        "shadowing",
+        "call site",
+        "kwargs",
+        "signature",
+        "semantic edit",
+        "codemod"
+      ],
+      "limitations": [
+        "edits identifiers, never strings or formatting: comment/docstring words byte-preserved; all splices are byte-integrity-checked at exact identifier spans (SPAN_INTEGRITY refusal).",
+        "positional call sites are counted but never edited (semantic ambiguity is a law, not a bug); dynamic receivers, getattr dispatch and **kwargs passthroughs are listed in unknown_sites and lower complete instead of being silently edited.",
+        "nested scopes that rebind the old parameter shadow it (recorded in shadowed_keeps); ClassDef bodies are opaque; a global/nonlocal declaration on the parameter refuses the edit (REFUSE_NONLOCAL_OR_GLOBAL).",
+        "no run_tests named => verified=false loudly; a red post-edit suite restores every original byte and refuses TESTS_RED_AFTER_EDIT.",
+        "same-name rerun refuses PARAM_NOT_FOUND (honest no-noop idempotence)."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.rename_parameter"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "complete",
+        "edit_count",
+        "edits",
+        "files_edited",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "positional_callsites_untouched",
+        "shadowed_keeps",
+        "unknown_sites",
+        "verified"
+      ],
+      "source": {
+        "module": "python stdlib ast/tokenize",
+        "type": "runtime",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-REFACTOR-001",
+        "observed_effect": {
+          "determinism": "two pristine worlds byte-identical trees and artifacts; rerun refuses PARAM_NOT_FOUND",
+          "dynamic": "getattr(core_mod,'describe')(n=k) listed in unknown_sites -> complete=false, bytes untouched, known edits still applied",
+          "golden": "describe n->size: 9 edits across def+body+callers (from-import AND module-alias styles); contract + through-caller propagation suite green post-edit (gate PASS, complete=true), e2e 204 ms",
+          "rollback": "tampered suite -> TESTS_RED_AFTER_EDIT, all originals restored",
+          "shadowing": "module with its own local describe(byte-identical) outlives the pass; docstring word 'n' preserved"
+        },
+        "pin_green": "16/16 x 3 consecutive runs",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REFACTOR-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REFACTOR-001.json"
+      }
+    },
+    "python.refactor.rename_symbol.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.rename_symbol.v1",
+          "module": "${input.module}",
+          "new_symbol": "${input.new_symbol}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "qualname": "${input.qualname}",
+          "run_tests": "${input.run_tests}",
+          "source_root": "${input.source_root}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "complete",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_refactor_rename_symbol",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "rename",
+        "symbol",
+        "identifier",
+        "ast",
+        "scope",
+        "binding",
+        "shadowing",
+        "call site",
+        "import propagation",
+        "semantic edit",
+        "codemod"
+      ],
+      "limitations": [
+        "edits identifiers at exact spans only: strings, comments and formatting are byte-preserved; every splice is verified against the original bytes (SPAN_INTEGRITY).",
+        "only uses that provably resolve to the same binding are renamed; dynamic receivers, getattr dispatch and unattributable attribute sites are listed in unknown_sites and lower complete, never silently edited or dropped.",
+        "method renames refuse when a subclass overrides the same name (REFUSE_INHERITED_OVERRIDE) or inherits-and-calls it (REFUSE_INHERITED_USE); super() references are never touched.",
+        "locals, parameters and class-level assignments refuse SYMBOL_KIND_UNSUPPORTED (rename_parameter owns params); global/nonlocal declarations on the old name refuse REFUSE_NONLOCAL_OR_GLOBAL.",
+        "no run_tests named => gate PASS_BLIND with verified=false, stated loudly.",
+        "the action contract is `complete`: every provable site is edited and then re-measured on the post-edit trees, and a surviving provable reference refuses RESIDUAL_REFERENCE before a byte is written; `gate` is PASS only when a named pytest suite ran green, so a no-suite run reports PASS_BLIND and the registry expects complete=true rather than an unreachable gate."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.rename_symbol"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "module",
+        "qualname",
+        "old_symbol",
+        "new_symbol",
+        "symbol_kind",
+        "edit_count",
+        "files_edited",
+        "unknown_sites",
+        "shadowed_keeps",
+        "gate",
+        "complete",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "module": "python stdlib ast",
+        "type": "runtime",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
+        "observed_effect": {
+          "determinism": "two pristine worlds -> byte-identical trees and artifacts; string literals and substring-carriers (topper, \"top of \") never edited",
+          "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files",
+          "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
+          "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
+          "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
+          "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical"
+        },
+        "pin_green": "18/18 rename-symbol pins green",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-RENAMESYM-001.json"
+      }
+    },
+    "python.refactor.test_scaffold.fusion.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.test_scaffold.fusion.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_refactor_test_scaffold_fusion_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "refactor",
+        "scaffold",
+        "transformation"
+      ],
+      "limitations": [
+        "Stdlib + tree_sitter, no model"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.transformation.fused.verified",
+        "python.edit.primitive.fused"
+      ],
+      "requires": [
+        "python.refactor.rename_parameter",
+        "python.tests.generate.scaffold",
+        "python.source.audit"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_refactor_test_scaffold_fusion_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-REFACTOR-TEST-SCAFFOLD-FUSION-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_REFACTOR_TEST_SCAFFOLD_FUSION_V1_V1.json"
+      }
+    },
+    "python.repo.diff_apply_full_testgate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "capability_id": "python.repo.diff_apply_full_testgate.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repo_diff_apply_full_testgate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repo",
+        "diff",
+        "apply",
+        "full",
+        "test",
+        "suite",
+        "gate",
+        "integration",
+        "pre-merge",
+        "pytest",
+        "anchor",
+        "regression",
+        "pull request",
+        "pr"
+      ],
+      "limitations": [
+        "needs git on PATH (git apply --check then --apply); absent -> GIT_UNAVAILABLE refusal, loudly, before anything runs.",
+        "test discovery is the pytest filename convention (test_*.py / *_test.py); suites named otherwise are not discovered and an empty suite is a refusal, not a pass.",
+        "scratch apply is single-commit text apply; binary diffs and mode-change hunks are out of v1 scope (git apply refuses them as DIFF_DOES_NOT_APPLY).",
+        "runtime verdicts inherit pytest's own environment sensitivity; the gate reports the pytest verdict honestly rather than interpreting it."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repo.diff_apply_full_testgate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "complete",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "tests_discovered",
+        "tests_failed",
+        "verified"
+      ],
+      "source": {
+        "module": "git",
+        "type": "system_tool",
+        "version_family": ">=2.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-APPLYGATE-001",
+        "observed_effect": {
+          "blind_spot_closed": "rename-only diff: static triage PASS, this gate FAIL with tests/test_core.py named -- the measured reason this capability exists",
+          "crown": "natural-language issue -> orchestrator -> static diff triage -> this anchored full-suite apply gate",
+          "deterministic": "applygate artifact byte-identical on rerun; anchor tree hash-identical before/after",
+          "golden": "gate PASS, 1 test file green, full 4-stage chain 474-538 ms",
+          "sabotage_both": "unused-import edit: F401 blocks statically AND this gate fails at runtime"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-APPLYGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-APPLYGATE-001.json"
+      }
+    },
+    "python.repo.pr_realize.v1": {
+      "action_template": {
+        "args": {
+          "apply_directory": "${input.apply_directory}",
+          "base_branch": "${input.base_branch}",
+          "branch_name": "${input.branch_name}",
+          "capability_id": "python.repo.pr_realize.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "pr_intent_path": "${input.pr_intent_path}",
+          "repo_path": "${input.repo_path}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "push_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repo_pr_realize",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repo",
+        "pull request",
+        "pr",
+        "realize",
+        "forge",
+        "push",
+        "branch",
+        "commit",
+        "ship",
+        "deploy",
+        "git",
+        "verify",
+        "ls-remote"
+      ],
+      "limitations": [
+        "pushes to the repo's configured origin only; forge PR-OPEN (the web/API step after the push) is deliberately out of v1 scope -- the branch on the forge with a verified sha IS the realized intent.",
+        "commit identity and dates are pinned inputs so the sha is a pure content function; a rerun of the same world is idempotent (already_realized, no force-push) and post-rerun receipts are byte-identical.",
+        "staging is restricted to diff-touched paths; crown bookkeeping files (the diff itself, intents, receipts) never enter the commit.",
+        "requires git an origin remote; bogus diffs, empty diffs, non-git trees, and branch-name injection are all named pre-action refusals; a remote sha mismatch after push fails the receipt loudly."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repo.pr_realize"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "already_realized",
+        "branch_name",
+        "complete",
+        "gate",
+        "head_sha",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "push_verified",
+        "pushed",
+        "remote_ref",
+        "verified"
+      ],
+      "source": {
+        "module": "git",
+        "type": "system_tool",
+        "version_family": ">=2.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-REALIZE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrate -> six review gates -> THIS CAPABILITY ships the result: branch push verified by ls-remote sha equality",
+          "golden": "remote ref crown/GH-9900-rename == head_sha 7a7e8438f..., all six review gates PASS, full loop ~1.9 s",
+          "hermetic": "local bare repo as origin: full push/verify semantics, zero network",
+          "idempotent": "rerun: identical head sha, already_realized=true, no force-push, receipts equal on all post-world rows"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REALIZE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REALIZE-001.json"
+      }
+    },
+    "python.repository.acceptance.measure.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.repository.acceptance.measure.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repository_acceptance_measurement_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repository",
+        "measurement",
+        "acceptance",
+        "test",
+        "content-addressed",
+        "objective",
+        "receipt",
+        "tests",
+        "run the tests",
+        "run tests",
+        "test suite",
+        "test path",
+        "source root"
+      ],
+      "limitations": [
+        "Measures an isolated copy of one repository-local source root; test-side mutations do not alter the measured source.",
+        "Produces content-addressed source snapshot, measurement program, measurement specification, and typed objective fields including tests_pass and python_parse_ok.",
+        "Measurement success is not task acceptance; passing declared tests does not establish complete request semantics or mergeability.",
+        "Python test command only; measured tree size/file count and timeout are bounded."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repository.acceptance.measurement.content_addressed",
+        "python.test.measurement.objective"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "subject",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "measurement_schema",
+        "measurements",
+        "test_evidence",
+        "python_parse_errors",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "shutil",
+          "subprocess",
+          "sys",
+          "tempfile",
+          "time"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "combined_suite_each_carrier": "28_OF_28_PASS",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "focused_measurement_test_count": 7,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "model_dependency_count": 0,
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "runtime_git_blob_sha": "8f5870418de5396b7ae82fbdceb5c51c70f3104c",
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "0c99781622b30b7067063f2be626e0c0f132be73"
+      }
+    },
+    "python.review.diff_coverage_gate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "capability_id": "python.review.diff_coverage_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "min_coverage_ratio": "${input.min_coverage_ratio}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_coverage_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "coverage",
+        "gate",
+        "test coverage",
+        "changed lines",
+        "pull request",
+        "pr",
+        "untested",
+        "pre-merge",
+        "regression"
+      ],
+      "limitations": [
+        "coverage stage needs coverage.py on the python_executable (PyPI tool, offline-probed); absent -> gate PASS_BLIND recorded loudly after the suite is still proven green, the coverage sweep honestly did not run.",
+        "a failing suite is SUITE_RED, a refusal: coverage under failing tests is untrustworthy data, never produced.",
+        "statement coverage is a floor: a def line counts as executed at import; behavioral adequacy belongs to test-quality capabilities (property/mutation) outside v1.",
+        "test discovery is the pytest filename convention; suites named otherwise are not discovered and an empty suite is a refusal, not a pass."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_coverage_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "complete",
+        "diff_covered_ratio",
+        "diff_executable_lines",
+        "diff_miss_lines",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "tests_discovered",
+        "verified"
+      ],
+      "source": {
+        "module": "coverage",
+        "type": "pypi",
+        "version_family": ">=7.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-COVGATE-001",
+        "observed_effect": {
+          "blind_leg": "lint PASS, type PASS, suite PASS, coverage FAIL with pkg/util.py:9 named -- ONLY this gate sees the untested changed line",
+          "crown": "natural-language issue -> orchestrator diff -> lint triage + type gate -> anchored full-suite -> this coverage gate",
+          "deterministic": "coverage artifact byte-identical on rerun; anchor hash-identical before/after",
+          "golden": "gate PASS at diff coverage ratio 1.0 in a ~1.9s full six-stage chain"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COVGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-COVGATE-001.json"
+      }
+    },
+    "python.review.diff_mutation_gate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "capability_id": "python.review.diff_mutation_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "max_mutants": "${input.max_mutants}",
+          "min_kill_ratio": "${input.min_kill_ratio}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "run_tests": "${input.run_tests}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_mutation_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "mutation",
+        "mutant",
+        "test quality",
+        "kill ratio",
+        "survivor",
+        "falsification",
+        "gate",
+        "coverage",
+        "behavior"
+      ],
+      "limitations": [
+        "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) \u2014 deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
+        "mutants are confined to the diff's hunk new-side lines; the suite's own changed test files are measured, never mutated, and never become mutation targets.",
+        "a red base world refuses (BASE_WORLD_RED): mutants cannot be attributed against a suite that was already green-flavoured broken.",
+        "mutant runs share one wall-clock budget per mutant; a mutant suite timeout is counted as a KILL because the behavioural divergence was observable.",
+        "refusal ladder covers PATH_*, DIFF_EMPTY, DIFF_DOES_NOT_APPLY, GIT_UNAVAILABLE, NO_TESTS_DISCOVERED, NO_MUTABLE_SITES, SYNTAX_ERROR_IN_FILE, SPAN_INTEGRITY, BASE_WORLD_RED, TIMEOUT; no named tests => discovered-suite fallback, never silent PASS."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_mutation_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "diff_sha256",
+        "mutants_generated",
+        "mutants_killed",
+        "mutants_survived",
+        "survivors",
+        "kill_ratio",
+        "changed_lines_targeted",
+        "gate",
+        "complete",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "module": "python stdlib ast/pytest + git",
+        "type": "runtime",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-MUTGATE-001",
+        "observed_effect": {
+          "adversarial": "same fix WITHOUT its tests: survivor witness src/pkg/core.py:13 arith_swap '+'->'-', gate FAIL, kill_ratio 0.875",
+          "determinism": "two pristine worlds -> byte-identical artifacts and anchors",
+          "golden": "BatchSizer ceil-half fix + diff-carried tests: 8/8 mutants killed, gate PASS, complete=true, e2e 2225 ms",
+          "immutability": "anchor and diff byte-identical after every leg; scratch deleted",
+          "robustness": "diff-created files measured never mutated; 1e9 hunk sentinel clamped to true file extent"
+        },
+        "pin_green": "15/15 x 3 consecutive runs",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MUTGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MUTGATE-001.json"
+      }
+    },
+    "python.review.diff_perf_gate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "bench_path": "${input.bench_path}",
+          "capability_id": "python.review.diff_perf_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "repeats": "${input.repeats}",
+          "timeout_s": "${input.timeout_s}",
+          "tolerance": "${input.tolerance}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_perf_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "performance",
+        "regression",
+        "benchmark",
+        "bench",
+        "gate",
+        "slowdown",
+        "profiling",
+        "pull request",
+        "pr",
+        "hot path",
+        "latency"
+      ],
+      "limitations": [
+        "physical timings: artifacts carry raw nanoseconds and are NOT byte-identical; the pinned invariant is verdict stability (same gate on every rerun of a fixed world) plus deterministic verdict recomputation from recorded runs.",
+        "best-of-N estimator with an in-child fixed calibrator cancels cross-process site bias; residual shared-box noise floor measured ~0.11 -- declared tolerance bands must sit above it (default 0.10 floor, suite pins use 0.30 explicitly and say why).",
+        "needs a benchmark file defining bench(); no benchmark discovery in v1 -- an absent benchmark is a loud refusal, not an inferred one.",
+        "UNCLEAR is an honest third verdict when distributions overlap inside the tolerance band; the gate never coin-flips."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_perf_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_median_ns",
+        "anchor_path",
+        "bench_path",
+        "complete",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "patched_median_ns",
+        "repeats",
+        "slowdown_ratio",
+        "verified"
+      ],
+      "source": {
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PERFGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + this perf gate (full review fan-in)",
+          "disjointness_law": "FAIL requires min(patched) > max(anchor); overlapping runs inside the band yield UNCLEAR, never a coin flip",
+          "golden": "all five gates PASS on a cosmetic rename in ~2.0 s; normalized ratio 0.985 shows the calibrator is truthful on a no-op",
+          "isolation_leg": "planted cost executed by the suite (coverage-clean) -> lint/type/suite/coverage ALL PASS, this gate FAILs alone at 13.9x normalized slowdown"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PERFGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PERFGATE-001.json"
+      }
+    },
+    "python.review.diff_security_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_security_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}",
+          "worktree_path": "${input.worktree_path}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_security_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "security",
+        "bandit",
+        "gate",
+        "shell=True",
+        "eval",
+        "secrets",
+        "hardcoded password",
+        "injection",
+        "pull request",
+        "pr",
+        "changed lines"
+      ],
+      "limitations": [
+        "bandit stage needs a bandit-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_BASELINE_ONLY recorded loudly, the security sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking; hunk context lines inside a changed hunk share the range (conservatism widens blocking, never narrows a real changed-line finding out of blocking).",
+        "policy: HIGH severity blocks; MEDIUM blocks at HIGH confidence; B104-B107 hardcoded-secret family blocks regardless of bandit's LOW label; LOW otherwise advisory.",
+        "static heuristics only: bandit's own false-positive classes are advisory-visible, and absent tool classes (dataflow-level injection) are out of v1 scope."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_security_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "bandit",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "bandit",
+        "type": "pypi",
+        "version_family": ">=1.7"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SECGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + perf + this security gate (review fan-in complete)",
+          "deterministic": "security artifact byte-identical on rerun",
+          "golden": "all six review gates PASS on the choreographed rename chain in ~1.8-2.0 s",
+          "isolation_leg": "covered, typed, lint-clean, fast shell=True wrapper with its own green test -> five gates PASS, ONLY this gate FAILs with B602 at pkg/util.py:10"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECGATE-001.json"
+      }
+    },
+    "python.review.diff_static_triage.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_static_triage.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}",
+          "worktree_path": "${input.worktree_path}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_static_triage",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "static",
+        "triage",
+        "ruff",
+        "lint",
+        "gate",
+        "pull request",
+        "pr",
+        "f821",
+        "syntax",
+        "changed lines",
+        "pre-existing",
+        "noise"
+      ],
+      "limitations": [
+        "ruff stage needs a ruff-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_SYNTAX_ONLY recorded loudly, the F/E/W sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking: untouched pre-existing findings are advisory context listed as out_of_scope (never blockers).",
+        "isolated ruff run (--isolated, --no-cache): repo lint config is NOT read; zero config law keeps verdicts reproducible.",
+        "v1 reviews unified diffs of .py files; other languages fall through to the syntax baseline silently-listed as non-Python rows."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_static_triage"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "ruff",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "ruff",
+        "type": "pypi",
+        "version_family": ">=0.5"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-DIFFTRIAGE-001",
+        "observed_effect": {
+          "chain": "natural-language issue -> orchestrator (apply + tests green) -> produced diff -> this gate",
+          "deterministic": "triage artifact byte-identical on rerun",
+          "e2e_loop_ms": [
+            382.2,
+            322.7
+          ],
+          "golden": "gate PASS, 0 blocking on a real choreographed rename diff",
+          "ruff": "0.17.3",
+          "sabotage": "injected undefined-name line -> gate FAIL with F821 at pkg/core.py:3"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIFFTRIAGE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIFFTRIAGE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
