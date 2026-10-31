@@ -188,7 +188,9 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
         rel = adapter.name
 
     found: dict[str, str] = {}
-    for node in ast.walk(tree):
+    nodes = list(ast.walk(tree))
+    parents = {child: parent for parent in nodes for child in ast.iter_child_nodes(parent)}
+    for node in nodes:
         if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
                 and node.func.attr == "get" and node.args):
             continue

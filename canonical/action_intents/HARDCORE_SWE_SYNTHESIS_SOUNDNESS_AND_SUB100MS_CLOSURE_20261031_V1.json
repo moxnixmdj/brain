@@ -37,7 +37,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The machine could rename a symbol across files, inline a helper, resolve a merge conflict and repair a whole tree through the choreographer -- and could not MOVE a definition, the one refactor whose plan already existed (python_crossfile_edit_choreograph.build_plan emits CUT_SPAN / INSERT_SPAN / IMPORT_REWRITE) with nothing to execute it. The front door could not even bind the sentence: two stated .py files made `module` underivable, so the row that exists for the sentence was refused with BINDING_REFUSED:module:not_stated.",
-  "canonical_base_commit": "c2335806bc59d197e180a5960dcfce1db8caa559",
+  "canonical_base_commit": "7898bc86e570643a3ee6d0edced43fa7ff85fc28",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -81,7 +81,7 @@
     "HARDCORE_SWE_ALL_PROBLEMS_20261030_V1.md"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "c2335806bc59d197e180a5960dcfce1db8caa559",
+    "canonical_base_commit": "7898bc86e570643a3ee6d0edced43fa7ff85fc28",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",

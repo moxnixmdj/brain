@@ -1632,6 +1632,13 @@ def _role_anchored(goal: str, raw: str, phrases, index: int | None = None) -> bo
         index = text.find(raw)
     if index < 0:
         return False
+    # A stated directory/file may first occur as a PREFIX of another path:
+    # "report to src/report.json for the source root src". That first "src"
+    # is not a destination occurrence of the directory. A trailing sentence
+    # period is punctuation, but /child, _suffix and .extension continue a path.
+    end = index + len(raw)
+    if re.match(r"[A-Za-z0-9_/-]|\.[A-Za-z0-9_.-]", text[end:]):
+        return False
     before = text[:index]
     filler = r"(?:\s+(?:" + "|".join(_ROLE_FILLERS) + r"))?"
     for phrase in phrases:
@@ -1776,7 +1783,11 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     pinned_keys = [k for k in keys if k not in declared_selectors and (k in ("text", "goal", "url") or k.endswith("_path"))]
     typed_keys = [k for k in keys if k not in pinned_keys]
     inputs: dict[str, Any] = {}
-    taken: set[str] = set()
+    # A destination is not a source on ANY binding path, including a successful
+    # pinned binding and joint-role elimination (not just the type fallback).
+    # Compute once per binding, reusing the existing role detector.
+    named_destinations = _named_output_destinations(goal, entry, keys, root)
+    taken: set[str] = set(named_destinations)
     pending_input_paths: list[str] = []
     for key in pinned_keys:
         shadow = dict(entry)
@@ -1785,6 +1796,9 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             bound_val = gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses)
             val = bound_val.get(key)
             if key.endswith("_path") and not _is_output_key(key, entry) and val:
+                if val in named_destinations:
+                    raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",
+                                                 "input_is_stated_destination:" + key)
                 stem = key[:-5].lower()
                 wanted = _STEM_SUFFIXES.get(stem)
                 if wanted and pathlib.PurePosixPath(val).suffix.lower() not in wanted:
@@ -1835,10 +1849,10 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             try:
                 inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
             except GoalCompilationFailure:
-                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | _named_output_destinations(goal, entry, keys, root))
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | named_destinations)
         else:
             try:
-                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | _named_output_destinations(goal, entry, keys, root))
+                inputs[key] = _bind_path_by_type(goal, key, root, exclude=_excluded(produced_paths, taken) | named_destinations)
             except GoalCompilationFailure as type_failure:
                 if not produced_paths:
                     raise

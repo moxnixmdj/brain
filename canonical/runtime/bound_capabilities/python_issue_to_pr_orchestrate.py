@@ -126,12 +126,16 @@ def _copy_tree(src: Path, dst: Path) -> None:
 def _splice_token(line: str, name: str, new_name: str, col: int) -> str:
     """Replace the token occurrence of `name` sitting exactly at `col`
     (ast col_offset semantics).  Off-position refuses, never guesses."""
-    seg = line[col:col + len(name)]
-    if seg != name or not re.fullmatch(r"[A-Za-z_]\w*", name):
-        raise ValueError(f"TOKEN_NOT_AT_INDEXED_POSITION:{col}:{seg!r}")
-    if len(line) > col + len(name) and (line[col + len(name)].isalnum() or line[col + len(name)] == "_"):
+    raw, token = line.encode("utf-8"), name.encode("utf-8")
+    if col < 0 or raw[col:col + len(token)] != token or not name.isidentifier():
+        raise ValueError(f"TOKEN_NOT_AT_INDEXED_POSITION:{col}")
+    try:
+        head, tail = raw[:col].decode("utf-8"), raw[col + len(token):].decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError("TOKEN_BYTE_BOUNDARY_INVALID") from exc
+    if tail and (tail[0].isalnum() or tail[0] == "_"):
         raise ValueError("TOKEN_BOUNDARY_VIOLATION:" + line[:60])
-    return line[:col] + new_name + line[col + len(name):]
+    return head + new_name + tail
 
 
 def _splice_site(line: str, name: str, new_name: str, site: dict) -> str:
@@ -160,42 +164,27 @@ def _apply_rename(work_src: Path, op: dict, plan_op: dict) -> dict:
         lines = original.splitlines(keepends=True)
         new_lines = list(lines)
         splices = []
+        inline = [s for s in by_file[file_rel] if s["kind"] != "IMPORT_SITE"]
         import_sites = [s for s in by_file[file_rel] if s["kind"] == "IMPORT_SITE"]
         if import_sites:
-            # plan rows carry only the file for IMPORT_SITE: re-parse the file
-            # and locate every ImportFrom statement that names the symbol.
+            # AST alias spans identify the actual identifier, including in
+            # parenthesized/backslash imports. Preserve every other byte:
+            # comments, whitespace, other names and same-line statements.
             try:
                 tree = ast.parse(original, filename=file_rel)
             except SyntaxError as exc:
                 raise ValueError(f"IMPORT_FILE_UNPARSEABLE:{file_rel}:{exc.lineno}")
-            spans = []
-            for node in ast.walk(tree):
-                if isinstance(node, ast.ImportFrom) and str(node.module or "") == defining_dot:
-                    if any(a.name == name for a in node.names):
-                        if node.end_lineno != node.lineno:
-                            raise ValueError("MULTILINE_IMPORT_SPAN:" +
-                                             f"{file_rel}:{node.lineno}")
-                        spans.append((int(node.lineno), int(node.col_offset)))
-            if not spans:
+            aliases = [alias for node in ast.walk(tree)
+                       if isinstance(node, ast.ImportFrom) and str(node.module or "") == defining_dot
+                       for alias in node.names if alias.name == name]
+            if not aliases:
                 raise ValueError("IMPORT_SITE_STATEMENT_NOT_FOUND:" + file_rel)
-            for lineno, col0 in spans:
-                idx = lineno - 1
-                if idx < 0 or idx >= len(new_lines):
-                    raise ValueError(f"LINE_OUT_OF_RANGE:{file_rel}:{lineno}")
-                body = new_lines[idx].rstrip("\n")
-                ending = new_lines[idx][len(body):]
-                # splice only the alias token inside `from X import <names>`
-                head, _, tail = body.partition(" import ")
-                if not tail:
-                    raise ValueError(f"IMPORT_STATEMENT_SHAPE_UNKNOWN:{file_rel}:{lineno}")
-                seg = re.sub(r"\b" + re.escape(name) + r"\b(?!\s+as\b)",
-                             new_name, tail, count=1)
-                if seg == tail:
-                    # name present only as `name as alias`: refusing beats guessing
-                    raise ValueError(f"ALIASED_IMPORT_UNTRACKED:{file_rel}:{lineno}")
-                new_lines[idx] = head + " import " + seg + ending
-                splices.append({"file": file_rel, "kind": "IMPORT_SITE", "lineno": lineno})
-        inline = [s for s in by_file[file_rel] if s["kind"] != "IMPORT_SITE"]
+            for alias in aliases:
+                if alias.asname is not None:
+                    raise ValueError(f"ALIASED_IMPORT_UNTRACKED:{file_rel}:{alias.lineno}")
+                inline.append({"kind": "IMPORT_SITE", "lineno": alias.lineno, "col": alias.col_offset})
+        # One reverse-position pass is essential: an import and a reference
+        # may share a line, and earlier replacements change later offsets.
         for site in sorted(inline,
                            key=lambda s: (s.get("lineno", 0), s.get("col", 0)), reverse=True):
             idx = int(site["lineno"]) - 1
@@ -203,7 +192,8 @@ def _apply_rename(work_src: Path, op: dict, plan_op: dict) -> dict:
                 raise ValueError(f"LINE_OUT_OF_RANGE:{file_rel}:{site['lineno']}")
             body = new_lines[idx].rstrip("\n")
             ending = new_lines[idx][len(body):]
-            body = _splice_site(body, name, new_name, site)
+            body = (_splice_token(body, name, new_name, int(site["col"]))
+                    if site["kind"] == "IMPORT_SITE" else _splice_site(body, name, new_name, site))
             new_lines[idx] = body + ending
             splices.append({"file": file_rel, "kind": site["kind"],
                             "lineno": int(site["lineno"])})

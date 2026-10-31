@@ -448,12 +448,9 @@ def _parallel_index_misses(misses: list[tuple[str, str]]) -> list[tuple[bool, di
         return [_index_one_file(t) for t in misses]
 
 
-def run(args, root):
+def _collect_index_parts(source_root_arg, root):
     repo = pathlib.Path(root).resolve()
-    source_root = _safe_root(repo, args.get("source_root", "canonical/runtime"))
-    output = (repo / str(args.get("output_path") or "")).resolve()
-    if output == repo or repo not in output.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    source_root = _safe_root(repo, source_root_arg)
 
     file_stats = _py_files_with_stat(source_root)
     cache_path = _cache_file_path(repo)
@@ -462,11 +459,12 @@ def run(args, root):
     outcomes: list[tuple[bool, dict] | None] = [None] * len(file_stats)
     miss_indices: list[int] = []
     miss_tasks: list[tuple[str, str]] = []
-    miss_keys: list[tuple[str, int, int]] = []
+    miss_keys: list[tuple[str, str, int, int]] = []
+    repo_key = str(repo)
 
     for idx, (path, st) in enumerate(file_stats):
         rel = str(path.relative_to(repo)).replace("\\", "/")
-        key = (rel, int(st.st_mtime_ns), int(st.st_size))
+        key = (repo_key, rel, int(st.st_mtime_ns), int(st.st_size))
         cached = _MEM_CACHE.get(key)
         if cached is None and disk_cache:
             cached = disk_cache.get(key)
@@ -540,9 +538,32 @@ def run(args, root):
         "call_edges": call_edge_total,
     }
     callers_sorted = {k: sorted(v) for k, v in sorted(callers_of.items())}
+    return repo, src_rel, mod_jsons, symbols, callers_sorted, unparseable, totals
+
+
+def build_index(source_root, root):
+    """Build a source-relative index without writing a probe into the source."""
+    _, src_rel, mod_jsons, symbols, callers_sorted, unparseable, totals = _collect_index_parts(source_root, root)
+    return {
+        "schema": "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1",
+        "source_root": src_rel,
+        "modules": [json.loads(mj) for mj in mod_jsons],
+        "symbols": symbols,
+        "callers_of": callers_sorted,
+        "unparseable": unparseable,
+        "totals": totals,
+    }
+
+
+def run(args, root):
+    repo = pathlib.Path(root).resolve()
+    output = (repo / str(args.get("output_path") or "")).resolve()
+    if output == repo or repo not in output.parents:
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    _, src_rel, mod_jsons, symbols, callers_sorted, unparseable, totals = _collect_index_parts(
+        args.get("source_root", "canonical/runtime"), repo
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
-    # Assemble exact canonical sort_keys=True JSON (callers_of, modules, schema,
-    # source_root, symbols, totals, unparseable) using pre-encoded module JSONs.
     parts = [
         '{"callers_of":',
         json.dumps(callers_sorted, separators=(",", ":"), sort_keys=True),
@@ -566,13 +587,13 @@ def run(args, root):
         "output_path": str(output.relative_to(repo)).replace("\\", "/"),
         "output_sha256": hashlib.sha256(data).hexdigest(),
         "output_verified": True,
-        "file_count": len(mod_jsons),
-        "unparseable_count": len(unparseable),
+        "file_count": totals["files"],
+        "unparseable_count": totals["unparseable"],
         "unparseable_paths": [u["path"] for u in unparseable][:20],
-        "symbol_count": len(symbols),
-        "reference_count": reference_total,
-        "call_edge_count": call_edge_total,
-        "caller_index_size": len(callers_of),
+        "symbol_count": totals["symbols"],
+        "reference_count": totals["references"],
+        "call_edge_count": totals["call_edges"],
+        "caller_index_size": len(callers_sorted),
     }
 
 

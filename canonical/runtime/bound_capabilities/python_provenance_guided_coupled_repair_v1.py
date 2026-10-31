@@ -152,6 +152,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  guidance["guidance_reduced_pair_space"]=guidance["pair_space_reduction"]>0
  originals={r["path"]:r["path"].read_bytes() for r in rows}
  single_scores={};tested_single=0
+ winner=None;winner_mode=None;pair_count=0;crossed=False
  for p,e in guided_items:
   if not _wall_left():break
   cand=_COUPLED._candidate(originals,[(p,e)])
@@ -159,12 +160,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ss=_STRICT._score(rr)
   if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ss=1
   single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
- winner=None;winner_mode=None;pair_count=0;crossed=False
- for p,e in guided_items:
-  if not _wall_left():break
-  cand=_COUPLED._candidate(originals,[(p,e)])
-  if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ss=_STRICT._score(rr)
+  # The first passing exploration already identifies this candidate. Do not
+  # execute all remaining singles or repeat the single sweep. Acceptance still
+  # requires the two fresh winner replays below and the controller measurement.
   if rr.get("returncode")==0 and (ss==0 or ss is None):
    winner=cand;winner_mode="SINGLE_GUIDED";break
  if winner is None:

@@ -36,6 +36,7 @@ from typing import Any, Mapping
 from canonical.runtime import capability_selection_retrieval_v1 as selection
 from canonical.runtime import declared_input_derivation_v1 as derivation
 from canonical.runtime import goal_compiler
+from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime import live_integrated_brain_v1 as live_brain
 
 SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
@@ -57,7 +58,7 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     (("move the function", "move the class", "move symbol", "relocate function", "relocate class"),
      ("move_symbol", "relocate symbol"), "move_symbol"),
     (("add a parameter", "add parameter", "new parameter"),
-     ("add_parameter", "signature evolution"), "add_parameter"),
+     ("add_parameter", "signature evolution"), "source.add_parameter"),
     (("add a function", "implement a function", "implement function", "create a function"),
      ("implement_function_spec", "function specification"), "implement_function_spec"),
     (("regression test that would have caught", "add a regression test"),
@@ -98,7 +99,8 @@ def stated_family_token(goal: str) -> str | None:
 
 
 def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
-    low = str(goal or "").lower()
+    # Paths and quoted values are task data, not evidence of an effect family.
+    low = front.prose_only(str(goal or "")).lower()
     for triggers, terms, token in _FAMILIES:
         if token == "symbol" and ("update every caller" in low or "rename " in low):
             continue
@@ -135,17 +137,19 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str],
 
 
 def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any]) -> str | None:
-    """If ``output_path`` was bound onto a stated source/test file, relocate it to a
+    """If ``output_path`` was bound onto a stated source file, relocate it to a
     fresh report path in the stated source directory.  Never overwrite a source.
+
+    Evidence: the stated source directory (or the parent of the single stated
+    source file).  Deterministic name; the promised-artifact gate independently
+    checks that the file is non-empty, so inventing a passing path proves nothing.
     """
     stated = set(derivation.stated_existing_files(goal, root))
     current = inputs.get("output_path")
-    if not isinstance(current, str):
+    if not isinstance(current, str) or current not in stated:
         return None
-    is_code_suffix = current.endswith((".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb"))
-    if not is_code_suffix:
-        return None
-    if current not in stated and not current.endswith(".py"):
+    # Only a file the sentence treats as code is a dangerous output target.
+    if not current.endswith((".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb")):
         return None
     source_root = inputs.get("source_root")
     if isinstance(source_root, str) and source_root and (root / source_root).is_dir():
@@ -237,10 +241,11 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     a real registry row that must bind every declared input from the sentence.
 
     Measured 2026-10-28: "Find every caller of the function add in X" enumerates
-    {symbol.index.ast, change_impact.testselect}; only symbol.index.ast admits
-    (specific) and names the effect -> decisive, and its artifact is a REAL
-    callers_of map.  test-gen/lint/typecheck/extract enumerate to zero-or-many
-    admitted and therefore stay honestly fail-closed (no false PASS).
+    {symbol.index.ast, change_impact.testselect}; symbol.index.ast names the
+    requested effect and its artifact is a REAL callers_of map. Later input
+    derivation also made testselect/an inliner bindable, so effect eligibility
+    must precede ambiguity counting, not rely on unrelated tools failing to
+    bind. Multiple effect-eligible admissions still refuse.
     """
     fam = _family_terms(goal)
     if fam is None:
@@ -249,6 +254,13 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     candidates: list[str] = []
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
+            continue
+        # Apply the existing family-effect constraint BEFORE admission and
+        # ambiguity counting. Shared keywords and bindable inputs do not make
+        # an inliner/test selector an answer to a caller-index request. Filtering
+        # only after len(admitted) rejected the real index when those unrelated
+        # tools became bindable, and wasted their contract-binding work.
+        if token not in cid.lower():
             continue
         surface = " ".join(map(str, (entry.get("keywords") or []) +
                                (entry.get("provides") or []))) + " " + cid
@@ -264,15 +276,16 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         except Exception:
             continue
         if decision.get("admitted") and decision.get("specific"):
-            if token in cid.lower():
-                admitted.append((cid, dict(decision.get("inputs") or {})))
+            admitted.append((cid, dict(decision.get("inputs") or {})))
     if len(admitted) != 1:
         return None  # ambiguous / none -> fail closed
     cid, inputs = admitted[0]
+    if token not in cid.lower():
+        return None  # effect-inconsistent -> no false PASS
     return cid, inputs
 
 
-def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
+def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, dict, dict] | None:
     """Return ``(registry, admissible, compiled)`` for a DECISIVE typed SWE
     selection, or ``None``.  ``None`` means: not a SWE request, ambiguous, no
     bindable proposal, effect-inconsistent, or any fault — the caller keeps its
@@ -287,7 +300,8 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
     if not is_swe_request(goal):
         return None
     try:
-        registry = dict(live_brain.load_verified_registry())
+        registry = (dict(compiled_context[0]) if compiled_context is not None
+                    else dict(live_brain.load_verified_registry()))
         declared = selection.declarations(root)
         cid = ""
         inputs: dict = {}
@@ -322,9 +336,26 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         inputs = {**inputs, **values}
         removed = set((report.get("adapter_defaulted") or {}).keys())
 
-        relocated = _fresh_output_path(goal, root, inputs)
-        if relocated:
-            inputs["output_path"] = relocated
+        # Destination identity comes from the stated ROLE, not file existence.
+        # F7/F13 can spool an occupied report elsewhere; then repair preflight
+        # checks that spool instead of the user's destination, making the verdict
+        # depend on previous requests. Reuse the front compiler's role detector
+        # (including its aliases and repeated-mention handling). This grants no
+        # overwrite authority: the existing adapter/preflight still judges the
+        # actual destination. Multiple stated destinations are ambiguous.
+        destinations = (front._named_output_destinations(goal, entry, ("output_path",), root)
+                        if "output_path" in inputs else set())
+        if len(destinations) > 1:
+            return None
+        if destinations:
+            inputs["output_path"] = next(iter(destinations))
+        else:
+            # Only relocate an incidental source binding. Never move a report
+            # the sentence explicitly directs onto an existing source file;
+            # preserve that path so the write/repair guards can refuse it.
+            relocated = _fresh_output_path(goal, root, inputs)
+            if relocated:
+                inputs["output_path"] = relocated
 
         # The three refactor adapters (rename_parameter / rename_symbol /
         # extract_function) resolve ``module`` RELATIVE to ``source_root``:
@@ -349,7 +380,10 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         # lossless raw-task contract reads); fall back to a synthetic single-
         # capability plan when the compiler raised (the short-sentence case).
         try:
-            _, _, real = live_brain.compile_against_live_registry(goal, root)
+            if compiled_context is None:
+                _, _, real = live_brain.compile_against_live_registry(goal, root)
+            else:
+                real = compiled_context[2]
             compiled = dict(real)
         except Exception:
             compiled = {
@@ -357,11 +391,18 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
                 "score": 0, "match_evidence": {}, "initial_facts": {},
                 "finish_summary": "RAW_GOAL_COMPLETE",
             }
-        compiled["capabilities"] = [cid]
         compiled["selected_capability"] = cid
         compiled["inputs"] = inputs
         compiled["compiler_mode"] = "SWE_TYPED_PLAN_V1"
+        # The original lexical plan may describe a DIFFERENT capability. Its
+        # effects and evidence cannot follow a corrected typed selection.
         compiled["target_effects"] = list(entry.get("provides") or []) or [cid]
+        compiled["initial_facts"] = list(entry.get("requires") or [])
+        compiled["compiled_parts"] = []
+        compiled["capabilities"] = [cid]
+        score, _, evidence = goal_compiler._score(goal, cid, entry)
+        compiled["score"] = score
+        compiled["match_evidence"] = evidence
         compiled.pop("capability_dag", None)
         compiled.pop("controller_actions", None)
         return (registry, admissible, compiled)

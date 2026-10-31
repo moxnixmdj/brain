@@ -1,15 +1,7 @@
 #!/usr/bin/env python3
-"""Software patch synthesis — CEGIS(T) over Observational Equivalence + STUN + Concrete Oracles.
-
-Dual-mode deterministic synthesizer ($0, zero model calls):
-  1. Source-level CEGIS mode (`source_root` present): extracts concrete input/output
-     counterexamples from failing unit tests, synthesizes minimal Python expressions
-     and STUN conditional decision trees via observational-equivalence pruning
-     (`swe_observational_program_synthesizer_v1`), verifies candidates against the
-     real test suite (`python_test_guided_patch_search_v1`), and emits a verified
-     unified diff.
-  2. Architecture-frontier CEGIS mode (`manifest` or standalone): delegates to
-     `counterexample_guided_causal_architecture_synthesizer_v1`.
+"""Software patch synthesis — source-level CEGIS(T) when `source_root` is provided,
+and bounded architecture-search diagnostic (honestly reporting `patch_synthesized=False`)
+when invoked without `source_root`.
 """
 from __future__ import annotations
 
@@ -19,6 +11,7 @@ import hashlib
 import json
 import pathlib
 from typing import Any
+from canonical.runtime.swe_task_artifacts_v1 import fresh_output, publish_report
 
 SCHEMA = "PROJECT_BRAIN_SOFTWARE_PATCH_CEGIS_Z3_V1"
 CAPABILITY_ID = "software.patch.synthesize.cegis.z3.v1"
@@ -26,14 +19,6 @@ PROVIDES = ["software.patch.synthesize.cegis.proven", "software.architect.synthe
 REQUIRES: list[str] = ["python.fault.localization.symbol_ranked"]
 
 REPO = pathlib.Path(__file__).resolve().parents[3]
-
-
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p = (root / str(raw or "canonical/astra_runtime/tmp/tmp_patch_cegis.json")).resolve()
-    if p == root or root not in p.parents:
-        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True)
-    return p
 
 
 def _safe_dir(root: pathlib.Path, raw: str) -> pathlib.Path:
@@ -154,49 +139,55 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
     }
 
 
+def _load_cegis():
+    import canonical.runtime.counterexample_guided_causal_architecture_synthesizer_v1 as mod
+    return mod
+
+
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
-    output = _safe_output(repo, args.get("output_path"))
-
+    output = fresh_output(repo, args.get("output_path"), "canonical/tmp_patch_cegis.json")
     if args.get("source_root"):
         result = _synthesize_code_patch_cegis(repo, args)
         is_verified = bool(result.get("verified"))
-    else:
-        import canonical.runtime.counterexample_guided_causal_architecture_synthesizer_v1 as cegis
-        manifest = args.get("manifest") or {
-            "components": [
-                {"id": "python.fault.localize.dynamic.dataflow.v1", "kind": "MECHANISM", "requires": ["python.source.file.available"], "provides": ["python.fault.localization.symbol_ranked"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.5, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
-                {"id": "python.patch.search.test_guided.ast.v1", "kind": "MECHANISM", "requires": ["python.source.file.available"], "provides": ["python.patch.candidate.test_verified"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.6, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
-                {"id": "evidence.oracle.concrete_execution.v1", "kind": "VERIFIER", "requires": ["python.source.file.available"], "provides": ["evidence.concrete_contract_violation"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.4, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
-                {"id": "python.contract.check.crosshair.v1", "kind": "VERIFIER", "requires": ["python.source.file.available"], "provides": ["python.contract.verdict"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 1.0, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
-            ],
-            "counterexamples": args.get("counterexamples", []),
-            "initial_facts": ["python.source.file.available", "python.test.corpus.available"],
-            "target": {"required_effects": ["software.architect.synthesize.cegis.verified"], "forbidden_effects": [], "max_components": 12, "top_k": 3},
-            "allow_candidate_components": False,
+        artifact = {
+            "schema": SCHEMA,
+            "capability_id": CAPABILITY_ID,
+            "adapter": "software_patch_cegis_z3_v1",
+            "provides": PROVIDES,
+            "cegis_synthesis_executed": True,
+            "result": result,
+            "patch_synthesized": is_verified,
+            "pass": is_verified,
+            "verified": is_verified,
+            "model_dependency_count": 0,
+            "incremental_spend_usd": 0,
         }
-        result = cegis.synthesize(manifest)
-        is_verified = isinstance(result, dict) and result.get("exact_over_declared_frontier") is True
+        return publish_report(repo, output, artifact)
 
+    cegis = _load_cegis()
+    manifest = args.get("manifest") or {
+        "components": [
+            {"id": "python.fault.localize.dynamic.dataflow.v1", "kind": "MECHANISM", "requires": ["python.source.file.available"], "provides": ["python.fault.localization.symbol_ranked"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.5, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
+            {"id": "python.patch.search.test_guided.ast.v1", "kind": "MECHANISM", "requires": ["python.source.file.available"], "provides": ["python.patch.candidate.test_verified"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.6, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
+            {"id": "evidence.oracle.concrete_execution.v1", "kind": "VERIFIER", "requires": ["python.source.file.available"], "provides": ["evidence.concrete_contract_violation"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 0.4, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
+            {"id": "python.contract.check.crosshair.v1", "kind": "VERIFIER", "requires": ["python.source.file.available"], "provides": ["python.contract.verdict"], "verified": True, "brain_owned": True, "donor_independent": True, "cost": {"wall_clock": 1.0, "incremental_spend_usd": 0, "persistent_bits": 0, "risk": 0}},
+        ],
+        "counterexamples": args.get("counterexamples", []),
+        "initial_facts": ["python.source.file.available", "python.test.corpus.available"],
+        "target": {"required_effects": ["software.architect.synthesize.cegis.verified"], "forbidden_effects": [], "max_components": 12, "top_k": 3},
+        "allow_candidate_components": False,
+    }
+    result = cegis.synthesize(manifest)
     artifact = {
-        "schema": SCHEMA,
-        "capability_id": CAPABILITY_ID,
-        "provides": PROVIDES,
-        "cegis_synthesis_executed": True,
-        "result": result,
-        "verified": is_verified,
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0,
+        "schema": SCHEMA, "capability_id": CAPABILITY_ID,
+        "adapter": "software_patch_cegis_z3_v1", "result": result,
+        "status": "OPEN__SOURCE_PATCH_SYNTHESIS_NOT_IMPLEMENTED",
+        "classification": result.get("classification"),
+        "architecture_search_completed": result.get("exact_over_declared_frontier") is True,
+        "architecture_search_pass": result.get("pass") is True,
+        "patch_synthesized": False, "pass": False, "verified": False,
+        "verification_scope": "DECLARED_COMPONENT_FRONTIER_ONLY",
+        "model_dependency_count": 0, "incremental_spend_usd": 0,
     }
-    raw = (json.dumps(artifact, indent=2, sort_keys=True) + "\n").encode("utf-8")
-    output.write_bytes(raw)
-    return {
-        "adapter": "software_patch_cegis_z3_v1",
-        "output_path": str(output.relative_to(repo)).replace("\\", "/"),
-        "output_sha256": hashlib.sha256(raw).hexdigest(),
-        "output_verified": is_verified,
-        "verified": is_verified,
-        "cegis_synthesis_executed": True,
-        "model_dependency_count": 0,
-        "incremental_spend_usd": 0,
-    }
+    return publish_report(repo, output, artifact)

@@ -295,7 +295,9 @@ def request_excluded_proposals(goal: str,
     excluded: list[dict[str, Any]] = []
     if not proposals:
         return proposals, excluded
-    stated_versions = _version_sequence(goal)
+    # F27 constrains requested capability versions, not versions inside path,
+    # URL or payload VALUES. Reuse the same intent/data boundary as F8/F25.
+    stated_versions = _version_sequence(front.prose_only(goal))
     stated_words = _request_words(goal)
     names = {p["capability_id"]: _name_words(p["capability_id"]) for p in proposals}
 
