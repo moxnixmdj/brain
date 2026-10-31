@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ed636f60823d80f491d69401abc58c81d8f911fab7c2ecce3610965adb69a586"
+  "value": "b32e6d4922bdb393e977ac5ab97518dd7f5a021dd2b182e6ce1ca8c7ea2e4581"
  },
  "engines": [
   {
@@ -238124,9 +238124,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "cd3aa2b8611686f7a7746ff453d340502c9441243336eab4cd79a3d95c57726e",
+   "sha256": "3a124261cab90e4fa7b43b26a7a2ac25ada2a667f566419868670fb6c0632887",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 132,
+   "symbol_count": 133,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
