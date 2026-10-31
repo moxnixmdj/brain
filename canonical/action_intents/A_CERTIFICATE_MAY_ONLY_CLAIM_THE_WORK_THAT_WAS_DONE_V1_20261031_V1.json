@@ -335,9 +335,9 @@
     "execution_dependencies": [
      {
       "dependency": "CPYTHON_STDLIB_RE_AST_JSON",
-      "kind": "RUNTIME",
+      "kind": "LOCAL_RUNTIME",
       "required": true,
-      "volatility": "STABLE",
+      "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
       "observed_at_utc": "2026-10-31T19:02:36Z",
@@ -351,9 +351,9 @@
      },
      {
       "dependency": "WORKING_TREE_AT_canonical/runtime",
-      "kind": "SOURCE_TREE",
+      "kind": "CODE_ARTIFACT",
       "required": true,
-      "volatility": "STABLE",
+      "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
       "observed_at_utc": "2026-10-31T19:02:36Z",
@@ -367,9 +367,9 @@
      },
      {
       "dependency": "UNITTEST",
-      "kind": "RUNTIME",
+      "kind": "LOCAL_RUNTIME",
       "required": true,
-      "volatility": "STABLE",
+      "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
       "observed_at_utc": "2026-10-31T19:02:36Z",
@@ -381,7 +381,8 @@
       ],
       "evidence_scope": "LOCAL"
      }
-    ]
+    ],
+    "execution_dependencies_complete": true
    }
   },
   "selected_route": "REFUSE_A_CERTIFICATE_WHEN_THE_WORK_IT_NAMES_DID_NOT_HAPPEN"
