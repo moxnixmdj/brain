@@ -611,6 +611,28 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if len(found) == 1:
             tests = [str(found[0].relative_to(pathlib.Path(root)))]
             discovered_tests = True
+    # Retain current-main evidence-backed derivation.
+    if not tests:
+        _stated = _stated_directories(goal, root)
+        if len(_stated) <= 1:
+            _found_tests: list[str] = []
+            for _d in _stated:
+                try:
+                    _dir_abs = (pathlib.Path(root) / _d).resolve()
+                    _files = sorted(_dir_abs.rglob("*.py"))
+                except (OSError, ValueError):
+                    continue
+                for _f in _files[:400]:
+                    if "__pycache__" in _f.parts or not _TEST_NAME_RE.search(_f.name):
+                        continue
+                    try:
+                        _found_tests.append(_f.relative_to(pathlib.Path(root).resolve()).as_posix())
+                    except ValueError:
+                        continue
+            if _found_tests:
+                tests = _found_tests
+                discovered_tests = True
+
     _bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
     for _dir_slot in ("anchor_path",):
         if _dir_slot in keys and len(sources) == 1 and _dir_slot not in out:
@@ -656,6 +678,38 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if common and (pathlib.Path(root) / common).is_dir():
             out["source_root"] = {"value": common, "rule": "PATH_DIR_COMMON_TO_STATED_FILES",
                                   "evidence": ",".join(sources)}
+    # Retain current-main evidence-backed derivation.
+    if "source_root" in keys and tests and not sources:
+        _owners = {str(pathlib.PurePosixPath(t).parent) for t in tests}
+        if len(_owners) == 1:
+            _owner = next(iter(_owners))
+            _walk = pathlib.PurePosixPath(_owner).parent
+            for _ in range(3):
+                if not _walk.name:
+                    break
+                _walk_abs = pathlib.Path(root) / str(_walk)
+                if _walk_abs.is_dir():
+                    _code = False
+                    scanned = 0
+                    try:
+                        for _f in _walk_abs.rglob("*.py"):
+                            scanned += 1
+                            if scanned > 400:
+                                break
+                            if "__pycache__" in _f.parts or _TEST_NAME_RE.search(_f.name):
+                                continue
+                            _code = True
+                            break
+                    except OSError:
+                        _code = False
+                    if _code:
+                        out["source_root"] = {
+                            "value": str(_walk), "rule": "PATH_DIR_OWNING_STATED_TESTS",
+                            "evidence": _owner,
+                        }
+                        break
+                _walk = _walk.parent
+
     if "test_argv" in keys and len(tests) == 1:
         from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
             suite_argv as _suite_argv,
@@ -775,6 +829,74 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                                    "evidence": goal[:120]}
                 out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
                                  "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
+    # Retain current-main evidence-backed derivation.
+    if ("start_line" in keys and "end_line" in keys
+            and "start_line" not in out and len(sources) == 1 and sources[0].endswith(".py")):
+        try:
+            _src_text = (pathlib.Path(root) / sources[0]).read_text(encoding="utf-8", errors="replace")
+            _src_tree = ast.parse(_src_text)
+        except (OSError, SyntaxError):
+            _src_tree = None
+        if _src_tree is not None:
+            _defined = {n.name for n in ast.walk(_src_tree)
+                        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+            _phrases = [m.group(1) for m in re.finditer(
+                r"\b(?:from|in|of)\s+([A-Za-z_][A-Za-z0-9_]*)", str(goal or ""), re.I)]
+            _hosts = [n for n in dict.fromkeys(_phrases) if n in _defined]
+            _host = _hosts[0] if len(_hosts) == 1 else ""
+            _fn = None
+            for _node in ast.walk(_src_tree):
+                if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef)) and _node.name == _host:
+                    _fn = _node
+                    break
+            if _fn is not None:
+                _params = {a.arg for a in list(_fn.args.args) + list(_fn.args.kwonlyargs)
+                           + list(getattr(_fn.args, "posonlyargs", []))}
+                _module_names = {t.id for n in _src_tree.body if isinstance(n, ast.Assign)
+                                 for t in n.targets if isinstance(t, ast.Name)}
+                _body = [st for st in _fn.body if isinstance(st, ast.stmt)]
+                _blocked = (ast.Return, ast.Raise, ast.Break, ast.Continue, ast.Yield,
+                            ast.Global, ast.Nonlocal, ast.FunctionDef, ast.AsyncFunctionDef,
+                            ast.ClassDef)
+                _winners: list[tuple[int, int, int]] = []
+                for _i in range(len(_body)):
+                    for _j in range(_i, len(_body)):
+                        _run = _body[_i:_j + 1]
+                        if any(isinstance(x, _blocked) for st in _run for x in ast.walk(st)):
+                            continue
+                        _assigns = {t.id for st in _run for x in ast.walk(st)
+                                    if isinstance(x, (ast.Assign, ast.AnnAssign))
+                                    for t in ([x.target] if isinstance(x, ast.AnnAssign) else x.targets)
+                                    if isinstance(t, ast.Name)}
+                        _reads = {x.id for st in _run for x in ast.walk(st)
+                                  if isinstance(x, ast.Name) and isinstance(x.ctx, ast.Load)}
+                        _free = _reads - _assigns
+                        if not _free <= (_params | _module_names):
+                            continue
+                        _computes = any(isinstance(x, (ast.BinOp, ast.Call))
+                                        for st in _run for x in ast.walk(st))
+                        if not _assigns or not _computes:
+                            continue
+                        _winners.append((len(_run), _i, _j))
+                if _winners:
+                    _winners.sort()
+                    _smallest = [w for w in _winners if w[0] == _winners[0][0]]
+                    if len(_smallest) == 1:
+                        _, _i, _j = _smallest[0]
+                        out["qualname"] = {"value": _host, "rule": "QUALNAME_FROM_ENCLOSING_FUNCTION",
+                                           "evidence": sources[0]}
+                        out["start_line"] = {"value": _body[_i].lineno,
+                                             "rule": "SPAN_FROM_SELF_CONTAINED_BLOCK",
+                                             "evidence": "%s:%d-%d" % (_host, _body[_i].lineno,
+                                                                       _body[_j].end_lineno)}
+                        out["end_line"] = {"value": _body[_j].end_lineno,
+                                           "rule": "SPAN_FROM_SELF_CONTAINED_BLOCK",
+                                           "evidence": _host}
+                        if "module" in keys and "module" not in out:
+                            out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                             "rule": "MODULE_IS_THE_STATED_FILE",
+                                             "evidence": sources[0]}
+
     if "bench_path" in keys and (sources or tests):
         parent = (pathlib.Path(root) / (sources or tests)[0]).parent
         found: list[str] = []

@@ -23386,7 +23386,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "6dce8d0ce8f4b578ca90cfb6f7934e252fbafd64e63b5d5d4a12b0911f0fbb14",
+    "source_sha256": "c43a6cfa0129240d217b5f0fbf97ea52d96f8a2697480d3d324f14c0d141d163",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24031,7 +24031,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "f61c434659c8e518e62cbcc7654cb74bd797ca9816fa809c037dde2b95874d21",
+    "source_sha256": "f30733a3f7217142967384ffe61d2805e905c67df41af1fe812dfc6ce1258835",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25995,7 +25995,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "68989753b37aba7a27cc58138ed0ca35b5bab14240e4dcc09d1557ab485470c2",
+    "source_sha256": "324e7266815bd87b61d431b12ec7cd681b0e9bff3d8a4586ea08a60a458bc5d7",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -26087,7 +26087,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "44259fa9c082b25884e5814913fbd616bb91771705b8283934916b07fb460f4b",
+    "source_sha256": "4ccd5208eb3930f7a32391c24a4fb1600f02edc34a83c23c2fb31153047af23a",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30493,7 +30493,7 @@
   "engines": 26,
   "knowledge_documents": 207,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6532,
+  "research_index_records": 6533,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30502,7 +30502,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "df32d5bf98398f15711ed39d3d38bbb949a8830cba1a4ab9aba38ac0daaf7f05"
+  "value": "f93959eaea4a00e1b2ad87c299f66f0e78994b42d310bbb77b9ad1aaaed8ebfd"
  },
  "engines": [
   {
@@ -57820,7 +57820,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 12201,
+   "bytes": 12747,
    "headings": [
     "SWE mechanism reuse and current-main integration — 2026-10-31",
     "Changes",
@@ -57834,14 +57834,15 @@
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_REUSE_INTEGRATION_20261031.md",
-   "sha256": "b4a9fc5b4fc5ac3ac3e8d42f4e66bae601cfd8d10c4ba43de54b419426bd8336",
+   "sha256": "83dea2841b02189b09e429f7bb666381c6c19fa93a9b74b49bfbe038c97df0cf",
    "summary": "Local sandbox measurement; authority NONE. This report is not a terminal-goal claim or an independent runtime-verification receipt. The signed referee judges repository integrity separately; it does not turn a failing test into a pass.",
    "terms": {
     "166": 3,
     "33": 4,
-    "577-case": 3,
+    "577-case": 4,
     "admission": 5,
     "all": 4,
+    "also": 3,
     "both": 4,
     "cache": 4,
     "cannot": 4,
@@ -57852,7 +57853,7 @@
     "checks": 6,
     "compatibility": 3,
     "compiler": 3,
-    "controls": 6,
+    "controls": 7,
     "current": 6,
     "current-tree": 3,
     "destination": 3,
@@ -57860,31 +57861,30 @@
     "existing": 8,
     "expanded": 3,
     "explicitly": 3,
-    "failed": 3,
+    "extraction": 3,
     "final": 6,
-    "git": 3,
-    "including": 3,
     "independent": 4,
     "local": 4,
-    "main": 7,
+    "main": 8,
+    "measurement": 4,
     "model": 7,
-    "new": 5,
+    "new": 6,
     "no": 6,
-    "not": 15,
+    "not": 16,
     "now": 7,
     "original": 5,
     "pass": 6,
-    "passed": 7,
+    "passed": 8,
     "passing": 4,
     "refusal": 4,
     "report": 5,
-    "retained": 4,
+    "retained": 6,
     "run": 7,
     "scope": 4,
     "test": 4,
     "tests": 50,
     "verifier": 4,
-    "zero": 4
+    "zero": 5
    },
    "title": "SWE mechanism reuse and current-main integration — 2026-10-31",
    "title_terms": [
@@ -57926,7 +57926,7 @@
   "included_source_count": 996,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e386ded6acb6810154e97ecfbbaeb6902a417ba27a8a6f39a38437eaeddbf6d7"
+  "source_tree_digest": "c7e97b8eaa312938e4875d9517b64412adca05089f4be413c55fe9f3f7e66036"
  },
  "research_index": [
   {
@@ -202524,6 +202524,51 @@
    }
   },
   {
+   "action_id": "A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "678af6c3a3c27269094d3c3ca55bf09cfb65d18264f0a460804069e08ea1766a",
+   "status": "",
+   "terms": {
+    "105": 1,
+    "18": 1,
+    "2.6": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 1,
+    "3.3": 1,
+    "46": 1,
+    "68": 1,
+    "74": 1,
+    "a_repair_search_must_contain_the_defect_v1_20261031_v1": 1,
+    "above": 1,
+    "adding": 1,
+    "correct": 2,
+    "failing": 2,
+    "fixture": 3,
+    "green": 2,
+    "no": 3,
+    "not": 4,
+    "now": 2,
+    "one": 3,
+    "oracle": 2,
+    "own": 3,
+    "repair": 6,
+    "reported": 2,
+    "routing": 2,
+    "search": 2,
+    "so": 3,
+    "test": 3,
+    "tests": 6,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_REPAIR_SENTENCE_THAT_NAMES_NO_TEST_STILL_REPAIRS_THE_SOURCE_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -208422,7 +208467,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "f479f09b9905f82279eb586e4acf1e78664d7bce02ae7daf61a320aa9395ba85",
+   "sha256": "a533ce964395bf116b08a8b4390cd95c598b5961385f67c69ff01fc5b3ae1322",
    "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
    "terms": {
     "166-case": 1,
@@ -230498,7 +230543,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "bac89dd70c0e8e5a18e37c69f45f1f8f3b7cc0cf24a4085130f67410c4dc558d",
+   "sha256": "6ae80f7b08a9623494440296baf09fd81fa607285f4dc4cbc05739df46fbe47a",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 16,
    "symbols": [

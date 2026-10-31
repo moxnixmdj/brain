@@ -4,7 +4,7 @@
   "action_intent_id": "SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1",
   "date": "2026-10-31",
   "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
-  "canonical_base_commit": "5029bf7d955d914b575cef6b7922fedc1690f749",
+  "canonical_base_commit": "95e70a3134969fc28fb8a8c9fb4a548ee52a8fa0",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -58,7 +58,7 @@
     "incremental_spend_usd": 0
   },
   "load_bearing_primary": {
-    "canonical_base_commit": "5029bf7d955d914b575cef6b7922fedc1690f749",
+    "canonical_base_commit": "95e70a3134969fc28fb8a8c9fb4a548ee52a8fa0",
     "open_obligation_ids": [],
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
@@ -77,7 +77,7 @@
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Existing taint/cost/index mechanisms and typed routes were disconnected or disagreed with exact-file scope, request roles and non-vacuous execution evidence.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "5029bf7d955d914b575cef6b7922fedc1690f749",
+    "canonical_base_commit": "95e70a3134969fc28fb8a8c9fb4a548ee52a8fa0",
     "real_outcome": "Restore live access to existing SWE mechanisms while retaining exact-file, staged, effect and execution-evidence boundaries. The original 166-case cohort improved from 65 failures to no failures; expanded residuals remain explicitly open. No benchmark, acceptance, family, ownership or terminal credit is requested.",
     "required_capability": "Current-tree static SWE analysis and truthful typed execution using existing mechanisms",
     "selected_surviving_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
@@ -170,7 +170,7 @@
     },
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-10-31T16:14:29.760744+00:00",
+      "checked_at_utc": "2026-10-31T16:18:00.721958+00:00",
       "max_age_hours": 24,
       "incumbent_route": "Current disconnected SWE route",
       "selected_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
@@ -253,7 +253,7 @@
       ],
       "selected_route_preflight": {
         "selected_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
-        "checked_at_utc": "2026-10-31T16:14:29.760744+00:00",
+        "checked_at_utc": "2026-10-31T16:18:00.721978+00:00",
         "max_age_hours": 2,
         "status": "READY",
         "all_required_dependencies_ready": true,
@@ -359,6 +359,7 @@
     "shared_binding_fix": "Reuse output-role/claimed-path machinery; a destination cannot become an input scope, independent of argument order.",
     "measurement": "Local expanded current-tree run: 571 passed, 6 failed, 947 subtests passed; all original 166 cases and all 137 model/compiler tests pass.",
     "authority": "NONE; sandbox measurement, no independent capability credit",
-    "latest_main_check": "Main 5029bf7d retained; new Git-question, Git-intent and joint-boundary suites: 46 passed."
+    "latest_main_check": "Main 5029bf7d retained; new Git-question, Git-intent and joint-boundary suites: 46 passed.",
+    "incoming_repair_search": "Retained main 95e70a31 repair-search candidates, bounded directory-test discovery and data-flow-based extraction-span derivation. Derivation/joint/Git-question controls: 32 passed; original nonzero span/name boundaries retained."
   }
 }

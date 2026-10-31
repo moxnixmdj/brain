@@ -8,7 +8,7 @@ repository integrity separately; it does not turn a failing test into a pass.
 
 Reused existing Brain implementations discovered at `cd44f98`, then integrated
 rather than restoring old modules wholesale. Merged current main through
-`5029bf7d955d914b575cef6b7922fedc1690f749`; preserved its bisect materialization
+`95e70a3134969fc28fb8a8c9fb4a548ee52a8fa0`; preserved its bisect materialization
 limits, request-role rules and guarded retry behavior. Runtime and tests import
 only current-tree source, never the discovery copies.
 
@@ -195,3 +195,11 @@ The new Git-question suite plus the existing Git-intent and joint-boundary suite
 measure **46 passed** on the merged source. The 577-case measurement above is
 explicitly the earlier `cb21400a` run; the new main tests supplement it rather
 than being silently included in that count. Model/admission records were rebound.
+
+Retained main `95e70a31`'s repair-search/localizer improvements and integrated its
+three derivation rules without restoring its older duplicate module body.
+Directory-test discovery and the test-owning code root are retained; an extraction
+span can also come from the new unique self-contained data-flow block heuristic.
+That heuristic is not a proof of arbitrary prose meaning. Zero line sentinels and
+invented helper names stay removed. Derivation/joint/Git-question controls:
+**32 passed**. This supplements the earlier 577-case measurement.
