@@ -9413,6 +9413,220 @@
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_FINAL_SUPERCOMPOSER_V1_V1.json"
       }
+    },
+    "software.hardcore.kernel.orchestrate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.kernel.orchestrate.v1",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "hardcore_software_engineering_orchestrator_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "software",
+        "engineering",
+        "deterministic",
+        "kernel",
+        "orchestrate",
+        "cegis",
+        "grid",
+        "pipeline",
+        "concrete",
+        "symbol",
+        "crossfile",
+        "change-impact",
+        "fastest",
+        "smartest"
+      ],
+      "limitations": [
+        "Deterministic harvesting of Brain-owned hidden kernels: CEGIS 24/12, finite grid 100k, pipeline 8-stage, concrete 13-sample, symbol 86k/221k. No model, no spend, fail-closed."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.hardcore.kernel.verified",
+        "python.fault.localization.symbol_ranked",
+        "python.contract.verdict",
+        "evidence.concrete_contract_violation",
+        "software.synthesis.grid_program.exact"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "cegis_pass",
+        "cegis_classification",
+        "pipeline_verified",
+        "concrete_status",
+        "grid_status",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "brain_native_deterministic_composition",
+        "version_family": ">=3.11"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-HARDCORE-KERNEL-ORCHESTRATE-V1",
+        "observed_effect": {
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_KERNEL_ORCHESTRATE_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_HARDCORE_KERNEL_ORCHESTRATE_V1.json"
+      }
+    },
+    "software.hardcore.swe.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.hardcore.swe.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_hardcore_swe_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "hardcore",
+        "swe",
+        "supercomposer",
+        "fullstack"
+      ],
+      "limitations": [
+        "5-kernel supercomposition, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "software.hardcore.swe.composed.verified",
+        "software.hardcore.swe.fullstack.verified"
+      ],
+      "requires": [
+        "python.pipeline.allowlist.verified",
+        "python.pr.land.verified",
+        "python.transformation.fused.verified",
+        "software.hardcore.kernel.verified",
+        "software.repair.loop.cegis_verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_hardcore_swe_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-SOFTWARE-HARDCORE-SWE-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "software.patch.synthesize.cegis.z3.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.patch.synthesize.cegis.z3.v1",
+          "manifest": "${input.manifest}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_patch_cegis_z3_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "software",
+        "patch",
+        "cegis",
+        "z3",
+        "synthesize",
+        "counterexample",
+        "dpll",
+        "theory",
+        "solver",
+        "architecture"
+      ],
+      "limitations": [
+        "CEGIS(T) loop synthesize\u2192verify (CrossHair symbolic + concrete) \u2192 counterexample \u2192 resynthesize with DPLL(T) theory solver. 24 frontier 12 max verified, exponential speedup over blind search. Deterministic, 0 model, $0."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "software.patch.synthesize.cegis.proven",
+        "software.architect.synthesize.cegis.verified"
+      ],
+      "requires": [
+        "python.fault.localization.symbol_ranked"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "status",
+        "verified",
+        "model_dependency_count",
+        "incremental_spend_usd"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "AUTO-VERIFY-SOFTWARE-PATCH-CEGIS-Z3-V1",
+        "observed_effect": {
+          "classification": "NEW_PRIMITIVE_REQUIRED",
+          "exact_over_declared_frontier": true,
+          "verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_PATCH_CEGIS_Z3_V1_V1.json",
+        "state_path": "canonical/astra_runtime/state/HARDCORE_SOFTWARE_PATCH_CEGIS_Z3_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
