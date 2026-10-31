@@ -70,13 +70,18 @@ def _has_tests(tree_root: pathlib.Path) -> bool:
     return False
 
 
+def _suite_root(tree_root: pathlib.Path) -> pathlib.Path:
+    """Where the suite actually lives: ``<tree>/tests`` if there is one, else the tree itself."""
+    return tree_root / "tests" if (tree_root / "tests").is_dir() else tree_root
+
+
 def _run_suite(tree_root: pathlib.Path, timeout: int = 20) -> tuple[int, str]:
     if not _has_tests(tree_root):
         return 0, "NO_TESTS"
     env = dict(os.environ)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONPATH"] = str(tree_root) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
-    start_dir = str(tree_root / "tests") if (tree_root / "tests").is_dir() else str(tree_root)
+    start_dir = str(_suite_root(tree_root))
     proc = subprocess.run(
         [sys.executable, "-B", "-m", "unittest", "discover", "-s", start_dir, "-t", str(tree_root)],
         cwd=str(tree_root),
@@ -179,57 +184,74 @@ def _micro_slowdown_ratio(old_src: str, new_src: str, fn_name: str) -> float:
     return 1.0
 
 
-def _bisect_commits(git_root: pathlib.Path, commits: list[str]) -> dict[str, Any]:
+def _bisect_commits(git_root: pathlib.Path, commits: list[str],
+                    suite_rel: str = ".") -> dict[str, Any]:
+    """Binary search the history, materialising each revision in ONE shared worktree.
+
+    This used to ``git clone --shared`` the whole repository once and then check out a
+    revision per probe.  Measured 2026-10-31 on this repository (241 MB of tracked files):
+    the clone alone took 35.5 s against this function's own 30 s timeout, so the row that
+    answers "which commit broke the test" timed out on every other run and, when the clone
+    did win the race, it ran the REPOSITORY's suite instead of the sentence's test.  A
+    worktree shares the object database (8 ms to create, 2.3 s for the first full checkout)
+    and a later revision costs one incremental ``reset --hard`` (0.2 s) because git only
+    rewrites the files that changed between the two commits.
+    """
     probed: list[dict[str, Any]] = []
+    suite_rel = str(suite_rel or ".")
     with tempfile.TemporaryDirectory(prefix="brain_bisect_") as tmp:
-        clone_dir = pathlib.Path(tmp) / "work"
-        cr = subprocess.run(
-            ["git", "clone", "--quiet", "--shared", str(git_root), str(clone_dir)],
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
-        if cr.returncode != 0:
-            shutil.copytree(git_root, clone_dir)
+        wt = pathlib.Path(tmp) / "work"
+        added = _git(git_root, "worktree", "add", "--detach", "--no-checkout", str(wt),
+                     commits[-1], timeout=120)
+        if added.returncode != 0:
+            raise RuntimeError("GIT_WORKTREE_FAILED:" + (added.stderr or "").strip()[-200:])
+        try:
+            return _bisect_in_worktree(wt, commits, suite_rel, probed)
+        finally:
+            _git(git_root, "worktree", "remove", "--force", str(wt), timeout=120)
+            _git(git_root, "worktree", "prune")
 
-        def check_idx(idx: int) -> bool:
-            sha = commits[idx]
-            co = _git(clone_dir, "checkout", "--detach", "--force", sha)
-            if co.returncode != 0:
-                raise RuntimeError("GIT_CHECKOUT_FAILED:" + sha)
-            rc, _tail = _run_suite(clone_dir)
-            ok = rc == 0
-            probed.append({"commit": sha, "index": idx, "pass": ok, "returncode": rc})
-            return ok
 
-        if not check_idx(0):
-            return {
-                "mode": "commit_bisect",
-                "answer": commits[0],
-                "breaking_commit": commits[0],
-                "last_good_commit": None,
-                "commit_count": len(commits),
-                "probed_commits": probed,
-            }
+def _bisect_in_worktree(wt: pathlib.Path, commits: list[str], suite_rel: str,
+                        probed: list[dict[str, Any]]) -> dict[str, Any]:
+    def check_idx(idx: int) -> bool:
+        sha = commits[idx]
+        co = _git(wt, "reset", "--hard", "--quiet", sha, timeout=120)
+        if co.returncode != 0:
+            raise RuntimeError("GIT_CHECKOUT_FAILED:" + sha)
+        rc, _tail = _run_suite(wt / suite_rel if suite_rel != "." else wt)
+        ok = rc == 0
+        probed.append({"commit": sha, "index": idx, "pass": ok, "returncode": rc})
+        return ok
 
-        lo = 0
-        hi = len(commits) - 1
-        probed.append({"commit": commits[hi], "index": hi, "pass": False, "returncode": 1})
-        while hi - lo > 1:
-            mid = (lo + hi) // 2
-            if check_idx(mid):
-                lo = mid
-            else:
-                hi = mid
-
+    if not check_idx(0):
         return {
             "mode": "commit_bisect",
-            "answer": commits[hi],
-            "breaking_commit": commits[hi],
-            "last_good_commit": commits[lo],
+            "answer": commits[0],
+            "breaking_commit": commits[0],
+            "last_good_commit": None,
             "commit_count": len(commits),
             "probed_commits": probed,
         }
+
+    lo = 0
+    hi = len(commits) - 1
+    probed.append({"commit": commits[hi], "index": hi, "pass": False, "returncode": 1})
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if check_idx(mid):
+            lo = mid
+        else:
+            hi = mid
+
+    return {
+        "mode": "commit_bisect",
+        "answer": commits[hi],
+        "breaking_commit": commits[hi],
+        "last_good_commit": commits[lo],
+        "commit_count": len(commits),
+        "probed_commits": probed,
+    }
 
 
 def _attribute_perf_regression(git_root: pathlib.Path) -> dict[str, Any]:
@@ -289,9 +311,22 @@ def run(args: dict[str, Any], root: Any) -> dict[str, Any]:
         raise RuntimeError("EMPTY_GIT_HISTORY")
     commits = [c.strip() for c in revs.stdout.splitlines() if c.strip()]
 
-    head_rc, _head_tail = _run_suite(git_root)
-    if head_rc != 0 and _has_tests(git_root):
-        details = _bisect_commits(git_root, commits)
+    # THE SENTENCE NAMES A TEST; THE HISTORY MUST CONTAIN IT.
+    #
+    # A bisect can only attribute a change that git remembers.  Measured 2026-10-31 on this
+    # repository: the named tree was an untracked scratch directory, so the row silently
+    # bisected the REPOSITORY's own suite (red on main) and answered "the first commit broke
+    # it" -- naming the oldest commit of an unrelated history, after a 35 s clone.  A path
+    # git does not track is refused here, in milliseconds, before anything is materialised.
+    suite_dir = src if src.is_dir() else src.parent
+    suite_rel = suite_dir.relative_to(git_root).as_posix() if suite_dir != git_root else "."
+    tracked = _git(git_root, "ls-tree", "-r", "--name-only", "HEAD", "--", suite_rel or ".")
+    if tracked.returncode != 0 or not tracked.stdout.strip():
+        raise RuntimeError("NAMED_TEST_NOT_IN_GIT_HISTORY:" + (suite_rel or "."))
+
+    head_rc, _head_tail = _run_suite(suite_dir)
+    if head_rc != 0 and _has_tests(suite_dir):
+        details = _bisect_commits(git_root, commits, suite_rel)
     else:
         if len(commits) < 2:
             raise RuntimeError("INSUFFICIENT_COMMITS_FOR_REGRESSION_ANALYSIS")

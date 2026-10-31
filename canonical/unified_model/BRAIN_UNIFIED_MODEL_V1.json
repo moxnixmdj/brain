@@ -21743,7 +21743,7 @@
     "source_executable": null,
     "source_module": "subprocess",
     "source_path": "canonical/runtime/bound_capabilities/git_bisect_regression.py",
-    "source_sha256": "ad88f496b8ce369eae4926fe31456559a28be2048066abdb2f547393e6558d7a",
+    "source_sha256": "319091c56085f670dd4214222787dc1bde1afc3ae2224dab39e428f712983baa",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -30489,7 +30489,7 @@
   "engines": 26,
   "knowledge_documents": 205,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6525,
+  "research_index_records": 6526,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0906058ad6b60288821d834e55648eac51a0fe6beb141353cba4e5561b73a16b"
+  "value": "6741be517f0383c8e5fdc8f9449802c05f7f283bccd276e36151278f1f439528"
  },
  "engines": [
   {
@@ -57753,7 +57753,7 @@
   "included_source_count": 994,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "34278746bc49ab141f300cc214bb0141d2d89328f32298dc058e6cc628a5a25a"
+  "source_tree_digest": "9aefefecffea0e4a6891b30b9d36c6d4d6d2132ada54a418b58017bcfca2be7c"
  },
  "research_index": [
   {
@@ -200014,6 +200014,30 @@
     "measured": 1,
     "ranked": 2,
     "repair": 3,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "A_BISECT_COSTS_THE_TREE_IT_NAMES_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_BISECT_COSTS_THE_TREE_IT_NAMES_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_BISECT_COSTS_THE_TREE_IT_NAMES_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c35044614dff8d9497d79367d7b4fdd8071f6243203abf71cbb4e34c4705df4b",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_bisect_costs_the_tree_it_names_v1_20261031_v1": 1,
+    "a_bisect_materialised_the_whole_repository_instead_of_the_named_tree_and_ran_the_repository_s_suite_instead_of_the_sentence_s_test__measured_2026_10_31_clone_of_241_mb_took_35_5_s_against_a_30_s_timeout_so_the_row_failed_or_attributed_to_the_oldest_commit_of_an_unrelated_history": 1,
+    "bisect": 1,
+    "costs": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "materialise_the_named_tree_per_revision_with_git_s_own_worktree_and_incremental_reset__no_new_route_no_new_row_no_new_capability": 1,
+    "names": 1,
+    "one_worktree_and_incremental_resets_instead_of_a_per_request_clone__the_suite_run_at_the_named_path_instead_of_the_repository_root__and_a_refusal_when_git_does_not_track_that_path": 1,
+    "tree": 1,
     "v1": 2
    }
   },
