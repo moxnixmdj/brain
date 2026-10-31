@@ -442,6 +442,38 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 out["limit"] = {"value": value, "rule": "LIMIT_FROM_STATED_COUNT",
                                 "evidence": token}
 
+    # A commit message is the caller's OWN words, so it is copied, never
+    # invented.  Two proofs, both from the sentence:
+    #   * an operation other than `commit` has no message at all -- the slot is
+    #     declared by the row because ONE operation needs it, so deriving "not
+    #     applicable" from the operation is a proof, not a default;
+    #   * `commit` takes the quoted literal after "message", or the single quoted
+    #     literal of the sentence.
+    # Measured on main after the git capability landed: the row declares the slot
+    # but the surface only binds what derivation supplies, so without this the
+    # operation was refused as BINDING_REFUSED:message:not_stated for EVERY git
+    # sentence, including the ones that never commit anything.  The commit
+    # sentence in the other direction bound op=commit and then died in the adapter
+    # with COMMIT_REQUIRES_A_STATED_MESSAGE -- the operation was unreachable
+    # through the door while the grammar said it was bindable.
+    if "message" in keys:
+        text = str(goal or "")
+        op_value = (out.get("op") or {}).get("value")
+        if op_value and op_value != "commit":
+            out["message"] = {"value": "", "rule": "MESSAGE_NOT_APPLICABLE_TO_THIS_OPERATION",
+                              "evidence": op_value}
+        else:
+            m = re.search(r"\bmessage\b\s*(?:is|of|:|=|saying|say|reads)?\s*"
+                          r"[`\"'](.+?)[`\"']", text, re.I | re.S)
+            value = m.group(1).strip() if m else None
+            if value is None and op_value == "commit":
+                quoted = [q.strip() for q in re.findall(r"[`\"'](.+?)[`\"']", text) if q.strip()]
+                if len(quoted) == 1:
+                    value = quoted[0]
+            if value:
+                out["message"] = {"value": value, "rule": "MESSAGE_FROM_STATED_QUOTED_TEXT",
+                                  "evidence": value[:48]}
+
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file
     # must declare it; if the request names a function, exactly one must match.
