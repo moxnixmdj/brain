@@ -59,6 +59,13 @@ Incoming main changed runtime modules beyond this repair's three-module source s
 
 These failures are not hidden, tests are not weakened, and missing APIs are not shimmed in test infrastructure. No end-to-end Git blame transport, general adaptive engineering controller, broad systems qualification, universal optimality, or fastest-engineer claim is made. Further integration repair must preserve both upstream's newer rules and the already-landed mechanisms rather than replacing whole modules blindly.
 
+## Final focused and model checks
+
+- Combined acceptance-boundary and unified-model regression modules: **93 passed, 905 subtests passed, 41.95 s**.
+- Separate compiled-model verifier, seed `acceptance-boundaries-20261031`: **33/33 PASS**, all eight verification categories passed. Its own authority remains NONE; this is a sandbox measurement, not independent capability promotion.
+- Repository integrity guard against integrated main: **17 rules, zero violations**.
+- The compiled model was regenerated after this report update so its knowledge/source hashes describe the final tree. No descriptor counts were increased by this repair.
+
 ## Reproduction
 
 ```sh
