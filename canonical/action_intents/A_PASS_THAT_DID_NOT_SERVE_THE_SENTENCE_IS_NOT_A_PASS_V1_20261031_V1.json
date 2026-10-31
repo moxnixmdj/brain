@@ -33,7 +33,7 @@
     "route_class": "INTEGRATE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A sentence with two effects was certified after one, and the answer gate read tags instead of productions",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two effects were asked for, one was delivered, and the single-capability route certified the sentence. Measured on b68f7c7: 'Fix the bug in <D>/app and add a regression test that would have caught it' -> repair.apply.verified -> pass=True, app fixed, suite green, no test file. The composed branch already demoted itself on a False verifier verdict; this route did not. And the answer gate greps the whole row, so a test-GUIDED repair row 'supplies' test authoring by mentioning it -- measured: adding the rule alone changed nothing for that sentence.",
   "canonical_base_commit": "b68f7c7633cfd3e3f212dcc83bab49f7ca213bf1",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
