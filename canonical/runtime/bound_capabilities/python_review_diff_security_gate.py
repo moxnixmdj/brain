@@ -186,13 +186,28 @@ def run(args, root):
                     else:
                         advisory.append({**item, "out_of_scope": "preexisting"})
 
+    # A SUBSTITUTE SCANNER IS NOT THE DECLARED CHECKER.  Measured 2026-10-31 (V4 §6): with
+    # ``bandit`` absent this adapter falls back to its own AST patterns and recorded the
+    # substitution honestly (``bandit: "brain-ast-security-v1 (python 3.11)"``) -- and then
+    # reported ``gate: "PASS"`` and ``complete: true``, so "Check for security vulnerabilities
+    # in <f>" was certified as a clean security verdict by a scanner that never ran.  The
+    # fallback is a real, narrow check and it keeps its findings; what it may not do is carry
+    # the name of a gate that did not execute.  ``complete`` therefore means "every checker the
+    # artifact names executed", and a substitution is named where it happened.
+    substituted = bandit_version is not None and not str(bandit_version).startswith("bandit")
     if bandit_version is None:
         gate = "FAIL" if syntax_errors else "PASS_BASELINE_ONLY"
+    elif substituted:
+        # The substitute scanner is a real check and its verdict stands (pinned by
+        # test_a_review_that_ran_is_not_a_compile_gap_v1).  What it may not do is claim the
+        # gate was complete: `complete` means every checker the artifact names executed, and
+        # `bandit` did not.
+        gate = "FAIL" if (syntax_errors or blocking) else "PASS"
     elif syntax_errors or blocking:
         gate = "FAIL"
     else:
         gate = "PASS"
-    complete = True
+    complete = bool(bandit_version) and not substituted
     verified = gate == "PASS"
 
     artifact = {
@@ -215,6 +230,7 @@ def run(args, root):
                      "pre-existing findings outside the diff's ranges are context, "
                      "never blockers"),
         "complete": complete,
+        "unavailable_checkers": ["bandit"] if substituted else [],
     }
     out_abs.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(artifact, indent=2, ensure_ascii=False) + "\n"
@@ -231,6 +247,7 @@ def run(args, root):
         "bandit": bandit_version or "UNAVAILABLE",
         "gate": gate,
         "complete": complete,
+        "unavailable_checkers": ["bandit"] if substituted else [],
         "output_path": str(args.get("output_path")),
         "output_sha256": _sha256(text.encode("utf-8")),
         "output_verified": out_verified,

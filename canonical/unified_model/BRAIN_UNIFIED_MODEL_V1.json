@@ -30478,7 +30478,7 @@
   "engines": 26,
   "knowledge_documents": 219,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6547,
+  "research_index_records": 6548,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f38c5d73fe08ffbbb1f33ea03b9dc7211483b4fe064ffb4fad69ecd0eda7b4aa"
+  "value": "f1efddd2f95b86f6885df5459ff123beeeb1b7048fc1bfbe39ada66607a75561"
  },
  "engines": [
   {
@@ -201590,6 +201590,51 @@
    }
   },
   {
+   "action_id": "A_CERTIFICATE_MAY_ONLY_CLAIM_THE_WORK_THAT_WAS_DONE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_CERTIFICATE_MAY_ONLY_CLAIM_THE_WORK_THAT_WAS_DONE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CERTIFICATE_MAY_ONLY_CLAIM_THE_WORK_THAT_WAS_DONE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b4e8ab6c3788f6e5d47cb019c1613538dfc50b96e1f5c64ffb8cf75cf144f214",
+   "status": "",
+   "terms": {
+    "2026-10-31": 1,
+    "20261031": 1,
+    "a_certificate_may_only_claim_the_work_that_was_done_v1_20261031_v1": 1,
+    "absent": 2,
+    "all": 1,
+    "alone": 1,
+    "analysis": 1,
+    "answered": 6,
+    "artifact": 2,
+    "bandit": 2,
+    "break": 1,
+    "build_plan": 1,
+    "call": 1,
+    "called": 1,
+    "caller": 1,
+    "certificate": 2,
+    "certified": 2,
+    "check": 1,
+    "claim": 3,
+    "claiming": 1,
+    "completeness": 3,
+    "enumeration": 2,
+    "false": 3,
+    "over": 3,
+    "run": 4,
+    "scalar": 2,
+    "scope": 2,
+    "security": 2,
+    "tests": 2,
+    "v1": 2,
+    "were": 2,
+    "work": 2
+   }
+  },
+  {
    "action_id": "A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -215846,7 +215891,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "44f22ae3f986277b16d1e7e3e62cdebbe78e691edcb8a57561370f4af925005e",
+   "sha256": "387616aa0b72acdd9177b99abf157802c2fdb2d385353f55da754c52d2f707b0",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
    "symbol_count": 9,
    "symbols": [
@@ -219648,7 +219693,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_security_gate.py",
-   "sha256": "0e065da2f4306c8d6e21cf44b3ea5866cab681b1828b456d4e05c9f594f57d56",
+   "sha256": "6f616e2511d244f7bc7d58eecdbf41c905ce0f6fed984a893922278f679d717c",
    "summary": "python.review.diff_security_gate.v1 — security triage on changed lines.",
    "symbol_count": 6,
    "symbols": [
@@ -246313,9 +246358,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "5737687d5ee17a8e31f07a8821451dfa3b72e9b23e05c27c899b55efb32156dd",
+   "sha256": "f53544529b4e871bfc01a013fae17fab568027b94b97dd283334bfa7304e7a4d",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 99,
+   "symbol_count": 100,
    "symbols": [
     "LocalExecutionFailure",
     "_asks_only_for_a_plan",
