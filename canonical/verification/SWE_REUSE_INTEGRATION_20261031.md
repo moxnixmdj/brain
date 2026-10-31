@@ -8,7 +8,7 @@ repository integrity separately; it does not turn a failing test into a pass.
 
 Reused existing Brain implementations discovered at `cd44f98`, then integrated
 rather than restoring old modules wholesale. Merged current main through
-`9f808230890332e75643b6bfafce3352749ed9ba`; preserved its bisect materialization
+`5029bf7d955d914b575cef6b7922fedc1690f749`; preserved its bisect materialization
 limits, request-role rules and guarded retry behavior. Runtime and tests import
 only current-tree source, never the discovery copies.
 
@@ -189,3 +189,9 @@ output regardless of slot order. No document-specific route was added.
 Two fresh file/directory controls require refusal and pair it with a real-source
 positive case. All **137 model/compiler tests now pass** inside the final expanded
 run, with the original six SWE compatibility failures still reported above.
+
+Latest-main carry: subsequently merged `5029bf7d`'s Git-question/composer rule.
+The new Git-question suite plus the existing Git-intent and joint-boundary suites
+measure **46 passed** on the merged source. The 577-case measurement above is
+explicitly the earlier `cb21400a` run; the new main tests supplement it rather
+than being silently included in that count. Model/admission records were rebound.
