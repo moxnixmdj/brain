@@ -72,6 +72,28 @@ GENERIC_MATCH_TOKENS={
     # restores the audit family selections (compiler + world-binding suites)
     # and no capability in the live registry loses its last distinctive token.
     "python",
+    # A GIT REVISION IS A VALUE, NOT A TOPIC.
+    #
+    # Measured 2026-10-31 on the advanced census, request 44.  Two sentences that differ only by
+    # a revision phrase:
+    #
+    #   "Show the diff of <f>."                      -> matched tokens [diff, show] -> git.repository
+    #                                                    .operate.v1, PASS
+    #   "Show the diff of <f> against HEAD~1."       -> matched tokens [head] -> git.history.bisect
+    #                                                    _regression.v1, FAIL in the controller
+    #
+    # The row that answers the request was in the pool both times; the second sentence's only
+    # distinctive token was the revision `HEAD~1`, which `git.history.bisect_regression.v1`
+    # carries as the keyword "head".  Nothing about that token means the caller asked to bisect:
+    # it is the ARGUMENT of the diff, exactly as `python` is the language of an audit rather
+    # than the operation.  `HEAD`, `HEAD~n` and a commit sha are values a request carries, so
+    # they may refine a match but never create one -- the same rule already applied to paths
+    # (`matched_from_paths_only`) and to the words around it.
+    #
+    # A request that is genuinely about history keeps its own evidence: bisect's distinctive
+    # keywords are "bisect", "broke", "regression", "slower" and "git history", none of which is
+    # "head", so no capability in the live registry loses its last distinctive token here.
+    "head",
     # Repository-self-referential vocabulary. Every goal in this repository
     # names the project ("PROJECT BRAIN") and cites a scratch destination
     # under canonical/astra_runtime/tmp/, so these tokens are present in

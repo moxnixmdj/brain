@@ -1,0 +1,413 @@
+{
+ "action_id": "A_GIT_REVISION_IS_A_VALUE_NOT_A_TOPIC_V1_20261031_V1",
+ "action_intent_id": "AN_EFFECT_NOBODY_DECLARES_MUST_BE_SERVED_BY_NOBODY_V1_20261031_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "A GIT REVISION IS A VALUE, NOT A TOPIC. Advanced census request 44: \"Show the diff of <f> against HEAD~1\" routed to git.history.bisect_regression.v1 and failed in the controller, while the same sentence without the revision routed to git.repository.operate.v1 and passed. The revision is the ARGUMENT of the diff; the history row merely carries 'head' as a keyword, so the request's only distinctive token named a capability nobody asked for. Fixed exactly as the repository already fixed the word 'python' for the same failure class: the token joins GENERIC_MATCH_TOKENS, so it may refine a match but never create one. Pinned in both directions - a revision phrase scores 0 for the history row, a request that states what changed still scores above 0 - and the door never executes a bisect for a diff-against-revision request. Measured: wrong executions 10 -> 9 on the census, matrix 23 REAL / 0 FALSE / 0 DAMAGED stable over four runs, census unchanged at 4 of 49.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_compiler.py",
+   "canonical/tests/test_a_revision_is_a_value_not_a_topic_v1.py",
+   "canonical/action_intents/A_GIT_REVISION_IS_A_VALUE_NOT_A_TOPIC_V1_20261031_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_GIT_REVISION_TOKEN_NAMED_A_CAPABILITY_NOBODY_ASKED_FOR_BECAUSE_git_history_bisect_regression_CARRIES_head_AS_A_KEYWORD_SO_SHOW_THE_DIFF_OF_f_against_HEAD_1_ROUTED_TO_A_BISECT_ROW_AND_FAILED_WHILE_THE_SAME_SENTENCE_WITHOUT_THE_REVISION_ROUTED_TO_git_repository_operate_AND_PASSED_MEASURED_2026_10_31_ADVANCED_CENSUS_REQUEST_44",
+ "canonical_base_commit": "c4c74d74d5718299418b511c3a4feef9aff21ff5",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A_GIT_REVISION_TOKEN_NAMED_A_CAPABILITY_NOBODY_ASKED_FOR_BECAUSE_git_history_bisect_regression_CARRIES_head_AS_A_KEYWORD_SO_SHOW_THE_DIFF_OF_f_against_HEAD_1_ROUTED_TO_A_BISECT_ROW_AND_FAILED_WHILE_THE_SAME_SENTENCE_WITHOUT_THE_REVISION_ROUTED_TO_git_repository_operate_AND_PASSED_MEASURED_2026_10_31_ADVANCED_CENSUS_REQUEST_44",
+ "date": "2026-10-31",
+ "expected_parent_change": "A_GIT_REVISION_TOKEN_CANNOT_CREATE_A_MATCH_SO_A_DIFF_AGAINST_A_REVISION_NO_LONGER_ROUTES_TO_A_BISECT_ROW_WHILE_A_REAL_HISTORY_REQUEST_KEEPS_ITS_ROUTE",
+ "expected_parent_frontier_change": "A_GIT_REVISION_TOKEN_CANNOT_CREATE_A_MATCH_SO_A_DIFF_AGAINST_A_REVISION_NO_LONGER_ROUTES_TO_A_BISECT_ROW_WHILE_A_REAL_HISTORY_REQUEST_KEEPS_ITS_ROUTE",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. And merge all of your work.\"",
+ "falsification_condition": "REMOVE_head_FROM_GENERIC_MATCH_TOKENS_AND_SEE_THE_SUITE_FAIL__ASK_FOR_A_BISECT_WITHOUT_THE_REVISION_AND_SEE_THE_ROUTE_UNCHANGED",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Magnet rows removed in memory (435 rows, patch verified): census served 6 -> 2, wrong served 4 -> 0. The four sentences now report STATED_PROFILE_NOT_TAKEN_BY_CAPABILITY, STATED_OPTIMISATION_NOT_PERFORMED_BY_CAPABILITY, STATED_CONCURRENCY_NOT_ADDRESSED_BY_CAPABILITY and STATED_FUZZ_OR_PROPERTY_RUN_NOT_PERFORMED_BY_CAPABILITY. With the magnets present the census is unchanged at 2 served / 47 refused and the matrix is unchanged at 19 REAL / 0 FALSE / 35 REFUSED / 0 DAMAGED with median 68 ms and p90 387 ms (was 479). New suite test_a_definition_count_is_not_a_profile_v1: 10/10, including four neighbour assertions (perf review, mutation score, dead-code question, definition-count question) and three hypothetical-capability admissions so a real profiler, threading change or fuzzer would pass.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/goal_compiler.py",
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "execution_guard/swe_advanced_probe_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "c4c74d74d5718299418b511c3a4feef9aff21ff5",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
+   "READING_THE_HOST_ONLY_FROM_IN_NAME",
+   "WIDENING_A_STATED_REGION_TO_ITS_NEIGHBOURS"
+  ],
+  "expected_parent_level_state_change": "A_GIT_REVISION_TOKEN_CANNOT_CREATE_A_MATCH_SO_A_DIFF_AGAINST_A_REVISION_NO_LONGER_ROUTES_TO_A_BISECT_ROW_WHILE_A_REAL_HISTORY_REQUEST_KEEPS_ITS_ROUTE",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETING_THIS_RESTORES_FOUR_PASSING_ANSWERS_FROM_A_FUNCTION_COUNTER",
+   "intrinsic_or_path_specific": "GENERAL__ANY_EFFECT_THE_REGISTRY_DOES_NOT_DECLARE",
+   "surviving_causal_blocker": "A_GIT_REVISION_TOKEN_NAMED_A_CAPABILITY_NOBODY_ASKED_FOR_BECAUSE_git_history_bisect_regression_CARRIES_head_AS_A_KEYWORD_SO_SHOW_THE_DIFF_OF_f_against_HEAD_1_ROUTED_TO_A_BISECT_ROW_AND_FAILED_WHILE_THE_SAME_SENTENCE_WITHOUT_THE_REVISION_ROUTED_TO_git_repository_operate_AND_PASSED_MEASURED_2026_10_31_ADVANCED_CENSUS_REQUEST_44"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "ONE_TOKEN_AND_ONE_RULE__NO_NEW_CAPABILITY_NO_NEW_ROW",
+   "existing_inherited_routes_checked": [
+    "live_brain_route_admission_v1._STATED_EFFECTS",
+    "stated_answer_errors",
+    "declared_effect_ids",
+    "_enforced_at_exit"
+   ],
+   "external_existing_routes_checked": "None needed.",
+   "surviving_gap": "THE_DIFF_ROW_HAS_NO_REVISION_SLOT_SO_THE_REQUEST_IS_NOW_AN_HONEST_COMPILATION_GAP_RATHER_THAN_A_WRONG_EXECUTION"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_SERVED_COUNT",
+    "REMOVING_ROWS_TO_LOOK_CAPABLE"
+   ],
+   "real_outcome": "A request to diff a file against a revision is never answered by a bisect; a request that states what changed still routes to the history row.",
+   "surviving_necessity": "A wrong answer costs more than a refusal: it spends the caller's trust on top of the request."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_EXISTING_SHAPE_RULE_THE_EXISTING_EXIT_AND_THE_EXISTING_ORACLE"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_ONCE_BEFORE_AND_AFTER",
+   "search_stop_decision": "STOPPED_AFTER_FOUR_BECAUSE_THOSE_WERE_ALL_THE_WRONG_ANSWERS_THE_EXPERIMENT_PRODUCED"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A second gate duplicates a wired one; deleting the magnets was measured to produce four wrong answers before this gate existed.",
+   "routes_ranked": [
+    "ADD_FOUR_ROWS__CHOSEN",
+    "SECOND_GATE",
+    "DELETE_MAGNETS"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_CENSUS_REPORTS_THE_REFUSAL_CODES_AND_THE_MATRIX_IS_AN_INDEPENDENT_ORACLE"
+  },
+  "real_outcome": "A request to extract the loop of a named function is answered by extracting it: the region the sentence states is proved from the stated file's AST and the loop really leaves the module, instead of the request being refused for a region the repository had already proved.",
+  "required_capability": "A_REGION_THE_SENTENCE_STATES_MUST_BE_ASKED_FOR_BEFORE_A_PLACEHOLDER_IS_WRITTEN",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "BROAD_REFACTORING_SUITE",
+      "CORRECTNESS": "GOOD_ON_SUPPORTED_SYNTAX",
+      "INCREMENTAL_COST": "NEW_LGPL_DEPENDENCY",
+      "RELIABILITY": "TEXT_BASED_EDITS",
+      "VERIFIABILITY": "OUTSIDE_THE_ADAPTERS_OWN_GATE",
+      "WALL_CLOCK": "PROJECT_LOAD_AND_DEPENDENCY"
+     },
+     "evidence": [
+      "rope states support for Python syntax up to 3.10 while this tree runs 3.11, and it is LGPL v3+ so it would be a new licensed runtime dependency",
+      "the adapter already passes its own gate on this exact request, so an external engine would add a dependency to replace a working path"
+     ],
+     "qualification_evidence": [
+      "pypi.org/project/rope read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ROPE_EXTERNAL_REFACTOR_ENGINE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "FAR_BEYOND_THE_NEED",
+      "CORRECTNESS": "HIGH",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REPRINTS_THE_MODULE",
+      "VERIFIABILITY": "BYTE_IDENTITY_NOT_GUARANTEED",
+      "WALL_CLOCK": "PARSER_DEPENDENCY"
+     },
+     "evidence": [
+      "libcst preserves formatting by holding a CST and re-serialising the whole module; the adapter's law is that untouched bytes stay untouched, which a whole-module reprint cannot promise in general"
+     ],
+     "qualification_evidence": [
+      "github.com/Instagram/LibCST README read this session",
+      "community survey comparing LibCST, Rope, ast on formatting preservation"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "BROAD_WEB_OR_COMMUNITY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LIBCST_CONCRETE_SYNTAX_REWRITE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "TRIVIAL",
+      "CORRECTNESS": "INVENTS_WHAT_THE_SENTENCE_DID_NOT_STATE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "WRONG_ON_A_HOST_WITH_SEVERAL_LOOPS",
+      "VERIFIABILITY": "NO_RULE_TO_POINT_AT",
+      "WALL_CLOCK": "FASTEST"
+     },
+     "evidence": [
+      "measured this session: the adapter extracts the stated loop correctly when it is given the span, so the only missing thing is the proof, and a guess inside the adapter would need the same AST walk in the wrong layer while losing the rule and its evidence"
+     ],
+     "qualification_evidence": [
+      "direct probe: python_refactor_extract_function.run with qualname=total, start_line=3, end_line=4 returns gate PASS and edit_count=1"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "TEACH_THE_ADAPTER_TO_GUESS_THE_REGION"
+    }
+   ],
+   "checked_at_utc": "2026-10-31T20:06:33Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "LET_A_REVISION_TOKEN_NAME_A_CAPABILITY",
+   "max_age_hours": 24,
+   "negative_search_summary": "No external engine dominates: rope is capped at 3.10 syntax and would add an LGPL dependency, libcst reprints the module, and the capability that performs this exact extraction already exists in the tree.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python extract loop of a named function into a helper ast span"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope libcst refactoring library python extract function"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "derive a statement span from a function body without reprinting the module"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "rope 1.15.0 libcst latest release python 3.11 support"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "A_VALUE_TOKEN_MAY_REFINE_A_MATCH_BUT_NEVER_CREATE_ONE",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-31T20:06:33Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3.11 stdlib (ast, json, pathlib, re, sys)",
+      "evidence": [
+       "DIRECT_PROBE: the 3.11 interpreter parsed both modules and executed the adapter with qualname=total, start_line=3, end_line=4 this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/declared_input_derivation_v1.py + canonical/runtime/goal_front_compiler_v1.py (in-tree, no new package)",
+      "evidence": [
+       "BRAIN_INHERITED: the region block and the derive_declared_inputs loop are both already in the tree",
+       "DIRECT_PROBE: derive() returns start_line 3 / end_line 4 for the stated sentence after the change"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "execution_guard/swe_advanced_probe_v1.py + execution_guard/swe_capability_matrix_v1.py (in-tree instruments)",
+      "evidence": [
+       "DIRECT_PROBE: census 3 served / 46 refused and matrix 22 REAL / 0 FALSE / 0 DAMAGED on this tree"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "A_VALUE_TOKEN_MAY_REFINE_A_MATCH_BUT_NEVER_CREATE_ONE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/declared_input_derivation_v1.py already computes start_line/end_line from a host function's statement runs (the extract-region block)",
+     "canonical/runtime/bound_capabilities/python_refactor_extract_function.py already performs the extraction and returns gate PASS given qualname=total and lines 3-4"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "modelcitizendeveloper survey 1.104.1: only LibCST, RedBaron and Bowler fully preserve formatting; Rope does text-based modification with partial round-trip fidelity"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi.org/project/rope 1.15.0: 'the world's most advanced open source Python refactoring library', LGPL v3+, 'Most Python syntax up to Python 3.10 is supported'"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "github.com/Instagram/LibCST README: a CST that keeps all formatting details (comments, whitespace, parentheses), for automated refactoring"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "DELETE_THE_MAGNET_ROWS__MEASURED_TO_PRODUCE_FOUR_WRONG_ANSWERS",
+   "BUILD_A_SEPARATE_EFFECT_GATE__DUPLICATES_THE_EXISTING_TABLE",
+   "ADD_FOUR_CLASSES_TO_THE_EXISTING_TABLE__CHOSEN"
+  ],
+  "selected_route": "DECLARE_THE_ARTIFACT_A_CAPABILITY_REALLY_EMITS_SO_THE_PLANNER_CAN_CHAIN_IT_TO_THE_VERIFIER_THAT_ALREADY_REQUIRES_THAT_TYPE",
+  "selected_surviving_route": "A_VALUE_TOKEN_MAY_REFINE_A_MATCH_BUT_NEVER_CREATE_ONE",
+  "stop_condition": "REVISION_PHRASE_SCORES_ZERO_FOR_THE_HISTORY_ROW__REAL_HISTORY_REQUEST_STILL_SCORES__5_OF_5_NEW_TESTS_GREEN__MATRIX_23_REAL_0_FALSE_0_DAMAGED_STABLE_OVER_FOUR_RUNS__CENSUS_WRONG_EXECUTIONS_10_TO_9",
+  "why_selected_route_is_fastest_sufficient": "The adapter already performs this extraction correctly -- called with qualname=total and lines 3-4 it returns gate PASS and one edit -- so the refusal was never a missing capability. The derivation module already had a block that computes a span from a host function's statements; it was unreachable because the binder wrote a 0 first and because the host phrase pattern only knew 'in <name>'. Two rules reuse both, no new module, and the alternative -- teaching the adapter to guess a region -- would have made the door invent what the sentence did not say."
+ },
+ "route_id": "A_GIT_REVISION_IS_A_VALUE_NOT_A_TOPIC_V1_20261031_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "A_VALUE_TOKEN_MAY_REFINE_A_MATCH_BUT_NEVER_CREATE_ONE",
+ "stop_condition": "REVISION_PHRASE_SCORES_ZERO_FOR_THE_HISTORY_ROW__REAL_HISTORY_REQUEST_STILL_SCORES__5_OF_5_NEW_TESTS_GREEN__MATRIX_23_REAL_0_FALSE_0_DAMAGED_STABLE_OVER_FOUR_RUNS__CENSUS_WRONG_EXECUTIONS_10_TO_9",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "5bed1938c8468de06bd7eff1e67ad23ba0153165",
+     "note": "Base blob: line 966 wrote inputs[key] = 0 for start_line/end_line before any derivation call.",
+     "path": "canonical/runtime/goal_front_compiler_v1.py"
+    },
+    {
+     "git_blob_sha": "f14dee6a4aabe635f93a035c693b171abbd19496",
+     "note": "Base blob: host phrases were from|in|of <name> only; no region-kind rule.",
+     "path": "canonical/runtime/declared_input_derivation_v1.py"
+    }
+   ],
+   "decisive_question": "MAY_A_GIT_REVISION_PHRASE_ALONE_SELECT_A_CAPABILITY",
+   "falsifier_id": "REMOVE_head_FROM_GENERIC_MATCH_TOKENS_AND_SEE_THE_SUITE_FAIL",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_ADAPTER_ALREADY_EXTRACTS_THE_STATED_LOOP_WITH_GATE_PASS_WHEN_GIVEN_QUALNAME_total_AND_LINES_3_4__NOTHING_WAS_MISSING_BUT_THE_ORDER_OF_THE_TWO_ANSWERS_AND_NO_OTHER_REQUEST_IN_THE_49_CASE_CENSUS_CHANGED_VERDICT",
+   "proposal_id": "A_GIT_REVISION_IS_A_VALUE_NOT_A_TOPIC_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. The derivation still proves nothing it cannot read off the stated file's AST, and when the sentence states no region the placeholder is written exactly as before, so the adapter's REGION_INVALID refusal stands for every request that genuinely states no region. One new test pins that non-invention; another removes the role phrase and shows the proof disappears."
+}
