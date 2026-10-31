@@ -358,12 +358,42 @@ def _module_names_prepass(tree):
     return names
 
 
+def _parse_single_module_worker(item):
+    """Top-level worker for parallel cold AST indexing on large trees."""
+    rel, sha, path_str = item
+    try:
+        raw = pathlib.Path(path_str).read_bytes()
+        tree = ast.parse(raw.decode("utf-8"), filename=path_str)
+    except Exception as exc:
+        return ("err", {
+            "path": rel,
+            "sha256": sha,
+            "error": type(exc).__name__,
+            "detail": str(exc)[:400],
+        })
+    indexer = _ModuleIndexer()
+    indexer.module_names |= _module_names_prepass(tree)
+    indexer.visit(tree)
+    row = {
+        "path": rel,
+        "sha256": sha,
+        "imports": indexer.imports,
+        "definitions": sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"])),
+        "references": sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"])),
+        "calls": sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"])),
+    }
+    row["row_sha256"] = _row_sha(row)
+    return ("ok", row)
+
+
 def _collect_index_parts(source_root_arg, root, cached=None):
     """Request-local index construction shared by staged workflows and the adapter."""
     repo = pathlib.Path(root).resolve()
     source_root = _safe_root(repo, source_root_arg)
     cached = cached or {}
-    modules = []
+    modules_by_rel = {}
+    ordered_rels = []
+    to_parse = []
     unparseable = []
     reused = 0
 
@@ -377,35 +407,36 @@ def _collect_index_parts(source_root_arg, root, cached=None):
         if old is not None and old.get("sha256") == sha:
             # The file's bytes are the ones this row was built from, and the row
             # itself verified.  Re-deriving it would produce exactly this row.
-            modules.append(old)
+            modules_by_rel[rel] = old
+            ordered_rels.append(rel)
             reused += 1
             continue
+        ordered_rels.append(rel)
+        to_parse.append((rel, sha, str(path)))
+
+    use_mp = False
+    if len(to_parse) >= 64:
         try:
-            tree = ast.parse(raw.decode("utf-8"), filename=str(path))
-        except Exception as exc:
-            # Same law as the audit: a file that will not parse is a FINDING
-            # to report, never an excuse to hide the rest of the tree behind
-            # a tool-looking exception.
-            unparseable.append({
-                "path": rel,
-                "sha256": sha,
-                "error": type(exc).__name__,
-                "detail": str(exc)[:400],
-            })
-            continue
-        indexer = _ModuleIndexer()
-        indexer.module_names |= _module_names_prepass(tree)
-        indexer.visit(tree)
-        row = {
-            "path": rel,
-            "sha256": sha,
-            "imports": indexer.imports,
-            "definitions": sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"])),
-            "references": sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"])),
-            "calls": sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"])),
-        }
-        row["row_sha256"] = _row_sha(row)
-        modules.append(row)
+            import multiprocessing
+            use_mp = not multiprocessing.current_process().daemon and (os.cpu_count() or 1) > 1
+        except Exception:
+            use_mp = False
+
+    if use_mp:
+        from concurrent.futures import ProcessPoolExecutor
+        workers = min(os.cpu_count() or 4, 8)
+        with ProcessPoolExecutor(max_workers=workers) as ex:
+            results = list(ex.map(_parse_single_module_worker, to_parse, chunksize=max(8, len(to_parse) // (workers * 4))))
+    else:
+        results = [_parse_single_module_worker(item) for item in to_parse]
+
+    for kind, payload in results:
+        if kind == "ok":
+            modules_by_rel[payload["path"]] = payload
+        else:
+            unparseable.append(payload)
+
+    modules = [modules_by_rel[r] for r in ordered_rels if r in modules_by_rel]
 
     if not modules and not unparseable:
         raise RuntimeError("PYTHON_INDEX_EMPTY")
@@ -481,8 +512,9 @@ def run(args, root):
         data = output.read_bytes()
     else:
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        data = output.read_bytes()
+        raw_bytes = (json.dumps(report, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+        output.write_bytes(raw_bytes)
+        data = raw_bytes
     return {
         "adapter": "python_source_symbol_index",
         "output_path": str(output.relative_to(repo)).replace("\\", "/"),

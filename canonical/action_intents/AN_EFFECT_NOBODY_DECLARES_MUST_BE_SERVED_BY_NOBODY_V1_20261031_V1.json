@@ -36,7 +36,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_SENTENCE_STATING_AN_EFFECT_NO_ROW_DECLARES_WAS_ANSWERED_BY_THE_BEST_LEXICAL_MATCH_AND_CERTIFIED_PASS__MEASURED_4_OF_6_SERVED_ANSWERS_WRONG_ONCE_THE_MAGNETS_WERE_OUT_OF_THE_WAY",
-  "canonical_base_commit": "75ea4ec9d059d1b4770087f1db145da0ffa79d1c",
+  "canonical_base_commit": "2e9b6427a1d5d7e22610810efd71e052fc343c4d",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -82,7 +82,7 @@
     "execution_guard/swe_advanced_probe_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "75ea4ec9d059d1b4770087f1db145da0ffa79d1c",
+    "canonical_base_commit": "2e9b6427a1d5d7e22610810efd71e052fc343c4d",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "TREATING_A_DEFINITION_COUNT_AS_A_MEASUREMENT_OVER_TIME",
@@ -209,7 +209,7 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "9f88596e693c9239b9502d4d124e29cde3727e1f",
+          "git_blob_sha": "9b9a8f020cede83b339b2a9338b57a1a0211a138",
           "note": "Base blob: _STATED_EFFECTS had 14 classes, none for profiling, optimisation, concurrency or fuzzing.",
           "path": "canonical/runtime/live_brain_route_admission_v1.py"
         }

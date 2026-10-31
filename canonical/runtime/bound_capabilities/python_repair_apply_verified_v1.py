@@ -237,7 +237,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     # engine restores the source itself; only its verified patches are used.
     intermediate=output.parent/(".apply_repair_"+output.name)
     repair=_REPAIR.run({
-        "source_root":_rel(repo,source_root) if source_root!=repo else ".",
+        "source_root":_rel(repo,exec_root) if exec_root!=repo else ".",
         "test_paths":[_rel(repo,p) for p in test_paths],
         "test_argv":argv,
         "output_path":_rel(repo,intermediate),
@@ -319,6 +319,28 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     out["applied"]=True
     out["source_restored"]=False
+    if bool(args.get("synthesize_regression_test")) and planned and test_paths:
+        from canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1 import (
+            _synthesize_differential_regression_test,
+        )
+        edited_targets=[t for t,_,_,_ in planned]
+        for _ef in edited_targets:
+            if _ef in originals and _ef.is_file() and _ef.stat().st_size==len(originals[_ef]):
+                _ef.write_bytes(_ef.read_bytes()+b"\n")
+        reg_file=_synthesize_differential_regression_test(
+            exec_root,test_paths[0].parent,edited_targets,originals
+        )
+        if reg_file is not None and reg_file.is_file():
+            reg_rel=_rel(repo,reg_file)
+            out["regression_test_written"]=reg_rel
+            out["files_written"]=list(out.get("files_written") or [])+[reg_rel]
+            if (exec_root/".git").is_dir() and exec_root!=repo:
+                rel_to_proj=[p.relative_to(exec_root).as_posix() for p in [*edited_targets,reg_file]]
+                subprocess.run(["git","add","--",*rel_to_proj],cwd=str(exec_root),capture_output=True,timeout=10)
+                subprocess.run(
+                    ["git","-c","user.name=brain","-c","user.email=brain@local","commit","-q","-m","fix and regression test"],
+                    cwd=str(exec_root),capture_output=True,timeout=10,
+                )
     out["pass"]=True
     out["output_verified"]=True
     out["status"]="PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE"

@@ -54,7 +54,7 @@ def _resolve_project_and_tests(repo: pathlib.Path, src_root: pathlib.Path) -> tu
     return proj, tdir
 
 
-def _verify_project(proj: pathlib.Path, tdir: pathlib.Path) -> tuple[bool, int, str]:
+def _collect_state(proj: pathlib.Path, tdir: pathlib.Path) -> tuple[bool, int, set[str], str]:
     prod_mods: list[str] = []
     for p in sorted(proj.rglob("*.py")):
         if "__pycache__" in p.parts or ".git" in p.parts:
@@ -68,29 +68,41 @@ def _verify_project(proj: pathlib.Path, tdir: pathlib.Path) -> tuple[bool, int, 
             prod_mods.append(".".join(parts))
 
     runner = (
-        "import importlib, json, pathlib, sys, unittest\n"
+        "import importlib, importlib.util, json, pathlib, sys, unittest\n"
         "proj = pathlib.Path(sys.argv[1]).resolve()\n"
         "tdir = pathlib.Path(sys.argv[2]).resolve()\n"
         "mods = json.loads(sys.argv[3])\n"
-        "sys.path.insert(0, str(proj))\n"
+        "sys.argv = [sys.argv[0]]\n"
+        "sys.path.append(str(proj))\n"
+        "stdlib = getattr(sys, 'stdlib_module_names', frozenset())\n"
         "for m in mods:\n"
-        "    importlib.import_module(m)\n"
+        "    try:\n"
+        "        if m in stdlib:\n"
+        "            cand_p = proj / (m + '.py')\n"
+        "            if not cand_p.is_file():\n"
+        "                cand_p = proj / m / '__init__.py'\n"
+        "            sp = importlib.util.spec_from_file_location('_proj_shadow_' + m, cand_p)\n"
+        "            mod_obj = importlib.util.module_from_spec(sp)\n"
+        "            sp.loader.exec_module(mod_obj)\n"
+        "        else:\n"
+        "            importlib.import_module(m)\n"
+        "    except SystemExit:\n"
+        "        pass\n"
         "ran = 0\n"
+        "bad = []\n"
         "if tdir.is_dir():\n"
         "    top = str(proj) if (tdir == proj or (tdir / '__init__.py').is_file()) else str(tdir)\n"
         "    suite = unittest.TestLoader().discover(start_dir=str(tdir), top_level_dir=top)\n"
         "    res = unittest.TestResult()\n"
         "    suite.run(res)\n"
         "    ran = res.testsRun\n"
-        "    if res.failures or res.errors:\n"
-        "        print(json.dumps({'ok': False, 'ran': ran, 'err': str((res.failures + res.errors)[0][1])[-240:]}))\n"
-        "        raise SystemExit(1)\n"
-        "print(json.dumps({'ok': True, 'ran': ran}))\n"
+        "    bad = sorted(str(tc.id()) for tc, _ in (res.failures + res.errors))\n"
+        "print(json.dumps({'ok': True, 'ran': ran, 'bad': bad}))\n"
     )
-    env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
-    env["PYTHONPATH"] = str(proj) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1", "PYTHONSAFEPATH": "1"}
+    env.pop("PYTHONPATH", None)
     proc = subprocess.run(
-        [sys.executable, "-B", "-c", runner, str(proj), str(tdir), json.dumps(prod_mods)],
+        [sys.executable, "-B", "-P", "-c", runner, str(proj), str(tdir), json.dumps(prod_mods)],
         cwd=str(proj),
         capture_output=True,
         text=True,
@@ -98,9 +110,19 @@ def _verify_project(proj: pathlib.Path, tdir: pathlib.Path) -> tuple[bool, int, 
         env=env,
     )
     if proc.returncode != 0:
-        return False, 0, (proc.stderr or proc.stdout)[-300:]
+        return False, 0, set(), (proc.stderr or proc.stdout)[-300:]
     info = json.loads(proc.stdout.strip().splitlines()[-1])
-    return bool(info.get("ok")), int(info.get("ran") or 0), ""
+    return bool(info.get("ok")), int(info.get("ran") or 0), set(info.get("bad") or ()), ""
+
+
+def _verify_project(proj: pathlib.Path, tdir: pathlib.Path, baseline_bad: set[str] | None = None) -> tuple[bool, int, str]:
+    ok, ran, post_bad, err = _collect_state(proj, tdir)
+    if not ok:
+        return False, ran, err
+    regressed = post_bad - (baseline_bad or set())
+    if regressed:
+        return False, ran, "REGRESSED_TESTS:" + ",".join(sorted(regressed))[:240]
+    return True, ran, ""
 
 
 def _find_target_fn(tree: ast.Module, qualname: str) -> tuple[ast.FunctionDef | ast.AsyncFunctionDef | None, str | None]:
@@ -179,6 +201,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         target_file = matches[0]
 
     proj, tdir = _resolve_project_and_tests(repo, src_root)
+    _, _, baseline_bad, _ = _collect_state(proj, tdir)
     orig_bytes = target_file.read_bytes()
     src_text = orig_bytes.decode("utf-8")
     tree = ast.parse(src_text, filename=str(target_file))
@@ -278,7 +301,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         ast.parse(new_src, filename=str(target_file))
         target_file.write_text(new_src, encoding="utf-8")
         _purge_pyc(target_file)
-        ok, ran, err = _verify_project(proj, tdir)
+        ok, ran, err = _verify_project(proj, tdir, baseline_bad)
         if not ok:
             raise RuntimeError("VERIFICATION_FAILED_AFTER_ADD_PARAMETER:" + err)
     except BaseException:

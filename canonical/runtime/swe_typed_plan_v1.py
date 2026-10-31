@@ -190,6 +190,10 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
                     r"(?:\s+(?:of|for|in|under|at)\s*)?[.?!]*", head.strip()):
         if len(derivation.stated_git_operations(goal)) == 1:
             return derivation.stated_git_operations(goal), ("git", "repository"), GIT_FAMILY_TOKEN
+    # Direct bare repair imperative ("fix <pkg/calc.py>") where prose_only leaves only "fix"/"repair".
+    if re.fullmatch(r"(?:please\s+)?(?:fix|repair)\s*(?:the\s+(?:bug|code|function|module|file)s?\s*(?:in)?)?[.!]*",
+                    head.strip()):
+        return ("fix",), ("apply the repair", "repair.apply", "verified_repair_applied", "write the fix"), "repair"
     return None
 
 
@@ -220,7 +224,7 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str],
         if key in removed and isinstance(value, str) and "${input." in value:
             args.pop(key, None)
     if extra_inputs and extra_inputs.get("synthesize_regression_test") is True:
-        args["synthesize_regression_test"] = True
+        args["synthesize_regression_test"] = "${input.synthesize_regression_test}"
     template["args"] = args
     return template
 
@@ -252,7 +256,9 @@ def _fresh_output_path(goal: str, root: pathlib.Path, inputs: Mapping[str, Any])
                   else str(pathlib.PurePosixPath(current).parent))
     if not parent or not (root / parent).is_dir():
         return None
-    return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
+    import hashlib
+    digest = hashlib.sha256((str(goal or "") + "\0" + parent).encode("utf-8")).hexdigest()[:12]
+    return f"canonical/astra_runtime/tmp/typed_swe_reports/{digest}_typed_swe_report.json"
 
 
 def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str, Any]) -> str | None:

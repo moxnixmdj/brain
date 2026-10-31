@@ -740,5 +740,4 @@ def run(args, root):
     final = dict(out)
     final["output_path"] = out_rel
     final["output_sha256"] = _sha256(payload.encode("utf-8"))
-    print(json.dumps(final, indent=1, sort_keys=True, default=list))
     return final
