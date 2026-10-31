@@ -23388,7 +23388,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "c43a6cfa0129240d217b5f0fbf97ea52d96f8a2697480d3d324f14c0d141d163",
+    "source_sha256": "03120d0fa672a4b6d8defef42a72fa8fc7f3a15fb3509bc66a0c90d9c49ea073",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24033,7 +24033,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "d70b5aa94954fde631f837294d54cb65aa4e963118e34244aac033b48b1cb129",
+    "source_sha256": "71a31b6484e85b944e8653443aec6de7630fa7f7765c91cab002898cc71abd28",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25801,7 +25801,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
-    "source_sha256": "507a70bd08bff4c11df82afcf4fa395fb8868caba882ff59533cb9ec1be9cd79",
+    "source_sha256": "de48bf8c52f221b862616b403ac1dab1bc63b2552bddb68ccffab4abde024904",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -25891,7 +25891,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
-    "source_sha256": "0fe6e0bf64383f74e24bee0e2d59d5cc5d3f307d39e437a0ceb4c3185d1cf7c4",
+    "source_sha256": "d430952baf20d581bdc6293b917988e749456529a8c50c2efd7d1cb265419f60",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -30485,7 +30485,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f7eb0d0a8e441c7544db1842d496c67b83b7c59a0fb391de2a13fbbd264a66cd"
+  "value": "37beccd820243dd28c0e8d4aa2baa6481e2ea874750184f03d0bc462c49f72b3"
  },
  "engines": [
   {
@@ -58506,7 +58506,7 @@
   "included_source_count": 1005,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "02e042240c1c9a373d031ece7f90a3fc447ea1f8a0d92f51863dc6d73c6591c9"
+  "source_tree_digest": "3e0c683d0ca45220a7435c0ccc13ffe6e3b24e5a802e3c6fee55b6954887f9c0"
  },
  "research_index": [
   {
