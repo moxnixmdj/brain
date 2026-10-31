@@ -156,6 +156,82 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
     )
 
 
+# ------------------------------------------------------------------ object roles
+#
+# A declared input contract binds for a SIBLING row as easily as for the row the
+# sentence meant.  Measured on main f333567, three trials out of three:
+#
+#   "Rename the parameter text to value in the python module <D>/app/models.py."
+#     -> python.refactor.rename_symbol.v1
+#     -> PASS, and the FUNCTION was renamed: "def value(text, scale=1)"
+#     the parameter is still `text` and its caller still passes it positionally,
+#     so the module's public name changed and the rename the sentence asked for
+#     did not happen.
+#   ... the same sentence plus "and save the report to <D>/r.json" -> the correct
+#   row (python.refactor.rename_parameter.v1) and the correct edit.
+#
+# The binder was not wrong: `qualname=norm, new_symbol=value` binds perfectly.  It
+# binds the WRONG OBJECT.  English says which object a rename is about, and the
+# registry already says which object each row edits, in its own slot vocabulary:
+# `old_param`/`new_param` for a parameter, `qualname`/`new_symbol` for a symbol.
+# So the role is not invented here -- it is read off the sentence's noun and off
+# the row's declared slots, and admission refuses when they disagree.
+# The name after the noun must BE a name, not the head of a path: in "the python
+# module canonical/x/models.py" the next word is `canonical`, which is a valid
+# identifier, and reading it as a symbol role made every parameter sentence state
+# both roles at once.  So the identifier may not be continued by `/` or by a
+# dotted suffix.  Measured: without this the role rule never fired.
+_NAME_END = r"(?![./][A-Za-z0-9_])"
+_ROLE_WORDS: tuple[tuple[str, "re.Pattern[str]"], ...] = (
+    ("PARAMETER", re.compile(r"\b(?:parameter|argument|kwarg|keyword\s+argument)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
+    ("LOCAL", re.compile(r"\b(?:local\s+variable|variable)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
+    ("SYMBOL", re.compile(r"\b(?:function|method|class|symbol|def)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
+)
+# The row's own declaration of what it edits, in the registry's existing slots.
+_ROLE_SLOTS: tuple[tuple[str, frozenset[str]], ...] = (
+    ("PARAMETER", frozenset({"old_param", "new_param", "param", "parameter", "param_name"})),
+    ("LOCAL", frozenset({"local_name", "variable", "variable_name"})),
+    ("SYMBOL", frozenset({"qualname", "symbol", "old_symbol", "new_symbol", "symbol_name", "old_name"})),
+)
+
+
+def stated_object_roles(goal: str) -> set[str]:
+    """The object roles the sentence names, from the nouns it puts before them."""
+    text = str(goal or "")
+    return {role for role, pattern in _ROLE_WORDS if pattern.search(text)}
+
+
+def object_role_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
+    """A PASS whose row edits a DIFFERENT KIND of object than the sentence names.
+
+    The admission gate above refuses the mismatch when a sentence reaches a row
+    through its declared contract.  This is the same law read at the EXIT, because
+    a sentence can reach a row by other routes -- an explicit capability id, a
+    decisive lexical margin, the front compiler's own pick -- and every one of
+    them still has to answer the object the sentence is about.
+
+    Measured on main f333567, 3/3: "Rename the parameter text to value in the
+    python module <D>/app/models.py." was answered by python.refactor.rename_symbol.v1,
+    which renamed the FUNCTION (`def value(text, ...)`) and reported PASS; the
+    parameter kept its name and the module's public name changed.  The bytes of
+    the named file DID change, so no byte-level gate could see it.
+
+    Only a CONTRADICTION is an error: a sentence that states no object role, or a
+    row that declares none, is untouched.
+    """
+    stated = stated_object_roles(goal)
+    declared = declared_object_roles(entry)
+    if stated and declared and not (stated & declared):
+        return ["OBJECT_ROLE_MISMATCH:" + "+".join(sorted(stated)) + "!=" + "+".join(sorted(declared))]
+    return []
+
+
+def declared_object_roles(entry: Mapping[str, Any]) -> set[str]:
+    """The object roles a registry row declares, from its own argument slots."""
+    slots = {str(k).lower() for k in (((entry.get("action_template") or {}).get("args")) or {})}
+    return {role for role, names in _ROLE_SLOTS if slots & names}
+
+
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
     dag = compiled.get("capability_dag")
@@ -289,8 +365,19 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     except Exception:  # noqa: BLE001 - any failure to re-verify is simply no admission here
         typed = None
     if isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True:
+        # ...and the contract must bind the object the sentence is ABOUT.
+        stated_roles = stated_object_roles(goal)
+        declared_roles = declared_object_roles(entry)
+        if stated_roles and declared_roles and not (stated_roles & declared_roles):
+            return {**base, "admitted": False, "rule": "OBJECT_ROLE_MISMATCH",
+                    "stated_object_roles": sorted(stated_roles),
+                    "capability_object_roles": sorted(declared_roles),
+                    "typed_admission": {"required_inputs": typed.get("required_inputs"),
+                                        "specific": True, "object_role_refused": True}}
         return {**base, "admitted": True, "rule": None,
                 "admission_basis": "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL",
+                "stated_object_roles": sorted(stated_roles),
+                "capability_object_roles": sorted(declared_roles),
                 "typed_admission": {"required_inputs": typed.get("required_inputs"), "specific": True}}
     # The same verdict read the other way.  `admit` had only ever been allowed to
     # GRANT admission; when it refused, its reason was thrown away and the route
@@ -4020,6 +4107,21 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     ]
     # close the loop: what memory offered is judged by what actually happened
     _credit_recall(recalled, bool(result.get("pass")))
+    if result.get("pass") is True:
+        _selected_id = str(compiled.get("selected_capability") or result.get("compiled_capability_id") or "")
+        _selected_entry = registry.get(_selected_id) or {}
+        _role_errors = object_role_errors(goal, _selected_entry) if _selected_entry else []
+        if _role_errors:
+            # Refuse here rather than report.  `solve()` then hands the sentence to the
+            # decisive typed plan, which names the row for the object the sentence
+            # actually states; if that also fails the refusal stands.
+            result["runtime_status_before_object_role_check"] = result.get("status")
+            result["status"] = "FAIL_CLOSED__OBJECT_ROLE_MISMATCH"
+            result["pass"] = False
+            result["failure_class"] = "OBJECT_ROLE_MISMATCH"
+            result["object_role_errors"] = _role_errors
+            result["object_role_stated"] = sorted(stated_object_roles(goal))
+            result["object_role_declared"] = sorted(declared_object_roles(_selected_entry))
     truth = tool_truth_errors(result)
     if truth and result.get("pass") is True:
         result["runtime_status_before_truth_check"] = result.get("status")
