@@ -1,0 +1,250 @@
+{
+ "bootstrap": "python3 execution_guard/toolchain_preflight_v1.py --bootstrap",
+ "capability_tools": {
+  "python.contract.check.crosshair.v1": [
+   "crosshair"
+  ],
+  "python.dynamic.crash_repro.v1": [],
+  "python.dynamic.differential_test.v1": [
+   "git"
+  ],
+  "python.packaging.build_package.v1": [
+   "pip"
+  ],
+  "python.packaging.dependency_add.v1": [
+   "pip"
+  ],
+  "python.perf.benchmark.v1": [],
+  "python.perf.cpu_profile.v1": [],
+  "python.perf.memory_profile.v1": [],
+  "python.quality.api_compatibility.v1": [],
+  "python.quality.changelog.v1": [],
+  "python.quality.coverage.v1": [
+   "coverage",
+   "pytest"
+  ],
+  "python.quality.duplication.v1": [],
+  "python.quality.flake_detect.v1": [
+   "pytest"
+  ],
+  "python.quality.license_scan.v1": [],
+  "python.quality.resource_leak.v1": [],
+  "python.refactor.change_signature.v1": [
+   "pytest"
+  ],
+  "python.refactor.extract_function.v1": [
+   "pytest"
+  ],
+  "python.refactor.inline_function.v1": [
+   "pytest"
+  ],
+  "python.refactor.move_function.v1": [
+   "pytest"
+  ],
+  "python.refactor.rename_parameter.v1": [
+   "pytest"
+  ],
+  "python.refactor.rename_symbol.v1": [
+   "pytest"
+  ],
+  "python.repo.diff_apply_full_testgate.v1": [
+   "pytest"
+  ],
+  "python.review.diff_coverage_gate.v1": [
+   "coverage",
+   "pytest"
+  ],
+  "python.review.diff_mutation_gate.v1": [
+   "pytest"
+  ],
+  "python.review.diff_security_gate.v1": [
+   "bandit"
+  ],
+  "python.review.diff_static_triage.v1": [
+   "ruff"
+  ],
+  "python.review.diff_type_gate.v1": [
+   "mypy"
+  ],
+  "python.software.issue_to_pr.orchestrate.v1": [
+   "pytest"
+  ],
+  "python.supply_chain.secret_scan.v1": [
+   "detect_secrets"
+  ],
+  "python.supply_chain.vulnerability_audit.v1": [
+   "pip_audit"
+  ],
+  "python.tests.generate.scaffold.v1": [
+   "pytest"
+  ],
+  "python.toolchain.bandit_security.v1": [
+   "bandit"
+  ],
+  "python.toolchain.mypy_typecheck.v1": [
+   "mypy"
+  ],
+  "python.toolchain.ruff_async_audit.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_complexity.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_dead_code.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_exception_audit.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_format.v1": [
+   "ruff"
+  ],
+  "python.toolchain.ruff_lint.v1": [
+   "ruff"
+  ]
+ },
+ "check": "python3 execution_guard/toolchain_preflight_v1.py",
+ "declared_at": "2026-10-28",
+ "distribution": {
+  "bandit": {
+   "absent_effect": "the security gate exits its process",
+   "blocks": [
+    "review_security"
+   ],
+   "declared_by_capability": "python.review.diff_security_gate.v1",
+   "import": "bandit",
+   "version": "1.9.4"
+  },
+  "coverage": {
+   "absent_effect": "the coverage gate exits its process; the diff is never measured",
+   "blocks": [
+    "review_coverage"
+   ],
+   "declared_by_capability": "python.review.diff_coverage_gate.v1",
+   "import": "coverage",
+   "version": "7.17.0"
+  },
+  "crosshair-tool": {
+   "absent_effect": "symbolic contract checking is unavailable; the capability looks broken instead",
+   "blocks": [
+    "contract_check"
+   ],
+   "declared_by_capability": "python.contract.check.crosshair.v1",
+   "import": "crosshair",
+   "metadata_name": "crosshair-tool",
+   "version": "0.0.112"
+  },
+  "detect-secrets": {
+   "absent_effect": "the secret_scan act has no engine at all: bandit reports 2 of 4 planted credentials because it matches VARIABLE NAMES, and misses an AWS access-key id and a Slack token entirely",
+   "blocks": [
+    "secret_scan"
+   ],
+   "declared_by_capability": "python.supply_chain.secret_scan.v1",
+   "import": "detect_secrets",
+   "metadata_name": "detect-secrets",
+   "version": "1.5.0"
+  },
+  "mypy": {
+   "absent_effect": "the type gate exits its process rather than reporting a verdict",
+   "blocks": [
+    "review_type"
+   ],
+   "declared_by_capability": "python.review.diff_type_gate.v1",
+   "import": "mypy",
+   "version": "2.4.0"
+  },
+  "pip-audit": {
+   "absent_effect": "the vulnerability_audit act has no advisory source at all: bandit carries no CVE/OSV data, so 'audit dependencies for vulnerabilities' was 0/0",
+   "blocks": [
+    "vulnerability_audit"
+   ],
+   "declared_by_capability": "python.supply_chain.vulnerability_audit.v1",
+   "import": "pip_audit",
+   "metadata_name": "pip-audit",
+   "version": "2.10.1"
+  },
+  "pytest": {
+   "absent_effect": "the machine loses the ability to VERIFY ITS OWN WORK: the full test gate, the coverage gate, and both refactor capabilities that re-run the suite after editing are gone.  Highest blast radius of any entry here -- pytest is the oracle the repair loop uses, so without it 'repaired' is unmeasurable.",
+   "blocks": [
+    "rename_symbol",
+    "rename_param",
+    "repo_diff_apply",
+    "review_coverage"
+   ],
+   "declared_by_capability": "python.repo.diff_apply_full_testgate.v1",
+   "import": "pytest",
+   "version": "9.2.0"
+  },
+  "ruff": {
+   "absent_effect": "nothing on the 22-task surface; declared for the lint/format acts that do not exist yet",
+   "blocks": [],
+   "declared_by_capability": null,
+   "import": "ruff",
+   "version": "0.17.3"
+  },
+  "tree-sitter": {
+   "absent_effect": "nothing on the 22-task surface; the parse capability itself needs it",
+   "blocks": [],
+   "declared_by_capability": "code.multilanguage.parse.tree_sitter.v1",
+   "import": "tree_sitter",
+   "metadata_name": "tree-sitter",
+   "version": "0.26.0"
+  },
+  "z3-solver": {
+   "absent_effect": "crosshair-tool cannot solve; the contract check reports a crash, not a verdict",
+   "blocks": [
+    "contract_check"
+   ],
+   "declared_by_capability": "python.contract.check.crosshair.v1",
+   "import": "z3",
+   "metadata_name": "z3-solver",
+   "version": "5.3.2.0"
+  }
+ },
+ "measurements": {
+  "clean_image_bare_python3": {
+   "bind": "22/22",
+   "failing": [
+    "rename_symbol",
+    "rename_param",
+    "repo_diff_apply",
+    "review_coverage",
+    "review_security",
+    "review_type",
+    "contract_check",
+    "mutation_gate"
+   ],
+   "pass": "14/22",
+   "select": "19/22"
+  },
+  "note": "identical commits; only the interpreter and its installed distributions differ",
+  "with_this_declaration_installed": {
+   "bind": "22/22",
+   "failing": [],
+   "pass": "22/22",
+   "select": "22/22"
+  }
+ },
+ "schema": "brain.toolchain.declaration.v1",
+ "why": [
+  "A capability is not the adapter file.  It is the adapter PLUS the software that adapter calls,",
+  "and nothing in this repository stated that second half in a form a gate could check: the live",
+  "registry's `source` block is human prose ('python stdlib ast/pytest + git'), and",
+  "`declared_dependency_executables` is empty for all 419 verified capabilities.  Measured on a",
+  "clean checkout of this branch: the 22-task hardcore-SE probe reads 14/22 pass with no venv and",
+  "22/22 pass with one.  The same commit, the same code, eight capabilities appearing and",
+  "disappearing -- because the toolchain they need was never declared, so nothing could install it",
+  "and nothing could warn that it was missing.",
+  "Every entry below was attributed BY MEASUREMENT, not by reading the source: the module was",
+  "blocked with an import hook and the 22-task probe re-run, so `blocks` lists exactly the tasks",
+  "that fail when that module is absent (execution_guard/toolchain_preflight_v1.py --attribute)."
+ ],
+ "why_capability_tools": [
+  "A shared adapter serves several verbs (toolchain_v1 runs ruff, mypy, bandit, coverage and",
+  "crosshair), so reading the TOOLS out of the source attributes the UNION to every verb that",
+  "uses it -- which would make ruff_format demand mypy.  This map is per capability and each row",
+  "was measured: the verb failed on a bare interpreter with TOOL_NOT_INSTALLED naming that tool,",
+  "or with a suite that could not run because pytest was absent.",
+  "An empty row is a claim as well: it says this capability invokes no external tool, and it must be stated, because the fallback (read the tools out of the adapter) attributes the union of a shared adapter to every verb that uses it."
+ ]
+}

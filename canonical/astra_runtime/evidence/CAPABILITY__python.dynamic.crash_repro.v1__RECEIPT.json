@@ -1,0 +1,31 @@
+{
+ "artifact_sha256": "a1ab299ae0315ee2d150171b99d9cb0c96547aae7637adbc02c2593cae87ebb8",
+ "capability_id": "python.dynamic.crash_repro.v1",
+ "elapsed_ms": null,
+ "entrypoint": "run",
+ "executor": "execution_guard/capability_evidence_probe_v1.py",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "invoked_args": {
+  "act_verb": "crash_repro",
+  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_2mke5c0z/first/out/crash_repro.json",
+  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_2mke5c0z/first/crash_fixture/calc.py"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/dynamic_probe_v1.py",
+ "module_sha256": "da3690eabf3125e0ba3814ea64c51574791dcd0f71bbb58298802e85e5e3f1ff",
+ "observed": {
+  "gate": "PASS",
+  "output_verified": true
+ },
+ "outcome": "EXECUTED",
+ "planted_defect": "the divide-by-zero in `divide`, found without being told which function crashes and shrunk to `divide(0, 0)`",
+ "planted_defect_found": true,
+ "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+ "producer_independent": false,
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.crash_repro.v1__RECEIPT.json",
+ "reproduced_on_second_run": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

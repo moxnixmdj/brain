@@ -320,6 +320,27 @@ def _is_record_collection(data):
     return False
 
 
+# The world's file list does not change inside one process, and `_world_path_for` is asked for
+# the same kind once per capability.  Without this cache every ask re-SORTED the whole index and
+# re-matched every entry against the kind's suffixes: measured on this repository (15,181 files,
+# 9,458 of them JSON), `test_every_capability_is_reachable_from_one_sentence_by_prose_or_by_name`
+# ran for more than 90 seconds and died inside this list comprehension, so the compiler suite --
+# the only instrument that can see a routing regression -- could not finish at all.  The cache is
+# keyed on (root, kind), and the index it reads is already cached and rebuilt per process.
+_ORDERED_CACHE: dict[tuple[str, str], tuple[str, ...]] = {}
+
+
+def _ordered_for_kind(root, key, suffixes, substrings):
+    cache_key = (str(root), str(key))
+    cached = _ORDERED_CACHE.get(cache_key)
+    if cached is None:
+        from canonical.runtime import world_probe_v1 as WP
+        cached = tuple(rel for rel in sorted(WP._index(root))
+                       if WP._matches_kind(rel, suffixes, substrings))
+        _ORDERED_CACHE[cache_key] = cached
+    return cached
+
+
 def _first_with_records(rel_paths, root):
     """The first candidate that actually holds records, within a bounded scan.
 
@@ -367,8 +388,7 @@ def _world_path_for(name, cid, root):
     for keys in (WP.kind_keys_for(str(name)), WP.kind_keys_for(str(cid))):
         for key in sorted(keys):
             suffixes, substrings = WP._FILE_KINDS[key]
-            ordered = [rel for rel in sorted(WP._index(root))
-                       if WP._matches_kind(rel, suffixes, substrings)]
+            ordered = _ordered_for_kind(root, key, suffixes, substrings)
             if not ordered:
                 continue
             if key in _STRUCTURED_KINDS:

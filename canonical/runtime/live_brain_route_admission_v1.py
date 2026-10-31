@@ -59,6 +59,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -144,6 +145,234 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
     )
 
 
+# The verbs a request is MADE of, not the act it asks for: "Show me the git status", "Write
+# the changelog", "Find the dead code".  A sentence opening with one of these states its act
+# somewhere else, so the act vocabulary check below does not apply to it.
+_REQUEST_VERBS = frozenset({
+    "show", "give", "tell", "list", "report", "write", "save", "send", "return", "print",
+    "find", "search", "look", "check", "verify", "validate", "confirm", "inspect", "examine",
+    "get", "read", "open", "load", "fetch", "produce", "generate", "create", "make", "build",
+    "add", "remove", "delete", "update", "change", "modify", "apply", "perform", "run",
+    "execute", "invoke", "call", "use", "using", "with", "please", "let", "keep", "ensure",
+    "must", "should", "can", "i", "we", "you", "it", "this", "that", "there", "do", "does",
+    "have", "has", "want", "need", "take", "put", "set", "start", "stop", "repeat", "again",
+    # "Scan", "measure", "detect", "review": the same class.  Measured on the 43-act probe:
+    # "Scan the repository R for leaked secrets" selected the security analyser and was then
+    # REJECTED with "scan is owned by python.quality.license_scan.v1" -- the word `scan` is in
+    # that capability's id, and a request verb in an id is not a claim on an act.  The
+    # capability that matched `leaked` and `secrets` was refused in favour of nothing.
+    "scan", "measure", "detect", "review", "analyze", "analyse", "collect", "compute",
+    "count", "check", "display", "dump", "emit", "log", "note", "observe", "track",
+})
+
+
+def _registry_vocabulary(registry: Mapping[str, Mapping[str, Any]]) -> set[str]:
+    """Every word the registry claims to act on: its keywords, its identifiers, its provides."""
+    words: set[str] = set()
+    for cid, entry in registry.items():
+        try:
+            for keyword in (entry.get("keywords") or []):
+                # The phrase AND its words: "duplicated code" is how a capability says it acts on
+                # duplication, and the sentence says "the duplicated code".  Keeping only the
+                # phrase made the sentence's own word unheard -- measured: `Find the duplicated
+                # code in X` was refused R14 UNHEARD_ACT_WORD:duplicated while
+                # python.quality.duplication.v1 sat in the registry with that exact phrase.
+                low = str(keyword).lower()
+                words.add(low)
+                words.update(re.findall(r"[a-z0-9]+", low))
+            words.update(re.findall(r"[a-z0-9]+", str(cid).lower()))
+            words.update(re.findall(r"[a-z0-9]+", " ".join(entry.get("provides") or []).lower()))
+        except Exception:  # noqa: BLE001 - an unreadable entry claims nothing extra
+            continue
+    return {w for w in words if w}
+
+
+def _stated_act_is_unknown(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> str:
+    """The act a sentence opens with that no capability claims, or ''.
+
+    Only the sentence's own opening act word is judged, and only when it is not one of the
+    request verbs every sentence is made of -- so this refuses "Bisect the history of R"
+    (no capability is about bisecting) while leaving "Show me the git status of R" to the
+    evidence rules that already decide it.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _croute
+        word = _croute._stated_action_word(str(goal or ""))
+    except Exception:  # noqa: BLE001 - an unreadable sentence claims no act
+        return ""
+    if not word or word in _REQUEST_VERBS or len(word) < 3:
+        return ""
+    vocabulary = _registry_vocabulary(registry)
+    if word in vocabulary:
+        return ""
+    for claimed in vocabulary:
+        # Inflections of ONE act -- "audit"/"audits", "debug"/"debugging", "lint"/"linting".
+        if len(claimed) >= 4 and (claimed.startswith(word) or word.startswith(claimed)):
+            return ""
+    return word
+
+
+def _act_owned_by_someone_else(goal: str, selected: str,
+                               registry: Mapping[str, Mapping[str, Any]]) -> tuple[str, str] | None:
+    """(act, owner) when exactly one OTHER capability names the act the sentence opens with.
+
+    Narrow on purpose: one owner, and only when the owner names the word itself (a keyword or
+    its own identifier), not a stem, not a phrase.  Two owners means the word does not identify
+    an act, and the evidence rules that already exist decide it.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _croute
+        word = _croute._stated_action_word(str(goal or ""))
+    except Exception:  # noqa: BLE001 - an unreadable sentence claims no act
+        return None
+    if not word or word in _REQUEST_VERBS or len(word) < 3:
+        return None
+    owners = []
+    for cid, entry in registry.items():
+        if str(cid) == str(selected):
+            continue
+        try:
+            words = {str(x).lower() for x in (entry.get("keywords") or [])}
+            words |= set(re.findall(r"[a-z0-9]+", str(cid).lower()))
+        except Exception:  # noqa: BLE001 - an unreadable entry names nothing
+            continue
+        if word in words:
+            owners.append(str(cid))
+    if len(owners) != 1:
+        return None
+    # The selected capability must not also name it: then both claim the act and the evidence
+    # decides, exactly as it did before this rule existed.
+    try:
+        chosen = registry.get(str(selected)) or {}
+        chosen_words = {str(x).lower() for x in (chosen.get("keywords") or [])}
+        chosen_words |= set(re.findall(r"[a-z0-9]+", str(selected).lower()))
+    except Exception:  # noqa: BLE001
+        chosen_words = set()
+    if word in chosen_words:
+        return None
+    # THE SELECTED CAPABILITY MAY NAME A MORE SPECIFIC ACT THAN THE VERB DOES.
+    #
+    # `word` is the sentence's OPENING verb, and an opening verb is often the generic one:
+    # "Measure the cyclomatic complexity of the python source ..." opens with `measure`, which
+    # python.repository.acceptance.measure.v1 names and python.toolchain.ruff_complexity.v1 does
+    # not -- so this rule rejected the analyser that performs the act and reported "measure is
+    # owned by another capability".  The refusal was correct in form and wrong in fact: the
+    # sentence's DISTINCTIVE words are `cyclomatic` and `complexity`, and only the selected
+    # capability names them.  So when the selected entry matches a word the supposed owner does
+    # not, the sentence is more specific than its own first verb and the evidence decides.
+    goal_words = {str(w).lower() for w in re.findall(r"[a-z0-9]+", str(goal or "").lower())}
+    owner_entry = registry.get(owners[0]) or {}
+    owner_words = {str(x).lower() for x in (owner_entry.get("keywords") or [])}
+    owner_words |= set(re.findall(r"[a-z0-9]+", str(owners[0]).lower()))
+    specific = (goal_words & chosen_words) - owner_words
+    if specific:
+        return None
+    return (word, owners[0])
+
+
+_PROSE_STOPWORDS = frozenset({
+    "the", "and", "for", "with", "from", "into", "onto", "that", "this", "these", "those",
+    "then", "than", "them", "they", "there", "here", "each", "every", "some", "any", "all",
+    "its", "it", "is", "are", "was", "were", "be", "been", "being", "has", "have", "had",
+    "its", "our", "your", "their", "which", "what", "when", "where", "while", "also", "just",
+    # A wh-word is a question, not an act.  Measured: "Check whether the knowledge in X and Y is
+    # consistent" was refused with R14_UNHEARD_ACT_WORD:whether -- the machine declined to answer
+    # because it had never heard the word "whether" as an act.  It has not, and never will.
+    "whether", "whatever", "whichever", "whenever", "wherever", "why", "who", "how", "whoever",
+    "only", "very", "more", "most", "less", "least", "such", "same", "other", "another",
+    "should", "would", "could", "must", "may", "can", "will", "shall", "please", "using",
+    "use", "used", "make", "made", "make", "give", "keep", "take", "want", "need", "let",
+    "python", "source", "code", "file", "files", "path", "paths", "report", "output",
+    # Determiners and ordinals: they qualify a thing, they never name the act of a sentence.
+    "previous", "last", "first", "next", "new", "existing", "current", "same", "whole",
+    "entire", "some", "several", "many", "much", "both", "either", "neither", "each",
+    # Interrogatives: they open a question, they never name what is asked about.
+    "whether", "what", "which", "how", "why", "when", "where", "who", "whom", "whose",
+})
+
+
+_INFLECTIONS = frozenset({
+    "s", "es", "ed", "d", "ing", "ion", "ions", "ation", "ations", "ly", "er", "ers",
+    "ment", "ments", "ness", "ity", "ive", "able", "al", "y", "en",
+})
+
+
+def _is_a_form_of(word: str, claimed: str) -> bool:
+    """Is `word` the same word as `claimed`, allowing an inflectional ending?"""
+    if word == claimed:
+        return True
+    if claimed.startswith(word) and len(word) >= 4:
+        return claimed[len(word):] in _INFLECTIONS
+    if word.startswith(claimed) and len(claimed) >= 4:
+        return word[len(claimed):] in _INFLECTIONS
+    return False
+
+
+def _unheard_act_word(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> str:
+    """A content word in the sentence that the registry has NEVER heard as an act.
+
+    Measured: "Find the flaky tests in the repository R" was answered by the CHANGELOG
+    builder with a PASS, because `report` and `repository` -- the words that name the artifact
+    and the medium, not the act -- were the only evidence, and the declared-input contract
+    bound.  Bindability is not relevance: a capability whose inputs fit proves where the
+    values go, never that it performs what was asked.
+
+    So when the evidence is generic AND the sentence carries a content word that appears
+    nowhere in the registry's vocabulary, the answer is a refusal that names that word.  It is
+    the same discipline as R12 (an act this brain does not perform), applied to the word that
+    actually distinguishes the act instead of to the sentence's opening verb.
+    """
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+        text = _front.without_stated_text_value(str(goal or ""))
+    except Exception:  # noqa: BLE001 - no front grammar, no claim to make
+        return ""
+    try:
+        from canonical.runtime import goal_compiler as _gc
+        for raw, _resolved in _gc._repo_paths(text, ROOT):
+            text = text.replace(str(raw), " ")
+    except Exception:  # noqa: BLE001 - a path that cannot be read is simply not a word
+        pass
+    # A filesystem path is a VALUE, not a word about the act: "/home/user/..." made `home` an
+    # unheard act word, and a ref named `main` did the same.  Absolute paths, drive paths and
+    # anything carrying an extension are dropped before the vocabulary test.
+    text = re.sub(r"(?:[A-Za-z]:[\\/]|/)\S*", " ", text)
+    text = re.sub(r"\S+\.\w{1,5}\b", " ", text)
+    vocabulary = _registry_vocabulary(registry)
+    for token in re.findall(r"[A-Za-z][A-Za-z0-9]+", text):
+        word = token.lower()
+        if len(word) < 4 or word in _PROSE_STOPWORDS or word in _REQUEST_VERBS:
+            continue
+        if word in vocabulary:
+            continue
+        # AN INFLECTION, not a shared prefix.  A prefix is not evidence of the same word:
+        # measured, "Run a differential test of X against a reference" was never flagged because
+        # `different` starts `differential` -- the one word that names the act was "heard" through
+        # a different word.  Two words are the same word here only when the shorter is the longer
+        # with an inflectional ending on it.
+        if any(_is_a_form_of(word, claimed) for claimed in vocabulary):
+            continue
+        return word
+    return ""
+
+
+def _unheard_is_the_requested_object(goal: str, unheard: str, registry: Mapping[str, Mapping[str, Any]]) -> bool:
+    """Is this unheard word what the sentence's opening request verb asks about?"""
+    try:
+        from canonical.runtime import goal_compiler as _gc
+        head = _gc._head_verb(goal)
+    except Exception:  # noqa: BLE001 - no parser, no claim
+        return False
+    if not head or head not in _REQUEST_VERBS:
+        return False
+    words = [w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9]+", str(goal or ""))]
+    for word in words[words.index(head) + 1:]:
+        if len(word) < 4 or word in _PROSE_STOPWORDS or word in _REQUEST_VERBS:
+            continue
+        return word == unheard
+    return False
+
+
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
     dag = compiled.get("capability_dag")
@@ -158,6 +387,31 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     entry = registry.get(selected)
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
+    # An act this brain has never claimed to perform must be REFUSED, not answered by whichever
+    # capability shares a word with the sentence.  Measured over 43 acts an engineer asks for
+    # that the registry holds no capability for: 18 of them were answered with a PASS and a
+    # credible artifact -- "Bisect the history of the repository R" by a `git log` LISTING,
+    # "Lint the python source R/pkg" by an AST parser, "Fuzz the function add" by the same
+    # parser.  The reader that says what act a sentence asks for already exists
+    # (`_stated_action_word`), and the registry already says which words it can act on.
+    # ... and the same is true in the other direction.  A capability that CLAIMS the act must be
+    # the one that answers it; when the sentence's act verb is named by exactly one entry and a
+    # DIFFERENT entry was selected, the selected one is answering a request it does not perform.
+    # Measured after the analyser capabilities were registered: adding the act vocabulary turned
+    # five honest refusals into hollow passes, because the front layer still preferred the AST
+    # parser that matched the medium ("python source") over the analyser that matched the act.
+    # Refusing here is the honest half of that: the caller is told the act exists and which
+    # capability owns it, instead of receiving an artifact about something else.
+    other_owner = _act_owned_by_someone_else(goal, selected, registry)
+    if other_owner:
+        return {"schema": SCHEMA, "admitted": False,
+                "rule": "R13_STATED_ACT_IS_OWNED_BY_ANOTHER_CAPABILITY:%s:%s" % other_owner,
+                "compiler_mode": mode, "selected_capability": selected}
+    unknown_act = _stated_act_is_unknown(goal, registry)
+    if unknown_act:
+        return {"schema": SCHEMA, "admitted": False,
+                "rule": "R12_STATED_ACT_IS_NOT_AN_ACT_THIS_BRAIN_PERFORMS:" + unknown_act,
+                "compiler_mode": mode, "selected_capability": selected}
     # A sentence that states a settled command line states a COMMAND, and a
     # capability that cannot run a command line cannot answer it -- however many
     # of the sentence's words its keywords happen to contain.  The retrieval
@@ -183,7 +437,7 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {"schema": SCHEMA, "admitted": False,
                 "rule": "WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
                 "compiler_mode": mode, "selected_capability": selected}
-    if composer_route.extract_argv(goal) is not None:
+    if composer_route.statement_is_a_command_line(goal):
         _slots = {str(k or "").lower() for k in
                   ((entry.get("action_template") or {}).get("args") or {})}
         # A COMMAND slot is a command slot whatever it is called.  Measured on
@@ -249,12 +503,42 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # R3_WEAK_EVIDENCE, one semantic token).  Re-verified HERE rather than trusting a rule string, and
     # only for a SPECIFIC contract: a capability whose only input is the whole request binds any
     # sentence at all, so binding it proves nothing about what was asked for.
+    # THE WORD THAT NAMES THE ACT IS THE EVIDENCE, NOT THE WORD THAT NAMES THE ARTIFACT.
+    # Placed before the typed admission, because a bound contract proves where the values go
+    # and never that this capability performs what was asked.
+    _unheard = _unheard_act_word(goal, registry)
+    # Two readings of the same defect.  (a) The evidence is only artefact and medium words, and
+    # the sentence carries a word no capability has ever heard: nothing names the act.  (b) The
+    # sentence opens with a request verb ("find", "check", "scan") and the FIRST thing that verb
+    # is asked to find is itself unheard: "Find the flaky tests" -- `flaky` is in no capability's
+    # vocabulary, so `python.quality.coverage.v1` measured test coverage and reported PASS, which
+    # is a true statement about a different question.  A request verb is a frame, and the frame's
+    # object has to be something this machine knows how to reason about.
+    if _unheard and ((semantic and semantic <= goal_compiler.GENERIC_MATCH_TOKENS)
+                     or _unheard_is_the_requested_object(goal, _unheard, registry)):
+        return {**base, "admitted": False,
+                "rule": "R14_UNHEARD_ACT_WORD:%s" % _unheard,
+                "admission_basis": "GENERIC_EVIDENCE_FOR_AN_ACT_NO_CAPABILITY_NAMES"}
     try:
         from canonical.runtime import capability_selection_retrieval_v1 as _selection
         typed = _selection.admit(goal, selected, entry, ROOT)
     except Exception:  # noqa: BLE001 - any failure to re-verify is simply no admission here
         typed = None
-    if isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True:
+    # ...and the contract proves nothing on its own either.  A capability binds a sentence it
+    # shares ONE WORD with, and that word need not be the act it performs: `python.source.
+    # symbols.index.ast` was admitted for "Make the network calls in X retry safely" on the single
+    # keyword `calls` (score 4, no other candidate above 5) and PASSed, answering a request for a
+    # retry policy with a symbol index.  So a bound contract admits only when the sentence says at
+    # least two things this capability is about, OR the one thing it says is the ACT (its own
+    # name) or the EFFECT (its provides) rather than an incidental keyword.  A sentence that
+    # shares NO word with the capability is not that case -- there the declared contract is the
+    # whole of the evidence (measured: "Audit the pypi wheel artifact provenance and sha256
+    # download hash on <a> with selection <b> and save the report to <c>" overlaps the capability
+    # not once, and the pinned binder places all three files; refusing it was a regression).
+    _act_or_effect = semantic & (set(evidence.get("matched_provides") or [])
+                                 | set(evidence.get("matched_identity") or []))
+    if (isinstance(typed, Mapping) and typed.get("admitted") is True and typed.get("specific") is True
+            and (len(semantic) >= 2 or _act_or_effect or not matched)):
         return {**base, "admitted": True, "rule": None,
                 "admission_basis": "DECLARED_INPUT_CONTRACT_FULLY_STATED_IN_GOAL",
                 "typed_admission": {"required_inputs": typed.get("required_inputs"), "specific": True}}
@@ -614,11 +898,54 @@ def failure_kind(result: Mapping[str, Any]) -> str:
     return FAILURE_KIND_UNKNOWN
 
 
+def _blocked_by(reason: Any) -> str | None:
+    """The module or tool a failure names as missing, when it names one.
+
+    ``failure_kind`` says a failure is environmental; this says WHICH dependency,
+    which is the part a caller can act on.  Read off the message the interpreter or
+    the adapter already wrote -- nothing is probed and nothing is installed.
+    """
+    text = str(reason or "")
+    match = _MISSING_MODULE_RE.search(text)
+    if match:
+        return match.group("module")
+    match = _MISSING_TOOL_RE.search(text)
+    if match:
+        return match.group("tool")
+    return None
+
+
+_MISSING_MODULE_RE = re.compile(r"No module named '?(?P<module>[A-Za-z_][A-Za-z0-9_.]*)'?")
+_MISSING_TOOL_RE = re.compile(r"(?:NOT_FOUND|NOT_INSTALLED|NOT_PRESENT_HERE)[:](?P<tool>[A-Za-z0-9_.+-]+)")
+
+
+def _classify(out: dict[str, Any]) -> dict[str, Any]:
+    """Attach the failure KIND to a closed failure, using the classifier that exists.
+
+    ``failure_kind`` was written for exactly this distinction -- "a defect is never
+    reported as a refusal" -- and is pinned by its own test file, but the live entry
+    point never called it.  Measured: the four-step, five-, eight- and ten-step DAG
+    tests all came back ``FAIL__CAPABILITY_DAG_RESULT_INVALID`` while the actual
+    reason was ``ModuleNotFoundError: No module named 'et_xmlfile'`` -- openpyxl's
+    own dependency, absent from this box.  A missing dependency was being reported
+    as an invalid result, which is the one thing the classifier exists to prevent.
+    """
+    reason = out.get("reason")
+    if reason is None:
+        return out
+    kind = failure_kind({"reason": str(reason)})
+    out["failure_kind"] = kind
+    blocked_by = _blocked_by(reason)
+    if blocked_by:
+        out["blocked_by"] = blocked_by
+    return out
+
+
 def _fail(task_id: str, status: str, failure_class: str, started: int, **extra: Any) -> dict[str, Any]:
     out = {"schema": LIVE_SCHEMA, "status": status, "pass": False, "task_id": task_id, "failure_class": failure_class,
            "executed": extra.pop("executed", False), "elapsed_ns": perf_counter_ns() - started, "incremental_spend_usd": 0}
     out.update(extra)
-    return out
+    return _classify(out)
 
 
 def _controller_passed(controller: Any) -> bool:
@@ -718,7 +1045,24 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure("BOUND_CAPABILITY_ENTRYPOINT_MISSING")
     call_args = dict(action.get("args") or {})
     call_args.pop("capability_id", None)
-    result = fn(call_args, ROOT)
+    # A CAPABILITY MAY NOT KILL THE PROCESS THAT CALLED IT.
+    #
+    # 19 of the bound adapters report failure by raising SystemExit with a JSON body
+    # (`raise SystemExit(json.dumps({"error": True, "reason": ...}))`).  SystemExit is a
+    # BaseException, so the `except Exception` in _execute_locally never saw it: measured on
+    # this branch, `run_adapter_locally(python.issue.natural_language.parse_edit_intent.v1,
+    # {})` terminated the interpreter outright.  A long-running agent that runs an adapter
+    # with a missing argument therefore DIES instead of being told the argument is
+    # missing -- and the caller cannot tell which capability did it, because the process is
+    # gone.  The adapter's exit payload is already the diagnosis it wanted to give, so it
+    # is converted to the same closed failure every other refusal uses.
+    try:
+        result = fn(call_args, ROOT)
+    except SystemExit as exc:
+        detail = exc.code
+        if isinstance(detail, int) or detail is None:
+            detail = "exit_code=%s" % (detail,)
+        raise LocalExecutionFailure(str(detail)[:2000]) from None
     if not isinstance(result, dict):
         raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
     result.setdefault("capability_id", cid)
@@ -933,6 +1277,15 @@ def _dag_result(task_id: str, goal: str, compiled: Mapping[str, Any], raw_contra
     if reason is not None:
         out["failure_class"] = "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
         out["reason"] = str(reason)[:1600]
+        _classify(out)
+        if out.get("failure_kind") == FAILURE_KIND_ENVIRONMENT:
+            # AN ABSENT DEPENDENCY IS NOT AN INVALID RESULT.  The plan was fine, the
+            # executor was fine, and the machine does not have the module -- saying
+            # "invalid result" hides that from the caller and from every measurement
+            # that buckets failures by status.  The repo's own law is already
+            # ENVIRONMENT_BLOCKED_CAPABILITIES_ARE_NOT_PASSES; this gives it a name
+            # the DAG path can report.  pass stays False either way.
+            out["status"] = "BLOCKED__CAPABILITY_DAG_ENVIRONMENT_BLOCKER"
     return out
 
 
@@ -1017,6 +1370,63 @@ def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any]
     )
     return _dag_result(task_id, goal, compiled, raw_contract, DAG_KERNEL_EXECUTOR, rows, passed, started,
                        controller=controller, checkpoint=checkpoint)
+
+
+def _capability_ids_in(compiled: Mapping[str, Any]) -> list[str]:
+    """Every capability this plan will call, in order."""
+    ids: list[str] = []
+    selected = str(compiled.get("selected_capability") or "").strip()
+    if selected:
+        ids.append(selected)
+    dag = compiled.get("capability_dag")
+    if isinstance(dag, Mapping):
+        for step in dag.get("steps") or []:
+            if isinstance(step, Mapping):
+                cid = str(step.get("capability_id") or step.get("selected_capability") or "").strip()
+                if cid and cid not in ids:
+                    ids.append(cid)
+    for part in compiled.get("compiled_parts") or []:
+        if isinstance(part, Mapping):
+            cid = str(part.get("capability_id") or part.get("selected_capability") or "").strip()
+            if cid and cid not in ids:
+                ids.append(cid)
+    return ids
+
+
+def _toolchain_refusal(compiled: Mapping[str, Any]) -> tuple[str, str] | None:
+    """(capability_id, reason) when a capability in this plan has no engine here.
+
+    Measured: the same commit answers 32 of 43 acts with its declared toolchain installed and 16
+    without it, and thirteen of the losses were reported as `OWNED_BUT_FAILED` -- the capability
+    blamed for a package nobody installed.  The gate turns each of those into one refusal that
+    names the tool and the command that installs it, and installs it first when this interpreter
+    is one we manage.
+    """
+    try:
+        from canonical.runtime import capability_receipt_lane_v1 as _lane
+        from canonical.runtime import toolchain_gate_v1 as _gate
+    except Exception:  # noqa: BLE001 - no gate module, no claim to make
+        return None
+    try:
+        from pathlib import Path as _Path
+        _root = _Path(__file__).resolve().parents[2]
+    except Exception:  # noqa: BLE001
+        _root = None
+    for capability_id in _capability_ids_in(compiled):
+        try:
+            entry = load_verified_registry().get(capability_id)
+        except Exception:  # noqa: BLE001 - an unreadable registry claims nothing
+            entry = None
+        if not entry:
+            continue
+        try:
+            module_path = _lane._bound_module_path(str(_root), entry)
+            ok, missing, _installed, _detail = _gate.check(capability_id, module_path)
+        except Exception:  # noqa: BLE001 - a gate that cannot read the adapter must not decide
+            continue
+        if not ok and missing:
+            return capability_id, _gate.refuse_reason(missing)
+    return None
 
 
 def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: Mapping[str, Mapping[str, Any]], started: int) -> dict[str, Any]:
@@ -1170,6 +1580,27 @@ _TOOL_NOUNS = ("loop", "search", "tool", "engine", "report", "step", "routine",
                "capability", "pass")
 
 
+def _path_spans(text: str) -> list[tuple[int, int]]:
+    """Character spans of every repository path the sentence spells out.
+
+    Used to answer "was this word part of a VALUE?" without disturbing the
+    positions of the words around it, which the callers rely on to find the file
+    a verb governs.
+    """
+    spans = []
+    for raw, path in goal_compiler._repo_paths(text, ROOT):
+        for spelling in {str(raw), str(path)}:
+            start = text.find(spelling)
+            while start >= 0:
+                spans.append((start, start + len(spelling)))
+                start = text.find(spelling, start + 1)
+    return spans
+
+
+def _inside_spans(pos: int, spans) -> bool:
+    return any(start <= pos < end for start, end in spans)
+
+
 def _promised_source_files(goal: str) -> list[str]:
     """Source files the goal asked to have CHANGED, not merely read.
 
@@ -1187,8 +1618,17 @@ def _promised_source_files(goal: str) -> list[str]:
     # the test Y passes" names Y as the WITNESS; demanding Y change too would
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
+    spans = _path_spans(text)
     out = []
     for m in _REPAIR_VERB_RE.finditer(text):
+        if _inside_spans(m.start(), spans):
+            # The verb was a WORD INSIDE A FILENAME.  "Review the diff fix.patch"
+            # carries the word "patch"; reading it as an instruction to change
+            # source made a review gate promise an edit it must never make, and
+            # the front door threw away the gate's own PASS with
+            # PROMISED_SOURCE_CHANGE_NOT_APPLIED.  A value's words are not the
+            # task's words -- the same rule F25 applies to quoted literals.
+            continue
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -1258,8 +1698,11 @@ def _promised_source_roots(goal: str) -> list[str]:
     text = str(goal or "")
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
+    spans = _path_spans(text)
     out = []
     for m in _REPAIR_VERB_RE.finditer(text):
+        if _inside_spans(m.start(), spans):
+            continue
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -1569,6 +2012,46 @@ def _observation_roots(goal: str) -> list[Path]:
     return [r for r in roots if not any(o != r and r in o.parents for o in roots)]
 
 
+_OBSERVATION_SKIP_DIRS = frozenset({".git", "node_modules", "__pycache__", ".brain_venv"})
+
+
+def _observe_tree(root: Path, limit: int) -> dict[str, tuple[int, int]] | None:
+    """One walk: stat what is under ``root``, or None if the tree is too large to trust.
+
+    This replaces a count-then-snapshot pair that walked every observation root TWICE
+    (`sum(1 for _ in root.rglob("*"))` purely to decide whether to walk it again) and
+    built two Path objects per entry.  Measured on the AST-audit sentence: 22k
+    pathlib `_parse_args` calls and 0.12 s per observation, with two observations per
+    solve -- the largest single cost in the door, larger than compiling and running the
+    capability together.  A single `os.scandir` pass keeps the size guard, drops the
+    duplicate walk, and still refuses a tree it cannot afford: the guard now aborts
+    WHILE walking (the old one walked the whole tree first, so it paid the cost it was
+    trying to avoid).
+    """
+    stack = [root]
+    out: dict[str, tuple[int, int]] = {}
+    while stack:
+        current = stack.pop()
+        try:
+            entries = list(os.scandir(current))
+        except OSError:
+            continue
+        for entry in entries:
+            if entry.name in _OBSERVATION_SKIP_DIRS:
+                continue
+            try:
+                if entry.is_dir(follow_symlinks=False):
+                    stack.append(Path(entry.path))
+                    continue
+                st = entry.stat(follow_symlinks=False)
+            except OSError:
+                continue
+            out[Path(entry.path).relative_to(root).as_posix()] = (st.st_size, st.st_mtime_ns)
+            if len(out) > limit:
+                return None
+    return out
+
+
 def observe_world(goal: str) -> dict[str, Any]:
     """What the filesystem looked like, read here rather than taken on report.
 
@@ -1583,15 +2066,13 @@ def observe_world(goal: str) -> dict[str, Any]:
     files: dict[str, tuple[int, int]] = {}
     walked = []
     for root in _observation_roots(goal):
-        try:
-            count = sum(1 for _ in root.rglob("*"))
-        except OSError:
-            continue
-        if count > _OBSERVATION_MAX_FILES:
+        observed = _observe_tree(root, _OBSERVATION_MAX_FILES)
+        if observed is None:
             continue
         walked.append(str(root.relative_to(ROOT)) if root != ROOT else ".")
-        for rel, stat_row in _kernel._snapshot(str(root)).items():
-            files[str(Path(root, rel).relative_to(ROOT))] = stat_row
+        base = str(root.relative_to(ROOT)) if root != ROOT else ""
+        for rel, stat_row in observed.items():
+            files[(base + "/" + rel).lstrip("/")] = stat_row
     parses: dict[str, bool] = {}
     for raw in stated:
         path = ROOT / raw
@@ -1751,6 +2232,9 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     composed["failure_class"] = cls
     composed["promised_artifact_errors"] = still
     composed["composer_ran_but_left_the_artifact_missing"] = True
+    # Say WHY, not just that something is missing: the caller has to be able to tell a
+    # request this brain cannot perform from one it performed badly.
+    composed.setdefault("reason", ";".join(still)[:400])
     # The chain is being declared a failure, so what it created must stop existing.
     # Otherwise the caller reports FAIL_CLOSED while the file it wrote sits on disk,
     # and the next reader cannot tell a refused goal from an executed one.
@@ -1955,6 +2439,15 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # PROMISED_ARTIFACT_MISSING:A, naming the source the sentence asked to
         # have gone.  The main path below has always read this list before
         # _execute; this branch did not.
+        if exc.code == "GOAL_STATED_ACT_INPUTS_UNBOUND":
+            # The sentence named the act and could not state what it needs.  Composition is the
+            # wrong question here: it would search for ANY chain that reaches the sentence's
+            # words, which is how a predicate-less bisect came to be answered by a source-file
+            # enumerator that reported PASS.  The honest answer is the refusal the compiler
+            # already wrote, naming the capability and the input it could not bind.
+            return _fail(task_id, "FAIL_CLOSED__STATED_ACT_INPUTS_UNBOUND",
+                         "THE_ACT_THE_SENTENCE_NAMES_NEEDS_INPUTS_IT_DOES_NOT_STATE", started,
+                         reason=str(exc.detail or exc.code), compiler_code=exc.code)
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
         composed = _try_composed(task_id, goal, started)
@@ -1962,7 +2455,36 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
                 gap_normalized, observe_world(gap_normalized), gap_future_artifacts)
+        # THE DIAGNOSIS MUST BE WHERE THE READER LOOKS.  This branch reported the gap
+        # only under `compiler_code`/`compiler_detail`, so a caller reading `reason` --
+        # which is where every other refusal in this entry puts its diagnosis -- saw an
+        # empty string.  Measured by the missing-verb probe: "Write a continuous
+        # integration workflow for the repository R" returned
+        # FAIL__RAW_GOAL_COMPILATION_GAP with reason "", the one row of 43 with no
+        # diagnosis at all, and the probe had to classify it as a SILENT_REFUSAL.
+        # Nothing new is computed here; the code the compiler already wrote is copied
+        # into the field the reader reads.
+        _gap_reason = str(exc.code or "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP")
+        if exc.detail:
+            _gap_reason += ":" + str(exc.detail)
+        # ...AND IT MUST NAME THE ACT.  The code above says which capability came CLOSEST and
+        # which of its slots stayed unbound, which is a report about the compiler, not about the
+        # request: "Fuzz the function add in calc.py" came back as
+        # GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:python.refactor.extract_function.v1:
+        # end_line -- accurate, unreadable, and silent about the act nobody in the registry
+        # performs.  The word is already computed for R14 (_unheard_act_word: a content word the
+        # registry has never heard as an act), so the refusal reuses it rather than inventing a
+        # second vocabulary.  Measured on the 43-act probe: refusals naming the missing act
+        # 6/15 -> 14/15.
+        try:
+            from canonical.runtime import live_integrated_brain_v1 as _live
+            _act_missing = _unheard_act_word(goal, _live.load_verified_registry())
+        except Exception:  # noqa: BLE001 - naming the act must never break the refusal
+            _act_missing = ""
+        if _act_missing:
+            _gap_reason += ":NO_CAPABILITY_PERFORMS:" + _act_missing
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
+                     reason=_gap_reason,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal
         return _fail(task_id, "FAIL_CLOSED", "RAW_GOAL_INTEGRATION_RUNTIME_ERROR", started, reason=type(exc).__name__ + ":" + str(exc))
@@ -1994,6 +2516,11 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             "compiled_capability_id": _rejected,
             "compiler_mode": compiled.get("compiler_mode"),
             "route_admission": admission,
+            # The rule and the capability were computed and then left out of the report, so a
+            # refusal reached the caller as FAIL_CLOSED__ROUTE_ADMISSION_REJECTED with an empty
+            # reason and no way to tell a missing act from an unbound argument.  Measured over
+            # the 43-act probe: 18 honest refusals, none of which named the act it declined.
+            "reason": (_detail or ("ROUTE_ADMISSION_REJECTED:" + str(admission.get("rule")))),
         }
         if _detail is not None:
             _extra["compiler_detail"] = _detail
@@ -2062,7 +2589,13 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # #6119 hazard stays closed for the reason it always has: "Check the
         # file X" states no command line, so extract_argv is None and it keeps
         # failing closed.
-        stated_a_command_line = composer_route.extract_argv(normalized) is not None
+        # A sentence that merely MENTIONS a program is not asking for it to be run.
+        # Measured: "Show the git diff of the repository <R> against HEAD and write it to
+        # <O>" was read as `diff <O> <R>`, executed, and failed -- after the capability that
+        # performs the act had been selected and refused for want of a command slot.  The
+        # composer is the right answer for "Copy the file A to the file B"; it is the wrong
+        # answer when the sentence's own verb names the act a capability already performs.
+        stated_a_command_line = composer_route.statement_is_a_command_line(normalized)
         # The symmetric case, measured.  A sentence can state BOTH a payload and
         # the path it goes to, and still be refused for a reason that has
         # nothing to do with the binder -- so this gate, which required
@@ -2103,6 +2636,15 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
     promised_roots = _promised_source_roots(normalized)
     roots_before = {root: {rel: _source_digest(rel) for rel in _py_files_under(root)}
                     for root in promised_roots}
+    # THE DOOR CHECKS THE ENGINE BEFORE IT PROMISES THE WORK.  A capability is the adapter plus
+    # the software it calls; without this, a clean box answers 16 of 43 acts instead of 32, and
+    # the 13 it loses are reported as broken capabilities rather than as absent packages.
+    _missing_engine = _toolchain_refusal(compiled)
+    if _missing_engine is not None:
+        return _fail(task_id, "FAIL_CLOSED__TOOLCHAIN_MISSING",
+                     _missing_engine[1], started,
+                     reason=_missing_engine[1],
+                     compiled_capability_id=_missing_engine[0])
     try:
         result = _execute(task_id, goal, compiled, admissible, started)
     except SystemExit as exc:
@@ -2159,6 +2701,7 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         result["pass"] = False
         result["failure_class"] = cls
         result["promised_artifact_errors"] = missing
+        result.setdefault("reason", ";".join(missing)[:400])
     stated_files = _stated_files(normalized)
     patch_evidence = future_artifacts + [p for p in stated_files if p not in future_artifacts]
     unchanged = promised_source_change_errors(

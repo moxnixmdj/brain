@@ -1,0 +1,32 @@
+{
+ "artifact_sha256": "8987a8e314b6a6bd1ca0f9f1b940fd04d998729fe671cd7775b1b22fff1ce987",
+ "capability_id": "python.toolchain.ruff_async_audit.v1",
+ "elapsed_ms": null,
+ "entrypoint": "run",
+ "executor": "execution_guard/capability_evidence_probe_v1.py",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "invoked_args": {
+  "act_verb": "async_audit",
+  "output_path": "/tmp/brain_evidence_peexj2do/out/ruff_async_audit.json",
+  "select": "ASYNC,RUF006,PT",
+  "source_root": "/tmp/brain_evidence_peexj2do/source",
+  "tool_verb": "async_audit"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+ "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+ "observed": {
+  "gate": "PASS"
+ },
+ "outcome": "EXECUTED",
+ "planted_defect": null,
+ "planted_defect_found": null,
+ "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+ "producer_independent": false,
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_async_audit.v1__RECEIPT.json",
+ "reproduced_on_second_run": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

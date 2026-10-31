@@ -27,10 +27,12 @@ Nothing here calls a model. Nothing here spends. Everything fails closed.
 """
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
+import os
 import re
-import subprocess
+import shlex
 import tarfile
 import zipfile
 from collections.abc import Mapping
@@ -70,6 +72,66 @@ _COMMAND_ROLE_WORD = re.compile(r"\b(?:shell|cli|terminal)?\s*(?:command|argv)\b
 def _STATES_A_COMMAND(goal: Any) -> bool:
     """True when the sentence itself introduces a command line."""
     return bool(_COMMAND_ROLE_WORD.search(str(goal or "")))
+
+
+_EXPLICIT_COMMAND_SENTENCE = re.compile(
+    r"^\s*(?:please\s+)?(?:run|execute)\s+(?:the\s+)?"
+    r"(?:(?:shell|cli|terminal)\s+)?(?:command|argv)(?:\s*:\s*|\s+)(.*?)\s*$",
+    re.I | re.S,
+)
+# The adapter executes argv without a shell. Treating shell operators or
+# expansions as literal arguments would claim a different command was run.
+_SHELL_SYNTAX = re.compile(r"[|&;<>`$*?\[\]{}~\\!#\r\n]")
+_STDOUT_DESTINATION_WORDS = frozenset({
+    ("and", "save", "it", "to"), ("and", "save", "the", "output", "to"),
+    ("and", "save", "the", "result", "to"), ("and", "save", "stdout", "to"),
+    ("and", "write", "the", "output", "to"), ("and", "write", "stdout", "to"),
+})
+
+
+def _single_explicit_command_covers_sentence(goal: str, args: Mapping) -> bool:
+    """A bounded whole-sentence proof for one explicit, zero-shell command.
+
+    Checking that each argv token occurs somewhere in a goal is not enough:
+    "run cat A and delete B" contains the cat tokens but also asks for a
+    second effect. This recognizes only a whole explicit-command sentence, or
+    that sentence plus the adapter's checked stdout destination. Anything else
+    remains unresolved. It does not claim to solve arbitrary task semantics.
+    """
+    match = _EXPLICIT_COMMAND_SENTENCE.fullmatch(goal)
+    argv = args.get("argv")
+    if match is None or not isinstance(argv, (list, tuple)) or not argv:
+        return False
+    if any(not isinstance(token, str) or not token or _SHELL_SYNTAX.search(token)
+           or token.casefold() in {"and", "then", "also", "afterwards"} for token in argv):
+        return False
+    body = match.group(1)
+    bodies = [body]
+    if body.endswith((".", "!", "?")):
+        bodies.append(body[:-1])
+    for candidate in bodies:
+        try:
+            parts = shlex.split(candidate)
+        except ValueError:
+            continue
+        variants = [parts]
+        # A whole command may itself be quoted: "run the command 'cat A'".
+        if parts and " " in parts[0]:
+            try:
+                variants.append(shlex.split(parts[0]) + parts[1:])
+            except ValueError:
+                pass
+        for words in variants:
+            if words[:len(argv)] != list(argv):
+                continue
+            suffix = words[len(argv):]
+            if not suffix:
+                return True
+            if (args.get("write_stdout_to_output") == "true" and len(suffix) > 1
+                    and tuple(word.casefold() for word in suffix[:-1]) in _STDOUT_DESTINATION_WORDS
+                    and suffix[-1] == args.get("output_path")):
+                return True
+    return False
 
 
 # What may sit between a payload and the path it is being written to.
@@ -161,6 +223,30 @@ def _payload_runs_to_the_destination(goal: str, payload: str) -> bool:
                 return True
         start = text.find(payload, start + 1)
     return False
+
+def _single_text_write_covers_sentence(goal: str, args: Mapping) -> bool:
+    """A bounded whole-sentence proof for a literal text-file write.
+
+    The existing payload-to-destination check proves the text is not truncated,
+    but it does not cover a second instruction after the path. Accept only the
+    complete literal-write form here; other wording needs another verifier.
+    """
+    content, output = args.get("content"), args.get("output_path")
+    if not isinstance(content, str) or not content or not isinstance(output, str) or not output:
+        return False
+
+    def literal(value: str) -> str:
+        escaped = re.escape(value)
+        return rf"(?:{escaped}|'{escaped}'|\"{escaped}\"|‘{escaped}’|“{escaped}”)"
+
+    prefix = (r"^\s*(?i:(?:please\s+)?(?:write|save|create)\s+"
+              r"(?:(?:the|a|an)\s+)?(?:(?:following|given|provided)\s+)?"
+              r"(?:text|content|string|message|line|file\s+content)\s+)")
+    destination = (r"(?i:\s+(?:to|into|in|at)\s+(?:(?:the|a|an)\s+)?" +
+                   _DEST_MODIFIER + r"(?:(?:file|path)\s+)?)")
+    return bool(re.fullmatch(prefix + literal(content) + destination + literal(output) +
+                             r"\s*[.!?]?\s*", goal))
+
 
 # One quotation mark, bracket or paren on each side of a stated payload.  Kept to
 # a single character deliberately: a run of them is not punctuation, it is content.
@@ -815,12 +901,12 @@ def _inspect_text_file_write(args: Mapping, result: Mapping, root: Path) -> tupl
                       "matches_the_requested_text": True}
 
 
-# Commands that cannot change anything when they are run again.  A re-inspection
-# has to go back to the world rather than to the producer's own report, and for a
-# command the only way back to the world is to run it -- which is safe for these
-# and not safe for anything else, so everything else is refused rather than
-# guessed at.  "cp", "mv", "rm", "mkdir", "touch", "tee" and "dd" are deliberately
-# absent: re-running one of those is a second side effect, not a check.
+# Candidate readers. A program name alone does NOT prove that an invocation is
+# read-only: find has -delete/-exec, sed has write/execute scripts, and even a
+# Python file inside the repository can perform arbitrary effects. Replays go
+# through the existing read-only, network-isolated namespace below; known
+# mutating shapes are checked by postcondition or refused rather than replayed.
+# "cp", "mv", "rm", "mkdir", "touch", "tee" and "dd" are deliberately absent.
 # An address, optionally a substitution composed onto it, ending in `p`: the
 # shapes are `3p`, `2,4p` and `3s/.*/\U&/p`.  sed composes an address with a
 # command in one script, so "the third line in upper case" is a single command
@@ -861,17 +947,8 @@ _READ_ONLY_COMMANDS = frozenset({
     "cat", "head", "tail", "wc", "nl", "sort", "grep", "egrep", "fgrep", "ls",
     "uniq", "tr", "cut", "sha256sum", "md5sum", "stat", "file", "diff", "cmp",
     "od", "tac", "basename", "dirname", "realpath",
-    # `find` only ever reads the tree and prints what is there, so the inspector
-    # can re-run it and compare stdout exactly as it does for ls.  `du` reads a
-    # tree too, but no sentence reaches it, and a command the acceptance layer is
-    # willing to judge that nothing can ask for is dead weight in this table.
-    "find",
-    # `sed` WITHOUT -i reads a file and writes nothing: the transformed text
-    # comes back on stdout.  That makes it a reader as far as this table is
-    # concerned, and the inspector re-runs it and compares stdout, stderr and
-    # the return code exactly as it does for cat.  Whether the result is then
-    # put somewhere is the caller's declaration, not the program's behaviour.
-    "sed",
+    # Both have reader and writer forms; the invocation is checked below.
+    "find", "sed",
 })
 # Programs whose whole purpose is to hand back a rewritten copy of the file they
 # read.  Only these may write over their own operand, and only because the
@@ -1397,22 +1474,213 @@ _MUTATING_POSTCONDITIONS = {
 }
 
 
+# These are find's non-writing predicates/operators. Unknown options are refused;
+# in particular -delete, -exec*, -ok*, -fprint*, -fprintf and -fls are not
+# readers. A denial is deliberately conservative, including an option-looking
+# operand to -name. The namespace is the safety boundary, not this vocabulary.
+_FIND_READER_OPTIONS = frozenset({
+    "-H", "-L", "-P", "--", "-name", "-iname", "-path", "-ipath",
+    "-wholename", "-iwholename", "-regex", "-iregex", "-type", "-xtype",
+    "-mindepth", "-maxdepth", "-empty", "-size", "-mtime", "-mmin",
+    "-atime", "-amin", "-ctime", "-cmin", "-user", "-group", "-uid",
+    "-gid", "-perm", "-print", "-print0", "-printf", "-ls", "-prune",
+    "-depth", "-xdev", "-mount", "-samefile", "-newer", "-true", "-false",
+    "-readable", "-writable", "-executable", "-inum", "-links", "-fstype",
+    "-daystart", "-follow", "-regextype", "-ignore_readdir_race",
+    "-noignore_readdir_race", "-noleaf", "-a", "-and", "-or", "-not",
+})
+
+
+def _sed_reader_script(script: str) -> bool:
+    """Recognize only line prints and substitutions without sed's e/w flags."""
+    if not script or any(c in script for c in "\r\n\0"):
+        return False
+    if re.fullmatch(r"(?:\d+|\$)(?:,(?:\d+|\$))?p", script):
+        return True
+    match = re.match(r"^(?:(?:\d+|\$)(?:,(?:\d+|\$))?)?s([/|#])", script)
+    if match is None:
+        return False
+    delimiter = match.group(1)
+    pos = match.end()
+    # Exactly two unescaped delimiters terminate pattern and replacement.
+    for _ in range(2):
+        while pos < len(script) and script[pos] != delimiter:
+            if script[pos] == "\\":
+                pos += 1
+                if pos == len(script):
+                    return False
+            pos += 1
+        if pos == len(script):
+            return False
+        pos += 1
+    return bool(re.fullmatch(r"[gpI0-9]*", script[pos:]))
+
+
+def _sed_reader_argv(tokens: list[str]) -> bool:
+    scripts: list[str] = []
+    options_done = False
+    i = 1
+    while i < len(tokens):
+        token = tokens[i]
+        if not options_done and token == "--":
+            options_done = True
+        elif not options_done and token in {
+            "-n", "--quiet", "--silent", "-E", "-r", "--regexp-extended",
+            "--posix", "-s", "--separate", "-u", "--unbuffered", "-z",
+            "--null-data", "--sandbox",
+        }:
+            pass
+        elif not options_done and token in ("-e", "--expression"):
+            i += 1
+            if i >= len(tokens):
+                return False
+            scripts.append(tokens[i])
+        elif not options_done and token.startswith("--expression="):
+            scripts.append(token.split("=", 1)[1])
+        elif not options_done and token.startswith("-e") and len(token) > 2:
+            scripts.append(token[2:])
+        elif not options_done and token.startswith("-"):
+            return False
+        elif not scripts:
+            scripts.append(token)
+        i += 1
+    return bool(scripts) and all(_sed_reader_script(script) for script in scripts)
+
+
+def _reader_shape_is_known(program: str, tokens: list[str]) -> bool:
+    """Do not certify a known effectful form by its reproducible stdout."""
+    if program == "find":
+        return all(not token.startswith("-") or token in _FIND_READER_OPTIONS
+                   for token in tokens[1:])
+    if program == "sed":
+        return _sed_reader_argv(tokens)
+    if program == "sort":
+        return not any(token == "--compress-program" or token.startswith("--compress-program=")
+                       for token in tokens[1:])
+    if program == "file":
+        return not any(token == "--compile" or
+                       (token.startswith("-") and not token.startswith("--") and "C" in token[1:])
+                       for token in tokens[1:])
+    return True
+
+
+def _reopen_simple_reader_inputs(tokens: list[str], root: Path) -> tuple[dict, int] | None:
+    """Re-derive plain cat and one-file wc -l from bytes, with no process.
+
+    Other options, non-files and non-system executables take the confined path.
+    The read is bounded to the namespace broker's limit; large or special inputs
+    keep the fail-closed replay behavior rather than consuming unbounded RAM.
+    """
+    program = tokens[0].rsplit("/", 1)[-1]
+    if program == "cat" and len(tokens) >= 2:
+        paths = tokens[1:]
+    elif program == "wc" and len(tokens) == 3 and tokens[1] == "-l":
+        paths = tokens[2:]
+    else:
+        return None
+    if any(token.startswith("-") for token in paths):
+        return None
+    try:
+        from canonical.runtime.root3_read_only_local_file_query_executor_v1 import _resolve_executable
+        executable = Path(_resolve_executable(tokens[0], {program}))
+        if executable not in {Path("/usr/bin", program).resolve(), Path("/bin", program).resolve()}:
+            return None
+        chunks: list[bytes] = []
+        size = 0
+        for token in paths:
+            path = _inside(root, token)
+            if path is None or not path.is_file():
+                return None
+            with path.open("rb") as stream:
+                chunk = stream.read(8_000_001 - size)
+            size += len(chunk)
+            if size > 8_000_000:
+                return None
+            chunks.append(chunk)
+        if program == "wc":
+            stdout = (str(chunks[0].count(b"\n")) + " " + paths[0] + "\n").encode("utf-8")
+        else:
+            stdout = b"".join(chunks)
+        return {"returncode": 0, "stdout": stdout, "stderr": b""}, len(chunks)
+    except (OSError, ValueError, UnicodeError):
+        return None
+
+
+def _replay_in_read_only_namespace(tokens: list[str], root: Path) -> tuple[dict | None, str]:
+    """Reuse the existing namespace and broker; never fall back to host execution.
+
+    The namespace binds the input tree read-only, hides other host files and
+    isolates the network. The existing query wrapper returns stdout/stderr over
+    its broker without handing that descriptor to the command being checked.
+    Different environments or unavailable confinement are refusals, not proof.
+    """
+    try:
+        from canonical.runtime import zero_ambient_namespace_launcher_v1 as namespace
+        from canonical.runtime.root3_read_only_local_file_query_executor_v1 import (
+            _resolve_executable, _WRAPPER,
+        )
+
+        root = root.resolve()
+        program = tokens[0].rsplit("/", 1)[-1]
+        executable = _resolve_executable(tokens[0], {program})
+        inner = [executable]
+        for token in tokens[1:]:
+            # The tree is mounted at /input. Preserve relative operands and map
+            # absolute operands inside it; anything else stays inaccessible.
+            if os.path.isabs(token):
+                path = _inside(root, token)
+                if path is not None:
+                    rel = path.relative_to(root).as_posix()
+                    token = "/input" if rel == "." else "/input/" + rel
+            inner.append(token)
+        spec = {"argv": inner, "cwd": "/input", "timeout": 60}
+        encoded = base64.urlsafe_b64encode(json.dumps(spec).encode("utf-8")).decode("ascii")
+        policy: dict[str, Any] = {
+            "argv": ["/usr/bin/python3", "-I", "-c", _WRAPPER, encoded],
+            "input_dir": str(root),
+            "allow_dev_null": True,
+            "env": {key: os.environ[key] for key in ("LANG", "LC_ALL", "TZ", "PYTHONHASHSEED")
+                    if key in os.environ},
+            "limits": {"pids": 32, "memory_mb": 1024, "cpu_seconds": 60,
+                       "wallclock_s": 65, "scratch_mb": 64, "max_file_mb": 16,
+                       "nofile": 64, "broker_max_bytes": 8_000_000},
+        }
+        if os.geteuid() == 0:
+            # The launcher deliberately refuses a root host identity. A root-
+            # owned tree supplies no non-root identity we can safely assume.
+            owner = root.stat()
+            if owner.st_uid <= 0 or owner.st_gid <= 0:
+                return None, "COMMAND_REINSPECTION_CONFINEMENT_UNAVAILABLE"
+            policy.update(host_uid=owner.st_uid, host_gid=owner.st_gid)
+        run = namespace.run_confined(policy)
+        if run.get("status") != "CHILD_EXITED" or run.get("returncode") != 0:
+            return None, "COMMAND_REINSPECTION_CONFINEMENT_UNAVAILABLE"
+        data = json.loads(run["broker_payload"].decode("utf-8"))
+        if (not isinstance(data, dict) or data.get("timed_out") is not False
+                or type(data.get("returncode")) is not int):
+            return None, "COMMAND_REINSPECTION_RESULT_INVALID"
+        return {
+            "returncode": data["returncode"],
+            "stdout": base64.b64decode(data["stdout_b64"], validate=True),
+            "stderr": base64.b64decode(data["stderr_b64"], validate=True),
+        }, ""
+    except Exception:  # noqa: BLE001 - missing confinement must never cause a host replay
+        return None, "COMMAND_REINSPECTION_CONFINEMENT_UNAVAILABLE"
+
+
 def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tuple[bool, str, dict]:
-    """Run the stated command again and compare what comes back.
+    """Reopen known inputs or replay in confinement, then compare the result.
 
-    A command has no artifact of its own to re-open, so the temptation is to
-    accept ``returncode == 0`` and the ``stdout`` the adapter reported.  That is
-    exactly the shape of check PR #6118 showed to be worthless: it compares the
-    record to the record.  What is available instead is the world -- the command
-    can be run again, and if the world still says the same thing then the report
-    was not invented.
+    Trusting the adapter's ``returncode`` and ``stdout`` would compare its record
+    to itself. Plain cat and wc -l can instead be checked directly against file
+    bytes; other supported readers are re-run in a read-only namespace. Neither
+    check proves side effects outside its stated scope or all task semantics.
 
-    Re-running is only safe for a command that cannot change anything, so the
-    set above is closed and everything outside it is refused with a named reason
-    rather than passed.  That costs coverage -- "cp", "mv" and "rm" are not
-    re-inspected here -- and the honest reading of that cost is in the ledger:
-    this inspector reports what it checked, and a mutating command is reported as
-    unchecked rather than as accepted.
+    Replays run in the existing read-only, network-isolated namespace, not on
+    the live tree. Known writers are checked by their on-disk postconditions or
+    refused; an unavailable namespace is a refusal, never an unconfined retry.
+    Matching stdout alone is not proof that a separately written artifact is
+    right, so a declared stdout destination is compared to those actual bytes.
     """
     argv = args.get("argv")
     if not isinstance(argv, (list, tuple)) or not argv:
@@ -1426,11 +1694,16 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
         for tok in tokens[1:]) or any(
         tok in _SIDE_EFFECTING_FLAGS_BY_PROGRAM.get(program, ())
         for tok in tokens[1:])
-    # An interpreter is not read-only in general, and it is not being treated as
-    # one here.  What is allowed is the one shape the receipt-backed rows all
-    # have -- ["python3", "<a .py file inside this repository>"] -- which is
-    # narrow enough to reason about: no arguments to smuggle anything through,
-    # and a script whose source is in the tree being judged.
+    # GNU accepts attached and grouped short options too: -oFILE and -ni.bak
+    # must not take the reader path just because the flag is not a whole token.
+    if program in ("sort", "sed"):
+        letter = "o" if program == "sort" else "i"
+        takes_output_flag = takes_output_flag or any(
+            (tok.startswith("-") and not tok.startswith("--") and letter in tok[1:])
+            or (program == "sed" and tok.startswith("--in-place="))
+            for tok in tokens[1:])
+    # An in-tree Python script is not necessarily read-only. Its only permitted
+    # replay shape still runs inside the namespace, not in the working tree.
     if program in ("python3", "python") and len(tokens) == 2 and tokens[1].endswith(".py"):
         if _inside(root, tokens[1]) is None:
             return False, "COMMAND_SCRIPT_OUTSIDE_REPOSITORY", {}
@@ -1459,36 +1732,59 @@ def _inspect_shell_command_run(args: Mapping, result: Mapping, root: Path) -> tu
             "program": program, "checked": False}
     if takes_output_flag:
         return False, "COMMAND_TAKES_AN_OUTPUT_FLAG", {"program": program}
+    if not _reader_shape_is_known(program, tokens):
+        return False, "COMMAND_NOT_RE_RUNNABLE_WITHOUT_SIDE_EFFECTS", {
+            "program": program, "checked": False}
     claimed_out = result.get("stdout")
     claimed_code = result.get("returncode")
-    if not isinstance(claimed_out, str) or not isinstance(claimed_code, int):
+    if not isinstance(claimed_out, str) or type(claimed_code) is not int:
         return False, "COMMAND_RESULT_CARRIES_NO_OUTPUT_TO_CHECK", {}
-    try:
-        proc = subprocess.run(tokens, cwd=root, capture_output=True, timeout=60)
-    except Exception as exc:  # noqa: BLE001 - a failed re-run is a refusal, not a crash
-        return False, "COMMAND_RE_RUN_RAISED:" + type(exc).__name__, {}
-    if proc.returncode != claimed_code:
+    reopened = _reopen_simple_reader_inputs(tokens, root) if program in ("cat", "wc") else None
+    if reopened is not None:
+        proc, files_reopened = reopened
+        replayed = False
+    else:
+        proc, reason = _replay_in_read_only_namespace(tokens, root)
+        if proc is None:
+            return False, reason, {"program": program, "checked": False}
+        files_reopened = 0
+        replayed = True
+    if proc["returncode"] != claimed_code:
         return False, "COMMAND_RETURN_CODE_NOT_REPRODUCED", {
-            "claimed": claimed_code, "re_run": proc.returncode}
-    again = proc.stdout.decode("utf-8", "replace")
+            "claimed": claimed_code, "re_run": proc["returncode"]}
+    again = proc["stdout"].decode("utf-8", "replace")
     if again != claimed_out:
         return False, "COMMAND_OUTPUT_NOT_REPRODUCED", {
             "claimed_bytes": len(claimed_out.encode("utf-8")),
             "re_run_bytes": len(again.encode("utf-8"))}
-    again_err = proc.stderr.decode("utf-8", "replace")
+    again_err = proc["stderr"].decode("utf-8", "replace")
     if again_err != str(result.get("stderr") or ""):
         return False, "COMMAND_STDERR_NOT_REPRODUCED", {}
-    if not again and proc.returncode == 0 and _asked_to_print_named_lines(tokens):
+    checked_destination = False
+    if args.get("write_stdout_to_output") == "true":
+        output = _inside(root, args.get("output_path"))
+        if output is None or not output.is_file():
+            return False, "COMMAND_STDOUT_DESTINATION_ABSENT", {}
+        result_output = result.get("output_path")
+        if result_output and _inside(root, result_output) != output:
+            return False, "COMMAND_STDOUT_DESTINATION_MISMATCH", {}
+        if claimed_code != 0 or output.read_bytes() != proc["stdout"]:
+            return False, "COMMAND_STDOUT_DESTINATION_MISMATCH", {}
+        checked_destination = True
+    if not again and proc["returncode"] == 0 and _asked_to_print_named_lines(tokens):
         # Reproducible silence is still silence.  The re-run agrees that the
         # command printed nothing, which proves the nothing was real and proves
         # nothing about whether it answers the sentence -- and for a command
         # whose whole job was to print the lines the sentence named, it does not.
         return False, "COMMAND_PRINTED_NONE_OF_THE_LINES_THE_SENTENCE_NAMED", {
-            "program": program, "returncode_reproduced": proc.returncode,
+            "program": program, "returncode_reproduced": proc["returncode"],
             "stdout_bytes_reproduced": 0}
-    return True, "", {"command_re_run": True, "program": program,
-                      "returncode_reproduced": proc.returncode,
-                      "stdout_bytes_reproduced": len(again.encode("utf-8"))}
+    return True, "", {"command_re_run": replayed, "program": program,
+                      "replay_read_only_namespace": replayed,
+                      "input_files_reopened": files_reopened,
+                      "stdout_destination_checked": checked_destination,
+                      "returncode_reproduced": proc["returncode"],
+                      "stdout_bytes_reproduced": len(proc["stdout"])}
 
 
 INSPECTORS: dict[str, Inspector] = {
@@ -1702,6 +1998,18 @@ def verify(
                 if _digest(path.read_bytes()) != claimed:
                     return _unresolved("DECLARED_OUTPUT_SHA256_MISMATCH",
                                        capability_id=cid)
+
+        # Raw spans and a matching trace do not themselves discharge every
+        # obligation. In these two bounded one-step forms, only a whole goal
+        # matched by the checked operation may receive acceptance credit. Other
+        # capabilities and multi-step goals still need per-obligation proof.
+        if (len(rows) == 1 and executed[0] == "shell.command.run"
+                and _STATES_A_COMMAND(goal)
+                and not _single_explicit_command_covers_sentence(goal, rows[0]["args"])):
+            return _unresolved("COMMAND_GOAL_HAS_UNVERIFIED_TEXT", capability_id=executed[0])
+        if (len(rows) == 1 and executed[0] == "text.file.write"
+                and not _single_text_write_covers_sentence(goal, rows[0]["args"])):
+            return _unresolved("TEXT_WRITE_GOAL_HAS_UNVERIFIED_TEXT", capability_id=executed[0])
 
         # --- independent re-inspection, or refusal -------------------------
         ledger = []

@@ -1,0 +1,47 @@
+{
+ "receipt_for": "ASTRA-VERIFY-CHANGESIG-001",
+ "capability_id": "python.refactor.change_signature.v1",
+ "adapter_module": "python_refactor_change_signature",
+ "adapter_path": "canonical/runtime/bound_capabilities/python_refactor_change_signature.py",
+ "pins": "canonical/tests/test_python_refactor_change_signature_v1.py",
+ "pins_result": "14 passed",
+ "observed": {
+  "golden": {
+   "world": "pkg/calc.py: def add(a, b): return a + b; spec {\"renames\":{\"a\":\"left\"},\"add\":[{\"name\":\"scale\",\"default\":\"1\"}]}",
+   "old_signature": "(a, b)",
+   "new_signature": "(left, b, scale=1)",
+   "file_after": "def add(left, b, scale=1):\\n    return left + b",
+   "edit_count": 2,
+   "gate": "PASS_BLIND",
+   "e2e_ms": 2
+  },
+  "cross_file": {
+   "world": "pkg/core.py add + use/caller.py (from-import) + use/alias.py (import-module) + pkg/test_ok.py",
+   "call_sites_edited": 4,
+   "effects": [
+    "keyword call sites add(a=3) -> add(x=3) in the defining module's importers",
+    "positional call sites add(1, 2) byte-untouched",
+    "core_mod.add(x=5, b=6) follows the rename through the module alias"
+   ],
+   "gate": "PASS",
+   "verified": true
+  },
+  "arity": {
+   "required_param": "add(1, 2, scale=1) / add(a=3, b=4, scale=1) appended at every resolved call site",
+   "no_call_value": "REQUIRED_PARAM_NEEDS_CALL_VALUE, zero bytes changed",
+   "escaping_object": "FUNCTION_OBJECT_ESCAPES when the function is also used as a value and the change is not backward compatible, zero bytes changed"
+  },
+  "honesty_legs_observed": [
+   "DUPLICATE_PARAM when a rename lands on an existing parameter name",
+   "REMOVAL_SHIFTS_ARGUMENT for a non-trailing or defaultless parameter",
+   "PARAM_IN_USE when a removed parameter is read in the body or passed as a keyword",
+   "FUNCTION_OBJECT_ESCAPES listed in unknown_sites for a rename too (complete=false), silently breaking nothing",
+   "SIGNATURE_NOT_STATED for an empty request",
+   "a scope that rebinds the name (nested def or lambda parameter) is not this function: its calls are left untouched",
+   "PASS_BLIND with verified=false when no run_tests is named"
+  ],
+  "rollback": "a red named suite restores every file sha256-identical and refuses TESTS_RED_AFTER_EDIT",
+  "determinism": "two pristine worlds -> byte-identical trees and identical signatures/edit counts"
+ },
+ "reuse_note": "helper shape (_fail, _safe_path, _sha256, _modname_of, _params_of, _binds_name, _resolve_def, _import_table, token-span splice, test-gate rollback) taken unchanged from python_refactor_rename_symbol / python_refactor_rename_parameter; the structured-edit-spec-as-file convention is python.source.crossfile_edit.choreograph.v1's `edits_path`"
+}

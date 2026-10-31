@@ -1,0 +1,30 @@
+{
+ "artifact_sha256": "b8e6e0d3d72ab447433efdb042d1d6345985ae52ea56d880bbae6140a3724cbf",
+ "capability_id": "python.packaging.build_package.v1",
+ "elapsed_ms": null,
+ "entrypoint": "run",
+ "executor": "execution_guard/capability_evidence_probe_v1.py",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "invoked_args": {
+  "act_verb": "build_package",
+  "output_path": "/tmp/brain_evidence_fwms63wy/first/out/build_package.json",
+  "source_root": "/tmp/brain_evidence_fwms63wy/first/source"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/packaging_v1.py",
+ "module_sha256": "59d0163ffa43230741bcaa9068867123d13bae3b31cdaaaeb9ca01072adb84ba",
+ "observed": {
+  "gate": "PASS"
+ },
+ "outcome": "EXECUTED",
+ "planted_defect": "the built wheel's own METADATA (name, version, RECORD)",
+ "planted_defect_found": true,
+ "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+ "producer_independent": false,
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.packaging.build_package.v1__RECEIPT.json",
+ "reproduced_on_second_run": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

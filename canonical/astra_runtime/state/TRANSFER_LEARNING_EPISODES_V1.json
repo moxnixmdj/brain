@@ -58,5 +58,776 @@
     "trials": 1,
     "successes": 1,
     "last_used_utc": "2026-10-26T22:59:31Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_convert-im6.q16",
+        "run_docker-entrypoint.sh",
+        "run_dpkg-architecture",
+        "run_dpkg-buildpackage",
+        "run_dpkg-source",
+        "run_flock",
+        "run_gcov-12",
+        "run_gcov-dump-12",
+        "run_gcov-tool-12",
+        "run_gmake",
+        "run_gold",
+        "run_gp-display-html",
+        "run_last",
+        "run_lastb",
+        "run_ld.gold",
+        "run_make",
+        "run_node",
+        "run_nodejs",
+        "run_pip",
+        "run_pip3",
+        "run_pip3.11",
+        "run_prove",
+        "run_script",
+        "run_sudoedit",
+        "run_systemd-detect-virt",
+        "run_systemd-run",
+        "run_top",
+        "run_x86_64-linux-gnu-gcov-12",
+        "run_xargs"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.431,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "ac7d23dc9cf27960d00e",
+    "goal_key": "goal",
+    "plan": [
+      "run_gcov-dump-12"
+    ],
+    "reached": true,
+    "model": null,
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-28T19:35:07Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_convert-im6.q16",
+        "run_coverage-3.11",
+        "run_docker-entrypoint.sh",
+        "run_dpkg-architecture",
+        "run_dpkg-buildpackage",
+        "run_dpkg-source",
+        "run_flock",
+        "run_gcov-12",
+        "run_gcov-dump-12",
+        "run_gcov-tool-12",
+        "run_gmake",
+        "run_gold",
+        "run_gp-display-html",
+        "run_last",
+        "run_make",
+        "run_node",
+        "run_nodejs",
+        "run_pip",
+        "run_pip3",
+        "run_pip3.11",
+        "run_prove",
+        "run_py.test",
+        "run_pytest",
+        "run_script",
+        "run_sudoedit",
+        "run_systemd-detect-virt",
+        "run_systemd-run",
+        "run_top",
+        "run_x86_64-linux-gnu-gcov-12",
+        "run_xargs"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.472,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "d2d7e5d6ea3c58964bc2",
+    "goal_key": "goal",
+    "plan": [
+      "run_gcov-dump-12"
+    ],
+    "reached": true,
+    "model": null,
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-28T20:13:35Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_apt-key",
+        "run_apt-mark",
+        "run_as",
+        "run_c89",
+        "run_c89-gcc",
+        "run_c99",
+        "run_c99-gcc",
+        "run_cc",
+        "run_cpp",
+        "run_cpp-12",
+        "run_docker-entrypoint.sh",
+        "run_dpkg",
+        "run_dpkg-parsechangelog",
+        "run_findmnt",
+        "run_gcc",
+        "run_gcc-12",
+        "run_gcc-nm",
+        "run_gcc-nm-12",
+        "run_gcov",
+        "run_gcov-12",
+        "run_gold",
+        "run_gp-display-html",
+        "run_ld",
+        "run_ld.bfd",
+        "run_ld.gold",
+        "run_lsblk",
+        "run_perl5.36.0",
+        "run_ssh-argv0"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.944,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "a1fe1bd49895d14829c6",
+    "goal_key": "<lambda>",
+    "plan": [
+      "run_ld.bfd"
+    ],
+    "reached": true,
+    "model": {
+      "input.txt:26:4575a05f63b3": {
+        "run_ld.bfd": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8",
+        "run_apt-key": "input.txt:26:4575a05f63b3",
+        "run_apt-get": "input.txt:26:4575a05f63b3",
+        "run_gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55",
+        "run_animate-im6.q16": "input.txt:26:4575a05f63b3",
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-cdrom": "input.txt:26:4575a05f63b3",
+        "run_animate-im6": "input.txt:26:4575a05f63b3",
+        "run_ld": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8",
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a",
+        "run_apt-config": "input.txt:26:4575a05f63b3",
+        "copy_input": "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3",
+        "run_addr2line": "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f",
+        "run_c89": "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905",
+        "run_gcc-nm-12": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8": {
+        "run_gcc-nm-12": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55",
+        "run_ssh-argv0": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55": {
+        "run_gcov": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd": {
+        "run_ssh-argv0": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a": {
+        "run_perl5.36.0": "input.txt:26:4575a05f63b3|input.txt.0:560:e29bf30746ff"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:560:e29bf30746ff": {
+        "run_findmnt": "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3": {
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32": {
+        "run_animate": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f": {
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905": {
+        "run_perl5.36.0": "input.txt:26:4575a05f63b3|input.txt.0:560:e29bf30746ff"
+      }
+    },
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-29T07:46:37Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_apt-key",
+        "run_apt-mark",
+        "run_as",
+        "run_c89",
+        "run_c89-gcc",
+        "run_c99",
+        "run_c99-gcc",
+        "run_cc",
+        "run_cpp",
+        "run_cpp-12",
+        "run_docker-entrypoint.sh",
+        "run_dpkg",
+        "run_dpkg-parsechangelog",
+        "run_findmnt",
+        "run_gcc",
+        "run_gcc-12",
+        "run_gcc-nm",
+        "run_gcc-nm-12",
+        "run_gcov",
+        "run_gcov-12",
+        "run_gold",
+        "run_gp-display-html",
+        "run_ld",
+        "run_ld.gold",
+        "run_lsblk",
+        "run_perl5.36.0",
+        "run_ssh-argv0"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 0.917,
+      "revisits": 6,
+      "probes": 6
+    },
+    "fp_key": "7e5b909534b34c3a0aa9",
+    "goal_key": "<lambda>",
+    "plan": [
+      "run_ld.gold"
+    ],
+    "reached": true,
+    "model": {
+      "input.txt:26:4575a05f63b3": {
+        "run_ld.gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55",
+        "run_apt-key": "input.txt:26:4575a05f63b3",
+        "run_apt-get": "input.txt:26:4575a05f63b3",
+        "run_gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55",
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-cdrom": "input.txt:26:4575a05f63b3",
+        "run_animate-im6": "input.txt:26:4575a05f63b3",
+        "run_ld": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8",
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a",
+        "run_findmnt": "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b",
+        "copy_input": "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3",
+        "run_animate": "input.txt:26:4575a05f63b3",
+        "run_addr2line": "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f",
+        "run_c89": "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905",
+        "copy_to_out": "input.txt:26:4575a05f63b3",
+        "run_gcc-nm-12": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55": {
+        "run_gcc-nm-12": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_gcov": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55",
+        "run_apt-config": "input.txt:26:4575a05f63b3",
+        "run_cpp": "input.txt:26:4575a05f63b3|input.txt.0:240:60bfe6088e30",
+        "run_perl5.36.0": "input.txt:26:4575a05f63b3|input.txt.0:560:e29bf30746ff"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd": {
+        "run_apt-get": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a": {
+        "run_ssh-argv0": "input.txt:26:4575a05f63b3",
+        "run_apt-key": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f": {
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:240:60bfe6088e30": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:560:e29bf30746ff": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32": {
+        "run_as": "input.txt:26:4575a05f63b3|input.txt.0:327:0b97ff27fdaf"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:327:0b97ff27fdaf": {}
+    },
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-29T07:46:39Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_apt-key",
+        "run_apt-mark",
+        "run_as",
+        "run_c89",
+        "run_c89-gcc",
+        "run_c99",
+        "run_c99-gcc",
+        "run_cc",
+        "run_cpp",
+        "run_cpp-12",
+        "run_docker-entrypoint.sh",
+        "run_dpkg",
+        "run_dpkg-parsechangelog",
+        "run_findmnt",
+        "run_gcc",
+        "run_gcc-12",
+        "run_gcc-nm",
+        "run_gcc-nm-12",
+        "run_gcov",
+        "run_gcov-12",
+        "run_gold",
+        "run_gp-display-html",
+        "run_ld",
+        "run_lsblk",
+        "run_perl5.36.0",
+        "run_ssh-argv0"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 1.042,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "551b04788d988009c3f0",
+    "goal_key": "<lambda>",
+    "plan": [
+      "run_gcc-nm-12"
+    ],
+    "reached": true,
+    "model": {
+      "input.txt:26:4575a05f63b3": {
+        "run_lsblk": "input.txt:26:4575a05f63b3",
+        "run_gcc-nm-12": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-key": "input.txt:26:4575a05f63b3",
+        "run_apt-get": "input.txt:26:4575a05f63b3",
+        "run_gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55",
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-cdrom": "input.txt:26:4575a05f63b3",
+        "run_animate-im6": "input.txt:26:4575a05f63b3",
+        "run_ld": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8",
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a",
+        "copy_input": "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3",
+        "run_addr2line": "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f",
+        "copy_to_out": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55",
+        "run_apt-config": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55": {
+        "run_gcov": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd": {
+        "run_apt-get": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a": {
+        "run_findmnt": "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3": {
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f": {}
+    },
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-29T07:46:42Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_apt-key",
+        "run_apt-mark",
+        "run_as",
+        "run_c89",
+        "run_c89-gcc",
+        "run_c99",
+        "run_c99-gcc",
+        "run_cc",
+        "run_cpp",
+        "run_cpp-12",
+        "run_docker-entrypoint.sh",
+        "run_dpkg",
+        "run_dpkg-parsechangelog",
+        "run_findmnt",
+        "run_gcc",
+        "run_gcc-12",
+        "run_gcc-nm",
+        "run_gcov",
+        "run_gcov-12",
+        "run_gold",
+        "run_gp-display-html",
+        "run_ld",
+        "run_lsblk",
+        "run_perl5.36.0",
+        "run_ssh-argv0"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 1.042,
+      "revisits": 4,
+      "probes": 6
+    },
+    "fp_key": "40f09ba8127d49f3a362",
+    "goal_key": "<lambda>",
+    "plan": [
+      "run_perl5.36.0"
+    ],
+    "reached": true,
+    "model": {
+      "input.txt:26:4575a05f63b3": {
+        "run_perl5.36.0": "input.txt:26:4575a05f63b3|input.txt.0:560:e29bf30746ff",
+        "run_apt-key": "input.txt:26:4575a05f63b3",
+        "run_apt-get": "input.txt:26:4575a05f63b3",
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32",
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-cdrom": "input.txt:26:4575a05f63b3",
+        "run_animate-im6": "input.txt:26:4575a05f63b3",
+        "run_lsblk": "input.txt:26:4575a05f63b3",
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a",
+        "copy_input": "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3",
+        "run_addr2line": "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f",
+        "copy_to_out": "input.txt:26:4575a05f63b3",
+        "run_gcov": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:560:e29bf30746ff": {
+        "run_gcov": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-get": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553": {
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32",
+        "run_apt-config": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32": {
+        "run_gcov-12": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a": {
+        "run_findmnt": "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3": {
+        "run_ld": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f": {}
+    },
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-29T07:46:45Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_apt-key",
+        "run_apt-mark",
+        "run_as",
+        "run_c89",
+        "run_c89-gcc",
+        "run_c99",
+        "run_c99-gcc",
+        "run_cc",
+        "run_cpp",
+        "run_cpp-12",
+        "run_docker-entrypoint.sh",
+        "run_dpkg",
+        "run_dpkg-parsechangelog",
+        "run_findmnt",
+        "run_gcc",
+        "run_gcc-12",
+        "run_gcc-nm",
+        "run_gcov",
+        "run_gcov-12",
+        "run_gold",
+        "run_gp-display-html",
+        "run_ld",
+        "run_lsblk",
+        "run_ssh-argv0"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 1.0,
+      "revisits": 5,
+      "probes": 6
+    },
+    "fp_key": "8796e6bca930cab91695",
+    "goal_key": "<lambda>",
+    "plan": [
+      "run_gcov"
+    ],
+    "reached": true,
+    "model": {
+      "input.txt:26:4575a05f63b3": {
+        "run_ssh-argv0": "input.txt:26:4575a05f63b3",
+        "run_gcov": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd",
+        "run_apt-key": "input.txt:26:4575a05f63b3",
+        "run_apt-get": "input.txt:26:4575a05f63b3",
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32",
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-cdrom": "input.txt:26:4575a05f63b3",
+        "run_animate-im6": "input.txt:26:4575a05f63b3",
+        "run_lsblk": "input.txt:26:4575a05f63b3",
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a",
+        "copy_input": "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3",
+        "run_addr2line": "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f",
+        "copy_to_out": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_apt-get": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553": {
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32",
+        "run_apt-config": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32": {
+        "run_gcov-12": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a": {
+        "run_findmnt": "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3": {
+        "run_ld": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f": {}
+    },
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-29T07:46:49Z"
+  },
+  {
+    "fingerprint": {
+      "actions": [
+        "copy_input",
+        "copy_to_out",
+        "run_addpart",
+        "run_addr2line",
+        "run_animate",
+        "run_animate-im6",
+        "run_animate-im6.q16",
+        "run_apt",
+        "run_apt-cache",
+        "run_apt-cdrom",
+        "run_apt-config",
+        "run_apt-get",
+        "run_apt-key",
+        "run_apt-mark",
+        "run_as",
+        "run_c89",
+        "run_c89-gcc",
+        "run_c99",
+        "run_c99-gcc",
+        "run_cc",
+        "run_cpp",
+        "run_cpp-12",
+        "run_docker-entrypoint.sh",
+        "run_dpkg",
+        "run_dpkg-parsechangelog",
+        "run_findmnt",
+        "run_gcc",
+        "run_gcc-12",
+        "run_gcc-nm",
+        "run_gcov-12",
+        "run_gold",
+        "run_gp-display-html",
+        "run_ld",
+        "run_lsblk",
+        "run_ssh-argv0"
+      ],
+      "shapes": [
+        "str"
+      ],
+      "growth": 1.056,
+      "revisits": 4,
+      "probes": 6
+    },
+    "fp_key": "c18f63ceb6c9972d189f",
+    "goal_key": "<lambda>",
+    "plan": [
+      "run_gcov-12"
+    ],
+    "reached": true,
+    "model": {
+      "input.txt:26:4575a05f63b3": {
+        "run_gcov-12": "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd",
+        "run_ld": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8",
+        "run_apt-get": "input.txt:26:4575a05f63b3",
+        "run_animate-im6.q16": "input.txt:26:4575a05f63b3",
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_animate-im6": "input.txt:26:4575a05f63b3",
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a",
+        "copy_input": "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3",
+        "run_animate": "input.txt:26:4575a05f63b3",
+        "run_addr2line": "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f",
+        "run_c89": "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905",
+        "copy_to_out": "input.txt:26:4575a05f63b3",
+        "run_as": "input.txt:26:4575a05f63b3|input.txt.0:327:0b97ff27fdaf",
+        "run_c99": "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905",
+        "run_c89-gcc": "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:241:8b20a90592dd": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553",
+        "run_cpp": "input.txt:26:4575a05f63b3|input.txt.0:240:60bfe6088e30"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553": {
+        "run_ld": "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8",
+        "run_cc": "input.txt:26:4575a05f63b3|input.txt.0:239:7e575ab6fefd",
+        "run_apt-config": "input.txt:26:4575a05f63b3",
+        "run_apt-key": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:281:c8a5239ca0e8": {
+        "run_apt-key": "input.txt:26:4575a05f63b3",
+        "run_gold": "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:288:0a2ddb986b55": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:239:7e575ab6fefd": {
+        "run_apt-cdrom": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a": {
+        "run_findmnt": "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b",
+        "run_apt-key": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:61:4701eb32396b": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3": {},
+      "input.txt:26:4575a05f63b3|input.txt.0:290:5a94880f411f": {
+        "run_addpart": "input.txt:26:4575a05f63b3|input.txt.0:31:1ca16489465a"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905": {
+        "run_gp-display-html": "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32",
+        "run_gcc": "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905",
+        "run_animate-im6": "input.txt:26:4575a05f63b3"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:240:60bfe6088e30": {
+        "run_gcc-nm": "input.txt:26:4575a05f63b3|input.txt.0:283:127f95396553"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:327:0b97ff27fdaf": {
+        "run_c99-gcc": "input.txt:26:4575a05f63b3|input.txt.0:240:8c59c3b7b905"
+      },
+      "input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32": {
+        "copy_input": "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32"
+      },
+      "copy.txt:26:4575a05f63b3|input.txt:26:4575a05f63b3|input.txt.0:296:474e0d380b32": {
+        "run_animate-im6": "input.txt:26:4575a05f63b3"
+      }
+    },
+    "trials": 1,
+    "successes": 1,
+    "last_used_utc": "2026-10-29T07:46:52Z"
   }
 ]

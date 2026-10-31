@@ -202,6 +202,9 @@ def without_stated_text_value(text: str) -> str:
 _QUOTED_VALUE_ALIASES: dict[str, tuple[str, ...]] = {
     "content": ("text", "string", "message", "line"),
 }
+from canonical.runtime import input_role_lexicon_v1 as input_role_lexicon
+from canonical.runtime.input_role_lexicon_v1 import ROLE_ALIASES as _ROLE_LEXICON_ALIASES
+
 _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "content": _QUOTED_VALUE_ALIASES["content"],
     # An output has no type of its own, so its role can only come from the sentence.
@@ -220,6 +223,7 @@ _KEY_ALIASES: dict[str, tuple[str, ...]] = {
     "prompt": ("prompt", "question"),
     "pattern": ("pattern", "test pattern", "file pattern"),
     "test_argv": ("test argv", "test_argv", "test command", "command"),
+
     # The extract-function refactor states its coordinates the way an engineer
     # states them: "the function big", "lines 5 to 9", "named total_of". Without
     # these the capability's own docstring phrasing bound nothing, so the highest
@@ -288,6 +292,13 @@ def _declared_literal_selector_keys(entry: Mapping[str, Any]) -> set[str]:
         if isinstance(binding, Mapping) and binding.get("type") == "literal"
         and isinstance(binding.get("value"), list) and str(key).endswith("_path")
     }
+# The extensions that mean "this token is a FILE, not a name".  Used by the identifier law: a
+# symbol slot that accepts a path is a slot that accepts a sentence's OUTPUT as its value.
+_FILE_SUFFIXES = frozenset({
+    ".py", ".json", ".txt", ".md", ".markdown", ".csv", ".tsv", ".yaml", ".yml", ".toml", ".xml",
+    ".html", ".htm", ".ini", ".cfg", ".log", ".diff", ".patch", ".sqlite", ".sqlite3", ".db",
+    ".pdf", ".docx", ".xlsx", ".png", ".jpg", ".jpeg", ".webp", ".zip", ".tar", ".gz", ".dot",
+})
 _NUMERIC_KEYS = {"x_value", "y_value", "major", "max_age_s"}
 _LINE_RANGE_KEYS = {"start_line", "end_line"}
 _LIST_NUMERIC_KEYS = {"x_ticks", "y_ticks"}
@@ -608,7 +619,31 @@ def _after_key(goal: str, key: str) -> list[str]:
     phrases = sorted(set(aliases + [key, key.replace("_", " ")]), key=len, reverse=True)
     tails: list[str] = []
     for phrase in phrases:
-        pattern = re.compile(r"(?i)\b" + re.escape(phrase) + r"\s*(?:=|:|\bof\b|\bis\b)?\s*")
+        pattern = re.compile(r"(?i)\b" + re.escape(phrase)
+                             + r"(?![A-Za-z0-9_])\s*(?:=|:|\bof\b|\bis\b)?\s*")
+        tails.extend(goal[m.end():] for m in pattern.finditer(goal))
+    if tails:
+        return tails
+    # A slot the lexicon DECLARES aliases for was still only matched by its own name, so a
+    # sentence that used the ordinary English word found nothing and the slot was then filled
+    # by an elimination pass -- or not at all.  Measured while binding the git surface:
+    # `repo_path` is declared in the lexicon with the aliases ("repository", "repo",
+    # "project"), and "Show me the git status of the repository <R> and write it to <O>"
+    # bound repo_path to the OUTPUT path, because its own regex found no tail and the
+    # remaining path was assigned to it by position.  The fallback is additive by
+    # construction: it runs only when the key's own phrases produced nothing, so no route
+    # that binds today can lose the tail it binds from.
+    declared = [phrase for phrase in input_role_lexicon.phrases_for(key)
+                if phrase not in aliases and phrase not in (key, key.replace("_", " "))]
+    for phrase in sorted(set(declared), key=len, reverse=True):
+        if gated and phrase in gated:
+            continue
+        # The alias must END where the word ends.  Measured: the alias "ref" matched inside
+        # the word "refuse_revert_conflict" -- every alias hit inside a longer word (a path, a
+        # directory name) binds its slot to whatever follows, and the value the sentence
+        # actually stated is then bound by whichever slot is left.
+        pattern = re.compile(r"(?i)\b" + re.escape(phrase)
+                             + r"(?![A-Za-z0-9_])\s*(?:=|:|\bof\b|\bis\b)?\s*")
         tails.extend(goal[m.end():] for m in pattern.finditer(goal))
     return tails
 
@@ -662,16 +697,77 @@ def _kv_pairs(text: str) -> dict[str, float] | None:
     return out or None
 
 
+def _stated_destination(goal: str, root: pathlib.Path) -> pathlib.Path | None:
+    """The path the sentence says to WRITE to, if it states one.
+
+    A destination is not a source.  Measured: "Blame the lines of the file R/pkg/calc.py in the
+    repository R and write it to R/out/blame.json" bound correctly on the first run and refused
+    `path:2_existing_files_named` on every run after it, because the report the capability wrote
+    was, from the second run on, an existing file the sentence also named.  The same act then
+    answered differently depending on whether its own output already existed.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _cr
+        dest = _cr.extract_content_destination(str(goal or ""))
+    except Exception:  # noqa: BLE001 - an unreadable sentence states no destination
+        return None
+    raw = str(dest or "").strip()
+    if not raw:
+        return None
+    candidate = pathlib.Path(raw)
+    if not candidate.is_absolute():
+        candidate = pathlib.Path(root) / candidate
+    try:
+        return candidate.resolve()
+    except OSError:
+        return None
+
+
+def _excludes_destination(raw: str, destination: pathlib.Path | None, root: pathlib.Path) -> bool:
+    """Is this stated path the sentence's own destination rather than a value it reads?"""
+    if destination is None:
+        return False
+    candidate = pathlib.Path(str(raw))
+    if not candidate.is_absolute():
+        candidate = pathlib.Path(root) / candidate
+    try:
+        return candidate.resolve() == destination
+    except OSError:
+        return False
+
+
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
+    destination = _stated_destination(goal, root)
     if key in _PATH_FILE_KEYS:
-        files = [raw for raw, p in paths if p.is_file()]
+        files = [raw for raw, p in paths if p.is_file()
+                 and not _excludes_destination(raw, destination, root)]
         if len(files) == 1:
             return files[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(files)) + "_existing_files_named")
     if key in _PATH_DIR_KEYS:
-        dirs = [raw for raw, p in paths if p.is_dir()]
+        dirs = [raw for raw, p in paths if p.is_dir()
+                and not _excludes_destination(raw, destination, root)]
+        bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
+        declared_file_scope = (
+            isinstance(bindings, Mapping)
+            and isinstance(bindings.get(key), Mapping)
+            and bindings[key].get("type") == "path_file_or_dir"
+        )
+        # THE FILE THE CALLER NAMED WINS OVER THE DIRECTORY ITS PATH HAPPENS TO SPELL.
+        # `_repo_paths` yields every prefix of a stated path, so `.../pkg/calc.py` produced BOTH
+        # the file and its directory, and returning `dirs[0]` widened the scope of a one-file
+        # request to everything beside it.  Measured: "Format the python file <F> in place."
+        # bound the directory and ruff rewrote 2238 files; "Reproduce the crash in <F>" bound the
+        # directory again, so a capability that can only search a file was handed a tree.
+        # A declared `path_file_or_dir` capability means exactly what the caller named, so when
+        # the caller named a file and nothing else, the file is the scope.
+        if declared_file_scope:
+            files = [raw for raw, p in paths if p.is_file()
+                     and not _excludes_destination(raw, destination, root)]
+            if len(files) == 1:
+                return files[0]
         if len(dirs) == 1:
             return dirs[0]
         # A scope key is a scope, not a directory. "Audit the python source root
@@ -687,12 +783,6 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         # accepts one. The scope stays exactly what the caller named -- one file
         # means one file, never its siblings -- and anything but exactly one
         # named existing file still fails closed.
-        bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
-        declared_file_scope = (
-            isinstance(bindings, Mapping)
-            and isinstance(bindings.get(key), Mapping)
-            and bindings[key].get("type") == "path_file_or_dir"
-        )
         if not dirs and declared_file_scope:
             files = [raw for raw, p in paths if p.is_file()]
             if len(files) == 1:
@@ -709,6 +799,17 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
         if chosen:
             return chosen
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":no_matching_existing_files_named")
+    if key == "argv":
+        # A COMMAND THE SENTENCE QUOTES IS THE COMMAND, and the front binder had no rule for a
+        # slot literally named `argv`.  Measured: "Bisect the repository R ... using the command
+        # \"pytest -q t.py\"" bound no argv at all (GOAL_INPUT_BINDING_REQUIRED:argv:not_stated),
+        # the capability that ranks FIRST for that sentence was skipped as unstateable, and the
+        # request was answered by a changelog builder.  `test_argv` keeps its own derivation
+        # below, because a test runner's command line is also expressible as the tests it names.
+        stated = gc._stated_command_argv(goal)
+        if stated:
+            return stated
+        raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":not_stated")
     tails = _after_key(goal, key)
     if not tails:
         if key in _KV_KEYS:
@@ -761,7 +862,54 @@ _LINE_RANGE_RE = re.compile(
 )
 
 
+def _textual_tuning(key: str) -> bool:
+    """Is this slot a tuning value the sentence states in words (a revision)? See the lexicon."""
+    try:
+        from canonical.runtime import input_role_lexicon_v1 as _lex
+    except Exception:  # noqa: BLE001 - no lexicon, historical behaviour
+        return False
+    return _lex.is_textual_tuning(key)
+
+
+def _program_or_path(tail: str) -> bool:
+    """Is this stated value a program or a path rather than a word?"""
+    text = str(tail).strip().strip('"\'')
+    if not text:
+        return False
+    token = text.split()[0]
+    return ("/" in token or "\\" in token or token.endswith(".exe")
+            or re.fullmatch(r"(?:python|pypy|node|ruby|perl|java|go|rustc|php)[0-9.]*", token) is not None)
+
+
+def _declared_kind(key: str) -> str | None:
+    """The kind the lexicon declares for this slot, or None when it declares none."""
+    try:
+        return input_role_lexicon.kind_of(key)
+    except Exception:  # noqa: BLE001 - no lexicon, historical behaviour
+        return None
+
+
 def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
+    # THE DECLARED KIND PARSES THE VALUE.  `input_role_lexicon_v1.SLOT_KIND` says which shape each
+    # declared slot takes, and this parser kept its own four-key sets instead: `timeout_s`,
+    # `repeats`, `max_mutants`, `min_coverage_ratio`, `tolerance` and `budget` are declared there
+    # (KIND_TUNING) and were unknown here, so "timeout 30" parsed to nothing and the capability was
+    # refused as though the caller had said nothing.  Only the numeric kinds are added here; every
+    # identifier, path and text slot keeps the pinned rules below, because a number is the one shape
+    # the generic branch could never recover.
+    if (_declared_kind(key) in (input_role_lexicon.KIND_NUMBER, input_role_lexicon.KIND_TUNING)
+            and not _textual_tuning(key)):
+        number = _number(tail)
+        if number is not None:
+            return number
+        # A NUMBER SLOT DOES NOT TAKE TEXT.  Measured: "with a timeout of soonish" bound the string
+        # "soonish" to an integer slot and the adapter would have received it.  A declared number is
+        # parsed as a number or not at all; a tuning knob may also be a program (an interpreter is a
+        # path or a program name), and nothing else.
+        if _declared_kind(key) == input_role_lexicon.KIND_NUMBER:
+            return None
+        if not _program_or_path(tail):
+            return None
     if key in _LINE_RANGE_KEYS:
         # "lines 5 to 9" is ONE statement of TWO bounds. Read as two numbers the
         # first key would take 5 and the second would find nothing, so the pair is
@@ -830,10 +978,42 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
             return json.loads(q)
         except ValueError:
             return q
+    if _declared_kind(key) in (input_role_lexicon.KIND_IDENT, input_role_lexicon.KIND_IDENTS):
+        # AN IDENTIFIER SLOT DOES NOT TAKE A PATH.  The generic branch below accepts any bare
+        # token, so a sentence ending "... and save it to out.json" put `out.json` into
+        # `new_symbol` -- a symbol name that is a file name, bound as though the caller had said
+        # it.  The sentence DID contain the word, which is why the anti-fabrication check cannot
+        # catch it: the fabrication is the SHAPE, and the shape is what the lexicon declares.
+        candidate = _quoted(tail)
+        if candidate is None:
+            # The WHOLE token, slashes included: measuring only its identifier-shaped prefix read
+            # "pkg/mod.py" as "pkg" and let the path through as a symbol name.
+            bare = re.match(r"\s*([A-Za-z_][A-Za-z0-9_./\\-]*)", tail)
+            candidate = bare.group(1) if bare else None
+        if candidate is not None and (
+                "/" in candidate or "\\" in candidate
+                or pathlib.PurePosixPath(candidate).suffix.lower() in _FILE_SUFFIXES):
+            return None
     value = _quoted(tail)
     if value is None and not quoted_only:
-        m = re.match(r"\s*([A-Za-z0-9_.:/-]+)", tail)
+        # A REVISION IS READ WHOLE.  The bare-token class below stops at "~" and "^", so
+        # "from the ref HEAD~2" bound `ref` to "HEAD" -- a DIFFERENT commit, silently, exactly
+        # the class of error this key was already fixed for once ("the commit 49b9ce0" used to
+        # be dropped entirely).  The wider class is confined to the slots declared textual
+        # tuning, where a value really is a revision expression; every other key keeps the
+        # historical token shape byte for byte.
+        _clause=(r"([A-Za-z0-9_.:/~^@{}-]+)" if _textual_tuning(key)
+                 else r"([A-Za-z0-9_.:/-]+)")
+        m = re.match(r"\s*" + _clause, tail)
         value = m.group(1) if m else None
+        # ... and a connective is not a value either.  Measured while binding the git
+        # surface: "Revert the last commit in the repository <R>" bound `ref` to "in",
+        # because "commit" is one of ref's own aliases and the word after it is the
+        # preposition.  `ref` is then a revision that does not exist and the capability
+        # refuses a sentence that stated nothing wrong; the honest reading is that the
+        # sentence did not state a revision, which is what None means here.
+        if value is not None and value.lower() in gc.STOPWORDS:
+            return None
         # a bare version token names a capability; it is not a value the caller stated
         if value is not None and _VERSION_FRAGMENT.match(value) and key not in _VERSION_KEYS:
             return None
@@ -847,6 +1027,18 @@ _STEM_SUFFIXES: dict[str, set[str]] = {
     "sqlite": {".sqlite", ".db", ".sqlite3"}, "database": {".sqlite", ".db", ".sqlite3"}, "yaml": {".yaml", ".yml"}, "csv": {".csv"},
     "html": {".html", ".htm"}, "image": {".png", ".jpg", ".jpeg", ".webp"}, "png": {".png"}, "screenshot": {".png", ".jpg", ".jpeg"},
     "text": {".txt", ".md"}, "source": {".py"}, "python": {".py"}, "test": {".py"},
+    # A diff slot is a patch, not any file that happens to be named: without this a
+    # JSON document the sentence gave to another role was bound as `diff_path` by the
+    # F23 elimination pass, and a repair capability outranked the capability the
+    # sentence actually named ("Apply the jq filter ... to x.json").
+}
+# A slot whose KIND the sentence states even though its stem names no type.  Used only
+# where a bound value must be sanity-checked (the F23 joint pass), never to drive a
+# type SCAN: adding "diff" to _STEM_SUFFIXES made every diff-shaped key scan the whole
+# repository by extension, and the front-compiler suite went from 13 to over 28 minutes.
+_JOINT_SUFFIX_GUARD: dict[str, set[str]] = {
+    "diff": {".diff", ".patch", ".txt"},
+    "patch": {".diff", ".patch"},
 }
 _OUTPUT_STEMS = {"output", "result", "report", "screenshot", "image", "artifact", "destination", "dest"}
 
@@ -1161,6 +1353,19 @@ def _role_phrases(key: str) -> list[str]:
         alias = str(alias).lower().strip()
         if alias and alias not in phrases:
             phrases.append(alias)
+    # THE VOCABULARY WAS ALREADY DECLARED AND NOBODY READ IT.  `input_role_lexicon_v1.ROLE_ALIASES`
+    # carries the words a sentence uses for 38 declared roles -- "timeout", "interpreter",
+    # "branch called", "kill ratio", "repeats" -- and this module imported it (`_ROLE_LEXICON_ALIASES`)
+    # without ever consulting it.  Measured consequence: 33 declared inputs had no prose form at
+    # all in this table, so `timeout_s` (15 entries), `python_executable` (14) and `run_tests` (6)
+    # could not be stated by ANY sentence, and every one of those capabilities was refused as
+    # `named_but_inputs_not_stated` -- the machine could not be asked to run its own tests, on its
+    # own interpreter, inside its own time limit.  The lexicon's forms are appended, not substituted:
+    # the explicit aliases in this module keep their precedence.
+    for alias in _ROLE_LEXICON_ALIASES.get(key, ()):
+        alias = str(alias).lower().strip()
+        if alias and alias not in phrases:
+            phrases.append(alias)
     return phrases
 
 
@@ -1302,6 +1507,39 @@ def _joint_role_binding(goal: str, pending: list[str], root: pathlib.Path, taken
     return assignment
 
 
+# WHICH SLOTS WERE LEFT TO THE ADAPTER, so the answer can say so.  A compiler that silently chose
+# a timeout would be guessing; one that records "these knobs were not stated, the adapter's own
+# default applies" has decided nothing the caller asked about.
+_DEFAULTED_INPUTS: contextvars.ContextVar[tuple[str, ...]] = contextvars.ContextVar(
+    "defaulted_inputs", default=())
+
+
+def _record_defaulted(key: str) -> None:
+    _DEFAULTED_INPUTS.set(tuple(sorted(set(_DEFAULTED_INPUTS.get()) | {str(key)})))
+
+
+def _tuning_the_sentence_did_not_state(goal: str, key: str) -> bool:
+    """Is this slot a declared tuning knob, absent from the sentence?
+
+    Both halves are measured: the slot must be declared KIND_TUNING by the lexicon (so this never
+    widens to a slot whose unstated value means something), and the sentence must not state it by
+    any of its own phrases (so a stated knob is never overridden by a default).
+    """
+    if input_role_lexicon.kind_of(key) != input_role_lexicon.KIND_TUNING:
+        return False
+    tails = _after_key(goal, key)
+    if not tails:
+        return True
+    if key == "python_executable":
+        # THE WORD "python" IS NOT AN INTERPRETER.  Every Python sentence contains it, so the
+        # presence test alone made this slot look stated and the capability was refused for not
+        # stating a path nobody says out loud.  A stated interpreter is a PATH (an absolute one, or
+        # a program name with a version), and anything else leaves the choice to the machine.
+        return not any(re.match(r"\s*(?:[\"']?(?:/[^\s\"']+|[A-Za-z]:[\\/][^\s\"']+)|python[0-9.]*\b)",
+                                str(tail)) for tail in tails)
+    return False
+
+
 def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None,
                     produced_paths=None, cycle=None, spool=None) -> dict[str, Any]:
     """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses.
@@ -1319,7 +1557,22 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     # payload selector (knowledge fetch json_path: literal []), not a file; every other
     # ``*_path`` key (jq json_path ...) keeps the pinned file binder.
     declared_selectors = _declared_literal_selector_keys(entry)
-    pinned_keys = [k for k in keys if k not in declared_selectors and (k in ("text", "goal", "url") or k.endswith("_path"))]
+    # The pinned binder is authoritative for every slot the role lexicon knows a
+    # KIND for: an identifier, a test list, a tree, a knob.  Classifying them as
+    # "typed" handed them to a generic type binder with no grammar for a symbol,
+    # so a refactoring request failed as "the sentence never stated it" and F24
+    # skipped the capability -- after which an artifact writer answered "rename
+    # the function add to plus in .../good.py" by converting that .py to a PDF.
+    pinned_keys = [
+        k for k in keys
+        if k not in declared_selectors
+        and (
+            k in ("text", "goal", "url")
+            or k.endswith("_path")
+            or (input_role_lexicon.kind_of(k) is not None
+                and not k.endswith("_paths"))
+        )
+    ]
     typed_keys = [k for k in keys if k not in pinned_keys]
     inputs: dict[str, Any] = {}
     taken: set[str] = set()
@@ -1330,9 +1583,27 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
         try:
             bound_val = gc._bind_inputs(goal, root, shadow, context_paths=context_paths, future_clauses=future_clauses)
             val = bound_val.get(key)
+            # THE FILE THE CALLER NAMED OUTRANKS THE DIRECTORY ITS PATH SPELLS.  The pinned binder
+            # returns the enclosing directory for a scope key even when the sentence named one
+            # file, and `_repo_paths` yields every prefix of a stated path, so a one-file request
+            # silently became a whole-tree request.  Measured twice: `ruff format` rewrote 2238
+            # files from a sentence about one file, and a crash search was handed a directory when
+            # its sentence named the module.  Only capabilities that DECLARE `path_file_or_dir`
+            # are affected, because only their adapters can index a single file.
+            _bindings = entry.get("proposal_bindings") if isinstance(entry, Mapping) else None
+            if (key in _PATH_DIR_KEYS and isinstance(val, str)
+                    and isinstance(_bindings, Mapping)
+                    and isinstance(_bindings.get(key), Mapping)
+                    and _bindings[key].get("type") == "path_file_or_dir"):
+                _files = [raw for raw, path in gc._repo_paths(goal, root)
+                          if path.is_file()
+                          and not _excludes_destination(raw, _stated_destination(goal, root), root)]
+                if len(_files) == 1:
+                    val = _files[0]
+                    bound_val[key] = val
             if key.endswith("_path") and not _is_output_key(key, entry) and val:
                 stem = key[:-5].lower()
-                wanted = _STEM_SUFFIXES.get(stem)
+                wanted = _STEM_SUFFIXES.get(stem) or _JOINT_SUFFIX_GUARD.get(stem)
                 if wanted and pathlib.PurePosixPath(val).suffix.lower() not in wanted:
                     raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "type_mismatch:" + key)
             inputs.update(bound_val)
@@ -1345,10 +1616,14 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                 pending_input_paths.append(key)
                 continue
             if key.endswith("_path"):
-                # F26: an OUTPUT is a new artifact.  It never claims an artifact an earlier
-                # step already writes (that would overwrite the producer's output), so the
-                # produced-artifact binder is not offered here - only the future artifacts the
-                # sentence still names, and then the deterministic spool.
+                # AN OUTPUT IS NEVER DROPPED.  This branch used to be UNREACHABLE: the knob
+                # handling above it ended in `continue`, so an output path the pinned binder could
+                # not decide was recorded as defaulted and silently vanished from the request.  A
+                # capability whose artifact path disappears still compiles and still runs, and it
+                # writes its report wherever the adapter felt like.  Measured: the pypi provenance
+                # audit states `report_path` in plain words ("... and save it to .../out.json") and
+                # the row only passed because the missing path was never noticed.  F26: an OUTPUT
+                # is a new artifact, so it never claims one an earlier step already writes.
                 bound = None
                 try:
                     bound = _bind_output_by_future(goal, key, root, exclude=produced_paths)
@@ -1362,12 +1637,42 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                 if isinstance(bound, str) and bound:
                     taken.add(bound)
                 continue
-            raise
+            if input_role_lexicon.kind_of(key) == input_role_lexicon.KIND_TUNING:
+                # THE ADAPTER'S OWN KNOB  `input_role_lexicon_v1.SLOT_KIND` declares these slots
+                # KIND_TUNING with the reason written beside them: every adapter writes
+                # `args.get("<knob>") or <default>`, so the value is the machine's business, not the
+                # caller's.  The declaration existed and no binder read it, so `timeout_s` (15
+                # entries), `python_executable` (14), `run_tests` (6) and `repeats` each made their
+                # capability unaskable: the sentence could not state them, the compiler refused as
+                # `named_but_inputs_not_stated`, and no adapter ever ran.  A knob the sentence DOES
+                # state is still bound, and a knob it states unparseably still fails closed.
+                _record_defaulted(key)
+                continue
+            # THE DECLARED KIND IS A BINDER TOO, and it must get its turn before the request is
+            # refused.  The pinned binder measures one slot at a time against the whole sentence
+            # and gives up when the sentence does not match ITS shape; the typed grammar here
+            # reads the slot's declared introducers ("rename to", "to", "the function").  Measured:
+            # "Rename the symbol add to plus in the python module P" left `new_symbol` unbound --
+            # the pinned binder has no rule for an identifier introduced by "to", and the typed
+            # binder was never asked -- so all six refactor verbs were refused
+            # `contract_not_stated:module,new_symbol,qualname,...` for a sentence that stated every
+            # one of them.  The fallback invents nothing: the value still has to come out of the
+            # sentence, and it still has to be the declared kind (see the identifier law above).
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+            if isinstance(inputs[key], str) and inputs[key]:
+                taken.add(inputs[key])
     # F23: the roles the sentence states decide the keys the pinned binder left open.
     if pending_input_paths:
         joint = _joint_role_binding(goal, pending_input_paths, root, taken, produced_paths=produced_paths)
         for key in pending_input_paths:
             if key in joint:
+                stem = key[:-5].lower() if key.endswith("_path") else ""
+                wanted = _STEM_SUFFIXES.get(stem) or _JOINT_SUFFIX_GUARD.get(stem)
+                if wanted and pathlib.PurePosixPath(str(joint[key])).suffix.lower() not in wanted:
+                    # F23's elimination decides WHICH of the stated files fills a slot;
+                    # it never decides that a file of the wrong kind is the slot.  The
+                    # type gate the pinned binder already applies holds here too.
+                    continue
                 inputs[key] = joint[key]
                 taken.add(joint[key])
     for key in pending_input_paths:
@@ -1392,10 +1697,44 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
                     inputs[key] = _bind_produced_artifact(goal, key, root, produced_paths)
                 except GoalCompilationFailure:
                     raise type_failure
+        stem = key[:-5].lower() if key.endswith("_path") else ""
+        wanted = _STEM_SUFFIXES.get(stem) or _JOINT_SUFFIX_GUARD.get(stem)
+        if (wanted and isinstance(inputs.get(key), str)
+                and pathlib.PurePosixPath(inputs[key]).suffix.lower() not in wanted):
+            # The type fallback searches the repository for a file of the key's
+            # TYPE; for a slot that names no type of its own ("diff_path") it
+            # will happily hand back any named file, so the stated kind is
+            # checked here the same way the pinned binder checks it.
+            inputs.pop(key, None)
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", "type_mismatch:" + key)
         if isinstance(inputs.get(key), str) and inputs[key]:
             taken.add(inputs[key])
     for key in typed_keys:
-        inputs[key] = bind_typed_key(goal, key, root, entry)
+        try:
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+        except GoalCompilationFailure:
+            if _tuning_the_sentence_did_not_state(goal, key):
+                _record_defaulted(key)
+                continue
+            raise
+    # NOTHING STATED MAY VANISH, AND NOTHING DEFAULTED MAY BE SILENT.  A pinned knob can drop out
+    # without raising (`_bind_inputs` simply omits a key it cannot decide), so the budget is settled
+    # here, once: a declared tuning slot the sentence never states is DEFAULTED and recorded, and a
+    # slot the sentence DOES state but that no binder produced is refused -- a stated value that
+    # disappears is the same defect as a stated revision silently replaced by HEAD.
+    for key in keys:
+        if key in inputs or input_role_lexicon.kind_of(key) != input_role_lexicon.KIND_TUNING:
+            continue
+        if _tuning_the_sentence_did_not_state(goal, key):
+            _record_defaulted(key)
+            continue
+        # A STATED KNOB IS BOUND, NOT DISCARDED.  The pinned binder omits a knob it cannot decide
+        # without raising, so "with a timeout of 30 seconds" used to vanish; the declared kind is
+        # what parses it.
+        try:
+            inputs[key] = bind_typed_key(goal, key, root, entry)
+        except GoalCompilationFailure:
+            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":stated_but_unbound")
     repair_output_collisions(goal, inputs, root, exclude=produced_paths, entry=entry,
                              cycle=cycle, spool=spool)
     return inputs
@@ -1497,8 +1836,65 @@ def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int
 _FALLBACK_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
+def _named_by_its_own_name(goal_tokens: set[str], cid: str) -> bool:
+    """Does the sentence state this capability's WHOLE name?
+
+    A capability's name is its identity: `python.quality.coverage.v1` is the thing you get when you
+    say "python quality coverage".  The pinned scorer weighs the words of the name like any other
+    evidence, which is right for a sentence that mentions a capability in passing and wrong for one
+    that spells it out.  Measured: the sentence "Run the python quality coverage. <dir> ... and save
+    it to <out>" — the capability's entire name, in its own order — ranked
+    `python.quality.coverage.v1` THIRD at 20, behind `python.quality.flake_detect.v1` (22) and
+    `python.review.diff_coverage_gate.v1` (22), both of which merely share the words "python" and
+    "coverage".  Same shape on `python.perf.benchmark.v1`, `python.packaging.build_package.v1` and
+    the four quality siblings: eight capabilities were unaskable by their own names.
+
+    Two distinctive words are required, so a name that reduces to one generic word ("source",
+    "python") cannot claim a sentence on the strength of that word alone: `_name_words` already
+    drops the generic vocabulary and the version token, and a one-word residue is not an
+    identification.
+    """
+    from canonical.runtime.capability_selection_retrieval_v1 import _name_words
+    words = {w for w in _name_words(cid) if w not in gc.GENERIC_MATCH_TOKENS}
+    return len(words) >= 2 and words <= goal_tokens
+
+
+def _catch_all_was_handed_a_contract(text: str, entry: Mapping[str, Any], root: pathlib.Path) -> bool:
+    """Was this catch-all HANDED a contract rather than left to swallow the request?
+
+    F4's law is that a capability which takes the whole request can never be the answer to one.
+    It is still the law.  But a capability whose only non-output input is a PAYLOAD the sentence
+    quoted is not swallowing anything: the caller stated the text and the destination, and the
+    capability's whole job is to put one in the other.
+
+    Measured: "Use available content on text \"hello world\" and save it to <out>" ranked
+    `text.file.write` FIRST at 24 — its own keywords, its own act — and the request was answered
+    by a capability that ranked 9 and failed with `source_root:0_existing_directories_named`.  The
+    contract fallback in `ranked_candidates` was written for exactly this sentence shape ("Write
+    the text 'hello patch' to the file out.txt") and could never complete, because the catch-all it
+    ranked was deleted from the pool two lines later.
+
+    Three conditions, all of them narrow: the sentence quotes a value, every declared input binds,
+    and nothing bound went unstated.  "Run the thing." quotes nothing, so it is refused exactly as
+    before.
+    """
+    if not _QUOTED_LITERAL.search(str(text or "")):
+        return False
+    try:
+        inputs = bind_all_inputs(text, entry, root, cycle=0, spool=set())
+    except GoalCompilationFailure:
+        return False
+    if not any(not _is_output_key(key, entry) for key in inputs):
+        return False
+    return not _inputs_not_stated_by(text, inputs)
+
+
 def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
-    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal."""
+    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal.
+
+    A capability whose whole NAME the sentence states comes first; the score orders everything the
+    request left open.  The name is the request's own words, not a hint about them.
+    """
     out = []
     for cid, entry in sorted(registry.items()):
         if not isinstance(entry, Mapping) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
@@ -1517,7 +1913,49 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
         score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:
             out.append((score, specificity, cid, evidence))
-    out.sort(key=lambda x: (-x[0], -x[1], x[2]))
+    named_tokens = gc._tokens(prose_only(goal))
+    # A NAME IS ITS ACT AND ITS OBJECT.  THE NAME RULE MAY NOT READ HALF OF ONE.
+    #
+    # `_name_words` drops the verb segment, so the "whole name" of
+    # `archive.tar_gz.create_from_manifest` is {archive, tar, gz, manifest} -- the OBJECT only.
+    # A sentence that shares that object while using a different verb was therefore counted as
+    # stating the capability's whole name and pinned ABOVE the capability that declares the verb
+    # the sentence uses: "Verify the tar.gz archive A against the manifest M." ranked
+    # `archive.tar_gz.create_from_manifest` (47) first and `archive.verify.tar_gz.gnu` (61)
+    # second, and the front door answered the check by building a new archive.  The pinned score
+    # had already picked the verifier; the name rule inverted it.
+    #
+    # The head verb of a sentence names the ACT.  When it names one that this candidate does not
+    # declare, the sentence has not named this candidate -- it named its object and somebody
+    # else's verb. Two other cases are untouched: a sentence with no act verb ("Run the python
+    # quality coverage ...") keeps the old rule, and a sentence whose verb the candidate DOES
+    # declare is still named on object words alone.
+    _head_verb = gc._head_verb(prose_only(goal))
+    # A RIVAL THAT OWNS THE SENTENCE'S VERB AND OUTSCORES YOU MEANS THE SENTENCE NAMED ITS OBJECT,
+    # NOT YOU.  The competitor's own declared act is the test, and only a candidate that
+    # OUTSCORES this one can strip its name -- so a name pin never survives at the cost of a
+    # better-scoring answer, and a capability that is itself the best answer to its own sentence
+    # keeps its pin.  Two measured shapes this must NOT touch: the reachability sentence
+    # "Use ambiguity bound existing goal grounding plain registry stdlib ..." opens with a
+    # keyword, not a verb, and nothing declares "ambiguity"; and `python.repo.pr_realize.v1`
+    # (72) opens "Use branch commit ... verify ..." over `vcs.git.branch_list.v1` (36), which
+    # declares the word but cannot outscore it.
+    _rivals: dict[str, int] = {}
+    if _head_verb:
+        for row in out:
+            entry = registry.get(row[2]) or {}
+            if _head_verb in gc._declared_act_words(entry):
+                _rivals[row[2]] = row[0]
+
+    def _named(row):
+        cid = row[2]
+        if not _named_by_its_own_name(named_tokens, cid):
+            return False
+        if not _head_verb or cid in _rivals:
+            return True
+        return not any(score > row[0] for score in _rivals.values())
+
+    out.sort(key=lambda x: (not _named(x), -x[0], -x[1], x[2]))
     if out:
         return out
     # A request whose every distinctive word is a VALUE carries no prose to rank on.
@@ -1627,6 +2065,7 @@ def _score_tiers(pool: list[tuple[int, int, str, dict[str, Any]]]) -> list[list[
 # A binding failure that names ZERO candidates means the sentence never stated that input;
 # a failure that names TWO or more means the sentence stated it ambiguously.  The difference
 # decides whether the route may continue (F24) or must fail closed.
+_BARE_KEY_DETAIL = re.compile(r"[A-Za-z_][A-Za-z0-9_]*$")
 _UNSTATED_DETAIL = re.compile(r"(?:^|:)(?:not_stated|value_not_parseable|no_matching_existing_files_named)$")
 
 
@@ -1635,10 +2074,25 @@ def _failure_is_unstated(exc: BaseException) -> bool:
     if getattr(exc, "code", "") != "GOAL_INPUT_BINDING_REQUIRED":
         return False
     detail = str(getattr(exc, "detail", "") or "")
+    # A file of the WRONG KIND is not a statement about this slot either: the
+    # type fallback picked some file that exists, the sentence never said it was
+    # the diff.  Measured: without this, "Apply the jq filter ... to x.json ..."
+    # stopped the walk at the top-ranked repair capability because it had bound
+    # that JSON as its diff_path, and json.query.jq -- the capability the
+    # sentence names -- was never reached.
+    if detail.startswith("type_mismatch:"):
+        return True
     counted = re.search(r":(\d+)_", detail)
     if counted:
         return int(counted.group(1)) == 0
-    return bool(_UNSTATED_DETAIL.search(detail))
+    # The pinned binder names the ONE key it could not fill, bare: `source_root`.
+    # That is a slot the sentence never stated (an ambiguous one is reported as
+    # `<key>:2_<what>_named`, and a type conflict as `type_mismatch:<key>`), so a
+    # bare key must be SKIPPED, not treated as ambiguity.  Measured: without this
+    # the walk stopped on the top-ranked candidate -- "Apply the jq filter ... to
+    # x.json ..." was refused for `python.software.repair.apply`'s `source_root`
+    # and json.query.jq, the capability the sentence names, was never reached.
+    return bool(_UNSTATED_DETAIL.search(detail)) or bool(_BARE_KEY_DETAIL.match(detail))
 
 
 def _single(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any], score: int, evidence: Mapping[str, Any], rules: list[str]) -> dict[str, Any]:    return {
@@ -1757,7 +2211,9 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
             continue
         if any(str(inputs[k]) == str(inputs[j]) for k in inputs if _is_output_key(k, entry) for j in inputs if j != k and j.endswith("_path")):
             continue
-        return {"capability_id": cid, "inputs": inputs, "score": score, "specificity": specificity, "match_evidence": dict(evidence)}
+        return {"capability_id": cid, "inputs": inputs, "score": score, "specificity": specificity,
+                "defaulted_inputs": list(_DEFAULTED_INPUTS.get()),
+                "match_evidence": dict(evidence)}
     return None
 
 
@@ -1976,6 +2432,119 @@ def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, A
     }
 
 
+# Verbs that state HOW work is asked for, never WHICH work it is.
+_EXECUTION_VERBS = frozenset({"run", "call", "execute", "invoke", "perform", "do", "use", "apply"})
+
+
+def stated_act_unbound(
+    goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path,
+    selected: str | None = None,
+) -> dict[str, Any] | None:
+    """The ACT the sentence's own verb names, when its declared inputs cannot be bound.
+
+    A sentence states its verb first, and that verb is the strongest identity evidence a caller
+    gives without writing a capability id.  Measured: "Bisect the repository R from the ref
+    HEAD~2" -- a bisect with no predicate -- could not bind `argv`, so the pinned compiler
+    served it with `source.candidates.enumerate.stdlib`, which enumerated 400 python files and
+    reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED.  The caller asked
+    for a commit and was handed a file listing, certified as the work requested.
+
+    So: when the head verb matches a registered capability's identity, and that capability's
+    own declared inputs cannot be bound from the sentence, that is a REFUSAL about the act the
+    caller named -- never a licence to answer with a different act.  Returns the capability and
+    the unbound input, or None when no act is named this way (which is the ordinary case and
+    changes nothing).
+    """
+    registry = dict(admissible)
+    text = without_stated_text_value(normalize_goal(str(goal or "")))
+    ranked = ranked_candidates(text, registry)
+    # THE BAR IS THE BEST CAPABILITY THE SENTENCE CAN ACTUALLY BE GIVEN, not whatever the pinned
+    # compiler happened to pick.  Measured: "Use ast call codemod ... function inline ... on the
+    # python module M" ranked `python.refactor.inline_function.v1` FIRST at 87 and it bound every
+    # declared input, while the pinned compiler answered `python.toolchain.ruff_dead_code.v1`; the
+    # bar was therefore that pick's own score, and `python.software.repair.loop.test_guided.ast.v1`
+    # (50, a candidate the sentence never named as its act) cleared it on the strength of the word
+    # "ast" and the request was REFUSED as `GOAL_STATED_ACT_INPUTS_UNBOUND:...:source_paths`.  A
+    # refusal is for an act the ranking PREFERS and cannot serve; when a better-ranked capability
+    # binds, there is no displacement to refuse and the act the sentence names is serviceable.
+    winner_score = 0
+    for score, _specificity, cid, _evidence in ranked[:8]:
+        entry = registry.get(cid)
+        if not isinstance(entry, Mapping) or not is_plain_goal_routable(entry):
+            continue
+        if _binds(goal, entry, root):
+            winner_score = score
+            break
+    else:
+        winner_score = next((row[0] for row in ranked if row[2] == selected), 0)
+    act = ""
+    failure: dict[str, Any] | None = None
+    for score, _specificity, cid, evidence in ranked[:6]:
+        # ONLY A DISPLACEMENT IS REFUSED.  If the winner OUTRANKS the capability the sentence's
+        # own verb names, the caller's words were read as something better and that is an
+        # ordinary routing decision -- measured: "Check out the branch feature in the repository
+        # R" ranks vcs.git.checkout.v1 first (17) while python.contract.check.crosshair.v1 reads
+        # the word "Check" (score below it) and cannot bind; refusing there took a working
+        # checkout off the surface.  Refusal is for the case where the act the sentence names is
+        # the one the ranking PREFERS and it still cannot be served.
+        if score <= winner_score:
+            continue
+        verb = str(evidence.get("matched_head_verb") or "")
+        if not verb or verb.lower() in _EXECUTION_VERBS:
+            # "Run the pdf extract text pypdf on X" has the head verb `run`, which names how the
+            # work is asked for, not which work it is: taking it as identity made
+            # shell.command.run the "stated act" of a PDF extraction and refused the capability
+            # the sentence actually described.
+            continue
+        if not act:
+            act = verb.lower()
+        if verb.lower() != act:
+            # Only the candidates the SAME verb names are alternatives for this act.
+            break
+        entry = registry.get(cid)
+        if not isinstance(entry, Mapping) or not is_plain_goal_routable(entry):
+            continue
+        if _binds(goal, entry, root):
+            # The act is serviceable by at least one of the capabilities that name it, so this
+            # is an ordinary routing decision -- not a refusal.  Measured: rename_parameter and
+            # rename_symbol both name `rename` and both outrank the winner; rename_parameter
+            # cannot bind `module`, rename_symbol binds everything.  Refusing on the first
+            # unbound sibling would have taken a working refactor off the surface.
+            return None
+        if failure is None:
+            failure = {"capability_id": cid, "act": verb, "code": "GOAL_INPUT_BINDING_REQUIRED",
+                       "detail": _bind_detail(goal, entry, root)}
+    return failure
+
+
+def _binds(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> bool:
+    """Can this capability's own declared inputs be bound from the sentence, by EITHER binder?
+
+    Two binders serve this repository -- the pinned one in goal_compiler and the front one here
+    -- and they do not overlap completely: `module` is a role the pinned binder resolves and the
+    front binder does not.  Asking only the front binder made a working capability look
+    unstateable.
+    """
+    try:
+        bind_all_inputs(goal, entry, root, cycle=0, spool=set())
+        return True
+    except GoalCompilationFailure:
+        pass
+    try:
+        gc._bind_inputs(goal, root, entry)
+        return True
+    except Exception:  # noqa: BLE001 - the pinned binder refuses by raising
+        return False
+
+
+def _bind_detail(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> str:
+    try:
+        bind_all_inputs(goal, entry, root, cycle=0, spool=set())
+        return "unstated"
+    except GoalCompilationFailure as exc:
+        return str(exc.detail or exc.code)
+
+
 def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
@@ -2092,6 +2661,17 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     selected = (compiled or {}).get("selected_capability") if compiled else None
     single_shape = bool(compiled) and compiled.get("compiler_mode") == "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH" and selected
 
+    # A NAMED ACT IS NOT A LICENCE TO SERVE A DIFFERENT ONE.
+    # The pinned compiler answers with whatever BINDS, so an act whose inputs the sentence
+    # states incompletely silently loses to a neighbour that needs nothing.  Refuse instead,
+    # naming the act and the input, and let the caller fix the sentence.
+    _unbound_act = stated_act_unbound(text, registry, root, selected) if single_shape else None
+    if _unbound_act is not None and _unbound_act["capability_id"] != selected:
+        rules.append("F32_STATED_ACT_INPUTS_UNBOUND")
+        raise GoalCompilationFailure(
+            "GOAL_STATED_ACT_INPUTS_UNBOUND",
+            _unbound_act["capability_id"] + ":" + _unbound_act["detail"])
+
     # An explicit name outranks a scorer that could not see the thing named.
     # The name is read OUTSIDE the single_shape gate on purpose.  Inside it, the
     # 28 of 32 capabilities that routed to themselves while being handed inputs
@@ -2191,12 +2771,35 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
         # not a name, so a zero-input tool that is not named stays undecidable.
         selectable = [
             c for c in ranked
-            if c[2] in decidable or request_names_capability_id(text, c[2])
+            if (c[2] in decidable or request_names_capability_id(text, c[2])
+                or _catch_all_was_handed_a_contract(text, registry[c[2]], root))
         ]
         # F3: a goal that names a file to be produced is served by a tool that can write a file
+        #
+        # F3 MUST NOT OUTRULE THE VERB THE SENTENCE USES.  Measured: "Verify the tar.gz archive
+        # <A> against the manifest <M> with gnu tar." ranks `archive.verify.tar_gz.gnu` FIRST at
+        # 63 -- the verifier does not write a file, it returns a verdict about files that already
+        # exist -- and F3, reading the two INPUT paths as things to be produced, restricted the
+        # pool to artifact writers and handed the request to `archive.tar_gz.create_from_manifest`
+        # at 47.  The end-to-end archive-verification family therefore scored 0 of 3 with every
+        # route on the CREATOR: the machine was asked to check an archive and built a new one.
+        #
+        # The escape is the same law the ranking uses, not a new one: when the sentence's own head
+        # verb is an act the best-ranked candidate DECLARES, that candidate is what was asked for,
+        # and a lower-ranked writer cannot take the request from it.  A verifier is exactly the
+        # shape this matters for -- it has no output keys -- so the rule is written in those
+        # terms and cannot lift an arbitrary non-writer over a writer the sentence asked for.
+        outranking_act = None
+        if selectable and not _output_keys(registry[selectable[0][2]]):
+            _verb = gc._head_verb(text)
+            if _verb and _verb in gc._declared_act_words(registry[selectable[0][2]]):
+                outranking_act = selectable[0]
         preferred = [c for c in selectable if _output_keys(registry[c[2]])] if future else []
-        if future and preferred:
+        if future and preferred and outranking_act is None:
             rules.append("F3_ARTIFACT_WRITERS_PREFERRED")
+        elif outranking_act is not None:
+            preferred = [outranking_act]
+            rules.append("F3_NOT_APPLIED__THE_SENTENCE_NAMES_THE_ACT_THE_BEST_CANDIDATE_DECLARES")
         pool = preferred or selectable
         best = pool[0] if pool else None
         if best is not None and selected != best[2]:
@@ -2217,7 +2820,8 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
                 tier_error: GoalCompilationFailure | None = None
                 for rank, cand in enumerate(tier):
                     cand_entry = registry[cand[2]]
-                    if _is_catch_all(cand_entry):
+                    if (_is_catch_all(cand_entry)
+                            and not _catch_all_was_handed_a_contract(text, cand_entry, root)):
                         # a capability that binds every sentence is never the decision
                         continue
                     try:
@@ -2326,6 +2930,42 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
 _OWNED_OUTPUT_ROLES = ("output_path", "result_path")
 
 
+def _stated_in(text: str, value: Any) -> bool:
+    """Did the sentence state this bound value?  A LIST is stated member by member.
+
+    Every "was it stated?" check in this module used to test `isinstance(value, str)`, so a slot
+    whose value is a LIST could never be shown to have been stated -- whatever the sentence said.
+    Measured, and it is the single largest cause of the capability residue: `shell.command.run`
+    bound `argv` to exactly the quoted command the caller wrote ("cat README.md" -> ["cat",
+    "README.md"]) and was then refused `named_but_inputs_not_stated:argv`, because a list is not a
+    string; `queries`, `test_argv`, `test_paths`, `source_paths`, `changed_paths` and `edits` were
+    refused the same way.  The rule is not new: an output we own is exempt everywhere already;
+    what was missing is that "the caller stated it" holds for a list exactly when it holds for
+    every member.
+    """
+    if isinstance(value, str):
+        stated = value.strip()
+        return bool(stated) and (stated in text or text.strip().startswith(stated))
+    if isinstance(value, (list, tuple)):
+        return bool(value) and all(_stated_in(text, item) for item in value)
+    if isinstance(value, bool):
+        # "run the tests true" is how a caller states a flag; the bound value is a bool.
+        return any(re.search(r"(?<![A-Za-z0-9_])" + word + r"(?![A-Za-z0-9_])", str(text), re.I)
+                   for word in (("true", "yes") if value else ("false", "no")))
+    if isinstance(value, (int, float)):
+        # A NUMBER IS A VALUE THE SENTENCE STATES, and it has to be read as a TOKEN: a substring
+        # test would accept "3" from "30".  Measured: `python.review.diff_mutation_gate.v1` bound
+        # `max_mutants` to 8 from the sentence's own words and was then refused
+        # `named_but_inputs_not_stated:max_mutants` -- the last three rows of the named residue were
+        # this, and every one of them had bound the number correctly.
+        rendered = ("%d" % value) if float(value).is_integer() else ("%g" % value)
+        return re.search(r"(?<![A-Za-z0-9_.])" + re.escape(rendered) + r"(?![A-Za-z0-9_.])", str(text)) is not None
+    if isinstance(value, Mapping):
+        # A key/value payload is stated when every stated pair is ("variables x=1, y=2").
+        return bool(value) and all(_stated_in(text, k) and _stated_in(text, v) for k, v in value.items())
+    return False
+
+
 def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
     """Every bound input that is neither an output we own nor the caller's own words.
 
@@ -2346,16 +2986,23 @@ def _inputs_not_stated_by(text: str, inputs: Mapping[str, Any]) -> list[str]:
     request itself.
     """
     unstated = []
+    # A DECLARED DEFAULT IS NOT AN INVENTED VALUE.  This check exists to catch the binder handing a
+    # capability a plausible path nobody asked for; a slot the lexicon declares KIND_TUNING and that
+    # was filled by the adapter's own default is the opposite of that -- the caller asked about a
+    # timeout no more than the machine needed them to.  Only declared tuning slots can be exempt,
+    # so the anti-fabrication rule keeps all of its force where it matters.
+    defaulted = {k for k in _DEFAULTED_INPUTS.get()
+                 if input_role_lexicon.kind_of(k) == input_role_lexicon.KIND_TUNING}
     for key, value in dict(inputs or {}).items():
         role = str(key)
+        if role in defaulted:
+            continue
         if (role in _OWNED_OUTPUT_ROLES
                 or role.endswith("_output_path")
                 or role.endswith("_result_path")):
             continue
-        if isinstance(value, str):
-            stated = value.strip()
-            if stated and (stated in text or text.strip().startswith(stated)):
-                continue
+        if _stated_in(text, value):
+            continue
         unstated.append(role)
     return unstated
 
@@ -2388,11 +3035,8 @@ def _contract_gaps_for(text: str, entry: Mapping[str, Any], root: pathlib.Path) 
                 or role.endswith("_output_path")
                 or role.endswith("_result_path")):
             continue
-        value = bound.get(role)
-        if isinstance(value, str) and value.strip():
-            stated = value.strip()
-            if stated in text or text.strip().startswith(stated):
-                continue
+        if _stated_in(text, bound.get(role)):
+            continue
         gaps.append(role)
     return gaps
 
@@ -2429,12 +3073,41 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
         _NAMED_EXPECTATION.reset(token)
         _NAMED_ROUTE.reset(rtoken)
     if failure is not None:
+        if expected is not None:
+            # A NAME PLUS A STATED CONTRACT IS THE REQUEST.  The body's failure is about the
+            # candidates IT could not separate -- measured: `text.file.write` named in a sentence
+            # that states both of its declared inputs, refused because the pinned compiler found
+            # `source.candidates.enumerate.stdlib` and `structured.decision.evidence.locate.stdlib`
+            # tied at 5 for the rest of the sentence.  Ambiguity among capabilities the caller did
+            # not name is not a reason to refuse the one they did name.  The conditions are the
+            # strict ones: the capability must be routable, every declared input must bind, and
+            # nothing unstated may have been invented -- so this can serve a request that stated
+            # its contract and can never rescue one that did not.
+            named_entry = (admissible or {}).get(expected) or {}
+            if is_plain_goal_routable(named_entry):
+                try:
+                    named_inputs = bind_all_inputs(goal, named_entry, root, cycle=0, spool=set())
+                except GoalCompilationFailure:
+                    named_inputs = None
+                if named_inputs is not None and not _inputs_not_stated_by(goal, named_inputs):
+                    return _single(expected, named_entry, named_inputs, _EXPLICIT_NAME_SCORE,
+                                   {"rule": "F33_NAMED_CONTRACT_BEATS_BODY_AMBIGUITY",
+                                    "body_failure": str(failure.detail or failure.code)[:200]},
+                                   ["F33_NAMED_CONTRACT_BEATS_BODY_AMBIGUITY"])
         if expected is not None and expected not in str(failure.detail or ""):
             named_entry = (admissible or {}).get(expected) or {}
             gaps = _contract_gaps_for(goal, named_entry, root)
+            # A REFUSAL MUST SAY WHY.  When no declared input is missing, this used to report the
+            # word "inputs" as though one were -- so a request that reached its capability's own
+            # contract was told to state inputs it had already stated, and the body's real
+            # complaint was thrown away.  Measured: `python.perf.benchmark.v1` and the whole
+            # quality family were refused this way while the pinned compiler bound them exactly.
+            # The body's own detail is carried now; the empty case says so in words.
+            why = (",".join(gaps) if gaps
+                   else "no_declared_input_missing;body:" + str(failure.detail or failure.code))
             raise GoalCompilationFailure(
                 "GOAL_INPUT_BINDING_REQUIRED",
-                "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
+                "%s:contract_not_stated:%s" % (expected, why))
         raise failure
     if expected is None:
         return compiled
@@ -2468,8 +3141,14 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
             still = []
             for role in sorted(unstated):
                 value = named_bound.get(role)
-                if isinstance(value, str) and value.strip() and (
-                        value.strip() in goal or goal.strip().startswith(value.strip())):
+                # A STATED NUMBER IS STATED.  This repair used to accept only strings, so every
+                # numeric or boolean slot -- `x_value`, `x_ticks`, `authoritative`, `max_age_s` --
+                # was reported as "not stated" no matter what the caller said, and the capability
+                # that needed a coordinate could not be asked for one.  The value is now rendered
+                # and looked for in the request, which is exactly the test a string gets.
+                rendered = value.strip() if isinstance(value, str) else str(value).strip()
+                if rendered and (rendered in goal or goal.strip().startswith(rendered)
+                                 or rendered.rstrip("0").rstrip(".") in goal):
                     repaired[role] = value
                 else:
                     still.append(role)
@@ -2490,6 +3169,11 @@ def compile_goal(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: p
     # tells the caller nothing they can act on.
     named_entry = (admissible or {}).get(expected) or {}
     gaps = _contract_gaps_for(goal, named_entry, root)
+    # A REFUSAL MUST SAY WHY.  When no declared input is missing, this reported the word "inputs"
+    # as though one were, so a request that had stated everything was told to state inputs it had
+    # already stated -- measured on `python.perf.benchmark.v1` and the whole quality family, whose
+    # own contracts bound perfectly through the pinned compiler while this path refused them.
     raise GoalCompilationFailure(
         "GOAL_INPUT_BINDING_REQUIRED",
-        "%s:contract_not_stated:%s" % (expected, ",".join(gaps) or "inputs"))
+        "%s:contract_not_stated:%s" % (
+            expected, ",".join(gaps) or "no_declared_input_missing"))

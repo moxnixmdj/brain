@@ -82,6 +82,88 @@ _ADAPTER_DIRECTIVES = frozenset({"output_may_be_consumed",
                                  "exit_status_is_the_answer"})
 
 
+# THE WORDS THAT NAME WHERE THE ANSWER GOES ARE NOT EVIDENCE ABOUT WHAT THE TASK IS.
+# `score` counts a hit on any word the capability knows, and every request in this
+# repository ends "and report it to <O>".  A capability that lists `report` among its
+# keywords therefore matches EVERY such sentence, and when nothing else scores above zero
+# it wins -- measured on the 43-act probe: "Fuzz the function add in calc.py ...", "Build a
+# wheel for the project ...", "Add logging and metrics to calc.py ...", "Inline the function
+# sub ..." and "Add the dependency requests ..." were each routed to
+# document.convert.markdown_pdf.pandoc_weasyprint, on the single word `report`, and five of
+# those six reached the route with a PASS.  The machine converted a document nobody asked
+# for.  This is the same distinction goal_compiler.GENERIC_MATCH_TOKENS already draws for the
+# front compiler; it is repeated here because this module scores on its own vocabulary and
+# never sees that set.  Only artefact and medium words are listed: an act verb such as
+# `convert`, `write` or `generate` IS the request, so dropping a hit on it would drop the
+# request itself -- "Convert a.md to b.pdf" hits only `convert` and must still route.
+_NO_EVIDENCE_WORDS = frozenset("""
+report reports receipt artifact artefacts result results summary summaries findings
+issue issues log logs record records output outputs document documents repository repo
+directory directorys folder folders file files json xml txt markdown md pdf html
+""".split())
+
+
+# A REQUEST VERB IS NOT AN IDENTIFICATION.  "Build ...", "Add ...", "Write ..." open half the
+# sentences in this repository; a capability that lists one of those words has not thereby
+# said it performs THIS request.  Measured on the remaining wrong-tool routes of the 43-act
+# probe after the artefact-word rule: "Add logging and metrics to calc.py" and "Add the
+# dependency requests ..." both reached finance.saccr.credit.addon.v1 on the single word
+# `compute`, and "Build a wheel for the project ..." reached
+# pypi.provenance.audit_live_artifact.v1 on the single word `build` -- each of them a PASS on
+# an act nobody asked for.  The list is the same one the probe's ownership oracle already
+# uses to decide whether an answering capability claims the act, so the two cannot drift.
+_REQUEST_VERBS = frozenset("""
+write create make add build run check find show list get set use apply ensure verify
+validate update remove delete report measure produce generate save read print convert
+extract compute process change fix scan audit review inspect debug improve design
+refactor document
+""".split())
+
+# ...and an act NOUN that nothing else in the sentence supports is not one either: "the
+# function add" names the SUBJECT of the request, so a capability that hit `function` has
+# been told what the sentence is about, not what to do with it.
+# An identifier or a version stamp is a NAME, not an act: `v1`, `py`, `auto`, `brain`.
+# Measured: "run <unknown-capability-id>" was admitted to python.test.measurement.objective
+# on the two "content" words `run` and `v1`.
+_IDENTIFIER_WORDS = frozenset("py auto brain canonical runtime tmp v1 v2 v3 v4 v5".split())
+
+_MEDIUM_WORDS = frozenset("""
+function functions method methods class classes module modules package packages library
+project python program code source file files repository repo directory folder data network
+call calls test tests suite suites line lines block blocks svn git wheel
+""".split())
+
+
+def _head_verb(goal: str) -> str:
+    """The request verb: the first content word the sentence actually opens with."""
+    try:
+        from canonical.runtime import goal_front_compiler_v1 as _front
+        prose = _front.prose_only(goal)
+    except Exception:  # noqa: BLE001 - no front compiler, read the goal itself
+        prose = str(goal or "")
+    for word in _WORD.findall(str(prose or "").lower()):
+        if len(word) > 1 and word not in _STOP:
+            return word
+    return ""
+
+
+def _claims(word: str, token: str, extra_words: Mapping[str, set[str]] | None) -> bool:
+    """Does this token claim `word`, allowing for inflection (inline/inlining)? """
+    if not word:
+        return False
+    known = token_words(token) | set((extra_words or {}).get(token) or ())
+    return any(k == word or (len(word) > 3 and (k.startswith(word) or word.startswith(k)))
+               for k in known)
+
+
+def _matched_words(goal_words: set[str], token: str,
+                   extra_words: Mapping[str, set[str]] | None = None) -> set[str]:
+    """The goal's own words that this token hit."""
+    known = token_words(token) | set((extra_words or {}).get(token) or ())
+    return set(goal_words) & known
+
+
+
 def _fully_bound_contract_tokens(goal: str, g: Mapping[str, Any],
                                  reg: Mapping[str, Any]) -> frozenset[str]:
     """Tokens provided by a capability every declared input of which the goal fills.
@@ -246,6 +328,14 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     # same test PR #6135 established as DECLARED_CONTRACT_FULLY_BOUND.
     scored = [(score(gw, tok, extra), tok) for tok in provided]
     scored = [(s0, t) for s0, t in scored if s0 > 0]
+    # A hit on an artefact word ("report", "output", "file") says where the answer goes,
+    # not what the task is: a candidate whose ONLY hits are those words has not been
+    # identified by the sentence at all.  It is kept when the contract test below binds it
+    # (the sentence fills its declared inputs, which is evidence the words are not), and
+    # dropped otherwise -- see _NO_EVIDENCE_WORDS.  Measured on the 43-act probe: five
+    # wrong-tool routes to pandoc, 0 correct routes lost.
+
+
     bound = _fully_bound_contract_tokens(goal, g, reg)
     # The last two terms are the tiebreak, and their ORDER is the fix.  A
     # capability that contradicts the payload the sentence states is demoted
@@ -256,6 +346,65 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
                                   _contradicts_the_stated_payload(goal, pair[1]),
                                   pair[1]))
     return [t for _, t in scored]
+
+
+def is_identified(goal: str, token: str,
+                  g: Mapping[str, Any] | None = None,
+                  reg: Mapping[str, Any] | None = None) -> bool:
+    """Has the SENTENCE identified this token as the act it asks for?
+
+    Not "did the words overlap".  Three things a hit on a word does not prove, each measured
+    on the 43-act probe:
+
+    * an ARTEFACT word ("report", "output") says where the answer goes, not what the task is;
+    * a MEDIUM word ("function", "project") says what the task is about, not what to do with it;
+    * a REQUEST VERB ("write", "add", "build") opens half the sentences in this repository.
+
+    So a token is identified when the sentence FILLS ITS DECLARED CONTRACT, or -- for a
+    sentence whose own verb names a specific act ("Fuzz ...", "Inline ...", "Bisect ...") --
+    when the token claims that verb, or -- for a generic request verb -- when at least two of
+    the sentence's own content words support it.
+
+    This is the admission side of the same distinction the front compiler draws with
+    GENERIC_MATCH_TOKENS, and it is deliberately NOT applied by shrinking the candidate list:
+    the list is what the composER is allowed to TRY, and removing entries from it promoted
+    unrelated zero-input capabilities into the top window -- measured, that broke
+    "run <unknown-capability-id>", which must fail closed as a compilation gap and instead
+    composed a step that raised.  The law belongs where the chain is ACCEPTED.
+    """
+    if reg is None:
+        from canonical.runtime import capability_composer_v1 as _cc
+        g = g if g is not None else _cc.graph()
+        reg = _cc.load_registry()
+    from canonical.runtime import goal_front_compiler_v1 as _front
+    gw = words(_front.prose_only(goal))
+    extra: dict[str, set[str]] = {}
+    for cid, node in (g or {}).items():
+        entry = (reg or {}).get(cid) or {}
+        words_for = set(words(cid))
+        for kw in (entry.get("keywords") or []):
+            words_for |= words(str(kw))
+        for tok in (node.get("provides") or []):
+            extra.setdefault(str(tok), set()).update(words_for)
+    if token in _fully_bound_contract_tokens(goal, g, reg):
+        return True
+    matched = _matched_words(gw, token, extra)
+    if not matched:
+        return False
+    head = _head_verb(goal)
+    if head and head not in _REQUEST_VERBS:
+        # The sentence asks for a NAMED act.  A token that never says that word has not been
+        # identified by it, however many other words it matched.
+        return _claims(head, token, extra)
+    # A generic request verb identifies nothing, so at least one of the sentences's own
+    # content words has to survive as evidence -- an artefact word, a medium word, the
+    # request verb itself and a version stamp do not.
+    evidence = {w for w in matched
+                if w not in _NO_EVIDENCE_WORDS and w not in _MEDIUM_WORDS
+                and w not in _REQUEST_VERBS and w not in _IDENTIFIER_WORDS
+                and not any(ch.isdigit() for ch in w)}
+    return bool(evidence)
+
 
 
 def route(goal: str, seed: Sequence[str] | None = None,
@@ -307,10 +456,16 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "status": "PASS__COMPOSER_ROUTE_FOUND",
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
 
+    _reg_for_law = composer.load_registry()
     for token in candidate_tokens(goal, g)[:max_candidates]:
-        chain = composer.plan(have, token, g)
+        # A reachable chain is not an answer: `shell.command.run` is reachable from any
+        # sentence containing the word "run", which is how "run <unknown-capability-id>"
+        # composed a step instead of failing closed as a compilation gap.  The sentence has
+        # to have IDENTIFIED the token before its chain may be accepted.
+        identified = is_identified(goal, token, g, _reg_for_law)
+        chain = composer.plan(have, token, g) if identified else None
         tried.append({"token": token, "reachable": chain is not None,
-                      "chain": chain})
+                      "chain": chain, "identified": identified})
         if chain:
             return {"schema": SCHEMA, "pass": True, "goal": goal,
                     "token": token, "chain": list(chain), "tried": tried,
@@ -441,6 +596,7 @@ def extract_paths(text: str) -> list[str]:
     library looks is how a machine decides a goal named no input.
     """
     body = str(text or "")
+    original = body
     found: list[str] = []
     seen: set[str] = set()
 
@@ -448,6 +604,33 @@ def extract_paths(text: str) -> list[str]:
         if candidate and candidate not in seen:
             found.append(candidate)
             seen.add(candidate)
+
+    def _add_in_sentence_order(candidate: str) -> None:
+        """Add a path where the sentence puts it, not where the scanner reaches it.
+
+        ``found`` is in sentence order for everything ``_EXT`` reads, and ORDER IS MEANING:
+        PATH_OUTPUT binds ``paths[-1]`` and a command's first operand is its source.  A
+        DIRECTORY token is found by a later pass, so appending it moved it to the end of the
+        sentence: measured on "Measure the line coverage of the tests in <abs>/repo and report
+        it to <abs>/out/cov.json", the repository came out LAST, PATH_OUTPUT bound the
+        repository, source_root bound the report, and the coverage capability was handed a
+        directory where it wanted to write.  The sentence states the repository first, so the
+        list says so too.
+        """
+        if not candidate or candidate in seen:
+            return
+        at = original.find(candidate)
+        if at < 0:
+            _add(candidate)
+            return
+        index = len(found)
+        for position, existing in enumerate(found):
+            spot = original.find(str(existing))
+            if spot < 0 or spot > at:
+                index = position
+                break
+        found.insert(index, candidate)
+        seen.add(candidate)
 
     # A quoted name is read whole first, and then removed from the sentence, so
     # its fragments cannot be picked up as separate paths below.  Only a quoted
@@ -481,7 +664,17 @@ def extract_paths(text: str) -> list[str]:
     matches = list(_EXT.finditer(body))
     base = len(found)
     for match in matches:
-        found.append(match.group(0))
+        candidate = match.group(0)
+        # An ABSOLUTE path keeps its separator.  The pattern cannot match a leading "/", so
+        # "/home/u/x.json" was read as "home/u/x.json" -- and every layer that then joins a
+        # path onto the repository root wrote a mirror of the absolute path INSIDE the
+        # repository: measured while binding the analyser capabilities, a report stated at
+        # /home/user/brain/tmp/tc/fmt.json was written to
+        # /home/user/brain/home/user/brain/tmp/tc/fmt.json.  The path the sentence states is
+        # the path that is used, or the request is refused.
+        if match.start() > 0 and body[match.start() - 1] == "/":
+            candidate = "/" + candidate
+        found.append(candidate)
     seen.update(found)
     # A name with spaces that no word introduces -- "sort <dir>/my notes.txt".
     # Taking any run of words would invent paths out of prose, so the candidate
@@ -532,6 +725,12 @@ def extract_paths(text: str) -> list[str]:
         body = body.replace(str(stated), " ", 1)
     for m in _DIRPATH.finditer(body):
         token = m.group(0)
+        # An ABSOLUTE directory keeps its separator, for the reason the file scanner above
+        # already keeps it: `_DIRPATH` cannot match a leading "/", so "/home/u/x/repo" was read
+        # as "home/u/x/repo" and every layer that joins a path onto the repository root wrote a
+        # mirror of the absolute path INSIDE the repository.
+        if m.start() > 0 and body[m.start() - 1] == "/":
+            token = "/" + token
         if token in seen:
             continue
         # The parent of a path already found is not a second path.  Appending it
@@ -543,7 +742,7 @@ def extract_paths(text: str) -> list[str]:
             # The last arm is a name with spaces: "canonical/x/my" is the head of
             # "canonical/x/my backup.txt", not a directory holding it.
             continue
-        _add(token)
+        _add_in_sentence_order(token)
     return found
 
 
@@ -1676,6 +1875,77 @@ _LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
 _BARE_NOUN_PHRASE = re.compile(r"^\s*(?:the|a|an)\b")
 
 
+# A determiner in front of a command word makes it a NOUN, not an instruction:
+# "the diff X", "this patch", "the archive" name a thing, they do not ask for a
+# program.  Measured: "Apply the diff <f> to the repository ... and run the full
+# test gate" was read as the command `diff <f> <report>`, so the composer
+# answered an SF-capability request with a file comparison, and "Gate the diff
+# <f> on performance using the benchmark <b>" was read the same way.
+_DETERMINERS = ("the", "a", "an", "this", "that", "these", "those", "its", "our",
+                "your", "my", "their", "his", "her", "each", "every", "any",
+                "some", "one", "another", "same", "given", "stated")
+_DETERMINER_BEFORE = re.compile(
+    r"(?<![a-z0-9])(?:" + "|".join(_DETERMINERS) + r")[\s-]+$", re.IGNORECASE)
+
+
+def _command_match(pattern: str, text: str):
+    """The first occurrence of a program word that is a VERB, not a noun.
+
+    Every occurrence preceded by a determiner is skipped, so a sentence that
+    merely names a diff, a patch or an archive never becomes a command.
+    """
+    for match in re.finditer(pattern, text):
+        if _DETERMINER_BEFORE.search(text[:match.start()]):
+            continue
+        return match
+    return None
+
+
+_NON_ACTION_WORDS = frozenset({"please", "the", "a", "an", "my", "our", "your", "their", "then",
+                               "now", "and", "so", "show", "give", "tell", "me", "us"})
+
+
+def _stated_action_word(sentence: str) -> str:
+    """The verb the sentence opens with, or '' -- the same reading the front compiler uses."""
+    for word in re.findall(r"[A-Za-z][A-Za-z0-9_]*", str(sentence or "")):
+        low = word.lower()
+        if low in _NON_ACTION_WORDS or len(low) < 2:
+            continue
+        return low
+    return ""
+
+
+def statement_is_a_command_line(sentence: str) -> bool:
+    """Does the sentence ASK FOR this command, or does it merely mention the program?
+
+    ``extract_argv`` reads a program and its operands out of prose, and that is what makes
+    ordinary requests runnable: "Copy the file A to the file B".  It is also how a sentence
+    that names an ACT gets stolen: measured while adding the git surface, "Show the git diff
+    of the repository <R> against HEAD and write it to <O>" was read as the shell command
+    ``diff <O> <R>`` -- it ran /usr/bin/diff against the two paths and failed, while the
+    capability that performs the requested act (vcs.git.diff.v1) had already been selected
+    and was refused NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND.
+
+    The distinction that fixes it without narrowing the reader is the sentence's own
+    grammar: an imperative puts the ACTION first, so the program a sentence asks for is the
+    verb it opens with, or a program introduced by run/execute/invoke.  A program the
+    sentence merely MENTIONS ("the git diff", "a cp of the tree") is its object, not its
+    action, and the act belongs to whatever capability performs it.
+    """
+    parts = extract_argv(sentence)
+    if not parts:
+        return False
+    program = str(parts[0]).strip().rsplit("/", 1)[-1].lower()
+    if not program:
+        return False
+    head = _stated_action_word(sentence)
+    if program == head:
+        return True
+    return bool(re.search(r"\b(?:run|runs|running|execute|executes|invoke|invokes|call|calls)\s+"
+                          r"(?:the\s+|a\s+)?(?:command\s+|program\s+|tool\s+)?"
+                          + re.escape(program) + r"\b", str(sentence or ""), re.I))
+
+
 def _prose_argv(sentence: str) -> list[str] | None:
     """The command a sentence asks for in ordinary English, or None.
 
@@ -1707,7 +1977,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
     for pattern, program, dest_flag in _PROSE_COMMAND_DEST_FLAG:
         if program not in known:
             continue
-        if not re.search(pattern, text):
+        if _command_match(pattern, text) is None:
             continue
         if len(paths) != 2:
             return None
@@ -2572,7 +2842,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
-        if not re.search(pattern, text):
+        if _command_match(pattern, text) is None:
             continue
         operands = paths
         if program in mutating and reserved_for_report & set(map(str, paths)):
@@ -2822,6 +3092,20 @@ def _stated_directory(slot: str, goal: str) -> str | None:
     return None
 
 
+# The slots whose value is a REPOSITORY the tool runs inside, from the compiler's own table
+# (goal_compiler._REPO_ANCHOR_SLOTS) so the two layers cannot drift apart.
+_REPO_ANCHOR_SLOTS = frozenset({"anchor_path", "repo_path", "worktree_path", "apply_directory"})
+
+
+def _enclosing_worktree(candidate: str) -> str | None:
+    """The git worktree that CONTAINS a stated path (goal_compiler owns the rule)."""
+    try:
+        from canonical.runtime import goal_compiler as _gc
+        return _gc._enclosing_worktree(candidate, _repo_root())
+    except Exception:  # noqa: BLE001 - an unresolvable path is simply not an anchor
+        return None
+
+
 def _is_directory_in_repo(candidate: str) -> bool:
     try:
         return (_repo_root() / str(candidate)).is_dir()
@@ -2991,6 +3275,10 @@ def bind(signature: Mapping[str, str], goal: str,
                     continue
             named = _noun_matched_path(slot, paths, goal)
             chosen = named if named is not None else _sole_existing_repository_path(paths)
+            if chosen is not None and t == "PATH_DIR" and slot in _REPO_ANCHOR_SLOTS:
+                # A slot that names a repository is the worktree that contains the path, not
+                # the path's parent directory (see _enclosing_worktree).
+                chosen = _enclosing_worktree(chosen) or chosen
             if chosen is not None and t == "PATH_DIR":
                 # A DIRECTORY slot takes a directory.  Measured the same day: on
                 # "Run the strict progress repair loop on the python source root
@@ -3027,7 +3315,16 @@ def bind(signature: Mapping[str, str], goal: str,
             # side -- and it is only consulted when content was actually stated,
             # so a sentence with no payload keeps binding exactly as before.
             destination = extract_content_destination(goal)
-            if destination and destination in paths:
+            # ... and a DESTINATION FOR CONTENT IS A FILE.  The payload grammar reads
+            # "line coverage of the tests in <dir>" as a payload introduced by "line" whose
+            # destination is <dir>, so a request that states no payload at all bound its
+            # output_path to the directory it was asked to MEASURE.  Measured: "Measure the
+            # line coverage of the tests in <abs>/repo and report it to <abs>/out/cov.json"
+            # handed the coverage adapter its own source root as the place to write, the
+            # adapter raised IsADirectoryError, and the request died as
+            # PROMISED_ARTIFACT_MISSING.  An existing directory is not a place this slot can
+            # put a file, whatever the grammar said.
+            if destination and destination in paths and not _is_directory_in_repo(destination):
                 args[slot] = destination
             elif _noun_matched_path(slot, paths, goal) is not None:
                 # "the archive <A>" is what this slot is about, whatever exists.
@@ -3237,6 +3534,40 @@ _ROLLBACK_PATH_KEYS = ("output_path", "archive_path", "target_path", "path", "de
                        "output", "out", "into", "to", "source_path", "input_path")
 
 
+def _template_constants(entry: Mapping[str, Any]) -> dict[str, Any]:
+    """The action template's literal arguments -- the values the REGISTRY declares."""
+    declared = ((entry.get("action_template") or {}).get("args") or {})
+    out: dict[str, Any] = {}
+    for key, value in declared.items():
+        if isinstance(value, str) and "${" in value:
+            continue
+        if isinstance(value, (str, int, float, bool)):
+            out[str(key)] = value
+    return out
+
+
+def _stated_destination_path(goal: str) -> str:
+    """The path the sentence says to write to, as an absolute path, or ''."""
+    try:
+        raw = str(extract_content_destination(str(goal or "")) or "").strip()
+    except Exception:  # noqa: BLE001 - an unreadable sentence states no destination
+        return ""
+    if not raw:
+        return ""
+    try:
+        return str(pathlib.Path(raw).expanduser().resolve())
+    except (OSError, RuntimeError):
+        return ""
+
+
+def _same_path(left: str, right: str) -> bool:
+    """Do these two stated paths name the same place?"""
+    try:
+        return str(pathlib.Path(left).expanduser().resolve()) == str(pathlib.Path(right).resolve())
+    except (OSError, RuntimeError):
+        return False
+
+
 def _pathish(value: Any) -> str | None:
     """A string that the chain treats as a file it can touch, or None."""
     if not isinstance(value, str) or not value or "\n" in value:
@@ -3328,6 +3659,27 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "steps": steps}
         sig = TS.signature(entry)
         args = bind(sig, goal, inputs, produced)
+        # The template's own constants are part of the contract.  `bind` fills the SLOTS the
+        # sentence states, and a constant is not a slot: measured while composing the git
+        # surface, "Show me the git status of the repository and write it to <O>" dispatched
+        # vcs.git.status.v1 WITHOUT `git_verb`, so the adapter refused
+        # GIT_VERB_NOT_SUPPORTED:<none> -- a correct refusal about an argument the caller never
+        # supplies and the registry already declares.
+        for constant_key, constant_value in _template_constants(entry).items():
+            args.setdefault(constant_key, constant_value)
+        # A stated destination is never a SOURCE.  The same sentence names one path, the file
+        # it writes, and bind() filled `worktree_path` with it by elimination -- so the adapter
+        # was asked to run git inside the report it was about to write.  Left as the empty
+        # string rather than removed, so the adapter refuses with the reason that is true
+        # (REPOSITORY_NOT_STATED) instead of one about a directory that is not a repository.
+        destination = _stated_destination_path(goal)
+        if destination:
+            for slot_name, slot_value in list(args.items()):
+                if str(sig.get(slot_name) or "").upper() == "PATH_OUTPUT":
+                    continue
+                candidate = _pathish(slot_value)
+                if candidate and _same_path(candidate, destination):
+                    args[slot_name] = ""
         # Snapshot what already exists, so this step can only be credited with
         # files it actually created.
         existed_before = {v for v in (_pathish(a) for a in args.values()) if v and _exists_in_repo(v)}

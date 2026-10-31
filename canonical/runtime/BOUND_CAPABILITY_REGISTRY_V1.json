@@ -4319,6 +4319,286 @@
     "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1_V1.json"
    }
   },
+  "python.dynamic.crash_repro.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "crash_repro",
+     "capability_id": "python.dynamic.crash_repro.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "dynamic_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "reproduce the crash",
+    "reproduce a crash",
+    "crash reproduction",
+    "reproducer",
+    "reproduce",
+    "crash",
+    "shrink",
+    "shrinking",
+    "minimal case",
+    "minimal reproduction",
+    "dynamic analysis",
+    "failure reproduction"
+   ],
+   "limitations": [
+    "the search covers every PUBLIC function in the stated file, in source order, because a sentence that named one function would have said which; a private function or a method is not searched unless it is named.",
+    "cases are the fuzzer's: annotation-directed draws plus a boundary corpus; an unannotated parameter gets int and str draws, which is what finds `add('', 0)` as a TypeError.",
+    "each case runs in its own interpreter with a wall-clock cap, so a hang or a segfault is an outcome that is reported, not a lost run.",
+    "an exception named in expected_exceptions is not a crash.",
+    "the shrink must keep the SAME failure mode; the reproduction is re-checked after shrinking and a changed mode is a refusal.",
+    "when nothing crashes the answer is 'NO CRASH REPRODUCED' with the number of functions searched and cases run -- that is a search result, not a pass."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.dynamic.crash_repro",
+    "python.dynamic.crash.reproduction"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "capability_id",
+    "act",
+    "module",
+    "reproduced",
+    "qualname",
+    "cases_run",
+    "minimal_case",
+    "failure_mode",
+    "reproducer_path",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib subprocess/random/ast",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "da3690eabf3125e0ba3814ea64c51574791dcd0f71bbb58298802e85e5e3f1ff",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the TypeError in `add('', 0)`, found in a file whose sentence named no function, shrunk from a random mixed-type draw to the minimal case",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a crashing function), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.crash_repro.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.dynamic.differential_test.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "differential_test",
+     "capability_id": "python.dynamic.differential_test.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "differential_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "differential test",
+    "differential testing",
+    "differential",
+    "against a reference",
+    "reference implementation",
+    "behavioral equivalence",
+    "behavioural equivalence",
+    "cross-check",
+    "compare implementations",
+    "equivalence",
+    "oracle comparison",
+    "regression against the previous version"
+   ],
+   "limitations": [
+    "the reference is stated or it comes from git (default HEAD); with neither, the call is REFUSED rather than compared against whatever file is nearby.",
+    "both implementations are loaded by file path under private module names, so a reference cannot shadow the code under test and two same-named packages cannot collide.",
+    "agreement means the same outcome and, for a return, the same repr; two equal exceptions agree even when their messages differ, because a message is prose.",
+    "the shrink must keep the same KIND of disagreement (value vs exception vs returns-vs-raises).",
+    "one child evaluates both sides over the whole case list for speed; if that child dies, the unreported cases are re-run one at a time so a crash is attributed to a side instead of losing the run.",
+    "a module that imports its own package relatively is reported NOT IMPORTABLE rather than silently compared as a stub."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.dynamic.differential_test",
+    "python.dynamic.differential.testing"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "capability_id",
+    "act",
+    "module",
+    "reference_basis",
+    "cases_run",
+    "divergences",
+    "minimal_case",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib subprocess/importlib/random/ast, git",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "5039c38c08d834fda478b913138b87f180b29b07e43c2f0afaa6845537849e63",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "a `sub` that adds instead of subtracting, found against the committed version of the same file and shrunk to `sub(0, 1)`",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a git repository with an uncommitted behavioural change), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.differential_test.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.dynamic.fuzz.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "fuzz",
+     "capability_id": "python.dynamic.fuzz.v1",
+     "output_path": "${input.output_path}",
+     "qualname": "${input.qualname}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "dynamic_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "fuzz",
+    "fuzzing",
+    "fuzzer",
+    "property",
+    "random input",
+    "crash",
+    "minimal case",
+    "shrink",
+    "reproduce",
+    "execution",
+    "dynamic analysis",
+    "subprocess isolation",
+    "edge case"
+   ],
+   "limitations": [
+    "cases are drawn from the parameter annotations plus a boundary corpus (0, 1, -1, sys.maxsize, '', 'a', '0'); an unannotated parameter gets int and str draws only, so a structured or generic input is not invented.",
+    "each case runs in its own interpreter with a wall-clock cap; timeout, nonzero exit and unparseable child output are all outcomes ('timeout', 'crashed', 'signaled'), never a lost run.",
+    "an exception is a finding only when it is not in expected_exceptions, because a validator that must raise is not a bug.",
+    "shrinking is greedy and must keep the SAME failure mode; a reduction that changes how it fails is rejected and the previous case is kept.",
+    "the reproducer is written beside the artifact as a standalone script; it is a record of the minimal call, not a regression test for the suite.",
+    "varargs / keyword-only targets are refused, because the arity is not knowable without running the code."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.dynamic.fuzz"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "capability_id",
+    "act",
+    "module",
+    "qualname",
+    "cases_run",
+    "cases_that_failed",
+    "minimal_case",
+    "failure_mode",
+    "reproducer_path",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib subprocess/random/ast",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "94ab417910129d6e28cdb9c9d2f83c57a53be00942deca986c97221292c7ccca",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the divide-by-zero found by generation and shrunk to `divide(0, 0)`",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.dynamic.fuzz.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
   "python.evidence.contract.supercomposer.v1": {
    "action_template": {
     "args": {
@@ -4853,6 +5133,173 @@
     "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1_V1.json"
    }
   },
+  "python.packaging.build_package.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "build_package",
+     "capability_id": "python.packaging.build_package.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "packaging_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "build",
+    "build a wheel",
+    "wheel",
+    "package",
+    "distributable",
+    "sdist",
+    "dist",
+    "pip wheel",
+    "release artifact"
+   ],
+   "limitations": [
+    "Builds with `pip wheel`, the tool that builds wheels and is already installed; no new dependency and no build backend is chosen by this adapter.",
+    "The artifact is verified by reading it: a wheel is a zip with a `.dist-info/METADATA` and a `RECORD`, and name, version and top-level modules are read out of those.",
+    "The wheel is copied to `<project>/dist/` so the caller can find it; the temporary wheelhouse is removed."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.project.wheel.built"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "act",
+    "manifest",
+    "wheel",
+    "wheel_name",
+    "wheel_sha256",
+    "wheel_bytes",
+    "name",
+    "version",
+    "requires_python",
+    "requires_dist",
+    "member_count",
+    "top_level",
+    "has_record",
+    "verified",
+    "gate",
+    "complete"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/packaging_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "59d0163ffa43230741bcaa9068867123d13bae3b31cdaaaeb9ca01072adb84ba",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the built wheel's own METADATA (name, version, RECORD)",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.packaging.build_package.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.packaging.dependency_add.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "dependency_add",
+     "capability_id": "python.packaging.dependency_add.v1",
+     "dependency": "${input.dependency}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "packaging_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "dependency",
+    "dependencies",
+    "add a dependency",
+    "add the dependency",
+    "requirement",
+    "requirements",
+    "install",
+    "package",
+    "pyproject",
+    "manifest"
+   ],
+   "limitations": [
+    "Edits the project's own manifest in place: a line is SPLICED into `[project].dependencies` or appended to requirements*.txt, and the file is never re-serialised.",
+    "The edit is verified by re-reading: the manifest still parses, the dependency appears exactly once, and no existing line changed.",
+    "Adding a dependency does not install it.  `environment_fit_v1.satisfy` remains the step that puts a declared dependency into the interpreter."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.project.dependency.added"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "act",
+    "manifest",
+    "manifest_kind",
+    "dependency",
+    "already_present",
+    "lines_added",
+    "verified",
+    "dependencies",
+    "other_lines_changed",
+    "gate",
+    "complete"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/packaging_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "59d0163ffa43230741bcaa9068867123d13bae3b31cdaaaeb9ca01072adb84ba",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the new dependency, spliced into [project].dependencies and verified by re-reading",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.packaging.dependency_add.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
   "python.patch.review.supercomposer.v1": {
    "action_template": {
     "args": {
@@ -5013,6 +5460,272 @@
     "model_dependency_count": 0,
     "runtime_sha256": "76ba334b9539def530b780c359d62d5ace90590f09c340148cec44f6c0c2c08b",
     "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS"
+   }
+  },
+  "python.perf.benchmark.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "benchmark",
+     "capability_id": "python.perf.benchmark.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "perf_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "benchmark",
+    "benchmarking",
+    "growth",
+    "scaling",
+    "asymptotic",
+    "big-o",
+    "timing",
+    "timings",
+    "throughput"
+   ],
+   "limitations": [
+    "the growth class is a FIT over a measured ladder (default 64..2048), not a proof: `slope` and `r2` are reported and a class is claimed only when the log-log line is straight.",
+    "one child runs the whole ladder after a warm-up, because per-size process startup cost more than the call at small sizes; if that child dies the run is refused rather than half-timed.",
+    "the size is carried by one positional parameter (default index 0), as an int, or as a list of that length when the parameter is annotated as a list.",
+    "the minimum of the repetitions is kept, because one scheduler hiccup must not become a curve."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "perf.big_o_inference",
+    "perf.benchmark"
+   ],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "capability_id",
+    "target",
+    "module",
+    "qualname",
+    "sizes",
+    "timings",
+    "growth",
+    "best_class",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib tracemalloc/cProfile/pstats/time, subprocess",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "391c229c53f290a9226bc2fcd9d6c00e018c1ea7b71f9f43e94f46775986c7a6",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "`quadratic` measured at 64..2048 and reported as O(n^2) with slope 2.03 and r2 0.9999",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a known cost shape), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.perf.benchmark.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.perf.cpu_profile.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "cpu_profile",
+     "capability_id": "python.perf.cpu_profile.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "perf_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "cpu",
+    "profile",
+    "profiling",
+    "profiler",
+    "hotspot",
+    "hotspots",
+    "bottleneck",
+    "cprofile",
+    "slowest"
+   ],
+   "limitations": [
+    "every case runs in its own interpreter, so a crash or a hang is an outcome and never a lost run, and the profiler never measures itself in the caller's process.",
+    "the reported hotspots are the WORST case's, not an average over all of them: an average ranks a function that is slow once beside one that is slow always.",
+    "the harness's own frames are filtered out, so the ranking cannot be topped by the profiler.",
+    "cProfile adds per-call overhead, which is why the ranking is by cumulative time and the absolute seconds are reported as measured rather than as a floor."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "perf.hotspot_ranking",
+    "perf.cpu_profile"
+   ,
+    "dynamic.cpu_profile"],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "capability_id",
+    "target",
+    "module",
+    "qualname",
+    "cases_run",
+    "worst_case",
+    "hotspots",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib tracemalloc/cProfile/pstats/time, subprocess",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "391c229c53f290a9226bc2fcd9d6c00e018c1ea7b71f9f43e94f46775986c7a6",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the quadratic `quadratic(512)` ranked first by cumulative time in work.py, found without being told which function was slow",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a known cost shape), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.perf.cpu_profile.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.perf.memory_profile.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "memory_profile",
+     "capability_id": "python.perf.memory_profile.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "perf_probe_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "memory",
+    "allocation",
+    "allocations",
+    "allocated",
+    "tracemalloc",
+    "footprint",
+    "memory-profile"
+   ],
+   "limitations": [
+    "the measurement is tracemalloc's TRACED allocation, which is Python objects only; memory held by C extensions or the allocator's arenas is not counted.",
+    "the snapshot is taken while the returned value is still alive, because the bytes a call RETURNS are the interesting ones and a profile of freed intermediates measures the collector.",
+    "the ladder of sizes is always present (8, 64, 512) beside the annotated draws, because the fuzzer's boundary corpus tops out at 2**63 and a profile cannot finish it.",
+    "attribution is by allocating LINE through an 8-frame traceback; a single-frame traceback attributes everything to the caller and is a measured defect this adapter avoids."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "perf.allocation_growth",
+    "perf.memory_profile"
+   ,
+    "dynamic.memory_profile"],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "capability_id",
+    "target",
+    "module",
+    "qualname",
+    "cases_run",
+    "worst_case",
+    "peak_bytes",
+    "top_sites",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "python stdlib tracemalloc/cProfile/pstats/time, subprocess",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "391c229c53f290a9226bc2fcd9d6c00e018c1ea7b71f9f43e94f46775986c7a6",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the `hog(512)` list that holds 40 KB at work.py:9, named as the allocating line",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (a package with a known cost shape), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.perf.memory_profile.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
    }
   },
   "python.pipeline.allowlist_gate.v1": {
@@ -5196,20 +5909,647 @@
     "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1_V1.json"
    }
   },
+  "python.quality.api_compatibility.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "api_compatibility",
+     "capability_id": "python.quality.api_compatibility.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "public api",
+    "api compatibility",
+    "backward compatible",
+    "breaking change",
+    "breaking changes",
+    "breaks the public api",
+    "removed symbol",
+    "signature change",
+    "api surface"
+   ],
+   "limitations": [
+    "the baseline is the committed revision (base_ref, default HEAD) read through `git show`; an uncommitted file with no committed version is a NEW module, so everything in it is an addition and nothing in it can break a caller.",
+    "the surface is module-level public names, public class methods and their signatures; instance attributes, type annotations as contracts, and behaviour changes that keep the same signature are not detected.",
+    "a renamed positional parameter is breaking even when the function still accepts the same calls positionally, because a keyword caller breaks."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.source.api_compatibility.report"
+   ],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "base_ref",
+    "files_compared",
+    "change_count",
+    "breaking_count",
+    "breaking_changes",
+    "changes",
+    "compatible",
+    "gate",
+    "complete"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the committed revision it must diff against",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.api_compatibility.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.quality.changelog.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "changelog",
+     "capability_id": "python.quality.changelog.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "changelog",
+    "release notes",
+    "release history",
+    "what changed",
+    "history of changes"
+   ],
+   "limitations": [
+    "Reads the repository's own history: it reports what the commits say, never a summary.",
+    "Conventional-commit types are grouped; everything else is kept under Other."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.repository.changelog.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "act",
+    "commit_count",
+    "sections",
+    "commits",
+    "changelog_markdown"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the committed baseline",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.changelog.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.quality.coverage.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "coverage",
+     "capability_id": "python.quality.coverage.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "coverage",
+    "test coverage",
+    "line coverage",
+    "covered",
+    "untested",
+    "branch coverage"
+   ],
+   "limitations": [
+    "Runs the stated suite under coverage.py: coverage is a fact about a run, not about source.",
+    "Refuses NO_TESTS_FOUND rather than reporting 0% for a tree it never executed."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.tests.coverage.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "act",
+    "percent_covered",
+    "files",
+    "least_covered",
+    "test_exit"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the failing test in tests/test_calc.py",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.coverage.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.quality.duplication.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "duplication",
+     "capability_id": "python.quality.duplication.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "duplication",
+    "duplicated code",
+    "duplicate code",
+    "clone",
+    "clones",
+    "copy pasted",
+    "repeated code",
+    "dry"
+   ],
+   "limitations": [
+    "AST statement windows (6), normalised for names and literals.",
+    "Overlapping windows of one copied block are reported once, not once per offset."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.duplication.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "act",
+    "clone_group_count",
+    "clones",
+    "duplicated_statement_estimate"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the block duplicated between duplicate_a and duplicate_b",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.duplication.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.quality.flake_detect.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.quality.flake_detect.v1",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "repeats": "${input.repeats}",
+     "source_root": "${input.source_root}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_flake_detect_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "flaky",
+    "flake",
+    "flaky tests",
+    "intermittent",
+    "nondeterministic",
+    "test order",
+    "hash seed",
+    "rerun",
+    "reproducibility",
+    "quality"
+   ],
+   "limitations": [
+    "a flake is proven by REPLAY, never by a linter: the verdict is outcome variance across runs, and the evidence for each flaky test names the exact order and hash seeds that failed.",
+    "the tree is never modified: the order-shuffling plugin is written to a temp dir and put on PYTHONPATH for the child run only.",
+    "a test that fails in EVERY run is reported as consistently_failing, not as a flake, so a stable failure is not 'fixed' by rerunning.",
+    "stable means 'passed in every run of this budget'; a flake rarer than the run count is invisible, and detection_scope says so instead of certifying determinism.",
+    "repeats below 2 refuses REPEATS_BELOW_TWO: one execution is a test run, not a flake hunt."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.quality.flaky_tests.report"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "source_root",
+    "targets",
+    "runs",
+    "flakes_found",
+    "flaky_tests",
+    "flaky_evidence",
+    "consistently_failing",
+    "stable",
+    "test_count",
+    "detection_scope",
+    "run_summary",
+    "gate",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "pytest",
+    "type": "runtime",
+    "version_family": ">=7"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-FLAKEDETECT-001",
+    "observed_effect": {
+     "golden": "a suite with one order-dependent test: 4 runs over 4 seeded collection orders report flakes_found=1, the flaky test named with per-run evidence (seed 0 passed, seeds 1-3 failed)",
+     "honesty": "repeats<2 refuses REPEATS_BELOW_TWO; no tests refuses NO_TESTS_FOUND; a collection error refuses TESTS_COULD_NOT_RUN instead of reporting zero flakes",
+     "scope": "the tree is byte-untouched by the probe (the shuffle plugin lives in a temp dir on PYTHONPATH)",
+     "stable": "the order-independent test in the same suite is in `stable`, and a test that fails in every run appears in `consistently_failing` rather than `flaky_tests`"
+    }
+   }
+  },
+  "python.quality.license_scan.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "license_scan",
+     "capability_id": "python.quality.license_scan.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "license",
+    "licenses",
+    "licence",
+    "licensing",
+    "spdx",
+    "compliance",
+    "attribution"
+   ],
+   "limitations": [
+    "Reads installed distribution metadata for the modules the project imports.",
+    "A distribution that declares no license is counted separately, never assumed permissive."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.dependencies.licenses.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "act",
+    "dependency_count",
+    "declared_count",
+    "licenses",
+    "license_counts"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the package's undeclared licence",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.license_scan.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.quality.resource_leak.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "resource_leak",
+     "capability_id": "python.quality.resource_leak.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "quality_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "resource leak",
+    "resource leaks",
+    "leak",
+    "leaks",
+    "unclosed",
+    "unclosed file",
+    "file descriptor",
+    "handle",
+    "socket leak",
+    "not closed",
+    "context manager"
+   ],
+   "limitations": [
+    "a same-scope static reading: a with-statement, a close/terminate/kill/release call on the bound name in the same scope, or returning the handle clears a finding; it does not claim path-sensitivity, so a handle closed on one branch and leaked on another is not reported.",
+    "builtins/io open, socket.socket, socket.create_connection, sqlite3.connect, subprocess.Popen, os.popen, tempfile.NamedTemporaryFile, tarfile.open, zipfile.ZipFile, urllib.request.urlopen and mmap.mmap are the acquisitions it knows; a wrapper with its own close() is not assumed to be one of them.",
+    "a resource acquired in one function and closed in another is reported: scopes are analysed separately."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.source.resource_leak.report"
+   ],
+   "requires": [],
+   "result_fields": [
+    "act",
+    "files_scanned",
+    "leaks_found",
+    "leaks",
+    "detection_scope",
+    "gate",
+    "complete"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/quality_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "feadedda0f92b3294d0edd9dad2bb8e943d7d62ed00605000169e0052fdf0c3c",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the unclosed open() in pkg/io_leak.py",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.quality.resource_leak.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.refactor.change_signature.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.change_signature.v1",
+     "edits_path": "${input.edits_path}",
+     "module": "${input.module}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_refactor_change_signature",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "refactor",
+    "signature",
+    "parameter",
+    "argument",
+    "call site",
+    "arity",
+    "default value",
+    "keyword argument",
+    "ast",
+    "codemod",
+    "semantic edit",
+    "change signature"
+   ],
+   "limitations": [
+    "the signature is re-rendered from the parsed def and spliced as ONE span: annotations and unstated defaults are carried through byte-exactly, and a param rename rewrites the body by the same lexical shadow law as rename_symbol.",
+    "a call site is edited only when it provably binds this symbol (same module, from-import, or import-module attribute); a call inside a scope that rebinds the name is not this function and is left alone.",
+    "adding a parameter WITHOUT a default requires call_default, because then every resolved call site must be rewritten; a function that also ESCAPES as a value (a callback, an alias) refuses FUNCTION_OBJECT_ESCAPES instead of silently leaving a broken arity.",
+    "removal is only a trailing parameter with a default that the body never reads and no call site passes (REMOVAL_SHIFTS_ARGUMENT / PARAM_IN_USE otherwise).",
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly; a red post-edit suite restores every original byte and refuses TESTS_RED_AFTER_EDIT."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.change_signature"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "module",
+    "qualname",
+    "old_signature",
+    "new_signature",
+    "renames",
+    "added",
+    "removed",
+    "defaults_set",
+    "call_sites_edited",
+    "edit_count",
+    "files_edited",
+    "unknown_sites",
+    "shadowed_keeps",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified"
+   ],
+   "source": {
+    "module": "python stdlib ast",
+    "type": "runtime",
+    "version_family": ">=3.8"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-CHANGESIG-001",
+    "observed_effect": {
+     "arity": "a parameter added without a default appends `scale=1` at every resolved call site (positional and keyword forms both), suite green, 4 call sites + 1 signature span",
+     "blind": "no run_tests named -> gate PASS_BLIND, verified=false",
+     "golden": "def add(a, b) -> add(x, b, scale=1); body `return a + b` -> `return x + b`; keyword call sites add(a=3) -> add(x=3) across the defining module and two importers; named pytest suite green post-edit (gate PASS, complete true)",
+     "honesty": "removal of a non-trailing or defaultless parameter refuses REMOVAL_SHIFTS_ARGUMENT; a parameter renamed onto an existing name refuses DUPLICATE_PARAM; an escaping function object refuses FUNCTION_OBJECT_ESCAPES when the change is not backward compatible; an empty request refuses SIGNATURE_NOT_STATED",
+     "rollback": "a red named suite restores every edited file sha256-identical and refuses TESTS_RED_AFTER_EDIT",
+     "shadowing": "a nested def that rebinds the target name has its calls left untouched (the call is not this function)"
+    }
+   }
+  },
   "python.refactor.extract_function.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.refactor.extract_function.v1",
-          "end_line": "${input.end_line}",
-          "module": "${input.module}",
-          "new_name": "${input.new_name}",
-          "output_path": "${input.output_path}",
-          "qualname": "${input.qualname}",
-          "run_tests": [],
-          "source_root": "${input.source_root}",
-          "start_line": "${input.start_line}",
-          "timeout_s": 300
-        },
+     "capability_id": "python.refactor.extract_function.v1",
+     "end_line": "${input.end_line}",
+     "module": "${input.module}",
+     "new_name": "${input.new_name}",
+     "output_path": "${input.output_path}",
+     "qualname": "${input.qualname}",
+     "run_tests": [],
+     "source_root": "${input.source_root}",
+     "start_line": "${input.start_line}",
+     "timeout_s": 300
+    },
     "expect": {
      "field": "gate",
      "type": "field_equals",
@@ -5233,7 +6573,12 @@
     "dedent",
     "inputs outputs inference",
     "semantic edit",
-    "codemod"
+    "codemod",
+    "statement",
+    "block",
+    "extract",
+    "method",
+    "extract statement"
    ],
    "limitations": [
     "region bytes move verbatim and dedent exactly 4: comments and formatting inside the region are byte-carried, never reprinted; the extracted def parse-checks BEFORE the file is touched and the rebuilt module parse-checks before it is written.",
@@ -5286,6 +6631,195 @@
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-EXTRACT-001.json"
    }
   },
+  "python.refactor.inline_function.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.inline_function.v1",
+     "module": "${input.module}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_refactor_inline_function",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "refactor",
+    "inline",
+    "inlining",
+    "inline function",
+    "remove function",
+    "call site",
+    "dead function",
+    "ast",
+    "codemod",
+    "semantic edit",
+    "extract inverse"
+   ],
+   "limitations": [
+    "inlining is statement-level: a call site must be a single-line assignment, augmented assignment, expression statement or return. A call inside a larger expression is refused by line (CALL_SITE_INSIDE_EXPRESSION), because splicing a statement list into an expression needs an invented lambda.",
+    "a body whose return is inside a branch, a decorated/async/generator body, a body with nested def/class/lambda or a multi-line string, and recursion are all refused by name rather than spliced.",
+    "a parameter name already live at the site is renamed (_inl_<name>) and the returned expression is renamed with it, since the expression was written in the callee's scope.",
+    "*args/**kwargs at a site, and callees with varargs/kw-only params, refuse: the binding is not knowable without running the code.",
+    "the definition is deleted only when no call in the module and no other module in the tree names it; otherwise function_removed is false and the name survives.",
+    "no run_tests named => gate PASS_BLIND with verified=false; a red post-edit suite restores every original byte and refuses TESTS_RED_AFTER_EDIT."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.inline_function"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "module",
+    "qualname",
+    "inlined_sites",
+    "renames",
+    "sites_refused",
+    "function_removed",
+    "external_references",
+    "edit_count",
+    "files_edited",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified"
+   ],
+   "source": {
+    "module": "python stdlib ast",
+    "type": "runtime",
+    "version_family": ">=3.9"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "44ecf4c823df90366a1560d64e8b95e201d89b66603eaaadcfccb18fba1e6844",
+    "observed_effect": {
+     "gate": "PASS_BLIND",
+     "output_verified": true
+    },
+    "planted_defect": "every call site replaced by the callee's body, the def kept because the tests import it",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.refactor.inline_function.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.refactor.move_function.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.move_function.v1",
+     "module": "${input.module}",
+     "output_path": "${input.output_path}",
+     "python_executable": "${input.python_executable}",
+     "qualname": "${input.qualname}",
+     "run_tests": "${input.run_tests}",
+     "source_root": "${input.source_root}",
+     "target_module": "${input.target_module}",
+     "timeout_s": "${input.timeout_s}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_refactor_move_function",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "python",
+    "refactor",
+    "move",
+    "move function",
+    "relocate",
+    "move to module",
+    "new module",
+    "module",
+    "function",
+    "ast",
+    "import rewrite",
+    "cross-file",
+    "codemod",
+    "semantic edit"
+   ],
+   "limitations": [
+    "moves module-scope functions only; methods, nested functions and module bindings refuse SYMBOL_KIND_UNSUPPORTED.",
+    "an `import pkg.mod as alias` site is rewritten only when that alias is used for the moved name and nothing else; otherwise the whole edit refuses UNSUPPORTED_SHARED_MODULE_IMPORT and lists the sites -- a half-rewritten import is worse than a refusal.",
+    "every file that loads the name must hold a provable import of it, or the edit refuses UNPROVABLE_REFERENCE rather than leaving a NameError behind.",
+    "comments immediately above the def are not moved: they are not provably the symbol's.",
+    "no run_tests named => gate PASS_BLIND with verified=false, stated loudly."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.move_function"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "module",
+    "qualname",
+    "symbol_kind",
+    "moved_to",
+    "moved_line_count",
+    "edit_count",
+    "files_edited",
+    "injected_imports",
+    "unresolved_sites",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified",
+    "verified"
+   ],
+   "source": {
+    "module": "python stdlib ast",
+    "type": "runtime",
+    "version_family": ">=3.8"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "ASTRA-VERIFY-MOVEFN-001",
+    "observed_effect": {
+     "determinism": "identical worlds produce byte-identical trees and artifacts",
+     "golden": "pkg/calc.py add -> pkg/ops.py across three importers: def bytes moved with its decorator and docstring, `from pkg.calc import add, sub` SPLIT into `from pkg.ops import add` + `from pkg.calc import sub`, `import pkg.calc as calc` swapped to `import pkg.ops as calc` because the alias was used for add alone, and a source module that still calls the name re-imported it; 4 files edited, named pytest suite green, gate PASS",
+     "rollback": "a red named suite restores every original byte and refuses TESTS_RED_AFTER_EDIT",
+     "seam": "blank lines are normalised only where the def was removed; every other byte of every edited file is preserved",
+     "split_law": "measured on the first build: rewriting the module token of a multi-name import sent `sub` to a module that does not define it, and only the named suite noticed -- the split is now the only behaviour"
+    },
+    "pin_green": "9/9 move-function pins green",
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MOVEFN-001__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MOVEFN-001__RECEIPT.json"
+   }
+  },
   "python.refactor.rename_parameter.v1": {
    "action_template": {
     "args": {
@@ -5323,7 +6857,10 @@
     "kwargs",
     "signature",
     "semantic edit",
-    "codemod"
+    "codemod",
+    "argument",
+    "kwarg",
+    "keyword argument"
    ],
    "limitations": [
     "edits identifiers, never strings or formatting: comment/docstring words byte-preserved; all splices are byte-integrity-checked at exact identifier spans (SPAN_INTEGRITY refusal).",
@@ -5414,7 +6951,12 @@
     "call site",
     "import propagation",
     "semantic edit",
-    "codemod"
+    "codemod",
+    "function",
+    "method",
+    "class",
+    "variable",
+    "rename function"
    ],
    "limitations": [
     "edits identifiers at exact spans only: strings, comments and formatting are byte-preserved; every splice is verified against the original bytes (SPAN_INTEGRITY).",
@@ -5460,12 +7002,12 @@
     "independently_verified": true,
     "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
     "observed_effect": {
-     "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
-     "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
-     "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
-     "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical",
      "determinism": "two pristine worlds -> byte-identical trees and artifacts; string literals and substring-carriers (topper, \"top of \") never edited",
-     "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files"
+     "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files",
+     "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
+     "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
+     "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
+     "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical"
     },
     "pin_green": "18/18 rename-symbol pins green",
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
@@ -5626,8 +7168,8 @@
      "diff_path": "${input.diff_path}",
      "output_path": "${input.output_path}",
      "pr_intent_path": "${input.pr_intent_path}",
-     "repo_path": "${input.repo_path}",
-     "timeout_s": "${input.timeout_s}"
+     "timeout_s": "${input.timeout_s}",
+     "worktree_path": "${input.worktree_path}"
     },
     "expect": {
      "field": "push_verified",
@@ -7380,11 +8922,11 @@
   "python.source.change_impact.testselect.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.source.change_impact.testselect.v1",
-          "changed_paths": "${input.changed_paths}",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.source.change_impact.testselect.v1",
+     "changed_paths": "${input.changed_paths}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7403,7 +8945,6 @@
     "diff",
     "test",
     "selection",
-    "blame",
     "callers",
     "affected",
     "minimal",
@@ -7467,11 +9008,11 @@
   "python.source.crossfile_edit.choreograph.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.source.crossfile_edit.choreograph.v1",
-          "edits_path": "${input.edits_path}",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.source.crossfile_edit.choreograph.v1",
+     "edits_path": "${input.edits_path}",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "output_verified",
      "type": "field_equals",
@@ -7709,6 +9250,185 @@
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
    }
+  },
+  "python.supply_chain.secret_scan.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "secret_scan",
+     "capability_id": "python.supply_chain.secret_scan.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "supply_chain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "secret",
+    "secrets",
+    "credential",
+    "api key",
+    "token",
+    "password",
+    "leak",
+    "leaked secret",
+    "entropy",
+    "aws access key",
+    "github token",
+    "slack token",
+    "detect-secrets",
+    "hardcoded credential",
+    "scan for secrets"
+   ],
+   "limitations": [
+    "the engine is detect-secrets: 27 detectors and an entropy filter, with the providers Yelp ships. A credential shape no detector knows is not found; the artifact says which detectors ran.",
+    "findings carry a salted SHA-1 and a location, never the secret itself -- a report that quotes the credential is a second leak.",
+    "verification against the provider (`is_verified`) is OFF: it would send the credential to a third party. The artifact says so per finding.",
+    "the scan covers every file in the tree, not only git-tracked ones; binary files are skipped by detect-secrets' own rules.",
+    "TOOL_NOT_INSTALLED:detect-secrets is refused by name rather than reported as zero findings -- an empty report from a scanner that did not run is a lie."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.supply_chain.leaked_secret.report",
+    "python.repository.secrets.scanned"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "capability_id",
+    "act",
+    "target",
+    "finding_count",
+    "findings_by_detector",
+    "files_with_findings",
+    "detectors_enabled",
+    "secrets_written_to_this_artifact",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "detect-secrets 1.5.0 (declared in TOOLCHAIN_DECLARATION_V1)",
+    "type": "runtime",
+    "version_family": ">=1.5"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "03b88dde3a0278814b49ec26ac82f4fcf460472d966c70b6bef3474f02114371",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the AWS access-key detector firing on a credential bandit's name matching misses",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.supply_chain.secret_scan.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }
+  },
+  "python.supply_chain.vulnerability_audit.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "vulnerability_audit",
+     "capability_id": "python.supply_chain.vulnerability_audit.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "supply_chain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "vulnerability",
+    "vulnerabilities",
+    "known vulnerabilities",
+    "cve",
+    "ghsa",
+    "pysec",
+    "advisory",
+    "dependency audit",
+    "pip-audit",
+    "supply chain",
+    "security advisory",
+    "fixed version"
+   ],
+   "limitations": [
+    "the advisory source is pip-audit's PyPI service: every finding carries a PYSEC id with its CVE/GHSA aliases and the versions that fix it. Without network there is no advisory data, and the verb refuses ADVISORY_SERVICE_UNREACHABLE rather than reporting zero -- an empty report from a service that was never reached is a lie.",
+    "the audited set is the project's OWN declaration: [project].dependencies from pyproject.toml, else requirements*.txt, else a stated requirements_path. It is resolved by pip, so a floating range audits the version pip would install today.",
+    "a requirements_path that does not exist is refused by name; pip resolution conflicts are refused as ADVISORY_SERVICE_UNREACHABLE with pip's own words, because the run could not happen.",
+    "this audits declared dependencies, not the running interpreter: use the project, not the venv, as the target."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.dependencies.vulnerability.report"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "capability_id",
+    "act",
+    "target",
+    "requirements_source",
+    "requirements_audited",
+    "packages_audited",
+    "vulnerable_packages",
+    "vulnerability_count",
+    "vulnerabilities_by_package",
+    "advisory_service",
+    "gate",
+    "complete",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "module": "pip-audit 2.10.1 (declared in TOOLCHAIN_DECLARATION_V1)",
+    "type": "runtime",
+    "version_family": ">=2.10"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "03b88dde3a0278814b49ec26ac82f4fcf460472d966c70b6bef3474f02114371",
+    "observed_effect": {
+     "gate": "PASS",
+     "output_verified": true
+    },
+    "planted_defect": "the PYSEC advisories on the pinned urllib3==1.26.0",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.supply_chain.vulnerability_audit.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+  }
   },
   "python.symbol.resolve.standalone.v1": {
    "action_template": {
@@ -8004,10 +9724,10 @@
   "python.tests.generate.scaffold.v1": {
    "action_template": {
     "args": {
-          "capability_id": "python.tests.generate.scaffold.v1",
-          "output_path": "${input.output_path}",
-          "source_root": "${input.source_root}"
-        },
+     "capability_id": "python.tests.generate.scaffold.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}"
+    },
     "expect": {
      "field": "verified",
      "type": "field_equals",
@@ -8088,6 +9808,613 @@
     },
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
+   }
+  },
+  "python.toolchain.bandit_security.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.toolchain.bandit_security.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "tool_verb": "security"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "security",
+    "bandit",
+    "insecure",
+    "unsafe call",
+    "cwe",
+    "exploit",
+    "security audit"
+   ],
+   "limitations": [
+    "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+    "Static analysis only: it reads the source it is pointed at and nothing else."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.security.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "issue_count",
+    "issues",
+    "severity_counts",
+    "clean"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "tool": "bandit",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the assert in the test module (B101)",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.bandit_security.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.toolchain.mypy_typecheck.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.toolchain.mypy_typecheck.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "tool_verb": "type_check"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "type check",
+    "typecheck",
+    "mypy",
+    "types",
+    "type error",
+    "annotations",
+    "static types",
+    "type hints"
+   ],
+   "limitations": [
+    "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+    "Static analysis only: it reads the source it is pointed at and nothing else."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.types.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "error_count",
+    "errors",
+    "clean"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "tool": "mypy",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the functions it must at least parse",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.mypy_typecheck.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.toolchain.ruff_async_audit.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "async_audit",
+     "capability_id": "python.toolchain.ruff_async_audit.v1",
+     "output_path": "${input.output_path}",
+     "select": "ASYNC,RUF006,PT",
+     "source_root": "${input.source_root}",
+     "tool_verb": "async_audit"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "concurrency",
+    "race condition",
+    "race conditions",
+    "async",
+    "await",
+    "coroutine",
+    "event loop",
+    "thread safety",
+    "asyncio"
+   ],
+   "limitations": [
+    "ruff ASYNC + RUF006 + PT rule families.",
+    "Static rules only: they cannot prove the absence of a race, only its known shapes."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.concurrency.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "issue_count",
+    "issues",
+    "issue_codes",
+    "clean"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": null,
+    "planted_defect_found": null,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_async_audit.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.toolchain.ruff_complexity.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.toolchain.ruff_complexity.v1",
+     "output_path": "${input.output_path}",
+     "select": "C901",
+     "source_root": "${input.source_root}",
+     "threshold": 10,
+     "tool_verb": "complexity"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "complexity",
+    "cyclomatic",
+    "mccabe",
+    "branching",
+    "hard to read",
+    "c901"
+   ],
+   "limitations": [
+    "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+    "Static analysis only: it reads the source it is pointed at and nothing else."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.complexity.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "threshold",
+    "functions",
+    "max_complexity",
+    "over_threshold_count"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "tool": "ruff",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the twelve-branch function `branchy`, which is above the default threshold",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_complexity.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.toolchain.ruff_dead_code.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.toolchain.ruff_dead_code.v1",
+     "output_path": "${input.output_path}",
+     "select": "F401,F811,F841",
+     "source_root": "${input.source_root}",
+     "tool_verb": "dead_code"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "dead code",
+    "unused",
+    "unreachable",
+    "unused import",
+    "unused variable",
+    "never used",
+    "orphan"
+   ],
+   "limitations": [
+    "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+    "Static analysis only: it reads the source it is pointed at and nothing else."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.dead_code.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "unused_count",
+    "unused",
+    "clean"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "tool": "ruff",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the unused `import os`",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_dead_code.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.toolchain.ruff_exception_audit.v1": {
+   "action_template": {
+    "args": {
+     "act_verb": "exception_audit",
+     "capability_id": "python.toolchain.ruff_exception_audit.v1",
+     "output_path": "${input.output_path}",
+     "select": "BLE,TRY,B,E722,S110",
+     "source_root": "${input.source_root}",
+     "tool_verb": "exception_audit"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "exception handling",
+    "exception",
+    "exceptions",
+    "error handling",
+    "except",
+    "swallowed",
+    "bare except",
+    "raise"
+   ],
+   "limitations": [
+    "ruff BLE + TRY + B rule families.",
+    "Reports the patterns the rules encode; it does not judge whether an except is correct."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.exception_handling.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "issue_count",
+    "issues",
+    "issue_codes",
+    "clean"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": null,
+    "planted_defect_found": null,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_exception_audit.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.toolchain.ruff_format.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.toolchain.ruff_format.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "tool_verb": "format"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "format",
+    "formatter",
+    "reformat",
+    "formatting",
+    "ruff format",
+    "style fix"
+   ],
+   "limitations": [
+    "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+    "Static analysis only: it reads the source it is pointed at and nothing else."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.format.applied"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "check_only",
+    "changed_files",
+    "changed_count",
+    "reformatted"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "tool": "ruff",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": null,
+    "planted_defect_found": null,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_format.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "python.toolchain.ruff_lint.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.toolchain.ruff_lint.v1",
+     "output_path": "${input.output_path}",
+     "select": "E,F,W,I,B,UP,SIM,C4,RUF",
+     "source_root": "${input.source_root}",
+     "tool_verb": "lint"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "toolchain_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "lint",
+    "linter",
+    "ruff",
+    "style",
+    "pep8",
+    "flake",
+    "static check",
+    "warnings"
+   ],
+   "limitations": [
+    "Runs the analyser that belongs to THIS interpreter; an analyser that is absent is refused TOOL_NOT_INSTALLED, never reported as no findings.",
+    "Static analysis only: it reads the source it is pointed at and nothing else."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "source_root": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "python.source.lint.report"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "tool",
+    "issue_count",
+    "issues",
+    "issue_codes",
+    "clean"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/toolchain_v1.py",
+    "module": "subprocess",
+    "tool": "ruff",
+    "type": "python_stdlib"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "a877990adef90b29caca21a25b70444bf41dbff417f3d83328903bfeb7f89812",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the unclosed file (SIM115) and the unused import (F401)",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.toolchain.ruff_lint.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
    }
   },
   "shell.command.run": {
@@ -9942,6 +12269,700 @@
      "output_verified": true
     },
     "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001__text.file.write__AUTO_VERIFY.json"
+   }
+  },
+  "vcs.git.bisect.v1": {
+   "action_template": {
+    "args": {
+     "argv": "${input.argv}",
+     "capability_id": "vcs.git.bisect.v1",
+     "git_verb": "bisect",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "bisect",
+    "first bad commit",
+    "which commit broke",
+    "regression range"
+   ],
+   "limitations": [
+    "Requires the predicate command; a bisect with an invented predicate is refused.",
+    "Always resets the bisect state, including on the failure path."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "vcs.git.history.bisect"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "good_ref",
+    "bad_ref",
+    "command",
+    "first_bad_sha",
+    "first_bad_subject"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7ecd4eead024db31d52690b34b914ed47b44e95372f95338a850e7cc0f02fa3a",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the first bad commit, whose subject is 'bad'",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__vcs.git.bisect.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "vcs.git.blame.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.blame.v1",
+     "git_verb": "blame",
+     "output_path": "${input.output_path}",
+     "path": "${input.path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "blame",
+    "who wrote",
+    "who last changed",
+    "last changed",
+    "attribution",
+    "per line"
+   ],
+   "limitations": [
+    "read-only; porcelain blame of exactly one file, parsed to per-line rows plus author totals",
+    "the file must already exist inside the repository"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.blame"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.branch_create.v1": {
+   "action_template": {
+    "args": {
+     "branch_name": "${input.branch_name}",
+     "capability_id": "vcs.git.branch_create.v1",
+     "git_verb": "branch_create",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "branch",
+    "create branch",
+    "new branch"
+   ],
+   "limitations": [
+    "mutating; `git branch NAME [start]`, which creates without switching",
+    "refuses BRANCH_ALREADY_EXISTS and BRANCH_NAME_INVALID instead of reusing a name"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.branch_create"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.branch_list.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.branch_list.v1",
+     "git_verb": "branch_list",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "branch",
+    "branches",
+    "list branches",
+    "which branch",
+    "current branch"
+   ],
+   "limitations": [
+    "read-only; every local branch with its commit and a current flag"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.branch_list"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.checkout.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.checkout.v1",
+     "git_verb": "checkout",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "checkout",
+    "switch",
+    "switch branch",
+    "go to branch",
+    "check out"
+   ],
+   "limitations": [
+    "mutating; refuses WORKING_TREE_DIRTY and REF_NOT_FOUND before touching the tree",
+    "the resulting branch is read back from git, not assumed"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.checkout"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.commit.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.commit.v1",
+     "git_verb": "commit",
+     "message": "${input.message}",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "commit",
+    "save changes",
+    "record changes",
+    "commit changes"
+   ],
+   "limitations": [
+    "mutating; stages everything not ignored, commits the stated message, proves HEAD moved",
+    "refuses NOTHING_TO_COMMIT rather than reporting a commit that did not happen"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.commit"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.diff.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.diff.v1",
+     "git_verb": "diff",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "diff",
+    "changes",
+    "patch",
+    "modified files",
+    "uncommitted diff"
+   ],
+   "limitations": [
+    "read-only; unified diff plus --stat over the same selection",
+    "`ref` compares the working tree against that commit; omitted means the unstaged changes"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.diff"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.log.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.log.v1",
+     "git_verb": "log",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "log",
+    "history",
+    "commits",
+    "commit history",
+    "recent commits"
+   ],
+   "limitations": [
+    "read-only; newest first, at most 20 commits",
+    "an empty repository is empty_repository=true, never a failure"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.log"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.rebase.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.rebase.v1",
+     "git_verb": "rebase",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "rebase",
+    "replay onto",
+    "linearise",
+    "apply onto"
+   ],
+   "limitations": [
+    "Refuses a dirty tree, and aborts a conflicting rebase rather than leaving it open."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "vcs.git.branch.rebase"
+   ],
+   "requires": [
+    "python.source.available"
+   ],
+   "result_fields": [
+    "onto",
+    "branch",
+    "previous_sha",
+    "sha",
+    "commits_replayed"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "7ecd4eead024db31d52690b34b914ed47b44e95372f95338a850e7cc0f02fa3a",
+    "observed_effect": {
+     "gate": "PASS"
+    },
+    "planted_defect": "the one commit replayed onto the upstream branch",
+    "planted_defect_found": true,
+    "probe": "execution_guard/capability_evidence_probe_v1.py",
+    "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__vcs.git.rebase.v1__RECEIPT.json",
+    "reproduced_on_second_run": true
+   }
+  },
+  "vcs.git.revert.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.revert.v1",
+     "git_verb": "revert",
+     "output_path": "${input.output_path}",
+     "ref": "${input.ref}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "revert",
+    "undo commit",
+    "undo the last commit",
+    "roll back a commit"
+   ],
+   "limitations": [
+    "mutating; `git revert --no-edit`, WORKING_TREE_DIRTY refused first, REVERT_CONFLICT aborts",
+    "reverts by creating the inverse commit; it never rewrites history"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.revert"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.stash.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.stash.v1",
+     "git_verb": "stash",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "stash",
+    "uncommitted",
+    "set aside",
+    "shelve",
+    "put aside",
+    "working changes"
+   ],
+   "limitations": [
+    "mutating; stashes tracked and untracked changes with a message, then reads the tree back",
+    "a clean tree is stashed=false with reason WORKING_TREE_CLEAN, never a success"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.stash"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
+   }
+  },
+  "vcs.git.status.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "vcs.git.status.v1",
+     "git_verb": "status",
+     "output_path": "${input.output_path}",
+     "worktree_path": "${input.worktree_path}"
+    },
+    "expect": {
+     "field": "gate",
+     "type": "field_equals",
+     "value": "PASS"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "vcs_git_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "git",
+    "status",
+    "working tree",
+    "dirty",
+    "uncommitted changes",
+    "clean",
+    "what changed"
+   ],
+   "limitations": [
+    "read-only; `git --no-optional-locks status --porcelain=v1 -b --untracked-files=all`",
+    "a dirty tree is clean=false, not a failure: the verb succeeded and the finding is the tree's"
+   ],
+   "platforms": [
+    "darwin",
+    "linux",
+    "windows"
+   ],
+   "provides": [
+    "vcs.git.status"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+    "executable": "git",
+    "module": "git",
+    "type": "system_tool",
+    "version_family": ">=2.30"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "independently_verified": true,
+    "mission_id": "VCS-GIT-SURFACE-V1",
+    "receipt_path": "canonical/astra_runtime/evidence/VCS-GIT-SURFACE-V1__RECEIPT.json",
+    "state_path": "canonical/astra_runtime/state/VCS-GIT-SURFACE-V1.json"
    }
   },
   "web.browser.rendered.capture.chromedriver": {

@@ -1,0 +1,21 @@
+{
+ "learned": {
+  ".json": {
+   "goal": "Measure the memory usage of the program in the repository /home/user/brain/canonical/astra_runtime/tmp/missing_verb_probe/repo and report it to /home/user/brain/canonical/astra_runtime/tmp/missing_ver",
+   "learned_at": 1793215662.0904472,
+   "module": "json",
+   "origin": "documentation",
+   "source": "import json\nprint(json.dumps(['foo', {'bar': ('baz', None, 1.0, 2)}]))\n",
+   "verified_sha256": "53d743629cc2fcfd2e3f3936957c89919e16ce502060c437e742db08253f7704"
+  },
+  ".py": {
+   "goal": "Add logging and metrics to /home/user/brain/canonical/astra_runtime/tmp/missing_verb_probe/repo/pkg/calc.py and report it to /tmp/probe_out/observe.json.",
+   "learned_at": 1793215461.5399172,
+   "module": "ipaddress",
+   "origin": "documentation",
+   "source": "import ipaddress\nprint(ipaddress.ip_address('2001:db8::'))\n",
+   "verified_sha256": "769509b0e981e7b9742096b5bd45e952aae8e9c320fbff422bd3e7b33158bde4"
+  }
+ },
+ "schema": "PROJECT_BRAIN_DOCUMENTATION_MINING_V1"
+}

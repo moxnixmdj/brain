@@ -1,0 +1,13 @@
+{
+ "learned": {
+  ".json": {
+   "effect": "ROUND_TRIP_OK",
+   "goal": "Write a schema migration for the database in /home/user/brain/canonical/astra_runtime/tmp/missing_verb_probe/repo and report it to /home/user/brain/canonical/astra_runtime/tmp/missing_verb_probe/out/s",
+   "learned_at": 1793217408.5973642,
+   "name": "json_dump",
+   "source": "import json\njson.dump({'content': 'brain-synthesis-sample'}, open('/tmp/brain-synth-r1zwyhne/out.json', 'w', encoding='utf-8'))\n",
+   "verified_sha256": "64803be9dd2081597d579fa322276af4372db74911fa1fbed01f9508f9bc4a1e"
+  }
+ },
+ "schema": "PROJECT_BRAIN_PROGRAM_SYNTHESIS_V1"
+}

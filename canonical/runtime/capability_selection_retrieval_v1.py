@@ -484,6 +484,13 @@ def _is_executable(entry: Mapping[str, Any]) -> bool:
 # be the capability a write request meant -- whatever its keywords matched.
 _PAYLOAD_SLOT_KINDS = frozenset({"STRING", "JSON_TEXT", "UNKNOWN"})
 
+# Words that stand in for a payload instead of stating it.  "write it to O" states a
+# DESTINATION and points at the act for the content; only a literal can be refused for
+# want of a slot to hold it.
+_ANAPHORIC_PAYLOADS = frozenset({"it", "them", "this", "that", "these", "those", "the result",
+                                 "the results", "the output", "the report", "result", "results",
+                                 "output", "report", "the answer", "answer", "the response"})
+
 
 def _states_a_command_the_sentence_maps_to(goal: Any) -> bool:
     """True when the sentence names an operation that maps to one real program.
@@ -513,7 +520,17 @@ def _states_a_payload_and_its_destination(goal: Any) -> bool:
     except Exception:  # noqa: BLE001 - no composer, no claim to make
         return False
     try:
-        return (_cr.extract_content(goal) is not None
+        content = _cr.extract_content(goal)
+        # A PRONOUN is not stated text.  Measured while binding the git surface: "Blame the
+        # lines of the file F in the repository R and write IT to O" extracts the payload "it",
+        # and the write rule above then required a text-holding slot -- so the capability that
+        # produces the very report that "it" refers to was refused NO_SLOT_FOR_THE_STATED_PAYLOAD,
+        # while the sentence had stated its whole contract.  An anaphor defers to its antecedent,
+        # which is the act the sentence already asked for, so the rule governs only text the
+        # sentence actually writes down.
+        if str(content or "").strip().lower() in _ANAPHORIC_PAYLOADS:
+            return False
+        return (content is not None
                 and _cr.extract_content_destination(goal) is not None)
     except Exception:  # noqa: BLE001 - an unreadable sentence states nothing
         return False

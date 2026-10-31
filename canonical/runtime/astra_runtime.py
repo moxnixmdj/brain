@@ -1001,6 +1001,16 @@ LOCAL_SOURCE_BASE_TYPE={
   "brain_native_deterministic":None,
   "brain_native_deterministic_composition":None,
   "brain_owned_python_composition":None,
+  # `runtime` is the declaration the six hardcore-software adapters use: the dependency is the
+  # Python runtime the adapter itself runs on, and the adapter file is the whole of it.  It was
+  # absent from this table, so `_ensure_local_dependency` refused it with
+  # BOUND_CAPABILITY_SOURCE_UNSUPPORTED:runtime -- every one of python.refactor.rename_symbol,
+  # rename_parameter, extract_function, change_signature, python.review.diff_mutation_gate and
+  # python.quality.flake_detect was dead on arrival at the kernel and could only ever run on the
+  # front layer's first-try local path.  Measured: the whole refactor family, 6 of 151.
+  "runtime":None,
+  # Same fact, different noun: one entry declares brain_owned_deterministic for an in-repo adapter.
+  "brain_owned_deterministic":None,
 }
 
 

@@ -1,0 +1,31 @@
+{
+ "artifact_sha256": "cdd07293b7618bc80042797bbcdba0bbfec373a10ea280980bafe7da3af4b91d",
+ "capability_id": "vcs.git.rebase.v1",
+ "elapsed_ms": null,
+ "entrypoint": "run",
+ "executor": "execution_guard/capability_evidence_probe_v1.py",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "invoked_args": {
+  "git_verb": "rebase",
+  "output_path": "/tmp/brain_evidence_peexj2do/out/rebase.json",
+  "ref": "8f52cd5eb078f44682aeec9655f2d15026248f49",
+  "worktree_path": "/tmp/brain_evidence_peexj2do/repo"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/vcs_git_v1.py",
+ "module_sha256": "7ecd4eead024db31d52690b34b914ed47b44e95372f95338a850e7cc0f02fa3a",
+ "observed": {
+  "gate": "PASS"
+ },
+ "outcome": "EXECUTED",
+ "planted_defect": "the one commit replayed onto the upstream branch",
+ "planted_defect_found": true,
+ "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+ "producer_independent": false,
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__vcs.git.rebase.v1__RECEIPT.json",
+ "reproduced_on_second_run": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

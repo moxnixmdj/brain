@@ -1,0 +1,31 @@
+{
+ "artifact_sha256": "de446706348749b4e9ebe3d6144d484fbcf1e5aafaf6a298a77f398aefa7717d",
+ "capability_id": "python.perf.benchmark.v1",
+ "elapsed_ms": null,
+ "entrypoint": "run",
+ "executor": "execution_guard/capability_evidence_probe_v1.py",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "invoked_args": {
+  "act_verb": "benchmark",
+  "output_path": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/out/benchmark.json",
+  "source_root": "/home/user/brain/canonical/astra_runtime/tmp/brain_evidence_enlfkhbo/first/perf_fixture/cost_growth.py"
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/perf_probe_v1.py",
+ "module_sha256": "391c229c53f290a9226bc2fcd9d6c00e018c1ea7b71f9f43e94f46775986c7a6",
+ "observed": {
+  "gate": "PASS",
+  "output_verified": true
+ },
+ "outcome": "EXECUTED",
+ "planted_defect": "`quadratic` measured over the ladder and reported as O(n^2) with a straight log-log line",
+ "planted_defect_found": true,
+ "probe_input": "task-shaped fixture (source tree / git repository), not a sink path",
+ "producer_independent": false,
+ "ran_by": "local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__python.perf.benchmark.v1__RECEIPT.json",
+ "reproduced_on_second_run": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}
