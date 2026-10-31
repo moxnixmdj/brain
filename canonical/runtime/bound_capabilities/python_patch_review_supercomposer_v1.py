@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Patch-review supercomposer — only-right-way patch review.
-
-Hidden kernels: patch candidate objective/semantic/strict_progress + review diff mutation/perf (5 dead).
-Why max: patch review was 5 isolated gates (dead). This super-composes them: objective acceptance → semantic acceptance → strict progress multi-round → mutation gate → perf gate → patch-review verified."""
+"""Inspect registry declarations only; this adapter does not execute a workflow."""
 from __future__ import annotations
 import hashlib, json, pathlib
 from typing import Any
@@ -23,7 +20,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     found={r: (r in all_prov) for r in required}
     producers=["python.software.repair.measured_acceptance.v1","python.software.repair.semantic_acceptance.v1","python.software.repair.loop.strict_progress.ast.v1","python.review.diff_mutation_gate.v1","python.review.diff_perf_gate.v1"]
     prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"objective acceptance → semantic acceptance → strict progress → mutation gate → perf gate, patch-review verified","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
+    registry_ready=all(found.values()) and all(prod_found.values())
+    # Registry declarations are not execution or verification evidence.
+    verified=False
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"objective acceptance → semantic acceptance → strict progress → mutation gate → perf gate, patch-review verified","verified":verified,"registry_ready":registry_ready,"reason":"DEPENDENCIES_NOT_EXECUTED","model_dependency_count":0,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"python_patch_review_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    return {"adapter":"python_patch_review_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"reason":"DEPENDENCIES_NOT_EXECUTED","found":found,"model_dependency_count":0,"incremental_spend_usd":0}

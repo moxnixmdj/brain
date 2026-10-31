@@ -239,7 +239,10 @@ class ChangeImpactRegistryContractTests(unittest.TestCase):
 
     def test_the_entry_is_a_verified_bound_capability(self):
         self.assertEqual(self.entry["status"], "VERIFIED_BOUND_CAPABILITY")
-        self.assertEqual(self.entry["provides"], ["python.source.change_impact.test_selection"])
+        # The ID alias is required by the issue-to-PR orchestrator's dependency
+        # contract as well as the semantic effect name.
+        self.assertEqual(set(self.entry["provides"]),
+                         {"python.source.change_impact.test_selection", CAPABILITY_ID})
         self.assertEqual(self.entry["requires"], [])
         self.assertEqual(self.entry["adapter_module"], "python_change_impact_testselect")
         self.assertEqual(self.entry["incremental_spend_usd"], 0)

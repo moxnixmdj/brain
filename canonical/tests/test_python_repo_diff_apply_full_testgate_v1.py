@@ -129,8 +129,9 @@ class TestDiffApplyFullTestgate(unittest.TestCase):
     def test_green_refactor_gate_pass(self):
         root = self._fixture(GREEN_DIFF)
         res = _run(root, "d.diff")
-        self.assertEqual(res["gate"], "PASS")
-        self.assertTrue(res["verified"])
+        self.assertEqual(res["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
+        self.assertEqual(res["local_gate"], "PASS")
+        self.assertFalse(res["verified"])
         self.assertEqual(res["tests_discovered"], 1)
         self.assertEqual(res["tests_failed"], 0)
 
@@ -229,7 +230,8 @@ class TestDiffApplyFullTestgate(unittest.TestCase):
         _build_anchor(root2)
         (root2 / "d.diff").write_text(GREEN_DIFF, encoding="utf-8")
         res2 = _run(root2, "d.diff")
-        self.assertEqual(res2["gate"], "PASS")
+        self.assertEqual(res2["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
+        self.assertEqual(res2["local_gate"], "PASS")
 
     def test_artifact_schema_and_diff_sha(self):
         root = self._fixture(GREEN_DIFF)

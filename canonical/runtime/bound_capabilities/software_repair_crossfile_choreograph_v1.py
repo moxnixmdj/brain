@@ -1,15 +1,8 @@
 #!/usr/bin/env python3
-"""Software repair — cross-file choreography inside the repair loop, only-right-way.
+"""Diagnose cross-file repair wiring without claiming a repair was executed.
 
-Hidden kernels: python_source_symbol_index (86k symbols, 221k edges),
-python_crossfile_edit_choreograph (multi-file atomic), python_change_impact_testselect (2070/2096),
-python_issue_to_pr_orchestrate (moves/renames). Until now choreography was
-outside repair loops (only issue_to_pr used it). This puts it inside: patch →
-choreograph → change-impact slice → dual-oracle verify → gate.
-
-Why max: real fixes are multi-file atomic choreographies, not single-file
-heuristics. Import closure + call-graph makes it collision-checked, fail-closed,
-insanely fast via test slicing (50 not 2000 tests), $0, 0 model.
+Imports are not a choreography, an atomic patch, or verification evidence.
+This adapter has no authenticated execution path and therefore fails closed.
 """
 from __future__ import annotations
 import hashlib
@@ -34,14 +27,11 @@ def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     repo = pathlib.Path(root).resolve()
     output = _safe_output(repo, args.get("output_path"))
-    # Compose: load change-impact and choreography kernels to verify wiring
+    # Imports identify the existing kernels; they do not execute them.
     import canonical.runtime.bound_capabilities.python_change_impact_testselect as ci_mod  # noqa
     import canonical.runtime.bound_capabilities.python_crossfile_edit_choreograph as choreo_mod  # noqa
     import canonical.runtime.bound_capabilities.python_source_symbol_index as idx_mod  # noqa
-    # Deterministic proof that the three compose: run each on a tiny fixture
     source_root = args.get("source_root") or "canonical/runtime"
-    # Minimal synthetic choreography: rename symbol via index → choreography plan → impact select
-    # We don't mutate repo; we produce a choreography artifact that is verified by the kernels' own checks
     artifact = {
         "schema": SCHEMA,
         "capability_id": CAPABILITY_ID,
@@ -51,12 +41,13 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             "choreograph": getattr(choreo_mod, "CAPABILITY_ID", "python.source.crossfile_edit.choreograph.v1"),
             "change_impact": getattr(ci_mod, "CAPABILITY_ID", "python.source.change_impact.testselect.v1"),
         },
-        "choreography_verified": True,
-        "change_impact_available": True,
-        "symbol_graph_available": True,
+        "choreography_verified": False,
+        "reason": "REPAIR_AND_VERIFICATION_NOT_EXECUTED",
+        "change_impact_available": False,
+        "symbol_graph_available": False,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
-        "verified": True,
+        "verified": False,
     }
     raw = json.dumps(artifact, sort_keys=True, separators=(",", ":")).encode()
     output.write_bytes(raw)
@@ -64,9 +55,10 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
         "adapter": "software_repair_crossfile_choreograph_v1",
         "output_path": str(output.relative_to(repo)),
         "output_sha256": hashlib.sha256(raw).hexdigest(),
-        "output_verified": True,
-        "verified": True,
-        "choreography_verified": True,
+        "output_verified": False,
+        "reason": "REPAIR_AND_VERIFICATION_NOT_EXECUTED",
+        "verified": False,
+        "choreography_verified": False,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
     }

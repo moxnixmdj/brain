@@ -88,6 +88,39 @@ _STDOUT_DESTINATION_WORDS = frozenset({
     ("and", "write", "the", "output", "to"), ("and", "write", "stdout", "to"),
 })
 
+_SINGLE_ARCHIVE_CREATE = re.compile(
+    r"Create a tar\.gz archive from a manifest\.", re.I | re.ASCII,
+)
+_NAMED_ARCHIVE_CREATE = re.compile(
+    r"Create a tar\.gz archive from (?P<manifest>[A-Za-z0-9_./-]+\.json) "
+    r"and save it to (?P<archive>[A-Za-z0-9_./-]+\.tar\.gz)\.", re.I | re.ASCII,
+)
+_SINGLE_ARCHIVE_VERIFY = re.compile(
+    r"Verify a tar\.gz archive against its manifest\.", re.I | re.ASCII,
+)
+_NAMED_ARCHIVE_VERIFY = re.compile(
+    r"Verify (?P<archive>[A-Za-z0-9_./-]+\.tar\.gz) against "
+    r"(?P<manifest>[A-Za-z0-9_./-]+\.json)\.?", re.I | re.ASCII,
+)
+
+
+def _single_archive_create_covers_sentence(goal: str, args: Mapping) -> bool:
+    """Cover only one complete archive creation, binding any paths it names."""
+    if _SINGLE_ARCHIVE_CREATE.fullmatch(goal):
+        return True
+    named = _NAMED_ARCHIVE_CREATE.fullmatch(goal)
+    return bool(named and named.group("manifest") == args.get("manifest_path")
+                and named.group("archive") == args.get("output_path"))
+
+
+def _single_archive_verify_covers_sentence(goal: str, args: Mapping) -> bool:
+    """Cover only one complete archive check, binding any paths it names."""
+    if _SINGLE_ARCHIVE_VERIFY.fullmatch(goal):
+        return True
+    named = _NAMED_ARCHIVE_VERIFY.fullmatch(goal)
+    return bool(named and named.group("archive") == args.get("archive_path")
+                and named.group("manifest") == args.get("manifest_path"))
+
 
 def _single_explicit_command_covers_sentence(goal: str, args: Mapping) -> bool:
     """A bounded whole-sentence proof for one explicit, zero-shell command.
@@ -543,27 +576,36 @@ def _inspect_archive_verify(args, result, root):
         return False, "ARCHIVE_ABSENT_FROM_DISK", {}
     if manifest is None or not manifest.is_file():
         return False, "MANIFEST_ABSENT_FROM_DISK", {}
+    # Reuse the exact-archive check: derive membership from the manifest and
+    # compare each archived byte stream with the corresponding source file.
+    from canonical.runtime.raw_goal_archive_acceptance_v1 import (
+        ArchiveReinspectionError, inspect_archive_manifest,
+    )
     try:
-        with tarfile.open(archive, "r:gz") as handle:
-            members = sorted(handle.getnames())
-    except (tarfile.TarError, OSError, EOFError):
-        return False, "ARCHIVE_NOT_A_READABLE_GZIP_TAR", {}
-    if members != sorted(result.get("members") or []):
+        inspected = inspect_archive_manifest(root, args.get("manifest_path"), args.get("archive_path"))
+    except ArchiveReinspectionError as exc:
+        return False, str(exc), {}
+    members = inspected["members"]
+    claimed_members = result.get("members")
+    if (not isinstance(claimed_members, list)
+            or not all(isinstance(name, str) for name in claimed_members)
+            or members != sorted(claimed_members)):
         return False, "ARCHIVE_MEMBERS_MISMATCH", {
-            "reopened": members, "claimed": sorted(result.get("members") or [])}
+            "reopened": members, "claimed": claimed_members}
     if len(members) != result.get("member_count"):
         return False, "ARCHIVE_MEMBER_COUNT_MISMATCH", {}
-    if not members:
-        return False, "ARCHIVE_HAS_NO_MEMBERS", {}
-    for name in members:
-        member = _inside(root, name)
-        if member is None or not member.is_file():
-            return False, "ARCHIVE_MEMBER_ABSENT_FROM_REPOSITORY", {}
-    declared = result.get("archive_path")
-    if declared is not None and declared != args.get("archive_path"):
-        return False, "ARCHIVE_RESULT_PATH_MISMATCH", {}
+    if result.get("verified") is not True:
+        return False, "ARCHIVE_VERIFY_STEP_NOT_VERIFIED", {}
+    for key, expected in (("archive_path", args.get("archive_path")),
+                          ("manifest_path", args.get("manifest_path")),
+                          ("archive_sha256", inspected["archive_sha256"]),
+                          ("manifest_sha256", inspected["source_sha256"][args.get("manifest_path")])):
+        if key in result and result[key] != expected:
+            return False, "ARCHIVE_RESULT_" + key.upper() + "_MISMATCH", {}
     return True, "", {"archive_reopened": True, "members_relisted": len(members),
-                      "archive_sha256": _digest(archive.read_bytes())}
+                      "manifest_member_set_checked": True,
+                      "member_bytes_compared": len(members),
+                      "archive_sha256": inspected["archive_sha256"]}
 
 
 def _inspect_xlsx_create(args, result, root):
@@ -781,90 +823,66 @@ def _inspect_decision_verify(args, result, root):
 
 
 def _inspect_tar_gz_create_from_manifest(args, result, root):
-    """Re-open an archive the machine claims it built from a manifest.
+    """Re-open a created archive against the manifest and every source byte.
 
-    The producer's own ``output_verified`` flag is not evidence, so this reads
-    the manifest and every source file back off disk, re-opens the archive that
-    was supposedly written, and compares the archived bytes with the bytes still
-    on disk. A claim that does not survive being re-opened is refused.
-
-    Acceptance for this capability was impossible before: the trace verifier
-    refuses any capability it has no re-inspector for, and this one had none.
-    That also made the R3 raw success adapter unreachable, because any accepted
-    archive goal had to carry ``archive.verify.tar_gz.gnu`` alongside the
-    create, so ``selected_plan`` was never the single create capability the
-    adapter requires.
+    This shares the exact-archive acceptance check with the verify and compound
+    paths; a producer-supplied member list cannot define what was requested.
     """
-    archive = _inside(root, result.get("output_path") or args.get("output_path"))
+    archive_rel = args.get("output_path")
+    archive = _inside(root, archive_rel)
     if archive is None or not archive.is_file():
         return False, "ARCHIVE_ABSENT_FROM_DISK", {}
-    data = archive.read_bytes()
-    claimed_sha = result.get("output_sha256")
-    if _digest(data) != claimed_sha:
-        return False, "ARCHIVE_SHA256_MISMATCH", {
-            "recomputed_sha256": _digest(data), "claimed_sha256": claimed_sha}
-    claimed_bytes = result.get("output_bytes")
-    if claimed_bytes is not None and len(data) != int(claimed_bytes):
-        return False, "ARCHIVE_BYTE_LENGTH_MISMATCH", {
-            "reopened_bytes": len(data), "claimed_bytes": claimed_bytes}
-
+    if result.get("output_path") != archive_rel:
+        return False, "ARCHIVE_RESULT_PATH_MISMATCH", {}
     manifest = _inside(root, args.get("manifest_path"))
     if manifest is None or not manifest.is_file():
         return False, "MANIFEST_ABSENT_FROM_DISK", {}
-
-    members = result.get("members")
-    if not isinstance(members, list) or not members:
-        return False, "ARCHIVE_MEMBER_LIST_MISSING", {}
-    members = [str(m) for m in members]
-    claimed_sources = result.get("source_sha256")
-    if not isinstance(claimed_sources, dict):
-        return False, "ARCHIVE_SOURCE_DIGESTS_MISSING", {}
-
+    from canonical.runtime.raw_goal_archive_acceptance_v1 import (
+        ArchiveReinspectionError, _file_digest, inspect_archive_manifest,
+    )
     try:
-        import tarfile  # the capability's own declared substrate, re-used
-    except Exception:
-        return False, "ARCHIVE_REINSPECTION_SUBSTRATE_UNAVAILABLE", {}
-    try:
-        with tarfile.open(archive, "r:gz") as handle:
-            found = [m.name for m in handle.getmembers() if m.isfile()]
-            archived: dict[str, bytes] = {}
-            for name in found:
-                member = handle.getmember(name)
-                streamed = handle.extractfile(member)
-                if streamed is None:
-                    return False, "ARCHIVE_MEMBER_UNREADABLE", {"member": name}
-                archived[name] = streamed.read()
-    except Exception:
-        return False, "ARCHIVE_NOT_A_READABLE_GZIP_TAR", {}
-
-    if sorted(found) != sorted(members):
+        inspected = inspect_archive_manifest(root, args.get("manifest_path"), archive_rel)
+    except ArchiveReinspectionError as exc:
+        # Preserve the established tampering diagnostic without trusting the
+        # producer's digest as a substitute for the full archive inspection.
+        try:
+            current_digest = _file_digest(archive)
+        except OSError:
+            current_digest = None
+        if current_digest is not None and result.get("output_sha256") != current_digest:
+            return False, "ARCHIVE_SHA256_MISMATCH", {
+                "recomputed_sha256": current_digest,
+                "claimed_sha256": result.get("output_sha256")}
+        reason = str(exc)
+        if reason in {"ARCHIVE_MEMBER_SET_NOT_EXACT", "ARCHIVE_MEMBER_ABSENT_FROM_REPOSITORY"}:
+            reason = "ARCHIVE_MEMBER_SET_MISMATCH"
+        return False, reason, {}
+    if result.get("output_sha256") != inspected["archive_sha256"]:
+        return False, "ARCHIVE_SHA256_MISMATCH", {
+            "recomputed_sha256": inspected["archive_sha256"],
+            "claimed_sha256": result.get("output_sha256")}
+    size = archive.stat().st_size
+    if result.get("output_bytes") is not None and result.get("output_bytes") != size:
+        return False, "ARCHIVE_BYTE_LENGTH_MISMATCH", {
+            "reopened_bytes": size, "claimed_bytes": result.get("output_bytes")}
+    members = inspected["members"]
+    if result.get("members") != members:
         return False, "ARCHIVE_MEMBER_SET_MISMATCH", {
-            "reopened_members": sorted(found), "claimed_members": sorted(members)}
-    claimed_count = result.get("member_count")
-    if claimed_count is not None and len(found) != int(claimed_count):
-        return False, "ARCHIVE_MEMBER_COUNT_MISMATCH", {
-            "reopened_count": len(found), "claimed_count": claimed_count}
-
-    for name in found:
-        on_disk = _inside(root, name)
-        if on_disk is None or not on_disk.is_file():
-            return False, "ARCHIVE_SOURCE_ABSENT_FROM_DISK", {"member": name}
-        live_bytes = on_disk.read_bytes()
-        if _digest(live_bytes) != str(claimed_sources.get(name) or ""):
-            return False, "ARCHIVE_SOURCE_SHA256_MISMATCH", {"member": name}
-        # The strongest check: the bytes inside the archive are the bytes on
-        # disk now, not merely a digest the producer asserted.
-        if archived[name] != live_bytes:
-            return False, "ARCHIVE_CONTENT_DIFFERS_FROM_SOURCE", {"member": name}
-
+            "reopened_members": members, "claimed_members": result.get("members")}
+    if result.get("member_count") != len(members):
+        return False, "ARCHIVE_MEMBER_COUNT_MISMATCH", {}
+    if result.get("source_sha256") != inspected["source_sha256"]:
+        return False, "ARCHIVE_SOURCE_SHA256_MISMATCH", {}
+    if result.get("output_verified") is not True:
+        return False, "ARCHIVE_CREATE_STEP_NOT_VERIFIED", {}
     return True, "", {
-        "archive_bytes_reopened": len(data),
+        "archive_bytes_reopened": size,
         "archive_sha256_recomputed": True,
-        "members_reopened": len(found),
+        "members_reopened": len(members),
         "manifest_reread_from_disk": True,
-        "members_byte_compared_to_source": len(found),
+        "manifest_member_set_checked": True,
+        "members_byte_compared_to_source": len(members),
     }
-
 
 def _inspect_text_file_write(args: Mapping, result: Mapping, root: Path) -> tuple[bool, str, dict]:
     """Re-open the file and compare it to the text the REQUEST asked for.
@@ -1999,15 +2017,24 @@ def verify(
                     return _unresolved("DECLARED_OUTPUT_SHA256_MISMATCH",
                                        capability_id=cid)
 
-        # Raw spans and a matching trace do not themselves discharge every
-        # obligation. In these two bounded one-step forms, only a whole goal
-        # matched by the checked operation may receive acceptance credit. Other
-        # capabilities and multi-step goals still need per-obligation proof.
-        if (len(rows) == 1 and executed[0] == "shell.command.run"
-                and _STATES_A_COMMAND(goal)
+        # Re-inspecting steps does not prove that they cover every raw-source
+        # instruction. This generic verifier has no whole-goal proof for a
+        # composed trace, including traces that really did complete all steps.
+        # Keep them provisional; dedicated exact-goal verifiers may still judge
+        # the forms they actually cover. Routing/localizer availability and
+        # producer claims are not substitutes for acceptance semantics.
+        if len(rows) > 1:
+            return _unresolved("MULTI_STEP_RAW_OBLIGATIONS_NOT_PROVEN",
+                               planned_capability_chain=chain,
+                               executed_capability_chain=executed)
+        # For shell.command.run, apply the bounded whole-sentence proof even
+        # when the user did not write the word "command". Otherwise an
+        # implicit read plus an unperformed instruction is silently accepted.
+        # Unsupported natural wording remains provisional, not a failed run.
+        if (executed[0] == "shell.command.run"
                 and not _single_explicit_command_covers_sentence(goal, rows[0]["args"])):
             return _unresolved("COMMAND_GOAL_HAS_UNVERIFIED_TEXT", capability_id=executed[0])
-        if (len(rows) == 1 and executed[0] == "text.file.write"
+        if (executed[0] == "text.file.write"
                 and not _single_text_write_covers_sentence(goal, rows[0]["args"])):
             return _unresolved("TEXT_WRITE_GOAL_HAS_UNVERIFIED_TEXT", capability_id=executed[0])
 
@@ -2033,6 +2060,20 @@ def verify(
             if not ok:
                 return _unresolved(reason, capability_id=cid)
             ledger.append({"capability_id": cid, "reinspection": evidence})
+
+        # A re-inspected operation alone does not cover the whole sentence.
+        # Beyond the command and text forms checked above, only the exact
+        # single-archive forms have a bounded whole-goal check here. Every
+        # other capability or extra instruction remains provisional.
+        archive_covered = (
+            (executed[0] == "archive.verify.tar_gz.gnu"
+             and _single_archive_verify_covers_sentence(goal, rows[0]["args"]))
+            or (executed[0] == "archive.tar_gz.create_from_manifest"
+                and _single_archive_create_covers_sentence(goal, rows[0]["args"]))
+        )
+        if executed[0] not in {"shell.command.run", "text.file.write"} and not archive_covered:
+            return _unresolved("CAPABILITY_RAW_OBLIGATIONS_NOT_PROVEN",
+                               capability_id=executed[0])
 
         return {
             "schema": SCHEMA,

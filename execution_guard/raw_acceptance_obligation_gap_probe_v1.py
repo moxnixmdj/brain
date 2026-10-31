@@ -43,6 +43,8 @@ def measure() -> dict:
         subjects = (
             ("single_command", "shell.command.run", "Run the shell command cat source.txt and ",
              [(command_args, command_first)], "shell.command.result"),
+            ("implicit_command", "shell.command.run", "Read source.txt and ",
+             [(command_args, command_first)], "shell.command.result"),
             ("single_text_write", "text.file.write", "Write the text 'hello' to the file out.txt and ",
              [(text_args, file_write_text.run(text_args, root))], "text.file.available"),
             ("two_commands", "shell.command.run", "Run the shell command cat source.txt and ",

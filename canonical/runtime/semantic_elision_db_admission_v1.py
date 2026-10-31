@@ -1,13 +1,15 @@
 """Unified fail-closed D_B admission over three semantic-elision routes.
 
-A context may be admitted to D_B when exactly one of these independently
-authenticated routes succeeds:
+A context may be admitted to D_B when exactly one of these routes reports success:
 A) complete-objective global optimum;
 B) robust common policy across every still-possible completion;
 C) exact-candidate direct end-to-end raw-task acceptance.
 
-This module grants cell-level D_B admission only. It never grants U-empty or
-terminal credit.
+Route C relies on the raw acceptance gate, which checks receipt consistency
+but cannot authenticate caller-supplied verifier claims. It therefore remains
+unresolved until an authenticated verification boundary is implemented. This
+module grants cell-level D_B admission only; it never grants U-empty or
+terminal credit. Routes A and B have separate trust assumptions.
 """
 from __future__ import annotations
 from typing import Any, Mapping

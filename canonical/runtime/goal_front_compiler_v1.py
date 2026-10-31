@@ -978,6 +978,33 @@ def _parse_typed_value(key: str, tail: str, quoted_only: bool = False):
             return json.loads(q)
         except ValueError:
             return q
+    if key == "jq_filter":
+        # A bare token is not a jq program parser: it silently dropped [], |,
+        # arithmetic and // from caller-supplied filters. Keep simple field paths;
+        # require quoting for anything whose full boundary is not clear here.
+        text = tail.lstrip()
+        pairs = {'"': '"', "'": "'", '`': '`', '\u201c': '\u201d', '\u2018': '\u2019'}
+        if text and text[0] in pairs:
+            end = text.find(pairs[text[0]], 1)
+            if end < 0:
+                return None
+            value = text[1:end]
+            # Escaped closing quotes need a defined unescaping contract; do not
+            # mistake one for the end of the program and return only a prefix.
+            if (len(value) - len(value.rstrip('\\'))) % 2:
+                return None
+            rest = text[end + 1:]
+        else:
+            if quoted_only:
+                return None
+            m = re.match(r"\s*(\.[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*)", tail)
+            if not m:
+                return None
+            value = m.group(1)
+            rest = tail[m.end():]
+        if not re.match(r"\s*(?:$|[.!?](?:\s|$)|(?:to|on|from|in)\s+|and\s+(?:save|write|store)\b)", rest, re.I):
+            return None
+        return value
     if _declared_kind(key) in (input_role_lexicon.KIND_IDENT, input_role_lexicon.KIND_IDENTS):
         # AN IDENTIFIER SLOT DOES NOT TAKE A PATH.  The generic branch below accepts any bare
         # token, so a sentence ending "... and save it to out.json" put `out.json` into

@@ -84,20 +84,43 @@ def _sha256(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
-def _junit_outcomes(xml_path: Path) -> dict:
-    """test id -> "passed" | "failed" | "skipped", from pytest's own XML."""
-    out = {}
-    try:
-        tree = ET.parse(str(xml_path))
-    except (ET.ParseError, OSError):
-        return out
-    for case in tree.iter("testcase"):
+def _junit_cases(xml_path: Path) -> list[tuple[str, str]]:
+    """Ordered pytest JUnit cases; preserve duplicate identities and failures.
+
+    This is report interpretation, not authentication of tests or plugins.
+    """
+    root = ET.parse(str(xml_path)).getroot()
+    if root.tag not in {"testsuite", "testsuites"}:
+        raise ValueError("PYTEST_JUNIT_ROOT_INVALID")
+    out = []
+    for case in root.iter("testcase"):
         name = str(case.get("classname") or "")
         node = str(case.get("name") or "")
+        if not node:
+            raise ValueError("PYTEST_JUNIT_TESTCASE_NAME_MISSING")
         ident = (name + "::" + node) if name else node
         failed = case.find("failure") is not None or case.find("error") is not None
         skipped = case.find("skipped") is not None
-        out[ident] = "failed" if failed else ("skipped" if skipped else "passed")
+        out.append((ident, "failed" if failed else ("skipped" if skipped else "passed")))
+    return out
+
+
+def _junit_outcomes(xml_path: Path) -> dict:
+    """test id -> worst reported outcome for that id in this pytest run.
+
+    The flake detector compares one outcome per identity per run. If pytest
+    collected an identity more than once, a later pass must not hide a failure.
+    This conservative collapse does not detect variation within a single run.
+    """
+    try:
+        cases = _junit_cases(xml_path)
+    except (ET.ParseError, OSError, ValueError):
+        return {}
+    out = {}
+    severity = {"passed": 0, "skipped": 1, "failed": 2}
+    for ident, outcome in cases:
+        if ident not in out or severity[outcome] > severity[out[ident]]:
+            out[ident] = outcome
     return out
 
 
@@ -198,7 +221,9 @@ def run(args, root):
         "test_count": len(known),
         "detection_scope": ("%d runs over %d seeded collection orders and %d hash seeds; a flake "
                             "rarer than this budget is invisible to it, so `stable` is not a "
-                            "certificate of determinism" % (repeats, repeats, repeats)),
+                            "certificate of determinism; duplicate case identities are collapsed "
+                            "to the worst outcome per run, so within-run variation is not detected"
+                            % (repeats, repeats, repeats)),
         "run_summary": [{"run": r["run"], "order_seed": r["order_seed"],
                          "hash_seed": r["hash_seed"], "returncode": r["returncode"],
                          "failed": sorted(n for n, v in r["outcomes"].items() if v == "failed")}

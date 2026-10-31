@@ -365,6 +365,31 @@ def _first_with_records(rel_paths, root):
     return None
 
 
+def _first_archive_manifest(rel_paths, root):
+    """Find a usable archive manifest using the existing acceptance contract.
+
+    A JSON document containing some unrelated nested records is not an archive
+    manifest. This is only a world-discovered candidate, not proof that an
+    unnamed file was the user's intended input.
+    """
+    from canonical.runtime.raw_goal_archive_acceptance_v1 import (
+        ArchiveReinspectionError, _has_symlink_component, manifest_members,
+    )
+    root = Path(root).resolve()
+    for rel in rel_paths[:_STRUCTURAL_SCAN_LIMIT]:
+        path = root / str(rel)
+        try:
+            if path.stat().st_size > _STRUCTURAL_SCAN_MAX_BYTES:
+                continue
+            members = manifest_members(root, str(rel))
+            if all((root / member).is_file() and not _has_symlink_component(root, member)
+                   for member in members):
+                return rel
+        except (OSError, ArchiveReinspectionError):
+            continue
+    return None
+
+
 def _world_path_for(name, cid, root):
     """Find the file the world already has, when the goal never named it.
 
@@ -383,6 +408,14 @@ def _world_path_for(name, cid, root):
     the pick.
     """
     from canonical.runtime import world_probe_v1 as WP
+    if (str(name) == "manifest_path" and str(cid) in {
+            "archive.tar_gz.create_from_manifest", "archive.verify.tar_gz.gnu"}):
+        # Unlike the general recursive-record heuristic, this checks the exact
+        # manifest schema and referenced source files the archive acceptance
+        # verifier needs. If no candidate qualifies, do not substitute JSON.
+        suffixes, substrings = WP._FILE_KINDS["manifest.json"]
+        ordered = _ordered_for_kind(root, "manifest.json", suffixes, substrings)
+        return _first_archive_manifest(ordered, root)
     # The placeholder's own name is the stronger signal: `manifest_path`
     # must never be satisfied by the .tar.gz the capability also mentions.
     for keys in (WP.kind_keys_for(str(name)), WP.kind_keys_for(str(cid))):

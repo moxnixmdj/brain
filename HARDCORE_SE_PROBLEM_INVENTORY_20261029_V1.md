@@ -1,5 +1,10 @@
 # HARDCORE SOFTWARE-ENGINEERING PROBLEM INVENTORY
 
+> **Superseded by [`HARDCORE_SE_PROBLEM_INVENTORY_20261029_V2.md`](HARDCORE_SE_PROBLEM_INVENTORY_20261029_V2.md).**
+> This file is historical: its P0/P1 and P4–P8 claims and work queue predate later counterexamples,
+> safeguards and corrections. In particular, it overstates composition and understates existing
+> call-index, differential/mutation and multi-language patch machinery. Use V2 for current status.
+
 **Date:** 2026-10-29 · **Branch:** `arena/4ca3a720-brain` · **Tree:** branch state after `bb36ebae` (see `git log` for subsequent changes)
 **Scope:** the owner's question — *what are all the problems* on the way to the most advanced, fastest
 software engineer. Document, image, chart and PDF families are measured only so the denominator is

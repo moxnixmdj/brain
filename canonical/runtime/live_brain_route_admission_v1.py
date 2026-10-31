@@ -493,6 +493,15 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # capabilities.  The identifier is re-verified here rather than trusting the rule string.
     rules = set(((compiled.get("front_compiler") or {}).get("rules_applied")) or [])
     if "F15_EXPLICIT_CAPABILITY_ID_NAMED" in rules and front.explicitly_named_capabilities(goal, registry) == [selected]:
+        # Naming the intended capability is evidence of intent, not of its inputs.
+        try:
+            from canonical.runtime import capability_selection_retrieval_v1 as _named_selection
+            named_typed = _named_selection.admit(goal, selected, entry, ROOT)
+        except Exception:  # noqa: BLE001 - this gate has no binding verdict to assert
+            named_typed = None
+        if isinstance(named_typed, Mapping) and str(named_typed.get("reason") or "").startswith("BINDING_REFUSED:"):
+            return {**base, "admitted": False, "rule": "R15_TYPED_INPUT_BINDING_REFUSED",
+                    "typed_binding_refused": True, "typed_binding_reason": named_typed.get("reason")}
         return {**base, "admitted": True, "rule": None, "admission_basis": "EXPLICIT_CAPABILITY_ID_IN_GOAL"}
     # Typed admission: a capability whose DECLARED argument contract the sentence states completely
     # is not weak path evidence either - the sentence supplies exactly the values this capability
@@ -550,8 +559,11 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     # the real one.  Recorded here so the caller can tell "this capability could
     # not be bound to this sentence" from "this sentence is thin evidence".
     if isinstance(typed, Mapping) and str(typed.get("reason") or "").startswith("BINDING_REFUSED:"):
-        base["typed_binding_refused"] = True
-        base["typed_binding_reason"] = typed.get("reason")
+        # A lexical score cannot supply a required input that the binder refused.
+        # Preserve the reason for the existing composed-route fallback, but do not
+        # allow either the lexical-margin or generic evidence rules to admit it.
+        return {**base, "admitted": False, "rule": "R15_TYPED_INPUT_BINDING_REFUSED",
+                "typed_binding_refused": True, "typed_binding_reason": typed.get("reason")}
     # Decisive lexical margin (F18), the third way a caller can be explicit without this layer
     # inventing anything: the sentence names one capability so much better than any other that the
     # ranker separates them.  Measured before it was trusted - 295 name-derived goals, threshold
@@ -2510,8 +2522,11 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         _unbound = admission.get("unbound_file_inputs") or []
         _detail = None
         if _rejected:
-            _detail = "%s:contract_not_stated:%s" % (_rejected, ",".join(_unbound)) \
-                if _unbound else "%s:not_admitted:%s" % (_rejected, admission.get("rule"))
+            if admission.get("typed_binding_reason"):
+                _detail = "%s:%s" % (_rejected, admission["typed_binding_reason"])
+            else:
+                _detail = "%s:contract_not_stated:%s" % (_rejected, ",".join(_unbound)) \
+                    if _unbound else "%s:not_admitted:%s" % (_rejected, admission.get("rule"))
         _extra: dict[str, Any] = {
             "compiled_capability_id": _rejected,
             "compiler_mode": compiled.get("compiler_mode"),

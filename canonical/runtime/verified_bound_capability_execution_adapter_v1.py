@@ -284,15 +284,14 @@ def _receipt_backed_execution(
 
     Two differences from the promoted-registry path, both deliberate:
 
-    * AUTHORITY is the loader, not a status string. `load_verified_registry()` re-verifies, at
-      this instant, that the module hash matches the producer receipt AND that a different
-      identity reproduced it under a GitHub-signed OIDC run reference. A promoted-registry
-      entry is admitted on `status == VERIFIED_BOUND_CAPABILITY`; this path is admitted on
-      evidence, and refuses everything the loader refuses.
-    * EXECUTION is `run_adapter_locally` (this repository's kernel argument and expectation
-      semantics, which already runs all 294 with their declared expectations met) rather than
-      `astra_runtime._invoke_bound_capability`, which is by definition confined to the
-      promoted registry.
+    * AUTHORITY is the loader, not a status string. It checks the module hash and
+      the shape of claimed reproduction evidence, but does NOT authenticate the
+      claimed OIDC reference or independently establish who ran it. A promoted
+      entry follows its separate status-based path.
+    * EXECUTION is `run_adapter_locally` rather than
+      `astra_runtime._invoke_bound_capability`, which is confined to the
+      promoted registry. Successful dispatch is not proof that every projected
+      capability or higher-level task works.
 
     Returns None for every id that is not a loader-admitted receipt-backed capability, so the
     promoted-registry path below is reached unchanged for everything else. Caller inputs may
@@ -351,7 +350,7 @@ def _receipt_backed_execution(
         "result_sha256": _sha(dict(tool)),
         "result": deepcopy(dict(tool)),
         "execution_authority": (
-            "LOADER_ADMITTED_EXECUTION_RECEIPT_WITH_INDEPENDENT_OIDC_ATTESTED_REPRODUCTION"
+            "LOADER_ADMITTED_RECEIPT_WITH_UNAUTHENTICATED_INDEPENDENCE_CLAIMS"
         ),
         "incremental_spend_usd": 0,
         "search_or_pending_binding_execution_allowed": False,

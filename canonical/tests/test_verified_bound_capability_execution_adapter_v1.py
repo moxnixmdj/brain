@@ -110,7 +110,7 @@ def test_receipt_backed_capability_executes_and_reports_its_evidence():
     assert out["pass"] is True, out
     assert out["status"] == "PASS__RECEIPT_BACKED_BOUND_CAPABILITY_EXECUTED"
     assert out["execution_authority"] == (
-        "LOADER_ADMITTED_EXECUTION_RECEIPT_WITH_INDEPENDENT_OIDC_ATTESTED_REPRODUCTION")
+        "LOADER_ADMITTED_RECEIPT_WITH_UNAUTHENTICATED_INDEPENDENCE_CLAIMS")
     assert out["receipt_path"] and out["module_sha256"]
     assert out["incremental_spend_usd"] == 0
     # it must NOT claim the promoted-registry digests it never checked

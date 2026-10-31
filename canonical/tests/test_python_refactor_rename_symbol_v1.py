@@ -150,7 +150,9 @@ class TestRenameSymbol(unittest.TestCase):
         self.assertNotIn("d import top", caller)
         self.assertTrue(art["complete"] is True or art["unknown_sites"] == [])
         self.assertEqual(art["symbol_kind"], "FUNCTION")
-        self.assertTrue(art["verified"])
+        self.assertFalse(art["verified"])
+        self.assertEqual(art["local_gate"], "PASS")
+        self.assertEqual(art["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
 
     def test_class_rename_propagates_imports_and_construction(self):
         src = _build_wide(self.tmp)
@@ -358,8 +360,9 @@ def probe():
         self.assertIn("from pkg.core import apex", (pkg / "test_core.py").read_text())
         self.assertIn("def apex(n):", (pkg / "core.py").read_text())
         self.assertEqual(art["files_edited"], ["core.py", "test_core.py"])
-        self.assertTrue(art["verified"])
-        self.assertEqual(art["gate"], "PASS")
+        self.assertFalse(art["verified"])
+        self.assertEqual(art["local_gate"], "PASS")
+        self.assertEqual(art["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
 
     def test_an_ambiguous_dotted_name_is_never_matched(self):
         """A name that could denote two files proves nothing, so it edits nothing.

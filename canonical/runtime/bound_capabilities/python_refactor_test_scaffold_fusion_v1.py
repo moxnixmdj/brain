@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Refactor+test-scaffold fusion — the only-right-way transformation primitive.
-
-Hidden kernels: refactor.rename_parameter (scope-aware) + tests.generate.scaffold (uncovered paths) + source.audit (structural counts) + tree_sitter 0.20.4.
-Why max: CEGIS pool had only patch candidates; now refactor + scaffold are first-class edit ops — 3× transformation coverage, still deterministic, $0."""
+"""Inspect registry declarations only; this adapter does not execute a workflow."""
 from __future__ import annotations
 import hashlib, json, pathlib
 from typing import Any
@@ -24,7 +21,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     producers=["python.refactor.rename_parameter.v1","python.tests.generate.scaffold.v1","python.source.audit.ast"]
     prod_found={c: c in reg["capabilities"] for c in producers}
     audit_exists=(repo/"canonical/runtime/bound_capabilities/python_source_audit.py").is_file()
-    verified=all(found.values()) and all(prod_found.values()) and audit_exists
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"audit_exists":audit_exists,"fusion":"rename_parameter (scope-aware) + scaffold (uncovered paths) + audit as CEGIS pool primitives","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
+    registry_ready=all(found.values()) and all(prod_found.values()) and audit_exists
+    # Registry declarations are not execution or verification evidence.
+    verified=False
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"audit_exists":audit_exists,"fusion":"rename_parameter (scope-aware) + scaffold (uncovered paths) + audit as CEGIS pool primitives","verified":verified,"registry_ready":registry_ready,"reason":"DEPENDENCIES_NOT_EXECUTED","model_dependency_count":0,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"python_refactor_test_scaffold_fusion_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    return {"adapter":"python_refactor_test_scaffold_fusion_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"reason":"DEPENDENCIES_NOT_EXECUTED","found":found,"model_dependency_count":0,"incremental_spend_usd":0}

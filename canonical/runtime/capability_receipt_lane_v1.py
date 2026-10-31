@@ -20,18 +20,19 @@ verification key names (`workflow_run_id`, `public_run_id`, `regression_run_id`,
 `focused_workflow_run_id`, `producer_git_blob`, `verifier_git_blob`, ...) for the
 single concept "someone else ran it and here is the reference".
 
-So this module supplies the one part that was missing: a *capability-level*
-execution receipt with ONE normalized shape, and it proves claims by running them.
+This module provides a capability-level receipt shape and can locally re-execute
+modules. Its caller-supplied identity and run reference are not authenticated,
+and its matching result hash is not independently attested provenance.
 
 WHAT ONE RECEIPT ASSERTS (nothing more)
 ---------------------------------------
 1. this module, at this exact sha256, loaded;
 2. its `run(args, root)` returned a dict, recorded by sha256;
 3. these status/pass fields were observed;
-4. this identity ran it, on this platform, with zero model dependency.
+4. the receipt claims an identity, platform and zero model dependency.
 
-It does NOT assert correctness, usefulness or independence.  `independent_verifier`
-is null unless a *different* identity actually re-ran it.
+It does NOT prove correctness, usefulness, identity, or independence. A different
+self-described identity is not an authenticated independent verifier.
 
 WHAT IT REFUSES TO DO
 ---------------------
@@ -244,12 +245,8 @@ def contract_shape(path: str | os.PathLike) -> tuple[str, str] | None:
 GITHUB_OIDC_ISSUER = "https://token.actions.githubusercontent.com"
 
 
-def run_reference_is_attested(run_reference: Any) -> bool:
-    """True only for a reference carrying GitHub-SIGNED OIDC claims.
-
-    A local process can write `{"github_run_id": 1}`; it cannot obtain a token signed by
-    `token.actions.githubusercontent.com`.  Only the latter is independence.
-    """
+def run_reference_has_legacy_claim_shape(run_reference: Any) -> bool:
+    """Check claim shape only; callers may invent every field."""
     if not isinstance(run_reference, Mapping):
         return False
     claims = run_reference.get("oidc_claims")
@@ -258,6 +255,15 @@ def run_reference_is_attested(run_reference: Any) -> bool:
     if claims.get("iss") != GITHUB_OIDC_ISSUER:
         return False
     return bool(claims.get("repository") and claims.get("run_id"))
+
+
+def run_reference_is_attested(run_reference: Any) -> bool:
+    """Fail closed: this lane cannot authenticate or result-bind run references.
+
+    A future positive return requires real signature/attestation verification
+    and a trusted, result-bound execution policy, not merely claim fields.
+    """
+    return False
 
 
 def _changed_paths(root: str) -> set[str] | None:
@@ -406,26 +412,31 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
 
 def verify_producer_receipts(root: str, ran_by: str,
                              run_reference: Mapping[str, Any] | None) -> dict[str, Any]:
-    """Re-execute producer receipts as a DIFFERENT identity and stamp only what reproduces.
+    """Re-execute receipts and report reproductions, without proving independence.
 
-    Independence is the whole point (AGENTS.md rule 4: "Verification means someone else ran
-    it").  A producer receipt is self-issued and admits nothing on its own.  This runs the
-    same module again, and writes a verification record ONLY when the observed result hash
-    matches the producer's.  Mismatch, crash or timeout writes nothing and is reported.
-
-    `independent_run_reference` must carry a platform-attested run id.  A reference this
-    process invented itself is not independence, and the admission gate refuses references
-    without `github_run_id` for exactly that reason.
+    The legacy reference check only validates caller-supplied claim shape; it
+    neither verifies a signature nor binds the run to the output. Since receipt
+    code would run in-process, an unauthenticated request is refused before
+    executing any such code or writing independent records.
     """
     import glob as _glob
 
+    claim_shape_valid = run_reference_has_legacy_claim_shape(run_reference)
     attested = run_reference_is_attested(run_reference)
     produced: list[str] = []
     reproduced: list[str] = []
     mismatched: list[str] = []
     unreadable: list[str] = []
 
-    for receipt_path in sorted(_glob.glob(os.path.join(root, RECEIPT_DIR, "CAPABILITY__*__EXECUTION_RECEIPT.json"))):
+    receipt_paths = sorted(_glob.glob(os.path.join(root, RECEIPT_DIR, "CAPABILITY__*__EXECUTION_RECEIPT.json")))
+    if not attested:
+        return {"producer_receipts": len(receipt_paths), "reproduced": 0,
+                "mismatched": 0, "unreadable": 0, "capability_ids": [],
+                "not_reproduced": [], "execution_skipped": True,
+                "run_reference_claim_shape_valid": claim_shape_valid,
+                "run_reference_attested": False, "records_written": 0,
+                "note": "receipt code was not executed: run reference and result binding were not authenticated"}
+    for receipt_path in receipt_paths:
         rel = os.path.relpath(receipt_path, root)
         try:
             producer = json.loads(open(receipt_path, encoding="utf-8").read())
@@ -445,12 +456,6 @@ def verify_producer_receipts(root: str, ran_by: str,
                                    str(producer.get("kind") or "contract"))
         if fresh is None or fresh.get("result_sha256") != producer.get("result_sha256"):
             mismatched.append(rel)
-            continue
-
-        if not attested:
-            # Reproduction confirmed, but this process cannot attest it. Reporting is honest;
-            # writing would forge independence and overwrite a real runner's record.
-            reproduced.append(producer["capability_id"])
             continue
 
         record = {
@@ -474,15 +479,14 @@ def verify_producer_receipts(root: str, ran_by: str,
         produced.append(rel)
         reproduced.append(producer["capability_id"])
 
-    return {"producer_receipts": len(produced) + len(mismatched) + len(unreadable),
+    return {"producer_receipts": len(receipt_paths),
             "reproduced": len(reproduced), "mismatched": len(mismatched),
             "unreadable": len(unreadable), "capability_ids": reproduced,
-            "not_reproduced": sorted(mismatched)[:25],
+            "not_reproduced": sorted(mismatched)[:25], "execution_skipped": False,
+            "run_reference_claim_shape_valid": claim_shape_valid,
             "run_reference_attested": attested,
             "records_written": len(produced),
-            "note": ("wrote independent verification records" if attested else
-                     "reproduction confirmed but NOT written: a run reference without signed "
-                     "GitHub OIDC claims is not independence")}
+            "note": "authenticated run reference and result binding verified"}
 
 
 def _has_independence_claim(entry: dict[str, Any]) -> bool:
@@ -648,7 +652,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--verify", action="store_true",
                     help="re-execute producer receipts as this identity and stamp only reproductions")
     ap.add_argument("--run-reference-json", default=os.environ.get("BRAIN_RUN_REFERENCE", ""),
-                    help='platform-attested run reference, e.g. \'{"github_run_id": 123}\'')
+                    help="legacy run-reference claim JSON; not signature-verified")
     args = ap.parse_args(argv)
     root = os.path.abspath(args.root)
 
@@ -671,8 +675,8 @@ def main(argv: list[str] | None = None) -> int:
         result["reverted_sample"] = reverted[:10]
         result["independent_verifier"] = args.ran_by
         result["run_reference"] = run_reference
-        result["note"] = ("records written only for an attestable run reference; a local "
-                          "process can confirm reproduction but never certify it")
+        # Preserve the report's explicit warning: a matching legacy claim
+        # shape does not authenticate the caller or its execution.
         print(json.dumps(result, indent=1))
         return 0
 

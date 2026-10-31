@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Hardcore SWE supercomposer — the only-right-way full-stack composition.
-
-Hidden kernels: hardcore kernel + CEGIS(T) Z3 + CEGIS+hypothesis HTN loop + pipeline allowlist + PR-land + transformation fused + symbol standalone.
-Why max: SWE was 6 isolated stacks (repair, pipeline, PR, transform, symbol, provenance). This super-composes them into one verified SWE engineer — 5 dead gates healed, 1 call."""
+"""Inspect registry declarations only; this adapter does not execute a workflow."""
 from __future__ import annotations
 import hashlib, json, pathlib
 from typing import Any
@@ -23,7 +20,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     found={r: (r in all_prov) for r in required}
     producers=["software.hardcore.kernel.orchestrate.v1","software.patch.synthesize.cegis.z3.v1","software.repair.loop.cegis_hypothesis.v1","python.pipeline.allowlist_gate.v1","python.pr.land.composer.v1","python.refactor.test_scaffold.fusion.v1"]
     prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"hardcore_kernel→CEGIS(T)→CEGIS+hypothesis loop + pipeline allowlist + PR-land + transformation fused → fullstack SWE engineer","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
+    registry_ready=all(found.values()) and all(prod_found.values())
+    # Registry declarations are not execution or verification evidence.
+    verified=False
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"hardcore_kernel→CEGIS(T)→CEGIS+hypothesis loop + pipeline allowlist + PR-land + transformation fused → fullstack SWE engineer","verified":verified,"registry_ready":registry_ready,"reason":"DEPENDENCIES_NOT_EXECUTED","model_dependency_count":0,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_hardcore_swe_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    return {"adapter":"software_hardcore_swe_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"reason":"DEPENDENCIES_NOT_EXECUTED","found":found,"model_dependency_count":0,"incremental_spend_usd":0}

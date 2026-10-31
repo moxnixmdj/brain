@@ -24,8 +24,10 @@ artifact usually sits inside the anchor.  A scratch directory beside the output 
 therefore inside the copy, gets copied into the next copy, into the next ... until the
 kernel refuses the path for length.  Measured on the repository as the anchor: a
 single perf-gate call left thirty nested copies and died with ENAMETOOLONG.  Scratch
-goes outside the anchor, still deterministic in the anchor's own digest, so a rerun
-reuses the same place instead of scattering new ones.
+goes outside the anchor, with a stable base derived from the anchor. Callers
+should create a unique child directory for each run: reusing a fixed child can
+make simultaneous runs delete or overwrite one another's scratch state. This
+does not serialize or protect callers that choose the same output artifact path.
 """
 from __future__ import annotations
 

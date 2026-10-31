@@ -31,10 +31,11 @@ ALIAS_BINDING_SAME_NAME, SPAN_INTEGRITY, TESTS_RED_AFTER_EDIT (named
 pytest suite red post-edit -> every byte restored and refuse),
 SYNTAX_ERROR_IN_FILE, PATH_*.
 
-Verification law: after edits the named pytest suite runs; red restores
-ALL original bytes.  No run_tests named => gate PASS_BLIND,
-verified=false loudly.  Determinism: identical worlds -> byte-identical
-trees and artifacts.
+Verification law: a nonzero named pytest run or a failure to start/wait for
+it restores the adapter-edited files. A zero exit is an unauthenticated local
+diagnostic, not proof: its final gate is unresolved and verified remains false.
+No named tests yields PASS_BLIND. Pytest runs without isolation and can itself
+modify files; restoration does not cover its side effects or concurrent writers.
 
 Inputs (kwargs, repo-confined):
   source_root        tree to edit IN PLACE (crown worktree convention)
@@ -59,8 +60,11 @@ import hashlib
 import json
 import keyword as pykeyword
 import subprocess
+import symtable
 import sys
 from pathlib import Path
+
+from canonical.runtime.raw_goal_archive_acceptance_v1 import _has_symlink_component
 
 SCHEMA = "PROJECT_BRAIN_REFACTOR_RENAME_SYMBOL_V1"
 
@@ -295,6 +299,17 @@ def run(args, root):
         _fail("INVALID_IDENTIFIER:new_symbol")
     out_rel = str(args.get("output_path") or "")
     out_abs = _safe_path(repo, out_rel)
+    output_name = Path(out_rel)
+    try:
+        output_lexical = output_name.relative_to(repo) if output_name.is_absolute() else output_name
+    except ValueError:
+        _fail("REFUSE_UNSAFE_OUTPUT:outside_repository")
+    # A report is not allowed to overwrite the source tree or a linked file.
+    # Check the lexical name before resolve hides symlink components.
+    if (".." in output_lexical.parts or _has_symlink_component(repo, output_lexical.as_posix())
+            or (out_abs.exists() and (out_abs.is_dir() or out_abs.stat().st_nlink != 1
+                                      or out_abs == src_abs or src_abs in out_abs.parents))):
+        _fail("REFUSE_UNSAFE_OUTPUT:" + out_rel)
     python_exe = str(args.get("python_executable") or sys.executable)
     timeout_s = int(args.get("timeout_s") or 300)
     run_tests = list(args.get("run_tests") or [])
@@ -305,6 +320,13 @@ def run(args, root):
 
     all_py = sorted(p for p in src_abs.rglob("*.py")
                     if "__pycache__" not in p.parts)
+    # A lexical path under source_root can still refer to an external inode.
+    # Refuse links before reading or editing; a multi-link file may have another
+    # name outside the tree. This is not a concurrent-writer sandbox.
+    for path in all_py:
+        rel = path.relative_to(src_abs).as_posix()
+        if _has_symlink_component(src_abs, rel) or path.stat().st_nlink != 1:
+            _fail("REFUSE_LINKED_PYTHON_FILE:" + rel)
     originals = {p: p.read_bytes() for p in all_py}
     # module identity for imports is by FILE, not by string (see _module_aliases)
     target_mods = _module_aliases(module_abs, src_abs, repo, all_py) or {target_mod}
@@ -386,6 +408,23 @@ def run(args, root):
         edits = []
         bindings = _import_table(tree)
         lines = originals[path].decode("utf-8").splitlines()
+
+        # The cross-file harvester below is module-wide, so it cannot safely
+        # rewrite a name when a nested scope gives that name a local meaning.
+        # Use Python's symbol tables (including comprehensions and bindings in
+        # control-flow blocks) and refuse before any file is written.
+        imported = bindings.get(old)
+        if path != module_abs and cross and imported and imported[0] in target_mods and imported[1] == old:
+            table = symtable.symtable(originals[path].decode("utf-8"), rel, "exec")
+            if new in table.get_identifiers() and (table.lookup(new).is_assigned() or table.lookup(new).is_imported()):
+                _fail("REFUSE_CROSSFILE_NAME_COLLISION:" + rel + ":" + new)
+            stack = list(table.get_children())
+            while stack:
+                scope = stack.pop()
+                for name in (old, new):
+                    if name in scope.get_identifiers() and scope.lookup(name).is_local():
+                        _fail("REFUSE_CROSSFILE_SHADOWED_BINDING:" + rel + ":" + name)
+                stack.extend(scope.get_children())
 
         if path == module_abs:
             # def site (name span resolved from the source line)
@@ -541,12 +580,18 @@ def run(args, root):
         path.write_bytes(b)
 
     gate = "PASS"
-    verified = bool(run_tests)
     if run_tests:
-        proc = subprocess.run(
-            [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"]
-            + run_tests,
-            cwd=src_abs, capture_output=True, text=True, timeout=timeout_s)
+        try:
+            proc = subprocess.run(
+                [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"]
+                + run_tests,
+                cwd=src_abs, capture_output=True, text=True, timeout=timeout_s)
+        except BaseException:
+            # Restore our edits on startup failure, timeout, or interruption.
+            # This does not roll back arbitrary writes made by test code.
+            for path in applied:
+                path.write_bytes(originals[path])
+            raise
         if proc.returncode != 0:
             for path in applied:
                 path.write_bytes(originals[path])
@@ -556,6 +601,9 @@ def run(args, root):
     else:
         gate = "PASS_BLIND"
 
+    local_gate = gate
+    if gate == "PASS":
+        gate = "UNRESOLVED__UNAUTHENTICATED_EVIDENCE"
     unknown_sites.sort(key=lambda r: (r["file"], r["line"]))
     complete = not unknown_sites
     seen_shadows = {}
@@ -577,9 +625,11 @@ def run(args, root):
         "unknown_sites": unknown_sites,
         "shadowed_keeps": shadowed_rows,
         "gate": gate,
+        "local_gate": local_gate,
+        "test_evidence_authentication": "UNAUTHENTICATED",
         "complete": complete,
-        "output_verified": True,
-        "verified": verified,
+        "output_verified": False,
+        "verified": False,
     }
     out_abs.parent.mkdir(parents=True, exist_ok=True)
     payload = json.dumps(out, indent=1, sort_keys=True, default=list) + "\n"

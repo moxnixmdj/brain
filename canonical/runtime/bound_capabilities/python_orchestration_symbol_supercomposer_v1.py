@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Orchestration-symbol supercomposer — only-right-way navigation orchestration.
-
-Hidden kernels: contract+issue orchestration fused + symbol standalone + crossfile choreography + symbol index + tree-sitter.
-Why max: navigation/orchestration was 5 isolated verifiers (dead). This super-composes them: contract-gated issue → symbol resolve → crossfile choreography → orchestration fused, $0."""
+"""Inspect registry declarations only; this adapter does not execute a workflow."""
 from __future__ import annotations
 import hashlib, json, pathlib
 from typing import Any
@@ -23,7 +20,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     found={r: (r in all_prov) for r in required}
     producers=["python.contract.issue_orchestration.fusion.v1","python.symbol.resolve.standalone.v1","python.source.crossfile_edit.choreograph.v1","python.source.symbols.resolve.v1","code.multilanguage.parse.tree_sitter.v1"]
     prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"contract-gated issue → symbol standalone → crossfile choreography → orchestration fused, navigation verified","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
+    registry_ready=all(found.values()) and all(prod_found.values())
+    # Registry declarations are not execution or verification evidence.
+    verified=False
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"contract-gated issue → symbol standalone → crossfile choreography → orchestration fused, navigation verified","verified":verified,"registry_ready":registry_ready,"reason":"DEPENDENCIES_NOT_EXECUTED","model_dependency_count":0,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"python_orchestration_symbol_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    return {"adapter":"python_orchestration_symbol_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"reason":"DEPENDENCIES_NOT_EXECUTED","found":found,"model_dependency_count":0,"incremental_spend_usd":0}

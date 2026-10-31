@@ -33,9 +33,9 @@ JQ_FORBIDDEN = (
     r"(?<![A-Za-z0-9_.])import\s+",
     r"(?<![A-Za-z0-9_.])include\s+",
     r"(?<![A-Za-z0-9_.])module\s+",
-    r"(?<![A-Za-z0-9_.])input\s*\(",
+    r"(?<![A-Za-z0-9_.])input\b",
     r"(?<![A-Za-z0-9_.])inputs\b",
-    r"(?<![A-Za-z0-9_])env\.",
+    r"(?<![A-Za-z0-9_.])env\b",
     r"\$ENV\b",
 )
 
@@ -47,10 +47,11 @@ if spec.get("cwd"):
 try:
     p=subprocess.run(
         spec["argv"],
-        stdin=None,
+        stdin=None,  # The namespace launcher supplies DEVNULL as its own stdin.
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         timeout=spec["timeout"],
+        env={} if spec.get("empty_env") else None,
         check=False,
     )
     out={
@@ -142,7 +143,7 @@ def _validate_common(context: Mapping[str, Any]) -> tuple[list[str], dict[str, A
     kwargs = dict(context.get("kwargs") or {})
     if kwargs.get("shell", False):
         raise ReadOnlyQueryDenied("SHELL_FORBIDDEN")
-    if kwargs.get("env") is not None:
+    if kwargs.get("env") is not None and not (profile == "JQ" and type(kwargs["env"]) is dict and not kwargs["env"]):
         raise ReadOnlyQueryDenied("CUSTOM_ENV_FORBIDDEN")
     if kwargs.get("input") is not None or kwargs.get("stdin") not in (None, subprocess.DEVNULL):
         raise ReadOnlyQueryDenied("STDIN_OR_INPUT_FORBIDDEN")
@@ -239,7 +240,8 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
         raise ReadOnlyQueryDenied("PROFILE_UNREACHABLE")
 
     timeout = _timeout(kwargs)
-    spec = {"argv": inner, "cwd": inner_cwd, "timeout": timeout}
+    spec = {"argv": inner, "cwd": inner_cwd, "timeout": timeout,
+            "empty_env": profile == "JQ" and kwargs.get("env") == {}}
     encoded = base64.urlsafe_b64encode(
         json.dumps(spec, sort_keys=True, separators=(",", ":")).encode("utf-8")
     ).decode("ascii")

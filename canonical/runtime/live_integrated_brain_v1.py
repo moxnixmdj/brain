@@ -76,20 +76,12 @@ def _sha256_of(path: Path) -> str:
 
 
 def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
-    """Admit a capability on independently reproduced execution evidence — never on a string.
+    """Fail closed unless the receipt lane authenticates the run reference.
 
-    A `status` field is writable by any program, which is why the extended registry could be
-    mass-flipped to `VERIFIED_BOUND_CAPABILITY` unnoticed.  A receipt alone is not enough
-    either: a receipt this project issues to itself is the SESSION_E0A256F8 failure mode
-    ("produced 464 self-verified receipts").  So admission needs BOTH:
-
-      1. a producer receipt for *this* module at *this* content hash, and
-      2. an independent verification record — a DIFFERENT identity re-ran it, the observed
-         result hash matched, and the run reference carries a platform-attested
-         `github_run_id`.
-
-    (2) is why only a real runner can mint admission, and why nothing admitted here is a
-    status flip. Deliberately ADDITIVE: it never demotes anything.
+    The existing lane currently has no authenticated, result-bound positive
+    path, so legacy projected receipts are unavailable even if genuine. Hashes
+    and self-described OIDC claims are not authentication. Curated static
+    registry entries use a separate admission path.
     """
     verification = entry.get("verification")
     if not isinstance(verification, Mapping):
@@ -113,6 +105,17 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
     if not receipt_file.is_file() or not module_file.is_file():
         return False
     try:
+        record = json.loads(verification_file.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    if not isinstance(record, Mapping) or record.get("schema") != VERIFICATION_SCHEMA:
+        return False
+    # Reuse the lane's existing fail-closed decision before hashing modules.
+    # A future positive path must authenticate the run *and* bind it to this
+    # exact module, result and verifier; claim shape is never sufficient.
+    if not lane.run_reference_is_attested(record.get("independent_run_reference")):
+        return False
+    try:
         receipt = json.loads(receipt_file.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return False
@@ -125,12 +128,6 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
     if _sha256_of(module_file) != receipt.get("module_sha256"):
         return False
 
-    try:
-        record = json.loads(verification_file.read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return False
-    if not isinstance(record, Mapping) or record.get("schema") != VERIFICATION_SCHEMA:
-        return False
     if record.get("reproduced") is not True:
         return False
     if record.get("module_sha256") != receipt.get("module_sha256"):
@@ -143,16 +140,7 @@ def _receipt_admits(entry: Mapping[str, Any], root: Path) -> bool:
     run_reference = record.get("independent_run_reference")
     if not isinstance(run_reference, Mapping) or not run_reference.get("github_run_id"):
         return False
-    # And the reference must carry a GitHub-SIGNED OIDC attestation, not a number a local
-    # process typed. `brain-trusted-oidc-receipt.yml` is this repo's own idiom for it:
-    # `id-token: write` yields a token whose `iss` is GitHub's issuer and whose claims name
-    # the repository, workflow and run that produced it.
-    claims = run_reference.get("oidc_claims")
-    if not isinstance(claims, Mapping):
-        return False
-    if claims.get("iss") != "https://token.actions.githubusercontent.com":
-        return False
-    return bool(claims.get("repository"))
+    return True
 
 
 _REGISTRY_CACHE: dict[tuple[int, int, int], dict[str, Mapping[str, Any]]] = {}
@@ -223,11 +211,11 @@ def load_verified_registry(include_extended: bool = True) -> dict[str, Mapping[s
         except (OSError, ValueError, TypeError) as exc:
             raise LiveBrainError("EXTENDED_CAPABILITY_REGISTRY_INVALID") from exc
 
-        # Third source: receipt-backed capabilities.  The projection is DERIVED evidence
-        # (execution + independent reproduction), not a declaration, so admitting from it
-        # adds no registry entry and therefore declares no new capability.  An entry here
-        # keeps status RECEIPT_BACKED_FROM_PROJECTION and is admitted only if the
-        # independent-verification gate passes.
+        # Third source: projected receipt candidates. Their records are not
+        # automatically independent evidence. _receipt_admits currently refuses
+        # them because the receipt lane has no authenticated positive path.
+        # Keep the projection and its implementation files intact for future
+        # result-bound re-verification rather than admitting self-described claims.
         if PROJECTION.is_file():
             try:
                 projection = json.loads(PROJECTION.read_text(encoding="utf-8"))

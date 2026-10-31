@@ -153,8 +153,8 @@ class ReceiptTests(unittest.TestCase):
         self.assertEqual(lane_module.sha256_canonical({"a": 1, "b": 2}), lane_module.sha256_canonical({"b": 2, "a": 1}))
 
 
-def _signed_run_reference(run_id=123):
-    """The shape only a GitHub runner can produce: a signed OIDC claim set."""
+def _legacy_run_reference(run_id=123):
+    """Legacy example claim shape; this dictionary is unsigned and forgeable."""
     return {"github_run_id": run_id,
             "oidc_claims": {"iss": "https://token.actions.githubusercontent.com",
                             "repository": "moxnixmdj/brain",
@@ -163,7 +163,7 @@ def _signed_run_reference(run_id=123):
 
 
 class IndependenceProvenanceTests(unittest.TestCase):
-    """Only a GitHub-signed reference may WRITE a verification record."""
+    """The legacy claim-shape check is not signature authentication."""
 
     def test_a_local_reference_is_not_attestable(self):
         self.assertFalse(lane_module.run_reference_is_attested({"github_run_id": 1}))
@@ -172,9 +172,10 @@ class IndependenceProvenanceTests(unittest.TestCase):
             {"github_run_id": 1, "oidc_claims": {"iss": "https://evil.example", "repository": "x"}}))
         self.assertFalse(lane_module.run_reference_is_attested(
             {"oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER}}))
-        self.assertTrue(lane_module.run_reference_is_attested(
-            {"github_run_id": 1, "oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER,
-                                                 "repository": "o/r", "run_id": "1"}}))
+        claimed = {"github_run_id": 1, "oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER,
+                                                        "repository": "o/r", "run_id": "1"}}
+        self.assertTrue(lane_module.run_reference_has_legacy_claim_shape(claimed))
+        self.assertFalse(lane_module.run_reference_is_attested(claimed))
 
     def _producer_root(self, tmp, name):
         root = pathlib.Path(tmp)
@@ -188,26 +189,32 @@ class IndependenceProvenanceTests(unittest.TestCase):
         (root / receipt["receipt_path"]).write_text(json.dumps(receipt), encoding="utf-8")
         return root, receipt
 
-    def test_local_identity_confirms_reproduction_but_writes_nothing(self):
+    def test_local_identity_skips_receipt_execution_and_writes_nothing(self):
         with tempfile.TemporaryDirectory() as tmp:
             root, receipt = self._producer_root(tmp, "prod_v1.py")
             report = lane_module.verify_producer_receipts(
                 str(root), "local-replay", {"local_replay": True})
-            self.assertEqual(report["reproduced"], 1)
+            self.assertEqual(report["reproduced"], 0)
+            self.assertEqual(report["producer_receipts"], 1)
+            self.assertIs(report["execution_skipped"], True)
             self.assertIs(report["run_reference_attested"], False)
+            self.assertIs(report["run_reference_claim_shape_valid"], False)
             self.assertEqual(report["records_written"], 0)
             self.assertFalse((root / lane_module.verification_path_for(receipt["receipt_path"])).exists())
 
-    def test_attested_identity_writes_the_record(self):
+    def test_legacy_claim_shape_cannot_write_an_unauthenticated_record(self):
         with tempfile.TemporaryDirectory() as tmp:
             root, receipt = self._producer_root(tmp, "prod2_v1.py")
             ref = {"github_run_id": 7, "oidc_claims": {"iss": lane_module.GITHUB_OIDC_ISSUER,
                                                       "repository": "o/r", "run_id": "7"}}
             report = lane_module.verify_producer_receipts(str(root), "github-actions:o/r", ref)
-            self.assertEqual(report["records_written"], 1)
+            self.assertIs(report["run_reference_attested"], False)
+            self.assertIs(report["run_reference_claim_shape_valid"], True)
+            self.assertEqual(report["reproduced"], 0)
+            self.assertIs(report["execution_skipped"], True)
+            self.assertEqual(report["records_written"], 0)
             written = root / lane_module.verification_path_for(receipt["receipt_path"])
-            self.assertTrue(written.is_file())
-            self.assertEqual(json.loads(written.read_text())["independent_verifier"], "github-actions:o/r")
+            self.assertFalse(written.exists())
 
     def test_the_producer_cannot_verify_its_own_receipt(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -321,7 +328,7 @@ class LoaderGateTests(unittest.TestCase):
                   "module_path": rel_module, "module_sha256": module_sha,
                   "reproduced": True, "independent_verifier": verifier,
                   "verifier_result_sha256": "b" * 64 if result_mismatch else "a" * 64,
-                  "independent_run_reference": run_ref if run_ref is not None else _signed_run_reference(),
+                  "independent_run_reference": run_ref if run_ref is not None else _legacy_run_reference(),
                   "model_dependency_count": 0}
         (root / rel_receipt).write_text(json.dumps(receipt), encoding="utf-8")
         (root / lane_module.verification_path_for(rel_receipt)).write_text(json.dumps(record), encoding="utf-8")
@@ -365,15 +372,16 @@ class LoaderGateTests(unittest.TestCase):
 
     def test_wrong_oidc_issuer_cannot_admit(self):
         with tempfile.TemporaryDirectory() as tmp:
-            ref = _signed_run_reference()
+            ref = _legacy_run_reference()
             ref["oidc_claims"] = dict(ref["oidc_claims"], iss="https://evil.example")
             root, entry = self._root(tmp, run_ref=ref)
             self.assertFalse(_receipt_admits(entry, root))
 
-    def test_independent_attested_reproduction_admits(self):
+    def test_unsigned_legacy_reproduction_is_not_attested(self):
         with tempfile.TemporaryDirectory() as tmp:
             root, entry = self._root(tmp)
-            self.assertTrue(_receipt_admits(entry, root))
+            self.assertFalse(lane_module.run_reference_is_attested(_legacy_run_reference()))
+            self.assertFalse(_receipt_admits(entry, root))
 
     def test_edited_module_voids_the_receipt(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -415,13 +423,16 @@ class LoaderGateTests(unittest.TestCase):
         not go stale: NOTHING is admitted without a signed, independently reproduced record.
         """
         registry = load_verified_registry(include_extended=True)
-        for cid, entry in registry.items():
-            if entry.get("capability_source") != "receipt_projection":
-                continue
+        projected = {cid: entry for cid, entry in registry.items()
+                     if entry.get("capability_source") == "receipt_projection"}
+        if not projected:
+            self.skipTest("no authenticated projected receipt positive path is available")
+        for cid, entry in projected.items():
             receipt_path = entry["verification"]["receipt_path"]
             vpath = ROOT / lane_module.verification_path_for(receipt_path)
             self.assertTrue(vpath.is_file(), cid)
             record = json.loads(vpath.read_text(encoding="utf-8"))
+            self.assertTrue(lane_module.run_reference_is_attested(record.get("independent_run_reference")), cid)
             producer = json.loads((ROOT / receipt_path).read_text(encoding="utf-8"))
             self.assertEqual(record["schema"], lane_module.VERIFICATION_SCHEMA, cid)
             self.assertIs(record["reproduced"], True, cid)

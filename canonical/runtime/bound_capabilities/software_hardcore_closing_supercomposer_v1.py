@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Hardcore closing supercomposer — only-right-way final engineer.
-
-Hidden kernels: hardcore final + final synthesis + triad proven + test contract + verification super (5 dead).
-Why max: closing SWE engineer was 5 isolated hardcore verifiers (dead). This super-composes them: triad proven → test contract → verification super → hardcore final → final synthesis → closing verified."""
+"""Inspect registry declarations only; this adapter does not execute a workflow."""
 from __future__ import annotations
 import hashlib, json, pathlib
 from typing import Any
@@ -23,7 +20,9 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     found={r: (r in all_prov) for r in required}
     producers=["software.hardcore.final.supercomposer.v1","software.test.contract.supercomposer.v1","software.repair.loop.cegis_hypothesis.v1","software.hardcore.swe.supercomposer.v1"]
     prod_found={c: c in reg["capabilities"] for c in producers}
-    verified=all(found.values()) and all(prod_found.values())
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"triad proven → test contract verified → verification super → hardcore final → final synthesis → closing","verified":verified,"model_dependency_count":0,"incremental_spend_usd":0}
+    registry_ready=all(found.values()) and all(prod_found.values())
+    # Registry declarations are not execution or verification evidence.
+    verified=False
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"producers":prod_found,"composition":"triad proven → test contract verified → verification super → hardcore final → final synthesis → closing","verified":verified,"registry_ready":registry_ready,"reason":"DEPENDENCIES_NOT_EXECUTED","model_dependency_count":0,"incremental_spend_usd":0}
     raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_hardcore_closing_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"found":found,"model_dependency_count":0,"incremental_spend_usd":0}
+    return {"adapter":"software_hardcore_closing_supercomposer_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":verified,"verified":verified,"reason":"DEPENDENCIES_NOT_EXECUTED","found":found,"model_dependency_count":0,"incremental_spend_usd":0}

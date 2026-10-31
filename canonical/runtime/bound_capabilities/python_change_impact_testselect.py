@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 """Deterministic diff-to-minimal-test-set selection (change impact analysis).
 
-The speed tax of engineering is paying the full battery for a one-line edit.
-This adapter ends it for Python: parse a unified diff (or an explicit changed
-path list), locate the touched symbols in the semantic symbol index, walk the
-call graph and the import graph downstream, and select exactly the tests that
-can still observe the change. Over-approximation law: selectors must never
-miss an affected test, but may over-select; every selected test carries the
-evidence chain that selected it, and unresolvable changes fail into a named
-truthful reason instead of a confident-looking empty set.
+This adapter parses a unified diff (or explicit changed-path list), locates
+touched symbols in the semantic symbol index, and walks a static call/import
+graph to suggest tests. The result is advisory, not a never-miss guarantee:
+dynamic loading, aliases, wildcard imports and pytest fixtures can hide real
+dependencies. A green suggested subset must not be the sole verification gate.
 """
 from __future__ import annotations
 
@@ -158,13 +155,11 @@ def _dependency_maps(index):
 
 
 def _affected_modules(index, changed, changed_symbols):
-    """Downstream closure that never misses: modules and call names together.
+    """Compute the downstream closure visible in the static index.
 
-    BFS over two graphs at once: modules that import a changed module, and
-    definitions that call a changed name. A reached caller escalates its own
-    bare name, so ``helper -> origin -> entrypoint`` propagates as far as the
-    graph goes. Same-named definitions across modules merge (documented
-    over-approximation): the selector may widen, never omit.
+    BFS over import and call-name graphs can widen on same-named definitions,
+    but it cannot see every Python dependency (for example, reflection and
+    pytest fixture injection). It is not a proof that omitted tests are safe.
     """
     callers_of = index.get("callers_of") or {}
     _def_modules, name_edges, wide_edges = _dependency_maps(index)
@@ -316,6 +311,7 @@ def run(args, root):
         "indexed_but_not_repo_test_root": False,
         "tests": test_rows,
         "selected_tests": selected,
+        "selection_scope": "STATIC_GRAPH_HEURISTIC_NOT_A_NEVER_MISS_PROOF",
         "unknown_symbol_modules": unknown,
         "totals": {
             "changed_files": len(changed),

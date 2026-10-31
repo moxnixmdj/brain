@@ -2,27 +2,24 @@ name: Capability receipt independent verification
 
 # WHY THIS WORKFLOW EXISTS
 #
-# `load_verified_registry` admits a capability only when BOTH hold:
-#   1. a producer execution receipt exists for this module at this content hash, and
-#   2. an INDEPENDENT verification record exists — a different identity re-ran the module,
-#      observed the same result hash, and the run reference carries a platform-attested
-#      `github_run_id`.
+# `load_verified_registry` checks for a producer receipt and a second record
+# claiming a distinct verifier, a matching result, and a GitHub run reference.
+# Those fields are not themselves platform-attested.
 #
-# The second condition is the one this workflow satisfies, and it is deliberately the only
-# way to satisfy it: a reference invented by a local process cannot carry `github_run_id`,
-# so no local session — and no agent — can mint admission for itself. That is the whole
-# point (AGENTS.md rule 4: "Verification means someone else ran it").
+# SECURITY LIMITATION: the workflow retains decoded OIDC claims, not the signed token or
+# an attestation bound to the records. The current consumers do not authenticate those
+# claims, and receipt-specified Python would execute in the verifier process. The records
+# alone therefore do not prove independent execution, even when they contain a run id.
 #
-# The runner re-executes every producer receipt and stamps a verification record ONLY when
-# the observed result hash matches. A mismatch stamps nothing and fails the job.
+# The preflight below stops this workflow before receipt code executes or records are
+# published until an authenticated, result-bound verification policy exists.
 #
 # Nothing here writes a registry: the executable set is derived from reproduced evidence,
 # so no capability is declared and no capability is deleted.
 
 on:
-  # `pull_request` (never `pull_request_target`, which AGENTS.md rule 7 forbids) so the
-  # independent attestation can be produced and committed on the pull request itself,
-  # without waiting for a merge.
+  # `pull_request` (never `pull_request_target`, which AGENTS.md rule 7 forbids).
+  # PR runs cannot commit resulting records.
   pull_request:
     paths:
       - ".github/workflows/capability-receipt-verification.yml"
@@ -41,14 +38,10 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
-  # GitHub signs an OIDC token whose claims include run_id, repository, workflow_ref and
-  # actor. That is the attestation: a locally-written `github_run_id` field is not.
+  contents: read
+  # Required by the legacy reference producer; its decoded claims are not an
+  # authenticated, result-bound attestation.
   id-token: write
-
-env:
-  AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
-  AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
 
 jobs:
   verify-receipts:
@@ -58,6 +51,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: actions/setup-python@v5
         with:
@@ -83,7 +77,18 @@ jobs:
           print(json.dumps({"github_run_id": int(claims["run_id"]),
                             "oidc_claims": {k: claims.get(k) for k in keep}}, sort_keys=True))
           PY
+          unset TOKEN_JSON
           cat /tmp/run_reference.json
+          # Never execute receipt-specified code on this runner while its
+          # result-bound provenance and isolation are unestablished.
+          python3 - <<'PY'
+          import json
+          from canonical.runtime.capability_receipt_lane_v1 import run_reference_is_attested
+          with open('/tmp/run_reference.json', encoding='utf-8') as stream:
+              reference = json.load(stream)
+          if not run_reference_is_attested(reference):
+              raise SystemExit('INDEPENDENT_VERIFICATION_UNAVAILABLE: run reference and result are not authenticated')
+          PY
           python3 canonical/runtime/capability_receipt_lane_v1.py \
             --verify \
             --root . \
@@ -105,12 +110,8 @@ jobs:
           PY
 
       - name: Publish the verification records as an artifact
-        # Always runs. `land_on_main.sh` needs the Brain Automation app
-        # (AUTOMATION_APP_ID / AUTOMATION_APP_PRIVATE_KEY); every workflow in this repo
-        # that calls it is currently failing, so independence must not depend on that one
-        # link. The artifact is the runner's own output, produced under a real
-        # `github_run_id`, and can be committed in one pass if automatic landing is down.
-        if: always()
+        # Do not publish stale records if the preflight or reproduction fails.
+        # A future authenticated path must still bind the artifact bytes.
         uses: actions/upload-artifact@v4
         with:
           name: capability-independent-verification
@@ -119,6 +120,11 @@ jobs:
 
       - name: Land the verification records
         shell: bash
+        # Defense in depth, not a sandbox: any future re-enabled execution
+        # would still share the runner and its job-level OIDC authority.
+        env:
+          AUTOMATION_APP_ID: ${{ secrets.AUTOMATION_APP_ID }}
+          AUTOMATION_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           git config user.name "project-brain-capability-receipt-verification"

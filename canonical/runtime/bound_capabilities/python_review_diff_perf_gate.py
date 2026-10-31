@@ -205,8 +205,8 @@ def run(args, root):
     # copy, which is copied into the next, and the run dies with ENAMETOOLONG on a
     # path made of a single directory name repeated.  Measured: "Gate the diff <D>
     # on performance" against an anchor that was the repository itself never
-    # finished, and left 30 nested copies behind.  The scratch root is therefore
-    # moved OUTSIDE the anchor, still deterministic in the anchor's own digest.
+    # finished, and left 30 nested copies behind. The stable scratch base is
+    # outside the anchor; each invocation gets its own temporary child.
     anchor_abs = _gate_anchor.resolve_anchor(repo, anchor_abs, diff_abs, timeout_s,
                                             must_contain=[bench_abs] if bench_abs else [])
     if bench_abs is not None:
@@ -214,11 +214,9 @@ def run(args, root):
             _fail("BENCH_OUTSIDE_ANCHOR:" + bench_rel)
         bench_rel = bench_abs.relative_to(anchor_abs).as_posix()
     scratch_base = _gate_anchor.scratch_base(anchor_abs, out_abs.parent)
-    scratch_a = scratch_base / ("_perf_anchor_" + _sha256(diff_text.encode())[:12])
-    scratch_p = scratch_base / ("_perf_patched_" + _sha256(diff_text.encode())[:12])
-    for s in (scratch_a, scratch_p):
-        if s.exists():
-            shutil.rmtree(s)
+    scratch_run = Path(tempfile.mkdtemp(prefix="_perf_run_", dir=scratch_base))
+    scratch_a = scratch_run / "anchor"
+    scratch_p = scratch_run / "patched"
     try:
         shutil.copytree(anchor_abs, scratch_a,
                         ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
@@ -238,9 +236,7 @@ def run(args, root):
         anchor_runs, anchor_cal = _bench(scratch_a, bench_rel, python_exe, repeats, timeout_s)
         patched_runs, patched_cal = _bench(scratch_p, bench_rel, python_exe, repeats, timeout_s)
     finally:
-        for s in (scratch_a, scratch_p):
-            if s.exists():
-                shutil.rmtree(s, ignore_errors=True)
+        shutil.rmtree(scratch_run, ignore_errors=True)
 
     # best-of estimator (pyperf-style: min of N is the noise-robust intrinsic
     # cost), box-normalized by the fixed calibrator measured in the SAME child
