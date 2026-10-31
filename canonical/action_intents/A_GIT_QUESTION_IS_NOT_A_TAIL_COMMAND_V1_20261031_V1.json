@@ -27,8 +27,8 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
     "progress_evidence_paths": [
-      "canonical/runtime/live_brain_route_admission_v1.py",
-      "canonical/runtime/swe_typed_plan_v1.py"
+      "canonical/runtime/composer_route_v1.py",
+      "canonical/tests/test_a_git_question_is_not_a_tail_command_v1.py"
     ],
     "route_class": "INTEGRATE"
   },
