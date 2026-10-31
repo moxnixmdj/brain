@@ -21804,6 +21804,7 @@
    "input_contract_source": "action_template",
    "input_names": [
     "limit",
+    "message",
     "op"
    ],
    "kind": "BOUND_CAPABILITY",
@@ -30343,7 +30344,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2369490ad48d9574c795341a4ca99672dce752c1b16ff783374324b35cece7e8"
+  "value": "6c51c326b9f42d2a583b0fb1280af97f7abb1b864427668f3d1ab318a87376cd"
  },
  "engines": [
   {
@@ -54939,7 +54940,7 @@
   "included_source_count": 963,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ebb86fd266702d25e930c6c5f9d40211c9cde8d2c5faba38e1e84148d3ea7453"
+  "source_tree_digest": "c3a2d30e65763c09eeea4171fb794b1416413d373920145aacbe8ef6c69612b5"
  },
  "research_index": [
   {
@@ -202390,7 +202391,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_SOUNDNESS_AND_SUB100MS_CLOSURE_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "692e28bc7787d963723825ff2f021f5c5488c368080497487c82f82e24b30bfb",
+   "sha256": "ba6d6265c3136c9ebb6bcb1c2977e53020e8203bc19cd87b472c0705a3c569d7",
    "status": "",
    "terms": {
     "10": 2,
@@ -226780,7 +226781,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "73ffc055c0930708e176729022428724f66b0d909578142006bca089f11d6e45",
+   "sha256": "4dd8b272bad40b631869e0d0abe1112b96efdd8132f41a9be621d8b434313634",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 9,
    "symbols": [
