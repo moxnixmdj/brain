@@ -1934,7 +1934,47 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
     return sorted(strong) if strong else sorted(weak)
 
 
-def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
+# A PROPERTY OF THE TREE IS NOT A REQUEST FOR A REPORT ABOUT IT.
+#
+# Measured 2026-10-31, two sentences, both refused before the row that serves them could run:
+#   "The test <t> is flaky.  Fix the code so it passes reliably."        -> STATED_FLAKY_VERDICT_...
+#   "The query in <f> is built with string formatting.  Remove the SQL injection ..."  -> STATED_LINT_...
+# In both, the "flakiness" and the "formatting" are PREMISES: the sentence tells you what is
+# wrong and then asks for a CHANGE.  The gate read the premise as the request and demanded a
+# flakiness verdict / a lint from a repair engine -- so a sentence the machine can serve was
+# refused by a word about the defect it was asked to fix.
+#
+# The evidence is grammatical and needs no new vocabulary: a property stated behind a copula
+# ("is flaky", "is built with ... formatting") is an attribute of the tree, not an imperative.
+# Two conditions keep it from widening anything: the sentence must not be a QUESTION ("Is there
+# a SQL injection in <f>?" asks for exactly that judgement), and the copula must be in the same
+# unpunctuated span as the effect.
+_QUESTION_RE = re.compile(
+    r"\?|^\s*(?:which|what|where|who|whom|whose|how|why|is|are|does|do|can|could|should|would)\b"
+    # ... and a question written without a question mark.  Measured 2026-10-31: "Rerun the
+    # failing test <t> three times and tell me if it is flaky" is a request for a VERDICT, and
+    # a copula-only reading filed "is flaky" as a premise and let the answer gate be skipped.
+    r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b|\bfind out (?:if|whether)\b"
+    r"|\bdetermine (?:if|whether)\b|\bconfirm (?:if|whether)\b",
+    re.IGNORECASE)
+_PREMISE_COPULA_RE = re.compile(
+    r"\b(?:is|are|was|were|has|have|had)\b[^.?!;,]{0,40}?"
+    r"(?:built|written|implemented|made|done|defined|used|set|left|affected)?\s*"
+    r"(?:with|in|by|using|as|of)?\s*$", re.IGNORECASE)
+
+
+def _is_a_premise(text: str, start: int) -> bool:
+    """True when the effect words at ``start`` describe the tree rather than ask for work."""
+    if _QUESTION_RE.search(text):
+        return False
+    head = text[max(0, start - 56):start]
+    cut = max(head.rfind(ch) for ch in ".;?,!")
+    if cut >= 0:
+        head = head[cut + 1:]
+    return bool(_PREMISE_COPULA_RE.search(head))
+
+
+def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> list[str]:
     """A sentence that asks for X must be answered by something that declares X.
 
     Only the sentence and the capability's own declaration are consulted: its id, what it
@@ -1946,13 +1986,34 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     text = str(goal or "")
     if not text.strip():
         return []
-    cid = str(entry.get("capability_id") or entry.get("id") or "")
+    # THE REFUSAL MUST NAME THE ROW.  ``load_verified_registry()`` keys its entries by capability id
+    # instead of repeating it inside the entry, so a caller holding the entry reported
+    # ``..._ANSWERED_BY_A_WRITER:UNNAMED`` -- a diagnosis nobody can act on, measured 2026-10-31
+    # while pinning the review rule.  The caller knows the id (it looked the entry up by it), so it
+    # may say so; the in-entry lookup stays as the fallback for entries that do carry one.
+    cid = str(cid or entry.get("capability_id") or entry.get("id") or "")
     surface = " ".join([cid,
                         " ".join(str(x) for x in (entry.get("provides") or [])),
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
+    # A STATED EFFECT IS ASKED FOR BY THE CLAUSE THAT CARRIES THE REQUEST.
+    #
+    # "Add a parameter qty with a default value to the function line_total in <f> and update
+    # every caller so behaviour is unchanged" mentions a caller, and the caller-map gate read
+    # that noun as "tell me who the callers are" -- so the row that EXTENDS the signature and
+    # rewrites the call sites was refused with STATED_CALLER_MAP_NOT_PROVIDED_BY_CAPABILITY
+    # before it could run.  Measured 2026-10-31.  The map is a request made by the clause that
+    # asks it ("find every caller", "who calls"); a noun in a subordinate instruction is the
+    # OBJECT of that instruction.  Reuses the governing-clause law the typed selector applies,
+    # so there is one reading of "what did this sentence ask for" in the tree.
+    from canonical.runtime.swe_typed_plan_v1 import _governing_clause as _clause_of
+    head = _clause_of(text.lower())
     errors: list[str] = []
     for asked, supplied, code in _STATED_EFFECTS:
-        if not asked.search(text) or supplied.search(surface):
+        probe = head if code.startswith("STATED_CALLER_MAP") else text.lower()
+        match = asked.search(probe)
+        if not match or supplied.search(surface):
+            continue
+        if _is_a_premise(probe, match.start()):
             continue
         errors.append(code + ":" + (cid or "UNNAMED"))
     errors.extend(stated_application_errors(text, entry))
@@ -2015,6 +2076,24 @@ _PLAN_REQUEST_RE = re.compile(
     r"^\s*(?:please\s+)?(?:plan|propose|outline|sketch|draft|map out)\b", re.IGNORECASE)
 _PLAN_THEN_DO_RE = re.compile(
     r"\b(?:then|and|also)\b[^.\n]{0,40}\b(?:apply|implement|execute|perform|carry out|do it)\b",
+    re.IGNORECASE)
+
+
+# A REVIEW IS A QUESTION ABOUT A FILE, NOT A JOB ON IT.
+#
+# Measured 2026-10-31 in the capability matrix: "Review <f> for security issues" was answered by
+# ``software.repair.choreograph.crossfile.v1`` -- a MUTATOR -- which ran its
+# ``dead_code_and_import_pruning`` mode over the reviewed project and edited a file the sentence
+# never named (DAMAGED: bench_calc.py), then returned pass=True with no security verdict in the
+# artifact.  The row declared "security" (it can REMOVE an sql injection), which satisfied the
+# effect table, and the shape rule did not fire because "review" is not one of its read-only openers.
+# A sentence that asks for a VERDICT promises no byte change, so it belongs to the same shape as
+# "find"/"show": the answering row must read, and a row that writes is the wrong kind of row.
+# Scoped by the sentence's own promise: "review and fix the injection" promises a change and is
+# untouched by this rule.
+_REVIEW_REQUEST_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:review|audit|assess|scan|inspect|evaluate|check)\b"
+    r"|\b(?:security|code|design|style)\s+(?:review|audit|scan)\b",
     re.IGNORECASE)
 
 
@@ -2096,10 +2175,23 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
     # retry; the correct read-only row was one typed selection away.
     _writes = bool(_MUTATION_PROVIDES_RE.search(provides)) or \
         bool(front.capability_edits_source(entry))
-    if ((_READ_ONLY_REQUEST_RE.search(text) or _asks_only_for_a_plan(text))
+    _read_only_request = bool(_READ_ONLY_REQUEST_RE.search(text) or _asks_only_for_a_plan(text))
+    if _REVIEW_REQUEST_RE.search(text) and not _sentence_promises_a_change(text):
+        _read_only_request = True
+    # A WORD IN "provides" DOES NOT OUTRANK A DECLARATION OF WRITE AUTHORITY.
+    #
+    # ``software.repair.choreograph.crossfile.v1`` lists read-sounding words among what it provides
+    # ("call graph", "crossfile"), so ``_READ_SURFACE_RE`` excused it from the read-only rule above
+    # while its own registry row declares that it edits source -- and it acted on that authority,
+    # pruning dead code out of a file the review sentence had only asked about.  A row that declares
+    # ``capability_edits_source`` cannot be the answer to a question about a file; that is the
+    # declaration, and the wording of a keyword is not.  Rows that read for a living keep the
+    # escape, because the escape is what puts a read row in front of a question.
+    _declares_edits = bool(front.capability_edits_source(entry))
+    if (_read_only_request
             and _writes
-            and not _READ_SURFACE_RE.search(provides)
-            and not _declares_it_does_not_write(entry)):
+            and not _declares_it_does_not_write(entry)
+            and not (_READ_SURFACE_RE.search(provides) and not _declares_edits)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
     language = _LANGUAGE_OF_GOAL_RE.search(text)
     if (language and _PYTHON_ONLY_RE.search(surface)
@@ -2828,6 +2920,52 @@ def _blind_change_evidence(result: Mapping[str, Any]) -> list[str]:
     return out
 
 
+# A STATED ANSWER MUST BE IN THE ARTIFACT, NOT IMPLIED BY A PASS.
+#
+# Measured 2026-10-31 in the capability matrix: "Bisect the regression that broke the test in <T>"
+# reached ``git.history.bisect_regression.v1``, which really ran ``git bisect``, probed ONE commit,
+# found no known-good commit, and reported ``breaking_commit: <repo HEAD>`` with
+# ``last_good_commit: None`` -- and the door certified it PASS__...EXACT_SEMANTIC_ACCEPTANCE.  A
+# bisect without a good side has not attributed anything: it has run the failing side of a search it
+# never bounded.  The sentence states the answer it wants (the commit), so the artifact must carry
+# one that was actually bracketed by a known-good commit; otherwise this is the same
+# "the sentence asked for X and X was not provided" class the answer gate already names.
+_BISECT_ANSWER_RE = re.compile(r"\bbisect\b|\bwhich commit\b|\bwhen did\b[^.\n]{0,40}?\bbreak\b",
+                               re.IGNORECASE)
+
+
+def _written_artifacts(result: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Every JSON artifact the run says it wrote, parsed.  A report blob is not an answer."""
+    docs: list[dict[str, Any]] = []
+    for row in (result.get("execution") or []):
+        produced = str((((row or {}).get("result") or {}).get("output_path")) or "")
+        if not produced:
+            continue
+        try:
+            docs.append(json.loads((ROOT / produced).read_text(encoding="utf-8")))
+        except Exception:  # noqa: BLE001 - a non-JSON artifact answers nothing
+            continue
+    return docs
+
+
+def stated_answer_payload_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
+    """The answer the sentence named, checked against the artifact the run wrote."""
+    text = str(goal or "")
+    docs = _written_artifacts(result) if isinstance(result, Mapping) else []
+    if _BISECT_ANSWER_RE.search(text):
+        for doc in docs:
+            if not isinstance(doc, Mapping):
+                continue
+            if "breaking_commit" not in doc and "last_good_commit" not in doc:
+                continue
+            if not doc.get("breaking_commit"):
+                return ["BISECT_NAMED_NO_COMMIT"]
+            if not doc.get("last_good_commit"):
+                return ["BISECT_WITHOUT_A_KNOWN_GOOD_COMMIT"]
+            return []
+    return []
+
+
 def _close_observations(result: dict[str, Any], goal: str,
                          before: Mapping[str, Any] | None,
                          artifacts: list[str] | None = None) -> dict[str, Any]:
@@ -2873,6 +3011,15 @@ def _close_observations(result: dict[str, Any], goal: str,
                                 .replace("_EXECUTED_AND_VERIFIED", "_EXECUTED_APPLIED_UNVERIFIED")
                                 .replace("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
                                          "EXACT_SEMANTIC_ACCEPTANCE_APPLIED_UNVERIFIED"))
+    if result.get("pass") is True:
+        unanswered_payload = stated_answer_payload_errors(goal, result)
+        if unanswered_payload:
+            result["runtime_status_before_answer_payload_check"] = result.get("status")
+            result["status"] = "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED"
+            result["pass"] = False
+            result["failure_class"] = "STATED_ANSWER_NOT_PROVIDED"
+            result["stated_answer_payload_errors"] = unanswered_payload
+            return result
     # THE ANSWER MUST BE THE ANSWER.  A PASS whose payload cannot answer the sentence is a
     # wrong answer with a certificate on it, and this is the one exit every path passes
     # through, so the reconciliation lives here.
@@ -3389,6 +3536,23 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     if failure_class in _JUDGED_FAILURE_CLASSES:
         return False
     if result.get("executed") is True:
+        # AN "EXECUTED" ATTEMPT WITH NO EXECUTION RECORD EXECUTED NOTHING.
+        #
+        # ``executed`` says the controller was invoked; ``execution`` is the record of what
+        # actually ran, and the block above has already established that no honesty gate
+        # spoke.  Measured 2026-10-31 on two sentences: "Resolve the merge conflict in
+        # <file> keeping both changes" was routed to a mutation score, which raised
+        # SyntaxError on the conflicted file, and "Rename the function line_total to
+        # item_total in <dir> and update every caller" was routed to a PARAMETER rename,
+        # which refused PARAM_NOT_FOUND.  Both reported executed:True with execution == []
+        # and not one judged-evidence field set: neither capability produced an artifact,
+        # moved a byte, or said anything about the tree.  The refusal is a statement about
+        # the ROW that was asked, and the decisive typed plan already names the row the
+        # sentence describes.  The retry re-enters the SAME gate chain, and the verdict the
+        # caller receives is the retry's own -- failure included.  Nothing is widened.
+        if not result.get("execution") and not any(result.get(field)
+                                                   for field in _JUDGED_EVIDENCE_FIELDS):
+            return True
         stated = "%s %s" % (result.get("reason") or "", result.get("failure_reason") or "")
         return bool(_PRECONDITION_BLOCKER_RE.search(stated))
     return True
@@ -3834,7 +3998,8 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     _declared = str(compiled.get("capability_id") or compiled.get("selected_capability") or "")
     # Only a capability that was actually about to run can be refused for not answering: with no
     # compiled capability there is no claim to reject, and the request keeps its own refusal.
-    declared_answer_errors = (stated_answer_errors(normalized, dict(admissible.get(_declared) or {}))
+    declared_answer_errors = (stated_answer_errors(normalized, dict(admissible.get(_declared) or {}),
+                                                   _declared)
                               if _declared else [])
     if declared_answer_errors:
         refused = _fail(task_id, "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
@@ -4060,7 +4225,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         result["failure_class"] = "PROMISED_SOURCE_CHANGE_NOT_APPLIED"
         result["promised_source_change_errors"] = unchanged
     unanswered = stated_answer_errors(
-        normalized, dict(admissible.get(_answered_by) or {})) \
+        normalized, dict(admissible.get(_answered_by) or {}), str(_answered_by or "")) \
         if result.get("pass") is True else []
     if unanswered:
         result["runtime_status_before_answer_check"] = result.get("status")

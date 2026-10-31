@@ -250,10 +250,17 @@ case("rename_param", lambda b: "Rename the parameter old_price to price in the p
      "save the report to %s." % (rel(b, "pkg/util.py"), rel(b, "out.json")),
      lambda b, r: "def total(price, qty)" in text_of(b / "pkg/util.py"), "refactor",
      allow=("util.py",))
+# THE SENTENCE AUTHORISES THE CALLERS IT NAMES.
+#
+# Measured 2026-10-31: "Rename the function add to plus in <mod.py> and update every caller"
+# renamed in both files and the oracle -- which requires the caller to change -- passed, while the
+# damage rule reported the caller file as a file nobody asked for.  The oracle and the damage rule
+# cannot both be right: when the sentence says "update every caller", a caller changing is the
+# request, not the damage.
 case("rename_symbol", lambda b: "Rename the function add to plus in %s and update every caller."
      % rel(b, "pkg/mod.py"),
      lambda b, r: "def plus(" in text_of(b / "pkg/mod.py") and "plus" in text_of(b / "pkg/service.py"),
-     "refactor")
+     "refactor", allow=("mod.py", "service.py"))
 case("extract_function", lambda b: "Extract the body of add in %s into a helper function."
      % rel(b, "pkg/mod.py"),
      lambda b, r: parses(b / "pkg/mod.py") and text_of(b / "pkg/mod.py").count("def ") >= 4, "refactor")
@@ -356,8 +363,16 @@ case("add_logging", lambda b: "Add logging to every function in %s." % rel(b, "p
      lambda b, r: "logging" in text_of(b / "pkg/mod.py"), "feature")
 case("add_retries", lambda b: "Add retry with backoff to the network call in %s."
      % rel(b, "pkg/http.py"), lambda b, r: "retry" in text_of(b / "pkg/http.py").lower(), "feature")
+# THE REQUEST NAMES THE FILE IT WANTS CHANGED, SO THAT FILE IS NOT DAMAGE.
+#
+# Measured 2026-10-31: python.refactor.add_parameter.v1 did exactly what the sentence asked --
+# it added `strict` to `total` in the named file and the oracle passed -- and the run was
+# reported DAMAGED because the case carried no `allow` list, so the one file the goal named
+# counted as a file nobody asked for.  The allow list is the place that says "the request
+# itself asks for this"; the repair cases have used it since the lane existed.
 case("add_parameter", lambda b: "Add a parameter strict to the function total in %s."
-     % rel(b, "pkg/util.py"), lambda b, r: "strict" in text_of(b / "pkg/util.py"), "feature")
+     % rel(b, "pkg/util.py"), lambda b, r: "strict" in text_of(b / "pkg/util.py"), "feature",
+     allow=("util.py",))
 case("implement_issue", lambda b: "Implement this issue: add a subtract function to %s with a unit "
      "test." % rel(b, "pkg/calc.py"), lambda b, r: "def subtract" in text_of(b / "pkg/calc.py"),
      "feature")
@@ -452,11 +467,36 @@ def _security_review_ran(b: pathlib.Path, r: dict) -> bool:
 
 
 def _mutation_score_measured(b: pathlib.Path, r: dict) -> bool:
+    """A mutation verdict, from either of the two rows that really measure one.
+
+    The oracle used to accept only the DIFF gate's schema, so "Measure the mutation score of X"
+    was scored FALSE even when ``python.tests.mutation_score.v1`` had run every mutant and
+    written the arithmetic down: measured 2026-10-31, that run produced two mutants, both
+    killed, ``mutation_score: 1.0``.  The sentence names a MEASUREMENT, not a diff gate, so both
+    shapes are accepted -- but only against the evidence, never against a self-report: the score
+    row must have actually enumerated its mutants and the arithmetic must close.
+    """
     for doc in _artifacts(r):
         if doc.get("schema") == "PROJECT_BRAIN_DIFF_MUTATION_GATE_V1" \
                 and doc.get("gate") == "PASS" \
                 and isinstance(doc.get("kill_ratio"), (int, float)):
             return True
+        if doc.get("schema") != "PROJECT_BRAIN_PYTHON_TESTS_MUTATION_SCORE_V1":
+            continue
+        mutants = doc.get("mutants")
+        total = doc.get("total_mutants")
+        score = doc.get("mutation_score")
+        if not isinstance(mutants, list) or not mutants or not isinstance(total, int) or total < 1:
+            continue
+        if len(mutants) != total or not isinstance(score, (int, float)):
+            continue
+        killed = sum(1 for m in mutants if isinstance(m, dict) and m.get("status") == "killed")
+        survived = sum(1 for m in mutants if isinstance(m, dict) and m.get("status") == "survived")
+        if killed + survived != total:
+            continue
+        if abs(float(score) - killed / total) > 1e-9:
+            continue
+        return True
     return False
 
 
