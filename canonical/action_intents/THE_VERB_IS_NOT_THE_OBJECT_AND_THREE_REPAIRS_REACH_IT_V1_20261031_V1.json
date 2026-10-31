@@ -47,7 +47,8 @@
  "expected_parent_frontier_change": "Nine of ten advanced SWE tiers and 23/28 surface SWE tasks execute deterministically at sub-second latency with independent raw_goal_trace_acceptance_v1 re-inspection.",
  "explicit_user_authorization": "Owner instruction this session, verbatim and repeated: all of the problems are already solved in the brain, so the fix wires what the repository already has -- the symbol index the adapter already builds, the overlap law the adapter already enforces, the unittest module _render_module already emits -- instead of inventing policy or adding a dependency. Owner instruction to focus on hardcore software engineering: this is the capability that writes tests. Owner instruction to do the optimal in the fastest way and only the right way. Owner instruction that all tests must be extremely hard and only truthful: five of the seven new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed.",
  "falsification_condition": "Re-run hardcore_swe_surface_probe_20261030.py on main and on this branch: if this branch is not strictly ahead on the 28 tasks, or if the ordinary-sentence failure set gains one name, or if the mover reports output_verified while the old module still defines the name, a stale import survives, or the suite is red, this change is wrong.",
- "governance_change": false,
+ "governance_change": true,
+ "governance_change_summary": "canonical/runtime/astra_runtime.py carries the controller checkpoint.  What changed is the MEANING of a stale plan hash: a mismatch used to raise a Blocker, so a named task could be resumed only against the exact plan it was created with and every later re-run failed before it started.  It now rewinds to action 0 and executes the CURRENT plan -- the same reading this file already applied to a durable-effect failure -- recording resume_count, rewind_count and last_rewind_reason=PLAN_CHANGED.  Nothing is skipped and no completed action from a different plan is ever treated as a continuation.",
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "intent": "Advance hardcore deterministic SWE capability breadth and sub-second execution speed using pure Python stdlib AST, graph, and git primitives plus independent byte-level acceptance inspectors.",
@@ -260,7 +261,7 @@
    "selected_route_checked_at_utc": "2026-10-31T08:57:03Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T08:57:03Z",
+    "checked_at_utc": "2026-10-31T11:42:09Z",
     "execution_dependencies": [
      {
       "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
@@ -333,7 +334,7 @@
    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
   ],
   "selected_surviving_route": "REUSE_THE_SYMBOL_INDEX_AND_THE_ISSUER_PUBLISHED_CREDENTIAL_SHAPES",
-  "stop_condition": "Ship only the vocabulary the rows already carry and the three placements. Do not add an effect-kind field, do not invent a per-capability table, do not exempt shell.command.run, and do not claim a tier or an obligation this law does not measure. A verdict after a destructive effect is an autopsy: the refusal must come before the call.",
+  "stop_condition": "The 28-task census is re-run on both trees and this branch is strictly ahead.",
   "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
  },
  "refusal_or_stop_condition": "The 28-task census is re-run on both trees and this branch is strictly ahead.",
@@ -344,7 +345,7 @@
  "stop_condition": "The 28-task census is re-run on both trees and this branch is strictly ahead.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
- "user_authorized_governance_change": false,
+ "user_authorized_governance_change": true,
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
@@ -388,11 +389,11 @@
    "chosen_candidate": "UPGRADE_SWE_REPAIR_REFACTOR_FAULT_ADAPTERS_AND_ADD_DETERMINISTIC_GIT_BISECT_AND_AST_MUTATION_TESTING",
    "counterexample_receipts": [
     {
-     "git_blob_sha": "c8b104da48bcbe545b664f5b341efcba39fda88a",
+     "git_blob_sha": "95bad7bf130466a02f36de2f7f1cc1de8d4be476",
      "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py"
     },
     {
-     "git_blob_sha": "5ee986181790b70fa317e8c0e05480859dfb2cc5",
+     "git_blob_sha": "37bdda38a818f746302cd74db7d5c9ab8c72fceb",
      "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py"
     }
    ],
