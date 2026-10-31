@@ -21810,7 +21810,8 @@
    "input_names": [
     "limit",
     "message",
-    "op"
+    "op",
+    "repo_root"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -24031,7 +24032,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "f30733a3f7217142967384ffe61d2805e905c67df41af1fe812dfc6ce1258835",
+    "source_sha256": "d70b5aa94954fde631f837294d54cb65aa4e963118e34244aac033b48b1cb129",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25190,22 +25191,10 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "argparse",
-     "coverage",
-     "git",
-     "hashlib",
-     "json",
-     "os",
-     "pathlib",
-     "pytest",
-     "shutil",
-     "subprocess",
-     "sys"
+     "stdlib"
     ],
-    "declared_dependency_executables": [
-     "git"
-    ],
-    "kind": "PACKAGE_OR_SYSTEM_TOOL"
+    "declared_dependency_executables": [],
+    "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
    "id": "python.review.diff_coverage_gate.v1",
@@ -25230,10 +25219,10 @@
    ],
    "provenance": {
     "source_executable": null,
-    "source_module": "coverage",
+    "source_module": "stdlib",
     "source_path": null,
     "source_sha256": null,
-    "source_type": "pypi"
+    "source_type": "python_stdlib"
    },
    "provides": [
     "python.review.diff_coverage_gate"
@@ -25434,17 +25423,10 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "argparse",
-     "ast",
-     "bandit",
-     "hashlib",
-     "json",
-     "pathlib",
-     "subprocess",
-     "sys"
+     "stdlib"
     ],
     "declared_dependency_executables": [],
-    "kind": "PACKAGE_OR_SYSTEM_TOOL"
+    "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
    "id": "python.review.diff_security_gate.v1",
@@ -25468,10 +25450,10 @@
    ],
    "provenance": {
     "source_executable": null,
-    "source_module": "bandit",
+    "source_module": "stdlib",
     "source_path": null,
     "source_sha256": null,
-    "source_type": "pypi"
+    "source_type": "python_stdlib"
    },
    "provides": [
     "python.review.diff_security_gate"
@@ -27235,11 +27217,11 @@
     "scan"
    ],
    "verification": {
-    "evidence_path": null,
+    "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": null,
-    "independent_verification_evident": false,
-    "mission_id": null,
+    "evidence_sha256": "687a2328da8131972e30d8e069de0769355db695e9f0528ff234ecc207baa8c2",
+    "independent_verification_evident": true,
+    "mission_id": "ASTRA-VERIFY-SECRET-SCAN-001",
     "module_sha256": null,
     "producer_independent": null
    }
@@ -27464,11 +27446,11 @@
     "flow"
    ],
    "verification": {
-    "evidence_path": null,
+    "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": null,
-    "independent_verification_evident": false,
-    "mission_id": null,
+    "evidence_sha256": "9896b7141ad8bb04c575ec6cbc8991b97e1a3dffa1476c499d12184be726ec88",
+    "independent_verification_evident": true,
+    "mission_id": "ASTRA-VERIFY-TAINT-FLOW-001",
     "module_sha256": null,
     "producer_independent": null
    }
@@ -28824,7 +28806,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "f26961cf4a1a4c7f108d77afe809a4a9c810b9f265cdadb3f838050efabd8caa",
+    "source_sha256": "f0dd0c0421df2f11e675385a4cd1619e12d5658254e37a6de2ff664ad9f46135",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30493,7 +30475,7 @@
   "engines": 26,
   "knowledge_documents": 208,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6534,
+  "research_index_records": 6536,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30502,7 +30484,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1e51bb64a1ca3710645a2258bcf129913d5a5a5b2216108bed58fd460d461c24"
+  "value": "700d76da8639afa134ff9cef993cf25dd4722cc3f6ef13add3132987cb996d13"
  },
  "engines": [
   {
@@ -57908,7 +57890,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 14450,
+   "bytes": 16367,
    "headings": [
     "SWE mechanism reuse and current-main integration — 2026-10-31",
     "Changes",
@@ -57919,58 +57901,59 @@
     "Latest-main integration and report provenance",
     "Compiled-model and admission checks",
     "Existing-output source-role regression",
-    "Final current-main controls and census"
+    "Final current-main controls and census",
+    "Final intent/scope and framework-semantics repair"
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_REUSE_INTEGRATION_20261031.md",
-   "sha256": "ea65f691019139927b1106a7e093a5ab105e3ca9cc4db2a745c1c7aa96d1e1f5",
+   "sha256": "a952b8626e22393750d2c69cac4e7ca5fe1e5f29ca5c7ac9286502871e27033c",
    "summary": "Local sandbox measurement; authority NONE. This report is not a terminal-goal claim or an independent runtime-verification receipt. The signed referee judges repository integrity separately; it does not turn a failing test into a pass.",
    "terms": {
     "166": 4,
     "33": 4,
-    "577-case": 5,
+    "577-case": 6,
+    "above": 4,
+    "actual": 4,
     "admission": 6,
     "all": 5,
-    "also": 5,
-    "both": 4,
+    "also": 6,
+    "both": 5,
     "cache": 4,
     "cannot": 4,
     "canonical": 42,
     "canonical.tests.test_live_brain_route_admission_v1": 4,
     "case": 4,
-    "cases": 5,
+    "cases": 6,
     "census": 5,
     "checks": 9,
+    "commit": 4,
     "compiler": 5,
-    "controls": 10,
-    "current": 6,
+    "controls": 11,
+    "current": 7,
     "earlier": 4,
-    "execution": 5,
-    "existing": 8,
-    "failed": 4,
-    "final": 9,
-    "including": 4,
-    "independent": 4,
-    "index": 4,
-    "integration": 4,
-    "joint": 4,
-    "local": 4,
-    "main": 10,
-    "measurement": 4,
-    "merged": 4,
+    "execution": 6,
+    "existing": 12,
+    "final": 11,
+    "git": 5,
+    "including": 5,
+    "integration": 5,
+    "main": 11,
     "model": 10,
-    "new": 8,
-    "no": 7,
-    "not": 20,
-    "now": 7,
-    "original": 8,
+    "new": 9,
+    "no": 9,
+    "not": 23,
+    "now": 9,
+    "original": 9,
     "pass": 6,
-    "passed": 11,
-    "passing": 4,
+    "passed": 12,
+    "passing": 6,
+    "repair": 5,
     "report": 5,
-    "retained": 7,
-    "run": 8,
-    "source": 6,
+    "retained": 8,
+    "run": 10,
+    "scope": 7,
+    "source": 11,
+    "test": 5,
     "tests": 51,
     "verifier": 5,
     "zero": 5
@@ -58012,10 +57995,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 997,
+  "included_source_count": 999,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1346b49d71db90697b9afa1a74ad3f44662a4739e1157c9cd8752c4c0cfd0695"
+  "source_tree_digest": "1c55cb9f855e8c2ba1bc443b0b5c32388be4c1c9ee5fdb1abee24047eb703372"
  },
  "research_index": [
   {
@@ -201803,6 +201786,51 @@
    }
   },
   {
+   "action_id": "A_PATH_IS_NOT_PROSE_WHEN_THE_COMPILER_SCORES_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_PATH_IS_NOT_PROSE_WHEN_THE_COMPILER_SCORES_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_PATH_IS_NOT_PROSE_WHEN_THE_COMPILER_SCORES_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "030d56c8da262e1fb20891b9ea2a057428e35b82d1ed14d3dbe7eb18430b85f0",
+   "status": "",
+   "terms": {
+    "137": 2,
+    "18": 2,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 2,
+    "a_path_is_not_prose_when_the_compiler_scores_v1_20261031_v1": 1,
+    "alone": 1,
+    "ambiguous": 1,
+    "audit": 2,
+    "because": 2,
+    "both": 1,
+    "capability_audit.pdf": 1,
+    "ci": 1,
+    "clause": 2,
+    "compiler": 3,
+    "composer": 2,
+    "compound": 1,
+    "contains": 1,
+    "create": 1,
+    "decided": 1,
+    "document.convert.markdown_pdf.pandoc_weasyprint": 1,
+    "existed": 1,
+    "filename": 3,
+    "not": 2,
+    "prose": 2,
+    "python.source.audit.ast": 2,
+    "scores": 2,
+    "sentence": 2,
+    "stay": 2,
+    "tests": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_PATH_WRITTEN_ABSOLUTE_OR_WITH_A_LEADING_DOT_SLASH_NAMES_THE_FILE_IT_STATES_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -208601,7 +208629,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "a56b951044a833d739a2490903d538b911bff1720049f07a399a627652c70029",
+   "sha256": "dc746e09efc16f3c11161d7aff0e6b6c05d1441101a10ef5f9a0c4d1acaf94d2",
    "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
    "terms": {
     "166-case": 1,
@@ -210565,6 +210593,51 @@
     "unified": 1,
     "unified_model_status_source_index_reporting_fix_v1_20261021_v1": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "UNIVERSAL_STDLIB_SWE_REVIEW_GATES_AND_TYPED_FILE_DISAMBIGUATION_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/UNIVERSAL_STDLIB_SWE_REVIEW_GATES_AND_TYPED_FILE_DISAMBIGUATION_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/UNIVERSAL_STDLIB_SWE_REVIEW_GATES_AND_TYPED_FILE_DISAMBIGUATION_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d1b3b481479177f09c9878dad7ff0f96d53696265e7c0d294f3833a0276fa0d4",
+   "status": "",
+   "terms": {
+    "17": 1,
+    "184ms": 1,
+    "19": 1,
+    "20261031": 1,
+    "3.11": 1,
+    "54": 2,
+    "88": 2,
+    "bandit": 1,
+    "capabilities": 1,
+    "clean": 1,
+    "coverage": 2,
+    "damaged": 1,
+    "directory": 1,
+    "disambiguation": 1,
+    "environments": 1,
+    "failed": 1,
+    "false": 1,
+    "fell": 1,
+    "file": 1,
+    "file-scoped": 1,
+    "filenames": 1,
+    "four": 1,
+    "gates": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal_compiler": 1,
+    "inside": 1,
+    "lacking": 1,
+    "measurement": 1,
+    "median": 1,
+    "real": 2,
+    "review": 2,
+    "swe": 3
    }
   },
   {
@@ -216622,17 +216695,27 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/_swe_static_soundness_v1.py",
-   "sha256": "1cbe9639eb3c54b64946851d484ff12ab190c0a8247481ffd99db13d3fad5a4d",
-   "summary": "Shared active-registry loader and deterministic stdlib Python static/type/security analyzer.",
-   "symbol_count": 7,
+   "sha256": "bdb3e6244d525f4fe796a36685ee6f26f10094733b7373f89aaee05371ada85c",
+   "summary": "Shared active-registry loader and deterministic stdlib Python static/type/security/coverage analyzer.",
+   "symbol_count": 17,
    "symbols": [
     "_collect_bound_names",
+    "_compatible_types",
     "_matches_prim_annotation",
+    "_norm_base_type",
     "_sig_spec",
     "active_bound_registry_path",
     "analyze_python_module_ast",
     "analyze_python_static_soundness",
-    "load_active_bound_registry"
+    "has_pytest",
+    "lint_python_source",
+    "load_active_bound_registry",
+    "measure_coverage_stdlib",
+    "python_interpreter_works",
+    "run_universal_tests",
+    "security_scan_python_source",
+    "typecheck_python_source",
+    "universal_test_argv"
    ],
    "terms": {
     "active-registry": 1,
@@ -216641,12 +216724,21 @@
     "analyze_python_static_soundness": 1,
     "analyzer": 1,
     "collect_bound_names": 1,
+    "compatible_types": 1,
+    "coverage": 1,
     "deterministic": 1,
+    "has_pytest": 1,
+    "lint_python_source": 1,
     "load_active_bound_registry": 1,
     "loader": 1,
     "matches_prim_annotation": 1,
+    "measure_coverage_stdlib": 1,
+    "norm_base_type": 1,
     "python": 1,
+    "python_interpreter_works": 1,
+    "run_universal_tests": 1,
     "security": 1,
+    "security_scan_python_source": 1,
     "shared": 1,
     "sig_spec": 1,
     "soundness": 1,
@@ -216654,6 +216746,8 @@
     "stdlib": 1,
     "swe": 1,
     "type": 1,
+    "typecheck_python_source": 1,
+    "universal_test_argv": 1,
     "v1": 1
    }
   },
@@ -217836,7 +217930,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
-   "sha256": "ab7037bce8fe91052a48f7358a9687575c3e6678f8811375465da75f928326e8",
+   "sha256": "12503a125a76b36c020446dccac2d29c36d76d2e93caf7bd75c1ecd7d8b6922e",
    "summary": "python.refactor.extract_function.v1 — scope-aware statement-block",
    "symbol_count": 8,
    "symbols": [
@@ -218090,7 +218184,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py",
-   "sha256": "b20d832c7c46fd124ca55f54fe1ac0197c44227c52410ae75758615ee21bec9e",
+   "sha256": "2d64808961d0b2594196d081d62f9c5ad8ca4c8f9e3d50e8771b06f5ddb9effa",
    "summary": "python.review.diff_coverage_gate.v1 — every changed line must be",
    "symbol_count": 5,
    "symbols": [
@@ -218126,7 +218220,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py",
-   "sha256": "b24b7eda796ae04243eaaa2b53d7d4616ec35124ca5eb19bf0819f10cf064ab5",
+   "sha256": "d0934328a87b521418869c230484d50ca8a4ab62119df5e11fd28c515db48a49",
    "summary": "python.review.diff_mutation_gate.v1 — every changed executable line",
    "symbol_count": 10,
    "symbols": [
@@ -218205,7 +218299,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_security_gate.py",
-   "sha256": "44c9c630a3303280d96227bb2482411b2899620c2bcb04da845b54f09bc25ca7",
+   "sha256": "0e065da2f4306c8d6e21cf44b3ea5866cab681b1828b456d4e05c9f594f57d56",
    "summary": "python.review.diff_security_gate.v1 — security triage on changed lines.",
    "symbol_count": 6,
    "symbols": [
@@ -218278,7 +218372,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_type_gate.py",
-   "sha256": "22b73dd4bdc499c1d7fc77893df013c4373d96bcda6d33030413f04cb706d4ce",
+   "sha256": "c6c566625e2a118323f15f844df3d1754f8f70661b8b637471211cbd6f587a58",
    "summary": "python.review.diff_type_gate.v1 — the type-soundness gate on the diff.",
    "symbol_count": 5,
    "symbols": [
@@ -230677,7 +230771,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "0e4016df8aacfa7c036292e27ea478a7709aa490b1afbb2d2f861a46fa868c8c",
+   "sha256": "489d86e865a00dcebbd375f3343524c4c249b423e088962293ed473400a2ca64",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 16,
    "symbols": [
@@ -238448,9 +238542,9 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "e0a1f64c2fa9d699a549d695691e4eeff188d2ffd89f34f3c29177affe28d71b",
+   "sha256": "bb256366613bfb05aeb4a3297c31af1745f7f34950bb6a5ddc2c519ab57471d8",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
-   "symbol_count": 132,
+   "symbol_count": 134,
    "symbols": [
     "GoalCompilationFailure",
     "_adapter_default_argv",
@@ -238483,9 +238577,9 @@
     "brain": 1,
     "claimed_paths": 1,
     "compiler": 2,
-    "complete_inputs_via_world_binding": 1,
     "context_path_for_key": 1,
     "current_runtime_platform": 1,
+    "declared_exact_file_scope": 1,
     "deterministic": 1,
     "extract_goal_argument": 1,
     "extract_text_argument": 1,
@@ -244862,9 +244956,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "3291b1bbea37acd095162f9bec936e8dbbba024ee000400f6fffdbfdafbc72fc",
+   "sha256": "92035295c7739962f26a49e3a696f9da4da3eac0f0efb673bde6c88d5650085e",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 92,
+   "symbol_count": 93,
    "symbols": [
     "LocalExecutionFailure",
     "_asks_only_for_a_plan",
@@ -244894,7 +244988,6 @@
    "terms": {
     "admission": 2,
     "brain": 2,
-    "check_expectation": 1,
     "controller_passed": 1,
     "dag_admission": 1,
     "dag_contract_errors": 1,
@@ -244906,6 +244999,7 @@
     "front": 1,
     "future_artifacts": 1,
     "goal_names_a_file": 1,
+    "input_format_mismatch": 1,
     "inventory_source_path": 1,
     "kernel_refuses": 1,
     "last_json_object": 1,
@@ -274540,7 +274634,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "924807df56b743a4d4ee11a8cad91e96d6b1b15325627d15f018d079a9ef4c65",
+   "sha256": "0997cc622f72f1ab461f5d5ad7c15030a93d103fca716ec9a3bc2e5614c03ca4",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 16,
    "symbols": [
@@ -282542,7 +282636,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/verify_bound_capability_provenance_v1.py",
-   "sha256": "07c5857bdad185497a13ab4247bfce814b5a6cdd5cd14f7857830cbf9386ffcd",
+   "sha256": "3db3242a054dfa3fc2098f790b197428f40dbea40607aecdd6d15daea2fe9e2f",
    "summary": "Provenance for bound capability rows -- re-derivable, not asserted.",
    "symbol_count": 30,
    "symbols": [
@@ -283242,7 +283336,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_binding_v1.py",
-   "sha256": "2a319ef9d9d7b86e0b0c5af62ea098285e3d59a8c30ef8cc65ce18ff18394863",
+   "sha256": "1de54d868f3e13155f7a936765be6146ecf17e2741837cd37dcb0777ec1f75b2",
    "summary": "Complete a capability's inputs when the goal does not state all of them.",
    "symbol_count": 22,
    "symbols": [

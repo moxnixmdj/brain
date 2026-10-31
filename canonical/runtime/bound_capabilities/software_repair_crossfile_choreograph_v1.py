@@ -351,9 +351,12 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
     mod_names: list[str] = []
     for p in prod_files:
         try:
-            ast.parse(p.read_bytes())
+            raw_src = p.read_bytes()
+            ast.parse(raw_src)
         except (SyntaxError, ValueError, OSError) as exc:
             return False, 0, f"SYNTAX_ERROR:{p.name}:{exc}"
+        if b"parse_args(" in raw_src and b"__main__" not in raw_src:
+            continue
         rel = p.relative_to(proj).with_suffix("")
         parts = list(rel.parts)
         if parts[-1] == "__init__":
@@ -361,37 +364,30 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         if parts:
             mod_names.append(".".join(parts))
 
-    checker = (
-        "import importlib, json, pathlib, sys, unittest\n"
+    # Reuse the counted framework-aware executor used by repair and tracing.
+    # Calling bare functions ourselves ignores pytest skip/fixture/parametrize
+    # semantics and can certify an all-skipped suite as a successful repair.
+    from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import SUITE_RUNNER
+    checker = SUITE_RUNNER + (
+        "import importlib, json\n"
         "proj = pathlib.Path(sys.argv[1]).resolve()\n"
         "tdir = pathlib.Path(sys.argv[2]).resolve()\n"
         "repeats = int(sys.argv[3])\n"
         "mods = json.loads(sys.argv[4])\n"
+        "sys.argv[:] = [sys.argv[0]]\n"
         "sys.path.insert(0, str(proj))\n"
-        "for m in mods:\n"
-        "    importlib.import_module(m)\n"
+        "targets = [p for p in sorted(tdir.rglob('*.py')) if '__pycache__' not in p.parts and (p.name.startswith('test_') or p.name.endswith('_test.py'))]\n"
         "total_ran = 0\n"
         "for _ in range(repeats):\n"
         "    for k, v in list(sys.modules.items()):\n"
         "        f = getattr(v, '__file__', None)\n"
-        "        if f:\n"
-        "            fp = pathlib.Path(f).resolve()\n"
-        "            if fp == proj or proj in fp.parents:\n"
-        "                sys.modules.pop(k, None)\n"
+        "        if f and proj in pathlib.Path(f).resolve().parents:\n"
+        "            sys.modules.pop(k, None)\n"
         "    for m in mods:\n"
         "        importlib.import_module(m)\n"
-        "    if tdir.is_dir():\n"
-        "        top = str(proj) if (tdir == proj or (tdir / '__init__.py').is_file()) else str(tdir)\n"
-        "        suite = unittest.TestLoader().discover(start_dir=str(tdir), top_level_dir=top)\n"
-        "        res = unittest.TestResult()\n"
-        "        suite.run(res)\n"
-        "        total_ran += max(0, res.testsRun - len(res.skipped))\n"
-        "        if res.failures or res.errors:\n"
-        "            print(json.dumps({'ok': False, 'ran': res.testsRun, 'err': str((res.failures + res.errors)[0][1])[-240:]}))\n"
-        "            raise SystemExit(1)\n"
+        "    total_ran += _brain_run_suites(targets)\n"
         "if total_ran <= 0:\n"
-        "    print(json.dumps({'ok': False, 'ran': 0, 'err': 'NO_TESTS_EXECUTED'}))\n"
-        "    raise SystemExit(1)\n"
+        "    raise RuntimeError('NO_TESTS_EXECUTED')\n"
         "print(json.dumps({'ok': True, 'ran': total_ran}))\n"
     )
     env = dict(os.environ)
@@ -1450,7 +1446,11 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if edited is None:
         base_ok, _ran, _err = _verify_project(proj, test_dir)
         if not base_ok:
-            edited = _try_test_guided_repair(proj, test_dir, focus) if ((proj / "tests").is_dir() or (src / "tests").is_dir()) else None
+            _has_tests = test_dir.is_dir() and any(
+                "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
+                for p in test_dir.rglob("*.py")
+            )
+            edited = _try_test_guided_repair(proj, test_dir, focus) if _has_tests else None
             if edited is not None:
                 mode_applied = "test_guided_ast_repair"
             else:

@@ -231,3 +231,33 @@ Its incoming diff adds the inventory Markdown and its generated model index;
 no runtime source changed. The combined model was regenerated and subjected to
 the fresh 33-case verifier; the 205-case/census measurements above retain their
 original measured-source attribution.
+
+## Final intent/scope and framework-semantics repair
+
+Integrated main `e25e8b5c92` (PR6472 path-as-data scoring and PR6471 static
+soundness/file disambiguation), preserving the existing interprocedural sanitizer
+context controls and native non-vacuous verification. This integration is tested
+against actual current source, never a donor checkout.
+
+Two matrix failures were reproduced, not presumed pre-existing: quoted commit
+messages containing “fix” could promote a Git operation into a source repair;
+and the world-binding fallback widened a named counting subject to its parent.
+Reuse fixes both: `prose_only` plus repair-contract eligibility governs promotion;
+the same declaration-aware file selector now governs primary and fallback scope.
+The existing Git adapter's repository argument is exposed and bound explicitly.
+A non-repository directory or ambiguous pair must not default to its parent.
+The adapter continues committing only staged changes; no broad staging is added.
+
+Incoming native plain-test execution also ignored pytest skip markers. Reproduced
+an all-skipped suite being certified as one successful test. Replaced that ad-hoc
+executor with the **existing shared SUITE_RUNNER**, exposing its positive passing
+count without changing failure semantics. Real pytest now handles markers,
+fixtures and parametrization, and empty/all-skipped runs remain refusals.
+
+**11 new regression cases**, including real commits in isolated fixture
+repositories, preserve source bytes and compare actual commit messages/objects.
+The latest focused run (new11, joint20, stated-report17, stated-defect3) measured
+**51 passed in 12.19 s**. Existing wrong-operation/scope reports are not retained
+as passing evidence. Historical 577-case and 205-case measurements above keep
+their original source attribution; a fresh expanded run is required for the
+final source, and no whole-repository green claim is made.

@@ -232,6 +232,20 @@ def declared_object_roles(entry: Mapping[str, Any]) -> set[str]:
     return {role for role, names in _ROLE_SLOTS if slots & names}
 
 
+def _input_format_mismatch(cid: str, inputs: Any) -> str | None:
+    if not isinstance(inputs, Mapping):
+        return None
+    if cid == "decision.synthesis.typed.stdlib":
+        ip = str(inputs.get("input_path") or "").strip()
+        if ip and not ip.lower().endswith(".json"):
+            return "INPUT_FORMAT_MISMATCH:decision.synthesis.typed.stdlib:json_required"
+    if cid == "python.tests.mutation_score.v1":
+        sr = str(inputs.get("source_root") or "").strip()
+        if sr and (ROOT / sr).is_file() and not sr.lower().endswith((".py", ".pyi")):
+            return "INPUT_FORMAT_MISMATCH:python.tests.mutation_score.v1:python_required"
+    return None
+
+
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
     """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
     dag = compiled.get("capability_dag")
@@ -240,9 +254,18 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     selected = str(compiled.get("selected_capability") or "").strip()
     mode = compiled.get("compiler_mode")
     if not selected:
+        for part in (compiled.get("compiled_parts") or []):
+            if isinstance(part, Mapping):
+                pcid = str(part.get("selected_capability") or "").strip()
+                fmt_err = _input_format_mismatch(pcid, part.get("inputs"))
+                if fmt_err:
+                    return {"schema": SCHEMA, "admitted": False, "rule": fmt_err, "compiler_mode": mode, "selected_capability": pcid}
         # Controller plans (literal JSON, exact literal, compound) are shaped by explicit
         # grammar matches, not by token overlap; nothing to re-judge here.
         return {"schema": SCHEMA, "admitted": True, "rule": None, "compiler_mode": mode, "selected_capability": None}
+    fmt_err = _input_format_mismatch(selected, compiled.get("inputs"))
+    if fmt_err:
+        return {"schema": SCHEMA, "admitted": False, "rule": fmt_err, "compiler_mode": mode, "selected_capability": selected}
     entry = registry.get(selected)
     if entry is None:
         return {"schema": SCHEMA, "admitted": False, "rule": "SELECTED_CAPABILITY_NOT_ADMISSIBLE", "selected_capability": selected}
@@ -557,6 +580,9 @@ def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any]
         if not isinstance(entry, Mapping):
             return {**base, "admitted": False, "rule": "DAG_CAPABILITY_NOT_ADMISSIBLE", "dag_steps": rows,
                     "failed_capability_id": cid}
+        fmt_err = _input_format_mismatch(cid, step.get("inputs"))
+        if fmt_err:
+            return {**base, "admitted": False, "rule": fmt_err, "dag_steps": rows, "failed_capability_id": cid}
         from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
         effect_error = implementation_effect_error(clause, [cid], registry)
         if effect_error:
@@ -1961,6 +1987,14 @@ def stated_application_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     if not any(_intent_verb_matches(_APPLICATION_REQUEST_RE, text)) or _REPORT_DESTINATION_RE.search(text):
         return []
     cid = str(entry.get("capability_id") or entry.get("id") or "")
+    adapter_mod = str(entry.get("adapter_module") or "")
+    if (cid == "software.repair.choreograph.crossfile.v1"
+            or adapter_mod == "software_repair_crossfile_choreograph_v1") and re.search(
+        r"\b(?:circular\s+import|import\s+cycle|merge\s+conflict|sql\s+injection|race\s+condition|deadlock|deprecated)\b",
+        text,
+        re.IGNORECASE,
+    ):
+        return []
     surface = " ".join([cid,
                         " ".join(str(x) for x in (entry.get("provides") or [])),
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
@@ -3698,7 +3732,7 @@ def _typed_plan_is_stated(request: Any) -> bool:
         # an effect family, the row that DECLARES that family is the answer; the family's own
         # plan then runs through the same gate chain, so nothing is skipped by being first.
         token = _typed.stated_family_token(goal)
-        if token == _typed.GIT_FAMILY_TOKEN:
+        if token in (_typed.GIT_FAMILY_TOKEN, "extract", "security", "coverage", "mutation", "perf"):
             return True
         # The CHANGE-SET QUESTION, and only that shape.  Measured 2026-10-31: "Which files must
         # change to rename the symbol `mul` to `multiply` in <dir>?" was answered by a definitions

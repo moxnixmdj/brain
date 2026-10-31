@@ -94,7 +94,7 @@ _FAMILIES = ((('move the function', 'move the class', 'move symbol', 'relocate f
    'does not pass',
    "doesn't pass"),
   ('apply the repair', 'repair.apply', 'verified_repair_applied', 'write the fix'),
-  'apply'),
+  'repair'),
  (('into a new function', 'pull out into'), ('extract', 'refactor'), 'extract'),
  (('which files must change',
    'what has to change',
@@ -146,12 +146,10 @@ def stated_family_token(goal: str) -> str | None:
 # subordinate clause is not what the sentence asked for.  Measured 2026-10-31:
 # "Add a parameter qty with a default value to the function line_total in X and
 # update every caller so behaviour is unchanged" contains "caller", so the caller
-# family claimed AUTHORITY over an add-a-parameter request, its single admitted
-# candidate was the symbol index, and R10 then rejected the plan because a
-# caller inventory does not deliver a signature change -- 4 of 28 tasks that a
-# lower-bound reading of the same registry does serve.  The triggering noun is
-# in the second clause: the sentence's own governing clause decides its effect.
-_CLAUSE_BREAK = re.compile(r"(?:[.;!?]|,\s*$|\s+(?:and|then|so|but)\s+)", re.I)
+# family claimed AUTHORITY over an add-a-parameter request and the symbol index
+# was executed for a signature change.  The sentence's own governing clause
+# decides its effect.
+_CLAUSE_BREAK = re.compile(r"(?:\.(?=\s|$)|[;!?]|,\s*$|\s+(?:and|then|so|but)\s+)", re.I)
 
 
 def _governing_clause(text: str) -> str:
@@ -400,6 +398,8 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     operations = derivation.stated_git_operations(goal) if token == GIT_FAMILY_TOKEN else ()
     if len(operations) > 1 or (operations and re.search(r"\bbisect\b", front.prose_only(goal), re.I)):
         return None  # a history noun must not turn a bisection into a log read
+    if operations and len(derivation._stated_directories(goal, root)) > 1:
+        return None  # an optional repository slot must never erase scope ambiguity
     candidates: list[str] = []
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
@@ -457,6 +457,18 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         if (decision.get("admitted") and decision.get("specific")
                 and (not operations or (decision.get("inputs") or {}).get("op") == operations[0])):
             admitted.append((cid, dict(decision.get("inputs") or {})))
+    if len(admitted) > 1:
+        stated_py = {
+            p for p in derivation.stated_existing_files(goal, root)
+            if p.endswith(".py")
+        }
+        if stated_py:
+            exact_file_admitted = [
+                (cid, inp) for cid, inp in admitted
+                if "diff_path" in inp or "module" in inp
+            ]
+            if len(exact_file_admitted) == 1:
+                admitted = exact_file_admitted
     if len(admitted) != 1:
         return None  # ambiguous / none -> fail closed
     cid, inputs = admitted[0]
@@ -482,8 +494,9 @@ _APPLYING_REPAIR_CAPABILITY = "python.software.repair.apply.verified.v1"
 
 
 def _states_a_repair(goal: str) -> bool:
-    low = str(goal or "").lower()
-    return any(word in low for word in _REPAIR_EFFECT_WORDS)
+    low = front.prose_only(str(goal or "")).lower()
+    return any(re.search(r"\b" + re.escape(word) + r"\b", low)
+               for word in _REPAIR_EFFECT_WORDS)
 
 
 def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict,
@@ -495,7 +508,12 @@ def _prefer_the_writing_repair(goal: str, cid: str, inputs: dict, registry: dict
     caller keeps the capability it already had -- nothing is fabricated, and a
     sentence that names no test stays on the read-only path exactly as before.
     """
-    if not _states_a_repair(goal) or cid == _APPLYING_REPAIR_CAPABILITY:
+    # This optimization promotes a repair search, never a different operation.
+    # Quoted messages and path components cannot authorize a source write.
+    effects = (registry.get(cid) or {}).get("provides") or []
+    repair_contract = any("repair" in str(e) or "patch.candidate" in str(e)
+                          or "patch.search" in str(e) for e in effects)
+    if not repair_contract or not _states_a_repair(goal) or cid == _APPLYING_REPAIR_CAPABILITY:
         return cid, inputs
     entry = registry.get(_APPLYING_REPAIR_CAPABILITY)
     if not entry:

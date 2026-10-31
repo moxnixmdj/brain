@@ -783,13 +783,14 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                                 "evidence": ",".join(stated_change)}
     stated_python = [f for f in files if f.endswith(".py")]
     base = "."
-    parents = {str(pathlib.PurePosixPath(f).parent) for f in stated_python}
-    if len(parents) == 1:
-        candidate = parents.pop().strip("./") or "."
-        if candidate != "" and (pathlib.Path(root) / candidate).is_dir():
-            base = candidate
+    if "anchor_path" in keys:
+        parents = {str(pathlib.PurePosixPath(f).parent) for f in stated_python}
+        if len(parents) == 1:
+            candidate = parents.pop().strip("./") or "."
+            if candidate != "" and (pathlib.Path(root) / candidate).is_dir():
+                base = candidate
     if "diff_path" in keys and stated_python:
-        change_set = _stated_change_set(stated_python, root, base)
+        change_set = _stated_change_set(stated_python, root, base, apply_in_place=("anchor_path" in keys))
         if change_set is not None:
             out["diff_path"] = change_set
             if "worktree_path" in keys:
@@ -832,6 +833,37 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                                    "evidence": _wanted[:80]}
                 out["new_name"] = {"value": _named.group(1), "rule": "NAME_FROM_STATED_NEW_NAME",
                                    "evidence": goal[:120]}
+                out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                 "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
+        elif re.search(r"\bextract\s+the\s+loop\b", str(goal or ""), re.IGNORECASE):
+            try:
+                _text = (pathlib.Path(root) / sources[0]).read_text(encoding="utf-8", errors="replace")
+                _tree = ast.parse(_text)
+            except (OSError, SyntaxError):
+                _tree = None
+            _fn_hint = re.search(r"\b(?:function|method|in)\s+([A-Za-z_][A-Za-z0-9_]*)\b", str(goal or ""), re.I)
+            _want_fn = _fn_hint.group(1) if _fn_hint else None
+            _loops: list[tuple[str, int, int]] = []
+            if _tree is not None:
+                for _fn in ast.walk(_tree):
+                    if not isinstance(_fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    if _want_fn and _fn.name != _want_fn:
+                        continue
+                    for _st in _fn.body:
+                        if isinstance(_st, (ast.For, ast.AsyncFor, ast.While)):
+                            _loops.append((_fn.name, _st.lineno, _st.end_lineno))
+            if len(_loops) == 1:
+                _fn_name, _start, _end = _loops[0]
+                _helper_nm = _named.group(1) if _named else f"_{_fn_name}_loop"
+                out["qualname"] = {"value": _fn_name, "rule": "QUALNAME_FROM_STATED_LOOP_FUNCTION",
+                                   "evidence": sources[0]}
+                out["start_line"] = {"value": _start, "rule": "SPAN_FROM_STATED_LOOP",
+                                     "evidence": f"{sources[0]}:{_start}-{_end}"}
+                out["end_line"] = {"value": _end, "rule": "SPAN_FROM_STATED_LOOP",
+                                   "evidence": f"{sources[0]}:{_start}-{_end}"}
+                out["new_name"] = {"value": _helper_nm, "rule": "NAME_FOR_STATED_LOOP_HELPER",
+                                   "evidence": _helper_nm}
                 out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
                                  "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
     # Retain current-main evidence-backed derivation.
@@ -992,6 +1024,20 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             for key in ({"symbol", "name"} & keys):
                 out[key] = {"value": proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
                             "evidence": f"{proved[0][0]}:{proved[0][1]}"}
+    if "repo_root" in keys and stated_git_operations(goal):
+        directories = _stated_directories(goal, root)
+        if len(directories) == 1:
+            out["repo_root"] = {"value": directories[0],
+                                "rule": "REPOSITORY_IS_THE_STATED_DIRECTORY",
+                                "evidence": directories[0]}
+        elif not directories:
+            # Unqualified Git operations concern the current checkout. A file-
+            # scoped commit is not an authorization to commit its whole parent.
+            commit_files = files if stated_git_operations(goal) == ("commit",) else []
+            scope = commit_files[0] if commit_files else "."
+            out["repo_root"] = {"value": scope,
+                                "rule": "STATED_FILE_OR_CURRENT_GIT_REPOSITORY",
+                                "evidence": scope}
     if "op" in keys:
         stated = stated_git_operations(goal)
         if len(stated) == 1:
@@ -1346,7 +1392,8 @@ _MAX_SCAN_FILES = 4000
 
 
 def _stated_change_set(files: list[str], root: pathlib.Path,
-                       base: str | None = None) -> dict[str, Any] | None:
+                       base: str | None = None,
+                       apply_in_place: bool | None = None) -> dict[str, Any] | None:
     """A unified diff in which every line of every stated file is new.  Pure in the bytes.
 
     ``base`` is the directory the diff's paths are relative to, and it must be the SAME directory
@@ -1358,6 +1405,8 @@ def _stated_change_set(files: list[str], root: pathlib.Path,
     reported ``gate: PASS`` with ``diff_covered_ratio: 1.0`` -- a passing coverage measurement
     that measured nothing.  Paths and anchor are one decision, not two.
     """
+    if apply_in_place is None:
+        apply_in_place = bool(base and str(base).strip("./"))
     root = pathlib.Path(root)
     chunks: list[str] = []
     for rel in files:
@@ -1390,15 +1439,23 @@ def _stated_change_set(files: list[str], root: pathlib.Path,
         # file's own lines removed and re-added -- states the same thing (the entire file is in
         # scope, every line is the new side) and applies to a tree that already holds it, because
         # the removed lines are its exact content.  Nothing is invented: same bytes, both sides.
-        chunks.append("--- a/" + shown)
-        chunks.append("+++ b/" + shown)
-        chunks.append("@@ -1,%d +1,%d @@" % (max(len(lines), 1), max(len(lines), 1)))
-        chunks.extend("-" + line for line in lines)
-        if text and not text.endswith("\n"):
-            chunks.append("\\ No newline at end of file")
-        chunks.extend("+" + line for line in lines)
-        if text and not text.endswith("\n"):
-            chunks.append("\\ No newline at end of file")
+        if apply_in_place:
+            chunks.append("--- a/" + shown)
+            chunks.append("+++ b/" + shown)
+            chunks.append("@@ -1,%d +1,%d @@" % (max(len(lines), 1), max(len(lines), 1)))
+            chunks.extend("-" + line for line in lines)
+            if text and not text.endswith("\n"):
+                chunks.append("\\ No newline at end of file")
+            chunks.extend("+" + line for line in lines)
+            if text and not text.endswith("\n"):
+                chunks.append("\\ No newline at end of file")
+        else:
+            chunks.append("--- /dev/null")
+            chunks.append("+++ b/" + shown)
+            chunks.append("@@ -0,0 +1,%d @@" % max(len(lines), 1))
+            chunks.extend("+" + line for line in lines)
+            if text and not text.endswith("\n"):
+                chunks.append("\\ No newline at end of file")
     if not chunks:
         return None
     body = "\n".join(chunks) + "\n"
