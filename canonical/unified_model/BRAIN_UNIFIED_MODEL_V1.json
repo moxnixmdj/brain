@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c66195ce8f26418b09bd2b18f0aee4a5f91b53d7593628ed7066872e1641199d"
+  "value": "d2ab97d05156f2a740363b360614a2a1b75319d7e92678b892ef89dc8629cadb"
  },
  "engines": [
   {
@@ -44315,7 +44315,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 14026,
+   "bytes": 14768,
    "headings": [
     "Hardcore software-engineering problem inventory — V14",
     "§0 The answer in one paragraph",
@@ -44342,7 +44342,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V14.md",
-   "sha256": "cdaa43ed71e7e5f210d2c9165b48c3a7ef58e3d888f971d02d828271e2a24a0e",
+   "sha256": "086009190553ead38b058b7da1959809df63fa347d82a2713421b07ce8b732b1",
    "summary": "Measured 2026-10-31 on `ecfc9fb` (branch `arena/7a6872b9-brain`). Supersedes V13. **V13's structure was right and its #1 priority was wrong**: this document shows the engines work and the sequencing does not. Document-format, image, chart and office rows are excluded from every count on purpose.",
    "terms": {
     "11": 6,
@@ -44351,36 +44351,38 @@
     "69": 5,
     "80": 6,
     "84": 6,
-    "absent": 4,
-    "adapter": 4,
-    "adapter_defaulted_keys": 4,
     "all": 5,
     "already": 5,
-    "answer": 4,
+    "audit": 5,
     "both": 5,
     "calls": 6,
-    "census": 5,
+    "census": 7,
     "chain": 5,
+    "declared": 5,
     "derivation": 5,
     "door": 8,
+    "engine": 5,
     "engines": 10,
     "every": 8,
+    "exists": 5,
     "false": 5,
     "family": 5,
-    "files": 6,
+    "file": 5,
+    "files": 7,
+    "git": 5,
     "import": 5,
     "measured": 7,
     "mechanism": 6,
     "ms": 25,
     "never": 5,
-    "no": 13,
-    "not": 16,
-    "one": 18,
-    "only": 6,
+    "no": 14,
+    "not": 17,
+    "one": 19,
+    "only": 7,
     "output_verified": 8,
     "per": 5,
     "provides": 5,
-    "real": 7,
+    "real": 8,
     "request": 8,
     "requires": 5,
     "row": 14,
@@ -44388,10 +44390,8 @@
     "sequencing": 5,
     "served": 7,
     "so": 8,
-    "source_root": 10,
+    "source_root": 11,
     "substrate": 7,
-    "three": 5,
-    "v13": 5,
     "work": 7
    },
    "title": "Hardcore software-engineering problem inventory — V14",
@@ -58020,7 +58020,7 @@
   "included_source_count": 997,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1fd59aeea2a3147ff897885a5df97921ccf344fea9ad7ba5462c82e4ce5f071a"
+  "source_tree_digest": "d5f9e54ed1b403b5b926df9d1d4b56d072acb07cd871cac74db4fffd872ac4cf"
  },
  "research_index": [
   {

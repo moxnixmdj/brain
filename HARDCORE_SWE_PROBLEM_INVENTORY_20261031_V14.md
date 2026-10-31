@@ -47,7 +47,7 @@ Direct-engine table (repo-relative args, output under `canonical/astra_runtime/t
 | `python.source.change_impact.testselect.v1` | `source_root`, `changed_paths` | **4 ms**, `output_verified` |
 | `python.tests.audit.unittest` | `source_root` | **80 ms**, `output_verified` |
 | `python.tests.mutation_score.v1` | `source_root`, budgets | **166 ms**, score **1.0** |
-| `python.tests.generate.scaffold.v1` | `source_root` | 4 ms, `output_verified` but `complete: false` |
+| `python.tests.generate.scaffold.v1` | `source_root` | 4 ms, `output_verified` but `complete: false` — and it wrote outside its output path (P6) |
 | `python.source.test_adequacy.v1` | `source_root` | **fails** `TEST_ROOT_MISSING` on a flat layout |
 | `code.index.tree_sitter.incremental.v1` | `source_root` | **fails** `TREE_SITTER_SUBSTRATE_IDENTITY_UNAVAILABLE` |
 
@@ -126,6 +126,15 @@ beside the module; `python.tests.generate.scaffold.v1` returns
 suite's import path does not match its cwd. Each is a tiny contract fix and each currently
 reads as a capability gap.
 
+**One of them changes files outside its declared output.** During this audit,
+`python.tests.generate.scaffold.v1` — given `source_root` and `output_path` under
+`canonical/astra_runtime/tmp/` — **deleted and recreated
+`generated_tests/pkg/test_generated_smoke_*.py` at the repository root**. The run was
+reverted by hand (`git checkout -- generated_tests/` plus removing the untracked file) and
+the tree is clean, but the defect is real and is exactly the class this repository exists
+to refuse: an engine whose writes are not bounded by its declared contract, invisible to
+the census because the census only hashes the fixture directory it built.
+
 ### P7 — Substrate identity is proved from wheel metadata, so vendored deployments fail
 `code.index.tree_sitter.incremental.v1` verifies its parser by
 `importlib.metadata.distribution("tree-sitter")`. In this sandbox the modules import, parse
@@ -182,7 +191,7 @@ L3 is the level the question is asking for, and P1 is the only thing between L2 
 | 3 | **six derivation rules** (`symbol`, `to_module`, `edits`, `index_path`, `task_text`, budgets) | 25 rows | one rule each |
 | 4 | **effect-named family tokens** | 9 requests, unblocks #3 | one line per family |
 | 5 | **magnet containment** | 24 wrong selections | reuse `_ANALYSIS_ONLY_TRIGGERS` |
-| 6 | **contract fixes** (P6) + **substrate fallback** (P7) | 3 engines, 1 crown row | small |
+| 6 | **contract fixes** (P6) + **bounded writes** + **substrate fallback** (P7) | 3 engines, 1 crown row, no unauthorised edits | small |
 | 7 | **effect-faithfulness gate** on served answers | the false-answer class | reuse `implementation_effect_error` |
 | 8 | rows for build/packaging/dependency/CI-YAML | 4 domains | after 1–4 |
 
