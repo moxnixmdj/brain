@@ -131,6 +131,96 @@ def _origin_mission_sha256(root,mission_path):
         raise AutoPythonSourceCodecFailure("SOURCE_ORIGIN_MISSION_INVALID",str(mission_path))
     return hashlib.sha256(mission.read_bytes()).hexdigest()
 
+
+def prime_verifier_trees(goal,mission_id,root,limit=3,exclude_repository=""):
+    """Materialize+probe content-addressed python source trees so an offline
+    verification child can replay an independent supplier-class codec check
+    without network (tree bytes + contract up front). Raises nothing; returns [].
+    Prime-failure evidence lands in the returned ``_prime_errors`` list key
+    (opt-in; never blocks acquisition).
+    """
+    provider=_EXTERNAL_SOURCE_TREE_PROVIDER
+    if not callable(provider):
+        return []
+    root=pathlib.Path(root).resolve()
+    probe_helper=root/"canonical"/"runtime"/"python_codec_probe.py"
+    if not probe_helper.is_file():
+        return []
+    def _pdbg(**kw):
+        try:
+            tmp=root/"canonical"/"astra_runtime"/"tmp"
+            tmp.mkdir(parents=True,exist_ok=True)
+            (tmp/"dispatch_trace.jsonl").open("a").write(json.dumps(dict({"on":"src.prime"},**kw))+"\n")
+        except Exception:
+            pass
+    import os as _os
+    _pdbg(stage="provider_call", env_bridge=bool((_os.environ.get("PROJECT_BRAIN_EXTERNAL_TOOL_BRIDGE_DIR") or "").strip()), provider_mod=getattr(provider,"__module__",None))
+    try:
+        response=provider(goal=goal,mission_id=mission_id)
+        _pdbg(stage="provider_ok", result_keys=sorted((response or {}).keys()) if isinstance(response,dict) else None, trees=len((response or {}).get("trees") or []) if isinstance(response,dict) else None)
+    except Exception as exc:
+        _pdbg(stage="provider_raised", error=type(exc).__name__+":"+str(exc)[:240])
+        return [{"_prime_error":type(exc).__name__+":"+str(exc)[:240]}]
+    if isinstance(response,dict) and isinstance(response.get("result"),dict):
+        # Bridge envelope: {agent_id,kind,request_sha256,result:{trees:[...]}}
+        response=response["result"]
+    trees=(response or {}).get("trees") if isinstance(response,dict) else None
+    if not isinstance(trees,list):
+        return []
+    out=[]
+    errors=[]
+    for supplied in trees:
+        if len(out)>=limit:
+            break
+        try:
+            with tempfile.TemporaryDirectory(prefix="brain-source-verifier-prime-") as td:
+                site=pathlib.Path(td)/"site"
+                manifest=_materialize(supplied,site)
+            if exclude_repository and manifest.get("repository")==str(exclude_repository):
+                continue
+            with tempfile.TemporaryDirectory(prefix="brain-source-verifier-probe-") as td:
+                site=pathlib.Path(td)/"site"
+                manifest=_materialize(supplied,site)
+                probe=subprocess.run(
+                    [sys.executable,str(probe_helper),str(site),json.dumps([manifest["package"]])],
+                    cwd=root,text=True,capture_output=True,timeout=90
+                )
+                if probe.returncode!=0:
+                    continue
+                try:
+                    observed=json.loads((probe.stdout or "").strip().splitlines()[-1])
+                except Exception:
+                    continue
+                if observed.get("ok") is not True:
+                    continue
+            contract={
+              "schema":"PROJECT_BRAIN_PYTHON_SOURCE_CODEC_CONTRACT_V1",
+              "module":observed["module"],
+              "encode_callable":observed["encode_callable"],
+              "decode_callable":observed["decode_callable"],
+              "encode_kwargs":observed.get("encode_kwargs") or {},
+              "decode_kwargs":observed.get("decode_kwargs") or {},
+              "envelope_key":observed.get("envelope_key"),
+              "fixture":observed["fixture"],
+              "probe_output_sha256":observed["probe_output_sha256"],
+              "probe_output_bytes":observed["probe_output_bytes"],
+              "pair_discovery":observed.get("pair_discovery"),
+            }
+            out.append({
+              "repository":manifest["repository"],
+              "revision":manifest["revision"],
+              "tree_sha256":manifest["tree_sha256"],
+              "tree":supplied,
+              "contract":contract,
+            })
+        except Exception as exc:
+            if len(errors)<3:
+                errors.append(type(exc).__name__+":"+str(exc)[:200])
+            continue
+    if not out and errors:
+        out.append({"_prime_error":" | ".join(errors)})
+    return out
+
 def _write_generated_verification_mission(root,vm_rel,verifier,origin_mission_id):
     root=pathlib.Path(root).resolve()
     vp=root/vm_rel
@@ -287,20 +377,24 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   "verification_result_path":verify_rel,
                   "status":"PENDING_INDEPENDENT_VERIFICATION",
                 }
+                try:
+                    from canonical.runtime import auto_npm_library_acquisition as _npm
+                    staged_npm=_npm.prime_verifier_npm_candidates(goal,mission_id,root,limit=2)
+                    if staged_npm:
+                        pending["independent_verifier_npm_candidates"]=staged_npm
+                except Exception:
+                    pass
                 pp=root/pending_rel; pp.parent.mkdir(parents=True,exist_ok=True)
                 pp.write_text(json.dumps(pending,indent=2,sort_keys=True)+"\n",encoding="utf-8")
                 verifier={
                   "schema":"PROJECT_BRAIN_ASTRA_RUNTIME_MISSION_V1",
                   "mission_id":verify_mid,
-                  "purpose":"Fresh semantic round-trip verification and supplier-independent verification of an automatically acquired content-addressed Python source-tree codec.",
-                  "goal":"Verify the pending source-tree codec in a fresh process, require a different supplier-class verifier, promote only after exact semantic equality, then replay the originating mission.",
+                  "purpose":"Fresh semantic round-trip verification and supplier-independent verification of an automatically acquired content-addressed Python source-tree codec. Promotion is committed by the outer acquisition context after this mission completes.",
+                  "goal":"Verify the pending source-tree codec in a fresh process, require a different supplier-class verifier, exact semantic equality required.",
                   "steps":[
                     {"id":"verify-pending-source-codec","adapter":"shell",
                      "command":f"set -euo pipefail\npython canonical/runtime/verify_pending_cli_binding.py {pending_rel} {verify_rel}",
-                     "verify":{"type":"stdout_contains","text":"PENDING_SOURCE_BINDING_EFFECT_VERIFIED"}},
-                    {"id":"promote-and-replay","adapter":"shell",
-                     "command":f"set -euo pipefail\npython canonical/runtime/promote_pending_binding.py {pending_rel} {verify_rel}",
-                     "verify":{"type":"stdout_contains","text":"PENDING_CAPABILITY_PROMOTED"}}
+                     "verify":{"type":"stdout_contains","text":"PENDING_SOURCE_BINDING_EFFECT_VERIFIED"}}
                   ],
                   "constraints":{
                     "incremental_spend_usd":0,
@@ -316,6 +410,8 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                 verification_mission_recovery=_write_generated_verification_mission(
                     root,vm_rel,verifier,mission_id
                 )
+                from canonical.runtime import auto_capability_acquisition as _aca
+                _aca.propagate_obs_sidecar_for_generated_mission(root, mission_path, vm_rel)
                 return {
                   "status":"ACQUISITION_DISPATCHED",
                   "supplier_class":"content_addressed_python_source_tree",

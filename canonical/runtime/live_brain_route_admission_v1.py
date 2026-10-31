@@ -74,6 +74,7 @@ from time import perf_counter_ns
 from typing import Any, Mapping
 
 from canonical.runtime import astra_runtime, goal_compiler
+from canonical.runtime import capability_selection_retrieval_v1 as capability_selection
 from canonical.runtime import composer_route_v1 as composer_route
 from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime import live_integrated_brain_v1
@@ -121,11 +122,15 @@ def _future_artifacts(goal: str) -> list[str]:
     correctly selected and executed capability ended in FAIL_CLOSED__PROMISED_ARTIFACT_MISSING
     for 294 of 361 live ids - the R6 gate punishing a capability for the file it must not write.
     """
+    repo_paths = goal_compiler._repo_paths(goal, ROOT)
+    existing_dirs = [p for _r, p in repo_paths if p.is_dir()]
     out = []
-    for raw, path in goal_compiler._repo_paths(goal, ROOT):
+    for raw, path in repo_paths:
         if front._CAPABILITY_ID_SHAPE.fullmatch(str(raw)):
             continue
         if pathlib.Path(raw).suffix and not path.exists():
+            if any((d / raw).exists() for d in existing_dirs):
+                continue
             out.append(raw)
     return out
 
@@ -192,7 +197,9 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {"schema": SCHEMA, "admitted": False,
                 "rule": "WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
                 "compiler_mode": mode, "selected_capability": selected}
-    if composer_route.extract_argv(goal) is not None:
+    if (not capability_selection.is_computed_answer_delivery(goal)
+            and not capability_selection.is_ast_code_edit_request(goal)
+            and composer_route.extract_argv(goal) is not None):
         _slots = {str(k or "").lower() for k in
                   ((entry.get("action_template") or {}).get("args") or {})}
         # A COMMAND slot is a command slot whatever it is called.  Measured on
@@ -277,6 +284,14 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if isinstance(typed, Mapping) and str(typed.get("reason") or "").startswith("BINDING_REFUSED:"):
         base["typed_binding_refused"] = True
         base["typed_binding_reason"] = typed.get("reason")
+        if str(typed.get("reason") or "").startswith("BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD"):
+            return {**base, "admitted": False, "rule": "R11_STATED_PAYLOAD_SLOT_MISSING"}
+    if isinstance(typed, Mapping) and typed.get("reason") in (
+        "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
+        "REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER",
+        "READ_ONLY_QUESTION_CANNOT_MUTATE_SOURCE",
+    ):
+        return {**base, "admitted": False, "rule": "R12_" + str(typed.get("reason"))}
     # Decisive lexical margin (F18), the third way a caller can be explicit without this layer
     # inventing anything: the sentence names one capability so much better than any other that the
     # ranker separates them.  Measured before it was trusted - 295 name-derived goals, threshold
@@ -1655,6 +1670,7 @@ def observe_world(goal: str) -> dict[str, Any]:
     existence and parseability checks still run).  Nothing in the answer is the
     tool's own claim.
     """
+    import itertools
     from canonical.runtime import execute_v1 as _kernel
 
     stated = _stated_paths(goal)
@@ -1662,7 +1678,7 @@ def observe_world(goal: str) -> dict[str, Any]:
     walked = []
     for root in _observation_roots(goal):
         try:
-            count = sum(1 for _ in root.rglob("*"))
+            count = sum(1 for _ in itertools.islice(root.rglob("*"), _OBSERVATION_MAX_FILES + 1))
         except OSError:
             continue
         if count > _OBSERVATION_MAX_FILES:
@@ -1673,8 +1689,18 @@ def observe_world(goal: str) -> dict[str, Any]:
     parses: dict[str, bool] = {}
     for raw in stated:
         path = ROOT / raw
-        if path.is_file() and path.suffix.lower() == ".py":
-            parses[raw] = _is_python_code(path.read_text(encoding="utf-8", errors="replace"))
+        if path.is_file():
+            try:
+                st = path.stat()
+                if st.st_size <= 1_048_576:
+                    import hashlib as _hl
+                    files[raw] = (st.st_size, st.st_mtime_ns, st.st_mode, _hl.sha256(path.read_bytes()).hexdigest())
+                else:
+                    files[raw] = (st.st_size, st.st_mtime_ns, st.st_mode)
+            except OSError:
+                pass
+            if path.suffix.lower() == ".py":
+                parses[raw] = _is_python_code(path.read_text(encoding="utf-8", errors="replace"))
     head = _git_head(ROOT / stated[0]) if stated else ""
     return {"files": files, "walks": walked, "parses": parses,
             "git_head": head, "stated": stated}
@@ -1714,7 +1740,21 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
             from canonical.runtime import execute_v1 as _kernel
             moved = _kernel._diff(before.get("files") or {}, after.get("files") or {})["changed"]
             committed = bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")
-            if not (present or moved or committed):
+            stdout_filter_verified = False
+            if not artifacts and isinstance(result.get("composer_execution"), Mapping):
+                steps = list((result.get("composer_execution") or {}).get("steps") or [])
+                ledger = list(((result.get("raw_goal_acceptance") or {}).get("reinspection_ledger")) or [])
+                if (len(steps) == 1
+                        and steps[0].get("capability_id") == "shell.command.run"
+                        and not (steps[0].get("args") or {}).get("write_stdout_to_output")
+                        and not (steps[0].get("args") or {}).get("output_may_be_consumed")
+                        and ledger
+                        and ((ledger[0].get("reinspection") or {}).get("command_re_run") is True)
+                        and ((ledger[0].get("reinspection") or {}).get("program") in {
+                            "grep", "fgrep", "egrep", "sed", "sort", "uniq", "awk", "cut", "tr", "head", "tail", "wc", "cat", "diff", "comm"
+                        })):
+                    stdout_filter_verified = True
+            if not (present or moved or committed or stdout_filter_verified):
                 errors.append("NO_OBSERVED_EFFECT")
     return errors
 
@@ -1861,6 +1901,9 @@ def _states_an_executable_form(goal: str, admission: Mapping[str, Any] | None = 
     failing closed for the reason it always has (#6119).
     """
     try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _csr
+        if _csr.is_computed_answer_delivery(goal) or _csr.is_ast_code_edit_request(goal):
+            return False
         if composer_route.extract_argv(goal) is not None:
             return True
         if (composer_route.extract_content(goal) is not None
@@ -2300,6 +2343,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # _execute; this branch did not.
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
+        gap_world_before = observe_world(gap_normalized)
         # A refusal is terminal unless the sentence states the executable form.
         # This branch used to compose unconditionally, which made it the one
         # place a refusal could be answered by a substitute -- see
@@ -2309,7 +2353,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         if composed is not None:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
-                gap_normalized, observe_world(gap_normalized), gap_future_artifacts)
+                gap_normalized, gap_world_before, gap_future_artifacts)
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal

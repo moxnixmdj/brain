@@ -1,0 +1,138 @@
+{
+ "schema": "PROJECT_BRAIN_REAL_CORPUS_L6_TORNADO_V1",
+ "date": "20261029",
+ "corpus": "BugsInPy (soarsmu/BugsInPy mirror) - real historical tornado bugs",
+ "harness_laws": [
+  "BugsInPy pairs BUGGY SOURCE with the FIXED TEST FILE (the failing test is added in the fix commit). Baseline red must be the REAL bug's symptom.",
+  "Satisfiability gate: an instance is valid only if applying the REAL fix greens the named test in our env (3.11). 2 candidate bugs discarded before this gate existed.",
+  "Wall-clock is part of the metric: repair within B seconds or NOT_REPAIRED_TIMEOUT."
+ ],
+ "instances": [
+  {
+   "id": "tornado/2",
+   "file": "tornado/http1connection.py",
+   "satisfiable": true,
+   "router": "NOT_REPAIRED_WALL_TIMEOUT_330s"
+  },
+  {
+   "id": "tornado/4",
+   "file": "tornado/web.py",
+   "satisfiable": true,
+   "router": "NOT_REPAIRED_232s",
+   "taxonomy": "ProvenanceError:TEST_TIMEOUT (static-file test spawns a live HTTP server per candidate; engine harness timeout)"
+  },
+  {
+   "id": "tornado/14",
+   "file": "tornado/ioloop.py",
+   "satisfiable": true,
+   "router": "CRASH",
+   "taxonomy": "TypeError inside writer path on real-repo layout (debug in progress)"
+  }
+ ],
+ "measured": "0/3 repaired within wall caps on first L6 round - the seeded-ladder 100% does NOT transfer to real repos at current budgets. Named causes: (1) candidate space x per-candidate test cost on 1000-line real modules exceeds wall caps; (2) live-server tests break the engine's per-candidate harness; (3) one real router bug on package-rooted layouts.",
+ "fixes_landed": [
+  "_source_env walks up through __init__.py parents: package-rooted test layouts (tornado.test.*) were rc=2/zero-failing-tests for every localizer - flat-fixture behavior unchanged"
+ ],
+ "next": [
+  "fix writer TypeError on real layouts; narrow localization (traceback-frame-first) for 1000-line modules; live-server-safe harness mode; re-measure with per-bug wall budget accounting"
+ ],
+ "round2": {
+  "date": "20261029",
+  "result": {
+   "tornado/14": "REPAIRED (211s wall; coupled pair route found the real fix is None->is not None, realized, replayed green; independent replay GREEN)",
+   "tornado/2": "NOT_REPAIRED (wall-capped 330s; fix is a structural clause-insertion beyond the mutation grammar -- named MISS)",
+   "tornado/4": "NOT_REPAIRED (wall-capped 330s; live-server test per candidate -- named MISS, harness mode pending)"
+  },
+  "score": "1/3 real historical bugs repaired within wall caps (first genuine external-validity point)",
+  "laws_mined_round2": [
+   "HARNESS: a['cmd'][0] IS '-m'; slicing [1:] ate it and poisoned round 1 with usage errors -- round-1 0/3 was instrument fault",
+   "ENV: import root = WORLD ROOT on PYTHONPATH (world-root env => suite GREEN; test-dir env => no module named tornado); package dirs on sys.path SHADOW STDLIB (tornado/locale.py beat stdlib locale inside gettext) -- _source_env package-walk REVERTED with this evidence",
+   "WALL: hanging mutants burn full caller timeout -- candidate wall = 8x measured baseline suite time + 3s (faulthandler-proven)",
+   "WALL: interprocedural provenance phase = full traced suite run, zero measured benefit ever (prov_hypothesis_count=0 in every receipt) -- off hot path, opt-in",
+   "WALL: 3 sequential engines need a router deadline; skipped steps are LABELED (SKIPPED_WALL_BUDGET), never silent",
+   "RESILIENCE: realize gets one suite retry (wall-pressure transients); suite tail captured in the trace row"
+  ]
+ },
+ "round3": {
+  "date": "20261029",
+  "scaleout": {
+   "screened_projects": [
+    "tqdm",
+    "httpie",
+    "PySnooper",
+    "cookiecutter"
+   ],
+   "result": "1 new satisfiable instance (tqdm/9, SI-format bug in _tqdm.py, pytest node)",
+   "corpus_age_bias_measured": "most BugsInPy fixes predate py3.11: tqdm 1,3-8 red-on-baseline but real fix does NOT green (env-drift, honestly rejected by the satisfiability gate); httpie/PySnooper/cookiecutter mostly no-test-command or multi-file patches",
+   "harness": "tools/l6_scale.py -- screens + caches manifest; --measure runs the router on new instances"
+  },
+  "tqdm9": {
+   "repaired": false,
+   "wall": 303.4,
+   "trace": [
+    "cegis_writer ran to deadline",
+    "coupled SKIPPED_WALL_BUDGET",
+    "iterative NO_STRICTLY_IMPROVING_CANDIDATE (deadline-clean exit)"
+   ],
+   "laws": [
+    "anytime deadline architecture: candidate loops check wall_deadline every candidate -- receipts return instead of hangs",
+    "pytest collection (~1-3s/node) makes count caps meaningless; mutant wall = 8x measured baseline now in PGC AND iterative loops"
+   ]
+  },
+  "l6_scoreboard": {
+   "round1": "0/3 (instrument-poisoned: argv slice ate -m)",
+   "round2": "1/3 (tornado/14 REPAIRED, first real fix)",
+   "round3": "1/4 (tqdm/9 added, honest labeled NOT_REPAIRED)",
+   "instances_available": "4 satisfiable (tornado x3, tqdm x1); corpus breadth bounded by 3.11 satisfiability, not by tooling"
+  }
+ },
+ "round4": {
+  "date": "20261029",
+  "edit": "traceback-frame-first candidate ordering ported to the iterative loop (was PGC-only); ladder zero-regression (writers 100% L1-L5, searchers P100 intact)",
+  "tqdm9_decoded": {
+   "real_fix": "numeric boundary tuning: 1000.0->999.95, 100.0->99.95, 10.0->9.995 in format_sizeof (+ __len__ conditional)",
+   "verdict": "GRAMMAR_EXPRESSIBILITY_MISS #2: constant candidates are {0,1,-1} flips; no mutation table produces 999.95",
+   "named_seam": "neighborhood-numeric candidate synthesis (bounded decimal lattice around existing constants, guided by the failing assertion) -- the same beyond-grammar seam as tornado/2's clause insertion; both are the measured case for solver/component-based synthesis"
+  },
+  "l6_scoreboard": {
+   "round4": "1/4 unchanged; misses now 2x grammar-expressibility + 1 live-server + env-rejected corpus tail"
+  }
+ },
+ "round5": {
+  "date": "20261029",
+  "landed": {
+   "numeric_neighborhood_synthesis": "the decoded tqdm/9 spec implemented: n*0.9995/0.99995/0.999 + float eps moves, int sites included (filter-exempt); verified present: 1000->999.5/999.95/999.995, 99.95, 9.995",
+   "wall_allocation": "router now ALLOCATES wall (writer 35%, coupled 60% of rest) instead of capping -- measured: the pair engine went from SKIPPED_WALL_BUDGET to RUNNING on tqdm/9",
+   "fail_fast": "PGC refuses with WALL_BUDGET_EXHAUSTED_BEFORE_SEARCH before the indivisible traced-localization phase (order bug in first cut fixed)"
+  },
+  "tqdm9_status": "STILL NOT_REPAIRED this round: test_si_format asserts ~7 boundary values -- the fix needs 2-3 SIMULTANEOUS numeric edits; the pair engine now gets its share but its pair-space sweep (focus-ordered) needs the next efficiency pass (skip strict-singles on multi-assert diagnosis; tighter pair ordering)",
+  "l6_scoreboard": "1/4 unchanged; the multi-edit class now has BOTH its tool (pair engine with neighborhood values in grammar) and its wall share",
+  "pending_verification": "full ladder + fleet re-verify after neighborhood family (canary passed: apply.verified repairs, refusals honest)"
+ },
+ "round6": {
+  "date": "20261029",
+  "landed": {
+   "family_reserve_law": "candidate families carry tags (family/ratio); legacy budgets byte-identical (provenance tagging, NOT value matching -- 999==999.0 reclassification was the real L5 regression the ladder gate caught)",
+   "pair_space_legacy_only": "pair enumeration excludes neighborhood entries (pair_max index-product dilution law)",
+   "coordinated_neighborhood_phase": "ONE candidate per multiplier applying every same-ratio neighborhood edit simultaneously (the decoded tqdm/9 shape), tried FIRST in the coupled engine, ~1 suite run per ratio",
+   "wall_governor_complete": "every engine now wall-bounded at every phase: CEGIS writer (rounds+realize+replay), PGC (pair loop was UNGUARDED -- faulthandler x-ray), coupled loop (entry deadline, strict-probe skip under 45s share, per-phase guards, shrunk suite timeouts); tqdm/9 measure 460s->246.6s with all three stages taking their shares",
+   "router_observability": "route_trace rows carry at_s/remaining_s"
+  },
+  "regression_cycle": "neighborhood family landed -> L5 broke (2 dilution mechanisms found: uniq[:64] value-reclassification + pair-space index-product) -> ladder gate caught it -> fixed by construction -> zero regression restored (writers 100% L1-L5, searchers P100)",
+  "tqdm9_remaining_seam": "coupled stage reaches evidence phases but pytest tracebacks name only the TEST file -- source-side focus needs test-execution evidence (trace the failing node once, focus pools on executed lines). This is the LAST named seam to 2/4.",
+  "l6_scoreboard": "1/4 (tornado/14) unchanged; all machinery for tqdm/9's decoded fix is IN and verified at L5; one seam remains"
+ },
+ "round7": {
+  "date": "20261030",
+  "headline": "tqdm/9 REPAIRED END-TO-END: route repaired=true independent_replay=true, 129.9s total",
+  "l6_scoreboard": "2/4 (tornado/14 + tqdm/9); misses now: tornado/2 (clause insertion) + tornado/4 (live-server)",
+  "how": "the harvested dynamic fault localizer traced the failing pytest node once; execution-frequency-weighted pools (loop-hot lines outrank incidental lines; inside evidence spans the trace IS the ranker -- static symbol scores ignored); the coordinated-neighborhood phase fired the ratio-0.9995 symbol group = the EXACT decoded real-fix class (1000.0->999.5, 100.0->99.95, 10.0->9.995 in format_sizeof), verified green in-engine 27.9s",
+  "laws_discovered": {
+   "WORLD_CWD": "pytest-style argv paths are world-relative: running the suite from the brain root exits rc=4 (file-not-found) and EVERY candidate reads as a PHANTOM RED -- the engine was blind on pytest suites; fixed at the shared runner (cwd param) + router realize gate + coupled baseline/candidates/replay",
+   "EXECUTION_FREQUENCY_RANKING": "inside evidence spans, pool priority = trace hit-frequency (capped at 8 runs) + focus proximity; static symbol scores are IGNORED there (the scored format_meter symbol let its trivia sites consume the neighborhood reserve ahead of the faulty format_sizeof zone)",
+   "MINIMAL_FIRST_COORDINATION": "symbol-scoped coordinated groups tried before the full set -- a green full-set carrying extra files' edits is a worse repair contract than a green single-function retune",
+   "EVIDENCE_TRACE_BUDGET": "pytest collection burns a 30k tracer cap before the test body; the evidence pass needs its own budget (1e6)"
+  },
+  "verification": "ladder zero-regression (writers 100% L1-L5, searchers P100); fleet 129 swept / 76 clean / 0 partial / 22 unsampled (new args exec_evidence BOOL + exec_evidence_trace_events NUMBER typed same-edit)"
+ }
+}

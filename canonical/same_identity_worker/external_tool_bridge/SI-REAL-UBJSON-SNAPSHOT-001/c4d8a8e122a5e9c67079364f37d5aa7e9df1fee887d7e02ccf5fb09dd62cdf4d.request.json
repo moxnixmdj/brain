@@ -1,0 +1,16 @@
+{
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "kind": "urlopen",
+  "payload": {
+    "data_b64": null,
+    "headers": {
+      "User-agent": "ProjectBrain-CapabilityDiscovery/1"
+    },
+    "method": "GET",
+    "timeout_s": 12,
+    "url": "https://registry.modelcontextprotocol.io/v0.1/servers?search=ubjson&version=latest&limit=30"
+  },
+  "request_sha256": "c4d8a8e122a5e9c67079364f37d5aa7e9df1fee887d7e02ccf5fb09dd62cdf4d",
+  "schema": "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1",
+  "task_id": "SI-REAL-UBJSON-SNAPSHOT-001"
+}

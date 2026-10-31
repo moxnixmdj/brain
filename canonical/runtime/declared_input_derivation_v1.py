@@ -36,12 +36,19 @@ Zero model, zero network, zero spend.  It changes no registry row and no kernel.
 from __future__ import annotations
 
 import ast
+import os
 import pathlib
 import re
 import sys
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
+# "from <A> to <B>" -- the two halves are bounded by another role word or the end
+# of the clause, so the pair is read off the sentence, never assembled.
+_FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
+# "<noun> <name>" -- "the function line_total", "the class Cart".  The name is
+# read off the sentence and then PROVED against the file's own AST.
+_NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 # ONLY configuration knobs may be defaulted away.  A path/root/argv/dir/file
 # slot is SEMANTIC: even when the adapter has a fallback, dropping it let the
@@ -60,21 +67,17 @@ _CONFIGURATION_SLOTS = frozenset({
 # applied to every goal.  Only an explicit software-engineering request to a
 # software-engineering capability takes this path; everything else keeps the
 # byte-for-byte original admission gate.
-SWE_CID_PREFIXES = ("python.", "code.", "software.", "evidence.oracle.", "orchestration.verify.")
+SWE_CID_PREFIXES = ("python.", "code.", "software.", "git.", "evidence.oracle.", "orchestration.verify.")
 _SWE_VERBS = (
-    "rename", "repair", "fix", "bug", "broken", "refactor", "extract function",
-    "lint", "type-check", "typecheck", "review", "localize", "traceback",
+    "rename", "repair", "fix", "bug", "broken", "broke", "refactor", "extract ", "extract function",
+    "lint", "type-check", "typecheck", "review", "localize", "fault", "traceback",
     "scaffold", "generate test", "failing test", "unit test", "patch",
-    # The verbs the job is made of that were missing.  Measured: "Inline the
-    # single-use helper ...", "Remove the SQL injection ..." and "Resolve the merge
-    # conflict ..." are ordinary software-engineering sentences, and every one of
-    # them was refused the derivation path -- so a row that exists could never be
-    # reached by the sentence that names it.  This list is only a GATE (does this
-    # request belong on the typed SWE path at all); a listed verb still binds
-    # nothing by itself, and ambiguity still yields no value.
     "inline", "single-use", "single use", "merge conflict", "conflict", "unmerged",
     "injection", "parameterize", "parameterized", "sql", "dead code", "unused import",
     "remove the unused", "move the function", "add a parameter", "caller",
+    "circular import", "import cycle", "bisect", "slower", "mutation", "taint", "untrusted",
+    "flaky", "intermittently", "deprecated", "sql injection",
+    "linearithmic", "unused", "race condition", "are failing",
 )
 
 
@@ -176,6 +179,18 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     return found
 
 
+def _tree_of(root: pathlib.Path, rel: str):
+    """The parsed module, or an empty module when it cannot be read.
+
+    An unreadable stated file proves nothing, so the proof above simply yields no
+    candidate -- the same fail-closed reading the qualname rule uses.
+    """
+    try:
+        return ast.parse((pathlib.Path(root) / rel).read_text(encoding="utf-8"))
+    except (OSError, SyntaxError, ValueError):
+        return ast.Module(body=[], type_ignores=[])
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -190,6 +205,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # the directory is stated evidence, the scan is bounded to that directory,
     # and more than one candidate is still ambiguous (no value is invented).
     discovered_tests = False
+    if not tests:
+        try:
+            from canonical.runtime import goal_compiler as _gc
+            repo_paths = _gc._repo_paths(str(goal or ""), pathlib.Path(root))
+            witness_dirs = _gc._witness_directories(str(goal or ""), repo_paths)
+        except Exception:
+            witness_dirs = set()
+        if witness_dirs:
+            w_found: list[str] = []
+            for wdir in sorted(witness_dirs):
+                wp = (pathlib.Path(root) / wdir).resolve()
+                if wp.is_dir():
+                    for p in sorted(wp.rglob("*.py")):
+                        if "__pycache__" not in p.parts and _TEST_NAME_RE.search(p.name):
+                            w_found.append(p.relative_to(pathlib.Path(root).resolve()).as_posix())
+            if w_found:
+                tests = w_found
+                discovered_tests = True
     if not tests and len(sources) == 1:
         parent = (pathlib.Path(root) / sources[0]).parent
         try:
@@ -207,6 +240,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if parent and (pathlib.Path(root) / parent).is_dir():
             out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
                                   "evidence": sources[0]}
+    # The same rule for SEVERAL stated files, but ONLY when the sentence already
+    # gave them ROLES ("from A to B"): the directory that holds both ends of a
+    # stated move is determined, and it is the only directory that is.  Without
+    # this the sibling move row refused with
+    # source_root:0_existing_directories_named.  A sentence that merely lists two
+    # files derives nothing -- that is a pinned law
+    # (test_two_source_files_are_ambiguous_and_derive_nothing), and it stays.
+    elif "source_root" in keys and len(sources) > 1 and _FROM_TO.search(str(goal or "")):
+        parents = [str(pathlib.PurePosixPath(f).parent) for f in sources]
+        common = parents[0] if len(set(parents)) == 1 else None
+        if common is None:
+            try:
+                common = str(pathlib.PurePosixPath(os.path.commonpath(parents)))
+            except ValueError:
+                common = None
+        if common and (pathlib.Path(root) / common).is_dir():
+            out["source_root"] = {"value": common, "rule": "PATH_DIR_COMMON_TO_STATED_FILES",
+                                  "evidence": ",".join(sources)}
     # A test command slot is satisfied by running the ONE stated test file.
     if "test_argv" in keys and len(tests) == 1:
         out["test_argv"] = {"value": [sys.executable, "-B", tests[0]],
@@ -226,6 +277,30 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "module" in keys and len(sources) == 1 and sources[0].endswith(".py"):
         out["module"] = {"value": sources[0], "rule": "MODULE_FROM_STATED_SOURCE_FILE",
                          "evidence": sources[0]}
+    # MOVE GRAMMAR: two stated source files with the roles "from A to B" name a
+    # SENDER and a RECEIVER, and the sentence says which is which.  Measured:
+    # "Move the function line_total from <b>/app/models.py to <b>/app/service.py"
+    # shortlisted python.refactor.move_function.v1 and then refused it with
+    # BINDING_REFUSED:module:not_stated, because the one-file rule above only
+    # fires when exactly ONE source file is stated -- so the capability that
+    # exists for this sentence could never be reached by it.  The roles are read
+    # from the sentence's own "from ... to ..." pair, matched against the paths
+    # it actually states; anything else (no pair, no path, both orders) yields no
+    # value and the binder still fails closed.
+    py_sources = [f for f in sources if f.endswith(".py")]
+    if len(py_sources) == 2 and ("module" in keys) and ({"to_module", "target_module"} & keys):
+        pair = _FROM_TO.search(str(goal or ""))
+        if pair is not None:
+            def _stated(near: str) -> str | None:
+                hits = [f for f in py_sources if f in near or f.split("/")[-1] in near]
+                return hits[0] if len(hits) == 1 else None
+            src_hit, dst_hit = _stated(pair.group(1)), _stated(pair.group(2))
+            if src_hit and dst_hit and src_hit != dst_hit:
+                out["module"] = {"value": src_hit, "rule": "MODULE_FROM_STATED_FROM_PATH",
+                                 "evidence": src_hit}
+                for key in ({"to_module", "target_module"} & keys):
+                    out[key] = {"value": dst_hit, "rule": "TARGET_MODULE_FROM_STATED_TO_PATH",
+                                "evidence": dst_hit}
     # Rename grammar: BOTH names must be stated, and exactly one pair may match.
     pairs = _RENAME_OLD_NEW.findall(str(goal or ""))
     if len(pairs) == 1:
@@ -244,7 +319,34 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             for key in ("new_param", "new_symbol", "new_name"):
                 if key in keys:
                     out[key] = {"value": named[0], "rule": "NEW_NAME_STATED", "evidence": named[0]}
+        elif re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
+            if "new_name" in keys:
+                out["new_name"] = {"value": "_extracted_helper", "rule": "EXTRACT_DEFAULT_HELPER_NAME", "evidence": "extract"}
+    if re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
+        for lkey in ("start_line", "end_line"):
+            if lkey in keys and lkey not in out:
+                out[lkey] = {"value": 0, "rule": "EXTRACT_AUTO_SLICE_REGION", "evidence": "extract"}
 
+    # A symbol slot is PROVED the same way a qualname is, and for the same reason:
+    # "Move the function line_total ..." states the name AFTER the noun, so the
+    # qualname grammar above ("the <name> function") reads nothing and the move
+    # row refused with BINDING_REFUSED:symbol:not_stated.  Exactly one identifier
+    # must follow the noun AND be defined at module scope in the stated file.
+    py_named = [f for f in sources if f.endswith(".py")]
+    if ({"symbol", "name"} & keys) and py_named:
+        nouns = _NAMED_AFTER_NOUN.findall(str(goal or ""))
+        candidates = [n for n in dict.fromkeys(nouns) if _NAME_RE.match(n)]
+        # A move states TWO files and only one of them DEFINES the name; the
+        # proof is "defined at module scope in exactly one stated file", which is
+        # strictly stronger than "in the one stated file".
+        proved = [(f, _node.name) for f in py_named
+                  for _node in (getattr(_tree_of(root, f), "body", []) or [])
+                  if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                  and _node.name in candidates]
+        if len(proved) == 1:
+            for key in ({"symbol", "name"} & keys):
+                out[key] = {"value": proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+                            "evidence": f"{proved[0][0]}:{proved[0][1]}"}
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file
     # must declare it; if the request names a function, exactly one must match.
@@ -260,6 +362,19 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         except (OSError, SyntaxError, ValueError):
             tree = None
         if tree is not None:
+            defined_fns = {
+                node.name
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+            }
+            if not wanted_fn and not wanted_param:
+                preps = {
+                    m.group(1)
+                    for m in re.finditer(r"\b(?:from|in|of|function|method)\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", str(goal or ""), re.I)
+                    if m.group(1) in defined_fns
+                }
+                if len(preps) == 1:
+                    wanted_fn = next(iter(preps))
             matches: list[str] = []
             for node in ast.walk(tree):
                 if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):

@@ -1,0 +1,127 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "software.repair.choreograph.crossfile.v1",
+          "output_path": "canonical/astra_runtime/tmp/brain_out__software_repair_choreograph_crossfile_v1__656ce9cdef.json",
+          "source_root": "canonical/astra_runtime/tmp/advanced_probe_20261030/surface_sql_injection/app"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "software.repair.choreograph.crossfile.v1",
+          "output_path": "canonical/astra_runtime/tmp/brain_out__software_repair_choreograph_crossfile_v1__656ce9cdef.json",
+          "source_root": "canonical/astra_runtime/tmp/advanced_probe_20261030/surface_sql_injection/app"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "software_repair_crossfile_choreograph_v1",
+        "capability_id": "software.repair.choreograph.crossfile.v1",
+        "choreography_verified": true,
+        "dependency": {
+          "external_dependency": null,
+          "status": "LOCAL_VERIFIED",
+          "type": "brain_native_deterministic_composition"
+        },
+        "edit_count": 1,
+        "files_edited": [
+          "canonical/astra_runtime/tmp/advanced_probe_20261030/surface_sql_injection/app/db.py"
+        ],
+        "mode": "sql_parameterization",
+        "output_path": "canonical/astra_runtime/tmp/brain_out__software_repair_choreograph_crossfile_v1__656ce9cdef.json",
+        "output_sha256": "10dc772924c8a68d485ffeac506839f8d4cdd3bb29dc2262467f6e0e37905368",
+        "output_verified": true,
+        "verified": true
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "capability_id": "software.repair.choreograph.crossfile.v1",
+          "output_path": "canonical/astra_runtime/tmp/brain_out__software_repair_choreograph_crossfile_v1__656ce9cdef.json",
+          "source_root": "canonical/astra_runtime/tmp/advanced_probe_20261030/surface_sql_injection/app"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "software.repair.choreograph.crossfile.v1",
+          "output_path": "canonical/astra_runtime/tmp/brain_out__software_repair_choreograph_crossfile_v1__656ce9cdef.json",
+          "source_root": "canonical/astra_runtime/tmp/advanced_probe_20261030/surface_sql_injection/app"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "software_repair_crossfile_choreograph_v1",
+        "capability_id": "software.repair.choreograph.crossfile.v1",
+        "choreography_verified": true,
+        "dependency": {
+          "external_dependency": null,
+          "status": "LOCAL_VERIFIED",
+          "type": "brain_native_deterministic_composition"
+        },
+        "edit_count": 0,
+        "files_edited": [],
+        "mode": "already_acyclic_and_green",
+        "output_path": "canonical/astra_runtime/tmp/brain_out__software_repair_choreograph_crossfile_v1__656ce9cdef.json",
+        "output_sha256": "1aa1316648bc090454254e758dd976f484586532aa9920ece30ccf6ae345c4fd",
+        "output_verified": true,
+        "verified": true
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-31T11:42:24.145787+00:00",
+  "mission_id": "ADV_sql_injection",
+  "next_action_index": 3,
+  "plan_sha256": "b509b2d50364fd49154d7db3406be731a3a6ff93e55d0547bba604919775d1f6",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-31T11:42:24.403875+00:00"
+}

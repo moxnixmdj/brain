@@ -2,7 +2,7 @@
 """Production ASTRA launcher with Root3 subprocess mediation installed first.
 
 This launcher is the credited production seam for the shared ASTRA runtime.
-It installs the independently verified Root3 two-class attempt authority before
+It installs the independently verified Root3 three-class attempt authority before
 importing ASTRA, so subprocess.run/Popen are fail-closed process-wide before
 any ASTRA mission step can execute. No authority is added for the other effect
 classes.
@@ -19,8 +19,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from canonical.runtime import root3_strict_current_bootstrap_v2 as bootstrap
-from canonical.runtime import root3_two_class_attempt_authorizer_v1 as attempt_authorizer
+from canonical.runtime import root3_strict_current_bootstrap_v3 as bootstrap
+from canonical.runtime import root3_three_class_attempt_authorizer_v1 as attempt_authorizer
 
 SCHEMA = "PROJECT_BRAIN_ROOT3_PRODUCTION_ASTRA_LAUNCHER_V1"
 ASTRA_MODULE = "canonical.runtime.astra_runtime"

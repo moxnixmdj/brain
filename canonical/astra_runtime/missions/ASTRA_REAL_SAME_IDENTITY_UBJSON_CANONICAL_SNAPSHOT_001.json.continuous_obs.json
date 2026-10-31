@@ -1,0 +1,74 @@
+{
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_state_dependencies": [
+    {
+      "path": "canonical/CANONICAL_POINTER.json",
+      "sha256": "a90556afb87410b2c903c21b4b00deface849be5b3f654e6b08f59df5e8b2fe0"
+    },
+    {
+      "path": "canonical/governance/ACTIVE_GOAL_HIERARCHY_V1.json",
+      "sha256": "48ef715986134102e01975667aaa053e5ba636c6d608fb99d7a74b63b507f1a9"
+    },
+    {
+      "path": "canonical/governance/REAL_OUTPUT_SCOREBOARD_V1.json",
+      "sha256": "d5ef8e11a82b82092ca71bdb76b3eb28bbca911ae427f790b0f1e63a01fb124a"
+    }
+  ],
+  "dependencies": [
+    {
+      "class": "EXECUTION_SURFACE",
+      "dependency_id": "ASTRA_RUNTIME",
+      "evidence": [
+        "canonical/runtime/astra_runtime.py"
+      ],
+      "material": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+    },
+    {
+      "class": "EXECUTION_SURFACE",
+      "dependency_id": "EXTERNAL_TOOL_RELAY",
+      "evidence": [
+        "canonical/runtime/external_tool_relay.py"
+      ],
+      "material": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+    },
+    {
+      "class": "EXECUTION_SURFACE",
+      "dependency_id": "SAME_IDENTITY_SUPERVISOR",
+      "evidence": [
+        "canonical/runtime/same_identity_supervisor.py"
+      ],
+      "material": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+    }
+  ],
+  "dependency_inventory_complete": true,
+  "information_boundary_complete": true,
+  "information_policy": {
+    "allowed_exact_sources": [],
+    "allowed_external_tool_kinds": [],
+    "mode": "OPEN_DISCOVERY"
+  },
+  "material_world_state_dependencies_complete": true,
+  "obs_layers_current": {
+    "blocker": true,
+    "capability": true,
+    "goal": true,
+    "inherited_system": true,
+    "obs_process": true,
+    "solution": true,
+    "verification": true
+  },
+  "schema": "PROJECT_BRAIN_CONTINUOUS_OBS_CONTEXT_V1",
+  "stale_authority_absent": true,
+  "status": "CURRENT",
+  "unknown_material_dependencies": [],
+  "valid_proof_action_priority": true
+}

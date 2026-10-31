@@ -1,0 +1,60 @@
+{
+  "affected_modules": [
+    "calc.py",
+    "test_calc.py",
+    "user_mod.py"
+  ],
+  "changed_files": [
+    "calc.py",
+    "test_calc.py",
+    "user_mod.py"
+  ],
+  "changed_source": "unified_diff",
+  "changed_symbols": {
+    "calc.py": {
+      "module_wide": false,
+      "reason": "DEFINITIONS_TOUCHED",
+      "symbols": [
+        "weighted_total"
+      ]
+    },
+    "test_calc.py": {
+      "module_wide": false,
+      "reason": "DEFINITIONS_TOUCHED",
+      "symbols": [
+        "TestTotal",
+        "TestTotal.test_doubled_total"
+      ]
+    },
+    "user_mod.py": {
+      "module_wide": false,
+      "reason": "DEFINITIONS_TOUCHED",
+      "symbols": [
+        "twice"
+      ]
+    }
+  },
+  "ignored_non_python": [],
+  "indexed_but_not_repo_test_root": false,
+  "schema": "PROJECT_BRAIN_CHANGE_IMPACT_TEST_SELECTION_V1",
+  "selected_tests": [
+    "test_calc.py"
+  ],
+  "source_root": ".",
+  "tests": [
+    {
+      "path": "test_calc.py",
+      "reason": "MODULE_IN_AFFECTED_CLOSURE",
+      "selected": true
+    }
+  ],
+  "totals": {
+    "affected_modules": 3,
+    "candidate_tests": 1,
+    "changed_files": 3,
+    "changed_python_files": 3,
+    "changed_symbols": 4,
+    "selected_tests": 1
+  },
+  "unknown_symbol_modules": []
+}

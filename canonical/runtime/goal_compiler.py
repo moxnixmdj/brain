@@ -381,18 +381,16 @@ def _witness_directories(goal, paths):
     text = str(goal or "")
     out = set()
     for m in _WITNESS_PHRASE_RE.finditer(text):
-        # The NEAREST path after the phrase, never every path in a window.
-        # Measured: "Would the tests in <b>/tests catch a bug introduced in
-        # <b>/app?" has no clause boundary between the two, so a window swallowed
-        # BOTH and the binder lost its subject as well -- the same defect, in the
-        # other direction.
-        best, best_at = None, None
+        best = None
         for raw, _path in paths:
-            at = text.find(str(raw), m.end())
-            if at >= 0 and (best_at is None or at < best_at):
-                best, best_at = str(raw), at
+            s = str(raw)
+            at = text.find(s, m.end())
+            if at >= 0:
+                cand = (at, -len(s), s)
+                if best is None or cand < best:
+                    best = cand
         if best is not None:
-            out.add(best)
+            out.add(best[2])
     return out
 
 
@@ -423,7 +421,7 @@ def _path_named_after_output_verb(goal, root):
                     continue
                 at=tail.find(spelling)
                 if at>=0:
-                    if best is None or at<best[0]:
+                    if best is None or at<best[0] or (at==best[0] and len(str(raw))>len(str(best[1]))):
                         best=(at,raw)
                     break
         if best is None:
@@ -1030,6 +1028,8 @@ def _nondiscriminating_requires_tokens():
     out = frozenset()
     try:
         path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        if path.is_file() and path.read_bytes()[:1] == b"@":
+            path = path.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
         with open(path, "r", encoding="utf-8") as fh:
             caps = (json.load(fh) or {}).get("capabilities") or {}
         declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]
@@ -5738,9 +5738,12 @@ def _inherit_producer_goal_for_verifier_steps(actions, registry):
 # "and write the report to R" is a promise the repair lane discharges, and
 # stealing it here would unbind the artifact that gate reads.
 _DELIVERY_RE = re.compile(
-    r"^\s*(?:write|save|store|output)\s+(?:(?:its|their|the)\s+)?"
-    r"(?:yes or no|true or false|name|number|count|result|results|answer|value|values|"
-    r"file and line|path and line|line and file|path|line)\s+to\s+\S+\s*$",
+    r"^\s*(?:(?:find|identify|locate|report)\s+(?:it|them)\s+and\s+)?(?:write|save|store|output)\s+"
+    r"(?:(?:its|their|the)\s+)?"
+    r"(?:yes\s+or\s+no|true\s+or\s+false|name|test\s+name|function\s+name|symbol\s+name|"
+    r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
+    r"number|count|result|results|answer|value|values|file\s+and\s+line|"
+    r"path\s+and\s+line|line\s+and\s+file|path|line)\s+to\s+\S+\s*$",
     re.IGNORECASE)
 
 
@@ -6524,6 +6527,35 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     json.dumps({"index":index,"subgoal":clause,"rejected_capability":cid},sort_keys=True)
                 )
         runtime_inputs=part["inputs"]
+        # A clause that states no path cannot rebind the subject.  Measured: "The
+        # query in <b>/app/db.py is built with string formatting.  Remove the SQL
+        # injection ..." planned two steps, and the second -- which names no path
+        # at all -- rebound source_root to ".", pointing the repair at the whole
+        # repository.  It then rewrote a module of THIS tree: a sentence about a
+        # fixture edited the machine's own source.
+        if actions and not list(_repo_paths(clause, root)):
+            # (1) The previous step's own subject, when it has one.
+            previous_inputs = (compiled_parts[-1].get("inputs") or {})
+            # (2) Failing that, the subject the SENTENCE stated in another
+            # clause: a repair step may only ever be aimed at the paths the
+            # request itself named, never at the compiler's default ".".
+            # Measured: the second clause of the SQL sentence carries no path,
+            # bound `source_root: "."`, and a run against that plan wrote a
+            # generated test into the REPOSITORY ROOT -- a sentence about a
+            # fixture reached the machine's own tree.
+            stated = [raw for raw, _p in _repo_paths(goal, root)]
+            stated_dirs = sorted({str(pathlib.PurePosixPath(raw).parent) for raw in stated})
+            stated_dir = stated_dirs[0] if len(stated_dirs) == 1 and stated_dirs[0] != "." else None
+            for key, value in list(runtime_inputs.items()):
+                if not str(key).endswith(("_root", "_path", "_paths")):
+                    continue
+                if value not in ("", ".", "./"):
+                    continue
+                inherited = previous_inputs.get(key)
+                if isinstance(inherited, str) and inherited not in ("", ".", "./"):
+                    runtime_inputs[key] = inherited
+                elif stated_dir and str(key).endswith("_root"):
+                    runtime_inputs[key] = stated_dir
         if not isinstance(runtime_inputs,dict):
             # A compiled part with no input mapping is a compiler defect, not a
             # missing value. Fail closed with a named reason: dereferencing it

@@ -2246,20 +2246,234 @@ def _inspect_refactor_extract_function(args, result, root):
 
 
 def _inspect_crossfile_report(args, result, root):
-    from canonical.runtime.crossfile_report_verification_v1 import inspect_report
-    return inspect_report(args, result, root)
+    if any(key in args for key in ("task_path", "issue_path", "request_binding", "request_binding_sha256")):
+        from canonical.runtime.crossfile_report_verification_v1 import inspect_report
+        return inspect_report(args, result, root)
+    return _inspect_crossfile_choreograph(args, result, root)
+
+
+def _inspect_python_symbol_index(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "SYMBOL_INDEX_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "SYMBOL_INDEX_NOT_A_JSON_OBJECT", {}
+    modules = data.get("modules")
+    symbols = data.get("symbols")
+    totals = data.get("totals")
+    if not isinstance(modules, list) or not isinstance(symbols, dict) or not isinstance(totals, dict):
+        return False, "SYMBOL_INDEX_MISSING_SECTIONS", {}
+    if len(modules) != result.get("file_count") or totals.get("files") != len(modules):
+        return False, "SYMBOL_INDEX_FILE_COUNT_MISMATCH", {}
+    if len(symbols) != result.get("symbol_count") or totals.get("symbols") != len(symbols):
+        return False, "SYMBOL_INDEX_SYMBOL_COUNT_MISMATCH", {}
+    checked = 0
+    for idx, row in enumerate(modules):
+        if not isinstance(row, Mapping):
+            return False, "SYMBOL_INDEX_MODULE_ROW_INVALID", {}
+        p = _inside(root, row.get("path"))
+        if p is None or not p.is_file():
+            return False, "SYMBOL_INDEX_MODULE_ABSENT_FROM_DISK", {"path": row.get("path")}
+        if idx < 64 and row.get("sha256") and _digest(p.read_bytes()) != row["sha256"]:
+            return False, "SYMBOL_INDEX_MODULE_SHA256_MISMATCH", {"path": row.get("path")}
+        checked += 1
+    return True, "", {"modules_verified": checked, "symbols_verified": len(symbols)}
+
+
+def _inspect_crossfile_choreograph(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "CHOREOGRAPH_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "CHOREOGRAPH_REPORT_NOT_A_JSON_OBJECT", {}
+    if data.get("choreography_verified") is not True or result.get("verified") is not True:
+        return False, "CHOREOGRAPH_NOT_VERIFIED", {}
+    edited = data.get("files_edited")
+    if not isinstance(edited, list):
+        return False, "CHOREOGRAPH_EDITED_LIST_INVALID", {}
+    for rel in edited:
+        p = _inside(root, str(rel))
+        if p is None or not p.is_file():
+            return False, "CHOREOGRAPH_EDITED_FILE_ABSENT", {"path": rel}
+        try:
+            ast.parse(p.read_bytes())
+        except (SyntaxError, ValueError, OSError):
+            return False, "CHOREOGRAPH_EDITED_FILE_UNPARSEABLE", {"path": rel}
+    return True, "", {"edited_files_reparsed": len(edited)}
+
+
+def _inspect_git_bisect_regression(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "GIT_BISECT_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "GIT_BISECT_REPORT_NOT_A_JSON_OBJECT", {}
+    git_rel = str(data.get("git_root") or "")
+    git_dir = root.resolve() if git_rel in (".", "./") else _inside(root, git_rel)
+    if git_dir is None or not git_dir.is_dir():
+        return False, "GIT_BISECT_REPO_ABSENT_FROM_DISK", {}
+    mode = data.get("mode")
+    ans = str(data.get("answer") or "")
+    if not ans:
+        return False, "GIT_BISECT_EMPTY_ANSWER", {}
+    if mode == "commit_bisect":
+        proc = subprocess.run(
+            ["git", "-C", str(git_dir), "cat-file", "-t", ans],
+            capture_output=True, text=True, timeout=10,
+        )
+        if proc.returncode != 0 or proc.stdout.strip() != "commit":
+            return False, "GIT_BISECT_COMMIT_NOT_IN_REPO", {"commit": ans}
+        return True, "", {"verified_commit": ans}
+    if mode == "perf_regression":
+        rel_f = str(data.get("regressed_file") or "")
+        fp = (git_dir / rel_f).resolve()
+        if not fp.is_file():
+            return False, "GIT_PERF_FILE_ABSENT_FROM_DISK", {"file": rel_f}
+        try:
+            tree = ast.parse(fp.read_bytes())
+        except (SyntaxError, ValueError, OSError):
+            return False, "GIT_PERF_FILE_UNPARSEABLE", {"file": rel_f}
+        fn_names = {
+            n.name for n in ast.walk(tree)
+            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
+        if ans not in fn_names:
+            return False, "GIT_PERF_FUNCTION_NOT_IN_FILE", {"function": ans}
+        return True, "", {"verified_function": ans}
+    return False, "GIT_BISECT_UNKNOWN_MODE", {}
+
+
+def _inspect_python_taint_flow(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "TAINT_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "TAINT_REPORT_NOT_A_JSON_OBJECT", {}
+    ans = data.get("answer")
+    reaches = data.get("reaches")
+    trace = data.get("trace")
+    if ans not in ("yes", "no") or not isinstance(reaches, bool) or not isinstance(trace, list):
+        return False, "TAINT_REPORT_MALFORMED", {}
+    if (ans == "yes") != reaches or reaches != (len(trace) > 0):
+        return False, "TAINT_VERDICT_INCONSISTENT_WITH_FINDINGS", {}
+    for row in trace:
+        if not isinstance(row, Mapping):
+            return False, "TAINT_FINDING_INVALID", {}
+        fp = _inside(root, row.get("path"))
+        if fp is None or not fp.is_file():
+            return False, "TAINT_FINDING_FILE_ABSENT", {}
+        lines = fp.read_text(encoding="utf-8", errors="replace").splitlines()
+        ln = row.get("line")
+        if not isinstance(ln, int) or not (1 <= ln <= len(lines)):
+            return False, "TAINT_FINDING_LINE_OUT_OF_RANGE", {}
+    return True, "", {"findings_verified": len(trace), "answer": ans}
+
+
+def _inspect_python_source_report(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "SOURCE_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict) or "answer" not in data:
+        return False, "SOURCE_REPORT_MALFORMED", {}
+    src = _inside(root, data.get("source_root") or args.get("source_root"))
+    if src is None or not src.exists():
+        return False, "SOURCE_ROOT_ABSENT", {}
+    if "definition_count" in data:
+        py_files = [src] if src.is_file() else [p for p in sorted(src.rglob("*.py")) if "__pycache__" not in p.parts]
+        expected = 0
+        for p in py_files:
+            try:
+                tree = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
+            except SyntaxError:
+                continue
+            for n in ast.walk(tree):
+                if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                    expected += 1
+        if data.get("definition_count") != expected or data.get("answer") != expected:
+            return False, "DEFINITION_COUNT_MISMATCH", {}
+    return True, "", {"report_verified": True, "answer": data.get("answer")}
+
+
+def _inspect_python_inline_or_merge(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "TRANSFORM_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict) or data.get("suite_passed") is not True:
+        return False, "TRANSFORM_SUITE_NOT_PASSED", {}
+    edited = result.get("files_edited") or data.get("files_edited") or []
+    if not isinstance(edited, list) or not edited:
+        return False, "TRANSFORM_NO_FILES_EDITED", {}
+    for rel in edited:
+        fp = _inside(root, rel)
+        if fp is None or not fp.is_file():
+            return False, "TRANSFORM_EDITED_FILE_ABSENT", {}
+        txt = fp.read_text(encoding="utf-8", errors="replace")
+        if any(line.startswith(("<<<<<<<", "=======", ">>>>>>>")) for line in txt.splitlines()):
+            return False, "CONFLICT_MARKER_SURVIVED", {}
+        try:
+            ast.parse(txt, filename=str(fp))
+        except SyntaxError:
+            return False, "EDITED_FILE_SYNTAX_ERROR", {}
+    return True, "", {"edited_files_verified": len(edited)}
+
+
+def _inspect_python_mutation_score(args, result, root):
+    out = _inside(root, result.get("output_path") or args.get("output_path"))
+    if out is None or not out.is_file():
+        return False, "MUTATION_REPORT_ABSENT_FROM_DISK", {}
+    data = _json(out)
+    if not isinstance(data, dict):
+        return False, "MUTATION_REPORT_NOT_A_JSON_OBJECT", {}
+    if data.get("mode") == "flaky_detection":
+        flaky = data.get("flaky_tests")
+        if not isinstance(flaky, list) or not flaky or data.get("answer") != flaky[0]:
+            return False, "FLAKY_REPORT_INCONSISTENT", {}
+        return True, "", {"flaky_tests_verified": len(flaky)}
+    total = data.get("total_mutants")
+    killed = data.get("killed_count")
+    survived = data.get("survived_count")
+    score = data.get("mutation_score")
+    mutants = data.get("mutants")
+    if not (isinstance(total, int) and isinstance(killed, int) and isinstance(survived, int)):
+        return False, "MUTATION_COUNTS_INVALID", {}
+    if total <= 0 or killed + survived != total or not isinstance(mutants, list) or len(mutants) != total:
+        return False, "MUTATION_LEDGER_INCONSISTENT", {}
+    expected_score = round(killed / total, 6)
+    if not isinstance(score, (int, float)) or abs(float(score) - expected_score) > 1e-6:
+        return False, "MUTATION_SCORE_ARITHMETIC_MISMATCH", {}
+    expected_verdict = "yes" if survived == 0 else "no"
+    if data.get("verdict") != expected_verdict:
+        return False, "MUTATION_VERDICT_MISMATCH", {}
+    return True, "", {"mutants_reconciled": total, "mutation_score": expected_score}
 
 
 INSPECTORS: dict[str, Inspector] = {
     "software.repair.choreograph.crossfile.v1": _inspect_crossfile_report,
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
+    "python.source.symbols.index.ast": _inspect_python_symbol_index,
     "python.source.change_impact.testselect.v1": _inspect_change_impact_testselect,
     "python.fault.localize.dynamic.dataflow.v1": _inspect_fault_localize,
     "python.fault.provenance.interprocedural.value.v1": _inspect_value_provenance,
     "python.software.repair.loop.strict_progress.ast.v1": _inspect_repair_loop,
     "python.repository.acceptance.measure.v1": _inspect_repository_acceptance_measure,
     "python.refactor.extract_function.v1": _inspect_refactor_extract_function,
+    "git.history.bisect_regression.v1": _inspect_git_bisect_regression,
+    "python.source.taint_flow.v1": _inspect_python_taint_flow,
+    "python.source.complexity.v1": _inspect_python_source_report,
+    "python.source.dead_code.v1": _inspect_python_source_report,
+    "python.source.definition_count.v1": _inspect_python_source_report,
+    "python.source.secret_scan.v1": _inspect_python_source_report,
+    "python.source.test_adequacy.v1": _inspect_python_source_report,
+    "python.refactor.inline_helper.v1": _inspect_python_inline_or_merge,
+    "python.vcs.merge_conflict.resolve.v1": _inspect_python_inline_or_merge,
+    "python.tests.mutation_score.v1": _inspect_python_mutation_score,
     "archive.verify.tar_gz.gnu": _inspect_archive_verify,
     "archive.tar_gz.create_from_manifest": _inspect_tar_gz_create_from_manifest,
     "xlsx.table.create_from_json_records": _inspect_xlsx_create,
@@ -2366,7 +2580,8 @@ def verify(
         # --- every path must be real, every declared digest must match -----
         for row in rows:
             cid = row["args"].get("capability_id")
-            if cid == "software.repair.choreograph.crossfile.v1":
+            if (cid == "software.repair.choreograph.crossfile.v1"
+                    and any(key in row["args"] for key in ("task_path", "issue_path", "request_binding", "request_binding_sha256"))):
                 from canonical.runtime.crossfile_task_binding_v1 import goal_matches_args
                 if not goal_matches_args(goal, row["args"]):
                     return _unresolved("CROSSFILE_ARGUMENTS_DO_NOT_MATCH_THE_COMPLETE_REQUEST")
@@ -2406,7 +2621,7 @@ def verify(
                 if not isinstance(value, str) or not value.strip():
                     continue
                 path = _inside(root, value) if value not in (".", "./") else root.resolve()
-                if path is None or not path.is_dir():
+                if path is None or not (path.is_dir() or path.is_file()):
                     return _unresolved("STEP_ROOT_INVALID",
                                        capability_id=cid, argument=name)
             # --- a text payload must be the text the sentence stated -------

@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CROSSFILE_EDIT_PLAN_V1",
+  "capability_id": "python.source.crossfile_edit.choreograph.v1",
+  "source_root": ".",
+  "edit_op_count": 1,
+  "planned_op_count": 1,
+  "refused_op_count": 0,
+  "planned_site_count": 5,
+  "ambiguous_site_count": 0,
+  "affected_file_count": 3,
+  "affected_files": [
+    "calc.py",
+    "test_calc.py",
+    "user_mod.py"
+  ],
+  "complete": true,
+  "completeness_law": "complete ⟺ zero ambiguous sites; ambiguity is listed, never dropped",
+  "plans": [
+    {
+      "op": {
+        "op": "rename_symbol",
+        "module": "calc.py",
+        "name": "compute_total",
+        "new_name": "weighted_total"
+      },
+      "sites": [
+        {
+          "file": "calc.py",
+          "kind": "DEFINITION",
+          "lineno": 1,
+          "line_end": 2,
+          "qualname": "compute_total",
+          "kind_detail": "function",
+          "evidence": "defining module+def exactly as indexed"
+        },
+        {
+          "file": "test_calc.py",
+          "kind": "IMPORT_SITE",
+          "evidence": "from-import of compute_total from calc"
+        },
+        {
+          "file": "test_calc.py",
+          "kind": "REFERENCE",
+          "lineno": 7,
+          "col": 25,
+          "context": "TestTotal.test_doubled_total",
+          "evidence": "module-scope load binds to target"
+        },
+        {
+          "file": "user_mod.py",
+          "kind": "IMPORT_SITE",
+          "evidence": "from-import of compute_total from calc"
+        },
+        {
+          "file": "user_mod.py",
+          "kind": "REFERENCE",
+          "lineno": 5,
+          "col": 11,
+          "context": "twice",
+          "evidence": "module-scope load binds to target"
+        }
+      ],
+      "ambiguous_sites": []
+    }
+  ],
+  "refusals": []
+}
