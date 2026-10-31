@@ -132,7 +132,10 @@ def test_real_bounded_search_parses_source_once_but_executes_every_trial(tmp_pat
         sys.setprofile(previous)
     assert len(calls) == 1
     assert result['pass'] is False
-    assert result['tested_candidate_count'] == 4
-    assert len((tmp_path / 'calls.txt').read_text().splitlines()) == 5
+    # Upstream single search reserves six neighborhood trials independently
+    # of the four legacy slots; the iterative engine retains its total cap.
+    expected_trials = 10 if engine == 'single' else 4
+    assert result['tested_candidate_count'] == expected_trials
+    assert len((tmp_path / 'calls.txt').read_text().splitlines()) == expected_trials + 1
     assert source.read_bytes() == text.encode()
     assert result['source_restored'] is True

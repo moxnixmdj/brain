@@ -1,14 +1,13 @@
-"""Task-bound cross-file rename/move using existing Brain kernels.
+"""Cross-file repair with separate staged and in-place protocols.
 
-Accept either an explicit edits task or a supported natural-language issue.
-Reuse symbol indexing, strict issue binding, isolated issue-to-PR choreography,
-fixed-point checks, impact-selected tests, and a full pytest regression run.
-Original source is not promoted or intentionally edited. This is NOT general
-repair synthesis, hostile-code confinement, or independent verification.
+Explicit task/issue/binding arguments select isolated rename/move choreography,
+strict task binding, fixed-point checks, selected/full pytest regression, and
+no promotion of the original source. Malformed staged requests never fall back.
 
-The legacy source-root-only registry template refuses: imports alone are not
-a cross-file repair. Normal entry binds the explicit staged-report grammar
-through crossfile_task_binding_v1 without changing the shared registry.
+Source-root-only requests retain upstream in-place structural/test-guided repair
+algorithms below, including conflict merging and import-cycle deferral. That
+mode can edit the stated source tree; it is not an isolated staged proposal.
+Neither mode implies universal repair or independent semantic verification.
 """
 from __future__ import annotations
 

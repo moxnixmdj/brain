@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-"""Task-bound compatibility adapter for bounded repair and candidate checking.
+"""Bounded repair with distinct structured-contract and in-place fixture modes.
 
-Reuse the existing provenance-guided repair -> isolated realization -> measured
-acceptance controller, with concrete and Hypothesis checks of the SAME candidate.
-No demo sources, registry-only proofs, or unchanged retries. ``budget`` bounds
-controller dispatches; one bounded dispatch is sufficient because the controller
-already searches candidates. Its own candidate limits still apply.
+Requests containing task_text or contract_checks retain the task-bound controller:
+provenance-guided synthesis, isolated realization, concrete/Hypothesis checks of
+that same candidate, measured acceptance, and source restoration. Such requests
+never fall back to a weaker mode on malformed input or failed acceptance.
 
-The legacy capability/effect identifiers are retained for compatibility; they
-are not a claim of Z3-based patch synthesis, universal repair, or independent
-semantic verification. Explicit source_root, task_text and contract_checks are
-required. The old budget-only registry template now fails closed rather than
-manufacturing success; this change does not claim natural-language reachability.
+Source/test-only requests retain upstream fixture CEGIS: bounded synthesis,
+realization in the stated source tree, suite verification and counterexample
+escalation. This mode can mutate source and is not a structured-contract proof.
+Budget-only invocation still fails closed; registry presence is not task success.
+The compatibility identifiers do not imply universal synthesis or semantic proof.
 """
 from __future__ import annotations
 

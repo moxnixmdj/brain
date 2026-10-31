@@ -10,7 +10,7 @@ from canonical.runtime.bound_capabilities import python_repair_measured_acceptan
 
 
 def reference_pool(row, tests, limit):
-    """Original parse-per-edit algorithm, independently expressed as an oracle."""
+    """Parse-per-edit byte oracle with upstream legacy/neighborhood reserves."""
     text = row['path'].read_bytes().decode('utf-8')
     parsed = ast.parse(text)
     nums, strings = coupled._PATCH._test_literals(tests)
@@ -29,9 +29,15 @@ def reference_pool(row, tests, limit):
             continue
         priority = max([s['score'] for s in row['symbols'] if s['score'] > 0
                         and s['lineno'] <= descriptor['lineno'] <= s['end_lineno']] or [0])
-        rows.append((priority, {'start': start, 'end': end, 'replacement': data, 'mutation': descriptor}))
+        edit = {'start': start, 'end': end, 'replacement': data, 'mutation': descriptor,
+                'family': descriptor.get('family') or 'legacy', 'lineno': descriptor.get('lineno') or 0}
+        if descriptor.get('ratio'):
+            edit['ratio'] = descriptor['ratio']
+        rows.append((priority, edit))
     rows.sort(key=lambda r: (-r[0], r[1]['start'], r[1]['end'], str(r[1]['mutation'])))
-    return [r for _, r in rows[:limit]]
+    legacy = [r for _, r in rows if r['family'] != 'neighborhood'][:limit]
+    neighborhood = [r for _, r in rows if r['family'] == 'neighborhood'][:9]
+    return legacy + neighborhood
 
 
 @pytest.mark.parametrize('source', [
@@ -68,7 +74,9 @@ def test_pool_parses_source_once_not_once_per_mutation(tmp_path):
         edits = coupled._pool(row, [], 12)
     finally:
         sys.setprofile(previous)
-    assert len(edits) == 12
+    assert len(edits) == 21
+    assert sum(e['family'] != 'neighborhood' for e in edits) == 12
+    assert sum(e['family'] == 'neighborhood' for e in edits) == 9
     assert calls == [str(path)]
 
 
