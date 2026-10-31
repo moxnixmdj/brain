@@ -7569,6 +7569,306 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIFFTRIAGE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIFFTRIAGE-001.json"
       }
+    },
+    "python.review.diff_type_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_type_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}",
+          "worktree_path": "${input.worktree_path}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_type_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "type",
+        "mypy",
+        "typecheck",
+        "gate",
+        "pull request",
+        "pr",
+        "type error",
+        "operand",
+        "changed lines",
+        "soundness"
+      ],
+      "limitations": [
+        "mypy stage needs a mypy-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_BASELINE_ONLY recorded loudly, the type sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking: untouched pre-existing findings are advisory context listed as out_of_scope (never blockers).",
+        "--follow-imports=silent --ignore-missing-imports: imported modules are trusted silently; cross-module type faults in untouched files are outside this gate's changed-lines law.",
+        "v1 reviews unified diffs of .py files only; non-Python touched rows are skipped by the stage-1/stage-2 machinery."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_type_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "mypy",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "mypy",
+        "type": "pypi",
+        "version_family": ">=1.5"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TYPEGATE-001",
+        "observed_effect": {
+          "blind_spot_closed": "lint-clean int+str operand lie: ruff lint gate PASS, this gate FAIL with assignment/operator at pkg/core.py:6 -- measured complementarity",
+          "crown": "natural-language issue -> orchestrator diff -> ruff lint triage AND this type gate (review stage pair)",
+          "deterministic": "typegate artifact byte-identical on rerun",
+          "e2e_chain_ms": [
+            1241.0,
+            1163.3
+          ],
+          "golden": "gate PASS on the choreographed rename diff with mypy 2.4.0",
+          "mypy": "2.4.0"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TYPEGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TYPEGATE-001.json"
+      }
+    },
+    "python.software.issue_to_pr.orchestrate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.issue_to_pr.orchestrate.v1",
+          "diff_path": "${input.diff_path}",
+          "index_path": "${input.index_path}",
+          "output_path": "${input.output_path}",
+          "pr_intent_path": "${input.pr_intent_path}",
+          "python_executable": "${input.python_executable}",
+          "source_root": "${input.source_root}",
+          "task_path": "${input.task_path}",
+          "timeout_s": "${input.timeout_s}",
+          "worktree_path": "${input.worktree_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_issue_to_pr_orchestrate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "issue",
+        "pull request",
+        "pr",
+        "orchestrate",
+        "end-to-end",
+        "implement",
+        "task",
+        "edit",
+        "apply",
+        "diff",
+        "closed loop",
+        "autonomous",
+        "rename",
+        "move",
+        "refactor",
+        "dependency closure"
+      ],
+      "limitations": [
+        "requires a JSON task file whose edits are choreograph ops (rename_symbol, move_symbol); free-text issue parsing is a separate concern (refuses TASK_SCHEMA_MISSING fields, never guesses).",
+        "move_symbol creates a missing target module by declared intent; multi-line import statements, multi-line decorator spans, and aliased-from-import rewrite shapes fail closed rather than guess.",
+        "test execution runs pytest on the selected minimal subset against the given python_executable; pytest absence is reported as test_pytest 'UNAVAILABLE' \u2014 edits are then still proven by the fixed-point re-index and verdict splits explicitly ('edits_verified' vs composite 'verified').",
+        "writes land only in the named worktree copy; producing the PR itself (git push/gh pr create) is intentionally outside v1."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.issue_to_pr.orchestration"
+      ],
+      "requires": [
+        "python.source.crossfile_edit.choreograph.v1",
+        "python.source.change_impact.testselect.v1",
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "applied_op_count",
+        "applied_site_count",
+        "diff_sha256",
+        "edits_verified",
+        "planned_op_count",
+        "pr_intent_verified",
+        "refused_op_count",
+        "task_id",
+        "test_failed_count",
+        "test_passed_count",
+        "test_pytest",
+        "test_selected_count",
+        "verified"
+      ],
+      "source": {
+        "module": "pytest",
+        "type": "pypi",
+        "version_family": ">=8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-ISSUE2PR-002",
+        "observed_effect": {
+          "applied_ops": 1,
+          "applied_sites": 3,
+          "dependency_closure": "from pkg.core import normalize injected into pkg/ops.py",
+          "deterministic": "diff artifacts byte-identical across reruns",
+          "edit": "move_symbol helper from pkg/core.py to pkg/ops.py with dependency-closure injection and multi-name import rewriting",
+          "first_run_ms": 323.3,
+          "issue_id": "GH-8843",
+          "loop_median_ms": 324.5,
+          "planned_ops": 1,
+          "prior_rename_mission": "ASTRA-VERIFY-ISSUE2PR-001 (rename_symbol golden, 305-315ms)",
+          "source_tree_untouched": true,
+          "tests_failed": 0,
+          "tests_passed": 2,
+          "tests_selected": 1
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ISSUE2PR-002__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-ISSUE2PR-002.json"
+      }
+    },
+    "python.software.request.semantic_behavior.compile.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.software.request.semantic_behavior.compile.v1",
+          "output_path": "${input.output_path}",
+          "task_text": "${input.goal}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_software_request_semantic_acceptance_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "software",
+        "request",
+        "semantic",
+        "behavior",
+        "acceptance",
+        "call",
+        "exception",
+        "function",
+        "class",
+        "exact-text",
+        "compiler"
+      ],
+      "limitations": [
+        "One-sided controlled semantic compiler for explicit Python callable equality/boolean/exception requirements, exact file text, and top-level function/class existence.",
+        "Compilation is complete only when every lossless raw-task obligation is covered by the supported line grammar; malformed, mixed unsupported, or ambiguous lines remain blocking residuals.",
+        "Generated acceptance programs resolve callables only to repository-local Python modules and reject injection-shaped callable syntax.",
+        "This compiler does not itself prove that a candidate passes the generated acceptance program and has no general natural-language, cross-language, mergeability, benchmark-score, promotion, or terminal authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.software.request.semantic_behavior.acceptance_program_compiled"
+      ],
+      "requires": [],
+      "result_fields": [
+        "schema",
+        "status",
+        "pass",
+        "coverage_complete",
+        "task_sha256",
+        "lossless_task_contract_sha256",
+        "required_obligation_ids",
+        "compiled_obligation_ids",
+        "residual_obligation_ids",
+        "cells",
+        "compile_errors",
+        "compiler_payload_sha256",
+        "acceptance_program_sha256",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "terminal_authority",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
+        "composed_runtime": [
+          "canonical/runtime/lossless_raw_task_contract_v1.py"
+        ],
+        "modules": [
+          "ast",
+          "builtins",
+          "hashlib",
+          "importlib",
+          "importlib.util",
+          "json",
+          "pathlib",
+          "re",
+          "sys"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_two_carrier_replay": "13_OF_13_EACH",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "model_dependency_count": 0,
+        "post_merge_current_dependency_replay": "13_OF_13_EACH",
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "receipt_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
