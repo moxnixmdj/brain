@@ -28811,10 +28811,6 @@
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
-    "dependency.deprecated.inspect.migrate",
-    "performance.quadratic.linearithmic.optimize",
-    "security.sql.injection.remove",
-    "software.concurrency.race.condition.fix",
     "software.patch.crossfile.atomic",
     "software.repair.choreography.verified",
     "software.source.write.crossfile",
@@ -28875,15 +28871,6 @@
     "patch",
     "source",
     "write",
-    "fix",
-    "security",
-    "sql",
-    "injection",
-    "remove",
-    "performance",
-    "quadratic",
-    "optimize",
-    "dependency",
     "applied"
    ],
    "verification": {
@@ -30478,8 +30465,8 @@
   "engines": 26,
   "knowledge_documents": 224,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6556,
-  "routing_tokens": 2262,
+  "research_index_records": 6557,
+  "routing_tokens": 2261,
   "skills": 18,
   "source_index_entry_points": 428,
   "source_index_modules": 1905
@@ -30487,7 +30474,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ecff615d7207a27c055e7e9dd8496fa51ef917eeafff8217bc325ee62c932bdd"
+  "value": "6413041a313e3f38f9345ee7e4939e5e7382e2cb55027450990f9eee1b891484"
  },
  "engines": [
   {
@@ -34270,9 +34257,8 @@
     "code.impact.tree_sitter.testselect.v1": 468.0
    },
    "dependency": {
-    "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1": 235.0,
-    "python.software.issue_to_pr.orchestrate.v1": 352.5,
-    "software.repair.choreograph.crossfile.v1": 235.0
+    "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1": 312.666667,
+    "python.software.issue_to_pr.orchestrate.v1": 469.0
    },
    "deploy": {
     "python.repo.pr_realize.v1": 468.0
@@ -36742,9 +36728,6 @@
    "optimality": {
     "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py.auto.v1": 468.0
    },
-   "optimize": {
-    "software.repair.choreograph.crossfile.v1": 468.0
-   },
    "optional": {
     "python.refactor.add_parameter.v1": 702.0
    },
@@ -37161,8 +37144,7 @@
     "software.review.gate.composer.v1": 235.0
    },
    "performance": {
-    "python.review.diff_perf_gate.v1": 312.666667,
-    "software.repair.choreograph.crossfile.v1": 312.666667
+    "python.review.diff_perf_gate.v1": 468.0
    },
    "persistence": {
     "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1": 468.0
@@ -38240,8 +38222,7 @@
     "image.qr.generate.qrencode": 468.0
    },
    "quadratic": {
-    "python.source.complexity.v1": 312.666667,
-    "software.repair.choreograph.crossfile.v1": 312.666667
+    "python.source.complexity.v1": 468.0
    },
    "quality": {
     "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py.auto.v1": 37.846154,
@@ -38593,8 +38574,7 @@
     "python.refactor.move_function.v1": 702.0
    },
    "remove": {
-    "shell.command.run": 312.666667,
-    "software.repair.choreograph.crossfile.v1": 312.666667
+    "shell.command.run": 468.0
    },
    "rename": {
     "python.issue.natural_language.parse_edit_intent.v1": 135.142857,
@@ -39382,8 +39362,7 @@
     "python.review.diff_security_gate.v1": 468.0
    },
    "security": {
-    "python.review.diff_security_gate.v1": 312.666667,
-    "software.repair.choreograph.crossfile.v1": 312.666667
+    "python.review.diff_security_gate.v1": 468.0
    },
    "seed": {
     "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py.auto.v1": 312.666667,
@@ -204779,6 +204758,30 @@
    }
   },
   {
+   "action_id": "A_ROW_DECLARES_ONLY_WHAT_IT_IMPLEMENTS_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_ROW_DECLARES_ONLY_WHAT_IT_IMPLEMENTS_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_ROW_DECLARES_ONLY_WHAT_IT_IMPLEMENTS_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "73e49d6b7e643f4530396956d01edb247db2f42198d68556b5532dc9483a1439",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_row_declared_four_effects_its_adapter_does_not_implement_so_the_effect_gate_admitted_sentences_it_could_only_fail_and_a_read_of_a_named_revision_never_reached_the_repository_row_whose_ops_already_contained_diff__measured_2026_10_31_on_bf4f78f": 1,
+    "a_row_declares_only_what_it_implements_v1_20261031_v1": 1,
+    "declares": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "implements": 1,
+    "only": 1,
+    "read_the_section_the_answer_is_in_and_key_the_index_cache_by_the_tree": 1,
+    "row": 1,
+    "the_choreograph_row_declares_only_the_four_effects_it_implements_and_a_read_opener_with_one_stated_git_operation_and_a_stated_revision_is_a_repository_read__both_proven_by_the_instruments": 1,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_SECOND_OPERAND_IS_THE_SAME_QUESTION_ASKED_TWICE_UNLESS_THE_PROGRAM_WRITES_TO_IT_V1_20261026_V1",
    "capability": false,
    "date": "2026-10-26",
@@ -276733,7 +276736,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "457ebe3a1e6c15664fa928d81292e89c6bdb7cb5b924f4a6633a348b1234a7ad",
+   "sha256": "b3a1356b5453fc067836d4028f56a2ef4cb85e7474613f78b7a745d713d8646a",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 16,
    "symbols": [

@@ -1,0 +1,205 @@
+{
+ "action_id": "A_ROW_DECLARES_ONLY_WHAT_IT_IMPLEMENTS_V1_20261031_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "THE GATE REFUSED AN ANSWER THE MACHINE HAD ALREADY WRITTEN. The symbol index emits a 105.8 MB artifact for canonical/runtime in which the callers answer is 1.47 MB, and the answer gate's 16 MB cap refused the whole run -- 16.5-18.7 s to ARTIFACT_TOO_LARGE while the same sentence about one file answered in 293 ms. The index's own cache, meanwhile, was keyed by the request's artifact path, which the door makes unique per request, so no two sentences about one tree ever shared work. Neither fix is a new primitive: the gate already projects and bounds an answer, and the index already had a sha256-verified row cache looking for a key a caller could repeat.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "route_class": "REUSE",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/swe_typed_plan_v1.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+   "canonical/tests/test_a_row_declares_only_what_it_implements_v1.py",
+   ".github/workflows/swe-advanced-census.yml"
+  ]
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_ROW_DECLARED_FOUR_EFFECTS_ITS_ADAPTER_DOES_NOT_IMPLEMENT_SO_THE_EFFECT_GATE_ADMITTED_SENTENCES_IT_COULD_ONLY_FAIL_AND_A_READ_OF_A_NAMED_REVISION_NEVER_REACHED_THE_REPOSITORY_ROW_WHOSE_OPS_ALREADY_CONTAINED_DIFF__MEASURED_2026_10_31_ON_bf4f78f",
+ "canonical_base_commit": "bf4f78f6b6eb0b2bae1c1892772b66ce6e37365e",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A_ROW_DECLARED_FOUR_EFFECTS_ITS_ADAPTER_DOES_NOT_IMPLEMENT_SO_THE_EFFECT_GATE_ADMITTED_SENTENCES_IT_COULD_ONLY_FAIL_AND_A_READ_OF_A_NAMED_REVISION_NEVER_REACHED_THE_REPOSITORY_ROW_WHOSE_OPS_ALREADY_CONTAINED_DIFF__MEASURED_2026_10_31_ON_bf4f78f",
+ "date": "2026-10-31",
+ "expected_parent_change": "THE_CHOREOGRAPH_ROW_DECLARES_ONLY_THE_FOUR_EFFECTS_IT_IMPLEMENTS_AND_A_READ_OPENER_WITH_ONE_STATED_GIT_OPERATION_AND_A_STATED_REVISION_IS_A_REPOSITORY_READ__BOTH_PROVEN_BY_THE_INSTRUMENTS",
+ "expected_parent_frontier_change": "THE_CHOREOGRAPH_ROW_DECLARES_ONLY_THE_FOUR_EFFECTS_IT_IMPLEMENTS_AND_A_READ_OPENER_WITH_ONE_STATED_GIT_OPERATION_AND_A_STATED_REVISION_IS_A_REPOSITORY_READ__BOTH_PROVEN_BY_THE_INSTRUMENTS",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
+ "falsification_condition": "PUT_THE_FOUR_EFFECTS_BACK_AND_SEE_fix_failing_ci_RETURN_TO_LIVE_CONTROLLER_EXECUTION__REMOVE_THE_REVISION_RULE_AND_SEE_SENTENCE_44_RETURN_TO_RAW_GOAL_COMPILATION_GAP",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_ROW_CAN_NO_LONGER_CLAIM_AN_EFFECT_IT_CANNOT_PERFORM_AND_A_GIT_READ_REACHES_GIT",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.5,
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/swe_typed_plan_v1.py",
+  "canonical/runtime/declared_input_derivation_v1.py",
+  "canonical/runtime/bound_capabilities/git_repository_operate.py",
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+  "execution_guard/swe_advanced_probe_v1.py",
+  "execution_guard/swe_capability_matrix_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "bf4f78f6b6eb0b2bae1c1892772b66ce6e37365e",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "FOUR_DECLARED_EFFECTS_NO_ADAPTER_IMPLEMENTS",
+   "A_READ_DETECTION_THAT_COULD_NOT_SEE_A_STATED_REVISION",
+   "A_WORD_MENTION_LAW_THAT_THE_ADAPTER_S_PROSE_WOULD_HAVE_SATISFIED"
+  ],
+  "expected_parent_level_state_change": "THE_CHOREOGRAPH_ROW_DECLARES_ONLY_THE_FOUR_EFFECTS_IT_IMPLEMENTS_AND_A_READ_OPENER_WITH_ONE_STATED_GIT_OPERATION_AND_A_STATED_REVISION_IS_A_REPOSITORY_READ__BOTH_PROVEN_BY_THE_INSTRUMENTS",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "REVERTING_EITHER_HALF_RETURNS_A_CORRECT_ANSWER_TO_A_REFUSAL_OR_THE_TREE_TO_A_COLD_REPARSE",
+   "intrinsic_or_path_specific": "GENERAL__THE_GATE_RULE_IS_ABOUT_ANY_OVER_CAP_JSON_OBJECT_AND_THE_CACHE_RULE_IS_ABOUT_ANY_TREE_A_SIBLING_DESCRIBES",
+   "surviving_causal_blocker": "THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_REGISTRY_ROW__THE_FIX_IS_A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_ARGUMENT",
+   "existing_inherited_routes_checked": [
+    "answer_shape_v1",
+    "python_source_symbol_index",
+    "validate_cached_index",
+    "hardcore_swe_surface_probe_20261030.py",
+    "swe_capability_matrix_v1"
+   ],
+   "external_existing_routes_checked": "None needed: both mechanisms already existed in the tree.",
+   "surviving_gap": "ADVANCED_CENSUS_IS_STILL_5_OF_49__THIS_CHANGE_MOVES_ONE_SENTENCE_AND_ONE_MATRIX_CASE_AND_SAYS_SO"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_MATRIX_REAL_COUNT",
+    "TURNING_REFUSALS_INTO_PASSES"
+   ],
+   "real_outcome": "A sentence about a CI failure is served for real instead of dying inside a repair choreography, and 'Show me the diff of <file> against HEAD~1' returns the diff from the repository row instead of compiling to nothing.",
+   "surviving_necessity": "The machine could only answer 'who calls X' for a single file; for a tree it computed the answer and discarded it."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_EXISTING_PROJECTION_THE_EXISTING_SHA256_ROW_CACHE_AND_THE_EXISTING_FLOOR_IDIOM"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "ONE_A_B_MATRIX_RUN_WITH_THE_CHANGE_STASHED_TO_SEPARATE_THIS_CHANGE_FROM_MAIN_MOVING",
+   "search_stop_decision": "STOPPED_AFTER_TWO_DEFECTS_THAT_ARE_BOTH_FALSIFIABLE_BY_A_SINGLE_REVERT_AND_A_THIRD_LAW_IDEA_THAT_MEASURED_AS_WORTHLESS"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "losing_routes_reason": "A subsystem swap cannot be verified in one step; implementing race/SQL/optimisation detection to match a declaration would be three new capabilities invented to justify a sentence; and the word-mention law passes on the very adapter that lies.",
+   "routes_ranked": [
+    "DELETE_THE_FALSE_DECLARATION_AND_RECOGNISE_A_STATED_REVISION__SELECTED",
+    "REWRITE_SELECTION_WHOLESALE__A_SUBSYSTEM_SWAP_WITH_NO_SMALLER_MEASURABLE_STEP",
+    "EDIT_THE_ADAPTER_TO_IMPLEMENT_CONCURRENCY__THREE_FABRICATED_EFFECTS",
+    "ADD_A_WORD_MENTION_LAW__MEASURED_AND_REJECTED"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_MATRIX_CASE_IS_A_REAL_CI_FIX_VERIFIED_BY_ITS_OWN_ORACLE_AND_THE_DIFF_IS_VERIFIED_BY_THE_GIT_BINARY"
+  },
+  "real_outcome": "Find the callers of binding_view in canonical/runtime delivers ['_execute', '_prefer_the_writing_repair', 'admit', 'build_plan', 'compile_against_live_registry'] instead of refusing for size.",
+  "required_capability": "A_GATE_THAT_READS_THE_ANSWER_IT_ASKED_FOR_AND_A_CACHE_KEYED_BY_WHAT_IT_DESCRIBES",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Both defects are in this repository and were measured by its own instruments."
+  },
+  "routes_considered": [
+   "RAISE_THE_CAP__PAYS_FOR_THE_WHOLE_PARSE",
+   "NEW_SUMMARY_FORMAT__TWO_THINGS_TO_KEEP_IN_SYNC",
+   "BOUNDED_SECTION_READ_AND_TREE_KEYED_CACHE__CHOSEN"
+  ],
+  "selected_route": "DELETE_THE_FALSE_DECLARATION_AND_RECOGNISE_A_STATED_REVISION",
+  "selected_surviving_route": "DELETE_THE_FALSE_DECLARATION_AND_RECOGNISE_A_STATED_REVISION",
+  "stop_condition": "CAPABILITY_MATRIX_21_TO_22_REAL_0_FALSE_0_DAMAGED_fix_failing_ci_TOUCHED_ONLY_BY_THIS_CHANGE__ADVANCED_CENSUS_4_TO_5_OF_49_SENTENCE_44_SERVED_BY_git_repository_operate_v1__NUMBER_18_CAUSE_CHANGED_FROM_R3_WEAK_EVIDENCE_TO_STATED_OPTIMISATION_NOT_PERFORMED__NO_OTHER_ROW_MOVED__SIX_NEW_TESTS_PASS__A_WORD_MENTION_LAW_WAS_MEASURED_AND_REJECTED_BECAUSE_THE_ADAPTER_NAMES_RACE_SQL_AND_INJECT_WHILE_REFUSING_THEM",
+  "why_selected_route_is_fastest_sufficient": "Four deleted JSON lines and one regex clause, both re-measurable in a 15-second census and a 10-second matrix. The matrix case it recovered (fix_failing_ci) was verified by re-running the matrix immediately before and after."
+ },
+ "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "READ_THE_SECTION_THE_ANSWER_IS_IN_AND_KEY_THE_INDEX_CACHE_BY_THE_TREE",
+ "stop_condition": "CAPABILITY_MATRIX_21_TO_22_REAL_0_FALSE_0_DAMAGED_fix_failing_ci_TOUCHED_ONLY_BY_THIS_CHANGE__ADVANCED_CENSUS_4_TO_5_OF_49_SENTENCE_44_SERVED_BY_git_repository_operate_v1__NUMBER_18_CAUSE_CHANGED_FROM_R3_WEAK_EVIDENCE_TO_STATED_OPTIMISATION_NOT_PERFORMED__NO_OTHER_ROW_MOVED__SIX_NEW_TESTS_PASS__A_WORD_MENTION_LAW_WAS_MEASURED_AND_REJECTED_BECAUSE_THE_ADAPTER_NAMES_RACE_SQL_AND_INJECT_WHILE_REFUSING_THEM",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "DOES_A_ROW_S_DECLARED_EFFECT_SET_EQUAL_WHAT_ITS_ADAPTER_IMPLEMENTS_AND_DOES_A_STATED_REVISION_REACH_THE_OPERATION_BEARING_ROW",
+   "falsifier_id": "RESTORE_THE_FOUR_EFFECTS_AND_SEE_THE_MATRIX_LOSE_A_REAL_ROW",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
+   "proposal_id": "A_ROW_DECLARES_ONLY_WHAT_IT_IMPLEMENTS_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. A row now declares strictly LESS than before, so the effect gate refuses more rather than less; a read-only race question is still refused by name (pinned by test); the repository row still refuses an operation outside its own OPS tuple; and the census floor rises 4 -> 5 in the same change.",
+ "action_intent_path": null,
+ "real_outcome": "A sentence about a CI failure is served for real instead of dying inside a repair choreography, and 'Show me the diff of <file> against HEAD~1' returns the diff from the repository row instead of compiling to nothing.",
+ "required_capability": "A_DECLARATION_THAT_MATCHES_THE_ADAPTER_AND_A_FAMILY_RULE_KEYED_ON_THE_STATED_OPERATION"
+}
