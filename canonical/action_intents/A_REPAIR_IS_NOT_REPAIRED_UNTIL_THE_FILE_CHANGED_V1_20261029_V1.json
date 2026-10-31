@@ -38,7 +38,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The repair family's shared import path named only the source file's directory, so a package-layout suite died at import before any assertion ran; baseline and every candidate then scored identically and no candidate was a strict improvement. The same defect in three more places hid correct repairs, and the door accepted a read-only mechanism's report as a repair.",
- "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
+ "canonical_base_commit": "99db201ab737ea36948abda8d52091c617223aae",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +52,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
+  "canonical_base_commit": "99db201ab737ea36948abda8d52091c617223aae",
   "constructive_gap_for_open_obligation_ids": [
    "CODING_FRONTIERCODE_GE_54_4",
    "CODING_TB4_GE_66_4"
@@ -83,7 +83,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
+  "canonical_base_commit": "99db201ab737ea36948abda8d52091c617223aae",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "RETURNING_ANY_EXECUTED_VERDICT_UNCHANGED",
@@ -303,7 +303,7 @@
      "route": "WIDEN_THE_ACCEPTANCE_TOLERANCE"
     }
    ],
-   "checked_at_utc": "2026-10-31T13:35:34Z",
+   "checked_at_utc": "2026-10-31T13:39:26Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -367,7 +367,7 @@
    "selected_route_checked_at_utc": "2026-10-30T00:32:14Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T13:35:34Z",
+    "checked_at_utc": "2026-10-31T13:39:26Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -491,7 +491,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-31T13:35:34Z",
+  "checked_at_utc": "2026-10-31T13:39:26Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
@@ -531,7 +531,7 @@
      "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py"
     },
     {
-     "git_blob_sha": "c2e510488905006ea3b499cdb59a57bf7a350854",
+     "git_blob_sha": "3c9179e31ac3dc0058fd47cf161bf95ac1faa7e2",
      "path": "canonical/runtime/declared_input_derivation_v1.py"
     },
     {

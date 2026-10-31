@@ -21804,6 +21804,7 @@
    "input_contract_source": "action_template",
    "input_names": [
     "limit",
+    "message",
     "op"
    ],
    "kind": "BOUND_CAPABILITY",
@@ -30074,7 +30075,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "70a85e8fa2b2a8e611b5b26ad2a12ae040fb1d5fe35eb6b352ba6f720af8a4d6"
+  "value": "cb0c1e0dfd4a0e790547b8e730acb50a6c623c3785381be36b6240fde30b707d"
  },
  "engines": [
   {
@@ -54787,7 +54788,7 @@
   "included_source_count": 962,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6e8c50412328097aa9b7aca8992fe441504a97d0aec93192269a82c6031be215"
+  "source_tree_digest": "6e3e086803dd4176a462a16e15bd83a9ac16012d1a70db8b7e7e4015a10c91f0"
  },
  "research_index": [
   {
@@ -199163,7 +199164,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_REPAIR_IS_NOT_REPAIRED_UNTIL_THE_FILE_CHANGED_V1_20261029_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ffefd8569c4fae24dcc5ec727699e1e8cdb3714e8fd14291813da24688d41aef",
+   "sha256": "3163d6da41ffac08c3c876f6f82ce1079ea8d0e904208b99b738b30b74264dd0",
    "status": "",
    "terms": {
     "20261029": 1,
@@ -226567,7 +226568,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "b8b02e44730c25c05b85584b9ce7ceab1ca8c980ee0c34df38c2a27ccad1e264",
+   "sha256": "91fa1d2fa648722ecbb5dbc4417933e25cab88a4adcb2a333e78adbad8af3280",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 8,
    "symbols": [
