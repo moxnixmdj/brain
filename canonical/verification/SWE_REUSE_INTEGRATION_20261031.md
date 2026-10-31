@@ -225,3 +225,9 @@ checks. Its non-required same-identity UBJSON mission failed in the worker/relay
 step after its relay/compiler unit checks passed; the cause is not attributed
 without a diagnostic trace. The long heartbeat is not represented as completed.
 The final head must obtain its own signed verdict and model/compiler CI result.
+
+Final landing integration also retains main `ecfc9fb0`'s V13 inventory.
+Its incoming diff adds the inventory Markdown and its generated model index;
+no runtime source changed. The combined model was regenerated and subjected to
+the fresh 33-case verifier; the 205-case/census measurements above retain their
+original measured-source attribution.
