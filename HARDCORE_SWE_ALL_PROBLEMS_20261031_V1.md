@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-10-31 on main `bbc00a7` with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-10-31 on main `b37f118` with the substrate restored (`scripts/restore_substrate_v1.py`).
 Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md`
 records one round of repairs; this document is the whole problem list, ordered so that the next
 hour of work buys the most capability. Nothing here is a wish — every number is a measurement
@@ -11,7 +11,7 @@ the live verified registry, and a probe of the substrate).
 
 ## §0 The answer in one paragraph
 
-The brain answers **4 of 49** advanced software-engineering sentences and **22 of 54** capability cases for real (no FALSE rows, no DAMAGED). That gap is not a shortage of theory and it is
+The brain answers **4 of 49** advanced software-engineering sentences and **23 of 54** capability cases for real (no FALSE rows, no DAMAGED). That gap is not a shortage of theory and it is
 not a shortage of verification machinery — the tree has 440 registry rows and the strongest
 fail-closed answer gate it has ever had. The gap is three separate things, in this order:
 
@@ -33,15 +33,15 @@ fail-closed answer gate it has ever had. The gap is three separate things, in th
 | instrument | result |
 |---|---|
 | advanced census (49 hardcore sentences) | **4 served / 45 refused** |
-| capability matrix (54 cases) | **22 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
-| matrix latency | median 106 ms  p90 686 ms  max 4245 ms |
+| capability matrix (54 cases) | **23 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
+| matrix latency | median 102 ms  p90 673 ms  max 4257 ms |
 | live verified registry | 440 rows, 88 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
 
-The 22 rows that work for real, by name:
+The 23 rows that work for real, by name:
 
-`fix_verb_first`, `fix_target_first`, `bug_report`, `repair_with_report`, `repair_two_modules`, `repair_test_file`, `repair_no_test_named`, `rename_param`, `rename_symbol`, `extract_stated_statement`, `dead_code`, `complexity`, `change_impact`, `count_functions`, `run_suite`, `lint`, `typecheck`, `git_diff`, `add_parameter`, `measure_coverage`, `security_review`, `mutation_score`
+`fix_verb_first`, `fix_target_first`, `bug_report`, `repair_with_report`, `repair_two_modules`, `repair_test_file`, `repair_no_test_named`, `rename_param`, `rename_symbol`, `extract_stated_statement`, `dead_code`, `complexity`, `change_impact`, `count_functions`, `run_suite`, `lint`, `typecheck`, `git_diff`, `add_parameter`, `measure_coverage`, `security_review`, `mutation_score`, `perf_review`
 
 That list is the honest capability of the machine today: **single-file Python edits** (repair,
 rename, rename-parameter, add-parameter, extract, add-function), **static Python analysis**

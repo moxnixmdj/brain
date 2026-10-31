@@ -175,7 +175,7 @@ def main() -> int:
 
     add("# Every hardcore software-engineering problem, measured")
     add("")
-    add("Measured 2026-10-31 on main `bbc00a7` with the substrate restored (`scripts/restore_substrate_v1.py`).")
+    add("Measured 2026-10-31 on main `b37f118` with the substrate restored (`scripts/restore_substrate_v1.py`).")
     add("Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md`")
     add("records one round of repairs; this document is the whole problem list, ordered so that the next")
     add("hour of work buys the most capability. Nothing here is a wish — every number is a measurement")
