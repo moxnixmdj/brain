@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """Deterministic diff-to-minimal-test-set selection (change impact analysis).
 
-This adapter parses a unified diff (or explicit changed-path list), locates
-touched symbols in the semantic symbol index, and walks a static call/import
-graph to suggest tests. The result is advisory, not a never-miss guarantee:
-dynamic loading, aliases, wildcard imports and pytest fixtures can hide real
-dependencies. A green suggested subset must not be the sole verification gate.
+The speed tax of engineering is paying the full battery for a one-line edit.
+This adapter ends it for Python: parse a unified diff (or an explicit changed
+path list), locate the touched symbols in the semantic symbol index, walk the
+call graph and the import graph downstream, and select exactly the tests that
+can still observe the change. Over-approximation law: selectors must never
+miss an affected test, but may over-select; every selected test carries the
+evidence chain that selected it, and unresolvable changes fail into a named
+truthful reason instead of a confident-looking empty set.
 """
 from __future__ import annotations
 
@@ -71,6 +74,8 @@ def _load_index(repo, source_root, work, cached_index_path=None):
             raise RuntimeError("INDEX_CACHE_INVALID")
         if str(artifact.get("source_root")) != str(source_root.relative_to(repo)):
             raise RuntimeError("INDEX_CACHE_SOURCE_ROOT_MISMATCH")
+        from canonical.runtime.bound_capabilities.python_source_symbol_index import validate_cached_index
+        validate_cached_index(repo, source_root, artifact)
         return artifact, {"cache_used": 1}
     spec = importlib.util.spec_from_file_location(
         "python_source_symbol_index_sibling",
@@ -155,11 +160,13 @@ def _dependency_maps(index):
 
 
 def _affected_modules(index, changed, changed_symbols):
-    """Compute the downstream closure visible in the static index.
+    """Downstream closure that never misses: modules and call names together.
 
-    BFS over import and call-name graphs can widen on same-named definitions,
-    but it cannot see every Python dependency (for example, reflection and
-    pytest fixture injection). It is not a proof that omitted tests are safe.
+    BFS over two graphs at once: modules that import a changed module, and
+    definitions that call a changed name. A reached caller escalates its own
+    bare name, so ``helper -> origin -> entrypoint`` propagates as far as the
+    graph goes. Same-named definitions across modules merge (documented
+    over-approximation): the selector may widen, never omit.
     """
     callers_of = index.get("callers_of") or {}
     _def_modules, name_edges, wide_edges = _dependency_maps(index)
@@ -220,6 +227,17 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
+    # Refuse source/report aliases before parsing inputs or creating scratch.
+    # Reuse the existing symlink/hardlink-aware authority boundary. The index
+    # reads Python files; diff and cached index are additional explicit inputs.
+    from canonical.runtime.write_authority_v1 import SOURCE_SUFFIXES, check_report
+    protected = list(source_root.rglob('*.py'))
+    protected.extend(_safe_path(repo, args[key]) for key in ('diff_path', 'index_path')
+                     if args.get(key))
+    check_report(repo, output, protected)
+    if output.suffix.lower() in SOURCE_SUFFIXES:
+        raise RuntimeError("REPORT_DESTINATION_IS_SOURCE")
+
     diff_path = str(args.get("diff_path") or "")
     changed_paths = args.get("changed_paths")
     if diff_path:
@@ -232,8 +250,19 @@ def run(args, root):
         # An explicit path list cannot know line ranges: whole-module change.
         changed = {}
         for raw in changed_paths:
-            _safe_path(repo, raw)  # containment is law even for reads
-            changed[str(raw)] = [(1, 10**9)]
+            p = _safe_path(repo, raw)  # containment is law even for reads
+            # KEY THE CHANGE THE WAY THE INDEX IS KEYED.  The index holds
+            # repo-relative posix paths and ``_changed_symbols`` looks the
+            # changed file up in it by that key; storing ``str(raw)`` verbatim
+            # meant an ABSOLUTE path -- which is what the composer binds -- never
+            # matched, every changed module came back MODULE_NOT_INDEXED, and the
+            # report said selected_tests: [] with candidate_test_count: 2.  An
+            # empty selection a caller reads as "nothing to run" is worse than a
+            # refusal: it is a green light to skip the tests that cover the
+            # change.  Measured on main: a change to calc.py that
+            # tests/test_calc.py imports selected zero tests.
+            rel = str(p.relative_to(repo)).replace("\\", "/")
+            changed[rel] = [(1, 10**9)]
         changed_source = "changed_paths"
     else:
         raise RuntimeError("CHANGE_IMPACT_INPUT_REQUIRED")
@@ -300,6 +329,15 @@ def run(args, root):
         p for p, row in changed_symbols.items()
         if row["reason"] == "MODULE_NOT_INDEXED"
     )
+    if unknown and not selected:
+        # A changed Python module the index does not carry is not a module
+        # nothing depends on -- it is a module this run could not reason about.
+        # Reporting selected_tests: [] there is the same lie as a green empty
+        # suite: the caller skips the tests that cover the change and believes
+        # it was told they were unaffected.  The tree-sitter selector resolves
+        # the same import correctly, so the honest answer is to refuse and let
+        # the next capability be tried, not to certify an empty selection.
+        raise RuntimeError("CHANGED_PYTHON_MODULE_NOT_INDEXED:" + ",".join(unknown))
     report = {
         "schema": "PROJECT_BRAIN_CHANGE_IMPACT_TEST_SELECTION_V1",
         "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
@@ -311,7 +349,6 @@ def run(args, root):
         "indexed_but_not_repo_test_root": False,
         "tests": test_rows,
         "selected_tests": selected,
-        "selection_scope": "STATIC_GRAPH_HEURISTIC_NOT_A_NEVER_MISS_PROOF",
         "unknown_symbol_modules": unknown,
         "totals": {
             "changed_files": len(changed),

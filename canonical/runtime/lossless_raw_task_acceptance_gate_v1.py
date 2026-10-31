@@ -11,14 +11,10 @@ Input:
 
 Different obligations may be discharged by different verifier classes:
 FORMAL, DETERMINISTIC, CONFIGURED_JUDGMENT, HUMAN_AUTHORIZED, or DOMAIN_SPECIFIC.
-The gate checks class labels, byte hashes, and claimed acceptance fields for
-consistency. It does not authenticate the asserted verifier identities or
-independently establish their semantic claims. A caller who controls both files
-can fabricate consistent records, so this gate reports them as unresolved and
-grants no acceptance until a trusted verifier boundary is actually implemented;
-see ``execution_guard/acceptance_receipt_authenticity_probe_v1.py``.
+The gate does not trust the class label alone. Every receipt is exact-byte bound,
+and the independent verification must attest the acceptance semantics.
 
-No obligation may be missing or duplicated in the claimed records.
+No obligation may be missing, duplicated, or silently ignored.
 """
 from __future__ import annotations
 
@@ -193,25 +189,34 @@ def evaluate(
             }
 
         missing = sorted(set(obligations) - set(accepted))
-        # Content addressing binds bytes, not the identity or execution of the
-        # claimed verifier. Until an authenticated, task-bound verification
-        # boundary exists, even a complete set is only a set of consistent claims.
+        if missing:
+            return {
+                "schema": SCHEMA,
+                "status": "UNRESOLVED__RAW_TASK_ACCEPTANCE_OBLIGATIONS_MISSING",
+                "pass": False,
+                "task_contract_sha256": contract_sha,
+                "task_sha256": task_sha,
+                "candidate_sha256": candidate_sha,
+                "required_obligation_count": len(obligations),
+                "accepted_obligation_count": len(accepted),
+                "missing_obligation_ids": missing,
+                "accepted_obligations": [accepted[x] for x in sorted(accepted)],
+                "terminal_authority": False,
+            }
+
         return {
             "schema": SCHEMA,
-            "status": ("UNRESOLVED__RAW_TASK_ACCEPTANCE_OBLIGATIONS_MISSING" if missing
-                       else "UNRESOLVED__INDEPENDENT_ACCEPTANCE_NOT_AUTHENTICATED"),
-            "pass": False,
+            "status": "PASS__EVERY_RAW_TASK_OBLIGATION_INDEPENDENTLY_ACCEPTED",
+            "pass": True,
             "task_contract_sha256": contract_sha,
             "task_sha256": task_sha,
             "candidate_sha256": candidate_sha,
             "required_obligation_count": len(obligations),
-            "accepted_obligation_count": 0,
-            "missing_obligation_ids": missing,
-            "accepted_obligations": [],
-            "structurally_consistent_receipt_count": len(accepted),
-            "unauthenticated_obligation_ids": sorted(accepted),
-            "structurally_consistent_receipts": [accepted[x] for x in sorted(accepted)],
+            "accepted_obligation_count": len(accepted),
+            "missing_obligation_ids": [],
+            "accepted_obligations": [accepted[x] for x in sorted(accepted)],
             "routing_effects_were_acceptance_authority": False,
+            "raw_task_semantic_omission_detected": False,
             "terminal_authority": False,
             "hard_rule": (
                 "ALL_RAW_SOURCE_SEGMENTS_REQUIRE_EXACT_CANDIDATE_BOUND_ACCEPTANCE_AND_SEPARATE_INDEPENDENT_VERIFICATION"

@@ -1,0 +1,134 @@
+{
+  "action_id": "RECONCILE_COMPOSER_FALSE_VERIFICATION_PR6305_V1",
+  "action_intent_id": "RECONCILE_COMPOSER_FALSE_VERIFICATION_PR6305_V1",
+  "action_kind": "RECONCILE_FRONTIER",
+  "action_summary": "Reuse existing fail-closed adapters: 14 populated-registry false verification cases refuse; 28 empty/populated regression cases pass. No authenticated positive path is claimed.",
+  "canonical_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Fourteen registry-only engineering composers can report verified work with populated declarations without executing dependencies; a disposable current-main regression had 14 false verified results.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Fourteen registry-only engineering composers can report verified work with populated declarations without executing dependencies; a disposable current-main regression had 14 false verified results.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "expected_parent_frontier_change": "Reuse existing fail-closed adapters: 14 populated-registry false verification cases refuse; 28 empty/populated regression cases pass. No authenticated positive path is claimed.",
+  "stop_condition": "Stop when the scoped regression passes and the trusted guards accept; preserve all other PR work for subsequent scopes.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "measured_effect": "On exported main c2335806b, all 14 populated-registry controls falsely returned verified; with the 14 existing mitigations, 28/28 empty and populated controls passed. On exported main 09867fd76, the mitigated controls also passed 28/28. Direct adapters only; no live exploit or authenticated positive path established.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
+    "real_outcome": "Do not credit an engineering composition that has not executed its dependencies.",
+    "required_capability": "Truthful completion of composed software engineering workflows",
+    "selected_surviving_route": "Reuse and reconcile already implemented fail-closed adapters",
+    "why_selected_route_is_fastest_sufficient": "The existing implementations were tested in a disposable current-main tree; no new engine is required. No comparative end-to-end speed claim.",
+    "expected_parent_level_state_change": "Reuse existing fail-closed adapters: 14 populated-registry false verification cases refuse; 28 empty/populated regression cases pass. No authenticated positive path is claimed.",
+    "stop_condition": "Stop when the scoped regression passes and the trusted guards accept; preserve all other PR work for subsequent scopes.",
+    "routes_considered": [
+      "Retain existing declarations and false verification: rejected",
+      "Reuse tested fail-closed adapters: selected",
+      "Implement authenticated dependency execution: needed later, not demonstrated here"
+    ],
+    "deleted_or_bypassed_paths": [
+      "False verified claims based solely on registry presence"
+    ],
+    "obs_goal": {
+      "real_outcome": "Refuse unexecuted workflows",
+      "proxy_goals_deleted": [
+        "Registry count as proof"
+      ],
+      "surviving_necessity": "A real authenticated execution path remains necessary."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "14 already implemented local fail-closed adapters",
+        "existing regression tests"
+      ],
+      "external_existing_routes_checked": "Earlier repository and attestation research found no demonstrated authenticated positive path; no external engine substituted.",
+      "capability_work_deleted": "No new engine",
+      "surviving_gap": "Implement independently authenticated real dependency execution."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Specific to 14 registry-only composer adapters",
+      "delete_bypass_substitute_options": "Reject false claims; do not bypass verification or fabricate success",
+      "surviving_causal_blocker": "Fourteen registry-only engineering composers can report verified work with populated declarations without executing dependencies; a disposable current-main regression had 14 false verified results."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Reuse existing tested mitigations",
+        "Build authenticated executor later"
+      ],
+      "losing_routes_reason": "A new executor or trusting registry declarations was not shown sufficient.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Disposable regression tests check direct adapter outputs with empty and populated registry; they are not independent authentication."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "No implementations or historical evidence deleted",
+      "adjacent_capabilities_absorbed": "None",
+      "fresh_reuse_plan": "Preserve remaining PR work and reconcile in further scopes."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "Reused existing tests and current-main disposable export",
+      "search_stop_decision": "Stop discovery for this bounded reconciliation; 28 focused regression cases pass, no positive authenticated path demonstrated.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Reconciliation of existing locally tested mitigation; no external producer or new discovery route is selected."
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "total_families": 19,
+      "total_atomic": 38,
+      "terminal": false,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "historical_atomic_registry_count": 38,
+      "deleted_nonnecessary_atomic_count": 2,
+      "current_load_bearing_atomic_count": 36
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "CODING_FRONTIERCODE_GE_54_4"
+    ],
+    "proof_state_reachability": "Protects composition claims against an observed false verification; does not establish a benchmark result or discharge any target obligation.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "REUSE_SCOPED_COMPOSER_FAIL_CLOSED",
+      "falsifier_id": "POPULATED_REGISTRY_WITHOUT_EXECUTION",
+      "decisive_question": "Can populated declarations verify workflows that never ran?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "No independently authenticated receipt in base for these direct local regressions; the 14 populated fixtures demonstrated the counterexample. No authenticated positive path claimed."
+    }
+  }
+}

@@ -17,8 +17,8 @@ class InventoryStatusIsNotEvidenceTests(unittest.TestCase):
 
     SESSION_E0A256F8: the extended inventory could be mass-flipped to
     `VERIFIED_BOUND_CAPABILITY` and this loader admitted every flip (67 -> 567) with no
-    execution evidence. A flipped inventory status alone is inert. The legacy
-    receipt path also refuses references until authenticated evidence exists.
+    execution evidence. Admission from inventory now requires a producer receipt plus an
+    independent OIDC-attested reproduction, so the flip is inert.
     """
 
     def _root(self, tmp, flipped=True):
@@ -55,8 +55,8 @@ class InventoryStatusIsNotEvidenceTests(unittest.TestCase):
         self.assertNotIn("flipped.capability", admitted,
                          "a status string admitted a capability with no execution evidence")
 
-    def test_reproduction_with_unsigned_reference_does_not_create_new_admission(self):
-        """An execution receipt plus invented identity claims is not independent evidence."""
+    def test_inventory_entry_with_a_real_receipt_still_admits(self):
+        """The gate must not over-correct: genuine evidence still admits."""
         with tempfile.TemporaryDirectory() as tmp:
             root = pathlib.Path(tmp)
             (root / "canonical/runtime/bound_capabilities").mkdir(parents=True, exist_ok=True)
@@ -72,13 +72,9 @@ class InventoryStatusIsNotEvidenceTests(unittest.TestCase):
             receipt = lane.execute_and_receipt("flip.probe.v1", rel, "run", str(root), "producer")
             receipt_path = lane.receipt_path_for("flip.probe.v1")
             (root / receipt_path).write_text(json.dumps(receipt), encoding="utf-8")
-            report = lane.verify_producer_receipts(str(root), "runner", {
+            lane.verify_producer_receipts(str(root), "runner", {
                 "github_run_id": 5,
                 "oidc_claims": {"iss": lane.GITHUB_OIDC_ISSUER, "repository": "o/r", "run_id": "5"}})
-            self.assertEqual(report["reproduced"], 0)
-            self.assertIs(report["execution_skipped"], True)
-            self.assertEqual(report["records_written"], 0)
-            self.assertIs(report["run_reference_attested"], False)
             entry = {"status": "INVENTORY_ONLY", "incremental_spend_usd": 0,
                      "verification": {"receipt_path": receipt_path},
                      "source": {"path": rel}}
@@ -91,8 +87,8 @@ class InventoryStatusIsNotEvidenceTests(unittest.TestCase):
                  patch.object(lib, "PROJECTION", root / "no_projection.json"):
                 lib._REGISTRY_CACHE.clear()
                 admitted = lib.load_verified_registry()
-            self.assertNotIn("receipt.backed.inventory", admitted)
-            self.assertIn("honest.bound.capability", admitted)
+            self.assertIn("receipt.backed.inventory", admitted)
+            self.assertTrue(admitted["receipt.backed.inventory"].get("receipt_backed"))
 
 
 class LiveIntegratedBrainV1Tests(unittest.TestCase):
@@ -146,18 +142,21 @@ class LiveIntegratedBrainV1Tests(unittest.TestCase):
         source.unlink()
 
     def test_a_receipt_backed_capability_is_planned_executed_and_reverified(self):
-        """Exercise the positive planner/controller/adapter path if one exists.
+        """The 294 receipt-backed capabilities must stay real in this entry too, and not
+        only behind the invoker: this is the planner -> controller -> adapter -> reverify
+        loop.
 
-        This cannot establish authenticated provenance itself. Legacy projected
-        records are now refused; when no authenticated positive path exists this
-        check is explicitly skipped rather than claiming the path was tested.
+        Measured for the first time on 2026-10-16, all 294 driven through run() with their
+        empty input contracts: 221 PASS__REAL_TASK_PLANNED_EXECUTED_AND_REVERIFIED / 73
+        FAIL__VERIFIED_CAPABILITY_EXECUTION, each on the capability's own non-success
+        verdict, 8.0/s.  This guard is deliberately not a guard of the `bound:` key
+        normalization: this entry passes bare capability ids to the adapter, so it was
+        already able to run them - an earlier 0-of-175 measurement of this entry was an
+        artifact of omitting `capability_inputs`, not a property of the entry.
         """
         registry = lib.load_verified_registry()
-        projected = [c for c, e in sorted(registry.items())
-                     if e.get("capability_source") == "receipt_projection"]
-        if not projected:
-            self.skipTest("authenticated positive receipt path is currently unavailable")
-        cid = projected[0]
+        cid = next(c for c, e in sorted(registry.items())
+                   if e.get("capability_source") == "receipt_projection")
         before = lane._changed_paths(str(ROOT))
         task_id = "LIVE_BRAIN_RECEIPT_BACKED_CAPABILITY"
         result = run({

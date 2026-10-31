@@ -23,11 +23,16 @@ from collections.abc import Callable, Mapping
 from typing import Any
 
 from canonical.runtime import root3_subprocess_mediator_v1 as v1
-from canonical.runtime.root3_subprocess_callsite_classifier_v1 import (
-    RuntimeCallsiteClassificationError,
+# V2 composes over registry V2: the registry totalizes every observed process
+# site (legacy classes preserved, new sites default-deny or semantically
+# twin-narrowed), and the classifier matches against that live universe so
+# acquisition probes and other registered non-legacy sites can run under the
+# same fail-closed chokepoint.
+from canonical.runtime.root3_subprocess_callsite_classifier_v2 import (
+    RuntimeCallsiteClassificationV2Error as RuntimeCallsiteClassificationError,
     detect_effect_class,
 )
-from canonical.runtime.root3_subprocess_effect_class_registry_v1 import CLASSES
+from canonical.runtime.root3_subprocess_effect_class_registry_v2 import CLASSES
 
 SCHEMA = "PROJECT_BRAIN_ROOT3_SUBPROCESS_MEDIATOR_REQUEST_V2"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -86,6 +91,7 @@ def _request(
         "function": str(callsite["function"]),
         "effect_class": str(callsite["effect_class"]),
         "registry_site_count": int(callsite["registry_site_count"]),
+        "registry_sha256": str(callsite.get("registry_sha256") or ""),
         "runtime_join": str(callsite["runtime_join"]),
     }
     return {**core, "request_sha256": _sha(core)}

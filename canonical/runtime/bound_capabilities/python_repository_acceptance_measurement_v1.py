@@ -123,6 +123,15 @@ def _tree_manifest(root: pathlib.Path, *, max_files: int, max_bytes: int) -> tup
     return rows, _sha_obj(rows)
 
 
+# The name rule and the walk now live in one place, shared with the eleven other
+# capabilities that refuse TEST_PATHS_REQUIRED. This module held the only copy;
+# a second copy in the repair lane would have been a rule edited once.
+from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import (
+    discover_test_paths as _discover_test_paths,
+    is_test_file_name as _is_test_file_name,
+)
+
+
 def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.Path | None = None) -> list[str]:
     """Resolve each stated test path, accepting either spelling of the same path.
 
@@ -139,7 +148,12 @@ def _validate_test_paths(source_root: pathlib.Path, values: Any, repo: pathlib.P
     root can be measured, and when ``source_root`` is the repository itself the
     two spellings coincide and behaviour is unchanged.
     """
-    if not isinstance(values, list) or not values:
+    if values is None or (isinstance(values, list) and not values):
+        try:
+            return _discover_test_paths(source_root)
+        except FileNotFoundError:
+            raise MeasurementError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+    if not isinstance(values, list):
         raise MeasurementError("TEST_PATHS_REQUIRED")
     out = []
     for raw in values:
@@ -258,8 +272,13 @@ def _run_tests(workspace: pathlib.Path, argv: list[str], timeout_s: int) -> dict
 
 
 def _test_count(text: str) -> int:
-    m = re.search(r"Ran\s+(\d+)\s+tests?", text)
-    return int(m.group(1)) if m else 0
+    # Counts are runner-summary observations, not independent test attestation.
+    # Prefer the final pytest summary; do not count subtests or skipped cases
+    # again as primary executed tests. Plain assertion scripts remain unknown.
+    counts = _PATCH.pytest_summary(text)
+    if counts is not None:
+        return sum(counts.values())
+    return sum(int(n) for n in re.findall(r"(?m)^Ran\s+(\d+)\s+tests?\b", text))
 
 
 def _copy_source(source_root: pathlib.Path, workspace: pathlib.Path) -> None:
@@ -280,7 +299,13 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
     timeout_s = max(1, min(int(args.get("timeout_s", 60)), 300))
     max_files = max(1, min(int(args.get("max_files", 5000)), 20000))
     max_bytes = max(1024, min(int(args.get("max_bytes", 100_000_000)), 500_000_000))
-    test_paths = _validate_test_paths(source_root, args.get("test_paths"), repo)
+    _stated_paths = args.get("test_paths")
+    test_paths = _validate_test_paths(source_root, _stated_paths, repo)
+    # The report must say whether the caller named the tests or the tree did.
+    # "test_count: 1" means nothing if the reader cannot tell that one named file
+    # was measured from the whole suite having been found and run.
+    test_paths_source = ("stated" if isinstance(_stated_paths, list) and _stated_paths
+                         else "discovered_under_source_root")
     argv = _validate_argv(args.get("test_argv"), test_paths, source_root, repo)
 
     before_manifest, before_sha = _tree_manifest(
@@ -314,6 +339,7 @@ def run(args: Mapping[str, Any], root: str | os.PathLike[str]) -> dict[str, Any]
     spec = {
         "source_root": _rel(repo, source_root) if source_root != repo else ".",
         "test_paths": test_paths,
+        "test_paths_source": test_paths_source,
         "test_argv": argv,
         "timeout_s": timeout_s,
         "max_files": max_files,

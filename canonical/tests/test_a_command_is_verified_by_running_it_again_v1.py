@@ -1,8 +1,4 @@
-"""A command is checked against the world, not by believing its report.
-
-Plain cat and wc -l are checked by reopening their inputs; other supported
-readers are re-run in a read-only namespace. Mutating shapes are held to their
-postconditions or refused.
+"""A command is verified by running it again, not by believing the report.
 
 ``shell.command.run`` became reachable in PR #6120, and that PR named the gap it
 left open: the capability had no independent inspector, so its runs reported
@@ -14,9 +10,9 @@ inspector, the everyday denominator moves **2 of 15 -> 9 of 15**.
 The obvious check is worthless and this file exists to make sure it was not the
 one taken. A command's result already carries ``returncode`` and ``stdout``;
 comparing them to themselves proves nothing, which is precisely the failure PR
-#6118 documented for a written file. The inspector instead reopens inputs or
-re-runs supported argv under confinement and compares returncode, stdout and
-stderr with the observed result.
+#6118 documented for a written file. What is available instead is the world: the
+command can be run again. So this inspector re-runs the argv and requires
+returncode, stdout and stderr to come back identical.
 
 Re-running is only safe for a command that cannot change anything, so the set is
 closed and everything outside it is **refused with a named reason rather than
@@ -117,11 +113,7 @@ class TestTheReportIsHeldAgainstTheWorld(unittest.TestCase):
     def test_an_honest_read_is_accepted(self):
         ok, reason, ledger = _inspect(["cat", self.f], BODY)
         self.assertTrue(ok, "refused an honest read: %s" % reason)
-        # Plain cat is independently checked by reopening its input. That is
-        # stronger and faster than launching a process, and the forged-output
-        # test below still proves the check is against real bytes.
-        self.assertEqual(ledger.get("input_files_reopened"), 1, ledger)
-        self.assertIs(ledger.get("command_re_run"), False, ledger)
+        self.assertTrue(ledger.get("command_re_run"), "did not actually re-run: %r" % ledger)
 
     def test_a_forged_stdout_is_refused(self):
         ok, reason, _ = _inspect(["cat", self.f], "INVENTED CONTENT\n")

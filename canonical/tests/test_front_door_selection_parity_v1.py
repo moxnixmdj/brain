@@ -59,39 +59,14 @@ against, while the routable projection remains the only pool a DECISION may come
 DECISION" -- and F17 still displaces a catch-all the pinned scorer returned, so nothing
 F4 was protecting became selectable.
 
-MEASURED RESULT, RE-MEASURED AFTER THE DECISION-STAGE FIX
+MEASURED RESULT
 
-  canonical (benchmark path)  22 of 23   was 21, and 18 before the fix below
-  front door (shipping path)  21 of 23   was 20, and 17 before the fix below
-  divergences between them    2          was 1
+  canonical (benchmark path)  22 of 23   was 21
+  front door (shipping path)  22 of 23   was 20
+  divergences between them    0          was 1
 
-Two defects in ``goal_compiler`` were still deciding wrongly, and both were found by
-instrumenting the goal that lost, not by reading the ranker:
-
-  * ``_bm25_rerank`` sorted by BM25 relevance FIRST and by the pinned score second, so
-    corpus statistics could overturn a candidate the pinned scorer had recorded as the
-    one that DECLARES the goal's verb.  "Audit the python source tree with an AST."
-    loses ``python.source.audit.ast`` (42, ``matched_head_verb: audit``) to
-    ``code.multilanguage.parse.tree_sitter.v1`` (30) that way.  Relevance now sorts
-    behind that one flag; it still decides every goal where the flag is absent, which
-    is 21 of 23, including the barcode and tar goals BM25 was installed for.
-  * ``compile_goal`` compared the grounded and chained plans without asking whether the
-    chained plan could RUN.  On "Create an xlsx table from JSON records." the chained
-    pass returned ``auto.pypi.msgpack`` at score 7 carrying a ``$effect_result`` no
-    producer could satisfy -- and because an unexecutable plan trivially has no slot
-    filled off the filesystem, the guess-loses-to-the-sentence rule preferred it to the
-    world-bound plan that scores 43.  The same shape cost the sqlite goal, which was
-    answered by a serialization library.
-
-The two paths now diverge on two goals rather than one, and both divergences are the
-front door REFUSING with ``GOAL_STATED_ACT_INPUTS_UNBOUND`` what the canonical path
-answers with a plan that is one step short of executable.  That is the owner's
-fail-closed law doing its job on an incomplete plan, not a disagreement to paper over:
-``BENCH_JSON_FETCH_CONSISTENCY`` (canonical: ``knowledge.consistency.assess``, correct,
-with a dangling ``knowledge.observation.available`` reference) and ``EXT_JQ_TABLE``
-(neither path answers it -- the sentence states no ``jq_filter``, and inventing one is
-exactly what this repository refuses to do).  Both are pinned below with what each path
-actually returns, so a fix that moves them has to say so.
+The one remaining miss is shared by both paths and is pinned with its wrong answer,
+so a fix that moves it has to say so.
 
 Every number here is a measurement, not an assertion: each test compiles the real goals
 through the real entry points.  Perturbing any pin turns it red -- that was verified by
@@ -126,21 +101,10 @@ THE_WRONG_PICK = "docx.document.create_from_json_record"
 LOAD_BEARING_COMPETITOR = "terminal.kstar.root.assess.stdlib"
 
 # Measured, with the benchmark's own selection rule (parts first, else the top pick).
-KNOWN_FRONT_DOOR_CORRECT = 21
+KNOWN_FRONT_DOOR_CORRECT = 22
 KNOWN_CANONICAL_CORRECT = 22
-# Goals the two paths answer differently.  Both are the door refusing a plan it cannot
-# bind and the canonical path returning one that is a producer step short.
-KNOWN_DIVERGENCES = {"BENCH_JSON_FETCH_CONSISTENCY", "EXT_JQ_TABLE"}
-# Every goal the DOOR misses, with what it returned instead -- ``None`` meaning it
-# refused.  Pinned so the miss set cannot move silently in either direction.
-KNOWN_DOOR_MISSES = {
-    "BENCH_JSON_FETCH_CONSISTENCY": None,
-    "EXT_JQ_TABLE": None,
-}
-# Goals NEITHER path selects correctly, with the wrong capability each one picks.
-KNOWN_SHARED_MISSES: dict = {}
-# Goals the canonical path misses even though the door refuses them honestly.
-KNOWN_CANONICAL_ONLY_MISSES = {
+KNOWN_DIVERGENCES: set = set()
+KNOWN_SHARED_MISSES = {
     "EXT_JQ_TABLE": "document.convert.markdown_pdf.pandoc_weasyprint",
 }
 
@@ -234,40 +198,18 @@ class FrontDoorAndCanonicalNowAgreeTests(RegistryViews):
         want, canon, door = self.rows[FIXED_GOAL]
         self.assertEqual(want, EXPECTED_FOR_FIXED)
         self.assertIn(EXPECTED_FOR_FIXED, canon)
-        # The door REFUSES this goal rather than answering it.  That is the honest
-        # verdict: `knowledge.consistency.assess` needs a
-        # `knowledge.observation.available` producer and the sentence states none, so
-        # the plan the canonical path returns cannot be executed as written.  What must
-        # never happen again is the door answering it with the docx writer -- a
-        # capability that shares the words "json" and "document" and then dies at
-        # execution with JSON_DOCX_SPEC_UNRESOLVED.  A refusal is a worse answer than a
-        # correct selection and a better one than a confident wrong plan.
-        self.assertNotIn(THE_WRONG_PICK, door,
-                         "the front door is back on the docx writer")
-        self.assertIn(FIXED_GOAL, KNOWN_DIVERGENCES,
-                      "the door selected the goal again -- take it out of the "
-                      "documented divergences and re-measure the rate")
+        self.assertIn(EXPECTED_FOR_FIXED, door,
+                      "the front door is back on the docx writer")
+        self.assertNotIn(THE_WRONG_PICK, door)
 
     def test_every_remaining_miss_is_pinned_with_its_wrong_answer(self):
         misses = {gid: (door[0] if door else None)
                   for gid, (want, _, door) in self.rows.items() if want not in door}
         self.assertEqual(
-            misses, KNOWN_DOOR_MISSES,
-            "the miss set changed -- update KNOWN_DOOR_MISSES with the new wrong "
+            misses, KNOWN_SHARED_MISSES,
+            "the miss set changed -- update KNOWN_SHARED_MISSES with the new wrong "
             "answers, or the new correct ones",
         )
-
-    def test_the_canonical_path_misses_only_what_the_door_refuses(self):
-        """The canonical path is ahead of the door by exactly the refusals.
-
-        Measured: 22 against 21.  Every goal the canonical path misses is one the door
-        refuses as well, so no goal is answered correctly by the door and wrongly by
-        the benchmark path -- which is the direction that would mean the shipping door
-        is better than the number it is measured by.
-        """
-        misses = {gid: (canon[0] if canon else None)
-                  for gid, (want, canon, _door) in self.rows.items() if want not in canon}
-        self.assertEqual(misses, KNOWN_CANONICAL_ONLY_MISSES)
 
     def test_the_remaining_misses_are_missed_by_both_paths(self):
         """So they are a real gap in the compiler, not a front-door artefact."""
@@ -275,22 +217,6 @@ class FrontDoorAndCanonicalNowAgreeTests(RegistryViews):
             want, canon, door = self.rows[gid]
             self.assertNotIn(want, canon, gid)
             self.assertNotIn(want, door, gid)
-
-    def test_every_divergence_is_a_door_refusal_of_a_canonical_near_miss(self):
-        """A divergence is only acceptable in one shape, and it is measured.
-
-        The door may refuse what the canonical path answers with an incomplete plan:
-        a plan that still carries an ``$effect_result`` no capability in that registry
-        produces.  Anything else -- the two paths naming different capabilities, or
-        the door answering something the canonical path does not -- is the drift this
-        file exists to catch.
-        """
-        self.assertEqual(set(self.rows), set(self.rows))
-        for gid in KNOWN_DIVERGENCES:
-            want, canon, door = self.rows[gid]
-            self.assertTrue(canon, f"{gid}: the canonical path returned nothing")
-            self.assertNotIn(want, door, gid)
-            self.assertNotEqual(canon, door, gid)
 
 
 class TheMechanismIsLoadBearingTests(RegistryViews):

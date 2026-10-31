@@ -1,0 +1,389 @@
+{
+ "action_id": "A_DEMAND_THE_ADAPTER_NEVER_MAKES_IS_NOT_A_DEMAND_V1_20261030_V1",
+ "action_intent_id": "A_DEMAND_THE_ADAPTER_NEVER_MAKES_IS_NOT_A_DEMAND_V1_20261030_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "input_keys reads every ${input.X} placeholder of a row's action_template as a DEMAND on the caller, and the only stage that could withdraw a demand -- declared_adapter_defaults -- reads exactly one AST shape, `args.get(\"k\") or <literal>`. Six of the seven repair rows fall back through a CALL instead: argv_or_derived(args.get(\"test_argv\"), sys.executable, *test_paths). A call is not a literal, so test_argv stayed a demand that no adapter makes and all seven rows were unreachable from the front door; measured on \"Apply the verified repair to <b>/app so the failing test in <b>/tests passes\", the sentence reached software.repair.choreograph.crossfile.v1 and failed PROMISED_SOURCE_CHANGE_NOT_APPLIED. Inferring the fallback from call shape was tried first and rejected on measurement: `isinstance(args.get(\"actions\"), list)` and `verify(args.get(\"goal\"), result, registry)` are the same shape and are not derivations, and goal would have been bound to None on a verification capability -- four false positives in seven rows is not a rule. The row therefore declares it beside the args it declares, action_template.optional, and the binder passes None; the adapter's own *_REQUIRED refusal remains the only authority on whether the declaration is true, so a row that lies here fails loudly at the call. Measured: the same sentence now reaches python.software.repair.apply.verified.v1, whose own first gate refuses because the stated test already passes. Census unchanged at 2/28 and tiers unchanged at 2/10 -- reachability is a prerequisite, not a pass.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/goal_front_compiler_v1.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/tests/test_a_row_that_declares_an_optional_input_is_not_refused_for_it_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+   "hardcore_swe_surface_probe_20261030.py",
+   "advanced_swe_probe_20261030.py"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::\"Apply the verified repair to <b>/app so the failing test in <b>/tests passes\" was served by a substitute: seven repair rows declared `test_argv` and every one of their adapters builds that argv itself (`argv_or_derived(args.get(\"test_argv\"), sys.executable, *test_paths)`), so the demand stood, the rows were unbindable, and the sentence fell to software.repair.choreograph.crossfile.v1 which reported PROMISED_SOURCE_CHANGE_NOT_APPLIED for a repair it never attempted.",
+ "canonical_base_commit": "4605d7b52532af2a0543228b93dedcecfea69de5",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "\"Apply the verified repair to <b>/app so the failing test in <b>/tests passes\" was served by a substitute: seven repair rows declared `test_argv` and every one of their adapters builds that argv itself (`argv_or_derived(args.get(\"test_argv\"), sys.executable, *test_paths)`), so the demand stood, the rows were unbindable, and the sentence fell to software.repair.choreograph.crossfile.v1 which reported PROMISED_SOURCE_CHANGE_NOT_APPLIED for a repair it never attempted.",
+ "date": "2026-10-30",
+ "expected_parent_change": "A row that declares an optional input is not refused for it: the seven repair rows bind without a stated test command, the adapter's own *_REQUIRED refusal stays the only authority, and a sentence that asks to apply a verified repair reaches python.software.repair.apply.verified.v1 instead of a substitute.",
+ "expected_parent_frontier_change": "A row that declares an optional input is not refused for it: the seven repair rows bind without a stated test command, the adapter's own *_REQUIRED refusal stays the only authority, and a sentence that asks to apply a verified repair reaches python.software.repair.apply.verified.v1 instead of a substitute.",
+ "explicit_user_authorization": "Owner standing directive (2026-10-29/30): every listed problem already has a solution somewhere in the repository, its hidden tools or published research; do the optimal fix in the fastest way, only the right way, with no new primitive where an existing mechanism can be wired.",
+ "falsification_condition": "FALSIFIED if any row becomes bindable for a key its adapter cannot synthesize (the adapter must refuse with its own *_REQUIRED code), if any row not carrying the declaration binds the same key, or if the declaration changes the verdict of any sentence outside the repair lane.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intent": "Wire the three declarations the repository already carries -- the adapter's own harness defaults, the sentence's replacement identifier and the tree's defining module -- into the binder, and give the rename adapter file identity for modules plus a post-edit residual measurement, so the capability that ranks first can actually run.",
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "The repair lane is substrate for the coding obligations. A row that binds is not a repair that lands: this makes the capability that edits reachable from an ordinary sentence, and it discharges no obligation alone.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Bind test over the seven rows: 0/7 bindable on 4605d7b -> 7/7 here (declared optional input passed as None). End-to-end A/B on one sentence: 4605d7b selects software.repair.choreograph.crossfile.v1 and reports FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED; here it selects python.software.repair.apply.verified.v1 and that capability's own gate refuses (the stated test already passes). Three sentences unchanged on both trees; tier probe 2/10 -> 2/10 with T5_CONCURRENCY now reaching the capability that edits; surface probe 2/28 -> 2/28. compile+verify 33/33, digest 28d03135c7af4a381c12db5d3385bc33f29da6b9f5e40ad66ac33dc9faafb1ed; repo integrity 17 rules / 0 violations.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": "declared_adapter_defaults and its AST reader, derive_declared_inputs and _is_referent_key (the referent law the rename fix added), the adapter's own argv_or_derived/suite_argv fallbacks, python_test_corpus_discovery_v1, and the registry's action_template as the place a row states what it needs.",
+ "progress_evidence_paths": [
+  "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
+  "canonical/runtime/goal_front_compiler_v1.py",
+  "canonical/tests/test_a_rename_resolves_the_module_by_file_not_by_dotted_spelling_v1.py",
+  "canonical/tests/test_the_sentence_the_tree_and_the_adapter_state_what_was_unbound_v1.py",
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "4605d7b52532af2a0543228b93dedcecfea69de5",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "DEMAND_BY_PLACEHOLDER__a_template_placeholder_is_treated_as_a_demand_even_when_the_adapter_builds_the_value",
+   "AST_SHAPE_GUESS__INFERRING_OPTIONALITY_FROM_A_FORWARDED_ARGUMENT (rejected on measurement: 4 false positives in 7 rows)"
+  ],
+  "expected_parent_level_state_change": "A row that declares an optional input is not refused for it: the seven repair rows bind without a stated test command, the adapter's own *_REQUIRED refusal stays the only authority, and a sentence that asks to apply a verified repair reaches python.software.repair.apply.verified.v1 instead of a substitute.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
+   "intrinsic_or_path_specific": "Intrinsic: resolving which module an import denotes requires the file system below the import root, a property of Python packaging rather than of this repo's plumbing",
+   "surviving_causal_blocker": "Nothing else in the tree maps an import spelling onto the parsed file set, so without this the rename either edits nothing or refuses"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "the string comparison of module names and the assertion-style `complete` were deleted, not bypassed",
+   "existing_inherited_routes_checked": "span splice + SPAN_INTEGRITY, from-import name-token rewrite, shadowed-scope keeps, _modname_of, the parsed-file set and the post-splice ast.parse were all reused unchanged",
+   "external_existing_routes_checked": "rope and libcst rejected for byte-preservation and dependency cost; textual replace rejected for correctness",
+   "surviving_gap": "the remaining tiers (extract, fix_test, bisect, race, perf, mutation, taint, feature) still lack their own oracles and are untouched"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "TREATING_A_SUCCESSFUL_COMPILE_AS_A_FINISHED_RENAME",
+    "TREATING_THE_TOP_RANKED_CAPABILITY_AS_THE_ONE_THAT_RAN",
+    "TREATING_AN_EMPTY_unknown_sites_LIST_AS_PROOF_THE_TREE_IS_CLEAN"
+   ],
+   "real_outcome": "`python.refactor.rename_symbol.v1` now runs from an ordinary sentence and its report is checkable: files_edited ['models.py','service.py'], edit_count 3, complete true, package imports, unittest suite green, 338 ms end to end; the tier probe moves 1/10 -> 2/10 with one FAIL->PASS and no new pass in a 15-sentence A/B on a pristine HEAD worktree.",
+   "surviving_necessity": "The tier oracle is independent of the adapter: it greps the whole tree for the old name, imports the package and runs the unittest suite, so a report that lies cannot pass it."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "all 125 registry rows keep their authority; the binding stage order is unchanged and derivation only runs after both binders refuse",
+   "downstream_work_to_delete_or_supersede": "the registry row's unreachable gate==PASS expectation is superseded by complete==true",
+   "fresh_reuse_plan": "the same three declarations settle other typed keys as they are measured (the A/B shows no other sentence changing verdict)"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "adapter defaults are parsed once per (path, mtime); the tree scan is prefilted by the symbol name before any AST parse and exits on the second defining file",
+   "search_stop_decision": "Stop: the sentence runs, the tree is proven clean, the contract is satisfiable and the A/B shows no widening; further tiers need their own oracles before they can be claimed"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "implementation_still_necessary_reason": "No new primitive was needed: file identity, the residual measurement and the three declarations are all wired onto mechanisms the tree already had",
+   "losing_routes_reason": "rope and libcst add a dependency and reprint the module; textual replace edits strings and shadowed scopes",
+   "routes_ranked": [
+    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED",
+    "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
+    "ROPE_EXTERNAL_REFACTOR_ENGINE",
+    "LIBCST_CONCRETE_SYNTAX_REWRITE"
+   ],
+   "routes_ranked_reason": "File identity is the only route that is byte-exact, dependency-free and verifiable from the tree itself; the others lose on correctness or on incremental cost"
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The fixture trees are tiny by construction, but the referee is real: a tree-wide grep for the old name, a real package import and a real unittest run, plus an A/B against a pristine HEAD worktree with the same fixtures"
+  },
+  "real_outcome": "`python.refactor.rename_symbol.v1` now runs from an ordinary sentence and its report is checkable: files_edited ['models.py','service.py'], edit_count 3, complete true, package imports, unittest suite green, 338 ms end to end; the tier probe moves 1/10 -> 2/10 with one FAIL->PASS and no new pass in a 15-sentence A/B on a pristine HEAD worktree.",
+  "required_capability": "REUSE_FILE_IDENTITY_FOR_CROSS_MODULE_EDITS_AND_READ_DECLARED_INPUTS_BEFORE_REFUSING",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "BROAD_SUITE_OF_REFACTORS",
+      "CORRECTNESS": "GOOD_BUT_CONFIG_DEPENDENT",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REFORMATS_BY_CONFIG",
+      "VERIFIABILITY": "NEEDS_PROJECT_DISCIPLINE",
+      "WALL_CLOCK": "SLOWER_SETUP"
+     },
+     "evidence": [
+      "rope operates on ropeproject configuration and its output formatting varies with user config, which breaks the adapter's byte-preservation law"
+     ],
+     "qualification_evidence": [
+      "pypi project page for rope read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ROPE_EXTERNAL_REFACTOR_ENGINE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "FAR_BEYOND_THE_NEED",
+      "CORRECTNESS": "HIGH",
+      "INCREMENTAL_COST": "NEW_DEPENDENCY",
+      "RELIABILITY": "REPRINT_VARIES",
+      "VERIFIABILITY": "BYTE_PRESERVATION_NOT_GUARANTEED",
+      "WALL_CLOCK": "PARSER_DEPENDENCY_AND_REPRINT"
+     },
+     "evidence": [
+      "libcst reprints the module from its own tree, so comments and formatting are no longer byte-identical"
+     ],
+     "qualification_evidence": [
+      "pypi project page for libcst read this session"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LIBCST_CONCRETE_SYNTAX_REWRITE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "TRIVIAL",
+      "CORRECTNESS": "WRONG_ON_SHADOWING_AND_ON_COMMENTS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "SILENTLY_BREAKS",
+      "VERIFIABILITY": "NO_BINDING_EVIDENCE",
+      "WALL_CLOCK": "FASTEST"
+     },
+     "evidence": [
+      "a textual replace edits strings, comments and shadowed scopes; the adapter's own SPAN_INTEGRITY law exists to prevent exactly that"
+     ],
+     "qualification_evidence": [
+      "measured on this tree: the fixture's docstrings and `subtotal_cents` carriers must survive"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
+    }
+   ],
+   "checked_at_utc": "2026-10-29T23:37:50Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "RANK_THEN_DROP__the_capability_is_ranked_first_and_refused_on_unbound_inputs_then_the_front_door_substitutes_a_read_only_tool",
+   "max_age_hours": 24,
+   "negative_search_summary": "No smaller mechanism exists in the tree for cross-module module identity: _modname_of existed but was compared as a string.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "python rename symbol across modules ast span edit"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "rope libcst refactoring library python"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "resolve module identity from import statement path suffix"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "libcst rope latest release python 3.11"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "routes_considered": [
+    "ROPE_EXTERNAL_REFACTOR_ENGINE",
+    "LIBCST_CONCRETE_SYNTAX_REWRITE",
+    "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
+    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
+   ],
+   "selected_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
+   "selected_route_checked_at_utc": "2026-10-29T23:37:50Z",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-10-29T23:37:50Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
+      "evidence": [
+       "DIRECT_PROBE: 3.11 interpreter parsed the adapter, the fixture tree and 2254 runtime modules this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/goal_front_compiler_v1.py + bound_capabilities/python_refactor_rename_symbol.py (in-tree)",
+      "evidence": [
+       "DIRECT_PROBE: 11 new tests green; tier probe T1 PASS at 338 ms; repo integrity guard 17 rules / 0 violations"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
+    "status": "READY"
+   },
+   "selected_surviving_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "python_refactor_rename_symbol.py already splices exact identifier spans and rewrites `from m import old` name tokens; the missing piece was module identity, not a parser",
+     "goal_front_compiler_v1._module_pair_file already derived a module name from a named .py file; the tree-wide rule is its sibling"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "unix.stackexchange.com/questions/714125 + stackoverflow.com/questions/29244351 -- `sort f > f` truncates while `sort -o f f` stages through a temp file: a tool must never treat a spelling as identity and must stage before it replaces"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi rope and libcst remain heavier than the need for a byte-exact stdlib-only rename (configuration, reformatting, extra dependency)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "docs.python.org/3.10/library/ast.html -- ast.parse + lineno/col_offset are the sanctioned mechanism for span-exact edits; no third-party parser is required"
+    ]
+   },
+   "stop_condition": "Ship only what is measured here: the three declarations, file identity, the residual law and the honest contract field. Do not add per-name lists, do not widen what may run (a referent is never defaulted), and do not touch the remaining tiers' capabilities until their own oracles are built.",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
+  },
+  "routes_considered": [
+   "ROPE_EXTERNAL_REFACTOR_ENGINE",
+   "LIBCST_CONCRETE_SYNTAX_REWRITE",
+   "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
+   "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
+  ],
+  "selected_surviving_route": "REUSE_FILE_IDENTITY_AND_DECLARED_DEFAULTS_FOR_THE_RENAME_VERB",
+  "stop_condition": "Ship only the declaration and the binder stage that reads it. Do not infer optionality from the adapter's AST (measured: `isinstance(args.get(\"actions\"), list)` and `verify(args.get(\"goal\"), result, registry)` read as derivations and would have bound goal=None on a verification capability), do not derive a referent, do not widen any other row, and do not claim a tier or a census pass this change does not measure.",
+  "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
+ },
+ "resolution": "Measured reuse slice: no new primitive, no model, no spend, no protected path, no governance change. Seven registry rows gain one declaration each (21 added lines); the binder gains one three-line stage that reads it; a five-test pin file states the law and the two negative controls.",
+ "route_id": "REUSE_DECLARED_OPTIONAL_INPUTS_FOR_THE_REPAIR_LANE",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REUSE_DECLARED_OPTIONAL_INPUTS_FOR_THE_REPAIR_LANE",
+ "stop_condition": "Ship only the declaration and the binder stage that reads it. Do not infer optionality from the adapter's AST (measured: `isinstance(args.get(\"actions\"), list)` and `verify(args.get(\"goal\"), result, registry)` read as derivations and would have bound goal=None on a verification capability), do not derive a referent, do not widen any other row, and do not claim a tier or a census pass this change does not measure.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "DIRECT_PROBE__the_pre_fix_refusal_is_reproduced_by_the_pin_file_on_the_base_tree__plus_a_4_sentence_A/B_route_comparison_on_the_unmodified_base_tree",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+     "git_blob_sha": "8ff86fc9ff411769e4279cb1ca5f4f1b21bf44ec"
+    },
+    {
+     "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+     "git_blob_sha": "7c8228c82b4543e2c4b082e1100d35cc5ecbde2d"
+    }
+   ],
+   "decisive_question": "Does a row that declares an optional input become reachable without any row that does not declare it changing, and does the adapter still refuse when the declaration is false?",
+   "falsifier_id": "F_ANY_ROW_BINDS_A_KEY_ITS_ADAPTER_CANNOT_SYNTHESIZE_20261030",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "P_DECLARED_OPTIONAL_INPUTS_20261030"
+  }
+ },
+ "weakens_existing_guard": false
+}

@@ -6,13 +6,11 @@ an exact, unambiguous user directive and independent inspection of the resulting
 """
 from __future__ import annotations
 
-import gzip
 import hashlib
 import json
 from pathlib import Path
 import re
 import tarfile
-import zlib
 from typing import Any, Mapping
 
 
@@ -59,16 +57,6 @@ def _inside(root: Path, relative: str) -> Path:
     return p
 
 
-def _has_symlink_component(root: Path, relative: str) -> bool:
-    """Check every lexical component after _inside has validated the path."""
-    current = root
-    for part in Path(relative).parts:
-        current = current / part
-        if current.is_symlink():
-            return True
-    return False
-
-
 def _unresolved(reason: str) -> dict[str, Any]:
     return {
         "schema": SCHEMA,
@@ -79,132 +67,6 @@ def _unresolved(reason: str) -> dict[str, Any]:
         "semantic_acceptance_complete": False,
         "terminal_authority": False,
         "terminal_credit_delta": 0,
-    }
-
-
-class ArchiveReinspectionError(ValueError):
-    """The manifest or the independently re-opened archive does not match."""
-
-
-def _file_digest(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
-def _read_manifest_members(root: Path, manifest_rel: str) -> tuple[list[str], str]:
-    """Read the member set and the digest of the bytes used to derive it."""
-    root = Path(root).resolve()
-    try:
-        manifest = _inside(root, manifest_rel)
-    except (TypeError, ValueError) as exc:
-        raise ArchiveReinspectionError("ARCHIVE_OR_MANIFEST_PATH_INVALID") from exc
-    if not manifest.is_file() or _has_symlink_component(root, manifest_rel):
-        raise ArchiveReinspectionError("SOURCE_FILE_UNSAFE_OR_MISSING")
-    try:
-        raw = manifest.read_bytes()
-        doc = json.loads(raw.decode("utf-8"))
-    except (OSError, ValueError, UnicodeDecodeError) as exc:
-        raise ArchiveReinspectionError("MANIFEST_SHAPE_INVALID") from exc
-    if not isinstance(doc, Mapping) or not isinstance(doc.get("records"), list):
-        raise ArchiveReinspectionError("MANIFEST_SHAPE_INVALID")
-    members = {manifest_rel}
-    for record in doc["records"]:
-        if not isinstance(record, Mapping) or not isinstance(record.get("verification_paths"), list):
-            raise ArchiveReinspectionError("MANIFEST_RECORD_INVALID")
-        for rel in record["verification_paths"]:
-            if not isinstance(rel, str) or not rel.startswith("canonical/"):
-                raise ArchiveReinspectionError("MANIFEST_MEMBER_INVALID")
-            try:
-                _inside(root, rel)
-            except (TypeError, ValueError) as exc:
-                raise ArchiveReinspectionError("MANIFEST_MEMBER_INVALID") from exc
-            members.add(rel)
-    return sorted(members), _digest(raw)
-
-
-def manifest_members(root: Path, manifest_rel: str) -> list[str]:
-    """Read the exact archive-member set described by a verification manifest."""
-    return _read_manifest_members(root, manifest_rel)[0]
-
-
-def inspect_archive_manifest(root: Path, manifest_rel: str, archive_rel: str) -> dict[str, Any]:
-    """Re-use the exact-archive check without trusting a producer's member list.
-
-    The manifest supplies the complete set, and every archive member, including
-    the manifest itself, must be a regular file whose bytes equal the current
-    repository file. Stream the gzip tar once; never extract it to disk. This is
-    a local state reinspection, not authentication of the execution trace or
-    protection against a concurrently malicious writer of the same files.
-    """
-    root = Path(root).resolve()
-    try:
-        manifest = _inside(root, manifest_rel)
-        output = _inside(root, archive_rel)
-    except (TypeError, ValueError) as exc:
-        raise ArchiveReinspectionError("ARCHIVE_OR_MANIFEST_PATH_INVALID") from exc
-    if (not manifest.is_file() or not output.is_file() or manifest == output
-            or _has_symlink_component(root, archive_rel)):
-        raise ArchiveReinspectionError("SOURCE_OR_OUTPUT_MISSING")
-    member_list, parsed_manifest_sha = _read_manifest_members(root, manifest_rel)
-    members = set(member_list)
-    if archive_rel in members:
-        raise ArchiveReinspectionError("OUTPUT_EQUALS_ARCHIVE_MEMBER")
-
-    seen: set[str] = set()
-    source_hashes: dict[str, str] = {}
-    try:
-        # Drain gzip after tar reaches its end marker: tarfile alone can stop
-        # before checking the gzip footer, CRC, or trailing data.
-        with gzip.open(output, "rb") as compressed:
-            with tarfile.open(fileobj=compressed, mode="r:") as archive:
-                for info in archive:
-                    name = info.name
-                    if name not in members:
-                        try:
-                            actual = _inside(root, name)
-                        except (TypeError, ValueError):
-                            actual = None
-                        if actual is None or not actual.is_file():
-                            raise ArchiveReinspectionError("ARCHIVE_MEMBER_ABSENT_FROM_REPOSITORY")
-                        raise ArchiveReinspectionError("ARCHIVE_MEMBER_SET_NOT_EXACT")
-                    if name in seen:
-                        raise ArchiveReinspectionError("ARCHIVE_MEMBER_SET_NOT_EXACT")
-                    if not info.isfile() or info.issym() or info.islnk():
-                        raise ArchiveReinspectionError("ARCHIVE_UNSAFE_MEMBER_TYPE")
-                    seen.add(name)
-                    source = _inside(root, name)
-                    if not source.is_file() or _has_symlink_component(root, name):
-                        raise ArchiveReinspectionError("SOURCE_FILE_UNSAFE_OR_MISSING")
-                    archived = archive.extractfile(info)
-                    if archived is None:
-                        raise ArchiveReinspectionError("ARCHIVE_MEMBER_BYTES_MISMATCH")
-                    digest = hashlib.sha256()
-                    with source.open("rb") as current:
-                        while True:
-                            chunk = current.read(1024 * 1024)
-                            other = archived.read(1024 * 1024)
-                            if chunk != other:
-                                raise ArchiveReinspectionError("ARCHIVE_MEMBER_BYTES_MISMATCH")
-                            if not chunk:
-                                break
-                            digest.update(chunk)
-                    source_hashes[name] = digest.hexdigest()
-            for tail in iter(lambda: compressed.read(1024 * 1024), b""):
-                if any(tail):
-                    raise ArchiveReinspectionError("ARCHIVE_TRAILING_DATA")
-    except (tarfile.TarError, OSError, EOFError, zlib.error) as exc:
-        raise ArchiveReinspectionError("ARCHIVE_NOT_A_READABLE_GZIP_TAR") from exc
-    if seen != members:
-        raise ArchiveReinspectionError("ARCHIVE_MEMBER_SET_NOT_EXACT")
-    if source_hashes.get(manifest_rel) != parsed_manifest_sha:
-        raise ArchiveReinspectionError("MANIFEST_CHANGED_DURING_REINSPECTION")
-    return {
-        "members": sorted(members),
-        "source_sha256": source_hashes,
-        "archive_sha256": _file_digest(output),
     }
 
 
@@ -324,18 +186,47 @@ def verify(
         result = _unwrap_result(execution.get("result"))
         if not isinstance(result, Mapping) or result.get("output_verified") is not True:
             return _unresolved("CAPABILITY_OUTPUT_PROOF_MISSING")
-        try:
-            inspected = inspect_archive_manifest(root, manifest_rel, output_rel)
-        except ArchiveReinspectionError as exc:
-            return _unresolved(str(exc))
-        members = inspected["members"]
+        root = Path(root).resolve()
+        manifest = _inside(root, manifest_rel)
+        output = _inside(root, output_rel)
+        if not manifest.is_file() or not output.is_file() or manifest == output:
+            return _unresolved("SOURCE_OR_OUTPUT_MISSING")
+        doc = json.loads(manifest.read_text(encoding="utf-8"))
+        if not isinstance(doc, Mapping) or not isinstance(doc.get("records"), list):
+            return _unresolved("MANIFEST_SHAPE_INVALID")
+        members = {manifest_rel}
+        for record in doc["records"]:
+            if not isinstance(record, Mapping) or not isinstance(record.get("verification_paths"), list):
+                return _unresolved("MANIFEST_RECORD_INVALID")
+            for rel in record["verification_paths"]:
+                if not isinstance(rel, str) or not rel.startswith("canonical/"):
+                    return _unresolved("MANIFEST_MEMBER_INVALID")
+                members.add(rel)
+        if output_rel in members:
+            return _unresolved("OUTPUT_EQUALS_ARCHIVE_MEMBER")
         if (result.get("output_path") != output_rel
-                or result.get("output_sha256") != inspected["archive_sha256"]
-                or result.get("members") != members
+                or result.get("output_sha256") != _digest(output.read_bytes())
+                or result.get("members") != sorted(members)
                 or result.get("member_count") != len(members)):
             return _unresolved("TRACE_OUTPUT_DIGEST_OR_MEMBERS_MISMATCH")
-        if result.get("source_sha256") != inspected["source_sha256"]:
+        actual_source_hashes = {}
+        for rel in sorted(members):
+            src = _inside(root, rel)
+            if not src.is_file() or src.is_symlink():
+                return _unresolved("SOURCE_FILE_UNSAFE_OR_MISSING")
+            actual_source_hashes[rel] = _digest(src.read_bytes())
+        if result.get("source_sha256") != actual_source_hashes:
             return _unresolved("SOURCE_CHANGED_SINCE_EXECUTION")
+        with tarfile.open(output, "r:gz") as archive:
+            infos = archive.getmembers()
+            if len(infos) != len(members) or sorted(i.name for i in infos) != sorted(members):
+                return _unresolved("ARCHIVE_MEMBER_SET_NOT_EXACT")
+            if any(not info.isfile() or info.issym() or info.islnk() for info in infos):
+                return _unresolved("ARCHIVE_UNSAFE_MEMBER_TYPE")
+            for info in infos:
+                data_file = archive.extractfile(info)
+                if data_file is None or _digest(data_file.read()) != actual_source_hashes[info.name]:
+                    return _unresolved("ARCHIVE_MEMBER_BYTES_MISMATCH")
         return {
             "schema": SCHEMA,
             "pass": True,

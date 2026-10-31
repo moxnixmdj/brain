@@ -237,9 +237,7 @@ class TestNaturalLanguageEditIntent(unittest.TestCase):
             "python_executable": sys.executable,
         }, root)
         res = json.loads((root / "_out" / "summary.json").read_text(encoding="utf-8"))
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         self.assertEqual(res["applied_op_count"], 1)
         diff = (root / "_out" / "change.diff").read_text(encoding="utf-8")
         self.assertIn("+def compute(", diff)

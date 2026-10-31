@@ -64,11 +64,21 @@ def _pair_space(n):return n*(n-1)//2
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise GuidedRepairError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
- env=_PATCH._source_env(src)
- tests=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+ env=_PATCH._source_env()
+ env["PYTHONPATH"]=f"{src}:{env.get('PYTHONPATH','')}".rstrip(":")
+ tests=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
+ if not tests:
+  from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+  try:tests=discover_test_files(src)
+  except FileNotFoundError:raise GuidedRepairError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  if not tests:raise GuidedRepairError("TEST_PATHS_REQUIRED")
- argv=[str(x) for x in (args.get("test_argv") or _PATCH.suite_argv(sys.executable,*tests))]
+ argv=_PATCH.argv_or_derived(args.get("test_argv"),sys.executable,*tests)
  timeout=max(1,min(int(args.get("timeout_s",20)),120))
+ import time as _t
+ _wb=args.get("wall_budget_s")
+ _deadline=(_t.monotonic()+float(_wb)) if _wb else None
+ def _wall_left():
+  return _deadline is None or _t.monotonic()<_deadline
  max_files=max(1,min(int(args.get("max_guided_files",4)),16))
  max_symbols=max(1,min(int(args.get("max_guided_symbols_per_file",6)),32))
  per=max(1,min(int(args.get("mutations_per_file",24)),128))
@@ -80,17 +90,49 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  base=_PATCH._run_tests(repo,argv,timeout,env)
  if base.get("timed_out"):raise GuidedRepairError("BASELINE_TIMEOUT")
  if base.get("returncode")==0:raise GuidedRepairError("BASELINE_ALREADY_PASSES")
+ # Fail fast BEFORE the traced localization phase: an indivisible round
+ # (trace + pool + search) that starts with the wall already spent returns
+ # a labeled refusal instead of eating the next engine's share (measured
+ # tqdm/9: writer overshoot starved the pair engine via SKIPPED_WALL_BUDGET).
+ if not _wall_left():raise GuidedRepairError("WALL_BUDGET_EXHAUSTED_BEFORE_SEARCH")
  base_score=_STRICT._score(base)
  if base_score is None:base_score=1
+ # Traceback-frame-first economics (L6 law, measured on BugsInPy tornado/14):
+ # the pool cap (mutations_per_file) sorted by line number spent the whole
+ # budget on early-line trivia before reaching the line the stack names.
+ # Frames from the REAL failing run focus the grammar where the evidence is.
+ import re as _re
+ _tb=_re.findall(r'File "([^"]+)", line (\d+)', (base.get("stderr") or "")+(base.get("stdout") or ""))
+ _focus={}
+ for _f,_n in _tb:
+  try:_rel_f=_rel(repo,pathlib.Path(_f).resolve())
+  except Exception:continue
+  _focus.setdefault(_rel_f,set()).add(int(_n))
  temp_loc=out.parent/(".loc_"+out.name);temp_prov=out.parent/(".prov_"+out.name)
  loc_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"output_path":_rel(repo,temp_loc),"timeout_s":timeout,"max_trace_events":args.get("max_trace_events",100000),"max_ranked_lines":args.get("max_ranked_lines",100),"max_ranked_symbols":args.get("max_ranked_symbols",100)}
  prov_args={"source_root":_rel(repo,src) if src!=repo else ".","test_paths":[_rel(repo,p) for p in tests],"output_path":_rel(repo,temp_prov),"timeout_s":timeout,"max_trace_events":args.get("max_trace_events",100000),"max_value_chars":args.get("max_value_chars",120)}
  try:
-  loc=_LOC.run(loc_args,repo);prov=_PROV.run(prov_args,repo)
+  loc=_LOC.run(loc_args,repo)
+  # L6 wall economics: the interprocedural provenance phase costs a full
+  # traced suite run and its boosts have NEVER fired in any measured receipt
+  # (provenance_hypothesis_count=0, guidance_reduced_candidate_items=false on
+  # every instance so far). Off by default; opt in with provenance=true.
+  if args.get("provenance", True):
+   prov=_PROV.run(prov_args,repo)
+  else:
+   prov={"interprocedural_hypotheses":[]}
  finally:
   if temp_loc.exists():temp_loc.unlink()
   if temp_prov.exists():temp_prov.unlink()
+ # Mutant-wall economics (L6, faulthandler-measured on tornado bugs): a
+ # hanging mutant burns the FULL caller timeout each. Candidates get a wall
+ # derived from the MEASURED baseline suite time (8x + 3s, min 6, capped by
+ # the caller timeout): the real suite is ~0.3s here, so mutants die in <=6s
+ # instead of 40.
+ cand_timeout=max(6,min(timeout,int(8*float(base.get("elapsed_s") or 1)+3)))
  rows=_guided_rows(repo,loc,prov,max_files,max_symbols)
+ for _row in rows:
+  _row["focus"]=sorted(_focus.get(_row["rel"],set()))
  if not rows:raise GuidedRepairError("GUIDANCE_EMPTY")
  guided_items=_items(rows,tests,per)
  failure_text=_STRICT._text(base)
@@ -110,28 +152,31 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  guidance["guidance_reduced_pair_space"]=guidance["pair_space_reduction"]>0
  originals={r["path"]:r["path"].read_bytes() for r in rows}
  single_scores={};tested_single=0
- for p,e in guided_items:
-  cand=_COUPLED._candidate(originals,[(p,e)])
-  if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr)
-  if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ss=1
-  single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
  winner=None;winner_mode=None;pair_count=0;crossed=False
  for p,e in guided_items:
+  if not _wall_left():break
   cand=_COUPLED._candidate(originals,[(p,e)])
   if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ss=_STRICT._score(rr)
+  rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ss=_STRICT._score(rr)
+  if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ss=1
+  single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
+  # The first passing exploration already identifies this candidate. Do not
+  # execute all remaining singles or repeat the single sweep. Acceptance still
+  # requires the two fresh winner replays below and the controller measurement.
   if rr.get("returncode")==0 and (ss==0 or ss is None):
    winner=cand;winner_mode="SINGLE_GUIDED";break
  if winner is None:
+  # the pair product is the MOST expensive phase -- it must check the wall
+  # at BOTH levels (measured tqdm/9 x-ray: unguarded pair loop ran 180+s
+  # past its deadline, starving every downstream engine)
   for i in range(len(guided_items)):
-   if pair_count>=pair_max:break
+   if pair_count>=pair_max or not _wall_left():break
    for j in range(i+1,len(guided_items)):
-    if pair_count>=pair_max:break
+    if pair_count>=pair_max or not _wall_left():break
     pair_count+=1;a,b=guided_items[i],guided_items[j]
     cand=_COUPLED._candidate(originals,[a,b])
     if cand is None:continue
-    rr=_COUPLED._run_candidate(repo,originals,cand,argv,timeout,env);ps=_STRICT._score(rr)
+    rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ps=_STRICT._score(rr)
     if ps is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ps=1
     if rr.get("returncode")==0 and (ps==0 or ps is None):
      ka=(a[0],a[1]["start"],a[1]["end"],a[1]["replacement"]);kb=(b[0],b[1]["start"],b[1]["end"],b[1]["replacement"])
@@ -142,7 +187,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if winner:
   ok=True
   for _ in range(2):
-   rr=_COUPLED._run_candidate(repo,originals,winner,argv,timeout,env);rs=_STRICT._score(rr)
+   rr=_COUPLED._run_candidate(repo,originals,winner,argv,cand_timeout,env);rs=_STRICT._score(rr)
    if rr.get("returncode")==0:rs=0
    elif rs is None and not rr.get("timed_out"):rs=1
    replay.append({"returncode":rr.get("returncode"),"failure_score":rs,"timed_out":rr.get("timed_out")})

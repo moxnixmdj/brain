@@ -30,6 +30,8 @@ from typing import Any, Callable, Mapping
 
 SCHEMA = "PROJECT_BRAIN_CAPABILITY_TYPE_SURFACE_V1"
 REGISTRY = Path(__file__).resolve().parents[0] / "BOUND_CAPABILITY_REGISTRY_V1.json"
+if REGISTRY.is_file() and REGISTRY.read_bytes()[:1] == b"@":
+    REGISTRY = REGISTRY.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
 
 # --------------------------------------------------------------------------------- type universe
 
@@ -165,10 +167,19 @@ PARSERS: dict[str, Callable[[str], Any]] = {
 _EXPLICIT: dict[str, str] = {
     "x_ticks": PAIR_LIST, "y_ticks": PAIR_LIST,          # was NUMBER_LIST -- a real type error
     "x_value": NUMBER, "y_value": NUMBER, "major": NUMBER, "max_age_s": NUMBER,
+    # a repair-loop budget is a bounded attempt count -- a NUMBER; left UNKNOWN
+    # it made software.repair.loop.cegis_hypothesis unsampleable
+    "budget": NUMBER,
     "authoritative": BOOL, "test_argv": ARGV, "spec": JSON_TEXT, "objective": JSON_TEXT,
     # a slot the router cannot type is a slot the router cannot fill, and an
     # unfilled slot is a chain that never runs
     "content": STRING,
+    "module_name": STRING,
+    "max_mutants": NUMBER,
+    "wall_budget_s": NUMBER,   # relative duration; an absolute timestamp arg
+    "provenance": BOOL,        # opt-in interprocedural phase switch
+    "exec_evidence": "BOOL",
+    "exec_evidence_trace_events": "NUMBER",
     "argv": ARGV,                  # general command vector -- the universal
                                    # action primitive in any environment
     "actions": JSON_TEXT,          # browser action script, consumed by
@@ -320,7 +331,13 @@ def signature(entry: Mapping[str, Any]) -> dict[str, str]:
 
 
 def load_registry(path: str | Path | None = None) -> dict[str, Any]:
-    return json.loads(Path(path or REGISTRY).read_text(encoding="utf-8"))["capabilities"]
+    p = Path(path or REGISTRY)
+    caps = dict(json.loads(p.read_text(encoding="utf-8"))["capabilities"])
+    if path is None:
+        snap = p.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+        if snap.is_file() and snap != p:
+            caps.update(json.loads(snap.read_text(encoding="utf-8")).get("capabilities") or {})
+    return caps
 
 
 def signatures(registry: Mapping[str, Any] | None = None) -> dict[str, dict[str, str]]:

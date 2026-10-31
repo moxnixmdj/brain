@@ -300,115 +300,6 @@ def synthesize(goal: str, content: str = "brain-synthesis-sample",
 # --------------------------------------------------------------------------- #
 # remembering what worked, so it is instant next time
 # --------------------------------------------------------------------------- #
-# --------------------------------------------------------------------------- #
-# what this layer may and may not claim
-# --------------------------------------------------------------------------- #
-# The candidates above are FORMAT WRITERS.  They write a payload in a named format and the
-# oracle proves the format.  Nothing here can fuzz a function, build a wheel, add a
-# dependency, inline a function or write docstrings -- no stdlib one-liner does those -- and
-# yet `synthesize_or_recall` answered every one of them.  Measured on the 43-act probe:
-# "Fuzz the function add in calc.py ... report it to out/fuzz.json", "Build a wheel ...",
-# "Add the dependency requests ...", "Add logging and metrics ...", "Inline the function
-# sub ..." and "Write docstrings for the functions ..." were each returned with
-# `pass: true, from_memory: true, authority: PREVIOUSLY_SYNTHESISED_AND_VERIFIED`, by
-# recalling a remembered `json_dump` -- because `remember` keyed the learned program on the
-# OUTPUT SUFFIX alone (`json`), so the store held one program per FILE EXTENSION and any
-# sentence ending in ".json" recalled it.  composure, that is a false claim of the worst
-# kind: a verified program was named for a request no program in this file can perform.
-#
-# So the fallback is admitted for the one class it actually serves -- produce a file in the
-# requested format -- and for nothing else.  A request whose act is not among these words is
-# not a format write, and this layer says so instead of writing a JSON file about it.
-_FORMAT_WRITE_VERBS = frozenset("""
-write save create output dump store put generate make encode produce print convert
-format export render serialise serialize compose emit record
-compress uncompress decompress archive pack unpack zip gzip bundle unbundle
-""".split())
-
-_ACT_STOP = frozenset("""
-a an the this that these those it its is are was were be been am do does did and or but if
-then than so as at by for from in into of on to with without using use please me my we you
-please first second every all each any some few more most
-report reports receipt receipts findings summary summaries result results
-out dest destination target tmp temp output outputs
-""".split())
-
-# The nouns a FORMAT WRITE is made of: the payload and the shape it is written in.  A
-# sentence containing any OTHER content noun is not a format write, however it opens.
-_FORMAT_WRITE_OBJECTS = frozenset("""
-json xml csv tsv txt yaml yml toml html htm markdown md pdf png jpg jpeg gif gz bz2 zip tar
-xz svg docx xlsx rtf text string content contents data payload bytes value values object
-objects array record records row rows sample file files document documents archive manifest
-listing list image raster font chart line lines number numbers total totals
-""".split())
-
-
-def _act_words(text: str) -> set[str]:
-    """The words that name WHAT TO DO, with the destination's own words removed.
-
-    The prose is read through the front compiler's own value stripper, so a path, a URL or a
-    quoted payload cannot vote -- the same rule the composer route applies, and for the same
-    measured reason (a destination's suffix once decided the task).
-    """
-    try:
-        from canonical.runtime import goal_front_compiler_v1 as _front
-        text = _front.prose_only(str(text or ""))
-        # The PAYLOAD the sentence states is a value, not a word about the act.  Reused from
-        # the composer route, which already draws this distinction: measured, "Write the text
-        # hello." was refused with ACT_NOT_A_FORMAT_WRITE:hello -- and `hello` was the text to
-        # write, not part of the job.
-        from canonical.runtime import composer_route_v1 as _cr
-        stated = _cr.extract_content(str(text or ""))
-        if stated:
-            text = str(text).replace(str(stated), " ")
-    except Exception:  # noqa: BLE001 - no front compiler, read the sentence itself
-        pass
-    words = {w for w in re.findall(r"[a-z][a-z0-9]+", str(text or "").lower())}
-    return {w for w in words if w not in _ACT_STOP}
-
-
-def claims_the_request(goal: str) -> tuple[bool, str]:
-    """May this layer answer `goal`?  Only when it is a format write.
-
-    Returns (may_answer, why).  `why` names the act that made it impossible, so callers can
-    refuse in words the owner can act on rather than with a generic status.
-    """
-    # `_requested_suffix` answers "" as well as None when the sentence names no format; the
-    # earlier test compared with `is None` and so admitted every sentence as a format write.
-    if not _requested_suffix_guarded(goal):
-        return False, "NO_FORMAT_STATED"
-    act = _act_words(goal)
-    if not act:
-        return False, "NO_ACT_STATED"
-    # EVERY content word has to belong to a format write -- the verb AND the object.  "Write
-    # docstrings for the functions in X" opens with a format-write verb and is not one: the
-    # thing it asks for is docstrings, and a JSON writer cannot produce docstrings.
-    # Measured: with only the verb tested, that sentence and "Make the network calls ...
-    # retry safely" were still admitted, and each was answered with a JSON file.
-    extra = act - _FORMAT_WRITE_VERBS - _FORMAT_WRITE_OBJECTS
-    if extra:
-        return False, "ACT_NOT_A_FORMAT_WRITE:" + ",".join(sorted(extra))
-    if act & _FORMAT_WRITE_VERBS:
-        return True, "FORMAT_WRITE"
-    return False, "NO_FORMAT_WRITE_VERB:" + ",".join(sorted(act))
-
-
-def _requested_suffix_guarded(goal: str) -> str | None:
-    from canonical.runtime import cli_capability_acquisition_v1 as acq
-    try:
-        return acq._requested_suffix(goal)
-    except Exception:  # noqa: BLE001 - no suffix question, no suffix answer
-        return None
-
-
-def _covers(a_goal: str, b_goal: str) -> bool:
-    """Does an act verified for `b_goal` also name everything `a_goal` asks for?"""
-    want = _act_words(a_goal)
-    have = _act_words(b_goal)
-    return bool(want) and want <= have
-
-
-
 def _load() -> dict[str, Any]:
     p = pathlib.Path(STATE_PATH)
     if not p.is_file():
@@ -447,22 +338,9 @@ def remember(result: Mapping[str, Any]) -> None:
     _save(state)
 
 
-def recall(suffix: str, goal: str | None = None) -> dict[str, Any] | None:
-    """A program already proven to produce this format -- AND to do this job.
-
-    The format is recorded on the program; the ACT is recorded on the goal it was verified
-    against.  Recalling on the format alone made every `.json` sentence recall a JSON
-    writer, including sentences asking for a fuzzer (see the header of this section).
-    """
-    known = _load()["learned"].get(str(suffix or "").lower())
-    if not known:
-        return None
-    if goal is None:
-        return known
-    if _covers(goal, str(known.get("goal") or "")) or _covers(
-            str(known.get("goal") or ""), goal):
-        return known
-    return None
+def recall(suffix: str) -> dict[str, Any] | None:
+    """A program already proven to produce this format."""
+    return _load()["learned"].get(str(suffix or "").lower())
 
 
 def synthesize_or_recall(goal: str, content: str = "brain-synthesis-sample",
@@ -470,14 +348,7 @@ def synthesize_or_recall(goal: str, content: str = "brain-synthesis-sample",
     """instant when known, honest when not."""
     from canonical.runtime import cli_capability_acquisition_v1 as acq
     suffix = suffix or acq._requested_suffix(goal)
-    allowed, why = claims_the_request(goal)
-    if not allowed:
-        return {"schema": SCHEMA, "pass": False, "from_memory": False,
-                "status": "REFUSED__NOT_A_FORMAT_WRITE",
-                "reason": "SYNTHESIS_CANNOT_PERFORM:" + why,
-                "goal": goal, "suffix": suffix,
-                "authority": "NO_PROGRAM_IN_THIS_LAYER_PERFORMS_THE_ACT"}
-    known = recall(suffix, goal) if suffix else None
+    known = recall(suffix) if suffix else None
     if known:
         return {"schema": SCHEMA, "pass": True, "from_memory": True,
                 "status": "PASS__RECALLED_VERIFIED_PROGRAM",

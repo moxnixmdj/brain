@@ -1,0 +1,16 @@
+{
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "kind": "urlopen",
+  "payload": {
+    "data_b64": null,
+    "headers": {
+      "User-agent": "ProjectBrain-CapabilityDiscovery/1"
+    },
+    "method": "GET",
+    "timeout_s": 12,
+    "url": "https://pypi.org/pypi/simpleubjson/json"
+  },
+  "request_sha256": "31303a6ec6633d6426c49c7ffd049d4232711803a189cd043442b26ed2b7ff5a",
+  "schema": "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1",
+  "task_id": "SI-REAL-UBJSON-SNAPSHOT-001"
+}

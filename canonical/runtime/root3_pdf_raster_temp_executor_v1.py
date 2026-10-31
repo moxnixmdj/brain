@@ -253,7 +253,8 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
 
 def _run_confined(prepared: Mapping[str, Any], popen_impl: Callable[..., Any]) -> dict[str, Any]:
     required = ["unshare", "mount", "chroot", "setpriv", "ip", "bash", "env"]
-    resolved = {name: shutil.which(name) for name in required}
+    from canonical.runtime import zero_ambient_namespace_launcher_v1 as ns
+    resolved = {name: ns.resolve_system_binary(name) for name in required}
     missing = [name for name, value in resolved.items() if not value]
     if missing:
         raise PdfRasterTempDenied("HOST_PRIMITIVE_MISSING:" + ",".join(missing))

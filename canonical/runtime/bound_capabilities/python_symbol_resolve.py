@@ -143,6 +143,11 @@ def _load_index(repo, source_abs, work, cached_index_path=None):
         want = str(source_abs.relative_to(repo)).replace("\\", "/")
         if str(artifact.get("source_root")) != want:
             _systemic("cached index invalid: source_root mismatch")
+        from canonical.runtime.bound_capabilities.python_source_symbol_index import validate_cached_index
+        try:
+            validate_cached_index(repo, source_abs, artifact)
+        except (RuntimeError, OSError) as exc:
+            _systemic(str(exc))
         return _materialize(artifact)
     import importlib.util
     import pathlib as _plib

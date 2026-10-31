@@ -2,6 +2,7 @@
 """Route autonomous capability acquisition across supplier classes."""
 from __future__ import annotations
 import json
+import pathlib
 import re
 
 import auto_apt_cli_acquisition
@@ -14,6 +15,26 @@ class AutoAcquisitionFailure(RuntimeError):
     def __init__(self,code,detail=None):
         self.code=code; self.detail=detail
         super().__init__(code if detail is None else f"{code}:{detail}")
+
+
+
+def propagate_obs_sidecar_for_generated_mission(root, origin_mission_path, verify_mission_path):
+    """Copy the origin mission's continuous-observation sidecar next to an
+    auto-generated verification mission so the fresh verification child runs
+    with the same information boundary as the originating mission."""
+    root = pathlib.Path(root).resolve()
+    origin = (root / str(origin_mission_path)).resolve()
+    src = origin.with_name(origin.name + ".continuous_obs.json")
+    vm = (root / str(verify_mission_path)).resolve()
+    dst = vm.with_name(vm.name + ".continuous_obs.json")
+    if not src.is_file():
+        return "NO_ORIGIN_SIDECAR"
+    data = src.read_bytes()
+    if dst.is_file() and dst.read_bytes() == data:
+        return "REUSED_IDENTICAL"
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    dst.write_bytes(data)
+    return "PROPAGATED"
 
 
 def _required_supplier_class(goal):
@@ -69,6 +90,30 @@ def _fallback_supplier_order(goal):
     return out
 
 
+_SUPPLIER_PROBES={
+  "pypi_python_library": auto_pypi_library_acquisition.supports,
+  "npm_javascript_library": auto_npm_library_acquisition.supports_effect,
+  "content_addressed_python_source_tree": auto_python_source_codec_acquisition.supports,
+}
+
+
+def supplier_classes_supporting(goal):
+    """Which (non-apt) supplier classes accept this goal's shape.
+
+    Read-only: classes REFUSE goals whose words carry no usable contract
+    anchor (no codec path, no codec keyword), so the caller can tell a
+    goal-wide race from a clause that never had a contract shape at all.
+    """
+    out=[]
+    for name,probe in _SUPPLIER_PROBES.items():
+        try:
+            if probe(goal):
+                out.append(name)
+        except Exception:
+            continue
+    return out
+
+
 def dispatch(goal,mission_id,mission_path,root,discovery=None):
     attempts=[]
     required=_required_supplier_class(goal)
@@ -107,6 +152,9 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                 goal,mission_id,mission_path,root,discovery=discovery
             )
         except Exception as exc:
+            import traceback as _tb
+            tb_lines=_tb.format_exception(type(exc),exc,exc.__traceback__)
+            tb_t="".join(tb_lines) if isinstance(tb_lines,list) else _tb.format_exc()
             attempts.append({
               "supplier_class":supplier,
               "selection_basis":(
@@ -117,6 +165,7 @@ def dispatch(goal,mission_id,mission_path,root,discovery=None):
                   discovered.index(supplier) if supplier in discovered else None
               ),
               "error":type(exc).__name__+":"+str(exc),
+              "traceback":tb_t[-1500:],
             })
 
     raise AutoAcquisitionFailure(

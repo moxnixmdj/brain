@@ -14,7 +14,7 @@ Candidate-only search over one repository-local Python source file. The runtime:
 No model calls, network calls, package installation, or canonical source writes.
 """
 from __future__ import annotations
-import ast, difflib, hashlib, importlib.util, json, os, pathlib, subprocess, sys, time
+import ast, copy, difflib, hashlib, importlib.util, json, os, pathlib, re, subprocess, sys, time
 from typing import Any, Iterable, Mapping
 
 SCHEMA="PROJECT_BRAIN_PYTHON_TEST_GUIDED_PATCH_SEARCH_V1"
@@ -33,7 +33,14 @@ def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
-               extra_env: Mapping[str, str] | None = None) -> dict[str, Any]:
+               extra_env: Mapping[str, str] | None = None,
+               cwd: pathlib.Path | None = None) -> dict[str, Any]:
+    # ``cwd`` overrides the subprocess working directory. WORLD-CWD LAW
+    # (tqdm/9, measured): pytest-style argv paths are relative to the WORLD
+    # root -- running them from the brain repository root exits rc=4
+    # (file-or-directory-not-found) and every candidate reads as a PHANTOM
+    # red. Suite runs for such suites must execute from the source root.
+
     """Run the test argv and report the outcome.
 
     ``extra_env`` is merged over the inherited environment. It exists because the bound executor
@@ -56,7 +63,7 @@ def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
     started=time.monotonic()
     try:
         env=None if not extra_env else {**os.environ,**{k:str(v) for k,v in extra_env.items()}}
-        proc=subprocess.run(argv,cwd=root,text=True,capture_output=True,timeout=timeout_s,env=env)
+        proc=subprocess.run(argv,cwd=str(cwd) if cwd else root,text=True,capture_output=True,timeout=timeout_s,env=env)
         return {
             "returncode":proc.returncode,
             "stdout":proc.stdout or "",
@@ -72,6 +79,21 @@ def _run_tests(root: pathlib.Path, argv: list[str], timeout_s: int,
             "elapsed_s":round(time.monotonic()-started,6),
             "timed_out":True,
         }
+
+def pytest_summary(text: str) -> dict[str, int] | None:
+    """Read the final supported pytest summary; this is not attestation."""
+    for line in reversed(text.splitlines()):
+        summary = line.strip().strip("= ")
+        if (re.match(r"^\d+ (?:passed|failed|skipped|xfailed|xpassed|errors?)\b", summary)
+                and re.search(r"\bin \d+(?:\.\d+)?s\b", summary)):
+            counts = {}
+            for n, outcome in re.findall(
+                    r"(\d+) (passed|failed|xfailed|xpassed|errors?)(?=,|\s+in\b|$)", summary):
+                key = "errors" if outcome in ("error", "errors") else outcome
+                counts[key] = counts.get(key, 0) + int(n)
+            return counts
+    return None
+
 
 def _test_literals(paths: Iterable[pathlib.Path]) -> tuple[list[Any], list[str]]:
     nums=set()
@@ -99,7 +121,12 @@ _COMPARE_SWAPS={
     ast.In:ast.NotIn, ast.NotIn:ast.In,
 }
 _BINOP_SWAPS={
-    ast.Add:[ast.Sub],
+    # Add->Mult is load-bearing: the canonical injected-operator defect class
+    # is "+ where * belongs" (unit_price(q) * k written as q + k). Without the
+    # Add->Mult swap the bounded search never contains the repair, whatever
+    # the budget (measured: L3 interprocedural tier 0% before, ladder receipt
+    # REPAIR_DEPTH_LADDER_20261029). Pool growth is +1 candidate per Add site.
+    ast.Add:[ast.Sub, ast.Mult],
     ast.Sub:[ast.Add],
     ast.Mult:[ast.FloorDiv,ast.Div],
     ast.FloorDiv:[ast.Mult,ast.Div],
@@ -108,9 +135,19 @@ _BINOP_SWAPS={
 }
 _BOOLOP_SWAPS={ast.And:ast.Or, ast.Or:ast.And}
 
-def _descriptor(node: ast.AST, kind: str, detail: str) -> dict[str, Any]:
+def _descriptor(node: ast.AST, kind: str, detail: str, family: str = "legacy", ratio: Any = None) -> dict[str, Any]:
+    # FAMILY TAG (L5 dilution law): every candidate carries its family so
+    # consumers can budget families SEPARATELY. Legacy families keep the
+    # exact trial budget they always had; the decoded neighborhood family
+    # draws from its own small reserve instead of eating legacy slots.
+    # RATIO carries the multiplier that produced a neighborhood value so
+    # consumers can apply the SAME multiplier across sites simultaneously
+    # (the coordinated boundary-retune class: 1000->999.95, 100->99.95,
+    # 10->9.995 is ONE logical edit spread over three constants).
     return {
         "kind":kind,
+        "family":family,
+        "ratio":ratio,
         "detail":detail,
         "lineno":getattr(node,"lineno",None),
         "col_offset":getattr(node,"col_offset",None),
@@ -164,30 +201,68 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
         if isinstance(node,ast.Constant):
             value=node.value
             replacements=[]
+            # BOUNDARY NEIGHBORHOOD (L6-decoded spec, receipt REAL_CORPUS_L6
+            # round4): a real numeric-boundary bug replaces a threshold by
+            # one just BELOW it -- 1000.0->999.95, 100.0->99.95, 10.0->9.995
+            # (tqdm format_sizeof). Family: n*0.9995, n*0.99995, n*0.999,
+            # plus float-only eps moves. Bounded: <=9 extra candidates per
+            # numeric site, only for abs(value)>=2 (0/1 boundaries are the
+            # existing {0,1,-1} family's job).
+            neighbors=[]
+            neighbor_ratio={}
+            if isinstance(value,(int,float)) and not isinstance(value,bool) \
+                    and abs(value)>=2:
+                v=float(value)
+                for _m in (0.9995,0.99995,0.999):
+                    _c=round(v*_m,6)
+                    if _c!=v and _c not in neighbor_ratio:
+                        neighbors.append(_c);neighbor_ratio[_c]=_m
+                if isinstance(value,float):
+                    for _e in (0.005,0.05):
+                        for _c in (round(v-_e,6),round(v+_e,6)):
+                            if _c!=v and _c not in neighbor_ratio:
+                                neighbors.append(_c);neighbor_ratio[_c]=None
             if isinstance(value,bool):
                 replacements=[not value]
             elif isinstance(value,(int,float)) and not isinstance(value,bool):
                 base=[0,1,-1]
                 if isinstance(value,int):
                     base += [value-1,value+1]
-                replacements=base+numeric_literals
+                replacements=base+numeric_literals+neighbors
             elif isinstance(value,str):
                 replacements=string_literals
+            # provenance-tagged: classification by ORIGIN, never by value
+            # (999 == 999.0 is True in Python -- value-membership testing
+            # against `neighbors` reclassified legacy coerced reps as
+            # neighborhood and silently reordered the legacy stream; that
+            # was the real L5 regression, caught by the ladder gate).
             uniq=[]
+            tagged=[]
             for rep in replacements:
+                is_neigh=rep in neighbors
                 if rep==value or type(rep) is not type(value) and isinstance(value,bool):
                     continue
-                if isinstance(value,int) and isinstance(rep,float) and not float(rep).is_integer():
-                    continue
-                if isinstance(value,int) and isinstance(rep,float):
-                    rep=int(rep)
+                if not is_neigh:
+                    # LEGACY PATH -- byte-identical to the pre-neighborhood
+                    # grammar so legacy candidates can never be displaced.
+                    if isinstance(value,int) and isinstance(rep,float) \
+                            and not float(rep).is_integer():
+                        continue
+                    if isinstance(value,int) and isinstance(rep,float) \
+                            and float(rep).is_integer():
+                        rep=int(rep)
                 if rep not in uniq:
                     uniq.append(rep)
-            for rep in uniq[:64]:
+                    tagged.append(is_neigh)
+            _legacy=[r for r,f in zip(uniq,tagged) if not f][:64]
+            _neigh=[r for r,f in zip(uniq,tagged) if f][:3]
+            uniq=_legacy+_neigh
+            for rep in uniq:
                 sig=(key,"const",repr(rep))
                 if sig in seen: continue
                 seen.add(sig)
-                yield key,_descriptor(node,"CONSTANT_REPLACE",repr(value)+"->"+repr(rep)),(
+                fam="neighborhood" if rep in neighbors else "legacy"
+                yield key,_descriptor(node,"CONSTANT_REPLACE",repr(value)+"->"+repr(rep),fam,neighbor_ratio.get(rep)),(
                     lambda n,rep=rep: ast.Constant(value=rep)
                 )
         if isinstance(node,ast.UnaryOp) and isinstance(node.op,ast.Not):
@@ -204,30 +279,142 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                 yield tkey,_descriptor(test,"ADD_NOT","condition -> not condition"),(
                     lambda n: ast.UnaryOp(op=ast.Not(),operand=n)
                 )
+        # GUARD / CLAUSE / BOUNDARY FAMILY (NOPOL / SPR / Plastic Surgery):
+        # Kept strictly in `family="guard_clause"` so `legacy` and `neighborhood`
+        # candidate budgets and pair-space indices remain 100% invariant.
+        if isinstance(node,ast.Call) and isinstance(node.func,ast.Name):
+            _fn_swaps={"min":"max","max":"min","any":"all","all":"any"}
+            _swap=_fn_swaps.get(node.func.id)
+            if _swap:
+                sig=(key,"guard_call",_swap)
+                if sig not in seen:
+                    seen.add(sig)
+                    yield key,_descriptor(node,"CALL_FUNC_SWAP",f"{node.func.id}->{_swap}","guard_clause"),(
+                        lambda n,_swap=_swap: ast.Call(func=ast.Name(id=_swap,ctx=ast.Load()),args=n.args,keywords=n.keywords)
+                    )
+            if node.func.id=="range" and len(node.args)==1:
+                arg0=node.args[0]
+                if isinstance(arg0,ast.BinOp) and isinstance(arg0.op,ast.Sub) and isinstance(arg0.right,ast.Constant) and arg0.right.value==1:
+                    sig=(key,"guard_range","drop_minus1")
+                    if sig not in seen:
+                        seen.add(sig)
+                        yield key,_descriptor(node,"RANGE_BOUND_ADJUST","range(n-1)->range(n)","guard_clause"),(
+                            lambda n: ast.Call(func=n.func,args=[n.args[0].left],keywords=n.keywords)
+                        )
+                else:
+                    sig=(key,"guard_range","add_plus1")
+                    if sig not in seen:
+                        seen.add(sig)
+                        yield key,_descriptor(node,"RANGE_BOUND_ADJUST","range(n)->range(n+1)","guard_clause"),(
+                            lambda n: ast.Call(func=n.func,args=[ast.BinOp(left=n.args[0],op=ast.Add(),right=ast.Constant(value=1))],keywords=n.keywords)
+                        )
+        if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)):
+            _params=[a.arg for a in (*node.args.posonlyargs,*node.args.args) if a.arg not in ("self","cls")]
+            for sub in ast.walk(node):
+                if isinstance(sub,ast.Return) and sub.value is not None and not isinstance(sub.value,ast.IfExp):
+                    rval=sub.value
+                    rkey=_node_key(rval)
+                    # Division zero-denominator guard: `return a / b` -> `return (0 if b == 0 else a / b)`
+                    if isinstance(rval,ast.BinOp) and isinstance(rval.op,(ast.Div,ast.FloorDiv,ast.Mod)) and isinstance(rval.right,ast.Name):
+                        dname=rval.right.id
+                        sig=(rkey,"guard_div0",dname)
+                        if sig not in seen:
+                            seen.add(sig)
+                            yield rkey,_descriptor(rval,"GUARD_DIV_ZERO",f"0 if {dname}==0 else expr","guard_clause"),(
+                                lambda n,dname=dname: ast.IfExp(
+                                    test=ast.Compare(left=ast.Name(id=dname,ctx=ast.Load()),ops=[ast.Eq()],comparators=[ast.Constant(value=0)]),
+                                    body=ast.Constant(value=0),
+                                    orelse=n,
+                                )
+                            )
+                    # Null / empty precondition guards on first parameter (NOPOL angelic precondition)
+                    if _params:
+                        p0=_params[0]
+                        for tag,cond_fn,sent in (
+                            ("none_none",lambda p=p0: ast.Compare(left=ast.Name(id=p,ctx=ast.Load()),ops=[ast.Is()],comparators=[ast.Constant(value=None)]),ast.Constant(value=None)),
+                            ("none_zero",lambda p=p0: ast.Compare(left=ast.Name(id=p,ctx=ast.Load()),ops=[ast.Is()],comparators=[ast.Constant(value=None)]),ast.Constant(value=0)),
+                            ("empty_zero",lambda p=p0: ast.UnaryOp(op=ast.Not(),operand=ast.Name(id=p,ctx=ast.Load())),ast.Constant(value=0)),
+                            ("empty_str",lambda p=p0: ast.UnaryOp(op=ast.Not(),operand=ast.Name(id=p,ctx=ast.Load())),ast.Constant(value="")),
+                        ):
+                            sig=(rkey,"guard_ret",p0,tag)
+                            if sig not in seen:
+                                seen.add(sig)
+                                yield rkey,_descriptor(rval,"GUARD_PRECONDITION",f"{p0}:{tag}","guard_clause"),(
+                                    lambda n,cf=cond_fn,sv=sent: ast.IfExp(test=cf(),body=sv,orelse=n)
+                                )
 
-"""Child-side source injected into every traced suite execution.
+"""Child-side suite execution shared by repair, measurement and tracing.
 
-runpy.run_path(..., run_name="__main__") only executes the tests when the file carries that guard.
-34% of the unittest files in this repository (695 of 2019, measured) do not, because they are meant
-to be collected by a runner. For those the traced child produced no failures at all, so the caller
-raised NO_FAILING_TEST and the whole localization-and-repair chain was dead on a third of the corpus.
-
-A second shape is not a unittest suite at all: 710 files in this repository hold 3880 bare
-``def test_*`` functions in the pytest style, from which the unittest loader collects nothing. The
-runpy fallback executes the module but never enters a function body, so those tests were invisible
-too. They are wrapped in unittest.FunctionTestCase, the standard library type built for exactly
-that, so they run through the same runner and produce the same parseable summary. A function that
-requires an argument is skipped rather than guessed at, and a module with neither shape still falls
-back to runpy.
-
-Loading the module and running the collected suite works for both shapes, and the first failure is
-re-raised with its original traceback so the caller can still rank the lines that actually executed.
-The suite is run through unittest.TextTestRunner so the child still prints the standard summary and
-FAIL:/ERROR: lines, which is what the repair loops parse to score a baseline; the first failure is
-then re-raised so a tracing caller can still rank the lines that executed. Files that are not
-unittest suites fall back to runpy, so nothing that worked before changes.
+Plain unittest suites keep their fast stdlib path. Pytest-style suites are run
+by the real framework when available; fixtures, parametrization, configuration
+and test classes are not reimplemented or silently skipped. When pytest is
+needed but unavailable the run fails closed. Simple bare functions still work
+without pytest. The first real failure retains its traceback for the localizer,
+and the pytest reporter emits the same counted summary consumed by existing
+repair and audit code. This is test execution, not an OS security sandbox.
 """
-SUITE_RUNNER = """import importlib.util,inspect,unittest
+SUITE_RUNNER = r'''import ast,importlib.util,inspect,os,pathlib,runpy,sys,time,tokenize,unittest
+
+def _brain_suite_shape(target):
+ with tokenize.open(str(target)) as source:tree=ast.parse(source.read(),filename=str(target))
+ prefer_pytest=False
+ require_pytest=bool(os.environ.get("PYTEST_ADDOPTS") or os.environ.get("PYTEST_PLUGINS"))
+ script=False
+ for parent in (target.parent,*target.parent.parents):
+  if (parent/"conftest.py").is_file() or (parent/"pytest.ini").is_file() or (parent/".pytest.ini").is_file():
+   require_pytest=True
+  for name,markers in (("pyproject.toml",("[tool.pytest",)),("setup.cfg",("[tool:pytest]",)),("tox.ini",("[pytest]",))):
+   config=parent/name
+   if config.is_file():
+    try: content=config.read_text(encoding="utf-8")
+    except (OSError,UnicodeError): require_pytest=True;continue
+    if any(marker in content for marker in markers):require_pytest=True
+ for node in ast.walk(tree):
+  if isinstance(node,ast.Name) and node.id in ("pytest","pytestmark","pytest_plugins"):require_pytest=True
+  if isinstance(node,ast.Import) and any(a.name.split(".")[0]=="pytest" for a in node.names):require_pytest=True
+  if isinstance(node,ast.ImportFrom) and (node.module or "").split(".")[0]=="pytest":require_pytest=True
+ unittest_modules=set();unittest_cases=set();case_names={"TestCase","IsolatedAsyncioTestCase"}
+ for node in tree.body:
+  if isinstance(node,ast.Import):
+   unittest_modules.update(a.asname or a.name for a in node.names if a.name=="unittest")
+  elif isinstance(node,ast.ImportFrom) and node.module in ("unittest","unittest.case","unittest.async_case"):
+   for alias in node.names:
+    if alias.name=="*":unittest_cases.update(case_names)
+    elif alias.name in case_names:unittest_cases.add(alias.asname or alias.name)
+ for node in tree.body:
+  if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and node.name.startswith("test_"):
+   prefer_pytest=True
+   args=node.args
+   if (isinstance(node,ast.AsyncFunctionDef) or node.decorator_list or args.posonlyargs or args.args
+       or args.kwonlyargs or args.vararg or args.kwarg or any(isinstance(x,(ast.Yield,ast.YieldFrom)) for x in ast.walk(node))):
+    require_pytest=True
+  elif isinstance(node,ast.ClassDef):
+   unittest_base=any((isinstance(b,ast.Name) and b.id in unittest_cases) or
+                     (isinstance(b,ast.Attribute) and b.attr in case_names and
+                      isinstance(b.value,ast.Name) and b.value.id in unittest_modules) for b in node.bases)
+   if unittest_base:unittest_cases.add(node.name)
+   elif node.name.startswith("Test"):require_pytest=True
+  elif isinstance(node,ast.Assert):script=True
+  elif isinstance(node,ast.If):
+   names={x.id for x in ast.walk(node.test) if isinstance(x,ast.Name)}
+   values={x.value for x in ast.walk(node.test) if isinstance(x,ast.Constant) and isinstance(x.value,str)}
+   if "__name__" in names and "__main__" in values:script=True
+ return prefer_pytest,require_pytest,script
+
+def _brain_project_file(frame,root,cache):
+ if frame is None:return None
+ filename=frame.f_code.co_filename
+ if filename.startswith("<") and filename.endswith(">"):return None
+ try:cwd=os.getcwd() if not os.path.isabs(filename) else None
+ except OSError:return None
+ key=(filename,cwd)
+ if key not in cache:
+  try:
+   path=pathlib.Path(filename).resolve()
+   cache[key]=path if path.is_file() and root in path.parents and path.suffix==".py" else None
+  except (OSError,ValueError):cache[key]=None
+ return cache[key]
+
 def _brain_bare_functions(mod):
  out=[]
  for name in sorted(vars(mod)):
@@ -235,59 +422,189 @@ def _brain_bare_functions(mod):
   fn=vars(mod)[name]
   if not callable(fn):continue
   try:params=list(inspect.signature(fn).parameters.values())
-  except (TypeError,ValueError):continue
-  needs=[p for p in params if p.default is p.empty and p.kind in (p.POSITIONAL_ONLY,p.POSITIONAL_OR_KEYWORD)]
-  if needs:continue
+  except (TypeError,ValueError):raise RuntimeError("UNSUPPORTED_TEST_SIGNATURE:"+name)
+  needs=[p for p in params if p.default is p.empty and p.kind in (p.POSITIONAL_ONLY,p.POSITIONAL_OR_KEYWORD,p.KEYWORD_ONLY)]
+  if needs:raise RuntimeError("PYTEST_REQUIRED:"+name)
   out.append((name,fn))
  return out
-def _brain_run_suite(target):
- import runpy,sys
- _d=str(target.resolve().parent)
- if _d not in sys.path:sys.path.insert(0,_d)
+
+def _brain_reraise_failure(exc,tb):
+ # Re-raising SystemExit(0) would turn a failed test or aborted collection
+ # into a successful process while still printing a failure summary.
+ if isinstance(exc,SystemExit) and exc.code in (None,0):
+  raise AssertionError("TEST_RAISED_SYSTEM_EXIT_ZERO").with_traceback(tb) from exc
+ raise exc.with_traceback(tb)
+
+def _brain_run_stdlib(target,script):
+ directory=str(target.resolve().parent)
+ if directory not in sys.path:sys.path.insert(0,directory)
  spec=importlib.util.spec_from_file_location("__brain_suite__",str(target))
  mod=importlib.util.module_from_spec(spec);sys.modules["__brain_suite__"]=mod
  spec.loader.exec_module(mod)
  suite=unittest.TestLoader().loadTestsFromModule(mod)
+ for _,fn in _brain_bare_functions(mod):suite.addTest(unittest.FunctionTestCase(fn))
  if suite.countTestCases()==0:
-  bare=_brain_bare_functions(mod)
-  if not bare:
-   runpy.run_path(str(target),run_name="__main__");return
-  suite=unittest.TestSuite(unittest.FunctionTestCase(fn) for _,fn in bare)
+  if not script:raise RuntimeError("NO_TESTS_COLLECTED:"+str(target))
+  try:runpy.run_path(str(target),run_name="__main__")
+  except SystemExit as exc:
+   if exc.code not in (None,0):raise
+  return
  class _R(unittest.TestResult):
-  def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None
+  def __init__(self,*a,**k):unittest.TestResult.__init__(self);self.err=None;self.no_passing=False
   def addFailure(self,test,err):unittest.TestResult.addFailure(self,test,err);self.err=err
   def addError(self,test,err):unittest.TestResult.addError(self,test,err);self.err=err
+  def stopTestRun(self):
+   unittest.TestResult.stopTestRun(self)
+   # Existing consumers understand skipped, not unittest's expected-failure label.
+   self.skipped.extend((test,"expected failure") for test,_ in self.expectedFailures)
+   self.expectedFailures.clear()
+   self.errors.extend((test,"unexpected success") for test in self.unexpectedSuccesses)
+   self.unexpectedSuccesses.clear()
+   if self.testsRun and self.testsRun==len(self.skipped):
+    self.no_passing=True;self.testsRun+=1;self.errors.append((None,"no passing tests executed"))
  res=unittest.TextTestRunner(stream=sys.stderr,resultclass=_R).run(suite)
  if not res.wasSuccessful():
-  if res.err:raise res.err[1].with_traceback(res.err[2])
+  if res.err:_brain_reraise_failure(res.err[1],res.err[2])
+  if res.no_passing:raise RuntimeError("NO_PASSING_TESTS_EXECUTED")
   raise AssertionError("SUITE_FAILED_WITHOUT_EXCEPTION_INFO")
-"""
 
+def _brain_run_pytest(targets,shapes):
+ import pytest
+ class _Report:
+  def __init__(self):
+   self.nodes=set();self.collected_files=set();self.selected_files=set()
+   self.passed=0;self.failed=0;self.errors=0;self.skipped=0;self.exception=None
+  def _file(self,item):
+   path=getattr(item,"path",None) or getattr(item,"fspath",None)
+   return pathlib.Path(str(path)).resolve() if path is not None else None
+  def pytest_itemcollected(self,item):
+   self.collected_files.add(self._file(item))
+  def pytest_collection_finish(self,session):
+   self.selected_files.update(self._file(item) for item in session.items)
+  @pytest.hookimpl(hookwrapper=True)
+  def pytest_runtest_makereport(self,item,call):
+   outcome=yield
+   report=outcome.get_result()
+   if report.failed and call.excinfo and self.exception is None:
+    self.exception=(call.excinfo.value,call.excinfo.tb)
+  def pytest_runtest_logreport(self,report):
+   if report.when=="call":
+    self.nodes.add(report.nodeid)
+    if report.failed:self.failed+=1
+    elif report.skipped:self.skipped+=1
+    elif report.passed:self.passed+=1
+   elif report.when=="setup" and (report.failed or report.skipped):
+    self.nodes.add(report.nodeid)
+    if report.failed:self.errors+=1
+    else:self.skipped+=1
+   elif report.when=="teardown" and report.failed:self.errors+=1
+  def pytest_collectreport(self,report):
+   if report.failed:self.errors+=1
+ report=_Report();started=time.monotonic()
+ status=int(pytest.main(["-q","-p","no:cacheprovider"]+[str(t) for t in targets],plugins=[report]))
+ if status in (0,5) and not report.errors:
+  for target,shape in zip(targets,shapes):
+   if target in report.selected_files:continue
+   if shape[2] and target not in report.collected_files:
+    # Pytest imports a script but does not execute its __main__ guard.
+    try:runpy.run_path(str(target),run_name="__main__")
+    except BaseException as exc:
+     if isinstance(exc,SystemExit) and exc.code in (None,0):report.passed+=1;continue
+     report.errors+=1;status=1
+     if report.exception is None:report.exception=(exc,exc.__traceback__)
+    else:report.passed+=1
+   else:
+    sys.stderr.write("NO_TESTS_COLLECTED_IN_TARGET:"+str(target)+"\n")
+    report.errors+=1;status=1
+  if status==5 and report.passed and not report.errors:status=0
+ if status==0 and report.passed==0:
+  sys.stderr.write("NO_PASSING_TESTS_EXECUTED\n")
+  status=1;report.errors+=1
+ if status and not (report.failed or report.errors):report.errors+=1
+ # Collection, teardown and no-passing-oracle failures can add suite-level
+ # errors beyond the number of collected test nodes.
+ count=max(len(report.nodes),report.passed+report.failed+report.errors+report.skipped)
+ sys.stderr.write("Ran %d test%s in %.3fs\n\n"%(count,"" if count==1 else "s",time.monotonic()-started))
+ parts=[]
+ if report.failed:parts.append("failures=%d"%report.failed)
+ if report.errors:parts.append("errors=%d"%report.errors)
+ if report.skipped:parts.append("skipped=%d"%report.skipped)
+ sys.stderr.write(("FAILED" if status else "OK")+(" ("+", ".join(parts)+")" if parts else "")+"\n")
+ if status:
+  if report.exception:
+   exc,tb=report.exception
+   _brain_reraise_failure(exc,tb)
+  raise RuntimeError("PYTEST_EXECUTION_FAILED:"+str(status))
+
+def _brain_run_suites(targets):
+ targets=[pathlib.Path(t).resolve() for t in targets]
+ if not targets:raise RuntimeError("NO_TESTS_COLLECTED")
+ shapes=[_brain_suite_shape(t) for t in targets]
+ try:has_pytest=importlib.util.find_spec("pytest") is not None
+ except (ImportError,ValueError):has_pytest=False
+ if any(shape[1] for shape in shapes) and not has_pytest:
+  raise RuntimeError("PYTEST_REQUIRED:"+", ".join(str(t) for t,s in zip(targets,shapes) if s[1]))
+ if has_pytest and any(shape[0] or shape[1] for shape in shapes):
+  _brain_run_pytest(targets,shapes);return
+ errors=[]
+ for target,shape in zip(targets,shapes):
+  try:_brain_run_stdlib(target,shape[2])
+  except BaseException as exc:errors.append(exc)
+ if errors:_brain_reraise_failure(errors[0],errors[0].__traceback__)
+
+def _brain_run_suite(target):
+ _brain_run_suites([target])
+'''
 
 
 SUITE_ENTRY = (
     "import pathlib,sys\n"
-    "_errs=[]\n"
-    "for _t in sys.argv[1:]:\n"
-    " try:_brain_run_suite(pathlib.Path(_t).resolve())\n"
-    " except BaseException as _e:_errs.append(_e)\n"
-    "if _errs:raise _errs[0]\n"
+    "_brain_run_suites([pathlib.Path(_t).resolve() for _t in sys.argv[1:]])\n"
 )
 
 
+def argv_names_a_target(argv: Any) -> bool:
+    """True when a command line actually names a test suite to run.
+
+    The runner ``suite_argv`` generates reads its targets from ``sys.argv[1:]``,
+    so ``[executable, "-c", script]`` names no suite. An older runner returned
+    zero for that command, causing a false BASELINE_ALREADY_PASSES result. The
+    runner now fails closed, and this check also lets callers derive the actual
+    discovered targets instead of retaining an empty command.
+
+    Targets follow the ``-c`` script when there is one; otherwise any non-flag
+    element after the executable is treated as a target.
+    """
+    items = [str(x) for x in (argv or [])]
+    if not items:
+        return False
+    if "-c" in items:
+        return len(items) > items.index("-c") + 2
+    return any(not item.startswith("-") for item in items[1:])
+
+
+def argv_or_derived(supplied: Any, executable: Any, *targets: Any) -> list[str]:
+    """The caller's command line when it names a suite, otherwise the derived one.
+
+    The derivation is not a fallback for a missing value only.  An argv that is
+    present but empty of targets is worse than a missing one, because it looks
+    bound: the missing value takes the derived path, while the empty one used to
+    win and silently run nothing.  Both must derive.
+    """
+    if argv_names_a_target(supplied):
+        return [str(x) for x in supplied]
+    return suite_argv(executable, *targets)
+
+
 def suite_argv(executable: Any, *targets: Any) -> list[str]:
-    """A command line that runs suites through the loader instead of executing the files.
+    """Run named suites with the applicable framework and a counted result.
 
-    Running a test file as a script only starts the tests when the file carries a __main__ guard, and
-    34% of the unittest files in this repository (695 of 2019, measured) do not, because they are
-    written to be collected by a runner. Such a run executes nothing and exits 0, which a repair loop
-    reads as BASELINE_ALREADY_PASSES - a false "already passes" for a program that fails its own test.
-    Delegating to SUITE_RUNNER collects the tests the way a real runner does and falls back to runpy
-    for files that are not unittest suites, so the shape of the file stops deciding whether a
-    capability can see its failures.
-
-    Every suite named is run and the first failure is re-raised, so a baseline over several files
-    fails if any one of them fails, which is what a repair loop needs.
+    Unittest suites and simple bare functions retain a stdlib-only path. When
+    installed, pytest collects pytest-style suites together, including fixtures,
+    parametrization and project configuration. Without pytest, suites requiring
+    it fail explicitly instead of skipping cases and reporting success. A file
+    without tests or an explicit script oracle and a command with no targets
+    fail closed. Failures retain their tracebacks for localization.
     """
     return [str(executable), "-c", SUITE_RUNNER + SUITE_ENTRY] + [str(x) for x in targets]
 
@@ -309,6 +626,14 @@ def _source_env(*paths: Any) -> dict[str, str]:
         d = q if q.is_dir() else q.parent
         if str(d) not in dirs:
             dirs.append(str(d))
+        # NO package-dir walk here, reverted with evidence: intermediate
+        # __init__.py parents on sys.path SHADOW STDLIB MODULES -- the
+        # tornado package dir made `import locale` resolve to
+        # tornado/locale.py inside gettext (measured: AttributeError
+        # locale.normalize in-run, absent standalone). Package-rooted test
+        # imports are satisfied by the WORLD ROOT, which callers already
+        # pass as source_root; the rc=2/zero-failing-tests symptom this walk
+        # once chased turned out to be the harness slicing -m off the argv.
     existing = os.environ.get("PYTHONPATH", "")
     if existing:
         dirs.append(existing)
@@ -318,29 +643,64 @@ def _source_env(*paths: Any) -> dict[str, str]:
 def _byte_offset(lines: list[bytes], lineno: int, col: int) -> int:
     return sum(len(x) for x in lines[:lineno-1]) + col
 
-def _render_candidate(source_text: str, key, replacer) -> str|None:
-    tree=ast.parse(source_text)
-    target=None
-    for node in ast.walk(tree):
-        if _node_key(node)==key:
-            target=node
-            break
-    if target is None:
+def _replacement_span(raw, lines, target, replacer, offsets=None):
+    """Shared byte-splice primitive, extracted from the coupled repair engine."""
+    if target is None or any(getattr(target, name, None) is None for name in
+                             ("lineno", "col_offset", "end_lineno", "end_col_offset")):
         return None
-    if None in (
-        getattr(target,"lineno",None),getattr(target,"col_offset",None),
-        getattr(target,"end_lineno",None),getattr(target,"end_col_offset",None)
-    ):
-        return None
-    replacement=replacer(target)
+    # Replacers may mutate their argument. Never lend out the indexed subtree.
+    replacement = replacer(copy.deepcopy(target))
     ast.fix_missing_locations(replacement)
-    replacement_text=ast.unparse(replacement)
-    raw=source_text.encode("utf-8")
-    lines=raw.splitlines(keepends=True)
-    start=_byte_offset(lines,target.lineno,target.col_offset)
-    end=_byte_offset(lines,target.end_lineno,target.end_col_offset)
-    candidate=raw[:start]+replacement_text.encode("utf-8")+raw[end:]
-    return candidate.decode("utf-8")
+    data = ast.unparse(replacement).encode("utf-8")
+    start = (offsets[target.lineno - 1] + target.col_offset if offsets is not None
+             else _byte_offset(lines, target.lineno, target.col_offset))
+    end = (offsets[target.end_lineno - 1] + target.end_col_offset if offsets is not None
+           else _byte_offset(lines, target.end_lineno, target.end_col_offset))
+    return start, end, data
+
+
+class _CandidateRenderer:
+    """Request-local source index; caches syntax, never execution/acceptance."""
+    def __init__(self, source_text, tree=None):
+        self.raw = source_text.encode("utf-8")
+        self.lines = self.raw.splitlines(keepends=True)
+        self.offsets = [0]
+        for line in self.lines:
+            self.offsets.append(self.offsets[-1] + len(line))
+        self.nodes = {}
+        for node in ast.walk(ast.parse(source_text) if tree is None else tree):
+            self.nodes.setdefault(_node_key(node), node)
+
+    def span(self, key, replacer):
+        return _replacement_span(self.raw, self.lines, self.nodes.get(key), replacer, self.offsets)
+
+    def render(self, key, replacer):
+        span = self.span(key, replacer)
+        if span is None:
+            return None
+        start, end, data = span
+        return (self.raw[:start] + data + self.raw[end:]).decode("utf-8")
+
+    def edit(self, key, desc, replacer):
+        span = self.span(key, replacer)
+        if span is None:
+            return None
+        start, end, data = span
+        if self.raw[start:end] == data:
+            return None
+        return {"start": start, "end": end, "replacement": data, "mutation": desc}
+
+
+def _render_candidate(source_text: str, key, replacer) -> str|None:
+    # One-off callers need no complete index. Search loops reuse a renderer.
+    tree = ast.parse(source_text)
+    target = next((node for node in ast.walk(tree) if _node_key(node) == key), None)
+    raw = source_text.encode("utf-8")
+    span = _replacement_span(raw, raw.splitlines(keepends=True), target, replacer)
+    if span is None:
+        return None
+    start, end, data = span
+    return (raw[:start] + data + raw[end:]).decode("utf-8")
 
 def _purge_source_bytecode(source: pathlib.Path) -> None:
     try:
@@ -363,8 +723,16 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     if not isinstance(args,Mapping):
         raise PatchSearchError("ARGS_NOT_OBJECT")
     source=_safe_file(repo,args.get("source_path"),suffix=".py")
-    tests_raw=args.get("test_paths") or []
-    if not isinstance(tests_raw,list) or not tests_raw:
+    tests_raw=[x for x in (args.get("test_paths") or []) if str(x).strip()]
+    if not isinstance(tests_raw,list):
+        raise PatchSearchError("TEST_PATHS_REQUIRED")
+    if not tests_raw:
+        # This capability names a single SOURCE file, so the corpus is the tree
+        # that file lives in -- the smallest scope in which its tests can be.
+        from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_paths
+        try: tests_raw=discover_test_paths(source.parent)
+        except FileNotFoundError: raise PatchSearchError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+    if not tests_raw:
         raise PatchSearchError("TEST_PATHS_REQUIRED")
     tests=[_safe_file(repo,x,suffix=".py") for x in tests_raw]
     argv=args.get("test_argv")
@@ -378,6 +746,8 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
     output=(repo/str(args.get("output_path") or "")).resolve()
     if output==repo or repo not in output.parents:
         raise PatchSearchError("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+    from canonical.runtime.write_authority_v1 import check_report
+    check_report(repo, output, [source, *tests])
     original_bytes=source.read_bytes()
     try:
         source_text=original_bytes.decode("utf-8")
@@ -391,17 +761,27 @@ def run(args: Mapping[str, Any], root: str|os.PathLike[str]) -> dict[str, Any]:
         raise PatchSearchError("BASELINE_TIMEOUT")
     nums,strings=_test_literals(tests)
     tree=ast.parse(source_text,filename=str(source))
+    renderer=_CandidateRenderer(source_text, tree)
     attempts=[]
     winner=None
     tested=0
+    legacy_tested=0
+    neigh_tested=0
+    NEIGH_RESERVE=6  # own budget; legacy slots untouched (zero dilution)
     try:
         for key,desc,replacer in _candidate_specs(tree,nums,strings):
-            if tested>=max_candidates:
-                break
-            candidate=_render_candidate(source_text,key,replacer)
+            if desc.get("family")=="neighborhood":
+                if neigh_tested>=NEIGH_RESERVE:
+                    continue
+                neigh_tested+=1
+            elif legacy_tested>=max_candidates:
+                continue  # keep scanning: neighborhood reserve must stay reachable
+            candidate=renderer.render(key,replacer)
             if candidate is None or candidate==source_text:
                 continue
             tested+=1
+            if desc.get("family")!="neighborhood":
+                legacy_tested+=1
             source.write_text(candidate,encoding="utf-8")
             _purge_source_bytecode(source)
             result=_run_tests(repo,argv,timeout_s,env)

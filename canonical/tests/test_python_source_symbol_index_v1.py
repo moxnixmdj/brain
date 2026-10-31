@@ -210,9 +210,7 @@ class SymbolIndexRegistryContractTests(unittest.TestCase):
 
     def test_the_entry_is_a_verified_bound_capability(self):
         self.assertEqual(self.entry["status"], "VERIFIED_BOUND_CAPABILITY")
-        # Consumers name both the semantic effect and this capability's ID.
-        self.assertEqual(set(self.entry["provides"]),
-                         {"python.source.symbol_index", CAPABILITY_ID})
+        self.assertEqual(self.entry["provides"], ["python.source.symbol_index", "python.source.symbols.index.ast"])
         self.assertEqual(self.entry["requires"], [])
         self.assertEqual(self.entry["adapter_module"], "python_source_symbol_index")
         self.assertEqual(self.entry["incremental_spend_usd"], 0)

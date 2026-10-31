@@ -13,19 +13,18 @@ manifest." -- which asks for two things, and the compiler really does plan two
 capabilities for it: ``archive.tar_gz.create_from_manifest`` then
 ``archive.verify.tar_gz.gnu``.
 
-The archive is independently re-opened using the existing exact-archive byte
-reinspection: its complete member set comes from the manifest, and each member
-must match the current source bytes. Both steps must name the same archive and
-manifest and their reported digests must match the reinspection.
-
-This checks current local artifacts, not the authenticity of the supplied trace
-or protection against a concurrent writer. A trace supplied across an untrusted
-boundary still requires authenticated execution evidence.
+Acceptance here is not a restatement of what the plan claimed. The archive is
+re-opened from disk, its members are listed, and every member is required to
+exist inside the repository. The verify step is required to have been pointed at
+the SAME archive and the SAME manifest the create step used, because that is
+what "against that manifest" means. Anything else is refused with a reason.
 """
 from __future__ import annotations
 
 import hashlib
+import json
 import re
+import tarfile
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -159,31 +158,18 @@ def verify(
         if not archive.is_file():
             return _unresolved("ARCHIVE_ABSENT_FROM_DISK")
 
-        # Use the pre-existing exact-archive verifier's byte check rather than
-        # trusting either step's success flag or member listing.
-        from canonical.runtime.raw_goal_archive_acceptance_v1 import (
-            ArchiveReinspectionError, inspect_archive_manifest,
-        )
+        # Independent of anything the plan asserted: open the bytes.
         try:
-            inspected = inspect_archive_manifest(root, manifest_rel, output_rel)
-        except ArchiveReinspectionError as exc:
-            return _unresolved(str(exc))
-        members = inspected["members"]
-        create_result = create["result"]
-        verify_result = verify_row["result"]
-        if (create_result.get("output_path") != output_rel
-                or create_result.get("output_sha256") != inspected["archive_sha256"]
-                or create_result.get("members") != members
-                or create_result.get("member_count") != len(members)
-                or create_result.get("source_sha256") != inspected["source_sha256"]):
-            return _unresolved("CREATE_TRACE_OUTPUT_MISMATCH")
-        if (verify_result.get("archive_path") != output_rel
-                or verify_result.get("manifest_path") != manifest_rel
-                or verify_result.get("archive_sha256") != inspected["archive_sha256"]
-                or verify_result.get("manifest_sha256") != inspected["source_sha256"][manifest_rel]
-                or verify_result.get("members") != members
-                or verify_result.get("member_count") != len(members)):
-            return _unresolved("VERIFY_TRACE_OUTPUT_MISMATCH")
+            with tarfile.open(archive, "r:gz") as handle:
+                members = sorted(handle.getnames())
+        except (tarfile.TarError, OSError, EOFError):
+            return _unresolved("ARCHIVE_NOT_A_READABLE_GZIP_TAR")
+        if not members:
+            return _unresolved("ARCHIVE_HAS_NO_MEMBERS")
+        for name in members:
+            member = _inside(root, name)
+            if member is None or not member.is_file():
+                return _unresolved("ARCHIVE_MEMBER_ABSENT_FROM_REPOSITORY")
 
         return {
             "schema": SCHEMA,
@@ -196,7 +182,7 @@ def verify(
             "manifest_path": manifest_rel,
             "archive_member_count": len(members),
             "archive_members": members,
-            "archive_sha256": inspected["archive_sha256"],
+            "archive_sha256": _digest(archive.read_bytes()),
             "independent_reinspection": True,
             "model_dependency_count": 0,
             "incremental_spend_usd": 0,

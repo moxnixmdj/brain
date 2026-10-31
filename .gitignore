@@ -36,13 +36,4 @@ canonical/astra_runtime/state/E2E_*
 # root when it runs.  It is run litter, not source: `git add -A` must never
 # commit it as if it were evidence.
 LONG_HORIZON_CONTINUITY_REPORT.json
-# Litter from MEASURING the door, not from the door.  A probe run writes its scratch worlds
-# under canonical/astra_runtime/tmp/ (already ignored), but the controller checkpoints, the
-# composer's tmp JSON and the generated smoke modules land OUTSIDE it, and `git add -A` after
-# a run committed 64k lines of them as if they were evidence.  Measured 2026-10-28: 35 of 40
-# files in one automatic commit were run output.
-canonical/astra_runtime/state/*CONTROLLER_CHECKPOINT.json
 canonical/tmp_*.json
-generated_tests/
-tmp/
-gz[0-9]*

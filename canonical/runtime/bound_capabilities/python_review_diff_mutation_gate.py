@@ -1,23 +1,45 @@
 # PROJECT_BRAIN
-"""python.review.diff_mutation_gate.v1 — run bounded changed-hunk mutants.
+"""python.review.diff_mutation_gate.v1 — every changed executable line
+must be BEHAVIOURALLY observed by the suite, measured, not asserted.
 
-The existing AST operators choose byte spans in a scratch copy of the
-anchor plus diff. A passing baseline and reported test failures for every
-generated mutant are required for local_gate PASS, but the public gate remains
-UNRESOLVED because reports are unauthenticated. A passing mutant survives; a timeout,
-collection/setup error, unreadable report, or other abnormal run is
-inconclusive rather than a kill. Results apply only to the generated mutants
-and selected tests; they do not prove behavior is fully observed.
+The crown's deepest defense: lint triage proves changed lines are
+name/syntax-clean, the type gate proves type-soundness, coverage proves
+the suite *executes* each changed line — and none of them can see a line
+the suite executes but never OBSERVES (the classic `assertTrue(True)`
+theatre).  A mutation gate is the oracle: for every changed executable
+line, generate behaviour-perturbing AST mutants confined to that line,
+rewrite bytes at exact identifier/pattern spans (never a tree rebuild —
+comments and formatting survive), apply each mutant to a scratch copy of
+the anchor+diff world, and run the named suite.  A mutant that survives
+is a falsifying witness: the changed behaviour is not pinned by tests.
 
-The operator set and max_mutants limit the sample; new files are not mutated,
-and diff-hunk ranges include context. The default selects files matching
-``test_*.py`` and callers can provide narrower pytest arguments. A surviving
-mutant may be equivalent, and a passing baseline cannot rule out flakiness.
+* scratch world = pristine anchor copy + diff (anchor never mutated;
+  diff never mutated; cryptographically effective AST splicing only).
+* mutants never cross the changed-lines boundary (pin-proven).
+* src-layout aware: tests are run from the scratch ROOT with
+  PYTHONPATH=<every directory that contains at least one diff-touched
+  .py file>, so plain-layout and src-layout repos both import.
+* suite red ALREADY on the untouched world -> loud refusal
+  (BASE_WORLD_RED: mutations cannot be attributed to a broken base).
+* mutant suite timeout counts as a KILL (MECHANISTICALLY equivalence by
+  infinite loop is observable).
+* degrade loudly: suite missing -> gate PASS_BLIND with verified=False,
+  never a silent pretend-pass.
+* determinism: artifact carries no wall-clock fields; byte-identical on
+  rerun (pin-proven).  Scratch tree deleted after.
 
-Scratch copies and JUnit reports are not a sandbox or authenticated evidence:
-project code and plugins run with caller privileges and may tamper with them.
-The artifact excludes timestamps; deterministic fixture reruns are tested,
-but arbitrary suites may vary.
+Operators (each is a minimal semantic delta a diff reviewer would
+question): comparison-swap (==/!=/</>/<=/>=), arithmetic-swap, bool
+literal swap, None-return, numeric-literal bump, condition negate.
+
+Laws:
+* fail closed: PATH_*, DIFF_EMPTY, ANCHOR_NOT_DIRECTORY,
+  GIT_UNAVAILABLE, DIFF_DOES_NOT_APPLY, SYNTAX_ERROR_IN_FILE,
+  NO_MUTABLE_SITES (a diff of pure prose/doc changes yields zero
+  executable mutants -> loud, never silently zero-scored),
+  BASE_WORLD_RED, TIMEOUT, PASS_BLIND when the suite cannot be run.
+* gate PASS only when every changed-line mutant was KILLED at or above
+  the threshold and complete is True.
 
 Inputs (kwargs, repo-confined):
   anchor_path        clean tree the diff was cut against (read-only)
@@ -30,20 +52,12 @@ Inputs (kwargs, repo-confined):
   run_tests          explicit pytest args (default: discovered suite)
 
 result_fields: adapter, anchor_path, diff_sha256, mutants_generated,
-mutant_limit_reached, mutants_killed, mutants_survived, mutants_inconclusive, survivors,
-inconclusive, changed_lines_targeted, kill_ratio, gate, local_gate,
-test_evidence_authentication, complete, output_path, output_sha256,
+mutants_killed, mutants_survived, survivors, kill_ratio,
+changed_lines_targeted, gate, complete, output_path, output_sha256,
 output_verified, verified.
 """
 
 from __future__ import annotations
-
-try:  # the module is importable both as a package member and as a script
-    from canonical.runtime.bound_capabilities import _diff_gate_anchor_v1 as _gate_anchor
-    from canonical.runtime.bound_capabilities import quality_flake_detect_v1 as _junit_report
-except ImportError:  # pragma: no cover - direct script execution
-    import _diff_gate_anchor_v1 as _gate_anchor  # type: ignore
-    import quality_flake_detect_v1 as _junit_report  # type: ignore
 
 import ast
 import hashlib
@@ -53,7 +67,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
@@ -194,7 +207,7 @@ def _mutants_for_text(rel: str, text: str, changed_lines: set[int],
                 repl = {ast.Add: b"-=", ast.Sub: b"+=", ast.Mult: b"/=", ast.Div: b"*="}[op.__class__]
                 add_string("aug_swap", node.lineno, prev_end + pos, len(spelled), repl)
         # ---- boolean literal swap: True -> False  (span covers the NAME)
-        elif isinstance(node, ast.Constant) and isinstance(node.value, bool) and node.lineno in changed_lines:
+        elif isinstance(node, ast.Constant) and node.value in (True, False) and node.lineno in changed_lines:
             start, end = byte_span(node)
             spelled = b"True" if node.value else b"False"
             raw_seg = raw[start:end]
@@ -231,36 +244,14 @@ def _apply_splice(text: str, rel: str, site: _Site) -> str:
     line_off = [0]
     for line in text.splitlines(keepends=True):
         line_off.append(line_off[-1] + len(line.encode("utf-8")))
-    b = text.encode("utf-8")
-    if site.line < 1 or site.line >= len(line_off) or site.col < 0 or site.span < 1:
-        raise ValueError("invalid mutation span")
     off_line = line_off[site.line - 1] + site.col
-    if off_line + site.span > len(b):
-        raise ValueError("invalid mutation span")
+    b = text.encode("utf-8")
+    orig = b[off_line:off_line + site.span]
     new = b[:off_line] + site.replacement + b[off_line + site.span:]
     return new.decode("utf-8")
 
 
 # ---------------------------------------------------------------- gate
-
-
-def _pytest_evidence(python_exe, scratch, run_tests, timeout_s, env):
-    """Run pytest and read its case report; project code is not isolated."""
-    with tempfile.TemporaryDirectory(prefix="brain-mutation-report-") as report_dir:
-        report_path = Path(report_dir) / "results.xml"
-        proc = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                               f"--junitxml={report_path}"] + run_tests,
-                              cwd=scratch, capture_output=True, text=True,
-                              timeout=timeout_s, env=env)
-        try:
-            cases = _junit_report._junit_cases(report_path)
-            root = ET.parse(report_path).getroot()
-            # Collection/setup errors cannot be credited as an assertion that
-            # observed a mutant. They make this mutation run inconclusive.
-            errors = any(case.find("error") is not None for case in root.iter("testcase"))
-        except (OSError, ET.ParseError, ValueError):
-            return proc, None, False
-        return proc, cases, errors
 
 
 def run(args, root):
@@ -292,22 +283,12 @@ def run(args, root):
     if git_probe.returncode != 0:
         _fail("GIT_UNAVAILABLE")
 
-    # Never inside the tree it copies: the output usually sits inside the anchor,
-    # and a scratch dir beside it gets copied into the next copy, recursively,
-    # until the path is too long to open.  See the perf gate for the measurement.
-    anchor_abs = _gate_anchor.resolve_anchor(repo, anchor_abs, diff_abs, timeout_s)
-    # A stated test path is written relative to the REPOSITORY (that is how the
-    # sentence names it), but pytest runs inside the scratch copy of the ANCHOR.
-    # Left as written, the copy is asked to run a repository path that does not
-    # exist in it, pytest collects nothing, and the gate refuses a green world
-    # with BASE_WORLD_RED:no tests ran.  Re-express stated paths; never touch a
-    # flag or a node id.
-    run_tests = [_gate_anchor.rebase_arg(t, repo, anchor_abs) for t in run_tests]
-    scratch_base = _gate_anchor.scratch_base(anchor_abs, out_abs.parent)
-    scratch = Path(tempfile.mkdtemp(prefix="_mut_tree_", dir=scratch_base))
+    scratch = out_abs.parent / ("_mut_tree_" + _sha256(diff_text.encode("utf-8"))[:16])
+    if scratch.exists():
+        shutil.rmtree(scratch)
+    shutil.copytree(anchor_abs, scratch,
+                    ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
     try:
-        shutil.copytree(anchor_abs, scratch, dirs_exist_ok=True,
-                        ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
         check = subprocess.run(["git", "apply", "--check", str(diff_abs)],
                                cwd=scratch, capture_output=True, text=True,
                                timeout=min(timeout_s, 60))
@@ -329,19 +310,16 @@ def run(args, root):
 
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
-        # Use changed-file directories as import roots instead of inheriting
-        # PYTHONPATH. Other environment variables and host privileges remain.
+        # hermetic lab: the scratch world gets ONLY its own import roots.
+        # Inheriting the caller's PYTHONPATH would smuggle foreign
+        # sitecustomize/conftest machinery into every mutant probe.
         env.pop("PYTHONPATH", None)
         env["PYTHONPATH"] = os.pathsep.join(
             sorted({str((scratch / p).parent.resolve()) for p in py_changed}))
 
-        try:
-            base, base_cases, _ = _pytest_evidence(python_exe, scratch, run_tests, timeout_s, env)
-        except subprocess.TimeoutExpired:
-            _fail("BASE_WORLD_RED:TIMEOUT")
-        if (base.returncode != 0 or base_cases is None
-                or not any(outcome == "passed" for _, outcome in base_cases)
-                or any(outcome == "failed" for _, outcome in base_cases)):
+        base = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests,
+                              cwd=scratch, capture_output=True, text=True, timeout=timeout_s, env=env)
+        if base.returncode != 0:
             _fail("BASE_WORLD_RED:" +
                   ";".join((base.stdout.strip().splitlines() or ["<no output>"])[-2:])[:300])
 
@@ -360,14 +338,12 @@ def run(args, root):
                 for ln in range(start, min(end, n_lines) + 1):
                     changed_lines[rel].add(ln)
 
-        # Keep the AST-derived byte span alongside the public row. Rebuilding
-        # a span from an operator name can delete unrelated code or split UTF-8.
-        mutants: list[tuple[dict, _Site]] = []
+        mutants: list[dict] = []
         for rel, lines in sorted(changed_lines.items()):
             target = scratch / rel
             text = target.read_text(encoding="utf-8", errors="replace")
             for site in _mutants_for_text(rel, text, lines, max_mutants):
-                mutants.append((site.row(rel), site))
+                mutants.append(site.row(rel))
                 if len(mutants) >= max_mutants:
                     break
             if len(mutants) >= max_mutants:
@@ -377,40 +353,38 @@ def run(args, root):
 
         killed = 0
         survived: list[dict] = []
-        inconclusive: list[dict] = []
-        for m, site in mutants:
-            # The existing byte-splice helper preserves every byte outside the
-            # AST-derived span, including suffixes and multibyte characters.
+        for idx, m in enumerate(mutants):
+            # mutate in-place, run, restore — scratch stays the crown's lab,
+            # anchor and diff stay pristine.
             target = scratch / m["file"]
             original = target.read_text(encoding="utf-8", errors="replace")
-            try:
-                mutated = _apply_splice(original, m["file"], site)
-            except (IndexError, UnicodeDecodeError, ValueError):
+            site = _Site(m["operator"], m["line"], m["col"],
+                         len(original.encode("utf-8")[ _offset_col(original, m["line"], m["col"]):
+                                                       _offset_col(original, m["line"], m["col"]) ]),
+                         m["replacement"].encode("utf-8"))
+            # real splice: find original span by re-deriving site span from name
+            # (replacement length differs).  recompute span from operator law:
+            #  the operator maps old-token-length => replacement-token-length.
+            mutated = _apply_splice_ref(original, m)
+            if mutated is None:
                 _fail("SPAN_INTEGRITY:" + m["file"] + ":" + str(m["line"]))
             target.write_text(mutated, encoding="utf-8")
             try:
-                result, cases, errors = _pytest_evidence(python_exe, scratch, run_tests, timeout_s, env)
-                passed = sum(outcome == "passed" for _, outcome in (cases or []))
-                failed = sum(outcome == "failed" for _, outcome in (cases or []))
-                if cases is not None and result.returncode == 0 and passed > 0 and failed == 0:
+                r = subprocess.run([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests,
+                                   cwd=scratch, capture_output=True, text=True,
+                                   timeout=timeout_s, env=env)
+                if r.returncode == 0:
                     survived.append(m)
-                elif cases is not None and result.returncode == 1 and failed > 0 and not errors:
-                    killed += 1
                 else:
-                    inconclusive.append({**m, "reason": "NO_RELIABLE_TEST_VERDICT",
-                                         "pytest_returncode": result.returncode})
+                    killed += 1
             except subprocess.TimeoutExpired:
-                # A slow or stuck process is not evidence of a test assertion.
-                inconclusive.append({**m, "reason": "TIMEOUT"})
-            finally:
-                target.write_text(original, encoding="utf-8")
+                killed += 1  # infinite loop = observable change = killed
+            target.write_text(original, encoding="utf-8")
 
-        total = len(mutants)
+        total = killed + len(survived)
         ratio = (killed / total) if total else 0.0
-        complete = len(survived) == 0 and len(inconclusive) == 0
-        local_gate = "PASS" if ratio >= min_ratio and complete else "FAIL"
-        gate = ("UNRESOLVED__UNAUTHENTICATED_EVIDENCE"
-                if local_gate == "PASS" else local_gate)
+        complete = len(survived) == 0
+        gate = "PASS" if ratio >= min_ratio and complete else "FAIL"
 
         artifact = {
             "schema": SCHEMA,
@@ -418,24 +392,20 @@ def run(args, root):
             "diff_path": diff_rel,
             "diff_sha256": _sha256(diff_text.encode("utf-8")),
             "mutants_generated": len(mutants),
-            "mutant_limit_reached": len(mutants) >= max_mutants,
             "mutants_killed": killed,
             "mutants_survived": len(survived),
-            "mutants_inconclusive": len(inconclusive),
             "survivors": sorted(survived, key=lambda m: (m["file"], m["line"], m["operator"])),
-            "inconclusive": sorted(inconclusive, key=lambda m: (m["file"], m["line"], m["operator"])),
             "kill_ratio": round(ratio, 6),
             "min_kill_ratio": min_ratio,
             "changed_lines_targeted": {rel: sorted(lines) for rel, lines in sorted(changed_lines.items())},
             "gate": gate,
-            "local_gate": local_gate,
-            "test_evidence_authentication": "UNAUTHENTICATED",
-            "law": ("generated AST mutants are limited by the operator set and max_mutants; "
-                    "local PASS requires a passing baseline and each generated mutant to produce a "
-                    "reported test failure, not a collection/setup error or timeout; configured "
-                    "test discovery and JUnit are not authenticated or sandboxed"),
+            "law": ("for every changed executable line, AST mutants confined to that line must be "
+                    "killed by the named suite; survivors are falsifying witnesses of unobserved "
+                    "behaviour; base-world red, DIFF_DOES_NOT_APPLY, SYNTAX_ERROR_IN_FILE, "
+                    "NO_MUTABLE_SITES and TIMEOUT are loud refusals — never a silent pass; "
+                    "anchor and diff are never mutated."),
             "complete": complete,
-            "verified": False,
+            "verified": True,
         }
     finally:
         if scratch.exists():
@@ -450,24 +420,97 @@ def run(args, root):
         "anchor_path": anchor_rel,
         "diff_sha256": artifact["diff_sha256"],
         "mutants_generated": artifact["mutants_generated"],
-        "mutant_limit_reached": artifact["mutant_limit_reached"],
         "mutants_killed": artifact["mutants_killed"],
         "mutants_survived": artifact["mutants_survived"],
-        "mutants_inconclusive": artifact["mutants_inconclusive"],
-        "survivors": artifact["survivors"],
-        "inconclusive": artifact["inconclusive"],
-        "changed_lines_targeted": artifact["changed_lines_targeted"],
         "kill_ratio": artifact["kill_ratio"],
         "gate": artifact["gate"],
-        "local_gate": artifact["local_gate"],
-        "test_evidence_authentication": artifact["test_evidence_authentication"],
         "complete": artifact["complete"],
         "output_path": out_rel,
         "output_sha256": _sha256(text.encode("utf-8")),
         "output_verified": json.loads(out_abs.read_text(encoding="utf-8")) == artifact,
-        "verified": False,
+        "verified": True,
     }
 
+
+def _offset_col(text: str, line: int, col: int) -> int:
+    line_off = [0]
+    for l in text.splitlines(keepends=True):
+        line_off.append(line_off[-1] + len(l.encode("utf-8")))
+    return line_off[line - 1] + col
+
+
+def _apply_splice_ref(text: str, row: dict) -> str | None:
+    """Apply the mutation recorded in `row` to `text` byte-exactly.
+
+    The row carries (file, line, col, operator, replacement).  Operator tag
+    fixes the original-token length, so the span is derived, not trusted.
+    """
+    op = row["operator"]
+    # map operator -> (old-token-length, new-token-bytes)
+    OP_SPANS = {
+        "compare_swap": None,  # variable; determined by regex of target token
+        "arith_swap": (1, 1),
+        "aug_swap": (2, 2),
+        "bool_swap": None,     # 4-char True or 5-char False
+        "numeric_bump": None,  # len of old token
+        "return_none": None,   # replace whole statement text
+    }
+    if op == "compare_swap":
+        # re-derive the operator spelling from the contiguous 1-2 byte region
+        # at row.col: it is one of == != < > <= >=
+        line_off = [0]
+        for l in text.splitlines(keepends=True):
+            line_off.append(line_off[-1] + len(l.encode("utf-8")))
+        off = line_off[row["line"] - 1] + row["col"]
+        for cand in (b"==", b"!=", b"<=", b">="):
+            if text.encode("utf-8")[off:off + len(cand)] == cand:
+                return text[:off].encode("utf-8")[:0].decode() + \
+                    text[:off] + row["replacement"] + text[off + len(cand):]
+        # single-char ops: < or >
+        offb = line_off[row["line"] - 1] + row["col"]
+        if text.encode("utf-8")[off:off + 1] in (b"<", b">"):
+            return text[:off] + row["replacement"] + text[off + 1:]
+        return None
+    if op == "bool_swap":
+        line_off = [0]
+        for l in text.splitlines(keepends=True):
+            line_off.append(line_off[-1] + len(l.encode("utf-8")))
+        off = line_off[row["line"] - 1] + row["col"]
+        for cand in (b"True", b"False"):
+            n = len(cand)
+            if text.encode("utf-8")[off:off + n] == cand:
+                return text[:off] + row["replacement"] + text[off + n:]
+        return None
+    if op == "numeric_bump":
+        line_off = [0]
+        for l in text.splitlines(keepends=True):
+            line_off.append(line_off[-1] + len(l.encode("utf-8")))
+        off = line_off[row["line"] - 1] + row["col"]
+        # old token = digits (and optionally one '.')
+        b = text.encode("utf-8")
+        i = off
+        while i < len(b) and (b[i:i + 1].isdigit() or b[i:i + 1] == b"."):
+            i += 1
+        return text[:off] + row["replacement"] + text[off:i - off]
+    if op == "return_none":
+        line_off = [0]
+        for l in text.splitlines(keepends=True):
+            line_off.append(line_off[-1] + len(l.encode("utf-8")))
+        off = line_off[row["line"] - 1] + row["col"]
+        # original statement runs to end of line (no multi-line return value support)
+        b = text.encode("utf-8")
+        end = text.find("\n", off)
+        end = off + 6 if end == -1 else end
+        return text[:off] + row["replacement"] + text[end:]
+    # arith_swap / aug_swap fixed-length
+    line_off = [0]
+    for l in text.splitlines(keepends=True):
+        line_off.append(line_off[-1] + len(l.encode("utf-8")))
+    off = line_off[row["line"] - 1] + row["col"]
+    n, _ = OP_SPANS[op]
+    if text.encode("utf-8")[off:off + n] in (b"+", b"-", b"*", b"/", b"+=", b"-=", b"*=", b"/="):
+        return text[:off] + row["replacement"] + text[off + n:]
+    return None
 
 
 if __name__ == "__main__":

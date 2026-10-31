@@ -73,10 +73,22 @@ MAX_TIMEOUT_S=600
 
 
 def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes]:
-    """Run the stated test command verbatim.  No shell, so nothing is invented."""
+    """Run the stated test command verbatim.  No shell, so nothing is invented.
+
+    The command line is the caller's; the IMPORT PATH is the tree's.  Measured
+    2026-10-29: without the shared ``_source_env`` the gate that matters most --
+    "the stated test passes IN PLACE, against the real source tree, after the
+    write" -- could not run at all in a package layout.  The patch was found, the
+    bytes were written, and the in-place verification then failed with the same
+    ModuleNotFoundError the pre-apply gate had seen, so ``from pkg.calc import
+    add`` was reported as FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY
+    even though the candidate was correct.  One environment, one definition,
+    shared with every other member of the repair family.
+    """
     try:
         proc=subprocess.run(
             argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
+            env={**os.environ,**_REPAIR._PATCH._source_env(cwd)},
         )
     except subprocess.TimeoutExpired:
         return None,b"TIMEOUT"
@@ -125,22 +137,72 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         raise RepairApplyError("ARGS_NOT_OBJECT")
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","."))
-    test_paths=[_safe_file(repo,x) for x in (args.get("test_paths") or [])]
+    if "test_paths" not in args or args.get("test_paths") is None:
+        raise RepairApplyError("TEST_PATHS_REQUIRED")
+    _stated_tests=[x for x in (args.get("test_paths") or []) if str(x).strip()]
+    if _stated_tests:
+        test_paths=[_safe_file(repo,x) for x in _stated_tests]
+        test_paths_source="stated"
+    else:
+        # "Fix the failing test in the python source root D" names no file, and
+        # which files are tests is a fact about the tree.  The command on the
+        # next line was already derived when unstated; only this list was
+        # missing.  This is the same fallback python_coupled_software_repair_loop
+        # already had, reading the same shared module -- one rule, one place,
+        # eleven consumers.  A tree with no tests raises rather than reporting a
+        # green empty suite: test_count 0 with returncode 0 would be a pass for a
+        # suite that was never found.
+        from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
+        try:
+            test_paths=discover_test_files(source_root)
+            test_paths_source="discovered_under_source_root"
+        except FileNotFoundError:
+            sib_tests=source_root.parent/"tests" if source_root!=repo else None
+            if sib_tests is not None and sib_tests.is_dir() and (sib_tests==repo or repo in sib_tests.parents):
+                try:
+                    test_paths=discover_test_files(sib_tests)
+                    test_paths_source="discovered_under_source_root"
+                except FileNotFoundError:
+                    raise RepairApplyError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
+            else:
+                raise RepairApplyError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
     if not test_paths:
         raise RepairApplyError("TEST_PATHS_REQUIRED")
-    argv=[str(x) for x in (args.get("test_argv") or _REPAIR._PATCH.suite_argv(sys.executable,*test_paths))]
+    if test_paths_source=="discovered_under_source_root":
+        # A command line bound at COMPILE time cannot name a corpus that was only
+        # found at RUN time.  Measured on 96015b9, with a fixture whose add(1,2)
+        # returned -1 and whose test genuinely failed:
+        #
+        #   pre_apply_test_returncode  0
+        #   applied                    false
+        #   status                     PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR
+        #
+        # A LIE.  The bound argv was the collecting runner built for whatever
+        # targets existed when the binder ran -- none -- so it collected zero
+        # tests and returned 0, and gate 1 read that as "the test already
+        # passes" and declined to repair a file that was broken.  Zero tests
+        # passing is not a passing suite.  Derive the command from the tests
+        # this run actually found; that is still the adapter's own suite_argv,
+        # which is what the pinned binding requires, never an invented command.
+        argv=[str(x) for x in _REPAIR._PATCH.suite_argv(sys.executable,*test_paths)]
+    else:
+        argv=_REPAIR._PATCH.argv_or_derived(args.get("test_argv") or [],sys.executable,*test_paths)
     if not argv:
         raise RepairApplyError("TEST_ARGV_EMPTY")
     output=_safe_output(repo,args.get("output_path"))
     timeout=max(1,min(int(args.get("timeout_s",60)),MAX_TIMEOUT_S))
 
     out=_base(args,repo)
-    rel_tests,run_argv=_candidate_test_layout(repo,source_root,test_paths,argv)
+    out["test_paths_source"]=test_paths_source
+    exec_root=pathlib.Path(os.path.commonpath([str(source_root),*(str(p) for p in test_paths)])).resolve()
+    if exec_root!=repo and repo not in exec_root.parents:
+        raise RepairApplyError("EXEC_ROOT_OUTSIDE_REPOSITORY")
+    rel_tests,run_argv=_candidate_test_layout(repo,exec_root,test_paths,argv)
     if not rel_tests:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
     # GATE 1 -- the stated test must fail on the source as it stands.
-    before_rc,before_tail=_run_test(run_argv,source_root,timeout)
+    before_rc,before_tail=_run_test(run_argv,exec_root,timeout)
     out["pre_apply_test_returncode"]=before_rc
     if before_rc==0:
         # The sentence asked for the stated test to pass.  It already does, and
@@ -226,7 +288,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["unified_diffs"]=[row[3] for row in planned]
 
         # GATE 4 -- the stated test must pass IN PLACE, on the real tree.
-        after_rc,after_tail=_run_test(run_argv,source_root,timeout)
+        after_rc,after_tail=_run_test(run_argv,exec_root,timeout)
         out["post_apply_test_returncode"]=after_rc
         out["post_apply_test_tail"]=after_tail.decode("utf-8","replace")[-1024:]
         if after_rc!=0:

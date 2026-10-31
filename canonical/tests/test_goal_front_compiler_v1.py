@@ -43,25 +43,6 @@ def _cleanup(task_id: str) -> None:
         p.unlink()
 
 
-def _skip_if_the_machine_lacks_the_dependency(res):
-    """A DAG step that cannot import its dependency is not a broken DAG result.
-
-    Measured on this box: the four multi-step tests stop at
-    ``ModuleNotFoundError: No module named 'et_xmlfile'`` -- openpyxl's own
-    dependency.  The admission result now says so
-    (``BLOCKED__CAPABILITY_DAG_ENVIRONMENT_BLOCKER``, ``failure_kind:
-    ENVIRONMENT_BLOCKER``, ``blocked_by: et_xmlfile``) instead of calling the run an
-    invalid result, and a test that asserts ``pass is True`` would be asserting that
-    this box has a library it does not have.  The repo already treats an
-    environment-blocked capability as "not a pass and not a defect" -- the end-to-end
-    harness counts these families under ``environment_blocked_here`` -- so the test
-    skips, naming the dependency, rather than pretending the chain is broken.
-    """
-    if res.get("failure_kind") == "ENVIRONMENT_BLOCKER":
-        pytest.skip("ENVIRONMENT_BLOCKER:" + str(res.get("blocked_by") or res.get("reason")))
-    return res
-
-
 def test_f2_sentence_final_period_no_longer_corrupts_the_last_literal_value():
     goal = f"Create {REL}/rec.json containing exactly one record with fields id and value: alpha 1."
     compiled = front.compile_goal(goal, _registry(), ROOT)
@@ -387,8 +368,6 @@ def test_f11_multi_step_capability_dag_planned_and_executed():
     task_id = "TEST_DAG_CHAIN_%d" % os.getpid()
     try:
         res = adm.solve({"task_id": task_id, "goal": goal})
-
-        _skip_if_the_machine_lacks_the_dependency(res)
     finally:
         _cleanup(task_id)
 
@@ -471,8 +450,6 @@ def test_f11_five_step_metabolic_dag_executed_and_verified():
     task_id = "TEST_5STEP_%d" % os.getpid()
     try:
         res = adm.solve({"task_id": task_id, "goal": goal})
-
-        _skip_if_the_machine_lacks_the_dependency(res)
     finally:
         _cleanup(task_id)
 
@@ -564,8 +541,6 @@ def test_f11_eight_step_metabolic_dag_executed_and_verified():
     task_id = "TEST_8STEP_%d" % os.getpid()
     try:
         res = adm.solve({"task_id": task_id, "goal": goal})
-
-        _skip_if_the_machine_lacks_the_dependency(res)
     finally:
         _cleanup(task_id)
 
@@ -662,8 +637,6 @@ def test_f11_ten_step_metabolic_dag_executed_and_verified():
     task_id = "TEST_10STEP_%d" % os.getpid()
     try:
         res = adm.solve({"task_id": task_id, "goal": goal})
-
-        _skip_if_the_machine_lacks_the_dependency(res)
     finally:
         _cleanup(task_id)
 
@@ -1065,3 +1038,23 @@ def test_f26_a_multi_step_request_forwards_the_producers_artifact():
     edges = dag["artifact_edges"]
     assert len(edges) == 1 and edges[0]["producer_cycle"] == 0 and edges[0]["consumer_cycle"] == 1
     assert edges[0]["input_key"] == "metadata_path"
+
+
+@pytest.mark.parametrize("data", [
+    "using canonical/tmp/project-v6/output.json",
+    "from https://example.invalid/v6/input.json",
+    "with payload 'v6'",
+])
+@pytest.mark.parametrize("explicit_version", [False, True])
+def test_f27_task_data_versions_are_not_requested_capability_versions(data, explicit_version):
+    from canonical.runtime import capability_selection_retrieval_v1 as sel
+    proposals = [{"capability_id": f"canonical/runtime/composition_cross_step_no_bypass_audit_v{v}.py.auto.v1",
+                  "lexical_relevance_score": 46.0} for v in (1, 2)]
+    goal = "Run the composition cross step no bypass audit"
+    if explicit_version:
+        goal += " v2"
+    kept, excluded = sel.request_excluded_proposals(goal + " " + data, proposals)
+    assert kept == (proposals[1:] if explicit_version else proposals)
+    assert len(excluded) == (1 if explicit_version else 0)
+    if explicit_version:
+        assert excluded[0]["requested_versions"] == ["v2"]

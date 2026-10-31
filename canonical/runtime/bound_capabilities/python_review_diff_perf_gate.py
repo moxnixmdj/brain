@@ -49,16 +49,10 @@ output_path, output_sha256, output_verified, verified.
 
 from __future__ import annotations
 
-try:  # the module is importable both as a package member and as a script
-    from canonical.runtime.bound_capabilities import _diff_gate_anchor_v1 as _gate_anchor
-except ImportError:  # pragma: no cover - direct script execution
-    import _diff_gate_anchor_v1 as _gate_anchor  # type: ignore
-
 import hashlib
 import json
 import os
 import shutil
-import tempfile
 import statistics
 import subprocess
 import sys
@@ -181,42 +175,13 @@ def run(args, root):
                                timeout=min(timeout_s, 30))
     if git_probe.returncode != 0:
         _fail("GIT_UNAVAILABLE")
-    # Each side of the comparison is a COPY OF THE ANCHOR, so the benchmark has to
-    # be reachable from inside that copy.  The sentence normally names a worktree
-    # inside the repository and a benchmark inside that worktree, but the registry
-    # binds a repo-relative path -- measured: "Gate the diff <D> on performance
-    # using the benchmark <B>" failed with BENCH_FILE_MISSING:<B> while B sat
-    # exactly where the sentence said.  The path is therefore accepted relative to
-    # the ANCHOR first (its historical meaning) and rebased from the repository
-    # second, and never silently retargeted to a file in some other tree.
-    bench_abs = None
-    _inside_anchor = (anchor_abs / bench_rel)
-    if bench_rel and _inside_anchor.is_file():
-        bench_abs = _inside_anchor
-    else:
-        _repo_relative = _safe_path(repo, bench_rel)  # confinement
-        if _repo_relative.is_file() and (_repo_relative == anchor_abs
-                                         or anchor_abs in _repo_relative.parents):
-            bench_abs = _repo_relative
-            bench_rel = _repo_relative.relative_to(anchor_abs).as_posix()
-    # SCRATCH STATE MUST NEVER LIVE INSIDE THE TREE IT COPIES.  Both sides of the
-    # comparison are copies of the anchor, and the output usually sits inside that
-    # anchor -- so a scratch directory beside the output is copied into the next
-    # copy, which is copied into the next, and the run dies with ENAMETOOLONG on a
-    # path made of a single directory name repeated.  Measured: "Gate the diff <D>
-    # on performance" against an anchor that was the repository itself never
-    # finished, and left 30 nested copies behind. The stable scratch base is
-    # outside the anchor; each invocation gets its own temporary child.
-    anchor_abs = _gate_anchor.resolve_anchor(repo, anchor_abs, diff_abs, timeout_s,
-                                            must_contain=[bench_abs] if bench_abs else [])
-    if bench_abs is not None:
-        if bench_abs != anchor_abs and anchor_abs not in bench_abs.parents:
-            _fail("BENCH_OUTSIDE_ANCHOR:" + bench_rel)
-        bench_rel = bench_abs.relative_to(anchor_abs).as_posix()
-    scratch_base = _gate_anchor.scratch_base(anchor_abs, out_abs.parent)
-    scratch_run = Path(tempfile.mkdtemp(prefix="_perf_run_", dir=scratch_base))
-    scratch_a = scratch_run / "anchor"
-    scratch_p = scratch_run / "patched"
+    _safe_path(repo, bench_rel)  # confinement; existence checked per tree
+
+    scratch_a = out_abs.parent / ("_perf_anchor_" + _sha256(diff_text.encode())[:12])
+    scratch_p = out_abs.parent / ("_perf_patched_" + _sha256(diff_text.encode())[:12])
+    for s in (scratch_a, scratch_p):
+        if s.exists():
+            shutil.rmtree(s)
     try:
         shutil.copytree(anchor_abs, scratch_a,
                         ignore=shutil.ignore_patterns(".git", "__pycache__", ".pytest_cache"))
@@ -236,7 +201,9 @@ def run(args, root):
         anchor_runs, anchor_cal = _bench(scratch_a, bench_rel, python_exe, repeats, timeout_s)
         patched_runs, patched_cal = _bench(scratch_p, bench_rel, python_exe, repeats, timeout_s)
     finally:
-        shutil.rmtree(scratch_run, ignore_errors=True)
+        for s in (scratch_a, scratch_p):
+            if s.exists():
+                shutil.rmtree(s, ignore_errors=True)
 
     # best-of estimator (pyperf-style: min of N is the noise-robust intrinsic
     # cost), box-normalized by the fixed calibrator measured in the SAME child

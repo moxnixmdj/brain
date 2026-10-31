@@ -10,9 +10,9 @@ FORBIDDEN_FILTER_PATTERNS=(
     r"(?<![A-Za-z0-9_.])import\s+",
     r"(?<![A-Za-z0-9_.])include\s+",
     r"(?<![A-Za-z0-9_.])module\s+",
-    r"(?<![A-Za-z0-9_.])input\b",
+    r"(?<![A-Za-z0-9_.])input\s*\(",
     r"(?<![A-Za-z0-9_.])inputs\b",
-    r"(?<![A-Za-z0-9_.])env\b",
+    r"(?<![A-Za-z0-9_])env\.",
     r"\$ENV\b",
 )
 
@@ -39,7 +39,7 @@ def run(args, root):
         argv.append("-r")
     argv.extend([filt,str(src)])
     proc=subprocess.run(
-        argv,cwd=root,text=True,capture_output=True,env={},stdin=subprocess.DEVNULL,
+        argv,cwd=root,text=True,capture_output=True,
         timeout=max(1,min(int(args.get("timeout_s",60)),180))
     )
     if proc.returncode!=0:

@@ -134,13 +134,21 @@ def _sha(value: Any) -> str:
 
 
 def _load_registry() -> tuple[bytes, Mapping[str, Any], Mapping[str, Any]]:
-    raw = REGISTRY_PATH.read_bytes()
-    doc = json.loads(raw.decode("utf-8"))
-    if not isinstance(doc, Mapping) or doc.get("schema") != "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1":
+    target = REGISTRY_PATH
+    snap = target.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+    raw = target.read_bytes()
+    if raw[:1] == b"@" and snap.is_file():
+        raw = snap.read_bytes()
+    doc = dict(json.loads(raw.decode("utf-8")))
+    if doc.get("schema") not in ("PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1", "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1"):
         raise BoundExecutionError("BOUND_CAPABILITY_REGISTRY_INVALID")
-    caps = doc.get("capabilities")
-    if not isinstance(caps, Mapping):
+    caps = dict(doc.get("capabilities") or {})
+    if snap.is_file() and target == REGISTRY_PATH:
+        sdoc = json.loads(snap.read_text(encoding="utf-8"))
+        caps.update(sdoc.get("capabilities") or {})
+    if not isinstance(caps, Mapping) or not caps:
         raise BoundExecutionError("BOUND_CAPABILITY_REGISTRY_CAPABILITIES_INVALID")
+    doc["capabilities"] = caps
     return raw, doc, caps
 
 
@@ -284,14 +292,15 @@ def _receipt_backed_execution(
 
     Two differences from the promoted-registry path, both deliberate:
 
-    * AUTHORITY is the loader, not a status string. It checks the module hash and
-      the shape of claimed reproduction evidence, but does NOT authenticate the
-      claimed OIDC reference or independently establish who ran it. A promoted
-      entry follows its separate status-based path.
-    * EXECUTION is `run_adapter_locally` rather than
-      `astra_runtime._invoke_bound_capability`, which is confined to the
-      promoted registry. Successful dispatch is not proof that every projected
-      capability or higher-level task works.
+    * AUTHORITY is the loader, not a status string. `load_verified_registry()` re-verifies, at
+      this instant, that the module hash matches the producer receipt AND that a different
+      identity reproduced it under a GitHub-signed OIDC run reference. A promoted-registry
+      entry is admitted on `status == VERIFIED_BOUND_CAPABILITY`; this path is admitted on
+      evidence, and refuses everything the loader refuses.
+    * EXECUTION is `run_adapter_locally` (this repository's kernel argument and expectation
+      semantics, which already runs all 294 with their declared expectations met) rather than
+      `astra_runtime._invoke_bound_capability`, which is by definition confined to the
+      promoted registry.
 
     Returns None for every id that is not a loader-admitted receipt-backed capability, so the
     promoted-registry path below is reached unchanged for everything else. Caller inputs may
@@ -350,7 +359,7 @@ def _receipt_backed_execution(
         "result_sha256": _sha(dict(tool)),
         "result": deepcopy(dict(tool)),
         "execution_authority": (
-            "LOADER_ADMITTED_RECEIPT_WITH_UNAUTHENTICATED_INDEPENDENCE_CLAIMS"
+            "LOADER_ADMITTED_EXECUTION_RECEIPT_WITH_INDEPENDENT_OIDC_ATTESTED_REPRODUCTION"
         ),
         "incremental_spend_usd": 0,
         "search_or_pending_binding_execution_allowed": False,

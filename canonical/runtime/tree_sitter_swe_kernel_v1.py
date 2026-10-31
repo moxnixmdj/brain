@@ -9,6 +9,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import sys
+from importlib import metadata
 import pathlib
 import posixpath
 import re
@@ -22,6 +25,9 @@ SUBSTRATE = {"tree_sitter": "0.20.4", "tree_sitter_languages": "1.10.2"}
 MAX_FILES = 5000
 MAX_FILE_BYTES = 2_000_000
 MAX_REFERENCES_PER_FILE = 50_000
+_IMPLEMENTATION_SHA256 = hashlib.sha256(pathlib.Path(__file__).read_bytes()).hexdigest()
+_PARSER_FILE_IDENTITIES: dict[str, tuple] = {}
+_PARSER_SUBSTRATE_SHA256: str | None = None
 
 LANGUAGE_BY_SUFFIX = {
     ".py": "python",
@@ -146,16 +152,100 @@ def source_files(source_root: pathlib.Path, *, max_files: int = MAX_FILES) -> li
     if not source_root.is_dir():
         raise TreeSitterSWEError("SOURCE_ROOT_MISSING")
     files: list[pathlib.Path] = []
-    for path in sorted(source_root.rglob("*")):
-        if any(part in IGNORED_DIRS for part in path.relative_to(source_root).parts):
-            continue
-        if path.is_symlink():
-            raise TreeSitterSWEError("SYMLINK_REFUSED:" + str(path))
-        if path.is_file() and detect_language(path):
-            files.append(path)
-            if len(files) > max_files:
-                raise TreeSitterSWEError("SOURCE_FILE_LIMIT_EXCEEDED")
-    return files
+    def walk_error(error):
+        raise error
+    # Prune before descending, rather than discovering and sorting excluded trees.
+    for directory, dirs, names in os.walk(source_root, followlinks=False, onerror=walk_error):
+        parent = pathlib.Path(directory)
+        kept = []
+        for name in sorted(dirs):
+            if name in IGNORED_DIRS:
+                continue
+            if (parent / name).is_symlink():
+                raise TreeSitterSWEError("SYMLINK_REFUSED:" + str(parent / name))
+            kept.append(name)
+        dirs[:] = kept
+        for name in sorted(names):
+            if name in IGNORED_DIRS:
+                continue
+            path = parent / name
+            if path.is_symlink():
+                raise TreeSitterSWEError("SYMLINK_REFUSED:" + str(path))
+            if path.is_file() and detect_language(path):
+                files.append(path)
+                if len(files) > max_files:
+                    raise TreeSitterSWEError("SOURCE_FILE_LIMIT_EXCEEDED")
+    return sorted(files)
+
+
+def _file_identity(path: pathlib.Path) -> tuple:
+    stat = path.stat()
+    return stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
+
+
+@lru_cache(maxsize=128)
+def _dependency_digest(path: str, identity: tuple) -> str:
+    # Only installed parser dependencies use this metadata-keyed memo. Project
+    # source is always read and content-hashed on every request.
+    digest = hashlib.sha256()
+    with open(path, "rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    if _file_identity(pathlib.Path(path)) != identity:
+        raise TreeSitterSWEError("PARSER_DEPENDENCY_CHANGED_DURING_HASH")
+    return digest.hexdigest()
+
+
+def analysis_context() -> dict[str, Any]:
+    """Content/version-bound extractor identity, not a security attestation.
+
+    Installed parser code is immutable during a process: changes require restart
+    so a new on-disk digest is never assigned to an already-loaded old library.
+    """
+    global _PARSER_SUBSTRATE_SHA256
+    packages = {}
+    try:
+        for name in ("tree-sitter", "tree-sitter-languages"):
+            distribution = metadata.distribution(name)
+            dependencies = {}
+            for entry in distribution.files or []:
+                if str(entry).split("/")[0] not in {"tree_sitter", "tree_sitter_languages"}:
+                    continue
+                if entry.suffix not in {".py", ".so", ".pyd", ".dll", ".dylib"}:
+                    continue
+                path = pathlib.Path(distribution.locate_file(entry)).resolve()
+                identity = _file_identity(path)
+                previous = _PARSER_FILE_IDENTITIES.setdefault(str(path), identity)
+                if identity != previous:
+                    raise TreeSitterSWEError("PARSER_DEPENDENCY_CHANGED_RESTART_REQUIRED")
+                dependencies[str(entry)] = _dependency_digest(str(path), identity)
+            if not dependencies:
+                raise TreeSitterSWEError("PARSER_DEPENDENCY_IDENTITY_UNAVAILABLE")
+            packages[name] = {"version": distribution.version, "files": dependencies}
+    except (metadata.PackageNotFoundError, OSError) as exc:
+        raise TreeSitterSWEError("TREE_SITTER_SUBSTRATE_IDENTITY_UNAVAILABLE") from exc
+    substrate_sha = json_sha256(packages)
+    if _PARSER_SUBSTRATE_SHA256 is None:
+        _PARSER_SUBSTRATE_SHA256 = substrate_sha
+    elif _PARSER_SUBSTRATE_SHA256 != substrate_sha:
+        raise TreeSitterSWEError("PARSER_DEPENDENCY_CHANGED_RESTART_REQUIRED")
+    context = {
+        "schema": "PROJECT_BRAIN_TREE_SITTER_ANALYSIS_CONTEXT_V1",
+        "implementation_sha256": _IMPLEMENTATION_SHA256,
+        "python": {"implementation": sys.implementation.name, "version": list(sys.version_info[:3])},
+        "packages": packages,
+        "policy": {
+            "expected_substrate": SUBSTRATE,
+            "language_by_suffix": LANGUAGE_BY_SUFFIX,
+            "definition_kinds": DEFINITION_KINDS,
+            "identifier_types": sorted(IDENTIFIER_TYPES),
+            "imports": {lang: [[p.pattern, p.flags] for p in patterns]
+                        for lang, patterns in _IMPORT_PATTERNS.items()},
+            "ignored_dirs": sorted(IGNORED_DIRS),
+            "limits": [MAX_FILES, MAX_FILE_BYTES, MAX_REFERENCES_PER_FILE],
+        },
+    }
+    return json.loads(canonical_bytes(context))
 
 
 @lru_cache(maxsize=None)
@@ -266,11 +356,12 @@ def _row_with_hash(row: dict[str, Any]) -> dict[str, Any]:
     return {**body, "row_sha256": json_sha256(body)}
 
 
-def parse_file(repo: pathlib.Path, path: pathlib.Path, language: str | None = None) -> dict[str, Any]:
+def parse_file(repo: pathlib.Path, path: pathlib.Path, language: str | None = None,
+               *, raw: bytes | None = None) -> dict[str, Any]:
     language = language or detect_language(path)
     if not language:
         raise TreeSitterSWEError("LANGUAGE_UNSUPPORTED:" + str(path))
-    raw = path.read_bytes()
+    raw = path.read_bytes() if raw is None else raw
     if len(raw) > MAX_FILE_BYTES:
         raise TreeSitterSWEError("SOURCE_FILE_TOO_LARGE:" + relative_path(repo, path))
     tree = parse_bytes(language, raw)
@@ -317,7 +408,7 @@ def parse_file(repo: pathlib.Path, path: pathlib.Path, language: str | None = No
     return _row_with_hash(row)
 
 
-def validate_row(repo: pathlib.Path, row: Any) -> dict[str, Any]:
+def validate_row(repo: pathlib.Path, row: Any, *, raw: bytes | None = None) -> dict[str, Any]:
     if not isinstance(row, dict):
         raise TreeSitterSWEError("INDEX_ROW_INVALID")
     declared = row.get("row_sha256")
@@ -327,10 +418,34 @@ def validate_row(repo: pathlib.Path, row: Any) -> dict[str, Any]:
     path = safe_path(repo, row.get("path"), must_exist=True)
     if not path.is_file():
         raise TreeSitterSWEError("INDEX_SOURCE_NOT_FILE")
-    if bytes_sha256(path.read_bytes()) != row.get("source_sha256"):
+    raw = path.read_bytes() if raw is None else raw
+    if bytes_sha256(raw) != row.get("source_sha256"):
         raise TreeSitterSWEError("INDEX_SOURCE_STALE:" + str(row.get("path")))
     if detect_language(path) != row.get("language"):
         raise TreeSitterSWEError("INDEX_LANGUAGE_MISMATCH")
+    if (type(row.get("byte_count")) is not int or row["byte_count"] != len(raw)
+            or len(raw) > MAX_FILE_BYTES or type(row.get("node_count")) is not int
+            or row["node_count"] < 1 or type(row.get("has_syntax_error")) is not bool
+            or not isinstance(row.get("root_node_type"), str) or not row["root_node_type"]):
+        raise TreeSitterSWEError("INDEX_ROW_SHAPE_INVALID")
+    for key in ("definitions", "references", "imports"):
+        if not isinstance(row.get(key), list):
+            raise TreeSitterSWEError("INDEX_ROW_SHAPE_INVALID")
+    if len(row["references"]) > MAX_REFERENCES_PER_FILE:
+        raise TreeSitterSWEError("REFERENCE_LIMIT_EXCEEDED:" + str(row["path"]))
+    if not all(isinstance(item, str) for item in row["imports"]):
+        raise TreeSitterSWEError("INDEX_ROW_SHAPE_INVALID")
+    for key in ("definitions", "references"):
+        for entry in row[key]:
+            if (not isinstance(entry, dict)
+                    or any(not isinstance(entry.get(k), str) or not entry[k]
+                           for k in (("name", "node_type", "kind") if key == "definitions"
+                                     else ("name", "node_type")))
+                    or any(type(entry.get(k)) is not int for k in
+                           ("start_byte", "end_byte", "start_line", "end_line"))
+                    or not 0 <= entry["start_byte"] <= entry["end_byte"] <= len(raw)
+                    or not 1 <= entry["start_line"] <= entry["end_line"]):
+                raise TreeSitterSWEError("INDEX_ROW_SHAPE_INVALID")
     return row
 
 
@@ -344,6 +459,22 @@ def read_index(repo: pathlib.Path, path: pathlib.Path) -> dict[str, Any]:
     rows = artifact.get("files")
     if not isinstance(rows, list) or not rows:
         raise TreeSitterSWEError("INDEX_EMPTY")
+    context = analysis_context()
+    if (artifact.get("analysis_context") != context
+            or artifact.get("analysis_context_sha256") != json_sha256(context)):
+        raise TreeSitterSWEError("INDEX_ANALYSIS_CONTEXT_STALE")
+    source_root = safe_path(repo, artifact.get("source_root"), must_exist=True, allow_root=True)
+    paths = [row.get("path") for row in rows if isinstance(row, dict)]
+    if len(paths) != len(rows) or any(not isinstance(path, str) for path in paths):
+        raise TreeSitterSWEError("INDEX_ROW_INVALID")
+    if len(set(paths)) != len(paths):
+        raise TreeSitterSWEError("INDEX_DUPLICATE_PATH")
+    # Producers may explicitly index more than the default file budget. Admit
+    # that existing inventory, but refuse any additional files beyond it.
+    current = [relative_path(repo, path) for path in
+               source_files(source_root, max_files=max(MAX_FILES, len(rows)))]
+    if sorted(paths) != current:
+        raise TreeSitterSWEError("INDEX_FILE_SET_CHANGED")
     for row in rows:
         validate_row(repo, row)
     return artifact

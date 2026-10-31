@@ -1,0 +1,18 @@
+{
+  "agent_id": "SUPERWORKER-UNIFIED-1",
+  "kind": "python_source_tree",
+  "payload": {
+    "allowed_suffixes": [
+      ".py"
+    ],
+    "goal": "Encode canonical/CANONICAL_POINTER.json as UBJSON and save canonical/astra_runtime/artifacts/CANONICAL_POINTER_20260927.ubj. Independently decode the UBJSON artifact using a different implementation than the producer and verify the decoded JSON object is exactly identical to canonical/CANONICAL_POINTER.json in keys, values, nesting, arrays, strings, numbers, booleans, and nulls.",
+    "max_files_per_tree": 128,
+    "max_total_bytes_per_tree": 2000000,
+    "max_trees": 12,
+    "mission_id": "ASTRA-REAL-SAME-IDENTITY-UBJSON-CANONICAL-SNAPSHOT-001",
+    "require_git_blob_sha": true
+  },
+  "request_sha256": "21dadd2836140e01d5391d4ada8daad601bdee8b5e95cc3c1e31da08c55d8a6d",
+  "schema": "PROJECT_BRAIN_EXTERNAL_TOOL_REQUEST_V1",
+  "task_id": "SI-REAL-UBJSON-SNAPSHOT-001"
+}

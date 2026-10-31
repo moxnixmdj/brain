@@ -64,36 +64,6 @@ STOPWORDS={
 GENERIC_MATCH_TOKENS={
     "generate","image","text","extract","create","save","output","input",
     "file","read","write","convert","process","data",
-    # The words that name the ARTIFACT a sentence asks for, rather than the act it asks for.
-    # Almost every request in this repository ends "and report it to <O>", and a capability
-    # whose `provides` contains "...report" therefore matches all of them: measured on the
-    # 43-act probe, `python.toolchain.bandit_security.v1` (provides
-    # `python.source.security.report`) was selected for "Find the resource leaks in X",
-    # "Add the dependency requests ...", "Build a wheel ..." and four more, each answered with
-    # a security report and a PASS.  Asking for a report is not asking for a security audit.
-    # Measured after adding these: hollow passes 15 -> 11 on that probe, no suite moved.
-    "report","reports","receipt","artifact","result","results","summary","findings",
-    "issue","issues","log","record",
-    # The words that name the MEDIUM the sentence works in, rather than the act.  Measured on
-    # the 43-act probe: "Find the flaky tests in the repository R" was admitted to
-    # `python.quality.changelog.v1` with a PASS on exactly {report, repository} -- the artifact
-    # word and the medium word -- because `repository` counted as distinctive evidence for a
-    # changelog.  Every goal in this repository names one, so it can never distinguish two.
-    # Measured before adding: 0 of 149 live capabilities lose their last distinctive token.
-    "repository","repo","directory","folder",
-    # "test" is the SUBJECT MATTER of this whole repository, not a distinction between two acts.
-    # Measured: "Run a differential test of X against a reference" was answered by
-    # `python.repository.acceptance.measure.v1` -- a PASS for a measurement nobody asked for --
-    # on {tests, report} alone, the two words that say "there are tests" and "write it down".
-    # A capability that genuinely tests something still matches through its own act word
-    # (runner, flake, coverage, scaffold), which is why measured on the live registry 0 of 151
-    # capabilities lose their last distinctive token.
-    "test","tests","testing",
-    # "run" names an execution MODE, not an act: every capability that runs something carries it,
-    # so it can never pick between them.  Measured: "Run a differential test of X against a
-    # reference" was answered by python.repository.acceptance.measure.v1 with a PASS on
-    # {run, test} alone -- two words that say "start something" and "there are tests".
-    "run","runs","running",
     # "python" alone names a language, not an operation: zero-input fleet rows
     # whose entire match is the word "python" score 16 on "Audit python source
     # structure..." and outrank the right capability only because their empty
@@ -163,9 +133,14 @@ def _platform_admissible_registry(registry):
     return out
 
 
+_TOKEN_WORD_RE = re.compile(r"[A-Za-z0-9]+")
+_PLACEHOLDER_TOKEN_RE = re.compile(r"\$\{input\.([A-Za-z0-9_]+)\}")
+_ENTRY_TOKEN_CACHE: dict[tuple[str, tuple[str, ...], tuple[str, ...], tuple[str, ...]], tuple[frozenset[str], frozenset[str], frozenset[str], frozenset[str]]] = {}
+
+
 def _tokens(value):
     return {
-        t.lower() for t in re.findall(r"[A-Za-z0-9]+", str(value or ""))
+        t.lower() for t in _TOKEN_WORD_RE.findall(str(value or ""))
         if len(t) >= 2 and t.lower() not in STOPWORDS
     }
 
@@ -180,7 +155,7 @@ def _flatten(value):
 
 def _placeholders(value):
     text=_flatten(value)
-    return sorted(set(re.findall(r"\$\{input\.([A-Za-z0-9_]+)\}",text)))
+    return sorted(set(_PLACEHOLDER_TOKEN_RE.findall(text)))
 
 
 # `_repo_paths` is a pure function of the sentence and the root: it scans the
@@ -195,12 +170,6 @@ def _placeholders(value):
 # otherwise be editing every later answer to the same sentence.
 _REPO_PATHS_CACHE: dict[tuple[str, str], list] = {}
 _REPO_PATHS_CACHE_MAX = 1024
-
-
-# File roles whose value is a DESTINATION, not a source: they may legitimately name a path
-# that does not exist yet.  Kept to an explicit allowlist so every other file role keeps
-# failing closed on a missing file.
-_CREATABLE_FILE_SLOTS = frozenset({"target_module"})
 
 
 def _repo_paths(goal, root):
@@ -381,17 +350,53 @@ def _path_named_by_role(goal, stem, root):
 # A verb, up to four words of object ("write the report", "save the final audit"),
 # then "to".  A fixed phrase list only ever matched the exact wording it was
 # written against: "write to" matched, "write the report to" did not.
-# "report it to X" IS AN OUTPUT ROLE.  Every software-engineering sentence in this
-# repository's own probes ends that way, and the verb table did not contain it, so a
-# sentence with one future path bound by luck (non-existence) and a sentence with two --
-# a destination module AND a report -- bound neither.
-_OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit|report|log|dump|persist)\b(?:\s+[A-Za-z0-9_.\-']+){0,4}\s+(?:to|into|in)\b"
+_OUTPUT_ROLE_RE=r"\b(?:save|write|store|output|emit)\b(?:\s+[A-Za-z0-9_.\-']+){0,4}\s+to\b"
 
 
 # Clauses are separated by a comma, a semicolon, or a coordinating word.  A
 # period is deliberately NOT a boundary: repository paths contain dots, and a
 # window cut at the first dot would truncate at "out.txt".
 _CLAUSE_BOUNDARY_RE=re.compile(r"[,;]|\band\b|\bthen\b",re.IGNORECASE)
+
+
+# "the tests in X" never names the SUBJECT of a code question; it names the
+# witness that decides the answer.  The distinction already exists elsewhere in
+# this repository -- _promised_source_files skips "the WITNESS test" when it
+# decides which source file a repair verb governs -- and it is the difference
+# between a sentence that names two directories and one that names a
+# directory and its oracle.
+#
+# Measured on 814ae41 + three analysis rows: "Which function in <b>/app is
+# never executed by the tests in <b>/tests?" selected
+# python.source.dead_code.v1 correctly and then failed to bind source_root at
+# all, because the binder saw two existing directories named and refused to
+# guess -- which was right.  The sentence had already said which was which.
+_WITNESS_PHRASE_RE = re.compile(
+    r"\b(?:tests?|suite|test\s+suite)\s+(?:in|under|inside|within|at)\s+",
+    re.IGNORECASE)
+
+
+def _witness_directories(goal, paths):
+    """Paths the sentence names as the WITNESS, not as the subject.
+
+    A witness phrase binds the nearest stated path that follows it.  Only paths
+    that literally appear after the phrase are returned, and only within the same
+    sentence, so nothing is inferred about a path the caller did not place there.
+    """
+    text = str(goal or "")
+    out = set()
+    for m in _WITNESS_PHRASE_RE.finditer(text):
+        best = None
+        for raw, _path in paths:
+            s = str(raw)
+            at = text.find(s, m.end())
+            if at >= 0:
+                cand = (at, -len(s), s)
+                if best is None or cand < best:
+                    best = cand
+        if best is not None:
+            out.add(best[2])
+    return out
 
 
 def _path_named_after_output_verb(goal, root):
@@ -421,7 +426,7 @@ def _path_named_after_output_verb(goal, root):
                     continue
                 at=tail.find(spelling)
                 if at>=0:
-                    if best is None or at<best[0]:
+                    if best is None or at<best[0] or (at==best[0] and len(str(raw))>len(str(best[1]))):
                         best=(at,raw)
                     break
         if best is None:
@@ -552,106 +557,6 @@ def _claimed_paths(result):
     return claimed
 
 
-_COMMAND_QUOTED=re.compile(
-    r"(?:command|using|with|run|running|execute|executing|via)\s+(?:the\s+)?"
-    r"(?:shell\s+)?(?:command\s+)?[\"\u201c']([^\"\u201d']+)[\"\u201d']",
-    re.IGNORECASE)
-
-
-# WHERE A BARE COMMAND ENDS.  A caller writes "run the shell command cat <file> and save the
-# output to <out>": the command is not quoted, and the sentence says where it stops.  These are
-# the only boundaries that end one -- everything after them is the request's own prose, and
-# everything before them is the command.
-_COMMAND_ENDS = re.compile(
-    r"(?i)\s+(?:and\s+(?:save|write|store|report|put|emit)\b|then\b|in\s+the\b|from\s+the\b"
-    r"|inside\s+the\b|into\s+the\b|at\s+the\b|using\s+the\b)|[.;]\s")
-
-# The programs a bare command may name: the ones this repository already declares as commands,
-# plus the interpreters and build tools the registry's own capability names carry.  A word that
-# is NOT one of these is prose, and a "command" made of prose is a guess.
-_COMMAND_PROGRAMS = frozenset({
-    "python", "python3", "pytest", "pip", "pip3", "git", "make", "npm", "node", "npx", "yarn",
-    "cargo", "rustc", "go", "javac", "java", "mvn", "gradle", "bash", "sh", "zsh", "ruby",
-    "perl", "php", "dotnet", "cmake", "gcc", "clang", "docker", "kubectl", "terraform", "ansible",
-})
-
-
-def _command_programs():
-    """The programs a bare command may name, declared rather than discovered.
-
-    The two tables already exist: `raw_goal_trace_acceptance_v1` declares the read-only commands
-    and the mutating ones, and the composer's `_prose_argv` matches against exactly that union.
-    Reading them here means the compiler and the composer cannot disagree about what a program is.
-    """
-    try:
-        from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
-        return frozenset(_accept._READ_ONLY_COMMANDS) | frozenset(_accept._MUTATING_POSTCONDITIONS) | _COMMAND_PROGRAMS
-    except Exception:  # noqa: BLE001 - a missing table leaves the declared set
-        return _COMMAND_PROGRAMS
-
-
-def _bare_command(text):
-    """The command a sentence states WITHOUT quoting it, or None.
-
-    Read only after an introducer that says "a command follows" ("the shell command", "the
-    command", "run", "execute"), and only up to a boundary where the sentence's own prose
-    resumes.  It fails closed twice over: the first token must be a program this repository
-    already declares as one, and the span must end at a stated boundary -- so a sentence that
-    merely contains the word "run" cannot offer a command nobody wrote.
-    """
-    import shlex
-    for match in _COMMAND_INTRODUCED.finditer(text):
-        tail = text[match.end():]
-        head = _COMMAND_ENDS.split(tail, 1)[0].strip()
-        if not head:
-            continue
-        try:
-            parts = shlex.split(head)
-        except ValueError:
-            continue
-        # Trailing punctuation belongs to the sentence, not to the command.
-        parts = [p.strip(",;") for p in parts]
-        parts = [p for p in parts if p]
-        if not parts:
-            continue
-        first = parts[0].lower()
-        if first not in _command_programs():
-            continue
-        return parts
-    return None
-
-
-_COMMAND_INTRODUCED = re.compile(
-    r"(?i)(?:\bshell\s+command|\bthe\s+command|\bcommand\s*:?)\s+(?:the\s+)?")
-
-
-def _stated_command_argv(goal):
-    """The command line the sentence states, or None.
-
-    Read only where the sentence INTRODUCES it as a command, and split with shlex so the argv is
-    exactly what a shell would receive -- never a prose guess about which words are operands.
-
-    THE QUOTED FORM WINS, and the bare form is read second.  Measured: "Run the shell command
-    `cat README.md` and save the output to <out>" was unaskable, because the command grammar only
-    ever read a QUOTED command and every added quote is the caller doing the machine's work.  The
-    bare form is bounded on both sides -- a declared introducer before it, a stated boundary after
-    it, and a declared program as its first token -- so it can only read a command the sentence
-    actually wrote.
-    """
-    import shlex
-    for match in _COMMAND_QUOTED.finditer(str(goal or "")):
-        raw=match.group(1).strip()
-        if not raw or " " not in raw:
-            continue
-        try:
-            parts=shlex.split(raw)
-        except ValueError:
-            continue
-        if parts:
-            return parts
-    return _bare_command(str(goal or ""))
-
-
 def _find_suite_argv(mod, _seen=None, _depth=0):
     """Follow an adapter's own delegation chain to the suite runner it uses.
 
@@ -726,510 +631,6 @@ def _adapter_default_argv(entry, root, targets):
     return [str(x) for x in argv]
 
 
-_RENAME_VERB_RE=re.compile(r"\brenam(?:e|es|ing)\b",re.IGNORECASE)
-
-_RENAME_KIND_PATTERNS=(
-    # "rename the parameter a to x in the function add [in module M]"
-    ("param",re.compile(
-        r"\brenam(?:e|es|ing)\s+(?:the\s+)?(?:parameter|param|argument|arg)\s+"
-        r"[`\"']?(?P<old>[A-Za-z_]\w*)[`\"']?\s+(?:to|into|as)\s+"
-        r"[`\"']?(?P<new>[A-Za-z_]\w*)[`\"']?(?P<tail>[^.;\n]*)",re.IGNORECASE)),
-    # "rename the function add to plus", "rename Calc.scale to Calc.multiply",
-    # "rename `add` to `plus`" -- a natural-language instruction, not a channel
-    # that only accepts bare identifiers.
-    ("symbol",re.compile(
-        r"\brenam(?:e|es|ing)\s+(?:the\s+)?(?:(?:python\s+)?(?:function|method|class|"
-        r"symbol|identifier|variable|constant|attribute|module|def)\s+)?"
-        r"[`\"']?(?P<old>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)[`\"']?\s+(?:to|into|as)\s+"
-        r"[`\"']?(?P<new>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)[`\"']?"
-        r"(?P<tail>[^.;\n]*)",re.IGNORECASE)),
-)
-
-_ENCLOSING_CLASS_RE=re.compile(
-    r"\b(?:in|of|inside|within|on)\s+(?:the\s+)?(?:class|type)\s+[`\"']?(?P<name>[A-Za-z_]\w*)",
-    re.IGNORECASE)
-_ENCLOSING_FUNCTION_RE=re.compile(
-    r"\b(?:in|of|inside|within|on)\s+(?:the\s+)?(?:function|method|def)\s+"
-    r"[`\"']?(?P<name>[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)",
-    re.IGNORECASE)
-
-
-def _identifier_slots(goal, root):
-    """The identifiers a refactoring sentence states, keyed by slot name.
-
-    Read, never inferred: every value comes from a phrase in the sentence, and a
-    slot the sentence does not state is absent from the result, so the
-    capability still fails closed rather than renaming a symbol nobody named.
-    """
-    text=str(goal or "")
-    if not text:
-        return {}
-    out={}
-    # The module coordinate is stated by any sentence that names a python
-    # module, whether or not it is a renaming: every refactoring adapter
-    # resolves `module` RELATIVE TO `source_root`, so the pair is one binding.
-    renaming=bool(_RENAME_VERB_RE.search(text))
-    for kind,pattern in (_RENAME_KIND_PATTERNS if renaming else ()):
-        m=pattern.search(text)
-        if not m:
-            continue
-        old,new,tail=m.group("old"),m.group("new"),m.group("tail") or ""
-        if old in out.values() or new in out.values():
-            continue
-        cls=_ENCLOSING_CLASS_RE.search(tail)
-        fn=_ENCLOSING_FUNCTION_RE.search(tail)
-        if kind=="param":
-            if not fn:
-                continue
-            qualname=fn.group("name")
-            if cls:
-                qualname=cls.group("name")+"."+qualname
-            out.setdefault("old_param",old)
-            out.setdefault("new_param",new)
-            out.setdefault("qualname",qualname)
-        else:
-            qualname=old
-            if cls and "." not in old:
-                qualname=cls.group("name")+"."+old
-            out.setdefault("old_symbol",old.split(".")[-1])
-            out.setdefault("new_symbol",new.split(".")[-1])
-            out.setdefault("qualname",qualname)
-    # Cheap gate before the filesystem: a module coordinate needs a python
-    # file to be named, and _repo_paths walks the tree.  Measured: calling it
-    # unconditionally here made every binding attempt in the suite pay for a
-    # walk, and the front-compiler suite went from 13 to over 28 minutes.
-    if ".py" not in text:
-        return out
-    module=_module_named_by_sentence(text,root)
-    if module:
-        # `module` is resolved by the adapter RELATIVE TO `source_root`, so the
-        # two slots are one binding and are decided together: binding the
-        # repo-relative path with the module's own directory as the root made
-        # the adapter look for "<dir>/<dir>/calc.py" and refuse PATH_MISSING.
-        parent=str(pathlib.PurePosixPath(str(module)).parent)
-        out["module"]=str(pathlib.PurePosixPath(str(module)).name)
-        out["source_root"]=parent or "."
-    return out
-
-
-def _module_named_by_sentence(goal, root):
-    """The python module a refactoring sentence names, as a repo-relative path."""
-    rr=pathlib.Path(root).resolve()
-    try:
-        candidates=_repo_paths(goal,root)
-    except Exception:
-        return None
-    pys=[raw for raw,p in candidates
-         if str(raw).endswith(".py") and p.is_file() and rr in p.parents]
-    if len(pys)==1:
-        return pys[0]
-    nontest=[raw for raw in pys
-             if "test" not in pathlib.PurePosixPath(str(raw)).name.lower()]
-    if len(nontest)==1:
-        return nontest[0]
-    return None
-
-
-def _referee_tests_for_module(root, identifiers):
-    """Existing test modules beside a stated module that name it.
-
-    Deterministic and bounded: one directory, only files whose name marks them as
-    tests, only when they mention the module.  A refactor with no referee is a
-    blind edit, and the adapter refuses to call that a rename.
-    """
-    module=str((identifiers or {}).get("module") or "")
-    source_root=str((identifiers or {}).get("source_root") or "")
-    if not module or not source_root:
-        return []
-    root_path=(pathlib.Path(root)/source_root).resolve()
-    target=root_path/module
-    if not target.is_file():
-        return []
-    stem=target.stem
-    found=[]
-    try:
-        siblings=sorted(root_path.iterdir())
-    except OSError:
-        return []
-    for path in siblings:
-        if not path.is_file() or path.suffix!=".py" or path.stem==stem:
-            continue
-        name=path.stem.lower()
-        if not (name.startswith("test_") or name.endswith("_test")
-                or name.startswith("tests_") or name.endswith("_tests")):
-            continue
-        try:
-            text=path.read_text(encoding="utf-8",errors="replace")
-        except OSError:
-            continue
-        if re.search(r"\b"+re.escape(stem)+r"\b",text):
-            found.append(str(path.relative_to(pathlib.Path(root).resolve())).replace("\\","/"))
-    return found
-
-
-def _relative_to_source_root(rel, source_root):
-    """Re-express a repo path the way a refactoring adapter resolves it."""
-    if not isinstance(rel,str) or not rel:
-        return rel
-    root=str(source_root or "")
-    if not root or root in (".",""):
-        return rel
-    try:
-        return str(pathlib.PurePosixPath(rel).relative_to(pathlib.PurePosixPath(root)))
-    except ValueError:
-        return rel
-
-
-# The roles that mean "the repository this machine works inside".  A sentence
-# that names a file in the repository has named the repository; it does not have
-# to repeat the word.  No other directory role is inferred this way.
-_REPO_ANCHOR_SLOTS=frozenset({"anchor_path","repo_path","worktree_path","apply_directory"})
-
-
-_UNBOUND=object()
-
-
-def _role_lexicon():
-    from canonical.runtime import input_role_lexicon_v1 as lexicon
-    return lexicon
-
-
-def _stated_number(goal,key):
-    """The number the sentence attaches to this knob, if it states one."""
-    words=[w for w in re.split(r"[^a-z0-9]+",str(key or "").lower()) if w]
-    if not words:
-        return None
-    pattern=r"(?<![a-z0-9])"+"[\s_-]+".join(re.escape(w) for w in words)+r"(?![a-z0-9])"
-    m=re.search(pattern+r"\s*(?:=|:|of|to|is)?\s*(?P<value>-?\d+(?:\.\d+)?)\b",
-                str(goal or ""),re.IGNORECASE)
-    if m is None:
-        return None
-    raw=m.group("value")
-    try:
-        return int(raw) if re.fullmatch(r"-?\d+",raw) else float(raw)
-    except ValueError:
-        return None
-
-
-def _introduced(text,raw,phrases,root):
-    """Is this path introduced by a role phrase, in whichever form the sentence wrote it?
-
-    A sentence may name a file relatively ("pkg/good.py") or absolutely
-    ("/home/u/repo/pkg/good.py").  Binding is the same file either way, but the
-    phrase is anchored against the TEXT, so both spellings have to be tried:
-    measured, every absolutely-spelled path lost its role anchor and a
-    capability whose contract the sentence stated perfectly refused to bind.
-    """
-    raw=str(raw or "")
-    forms=[raw]
-    if raw and not raw.startswith("/"):
-        try:
-            forms.append(str((pathlib.Path(root)/raw).resolve()))
-        except Exception:
-            pass
-    lex=_role_lexicon()
-    tried=set()
-    for form in forms:
-        if not form or form in tried or form not in text:
-            continue
-        tried.add(form)
-        if lex.introduced_before(text,form,phrases):
-            return True
-    return False
-
-
-def _enclosing_worktree(path, root):
-    """The git worktree that CONTAINS a file, relative to ``root``, or None.
-
-    A repository anchor is the tree the tool must run INSIDE, and "the tree the file is in" is a
-    fact on the filesystem: walk up to the nearest ancestor that carries ``.git``.  Measured:
-    "Blame the lines of <root>/scratch/repo/pkg/calc.py" anchored `worktree_path` at ``"."`` --
-    the outer project -- because the file is inside the project, so git ran in the project while
-    the path was stated against the nested repository and refused `fatal: no such path`.  The
-    nested worktree was on disk the whole time.
-    """
-    try:
-        candidate = pathlib.Path(path)
-        start = (pathlib.Path(root) / candidate) if not candidate.is_absolute() else candidate
-        start = (start if start.is_dir() else start.parent).resolve()
-        base = pathlib.Path(root).resolve()
-        for parent in (start, *start.parents):
-            if str(parent) in ("/", "."):
-                return None
-            if (parent / ".git").exists():
-                return "." if parent == base else str(parent.relative_to(base))
-    except (OSError, ValueError):
-        return None
-    return None
-
-
-def _bind_by_role_kind(goal,key,root,bound,extra=None,paths=None):
-    """Bind one slot from the words a person uses for it -- or nothing at all.
-
-    ``bound`` is what this plan has already assigned, so a path another slot
-    owns is never stolen by a slot that merely mentions a nearby word.
-    """
-    lex=_role_lexicon()
-    if not lex.is_rescuable(key):
-        return _UNBOUND
-    kind=lex.kind_of(key)
-    claimed={str(v) for v in (bound or {}).values() if isinstance(v,(str,int,float))}
-    repo_anchor=kind==lex.KIND_DIR and str(key) in _REPO_ANCHOR_SLOTS
-    if isinstance(bound,dict):
-        for value in bound.values():
-            if isinstance(value,list):
-                claimed.update(str(x) for x in value)
-    rr=pathlib.Path(root).resolve()
-    # `paths` is what the caller already computed for this same sentence; the
-    # walk is the expensive part of a binding attempt and recomputing it for
-    # every unbound key is pure repetition.
-    named=[(raw,p) for raw,p in (paths if paths is not None else _repo_paths(goal,root))]
-    named=[(raw,p) for raw,p in named if str(raw) not in claimed]
-    if kind is None:
-        return _UNBOUND
-    if kind==lex.KIND_LINE:
-        # "lines 1 to 2" states both ends once; the slot names which end it wants.
-        shown=_line_span(text_slot:=str(goal or ""))
-        if shown is None:
-            return _UNBOUND
-        first,last=shown
-        return first if str(key).startswith("start") else last
-    if kind==lex.KIND_TUNING:
-        stated=_stated_number(goal,key)
-        if stated is None and lex.is_textual_tuning(key):
-            # A TUNING SLOT THE SENTENCE STATES IN WORDS IS STILL STATED.
-            #
-            # This branch used to read numbers only, so "Revert the commit 49b9ce0 in the
-            # repository R" dropped the commit, the adapter defaulted `ref` to HEAD, and a
-            # DIFFERENT commit was reverted -- silently, with the request reported as done.
-            # Where the value is a revision rather than a knob, the words the sentence uses are
-            # read in this order: the revision phrase table ("the previous commit" -> HEAD~1),
-            # then the slot's own introducer ("onto main" -> main).  Nothing is invented: a
-            # sentence that names no revision leaves the slot unbound exactly as before.
-            stated=lex.revision_from_phrase(goal) or _stated_text_value(goal,key) or None
-        return stated if stated is not None else _UNBOUND
-    text=str(goal or "")
-    phrases=lex.phrases_for(key)
-    if kind==lex.KIND_DIR:
-        cands=[raw for raw,p in named if p.is_dir() and rr in p.parents or raw=="."]
-        if len(cands)==1:
-            return cands[0]
-        stated=[raw for raw in cands if _introduced(text,raw,phrases,root)]
-        if len(stated)==1:
-            return stated[0]
-        # A repository anchor is not missing when the sentence named a file IN
-        # the repository: the tree a diff applies to is the tree the diff and the
-        # benchmark live in.  Binding it stays narrow on purpose -- it fires only
-        # for the repo-anchor roles, only when the sentence names a file inside
-        # this repository, and never for `source_root`, which must be STATED.
-        if repo_anchor:
-            inside=[raw for raw,p in named if p.is_file() and rr in p.parents]
-            if inside:
-                # ...and it is the worktree CONTAINING that file, not this project by default.
-                worktree=_enclosing_worktree(inside[0],root)
-                return worktree if worktree is not None else "."
-        return _UNBOUND
-    if kind in (lex.KIND_FILE,lex.KIND_FILES):
-        existing=[raw for raw,p in named if p.is_file() and rr in p.parents]
-        if str(key).endswith("_tests"):
-            # A verification suite is not any file: bind only what the sentence
-            # named that LOOKS like a test module, then fall back to the test
-            # module that already sits beside the module the sentence named.
-            # Discovery is scoped to a refactoring request (one that stated a
-            # module); a repair capability's suite is STATED, never discovered.
-            tests=[raw for raw in existing
-                   if "test" in pathlib.PurePosixPath(raw).stem.lower()]
-            if tests:
-                return tests
-            # Discovery (a referee beside the stated module) is scoped to a
-            # refactoring request; a gate's suite is STATED, never invented.
-            if not dict(extra or {}).get("module"):
-                return _UNBOUND
-            context=dict(extra or {})
-            for source in (bound or {}),:
-                for name in ("module","source_root"):
-                    if isinstance(source,dict) and name in source:
-                        context.setdefault(name,source[name])
-            found=_referee_tests_for_module(root,context)
-            if found:
-                return [_relative_to_source_root(t,context.get("source_root"))
-                        for t in found]
-            return _UNBOUND
-        if kind==lex.KIND_FILES:
-            scoped=[raw for raw,_p in _repo_paths(goal,root)
-                    if _p.is_dir() and rr in _p.parents]
-            inside=[raw for raw in existing
-                    if any(raw.startswith(s.rstrip("/")+"/") for s in scoped)]
-            pool=inside or existing
-            stated=[raw for raw in pool if _introduced(text,raw,phrases,root)]
-            return stated if stated else _UNBOUND
-        # A DESTINATION MAY NOT EXIST YET.  Every other file role names something the
-        # machine READS, so a missing file cannot be that role.  `target_module` names where
-        # the thing should GO, and "into a new module pkg/ops.py" is a statement about a
-        # file that by definition does not exist when the sentence is written.  Bound only
-        # when the sentence introduces it with the slot's own destination phrase, only
-        # inside the repository, and only when exactly one such path is stated.
-        if str(key) in _CREATABLE_FILE_SLOTS:
-            future=[raw for raw,p in _repo_paths(goal,root)
-                    if rr in p.parents and not p.exists()
-                    and _introduced(text,raw,phrases,root)]
-            return future[0] if len(future)==1 else _UNBOUND
-        # A file role is bound only by the role the sentence actually states.
-        # Binding "the only existing file" to a slot whose noun the sentence never
-        # used is invention: measured, "Apply the jq filter ... to <a>.json ...
-        # and write the output to <b>.json" bound repo_diff_apply's diff_path to
-        # the input JSON and beat the jq capability the sentence names.
-        stated=[raw for raw in existing if _introduced(text,raw,phrases,root)]
-        return stated[0] if len(stated)==1 else _UNBOUND
-    if kind==lex.KIND_TEXT:
-        return _literal_after_role(text,phrases)
-    if kind==lex.KIND_IDENT:
-        stated=_identifier_after_role(text,phrases)
-        return stated if stated else _UNBOUND
-    if kind==lex.KIND_IDENTS:
-        stated=_identifiers_after_role(text,phrases)
-        return stated if stated else _UNBOUND
-    return _UNBOUND
-
-
-_QUOTED_OR_PATTERN=re.compile(r"""["'`]([^"'`]+)["'`]|\b([A-Za-z0-9_.*?\[\]-]*(?:\*|\?)[A-Za-z0-9_.*?\[\]-]*)\b""",re.IGNORECASE)
-
-
-_LINE_SPAN_RE=re.compile(
-    r"\blines?\s+(?P<first>\d+)\s*(?:to|through|until|-|–|and)\s*(?P<last>\d+)\b",
-    re.IGNORECASE)
-
-
-def _line_span(text):
-    """"lines 4 to 7" -> (4, 7).  Read, never inferred: no span, no binding."""
-    m=_LINE_SPAN_RE.search(str(text or ""))
-    if m is None:
-        return None
-    return int(m.group("first")),int(m.group("last"))
-
-
-def _literal_after_role(text,phrases):
-    """A literal value the sentence states for a text slot ("test_*.py")."""
-    for match in _QUOTED_OR_PATTERN.finditer(str(text or "")):
-        value=(match.group(1) or match.group(2) or "").strip()
-        if not value:
-            continue
-        before=str(text)[:match.start()]
-        for phrase in phrases:
-            words=[w for w in re.split(r"[^a-z0-9]+",str(phrase).lower()) if w]
-            if not words:
-                continue
-            pattern=("(?<![a-z0-9])"+"[^a-z0-9]+".join(re.escape(w) for w in words)
-                     +r"(?![a-z0-9])")
-            if re.search(pattern+r"[^.;\n]{0,40}$",before,re.IGNORECASE):
-                return value
-    return _UNBOUND
-
-
-_IDENT_WORD=re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
-
-
-def _identifier_after_role(text,phrases):
-    for phrase in phrases:
-        words=[w for w in re.split(r"[^a-z0-9]+",str(phrase).lower()) if w]
-        if not words:
-            continue
-        pattern=("(?<![A-Za-z0-9])"+"[^a-z0-9]+".join(re.escape(w) for w in words)
-                 +r"(?![a-z0-9])")
-        m=re.search(pattern,text,re.IGNORECASE)
-        if m is None:
-            continue
-        tail=text[m.end():]
-        hit=_IDENT_WORD.search(tail)
-        if hit is not None:
-            return hit.group(0)
-    return None
-
-
-def _identifiers_after_role(text,phrases):
-    """The identifiers a sentence states for a plural role -- the WHOLE stated run.
-
-    A delimited run is a list and has to be read as one.  This used to take the first
-    id-word after the role, so "resolve the symbols add, sub" bound `queries` to ["add"] and
-    the caller's second question was silently dropped: the artifact then honestly reported
-    one query, and a truthful answer to a narrower question is not the answer to the question.
-    The delimiter is what makes it a list -- "for the queries top, leaf, orphan" states three,
-    while an undelimited tail is indistinguishable from prose and still binds exactly one, the
-    same discipline `goal_front_compiler_v1._parse_typed_value` already applies to this shape.
-    """
-    found=[]
-    for phrase in phrases:
-        words=[w for w in re.split(r"[^a-z0-9]+",str(phrase).lower()) if w]
-        if not words:
-            continue
-        pattern=("(?<![A-Za-z0-9])"+"[^a-z0-9]+".join(re.escape(w) for w in words)
-                 +r"(?![a-z0-9])")
-        for m in re.finditer(pattern,text,re.IGNORECASE):
-            tail=text[m.end():]
-            hit=_IDENT_WORD.search(tail)
-            if hit is None or hit.group(0) in found:
-                continue
-            found.append(hit.group(0))
-            # The delimited run after the first name, read member by member.  It stops at
-            # sentence punctuation and at the first member that is not an identifier, which is
-            # where the prose resumes ("add, sub in the source root S").
-            run=re.split(r"[.\n;]|\band save\b|\bwriting\b",tail,1)[0]
-            for part in re.split(r"\s*(?:,|;|\band\b)\s*",run)[1:]:
-                member=re.match(r"[A-Za-z_][A-Za-z0-9_]*",part.strip())
-                if member is None or member.group(0).lower() in STOPWORDS:
-                    break
-                if member.group(0) not in found:
-                    found.append(member.group(0))
-    return found
-
-
-def _stated_text(goal, key):
-    """The text a tuning slot's introducing phrase states, or None.
-
-    Reads with the pinned tail reader, so the slot binds exactly what the sentence wrote and
-    nothing the sentence left out.  Used only for the slots the lexicon marks as text-valued
-    tuning (`ref`): without it a stated revision was dropped and its adapter defaulted to HEAD.
-    """
-    try:
-        from canonical.runtime import goal_front_compiler_v1 as _front
-    except Exception:  # noqa: BLE001 - no reader, no binding
-        return None
-    if str(key) == "ref":
-        # A revision named in words is a revision; it is not a tail to parse.
-        named = _role_lexicon().revision_from_phrase(goal)
-        if named:
-            return named
-    try:
-        for tail in _front._after_key(str(goal or ""), str(key)):
-            value = _front._parse_typed_value(str(key), tail)
-            if isinstance(value, str) and value.strip():
-                return value.strip()
-    except Exception:  # noqa: BLE001 - an unreadable tail states nothing
-        return None
-    return None
-
-
-_TEXT_VALUE_OK=re.compile(r"^[\w./~^@{}-]{1,120}$")
-
-
-def _stated_text_value(goal,key):
-    """The plain word or token the sentence puts after this slot's own introducer.
-
-    Only for slots declared TEXTUAL_TUNING, and only a token shaped like a value a program
-    would accept (no spaces, no punctuation beyond a revision's own characters).  An
-    unshaped remainder is prose, and prose is not a value.
-    """
-    try:
-        from canonical.runtime import goal_front_compiler_v1 as _front
-    except Exception:  # noqa: BLE001 - no front grammar, nothing to read
-        return None
-    for tail in _front._after_key(str(goal or ""),str(key)):
-        value=_front._parse_typed_value(str(key),tail)
-        if isinstance(value,str) and _TEXT_VALUE_OK.match(value.strip()):
-            return value.strip()
-    return None
-
-
 def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     template=entry.get("action_template") or {}
     keys=_placeholders(template)
@@ -1238,27 +639,8 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     paths=_repo_paths(goal,root)
     future_text=" ".join(str(x) for x in (future_clauses or []))
     future_paths=_repo_paths(future_text,root) if future_text else []
-    identifiers=_identifier_slots(goal,root)
     result={}
     for key in keys:
-        if _role_lexicon().is_tuning(key):
-            # An execution knob is the ADAPTER's input, not the caller's: every
-            # one of these adapters already writes `args.get("timeout_s") or 300`
-            # and `args.get("python_executable") or sys.executable`.  The binder
-            # raised on them anyway, so a capability that was selected and fully
-            # grounded was dropped (or died at dispatch) for want of a number
-            # nobody asked for.  Measured: 12 slots named timeout_s, 11 named
-            # python_executable, and the type gate was unreachable for exactly
-            # this reason.  A value the sentence does state is still bound below.
-            stated=_stated_number(goal,key)
-            if stated is None and _role_lexicon().is_textual_tuning(key):
-                stated=_stated_text(goal,key)
-            if stated is not None:
-                result[key]=stated
-            continue
-        if key in identifiers:
-            result[key]=identifiers[key]
-            continue
         if key=="text":
             result[key]=_extract_text_argument(goal)
             continue
@@ -1301,20 +683,45 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if re.search(r"\b"+re.escape(str(stem).replace("_"," "))+r"s?\b",
                          str(goal),re.IGNORECASE):
                 files=[raw for raw,p in paths if p.is_file()]
+                # THE SAME TWO FILTERS THE TWO SITES ABOVE ALREADY APPLY.  This
+                # fallback had neither, and it is the one that fires when the
+                # sentence names no file at all -- which is how an ordinary
+                # request is phrased.  Measured on 96015b9:
+                #
+                #   "Fix the failing test in the python source root D and write
+                #    the report to D_out/r1.json"
+                #
+                #   selected  python.software.repair.apply.verified.v1
+                #   test_paths ["canonical/astra_runtime/tmp/hx/r1.json"]
+                #
+                # The machine handed the repair adapter ITS OWN REPORT as the
+                # test to fix.  Nothing was repaired, the promise layer saw no
+                # source change, and the run died PROMISED_SOURCE_CHANGE_NOT_APPLIED
+                # -- a truthful refusal for the wrong reason.  Both filters
+                # already exist in this file and are already applied to the role
+                # list above and to the derived *_argv below; a helper that
+                # fixes a defect has to be called from every site that has it.
+                out=_path_named_after_output_verb(goal,root)
+                if out is not None:
+                    files=[x for x in files if x!=out]
+                files=[x for x in files if x not in _claimed_paths(result)]
                 if files:
                     result[key]=files
                     continue
+                # The role was stated and no file survived, so the sentence
+                # named no test.  [] is the identity element for a list input,
+                # not a guess -- the same discipline this function already uses
+                # for {} on a key/value input and [] on a payload selector.  The
+                # capability that owns the semantics derives the corpus from the
+                # tree it was given and still fails closed on a tree that has no
+                # tests (NO_TEST_FILES_UNDER_SOURCE_ROOT), so nothing is
+                # invented here and a green empty suite is still impossible.
+                # Guessing the report was worse than either: it is a file that
+                # exists, so every downstream existence check passed.
+                if key=="test_paths":
+                    result[key]=[]
+                    continue
         if key.endswith("_argv"):
-            # A COMMAND THE SENTENCE QUOTES IS THE COMMAND.  This branch used to bind only the
-            # adapter's own default runner, so "bisect ... using the command \"pytest -q t.py\""
-            # bound no argv at all, the candidate was skipped as unstated, and the request was
-            # answered by a changelog builder.  The stated command comes first; the derived
-            # default remains the fallback for the sentences that state tests instead of a
-            # command line.
-            stated=_stated_command_argv(goal)
-            if stated:
-                result[key]=stated
-                continue
             # Derived, never invented: ask the adapter for the command line it
             # would itself have used for the tests the sentence named, and fail
             # closed when it offers no default.
@@ -1334,29 +741,6 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if argv is not None:
                 result[key]=argv
                 continue
-        if key == "target_module":
-            # A DESTINATION THAT DOES NOT EXIST YET IS STILL STATED.  Every other file role
-            # names what the machine reads, so a missing file cannot be that role; a move
-            # names where the symbol should GO, and "into a new module pkg/ops.py" is a
-            # statement about a file that by definition does not exist when it is written.
-            # Bound only from the slot's own destination phrases, only for a stated path
-            # inside the repository, only when exactly one is left after the paths already
-            # claimed by other keys are removed -- and preferring the one that does not
-            # exist, because a target that already exists is a different request.
-            claimed=_claimed_paths(result)
-            phrases=_role_lexicon().phrases_for(key)
-            future=[(raw,pth) for raw,pth in paths if raw not in claimed
-                    and pth.suffix==".py" and _introduced(goal,raw,phrases,root)]
-            fresh=[raw for raw,pth in future if not pth.exists()]
-            if len(fresh)==1:
-                result[key]=fresh[0]
-                continue
-            if not fresh and len(future)==1:
-                result[key]=future[0][0]
-                continue
-            if not future:
-                raise GoalCompilationFailure("GOAL_STATED_ACT_INPUTS_UNBOUND",key+":not_stated")
-            raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key+":"+str(len(future))+"_paths_named")
         if key.endswith("_root") or key.endswith("_dir"):
             # A *_root key names a DIRECTORY, and the binder only ever handled
             # *_path.  Every capability whose input is source_root therefore
@@ -1380,19 +764,6 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if len(matching)==1:
                 result[key]=matching[0]
                 continue
-            # THE FILE THE CALLER NAMED OUTRANKS THE DIRECTORY ITS PATH SPELLS -- but only where
-            # the capability declares that its adapter can index one file (`path_file_or_dir`),
-            # because most scope keys (a test runner, a repair loop) genuinely need a tree.
-            # Measured twice, both destructive: `ruff format` took a one-file sentence, was handed
-            # the file's directory, and rewrote 2238 files; and a crash search was handed a
-            # directory when its sentence named the module.  A scope stays what was named.
-            bindings=entry.get("proposal_bindings") if isinstance(entry, dict) else None
-            if (isinstance(bindings, dict) and isinstance(bindings.get(key), dict)
-                    and bindings[key].get("type")=="path_file_or_dir"):
-                named_files=[(raw,fp) for raw,fp in paths if fp.is_file()]
-                if len(named_files)==1:
-                    result[key]=named_files[0][0]
-                    continue
             if named and len(dirs)==1:
                 result[key]=dirs[0][0]
                 continue
@@ -1462,15 +833,8 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                           (("markdown",),{".md",".markdown"}),
                           (("png","qr","barcode","image"),{".png",".jpg",".jpeg",".webp"}),
                         ]
-                        # WHOLE WORDS, not substrings.  "hardcoded password" in
-                        # the security gate's keywords contains the letters of
-                        # "word", so the format of a JSON report was inferred to
-                        # be .docx and the sentence's own .json destination was
-                        # then refused as type-incompatible.
                         for markers,suffix_set in semantic_suffixes:
-                            if any(re.search(r"(?<![a-z0-9])"+re.escape(marker)
-                                             +r"(?![a-z0-9])",semantic_blob)
-                                   for marker in markers):
+                            if any(marker in semantic_blob for marker in markers):
                                 wanted=suffix_set
                                 break
                 if wanted:
@@ -1492,18 +856,9 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                     # is the only causally admissible output. Do not require its
                     # filename to contain the word "output" or pre-enumerate its
                     # extension.
-                    # A PATH ALREADY GIVEN ANOTHER ROLE IS NOT THE OUTPUT.  "Move the
-                    # function add from A into a new module B, run the tests T and report
-                    # it to R" names TWO paths that do not exist yet -- the destination
-                    # module and the report -- and counting both here left the output
-                    # unbound, so the capability ran correctly and was then failed for a
-                    # promised artifact it had never been given.  `_claimed_paths` is the
-                    # existing answer to "which paths are already spoken for".
-                    claimed=_claimed_paths(result)
                     future_artifacts=[
                         raw for raw,p in paths
                         if pathlib.Path(raw).suffix and not p.exists()
-                        and raw not in claimed
                     ]
                     if len(future_artifacts)==1:
                         result[key]=future_artifacts[0]
@@ -1549,26 +904,6 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if stem in {"input","source"} and len(existing)==1:
                     result[key]=existing[0][0]
                     continue
-        # Last resort, and the only place every unbound key passes through: the
-        # registry's own noun for this slot is not what a person calls it.  The
-        # role lexicon says what a person calls it, and the binder accepts that
-        # word only when the sentence names EXACTLY ONE value of the right kind
-        # for this slot -- otherwise the key stays unbound and the capability
-        # still fails closed.
-        rescued=_bind_by_role_kind(goal,key,root,result,identifiers,paths=paths)
-        if rescued is not _UNBOUND:
-            result[key]=rescued
-            continue
-        # A VERIFICATION SLOT IS NOT A PREMISE.  `run_tests` names the suite that will judge the
-        # edit; every refactor adapter treats its absence as PASS_BLIND with verified=false, which
-        # is the truthful statement "nothing checked this".  Refusing to bind an empty list made
-        # the sentence "Rename the function top to apex in <module>" unable to reach ANY refactor
-        # verb -- measured: FAIL_CLOSED__STATED_ACT_INPUTS_UNBOUND
-        # python.refactor.rename_parameter.v1:run_tests, on a request that stated everything the
-        # edit needs.
-        if str(key) == "run_tests":
-            result[key]=[]
-            continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     return result
 
@@ -1698,8 +1033,14 @@ def _nondiscriminating_requires_tokens():
     out = frozenset()
     try:
         path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        snap = path.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+        if path.is_file() and path.read_bytes()[:1] == b"@":
+            path = snap
         with open(path, "r", encoding="utf-8") as fh:
-            caps = (json.load(fh) or {}).get("capabilities") or {}
+            caps = dict((json.load(fh) or {}).get("capabilities") or {})
+        if snap.is_file() and snap != path:
+            with open(snap, "r", encoding="utf-8") as sfh:
+                caps.update((json.load(sfh) or {}).get("capabilities") or {})
         declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]
         if declaring:
             counts = {}
@@ -1755,175 +1096,6 @@ def _artifact_write_tokens(goal):
     return out
 
 
-# ONE ACT, ONE OWNER -- and one act has MANY SPELLINGS.
-#
-# The registry names an act once, in the capability that performs it: the archive
-# verification family is declared `archive.tar_gz.verify_manifest_members`, so its
-# act words are verify, manifest and members. A person asking for the same thing
-# writes "Check the bundle against its manifest" or "Audit the archive against the
-# manifest" -- and NOTHING in the machine knew that check and audit name the act
-# `verify`, so those sentences went to `archive.tar_gz.create_from_manifest`.
-# Measured head-verb routes on the ARCHIVE_VERIFY_GNU family: verb `verify` reaches
-# the verifier, `check` and `audit` reach the creator; the family scored 4 of 6.
-#
-# This is a declaration, not an inference: each line says these spellings name the
-# SAME act, and it is applied only to capabilities that already declare the act in
-# the left column -- it can never hand an act to a capability that does not own it.
-# The table is deliberately tiny: every line here is one a measured miss needed.
-_ACT_SYNONYMS={
-    "verify": ("check", "audit", "inspect", "validate", "confirm"),
-}
-
-# act word -> every spelling of that act, including the act itself
-_ACT_SPELLINGS={}
-for _act, _synonyms in _ACT_SYNONYMS.items():
-    _ACT_SPELLINGS.setdefault(_act, set()).add(_act)
-    for _syn in _synonyms:
-        _ACT_SPELLINGS.setdefault(_act, set()).add(_syn)
-
-# A sentence may open with a word that is not the act ("Please ...", "The ...").
-# Those never name a capability, so the head-verb rule simply does not fire.
-_NON_ACT_TOKENS=frozenset({"please","the","a","an","i","we","you","it","this","that",
-                           "and","or","if","then","hello","test","file",
-    # A REQUEST VERB IS NOT AN ACT.  "Scan", "check", "find", "show", "measure", "look" --
-    # these say how the caller wants the answer, and every capability that carries one of them
-    # in its own id would collect the head-verb bonus for it.  Measured on the 43-act probe:
-    # "Scan the repository R for leaked secrets" scored python.quality.license_scan.v1 14 (the
-    # word `scan` is in its id) against python.toolchain.bandit_security.v1 13, which matched
-    # `leaked` and `secrets`.  The security analyser lost to the licence scanner by one point
-    # over a word that names no act, and the request was answered with a licence report.
-    # Dropping the bonus for these words costs nothing: a capability that names its act
-    # ("lint", "bisect", "blame", "rebase") still gets it.
-    "scan","check","find","show","list","look","measure","report","review","inspect",
-    "detect","ensure","verify","validate"})
-
-
-def _declared_act_words(entry):
-    """The ACT each `provides` value declares: its last segment, as tokens.
-
-    `vcs.git.blame` declares the act `blame`; `json.file.available` declares the act `available`.
-    The rest of the dotted name is the object it acts on, and it is the OBJECT -- not the act --
-    that the rest of the scoring already matches.
-    """
-    out = set()
-    for value in (entry.get("provides") or []):
-        text = str(value).lower()
-        segments = [seg for seg in re.split(r"[^a-z0-9]+", text) if seg]
-        if segments:
-            out.add(segments[-1])
-        # A SEGMENT THAT IS A PHRASE DECLARES ITS VERB, NOT ONLY ITS LAST NOUN.
-        #
-        # `archive.verify.tar_gz.verify_manifest_members` splits to its last token,
-        # "members", so the one capability whose whole job is to VERIFY declared the act
-        # "members" and nothing else.  Measured: the end-to-end archive-verification family
-        # scored 0 of 2 and its route was `archive.tar_gz.create_from_manifest` -- a sentence
-        # built from the verifier's own declarations says "members", and the creator answers
-        # it.  On a sentence a person writes the verifier wins cleanly, 64 against 50, which is
-        # why this is a DECLARATION defect and not a ranking one.
-        #
-        # Reading every token of the final segment fixes the class (71 of 459 entries declare a
-        # snake_case phrase) without touching a registry byte: "verify_manifest_members" now
-        # declares verify, manifest and members; "create_from_manifest" declares create,
-        # from (dropped as a stop word) and manifest.  The head-verb bonus still demands that
-        # the sentence match something else in the entry, so a capability merely named after a
-        # verb still collects nothing.
-        last_segment = [part for part in text.split(".") if part]
-        for token in re.split(r"[^a-z0-9]+", last_segment[-1] if last_segment else ""):
-            if token and len(token) > 2 and token not in STOPWORDS:
-                out.add(token)
-    # The other spellings of an act this entry declares. A capability that declares
-    # `verify` is the owner of `check` and `audit` too -- see `_ACT_SYNONYMS`. The
-    # expansion is one-directional and act-bound: it can only add spellings for an act
-    # the entry already declares, so no capability acquires an act it does not own.
-    for act in tuple(out):
-        out |= _ACT_SPELLINGS.get(act, set())
-    return out
-
-
-_shared_identity_verbs_cache = None
-
-
-def _shared_identity_verbs():
-    """Verbs that more than one capability carries in its own NAME.
-
-    An act word is evidence of an act only while it names ONE thing.  `audit` sits in the
-    identifiers of five capabilities (a source-structure auditor, a unittest auditor, a
-    provenance auditor and two ruff rule audits), so the word alone cannot say which act the
-    sentence asked for -- its object does.  `bisect` sits in exactly one, so the verb alone is
-    the capability.  Read from the pinned registry beside this module, cached, never inferred:
-    the same construction the requires ceiling above uses.
-    """
-    global _shared_identity_verbs_cache
-    if _shared_identity_verbs_cache is not None:
-        return _shared_identity_verbs_cache
-    out = {}
-    try:
-        path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
-        with open(path, "r", encoding="utf-8") as fh:
-            caps = (json.load(fh) or {}).get("capabilities") or {}
-        for cid in caps:
-            for tok in _tokens(cid):
-                out[tok] = out.get(tok, 0) + 1
-    except Exception:  # noqa: BLE001 - an unreadable registry disables the rule, never the score
-        out = {}
-    _shared_identity_verbs_cache = out
-    return out
-
-
-def _head_verb(goal):
-    """The imperative verb a sentence opens with, or None.
-
-    English puts the verb first in an imperative, which is how every request in
-    this system is phrased.  Deterministic: the first token of the prose, with
-    nothing inferred beyond that.
-    """
-    for word in re.findall(r"[A-Za-z][A-Za-z0-9]*", str(goal or "")):
-        low=word.lower()
-        if len(low)<2 or low in STOPWORDS:
-            continue
-        return low
-    return None
-
-
-def _head_verb_compound(goal):
-    """The sentence's opening verb phrase when the registry spells it as one word.
-
-    English compounds are written apart and named together: "Type check the python source ..."
-    is the act in `python.toolchain.mypy_typecheck.v1`, but the first word alone is `type`, and
-    `type` also prefixes an unrelated gate (`python.review.diff_type_gate.v1`) which then claimed
-    the head-verb bonus and turned a right capability into a refusal.  The two words are joined
-    only when the join is a token some capability already carries in its own name, so nothing is
-    invented; otherwise this returns None and the first word stands.
-    """
-    words = [w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9]*", str(goal or ""))
-             if len(w) > 1 and w.lower() not in STOPWORDS]
-    if len(words) < 2:
-        return None
-    joined = words[0] + words[1]
-    return joined if _shared_identity_verbs().get(joined) else None
-
-
-def _named_by_the_goal(goal_tokens, name_tokens):
-    """Name tokens the goal states in an inflected form (scaffolding -> scaffold).
-
-    Bounded on purpose: a stem must be at least five characters and one must be a
-    prefix of the other, so `test`/`tests` is not a stem match while
-    `scaffold`/`scaffolding`, `localize`/`localizing` and `optimize`/`optimization`
-    are.  The goal token is returned, so the caller's set arithmetic still works.
-    """
-    hits=set()
-    for word in goal_tokens:
-        if len(word)<5:
-            continue
-        for name in name_tokens:
-            if len(name)<5 or name==word:
-                continue
-            if name.startswith(word) or word.startswith(name):
-                hits.add(word)
-                break
-    return hits
-
-
 def _score(goal, cid, entry):
     surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
     if not surface_ok:
@@ -1956,28 +1128,25 @@ def _score(goal, cid, entry):
     # on python.software.repair.apply.verified.v1, the one capability that both
     # finds the patch and lands it, so the file really is repaired.
     gt_effect=gt-(_artifact_write_tokens(goal) if _names_a_patch_route(goal) else set())
-    # A verb phrase the registry spells as one word is a token of this sentence (see
-    # _head_verb_compound): "type check" is `typecheck`, and the capability whose name contains
-    # it is claiming this sentence's own verb rather than a prefix of it.
-    _compound=_head_verb_compound(goal)
-    if _compound:
-        gt=gt|{_compound}
-        gt_effect=gt_effect|{_compound}
-    provides=_tokens(entry.get("provides",[]))
-    requires=_tokens(entry.get("requires",[]))
-    identity=_tokens(cid)
-    keywords=_tokens(entry.get("keywords",[]))
+    p_raw = tuple(str(x) for x in (entry.get("provides") or ()))
+    r_raw = tuple(str(x) for x in (entry.get("requires") or ()))
+    k_raw = tuple(str(x) for x in (entry.get("keywords") or ()))
+    cache_key = (str(cid), p_raw, r_raw, k_raw)
+    cached_toks = _ENTRY_TOKEN_CACHE.get(cache_key)
+    if cached_toks is None:
+        cached_toks = (
+            frozenset(_tokens(list(p_raw))),
+            frozenset(_tokens(list(r_raw))),
+            frozenset(_tokens(cid)),
+            frozenset(_tokens(list(k_raw))),
+        )
+        if len(_ENTRY_TOKEN_CACHE) > 4096:
+            _ENTRY_TOKEN_CACHE.clear()
+        _ENTRY_TOKEN_CACHE[cache_key] = cached_toks
+    provides, requires, identity, keywords = cached_toks
     # Requirements are highly informative for environment qualifiers such as
     # image-only/scanned/local/etc. Provides represent the requested effect.
-    # A capability NAMES an act; the sentence inflects it.  "Generate unit test
-    # scaffolding ..." is a request for the capability whose own name contains
-    # `scaffold`, and exact word equality could not see it, so the request went to
-    # a parser that merely shared the words "python", "source" and "tree" with the
-    # sentence -- and that parser reported success.  Stem equality is applied only
-    # to the capability's OWN NAME and keywords: a morphological variant of a
-    # name is the same act, while a variant of a precondition word proves nothing.
-    stem_hits=_named_by_the_goal(gt_effect, identity | keywords)
-    effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords) | stem_hits
+    effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords)
     distinctive={x for x in effect_matches if x not in GENERIC_MATCH_TOKENS}
     # Preconditions and generic verbs/nouns may refine a match but may never
     # create one. A barcode-image goal must not become a QR-image action merely
@@ -1994,75 +1163,7 @@ def _score(goal, cid, entry):
     # sentence. See _nondiscriminating_requires_tokens for the measurement.
     nondiscriminating=_nondiscriminating_requires_tokens()
     informative_requires=(gt & requires) - nondiscriminating
-    # An inflected form of the capability's OWN NAME is the same act named in
-    # another grammatical shape, so it is weighted like a provides match rather
-    # than like a keyword.
-    score=(5*len(gt_effect & provides)+4*len(gt_effect & keywords)
-           +3*len(informative_requires)+2*len(gt_effect & identity)
-           +5*len(stem_hits))
-    # The sentence's HEAD VERB is the strongest single piece of evidence about the
-    # act requested: an English imperative puts the verb first, and the verb picks
-    # the frame its arguments fill.  Without it a tool that matches three NOUNS
-    # from the medium ("python source tree") outranks the tool whose own name is
-    # the verb the sentence opens with.  Measured: "Localize the fault in the
-    # python source tree ..." scored code.multilanguage.parse.tree_sitter.v1 25
-    # against python.fault.localize... 24, and "Generate unit test scaffolding
-    # for the python source tree ..." scored the same parser 30 against
-    # python.tests.generate.scaffold.v1 26.  Both wrong capability, both bound,
-    # both executed -- the parse tool really did parse.  A capability that names
-    # the act is the one that performs it.
-    # The bonus is for a verb that IDENTIFIES an act.  A generic act verb
-    # ("generate", "create", "write") is shared by dozens of capabilities and
-    # says nothing about which one -- and rewarding it would let a tool win on
-    # the strength of a word in its own name alone.  Measured cost of dropping
-    # the distinction: "Generate a QR code image ..." moved the pinned overlap
-    # order from the decoder to the generator, which empties a negative control
-    # that proves the BM25 re-rank is load-bearing.
-    head_verb=_compound or _head_verb(goal)
-    verb_bonus=0
-    # The verb picks the frame, and its ARGUMENTS fill it.  A capability that claims the verb
-    # but matches nothing else in the sentence is not the capability the sentence describes --
-    # it is a tool that happens to be named after the verb.  Measured: "Audit the dependencies
-    # in R for known vulnerabilities and report it to O" gave python.source.audit.ast only
-    # {audit} plus this bonus, 18, over python.toolchain.bandit_security.v1 at 17 with
-    # {audit, known, vulnerabilities}, so the source-structure auditor PASSed a question about
-    # dependency vulnerabilities.  An artefact or medium word ("report", "repository") cannot
-    # be that second token either -- it names where the answer goes, not what is being audited.
-    _verb_matched=(set(gt_effect & keywords) | set(gt_effect & provides) | set(gt_effect & identity)
-                   | {stem for stem in stem_hits})
-    head_verb_arguments=((_verb_matched - {head_verb}) - GENERIC_MATCH_TOKENS) if head_verb else set()
-    # ...unless the verb names exactly one capability in the whole registry.  Then the verb IS
-    # the identification and there is no other candidate to confuse it with: `bisect` matches
-    # nothing but itself in "Bisect the repository R from the ref HEAD~2", and without the bonus
-    # it tied shell.command.run at 11 and lost on alphabetical order.
-    _verb_shared = _shared_identity_verbs().get(head_verb or "", 0) > 1
-    # AN ACT WORD MAY BE DECLARED IN `provides` RATHER THAN SPELLED IN THE ID.
-    #
-    # `provides` is the capability's own statement of the effect it has, and its LAST SEGMENT names
-    # that effect: `json.file.write` provides `json.file.available`, so "make the json file
-    # available" names exactly what it does, and the word never appears in its id.  Measured: the
-    # sentence "Use available document json structured ..." scored
-    # `docx.document.create_from_json_record` 28 against `json.file.write` 24, because the DOCX
-    # creator matched the word "document" from its own id while the JSON writer's declared act word
-    # was not an identity token at all, so it could not collect the verb bonus.  The JSON writer
-    # then lost to a capability that went on to refuse the sentence
-    # (`output_path_equals_an_input_path`) -- a wrong route that could not even run.
-    #
-    # The guard is the one the identity branch already applies and one more: the verb must be a
-    # DECLARED act (the last segment), never merely a word that appears somewhere in `provides`
-    # ("json" and "file" are in `json.file.available` and name nothing), and the sentence must
-    # match something else in the same entry -- a capability that claims the verb alone is a tool
-    # named after the verb, which is what `head_verb_arguments` already exists to refuse.
-    _declared_acts = _declared_act_words(entry)
-    _names_the_act = bool(head_verb) and (head_verb in identity or head_verb in _declared_acts)
-    _shared_act = _verb_shared and head_verb not in identity
-    if (head_verb and _names_the_act
-            and head_verb not in GENERIC_MATCH_TOKENS
-            and head_verb not in _NON_ACT_TOKENS
-            and head_verb_arguments
-            and (head_verb_arguments or not _shared_act)):
-        verb_bonus=7
-        score+=verb_bonus
+    score=5*len(gt_effect & provides)+4*len(gt_effect & keywords)+3*len(informative_requires)+2*len(gt_effect & identity)
     # Prefer more-specific matched preconditions when base scores tie.
     specificity=len(informative_requires)
     return score,specificity,{
@@ -2073,38 +1174,19 @@ def _score(goal, cid, entry):
         "nondiscriminating_requires":sorted((gt & requires) & nondiscriminating),
         "matched_identity":sorted(gt_effect & identity),
         "matched_keywords":sorted(gt_effect & keywords),
-        "matched_head_verb":head_verb if verb_bonus else None,
-        "matched_stem":sorted(stem_hits),
     }
-
-
-class _Omitted:
-    """A template slot the adapter itself already defaults."""
-
-    def __repr__(self):  # pragma: no cover - debugging aid
-        return "<omitted>"
-
-
-_OMITTED=_Omitted()
 
 
 def _render_template(value, inputs):
     if isinstance(value,dict):
-        rendered={k:_render_template(v,inputs) for k,v in value.items()}
-        return {k:v for k,v in rendered.items() if v is not _OMITTED}
+        return {k:_render_template(v,inputs) for k,v in value.items()}
     if isinstance(value,list):
-        return [v for v in (_render_template(x,inputs) for x in value)
-                if v is not _OMITTED]
+        return [_render_template(v,inputs) for v in value]
     if isinstance(value,str):
         exact=re.fullmatch(r"\$\{input\.([A-Za-z0-9_]+)\}",value)
         if exact:
             key=exact.group(1)
             if key not in inputs:
-                # The binder no longer invents a knob; the adapter's own default
-                # is the correct value, so the key is left out of the action
-                # rather than raised for a number the sentence never stated.
-                if _role_lexicon().is_tuning(key):
-                    return _OMITTED
                 raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
             return json.loads(json.dumps(inputs[key]))
         out=value
@@ -2372,62 +1454,47 @@ def _bm25_rerank(goal,ranked):
     out=[]
     for item,(relevance,_contributions) in zip(ranked,scores):
         score,specificity,cid=item[0],item[1],item[2]
-        # A CANDIDATE THAT NAMES THE ACT IS NOT DISPLACED BY ONE THAT MERELY
-        # TALKS ABOUT IT.
-        #
-        # BM25 reads the whole document a capability carries, so a long
-        # declaration list can outweigh the one candidate whose own name or
-        # `provides` says it performs the verb the sentence uses.  Measured on
-        # "Audit the python source tree with an AST.": `python.source.audit.ast`
-        # scores 42 against 30 and is the only candidate `_score` records as
-        # `matched_head_verb: audit`, yet BM25 prefers
-        # `code.multilanguage.parse.tree_sitter.v1` (6.25 to 5.72) because
-        # "parse" and "tree" are rarer words in the corpus than "audit".  The
-        # pinned score already knows which one declares the act; that verdict is
-        # not BM25's to overturn.
-        #
-        # This is NOT the act-word bonus `_score` already applies, applied twice:
-        # the flag is None for every candidate on 21 of the 23 benchmark goals,
-        # so on those this changes nothing and BM25 still decides -- which is
-        # what keeps `image.qr.generate.qrencode` (21) ahead of the decoder that
-        # out-scores it (22) and `archive.tar_gz.create_from_manifest` ahead of
-        # the verifier (54 against 61).  It separates candidates on exactly the
-        # goals where the goal's verb has a declared owner.
-        head_verb=(item[5] or {}) if isinstance(item[5],dict) else {}
-        declares_act=bool(head_verb.get("matched_head_verb"))
-        out.append((declares_act,relevance,score,specificity,cid,item))
-    # THE ACT WORD PROTECTS AN ADVANTAGE; IT DOES NOT CREATE ONE.
+        out.append((relevance,score,specificity,cid,item))
+    # BM25 first; the pinned overlap score breaks BM25 ties, then specificity,
+    # then identity for determinism.
+    out.sort(key=lambda x:(-x[0],-x[1],-x[2],x[3]))
+    ordered=[x[4] for x in out]
+    # A capability that binds VACUOUSLY -- it declares no ``${input.}``
+    # placeholder at all, so it attaches to any sentence for free -- is demoted
+    # below every candidate the pinned scorer rated strictly higher.
     #
-    # Declaring the goal's verb may lift a candidate above candidates it already
-    # out-scores, and no further.  Both halves are measured.  On "Audit the python
-    # source tree with an AST." the act-declarer scores 42 against the parser's 30,
-    # so it leads.  On the sentence the reachability instrument builds from
-    # `python.review.diff_mutation_gate.v1` -- "Use behavior coverage diff ..." --
-    # the head verb is the first declaration word, "behavior", which is declared by
-    # `python.software.request.semantic_behavior.compile.v1` at score 25 while the
-    # capability the sentence was built from scores 88.  An unconditional act-first
-    # sort promoted the 25 and cost four capabilities their last route to being
-    # asked (454 reached and bound became 450); this bound costs none of them and
-    # keeps every benchmark gain, because it never promotes a weaker competitor.
-    return _order_with_act_flag(out)
-
-
-def _order_with_act_flag(rows):
-    """Order (declares_act, relevance, score, specificity, cid, item) rows.
-
-    The candidate that declares the goal's verb AND out-scores every candidate that does
-    not comes first; then BM25; the pinned overlap score breaks BM25 ties, then
-    specificity, then identity for determinism.  A separate function so the law can be
-    pinned on rows whose relevance is chosen rather than measured -- the BM25 weights are
-    corpus statistics and cannot be steered to an interesting shape from a test.
-    """
-    highest_unflagged=max((row[2] for row in rows if not row[0]),default=None)
-    ranked_rows=[]
-    for row in rows:
-        leads=row[0] and (highest_unflagged is None or row[2]>=highest_unflagged)
-        ranked_rows.append((0 if leads else 1,row[1],row[2],row[3],row[4],row[5]))
-    ranked_rows.sort(key=lambda x:(x[0],-x[1],-x[2],-x[3],x[4]))
-    return [x[5] for x in ranked_rows]
+    # This is the same distinction _compile_single_goal already draws when it
+    # decides whether a substitution is a substitution ("a vacuous bind: it
+    # attaches to any sentence for free, e.g. msgpack/kstar catch-alls"); it was
+    # only ever applied to the REFUSAL, never to the ORDER, and the order is
+    # what selects: _compile_single_goal takes ranked[0].  Measured on
+    # 29b3107, "Localize the fault in the python source root D using the tests"
+    # ranked terminal.kstar.root.assess.stdlib FIRST at pinned score 15, above
+    # the capability that owns the sentence at 28 -- the exact inversion this
+    # function's own docstring says BM25 exists to prevent -- because BM25's
+    # inverse document frequency is measured over the surviving shortlist,
+    # where a token most capabilities carry but few survivors carry looks rare.
+    # Rather than re-weight the whole corpus and move goals that already select
+    # correctly, the ordering is made to respect the fact the pinned scorer
+    # already established: a binder that consumed nothing from the sentence
+    # does not outrank one that consumed it and scored higher.
+    def _vacuous(item):
+        args=((item[3].get("action_template") or {}).get("args") or {})
+        return not any(
+            isinstance(v,str) and v.startswith("${input.") for v in args.values()
+        )
+    grounded=[it[0] for it in ordered if not _vacuous(it)]
+    if not grounded:
+        return ordered
+    best_grounded=max(grounded)
+    head=[]
+    tail=[]
+    for it in ordered:
+        if _vacuous(it) and it[0]<best_grounded:
+            tail.append(it)
+        else:
+            head.append(it)
+    return head+tail
 
 
 def _effect_providers(registry):
@@ -2484,59 +1551,6 @@ def _plan_score(plan):
         return -1
 
 
-def _plan_terminal_names_the_sentence(plan):
-    """True when the plan's own capability name shares a word with the goal.
-
-    Reads ``match_evidence["matched_identity"]``, which ``_score`` already
-    computes from the capability id -- no new signal, only a use for one that
-    was already recorded and discarded.  A compound plan is judged by its last
-    part, the one whose result the user asked for.
-    """
-    if not isinstance(plan,dict):
-        return False
-    row=plan
-    parts=[p for p in (plan.get("compiled_parts") or []) if isinstance(p,dict)]
-    if parts:
-        row=parts[-1]
-    evidence=row.get("match_evidence")
-    if not isinstance(evidence,dict):
-        evidence=plan.get("match_evidence")
-    if not isinstance(evidence,dict):
-        return False
-    return bool(evidence.get("matched_identity"))
-
-
-def _plan_has_dangling_effect_refs(plan):
-    """True when the plan still carries a ``$effect_result`` nobody produces.
-
-    ``_bind_planned_inputs`` records an effect slot as a reference to the
-    capability that would produce it, and ``_attach_effect_producer_steps``
-    turns those references into real earlier steps -- but only when every
-    producer it needs binds from the sentence.  When one does not, the attach
-    pass returns the plan untouched by design ("a gap stays a gap instead of
-    becoming a chain whose first step is guaranteed to fail"), and the
-    reference survives into the emitted plan.
-
-    The plan comparison did not look.  Measured: on "Create an xlsx table from
-    JSON records." and "Verify a sqlite table against JSON records." the
-    chained pass returned ``auto.pypi.msgpack`` -- a serialization library, for
-    both a spreadsheet and a database question -- at score 7, carrying
-    ``{'json_path': {'$effect_result': {...}}}`` because no producer of
-    ``json.file.available`` could be bound.  An unexecutable plan trivially has
-    no slot filled from the filesystem, so the guess-loses-to-the-sentence rule
-    below preferred it to the world-bound plan that scores 43 and 54.  A
-    dangling reference is not a plan; it is a plan's missing half.
-    """
-    if not isinstance(plan,dict):
-        return False
-    rows=[plan]
-    rows.extend(p for p in (plan.get("compiled_parts") or []) if isinstance(p,dict))
-    for row in rows:
-        if _collect_effect_result_refs(row.get("inputs")):
-            return True
-    return False
-
-
 def _plan_has_unjustified_world_slots(plan):
     """True when the plan filled at least one slot by scanning the filesystem.
 
@@ -2573,7 +1587,8 @@ def _plan_has_unjustified_world_slots(plan):
 
 def _rank_bindable_candidates(
     goal, registry, root, context_paths=None, future_clauses=None,
-    proposal_binder=None, effect_providers=None, allow_world_binding=False
+    proposal_binder=None, effect_providers=None, allow_world_binding=False,
+    unbindable_out=None
 ):
     """Score every live capability the goal could select, then try to bind it.
 
@@ -2586,6 +1601,12 @@ def _rank_bindable_candidates(
     disambiguation power that bindability provides.
 
     The inferred pass therefore runs only when nothing grounded survived.
+
+    ``unbindable_out`` (optional list) receives every word-matched candidate
+    that could NOT be bound at this level, as ``(score, specificity, cid)``
+    tuples. The caller compares it against the bindable survivors: when the
+    best word-match is unbindable, the honest answer is a refusal -- never a
+    substitution with a weaker-scoring tool that happens to be callable.
     """
     ranked=[]
     for cid,entry in sorted((registry or {}).items()):
@@ -2629,12 +1650,16 @@ def _rank_bindable_candidates(
             inputs=None
         if inputs is None:
             if not allow_world_binding or _uses_effect_result_bindings(entry):
+                if unbindable_out is not None:
+                    unbindable_out.append((score,specificity,cid))
                 continue
             # BIND FIRST, THEN RANK. Ambiguity is frequently an artefact of
             # ranking unbound candidates: several capabilities match the words,
             # but only some can actually be called with what the world offers.
             completed=_complete_inputs_via_world_binding(goal,root,cid,entry)
             if completed is None:
+                if unbindable_out is not None:
+                    unbindable_out.append((score,specificity,cid))
                 continue
             inputs,binding_provenance=completed
         ranked.append((score,specificity,cid,entry,inputs,evidence,binding_provenance))
@@ -3210,6 +2235,7 @@ def _compile_single_goal(
     goal, registry, root, context_paths=None, future_clauses=None,
     proposal_binder=None, effect_providers=None, attach_producer_steps=False
 ):
+    ranked_unbindable=[]  # [(score, specificity, cid), ...] word-matched, could not bind
     ranked=_rank_bindable_candidates(
         goal,registry,root,
         context_paths=context_paths,
@@ -3217,6 +2243,7 @@ def _compile_single_goal(
         proposal_binder=proposal_binder,
         effect_providers=effect_providers,
         allow_world_binding=False,
+        unbindable_out=ranked_unbindable,
     )
     binding_source="GOAL_STATEMENT"
     if not ranked:
@@ -3227,8 +2254,50 @@ def _compile_single_goal(
             proposal_binder=proposal_binder,
             effect_providers=effect_providers,
             allow_world_binding=True,
+            unbindable_out=ranked_unbindable,
         )
         binding_source="GOAL_STATEMENT+WORLD_BINDING"
+    if ranked and ranked_unbindable:
+        # THE LAW THIS REPO ALREADY STATES: when the best word-match cannot be
+        # called, refuse -- never substitute a weaker-scoring tool merely
+        # because it happens to be callable.  Bindable-beats-unbindable
+        # regardless of score is the measured failure shape that made a
+        # barcode decoder outrank the barcode generator, msgpack cover XLSX,
+        # and pandoc cover jq.
+        #
+        # Precise scope: the predicate fires only against a substitution that
+        # consumed NOTHING from the sentence -- the would-be substitute either
+        # declares no input placeholders at all (a vacuous bind: it attaches
+        # to any sentence for free, e.g. msgpack/kstar catch-alls) or filled at
+        # least one slot with a world guess the goal never justified
+        # (``filled_from_world_not_goal``: pandoc pinning markdown_path to
+        # AGENTS.md for a jq query).  A sentence that fully states a grounded
+        # candidate's contract therefore still selects it with certainty:
+        # lexical noise from unbindable neighbours (a decoder outscoring the
+        # generator the sentence fully names) is noise, not law.
+        best_unbindable=max(ranked_unbindable, key=lambda x:(x[0],x[1]))
+        survivor_provenance=ranked[0][6]
+        survivor_args=((ranked[0][3].get("action_template") or {}).get("args") or {})
+        survivor_vacuous=not any(
+            isinstance(v,str) and v.startswith("${input.") for v in survivor_args.values()
+        )
+        survivor_unjustified=bool(
+            isinstance(survivor_provenance,dict)
+            and (survivor_provenance.get("filled_from_world_not_goal") or {})
+        )
+        if best_unbindable[0] > ranked[0][0] and (survivor_vacuous or survivor_unjustified):
+            raise GoalCompilationFailure(
+                "GOAL_COMPILATION_BEST_MATCH_UNBINDABLE",
+                json.dumps({
+                    "unbindable_best_match": best_unbindable[2],
+                    "unbindable_best_match_score": best_unbindable[0],
+                    "substitute_refused": ranked[0][2],
+                    "substitute_score": ranked[0][0],
+                    "substitute_binding": (
+                        "VACUOUS" if survivor_vacuous else "UNJUSTIFIED_WORLD_SLOTS"
+                    ),
+                }, sort_keys=True),
+            )
     if not ranked:
         raise GoalCompilationFailure("GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH")
     best=ranked[0]
@@ -6671,6 +5740,62 @@ def _inherit_producer_goal_for_verifier_steps(actions, registry):
     return actions
 
 
+# A clause that only says WHERE the previous answer goes is delivery, not a
+# second task.  The census writes its questions that way, because that is how a
+# person writes them:
+#
+#   "Which function in <b>/app is never executed by the tests in <b>/tests?
+#    Write its name to <b>/answer.json"
+#
+# Measured on 814ae41 + three analysis rows: the first clause reached
+# python.source.dead_code.v1 correctly, and the delivery clause was handed to
+# python.software.request.semantic_behavior.compile.v1 as its own step, which
+# failed, which made the whole run FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS -- for
+# a question the machine had just answered.
+#
+# The object is ANAPHORIC: "its name", "the number", "the file and line".  It
+# does not name a new subject, so it cannot name a new capability.  The
+# vocabulary is closed on purpose, and "report"/"patch" are deliberately absent:
+# "and write the report to R" is a promise the repair lane discharges, and
+# stealing it here would unbind the artifact that gate reads.
+_DELIVERY_RE = re.compile(
+    r"^\s*(?:(?:find|identify|locate|report)\s+(?:it|them)\s+and\s+)?(?:write|save|store|output)\s+"
+    r"(?:(?:its|their|the)\s+)?"
+    r"(?:yes\s+or\s+no|true\s+or\s+false|name|test\s+name|function\s+name|symbol\s+name|"
+    r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
+    r"number|count|result|results|answer|value|values|file\s+and\s+line|"
+    r"path\s+and\s+line|line\s+and\s+file|path|line)\s+to\s+\S+\s*$",
+    re.IGNORECASE)
+
+
+def _compile_answer_delivery(clause, actions, compiled_parts, root):
+    """Point the PREVIOUS step's output at the destination this clause names.
+
+    Returns True when the clause was consumed.  Nothing new is executed: the
+    delivery is the destination of the answer the previous step already
+    produces, which is exactly what a single-capability compile of the same
+    sentence does with ``output_path``.
+    """
+    text = str(clause or "")
+    if not _DELIVERY_RE.match(text):
+        return False
+    if not actions:
+        return False
+    stated = [str(raw) for raw, path in _repo_paths(text, root) if not path.is_dir()]
+    if len(stated) != 1:
+        return False
+    args = actions[-1].get("args")
+    if not isinstance(args, dict) or "output_path" not in args:
+        return False
+    args["output_path"] = stated[0]
+    for part in reversed(compiled_parts):
+        inputs = part.get("inputs")
+        if isinstance(inputs, dict) and "output_path" in inputs:
+            inputs["output_path"] = stated[0]
+            break
+    return True
+
+
 def _compile_compound_goal(goal, clauses, registry, root):
     actions=[]
     compiled_parts=[]
@@ -6690,6 +5815,11 @@ def _compile_compound_goal(goal, clauses, registry, root):
         if index in consumed_indices:
             continue
         lower=clause.lower()
+
+        # Delivery of the previous answer is not a second subgoal.
+        if _compile_answer_delivery(clause, actions, compiled_parts, root):
+            consumed_indices.add(index)
+            continue
 
         external_knowledge_fetch=_compile_external_json_knowledge_fetch(clause,len(actions))
         if external_knowledge_fetch is not None:
@@ -7418,6 +6548,35 @@ def _compile_compound_goal(goal, clauses, registry, root):
                     json.dumps({"index":index,"subgoal":clause,"rejected_capability":cid},sort_keys=True)
                 )
         runtime_inputs=part["inputs"]
+        # A clause that states no path cannot rebind the subject.  Measured: "The
+        # query in <b>/app/db.py is built with string formatting.  Remove the SQL
+        # injection ..." planned two steps, and the second -- which names no path
+        # at all -- rebound source_root to ".", pointing the repair at the whole
+        # repository.  It then rewrote a module of THIS tree: a sentence about a
+        # fixture edited the machine's own source.
+        if actions and not list(_repo_paths(clause, root)):
+            # (1) The previous step's own subject, when it has one.
+            previous_inputs = (compiled_parts[-1].get("inputs") or {})
+            # (2) Failing that, the subject the SENTENCE stated in another
+            # clause: a repair step may only ever be aimed at the paths the
+            # request itself named, never at the compiler's default ".".
+            # Measured: the second clause of the SQL sentence carries no path,
+            # bound `source_root: "."`, and a run against that plan wrote a
+            # generated test into the REPOSITORY ROOT -- a sentence about a
+            # fixture reached the machine's own tree.
+            stated = [raw for raw, _p in _repo_paths(goal, root)]
+            stated_dirs = sorted({str(pathlib.PurePosixPath(raw).parent) for raw in stated})
+            stated_dir = stated_dirs[0] if len(stated_dirs) == 1 and stated_dirs[0] != "." else None
+            for key, value in list(runtime_inputs.items()):
+                if not str(key).endswith(("_root", "_path", "_paths")):
+                    continue
+                if value not in ("", ".", "./"):
+                    continue
+                inherited = previous_inputs.get(key)
+                if isinstance(inherited, str) and inherited not in ("", ".", "./"):
+                    runtime_inputs[key] = inherited
+                elif stated_dir and str(key).endswith("_root"):
+                    runtime_inputs[key] = stated_dir
         if not isinstance(runtime_inputs,dict):
             # A compiled part with no input mapping is a compiler defect, not a
             # missing value. Fail closed with a named reason: dereferencing it
@@ -7989,28 +7148,6 @@ def compile_goal(goal, registry, root):
     # world-bound UNCONDITIONALLY was tried and measured at 21->19 canonical and
     # 20->19 front-door, because it broke exactly those audit goals -- so the
     # unjustified-slot test is load-bearing, not decoration.
-    if (_plan_has_dangling_effect_refs(chained)
-            and not _plan_has_dangling_effect_refs(grounded)
-            and not _plan_terminal_names_the_sentence(chained)):
-        # THE SECOND CONDITION IS THE WHOLE POINT, AND IT IS MEASURED RATHER
-        # THAN TUNED.  A dangling reference means the plan cannot run as
-        # written, so the question is whether the capability it names is worth
-        # one more step of work.  `match_evidence["matched_identity"]` answers
-        # exactly that: does the capability's OWN NAME contain a word of the
-        # sentence?  Measured -- on "Create an xlsx table from JSON records."
-        # the dangling plan is `auto.pypi.msgpack`, whose matched_identity is
-        # EMPTY: it shares one keyword ("records") and none of its name appears
-        # in the request, so it is a serialization library that happens to hold
-        # the word "records", not an answer.  On "Fetch a JSON document and
-        # assess its internal consistency." the dangling plan is
-        # `knowledge.consistency.assess` with matched_identity
-        # ["assess","consistency"] -- the request's own verb and object -- and
-        # it is the best answer available in the front door's routable view.
-        # No score, margin or ratio separates those two cases half as cleanly:
-        # the same score comparison that prefers xlsx at 43 to msgpack at 7 also
-        # prefers a score-25 docx writer to the score-13 consistency assessor,
-        # which is the very regression the parity suite exists to catch.
-        return grounded
     if (_plan_has_unjustified_world_slots(grounded)
             and not _plan_has_unjustified_world_slots(chained)):
         return chained

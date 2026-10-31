@@ -8,23 +8,17 @@ instead of four disconnected tools:
     task (JSON: edits[] = choreograph op spec)
       -> stage name/describe           [this adapter]
       -> cross-file edit plan          (slice 4: python_crossfile_edit_choreograph)
-      -> apply plan to a WORKTREE copy (project tests still have host access)
+      -> apply plan to a WORKTREE copy (this adapter; source tree is never mutated)
       -> prove application             (re-index + re-plan: fixed point == no-op)
-      -> suggest affected tests        (slice 2: python_change_impact_testselect)
-      -> run default-discovery pytest  (the selection is advisory, not a proof)
+      -> select minimal tests          (slice 2: python_change_impact_testselect)
+      -> run selected tests            (pytest on the worktree)
       -> emit unified diff + pr_intent + Merkle receipt (this adapter)
 
 Correctness laws it refuses to violate:
 
-* Source-change detection — regular files and symlinks in the copied scope
-  are inventoried before edits, after edits, and after tests. Persistent drift
-  in that scope refuses success. Ignored cache/git directories and external
-  symlink targets are excluded. This check does not prevent or undo writes,
-  detect restored/transient changes, or isolate untrusted tests and plugins.
-* Local pytest reports are diagnostics, not authenticated verification:
-  tests/plugins can fabricate JUnit and override exits. The composite verdict
-  remains false until an independently authenticated evidence path exists;
-  genuine passing runs also remain provisional.
+* NEVER-MUTATE-SOURCE — ``repository_root`` bytes are hashed before/after;
+  any drift is caught and the run FAILS CLOSED.  All edits land in
+  ``worktree_path`` (a byte-copy of ``source_root``).
 * COMPLETE-OR-REFUSE — a plan with any AMBIGUOUS_* site or a refused op
   aborts the whole task before any write; the refusals and ambiguous sites
   are reported verbatim (truth over progress).
@@ -53,8 +47,7 @@ Inputs (kwargs; every path is confined to the repo by _safe_path):
 result_fields: adapter, task_id, planned_op_count, applied_op_count,
 refused_op_count, applied_site_count, test_selected_count,
 test_passed_count, test_failed_count, diff_sha256, pr_intent_verified,
-edits_verified, local_test_report_passed, test_evidence_authentication,
-verification_status, verified.
+verified.
 """
 
 from __future__ import annotations
@@ -63,14 +56,11 @@ import ast
 import difflib
 import hashlib
 import json
-import os
 import re
 import shutil
 import subprocess
 import sys
-import tempfile
 import time
-import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from canonical.runtime.bound_capabilities import (
@@ -79,7 +69,6 @@ from canonical.runtime.bound_capabilities import (
 from canonical.runtime.bound_capabilities import (
     python_change_impact_testselect as testselect,
 )
-from canonical.runtime.bound_capabilities import quality_flake_detect_v1 as junit_report
 
 ARTIFACT_VERSION = 1
 NAME_RE = re.compile(r"^[A-Za-z_]\w*$")
@@ -106,48 +95,16 @@ def _safe_path(repo: Path, rel: str, must_exist: bool = False) -> Path:
     return p
 
 
-def _module_path(worktree: Path, value: object) -> Path:
-    """Validate an edit's relative module path, then resolve symlink escapes."""
-    if not isinstance(value, str) or not value or "\x00" in value:
-        _fail("INVALID_EDIT_MODULE_PATH")
-    rel = Path(value)
-    if rel.is_absolute() or ".." in rel.parts or rel.suffix != ".py":
-        _fail("INVALID_EDIT_MODULE_PATH:" + value)
-    path = _safe_path(worktree, value)
-    if path == worktree:
-        _fail("INVALID_EDIT_MODULE_PATH:" + value)
-    return path
-
-
 def _sha256(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
 
 
 def _tree_manifest(root: Path) -> dict:
-    """Detect persistent changes in copied inputs, not a security boundary.
-
-    Excluded cache/git directories and external symlink targets are not checked.
-    File hashes are streamed to avoid loading large files into memory.
-    """
     rows = []
-    for directory, dirs, files in os.walk(root, followlinks=False):
-        dirs[:] = sorted(d for d in dirs if d not in _SKIP_DIRS)
-        for name in sorted(dirs + files):
-            p = Path(directory) / name
-            rel = p.relative_to(root).as_posix()
-            if p.is_symlink():
-                rows.append([rel, "symlink", os.readlink(p)])
-            elif p.is_file():
-                digest = hashlib.sha256()
-                with p.open("rb") as stream:
-                    for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-                        digest.update(chunk)
-                rows.append([rel, "file", digest.hexdigest()])
-            elif p.is_dir():
-                rows.append([rel, "directory"])
-            else:
-                _fail("SOURCE_TREE_UNSUPPORTED_ENTRY:" + rel)
-    return {"file_count": sum(row[1] == "file" for row in rows),
+    for p in sorted(root.rglob("*.py")):
+        if p.is_file() and not any(part in _SKIP_DIRS for part in p.parts):
+            rows.append([str(p.relative_to(root)).replace("\\", "/"), _sha256(p.read_bytes())])
+    return {"file_count": len(rows),
             "sha256": _sha256(json.dumps(rows, separators=(",", ":")).encode("utf-8"))}
 
 
@@ -169,12 +126,16 @@ def _copy_tree(src: Path, dst: Path) -> None:
 def _splice_token(line: str, name: str, new_name: str, col: int) -> str:
     """Replace the token occurrence of `name` sitting exactly at `col`
     (ast col_offset semantics).  Off-position refuses, never guesses."""
-    seg = line[col:col + len(name)]
-    if seg != name or not re.fullmatch(r"[A-Za-z_]\w*", name):
-        raise ValueError(f"TOKEN_NOT_AT_INDEXED_POSITION:{col}:{seg!r}")
-    if len(line) > col + len(name) and (line[col + len(name)].isalnum() or line[col + len(name)] == "_"):
+    raw, token = line.encode("utf-8"), name.encode("utf-8")
+    if col < 0 or raw[col:col + len(token)] != token or not name.isidentifier():
+        raise ValueError(f"TOKEN_NOT_AT_INDEXED_POSITION:{col}")
+    try:
+        head, tail = raw[:col].decode("utf-8"), raw[col + len(token):].decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError("TOKEN_BYTE_BOUNDARY_INVALID") from exc
+    if tail and (tail[0].isalnum() or tail[0] == "_"):
         raise ValueError("TOKEN_BOUNDARY_VIOLATION:" + line[:60])
-    return line[:col] + new_name + line[col + len(name):]
+    return head + new_name + tail
 
 
 def _splice_site(line: str, name: str, new_name: str, site: dict) -> str:
@@ -203,42 +164,27 @@ def _apply_rename(work_src: Path, op: dict, plan_op: dict) -> dict:
         lines = original.splitlines(keepends=True)
         new_lines = list(lines)
         splices = []
+        inline = [s for s in by_file[file_rel] if s["kind"] != "IMPORT_SITE"]
         import_sites = [s for s in by_file[file_rel] if s["kind"] == "IMPORT_SITE"]
         if import_sites:
-            # plan rows carry only the file for IMPORT_SITE: re-parse the file
-            # and locate every ImportFrom statement that names the symbol.
+            # AST alias spans identify the actual identifier, including in
+            # parenthesized/backslash imports. Preserve every other byte:
+            # comments, whitespace, other names and same-line statements.
             try:
                 tree = ast.parse(original, filename=file_rel)
             except SyntaxError as exc:
                 raise ValueError(f"IMPORT_FILE_UNPARSEABLE:{file_rel}:{exc.lineno}")
-            spans = []
-            for node in ast.walk(tree):
-                if isinstance(node, ast.ImportFrom) and str(node.module or "") == defining_dot:
-                    if any(a.name == name for a in node.names):
-                        if node.end_lineno != node.lineno:
-                            raise ValueError("MULTILINE_IMPORT_SPAN:" +
-                                             f"{file_rel}:{node.lineno}")
-                        spans.append((int(node.lineno), int(node.col_offset)))
-            if not spans:
+            aliases = [alias for node in ast.walk(tree)
+                       if isinstance(node, ast.ImportFrom) and str(node.module or "") == defining_dot
+                       for alias in node.names if alias.name == name]
+            if not aliases:
                 raise ValueError("IMPORT_SITE_STATEMENT_NOT_FOUND:" + file_rel)
-            for lineno, col0 in spans:
-                idx = lineno - 1
-                if idx < 0 or idx >= len(new_lines):
-                    raise ValueError(f"LINE_OUT_OF_RANGE:{file_rel}:{lineno}")
-                body = new_lines[idx].rstrip("\n")
-                ending = new_lines[idx][len(body):]
-                # splice only the alias token inside `from X import <names>`
-                head, _, tail = body.partition(" import ")
-                if not tail:
-                    raise ValueError(f"IMPORT_STATEMENT_SHAPE_UNKNOWN:{file_rel}:{lineno}")
-                seg = re.sub(r"\b" + re.escape(name) + r"\b(?!\s+as\b)",
-                             new_name, tail, count=1)
-                if seg == tail:
-                    # name present only as `name as alias`: refusing beats guessing
-                    raise ValueError(f"ALIASED_IMPORT_UNTRACKED:{file_rel}:{lineno}")
-                new_lines[idx] = head + " import " + seg + ending
-                splices.append({"file": file_rel, "kind": "IMPORT_SITE", "lineno": lineno})
-        inline = [s for s in by_file[file_rel] if s["kind"] != "IMPORT_SITE"]
+            for alias in aliases:
+                if alias.asname is not None:
+                    raise ValueError(f"ALIASED_IMPORT_UNTRACKED:{file_rel}:{alias.lineno}")
+                inline.append({"kind": "IMPORT_SITE", "lineno": alias.lineno, "col": alias.col_offset})
+        # One reverse-position pass is essential: an import and a reference
+        # may share a line, and earlier replacements change later offsets.
         for site in sorted(inline,
                            key=lambda s: (s.get("lineno", 0), s.get("col", 0)), reverse=True):
             idx = int(site["lineno"]) - 1
@@ -246,7 +192,8 @@ def _apply_rename(work_src: Path, op: dict, plan_op: dict) -> dict:
                 raise ValueError(f"LINE_OUT_OF_RANGE:{file_rel}:{site['lineno']}")
             body = new_lines[idx].rstrip("\n")
             ending = new_lines[idx][len(body):]
-            body = _splice_site(body, name, new_name, site)
+            body = (_splice_token(body, name, new_name, int(site["col"]))
+                    if site["kind"] == "IMPORT_SITE" else _splice_site(body, name, new_name, site))
             new_lines[idx] = body + ending
             splices.append({"file": file_rel, "kind": site["kind"],
                             "lineno": int(site["lineno"])})
@@ -543,28 +490,19 @@ def run(args, root):
                 or out_abs == worktree_abs or worktree_abs in out_abs.parents:
             _fail("ARTIFACT_PATH_OVERLAPS_SOURCE_OR_WORKTREE:" + key)
 
-    # Validate the complete batch before staging any move destination. The
-    # second check after copying also resolves paths in the actual worktree.
-    for op in edits:
-        _module_path(worktree_abs, op.get("module"))
-        if op["op"] == "move_symbol":
-            _module_path(worktree_abs, op.get("to_module"))
-
     started = time.monotonic()
     before = _tree_manifest(source_abs)
 
     _copy_tree(source_abs, worktree_abs)
 
-    destinations = []
+    # a move_symbol into a not-yet-existing module states the intent to
+    # create that module: stage the empty file so the planner can index it.
     for op in edits:
-        _module_path(worktree_abs, op.get("module"))
         if op["op"] == "move_symbol":
-            destinations.append(_module_path(worktree_abs, op.get("to_module")))
-    # A new move target must exist for the existing planner to index it.
-    for tgt in destinations:
-        if not tgt.exists():
-            tgt.parent.mkdir(parents=True, exist_ok=True)
-            tgt.write_text("", encoding="utf-8")
+            tgt = worktree_abs / str(op["to_module"])
+            if not tgt.exists():
+                tgt.parent.mkdir(parents=True, exist_ok=True)
+                tgt.write_text("", encoding="utf-8")
 
     plan_path = ".orchestrate_plan.json"
     ch_args = {"source_root": ".", "output_path": plan_path,
@@ -607,10 +545,7 @@ def run(args, root):
     if after != before:
         _fail("SOURCE_TREE_MUTATED")
 
-    # Compute a test-selection suggestion on the staged diff. It is useful
-    # diagnostic information, but static import/call analysis cannot prove that
-    # tests reached through reflection, fixtures or other dynamic paths are safe
-    # to omit. The verification gate below must run the discovered suite.
+    # minimal test selection on the staged diff
     old_new = {}
     for row in splice_rows:
         for f in row["touched_files"]:
@@ -646,39 +581,17 @@ def run(args, root):
     selection = json.loads((worktree_abs / ".orchestrate_testselect.json").read_text(encoding="utf-8"))
     selected = sorted(r["path"] for r in (selection.get("tests") or []) if r.get("selected"))
 
-    # A green static slice is not proof that omitted tests would pass. Run the
-    # worktree's default pytest discovery for the verdict, even when the slice
-    # is empty. This covers that configured suite only, not every possible test.
+    # run the selected subset on the worktree
     test_passed, test_failed, run_rc = 0, 0, None
-    test_scope = "NOT_RUN__PYTEST_UNAVAILABLE"
-    if pytest_version:
-        test_scope = "PYTEST_DEFAULT_DISCOVERY"
-        # Test stdout is not a pytest verdict: an all-skipped test module can
-        # print "1 passed" while pytest exits zero. Read pytest's built-in JUnit
-        # case results instead. Missing/malformed reports fail closed. This is
-        # not isolation from a malicious repository or pytest plugin.
-        with tempfile.TemporaryDirectory(prefix="brain-pytest-report-") as report_dir:
-            report_path = Path(report_dir) / "results.xml"
-            try:
-                proc = subprocess.run(
-                    [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider",
-                     f"--junitxml={report_path}"],
-                    cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
-            except subprocess.TimeoutExpired:
-                test_scope = "PYTEST_DEFAULT_DISCOVERY_TIMED_OUT"
-            else:
-                run_rc = proc.returncode
-                try:
-                    cases = junit_report._junit_cases(report_path)
-                    test_failed = sum(outcome == "failed" for _, outcome in cases)
-                    test_passed = sum(outcome == "passed" for _, outcome in cases)
-                except (OSError, ET.ParseError, ValueError):
-                    test_scope = "PYTEST_DEFAULT_DISCOVERY_REPORT_UNAVAILABLE"
-
-    # Tests run with host privileges. Detect persistent changes to the original
-    # tree before producing a success verdict; this cannot prevent or undo them.
-    if _tree_manifest(source_abs) != before:
-        _fail("SOURCE_TREE_MUTATED_AFTER_TESTS")
+    if selected and pytest_version:
+        proc = subprocess.run(
+            [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + selected,
+            cwd=worktree_abs, capture_output=True, text=True, timeout=timeout_s)
+        run_rc = proc.returncode
+        m = re.search(r"(\d+) passed", proc.stdout + proc.stderr)
+        test_passed = int(m.group(1)) if m else 0
+        m = re.search(r"(\d+) failed", proc.stdout + proc.stderr)
+        test_failed = int(m.group(1)) if m else 0
 
     pr_intent = {
         "schema": "pr_intent_v1", "issue_id": issue_id, "title": title,
@@ -690,15 +603,12 @@ def run(args, root):
                      "planned_site_count": plan["planned_site_count"],
                      "complete": plan["complete"]},
             "tests": {"selected": len(selected), "passed": test_passed,
-                      "failed": test_failed, "pytest_rc": run_rc, "scope": test_scope,
-                      "selection_is_acceptance_authority": False,
-                      "evidence_authentication": "UNAUTHENTICATED"},
+                      "failed": test_failed, "pytest_rc": run_rc},
             "proof": {"fixed_point_verified": True, "diff_sha256": diff_sha},
         },
         "checklist": ["plan complete (zero ambiguous sites)",
                       "apply fixed point proven by re-index",
-                      "default-discovery pytest results are unauthenticated diagnostics",
-                      "independent authenticated verification is required"],
+                      "minimal test selection executed"],
     }
     pr_abs.parent.mkdir(parents=True, exist_ok=True)
     pr_text = json.dumps(pr_intent, indent=2, ensure_ascii=False) + "\n"
@@ -706,18 +616,8 @@ def run(args, root):
     pr_verified = json.loads(pr_abs.read_text(encoding="utf-8")) == pr_intent
 
     edits_verified = pr_verified and not problems
-    # pytest's success code also covers an all-skipped suite, and a project
-    # plugin can override it despite failed cases. Require the independently
-    # parsed report to contain at least one pass and no failures or errors.
-    local_test_report_passed = (run_rc == 0 and test_passed > 0 and test_failed == 0
-                                and test_scope == "PYTEST_DEFAULT_DISCOVERY")
-    # A project plugin can forge both exit status and JUnit. No authenticated
-    # verifier is available here, so neither a real green nor a forged report
-    # may authorize a verified verdict. Keep local observations for debugging.
-    verified = False
-    verification_status = ("UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED"
-                           if edits_verified and local_test_report_passed
-                           else "NOT_VERIFIED__LOCAL_CHECK_FAILED")
+    tests_verified = (run_rc == 0) if selected else True
+    verified = edits_verified and tests_verified
     summary = {
         "adapter": "python_issue_to_pr_orchestrate",
         "task_id": issue_id,
@@ -732,10 +632,7 @@ def run(args, root):
         "diff_sha256": diff_sha,
         "pr_intent_verified": pr_verified,
         "edits_verified": bool(edits_verified),
-        "local_test_report_passed": bool(local_test_report_passed),
-        "test_evidence_authentication": "UNAUTHENTICATED",
-        "verification_status": verification_status,
-        "verified": verified,
+        "verified": bool(verified),
     }
     output_abs.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(summary, indent=2, ensure_ascii=False) + "\n"

@@ -21,21 +21,25 @@ from canonical.runtime import zero_ambient_namespace_launcher_v1 as ns
 SCHEMA = "PROJECT_BRAIN_ROOT3_READ_ONLY_LOCAL_FILE_QUERY_EXECUTOR_V1"
 EFFECT_CLASS = "READ_ONLY_DECLARED_QUERY"
 
+# Site keys follow the CURRENT verified source lines (V2 registry lineage);
+# semantic profiles are unchanged from the original 18-site verification.
+# The sqlite CLI profile was discharged on #6300: the capability now queries
+# through the same libsqlite3 via the stdlib sqlite3 module in-process, so no
+# child-process site remains for it.
 SUPPORTED = {
-    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 32, "subprocess.run"): "TAR_LIST",
+    ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 53, "subprocess.run"): "TAR_LIST",
     ("canonical/runtime/bound_capabilities/jq_query.py", 41, "subprocess.run"): "JQ",
     ("canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py", 44, "subprocess.run"): "TESSERACT_STDOUT",
-    ("canonical/runtime/bound_capabilities/sqlite_verify_cli.py", 66, "subprocess.run"): "SQLITE_READ",
-    ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 21, "subprocess.run"): "YQ",
+    ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 23, "subprocess.run"): "YQ",
 }
 
 JQ_FORBIDDEN = (
     r"(?<![A-Za-z0-9_.])import\s+",
     r"(?<![A-Za-z0-9_.])include\s+",
     r"(?<![A-Za-z0-9_.])module\s+",
-    r"(?<![A-Za-z0-9_.])input\b",
+    r"(?<![A-Za-z0-9_.])input\s*\(",
     r"(?<![A-Za-z0-9_.])inputs\b",
-    r"(?<![A-Za-z0-9_.])env\b",
+    r"(?<![A-Za-z0-9_])env\.",
     r"\$ENV\b",
 )
 
@@ -47,11 +51,10 @@ if spec.get("cwd"):
 try:
     p=subprocess.run(
         spec["argv"],
-        stdin=None,  # The namespace launcher supplies DEVNULL as its own stdin.
+        stdin=None,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         timeout=spec["timeout"],
-        env={} if spec.get("empty_env") else None,
         check=False,
     )
     out={
@@ -143,7 +146,7 @@ def _validate_common(context: Mapping[str, Any]) -> tuple[list[str], dict[str, A
     kwargs = dict(context.get("kwargs") or {})
     if kwargs.get("shell", False):
         raise ReadOnlyQueryDenied("SHELL_FORBIDDEN")
-    if kwargs.get("env") is not None and not (profile == "JQ" and type(kwargs["env"]) is dict and not kwargs["env"]):
+    if kwargs.get("env") is not None:
         raise ReadOnlyQueryDenied("CUSTOM_ENV_FORBIDDEN")
     if kwargs.get("input") is not None or kwargs.get("stdin") not in (None, subprocess.DEVNULL):
         raise ReadOnlyQueryDenied("STDIN_OR_INPUT_FORBIDDEN")
@@ -240,8 +243,7 @@ def _prepare(context: Mapping[str, Any]) -> dict[str, Any]:
         raise ReadOnlyQueryDenied("PROFILE_UNREACHABLE")
 
     timeout = _timeout(kwargs)
-    spec = {"argv": inner, "cwd": inner_cwd, "timeout": timeout,
-            "empty_env": profile == "JQ" and kwargs.get("env") == {}}
+    spec = {"argv": inner, "cwd": inner_cwd, "timeout": timeout}
     encoded = base64.urlsafe_b64encode(
         json.dumps(spec, sort_keys=True, separators=(",", ":")).encode("utf-8")
     ).decode("ascii")
@@ -273,7 +275,7 @@ def _run_confined_with_popen(policy: Mapping[str, Any], popen_impl: Callable[...
     p = ns.canonical_policy(policy)
     lim = p["limits"]
     required_names = ["unshare", "mount", "chroot", "setpriv", "ip", "bash", "env"]
-    resolved = {name: shutil.which(name) for name in required_names}
+    resolved = {name: ns.resolve_system_binary(name) for name in required_names}
     missing = [name for name, path in resolved.items() if not path]
     if missing:
         raise ReadOnlyQueryDenied("HOST_PRIMITIVE_MISSING:" + ",".join(missing))

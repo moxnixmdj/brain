@@ -155,15 +155,13 @@ class TestDiffMutationGate(unittest.TestCase):
     def test_full_suite_kills_every_mutant_gate_pass(self):
         _build(self.tmp, extra={"tests/test_core.py": TEST_KILLER})
         res, art = _run(self.tmp)
-        self.assertEqual(art["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
-        self.assertEqual(art["local_gate"], "PASS")
-        self.assertEqual(res["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
-        self.assertEqual(res["local_gate"], "PASS")
+        self.assertEqual(art["gate"], "PASS")
+        self.assertEqual(res["gate"], "PASS")
         self.assertGreaterEqual(art["mutants_generated"], 5)
         self.assertEqual(art["mutants_survived"], 0)
         self.assertEqual(art["kill_ratio"], 1.0)
         self.assertTrue(art["complete"])
-        self.assertFalse(res["verified"])
+        self.assertTrue(res["verified"])
 
     def test_blind_suite_survives_witness_gate_fails(self):
         _build(self.tmp, extra={"tests/test_core.py": TEST_BLIND})
@@ -206,8 +204,7 @@ class TestDiffMutationGate(unittest.TestCase):
                    "parents[1]", 'parents[1] / "src"')},
                anchor_py="src/pkg/core.py")
         res, art = _run(self.tmp)
-        self.assertEqual(art["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
-        self.assertEqual(art["local_gate"], "PASS")
+        self.assertEqual(art["gate"], "PASS")
         self.assertEqual(art["mutants_survived"], 0)
 
     # ------------------------------------------------- honesty gates

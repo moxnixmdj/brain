@@ -320,27 +320,6 @@ def _is_record_collection(data):
     return False
 
 
-# The world's file list does not change inside one process, and `_world_path_for` is asked for
-# the same kind once per capability.  Without this cache every ask re-SORTED the whole index and
-# re-matched every entry against the kind's suffixes: measured on this repository (15,181 files,
-# 9,458 of them JSON), `test_every_capability_is_reachable_from_one_sentence_by_prose_or_by_name`
-# ran for more than 90 seconds and died inside this list comprehension, so the compiler suite --
-# the only instrument that can see a routing regression -- could not finish at all.  The cache is
-# keyed on (root, kind), and the index it reads is already cached and rebuilt per process.
-_ORDERED_CACHE: dict[tuple[str, str], tuple[str, ...]] = {}
-
-
-def _ordered_for_kind(root, key, suffixes, substrings):
-    cache_key = (str(root), str(key))
-    cached = _ORDERED_CACHE.get(cache_key)
-    if cached is None:
-        from canonical.runtime import world_probe_v1 as WP
-        cached = tuple(rel for rel in sorted(WP._index(root))
-                       if WP._matches_kind(rel, suffixes, substrings))
-        _ORDERED_CACHE[cache_key] = cached
-    return cached
-
-
 def _first_with_records(rel_paths, root):
     """The first candidate that actually holds records, within a bounded scan.
 
@@ -365,29 +344,7 @@ def _first_with_records(rel_paths, root):
     return None
 
 
-def _first_archive_manifest(rel_paths, root):
-    """Find a usable archive manifest using the existing acceptance contract.
-
-    A JSON document containing some unrelated nested records is not an archive
-    manifest. This is only a world-discovered candidate, not proof that an
-    unnamed file was the user's intended input.
-    """
-    from canonical.runtime.raw_goal_archive_acceptance_v1 import (
-        ArchiveReinspectionError, _has_symlink_component, manifest_members,
-    )
-    root = Path(root).resolve()
-    for rel in rel_paths[:_STRUCTURAL_SCAN_LIMIT]:
-        path = root / str(rel)
-        try:
-            if path.stat().st_size > _STRUCTURAL_SCAN_MAX_BYTES:
-                continue
-            members = manifest_members(root, str(rel))
-            if all((root / member).is_file() and not _has_symlink_component(root, member)
-                   for member in members):
-                return rel
-        except (OSError, ArchiveReinspectionError):
-            continue
-    return None
+_WORLD_KIND_HIT_CACHE: dict[tuple[int, str, str], str | None] = {}
 
 
 def _world_path_for(name, cid, root):
@@ -408,27 +365,33 @@ def _world_path_for(name, cid, root):
     the pick.
     """
     from canonical.runtime import world_probe_v1 as WP
-    if (str(name) == "manifest_path" and str(cid) in {
-            "archive.tar_gz.create_from_manifest", "archive.verify.tar_gz.gnu"}):
-        # Unlike the general recursive-record heuristic, this checks the exact
-        # manifest schema and referenced source files the archive acceptance
-        # verifier needs. If no candidate qualifies, do not substitute JSON.
-        suffixes, substrings = WP._FILE_KINDS["manifest.json"]
-        ordered = _ordered_for_kind(root, "manifest.json", suffixes, substrings)
-        return _first_archive_manifest(ordered, root)
+    idx = WP._index(root)
+    root_s = str(root)
     # The placeholder's own name is the stronger signal: `manifest_path`
     # must never be satisfied by the .tar.gz the capability also mentions.
     for keys in (WP.kind_keys_for(str(name)), WP.kind_keys_for(str(cid))):
         for key in sorted(keys):
-            suffixes, substrings = WP._FILE_KINDS[key]
-            ordered = _ordered_for_kind(root, key, suffixes, substrings)
-            if not ordered:
+            ck = (id(idx), root_s, key)
+            if ck in _WORLD_KIND_HIT_CACHE:
+                cached = _WORLD_KIND_HIT_CACHE[ck]
+                if cached is not None:
+                    return cached
                 continue
+            ordered = WP._matching_files(root, key)
+            if not ordered:
+                if len(_WORLD_KIND_HIT_CACHE) > 1024:
+                    _WORLD_KIND_HIT_CACHE.clear()
+                _WORLD_KIND_HIT_CACHE[ck] = None
+                continue
+            picked = ordered[0]
             if key in _STRUCTURED_KINDS:
                 with_records = _first_with_records(ordered, root)
                 if with_records is not None:
-                    return with_records
-            return ordered[0]
+                    picked = with_records
+            if len(_WORLD_KIND_HIT_CACHE) > 1024:
+                _WORLD_KIND_HIT_CACHE.clear()
+            _WORLD_KIND_HIT_CACHE[ck] = picked
+            return picked
     return None
 
 

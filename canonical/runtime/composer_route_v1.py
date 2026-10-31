@@ -82,88 +82,6 @@ _ADAPTER_DIRECTIVES = frozenset({"output_may_be_consumed",
                                  "exit_status_is_the_answer"})
 
 
-# THE WORDS THAT NAME WHERE THE ANSWER GOES ARE NOT EVIDENCE ABOUT WHAT THE TASK IS.
-# `score` counts a hit on any word the capability knows, and every request in this
-# repository ends "and report it to <O>".  A capability that lists `report` among its
-# keywords therefore matches EVERY such sentence, and when nothing else scores above zero
-# it wins -- measured on the 43-act probe: "Fuzz the function add in calc.py ...", "Build a
-# wheel for the project ...", "Add logging and metrics to calc.py ...", "Inline the function
-# sub ..." and "Add the dependency requests ..." were each routed to
-# document.convert.markdown_pdf.pandoc_weasyprint, on the single word `report`, and five of
-# those six reached the route with a PASS.  The machine converted a document nobody asked
-# for.  This is the same distinction goal_compiler.GENERIC_MATCH_TOKENS already draws for the
-# front compiler; it is repeated here because this module scores on its own vocabulary and
-# never sees that set.  Only artefact and medium words are listed: an act verb such as
-# `convert`, `write` or `generate` IS the request, so dropping a hit on it would drop the
-# request itself -- "Convert a.md to b.pdf" hits only `convert` and must still route.
-_NO_EVIDENCE_WORDS = frozenset("""
-report reports receipt artifact artefacts result results summary summaries findings
-issue issues log logs record records output outputs document documents repository repo
-directory directorys folder folders file files json xml txt markdown md pdf html
-""".split())
-
-
-# A REQUEST VERB IS NOT AN IDENTIFICATION.  "Build ...", "Add ...", "Write ..." open half the
-# sentences in this repository; a capability that lists one of those words has not thereby
-# said it performs THIS request.  Measured on the remaining wrong-tool routes of the 43-act
-# probe after the artefact-word rule: "Add logging and metrics to calc.py" and "Add the
-# dependency requests ..." both reached finance.saccr.credit.addon.v1 on the single word
-# `compute`, and "Build a wheel for the project ..." reached
-# pypi.provenance.audit_live_artifact.v1 on the single word `build` -- each of them a PASS on
-# an act nobody asked for.  The list is the same one the probe's ownership oracle already
-# uses to decide whether an answering capability claims the act, so the two cannot drift.
-_REQUEST_VERBS = frozenset("""
-write create make add build run check find show list get set use apply ensure verify
-validate update remove delete report measure produce generate save read print convert
-extract compute process change fix scan audit review inspect debug improve design
-refactor document
-""".split())
-
-# ...and an act NOUN that nothing else in the sentence supports is not one either: "the
-# function add" names the SUBJECT of the request, so a capability that hit `function` has
-# been told what the sentence is about, not what to do with it.
-# An identifier or a version stamp is a NAME, not an act: `v1`, `py`, `auto`, `brain`.
-# Measured: "run <unknown-capability-id>" was admitted to python.test.measurement.objective
-# on the two "content" words `run` and `v1`.
-_IDENTIFIER_WORDS = frozenset("py auto brain canonical runtime tmp v1 v2 v3 v4 v5".split())
-
-_MEDIUM_WORDS = frozenset("""
-function functions method methods class classes module modules package packages library
-project python program code source file files repository repo directory folder data network
-call calls test tests suite suites line lines block blocks svn git wheel
-""".split())
-
-
-def _head_verb(goal: str) -> str:
-    """The request verb: the first content word the sentence actually opens with."""
-    try:
-        from canonical.runtime import goal_front_compiler_v1 as _front
-        prose = _front.prose_only(goal)
-    except Exception:  # noqa: BLE001 - no front compiler, read the goal itself
-        prose = str(goal or "")
-    for word in _WORD.findall(str(prose or "").lower()):
-        if len(word) > 1 and word not in _STOP:
-            return word
-    return ""
-
-
-def _claims(word: str, token: str, extra_words: Mapping[str, set[str]] | None) -> bool:
-    """Does this token claim `word`, allowing for inflection (inline/inlining)? """
-    if not word:
-        return False
-    known = token_words(token) | set((extra_words or {}).get(token) or ())
-    return any(k == word or (len(word) > 3 and (k.startswith(word) or word.startswith(k)))
-               for k in known)
-
-
-def _matched_words(goal_words: set[str], token: str,
-                   extra_words: Mapping[str, set[str]] | None = None) -> set[str]:
-    """The goal's own words that this token hit."""
-    known = token_words(token) | set((extra_words or {}).get(token) or ())
-    return set(goal_words) & known
-
-
-
 def _fully_bound_contract_tokens(goal: str, g: Mapping[str, Any],
                                  reg: Mapping[str, Any]) -> frozenset[str]:
     """Tokens provided by a capability every declared input of which the goal fills.
@@ -328,14 +246,6 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
     # same test PR #6135 established as DECLARED_CONTRACT_FULLY_BOUND.
     scored = [(score(gw, tok, extra), tok) for tok in provided]
     scored = [(s0, t) for s0, t in scored if s0 > 0]
-    # A hit on an artefact word ("report", "output", "file") says where the answer goes,
-    # not what the task is: a candidate whose ONLY hits are those words has not been
-    # identified by the sentence at all.  It is kept when the contract test below binds it
-    # (the sentence fills its declared inputs, which is evidence the words are not), and
-    # dropped otherwise -- see _NO_EVIDENCE_WORDS.  Measured on the 43-act probe: five
-    # wrong-tool routes to pandoc, 0 correct routes lost.
-
-
     bound = _fully_bound_contract_tokens(goal, g, reg)
     # The last two terms are the tiebreak, and their ORDER is the fix.  A
     # capability that contradicts the payload the sentence states is demoted
@@ -346,65 +256,6 @@ def candidate_tokens(goal: str, g: Mapping[str, Any] | None = None) -> list[str]
                                   _contradicts_the_stated_payload(goal, pair[1]),
                                   pair[1]))
     return [t for _, t in scored]
-
-
-def is_identified(goal: str, token: str,
-                  g: Mapping[str, Any] | None = None,
-                  reg: Mapping[str, Any] | None = None) -> bool:
-    """Has the SENTENCE identified this token as the act it asks for?
-
-    Not "did the words overlap".  Three things a hit on a word does not prove, each measured
-    on the 43-act probe:
-
-    * an ARTEFACT word ("report", "output") says where the answer goes, not what the task is;
-    * a MEDIUM word ("function", "project") says what the task is about, not what to do with it;
-    * a REQUEST VERB ("write", "add", "build") opens half the sentences in this repository.
-
-    So a token is identified when the sentence FILLS ITS DECLARED CONTRACT, or -- for a
-    sentence whose own verb names a specific act ("Fuzz ...", "Inline ...", "Bisect ...") --
-    when the token claims that verb, or -- for a generic request verb -- when at least two of
-    the sentence's own content words support it.
-
-    This is the admission side of the same distinction the front compiler draws with
-    GENERIC_MATCH_TOKENS, and it is deliberately NOT applied by shrinking the candidate list:
-    the list is what the composER is allowed to TRY, and removing entries from it promoted
-    unrelated zero-input capabilities into the top window -- measured, that broke
-    "run <unknown-capability-id>", which must fail closed as a compilation gap and instead
-    composed a step that raised.  The law belongs where the chain is ACCEPTED.
-    """
-    if reg is None:
-        from canonical.runtime import capability_composer_v1 as _cc
-        g = g if g is not None else _cc.graph()
-        reg = _cc.load_registry()
-    from canonical.runtime import goal_front_compiler_v1 as _front
-    gw = words(_front.prose_only(goal))
-    extra: dict[str, set[str]] = {}
-    for cid, node in (g or {}).items():
-        entry = (reg or {}).get(cid) or {}
-        words_for = set(words(cid))
-        for kw in (entry.get("keywords") or []):
-            words_for |= words(str(kw))
-        for tok in (node.get("provides") or []):
-            extra.setdefault(str(tok), set()).update(words_for)
-    if token in _fully_bound_contract_tokens(goal, g, reg):
-        return True
-    matched = _matched_words(gw, token, extra)
-    if not matched:
-        return False
-    head = _head_verb(goal)
-    if head and head not in _REQUEST_VERBS:
-        # The sentence asks for a NAMED act.  A token that never says that word has not been
-        # identified by it, however many other words it matched.
-        return _claims(head, token, extra)
-    # A generic request verb identifies nothing, so at least one of the sentences's own
-    # content words has to survive as evidence -- an artefact word, a medium word, the
-    # request verb itself and a version stamp do not.
-    evidence = {w for w in matched
-                if w not in _NO_EVIDENCE_WORDS and w not in _MEDIUM_WORDS
-                and w not in _REQUEST_VERBS and w not in _IDENTIFIER_WORDS
-                and not any(ch.isdigit() for ch in w)}
-    return bool(evidence)
-
 
 
 def route(goal: str, seed: Sequence[str] | None = None,
@@ -456,16 +307,10 @@ def route(goal: str, seed: Sequence[str] | None = None,
                             "status": "PASS__COMPOSER_ROUTE_FOUND",
                             "authority": "TYPE_LEVEL_COMPOSITION_REACHABLE"}
 
-    _reg_for_law = composer.load_registry()
     for token in candidate_tokens(goal, g)[:max_candidates]:
-        # A reachable chain is not an answer: `shell.command.run` is reachable from any
-        # sentence containing the word "run", which is how "run <unknown-capability-id>"
-        # composed a step instead of failing closed as a compilation gap.  The sentence has
-        # to have IDENTIFIED the token before its chain may be accepted.
-        identified = is_identified(goal, token, g, _reg_for_law)
-        chain = composer.plan(have, token, g) if identified else None
+        chain = composer.plan(have, token, g)
         tried.append({"token": token, "reachable": chain is not None,
-                      "chain": chain, "identified": identified})
+                      "chain": chain})
         if chain:
             return {"schema": SCHEMA, "pass": True, "goal": goal,
                     "token": token, "chain": list(chain), "tried": tried,
@@ -584,7 +429,16 @@ _NUM = re.compile(r"-?\d+(?:\.\d+)?")
 # that already found its paths can change.  The same idiom this file already uses
 # for _CONTENT_FALLBACK: a fallback that is never reached first cannot alter a
 # sentence that already worked.
-_DIRPATH = re.compile(r"\b(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_-]+(?![.\w-])")
+# `_EXT` already consumes a leading slash, because "/" is inside its character
+# class, so an absolute FILE survives extraction intact.  This class deliberately
+# excludes "/" -- a run of "segment/" -- so the same absolute DIRECTORY came out
+# missing its leading slash: "/home/user/brain/canonical/x" was read as
+# "home/user/brain/canonical/x", which is a repository-relative path that points
+# nowhere on disk.  The command then ran with cwd at the repository root and
+# reported "No such file or directory" for a directory that exists.  Restoring
+# the one character `_EXT` already keeps makes the two agree, and it is the
+# token the sentence actually said.
+_DIRPATH = re.compile(r"/?\b(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_-]+(?![.\w-])")
 
 
 def extract_paths(text: str) -> list[str]:
@@ -596,7 +450,6 @@ def extract_paths(text: str) -> list[str]:
     library looks is how a machine decides a goal named no input.
     """
     body = str(text or "")
-    original = body
     found: list[str] = []
     seen: set[str] = set()
 
@@ -604,33 +457,6 @@ def extract_paths(text: str) -> list[str]:
         if candidate and candidate not in seen:
             found.append(candidate)
             seen.add(candidate)
-
-    def _add_in_sentence_order(candidate: str) -> None:
-        """Add a path where the sentence puts it, not where the scanner reaches it.
-
-        ``found`` is in sentence order for everything ``_EXT`` reads, and ORDER IS MEANING:
-        PATH_OUTPUT binds ``paths[-1]`` and a command's first operand is its source.  A
-        DIRECTORY token is found by a later pass, so appending it moved it to the end of the
-        sentence: measured on "Measure the line coverage of the tests in <abs>/repo and report
-        it to <abs>/out/cov.json", the repository came out LAST, PATH_OUTPUT bound the
-        repository, source_root bound the report, and the coverage capability was handed a
-        directory where it wanted to write.  The sentence states the repository first, so the
-        list says so too.
-        """
-        if not candidate or candidate in seen:
-            return
-        at = original.find(candidate)
-        if at < 0:
-            _add(candidate)
-            return
-        index = len(found)
-        for position, existing in enumerate(found):
-            spot = original.find(str(existing))
-            if spot < 0 or spot > at:
-                index = position
-                break
-        found.insert(index, candidate)
-        seen.add(candidate)
 
     # A quoted name is read whole first, and then removed from the sentence, so
     # its fragments cannot be picked up as separate paths below.  Only a quoted
@@ -664,17 +490,7 @@ def extract_paths(text: str) -> list[str]:
     matches = list(_EXT.finditer(body))
     base = len(found)
     for match in matches:
-        candidate = match.group(0)
-        # An ABSOLUTE path keeps its separator.  The pattern cannot match a leading "/", so
-        # "/home/u/x.json" was read as "home/u/x.json" -- and every layer that then joins a
-        # path onto the repository root wrote a mirror of the absolute path INSIDE the
-        # repository: measured while binding the analyser capabilities, a report stated at
-        # /home/user/brain/tmp/tc/fmt.json was written to
-        # /home/user/brain/home/user/brain/tmp/tc/fmt.json.  The path the sentence states is
-        # the path that is used, or the request is refused.
-        if match.start() > 0 and body[match.start() - 1] == "/":
-            candidate = "/" + candidate
-        found.append(candidate)
+        found.append(match.group(0))
     seen.update(found)
     # A name with spaces that no word introduces -- "sort <dir>/my notes.txt".
     # Taking any run of words would invent paths out of prose, so the candidate
@@ -725,12 +541,6 @@ def extract_paths(text: str) -> list[str]:
         body = body.replace(str(stated), " ", 1)
     for m in _DIRPATH.finditer(body):
         token = m.group(0)
-        # An ABSOLUTE directory keeps its separator, for the reason the file scanner above
-        # already keeps it: `_DIRPATH` cannot match a leading "/", so "/home/u/x/repo" was read
-        # as "home/u/x/repo" and every layer that joins a path onto the repository root wrote a
-        # mirror of the absolute path INSIDE the repository.
-        if m.start() > 0 and body[m.start() - 1] == "/":
-            token = "/" + token
         if token in seen:
             continue
         # The parent of a path already found is not a second path.  Appending it
@@ -742,7 +552,7 @@ def extract_paths(text: str) -> list[str]:
             # The last arm is a name with spaces: "canonical/x/my" is the head of
             # "canonical/x/my backup.txt", not a directory holding it.
             continue
-        _add_in_sentence_order(token)
+        _add(token)
     return found
 
 
@@ -882,6 +692,21 @@ _ARGV = [
 ]
 
 
+def _known_programs() -> frozenset[str]:
+    """Every program the acceptance layer is willing to judge.
+
+    Not a new list.  ``raw_goal_trace_acceptance_v1`` owns it, split between the
+    commands whose re-run proves a read (``_READ_ONLY_COMMANDS``) and the ones
+    whose postcondition proves a write (``_MUTATING_POSTCONDITIONS``).  Writing
+    it here as well would be a list edited once, and a command whose name is in
+    one table but not the other would then be judged by nothing.
+    """
+    from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
+
+    return frozenset(_accept._READ_ONLY_COMMANDS) | frozenset(
+        _accept._MUTATING_POSTCONDITIONS)
+
+
 def extract_argv(text: str) -> list[str] | None:
     """The command line the sentence states, token by token, or None.
 
@@ -923,6 +748,7 @@ def extract_argv(text: str) -> list[str] | None:
                 return None
             if parts and all(isinstance(part, str) and part for part in parts):
                 return parts
+    known = _known_programs()
     for pat in _ARGV:
         m = pat.search(sentence)
         if not m:
@@ -936,8 +762,33 @@ def extract_argv(text: str) -> list[str] | None:
             # An unbalanced quote is a malformed command line, not something to
             # repair by guessing at the missing half.
             return None
-        if parts and all(isinstance(part, str) and part for part in parts):
-            return parts
+        if not (parts and all(isinstance(part, str) and part for part in parts)):
+            continue
+        # AN UNQUOTED command line is only a command line if its first token is a
+        # program.  The pattern makes the "shell|cli|terminal" role word
+        # optional, so it also matches the plain English noun -- and real
+        # sentences use that noun.  Measured 2026-10-27 on
+        # "Repair the python source root D so the test command passes writing the
+        # report to D_out/r.json":
+        #
+        #   capability_id  shell.command.run
+        #   argv           ['passes','writing','the','report','to','D_out/r.json']
+        #   adapter_raised FileNotFoundError:[Errno 2] No such file or directory:
+        #                  'passes'
+        #
+        # The machine tried to EXECUTE THE REST OF THE SENTENCE AS A PROGRAM.  The
+        # quoted form cannot do this -- the quotes are the sentence saying where
+        # the command ends, which is why it wins above and keeps winning here.
+        # Only the unquoted inference needs the proof, and the proof already
+        # exists: _prose_argv refuses any program outside these same tables, and
+        # the adapter itself raises TEST_ARGS_WITHOUT_A_PROGRAM.  The check was
+        # simply absent at this site, so the stricter fallthrough was never
+        # reached.  Refuse here rather than return a guess: a slot filled from
+        # something the sentence does not contain is an invention, and an
+        # invention executes.
+        if parts[0] not in known:
+            continue
+        return parts
     # No command line was QUOTED.  The request may still state one in ordinary
     # English -- "Copy the file a to b" -- and that is the shape almost every
     # real request takes.  This is a fallthrough, not a replacement: a quoted
@@ -1042,8 +893,48 @@ _INSIDE_THE_FILE_NOUNS = (
     r"characters|letter|letters|header|headers|footer|footers|space|spaces|"
     r"comment|comments|blank|blanks|row|rows|column|columns|field|fields|"
     r"entry|entries|tag|tags|number|numbers|indentation|prefix|suffix|"
-    r"duplicate|duplicates|repeat|repeats|repeated"
+    r"duplicate|duplicates|repeat|repeats|repeated|"
+    # CODE nouns.  The list above was written for text, and the same rule was
+    # never applied to the other thing this machine edits.  Measured on the
+    # census: "Remove the SQL injection while keeping the behaviour identical"
+    # bound `rm <b>/app/db.py` -- the deletion of the file that CONTAINS the
+    # vulnerability, certified, for a request to fix it.  "Remove the unused
+    # function legacy_total and every unused import from <b>/app" bound `rm -r
+    # <b>/app`: the whole package, because the sentence named a directory.
+    # A noun that names something INSIDE a file is the sentence saying the
+    # object of the verb is a part, and a part is edited, never deleted.
+    r"function|functions|class|classes|method|methods|def|defs|symbol|symbols|"
+    r"identifier|identifiers|import|imports|variable|variables|parameter|"
+    r"parameters|argument|arguments|constant|constants|helper|helpers|"
+    r"module|modules|package|packages|injection|injections|vulnerability|"
+    r"vulnerabilities|exploit|bug|bugs|defect|defects|error|errors|issue|"
+    r"issues|code|codesnippet|logic|type|types|annotation|annotations|"
+    r"signature|signatures|returncode|branch|branches|loop|loops|lambda|"
+    r"decorator|decorators|docstring|docstrings|todo|todos|warning|warnings|"
+    r"deprecation|deprecations|api|apis|call|caller|callers|usage|usages|"
+    r"semicolon|semicolons|whitespace|trailing|leading|license|licence"
 )
+
+# A mutating prose command consumes EVERY object its verb names.  ``rm`` has an
+# arity of one, so a sentence that names a second thing to delete -- "Delete
+# <b>/prod.db and the app directory, then report what you removed" -- states two
+# deletions, and serving it with ``rm -r <b>/prod.db`` performs one of them and
+# silently drops the other, because the second object is a NOUN PHRASE and never
+# becomes a path.  Measured 2026-10-31 on the hardcore SWE surface: that sentence
+# deleted the database file, left the directory standing, and reported
+# ``PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`` -- an
+# irreversible effect certified as the whole request.
+#
+# The rule is the arity rule's dual.  Arity says a pattern that wants two paths
+# and finds one is refused; this says a pattern that wants one object and finds
+# two is refused as well.  It is stated as the SHAPE of a second object -- a
+# conjunction followed by a noun phrase whose head is a directory, folder or tree
+# -- and not as a list of sentences, so it applies to every row that deletes.
+_SECOND_DELETION_OBJECT = re.compile(
+    r"\b(?:and|&|,)\s+(?:also\s+|then\s+)?(?:the\s+|its\s+|all\s+|every\s+|a\s+|an\s+)?"
+    r"(?:[\w./*-]+\s+){1,2}?(?:sub-?director(?:y|ies)|director(?:y|ies)|"
+    r"folders?|trees?|dirs?)\b")
+
 
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Synonyms measured rather than guessed: "duplicate the file a as b" bound
@@ -1057,7 +948,13 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # None, which ends the search.  The whole table was abandoned on a word that
     # meant "repeated", not "make a second copy".
     (r"\b(?:copy|duplicate)\b(?![^\n]{0,20}?\blines?\b)", "cp", _no_flags, 2),
-    (r"\b(?:move|rename)\b", "mv", _no_flags, 2),
+    # The same rule as `rm`, and it was simply absent here.  Measured: "Move the
+    # function line_total from A to B and update every caller" bound
+    # `mv A B`, which overwrites module B with module A -- the exact opposite of
+    # moving one function between them, and unrecoverable.
+    (r"\b(?:move|rename)\b"
+     r"(?![^\n]{0,60}?\b(?:" + _INSIDE_THE_FILE_NOUNS + r")\b)",
+     "mv", _no_flags, 2),
     # "Erase the file X" measured to bind nothing.  The negative lookahead is
     # scoped to exactly one claim: removing LINES that are duplicated is a
     # filter over a file that stays, not a deletion of it.  Measured without it,
@@ -1233,8 +1130,18 @@ _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # bound `ls` on a file.
     (r"\bbase ?name\b", "basename", _no_flags, 1),
     (r"\b(?:directory name|parent directory)\b", "dirname", _no_flags, 1),
-    (r"\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b"
-     r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b", "ls", _no_flags, 1),
+    # A sentence that asks which files CONTAIN some stated text is a narrower
+    # claim than a general listing of a directory, so by this table's own order
+    # rule it must not be caught here.  "Show which files in the directory D
+    # contain 'gamma'" bound `ls D` and was certified pass=True with a list of
+    # names -- a perfectly reproducible answer to a question nobody asked, since
+    # not one of those names says whether the file holds the text.  The content
+    # words are the evidence; "the files named '*.log' in D" states none, so the
+    # recursive walk that sentence binds is untouched.
+    (r"(?![^\n]*\b(?:contain|contains|containing|contained|hold|holds|holding"
+     r"|include|includes|including)\b)"
+     r"(?:\b(?:list|show)\b[^\n]{0,40}?\bdirectory\b"
+     r"|\bfiles?\b[^\n]{0,30}?\bdirectory\b)", "ls", _no_flags, 1),
     (r"\b(?:real|absolute|full) path\b", "realpath", _no_flags, 1),
     (r"\b(?:octal|byte) dump\b", "od", _no_flags, 1),
     # The pattern is deliberately narrow.  The PROGRAM is called `file`, and the
@@ -1341,6 +1248,28 @@ _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
     (r"\bregex\b|\bregular expression\b|\bextended (?:pattern|regex|search)\b"
      r"|\bpattern\b[^\n]{0,30}?\b(?:match|search)\b", "egrep"),
     (r"\b(?:grep|search|find)\b", "grep"),
+    # "Which files in the directory D contain 'gamma'" is the same question as
+    # "Search the directory D for 'gamma'" written without a search verb, and two
+    # ways of writing one question must bind one operation.  It sits after the
+    # fgrep and egrep rows on purpose: a sentence that calls its own text exact,
+    # literal or a regular expression has said which program answers, and that
+    # evidence outranks the shape of the question.
+    # Both arms key on FILES as the noun the sentence asks about, never on a
+    # content word alone: "How many lines in the file X contain 'gamma'" holds
+    # the words "file" and "contain" too, and a row keyed on those two stole the
+    # sentence away from the count it was measured to bind.  Measured both ways.
+    # The `^` is load-bearing.  A row pattern is consumed by `re.search`, which
+    # tries every start position, so a bare leading lookahead only guards the
+    # position the match happens to begin at: "(?!...lines...)...file...contain"
+    # still matched "Which lines in the file X contain 'gamma'" by starting at the
+    # word "file", because `files?` matches the singular.  Anchored at the start,
+    # the lookahead reads the whole sentence and the asked noun decides: FILES
+    # reaches grep, LINES falls through to the rule that prints lines and a COUNT
+    # falls through to the rule that counts.  Measured all three.
+    (r"^(?![^\n]*\b(?:which|what|how many|show|list|print|count|number)\b"
+     r"[^\n]{0,30}?\blines?\b)"
+     r"[^\n]*\bfiles?\b[^\n]{0,40}?\b(?:contain|contains|containing|hold|holds"
+     r"|holding|include|includes|including)\b", "grep"),
 )
 
 _COUNT_RE = re.compile(r"\bfirst\s+(\d+)\b|\b(\d+)\s+lines?\b")
@@ -1850,6 +1779,26 @@ _DIRECTORY_REQUEST = re.compile(r"\bdirector(?:y|ies)\b|\bfolders?\b")
 _RECURSIVE_REQUEST = re.compile(
     r"\bfiles?\b[^\n]{0,20}?\bin the\b[^\n]{0,20}?\bdirector(?:y|ies)\b"
     r"|\ball the files\b|\bevery file\b|\beach file\b")
+# "Which files hold the text" asks for NAMES; "which lines hold the text" asks
+# for the lines themselves.  `grep -r` prints "path:line:text", which answers the
+# second and only implies the first, so a question about files gets `-l`, which
+# is grep's own answer to exactly that question.  Deliberately keyed on the noun
+# the sentence asks about, never on the verb, so "Search the directory D for
+# 'gamma'" keeps printing the lines it has always printed.
+_ASKS_WHICH_FILES = re.compile(
+    r"\b(?:which|what)\b[^\n]{0,30}?\bfiles?\b"
+    r"|\b(?:list|show|print)\b[^\n]{0,30}?\bfiles?\b[^\n]{0,40}?\b(?:contain|contains"
+    r"|containing|hold|holds|holding|include|includes|including)\b")
+# The exclusion is the part that makes `-l` safe, and it is a SEPARATE search on
+# the whole sentence rather than a lookahead inside the one above: a lookahead in
+# a `re.search` pattern is evaluated at whatever position the match happens to
+# start from, so "(?!...lines...)...file...contain" still matched "Which lines in
+# the file X contain 'gamma'" by starting at the word "file".  Measured: that
+# sentence bound `grep -l` and answered with the file's name, certified all the
+# same, having lost the one thing it was asked for.
+_ASKS_ABOUT_LINES = re.compile(
+    r"\b(?:which|what|how many|show|list|print|count|number)\b"
+    r"[^\n]{0,30}?\blines?\b")
 _FIND_SUFFIX = re.compile(r"\bend(?:s|ing)?\s+with\s+([^\s,]+)")
 _FIND_PREFIX = re.compile(r"\b(?:start|begin)(?:s|ing)?\s+with\s+([^\s,]+)")
 # "all the .log files in the directory D" names a SET of files by pattern, which
@@ -1873,77 +1822,6 @@ _LISTING_REQUEST = re.compile(r"\b(?:list|names?|what|which)\b")
 # states a transform -- "the third line of X in upper case" -- keeps composing
 # instead of losing the transform.
 _BARE_NOUN_PHRASE = re.compile(r"^\s*(?:the|a|an)\b")
-
-
-# A determiner in front of a command word makes it a NOUN, not an instruction:
-# "the diff X", "this patch", "the archive" name a thing, they do not ask for a
-# program.  Measured: "Apply the diff <f> to the repository ... and run the full
-# test gate" was read as the command `diff <f> <report>`, so the composer
-# answered an SF-capability request with a file comparison, and "Gate the diff
-# <f> on performance using the benchmark <b>" was read the same way.
-_DETERMINERS = ("the", "a", "an", "this", "that", "these", "those", "its", "our",
-                "your", "my", "their", "his", "her", "each", "every", "any",
-                "some", "one", "another", "same", "given", "stated")
-_DETERMINER_BEFORE = re.compile(
-    r"(?<![a-z0-9])(?:" + "|".join(_DETERMINERS) + r")[\s-]+$", re.IGNORECASE)
-
-
-def _command_match(pattern: str, text: str):
-    """The first occurrence of a program word that is a VERB, not a noun.
-
-    Every occurrence preceded by a determiner is skipped, so a sentence that
-    merely names a diff, a patch or an archive never becomes a command.
-    """
-    for match in re.finditer(pattern, text):
-        if _DETERMINER_BEFORE.search(text[:match.start()]):
-            continue
-        return match
-    return None
-
-
-_NON_ACTION_WORDS = frozenset({"please", "the", "a", "an", "my", "our", "your", "their", "then",
-                               "now", "and", "so", "show", "give", "tell", "me", "us"})
-
-
-def _stated_action_word(sentence: str) -> str:
-    """The verb the sentence opens with, or '' -- the same reading the front compiler uses."""
-    for word in re.findall(r"[A-Za-z][A-Za-z0-9_]*", str(sentence or "")):
-        low = word.lower()
-        if low in _NON_ACTION_WORDS or len(low) < 2:
-            continue
-        return low
-    return ""
-
-
-def statement_is_a_command_line(sentence: str) -> bool:
-    """Does the sentence ASK FOR this command, or does it merely mention the program?
-
-    ``extract_argv`` reads a program and its operands out of prose, and that is what makes
-    ordinary requests runnable: "Copy the file A to the file B".  It is also how a sentence
-    that names an ACT gets stolen: measured while adding the git surface, "Show the git diff
-    of the repository <R> against HEAD and write it to <O>" was read as the shell command
-    ``diff <O> <R>`` -- it ran /usr/bin/diff against the two paths and failed, while the
-    capability that performs the requested act (vcs.git.diff.v1) had already been selected
-    and was refused NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND.
-
-    The distinction that fixes it without narrowing the reader is the sentence's own
-    grammar: an imperative puts the ACTION first, so the program a sentence asks for is the
-    verb it opens with, or a program introduced by run/execute/invoke.  A program the
-    sentence merely MENTIONS ("the git diff", "a cp of the tree") is its object, not its
-    action, and the act belongs to whatever capability performs it.
-    """
-    parts = extract_argv(sentence)
-    if not parts:
-        return False
-    program = str(parts[0]).strip().rsplit("/", 1)[-1].lower()
-    if not program:
-        return False
-    head = _stated_action_word(sentence)
-    if program == head:
-        return True
-    return bool(re.search(r"\b(?:run|runs|running|execute|executes|invoke|invokes|call|calls)\s+"
-                          r"(?:the\s+|a\s+)?(?:command\s+|program\s+|tool\s+)?"
-                          + re.escape(program) + r"\b", str(sentence or ""), re.I))
 
 
 def _prose_argv(sentence: str) -> list[str] | None:
@@ -1977,7 +1855,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
     for pattern, program, dest_flag in _PROSE_COMMAND_DEST_FLAG:
         if program not in known:
             continue
-        if _command_match(pattern, text) is None:
+        if not re.search(pattern, text):
             continue
         if len(paths) != 2:
             return None
@@ -2569,15 +2447,49 @@ def _prose_argv(sentence: str) -> list[str] | None:
         # it, which is the same evidence that made it the pattern.
         operand_paths = paths
         if value:
-            operand_paths = extract_paths(str(sentence).replace(str(value), " "))
+            # Mask the value where the CALLER delimited it, not every place its
+            # text happens to occur.  Replacing the bare text also blanks it
+            # inside a path that contains the word being searched, and the path
+            # then no longer exists: "Search the file /repo/gammaq/x.txt for
+            # 'gamma'" ran on "/repo/ q/x.txt" and failed with "No such file or
+            # directory", while "which files in /repo/gammaq contain 'gamma'"
+            # silently searched /repo instead -- one directory up, over the whole
+            # tree -- and was certified all the same.  A repository whose own
+            # name is the word under search hits this on the first sentence.
+            # When the sentence stated no delimited value there is nothing
+            # safer to remove, so the bare text is masked exactly as before.
+            masked = str(sentence)
+            delimited = False
+            for quoted in ("'%s'" % value, '"%s"' % value):
+                if quoted in masked:
+                    masked = masked.replace(quoted, " ")
+                    delimited = True
+            if not delimited:
+                masked = masked.replace(str(value), " ")
+            operand_paths = extract_paths(masked)
         if not value or len(operand_paths) != 1:
             # A pattern the sentence did not state, or more than one file to
             # search in: refuse rather than complete the command by guessing.
             return None
         # "Search the files in the directory X for ..." is a search of a tree,
         # and `grep` on a directory without -r is an error, not an answer.
-        extra = ["-r"] if _RECURSIVE_REQUEST.search(text) else []
-        return [program, *extra, str(value), str(operand_paths[0])]
+        #
+        # The sentence's own words are only half the evidence.  "Search the
+        # directory D for 'gamma'" never says "files ... in the ... directory",
+        # so the phrase rule above missed it and grep ran on a folder:
+        # "grep: <D>: Is a directory", reported as CLI_COMMAND_FAILED for a
+        # sentence the machine understood perfectly.  Whether the operand IS a
+        # directory is a fact about the disk, and `_is_directory_in_repo` already
+        # answers it for the slots that need the same fact.  Asking the disk
+        # cannot over-reach the way a phrase can: a single file is never a
+        # directory, so nothing that already searched one file changes.
+        target = str(operand_paths[0])
+        extra = ["-r"] if (
+            _RECURSIVE_REQUEST.search(text) or _is_directory_in_repo(target)
+        ) else []
+        if _ASKS_WHICH_FILES.search(text) and not _ASKS_ABOUT_LINES.search(text):
+            extra.append("-l")
+        return [program, *extra, str(value), target]
     # A sentence that asks for ONE line, for a COUNT of the lines holding some
     # text, or for the NUMBER of a line, names a part of the file rather than
     # the file.  Falling through to `cat` or `wc -l` then answers a different
@@ -2842,7 +2754,7 @@ def _prose_argv(sentence: str) -> list[str] | None:
     for pattern, program, flags, arity in _PROSE_COMMAND:
         if program not in known:
             continue
-        if _command_match(pattern, text) is None:
+        if not re.search(pattern, text):
             continue
         operands = paths
         if program in mutating and reserved_for_report & set(map(str, paths)):
@@ -2923,6 +2835,10 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, *_cut_flags(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
+        if program == "rm" and _SECOND_DELETION_OBJECT.search(text):
+            # Two deletions named, one command available.  Refuse rather than
+            # perform the first and report the pair as done.
+            return None
         if (program == "rm" and _DIRECTORY_REQUEST.search(text)
                 and not re.search(r"\bfiles?\b|\*|\bnamed\b|\bpattern\b", text)):
             # The same reading `cp` already makes: a sentence that says
@@ -3090,20 +3006,6 @@ def _stated_directory(slot: str, goal: str) -> str | None:
             if _is_directory_in_repo(cleaned):
                 return cleaned
     return None
-
-
-# The slots whose value is a REPOSITORY the tool runs inside, from the compiler's own table
-# (goal_compiler._REPO_ANCHOR_SLOTS) so the two layers cannot drift apart.
-_REPO_ANCHOR_SLOTS = frozenset({"anchor_path", "repo_path", "worktree_path", "apply_directory"})
-
-
-def _enclosing_worktree(candidate: str) -> str | None:
-    """The git worktree that CONTAINS a stated path (goal_compiler owns the rule)."""
-    try:
-        from canonical.runtime import goal_compiler as _gc
-        return _gc._enclosing_worktree(candidate, _repo_root())
-    except Exception:  # noqa: BLE001 - an unresolvable path is simply not an anchor
-        return None
 
 
 def _is_directory_in_repo(candidate: str) -> bool:
@@ -3275,10 +3177,6 @@ def bind(signature: Mapping[str, str], goal: str,
                     continue
             named = _noun_matched_path(slot, paths, goal)
             chosen = named if named is not None else _sole_existing_repository_path(paths)
-            if chosen is not None and t == "PATH_DIR" and slot in _REPO_ANCHOR_SLOTS:
-                # A slot that names a repository is the worktree that contains the path, not
-                # the path's parent directory (see _enclosing_worktree).
-                chosen = _enclosing_worktree(chosen) or chosen
             if chosen is not None and t == "PATH_DIR":
                 # A DIRECTORY slot takes a directory.  Measured the same day: on
                 # "Run the strict progress repair loop on the python source root
@@ -3315,16 +3213,7 @@ def bind(signature: Mapping[str, str], goal: str,
             # side -- and it is only consulted when content was actually stated,
             # so a sentence with no payload keeps binding exactly as before.
             destination = extract_content_destination(goal)
-            # ... and a DESTINATION FOR CONTENT IS A FILE.  The payload grammar reads
-            # "line coverage of the tests in <dir>" as a payload introduced by "line" whose
-            # destination is <dir>, so a request that states no payload at all bound its
-            # output_path to the directory it was asked to MEASURE.  Measured: "Measure the
-            # line coverage of the tests in <abs>/repo and report it to <abs>/out/cov.json"
-            # handed the coverage adapter its own source root as the place to write, the
-            # adapter raised IsADirectoryError, and the request died as
-            # PROMISED_ARTIFACT_MISSING.  An existing directory is not a place this slot can
-            # put a file, whatever the grammar said.
-            if destination and destination in paths and not _is_directory_in_repo(destination):
+            if destination and destination in paths:
                 args[slot] = destination
             elif _noun_matched_path(slot, paths, goal) is not None:
                 # "the archive <A>" is what this slot is about, whatever exists.
@@ -3534,40 +3423,6 @@ _ROLLBACK_PATH_KEYS = ("output_path", "archive_path", "target_path", "path", "de
                        "output", "out", "into", "to", "source_path", "input_path")
 
 
-def _template_constants(entry: Mapping[str, Any]) -> dict[str, Any]:
-    """The action template's literal arguments -- the values the REGISTRY declares."""
-    declared = ((entry.get("action_template") or {}).get("args") or {})
-    out: dict[str, Any] = {}
-    for key, value in declared.items():
-        if isinstance(value, str) and "${" in value:
-            continue
-        if isinstance(value, (str, int, float, bool)):
-            out[str(key)] = value
-    return out
-
-
-def _stated_destination_path(goal: str) -> str:
-    """The path the sentence says to write to, as an absolute path, or ''."""
-    try:
-        raw = str(extract_content_destination(str(goal or "")) or "").strip()
-    except Exception:  # noqa: BLE001 - an unreadable sentence states no destination
-        return ""
-    if not raw:
-        return ""
-    try:
-        return str(pathlib.Path(raw).expanduser().resolve())
-    except (OSError, RuntimeError):
-        return ""
-
-
-def _same_path(left: str, right: str) -> bool:
-    """Do these two stated paths name the same place?"""
-    try:
-        return str(pathlib.Path(left).expanduser().resolve()) == str(pathlib.Path(right).resolve())
-    except (OSError, RuntimeError):
-        return False
-
-
 def _pathish(value: Any) -> str | None:
     """A string that the chain treats as a file it can touch, or None."""
     if not isinstance(value, str) or not value or "\n" in value:
@@ -3638,6 +3493,11 @@ def execute_chain(chain: Sequence[str], goal: str,
     from canonical.runtime import live_brain_route_admission_v1 as ra
 
     reg = registry if registry is not None else composer.load_registry()
+    from canonical.runtime.swe_typed_plan_v1 import implementation_effect_error
+    effect_error = implementation_effect_error(goal, chain, reg)
+    if effect_error:
+        return {"schema": SCHEMA, "pass": False, "goal": goal,
+                "status": "FAIL_CLOSED__" + effect_error, "steps": []}
     steps: list[dict[str, Any]] = []
     produced: dict[str, Any] = {}
     created_paths: list[str] = []
@@ -3659,27 +3519,6 @@ def execute_chain(chain: Sequence[str], goal: str,
                     "steps": steps}
         sig = TS.signature(entry)
         args = bind(sig, goal, inputs, produced)
-        # The template's own constants are part of the contract.  `bind` fills the SLOTS the
-        # sentence states, and a constant is not a slot: measured while composing the git
-        # surface, "Show me the git status of the repository and write it to <O>" dispatched
-        # vcs.git.status.v1 WITHOUT `git_verb`, so the adapter refused
-        # GIT_VERB_NOT_SUPPORTED:<none> -- a correct refusal about an argument the caller never
-        # supplies and the registry already declares.
-        for constant_key, constant_value in _template_constants(entry).items():
-            args.setdefault(constant_key, constant_value)
-        # A stated destination is never a SOURCE.  The same sentence names one path, the file
-        # it writes, and bind() filled `worktree_path` with it by elimination -- so the adapter
-        # was asked to run git inside the report it was about to write.  Left as the empty
-        # string rather than removed, so the adapter refuses with the reason that is true
-        # (REPOSITORY_NOT_STATED) instead of one about a directory that is not a repository.
-        destination = _stated_destination_path(goal)
-        if destination:
-            for slot_name, slot_value in list(args.items()):
-                if str(sig.get(slot_name) or "").upper() == "PATH_OUTPUT":
-                    continue
-                candidate = _pathish(slot_value)
-                if candidate and _same_path(candidate, destination):
-                    args[slot_name] = ""
         # Snapshot what already exists, so this step can only be credited with
         # files it actually created.
         existed_before = {v for v in (_pathish(a) for a in args.values()) if v and _exists_in_repo(v)}

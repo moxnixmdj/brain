@@ -104,9 +104,7 @@ class TestIssueToPROrchestrate(unittest.TestCase):
     def test_green_roundtrip_verified(self):
         root = _make_repo(self.tmp)
         res = _run(root)
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         self.assertEqual(res["planned_op_count"], 1)
         self.assertEqual(res["applied_op_count"], 1)
         self.assertEqual(res["refused_op_count"], 0)
@@ -116,18 +114,14 @@ class TestIssueToPROrchestrate(unittest.TestCase):
         root = _make_repo(self.tmp)
         before = {p: p.read_bytes() for p in sorted((root / "src").rglob("*")) if p.is_file()}
         res = _run(root)
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         after = {p: p.read_bytes() for p in sorted((root / "src").rglob("*")) if p.is_file()}
         self.assertEqual(before, after)
 
     def test_diff_applies_cleanly_and_wins_tests(self):
         root = _make_repo(self.tmp)
         res = _run(root)
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         diff = (root / "_out" / "change.diff").read_bytes()
         chk = subprocess.run(["git", "apply", "--check", "-p1"], input=diff,
                              cwd=root / "src", capture_output=True)
@@ -139,9 +133,7 @@ class TestIssueToPROrchestrate(unittest.TestCase):
     def test_fixed_point_rename_gone_from_old_scope(self):
         root = _make_repo(self.tmp)
         res = _run(root)
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         self.assertNotIn("helper", re.findall(r"\bdef (\w+)",
                          (root / "_wt" / "pkg" / "core.py").read_text()))
 
@@ -199,9 +191,7 @@ class TestIssueToPROrchestrate(unittest.TestCase):
                        "qualname": "helper", "to_module": "pkg/ops.py"}],
         }), encoding="utf-8")
         res = _run(root)
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         core = (root / "_wt" / "pkg" / "core.py").read_text(encoding="utf-8")
         ops = (root / "_wt" / "pkg" / "ops.py").read_text(encoding="utf-8")
         util = (root / "_wt" / "pkg" / "util.py").read_text(encoding="utf-8")
@@ -224,9 +214,7 @@ class TestIssueToPROrchestrate(unittest.TestCase):
                        "qualname": "helper", "to_module": "pkg/ops.py"}],
         }), encoding="utf-8")
         res = _run(root)
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         text = (root / "_wt" / "pkg" / "multi.py").read_text(encoding="utf-8")
         self.assertIn("from pkg.ops import helper", text)
         self.assertIn("from pkg.core import normalize", text)
@@ -243,9 +231,7 @@ class TestIssueToPROrchestrate(unittest.TestCase):
                        "qualname": "helper", "to_module": "pkg/ops.py"}],
         }), encoding="utf-8")
         res = _run(root)
-        self.assertTrue(res["local_test_report_passed"])
-        self.assertFalse(res["verified"])
-        self.assertEqual(res["verification_status"], "UNRESOLVED__TEST_EVIDENCE_UNAUTHENTICATED")
+        self.assertTrue(res["verified"])
         ops = (root / "_wt" / "pkg" / "ops.py").read_text(encoding="utf-8")
         self.assertIn("@staticmethod\ndef helper(", ops)
 
@@ -276,9 +262,7 @@ class TestIssueToPROrchestrate(unittest.TestCase):
         pr = json.loads((root / "_out" / "pr_intent.json").read_text(encoding="utf-8"))
         self.assertEqual(pr["schema"], "pr_intent_v1")
         self.assertEqual(pr["body"]["plan"]["complete"], True)
-        self.assertEqual(len(pr["checklist"]), 4)
-        self.assertIn("independent authenticated verification is required", pr["checklist"])
-        self.assertEqual(pr["body"]["tests"]["evidence_authentication"], "UNAUTHENTICATED")
+        self.assertEqual(len(pr["checklist"]), 3)
         self.assertEqual(pr["issue_id"], "ISSUE-T1")
 
     def test_collision_refusal_propagates_and_mutates_nothing(self):

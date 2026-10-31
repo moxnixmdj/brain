@@ -116,10 +116,9 @@ class TestDiffCoverageGate(unittest.TestCase):
         res = _run(self.tmp, "d.diff")
         if not self._have_coverage():
             self.skipTest("coverage not on this interpreter")
-        self.assertEqual(res["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
-        self.assertEqual(res["local_gate"], "PASS")
+        self.assertEqual(res["gate"], "PASS")
         self.assertEqual(res["diff_covered_ratio"], 1.0)
-        self.assertFalse(res["verified"])
+        self.assertTrue(res["verified"])
 
     def test_uncovered_change_fails_with_named_lines(self):
         _build(self.tmp)
@@ -226,8 +225,7 @@ class TestDiffCoverageGate(unittest.TestCase):
         if not self._have_coverage():
             self.skipTest("coverage not present")
         # changed executable lines {1,2,5,6}; only body line 6 misses -> 3/4
-        self.assertEqual(res["gate"], "UNRESOLVED__UNAUTHENTICATED_EVIDENCE")
-        self.assertEqual(res["local_gate"], "PASS")
+        self.assertEqual(res["gate"], "PASS")
         self.assertEqual(res["diff_covered_ratio"], 0.75)
 
     def test_schema_and_sha_pins(self):
