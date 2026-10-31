@@ -38,7 +38,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Four SWE review/measurement gates failed on clean Python 3.11 environments lacking pytest/bandit/coverage, swe_typed_plan_v1._CLAUSE_BREAK split sentences inside .py filenames, and file-scoped mutation/security/coverage requests fell through to directory/wrong-format capabilities.",
-  "canonical_base_commit": "04b6cbb8329507cbd139b7df2038c0eb2c56c237",
+  "canonical_base_commit": "ecfc9fb0aa7735a51c189434f6854bda0f9f5e59",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -54,7 +54,7 @@
   "incremental_spend_usd": 0,
   "intent": "Enable stdlib-native SWE coverage/security/mutation/refactor verification and exact per-file typed routing without external binary dependencies.",
   "load_bearing_primary": {
-    "canonical_base_commit": "04b6cbb8329507cbd139b7df2038c0eb2c56c237",
+    "canonical_base_commit": "ecfc9fb0aa7735a51c189434f6854bda0f9f5e59",
     "constructive_gap_for_open_obligation_ids": [
       "AUTOMATIONBENCH_GE_40",
       "CHARTOGRAPHY_TOOLS_GE_89",
@@ -92,7 +92,7 @@
     "canonical/runtime/live_brain_route_admission_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "04b6cbb8329507cbd139b7df2038c0eb2c56c237",
+    "canonical_base_commit": "ecfc9fb0aa7735a51c189434f6854bda0f9f5e59",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
