@@ -246,6 +246,15 @@ sentences already perform end to end.
 * Affected 6-module sweep after those fixes: **18 red**, against **21** on the pre-merge branch and
   **24** on `main` — four of `main`'s/HEAD's reds are green here.
 
+**One known-open merge item, stated rather than hidden.** `test_a_sentence_reaches_the_repair_it_names_v1
+::TwoFilesWithStatedRolesAreNotAmbiguous::test_the_front_door_binds_both_ends_of_a_stated_move` fails on
+this tree and passes on `main`. Measured: `python.refactor.move_function.v1` still ranks FIRST (22) and
+binds when called directly, but the compile walk does not select it and lands on
+`software.repair.choreograph.crossfile.v1` (15) — so the defect is in the walk's admission/fall-through
+for a row whose slots are derived, not in the derivation or the registry. It is the next thing to fix,
+and it is why the sentence "Move the function … and update every caller" is listed under §2.2 as refused
+rather than performed.
+
 ---
 
 ## 8. Reproduction

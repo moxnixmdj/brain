@@ -22,7 +22,7 @@ class T(unittest.TestCase):
  def test_provenance_present(self):
   td,r=self.fixture({"m.py":"def h(x): return x < 3\ndef f(x): return h(x)\n","trace_fail.py":"from m import f\nassert f(3)\n","trace_pass.py":"from m import f\nassert f(2)\n","test_all.py":"from m import f\nassert f(3)\n"})
   with td:
-   o=self.runr(r,["trace_fail.py","trace_pass.py"],max_guided_files=1);self.assertGreater(o["provenance_hypothesis_count"],0)
+   o=self.runr(r,["trace_fail.py","trace_pass.py"],max_guided_files=1,provenance=True);self.assertGreater(o["provenance_hypothesis_count"],0)
  def test_no_solution_fails_closed(self):
   src="def f(x): return x\n";td,r=self.fixture({"m.py":src,"trace_fail.py":"from m import f\nassert f(2)==99\n","test_all.py":"from m import f\nassert f(2)==99\n"})
   with td:

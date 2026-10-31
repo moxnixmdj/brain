@@ -466,7 +466,7 @@ def run(args, root):
         """True when an import spelling provably denotes OUR module file."""
         return module_abs in _resolve_module(mod_files, module, level, package)
 
-    def _cross_sites(tree, package, bindings, lines, rel):
+    def _cross_sites(tree, package, bindings, lines, rel, check_collisions=True):
         """Provable cross-module references to the old symbol in one file.
 
         File identity (never a dotted-string guess) decides what is ours, so
@@ -538,7 +538,7 @@ def run(args, root):
                         continue
                     elif a.name == old and a.asname == old:
                         _fail("ALIAS_BINDING_SAME_NAME:" + str(node.lineno))
-                    elif a.asname == new and a.name != old:
+                    elif check_collisions and a.asname == new and a.name != old:
                         # another symbol imported AS the new name: after the
                         # rename this module binds `new` to something else
                         # while edited uses spell `new` for ours.
@@ -660,7 +660,7 @@ def run(args, root):
             "utf-8").splitlines()
         re_edits, _ = _cross_sites(tree, _package_of(path, src_abs),
                                    _import_table(tree), lines,
-                                   path.relative_to(src_abs).as_posix())
+                                   path.relative_to(src_abs).as_posix(), False)
         residual.extend((path.relative_to(src_abs).as_posix(), ln)
                         for ln, _col, _name in re_edits)
     if residual:
@@ -694,12 +694,11 @@ def run(args, root):
     for path, b in applied.items():
         path.write_bytes(b)
 
-    gate = "PASS"
+    gate = "PASS"; _tcmd = ([python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"] + run_tests) if __import__("importlib.util").util.find_spec("pytest") else ([python_exe, "-B", "-c", "import importlib.util,pathlib,sys,unittest;ok=True\nfor f in sys.argv[1:]:\n p=pathlib.Path(f).resolve();sys.path.insert(0,str(p.parent));sys.path.insert(0,'.');s=importlib.util.spec_from_file_location(p.stem,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);r=unittest.TestResult();unittest.defaultTestLoader.loadTestsFromModule(m).run(r);ok=ok and r.wasSuccessful()\n for k,v in list(vars(m).items()):\n  if k.startswith('test_') and callable(v):v()\nsys.exit(0 if ok else 1)"] + run_tests)
     verified = bool(run_tests)
     if run_tests:
         proc = subprocess.run(
-            [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"]
-            + run_tests,
+            _tcmd,
             cwd=src_abs, capture_output=True, text=True, timeout=timeout_s)
         if proc.returncode != 0:
             for path in applied:

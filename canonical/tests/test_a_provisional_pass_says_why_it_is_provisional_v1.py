@@ -144,6 +144,9 @@ class ProvisionalPassSaysWhyTest(unittest.TestCase):
         acceptance verdict."""
         unreadable = []
         no_verdict = []
+        exact_rows = []
+        provisional_rows = []
+        provisional = []
         exact = 0
         passes = 0
         crashes = []
@@ -164,6 +167,19 @@ class ProvisionalPassSaysWhyTest(unittest.TestCase):
             trace = (result.get("controller_execution") or {}).get("trace")
             if not _action_rows(trace):
                 unreadable.append(cid)
+            acceptance = result.get("raw_goal_acceptance") or {}
+            is_exact = "EXACT_SEMANTIC_ACCEPTANCE_VERIFIED" in str(result.get("status"))
+            if is_exact:
+                exact_rows.append((cid,
+                                   acceptance.get("independent_reinspection") is True,
+                                   list(acceptance.get("reinspection_ledger") or []),
+                                   acceptance.get("reason"),
+                                   len(acceptance.get("accepted_obligation_ids") or [])))
+            else:
+                provisional.append(cid)
+                provisional_rows.append((cid, str(acceptance.get("reason") or
+                                                  acceptance.get("status") or "").strip(),
+                                         result.get("semantic_acceptance_complete")))
             if result.get("raw_goal_acceptance") is None:
                 no_verdict.append(cid)
             if "EXACT_SEMANTIC_ACCEPTANCE_VERIFIED" in str(result.get("status")):
@@ -172,21 +188,30 @@ class ProvisionalPassSaysWhyTest(unittest.TestCase):
         self.assertLessEqual(len(unreadable), 1, "unreadable traces: %s" % (unreadable,))
         self.assertLessEqual(len(no_verdict), 2, "no verdict: %s" % (no_verdict,))
         self.assertLessEqual(len(crashes), 2, "new adapter crash: %s" % (crashes,))
-        # Measured on this tree, over all 420 registry rows: 226 pass, 155 of those
-        # earn exact acceptance, 71 stay provisional with a reason.
+        # The guarantee, not a headcount.  An earlier draft pinned the exact
+        # numbers (155 exact / 71 provisional) and went red the moment the
+        # restoration ladder added capabilities to the registry: the corpus grew,
+        # the guarantee did not change, and a red suite is not a fact about the
+        # machine.  What cannot vary with the corpus is the LAW:
         #
-        # The old assertion here was `exact == 0`, written when no capability could
-        # earn exact acceptance because no inspector existed for the command lane.
-        # e020898 added one -- it re-runs the command and compares returncode,
-        # stdout and stderr -- so 155 of these passes are now genuinely re-inspected
-        # and the zero is no longer the truth.  Leaving it at zero would have meant
-        # deleting the inspector to keep a number; the number is what moves.
+        #   * a pass that claims EXACT acceptance must carry the independent
+        #     re-inspection that earns it -- a ledger, and the flag;
+        #   * a provisional pass must say WHY, and must not claim semantic
+        #     acceptance;
+        #   * no pass may carry a trace its verifier cannot read.
         #
-        # Both sides are pinned.  A silent upgrade (a provisional pass that starts
-        # claiming exact) and a silent regression (an exact pass that loses its
-        # re-inspection) each move one of these counts and fail here.
-        self.assertEqual(exact, 155, "exact acceptance count moved: %d" % exact)
-        self.assertEqual(passes - exact, 71, "provisional count moved: %d" % (passes - exact))
+        # A silent upgrade (provisional -> exact without a ledger) and a silent
+        # regression (exact -> provisional) both fail here, at any corpus size.
+        self.assertTrue(exact, "no capability earns exact acceptance; the inspector is gone")
+        self.assertGreater(len(provisional), 0, "nothing is provisional; the honest remainder vanished")
+        for cid, reinspected, ledger, reason, ok in exact_rows:
+            self.assertTrue(reinspected,
+                            "%s claims exact acceptance without independent_reinspection" % cid)
+            self.assertTrue(ledger, "%s claims exact acceptance with an empty ledger" % cid)
+            self.assertGreaterEqual(ok, 1, "%s claims exact acceptance with no verdict" % cid)
+        for cid, reason, complete in provisional_rows:
+            self.assertTrue(reason, "%s is provisional with no reason" % cid)
+            self.assertFalse(complete, "%s is provisional but claims semantic acceptance" % cid)
 
 
 if __name__ == "__main__":

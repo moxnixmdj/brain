@@ -810,7 +810,19 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # "from ... to ..." pair, matched against the paths it actually states; anything else (no
     # pair, no path, both orders) yields no value and the binder still fails closed.
     _py_sources = [f for f in sources if f.endswith(".py")]
-    if len(_py_sources) == 2 and ("module" in keys) and ({"to_module", "target_module"} & keys):
+    # ``source_module`` is the same fact under the name a different row chose for it
+    # (``python.refactor.move_symbol.v1`` declares source_module/target_module where
+    # ``python.refactor.move_function.v1`` declares module/to_module).  Measured 2026-10-31: with
+    # only ``module`` recognised, the symbol mover bound nothing, refused
+    # ``source_module:not_stated``, and the sentence fell through to a repair choreographer --
+    # a mover that exists and cannot be reached by the sentence written for it.
+    # The alias is offered only to the sentence that names a SYMBOL: "Move the function
+    # line_total ..." states a function and is answered by python.refactor.move_function.v1,
+    # while "Move the symbol `mul` ..." states the other noun and is answered by
+    # python.refactor.move_symbol.v1.  Measured 2026-10-31: with the alias unconditional both
+    # rows bound and the symbol mover outranked the function mover for a FUNCTION sentence.
+    _source_module_keys = ({"module"} | ({"source_module"} if "symbol" in str(goal or "").lower() else set())) & keys
+    if len(_py_sources) == 2 and _source_module_keys and ({"to_module", "target_module"} & keys):
         _pair = _FROM_TO.search(str(goal or ""))
         if _pair is not None:
             def _stated_near(near: str) -> str | None:
@@ -818,7 +830,8 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 return hits[0] if len(hits) == 1 else None
             _src_hit, _dst_hit = _stated_near(_pair.group(1)), _stated_near(_pair.group(2))
             if _src_hit and _dst_hit and _src_hit != _dst_hit:
-                out["module"] = {"value": _src_hit, "rule": "MODULE_FROM_STATED_FROM_PATH",
+                for _key in _source_module_keys:
+                    out[_key] = {"value": _src_hit, "rule": "MODULE_FROM_STATED_FROM_PATH",
                                  "evidence": _src_hit}
                 for _key in ({"to_module", "target_module"} & keys):
                     out[_key] = {"value": _dst_hit, "rule": "TARGET_MODULE_FROM_STATED_TO_PATH",

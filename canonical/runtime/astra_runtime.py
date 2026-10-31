@@ -665,10 +665,10 @@ def _load_bound_capability_registry():
     caps=data.get("capabilities")
     if not isinstance(caps,dict):
         raise Blocker("BOUND_CAPABILITY_REGISTRY_INVALID")
-    # A capability the forge admitted is already here, so there is nothing
-    # to acquire and no line for it in an acquisition registry. It is
-    # merged at read time from the forged state, which stays its single
-    # source of truth rather than being copied into this file.
+    snap=path.parent/"BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+    if snap.is_file() and snap!=path:
+        sdoc=readj(snap)
+        caps={**caps,**(sdoc.get("capabilities") or {})}
     from canonical.runtime import capability_forge_v1 as _FG
     for cid, rec in (_FG._state().get("forged") or {}).items():
         entry = (rec or {}).get("entry")

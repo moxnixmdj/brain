@@ -37,6 +37,11 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     output = _safe_output(repo, args.get("output_path"))
     bridge_mod = _load_bridge()
     registry = args.get("registry") or "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    reg_check = (repo / str(registry)).resolve()
+    if not args.get("registry") and (not reg_check.is_file() or not reg_check.read_bytes()[:8].lstrip().startswith(b"{")):
+        snap = "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+        if (repo / snap).is_file():
+            registry = snap
     report = bridge_mod.enumerate_bridges(registry)
     # Keep only execution-verified rows; rest is already classified in report
     artifact = {

@@ -133,9 +133,14 @@ def _platform_admissible_registry(registry):
     return out
 
 
+_TOKEN_WORD_RE = re.compile(r"[A-Za-z0-9]+")
+_PLACEHOLDER_TOKEN_RE = re.compile(r"\$\{input\.([A-Za-z0-9_]+)\}")
+_ENTRY_TOKEN_CACHE: dict[tuple[str, tuple[str, ...], tuple[str, ...], tuple[str, ...]], tuple[frozenset[str], frozenset[str], frozenset[str], frozenset[str]]] = {}
+
+
 def _tokens(value):
     return {
-        t.lower() for t in re.findall(r"[A-Za-z0-9]+", str(value or ""))
+        t.lower() for t in _TOKEN_WORD_RE.findall(str(value or ""))
         if len(t) >= 2 and t.lower() not in STOPWORDS
     }
 
@@ -150,7 +155,7 @@ def _flatten(value):
 
 def _placeholders(value):
     text=_flatten(value)
-    return sorted(set(re.findall(r"\$\{input\.([A-Za-z0-9_]+)\}",text)))
+    return sorted(set(_PLACEHOLDER_TOKEN_RE.findall(text)))
 
 
 # `_repo_paths` is a pure function of the sentence and the root: it scans the
@@ -1045,10 +1050,14 @@ def _nondiscriminating_requires_tokens():
     out = frozenset()
     try:
         path = pathlib.Path(__file__).resolve().parent / "BOUND_CAPABILITY_REGISTRY_V1.json"
+        snap = path.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
         if path.is_file() and path.read_bytes()[:1] == b"@":
-            path = path.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+            path = snap
         with open(path, "r", encoding="utf-8") as fh:
-            caps = (json.load(fh) or {}).get("capabilities") or {}
+            caps = dict((json.load(fh) or {}).get("capabilities") or {})
+        if snap.is_file() and snap != path:
+            with open(snap, "r", encoding="utf-8") as sfh:
+                caps.update((json.load(sfh) or {}).get("capabilities") or {})
         declaring = [_tokens(e.get("requires", [])) for e in caps.values() if isinstance(e, dict) and e.get("requires")]
         if declaring:
             counts = {}
@@ -1136,10 +1145,22 @@ def _score(goal, cid, entry):
     # on python.software.repair.apply.verified.v1, the one capability that both
     # finds the patch and lands it, so the file really is repaired.
     gt_effect=gt-(_artifact_write_tokens(goal) if _names_a_patch_route(goal) else set())
-    provides=_tokens(entry.get("provides",[]))
-    requires=_tokens(entry.get("requires",[]))
-    identity=_tokens(cid)
-    keywords=_tokens(entry.get("keywords",[]))
+    p_raw = tuple(str(x) for x in (entry.get("provides") or ()))
+    r_raw = tuple(str(x) for x in (entry.get("requires") or ()))
+    k_raw = tuple(str(x) for x in (entry.get("keywords") or ()))
+    cache_key = (str(cid), p_raw, r_raw, k_raw)
+    cached_toks = _ENTRY_TOKEN_CACHE.get(cache_key)
+    if cached_toks is None:
+        cached_toks = (
+            frozenset(_tokens(list(p_raw))),
+            frozenset(_tokens(list(r_raw))),
+            frozenset(_tokens(cid)),
+            frozenset(_tokens(list(k_raw))),
+        )
+        if len(_ENTRY_TOKEN_CACHE) > 4096:
+            _ENTRY_TOKEN_CACHE.clear()
+        _ENTRY_TOKEN_CACHE[cache_key] = cached_toks
+    provides, requires, identity, keywords = cached_toks
     # Requirements are highly informative for environment qualifiers such as
     # image-only/scanned/local/etc. Provides represent the requested effect.
     effect_matches=(gt_effect & provides) | (gt_effect & identity) | (gt_effect & keywords)

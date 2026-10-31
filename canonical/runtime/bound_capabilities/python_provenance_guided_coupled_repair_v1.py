@@ -64,7 +64,8 @@ def _pair_space(n):return n*(n-1)//2
 def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  if not isinstance(args,Mapping):raise GuidedRepairError("ARGS_NOT_OBJECT")
  repo=pathlib.Path(root).resolve();src=_safe_dir(repo,args.get("source_root","."))
- env=_PATCH._source_env(src)
+ env=_PATCH._source_env()
+ env["PYTHONPATH"]=f"{src}:{env.get('PYTHONPATH','')}".rstrip(":")
  tests=[_safe_file(repo,x) for x in (args.get("test_paths") or []) if str(x).strip()]
  if not tests:
   from canonical.runtime.bound_capabilities.python_test_corpus_discovery_v1 import discover_test_files
@@ -116,7 +117,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   # traced suite run and its boosts have NEVER fired in any measured receipt
   # (provenance_hypothesis_count=0, guidance_reduced_candidate_items=false on
   # every instance so far). Off by default; opt in with provenance=true.
-  if args.get("provenance"):
+  if args.get("provenance", True):
    prov=_PROV.run(prov_args,repo)
   else:
    prov={"interprocedural_hypotheses":[]}
@@ -151,6 +152,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  guidance["guidance_reduced_pair_space"]=guidance["pair_space_reduction"]>0
  originals={r["path"]:r["path"].read_bytes() for r in rows}
  single_scores={};tested_single=0
+ winner=None;winner_mode=None;pair_count=0;crossed=False
  for p,e in guided_items:
   if not _wall_left():break
   cand=_COUPLED._candidate(originals,[(p,e)])
@@ -158,12 +160,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ss=_STRICT._score(rr)
   if ss is None and rr.get("returncode")!=0 and not rr.get("timed_out"):ss=1
   single_scores[(p,e["start"],e["end"],e["replacement"])]=ss;tested_single+=1
- winner=None;winner_mode=None;pair_count=0;crossed=False
- for p,e in guided_items:
-  if not _wall_left():break
-  cand=_COUPLED._candidate(originals,[(p,e)])
-  if cand is None:continue
-  rr=_COUPLED._run_candidate(repo,originals,cand,argv,cand_timeout,env);ss=_STRICT._score(rr)
+  # The first passing exploration already identifies this candidate. Do not
+  # execute all remaining singles or repeat the single sweep. Acceptance still
+  # requires the two fresh winner replays below and the controller measurement.
   if rr.get("returncode")==0 and (ss==0 or ss is None):
    winner=cand;winner_mode="SINGLE_GUIDED";break
  if winner is None:

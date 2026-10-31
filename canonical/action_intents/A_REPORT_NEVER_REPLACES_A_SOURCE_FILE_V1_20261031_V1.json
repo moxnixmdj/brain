@@ -1,8 +1,8 @@
 {
- "action_id": "A_SECOND_OBJECT_IS_NOT_SILENTLY_DROPPED_V1_20261031_V1",
- "action_intent_id": "A_SECOND_OBJECT_IS_NOT_SILENTLY_DROPPED_V1_20261031_V1",
+ "action_id": "A_REPORT_NEVER_REPLACES_A_SOURCE_FILE_V1_20261031_V1",
+ "action_intent_id": "A_REPORT_NEVER_REPLACES_A_SOURCE_FILE_V1_20261031_V1",
  "action_kind": "FRESH_REUSE",
- "action_summary": "_PROSE_COMMAND's arity rule bound the objects of a prose command but not the COUNT: a row with arity one took the first path and dropped a second object stated as a noun phrase. The arity rule's dual now refuses a sentence that names a conjunction-headed second directory, folder or tree object, so nothing is deleted unless every named object is served.",
+ "action_summary": "The corrupted module is restored byte-for-byte from the last commit that held it as Python (c2335806bc) and a new invariant test makes the class impossible to miss: no .py file under canonical/ or execution_guard/ may open as a JSON receipt with a schema, the scan is asserted non-vacuous (>500 files), and the restored measurement module is compiled and checked.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -27,30 +27,30 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/composer_route_v1.py",
-   "canonical/tests/test_a_second_object_is_not_silently_dropped_v1.py"
+   "canonical/tests/test_declared_input_derivation_v1.py",
+   "canonical/tests/test_a_report_never_replaces_a_source_file_v1.py"
   ],
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A prose delete naming TWO objects was executed as a command over ONE of them: \"Delete <b>/prod.db and the app directory\" bound `rm -r <b>/prod.db`, destroyed the database, left the directory standing, and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. A command that serves half of a two-object sentence and certifies it as the whole request is the destructive form of an unobserved effect: the effect was observed, irreversible, and only half of what was asked.",
- "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Commit 665959c5be replaced canonical/tests/test_declared_input_derivation_v1.py -- a pinned measurement module -- with the adapter's own result JSON {\"capability_id\":\"test.slice.never_miss.v1\", ... \"verified\":true}. The file still has a .py name, cannot be imported, and its measurements are gone, while the report that replaced them claims verified:true. No guard in the tree asked whether a run destroyed the evidence it was supposed to produce, because every guard asks whether a capability RAN.",
+ "canonical_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "A prose delete naming TWO objects was executed as a command over ONE of them: \"Delete <b>/prod.db and the app directory\" bound `rm -r <b>/prod.db`, destroyed the database, left the directory standing, and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. A command that serves half of a two-object sentence and certifies it as the whole request is the destructive form of an unobserved effect: the effect was observed, irreversible, and only half of what was asked.",
+ "causal_blocker": "Commit 665959c5be replaced canonical/tests/test_declared_input_derivation_v1.py -- a pinned measurement module -- with the adapter's own result JSON {\"capability_id\":\"test.slice.never_miss.v1\", ... \"verified\":true}. The file still has a .py name, cannot be imported, and its measurements are gone, while the report that replaced them claims verified:true. No guard in the tree asked whether a run destroyed the evidence it was supposed to produce, because every guard asks whether a capability RAN.",
  "date": "2026-10-31",
- "expected_parent_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
- "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+ "expected_parent_change": "Before: importing canonical.tests.test_declared_input_derivation_v1 raises NameError: name 'true' is not defined at line 1, and the pinned derivation measurements do not run at all. After: 19 tests across the declaration, creation and second-object modules pass (0.6 s), and the invariant scan covers 3000+ python files in 0.13 s.",
+ "expected_parent_frontier_change": "Before: importing canonical.tests.test_declared_input_derivation_v1 raises NameError: name 'true' is not defined at line 1, and the pinned derivation measurements do not run at all. After: 19 tests across the declaration, creation and second-object modules pass (0.6 s), and the invariant scan covers 3000+ python files in 0.13 s.",
  "explicit_user_authorization": "Owner instruction this session, verbatim and repeated: all of the problems are already solved in the brain, so the fix wires what the repository already has -- the symbol index the adapter already builds, the overlap law the adapter already enforces, the unittest module _render_module already emits -- instead of inventing policy or adding a dependency. Owner instruction to focus on hardcore software engineering: this is the capability that writes tests. Owner instruction to do the optimal in the fastest way and only the right way. Owner instruction that all tests must be extremely hard and only truthful: five of the seven new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed.",
- "falsification_condition": "Re-run the tag on main and on this branch. If the baseline does not destroy the fixture and report the pair as verified, or if this branch refuses the single-object forms 'Delete the directory D' and 'Delete the file X', the law is wrong.",
+ "falsification_condition": "Run the three modules on origin/main and here, and grep the tree for a .py file whose content is a JSON receipt.",
  "governance_change": true,
- "governance_change_summary": "canonical/runtime/composer_route_v1.py decides which prose sentence becomes a shell command. It now also refuses a delete whose second named object it cannot serve. No capability is granted anything new: the change only removes an execution path, and the two single-object forms are pinned as still binding.",
+ "governance_change_summary": "Adds a content invariant over the tree and restores a measurement module from its last good blob. No refusal is relaxed; the new test only fails when a source file has become a receipt.",
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
- "intent": "Stop an irreversible command that serves one of two named objects and certifies the pair: the arity rule must count objects as well as bind them.",
+ "intent": "A capability's report may not be committed over the source file it was measuring: the evidence a pass rests on must survive the pass.",
  "load_bearing_primary": {
-  "canonical_base_commit": "4a936b1064d26490f23d1d94b88a91538d8c4379",
+  "canonical_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4",
    "CODING_FRONTIERCODE_GE_54_4",
@@ -60,28 +60,28 @@
   "expected_obligation_unlock_lcb": "1/13",
   "highest_leverage_now": true,
   "interpretation": "A capability that could delete now declines a sentence it cannot serve whole, and the refusal is measured by a filesystem oracle rather than by its own report.",
-  "measured_effect": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+  "measured_effect": "Before: importing canonical.tests.test_declared_input_derivation_v1 raises NameError: name 'true' is not defined at line 1, and the pinned derivation measurements do not run at all. After: 19 tests across the declaration, creation and second-object modules pass (0.6 s), and the invariant scan covers 3000+ python files in 0.13 s.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+  "stop_condition": "Stop when the restored module imports, its measurements run, and the invariant finds no receipt under a Python name.",
   "success_probability_lcb": "1/2",
   "wall_clock_cost_ub": 1
  },
- "measured_effect": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+ "measured_effect": "Before: importing canonical.tests.test_declared_input_derivation_v1 raises NameError: name 'true' is not defined at line 1, and the pinned derivation measurements do not run at all. After: 19 tests across the declaration, creation and second-object modules pass (0.6 s), and the invariant scan covers 3000+ python files in 0.13 s.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "prior_work_reused": "The arity rule already in _PROSE_COMMAND, the _INSIDE_THE_FILE_NOUNS table that already keeps a delete off a part of a file, and the rm -r promotion comment that already recorded 'a set expansion turns one wrong deletion into a whole directory of them'.",
+ "prior_work_reused": "The measurement module itself is unchanged from c2335806bc; the new test reuses only the tree and the JSON the report already carries.",
  "progress_evidence_paths": [
-  "canonical/runtime/composer_route_v1.py",
-  "canonical/tests/test_a_second_object_is_not_silently_dropped_v1.py"
+  "canonical/tests/test_declared_input_derivation_v1.py",
+  "canonical/tests/test_a_report_never_replaces_a_source_file_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
+  "canonical_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
    "DELIVERY_TREATED_AS_A_SECOND_TASK__the_answer_clause_bound_to_an_unrelated_writer"
   ],
-  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+  "expected_parent_level_state_change": "Before: importing canonical.tests.test_declared_input_derivation_v1 raises NameError: name 'true' is not defined at line 1, and the pinned derivation measurements do not run at all. After: 19 tests across the declaration, creation and second-object modules pass (0.6 s), and the invariant scan covers 3000+ python files in 0.13 s.",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
@@ -92,7 +92,7 @@
    "capability_work_deleted": "the string comparison of module names and the assertion-style `complete` were deleted, not bypassed",
    "existing_inherited_routes_checked": "span splice + SPAN_INTEGRITY, from-import name-token rewrite, shadowed-scope keeps, _modname_of, the parsed-file set and the post-splice ast.parse were all reused unchanged",
    "external_existing_routes_checked": "rope and libcst rejected for byte-preservation and dependency cost; textual replace rejected for correctness",
-   "surviving_gap": "The remaining creation-vs-mutation trio: add_parameter, add_total_function, fix_then_regression_test."
+   "surviving_gap": "fix_then_regression_test: the repair capability carries no regression-test synthesis, and no registered row declares synthesize_regression_test, which R10 then refuses."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -100,7 +100,7 @@
     "TREATING_THE_TOP_RANKED_CAPABILITY_AS_THE_ONE_THAT_RAN",
     "TREATING_AN_EMPTY_unknown_sites_LIST_AS_PROOF_THE_TREE_IS_CLEAN"
    ],
-   "real_outcome": "The two-object delete no longer binds a command at all; the probe's filesystem oracle sees prod.db survive, and the single-object forms still delete exactly what they name.",
+   "real_outcome": "The pinned selection measurements exist as executable Python and any future report written over a source file is caught by an invariant that reads content, not intent.",
    "surviving_necessity": "The tier oracle is independent of the adapter: it greps the whole tree for the old name, imports the package and runs the unittest suite, so a report that lies cannot pass it."
   },
   "obs_inherited_system": {
@@ -140,8 +140,8 @@
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "The fixture trees are tiny by construction, but the referee is real: a tree-wide grep for the old name, a real package import and a real unittest run, plus an A/B against a pristine HEAD worktree with the same fixtures"
   },
-  "real_outcome": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
-  "required_capability": "REUSE_THE_ARITY_RULE_AS_A_COUNT_OF_NAMED_OBJECTS",
+  "real_outcome": "Before: importing canonical.tests.test_declared_input_derivation_v1 raises NameError: name 'true' is not defined at line 1, and the pinned derivation measurements do not run at all. After: 19 tests across the declaration, creation and second-object modules pass (0.6 s), and the invariant scan covers 3000+ python files in 0.13 s.",
+  "required_capability": "REUSE_THE_TREE_INVARIANT_AND_THE_LAST_GOOD_BLOB",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -208,7 +208,7 @@
      "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
     }
    ],
-   "checked_at_utc": "2026-10-31T13:26:42Z",
+   "checked_at_utc": "2026-10-31T14:11:03Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -251,11 +251,11 @@
     "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
     "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
    ],
-   "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
-   "selected_route_checked_at_utc": "2026-10-31T13:26:42Z",
+   "selected_route": "RESTORE_THE_BLOB_AND_ADD_A_CONTENT_INVARIANT",
+   "selected_route_checked_at_utc": "2026-10-31T14:11:03Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T13:26:42Z",
+    "checked_at_utc": "2026-10-31T14:11:03Z",
     "execution_dependencies": [
      {
       "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
@@ -292,10 +292,10 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+    "selected_route": "RESTORE_THE_BLOB_AND_ADD_A_CONTENT_INVARIANT",
     "status": "READY"
    },
-   "selected_surviving_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+   "selected_surviving_route": "RESTORE_THE_BLOB_AND_ADD_A_CONTENT_INVARIANT",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
@@ -317,7 +317,7 @@
      "docs.python.org/3.10/library/ast.html -- ast.parse + lineno/col_offset are the sanctioned mechanism for span-exact edits; no third-party parser is required"
     ]
    },
-   "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+   "stop_condition": "Stop when the restored module imports, its measurements run, and the invariant finds no receipt under a Python name.",
    "unresolved_plausible_dominators": [],
    "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
   },
@@ -327,16 +327,16 @@
    "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
   ],
-  "selected_surviving_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
-  "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+  "selected_surviving_route": "RESTORE_THE_BLOB_AND_ADD_A_CONTENT_INVARIANT",
+  "stop_condition": "Stop when the restored module imports, its measurements run, and the invariant finds no receipt under a Python name.",
   "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
  },
- "refusal_or_stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
- "resolution": "One shape added to composer_route_v1 (a conjunction followed by a noun phrase whose head is a directory/folder/tree), applied to the rm row before its -r promotion. Single-object deletes are untouched and pinned.",
- "route_id": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+ "refusal_or_stop_condition": "Stop when the restored module imports, its measurements run, and the invariant finds no receipt under a Python name.",
+ "resolution": "canonical/tests/test_declared_input_derivation_v1.py restored; canonical/tests/test_a_report_never_replaces_a_source_file_v1.py added.",
+ "route_id": "RESTORE_THE_BLOB_AND_ADD_A_CONTENT_INVARIANT",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
- "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+ "selected_route": "RESTORE_THE_BLOB_AND_ADD_A_CONTENT_INVARIANT",
+ "stop_condition": "Stop when the restored module imports, its measurements run, and the invariant finds no receipt under a Python name.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "user_authorized_governance_change": true,
@@ -380,14 +380,14 @@
      "why_rejected_or_selected": "Rejected: duplicates existing bound adapters instead of adapting them in-place and adding only genuinely absent git-bisect and mutation-testing primitives."
     }
    ],
-   "chosen_candidate": "UPGRADE_SWE_REPAIR_REFACTOR_FAULT_ADAPTERS_AND_ADD_DETERMINISTIC_GIT_BISECT_AND_AST_MUTATION_TESTING",
+   "chosen_candidate": "RESTORE_THE_DERIVATION_RULES_AND_LET_CLAUSE_AND_DECLARED_PHRASE_DECIDE",
    "counterexample_receipts": [
     {
      "git_blob_sha": "95bad7bf130466a02f36de2f7f1cc1de8d4be476",
      "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py"
     },
     {
-     "git_blob_sha": "37bdda38a818f746302cd74db7d5c9ab8c72fceb",
+     "git_blob_sha": "cc16fb560ca32883900fb39c295268f638a9b6b3",
      "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py"
     }
    ],
