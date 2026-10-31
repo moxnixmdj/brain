@@ -2123,6 +2123,231 @@
         "workflow_job_id": 114688871759,
         "workflow_run_id": 38212267960
       }
+    },
+    "chart.raster.curve_value_query.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "chart.raster.curve_value_query.v1",
+          "label": "${input.label}",
+          "path": "${input.path}",
+          "x_value": "${input.x_value}"
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "chart_curve_value_query_v1",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "curve",
+        "series",
+        "value",
+        "interpolation",
+        "axis",
+        "legend",
+        "raster"
+      ],
+      "limitations": [
+        "Requires a uniquely legend-bound color series and calibrated x/y axes.",
+        "Supports linear and log10 axis transforms and bounded interpolation only.",
+        "Same-color multi-series ambiguity, vertical overlap at the query, missing labels, out-of-range queries, and large interpolation gaps fail closed.",
+        "No chart-family/domain semantic interpretation and no Chartography score authority."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "chart.raster.curve.y_at_x"
+      ],
+      "requires": [
+        "image.file.available",
+        "chart.series.label.available",
+        "chart.query.x_value.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_curve_value_query_v1.py",
+        "composed_capabilities": [
+          "image.extract.ocr.tesseract.positioned.tsv",
+          "chart.raster.scene_graph.v1",
+          "chart.raster.legend_style_binding.v1"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "author_tests_passed": 10,
+        "exact_runtime_blob_sha": "107e20dd66840ecaba32e9e9f6cbfc764da1ae0b",
+        "exact_test_blob_sha": "21870c05e9a8533305168cad65edd1977aeb047b",
+        "heldout_chartography_cases_consumed": 0,
+        "independent_falsification_passed": 6,
+        "independently_verified": true,
+        "model_dependency_count": 0,
+        "receipt_path": "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json",
+        "verifier_merge_sha": "757a8a9648c82953238aec6c0e481de99ab98ad4",
+        "verifier_pull_request": 2713,
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "workflow_job_id": 114508865515,
+        "workflow_run_id": 38152570909
+      }
+    },
+    "chart.raster.curve_x_at_y_query.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "chart.raster.curve_x_at_y_query.v1",
+          "label": "${input.label}",
+          "path": "${input.path}",
+          "y_value": "${input.y_value}"
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "chart_curve_x_at_y_query_v1",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "curve",
+        "series",
+        "threshold",
+        "intersection",
+        "axis",
+        "legend",
+        "raster"
+      ],
+      "limitations": [
+        "Requires a uniquely legend-bound color series and calibrated x/y axes.",
+        "Supports linear and log10 axis transforms with bounded raster segment interpolation only.",
+        "Multiple crossings, a flat curve overlapping the requested y over an interval, same-color multiple polylines, missing labels, out-of-range queries, and large segment gaps fail closed.",
+        "No chart-family/domain semantic interpretation and no Chartography score authority."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "chart.raster.curve.x_at_y"
+      ],
+      "requires": [
+        "image.file.available",
+        "chart.series.label.available",
+        "chart.query.y_value.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_curve_x_at_y_query_v1.py",
+        "composed_capabilities": [
+          "chart.raster.curve_value_query.v1",
+          "chart.raster.legend_style_binding.v1",
+          "chart.raster.scene_graph.v1",
+          "image.extract.ocr.tesseract.positioned.tsv"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "author_tests_passed": 11,
+        "exact_runtime_blob_sha": "04866f3aee99d9fd964f13571d8af278dfa6fe5e",
+        "exact_test_blob_sha": "325d125c3e55acab091be139a35ba3b9d1e57c25",
+        "heldout_chartography_cases_consumed": 0,
+        "independent_falsification_passed": 6,
+        "independently_verified": true,
+        "model_dependency_count": 0,
+        "receipt_path": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json",
+        "verifier_merge_sha": "ed91f366ea9690bcfb4aa8406887155a51c027c8",
+        "verifier_pull_request": 2715,
+        "verifier_repository": "moxnixmdj/verification-capsule-runner",
+        "workflow_job_id": 114511585709,
+        "workflow_run_id": 38153488048
+      }
+    },
+    "chart.raster.direct_curve_label_family_rank.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "chart.raster.direct_curve_label_family_rank.v1",
+          "path": "${input.path}",
+          "x_value": "${input.x_value}"
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "chart_direct_curve_label_family_rank_v1",
+      "cost": 2,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "chart",
+        "curve",
+        "direct label",
+        "series",
+        "family",
+        "rank",
+        "nearest",
+        "growth",
+        "survival",
+        "raster"
+      ],
+      "limitations": [
+        "Direct-label binding is limited to alphabetic or alphanumeric OCR labels adjacent to a unique curve start or end point.",
+        "Ambiguous nearby endpoints, duplicate normalized labels, multiple direct labels for one curve, unbracketed queries, large interpolation gaps, vertical overlap, unsupported axis scales, nonfinite queries, and nearest-value ties fail closed.",
+        "Same-color curves can be distinguished only when direct labels bind distinct polyline indices.",
+        "No arbitrary inline contour-label authority, domain semantic interpretation, heldout Chartography coverage, or Chartography score authority."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "chart.raster.direct_curve.label_binding",
+        "chart.raster.curve_family.rank_at_x",
+        "chart.raster.curve_family.nearest_at_x_y"
+      ],
+      "requires": [
+        "image.file.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py",
+        "composed_capabilities": [
+          "chart.raster.scene_graph.v1",
+          "chart.raster.positioned_ocr_axis_binding.v1",
+          "image.extract.ocr.tesseract.positioned.tsv"
+        ],
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "authored_tests_passed": 13,
+        "exact_runtime_blob_sha": "e3be28bd83ce0a9359a2ce9cedc8415dbcf745d2",
+        "exact_test_blob_sha": "4c8fc60d72e160f9995c5df1b0af75b97d9a1eb9",
+        "focused_workflow_job_id": 114516848546,
+        "focused_workflow_run_id": 38155272543,
+        "heldout_chartography_cases_consumed": 0,
+        "independent_falsification_tests_passed": 14,
+        "independent_second_carrier_tests_passed": 27,
+        "independent_test_blob_sha": "d327f22c7d35e754298f477660a140198e042999",
+        "independently_verified": true,
+        "model_dependency_count": 0,
+        "neighboring_regression_tests_passed": 34,
+        "receipt_path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_SPRITE_INDEPENDENT_VERIFY_20261011_V1.json",
+        "verification_class": "FOCUSED_PLUS_INDEPENDENT_SECOND_CARRIER",
+        "verified": true,
+        "verifier_commit": "86e36b09ae6ec3c9da90c9a19a328e6dafc174ab",
+        "verifier_repository": "moxnixmdj/verification-capsule-runner"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
