@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_ROW_COULD_DECLARE_AS_ITS_REQUIREMENT_THE_NAME_OF_ANOTHER_ROW_AND_NO_CHECK_COMPARED_A_REQUIREMENT_AGAINST_WHAT_THE_REGISTRY_PUBLISHES__SIX_SWE_ROWS_REQUIRED_THE_CAPABILITY_ID_python_source_symbols_index_ast_WHICH_IS_NOT_AN_EFFECT_WHILE_THAT_ROW_PUBLISHES_python_source_symbol_index__INCLUDING_THE_MOST_SELECTED_ROW_IN_THE_ADVANCED_CENSUS__AND_THE_ONLY_FALSE_ROW_IN_THE_54_CASE_MATRIX_WAS_A_FIXTURE_WITH_NO_DIFF_TO_SHOW_MEASURED_2026_10_31",
- "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+ "canonical_base_commit": "75ea4ec9d059d1b4770087f1db145da0ffa79d1c",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -70,7 +70,7 @@
   "execution_guard/swe_capability_matrix_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+  "canonical_base_commit": "75ea4ec9d059d1b4770087f1db145da0ffa79d1c",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "A_REQUIREMENT_THAT_NAMES_A_ROW_AND_BINDS_NOTHING",
