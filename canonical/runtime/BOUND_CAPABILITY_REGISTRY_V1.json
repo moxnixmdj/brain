@@ -6538,6 +6538,257 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-EXTRACT-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-EXTRACT-001.json"
       }
+    },
+    "python.refactor.inline_helper.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.inline_helper.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_inline_helper",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "inline",
+        "inline the helper",
+        "single-use",
+        "single use",
+        "helper",
+        "only caller",
+        "call site",
+        "refactor",
+        "expand function",
+        "inline function"
+      ],
+      "limitations": [
+        "Inlines a module-level function that ends in a single return and has exactly ONE call site in the subject; 'single-use' is read as that property of the tree, never as a hint.",
+        "Refuses a call whose argument is not re-evaluable (a call, lambda, await or comprehension): substituting it twice would run it twice.",
+        "Kept only if the helper's name survives nowhere and the suite is green."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.inline_helper",
+        "python.refactor.single_use_inlined"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "helper",
+        "inlined_expression",
+        "edits",
+        "files_edited",
+        "suite_passed",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_inline_helper.py",
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.refactor.rename_parameter.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.rename_parameter.v1",
+          "module": "${input.module}",
+          "new_param": "${input.new_param}",
+          "old_param": "${input.old_param}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "qualname": "${input.qualname}",
+          "run_tests": "${input.run_tests}",
+          "source_root": "${input.source_root}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_refactor_rename_parameter",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "rename",
+        "parameter",
+        "ast",
+        "scope",
+        "shadowing",
+        "call site",
+        "kwargs",
+        "signature",
+        "semantic edit",
+        "codemod"
+      ],
+      "limitations": [
+        "edits identifiers, never strings or formatting: comment/docstring words byte-preserved; all splices are byte-integrity-checked at exact identifier spans (SPAN_INTEGRITY refusal).",
+        "positional call sites are counted but never edited (semantic ambiguity is a law, not a bug); dynamic receivers, getattr dispatch and **kwargs passthroughs are listed in unknown_sites and lower complete instead of being silently edited.",
+        "nested scopes that rebind the old parameter shadow it (recorded in shadowed_keeps); ClassDef bodies are opaque; a global/nonlocal declaration on the parameter refuses the edit (REFUSE_NONLOCAL_OR_GLOBAL).",
+        "no run_tests named => verified=false loudly; a red post-edit suite restores every original byte and refuses TESTS_RED_AFTER_EDIT.",
+        "same-name rerun refuses PARAM_NOT_FOUND (honest no-noop idempotence)."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.rename_parameter"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "complete",
+        "edit_count",
+        "edits",
+        "files_edited",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "positional_callsites_untouched",
+        "shadowed_keeps",
+        "unknown_sites",
+        "verified"
+      ],
+      "source": {
+        "module": "python stdlib ast/tokenize",
+        "type": "runtime",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-REFACTOR-001",
+        "observed_effect": {
+          "determinism": "two pristine worlds byte-identical trees and artifacts; rerun refuses PARAM_NOT_FOUND",
+          "dynamic": "getattr(core_mod,'describe')(n=k) listed in unknown_sites -> complete=false, bytes untouched, known edits still applied",
+          "golden": "describe n->size: 9 edits across def+body+callers (from-import AND module-alias styles); contract + through-caller propagation suite green post-edit (gate PASS, complete=true), e2e 204 ms",
+          "rollback": "tampered suite -> TESTS_RED_AFTER_EDIT, all originals restored",
+          "shadowing": "module with its own local describe(byte-identical) outlives the pass; docstring word 'n' preserved"
+        },
+        "pin_green": "16/16 x 3 consecutive runs",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REFACTOR-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REFACTOR-001.json"
+      }
+    },
+    "python.refactor.rename_symbol.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.rename_symbol.v1",
+          "module": "${input.module}",
+          "new_symbol": "${input.new_symbol}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "qualname": "${input.qualname}",
+          "run_tests": "${input.run_tests}",
+          "source_root": "${input.source_root}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "complete",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_refactor_rename_symbol",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "refactor",
+        "rename",
+        "symbol",
+        "identifier",
+        "ast",
+        "scope",
+        "binding",
+        "shadowing",
+        "call site",
+        "import propagation",
+        "semantic edit",
+        "codemod"
+      ],
+      "limitations": [
+        "edits identifiers at exact spans only: strings, comments and formatting are byte-preserved; every splice is verified against the original bytes (SPAN_INTEGRITY).",
+        "only uses that provably resolve to the same binding are renamed; dynamic receivers, getattr dispatch and unattributable attribute sites are listed in unknown_sites and lower complete, never silently edited or dropped.",
+        "method renames refuse when a subclass overrides the same name (REFUSE_INHERITED_OVERRIDE) or inherits-and-calls it (REFUSE_INHERITED_USE); super() references are never touched.",
+        "locals, parameters and class-level assignments refuse SYMBOL_KIND_UNSUPPORTED (rename_parameter owns params); global/nonlocal declarations on the old name refuse REFUSE_NONLOCAL_OR_GLOBAL.",
+        "no run_tests named => gate PASS_BLIND with verified=false, stated loudly.",
+        "the action contract is `complete`: every provable site is edited and then re-measured on the post-edit trees, and a surviving provable reference refuses RESIDUAL_REFERENCE before a byte is written; `gate` is PASS only when a named pytest suite ran green, so a no-suite run reports PASS_BLIND and the registry expects complete=true rather than an unreachable gate."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.rename_symbol"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "module",
+        "qualname",
+        "old_symbol",
+        "new_symbol",
+        "symbol_kind",
+        "edit_count",
+        "files_edited",
+        "unknown_sites",
+        "shadowed_keeps",
+        "gate",
+        "complete",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "module": "python stdlib ast",
+        "type": "runtime",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-RENAMESYM-001",
+        "observed_effect": {
+          "determinism": "two pristine worlds -> byte-identical trees and artifacts; string literals and substring-carriers (topper, \"top of \") never edited",
+          "fertility_note": "qualified 'top' rename run_twice gate PASS at 218ms with 5 span edits across 3 files",
+          "golden": "pkg/core.py top -> apex across caller: def, load uses, from-import name token, import-module attribute site (5 edits); aliaser `import top as apex` becomes `import apex as apex` and keeps resolving; named pytest suite green post-edit; e2e 218 ms",
+          "honesty": "shadowed inner scope keeps old name and is recorded; NEW_NAME_COLLIDES on def, module binding, nested scope and import alias; REFUSE_INHERITED_OVERRIDE/USE on subclass override and inherited self-call; REFUSE_NONLOCAL_OR_GLOBAL; SYMBOL_NOT_FOUND; INVALID_IDENTIFIER",
+          "kind_matrix": "FUNCTION cross-file golden; CLASS; MODULE_BINDING (Assign + AnnAssign); METHOD with self/cls/C.m law; NESTED_FUNCTION file-local",
+          "rollback": "tampered named suite red post-edit -> TESTS_RED_AFTER_EDIT and every edited file restored sha256-identical"
+        },
+        "pin_green": "18/18 rename-symbol pins green",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-RENAMESYM-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
