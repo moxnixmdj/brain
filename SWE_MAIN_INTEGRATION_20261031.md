@@ -1,5 +1,7 @@
 # SWE integration — 2026-10-31
 
+> Historical integration measurements. See `SWE_EXISTING_MECHANISM_RECOVERY_20261031.md` for the subsequent fixes and corrected landing diagnosis. The local admission failures below are real, but GitHub's live rules list only the signed referee check as required; they do not establish that advisory failures prohibit a normal merge.
+
 ## Status
 
 All accumulated work is preserved on `arena/4b31f8b6-brain`, with main integrated through `f4b04d0c`. This is **not a claim that PR #6341 has landed**. Required admission checks reject the missing action intent and the broad accumulated scope. No policy bypass, protected-file edit, or relabeling as governance was performed.

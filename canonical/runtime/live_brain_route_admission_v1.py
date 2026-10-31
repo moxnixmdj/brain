@@ -2086,7 +2086,7 @@ def _composed_acceptance(goal: str, chain: Any, executed: Mapping[str, Any]) -> 
 _MEASURED_REPAIR = "python.software.repair.measured_acceptance.v1"
 
 
-def _bind_requested_contract_checks(checks, compiled, admissible):
+def _bind_requested_contract_checks(checks, compiled, admissible, *, goal=None):
     """Bind a public structured requirement, never arbitrary adapter kwargs."""
     selected = compiled.get("selected_capability")
     if (selected != _MEASURED_REPAIR or compiled.get("capability_dag")
@@ -2096,6 +2096,22 @@ def _bind_requested_contract_checks(checks, compiled, admissible):
     source_root = inputs.get("source_root")
     if not isinstance(source_root, str) or not source_root.strip():
         raise ValueError("CONTRACT_SOURCE_ROOT_UNBOUND")
+    # Reuse the controller's lossless clause boundary before any search or
+    # child suite. Structured properties cannot erase an unsupported routing
+    # obligation merely because the objective suffix is understandable.
+    task_text = goal if goal is not None else inputs.get("goal")
+    if not isinstance(task_text, str) or not task_text.strip():
+        raise ValueError("CONTRACT_TASK_TEXT_UNBOUND")
+    clause = _acceptance.acceptance_clause.extract(task_text, inputs)
+    if str(clause.get("status") or "").startswith("FAIL_CLOSED__"):
+        raise ValueError(str(clause["status"]))
+    acceptance_model = _acceptance._ACCEPT.objective.compile_model(
+        clause["acceptance_task_text"],
+        candidate_field_schema=_acceptance._MEASURE.MEASUREMENT_SCHEMA,
+    )
+    if (acceptance_model.get("pass") is not True
+            or acceptance_model.get("objective_acceptance_model_complete") is not True):
+        raise ValueError("CONTRACT_ACCEPTANCE_HAS_UNSUPPORTED_OBLIGATIONS")
     root = _acceptance._safe_dir(ROOT, source_root)
     normalized = _acceptance._validate_contract_checks(checks, root)
     output = _acceptance._safe_output(ROOT, inputs.get("output_path"))
@@ -2204,6 +2220,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     original_request = request
     goal = str((request or {}).get("goal") or "").strip()
     early_selection = None
+    primary_selection = None
     context = None
     from canonical.runtime import crossfile_task_binding_v1 as _crossfile
     if _crossfile.is_request(goal):
@@ -2245,6 +2262,11 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 context = None
             if context is not None:
                 selected = str(context[2].get("selected_capability") or "")
+                primary_selection = {
+                    "primary_capability": selected,
+                    "selected_capability": selected,
+                    "basis": "PRIMARY_COMPILATION_REUSED_BEFORE_EXECUTION",
+                }
                 # An explicit family has its own decisive resolver and binding
                 # rules. Use it before ANY lexical dispatch, even when the raw
                 # id looks compatible: its output may still bind onto source.
@@ -2267,6 +2289,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 request = dict(request)
                 request["_typed_swe_plan"] = context
     result = _solve_body(request)
+    if primary_selection is not None:
+        result["typed_swe_selection"] = primary_selection
     if early_selection is not None:
         result["typed_swe_selection"] = early_selection
         # The actual selected adapter's verdict is final, including failures.
@@ -2362,7 +2386,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     if "contract_checks" in (request or {}):
         try:
             admissible, contract_spec = _bind_requested_contract_checks(
-                request["contract_checks"], compiled, admissible)
+                request["contract_checks"], compiled, admissible, goal=goal)
         except (ValueError, RuntimeError, TypeError) as exc:
             return _fail(task_id, "FAIL_CLOSED__CONTRACT_CHECKS_UNBOUND",
                          "CONTRACT_CHECKS_UNBOUND", started, executed=False, reason=str(exc))

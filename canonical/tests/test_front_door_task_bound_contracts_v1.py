@@ -51,8 +51,11 @@ def test_normal_public_request_executes_real_repair_and_requested_checks(task):
     assert result["pass"] is True, result
     assert result["compiled_capability_id"] == "python.software.repair.measured_acceptance.v1"
     assert result["structured_contract_acceptance_complete"] is True
-    assert result["typed_swe_selection"]["primary_capability"] == "python.repository.acceptance.measure.v1"
-    assert result["typed_swe_selection"]["basis"] == "DECISIVE_TYPED_SELECTION_BEFORE_EXECUTION"
+    # Current registry routes directly to the real repair controller, not the
+    # older measurement-only alias. Report the observed primary route honestly.
+    assert result["typed_swe_selection"]["primary_capability"] == "python.software.repair.measured_acceptance.v1"
+    assert result["typed_swe_selection"]["selected_capability"] == result["compiled_capability_id"]
+    assert result["typed_swe_selection"]["basis"] == "PRIMARY_COMPILATION_REUSED_BEFORE_EXECUTION"
     report = json.loads((path / "report.json").read_text())
     assert result["contract_check_spec_sha256"] == report["contract_check_spec_sha256"]
     checks = report["contract_checks"]
@@ -180,9 +183,8 @@ def test_unknown_requirement_in_goal_is_not_removed_by_structured_checks(task):
     result = door.solve(request)
     assert result["pass"] is False
     assert result["structured_contract_acceptance_complete"] is False
-    # This sentence selects the semantic controller, which does not implement
-    # the requested optional property configuration. Refuse BEFORE running it,
-    # rather than silently discard the structured part of the user's request.
+    # The lossless clause checker rejects the extra routing obligation before
+    # repair execution; property checks must not authorize dropping that text.
     assert result["executed"] is False
     assert result["failure_class"] == "CONTRACT_CHECKS_UNBOUND"
     assert not (path / "report.json").exists()
@@ -194,3 +196,32 @@ def test_invalid_requests_do_not_enter_execution(payload):
     assert result["pass"] is False
     assert result["executed"] is False
     assert result["failure_class"] == "REQUEST_INVALID"
+
+
+@pytest.mark.parametrize("extra,location", [
+    ("preserve every secret file ", "prefix"),
+    ("never contact the network ", "prefix"),
+    ("also implement a web server ", "prefix"),
+    (" and preserve every secret file", "suffix"),
+    (" and `hidden_checks` must be true", "suffix"),
+    (" and `python_parse_ok` must be at least 5", "suffix"),
+])
+def test_unsupported_obligations_do_not_run_even_the_baseline_oracle(task, extra, location):
+    path, request = task
+    oracle = path / "test_all.py"
+    oracle.write_text("from pathlib import Path\n"
+                      "Path(__file__).with_name('oracle-ran').write_text('executed')\n"
+                      + oracle.read_text())
+    if location == "prefix":
+        request["goal"] = request["goal"].replace("using the test path", extra + "using the test path")
+    else:
+        request["goal"] += extra
+    before = {p.name: p.read_bytes() for p in path.iterdir()}
+    result = door.solve(request)
+    assert result["pass"] is False
+    assert result["executed"] is False
+    assert result["failure_class"] == "CONTRACT_CHECKS_UNBOUND"
+    assert result["structured_contract_acceptance_complete"] is False
+    assert not (path / "oracle-ran").exists()
+    assert not (path / "report.json").exists()
+    assert before == {p.name: p.read_bytes() for p in path.iterdir()}

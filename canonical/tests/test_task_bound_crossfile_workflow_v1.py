@@ -228,12 +228,26 @@ def test_even_successful_component_plan_is_not_executed_source_patch(tmp_path):
     assert result["verified"] is False
 
 
-def test_registry_presence_cannot_credit_fullstack_delivery(tmp_path):
+@pytest.mark.parametrize("complete", [False, True])
+def test_registry_presence_cannot_credit_fullstack_delivery(tmp_path, complete):
+    # Deliberately declaration-only test data, not executable providers or a
+    # historical registry. Both complete and incomplete catalogs must fail to
+    # credit delivery. No producer is imported/executed by this inspector.
+    producers = ["software.hardcore.kernel.orchestrate.v1", "software.patch.synthesize.cegis.z3.v1",
+                 "software.repair.loop.cegis_hypothesis.v1", "python.pipeline.allowlist_gate.v1",
+                 "python.pr.land.composer.v1", "python.refactor.test_scaffold.fusion.v1"]
+    required = ["python.pipeline.allowlist.verified", "python.pr.land.verified",
+                "python.transformation.fused.verified", "software.hardcore.kernel.verified",
+                "software.repair.loop.cegis_verified"]
+    rows = {cid: {"provides": []} for cid in producers}
+    rows[producers[0]]["provides"] = required
+    if not complete:
+        del rows[producers[-1]]
     registry_path = tmp_path / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
     registry_path.parent.mkdir(parents=True)
-    registry_path.write_bytes((ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json").read_bytes())
+    registry_path.write_text(json.dumps({"capabilities": rows}))
     result = declarations.run({"output_path": "report.json"}, tmp_path)
-    assert result["declarations_resolve"] is True
+    assert result["declarations_resolve"] is complete
     assert result["workflow_executed"] is False
     assert result["fullstack_verified"] is False
     assert result["output_verified"] is False

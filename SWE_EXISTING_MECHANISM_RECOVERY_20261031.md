@@ -1,0 +1,48 @@
+# Existing-mechanism SWE recovery — 2026-10-31
+
+## Implemented rather than reinvented
+
+This work reuses Brain's acceptance-clause extractor, lossless objective compiler, measurement schema, direct repair routing, existing provenance tracer, and normal GitHub pull-request merge mechanism. No new capability, external model, dependency, or protected-policy modification was added in this follow-up.
+
+### Reject unsupported structured requests before expensive execution
+
+`live_brain_route_admission_v1._bind_requested_contract_checks` now feeds the original request through the existing clause extractor and objective compiler using the actual measurement schema before dispatching repair. Undeclared prefix requirements, unsupported suffixes, unknown fields, and invalid field/type combinations cannot be erased by a supported property check.
+
+This is feasibility checking, not acceptance: supported but false objectives still require real candidate execution and verification. The existing artifact/content/property checks remain mandatory. This follow-up scopes the preflight to requests carrying explicit `contract_checks`; it does not claim general natural-language semantic understanding or preflight coverage for every adapter.
+
+Six added real-oracle regressions put a filesystem marker in the baseline test program. All refuse before that program runs, emit no report, and preserve the entire source/input directory. No successful test result is substituted or cached.
+
+### Honest route provenance
+
+The request-local compilation already selects the measured repair controller directly in the current registry. Its observed primary and selected capability are now reported with basis `PRIMARY_COMPILATION_REUSED_BEFORE_EXECUTION`. Genuine typed corrections retain their distinct `DECISIVE_TYPED_SELECTION_BEFORE_EXECUTION` basis and executed verdicts remain final. The test no longer expects a historical measurement-only route that was not taken.
+
+### Correct two stale test assumptions without weakening acceptance
+
+- Interprocedural provenance had deliberately become opt-in upstream for cost reasons. The positive provenance test now requests `provenance=True`; the existing tracer produces actual hypotheses and its strict positive-count assertion is unchanged. This was not a missing tracing algorithm.
+- The fullstack declaration test previously assumed the current partial registry contained every producer. It now exercises explicitly declaration-only complete and incomplete catalogs, requiring the exact resolution result for each. Both must still deny workflow execution, delivery verification and output acceptance. No actual software-delivery capability is inferred from catalog completeness.
+
+### Let model diagnostics finish honestly
+
+The missing-input negative control now uses the registered Python symbol index instead of an absent audit capability. This preserves the missing-input assertion and allows the verifier to reach all categories. Its existing fresh execution checks still expose unsupported audit, SQLite creation and test-audit workflows; none is relabeled as passing or removed.
+
+## Actual measurements
+
+- Reproduced all four previously reported SWE failures before edits: **4 failed, 3.96 s**.
+- First corrected three-module run: **66 passed, 23.07 s**.
+- Structured public-contract module, including six new no-execution controls: **30 passed, 14.82 s**.
+- Full selected 16-module SWE regression run: **299 passed, 101.67 s**, one existing tree-sitter deprecation warning. This includes real repair, candidate replay, source preservation, caller routing, destination handling, parallel indexing, property checks, namespace execution, cache invalidation, and both cross-file protocols. It is not a full repository-suite claim.
+- Separate wider routing/acceptance run: **50 passed, 17 failed, 12.61 s**. Actual-source comparison with the pre-change runtime reproduced **50 passed, the same 17 failed, 11.81 s**. Production source was restored byte-for-byte after comparison; no import-loader or test-harness file substitution was used. Missing registrations and older routing/composition failures remain real backlog, not passing capability evidence. These runs do not establish an overall speedup.
+- Model-verification diagnostic run completed **30/33**, including **5/5 negative controls**. Remaining failures are source-audit execution, SQLite creation, and test-audit execution. They were not fixed by changing the control, and no 33/33 claim is made.
+- Local integrity guard against `origin/main`: **17 rules, zero violations, PASS**. The follow-up leaves the preceding three-declaration restoration within its existing limit.
+
+The compiled artifact is regenerated from the final tree; its own digest block and PR record identify it. The current digest is deliberately not embedded in this root knowledge document, avoiding a self-referential compiler input.
+
+## Corrected landing diagnosis
+
+The live GitHub branch-rules endpoint `repos/moxnixmdj/brain/rules/branches/main` declares the signed `referee/repo-integrity-guard` as its required status check, with strict up-to-date enforcement and a pull-request requirement. The local missing-intent and scope diagnostics remain failures, but they are not listed as required status checks by that endpoint. Earlier statements that they necessarily prevent any normal GitHub merge were too strong.
+
+This evidence does not authorize bypassing the referee. A fresh signed SUCCESS for the pushed head is required before attempting the normal, head-matched PR merge. No admin flag, forced push, check manipulation, ruleset change, or protected-file edit is used. At document creation the new commit has not yet landed; the GitHub PR state is authoritative for the subsequent merge outcome.
+
+## Limits
+
+Passing these selected tests does not establish the world's fastest or most capable general software engineer. The wider 17-case routing backlog, three model execution failures, declaration-only fullstack composition, bounded repair grammars, and broader real-repository transfer/production-engineering qualifications remain unresolved. These are producer-run sandbox measurements, not independent verification or terminal-capability credit.
