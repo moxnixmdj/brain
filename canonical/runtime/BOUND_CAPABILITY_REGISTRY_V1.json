@@ -4030,6 +4030,192 @@
         "mission_id": "SACCR-CREDIT-ADDON-LIVE-BINDING-001",
         "model_dependency_count": 0
       }
+    },
+    "http.json.fetch_from_state": {
+      "action_template": {
+        "args": {
+          "capability_id": "http.json.fetch_from_state",
+          "max_bytes": 5000000,
+          "output_path": "${input.output_path}",
+          "source_json_path": "${input.source_json_path}",
+          "timeout_s": 30,
+          "url_key": "${input.url_key}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "http_json_fetch",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "fetch",
+        "http",
+        "https",
+        "json",
+        "url",
+        "metadata",
+        "live",
+        "authoritative"
+      ],
+      "limitations": [
+        "HTTPS only.",
+        "The requested URL must be uniquely named by url_key inside a repository-local JSON source.",
+        "Fetched content must parse as JSON and is size bounded."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "http.json.fetch_from_state"
+      ],
+      "requires": [
+        "structured.json.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/http_json_fetch.py",
+        "module": "urllib.request",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_semantics_equal": true,
+        "independent_verifier": "curl",
+        "mission_id": "ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001",
+        "observed_effect": {
+          "output_bytes": 9248,
+          "output_sha256": "9eca4c2315cec5fcb72f58ed96752dabd6711ba84603eb53160caa19eefe8c7f",
+          "requested_url": "https://pypi.org/pypi/pypdf/6.19.0/json"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001__RECEIPT.json"
+      }
+    },
+    "image.code.decode.zbarimg": {
+      "action_template": {
+        "args": {
+          "argv": [
+            "zbarimg",
+            "--quiet",
+            "--raw",
+            "${input.path}"
+          ],
+          "capability_id": "image.code.decode.zbarimg",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "stdout",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "cli_command",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "decode",
+        "qr",
+        "barcode",
+        "code128",
+        "image",
+        "zbar"
+      ],
+      "limitations": [
+        "Verified for QR and Code 128 PNG decoding through zbarimg."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "image.code.decode"
+      ],
+      "requires": [],
+      "source": {
+        "origin": "Ubuntu",
+        "packages": [
+          {
+            "name": "zbar-tools",
+            "sha256": "9e718d34a9650263aca2dd85e56d9de42ca24ff82254f90f5e4270d1e5d00422",
+            "version": "0.23.93-4build3"
+          }
+        ],
+        "type": "apt"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "formats": [
+          "QR",
+          "CODE128"
+        ],
+        "independent_verified": true,
+        "mission_id": "ASTRA-VERIFY-ZBAR-MULTIFORMAT-001",
+        "payload": "PROJECT BRAIN",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ZBAR-MULTIFORMAT-001__RECEIPT.json"
+      }
+    },
+    "image.extract.ocr.tesseract": {
+      "action_template": {
+        "args": {
+          "capability_id": "image.extract.ocr.tesseract",
+          "language": "eng",
+          "path": "${input.path}",
+          "psm_values": [
+            "6",
+            "7",
+            "11",
+            "3"
+          ]
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "image_ocr_tesseract",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "image",
+        "ocr",
+        "tesseract",
+        "text",
+        "raster"
+      ],
+      "limitations": [
+        "English raster text extraction only.",
+        "Pinned Tesseract package and eng.traineddata surface is verified at runtime.",
+        "No chart or domain semantic authority."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "image.text.ocr.english"
+      ],
+      "requires": [
+        "image.file.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+        "engine": "tesseract",
+        "language": "eng",
+        "model_sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+        "type": "brain_bound_system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_runtime_blob_sha": "45714d7a0160802d986042910da1c4c6462676e5",
+        "independent_verified": true,
+        "receipt_path": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
