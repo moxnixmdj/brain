@@ -1,13 +1,14 @@
 # All the problems — the hardcore software-engineering census
 
-**Revision 7.** Measured on `ec2f9ec` (main), 2026-10-30. Every number below is a measurement from
+**Revision 8.** Measured on `5fb3598` (main) and this branch, 2026-10-31. Every number below is a measurement from
 this tree, not an estimate. §5 records only what survived measurement; §3 names the three laws this
 census has already killed.
 
 **Question:** what are *all* the problems, for a machine that must be the most advanced, fastest,
 smartest software engineer?
 
-**Answer:** the machine owns **125 routable capabilities and 419 verified ones**, and **9 of the 14
+**Answer:** the machine owns **131 registered capability rows and 425 verified capabilities**, of which
+**112 are routable from an ordinary sentence**, and **9 of the 14
 capability families a working software engineer uses every day have zero owners.** That is not a
 long tail. It is *inline a function, move a symbol, find dead code, change a signature, scan for a
 secret, measure complexity, resolve a conflict, detect a flaky test, bisect a regression, find an
@@ -19,10 +20,11 @@ Authority: none. Credit: 0. Model dependency: 0. Spend: $0.
 
 ## 0. The answer in one line
 
-> **5 of 28.** The machine executes a rename, indexes 2,254 files, refuses five requests it used to lie
-> about, and now answers three analysis questions from artifacts it already builds. Everything else it
-> cannot do — and one thing it does that it should not: it deletes a production database when asked,
-> and reports success.
+> **8 of 28.** The machine executes a rename, indexes 2,254 files, refuses five requests it used to lie
+> about, and answers **six** analysis questions from artifacts it already builds — including one,
+> *would these tests catch this bug*, that needs the suite to actually run. Everything else it cannot
+> do — and one thing it does that it should not: it deletes a production database when asked, and
+> reports success.
 
 | works end to end today | measured |
 |---|---|
@@ -32,6 +34,9 @@ Authority: none. Credit: 0. Model dependency: 0. Spend: $0.
 | say which function nothing executes | **PASS, 1.7 ms** — `audit_total`, from the index's own `callers_of` |
 | find a hardcoded credential | **PASS, 0.2 ms** — file + line, secret redacted, never written |
 | say which function is quadratic | **PASS, 0.5 ms** — nesting depth → `O(n^2)` |
+| count the definitions in a tree | **PASS, 0.9 ms** — one number, every `def`/`class` at any depth |
+| say whether input reaches `exec` | **PASS, 1.8 ms** — bound at the input boundary, with the edges it followed |
+| say whether the tests would catch a bug | **PASS, 44 ms** — `sys.settrace`, stdlib only; *no* is a proof |
 | everything else | refuses, substitutes, or lies |
 
 ---
@@ -177,6 +182,33 @@ directories no longer block `source_root`; and *"write its name to P"* is **deli
 answer — anaphoric, so it cannot name a new capability — rather than a second step that fails and
 takes the answer down with it.
 
+**Admitted in this revision.** Three more rows, **5/28 → 8/28**, each one pass over the same stdlib the
+lane already uses:
+
+| row | adapter | measured | census oracle |
+|---|---|---|---|
+| `count_functions` | `ast.walk` at any depth, both kinds summed | **0.9 ms** → `5` | `5` |
+| `taint_reaches_exec` | source = the input boundary, sink = a call vocabulary | **1.8 ms** → `yes` | `yes` |
+| `suite_would_catch` | `sys.settrace` in a subprocess, `unittest` discovery | **44 ms** → `no` (6 of 9 lines never ran) | `no` |
+
+Three more laws, all measured, all narrowings:
+
+- **ONE VERDICT.** A report is data. The adequacy artifact explained itself — *"yes means every
+  executable line ran; no means at least one never ran"* — and a reader looking for the answer word
+  in the file found **both**, so a correct `no` was unreadable. Its own oracle returned `ok=False`
+  on it. The report now carries one verdict plus a machine-readable scope code.
+- **SIBLING, BOTH WAYS.** The witness law found the tests from the subject. A sentence that names
+  *only* the tests (*"the tests in `<b>/tests`"*) has to find the code they exercise by the same
+  relation reversed — bound the other way the row died `NO_TARGET_FUNCTIONS` and wrote nothing.
+- **DELIVERY IS A DESTINATION.** The DAG planner handed *"Write yes or no to `<b>/answer.json`"* to
+  `software.synthesis.grid_induction.v1` as a second step. The capability that **had** the answer ran
+  fine and wrote to a spool; the run ended `FAIL_CLOSED__PROMISED_ARTIFACT_MISSING`. Fixed at the
+  seam the planner actually uses, not the one the compound compiler uses.
+
+And one correction that is not a law but a semantics fix: **a parser is a source, never a sink.**
+With `loads` in the sink vocabulary, a function that parsed its parameter and returned a field of it
+reported *reach* — a claim about code that cannot execute anything.
+
 That gives the ratio for the remaining eight families: **one query, one row, one adapter, ~0.5 ms.**
 They are not research. They are bookkeeping against artifacts this machine already produces.
 
@@ -232,7 +264,7 @@ actually serves, every item below is unverifiable at merge time.
 
 Ordered by *measured* leverage, with the arithmetic shown.
 
-**① Build the owners — in progress, 3 of 11 admitted (`ec2f9ec`).** This is first, because §2.1
+**① Build the owners — in progress, 6 of 11 admitted.** This is first, because §2.1
 proved the ranking is not the disease.
 The word-suppression rule was built and killed this revision: it moved the false match from `report`
 to `run` and left the false pass standing. A sentence with no owner is answered by whatever row shares
@@ -240,11 +272,12 @@ one word with it — a PDF converter, a test auditor, a repo measurer. **An owne
 `security` ends the tie by itself.** Until these families exist, every ranking rule is arithmetic on
 noise.
 
-**② Finish the analysis lane — three done, and the shape of the next three is now proven.** Each
-remaining family is a query over an artifact the machine already builds: *unused imports* and
-*unreachable branches* read the same symbol index; *flaky test* and *import cycle* read the same call
-and import edges; *merge conflict* is marker detection over bytes. The per-PR registration limit is
-**3**, so this is a four-PR lane — and it is the only lane that raises the pass count.
+**② Finish the analysis lane — six done, and it has now run out of free rows.** Six of the eleven
+families answer end to end. The rest are no longer analysis: *merge conflict*, *circular import* and
+*injection* each require the machine to **modify the tree and re-run the suite**, and the controller
+that would do that does not exist (§2.2's `FAIL__LIVE_CONTROLLER_EXECUTION`). The next three cheapest
+rows are therefore a repair lane, not another adapter — this is the first time this document has been
+able to say that the analysis lane's ceiling is reached rather than merely unfinished.
 
 **③ Derive the intermediate artifact (21 rows, §2.2).** `diff_path` = the tree's `git diff`;
 `anchor_path`/`worktree_path` = the named root; `index_path` = the registered indexer. The mechanism
@@ -278,6 +311,7 @@ the largest.
 | built, measured, reverted | **The step-expectation law.** A composed step must satisfy its capability's declared `expect`. Killed **19 real questions**: `shell.command.run` declares `returncode == 0`, and for `cmp` the exit code *is the answer*. |
 | built, measured, reverted | **The pre-execution change gate.** Alone it turned an honest failure into a false pass through the composer — the very defect it was written to stop. |
 | merged, `6d172a8` | **A refusal is not answered by a substitute** (class G) and **class D's `add_parameter`**. Census unchanged at 2/28; false passes 2 → 1; the 394-test suite byte-for-byte identical to base. |
+| merged this revision | **One verdict, sibling both ways, delivery is a destination** (above). Census **5/28 → 8/28**; three rows; one false pass unchanged. The sink vocabulary lost `loads`/`load`, which had made "parsed and returned a field" read as "reached `exec`". |
 | built, measured, reverted | **The artifact-noun rule** (§2.1). The word for the output is not evidence — true, and it changed nothing: the match moved from `report` to `run` and the false pass survived. Reverted. Four laws written, four killed, **zero of them by argument** — every one by running the machine. |
 
 All three killed laws were defensible in advance and cheap to write. Each was wrong in a direction
@@ -289,11 +323,12 @@ and it is why the referee comes before any more law-writing.
 ## 6. Reproduction
 
 ```bash
-python3 hardcore_swe_surface_probe_20261030.py --jobs 6          # 28 tasks      -> 2/28
+python3 hardcore_swe_surface_probe_20261030.py --jobs 6          # 28 tasks      -> 8/28
 python3 advanced_swe_probe_20261030.py --jobs 5                  # 10 tiers      -> 2/10
 python3 hardcore_swe_surface_probe_20261030.py --only add_parameter       # class D
 python3 hardcore_swe_surface_probe_20261030.py --only destructive_refusal # class E
 python3 -m unittest canonical.tests.test_a_refusal_is_not_answered_by_a_substitute_v1
+python3 -m unittest canonical.tests.test_three_answers_the_tree_already_had_v1   # 16 tests
 ```
 
 §1.1 is reproducible by regex over `load_verified_registry()`. §2.1 by running the security-gate
