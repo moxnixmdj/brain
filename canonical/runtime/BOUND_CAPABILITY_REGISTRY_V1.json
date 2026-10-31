@@ -7022,6 +7022,285 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REALIZE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-REALIZE-001.json"
       }
+    },
+    "python.repository.acceptance.measure.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.repository.acceptance.measure.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_repository_acceptance_measurement_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "repository",
+        "measurement",
+        "acceptance",
+        "test",
+        "content-addressed",
+        "objective",
+        "receipt",
+        "tests",
+        "run the tests",
+        "run tests",
+        "test suite",
+        "test path",
+        "source root"
+      ],
+      "limitations": [
+        "Measures an isolated copy of one repository-local source root; test-side mutations do not alter the measured source.",
+        "Produces content-addressed source snapshot, measurement program, measurement specification, and typed objective fields including tests_pass and python_parse_ok.",
+        "Measurement success is not task acceptance; passing declared tests does not establish complete request semantics or mergeability.",
+        "Python test command only; measured tree size/file count and timeout are bounded."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.repository.acceptance.measurement.content_addressed",
+        "python.test.measurement.objective"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "subject",
+        "measurement_program_sha256",
+        "measurement_spec_sha256",
+        "measurement_schema",
+        "measurements",
+        "test_evidence",
+        "python_parse_errors",
+        "model_dependency_count",
+        "external_general_purpose_model_runtime_dependency_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "os",
+          "pathlib",
+          "re",
+          "shutil",
+          "subprocess",
+          "sys",
+          "tempfile",
+          "time"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "combined_suite_each_carrier": "28_OF_28_PASS",
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "focused_measurement_test_count": 7,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "model_dependency_count": 0,
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "runtime_git_blob_sha": "8f5870418de5396b7ae82fbdceb5c51c70f3104c",
+        "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "0c99781622b30b7067063f2be626e0c0f132be73"
+      }
+    },
+    "python.review.diff_coverage_gate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "capability_id": "python.review.diff_coverage_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "min_coverage_ratio": "${input.min_coverage_ratio}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_coverage_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "coverage",
+        "gate",
+        "test coverage",
+        "changed lines",
+        "pull request",
+        "pr",
+        "untested",
+        "pre-merge",
+        "regression"
+      ],
+      "limitations": [
+        "coverage stage needs coverage.py on the python_executable (PyPI tool, offline-probed); absent -> gate PASS_BLIND recorded loudly after the suite is still proven green, the coverage sweep honestly did not run.",
+        "a failing suite is SUITE_RED, a refusal: coverage under failing tests is untrustworthy data, never produced.",
+        "statement coverage is a floor: a def line counts as executed at import; behavioral adequacy belongs to test-quality capabilities (property/mutation) outside v1.",
+        "test discovery is the pytest filename convention; suites named otherwise are not discovered and an empty suite is a refusal, not a pass."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_coverage_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "complete",
+        "diff_covered_ratio",
+        "diff_executable_lines",
+        "diff_miss_lines",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "tests_discovered",
+        "verified"
+      ],
+      "source": {
+        "module": "coverage",
+        "type": "pypi",
+        "version_family": ">=7.0"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-COVGATE-001",
+        "observed_effect": {
+          "blind_leg": "lint PASS, type PASS, suite PASS, coverage FAIL with pkg/util.py:9 named -- ONLY this gate sees the untested changed line",
+          "crown": "natural-language issue -> orchestrator diff -> lint triage + type gate -> anchored full-suite -> this coverage gate",
+          "deterministic": "coverage artifact byte-identical on rerun; anchor hash-identical before/after",
+          "golden": "gate PASS at diff coverage ratio 1.0 in a ~1.9s full six-stage chain"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COVGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-COVGATE-001.json"
+      }
+    },
+    "python.review.diff_mutation_gate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "capability_id": "python.review.diff_mutation_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "max_mutants": "${input.max_mutants}",
+          "min_kill_ratio": "${input.min_kill_ratio}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "run_tests": "${input.run_tests}",
+          "timeout_s": "${input.timeout_s}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_mutation_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "mutation",
+        "mutant",
+        "test quality",
+        "kill ratio",
+        "survivor",
+        "falsification",
+        "gate",
+        "coverage",
+        "behavior"
+      ],
+      "limitations": [
+        "operators are a surgical set (compare/arith/aug swap, bool swap, numeric bump, return-None) \u2014 deliberately review-shaped, not the full mutmut catalogue; equivalence mutants surviving count honestly against the ratio.",
+        "mutants are confined to the diff's hunk new-side lines; the suite's own changed test files are measured, never mutated, and never become mutation targets.",
+        "a red base world refuses (BASE_WORLD_RED): mutants cannot be attributed against a suite that was already green-flavoured broken.",
+        "mutant runs share one wall-clock budget per mutant; a mutant suite timeout is counted as a KILL because the behavioural divergence was observable.",
+        "refusal ladder covers PATH_*, DIFF_EMPTY, DIFF_DOES_NOT_APPLY, GIT_UNAVAILABLE, NO_TESTS_DISCOVERED, NO_MUTABLE_SITES, SYNTAX_ERROR_IN_FILE, SPAN_INTEGRITY, BASE_WORLD_RED, TIMEOUT; no named tests => discovered-suite fallback, never silent PASS."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_mutation_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_path",
+        "diff_sha256",
+        "mutants_generated",
+        "mutants_killed",
+        "mutants_survived",
+        "survivors",
+        "kill_ratio",
+        "changed_lines_targeted",
+        "gate",
+        "complete",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "module": "python stdlib ast/pytest + git",
+        "type": "runtime",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-MUTGATE-001",
+        "observed_effect": {
+          "adversarial": "same fix WITHOUT its tests: survivor witness src/pkg/core.py:13 arith_swap '+'->'-', gate FAIL, kill_ratio 0.875",
+          "determinism": "two pristine worlds -> byte-identical artifacts and anchors",
+          "golden": "BatchSizer ceil-half fix + diff-carried tests: 8/8 mutants killed, gate PASS, complete=true, e2e 2225 ms",
+          "immutability": "anchor and diff byte-identical after every leg; scratch deleted",
+          "robustness": "diff-created files measured never mutated; 1e9 hunk sentinel clamped to true file extent"
+        },
+        "pin_green": "15/15 x 3 consecutive runs",
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MUTGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MUTGATE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
