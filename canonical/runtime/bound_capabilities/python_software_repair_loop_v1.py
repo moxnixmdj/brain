@@ -2,7 +2,7 @@
 """Bounded donor-free multi-edit Python repair loop V1."""
 from __future__ import annotations
 import ast, hashlib, json, os, pathlib, sys
-from typing import Any, Mapping
+from typing import Any, Mapping, Sequence
 from canonical.runtime.bound_capabilities import python_test_guided_patch_search_v1 as ptg
 
 SCHEMA="PROJECT_BRAIN_PYTHON_SOFTWARE_REPAIR_LOOP_V1"
@@ -37,8 +37,21 @@ def _imports(repo:pathlib.Path, test:pathlib.Path)->list[pathlib.Path]:
             if p.is_file() and repo in p.parents and p!=test and p not in out: out.append(p)
     return out
 
-def _test(repo:pathlib.Path, test:pathlib.Path, timeout:int)->dict[str,Any]:
-    return ptg._run_tests(repo,ptg.suite_argv(sys.executable,test),timeout,ptg._source_env(test))
+def _test(repo:pathlib.Path, test:pathlib.Path, timeout:int,
+          sources:Sequence[pathlib.Path]=( )) ->dict[str,Any]:
+    """Run one stated test with the import path that makes BOTH sides importable.
+
+    The test is not the only thing on the path.  A suite in ``tests/`` imports the
+    package it tests (``from app.calc import add``), which resolves only from the
+    directory ABOVE ``app`` -- and that directory is a property of the SOURCE the
+    repair is editing, not of the test file.  Measured 2026-10-29: with the test
+    file alone, an identical bug repaired in a flat layout and reported
+    PASS=false / TOOL_REPORTED_NON_SUCCESS in ``src/app`` and ``app`` layouts,
+    because every candidate failed at import exactly like the baseline, so no
+    edit was ever a strict improvement.
+    """
+    return ptg._run_tests(repo,ptg.suite_argv(sys.executable,test),timeout,
+                          ptg._source_env(test,*sources))
 
 def _materialize(source:pathlib.Path, tests:list[pathlib.Path], wanted:Mapping[str,Any])->str|None:
     text=source.read_text(encoding="utf-8")
@@ -84,13 +97,13 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
     from canonical.runtime.write_authority_v1 import check_report
     check_report(repo, output, [*sources, *tests])
     originals={p:p.read_bytes() for p in sources}
-    baseline=[_test(repo,t,timeout) for t in tests]
+    baseline=[_test(repo,t,timeout,sources) for t in tests]
     if all(r["returncode"]==0 for r in baseline): raise RepairLoopError("BASELINE_ALREADY_PASSES")
     history=[]; final=False; replays=[]; probes=0
     probe=(output.parent/(".repair_probe_"+output.name)).resolve()
     try:
         for cycle in range(1,max_edits+1):
-            failing=[t for t in tests if _test(repo,t,timeout)["returncode"]!=0]
+            failing=[t for t in tests if _test(repo,t,timeout,sources)["returncode"]!=0]
             if not failing:
                 final=True; break
             target=failing[0]
@@ -129,10 +142,10 @@ def run(args:Mapping[str,Any], root:str|os.PathLike[str])->dict[str,Any]:
                 applied=True; break
             if not applied: break
 
-        final=all(_test(repo,t,timeout)["returncode"]==0 for t in tests)
+        final=all(_test(repo,t,timeout,sources)["returncode"]==0 for t in tests)
         if final:
             for _ in range(2):
-                ok=all(_test(repo,t,timeout)["returncode"]==0 for t in tests)
+                ok=all(_test(repo,t,timeout,sources)["returncode"]==0 for t in tests)
                 replays.append({"pass":ok})
                 final=final and ok
         patches=[]

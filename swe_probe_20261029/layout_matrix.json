@@ -1,0 +1,106 @@
+{
+ "flat": {
+  "repair": [
+   true,
+   "python.software.repair.apply.verif"
+  ],
+  "find_callers": [
+   true,
+   "python.source.symbols.index.ast"
+  ],
+  "rename": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "write_test": [
+   false,
+   "chart.raster.axis_title_unit_bindi"
+  ],
+  "lint": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "type_check": [
+   false,
+   "python.contract.check.crosshair.v1"
+  ]
+ },
+ "package": {
+  "repair": [
+   true,
+   "python.software.repair.apply.verif"
+  ],
+  "find_callers": [
+   true,
+   "python.source.symbols.index.ast"
+  ],
+  "rename": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "write_test": [
+   false,
+   "chart.raster.axis_title_unit_bindi"
+  ],
+  "lint": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "type_check": [
+   false,
+   "python.contract.check.crosshair.v1"
+  ]
+ },
+ "src_layout": {
+  "repair": [
+   true,
+   "python.software.repair.apply.verif"
+  ],
+  "find_callers": [
+   true,
+   "python.source.symbols.index.ast"
+  ],
+  "rename": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "write_test": [
+   false,
+   "chart.raster.axis_title_unit_bindi"
+  ],
+  "lint": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "type_check": [
+   false,
+   "python.contract.check.crosshair.v1"
+  ]
+ },
+ "root_pkg": {
+  "repair": [
+   true,
+   "python.software.repair.apply.verif"
+  ],
+  "find_callers": [
+   true,
+   "python.source.symbols.index.ast"
+  ],
+  "rename": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "write_test": [
+   false,
+   "chart.raster.axis_title_unit_bindi"
+  ],
+  "lint": [
+   false,
+   "document.convert.markdown_pdf.pand"
+  ],
+  "type_check": [
+   false,
+   "None"
+  ]
+ }
+}
