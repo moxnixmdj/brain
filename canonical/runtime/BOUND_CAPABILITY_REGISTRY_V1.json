@@ -8981,6 +8981,255 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005.json"
       }
+    },
+    "python.tests.generate.scaffold.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.tests.generate.scaffold.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_tests_generate_scaffold",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "test",
+        "generate",
+        "scaffold",
+        "smoke",
+        "unittest",
+        "uncovered",
+        "fixture",
+        "annotation",
+        "derive",
+        "coverage gap",
+        "regression",
+        "born",
+        "author"
+      ],
+      "limitations": [
+        "smoke-class only: asserts 'evaluates with derived fixtures' (result is not an exception); no invented semantic expectations, no coverage-percentage claims.",
+        "v1 targets module-scope functions only; class targets refuse loudly with evidence.",
+        "parameters: annotated via the pinned deterministic fixture table, else literal ast default, else refused UNANNOTATED_PARAM_NO_DEFAULT (listed, never guessed).",
+        "execution requires a pytest-bearing python_executable; otherwise pytest:'UNAVAILABLE' and verified=false with the generation evidence still recorded (never a silent skip)."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.tests.generate.scaffold"
+      ],
+      "requires": [
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "complete",
+        "generated_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "refused_count",
+        "target_count",
+        "test_count",
+        "test_failed",
+        "test_passed",
+        "verified"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-TESTGEN-001",
+        "observed_effect": {
+          "deterministic": "summary artifact byte-identical on rerun",
+          "fixture_derivation": "celsius_to_kelvin(c=1.5); fan_curve(temp=1.5, max_rpm=1); serial_id(zone='s', idx=1); summarize(readings=[1.5])",
+          "generated_tests": 4,
+          "module": "engine/thermo.py (4 annotated, previously-uncovered functions)",
+          "run1_ms": 317.5,
+          "run2_ms": 306.7,
+          "source_tree_manifest": "unchanged (byte-frozen before/after)",
+          "tests_failed": 0,
+          "tests_passed": 4
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
+      }
+    },
+    "python.vcs.merge_conflict.resolve.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.vcs.merge_conflict.resolve.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_merge_resolve",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "merge conflict",
+        "conflict",
+        "conflicted",
+        "conflict markers",
+        "merge",
+        "resolve the conflict",
+        "keep both changes",
+        "both sides",
+        "unmerged"
+      ],
+      "limitations": [
+        "Resolves a TWO-SIDED conflict as the union of its sides, in order, when the sentence says both changes are kept.",
+        "Refuses a diff3 base section (|||||||): there the union is not stated and is not guessed.",
+        "Kept only if no marker survives, the file parses and the suite is green."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.vcs.merge_conflict.resolved",
+        "python.source.conflict.free"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "resolved",
+        "resolved_file_count",
+        "files_edited",
+        "suite_passed",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py",
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "shell.command.run": {
+      "action_template": {
+        "args": {
+          "argv": "${input.argv}",
+          "output_path": "${input.output_path}"
+        },
+        "expect": {
+          "field": "returncode",
+          "type": "field_equals",
+          "value": 0
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "cli_command",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "shell",
+        "command",
+        "exec",
+        "run",
+        "terminal",
+        "bash",
+        "process",
+        "environment",
+        "probe",
+        "cli",
+        "cp",
+        "mv",
+        "rm",
+        "mkdir",
+        "touch",
+        "cat",
+        "sort",
+        "sha256sum",
+        "copy",
+        "move",
+        "rename",
+        "remove",
+        "delete",
+        "checksum",
+        "sha256",
+        "directory",
+        "dir",
+        "empty",
+        "file"
+      ],
+      "limitations": [
+        "Runs with cwd pinned to the repository root.",
+        "Timeout clamped to 1-300 seconds.",
+        "Argv limited to 64 non-empty string elements.",
+        "Non-zero exit raises rather than returning."
+      ],
+      "provides": [
+        "shell.command.result"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "argv",
+        "output_bytes",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "returncode",
+        "stderr",
+        "stdout"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "autonomous_acquisition": true,
+        "independent_output_bytes": 51,
+        "independent_output_sha256": "cf8aa6bb828d7b0fb3819f9b4254ab772e49afe19dbbe1ff969532705a9ef5d8",
+        "independent_verified": true,
+        "mission_id": "ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001",
+        "observed_effect": {
+          "adapter": "bound_capability_cli",
+          "argv": [
+            "/usr/bin/python3",
+            "-c",
+            "import pathlib; pathlib.Path('canonical/astra_runtime/tmp/shell_verify/SHELL_COMMAND_RUN_PROOF.txt').write_text('PROJECT BRAIN shell.command.run verification probe\\n')"
+          ],
+          "output_bytes": 51,
+          "output_path": "canonical/astra_runtime/tmp/shell_verify/SHELL_COMMAND_RUN_PROOF.txt",
+          "output_sha256": "cf8aa6bb828d7b0fb3819f9b4254ab772e49afe19dbbe1ff969532705a9ef5d8",
+          "output_verified": true,
+          "returncode": 0,
+          "stderr": "",
+          "stdout": ""
+        },
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001__shell.command.run__AUTO_VERIFY.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
