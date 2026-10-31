@@ -2245,6 +2245,13 @@ def _inspect_refactor_extract_function(args, result, root):
                       "owner_now_calls": extracted}
 
 
+def _inspect_crossfile_report(args, result, root):
+    if any(key in args for key in ("task_path", "issue_path", "request_binding", "request_binding_sha256")):
+        from canonical.runtime.crossfile_report_verification_v1 import inspect_report
+        return inspect_report(args, result, root)
+    return _inspect_crossfile_choreograph(args, result, root)
+
+
 def _inspect_python_symbol_index(args, result, root):
     out = _inside(root, result.get("output_path") or args.get("output_path"))
     if out is None or not out.is_file():
@@ -2447,6 +2454,7 @@ def _inspect_python_mutation_score(args, result, root):
 
 
 INSPECTORS: dict[str, Inspector] = {
+    "software.repair.choreograph.crossfile.v1": _inspect_crossfile_report,
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,
     "python.source.symbols.index.ast": _inspect_python_symbol_index,
@@ -2454,7 +2462,6 @@ INSPECTORS: dict[str, Inspector] = {
     "python.fault.localize.dynamic.dataflow.v1": _inspect_fault_localize,
     "python.fault.provenance.interprocedural.value.v1": _inspect_value_provenance,
     "python.software.repair.loop.strict_progress.ast.v1": _inspect_repair_loop,
-    "software.repair.choreograph.crossfile.v1": _inspect_crossfile_choreograph,
     "python.repository.acceptance.measure.v1": _inspect_repository_acceptance_measure,
     "python.refactor.extract_function.v1": _inspect_refactor_extract_function,
     "git.history.bisect_regression.v1": _inspect_git_bisect_regression,
@@ -2573,6 +2580,11 @@ def verify(
         # --- every path must be real, every declared digest must match -----
         for row in rows:
             cid = row["args"].get("capability_id")
+            if (cid == "software.repair.choreograph.crossfile.v1"
+                    and any(key in row["args"] for key in ("task_path", "issue_path", "request_binding", "request_binding_sha256"))):
+                from canonical.runtime.crossfile_task_binding_v1 import goal_matches_args
+                if not goal_matches_args(goal, row["args"]):
+                    return _unresolved("CROSSFILE_ARGUMENTS_DO_NOT_MATCH_THE_COMPLETE_REQUEST")
             consumed = _verified_consumed_paths(row["args"], root)
             for name in _PATH_ARGS:
                 value = row["args"].get(name)
