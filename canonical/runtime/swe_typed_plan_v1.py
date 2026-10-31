@@ -55,6 +55,14 @@ SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
 
 _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # (goal triggers, registry-keyword terms to enumerate candidates, required effect token in cid)
+    (("move the function", "move the class", "move symbol", "relocate function", "relocate class"),
+     ("move_symbol", "relocate symbol"), "move_symbol"),
+    (("add a parameter", "add parameter", "new parameter"),
+     ("add_parameter", "signature evolution"), "source.add_parameter"),
+    (("add a function", "implement a function", "implement function", "create a function"),
+     ("implement_function_spec", "function specification"), "implement_function_spec"),
+    (("regression test that would have caught", "add a regression test"),
+     ("python.tests.regression.synthesized",), "choreograph"),
     (("caller", "who calls", "call site", "call graph", "find every call"),
      ("caller", "call graph", "who calls"), "symbol"),
     # Measured 2026-10-29: "Show the last three git commits" is the plainest thing a
@@ -94,6 +102,8 @@ def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
     # Paths and quoted values are task data, not evidence of an effect family.
     low = front.prose_only(str(goal or "")).lower()
     for triggers, terms, token in _FAMILIES:
+        if token == "symbol" and ("update every caller" in low or "rename " in low):
+            continue
         if any(t in low for t in triggers):
             return terms, token
     return None
@@ -109,7 +119,8 @@ def is_swe_request(goal: str) -> bool:
     return _family_terms(goal) is not None
 
 
-def _execution_template(entry: Mapping[str, Any], removed: set[str]) -> dict[str, Any]:
+def _execution_template(entry: Mapping[str, Any], removed: set[str],
+                        extra_inputs: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Copy the adapter's declared template, dropping ONLY adapter-defaulted
     ``${input.*}`` placeholders.  Slots with a bound value (including derived
     ones) are kept so the adapter still receives them at run time."""
@@ -119,6 +130,8 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str]) -> dict[str
         value = args[key]
         if key in removed and isinstance(value, str) and "${input." in value:
             args.pop(key, None)
+    if extra_inputs and extra_inputs.get("synthesize_regression_test") is True:
+        args["synthesize_regression_test"] = True
     template["args"] = args
     return template
 
@@ -160,6 +173,16 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
     """
     from canonical.runtime import goal_front_compiler_v1 as front
     prose = front.prose_only(goal).lower()
+    if re.search(r"\b(?:find\s+every\s+caller|who\s+calls)\b", prose):
+        if not any("symbol" in str(c).lower() for c in capability_ids):
+            return "R10_CALLER_QUERY_EFFECT_UNSERVED"
+    if re.search(r"\badd\s+(?:a\s+)?regression\s+test\b", prose) and re.search(r"\b(?:fix|repair)\b", prose):
+        has_reg_cap = any(
+            (((registry.get(str(c)) or {}).get("action_template") or {}).get("args") or {}).get("synthesize_regression_test") is True
+            for c in capability_ids
+        )
+        if not has_reg_cap:
+            return "R10_REGRESSION_TEST_EFFECT_UNSERVED"
     imperative = re.search(
         r"(?:^|[.;\n]|\bthen\b|\band\b)\s*"
         r"(?:(?:please|first|next)\s+|(?:can|could|would)\s+you\s+(?:please\s+)?)?"
@@ -177,7 +200,7 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
         return None
     # These are actual registry effect namespaces, not keyword relevance or id
     # substrings such as 'patch' (which could mean a report-only patch search).
-    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.')
+    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.', '.feature.implement.')
     for cid in capability_ids:
         entry = registry.get(str(cid)) or {}
         if any(any(part in str(effect) for part in material)
@@ -349,7 +372,7 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
             inputs["module"] = mod[len(sr.rstrip("/")) + 1:]
 
         exec_entry = dict(entry)
-        exec_entry["action_template"] = _execution_template(entry, removed)
+        exec_entry["action_template"] = _execution_template(entry, removed, inputs)
         admissible[cid] = exec_entry
 
         # Prefer the real compiled shape when the lexical compiler can produce

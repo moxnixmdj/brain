@@ -154,9 +154,10 @@ def _pool(row,tests,per_file):
  # the pair loop enumerates the index product of the flattened pool under
  # pair_max -- extra entries there push the winning pair past the cap
  # (the L5 (Add->+,Add->+) repair fell outside 1000).
- legacy=[e for _,e in out if e.get("family")!="neighborhood"][:per_file]
+ legacy=[e for _,e in out if e.get("family") not in ("neighborhood","guard_clause")][:per_file]
  neigh=[e for _,e in out if e.get("family")=="neighborhood"][:9]
- return legacy+neigh
+ guards=[e for _,e in out if e.get("family")=="guard_clause"][:12]
+ return legacy+neigh+guards
 def _apply(text,edits):
  raw=text.encode(); es=sorted(edits,key=lambda e:(e["start"],e["end"]));last=-1
  for e in es:

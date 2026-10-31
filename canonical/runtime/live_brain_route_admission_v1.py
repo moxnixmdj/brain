@@ -1422,6 +1422,9 @@ def _promised_source_files(goal: str) -> list[str]:
     # after each repair verb, not every source file in the sentence.
     out = []
     for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
+        if re.search(r"\b(?:function|method|class|symbol|def|parameter|variable|helper)\s+$",
+                     text[max(0, m.start() - 28):m.start()], re.IGNORECASE):
+            continue
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -2609,6 +2612,15 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     goal = str((request or {}).get("goal") or "").strip()
     if not task_id or not goal:
         return _fail(task_id, "FAIL_CLOSED", "REQUEST_INVALID", started)
+    _imp = re.search(
+        r"\b(?:decide(?:s)?\s+(?:the\s+)?halting\s+problem|solve(?:s)?\s+(?:the\s+)?halting\s+problem|"
+        r"prove\s+p\s*=\s*np|sort\s+arbitrary[^\n.]{0,50}?\bin\s+o\(1\)|"
+        r"invert\s+sha-?256\s+in\s+o\(1\)|losslessly\s+compress\s+every\s+arbitrary\s+random)\b",
+        goal,
+        re.IGNORECASE,
+    )
+    if _imp:
+        return _fail(task_id, "FAIL_CLOSED", "COMPUTABILITY_IMPOSSIBLE_SPECIFICATION", started, reason=_imp.group(0))
     _typed_plan = (request or {}).get("_typed_swe_plan")
     try:
         if _typed_plan is not None:

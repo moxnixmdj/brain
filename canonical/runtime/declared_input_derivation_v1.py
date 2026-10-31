@@ -36,10 +36,13 @@ Zero model, zero network, zero spend.  It changes no registry row and no kernel.
 from __future__ import annotations
 
 import ast
+import difflib
+import hashlib
 import os
 import pathlib
 import re
 import sys
+import zlib
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
@@ -60,7 +63,9 @@ _CONFIGURATION_SLOTS = frozenset({
     "max_candidates", "max_total_candidates", "max_candidates_per_file",
     "max_edits", "max_pair_candidates", "max_symbols_per_file",
     "mutations_per_file", "pattern", "budget", "top_k", "seed", "verbose", "strict",
-    "limit",
+    "default_expr", "export_in_init", "generate_unit_tests", "synthesize_regression_test",
+    "min_coverage_ratio", "min_kill_ratio", "repeats", "tolerance", "algorithm",
+    "search_seed", "time_budget_s", "limit",
 })
 
 # Scope, measured not assumed: typed-admission pins for receipt-projected
@@ -75,10 +80,14 @@ _SWE_VERBS = (
     "scaffold", "generate test", "failing test", "unit test", "patch",
     "inline", "single-use", "single use", "merge conflict", "conflict", "unmerged",
     "injection", "parameterize", "parameterized", "sql", "dead code", "unused import",
-    "remove the unused", "move the function", "add a parameter", "caller",
+    "remove the unused", "move the function", "move the class", "move symbol",
+    "add a parameter", "add parameter", "add a function", "implement a function",
+    "implement function", "create a function", "regression test", "caller",
     "circular import", "import cycle", "bisect", "slower", "mutation", "taint", "untrusted",
     "flaky", "intermittently", "deprecated", "sql injection",
     "linearithmic", "unused", "race condition", "are failing",
+    "security gate", "type gate", "coverage gate", "mutation gate", "perf gate", "static triage",
+    "changed lines", "synthesize",
 )
 
 
@@ -134,25 +143,50 @@ def stated_existing_files(goal: str, root: pathlib.Path) -> list[str]:
     return out
 
 
-def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, str]:
-    """Keys the adapter itself defaults, proved from its source AST.
+_ADAPTER_DEFAULTS_CACHE: dict[tuple[str, int, int, str], dict[str, str]] = {}
+_PARSED_TREE_CACHE: dict[tuple[str, int, int], ast.Module] = {}
 
-    A key qualifies only when the adapter reads it with ``args.get(<key>)`` AND
-    that read is guarded by an ``or <fallback>`` or a positional default.  The
-    evidence string is ``<relative path>:<line>`` so a reviewer can re-check it.
-    """
+
+def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, str]:
+    """Keys the adapter itself defaults, proved from its source AST (O(|AST|) + mtime-memoized)."""
     from canonical.runtime import capability_type_surface_v1 as surface
 
     try:
         adapter = surface.resolve_adapter(entry, root)
-    except Exception:  # an unresolvable adapter declares no defaults we can prove
+    except Exception:
         return {}
     if adapter is None or not adapter.is_file():
         return {}
     try:
+        st = adapter.stat()
+        root_resolved = pathlib.Path(root).resolve()
+        cache_key = (str(adapter), st.st_mtime_ns, st.st_size, str(root_resolved))
+    except OSError:
+        return {}
+    cached = _ADAPTER_DEFAULTS_CACHE.get(cache_key)
+    if cached is not None:
+        return dict(cached)
+    try:
         tree = ast.parse(adapter.read_text(encoding="utf-8", errors="replace"))
     except (OSError, SyntaxError, ValueError):
+        _ADAPTER_DEFAULTS_CACHE[cache_key] = {}
         return {}
+
+    # Single O(|AST|) prepass collecting nodes guarded by BoolOp(Or) or If.test.
+    guarded_nodes: set[int] = set()
+    for parent in ast.walk(tree):
+        if isinstance(parent, ast.BoolOp) and isinstance(parent.op, ast.Or):
+            for v in parent.values:
+                guarded_nodes.add(id(v))
+        elif isinstance(parent, ast.If):
+            for sub in ast.walk(parent.test):
+                guarded_nodes.add(id(sub))
+
+    try:
+        rel = str(adapter.relative_to(root_resolved))
+    except ValueError:
+        rel = adapter.name
+
     found: dict[str, str] = {}
     nodes = list(ast.walk(tree))
     parents = {child: parent for parent in nodes for child in ast.iter_child_nodes(parent)}
@@ -166,40 +200,29 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
         key = node.args[0]
         if not (isinstance(key, ast.Constant) and isinstance(key.value, str)):
             continue
-        # A default is proved by: a second positional arg, an `or` fallback on
-        # this very call, or an `if args.get(key)` guard (presence-optional).
-        guarded = len(node.args) >= 2
-        child = node
-        parent = parents.get(child)
-        while not guarded and parent is not None:
-            if isinstance(parent, ast.BoolOp) and isinstance(parent.op, ast.Or) and node in parent.values:
-                guarded = True
-            if isinstance(parent, ast.If) and child is parent.test:
-                guarded = True
-            child = parent
-            parent = parents.get(child)
-        # Scope is declaration-driven: only a proven configuration knob, never
-        # an output (the stated destination is the acceptance promise) and never
-        # a semantic path/root/argv slot.
+        guarded = len(node.args) >= 2 or (id(node) in guarded_nodes)
         low = key.value.lower()
         if guarded and key.value in _CONFIGURATION_SLOTS \
                 and not any(word in low for word in ("output", "result", "report")):
-            try:
-                rel = str(adapter.relative_to(pathlib.Path(root).resolve()))
-            except ValueError:
-                rel = adapter.name
             found.setdefault(key.value, f"{rel}:{node.lineno}")
-    return found
+    _ADAPTER_DEFAULTS_CACHE[cache_key] = found
+    return dict(found)
 
 
-def _tree_of(root: pathlib.Path, rel: str):
-    """The parsed module, or an empty module when it cannot be read.
-
-    An unreadable stated file proves nothing, so the proof above simply yields no
-    candidate -- the same fail-closed reading the qualname rule uses.
-    """
+def _tree_of(root: pathlib.Path, rel: str) -> ast.Module:
+    """The parsed module (mtime-memoized), or an empty module when unreadable."""
     try:
-        return ast.parse((pathlib.Path(root) / rel).read_text(encoding="utf-8"))
+        p = (pathlib.Path(root) / rel).resolve()
+        st = p.stat()
+        key = (str(p), st.st_mtime_ns, st.st_size)
+        cached = _PARSED_TREE_CACHE.get(key)
+        if cached is not None:
+            return cached
+        mod = ast.parse(p.read_text(encoding="utf-8"))
+        if len(_PARSED_TREE_CACHE) > 512:
+            _PARSED_TREE_CACHE.clear()
+        _PARSED_TREE_CACHE[key] = mod
+        return mod
     except (OSError, SyntaxError, ValueError):
         return ast.Module(body=[], type_ignores=[])
 # Ordered: the first rule whose pattern matches decides, and the caller still
@@ -250,6 +273,120 @@ _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
                    r"|\bcommit\s+(?:the|all|these|this|that|staged|everything|it)\b"),
     )
 )
+
+
+def _read_git_loose_obj(git_dir: pathlib.Path, sha: str) -> tuple[str, bytes] | None:
+    if len(sha) != 40:
+        return None
+    obj_p = git_dir / "objects" / sha[:2] / sha[2:]
+    if not obj_p.is_file():
+        return None
+    try:
+        raw = zlib.decompress(obj_p.read_bytes())
+        nul = raw.index(b"\x00")
+        kind = raw[:nul].decode("ascii", errors="replace").split()[0]
+        return kind, raw[nul + 1:]
+    except Exception:
+        return None
+
+
+def _git_head_tree_blobs(repo_dir: pathlib.Path, prefix: str = "") -> dict[str, bytes] | None:
+    git_dir = repo_dir / ".git"
+    if not git_dir.is_dir():
+        return None
+    try:
+        head_raw = (git_dir / "HEAD").read_text(encoding="utf-8").strip()
+        if head_raw.startswith("ref:"):
+            ref_rel = head_raw.split(":", 1)[1].strip()
+            ref_p = git_dir / ref_rel
+            if not ref_p.is_file():
+                return None
+            commit_sha = ref_p.read_text(encoding="utf-8").strip()
+        else:
+            commit_sha = head_raw
+        c_obj = _read_git_loose_obj(git_dir, commit_sha)
+        if not c_obj or c_obj[0] != "commit":
+            return None
+        tree_sha = ""
+        for line in c_obj[1].decode("utf-8", errors="replace").splitlines():
+            if line.startswith("tree "):
+                tree_sha = line.split()[1].strip()
+                break
+        if not tree_sha:
+            return None
+
+        blobs: dict[str, bytes] = {}
+
+        def _walk_tree(t_sha: str, cur_prefix: str) -> bool:
+            t_obj = _read_git_loose_obj(git_dir, t_sha)
+            if not t_obj or t_obj[0] != "tree":
+                return False
+            buf = t_obj[1]
+            idx = 0
+            n = len(buf)
+            while idx < n:
+                sp = buf.index(b" ", idx)
+                mode = buf[idx:sp].decode("ascii", errors="replace")
+                nul = buf.index(b"\x00", sp + 1)
+                name = buf[sp + 1:nul].decode("utf-8", errors="replace")
+                entry_sha = buf[nul + 1:nul + 21].hex()
+                idx = nul + 21
+                rel_name = f"{cur_prefix}{name}"
+                if mode == "40000" or mode == "040000":
+                    if not _walk_tree(entry_sha, rel_name + "/"):
+                        return False
+                else:
+                    b_obj = _read_git_loose_obj(git_dir, entry_sha)
+                    if not b_obj or b_obj[0] != "blob":
+                        return False
+                    blobs[rel_name] = b_obj[1]
+            return True
+
+        return blobs if _walk_tree(tree_sha, prefix) else None
+    except Exception:
+        return None
+
+
+def _materialize_git_diff_for_dir(root: pathlib.Path, rel_dir: str) -> tuple[str | None, list[str]]:
+    """Pure-Python working-tree vs HEAD unified diff materializer (zero subprocesses)."""
+    repo = pathlib.Path(root).resolve()
+    target = (repo / rel_dir).resolve()
+    if not target.is_dir() or (target != repo and repo not in target.parents):
+        return None, []
+    head_blobs = _git_head_tree_blobs(target)
+    if head_blobs is None:
+        return None, []
+    diff_chunks: list[str] = []
+    changed_rel: list[str] = []
+    disk_files: dict[str, bytes] = {}
+    for p in sorted(target.rglob("*")):
+        if not p.is_file() or ".git" in p.parts or "__pycache__" in p.parts or p.suffix == ".pyc":
+            continue
+        rel_in = p.relative_to(target).as_posix()
+        try:
+            disk_files[rel_in] = p.read_bytes()
+        except OSError:
+            continue
+    for rel_in in sorted(set(head_blobs) | set(disk_files)):
+        old_b = head_blobs.get(rel_in)
+        new_b = disk_files.get(rel_in)
+        if old_b == new_b:
+            continue
+        changed_rel.append(f"{rel_dir.rstrip('/')}/{rel_in}")
+        old_lines = (old_b.decode("utf-8", errors="replace").splitlines(keepends=True) if old_b is not None else [])
+        new_lines = (new_b.decode("utf-8", errors="replace").splitlines(keepends=True) if new_b is not None else [])
+        from_hdr = f"a/{rel_in}" if old_b is not None else "/dev/null"
+        to_hdr = f"b/{rel_in}" if new_b is not None else "/dev/null"
+        ud = list(difflib.unified_diff(old_lines, new_lines, fromfile=from_hdr, tofile=to_hdr))
+        if ud:
+            diff_chunks.append("".join(ud if ud[-1].endswith("\n") else ud + ["\n"]))
+    patch_text = "".join(diff_chunks)
+    digest = hashlib.sha256((rel_dir + "\0" + patch_text).encode("utf-8")).hexdigest()[:16]
+    spool_rel = f"canonical/astra_runtime/tmp/derived_diff_{digest}.patch"
+    spool_abs = repo / spool_rel
+    spool_abs.parent.mkdir(parents=True, exist_ok=True)
+    spool_abs.write_text(patch_text, encoding="utf-8")
+    return spool_rel, changed_rel
 
 
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
@@ -486,37 +623,200 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         wanted_param = (pairs[0][0] if len(pairs) == 1 else None)
         wanted_fn = None
         fn_match = re.search(r"\b(?:the\s+)?([A-Za-z_][A-Za-z0-9_]*)\s+function\b", str(goal or ""), re.I)
-        if fn_match:
+        if fn_match and fn_match.group(1).lower() not in ("the", "a", "an", "python", "target", "helper", "existing", "this", "each", "every"):
             wanted_fn = fn_match.group(1)
-        try:
-            tree = ast.parse((pathlib.Path(root) / sources[0]).read_text(encoding="utf-8"))
-        except (OSError, SyntaxError, ValueError):
-            tree = None
-        if tree is not None:
-            defined_fns = {
-                node.name
-                for node in ast.walk(tree)
-                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
-            }
-            if not wanted_fn and not wanted_param:
+        tree = _tree_of(root, sources[0])
+        if tree.body:
+            method_quals: list[tuple[str, ast.FunctionDef | ast.AsyncFunctionDef]] = []
+            for top in tree.body:
+                if isinstance(top, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    method_quals.append((top.name, top))
+                elif isinstance(top, ast.ClassDef):
+                    for sub in top.body:
+                        if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                            method_quals.append((f"{top.name}.{sub.name}", sub))
+            defined_fns = {q for q, _ in method_quals} | {n.name for _, n in method_quals}
+            if not wanted_fn:
+                dotted_hits = {
+                    m.group(1)
+                    for m in re.finditer(r"\b([A-Za-z_][A-Za-z0-9_]*\.[A-Za-z_][A-Za-z0-9_]*)\b", str(goal or ""))
+                    if m.group(1) in defined_fns
+                }
+                if len(dotted_hits) == 1:
+                    wanted_fn = next(iter(dotted_hits))
+            if not wanted_fn:
                 preps = {
                     m.group(1)
-                    for m in re.finditer(r"\b(?:from|in|of|function|method)\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", str(goal or ""), re.I)
+                    for m in re.finditer(r"\b(?:from|in|of|to|function|method)\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?", str(goal or ""), re.I)
                     if m.group(1) in defined_fns
                 }
                 if len(preps) == 1:
                     wanted_fn = next(iter(preps))
             matches: list[str] = []
-            for node in ast.walk(tree):
-                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                    arg_names = [a.arg for a in (list(node.args.args) + list(node.args.kwonlyargs))]
-                    if wanted_param and wanted_param in arg_names:
-                        matches.append(node.name)
-                    elif wanted_fn and node.name == wanted_fn:
-                        matches.append(node.name)
+            for qname, node in method_quals:
+                arg_names = [a.arg for a in (list(node.args.args) + list(node.args.kwonlyargs))]
+                if wanted_fn and (qname == wanted_fn or node.name == wanted_fn):
+                    matches.append(qname)
+                elif not wanted_fn and wanted_param and wanted_param in arg_names:
+                    matches.append(qname)
             if len(set(matches)) == 1:
                 out["qualname"] = {"value": matches[0], "rule": "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
                                    "evidence": f"{sources[0]}:{matches[0]}"}
+
+    goal_str = str(goal or "")
+    cid_str = str((args or {}).get("capability_id") or "")
+
+    stated_dirs: list[str] = []
+    seen_d: set[str] = set()
+    for match in _PATH_RE.finditer(goal_str):
+        raw_d = match.group(0).rstrip(".,;:)\"'")
+        if raw_d in seen_d:
+            continue
+        seen_d.add(raw_d)
+        try:
+            cand_d = (pathlib.Path(root) / raw_d).resolve()
+            if cand_d.is_dir() and pathlib.Path(root).resolve() in cand_d.parents:
+                stated_dirs.append(raw_d)
+        except (OSError, ValueError):
+            continue
+
+    # Auto-derive intermediate diff_path / anchor_path / worktree_path / changed_paths from stated git repo dir.
+    if ({"diff_path", "changed_paths"} & keys) and len(stated_dirs) == 1:
+        git_dir_rel = stated_dirs[0]
+        if ((pathlib.Path(root) / git_dir_rel / ".git").is_dir()):
+            patch_rel, chg_list = _materialize_git_diff_for_dir(root, git_dir_rel)
+            if patch_rel is not None:
+                if "diff_path" in keys and "diff_path" not in out:
+                    out["diff_path"] = {"value": patch_rel, "rule": "DIFF_PATH_MATERIALIZED_FROM_STATED_GIT_TREE", "evidence": git_dir_rel}
+                if "anchor_path" in keys and "anchor_path" not in out:
+                    out["anchor_path"] = {"value": git_dir_rel, "rule": "ANCHOR_PATH_FROM_STATED_GIT_TREE", "evidence": git_dir_rel}
+                if "worktree_path" in keys and "worktree_path" not in out:
+                    out["worktree_path"] = {"value": git_dir_rel, "rule": "WORKTREE_PATH_FROM_STATED_GIT_TREE", "evidence": git_dir_rel}
+                if "changed_paths" in keys and "changed_paths" not in out and chg_list:
+                    out["changed_paths"] = {"value": chg_list, "rule": "CHANGED_PATHS_FROM_STATED_GIT_TREE", "evidence": git_dir_rel}
+                if "source_root" in keys and "source_root" not in out:
+                    out["source_root"] = {"value": git_dir_rel, "rule": "SOURCE_ROOT_FROM_STATED_GIT_TREE", "evidence": git_dir_rel}
+
+    # Stated existing directories (scoped strictly to multi-file refactor/choreograph/spec capabilities).
+    if ("source_root" in keys and "source_root" not in out
+            and any(t in cid_str for t in ("rename_symbol", "move_symbol", "add_parameter", "implement_function_spec", "choreograph"))):
+        src_dirs = [d for d in stated_dirs if pathlib.PurePosixPath(d).name not in ("tests", "test")]
+        if len(src_dirs) == 1:
+            chosen_sr = src_dirs[0]
+            if "rename_symbol" in cid_str:
+                sr_abs = (pathlib.Path(root) / chosen_sr).resolve()
+                while (sr_abs / "__init__.py").is_file() and sr_abs.parent != sr_abs:
+                    if pathlib.Path(root).resolve() in sr_abs.parent.parents or sr_abs.parent == pathlib.Path(root).resolve():
+                        sr_abs = sr_abs.parent
+                    else:
+                        break
+                chosen_sr = sr_abs.relative_to(pathlib.Path(root).resolve()).as_posix()
+                if len(pairs) == 1 and ("module" in keys or "qualname" in keys):
+                    old_sym = pairs[0][0]
+                    scan_dir = (pathlib.Path(root) / src_dirs[0]).resolve()
+                    def_files: list[pathlib.Path] = []
+                    for py_f in sorted(scan_dir.rglob("*.py")):
+                        if "__pycache__" in py_f.parts:
+                            continue
+                        pt = _tree_of(root, py_f.relative_to(pathlib.Path(root).resolve()).as_posix())
+                        if any(
+                            isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and nd.name == old_sym
+                            for nd in pt.body
+                        ):
+                            def_files.append(py_f)
+                    if len(def_files) == 1:
+                        mod_rel = def_files[0].relative_to(pathlib.Path(root).resolve()).as_posix()
+                        if "module" in keys:
+                            out["module"] = {"value": mod_rel, "rule": "MODULE_UNIQUE_SYMBOL_DEF_IN_STATED_DIR", "evidence": mod_rel}
+                        if "qualname" in keys:
+                            out["qualname"] = {"value": old_sym, "rule": "QUALNAME_UNIQUE_SYMBOL_DEF_IN_STATED_DIR", "evidence": f"{mod_rel}:{old_sym}"}
+            if "choreograph" not in cid_str or re.search(r"\b(?:regression\s+test|race\s+condition|are\s+failing|circular\s+import|unused)\b", goal_str, re.I):
+                out["source_root"] = {"value": chosen_sr, "rule": "PATH_DIR_FROM_STATED_SOURCE_DIR",
+                                      "evidence": src_dirs[0]}
+
+    # Regression-test synthesis trigger on crossfile choreograph.
+    if "choreograph" in cid_str and re.search(r"\bregression\s+test\b", goal_str, re.I):
+        out["synthesize_regression_test"] = {
+            "value": True, "rule": "REGRESSION_TEST_REQUESTED", "evidence": "regression test",
+        }
+
+    # Move-symbol grammar: "Move [the] (function|class|symbol) SYM from SRC.py to DST.py".
+    if {"symbol", "source_module", "target_module"} & keys and "source_module" in keys:
+        mv_sym = re.search(
+            r"\b(?:move|relocate)\s+(?:the\s+)?(?:function|class|symbol)?\s*"
+            r"[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?",
+            goal_str, re.I,
+        )
+        mv_paths = re.search(
+            r"\bfrom\s+([A-Za-z0-9_./-]+\.py)\s+to\s+([A-Za-z0-9_./-]+\.py)\b",
+            goal_str, re.I,
+        )
+        if mv_sym and mv_paths:
+            sym_v = mv_sym.group(1)
+            src_m, dst_m = mv_paths.group(1), mv_paths.group(2)
+            if _NAME_RE.match(sym_v) and src_m in files:
+                if "symbol" in keys:
+                    out["symbol"] = {"value": sym_v, "rule": "MOVE_SYMBOL_STATED", "evidence": sym_v}
+                if "source_module" in keys:
+                    out["source_module"] = {"value": src_m, "rule": "MOVE_SOURCE_MODULE_STATED", "evidence": src_m}
+                if "target_module" in keys:
+                    out["target_module"] = {"value": dst_m, "rule": "MOVE_TARGET_MODULE_STATED", "evidence": dst_m}
+                if "source_root" in keys and "source_root" not in out:
+                    p_dir = str(pathlib.PurePosixPath(src_m).parent)
+                    if p_dir and (pathlib.Path(root) / p_dir).is_dir():
+                        out["source_root"] = {"value": p_dir, "rule": "MOVE_SOURCE_ROOT_FROM_SOURCE_MODULE", "evidence": src_m}
+
+    # Add-parameter grammar: "Add [a] parameter PARAM [with default ...] to [the] [function|method] QUAL in MOD.py".
+    if "param_name" in keys:
+        ap_m = re.search(
+            r"\badd\s+(?:a\s+|an\s+|optional\s+)*parameter\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?",
+            goal_str, re.I,
+        )
+        if ap_m and _NAME_RE.match(ap_m.group(1)):
+            out["param_name"] = {"value": ap_m.group(1), "rule": "ADD_PARAMETER_NAME_STATED", "evidence": ap_m.group(1)}
+            def_m = re.search(
+                r"\bdefault(?:\s+value)?\s*(?:=|of|is)\s*([0-9]+(?:\.[0-9]+)?|True|False|None|'[^']*'|\"[^\"]*\")",
+                goal_str, re.I,
+            )
+            if "default_expr" in keys:
+                d_val = def_m.group(1) if def_m else "None"
+                out["default_expr"] = {"value": d_val, "rule": "ADD_PARAMETER_DEFAULT_STATED", "evidence": d_val}
+
+    # Implement-function-spec grammar:
+    if {"function_name", "signature", "body_expr", "target_module"} <= keys:
+        fn_spec = re.search(
+            r"\b(?:add|implement|create|synthesize)\s+(?:a\s+|the\s+)?function\s+"
+            r"([A-Za-z_][A-Za-z0-9_]*)\s*(\([^)]*\))\s+"
+            r"(?:to|in)\s+([A-Za-z0-9_./-]+\.py)\b",
+            goal_str, re.I,
+        )
+        ret_spec = re.search(
+            r"\b(?:that\s+|which\s+)?returns?\s+(.+?)"
+            r"(?=\s*(?:,\s*(?:and\s+)?export\b|,\s*(?:and\s+)?add\s+(?:a\s+)?test\b|;\s|\.\s|$))",
+            goal_str, re.I,
+        )
+        if fn_spec and (ret_spec or tests):
+            fn_nm, fn_sig, tgt_mod = fn_spec.group(1), fn_spec.group(2), fn_spec.group(3)
+            body_e = ret_spec.group(1).strip().rstrip(".,;") if ret_spec else "__SYNTHESIZE_FROM_TESTS__"
+            if _NAME_RE.match(fn_nm) and body_e:
+                out["function_name"] = {"value": fn_nm, "rule": "SPEC_FUNCTION_NAME_STATED", "evidence": fn_nm}
+                out["signature"] = {"value": fn_sig, "rule": "SPEC_SIGNATURE_STATED", "evidence": fn_sig}
+                out["target_module"] = {"value": tgt_mod, "rule": "SPEC_TARGET_MODULE_STATED", "evidence": tgt_mod}
+                out["body_expr"] = {"value": body_e, "rule": "SPEC_RETURN_EXPR_STATED", "evidence": body_e}
+                if "source_root" in keys:
+                    p_dir = str(pathlib.PurePosixPath(tgt_mod).parent)
+                    if p_dir and (pathlib.Path(root) / p_dir).is_dir():
+                        out["source_root"] = {"value": p_dir, "rule": "SPEC_SOURCE_ROOT_FROM_TARGET_MODULE", "evidence": tgt_mod}
+                init_m = re.search(r"\b([A-Za-z0-9_./-]+/__init__\.py)\b", goal_str)
+                if "init_path" in keys:
+                    i_val = init_m.group(1) if init_m else ""
+                    out["init_path"] = {"value": i_val, "rule": "SPEC_INIT_PATH_STATED", "evidence": i_val or "default"}
+                if (init_m or re.search(r"\bexport\b", goal_str, re.I)) and "export_in_init" in keys:
+                    out["export_in_init"] = {"value": True, "rule": "SPEC_EXPORT_REQUESTED", "evidence": "export"}
+                tst_m = re.search(r"\b([A-Za-z0-9_./-]+/test_[A-Za-z0-9_]*\.py)\b", goal_str)
+                if "test_path" in keys:
+                    t_val = tst_m.group(1) if tst_m else ""
+                    out["test_path"] = {"value": t_val, "rule": "SPEC_TEST_PATH_STATED", "evidence": t_val or "default"}
     return out
 
 
