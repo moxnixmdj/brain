@@ -192,6 +192,12 @@ def _governing_clause(text: str) -> str:
     return parts[0] if parts else ""
 
 
+# A question is a request for a judgement, however it is punctuated.
+_ASKED_RE = re.compile(
+    r"\?|(?:^|[.;]\s*)(?:which|what|where|who|whom|whose|how|why|is|are|does|do)\b"
+    r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b", re.IGNORECASE)
+
+
 def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | None:
     """(trigger phrases the sentence states, candidate terms, effect token)."""
     low = str(goal or "").lower()
@@ -199,6 +205,19 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
         return None
     head = _governing_clause(low)
     for triggers, terms, token in _FAMILIES:
+        # A STATE DESCRIPTION IS NOT A REPAIR REQUEST.
+        #
+        # The repair family's evidence is a description of the tree ("fails", "broken",
+        # "returns the wrong value"), not a verb naming the operation.  Measured 2026-10-31:
+        # "The test suite in <dir> fails.  Which function in <dir> is at fault?  Write its name
+        # to <path>" is a DIAGNOSIS request -- it asks for an identification and a written
+        # answer -- and the repair family claimed it, so the decisive typed selection that
+        # names the fault-localizer was never built and the sentence was refused outright.
+        # A question asks for a judgement; the row that produces that judgement is the answer.
+        # Scoped to the repair family on purpose: the other families' triggers are the verbs
+        # the question is about ("which files must change to rename ...").
+        if token == "repair" and _ASKED_RE.search(str(goal or "")):
+            continue
         hits = tuple(t for t in triggers if t in head)
         if hits:
             return hits, terms, token
