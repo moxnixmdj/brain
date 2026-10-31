@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-10-31 on main `5ad1222` with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-10-31 on main `bbc00a7` with the substrate restored (`scripts/restore_substrate_v1.py`).
 Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md`
 records one round of repairs; this document is the whole problem list, ordered so that the next
 hour of work buys the most capability. Nothing here is a wish — every number is a measurement
@@ -11,7 +11,7 @@ the live verified registry, and a probe of the substrate).
 
 ## §0 The answer in one paragraph
 
-The brain answers **4 of 49** advanced software-engineering sentences and **23 of 54** capability cases for real (no FALSE rows, no DAMAGED). That gap is not a shortage of theory and it is
+The brain answers **4 of 49** advanced software-engineering sentences and **22 of 54** capability cases for real (no FALSE rows, no DAMAGED). That gap is not a shortage of theory and it is
 not a shortage of verification machinery — the tree has 440 registry rows and the strongest
 fail-closed answer gate it has ever had. The gap is three separate things, in this order:
 
@@ -33,15 +33,15 @@ fail-closed answer gate it has ever had. The gap is three separate things, in th
 | instrument | result |
 |---|---|
 | advanced census (49 hardcore sentences) | **4 served / 45 refused** |
-| capability matrix (54 cases) | **23 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
-| matrix latency | median 64 ms  p90 427 ms  max 2790 ms |
+| capability matrix (54 cases) | **22 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
+| matrix latency | median 106 ms  p90 686 ms  max 4245 ms |
 | live verified registry | 440 rows, 88 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
 
-The 23 rows that work for real, by name:
+The 22 rows that work for real, by name:
 
-`fix_verb_first`, `fix_target_first`, `bug_report`, `repair_with_report`, `repair_two_modules`, `repair_test_file`, `repair_no_test_named`, `rename_param`, `rename_symbol`, `extract_stated_statement`, `dead_code`, `complexity`, `change_impact`, `count_functions`, `run_suite`, `lint`, `typecheck`, `git_diff`, `add_parameter`, `measure_coverage`, `security_review`, `mutation_score`, `perf_review`
+`fix_verb_first`, `fix_target_first`, `bug_report`, `repair_with_report`, `repair_two_modules`, `repair_test_file`, `repair_no_test_named`, `rename_param`, `rename_symbol`, `extract_stated_statement`, `dead_code`, `complexity`, `change_impact`, `count_functions`, `run_suite`, `lint`, `typecheck`, `git_diff`, `add_parameter`, `measure_coverage`, `security_review`, `mutation_score`
 
 That list is the honest capability of the machine today: **single-file Python edits** (repair,
 rename, rename-parameter, add-parameter, extract, add-function), **static Python analysis**
@@ -201,10 +201,16 @@ These matter more than any single refusal, and none of them is measured by a 49-
 6. **The census measures the environment as much as the machine.** 4 of the 49 sentences turn
    on which packages happen to be installed, and the matrix prints `unmeasurable lanes` but
    does not fail. A number that moves when a pip cache is cold is not a capability number.
-7. **The matrix is not deterministic.** Seven consecutive runs on one unchanged tree gave
-   22 REAL once and 23 REAL six times, with the printed REAL list identical every time. A
-   number that moves on an unchanged tree cannot be regressed against, so the floor the
-   census workflow enforces is measuring partly the machine's mood.
+7. **A performance verdict is honest but not reproducible under load.** `perf_review`
+   measured slowdown ratios of 0.90 / 0.98 / 0.99 / 1.01 against a 1.10 band on unchanged
+   files: when contention pushes a run past the band the gate says UNCLEAR, which is the
+   correct answer (both sides were timed; the difference is inside the noise). The matrix
+   oracle used to demand PASS, so this case flickered 22 / 23 REAL on an unchanged tree
+   and the headline number moved with the box's load. The oracle now requires a complete
+   two-sided measurement with at least three timed runs per side and accepts PASS or
+   UNCLEAR -- strictly more evidence, one fewer false refusal. The residual problem is
+   real and stays: a review that cannot distinguish a 10% change under load cannot
+   certify a refactor's performance, only refute a large regression.
 8. **At least one census sentence is ill-posed.** Request 33 says *move the function `add`
    from mod.py into calc.py*, and both files define `add`, so the move collides and the
    refusal is CORRECT. The ambiguity rule caught it (it declined to pick a symbol whose
