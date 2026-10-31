@@ -3,7 +3,7 @@
   "action_intent_id": "RECONCILE_COMPOSER_FALSE_VERIFICATION_PR6305_V1",
   "action_kind": "RECONCILE_FRONTIER",
   "action_summary": "Reuse existing fail-closed adapters: 14 populated-registry false verification cases refuse; 28 empty/populated regression cases pass. No authenticated positive path is claimed.",
-  "canonical_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
+  "canonical_base_commit": "6c31fbb623b90d15c0e78aaf1bf03f8299921fee",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "Fourteen registry-only engineering composers can report verified work with populated declarations without executing dependencies; a disposable current-main regression had 14 false verified results.",
@@ -19,7 +19,7 @@
   "measured_effect": "On exported main c2335806b, all 14 populated-registry controls falsely returned verified; with the 14 existing mitigations, 28/28 empty and populated controls passed. On exported main 09867fd76, the mitigated controls also passed 28/28. Direct adapters only; no live exploit or authenticated positive path established.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "09867fd76b3f658b3e19da81576e634b370aa912",
+    "canonical_base_commit": "6c31fbb623b90d15c0e78aaf1bf03f8299921fee",
     "real_outcome": "Do not credit an engineering composition that has not executed its dependencies.",
     "required_capability": "Truthful completion of composed software engineering workflows",
     "selected_surviving_route": "Reuse and reconcile already implemented fail-closed adapters",
