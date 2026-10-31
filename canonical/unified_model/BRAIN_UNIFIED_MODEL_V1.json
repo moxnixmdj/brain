@@ -30487,9 +30487,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 185,
+  "knowledge_documents": 186,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6518,
+  "research_index_records": 6519,
   "routing_tokens": 2261,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d2ba1297faad56bff90d1621a5729a10d996c87dbcac270f0dc63f7d5a7c1342"
+  "value": "d15cffff16c0a0d825aa5107b2ded3fa5f11046a80b28eb967c498a11ccf94a2"
  },
  "engines": [
   {
@@ -55999,6 +55999,79 @@
     "heartbeat",
     "live"
    ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 3565,
+   "headings": [
+    "Reuse engineering operation intent — 2026-10-31",
+    "Scope",
+    "Existing machinery reused",
+    "Actual results",
+    "Adverse observations retained"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/SWE_OPERATION_INTENT_REUSE_20261031.md",
+   "sha256": "7d808b094ff96e547691cf1ec230a5bca55baf28f13d086a633c684977f48aff",
+   "summary": "Base: `59a593ca9094ecd7c31b02f83b05c9d27636a181`. Upstream synthesis, static-soundness, polyglot and network-mediation work is integrated, not reimplemented. This change adds no registry rows, providers, terminal credit, policies or runtime model calls.",
+   "terms": {
+    "actual": 5,
+    "add": 2,
+    "afterward": 2,
+    "assertions": 2,
+    "authority": 2,
+    "authorship": 3,
+    "base": 2,
+    "before": 3,
+    "branch": 2,
+    "caller": 4,
+    "cannot": 2,
+    "code": 2,
+    "contract": 2,
+    "controls": 4,
+    "execution": 4,
+    "existing": 7,
+    "failed": 2,
+    "file": 2,
+    "final": 2,
+    "function": 3,
+    "git": 4,
+    "history": 2,
+    "integrated": 3,
+    "intent": 3,
+    "model": 3,
+    "negative": 2,
+    "nine-module": 2,
+    "no": 5,
+    "nor": 2,
+    "not": 9,
+    "operation": 4,
+    "operations": 2,
+    "passed": 4,
+    "polyglot": 2,
+    "primary": 3,
+    "production": 2,
+    "public": 2,
+    "quoted": 2,
+    "real": 2,
+    "regressions": 2,
+    "rename": 2,
+    "replaced": 2,
+    "repository": 3,
+    "run": 2,
+    "stated": 2,
+    "status": 2,
+    "test": 3,
+    "upstream": 3
+   },
+   "title": "Reuse engineering operation intent — 2026-10-31",
+   "title_terms": [
+    "2026-10-31",
+    "engineering",
+    "intent",
+    "operation",
+    "reuse"
+   ]
   }
  ],
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
@@ -56027,10 +56100,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 974,
+  "included_source_count": 975,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "2786b4c44e7f1f67b2bff0d8793f9770abdd2c0f211d8e39ea749409b6777a63"
+  "source_tree_digest": "022d6c5e6847cd2cf88c937f8036c18f2999a18d04bae7910883124960d30985"
  },
  "research_index": [
   {
@@ -168873,7 +168946,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "2f72d16faf4924a93232a54b17a4650580eb4dabd9a3900ec4f73c8931a737b0",
+   "sha256": "15322ec0f9fa4a40fbb67dafe5fffd07ff38813ed289bf5bd4ad6b542d3b678c",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -205563,6 +205636,51 @@
    }
   },
   {
+   "action_id": "REUSE_SWE_OPERATION_INTENT_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/REUSE_SWE_OPERATION_INTENT_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REUSE_SWE_OPERATION_INTENT_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "657aec2797411a79c5f2b107e6b203dc1ac3229d25bd0fd4789148ae5ee38cb2",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "authoritative": 1,
+    "authorship": 1,
+    "bindable": 1,
+    "bisectors": 1,
+    "broad": 1,
+    "caller": 1,
+    "checks": 1,
+    "competed": 1,
+    "contaminated": 1,
+    "derivation": 1,
+    "did": 1,
+    "enter": 1,
+    "family": 1,
+    "git": 1,
+    "hid": 1,
+    "inside": 1,
+    "intent": 1,
+    "name": 1,
+    "not": 1,
+    "obligations": 1,
+    "operation": 2,
+    "operations": 1,
+    "queries": 1,
+    "reads": 1,
+    "real": 1,
+    "rejected": 1,
+    "reuse": 1,
+    "reuse_swe_operation_intent_20261031_v1": 1,
+    "short": 1,
+    "source-edit": 1,
+    "swe": 1
+   }
+  },
+  {
    "action_id": "ROOT2-CLOSURE-CONTROLLER-V2-20261004",
    "capability": false,
    "date": "",
@@ -228061,9 +228179,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "8e85d0d4e90609f6497b39831b52a4c390e6a4e3f03a45ee7ab8df71ed2b421f",
+   "sha256": "62984c87d10ff14a39089075c59ab256f3e76b5cad4e29715666a2cd4684749d",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "_git_head_tree_blobs",
     "_materialize_git_diff_for_dir",
@@ -228073,7 +228191,8 @@
     "binding_view",
     "derive",
     "is_swe_request",
-    "stated_existing_files"
+    "stated_existing_files",
+    "stated_git_operations"
    ],
    "terms": {
     "adapter_defaulted_keys": 1,
@@ -228092,6 +228211,7 @@
     "read_git_loose_obj": 1,
     "sentences": 1,
     "stated_existing_files": 1,
+    "stated_git_operations": 1,
     "tree_of": 1,
     "typed": 1,
     "v1": 1
@@ -242230,7 +242350,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "f87c55caa8569db025f214104a97f96fc87f9fbecac5f978016708eece0b6cb4",
+   "sha256": "78608139e73bdbaa845a0d8c79b5cc469822ef7944d4d2b9c891cbe831aaf913",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 70,
    "symbols": [
@@ -271908,7 +272028,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "78611f0edc6ec8bf1d79e29aa9b90e2e58aa27607d94f688dad7af37336eb2e5",
+   "sha256": "fe670f8fd045e04fd447ad0b925871ac5a0e91ab2b0dc3b0d8959df97a5f96a5",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 10,
    "symbols": [

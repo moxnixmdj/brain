@@ -102,10 +102,17 @@ def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
     # Paths and quoted values are task data, not evidence of an effect family.
     low = front.prose_only(str(goal or "")).lower()
     for triggers, terms, token in _FAMILIES:
-        if token == "symbol" and ("update every caller" in low or "rename " in low):
+        if token == "symbol" and ("update every caller" in low or re.search(
+                r"(?:^|[.;]|\bthen\b|\band\b)\s*(?:please\s+)?rename\b", low)):
             continue
         if any(t in low for t in triggers):
             return terms, token
+    # Unqualified repository reads use the existing operation grammar, not
+    # broad nouns such as "status" inside deployment questions or task data.
+    if re.fullmatch(r"(?:please\s+)?(?:show|list|print|display|what\s+is)\s+"
+                    r"(?:me\s+)?(?:the\s+)?(?:diff|status|history|current\s+branch)[.?!]*", low.strip()):
+        if len(derivation.stated_git_operations(goal)) == 1:
+            return ("git", "repository"), GIT_FAMILY_TOKEN
     return None
 
 
@@ -251,6 +258,9 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     if fam is None:
         return None
     terms, token = fam
+    operations = derivation.stated_git_operations(goal) if token == GIT_FAMILY_TOKEN else ()
+    if len(operations) > 1 or (operations and re.search(r"\bbisect\b", front.prose_only(goal), re.I)):
+        return None  # a history noun must not turn a bisection into a log read
     candidates: list[str] = []
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
@@ -262,6 +272,13 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
         # tools became bindable, and wasted their contract-binding work.
         if token not in cid.lower():
             continue
+        if operations:
+            contract = selection.contract_of(entry, declared.get(cid))
+            args = contract.get("args", {}) if isinstance(contract, Mapping) else {}
+            # A specific operation needs an operation-bearing contract. A
+            # bisector's bindable source_root alone cannot answer "git blame".
+            if "op" not in args:
+                continue
         surface = " ".join(map(str, (entry.get("keywords") or []) +
                                (entry.get("provides") or []))) + " " + cid
         low = surface.lower()
@@ -275,7 +292,8 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
             decision = selection.admit(goal, cid, registry[cid], root, declared.get(cid))
         except Exception:
             continue
-        if decision.get("admitted") and decision.get("specific"):
+        if (decision.get("admitted") and decision.get("specific")
+                and (not operations or (decision.get("inputs") or {}).get("op") == operations[0])):
             admitted.append((cid, dict(decision.get("inputs") or {})))
     if len(admitted) != 1:
         return None  # ambiguous / none -> fail closed

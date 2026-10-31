@@ -105,8 +105,7 @@ def is_swe_request(goal: str) -> bool:
     text = str(goal or "").lower()
     if any(verb in text for verb in _SWE_VERBS):
         return True
-    return len([name for name, pattern in _GIT_OPERATION_GRAMMAR
-                if pattern.search(text)]) == 1
+    return len(stated_git_operations(goal)) == 1
 
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
 _TEST_NAME_RE = re.compile(r"(^|/)(test_[^/]*|[^/]*_test)\.(py|js|ts|go|rs)$")
@@ -389,6 +388,16 @@ def _materialize_git_diff_for_dir(root: pathlib.Path, rel_dir: str) -> tuple[str
     return spool_rel, changed_rel
 
 
+def stated_git_operations(goal: str) -> tuple[str, ...]:
+    """Reuse the operation grammar on intent, never on paths or literal payloads."""
+    from canonical.runtime import goal_front_compiler_v1 as front
+    prose = front.prose_only(goal)
+    stated = tuple(name for name, pattern in _GIT_OPERATION_GRAMMAR if pattern.search(prose))
+    if stated == ("commit",) and not _REPOSITORY_CONTEXT.search(prose):
+        return ()
+    return stated
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -554,16 +563,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # ambiguous sentence binds nothing and the binder refuses, which is the whole
     # point of an enumerated operation set.
     if "op" in keys:
-        stated = [name for name, pattern in _GIT_OPERATION_GRAMMAR
-                  if pattern.search(str(goal or ""))]
-        # The one DESTRUCTIVE operation needs repository context, not just a verb.
-        # Measured 2026-10-29: "Commit the transaction to the database" matched the
-        # commit grammar.  Reading the wrong repository is a wrong answer; creating
-        # a commit in it is a wrong change, so the bar is higher: the sentence must
-        # say where it is committing (git, staged, changes, working tree, branch,
-        # repo) or no operation is derived at all.
-        if stated == ["commit"] and not _REPOSITORY_CONTEXT.search(str(goal or "")):
-            stated = []
+        stated = stated_git_operations(goal)
         if len(stated) == 1:
             out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
                          "evidence": stated[0]}
