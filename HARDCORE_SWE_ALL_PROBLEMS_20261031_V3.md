@@ -7,7 +7,7 @@ door's own words, not a reader's summary.
 
 | instrument | what it measures | result |
 |---|---|---|
-| `execution_guard/swe_advanced_probe_v1.py` | 49 advanced SWE sentences through the live front door | **4 served / 45 refused** |
+| `execution_guard/swe_advanced_probe_v1.py` | 49 advanced SWE sentences through the live front door | **6 served / 43 refused** |
 | `execution_guard/swe_capability_matrix_v1.py` | 54 ordinary team-work cases | **21 REAL / 0 FALSE / 0 DAMAGED** |
 | `hardcore_swe_surface_probe_20261030.py` | 28 ordinary SWE sentences | **28 / 28** |
 | the live verified registry | 440 rows and what they declare | 85 SWE rows, **19 ever reached** |
@@ -24,7 +24,7 @@ Appendix C.
 
 ## §0 The answer in one paragraph
 
-The machine answers **4 of 49** advanced software-engineering sentences, **21 of 54** ordinary
+The machine answers **6 of 49** advanced software-engineering sentences, **21 of 54** ordinary
 capability cases and **28 of 28** surface sentences, with no FALSE and no DAMAGED answer anywhere.
 It is **Python-only by construction**, on a substrate missing **24 of 36** tools an advanced
 engineer works with, and **five capability classes have no row at all**. The 45 refusals fall into
@@ -42,6 +42,11 @@ exactly three kinds, and they must not be confused because they are fixed in thr
 
 20 + 11 + 14 = 45.
 
+> **Correction (2026-10-31):** this document also reports that one row declares four effects it
+> does not implement. That is **wrong** and is corrected in §3.1 — the row implements all four,
+> and deleting the declarations cost the surface census a real case (28 → 27) within one CI
+> cycle. The corrected finding is in §3.1.
+
 Only kind 1 is plumbing. Kind 2 is a missing template. Kind 3 is a missing capability, and no
 amount of routing work makes it appear.
 
@@ -57,11 +62,19 @@ By class, the 49 sentences:
 | build (pyproject, Makefile, pin, vendor) | 0 | 5 | refactor | **2** | 6 |
 | ci (repair, matrix, cache, quarantine) | 0 | 4 | review | **1** | 3 |
 | perf (profile, optimise, benchmark, memo) | 0 | 4 | tests | **1** | 6 |
-| systems (race, thread pool, GIL) | 0 | 3 | git (commit, branch, diff, cherry-pick, log) | 0 | 5 |
+| systems (race, thread pool, GIL) | 0 | 3 | git (commit, branch, diff, cherry-pick, log) | **1** | 5 |
 | design (ADR, migration, split) | 0 | 3 | | | |
 
-The four that work: **run a suite and explain failures** (`#29`), **rename a symbol** (`#35`),
-**extract a function** (`#38`), **security review** (`#40`).
+The six that work: **run a suite and explain failures** (`#29`), **rename a symbol** (`#35`),
+**extract a function** (`#38`), **security review** (`#40`), **show the diff of a file against a
+revision** (`#44`, served 2026-10-31 by `git.repository.operate.v1`), and **replace every use of a
+deprecated function** (`#36`, served the same day once the choreographer could bind the tree its
+codemod pass edits).
+
+Three sentences the census briefly *reported* as served on 2026-10-31 were not: `#18`, `#23` and
+`#36` were certified while the choreographer rewrote `pkg/mod.py` and `pkg/service.py` and left the
+file the sentence was about untouched. The door now refuses that (`EDITS_LANDED_OUTSIDE_THE_NAMED_SUBJECT`)
+unless the file the sentence named is the one that moved — see §3.1.
 
 Latency is not the problem: advanced census median **60 ms**, p90 **176 ms**, max **435 ms**;
 matrix median **65.5 ms**, p90 **395 ms**, max **1584 ms**.
@@ -120,22 +133,40 @@ about the **row**. A census that cannot tell those apart certifies nothing.
 them**. Selection is decided by vocabulary, and a generic row with a large trigger vocabulary wins
 almost every sentence. This single defect reaches more sentences than any capability work.
 
-### 3.1 The row that declares what it does not implement
+### 3.1 CORRECTION (2026-10-31, after this document was first written)
 
-`software.repair.choreograph.crossfile.v1` declares in its own `provides`:
+V16 through V3 recorded `software.repair.choreograph.crossfile.v1` as declaring four effects it
+does not implement. **That claim is false and this section replaces it.** The adapter has a pass
+for every one of the four:
 
-```
-software.concurrency.race.condition.fix
-security.sql.injection.remove
-performance.quadratic.linearithmic.optimize
-dependency.deprecated.inspect.migrate
-```
+| pass | what it does | effect the row declares |
+|---|---|---|
+| Pass C | deprecated stdlib/API codemod | `dependency.deprecated.inspect.migrate` |
+| Pass D | DB-API 2.0 parameterization (CWE-89) | `security.sql.injection.remove` |
+| Pass E | shared-state concurrency RLock synthesis | `software.concurrency.race.condition.fix` |
+| Pass F | O(n²) → O(n) strength reduction | `performance.quadratic.linearithmic.optimize` |
 
-It implements one choreography — patch, symbol graph, impact slice, dual-oracle verify, gate. It
-therefore **passes the effect gate that exists to catch it**, and the race-condition (`#21`), SQL
-injection, quadratic→linearithmic (`#18`) and dependency-migration sentences are refused *late*
-inside the controller instead of by name. One row, one declaration, and the effect gate is
-defeated for four effects.
+The correction was not made by reading the code; it was made by **deleting the declarations and
+watching what broke**. Within one CI cycle the surface census fell **28/28 → 27/28**: the
+`fix_race` case — ten real runs all passing, plus a real `Lock(` construct in the source — is
+served by Pass E. The deletion was reverted; the registry is byte-identical to main.
+
+Two things follow, and both matter more than the sentences involved:
+
+1. **A census floor is what makes a capability claim falsifiable.** The surface census became a
+   gate on 2026-10-31 and it is the only reason this error was caught in the same hour instead of
+   being carried forward a fourth time. A ledger claim that nothing measures is a claim nobody
+   can refute.
+2. **The obvious law is worthless.** "An effect's name must appear in its adapter" was measured
+   and rejected: it passes on an adapter that lies (the words *race*, *sql* and *dependency* live
+   in prose) and fails on the honest one. What ships instead pins each declaration to the pass
+   that implements it (see `test_a_row_declares_only_what_it_implements_v1`), so a declaration
+   can only be deleted together with its pass.
+
+What *is* still true about this row is narrower and was measured separately: it has no
+`bisect`, no `cherry-pick` and no `changelog` pass, so those sentences are refused by name
+(`INSUFFICIENT_COMMITS_FOR_REGRESSION_ANALYSIS`, `STATED_SWE_EFFECT_UNSERVED`) — an absence of
+capability, not a false declaration.
 
 ---
 
@@ -349,7 +380,7 @@ python3 -c "from canonical.runtime.live_integrated_brain_v1 import load_verified
 
 It is not a plan to make the machine *seem* more capable. Every line is a measured refusal with the
 door's own cause, a measured absence, or a measured red law. It also does not soften the headline:
-**4 of 49** advanced sentences, **21 of 54** ordinary cases, **85** SWE rows of which **19** are
+**6 of 49** advanced sentences, **21 of 54** ordinary cases, **85** SWE rows of which **19** are
 ever reached, a substrate missing **24 of 36** tools, and **20** red laws including the two that
 govern whether a failure can be named at all. The value of the list is that the next hour can be
 spent where the reach is largest — §9, item 1 — instead of where the last refusal happened to land.
