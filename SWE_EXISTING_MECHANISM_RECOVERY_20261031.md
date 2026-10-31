@@ -53,11 +53,19 @@ Main then advanced to rung 54 (`7502e90b`), again changing only the registry. Al
 
 Before the landing attempt, registry-only restoration continued through rung 56 (`5eb63865`). The registry was proven semantically identical to upstream and its exact upstream serialization was retained, removing formatting churn and future artificial merge conflicts. All original branch work is preserved. Subsequent registry refreshes are identified by the PR head/base and regenerated artifact; the full 299-case results above remain measurements of their stated earlier registry versions.
 
+The concurrent restoration batch completed at rung 66 (`b0df8bee`). Its registry changes are integrated before the final required-check run. The artifact is regenerated rather than carrying forward a smaller catalog's digest. Final post-batch measurements and the actual merge outcome are recorded on PR #6341; earlier numerical results here retain their explicitly stated measurement scope.
+
 ## Corrected landing diagnosis
 
 The live GitHub branch-rules endpoint `repos/moxnixmdj/brain/rules/branches/main` declares the signed `referee/repo-integrity-guard` as its required status check, with strict up-to-date enforcement and a pull-request requirement. The local missing-intent and scope diagnostics remain failures, but they are not listed as required status checks by that endpoint. Earlier statements that they necessarily prevent any normal GitHub merge were too strong.
 
 This evidence does not authorize bypassing the referee. A fresh signed SUCCESS for the pushed head is required before attempting the normal, head-matched PR merge. No admin flag, forced push, check manipulation, ruleset change, or protected-file edit is used. At document creation the new commit has not yet landed; the GitHub PR state is authoritative for the subsequent merge outcome.
+
+## Late reliability observation
+
+A later 74-case smoke run on the rung-57 integrated registry produced **73 passed, 1 failed, 11.86 s**. The failure was the *initial positive request* in `test_reinspection_rejects_tampered_real_report[different_bounds]`, before tampering: it refused with `CONTRACT_CHECKS_UNBOUND`, selected the measurement-only primary, and did not execute. This resembles the previously documented intermittent false refusal; this work does **not** claim to have explained or eliminated it.
+
+An additional 80-case pure-planning probe did not reproduce the refusal. A subsequent **64/64 actual positive public requests passed in 50.455 s** on fresh temporary sources, but that passing probe does not cancel the failed smoke observation or prove the flake fixed. No speculative routing change or outcome-tolerant assertion was introduced to make it disappear.
 
 ## Limits
 
