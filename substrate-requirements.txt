@@ -1,13 +1,28 @@
-# The sandbox substrate: pip installs outside /home/user EVAPORATE between
-# turns (measured twice: tree_sitter generation mismatch broke 3 tree-sitter
-# capabilities; missing mypy/ruff/bandit degraded the chain gates to
-# PASS_BASELINE_ONLY). Pinned to the exact generation the capabilities were
-# harvested and verified against. One command restores:
+# THE BOOTSTRAP IS NOT A SECOND SOURCE OF TRUTH.
+#
+# This file used to pin its own versions: tree_sitter==0.21.3 alongside a kernel
+# that was harvested and verified against 0.20.4 (canonical/runtime/
+# tree_sitter_swe_kernel_v1.py, SUBSTRATE), and it named none of hypothesis,
+# crosshair-tool or z3-solver, which requirements/software_engineering_kernel_v1.txt
+# pins by exact version and SHA-256.  Measured 2026-10-31 on 1f2f160: installing
+# this file alone left 6 of 10 tools present, so the matrix reported the toolchain
+# lane unmeasurable and two capability cases (lint, typecheck) could not run at
+# all; installing the pinned kernel manifest instead took the matrix from
+# 22 REAL to 24 REAL with no change to any row.
+#
+# So the versions live in exactly one place -- the pinned, hashed kernel manifest --
+# and this file only adds the linters the kernel does not need but the review gates
+# do.  The drift is now a test:
+# canonical/tests/test_the_declared_substrate_is_the_verified_substrate_v1.py.
+#
+# One command restores the substrate (pip installs outside /home/user evaporate
+# between turns, measured twice):
 #   pip install --break-system-packages -r substrate-requirements.txt
-tree_sitter==0.21.3
-tree_sitter_languages==1.10.2
+-r requirements/software_engineering_kernel_v1.txt
+
+# Review-gate tools.  The kernel does not need them; python.review.diff_static_triage.v1,
+# python.review.diff_type_gate.v1, python.review.diff_security_gate.v1 and the mutation lane do.
 mypy
 ruff
 bandit
 coverage
-pytest
