@@ -7711,6 +7711,7 @@
           "output_path": "${input.output_path}",
           "regression_test_file": "${input.regression_test_file}",
           "source_root": "${input.source_root}",
+          "synthesize_regression_test": true,
           "target_file": "${input.target_file}",
           "test_paths": "${input.test_paths}"
         },
@@ -9724,15 +9725,7 @@
         "multi-file",
         "import closure",
         "call-graph",
-        "change-impact",
-        "circular import",
-        "import cycle",
-        "merge conflict",
-        "sql injection",
-        "linearithmic",
-        "race condition",
-        "concurrency",
-        "synchronization"
+        "change-impact"
       ],
       "limitations": [
         "Cross-file atomic choreography inside repair loop: patch\u2192choreograph via 86k/221k symbol graph\u2192change-impact 2070/2096 slice\u2192dual-oracle verify\u2192gate. Multi-file fixes, collision-checked, fail-closed, 50 not 2000 tests, $0, 0 model."
@@ -9744,11 +9737,7 @@
       ],
       "provides": [
         "software.repair.choreography.verified",
-        "software.patch.crossfile.atomic",
-        "software.concurrency.race.condition.fix",
-        "security.sql.injection.remove",
-        "performance.quadratic.linearithmic.optimize",
-        "dependency.deprecated.inspect.migrate"
+        "software.patch.crossfile.atomic"
       ],
       "requires": [
         "python.fault.localization.symbol_ranked",

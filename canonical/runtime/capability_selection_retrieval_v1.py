@@ -523,7 +523,8 @@ _COMPUTED_ANSWER_DELIVERY_RE = re.compile(
     r"(?:(?:yes\s+or\s+no|true\s+or\s+false)"
     r"|(?:its|their|the)\s+(?:name|test\s+name|function\s+name|symbol\s+name|"
     r"commit\s+id|commit|sha|hash|mutation\s+score(?:\s*\([^)]*\))?|score|"
-    r"number|count|result|results|report|reports|summary|answer|value|values|"
+    r"number|count|result|results|summary|answer|value|values|"
+    r"(?:repair\s+)?report|reports|receipt|index|output|"
     r"file\s+and\s+line|path\s+and\s+line|line\s+and\s+file))"
     r"\s+(?:to|into|in|at)\s+\S+\s*[.!?]?\s*$",
     re.IGNORECASE,
@@ -683,7 +684,7 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     if (
         not is_computed_answer_delivery(goal)
         and re.search(
-            r"\b(?:(?:fix|repair)\s+(?:the\s+(?:code|bug|race|circular|import|package|module|function)|it\b)"
+            r"\b(?:(?:fix|repair)\s+(?:the\s+(?:python\s+source|source|file|code|bug|race|circular|import|package|module|function)|it\b)"
             r"|remove\s+the\s+sql\s+injection|make\s+\w+\s+linearithmic|migrate\s+it\b)",
             _goal_low,
         )
@@ -823,12 +824,13 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
 _EFFECT_WORDS: tuple[tuple[tuple[str, ...], tuple[str, ...]], ...] = (
     (("rename",), ("rename",)),
     (("add parameter", "add a parameter", "add an optional parameter", "add optional parameter", "add argument"), ("add_parameter", "rename_parameter")),
-    (("move function", "move the function", "move helper", "move the helper"), ("move_function",)),
-    (("move symbol", "move class"), ("move_function", "extract_function")),
+    (("move function", "move the function", "move a function", "relocate the function", "move helper", "move the helper"), ("move_function",)),
+    (("move the class", "move a class", "move symbol", "move class", "relocate symbol"), ("move_symbol", "move_function", "extract_function")),
     (("extract",), ("extract",)),
-    (("synthesize", "implement ", "add a function", "add a total function", "total function", "write a function"), ("add_function", "synthesize_function", "synthesize")),
-    (("regression test",), ("synthesize_function",)),
+    (("synthesize", "implement ", "add a function", "add a total function", "total function", "write a function", "implement a function", "implement function", "create a function"), ("add_function", "implement_function_spec", "synthesize_function", "synthesize")),
+    (("regression test",), ("synthesize_function", "choreograph")),
     (("repair", "fix", "broken", "failing"), ("repair.apply", "repair", "patch", "choreograph")),
+    (("bug:", "returns the wrong"), ("repair", "patch", "fault")),
     (("merge conflict", "sql injection", "deprecated", "linearithmic", "unused import", "unused function", "race condition", "circular import", "import cycle"), ("merge_conflict", "choreograph", "crossfile")),
     (("change impact", "impacted test", "which tests"), ("change_impact", "testselect")),
     (("scaffold", "generate test"), ("scaffold", "generate")),

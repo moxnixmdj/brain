@@ -1,8 +1,8 @@
 {
- "action_id": "A_STATED_FUNCTION_IS_WRITTEN_WIRED_AND_TESTED_V1_20261031_V1",
- "action_intent_id": "A_STATED_FUNCTION_IS_WRITTEN_WIRED_AND_TESTED_V1_20261031_V1",
+ "action_id": "A_FAMILY_NOUN_IN_A_SUBORDINATE_CLAUSE_IS_NOT_THE_REQUEST_V1_20261031_V1",
+ "action_intent_id": "A_FAMILY_NOUN_IN_A_SUBORDINATE_CLAUSE_IS_NOT_THE_REQUEST_V1_20261031_V1",
  "action_kind": "FRESH_REUSE",
- "action_summary": "Two capabilities now serve the creation grammar by reusing what the tree already had: the scope-aware signature edit (an optional parameter whose default IS the value the body already read, so no call site changes) and a stated-specification function writer (signature, expression, module, export and test path read from the sentence; free names proved to be the class's own attributes; the test's expectation evaluated from the specification). Derivation gained three stated-evidence rules and one slot; the front layer may now select a snapshot row whose slots the SENTENCE derived.",
+ "action_summary": "Two law sets, one measurement. (A) The creation grammar is restored in declared_input_derivation_v1.py: the add-a-function signature and returned expression are read verbatim, destination/export/test targets are read from their own role words, and an added parameter is proved to be one the stated function does not already declare -- all gated on the sentence asking to CREATE a function. (B) The typed selector's family laws: a family trigger counts only in the sentence's governing clause; a trigger that sits inside a multi-word phrase another row DECLARES loses to that row; effect consistency accepts a row that declares the stated phrase itself. Census on this tree: 27/28, from 25/28 at the base this branch started from and 21/28 at the current tip. (C) The feature adapter's own report may not land on a file the same run wrote: when the binder hands output_path the stated test file, the report moves to <name>.report.json instead of overwriting the generated test -- measured on main: the generated test was replaced by the adapter's result JSON and the run still reported output_verified=true for a suite that could not import.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -27,34 +27,30 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/bound_capabilities/python_refactor_add_parameter.py",
-   "canonical/runtime/bound_capabilities/python_source_add_function.py",
-   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
-   "canonical/runtime/declared_input_derivation_v1.py",
-   "canonical/runtime/goal_front_compiler_v1.py",
-   "canonical/tests/test_a_stated_function_is_written_wired_and_tested_v1.py"
+   "canonical/runtime/swe_typed_plan_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py"
   ],
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two ordinary creation requests were unserved: 'Add a parameter qty with a default value to the function line_total ...' was routed to python.refactor.inline_helper.v1 (the call line_total(item, 3) still raised TypeError) and 'Add a function total_cents(item) ... export it ... add a test ...' was refused at route admission with nothing written. The machine could edit code that already existed and could not create code the sentence fully specified.",
- "canonical_base_commit": "99db201ab737ea36948abda8d52091c617223aae",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Routing laws refused work the machine already does. (A) The derivation rules that serve create-a-function requests were not on main although the two creation capabilities, their adapters and their registry rows were, so add_total_function and add_parameter failed. (B) The family resolver treated any family noun anywhere as the sentence's effect: 'Inline the single-use helper ... into its only caller' ran the symbol index for a refactor, 'Add a parameter ... and update every caller' claimed a signature change for the caller family, and the curated verb->effect table judged the dedicated merge-conflict row effect-inconsistent with the sentence it exists for. Same tree: 21/28.",
+ "canonical_base_commit": "59a593ca9094ecd7c31b02f83b05c9d27636a181",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "Two ordinary creation requests were unserved: 'Add a parameter qty with a default value to the function line_total ...' was routed to python.refactor.inline_helper.v1 (the call line_total(item, 3) still raised TypeError) and 'Add a function total_cents(item) ... export it ... add a test ...' was refused at route admission with nothing written. The machine could edit code that already existed and could not create code the sentence fully specified.",
+ "causal_blocker": "Routing laws refused work the machine already does. (A) The derivation rules that serve create-a-function requests were not on main although the two creation capabilities, their adapters and their registry rows were, so add_total_function and add_parameter failed. (B) The family resolver treated any family noun anywhere as the sentence's effect: 'Inline the single-use helper ... into its only caller' ran the symbol index for a refactor, 'Add a parameter ... and update every caller' claimed a signature change for the caller family, and the curated verb->effect table judged the dedicated merge-conflict row effect-inconsistent with the sentence it exists for. Same tree: 21/28.",
  "date": "2026-10-31",
- "expected_parent_change": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
- "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
+ "expected_parent_change": "hardcore_swe_surface_probe_20261030.py --jobs 4: 25/28 on origin/main 59a593ca90 (fails add_total_function, add_parameter, fix_then_regression_test); 27/28 on this tree in 10.1 s, only fix_then_regression_test left. The seven pinned SWE/selection modules show the same 5 failures and 3 pytest-only loader errors as origin/main.",
+ "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py --jobs 4: 25/28 on origin/main 59a593ca90 (fails add_total_function, add_parameter, fix_then_regression_test); 27/28 on this tree in 10.1 s, only fix_then_regression_test left. The seven pinned SWE/selection modules show the same 5 failures and 3 pytest-only loader errors as origin/main.",
  "explicit_user_authorization": "Owner instruction this session, verbatim and repeated: all of the problems are already solved in the brain, so the fix wires what the repository already has -- the symbol index the adapter already builds, the overlap law the adapter already enforces, the unittest module _render_module already emits -- instead of inventing policy or adding a dependency. Owner instruction to focus on hardcore software engineering: this is the capability that writes tests. Owner instruction to do the optimal in the fastest way and only the right way. Owner instruction that all tests must be extremely hard and only truthful: five of the seven new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed.",
- "falsification_condition": "Re-run both tags on main and on this branch. If the baseline does not fail them, or if the new pin suite is not red on the baseline, the law is wrong.",
+ "falsification_condition": "Re-run the census on origin/main and here. If the baseline does not fail those tags, or if the pinned selection measurements move, the laws are wrong.",
  "governance_change": true,
- "governance_change_summary": "Two new bound capabilities, three derivation rules and one admission gate. The gate only ADMITS a retrieved snapshot row when the sentence's own stated evidence filled its slots (derived_count > 0); a lexical near-miss still cannot displace anything, and the pinned selection measurements are unchanged.",
+ "governance_change_summary": "The typed SWE selector gains three clause/phrase laws that only NARROW when a family noun can claim authority, and widen effect consistency to a row's own declared phrases. No refusal is relaxed into a false pass: ambiguity still refuses, and the promise gate still rejects a route that cannot deliver the stated effect.",
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
- "intent": "Serve creation requests the sentence fully specifies instead of inlining, refusing, or answering with a different capability.",
+ "intent": "A sentence's own clause and the row that declares its phrase decide the effect; code the machine can already write must not be refused by a routing law.",
  "load_bearing_primary": {
-  "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
+  "canonical_base_commit": "59a593ca9094ecd7c31b02f83b05c9d27636a181",
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4",
    "CODING_FRONTIERCODE_GE_54_4",
@@ -64,32 +60,28 @@
   "expected_obligation_unlock_lcb": "1/13",
   "highest_leverage_now": true,
   "interpretation": "A capability that could delete now declines a sentence it cannot serve whole, and the refusal is measured by a filesystem oracle rather than by its own report.",
-  "measured_effect": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
+  "measured_effect": "hardcore_swe_surface_probe_20261030.py --jobs 4: 25/28 on origin/main 59a593ca90 (fails add_total_function, add_parameter, fix_then_regression_test); 27/28 on this tree in 10.1 s, only fix_then_regression_test left. The seven pinned SWE/selection modules show the same 5 failures and 3 pytest-only loader errors as origin/main.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
+  "stop_condition": "Stop when the census reads one or more higher than the baseline with no pinned test moving.",
   "success_probability_lcb": "1/2",
   "wall_clock_cost_ub": 1
  },
- "measured_effect": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
+ "measured_effect": "hardcore_swe_surface_probe_20261030.py --jobs 4: 25/28 on origin/main 59a593ca90 (fails add_total_function, add_parameter, fix_then_regression_test); 27/28 on this tree in 10.1 s, only fix_then_regression_test left. The seven pinned SWE/selection modules show the same 5 failures and 3 pytest-only loader errors as origin/main.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "prior_work_reused": "python_refactor_rename_parameter's span-integrity/rollback discipline, the existing symbol and module derivations, declared_input_derivation's shadow-contract binding, and F17 (retrieval proposes, typed admission disposes) rather than any new primitive.",
+ "prior_work_reused": "selection.admit as the only oracle, selection._EFFECT_WORDS as the existing verb vocabulary, the registry rows' own keywords/provides, and the front compiler's existing prose_only/role machinery.",
  "progress_evidence_paths": [
-  "canonical/runtime/bound_capabilities/python_refactor_add_parameter.py",
-  "canonical/runtime/bound_capabilities/python_source_add_function.py",
-  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
-  "canonical/runtime/declared_input_derivation_v1.py",
-  "canonical/runtime/goal_front_compiler_v1.py",
-  "canonical/tests/test_a_stated_function_is_written_wired_and_tested_v1.py"
+  "canonical/runtime/swe_typed_plan_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "99db201ab737ea36948abda8d52091c617223aae",
+  "canonical_base_commit": "59a593ca9094ecd7c31b02f83b05c9d27636a181",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
    "DELIVERY_TREATED_AS_A_SECOND_TASK__the_answer_clause_bound_to_an_unrelated_writer"
   ],
-  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
+  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py --jobs 4: 25/28 on origin/main 59a593ca90 (fails add_total_function, add_parameter, fix_then_regression_test); 27/28 on this tree in 10.1 s, only fix_then_regression_test left. The seven pinned SWE/selection modules show the same 5 failures and 3 pytest-only loader errors as origin/main.",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
@@ -108,7 +100,7 @@
     "TREATING_THE_TOP_RANKED_CAPABILITY_AS_THE_ONE_THAT_RAN",
     "TREATING_AN_EMPTY_unknown_sites_LIST_AS_PROOF_THE_TREE_IS_CLEAN"
    ],
-   "real_outcome": "Both sentences now execute a capability that writes the code they describe, and each run is judged by an oracle that runs the code (200/300) or reads the written test file and the package export (12).",
+   "real_outcome": "Refactor and signature requests execute the capability that writes the change they describe, and a merge-conflict request executes the capability that resolves conflict markers.",
    "surviving_necessity": "The tier oracle is independent of the adapter: it greps the whole tree for the old name, imports the package and runs the unittest suite, so a report that lies cannot pass it."
   },
   "obs_inherited_system": {
@@ -148,8 +140,8 @@
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "The fixture trees are tiny by construction, but the referee is real: a tree-wide grep for the old name, a real package import and a real unittest run, plus an A/B against a pristine HEAD worktree with the same fixtures"
   },
-  "real_outcome": "hardcore_swe_surface_probe_20261030.py: add_parameter FAIL__LIVE_CONTROLLER_EXECUTION (inline_helper, line_total(item, 3) -> TypeError) -> PASS in 97 ms (python.refactor.add_parameter.v1, 200/300, suite green); add_total_function FAIL_CLOSED__ROUTE_ADMISSION_REJECTED -> PASS in 193 ms (python.source.add_function.v1, value 12, exported, test file written, suite green). Full census 25/28 -> 27/28 in 14.1 s.",
-  "required_capability": "REUSE_THE_SIGNATURE_EDIT_AND_THE_STATED_SPECIFICATION_WRITER",
+  "real_outcome": "hardcore_swe_surface_probe_20261030.py --jobs 4: 25/28 on origin/main 59a593ca90 (fails add_total_function, add_parameter, fix_then_regression_test); 27/28 on this tree in 10.1 s, only fix_then_regression_test left. The seven pinned SWE/selection modules show the same 5 failures and 3 pytest-only loader errors as origin/main.",
+  "required_capability": "REUSE_THE_TYPED_SELECTOR_RULES_ALREADY_IN_THE_TREE",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -216,7 +208,7 @@
      "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
     }
    ],
-   "checked_at_utc": "2026-10-31T13:41:11Z",
+   "checked_at_utc": "2026-10-31T14:03:52Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -259,11 +251,11 @@
     "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
     "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
    ],
-   "selected_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
-   "selected_route_checked_at_utc": "2026-10-31T13:41:11Z",
+   "selected_route": "MAKE_CLAUSE_AND_DECLARED_PHRASE_DECIDE_THE_EFFECT",
+   "selected_route_checked_at_utc": "2026-10-31T14:03:52Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T13:41:11Z",
+    "checked_at_utc": "2026-10-31T14:03:52Z",
     "execution_dependencies": [
      {
       "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
@@ -300,10 +292,10 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
+    "selected_route": "MAKE_CLAUSE_AND_DECLARED_PHRASE_DECIDE_THE_EFFECT",
     "status": "READY"
    },
-   "selected_surviving_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
+   "selected_surviving_route": "MAKE_CLAUSE_AND_DECLARED_PHRASE_DECIDE_THE_EFFECT",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
@@ -325,7 +317,7 @@
      "docs.python.org/3.10/library/ast.html -- ast.parse + lineno/col_offset are the sanctioned mechanism for span-exact edits; no third-party parser is required"
     ]
    },
-   "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
+   "stop_condition": "Stop when the census reads one or more higher than the baseline with no pinned test moving.",
    "unresolved_plausible_dominators": [],
    "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
   },
@@ -335,16 +327,16 @@
    "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
   ],
-  "selected_surviving_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
-  "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
+  "selected_surviving_route": "MAKE_CLAUSE_AND_DECLARED_PHRASE_DECIDE_THE_EFFECT",
+  "stop_condition": "Stop when the census reads one or more higher than the baseline with no pinned test moving.",
   "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
  },
- "refusal_or_stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
- "resolution": "canonical/runtime/bound_capabilities/python_refactor_add_parameter.py and python_source_add_function.py, two registry rows, three derivation rules in declared_input_derivation_v1.py, and the F17 evidence gate in goal_front_compiler_v1.py.",
- "route_id": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
+ "refusal_or_stop_condition": "Stop when the census reads one or more higher than the baseline with no pinned test moving.",
+ "resolution": "canonical/runtime/swe_typed_plan_v1.py: governing-clause family hits, declared-phrase rivals, row-surface effect consistency; the door passes the registry entry to the effect check.",
+ "route_id": "MAKE_CLAUSE_AND_DECLARED_PHRASE_DECIDE_THE_EFFECT",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "selected_route": "REUSE_SPAN_EDITS_WITH_ROLLBACK_AND_DERIVE_EVERY_SLOT_FROM_THE_SENTENCE",
- "stop_condition": "Stop when both tags pass, the pin suite is green and the pinned selection measurements are unchanged.",
+ "selected_route": "MAKE_CLAUSE_AND_DECLARED_PHRASE_DECIDE_THE_EFFECT",
+ "stop_condition": "Stop when the census reads one or more higher than the baseline with no pinned test moving.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "user_authorized_governance_change": true,
@@ -388,14 +380,14 @@
      "why_rejected_or_selected": "Rejected: duplicates existing bound adapters instead of adapting them in-place and adding only genuinely absent git-bisect and mutation-testing primitives."
     }
    ],
-   "chosen_candidate": "UPGRADE_SWE_REPAIR_REFACTOR_FAULT_ADAPTERS_AND_ADD_DETERMINISTIC_GIT_BISECT_AND_AST_MUTATION_TESTING",
+   "chosen_candidate": "RESTORE_THE_DERIVATION_RULES_AND_LET_CLAUSE_AND_DECLARED_PHRASE_DECIDE",
    "counterexample_receipts": [
     {
      "git_blob_sha": "95bad7bf130466a02f36de2f7f1cc1de8d4be476",
      "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py"
     },
     {
-     "git_blob_sha": "37bdda38a818f746302cd74db7d5c9ab8c72fceb",
+     "git_blob_sha": "cc16fb560ca32883900fb39c295268f638a9b6b3",
      "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py"
     }
    ],

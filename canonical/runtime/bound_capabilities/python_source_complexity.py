@@ -73,6 +73,21 @@ def _files(root: pathlib.Path):
         yield path
 
 
+def _calls_with_loop_depth(node: ast.AST, cur_loop: int = 0) -> list[tuple[str, int]]:
+    out: list[tuple[str, int]] = []
+    for child in ast.iter_child_nodes(node):
+        if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda)):
+            continue
+        next_loop = cur_loop + (1 if isinstance(child, (ast.For, ast.AsyncFor, ast.While, ast.comprehension)) else 0)
+        if isinstance(child, ast.Call):
+            fn = child.func
+            cname = fn.id if isinstance(fn, ast.Name) else (fn.attr if isinstance(fn, ast.Attribute) else "")
+            if cname:
+                out.append((cname, cur_loop))
+        out.extend(_calls_with_loop_depth(child, next_loop))
+    return out
+
+
 def run(args, root):
     repo = pathlib.Path(root).resolve()
     source_root = _safe_root(repo, args.get("source_root"))
@@ -80,7 +95,7 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
-    measured = []
+    raw_fns: list[tuple[str, str, int, int, list[tuple[str, int]]]] = []
     unparseable = 0
     for path in _files(source_root):
         try:
@@ -89,17 +104,58 @@ def run(args, root):
         except (SyntaxError, ValueError):
             unparseable += 1
             continue
+        rel_p = _rel(repo, path)
         for node in tree.body:
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue
-            depth = _nesting(node)
-            measured.append({
-                "path": _rel(repo, path),
-                "name": node.name,
-                "nesting": depth,
-                "complexity_class": _class_for(depth),
-                "lineno": getattr(node, "lineno", 0),
-            })
+            raw_fns.append((
+                rel_p,
+                node.name,
+                _nesting(node),
+                getattr(node, "lineno", 0),
+                _calls_with_loop_depth(node, 0),
+            ))
+
+    # Interprocedural loop-depth propagation + self-recursion recurrence detection
+    eff_depth: dict[str, int] = {}
+    rec_class: dict[str, str] = {}
+    for _rel_p, fname, ldepth, _ln, calls in raw_fns:
+        self_calls = sum(1 for c, _ in calls if c == fname)
+        if self_calls >= 2:
+            eff_depth[fname] = max(eff_depth.get(fname, 0), max(ldepth, 4))
+            rec_class[fname] = "O(2^n)"
+        elif self_calls == 1:
+            eff_depth[fname] = max(eff_depth.get(fname, 0), max(ldepth, 1))
+        else:
+            eff_depth[fname] = max(eff_depth.get(fname, 0), ldepth)
+
+    for _ in range(min(len(raw_fns), 12)):
+        changed = False
+        for _rel_p, fname, ldepth, _ln, calls in raw_fns:
+            best_d = eff_depth.get(fname, ldepth)
+            for cname, call_loop_d in calls:
+                if cname != fname and cname in eff_depth:
+                    cand = call_loop_d + eff_depth[cname]
+                    if cand > best_d and cand <= 8:
+                        best_d = cand
+            if best_d != eff_depth.get(fname):
+                eff_depth[fname] = best_d
+                changed = True
+        if not changed:
+            break
+
+    measured = []
+    for rel_p, fname, ldepth, lineno, _calls in raw_fns:
+        depth = eff_depth.get(fname, ldepth)
+        c_cls = rec_class.get(fname) or _class_for(depth)
+        measured.append({
+            "path": rel_p,
+            "name": fname,
+            "local_nesting": ldepth,
+            "nesting": depth,
+            "complexity_class": c_cls,
+            "lineno": lineno,
+        })
 
     # Deepest first; ties broken by name so the artifact is deterministic.
     measured.sort(key=lambda r: (-r["nesting"], r["path"], r["name"]))

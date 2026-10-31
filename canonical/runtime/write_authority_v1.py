@@ -102,6 +102,7 @@ SOURCE_SUFFIXES: tuple[str, ...] = (
 _TRANSFORMERS: tuple[str, ...] = (
     "edit", "repair", "refactor", "rename", "patch", "apply", "fix", "rewrite",
     "transform", "migrate", "format", "generate", "scaffold", "synthes",
+    "implement", "move_symbol", "add_parameter", "choreograph", "resolve",
 )
 
 

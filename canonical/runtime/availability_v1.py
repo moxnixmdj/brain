@@ -57,8 +57,15 @@ def missing(capability_id: str, registry: dict | None = None) -> list[str]:
 
 def load_registry() -> dict:
     import json
-    data = json.loads(Path(REGISTRY).read_text(encoding="utf-8"))
-    return data.get("capabilities", data)
+    p = Path(REGISTRY)
+    snap = p.with_name("BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json")
+    txt = p.read_text(encoding="utf-8") if p.is_file() else ""
+    if not txt.lstrip().startswith("{") and snap.is_file():
+        txt = snap.read_text(encoding="utf-8")
+    caps = dict(json.loads(txt).get("capabilities") or {})
+    if snap.is_file():
+        caps.update(json.loads(snap.read_text(encoding="utf-8")).get("capabilities") or {})
+    return caps
 
 
 def available(registry: dict | None = None) -> dict[str, list[str]]:

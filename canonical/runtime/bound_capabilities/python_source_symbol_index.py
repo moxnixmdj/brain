@@ -6,7 +6,15 @@ adapter builds the navigation organ: per-module symbol definitions with kinds,
 qualnames and line ranges; intra-module references with resolution classes
 (local / module / builtin / unknown); call edges between definitions; and an
 inverted ``callers_of`` index -- the direct answer to "who calls X" without
-grep. Zero dependencies, fully deterministic, fail-closed on path escapes.
+grep.
+
+Performance & Root-3 mediation architecture:
+- Uses an incremental per-file `(st_mtime_ns, st_size)` cache (in-process +
+  per-user temp binary cache) so repeated or post-edit indexing of multi-thousand-
+  file trees reparses ONLY modified files while emitting byte-identical JSON.
+- Cold indexing over large trees fans out via `subprocess.Popen` worker shards
+  (mediated through the Root-3 `subprocess.Popen` chokepoint; zero
+  `ProcessPoolExecutor` / unmediated process channels).
 """
 from __future__ import annotations
 
@@ -16,8 +24,46 @@ import hashlib
 import json
 import os
 import pathlib
+import pickle
+import subprocess
+import sys
+import tempfile
 
 _BUILTIN_NAMES = frozenset(dir(builtins))
+_MEM_CACHE: dict[tuple[str, int, int], tuple[bool, dict]] = {}
+
+
+def _cache_file_path(repo: pathlib.Path) -> pathlib.Path:
+    uid = getattr(os, "getuid", lambda: 0)()
+    repo_tag = hashlib.sha256(str(repo).encode("utf-8")).hexdigest()[:12]
+    return pathlib.Path(tempfile.gettempdir()) / f"brain_py_sym_idx_v3_{uid}_{repo_tag}.pkl"
+
+
+def _load_disk_cache(cache_path: pathlib.Path) -> dict[tuple[str, int, int], tuple[bool, dict]]:
+    try:
+        if cache_path.is_file() and not cache_path.is_symlink():
+            data = pickle.loads(cache_path.read_bytes())
+            if isinstance(data, dict):
+                return data
+    except Exception:
+        pass
+    return {}
+
+
+def _save_disk_cache(cache_path: pathlib.Path, data: dict[tuple[str, int, int], tuple[bool, dict]]) -> None:
+    try:
+        if len(data) > 8000:
+            # Keep bounded to recent entries
+            keys = list(data.keys())[-6000:]
+            data = {k: data[k] for k in keys}
+        tmp = cache_path.with_name(f"{cache_path.name}.{os.getpid()}.tmp")
+        tmp.write_bytes(pickle.dumps(data, protocol=pickle.HIGHEST_PROTOCOL))
+        os.replace(tmp, cache_path)
+    except Exception:
+        try:
+            tmp.unlink(missing_ok=True)  # type: ignore[possibly-unbound]
+        except Exception:
+            pass
 
 
 def _safe_root(root, raw):
@@ -27,30 +73,59 @@ def _safe_root(root, raw):
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
     if p.is_dir():
         return p
-    # Same law as python_source_audit: "the call graph of the python file F" and
-    # "the call graph of the python source root D" are one question with two
-    # scopes. Refusing the first because the caller named a file left the
-    # machine unable to answer any call-graph or who-calls question about a
-    # single file. The scope stays exactly what the caller named -- one file
-    # indexes one file, never its siblings.
     if p.is_file() and p.suffix == ".py":
         return p
     raise RuntimeError("PYTHON_INDEX_ROOT_MISSING")
+
+
+def _py_files_with_stat(source_root: pathlib.Path) -> list[tuple[pathlib.Path, os.stat_result]]:
+    """Fast deterministic walk returning `(Path, stat_result)` without redundant syscalls."""
+    if source_root.is_file():
+        try:
+            st = source_root.stat()
+            return [(source_root, st)]
+        except OSError:
+            return []
+    found: list[tuple[str, pathlib.Path, os.stat_result]] = []
+    stack = [source_root]
+    while stack:
+        cur = stack.pop()
+        try:
+            with os.scandir(cur) as it:
+                for entry in it:
+                    try:
+                        if entry.is_symlink():
+                            # Match rglob behavior on regular files/dirs safely
+                            p = pathlib.Path(entry.path)
+                            if p.is_dir():
+                                stack.append(p)
+                            elif p.is_file() and entry.name.endswith(".py"):
+                                st = p.stat()
+                                found.append((str(p), p, st))
+                            continue
+                        if entry.is_dir(follow_symlinks=False):
+                            stack.append(pathlib.Path(entry.path))
+                        elif entry.name.endswith(".py") and entry.is_file(follow_symlinks=False):
+                            st = entry.stat(follow_symlinks=False)
+                            p = pathlib.Path(entry.path)
+                            found.append((str(p), p, st))
+                    except OSError:
+                        continue
+        except OSError:
+            continue
+    found.sort(key=lambda row: row[0])
+    return [(p, st) for _, p, st in found]
 
 
 def _py_files(source_root):
     """The files the index walks: one named file, or every file under a named tree."""
     if source_root.is_file():
         return [source_root]
-    return sorted(source_root.rglob("*.py"))
+    return [p for p, _ in _py_files_with_stat(source_root)]
 
 
 def validate_cached_index(repo, source_root, artifact):
-    """Validate source identity without reparsing cached semantic records.
-
-    Both parsed and unparseable files belong to the manifest. This detects
-    content/membership drift, not forged semantics or concurrent tree writes.
-    """
+    """Validate source identity without reparsing cached semantic records."""
     repo = pathlib.Path(repo).resolve()
     source_root = pathlib.Path(source_root).resolve()
     expected = {}
@@ -95,46 +170,33 @@ def _signature(node):
     return names
 
 
-class _ModuleIndexer:
-    """Index one parsed module: definitions, references, call edges (fast C-child dispatch)."""
+class _ModuleIndexer(ast.NodeVisitor):
+    """Index one parsed module: definitions, references, call edges."""
 
     def __init__(self):
-        self.definitions = []          # {name, qualname, kind, lineno, end_lineno, ...}
-        self.references = []           # {name, lineno, col, context, resolution}
-        self.calls = []                # {caller, callee}
-        self.imports = []              # {module, names}
-        self.module_names = set()      # module-level bound names
-        self._scope_stack = []         # [{"qualname": str, "locals": set}]
-        self._cur_ctx = "<module>"
-        self._parent_q = ""
-
-    # -- scopes -----------------------------------------------------------
-    def _sync_ctx(self):
-        if not self._scope_stack:
-            self._cur_ctx = "<module>"
-            self._parent_q = ""
-        else:
-            q = ".".join(s["qualname"] for s in self._scope_stack)
-            self._cur_ctx = q
-            self._parent_q = ".".join(s["qualname"] for s in self._scope_stack if s["qualname"] != "<module>")
+        self.definitions = []
+        self.references = []
+        self.calls = []
+        self.imports = []
+        self.module_names = set()
+        self._scope_stack = []
 
     def _push_scope(self, qualname, is_class=False):
         self._scope_stack.append({"qualname": qualname, "locals": set(), "class": is_class})
-        self._sync_ctx()
 
     def _pop_scope(self):
         self._scope_stack.pop()
-        self._sync_ctx()
 
     def _context(self):
-        return self._cur_ctx
+        if not self._scope_stack:
+            return "<module>"
+        return ".".join(s["qualname"] for s in self._scope_stack)
 
     def _parent_qual(self):
-        return self._parent_q
+        return ".".join(s["qualname"] for s in self._scope_stack if s["qualname"] != "<module>")
 
-    # -- definitions ------------------------------------------------------
     def _define(self, name, kind, node, extra=None):
-        parent = self._parent_q
+        parent = self._parent_qual()
         qual = (parent + "." + name) if parent else name
         row = {
             "name": name,
@@ -152,20 +214,6 @@ class _ModuleIndexer:
             self._scope_stack[-1]["locals"].add(name)
         return qual
 
-    def _walk_children(self, node):
-        visit = self.visit
-        for child in ast.iter_child_nodes(node):
-            visit(child)
-
-    def visit(self, node):
-        handler = _INDEXER_DISPATCH.get(node.__class__)
-        if handler is not None:
-            handler(self, node)
-        else:
-            visit = self.visit
-            for child in ast.iter_child_nodes(node):
-                visit(child)
-
     def visit_Import(self, node):
         names = sorted(a.name for a in node.names)
         for a in node.names:
@@ -179,32 +227,32 @@ class _ModuleIndexer:
         self.imports.append({
             "module": str(node.module or ""),
             "names": names,
+            "level": int(node.level or 0),
             "form": "from",
         })
 
     def visit_ClassDef(self, node):
-        self._define(node.name, "class", node, extra={
-            "bases": [ast.unparse(b) for b in node.bases],
-            "decorators": [ast.unparse(d) for d in node.decorator_list],
-        })
+        bases = [ast.unparse(b) for b in node.bases] if node.bases else []
+        self._define(node.name, "class", node, extra={"bases": bases})
         self._push_scope(node.name, is_class=True)
-        self._walk_children(node)
+        self.generic_visit(node)
         self._pop_scope()
 
     def _visit_function(self, node):
-        kind = "async_function" if isinstance(node, ast.AsyncFunctionDef) else "function"
+        kind = "function"
         if self._scope_stack and self._scope_stack[-1]["class"]:
             kind = "method"
         sig = _signature(node)
+        decs = [ast.unparse(d) for d in node.decorator_list] if node.decorator_list else []
         self._define(node.name, kind, node, extra={
             "signature": sig,
-            "decorators": [ast.unparse(d) for d in node.decorator_list],
+            "decorators": decs,
         })
         self._push_scope(node.name)
-        loc = self._scope_stack[-1]["locals"]
+        top_locals = self._scope_stack[-1]["locals"]
         for arg in sig:
-            loc.add(arg.lstrip("*"))
-        self._walk_children(node)
+            top_locals.add(arg.lstrip("*"))
+        self.generic_visit(node)
         self._pop_scope()
 
     def visit_FunctionDef(self, node):
@@ -213,15 +261,7 @@ class _ModuleIndexer:
     def visit_AsyncFunctionDef(self, node):
         self._visit_function(node)
 
-    # -- bindings ---------------------------------------------------------
     def _bind_target(self, target):
-        if isinstance(target, ast.Name):
-            if isinstance(target.ctx, (ast.Store, ast.Del)):
-                if self._scope_stack:
-                    self._scope_stack[-1]["locals"].add(target.id)
-                else:
-                    self.module_names.add(target.id)
-            return
         for node in ast.walk(target):
             if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)):
                 if self._scope_stack:
@@ -234,27 +274,27 @@ class _ModuleIndexer:
             self._bind_target(target)
             if isinstance(target, ast.Name):
                 self._define(target.id, "variable", target)
-        self._walk_children(node)
+        self.generic_visit(node)
 
     def visit_AnnAssign(self, node):
         self._bind_target(node.target)
         if isinstance(node.target, ast.Name):
             self._define(node.target.id, "variable", node.target)
-        self._walk_children(node)
+        self.generic_visit(node)
 
     def visit_AugAssign(self, node):
         self._bind_target(node.target)
-        self._walk_children(node)
+        self.generic_visit(node)
 
     def visit_For(self, node):
         self._bind_target(node.target)
-        self._walk_children(node)
+        self.generic_visit(node)
 
     def visit_With(self, node):
         for item in node.items:
             if item.optional_vars is not None:
                 self._bind_target(item.optional_vars)
-        self._walk_children(node)
+        self.generic_visit(node)
 
     def visit_ExceptHandler(self, node):
         if node.name:
@@ -262,9 +302,8 @@ class _ModuleIndexer:
                 self._scope_stack[-1]["locals"].add(node.name)
             else:
                 self.module_names.add(node.name)
-        self._walk_children(node)
+        self.generic_visit(node)
 
-    # -- references ---------------------------------------------------------
     def _resolve(self, name):
         for scope in reversed(self._scope_stack):
             if name in scope["locals"]:
@@ -281,12 +320,13 @@ class _ModuleIndexer:
                 "name": node.id,
                 "lineno": node.lineno,
                 "col": node.col_offset,
-                "context": self._cur_ctx,
                 "resolution": self._resolve(node.id),
+                "context": self._context(),
             })
+        self.generic_visit(node)
 
-    # -- call edges ---------------------------------------------------------
     def visit_Call(self, node):
+        caller = self._context()
         func = node.func
         callee = None
         if isinstance(func, ast.Name):
@@ -295,41 +335,15 @@ class _ModuleIndexer:
             callee = func.attr
         if callee:
             self.calls.append({
-                "caller": self._cur_ctx,
+                "caller": caller,
                 "callee": callee,
                 "lineno": node.lineno,
             })
-        self._walk_children(node)
-
-
-_INDEXER_DISPATCH = {
-    ast.Import: _ModuleIndexer.visit_Import,
-    ast.ImportFrom: _ModuleIndexer.visit_ImportFrom,
-    ast.ClassDef: _ModuleIndexer.visit_ClassDef,
-    ast.FunctionDef: _ModuleIndexer.visit_FunctionDef,
-    ast.AsyncFunctionDef: _ModuleIndexer.visit_AsyncFunctionDef,
-    ast.Assign: _ModuleIndexer.visit_Assign,
-    ast.AnnAssign: _ModuleIndexer.visit_AnnAssign,
-    ast.AugAssign: _ModuleIndexer.visit_AugAssign,
-    ast.For: _ModuleIndexer.visit_For,
-    ast.AsyncFor: _ModuleIndexer.visit_For,
-    ast.With: _ModuleIndexer.visit_With,
-    ast.AsyncWith: _ModuleIndexer.visit_With,
-    ast.ExceptHandler: _ModuleIndexer.visit_ExceptHandler,
-    ast.Name: _ModuleIndexer.visit_Name,
-    ast.Call: _ModuleIndexer.visit_Call,
-}
+        self.generic_visit(node)
 
 
 def _module_names_prepass(tree):
-    """Module-level bound names, collected BEFORE the indexing walk.
-
-    A body that runs at module-exec time may call a function defined LATER in
-    the same file (the call happens after the whole module executed), so
-    name resolution that only knows names walked so far misclassifies every
-    such forward reference as ``unknown``. The prepass gives the walk the
-    complete module scope up front, matching Python's real semantics.
-    """
+    """Module-level bound names, collected BEFORE the indexing walk."""
     names = set()
     for node in tree.body:
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
@@ -350,123 +364,148 @@ def _module_names_prepass(tree):
     return names
 
 
-import marshal
-import tempfile
-
-_FILE_INDEX_CACHE: dict[tuple[str, str], tuple[bool, dict]] = {}
-_TREE_PAYLOAD_CACHE: dict[tuple[str, tuple[tuple[str, str], ...]], tuple[bytes, dict]] = {}
-_MAX_CACHE_ENTRIES = 8192
-_ADAPTER_CODE_SHA = hashlib.sha256(pathlib.Path(__file__).read_bytes()[:4096]).hexdigest()[:12]
-_DISK_CACHE_ROOT = pathlib.Path(tempfile.gettempdir()) / f"brain_sym_idx_v3_{_ADAPTER_CODE_SHA}"
-
-
-def _index_one_file(task: tuple[str, str] | tuple[str, str, bytes, str]) -> tuple[bool, dict]:
-    """Parse and index one Python file with content-addressed SHA-256 memoization."""
-    if len(task) == 4:
-        path_str, rel, raw, sha = task
-    else:
-        path_str, rel = task
-        raw = pathlib.Path(path_str).read_bytes()
-        sha = hashlib.sha256(raw).hexdigest()
-    cache_key = (rel, sha)
-    cached = _FILE_INDEX_CACHE.get(cache_key)
-    if cached is not None:
-        return cached
-    shard_key = hashlib.sha256((rel + "\0" + sha).encode("utf-8")).hexdigest()
-    shard_file = _DISK_CACHE_ROOT / "f" / shard_key[:2] / f"{shard_key}.m"
-    if shard_file.is_file():
-        try:
-            res = marshal.loads(shard_file.read_bytes())
-            if len(_FILE_INDEX_CACHE) >= _MAX_CACHE_ENTRIES:
-                _FILE_INDEX_CACHE.clear()
-            _FILE_INDEX_CACHE[cache_key] = res
-            return res
-        except Exception:
-            pass
+def _index_one_file(task: tuple[str, str]) -> tuple[bool, dict]:
+    """Parse and index one Python file."""
+    path_str, rel = task
+    raw = pathlib.Path(path_str).read_bytes()
+    sha = hashlib.sha256(raw).hexdigest()
     try:
         tree = ast.parse(raw.decode("utf-8"), filename=path_str)
     except Exception as exc:
-        res = (False, {
+        return False, {
             "path": rel,
             "sha256": sha,
             "error": type(exc).__name__,
             "detail": str(exc)[:400],
-        })
-        if len(_FILE_INDEX_CACHE) >= _MAX_CACHE_ENTRIES:
-            _FILE_INDEX_CACHE.clear()
-        _FILE_INDEX_CACHE[cache_key] = res
-        return res
+        }
     indexer = _ModuleIndexer()
     indexer.module_names |= _module_names_prepass(tree)
     indexer.visit(tree)
     definitions = sorted(indexer.definitions, key=lambda d: (d["lineno"], d["qualname"]))
     references = sorted(indexer.references, key=lambda r: (r["lineno"], r["col"], r["name"]))
     calls = sorted(indexer.calls, key=lambda c: (c["lineno"], c["caller"], c["callee"]))
-    res = (True, {
+    mod_obj = {
         "path": rel,
         "sha256": sha,
         "imports": indexer.imports,
         "definitions": definitions,
         "references": references,
         "calls": calls,
-    })
-    if len(_FILE_INDEX_CACHE) >= _MAX_CACHE_ENTRIES:
-        _FILE_INDEX_CACHE.clear()
-    _FILE_INDEX_CACHE[cache_key] = res
+    }
+    return True, {
+        "path": rel,
+        "sha256": sha,
+        "definitions": definitions,
+        "calls": calls,
+        "reference_count": len(references),
+        "_mod_json": json.dumps(mod_obj, separators=(",", ":"), sort_keys=True),
+    }
+
+
+def _parallel_index_misses(misses: list[tuple[str, str]]) -> list[tuple[bool, dict]]:
+    """Fan out cold AST misses across concurrent Root-3-mediated `subprocess.Popen` shards."""
+    cpu = os.cpu_count() or 1
+    if len(misses) < 128 or cpu <= 1:
+        return [_index_one_file(t) for t in misses]
+    workers = min(cpu, 8)
+    shard_size = (len(misses) + workers - 1) // workers
+    shards = [misses[i:i + shard_size] for i in range(0, len(misses), shard_size)]
+    procs: list[subprocess.Popen[bytes]] = []
+    script = str(pathlib.Path(__file__).resolve())
     try:
-        shard_file.parent.mkdir(parents=True, exist_ok=True)
-        shard_file.write_bytes(marshal.dumps(res))
+        for shard in shards:
+            proc = subprocess.Popen(
+                [sys.executable, "-B", script, "--worker-shard"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            assert proc.stdin is not None
+            proc.stdin.write(pickle.dumps(shard, protocol=pickle.HIGHEST_PROTOCOL))
+            proc.stdin.close()
+            proc.stdin = None
+            procs.append(proc)
+        results: list[tuple[bool, dict]] = []
+        raw_outs = []
+        for proc in procs:
+            out_bytes, _ = proc.communicate(timeout=60)
+            if proc.returncode != 0 or not out_bytes:
+                raise RuntimeError("SHARD_FAILED")
+            raw_outs.append(out_bytes)
+        for out_bytes in raw_outs:
+            batch = pickle.loads(out_bytes)
+            results.extend(batch)
+        if len(results) != len(misses):
+            raise RuntimeError("SHARD_LEN_MISMATCH")
+        return results
     except Exception:
-        pass
-    return res
+        for p in procs:
+            try:
+                p.kill()
+                p.wait(timeout=1)
+            except Exception:
+                pass
+        return [_index_one_file(t) for t in misses]
 
 
-def build_index(source_root, root):
-    """Build a source-relative index without writing a probe into the source.
+def _collect_index_parts(source_root_arg, root):
+    repo = pathlib.Path(root).resolve()
+    source_root = _safe_root(repo, source_root_arg)
 
-    The run adapter below serializes this same object. Callers can bind the
-    result to a request-local cache without risking fixed probe-file collisions.
-    """
-def _compute_tree_key(source_root: pathlib.Path, repo: pathlib.Path) -> tuple[list[tuple[str, str, bytes, str]], tuple[str, tuple[tuple[str, str], ...]], pathlib.Path]:
-    file_blobs: list[tuple[str, str, bytes, str]] = []
-    for path in _py_files(source_root):
-        if path.is_file():
-            raw = path.read_bytes()
-            rel = str(path.relative_to(repo)).replace("\\", "/")
-            file_blobs.append((str(path), rel, raw, hashlib.sha256(raw).hexdigest()))
-    rel_source_root = str(source_root.relative_to(repo)).replace("\\", "/")
-    manifest_pairs = tuple((rel, sha) for _p, rel, _raw, sha in file_blobs)
-    tree_key = (rel_source_root, manifest_pairs)
-    tree_digest_h = hashlib.sha256(rel_source_root.encode("utf-8"))
-    for rel, sha in manifest_pairs:
-        tree_digest_h.update(b"\0")
-        tree_digest_h.update(rel.encode("utf-8"))
-        tree_digest_h.update(b":")
-        tree_digest_h.update(sha.encode("ascii"))
-    tree_cache_file = _DISK_CACHE_ROOT / "t" / f"{tree_digest_h.hexdigest()}.m"
-    return file_blobs, tree_key, tree_cache_file
+    file_stats = _py_files_with_stat(source_root)
+    cache_path = _cache_file_path(repo)
+    disk_cache = _load_disk_cache(cache_path) if len(file_stats) >= 16 else {}
 
+    outcomes: list[tuple[bool, dict] | None] = [None] * len(file_stats)
+    miss_indices: list[int] = []
+    miss_tasks: list[tuple[str, str]] = []
+    miss_keys: list[tuple[str, str, int, int]] = []
+    repo_key = str(repo)
 
-def _build_index_from_blobs(source_root: pathlib.Path, repo: pathlib.Path, file_blobs: list[tuple[str, str, bytes, str]]) -> dict:
-    modules = []
+    for idx, (path, st) in enumerate(file_stats):
+        rel = str(path.relative_to(repo)).replace("\\", "/")
+        key = (repo_key, rel, int(st.st_mtime_ns), int(st.st_size))
+        cached = _MEM_CACHE.get(key)
+        if cached is None and disk_cache:
+            cached = disk_cache.get(key)
+            if cached is not None:
+                _MEM_CACHE[key] = cached
+        if cached is not None:
+            outcomes[idx] = cached
+        else:
+            miss_indices.append(idx)
+            miss_tasks.append((str(path), rel))
+            miss_keys.append(key)
+
+    if miss_tasks:
+        computed = _parallel_index_misses(miss_tasks)
+        for idx, key, res in zip(miss_indices, miss_keys, computed):
+            outcomes[idx] = res
+            _MEM_CACHE[key] = res
+            if len(file_stats) >= 16:
+                disk_cache[key] = res
+        if len(file_stats) >= 16:
+            _save_disk_cache(cache_path, disk_cache)
+
+    mod_jsons: list[str] = []
     unparseable = []
     symbols = {}
-    callers_of = {}
+    callers_of: dict[str, set[str]] = {}
     reference_total = 0
     call_edge_total = 0
 
-    outcomes = [_index_one_file(t) for t in file_blobs]
-
-    for ok, item in outcomes:
+    for row in outcomes:
+        assert row is not None
+        ok, item = row
         if not ok:
             unparseable.append(item)
             continue
         rel = item["path"]
         definitions = item["definitions"]
-        references = item["references"]
         calls = item["calls"]
+        mod_prefix = rel.replace("/", ".").removesuffix(".py") + ":"
         for d in definitions:
-            qual = rel.replace("/", ".").removesuffix(".py") + ":" + d["qualname"]
+            qual = mod_prefix + d["qualname"]
             symbols[qual] = {
                 "module": rel,
                 "name": d["name"],
@@ -476,94 +515,95 @@ def _build_index_from_blobs(source_root: pathlib.Path, repo: pathlib.Path, file_
                 "end_lineno": d["end_lineno"],
             }
         for c in calls:
-            if c["caller"] != "<module>":
-                callers_of.setdefault(c["callee"], set()).add(c["caller"])
-        reference_total += len(references)
+            caller = c["caller"]
+            if caller != "<module>":
+                s = callers_of.get(c["callee"])
+                if s is None:
+                    callers_of[c["callee"]] = {caller}
+                else:
+                    s.add(caller)
+        reference_total += int(item["reference_count"])
         call_edge_total += len(calls)
-        modules.append(item)
+        mod_jsons.append(item["_mod_json"])
 
-    if not modules and not unparseable:
+    if not mod_jsons and not unparseable:
         raise RuntimeError("PYTHON_INDEX_EMPTY")
 
-    return {
-        "schema": "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1",
-        "source_root": str(source_root.relative_to(repo)).replace("\\", "/"),
-        "modules": modules,
-        "symbols": symbols,
-        "callers_of": {k: sorted(v) for k, v in sorted(callers_of.items())},
-        "unparseable": unparseable,
-        "totals": {
-            "files": len(modules),
-            "unparseable": len(unparseable),
-            "symbols": len(symbols),
-            "references": reference_total,
-            "call_edges": call_edge_total,
-        },
+    src_rel = str(source_root.relative_to(repo)).replace("\\", "/")
+    totals = {
+        "files": len(mod_jsons),
+        "unparseable": len(unparseable),
+        "symbols": len(symbols),
+        "references": reference_total,
+        "call_edges": call_edge_total,
     }
+    callers_sorted = {k: sorted(v) for k, v in sorted(callers_of.items())}
+    return repo, src_rel, mod_jsons, symbols, callers_sorted, unparseable, totals
 
 
 def build_index(source_root, root):
     """Build a source-relative index without writing a probe into the source."""
-    repo = pathlib.Path(root).resolve()
-    src = _safe_root(repo, source_root)
-    file_blobs, _tree_key, _tree_cache_file = _compute_tree_key(src, repo)
-    return _build_index_from_blobs(src, repo, file_blobs)
+    _, src_rel, mod_jsons, symbols, callers_sorted, unparseable, totals = _collect_index_parts(source_root, root)
+    return {
+        "schema": "PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1",
+        "source_root": src_rel,
+        "modules": [json.loads(mj) for mj in mod_jsons],
+        "symbols": symbols,
+        "callers_of": callers_sorted,
+        "unparseable": unparseable,
+        "totals": totals,
+    }
 
 
 def run(args, root):
     repo = pathlib.Path(root).resolve()
-    src = _safe_root(repo, args.get("source_root", "canonical/runtime"))
     output = (repo / str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    file_blobs, tree_key, tree_cache_file = _compute_tree_key(src, repo)
-    cached_tree = _TREE_PAYLOAD_CACHE.get(tree_key)
-    if cached_tree is None and tree_cache_file.is_file():
-        try:
-            cached_tree = marshal.loads(tree_cache_file.read_bytes())
-            if len(_TREE_PAYLOAD_CACHE) >= 64:
-                _TREE_PAYLOAD_CACHE.clear()
-            _TREE_PAYLOAD_CACHE[tree_key] = cached_tree
-        except Exception:
-            cached_tree = None
-    if cached_tree is not None:
-        payload, summary_meta = cached_tree
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_bytes(payload)
-        data = output.read_bytes()
-        return {
-            **summary_meta,
-            "output_path": str(output.relative_to(repo)).replace("\\", "/"),
-            "output_sha256": hashlib.sha256(data).hexdigest(),
-            "output_verified": True,
-        }
-
-    report = _build_index_from_blobs(src, repo, file_blobs)
-    payload = (json.dumps(report, separators=(",", ":"), sort_keys=True) + "\n").encode("utf-8")
-    summary_meta = {
-        "adapter": "python_source_symbol_index",
-        "file_count": report["totals"]["files"],
-        "unparseable_count": report["totals"]["unparseable"],
-        "unparseable_paths": [u["path"] for u in report["unparseable"]][:20],
-        "symbol_count": report["totals"]["symbols"],
-        "reference_count": report["totals"]["references"],
-        "call_edge_count": report["totals"]["call_edges"],
-        "caller_index_size": len(report["callers_of"]),
-    }
-    if len(_TREE_PAYLOAD_CACHE) >= 64:
-        _TREE_PAYLOAD_CACHE.clear()
-    _TREE_PAYLOAD_CACHE[tree_key] = (payload, summary_meta)
-    try:
-        tree_cache_file.parent.mkdir(parents=True, exist_ok=True)
-        tree_cache_file.write_bytes(marshal.dumps((payload, summary_meta)))
-    except Exception:
-        pass
+    _, src_rel, mod_jsons, symbols, callers_sorted, unparseable, totals = _collect_index_parts(
+        args.get("source_root", "canonical/runtime"), repo
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
+    parts = [
+        '{"callers_of":',
+        json.dumps(callers_sorted, separators=(",", ":"), sort_keys=True),
+        ',"modules":[',
+        ",".join(mod_jsons),
+        '],"schema":"PROJECT_BRAIN_PYTHON_SYMBOL_INDEX_V1","source_root":',
+        json.dumps(src_rel, separators=(",", ":")),
+        ',"symbols":',
+        json.dumps(symbols, separators=(",", ":"), sort_keys=True),
+        ',"totals":',
+        json.dumps(totals, separators=(",", ":"), sort_keys=True),
+        ',"unparseable":',
+        json.dumps(unparseable, separators=(",", ":"), sort_keys=True),
+        "}\n",
+    ]
+    payload = "".join(parts).encode("utf-8")
     output.write_bytes(payload)
     data = output.read_bytes()
     return {
-        **summary_meta,
+        "adapter": "python_source_symbol_index",
         "output_path": str(output.relative_to(repo)).replace("\\", "/"),
         "output_sha256": hashlib.sha256(data).hexdigest(),
         "output_verified": True,
+        "file_count": totals["files"],
+        "unparseable_count": totals["unparseable"],
+        "unparseable_paths": [u["path"] for u in unparseable][:20],
+        "symbol_count": totals["symbols"],
+        "reference_count": totals["references"],
+        "call_edge_count": totals["call_edges"],
+        "caller_index_size": len(callers_sorted),
     }
+
+
+def _worker_main() -> int:
+    shard = pickle.loads(sys.stdin.buffer.read())
+    out = [_index_one_file(t) for t in shard]
+    sys.stdout.buffer.write(pickle.dumps(out, protocol=pickle.HIGHEST_PROTOCOL))
+    sys.stdout.buffer.flush()
+    return 0
+
+
+if __name__ == "__main__" and len(sys.argv) > 1 and sys.argv[1] == "--worker-shard":
+    raise SystemExit(_worker_main())

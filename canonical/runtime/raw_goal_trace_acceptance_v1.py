@@ -2512,6 +2512,48 @@ def _inspect_python_taint_flow(args, result, root):
     return True, "", {"findings_verified": len(trace), "answer": ans}
 
 
+_INSPECT_DEF_CACHE: dict[tuple[str, int, int], int] = {}
+
+
+def _inspect_count_defs_in_file(p: Path) -> int:
+    try:
+        st = p.stat()
+        ck = (str(p), st.st_mtime_ns, st.st_size)
+    except OSError:
+        return 0
+    hit = _INSPECT_DEF_CACHE.get(ck)
+    if hit is not None:
+        return hit
+    try:
+        tree = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
+    except (SyntaxError, ValueError):
+        _INSPECT_DEF_CACHE[ck] = 0
+        return 0
+    total = 0
+    stack: list[list[ast.stmt]] = [tree.body]
+    while stack:
+        blk = stack.pop()
+        for nd in blk:
+            if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                total += 1
+                stack.append(nd.body)
+            else:
+                for attr in ("body", "orelse", "finalbody"):
+                    sub = getattr(nd, attr, None)
+                    if isinstance(sub, list) and sub:
+                        stack.append(sub)
+                for attr in ("handlers", "cases"):
+                    items = getattr(nd, attr, None)
+                    if isinstance(items, list):
+                        for item in items:
+                            if isinstance(getattr(item, "body", None), list):
+                                stack.append(item.body)
+    if len(_INSPECT_DEF_CACHE) > 8192:
+        _INSPECT_DEF_CACHE.clear()
+    _INSPECT_DEF_CACHE[ck] = total
+    return total
+
+
 def _inspect_python_source_report(args, result, root):
     out = _inside(root, result.get("output_path") or args.get("output_path"))
     if out is None or not out.is_file():
@@ -2524,15 +2566,7 @@ def _inspect_python_source_report(args, result, root):
         return False, "SOURCE_ROOT_ABSENT", {}
     if "definition_count" in data:
         py_files = [src] if src.is_file() else [p for p in sorted(src.rglob("*.py")) if "__pycache__" not in p.parts]
-        expected = 0
-        for p in py_files:
-            try:
-                tree = ast.parse(p.read_text(encoding="utf-8", errors="replace"))
-            except SyntaxError:
-                continue
-            for n in ast.walk(tree):
-                if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                    expected += 1
+        expected = sum(_inspect_count_defs_in_file(p) for p in py_files)
         if data.get("definition_count") != expected or data.get("answer") != expected:
             return False, "DEFINITION_COUNT_MISMATCH", {}
     return True, "", {"report_verified": True, "answer": data.get("answer")}
@@ -2592,6 +2626,89 @@ def _inspect_python_mutation_score(args, result, root):
     return True, "", {"mutants_reconciled": total, "mutation_score": expected_score}
 
 
+def _inspect_move_symbol(args, result, root):
+    if result.get("verified") is not True or result.get("gate") != "PASS":
+        return False, "MOVE_SYMBOL_NOT_VERIFIED", {}
+    sym = str(result.get("symbol") or args.get("symbol") or "")
+    dst_rel = str(result.get("target_module") or args.get("target_module") or "")
+    src_rel = str(result.get("source_module") or args.get("source_module") or "")
+    dst = _inside(root, dst_rel)
+    src = _inside(root, src_rel)
+    if dst is None or not dst.is_file() or src is None or not src.is_file():
+        return False, "MOVE_SYMBOL_MODULE_ABSENT", {}
+    try:
+        dst_tree = ast.parse(dst.read_bytes())
+        src_tree = ast.parse(src.read_bytes())
+    except (SyntaxError, ValueError, OSError):
+        return False, "MOVE_SYMBOL_AST_UNPARSEABLE", {}
+    dst_defs = {n.name for n in dst_tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))}
+    src_defs = {n.name for n in src_tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))}
+    if sym not in dst_defs or sym in src_defs:
+        return False, "MOVE_SYMBOL_PLACEMENT_UNVERIFIED", {"symbol": sym}
+    return True, "", {"symbol": sym, "target_module": dst_rel}
+
+
+def _inspect_add_parameter(args, result, root):
+    if result.get("verified") is not True or result.get("gate") != "PASS":
+        return False, "ADD_PARAMETER_NOT_VERIFIED", {}
+    param = str(result.get("param_name") or args.get("param_name") or "")
+    edited = result.get("files_edited") or []
+    if not isinstance(edited, list) or not edited or not param:
+        return False, "ADD_PARAMETER_EDITED_INVALID", {}
+    mod_p = _inside(root, str(edited[0]))
+    if mod_p is None or not mod_p.is_file():
+        return False, "ADD_PARAMETER_MODULE_ABSENT", {}
+    try:
+        tree = ast.parse(mod_p.read_bytes())
+    except (SyntaxError, ValueError, OSError):
+        return False, "ADD_PARAMETER_AST_UNPARSEABLE", {}
+    has_param = any(
+        isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+        and any(a.arg == param for a in (*n.args.posonlyargs, *n.args.args, *n.args.kwonlyargs))
+        for n in ast.walk(tree)
+    )
+    if not has_param:
+        return False, "ADD_PARAMETER_MISSING_IN_AST", {"param": param}
+    return True, "", {"param_name": param, "files_edited": len(edited)}
+
+
+def _inspect_implement_function_spec(args, result, root):
+    if result.get("verified") is not True or result.get("gate") != "PASS":
+        return False, "IMPLEMENT_FUNCTION_SPEC_NOT_VERIFIED", {}
+    fn_name = str(result.get("function_name") or args.get("function_name") or "")
+    tgt_rel = str(result.get("target_module") or args.get("target_module") or "")
+    tgt = _inside(root, tgt_rel)
+    if not fn_name or tgt is None or not tgt.is_file():
+        return False, "IMPLEMENT_FUNCTION_SPEC_TARGET_ABSENT", {}
+    try:
+        tree = ast.parse(tgt.read_bytes())
+    except (SyntaxError, ValueError, OSError):
+        return False, "IMPLEMENT_FUNCTION_SPEC_AST_UNPARSEABLE", {}
+    defined = {n.name for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    if fn_name not in defined:
+        return False, "IMPLEMENT_FUNCTION_SPEC_MISSING_DEF", {"function_name": fn_name}
+    return True, "", {"function_name": fn_name, "target_module": tgt_rel}
+
+
+def _inspect_rename_parameter(args, result, root):
+    if result.get("complete") is not True or result.get("gate") != "PASS":
+        return False, "RENAME_PARAMETER_NOT_COMPLETE", {}
+    edits = result.get("edits") or []
+    if not isinstance(edits, list) or not edits:
+        return False, "RENAME_PARAMETER_NO_EDITS", {}
+    sr = str(args.get("source_root") or "")
+    for row in edits:
+        f_rel = str((row or {}).get("file") or "")
+        cand = _inside(root, f"{sr.rstrip('/')}/{f_rel}" if sr else f_rel) or _inside(root, f_rel)
+        if cand is None or not cand.is_file():
+            return False, "RENAME_PARAMETER_EDITED_FILE_ABSENT", {"file": f_rel}
+        try:
+            ast.parse(cand.read_bytes())
+        except (SyntaxError, ValueError, OSError):
+            return False, "RENAME_PARAMETER_EDITED_FILE_UNPARSEABLE", {"file": f_rel}
+    return True, "", {"files_reparsed": len(edits)}
+
+
 INSPECTORS: dict[str, Inspector] = {
     "software.repair.choreograph.crossfile.v1": _inspect_crossfile_report,
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
@@ -2604,6 +2721,11 @@ INSPECTORS: dict[str, Inspector] = {
     "python.repository.acceptance.measure.v1": _inspect_repository_acceptance_measure,
     "python.refactor.extract_function.v1": _inspect_refactor_extract_function,
     "python.refactor.rename_parameter.v1": _inspect_refactor_rename_parameter,
+    "python.refactor.rename_symbol.v1": _inspect_rename_parameter,
+    "python.refactor.move_function.v1": _inspect_python_inline_or_merge,
+    "python.refactor.move_symbol.v1": _inspect_move_symbol,
+    "python.refactor.add_parameter.v1": _inspect_add_parameter,
+    "python.feature.implement_function_spec.v1": _inspect_implement_function_spec,
     "python.software.synthesize_function.v1": _inspect_program_synthesizer,
     "code.multilanguage.parse.tree_sitter.v1": _inspect_multilanguage_parse,
     "software.hardcore.swe.supercomposer.v1": _inspect_swe_supercomposer,
