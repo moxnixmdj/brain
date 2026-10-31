@@ -30475,7 +30475,7 @@
   "engines": 26,
   "knowledge_documents": 210,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6536,
+  "research_index_records": 6537,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30484,7 +30484,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0d87ba938968830d6db8b8732900ea303feb1b6e5ec701b5f461fa78d05221ac"
+  "value": "8875a8d64c42f68aac448f738b55107cb9f6c4b41b337974f035992b11904e8e"
  },
  "engines": [
   {
@@ -208131,6 +208131,31 @@
     "signed": 1,
     "v1": 1,
     "verdict": 1
+   }
+  },
+  {
+   "action_id": "REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b33131450c9a828d16e67754147d5fc0aedee2efd135778619712cb881ab7872",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_row_could_declare_as_its_requirement_the_name_of_another_row_and_no_check_compared_a_requirement_against_what_the_registry_publishes__six_swe_rows_required_the_capability_id_python_source_symbols_index_ast_which_is_not_an_effect_while_that_row_publishes_python_source_symbol_index__including_the_most_selected_row_in_the_advanced_census__and_the_only_false_row_in_the_54_case_matrix_was_a_fixture_with_no_diff_to_show_measured_2026_10_31": 1,
+    "effect": 1,
+    "every_requirement_that_spells_a_capability_id_must_be_a_token_that_id_publishes_as_a_law_test_over_the_shipped_registries__the_git_lane_measures_a_diff_that_exists_because_the_fixture_has_a_repository_and_an_uncommitted_edit__and_an_artifact_is_parsed_only_when_the_sentence_states_the_answer_being_checked": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "names": 1,
+    "not": 1,
+    "repair_the_declared_graph_with_a_law_over_the_registry_s_own_names": 1,
+    "requirement": 1,
+    "requirement_names_an_effect_not_a_row_v1_20261031_v1": 1,
+    "row": 1,
+    "v1": 2
    }
   },
   {
