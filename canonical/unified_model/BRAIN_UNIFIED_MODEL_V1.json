@@ -23231,7 +23231,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_contract_issue_orchestration_fusion_v1.py",
-    "source_sha256": "7bbb2ce1f26df66405ffc98e007e807e66991183fdee2885105b582c2fadb4fc",
+    "source_sha256": "8eead8f50b7283eeb6353189c3d250d8558c7b0a3c703c54959aa7d16fd3420c",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23302,7 +23302,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_evidence_contract_supercomposer_v1.py",
-    "source_sha256": "47e7ba958e3b73af58e0a19f1eaedb8e1383d1f7f90081ecba76d0079e7f5656",
+    "source_sha256": "f3088245db44019e9309a4989f479b5081cc506abb3f1dee241ac597a60ea311",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23474,7 +23474,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_fault_patch_supercomposer_v1.py",
-    "source_sha256": "f47d03b38440d86c9c93059a3f5c081ba29d87b66b9b2b1c71e764bd1b27c6b5",
+    "source_sha256": "0bc391481924edbaeaba2d07db33f35f254a43f4558440eff90741542695d968",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23873,7 +23873,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_orchestration_symbol_supercomposer_v1.py",
-    "source_sha256": "0f883dbe24326400bcefcb027cc4f8b865e219df3cfb9f8b9b9d43667a3f310e",
+    "source_sha256": "cbc810d664f80f753dbd7f93226567bcdf4fa54db6b60f31cefeb9d5c5df5c9b",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -23944,7 +23944,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_patch_review_supercomposer_v1.py",
-    "source_sha256": "ee4dbb9551dce165a9863f902a5b060658f0876f9ee5158ba01dd2c14447aacd",
+    "source_sha256": "2b0795094bbf03cabcd37d40276bdd8a7ec4259b5d30d96ce43de4711315c1f2",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24176,7 +24176,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_pr_land_composer_v1.py",
-    "source_sha256": "e1bde661609d731ef255c8e4797e0e20a79fe554e56733731dc482bf28dac33f",
+    "source_sha256": "97688308f58f29db1dca7cdc6e97fabeb647796a9fb8eef9a68852a241dde747",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24247,7 +24247,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_provenance_coupling_supercomposer_v1.py",
-    "source_sha256": "7d825cc04270d52be7bc6b5b3bd048e9e0d52b4e75351ba9ce2e059dae2e536c",
+    "source_sha256": "82b666b8ceafd8de760985a681ec8d1c18546e5c7f1a8b85ae5ac700d3b67d60",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24875,7 +24875,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_refactor_test_scaffold_fusion_v1.py",
-    "source_sha256": "fb48d4093dc6c03f86955991b56d00332cdf686dd16e6877c84c120181e25322",
+    "source_sha256": "82993e607797c14f8fceb069ed155e6d8a3f81e04bb77944d6b9b6f88b6d5173",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28358,7 +28358,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_evidence_synthesis_supercomposer_v1.py",
-    "source_sha256": "990cfa6065d60b309efe20e59c9969967cd44f4d45139ecb7e2f045ccbbcfb43",
+    "source_sha256": "34dfebec19a9af4d8d73c7b67574551305888df2a8608f57974f65cfdb74030b",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28430,7 +28430,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_hardcore_closing_supercomposer_v1.py",
-    "source_sha256": "a22c870deff24ee519cd3e8848eba0044dda3eaf77838570e260c138c063324f",
+    "source_sha256": "89155becfeb3a7b139089ff4a144747e970b98491efb59d4b3fe1b8482220999",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28500,7 +28500,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_hardcore_final_supercomposer_v1.py",
-    "source_sha256": "5671abbc83d4b9e41c37d1f06ef8b67595ebf6607644c9544ad2797a03c526e9",
+    "source_sha256": "2b39fe804b16bce9b5b23c2bb2c82c9e1830280d1f4bd0f9ab782990beaa3cd0",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28634,6 +28634,7 @@
    "declared_dependencies": {
     "declared_dependencies_checked": [
      "ast",
+     "hashlib",
      "json",
      "pathlib",
      "typing"
@@ -28657,7 +28658,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_hardcore_swe_supercomposer_v1.py",
-    "source_sha256": "391bb6c9fefac404e0b8adf720c654d829cb2d243ebcbb0daa048e15928cccaf",
+    "source_sha256": "2ece201a0e2349dfec96aeee985976c4cabfe599fe756d3a2cc64f2751849782",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -29104,7 +29105,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py",
-    "source_sha256": "a4543fb949515cb9bdc79f7bc60684869e78a704263b5c1c8a7878ad723a79bb",
+    "source_sha256": "0d5a2fc8c9ec259a48c57ada5889986bcb0866f85eec9cdb0144b578eafeefef",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -29246,7 +29247,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/software_test_contract_supercomposer_v1.py",
-    "source_sha256": "e0ee8b951fd1c67fff0181665fe71635cd23e77c65a1317f3536ee76f5e2755a",
+    "source_sha256": "d3bdcd370cb4f3febdb5c259c2ed1a7bec89abd35bca9dca56dada9a0e4349fb",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -30489,7 +30490,7 @@
   "engines": 26,
   "knowledge_documents": 187,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6519,
+  "research_index_records": 6520,
   "routing_tokens": 2261,
   "skills": 18,
   "source_index_entry_points": 427,
@@ -30498,7 +30499,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "67f5c74687f56346900f978ccf9149cde4e35f5ab11c4403f4450f0729185aaa"
+  "value": "f7d257459f56dd0c6096f5627710419b2db2400800c718887b40f43438c638cb"
  },
  "engines": [
   {
@@ -56232,7 +56233,7 @@
   "included_source_count": 976,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3ea7a53579afe0422bb273726c15419c36af4ae80fd412664d9b07cbe9e9b14d"
+  "source_tree_digest": "e1d27f2de4c29aa30d9e70893461b1ca161f81917735e6556199af23434556eb"
  },
  "research_index": [
   {
@@ -205541,6 +205542,51 @@
     "verification": 2,
     "while": 2,
     "whose": 3
+   }
+  },
+  {
+   "action_id": "RECONCILE_COMPOSER_FALSE_VERIFICATION_PR6305_V1",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/action_intents/RECONCILE_COMPOSER_FALSE_VERIFICATION_PR6305_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RECONCILE_COMPOSER_FALSE_VERIFICATION_PR6305_V1.json",
+   "schema": "",
+   "sha256": "ed2b188dd276c0494f01f9716205ee39b9fcefeb5f70bd131da5600125862391",
+   "status": "",
+   "terms": {
+    "14": 2,
+    "28": 1,
+    "adapters": 1,
+    "authenticated": 1,
+    "cases": 2,
+    "claimed": 1,
+    "composer": 1,
+    "composers": 1,
+    "current-main": 1,
+    "declarations": 1,
+    "dependencies": 1,
+    "disposable": 1,
+    "empty": 1,
+    "engineering": 1,
+    "executing": 1,
+    "existing": 1,
+    "fail-closed": 1,
+    "false": 3,
+    "fourteen": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "had": 1,
+    "no": 1,
+    "pass": 1,
+    "path": 1,
+    "populated": 2,
+    "populated-registry": 1,
+    "positive": 1,
+    "pr6305": 1,
+    "reconcile": 1,
+    "regression": 2,
+    "verification": 2,
+    "verified": 2
    }
   },
   {
