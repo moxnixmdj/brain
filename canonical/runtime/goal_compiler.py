@@ -1121,6 +1121,16 @@ def _artifact_write_tokens(goal):
     return out
 
 
+def _prose_only(goal: str) -> str:
+    """The sentence without the values it carries (F8/F25), for SCORING only.
+
+    Slot binding still reads the whole sentence: a path is exactly what a slot
+    needs.  What a path must never do is vote for which capability the task IS.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as _front
+    return _front.prose_only(goal)
+
+
 def _score(goal, cid, entry):
     surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
     if not surface_ok:
@@ -1142,7 +1152,19 @@ def _score(goal, cid, entry):
           "matched_keywords":[],
           "format_rejection":format_evidence,
         }
-    gt=_tokens(goal)
+    # A PATH IS A VALUE, NOT PROSE (F8/F25), AND THE COMPILER MUST SCORE ON PROSE.
+    #
+    # Measured 2026-10-31 on 9f808230: the compound audit goal's third clause --
+    # "Then create .../CAPABILITY_AUDIT.pdf from that report ..." -- selected
+    # python.source.audit.ast, because the OUTPUT FILE'S NAME contains the word
+    # AUDIT and that word is a keyword of the audit row.  The clause asks for a PDF
+    # to be created; the capability was chosen by a filename.  The same clause with
+    # a neutral filename is AMBIGUOUS instead -- measured -- so the name was the
+    # only thing deciding it.  prose_only() already exists for exactly this (F8
+    # removes URLs and paths, F25 removes quoted literals) and the composer already
+    # scores through it; the compiler did not.  Slot binding is untouched: it still
+    # reads the whole sentence, because a path is what a slot needs.
+    gt=_tokens(_prose_only(goal))
     # Evidence-only verbs are removed from the EFFECT side of the match.  They
     # still count as requirements below, because "write a report to R" does state
     # a needed surface; they just may not create or weight a source-change match.
