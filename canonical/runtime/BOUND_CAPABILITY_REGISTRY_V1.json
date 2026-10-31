@@ -5843,6 +5843,265 @@
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_FAULT_PROVENANCE_FUSION_V1_V1.json"
       }
+    },
+    "python.fault.provenance.interprocedural.value.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.fault.provenance.interprocedural.value.v1",
+          "max_trace_events": 100000,
+          "max_value_chars": 120,
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 20
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_interprocedural_value_provenance_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "fault",
+        "provenance",
+        "interprocedural",
+        "call",
+        "return",
+        "argument",
+        "value",
+        "dynamic",
+        "dataflow",
+        "callsite",
+        "value provenance",
+        "trace the value",
+        "tracing",
+        "provenance trace",
+        "trace the provenance",
+        "where does this value come from"
+      ],
+      "limitations": [
+        "Records bounded repository-local Python call/return observations and primitive-safe argument/return fingerprints from failing and passing test executions.",
+        "Links dynamic call edges to static Python callsite assignment bindings and emits ranked interprocedural value-provenance hypotheses.",
+        "Observed argument/return differences are evidence for localization, not a proof of semantic causality or a complete interprocedural def-use graph.",
+        "Does not inspect arbitrary object internal state, does not edit source, and provides no mergeability, hidden-requirement, FrontierCode score, or acceptance authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.fault.provenance.dynamic_call_edges",
+        "python.fault.provenance.interprocedural_value_hypotheses"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "failing_test_count",
+        "passing_test_count",
+        "test_traces",
+        "ranked_call_edges",
+        "interprocedural_hypotheses",
+        "provenance_basis",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
+        "modules": [
+          "ast",
+          "hashlib",
+          "json",
+          "math",
+          "os",
+          "pathlib",
+          "subprocess",
+          "sys"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "exact_branch_layout_combined_replay": "14_OF_14_PASS",
+        "exact_branch_layout_replay_test_count": 7,
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-canonical-apply-slice-verify-20261011-v1",
+        "independent_test_count": 7,
+        "model_dependency_count": 0,
+        "primary_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "primary_test_count": 7,
+        "runtime_git_blob_sha": "7e9a0201b89b5d2edf4647c868858288fd1a9820",
+        "runtime_sha256": "cfa9b3f5446a5c88d5d08b699c2af27e1470cb65620e0fae9b62d1d50182d477",
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS",
+        "test_git_blob_sha": "82af855fc384d3d8193cf1426fd58e9a1a1443c8",
+        "test_sha256": "94bb177c68eb1a48402b43e50108d4ebdada336763417ea5ff38b41e9bc19cbb"
+      }
+    },
+    "python.issue.natural_language.parse_edit_intent.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.issue.natural_language.parse_edit_intent.v1",
+          "index_path": "${input.index_path}",
+          "issue_path": "${input.issue_path}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "complete",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_issue_nl_parse_edit_intent",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "issue",
+        "natural language",
+        "prose",
+        "parse",
+        "intent",
+        "free text",
+        "english",
+        "edit ops",
+        "binding",
+        "rename",
+        "move"
+      ],
+      "limitations": [
+        "strict anchored grammar only: 'rename N to N2 [in M]' and 'move N [from M] to M2' clauses bind; every other imperative line refuses with the line quoted (never guesses a verb).",
+        "v1 is deterministic text parsing, not an LLM: vague prose ('make it faster') is refused loudly as evidence, not silently interpreted.",
+        "module qualifiers are used only as index homes; semantic validity of the ops (collisions, ambiguity at plan time) is slice-4's job downstream."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.issue.natural_language.edit_intent"
+      ],
+      "requires": [
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "ambiguous_name_count",
+        "bound_name_count",
+        "cache_used",
+        "complete",
+        "issue_id",
+        "line_count",
+        "op_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "refused_line_count"
+      ],
+      "source": {
+        "module": "re",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-NLISSUE-001",
+        "observed_effect": {
+          "applied_sites": 2,
+          "complete": true,
+          "composed_with": "python.software.issue_to_pr.orchestrate.v1 unchanged",
+          "deterministic": "diff byte-identical across reruns",
+          "e2e_median_ms": 300.6,
+          "first_run_ms": 305.0,
+          "issue_id": "GH-9101",
+          "issue_text": "title 'Rename helper to compute in pkg/core.py' + duplicated body line",
+          "ops_emitted": 1,
+          "refusal_stories": "NAME_NOT_FOUND w/ lexical candidates; NAME_AMBIGUOUS w/ homes; UNSUPPORTED_ANCHOR w/ quoted line",
+          "selected_tests_green": 1
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLISSUE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-NLISSUE-001.json"
+      }
+    },
+    "python.orchestration.symbol.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.orchestration.symbol.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_orchestration_symbol_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "orchestration",
+        "symbol",
+        "supercomposer",
+        "navigation"
+      ],
+      "limitations": [
+        "Contract-gated issue \u2192 symbol \u2192 crossfile"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.orchestration.symbol.super.verified",
+        "python.navigation.orchestration.verified"
+      ],
+      "requires": [
+        "python.orchestration.fused.verified",
+        "python.symbol.navigation.verified",
+        "python.symbol.resolve.standalone.verified",
+        "python.source.crossfile_edit.choreography",
+        "python.source.symbols.resolve"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_orchestration_symbol_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-ORCHESTRATION-SYMBOL-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
