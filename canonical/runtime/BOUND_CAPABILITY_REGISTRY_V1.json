@@ -10379,6 +10379,244 @@
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
       }
+    },
+    "sqlite.table.verify_against_json_records": {
+      "action_template": {
+        "args": {
+          "capability_id": "sqlite.table.verify_against_json_records",
+          "goal": "${input.goal}",
+          "json_path": "${input.json_path}",
+          "sqlite_path": "${input.sqlite_path}"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "sqlite_verify_cli",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "sqlite",
+        "database",
+        "table",
+        "rows",
+        "columns",
+        "verify",
+        "query",
+        "independently"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "sqlite.table.verify_against_json_records"
+      ],
+      "requires": [],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
+        "module": "sqlite3",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SQLITE-ROUNDTRIP-002",
+        "observed_effect": {
+          "adapter": "sqlite_verify_cli",
+          "columns": [
+            "capability_id",
+            "status",
+            "source_type",
+            "provides",
+            "incremental_spend_usd"
+          ],
+          "producer_independent_verifier": true,
+          "sqlite_path": "canonical/astra_runtime/tmp/SQLITE_ROUNDTRIP_VERIFY.sqlite",
+          "sqlite_sha256": "b67c1545d8e91b6da2e4cef13075f32083a6bdfd8231ad1454ecaf3eae48a27a",
+          "status_value": "VERIFIED_BOUND_CAPABILITY",
+          "table_name": "verified_capabilities",
+          "verified": true,
+          "verified_rows": 17
+        },
+        "producer_source": "python_stdlib:sqlite3",
+        "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SQLITE-ROUNDTRIP-002__RESULT.json"
+      }
+    },
+    "structured.decision_evidence.locate.stdlib": {
+      "action_template": {
+        "args": {
+          "capability_id": "structured.decision_evidence.locate.stdlib",
+          "max_scan": 40000,
+          "output_path": "${input.output_path}",
+          "search_root": "canonical"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "decision_evidence_locate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "decision",
+        "evidence",
+        "typed",
+        "problem",
+        "locate",
+        "synthesis",
+        "alternatives",
+        "constraints"
+      ],
+      "limitations": [
+        "Locates and validates a typed decision problem already in the tree; it does not synthesise alternatives, constraint states, or confidence values.",
+        "Admits only problems for which evidence_decision_synthesis.synthesize returns DECIDED, so an undecidable or malformed problem is never emitted.",
+        "First validated match in sorted order wins; it does not rank candidate problems by relevance to a goal."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "structured.decision_evidence.available"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "alternative_count",
+        "constraint_count",
+        "evidence_count",
+        "json_files_scanned",
+        "model_dependency_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "schema_matches_validated",
+        "source_path",
+        "source_sha256",
+        "status"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/decision_evidence_locate.py",
+        "algorithm": "Deterministic sorted walk admitting only files the consumer's own synthesize() decides",
+        "modules": [
+          "hashlib",
+          "importlib.util",
+          "json",
+          "pathlib",
+          "sys"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "adapter_path": "canonical/runtime/bound_capabilities/decision_evidence_locate.py",
+        "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001__RESULT.json",
+        "independent_verifier": "decision_evidence_locate_verify",
+        "independent_verifier_binaries": [
+          "git grep -l",
+          "sha256sum",
+          "jq -S"
+        ],
+        "independently_verified": true,
+        "independently_verified_by": "canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py (git grep -l + sha256sum + jq -S)",
+        "mission_id": "ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001",
+        "observed_effect": {
+          "adapter": "decision_evidence_locate",
+          "first_decidable_candidate": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+          "git_schema_candidate_count": 29,
+          "independent_canonicalisation_source": "jq -S (jq binary)",
+          "independent_digest_source": "sha256sum (coreutils)",
+          "independent_enumeration_source": "git grep -l (git content search)",
+          "mismatches": [],
+          "output_sha256": "817b66999c744d0dfcb206139a472957c6a968c0dfb124edec1f0926358735c9",
+          "output_verified": true,
+          "source_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REAL_TASK_A_CARRIER_20260930_INPUT.json",
+          "source_sha256": "1775f1694ba0e6e3b464a9e73e21387fab2d530ecfd5c866bea677cbda759c5d",
+          "verified": true
+        },
+        "type": "adapter_self_check"
+      }
+    },
+    "task.acceptance.objective.lossless.v1": {
+      "action_template": {
+        "args": {
+          "candidate_response": "${input.candidate_response}",
+          "capability_id": "task.acceptance.objective.lossless.v1",
+          "raw_task_text": "${input.raw_task_text}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "raw_task_objective_acceptance_executor_v1_run",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "acceptance",
+        "raw task",
+        "specification",
+        "objective",
+        "verifier",
+        "semantic residual",
+        "software"
+      ],
+      "limitations": [
+        "Preserves every non-whitespace raw-task segment and executes only source-grounded objective acceptance routes already supported by the Brain.",
+        "Any semantic residual blocks candidate acceptance and acceptance-stop authorization.",
+        "Direct candidate fields are inputs to typed predicates and are not by themselves independently measured or content-addressed observations.",
+        "Existing tests, builder success, or candidate evidence cannot substitute for unresolved raw-request semantics.",
+        "No general natural-language semantic completeness, general V6 closure, benchmark score, or terminal authority."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "raw_task.objective_acceptance.model",
+        "raw_task.objective_acceptance.verdict",
+        "raw_task.semantic_residual.ids"
+      ],
+      "requires": [
+        "raw_task.text.available",
+        "candidate.response_or_fields.available"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/raw_task_objective_acceptance_executor_v1_run.py",
+        "donor_capabilities": [
+          "lossless_raw_task_contract_v1",
+          "raw_task_acceptance_residual_localizer_v1",
+          "instruction_constraint_compiler_v1",
+          "source_aligned_acceptance_program_v1",
+          "typed_acceptance_program_v1"
+        ],
+        "type": "brain_owned_python_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "external_general_purpose_model_runtime_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_test_count": 13,
+        "independently_verified": true,
+        "model_dependency_count": 0,
+        "primary_test_count": 13,
+        "receipt_path": "canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
+        "runtime_git_blob_sha": "c138171744406edd8e75e4867634febdb596014b",
+        "test_git_blob_sha": "00a1b23a80c12cdb38493de0de6335b62247fef4"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
