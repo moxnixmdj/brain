@@ -1,0 +1,315 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "inputs": {
+            "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+            "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+          },
+          "instance_id": "archive.verify.tar_gz.gnu",
+          "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json",
+          "provides": [
+            "archive.tar_gz.verify_manifest_members"
+          ],
+          "requires": [
+            "manifest.json.available",
+            "archive.tar_gz.available"
+          ],
+          "result_fields": []
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "plan": {
+        "args": {
+          "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "inputs": {
+            "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+            "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+          },
+          "instance_id": "archive.verify.tar_gz.gnu",
+          "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json",
+          "provides": [
+            "archive.tar_gz.verify_manifest_members"
+          ],
+          "requires": [
+            "manifest.json.available",
+            "archive.tar_gz.available"
+          ],
+          "result_fields": []
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "result": {
+        "capability_credit_delta": 0,
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "composition_capsule_head_hash": "493a7acd114fbf74e7ef34debbe50bdd424f32ab1b7b480beb10799feda5d2e8",
+        "execution_trace": {
+          "trace": [
+            {
+              "cycle": 0,
+              "plan": {
+                "args": {
+                  "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+                  "capability_id": "archive.verify.tar_gz.gnu",
+                  "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+                },
+                "capability_id": "archive.verify.tar_gz.gnu",
+                "expect": {
+                  "field": "verified",
+                  "type": "field_equals",
+                  "value": true
+                },
+                "type": "invoke_capability"
+              },
+              "result": {
+                "adapter": "archive_verify_gnu_tar",
+                "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+                "archive_sha256": "5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6",
+                "capability_id": "archive.verify.tar_gz.gnu",
+                "dependency": {
+                  "executable": "tar",
+                  "resolved_path": "/usr/bin/tar",
+                  "status": "LOCAL_VERIFIED",
+                  "type": "system_tool"
+                },
+                "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json",
+                "manifest_sha256": "cb4a936b42564e2b71d2062595969f8a4da2af5a7985c4695224aa53d4f2a41c",
+                "member_count": 2,
+                "members": [
+                  "canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json",
+                  "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+                ],
+                "verified": true
+              }
+            },
+            {
+              "cycle": 1,
+              "plan": {
+                "args": {
+                  "summary": "verified promoted bound capability execution"
+                },
+                "type": "finish",
+                "why": "All target effects have an executable minimum-cost capability plan."
+              },
+              "result": {
+                "summary": "verified promoted bound capability execution"
+              }
+            }
+          ]
+        },
+        "execution_verification": {
+          "detail": {
+            "acceptance_credit_delta": 0,
+            "all_declared_runtime_preconditions_have_prior_or_initial_witnesses": true,
+            "all_explicit_cross_role_result_edges_are_backward_and_declared": true,
+            "all_planned_nonfinish_actions_have_runtime_expectation_witnesses": true,
+            "all_target_effects_have_witnesses": true,
+            "capsule": {
+              "genesis_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+              "head_hash": "493a7acd114fbf74e7ef34debbe50bdd424f32ab1b7b480beb10799feda5d2e8",
+              "records": [
+                {
+                  "action_ref": "1ed8cb0f48871dcd212eba1f057d6410f9e40ffe3f6bc6a09e7c154d99cbe76e",
+                  "evidence_refs": [
+                    "result_sha256:488c86a08a46684969dec2139950e12631715abc1b9d8925ed3013eb3c3269f2",
+                    "verified_initial_fact:866f6c48757b3705ff6d95c97212def257106657bfdd8795e200d0711439b3c9",
+                    "verified_initial_fact:e43bf19346a50df6db6ec25307b0decb8191989cc9c2aa57635e986fa5a30981"
+                  ],
+                  "index": 0,
+                  "input_bindings": {},
+                  "lineage": {
+                    "effect:archive.tar_gz.verify_manifest_members": [
+                      "evidence:verified_initial_fact:866f6c48757b3705ff6d95c97212def257106657bfdd8795e200d0711439b3c9",
+                      "evidence:verified_initial_fact:e43bf19346a50df6db6ec25307b0decb8191989cc9c2aa57635e986fa5a30981",
+                      "evidence:result_sha256:488c86a08a46684969dec2139950e12631715abc1b9d8925ed3013eb3c3269f2",
+                      "action:1ed8cb0f48871dcd212eba1f057d6410f9e40ffe3f6bc6a09e7c154d99cbe76e"
+                    ]
+                  },
+                  "parent_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+                  "producer": "archive.verify.tar_gz.gnu",
+                  "provides": [
+                    "effect:archive.tar_gz.verify_manifest_members"
+                  ],
+                  "record_hash": "493a7acd114fbf74e7ef34debbe50bdd424f32ab1b7b480beb10799feda5d2e8",
+                  "requires": [],
+                  "value_hashes": {
+                    "effect:archive.tar_gz.verify_manifest_members": "5e9eb6b576b1352a530835f5096f6686029e7effbae1ae19148a0bf9933227a1"
+                  },
+                  "values": {
+                    "effect:archive.tar_gz.verify_manifest_members": {
+                      "capability_id": "archive.verify.tar_gz.gnu",
+                      "cycle": 0,
+                      "effect": "archive.tar_gz.verify_manifest_members",
+                      "expectation": {
+                        "field": "verified",
+                        "type": "field_equals",
+                        "value": true
+                      },
+                      "raw_action_sha256": "1ed8cb0f48871dcd212eba1f057d6410f9e40ffe3f6bc6a09e7c154d99cbe76e",
+                      "resolved_action_sha256": "1ed8cb0f48871dcd212eba1f057d6410f9e40ffe3f6bc6a09e7c154d99cbe76e",
+                      "result_sha256": "488c86a08a46684969dec2139950e12631715abc1b9d8925ed3013eb3c3269f2"
+                    }
+                  }
+                }
+              ],
+              "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_V1"
+            },
+            "capsule_head_hash": "493a7acd114fbf74e7ef34debbe50bdd424f32ab1b7b480beb10799feda5d2e8",
+            "capsule_record_count": 1,
+            "explicit_result_edge_count": 0,
+            "initial_fact_count": 2,
+            "plan_capability_count": 1,
+            "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_TRACE_CAPSULE_V1",
+            "status": "PASS",
+            "target_effect_count": 1,
+            "trace_action_count": 2,
+            "transition_receipts": [
+              {
+                "capability_id": "archive.verify.tar_gz.gnu",
+                "capsule_head_hash": "493a7acd114fbf74e7ef34debbe50bdd424f32ab1b7b480beb10799feda5d2e8",
+                "cycle": 0,
+                "explicit_result_edges": [],
+                "provides": [
+                  "archive.tar_gz.verify_manifest_members"
+                ],
+                "raw_action_sha256": "1ed8cb0f48871dcd212eba1f057d6410f9e40ffe3f6bc6a09e7c154d99cbe76e",
+                "requirement_witnesses": {
+                  "archive.tar_gz.available": {
+                    "capability_id": null,
+                    "cycle": null,
+                    "origin": "VERIFIED_INITIAL_FACT",
+                    "result_sha256": null
+                  },
+                  "manifest.json.available": {
+                    "capability_id": null,
+                    "cycle": null,
+                    "origin": "VERIFIED_INITIAL_FACT",
+                    "result_sha256": null
+                  }
+                },
+                "requires": [
+                  "manifest.json.available",
+                  "archive.tar_gz.available"
+                ],
+                "resolved_action_sha256": "1ed8cb0f48871dcd212eba1f057d6410f9e40ffe3f6bc6a09e7c154d99cbe76e",
+                "result_sha256": "488c86a08a46684969dec2139950e12631715abc1b9d8925ed3013eb3c3269f2"
+              }
+            ]
+          },
+          "execution_authority": false,
+          "pass": true,
+          "proof_digest": "e5fa4708d73db8a511292d1a954f9a39d0bc8caa89239229da09b1a3cfd8ef51",
+          "reason": null,
+          "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_EXECUTION_VERIFIER_V1",
+          "status": "VERIFIED",
+          "terminal_authority": false,
+          "verified_output": {
+            "all_target_effects_have_witnesses": true,
+            "capsule_head_hash": "493a7acd114fbf74e7ef34debbe50bdd424f32ab1b7b480beb10799feda5d2e8",
+            "capsule_record_count": 1,
+            "plan_capability_count": 1
+          }
+        },
+        "incremental_spend_usd": 0,
+        "inputs_sha256": "c4824e6943a2d16ff7c6d3177709e8260eb44eba1008fe4041885d2942425336",
+        "instance_id": "archive.verify.tar_gz.gnu",
+        "ownership_credit_delta": 0,
+        "pass": true,
+        "provides": [
+          "archive.tar_gz.verify_manifest_members"
+        ],
+        "registry_entry_sha256": "47b9e238f942c356cc8e50af6ea90a7fccdbc5112ec3388aa97ff0d740fcf64d",
+        "registry_file_sha256": "d3397b5e90e8c500ff9b0e59207463ca92dd236f8ed26db20a5496f56b41b573",
+        "rendered_action": {
+          "args": {
+            "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+            "capability_id": "archive.verify.tar_gz.gnu",
+            "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+          },
+          "expect": {
+            "field": "verified",
+            "type": "field_equals",
+            "value": true
+          },
+          "type": "invoke_capability"
+        },
+        "rendered_action_sha256": "2d495f3125485d549fd8ff9d160fc324fbe55b9157ff5db844291a02af6d4424",
+        "requires": [
+          "manifest.json.available",
+          "archive.tar_gz.available"
+        ],
+        "result": {
+          "adapter": "archive_verify_gnu_tar",
+          "archive_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_BUNDLE.tar.gz",
+          "archive_sha256": "5f2b144d07156cbb48cc37d66627f7ba98e32498e3bebcc4c89eb23f23a277d6",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "dependency": {
+            "executable": "tar",
+            "resolved_path": "/usr/bin/tar",
+            "status": "LOCAL_VERIFIED",
+            "type": "system_tool"
+          },
+          "manifest_path": "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json",
+          "manifest_sha256": "cb4a936b42564e2b71d2062595969f8a4da2af5a7985c4695224aa53d4f2a41c",
+          "member_count": 2,
+          "members": [
+            "canonical/astra_runtime/evidence/ASTRA-RUNTIME-CORE-REGRESSION-006__RECEIPT.json",
+            "canonical/astra_runtime/tmp/ARCHIVE_VERIFY_MANIFEST.json"
+          ],
+          "verified": true
+        },
+        "result_fields": [],
+        "result_sha256": "488c86a08a46684969dec2139950e12631715abc1b9d8925ed3013eb3c3269f2",
+        "schema": "PROJECT_BRAIN_VERIFIED_BOUND_CAPABILITY_EXECUTION_ADAPTER_V1",
+        "search_or_pending_binding_execution_allowed": false,
+        "semantic_boundary": "PROVES_EXECUTION_OF_THE_PROMOTED_REGISTRY_CONTRACT_AND_DECLARED_EXPECTATION;HIGHER_LEVEL_TASK_EFFECT_MEANING_REQUIRES_SEPARATE_AUTHENTICATION",
+        "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+        "terminal_authority": false
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T11:04:34.317102+00:00",
+  "mission_id": "PATH_TAR_b51af296",
+  "next_action_index": 2,
+  "plan_sha256": "25bfe5f2be4bbf83dd341b8c6077fd27289816e12f5ca7fa5fba5e3dc9394c10",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T11:04:34.337302+00:00"
+}

@@ -1,0 +1,11 @@
+{
+  "completed_at_utc": "2026-09-25T19:43:38.676946+00:00",
+  "mission_id": "ASTRA-AUTO-VERIFY-NPM-DFINITY-CBOR-B52D51692BC6",
+  "mission_path": "canonical/astra_runtime/missions/ASTRA_AUTO_VERIFY_NPM_DFINITY_CBOR_B52D51692BC6.json",
+  "mission_sha256": "ef3418802ff3e53ac7dc830946edef2c8f38bd6e8b60acc788a336bd6ac6dee8",
+  "runtime_id": "ASTRA_RUNTIME_V1_SHARED",
+  "schema": "PROJECT_BRAIN_ASTRA_RUNTIME_RECEIPT_V1",
+  "state_sha256": "4fedfef71c3a9c4ac52b173898e5885a1ddfd06fa12707570f922cf084187079",
+  "status": "COMPLETE",
+  "steps_completed": 2
+}

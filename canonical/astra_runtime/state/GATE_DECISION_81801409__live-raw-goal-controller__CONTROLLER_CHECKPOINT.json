@@ -1,0 +1,610 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "archive.tar_gz.create_from_manifest",
+          "inputs": {
+            "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+            "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz"
+          },
+          "instance_id": "archive.tar_gz.create_from_manifest",
+          "provides": [
+            "archive.tar_gz.create_from_manifest"
+          ],
+          "requires": [
+            "manifest.json.available"
+          ],
+          "result_fields": [
+            "adapter",
+            "member_count",
+            "members",
+            "output_bytes",
+            "output_path",
+            "output_sha256",
+            "output_verified",
+            "source_sha256"
+          ]
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "archive.tar_gz.create_from_manifest",
+          "inputs": {
+            "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+            "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz"
+          },
+          "instance_id": "archive.tar_gz.create_from_manifest",
+          "provides": [
+            "archive.tar_gz.create_from_manifest"
+          ],
+          "requires": [
+            "manifest.json.available"
+          ],
+          "result_fields": [
+            "adapter",
+            "member_count",
+            "members",
+            "output_bytes",
+            "output_path",
+            "output_sha256",
+            "output_verified",
+            "source_sha256"
+          ]
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "result": {
+        "capability_credit_delta": 0,
+        "capability_id": "archive.tar_gz.create_from_manifest",
+        "composition_capsule_head_hash": "17325c786ffe347e46b4abc9c0d5364cc53a7746f91a25aca554aed5ac11d8cf",
+        "execution_trace": {
+          "trace": [
+            {
+              "cycle": 0,
+              "plan": {
+                "args": {
+                  "capability_id": "archive.tar_gz.create_from_manifest",
+                  "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+                  "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz"
+                },
+                "capability_id": "archive.tar_gz.create_from_manifest",
+                "expect": {
+                  "field": "output_verified",
+                  "type": "field_equals",
+                  "value": true
+                },
+                "type": "invoke_capability"
+              },
+              "result": {
+                "adapter": "archive_tarfile",
+                "capability_id": "archive.tar_gz.create_from_manifest",
+                "dependency": {
+                  "module": "tarfile",
+                  "modules": [
+                    "tarfile"
+                  ],
+                  "python_version": "3.11.2",
+                  "status": "LOCAL_VERIFIED",
+                  "type": "python_stdlib"
+                },
+                "member_count": 1,
+                "members": [
+                  "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+                ],
+                "output_bytes": 21863,
+                "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+                "output_sha256": "8dcf8b576e8ea3397992354b166f1d786064ce886f9e6a9f98f114fafd37b475",
+                "output_verified": true,
+                "source_sha256": {
+                  "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json": "52d51ec2699176791c15e3fc9d2fc2818fd636905dbb650450f2bc39939f8fde"
+                }
+              }
+            },
+            {
+              "cycle": 1,
+              "plan": {
+                "args": {
+                  "summary": "verified promoted bound capability execution"
+                },
+                "type": "finish",
+                "why": "All target effects have an executable minimum-cost capability plan."
+              },
+              "result": {
+                "summary": "verified promoted bound capability execution"
+              }
+            }
+          ]
+        },
+        "execution_verification": {
+          "detail": {
+            "acceptance_credit_delta": 0,
+            "all_declared_runtime_preconditions_have_prior_or_initial_witnesses": true,
+            "all_explicit_cross_role_result_edges_are_backward_and_declared": true,
+            "all_planned_nonfinish_actions_have_runtime_expectation_witnesses": true,
+            "all_target_effects_have_witnesses": true,
+            "capsule": {
+              "genesis_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+              "head_hash": "17325c786ffe347e46b4abc9c0d5364cc53a7746f91a25aca554aed5ac11d8cf",
+              "records": [
+                {
+                  "action_ref": "f96f99b777835ee313a0daf98f6806feb328dfc72da7137d0f6bcec067d19cdf",
+                  "evidence_refs": [
+                    "result_sha256:e542e5d28ff898ceb56c1c7b94104b54c8d869836476c1b49781ce53d298c271",
+                    "verified_initial_fact:866f6c48757b3705ff6d95c97212def257106657bfdd8795e200d0711439b3c9"
+                  ],
+                  "index": 0,
+                  "input_bindings": {},
+                  "lineage": {
+                    "effect:archive.tar_gz.create_from_manifest": [
+                      "evidence:verified_initial_fact:866f6c48757b3705ff6d95c97212def257106657bfdd8795e200d0711439b3c9",
+                      "evidence:result_sha256:e542e5d28ff898ceb56c1c7b94104b54c8d869836476c1b49781ce53d298c271",
+                      "action:f96f99b777835ee313a0daf98f6806feb328dfc72da7137d0f6bcec067d19cdf"
+                    ]
+                  },
+                  "parent_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+                  "producer": "archive.tar_gz.create_from_manifest",
+                  "provides": [
+                    "effect:archive.tar_gz.create_from_manifest"
+                  ],
+                  "record_hash": "17325c786ffe347e46b4abc9c0d5364cc53a7746f91a25aca554aed5ac11d8cf",
+                  "requires": [],
+                  "value_hashes": {
+                    "effect:archive.tar_gz.create_from_manifest": "09d4db45c8ea17ab4ae5832c311d1dfa08965667a2122c7f843c002fe5cc8fe1"
+                  },
+                  "values": {
+                    "effect:archive.tar_gz.create_from_manifest": {
+                      "capability_id": "archive.tar_gz.create_from_manifest",
+                      "cycle": 0,
+                      "effect": "archive.tar_gz.create_from_manifest",
+                      "expectation": {
+                        "field": "output_verified",
+                        "type": "field_equals",
+                        "value": true
+                      },
+                      "raw_action_sha256": "f96f99b777835ee313a0daf98f6806feb328dfc72da7137d0f6bcec067d19cdf",
+                      "resolved_action_sha256": "f96f99b777835ee313a0daf98f6806feb328dfc72da7137d0f6bcec067d19cdf",
+                      "result_sha256": "e542e5d28ff898ceb56c1c7b94104b54c8d869836476c1b49781ce53d298c271"
+                    }
+                  }
+                }
+              ],
+              "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_V1"
+            },
+            "capsule_head_hash": "17325c786ffe347e46b4abc9c0d5364cc53a7746f91a25aca554aed5ac11d8cf",
+            "capsule_record_count": 1,
+            "explicit_result_edge_count": 0,
+            "initial_fact_count": 1,
+            "plan_capability_count": 1,
+            "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_TRACE_CAPSULE_V1",
+            "status": "PASS",
+            "target_effect_count": 1,
+            "trace_action_count": 2,
+            "transition_receipts": [
+              {
+                "capability_id": "archive.tar_gz.create_from_manifest",
+                "capsule_head_hash": "17325c786ffe347e46b4abc9c0d5364cc53a7746f91a25aca554aed5ac11d8cf",
+                "cycle": 0,
+                "explicit_result_edges": [],
+                "provides": [
+                  "archive.tar_gz.create_from_manifest"
+                ],
+                "raw_action_sha256": "f96f99b777835ee313a0daf98f6806feb328dfc72da7137d0f6bcec067d19cdf",
+                "requirement_witnesses": {
+                  "manifest.json.available": {
+                    "capability_id": null,
+                    "cycle": null,
+                    "origin": "VERIFIED_INITIAL_FACT",
+                    "result_sha256": null
+                  }
+                },
+                "requires": [
+                  "manifest.json.available"
+                ],
+                "resolved_action_sha256": "f96f99b777835ee313a0daf98f6806feb328dfc72da7137d0f6bcec067d19cdf",
+                "result_sha256": "e542e5d28ff898ceb56c1c7b94104b54c8d869836476c1b49781ce53d298c271"
+              }
+            ]
+          },
+          "execution_authority": false,
+          "pass": true,
+          "proof_digest": "c4e07f7de76521e6ee2383cde729518b9c831d5ffd94b3d6cfe75e5f5db955a3",
+          "reason": null,
+          "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_EXECUTION_VERIFIER_V1",
+          "status": "VERIFIED",
+          "terminal_authority": false,
+          "verified_output": {
+            "all_target_effects_have_witnesses": true,
+            "capsule_head_hash": "17325c786ffe347e46b4abc9c0d5364cc53a7746f91a25aca554aed5ac11d8cf",
+            "capsule_record_count": 1,
+            "plan_capability_count": 1
+          }
+        },
+        "incremental_spend_usd": 0,
+        "inputs_sha256": "061d0f1ad4022059266bcb09bae9c91713e3b9622a6924019f8344da80e27eda",
+        "instance_id": "archive.tar_gz.create_from_manifest",
+        "ownership_credit_delta": 0,
+        "pass": true,
+        "provides": [
+          "archive.tar_gz.create_from_manifest"
+        ],
+        "registry_entry_sha256": "e8fd90dd7730a1fe08c4fa1c83c2136fe1c9056bdc0063d10e14710352e53eee",
+        "registry_file_sha256": "d3397b5e90e8c500ff9b0e59207463ca92dd236f8ed26db20a5496f56b41b573",
+        "rendered_action": {
+          "args": {
+            "capability_id": "archive.tar_gz.create_from_manifest",
+            "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+            "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz"
+          },
+          "expect": {
+            "field": "output_verified",
+            "type": "field_equals",
+            "value": true
+          },
+          "type": "invoke_capability"
+        },
+        "rendered_action_sha256": "b171666c8407ec499089dff2a9e85d8a97b9c2ad5dadef81026cc4ce611ae483",
+        "requires": [
+          "manifest.json.available"
+        ],
+        "result": {
+          "adapter": "archive_tarfile",
+          "capability_id": "archive.tar_gz.create_from_manifest",
+          "dependency": {
+            "module": "tarfile",
+            "modules": [
+              "tarfile"
+            ],
+            "python_version": "3.11.2",
+            "status": "LOCAL_VERIFIED",
+            "type": "python_stdlib"
+          },
+          "member_count": 1,
+          "members": [
+            "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+          ],
+          "output_bytes": 21863,
+          "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+          "output_sha256": "8dcf8b576e8ea3397992354b166f1d786064ce886f9e6a9f98f114fafd37b475",
+          "output_verified": true,
+          "source_sha256": {
+            "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json": "52d51ec2699176791c15e3fc9d2fc2818fd636905dbb650450f2bc39939f8fde"
+          }
+        },
+        "result_fields": [
+          "adapter",
+          "member_count",
+          "members",
+          "output_bytes",
+          "output_path",
+          "output_sha256",
+          "output_verified",
+          "source_sha256"
+        ],
+        "result_sha256": "e542e5d28ff898ceb56c1c7b94104b54c8d869836476c1b49781ce53d298c271",
+        "schema": "PROJECT_BRAIN_VERIFIED_BOUND_CAPABILITY_EXECUTION_ADAPTER_V1",
+        "search_or_pending_binding_execution_allowed": false,
+        "semantic_boundary": "PROVES_EXECUTION_OF_THE_PROMOTED_REGISTRY_CONTRACT_AND_DECLARED_EXPECTATION;HIGHER_LEVEL_TASK_EFFECT_MEANING_REQUIRES_SEPARATE_AUTHENTICATION",
+        "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+        "terminal_authority": false
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "inputs": {
+            "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+            "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+          },
+          "instance_id": "archive.verify.tar_gz.gnu",
+          "provides": [
+            "archive.tar_gz.verify_manifest_members"
+          ],
+          "requires": [
+            "manifest.json.available",
+            "archive.tar_gz.available"
+          ],
+          "result_fields": []
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "inputs": {
+            "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+            "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+          },
+          "instance_id": "archive.verify.tar_gz.gnu",
+          "provides": [
+            "archive.tar_gz.verify_manifest_members"
+          ],
+          "requires": [
+            "manifest.json.available",
+            "archive.tar_gz.available"
+          ],
+          "result_fields": []
+        },
+        "expect": {
+          "field": "pass",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_verified_bound_capability_adapter"
+      },
+      "result": {
+        "capability_credit_delta": 0,
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "composition_capsule_head_hash": "857a2b751dbfe4d4243891b89e4a2e16d0c5fcbea1963904ba0e00db7340ddb2",
+        "execution_trace": {
+          "trace": [
+            {
+              "cycle": 0,
+              "plan": {
+                "args": {
+                  "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+                  "capability_id": "archive.verify.tar_gz.gnu",
+                  "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+                },
+                "capability_id": "archive.verify.tar_gz.gnu",
+                "expect": {
+                  "field": "verified",
+                  "type": "field_equals",
+                  "value": true
+                },
+                "type": "invoke_capability"
+              },
+              "result": {
+                "adapter": "archive_verify_gnu_tar",
+                "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+                "archive_sha256": "8dcf8b576e8ea3397992354b166f1d786064ce886f9e6a9f98f114fafd37b475",
+                "capability_id": "archive.verify.tar_gz.gnu",
+                "dependency": {
+                  "executable": "tar",
+                  "resolved_path": "/bin/tar",
+                  "status": "LOCAL_VERIFIED",
+                  "type": "system_tool"
+                },
+                "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+                "manifest_sha256": "52d51ec2699176791c15e3fc9d2fc2818fd636905dbb650450f2bc39939f8fde",
+                "member_count": 1,
+                "members": [
+                  "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+                ],
+                "verified": true
+              }
+            },
+            {
+              "cycle": 1,
+              "plan": {
+                "args": {
+                  "summary": "verified promoted bound capability execution"
+                },
+                "type": "finish",
+                "why": "All target effects have an executable minimum-cost capability plan."
+              },
+              "result": {
+                "summary": "verified promoted bound capability execution"
+              }
+            }
+          ]
+        },
+        "execution_verification": {
+          "detail": {
+            "acceptance_credit_delta": 0,
+            "all_declared_runtime_preconditions_have_prior_or_initial_witnesses": true,
+            "all_explicit_cross_role_result_edges_are_backward_and_declared": true,
+            "all_planned_nonfinish_actions_have_runtime_expectation_witnesses": true,
+            "all_target_effects_have_witnesses": true,
+            "capsule": {
+              "genesis_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+              "head_hash": "857a2b751dbfe4d4243891b89e4a2e16d0c5fcbea1963904ba0e00db7340ddb2",
+              "records": [
+                {
+                  "action_ref": "d89749d08444d06f42b7b9ca7c081847b0488ab7f5a6914b489a37976c4b3532",
+                  "evidence_refs": [
+                    "result_sha256:8f8ee19a54f4489ec28cb3961514d0ba43cf7b9a75671e92faad13c84c111b1e",
+                    "verified_initial_fact:866f6c48757b3705ff6d95c97212def257106657bfdd8795e200d0711439b3c9",
+                    "verified_initial_fact:e43bf19346a50df6db6ec25307b0decb8191989cc9c2aa57635e986fa5a30981"
+                  ],
+                  "index": 0,
+                  "input_bindings": {},
+                  "lineage": {
+                    "effect:archive.tar_gz.verify_manifest_members": [
+                      "evidence:verified_initial_fact:866f6c48757b3705ff6d95c97212def257106657bfdd8795e200d0711439b3c9",
+                      "evidence:verified_initial_fact:e43bf19346a50df6db6ec25307b0decb8191989cc9c2aa57635e986fa5a30981",
+                      "evidence:result_sha256:8f8ee19a54f4489ec28cb3961514d0ba43cf7b9a75671e92faad13c84c111b1e",
+                      "action:d89749d08444d06f42b7b9ca7c081847b0488ab7f5a6914b489a37976c4b3532"
+                    ]
+                  },
+                  "parent_hash": "913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8",
+                  "producer": "archive.verify.tar_gz.gnu",
+                  "provides": [
+                    "effect:archive.tar_gz.verify_manifest_members"
+                  ],
+                  "record_hash": "857a2b751dbfe4d4243891b89e4a2e16d0c5fcbea1963904ba0e00db7340ddb2",
+                  "requires": [],
+                  "value_hashes": {
+                    "effect:archive.tar_gz.verify_manifest_members": "aa6a19ce021415a5fec02e0469a334dd7720777a2108273ee1eb8622ef5d44cc"
+                  },
+                  "values": {
+                    "effect:archive.tar_gz.verify_manifest_members": {
+                      "capability_id": "archive.verify.tar_gz.gnu",
+                      "cycle": 0,
+                      "effect": "archive.tar_gz.verify_manifest_members",
+                      "expectation": {
+                        "field": "verified",
+                        "type": "field_equals",
+                        "value": true
+                      },
+                      "raw_action_sha256": "d89749d08444d06f42b7b9ca7c081847b0488ab7f5a6914b489a37976c4b3532",
+                      "resolved_action_sha256": "d89749d08444d06f42b7b9ca7c081847b0488ab7f5a6914b489a37976c4b3532",
+                      "result_sha256": "8f8ee19a54f4489ec28cb3961514d0ba43cf7b9a75671e92faad13c84c111b1e"
+                    }
+                  }
+                }
+              ],
+              "schema": "PROJECT_BRAIN_COMPOSITION_STATE_CAPSULE_V1"
+            },
+            "capsule_head_hash": "857a2b751dbfe4d4243891b89e4a2e16d0c5fcbea1963904ba0e00db7340ddb2",
+            "capsule_record_count": 1,
+            "explicit_result_edge_count": 0,
+            "initial_fact_count": 2,
+            "plan_capability_count": 1,
+            "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_TRACE_CAPSULE_V1",
+            "status": "PASS",
+            "target_effect_count": 1,
+            "trace_action_count": 2,
+            "transition_receipts": [
+              {
+                "capability_id": "archive.verify.tar_gz.gnu",
+                "capsule_head_hash": "857a2b751dbfe4d4243891b89e4a2e16d0c5fcbea1963904ba0e00db7340ddb2",
+                "cycle": 0,
+                "explicit_result_edges": [],
+                "provides": [
+                  "archive.tar_gz.verify_manifest_members"
+                ],
+                "raw_action_sha256": "d89749d08444d06f42b7b9ca7c081847b0488ab7f5a6914b489a37976c4b3532",
+                "requirement_witnesses": {
+                  "archive.tar_gz.available": {
+                    "capability_id": null,
+                    "cycle": null,
+                    "origin": "VERIFIED_INITIAL_FACT",
+                    "result_sha256": null
+                  },
+                  "manifest.json.available": {
+                    "capability_id": null,
+                    "cycle": null,
+                    "origin": "VERIFIED_INITIAL_FACT",
+                    "result_sha256": null
+                  }
+                },
+                "requires": [
+                  "manifest.json.available",
+                  "archive.tar_gz.available"
+                ],
+                "resolved_action_sha256": "d89749d08444d06f42b7b9ca7c081847b0488ab7f5a6914b489a37976c4b3532",
+                "result_sha256": "8f8ee19a54f4489ec28cb3961514d0ba43cf7b9a75671e92faad13c84c111b1e"
+              }
+            ]
+          },
+          "execution_authority": false,
+          "pass": true,
+          "proof_digest": "1dedb7746dfedfb75330e43835e487b8f1714d649bde17c5a1afe8e9386cca71",
+          "reason": null,
+          "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_EXECUTION_VERIFIER_V1",
+          "status": "VERIFIED",
+          "terminal_authority": false,
+          "verified_output": {
+            "all_target_effects_have_witnesses": true,
+            "capsule_head_hash": "857a2b751dbfe4d4243891b89e4a2e16d0c5fcbea1963904ba0e00db7340ddb2",
+            "capsule_record_count": 1,
+            "plan_capability_count": 1
+          }
+        },
+        "incremental_spend_usd": 0,
+        "inputs_sha256": "2e05c0b594cfab14bb7bc4787ec94f91f76bd235afa9d5d7bcf389757440fd80",
+        "instance_id": "archive.verify.tar_gz.gnu",
+        "ownership_credit_delta": 0,
+        "pass": true,
+        "provides": [
+          "archive.tar_gz.verify_manifest_members"
+        ],
+        "registry_entry_sha256": "47b9e238f942c356cc8e50af6ea90a7fccdbc5112ec3388aa97ff0d740fcf64d",
+        "registry_file_sha256": "d3397b5e90e8c500ff9b0e59207463ca92dd236f8ed26db20a5496f56b41b573",
+        "rendered_action": {
+          "args": {
+            "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+            "capability_id": "archive.verify.tar_gz.gnu",
+            "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+          },
+          "expect": {
+            "field": "verified",
+            "type": "field_equals",
+            "value": true
+          },
+          "type": "invoke_capability"
+        },
+        "rendered_action_sha256": "ce1ab6d89d5c0ba2b0ebfbecc9e9b1d215bb6f899121ef0f1932bb6b5b79b25b",
+        "requires": [
+          "manifest.json.available",
+          "archive.tar_gz.available"
+        ],
+        "result": {
+          "adapter": "archive_verify_gnu_tar",
+          "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+          "archive_sha256": "8dcf8b576e8ea3397992354b166f1d786064ce886f9e6a9f98f114fafd37b475",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "dependency": {
+            "executable": "tar",
+            "resolved_path": "/bin/tar",
+            "status": "LOCAL_VERIFIED",
+            "type": "system_tool"
+          },
+          "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+          "manifest_sha256": "52d51ec2699176791c15e3fc9d2fc2818fd636905dbb650450f2bc39939f8fde",
+          "member_count": 1,
+          "members": [
+            "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+          ],
+          "verified": true
+        },
+        "result_fields": [],
+        "result_sha256": "8f8ee19a54f4489ec28cb3961514d0ba43cf7b9a75671e92faad13c84c111b1e",
+        "schema": "PROJECT_BRAIN_VERIFIED_BOUND_CAPABILITY_EXECUTION_ADAPTER_V1",
+        "search_or_pending_binding_execution_allowed": false,
+        "semantic_boundary": "PROVES_EXECUTION_OF_THE_PROMOTED_REGISTRY_CONTRACT_AND_DECLARED_EXPECTATION;HIGHER_LEVEL_TASK_EFFECT_MEANING_REQUIRES_SEPARATE_AUTHENTICATION",
+        "status": "PASS__PROMOTED_BOUND_CAPABILITY_EXECUTED_AND_TRACE_VERIFIED",
+        "terminal_authority": false
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:03:58.606856+00:00",
+  "mission_id": "GATE_DECISION_81801409",
+  "next_action_index": 3,
+  "plan_sha256": "249bbae0aef1ae5b245f344b1f595fb43f91190e6f2b555bd20c8c2b390207d8",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:03:58.639258+00:00"
+}

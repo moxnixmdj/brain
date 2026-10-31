@@ -63,6 +63,31 @@ def _nesting(node: ast.AST) -> int:
     return best
 
 
+_DECISIONS = (ast.If, ast.For, ast.AsyncFor, ast.While, ast.ExceptHandler,
+              ast.With, ast.AsyncWith, ast.Assert, ast.IfExp, ast.comprehension)
+
+
+def _cyclomatic(node) -> int:
+    """McCabe's number, from the decisions the function itself contains.
+
+    The row's published metric was loop-chain DEPTH, which answers a different
+    question ("how deep") from the one the sentence asks ("cyclomatic complexity"):
+    measured 2026-10-31, "Report the cyclomatic complexity of <pkg>/mod.py" was
+    answered with a nesting depth and counted as a pass.  Two numbers, both true,
+    so the row now carries both -- and the `and`/`or` / `else` paths are counted
+    where they occur, which is what makes the number McCabe's rather than a guess.
+    """
+    count = 1
+    for child in ast.walk(node):
+        if child is node:
+            continue
+        if isinstance(child, _DECISIONS):
+            count += 1
+        elif isinstance(child, ast.BoolOp):
+            count += max(0, len(child.values) - 1)
+    return count
+
+
 def _files(root: pathlib.Path):
     if root.is_file():
         yield root
@@ -73,21 +98,6 @@ def _files(root: pathlib.Path):
         yield path
 
 
-def _calls_with_loop_depth(node: ast.AST, cur_loop: int = 0) -> list[tuple[str, int]]:
-    out: list[tuple[str, int]] = []
-    for child in ast.iter_child_nodes(node):
-        if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda)):
-            continue
-        next_loop = cur_loop + (1 if isinstance(child, (ast.For, ast.AsyncFor, ast.While, ast.comprehension)) else 0)
-        if isinstance(child, ast.Call):
-            fn = child.func
-            cname = fn.id if isinstance(fn, ast.Name) else (fn.attr if isinstance(fn, ast.Attribute) else "")
-            if cname:
-                out.append((cname, cur_loop))
-        out.extend(_calls_with_loop_depth(child, next_loop))
-    return out
-
-
 def run(args, root):
     repo = pathlib.Path(root).resolve()
     source_root = _safe_root(repo, args.get("source_root"))
@@ -95,7 +105,7 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
-    raw_fns: list[tuple[str, str, int, int, list[tuple[str, int]]]] = []
+    measured = []
     unparseable = 0
     for path in _files(source_root):
         try:
@@ -104,63 +114,26 @@ def run(args, root):
         except (SyntaxError, ValueError):
             unparseable += 1
             continue
-        rel_p = _rel(repo, path)
         for node in tree.body:
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue
-            raw_fns.append((
-                rel_p,
-                node.name,
-                _nesting(node),
-                getattr(node, "lineno", 0),
-                _calls_with_loop_depth(node, 0),
-            ))
-
-    # Interprocedural loop-depth propagation + self-recursion recurrence detection
-    eff_depth: dict[str, int] = {}
-    rec_class: dict[str, str] = {}
-    for _rel_p, fname, ldepth, _ln, calls in raw_fns:
-        self_calls = sum(1 for c, _ in calls if c == fname)
-        if self_calls >= 2:
-            eff_depth[fname] = max(eff_depth.get(fname, 0), max(ldepth, 4))
-            rec_class[fname] = "O(2^n)"
-        elif self_calls == 1:
-            eff_depth[fname] = max(eff_depth.get(fname, 0), max(ldepth, 1))
-        else:
-            eff_depth[fname] = max(eff_depth.get(fname, 0), ldepth)
-
-    for _ in range(min(len(raw_fns), 12)):
-        changed = False
-        for _rel_p, fname, ldepth, _ln, calls in raw_fns:
-            best_d = eff_depth.get(fname, ldepth)
-            for cname, call_loop_d in calls:
-                if cname != fname and cname in eff_depth:
-                    cand = call_loop_d + eff_depth[cname]
-                    if cand > best_d and cand <= 8:
-                        best_d = cand
-            if best_d != eff_depth.get(fname):
-                eff_depth[fname] = best_d
-                changed = True
-        if not changed:
-            break
-
-    measured = []
-    for rel_p, fname, ldepth, lineno, _calls in raw_fns:
-        depth = eff_depth.get(fname, ldepth)
-        c_cls = rec_class.get(fname) or _class_for(depth)
-        measured.append({
-            "path": rel_p,
-            "name": fname,
-            "local_nesting": ldepth,
-            "nesting": depth,
-            "complexity_class": c_cls,
-            "lineno": lineno,
-        })
+            depth = _nesting(node)
+            measured.append({
+                "path": _rel(repo, path),
+                "name": node.name,
+                "nesting": depth,
+                "cyclomatic_complexity": _cyclomatic(node),
+                "complexity_class": _class_for(depth),
+                "lineno": getattr(node, "lineno", 0),
+            })
 
     # Deepest first; ties broken by name so the artifact is deterministic.
     measured.sort(key=lambda r: (-r["nesting"], r["path"], r["name"]))
     worst = measured[0] if measured else None
     quadratic = [r["name"] for r in measured if r["nesting"] >= 2]
+    by_cyclomatic = sorted(measured, key=lambda r: (-r["cyclomatic_complexity"],
+                                                    r["path"], r["name"]))
+    worst_cyclomatic = by_cyclomatic[0] if by_cyclomatic else None
     report = {
         "schema": SCHEMA,
         "source_root": _rel(repo, source_root),
@@ -169,6 +142,10 @@ def run(args, root):
         "worst_nesting": (worst["nesting"] if worst else 0),
         "worst_class": (worst["complexity_class"] if worst else "O(1)"),
         "quadratic_symbols": quadratic,
+        "worst_cyclomatic": worst_cyclomatic,
+        "cyclomatic_complexity": (worst_cyclomatic["cyclomatic_complexity"]
+                                  if worst_cyclomatic else 0),
+        "total_cyclomatic": sum(r["cyclomatic_complexity"] for r in measured),
         "functions_measured": len(measured),
         "unparseable_count": unparseable,
         "functions": measured,
@@ -184,6 +161,10 @@ def run(args, root):
         "worst_nesting": report["worst_nesting"],
         "worst_class": report["worst_class"],
         "quadratic_symbols": quadratic,
+        "worst_cyclomatic": worst_cyclomatic,
+        "cyclomatic_complexity": (worst_cyclomatic["cyclomatic_complexity"]
+                                  if worst_cyclomatic else 0),
+        "total_cyclomatic": sum(r["cyclomatic_complexity"] for r in measured),
         "functions_measured": len(measured),
         "output_path": _rel(repo, output),
         "output_sha256": hashlib.sha256(raw).hexdigest(),

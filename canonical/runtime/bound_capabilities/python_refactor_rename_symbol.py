@@ -524,6 +524,18 @@ def run(args, root):
                         ln = node.lineno
                         col = _name_col(lines[ln - 1], "import", old)
                         edits.append((ln, col, old))
+                    elif a.name == new and a.asname == new:
+                        # `from m import new as new` -- nothing to edit, and not
+                        # a collision.  Two ways this shape is reached: the
+                        # residual law below re-harvests the POST-edit trees, so
+                        # it reads `from pkg.core import apex as apex` as the very
+                        # state this rename produced (measured 2026-10-31 in the
+                        # merge of #6340: the re-harvest refused the golden rename
+                        # with NEW_NAME_COLLIDES:apex (import alias) on every
+                        # world where the symbol was also aliased); or the module
+                        # imported the new name redundantly, which the defining
+                        # module's own NEW_NAME_COLLIDES check already refuses.
+                        continue
                     elif a.name == old and a.asname == old:
                         _fail("ALIAS_BINDING_SAME_NAME:" + str(node.lineno))
                     elif check_collisions and a.asname == new and a.name != old:

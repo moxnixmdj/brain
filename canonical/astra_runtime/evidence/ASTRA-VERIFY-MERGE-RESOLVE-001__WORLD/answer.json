@@ -1,0 +1,22 @@
+{
+  "capability_id": "python.vcs.merge_conflict.resolve.v1",
+  "law": "a two-sided conflict the sentence says to keep is the union of its sides, in order; a diff3 base section is not stated and is refused, never guessed",
+  "resolved": [
+    {
+      "file": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__WORLD/project/app/models.py",
+      "lines_removed": 0,
+      "regions": [
+        {
+          "ours_lines": 2,
+          "resolution": "KEEP_BOTH__OURS_THEN_THEIRS",
+          "start_line": 3,
+          "theirs_lines": 7
+        }
+      ]
+    }
+  ],
+  "resolved_file_count": 1,
+  "schema": "PROJECT_BRAIN_PYTHON_MERGE_CONFLICT_RESOLVE_V1",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__WORLD/project/app",
+  "suite_passed": true
+}

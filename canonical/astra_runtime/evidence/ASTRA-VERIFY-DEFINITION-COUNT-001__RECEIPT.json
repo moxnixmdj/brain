@@ -1,0 +1,39 @@
+{
+ "adapter_output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__WORLD/answer.json",
+ "adapter_output_sha256": "766159b71e25435f625270263e264a57944c571b5c85bcf48a10a7dce26d5a6a",
+ "adapter_path": "canonical/runtime/bound_capabilities/python_source_definition_count.py",
+ "adapter_self_report": {
+  "output_verified": true,
+  "verified": null
+ },
+ "adapter_sha256": "7fb153f60172f69f18c1e17854ce92a8357ec129e8c4bf686967f08b7510508b",
+ "capability_id": "python.source.definition_count.v1",
+ "checks": [
+  {
+   "evidence": {
+    "constructed_classes": 2,
+    "constructed_functions": 3,
+    "reported": {
+     "class_count": 2,
+     "definition_count": 5,
+     "function_count": 3
+    }
+   },
+   "name": "counts every function and class in a tree, by ast, exactly",
+   "ok": true
+  }
+ ],
+ "claim": "counts every function and class in a tree, by ast, exactly",
+ "elapsed_s": 0.003,
+ "independence": "the check recomputes the answer from the constructed world with the standard library and never imports the adapter",
+ "independent_verified": true,
+ "inputs": {
+  "output_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__WORLD/answer.json",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__WORLD/defs"
+ },
+ "mission_id": "ASTRA-VERIFY-DEFINITION-COUNT-001",
+ "replay": "python3 canonical/runtime/verify_bound_capability_provenance_v1.py --check",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_V1",
+ "verified_at": "2026-10-31T09:09:14Z",
+ "world": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DEFINITION-COUNT-001__WORLD"
+}

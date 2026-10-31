@@ -1,0 +1,9 @@
+{
+ "capability_id": "python.vcs.merge_conflict.resolve.v1",
+ "independent_verified": true,
+ "mission_id": "ASTRA-VERIFY-MERGE-RESOLVE-001",
+ "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__RECEIPT.json",
+ "receipt_sha256": "ef8102430666da23f00f04bf0282f98723e974141eb1b90b8167302f449b2127",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_STATE_V1",
+ "verified_at": "2026-10-31T09:09:15Z"
+}

@@ -520,6 +520,32 @@ def test_no_registry_entry_is_left_without_proof():
         assert isinstance(ver, dict) and ver, (cid, "no verification block")
 
 
+def test_every_provenance_receipt_replays_from_its_world():
+    """A ledger that cannot be re-read is a claim, not evidence.
+
+    The eight rows that used to carry a status and no proof now carry a receipt
+    written by ``verify_bound_capability_provenance_v1``: a constructed world, the
+    check that reproduced the row's claim from that world with the standard library,
+    and the adapter's sha256.  ``--check`` re-runs every check with NO adapter in the
+    loop, so this asserts the strongest thing the ledger can assert -- that the
+    evidence stands on its own, and that a row whose behaviour drifts away from its
+    receipt is caught by the row's own record rather than by a reader's memory.
+    """
+    from canonical.runtime import verify_bound_capability_provenance_v1 as provenance
+    results = {cid: provenance.check(cid) for cid in sorted(provenance.ROWS)}
+    unreplayable = {cid: row for cid, row in results.items() if not row["replayed_ok"]}
+    assert unreplayable == {}, json.dumps(unreplayable, indent=1)[:2000]
+    caps = json.loads((Path(__file__).resolve().parents[2]
+                       / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json")
+                      .read_text(encoding="utf-8"))["capabilities"]
+    for cid in results:
+        block = caps[cid]["verification"]
+        assert block["independently_verified"] is True, cid
+        receipt = Path(__file__).resolve().parents[2] / block["receipt_path"]
+        assert receipt.is_file(), block["receipt_path"]
+        assert (Path(__file__).resolve().parents[2] / block["state_path"]).is_file(), cid
+
+
 def test_shell_command_run_is_verified_by_evidence_not_by_assertion():
     """The last entry to carry no proof.  Checkable here rather than trusted: a
     frozen mission, a receipt on disk, and an independently computed digest that

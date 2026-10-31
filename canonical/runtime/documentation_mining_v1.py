@@ -247,10 +247,9 @@ def learn(goal: str, content: str = "brain-doc-sample", suffix: str | None = Non
           max_examples: int = 12, workdir: str | pathlib.Path | None = None,
           timeout: float = 15.0) -> dict[str, Any]:
     """Read the documentation, run what it says, keep what worked."""
-    from canonical.runtime import cli_capability_acquisition_v1 as acq
     from canonical.runtime import program_synthesis_v1 as synth
 
-    suffix = suffix or acq._requested_suffix(goal)
+    suffix = suffix or output_suffix(goal)
     if not suffix:
         return {"schema": SCHEMA, "pass": False,
                 "status": "OPEN__NO_OUTPUT_FORMAT_IN_GOAL", "goal": goal}
@@ -378,11 +377,37 @@ def recall(suffix: str) -> dict[str, Any] | None:
     return _load()["learned"].get(str(suffix or "").lower())
 
 
+_REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+def output_suffix(goal: str) -> str:
+    """The OUTPUT extension the goal states -- never the extension of a file it names.
+
+    Measured 2026-10-29 on a fresh tree, one door call each::
+
+        "Format <...>/pkg/calc.py."                       3,588 ms -> read 6 stdlib manuals
+        "Replace the magic number 3 in <...>/calc.py ..."  also .py
+
+    ``_requested_suffix`` is right about the cases it was written for ("compress the report into
+    out.gz" -> .gz, "save the results to out.json" -> .json) and wrong about one: a .py that is
+    the INPUT to be edited is not an artifact to be produced, so there is nothing to verify and
+    no manual to read.  The rule here is not a second grammar -- the sentence's tokens that name
+    a file which already exists are removed, and the SAME ``_requested_suffix`` reads what is
+    left.  Both pinned positives still yield .gz and .json because neither names an existing file.
+    """
+    from canonical.runtime import cli_capability_acquisition_v1 as acq
+    from canonical.runtime import declared_input_derivation_v1 as derivation
+
+    text = str(goal or "")
+    for raw in derivation.stated_existing_files(text, _REPO_ROOT):
+        text = text.replace(raw, " ")
+    return acq._requested_suffix(text)
+
+
 def learn_or_recall(goal: str, content: str = "brain-doc-sample",
                     suffix: str | None = None) -> dict[str, Any]:
     """instant when already read, honest when not."""
-    from canonical.runtime import cli_capability_acquisition_v1 as acq
-    suffix = suffix or acq._requested_suffix(goal)
+    suffix = suffix or output_suffix(goal)
     known = recall(suffix) if suffix else None
     if known:
         return {"schema": SCHEMA, "pass": True, "from_memory": True,

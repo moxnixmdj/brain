@@ -173,6 +173,7 @@ def run(args, root):
                 _fail("COVERAGE_JSON_NOT_JSON")
             miss_rows = []
             executable_changed = 0
+            unmatched = []
             files = doc.get("files") or {}
             norm = {k.replace("\\", "/"): v for k, v in files.items()}
             for rel in sorted(py_changed):
@@ -182,6 +183,15 @@ def run(args, root):
                         row = v
                         break
                 if row is None:
+                    # THE ONE DIRECTION A MEASUREMENT MUST NEVER GO.
+                    #
+                    # A changed file the coverage report does not mention has NOT been measured,
+                    # and the arithmetic below turned that into ``ratio = 1.0`` for zero
+                    # executable lines -- a PASS over nothing.  Measured 2026-10-29: a diff
+                    # planted one directory too deep, so the suite imported a different copy of
+                    # the module; the gate reported PASS / diff_covered_ratio 1.0 with
+                    # diff_executable_lines 0.  Zero lines is not full coverage.
+                    unmatched.append(rel)
                     continue
                 executable = set(row.get("executed_lines") or []) | set(row.get("missing_lines") or [])
                 for start, end in py_changed[rel]:
@@ -190,9 +200,16 @@ def run(args, root):
                             executable_changed += 1
                             if ln in set(row.get("missing_lines") or []):
                                 miss_rows.append({"file": rel, "line": ln})
-            ratio = 1.0 if executable_changed == 0 else (
-                (executable_changed - len(miss_rows)) / executable_changed)
-            gate = "PASS" if ratio >= min_ratio else "FAIL"
+            if unmatched:
+                _fail("DIFF_FILES_NOT_IN_COVERAGE_REPORT:" + ",".join(sorted(unmatched))[:300])
+            if executable_changed == 0:
+                # The suite ran and the diff applies, but no changed line is executable, so the
+                # ratio below is vacuously 1.0.  Reported as its own verdict, never as PASS.
+                gate = "NOTHING_EXECUTABLE_CHANGED"
+                ratio = None
+            else:
+                ratio = (executable_changed - len(miss_rows)) / executable_changed
+                gate = "PASS" if ratio >= min_ratio else "FAIL"
     finally:
         if scratch.exists():
             shutil.rmtree(scratch, ignore_errors=True)

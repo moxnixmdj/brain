@@ -1,0 +1,36 @@
+{
+  "arguments": [
+    "i[\"price_cents\"]",
+    "rate"
+  ],
+  "capability_id": "python.refactor.inline_helper.v1",
+  "edits": [
+    {
+      "edit": "CALL_REPLACED_BY_BODY",
+      "file": "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__WORLD/project/app/service.py",
+      "inlined": "((i[\"price_cents\"]) + (i[\"price_cents\"]) * (rate) // 100)",
+      "line": 9
+    },
+    {
+      "edit": "DEFINITION_DELETED",
+      "file": "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__WORLD/project/app/service.py",
+      "lines": [
+        4,
+        5
+      ]
+    }
+  ],
+  "files_edited": [
+    "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__WORLD/project/app/service.py"
+  ],
+  "helper": "_price_with_tax",
+  "inlined_expression": "((i[\"price_cents\"]) + (i[\"price_cents\"]) * (rate) // 100)",
+  "law": "a single-use helper whose arguments are re-evaluable is inlined by substituting the arguments for the parameters; a duplicated call is never substituted",
+  "parameters": [
+    "price_cents",
+    "rate"
+  ],
+  "schema": "PROJECT_BRAIN_PYTHON_INLINE_HELPER_V1",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__WORLD/project/app",
+  "suite_passed": true
+}

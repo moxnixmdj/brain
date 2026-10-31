@@ -1,0 +1,33 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "summary": "xatwuf rdib 4131"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "xatwuf rdib 4131"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "xatwuf rdib 4131",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T09:04:11.570655+00:00",
+  "mission_id": "ALONE_EXACT_LITERAL_RESPONSE_0",
+  "next_action_index": 1,
+  "plan_sha256": "6c7434ca87f5c598ab7a2f6d8f3cc295f7e96f0356b101f275e5bd5fba59c472",
+  "resume_count": 1,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T09:30:49.523878+00:00"
+}
