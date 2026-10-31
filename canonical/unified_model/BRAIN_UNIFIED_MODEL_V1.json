@@ -30489,7 +30489,7 @@
   "engines": 26,
   "knowledge_documents": 206,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6529,
+  "research_index_records": 6530,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "feed13b92fb84a3a5d4933c5adc2ea1d639529f9af0a58cd74c75b5b4bd5b8dc"
+  "value": "41a18997aa00664c22049362ad8409518cb0d35297ab87ee78c038941bb0ddfb"
  },
  "engines": [
   {
@@ -208847,6 +208847,51 @@
     "through": 2,
     "word": 3,
     "written": 3
+   }
+  },
+  {
+   "action_id": "THE_RENAME_ANSWERS_THE_OBJECT_THE_SENTENCE_NAMES_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/THE_RENAME_ANSWERS_THE_OBJECT_THE_SENTENCE_NAMES_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_RENAME_ANSWERS_THE_OBJECT_THE_SENTENCE_NAMES_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d69fadd454151b461fad564cab1daafd837e7dd16415cdda62ab214f17bd8e28",
+   "status": "",
+   "terms": {
+    "18": 2,
+    "18-sentence": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 1,
+    "about": 1,
+    "admits": 1,
+    "answers": 1,
+    "app": 1,
+    "binds": 1,
+    "both": 1,
+    "byte-change": 1,
+    "census": 1,
+    "class": 1,
+    "clause": 1,
+    "complete": 1,
+    "contract": 1,
+    "correct": 1,
+    "declared": 1,
+    "function": 2,
+    "norm": 2,
+    "object": 2,
+    "parameter": 3,
+    "pass": 2,
+    "py": 2,
+    "rename": 2,
+    "report": 2,
+    "row": 3,
+    "sentence": 5,
+    "test": 2,
+    "v1": 2,
+    "value": 3
    }
   },
   {
