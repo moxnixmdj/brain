@@ -1183,6 +1183,66 @@ def promised_artifact_class(errors: list[str]) -> str:
 
 
 _REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
+# The promise gate below takes the bytes of a file before the run so it can ask,
+# afterwards, whether the phrase that governs that file was discharged.  It only
+# ever asked that question of four words, and the read-shaped rows in the registry
+# (`python.source.symbols.index.ast` above all) answered every OTHER mutation
+# sentence by writing a JSON index beside the file.  Measured on 0dccc6c, with the
+# filesystem as the oracle:
+#
+#   "Inline the single-use helper _price_with_tax in <D>/app/service.py into its
+#    only caller."                              -> PASS, pass=True, bytes unchanged
+#   "Add a parameter qty with a default value to the function line_total in
+#    <D>/app/models.py and update every caller so behaviour is unchanged."
+#                                               -> PASS, pass=True, bytes unchanged
+#
+# and a third shape that was already documented one gate lower: "Rename the
+# parameter text to value throughout the python source <P>" deleted P and passed,
+# because `rename` was not a repair verb and took no digest.
+#
+# The list is not "every change word".  It is exactly the verbs whose only
+# discharge is a different set of BYTES in an object that already exists, so a
+# producer verb is excluded on purpose:
+#   * create|write|save|generate|build|convert|compress|install|emit|make
+#     produce a NEW artifact -- R6 measures those, and demanding the named source
+#     change would refuse a correct conversion;
+#   * count|extract|inspect|report|describe|name|find|index ask a QUESTION.  The
+#     same spelling is a mutation only when it also names an existing file it
+#     could not otherwise leave alone ("extract the function f from A.py into B.py"
+#     does; "extract the text from <pdf>" names no .py at all);
+#   * delete|remove|discard promise ABSENCE, which `_destructive_targets` and
+#     NAMED_INPUT_REMOVED measure already, and a digest taken here would report
+#     the deliberate deletion as PROMISED_SOURCE_UNREADABLE;
+#   * update|format are idempotent by contract -- "already up to date" is a true
+#     answer, so demanding a byte change would refuse a correct run.
+# What is left cannot be satisfied without an edit.
+_MUTATION_VERB_RE = re.compile(
+    r"\b(?:repair|fix|patch|correct|refactor|rename|inline|move|relocate|"
+    r"rewrite|replace|edit|modify|apply|add|insert|append|split|merge)\b",
+    re.IGNORECASE)
+# ...and it must be used as a VERB.  `add` and `move` are also the names of
+# functions, and the words in front of a name say so.  Measured on the family
+# enumeration suite: "Find every caller of the function add in <pkg/mod.py>" --
+# a question that promises nothing about any file's bytes -- matched `add` and
+# demanded mod.py change, refusing a run that had answered correctly with a
+# callers report.  So a match is a mutation only when it is not naming a symbol
+# (def/class/function/method/named/called/parameter/argument/variable/symbol/
+# module/file immediately before it) and is not a call (`add(`).
+_NAME_INTRODUCTION_RE = re.compile(
+    r"(?:\b(?:def|class|function|method|parameter|argument|variable|symbol|"
+    r"attribute|field|module|file|named|called|helper)\s+(?:of\s+|the\s+)*)$",
+    re.IGNORECASE)
+
+
+def _mutation_verb_matches(text: str):
+    """Every mutation verb used AS a verb, left to right."""
+    for m in _MUTATION_VERB_RE.finditer(text):
+        if text[m.end():m.end() + 1] == "(":
+            continue
+        if _NAME_INTRODUCTION_RE.search(text[max(0, m.start() - 40):m.start()]):
+            continue
+        yield m
+
 # "a measured acceptance repair report" is a noun phrase naming an artifact,
 # not an instruction to mutate a source file.  A file actually named report.py
 # is still a repair target: the negative lookahead keeps that distinction.
@@ -1219,7 +1279,7 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
-    for m in _REPAIR_VERB_RE.finditer(text):
+    for m in _mutation_verb_matches(text):
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -1290,7 +1350,7 @@ def _promised_source_roots(goal: str) -> list[str]:
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
     out = []
-    for m in _REPAIR_VERB_RE.finditer(text):
+    for m in _mutation_verb_matches(text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -2060,7 +2120,23 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         # acceptance on the real tree.  If it does not, this verdict stands.
         retry = _typed_retry(request, goal, primary=result,
                              exclude=result.get("compiled_capability_id"))
-        return retry if retry is not None else result
+        if retry is not None and retry.get("pass") is True:
+            return retry
+        if retry is not None:
+            # The retry may not REPLACE this verdict, but the reason it was
+            # refused is the most useful sentence in the whole run: primary
+            # statuses here are routing failures ("R3_WEAK_EVIDENCE" naming a
+            # DOCX converter), while the retry actually reached the capability
+            # the sentence named and was stopped by a gate with a real reason.
+            # Measured on 0dccc6c + the mutation-verb gate: "Add a parameter qty
+            # ... update every caller" now refuses correctly, and the caller was
+            # told `ROUTE_ADMISSION_REJECTED: R3_WEAK_EVIDENCE` naming
+            # docx.document.create_from_json_record -- with the true reason
+            # (PROMISED_SOURCE_CHANGE_NOT_APPLIED: app/models.py) discarded.
+            result["typed_swe_retry_refusal"] = retry.get("typed_swe_retry_refusal") or {
+                "status": retry.get("status"), "failure_class": retry.get("failure_class"),
+                "compiled_capability_id": retry.get("compiled_capability_id")}
+        return result
     if result.get("pass") is True:
         # A PASS is a claim about the world.  When the sentence states its own
         # acceptance (a test file) and a repair effect, the door re-runs that
@@ -2083,7 +2159,14 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
             failed["stated_acceptance_errors"] = stated_acceptance_errors(goal)
             return failed
         return result
-    return _typed_retry(request, goal, primary=result) or result
+    retry = _typed_retry(request, goal, primary=result)
+    if retry is not None and retry.get("pass") is True:
+        return retry
+    if retry is not None:
+        result["typed_swe_retry_refusal"] = retry.get("typed_swe_retry_refusal") or {
+            "status": retry.get("status"), "failure_class": retry.get("failure_class"),
+            "compiled_capability_id": retry.get("compiled_capability_id")}
+    return result
     # A retry is only for "could not route/bind yet".  An executed verdict, a
     # genuine adapter fault, or an observation failure already judged the world;
     # a second guess must never overwrite it.
@@ -2120,7 +2203,22 @@ def _typed_retry(request: Mapping[str, Any], goal: str,
                 "incremental_spend_usd": 0,
             }
             return retry
-        return None
+        # Not a second opinion that may be REPORTED, but it is a diagnosis the
+        # caller needs: this attempt reached a capability and the gate chain
+        # stopped it for a reason.  Handed back as a refusal, never as a verdict.
+        retry["typed_swe_retry_refusal"] = {
+            "schema": "SWE_TYPED_RETRY_REFUSAL_V1",
+            "primary_status": (primary or {}).get("status"),
+            "status": retry.get("status"),
+            "failure_class": retry.get("failure_class"),
+            "selected_capability": plan[2].get("selected_capability"),
+            "compiled_capability_id": retry.get("compiled_capability_id"),
+            "promised_source_change_errors": retry.get("promised_source_change_errors"),
+            "observed_effect_errors": retry.get("observed_effect_errors"),
+            "promised_artifact_errors": retry.get("promised_artifact_errors"),
+            "model_dependency_count": 0,
+        }
+        return retry
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
         return None
 

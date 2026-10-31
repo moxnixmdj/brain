@@ -197,6 +197,49 @@
   "route_frontier": {
    "challenger_routes": [
     {
+     "route": "DECLARE_AN_EFFECT_KIND_ON_ALL_125_REGISTRY_ROWS_AND_REFUSE_A_MUTATION_SENTENCE_ON_A_READ_ROW",
+     "comparison": {
+      "CORRECTNESS": "EQUAL",
+      "CAPABILITY_STRENGTH": "MORE",
+      "WALL_CLOCK": "SLOWER",
+      "INCREMENTAL_COST": "ZERO_MONETARY",
+      "RELIABILITY": "TOUCHES_THE_ROUTER_THAT_EVERY_SENTENCE_PASSES_THROUGH",
+      "VERIFIABILITY": "SAME"
+     },
+     "evidence": [
+      "26 of 125 adapters contain no file write at all, so an effect kind is a real distinction",
+      "measured 2026-10-31: the router picks docx.document.create_from_json_record for a python edit sentence on one matched token"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: _promised_source_files now returns the named file for inline/add/rename/refactor sentences and refuses the PASS on a byte-identical file; 28-task surface probe false PASSes 3 -> 1, 18 human sentences 8/18 unchanged"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING"
+    },
+    {
+     "route": "REFUSE_EVERY_MUTATION_SENTENCE_UNLESS_A_WRITE_CAPABILITY_IS_SELECTED",
+     "comparison": {
+      "CORRECTNESS": "LESS",
+      "CAPABILITY_STRENGTH": "LESS",
+      "WALL_CLOCK": "IDENTICAL",
+      "INCREMENTAL_COST": "ZERO_MONETARY",
+      "RELIABILITY": "REFUSES_SENTENCES_THE_MACHINE_CAN_ALREADY_DO",
+      "VERIFIABILITY": "SAME"
+     },
+     "evidence": [
+      "a blanket refusal is not a promise gate: it would also refuse the four repair families that write and re-verify in place"
+     ],
+     "qualification_evidence": [
+      "DIRECT_PROBE: repair.apply.verified writes and re-verifies in place in flat, pkg, src/app and app layouts"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    },
+    {
      "comparison": {
       "CAPABILITY_STRENGTH": "LESS",
       "CORRECTNESS": "LESS",
@@ -260,7 +303,7 @@
      "route": "WIDEN_THE_ACCEPTANCE_TOLERANCE"
     }
    ],
-   "checked_at_utc": "2026-10-30T00:32:14Z",
+   "checked_at_utc": "2026-10-31T13:14:53Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -324,7 +367,7 @@
    "selected_route_checked_at_utc": "2026-10-30T00:32:14Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-30T00:32:14Z",
+    "checked_at_utc": "2026-10-31T13:14:53Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -448,7 +491,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-10-30T00:32:14Z",
+  "checked_at_utc": "2026-10-31T13:14:53Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,

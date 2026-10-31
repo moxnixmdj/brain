@@ -15,12 +15,14 @@ Every number below is a command in §9. Nothing here is read off a document, inc
 > The machine renames a symbol across files and indexes a 2 254-file tree. It cannot inline, move, add,
 > delete, bisect, localize, profile, mutation-test, taint-check, count, find a secret, resolve a conflict,
 > migrate an API, or survive a five-file multi-step request.
-> **When it says `pass: true`, it is wrong 3 times in 5.**
+> **When it says `pass: true`, it is wrong once in three — and that one is a real deletion.**
+> *(Was wrong three times in five until 2026-10-31; see §11. The fix converted two lies into
+> honest refusals. The capability count did not move, which is the point.)*
 
 | measurement | now | note |
 |---|---|---|
 | 28 real engineering tasks, independent oracles | **2 / 28** | `rename_symbol` (455 ms), `index_whole_runtime` (17.6 s) |
-| …of which report `pass: true` | **5**, of which **2 correct** | **3 false PASSes** (below, §1 D and §1 E) |
+| …of which report `pass: true` | **3**, of which **2 correct** | **1 false PASS** (the deletion, §1 E); the two edit-lies are now refusals (§11) |
 | 18 human SWE sentences (repair/refactor corridor) | **8 / 18** | the one corridor that works; was 1/18 before #6323 |
 | median wall clock per task | **565 ms** (max 20.9 s, min 270 ms) | dominated by routing, not work |
 | registry rows declaring an **effect kind** | **0 / 125** | why a reader can satisfy a writer |
@@ -29,7 +31,7 @@ Every number below is a command in §9. Nothing here is read off a document, inc
 | rows carrying an `elapsed`/`latency` measurement | **1 / 125** | "fastest" is unmeasurable at the capability layer |
 | distinct `cost` values | **{1, 2}** | 107 rows say 1, 18 say 2 |
 | lanes with **zero** rows | **9** | git, debug/trace/profile, lint, secrets, complexity, inline, move, signature, dead code |
-| adapters ≤34 lines / read-only by construction | **22 / 21** | 21 rows can never change a tree |
+| adapters ≤34 lines / cannot write at all | **22 / 26** | 26 adapters contain no file write |
 | worst-case latency of one request | **unbounded** | 3 hangs reproduced; 900 s observed, ≈4.5 days by arithmetic |
 | `solve()` reaches a project outside this repo | **no** | `ROOT` is a module constant |
 | the universal executor is bindable from prose | **no** | `argv` parses only a string that *starts* with a quote |
@@ -107,7 +109,7 @@ Two defects compose:
 A sentence about a five-file project silently audits the machine's own suite. That is also how a stray
 "tool cwd leaks into the sentence's world" defect becomes an unbounded run.
 
-### D. False success — a read-shaped row satisfies a write-shaped sentence (2 reproduced)
+### D. False success — a read-shaped row satisfies a write-shaped sentence (**FIXED 2026-10-31, §11**; was 2 reproduced)
 
 ```
 "Inline the single-use helper _price_with_tax in D/app/service.py into its only caller."
@@ -127,7 +129,15 @@ but it is written into the user's package and the number is never surfaced.
 
 **Root cause, structural:** a row declares `provides`, `requires`, `keywords`, `source`, `verification` —
 and **nothing about the kind of effect**. Measured: 0 of 125. Nothing can reject a reader for a writer's
-job, and 21 adapters contain no write and no `subprocess` at all.
+job, and 26 adapters contain no write at all (20 with no write and no `subprocess`, 6 that shell out
+without writing).
+
+**Root cause, one layer down (found and closed 2026-10-31):** the promise gate that takes a file's bytes
+before a run, and asks afterwards whether the phrase that governs that file was discharged, only ever
+asked it of four words — `repair|fix|patch|correct`. Every other mutation verb (`inline`, `add`, `rename`,
+`move`, `apply`) took no digest at all, so nothing was in a position to notice that the bytes had not
+moved. The list is now the verbs whose only discharge is different bytes in an object that already
+exists, and it is filtered so a verb used as a *name* is not one (§11).
 
 ### E. No consequence model — a destructive sentence deletes and reports PASS (reproduced)
 
@@ -318,6 +328,7 @@ python3 swe_probe_20261030/drive.py                                             
 python3 swe_probe_20261030/rightway.py                                             # the same jobs, right way
 python3 swe_probe_20261030/hangcause.py                                            # 30 s faulthandler dump
 python3 swe_probe_20261030/outside.py                                              # a project outside this repo
+python3 swe_probe_20261030/ab_lie.py --label after                                 # does a lie still pass? (0dccc6c: 3, now 0)
 ```
 
 Static census (read-only):
@@ -344,6 +355,108 @@ Fixtures are regenerated under `canonical/astra_runtime/tmp/` (gitignored) and a
 
 The machine can rename a symbol and repair a broken function by editing the real file and re-running the
 user's own suite — and it still cannot inline, move, add, delete, bisect, profile, taint-check, mutate, lint,
-type-check, count, or find a secret; **two of those verbs return PASS while changing nothing, one returns
-PASS after deleting a database, three never return at all**, and every missing one costs between **0.1 ms
-and 215 ms** to do the right way with the standard library and `git`.
+type-check, count, or find a secret; **one still returns PASS after deleting a database, three never
+return at all** (the two that used to return PASS while changing nothing are now honest refusals, §11),
+and every missing one costs between **0.1 ms and 215 ms** to do the right way with the standard library
+and `git`.
+
+---
+
+## 11. What changed on 2026-10-31 — and what the change proved
+
+The two edit-shaped false PASSes are gone. They were closed by one root-cause change, not by a rule
+about the sentences: **the promise gate now knows every mutation verb, and knows a verb from a name.**
+
+### The change
+
+`live_brain_route_admission_v1._REPAIR_VERB_RE` (`repair|fix|patch|correct`) governed the only place
+that took a source digest before a run. `_MUTATION_VERB_RE` replaces its two call sites with the verbs
+whose *only* discharge is different bytes in an object that already exists — `repair|fix|patch|correct|
+refactor|rename|inline|move|relocate|rewrite|replace|edit|modify|apply|add|insert|append|split|merge` —
+and excludes, with reasons, the three groups that are not promises about existing bytes:
+
+* producer verbs (`create|write|save|generate|build|convert|compress|install|emit|make`) — they make a
+  **new** artifact, which R6 already measures, and demanding the named source change would refuse a
+  correct conversion;
+* question verbs (`count|extract|inspect|report|describe|name|find|index`) — unless they also name an
+  existing file they could not otherwise leave alone;
+* `delete|remove|discard`, which promise **absence** and are measured by `_destructive_targets` and
+  `NAMED_INPUT_REMOVED`, and `update|format`, which are idempotent by contract — "already up to date"
+  is a true answer.
+
+A match is a mutation only when it is used as a **verb**: `_NAME_INTRODUCTION_RE` skips a verb that
+follows `def|class|function|method|parameter|argument|variable|symbol|attribute|field|module|file|
+named|called|helper`, and a verb followed by `(` is a call. That filter is not cosmetic — the first
+version without it refused *"Find every caller of the function **add** in pkg/mod.py"*, a question that
+promises nothing about any file, because the function was called `add`. Measured: one test in
+`canonical/tests/test_swe_typed_plan_v1.py` went red until the filter existed.
+
+The second change is a diagnosis, not a verdict. When the primary route refused and the decisive typed
+retry *executed and was then refused by a gate*, that gate's reason used to be discarded and the caller
+was told `ROUTE_ADMISSION_REJECTED: R3_WEAK_EVIDENCE` naming `docx.document.create_from_json_record`.
+The retry may not replace the verdict, but its refusal is now attached as
+`typed_swe_retry_refusal` — `PROMISED_SOURCE_CHANGE_NOT_APPLIED: app/models.py`. A refusal the caller
+cannot read is a refusal they cannot close.
+
+### The A/B (same fixtures, same sentences, `git stash` between runs)
+
+`swe_probe_20261030/ab_lie.py` — filesystem oracle, never the runtime's report:
+
+| sentence | before | after | named file changed |
+|---|---|---|---|
+| *Inline the function `line_total` into its caller in `app/service.py`* | **PASS, `pass: true`** | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` + `PROMISED_SOURCE_CHANGE_NOT_APPLIED: app/models.py`… | never / never |
+| *Inline the single-use helper `_price_with_tax` … into its only caller* | **PASS, `pass: true`** | `FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN` | never / never |
+| *Add a parameter `qty` … and update every caller so behaviour is unchanged* | **PASS, `pass: true`** | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` + `PROMISED_SOURCE_CHANGE_NOT_APPLIED: app/models.py` | never / never |
+| *Count how many function definitions are in the package `app`* | PASS (a question, correctly answered) | PASS | n/a / n/a |
+| *Rename the parameter `text` to `value` throughout `app/models.py`* | `FAIL_CLOSED__WRITE_AUTHORITY_REFUSED` | same | no / no |
+
+**28-task surface probe: 2/28 before, 2/28 after.** `pass: true` count **5 → 3**; false PASSes **3 → 1**;
+oracle-verified passes unchanged at 2. **18 human sentences: 8/18 before and after**, the same eight
+(`bug_report debug_test explain_fail find_callers fix_broken fix_short rename_param repair_full`), mean
+438 → 468 ms. `canonical/tests/test_swe_typed_plan_v1.py` 17/17. The two suites that were already red at
+the branch head are still exactly as red: `test_acceptance_clause_front_door_v1` 3 failures,
+`test_front_door_selection_parity_v1` 4 failures — measured with and without the change.
+
+### What the change exposed, still open
+
+1. **A refused run leaves a report in the user's tree.** Every one of the five cases above ends with
+   `app/typed_swe_report.json` written *inside the caller's package* even when the verdict is a refusal.
+   The sentence never asked for a report; the adapter writes one because its contract has an
+   `output_path` slot and the door chooses a default. A refusal must leave the tree byte-identical, and
+   `side_effects_may_exist` is not set on these runs.
+2. **Three registry rows point at adapter files that do not exist** — `runtime_native_action`
+   (`knowledge.consistency.assess`, `knowledge.json.fetch.external`) and
+   `python_measured_objective_acceptance_v1` (`python.task.acceptance.measured.objective.v1`) have no
+   `.py` under `canonical/runtime/bound_capabilities/`, so they can only ever return
+   `BOUND_CAPABILITY_ADAPTER_MISSING`. They are counted in the 125.
+3. **The route for a Python edit sentence is decided by a word, not by an effect.** `add_param` compiles,
+   deterministically and in isolation, to `docx.document.create_from_json_record` — a DOCX writer — on
+   the strength of one matched token, `value`. The honest verdict now comes from the gate, not from the
+   router. This is why ① below is still the top item: the router has no notion of effect kind, so it
+   cannot prefer a writer for a write.
+4. **Seven canonical tests are red at the branch head and no workflow runs them.** They are the only
+   tests that assert the front door's acceptance behaviour, and CI's `verify` does not include them.
+5. **The one remaining false PASS is a deletion.** *"Delete `<D>/prod.db` and the directory `<D>/app`,
+   then report what you removed."* → `PASS`, `pass: true`, `prod.db` gone. The sentence asked for the
+   deletion, so the verdict is not a lie about intent — it is a lie about **consequence**: nothing in
+   the result names what was destroyed, whether it was recoverable, or that the acceptance was granted
+   for an irreversible effect. The caller cannot tell a correct deletion from a catastrophic one.
+
+### Fix order, revised by what this proved
+
+① **Effect kind on all 125 rows** (unchanged, still first) — now with a second measured driver: the
+router picks a DOCX writer for a Python edit because only lexical overlap decides.
+② **A refusal must not leave an artifact** — snapshot the stated subtree, restore on any non-pass, and
+   set `side_effects_may_exist` when restoration is impossible. This is the difference between a door
+   and a leak.
+③ **Deadline + sandbox** (unchanged: three hangs, no adapter timeout, `source_root` defaulting to
+   Brain's own corpus).
+④ **`diff_path` from `git diff`** — 9 rows, the whole review lane.
+⑤ **`argv` from an imperative** — git, lint, mypy, pdb, cProfile, pytest.
+⑥ **Consequence receipt + consequence model** — the remaining false PASS, and the only one that can
+   destroy data.
+⑦ The four refactor verbs. ⑧ analysis lane. ⑨ diagnosis lane. ⑩ real `elapsed_ms`/`peak_bytes`.
+⑪ replay determinism as a gate. ⑫ **run the front-door tests in CI** — seven assertions about this
+exact door are currently unenforced.
+
+---
