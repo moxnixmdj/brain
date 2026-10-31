@@ -38,7 +38,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two ordinary creation requests were unserved: 'Add a parameter qty with a default value to the function line_total ...' was routed to python.refactor.inline_helper.v1 (the call line_total(item, 3) still raised TypeError) and 'Add a function total_cents(item) ... export it ... add a test ...' was refused at route admission with nothing written. The machine could edit code that already existed and could not create code the sentence fully specified.",
- "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
+ "canonical_base_commit": "99db201ab737ea36948abda8d52091c617223aae",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -83,7 +83,7 @@
   "canonical/tests/test_a_stated_function_is_written_wired_and_tested_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "ba0924ea92cc56b48198d54ab15b5f8e9220b31e",
+  "canonical_base_commit": "99db201ab737ea36948abda8d52091c617223aae",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
