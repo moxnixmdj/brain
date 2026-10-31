@@ -4968,7 +4968,7 @@
         "python.issue.natural_language.edit_intent"
       ],
       "requires": [
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -6708,7 +6708,7 @@
       "requires": [
         "python.source.crossfile_edit.choreograph.v1",
         "python.source.change_impact.testselect.v1",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -8362,7 +8362,7 @@
       },
       "provides": [
         "python.source.symbol_index",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "requires": [],
       "result_fields": [
@@ -8697,7 +8697,6 @@
       ],
       "requires": [
         "python.source.symbol_index",
-        "python.source.symbols.index.ast",
         "code.symbols.multilanguage.indexed"
       ],
       "result_fields": [
@@ -9081,7 +9080,7 @@
         "python.tests.generate.scaffold"
       ],
       "requires": [
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
@@ -9810,7 +9809,7 @@
       ],
       "requires": [
         "python.fault.localization.symbol_ranked",
-        "python.source.symbols.index.ast"
+        "python.source.symbol_index"
       ],
       "result_fields": [
         "adapter",
