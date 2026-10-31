@@ -109,3 +109,21 @@ public invocation expectation. The two public invocation expectations remain red
 rather than bypass the live admission policy. The other failures concern exact
 capability identities, scope, compiler counts and refusal classifications; this
 change makes no blanket claim about their causes or baseline status.
+
+## Incoming-main integration validation
+
+Retained main `8679d55` unchanged, including PR6479's empty-diff semantics and
+PR6481's inventory V16. Rebuilt the combined model through the official compiler.
+
+- Original 166-case SWE cohort + model/compiler suites + all 12 new controls:
+  **315 passed, 905 subtests passed, 68.82 s**, 8 deprecation warnings.
+- Focused coverage/intent/Git/joint-contract/advanced-speed integration:
+  **88 passed, 5.94 s**. These overlap the preceding cohort; do not sum them.
+- Fresh official model verification: **33/33 passed**; model digest
+  `899178d7ccf8c5d1542178d21245b9b9120c20c77191b1303de78fd658bb9bba`.
+- Local current-base hierarchy/prewrite admission: `DRIFT_GUARD_PASS`.
+
+These post-integration measurements do not constitute a rerun of the entire
+45-module expanded cohort. Its nine residual failures above remain explicitly
+open. Signed remote repository-integrity admission is required separately before
+landing; no local run can manufacture that signature.
