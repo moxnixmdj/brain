@@ -1,0 +1,923 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "SWE_WRITE_PREFLIGHT_TYPED_RETRY_REUSE_V1_20261030_V1",
+  "action_intent_id": "SWE_WRITE_PREFLIGHT_TYPED_RETRY_REUSE_V1_20261030_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Reuse existing SWE selection, source/report identity and owned-process-group mechanisms to preserve source and report actual execution outcomes before dispatch, during retries and after test completion.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "date": "2026-10-30",
+  "canonical_base_commit": "5fb35987a4177daf4b03682007fb11c9acb8d6ac",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Source integrity and software execution evidence break when report identities, dispatch phases and test-process lifetimes are not bound to actual execution.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Source integrity and software execution evidence break when report identities, dispatch phases and test-process lifetimes are not bound to actual execution.",
+  "expected_parent_change": "Reuse existing SWE selection, source/report identity and owned-process-group mechanisms to preserve source and report actual execution outcomes before dispatch, during retries and after test completion.",
+  "expected_parent_frontier_change": "Reuse existing SWE selection, source/report identity and owned-process-group mechanisms to preserve source and report actual execution outcomes before dispatch, during retries and after test completion.",
+  "stop_condition": "Public caller/repair controls preserve source; unsafe single-action bindings refuse before dispatch; report hardlinks cannot overwrite declared code inputs; ordinary POSIX test descendants cannot write after timeout or completion; detached pipe draining remains bounded. Registry-only review/final/allowlist/landing wrappers cannot certify execution, including through local dispatch and existing live composition.",
+  "selected_route": "REUSE_SWE_EXECUTION_BOUNDARIES",
+  "route_id": "REUSE_SWE_EXECUTION_BOUNDARIES",
+  "explicit_user_authorization": "The user asked to reuse solutions already in Brain, tools, repositories or research and do the optimal work as fast as possible for advanced software engineering.",
+  "benchmark_or_family_rank_authority": false,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Directly reproduced integration blocker, not global optimality or all software capability gaps.",
+  "measured_effect": "Final ten-file stdlib regression group: 113 total, 100 passed and 13 dependency-related skips in 8.784 s. Separate index/resolver/impact group retains 2 registry alias assertions (41 passed/2 failed). No full-suite or independent-verification claim.",
+  "falsification_condition": "A differently named report alias overwrites source, an unsafe single-action binding reaches dispatch, an executed failure retries, or caller output is fabricated/source corrupted.",
+  "load_bearing_primary": {
+    "canonical_base_commit": "5fb35987a4177daf4b03682007fb11c9acb8d6ac",
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/1000000",
+    "success_probability_lcb": "1/1000",
+    "wall_clock_cost_ub": 7200,
+    "interpretation": "Conservative planning placeholders, not measured probabilities; task-effect matching is necessary for truthful software completion.",
+    "measured_effect": "Final ten-file stdlib regression group: 113 total, 100 passed and 13 dependency-related skips in 8.784 s. Separate index/resolver/impact group retains 2 registry alias assertions (41 passed/2 failed). No full-suite or independent-verification claim.",
+    "stop_condition": "Public caller/repair controls preserve source; unsafe single-action bindings refuse before dispatch; report hardlinks cannot overwrite declared code inputs; ordinary POSIX test descendants cannot write after timeout or completion; detached pipe draining remains bounded. Registry-only review/final/allowlist/landing wrappers cannot certify execution, including through local dispatch and existing live composition."
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/write_authority_v1.py",
+      "canonical/runtime/swe_typed_plan_v1.py",
+      "canonical/tests/test_swe_typed_plan_v1.py",
+      "canonical/tests/test_swe_write_preflight_retry_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+      "canonical/tests/test_swe_hardlink_report_preservation_v1.py",
+      "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+      "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+      "canonical/tests/test_shared_test_process_cleanup_v1.py",
+      "canonical/runtime/composition_inventory_v1.py",
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+      "canonical/tests/test_composition_inventory_not_execution_v1.py",
+      "canonical/runtime/bound_capabilities/python_pipeline_allowlist_gate_v1.py",
+      "canonical/runtime/bound_capabilities/python_pr_land_composer_v1.py",
+      "canonical/runtime/bound_capabilities/software_review_synthesis_supercomposer_v1.py",
+      "canonical/runtime/bound_capabilities/software_hardcore_final_supercomposer_v1.py",
+      "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py",
+      "canonical/tests/test_composition_binding_evidence_v1.py",
+      "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+      "canonical/tests/test_grounding_status_partition_v1.py",
+      "canonical/tests/test_plain_goal_bound_grounding_gate.py",
+      "canonical/tests/test_plain_goal_grounding_runtime_precedence.py",
+      "canonical/tests/test_brain_unified_model_v1.py",
+      "canonical/runtime/bound_capabilities/python_issue_nl_parse_edit_intent.py",
+      "canonical/tests/test_edit_intent_index_reuse_v1.py",
+      "canonical/tests/test_python_symbol_index_cache_freshness_v1.py",
+      "canonical/tests/test_python_issue_nl_parse_edit_intent_v1.py",
+      "canonical/runtime/capability_proposal_generators.py",
+      "canonical/tests/test_proposal_path_scope_reuse_v1.py",
+      "canonical/runtime/goal_front_compiler_v1.py",
+      "canonical/tests/test_index_intent_composition_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
+      "canonical/tests/test_rename_alias_phase_reuse_v1.py",
+      "canonical/tests/test_extraction_discovery_reuse_v1.py",
+      "canonical/tests/test_python_refactor_extract_function_v1.py",
+      "canonical/tests/test_python_source_symbol_index_v1.py",
+      "canonical/runtime/bound_capabilities/test_slice_never_miss_v1.py",
+      "canonical/tests/test_test_slice_kernel_reuse_v1.py",
+      "canonical/tests/test_path_only_route_admission_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
+      "canonical/tests/test_extraction_execution_diagnostics_v1.py",
+      "canonical/runtime/composer_route_v1.py",
+      "canonical/tests/test_quoted_search_question_reuse_v1.py",
+      "canonical/runtime/declared_input_derivation_v1.py",
+      "canonical/runtime/capability_selection_retrieval_v1.py",
+      "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+      "canonical/tests/test_verified_repair_delivery_reuse_v1.py",
+      "canonical/tests/test_repair_delivery_process_cleanup_reuse_v1.py",
+      "canonical/tests/test_test_diagnostic_decoding_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
+      "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py",
+      "canonical/runtime/bound_capabilities/python_test_audit.py",
+      "canonical/tests/test_composer_weak_evidence_admission_reuse_v1.py",
+      "canonical/tests/test_composition_observation_order_reuse_v1.py",
+      "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+      "canonical/tests/test_command_effect_classification_reuse_v1.py",
+      "canonical/tests/test_file_question_role_reuse_v1.py",
+      "canonical/tests/test_request_registry_snapshot_reuse_v1.py",
+      "canonical/tests/test_bounded_test_capture_reuse_v1.py",
+      "canonical/tests/test_trace_runner_lifecycle_reuse_v1.py",
+      "canonical/tests/test_audit_runner_lifecycle_reuse_v1.py",
+      "canonical/tests/test_trace_result_channel_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py",
+      "canonical/tests/test_repository_measurement_boundary_reuse_v1.py",
+      "canonical/tests/test_trace_runtime_library_boundary_reuse_v1.py",
+      "canonical/tests/test_provenance_compiler_identity_reuse_v1.py",
+      "canonical/tests/test_multifile_delivery_owned_staging_reuse_v1.py",
+      "canonical/tests/test_delivery_post_verification_readback_reuse_v1.py",
+      "canonical/tests/test_selected_test_input_integrity_reuse_v1.py",
+      "canonical/tests/test_crossfile_inventory_boundary_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+      "canonical/tests/test_rename_execution_safety_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_refactor_rename_parameter.py",
+      "canonical/tests/test_parameter_refactor_execution_safety_reuse_v1.py",
+      "canonical/tests/test_parameter_utf8_span_reuse_v1.py",
+      "canonical/tests/test_symbol_utf8_span_reuse_v1.py",
+      "canonical/tests/test_replacement_identifier_normalization_reuse_v1.py",
+      "canonical/tests/test_crossfile_workflow_execution_reuse_v1.py",
+      "canonical/tests/test_request_identifier_binding_reuse_v1.py",
+      "canonical/tests/test_parameter_binding_capture_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
+      "canonical/tests/test_generated_acceptance_execution_binding_reuse_v1.py",
+      "canonical/tests/test_public_delivery_measured_acceptance_chain_reuse_v1.py",
+      "canonical/tests/test_existing_automatic_semantic_repair_chain_reuse_v1.py",
+      "canonical/runtime/goal_compiler.py",
+      "canonical/tests/test_competing_path_role_fallback_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_repair_measured_acceptance_controller_v1.py",
+      "canonical/tests/test_candidate_argv_directory_relocation_reuse_v1.py",
+      "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
+      "canonical/tests/test_single_candidate_execution_reuse_v1.py",
+      "canonical/tests/test_accepted_candidate_delivery_identity_reuse_v1.py",
+      "canonical/runtime/confine_v1.py",
+      "canonical/runtime/execute_v1.py",
+      "canonical/tests/test_existing_kernel_confinement_reuse_v1.py",
+      "canonical/tests/test_confined_environment_policy_reuse_v1.py",
+      "canonical/tests/test_strict_launcher_system_path_reuse_v1.py"
+    ],
+    "route_class": "ADAPT",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "5fb35987a4177daf4b03682007fb11c9acb8d6ac",
+    "real_outcome": "Reuse existing SWE selection, source/report identity and owned-process-group mechanisms to preserve source and report actual execution outcomes before dispatch, during retries and after test completion.",
+    "required_capability": "Truthful dispatch, source/report preservation and bounded ordinary test-process cleanup.",
+    "obs_goal": {
+      "real_outcome": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "proxy_goals_deleted": [
+        "REFUSAL_AFTER_DISPATCH_EQUALS_PROVEN_NO_EXECUTION"
+      ],
+      "surviving_necessity": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "external_existing_routes_checked": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "capability_work_deleted": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "surviving_gap": "Existing tools already implement the work; timing of refusal, operand classification, stale effect metadata and discarded executed retry failures break their public integration."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "delete_bypass_substitute_options": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "surviving_causal_blocker": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "Reuse write_authority.check before single-action adapter/controller dispatch and keep existing retry gate.",
+        "Change executed flag after adapter import: not sufficient evidence nothing ran.",
+        "Build another selector/index: existing decisive typed plan already works."
+      ],
+      "losing_routes_reason": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "adjacent_capabilities_absorbed": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "fresh_reuse_plan": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "search_stop_decision": "Reuse write-authority preflight before single-capability adapter dispatch so a refused unsafe report binding remains a proven unexecuted outcome and can reach the existing decisive typed-SWE retry.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "ADAPT",
+      "SUBSTITUTE",
+      "COMPOSE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "UNSAFE_SINGLE_ACTION_ADAPTER_DISPATCH"
+    ],
+    "selected_surviving_route": "REUSE_SWE_EXECUTION_BOUNDARIES",
+    "why_selected_route_is_fastest_sufficient": "One early invocation of the existing guard unlocks an already tested typed plan; no new selector, analysis engine, capability registration or sandbox.",
+    "expected_parent_level_state_change": "Reuse existing SWE selection, source/report identity and owned-process-group mechanisms to preserve source and report actual execution outcomes before dispatch, during retries and after test completion.",
+    "stop_condition": "Public caller/repair controls preserve source; unsafe single-action bindings refuse before dispatch; report hardlinks cannot overwrite declared code inputs; ordinary POSIX test descendants cannot write after timeout or completion; detached pipe draining remains bounded.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-30T13:04:10.709453+00:00",
+      "max_age_hours": 12,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Inspected live solve/_execute/run_adapter_locally, write_authority.check, swe_typed_plan.build_plan and selector family enumeration.",
+          "Actual caller probe: primary selects dead-code tool and binds output over source; guard refuses after adapter import and controller dispatch. build_plan separately selects source symbol index with safe report.",
+          "Existing typed-plan tests reproduce 3 failures including caller and repair routing.",
+          "Real run_adapter_locally probe accepted report.json hardlinked to mod.py and replaced source with JSON; existing check_report detects the identity alias and is reused rather than reimplemented.",
+          "Shared _run_tests used subprocess.run and left descendants alive after success and timeout. Existing zero_ambient_namespace_launcher_v1 uses start_new_session and killpg; pattern reused with bounded pipe draining."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Python standard-library API use retained through existing pathlib/write_authority implementation; no new external dependency."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Existing local registry provides caller index and bounded repair; no new capability registration or install."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Prior external metadata discovery recorded in merged integration intent. No new external search required for directly reproduced wire-up bug; no exhaustive research claim."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Find current caller analysis and decisive typed plan."
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Trace preflight, adapter import, controller fallback and executed guard."
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Reuse existing write_authority and index; no additional supplier necessary."
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Reproduce behavior on current merged checkout."
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "unresolved_scope_note": "Bounded single-capability preflight only; no universal retry, sandbox, semantics or task-completion claim.",
+      "selected_route": "REUSE_SWE_EXECUTION_BOUNDARIES",
+      "incumbent_route": "DISPATCH_UNSAFE_BINDING_THEN_DISABLE_TYPED_RETRY",
+      "challenger_routes": [],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-10-30T12:46:51.029387+00:00",
+        "max_age_hours": 2,
+        "selected_route": "REUSE_SWE_EXECUTION_BOUNDARIES",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Python stdlib and existing admission/write-authority/typed-plan modules",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-30T12:46:51.029387+00:00",
+            "evidence": [
+              "Real stdlib unittest run and separate public caller/typed-plan probes executed."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      },
+      "negative_search_summary": "Existing index and typed selection already produce a complete plan; defect is the point at which unsafe binding is rejected."
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-10-30T11:43:28.836333+00:00",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "CONSTRUCTIVE_GAP_ONLY__LOCAL_REGRESSION_MEASUREMENT__NO_ACCEPTANCE_CREDIT",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SWE_WRITE_PREFLIGHT_TYPED_RETRY_REUSE_V1_20261030_V1",
+      "falsifier_id": "SWE_WRITE_PREFLIGHT_TYPED_RETRY_REUSE_V1_20261030_V1_FALSIFIER",
+      "decisive_question": "An unsafe single-action report binding reaches adapter import or controller, a previously executed failure retries, or public caller analysis fabricates callers/corrupts source.",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/verification/SWE_EXECUTION_BOUNDARY_LOCAL_MEASUREMENT_20261030_V1.json",
+          "git_blob_sha": "5f31c5f301bf9a75de551e8cf9a80f598019f30b"
+        }
+      ]
+    }
+  },
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "local_verification_summary": {
+    "baseline": "Existing SWE typed-plan file: 17 tests, 3 failures in 3.400 s. New first 5 tests: 2 failed, 3 passed in 0.108 s, including actual public refusal and controlled dispatch-trap regression.",
+    "discovery": "Existing decisive typed caller index plan already works in isolation; unsafe lexical primary is refused after import/controller dispatch and marked executed. Retrying it then exposed symbol add treated as edit verb and target effects inherited from unrelated dead-code tool.",
+    "implementation": [
+      "Check write authority before single-action adapter import/dispatch/controller fallback; retain lower dispatch guard.",
+      "Distinguish explicit function/method/symbol/class/parameter operands from edit verbs; retain genuine mutation promises elsewhere in sentence.",
+      "Replacement typed plan carries selected capability provides rather than old target effects.",
+      "Executed retry failures return the actual failed execution with provenance; no retry after primary executed=true."
+    ],
+    "negative_fixture_correction": "Old test_a_failing_retry_never_forges_a_pass demanded failure for a subtraction bug that the existing engine now actually repairs. Confirmed actual source a-b to a+b; changed negative fixture to unconditional RuntimeError outside bounded edit basis, asserted false pass, true execution and unchanged broken bytes. Added separate real positive repair control with rerun of unchanged original tests. No test deleted/skipped or acceptance weakened.",
+    "results": [
+      "Focused 57 tests passed in 5.402 s.",
+      "Separate 56-test regression group: 43 passed, 13 skipped in 3.190 s; pytest-dependent scenarios unavailable under current minimal toolchain.",
+      "Unified-model verifier: 33/33 PASS; exact model/goal-compiler/world-binding unittest group: 137 passed in 42.026 s."
+    ],
+    "limits": [
+      "Bounded single-action write preflight; does not certify no execution for arbitrary DAG/controller plans.",
+      "Retained lower guard cannot provide concurrent path race protection or an OS sandbox.",
+      "Operand recognition is a bounded grammar, not full natural-language understanding.",
+      "Caller index coverage retains existing static-analysis limitations.",
+      "Public caller output remains provisional where independent semantic reinspection is unavailable; no independent verification receipt or promotion manufactured.",
+      "No arbitrary feature synthesis, task-wide isolation/transactional delivery or end-to-end speed superiority established.",
+      "Shared guard retains existing source-transformer exemptions; explicit-report APIs are still required for those producers.",
+      "Directory alias scan is scoped to known source suffixes and multiply-linked destinations; not a universal bind-mount/hostile-filesystem containment proof.",
+      "POSIX process groups do not stop deliberate setsid escape or survive supervisor SIGKILL; non-POSIX descendant cleanup remains unresolved.",
+      "Captured stdout/stderr still has no aggregate memory/output budget; full sandbox and task-wide resource accounting remain open."
+    ]
+  },
+  "hardlink_followup_discovery": {
+    "actual_prechange_probe": "Common guard returned None for source_root containing mod.py with report.json hardlinked to mod.py. Real run_adapter_locally returned output_verified=true and replaced source bytes with JSON. Fixture was disposable and cleaned.",
+    "reuse_route": "Existing write_authority.check_report already detects hardlinks using samefile; integrate it into common read-only source protection and direct symbol indexing instead of another identity implementation.",
+    "performance_constraint": "Only hardlinked destinations need a source-directory alias scan; normal reports retain the cheap path. Symbol index reuses its existing file list.",
+    "implementation": "Shared guard delegates identity checks to existing check_report; only multiply-linked destination files trigger source-directory scans. Direct symbol index reuses one file list for protection and parsing.",
+    "tests": {
+      "red": "Real disposable probe overwrote Python source via report.json and returned output_verified=true. New 7-method file initially produced 6 failing subtests and 1 missing-helper error (not seven independent behavioral reproductions).",
+      "green": "Eight-file group: 79 passed in 5.167 s, including no-unnecessary-directory-scan control and repeatable separate reports.",
+      "broader": "43 tests, 2 failures: symbol-index and impact registry provides-list aliases; registry and those assertions unchanged in this work. Resource warnings in older fixtures also observed.",
+      "development_correction": "An initial automated edit accidentally changed the cache validator loop rather than only the run loop; cache regression tests caught the NameError, and the edit was corrected before the final 79-test passing run.",
+      "model_validation": "Unified-model verifier 33/33 PASS; exact model/compiler/world-binding unittest group 137 passed in 37.719 s after the hardlink changes."
+    }
+  },
+  "cancellation_followup": {
+    "blocker": "Shared repair test runner uses subprocess.run timeout, which terminates only the direct process and can leave ordinary child processes writing after return.",
+    "existing_solution": "zero_ambient_namespace_launcher_v1 already uses start_new_session and killpg; reuse that owned process-group pattern with bounded pipe draining in shared _run_tests.",
+    "limits": "POSIX process groups are not a sandbox; setsid escape, killing the supervising process, non-POSIX process trees and unbounded output memory remain outside this change.",
+    "baseline": "Three-method process-lifetime file: 2 failed, 1 passed. Both real descendant cases wrote a late file after the runner returned. Timeout output was also bytes despite text=True.",
+    "implementation": "Popen with owned POSIX session, killpg cleanup on completion/timeout/interruption, 1-second bounded output draining and explicit output_incomplete. Non-POSIX retains direct-process-only cleanup. Commands are noninteractive via DEVNULL stdin.",
+    "final": "Final ten-file stdlib group: 113 tests, 100 passed and 13 skipped in 8.784 s. Includes normal failure/environment/output preservation, late-write prevention on timeout/success, and bounded draining for a deliberately detached pipe holder (fixture cleans escaped child).",
+    "model_validation": "After process-lifetime changes: unified model 33/33 PASS; exact model/compiler/world-binding unittest group 137 passed in 43.535 s."
+  },
+  "composition_followup": {
+    "baseline": "Actual calls to review synthesis, hardcore final, pipeline allowlist and PR land wrappers all returned verified=true with only output_path supplied. No diff, task, gate execution or landing was supplied.",
+    "reuse_discovery": "Existing executed software_review_gate_composer_v1 actually runs six gates. Grounded composition verifier validates structure/bindings, not runtime completion. Pipeline allowlist and PR-land wrappers are themselves registry-only; no safe complete executable route identified in these wrappers.",
+    "selected_fix": "Preserve inventory diagnostics, but fail closed with verified=false/pass=false and explicit no-execution status. Registry action expectations must require verified rather than report-written output_verified. Reuse check_report for registry/source alias protection.",
+    "nonclaim": "Does not implement complete review synthesis/PR landing or independently verify synthesis. Historical verification metadata is retained and not promoted.",
+    "tests": {
+      "focused": "Nine new test methods, including four-way actual local dispatch, actual live composition invocation, forged input fields/receipts, positive inventory-ready and report-byte/hash controls, absent registry producers, deterministic reports and destination/registry hardlink protection.",
+      "combined": "88 total: 86 passed, 2 analyzer-dependency skips in 9.110 s. Includes existing executed reviewer and prior shared-runner/source/retry regressions.",
+      "broader": "98 total: 95 passed, 2 skipped, 1 failed in 9.504 s. Failure is existing global registry path-binding test with 27 offending entries; none are the four changed action expectations. No blanket full-suite claim.",
+      "model_development": "Before regeneration, model group had 3 failures detecting stale generated model/source index; rebuild required."
+    },
+    "model_validation": "After rebuilding: 137 model/compiler/world-binding tests passed in 37.296 s; model verifier 33/33 PASS. Local sandbox measurements, not independent acceptance.",
+    "admission_binding_correction": "Local admission caught stale earlier counterexample binding to modified runtime source. Replaced it with an explicitly non-independent JSON measurement of actual baseline/regression runs, bound to current sources. No acceptance credit or historical verification promotion."
+  },
+  "binding_verifier_followup": {
+    "discovery": "Existing proposal binder already derives literal, auto_path and effect_result bindings. Existing structural verifier trusts absence of proposal_binding_evidence and checks effect-result fields without matching each slot to its declared effect.",
+    "reproduction": "Actual compose plus verify calls using the real goal compiler on a controlled two-clause registry: honest graph accepted; erased evidence plus arbitrary output_path accepted; alpha input redirected to another required beta effect with same output_path field accepted. This is structural verification, not task execution.",
+    "selected_fix": "Derive whether declared binding validation is required from source declarations, prior providers and authorized initial facts rather than mutable trace presence. Match effect refs to each declared effect including validated requirement aliases. Preserve existing fallback for initial facts.",
+    "limits": "No complete registry binding repair, independent task verification or universal provenance proof claimed.",
+    "results": {
+      "baseline": "Six new methods: three positive methods passed; six failing assertion/subtest records across the three negative methods reproduced acceptance of altered bindings.",
+      "implementation": "Reused the existing effect-provider index; derive binding-validation requirement from declared specs, prior clause providers and explicitly authorized initial facts. Check each effect reference against its declared effect or validated aliases, as well as its field.",
+      "focused": "Final 94-method group passed except two analyzer dependency skips (92 passed, 2 skipped).",
+      "broader": "30-method composition group: 29 passed, one existing global registry-binding failure listing 27 entries. Separate 10-method contract group: 9 passed, one grounding count/status mismatch before this verifier is invoked. These failures were not suppressed or asserted away.",
+      "limits": "This is structural plan validation, not execution verification. Existing sentence binding for authorized initial facts is retained, not independently re-proven here. No blanket claim that all artifact/container/path tampering is solved.",
+      "model": "137 model/compiler/world-binding tests passed in 38.228 s; rebuilt model verifier 33/33 PASS. Local measurements only."
+    }
+  },
+  "grounding_status_followup": {
+    "reproduction": "Existing proposal-contract test reports UNBOUND_INPUTS_NOT_GROUNDED while grounded_clause_count=1 and unresolved=[]; discovery is forbidden. Provider slots are also published before this status is determined.",
+    "reuse": "Use the existing composer-ready vocabulary GROUNDED/AMBIGUOUS_BOUNDED for counting, unresolved partition and effect-provider admission. Preserve verifier rejection of unbound status; do not widen verification or pretend metadata-only coverage is execution.",
+    "scope": "Does not repair the classifier or the 27 registry binding entries. Positive ready routes and ambiguity remain supported.",
+    "baseline": "New 3-method regression file: 2 failed, 1 passed. Unbound candidate counted as grounded and supplied a downstream effect; genuinely ready producer/consumer control passed.",
+    "implementation": "Determine status before provider publication; publish provider slots and bound-input context only for GROUNDED/AMBIGUOUS_BOUNDED. Partition grounded count and unresolved indexes using that same existing ready vocabulary. Leave unbound candidates as diagnostics and retain the verifier status vocabulary.",
+    "test_corrections": "Evidence-helper positive fixture now states a real bindable literal URL rather than underspecified document creation. Precedence regression now verifies an unbound inputless fixture does reach the controlled acquisition sentinel (no actual discovery or installation performed). Model invariant separately checks ready count, unresolved partition and rejection of unbound status instead of equating count=0 to verification. Existing positive precedence control retained; no verifier acceptance widened.",
+    "results": "26 grounding tests passed in 0.426 s. Expanded regression group: 120 total, 118 passed and 2 analyzer dependency skips. Existing 27-entry registry-binding issue remains open.",
+    "model_validation": "137 model/compiler/world-binding tests passed in 36.590 s; verifier 33/33 PASS. Expanded regression: 118 passed, 2 dependency skips in 9.371 s. Local sandbox measurements, no independent acceptance claim."
+  },
+  "edit_intent_index_followup": {
+    "discovery": "Parser already delegates index construction, but its cached path bypasses the shared validate_cached_index used by symbol resolution, crossfile choreography and test selection. Standard producer paths are repository-relative while edit ops need source-relative module names. Fresh path also overwrites/unlinks a fixed .nl_intent_probe_index.json inside the source tree.",
+    "selected_reuse": "Use shared cache freshness validation; normalize validated producer module paths to source-relative edit operands. Use an owned TemporaryDirectory as existing sibling adapters do, preserving caller files and cleaning on exceptions.",
+    "nonclaim": "No semantic authentication of caller-provided caches, concurrent tree-write protection, or repair of all 27 registry bindings.",
+    "baseline": "Four new real-adapter regression methods all failed: canonical cache could not bind a qualified source-relative module, stale cache was accepted, fixed caller probe was deleted, and failed build leaked partial probe.",
+    "implementation": "Shared validate_cached_index now checks cache source membership/digests. Fresh indexing uses TemporaryDirectory under repository root and standard producer coordinates. Validated module paths are normalized only in memory for source-relative edit operands. Extended existing cache-freshness loaders to include this parser, including no-rebuild/no-AST-reparse positive control.",
+    "fixture_correction": "Existing cache-equivalence fixture now consumes unmodified indexer.run(source_root=src, root=repo) output instead of manually rewriting source_root on source-relative rows. Noncanonical manually relabeled manifests are rejected rather than guessed.",
+    "toolchain": "System Python lacked pytest, causing one failure and one SystemExit error in the initial 38-test group. Reused existing requirements/software_engineering_kernel_v1.txt pins and SHA256 hashes for pytest plus dependencies; installed binary wheels into ignored .venv. No test harness patches, global installation, fake tools, or test skips introduced.",
+    "results": "With the pinned pytest environment: 38 index/edit-intent tests passed in 0.574 s, including actual natural-language rename to verified worktree diff and parameter-rename apply/test gate. Expanded group: 148 total, 146 passed and 2 analyzer dependency skips in 11.124 s. No actual PR was opened or landed.",
+    "model_validation": "137 system-Python model/compiler/world-binding tests passed in 38.211 s; rebuilt model verifier 33/33 PASS. Pytest-enabled operational tests are separately measured in .venv; no full-kernel/full-suite certification."
+  },
+  "edit_intent_report_followup": {
+    "inspection": "Parser run writes output_path after reading issue/index and indexing source, with no explicit report-role preflight. Capability name contains edit, so generic transformer-name heuristics cannot establish a read-only report contract.",
+    "selected_reuse": "Reuse write_authority.check_report for explicit issue/index identity. Reject code-suffixed report destinations, and reuse source inventory only for multiply-linked destinations to protect disguised source aliases without scanning on ordinary reports. Refuse before index construction.",
+    "scope": "Bounded parser report-role protection; not a concurrent filesystem race or OS isolation guarantee.",
+    "baseline": "Initial expanded index-reuse file had 9 methods and 6 failing assertion/subtest records: issue, hardlink/symlink issue aliases, cached index and source hardlink reports were not refused; controlled load-index trap proved late execution. Repeated baseline after resetting issue bytes per subtest reproduced all three issue-alias cases independently.",
+    "implementation": "Explicit report-role preflight uses existing check_report on issue/index/source directory identity, rejects code-suffixed reports, and conditionally reuses indexer._py_files only for multiply-linked report destinations. Refusal precedes _parse_issue/index loading; no generic transformer exemption changed.",
+    "positive_controls": "Ordinary cached report uses one source inventory (existing freshness validator only). New actual cached-index to natural-language rename to worktree orchestrator test requires selected/passed test counts >0, zero failed tests, expected function diff, unchanged original source bytes and unchanged cache bytes. The fixture uses real pytest in .venv; its only optional skip is explicit absence of that required dependency.",
+    "results": "44 index/edit-intent/cache methods passed in 0.828 s. Expanded SWE regression group: 154 total, 152 passed, 2 analyzer-dependency skips. No task-wide isolation, all-adapter safety, or external PR delivery claimed.",
+    "model_validation": "154 operational regressions: 152 passed, 2 analyzer dependency skips in 11.476 s. Separate system-Python model/compiler/world-binding group: 137 passed in 39.690 s. Model verifier 33/33 PASS; local sandbox measurements, not independent acceptance."
+  },
+  "path_scope_proposal_followup": {
+    "baseline_probe": "Actual existing front.bind_typed_key bound a named Python file for the registered symbol indexer; the real proposal binder refused the same goal with PROPOSAL_BINDING_TYPE_UNKNOWN:path_file_or_dir. Five registered source-analysis tools declare that existing type.",
+    "reuse_route": "Delegate that declaration to existing goal_front_compiler_v1.bind_typed_key and existing repository-path parser. Extend structural binding checks with the same explicit scope contract and a trusted optional root parameter; never infer sibling scopes or widen runtime authority.",
+    "limits": "Shared scope parser is not independent semantic verification. No repair of all 27 registry bindings or general grounding-selection classifier claimed.",
+    "replay_discovery": "After adding typed declaration support, real composed index execution worked once but replay failed because the now-existing report became a second input-file candidate. Existing _named_output_destinations already solves this role distinction; apply it to declaration-driven scope inputs as well.",
+    "implementation": "Proposal binding delegates path_file_or_dir to existing typed binder, requiring the result to be an explicitly named existing repository-local path. Structural verifier checks the same scope contract rather than trace presence, with trusted optional root defaulting to the repository. Typed scope binding reuses existing _named_output_destinations to exclude existing reports on replay.",
+    "baseline_details": "Direct real-adapter probe established the unsupported type. Initial six-method test file produced four failing assertion records and thirteen error records, including a fixture missing grounding schema; schema was corrected openly. After type support, an actual second index execution failed NO_BINDABLE_CANDIDATE_FOR_CLAUSE until the destination-role filter was reused.",
+    "tests": "Eight scope methods cover five registered tools at file/directory scope, actual composed index execution (one file, replay, tree), absent/ambiguous/outside scopes, source/report collision, rehashed-plan scope broadening rejection and explicit trusted-root validation. No analyzer execution claim for all five tools: actual adapter execution control is the symbol indexer.",
+    "results": "Expanded SWE/proposal group: 186 total, 184 passed, 2 analyzer-dependency skips. Earlier 41-method focused group passed. Existing global 27-entry registry-binding failure remains open.",
+    "model_validation": "186 operational regressions: 184 passed, 2 analyzer dependency skips in 11.333 s. Separate system-Python model/compiler/world-binding group: 137 passed in 35.847 s. Model verifier 33/33 PASS. Local measurements, not independent acceptance or speed superiority."
+  },
+  "index_intent_composition_followup": {
+    "target": "Wire the registered symbol-index to edit-intent effect_result link using existing grounding, composition, planner and result-reference resolver. No new capability or orchestration engine.",
+    "reuse": "Existing path_file_or_dir binder, auto_path binding, effect_result binding and astra_runtime._resolve_result_refs. Add only source index output binding and parser input/output declarations to existing rows.",
+    "additional_discovery": "Auto-output stated-precedence probes can mistake the sole existing input JSON for a stated output. Reuse existing destination-role extraction; the structural verifier must honor genuinely stated outputs without trusting mutable evidence.",
+    "limits": "No new capabilities or framework. Real chain execution stops at edit-intent artifact, not arbitrary issue-to-land orchestration. Shared declaration/parser checks are structural agreement, not independent semantic verification. No comprehensive registry repair, broad-suite pass or benchmark speed superiority claimed.",
+    "baseline": "Seven initial tests failed after isolating auto-output to a single-file input fixture. The initial explicit-output fixture used an imperative conjunction that correctly decomposed into four tasks; changed it to same-clause output modifiers. Actual full-registry replay exposed unrelated tools competing even when an exact capability ID was named, blocking the real explicit-output chain.",
+    "additional_reuse": "Reuse front.explicitly_named_capabilities to narrow executable grounding when the caller names exact registered IDs. Preserve lexical-only behavior; no ranking-weight tuning. Gate effect-result path stated precedence using existing role anchors, including quoted path mentions, rather than filename substring guesses.",
+    "quote_replay_discovery": "A real quoted absolute destination was silently replaced by an auto path. Regression failed on the selected destination. Extended existing destination-role helper to inspect absolute/relative spellings and quote boundaries; actual full-registry execution and re-composition/replay now honor those destinations.",
+    "tests": "Ten dedicated tests: full live-registry grounding, actual composition and structural validation, native planner and production result resolver, both actual adapters, cache use, source/issue/cache byte preservation, generated/explicit/quoted absolute output replay, missing producer, filename containing index_path, stale-source refusal, rehashed reference forgery, ambiguous destinations and isolated sole-input output confusion.",
+    "results": "58 focused proposal/grounding/chain tests passed in 0.429 s. Broader exploratory SWE/refactor suite: 260 tests, 254 passed, 3 failures and 3 errors in 14.969 s (old exact symbol-index provides assertion, rename import-alias collision cases, and extract-function verification expectation); these are retained, not weakened. Provider-backed registry binding violations measured 26, down from 27. First model/compiler/world-binding run: 138 passed in 37.127 s; after subsequent destination-role source edit, rerun correctly caught two stale compiled-artifact pins, requiring recompilation.",
+    "final_validation": "After recompiling current sources: model/compiler/world-binding 138 passed in 36.806 s; model verifier 33/33 PASS, seed index-intent-reuse-20261030-final; digest fd63206e6959555c9ff46b06b02e4995c32badf9c347a54b63cbedb350530a59. Experience side effects restored. Focused 58-test suite passed. Local measurements only."
+  },
+  "rename_alias_phase_followup": {
+    "target": "Resolve the real cross-file rename alias failures without replacing the refactoring engine or weakening collision/residual checks.",
+    "reuse": "Existing AST import table, file-identity module resolver, edit harvest, pre-write residual-reference scan, pytest gate and rollback.",
+    "discovery": "_cross_sites performs both collision preconditions and reference harvesting. The post-edit residual scan calls it again and rejects the valid generated import `from module import new as new` as though it were a pre-existing collision.",
+    "baseline": "Original live-tree rename module: 18 tests, 1 failure and 3 errors in 0.052 s; new four-control module: 1 failure and 1 error in 0.007 s. Real collisions and unrelated alias preservation already passed.",
+    "scope": "Separate pre-edit collision checking from post-edit reference measurement; preserve real collision refusals and residual scan. No new capabilities, external dependency or acceptance credit.",
+    "implementation": "Reuse _cross_sites in both phases. Preserve default original-tree alias collision check; disable only that precondition during the post-edit residual-reference harvest. Retain original AST/file-identity resolution, all residual collection/refusal, parsing, named pytest gate and rollback.",
+    "results": "Original rename module plus four added controls: 22/22 passed in 0.762 s. Expanded current-tree suite: 265 tests, 263 passed, 2 failures in 15.871 s. The four formerly failing rename cases now pass without changing their assertions. Remaining failures are exact symbol-index provides expectation and extract-function verified expectation, left visible.",
+    "limits": "Bounded alias-phase repair, not proof of arbitrary semantic refactoring. Existing sandbox/resource/rollback limitations remain. No test weakening, external code, independent acceptance or capability promotion.",
+    "model_validation": "138 model/compiler/world-binding tests passed in 37.841 s. Model verifier 33/33 PASS, seed rename-alias-phase-reuse-20261030. Model digest ee19a322629a3be0481ef1e906fe8d4974fdc4f067b2272e32c8946cbc2d50da. Generated experience changes restored. Local sandbox measurement; no independent acceptance."
+  },
+  "existing_extraction_verification_reuse_followup": {
+    "target": "Resolve the two remaining exploratory assertions using existing implementations, not a new engine or blindly weakening expectations.",
+    "discovery": "Extract-function already discovers test files and uses the shared framework-aware counted suite runner. The failing fixture contains three real tests yet expects verified=false solely because run_tests=[]; that assumption predates discovery. Symbol-index registry assertion pins only the legacy effect although the existing declaration also provides its canonical index effect.",
+    "reuse": "Existing test-corpus discovery, suite_argv real execution, no-tests/all-skipped/exit-zero failure guards and extraction rollback. Add actual execution side-effect controls, preserve exact registry expectations, retain no-corpus verified=false.",
+    "limits": "No new runtime or capability implementation is warranted unless real controls expose a defect. This does not solve broader orchestration, isolation or all registry binding gaps.",
+    "results": "Expanded live-tree SWE/refactoring/proposal suite: 271/271 passed in 15.396 s. Six dedicated discovered-oracle controls passed with real pytest available (0.458 s) and separately under system Python without pytest (0.193 s). Existing extractor and shared runner were sufficient; no runtime implementation changed in this followup.",
+    "assertion_corrections": "Extraction golden fixture contains three runnable tests: assert verified=true plus exact discovered path and zero runner return code, instead of assuming empty caller list disables discovery. Separate real no-corpus test retains verified=false. Symbol-index provides assertion remains exact, now including both already-registered effects. No test deleted/skipped or made permissive.",
+    "artifact_currentness": "The model research index hashes this intent. Editing its result record after compilation correctly caused two fixed-point assertions to fail (136 of 138 passed). Structural comparison isolated the change to one research-index document hash and the resulting model digest; no runtime behavior changed. Finalize this record before recompiling and validating; do not weaken fixed-point checks.",
+    "final_validation_procedure": "Compile after final document edits, run the 138 model/compiler/world-binding cases and the 33-check seeded model verifier, restore generated experience changes and run integrity/admission checks. Tool outputs provide final local results; no independent acceptance authority."
+  },
+  "test_slice_kernel_reuse_followup": {
+    "target": "Replace metadata-only test-slice success and constant 40x claims with actual existing change-impact selection.",
+    "discovery": "test_slice_never_miss_v1.run imports the selector but never calls it; merely finding its registry row writes verified=true, never_miss=true, 50/2000 and 40x. Real python_change_impact_testselect.run already computes and reports selected/candidate counts, paths and reasons, with source/report protection.",
+    "reuse": "Make existing compatibility entrypoint delegate directly to existing selector, preserving its result contract and native safeguards. Registry action takes the actual source_root/changed_paths/output_path operands and expects output_verified, not universal semantic verification.",
+    "contract_change": "Remove artificial prerequisite: direct kernel execution does not consume an earlier selection. Advertise the same selection effects/results as the actual kernel, not test.selection.minimal or never_miss.verified. Existing historical verification metadata is not new evidence. This leaves dependent pipelines fail-closed rather than inventing minimality proofs.",
+    "limits": "Static selection only, no test execution, global minimum proof, universal no-miss guarantee or measured wall-clock speedup. No new capability or selection algorithm. Generic proposal-list declarations remain a separate gap; do not claim an all-bindings repair.",
+    "baseline": "New seven-method baseline: 6 failure records and 1 error; replay alone passed because the false constant artifact was deterministic. Missing source/change/escape controls did not refuse; direct source-report overwrite was reproduced. Hardlink control subsequently passes through the native kernel guard; no separate baseline hardlink execution claim.",
+    "implementation": "Compatibility entrypoint directly calls python_change_impact_testselect.run once. Registry uses identical operand schema, output_verified expectation, result fields and selection effects as the kernel. Unsupported fixed ratios, speedups, universal/minimality effects and artificial prerequisite removed. No second scan or new selector.",
+    "results": "Focused alias plus original selector suite: 21 tests passed in 0.110 s, including real native adapter dispatch. One stale original selector registry assertion expected only the legacy effect; updated to exact existing two-effect declaration without changing producer semantics. Expanded suite: 292 total, 291 passed, 1 failure in 15.977 s. The retained non-SWE refusal failed because a summary request executed decision synthesis from a path-only token; actual trace confirmed unrelated routing through stored decision evidence, not the selector.",
+    "routing_limits": "Direct native dispatch is proven. A controlled free-form explicit-ID invocation was refused as GOAL_NAMES_CAPABILITY_IN_COMPOUND_REQUEST; no general natural-language routing or composed binding readiness claim. Remaining path-only routing failure remains open.",
+    "binding_inventory": "25 provider-backed path-binding violations remain. Reduction from 26 follows removal of this artificial prerequisite, NOT completion of all proposal declarations or a new executable generic composition.",
+    "final_validation_procedure": "Finalize this intent before compiling because the model research index hashes it. Then compile current model, run model/compiler/world-binding tests and seeded model verifier, restore generated experience changes, run guards. Tool outputs carry final local results; historical verification records are not new independent evidence."
+  },
+  "path_only_route_admission_followup": {
+    "target": "Stop pathname-only matches from authorizing unrelated tool execution, while retaining explicit-ID and supported engineering routes.",
+    "discovery": "Existing R1_PATH_TOKENS_ONLY refusal runs after typed-contract and margin admissions. A file can fill decision synthesis input_path/output_path even though only its pathname supplies typed/decision vocabulary, bypassing the existing semantic-evidence check.",
+    "reuse": "Reuse existing prose-token extraction and R1 check; correct ordering rather than new routing framework, operation taxonomy or score tuning.",
+    "acceptance": "Deterministic live-registry gate controls, real public summary refusals with no writes, supported caller analysis execution, existing typed selection/admission/SWE regressions. No acceptance weakening or fabricated historical tests.",
+    "limits": "Path-only single-route admission repair only. Zero lexical matches, partial semantic overlap, controller-only and DAG routes require separate evaluation. Existing seven routing/selection failures and extraction artifact timing flakiness remain open. No universal semantic routing or end-to-end task completion claim.",
+    "baseline": "Five dedicated methods produced five failure records (including three named-path subtests). Real public summary executed unrelated decision synthesis. Explicit-ID and real caller-analysis controls already passed. The existing specific typed binder demonstrably accepts the unrelated input/output file slots.",
+    "implementation": "Moved existing matched-and-no-semantic R1 refusal to after re-verified explicit-ID admission and before typed-contract and lexical-margin admissions. No new classifier, scoring adjustment, capability registration or blanket block on typed contracts.",
+    "focused_results": "31 focused route/SWE/preflight methods pass. Public unsupported summary now refuses with executed=false, no output and unchanged source. Caller analysis still genuinely executes and reports the actual caller.",
+    "broader_results": "Expanded 297-case operational suite: 296 passed, 1 failure in 16.118 s. The previously failing non-SWE routing control passes. Remaining failure is extract-function byte determinism embedding pytest timing 0.00s versus 0.01s; preserved, not weakened. Separately, 51 routing/selection pytest cases: 44 passed, 7 failed under both old and corrected guard ordering (14.12 s old versus 14.37 s corrected). Controlled current-tree baseline temporarily restored only guard ordering and restored the corrected source in finally; no historical Git harness or test substitutions.",
+    "final_validation_procedure": "Finalize records and current receipt hash first; compile current model, run 138 model/compiler/world-binding tests and seeded 33-check verifier, restore generated experience, then run admission/integrity guards. Final tool outputs provide local results, not independent acceptance."
+  },
+  "extraction_deterministic_evidence_followup": {
+    "target": "Separate stable extraction acceptance evidence from volatile execution diagnostics without weakening byte determinism or hiding actual runner output.",
+    "discovery": "Expanded suite exposed pytest_tail embedding 0.00s versus 0.01s in the hashed extraction artifact. Free-form stdout can also contain random application output. Timing normalization alone would not make it a deterministic semantic record.",
+    "reuse": "Retain existing extraction, real subprocess runner, return-code gate and rollback. Keep declared tests and runner return code in the deterministic artifact; return raw stdout/stderr separately as execution_diagnostics, explicitly declared in the registry result contract.",
+    "acceptance": "Real two-world tests with different deterministic test-printed timing-like diagnostics; identical source/report bytes and hash, distinct preserved diagnostics; retain real red-test rollback and no-tests verification=false controls.",
+    "limits": "Stable report assumes identical declared inputs; does not establish reproducibility of arbitrary test behavior, environment or absolute derived corpus paths. No test assertion weakening or output-budget/sandbox claim.",
+    "baseline": "Prior expanded run reproduced artifact bytes differing solely by pytest timing 0.00s versus 0.01s. New diagnostics controls initially raised two missing-field errors. An exploratory system-Python named-pytest probe could not start pytest; actual execution controls use the existing pytest-bearing venv, not a fake runner.",
+    "implementation": "Remove volatile pytest_tail from hashed extraction verification; retain declared run_tests and pytest_rc. Preserve full runner returncode/stdout/stderr as separately returned execution_diagnostics, None when no suite ran, and declare that additive result field. Failures still roll back with existing diagnostics. No timing scrubbing or empty evidence substitution.",
+    "results": "23 extraction tests passed, including actual two-world differing output with identical report/source bytes, matching output SHA, preserved logs, no-corpus false verification and existing red-suite rollback. Expanded current-tree operational suite: 300/300 passed in 17.478 s."
+  },
+  "path_only_typed_fallback_followup": {
+    "target": "Restore existing structured function invocation without weakening pathname-only refusal.",
+    "discovery": "The typed retriever uniquely selects the real invoker. The pinned compiler instead selects generic claim relation because paths and classify_support supply claim/support vocabulary. Prose-only scoring still counts function identifiers; the first attempted prose-only condition did not fix it. Existing _IDENTIFIER_TOKEN_RE already distinguishes these operands from task words.",
+    "reuse": "Use existing front.score_capability prose scoring to identify a zero-prose pinned selection, and existing receipt-only _retrieval_first_selection for a unique specific typed replacement. No new parser, ranking weights or unrestricted override of real prose-supported routes.",
+    "acceptance": "Existing structured-invoker selection and both-live-doors tests; real module invocation with payload/result validation; retain unsupported summary refusal, catch-all-own-sentence behavior and ambiguity controls.",
+    "limits": "Only zero-prose single picks with an existing unique receipt-backed typed alternative. Not universal operation matching.",
+    "implementation": "Reuse _IDENTIFIER_TOKEN_RE and prose_only to score only the current single pick on task words. When that pick has zero task evidence, permit existing unique specific receipt-only F17 retrieval, just as for existing catch-alls. Preserve prose-supported routes, ambiguity refusal and original catch-all displacement evidence. No new parser, score weights or capability.",
+    "baseline": "New real structured-call control failed: generic claim tool selected instead of invoker. Existing wider routing/selection group had 7 failures of 51 under both previous and corrected R1 ordering.",
+    "results": "Six dedicated route/real-execution controls pass, including an actual classify_support invocation with exact SUPPORTS result and unchanged payload. Wider group now 47/51 pass in 14.54 s: original structured selection, real raw invocation and both-live-door agreement failures resolved without modifying their assertions. Four existing failures remain: early compile refusal vs old weak-word expectation, missing registry verification blocks, benchmark compilation count pin, and no-op outcome classification.",
+    "validation": "Expanded operational suite: 300 passed in 17.478 s. Finalize records before model compilation; tool outputs carry subsequent 138-case model/compiler and 33-check verifier results. No universal routing or independent acceptance claim."
+  },
+  "quoted_search_question_followup": {
+    "target": "Prevent quoted values from inventing a count/location/boolean search operation. Preserve executed-exception provenance rather than relabeling it no-op.",
+    "discovery": "The retained git-commit regression actually routes to grep -c: relative contains clause plus quoted message fix total satisfies _WC_QTY through total. No commit is created; this is wrong operation selection, not evidence for NO_OBSERVED_EFFECT.",
+    "reuse": "Existing _QUOTED_SPAN masking idiom within containment-question interpretation; retain raw pattern for argv and raw command-line grammar. No Git execution or new command support.",
+    "acceptance": "Real parser negative controls with commit-message values, positive count/location/boolean search controls and public unsupported-task refusal; preserve original outcome-unknown safeguards.",
+    "typed_followup_intent": "After parser repair, the original public regression now wrongly executes a source repair and reports PASS: quoted fix also activates raw SWE classifiers. Reuse front.prose_only in the base SWE predicate, caller-family predicate and shared E30 effect selectors. Add real negative and positive controls before implementation; retain original public assertions unchanged and report any remaining status mismatch.",
+    "implementation": "Reuse _ASKS_WHICH_FILES for inferred files questions and _QUOTED_SPAN for containment-question interrogatives; preserve raw operand/explicit command grammar. Reuse goal_front_compiler.prose_only in existing base SWE, caller-family and E30 effect predicates; local imports avoid initialization cycles.",
+    "results": "8 new tests pass; 26-module operational suite 233/233 (24.40 s). Routing remains 47/51 (16.00 s); commit request now correctly refuses before dispatch but original NO_OBSERVED_EFFECT status pin is unchanged and fails. Composer 18/27 both before and after, identical nine failure nodes (13.27/13.54 s). Native positive verifies a tested repair patch with source restored, not delivered source repair or semantic acceptance.",
+    "limits": "Bounded existing grammar only; no Git command execution/support, universal operation matching, full-suite pass or independent acceptance. No change to outcome-unknown provenance."
+  },
+  "verified_repair_delivery_reuse_followup": {
+    "discovery": "Existing python.software.repair.apply.verified.v1 already composes provenance-guided search, original/candidate hashes, atomic per-file writes, in-place tests and rollback. Semantic and measured acceptance controllers also exist. Earlier general delivery gap must be narrowed: available adapter implementation is not absent; live accessibility, contract and isolation must be measured.",
+    "intent": "First run real existing adapter and live-door controls on disposable repository-local source and unchanged tests. Reuse rather than build another delivery engine. Preserve report-only search semantics, original tests and all existing user edits. If live wiring fails, trace existing admission/derivation before a bounded fix.",
+    "acceptance": "Applied bytes persist and tests fail-before/pass-after with fresh independent process rerun; already-correct and unrepairable controls; report-only search remains non-writing. Reinspection is a local producer rerun, not independent-verifier authority.",
+    "limits": "No universal repair completeness, sandbox, task-wide transactionality or benchmark credit. Existing per-file apply/rollback is not crash-safe all-file transactionality.",
+    "measured_discovery": "Both explicit-apply and ordinary repair/apply requests already persist the actual < to <= change through the live door, with fresh tests passing. Existing no-test-named and semantic-controller suites: 23/23 pass. Existing direct apply suite: 12/13 pass, remaining assertion expects refusal where existing corpus-discovery behavior now succeeds. No existing assertion changed.",
+    "report_preflight_intent": "Adapter output is an explicit report but its reused _safe_output checks containment only, while source-transformer exemptions bypass generic report guards. Add real source/test report-alias negative controls before implementation. Reuse existing write_authority.check_report against declared tests and Python sources before any test/search or report write, including hidden intermediate report destination. Do not build a new repair/transaction engine.",
+    "results": "Existing delivery was measured working, not rebuilt. Reused check_report for final and derived report preflight after two real alias regression methods failed. Seven new tests pass; 29-module operational group 263/263 in 28.83 s. Old direct apply suite remains 12/13, same corpus-discovery assertion as baseline; unchanged. Fresh in-place unchanged tests rerun successfully.",
+    "nonclaims": "No arbitrary repair completeness, full raw-request acceptance, independent verification identity, OS sandbox or task-wide transactional delivery. Source-change promise still refuses unchanged second application even when adapter truthfully reports already-correct."
+  },
+  "repair_delivery_process_cleanup_reuse_followup": {
+    "discovery": "Verified repair apply has a separate subprocess.run gate runner, while its inherited _REPAIR._PATCH._run_tests already owns a POSIX session, cleans ordinary descendants on success/failure/timeout and bounds pipe drainage. Reuse the inherited runner rather than implementing another process manager.",
+    "intent": "Measure real descendant late-write controls on the current apply runner before code changes, then delegate Python test execution to the inherited shared runner while preserving tuple returncode/bytes diagnostics and OSError behavior. Keep timeout as None and preserve timeout marker. No unrelated routing or acceptance relaxation.",
+    "acceptance": "Ordinary child processes cannot write after successful/failed/timed-out apply test gates; actual native repair delivery and rollback controls retain their outcomes. No fake subprocess, OS sandbox or escape-proof claim.",
+    "limits": "POSIX process-group boundary only; deliberate setsid escape, supervisor SIGKILL, non-POSIX descendants and aggregate output budget remain outside this change.",
+    "implementation": "Use inherited _REPAIR._PATCH._run_tests for apply verification gates; retain tuple returncode/byte tails and launch-error/timeout semantics. Removes duplicate subprocess.run lifecycle.",
+    "results": "Four initial methods: 2 passed/2 failed before runtime change (real late writes). Five final controls including native adapter: 5 passed in 3.20 s. Expanded 30-module suite 268 passed in 34.40 s. Same existing corpus-discovery mismatch remains in separate 13-case apply suite; original assertion unchanged."
+  },
+  "test_diagnostic_decoding_reuse_followup": {
+    "discovery": "Shared _run_tests already decodes timeout partial bytes with errors=replace, and python_test_audit uses UTF-8 replacement decoding. Popen text mode instead uses strict locale decoding, so normal completion/drained timeout can throw UnicodeDecodeError before returning the actual test result. The apply path now inherits this existing runner behavior.",
+    "intent": "First exercise real stdout/stderr byte streams for passing, failing and timed-out Python commands, plus native repair delivery. Reuse standard subprocess encoding/errors parameters with the existing replacement-decoding policy rather than add a runner/decoder. Preserve returncode and timeout semantics, cleanup and valid Unicode.",
+    "acceptance": "Binary diagnostic bytes never replace execution outcome with decoding exceptions; real failure remains nonzero, timeout remains None, valid Unicode survives, and bounded native repair can persist a fix despite noisy test diagnostics.",
+    "limits": "Replacement characters are lossy diagnostics, not raw-byte preservation. No aggregate output budget, arbitrary repair completeness, independent verifier identity or full sandbox claim.",
+    "baseline": "Five real controls: 4 failed with UnicodeDecodeError and 1 valid-UTF8 control passed in 0.62 s. Shared runner fix alone: 13 passed, 1 native delivery failed in 6.82 s; the next inherited trace runner also used strict decoding. Follow actual execution chain instead of claiming private-helper success establishes delivered repair.",
+    "scope_extension": "Apply the same existing UTF-8 replacement policy to fault-localization/provenance trace capture and corpus audit, which run tests on this delivery path. No new decoding abstraction or process runner.",
+    "results": "Six new controls passed in 0.74 s, including real native repair persisted/fresh rerun and truthful mixed-corpus reporting. Expanded 35-module suite: 317 passed in 40.48 s. Standard-library parameters only; no new execution manager/dependency. Explicit replacement policy preserves verdicts, not exact raw diagnostic bytes."
+  },
+  "routing_composer_failure_reuse_followup": {
+    "intent": "Classify the 4 routing/9 composer baseline failures using actual current executions and existing admission, binding and benchmark evidence; preserve original tests. Reuse existing R3 weak-evidence adjudication where lexical composer routing bypasses it, without replacing reachability planning with full executable-task acceptance.",
+    "discovery": "Nonsense goal xyzzy plugh frobnicate nothing at all here routes to software.review.all_gates.verified solely on all, yielding a four-step hardcore software chain. Existing route_admission already refuses its terminal capability R3_WEAK_EVIDENCE, so no new semantic policy is needed. Type-level planning remains distinct from successful execution.",
+    "acceptance": "Actual old unreachable-goal test passes without weakening it; real stated-command route remains intact; type-level route with multiple semantic words but unbound operands remains planning-only; operational/routing/composer suites measured independently, not conflated.",
+    "limits": "Not universal natural-language understanding, arbitrary plan validity, independent full-task acceptance, or a claim all legacy failures are fixed. No new compressor or duplicate discovery implementation.",
+    "additional_measured_gap": "New real command control exposed extract_argv truncating Python -c commands at an inner opposite quote: expected [python3,-c,print(42)], observed [python3,-c]. Existing composer _QUOTED already matches opening/closing delimiters, so reuse it after the command prefix rather than introduce another parser. Initial four controls: 2 failed, 2 passed in 0.30 s.",
+    "results": "Original 66 tests: 53 passed/13 failed before, 55 passed/11 failed after, no new failed nodes. Eight new controls pass, including real command-produced artifact. Focused 36 modules: 325 passed in 48.79 s. Broader 38-module probe: 640 passed/41 failed; all 41 failed-node baseline replays also fail after removing ONLY this turn composer changes, then restoring in finally. Explicit classifications and unresolved limits recorded in local measurement; no original test changed."
+  },
+  "composition_observation_order_reuse_followup": {
+    "discovery": "Real Delete the file probe actually removed its input, raw-goal postcondition verified rm, but solve returned NO_OBSERVED_EFFECT. In _solve_body compilation-failure branch the before snapshot is taken as a _close_observations argument AFTER _try_composed has executed. Main branch already observes before execution using same observe_world/execute_v1 snapshot+diff machinery.",
+    "intent": "Measure real public mutation controls first; reuse existing observation at the correct lifecycle point in compilation-gap branch. No replacement observer, semantic bypass or test weakening.",
+    "acceptance": "Real removal/creation/in-place transformation no longer compare two post-execution snapshots. Fresh raw-goal reinspection and unchanged-input safety remain enforced. Untouched-world negative control still reports NO_OBSERVED_EFFECT.",
+    "limits": "No claim snapshot metadata is content-addressed, bounded observation covers entire arbitrary trees, or all 41 broader failures share this cause.",
+    "results": "New controls before: 4 failed/2 passed in 0.94 s; after: 6 passed in 1.04 s. Previously failing 41-node replay: 24 passed/17 failed in 8.31 s. Full expanded 39-module suite: 671 passed/17 failed in 102.63 s, remaining failed-node set is a strict subset of original 41. No original test changed, no new observer or dependency."
+  },
+  "command_effect_classification_reuse_followup": {
+    "discovery": "Remaining failures include read-only sort -u / sed filters rejected because the prose says remove, and chmod rejected because observe_world reuses size/mtime-only snapshots that miss permission changes. Existing raw_goal_trace_acceptance already owns read-only programs, side-effecting flags, and chmod postconditions. Composer already determines whether stdout is written back via _declare_a_written_output.",
+    "intent": "Measure real public filters and chmod first. Factor the existing read-only/side-effect flag classification for reuse by inspector, composer and observation. Re-derive settled argv and existing stdout-write declaration from request to avoid requiring file mutation for a pure answer. Include mode bits for explicitly stated paths in the existing observation, not a new observer.",
+    "acceptance": "Pure filters retain input bytes and still require raw-goal reinspection; in-place/output-writing commands remain mutation obligations; missing outputs/forged no-op producer claims still fail; actual chmod counts as an effect without content change.",
+    "limits": "Finite command classification is not a sandbox, full shell parser or general semantic verifier. Bounded metadata observation remains non-transactional and not content-addressed.",
+    "results": "Baseline six controls: 3 failed/3 passed. Final eight controls plus previous observation-order and raw-acceptance suites: 36 passed in 4.53 s. Prior 17 failed nodes: 13 now pass, 4 remain. Final full 41-module group: 714 passed/4 failed in 108.99 s, no new failing node. Adversarial conflicting-command test caught and closed a transitional exemption flaw; producer flags alone never discharge mutation promises. Original tests unchanged."
+  },
+  "file_question_role_reuse_followup": {
+    "discovery": "Tracing real _prose_argv calls shows existing file-name grep trigger steals both What is different between the files A and B and Show contents of the file P containing the report, then refuses for missing search value before reaching already-implemented diff/cat rows. Existing _ASKS_WHICH_FILES uses unconstrained distance from question/read verb to file, rather than the requested noun role.",
+    "intent": "Measure fresh public comparison and contents requests first. Narrow/reuse existing file-question recognizer; factor existing contents-of grammar so cat and file-filter routing agree. Keep missing-pattern refusal, actual file-name searches, line queries and read-only reinspection. Do not add another diff/reader implementation.",
+    "acceptance": "Fresh public diff 0/1 answers and descriptor-bearing reads execute existing adapters, reinspection agrees and input bytes survive. Valid file searches retain filename output; missing-value line searches stay refused. Existing unsatisfied-count pin remains unchanged; add count-independent actual precondition-scope control rather than fabricate registry entries to satisfy >30.",
+    "limits": "Bounded request grammar, not universal natural-language parsing. Existing legacy metadata/benchmark evidence gaps and sandbox limits remain; no speed-superiority claim.",
+    "results": "Baseline six controls: 3 failed/3 passed in 1.07 s. After grammar reuse: 6 passed in 1.11 s; includes real diff 0/1 and cat, raw-goal reinspection and unchanged input bytes. Prior four failed nodes: 3 passed/1 failed in 2.56 s. Full 42-module group: 723 passed/1 failed in 107.90 s; no new failed nodes. Remaining registry-size >30 assertion is unchanged (observed 29); new precondition-scope property passes without this numeric assumption."
+  },
+  "request_registry_snapshot_reuse_followup": {
+    "discovery": "Profiled real routing: 25 explicit-command requests reload/parse the registry 50 times; 25 lexical text/SWE requests do so 75 times. capability_composer.graph already accepts registry= and candidate/contract helpers already accept registry mappings. Existing persistent caches are unnecessary for this request-local duplication and introduce invalidation concerns.",
+    "intent": "Reuse one freshly loaded request-owned registry mapping across graph construction, candidate ranking, command selection and lexical admission. Add optional registry injection to candidate_tokens, retaining existing callers. No cross-request cache, skipped verifier or global mutable snapshot.",
+    "acceptance": "One physical registry load per ordinary routing request and standalone candidate ranking; same selections and admission controls; mid-request on-disk replacement cannot mix graph/ranking snapshots; following request observes changed file even with preserved mtime. Report exact work counters plus illustrative matched local timings, not end-to-end superiority.",
+    "limits": "A per-request snapshot is not a filesystem transaction or execution authorization. Execution revalidation remains separate; no universal performance claim.",
+    "results": "Five controls passed in 0.36 s. Per 25 real requests: command registry loads 50->25, lexical text/SWE 75->25. Illustrative local warm medians: command 4.705->2.503 ms, lexical text 14.578->9.808 ms, lexical SWE 10.352->6.495 ms. Full 43-module suite: 728 passed/1 unchanged failure in 107.11 s; no claim of full-suite speed improvement. Same-mtime rewrites remain visible next request, no persistent cache."
+  },
+  "bounded_test_capture_reuse_followup": {
+    "discovery": "Existing namespace launcher bounds broker reads and rejects overflow, but its stdout/stderr are DEVNULL; effect-tool and apt limits bound different data, not test pipe capture. Shared test runner still communicate-captures unbounded bytes, and an exited parent with inherited-pipe children waits for those children or is misclassified as timed out. No directly reusable general bounded subprocess capture found in inspected local paths.",
+    "intent": "Measure real modest noisy subprocesses first (about 9-10 MB, not OOM stress). Extend existing POSIX owned-process runner using standard-library selectors/nonblocking reads, the existing aggregate broker-budget/fail-closed pattern, and unchanged killpg/finally cleanup; no second process manager. Enforce 8,000,000 aggregate raw diagnostic bytes and raise TEST_OUTPUT_LIMIT_EXCEEDED after cleanup, never truncate to a false pass. Preserve UTF-8 replacement, universal newlines, env and returncode/timeout contracts. Clean inherited-pipe descendants promptly once direct parent exits.",
+    "acceptance": "Aggregate stdout+stderr cap applies while reading, not after allocation; overflow cannot certify repair and candidate source restoration holds. Ordinary descendants cleaned on completion, bounded drain for escaped pipe holders, normal failure/timeout/Unicode diagnostics preserved. Non-POSIX fallback explicitly remains unbounded capture/direct-process cleanup.",
+    "limits": "Cap bounds retained raw diagnostic payload, not whole-process RSS or child memory/disk/network. POSIX sessions are not hostile-code isolation. No cross-platform cap or independent full-task acceptance claim.",
+    "results": "Initial seven controls: 5 failed/2 passed in 2.05 s. Final eight controls: 8 passed in 4.17 s. Existing cleanup/diagnostic/apply controls preserved. Inherited-pipe probe returns exit 7 in 0.069045 s. Attempted 131,072,000-byte loop is stopped at 8,000,000-byte aggregate payload budget; observed Python tracemalloc peak 9,054,995 bytes (not RSS/child memory). Full 45-module suite: 746 passed/1 unchanged registry-count failure in 115.00 s. No original tests changed."
+  },
+  "trace_runner_lifecycle_reuse_followup": {
+    "discovery": "Fault localization and interprocedural provenance already load _PATCH but _trace_one still launches tests via independent subprocess.run. Shared _PATCH._run_tests now supplies bounded POSIX capture, owned cleanup and typed diagnostic results; no additional collector is needed.",
+    "intent": "First measure actual traced tests with ordinary background writers on success/timeout and ~9 MB logs. Delegate only the two trace subprocess sites to inherited _PATCH._run_tests, preserve marker/inner test verdict and env, translate shared timeout/output-limit failures to each existing trace error type.",
+    "acceptance": "Real public localization/provenance retain failing-test evidence and report fields while leaving no ordinary background writer; timeout remains TEST_TIMEOUT; overflow remains TEST_OUTPUT_LIMIT_EXCEEDED with no successful report. Do not equate wrapper exit 0 with inner assertion success.",
+    "limits": "Existing bounded trace JSON can exceed the shared 8 MB budget and will fail explicitly. Audit and other runner sites remain outside this connection; non-POSIX output capture remains unbounded and POSIX groups are not hostile-code isolation.",
+    "results": "Initial eight controls: 6 failed/2 passed in 3.78 s. Delegate two existing trace launch sites to inherited runner, preserving typed errors, marker/inner verdict and source/test bytes. Targeted five-module suite: 37 passed in 9.87 s. Expanded 46-module suite: 754 passed/1 unchanged registry-count failure in 104.97 s; no original test changed and no new failing node."
+  },
+  "audit_runner_lifecycle_reuse_followup": {
+    "discovery": "Corpus audit already owns _PATCH and suite_argv but still uses independent subprocess.run, bypassing owned descendant cleanup and bounded diagnostics. Its existing crash-unit accounting and report reinspection can faithfully record a supervised output-budget failure without a new report schema or runner.",
+    "intent": "First measure real public audit cases: successful/timeout background writers and a noisy file followed by an ordinary passing file. Delegate to _PATCH._run_tests, preserve timeout tail/TEST_TIMEOUT accounting, and catch only named TEST_OUTPUT_LIMIT_EXCEEDED as a red crashed file with explicit reason. Continue corpus/report, never silently count truncated output as passed.",
+    "acceptance": "A mixed noisy/green corpus reports every file, counts budget refusal as a red file unit, preserves true pass rate and strict output_verified=False, and verifies report totals from persisted bytes. Timeout cleans ordinary descendants; healthy audit and Unicode diagnostics retain semantics. Unexpected runner errors are not swallowed.",
+    "limits": "Existing report text/count parsing is not a complete independent test-result protocol. POSIX payload cap is not whole-process resource isolation, and non-POSIX capture remains unbounded.",
+    "results": "Initial four controls: 3 failed/1 passed in 2.89 s. Targeted three-module suite: 31 passed in 7.19 s. Delegate audit execution to inherited runner, preserve report-on-red semantics; named budget refusal is a red file unit, later green file still runs, report totals reinspected. Full 47-module group: 758 passed/1 unchanged registry-count failure in 109.85 s; no original test changed and no new failing node."
+  },
+  "trace_result_channel_reuse_followup": {
+    "discovery": "Both trace adapters already share _PATCH._run_tests but parse the last stdout line prefixed with a public marker. Existing namespace broker has dedicated socket/pass_fds result framing, but it discards diagnostics and is POSIX-specific. Existing adapters use stdlib TemporaryDirectory/artifact exchange. Reuse the current runner and temporary-artifact pattern, not another process manager or broker.",
+    "intent": "First reproduce unterminated logging, redirected stdout, atexit marker replacement, and early-exit marker imitation using real trace processes. Introduce one private temporary result artifact helper next to the shared runner; both trace adapters use it. Read at most existing budget+1 bytes; preserve combined raw diagnostic+trace cap on POSIX, with exact captured raw-byte accounting. Preserve wrapper return code independently of inner verdict, typed timeout/budget errors, and temporary cleanup.",
+    "acceptance": "Ordinary stdout cannot hide the result; marker-shaped stdout cannot replace a real failing verdict or substitute for a missing result artifact. Existing tracing, diagnostic cap, timeout and descendant controls stay green. Malformed/missing/oversized artifacts fail closed with typed errors and no public report.",
+    "limits": "Separate output transport is not independent verification or protection against same-process hostile code/filesystem access. Child disk/CPU/memory, non-POSIX diagnostics and deliberate session escape remain outside guarantees.",
+    "results": "Initial 8 trace controls: all fail in .57s. Descriptor-construction review found a refusal-path leak: 2 added real controls initially fail (.59s), then explicit fd ownership fixes it. Final 22 new methods cover transport, raw-budget accounting, malformed/nonregular artifacts, descriptor ownership and temporary cleanup. Focused 5-module group: 72 pass in 19.22s. Full 48-module group: 780 pass / 1 unchanged registry-count failure in 161.49s; no original test changed and no new failing node."
+  },
+  "repository_measurement_boundary_reuse_followup": {
+    "discovery": "Repository acceptance measurement already loads _PATCH/suite_argv and copies the source tree, but launches independent subprocess.run with strict decoding and timeout byte buffers. Its report writer also lacks the existing explicit check_report identity guard. An isolated working copy does not isolate test descendants or prevent report publication over original inputs.",
+    "intent": "Reproduce real public measurement descendant leaks, partial-timeout decoding, invalid UTF8 and diagnostic overflow. Reuse _PATCH._run_tests with existing deterministic environment and preserve timeout returncode124/objective-red measurement semantics. Translate named runner failures to MeasurementError without publishing a new report. Reuse write_authority_v1.check_report over exact measured manifest files before execution so direct/alias publication cannot destroy measured inputs.",
+    "acceptance": "Healthy and failing measurements remain content-addressed; timeout yields a valid red objective measurement with returncode124 and normalized diagnostic hashes; ordinary descendants are cleaned on completion/timeout/overflow; oversized output raises typed failure and preserves existing report. Direct and hardlink report aliases to measured inputs refuse before any test execution, preserving source bytes.",
+    "limits": "Local measurements are not complete task acceptance or independent verification; process group cleanup is not hostile-code isolation; identity preflight is not a filesystem lock.",
+    "results": "Initial 7 public controls all fail in3.75s. Shared runner and identity preflight integration yields42 focused passes in6.54s. Full51-module group:810passed/1unchanged registry-count failure in165.82s, no new failing node. Additional previously excluded reinspection module:37passed/3provenance failures in3.09s; direct probe finds in-tree .venv dependency lambda treated as project callee. Left open and recorded, not hidden or claimed fixed."
+  },
+  "trace_runtime_library_boundary_reuse_followup": {
+    "discovery": "The three expanded provenance reinspection failures arise from .venv/site-packages/_distutils_hack lambda frames treated as project code. Test discovery already skips dependency/cache names, but its build/dist/env directory policy is too broad for tracing genuine generated/project source. Python site.getsitepackages/getusersitepackages already identify actual runtime installation locations without guessing names.",
+    "intent": "Reproduce with real isolated minimal Python environments nested inside temporary repositories under nonstandard paths. Filter only actual runtime site-library roots nested beneath the declared repository boundary. Cache roots once per trace and retain explicitly chosen roots inside a library. Keep project build/env directories observable. Reuse Python site discovery and existing _brain_project_file cache; no new runner or broad directory blacklist.",
+    "acceptance": "Nested runtime dependencies do not consume project trace events or cause provenance reinspection rejection. Genuine failing project frames and ordinary generated/env source remain; explicitly analyzed library roots remain observable. Existing forty reinspection controls pass without changing assertions.",
+    "limits": "Runtime-library classification is not a security boundary or a complete dependency graph; editable/vendored libraries outside runtime site roots are not automatically classified. Named-definition verification for legitimate project lambdas remains a separate contract issue.",
+    "results": "Baseline 6 new methods:2fail/4pass; combined with40 original reinspection controls:5fail/41pass in3.88s. Reuse runtime-site metadata and existing per-trace cache, preserving build/env project source and explicit library subjects. Final8 new methods plus existing targeted controls:100pass in13.15s. Full53-module group:858pass/1unchanged registry-count failure in124.63s; all3 previously observed provenance failures now pass unchanged."
+  },
+  "provenance_compiler_identity_reuse_followup": {
+    "discovery": "Provenance producer records actual code.co_name/co_firstlineno and includes firstlineno in edge keys. Reinspector uses a lossy AST name->single def-line map, excluding anonymous code/decorator starts/duplicate names, and drops firstlineno when rebuilding edge coverage. Python compile/CodeType already supplies the exact code-object identity without executing source.",
+    "intent": "Reproduce genuine project lambda/comprehension/decorator/duplicate-name rejection and a forged same-name callee substitution using real produced reports. Reuse compile plus recursive code-constant inspection, caching code-name/first-line pairs per source file; preserve existing caller/coverage checks and align coverage key with producer firstlineno. Do not whitelist anonymous names or trust producer assertions.",
+    "acceptance": "Genuine runtime code identities validate against compiled current source; wrong/nonexistent lines still refuse. Real different same-name code objects at one callsite remain distinct; forged substitution cannot borrow coverage from another definition. Reinspection does not execute measured source. Existing controls pass unchanged.",
+    "limits": "Source code name/firstline is the existing report identity, not a unique code hash/column/qualname. Compiler introspection does not authenticate traces or provide sandboxing/whole-request acceptance.",
+    "results": "Initial6 real controls:5fail/1pass in.60s, including false acceptance of a forged same-name callee. Reuse compiler code-object metadata and producer first-line edge key; final8 new methods with existing focused controls:77pass in6.80s. Full54-module group:866pass/1unchanged registry-count failure in123.30s; no original test weakened and no new failing node."
+  },
+  "multifile_delivery_owned_staging_reuse_followup": {
+    "discovery": "Existing provenance-guided coupled search and native verified apply already support multiple patches. Native _atomic_write uses a predictable target.brain_apply_tmp, writes before its try block and replaces source without preserving mode. Existing external_tool_relay and root3 finalizers use uniquely owned tempfile siblings with unconditional cleanup; their JSON/authority wrappers are not suitable direct source-writer APIs. Reuse the standard tempfile ownership pattern inside the existing writer rather than another orchestrator or authority bypass.",
+    "intent": "Evaluate actual cross-package two-file nonmonotonic repair, persistent publication, unchanged tests/unrelated data and fresh native unittest acceptance. Reproduce permission loss and collisions with existing staging files/symlinks/hardlinks, plus negative replace/write failures. Replace only the staging primitive with uniquely created sibling ownership, mode preservation before publication, and unconditional cleanup.",
+    "acceptance": "Real two-file repair persists and fresh unchanged tests pass. Permission bits remain; unrelated fixed-name staging files/links and their targets survive unchanged. Publication/write failures leave original bytes/mode intact and no newly owned staging file. No change to repair search, report-verification semantics or existing assertions.",
+    "limits": "Per-file atomic rename is not a multi-file filesystem transaction, crash recovery, concurrent-editor lock, ownership/ACL/xattr or hardlink-relationship preservation. No universal software capability or speed claim.",
+    "results": "Initial7 controls:6fail/1pass in1.97s; existing two-package repair already fixes behavior but delivery loses modes/user stage. Existing owned-temp pattern fixes writer; final10 new controls include real public two-package delivery and actual partial-publication rollback. Focused4 modules:30pass in15.25s. Full55-module group:876pass/1unchanged registry-count failure in131.56s. No existing assertions weakened; public semantic_acceptance_complete staysFalse."
+  },
+  "delivery_post_verification_readback_reuse_followup": {
+    "discovery": "Native apply validates candidate bytes before writing but only checks test exit after publication; no final source readback. Repository finalizers already use exact post-commit readback. Existing owned atomic writer supports safe replacement; reuse it for restoration instead of following paths changed by tests.",
+    "intent": "Reproduce actual successful tests that alter/delete/alias/chmod source only after native publication (detected by inode change; search results are not mocked). Require current delivered regular-source bytes/modes to match plan after tests. Snapshot original modes with bytes; allow atomic restoration with saved modes even when file is missing. Reuse exact readback and existing owned writer; keep unrelated test-generated artifacts allowed.",
+    "acceptance": "Test exit0 cannot authorize delivery if planned source bytes or permission bits changed; typed failed delivery report preserves observed exit0 and lists mismatches. Restore original source without clobbering symlink/hardlink targets. Existing normal two-package/public delivery and rollback controls pass; no claim of complete request acceptance or crash safety.",
+    "limits": "Readback is a point-in-time check, not a concurrent writer lock or an OS sandbox. Ownership/ACL/xattr and whole-runtime dependency closure remain outside guarantees.",
+    "results": "Baseline6 real unittest controls:5fail/1pass in4.07s; exit0 certified modified/deleted/relinked/chmod source. Reused exact readback plus owned atomic restoration with saved modes; final8 new methods and linked group:38pass in20.87s. Strengthened prior rollback assertion to require candidate then exact-original atomic publications. Full56-module group:884pass/1unchanged registry-count failure in136.25s. Additional original apply module:12pass/1existing discovery-contract failure in3.60s; not hidden or weakened."
+  },
+  "selected_test_input_integrity_reuse_followup": {
+    "discovery": "Native delivery validates source readback but does not snapshot selected test entry files across baseline/search/final verification. Existing _source_matches, _restore_sources, owned atomic writer and shared bytecode purger already provide readback/restoration. Reuse those at execution phase boundaries rather than another runner or verifier.",
+    "intent": "Reproduce real selected test self-modification during already-green baseline, successful search candidate, final publication and baseline failure; test symlink/hardlink substitution without mocking execution. Snapshot selected test bytes/modes before baseline, validate in finally at each phase, restore via existing owned atomic writer and purge stale test bytecode, then raise typed TEST_INPUT_CHANGED. Final verification error uses existing source rollback.",
+    "acceptance": "No already-correct or applied success after selected test entry mutation. Exact original tests/modes restored without clobbering link targets; final source rolled back on final-verification corruption; prior report untouched on refusal. Healthy artifact-producing tests and existing multi-file/public delivery stay valid.",
+    "limits": "This guards selected entry files, not conftest/plugin/helper/config/environment dependency closure or hostile-code isolation. Point-in-time checks do not lock concurrent editors or provide crash recovery.",
+    "results": "Initial8 actual controls:7fail/1pass in4.36s. Added same-length source cache control fails1 in1.17s; shared restoration now purges test/source bytecode. Final12 new methods and focused6-module group:50pass in28.81s. Expanded58-module group:908pass/2previously observed failures in146.27s (registry count and newly included legacy discovery-contract test). No existing assertion weakened; no new regression node."
+  },
+  "crossfile_inventory_execution_boundary_reuse_followup": {
+    "discovery": "software_repair_crossfile_choreograph_v1 only imports three modules and emits verified/choreography_verified=True without invoking them or touching source. Registry expects output_verified=True, so local dispatch accepts report publication as cross-file execution. Existing composition_inventory_v1 already distinguishes diagnostic inventory from work and prior four wrappers use it. Real cross-file planner and native repair delivery exist separately.",
+    "intent": "Expand existing inventory-negative matrix to this wrapper, then reuse write_inventory_report and require verified=True at registry execution expectation (which this inventory cannot satisfy). Preserve availability diagnostics, explicitly mark choreography unperformed, protect declared source aliases using existing check_report, and retain real planner/delivery controls. Do not build another orchestrator or fabricate stage receipts.",
+    "acceptance": "Availability and caller success flags cannot certify choreography; direct report is valid diagnostics but unverified work; local dispatch and live composition refuse success. Report cannot overwrite registry or declared source via aliases. Existing actual planner and native two-package delivery still function.",
+    "limits": "This closes false task certification, not implementing a new choreography executor. Historical registration receipts are not replaced with invented verification or terminal credit.",
+    "local_results": "10FAIL/3PASS baseline0.58s ->23 focusedPASS5.83s; 60-module929PASS/3FAIL143.18s (two existing broad failures plus newly included planner exact-alias-list pin);119model/compilerPASS43.74s,4warnings. No original assertion weakened."
+  },
+  "rename_execution_safety_reuse_followup": {
+    "discovery": "Existing python_refactor_rename_symbol already implements real binding-aware cross-file edits and pytest verification. It publishes with write_bytes and only rolls back a nonzero test return code; timeout, launch failure and later report publication errors leave edits. Existing native delivery exposes owned atomic writes, exact restoration/readback and supervised bounded test execution.",
+    "intent": "Reproduce actual timeout, launch error, green-test source corruption, report failure and source/report alias cases. Reuse native delivery primitives in the existing rename adapter, including post-verification byte/mode checking. Preserve existing semantic planner and public rename behavior; add no capability or executor.",
+    "limits": "Owned phase-boundary rollback/readback, not crash-safe multi-file transaction, hostile sandbox or complete dependency-closure integrity.",
+    "local_results": "Initial6 controls5FAIL1PASS2.00s; final8 new methods within4-module33PASS3.61s;63-module958PASS3FAIL156.21s (same previous three failing nodes);119model/compilerPASS49.43s4warnings."
+  },
+  "parameter_refactor_execution_safety_reuse_followup": {
+    "discovery": "Parameter rename already implements cross-file keyword propagation, but uses direct publication interleaved with splice validation and raw subprocess.run. Native verified delivery and the now-hardened symbol rename already provide owned atomic publication, supervised bounded execution, exact rollback and readback.",
+    "intent": "Reuse existing real-execution safety tests for parameter rename, add genuine late-span-refusal control, and wire existing native primitives into this executor. Plan every splice before publication; preserve parameter scope/callsite logic and artifact contracts. No new framework, capability or dependency.",
+    "limits": "Phase-boundary safety for declared Python source; not complete acceptance-oracle integrity, hostile sandbox, concurrent-editor coordination or crash-safe whole-tree transactions.",
+    "local_results": "9 real controls:7FAIL2PASS2.59s ->33PASS5.43s across3focused modules.64-module967PASS3FAIL162.73s retains previous failure nodes.119model/compilerPASS51.04s4warnings."
+  },
+  "parameter_utf8_span_reuse_followup": {
+    "discovery": "Existing patch-search _byte_offset already uses UTF-8 byte lines, matching AST columns. Parameter rename instead indexes decoded text with AST byte columns. Its existing precomputed prefix table can retain linear construction while adopting that byte-coordinate convention; no extra parser/library needed.",
+    "intent": "Add actual cross-file pytest controls for multibyte prefixes/names, descending same-line edits, CRLF/no final newline and Unicode separators inside literals. Reuse existing byte-line offset convention in the current splice loop. Keep exact preimage guards and staging before publication. Replace now-valid Unicode refusal fixture with a real unsupported NFKC-normalized spelling to retain late-span refusal coverage; do not suppress any assertion.",
+    "limits": "UTF-8 parameter spans only; not claiming all encodings, normalized-spelling support, other refactor adapters or architectural delivery.",
+    "local_results": "5 actual Unicode controls5FAIL0.28s ->30focusedPASS3.97s;57affected refactor/routing/compositionPASS9.51s;119model/compilerPASS50.22s4warnings. Previous broader suite not rerun; no full-suite-green claim."
+  },
+  "symbol_utf8_span_reuse_followup": {
+    "discovery": "Symbol rename mixes AST byte coordinates with character-indexed splice lines, searched definition/import columns, and receiver lengths. Parameter rename and patch-search already establish the UTF-8 byte-coordinate convention.",
+    "intent": "Add actual cross-file pytest cases for Unicode prefixes/names/aliases/classes, CRLF and Unicode line separators, plus normalized-spelling refusal. Reuse the byte-line convention in symbol splicing, convert searched columns and receiver widths to bytes, keep Unicode character boundary guards and existing staging/rollback. No new executor/library/capability.",
+    "limits": "UTF-8 symbol-refactor spans; not arbitrary encodings, all normalized spellings, dynamic binding completeness or other refactor adapters.",
+    "local_results": "Initial7 controls5FAIL2PASS0.55s. Final9 new controls within8-module symbol/parameter regression72PASS9.16s. No original test assertion changed. Previous broad/model-compiler suites not rerun for isolated coordinate change."
+  },
+  "replacement_identifier_normalization_reuse_followup": {
+    "discovery": "Both rename adapters compare requested replacement strings against AST bindings, but Python normalizes identifiers to NFKC. Existing stdlib unicodedata.normalize is already reused throughout Brain. A requested \u212a can bypass a collision check against K, or fullwidth keywords can become invalid when emitted canonically.",
+    "intent": "Reproduce replacement-name collision and canonical-output cases using actual rename adapters; normalize replacement names with stdlib NFKC before existing identifier/keyword/collision checks. Reuse existing delivery guards and real pytest tests. Canonical replacement is reported and emitted; no new framework, dependency or capability.",
+    "limits": "Replacement operands only; not universal normalized source spelling support or complete binding/collision analysis.",
+    "local_results": "Five actual controls5FAIL0.63s -> nine-module77PASS9.76s. No existing assertions weakened. Targeted refactor validation only; broader/model-compiler groups not rerun."
+  },
+  "crossfile_workflow_execution_reuse_followup": {
+    "discovery": "Existing AST index, cached cross-file planner, change-impact selector, binding-aware rename executor and supervised runner already implement the required stages. Prior work mostly measured them separately.",
+    "intent": "Add an integration regression chaining these real adapters on a three-package owned project. Prove selected-tests dataflow, actual source publication, fresh-interpreter/full-suite acceptance, stale-cache refusal/reindex, and rollback with original-cache reuse after an actual red gate. Add no runtime executor or capability.",
+    "limits": "Constructed deterministic integration fixture, not unfamiliar external repository, autonomous workflow planning, architectural feature delivery benchmark or independent acceptance.",
+    "local_results": "Three real workflow controls within five-module30PASS2.81s. All runtime stages already present; test initially expected wrong stale-planner exception, corrected to exact public SystemExit/JSON contract. No production engine or capability change; no unfamiliar-project/architectural benchmark claim."
+  },
+  "external_boltons_execution_probe_followup": {
+    "discovery": "Prior integration proves direct stage interoperability only on a constructed fixture. Fetch pinned BSD-licensed boltons d31d821d56c8f7756af9c30a864077f2e5855321 into ignored tmp; existing index/planner/selector/rename/runner can be evaluated without installing dependencies or adding runtime code.",
+    "intent": "Establish upstream iterutils test baseline; attempt bounded public API rename chunked->partitioned using existing Brain stages. Save source manifests, exact inputs/results and fresh-interpreter behavioral checks. Keep upstream tests/harness as shipped except legitimate engine-produced refactor edits. Report refusals honestly; do not bypass unsupported inputs or claim autonomous task selection.",
+    "limits": "One selected external-project refactor, not SWE benchmark, general architectural delivery or independently verified acceptance. No third-party source committed.",
+    "local_results": "Pinned external66-file AST index; baseline/post iterutils58PASS;29of30 test files selected; real rename passes narrow gate and fresh behavior but3target doctest examples fail, task not accepted. Existing doctest gate:657PASS baseline ->1FAIL656PASS rename -> full Python restoration/no success report ->657PASS after rollback. New local gate regression within10-module81PASS11.54s. No new production engine/dependency.",
+    "workspace_hygiene": "Upstream-only guard violations exposed that external checkouts must be outside Brain source tree. Moved probe unchanged to /home/user/brain-external-probes/boltons-d31d821-probe; did not alter tests or guard."
+  },
+  "external_boltons_completed_staging_reuse_followup": {
+    "discovery": "Existing semantic rename intentionally preserves strings. Existing file_write_text verified writer, AST source spans, patch-search byte-offset helper, stdlib staging and pytest doctest acceptance suffice to complete the prior bounded external task without modifying that semantic contract.",
+    "intent": "Stage a copy of pristine pinned boltons outside Brain; execute existing code rename, update only three old-name call prompts inside target function docstring via existing verified text writer, then run frozen657-test/doctest acceptance plus fresh behavior. Keep original workspace untouched; add local integration regression. No runtime engine, capability or dependency.",
+    "limits": "Operator-directed staged workflow for the previously declared bounded API/doc-example task. Not autonomous selection, whole-project documentation migration, independent verification, hostile sandbox or crash-safe publication.",
+    "local_results": "External clean stage657PASS baseline, semantic rename plus3target prompt updates, frozen657PASS final2.18s, fresh behaviorPASS, exact2nonreportfileschanged, original workspace unchanged. Copied-bytecode baseline counterexample2FAIL655PASS resolved by excluding caches during staging. Local10-module82PASS12.00s; no production runtime change."
+  },
+  "request_identifier_binding_reuse_followup": {
+    "discovery": "On pinned external boltons, actual goal_front_compiler selects rename_symbol but binds requested r\u00e9sultat as r and compute_\u96ea as compute_. Backend Unicode support already exists. Existing front replacement and declared rename grammar use ASCII prefix patterns.",
+    "intent": "Add public-front and declared-input regression controls. Preserve complete replacement token then validate with existing Python str.isidentifier instead of accepting ASCII prefixes. Keep ambiguity refusal and exact request evidence; reuse backend normalization. No new parser/framework/capability.",
+    "limits": "Identifier binding only; not autonomous workflow/acceptance selection, source-root widening or full architectural delivery.",
+    "local_results": "Initial5methods5FAIL0.40s ->final8methods within7-module64PASS11.99s, including actual compiled-operand Unicode execution and fresh interpreter.119model/compilerPASS50.78s4warnings. No original assertion weakened."
+  },
+  "parameter_binding_capture_reuse_followup": {
+    "discovery": "Parameter rename checks other parameters but not existing local/import/exception bindings or nested capture of renamed closure references. Existing _binds_name is shallow AST analysis; CPython stdlib symtable already provides compiler-resolved binding categories and lexical child scopes.",
+    "intent": "Reproduce replacement capture on actual refactors, then reuse symtable to reject target-scope name capture and descendant capture where old parameter is free. Preserve unrelated nested scopes and existing NEW_PARAM_ALREADY_PRESENT semantics. Add actual pytest positives, no new capability/dependency/framework.",
+    "limits": "Replacement capture preflight, not complete old-name scope rewrite correctness, all Python versions, arbitrary encodings or semantic acceptance.",
+    "local_results": "Initial12 actual controls10FAIL2PASS0.72s ->13new methods within12-module103PASS14.16s. Compiler symtable reuse; original assertions unchanged. No new dependency or capability. Broader/model-compiler suites not rerun."
+  },
+  "external_strict_chunk_feature_reuse_followup": {
+    "discovery": "Existing request acceptance compiler supports exact bounded grammar, not general autonomous feature planning. Existing boltons iterator/chunk wrapper, verified writer, clean staging and supervised pytest/doctest runner suffice for a real behavior change. CPython3.13 itertools.batched strict contract provides established lazy incomplete-batch semantics.",
+    "intent": "On isolated pristine pinned boltons, add opt-in strict chunk validation while default behavior remains unchanged. Freeze external acceptance tests before editing, reproduce failure, update only iterutils implementation/docstrings, run fixed upstream+doctest+feature acceptance and fresh interpreter checks. No Brain runtime engine/dependency or capability registration.",
+    "source": "https://github.com/python/cpython/blob/3.13/Doc/library/itertools.rst",
+    "contract": "strict=True rejects partial final chunks lazily; empty/exact inputs succeed; chunked wrapper forwards option; explicit fill+strict is rejected; default/fill/non-strict behavior preserved.",
+    "limits": "Operator-selected/designed bounded external feature evaluation, not autonomous natural-language synthesis or independent acceptance.",
+    "local_results": "External original657PASS; frozen14new cases12FAIL2PASS; candidate671PASS3.13s including docs; fresh behaviorPASS; exact1projectfilechanged; original/oracle unchanged. Existing writer/runner/AST spans and CPython strict-batching semantics reused; no Brain runtime implementation change."
+  },
+  "existing_solution_contract_audit_followup": {
+    "intent": "Resolve three reproduced historical failures by tracing existing runtime and registry contracts; no new runtime engines, registry edits, or helper substitution. Correct obsolete tests openly with behavioral/mutation-sensitive assertions.",
+    "baseline": "Exact three historical nodes:3FAIL0.99s. All three misstate existing implementation: shared corpus discovery, already-declared crossfile effect alias, numerical blast-radius count.",
+    "planned_checks": [
+      "Keep exact unique typed-scalar owner assertion; replace population threshold with live admission probes using every unrelated unmet requirement, plus typed refusal control.",
+      "Replace absent-argument refusal with actual discovered repair, unchanged oracle, fresh-process success; add truly absent corpus exact refusal/no writes.",
+      "Keep exact crossfile provides equality, enumerate both existing aliases; other registry fields remain strict."
+    ],
+    "limits": "Corrected tests are producer-authored, not independent verification; broad initial three-module run timed out and did not yield a complete result. No all-problems-solved or global-green claim.",
+    "local_results": "Existing implementations resolved all3historical stale contract tests after explicit corrections;4focusedPASS1.07s and4modules388PASS60.16s. No runtime/registry/harness change; not independent/full-suite verification."
+  },
+  "oracle_execution_truth_followup": {
+    "intent": "Reuse shared inventory reporting and concrete contract oracle to remove reproduced false verification in CEGIS loop, synthesis wrapper and Hypothesis oracle. No acquisition/new capability.",
+    "baseline": "Loopbudget0verifiedtrue; default synthesis passfalse NEW_PRIMITIVE_REQUIRED verifiedtrue; invalidPython with unavailableHypothesis checked13verifiedtrue.",
+    "scope": "Loop remains inventory until real task execution exists. Architecture synthesis remains candidate-only, never verified patch. Hypothesis fallback must execute real declared contract checks, report actual counts, and remain unverified when requested backend unavailable.",
+    "limits": "Existing trusted-source execution not upgraded into security sandbox. New tests producer-authored. Hypothesis installed path requires separate execution if dependency unavailable.",
+    "local_results": "5modules50PASS55subtests2.86s withHypothesis;12unittestPASS0.007s withoutHypothesis; noexistingassertionschanged. Three wrappers fixed by shared existing inventory/oracle/report mechanisms."
+  },
+  "discovered_acceptance_corpus_followup": {
+    "intent": "Discover and exercise existing measured/semantic controller command derivation and acceptance; preserve controls without redundant runtime changes.",
+    "corrected_probe_interpretation": "test_count0 for bare script assertions was not zero execution: existing argv_or_derived already derives suite from targetless argv. Initial inferred runtime defect disproved.",
+    "result": "6new regression methods within4modules41PASS7.42s; positive measured/semantic candidate acceptance, explicit failure, missing corpus, unsupported obligations and unchanged source/oracle controls. No production changes.",
+    "limits": "Operator-authored bounded fixtures, not independent or autonomous architectural-delivery evidence; bare script counting limitation remains."
+  },
+  "script_count_measurement_reuse_followup": {
+    "intent": "Reuse existing unittest FunctionTestCase for script-oracle completion accounting in production shared runner; repository measurement aggregates all emitted suite summaries. No acceptance weakening, no fixture loader substitutions.",
+    "scope": "Each script oracle counts as one test case, not one per assertion; preserve failures, traces, exit behavior and empty-suite refusal. Test before patch.",
+    "limits": "Counts are diagnostic parsed output, not tamper-proof coverage/independent evidence; precollection/import failures may still lack counted case.",
+    "local_results": "Initial7cases6FAIL1PASS1.23s; final8new methods within7modules87PASS18.91s, original assertions unchanged. Includes actual semantic repair candidate acceptance with script counted1 and original bytes preserved."
+  },
+  "native_concurrency_reuse_followup": {
+    "intent": "Isolated evaluation of existing content-addressed Brain repository measurement and supervised Python test runner on a real pinned native concurrent queue library. Reuse g++ and UBSan, no native engine invented.",
+    "contract": "Compile actual upstream SPSCQueue header with unchanged MIT license, execute two-thread FIFO stress over wraparound capacities and move-only object lifetime; freeze harness before running; use deliberately corrupt FIFO and undefined-overflow controls.",
+    "provenance": "rigtorp/SPSCQueue commit59a6a938513ea5004817383711ed35d32385d3ee via GitHub API",
+    "limits": "Operator-authored integration evaluation, not new feature, autonomous concurrency design, race-freedom proof, upstream full suite, throughput comparison, or hostile-code sandbox.",
+    "local_results": "Pinned external native header + operator-authored harness:6PASS including2negativecontrols,200000FIFO transfers/profile optimized+UBSan, lifetime checksPASS,2.657678s measurement, original4filemanifest unchanged. Brain measurement/runner2modules45PASS10.29s. No new engine."
+  },
+  "broad_swe_integration_rerun_followup": {
+    "intent": "Rerun original64-module operational group plus7additional existing regression modules against real current tree; use managed process and JUnit. Diagnose actual failures before adding runtime mechanisms.",
+    "scope": "71selectedmodules, not whole repository, no external/native reexecution or autonomous-delivery claim.",
+    "policy": "No test assertions weakened or harness/loader changes; preserve test/source hashes; resolve missing environment dependencies from declared requirements as appropriate.",
+    "local_results": "71selectedmodules1036PASS237subtests185.44s; JUnit1273casesincluding237subtests,0errors0failures0skips. Current real-tree broader validation, no runtime/test assertion/dependency/harness changes in this followup."
+  },
+  "security_finding_span_reuse_followup": {
+    "intent": "Reuse real Bandit finding line_range in existing diff security gate; prevent high-severity multiline argument edit misclassified preexisting. Freeze real-analyzer controls before patch; preserve unrelated finding advisory policy.",
+    "baseline_probe": "Bandit1.9.4 B602 HIGH/HIGH anchorline5 span[3,4,5,6], literalcommand changed to callerparameter atline4; gate PASS verifiedtrue with0blockers. Direct shellFalse\u2192True control already correctly FAIL.",
+    "scope": "Changed statement span review, conservative not proof of vulnerability introduction. No new security engine. Bandit installed only in ephemeral venv for existing optional backend.",
+    "limits": "Static analyzer triage, not sandbox/taint completeness/independent security audit; previous broad71module result predates patch.",
+    "local_results": "Reproduced bypass1FAIL4PASS1.95s; reuse existing Bandit span metadata fixes it. Final4modules43PASS8.31s no skips with actual Bandit1.9.4/Ruff; no existing assertions changed."
+  },
+  "security_review_input_identity_reuse_followup": {
+    "intent": "Reuse shared write-authority identity preflight in direct security review adapter; reviewed tree/diff cannot be overwritten by diagnostic aliases. Confine diff-selected paths to worktree before reading/analyzing them.",
+    "baseline": "Direct real gate call output_path=wt/m.py overwrote source with JSON and returned PASS output_verifiedtrue.",
+    "contract": "Refuse source/diff samepath, symlink, hardlink and existing worktree-file report targets before tool launch; preserve ordinary fresh reports, replay outside tree, changedfinding behavior.",
+    "limits": "Direct adapter boundary; frontdoor already has separate protections. Not a whole review-gate audit or crash/concurrency guarantee.",
+    "local_results": "10newcontrols baseline9FAIL1PASS2.57s; final5modules53PASS9.60s. Shared input identity and resolved worktree containment reused. No existing assertions modified."
+  },
+  "shared_review_identity_preflight_reuse_followup": {
+    "intent": "Test same report/input identity and worktree containment law across Ruff, mypy, Bandit direct adapters; reuse existing write_authority with one shared review preflight, not copied guards. Freeze cross-adapter controls before runtime changes.",
+    "scope": "Three static review adapters only, not coverage/mutation/performance gates or all source publication.",
+    "limits": "Preflight not concurrent filesystem isolation; direct adapter boundary not frontdoor bypass. No assertion weakening or new registry capability.",
+    "local_results": "Cross-adapter baseline18FAIL12PASS0.98s; shared existing write-authority preflight now handles3adapters. Final8modules103PASS4subtests20.16s no skips using Ruff/mypy/Bandit. Existing assertions unchanged."
+  },
+  "executable_json_contract_identity_reuse_followup": {
+    "intent": "Trace existing executable behavior compiler versus acceptance union; before any automatic integration correct reproduced Python bool/int equality coercion in generated JSON/boolean checks. Preserve numeric JSON equality, reject non-JSON equality spoofing and recursive boolean coercion. Tests frozen before change.",
+    "baseline": "Actual rendered programs accepted mustbetrue from integer1 and mustbefalse from integer0, coverage_complete true and process exit0.",
+    "scope": "Existing generated acceptance checker only; no union route, new engine, synthesis, independent verification or general NL completeness claim.",
+    "local_results": "Generated-checker baseline17cases10FAIL7PASS0.90s; final5modules63PASS6.90s via actual repository measurement/fresh process; exact typed booleans and recursive JSON checks preserve valid controls. Existing assertions unchanged; no union integration."
+  },
+  "generated_acceptance_execution_binding_reuse_followup": {
+    "intent": "Use existing generated checker and bounded runner to test optimization-independent verdicts and actual candidate module origin. Replace removable generated assertions with explicit refusal; compare imported __file__ with already-proven local candidate path. No union integration.",
+    "baseline": "Actual -O wrongboolean program exited0 with passmarker. Actual localos.py wrongfspath function was ignored in favor of preloadedstdlibos and checker exited0. Initialjson.py collision refused during import; not counted as falseacceptance.",
+    "limits": "Generated trusted-source checker, not sandbox/attested hostile-code verifier. Module name collisions may now conservatively refuse rather than reload candidate. No existing test assertion changes.",
+    "local_results": "33frozen controls11FAIL22PASS3.09s -> sixmodules105PASS10.91s; final current-tree80modules1191PASS237subtests213.57s, no errors/failures/skips. 42new tests, no existing assertion changes."
+  },
+  "public_delivery_measured_acceptance_chain_reuse_followup": {
+    "intent": "Reuse existing public delivery, native tests, snapshot measurements and acceptance union in an explicit composed integration evaluation. No new runtime engine or automatic acceptance route.",
+    "local_results": "7modules55PASS7subtests30.94s; newcheckout task repairs2modules, frozen25case matrix, declaredcontractaccepted,3negativecontrolsrefuse. Producer-authored; no independent/benchmark credit."
+  },
+  "existing_automatic_semantic_repair_chain_reuse_followup": {
+    "intent": "Discover and exercise existing automatic repair/measurement/acceptance controller instead of new composer; preserve original source and explicit acceptance/publication distinction.",
+    "local_results": "4new composition cases pass in 5module run32PASS1FAIL5subtests15.33s. Existing shallow-delegator binder regression remains open; no assertion weakening or runtime change."
+  },
+  "competing_path_role_fallback_reuse_followup": {
+    "intent": "Reuse existing most-recent path-role parser to exclude explicitly competing role files from plural list fallback before earlier keys can consume them. Preserve explicit source/test bindings and template-order invariance. Empty source_paths delegates existing imported-source localization, not guessed files. Freeze regression before runtime edit.",
+    "scope": "Existing goal compiler only; no registry/engine/dependency or acceptance/publication changes.",
+    "local_results": "Corrected baseline7FAIL15PASS2subtests0.64s -> focused8modules59PASS9subtests18.44s; expandedcurrent-tree84modules1218PASS242subtests208.82s, no failures/errors/skips. Existing shallow-delegator failure resolved without assertion changes."
+  },
+  "candidate_argv_directory_relocation_reuse_followup": {
+    "intent": "Reuse existing _candidate_test_layout path relocation for existing source-local directories as well as files, preserving argv order, outside paths and nonpath tokens. Freeze full semantic-controller and helper regressions before edit.",
+    "discovery": "Original -s tests probe assumed source-root cwd but repair uses repo cwd; invalid original command. Correct -s candidate/tests repairs pair but measured copied candidate fails because directory argv token not relocated. No new engine or command grammar.",
+    "local_results": "7frozen cases5FAIL2PASS3.47s -> 11affected modules96PASS7subtests40.85s. Both explicit relative/absolute discovery now measure copied candidate; originals preserved; no existing assertion changes."
+  },
+  "single_candidate_execution_reuse_followup": {
+    "intent": "Eliminate duplicate single-candidate search execution by retaining earliest passing candidate during existing scoring pass. Preserve complete single score table, pair search order, two actual final replays and restoration. Real candidate runner wrapped for counts only; no fabricated results or cross-request cache.",
+    "local_results": "3frozen cases3FAIL6.99s ->7modules51PASS4subtests22.92s. Actual single execution counts32->16 for paired/unsuccessful search,19->18single success; complete scores, two actual final replays and source restoration retained."
+  },
+  "accepted_candidate_delivery_identity_reuse_followup": {
+    "intent": "Discover/reuse existing acceptance and public delivery with whole-tree content identity and fresh final acceptance. Add composed integration evidence without claiming an atomic publication API.",
+    "local_results": "6modules24PASS9subtests26.36s; accepted snapshot equals published snapshot; fresh final acceptance passes; stale receipt and forbidden config mutation refuse. No runtime change."
+  },
+  "current_swe_transaction_integration_reuse_followup": {
+    "intent": "Rerun accumulated current-tree engineering integration with existing canonical transaction/attestation/epoch contract tests. Reuse existing mechanisms; no runtime changes.",
+    "local_results": "93modules1262PASS244subtests214.52s;1506JUnitcases0errors/failures/skips. Selected local evidence only; authored verifier fixture IDs are not actual independent verification."
+  },
+  "sqlite_migration_concurrent_recovery_reuse_followup": {
+    "intent": "Discover existing DB mechanisms and reuse established migration/transaction infrastructure in real process evaluation through existing Brain writer/measurement. No new runtime or migration engine.",
+    "local_results": "External7PASS0.330551s, source snapshot unchanged;4processes160unique requests each twice; real before/aftercommit abrupt exits and non-atomic negative control. Runner2modules22PASS4.43s. Producer-authored bounded evaluation, no independent/capability credit."
+  },
+  "existing_kernel_confinement_discovery_reuse_followup": {
+    "intent": "Execute existing confine_v1 with real namespace/chroot/filesystem/network/resource controls. Correct execute_v1 availability diagnostic to consult existing backend syscall probe instead of infer from binary presence. No new sandbox or automatic routing.",
+    "baseline": "Real confine backend availableTrue; projectwrite persists; four kernel tests pass. execute_v1 diagnostic confinementFalse despite backend availableTrue.",
+    "local_results": "5new tests baseline1FAIL4PASS5subtests0.91s ->4modules21PASS5subtests7.89s no skips; real existing namespace/chroot backend works, diagnostic corrected. No automatic sandbox routing/security certification."
+  },
+  "confined_environment_policy_reuse_followup": {
+    "intent": "Reuse zero_ambient_namespace_launcher_v1 explicit environment allowlist/validation in shared minimal environment helper; remove ambient inheritance from existing confine_v1 availability and workload bootstrap subprocesses. Freeze real kernel sentinel tests before runtime change.",
+    "baseline": "Real confined program exitedOK with confinedTrue networkFalse and synthetic secret sentinel visibleTrue. No real credentials printed or inspected.",
+    "scope": "Existing confinement backend and shared existing environment policy only; no automatic sandbox routing or claim escape-proof sandbox.",
+    "local_results": "5frozen kernel cases5FAIL0.94s ->focused5modules32PASS5subtests8.57s no skips;11newcases. Broader strict launcher attempt22PASS4FAIL5subtests8.70s due missing chroot executable; retained failures, no harness weakening."
+  },
+  "strict_launcher_system_path_reuse_followup": {
+    "intent": "Use installed system primitives independent of caller PATH. Resolve strict-launcher tools against fixed system bin/sbin directories and give namespace setup same explicit PATH. No new sandbox/binary installation/fake tools. Freeze real namespace tests under restricted/empty caller PATH before edit.",
+    "baseline": "chroot exists at /usr/sbin/chroot; prior HOST_PRIMITIVE_MISSING was PATH omission, not absent binary. Existing strict launcher5unittestcases pass with PATH expanded,0.473s. Correct prior assessment.",
+    "local_results": "3newcases3FAIL0.41s ->6modules35PASS5subtests9.90s no skips. Prior4strict-launcher failures resolved by installed tool discovery, no fake tooling/assertion weakening."
+  }
+}

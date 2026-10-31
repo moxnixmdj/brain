@@ -362,10 +362,19 @@ def ground(
     all_candidates=set()
     provider_slots={}
     prior_paths=[]
+    ready_statuses={"GROUNDED","AMBIGUOUS_BOUNDED"}
     for index,clause in enumerate(clauses):
         text=clause["text"]
         ranked=[]
+        named=[]
+        if enforce_bindability:
+            from canonical.runtime import goal_front_compiler_v1 as front
+            named=front.explicitly_named_capabilities(text,registry)
         for cid,entry in sorted(registry.items()):
+            # Exact caller-selected tools are not invitations to substitute
+            # semantically similar tools with different effects.
+            if named and cid not in named:
+                continue
             if not _verified_zero_spend(entry):
                 continue
             # An executable grounding report must not call an internal
@@ -418,10 +427,26 @@ def ground(
         else:
             kept=[]
 
+        if not kept:
+            status="UNRESOLVED"
+        elif len(kept)>1:
+            status="AMBIGUOUS_BOUNDED"
+        elif enforce_bindability and not bool(
+            (kept[0].get("binding_affordance") or {}).get(
+                "proposal_bindings_cover_all_inputs")
+        ):
+            # The selected capability already reported that the proposed
+            # bindings do not cover its declared inputs. Surfacing GROUNDED
+            # here hands back a confident score for a call that cannot be
+            # made, which is worse than admitting it does not fit.
+            status="UNBOUND_INPUTS_NOT_GROUNDED"
+        else:
+            status="GROUNDED"
+
         for item in kept:
             all_candidates.add(item["capability_id"])
 
-        if enforce_bindability and kept:
+        if enforce_bindability and status in ready_statuses:
             kept_entries=[registry[str(x["capability_id"])] for x in kept]
             if len(kept_entries)==1:
                 slot_effects=[
@@ -452,21 +477,6 @@ def ground(
                     ):
                         prior_paths.append(value)
 
-        if not kept:
-            status="UNRESOLVED"
-        elif len(kept)>1:
-            status="AMBIGUOUS_BOUNDED"
-        elif enforce_bindability and not bool(
-            (kept[0].get("binding_affordance") or {}).get(
-                "proposal_bindings_cover_all_inputs")
-        ):
-            # The selected capability already reported that the proposed
-            # bindings do not cover its declared inputs. Surfacing GROUNDED
-            # here hands back a confident score for a call that cannot be
-            # made, which is worse than admitting it does not fit.
-            status="UNBOUND_INPUTS_NOT_GROUNDED"
-        else:
-            status="GROUNDED"
         output_contract=_output_contract(text)
         records.append({
             "index":index,
@@ -484,8 +494,8 @@ def ground(
             if str(x) not in prior_paths
         )
 
-    grounded=[x for x in records if x["status"]!="UNRESOLVED"]
-    unresolved=[x["index"] for x in records if x["status"]=="UNRESOLVED"]
+    grounded=[x for x in records if x["status"] in ready_statuses]
+    unresolved=[x["index"] for x in records if x["status"] not in ready_statuses]
     canonical_goal=" ".join(str(goal or "").strip().split())
     broad=None
     if records and not grounded and unresolved==list(range(len(records))):

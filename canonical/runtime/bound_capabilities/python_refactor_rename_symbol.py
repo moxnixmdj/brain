@@ -28,13 +28,18 @@ or is imported-as anywhere), REFUSE_NONLOCAL_OR_GLOBAL (an affected
 module declares the old name global/nonlocal),
 SYMBOL_KIND_UNSUPPORTED (locals, params, class assignments),
 ALIAS_BINDING_SAME_NAME, SPAN_INTEGRITY, TESTS_RED_AFTER_EDIT (named
-pytest suite red post-edit -> every byte restored and refuse),
+pytest suite red/timeout/launch failure -> every original byte/mode restored),
+SOURCE_CHANGED_AFTER_VERIFICATION (test execution changed candidate/input bytes),
 SYNTAX_ERROR_IN_FILE, PATH_*.
 
 Verification law: after edits the named pytest suite runs; red restores
 ALL original bytes.  No run_tests named => gate PASS_BLIND,
 verified=false loudly.  Determinism: identical worlds -> byte-identical
 trees and artifacts.
+
+Replacement identifiers are NFKC-normalized like Python AST bindings before
+validation/collision checks; the canonical name is emitted and reported.
+Original-source spans retain exact-preimage guards.
 
 Inputs (kwargs, repo-confined):
   source_root        tree to edit IN PLACE (crown worktree convention)
@@ -58,8 +63,9 @@ import ast
 import hashlib
 import json
 import keyword as pykeyword
-import subprocess
+import stat
 import sys
+import unicodedata
 from pathlib import Path
 
 SCHEMA = "PROJECT_BRAIN_REFACTOR_RENAME_SYMBOL_V1"
@@ -93,7 +99,9 @@ def _splice_file(path: Path, b: bytes, edits, new: str) -> bytes:
     measurement over the POST-edit trees, and the only way to prove that
     measurement can fail is to make a splice not land.
     """
-    lines = b.decode("utf-8").splitlines(keepends=True)
+    # Match AST byte columns; Unicode separators inside literals are not lines.
+    lines = b.splitlines(keepends=True)
+    replacement = new.encode("utf-8")
     out_lines = []
     by_line = {}
     for (ln, col, name) in edits:
@@ -105,18 +113,20 @@ def _splice_file(path: Path, b: bytes, edits, new: str) -> bytes:
         row = raw
         for col, name in sorted(by_line[i], key=lambda e: e[0],
                                 reverse=True):
-            seg = row[col:col + len(name)]
-            if seg != name:
+            token = name.encode("utf-8")
+            seg = row[col:col + len(token)]
+            if seg != token:
                 _fail("SPAN_INTEGRITY:" + f"{path.name}:{i}:{col}")
-            before = row[col - 1] if col > 0 else ""
-            after = row[col + len(name)] if col + len(name) < len(row) else ""
+            # Boundary laws operate on Unicode characters, not single bytes.
+            before = row[:col].decode("utf-8")[-1:]
+            after = row[col + len(token):].decode("utf-8")[:1]
             if before.isalnum() or before == "_":
                 _fail("SPAN_INTEGRITY:left_boundary")
             if after.isalnum() or after == "_":
                 _fail("SPAN_INTEGRITY:right_boundary")
-            row = row[:col] + new + row[col + len(name):]
+            row = row[:col] + replacement + row[col + len(token):]
         out_lines.append(row)
-    return "".join(out_lines).encode("utf-8")
+    return b"".join(out_lines)
 
 
 def _modname_of(rel: str) -> str:
@@ -298,14 +308,14 @@ def _collect_edits_in_scope(node, old: str, new: str, edits: list,
 
 
 def _name_col(line_text: str, keyword: str, name: str) -> int:
-    """Column of `name` in a def/class line: search after the keyword."""
+    """UTF-8 byte column of `name`: search text, then match AST coordinates."""
     idx = line_text.find(keyword)
     if idx < 0:
         _fail("SPAN_INTEGRITY:keyword:" + keyword)
     col = line_text.find(name, idx + len(keyword) + 1)
     if col < 0:
         _fail("SPAN_INTEGRITY:name_span")
-    return col
+    return len(line_text[:col].encode("utf-8"))
 
 
 def run(args, root):
@@ -323,7 +333,8 @@ def run(args, root):
     qualname = str(args.get("qualname") or "").strip()
     if not qualname:
         _fail("SYMBOL_NOT_FOUND:<empty>")
-    new = str(args.get("new_symbol") or "")
+    # Match Python AST binding names before keyword and collision checks.
+    new = unicodedata.normalize("NFKC", str(args.get("new_symbol") or ""))
     if not new.isidentifier() or pykeyword.iskeyword(new):
         _fail("INVALID_IDENTIFIER:new_symbol")
     out_rel = str(args.get("output_path") or "")
@@ -338,6 +349,9 @@ def run(args, root):
                     if "__pycache__" not in p.parts)
     mod_files = _module_files(all_py, src_abs)
     originals = {p: p.read_bytes() for p in all_py}
+    modes = {p: stat.S_IMODE(p.stat().st_mode) for p in all_py}
+    from canonical.runtime.write_authority_v1 import check_report
+    check_report(repo, out_abs, originals)
     parsed = {}
     for path in all_py:
         rel = path.relative_to(src_abs).as_posix()
@@ -413,7 +427,8 @@ def run(args, root):
         """True when an import spelling provably denotes OUR module file."""
         return module_abs in _resolve_module(mod_files, module, level, package)
 
-    def _cross_sites(tree, package, bindings, lines, rel):
+    def _cross_sites(tree, package, bindings, lines, rel, *,
+                     check_new_alias_collisions=True):
         """Provable cross-module references to the old symbol in one file.
 
         File identity (never a dotted-string guess) decides what is ours, so
@@ -434,13 +449,13 @@ def run(args, root):
                                                            package):
                         # import M [as alias]; alias.old(...)
                         edits.append((node.lineno,
-                                      node.col_offset + len(v.id) + 1, old))
+                                      node.col_offset + len(v.id.encode("utf-8")) + 1, old))
                     elif hit and hit[1] is not None and _targets(
                             (hit[0] + "." if hit[0] else "") + hit[1],
                             hit[2], package):
                         # from PKG import M; M.old(...) — M is our module
                         edits.append((node.lineno,
-                                      node.col_offset + len(v.id) + 1, old))
+                                      node.col_offset + len(v.id.encode("utf-8")) + 1, old))
                     elif not hit:
                         unknown.append({"file": rel, "line": node.lineno,
                                         "rule": "unresolvable module receiver"})
@@ -455,7 +470,8 @@ def run(args, root):
                         edits.append((ln, col, old))
                     elif a.name == old and a.asname == old:
                         _fail("ALIAS_BINDING_SAME_NAME:" + str(node.lineno))
-                    elif a.asname == new and a.name != old:
+                    elif (check_new_alias_collisions and a.asname == new
+                          and a.name != old):
                         # another symbol imported AS the new name: after the
                         # rename this module binds `new` to something else
                         # while edited uses spell `new` for ours.
@@ -480,7 +496,7 @@ def run(args, root):
         edits = []
         bindings = _import_table(tree)
         package = _package_of(path, src_abs)
-        lines = originals[path].decode("utf-8").splitlines()
+        lines = [line.decode("utf-8") for line in originals[path].splitlines()]
 
         if path == module_abs:
             # def site (name span resolved from the source line)
@@ -506,7 +522,7 @@ def run(args, root):
                             # self.m / cls.m / Meter.m inside Meter's body all
                             # resolve to THIS method
                             edits.append((nd.lineno, nd.col_offset
-                                          + len(str(v.id)) + 1, old))
+                                          + len(v.id.encode("utf-8")) + 1, old))
                         elif isinstance(v, ast.Call) and isinstance(
                                 v.func, ast.Name) and v.func.id == "super":
                             unknown_sites.append(
@@ -524,7 +540,7 @@ def run(args, root):
                                 and isinstance(nd.value, ast.Name) \
                                 and nd.value.id == cls_name:
                             edits.append((nd.lineno, nd.col_offset
-                                          + len(cls_name) + 1, old))
+                                          + len(cls_name.encode("utf-8")) + 1, old))
             else:
                 scope = ast.Module(body=tree.body, type_ignores=[])
                 _collect_edits_in_scope(scope, old, new, edits,
@@ -570,14 +586,18 @@ def run(args, root):
     for path, b in applied.items():
         post[path] = ast.parse(b.decode("utf-8"), filename=str(path))
     residual = []
+    # Collision preconditions were checked on the original trees. A generated
+    # `from m import new as new` is not a pre-existing competing binding.
+    # Reuse the same reference harvest here, without reapplying that precondition.
     for path, tree in post.items():
         if path == module_abs:
             continue        # same-file law incl. shadowed keeps: see harvest
-        lines = (applied.get(path) or originals[path]).decode(
-            "utf-8").splitlines()
+        lines = [line.decode("utf-8") for line in
+                 (applied.get(path) or originals[path]).splitlines()]
         re_edits, _ = _cross_sites(tree, _package_of(path, src_abs),
                                    _import_table(tree), lines,
-                                   path.relative_to(src_abs).as_posix())
+                                   path.relative_to(src_abs).as_posix(),
+                                   check_new_alias_collisions=False)
         residual.extend((path.relative_to(src_abs).as_posix(), ln)
                         for ln, _col, _name in re_edits)
     if residual:
@@ -585,55 +605,67 @@ def run(args, root):
         _fail("RESIDUAL_REFERENCE:" + ",".join(
             f"{f}:{ln}" for f, ln in residual[:8]))
 
-    for path, b in applied.items():
-        path.write_bytes(b)
+    # Reuse native delivery's owned publication, bounded process lifecycle,
+    # exact restoration and bytecode invalidation instead of a second executor.
+    from canonical.runtime.bound_capabilities import python_repair_apply_verified_v1 as delivery
 
-    gate = "PASS"
-    verified = bool(run_tests)
-    if run_tests:
-        proc = subprocess.run(
-            [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"]
-            + run_tests,
-            cwd=src_abs, capture_output=True, text=True, timeout=timeout_s)
-        if proc.returncode != 0:
-            for path in applied:
-                path.write_bytes(originals[path])
-            tail = "\n".join((proc.stdout + proc.stderr).strip()
-                             .splitlines()[-6:])
-            _fail("TESTS_RED_AFTER_EDIT:" + tail)
-    else:
-        gate = "PASS_BLIND"
+    try:
+        for path, b in applied.items():
+            delivery._atomic_write(path, b, mode=modes[path])
+            delivery._REPAIR._PATCH._purge_source_bytecode(path)
 
-    unknown_sites.sort(key=lambda r: (r["file"], r["line"]))
-    complete = not unknown_sites
-    seen_shadows = {}
-    for s in shadowed_keeps:
-        seen_shadows.setdefault((s["line"], s["scope"], s["rule"]), s)
-    shadowed_rows = [seen_shadows[k] for k in sorted(seen_shadows)]
-    out = {
-        "schema": SCHEMA,
-        "adapter": "python_refactor_rename_symbol",
-        "capability": "python.refactor.rename_symbol.v1",
-        "module": module_rel,
-        "qualname": qualname,
-        "old_symbol": old,
-        "new_symbol": new,
-        "symbol_kind": kind,
-        "edit_count": sum(len(v) for v in per_file_edits.values()),
-        "files_edited": sorted(p.relative_to(src_abs).as_posix()
-                               for p in applied),
-        "unknown_sites": unknown_sites,
-        "shadowed_keeps": shadowed_rows,
-        "gate": gate,
-        "complete": complete,
-        "output_verified": True,
-        "verified": verified,
-    }
-    out_abs.parent.mkdir(parents=True, exist_ok=True)
-    payload = json.dumps(out, indent=1, sort_keys=True, default=list) + "\n"
-    out_abs.write_text(payload, encoding="utf-8")
-    final = dict(out)
-    final["output_path"] = out_rel
-    final["output_sha256"] = _sha256(payload.encode("utf-8"))
+        gate = "PASS"
+        verified = bool(run_tests)
+        if run_tests:
+            rc, output = delivery._run_test(
+                [python_exe, "-m", "pytest", "-q", "-p", "no:cacheprovider"]
+                + run_tests, src_abs, timeout_s)
+            if rc != 0:
+                tail = "\n".join(output.decode("utf-8", errors="replace")
+                                 .strip().splitlines()[-6:])
+                _fail("TESTS_RED_AFTER_EDIT:" + tail)
+        else:
+            gate = "PASS_BLIND"
+
+        changed = [p.relative_to(src_abs).as_posix() for p, original in originals.items()
+                   if not delivery._source_matches(p, applied.get(p, original), modes[p])]
+        if changed:
+            _fail("SOURCE_CHANGED_AFTER_VERIFICATION:" + ",".join(changed))
+
+        unknown_sites.sort(key=lambda r: (r["file"], r["line"]))
+        complete = not unknown_sites
+        seen_shadows = {}
+        for s in shadowed_keeps:
+            seen_shadows.setdefault((s["line"], s["scope"], s["rule"]), s)
+        shadowed_rows = [seen_shadows[k] for k in sorted(seen_shadows)]
+        out = {
+            "schema": SCHEMA,
+            "adapter": "python_refactor_rename_symbol",
+            "capability": "python.refactor.rename_symbol.v1",
+            "module": module_rel,
+            "qualname": qualname,
+            "old_symbol": old,
+            "new_symbol": new,
+            "symbol_kind": kind,
+            "edit_count": sum(len(v) for v in per_file_edits.values()),
+            "files_edited": sorted(p.relative_to(src_abs).as_posix()
+                                   for p in applied),
+            "unknown_sites": unknown_sites,
+            "shadowed_keeps": shadowed_rows,
+            "gate": gate,
+            "complete": complete,
+            "output_verified": True,
+            "verified": verified,
+        }
+        out_abs.parent.mkdir(parents=True, exist_ok=True)
+        payload = json.dumps(out, indent=1, sort_keys=True, default=list) + "\n"
+        report_mode = stat.S_IMODE(out_abs.stat().st_mode) if out_abs.is_file() else 0o644
+        final = dict(out)
+        final["output_path"] = out_rel
+        final["output_sha256"] = _sha256(payload.encode("utf-8"))
+        delivery._atomic_write(out_abs, payload.encode("utf-8"), mode=report_mode)
+    except BaseException:
+        delivery._restore_sources(originals, modes)
+        raise
     print(json.dumps(final, indent=1, sort_keys=True, default=list))
     return final

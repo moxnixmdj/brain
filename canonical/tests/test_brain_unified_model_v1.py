@@ -725,33 +725,13 @@ class DeclaredContextBindingTests(unittest.TestCase):
             for path in (arc, man, src):
                 path.unlink(missing_ok=True)
 
-    def test_the_grounding_verifier_passes_only_when_grounding_found_nothing(self):
-        """A green check from the grounding verifier certifies emptiness, not success.
+    def test_grounding_verifier_rejects_unbound_status_despite_zero_ready_count(self):
+        """Ready counts do not turn an unbound clause into a verified report.
 
-        Measured across all 23 benchmark goals: the producer never emits
-        ``GROUNDED``. It emits ``UNRESOLVED`` (found no candidate),
-        ``UNBOUND_INPUTS_NOT_GROUNDED`` (found exactly one candidate whose
-        proposed bindings do not cover its declared inputs), and -- since the
-        fleet rows landed -- ``AMBIGUOUS_BOUNDED`` at exactly the three goals
-        pinned below, where several zero-input rows match the clause and are
-        all bindable. GROUNDED remains never: re-measured 2026-10-27 against
-        the 37-case landscape (23 benchmark + 14 extended) after the
-        tree-sitter row grew a required ``source_root`` and ``python`` became
-        a generic match token.
-        The verifier's accepted vocabulary is the former plus the two statuses
-        the producer never emits, so the two capabilities line up as:
-
-            verify PASS  <=>  grounded_clause_count == 0
-            grounded >= 1 =>  verify FAIL (STATUS_INVALID)
-
-        That is the opposite of what a passing check looks like from outside.
-        This test pins it so a green grounding verification is never mistaken
-        for a grounded goal, and so the split cannot move unnoticed.
-
-        Widening the verifier to accept ``UNBOUND_INPUTS_NOT_GROUNDED`` would
-        invalidate the ``ACQUIRED_VERIFIED`` receipt that pins this adapter's
-        git blob byte-for-byte (see the next test), which is why the gap is
-        pinned rather than closed here.
+        The producer counts only composer-ready statuses. The unchanged
+        verifier still rejects UNBOUND_INPUTS_NOT_GROUNDED, even though its
+        corrected ready count is zero. Check counts and discovery partition
+        separately from structural verification; none certify task execution.
         """
         producer = "plain_goal.bound_capability.grounding.stdlib"
         verifier = "plain_goal.bound_capability.grounding.verify.stdlib"
@@ -821,21 +801,20 @@ class DeclaredContextBindingTests(unittest.TestCase):
                     passed += 1
                 else:
                     failed += 1
-                # The load-bearing claim: PASS means nothing was grounded.
-                # "Grounded" on this producer means a clause resolved to
-                # exactly one bindable candidate, which AMBIGUOUS is not; the
-                # counter still tallies every non-UNRESOLVED clause, so the
-                # three measured multi-candidate goals read PASS with
-                # count == 1 and are pinned with their cause. Everywhere else
-                # the original equation holds unchanged.
+                # Counters follow ready statuses, not the mere presence of
+                # candidates. The verifier's status contract is independent.
+                ready={"GROUNDED","AMBIGUOUS_BOUNDED"}
+                self.assertEqual(grounded,sum(c.get("status") in ready for c in clauses))
+                self.assertEqual(record["unresolved_clause_indexes"],
+                                 [c["index"] for c in clauses if c.get("status") not in ready])
                 if case["id"] in ambiguous_measured:
                     self.assertIs(ok, True)
                     self.assertEqual(grounded, 1)
                 else:
                     self.assertEqual(
                         ok,
-                        grounded == 0,
-                        f"{case['id']}: verify={ok} but grounded_clause_count={grounded}",
+                        "UNBOUND_INPUTS_NOT_GROUNDED" not in statuses,
+                        f"{case['id']}: verify={ok}, statuses={statuses}, ready={grounded}",
                     )
         finally:
             out.unlink(missing_ok=True)

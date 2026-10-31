@@ -300,13 +300,13 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
                          [], "declared variables were reported as missing")
 
     def test_the_guard_is_scoped_to_the_one_precondition_it_was_written_for(self):
-        """39 entries require an effect nothing provides, and this must not touch them.
+        """Probe scope, not the historical population of unmet registry effects.
 
-        Measured, not assumed: refusing a capability merely for having an
-        unsatisfied `requires` would have broken all 39, because effects like
-        `image.file.available` and `manifest.json.available` are supplied by the
-        GOAL stating a path, not by another capability.  This test is the pin on
-        that blast radius -- widen the guard and it goes red.
+        Effects may be supplied by a goal rather than another capability. The
+        registry has evolved since the original count of 39: a shrinking count
+        does not imply a widened guard. Keep the exact owner assertion and run
+        admission with every unrelated unmet requirement on a bindable probe.
+        No adapter is executed and no registry entry is modified.
         """
         from canonical.runtime import capability_selection_retrieval_v1 as _sel
         import json as _json
@@ -323,14 +323,25 @@ class TestAnOrdinarySentenceYieldsTheCommandItStates(unittest.TestCase):
             cid = e.get("capability_id") or (item[0] if isinstance(item, tuple) else "")
             if [str(x) for x in (e.get("requires") or []) if str(x) not in provided]:
                 unsatisfied.append((cid, [str(x) for x in (e.get("requires") or [])]))
-        self.assertGreater(len(unsatisfied), 30,
-                           "the measured blast radius shrank, so this pin no "
-                           "longer proves anything: %d" % len(unsatisfied))
         scoped = [cid for cid, reqs in unsatisfied
                   if _sel._TYPED_SCALAR_PRECONDITION in reqs]
         self.assertEqual(scoped, ["math.numeric_expression.sympy"],
                          "the guard's precondition is declared by more than the "
                          "one entry it was measured against: %r" % scoped)
+        from canonical.runtime import live_integrated_brain_v1 as _L
+        probe = _L.load_verified_registry()["math.numeric_expression.sympy"]
+        goal = "Evaluate the numeric expression 'plum' and write the result to %s" % (
+            SCRATCH + "/scope-probe.json")
+        for owner, requires in unsatisfied:
+            with self.subTest(requirement_owner=owner):
+                candidate = dict(probe, requires=requires)
+                verdict = _sel.admit(goal, "math.numeric_expression.sympy", candidate, ROOT)
+                if _sel._TYPED_SCALAR_PRECONDITION in requires:
+                    self.assertIs(verdict.get("admitted"), False, verdict)
+                    self.assertEqual(verdict.get("reason"),
+                                     "BINDING_REFUSED:TYPED_SCALAR_INPUTS_UNDECLARED:plum")
+                else:
+                    self.assertIs(verdict.get("admitted"), True, verdict)
 
     def test_the_phrasing_that_once_hijacked_the_binder_now_reaches_its_command(self):
         """Rewritten, not deleted: this test pinned the limitation as permanent.

@@ -347,17 +347,40 @@ def safe_module(name):
     candidates=[p for p in candidates if ROOT in p.parents]
     if len(candidates)!=1:
         raise AssertionError("SEMANTIC_MODULE_NOT_UNIQUE_REPOSITORY_LOCAL:"+str(name))
-    return importlib.import_module(name)
+    mod=importlib.import_module(name)
+    origin=getattr(mod,"__file__",None)
+    if origin is None or pathlib.Path(origin).resolve() not in candidates:
+        raise AssertionError("SEMANTIC_MODULE_ORIGIN_MISMATCH:"+str(name))
+    return mod
+def json_equal(actual,expected):
+    # Python bool subclasses int: plain == accepts 1 as true, even nested.
+    # Restrict to builtin JSON value types before invoking equality, so an
+    # arbitrary object's __eq__ cannot impersonate the requested value.
+    kind=type(expected)
+    if expected is None:
+        return actual is None
+    if kind in (bool,str):
+        return type(actual) is kind and actual==expected
+    if kind in (int,float):
+        return type(actual) in (int,float) and actual==expected
+    if kind is list:
+        return type(actual) is list and len(actual)==len(expected) and all(json_equal(a,b) for a,b in zip(actual,expected))
+    if kind is dict:
+        return (type(actual) is dict and all(type(k) is str for k in actual)
+                and actual.keys()==expected.keys() and all(json_equal(actual[k],v) for k,v in expected.items()))
+    return False
 for cell in CELLS:
     kind=cell["kind"];spec=cell["spec"];cid=cell["cell_id"]
     if kind=="PYTHON_CALL_EQUALS":
         mod=safe_module(spec["module"])
         fn=getattr(mod,spec["function"])
         actual=fn(*spec["args"])
-        assert actual==spec["expected"],cid
+        if not json_equal(actual,spec["expected"]):
+            raise AssertionError(cid)
     elif kind=="PYTHON_CALL_RAISES_BUILTIN":
         exc=getattr(builtins,spec["exception"],None)
-        assert isinstance(exc,type) and issubclass(exc,BaseException),cid
+        if not (isinstance(exc,type) and issubclass(exc,BaseException)):
+            raise AssertionError(cid)
         mod=safe_module(spec["module"])
         fn=getattr(mod,spec["function"])
         try:
@@ -370,14 +393,16 @@ for cell in CELLS:
             raise AssertionError(cid+":EXPECTED_EXCEPTION_NOT_RAISED")
     elif kind=="FILE_TEXT_CONTAINS_EXACT":
         text=safe_path(spec["path"]).read_text(encoding="utf-8")
-        assert spec["text"] in text,cid
+        if spec["text"] not in text:
+            raise AssertionError(cid)
     elif kind in {"PYTHON_TOP_LEVEL_FUNCTION_EXISTS","PYTHON_TOP_LEVEL_CLASS_EXISTS"}:
         tree=ast.parse(safe_path(spec["path"]).read_text(encoding="utf-8"))
         if kind=="PYTHON_TOP_LEVEL_FUNCTION_EXISTS":
             ok=any(isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name==spec["name"] for n in tree.body)
         else:
             ok=any(isinstance(n,ast.ClassDef) and n.name==spec["name"] for n in tree.body)
-        assert ok,cid
+        if not ok:
+            raise AssertionError(cid)
     else:
         raise AssertionError("SEMANTIC_KIND_UNSUPPORTED:"+str(kind))
 print("V9_SEMANTIC_ACCEPTANCE_PASS")

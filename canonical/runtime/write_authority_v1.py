@@ -127,13 +127,21 @@ def is_source_transformer(capability_id: str) -> bool:
     return any(token in low for token in _TRANSFORMERS)
 
 
+def _directory_source_files(source: pathlib.Path):
+    """Only needed for multiply-linked report destinations, not ordinary writes."""
+    for path in source.rglob('*'):
+        if path.suffix.lower() in SOURCE_SUFFIXES and path.is_file():
+            yield path
+
+
 def violation(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -> str | None:
     """Return a refusal reason when this action would overwrite a file it reads.
 
     Four conditions, each READ from the action rather than assumed:
       1. some slot names a destination (``output_path`` and friends);
       2. that destination already exists -- a new file cannot destroy anything;
-      3. it is source, by suffix, and / or it sits inside a path the action also
+      3. it is source by resolved name, containment, or filesystem identity,
+         including a differently named hardlink; and / or it sits inside a path the action also
          hands the capability (a directory contains its files, which is how
          ``source_root`` admits ``utils.py`` without naming it) -- and "a path
          the action also hands the capability" is now READ as *every argument
@@ -161,10 +169,31 @@ def violation(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -
     for dest_slot, dest in destinations:
         if not dest.is_file():
             continue
-        if dest.suffix.lower() not in SOURCE_SUFFIXES:
-            continue
+        code_destination = dest.suffix.lower() in SOURCE_SUFFIXES
+        try:
+            multiply_linked = dest.stat().st_nlink > 1
+        except OSError as exc:
+            raise WriteAuthorityViolation("REPORT_IDENTITY_UNREADABLE") from exc
         for source_slot, source in sources:
-            if source == dest or (source.is_dir() and _inside(dest, source)):
+            directory = source.is_dir()
+            protected = code_destination and (
+                source == dest or (directory and _inside(dest, source)))
+            if not protected:
+                # Reuse the explicit report-role identity check. An extension
+                # change does not change the inode. Normal single-link reports
+                # need no directory traversal; only hardlinks require this scan.
+                candidates = (_directory_source_files(source)
+                              if directory and multiply_linked else
+                              [source] if not directory and
+                              (code_destination or source.suffix.lower() in SOURCE_SUFFIXES)
+                              else [])
+                try:
+                    check_report(root, dest, candidates)
+                except WriteAuthorityViolation as exc:
+                    if not str(exc).startswith("REPORT_OVERWRITES_INPUT:"):
+                        raise
+                    protected = True
+            if protected:
                 return ":".join((
                     "OUTPUT_OVERWRITES_A_STATED_SOURCE",
                     "%s=%s" % (dest_slot, dest.relative_to(root) if _inside(dest, root) else dest),
@@ -205,3 +234,34 @@ def check_report(root: pathlib.Path, destination: Any, inputs: Any) -> None:
             raise WriteAuthorityViolation("REPORT_IDENTITY_UNREADABLE") from exc
         if aliases:
             raise WriteAuthorityViolation("REPORT_OVERWRITES_INPUT:" + str(source))
+
+
+def check_review_inputs(root, worktree, diff, destination, relative_paths, fail):
+    """Shared direct-review preflight, before source reads or tool invocation.
+
+    Reuses report identity checks; only multiply-linked external destinations
+    require a tree scan. This is preflight, not a lock or filesystem sandbox.
+    ``fail`` preserves each adapter's existing named refusal interface.
+    """
+    root = pathlib.Path(root).resolve()
+    worktree = pathlib.Path(worktree).resolve()
+    destination = pathlib.Path(destination).resolve()
+    if not _inside(worktree, root) or not _inside(destination, root):
+        fail("PATH_ESCAPE")
+    check_report(root, destination, [diff])
+    if destination.suffix.lower() in SOURCE_SUFFIXES:
+        raise WriteAuthorityViolation("REPORT_DESTINATION_IS_SOURCE")
+    if destination.is_file():
+        if worktree in destination.parents:
+            check_report(root, destination, [destination])
+        elif destination.stat().st_nlink > 1:
+            check_report(root, destination, (p for p in worktree.rglob('*') if p.is_file()))
+    targets = {}
+    for rel in sorted(relative_paths):
+        target = (worktree / rel).resolve()
+        if worktree not in target.parents:
+            fail("TOUCHED_FILE_OUTSIDE_WORKTREE:" + str(rel))
+        if not target.is_file():
+            fail("TOUCHED_FILE_MISSING_IN_WORKTREE:" + str(rel))
+        targets[rel] = target
+    return targets

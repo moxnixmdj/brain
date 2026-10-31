@@ -249,6 +249,12 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     rules = set(((compiled.get("front_compiler") or {}).get("rules_applied")) or [])
     if "F15_EXPLICIT_CAPABILITY_ID_NAMED" in rules and front.explicitly_named_capabilities(goal, registry) == [selected]:
         return {**base, "admitted": True, "rule": None, "admission_basis": "EXPLICIT_CAPABILITY_ID_IN_GOAL"}
+    # File slots can be filled by an unrelated named file. That proves operand
+    # availability, not that pathname vocabulary states the requested operation.
+    # Enforce the existing path-only rule before typed or margin admissions;
+    # the re-verified explicit-ID route above remains authoritative.
+    if matched and not semantic:
+        return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
     # Typed admission: a capability whose DECLARED argument contract the sentence states completely
     # is not weak path evidence either - the sentence supplies exactly the values this capability
     # consumes, and the pinned binder never guesses (it binds every declared input or refuses).  This
@@ -296,8 +302,6 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
                 "admission_basis": "DECISIVE_LEXICAL_MARGIN",
                 "lexical_margin": verdict.get("lexical_margin"),
                 "margin_runner_up": verdict.get("runner_up")}
-    if matched and not semantic:
-        return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
     if futures and not output_keys:
         return {**base, "admitted": False, "rule": "R2_OUTPUT_ARTIFACT_UNSERVED"}
     if len(semantic) <= 1:
@@ -1084,6 +1088,19 @@ def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: M
             if not _declared:
                 raise
             action = goal_compiler._render_template(_entry["action_template"], _inputs)
+        # A rejected binding is not an executed adapter outcome. Check the
+        # existing authority rule BEFORE imports, local dispatch or controller
+        # fallback so the existing decisive typed retry can safely run. Keep
+        # the lower dispatch-time guard as defense against path changes.
+        from canonical.runtime import write_authority_v1 as _write_authority
+        try:
+            _write_authority.check(ROOT, dict(action.get("args") or {}), selected)
+        except _write_authority.WriteAuthorityViolation as exc:
+            return _fail(task_id, "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
+                         "AN_ACTION_WOULD_OVERWRITE_A_FILE_IT_READS", started,
+                         executed=False, compiled_capability_id=selected,
+                         compiler_mode=compiled.get("compiler_mode"), reason=str(exc),
+                         execution_phase="SINGLE_ACTION_WRITE_PREFLIGHT")
         if kernel_refuses(admissible[selected]):
             return _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
         local_res = _execute_locally(task_id, goal, compiled, admissible[selected], action, raw_contract, started)
@@ -1228,6 +1245,22 @@ _TOOL_NOUNS = ("loop", "search", "tool", "engine", "report", "step", "routine",
                "capability", "pass")
 
 
+def _edit_promise_matches(text: str):
+    """A named operand is not an imperative: 'function add' must stay read-only.
+
+    Keep actual edit verbs elsewhere in the same sentence; e.g. 'Repair the
+    function add' still promises a repair. Apply the same distinction to file
+    and source-root promises rather than weakening the unchanged-source gate.
+    """
+    operands = [m.span(1) for m in re.finditer(
+        r"\b(?:function|method|symbol|class|parameter)\s+(?:named\s+)?"
+        r"([A-Za-z_]\w*)\b", text, re.IGNORECASE)]
+    for match in _EDIT_PROMISE_RE.finditer(text):
+        if not any(start <= match.start() and match.end() <= end
+                   for start, end in operands):
+            yield match
+
+
 def _promised_source_files(goal: str) -> list[str]:
     """Source files the goal asked to have CHANGED, not merely read.
 
@@ -1246,7 +1279,7 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _edit_promise_matches(text):
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -1317,7 +1350,7 @@ def _promised_source_roots(goal: str) -> list[str]:
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _edit_promise_matches(text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -1638,7 +1671,7 @@ def observe_world(goal: str) -> dict[str, Any]:
     from canonical.runtime import execute_v1 as _kernel
 
     stated = _stated_paths(goal)
-    files: dict[str, tuple[int, int]] = {}
+    files: dict[str, tuple[int, ...]] = {}
     walked = []
     for root in _observation_roots(goal):
         try:
@@ -1649,7 +1682,15 @@ def observe_world(goal: str) -> dict[str, Any]:
             continue
         walked.append(str(root.relative_to(ROOT)) if root != ROOT else ".")
         for rel, stat_row in _kernel._snapshot(str(root)).items():
-            files[str(Path(root, rel).relative_to(ROOT))] = stat_row
+            key = str(Path(root, rel).relative_to(ROOT))
+            # chmod changes neither size nor mtime. Observe mode for named
+            # operands too, without widening the existing bounded tree walk.
+            if key in stated:
+                try:
+                    stat_row = (*stat_row, (ROOT / key).stat().st_mode)
+                except OSError:
+                    continue
+            files[key] = stat_row
     parses: dict[str, bool] = {}
     for raw in stated:
         path = ROOT / raw
@@ -1689,6 +1730,25 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
     if result.get("pass") is True:
         promised_file = bool(artifacts) or (
             bool(_CHANGE_VERB_RE.search(str(goal or ""))) and bool(after.get("stated")))
+        if promised_file and not artifacts:
+            # "Remove duplicate lines" may return a filtered answer while
+            # preserving the input. Reuse the inspector's command policy and
+            # the composer's stdout-write declaration, re-derived from the
+            # request rather than trusting a producer's claimed effects.
+            try:
+                from canonical.runtime import raw_goal_trace_acceptance_v1 as accept
+                argv = composer_route.extract_argv(goal)
+                # An explicit "cat" command must not erase an independent
+                # promise to delete/convert a file. The prose must resolve to
+                # the same reader before its verbs can mean an answer only.
+                if (accept.command_is_read_only(argv)
+                        and composer_route._prose_argv(goal) == argv):
+                    declaration = {}
+                    composer_route._declare_a_written_output(declaration, argv, goal)
+                    if not declaration.get("write_stdout_to_output"):
+                        promised_file = False
+            except Exception:
+                pass  # failed classification retains the mutation obligation
         if promised_file:
             present = any((ROOT / a).is_file() for a in (artifacts or []))
             from canonical.runtime import execute_v1 as _kernel
@@ -2057,7 +2117,7 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
         retry_request = dict(request)
         retry_request["_typed_swe_plan"] = plan
         retry = _solve_body(retry_request)
-        if retry.get("pass") is True:
+        if retry.get("pass") is True or retry.get("executed") is True:
             retry["typed_swe_retry"] = {
                 "schema": "SWE_TYPED_RETRY_V1",
                 "primary_status": result.get("status"),
@@ -2107,6 +2167,10 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         # _execute; this branch did not.
         gap_normalized = front.normalize_goal(goal)
         gap_future_artifacts = _future_artifacts(gap_normalized)
+        # Reuse the same pre-execution observation as the primary branch.
+        # Taking this in _close_observations' arguments would compare two
+        # post-execution worlds and reject a successfully performed mutation.
+        gap_world_before = observe_world(gap_normalized)
         # A refusal is terminal unless the sentence states the executable form.
         # This branch used to compose unconditionally, which made it the one
         # place a refusal could be answered by a substitute -- see
@@ -2116,7 +2180,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         if composed is not None:
             return _close_observations(
                 _composed_holds_up(composed, gap_normalized, gap_future_artifacts),
-                gap_normalized, observe_world(gap_normalized), gap_future_artifacts)
+                gap_normalized, gap_world_before, gap_future_artifacts)
         return _fail(task_id, "FAIL__RAW_GOAL_COMPILATION_GAP", "RAW_GOAL_TO_EXECUTABLE_CONTRACT_GAP", started,
                      compiler_code=exc.code, compiler_detail=exc.detail, route_admission=None)
     except Exception as exc:  # pragma: no cover - defensive, mirrors run_raw_goal

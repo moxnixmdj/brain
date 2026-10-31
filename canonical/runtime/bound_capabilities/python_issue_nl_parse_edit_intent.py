@@ -24,8 +24,9 @@ mutes what it cannot see:
 * OUTPUT is `edits`-schema JSON (ops for python_issue_to_pr_orchestrate)
   plus an evidence document; byte-identical on rerun (pin-proven).
 * cache law — index_path may name a validated slice-1 cache artifact
-  (schema + totals + source_root must match or it is refused), giving
-  the same bind decisions without the rebuild cost.
+  (schema, totals, source_root, file membership and source digests must
+  match). Standard repository-relative index paths are normalized to
+  source-relative edit operands, without rebuilding or reparsing a cache.
 
 result_fields: adapter, issue_id, line_count, op_count, refused_line_count,
 bound_name_count, ambiguous_name_count, complete, output_verified,
@@ -38,6 +39,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 SCHEMA = "PROJECT_BRAIN_NL_EDIT_INTENT_V1"
 NAME_RE = re.compile(r"^[A-Za-z_]\w*$")
@@ -102,12 +104,24 @@ def _load_index(repo: Path, source_abs: Path, source_root: str,
         files = int((art.get("totals") or {}).get("files", 0))
         if files <= 0 or not isinstance(art.get("modules"), list):
             _fail("INDEX_CACHE_TOTALS_INVALID")
-        return art, True
-    probe = source_abs / ".nl_intent_probe_index.json"
-    indexer.run({"source_root": ".", "output_path": probe.name}, source_abs)
-    art = json.loads(probe.read_text(encoding="utf-8"))
-    probe.unlink()
-    return art, False
+        try:
+            indexer.validate_cached_index(repo, source_abs, art)
+        except (RuntimeError, OSError) as exc:
+            _fail(str(exc))
+    else:
+        # Own the scratch lifetime. Never overwrite/unlink a caller's fixed
+        # filename inside the source tree, including on a failed index build.
+        with TemporaryDirectory(dir=repo, prefix=".nl_intent_work_") as work:
+            probe = Path(work) / "index.json"
+            indexer.run({"source_root": source_root,
+                         "output_path": probe.relative_to(repo).as_posix()}, repo)
+            art = json.loads(probe.read_text(encoding="utf-8"))
+    # The producer names files relative to the repository; edit operations
+    # name modules relative to source_root. Normalize only after validation,
+    # leaving the cache bytes and its semantic records untouched on disk.
+    for row in art["modules"]:
+        row["path"] = (repo / row["path"]).relative_to(source_abs).as_posix()
+    return art, cached is not None
 
 
 def _homes(index: dict, name: str) -> list[str]:
@@ -369,6 +383,25 @@ def run(args, root):
     cached = None
     if args.get("index_path"):
         cached = _safe_path(repo, str(args["index_path"]), must_exist=True)
+
+    # This adapter parses edits but does not apply them: its destination is
+    # always a report, regardless of the word "edit" in the capability name.
+    from canonical.runtime.write_authority_v1 import (
+        SOURCE_SUFFIXES, WriteAuthorityViolation, check_report,
+    )
+    if out_abs.suffix.lower() in SOURCE_SUFFIXES:
+        _fail("REPORT_DESTINATION_IS_SOURCE")
+    try:
+        check_report(repo, out_abs, [issue_path, source_abs] +
+                     ([cached] if cached is not None else []))
+        # Ordinary reports need no extra source walk. A differently named
+        # hardlink can share a source inode, so reuse the indexer's inventory
+        # only for multiply-linked destinations, before any index construction.
+        if out_abs.is_file() and out_abs.stat().st_nlink > 1:
+            from canonical.runtime.bound_capabilities import python_source_symbol_index as indexer
+            check_report(repo, out_abs, indexer._py_files(source_abs))
+    except (WriteAuthorityViolation, OSError) as exc:
+        _fail(str(exc))
 
     artifact, cache_used = _parse_issue(repo, source_abs, source_root, cached, issue)
 

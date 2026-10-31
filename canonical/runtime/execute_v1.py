@@ -397,49 +397,19 @@ def _check_rejects_broken(check: str, root: str, timeout: int = 60) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# Containment: measured, and not shipped.
-# ---------------------------------------------------------------------------
-#
-# This was attempted and withdrawn, and the reason is worth keeping,
-# because a containment that quietly discards the project's own work is
-# worse than no containment at all.
-#
-# True confinement is unavailable here. Measured, not assumed:
-#
-#   chroot              no binary present
-#   mount -o remount,ro /   permission denied -- the rootfs is locked
-#   bwrap, firejail     not installed
-#   unshare -r -m       works -- uid 0 inside a mount namespace
-#
-# So the only lever is mounting a tmpfs over each writable directory
-# outside the project, making an escape ephemeral rather than prevented.
-# Two things kill it:
-#
-#   IT IS A DENYLIST. It covers the directories named and not the ones
-#   that are not. Reading is unfiltered and no syscall is filtered.
-#
-#   IT COLLIDES WITH THE PROJECT. A project has to live somewhere
-#   writable, and every writable place here is one of the shields. Tested
-#   with the project under /tmp: mounting tmpfs over /tmp hid the project
-#   too, and the program's legitimate write to its OWN project vanished.
-#   A sandbox that eats the work it is supposed to be protecting is not a
-#   sandbox.
-#
-# Doing it properly means mounting tmpfs first and then binding the
-# project in on top, which needs a handle on the original tree. That is
-# real work and it is not justified by anything asked for here, so it is
-# left undone rather than half-done.
-#
-# What IS enforced stays as it was: paths recorded in the before/after
-# diff must resolve inside the project, which catches traversal and
-# symlinks. Everything beyond that is an operating-system job.
+# Confinement availability (diagnostic only).
+# The historical denylist/tmpfs-shield attempt was withdrawn because it hid
+# legitimate project writes. confine_v1 now owns the separate namespace/chroot
+# backend. Binary presence and remounting the host root do not determine whether
+# that backend can run; ask its existing syscall probe. This does not change the
+# unconfined execution path above or automatically enable a sandbox.
 
 
-def confinement_available() -> bool:
-    """Report whether this machine can confine a program at all.
+def confinement_available() -> dict[str, bool]:
+    """Report tool diagnostics and availability of the implemented backend.
 
-    Answering this is useful precisely because the answer is usually no,
-    and a system should know that about itself rather than assume it.
+    Tool presence alone is not evidence that confinement can execute. The
+    namespace/chroot result comes from confine_v1's actual syscall probe.
     """
     what = {}
     for tool in ("chroot", "bwrap", "firejail", "unshare"):
@@ -459,6 +429,7 @@ def confinement_available() -> bool:
             what["can_remount_root_readonly"] = (r.returncode == 0)
     except Exception:
         what["can_remount_root_readonly"] = False
-    what["confinement"] = bool(
-        what.get("chroot") or what.get("bwrap") or what.get("firejail"))
+    from canonical.runtime import confine_v1
+    what["namespace_chroot"] = confine_v1.available()
+    what["confinement"] = what["namespace_chroot"]
     return what

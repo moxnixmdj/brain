@@ -34,8 +34,9 @@ import importlib.util
 import json
 import os
 import pathlib
-import subprocess
+import stat
 import sys
+import tempfile
 from typing import Any, Mapping
 
 SCHEMA="PROJECT_BRAIN_PYTHON_REPAIR_APPLY_VERIFIED_V1"
@@ -73,17 +74,16 @@ MAX_TIMEOUT_S=600
 
 
 def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes]:
-    """Run the stated test command verbatim.  No shell, so nothing is invented."""
+    """Reuse the search runner's owned process lifecycle for in-place gates too."""
     try:
-        proc=subprocess.run(
-            argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
-        )
-    except subprocess.TimeoutExpired:
-        return None,b"TIMEOUT"
+        result=_REPAIR._PATCH._run_tests(cwd,argv,timeout)
     except OSError as exc:
         return None,str(exc).encode("utf-8")[:4096]
-    tail=(proc.stdout or b"")[-2048:]+(proc.stderr or b"")[-2048:]
-    return proc.returncode,tail
+    tail=(result["stdout"].encode("utf-8")[-2048:]
+          +result["stderr"].encode("utf-8")[-2048:])
+    if result["timed_out"]:
+        return None,b"TIMEOUT\n"+tail
+    return result["returncode"],tail
 
 
 def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
@@ -110,14 +110,63 @@ def _base(args:Mapping[str,Any],repo:pathlib.Path)->dict[str,Any]:
     }
 
 
-def _atomic_write(target:pathlib.Path,data:bytes)->None:
-    tmp=target.with_name(target.name+".brain_apply_tmp")
-    tmp.write_bytes(data)
+def _atomic_write(target:pathlib.Path,data:bytes,*,mode:int|None=None)->None:
+    # Reuse the owned temporary-sibling pattern from the repository's atomic
+    # artifact writers. A predictable sibling may already be user work, a
+    # symlink, or a hardlink; never open or remove a path we did not create.
+    if mode is None:
+        mode=stat.S_IMODE(target.stat().st_mode)
+    owned=None
     try:
-        os.replace(tmp,target)
-    except BaseException:
-        tmp.unlink(missing_ok=True)
-        raise
+        with tempfile.NamedTemporaryFile(mode="wb",dir=target.parent,
+                prefix=target.name+".brain_apply_tmp.",delete=False) as tmp:
+            owned=pathlib.Path(tmp.name)
+            tmp.write(data)
+            tmp.flush()
+            # Set permissions before publication, on the owned descriptor when
+            # supported. No transient default-mode source replaces the target.
+            if hasattr(os,"fchmod"):
+                os.fchmod(tmp.fileno(),mode)
+            else:
+                os.chmod(owned,mode)
+        os.replace(owned,target)
+    finally:
+        if owned is not None:
+            owned.unlink(missing_ok=True)
+
+
+
+def _source_matches(target:pathlib.Path,data:bytes,mode:int)->bool:
+    """Exact bounded readback, without following source links or opening FIFOs."""
+    fd=None
+    try:
+        if target.is_symlink():
+            return False
+        fd=os.open(target,os.O_RDONLY|getattr(os,"O_NOFOLLOW",0)|getattr(os,"O_NONBLOCK",0))
+        info=os.fstat(fd)
+        if (not stat.S_ISREG(info.st_mode) or info.st_size!=len(data)
+                or stat.S_IMODE(info.st_mode)!=mode):
+            return False
+        with os.fdopen(fd,"rb",closefd=False) as stream:
+            return stream.read(len(data)+1)==data
+    except OSError:
+        return False
+    finally:
+        if fd is not None:
+            os.close(fd)
+
+
+def _restore_sources(originals:Mapping[pathlib.Path,bytes],modes:Mapping[pathlib.Path,int])->None:
+    # Tests may remove or redirect source paths. Never follow their replacement
+    # during restoration; reuse owned atomic publication with saved permissions.
+    for target,original in originals.items():
+        if not _source_matches(target,original,modes[target]):
+            _atomic_write(target,original,mode=modes[target])
+        # Restored same-length bytes can share the candidate's timestamp second.
+        # Reuse the search engine's invalidation so imports cannot see its .pyc.
+        _REPAIR._PATCH._purge_source_bytecode(target)
+    if not all(_source_matches(p,data,modes[p]) for p,data in originals.items()):
+        raise RepairApplyError("SOURCE_RESTORATION_FAILED")
 
 
 def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
@@ -168,6 +217,14 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not argv:
         raise RepairApplyError("TEST_ARGV_EMPTY")
     output=_safe_output(repo,args.get("output_path"))
+    intermediate=output.parent/(".apply_repair_"+output.name)
+    # Applying a verified patch authorizes that source change, never replacing
+    # source/tests with a JSON report. Reuse the explicit-report identity gate
+    # before tests or search can write either the final or derived report.
+    from canonical.runtime.write_authority_v1 import check_report
+    report_inputs=[*test_paths,*source_root.rglob("*.py")]
+    check_report(repo,output,report_inputs)
+    check_report(repo,intermediate,report_inputs)
     timeout=max(1,min(int(args.get("timeout_s",60)),MAX_TIMEOUT_S))
 
     out=_base(args,repo)
@@ -176,8 +233,23 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     if not rel_tests:
         raise RepairApplyError("TEST_PATHS_OUTSIDE_SOURCE_ROOT")
 
+    # The selected tests are read-only evidence, not repair candidates. Reuse
+    # source readback/restoration for this explicit input role at every phase.
+    test_originals={p:p.read_bytes() for p in test_paths}
+    test_modes={p:stat.S_IMODE(p.stat().st_mode) for p in test_originals}
+
+    def guard_test_inputs():
+        changed=[p for p,data in test_originals.items()
+                 if not _source_matches(p,data,test_modes[p])]
+        if changed:
+            _restore_sources(test_originals,test_modes)
+            raise RepairApplyError("TEST_INPUT_CHANGED:"+",".join(_rel(repo,p) for p in changed))
+
     # GATE 1 -- the stated test must fail on the source as it stands.
-    before_rc,before_tail=_run_test(run_argv,source_root,timeout)
+    try:
+        before_rc,before_tail=_run_test(run_argv,source_root,timeout)
+    finally:
+        guard_test_inputs()
     out["pre_apply_test_returncode"]=before_rc
     if before_rc==0:
         # The sentence asked for the stated test to pass.  It already does, and
@@ -200,20 +272,22 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
 
     # GATE 2 -- a bounded repair must actually be found and verified.  The
     # engine restores the source itself; only its verified patches are used.
-    intermediate=output.parent/(".apply_repair_"+output.name)
-    repair=_REPAIR.run({
-        "source_root":_rel(repo,source_root) if source_root!=repo else ".",
-        "test_paths":[_rel(repo,p) for p in test_paths],
-        "test_argv":argv,
-        "output_path":_rel(repo,intermediate),
-        "timeout_s":timeout,
-        "max_guided_files":args.get("max_guided_files",4),
-        "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
-        "mutations_per_file":args.get("mutations_per_file",24),
-        "max_pair_candidates":args.get("max_pair_candidates",1000),
-        "max_control_files":args.get("max_control_files",12),
-        "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
-    },repo)
+    try:
+        repair=_REPAIR.run({
+            "source_root":_rel(repo,source_root) if source_root!=repo else ".",
+            "test_paths":[_rel(repo,p) for p in test_paths],
+            "test_argv":argv,
+            "output_path":_rel(repo,intermediate),
+            "timeout_s":timeout,
+            "max_guided_files":args.get("max_guided_files",4),
+            "max_guided_symbols_per_file":args.get("max_guided_symbols_per_file",6),
+            "mutations_per_file":args.get("mutations_per_file",24),
+            "max_pair_candidates":args.get("max_pair_candidates",1000),
+            "max_control_files":args.get("max_control_files",12),
+            "max_control_symbols_per_file":args.get("max_control_symbols_per_file",12),
+        },repo)
+    finally:
+        guard_test_inputs()
     patches=repair.get("patches") or []
     out["repair_status"]=repair.get("status")
     if not isinstance(patches,list) or not patches:
@@ -226,6 +300,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
     # before anything touches the tree.
     planned=[]
     originals={}
+    original_modes={}
     for index,row in enumerate(patches):
         if not isinstance(row,Mapping):
             raise RepairApplyError("PATCH_ROW_NOT_OBJECT:"+str(index))
@@ -251,6 +326,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         if _sha(after)!=candidate_sha:
             raise RepairApplyError("PATCH_CANDIDATE_SHA_MISMATCH:"+rel)
         originals[target]=before_bytes
+        original_modes[target]=stat.S_IMODE(target.stat().st_mode)
         planned.append((target,after,rel,diff_text))
 
     # Write.  Every original byte is held so any later gate can put it back.
@@ -263,12 +339,25 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         out["unified_diffs"]=[row[3] for row in planned]
 
         # GATE 4 -- the stated test must pass IN PLACE, on the real tree.
-        after_rc,after_tail=_run_test(run_argv,source_root,timeout)
+        try:
+            after_rc,after_tail=_run_test(run_argv,source_root,timeout)
+        finally:
+            guard_test_inputs()
         out["post_apply_test_returncode"]=after_rc
         out["post_apply_test_tail"]=after_tail.decode("utf-8","replace")[-1024:]
+        changed=[rel for target,after,rel,_diff in planned
+                 if not _source_matches(target,after,original_modes[target])]
+        if changed:
+            _restore_sources(originals,original_modes)
+            out["files_written"]=[]
+            out["changed_source_paths"]=changed
+            out["status"]="FAIL_CLOSED__APPLIED_SOURCE_CHANGED_DURING_VERIFICATION"
+            out["source_restored"]=True
+            out["detail"]="Verification changed planned source bytes, type or permissions; original sources were restored."
+            _emit(output,out)
+            return out
         if after_rc!=0:
-            for target,original in originals.items():
-                target.write_bytes(original)
+            _restore_sources(originals,original_modes)
             out["files_written"]=[]
             out["status"]="FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY"
             out["source_restored"]=True
@@ -276,8 +365,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
             _emit(output,out)
             return out
     except BaseException:
-        for target,original in originals.items():
-            target.write_bytes(original)
+        _restore_sources(originals,original_modes)
         out["files_written"]=[]
         out["source_restored"]=True
         raise

@@ -1,5 +1,5 @@
 from __future__ import annotations
-import ast,hashlib,json,math,os,pathlib,subprocess,sys,textwrap
+import ast,hashlib,json,math,os,pathlib,sys,textwrap
 from typing import Any,Mapping
 import importlib.util
 def _load_patch():
@@ -33,6 +33,7 @@ def _safe_dir(repo,raw):
  return p
 def _trace_one(repo,test,timeout,max_events,env=None):
  code=_PATCH.SUITE_RUNNER+r'''import json,pathlib,runpy,sys,traceback
+result_path=pathlib.Path(sys.argv[-1])
 repo=pathlib.Path(sys.argv[1]).resolve(); target=pathlib.Path(sys.argv[2]).resolve(); cap=int(sys.argv[3]); seen={}; events=0; path_cache={}
 def tr(frame,event,arg):
  global events
@@ -53,13 +54,12 @@ except SystemExit as e:
 except BaseException as e:
  ok=False;tb=traceback.extract_tb(e.__traceback__)
 finally:sys.settrace(None)
-print("__BRAIN_TRACE__"+json.dumps({"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":events},sort_keys=True))
+result_path.write_text(json.dumps({"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":events},sort_keys=True),encoding="utf-8")
 '''
- try:r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
- except subprocess.TimeoutExpired:raise FaultLocalizerError("TEST_TIMEOUT")
- marker="__BRAIN_TRACE__"; lines=[x for x in r.stdout.splitlines() if x.startswith(marker)]
- if not lines: raise FaultLocalizerError("TRACE_OUTPUT_MISSING")
- out=json.loads(lines[-1][len(marker):]);out["returncode"]=r.returncode;return out
+ # Reuse supervised execution and the private, bounded result channel.
+ try:return _PATCH._run_trace(repo,[sys.executable,"-c",code,str(repo),str(test),str(max_events)],timeout,env)
+ except _PATCH.PatchSearchError as exc:raise FaultLocalizerError(str(exc)) from exc
+
 def _defs_and_lines(path):
   # A file under source_root may be third-party and use syntax this interpreter cannot parse
   # (PEP 695 type aliases need 3.12). Such a file cannot be a repair candidate or a

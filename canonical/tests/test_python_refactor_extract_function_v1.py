@@ -122,7 +122,12 @@ class TestExtractFunction(unittest.TestCase):
         self.assertEqual(art["inputs"], ["base"])     # n not read in region
         self.assertEqual(art["outputs"], ["score"])   # dead write dropped
         self.assertEqual(art["edit_count"], 1)
-        self.assertFalse(res["verified"])             # no named tests: loud
+        # No explicit list is not "no tests": existing corpus discovery runs
+        # this fixture's three behavioral oracles through the shared runner.
+        self.assertTrue(res["verified"])
+        self.assertEqual(art["verification"]["run_tests"],
+                         [str(self.tmp / "tests/test_core.py")])
+        self.assertEqual(art["verification"]["pytest_rc"], 0)
         rewritten = (self.tmp / "pkg/core.py").read_text()
         self.assertIn("def odd_score(base):", rewritten)
         self.assertIn("score = odd_score(base)", rewritten)

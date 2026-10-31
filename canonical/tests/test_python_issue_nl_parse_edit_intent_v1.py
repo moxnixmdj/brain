@@ -168,13 +168,9 @@ class TestNaturalLanguageEditIntent(unittest.TestCase):
         _write_issue(root, {"issue_id": "NL-J", "title": "Rename helper to compute in pkg/core.py"})
         cache_rel = "_out/index_cache.json"
         Path(root, "_out").mkdir(exist_ok=True)
-        indexer.run({"source_root": ".", "output_path": cache_rel}, root / "src")
-        # indexer wrote under root/src: move into place and re-write the source_root marker
-        raw = json.loads((root / "src" / cache_rel).read_text(encoding="utf-8"))
-        raw["source_root"] = "src"
-        Path(root / "_out" / "index_cache.json").write_text(json.dumps(raw, indent=2) + "\n", encoding="utf-8")
-        (root / "src" / "_out" / "index_cache.json").unlink(missing_ok=True)
-        (root / "src" / "_out").rmdir()
+        # Consume the indexer's actual public output, not a cache whose
+        # source_root marker was manually rewritten while retaining old paths.
+        indexer.run({"source_root": "src", "output_path": cache_rel}, root)
         r1 = _run_nl(root)
         art1 = (root / "_out" / "nl.json").read_bytes()
         r2 = _run_nl(root, extra={"index_path": "_out/index_cache.json"})

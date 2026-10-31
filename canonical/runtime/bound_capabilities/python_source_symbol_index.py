@@ -306,6 +306,13 @@ def run(args, root):
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
 
+    # Reuse the existing inventory and report-role identity check before any
+    # report write, including when this adapter is called without the front door.
+    files = _py_files(source_root)
+    if output.exists():
+        from canonical.runtime.write_authority_v1 import check_report
+        check_report(repo, output, files)
+
     modules = []
     unparseable = []
     symbols = {}
@@ -313,7 +320,7 @@ def run(args, root):
     reference_total = 0
     call_edge_total = 0
 
-    for path in _py_files(source_root):
+    for path in files:
         if not path.is_file():
             continue
         raw = path.read_bytes()

@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import pathlib
 import re
 
 SCHEMA="PROJECT_BRAIN_GROUNDED_EXECUTABLE_COMPOSITION_V1"
@@ -62,7 +63,7 @@ def _effect_refs(value):
     return out
 
 def _validate_declared_bindings(clause_text,instance_id,entry,inputs,
-                                verified_initial_set=frozenset()):
+                                verified_initial_set=frozenset(),requirement_aliases=None,root=None):
     declared=entry.get("proposal_bindings") or {}
     if not declared:
         return True,"VERIFIED"
@@ -77,6 +78,19 @@ def _validate_declared_bindings(clause_text,instance_id,entry,inputs,
         if typ=="literal":
             if "value" not in spec or value!=spec.get("value"):
                 return False,"PROPOSAL_LITERAL_MISMATCH:"+instance_id+":"+str(key)
+        elif typ=="path_file_or_dir":
+            # Share the established scope parser, not the producer's trace.
+            # This checks structural scope agreement, not independent task semantics.
+            from canonical.runtime import goal_front_compiler_v1 as front
+            base=pathlib.Path(root or pathlib.Path(__file__).resolve().parents[3]).resolve()
+            try:
+                expected=front.bind_typed_key(clause_text,str(key),base,entry)
+                named={raw for raw,path in front.gc._repo_paths(clause_text,base)
+                       if path.is_file() or path.is_dir()}
+            except (front.GoalCompilationFailure,OSError):
+                return False,"PROPOSAL_PATH_SCOPE_BINDING_FAILED:"+instance_id+":"+str(key)
+            if not isinstance(value,str) or value!=expected or value not in named:
+                return False,"PROPOSAL_PATH_SCOPE_MISMATCH:"+instance_id+":"+str(key)
         elif typ=="goal_url":
             if len(urls)!=1 or value!=urls[0]:
                 return False,"PROPOSAL_GOAL_URL_MISMATCH:"+instance_id+":"+str(key)
@@ -85,6 +99,14 @@ def _validate_declared_bindings(clause_text,instance_id,entry,inputs,
                 expected=_auto_output_path(clause_text,instance_id,key,spec.get("suffix"))
             except Exception:
                 return False,"PROPOSAL_AUTO_PATH_INVALID:"+instance_id+":"+str(key)
+            from canonical.runtime import goal_front_compiler_v1 as front
+            if front._is_output_key(str(key),entry):
+                base=pathlib.Path(root or pathlib.Path(__file__).resolve().parents[3]).resolve()
+                named=front._named_output_destinations(clause_text,entry,{str(key)},base)
+                if len(named)>1:
+                    return False,"PROPOSAL_OUTPUT_SCOPE_AMBIGUOUS:"+instance_id+":"+str(key)
+                if named:
+                    expected=next(iter(named))
             if value!=expected:
                 return False,"PROPOSAL_AUTO_PATH_MISMATCH:"+instance_id+":"+str(key)
         elif typ=="effect_result":
@@ -101,14 +123,18 @@ def _validate_declared_bindings(clause_text,instance_id,entry,inputs,
                         and isinstance(value,str) and value.strip()):
                     continue
                 return False,"PROPOSAL_EFFECT_RESULT_MISSING:"+instance_id+":"+str(key)
-            field=str(spec.get("field") or "")
+            effect=str(spec.get("effect") or "").strip()
+            allowed_effects=set((requirement_aliases or {}).get(effect) or [effect])
+            if not effect or any(ref_effect not in allowed_effects for ref_effect,_field in refs):
+                return False,"PROPOSAL_EFFECT_RESULT_EFFECT_MISMATCH:"+instance_id+":"+str(key)
+            field=str(spec.get("field") or "").strip()
             if any(ref_field!=field for _effect,ref_field in refs):
                 return False,"PROPOSAL_EFFECT_RESULT_FIELD_MISMATCH:"+instance_id+":"+str(key)
         else:
             return False,"PROPOSAL_BINDING_TYPE_UNKNOWN:"+instance_id+":"+str(key)
     return True,"VERIFIED"
 
-def verify(goal,composition,grounding,registry,verified_initial_facts=None):
+def verify(goal,composition,grounding,registry,verified_initial_facts=None,root=None):
     canonical=" ".join(str(goal or "").strip().split())
     if composition.get("schema")!=SCHEMA:
         return False,"SCHEMA_INVALID"
@@ -141,6 +167,12 @@ def verify(goal,composition,grounding,registry,verified_initial_facts=None):
     caps=problem.get("capabilities")
     if not isinstance(caps,list) or not caps:
         return False,"CAPABILITIES_INVALID"
+    effect_providers={}
+    for provider in caps:
+        if not isinstance(provider,dict):
+            return False,"CAPABILITY_NOT_OBJECT"
+        for effect in provider.get("provides") or []:
+            effect_providers.setdefault(str(effect),[]).append(provider)
     cap_by_id={}
     all_provides=set()
     all_requires=set()
@@ -216,20 +248,40 @@ def verify(goal,composition,grounding,registry,verified_initial_facts=None):
         clause_index=int(cap.get("clause_index"))
         if clause_index<0 or clause_index>=len(grounding_clauses):
             return False,"CLAUSE_INDEX_INVALID:"+instance_id
-        # The composer records which route bound this capability. When a
-        # declared ``effect_result`` slot has no provider inside the composition,
-        # it falls back to ``_bind_inputs`` and the clause's own sentence supplies
-        # the paths, leaving ``proposal_binding_evidence`` empty. Validating the
-        # declared bindings in that case compares the sentence's paths against
-        # generated ones and can only mismatch, so validate only what the
-        # composer actually used.
-        if cap.get("proposal_binding_evidence"):
+        # A mutable trace cannot authorize skipping validation. Derive the
+        # proposal route from declarations and prior providers, just as the
+        # composer does. Preserve sentence binding only when a missing provider
+        # is backed by an explicitly authorized initial fact.
+        declared=entry.get("proposal_bindings") or {}
+        if not isinstance(declared,dict):
+            return False,"PROPOSAL_BINDINGS_INVALID:"+instance_id
+        declared_effects=[
+            str(spec.get("effect") or "").strip()
+            for spec in declared.values()
+            if isinstance(spec,dict) and spec.get("type")=="effect_result"
+        ]
+        missing_providers=[]
+        for effect in declared_effects:
+            names=set(req_aliases.get(effect) or [effect])
+            if not any(
+                int(provider.get("clause_index",-1))<clause_index
+                for name in names
+                for provider in effect_providers.get(name,[])
+            ):
+                missing_providers.append(effect)
+        initial_fact_fallback=(
+            bool(missing_providers)
+            and all(effect in verified_initial_set for effect in missing_providers)
+        )
+        if cap.get("proposal_binding_evidence") or not initial_fact_fallback:
             ok,reason=_validate_declared_bindings(
                 str((grounding_clauses[clause_index] or {}).get("text") or ""),
                 instance_id,
                 entry,
                 inputs,
                 verified_initial_set,
+                req_aliases,
+                root,
             )
             if not ok:
                 return False,reason
@@ -241,10 +293,6 @@ def verify(goal,composition,grounding,registry,verified_initial_facts=None):
         all_requires.update(cap["requires"])
         all_provides.update(cap["provides"])
 
-    effect_providers={}
-    for provider in caps:
-        for effect in provider.get("provides") or []:
-            effect_providers.setdefault(str(effect),[]).append(provider)
     for consumer in caps:
         consumer_id=str(consumer.get("id") or "")
         for effect,field in _effect_refs(consumer.get("inputs") or {}):

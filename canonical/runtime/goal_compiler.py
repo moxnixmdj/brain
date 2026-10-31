@@ -674,6 +674,13 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             if re.search(r"\b"+re.escape(str(stem).replace("_"," "))+r"s?\b",
                          str(goal),re.IGNORECASE):
                 files=[raw for raw,p in paths if p.is_file()]
+                # A later input still owns its explicitly named files. Reuse
+                # the same role parser before fallback can claim those files
+                # for an earlier list (e.g. source root D using tests D/t.py).
+                role_words=_path_role_words(keys)
+                competing={path for other in role_words if other!=stem
+                           for path in _paths_named_by_role(goal,other,root,role_words)}
+                files=[path for path in files if path not in competing]
                 # THE SAME TWO FILTERS THE TWO SITES ABOVE ALREADY APPLY.  This
                 # fallback had neither, and it is the one that fires when the
                 # sentence names no file at all -- which is how an ordinary
@@ -709,7 +716,9 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 # invented here and a green empty suite is still impossible.
                 # Guessing the report was worse than either: it is a file that
                 # exists, so every downstream existence check passed.
-                if key=="test_paths":
+                if key in {"test_paths","source_paths"}:
+                    # Empty source selection delegates the repair adapter's
+                    # existing imported-source localization; it is not a guess.
                     result[key]=[]
                     continue
         if key.endswith("_argv"):

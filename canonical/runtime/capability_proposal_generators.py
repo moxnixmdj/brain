@@ -388,6 +388,36 @@ def _bind_planned_inputs(
             continue
         if _slot not in placeholders:
             continue
+        if _spec.get("type")=="auto_path":
+            from canonical.runtime import goal_front_compiler_v1 as front
+            if front._is_output_key(_slot,entry):
+                # A sole existing INPUT is not a stated output. Reuse the
+                # existing destination-role parser rather than file-count guesses.
+                named=front._named_output_destinations(goal,entry,{_slot},pathlib.Path(root))
+                if len(named)>1:
+                    raise CapabilityProposalFailure("PROPOSAL_OUTPUT_SCOPE_AMBIGUOUS:"+str(cid)+":"+_slot)
+                if named:
+                    value=next(iter(named))
+                    if value in produced:
+                        raise CapabilityProposalFailure("PROPOSAL_OUTPUT_ALREADY_PRODUCED:"+str(cid)+":"+_slot)
+                    stated[_slot]=value
+                continue
+        if _spec.get("type")=="effect_result" and _slot.endswith("_path"):
+            from canonical.runtime import goal_front_compiler_v1 as front
+            # Filename substrings are not claims about this input's role.
+            # Keep explicit-key/role precedence, but do not let the generic
+            # one-file fallback steal an unrelated issue or report artifact.
+            role_stated=False
+            for raw,path in compiler._repo_paths(goal,root):
+                for spelling in {raw,str(path)}:
+                    for mention in re.finditer(re.escape(spelling),goal):
+                        at=mention.start()
+                        if at and goal[at-1] in front._QUOTE_OPEN:
+                            at-=1
+                        if front._role_anchored(goal,spelling,front._role_phrases(_slot),index=at):
+                            role_stated=True
+            if not role_stated:
+                continue
         probe=dict(entry)
         probe["action_template"]=_mask_declared_placeholders(
             template,(set(placeholders)-{_slot})
@@ -433,6 +463,25 @@ def _bind_planned_inputs(
                 )
             inputs[key]=json.loads(json.dumps(spec.get("value")))
             evidence[key]={"type":"literal"}
+            continue
+        if typ=="path_file_or_dir":
+            # This declaration is already implemented by the front compiler.
+            # Reuse its scope rules, never fall back to scanning the repository.
+            from canonical.runtime import goal_front_compiler_v1 as front
+            try:
+                value=front.bind_typed_key(goal,key,pathlib.Path(root),entry)
+                named={raw for raw,path in front.gc._repo_paths(goal,root)
+                       if path.is_file() or path.is_dir()}
+            except (front.GoalCompilationFailure,OSError) as exc:
+                raise CapabilityProposalFailure(
+                    "PROPOSAL_PATH_SCOPE_BINDING_FAILED:"+str(cid)+":"+key+":"+str(exc)
+                ) from exc
+            if not isinstance(value,str) or value not in named:
+                raise CapabilityProposalFailure(
+                    "PROPOSAL_PATH_SCOPE_BINDING_FAILED:"+str(cid)+":"+key+":NOT_NAMED_EXISTING_PATH"
+                )
+            inputs[key]=value
+            evidence[key]={"type":"path_file_or_dir","value":value}
             continue
         if typ=="goal_url":
             urls=_goal_urls(goal)

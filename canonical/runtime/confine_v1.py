@@ -75,6 +75,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from canonical.runtime.zero_ambient_namespace_launcher_v1 import isolated_environment
+
 SCHEMA = "PROJECT_BRAIN_CONFINE_V1"
 
 _MOUNTS = ("/usr", "/bin", "/lib", "/lib64")
@@ -178,7 +180,8 @@ def available() -> bool:
     )
     try:
         r = subprocess.run(["unshare", "-r", "-m", sys.executable, "-c", probe],
-                           timeout=60, capture_output=True, text=True)
+                           timeout=60, capture_output=True, text=True,
+                           env=isolated_environment(home='/project'))
         return r.returncode == 0
     except Exception:
         return False
@@ -226,7 +229,8 @@ def run(program: str, root: str, timeout: int = 300,
                 ["unshare", "-r", "-m"] + ([] if network else ["-n"]) + \
                 [sys.executable, helper_path, base,
                  os.path.realpath(root), script, "1" if network else "0"],
-                timeout=timeout, capture_output=True, text=True)
+                timeout=timeout, capture_output=True, text=True,
+                env=isolated_environment(home='/project'))
             return {"schema": SCHEMA,
                     "verdict": "OK" if r.returncode == 0 else "FAILED",
                     "exit_status": r.returncode,

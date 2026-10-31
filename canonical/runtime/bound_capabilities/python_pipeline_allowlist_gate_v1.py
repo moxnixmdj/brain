@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Pipeline allowlist gate — the only-right-way review composition.
+"""Registry inventory only; execution and task verification are not implemented.
 
-Hidden kernels: 6 diff gates (ruff+mypy+coverage+perf+bandit+mutation) + 8-stage pipeline + symbol index.
-Why max: gates were isolated with requires=[] fail-open. This gate allowlists repository paths and fans in all 6 gates plus pipeline completion into one verified composition — no unreviewed code lands."""
+Producer/token presence is diagnostic, not proof of review, synthesis,
+allowlisting or landing. Do not use this adapter to certify those effects.
+"""
 from __future__ import annotations
-import hashlib, json, pathlib
+import json, pathlib
+from canonical.runtime.composition_inventory_v1 import write_inventory_report
 from typing import Any
 SCHEMA="PROJECT_BRAIN_PYTHON_PIPELINE_ALLOWLIST_GATE_V1"
 CAPABILITY_ID="python.pipeline.allowlist_gate.v1"
@@ -23,6 +25,5 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     gates=["python.review.diff_static_triage.v1","python.review.diff_type_gate.v1","python.review.diff_coverage_gate.v1","python.review.diff_perf_gate.v1","python.review.diff_security_gate.v1","python.review.diff_mutation_gate.v1"]
     gate_caps={g: g in reg["capabilities"] for g in gates}
     pipeline_ok="execution.pipeline.8stage.v1" in reg["capabilities"] or "execution.pipeline.completed" in {p for m in reg["capabilities"].values() for p in m.get("provides",[])}
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"gate_caps":gate_caps,"pipeline_ok":pipeline_ok,"allowlist":"canonical/** allowlisted, vendor/** blocked","verified":all(found.values()),"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"python_pipeline_allowlist_gate_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":artifact["verified"],"verified":artifact["verified"],"model_dependency_count":0,"incremental_spend_usd":0}
+    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"required_tokens":required,"found":found,"gate_caps":gate_caps,"pipeline_ok":pipeline_ok,"planned_allowlist":"canonical/** allowlisted, vendor/** blocked","inventory_ready":all(found.values()) and all(gate_caps.values()) and pipeline_ok,"model_dependency_count":0,"incremental_spend_usd":0}
+    return write_inventory_report(repo, output, artifact, "python_pipeline_allowlist_gate_v1")

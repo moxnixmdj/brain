@@ -70,23 +70,23 @@ _SWE_VERBS = (
 
 def is_swe_request(goal: str) -> bool:
     """An explicit software-engineering request, not a generic module call."""
-    text = str(goal or "").lower()
+    from canonical.runtime import goal_front_compiler_v1 as front
+    text = front.prose_only(goal).lower()
     return any(verb in text for verb in _SWE_VERBS)
 
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
 _TEST_NAME_RE = re.compile(r"(^|/)(test_[^/]*|[^/]*_test)\.(py|js|ts|go|rs)$")
 _SOURCE_SUFFIXES = (".py", ".js", ".ts", ".rs", ".go", ".java", ".cpp", ".c", ".rb")
-_NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 # "rename [the] [parameter|symbol|function] OLD to NEW" / "into a new function named NEW".
 _RENAME_OLD_NEW = re.compile(
     r"\brename\b[^.?!]*?\b(?:parameter|symbol|function|argument|variable)?\s*"
-    r"([A-Za-z_][A-Za-z0-9_]*)\s+(?:to|as|into)\s+([A-Za-z_][A-Za-z0-9_]*)\b",
+    r"[`\"']?([^\s`\"']+)[`\"']?\s+(?:to|as|into)\s+[`\"']?([^\s`\"']+)[`\"']?",
     re.IGNORECASE,
 )
 _NAMED_NEW = re.compile(
     r"\b(?:new\s+(?:function|parameter|symbol|name)\s+named|named)\s+"
-    r"([A-Za-z_][A-Za-z0-9_]*)\b", re.IGNORECASE,
+    r"[`\"']?([^\s`\"']+)[`\"']?", re.IGNORECASE,
 )
 
 
@@ -213,10 +213,11 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         out["module"] = {"value": sources[0], "rule": "MODULE_FROM_STATED_SOURCE_FILE",
                          "evidence": sources[0]}
     # Rename grammar: BOTH names must be stated, and exactly one pair may match.
-    pairs = _RENAME_OLD_NEW.findall(str(goal or ""))
+    pairs = [(old.rstrip(".,;:!?"), new.rstrip(".,;:!?"))
+             for old, new in _RENAME_OLD_NEW.findall(str(goal or ""))]
     if len(pairs) == 1:
         old, new = pairs[0]
-        if _NAME_RE.match(old) and _NAME_RE.match(new):
+        if old.isidentifier() and new.isidentifier():
             if "old_param" in keys:
                 out["old_param"] = {"value": old, "rule": "RENAME_OLD_NAME_STATED", "evidence": old}
             if "old_symbol" in keys:
@@ -225,8 +226,8 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if key in keys:
                     out[key] = {"value": new, "rule": "RENAME_NEW_NAME_STATED", "evidence": new}
     else:
-        named = _NAMED_NEW.findall(str(goal or ""))
-        if len(named) == 1 and _NAME_RE.match(named[0]):
+        named = [name.rstrip(".,;:!?") for name in _NAMED_NEW.findall(str(goal or ""))]
+        if len(named) == 1 and named[0].isidentifier():
             for key in ("new_param", "new_symbol", "new_name"):
                 if key in keys:
                     out[key] = {"value": named[0], "rule": "NEW_NAME_STATED", "evidence": named[0]}

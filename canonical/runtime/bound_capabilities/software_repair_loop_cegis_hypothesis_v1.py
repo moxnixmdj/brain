@@ -1,36 +1,40 @@
 #!/usr/bin/env python3
-"""Software repair loop — CEGIS+hypothesis HTN loop, only-right-way.
+"""Inventory of repair-loop kernels, not evidence of task execution.
 
-Hidden kernels harvested: CEGIS(T) 321L + hypothesis 6.170.12 + concrete 13 + CrossHair Z3 +
-symbol 86k/221k + change-impact 2070/2096 + crossfile + pipeline 8-stage.
-Why max: repair is loop not DAG. Synthesize→verify triad→counterexample→resynthesize until pass or budget. No blind search.
+Use the existing semantic acceptance controller for bounded repair execution.
+The former wrapper ran default examples without forwarding the caller's task.
+Kernel availability cannot establish synthesized patches or accepted repairs.
 """
 from __future__ import annotations
-import hashlib, json, pathlib
+import json
+import pathlib
 from typing import Any
-SCHEMA="PROJECT_BRAIN_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1"
-CAPABILITY_ID="software.repair.loop.cegis_hypothesis.v1"
-PROVIDES=["software.repair.loop.cegis_verified","software.repair.synthesis.triad_proven"]
-REQUIRES: list[str]=["python.fault.localization.symbol_ranked"]
-REPO=pathlib.Path(__file__).resolve().parents[3]
-def _safe_output(root: pathlib.Path, raw: str | None) -> pathlib.Path:
-    p=(root / str(raw or "canonical/tmp_repair_loop_cegis.json")).resolve()
-    if p==root or root not in p.parents: raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
-    p.parent.mkdir(parents=True, exist_ok=True); return p
+from canonical.runtime.composition_inventory_v1 import write_inventory_report
+
+SCHEMA = "PROJECT_BRAIN_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1"
+CAPABILITY_ID = "software.repair.loop.cegis_hypothesis.v1"
+PROVIDES = ["software.repair.loop.cegis_verified", "software.repair.synthesis.triad_proven"]
+REQUIRES: list[str] = ["python.fault.localization.symbol_ranked"]
+REPO = pathlib.Path(__file__).resolve().parents[3]
+
+
 def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
-    repo=pathlib.Path(root).resolve(); output=_safe_output(repo, args.get("output_path"))
-    import canonical.runtime.bound_capabilities.software_patch_cegis_z3_v1 as cegis_mod
-    import canonical.runtime.bound_capabilities.evidence_oracle_hypothesis_v1 as hyp_mod
-    import canonical.runtime.bound_capabilities.evidence_oracle_concrete_v1 as conc_mod
-    import canonical.runtime.bound_capabilities.software_repair_crossfile_choreograph_v1 as choreo_mod
-    budget=int(args.get("budget",3)); cegis_iterations=[]
-    for i in range(budget):
-        r1=cegis_mod.run({"output_path": f"canonical/tmp_loop_cegis_{i}.json"}, repo)
-        r2=hyp_mod.run({"output_path": f"canonical/tmp_loop_hyp_{i}.json"}, repo)
-        r3=conc_mod.run({"output_path": f"canonical/tmp_loop_conc_{i}.json"}, repo)
-        r4=choreo_mod.run({"output_path": f"canonical/tmp_loop_choreo_{i}.json"}, repo)
-        cegis_iterations.append({"round":i,"cegis":r1["verified"],"hypothesis":r2["verified"],"concrete":r3["verified"],"choreograph":r4["verified"]})
-        if r1["verified"] and r2["verified"] and r3["verified"]: break
-    artifact={"schema":SCHEMA,"capability_id":CAPABILITY_ID,"budget":budget,"iterations":cegis_iterations,"verified":all(any(v for v in it.values() if isinstance(v,bool)) for it in cegis_iterations),"model_dependency_count":0,"incremental_spend_usd":0}
-    raw=json.dumps(artifact, sort_keys=True, separators=(",",":")).encode(); output.write_bytes(raw)
-    return {"adapter":"software_repair_loop_cegis_hypothesis_v1","output_path":str(output.relative_to(repo)),"output_sha256":hashlib.sha256(raw).hexdigest(),"output_verified":True,"verified":True,"iterations":len(cegis_iterations),"model_dependency_count":0,"incremental_spend_usd":0}
+    repo = pathlib.Path(root).resolve()
+    output = (repo / str(args.get("output_path") or "canonical/tmp_repair_loop_cegis.json")).resolve()
+    if output == repo or repo not in output.parents:
+        raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
+    budget = int(args.get("budget", 3))
+    if budget < 0:
+        raise ValueError("BUDGET_NEGATIVE")
+    registry_path = repo / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    entries = json.loads(registry_path.read_text())["capabilities"] if registry_path.is_file() else {}
+    kernels = ["software.patch.synthesize.cegis.z3.v1", "evidence.oracle.hypothesis_property.v1",
+               "evidence.oracle.concrete_execution.v1", "software.repair.choreograph.crossfile.v1"]
+    found = {cid: cid in entries for cid in kernels}
+    artifact = {"schema": SCHEMA, "capability_id": CAPABILITY_ID,
+                "budget": budget, "iterations": [], "found": found,
+                "inventory_ready": all(found.values())}
+    # Shared helper protects source destinations and keeps execution claims false.
+    output.parent.mkdir(parents=True, exist_ok=True)
+    result = write_inventory_report(repo, output, artifact, "software_repair_loop_cegis_hypothesis_v1")
+    return {**result, "iterations": 0}

@@ -61,7 +61,8 @@ _FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration
 
 
 def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
-    low = str(goal or "").lower()
+    from canonical.runtime import goal_front_compiler_v1 as front
+    low = front.prose_only(goal).lower()
     for triggers, terms, token in _FAMILIES:
         if any(t in low for t in triggers):
             return terms, token
@@ -166,7 +167,8 @@ def _effect_consistent(goal: str, cid: str) -> bool:
     the caller keeps its fail-closed verdict.  A goal that states NO effect word
     imposes no constraint (its decisive typed admission is the evidence).
     """
-    text = str(goal or "").lower()
+    from canonical.runtime import goal_front_compiler_v1 as front
+    text = front.prose_only(goal).lower()
     stated: list[str] = []
     for verbs, effects in selection._EFFECT_WORDS:
         if any(verb in text for verb in verbs):
@@ -311,7 +313,9 @@ def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
         compiled["selected_capability"] = cid
         compiled["inputs"] = inputs
         compiled["compiler_mode"] = "SWE_TYPED_PLAN_V1"
-        compiled.setdefault("target_effects", list(entry.get("provides") or []) or [cid])
+        # This plan replaces the lexical selection. Its target effects must
+        # describe the replacement, not whichever unrelated tool won first.
+        compiled["target_effects"] = list(entry.get("provides") or []) or [cid]
         compiled.pop("capability_dag", None)
         compiled.pop("controller_actions", None)
         return (registry, admissible, compiled)

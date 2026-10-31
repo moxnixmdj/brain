@@ -5,7 +5,7 @@ Lint proves name hygiene, types prove soundness, coverage proves
 execution, perf proves speed — none of them can see ``shell=True`` on a
 changed line, an ``eval`` of external input, or a hardcoded password.
 This adapter runs bandit's JSON report on the diff's touched files and
-intersects findings with the new-side changed line ranges.
+intersects each finding's reported line span with the new-side changed ranges.
 
 * BASELINE (always runs, stdlib): touched ``.py`` parsed with ``ast``.
 * BANDIT (PyPI tool, probed live): ``bandit -f json --quiet`` per
@@ -45,6 +45,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from canonical.runtime.write_authority_v1 import check_review_inputs
 
 from canonical.runtime.bound_capabilities.python_review_diff_static_triage import (
     _parse_diff_ranges,
@@ -112,12 +113,8 @@ def run(args, root):
 
     # -- stage 1: syntax baseline ----------------------------------------
     syntax_errors = []
-    files_on_disk = {}
-    for rel in sorted(py_changed):
-        target = worktree_abs / rel
-        if not target.is_file():
-            _fail("TOUCHED_FILE_MISSING_IN_WORKTREE:" + rel)
-        files_on_disk[rel] = target
+    files_on_disk = check_review_inputs(repo, worktree_abs, diff_abs, out_abs, py_changed, _fail)
+    for rel, target in files_on_disk.items():
         try:
             ast.parse(target.read_text(encoding="utf-8"), filename=rel)
         except SyntaxError as exc:
@@ -158,7 +155,14 @@ def run(args, root):
                             "severity": str(row.get("issue_severity") or ""),
                             "confidence": str(row.get("issue_confidence") or ""),
                             "message": str(row.get("issue_text") or "")[:300]}
-                    if _in_ranges(changed[rel], line):
+                    # Bandit may anchor shell injection at the unchanged
+                    # shell=True keyword while the changed command argument is
+                    # elsewhere in the same call. Reuse its actual finding span.
+                    lines = row.get("line_range") or [line]
+                    if not isinstance(lines, list) or any(type(n) is not int or n < 1 for n in lines):
+                        _fail("BANDIT_FINDING_LINE_RANGE_INVALID")
+                    item["line_range"] = lines
+                    if _in_ranges(changed[rel], line) or any(_in_ranges(changed[rel], n) for n in lines):
                         (blocking if _is_blocking(item["severity"], item["confidence"],
                                                   item["test_id"])
                          else advisory).append(item)
@@ -188,7 +192,7 @@ def run(args, root):
         "advisory_count": len(advisory),
         "gate": gate,
         "gate_law": ("PASS needs zero syntax errors AND zero blocking security rows "
-                     "on changed lines with bandit actually running; HIGH severity "
+                     "whose reported spans overlap changed lines with bandit actually running; HIGH severity "
                      "blocks, MEDIUM blocks at HIGH confidence, LOW is advisory; "
                      "PASS_BASELINE_ONLY is recorded loudly when the tool is absent; "
                      "pre-existing findings outside the diff's ranges are context, "
