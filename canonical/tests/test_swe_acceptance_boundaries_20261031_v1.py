@@ -163,3 +163,44 @@ def test_final_composer_preserves_existing_output(work):
     with pytest.raises(ValueError, match="OUTPUT_ALREADY_EXISTS"):
         composer.run({"output_path": str(output.relative_to(ROOT))}, ROOT)
     assert output.read_bytes() == b"do not overwrite"
+
+
+def test_report_publication_failure_rolls_back_verified_source(work):
+    module, original, args = _fixture(work, crlf=True)
+    with mock.patch.object(cegis, "publish_report", side_effect=OSError("injected disk failure")):
+        with pytest.raises(OSError, match="injected disk failure"):
+            cegis.run(args, ROOT)
+    assert module.read_bytes() == original
+
+
+def test_baseline_timeout_does_not_attempt_or_promote_a_candidate(work):
+    module, original, args = _fixture(work,
+        "    def test_slow_baseline(self):\n        import time\n        time.sleep(4)\n")
+    args["timeout_s"] = 1
+    result = cegis.run(args, ROOT)
+    assert result["verified"] is False
+    assert result["result"]["failure_reason"] == "BASELINE_TIMEOUT"
+    assert module.read_bytes() == original
+
+
+def test_empty_static_analysis_does_not_certify_a_tree(work):
+    result = static.analyze_python_static_soundness(ROOT, work)
+    assert result["files_checked"] == 0
+    assert result["sound"] is False
+    assert result["analysis_complete"] is False
+
+
+def test_complete_declarations_and_clean_static_check_still_are_not_delivery(work):
+    registry = work / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    registry.parent.mkdir(parents=True)
+    producers = ["software.hardcore.swe.supercomposer.v1", "software.patch.synthesize.cegis.z3.v1",
+                 "software.synthesis.grid_induction.v1", "software.hardcore.kernel.orchestrate.v1"]
+    registry.write_text(json.dumps({"capabilities": {
+        cid: {"provides": list(composer.REQUIRES)} for cid in producers}}))
+    (work / "clean.py").write_text("x: int = 1\n")
+    result = composer.run({"source_root": "clean.py", "output_path": "report.json"}, work)
+    assert result["declarations_resolve"] is True
+    assert result["static_soundness"]["sound"] is True
+    assert result["workflow_executed"] is False
+    assert result["verified"] is False
+    assert result["output_verified"] is False

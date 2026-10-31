@@ -57,6 +57,13 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
     env["PYTHONPATH"] = f"{extra_pp}:{env.get('PYTHONPATH', '')}".rstrip(":")
 
     pre_run = patch_mod._run_tests(repo, argv, timeout, env)
+    if pre_run.get("timed_out"):
+        return {
+            "mode": "code_cegis_observational_stun", "verified": False,
+            "exact_over_declared_frontier": False,
+            "pre_test_returncode": pre_run.get("returncode"),
+            "failure_reason": "BASELINE_TIMEOUT",
+        }
     combined_test_src = "\n\n".join(tf.read_text(encoding="utf-8", errors="replace") for tf in test_files if tf.is_file())
 
     py_sources = [
@@ -114,8 +121,9 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
                 accepted = (post_run.get("returncode") == 0
                             and not post_run.get("timed_out", False))
             finally:
-                if not (accepted and args.get("apply_in_place")):
-                    src_file.write_bytes(original_bytes)
+                # Trials never promote source. run() owns promotion and rolls
+                # it back even if publishing the acceptance report fails.
+                src_file.write_bytes(original_bytes)
                 patch_mod._purge_source_bytecode(src_file)
             if accepted:
                 rel_src = src_file.relative_to(repo).as_posix()
@@ -134,6 +142,7 @@ def _synthesize_code_patch_cegis(repo: pathlib.Path, args: dict[str, Any]) -> di
                     "source_path": rel_src,
                     "function": nd.name,
                     "synthesized_body": synth_body,
+                    "_candidate_bytes": cand_text.encode("utf-8"),
                     "examples_used": len(exs),
                     "pre_test_returncode": int(pre_run.get("returncode", 1)),
                     "post_test_returncode": 0,
@@ -158,6 +167,7 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if args.get("source_root"):
         result = _synthesize_code_patch_cegis(repo, args)
         is_verified = bool(result.get("verified"))
+        candidate_bytes = result.pop("_candidate_bytes", None)
         artifact = {
             "schema": SCHEMA,
             "capability_id": CAPABILITY_ID,
@@ -171,6 +181,18 @@ def run(args: dict[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             "model_dependency_count": 0,
             "incremental_spend_usd": 0,
         }
+        if is_verified and args.get("apply_in_place"):
+            from canonical.runtime.bound_capabilities import python_test_guided_patch_search_v1 as patch_mod
+            source = repo / result["source_path"]
+            original_bytes = source.read_bytes()
+            try:
+                source.write_bytes(candidate_bytes)
+                patch_mod._purge_source_bytecode(source)
+                return publish_report(repo, output, artifact)
+            except BaseException:
+                source.write_bytes(original_bytes)
+                patch_mod._purge_source_bytecode(source)
+                raise
         return publish_report(repo, output, artifact)
 
     cegis = _load_cegis()
