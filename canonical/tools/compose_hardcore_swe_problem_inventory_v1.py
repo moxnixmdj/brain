@@ -18,7 +18,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-CENSUS = pathlib.Path("/tmp/c22.json")
+CENSUS = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/tmp/c25.json")
 OUT = ROOT / "HARDCORE_SWE_ALL_PROBLEMS_20261031_V1.md"
 
 # ---- the class of work each census request belongs to (judgement about the SENTENCE) -------------
@@ -63,11 +63,11 @@ CLASS_STORY = {
     "polyglot": ("C++, Rust, Go, Java, TypeScript, SQL", "the machine is Python-only: there is no row that edits any other language"),
     "build": ("pyproject, Makefile, dependency pinning, vendoring", "no row owns the build file layer"),
     "ci": ("workflow repair, matrices, caching, flake quarantine", "no row owns CI configuration"),
-    "perf": ("profiling, optimisation, benchmark against a parent commit, memoisation", "no profiler is installed and no row answers 'which function is the hot spot'"),
+    "perf": ("profiling, optimisation, benchmark against a parent commit, memoisation", "no profiler is installed, and no row answers 'which function is the hot spot'"),
     "systems": ("race detection, thread pools, GIL release", "the only row claiming these declares them as effects it does not implement"),
     "tests": ("unit, property-based, regression-from-bug, mutation-score raising, fuzzing", "only running a suite and explaining failures works"),
     "debug": ("failing test to cause, 'why does this return None', bisect", "the rows exist but are chosen wrongly or fail inside the controller"),
-    "refactor": ("move, split module, rename across the repo, replace all uses, add type hints, extract", "extract now works; the other five refuse"),
+    "refactor": ("move, split module, rename across the repo, replace all uses, add type hints, extract", "extract and cross-repo rename work; move, split, replace-all and type hints refuse"),
     "review": ("API design review, security review, dependency CVE audit", "security review works; the other two have no row and no advisory data"),
     "git": ("commit, branch, diff, cherry-pick, changelog", "no row performs a git operation; the history row is chosen for all five"),
     "design": ("ADR, migration plan, package split", "no row, and no planning surface that produces a document"),
@@ -130,10 +130,15 @@ def pypi_runnability(pypi: list[str]) -> list[tuple[str, str, bool]]:
 
 
 def substrate() -> tuple[list[str], list[str]]:
+    """What an advanced engineer's day needs, and whether THIS image has it.
+
+    ``python3 scripts/restore_substrate_v1.py`` is the one command that makes this true; before it
+    existed the substrate evaporated between turns and nothing said so.
+    """
     have, missing = [], []
     for tool in ("python3", "pip", "gcc", "g++", "make", "node", "npm", "git", "sqlite3",
                  "cargo", "rustc", "go", "javac", "java", "tsc", "cmake", "ninja", "docker",
-                 "gdb", "valgrind", "strace", "perf"):
+                 "gdb", "valgrind", "strace", "perf"):  # noqa: E501
         (have if shutil.which(tool) else missing).append(tool)
     for mod in ("pytest", "hypothesis", "coverage", "ruff", "mypy", "tree_sitter",
                 "tree_sitter_languages", "crosshair", "z3", "radon", "libcst", "rope",
@@ -170,7 +175,8 @@ def main() -> int:
 
     add("# Every hardcore software-engineering problem, measured")
     add("")
-    add("Measured 2026-10-31 on main `43676be`. Supersedes nothing: `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md`")
+    add("Measured 2026-10-31 on main `5ad1222` with the substrate restored (`scripts/restore_substrate_v1.py`).")
+    add("Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md`")
     add("records one round of repairs; this document is the whole problem list, ordered so that the next")
     add("hour of work buys the most capability. Nothing here is a wish — every number is a measurement")
     add("taken by this run (`execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,")
@@ -189,11 +195,12 @@ def main() -> int:
     add(f"1. **Plumbing defects stop a sentence from reaching a row that already exists** "
         f"({len(refused)} refusals split across {len(by_defect)} failure classes below). One row alone absorbs "
         f"**{len(magnets.get('software.repair.choreograph.crossfile.v1', []))}** of the {len(rows)} sentences and fails on every one.")
-    add("2. **The machine is single-language and the substrate is empty.** It is Python-only by construction, and")
-    add(f"   this image has **only {len(have)} of the {len(missing) + len(have)} tools and packages** an advanced engineer works with —")
-    add("   no pytest, no ruff, no mypy, no tree-sitter, no hypothesis, no profiler, no debugger, no rustc,")
-    add("   no go, no javac, no tsc. Every row that needs any of them either degrades silently or dies in the")
-    add("   controller.")
+    add("2. **The substrate evaporates, and the machine is single-language.** It is Python-only by")
+    add(f"   construction, and this image currently holds **{len(have)} of the {len(missing) + len(have)} tools** an advanced")
+    add("   engineer works with. Restoring it is one command and it buys real capability — measured")
+    add(f"   this round: `python3 scripts/restore_substrate_v1.py` took the matrix from 22 to 23 REAL")
+    add("   and the census from 3 to 4 served, with no row changed — so part of what looked like a")
+    add("   capability gap was an install step nobody ran.")
     add("3. **Whole capability classes have no row at all** — build systems, CI, design/architecture, git")
     add("   operations, concurrency. Those are not defects; they are absences, and no amount of routing work")
     add("   makes them answer.")
@@ -311,34 +318,46 @@ def main() -> int:
     add("")
     add("---")
     add("")
-    add("## §4 The substrate: what the machine is standing on")
+    add("## §4 The substrate: restorable in one command, still missing real tools")
     add("")
     add("| present | missing |")
     add("|---|---|")
     add(f"| {', '.join(have)} | {', '.join(missing)} |")
     add("")
-    add("The consequences are not cosmetic:")
+    add("`scripts/restore_substrate_v1.py` installs the hashed kernel manifest, then the review tools,")
+    add("then verifies 10/10 modules, the required binaries, and the parser generation against")
+    add("`tree_sitter_swe_kernel_v1.SUBSTRATE`. It exits non-zero and prints `SUBSTRATE_INCOMPLETE`")
+    add("rather than letting a lane measure an environment gap and call it a capability gap.")
+    add("")
+    add("**What the restore bought, measured this round:**")
+    add("")
+    add("| before restore | after restore |")
+    add("|---|---|")
+    add("| tools 6/10, matrix 22 REAL, census 3/49 | **tools 10/10, matrix 23 REAL, census 4/49** |")
+    add("")
+    add("The census gained request 35 (*rename the public function `total` … across the repository*) —")
+    add("it had been failing for want of a tool, not a capability. `crosshair` and `z3` also became")
+    add("live: `python.contract.check.crosshair.v1` now refutes a real postcondition")
+    add("(`halve(n)` declared `__return__ * 2 == n` returns `CONTRACT_VIOLATION_FOUND` on odd `n`),")
+    add("so symbolic contract checking is no longer dead weight in the registry.")
     add("")
     runnable = sum(1 for _, _, ok in runnability if ok)
-    add(f"* **{len(rs['pypi'])} registry rows are sourced from a PyPI package or a package-shaped adapter, and")
-    add(f"  {len(rs['pypi']) - runnable} of them cannot run in this image**:")
+    add(f"**{len(rs['pypi'])} registry rows are sourced from a PyPI package or a package-shaped adapter, and")
+    add(f"{len(rs['pypi']) - runnable} of them cannot run in this image**:")
     add("")
     add("| package-sourced row | needs | here |")
     add("|---|---|---|")
     for cid, mod, ok in runnability:
         add(f"| `{cid}` | `{mod}` | {'**runnable**' if ok else 'package absent'} |")
     add("")
-    add(f"* **{len(rs['degrade'])} rows say in their own limitations** that they degrade when the package is absent —")
-    add("  which is honest, and which means the registry's declared strength is larger than what this image")
-    add("  can do.")
-    add("* **No profiler, no debugger, no `valgrind`, no `strace`.** Profiling, race detection and \"find the")
-    add("  commit that broke this\" are requests about *execution*, and there is nothing here that watches an")
-    add("  execution.")
-    add("* **No pytest.** The repository's own suite cannot run under it in this image (`import pytest` is a")
-    add("  pre-existing red in `test_crossfile_multiline_imports_v1`). Test synthesis is being asked for on a")
-    add("  substrate that cannot run the tests it would write.")
-    add("* **No `rustc`, `cargo`, `go`, `javac`, `tsc`.** Four of the six languages the census asks about")
-    add("  cannot be compiled here even if a row existed.")
+    add("* **No profiler, no debugger, no `valgrind`, no `strace`, no `gdb`.** Profiling, race")
+    add('  detection and "find the commit that broke this" are requests about *execution*, and nothing')
+    add("  here watches an execution.")
+    add("* **No `rustc`, `cargo`, `go`, `javac`, `tsc`, `sqlite3`.** Five of the six languages the census")
+    add("  asks about cannot be compiled here even if a row existed. `gcc`, `g++`, `node`, `npm` and")
+    add("  `make` are present but no row drives them.")
+    add("* **The substrate does not persist.** pip installs outside `/home/user` evaporate between")
+    add("  turns; this document is the first that names the restore as a step rather than a hope.")
     add("")
     add("---")
     add("")
@@ -356,7 +375,14 @@ def main() -> int:
     add("   refusal corpus is not mined automatically into candidate rows.")
     add("5. **Single-language is architectural** (Python `ast` everywhere), so polyglot support is not a row")
     add("   addition, it is a second substrate.")
-    add("6. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real")
+    add("6. **The census measures the environment as much as the machine.** 4 of the 49 sentences turn")
+    add("   on which packages happen to be installed, and the matrix prints `unmeasurable lanes` but")
+    add("   does not fail. A number that moves when a pip cache is cold is not a capability number.")
+    add("7. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports")
+    add("   `add_dependency` FALSE **and** DAMAGED, while the full run reports the same case refused with")
+    add("   a clean tree. The single-lane fixture lacks the shared setup the case depends on, so every")
+    add("   lane-only number is suspect until the fixture is shared.")
+    add("8. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real")
     add("   software engineering is unbounded, so this corpus can be satisfied without being a good engineer.")
     add("   It needs real repositories and adversarial sentences, not more fixtures.")
     add("")

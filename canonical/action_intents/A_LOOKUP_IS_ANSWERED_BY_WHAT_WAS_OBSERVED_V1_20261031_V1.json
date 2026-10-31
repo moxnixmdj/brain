@@ -7,7 +7,7 @@
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
+ "canonical_base_commit": "4c97c3212f59f961bd351e8ef5d2a0e1b0895679",
  "date": "2026-10-31",
  "intent": "Hand over the observation a row already made when the sentence asks for a state rather than a collection: a PASS that delivered nothing answers with the row's observed_effect, and never with a manufactured value.",
  "causal_blocker": "A PASS can carry no answer at all. asked() returns None for a state question -- the pinned law test_a_lookup_and_a_count_are_not_enumerations requires that 'Show the status of the working tree' is not an enumeration -- and deliver() returned [] for every None shape, so the answer the row had already produced was never handed over: measured 2026-10-31 on 35f9464, that sentence PASSed on git.repository.operate.v1 with answer: null while the row's own result held observed_effect {op: status, branch: arena/80891605-brain, entry_count: 0, staged: 0, unstaged: 0, untracked: 0}, and the same held for 'Show me the diff', 'Which branch am I on' and 'What is the git status'. Six of the 61 sentences in the V4 baseline are this class: the work ran, the answer existed, and the caller received nothing.",
@@ -30,7 +30,7 @@
  "user_authorized_governance_change": false,
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "load_bearing_primary": {
-  "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
+  "canonical_base_commit": "4c97c3212f59f961bd351e8ef5d2a0e1b0895679",
   "open_obligation_ids": [],
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
@@ -80,7 +80,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "35f946411c083e8ebf81bc5b21f25263fdfe0f25",
+  "canonical_base_commit": "4c97c3212f59f961bd351e8ef5d2a0e1b0895679",
   "real_outcome": "Four state questions that returned PASS with answer: null on 35f9464 now return the observation the row made, under the existing PROJECT_BRAIN_ANSWER_SHAPE_V1 envelope with noun=observation and field=observed_effect: 'Show the status of the working tree' (branch, entry_count 0, staged 0), 'Show me the diff', 'Which branch am I on', 'What is the git status'. No verdict moved: all four still PASS in 0.4 s or less, 'List the functions in <f>' still delivers its function list, 'Show the last three git commits' still delivers its three rows, the two pinned neighbours of the shape gate are unchanged (test_the_answer_must_be_the_answer_v1: 17 tests OK), and the seven refusal families from PR #6498 are untouched (test_a_certificate_requires_the_work_v1: 9 tests OK). Six new law tests in canonical/tests/test_a_lookup_is_answered_by_what_was_observed_v1.py run in 0.001 s.",
   "required_capability": "A projection at the door's single exit that reads the row's own observation when the sentence asks for no collection. It is an internal invariant over data the repository already produces; no external capability is involved.",
   "proxy_goals_deleted": [
@@ -177,7 +177,7 @@
   "route_frontier": {
    "discovery_required": true,
    "incumbent_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
-   "checked_at_utc": "2026-10-31T19:34:26Z",
+   "checked_at_utc": "2026-10-31T19:49:37Z",
    "max_age_hours": 24,
    "source_classes_checked": [
     "BRAIN_INHERITED",
@@ -311,7 +311,7 @@
    "unresolved_plausible_dominators": [],
    "selected_route": "ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-10-31T19:34:26Z",
+    "checked_at_utc": "2026-10-31T19:49:37Z",
     "max_age_hours": 2,
     "selected_route": "ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED",
     "status": "READY",
@@ -325,7 +325,7 @@
       "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
-      "observed_at_utc": "2026-10-31T19:34:26Z",
+      "observed_at_utc": "2026-10-31T19:49:37Z",
       "evidence": [
        "DIRECT_PROBE: python3 ast.parse + re.compile on the four edited files"
       ],
@@ -341,7 +341,7 @@
       "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
-      "observed_at_utc": "2026-10-31T19:34:26Z",
+      "observed_at_utc": "2026-10-31T19:49:37Z",
       "evidence": [
        "DIRECT_PROBE: ANSWER_A_LOOKUP_WITH_WHAT_THE_ROW_OBSERVED imported and called; four state questions now return an observation"
       ],
@@ -357,7 +357,7 @@
       "volatility": "STATIC",
       "scope": "LOCAL",
       "status": "READY",
-      "observed_at_utc": "2026-10-31T19:34:26Z",
+      "observed_at_utc": "2026-10-31T19:49:37Z",
       "evidence": [
        "DIRECT_PROBE: canonical.tests.test_a_lookup_is_answered_by_what_was_observed_v1 ran 6 tests OK in 0.001 s"
       ],
