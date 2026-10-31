@@ -22,6 +22,17 @@
    "what": "probe:--output|--input",
    "why": "empirical cli probe"
   },
+  "g1051735229511": {
+   "cost": 1.0,
+   "created": 1793449166.0785794,
+   "helped": 0,
+   "id": "g1051735229511",
+   "last_seen": 1793449166.0785794,
+   "resolved": false,
+   "trials": 0,
+   "what": "extract text from the pdf file /tmp/none.pdf",
+   "why": "raw goal compilation gap"
+  },
   "g1055578385974": {
    "cost": 1.0,
    "created": 1793274772.488441,
@@ -560,6 +571,17 @@
    "trials": 1,
    "what": "probe:--out|positional",
    "why": "empirical cli probe"
+  },
+  "g633549333077": {
+   "cost": 1.0,
+   "created": 1793449373.436172,
+   "helped": 0,
+   "id": "g633549333077",
+   "last_seen": 1793449373.436172,
+   "resolved": false,
+   "trials": 0,
+   "what": "extract text from the pdf file /tmp/none.pdf",
+   "why": "raw goal compilation gap"
   },
   "g636426028039": {
    "cost": 1.0,

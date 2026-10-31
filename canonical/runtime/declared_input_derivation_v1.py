@@ -38,6 +38,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import os
 import pathlib
 import re
 import sys
@@ -132,6 +133,14 @@ _NAMED_NEW = re.compile(
     r"\b(?:new\s+(?:function|parameter|symbol|name)\s+named|named)\s+" + _QUOTE +
     r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\b", re.IGNORECASE,
 )
+
+# "from <A> to <B>" -- the two halves are bounded by another role word or the end of the clause,
+# so the pair is read off the sentence, never assembled.  Read by the MOVE grammar: two stated
+# paths with roles are a sender and a receiver, and the sentence says which is which.
+_FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
+# "<noun> <name>" -- "the function line_total", "the class Cart".  The name is read off the
+# sentence and then PROVED against the file's own AST.
+_NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 
 def stated_existing_files(goal: str, root: pathlib.Path) -> list[str]:
@@ -423,6 +432,18 @@ def _derive_edits(goal: str, keys: set[str], root: pathlib.Path) -> dict[str, An
                                   "evidence": source_root}
     return derived
 
+def _tree_of(root: pathlib.Path, rel: str):
+    """The parsed module, or an empty module when it cannot be read.
+
+    An unreadable stated file proves nothing, so the proof below simply yields no candidate --
+    the same fail-closed reading the qualname rule uses.
+    """
+    try:
+        return ast.parse((pathlib.Path(root) / rel).read_text(encoding="utf-8"))
+    except (OSError, SyntaxError, ValueError):
+        return ast.Module(body=[], type_ignores=[])
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -491,6 +512,23 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             if parent and (pathlib.Path(root) / parent).is_dir():
                 out[_dir_slot] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
                                   "evidence": sources[0]}
+    # THE SAME RULE FOR SEVERAL STATED FILES, BUT ONLY WHEN THE SENTENCE GAVE THEM ROLES
+    # ("from A to B"): the directory that holds both ends of a stated move is determined, and it
+    # is the only directory that is.  Without it the sibling move row refused with
+    # source_root:0_existing_directories_named.  A sentence that merely LISTS two files derives
+    # nothing -- that is a pinned law (test_two_source_files_are_ambiguous_and_derive_nothing).
+    if "source_root" in keys and "source_root" not in out and len(sources) > 1 \
+            and _FROM_TO.search(str(goal or "")):
+        _parents = [str(pathlib.PurePosixPath(f).parent) for f in sources]
+        _common = _parents[0] if len(set(_parents)) == 1 else None
+        if _common is None:
+            try:
+                _common = str(pathlib.PurePosixPath(os.path.commonpath(_parents)))
+            except ValueError:
+                _common = None
+        if _common and (pathlib.Path(root) / _common).is_dir():
+            out["source_root"] = {"value": _common, "rule": "PATH_DIR_COMMON_TO_STATED_FILES",
+                                  "evidence": ",".join(sources)}
     # A test command slot is satisfied by running the ONE stated test file -- through
     # the repository's OWN suite runner, never by executing the file as a script.
     #
@@ -702,6 +740,44 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "module" in keys and len(sources) == 1 and sources[0].endswith(".py"):
         out["module"] = {"value": sources[0], "rule": "MODULE_FROM_STATED_SOURCE_FILE",
                          "evidence": sources[0]}
+    # MOVE GRAMMAR: two stated source files with the roles "from A to B" name a SENDER and a
+    # RECEIVER, and the sentence says which is which.  Measured: "Move the function line_total
+    # from <b>/app/models.py to <b>/app/service.py" shortlisted python.refactor.move_function.v1
+    # and then refused it with BINDING_REFUSED:module:not_stated, because the one-file rule above
+    # only fires when exactly ONE source file is stated -- so the capability that exists for this
+    # sentence could never be reached by it.  The roles are read from the sentence's own
+    # "from ... to ..." pair, matched against the paths it actually states; anything else (no
+    # pair, no path, both orders) yields no value and the binder still fails closed.
+    _py_sources = [f for f in sources if f.endswith(".py")]
+    if len(_py_sources) == 2 and ("module" in keys) and ({"to_module", "target_module"} & keys):
+        _pair = _FROM_TO.search(str(goal or ""))
+        if _pair is not None:
+            def _stated_near(near: str) -> str | None:
+                hits = [f for f in _py_sources if f in near or f.split("/")[-1] in near]
+                return hits[0] if len(hits) == 1 else None
+            _src_hit, _dst_hit = _stated_near(_pair.group(1)), _stated_near(_pair.group(2))
+            if _src_hit and _dst_hit and _src_hit != _dst_hit:
+                out["module"] = {"value": _src_hit, "rule": "MODULE_FROM_STATED_FROM_PATH",
+                                 "evidence": _src_hit}
+                for _key in ({"to_module", "target_module"} & keys):
+                    out[_key] = {"value": _dst_hit, "rule": "TARGET_MODULE_FROM_STATED_TO_PATH",
+                                 "evidence": _dst_hit}
+    # A SYMBOL SLOT IS PROVED THE SAME WAY A QUALNAME IS, AND FOR THE SAME REASON: "Move the
+    # function line_total ..." states the name AFTER the noun, so a "<name> function" grammar reads
+    # nothing and the move row refused with BINDING_REFUSED:symbol:not_stated.  Exactly one
+    # identifier must follow the noun AND be defined at module scope in a stated file -- which for
+    # a move is strictly stronger than "in the one stated file", since a move states two.
+    if ({"symbol", "name"} & keys) and _py_sources:
+        _nouns = _NAMED_AFTER_NOUN.findall(str(goal or ""))
+        _candidates = [n for n in dict.fromkeys(_nouns) if _NAME_RE.match(n)]
+        _proved = [(f, _node.name) for f in _py_sources
+                   for _node in (getattr(_tree_of(root, f), "body", []) or [])
+                   if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                   and _node.name in _candidates]
+        if len(_proved) == 1:
+            for _key in ({"symbol", "name"} & keys):
+                out[_key] = {"value": _proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+                             "evidence": "%s:%s" % (_proved[0][0], _proved[0][1])}
     # Rename grammar: BOTH names must be stated, and exactly one pair may match.
     pairs = _RENAME_OLD_NEW.findall(str(goal or ""))
     if len(pairs) == 1:

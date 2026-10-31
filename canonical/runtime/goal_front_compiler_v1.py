@@ -963,7 +963,55 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
                 inputs[key] = module
                 continue
         remaining.append((key, exc))
+    # The typed-admission door already settles exactly this class of key: a
+    # STATED file determines the module it spells, the directory that holds it,
+    # and the symbol the sentence names -- each PROVED against the file's AST
+    # (declared_input_derivation_v1).  Measured: "Move the function line_total
+    # from <b>/app/models.py to <b>/app/service.py" ranked
+    # python.refactor.move_function.v1 first at 34 against 8 for the runner-up,
+    # then the front binder refused it with to_module:not_stated: two doors, one
+    # gate, and only one of them could bind the sentence.  Asking the same
+    # evidence module here is what makes the two doors agree; it can only settle
+    # a key that is still unbound, so every binding that worked before is kept
+    # byte for byte.
+    if remaining:
+        try:
+            from canonical.runtime import declared_input_derivation_v1 as _derivation
+            _evidence = (_derivation.derive(goal, entry or {}, root)
+                         if _derivation.is_swe_request(goal) else {})
+        except Exception:  # noqa: BLE001 - derivation is advisory; a fault keeps the refusal
+            _evidence = {}
+        settled: list[tuple[str, BaseException]] = []
+        for key, exc in remaining:
+            row = _evidence.get(key) or {}
+            value = row.get("value")
+            # Only a value PROVED AGAINST THE TREE is taken here, never one read
+            # off the sentence's word order.  Measured: a blanket hook let
+            # `python.refactor.rename_parameter.v1` bind `old_param` on "Rename the
+            # function line_total to item_total", so a FUNCTION rename was answered
+            # by a parameter renamer -- the same substitution the gate above exists
+            # to stop.  The proofs that survive are the ones whose evidence is a
+            # file this sentence stated.
+            if value is None or str(row.get("rule") or "") not in _PROVED_BY_THE_TREE:
+                settled.append((key, exc))
+                continue
+            inputs[key] = value
+        remaining = settled
     return remaining
+
+
+# Derivations whose value is CHECKED against a stated file (its AST, or the path
+# itself) rather than parsed out of the sentence.  A front-door binding may only
+# rest on one of these.
+_PROVED_BY_THE_TREE = frozenset({
+    "MODULE_FROM_STATED_SOURCE_FILE",
+    "MODULE_FROM_STATED_FROM_PATH",
+    "TARGET_MODULE_FROM_STATED_TO_PATH",
+    "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+    "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
+    "PATH_DIR_FROM_STATED_FILE_PARENT",
+    "PATH_DIR_COMMON_TO_STATED_FILES",
+})
 
 
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):
@@ -1672,7 +1720,8 @@ def _joint_role_binding(goal: str, pending: list[str], root: pathlib.Path, taken
 
 
 def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, context_paths=None, future_clauses=None,
-                    produced_paths=None, cycle=None, spool=None) -> dict[str, Any]:
+                    produced_paths=None, cycle=None, spool=None,
+                    allow_declared_rescue: bool = True) -> dict[str, Any]:
     """Pinned binder for the keys it supports, typed grammar / type binding for the rest. Never guesses.
 
     ``produced_paths`` (F12) is the set of artifacts earlier steps of the same multi-step request
@@ -1682,6 +1731,16 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     sentence and no earlier step produces it, a deterministic spool path is assigned instead of
     failing closed.  Passing ``spool=None`` keeps the original fail-closed behaviour, which is what
     every caller outside the DAG planner does.
+
+    ``allow_declared_rescue`` gates the LAST-RESORT derivation hook in ``derive_declared_inputs``
+    (the one that settles a still-unbound key from ``declared_input_derivation_v1``).  A walk over
+    ranked candidates passes True only for its OWN FIRST candidate, because a rescue may decide the
+    top candidate and must never displace it: measured 2026-10-31 on the capability matrix, "Run a
+    performance review of <pkg>/calc.py" ranked python.review.diff_perf_gate.v1 first at 15, the
+    gate could not bind, and a row SEVEN places down the list --
+    python.repository.acceptance.measure.v1 at score 4, on the single word "review" -- was rescued
+    into binding source_root and answered a performance review with a whole-suite measurement.
+    FALSE on the matrix, and the previous route (software.review.gate.composer.v1) was correct.
     """
     keys = input_keys(entry)
     # F20: a ``*_path`` key whose OWN registry entry declares it a literal list value is a
@@ -1769,7 +1828,7 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
             inputs[key] = bind_typed_key(goal, key, root, entry)
         except GoalCompilationFailure as exc:
             refused.append((key, exc))
-    if refused:
+    if refused and allow_declared_rescue:
         refused = derive_declared_inputs(goal, refused, root, entry, inputs)
     if refused:
         raise refused[0][1]
@@ -2277,11 +2336,14 @@ def bind_dag_clause(clause: str, admissible: Mapping[str, Mapping[str, Any]], ro
     ``None`` when no bound capability serves the clause - never a weaker guess.
     """
     registry = routable_registry(admissible)
+    _seen_any = False
     for score, specificity, cid, evidence in ranked_candidates(clause, registry):
+        _rank_here, _seen_any = _seen_any, True
         entry = registry[cid]
         try:
             inputs = bind_all_inputs(clause, entry, root, produced_paths=produced_paths,
-                                     cycle=cycle, spool=spool)
+                                     cycle=cycle, spool=spool,
+                                     allow_declared_rescue=not _seen_any)
         except GoalCompilationFailure:
             continue
         if _claiming_earlier_artifact(inputs, produced_paths, entry):
@@ -2850,7 +2912,9 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
                     if _repair_imperative and not _wa_ro.is_source_transformer(cand[2]):
                         continue
                     try:
-                        cand_inputs = bind_all_inputs(text, cand_entry, root, cycle=0, spool=spool)
+                        cand_inputs = bind_all_inputs(
+                            text, cand_entry, root, cycle=0, spool=spool,
+                            allow_declared_rescue=(rank == 0 and tier_index == 0))
                     except GoalCompilationFailure as exc:
                         if _failure_is_unstated(exc):
                             if best_error is None:
