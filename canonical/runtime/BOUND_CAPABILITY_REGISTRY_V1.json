@@ -6102,6 +6102,231 @@
         },
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1_V1.json"
       }
+    },
+    "python.patch.review.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.patch.review.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_patch_review_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "patch",
+        "review",
+        "supercomposer",
+        "mutation"
+      ],
+      "limitations": [
+        "Patch\u2192review 5-kernel, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.patch.review.super.verified",
+        "python.patch.review.family.verified"
+      ],
+      "requires": [
+        "python.patch.candidate.objective_acceptance_verified",
+        "python.patch.candidate.semantic_acceptance_verified",
+        "python.patch.candidate.strict_progress.multi_round.test_verified",
+        "python.review.diff_mutation_gate",
+        "python.review.diff_perf_gate"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_patch_review_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-PATCH-REVIEW-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1_V1.json"
+      }
+    },
+    "python.patch.search.test_guided.ast.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.patch.search.test_guided.ast.v1",
+          "max_candidates": 2000,
+          "output_path": "${input.output_path}",
+          "source_path": "${input.source_path}",
+          "test_argv": "${input.test_argv}",
+          "test_paths": "${input.test_paths}",
+          "timeout_s": 60
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "optional": [
+          "test_argv"
+        ],
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_test_guided_patch_search_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "patch",
+        "repair",
+        "bug",
+        "test",
+        "ast",
+        "mutation",
+        "candidate",
+        "repository"
+      ],
+      "limitations": [
+        "Searches one repository-local Python source file using deterministic single-node AST mutations and test-corpus literal substitutions.",
+        "Requires a failing Python test command as the acceptance oracle; an already-passing baseline fails closed.",
+        "Candidate-only: source bytes are restored after every trial and before return; no source write or promotion authority.",
+        "No universal patch-search completeness, no multi-edit completeness, no non-Python support, and no semantic-correctness claim beyond the bound test oracle.",
+        "Confers no FrontierCode score or acceptance credit by itself."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.patch.candidate.test_verified",
+        "python.patch.search.test_guided.ast.v1"
+      ],
+      "requires": [
+        "python.source.file.available",
+        "python.test.corpus.available"
+      ],
+      "result_fields": [
+        "status",
+        "pass",
+        "source_path",
+        "source_sha256",
+        "test_paths",
+        "test_sha256",
+        "tested_candidate_count",
+        "model_dependency_count",
+        "external_capability_provider_count",
+        "incremental_spend_usd",
+        "source_restored",
+        "winning_mutation",
+        "candidate_source_sha256",
+        "verification_replays",
+        "unified_diff",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+        "modules": [
+          "ast",
+          "difflib",
+          "hashlib",
+          "importlib.util",
+          "json",
+          "pathlib",
+          "subprocess",
+          "sys",
+          "time"
+        ],
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "discovered_and_repaired_defect": "STALE_PYTHON_BYTECODE_CACHE_ON_SAME_SIZE_RAPID_MUTATIONS",
+        "external_capability_provider_count": 0,
+        "incremental_spend_usd": 0,
+        "independent_sprite": "brain-capability-first-scheduler-verify-20261008-v1",
+        "independent_test_count": 8,
+        "local_test_count": 8,
+        "model_dependency_count": 0,
+        "runtime_sha256": "76ba334b9539def530b780c359d62d5ace90590f09c340148cec44f6c0c2c08b",
+        "status": "INDEPENDENT_TWO_CARRIER_FOCUSED_FALSIFICATION_PASS"
+      }
+    },
+    "python.pipeline.allowlist_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.pipeline.allowlist_gate.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_pipeline_allowlist_gate_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "pipeline",
+        "allowlist",
+        "review",
+        "gate"
+      ],
+      "limitations": [
+        "Allowlist gate over 6 diff gates"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.pipeline.allowlist.verified",
+        "python.review.composition.allowlist_verified"
+      ],
+      "requires": [
+        "python.review.diff_static_triage",
+        "python.review.diff_type_gate",
+        "python.review.diff_coverage_gate",
+        "python.review.diff_security_gate"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_pipeline_allowlist_gate_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-PIPELINE-ALLOWLIST-GATE-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PIPELINE_ALLOWLIST_GATE_V1_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
