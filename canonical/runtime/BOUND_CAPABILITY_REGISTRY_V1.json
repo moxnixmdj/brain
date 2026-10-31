@@ -8313,6 +8313,235 @@
         "version_family": "3.x"
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.source.secret_scan.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.secret_scan.v1",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_secret_scan",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "secret",
+        "hardcoded",
+        "credential",
+        "api key",
+        "access key",
+        "aws",
+        "token",
+        "leaked",
+        "hardcoded aws access key"
+      ],
+      "limitations": [
+        "Matches published credential shapes (AWS key ids, GitHub/Stripe/Slack tokens, private key headers).",
+        "Reports file, line and signature name; the secret is redacted, never written."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.hardcoded_credential",
+        "python.source.secret_scan"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "files_scanned",
+        "finding_count",
+        "findings",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_secret_scan.py",
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
+    "python.source.symbols.index.ast": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.symbols.index.ast",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_symbol_index",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "source",
+        "symbols",
+        "definitions",
+        "references",
+        "callers",
+        "call",
+        "graph",
+        "navigation",
+        "index",
+        "ast",
+        "who",
+        "calls"
+      ],
+      "limitations": [
+        "Indexes repository-local Python files using the standard-library AST parser.",
+        "Intra-module reference resolution (local/module/builtin/unknown); cross-module resolution is by import table, not full type inference."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "proposal_bindings": {
+        "source_root": {
+          "type": "path_file_or_dir"
+        }
+      },
+      "provides": [
+        "python.source.symbol_index",
+        "python.source.symbols.index.ast"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "call_edge_count",
+        "caller_index_size",
+        "file_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "reference_count",
+        "symbol_count",
+        "unparseable_count",
+        "unparseable_paths"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001",
+        "observed_effect": {
+          "call_edges": 221482,
+          "files": 2196,
+          "references": 579194,
+          "symbols": 86796,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001.json"
+      }
+    },
+    "python.source.symbols.resolve.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.source.symbols.resolve.v1",
+          "output_path": "${input.output_path}",
+          "queries": "${input.queries}",
+          "source_root": "${input.source_root}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_symbol_resolve",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "resolve",
+        "definition",
+        "reference",
+        "import",
+        "alias",
+        "cross",
+        "module",
+        "symbol",
+        "lookup"
+      ],
+      "limitations": [
+        "Resolution is truthful, not omniscient: MULTI_HOME lists every candidate, EXTERNAL/BUILTIN declare their lane, UNRESOLVED carries its reason.",
+        "Dynamic receiver objects are not traced; dotted references walk module/class structure only."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.source.symbols.resolve"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "external_count",
+        "multi_home_count",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "query_count",
+        "resolved_count",
+        "unresolved_count"
+      ],
+      "source": {
+        "module": "ast",
+        "type": "python_stdlib",
+        "version_family": "3.x"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SYMBOL-RESOLVE-001",
+        "observed_effect": {
+          "builtin": 1,
+          "external": 0,
+          "multi_home": 1,
+          "queries": 4,
+          "resolved": 2,
+          "source_root": "canonical",
+          "unresolved": 0,
+          "verified": true
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SYMBOL-RESOLVE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
