@@ -172,6 +172,21 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if effect_error:
         return {"schema": SCHEMA, "admitted": False, "rule": effect_error,
                 "compiler_mode": mode, "selected_capability": selected}
+    # An inventory row is keyed by the path of a file in THIS repository, so it can
+    # only be chosen by a sentence that names that file.  Lexical overlap with a
+    # filename is not evidence about the goal: it is evidence that the filename
+    # contains a common English word.  Measured consequence in
+    # ``inventory_source_path``; the fix is one predicate, not a new subsystem, and
+    # it is the same discipline R1 already applies to path tokens that come from
+    # the GOAL rather than from the capability's own id.
+    _inventory = inventory_source_path(selected)
+    if _inventory is not None and _inventory not in goal and selected not in goal:
+        return {"schema": SCHEMA, "admitted": False,
+                "rule": "INVENTORY_FILE_IS_NOT_A_CAPABILITY_UNLESS_THE_SENTENCE_NAMES_IT",
+                "compiler_mode": mode, "selected_capability": selected,
+                "inventory_source_path": _inventory,
+                "reason": "a repository file is not a capability a sentence can reach by "
+                          "word overlap; name its path or its id"}
     # A sentence that states a settled command line states a COMMAND, and a
     # capability that cannot run a command line cannot answer it -- however many
     # of the sentence's words its keywords happen to contain.  The retrieval
@@ -489,6 +504,106 @@ def dag_admission(goal: str, compiled: Mapping[str, Any], dag: Mapping[str, Any]
 
 _NON_SUCCESS_PREFIXES = ("FAIL", "OPEN", "UNRESOLVED", "ERROR", "BLOCKED", "REJECTED", "INCOMPLETE")
 
+# The inventory registry keys a row by the PATH of a source file in this repository
+# ("canonical/runtime/<module>.py.auto.v1").  A path is not a capability a sentence
+# can name: it is a filename, so its words are not evidence about the goal, and
+# running it answers the file's own question, not the caller's.
+_INVENTORY_SUFFIX = ".auto.v1"
+
+
+def inventory_source_path(capability_id: Any) -> str | None:
+    """The repository path an inventory row is keyed by, or ``None``.
+
+    Measured 2026-10-29 on c79a8f5: "Show the last three git commits" selected
+    ``canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1``
+    on the single token ``three`` (admission_basis DECISIVE_LEXICAL_MARGIN, margin
+    0.3666) and returned PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED
+    with ``semantic_acceptance_complete: true`` and ``independent_reinspection: true``.
+    No commit was read.  What ran was a set-theory verifier whose own stdout says
+    ``"pass": true`` about a statement in set theory, and that self-assessment was
+    taken as the verdict on the caller's sentence.  ``"three"`` alone did the same,
+    and ``"Show the last seven git commits"`` did it through
+    ``root3_seven_class_one_substrate_*``.
+    """
+    cid = str(capability_id or "")
+    return cid[:-len(_INVENTORY_SUFFIX)] if cid.endswith(_INVENTORY_SUFFIX) else None
+
+
+# The two keys that make a mapping an EXECUTION ENVELOPE rather than a verdict.
+# Both wrapping lanes set both of them: the shell lane reports
+# `{adapter, command, returncode, stdout, stderr}` and the generic command adapter
+# reports `{adapter, argv, returncode, stdout, stderr}`.  Measured over the 147
+# adapters: exactly one (`cli_command.py`) emits `returncode` and `stdout` and
+# `adapter` and `argv` together, and the three that emit `returncode` beside
+# `stdout` do so inside a per-test record, not as their own verdict.  Requiring
+# both keys is what keeps a nested record from being unwrapped as a verdict.
+_ENVELOPE_KEYS = ("returncode", "adapter")
+_ENVELOPE_OUTPUT_KEYS = ("stdout",)
+
+
+def _printed_verdict(inner: Mapping[str, Any]) -> Mapping[str, Any] | None:
+    """The verdict a command envelope is carrying on its stdout, or ``None``.
+
+    A capability executed through ``bound_capabilities/cli_command.py`` returns
+    ``{"adapter", "argv", "returncode", "stdout", "stderr"}`` and nothing else: the
+    capability speaks by printing JSON, and that JSON is the verdict.  Reading
+    ``status`` off the envelope finds no key and no evidence of failure, so
+    ``tool_truth_errors`` returned [] for every capability in that lane no matter
+    what it printed -- a tool that printed ``{"pass": false}`` with exit 0 was
+    credited as a success.  This is the same blindness as §1.1 of the hardcore-SWE
+    report at the level of one step: the answer is present and is never read.
+
+    Absence of a printed verdict is not evidence of failure: a program that prints
+    plain text made no claim, and it keeps whatever verdict it had.  75 of the 147
+    adapters print a capability identity, 57 print a status, 22 print ``pass``; the
+    rest print prose, and prose is not a verdict to overrule.
+    """
+    if not all(key in inner for key in _ENVELOPE_KEYS):
+        return None
+    for key in _ENVELOPE_OUTPUT_KEYS:
+        text = inner.get(key)
+        if not isinstance(text, str) or not text.strip():
+            continue
+        parsed = _last_json_object(text)
+        if isinstance(parsed, Mapping) and parsed:
+            return parsed
+    return None
+
+
+def _last_json_object(text: str) -> Any:
+    """The last complete JSON object in ``text``, or ``None``.
+
+    Adapters print progress before the verdict, and a command envelope keeps only
+    the tail of stdout, so the document is frequently not at offset 0.  Scanning
+    the ``{`` positions this way also accepts the whole-text case unchanged.
+    """
+    decoder = json.JSONDecoder()
+    found: Any = None
+    start = text.find("{")
+    seen = 0
+    while start != -1 and seen < 64:
+        seen += 1
+        try:
+            value, end = decoder.raw_decode(text, start)
+        except ValueError:
+            start = text.find("{", start + 1)
+            continue
+        if isinstance(value, Mapping) and value:
+            found = value
+        start = text.find("{", end)
+    return found
+
+
+def _verdict_errors(verdict: Mapping[str, Any], capability_id: str) -> list[str]:
+    """Every way one verdict says this run did not succeed."""
+    errors: list[str] = []
+    if verdict.get("pass") is False or verdict.get("pass") == "false":
+        errors.append("TOOL_REPORTED_PASS_FALSE:" + capability_id)
+    status = str(verdict.get("status") or verdict.get("outcome") or "").upper()
+    if status.startswith(_NON_SUCCESS_PREFIXES):
+        errors.append("TOOL_REPORTED_NON_SUCCESS_STATUS:" + capability_id + ":" + status[:48])
+    return errors
+
 
 def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
     """R5: the executed tool's own verdict wins over the controller's "it returned".
@@ -498,8 +613,19 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
     ``pass: false`` / ``status: OPEN__...`` / ``UNRESOLVED`` while still setting
     ``output_verified: true`` (they verified that they wrote their own failure report).
     That must never surface as PASS.
+
+    The verdict is read from the mapping the step returned *and* from the JSON that
+    mapping printed (see ``_printed_verdict``): a step reports its answer in one of
+    two places depending on the lane it ran in, and a truth check that knows only
+    the first one silently passes every capability in the second.
     """
     errors: list[str] = []
+
+    def add(items: list[str]) -> None:
+        for item in items:
+            if item not in errors:
+                errors.append(item)
+
     rows = list(result.get("execution")) if isinstance(result.get("execution"), list) else []
     if not rows:
         controller = result.get("controller_execution")
@@ -513,11 +639,22 @@ def tool_truth_errors(result: Mapping[str, Any]) -> list[str]:
         inner = row.get("result") if isinstance(row, Mapping) else None
         if not isinstance(inner, Mapping):
             continue
-        status = str(inner.get("status") or inner.get("outcome") or "").upper()
-        if inner.get("pass") is False:
-            errors.append("TOOL_REPORTED_PASS_FALSE:" + str(row.get("capability_id")))
-        elif status.startswith(_NON_SUCCESS_PREFIXES):
-            errors.append("TOOL_REPORTED_NON_SUCCESS_STATUS:" + str(row.get("capability_id")) + ":" + status[:48])
+        cid = str(row.get("capability_id") or "")
+        add(_verdict_errors(inner, cid))
+        printed = _printed_verdict(inner)
+        if printed is None:
+            continue
+        add(_verdict_errors(printed, cid))
+        # The payload must answer THIS capability's question.  When the printed
+        # document names a capability identity and it is not the one that ran,
+        # the answer in hand is an answer to a different question -- the §1.1
+        # defect of the hardcore-SWE report, at the level of a single step.
+        # Only `capability_id` is read: in this repository that name is
+        # unambiguously a registry id, while `capability` is also used for family
+        # and adapter names and cannot be compared.
+        named = str(printed.get("capability_id") or "").strip()
+        if named and cid and named != cid:
+            errors.append("TOOL_ANSWERED_A_DIFFERENT_QUESTION:" + cid + ":PRINTED:" + named[:64])
     return errors
 
 
@@ -578,9 +715,12 @@ def _with_tool_own_reason(text: str, result: Mapping[str, Any]) -> str:
         if not isinstance(row, Mapping):
             continue
         inner = row.get("result") if isinstance(row.get("result"), Mapping) else {}
-        cause = inner.get("reason")
-        if isinstance(cause, str) and cause.strip():
-            return text + ":" + cause.strip()[:64]
+        # The cause can be in the step's own mapping or in the JSON it printed;
+        # the CLI lane keeps it only in the second.
+        for carrier in (inner, _printed_verdict(inner) or {}):
+            cause = carrier.get("reason")
+            if isinstance(cause, str) and cause.strip():
+                return text + ":" + cause.strip()[:64]
     return text
 
 
@@ -1403,8 +1543,75 @@ def _patch_records(report: Any, _depth: int = 0) -> list[Mapping[str, Any]]:
     return out[:64]
 
 
+def _stated_test_paths(goal: str) -> list[str]:
+    """The test files a sentence STATES.  Repo-relative posix, ``[]`` on any fault.
+
+    Only files the sentence names and that already exist count: a report that a
+    path is mentioned is not the same as the sentence promising a suite.
+    """
+    try:
+        from canonical.runtime import declared_input_derivation_v1 as derivation
+        stated = derivation.stated_existing_files(goal, ROOT)
+    except Exception:  # noqa: BLE001 - no derivation, no stated suite
+        return []
+    out: list[str] = []
+    for rel in sorted({str(p) for p in stated}):
+        if not rel.endswith(".py"):
+            continue
+        leaf = rel.rsplit("/", 1)[-1]
+        if leaf.startswith("test_") or leaf.endswith("_test.py") or "/tests/" in rel:
+            if (ROOT / rel).is_file():
+                out.append(rel)
+    return out
+
+
+def _patched_copy_passes(source: Path, patched: str, tests: list[str]) -> bool:
+    """Run the STATED suite against the PATCHED bytes, then put the original back.
+
+    Measured 2026-10-29: "Repair the python source X so that the unit test T
+    passes, and save the repair report to R" returned
+    PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED while X was
+    still byte-identical and T was still red.  The stated report carried a patch
+    that *applies*, and applying was the whole bar -- so a report describing a
+    repair nobody had run was accepted as the repair.  A patch is only the
+    promised artifact if the promise it encodes is true, so the suite the
+    sentence named is run on the patched copy.  Red, timed out, or unrunnable is
+    no authority.
+
+    The bytes are restored in a ``finally`` for the same reason the repair loop
+    restores its own: a gate that can leave a user's source broken is worse than
+    the over-claim it is closing.
+    """
+    original = source.read_bytes()
+    try:
+        from canonical.runtime.bound_capabilities import (
+            python_test_guided_patch_search_v1 as ptg,
+        )
+        source.write_text(patched, encoding="utf-8")
+        ptg._purge_source_bytecode(source)
+        targets = [(ROOT / t).resolve() for t in tests]
+        env = ptg._source_env(*targets, source)
+        result = ptg._run_tests(ROOT, ptg.suite_argv(sys.executable, *targets),
+                                120, env)
+        return result.get("returncode") == 0 and not result.get("timed_out")
+    except Exception:  # noqa: BLE001 - a suite that cannot run proves nothing
+        return False
+    finally:
+        try:
+            source.write_bytes(original)
+        finally:
+            try:
+                from canonical.runtime.bound_capabilities import (
+                    python_test_guided_patch_search_v1 as _ptg,
+                )
+                _ptg._purge_source_bytecode(source)
+            except Exception:  # noqa: BLE001
+                pass
+
+
 def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None,
-                               before_files: Mapping[str, Any] | None = None) -> bool:
+                               before_files: Mapping[str, Any] | None = None,
+                               goal: str = "") -> bool:
     """Does a stated report carry a patch for this source that really applies?
 
     Measured on 18ecf7db: "Repair the python source X ... so the unit tests in T
@@ -1470,6 +1677,11 @@ def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None,
             except Exception:  # noqa: BLE001 - a patch that does not apply is no promise
                 continue
             if patched != current:
+                stated = _stated_test_paths(goal)
+                if stated and not _patched_copy_passes(resolved, patched, stated):
+                    # the patch applies but the suite the sentence named is still
+                    # red on it: that is a description of a repair, not a repair.
+                    continue
                 return True
     return False
 
@@ -1511,7 +1723,7 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
         if not now:
             errors.append("PROMISED_SOURCE_UNREADABLE:" + raw)
         elif now == digest:
-            if _statement_patch_authority(raw, artifacts, before_files):
+            if _statement_patch_authority(raw, artifacts, before_files, goal):
                 continue
             errors.append("PROMISED_SOURCE_UNCHANGED:" + raw)
     # A stated source ROOT promises that the repair happened somewhere inside it.
@@ -1519,7 +1731,7 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     # one module; requiring nothing would accept a run that touched no file at all.
     for root, files_before in (roots_before or {}).items():
         changed = any(_source_digest(rel) != digest for rel, digest in files_before.items())
-        if changed or _statement_patch_authority(root, artifacts, before_files):
+        if changed or _statement_patch_authority(root, artifacts, before_files, goal):
             continue
         errors.append("PROMISED_SOURCE_UNCHANGED:" + root)
     return errors
@@ -2248,6 +2460,29 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
             result["status"] = "FAIL_CLOSED__CROSSFILE_TASK_NOT_REINSPECTED"
             result["failure_class"] = "CROSSFILE_TASK_NOT_REINSPECTED"
         return result
+    # Preserve upstream's plan-first optimization for an explicitly stated
+    # family, after the stricter staged-crossfile grammar above. Planning faults
+    # may fall back; an executed adapter's verdict must never be replaced.
+    if _typed_plan_is_stated(request):
+        try:
+            from canonical.runtime import swe_typed_plan_v1 as _typed
+            plan = _typed.build_plan(_request_goal(request), ROOT)
+        except Exception:
+            plan = None
+        if plan is not None:
+            fast_request = dict(request)
+            fast_request["_typed_swe_plan"] = plan
+            fast = _solve_body(fast_request)
+            if fast.get("pass") is True:
+                fast["typed_swe_plan_first"] = {
+                    "schema": "SWE_TYPED_PLAN_FIRST_V1",
+                    "selected_capability": plan[2].get("selected_capability"),
+                    "basis": "STATED_SWE_EFFECT_FAMILY_IS_AUTHORITATIVE",
+                    "primary_pass_skipped_ms": 0,
+                    "model_dependency_count": 0,
+                    "incremental_spend_usd": 0,
+                }
+            return fast
     # Reuse the compiler result within this request only. Never cache mutable
     # task evidence across calls. Correct a contradicted SWE effect BEFORE a
     # measurement-only/wrong-domain tool is allowed to execute.
@@ -2302,7 +2537,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     # a second guess must never overwrite it.
     if result.get("executed") is True or result.get("failure_class") == "CONTRACT_CHECKS_UNBOUND":
         return result
-    goal = str((request or {}).get("goal") or "").strip()
+    goal = _request_goal(request)
     try:
         from canonical.runtime import swe_typed_plan_v1 as _typed_plan
         if not _typed_plan.is_swe_request(goal):
@@ -2326,6 +2561,45 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
         pass
     return result
+
+
+def _request_goal(request: Any) -> str:
+    """The sentence a request carries, for a Mapping request or a bare string.
+
+    `solve` is declared `Mapping`, but `_solve_body` has always accepted a bare
+    sentence and the probes in this session called it that way.  A speed module
+    that reads `request["goal"]` without this normalisation turned a request that
+    has always worked into `AttributeError: 'str' object has no attribute 'get'`
+    -- a fault introduced by a module that was supposed to remove work, not
+    change what the door accepts.
+    """
+    if isinstance(request, Mapping):
+        return str(request.get("goal") or "").strip()
+    return str(request or "").strip()
+
+
+def _typed_plan_is_stated(request: Any) -> bool:
+    """True when the sentence STATES one of the SWE effect families by name.
+
+    Cheap on purpose (the typed module is imported only after this returns True):
+    a solve that is not a stated family pays one regex sweep and nothing else.
+    """
+    if isinstance(request, Mapping) and request.get("_typed_swe_plan") is not None:
+        return False
+    goal = _request_goal(request)
+    if not goal:
+        return False
+    try:
+        from canonical.runtime import swe_typed_plan_v1 as _typed
+        # Scoped to the GIT family on purpose.  Measured 2026-10-29: running the
+        # typed plan FIRST for every family changed the caller-finding verdict from
+        # PASS to FAIL_CLOSED__WRITE_AUTHORITY_REFUSED, because the primary pass had
+        # been doing work the typed plan relies on.  A speed change may not alter a
+        # verdict, so the family that has no primary route to lose (there was no git
+        # capability at all before this session) is the only one that skips it.
+        return _typed.stated_family_token(goal) == _typed.GIT_FAMILY_TOKEN
+    except Exception:  # noqa: BLE001
+        return False
 
 
 def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:

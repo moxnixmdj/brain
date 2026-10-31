@@ -1,0 +1,27 @@
+{
+ "gaps": {
+  "g156010694117": {
+   "cost": 1.0,
+   "created": 1793451970.0284297,
+   "helped": 0,
+   "id": "g156010694117",
+   "last_seen": 1793451970.9099615,
+   "resolved": false,
+   "trials": 0,
+   "what": "transcribe the audio in this recording to text",
+   "why": "raw goal compilation gap"
+  },
+  "g805573136179": {
+   "cost": 1.0,
+   "created": 1793451968.867195,
+   "helped": 0,
+   "id": "g805573136179",
+   "last_seen": 1793451968.867195,
+   "resolved": false,
+   "trials": 0,
+   "what": "get the writing out of that there pdf thing",
+   "why": "raw goal compilation gap"
+  }
+ },
+ "schema": "PROJECT_BRAIN_IGNORANCE_LEDGER_V1"
+}

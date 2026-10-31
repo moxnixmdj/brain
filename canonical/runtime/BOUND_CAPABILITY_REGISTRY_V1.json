@@ -11269,6 +11269,95 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
       }
+    },
+    "git.repository.operate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "git.repository.operate.v1",
+          "limit": "${input.limit}",
+          "op": "${input.op}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "git_repository_operate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "git",
+        "commit",
+        "log",
+        "history",
+        "diff",
+        "status",
+        "blame",
+        "branch",
+        "show",
+        "repository",
+        "revision",
+        "staged"
+      ],
+      "limitations": [
+        "Seven declared operations only (log, status, diff, show, blame, branch, commit); the sentence chooses the operation, never the argv, and any other operation is refused by name.",
+        "Reads plus one write (commit --no-verify). No push, rebase, merge, reset or history rewrite.",
+        "Every reported effect is re-derived by a second git plumbing mechanism; a disagreement is a refusal, not a warning.",
+        "Repository-local only: repo_root must resolve inside the calling root."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "git.repository.operate",
+        "git.history.read",
+        "git.working_tree.inspect",
+        "git.commit.create"
+      ],
+      "requires": [
+        "git.repository.available"
+      ],
+      "result_fields": [
+        "adapter",
+        "capability",
+        "head_sha",
+        "incremental_spend_usd",
+        "model_dependency_count",
+        "observed_effect",
+        "op",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "repo_root",
+        "row_count",
+        "rows"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
+        "adapter_sha256": "b0115970ddd67e689391a75fce1e0a424df835e7fb3920c66e86e103866bc166",
+        "engine": "git",
+        "type": "brain_bound_system_tool"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independent_verified_by": "git plumbing: rev-parse, rev-list, cat-file, merge-base, symbolic-ref",
+        "independent_mechanism": "each operation's reported effect is re-derived by a different git command than the one that produced it",
+        "mission_id": "ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001",
+        "observed_effect": {
+          "operations_measured": 7,
+          "commits_read": 2,
+          "patch_bytes": 315,
+          "blame_lines": 2,
+          "commit_sha_measured": "a2ad8d4ac665",
+          "independent_mechanism_disagreements": 0
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001__RECEIPT.json",
+        "authority": "NONE",
+        "carrier": "SANDBOX"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

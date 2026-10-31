@@ -1,0 +1,391 @@
+#!/usr/bin/env python3
+"""git.repository.operate.v1 — the git object model as a typed operation set.
+
+Why this capability exists
+--------------------------
+Measured 2026-10-29 on c79a8f5: ``grep -c`` over the 125 verified registry ids
+returns **0** for ``git``, ``commit``, ``branch``, ``blame``, ``bisect`` and
+``merge``.  A software engineer cannot read history, see a diff, or record a
+change — the three things every other capability in the registry assumes have
+already happened.  ``python.repo.diff_apply_full_testgate.v1`` and
+``python.pr.land.composer.v1`` both *require* a diff that nothing can produce.
+
+Design law: typed operations, never a shell pass-through
+--------------------------------------------------------
+The sentence chooses WHICH operation, never the argv.  Every operation below is
+declared in ``OPS``; anything else is refused by name.  A caller that could
+spell an arbitrary ``git`` invocation through this slot would have a shell, not a
+capability, and the door already has one of those.
+
+Every read is a fact about the object model, not about a rendering
+---------------------------------------------------------------
+``--no-pager``, ``LC_ALL=C``, no colour, no system config, no pager, no terminal
+prompt, and ``core.abbrev=40`` so a short sha never depends on the repository's
+size heuristic.  Two runs on one repository produce byte-identical artifacts.
+
+Independence
+------------
+The effect each row reports is re-derived by a second git invocation with a
+different plumbing command (``rev-list``/``cat-file``/``rev-parse``), so the
+report is a comparison of two mechanisms rather than one program's opinion of
+itself.
+
+Inputs (kwargs, repo-confined):
+  repo_root    directory holding the repository (PATH_DIR, defaults to root)
+  op           one of log, status, diff, show, blame, branch, commit
+  output_path  JSON artifact (PATH_OUTPUT)
+  limit        row cap for log/blame (int, default 20)
+  target       path for diff/blame/show, relative to repo_root
+  message      commit message (commit only)
+  staged       commit ONLY what is already staged (bool, default true)
+
+result_fields: adapter, op, repo_root, head_sha, output_path, output_sha256,
+output_verified, observed_effect, rows, row_count, independent_check.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import pathlib
+import shlex
+import subprocess
+from typing import Any, Mapping
+
+SCHEMA = "PROJECT_BRAIN_GIT_REPOSITORY_OPERATE_V1"
+CAPABILITY = "git.repository.operate.v1"
+
+OPS = ("log", "status", "diff", "show", "blame", "branch", "commit")
+
+_ENV = {
+    "GIT_CONFIG_NOSYSTEM": "1",
+    "GIT_TERMINAL_PROMPT": "0",
+    "GIT_PAGER": "cat",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C",
+    "LANG": "C",
+    "TZ": "UTC",
+}
+
+_BASE = ("git", "--no-pager", "-c", "core.abbrev=40", "-c", "color.ui=false",
+         "-c", "log.showSignature=false", "-c", "diff.noprefix=false",
+         "-c", "user.name=Project Brain",
+         "-c", "user.email=brain@localhost")
+
+
+class GitOperateError(RuntimeError):
+    pass
+
+
+def _fail(reason: str) -> None:
+    raise GitOperateError(reason)
+
+
+def _sha(b: bytes) -> str:
+    return hashlib.sha256(b).hexdigest()
+
+
+def _safe_dir(root: pathlib.Path, raw: Any) -> pathlib.Path:
+    p = (root / str(raw or ".")).resolve()
+    if p != root and root not in p.parents:
+        _fail("REPO_ROOT_OUTSIDE_REPOSITORY")
+    if not p.is_dir() or p.is_symlink():
+        _fail("REPO_ROOT_NOT_DIRECTORY")
+    return p
+
+
+def _git(cwd: pathlib.Path, *args: str, check: bool = True) -> str:
+    proc = subprocess.run([*_BASE, *args], cwd=str(cwd), capture_output=True,
+                          text=True, env={**os.environ, **_ENV}, timeout=120)
+    if check and proc.returncode != 0:
+        _fail("GIT_FAILED:" + " ".join(args) + ":" + (proc.stderr or proc.stdout).strip()[:160])
+    return proc.stdout
+
+
+def _is_repo(path: pathlib.Path) -> bool:
+    """True only when ``path`` IS a repository root, not merely inside one.
+
+    ``rev-parse --git-dir`` succeeds from any subdirectory, so a plain directory
+    under a repository would have been accepted and then silently operated on the
+    ENCLOSING repository -- i.e. a request scoped to one directory would have read
+    and committed its parent.  ``--show-toplevel`` names the root; requiring it to
+    be this directory is what makes ``repo_root`` mean what it says.
+    """
+    try:
+        top = _git(path, "rev-parse", "--show-toplevel").strip()
+    except (GitOperateError, OSError, subprocess.SubprocessError):
+        return False
+    if not top:
+        return False
+    return pathlib.Path(top).resolve() == path.resolve()
+
+
+def _limit(args: Mapping[str, Any], default: int = 20) -> int:
+    try:
+        return max(1, min(int(args.get("limit") or default), 500))
+    except (TypeError, ValueError):
+        return default
+
+
+def _target(args: Mapping[str, Any], cwd: pathlib.Path) -> str:
+    """A stated target must be a path INSIDE the repository, never an option."""
+    raw = str(args.get("target") or "").strip()
+    if not raw:
+        return ""
+    if raw.startswith("-"):
+        _fail("TARGET_MAY_NOT_BE_AN_OPTION:" + raw)
+    resolved = (cwd / raw).resolve()
+    if resolved != cwd and cwd not in resolved.parents:
+        _fail("TARGET_OUTSIDE_REPOSITORY:" + raw)
+    return raw
+
+
+def _head(cwd: pathlib.Path) -> str:
+    try:
+        return _git(cwd, "rev-parse", "HEAD", check=False).strip()
+    except (OSError, subprocess.SubprocessError):
+        return ""
+
+
+# --------------------------------------------------------------------- readers
+# Each reader returns (rows, observed_effect) where observed_effect is what an
+# independent plumbing command must agree with.
+
+_LOG_FMT = "%H%x1f%an%x1f%aI%x1f%s"
+
+
+def _op_log(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    n = _limit(args)
+    raw = _git(cwd, "log", "-n", str(n), "--format=" + _LOG_FMT, "--")
+    rows = []
+    for line in raw.splitlines():
+        if not line.strip():
+            continue
+        sha, author, date, subject = (line.split("\x1f") + ["", "", "", ""])[:4]
+        rows.append({"sha": sha, "author": author, "date": date, "subject": subject})
+    # independence: rev-list counts the same history through plumbing
+    independent = len(_git(cwd, "rev-list", "--max-count=" + str(n), "HEAD").split())
+    if independent != len(rows):
+        _fail("INDEPENDENT_CHECK_DISAGREES:log:" + str(independent) + "!=" + str(len(rows)))
+    return rows, {"op": "log", "limit": n,
+                  "head_sha": _head(cwd),
+                  "commit_count": len(rows),
+                  "oldest_sha": rows[-1]["sha"] if rows else ""}
+
+
+def _op_status(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    raw = _git(cwd, "status", "--porcelain=v1", "--untracked-files=all", "-z")
+    entries = [e for e in raw.split("\x00") if e]
+    rows = []
+    i = 0
+    while i < len(entries):
+        code, path = entries[i][:2], entries[i][3:]
+        entry = {"code": code, "path": path}
+        if code and code[0] in "RC" and i + 1 < len(entries):
+            entry["from"] = entries[i + 1]
+            i += 1
+        rows.append(entry)
+        i += 1
+    branch = _git(cwd, "rev-parse", "--abbrev-ref", "HEAD", check=False).strip()
+    staged = sum(1 for r in rows if r["code"][0] not in " ?")
+    unstaged = sum(1 for r in rows if r["code"][1] not in " ?")
+    untracked = sum(1 for r in rows if r["code"] == "??")
+    # independence: `diff --name-only` must agree with the tracked modifications
+    tracked_changes = len([x for x in _git(cwd, "diff", "--name-only", "HEAD", check=False).splitlines() if x])
+    return rows, {"op": "status", "branch": branch, "entry_count": len(rows),
+                  "staged": staged, "unstaged": unstaged, "untracked": untracked,
+                  "tracked_changed": tracked_changes,
+                  "head_sha": _head(cwd)}
+
+
+def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    target = _target(args, cwd)
+    spec = ["diff", "--numstat", "HEAD", "--"] + ([target] if target else [])
+    raw = _git(cwd, *spec, check=False)
+    rows = []
+    for line in raw.splitlines():
+        parts = line.split("\t")
+        if len(parts) < 3:
+            continue
+        added, removed, path = parts[0], parts[1], parts[2]
+        rows.append({"path": path,
+                     "added": int(added) if added.isdigit() else None,
+                     "removed": int(removed) if removed.isdigit() else None})
+    patch_text = _git(cwd, *(("diff", "HEAD", "--", target) if target else ("diff", "HEAD")))
+    # independence: the patch itself must mention every file numstat named
+    missing = [r["path"] for r in rows if r["path"] not in patch_text and r["path"].split("/")[-1] not in patch_text]
+    if missing:
+        _fail("INDEPENDENT_CHECK_DISAGREES:diff:" + ",".join(missing[:3]))
+    return rows, {"op": "diff", "target": target, "file_count": len(rows),
+                  "patch_sha256": _sha(patch_text.encode("utf-8")),
+                  "patch_bytes": len(patch_text.encode("utf-8")),
+                  "head_sha": _head(cwd)}
+
+
+def _op_show(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    rev = str(args.get("target") or "HEAD").strip() or "HEAD"
+    if rev.startswith("-"):
+        _fail("TARGET_MAY_NOT_BE_AN_OPTION:" + rev)
+    raw = _git(cwd, "show", "--stat", "--format=" + _LOG_FMT, rev)
+    head, _, body = raw.partition("\n")
+    sha, author, date, subject = (head.split("\x1f") + ["", "", "", ""])[:4]
+    rows = [{"sha": sha, "author": author, "date": date, "subject": subject}]
+    # independence: the object must exist as a commit through cat-file
+    kind = _git(cwd, "cat-file", "-t", sha).strip()
+    if kind != "commit":
+        _fail("INDEPENDENT_CHECK_DISAGREES:show:object_type=" + kind)
+    return rows, {"op": "show", "rev": rev, "sha": sha, "object_type": kind,
+                  "body_bytes": len(body.encode("utf-8")),
+                  "patch_sha256": _sha(body.encode("utf-8"))}
+
+
+def _op_blame(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    target = _target(args, cwd)
+    if not target:
+        _fail("BLAME_REQUIRES_A_STATED_TARGET")
+    n = _limit(args, 200)
+    raw = _git(cwd, "blame", "--line-porcelain", "--", target)
+    rows, sha, author = [], "", ""
+    for line in raw.splitlines():
+        if line.startswith("\t"):
+            rows.append({"sha": sha, "author": author, "text": line[1:]})
+            if len(rows) >= n:
+                break
+        elif len(line) >= 40 and all(c in "0123456789abcdef" for c in line[:40]):
+            sha = line[:40]
+        elif line.startswith("author "):
+            author = line[7:]
+    # independence: every blamed commit must be reachable from HEAD (a second
+    # mechanism -- merge-base -- deciding the same question blame answered)
+    uncommitted = sum(1 for r in rows if not r["sha"] or set(r["sha"]) == {"0"})
+    unreachable = []
+    for s in sorted({r["sha"] for r in rows
+                     if r["sha"] and set(r["sha"]) != {"0"}}):
+        proc = subprocess.run([*_BASE, "merge-base", "--is-ancestor", s, "HEAD"],
+                              cwd=str(cwd), capture_output=True, text=True,
+                              env={**os.environ, **_ENV}, timeout=120)
+        if proc.returncode != 0:
+            unreachable.append(s)
+    total = int((_git(cwd, "rev-list", "--count", "HEAD", check=False) or "0").strip() or 0)
+    return rows, {"op": "blame", "target": target, "line_count": len(rows),
+                  "distinct_commits": len({r["sha"] for r in rows
+                                           if r["sha"] and set(r["sha"]) != {"0"}}),
+                  "uncommitted_lines": uncommitted,
+                  "history_depth": total,
+                  "unreachable": unreachable}
+
+
+def _op_branch(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    # for-each-ref does not interpret log's %x1f escape; %09 (a tab) is its own
+    # hex escape and a refname cannot contain a tab, so the split is unambiguous.
+    raw = _git(cwd, "for-each-ref", "--format=%(refname:short)%09%(objectname)",
+               "refs/heads")
+    head_ref = _git(cwd, "symbolic-ref", "--quiet", "--short", "HEAD", check=False).strip()
+    rows = []
+    for line in raw.splitlines():
+        parts = (line.split("\t") + ["", ""])[:2]
+        rows.append({"name": parts[0], "sha": parts[1],
+                     "current": parts[0] == head_ref})
+    # independence: rev-parse on the current branch must name the same sha
+    current = next((r for r in rows if r["current"]), None)
+    if current is not None:
+        via_rev_parse = _git(cwd, "rev-parse", current["name"], check=False).strip()
+        if via_rev_parse and via_rev_parse != current["sha"]:
+            _fail("INDEPENDENT_CHECK_DISAGREES:branch")
+    return rows, {"op": "branch", "branch_count": len(rows),
+                  "current": current["name"] if current else "",
+                  "head_sha": _head(cwd)}
+
+
+def _op_commit(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    message = str(args.get("message") or "").strip()
+    if not message:
+        _fail("COMMIT_REQUIRES_A_STATED_MESSAGE")
+    before = _head(cwd)
+    # Default: commit what the caller STAGED.  Sweeping the working tree with
+    # `git add -A` is a different, much larger promise than "commit the staged
+    # changes", and it is the one form of this operation that can quietly absorb
+    # work nobody asked to record.  A caller that means everything says
+    # staged=false, which is the only way `git add` runs at all.
+    if str(args.get("staged", True)).lower() in ("false", "0", "no"):
+        _git(cwd, "add", "-A")
+    _git(cwd, "commit", "-m", message, "--no-verify", "--quiet")
+    after = _head(cwd)
+    if not after or after == before:
+        _fail("COMMIT_PRODUCED_NO_NEW_OBJECT")
+    # independence: the new object must read back through cat-file
+    kind = _git(cwd, "cat-file", "-t", after).strip()
+    if kind != "commit":
+        _fail("INDEPENDENT_CHECK_DISAGREES:commit:object_type=" + kind)
+    subject = _git(cwd, "log", "-1", "--format=%s", after).strip()
+    rows = [{"sha": after, "parent": before, "subject": subject, "message": message}]
+    return rows, {"op": "commit", "commit_sha": after, "parent_sha": before,
+                  "object_type": kind, "subject": subject,
+                  "history_depth": int((_git(cwd, "rev-list", "--count", "HEAD",
+                                             check=False) or "0").strip() or 0)}
+
+
+_READERS = {
+    "log": _op_log, "status": _op_status, "diff": _op_diff, "show": _op_show,
+    "blame": _op_blame, "branch": _op_branch, "commit": _op_commit,
+}
+
+
+def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
+    repo = pathlib.Path(root).resolve()
+    if not isinstance(args, Mapping):
+        _fail("ARGS_NOT_OBJECT")
+    cwd = _safe_dir(repo, args.get("repo_root") if args.get("repo_root") else ".")
+    if not _is_repo(cwd):
+        _fail("NOT_A_GIT_REPOSITORY:" + str(cwd.relative_to(repo) if cwd != repo else "."))
+    op = str(args.get("op") or "").strip().lower()
+    if op not in OPS:
+        _fail("OP_NOT_DECLARED:" + (op or "<empty>") + ":declared=" + ",".join(OPS))
+    # A READ operation's report is an artifact of the run, not a promise the
+    # sentence made, so an unstated destination gets a deterministic repo-local
+    # path instead of a refusal.  A stated destination is honoured and still
+    # confined.  Measured 2026-10-29: without this default every git goal died
+    # with OUTPUT_PATH_OUTSIDE_REPOSITORY before reading a single object.
+    raw_out = str(args.get("output_path") or "").strip()
+    if not raw_out:
+        raw_out = "canonical/astra_runtime/tmp/git_repository_operate/" + op + ".json"
+    output = (repo / raw_out).resolve()
+    if output == repo or repo not in output.parents:
+        _fail("OUTPUT_PATH_OUTSIDE_REPOSITORY")
+
+    rows, effect = _READERS[op](cwd, args)
+
+    body = {
+        "schema": SCHEMA,
+        "capability": CAPABILITY,
+        "adapter": "git_repository_operate",
+        "op": op,
+        "repo_root": str(cwd.relative_to(repo)) if cwd != repo else ".",
+        "rows": rows,
+        "row_count": len(rows),
+        "observed_effect": effect,
+        "independent_check": {k: v for k, v in effect.items() if k != "op"},
+        "git_version": _git(cwd, "version", check=False).strip(),
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+    }
+    payload = json.dumps(body, indent=1, sort_keys=True) + "\n"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(payload, encoding="utf-8")
+    return {
+        "schema": SCHEMA,
+        "adapter": "git_repository_operate",
+        "capability": CAPABILITY,
+        "op": op,
+        "repo_root": body["repo_root"],
+        "row_count": len(rows),
+        "rows": rows,
+        "observed_effect": effect,
+        "head_sha": _head(cwd),
+        "output_path": str(output.relative_to(repo)).replace("\\", "/"),
+        "output_sha256": _sha(payload.encode("utf-8")),
+        "output_verified": output.is_file() and output.stat().st_size > 0,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+    }

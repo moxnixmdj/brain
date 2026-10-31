@@ -57,8 +57,37 @@ _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # (goal triggers, registry-keyword terms to enumerate candidates, required effect token in cid)
     (("caller", "who calls", "call site", "call graph", "find every call"),
      ("caller", "call graph", "who calls"), "symbol"),
+    # Measured 2026-10-29: "Show the last three git commits" is the plainest thing a
+    # software engineer asks, and the machine had no git capability at all -- it
+    # returned PASS through an inventory row (see live_brain_route_admission_v1.
+    # inventory_source_path).  The capability now exists (git.repository.operate.v1);
+    # this entry is what lets a stated git OPERATION reach it, by the same
+    # enumerate-and-let-admission-be-the-oracle route the caller family uses.
+    # Triggers are deliberately narrow.  Measured 2026-10-29: with a bare "branch"
+    # trigger, "Branch out the new feature into three modules" bound op=branch and
+    # returned PASS for a `git branch` listing -- a false PASS of exactly the class
+    # this file exists to remove.  A metaphor is not a repository operation, so the
+    # trigger is the PLURAL noun or the explicit command, never the bare verb.
+    (("git", "commit the", "last commit", "commits", "blame", "branches",
+      "who wrote", "working tree", "staged changes"),
+     ("git", "commit", "history", "repository"), "git"),
 )
-_FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration.verify.")
+_FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration.verify.",
+                        "git.")
+
+
+GIT_FAMILY_TOKEN = "git"
+
+
+def stated_family_token(goal: str) -> str | None:
+    """The effect token of the family this sentence STATES, or ``None``.
+
+    Cheap enough for the front door: one pass over ``_FAMILIES`` triggers and no
+    registry read.  The door uses it to decide whether a typed plan is
+    AUTHORITATIVE for this sentence or merely a retry candidate.
+    """
+    fam = _family_terms(goal)
+    return fam[1] if fam else None
 
 
 def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:

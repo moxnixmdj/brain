@@ -55,6 +55,8 @@ Before the landing attempt, registry-only restoration continued through rung 56 
 
 The concurrent restoration batch completed at rung 66 (`b0df8bee`). Its registry changes are integrated before the final required-check run. The artifact is regenerated rather than carrying forward a smaller catalog's digest. Final post-batch measurements and the actual merge outcome are recorded on PR #6341; earlier numerical results here retain their explicitly stated measurement scope.
 
+The final integration also retains upstream's complete-registry loader and native-verdict/git improvements. Its plan-first path for explicitly stated effect families coexists with this branch's staged-crossfile grammar, structured-contract preflight, within-request context reuse and independent report reinspection. Planning faults can fall back; an executed typed adapter's failure is final, not an invitation to try a different lexical answer.
+
 ## Corrected landing diagnosis
 
 The live GitHub branch-rules endpoint `repos/moxnixmdj/brain/rules/branches/main` declares the signed `referee/repo-integrity-guard` as its required status check, with strict up-to-date enforcement and a pull-request requirement. The local missing-intent and scope diagnostics remain failures, but they are not listed as required status checks by that endpoint. Earlier statements that they necessarily prevent any normal GitHub merge were too strong.
