@@ -35,7 +35,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_MATRIX_MEASURES_ONLY_THE_SENTENCES_SOMEBODY_WROTE_CASES_FOR_SO_A_GOOD_MATRIX_COEXISTED_WITH_A_MACHINE_THAT_CANNOT_DO_ADVANCED_SOFTWARE_WORK__MEASURED_49_ADVANCED_REQUESTS_SERVED_2_WITH_24_OF_THE_49_LANDING_ON_FIVE_MAGNET_ROWS_AND_EIGHT_DOMAINS_HAVING_ZERO_ROWS_OF_440",
-  "canonical_base_commit": "f333567dd1a50aa0d18b583cb340765e9086f021",
+  "canonical_base_commit": "f8d64a9bd4e1def57573c71a5ff450ba9c0474e6",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -81,7 +81,7 @@
     "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V11.md"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "f333567dd1a50aa0d18b583cb340765e9086f021",
+    "canonical_base_commit": "f8d64a9bd4e1def57573c71a5ff450ba9c0474e6",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "ASSUMING_17_REAL_MEANS_THE_MACHINE_IS_BROADLY_CAPABLE",

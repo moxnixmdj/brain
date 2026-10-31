@@ -1,8 +1,8 @@
 {
- "action_id": "A_FAULT_IS_NOT_A_VERDICT_AND_A_NOUN_IS_NOT_A_REQUEST_V1_20261031_V1",
- "action_intent_id": "A_FAULT_IS_NOT_A_VERDICT_AND_A_NOUN_IS_NOT_A_REQUEST_V1_20261031_V1",
+ "action_id": "A_PREMISE_IS_NOT_A_REQUEST_AND_A_QUESTION_IS_NOT_A_REPAIR_V1_20261031_V1",
+ "action_intent_id": "A_PREMISE_IS_NOT_A_REQUEST_AND_A_QUESTION_IS_NOT_A_REPAIR_V1_20261031_V1",
  "action_kind": "FRESH_REUSE",
- "action_summary": "live_brain_route_admission_v1.py: (A) an executed attempt with an empty execution record and no judged-evidence field is not a verdict, so the decisive typed plan may re-route -- the retry re-enters the same gate chain and its own verdict is final; (B) the caller-map request is read in the sentence's governing clause, reusing the typed selector's own clause law.",
+ "action_summary": "live_brain_route_admission_v1.py: an effect stated behind a copula in an unpunctuated span ('is flaky', 'is built with formatting') is a premise, so the answer gates no longer demand a report about a defect the sentence asked to have fixed. The reading is suspended for questions -- including questions written without a question mark ('tell me if', 'whether') -- because 'Rerun the failing test X and tell me if it is flaky' IS a request for that verdict. swe_typed_plan_v1.py: the repair family may not claim a question; its evidence is a state description, while a question asks for a judgement.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -27,29 +27,30 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
   "progress_evidence_paths": [
-   "canonical/runtime/live_brain_route_admission_v1.py"
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/runtime/swe_typed_plan_v1.py"
   ],
   "route_class": "INTEGRATE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two routing laws refused work the machine already does. (A) The door treated an EXECUTED attempt as a verdict even when it produced no execution record and no gate evidence, so a mutation score that raised SyntaxError on a conflicted file blocked the decisive plan that names the conflict resolver, and a parameter rename that refused PARAM_NOT_FOUND blocked the function rename. (B) The caller-map gate matched the noun 'caller' in any clause, so 'add a parameter ... and update every caller' was refused before the row that extends the signature and rewrites the call sites could run. Census 18/28.",
- "canonical_base_commit": "4b18c9876b4dc71a70edc22b31ed9f8b47b9b80e",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Three sentences the machine can serve were refused by words about the defect they name. 'The test X is flaky. Fix the code so it passes reliably' was refused with STATED_FLAKY_VERDICT_NOT_PROVIDED and 'the query is built with string formatting. Remove the SQL injection' with STATED_LINT_OR_FORMAT_NOT_PERFORMED -- both before the repair row could run. 'The test suite in X fails. Which function is at fault? Write its name to answer.json' is a diagnosis, and the repair family claimed it from the word 'fails', so the typed selection that names the fault localizer was never built and the sentence was refused outright.",
+ "canonical_base_commit": "f333567dd1a50aa0d18b583cb340765e9086f021",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "Two routing laws refused work the machine already does. (A) The door treated an EXECUTED attempt as a verdict even when it produced no execution record and no gate evidence, so a mutation score that raised SyntaxError on a conflicted file blocked the decisive plan that names the conflict resolver, and a parameter rename that refused PARAM_NOT_FOUND blocked the function rename. (B) The caller-map gate matched the noun 'caller' in any clause, so 'add a parameter ... and update every caller' was refused before the row that extends the signature and rewrites the call sites could run. Census 18/28.",
+ "causal_blocker": "Three sentences the machine can serve were refused by words about the defect they name. 'The test X is flaky. Fix the code so it passes reliably' was refused with STATED_FLAKY_VERDICT_NOT_PROVIDED and 'the query is built with string formatting. Remove the SQL injection' with STATED_LINT_OR_FORMAT_NOT_PERFORMED -- both before the repair row could run. 'The test suite in X fails. Which function is at fault? Write its name to answer.json' is a diagnosis, and the repair family claimed it from the word 'fails', so the typed selection that names the fault localizer was never built and the sentence was refused outright.",
  "date": "2026-10-25",
- "expected_parent_change": "hardcore_swe_surface_probe_20261030.py --jobs 4: origin/main d669df4 18/28; this tree 22/28 in 25.8 s. merge_conflict now passes through software.repair.choreograph.crossfile.v1, rename_symbol through python.refactor.rename_symbol.v1, add_parameter through python.refactor.add_parameter.v1 (200/300, suite green), move_function through its own row. The surface pin test is green again (1.38 s).",
- "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py --jobs 4: origin/main d669df4 18/28; this tree 22/28 in 25.8 s. merge_conflict now passes through software.repair.choreograph.crossfile.v1, rename_symbol through python.refactor.rename_symbol.v1, add_parameter through python.refactor.add_parameter.v1 (200/300, suite green), move_function through its own row. The surface pin test is green again (1.38 s).",
+ "expected_parent_change": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
+ "expected_parent_frontier_change": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
  "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake, focus on hardcore software engineering. Owner instruction, real now not fake: the promise is claimed at the strength tee actually guarantees and not one step further, and the bytes are tied to the command by the producer's own digest rather than assumed. Owner standing instruction repeated six times: the perfect solution already exists in the brain, so _post_tee joins a table that already judged five commands by their effect and needs no new mechanism. Owner instruction that all tests must be extremely hard and only truthful: seven of the nine new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed, no protected path touched.",
- "falsification_condition": "Run the census on origin/main and here; and run the two modules that own these gates -- no verdict may weaken. Verified pre-existing: the 2 failures in test_hardcore_swe_capabilities_and_speed_v1 and the 1 in test_capability_selection_retrieval_v1 fail identically with the change stashed.",
+ "falsification_condition": "Run the refused-request and stated-effect suites: a request that states a property behind a copula must no longer be refused by that property, and a question that asks for a verdict must still be refused when the row cannot supply one.",
  "governance_change": true,
- "governance_change_summary": "Narrows two gates to the reading the sentence supports: a fault is not a verdict, and a stated effect is asked for by its own clause. Every honesty gate still runs on the route that executes, and the retry's verdict -- failure included -- is what the caller sees.",
+ "governance_change_summary": "Two readings are narrowed to the sentences that support them. No refusal is dropped: a question that asks for a verdict the row cannot supply is still refused, and the three pinned refusals around these questions are unchanged.",
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
- "intent": "Two readings of one sentence decide the route: a capability that faulted said nothing about the world, and a stated effect is asked for by the clause that asks it.",
+ "intent": "Read the sentence the way it is written: a property stated about the tree is a premise, and a question asks for a judgement rather than a change.",
  "load_bearing_primary": {
-  "canonical_base_commit": "4b18c9876b4dc71a70edc22b31ed9f8b47b9b80e",
+  "canonical_base_commit": "f333567dd1a50aa0d18b583cb340765e9086f021",
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
    "CHARTOGRAPHY_TOOLS_GE_89",
@@ -68,21 +69,22 @@
   "expected_obligation_discharge_lcb": 0,
   "expected_obligation_unlock_lcb": "1/13",
   "interpretation": "A_CAPABILITY_IS_NO_LONGER_ADMITTED_FOR_A_REQUEST_IT_HAS_NOWHERE_TO_ANSWER_SO_A_FILES_MERE_EXISTENCE_CAN_NO_LONGER_CHANGE_WHICH_CAPABILITY_ANSWERS_AN_ORDINARY_WRITE__MEASURED_TO_TAKE_THE_WRITE_FAMILY_TO_60_OF_60_WHETHER_OR_NOT_THE_TARGET_ALREADY_EXISTS_WITH_THE_TRIGGER_REACHING_EXACTLY_THE_TWO_WRITES_IN_A_SEVENTEEN_SENTENCE_TABLE",
-  "measured_effect": "hardcore_swe_surface_probe_20261030.py --jobs 4: origin/main d669df4 18/28; this tree 22/28 in 25.8 s. merge_conflict now passes through software.repair.choreograph.crossfile.v1, rename_symbol through python.refactor.rename_symbol.v1, add_parameter through python.refactor.add_parameter.v1 (200/300, suite green), move_function through its own row. The surface pin test is green again (1.38 s).",
+  "measured_effect": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "stop_condition": "Stop when the census is higher with no pinned verdict moved.",
+  "stop_condition": "Stop when both suites are green and the census is not lower.",
   "success_probability_lcb": 0.9,
   "wall_clock_cost_ub": 1
  },
- "measured_effect": "hardcore_swe_surface_probe_20261030.py --jobs 4: origin/main d669df4 18/28; this tree 22/28 in 25.8 s. merge_conflict now passes through software.repair.choreograph.crossfile.v1, rename_symbol through python.refactor.rename_symbol.v1, add_parameter through python.refactor.add_parameter.v1 (200/300, suite green), move_function through its own row. The surface pin test is green again (1.38 s).",
+ "measured_effect": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "prior_work_reused": "_may_supersede_a_failed_attempt's existing evidence-field vocabulary, the typed plan's _governing_clause, and _STATED_EFFECTS unchanged.",
+ "prior_work_reused": "The doors' existing _STATED_EFFECTS table and _governing_clause; no new vocabulary and no per-capability table.",
  "progress_evidence_paths": [
-  "canonical/runtime/live_brain_route_admission_v1.py"
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/runtime/swe_typed_plan_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "4b18c9876b4dc71a70edc22b31ed9f8b47b9b80e",
+  "canonical_base_commit": "f333567dd1a50aa0d18b583cb340765e9086f021",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
@@ -90,7 +92,7 @@
    "REMOVING_THE_HASH_PINNED_APT_CLAIM_FROM_ANY_OTHER_CAPABILITY",
    "WEAKENING_THE_STDLIB_PROBE_SO_A_MISSING_MODULE_COULD_PASS"
   ],
-  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py --jobs 4: origin/main d669df4 18/28; this tree 22/28 in 25.8 s. merge_conflict now passes through software.repair.choreograph.crossfile.v1, rename_symbol through python.refactor.rename_symbol.v1, add_parameter through python.refactor.add_parameter.v1 (200/300, suite green), move_function through its own row. The surface pin test is green again (1.38 s).",
+  "expected_parent_level_state_change": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "ADDING_TEE_TO_THE_READ_ONLY_SET_WHICH_WOULD_MAKE_THE_INSPECTOR_TRUNCATE_THE_FILE_A_SECOND_TIME__OR_ASSERTING_THE_FILE_IS_EMPTY_WHICH_WOULD_BE_A_CLAIM_ABOUT_A_CHANNEL_THE_SHAPE_NEVER_SEES__OR_LEAVING_IT_REFUSED_WHICH_LEAVES_THE_LAST_EVERYDAY_COMMAND_UNVERIFIED",
@@ -101,7 +103,7 @@
    "capability_work_deleted": "NO_NEW_VERIFIER_NO_NEW_ADAPTER_AND_NO_NEW_TABLE_WAS_WRITTEN",
    "existing_inherited_routes_checked": "capability_type_surface_v1.signature was read first and already types every declared slot, so no new typing was written; extract_content and extract_content_destination were read and are the same two functions the last two turns' gates rest on; the BINDING_REFUSED prefix and the composition fallthrough were read and reused unmodified; and the typed-scalar precondition rule added two turns ago is the shape this one follows.",
    "external_existing_routes_checked": "No external source was needed. The slot typing, the payload readers and the refusal channel were all already present; the change adds one test of the capability's own contract at the moment the route is chosen.",
-   "surviving_gap": "extract_function (REGION_INVALID), the repair engine on three sentences, localize_fault (route rejected), sql_injection (DAG result invalid)."
+   "surviving_gap": "The six remaining failures are capability depth, not routing: extract_function (REGION_INVALID), three repair sentences the verified repair engine cannot fix, a fault localizer that ranks no symbols without a passing-test contrast, and a sql_injection DAG whose result is invalid."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -109,7 +111,7 @@
     "CLAIMING_THE_FILE_IS_EMPTY_BECAUSE_STDIN_HAPPENED_TO_BE_EMPTY",
     "ADDING_TEE_TO_THE_READ_ONLY_SET_TO_MAKE_THE_INSPECTOR_REPEAT_IT"
    ],
-   "real_outcome": "A sentence is routed to the capability that serves it even when the first capability tried faulted, and a noun in a subordinate instruction no longer counts as a request for a report.",
+   "real_outcome": "Sentences are refused only for what they ASK for; a defect mentioned as context no longer blocks the capability that fixes it.",
    "surviving_necessity": "No route serves a yes-or-no question about a file, although the mechanism that would answer and verify it already exists in full."
   },
   "obs_inherited_system": {
@@ -181,8 +183,8 @@
    "REACH_CMP_FROM_PROSE__REJECTED_BECAUSE_IT_NEEDS_BARE_TASK_VERBS_ON_THE_RUNNER_KEYWORDS_THE_MOVE_THAT_TOOK_VERIFY_FROM_33_OF_33_TO_32_OF_33",
    "LET_THE_ADAPTER_DECIDE_WHICH_CODES_ARE_ANSWERS__REJECTED_BECAUSE_THE_PRODUCER_JUDGING_ITS_OWN_FAILURE_IS_THE_SHAPE_PR_6118_SHOWED_TO_BE_WORTHLESS"
   ],
-  "real_outcome": "hardcore_swe_surface_probe_20261030.py --jobs 4: origin/main d669df4 18/28; this tree 22/28 in 25.8 s. merge_conflict now passes through software.repair.choreograph.crossfile.v1, rename_symbol through python.refactor.rename_symbol.v1, add_parameter through python.refactor.add_parameter.v1 (200/300, suite green), move_function through its own row. The surface pin test is green again (1.38 s).",
-  "required_capability": "REUSE_THE_DOORS_EXISTING_VERDICT-VS-FAULT_VOCABULARY",
+  "real_outcome": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
+  "required_capability": "REUSE_THE_DOORS_STATED_EFFECT_TABLE_WITH_A_GRAMMATICAL_READING",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -860,7 +862,7 @@
      "why_not_selected_or_selected": "SELECTED: separate the two acts. Refusing keeps the one-word rule. Taking over a route now requires the caller's WHOLE name, in order, in PROSE -- repository paths and identifier tokens are stripped first, a trailing version token is optional because prose drops it, and among several names stated the MOST SPECIFIC one wins. Measured in three steps over the same 13 path-style receipt-backed targets: 6 of 13 before, 10 of 13 once the whole name was required (the 3 remaining lost to a SIBLING, because 'bytes characteristic active query task generator v10' also states the whole of bytes_active_query_task_generator_v1 with one extra word in the middle), and 13 of 13 once specificity decides. The ordinary sentences that caused the regression now name ZERO receipt projections, and the 4 core failures are gone: test_live_brain_route_admission_v1 and test_capability_naming_rule_v1 are 42 passed. The end-to-end family moved with it: RECEIPT_PROSE_EXECUTION 12 instances went 7 of 12 (0.5833) to 12 of 12 (1.0), measured with the harness itself. Benchmark unchanged at 23/23 compiled and 22/23 selected; 213 unittest OK; pytest suites over the live path 117 passed with the same 6 pre-existing failures (2 capability DAG, 3 missing openpyxl/docx, 1 the deliberate no-write-authority boundary, which source_write_authority=False is hard-coded and enforced against in five separate guard modules). The wave 7 suite now asserts 13 of 13 and an empty residual, with the three-step history kept in the file; 3 of its 10 tests go red when the change is reverted."
     }
    ],
-   "checked_at_utc": "2026-10-31T15:24:34Z",
+   "checked_at_utc": "2026-10-31T15:38:54Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -936,11 +938,11 @@
     "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
     "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
    ],
-   "selected_route": "DISTINGUISH_A_FAULT_FROM_A_VERDICT_AND_SCOPE_THE_ASKED_EFFECT",
-   "selected_route_checked_at_utc": "2026-10-31T15:24:34Z",
+   "selected_route": "READ_A_PREMISE_AS_A_PREMISE",
+   "selected_route_checked_at_utc": "2026-10-31T15:38:54Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T15:24:34Z",
+    "checked_at_utc": "2026-10-31T15:38:54Z",
     "execution_dependencies": [
      {
       "dependency": "python3 3.11.2",
@@ -977,10 +979,10 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "DISTINGUISH_A_FAULT_FROM_A_VERDICT_AND_SCOPE_THE_ASKED_EFFECT",
+    "selected_route": "READ_A_PREMISE_AS_A_PREMISE",
     "status": "READY"
    },
-   "selected_surviving_route": "DISTINGUISH_A_FAULT_FROM_A_VERDICT_AND_SCOPE_THE_ASKED_EFFECT",
+   "selected_surviving_route": "READ_A_PREMISE_AS_A_PREMISE",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
@@ -1005,7 +1007,7 @@
      "https://pubs.opengroup.org/onlinepubs/9699919799/utilities/tee.html -- tee opens its operand with O_CREAT|O_TRUNC, which is what makes the operand's existence a promise independent of its input"
     ]
    },
-   "stop_condition": "Stop when the census is higher with no pinned verdict moved.",
+   "stop_condition": "Stop when both suites are green and the census is not lower.",
    "unresolved_plausible_dominators": [],
    "why_selected_route_is_fastest_sufficient": "IT_ADDS_ONE_POSTCONDITION_TO_A_TABLE_THAT_ALREADY_JUDGED_FIVE_COMMANDS_BY_THEIR_EFFECT_AND_NEEDS_NO_ADAPTER_CHANGE_AT_ALL__MEASURED_TO_TAKE_THE_EVERYDAY_SET_TO_14_OF_14_WITH_ALL_TWELVE_ACCEPTANCE_SUITES_GREEN_AND_FALSE_PASSES_AT_ZERO"
   },
@@ -1049,16 +1051,16 @@
    "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
   ],
   "selected_route": "A_YES_OR_NO_QUESTION_IS_ANSWERED_BY_THE_EXIT_STATUS_THE_VERIFIER_ALREADY_ENUMERATED_V1_20261025_V1",
-  "selected_surviving_route": "DISTINGUISH_A_FAULT_FROM_A_VERDICT_AND_SCOPE_THE_ASKED_EFFECT",
-  "stop_condition": "Stop when the census is higher with no pinned verdict moved.",
+  "selected_surviving_route": "READ_A_PREMISE_AS_A_PREMISE",
+  "stop_condition": "Stop when both suites are green and the census is not lower.",
   "why_selected_route_is_fastest_sufficient": "Two rules in the prose table, placed after the rules for a count and for a line number so those keep their sentences, and one flag on cmp.  The dominant alternative was a new answer type for yes-or-no questions, rejected because the exit status already is that answer and is already enumerated, declared, carried to the adapter and reproduced by the inspector -- building a second mechanism would have added a way to be trusted where none was needed.  Plain `cmp` was rejected on measurement, not preference: on identical files it exits 0 with empty stdout and the adapter raises."
  },
- "refusal_or_stop_condition": "Stop when the census is higher with no pinned verdict moved.",
- "resolution": "canonical/runtime/live_brain_route_admission_v1.py",
- "route_id": "DISTINGUISH_A_FAULT_FROM_A_VERDICT_AND_SCOPE_THE_ASKED_EFFECT",
+ "refusal_or_stop_condition": "Stop when both suites are green and the census is not lower.",
+ "resolution": "canonical/runtime/live_brain_route_admission_v1.py, canonical/runtime/swe_typed_plan_v1.py",
+ "route_id": "READ_A_PREMISE_AS_A_PREMISE",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "selected_route": "DISTINGUISH_A_FAULT_FROM_A_VERDICT_AND_SCOPE_THE_ASKED_EFFECT",
- "stop_condition": "Stop when the census is higher with no pinned verdict moved.",
+ "selected_route": "READ_A_PREMISE_AS_A_PREMISE",
+ "stop_condition": "Stop when both suites are green and the census is not lower.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "user_authorized_governance_change": true,
