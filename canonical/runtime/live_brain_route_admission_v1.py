@@ -2021,6 +2021,46 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
     return sorted(strong) if strong else sorted(weak)
 
 
+# A PROPERTY OF THE TREE IS NOT A REQUEST FOR A REPORT ABOUT IT.
+#
+# Measured 2026-10-31, two sentences, both refused before the row that serves them could run:
+#   "The test <t> is flaky.  Fix the code so it passes reliably."        -> STATED_FLAKY_VERDICT_...
+#   "The query in <f> is built with string formatting.  Remove the SQL injection ..."  -> STATED_LINT_...
+# In both, the "flakiness" and the "formatting" are PREMISES: the sentence tells you what is
+# wrong and then asks for a CHANGE.  The gate read the premise as the request and demanded a
+# flakiness verdict / a lint from a repair engine -- so a sentence the machine can serve was
+# refused by a word about the defect it was asked to fix.
+#
+# The evidence is grammatical and needs no new vocabulary: a property stated behind a copula
+# ("is flaky", "is built with ... formatting") is an attribute of the tree, not an imperative.
+# Two conditions keep it from widening anything: the sentence must not be a QUESTION ("Is there
+# a SQL injection in <f>?" asks for exactly that judgement), and the copula must be in the same
+# unpunctuated span as the effect.
+_QUESTION_RE = re.compile(
+    r"\?|^\s*(?:which|what|where|who|whom|whose|how|why|is|are|does|do|can|could|should|would)\b"
+    # ... and a question written without a question mark.  Measured 2026-10-31: "Rerun the
+    # failing test <t> three times and tell me if it is flaky" is a request for a VERDICT, and
+    # a copula-only reading filed "is flaky" as a premise and let the answer gate be skipped.
+    r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b|\bfind out (?:if|whether)\b"
+    r"|\bdetermine (?:if|whether)\b|\bconfirm (?:if|whether)\b",
+    re.IGNORECASE)
+_PREMISE_COPULA_RE = re.compile(
+    r"\b(?:is|are|was|were|has|have|had)\b[^.?!;,]{0,40}?"
+    r"(?:built|written|implemented|made|done|defined|used|set|left|affected)?\s*"
+    r"(?:with|in|by|using|as|of)?\s*$", re.IGNORECASE)
+
+
+def _is_a_premise(text: str, start: int) -> bool:
+    """True when the effect words at ``start`` describe the tree rather than ask for work."""
+    if _QUESTION_RE.search(text):
+        return False
+    head = text[max(0, start - 56):start]
+    cut = max(head.rfind(ch) for ch in ".;?,!")
+    if cut >= 0:
+        head = head[cut + 1:]
+    return bool(_PREMISE_COPULA_RE.search(head))
+
+
 def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> list[str]:
     """A sentence that asks for X must be answered by something that declares X.
 
@@ -2057,7 +2097,10 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> 
     errors: list[str] = []
     for asked, supplied, code in _STATED_EFFECTS:
         probe = head if code.startswith("STATED_CALLER_MAP") else text.lower()
-        if not asked.search(probe) or supplied.search(surface):
+        match = asked.search(probe)
+        if not match or supplied.search(surface):
+            continue
+        if _is_a_premise(probe, match.start()):
             continue
         errors.append(code + ":" + (cid or "UNNAMED"))
     errors.extend(stated_application_errors(text, entry))
