@@ -3365,8 +3365,21 @@ def _written_artifacts(result: Mapping[str, Any]) -> list[dict[str, Any]]:
 
 
 def stated_answer_payload_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
-    """The answer the sentence named, checked against the artifact the run wrote."""
+    """The answer the sentence named, checked against the artifact the run wrote.
+
+    THE ARTIFACT IS READ ONLY WHEN AN ANSWER IS ACTUALLY BEING CHECKED.
+    ``_written_artifacts`` parses every artifact in full, and the artifacts this door produces
+    are large: the symbol index of ``canonical/runtime`` was **183 MB** on 2026-10-31, so one
+    parse costs ~0.9 s of a request.  Measured on fabf28c, a cold "Find the callers of
+    binding_view in canonical/runtime" took 10.9 s, of which 2.9 s was parsing that one file
+    three times -- and one of the three was this function looking for ``breaking_commit`` in a
+    report that has no such field and whose sentence never asked for one.  Every check below is
+    gated on the sentence, so the sentence is read first and the artifact only if a check will
+    use it.
+    """
     text = str(goal or "")
+    if not _BISECT_ANSWER_RE.search(text):
+        return []
     docs = _written_artifacts(result) if isinstance(result, Mapping) else []
     if _BISECT_ANSWER_RE.search(text):
         for doc in docs:

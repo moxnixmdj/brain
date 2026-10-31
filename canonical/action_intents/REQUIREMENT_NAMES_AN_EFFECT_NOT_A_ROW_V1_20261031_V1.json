@@ -1,0 +1,202 @@
+{
+ "action_id": "REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "THE REGISTRY NOW CHECKS ITS OWN DECLARED GRAPH. Six SWE rows required a capability ID instead of the effect that row publishes, so the producer was verified, indexed and unbindable; the 54-case matrix's only FALSE was a git fixture with nothing to diff, so the dot was measuring the fixture rather than the machine. No new primitive: one law test over the shipped registries, one repository in the git fixture, and one predicate moved in front of a 183 MB parse.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tests/test_declared_requirement_names_an_effect_v1.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+   "execution_guard/swe_capability_matrix_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_ROW_COULD_DECLARE_AS_ITS_REQUIREMENT_THE_NAME_OF_ANOTHER_ROW_AND_NO_CHECK_COMPARED_A_REQUIREMENT_AGAINST_WHAT_THE_REGISTRY_PUBLISHES__SIX_SWE_ROWS_REQUIRED_THE_CAPABILITY_ID_python_source_symbols_index_ast_WHICH_IS_NOT_AN_EFFECT_WHILE_THAT_ROW_PUBLISHES_python_source_symbol_index__INCLUDING_THE_MOST_SELECTED_ROW_IN_THE_ADVANCED_CENSUS__AND_THE_ONLY_FALSE_ROW_IN_THE_54_CASE_MATRIX_WAS_A_FIXTURE_WITH_NO_DIFF_TO_SHOW_MEASURED_2026_10_31",
+ "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A_ROW_COULD_DECLARE_AS_ITS_REQUIREMENT_THE_NAME_OF_ANOTHER_ROW_AND_NO_CHECK_COMPARED_A_REQUIREMENT_AGAINST_WHAT_THE_REGISTRY_PUBLISHES__SIX_SWE_ROWS_REQUIRED_THE_CAPABILITY_ID_python_source_symbols_index_ast_WHICH_IS_NOT_AN_EFFECT_WHILE_THAT_ROW_PUBLISHES_python_source_symbol_index__INCLUDING_THE_MOST_SELECTED_ROW_IN_THE_ADVANCED_CENSUS__AND_THE_ONLY_FALSE_ROW_IN_THE_54_CASE_MATRIX_WAS_A_FIXTURE_WITH_NO_DIFF_TO_SHOW_MEASURED_2026_10_31",
+ "date": "2026-10-31",
+ "expected_parent_change": "EVERY_REQUIREMENT_THAT_SPELLS_A_CAPABILITY_ID_MUST_BE_A_TOKEN_THAT_ID_PUBLISHES_AS_A_LAW_TEST_OVER_THE_SHIPPED_REGISTRIES__THE_GIT_LANE_MEASURES_A_DIFF_THAT_EXISTS_BECAUSE_THE_FIXTURE_HAS_A_REPOSITORY_AND_AN_UNCOMMITTED_EDIT__AND_AN_ARTIFACT_IS_PARSED_ONLY_WHEN_THE_SENTENCE_STATES_THE_ANSWER_BEING_CHECKED",
+ "expected_parent_frontier_change": "EVERY_REQUIREMENT_THAT_SPELLS_A_CAPABILITY_ID_MUST_BE_A_TOKEN_THAT_ID_PUBLISHES_AS_A_LAW_TEST_OVER_THE_SHIPPED_REGISTRIES__THE_GIT_LANE_MEASURES_A_DIFF_THAT_EXISTS_BECAUSE_THE_FIXTURE_HAS_A_REPOSITORY_AND_AN_UNCOMMITTED_EDIT__AND_AN_ARTIFACT_IS_PARSED_ONLY_WHEN_THE_SENTENCE_STATES_THE_ANSWER_BEING_CHECKED",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
+ "falsification_condition": "PUT_THE_SIX_REQUIREMENTS_BACK_AND_SEE_THE_LAW_TEST_FAIL__REMOVE_THE_REPOSITORY_FROM_THE_GIT_FIXTURE_AND_SEE_git_diff_RETURN_TO_FALSE__ASK_stated_answer_payload_errors_ABOUT_A_NON_BISECT_SENTENCE_WITH_A_183_MB_ARTIFACT_AND_SEE_IT_PARSE_IT_AGAIN",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_ADVANCED_CENSUS_DID_NOT_MOVE_2_OF_49_BEFORE_AND_AFTER_THE_SIX_STRING_REPAIR_BECAUSE_THE_DOOR_DOES_NOT_YET_WALK_requires__THE_YIELD_IS_THAT_A_DECLARED_REQUIREMENT_NOW_NAMES_SOMETHING_SOME_ROW_PUBLISHES_AND_A_FALSE_MATRIX_ROW_NO_LONGER_HIDES_A_FIXTURE_GAP_WHICH_IS_THE_CONDITION_FOR_ANY_CODING_NUMBER_TO_MEAN_ANYTHING",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.5,
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/live_integrated_brain_v1.py",
+  "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py",
+  "canonical/runtime/bound_capabilities/grounded_executable_composition.py",
+  "execution_guard/swe_capability_matrix_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "A_REQUIREMENT_THAT_NAMES_A_ROW_AND_BINDS_NOTHING",
+   "A_MATRIX_FIXTURE_THAT_CANNOT_DISTINGUISH_AN_EMPTY_DIFF_FROM_NO_DIFF",
+   "PARSING_EVERY_ARTIFACT_TO_ANSWER_A_QUESTION_THE_SENTENCE_NEVER_ASKED"
+  ],
+  "expected_parent_level_state_change": "EVERY_REQUIREMENT_THAT_SPELLS_A_CAPABILITY_ID_MUST_BE_A_TOKEN_THAT_ID_PUBLISHES_AS_A_LAW_TEST_OVER_THE_SHIPPED_REGISTRIES__THE_GIT_LANE_MEASURES_A_DIFF_THAT_EXISTS_BECAUSE_THE_FIXTURE_HAS_A_REPOSITORY_AND_AN_UNCOMMITTED_EDIT__AND_AN_ARTIFACT_IS_PARSED_ONLY_WHEN_THE_SENTENCE_STATES_THE_ANSWER_BEING_CHECKED",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "REVERTING_ANY_OF_THE_THREE_RETURNS_THE_REGISTRY_TO_A_DECLARED_GRAPH_THAT_CANNOT_BIND_AND_THE_MATRIX_TO_A_FALSE_ROW",
+   "intrinsic_or_path_specific": "GENERAL__THE_LAW_READS_THE_SHIPPED_REGISTRIES_AND_NOT_A_LIST_OF_TYPOS__THE_FIXTURE_RULE_IS_WHAT_A_GIT_CASE_IS__THE_PARSE_GUARD_KEYS_ON_THE_SENTENCE",
+   "surviving_causal_blocker": "A_ROW_COULD_DECLARE_AS_ITS_REQUIREMENT_THE_NAME_OF_ANOTHER_ROW_AND_NO_CHECK_COMPARED_A_REQUIREMENT_AGAINST_WHAT_THE_REGISTRY_PUBLISHES__SIX_SWE_ROWS_REQUIRED_THE_CAPABILITY_ID_python_source_symbols_index_ast_WHICH_IS_NOT_AN_EFFECT_WHILE_THAT_ROW_PUBLISHES_python_source_symbol_index__INCLUDING_THE_MOST_SELECTED_ROW_IN_THE_ADVANCED_CENSUS__AND_THE_ONLY_FALSE_ROW_IN_THE_54_CASE_MATRIX_WAS_A_FIXTURE_WITH_NO_DIFF_TO_SHOW_MEASURED_2026_10_31"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_REGISTRY_ROW__THE_FIX_IS_SIX_STRINGS_ONE_TEST_ONE_FIXTURE_AND_ONE_PREDICATE",
+   "existing_inherited_routes_checked": [
+    "live_brain_route_admission_v1",
+    "live_integrated_brain_v1",
+    "plain_goal_bound_grounding",
+    "grounded_executable_composition",
+    "composer_route_v1"
+   ],
+   "external_existing_routes_checked": "None needed: every mechanism this change uses was already in the tree.",
+   "surviving_gap": "THE_FRONT_DOOR_STILL_DOES_NOT_WALK_requires__THE_SIX_STRINGS_FIX_WHAT_A_CONSUMER_WOULD_BIND_IF_THE_CLOSURE_WALK_EXISTED_AND_THE_CENSUS_IS_UNCHANGED_AT_2_OF_49"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_MATRIX_REAL_COUNT",
+    "TURNING_REFUSALS_INTO_PASSES",
+    "WRITING_A_NEW_CAPABILITY"
+   ],
+   "real_outcome": "The registry answers for its own declared graph, the git lane measures a diff that exists, and an artifact is parsed only when the sentence names the answer being checked.",
+   "surviving_necessity": "A declared requirement that no consumer can bind is a plan the machine can never run, and a FALSE matrix row that is really a fixture gap hides that same fact."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_EXISTING_LAW_TEST_IDIOM_THE_EXISTING_FIXTURE_BUILDER_AND_THE_EXISTING_ANSWER_GATE"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "THE_SIX_ROWS_WERE_FOUND_BY_ONE_SCAN_OF_THE_LIVE_REGISTRY_AND_THE_MATRIX_THEN_MEASURED_ALL_FIFTY_FOUR_CASES_TWICE",
+   "search_stop_decision": "STOPPED_AT_THE_THREE_DEFECTS_THAT_ARE_EXACTLY_MEASURABLE__THE_CLOSURE_WALK_IS_A_SEPARATE_CHANGE_WITH_ITS_OWN_EVIDENCE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "losing_routes_reason": "A curated list of mistyped tokens ages; the registry's own names are the fact that decides the question.",
+   "routes_ranked": [
+    "REUSE_THE_REGISTRY_S_OWN_NAMES_AS_THE_LAW__SELECTED",
+    "HAND_FIX_SIX_STRINGS_WITH_NO_LAW__REGRESSES",
+    "ADD_A_NEW_VALIDATOR_SUBSYSTEM__A_SUBSYSTEM_FOR_A_PREDICATE",
+    "BLACKLIST_THE_KNOWN_BAD_TOKENS__A_LIST_THAT_AGES"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_MATRIX_RUNS_ON_A_REAL_TREE_AND_THE_LAW_RUNS_ON_THE_SHIPPED_REGISTRIES"
+  },
+  "real_outcome": "The shipped registries satisfy the law that a requirement names a published effect, the git lane produces a diff, and the matrix has no false row.",
+  "required_capability": "A_DECLARED_INPUT_GRAPH_THAT_CAN_BIND_AND_AN_INSTRUMENT_THAT_CAN_FAIL",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Both defects are in this repository and were read at their base blobs."
+  },
+  "routes_considered": [
+   "REPAIR_THE_SIX_STRINGS_ONLY__REGRESSES",
+   "ADD_A_NEW_REGISTRY_VALIDATOR__A_SUBSYSTEM_FOR_A_PREDICATE",
+   "WIRE_THE_WHOLE_CLOSURE_WALK_IN_THE_SAME_CHANGE__UNMEASURED_BLAST_RADIUS",
+   "REPAIR_THE_STRINGS_AND_PIN_THEM_WITH_A_LAW__CHOSEN"
+  ],
+  "selected_route": "REPAIR_THE_SIX_STRINGS_AND_PIN_THEM_WITH_A_LAW_OVER_THE_REGISTRY_S_OWN_NAMES",
+  "selected_surviving_route": "REPAIR_THE_DECLARED_GRAPH__MAKE_THE_GIT_FIXTURE_A_GIT_REPOSITORY__READ_THE_SENTENCE_BEFORE_THE_ARTIFACT",
+  "stop_condition": "LAW_TEST_GREEN__MATRIX_54_CASES_19_REAL_0_FALSE_0_DAMAGED_MEDIAN_62MS__SURFACE_CENSUS_27_OF_28__ADVANCED_CENSUS_2_OF_49_UNCHANGED_BY_DESIGN__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE",
+  "why_selected_route_is_fastest_sufficient": "It adds no moving part: the law is one scan of files already loaded, the fixture is the four commands a git case already needs, and the parse guard removes work instead of adding it."
+ },
+ "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REPAIR_THE_DECLARED_GRAPH_WITH_A_LAW_OVER_THE_REGISTRY_S_OWN_NAMES",
+ "stop_condition": "LAW_TEST_GREEN__MATRIX_54_CASES_19_REAL_0_FALSE_0_DAMAGED_MEDIAN_62MS__SURFACE_CENSUS_27_OF_28__ADVANCED_CENSUS_2_OF_49_UNCHANGED_BY_DESIGN__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__SIX_STRINGS_ONE_TEST_ONE_FIXTURE_AND_ONE_PREDICATE_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "CAN_A_ROW_DECLARE_AS_ITS_REQUIREMENT_A_TOKEN_THAT_NO_ROW_PUBLISHES_AND_STILL_HAVE_IT_BIND",
+   "falsifier_id": "PUT_THE_SIX_IDS_BACK_AND_SEE_THE_LAW_TEST_FAIL",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_SHIPPED_REGISTRY_HAD_NO_SUCH_ROW_AFTER_THE_REPAIR_AND_THE_LAW_IS_STRUCTURAL_OVER_WHAT_EACH_ROW_PUBLISHES",
+   "proposal_id": "REQUIREMENT_NAMES_AN_EFFECT_NOT_A_ROW_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. The law only forbids a requirement that names a capability id which publishes some other token, which is unsatisfiable by construction; rows that publish their own id stay legal and one test pins the only genuinely unprovided effect. The git fixture adds a repository under canonical/astra_runtime/tmp, which is gitignored. The parse guard keys on the same regex that gates the only check that reads artifacts."
+}

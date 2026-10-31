@@ -36,7 +36,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The runtime trusted its own metadata over the artifact. The suite was run with a PYTHONPATH derived from `cwd`, not from the imports in the suite; the answer was judged by a noun in the sentence, not by whether the sentence asks for one value or many. Both are the same error one layer apart and both produce a confident wrong verdict -- a PASS with nothing localized, and a refusal of an answer that was already correct.",
-  "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+  "canonical_base_commit": "9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +52,7 @@
   "incremental_spend_usd": 0,
   "intent": "Read the artifact: run the suite where its imports point, deliver the answer it produced.",
   "load_bearing_primary": {
-    "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+    "canonical_base_commit": "9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c",
     "constructive_gap_for_open_obligation_ids": [
       "AUTOMATIONBENCH_GE_40",
       "CHARTOGRAPHY_TOOLS_GE_89",
@@ -88,7 +88,7 @@
     "canonical/tests/test_a_single_named_answer_is_not_an_enumeration_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "6c6c5df48cd96802ace3e9e5266c9493cca92bfc",
+    "canonical_base_commit": "9e6a366b0d0f99b1974b9056e3798e09f2ef6a5c",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
