@@ -2342,13 +2342,50 @@ def _single(cid: str, entry: Mapping[str, Any], inputs: Mapping[str, Any], score
     }
 
 
+def _unserved_stated_file_paths(text: str, inputs: Mapping[str, Any], root: pathlib.Path) -> list[str]:
+    """Named files a binding drops, using the compiler's own path parser.
+
+    Completeness is necessary, not sufficient, for selection: the typed selector
+    still owns admission and ambiguity.  In particular, binding a module and a
+    report is not enough to answer a call that also names a payload file.  Do
+    not require existence here: dropping a missing input is no more legitimate
+    than dropping an existing one.  Ignore directory/context tokens and URLs.
+    """
+    stated = [(raw, path) for raw, path in gc._repo_paths(text, root)
+              if not path.is_dir() and (path.is_file() or path.suffix)]
+    if len(stated) < 2:
+        return []
+
+    def strings(value: Any):
+        if isinstance(value, str):
+            yield value
+        elif isinstance(value, Mapping):
+            for item in value.values():
+                yield from strings(item)
+        elif isinstance(value, (list, tuple)):
+            for item in value:
+                yield from strings(item)
+
+    consumed = {path for value in strings(inputs)
+                for _raw, path in gc._repo_paths(value, root)}
+    directories = [path for path in consumed if path.is_dir()]
+    # A directory-scoped tool owns files within that scope, including paths the
+    # caller states relative to the named repository (e.g. tests/test_math.py).
+    # Its later declared-input derivation may build the concrete test command.
+    return sorted({raw for raw, path in stated
+                   if path not in consumed
+                   and not any(directory in path.parents
+                               or ((directory / raw).is_file()
+                                   and directory in (directory / raw).resolve().parents)
+                               for directory in directories)})
+
+
 def _retrieval_first_selection(goal: str, admissible: Mapping[str, Mapping[str, Any]],
                                root: pathlib.Path, rules: list[str]) -> dict[str, Any] | None:
     """F17: retrieval proposes k=3, typed admission disposes.  Returns None to keep the failure.
 
-    Called ONLY after the pinned prose scorer has failed to deliver a bound single capability, so
-    it can turn a failure into a selection and can never override a selection that already bound
-    (that discipline is what keeps every earlier rule's evidence intact).  Selection quality is
+    Called only after the pinned scorer failed, selected a catch-all, or dropped a stated input
+    file.  A complete specific binding is never displaced.  Selection quality is
     therefore bounded by admission, not by the ranker: a lexical near-miss whose declared inputs
     the sentence does not state is refused, and an ambiguous shortlist selects nothing at all.
     """
@@ -3092,6 +3129,24 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
         if retrieved is not None:
             return retrieved
         raise pinned_failure  # type: ignore[misc]
+
+    # A specific lexical winner can still bind only PART of the request.  Its
+    # specificity cannot authorize silently ignoring another named input file.
+    # Reuse F17's existing contract/receipt admission, not a preferred tool ID;
+    # if no unambiguous complete route exists, refuse instead of running the
+    # incomplete winner.  A complete pinned route never pays for retrieval.
+    if single_shape and selected:
+        unserved = _unserved_stated_file_paths(text, compiled.get("inputs") or {}, root)
+        if unserved:
+            retrieved = _retrieval_first_selection(text, admissible, root, rules)
+            if retrieved is not None and not _unserved_stated_file_paths(
+                    text, retrieved.get("inputs") or {}, root):
+                retrieved["match_evidence"]["displaced_pinned_selection"] = selected
+                retrieved["match_evidence"]["displaced_unserved_files"] = unserved
+                return retrieved
+            raise GoalCompilationFailure(
+                "GOAL_INPUT_BINDING_REQUIRED",
+                selected + ":unserved_stated_files:" + ",".join(unserved))
 
     # F17 (pinned catch-all): the pinned scorer answers a STRUCTURED sentence with a capability
     # whose only declared inputs are {goal, output_path} - it binds any sentence at all, which is
