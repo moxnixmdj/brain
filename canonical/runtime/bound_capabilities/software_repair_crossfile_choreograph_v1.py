@@ -369,13 +369,16 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
     # semantics and can certify an all-skipped suite as a successful repair.
     from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import SUITE_RUNNER
     checker = SUITE_RUNNER + (
-        "import importlib, json\n"
+        "import importlib, importlib.util, json\n"
         "proj = pathlib.Path(sys.argv[1]).resolve()\n"
         "tdir = pathlib.Path(sys.argv[2]).resolve()\n"
         "repeats = int(sys.argv[3])\n"
         "mods = json.loads(sys.argv[4])\n"
         "sys.argv[:] = [sys.argv[0]]\n"
-        "sys.path.insert(0, str(proj))\n"
+        "if str(proj) in sys.path:\n"
+        "    sys.path.remove(str(proj))\n"
+        "sys.path.append(str(proj))\n"
+        "_stdlib_names = getattr(sys, 'stdlib_module_names', frozenset())\n"
         "targets = [p for p in sorted(tdir.rglob('*.py')) if '__pycache__' not in p.parts and (p.name.startswith('test_') or p.name.endswith('_test.py'))]\n"
         "total_ran = 0\n"
         "for _ in range(repeats):\n"
@@ -384,7 +387,18 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         "        if f and proj in pathlib.Path(f).resolve().parents:\n"
         "            sys.modules.pop(k, None)\n"
         "    for m in mods:\n"
-        "        importlib.import_module(m)\n"
+        "        try:\n"
+        "            if m.split('.')[0] in _stdlib_names:\n"
+        "                cand_p = proj / (m.replace('.', '/') + '.py')\n"
+        "                if cand_p.is_file():\n"
+        "                    sp = importlib.util.spec_from_file_location('_proj_shadow_' + m, cand_p)\n"
+        "                    if sp and sp.loader:\n"
+        "                        mod_obj = importlib.util.module_from_spec(sp)\n"
+        "                        sp.loader.exec_module(mod_obj)\n"
+        "                continue\n"
+        "            importlib.import_module(m)\n"
+        "        except SystemExit:\n"
+        "            pass\n"
         "    total_ran += _brain_run_suites(targets)\n"
         "if total_ran <= 0:\n"
         "    raise RuntimeError('NO_TESTS_EXECUTED')\n"
@@ -392,9 +406,9 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
     )
     env = dict(os.environ)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
-    env["PYTHONPATH"] = str(proj) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    env["PYTHONSAFEPATH"] = "1"
     proc = subprocess.run(
-        [sys.executable, "-B", "-c", checker, str(proj), str(test_dir), str(repeats), json.dumps(mod_names)],
+        [sys.executable, "-B", "-P", "-c", checker, str(proj), str(test_dir), str(repeats), json.dumps(mod_names)],
         cwd=str(proj),
         capture_output=True,
         text=True,

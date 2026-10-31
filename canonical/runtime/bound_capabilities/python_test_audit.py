@@ -114,17 +114,25 @@ def run(args, root):
     repo=pathlib.Path(root).resolve()
     source_root=_safe_dir(repo,args.get("source_root","canonical/tests"))
     pattern=str(args.get("pattern") or "test_*.py")
-    timeout_s=max(1,min(int(args.get("timeout_s",180)),600))
+    timeout_s=max(1,min(int(args.get("timeout_s",15)),180))
+    total_budget_s=max(5,min(int(args.get("total_budget_s",45)),300))
+    audit_deadline=time.monotonic()+total_budget_s
     output=(repo/str(args.get("output_path") or "")).resolve()
     if output == repo or repo not in output.parents:
         raise RuntimeError("PATH_OUTSIDE_REPOSITORY")
     files=sorted(p for p in source_root.glob(pattern) if p.is_file())
     if not files:
         raise RuntimeError("TEST_AUDIT_EMPTY")
+    if len(files)>64 and args.get("allow_large_corpus") is not True:
+        raise RuntimeError("REFUSING_UNBOUNDED_TEST_AUDIT_CORPUS:"+str(len(files)))
     records=[]
     totals={"files":0,"tests":0,"passed":0,"failed":0,"errors":0,"skipped":0,
             "crashed":0,"timed_out":0}
     for path in files:
+        remaining=audit_deadline-time.monotonic()
+        if remaining<=0:
+            raise RuntimeError("TEST_AUDIT_WALL_CLOCK_BUDGET_EXCEEDED:"+str(total_budget_s)+"s")
+        step_timeout=max(1,min(timeout_s,int(remaining)+1))
         started=time.monotonic()
         timed_out=False
         try:
@@ -134,7 +142,7 @@ def run(args, root):
             # zero tests and zero failures for the file - a failing test became invisible rather
             # than red, which understates the whole corpus health report.
             proc=subprocess.run(_PATCH.suite_argv(sys.executable,path),cwd=repo,text=True,
-                                capture_output=True,timeout=timeout_s,
+                                capture_output=True,timeout=step_timeout,
                                 env=_PATCH._source_env(path))
             returncode=proc.returncode
             combined=(proc.stdout or "")+"\n"+(proc.stderr or "")
