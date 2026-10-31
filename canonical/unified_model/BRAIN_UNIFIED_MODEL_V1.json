@@ -23385,7 +23385,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
-    "source_sha256": "6dce8d0ce8f4b578ca90cfb6f7934e252fbafd64e63b5d5d4a12b0911f0fbb14",
+    "source_sha256": "c43a6cfa0129240d217b5f0fbf97ea52d96f8a2697480d3d324f14c0d141d163",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -24030,7 +24030,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
-    "source_sha256": "f61c434659c8e518e62cbcc7654cb74bd797ca9816fa809c037dde2b95874d21",
+    "source_sha256": "f30733a3f7217142967384ffe61d2805e905c67df41af1fe812dfc6ce1258835",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -25189,22 +25189,10 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "argparse",
-     "coverage",
-     "git",
-     "hashlib",
-     "json",
-     "os",
-     "pathlib",
-     "pytest",
-     "shutil",
-     "subprocess",
-     "sys"
+     "stdlib"
     ],
-    "declared_dependency_executables": [
-     "git"
-    ],
-    "kind": "PACKAGE_OR_SYSTEM_TOOL"
+    "declared_dependency_executables": [],
+    "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
    "id": "python.review.diff_coverage_gate.v1",
@@ -25229,10 +25217,10 @@
    ],
    "provenance": {
     "source_executable": null,
-    "source_module": "coverage",
+    "source_module": "stdlib",
     "source_path": null,
     "source_sha256": null,
-    "source_type": "pypi"
+    "source_type": "python_stdlib"
    },
    "provides": [
     "python.review.diff_coverage_gate"
@@ -25433,17 +25421,10 @@
    "cost": 1,
    "declared_dependencies": {
     "declared_dependencies_checked": [
-     "argparse",
-     "ast",
-     "bandit",
-     "hashlib",
-     "json",
-     "pathlib",
-     "subprocess",
-     "sys"
+     "stdlib"
     ],
     "declared_dependency_executables": [],
-    "kind": "PACKAGE_OR_SYSTEM_TOOL"
+    "kind": "PYTHON_SOURCE"
    },
    "entrypoint": "run",
    "id": "python.review.diff_security_gate.v1",
@@ -25467,10 +25448,10 @@
    ],
    "provenance": {
     "source_executable": null,
-    "source_module": "bandit",
+    "source_module": "stdlib",
     "source_path": null,
     "source_sha256": null,
-    "source_type": "pypi"
+    "source_type": "python_stdlib"
    },
    "provides": [
     "python.review.diff_security_gate"
@@ -25994,7 +25975,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
-    "source_sha256": "68989753b37aba7a27cc58138ed0ca35b5bab14240e4dcc09d1557ab485470c2",
+    "source_sha256": "324e7266815bd87b61d431b12ec7cd681b0e9bff3d8a4586ea08a60a458bc5d7",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -26086,7 +26067,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py",
-    "source_sha256": "44259fa9c082b25884e5814913fbd616bb91771705b8283934916b07fb460f4b",
+    "source_sha256": "4ccd5208eb3930f7a32391c24a4fb1600f02edc34a83c23c2fb31153047af23a",
     "source_type": "python_stdlib_composition"
    },
    "provides": [
@@ -27428,7 +27409,7 @@
     "source_executable": null,
     "source_module": "ast",
     "source_path": "canonical/runtime/bound_capabilities/python_source_taint_flow.py",
-    "source_sha256": "d0106e401d0138ca416b9a8707a3952813eae11209b8acef7357608a08298502",
+    "source_sha256": "e9e239049350084515d3a66604e3131d16be487c53d48aa9163530ff0760bb22",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -28823,7 +28804,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "ea9881541b9508bceb53b23661f43955fbc976b26f803f40294cf97436d8b36b",
+    "source_sha256": "3526424fc826b3115462d47b78a6df7c09028b9a81ade160b7c3bd29e35e359e",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30487,9 +30468,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 206,
+  "knowledge_documents": 207,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6532,
+  "research_index_records": 6535,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30479,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "33117e09c99539f4a043a006bbbff905c3e89ec505371f4f4a247b4a2f3d88f1"
+  "value": "62f4dc7f13a0aea84cc8f32ad5ff2d24a201e24f2f2f469e366a5d0520a12b73"
  },
  "engines": [
   {
@@ -44227,6 +44208,94 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 19387,
+   "headings": [
+    "Hardcore software-engineering problem inventory — V13",
+    "§0 The answer in one paragraph",
+    "§1 What was measured, on what, with what",
+    "§2 The denominator was wrong, and that is the first problem",
+    "§3 The hardcore lattice: what exists, what can start, what serves",
+    "§4 The defect classes, ranked by how many measured requests they move",
+    "P2 — No artifact-producing step, so 43 of 84 rows can never start (est. 20+ requests)",
+    "P3 — Derivation holes: a row exists, the sentence cannot fill its slots (est. 6 requests)",
+    "P4 — Sibling rows share an effect token, so the family is always ambiguous (est. 3 requests)",
+    "P5 — The substrate is multilingual; the editor is not (est. 7 requests, axis 0/7)",
+    "P6 — A read-only operation is refused for \"no observed effect\" (2 requests)",
+    "P7 — Five magnet rows absorb 24 of 49 selections and then refuse their own inputs",
+    "P8 — A served answer can be an unrelated row, and nothing checks (1 confirmed false answer)",
+    "P9 — 29 adapters on disk have no registry row",
+    "P10 — 7 hardcore domains have no row and no substrate on this machine",
+    "P11 — The tree's own test suite is red (11,754 cases, 380 failed, 0 errors, 223 files)",
+    "P12 — Repeated derivation is not cached",
+    "§5 Corrections to V12 (this document's predecessor)",
+    "§6 Order of work (fastest path to advanced capability)",
+    "§7 Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V13.md",
+   "sha256": "4edad52111f3e4d4b910b7ea68d05de71adf2e2874150ec884698822b62bfec2",
+   "summary": "Measured 2026-10-31 on `9f80823` (branch `arena/276f5d81-brain`). Supersedes V12 (`HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V12.md`). **V12 contains two claims this document retracts; see §5.** Document-format, image, chart, archive and office rows are excluded from every count here on purpose: they are not software work.",
+   "terms": {
+    "11": 6,
+    "43": 9,
+    "440": 6,
+    "49": 12,
+    "84": 10,
+    "absent": 7,
+    "advanced": 6,
+    "all": 10,
+    "already": 16,
+    "answer": 9,
+    "cannot": 8,
+    "capability": 9,
+    "census": 8,
+    "chain": 11,
+    "chain-bound": 7,
+    "diff": 6,
+    "domains": 6,
+    "edit": 6,
+    "effect": 8,
+    "every": 8,
+    "exists": 6,
+    "family": 10,
+    "first": 7,
+    "git": 7,
+    "go": 7,
+    "index": 7,
+    "measured": 13,
+    "mechanism": 7,
+    "ms": 10,
+    "mutation": 8,
+    "no": 36,
+    "not": 23,
+    "one": 13,
+    "only": 8,
+    "provides": 8,
+    "real": 11,
+    "registry": 10,
+    "requests": 14,
+    "requires": 7,
+    "row": 37,
+    "rows": 32,
+    "sentence": 7,
+    "served": 11,
+    "so": 9,
+    "step": 7,
+    "swe": 7,
+    "they": 10,
+    "work": 8
+   },
+   "title": "Hardcore software-engineering problem inventory — V13",
+   "title_terms": [
+    "hardcore",
+    "inventory",
+    "problem",
+    "software-engineering",
+    "v13"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23697,
    "headings": [
     "What is actually missing — the complete problem list for a hardcore software engineer",
@@ -57839,10 +57908,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 995,
+  "included_source_count": 996,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "43bd9512fcba2ffdab57f4c251278d6a0cc71987c3bc3921d2f5bc83938fd9c0"
+  "source_tree_digest": "6a18085940797bd11fe4beca71a5faf11df8c713eafafa0c608b963d3ecee116"
  },
  "research_index": [
   {
@@ -200426,6 +200495,51 @@
    }
   },
   {
+   "action_id": "A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "83a72a6e4369526ac0bf455ea7e50074a2a085b526fef20b556bcb2e90dcb6c5",
+   "status": "",
+   "terms": {
+    "10": 1,
+    "18": 1,
+    "2-sentence": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "25": 1,
+    "28": 2,
+    "321": 1,
+    "68": 1,
+    "a_census_that_cannot_fail_is_not_a_gate_v1_20261031_v1": 1,
+    "after": 1,
+    "against": 1,
+    "anything": 1,
+    "artifact": 1,
+    "being": 1,
+    "builds": 1,
+    "but": 1,
+    "census": 4,
+    "every": 2,
+    "exits": 2,
+    "fix_race": 2,
+    "floor": 3,
+    "green": 2,
+    "measured": 2,
+    "nobody": 2,
+    "not": 3,
+    "now": 2,
+    "number": 2,
+    "runs": 2,
+    "tests": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_CHAIN_THAT_RAN_NOTHING_IS_NOT_A_PASS_AND_A_NOUN_PHRASE_IS_ANSWERED_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -201592,7 +201706,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_PATH_IS_NOT_PROSE_WHEN_THE_COMPILER_SCORES_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "82164c3c095a64f058410ef61b248c1f7d13a1211a24632d5db66e8e7d1581fe",
+   "sha256": "030d56c8da262e1fb20891b9ea2a057428e35b82d1ed14d3dbe7eb18430b85f0",
    "status": "",
    "terms": {
     "137": 2,
@@ -202481,6 +202595,51 @@
     "repair": 6,
     "says": 2,
     "sentence": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REPAIR_SEARCH_MUST_CONTAIN_THE_DEFECT_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "678af6c3a3c27269094d3c3ca55bf09cfb65d18264f0a460804069e08ea1766a",
+   "status": "",
+   "terms": {
+    "105": 1,
+    "18": 1,
+    "2.6": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 1,
+    "3.3": 1,
+    "46": 1,
+    "68": 1,
+    "74": 1,
+    "a_repair_search_must_contain_the_defect_v1_20261031_v1": 1,
+    "above": 1,
+    "adding": 1,
+    "correct": 2,
+    "failing": 2,
+    "fixture": 3,
+    "green": 2,
+    "no": 3,
+    "not": 4,
+    "now": 2,
+    "one": 3,
+    "oracle": 2,
+    "own": 3,
+    "repair": 6,
+    "reported": 2,
+    "routing": 2,
+    "search": 2,
+    "so": 3,
+    "test": 3,
+    "tests": 6,
     "v1": 2
    }
   },
@@ -210305,6 +210464,51 @@
    }
   },
   {
+   "action_id": "UNIVERSAL_STDLIB_SWE_REVIEW_GATES_AND_TYPED_FILE_DISAMBIGUATION_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/UNIVERSAL_STDLIB_SWE_REVIEW_GATES_AND_TYPED_FILE_DISAMBIGUATION_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/UNIVERSAL_STDLIB_SWE_REVIEW_GATES_AND_TYPED_FILE_DISAMBIGUATION_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d1b3b481479177f09c9878dad7ff0f96d53696265e7c0d294f3833a0276fa0d4",
+   "status": "",
+   "terms": {
+    "17": 1,
+    "184ms": 1,
+    "19": 1,
+    "20261031": 1,
+    "3.11": 1,
+    "54": 2,
+    "88": 2,
+    "bandit": 1,
+    "capabilities": 1,
+    "clean": 1,
+    "coverage": 2,
+    "damaged": 1,
+    "directory": 1,
+    "disambiguation": 1,
+    "environments": 1,
+    "failed": 1,
+    "false": 1,
+    "fell": 1,
+    "file": 1,
+    "file-scoped": 1,
+    "filenames": 1,
+    "four": 1,
+    "gates": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal_compiler": 1,
+    "inside": 1,
+    "lacking": 1,
+    "measurement": 1,
+    "median": 1,
+    "real": 2,
+    "review": 2,
+    "swe": 3
+   }
+  },
+  {
    "action_id": "UNPARSEABLE_NEIGHBOUR_DOES_NOT_ABORT_REPAIR_V1_20261023_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -216359,17 +216563,27 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/_swe_static_soundness_v1.py",
-   "sha256": "1cbe9639eb3c54b64946851d484ff12ab190c0a8247481ffd99db13d3fad5a4d",
-   "summary": "Shared active-registry loader and deterministic stdlib Python static/type/security analyzer.",
-   "symbol_count": 7,
+   "sha256": "bdb3e6244d525f4fe796a36685ee6f26f10094733b7373f89aaee05371ada85c",
+   "summary": "Shared active-registry loader and deterministic stdlib Python static/type/security/coverage analyzer.",
+   "symbol_count": 17,
    "symbols": [
     "_collect_bound_names",
+    "_compatible_types",
     "_matches_prim_annotation",
+    "_norm_base_type",
     "_sig_spec",
     "active_bound_registry_path",
     "analyze_python_module_ast",
     "analyze_python_static_soundness",
-    "load_active_bound_registry"
+    "has_pytest",
+    "lint_python_source",
+    "load_active_bound_registry",
+    "measure_coverage_stdlib",
+    "python_interpreter_works",
+    "run_universal_tests",
+    "security_scan_python_source",
+    "typecheck_python_source",
+    "universal_test_argv"
    ],
    "terms": {
     "active-registry": 1,
@@ -216378,12 +216592,21 @@
     "analyze_python_static_soundness": 1,
     "analyzer": 1,
     "collect_bound_names": 1,
+    "compatible_types": 1,
+    "coverage": 1,
     "deterministic": 1,
+    "has_pytest": 1,
+    "lint_python_source": 1,
     "load_active_bound_registry": 1,
     "loader": 1,
     "matches_prim_annotation": 1,
+    "measure_coverage_stdlib": 1,
+    "norm_base_type": 1,
     "python": 1,
+    "python_interpreter_works": 1,
+    "run_universal_tests": 1,
     "security": 1,
+    "security_scan_python_source": 1,
     "shared": 1,
     "sig_spec": 1,
     "soundness": 1,
@@ -216391,6 +216614,8 @@
     "stdlib": 1,
     "swe": 1,
     "type": 1,
+    "typecheck_python_source": 1,
+    "universal_test_argv": 1,
     "v1": 1
    }
   },
@@ -217573,7 +217798,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_refactor_extract_function.py",
-   "sha256": "ab7037bce8fe91052a48f7358a9687575c3e6678f8811375465da75f928326e8",
+   "sha256": "12503a125a76b36c020446dccac2d29c36d76d2e93caf7bd75c1ecd7d8b6922e",
    "summary": "python.refactor.extract_function.v1 — scope-aware statement-block",
    "symbol_count": 8,
    "symbols": [
@@ -217827,7 +218052,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_coverage_gate.py",
-   "sha256": "b20d832c7c46fd124ca55f54fe1ac0197c44227c52410ae75758615ee21bec9e",
+   "sha256": "2d64808961d0b2594196d081d62f9c5ad8ca4c8f9e3d50e8771b06f5ddb9effa",
    "summary": "python.review.diff_coverage_gate.v1 — every changed line must be",
    "symbol_count": 5,
    "symbols": [
@@ -217863,7 +218088,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_mutation_gate.py",
-   "sha256": "b24b7eda796ae04243eaaa2b53d7d4616ec35124ca5eb19bf0819f10cf064ab5",
+   "sha256": "d0934328a87b521418869c230484d50ca8a4ab62119df5e11fd28c515db48a49",
    "summary": "python.review.diff_mutation_gate.v1 — every changed executable line",
    "symbol_count": 10,
    "symbols": [
@@ -217942,7 +218167,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_security_gate.py",
-   "sha256": "44c9c630a3303280d96227bb2482411b2899620c2bcb04da845b54f09bc25ca7",
+   "sha256": "0e065da2f4306c8d6e21cf44b3ea5866cab681b1828b456d4e05c9f594f57d56",
    "summary": "python.review.diff_security_gate.v1 — security triage on changed lines.",
    "symbol_count": 6,
    "symbols": [
@@ -218015,7 +218240,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_review_diff_type_gate.py",
-   "sha256": "22b73dd4bdc499c1d7fc77893df013c4373d96bcda6d33030413f04cb706d4ce",
+   "sha256": "c6c566625e2a118323f15f844df3d1754f8f70661b8b637471211cbd6f587a58",
    "summary": "python.review.diff_type_gate.v1 — the type-soundness gate on the diff.",
    "symbol_count": 5,
    "symbols": [
@@ -230410,12 +230635,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "d49d4fa431d143c00f5d26e8b289d03b80ef631d5083f457045da9d8f575bf9a",
+   "sha256": "6d3e37f5ab646aa6ef8e7e4a79c718ec01f626dd43e9ed80969294dda35a0c72",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 10,
+   "symbol_count": 13,
    "symbols": [
     "_defining_module",
     "_derive_edits",
+    "_git_head_tree_blobs",
+    "_materialize_git_diff_for_dir",
+    "_read_git_loose_obj",
     "_stated_change_set",
     "_stated_directories",
     "_tree_of",
@@ -230436,9 +230664,12 @@
     "derivation": 2,
     "derive": 1,
     "derive_edits": 1,
+    "git_head_tree_blobs": 1,
     "human": 1,
     "input": 2,
     "is_swe_request": 1,
+    "materialize_git_diff_for_dir": 1,
+    "read_git_loose_obj": 1,
     "sentences": 1,
     "stated_change_set": 1,
     "stated_directories": 1,
@@ -238169,7 +238400,7 @@
    "imported_by_count": 7,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_compiler.py",
-   "sha256": "3a124261cab90e4fa7b43b26a7a2ac25ada2a667f566419868670fb6c0632887",
+   "sha256": "1402cb1b5adad8e516b5ae1c7c55a24323c66d93d18721b524cc917c20b0c3b4",
    "summary": "Deterministic plain-goal compiler for Project Brain.",
    "symbol_count": 133,
    "symbols": [
@@ -244583,9 +244814,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "dc4ed87250ed0c16a08911d7d1cfe3b2666cc6d0bc6a36f90bb55bc4043c00cd",
+   "sha256": "6687dfd0501203a5fbdb51ad74a1303867a1b6cec36955938c00139b287501b8",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 88,
+   "symbol_count": 89,
    "symbols": [
     "LocalExecutionFailure",
     "_asks_only_for_a_plan",
@@ -244615,7 +244846,6 @@
    "terms": {
     "admission": 2,
     "brain": 2,
-    "check_expectation": 1,
     "controller_passed": 1,
     "dag_admission": 1,
     "dag_contract_errors": 1,
@@ -244627,6 +244857,7 @@
     "front": 1,
     "future_artifacts": 1,
     "goal_names_a_file": 1,
+    "input_format_mismatch": 1,
     "inventory_source_path": 1,
     "kernel_refuses": 1,
     "last_json_object": 1,
@@ -274261,7 +274492,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "6237916ea7a8c81f8d3ef4cee05681851a420d42a7f0ba29734673b9b4c774b1",
+   "sha256": "7c04181bc8a43aedb77f8dc61dae4c869047f973d19a2510ad172a5873c82e6f",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 14,
    "symbols": [
@@ -282259,7 +282490,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/verify_bound_capability_provenance_v1.py",
-   "sha256": "07c5857bdad185497a13ab4247bfce814b5a6cdd5cd14f7857830cbf9386ffcd",
+   "sha256": "3db3242a054dfa3fc2098f790b197428f40dbea40607aecdd6d15daea2fe9e2f",
    "summary": "Provenance for bound capability rows -- re-derivable, not asserted.",
    "symbol_count": 30,
    "symbols": [

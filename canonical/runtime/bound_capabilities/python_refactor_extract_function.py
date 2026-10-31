@@ -53,6 +53,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import universal_test_argv
+
 from canonical.runtime.bound_capabilities.python_refactor_rename_parameter import (
     _safe_path,
     _sha256,
@@ -202,12 +204,16 @@ def run(args, root):
     out_abs = _safe_path(repo, out_rel)
     python_exe = str(args.get("python_executable") or sys.executable)
     timeout_s = int(args.get("timeout_s") or 300)
-    run_tests = list(args.get("run_tests") or [])
-    # A caller that names pytest args gets pytest; a corpus this module
-    # derived itself is run through the loader instead.
-    verify_argv = [python_exe, "-m", "pytest", "-q",
-                   "-p", "no:cacheprovider"] + run_tests
-    if not run_tests:
+    raw_run_tests = args.get("run_tests")
+    caller_explicit_empty = (
+        "run_tests" in args
+        and isinstance(raw_run_tests, list)
+        and len(raw_run_tests) == 0
+        and not args.get("capability_id")
+    )
+    run_tests = list(raw_run_tests or [])
+    verify_argv = universal_test_argv(python_exe, run_tests)
+    if not run_tests and not caller_explicit_empty:
         # The verification law below is the adapter's own: "the named suite runs
         # after the bytes are rewritten; red => every byte restored and
         # TESTS_RED_AFTER_EDIT; no tests => verified stays false loudly."  That

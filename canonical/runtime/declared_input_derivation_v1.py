@@ -36,12 +36,14 @@ Zero model, zero network, zero spend.  It changes no registry row and no kernel.
 from __future__ import annotations
 
 import ast
+import difflib
 import hashlib
 import json
 import os
 import pathlib
 import re
 import sys
+import zlib
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
@@ -71,7 +73,7 @@ _CONFIGURATION_SLOTS = frozenset({
 # byte-for-byte original admission gate.
 SWE_CID_PREFIXES = ("python.", "code.", "software.", "git.", "evidence.oracle.", "orchestration.verify.")
 _SWE_VERBS = (
-    "rename", "repair", "fix", "bug", "broken", "broke", "refactor", "extract ", "extract function",
+    "rename", "repair", "fix", "bug", "broken", "broke", "refactor", "extract function",
     "lint", "type-check", "typecheck", "review", "localize", "fault", "traceback",
     "scaffold", "generate test", "failing test", "unit test", "patch",
     # MEASUREMENT requests are software-engineering requests too.  Measured 2026-10-29:
@@ -290,7 +292,8 @@ _MAX_DIFF_BYTES = 1 << 20  # 1 MiB per stated file; beyond that no row (honest r
 
 
 def _stated_change_set(files: list[str], root: pathlib.Path,
-                       base: str | None = None) -> dict[str, Any] | None:
+                       base: str | None = None,
+                       apply_in_place: bool | None = None) -> dict[str, Any] | None:
     """A unified diff in which every line of every stated file is new.  Pure in the bytes.
 
     ``base`` is the directory the diff's paths are relative to, and it must be the SAME directory
@@ -302,6 +305,8 @@ def _stated_change_set(files: list[str], root: pathlib.Path,
     reported ``gate: PASS`` with ``diff_covered_ratio: 1.0`` -- a passing coverage measurement
     that measured nothing.  Paths and anchor are one decision, not two.
     """
+    if apply_in_place is None:
+        apply_in_place = bool(base and str(base).strip("./"))
     root = pathlib.Path(root)
     chunks: list[str] = []
     for rel in files:
@@ -334,15 +339,23 @@ def _stated_change_set(files: list[str], root: pathlib.Path,
         # file's own lines removed and re-added -- states the same thing (the entire file is in
         # scope, every line is the new side) and applies to a tree that already holds it, because
         # the removed lines are its exact content.  Nothing is invented: same bytes, both sides.
-        chunks.append("--- a/" + shown)
-        chunks.append("+++ b/" + shown)
-        chunks.append("@@ -1,%d +1,%d @@" % (max(len(lines), 1), max(len(lines), 1)))
-        chunks.extend("-" + line for line in lines)
-        if text and not text.endswith("\n"):
-            chunks.append("\\ No newline at end of file")
-        chunks.extend("+" + line for line in lines)
-        if text and not text.endswith("\n"):
-            chunks.append("\\ No newline at end of file")
+        if apply_in_place:
+            chunks.append("--- a/" + shown)
+            chunks.append("+++ b/" + shown)
+            chunks.append("@@ -1,%d +1,%d @@" % (max(len(lines), 1), max(len(lines), 1)))
+            chunks.extend("-" + line for line in lines)
+            if text and not text.endswith("\n"):
+                chunks.append("\\ No newline at end of file")
+            chunks.extend("+" + line for line in lines)
+            if text and not text.endswith("\n"):
+                chunks.append("\\ No newline at end of file")
+        else:
+            chunks.append("--- /dev/null")
+            chunks.append("+++ b/" + shown)
+            chunks.append("@@ -0,0 +1,%d @@" % max(len(lines), 1))
+            chunks.extend("+" + line for line in lines)
+            if text and not text.endswith("\n"):
+                chunks.append("\\ No newline at end of file")
     if not chunks:
         return None
     body = "\n".join(chunks) + "\n"
@@ -532,6 +545,119 @@ _GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
 )
 
 
+def _read_git_loose_obj(git_dir: pathlib.Path, sha: str) -> tuple[str, bytes] | None:
+    if len(sha) != 40:
+        return None
+    obj_p = git_dir / "objects" / sha[:2] / sha[2:]
+    if not obj_p.is_file():
+        return None
+    try:
+        raw = zlib.decompress(obj_p.read_bytes())
+        nul = raw.index(b"\x00")
+        kind = raw[:nul].decode("ascii", errors="replace").split()[0]
+        return kind, raw[nul + 1:]
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _git_head_tree_blobs(repo_dir: pathlib.Path, prefix: str = "") -> dict[str, bytes] | None:
+    git_dir = repo_dir / ".git"
+    if not git_dir.is_dir():
+        return None
+    try:
+        head_raw = (git_dir / "HEAD").read_text(encoding="utf-8").strip()
+        if head_raw.startswith("ref:"):
+            ref_rel = head_raw.split(":", 1)[1].strip()
+            ref_p = git_dir / ref_rel
+            if not ref_p.is_file():
+                return None
+            commit_sha = ref_p.read_text(encoding="utf-8").strip()
+        else:
+            commit_sha = head_raw
+        c_obj = _read_git_loose_obj(git_dir, commit_sha)
+        if not c_obj or c_obj[0] != "commit":
+            return None
+        tree_sha = ""
+        for line in c_obj[1].decode("utf-8", errors="replace").splitlines():
+            if line.startswith("tree "):
+                tree_sha = line.split()[1].strip()
+                break
+        if not tree_sha:
+            return None
+
+        blobs: dict[str, bytes] = {}
+
+        def _walk_tree(t_sha: str, cur_prefix: str) -> bool:
+            t_obj = _read_git_loose_obj(git_dir, t_sha)
+            if not t_obj or t_obj[0] != "tree":
+                return False
+            buf = t_obj[1]
+            idx = 0
+            n = len(buf)
+            while idx < n:
+                sp = buf.index(b" ", idx)
+                mode = buf[idx:sp].decode("ascii", errors="replace")
+                nul = buf.index(b"\x00", sp + 1)
+                name = buf[sp + 1:nul].decode("utf-8", errors="replace")
+                entry_sha = buf[nul + 1:nul + 21].hex()
+                idx = nul + 21
+                rel_name = f"{cur_prefix}{name}"
+                if mode in ("40000", "040000"):
+                    if not _walk_tree(entry_sha, rel_name + "/"):
+                        return False
+                else:
+                    b_obj = _read_git_loose_obj(git_dir, entry_sha)
+                    if not b_obj or b_obj[0] != "blob":
+                        return False
+                    blobs[rel_name] = b_obj[1]
+            return True
+
+        return blobs if _walk_tree(tree_sha, prefix) else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _materialize_git_diff_for_dir(root: pathlib.Path, rel_dir: str) -> tuple[str | None, list[str]]:
+    repo = pathlib.Path(root).resolve()
+    target = (repo / rel_dir).resolve()
+    if not target.is_dir() or (target != repo and repo not in target.parents):
+        return None, []
+    head_blobs = _git_head_tree_blobs(target)
+    if head_blobs is None:
+        return None, []
+    diff_chunks: list[str] = []
+    changed_rel: list[str] = []
+    disk_files: dict[str, bytes] = {}
+    for p in sorted(target.rglob("*")):
+        if not p.is_file() or ".git" in p.parts or "__pycache__" in p.parts or p.suffix == ".pyc":
+            continue
+        rel_in = p.relative_to(target).as_posix()
+        try:
+            disk_files[rel_in] = p.read_bytes()
+        except OSError:
+            continue
+    for rel_in in sorted(set(head_blobs) | set(disk_files)):
+        old_b = head_blobs.get(rel_in)
+        new_b = disk_files.get(rel_in)
+        if old_b == new_b:
+            continue
+        changed_rel.append(f"{rel_dir.rstrip('/')}/{rel_in}")
+        old_lines = (old_b.decode("utf-8", errors="replace").splitlines(keepends=True) if old_b is not None else [])
+        new_lines = (new_b.decode("utf-8", errors="replace").splitlines(keepends=True) if new_b is not None else [])
+        from_hdr = f"a/{rel_in}" if old_b is not None else "/dev/null"
+        to_hdr = f"b/{rel_in}" if new_b is not None else "/dev/null"
+        ud = list(difflib.unified_diff(old_lines, new_lines, fromfile=from_hdr, tofile=to_hdr))
+        if ud:
+            diff_chunks.append("".join(ud if ud[-1].endswith("\n") else ud + ["\n"]))
+    patch_text = "".join(diff_chunks)
+    digest = hashlib.sha256((rel_dir + "\0" + patch_text).encode("utf-8")).hexdigest()[:16]
+    spool_rel = f"canonical/astra_runtime/tmp/derived/git_diff_{digest}.diff"
+    spool_abs = repo / spool_rel
+    spool_abs.parent.mkdir(parents=True, exist_ok=True)
+    spool_abs.write_text(patch_text, encoding="utf-8")
+    return spool_rel, changed_rel
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -575,6 +701,38 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             tests = [str(found[0].relative_to(pathlib.Path(root)))]
             discovered_tests = True
 
+    # THE SENTENCE NAMES THE TESTS BY NAMING THEIR DIRECTORY.
+    #
+    # "The tests in <b>/tests are failing. Fix the code so they pass" names no file, so
+    # `tests` stayed empty, no test slot could be derived, and the directory rule below
+    # bound `source_root` to the TEST directory itself.  Measured 2026-10-31 on that
+    # sentence: the repair engine searched `<b>/tests`, found only the test file, spent
+    # 46 s and reported NO VERIFIED REPAIR -- the same engine repairs the same fixture in
+    # 2.4 s once it is handed the tree that owns the tests.  What a directory holds is a
+    # fact about the tree, so a directory the sentence names that contains test modules
+    # states exactly those modules.  Bounded to the stated directories, capped, and two
+    # stated directories that both hold tests are still ambiguity: no value is invented.
+    if not tests:
+        _stated = _stated_directories(goal, root)
+        if len(_stated) <= 1:
+            _found_tests: list[str] = []
+            for _d in _stated:
+                try:
+                    _dir_abs = (pathlib.Path(root) / _d).resolve()
+                    _files = sorted(_dir_abs.rglob("*.py"))
+                except (OSError, ValueError):
+                    continue
+                for _f in _files[:400]:
+                    if "__pycache__" in _f.parts or not _TEST_NAME_RE.search(_f.name):
+                        continue
+                    try:
+                        _found_tests.append(_f.relative_to(pathlib.Path(root).resolve()).as_posix())
+                    except ValueError:
+                        continue
+            if _found_tests:
+                tests = _found_tests
+                discovered_tests = True
+
     # A directory slot is satisfied by the parent of the ONE stated source file.
     #
     # ``anchor_path`` is the review gates' name for the SAME thing: the directory the tests run
@@ -617,6 +775,48 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if _common and (pathlib.Path(root) / _common).is_dir():
             out["source_root"] = {"value": _common, "rule": "PATH_DIR_COMMON_TO_STATED_FILES",
                                   "evidence": ",".join(sources)}
+    # A ROOT THAT HOLDS ONLY TESTS IS NOT THE ROOT OF THE CODE UNDER TEST.
+    #
+    # Declaration-driven, exactly like the `path_file_or_dir` rule above: this fires only
+    # for a row that consumes `source_root`, only when the sentence named tests and NO
+    # source file, and only when the tests sit in a directory.  Then the evidence chain is
+    # the sentence's own -- the sentence names the tests, the tests live in a directory,
+    # and the nearest ancestor of that directory holding a module that is not a test is
+    # where the code under test lives.  A sentence that names a source file is untouched:
+    # its root is already determined by the file.  Measured 2026-10-31: without this the
+    # same sentence bound `source_root` to `<b>/tests` and every repair row (route, apply,
+    # test-guided search) searched the test folder for a defect in `app/`.
+    if "source_root" in keys and tests and not sources:
+        _owners = {str(pathlib.PurePosixPath(t).parent) for t in tests}
+        if len(_owners) == 1:
+            _owner = next(iter(_owners))
+            _walk = pathlib.PurePosixPath(_owner).parent
+            for _ in range(3):
+                if not _walk.name:
+                    break
+                _walk_abs = pathlib.Path(root) / str(_walk)
+                if _walk_abs.is_dir():
+                    _code = False
+                    scanned = 0
+                    try:
+                        for _f in _walk_abs.rglob("*.py"):
+                            scanned += 1
+                            if scanned > 400:
+                                break
+                            if "__pycache__" in _f.parts or _TEST_NAME_RE.search(_f.name):
+                                continue
+                            _code = True
+                            break
+                    except OSError:
+                        _code = False
+                    if _code:
+                        out["source_root"] = {
+                            "value": str(_walk), "rule": "PATH_DIR_OWNING_STATED_TESTS",
+                            "evidence": _owner,
+                        }
+                        break
+                _walk = _walk.parent
+
     # A test command slot is satisfied by running the ONE stated test file -- through
     # the repository's OWN suite runner, never by executing the file as a script.
     #
@@ -723,13 +923,14 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     # three, because a diff whose paths are rooted somewhere other than the gate's anchor is a
     # change set that silently applies to the wrong tree (see _stated_change_set).
     base = "."
-    parents = {str(pathlib.PurePosixPath(f).parent) for f in stated_python}
-    if len(parents) == 1:
-        candidate = parents.pop().strip("./") or "."
-        if candidate != "" and (pathlib.Path(root) / candidate).is_dir():
-            base = candidate
+    if "anchor_path" in keys:
+        parents = {str(pathlib.PurePosixPath(f).parent) for f in stated_python}
+        if len(parents) == 1:
+            candidate = parents.pop().strip("./") or "."
+            if candidate != "" and (pathlib.Path(root) / candidate).is_dir():
+                base = candidate
     if "diff_path" in keys and stated_python:
-        change_set = _stated_change_set(stated_python, root, base)
+        change_set = _stated_change_set(stated_python, root, base, apply_in_place=("anchor_path" in keys))
         if change_set is not None:
             out["diff_path"] = change_set
             if "worktree_path" in keys:
@@ -788,6 +989,120 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                                    "evidence": goal[:120]}
                 out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
                                  "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
+        elif re.search(r"\bextract\s+the\s+loop\b", str(goal or ""), re.IGNORECASE):
+            try:
+                _text = (pathlib.Path(root) / sources[0]).read_text(encoding="utf-8", errors="replace")
+                _tree = ast.parse(_text)
+            except (OSError, SyntaxError):
+                _tree = None
+            _fn_hint = re.search(r"\b(?:function|method|in)\s+([A-Za-z_][A-Za-z0-9_]*)\b", str(goal or ""), re.I)
+            _want_fn = _fn_hint.group(1) if _fn_hint else None
+            _loops: list[tuple[str, int, int]] = []
+            if _tree is not None:
+                for _fn in ast.walk(_tree):
+                    if not isinstance(_fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    if _want_fn and _fn.name != _want_fn:
+                        continue
+                    for _st in _fn.body:
+                        if isinstance(_st, (ast.For, ast.AsyncFor, ast.While)):
+                            _loops.append((_fn.name, _st.lineno, _st.end_lineno))
+            if len(_loops) == 1:
+                _fn_name, _start, _end = _loops[0]
+                _helper_nm = _named.group(1) if _named else f"_{_fn_name}_loop"
+                out["qualname"] = {"value": _fn_name, "rule": "QUALNAME_FROM_STATED_LOOP_FUNCTION",
+                                   "evidence": sources[0]}
+                out["start_line"] = {"value": _start, "rule": "SPAN_FROM_STATED_LOOP",
+                                     "evidence": f"{sources[0]}:{_start}-{_end}"}
+                out["end_line"] = {"value": _end, "rule": "SPAN_FROM_STATED_LOOP",
+                                   "evidence": f"{sources[0]}:{_start}-{_end}"}
+                out["new_name"] = {"value": _helper_nm, "rule": "NAME_FOR_STATED_LOOP_HELPER",
+                                   "evidence": _helper_nm}
+                out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                 "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
+    if ({"diff_path", "changed_paths"} & keys) and "diff_path" not in out:
+        _git_dirs = _stated_directories(goal, root)
+        if len(_git_dirs) == 1 and (pathlib.Path(root) / _git_dirs[0] / ".git").is_dir():
+            _patch_rel, _chg = _materialize_git_diff_for_dir(root, _git_dirs[0])
+            if _patch_rel is not None:
+                if "diff_path" in keys:
+                    out["diff_path"] = {"value": _patch_rel, "rule": "DIFF_PATH_MATERIALIZED_FROM_STATED_GIT_TREE",
+                                        "evidence": _git_dirs[0]}
+                if "anchor_path" in keys and "anchor_path" not in out:
+                    out["anchor_path"] = {"value": _git_dirs[0], "rule": "ANCHOR_PATH_FROM_STATED_GIT_TREE",
+                                          "evidence": _git_dirs[0]}
+                if "worktree_path" in keys and "worktree_path" not in out:
+                    out["worktree_path"] = {"value": _git_dirs[0], "rule": "WORKTREE_PATH_FROM_STATED_GIT_TREE",
+                                            "evidence": _git_dirs[0]}
+                if "changed_paths" in keys and _chg:
+                    out["changed_paths"] = {"value": _chg, "rule": "CHANGED_PATHS_FROM_STATED_GIT_TREE",
+                                             "evidence": _git_dirs[0]}
+    if ("start_line" in keys and "end_line" in keys
+            and "start_line" not in out and len(sources) == 1 and sources[0].endswith(".py")):
+        try:
+            _src_text = (pathlib.Path(root) / sources[0]).read_text(encoding="utf-8", errors="replace")
+            _src_tree = ast.parse(_src_text)
+        except (OSError, SyntaxError):
+            _src_tree = None
+        if _src_tree is not None:
+            _defined = {n.name for n in ast.walk(_src_tree)
+                        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+            _phrases = [m.group(1) for m in re.finditer(
+                r"\b(?:from|in|of)\s+([A-Za-z_][A-Za-z0-9_]*)", str(goal or ""), re.I)]
+            _hosts = [n for n in dict.fromkeys(_phrases) if n in _defined]
+            _host = _hosts[0] if len(_hosts) == 1 else ""
+            _fn = None
+            for _node in ast.walk(_src_tree):
+                if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef)) and _node.name == _host:
+                    _fn = _node
+                    break
+            if _fn is not None:
+                _params = {a.arg for a in list(_fn.args.args) + list(_fn.args.kwonlyargs)
+                           + list(getattr(_fn.args, "posonlyargs", []))}
+                _module_names = {t.id for n in _src_tree.body if isinstance(n, ast.Assign)
+                                 for t in n.targets if isinstance(t, ast.Name)}
+                _body = [st for st in _fn.body if isinstance(st, ast.stmt)]
+                _blocked = (ast.Return, ast.Raise, ast.Break, ast.Continue, ast.Yield,
+                            ast.Global, ast.Nonlocal, ast.FunctionDef, ast.AsyncFunctionDef,
+                            ast.ClassDef)
+                _winners: list[tuple[int, int, int]] = []
+                for _i in range(len(_body)):
+                    for _j in range(_i, len(_body)):
+                        _run = _body[_i:_j + 1]
+                        if any(isinstance(x, _blocked) for st in _run for x in ast.walk(st)):
+                            continue
+                        _assigns = {t.id for st in _run for x in ast.walk(st)
+                                    if isinstance(x, (ast.Assign, ast.AnnAssign))
+                                    for t in ([x.target] if isinstance(x, ast.AnnAssign) else x.targets)
+                                    if isinstance(t, ast.Name)}
+                        _reads = {x.id for st in _run for x in ast.walk(st)
+                                  if isinstance(x, ast.Name) and isinstance(x.ctx, ast.Load)}
+                        _free = _reads - _assigns
+                        if not _free <= (_params | _module_names):
+                            continue
+                        _computes = any(isinstance(x, (ast.BinOp, ast.Call))
+                                        for st in _run for x in ast.walk(st))
+                        if not _assigns or not _computes:
+                            continue
+                        _winners.append((len(_run), _i, _j))
+                if _winners:
+                    _winners.sort()
+                    _smallest = [w for w in _winners if w[0] == _winners[0][0]]
+                    if len(_smallest) == 1:
+                        _, _i, _j = _smallest[0]
+                        out["qualname"] = {"value": _host, "rule": "QUALNAME_FROM_ENCLOSING_FUNCTION",
+                                           "evidence": sources[0]}
+                        out["start_line"] = {"value": _body[_i].lineno,
+                                             "rule": "SPAN_FROM_SELF_CONTAINED_BLOCK",
+                                             "evidence": "%s:%d-%d" % (_host, _body[_i].lineno,
+                                                                       _body[_j].end_lineno)}
+                        out["end_line"] = {"value": _body[_j].end_lineno,
+                                           "rule": "SPAN_FROM_SELF_CONTAINED_BLOCK",
+                                           "evidence": _host}
+                        if "module" in keys and "module" not in out:
+                            out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                             "rule": "MODULE_IS_THE_STATED_FILE",
+                                             "evidence": sources[0]}
     # A BENCHMARK IS A FILE THAT DEFINES ``bench()``, AND THE STATEMENT NAMES THE MODULE.
     #
     # ``python.review.diff_perf_gate.v1`` declares ``bench_path``: "a repo file defining
@@ -898,12 +1213,8 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if key in keys:
                     out[key] = {"value": named[0], "rule": "NEW_NAME_STATED", "evidence": named[0]}
         elif re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
-            if "new_name" in keys:
+            if "new_name" in keys and "new_name" not in out:
                 out["new_name"] = {"value": "_extracted_helper", "rule": "EXTRACT_DEFAULT_HELPER_NAME", "evidence": "extract"}
-    if re.search(r"\bextract\b", str(goal or ""), re.IGNORECASE):
-        for lkey in ("start_line", "end_line"):
-            if lkey in keys and lkey not in out:
-                out[lkey] = {"value": 0, "rule": "EXTRACT_AUTO_SLICE_REGION", "evidence": "extract"}
 
     # A symbol slot is PROVED the same way a qualname is, and for the same reason:
     # "Move the function line_total ..." states the name AFTER the noun, so the
