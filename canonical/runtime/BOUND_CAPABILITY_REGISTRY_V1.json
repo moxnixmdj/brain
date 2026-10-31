@@ -5264,6 +5264,70 @@
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-EXTRACT-001.json"
    }
   },
+  "python.refactor.inline_helper.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.refactor.inline_helper.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_inline_helper",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "inline",
+    "inline the helper",
+    "single-use",
+    "single use",
+    "helper",
+    "only caller",
+    "call site",
+    "refactor",
+    "expand function",
+    "inline function"
+   ],
+   "limitations": [
+    "Inlines a module-level function that ends in a single return and has exactly ONE call site in the subject; 'single-use' is read as that property of the tree, never as a hint.",
+    "Refuses a call whose argument is not re-evaluable (a call, lambda, await or comprehension): substituting it twice would run it twice.",
+    "Kept only if the helper's name survives nowhere and the suite is green."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.refactor.inline_helper",
+    "python.refactor.single_use_inlined"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "helper",
+    "inlined_expression",
+    "edits",
+    "files_edited",
+    "suite_passed",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_inline_helper.py",
+    "type": "brain_native_deterministic_composition"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
+  },
   "python.refactor.rename_parameter.v1": {
    "action_template": {
     "args": {
@@ -8455,6 +8519,68 @@
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
     "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TESTGEN-001.json"
    }
+  },
+  "python.vcs.merge_conflict.resolve.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "python.vcs.merge_conflict.resolve.v1",
+     "output_path": "${input.output_path}",
+     "source_root": "${input.source_root}",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "output_verified",
+     "type": "field_equals",
+     "value": true
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "python_source_merge_resolve",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "merge conflict",
+    "conflict",
+    "conflicted",
+    "conflict markers",
+    "merge",
+    "resolve the conflict",
+    "keep both changes",
+    "both sides",
+    "unmerged"
+   ],
+   "limitations": [
+    "Resolves a TWO-SIDED conflict as the union of its sides, in order, when the sentence says both changes are kept.",
+    "Refuses a diff3 base section (|||||||): there the union is not stated and is not guessed.",
+    "Kept only if no marker survives, the file parses and the suite is green."
+   ],
+   "platforms": [
+    "linux",
+    "windows",
+    "darwin"
+   ],
+   "provides": [
+    "python.vcs.merge_conflict.resolved",
+    "python.source.conflict.free"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "resolved",
+    "resolved_file_count",
+    "files_edited",
+    "suite_passed",
+    "output_path",
+    "output_sha256",
+    "output_verified"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/python_source_merge_resolve.py",
+    "type": "brain_native_deterministic_composition"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY"
   },
   "shell.command.run": {
    "action_template": {

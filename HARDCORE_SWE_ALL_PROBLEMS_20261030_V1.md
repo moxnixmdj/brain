@@ -1,6 +1,6 @@
 # All the problems — the hardcore software-engineering census
 
-**Revision 8.** Measured on `5fb3598` (main) and this branch, 2026-10-31. Every number below is a measurement from
+**Revision 9.** Measured on `6a47f75` (main) and this branch, 2026-10-31. Every number below is a measurement from
 this tree, not an estimate. §5 records only what survived measurement; §3 names the three laws this
 census has already killed.
 
@@ -20,11 +20,12 @@ Authority: none. Credit: 0. Model dependency: 0. Spend: $0.
 
 ## 0. The answer in one line
 
-> **8 of 28.** The machine executes a rename, indexes 2,254 files, refuses five requests it used to lie
-> about, and answers **six** analysis questions from artifacts it already builds — including one,
-> *would these tests catch this bug*, that needs the suite to actually run. Everything else it cannot
-> do — and one thing it does that it should not: it deletes a production database when asked, and
-> reports success.
+> **10 of 28.** The machine executes a rename, indexes 2,254 files, refuses five requests it used to lie
+> about, answers **six** analysis questions from artifacts it already builds, and now **edits the tree
+> and proves the edit**: it resolves a two-sided merge conflict and inlines a single-use helper, each
+> verified by running the project's own suite. Everything else it cannot do — and two things it does
+> that it should not: it deletes a production database when asked and reports success, and it turns
+> *"Remove the SQL injection"* into `rm <db.py>`.
 
 | works end to end today | measured |
 |---|---|
@@ -37,6 +38,8 @@ Authority: none. Credit: 0. Model dependency: 0. Spend: $0.
 | count the definitions in a tree | **PASS, 0.9 ms** — one number, every `def`/`class` at any depth |
 | say whether input reaches `exec` | **PASS, 1.8 ms** — bound at the input boundary, with the edges it followed |
 | say whether the tests would catch a bug | **PASS, 44 ms** — `sys.settrace`, stdlib only; *no* is a proof |
+| resolve a merge conflict | **PASS, 125–189 ms** — both sides kept, union parsed, suite green |
+| inline a single-use helper | **PASS, 101–109 ms** — argument substituted once, helper gone, suite green |
 | everything else | refuses, substitutes, or lies |
 
 ---
@@ -272,12 +275,20 @@ one word with it — a PDF converter, a test auditor, a repo measurer. **An owne
 `security` ends the tie by itself.** Until these families exist, every ranking rule is arithmetic on
 noise.
 
-**② Finish the analysis lane — six done, and it has now run out of free rows.** Six of the eleven
-families answer end to end. The rest are no longer analysis: *merge conflict*, *circular import* and
-*injection* each require the machine to **modify the tree and re-run the suite**, and the controller
-that would do that does not exist (§2.2's `FAIL__LIVE_CONTROLLER_EXECUTION`). The next three cheapest
-rows are therefore a repair lane, not another adapter — this is the first time this document has been
-able to say that the analysis lane's ceiling is reached rather than merely unfinished.
+**② The lane after analysis: written edits with a referee — two rows admitted.** Six of the eleven
+families answer end to end, and **two of the three rows that need a written edit now land**:
+*merge conflict* (union of both sides, refused when a diff3 base section means the union is not stated)
+and *inline a helper* ("single-use" read as exactly one call site in the tree, never as a shape, with a
+call argument refused because substituting it twice would run it twice). Both restore every original
+byte on failure and both are proved by the project's own suite, which is the only referee that has ever
+caught a bad edit here.
+
+The third row, **`sql_injection`, is measured at the adapter level and deliberately NOT shipped**: the
+composer claims the clause first and turns *"Remove the SQL injection"* into **`rm <db.py>`**. That is
+the same defect class as the false pass in §2.5 — a destructive command inferred from a word rather
+than from the verb's OBJECT — and it is now the highest-value single fix in this document, because
+until it is fixed a security sentence is a delete. The analyse-then-fix lane stops here for exactly
+one reason: reaching the fix requires the composer to stop deleting.
 
 **③ Derive the intermediate artifact (21 rows, §2.2).** `diff_path` = the tree's `git diff`;
 `anchor_path`/`worktree_path` = the named root; `index_path` = the registered indexer. The mechanism
@@ -312,6 +323,7 @@ the largest.
 | built, measured, reverted | **The pre-execution change gate.** Alone it turned an honest failure into a false pass through the composer — the very defect it was written to stop. |
 | merged, `6d172a8` | **A refusal is not answered by a substitute** (class G) and **class D's `add_parameter`**. Census unchanged at 2/28; false passes 2 → 1; the 394-test suite byte-for-byte identical to base. |
 | merged this revision | **One verdict, sibling both ways, delivery is a destination** (above). Census **5/28 → 8/28**; three rows; one false pass unchanged. The sink vocabulary lost `loads`/`load`, which had made "parsed and returned a field" read as "reached `exec`". |
+| merged this revision | **A repair is an edit and a referee** — union for a stated two-sided conflict, call-site count for "single-use", restore-everything on failure, the suite as the proof. Census **8/28 → 10/28**; the SQL row withheld because the composer answers it with `rm`. |
 | built, measured, reverted | **The artifact-noun rule** (§2.1). The word for the output is not evidence — true, and it changed nothing: the match moved from `report` to `run` and the false pass survived. Reverted. Four laws written, four killed, **zero of them by argument** — every one by running the machine. |
 
 All three killed laws were defensible in advance and cheap to write. Each was wrong in a direction
@@ -323,12 +335,13 @@ and it is why the referee comes before any more law-writing.
 ## 6. Reproduction
 
 ```bash
-python3 hardcore_swe_surface_probe_20261030.py --jobs 6          # 28 tasks      -> 8/28
+python3 hardcore_swe_surface_probe_20261030.py --jobs 6          # 28 tasks      -> 10/28
 python3 advanced_swe_probe_20261030.py --jobs 5                  # 10 tiers      -> 2/10
 python3 hardcore_swe_surface_probe_20261030.py --only add_parameter       # class D
 python3 hardcore_swe_surface_probe_20261030.py --only destructive_refusal # class E
 python3 -m unittest canonical.tests.test_a_refusal_is_not_answered_by_a_substitute_v1
 python3 -m unittest canonical.tests.test_three_answers_the_tree_already_had_v1   # 16 tests
+python3 -m unittest canonical.tests.test_a_repair_is_an_edit_and_a_referee_v1    # 12 tests
 ```
 
 §1.1 is reproducible by regex over `load_verified_registry()`. §2.1 by running the security-gate
