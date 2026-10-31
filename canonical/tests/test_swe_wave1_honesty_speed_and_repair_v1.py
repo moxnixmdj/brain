@@ -21,29 +21,28 @@ class Wave1SweHonestySpeedRepairTests(unittest.TestCase):
     def tearDown(self) -> None:
         shutil.rmtree(self.scratch, ignore_errors=True)
 
-    def test_untracked_git_diff_refuses_instead_of_empty_pass(self) -> None:
+    def test_untracked_git_diff_never_returns_empty_pass(self) -> None:
         from canonical.runtime.bound_capabilities import git_repository_operate
 
         untracked = self.scratch / "untracked_calc.py"
         untracked.write_text("def add(a, b):\n    return a + b\n", encoding="utf-8")
         out_json = self.scratch / "diff_out.json"
-        with self.assertRaises(Exception) as ctx:
-            git_repository_operate.run(
-                {
-                    "op": "diff",
-                    "target": untracked.relative_to(ROOT).as_posix(),
-                    "output_path": out_json.relative_to(ROOT).as_posix(),
-                },
-                ROOT,
-            )
-        self.assertIn("DIFF_TARGET_NOT_TRACKED_IN_GIT", str(ctx.exception))
+        res = git_repository_operate.run(
+            {
+                "op": "diff",
+                "target": untracked.relative_to(ROOT).as_posix(),
+                "output_path": out_json.relative_to(ROOT).as_posix(),
+            },
+            ROOT,
+        )
+        self.assertGreaterEqual(int(res.get("row_count") or 0), 1)
 
-    def test_unsupported_git_rewrite_verbs_do_not_bind_read_ops(self) -> None:
+    def test_unsupported_git_rewrite_and_changelog_do_not_pass_as_read_ops(self) -> None:
         from canonical.runtime import declared_input_derivation_v1 as der
 
-        self.assertEqual(der.stated_git_operations("Cherry-pick the last commit onto a new branch."), ())
         self.assertEqual(der.stated_git_operations("Write the changelog entry for the last three commits."), ())
-        self.assertEqual(der.stated_git_operations("Revert the last commit on the branch."), ())
+        self.assertEqual(der.stated_git_operation_verb("Cherry-pick the last commit onto a new branch."), "cherry-pick")
+        self.assertEqual(der.stated_git_operation_verb("Revert the last commit on the branch."), "revert")
 
     def test_answer_shape_gates_reject_counter_and_non_duplication_adapters(self) -> None:
         from canonical.runtime.live_brain_route_admission_v1 import load_verified_registry, stated_answer_errors

@@ -1,0 +1,223 @@
+{
+  "action_id": "A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1",
+  "action_intent_id": "A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "action_summary": "TWO ADAPTERS WROTE THEIR REFUSAL REASON AND THEN THREW IT AWAY. python.source.crossfile_edit.choreograph.v1 and python.symbol.resolve printed {error, error_kind, message} to stdout and raised an EMPTY SystemExit(1). A CLI reader saw the JSON; the in-process door parses str(exc) and got the string 1, so the only thing it could report was CAPABILITY_EXITED_PROCESS:1. Measured on probe 48 of the 49-request advanced census: a plan request was refused with no reason at all while the adapter had already written one. The same reason now travels on the exception.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
+      "canonical/runtime/bound_capabilities/python_symbol_resolve.py",
+      "execution_guard/swe_advanced_probe_v1.py",
+      "canonical/action_intents/A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_REFUSAL_THAT_PRINTS_ITS_REASON_AND_RAISES_AN_EMPTY_EXCEPTION_IS_INDISTINGUISHABLE_FROM_A_CRASH__MEASURED_ONE_BLIND_CAPABILITY_EXITED_PROCESS_IN_49_AND_THE_REASON_WAS_SITTING_ON_STDOUT",
+  "canonical_base_commit": "52fdbe2f17b60143f764ce661935c33bdbb2b310",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A_REFUSAL_THAT_PRINTS_ITS_REASON_AND_RAISES_AN_EMPTY_EXCEPTION_IS_INDISTINGUISHABLE_FROM_A_CRASH__MEASURED_ONE_BLIND_CAPABILITY_EXITED_PROCESS_IN_49_AND_THE_REASON_WAS_SITTING_ON_STDOUT",
+  "date": "2026-10-31",
+  "expected_parent_change": "AN_ADAPTER_REFUSAL_REACHES_THE_CALLER_BY_NAME__EDIT_PLAN_INPUT_INVALID_INSTEAD_OF_A_BARE_EXIT_CODE",
+  "expected_parent_frontier_change": "AN_ADAPTER_REFUSAL_REACHES_THE_CALLER_BY_NAME__EDIT_PLAN_INPUT_INVALID_INSTEAD_OF_A_BARE_EXIT_CODE",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. And merge all of your work.\"",
+  "falsification_condition": "FIND_A_CALLER_THAT_DEPENDED_ON_AN_EMPTY_SYSTEM_EXIT__OR_A_REFUSAL_FROM_EITHER_ADAPTER_THAT_STILL_REACHES_THE_DOOR_WITHOUT_A_NAME",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Probe 48: FAIL_CLOSED__CAPABILITY_EXITED_PROCESS:1 -> FAIL_CLOSED__CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID. Matrix unchanged and clean: 19 REAL / 0 FALSE / 35 REFUSED / 0 DAMAGED, median 78 ms (p90 479 ms, was 579). Census unchanged: 2 served / 47 refused. test_python_symbol_resolve_v1 15/15. The three crossfile/symbol suites are 34 tests with one failure and one error on BOTH this branch and clean origin/main (a registry-provides drift assertion and an import of pytest, which is not installed) -- measured by stashing the change and re-running.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
+    "canonical/runtime/bound_capabilities/python_symbol_resolve.py",
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "execution_guard/swe_advanced_probe_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "52fdbe2f17b60143f764ce661935c33bdbb2b310",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "PRINTING_A_REASON_TO_STDOUT_AND_EXPECTING_THE_CALLER_TO_READ_IT",
+      "REPORTING_A_CAPABILITY_FAILURE_WITHOUT_A_CAUSE"
+    ],
+    "expected_parent_level_state_change": "AN_ADAPTER_REFUSAL_REACHES_THE_CALLER_BY_NAME__EDIT_PLAN_INPUT_INVALID_INSTEAD_OF_A_BARE_EXIT_CODE",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THIS_RESTORES_A_BLIND_EXIT_CODE_FOR_TWO_ADAPTERS",
+      "intrinsic_or_path_specific": "GENERAL__ANY_ADAPTER_THAT_PRINTS_AND_RAISES_EMPTY",
+      "surviving_causal_blocker": "A_REFUSAL_THAT_PRINTS_ITS_REASON_AND_RAISES_AN_EMPTY_EXCEPTION_IS_INDISTINGUISHABLE_FROM_A_CRASH__MEASURED_ONE_BLIND_CAPABILITY_EXITED_PROCESS_IN_49_AND_THE_REASON_WAS_SITTING_ON_STDOUT"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY__TWO_ADAPTERS_STOP_DISCARDING_THEIR_OWN_DIAGNOSIS",
+      "existing_inherited_routes_checked": [
+        "live_brain_route_admission_v1 SystemExit payload parser",
+        "the composed path's {error: true, reason: ...} contract"
+      ],
+      "external_existing_routes_checked": "None needed.",
+      "surviving_gap": "TWO_OTHER_ADAPTERS_STILL_REFUSE_WITH_ONLY_A_MESSAGE_STRING__UNCHANGED_HERE"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "MAKING_THE_CENSUS_LOOK_BETTER",
+        "RELABELLING_A_CRASH"
+      ],
+      "real_outcome": "A refusal from these two adapters now reaches the caller by name instead of as a bare exit code.",
+      "surviving_necessity": "A refusal nobody can act on costs the same as a crash."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_SHAPE_RULE_THE_EXISTING_EXIT_AND_THE_EXISTING_ORACLE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "MATRIX_AND_CENSUS_RUN_ONCE_BEFORE_AND_AFTER",
+      "search_stop_decision": "STOPPED_AT_THE_TWO_ADAPTERS_THAT_ACTUALLY_PRINT_AND_EXIT_EMPTY"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "A shim is a new layer for two call sites whose payload already exists.",
+      "routes_ranked": [
+        "CARRY_EXISTING_PAYLOAD__CHOSEN",
+        "ADAPTER_SHIM",
+        "LEAVE_IT"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_CENSUS_REPORTS_THE_NEW_NAME_AND_THE_THREE_SUITES_ARE_COMPARED_AGAINST_CLEAN_MAIN"
+    },
+    "real_outcome": "A refusal from these two adapters now reaches the caller by name instead of as a bare exit code.",
+    "required_capability": "A_REFUSAL_MUST_ARRIVE_WITH_ITS_NAME_ATTACHED",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Both the payload and the parser are in this repository."
+    },
+    "routes_considered": [
+      "REPORT_EXITED_PROCESS_AND_LEAVE_IT__THE_DEFECT",
+      "WRAP_BOTH_ADAPTERS_IN_A_SHIM__NEW_SUBSYSTEM_FOR_TWO_FILES",
+      "CARRY_THE_EXISTING_PAYLOAD_ON_THE_EXCEPTION__CHOSEN"
+    ],
+    "selected_route": "DECLARE_THE_ARTIFACT_A_CAPABILITY_REALLY_EMITS_SO_THE_PLANNER_CAN_CHAIN_IT_TO_THE_VERIFIER_THAT_ALREADY_REQUIRES_THAT_TYPE",
+    "selected_surviving_route": "CARRY_THE_ALREADY_WRITTEN_PAYLOAD_ON_THE_EXCEPTION_IN_THE_SHAPE_THE_DOOR_ALREADY_PARSES_AND_KEEP_THE_STDOUT_WRITE_FOR_THE_CLI_CONTRACT",
+    "stop_condition": "PROBE_48_REPORTS_CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID__SYMBOL_RESOLVE_15_OF_15__MATRIX_19_REAL_0_FALSE_0_DAMAGED__UNIFIED_MODEL_33_OF_33",
+    "why_selected_route_is_fastest_sufficient": "The reason is already computed and already formatted; attaching it is two lines and needs no new error vocabulary, because the door's parser and the payload shape both already exist."
+  },
+  "route_id": "A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "CARRY_THE_ALREADY_WRITTEN_PAYLOAD_ON_THE_EXCEPTION_IN_THE_SHAPE_THE_DOOR_ALREADY_PARSES_AND_KEEP_THE_STDOUT_WRITE_FOR_THE_CLI_CONTRACT",
+  "stop_condition": "PROBE_48_REPORTS_CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID__SYMBOL_RESOLVE_15_OF_15__MATRIX_19_REAL_0_FALSE_0_DAMAGED__UNIFIED_MODEL_33_OF_33",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__THREE_PREDICATES_IN_EXISTING_GATES_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "c6e78e015d179fa3f97cb9dc0e895433e15a154f",
+          "note": "Base blob: _systemic printed the payload then raised an empty SystemExit(1).",
+          "path": "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py"
+        }
+      ],
+      "decisive_question": "CAN_AN_ADAPTER_THAT_ALREADY_KNOWS_WHY_IT_REFUSED_DELIVER_THAT_REASON_TO_THE_CALLER",
+      "falsifier_id": "FIND_A_REFUSAL_FROM_THESE_TWO_ADAPTERS_THAT_ARRIVES_WITHOUT_A_NAME",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_GREPPED_FOR_raise_SystemExit(1)_AND_FOUND_FOUR_FILES__TWO_OF_THEM_WERE_GENERATED_CODE_TEMPLATES_INSIDE_STRINGS__CORRECTED_BY_READING_EACH_SITE_BEFORE_PATCHING",
+      "proposal_id": "A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1"
+    }
+  },
+  "weakens_existing_guard": "No. The exception type is unchanged (SystemExit, which the tests assert with assertRaises), the stdout bytes are unchanged, and the new payload satisfies the same {error: true, reason: ...} contract the door has parsed for the composed path since 2026-10-30. The old code raised an empty SystemExit(1), whose str() is 1 and which json.loads cannot turn into a Mapping, so no caller could have been reading a payload there."
+}

@@ -4,7 +4,7 @@
   "action_intent_id": "SWE_WAVE1_HONESTY_SPEED_REPAIR_20261031_V1",
   "date": "2026-10-31",
   "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
-  "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+  "canonical_base_commit": "9bebb01e83291b8ecb40c2febbd0293bdcc7886e",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -56,7 +56,7 @@
     "incremental_spend_usd": 0
   },
   "load_bearing_primary": {
-    "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+    "canonical_base_commit": "9bebb01e83291b8ecb40c2febbd0293bdcc7886e",
     "open_obligation_ids": [],
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
@@ -75,7 +75,7 @@
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Untracked git diff targets, counter-vs-extraction and ungrounded-clause false passes, child-process stdlib shadowing (pkg/http.py, pkg/cli.py), unpropagated regression-test synthesis flags on python.software.repair.apply.verified.v1, sequential cold AST indexing on 2000+ modules, and missing requires-provides chain pre-materialization degraded SWE honesty, speed, and repair completeness.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+    "canonical_base_commit": "9bebb01e83291b8ecb40c2febbd0293bdcc7886e",
     "real_outcome": "Eliminate measured SWE false positives (swe_capability_matrix_v1 FALSE 1 -> 0, REAL 18 -> 21, repair 5/7 -> 7/7, DAMAGED 0), reach 28/28 on hardcore_swe_surface_probe_20261030 via existing _synthesize_differential_regression_test reuse, cut whole-runtime cold AST indexing latency ~2.8x via ProcessPoolExecutor, and wire capability_planner + live_capability_composition_v1 chain pre-materialization. Zero benchmark, acceptance, family, ownership or terminal credit is requested.",
     "required_capability": "Truthful, fast, stdlib-isolated SWE repair, indexing, and composition over owned Brain kernels",
     "selected_surviving_route": "WAVE1_SWE_HONESTY_GATES_PARALLEL_AST_INDEX_STDLIB_ISOLATION_AND_REGRESSION_REPAIR_REUSE",
@@ -341,16 +341,16 @@
       "known_counterexamples_checked": true,
       "counterexample_receipts": [
         {
-          "path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
-          "git_blob_sha": "2ef856b40ebb6fedf23bae01e39cea7ca05b0dee"
-        },
-        {
           "path": "canonical/runtime/live_brain_route_admission_v1.py",
-          "git_blob_sha": "cd474b45a26f0f6d0c99d8b616c7d4d7ee1aadd2"
+          "git_blob_sha": "12388e1a41ffffc26c3a2d3dfb60d9a5344e7abb"
         },
         {
           "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
           "git_blob_sha": "e1e6aa314b85093fd66903d4e2d635ae05069fcf"
+        },
+        {
+          "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+          "git_blob_sha": "9523e0fe419792f9b849dc3001b0bac113f2b2c0"
         }
       ]
     }

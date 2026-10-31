@@ -199,37 +199,69 @@ def _op_status(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
                   "head_sha": _head(cwd)}
 
 
-def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
-    target = _target(args, cwd)
-    if target:
-        in_index = subprocess.run([*_BASE, "ls-files", "--error-unmatch", "--", target],
-                                  cwd=str(cwd), capture_output=True, text=True,
-                                  env={**os.environ, **_ENV}, timeout=15).returncode == 0
-        if not in_index:
-            prefix = _git(cwd, "rev-parse", "--show-prefix", check=False).strip()
-            repo_rel = (prefix + target).lstrip("/")
-            in_head = subprocess.run([*_BASE, "cat-file", "-e", "HEAD:" + repo_rel],
-                                     cwd=str(cwd), capture_output=True, text=True,
-                                     env={**os.environ, **_ENV}, timeout=15).returncode == 0
-            if not in_head:
-                _fail("DIFF_TARGET_NOT_TRACKED_IN_GIT:" + target)
-    spec = ["diff", "--numstat", "HEAD", "--"] + ([target] if target else [])
-    raw = _git(cwd, *spec, check=False)
+def _tracked(cwd: pathlib.Path, target: str) -> bool:
+    """True when git has the target in its index.
+
+    ``git diff HEAD -- <untracked>`` is EMPTY by design, and an empty patch
+    returned as the answer to "show me the diff" is a PASS over nothing.
+    Measured 2026-10-31 on fabf28c: the capability matrix scored ``git_diff``
+    FALSE for exactly this -- the door reported
+    ``PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED`` while
+    ``row_count`` was 0 and the patch was the empty-string digest.
+    """
+    if not target:
+        return True
+    proc = subprocess.run([*_BASE, "ls-files", "--error-unmatch", "--", target],
+                          cwd=str(cwd), capture_output=True, text=True,
+                          env={**os.environ, **_ENV}, timeout=120)
+    return proc.returncode == 0
+
+
+def _numstat_rows(raw: str) -> list[dict[str, Any]]:
     rows = []
     for line in raw.splitlines():
         parts = line.split("\t")
         if len(parts) < 3:
             continue
         added, removed, path = parts[0], parts[1], parts[2]
+        # numstat names a no-index pair as "<from> => <to>"; the file is the destination.
+        path = path.rsplit(" => ", 1)[-1] if " => " in path else path
         rows.append({"path": path,
                      "added": int(added) if added.isdigit() else None,
                      "removed": int(removed) if removed.isdigit() else None})
-    patch_text = _git(cwd, *(("diff", "HEAD", "--", target) if target else ("diff", "HEAD")))
+    return rows
+
+
+def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
+    target = _target(args, cwd)
+    tracked = _tracked(cwd, target)
+    # AN UNTRACKED FILE HAS NO HISTORY, BUT IT DOES HAVE A DIFFERENCE.
+    #
+    # The difference between nothing and the file is a fact, and git already
+    # states it: ``git diff --no-index -- /dev/null <path>`` is the canonical
+    # "new file" patch -- ``new file mode``, ``@@ -0,0 +1,N @@``, every line
+    # prefixed ``+``.  Computing it is not a guess, and refusing it would leave
+    # the plainest question about a brand-new file unanswerable.  ``--no-index``
+    # exits 1 when the inputs differ, so its exit code is not a failure signal
+    # here; the patch and the numstat are.
+    if target and not tracked and (cwd / target).is_file():
+        rows = _numstat_rows(_git(cwd, "diff", "--no-index", "--numstat", "--", "/dev/null", target,
+                                  check=False))
+        patch_text = _git(cwd, "diff", "--no-index", "--", "/dev/null", target, check=False)
+    else:
+        spec = ["diff", "--numstat", "HEAD", "--"] + ([target] if target else [])
+        rows = _numstat_rows(_git(cwd, *spec, check=False))
+        patch_text = _git(cwd, *(("diff", "HEAD", "--", target) if target else ("diff", "HEAD")))
     # independence: the patch itself must mention every file numstat named
     missing = [r["path"] for r in rows if r["path"] not in patch_text and r["path"].split("/")[-1] not in patch_text]
     if missing:
         _fail("INDEPENDENT_CHECK_DISAGREES:diff:" + ",".join(missing[:3]))
-    return rows, {"op": "diff", "target": target, "file_count": len(rows),
+    # independence: every file numstat counted must also carry a hunk in the patch.
+    # Two plumbing commands, one answer -- an empty patch can no longer be returned
+    # as a diff (that was the false PASS).
+    if rows and "@@" not in patch_text:
+        _fail("INDEPENDENT_CHECK_DISAGREES:diff:NO_PATCH_BODY")
+    return rows, {"op": "diff", "target": target, "tracked": tracked, "file_count": len(rows),
                   "patch": patch_text,
                   "patch_sha256": _sha(patch_text.encode("utf-8")),
                   "patch_bytes": len(patch_text.encode("utf-8")),
