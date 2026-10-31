@@ -5435,6 +5435,187 @@
         },
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYPI-PROVENANCE-001__RECEIPT.json"
       }
+    },
+    "python.contract.check.crosshair.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.contract.check.crosshair.v1",
+          "output_path": "${input.output_path}",
+          "target_path": "${input.target_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "crosshair_contract_oracle",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "contract",
+        "symbolic",
+        "smt",
+        "oracle",
+        "crosshair",
+        "counterexample",
+        "verification"
+      ],
+      "limitations": [
+        "Requires the crosshair-tool package; reports ORACLE_INCONCLUSIVE when absent.",
+        "Checks declared postconditions only; cannot invent contracts the code does not state.",
+        "Symbolic execution can be slow on code with unbounded loops or heavy I/O."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.contract.verdict"
+      ],
+      "requires": [
+        "python.source.file.available"
+      ],
+      "source": {
+        "license": "MIT",
+        "project": "crosshair-tool",
+        "type": "pypi",
+        "version": "0.0.109"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-CROSSHAIR-CONTRACT-ORACLE-001",
+        "observed_effect": {
+          "model_dependency_count": 0,
+          "status": "CONTRACT_VIOLATION_FOUND",
+          "violations_found": 2
+        }
+      }
+    },
+    "python.contract.issue_orchestration.fusion.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.contract.issue_orchestration.fusion.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_contract_issue_orchestration_fusion_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "contract",
+        "issue",
+        "orchestration",
+        "fusion"
+      ],
+      "limitations": [
+        "Contract gates NL intent before HTN"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.orchestration.fused.verified",
+        "python.contract.issue.composition.verified"
+      ],
+      "requires": [
+        "python.contract.verdict",
+        "python.issue.natural_language.edit_intent",
+        "python.software.issue_to_pr.orchestration"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_contract_issue_orchestration_fusion_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-CONTRACT-ISSUE-ORCHESTRATION-FUSION-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1_V1.json"
+      }
+    },
+    "python.evidence.contract.supercomposer.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.evidence.contract.supercomposer.v1"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_evidence_contract_supercomposer_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "evidence",
+        "contract",
+        "supercomposer",
+        "oracle"
+      ],
+      "limitations": [
+        "Evidence\u2192contract 5-kernel, deterministic"
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "python.evidence.contract.super.verified",
+        "python.evidence.contract.family.verified"
+      ],
+      "requires": [
+        "evidence.evidence.family.super.verified",
+        "evidence.synthesis.super.verified",
+        "evidence.hypothesis.property_violation",
+        "evidence.oracle.independent_second",
+        "python.contract.issue.composition.verified"
+      ],
+      "result_fields": [
+        "adapter",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_evidence_contract_supercomposer_v1.py",
+        "module": "ast",
+        "type": "python_stdlib"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified_by": "hardcore_verify",
+        "mission_id": "HARDCORE-VERIFY-PYTHON-EVIDENCE-CONTRACT-SUPERCOMPOSER-V1",
+        "observed_effect": {
+          "output_verified": true
+        },
+        "receipt_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_EVIDENCE_CONTRACT_SUPERCOMPOSER_V1_V1.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
