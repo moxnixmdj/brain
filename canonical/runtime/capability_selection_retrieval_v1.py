@@ -697,7 +697,16 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
                     "reason": "BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:"
                               + ",".join(sorted(kinds))[:120],
                     "required_inputs": required}
-    if not front.is_plain_goal_routable({"action_template": _bind_contract}):
+    # F4 asks a question about the CAPABILITY ("does this tool take any input?"),
+    # not about the goal, so it must be answered on the DECLARED contract.  The
+    # shadow entry deliberately drops every slot the adapter defaults or the
+    # sentence derives -- its job is to decide what the binder still has to be
+    # asked -- and using it here made F4 refuse exactly the capabilities whose
+    # sentence-supplied slot is derived: measured 2026-10-29,
+    # "Show the last three git commits" derived `op` from its own verb, the shadow
+    # was left with no placeholders, and admit() answered
+    # NO_DECLARED_INPUT_CONTRACT for a capability that declares one.
+    if not front.is_plain_goal_routable({"action_template": contract}):
         return {"capability_id": cid, "admitted": False, "reason": "NO_DECLARED_INPUT_CONTRACT",
                 "required_inputs": required}
     conflict = _expectation_compatible(cid, entry, declared)
