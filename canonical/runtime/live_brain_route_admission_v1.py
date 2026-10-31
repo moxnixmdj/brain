@@ -1835,7 +1835,8 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     # (code.impact.tree_sitter.testselect.v1 provides change_impact + test selection), so this
     # row is a SHORTLIST, not a refusal: it asks the declaration which rows can select tests.
     (_CHANGE_IMPACT_REQUEST_RE,
-     re.compile(r"\bimpact\b|\baffected\b|\btest[._-]?select\w*\b|\bselect\w* tests?\b",
+     re.compile(r"\btest[._-]?select\w*\b|\bselect\w*[ ._-]+tests?\b|"
+                r"\b(?:impact|affected)[ ._-]+tests?\b",
                 re.IGNORECASE),
      "STATED_CHANGE_IMPACT_NOT_ANSWERED_BY_CAPABILITY"),
 )
@@ -1916,7 +1917,9 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
     text = str(goal or "")
     if not text.strip():
         return []
-    asked = [row for row in _STATED_EFFECTS if any(_intent_verb_matches(row[0], text))]
+    asked = [row for row in _STATED_EFFECTS
+             if any(not _is_a_premise(text, match.start())
+                    for match in _intent_verb_matches(row[0], text))]
     if not asked:
         return []
     # WHAT IT PRODUCES OUTRANKS WHAT IT IS TAGGED WITH.
@@ -1939,6 +1942,33 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
                  for _ask, supplied, _code in asked):
             weak.append(str(cid))
     return sorted(strong) if strong else sorted(weak)
+
+
+_QUESTION_RE = re.compile(
+    r"\?|^\s*(?:which|what|where|who|whom|whose|how|why|is|are|does|do|can|could|should|would)\b"
+    # ... and a question written without a question mark.  Measured 2026-10-31: "Rerun the
+    # failing test <t> three times and tell me if it is flaky" is a request for a VERDICT, and
+    # a copula-only reading filed "is flaky" as a premise and let the answer gate be skipped.
+    r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b|\bfind out (?:if|whether)\b"
+    r"|\bdetermine (?:if|whether)\b|\bconfirm (?:if|whether)\b",
+    re.IGNORECASE)
+
+
+_PREMISE_COPULA_RE = re.compile(
+    r"\b(?:is|are|was|were|has|have|had)\b[^.?!;,]{0,40}?"
+    r"(?:built|written|implemented|made|done|defined|used|set|left|affected)?\s*"
+    r"(?:with|in|by|using|as|of)?\s*$", re.IGNORECASE)
+
+
+def _is_a_premise(text: str, start: int) -> bool:
+    """True when the effect words at ``start`` describe the tree rather than ask for work."""
+    if _QUESTION_RE.search(text):
+        return False
+    head = text[max(0, start - 56):start]
+    cut = max(head.rfind(ch) for ch in ".;?,!")
+    if cut >= 0:
+        head = head[cut + 1:]
+    return bool(_PREMISE_COPULA_RE.search(head))
 
 
 def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> list[str]:
@@ -1964,7 +1994,8 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> 
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
     errors: list[str] = []
     for asked, supplied, code in _STATED_EFFECTS:
-        if not any(_intent_verb_matches(asked, text)) or supplied.search(surface):
+        if not any(not _is_a_premise(text, match.start())
+                   for match in _intent_verb_matches(asked, text)) or supplied.search(surface):
             continue
         errors.append(code + ":" + (cid or "UNNAMED"))
     errors.extend(stated_application_errors(text, entry))

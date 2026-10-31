@@ -168,3 +168,36 @@ def test_missing_execution_rows_do_not_erase_a_known_execution(execution_fact):
               "failure_class": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE",
               "reason": "RuntimeError:CHOREOGRAPHY_REPAIR_UNRESOLVED"}
     assert door._may_supersede_a_failed_attempt(result) is False
+
+
+@pytest.mark.parametrize("goal", [
+    "Which tests do I need to run after changing pkg/calc.py?",
+    "Which tests are affected if I change pkg/calc.py?",
+])
+def test_test_selection_is_not_a_generic_impact_index(goal):
+    from canonical.runtime import live_brain_route_admission_v1 as front
+    registry = {
+        "python.source.symbols.index.ast": {"provides": ["code.impact.index"]},
+        "python.source.change_impact.testselect.v1": {"provides": ["test.selection"]},
+    }
+    assert front.declared_effect_ids(goal, registry) == ["python.source.change_impact.testselect.v1"]
+    assert front.stated_answer_errors(goal, registry["python.source.symbols.index.ast"],
+                                      "python.source.symbols.index.ast")
+
+
+@pytest.mark.parametrize("goal,asks_verdict", [
+    ("The test test_calc.py is flaky. Fix the code so it passes reliably.", False),
+    ("Rerun test_calc.py and tell me if it is flaky", True),
+])
+def test_a_premise_is_not_a_request_but_an_indirect_question_is(goal, asks_verdict):
+    from canonical.runtime import live_brain_route_admission_v1 as front
+    errors = front.stated_answer_errors(goal, {"provides": ["software.source.write.crossfile"]},
+                                       "software.repair.choreograph.crossfile.v1")
+    assert any(e.startswith("STATED_FLAKY_VERDICT_") for e in errors) is asks_verdict
+
+
+def test_a_question_about_a_failed_suite_does_not_claim_the_repair_family():
+    from canonical.runtime import swe_typed_plan_v1 as planner
+    hit = planner._family_hits("The test suite in pkg fails. Which function is at fault? "
+                               "Write its name to answer.json")
+    assert hit is None or hit[2] not in {"apply", "repair"}

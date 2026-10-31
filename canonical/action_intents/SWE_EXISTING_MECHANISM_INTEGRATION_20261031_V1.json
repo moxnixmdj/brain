@@ -1,0 +1,358 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1",
+  "action_intent_id": "SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1",
+  "date": "2026-10-31",
+  "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
+  "canonical_base_commit": "f8d64a9bd4e1def57573c71a5ff450ba9c0474e6",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "action_kind": "FRESH_REUSE",
+  "causal_blocker": "Existing taint/cost/index mechanisms and typed routes were disconnected or disagreed with exact-file scope, request roles and non-vacuous execution evidence.",
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Among the observed SWE integration/safety repairs, compared with replacing the static-analysis stack or polishing document capabilities; not a universal optimum.",
+  "action_summary": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
+  "expected_parent_frontier_change": "Restore live access to existing SWE mechanisms while retaining exact-file, staged, effect and execution-evidence boundaries. The original 166-case cohort improved from 65 failures to no failures; expanded residuals remain explicitly open. No benchmark, acceptance, family, ownership or terminal credit is requested.",
+  "stop_condition": "Stop this integration cycle after the original cohort and all new joint-boundary controls pass, the compiled model verifies, and the signed referee admits the exact head. Publish remaining compatibility failures; do not manufacture green results. Reopen on a fresh counterexample; do not broaden into an unbounded repair project.",
+  "explicit_user_authorization": "All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers\u2026 Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work.",
+  "record_scope": "Current-base integration/landing intent for an already-produced local candidate; does not backdate prior edits or certify prewrite compliance for them.",
+  "benchmark_or_family_rank_authority": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "progress_evidence_paths": [
+    "canonical/tests/test_swe_reuse_joint_contracts_v1.py",
+    "canonical/verification/SWE_REUSE_INTEGRATION_20261031.md"
+  ],
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "route_class": "INTEGRATE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/tests/test_swe_reuse_joint_contracts_v1.py",
+      "canonical/verification/SWE_REUSE_INTEGRATION_20261031.md"
+    ],
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "load_bearing_primary": {
+    "canonical_base_commit": "f8d64a9bd4e1def57573c71a5ff450ba9c0474e6",
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 1800,
+    "units": "seconds for the final integration/landing cycle, not total prior exploration",
+    "interpretation": "Conservative subjective scheduling assumptions only, NOT statistically established confidence bounds and NOT benchmark measurements. An expected reusable coding-route unlock motivates the integration; all actual frozen obligations remain open. Zero benchmark/family/terminal credit. The local regression results do not establish a benchmark success probability.",
+    "stop_condition": "Stop this integration cycle after the original cohort and all new joint-boundary controls pass, the compiled model verifies, and the signed referee admits the exact head. Publish remaining compatibility failures; do not manufacture green results. Reopen on a fresh counterexample; do not broaden into an unbounded repair project."
+  },
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Existing taint/cost/index mechanisms and typed routes were disconnected or disagreed with exact-file scope, request roles and non-vacuous execution evidence.",
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "f8d64a9bd4e1def57573c71a5ff450ba9c0474e6",
+    "real_outcome": "Restore live access to existing SWE mechanisms while retaining exact-file, staged, effect and execution-evidence boundaries. The original 166-case cohort improved from 65 failures to no failures; expanded residuals remain explicitly open. No benchmark, acceptance, family, ownership or terminal credit is requested.",
+    "required_capability": "Current-tree static SWE analysis and truthful typed execution using existing mechanisms",
+    "selected_surviving_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
+    "why_selected_route_is_fastest_sufficient": "Reuse already implemented mechanisms and share the current index rather than add a second cache or an external analysis service. Local regressions establish the bounded gain. This is the best observed route in the enumerated comparison, not a global-optimality proof.",
+    "expected_parent_level_state_change": "Restore live access to existing SWE mechanisms while retaining exact-file, staged, effect and execution-evidence boundaries. The original 166-case cohort improved from 65 failures to no failures; expanded residuals remain explicitly open. No benchmark, acceptance, family, ownership or terminal credit is requested.",
+    "stop_condition": "Stop this integration cycle after the original cohort and all new joint-boundary controls pass, the compiled model verifies, and the signed referee admits the exact head. Publish remaining compatibility failures; do not manufacture green results. Reopen on a fresh counterexample; do not broaden into an unbounded repair project.",
+    "routes_considered": [
+      "DELETE_DUPLICATE_CACHE_AND_INVENTED_EXTRACTION_DEFAULTS",
+      "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
+      "EXTERNAL_STATIC_ANALYSIS_STACK_REPLACEMENT"
+    ],
+    "deleted_or_bypassed_paths": [
+      "Historical pickle/stat-only/worker cache not imported",
+      "Invented extraction line bounds and helper defaults removed",
+      "Broad source-write application-gate bypass removed"
+    ],
+    "obs_goal": {
+      "real_outcome": "Restore live access to existing SWE mechanisms while retaining exact-file, staged, effect and execution-evidence boundaries. The original 166-case cohort improved from 65 failures to no failures; expanded residuals remain explicitly open. No benchmark, acceptance, family, ownership or terminal credit is requested.",
+      "proxy_goals_deleted": [
+        "No document-capability expansion",
+        "No benchmark score/terminal counter edits"
+      ],
+      "surviving_necessity": "The user asked for advanced SWE capability integration and truthful fast execution."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "Current index engine and staged guard",
+        "cd44f98 analysis and derivation implementations",
+        "Current main request-role and execution-verdict safeguards"
+      ],
+      "external_existing_routes_checked": [
+        "CPython AST primary-source repository",
+        "GitHub python taint analysis repository search"
+      ],
+      "capability_work_deleted": [
+        "No new analysis service",
+        "No new capability IDs",
+        "No new cache engine"
+      ],
+      "surviving_gap": "Existing taint/cost/index mechanisms and typed routes were disconnected or disagreed with exact-file scope, request roles and non-vacuous execution evidence."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific integration and verification-evidence defects, not an assertion of absent algorithms",
+      "delete_bypass_substitute_options": [
+        "Delete speculative extraction defaults",
+        "Share the current index",
+        "Do not bypass effect or native verification gates"
+      ],
+      "surviving_causal_blocker": "Existing taint/cost/index mechanisms and typed routes were disconnected or disagreed with exact-file scope, request roles and non-vacuous execution evidence."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
+        "External analysis-stack replacement"
+      ],
+      "losing_routes_reason": "External replacement adds qualification/integration work, and the discovered community candidate has no declared license in its GitHub metadata; not an admissible drop-in donor. No claim that its algorithm is inferior. Existing Brain mechanisms already close the measured failures.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Current-tree regression and fresh-source neighboring controls measure concrete bytes, hashes, scope, metrics and refusals. They are sandbox regressions, not independent capability qualification or a new truth receipt."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "Do not build a second cache or external analyzer for the measured scope"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "Pure index delegates to existing incremental engine"
+      ],
+      "fresh_reuse_plan": "Run current-tree cohorts and the existing model verifier; restore test-generated state and retain explicit residuals."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Historical source is discovery only; no repeated recovery imports",
+        "Reuse measured baseline case identities"
+      ],
+      "search_stop_decision": "Reuse already implemented mechanisms and share the current index rather than add a second cache or an external analysis service. Local regressions establish the bounded gain. This is the best observed route in the enumerated comparison, not a global-optimality proof.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-10-31T15:50:00.453767+00:00",
+      "max_age_hours": 24,
+      "incumbent_route": "Current disconnected SWE route",
+      "selected_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "BROAD_WEB_OR_COMMUNITY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "OFFICIAL_PRIMARY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Current canonical/runtime/bound_capabilities/ and cd44f98 discovery; current-tree tests only"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/python/cpython/blob/main/Doc/library/ast.rst ; GitHub contents metadata retrieved this session, no new algorithm claim based on unread documentation"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "GitHub Brain source/commit discovery; PyPI dependencies already installed, no new runtime package"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "GitHub repository search python taint analysis: https://github.com/ihrishikesh0896/tainter; metadata returned no declared license"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "GitHub repositories: python taint analysis"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "CPython official Doc/library/ast.rst contents metadata"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Brain build_index, interprocedural taint/cost, typed effect contracts in historical and current source"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "git fetch origin main; inspect f333567d..f8d64a9b request-role changes"
+        }
+      ],
+      "comparison_dimensions": [
+        "CAPABILITY_STRENGTH",
+        "CORRECTNESS",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY",
+        "WALL_CLOCK"
+      ],
+      "refresh_triggers": [
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "challenger_routes": [
+        {
+          "route": "REPLACE_WITH_DISCOVERED_COMMUNITY_TAINT_STACK",
+          "evidence": [
+            "https://github.com/ihrishikesh0896/tainter describes a Python taint analysis engine"
+          ],
+          "qualification_evidence": [
+            "GitHub repository metadata: license unspecified; no copied/imported source. Not qualified for drop-in reuse. Existing code already covers the bounded fixture classes."
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY",
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Existing exact-scope/execution controls pass; an unqualified external replacement has no such current integration evidence.",
+            "CAPABILITY_STRENGTH": "Existing mechanisms cover the measured residual; no universal strength ordering is claimed.",
+            "WALL_CLOCK": "Avoids replacing and requalifying the stack.",
+            "INCREMENTAL_COST": "No new paid service or runtime dependency.",
+            "RELIABILITY": "Preserves current cache and fail-closed safeguards.",
+            "VERIFIABILITY": "Current-tree source/bytes and existing verifier rather than an author-written pass receipt."
+          }
+        }
+      ],
+      "selected_route_preflight": {
+        "selected_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
+        "checked_at_utc": "2026-10-31T15:50:00.453767+00:00",
+        "max_age_hours": 2,
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Local Python 3.11, Git 2.39.5 and pytest 9.2.0; existing hypothesis 6.170.14, z3-solver 5.3.3.0, tree-sitter 0.20.4/tree-sitter-languages 1.10.2 validation profile",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T15:50:00.453767+00:00",
+            "evidence": [
+              "Current local pytest runs complete; git --version and pip freeze inspected. No model runtime or new paid dependency."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Current Brain source, registries, guards and official model compiler/verifier",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T15:50:00.453767+00:00",
+            "evidence": [
+              "canonical/tests/test_swe_reuse_joint_contracts_v1.py",
+              "canonical/verification/SWE_REUSE_INTEGRATION_20261031.md"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Authenticated GitHub PR/push/check API",
+            "kind": "REMOTE_SERVICE",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "status": "READY",
+            "observed_at_utc": "2026-10-31T15:50:00.453767+00:00",
+            "evidence": [
+              "PR6463 created and signed referee succeeded on 0655faca. Current GitHub API calls and branch fetch succeed; future runner capacity is not guaranteed."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "NO_DISCHARGE_CLAIM__existing coding routes become reachable and evidence boundaries are narrowed; future target-specific qualification still required.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1",
+      "falsifier_id": "ZERO_NONSKIPPED_TESTS_OR_KNOWN_EXECUTION_WITH_MISSING_ROWS_MUST_NOT_CERTIFY_OR_RETRY",
+      "decisive_question": "Can the current typed door reuse existing SWE mechanisms without broadening scope, inventing inputs or accepting vacuous execution evidence?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
+          "git_blob_sha": "cc16fb560ca32883900fb39c295268f638a9b6b3"
+        },
+        {
+          "path": "canonical/runtime/live_brain_route_admission_v1.py",
+          "git_blob_sha": "139051a2b4d5482cf65c506229da9fd7db5ab2d3"
+        }
+      ]
+    }
+  }
+}

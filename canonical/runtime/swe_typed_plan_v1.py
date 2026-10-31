@@ -160,6 +160,11 @@ def _governing_clause(text: str) -> str:
     return parts[0] if parts else ""
 
 
+_ASKED_RE = re.compile(
+    r"\?|(?:^|[.;]\s*)(?:which|what|where|who|whom|whose|how|why|is|are|does|do)\b"
+    r"|\bwhether\b|\btell me\b|\bcheck (?:if|whether)\b", re.IGNORECASE)
+
+
 def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | None:
     """(the trigger phrases the sentence states, candidate terms, effect token)."""
     # Paths and quoted values are task data, not evidence of an effect family.
@@ -168,6 +173,9 @@ def _family_hits(goal: str) -> tuple[tuple[str, ...], tuple[str, ...], str] | No
     if any(word in head for word in _ANALYSIS_ONLY_TRIGGERS):
         return None
     for triggers, terms, token in _FAMILIES:
+        # Keep the current-main question/repair distinction under our apply name.
+        if token in {"repair", "apply"} and _ASKED_RE.search(prose):
+            continue
         # A guard that names "update every caller" and "rename " by hand is a
         # curated condition on the sentences this file must generalise over; the
         # governing clause decides it for every family and every sentence:
