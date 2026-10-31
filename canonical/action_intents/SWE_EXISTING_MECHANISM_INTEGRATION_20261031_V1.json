@@ -4,7 +4,7 @@
   "action_intent_id": "SWE_EXISTING_MECHANISM_INTEGRATION_20261031_V1",
   "date": "2026-10-31",
   "status": "LOCAL_INTEGRATION_CANDIDATE__ZERO_CREDIT",
-  "canonical_base_commit": "57edfa446c33c7b3908b00253e2ee4d056452caf",
+  "canonical_base_commit": "9f808230890332e75643b6bfafce3352749ed9ba",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -58,7 +58,7 @@
     "incremental_spend_usd": 0
   },
   "load_bearing_primary": {
-    "canonical_base_commit": "57edfa446c33c7b3908b00253e2ee4d056452caf",
+    "canonical_base_commit": "9f808230890332e75643b6bfafce3352749ed9ba",
     "open_obligation_ids": [],
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
@@ -77,7 +77,7 @@
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Existing taint/cost/index mechanisms and typed routes were disconnected or disagreed with exact-file scope, request roles and non-vacuous execution evidence.",
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "57edfa446c33c7b3908b00253e2ee4d056452caf",
+    "canonical_base_commit": "9f808230890332e75643b6bfafce3352749ed9ba",
     "real_outcome": "Restore live access to existing SWE mechanisms while retaining exact-file, staged, effect and execution-evidence boundaries. The original 166-case cohort improved from 65 failures to no failures; expanded residuals remain explicitly open. No benchmark, acceptance, family, ownership or terminal credit is requested.",
     "required_capability": "Current-tree static SWE analysis and truthful typed execution using existing mechanisms",
     "selected_surviving_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
@@ -170,7 +170,7 @@
     },
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-10-31T15:55:25.127428+00:00",
+      "checked_at_utc": "2026-10-31T15:58:54.599972+00:00",
       "max_age_hours": 24,
       "incumbent_route": "Current disconnected SWE route",
       "selected_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
@@ -209,7 +209,7 @@
         },
         {
           "intent": "RECENCY_OR_NEW_RELEASE",
-          "query": "git fetch origin main; inspect current-main request-role and inventory/probe changes through 57edfa44"
+          "query": "git fetch origin main; inspect current-main request-role and inventory/probe changes through 9f808230"
         }
       ],
       "comparison_dimensions": [
@@ -253,7 +253,7 @@
       ],
       "selected_route_preflight": {
         "selected_route": "INTEGRATE_EXISTING_BRAIN_SWE_MECHANISMS_WITH_CURRENT_SAFEGUARDS",
-        "checked_at_utc": "2026-10-31T15:55:25.127428+00:00",
+        "checked_at_utc": "2026-10-31T15:58:54.599972+00:00",
         "max_age_hours": 2,
         "status": "READY",
         "all_required_dependencies_ready": true,
@@ -268,7 +268,7 @@
             "scope": "LOCAL",
             "evidence_scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-10-31T15:55:25.127428+00:00",
+            "observed_at_utc": "2026-10-31T15:58:54.599972+00:00",
             "evidence": [
               "Current local pytest runs complete; git --version and pip freeze inspected. No model runtime or new paid dependency."
             ],
@@ -284,7 +284,7 @@
             "scope": "LOCAL",
             "evidence_scope": "LOCAL",
             "status": "READY",
-            "observed_at_utc": "2026-10-31T15:55:25.127428+00:00",
+            "observed_at_utc": "2026-10-31T15:58:54.599972+00:00",
             "evidence": [
               "canonical/tests/test_swe_reuse_joint_contracts_v1.py",
               "canonical/verification/SWE_REUSE_INTEGRATION_20261031.md"
@@ -301,7 +301,7 @@
             "scope": "ACCOUNT_SPECIFIC",
             "evidence_scope": "ACCOUNT_SPECIFIC",
             "status": "READY",
-            "observed_at_utc": "2026-10-31T15:55:25.127428+00:00",
+            "observed_at_utc": "2026-10-31T15:58:54.599972+00:00",
             "evidence": [
               "PR6463 created and signed referee succeeded on 0655faca. Current GitHub API calls and branch fetch succeed; future runner capacity is not guaranteed."
             ],
@@ -350,7 +350,7 @@
         },
         {
           "path": "canonical/runtime/live_brain_route_admission_v1.py",
-          "git_blob_sha": "139051a2b4d5482cf65c506229da9fd7db5ab2d3"
+          "git_blob_sha": "f7ffdc42168a8223f72dabec48581a4b05b45a5d"
         }
       ]
     }
