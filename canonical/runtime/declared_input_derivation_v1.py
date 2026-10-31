@@ -36,12 +36,19 @@ Zero model, zero network, zero spend.  It changes no registry row and no kernel.
 from __future__ import annotations
 
 import ast
+import os
 import pathlib
 import re
 import sys
 from typing import Any, Mapping
 
 SCHEMA = "PROJECT_BRAIN_DECLARED_INPUT_DERIVATION_V1"
+# "from <A> to <B>" -- the two halves are bounded by another role word or the end
+# of the clause, so the pair is read off the sentence, never assembled.
+_FROM_TO = re.compile(r"\bfrom\s+([^\s,;]+?)\s+(?:in)?to\s+([^\s,;]+)", re.I)
+# "<noun> <name>" -- "the function line_total", "the class Cart".  The name is
+# read off the sentence and then PROVED against the file's own AST.
+_NAMED_AFTER_NOUN = re.compile(r"\b(?:function|method|class)\s+([A-Za-z_][A-Za-z0-9_]*)", re.I)
 
 # ONLY configuration knobs may be defaulted away.  A path/root/argv/dir/file
 # slot is SEMANTIC: even when the adapter has a fallback, dropping it let the
@@ -53,6 +60,7 @@ _CONFIGURATION_SLOTS = frozenset({
     "max_candidates", "max_total_candidates", "max_candidates_per_file",
     "max_edits", "max_pair_candidates", "max_symbols_per_file",
     "mutations_per_file", "pattern", "budget", "top_k", "seed", "verbose", "strict",
+    "limit",
 })
 
 # Scope, measured not assumed: typed-admission pins for receipt-projected
@@ -78,9 +86,21 @@ _SWE_VERBS = (
 
 
 def is_swe_request(goal: str) -> bool:
-    """An explicit software-engineering request, not a generic module call."""
+    """An explicit software-engineering request, not a generic module call.
+
+    A stated git OPERATION counts on its own.  "Show the last three git commits"
+    contains none of the repair verbs, so derivation was skipped and the one slot
+    that has to come from the sentence (`op`) was never derived -- the capability
+    was enumerated, admitted as a candidate, and then refused on
+    ``BINDING_REFUSED:op:not_stated``.  The test is the grammar itself, not a
+    second word list, and it is exact: zero or two stated operations is not a
+    request for one operation, so neither derives anything.
+    """
     text = str(goal or "").lower()
-    return any(verb in text for verb in _SWE_VERBS)
+    if any(verb in text for verb in _SWE_VERBS):
+        return True
+    return len([name for name, pattern in _GIT_OPERATION_GRAMMAR
+                if pattern.search(text)]) == 1
 
 _PATH_RE = re.compile(r"[A-Za-z0-9_./-]+/[A-Za-z0-9_.-]+")
 _TEST_NAME_RE = re.compile(r"(^|/)(test_[^/]*|[^/]*_test)\.(py|js|ts|go|rs)$")
@@ -171,6 +191,66 @@ def adapter_defaulted_keys(entry: Mapping[str, Any], root: pathlib.Path) -> dict
     return found
 
 
+def _tree_of(root: pathlib.Path, rel: str):
+    """The parsed module, or an empty module when it cannot be read.
+
+    An unreadable stated file proves nothing, so the proof above simply yields no
+    candidate -- the same fail-closed reading the qualname rule uses.
+    """
+    try:
+        return ast.parse((pathlib.Path(root) / rel).read_text(encoding="utf-8"))
+    except (OSError, SyntaxError, ValueError):
+        return ast.Module(body=[], type_ignores=[])
+# Ordered: the first rule whose pattern matches decides, and the caller still
+# refuses when two DIFFERENT operations match, so order only resolves the cases
+# where one verb is a strict refinement of another.
+# Words that make a commit sentence about a REPOSITORY rather than about a
+# database transaction, a purchase or a promise.
+# ("commit" itself is deliberately absent: it would make the test always true.)
+_REPOSITORY_CONTEXT = re.compile(
+    r"\bgit\b|\bstaged\b|\bchanges?\b|\bworking\s+tree\b|\bbranch(?:es)?\b"
+    r"|\brepo(?:sitory)?\b|\buncommitted\b|\bhistory\b", re.I)
+
+
+_COUNT_WORDS = {w: i for i, w in enumerate(
+    ("zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+     "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+     "sixteen", "seventeen", "eighteen", "nineteen", "twenty"), start=0)}
+
+_STATED_COUNT = re.compile(
+    r"\b(\d{1,3}|" + "|".join(sorted(_COUNT_WORDS, key=len, reverse=True)) + r")\s+"
+    # up to three words may sit between the count and what it counts: "the last
+    # three GIT commits" says three, not twenty.
+    r"(?:[\w-]+\s+){0,3}(?:commits?|entries|rows|lines?|branches?)\b", re.IGNORECASE)
+
+
+_GIT_OPERATION_GRAMMAR: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
+    (name, re.compile(pattern, re.I)) for name, pattern in (
+        # history: an explicit git log, the word history, or "the last N commits"
+        ("log", r"\bgit\s+log\b|\bhistory\b|\b(?:last|recent|latest|first)"
+                r"(?:\s+\w+){0,3}\s+commits?\b"),
+        # a status question about the working tree
+        ("status", r"\bgit\s+status\b|\bworking\s+tree\b|\buncommitted\b|\bstatus\b"),
+        ("diff", r"\bgit\s+diff\b|\bdiff\b"),
+        ("blame", r"\bblame\b|\bwho\s+wrote\b|\bwho\s+touched\b"),
+        # An imperative or a question about branches -- never the bare noun.
+        # Measured 2026-10-29: with `\bbranch(?:es)?\b`, "Branch out the new feature
+        # into three modules" bound op=branch and returned PASS for a `git branch`
+        # listing.  A metaphor is not a repository operation, and an enumerated
+        # operation set is only as good as the grammar that admits to it.
+        ("branch", r"\b(?:list|show|print|git)\s+(?:me\s+)?(?:the\s+|all\s+)?branches?\b"
+                   r"|\bbranches\b|\bcurrent\s+branch\b|\bwhich\s+branch\b"),
+        # one commit's contents: "show the commit", "git show"
+        ("show", r"\bshow\s+(?:the\s+|a\s+|that\s+)?commit\b|\bgit\s+show\b"),
+        # an imperative to record a change.  Anchored or object-bearing ON PURPOSE:
+        # a bare \bcommit\b also matches "show the commit", which would turn one
+        # unambiguous sentence into an ambiguous two-operation match.
+        ("commit", r"^\s*(?:\w+\s+)?commit\b|\bgit\s+commit\b"
+                   r"|\bcommit\s+(?:the|all|these|this|that|staged|everything|it)\b"),
+    )
+)
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -220,6 +300,24 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         if parent and (pathlib.Path(root) / parent).is_dir():
             out["source_root"] = {"value": parent, "rule": "PATH_DIR_FROM_STATED_FILE_PARENT",
                                   "evidence": sources[0]}
+    # The same rule for SEVERAL stated files, but ONLY when the sentence already
+    # gave them ROLES ("from A to B"): the directory that holds both ends of a
+    # stated move is determined, and it is the only directory that is.  Without
+    # this the sibling move row refused with
+    # source_root:0_existing_directories_named.  A sentence that merely lists two
+    # files derives nothing -- that is a pinned law
+    # (test_two_source_files_are_ambiguous_and_derive_nothing), and it stays.
+    elif "source_root" in keys and len(sources) > 1 and _FROM_TO.search(str(goal or "")):
+        parents = [str(pathlib.PurePosixPath(f).parent) for f in sources]
+        common = parents[0] if len(set(parents)) == 1 else None
+        if common is None:
+            try:
+                common = str(pathlib.PurePosixPath(os.path.commonpath(parents)))
+            except ValueError:
+                common = None
+        if common and (pathlib.Path(root) / common).is_dir():
+            out["source_root"] = {"value": common, "rule": "PATH_DIR_COMMON_TO_STATED_FILES",
+                                  "evidence": ",".join(sources)}
     # A test command slot is satisfied by running the ONE stated test file.
     if "test_argv" in keys and len(tests) == 1:
         t_abs = (pathlib.Path(root) / tests[0]).resolve()
@@ -251,6 +349,30 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 mod_val = mod_val[len(sr_val) + 1:]
         out["module"] = {"value": mod_val, "rule": "MODULE_FROM_STATED_SOURCE_FILE",
                          "evidence": sources[0]}
+    # MOVE GRAMMAR: two stated source files with the roles "from A to B" name a
+    # SENDER and a RECEIVER, and the sentence says which is which.  Measured:
+    # "Move the function line_total from <b>/app/models.py to <b>/app/service.py"
+    # shortlisted python.refactor.move_function.v1 and then refused it with
+    # BINDING_REFUSED:module:not_stated, because the one-file rule above only
+    # fires when exactly ONE source file is stated -- so the capability that
+    # exists for this sentence could never be reached by it.  The roles are read
+    # from the sentence's own "from ... to ..." pair, matched against the paths
+    # it actually states; anything else (no pair, no path, both orders) yields no
+    # value and the binder still fails closed.
+    py_sources = [f for f in sources if f.endswith(".py")]
+    if len(py_sources) == 2 and ("module" in keys) and ({"to_module", "target_module"} & keys):
+        pair = _FROM_TO.search(str(goal or ""))
+        if pair is not None:
+            def _stated(near: str) -> str | None:
+                hits = [f for f in py_sources if f in near or f.split("/")[-1] in near]
+                return hits[0] if len(hits) == 1 else None
+            src_hit, dst_hit = _stated(pair.group(1)), _stated(pair.group(2))
+            if src_hit and dst_hit and src_hit != dst_hit:
+                out["module"] = {"value": src_hit, "rule": "MODULE_FROM_STATED_FROM_PATH",
+                                 "evidence": src_hit}
+                for key in ({"to_module", "target_module"} & keys):
+                    out[key] = {"value": dst_hit, "rule": "TARGET_MODULE_FROM_STATED_TO_PATH",
+                                "evidence": dst_hit}
 
     goal_str = str(goal or "")
     goal_low = goal_str.lower()
@@ -258,19 +380,18 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
     if "goal" in keys:
         out["goal"] = {"value": goal_str, "rule": "GOAL_TEXT_FORWARDED", "evidence": "goal"}
 
-    # Cross-file move_symbol grammar: "move [the] [function|helper|class|symbol] SYM from A.py to B.py"
+    # Cross-file move_symbol grammar on extract_function.v1 (`qualname` in keys)
     move_m = re.search(
         r"\bmove\b[^.?!]*?\bfrom\s+([A-Za-z0-9_./-]+\.py)\s+(?:to|into)\s+([A-Za-z0-9_./-]+\.py)",
         goal_str, re.IGNORECASE,
     )
-    if move_m and "to_module" in keys:
+    if move_m and "to_module" in keys and "qualname" in keys:
         orig_raw, dest_raw = move_m.group(1), move_m.group(2)
         orig_abs = (pathlib.Path(root) / orig_raw).resolve()
         dest_abs = (pathlib.Path(root) / dest_raw).resolve()
         repo_abs = pathlib.Path(root).resolve()
         if orig_abs.is_file() and repo_abs in orig_abs.parents and repo_abs in dest_abs.parents:
-            import os as _os
-            common_abs = pathlib.Path(_os.path.commonpath([str(orig_abs.parent), str(dest_abs.parent)]))
+            common_abs = pathlib.Path(os.path.commonpath([str(orig_abs.parent), str(dest_abs.parent)]))
             while (common_abs / "__init__.py").is_file() and common_abs != repo_abs and (common_abs.parent == repo_abs or repo_abs in common_abs.parent.parents):
                 common_abs = common_abs.parent
             if common_abs == repo_abs or repo_abs in common_abs.parents:
@@ -295,7 +416,7 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                         out["qualname"] = {"value": sym, "rule": "MOVE_SYMBOL_PROVED_IN_ORIGIN", "evidence": sym}
                     if "new_name" in keys:
                         out["new_name"] = {"value": sym, "rule": "MOVE_PRESERVES_SYMBOL_NAME", "evidence": sym}
-    elif "to_module" in keys:
+    elif "to_module" in keys and "to_module" not in out:
         out["to_module"] = {"value": "", "rule": "EXTRACT_IN_MODULE_DEFAULT", "evidence": "no_move"}
         span_m = re.search(r"\blines?\s+(\d+)\s*(?:to|through|-|\.\.)\s*(\d+)\b", goal_str, re.IGNORECASE)
         if span_m:
@@ -451,7 +572,6 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             out["function_name"] = {"value": fn_s.group(1), "rule": "SYNTH_FUNCTION_NAME_STATED", "evidence": fn_s.group(1)}
         elif tests:
             out["function_name"] = {"value": "", "rule": "SYNTH_FUNCTION_FROM_TEST_IMPORTS", "evidence": "auto_from_tests"}
-
     # Rename grammar: BOTH names must be stated, and exactly one pair may match.
     pairs = ([] if add_p_m else _RENAME_OLD_NEW.findall(str(goal or "")))
     if len(pairs) == 1:
@@ -526,6 +646,43 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                         "rule": "QUALNAME_PROVED_UNIQUE_SYMBOL_IN_STATED_DIR",
                         "evidence": f"{def_files[0].relative_to(repo_r).as_posix()}:{old_sym}",
                     }
+
+    # A symbol slot is PROVED the same way a qualname is, and for the same reason:
+    # "Move the function line_total ..." states the name AFTER the noun, so the
+    # qualname grammar above ("the <name> function") reads nothing and the move
+    # row refused with BINDING_REFUSED:symbol:not_stated.  Exactly one identifier
+    # must follow the noun AND be defined at module scope in the stated file.
+    py_named = [f for f in sources if f.endswith(".py")]
+    if ({"symbol", "name"} & keys) and py_named:
+        nouns = _NAMED_AFTER_NOUN.findall(str(goal or ""))
+        candidates = [n for n in dict.fromkeys(nouns) if _NAME_RE.match(n)]
+        proved = [(f, _node.name) for f in py_named
+                  for _node in (getattr(_tree_of(root, f), "body", []) or [])
+                  if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                  and _node.name in candidates]
+        if len(proved) == 1:
+            for key in ({"symbol", "name"} & keys):
+                out[key] = {"value": proved[0][1], "rule": "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+                            "evidence": f"{proved[0][0]}:{proved[0][1]}"}
+    if "op" in keys:
+        stated = [name for name, pattern in _GIT_OPERATION_GRAMMAR
+                  if pattern.search(str(goal or ""))]
+        if stated == ["commit"] and not _REPOSITORY_CONTEXT.search(str(goal or "")):
+            stated = []
+        if len(stated) == 1:
+            out["op"] = {"value": stated[0], "rule": "GIT_OPERATION_FROM_STATED_VERB",
+                         "evidence": stated[0]}
+
+    if "limit" in keys:
+        m = _STATED_COUNT.search(str(goal or ""))
+        if m:
+            token = m.group(1).lower()
+            value = _COUNT_WORDS.get(token)
+            if value is None and token.isdigit():
+                value = int(token)
+            if value is not None:
+                out["limit"] = {"value": value, "rule": "LIMIT_FROM_STATED_COUNT",
+                                "evidence": token}
 
     # A qualname is not guessed: it is PROVED by parsing the stated source file.
     # If the request names a parameter/symbol, exactly one function in that file

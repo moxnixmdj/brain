@@ -27,7 +27,7 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
    "canonical/runtime/bound_capabilities/python_program_synthesizer_v1.py",
    "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
    "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
@@ -49,7 +49,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::On d88ef946b6, advanced SWE tier TF_FEATURE (add_total_function with module export + unit test) and surface SWE edit workflows (directory-scoped rename_symbol, cross-file move_function into existing caller module, add_parameter with default attribute override, and fix_then_regression_test) lacked a bound deterministic program synthesizer + cross-file move/signature adapters, while python_source_symbol_index spent 29.7 s in ast.NodeVisitor.generic_visit and python_test_guided_patch_search_v1 spawned one subprocess per AST patch candidate.",
- "canonical_base_commit": "d88ef946b63b7118c3525882bfd61e04979a7072",
+ "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -81,7 +81,7 @@
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "prior_work_reused": "The rows' own `provides` tokens as the vocabulary; _close_observations, the existing 'called at every exit' choke point; _fail; the bound registry already loaded by the door; composer_route.route's chain.",
  "progress_evidence_paths": [
-  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json",
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
   "canonical/runtime/bound_capabilities/python_program_synthesizer_v1.py",
   "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
   "canonical/runtime/bound_capabilities/python_dynamic_fault_localizer_v1.py",
@@ -100,7 +100,7 @@
   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "d88ef946b63b7118c3525882bfd61e04979a7072",
+  "canonical_base_commit": "34a21bc5f1988e76e9d26544d4f6d1114216aea1",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
@@ -233,7 +233,7 @@
      "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
     }
    ],
-   "checked_at_utc": "2026-10-31T13:25:33Z",
+   "checked_at_utc": "2026-10-31T13:32:03Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -277,10 +277,10 @@
     "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
    ],
    "selected_route": "REUSE_THE_SYMBOL_INDEX_AND_THE_ISSUER_PUBLISHED_CREDENTIAL_SHAPES",
-   "selected_route_checked_at_utc": "2026-10-31T13:25:33Z",
+   "selected_route_checked_at_utc": "2026-10-31T13:32:03Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T13:25:33Z",
+    "checked_at_utc": "2026-10-31T13:32:03Z",
     "execution_dependencies": [
      {
       "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",

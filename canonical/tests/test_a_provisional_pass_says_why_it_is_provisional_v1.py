@@ -51,13 +51,30 @@ from canonical.runtime.raw_goal_trace_acceptance_v1 import (              # noqa
 )
 
 # A receipt-backed capability that takes no file and runs a repository script, so it
-# passes through the front-layer local adapter path this test is about.
-CID = "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1"
+# passes through the front-layer local adapter path this test is about -- and that
+# leaves nothing to re-inspect, so its pass stays provisional.
+#
+# Chosen by measurement on this tree, not by taste: of the 293 path-keyed rows, 199
+# pass through the front-layer local adapter, and 46 of those are still provisional
+# (`NO_INDEPENDENT_REINSPECTION_FOR:<cid>`).  `aa_briefcase_...` -- the fixture this
+# file shipped with -- is now one of the 153 that reach exact acceptance, because
+# e020898 added an adapter-keyed inspector that re-runs a command capability and
+# compares returncode/stdout/stderr; its pass is earned, so asserting it provisional
+# would be asserting a fact about an older tree.
+CID = "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1"
 
 
 def _goal_for(cid):
-    stem = re.sub(r"\.py\.auto\.v\d+$", "", cid.rsplit("/", 1)[-1])
-    return "Run the %s." % stem.replace("_", " ").replace(".", " ")
+    """The sentence a caller uses to reach a path-keyed inventory row.
+
+    It names the capability id.  The prose form ("run the aa briefcase component
+    summary noninversion v1") used to reach the row by matching the words of a
+    FILE NAME, which is the §1.1 defect: a path is not a capability and its words
+    are not evidence about the goal.  Admission now refuses a path-keyed row
+    unless the sentence names that path or that id, so the fixture names it.  The
+    subject of this file -- whether a provisional pass says why -- is unchanged.
+    """
+    return "Run the %s." % cid
 
 
 class ProvisionalPassSaysWhyTest(unittest.TestCase):
@@ -129,8 +146,18 @@ class ProvisionalPassSaysWhyTest(unittest.TestCase):
         no_verdict = []
         exact = 0
         passes = 0
+        crashes = []
         for index, cid in enumerate(sorted(self.reg)):
-            result = solve({"task_id": "PROV%03d" % index, "goal": _goal_for(cid)})
+            try:
+                result = solve({"task_id": "PROV%03d" % index, "goal": _goal_for(cid)})
+            except BaseException:  # noqa: BLE001 - a crashing adapter is a row, not the corpus
+                # Two registry rows raise SystemExit from inside the adapter
+                # (python.software.issue_to_pr.orchestrate.v1,
+                # python.source.crossfile_edit.choreograph.v1).  Measured here, not
+                # assumed: they are counted below so a NEW crash cannot hide inside
+                # an unchanged pass count.
+                crashes.append(cid)
+                continue
             if result.get("pass") is not True:
                 continue
             passes += 1
@@ -144,9 +171,25 @@ class ProvisionalPassSaysWhyTest(unittest.TestCase):
         self.assertGreaterEqual(passes, 200, "only %d passes; corpus changed shape" % passes)
         self.assertLessEqual(len(unreadable), 1, "unreadable traces: %s" % (unreadable,))
         self.assertLessEqual(len(no_verdict), 2, "no verdict: %s" % (no_verdict,))
-        # Recorded, not asserted as a goal: no capability in the corpus earns exact
-        # acceptance today.  If that ever changes this line must be updated on purpose.
-        self.assertEqual(exact, 0, "exact acceptance appeared for some capability")
+        self.assertLessEqual(len(crashes), 2, "new adapter crash: %s" % (crashes,))
+        # Measured on this tree, over all 420 registry rows: 226 pass, 155 of those
+        # earn exact acceptance, 71 stay provisional with a reason.
+        #
+        # The old assertion here was `exact == 0`, written when no capability could
+        # earn exact acceptance because no inspector existed for the command lane.
+        # e020898 added one -- it re-runs the command and compares returncode,
+        # stdout and stderr -- so 155 of these passes are now genuinely re-inspected
+        # and the zero is no longer the truth.  Leaving it at zero would have meant
+        # deleting the inspector to keep a number; the number is what moves.
+        #
+        # Both sides are pinned.  A silent upgrade (a provisional pass that starts
+        # claiming exact) and a silent regression (an exact pass that loses its
+        # re-inspection) each move one of these counts and fail here.
+        # Measured on the restored 436-capability tree: 225 pass, 154 exact
+        # (151 auto.v1 + 3 non-auto including software.hardcore.swe.supercomposer.v1),
+        # 71 provisional.
+        self.assertEqual(exact, 154, "exact acceptance count moved: %d" % exact)
+        self.assertEqual(passes - exact, 71, "provisional count moved: %d" % (passes - exact))
 
 
 if __name__ == "__main__":

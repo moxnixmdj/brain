@@ -974,6 +974,22 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
                 inputs[key] = module
                 continue
         remaining.append((key, exc))
+    if remaining:
+        try:
+            from canonical.runtime import declared_input_derivation_v1 as _derivation
+            _evidence = (_derivation.derive(goal, entry or {}, root)
+                         if _derivation.is_swe_request(goal) else {})
+        except Exception:  # noqa: BLE001 - derivation is advisory; a fault keeps the refusal
+            _evidence = {}
+        settled: list[tuple[str, BaseException]] = []
+        for key, exc in remaining:
+            row = _evidence.get(key) or {}
+            value = row.get("value")
+            if value is None or str(row.get("rule") or "") not in _PROVED_BY_THE_TREE:
+                settled.append((key, exc))
+                continue
+            inputs[key] = value
+        remaining = settled
     if isinstance(entry, Mapping):
         cid = str(((entry.get("action_template") or {}).get("args") or {}).get("capability_id") or "")
         if cid in (
@@ -982,6 +998,11 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
             "python.refactor.rename_parameter.v1",
             "python.refactor.rename_symbol.v1",
         ) and (remaining or cid in ("python.refactor.extract_function.v1", "python.refactor.rename_symbol.v1", "python.refactor.rename_parameter.v1")):
+            if cid == "python.refactor.rename_parameter.v1" and not re.search(
+                r"\b(?:parameter|parameters|argument|arguments|param|params|arg|args|kwarg|kwargs|signature)\b",
+                prose_only(goal).lower(),
+            ):
+                return remaining
             from canonical.runtime import declared_input_derivation_v1 as _swed
             if _swed.is_swe_request(goal):
                 swe_derived = _swed.derive(goal, entry, pathlib.Path(root))
@@ -1015,6 +1036,20 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
                         inputs["qualname"] = swe_derived["qualname"]["value"]
                 remaining = final_rem
     return remaining
+
+
+# Derivations whose value is CHECKED against a stated file (its AST, or the path
+# itself) rather than parsed out of the sentence.  A front-door binding may only
+# rest on one of these.
+_PROVED_BY_THE_TREE = frozenset({
+    "MODULE_FROM_STATED_SOURCE_FILE",
+    "MODULE_FROM_STATED_FROM_PATH",
+    "TARGET_MODULE_FROM_STATED_TO_PATH",
+    "SYMBOL_PROVED_FROM_STATED_SOURCE_AST",
+    "QUALNAME_PROVED_FROM_STATED_SOURCE_AST",
+    "PATH_DIR_FROM_STATED_FILE_PARENT",
+    "PATH_DIR_COMMON_TO_STATED_FILES",
+})
 
 
 def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, Any] | None = None):

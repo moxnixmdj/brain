@@ -5407,8 +5407,7 @@
           "run_tests": [],
           "source_root": "${input.source_root}",
           "start_line": "${input.start_line}",
-          "timeout_s": 300,
-          "to_module": "${input.to_module}"
+          "timeout_s": 300
         },
         "expect": {
           "field": "gate",
@@ -5433,18 +5432,7 @@
         "dedent",
         "inputs outputs inference",
         "semantic edit",
-        "codemod",
-        "move function",
-        "move the function",
-        "move symbol",
-        "move helper",
-        "move class",
-        "move",
-        "module",
-        "helper",
-        "lines",
-        "extract",
-        "into"
+        "codemod"
       ],
       "limitations": [
         "region bytes move verbatim and dedent exactly 4: comments and formatting inside the region are byte-carried, never reprinted; the extracted def parse-checks BEFORE the file is touched and the rebuilt module parse-checks before it is written.",
@@ -5561,15 +5549,81 @@
       },
       "status": "VERIFIED_BOUND_CAPABILITY"
     },
+    "python.refactor.move_function.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.refactor.move_function.v1",
+          "module": "${input.module}",
+          "output_path": "${input.output_path}",
+          "source_root": "${input.source_root}",
+          "symbol": "${input.symbol}",
+          "timeout_s": 60,
+          "to_module": "${input.to_module}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_source_move_function",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "move a function",
+        "move the function",
+        "move function",
+        "relocate the function",
+        "relocate function",
+        "move symbol",
+        "cross-file relocation",
+        "relocation of a definition"
+      ],
+      "limitations": [
+        "Cuts the definition's own ast span and appends it to the target module; every `from <old> import <name>` is rewritten, and the old and new modules drop it.",
+        "Refuses a target that already defines the name, a same-module move, and any import statement it cannot find verbatim.",
+        "Kept only if the old module no longer defines it, no stale import survives anywhere, and the suite is green; otherwise every original byte is restored."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.refactor.move_function",
+        "python.refactor.symbol.relocated"
+      ],
+      "requires": [
+        "python.source.symbols.index.ast"
+      ],
+      "result_fields": [
+        "adapter",
+        "answer",
+        "symbol",
+        "from_module",
+        "to_module",
+        "caller_rewrites",
+        "files_edited",
+        "suite_passed",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_source_move_function.py",
+        "type": "brain_native_deterministic_composition"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY"
+    },
     "python.refactor.rename_parameter.v1": {
       "action_template": {
         "args": {
           "capability_id": "python.refactor.rename_parameter.v1",
-          "default_expr": "${input.default_expr}",
           "module": "${input.module}",
           "new_param": "${input.new_param}",
           "old_param": "${input.old_param}",
-          "operation": "${input.operation}",
           "output_path": "${input.output_path}",
           "python_executable": "${input.python_executable}",
           "qualname": "${input.qualname}",
@@ -5600,16 +5654,7 @@
         "kwargs",
         "signature",
         "semantic edit",
-        "codemod",
-        "add parameter",
-        "add a parameter",
-        "add argument",
-        "optional parameter",
-        "default parameter",
-        "add",
-        "optional",
-        "default",
-        "argument"
+        "codemod"
       ],
       "limitations": [
         "edits identifiers, never strings or formatting: comment/docstring words byte-preserved; all splices are byte-integrity-checked at exact identifier spans (SPAN_INTEGRITY refusal).",
@@ -7679,106 +7724,6 @@
         "runtime_git_blob_sha": "3f4e23ab91e4b79c1e12ce8e1e3f0c985336ef31",
         "status": "INDEPENDENT_TWO_SPRITE_FOCUSED_FALSIFICATION_PASS",
         "test_git_blob_sha": "4f268918039e2b6e13ee73133dad46c4b3cc1165"
-      }
-    },
-    "python.software.synthesize_function.v1": {
-      "action_template": {
-        "args": {
-          "capability_id": "python.software.synthesize_function.v1",
-          "function_name": "${input.function_name}",
-          "goal": "${input.goal}",
-          "operation": "${input.operation}",
-          "output_path": "${input.output_path}",
-          "regression_test_file": "${input.regression_test_file}",
-          "source_root": "${input.source_root}",
-          "target_file": "${input.target_file}",
-          "test_paths": "${input.test_paths}"
-        },
-        "expect": {
-          "field": "verified",
-          "type": "field_equals",
-          "value": true
-        },
-        "type": "invoke_capability"
-      },
-      "adapter_module": "python_program_synthesizer_v1",
-      "cost": 1,
-      "entrypoint": "run",
-      "incremental_spend_usd": 0,
-      "keywords": [
-        "python",
-        "synthesize",
-        "implement",
-        "write function",
-        "add function",
-        "add a function",
-        "total function",
-        "feature",
-        "program synthesis",
-        "stun",
-        "bottom-up",
-        "specification",
-        "regression test",
-        "add a regression test",
-        "fix and add test",
-        "function",
-        "regression",
-        "test",
-        "fix",
-        "bug",
-        "total",
-        "export",
-        "returns",
-        "add",
-        "models"
-      ],
-      "limitations": [
-        "Synthesizes total Python functions from test-suite I/O + exception contracts and explicit domain guards using bottom-up observational-equivalence enumeration, exact affine/multivariate Gaussian elimination, and STUN conditional branch unification.",
-        "Fails closed and restores target module bytes on any failing test or unsatisfiable contract."
-      ],
-      "platforms": [
-        "linux",
-        "windows",
-        "darwin"
-      ],
-      "provides": [
-        "python.software.function.synthesized",
-        "python.source.feature.synthesized",
-        "python.source.write.synthesized_function"
-      ],
-      "requires": [],
-      "result_fields": [
-        "adapter",
-        "capability_id",
-        "exception_contract_count",
-        "files_edited",
-        "function_name",
-        "incremental_spend_usd",
-        "model_dependency_count",
-        "output_path",
-        "output_sha256",
-        "output_verified",
-        "parameters",
-        "positive_example_count",
-        "target_file",
-        "verified"
-      ],
-      "source": {
-        "adapter_path": "canonical/runtime/bound_capabilities/python_program_synthesizer_v1.py",
-        "module": "ast",
-        "type": "python_stdlib",
-        "version_family": "3.x"
-      },
-      "status": "VERIFIED_BOUND_CAPABILITY",
-      "verification": {
-        "independently_verified": true,
-        "mission_id": "HARDCORE-SWE-SYNTH-001",
-        "observed_effect": {
-          "total_function_synthesis": true,
-          "verified": true
-        },
-        "receipt_path": "canonical/action_intents/HARDCORE_SWE_SYNTHESIS_ZYGOTE_AND_COMPOSITION_V1_20261031_V1.json",
-        "state_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
       }
     },
     "python.source.audit.ast": {
