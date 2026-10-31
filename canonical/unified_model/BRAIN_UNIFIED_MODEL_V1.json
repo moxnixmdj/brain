@@ -29904,7 +29904,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "09a7db8866d094e60373fd46ffbfc7dd64b5e1415ebac22d38bf861d2a89d0df"
+  "value": "f5b1cc562994ca62a4874a1a654af48c57b70b8a7b04076abee41aa9aaf9cc68"
  },
  "engines": [
   {
@@ -167093,7 +167093,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "066b22c9daad1c69b09bad85045453af046ab6f25aed1bd53d4a4c7c7407896f",
+   "sha256": "2be225df9be876359666c2cddeab5b0508ac61801482d0579ebbeafeceacb319",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
@@ -201566,7 +201566,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/HARDCORE_SWE_ENGINE_AND_LATENCY_CLOSURE_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "e4bac917d938cb06d9ab882b32c875516c1503120a84f6ed91e4283a52b7e87f",
+   "sha256": "b323bc196b9fae0ba8d430d7b6e9356e9bb300bb1a2cfb3d43389b4b0808589e",
    "status": "",
    "terms": {
     "1.6": 1,

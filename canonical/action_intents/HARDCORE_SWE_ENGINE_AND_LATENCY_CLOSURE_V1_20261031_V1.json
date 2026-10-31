@@ -41,7 +41,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Live SWE execution on ec2f9ec spent ~1.6 s per solve() rescanning unchanged world_probe/world_binding trees and ~250 ms counting unslotted workspace files, ran python_source_symbol_index sequentially in 19.7 s, left software_repair_crossfile_choreograph_v1 as a synthetic stub, and lacked bound capabilities + independent re-inspectors for git regression bisection/attribution, interprocedural Python taint reachability, and AST mutation/flakiness test adequacy (holding advanced SWE tiers at 2/10 and surface census at 5/28).",
- "canonical_base_commit": "efe64022b5b6d84b871a39b3004f8a3cb1cc7ec8",
+ "canonical_base_commit": "0d4007dbd88d37efb33d420af0acb924fd082b1c",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -84,7 +84,7 @@
   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "efe64022b5b6d84b871a39b3004f8a3cb1cc7ec8",
+  "canonical_base_commit": "0d4007dbd88d37efb33d420af0acb924fd082b1c",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
