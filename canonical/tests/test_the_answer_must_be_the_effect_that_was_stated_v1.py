@@ -19,6 +19,7 @@ the verdict the capability emitted), never the door's self-report:
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 import shutil
@@ -55,6 +56,18 @@ def _tree(case: str, *, tests: bool = True) -> pathlib.Path:
     return base
 
 
+def _test_selection_artifact(result):
+    # The request allocates its own report; spool_0 may belong to an older run.
+    rows = [r for r in result.get("execution", [])
+            if r.get("capability_id") == "python.source.change_impact.testselect.v1"]
+    assert len(rows) == 1, result.get("selected_plan")
+    produced = rows[0]["result"]
+    assert produced.get("output_verified") is True
+    raw = (ROOT / produced["output_path"]).read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == produced["output_sha256"]
+    return json.loads(raw)
+
+
 class TheAnswerIsTheEffectTests(unittest.TestCase):
     def test_a_change_impact_answer_selects_the_test_that_covers_the_change(self):
         """The impact row must NAME a test, not merely run to completion."""
@@ -62,9 +75,7 @@ class TheAnswerIsTheEffectTests(unittest.TestCase):
         goal = "Which tests do I need to run after changing %s?" % _rel(base / "pkg/calc.py")
         result = door.solve({"task_id": "IMPACT", "goal": goal})
         self.assertIs(result.get("pass"), True, (result.get("status"), result.get("reason")))
-        artifact_path = ROOT / "canonical/astra_runtime/tmp/spool_0_output.json"
-        self.assertTrue(artifact_path.is_file())
-        artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
+        artifact = _test_selection_artifact(result)
         self.assertTrue(artifact.get("selected_tests"), artifact.get("totals"))
         self.assertTrue(any("test_calc" in p for p in artifact["selected_tests"]),
                         artifact["selected_tests"])
@@ -76,8 +87,7 @@ class TheAnswerIsTheEffectTests(unittest.TestCase):
             "task_id": "BESIDE",
             "goal": "Which tests are affected if I change %s?" % _rel(base / "pkg/calc.py")})
         self.assertIs(result.get("pass"), True, result.get("status"))
-        artifact = json.loads(
-            (ROOT / "canonical/astra_runtime/tmp/spool_0_output.json").read_text(encoding="utf-8"))
+        artifact = _test_selection_artifact(result)
         self.assertTrue(artifact.get("candidate_tests") or artifact.get("selected_tests"),
                         artifact.get("totals"))
 

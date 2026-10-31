@@ -218,6 +218,7 @@ def _op_diff(cwd: pathlib.Path, args: Mapping[str, Any]) -> tuple[list, dict]:
     if missing:
         _fail("INDEPENDENT_CHECK_DISAGREES:diff:" + ",".join(missing[:3]))
     return rows, {"op": "diff", "target": target, "file_count": len(rows),
+                  "patch": patch_text,
                   "patch_sha256": _sha(patch_text.encode("utf-8")),
                   "patch_bytes": len(patch_text.encode("utf-8")),
                   "head_sha": _head(cwd)}
