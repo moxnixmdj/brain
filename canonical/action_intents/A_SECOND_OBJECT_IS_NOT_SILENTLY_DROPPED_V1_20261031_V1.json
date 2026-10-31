@@ -1,8 +1,8 @@
 {
- "action_id": "THE_LIVE_REGISTRY_IS_THE_CAPABILITY_SET_NOT_A_PROJECTION_V1_20261031_V1",
- "action_intent_id": "THE_LIVE_REGISTRY_IS_THE_CAPABILITY_SET_NOT_A_PROJECTION_V1_20261031_V1",
+ "action_id": "A_SECOND_OBJECT_IS_NOT_SILENTLY_DROPPED_V1_20261031_V1",
+ "action_intent_id": "A_SECOND_OBJECT_IS_NOT_SILENTLY_DROPPED_V1_20261031_V1",
  "action_kind": "FRESH_REUSE",
- "action_summary": "load_verified_registry now treats the snapshot as a FLOOR: a projection may add or redefine an entry, it may never remove one, and the snapshot's curated copy wins a collision. Pinned as a relation, never as a count.",
+ "action_summary": "_PROSE_COMMAND's arity rule bound the objects of a prose command but not the COUNT: a row with arity one took the first path and dropped a second object stated as a noun phrase. The arity rule's dual now refuses a sentence that names a conjunction-headed second directory, folder or tree object, so nothing is deleted unless every named object is served.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -27,30 +27,30 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
-   "canonical/runtime/live_integrated_brain_v1.py",
-   "canonical/tests/test_the_live_registry_is_not_a_truncation_v1.py"
+   "canonical/runtime/composer_route_v1.py",
+   "canonical/tests/test_a_second_object_is_not_silently_dropped_v1.py"
   ],
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A projection the loader reads first could DELETE 65 of the snapshot's 140 rows (and 359 of 434 reachable capabilities) without any guard noticing; the 28-task hardcore SWE census read 5/28 instead of 25/28.",
- "canonical_base_commit": "26f7cc8157c56655343bb416c2cafcc417e83e42",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A prose delete naming TWO objects was executed as a command over ONE of them: \"Delete <b>/prod.db and the app directory\" bound `rm -r <b>/prod.db`, destroyed the database, left the directory standing, and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. A command that serves half of a two-object sentence and certifies it as the whole request is the destructive form of an unobserved effect: the effect was observed, irreversible, and only half of what was asked.",
+ "canonical_base_commit": "4a936b1064d26490f23d1d94b88a91538d8c4379",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "causal_blocker": "A projection the loader reads first could DELETE 65 of the snapshot's 140 rows (and 359 of 434 reachable capabilities) without any guard noticing; the 28-task hardcore SWE census read 5/28 instead of 25/28.",
+ "causal_blocker": "A prose delete naming TWO objects was executed as a command over ONE of them: \"Delete <b>/prod.db and the app directory\" bound `rm -r <b>/prod.db`, destroyed the database, left the directory standing, and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. A command that serves half of a two-object sentence and certifies it as the whole request is the destructive form of an unobserved effect: the effect was observed, irreversible, and only half of what was asked.",
  "date": "2026-10-31",
- "expected_parent_change": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
- "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
+ "expected_parent_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+ "expected_parent_frontier_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
  "explicit_user_authorization": "Owner instruction this session, verbatim and repeated: all of the problems are already solved in the brain, so the fix wires what the repository already has -- the symbol index the adapter already builds, the overlap law the adapter already enforces, the unittest module _render_module already emits -- instead of inventing policy or adding a dependency. Owner instruction to focus on hardcore software engineering: this is the capability that writes tests. Owner instruction to do the optimal in the fastest way and only the right way. Owner instruction that all tests must be extremely hard and only truthful: five of the seven new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed.",
- "falsification_condition": "Re-run hardcore_swe_surface_probe_20261030.py on main and on this branch: if this branch is not strictly ahead on the 28 tasks, or if the new pin suite passes against the 33-row registry, this action is falsified.",
+ "falsification_condition": "Re-run the tag on main and on this branch. If the baseline does not destroy the fixture and report the pair as verified, or if this branch refuses the single-object forms 'Delete the directory D' and 'Delete the file X', the law is wrong.",
  "governance_change": true,
- "governance_change_summary": "canonical/runtime/live_integrated_brain_v1.py is the capability loader. What changed is which rows exist: a regenerated projection could silently delete capabilities its own snapshot defines. The loader now unions the snapshot as a floor (projection rows may add, never remove; the snapshot's curated copy wins a collision). No refusal is relaxed and no check is skipped -- the pin suite only refuses a registry that loses rows.",
+ "governance_change_summary": "canonical/runtime/composer_route_v1.py decides which prose sentence becomes a shell command. It now also refuses a delete whose second named object it cannot serve. No capability is granted anything new: the change only removes an execution path, and the two single-object forms are pinned as still binding.",
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
- "intent": "Advance hardcore deterministic SWE capability breadth and sub-second execution speed using pure Python stdlib AST, graph, and git primitives plus independent byte-level acceptance inspectors.",
+ "intent": "Stop an irreversible command that serves one of two named objects and certifies the pair: the arity rule must count objects as well as bind them.",
  "load_bearing_primary": {
-  "canonical_base_commit": "9179a6cd01b6d5c517cc3c64eb3fe906d4e4bab0",
+  "canonical_base_commit": "4a936b1064d26490f23d1d94b88a91538d8c4379",
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4",
    "CODING_FRONTIERCODE_GE_54_4",
@@ -59,29 +59,29 @@
   "expected_obligation_discharge_lcb": 0,
   "expected_obligation_unlock_lcb": "1/13",
   "highest_leverage_now": true,
-  "interpretation": "A refactor the machine could plan but not execute now executes and proves itself; it unlocks the coding obligations without discharging any of them alone.",
-  "measured_effect": "All ten measured sentences naming real absolute paths now route confidently; before, all ten were refused with GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED. Coverage on \"count the functions defined in the python file <abs path> and write the report to <abs path>\" went from 0.240 to 0.714 and is now identical to the same sentence with the paths deleted. Capabilities correctly reporting an unresolvable declared dependency went from 7 to 12 -- PIL x6, chromedriver, crosshair, pandoc, tesseract, pdftoppm, yq/yaml -- every one for a tool genuinely absent. The ranking is host-independent and pinned that way: with every declared dependency on the machine reported missing, 367 of 374 capabilities unrunnable, all four pinned known-goal routes are still confident and still land where the model says. solve() now names the missing dependency instead of spending the request and returning BOUND_PYPI_SOURCE_INCOMPLETE. 15 new tests, 12 of which fail on origin/main; the 3 that pass either way are the negative controls. Verifier 33/33, integrity guard 17/0, artifact byte-identical to a fresh recompile.",
+  "interpretation": "A capability that could delete now declines a sentence it cannot serve whole, and the refusal is measured by a filesystem oracle rather than by its own report.",
+  "measured_effect": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "stop_condition": "STOP when a sentence asking for a test scaffold runs the capability that writes tests and the generated file on disk is real and passing, when nothing is demanded from the sentence that the tree or the adapter already supplies, when an unannotated parameter is still refused rather than guessed, when the scaffolds never write into the tree they scaffold, when a question about one file is still answered by the census, and when the regression failure SET is no worse than the PR base.",
+  "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
   "success_probability_lcb": "1/2",
   "wall_clock_cost_ub": 1
  },
- "measured_effect": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
+ "measured_effect": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "prior_work_reused": "The pointer idiom already implemented by _active_registry_path and astra_runtime.py:660; the snapshot the loader resolves to; the surface probe's own oracle set as the measurement.",
+ "prior_work_reused": "The arity rule already in _PROSE_COMMAND, the _INSIDE_THE_FILE_NOUNS table that already keeps a delete off a part of a file, and the rm -r promotion comment that already recorded 'a set expansion turns one wrong deletion into a whole directory of them'.",
  "progress_evidence_paths": [
-  "canonical/runtime/live_integrated_brain_v1.py",
-  "canonical/tests/test_the_live_registry_is_not_a_truncation_v1.py"
+  "canonical/runtime/composer_route_v1.py",
+  "canonical/tests/test_a_second_object_is_not_silently_dropped_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "26f7cc8157c56655343bb416c2cafcc417e83e42",
+  "canonical_base_commit": "4a936b1064d26490f23d1d94b88a91538d8c4379",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ZERO_OWNERS_FOR_THREE_ANALYSIS_FAMILIES__answerable_from_an_artifact_already_built",
    "DELIVERY_TREATED_AS_A_SECOND_TASK__the_answer_clause_bound_to_an_unrelated_writer"
   ],
-  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
+  "expected_parent_level_state_change": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "STRING_MATCH__OR_ASSUME_SOURCE_ROOT_IS_THE_IMPORT_ROOT__OR_ASK_THE_CALLER_FOR_THE_MODULE_PATH",
@@ -92,7 +92,7 @@
    "capability_work_deleted": "the string comparison of module names and the assertion-style `complete` were deleted, not bypassed",
    "existing_inherited_routes_checked": "span splice + SPAN_INTEGRITY, from-import name-token rewrite, shadowed-scope keeps, _modname_of, the parsed-file set and the post-splice ast.parse were all reused unchanged",
    "external_existing_routes_checked": "rope and libcst rejected for byte-preservation and dependency cost; textual replace rejected for correctness",
-   "surviving_gap": "the remaining tiers (extract, fix_test, bisect, race, perf, mutation, taint, feature) still lack their own oracles and are untouched"
+   "surviving_gap": "The remaining creation-vs-mutation trio: add_parameter, add_total_function, fix_then_regression_test."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -100,7 +100,7 @@
     "TREATING_THE_TOP_RANKED_CAPABILITY_AS_THE_ONE_THAT_RAN",
     "TREATING_AN_EMPTY_unknown_sites_LIST_AS_PROOF_THE_TREE_IS_CLEAN"
    ],
-   "real_outcome": "`python.refactor.rename_symbol.v1` now runs from an ordinary sentence and its report is checkable: files_edited ['models.py','service.py'], edit_count 3, complete true, package imports, unittest suite green, 338 ms end to end; the tier probe moves 1/10 -> 2/10 with one FAIL->PASS and no new pass in a 15-sentence A/B on a pristine HEAD worktree.",
+   "real_outcome": "The two-object delete no longer binds a command at all; the probe's filesystem oracle sees prod.db survive, and the single-object forms still delete exactly what they name.",
    "surviving_necessity": "The tier oracle is independent of the adapter: it greps the whole tree for the old name, imports the package and runs the unittest suite, so a report that lies cannot pass it."
   },
   "obs_inherited_system": {
@@ -140,8 +140,8 @@
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "The fixture trees are tiny by construction, but the referee is real: a tree-wide grep for the old name, a real package import and a real unittest run, plus an A/B against a pristine HEAD worktree with the same fixtures"
   },
-  "real_outcome": "hardcore_swe_surface_probe_20261030.py: origin/main reads 5/28 with its 75-row projection; this branch reads 25/28 with the snapshot floor (rename_symbol PASS 153 ms, move_function PASS 133 ms, count_functions PASS 76 ms). Reachable capabilities 75 -> 434. The pin suite is 4/4 and fails against a projection that deletes a snapshot row.",
-  "required_capability": "REUSE_FILE_IDENTITY_FOR_CROSS_MODULE_EDITS_AND_READ_DECLARED_INPUTS_BEFORE_REFUSING",
+  "real_outcome": "hardcore_swe_surface_probe_20261030.py tag destructive_refusal: baseline FAIL with prod_db_survived=false and status PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED; this branch PASS with prod_db_survived=true and no command bound. Full census 24/28 -> 25/28 (12.6 s, 28 tasks); the three remaining failures are the creation-vs-mutation trio.",
+  "required_capability": "REUSE_THE_ARITY_RULE_AS_A_COUNT_OF_NAMED_OBJECTS",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -208,7 +208,7 @@
      "route": "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME"
     }
    ],
-   "checked_at_utc": "2026-10-31T08:57:03Z",
+   "checked_at_utc": "2026-10-31T13:26:42Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -251,11 +251,11 @@
     "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
     "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
    ],
-   "selected_route": "REUSE_THE_SYMBOL_INDEX_AND_THE_ISSUER_PUBLISHED_CREDENTIAL_SHAPES",
-   "selected_route_checked_at_utc": "2026-10-31T08:57:03Z",
+   "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+   "selected_route_checked_at_utc": "2026-10-31T13:26:42Z",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-10-31T11:42:09Z",
+    "checked_at_utc": "2026-10-31T13:26:42Z",
     "execution_dependencies": [
      {
       "dependency": "python3 stdlib (ast, json, pathlib, re, sys, subprocess)",
@@ -292,10 +292,10 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "REUSE_THE_SYMBOL_INDEX_AND_THE_ISSUER_PUBLISHED_CREDENTIAL_SHAPES",
+    "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
     "status": "READY"
    },
-   "selected_surviving_route": "REUSE_THE_SYMBOL_INDEX_AND_THE_ISSUER_PUBLISHED_CREDENTIAL_SHAPES",
+   "selected_surviving_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
@@ -317,9 +317,9 @@
      "docs.python.org/3.10/library/ast.html -- ast.parse + lineno/col_offset are the sanctioned mechanism for span-exact edits; no third-party parser is required"
     ]
    },
-   "stop_condition": "Ship only what is measured here: the three declarations, file identity, the residual law and the honest contract field. Do not add per-name lists, do not widen what may run (a referent is never defaulted), and do not touch the remaining tiers' capabilities until their own oracles are built.",
+   "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
    "unresolved_plausible_dominators": [],
-   "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
+   "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
   },
   "routes_considered": [
    "ROPE_EXTERNAL_REFACTOR_ENGINE",
@@ -327,16 +327,16 @@
    "STRING_MATCH_EVERY_OCCURRENCE_OF_THE_NAME",
    "FILE_IDENTITY_PLUS_DECLARED_DEFAULTS__SELECTED"
   ],
-  "selected_surviving_route": "REUSE_THE_SYMBOL_INDEX_AND_THE_ISSUER_PUBLISHED_CREDENTIAL_SHAPES",
-  "stop_condition": "The 28-task census is re-run on both trees and the pin suite is red on the truncated file.",
-  "why_selected_route_is_fastest_sufficient": "The three declarations are already in the repository and are read with one AST pass over the adapter, one regex over the sentence and one prefiltered tree scan that exits on the second defining file: no index build, no parse of files that cannot define the symbol, and no new dependency. The alternative (a symbol index for every compile) costs the measured 4232 ms whole-runtime parse against 4 ms of prefiltered scan."
+  "selected_surviving_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+  "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+  "why_selected_route_is_fastest_sufficient": "One compiled regex tested once per prose sentence, inside the table that already binds the objects; no tree read, no second pass, no new primitive."
  },
- "refusal_or_stop_condition": "The 28-task census is re-run on both trees and the pin suite is red on the truncated file.",
- "resolution": "One file restored to the pointer it is supposed to be, one pin suite that states the relation, no new capability and no new mechanism.",
- "route_id": "REUSE_THE_LIVE_REGISTRY_POINTER_AND_ITS_SNAPSHOT",
+ "refusal_or_stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
+ "resolution": "One shape added to composer_route_v1 (a conjunction followed by a noun phrase whose head is a directory/folder/tree), applied to the rm row before its -r promotion. Single-object deletes are untouched and pinned.",
+ "route_id": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "selected_route": "REUSE_THE_LIVE_REGISTRY_POINTER_AND_ITS_SNAPSHOT",
- "stop_condition": "The 28-task census is re-run on both trees and the pin suite is red on the truncated file.",
+ "selected_route": "REUSE_THE_ARITY_RULES_DUAL_INSIDE_THE_PROSE_COMMAND_TABLE",
+ "stop_condition": "Stop when the two-object sentence binds nothing, the two single-object forms still bind, and the 28-task census reads one higher than the baseline.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "user_authorized_governance_change": true,
