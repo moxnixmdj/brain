@@ -1,0 +1,468 @@
+{
+  "action_id": "A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1",
+  "action_intent_id": "A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "composer_route_v1.py: a sentence whose subject is the repository's history is no longer translated into a file command. The git reader refuses an unstatable repository, and a git question then goes to the row that verifies git (git.repository.operate.v1) instead of to `tail`. A count written as a word is read as the count the sentence stated, and git's log rule reads 'the last N commits'.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/swe_typed_plan_v1.py"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A git question was translated into a file command, and a stated count was overridden by a default",
+  "canonical_base_commit": "9f808230890332e75643b6bfafce3352749ed9ba",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Three readings were wrong at once, measured 2026-10-31 on 9f808230: 'Show the last three git commits in <other repo>.' bound `tail -n 2 <that directory>`; '... and save the list to X' bound `tail -n 2 X` -- the last two lines of the output file; and 'Show the last three lines of <file>.' bound `tail -n 2` because _COUNT_RE read digits only and _prose_count fell back to its default of 2 over a count the sentence had stated. Routing git through the generic shell row is unusable in principle: `git` is absent from raw_goal_trace_acceptance_v1._READ_ONLY_COMMANDS, so the adapter is never told to write stdout to the bound output (CLI_EXPECTED_OUTPUT_MISSING) and no git postcondition exists to judge the run.",
+  "date": "2026-10-31",
+  "expected_parent_change": "Census stays 22/28 with 0 false PASS and nothing lost; the 18 ordinary sentences go 2/18 -> 3/18 on both layouts because 'Show the last three git commits in this repository.' is answered by git.repository.operate.v1 again, and three measured misreads are gone: a git question can no longer become `tail -n 2 <directory>`, a count written as a word is read ('the last three lines' -> tail -n 3, not 2), and a git read the sentence states ('the last three git commits') is no longer refused.",
+  "expected_parent_frontier_change": "Census stays 22/28 with 0 false PASS and nothing lost; the 18 ordinary sentences go 2/18 -> 3/18 on both layouts because 'Show the last three git commits in this repository.' is answered by git.repository.operate.v1 again, and three measured misreads are gone: a git question can no longer become `tail -n 2 <directory>`, a count written as a word is read ('the last three lines' -> tail -n 3, not 2), and a git read the sentence states ('the last three git commits') is no longer refused.",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-21, verbatim: use all the capability in the Brain that you are supposed to use, plus all the data that you are supposed to use, plus thinking from the deepest layer from first principles, and the plan must make the goal real now, not fake, focus on hardcore software engineering. Owner instruction, real now not fake: the promise is claimed at the strength tee actually guarantees and not one step further, and the bytes are tied to the command by the producer's own digest rather than assumed. Owner standing instruction repeated six times: the perfect solution already exists in the brain, so _post_tee joins a table that already judged five commands by their effect and needs no new mechanism. Owner instruction that all tests must be extremely hard and only truthful: seven of the nine new tests fail on baseline and every accepting row is paired with the nearest world in which it must fail. No external model, zero spend, fail closed, no protected path touched.",
+  "falsification_condition": "If a git sentence reaches `tail`, or 'the last three lines' binds -n 2, or the 28-task census drops, or git_log stops passing in the 18-sentence set, this action was wrong.",
+  "governance_change": false,
+  "governance_change_summary": "No guard, law, gate or tolerance is touched. One program table stops claiming sentences whose subject is git, one count reader reads the words it already had, and one git rule matches the phrasing it was written for.",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intent": "Answer a git question with the row that verifies git, and read a stated count as stated.",
+  "load_bearing_primary": {
+    "canonical_base_commit": "9f808230890332e75643b6bfafce3352749ed9ba",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "A_GIT_QUESTION_BELONGS_TO_THE_ROW_THAT_VERIFIES_GIT_AND_A_STATED_COUNT_IS_THE_COUNT",
+    "measured_effect": "Census stays 22/28 with 0 false PASS and nothing lost; the 18 ordinary sentences go 2/18 -> 3/18 on both layouts because 'Show the last three git commits in this repository.' is answered by git.repository.operate.v1 again, and three measured misreads are gone: a git question can no longer become `tail -n 2 <directory>`, a count written as a word is read ('the last three lines' -> tail -n 3, not 2), and a git read the sentence states ('the last three git commits') is no longer refused.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "stop_condition": "Stop when the git sentences reach the git row, the count is read as stated, and the census is not lower.",
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Census stays 22/28 with 0 false PASS and nothing lost; the 18 ordinary sentences go 2/18 -> 3/18 on both layouts because 'Show the last three git commits in this repository.' is answered by git.repository.operate.v1 again, and three measured misreads are gone: a git question can no longer become `tail -n 2 <directory>`, a count written as a word is read ('the last three lines' -> tail -n 3, not 2), and a git read the sentence states ('the last three git commits') is no longer refused.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": "git.repository.operate.v1 already verifies log/status/diff/show/blame/branch and re-derives every effect with a second git mechanism; the composer's existing token path reaches it. The acceptance layer's read-only table, the existing refusal discipline and the existing default count are reused unchanged.",
+  "progress_evidence_paths": [
+    "canonical/runtime/composer_route_v1.py",
+    "canonical/tests/test_a_git_question_is_not_a_tail_command_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "9f808230890332e75643b6bfafce3352749ed9ba",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",
+      "DECLARING_PYTHON_STDLIB_FOR_A_CAPABILITY_WHOSE_ADAPTER_DOES_NOT_IN_FACT_FALL_BACK",
+      "REMOVING_THE_HASH_PINNED_APT_CLAIM_FROM_ANY_OTHER_CAPABILITY",
+      "WEAKENING_THE_STDLIB_PROBE_SO_A_MISSING_MODULE_COULD_PASS"
+    ],
+    "expected_parent_level_state_change": "Census stays 22/28 with 0 false PASS and nothing lost; the 18 ordinary sentences go 2/18 -> 3/18 on both layouts because 'Show the last three git commits in this repository.' is answered by git.repository.operate.v1 again, and three measured misreads are gone: a git question can no longer become `tail -n 2 <directory>`, a count written as a word is read ('the last three lines' -> tail -n 3, not 2), and a git read the sentence states ('the last three git commits') is no longer refused.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "ADDING_GIT_TO_READ_ONLY_COMMANDS_WOULD_NEED_A_GIT_POSTCONDITION_THAT_ALREADY_EXISTS_IN_A_DIFFERENT_ROW; DELETING_THE_DEFAULT_COUNT_WOULD_BREAK_THE_DOCUMENTED_'show the last lines' REQUEST",
+      "intrinsic_or_path_specific": "Path-specific: one predicate, one count reader and one regex.",
+      "surviving_causal_blocker": "The file-command table is consulted for every sentence, so it answered one whose subject it cannot serve."
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_ADAPTER_NO_NEW_ROW_NO_NEW_TABLE",
+      "existing_inherited_routes_checked": "git.repository.operate.v1 was driven directly: op=log, limit=3, rows and observed_effect verified. git_argv and the prose tables were driven on the same sentences to show which one claimed them.",
+      "external_existing_routes_checked": "No external source was needed: the git row, the acceptance tables and the composer are all in this repository, and the failure was in which one was consulted.",
+      "surviving_gap": "A git read whose destination is a named file is still refused (the sentence's path is read as a repository operand); the answer is the git row's own output path, not the file the sentence names."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "ADDING_GIT_TO_THE_ACCEPTANCE_LAYERS_READ_ONLY_TABLE",
+        "GIVING_THE_SHELL_ROW_A_GIT_POSTCONDITION",
+        "PATCHING_THE_PROBE_TO_ACCEPT_A_TAIL_ANSWER"
+      ],
+      "real_outcome": "Census stays 22/28 but the residual class changes: fix_race and sql_injection now execute the repair row instead of being refused by a premise, and localize_fault now builds the typed plan and executes python.fault.localize.dynamic.dataflow.v1 (its own artifact ranks no symbols on this fixture -- a capability limit, not a routing one). Pinned: 68 tests over eight modules, exactly the 3 pre-existing failures; test_a_refused_request_leaves_the_tree_alone_v1 and test_the_answer_must_be_the_effect_that_was_stated_v1 are green (18 tests).",
+      "surviving_necessity": "The row that verifies git already existed; the sentence never reached it because the file table claimed it first."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "git_argv's log mapping is now reachable only through the git row, which is the only consumer that can verify it.",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "Reuse the git row, the composer's token path and the existing count default."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE THREE SENTENCES WERE MEASURED ONCE ON A COPY, AND THE 28-TASK AND 18-SENTENCE SETS WERE RUN ONCE BEFORE AND ONCE AFTER",
+      "search_stop_decision": "Stop: the row, the verification and the token path all existed; only the claim was wrong."
+    },
+    "obs_solution": {
+      "deleted_or_bypassed_paths": [
+        "TAIL_BINDING_FOR_A_GIT_SENTENCE",
+        "DEFAULT_COUNT_OVERRIDING_A_STATED_COUNT",
+        "SHELL_ROW_SERVING_GIT"
+      ],
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Every alternative adds a second mechanism for something the repository already verifies once; the git row re-derives its own effect with a second plumbing call.",
+      "routes_ranked": [
+        "refuse git sentences to the file table, read stated counts, let the composer reach the git row (selected)",
+        "add git to the acceptance layer's read-only table (rejected: duplicates the git row's verification)",
+        "give the shell row a git postcondition (rejected: a second verifier for one program)",
+        "leave the tail binding (rejected: a wrong command that executes)"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Not synthetic: the oracle is `git log --oneline -n 3` run independently, compared against the shas the row reported."
+    },
+    "prior_routes_considered": [
+      "ADD_GIT_TO_READ_ONLY_COMMANDS",
+      "GIVE_THE_SHELL_ROW_A_GIT_POSTCONDITION",
+      "REFUSE_GIT_TO_THE_FILE_TABLE_AND_READ_STATED_COUNTS"
+    ],
+    "real_outcome": "A git question is answered by the git row and verified by it; a file question keeps its program; a count the sentence states is the count that is used.",
+    "required_capability": "SEND_THE_SENTENCE_TO_THE_ROW_THAT_CAN_VERIFY_IT",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "COVERS EVERY GIT READ THE ROW DECLARES",
+            "CORRECTNESS": "THE RIGHT ROW ANSWERS AND VERIFIES",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "ONE TABLE, ONE ROW",
+            "VERIFIABILITY": "THE SHAS ARE COMPARED WITH git log ITSELF",
+            "WALL_CLOCK": "ONE REGEX"
+          },
+          "evidence": [
+            "measured: git sentence -> git.repository.operate.v1 -> 3 rows -> shas match"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: solve() PASS with rows compared against git log"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "REFUSE_GIT_TO_THE_FILE_TABLE_AND_READ_STATED_COUNTS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "DUPLICATES_THE_GIT_ROW",
+            "CORRECTNESS": "NEEDS_A_GIT_POSTCONDITION",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "TWO_VERIFIERS_DRIFT",
+            "VERIFIABILITY": "THE_TABLES_MUST_AGREE_WITH_THE_ROW",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "git.repository.operate.v1 already re-derives every effect with git plumbing"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: the row's observed_effect carries commit_count and head_sha"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "ADD_GIT_TO_READ_ONLY_COMMANDS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "WRONG_ANSWER",
+            "CORRECTNESS": "WRONG_COMMAND_EXECUTES",
+            "INCREMENTAL_COST": "ZERO_MONETARY",
+            "RELIABILITY": "FAILS_ON_ANY_DIRECTORY",
+            "VERIFIABILITY": "NONE",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "measured: 'Show the last three git commits in <other repo>.' bound tail -n 2 <dir>"
+          ],
+          "qualification_evidence": [
+            "DIRECT_PROBE: extract_argv returned the tail command"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LEAVE_THE_TAIL_BINDING"
+        }
+      ],
+      "checked_at_utc": "2026-10-31T16:03:47Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "EVERY_SENTENCE_IS_OFFERED_TO_THE_FILE_COMMAND_TABLE",
+      "max_age_hours": 24,
+      "negative_search_summary": "No package answers 'which kind of object does this sentence rename' for a front door that must also refuse; rope and libcst are editors driven by an explicit object argument, which is exactly the datum this fix reads off the sentence instead.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "python refactoring library rename parameter vs rename function"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "rope libcst which renames a parameter across a project"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "how a rename refactoring decides which object to rename"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "rope 1.15.0 libcst 1.9.0 parameter rename"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "routes_considered": [
+        "BIND_THE_SENTENCE_TO_A_ROW_BY_ARGUMENT_VALUE_ONLY",
+        "READ_THE_OBJECT_ROLE_AT_ADMISSION",
+        "READ_THE_OBJECT_ROLE_AT_THE_EXIT",
+        "INSPECT_THE_FILE_AFTER_THE_EDIT",
+        "A_PARAMETER_SPECIFIC_ROUTE_TABLE",
+        "RELY_ON_BUILD_PLAN_ALONE",
+        "DISABLE_THE_CONTRACT_PREDICATE"
+      ],
+      "selected_route": "REFUSE_GIT_TO_THE_FILE_TABLE_AND_READ_STATED_COUNTS",
+      "selected_route_checked_at_utc": "2026-10-31T16:03:47Z",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-10-31T16:03:47Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 interpreter in the workspace",
+            "evidence": [
+              "python3 -m unittest ran the new suite: 6 tests OK"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the git binary and this repository's history",
+            "evidence": [
+              "git log --oneline -n 3 ran independently and matched the shas the row reported"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the composer's capability graph",
+            "evidence": [
+              "composer_route_v1.route returned git.repository.operate.v1 for the git sentence"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "REFUSE_GIT_TO_THE_FILE_TABLE_AND_READ_STATED_COUNTS",
+        "status": "READY"
+      },
+      "selected_surviving_route": "READ_THE_OBJECT_ROLE_AT_ADMISSION_AND_AT_THE_EXIT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/composer_route_v1.py:_prose_argv, _prose_count, git_argv",
+          "canonical/runtime/bound_capabilities/git_repository_operate.py: op/limit binding and the second plumbing check",
+          "canonical/runtime/raw_goal_trace_acceptance_v1.py: git is absent from _READ_ONLY_COMMANDS"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "shell idioms put log history behind git, never behind tail, because tail reads a file's last lines"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "pypi.org/pypi/GitPython: every log read takes a max_count argument, no default of two"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "git-scm.com/docs/git-log: -n limits the number of commits, which is the count the sentence states"
+        ]
+      },
+      "stop_condition": "Stop when both measured sentences answer the stated object and the 28-task census is not lower.",
+      "unresolved_plausible_dominators": [],
+      "why_selected_route_is_fastest_sufficient": "IT_READS_A_DATUM_BOTH_SIDES_ALREADY_CARRY__THE_SENTENCES_NOUN_AND_THE_ROWS_SLOT_NAMES__NEEDS_NO_ADAPTER_OR_REGISTRY_CHANGE__AND_IS_MEASURED_TO_LEAVE_THE_28_TASK_CENSUS_AT_22_WITH_FALSE_PASSES_AT_ZERO"
+    },
+    "routes_considered": [
+      "RE_OPEN_THE_ARTIFACTS_THE_TRACE_ALREADY_NAMES_AND_REFUSE_ANY_CAPABILITY_WITH_NO_INSPECTOR",
+      "WRITE_ONE_SENTENCE_SPECIFIC_VERIFIER_PER_GOAL__REJECTED_MEASURED_ONE_OF_TWENTY_THREE_AND_LINEAR_IN_SENTENCES",
+      "TRUST_THE_PRODUCERS_VERIFIED_FLAG__REJECTED_MEASURED_TO_ACCEPT_TWO_GOALS_THE_PRODUCER_SAID_WERE_UNVERIFIED",
+      "COMPARE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB__REJECTED_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_THE_CAP_WOULD_LOOK_LIKE_A_LIE",
+      "REQUIRE_THE_TRACE_CAPABILITY_SEQUENCE_TO_EQUAL_THE_PLAN_CHAIN__REJECTED_MEASURED_THE_PLAN_AND_TRACE_ORDERS_LEGITIMATELY_DIFFER_WHEN_A_PREREQUISITE_PRODUCER_IS_INSERTED",
+      "INPUT_BOUND_BY_SENTENCE_ROLE_NOT_BY_FILENAME_V1_20261023_V1",
+      "ABSOLUTE_PATH_NORMALISED_AND_GOALS_ARE_IDEMPOTENT_V1_20261023_V1",
+      "SOURCE_ROOT_BOUND_FROM_THE_SENTENCE_ROLE_V1_20261023_V1",
+      "LIST_INPUTS_AND_ADAPTER_DERIVED_ARGV_BOUND_FROM_THE_SENTENCE_V1_20261023_V1",
+      "PROMISED_SOURCE_CHANGE_CHECKED_BEFORE_PASS_V1_20261023_V1",
+      "TEXT_FILE_WRITE_VERIFIED_FROM_REAL_EXECUTION_V1_20261023_V1",
+      "SHELL_COMMAND_RUN_VERIFIED_COMPLETING_72_OF_72_V1_20261023_V1",
+      "PYTHON_STDLIB_DECLARATION_ENFORCED_NO_EXTERNAL_BINARY_V1_20261023_V1",
+      "SQLITE_STATUS_FILTER_TAKEN_FROM_THE_SENTENCE_V1_20261023_V1",
+      "MEASUREMENT_DEPENDENCY_BLOCKED_NOT_ABORTED_V1_20261023_V1",
+      "PATH_ROLE_EXCLUSIVITY_ONE_PATH_ONE_ROLE_V1_20261023_V1",
+      "PLURAL_ROLE_WORD_BINDS_A_LIST_OF_PATHS_V1_20261023_V1",
+      "SUITE_ARGV_DELEGATION_FOLLOWED_TO_ANY_DEPTH_V1_20261023_V1",
+      "NEAREST_ROLE_WORD_OWNS_THE_PATH_V1_20261023_V1",
+      "COMPOSED_FALLBACK_HELD_TO_PROMISED_ARTIFACT_EVIDENCE_V1_20261023_V1",
+      "EXPLICIT_NAME_KEEPS_A_RECEIPT_PROJECTIONS_ROUTE_V1_20261023_V1",
+      "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+      "WHOLE_NAME_IN_PROSE_TAKES_THE_ROUTE_V1_20261024_V1",
+      "THE_TEXT_A_REQUEST_STATES_IS_THE_TEXT_WRITTEN_V1_20261024_V1",
+      "A_REQUEST_THAT_NAMES_NO_TEXT_WRITES_NOTHING_V1_20261024_V1",
+      "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
+      "A_COMMAND_IS_VERIFIED_BY_RUNNING_IT_AGAIN_V1_20261024_V1",
+      "A_COMMAND_THAT_CHANGES_SOMETHING_IS_VERIFIED_BY_THE_WORLD_AFTERWARDS_V1_20261024_V1",
+      "ONE_RUNNER_SERVES_294_CAPABILITIES_SO_ONE_INSPECTOR_RE_INSPECTS_ALL_OF_THEM_V1_20261024_V1",
+      "A_PROMISE_ABOUT_A_FILE_IS_READ_BEFORE_THE_WORK_V1_20261024_V1",
+      "A_PROMISED_FILE_IS_NON_EMPTY_ONLY_WHEN_THE_SENTENCE_PROMISED_CONTENT_V1_20261024_V1",
+      "A_COMMAND_THAT_RAN_IS_NEVER_REPORTED_AS_ONE_THAT_COULD_NOT_V1_20261024_V1",
+      "A_DIRECTORY_IS_A_REAL_ARTIFACT_AND_A_PATH_NEEDS_NO_EXTENSION_V1_20261024_V1",
+      "A_BINDERS_REFUSAL_MAY_REFUTE_A_SELECTION_AND_MAY_NOT_OPEN_A_WRITE_V1_20261024_V1",
+      "A_VERIFIER_THAT_SAID_NO_IS_NOT_OVERRULED_BY_THE_REPORT_V1_20261024_V1",
+      "A_REMOVAL_IS_CERTIFIED_BY_PROVING_THE_FILE_IS_GONE_V1_20261024_V1",
+      "DIRECTORY_SHAPED_REQUESTS_BIND_DIRECTORY_SHAPED_COMMANDS_AND_THE_LIVE_GATE_ASKS_WHETHER_A_CAPABILITY_CAN_RUN_ONE"
+    ],
+    "selected_route": "A_YES_OR_NO_QUESTION_IS_ANSWERED_BY_THE_EXIT_STATUS_THE_VERIFIER_ALREADY_ENUMERATED_V1_20261025_V1",
+    "selected_surviving_route": "REFUSE_GIT_TO_THE_FILE_TABLE_AND_READ_STATED_COUNTS",
+    "stop_condition": "Stop when the git sentences reach the git row, the count is read as stated, and the census is not lower.",
+    "why_selected_route_is_fastest_sufficient": "Two rules in the prose table, placed after the rules for a count and for a line number so those keep their sentences, and one flag on cmp.  The dominant alternative was a new answer type for yes-or-no questions, rejected because the exit status already is that answer and is already enumerated, declared, carried to the adapter and reproduced by the inspector -- building a second mechanism would have added a way to be trusted where none was needed.  Plain `cmp` was rejected on measurement, not preference: on identical files it exits 0 with empty stdout and the adapter raises."
+  },
+  "refusal_or_stop_condition": "Stop when the git sentences reach the git row, the count is read as stated, and the census is not lower.",
+  "resolution": "A git read whose destination is a named file is still refused; that is a binder gap, not a routing one, and it is recorded as the next item.",
+  "route_id": "READ_A_PREMISE_AS_A_PREMISE",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "REFUSE_GIT_TO_THE_FILE_TABLE_AND_READ_STATED_COUNTS",
+  "stop_condition": "Stop when the git sentences reach the git row, the count is read as stated, and the census is not lower.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "39a1057468fd8cf30b55d805c0884a57ae8dc024",
+          "path": "canonical/runtime/capability_selection_retrieval_v1.py"
+        },
+        {
+          "git_blob_sha": "0ff8be78e7d525c3a2dc9588ebd0413da4e11dd3",
+          "path": "canonical/tests/test_an_ordinary_sentence_runs_the_command_it_states_v1.py"
+        }
+      ],
+      "decisive_question": "MAY_A_CAPABILITY_BE_ADMITTED_FOR_A_REQUEST_WHEN_ITS_DECLARED_CONTRACT_HAS_NO_SLOT_TO_HOLD_WHAT_THE_SENTENCE_STATES",
+      "falsifier_id": "THE_SAME_SENTENCE_OVER_AN_ABSENT_TARGET_AND_OVER_AN_EXISTING_ONE_REACHES_THE_SAME_WRITER_AND_WRITES_THE_SAME_BYTES",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_CANDIDATE_WAS_TO_REMOVE_THE_OFFENDING_KEYWORDS_FROM_THE_DOCX_VERIFIER__REJECTED_BECAUSE_IT_WOULD_MOVE_THIS_TIE_AND_LEAVE_THE_CLASS__SECOND_CANDIDATE_WAS_TO_MAKE_THE_ADAPTER_TOLERATE_A_MISSING_SIDECAR__REJECTED_BECAUSE_THE_VERIFIER_REFUSING_IS_CORRECT_AND_THE_DEFECT_IS_THAT_IT_WAS_CHOSEN__THIRD_CANDIDATE_WAS_TO_REQUIRE_THE_SENTENCE_TO_NAME_A_WRITE_CAPABILITY__REJECTED_AS_A_KEYWORD_RULE_OF_THE_KIND_THAT_MEASURABLY_HIJACKS_THE_SCORER__FOURTH_CANDIDATE_WAS_TO_APPLY_THE_RULE_TO_ANY_SENTENCE_WITH_A_PAYLOAD__REJECTED_AS_THE_6119_SHAPE",
+      "proposal_id": "A_REQUEST_ABOUT_A_DIRECTORY_GETS_THE_DIRECTORY_FORM_OF_THE_COMMAND_SO_A_TREE_IS_NO_LONGER_AN_ERROR_V1_20261025_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}
