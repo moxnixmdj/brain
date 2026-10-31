@@ -42,8 +42,9 @@ def tr(frame,event,arg):
  if event=="line":
   rel=str(p.relative_to(repo)).replace("\\","/"); key=(rel,frame.f_lineno,frame.f_code.co_name)
   seen[key]=seen.get(key,0)+1;events+=1
+  if not order or order[-1]!=key:order.append(key)
  return tr
-ok=True;tb=[]
+ok=True;tb=[];order=[]
 sys.settrace(tr)
 try:
  _brain_run_suite(target)
@@ -53,7 +54,7 @@ except SystemExit as e:
 except BaseException as e:
  ok=False;tb=traceback.extract_tb(e.__traceback__)
 finally:sys.settrace(None)
-print("__BRAIN_TRACE__"+json.dumps({"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":events},sort_keys=True))
+print("__BRAIN_TRACE__"+json.dumps({"order":[[a,b,c] for (a,b,c) in order],"pass":ok,"events":[[a,b,c,n] for (a,b,c),n in sorted(seen.items())],"traceback":[[str(pathlib.Path(x.filename).resolve().relative_to(repo)).replace("\\","/"),x.lineno,x.name] for x in tb if pathlib.Path(x.filename).resolve().is_file() and repo in pathlib.Path(x.filename).resolve().parents],"event_count":events},sort_keys=True))
 '''
  try:r=subprocess.run([sys.executable,"-c",code,str(repo),str(test),str(max_events)],cwd=repo,text=True,capture_output=True,timeout=timeout,env=env)
  except subprocess.TimeoutExpired:raise FaultLocalizerError("TEST_TIMEOUT")
@@ -103,6 +104,19 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   try:tests=discover_test_files(src)
   except FileNotFoundError:raise FaultLocalizerError("NO_TEST_FILES_UNDER_SOURCE_ROOT")
  env=_source_env(src,*tests)
+ # THE PROJECT ROOT THE TESTS IMPORT THROUGH, WHEN THE TREE SAYS SO.
+ #
+ # Measured 2026-10-31: a fixture whose package is <project>/app and whose suite is
+ # <project>/tests imports `app.service`, but the source directory alone was on PYTHONPATH, so the
+ # test died on its own import line.  The trace showed two events, both in the test file, no
+ # application line at all -- and the localizer then reported PASS with an empty ranking, a false
+ # positive whose guidance is worth nothing.  The evidence is the tree: a source root that is a
+ # PACKAGE (it has __init__.py) whose parent holds the tests.  Appended LAST so it can never
+ # shadow a directory that was already resolved (the one measured shadowing risk in _source_env).
+ _proj=src.parent
+ if (src/"__init__.py").is_file() and (_proj/"tests").is_dir():
+  _existing=env.get("PYTHONPATH","")
+  env=dict(env); env["PYTHONPATH"]=(_existing+os.pathsep+str(_proj)) if _existing else str(_proj)
  if not tests:raise FaultLocalizerError("TEST_PATHS_REQUIRED")
  timeout=max(1,min(int(args.get("timeout_s",20)),120));max_events=max(100,min(int(args.get("max_trace_events",200000)),1000000));max_lines=max(1,min(int(args.get("max_ranked_lines",100)),1000));max_symbols=max(1,min(int(args.get("max_ranked_symbols",50)),500))
  traces=[]
@@ -110,7 +124,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  F=sum(not x["pass"] for x in traces);P=sum(x["pass"] for x in traces)
  if F==0:raise FaultLocalizerError("NO_FAILING_TEST")
  line_counts={}
- tbset=set()
+ tbset=set();last_lines=set()
+ _app_paths={_rel(repo,x) for x in list(src.rglob("*")) if x.is_file() and x.suffix==".py" and not x.name.startswith("test_")}
  for tr in traces:
   covered=set((a,b,c) for a,b,c,_ in tr["events"])
   for rel,line,func in covered:
@@ -118,6 +133,9 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
    rec["pass" if tr["pass"] else "fail"]+=1
   if not tr["pass"]:
    tbset.update(tuple(x) for x in tr.get("traceback",[]))
+   _order=[tuple(x) for x in tr.get("order",[])]
+   for _k in reversed(_order):
+    if _k[0] in _app_paths:last_lines.add(_k);break
  ranked=[]
  for (rel,line,func),c in line_counts.items():
   p=(repo/rel).resolve()
@@ -127,6 +145,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   if f and not q:reasons.append("FAIL_ONLY_EXECUTION")
   if q:reasons.append("PASSING_TEST_OVERLAP")
   if (rel,line,func) in tbset:score+=1.0;reasons.append("FAILING_TRACEBACK_FRAME")
+  if (rel,line,func) in last_lines:score+=2.0;reasons.append("LAST_EXECUTED_LINE_IN_FAILING_RUN")
   ranked.append({"path":rel,"line":line,"function":func,"fail_coverage":f,"pass_coverage":q,"ochiai":round(score-(1.0 if "FAILING_TRACEBACK_FRAME" in reasons else 0.0),12),"score":round(score,12),"reasons":reasons})
  ranked.sort(key=lambda x:(-x["score"],-x["fail_coverage"],x["pass_coverage"],x["path"],x["line"],x["function"]))
  ranked=ranked[:max_lines]
