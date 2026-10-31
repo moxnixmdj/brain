@@ -1,1 +1,1 @@
-@tools/l6_scale.py
+@/tmp/l6s.py
