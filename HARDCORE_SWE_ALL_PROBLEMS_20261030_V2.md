@@ -504,3 +504,45 @@ not an instruction (`_intent_verb_matches`), so *"Explain what `add(1, 2)` does 
 function definitions"* with `PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED` instead of
 writing an index, `git_log` passes, and the two edit-lies stay dead with the *correct* refusal
 (`FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED` on `symbols.index.ast`), not a lucky miss.
+
+---
+
+## 13. After the merge: what main already fixed, and the one leak with its exact line
+
+Merged into `main` as PR #6323 (`09867fd`).  Re-measured on the merged tree the same day, same oracle,
+same fixtures (`swe_probe_20261030/ab_lie.py`):
+
+| sentence | before this work | on the merged tree |
+|---|---|---|
+| *Inline the function `line_total` into its caller* | **PASS, file unchanged** | `FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED` on `python.source.symbols.index.ast` |
+| *Inline the single-use helper `_price_with_tax`* | **PASS, file unchanged** | `FAIL__LIVE_CONTROLLER_EXECUTION` on `python.refactor.inline_helper.v1` (a real inline row now exists) |
+| *Add a parameter `qty` … update every caller* | **PASS, file unchanged** | **PASS, and the file really changed** — `python.source.add_parameter.v1` |
+| *Count the function definitions* | PASS, wrote an index into the package | **PASS, the number is the answer** — `python.source.definition_count.v1` |
+
+So the two lies are gone and the two questions now have owners.  Two capabilities this census listed as
+*"no owner"* (`inline`, `add parameter`, `count`) arrived in `main` from parallel work while this document
+was being written — which is the strongest evidence for its own thesis: the verbs were missing, not the
+machinery.
+
+**The leak, located.**  Every refused sentence still leaves a report inside the caller's project.  It is
+not the adapter's doing: `canonical/runtime/swe_typed_plan_v1.py:191`
+
+```python
+return str(pathlib.PurePosixPath(parent) / "typed_swe_report.json")
+```
+
+`_fresh_output_path` exists to stop a report being written OVER a stated source — correct — but it
+relocates the report *into the stated source directory*, one level ABOVE the subtree the observation gate
+walks (`app/` for a sentence naming `app/service.py`, so `<project>/typed_swe_report.json` is invisible to
+it).  A refusal therefore reports `pass: false` and leaves a file the caller never asked for, with
+`side_effects_may_exist` unset.
+
+The fix is one line's worth of intent but not one line of code, and it is NOT applied here: the report
+destination is asserted by `canonical/tests/test_swe_typed_plan_v1.py` ("a report artifact was written"
+under the fixture), so moving the default into an intermediate spool changes a pinned contract.  That is a
+decision for the owner, and the census records it rather than deciding it.
+
+**Measured cost of main's churn, for the record:** 18 human sentences went **8/18 (this branch at
+`282a5f4`) → 4/18 (main `99db201`) → 5/18 (after restoring two dropped fixes)**.  The four sentences main
+lost (`repair_full`, `bug_report`, `explain_fail`, `debug_test`) are named with their failing capability in
+§12; none of them was lost by the merge.
