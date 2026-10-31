@@ -30489,7 +30489,7 @@
   "engines": 26,
   "knowledge_documents": 206,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6530,
+  "research_index_records": 6531,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "41a18997aa00664c22049362ad8409518cb0d35297ab87ee78c038941bb0ddfb"
+  "value": "ed636f60823d80f491d69401abc58c81d8f911fab7c2ecce3610965adb69a586"
  },
  "engines": [
   {
@@ -201315,6 +201315,51 @@
    }
   },
   {
+   "action_id": "A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_GIT_QUESTION_IS_NOT_A_TAIL_COMMAND_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dd6ca6f79f8d894773119777a79a171ccd5541c645dcf4d191d4f1b60c9d1940",
+   "status": "",
+   "terms": {
+    "18": 3,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "28": 1,
+    "9f808230": 1,
+    "a_git_question_is_not_a_tail_command_v1_20261031_v1": 1,
+    "absent": 1,
+    "adapter": 1,
+    "again": 1,
+    "answered": 1,
+    "because": 2,
+    "bound": 4,
+    "commits": 3,
+    "count": 2,
+    "directory": 2,
+    "file": 2,
+    "git": 9,
+    "last": 6,
+    "lines": 3,
+    "longer": 2,
+    "measured": 2,
+    "no": 3,
+    "not": 2,
+    "output": 2,
+    "question": 2,
+    "read": 3,
+    "sentence": 2,
+    "show": 3,
+    "tail": 6,
+    "three": 7,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_GOAL_INPUT_GETS_THE_GOAL_NOT_THE_INVOCATION_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -226312,9 +226357,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "4c04b0083f11dc927059551728bd8ceea364620e0b4e8d4a92827a903016efb7",
+   "sha256": "985afe097d5a1ae32927eeea2a3f4dc259d1124783f9db152c9b36cfd2a4133f",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 63,
+   "symbol_count": 64,
    "symbols": [
     "_bare_alternatives",
     "_bare_stated_value",
@@ -226328,6 +226373,7 @@
     "_dotted_module",
     "_exists_in_repo",
     "_fully_bound_contract_tokens",
+    "_git_domain",
     "_head_flags",
     "_is_directory_in_repo",
     "_is_repository_path",
@@ -226338,8 +226384,7 @@
     "_no_flags",
     "_noun_matched_path",
     "_parent_if_directory",
-    "_pathish",
-    "_place_a_read_commands_answer"
+    "_pathish"
    ],
    "terms": {
     "candidate_tokens": 1,

@@ -1362,6 +1362,24 @@ _PROSE_COMMAND_WITH_VALUE: tuple[tuple[str, str], ...] = (
 
 _COUNT_RE = re.compile(r"\bfirst\s+(\d+)\b|\b(\d+)\s+lines?\b")
 
+# A NUMBER WRITTEN AS A WORD IS STILL THE NUMBER THE SENTENCE STATED.
+#
+# Measured 2026-10-31: "Show the last three lines of <file>." bound `tail -n 2`,
+# because _COUNT_RE only read digits and _prose_count then returned its documented
+# default of 2 -- an answer to a question the sentence had already answered
+# differently.  The same sentence with "3" bound `tail -n 3`.  The default is for a
+# sentence that states NO count ("show the last lines"); it must not override one
+# that does.
+_NUMBER_WORDS = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7,
+    "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12, "thirteen": 13,
+    "fourteen": 14, "fifteen": 15, "sixteen": 16, "seventeen": 17, "eighteen": 18,
+    "nineteen": 19, "twenty": 20,
+}
+_COUNT_WORD_RE = re.compile(
+    r"\b(?:first|last|bottom|top|next|previous|final)\s+(?:%s)\b"
+    r"|\b(?:%s)\s+lines?\b" % ("|".join(_NUMBER_WORDS), "|".join(_NUMBER_WORDS)))
+
 
 _QUOTED = re.compile(r"""(['"])(.+?)\1""", re.S)
 
@@ -1383,10 +1401,19 @@ def _quoted_value(sentence: str) -> str | None:
 
 
 def _prose_count(sentence: str) -> int:
-    """How many lines the sentence asked for, or 2 as the documented default."""
+    """How many lines the sentence asked for, or 2 as the documented default.
+
+    The default answers only a sentence that states no count.  A count written as
+    a word is a count the sentence stated -- see `_COUNT_WORD_RE`.
+    """
     m = _COUNT_RE.search(sentence)
     if m:
         return int(m.group(1) or m.group(2))
+    w = _COUNT_WORD_RE.search(str(sentence or "").lower())
+    if w:
+        for word, value in _NUMBER_WORDS.items():
+            if re.search(r"\b%s\b" % word, w.group(0)):
+                return value
     return 2
 
 
@@ -2027,6 +2054,23 @@ _GIT_UNSTATABLE = re.compile(
     r"\b(?:revert|reset|stash|push|pull|merge|rebase|cherry-pick|bisect|blame|"
     r"who changed|am|--amend)\b", re.I)
 
+# THE SENTENCE NAMED GIT, SO A FILE COMMAND CANNOT BE ITS ANSWER.
+#
+# `_GIT_READ` is deliberately broad: it also matches the bare noun ("Write a commit
+# message to X") because the git reader is allowed to look at everything and then
+# refuse.  This predicate is the narrower one -- the sentence's SUBJECT is the
+# repository's history -- and it is only used to stop the file-command table from
+# answering a git question with `tail`.  Quoted spans are removed first: a payload
+# that says "commit" is a string, not a question about a repository.
+_GIT_DOMAIN = re.compile(
+    r"\bgit\b|\buncommitted\b|\bworking tree\b|\bcommit history\b"
+    r"|\b(?:last|recent|previous|latest|first|earliest|all|the)\b[^.]{0,24}\bcommits?\b"
+    r"|\bcommits?\b\s+(?:in|of|from|since|before|after)\b", re.I)
+
+
+def _git_domain(sentence: str) -> bool:
+    return bool(_GIT_DOMAIN.search(_QUOTED.sub(" ", str(sentence or ""))))
+
 
 def git_argv(sentence: str) -> list[str] | None:
     """The git READ a sentence asks for, or None.
@@ -2050,8 +2094,8 @@ def git_argv(sentence: str) -> list[str] | None:
     # commits in <dir>." yielded the PARENT directory as its only path -- the regex stopped at the
     # dot -- so the target was never found and the command ran against the enclosing repository,
     # which is a true answer about the wrong world.
-    named = [cand for cand in extract_paths(re.sub(r"\.(?=\s|$)", " ", text))
-             if (_REPO_ROOT / cand).is_dir()]
+    all_named = list(extract_paths(re.sub(r"\.(?=\s|$)", " ", text)))
+    named = [cand for cand in all_named if (_REPO_ROOT / cand).is_dir()]
     repos = [cand for cand in named if (_REPO_ROOT / cand / ".git").exists()]
     others = [cand for cand in named if cand not in repos]
     if len(repos) > 1 or (repos and others):
@@ -2066,8 +2110,15 @@ def git_argv(sentence: str) -> list[str] | None:
     if re.search(r"\b(?:what (?:changed|is different)|uncommitted|not yet committed|"
                  r"working tree|git status)\b", lowered):
         return prefix + ["status", "--porcelain"]
-    if re.search(r"\b(?:commit history|recent commits|last commit|git log)\b", lowered):
-        return prefix + ["log", "--oneline", "-n", "20"]
+    if re.search(r"\b(?:commit history|recent commits|last commit|git log|"
+                 r"(?:last|recent|previous|latest)\s+(?:\d+|%s)\s+(?:git\s+)?commits?)\b"
+                 % "|".join(_NUMBER_WORDS), lowered):
+        # WHICH commits, not merely the last twenty.  Measured 2026-10-31: "Show the
+        # last three git commits." bound nothing at all -- the phrase did not match
+        # this rule -- and the sentence was then refused.  The count the sentence
+        # states is read the same way every other count in this file is read.
+        count = _prose_count(lowered)
+        return prefix + ["log", "--oneline", "-n", str(count)]
     if re.search(r"\b(?:diff|what changed)\b", lowered):
         return prefix + ["diff", "--stat"]
     return None
@@ -2082,9 +2133,21 @@ def _prose_argv(sentence: str) -> list[str] | None:
     """
     from canonical.runtime import raw_goal_trace_acceptance_v1 as _accept
 
-    _git = git_argv(sentence)
-    if _git is not None:
-        return _git
+    if _git_domain(sentence):
+        # AND IT IS NOT THE GENERIC SHELL ROW'S QUESTION EITHER.
+        #
+        # `git_argv` below reads the git read a sentence asks for, and routing it
+        # through `shell.command.run` was measured to be unusable on 2026-10-31:
+        # `git` is not in `raw_goal_trace_acceptance_v1._READ_ONLY_COMMANDS`, so the
+        # adapter is never told to write stdout to the bound output
+        # (`CLI_EXPECTED_OUTPUT_MISSING`), and no git postcondition exists there to
+        # judge the run.  The repository already owns a row that DOES verify git --
+        # `git.repository.operate.v1`, whose op/limit are bound from the sentence and
+        # whose effect is re-derived by a second plumbing mechanism -- so a git
+        # question goes to that row, and the composer's token path reaches it exactly
+        # as it did before this refusal existed (measured: "Show the last three git
+        # commits in this repository." -> git.repository.operate.v1, PASS).
+        return None
     if _PROVENANCE_RE.search(str(sentence or "")):
         # No program in the read-only table answers "who changed this line", and the
         # rows below would answer a different question with the same words.  Refuse to
