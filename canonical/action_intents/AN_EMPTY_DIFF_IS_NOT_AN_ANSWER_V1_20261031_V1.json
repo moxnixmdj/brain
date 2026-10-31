@@ -1,0 +1,225 @@
+{
+  "action_id": "AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1",
+  "action_intent_id": "AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "action_summary": "A DIFF OF A FILE GIT DOES NOT KNOW YET WAS SERVED AS AN EMPTY PATCH AND PASSED. The 54-case capability matrix reported one FALSE on fabf28c -- git_diff -- and it was not the matrix's fault: git.repository.operate.v1 ran `git diff HEAD -- <untracked>` and returned row_count 0 with the empty-string digest, while the door reported PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED. The difference between nothing and a new file is a fact git itself states with --no-index; the answer now carries it, and a patch with counted files but no hunk can no longer be returned as a diff. Matrix: 19 REAL / 0 FALSE / 0 DAMAGED, median 88 ms.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/git_repository_operate.py",
+      "canonical/tests/test_git_repository_operate_v1.py",
+      "execution_guard/swe_capability_matrix_v1.py",
+      "canonical/action_intents/AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_READER_WHOSE_ANSWER_IS_EMPTY_REPORTED_PASS_BECAUSE_ITS_DECLARED_EXPECTATION_ONLY_CHECKED_THAT_AN_ARTIFACT_EXISTED__MEASURED_ONE_FALSE_IN_54_AND_ZERO_OF_THEM_WERE_VISIBLE_TO_THE_DOOR",
+  "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A_READER_WHOSE_ANSWER_IS_EMPTY_REPORTED_PASS_BECAUSE_ITS_DECLARED_EXPECTATION_ONLY_CHECKED_THAT_AN_ARTIFACT_EXISTED__MEASURED_ONE_FALSE_IN_54_AND_ZERO_OF_THEM_WERE_VISIBLE_TO_THE_DOOR",
+  "date": "2026-10-31",
+  "expected_parent_change": "THE_GIT_DIFF_READER_ANSWERS_FOR_A_TARGET_GIT_HAS_NEVER_SEEN__AND_A_DIFF_THAT_COUNTS_FILES_WITH_NO_HUNK_IS_REFUSED_BY_THE_ADAPTER_ITSELF",
+  "expected_parent_frontier_change": "THE_GIT_DIFF_READER_ANSWERS_FOR_A_TARGET_GIT_HAS_NEVER_SEEN__AND_A_DIFF_THAT_COUNTS_FILES_WITH_NO_HUNK_IS_REFUSED_BY_THE_ADAPTER_ITSELF",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. And merge all of your work.\"",
+  "falsification_condition": "FIND_A_TARGET_WHOSE_NO_INDEX_DIFF_DISAGREES_WITH_GITS_OWN__OR_SHOW_THAT_THE_MATRIX_CASE_WAS_RIGHT_TO_EXPECT_A_DIFF_FROM_AN_UNTRACKED_FILE_WITHOUT_ONE_BEING_PRODUCED",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "Capability matrix on this tree: 19 REAL / 0 FALSE / 35 REFUSED / 0 DAMAGED (was 18/1/35/0 on fabf28c), median 88 ms, p90 549 ms. git_diff is REAL with row_count 1, patch_bytes 428, observed_effect.tracked false, and a patch carrying 'new file mode' and '@@ -0,0 +1,6 @@'. The tracked-unchanged control still returns an honest empty diff (row_count 0, patch_bytes 0). Adapter suite 18/18 green, including the two new tests, one of which re-derives the added-line count with the git CLI rather than trusting the adapter.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/bound_capabilities/git_repository_operate.py",
+    "canonical/tests/test_git_repository_operate_v1.py",
+    "execution_guard/swe_capability_matrix_v1.py",
+    "execution_guard/swe_advanced_probe_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "fabf28c4ba5c947ad0341c083a2ae64db11aaaab",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "REPORTING_PASS_FOR_A_READER_THAT_RETURNED_NOTHING",
+      "TRUSTING_NUMSTAT_WITHOUT_A_HUNK_IN_THE_PATCH"
+    ],
+    "expected_parent_level_state_change": "THE_GIT_DIFF_READER_ANSWERS_FOR_A_TARGET_GIT_HAS_NEVER_SEEN__AND_A_DIFF_THAT_COUNTS_FILES_WITH_NO_HUNK_IS_REFUSED_BY_THE_ADAPTER_ITSELF",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "DELETING_THIS_RESTORES_A_READER_THAT_ANSWERS_A_DIFF_REQUEST_WITH_NOTHING_AND_PASSES",
+      "intrinsic_or_path_specific": "GENERAL__ANY_READER_WHOSE_EXPECTATION_IS_ARTIFACT_EXISTS_ALONE",
+      "surviving_causal_blocker": "A_READER_WHOSE_ANSWER_IS_EMPTY_REPORTED_PASS_BECAUSE_ITS_DECLARED_EXPECTATION_ONLY_CHECKED_THAT_AN_ARTIFACT_EXISTED__MEASURED_ONE_FALSE_IN_54_AND_ZERO_OF_THEM_WERE_VISIBLE_TO_THE_DOOR"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY__THE_EXISTING_READER_GAINED_THE_TARGET_CLASS_IT_COULD_NOT_ANSWER",
+      "existing_inherited_routes_checked": [
+        "git_repository_operate._op_diff",
+        "git ls-files --error-unmatch",
+        "git diff --no-index --numstat",
+        "git diff --no-index"
+      ],
+      "external_existing_routes_checked": "None needed: `git diff --no-index -- /dev/null <path>` is the canonical new-file patch and is the tool the request names.",
+      "surviving_gap": "CHERRY_PICK_AND_CHANGELOG_ARE_STILL_HONEST_REFUSALS__NO_ADAPTER_OP_EXISTS"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_MATRIX_PASS_COUNT",
+        "CALLING_AN_EMPTY_ARTIFACT_AN_ANSWER"
+      ],
+      "real_outcome": "Asking for the diff of a file git has never seen returns the file's real patch instead of an empty string that passed.",
+      "surviving_necessity": "A capability that returns nothing and reports success is worse than one that refuses: it spends the caller's trust."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_SHAPE_RULE_THE_EXISTING_EXIT_AND_THE_EXISTING_ORACLE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_FULL_CENSUS_AND_MATRIX_WERE_RUN_ONCE_PER_CHANGE",
+      "search_stop_decision": "STOPPED_AT_THE_ONE_ROW_THE_MATRIX_NAMED_AND_RE_MEASURED_ALL_54"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Refusing is honest but leaves the question unanswered; hand-computing the patch would duplicate git and could disagree with it.",
+      "routes_ranked": [
+        "GIT_NO_INDEX__CHOSEN",
+        "REFUSE",
+        "HAND_COMPUTED_PATCH"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_TEST_COMPARES_THE_ADAPTER_AGAINST_THE_GIT_CLI_ON_THE_SAME_REPOSITORY_AND_THE_MATRIX_ORACLE_IS_INDEPENDENT_OF_BOTH"
+    },
+    "real_outcome": "Asking for the diff of a file git has never seen returns the file's real patch instead of an empty string that passed.",
+    "required_capability": "A_READER_WHOSE_ANSWER_IS_EMPTY_MUST_NOT_REPORT_ITSELF_AS_THE_ANSWER",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The tool the request names (git) already computes the answer."
+    },
+    "routes_considered": [
+      "REFUSE_AN_UNTRACKED_TARGET__HONEST_BUT_UNANSWERABLE",
+      "COMPUTE_THE_ADDITION_PATCH_BY_HAND__A_SECOND_GIT",
+      "USE_GIT_DIFF_NO_INDEX_AGAINST_DEV_NULL__CHOSEN"
+    ],
+    "selected_route": "DECLARE_THE_ARTIFACT_A_CAPABILITY_REALLY_EMITS_SO_THE_PLANNER_CAN_CHAIN_IT_TO_THE_VERIFIER_THAT_ALREADY_REQUIRES_THAT_TYPE",
+    "selected_surviving_route": "REUSE_GITS_OWN_NO_INDEX_DIFF_FOR_AN_UNTRACKED_TARGET_AND_ADD_A_SECOND_INDEPENDENT_CHECK_THAT_COUNTED_FILES_CARRY_A_HUNK",
+    "stop_condition": "MATRIX_19_REAL_0_FALSE_0_DAMAGED__GIT_OPERATE_18_OF_18_TESTS_GREEN_INCLUDING_THE_TWO_NEW_ONES__UNIFIED_MODEL_VERIFIER_33_OF_33",
+    "why_selected_route_is_fastest_sufficient": "The truthful diff already exists as one git command the adapter can run; nothing has to be parsed, modelled or invented. The alternative -- refusing untracked targets -- is cheaper still but leaves the plainest question about a new file unanswerable, and the alternative of computing the patch by hand would be a second implementation of git."
+  },
+  "route_id": "AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "REUSE_GITS_OWN_NO_INDEX_DIFF_FOR_AN_UNTRACKED_TARGET_AND_ADD_A_SECOND_INDEPENDENT_CHECK_THAT_COUNTED_FILES_CARRY_A_HUNK",
+  "stop_condition": "MATRIX_19_REAL_0_FALSE_0_DAMAGED__GIT_OPERATE_18_OF_18_TESTS_GREEN_INCLUDING_THE_TWO_NEW_ONES__UNIFIED_MODEL_VERIFIER_33_OF_33",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__THREE_PREDICATES_IN_EXISTING_GATES_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "2ef856b40ebb6fedf23bae01e39cea7ca05b0dee",
+          "note": "Base blob: _op_diff ran `git diff HEAD -- <target>`, which is empty for an untracked file, and returned that empty patch as the answer.",
+          "path": "canonical/runtime/bound_capabilities/git_repository_operate.py"
+        }
+      ],
+      "decisive_question": "CAN_A_READER_THAT_RETURNED_NOTHING_STILL_REPORT_THAT_IT_ANSWERED",
+      "falsifier_id": "FIND_A_TARGET_WHOSE_NO_INDEX_DIFF_DISAGREES_WITH_GIT",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_READ_THE_EMPTY_PATCH_AS_A_FIXTURE_PROBLEM_AND_WOULD_HAVE_EDITED_THE_MATRIX__CORRECTED: THE MATRIX WAS RIGHT AND THE READER WAS EMPTY__SECOND_ATTEMPT_COULD_HAVE_EMITTED_THE_PATCH_WITHOUT_A_HUNK_CHECK__CORRECTED_WITH_A_SECOND_INDEPENDENT_PLUMBING_CHECK",
+      "proposal_id": "AN_EMPTY_DIFF_IS_NOT_AN_ANSWER_V1_20261031_V1"
+    }
+  },
+  "weakens_existing_guard": "No. The change ADDS a refusal: a diff whose numstat counted files but whose patch carries no '@@' hunk now fails INDEPENDENT_CHECK_DISAGREES:diff:NO_PATCH_BODY. The untracked path is read with --no-index against /dev/null, which cannot touch the index, the working tree, or HEAD, and a tracked target keeps exactly its previous codepath."
+}
