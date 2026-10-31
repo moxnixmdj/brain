@@ -72,7 +72,44 @@ COV_BENCH = ("import calc\n\n\ndef bench():\n    total = 0\n"
 # --------------------------------------------------------------------------- trees / oracles
 
 
-def build(case: str) -> pathlib.Path:
+# A GIT QUESTION NEEDS A GIT REPOSITORY UNDER THE FILE IT NAMES.
+#
+# Measured 2026-10-31 on fabf28c: "Show the diff of .../git_diff/pkg/calc.py" was served and then
+# marked FALSE.  The service was right and the fixture was empty -- the file sat in the brain
+# checkout, where it is untracked, so `git diff` truthfully printed nothing and the oracle read
+# "no hunk" as a false claim.  A case that cannot distinguish "the diff is empty" from "no diff
+# was produced" certifies nothing, so the git lane now builds its own repository with one
+# committed baseline and one uncommitted change: every git question then has an answer that only
+# a working implementation can give.
+_GIT_LANE = "git"
+
+
+def _seed_git_repository(base: pathlib.Path) -> None:
+    """Commit a baseline in ``base``, then leave one file modified.
+
+    On failure the case simply has no repository and the honest result is a refusal; the fixture
+    must never raise, because a raising fixture is scored as a machine defect.
+    """
+    env = {"PATH": "/usr/bin:/bin:/usr/local/bin",
+           "GIT_AUTHOR_NAME": "matrix", "GIT_AUTHOR_EMAIL": "matrix@example.invalid",
+           "GIT_COMMITTER_NAME": "matrix", "GIT_COMMITTER_EMAIL": "matrix@example.invalid",
+           "HOME": str(base)}
+    try:
+        for argv in (("git", "init", "-q"), ("git", "add", "-A"),
+                     ("git", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "baseline")):
+            if subprocess.run(argv, cwd=str(base), capture_output=True, text=True,
+                              timeout=60, env=env).returncode != 0:
+                return
+        # One uncommitted edit, so "show the diff" has a hunk to show and "commit the changes"
+        # has a change to commit.
+        calc = base / "pkg" / "calc.py"
+        calc.write_text(calc.read_text(encoding="utf-8") + "\n# matrix: uncommitted\n",
+                        encoding="utf-8")
+    except (OSError, subprocess.SubprocessError):
+        return
+
+
+def build(case: str, lane: str = "") -> pathlib.Path:
     base = WORK / case
     if base.exists():
         shutil.rmtree(base)
@@ -87,6 +124,8 @@ def build(case: str) -> pathlib.Path:
     for name, text in (("calc.py", COV_CALC), ("test_calc.py", COV_TEST),
                        ("bench_calc.py", COV_BENCH)):
         (cov / name).write_text(text, encoding="utf-8")
+    if lane == _GIT_LANE:
+        _seed_git_repository(base)
     return base
 
 
@@ -646,7 +685,7 @@ def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = Fals
     for spec in CASES:
         if lane and spec["lane"] != lane:
             continue
-        base = build(spec["name"])
+        base = build(spec["name"], spec["lane"])
         goal = spec["goal"](base)
         before = {p.relative_to(ROOT).as_posix(): digest(p)
                   for p in base.rglob("*") if p.is_file()}
