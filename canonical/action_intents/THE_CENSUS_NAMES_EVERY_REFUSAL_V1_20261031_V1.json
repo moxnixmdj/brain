@@ -1,0 +1,204 @@
+{
+ "action_id": "THE_CENSUS_NAMES_EVERY_REFUSAL_V1_20261031_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "THE GATE REFUSED AN ANSWER THE MACHINE HAD ALREADY WRITTEN. The symbol index emits a 105.8 MB artifact for canonical/runtime in which the callers answer is 1.47 MB, and the answer gate's 16 MB cap refused the whole run -- 16.5-18.7 s to ARTIFACT_TOO_LARGE while the same sentence about one file answered in 293 ms. The index's own cache, meanwhile, was keyed by the request's artifact path, which the door makes unique per request, so no two sentences about one tree ever shared work. Neither fix is a new primitive: the gate already projects and bounds an answer, and the index already had a sha256-verified row cache looking for a key a caller could repeat.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "route_class": "REUSE",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "execution_guard/swe_advanced_probe_v1.py",
+   "execution_guard/swe_git_fixture_v1.py",
+   "execution_guard/swe_capability_matrix_v1.py",
+   "canonical/tests/test_the_census_names_every_refusal_v1.py"
+  ]
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CENSUS_REPORTED_THE_FAILURE_FAMILY_AND_NEVER_THE_CAUSE_THE_DOOR_ALREADY_RETURNS_AND_IT_ASKED_SEVEN_HISTORY_SENTENCES_OF_DIRECTORIES_WITH_NO_HISTORY__MEASURED_2026_10_31_TEN_DIFFERENT_FAILURES_READ_AS_LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE_AND_THREE_HISTORY_SENTENCES_READ_AS_NAMED_TEST_NOT_IN_GIT_HISTORY_WHICH_IS_A_FACT_ABOUT_THE_FIXTURE",
+ "canonical_base_commit": "a35ff463fcc21a47bb487161d8264fa572b3914b",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_CENSUS_REPORTED_THE_FAILURE_FAMILY_AND_NEVER_THE_CAUSE_THE_DOOR_ALREADY_RETURNS_AND_IT_ASKED_SEVEN_HISTORY_SENTENCES_OF_DIRECTORIES_WITH_NO_HISTORY__MEASURED_2026_10_31_TEN_DIFFERENT_FAILURES_READ_AS_LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE_AND_THREE_HISTORY_SENTENCES_READ_AS_NAMED_TEST_NOT_IN_GIT_HISTORY_WHICH_IS_A_FACT_ABOUT_THE_FIXTURE",
+ "date": "2026-10-31",
+ "expected_parent_change": "THE_CENSUS_RECORDS_reason_AND_route_admission_rule_FOR_EVERY_ROW_AND_HISTOGRAMS_BY_NAMED_CAUSE_AND_THE_GIT_FIXTURE_HAS_ONE_OWNER_SWEEP_GIT_FIXTURE_V1_THAT_THE_MATRIX_ALREADY_USED_AND_THE_CENSUS_NOW_SEEDS_FOR_ANY_SENTENCE_THAT_TALKS_ABOUT_HISTORY",
+ "expected_parent_frontier_change": "THE_CENSUS_RECORDS_reason_AND_route_admission_rule_FOR_EVERY_ROW_AND_HISTOGRAMS_BY_NAMED_CAUSE_AND_THE_GIT_FIXTURE_HAS_ONE_OWNER_SWEEP_GIT_FIXTURE_V1_THAT_THE_MATRIX_ALREADY_USED_AND_THE_CENSUS_NOW_SEEDS_FOR_ANY_SENTENCE_THAT_TALKS_ABOUT_HISTORY",
+ "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
+ "falsification_condition": "BLANK_reason_IN_THE_CENSUS_AND_SEE_THE_FAMILY_HISTOGRAM_RETURN__POINT_THE_SEED_AT_A_MISSING_DIRECTORY_AND_SEE_A_REFUSAL_NOT_A_CRASH__THE_NEW_TESTS_PIN_BOTH",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_THE_45_REFUSALS_CAN_NOW_BE_WORKED_IN_ORDER_OF_CAUSE_INSTEAD_OF_GUESSED_AT",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.5,
+  "wall_clock_cost_ub": 1
+ },
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "execution_guard/swe_capability_matrix_v1.py",
+  "execution_guard/swe_advanced_probe_v1.py",
+  "execution_guard/swe_git_fixture_v1.py",
+  "canonical/tests/test_the_census_names_every_refusal_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "a35ff463fcc21a47bb487161d8264fa572b3914b",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "REPORTING_FAILURE_CLASS_WITHOUT_FAILURE_CAUSE",
+   "A_SECOND_PRIVATE_GIT_FIXTURE_IN_A_SECOND_INSTRUMENT",
+   "A_CURATED_LIST_OF_WHICH_CASES_GET_A_REPOSITORY"
+  ],
+  "expected_parent_level_state_change": "THE_CENSUS_RECORDS_reason_AND_route_admission_rule_FOR_EVERY_ROW_AND_HISTOGRAMS_BY_NAMED_CAUSE_AND_THE_GIT_FIXTURE_HAS_ONE_OWNER_SWEEP_GIT_FIXTURE_V1_THAT_THE_MATRIX_ALREADY_USED_AND_THE_CENSUS_NOW_SEEDS_FOR_ANY_SENTENCE_THAT_TALKS_ABOUT_HISTORY",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "REVERTING_EITHER_HALF_RETURNS_A_CORRECT_ANSWER_TO_A_REFUSAL_OR_THE_TREE_TO_A_COLD_REPARSE",
+   "intrinsic_or_path_specific": "GENERAL__THE_GATE_RULE_IS_ABOUT_ANY_OVER_CAP_JSON_OBJECT_AND_THE_CACHE_RULE_IS_ABOUT_ANY_TREE_A_SIBLING_DESCRIBES",
+   "surviving_causal_blocker": "THE_GATE_REFUSED_AN_ANSWER_IT_HAD_ALREADY_WRITTEN__python_source_symbol_index_WRITES_105_8_MB_FOR_canonical_runtime_WHILE_THE_CALLERS_ANSWER_IS_1_47_MB_AND_IS_THE_FIRST_TOP_LEVEL_MEMBER__MAX_ARTIFACT_BYTES_16_MB_REFUSED_THE_WHOLE_RUN_WITH_ARTIFACT_TOO_LARGE_SO_FIND_THE_CALLERS_OF_binding_view_IN_canonical_runtime_COST_16_5_TO_18_7_SECONDS_AND_FAILED_WHILE_THE_SAME_SENTENCE_ABOUT_ONE_FILE_ANSWERED_IN_293_MS__AND_THE_INDEX_CACHE_WAS_KEYED_BY_THE_REQUEST_ARTIFACT_PATH_BECAUSE_THE_DOOR_NAMES_EACH_ARTIFACT_AFTER_THE_REQUEST_SO_NO_TWO_SENTENCES_EVER_REUSED_ONE_TREE_MEASURED_2026_10_31"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_REGISTRY_ROW__THE_FIX_IS_A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_ARGUMENT",
+   "existing_inherited_routes_checked": [
+    "answer_shape_v1",
+    "python_source_symbol_index",
+    "validate_cached_index",
+    "hardcore_swe_surface_probe_20261030.py",
+    "swe_capability_matrix_v1"
+   ],
+   "external_existing_routes_checked": "None needed: both mechanisms already existed in the tree.",
+   "surviving_gap": "SERVED_IS_STILL_4_OF_49__THIS_CHANGE_MAKES_THE_REMAINING_45_ACTIONABLE_AND_MOVES_NONE_OF_THEM"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_MATRIX_REAL_COUNT",
+    "TURNING_REFUSALS_INTO_PASSES"
+   ],
+   "real_outcome": "Every refused sentence reports a named cause -- INSUFFICIENT_COMMITS_FOR_REGRESSION_ANALYSIS, BINDING_REFUSED:message, R3_WEAK_EVIDENCE -- instead of one family string, and a sentence about history is measured against a tree that has history.",
+   "surviving_necessity": "The machine could only answer 'who calls X' for a single file; for a tree it computed the answer and discarded it."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "REUSE_THE_EXISTING_PROJECTION_THE_EXISTING_SHA256_ROW_CACHE_AND_THE_EXISTING_FLOOR_IDIOM"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "ONE_A_B_MATRIX_RUN_WITH_THE_CHANGE_STASHED_TO_SEPARATE_THIS_CHANGE_FROM_MAIN_MOVING",
+   "search_stop_decision": "STOPPED_AFTER_BOTH_DEFECTS_WERE_PROVED_BY_A_TEST__THE_CAUSES_ARE_THE_INPUT_TO_THE_NEXT_CHANGE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": false,
+   "losing_routes_reason": "The door already returns the cause and the matrix already builds the tree; a verbose flag would re-run every sentence, a copy would drift, and leaving it keeps a false claim in the inventory.",
+   "routes_ranked": [
+    "READ_THE_reason_AND_THE_ROUTE_RULE_AND_SEED_THE_FIXTURE_FROM_ITS_ONE_OWNER__SELECTED",
+    "ADD_A_NEW_VERBOSE_FLAG_THAT_RE_RUNS_EVERY_SENTENCE__SLOWER_AND_A_SECOND_OWNER",
+    "COPY_THE_GIT_FIXTURE_INTO_THE_CENSUS__TWO_TREES_TO_KEEP_IN_SYNC",
+    "LEAVE_THE_FAMILY_HISTOGRAM__THE_INVENTORY_KEEPS_CALLING_TEN_FAILURES_OPAQUE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_FIXTURE_IS_VERIFIED_BY_THE_GIT_BINARY_ITSELF_rev_list_count_1_diff_stat_non_empty_AND_THE_CAUSES_BY_THE_TESTS"
+  },
+  "real_outcome": "Find the callers of binding_view in canonical/runtime delivers ['_execute', '_prefer_the_writing_repair', 'admit', 'build_plan', 'compile_against_live_registry'] instead of refusing for size.",
+  "required_capability": "A_GATE_THAT_READS_THE_ANSWER_IT_ASKED_FOR_AND_A_CACHE_KEYED_BY_WHAT_IT_DESCRIBES",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Both defects are in this repository and are measured by the instruments themselves."
+  },
+  "routes_considered": [
+   "RAISE_THE_CAP__PAYS_FOR_THE_WHOLE_PARSE",
+   "NEW_SUMMARY_FORMAT__TWO_THINGS_TO_KEEP_IN_SYNC",
+   "BOUNDED_SECTION_READ_AND_TREE_KEYED_CACHE__CHOSEN"
+  ],
+  "selected_route": "READ_THE_CAUSE_ALREADY_RETURNED_AND_SEED_THE_FIXTURE_FROM_ITS_ONE_OWNER",
+  "selected_surviving_route": "READ_THE_CAUSE_ALREADY_RETURNED_AND_SEED_THE_FIXTURE_FROM_ITS_ONE_OWNER",
+  "stop_condition": "CAUSES_NOW_NAMED_ACROSS_ALL_45_REFUSALS_R3_WEAK_EVIDENCE_5_R11_2_INPUT_FORMAT_MISMATCH_2_R10_1_INSUFFICIENT_COMMITS_3_NO_DECISIVE_TYPED_PLAN_3_CHOREOGRAPHY_2_BINDING_REFUSED_message_1_HELPER_NAME_SURVIVED_3_NO_PYTHON_SOURCE_FILES_1_NO_MUTANTS_GENERATED_1__SERVED_UNCHANGED_AT_4_OF_49_AND_THE_CHANGE_CLAIMS_NOTHING_ELSE__MATRIX_21_REAL_0_FALSE_0_DAMAGED_BEFORE_AND_AFTER__SEVEN_NEW_TESTS_PASS",
+  "why_selected_route_is_fastest_sufficient": "It adds no work to any request: one dict lookup per sentence and one git init per history sentence, in an instrument that already runs in six seconds. A verbose re-run would double the census; a second fixture copy would need its own tests and would drift from the matrix that already proved it."
+ },
+ "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "READ_THE_SECTION_THE_ANSWER_IS_IN_AND_KEY_THE_INDEX_CACHE_BY_THE_TREE",
+ "stop_condition": "CAUSES_NOW_NAMED_ACROSS_ALL_45_REFUSALS_R3_WEAK_EVIDENCE_5_R11_2_INPUT_FORMAT_MISMATCH_2_R10_1_INSUFFICIENT_COMMITS_3_NO_DECISIVE_TYPED_PLAN_3_CHOREOGRAPHY_2_BINDING_REFUSED_message_1_HELPER_NAME_SURVIVED_3_NO_PYTHON_SOURCE_FILES_1_NO_MUTANTS_GENERATED_1__SERVED_UNCHANGED_AT_4_OF_49_AND_THE_CHANGE_CLAIMS_NOTHING_ELSE__MATRIX_21_REAL_0_FALSE_0_DAMAGED_BEFORE_AND_AFTER__SEVEN_NEW_TESTS_PASS",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__A_BOUNDED_READER_A_CACHE_LOOKUP_AND_A_FLOOR_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "DOES_EVERY_REFUSAL_IN_THE_CENSUS_CARRY_THE_CAUSE_THE_DOOR_RETURNED_RATHER_THAN_ONLY_ITS_FAMILY",
+   "falsifier_id": "BLANK_THE_REASON_AND_SEE_THE_FAMILY_HISTOGRAM_RETURN",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
+   "proposal_id": "THE_CENSUS_NAMES_EVERY_REFUSAL_V1_20261031_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. The census gains information it already had; the matrix keeps its fixture byte-for-byte and its 21 REAL / 0 FALSE / 0 DAMAGED result; a missing directory still refuses instead of raising.",
+ "action_intent_path": null,
+ "real_outcome": "Every refused sentence reports a named cause -- INSUFFICIENT_COMMITS_FOR_REGRESSION_ANALYSIS, BINDING_REFUSED:message, R3_WEAK_EVIDENCE -- instead of one family string, and a sentence about history is measured against a tree that has history.",
+ "required_capability": "AN_INSTRUMENT_THAT_REPORTS_THE_CAUSE_IT_WAS_GIVEN_AND_A_FIXTURE_THAT_CAN_ANSWER_THE_QUESTION"
+}

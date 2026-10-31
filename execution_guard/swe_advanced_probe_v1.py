@@ -34,6 +34,7 @@ import collections
 import hashlib
 import json
 import pathlib
+import re
 import shutil
 import sys
 import time
@@ -41,6 +42,17 @@ import time
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
+# The fixture's git tree has one owner (execution_guard/swe_git_fixture_v1.py) because the
+# capability matrix already built it: a git question asked of a plain directory measures the
+# absence of a repository, not the machine.
+_HERE = str(pathlib.Path(__file__).resolve().parent)
+if _HERE not in sys.path:
+    sys.path.insert(0, _HERE)
+from swe_git_fixture_v1 import seed_repository  # noqa: E402
+
+# A sentence that talks about history is asked of a tree that has some.  The predicate is about
+# the sentence (HEAD~, commit, branch, bisect, git, changelog), never a curated case list, so a
+# new history sentence is measured correctly the day it is written.
 
 from canonical.runtime import live_brain_route_admission_v1 as door  # noqa: E402
 
@@ -138,6 +150,11 @@ def _build(case: str) -> pathlib.Path:
     return base
 
 
+def _asks_about_history(goal: str) -> bool:
+    return bool(re.search(r"\bgit\b|HEAD[~^]|\bcommit(s|ted)?\b|\bbranch\b|\bbisect\b|\bchangelog\b",
+                          str(goal or ""), re.I))
+
+
 def _paths(base: pathlib.Path) -> dict[str, str]:
     out = {rel: base.joinpath(rel).relative_to(ROOT).as_posix() for rel in FILES}
     out["pkg"] = (base / "pkg").relative_to(ROOT).as_posix()
@@ -154,6 +171,8 @@ def census(axis_filter: str | None = None) -> list[dict]:
             continue
         base = _build("%02d_%s" % (i, axis))
         goal = template.format(**_paths(base))
+        if _asks_about_history(goal):
+            seed_repository(base)
         before = {p.relative_to(ROOT).as_posix(): _digest(p) for p in base.rglob("*") if p.is_file()}
         started = time.perf_counter()
         try:
@@ -161,17 +180,57 @@ def census(axis_filter: str | None = None) -> list[dict]:
             status, passed = str(result.get("status")), bool(result.get("pass"))
             selected = str(result.get("compiled_capability_id") or "")
             refusal = str(result.get("failure_class") or "")
+            # THE DOOR ALREADY NAMES THE CAUSE.  Measured 2026-10-31: the controller returns
+            # ``reason`` ("RuntimeError:HELPER_NAME_SURVIVED_IN:...", "BINDING_REFUSED:message:...")
+            # and this census kept only the class, so ten different failures read as one string and
+            # the inventory called them opaque.  They were not opaque; they were unread.
+            reason = str(result.get("reason") or result.get("failure_reason") or "")
+            if not reason:
+                # A route admission refusal carries its rule, not a reason: R3_WEAK_EVIDENCE,
+                # R11_STATED_PAYLOAD_SLOT_MISSING, INPUT_FORMAT_MISMATCH...  That rule IS the
+                # cause, and it is the difference between "the sentence is thin evidence" and
+                # "there is no slot for what you asked to be produced".
+                admission = result.get("route_admission") or {}
+                reason = str(admission.get("rule") or admission.get("typed_binding_reason") or "")
         except BaseException as exc:  # noqa: BLE001 - a census must never stop itself
             status, passed, selected, refusal = "RAISED:" + type(exc).__name__, False, "", str(exc)[:120]
+            reason = "RAISED:" + type(exc).__name__
         elapsed = round((time.perf_counter() - started) * 1000)
         after = {p.relative_to(ROOT).as_posix(): _digest(p) for p in base.rglob("*") if p.is_file()}
         changed = sorted(p for p, d in before.items() if p in after and after[p] != d)
         allowed = tuple("/" + a for a in allow)
-        unauthorised = [p for p in changed if not any(p.endswith(a) for a in allowed)]
+        # A git operation writes its own metadata by definition; .git/ is the tree the sentence
+        # asked for, not a source edit the sentence did not name.
+        unauthorised = [p for p in changed
+                        if "/.git/" not in p and not any(p.endswith(a) for a in allowed)]
         rows.append(dict(n=i, axis=axis, goal=goal, status=status, served=passed,
                          selected=selected, ms=elapsed, changed=changed,
-                         unauthorised=unauthorised, refusal=refusal))
+                         unauthorised=unauthorised, refusal=refusal, reason=reason))
     return rows
+
+
+def _cause(row: dict) -> str:
+    """The named cause of a refusal, from the field the door already fills.
+
+    ``failure_class`` is the family ("LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"); the
+    cause is in ``reason`` ("RuntimeError:INSUFFICIENT_COMMITS_FOR_REGRESSION_ANALYSIS",
+    "BINDING_REFUSED:message:value_not_parseable").  A census that keeps only the family cannot
+    be acted on, and a harness that cannot separate causes certifies nothing.
+    """
+    reason = str(row.get("reason") or "").strip()
+    if reason:
+        reason = reason.splitlines()[0].strip()
+        parts = reason.split(":")
+        if parts[0] in ("RuntimeError", "ValueError", "KeyError", "TypeError", "OSError",
+                        "FileNotFoundError", "SyntaxError", "Exception"):
+            reason = ":".join(parts[1:])
+            parts = reason.split(":")
+        if parts[0] in ("BINDING_REFUSED", "RAISED") and len(parts) > 1:
+            # Keeps the slot: "BINDING_REFUSED:message" says which input the sentence did not
+            # state, which is the whole actionable content of that refusal.
+            return (parts[0] + ":" + parts[1]).strip()[:80]
+        return reason.strip()[:80] or "-"
+    return str(row.get("status") or "-")
 
 
 def summary(path: str, rows: list[dict], served: int, floor: int | None,
@@ -197,9 +256,7 @@ def summary(path: str, rows: list[dict], served: int, floor: int | None,
         out.append("| %s | %d | %d |" % (axis, ok, n))
     out.append("")
     refused = [r for r in rows if not r["served"]]
-    counts = collections.Counter(
-        (str(r.get("refusal") or "").split(":")[0] or str(r.get("status") or "UNNAMED"))
-        for r in refused)
+    counts = collections.Counter(_cause(r) for r in refused)
     out.append("Refused, by cause (%d):" % len(refused))
     out.append("")
     out.append("| count | cause |")
@@ -210,13 +267,15 @@ def summary(path: str, rows: list[dict], served: int, floor: int | None,
     if refused:
         out.append("<details><summary>every refused sentence</summary>")
         out.append("")
-        out.append("| # | axis | sentence | status |")
-        out.append("| ---: | --- | --- | --- |")
+        out.append("| # | axis | sentence | chosen row | status | cause |")
+        out.append("| ---: | --- | --- | --- | --- | --- |")
         for r in refused:
             cell = r["goal"].replace("|", "/")
-            out.append("| %d | %s | %s | `%s` |"
-                       % (r["n"], r["axis"], cell[:160],
-                          str(r.get("status") or "-").replace("|", "/")[:80]))
+            out.append("| %d | %s | %s | `%s` | `%s` | `%s` |"
+                       % (r["n"], r["axis"], cell[:150],
+                          str(r.get("selected") or "-").replace("|", "/")[:60],
+                          str(r.get("status") or "-").replace("|", "/")[:60],
+                          _cause(r).replace("|", "/")[:90]))
         out.append("")
         out.append("</details>")
         out.append("")
@@ -245,10 +304,11 @@ def main(argv: list[str] | None = None) -> int:
 
     rows = census(ns.axis)
     for row in rows:
-        print("%2d %-9s %-8s %6dms %-46s %-50s %s"
+        print("%2d %-9s %-8s %6dms %-44s %-44s %-40s %s"
               % (row["n"], row["axis"], "SERVED" if row["served"] else "refused", row["ms"],
-                 (row["selected"] or "-")[:46], (row["status"] or "-")[:50],
-                 ",".join(p.split("/")[-1] for p in row["unauthorised"])[:40]))
+                 (row["selected"] or "-")[:44], (row["status"] or "-")[:44],
+                 _cause(row)[:40],
+                 ",".join(p.split("/")[-1] for p in row["unauthorised"])[:30]))
     served = sum(1 for r in rows if r["served"])
     print("\nREQUESTS %d  SERVED %d  REFUSED %d" % (len(rows), served, len(rows) - served))
     by_axis: dict[str, list[int]] = collections.OrderedDict()
