@@ -153,3 +153,13 @@ Final current-main validation after that correction:
   `cc1690d071e7f83968b76f5c8fd8bb9586d7f59731b8180b2351a426c99ccd4a`.
 - The broader 45-module residual list is still the earlier scoped measurement;
   it has not been silently relabeled as a final whole-repository run.
+
+Artifact-ordering correction: the measurements immediately above were taken
+before this final report text was appended. Because the model indexes this
+report, that append made the stored artifact stale: remote run `41225043533`
+and a local reproduction both measured **32/33**, failing only byte-identical
+recompilation. No verifier was changed. Regenerate the model after all final
+report/intent text, then verify and record exact-head CI evidence on the PR;
+do not write the resulting digest back into an indexed report and invalidate
+it again. Historical digests above identify their scoped measurements, not a
+claim about every later document revision.
