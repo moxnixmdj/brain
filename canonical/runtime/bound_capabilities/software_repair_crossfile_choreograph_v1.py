@@ -351,9 +351,12 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
     mod_names: list[str] = []
     for p in prod_files:
         try:
-            ast.parse(p.read_bytes())
+            raw_src = p.read_bytes()
+            ast.parse(raw_src)
         except (SyntaxError, ValueError, OSError) as exc:
             return False, 0, f"SYNTAX_ERROR:{p.name}:{exc}"
+        if b"parse_args(" in raw_src and b"__main__" not in raw_src:
+            continue
         rel = p.relative_to(proj).with_suffix("")
         parts = list(rel.parts)
         if parts[-1] == "__init__":
@@ -362,11 +365,12 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
             mod_names.append(".".join(parts))
 
     checker = (
-        "import importlib, json, pathlib, sys, unittest\n"
+        "import importlib, importlib.util, inspect, json, pathlib, sys, traceback, unittest\n"
         "proj = pathlib.Path(sys.argv[1]).resolve()\n"
         "tdir = pathlib.Path(sys.argv[2]).resolve()\n"
         "repeats = int(sys.argv[3])\n"
         "mods = json.loads(sys.argv[4])\n"
+        "sys.argv[:] = [sys.argv[0]]\n"
         "sys.path.insert(0, str(proj))\n"
         "for m in mods:\n"
         "    importlib.import_module(m)\n"
@@ -389,6 +393,20 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         "        if res.failures or res.errors:\n"
         "            print(json.dumps({'ok': False, 'ran': res.testsRun, 'err': str((res.failures + res.errors)[0][1])[-240:]}))\n"
         "            raise SystemExit(1)\n"
+        "        for idx, tp in enumerate(sorted(tdir.rglob('*.py'))):\n"
+        "            if '__pycache__' in tp.parts or not (tp.name.startswith('test_') or tp.name.endswith('_test.py')):\n"
+        "                continue\n"
+        "            spec = importlib.util.spec_from_file_location(f'_plain_t_{idx}_{tp.stem}', tp)\n"
+        "            tm = importlib.util.module_from_spec(spec)\n"
+        "            spec.loader.exec_module(tm)\n"
+        "            for fn_name, fn_obj in list(vars(tm).items()):\n"
+        "                if fn_name.startswith('test_') and inspect.isfunction(fn_obj):\n"
+        "                    try:\n"
+        "                        fn_obj()\n"
+        "                        total_ran += 1\n"
+        "                    except BaseException:\n"
+        "                        print(json.dumps({'ok': False, 'ran': total_ran, 'err': traceback.format_exc()[-240:]}))\n"
+        "                        raise SystemExit(1)\n"
         "print(json.dumps({'ok': True, 'ran': total_ran}))\n"
     )
     env = dict(os.environ)
@@ -1444,7 +1462,11 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
     if edited is None:
         base_ok, _ran, _err = _verify_project(proj, test_dir)
         if not base_ok:
-            edited = _try_test_guided_repair(proj, test_dir, focus) if ((proj / "tests").is_dir() or (src / "tests").is_dir()) else None
+            _has_tests = test_dir.is_dir() and any(
+                "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
+                for p in test_dir.rglob("*.py")
+            )
+            edited = _try_test_guided_repair(proj, test_dir, focus) if _has_tests else None
             if edited is not None:
                 mode_applied = "test_guided_ast_repair"
             else:
