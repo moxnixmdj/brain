@@ -30485,7 +30485,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b71ed1dc039b09082e9051b6d0c5b4be5b160ca07ffc97a37451d264a300061a"
+  "value": "eed44d79adaa5817f54363ba360b7395f92d52185fcb31401350277615973d85"
  },
  "engines": [
   {
@@ -204185,7 +204185,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d4d47cca8ad7bf6d6c1d0b1ce6ab3ac574c2defdee7f94a9734e083036956968",
+   "sha256": "d7c8f600bf6dfec35fbc5a90bc746d178859460cc235a01fa858d8b91010a9c6",
    "status": "",
    "terms": {
     "20261031": 1,
