@@ -34,7 +34,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Two effects were asked for, one was delivered, and the single-capability route certified the sentence. Measured on b68f7c7: 'Fix the bug in <D>/app and add a regression test that would have caught it' -> repair.apply.verified -> pass=True, app fixed, suite green, no test file. The composed branch already demoted itself on a False verifier verdict; this route did not. And the answer gate greps the whole row, so a test-GUIDED repair row 'supplies' test authoring by mentioning it -- measured: adding the rule alone changed nothing for that sentence.",
-  "canonical_base_commit": "52fdbe2f17b60143f764ce661935c33bdbb2b310",
+  "canonical_base_commit": "9bebb01e83291b8ecb40c2febbd0293bdcc7886e",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -50,7 +50,7 @@
   "incremental_spend_usd": 0,
   "intent": "Withhold the claim, keep the work: an effect the run did not serve is named at the exit, never certified.",
   "load_bearing_primary": {
-    "canonical_base_commit": "52fdbe2f17b60143f764ce661935c33bdbb2b310",
+    "canonical_base_commit": "9bebb01e83291b8ecb40c2febbd0293bdcc7886e",
     "constructive_gap_for_open_obligation_ids": [
       "AUTOMATIONBENCH_GE_40",
       "CHARTOGRAPHY_TOOLS_GE_89",
@@ -84,7 +84,7 @@
     "canonical/tests/test_a_pass_that_did_not_serve_the_sentence_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "52fdbe2f17b60143f764ce661935c33bdbb2b310",
+    "canonical_base_commit": "9bebb01e83291b8ecb40c2febbd0293bdcc7886e",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "EDITING_THE_SUBSTRATE_GATE_TO_HONOUR_OPTIONAL_AND_FALLBACK_WHICH_IS_A_PROTECTED_GUARD_PATH_AND_WOULD_HAVE_REQUIRED_ASSERTING_A_USER_GOVERNANCE_AUTHORIZATION_THAT_WAS_DELEGATED_RATHER_THAN_GRANTED",

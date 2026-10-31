@@ -30474,9 +30474,9 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 213,
+  "knowledge_documents": 214,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6540,
+  "research_index_records": 6541,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30485,7 +30485,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e7c38a28246183da4b3b893ed0e97108ec881c78e22cef5e1093b48b3c0756be"
+  "value": "f7eb0d0a8e441c7544db1842d496c67b83b7c59a0fb391de2a13fbbd264a66cd"
  },
  "engines": [
   {
@@ -44579,6 +44579,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9267,
+   "headings": [
+    "Hardcore software-engineering problem inventory — V17",
+    "§0 The answer in one paragraph",
+    "§1 Measurements on `8679d55`",
+    "§2 Every one of the 49 requests, classified",
+    "§3 The experiment that inverted the order",
+    "§4 Landed this session",
+    "§5 Still open, with the measurement that sizes it",
+    "§6 The ladder"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V17.md",
+   "sha256": "12a77af9d1eab700e9af6a7bf2155304f54b1f83c0f7b96a63f7c3d73df3fb94",
+   "summary": "Measured 2026-10-31 on `8679d55` (branch `arena/d64f2e25-brain`). Supersedes V13–V16. V16 was right about the mechanism and **wrong about the order**, and this document measures why. Document-format, image, chart and office rows are excluded throughout.",
+   "terms": {
+    "16": 3,
+    "22": 9,
+    "39": 3,
+    "47": 3,
+    "49": 7,
+    "adding": 4,
+    "all": 5,
+    "answer": 6,
+    "answered": 3,
+    "answers": 4,
+    "census": 3,
+    "claims": 3,
+    "containment": 4,
+    "declared": 3,
+    "definition_count": 5,
+    "diff": 3,
+    "door": 4,
+    "effect": 10,
+    "empty": 3,
+    "every": 5,
+    "exists": 4,
+    "false": 4,
+    "file": 4,
+    "five": 4,
+    "function": 6,
+    "gate": 5,
+    "machine": 4,
+    "magnet": 4,
+    "magnets": 6,
+    "ms": 4,
+    "must": 4,
+    "no": 8,
+    "not": 13,
+    "one": 9,
+    "only": 5,
+    "pass": 7,
+    "reached": 4,
+    "reason": 4,
+    "refusals": 7,
+    "refused": 7,
+    "requests": 11,
+    "row": 13,
+    "rows": 10,
+    "sentence": 4,
+    "served": 14,
+    "so": 5,
+    "stated": 6,
+    "wrong": 7
+   },
+   "title": "Hardcore software-engineering problem inventory — V17",
+   "title_terms": [
+    "hardcore",
+    "inventory",
+    "problem",
+    "software-engineering",
+    "v17"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23697,
    "headings": [
     "What is actually missing — the complete problem list for a hardcore software engineer",
@@ -58427,10 +58503,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1004,
+  "included_source_count": 1005,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9e664dec6de35357af04c7e179923f9505078561041cf4a36a0f50ae38951f10"
+  "source_tree_digest": "02e042240c1c9a373d031ece7f90a3fc447ea1f8a0d92f51863dc6d73c6591c9"
  },
  "research_index": [
   {
@@ -202249,7 +202325,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_PASS_THAT_DID_NOT_SERVE_THE_SENTENCE_IS_NOT_A_PASS_V1_20261031_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "35ea62368adc3c3d17dbd8fcbdd952cada3d772329c05f77d4995d132364085f",
+   "sha256": "21d4abe7889a16edbfc1cd461d40137c7eb35cd74f12aa214c52c6969ee40b85",
    "status": "",
    "terms": {
     "18": 2,
@@ -204152,6 +204228,31 @@
     "tree": 2,
     "v1": 2,
     "verb": 3
+   }
+  },
+  {
+   "action_id": "A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d7c8f600bf6dfec35fbc5a90bc746d178859460cc235a01fa858d8b91010a9c6",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "a_refusal_that_prints_its_reason_and_raises_an_empty_exception_is_indistinguishable_from_a_crash__measured_one_blind_capability_exited_process_in_49_and_the_reason_was_sitting_on_stdout": 1,
+    "a_structured_refusal_must_carry_its_reason_v1_20261031_v1": 1,
+    "an_adapter_refusal_reaches_the_caller_by_name__edit_plan_input_invalid_instead_of_a_bare_exit_code": 1,
+    "carry": 1,
+    "carry_the_already_written_payload_on_the_exception_in_the_shape_the_door_already_parses_and_keep_the_stdout_write_for_the_cli_contract": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "reason": 1,
+    "refusal": 1,
+    "structured": 1,
+    "v1": 2
    }
   },
   {
@@ -218326,7 +218427,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py",
-   "sha256": "745e11d30956d724ec5e10da9c608e6e5010f0783fcc2b291514c421d99ce033",
+   "sha256": "6b1877a31e585965b2abfb934c2d3ff654b0037ef31fb9e18c7ac7a000d21f6c",
    "summary": "python.source.crossfile_edit.choreograph.v1 — plan cross-file edits.",
    "symbol_count": 12,
    "symbols": [
@@ -219180,7 +219281,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/python_symbol_resolve.py",
-   "sha256": "85f790379aa253df5674aa161cd01641f108aa5aee3ae000fd9d361ec31e7c12",
+   "sha256": "602be41ec684b3be0edb37d6b5d6c1d8c8705d43ccc661e6a6cd3bbd918fb1fb",
    "summary": "python.source.symbols.resolve.v1 — resolve a Python name to its definition.",
    "symbol_count": 18,
    "symbols": [
