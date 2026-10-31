@@ -128,3 +128,9 @@ Official artifact regeneration and model/goal-compiler verification are run
 with repository commands after this indexed report is finalized. Their final
 results and GitHub run links belong in the PR so the report does not recursively
 invalidate its own model digest.
+
+Integration: main advanced to `6c6c5df48cd96802ace3e9e5266c9493cca92bfc`
+(PR6489 undeclared-effect refusal guard). Retain that runtime and its negative
+controls unchanged; regenerate the combined model through the official compiler.
+The earlier baseline comparison above remains bound to its explicitly stated
+`2e9b6427` tree, not relabeled as a measurement of the newer base.
