@@ -145,7 +145,7 @@ def test_binding_does_not_mutate_registry_or_request(task):
 def test_reinspection_rejects_tampered_real_report(mutation, task):
     path, request = task
     result = door.solve(request)
-    assert result["pass"] is True
+    assert result["pass"] is True, result
     report_path = path / "report.json"
     report = json.loads(report_path.read_text())
     spec = {"checks": report["requested_contract_checks"],

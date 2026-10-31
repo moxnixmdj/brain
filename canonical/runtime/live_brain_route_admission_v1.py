@@ -1228,6 +1228,26 @@ _TOOL_NOUNS = ("loop", "search", "tool", "engine", "report", "step", "routine",
                "capability", "pass")
 
 
+def _intent_verb_matches(pattern, text: str):
+    """Keep operation words, not a symbol value occupying a declared name role.
+
+    Reuse the front compiler's qualname vocabulary and role anchoring. In
+    "the function add in X", `add` names the subject; it does not demand an
+    edit of X. A separate imperative ("then repair X") remains an obligation.
+    This is a scoped role distinction, not a general natural-language parser.
+    """
+    roles = front._role_phrases("qualname") + front._role_phrases("function")
+    for match in pattern.finditer(text):
+        named = front._role_anchored(text, match.group(0), roles, index=match.start())
+        # Keep the supported name boundary narrow: "function add in X" names
+        # add, whereas "make the function add a parameter" still requests an
+        # operation. An unsupported/ambiguous continuation keeps the obligation.
+        boundary = re.match(r"(?:\s+(?:in|from|of|within|at)\b|\s*[.,;:?!)]|\s*$)",
+                            text[match.end():], re.IGNORECASE)
+        if not (named and boundary):
+            yield match
+
+
 def _promised_source_files(goal: str) -> list[str]:
     """Source files the goal asked to have CHANGED, not merely read.
 
@@ -1246,7 +1266,7 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -1317,7 +1337,7 @@ def _promised_source_roots(goal: str) -> list[str]:
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -1565,7 +1585,7 @@ def _destructive_targets(goal: str) -> set[str]:
     text = str(goal or "")
     paths = _stated_paths(goal)
     out: set[str] = set()
-    for m in _DESTRUCTIVE_VERB_RE.finditer(text):
+    for m in _intent_verb_matches(_DESTRUCTIVE_VERB_RE, text):
         verb = m.group(0).lower()
         for raw in paths:
             at = text.find(raw, m.end())
@@ -1688,7 +1708,7 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
             errors.append("NAMED_SOURCE_UNPARSEABLE:" + raw)
     if result.get("pass") is True:
         promised_file = bool(artifacts) or (
-            bool(_CHANGE_VERB_RE.search(str(goal or ""))) and bool(after.get("stated")))
+            bool(next(_intent_verb_matches(_CHANGE_VERB_RE, str(goal or "")), None)) and bool(after.get("stated")))
         if promised_file:
             present = any((ROOT / a).is_file() for a in (artifacts or []))
             from canonical.runtime import execute_v1 as _kernel
@@ -2182,7 +2202,11 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 context = None
             if context is not None:
                 selected = str(context[2].get("selected_capability") or "")
-                if selected and not _typed_plan._effect_consistent(prose, selected):
+                # An explicit family has its own decisive resolver and binding
+                # rules. Use it before ANY lexical dispatch, even when the raw
+                # id looks compatible: its output may still bind onto source.
+                if selected and (_typed_plan._family_terms(prose) is not None
+                                 or not _typed_plan._effect_consistent(prose, selected)):
                     corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
                     if corrected is None:
                         # Structured obligations are unbound regardless of which

@@ -29348,7 +29348,7 @@
   "bound_capabilities": 133,
   "capabilities": 427,
   "engines": 26,
-  "knowledge_documents": 180,
+  "knowledge_documents": 181,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6513,
   "routing_tokens": 2172,
@@ -29359,7 +29359,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "00b4fae878625b993c697cfc2a35abd4796bc61d2e060de039764c0f9f05b3a5"
+  "value": "65c681488438b49e512cf3113e78cc49b21b576e13e9040adbca687617f4313a"
  },
  "engines": [
   {
@@ -41813,6 +41813,91 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10705,
+   "headings": [
+    "Reuse the existing destination-role boundary; stop state-dependent SWE report routing",
+    "Result",
+    "Actual root cause, not another intermittent-rerun explanation",
+    "Changes",
+    "`canonical/runtime/swe_typed_plan_v1.py`",
+    "`canonical/runtime/goal_front_compiler_v1.py`",
+    "Regression tests",
+    "Tests and measurements",
+    "Before/after discrimination of existing failures",
+    "Bounded extended run: incomplete and red",
+    "Real preflight latency",
+    "Generated model and integrity",
+    "Workspace and scope"
+   ],
+   "kind": "DOCUMENT",
+   "path": "SWE_DESTINATION_ROLE_REUSE_20261031.md",
+   "sha256": "12e7632d72f823f97c4412d9f93945451c20ee510ceed20675e208f79657cdc2",
+   "summary": "2026-10-31. Local development evidence, not independent capability admission or a full-suite verdict.",
+   "terms": {
+    "33": 5,
+    "actual": 4,
+    "after": 9,
+    "all": 4,
+    "already": 5,
+    "before": 10,
+    "both": 4,
+    "canonical": 5,
+    "changes": 4,
+    "compiler": 5,
+    "correction": 5,
+    "destination": 14,
+    "destination-role": 4,
+    "destinations": 5,
+    "detector": 4,
+    "execution": 6,
+    "existed": 4,
+    "existing": 17,
+    "explicit": 4,
+    "failed": 6,
+    "failures": 5,
+    "files": 6,
+    "final": 6,
+    "generated": 4,
+    "home": 4,
+    "local": 4,
+    "new": 7,
+    "no": 8,
+    "not": 26,
+    "one": 6,
+    "pass": 5,
+    "passed": 8,
+    "path": 5,
+    "plan": 4,
+    "refusal": 7,
+    "registry": 6,
+    "repair": 6,
+    "report": 10,
+    "request": 5,
+    "run": 5,
+    "runtime": 9,
+    "selection": 7,
+    "source": 9,
+    "test": 10,
+    "tests": 8,
+    "two": 7,
+    "user": 5,
+    "were": 6
+   },
+   "title": "Reuse the existing destination-role boundary; stop state-dependent SWE report routing",
+   "title_terms": [
+    "boundary",
+    "destination-role",
+    "existing",
+    "report",
+    "reuse",
+    "routing",
+    "state-dependent",
+    "stop",
+    "swe"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9882,
    "headings": [
     "Reuse-first guided repair: faster search and confined measured execution",
@@ -54030,10 +54115,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 958,
+  "included_source_count": 959,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "184246c02dae3ae7a9100be50443335f6a4b0fae158f069f2dfd6c6b11466095"
+  "source_tree_digest": "4d02da5c239847be17e1986e72edac8f60f197fe001d551cb1d7cca7b6026a4b"
  },
  "research_index": [
   {
@@ -233525,7 +233610,7 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "04964aee0288240ec01c2a6448389a2733f700ffadd83e006a1d493c40d8f86c",
+   "sha256": "fd157a5f80e92f7c1360591ca88525e453ee810fe07cfa989d447a54468e76d2",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
    "symbol_count": 76,
    "symbols": [
@@ -239833,9 +239918,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "c38340bf10127ae87f7612742369abaf2374558591e128173b68b2abcc71b699",
+   "sha256": "0fac6b49c2bbf4c0d39373c4ccd0a2c4b7261f65e05848a8b029c8d0049f765e",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 61,
+   "symbol_count": 62,
    "symbols": [
     "LocalExecutionFailure",
     "_bind_requested_contract_checks",
@@ -239858,9 +239943,9 @@
     "_future_artifacts",
     "_git_head",
     "_goal_names_a_file",
+    "_intent_verb_matches",
     "_is_executable",
-    "_is_python_code",
-    "_named_executable"
+    "_is_python_code"
    ],
    "terms": {
     "admission": 2,
@@ -269299,7 +269384,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "18a88ef49d703e32e5d01e951cee604b4afb460832978ea519c6a997326fcfda",
+   "sha256": "12728212bfb27901f4b8b477380b270b41cd97f9d5c3b8f513851dd44b109d90",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 9,
    "symbols": [

@@ -36,6 +36,7 @@ from typing import Any, Mapping
 from canonical.runtime import capability_selection_retrieval_v1 as selection
 from canonical.runtime import declared_input_derivation_v1 as derivation
 from canonical.runtime import goal_compiler
+from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime import live_integrated_brain_v1 as live_brain
 
 SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
@@ -61,7 +62,8 @@ _FAMILY_SWE_PREFIXES = ("python.", "code.", "software.", "test.", "orchestration
 
 
 def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
-    low = str(goal or "").lower()
+    # Paths and quoted values are task data, not evidence of an effect family.
+    low = front.prose_only(str(goal or "")).lower()
     for triggers, terms, token in _FAMILIES:
         if any(t in low for t in triggers):
             return terms, token
@@ -187,10 +189,11 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     a real registry row that must bind every declared input from the sentence.
 
     Measured 2026-10-28: "Find every caller of the function add in X" enumerates
-    {symbol.index.ast, change_impact.testselect}; only symbol.index.ast admits
-    (specific) and names the effect -> decisive, and its artifact is a REAL
-    callers_of map.  test-gen/lint/typecheck/extract enumerate to zero-or-many
-    admitted and therefore stay honestly fail-closed (no false PASS).
+    {symbol.index.ast, change_impact.testselect}; symbol.index.ast names the
+    requested effect and its artifact is a REAL callers_of map. Later input
+    derivation also made testselect/an inliner bindable, so effect eligibility
+    must precede ambiguity counting, not rely on unrelated tools failing to
+    bind. Multiple effect-eligible admissions still refuse.
     """
     fam = _family_terms(goal)
     if fam is None:
@@ -199,6 +202,13 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     candidates: list[str] = []
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
+            continue
+        # Apply the existing family-effect constraint BEFORE admission and
+        # ambiguity counting. Shared keywords and bindable inputs do not make
+        # an inliner/test selector an answer to a caller-index request. Filtering
+        # only after len(admitted) rejected the real index when those unrelated
+        # tools became bindable, and wasted their contract-binding work.
+        if token not in cid.lower():
             continue
         surface = " ".join(map(str, (entry.get("keywords") or []) +
                                (entry.get("provides") or []))) + " " + cid
@@ -274,9 +284,26 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
         inputs = {**inputs, **values}
         removed = set((report.get("adapter_defaulted") or {}).keys())
 
-        relocated = _fresh_output_path(goal, root, inputs)
-        if relocated:
-            inputs["output_path"] = relocated
+        # Destination identity comes from the stated ROLE, not file existence.
+        # F7/F13 can spool an occupied report elsewhere; then repair preflight
+        # checks that spool instead of the user's destination, making the verdict
+        # depend on previous requests. Reuse the front compiler's role detector
+        # (including its aliases and repeated-mention handling). This grants no
+        # overwrite authority: the existing adapter/preflight still judges the
+        # actual destination. Multiple stated destinations are ambiguous.
+        destinations = (front._named_output_destinations(goal, entry, ("output_path",), root)
+                        if "output_path" in inputs else set())
+        if len(destinations) > 1:
+            return None
+        if destinations:
+            inputs["output_path"] = next(iter(destinations))
+        else:
+            # Only relocate an incidental source binding. Never move a report
+            # the sentence explicitly directs onto an existing source file;
+            # preserve that path so the write/repair guards can refuse it.
+            relocated = _fresh_output_path(goal, root, inputs)
+            if relocated:
+                inputs["output_path"] = relocated
 
         # The three refactor adapters (rename_parameter / rename_symbol /
         # extract_function) resolve ``module`` RELATIVE to ``source_root``:
