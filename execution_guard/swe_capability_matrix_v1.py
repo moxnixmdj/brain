@@ -38,6 +38,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+# The fixture's git tree has one owner: the advanced census needs the identical tree, and asking
+# git questions of a directory with no history measures the fixture, not the machine.
+_HERE = str(pathlib.Path(__file__).resolve().parent)
+if _HERE not in sys.path:
+    sys.path.insert(0, _HERE)
+from swe_git_fixture_v1 import seed_repository  # noqa: E402
+
 WORK = ROOT / "canonical/astra_runtime/tmp/frontier_matrix"
 
 CALC = ("def add(a, b):\n    return a - b\n\n\n"
@@ -85,28 +92,14 @@ _GIT_LANE = "git"
 
 
 def _seed_git_repository(base: pathlib.Path) -> None:
-    """Commit a baseline in ``base``, then leave one file modified.
+    """Seed the fixture's git history from the one owner of that fixture.
 
-    On failure the case simply has no repository and the honest result is a refusal; the fixture
-    must never raise, because a raising fixture is scored as a machine defect.
+    The body moved to ``execution_guard/swe_git_fixture_v1.py`` on 2026-10-31, unchanged in
+    behaviour, because the advanced census needed the identical tree: it was asking five git
+    sentences and two history questions of plain directories, so its whole git class measured the
+    absence of a repository rather than the capability.
     """
-    env = {"PATH": "/usr/bin:/bin:/usr/local/bin",
-           "GIT_AUTHOR_NAME": "matrix", "GIT_AUTHOR_EMAIL": "matrix@example.invalid",
-           "GIT_COMMITTER_NAME": "matrix", "GIT_COMMITTER_EMAIL": "matrix@example.invalid",
-           "HOME": str(base)}
-    try:
-        for argv in (("git", "init", "-q"), ("git", "add", "-A"),
-                     ("git", "-c", "commit.gpgsign=false", "commit", "-q", "-m", "baseline")):
-            if subprocess.run(argv, cwd=str(base), capture_output=True, text=True,
-                              timeout=60, env=env).returncode != 0:
-                return
-        # One uncommitted edit, so "show the diff" has a hunk to show and "commit the changes"
-        # has a change to commit.
-        calc = base / "pkg" / "calc.py"
-        calc.write_text(calc.read_text(encoding="utf-8") + "\n# matrix: uncommitted\n",
-                        encoding="utf-8")
-    except (OSError, subprocess.SubprocessError):
-        return
+    seed_repository(base)
 
 
 def build(case: str, lane: str = "") -> pathlib.Path:

@@ -30478,7 +30478,7 @@
   "engines": 26,
   "knowledge_documents": 223,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6555,
+  "research_index_records": 6556,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30487,7 +30487,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c41525fbea6e2083b53ab2e4be2650aec87a1073845db6690a8d7e5aa7644c50"
+  "value": "e04b07770db01304f111f4a4ca07d8dc45d92cd5786c538153869dabe144aea5"
  },
  "engines": [
   {
@@ -210651,6 +210651,30 @@
     "real": 2,
     "source": 2,
     "text_file_write_verified_from_real_execution_v1_20261023_v1": 2,
+    "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_CENSUS_NAMES_EVERY_REFUSAL_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/THE_CENSUS_NAMES_EVERY_REFUSAL_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CENSUS_NAMES_EVERY_REFUSAL_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5e622f3f39c3172ae6f4dfbcdaffd7f140e3d09cecd3041df638f2cbce6d0b12",
+   "status": "",
+   "terms": {
+    "20261031": 1,
+    "census": 1,
+    "every": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "names": 1,
+    "read_the_section_the_answer_is_in_and_key_the_index_cache_by_the_tree": 1,
+    "refusal": 1,
+    "the_census_names_every_refusal_v1_20261031_v1": 1,
+    "the_census_records_reason_and_route_admission_rule_for_every_row_and_histograms_by_named_cause_and_the_git_fixture_has_one_owner_sweep_git_fixture_v1_that_the_matrix_already_used_and_the_census_now_seeds_for_any_sentence_that_talks_about_history": 1,
+    "the_census_reported_the_failure_family_and_never_the_cause_the_door_already_returns_and_it_asked_seven_history_sentences_of_directories_with_no_history__measured_2026_10_31_ten_different_failures_read_as_live_controller_execution_or_verification_failure_and_three_history_sentences_read_as_named_test_not_in_git_history_which_is_a_fact_about_the_fixture": 1,
     "v1": 2
    }
   },
