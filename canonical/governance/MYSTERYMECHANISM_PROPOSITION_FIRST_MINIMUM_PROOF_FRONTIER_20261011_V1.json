@@ -1,0 +1,154 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_PROPOSITION_FIRST_MINIMUM_PROOF_FRONTIER_20261011_V1",
+  "date": "2026-10-11",
+  "status": "ACTIVE__B_C_O_SEPARATED__BRANDED_RECEIPT_WAKE_GATED__CAPABILITY_PROOF_CONSTRUCTION_ACTIVE__ZERO_CREDIT",
+  "objective": "MINIMIZE_WALL_CLOCK_AND_NEW_REALITY_NEEDED_TO_PROVE_THE_MYSTERYMECHANISM_DERIVED_CAPABILITY_RELATION_WITHOUT_CONFUSING_IT_WITH_AN_EXACT_BRANDED_SCORE",
+  "authority": {
+    "measurement_law": "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V2.md",
+    "information_equivalence_law": "canonical/laws/BENCHMARK_OUTPUT_INFORMATION_EQUIVALENCE_LAW_V1.md",
+    "scheduler": "canonical/runtime/benchmark_capability_dominance_scheduler_v2.py",
+    "proof_cover_compiler": "canonical/runtime/proof_coverage_compiler.py",
+    "wall_clock_optimizer": "canonical/runtime/capability_proof_compression_optimizer_v1.py"
+  },
+  "propositions": {
+    "B": {
+      "id": "MYSTERYMECHANISM_BRANDED_VALS_RECEIPT_GE_ACTOR_ATTRIBUTED_WITNESS",
+      "type": "EXACT_BENCHMARK_STATISTIC",
+      "meaning": "A comparable owner-authorized Vals MysteryMechanism receipt at or above the actor-attributed represented-scope witness.",
+      "actor_attributed_witness_percent": 49.1,
+      "represented_success_count": 109,
+      "total_tasks": 222,
+      "state": "OPEN_UNPROVED",
+      "scheduler_state": "WAKE_GATED_EXTERNAL_AUTHORIZATION_OR_EXACT_STATISTIC_BRIDGE",
+      "critical_for_C": false,
+      "rule": "B_IS_NOT_REQUIRED_FOR_C_UNLESS_AN_INDEPENDENT_ACTIVE_OBJECTIVE_REQUIRES_THE_LITERAL_BRANDED_STATISTIC"
+    },
+    "C": {
+      "id": "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "type": "CAPABILITY_RELATION",
+      "meaning": "Brain unknown-mechanism recovery under bounded active experimentation is noninferior to the target capability on a proved bound scope represented by MysteryMechanism, or a strictly stronger scope-complete certificate holds.",
+      "state": "OPEN_UNBOUND_RELATION",
+      "exact_next_information": "PROVED_SCOPE_BOUND_ENTAILMENT_EDGE_FROM_A_BRAIN_OWNED_CAPABILITY_CERTIFICATE_TO_THIS_CAPABILITY_RELATION",
+      "benchmark_native_execution_required": false
+    },
+    "O": {
+      "id": "BRAIN_OWNERSHIP_OF_CREDITED_UNKNOWN_MECHANISM_RECOVERY_CAPABILITY",
+      "type": "OWNERSHIP_PREDICATE",
+      "meaning": "The operative credited mechanism-recovery route is Brain-owned and carries zero load-bearing external/general-purpose runtime cognition.",
+      "state": "OPEN_FOR_WHOLE_CLAIM",
+      "external_runtime_cognition_required": 0,
+      "note": "V4 is zero-model runtime capability work but this reconciliation grants no whole-capability ownership promotion."
+    }
+  },
+  "current_evidence": {
+    "public_contract": "222 private mechanisms; two passive observations; active budget 2*d+1; binary functional recovery under private continuous structural probes.",
+    "actor_attributed_witness": "canonical/governance/MYSTERYMECHANISM_REPRESENTED_SCOPE_ACTOR_ATTRIBUTED_WITNESS_20261007_V1.json",
+    "identifiability_lower_bound": "canonical/governance/MYSTERYMECHANISM_IDENTIFIABILITY_LOWER_BOUND_20261007_V1.json",
+    "public_scope_saturation": "canonical/governance/MYSTERYMECHANISM_PUBLIC_SCOPE_SUPERSET_SEARCH_SATURATION_20261005_V1.json",
+    "exact_linear_polytope": "canonical/governance/MYSTERYMECHANISM_EXACT_LINEAR_PARAMETER_POLYTOPE_20261008_V1.json",
+    "noisy_information_frontier": "canonical/governance/MYSTERYMECHANISM_INTERVAL_INFORMATION_FRONTIER_20261008_V1.json",
+    "prior_wake_gate": "canonical/governance/CURRENT_O_TB4_MYSTERY_WAKE_GATE_RECONCILIATION_20261011_V1.json",
+    "public_vals_payload": "AGGREGATE_ONLY__DATASET_PRIVATE__OVERALL_BUCKET_ONLY__NO_TASK_LEVEL_SCOPE_BINDING",
+    "credential_search": "EXHAUSTED_KNOWN_LOCAL_REPO_ENVIRONMENT_AND_RUNNER_PATHS__NO_VALS_OR_VALKYRIE_CREDENTIAL_FOUND"
+  },
+  "brain_capability_asset": {
+    "runtime_v3": "canonical/runtime/mysterymechanism_adaptive_planner_v3.py",
+    "tests_v3": "canonical/tests/test_mysterymechanism_adaptive_planner_v3.py",
+    "runtime_v4": "canonical/runtime/mysterymechanism_adaptive_planner_v4.py",
+    "tests_v4": "canonical/tests/test_mysterymechanism_adaptive_planner_v4.py",
+    "v4_role": "GENERAL_BRAIN_OWNED_ZERO_MODEL_STRUCTURAL_IDENTIFIABILITY_REPAIR__NOT_BENCHMARK_RECEIPT",
+    "v4_key_repair": [
+      "PRESERVE_PUBLIC_2D_PLUS_1_ACTIVE_EXPERIMENT_BUDGET",
+      "KEEP_STRUCTURALLY_STRONG_LOG_POWER_ROUTE",
+      "ADD_FIXED_STRUCTURE_LEAVE_ONE_OUT_VALIDATION",
+      "ADD_OFF_OBSERVATION_PLAUSIBLE_CANDIDATE_DISAGREEMENT_GATE",
+      "QUARANTINE_STRUCTURALLY_AMBIGUOUS_V3_FINALIZATIONS"
+    ],
+    "private_tasks_used": false,
+    "external_runtime_cognition": 0,
+    "benchmark_credit": 0
+  },
+  "route_frontier": [
+    {
+      "id": "VALS_OWNER_RECEIPT_WAIT",
+      "targets": [
+        "B"
+      ],
+      "state": "WAKE_GATED",
+      "waits_for_external_event": true,
+      "runnable_now": false,
+      "incremental_spend_usd": 0,
+      "reason": "OWNER_AUTHORIZATION_REQUIRED__EXTERNAL_WAIT_IS_NOT_A_NOW_ACTION_AND_B_IS_NOT_ON_C_CRITICAL_PATH"
+    },
+    {
+      "id": "REPEAT_UNCHANGED_PUBLIC_SCOPE_SEARCH",
+      "targets": [
+        "C"
+      ],
+      "state": "REJECTED",
+      "runnable_now": false,
+      "reason": "SAME_INFORMATION_RETRY__PUBLIC_SCOPE_SUPERSET_SEARCH_ALREADY_SATURATED"
+    },
+    {
+      "id": "RUN_THREE_PUBLIC_WALKTHROUGHS_AS_ACCEPTANCE",
+      "targets": [
+        "C"
+      ],
+      "state": "REJECTED_FOR_CLOSURE__ALLOWED_FOR_FALSIFICATION_ONLY",
+      "runnable_now": true,
+      "reason": "THREE_PUBLIC_DEVELOPMENT_EXAMPLES_DO_NOT_ENTAIL_PRIVATE_OR_SCOPE_COMPLETE_CAPABILITY_NONINFERIORITY"
+    },
+    {
+      "id": "V4_GENERAL_CAPABILITY_DEVELOPMENT",
+      "targets": [
+        "C",
+        "O"
+      ],
+      "state": "ACTIVE_SUPPORTING_CAPABILITY_WORK__ZERO_CLOSURE_AUTHORITY",
+      "runnable_now": true,
+      "waits_for_external_event": false,
+      "incremental_spend_usd": 0,
+      "external_runtime_cognition": 0,
+      "reason": "IMPROVES_BRAIN_OWNED_MECHANISM_RECOVERY_AND_FAIL_CLOSED_IDENTIFIABILITY_BUT_REQUIRES_A_PROVED_SCOPE_EDGE_BEFORE_C_CLOSURE"
+    },
+    {
+      "id": "PROVE_OR_FALSIFY_SCOPE_BOUND_CAPABILITY_ENTAILMENT",
+      "targets": [
+        "C"
+      ],
+      "state": "SELECTED_NEXT_INFORMATION_ACTION",
+      "runnable_now": true,
+      "waits_for_external_event": false,
+      "incremental_spend_usd": 0,
+      "external_runtime_cognition": 0,
+      "reconstructs_private_answers_or_hidden_task_identity": false,
+      "objective": "Find the smallest sound benchmark-independent capability certificate or evaluation contract that could conservatively dominate C; prove its scope implication or fail closed. Do not infer hidden task identities.",
+      "success_condition": "A typed scope-bound entailment edge admissible under BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V2.",
+      "failure_condition": "No such edge follows from the current public semantics and Brain-owned evidence; then C is explicitly gated on genuinely new scope information rather than further same-information work."
+    }
+  ],
+  "scheduler_decision": {
+    "selected_route": "PROVE_OR_FALSIFY_SCOPE_BOUND_CAPABILITY_ENTAILMENT",
+    "vals_authorization_on_current_C_critical_path": false,
+    "native_benchmark_execution_has_scheduling_privilege": false,
+    "same_information_public_search_retry_authorized": false,
+    "capability_development_may_continue": true,
+    "rule": "PROPOSITION_FIRST__DO_NOT_WAIT_FOR_B_WHEN_C_HAS_AN_IMMEDIATE_SOUND_INFORMATION_ACTION"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_CURRENTLY_SCORES_109_OF_222_OR_HIGHER",
+    "NO_CLAIM_V4_CLOSES_THE_CAPABILITY_RELATION",
+    "NO_CLAIM_A_LOCALLY_GENERATED_HIDDEN_OR_ADVERSARIAL_EVALUATION_IS_EQUIVALENT_WITHOUT_A_PROVED_SCOPE_RELATION",
+    "NO_CLAIM_THE_PUBLIC_THREE_WALKTHROUGHS_REPRESENT_THE_PRIVATE_222_TASK_SCOPE",
+    "NO_BRANDED_MYSTERYMECHANISM_SCORE_CREATED",
+    "NO_CAPABILITY_OWNERSHIP_ACCEPTANCE_OR_TERMINAL_PROMOTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "private_mysterymechanism_cases_consumed": 0,
+    "benchmark_score_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
