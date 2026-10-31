@@ -7301,6 +7301,274 @@
         "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MUTGATE-001__RECEIPT.json",
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-MUTGATE-001.json"
       }
+    },
+    "python.review.diff_perf_gate.v1": {
+      "action_template": {
+        "args": {
+          "anchor_path": "${input.anchor_path}",
+          "bench_path": "${input.bench_path}",
+          "capability_id": "python.review.diff_perf_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "repeats": "${input.repeats}",
+          "timeout_s": "${input.timeout_s}",
+          "tolerance": "${input.tolerance}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_perf_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "performance",
+        "regression",
+        "benchmark",
+        "bench",
+        "gate",
+        "slowdown",
+        "profiling",
+        "pull request",
+        "pr",
+        "hot path",
+        "latency"
+      ],
+      "limitations": [
+        "physical timings: artifacts carry raw nanoseconds and are NOT byte-identical; the pinned invariant is verdict stability (same gate on every rerun of a fixed world) plus deterministic verdict recomputation from recorded runs.",
+        "best-of-N estimator with an in-child fixed calibrator cancels cross-process site bias; residual shared-box noise floor measured ~0.11 -- declared tolerance bands must sit above it (default 0.10 floor, suite pins use 0.30 explicitly and say why).",
+        "needs a benchmark file defining bench(); no benchmark discovery in v1 -- an absent benchmark is a loud refusal, not an inferred one.",
+        "UNCLEAR is an honest third verdict when distributions overlap inside the tolerance band; the gate never coin-flips."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_perf_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "anchor_median_ns",
+        "anchor_path",
+        "bench_path",
+        "complete",
+        "diff_sha256",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "patched_median_ns",
+        "repeats",
+        "slowdown_ratio",
+        "verified"
+      ],
+      "source": {
+        "module": "stdlib",
+        "type": "python_stdlib",
+        "version_family": ">=3.8"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-PERFGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + this perf gate (full review fan-in)",
+          "disjointness_law": "FAIL requires min(patched) > max(anchor); overlapping runs inside the band yield UNCLEAR, never a coin flip",
+          "golden": "all five gates PASS on a cosmetic rename in ~2.0 s; normalized ratio 0.985 shows the calibrator is truthful on a no-op",
+          "isolation_leg": "planted cost executed by the suite (coverage-clean) -> lint/type/suite/coverage ALL PASS, this gate FAILs alone at 13.9x normalized slowdown"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PERFGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-PERFGATE-001.json"
+      }
+    },
+    "python.review.diff_security_gate.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_security_gate.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}",
+          "worktree_path": "${input.worktree_path}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_security_gate",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "security",
+        "bandit",
+        "gate",
+        "shell=True",
+        "eval",
+        "secrets",
+        "hardcoded password",
+        "injection",
+        "pull request",
+        "pr",
+        "changed lines"
+      ],
+      "limitations": [
+        "bandit stage needs a bandit-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_BASELINE_ONLY recorded loudly, the security sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking; hunk context lines inside a changed hunk share the range (conservatism widens blocking, never narrows a real changed-line finding out of blocking).",
+        "policy: HIGH severity blocks; MEDIUM blocks at HIGH confidence; B104-B107 hardcoded-secret family blocks regardless of bandit's LOW label; LOW otherwise advisory.",
+        "static heuristics only: bandit's own false-positive classes are advisory-visible, and absent tool classes (dataflow-level injection) are out of v1 scope."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_security_gate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "bandit",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "bandit",
+        "type": "pypi",
+        "version_family": ">=1.7"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-SECGATE-001",
+        "observed_effect": {
+          "crown": "natural-language issue -> orchestrator diff -> lint + type + suite + coverage + perf + this security gate (review fan-in complete)",
+          "deterministic": "security artifact byte-identical on rerun",
+          "golden": "all six review gates PASS on the choreographed rename chain in ~1.8-2.0 s",
+          "isolation_leg": "covered, typed, lint-clean, fast shell=True wrapper with its own green test -> five gates PASS, ONLY this gate FAILs with B602 at pkg/util.py:10"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECGATE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-SECGATE-001.json"
+      }
+    },
+    "python.review.diff_static_triage.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.review.diff_static_triage.v1",
+          "diff_path": "${input.diff_path}",
+          "output_path": "${input.output_path}",
+          "python_executable": "${input.python_executable}",
+          "timeout_s": "${input.timeout_s}",
+          "worktree_path": "${input.worktree_path}"
+        },
+        "expect": {
+          "field": "gate",
+          "type": "field_equals",
+          "value": "PASS"
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_review_diff_static_triage",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "review",
+        "diff",
+        "static",
+        "triage",
+        "ruff",
+        "lint",
+        "gate",
+        "pull request",
+        "pr",
+        "f821",
+        "syntax",
+        "changed lines",
+        "pre-existing",
+        "noise"
+      ],
+      "limitations": [
+        "ruff stage needs a ruff-bearing python_executable (PyPI tool, offline-probed); absent -> gate PASS_SYNTAX_ONLY recorded loudly, the F/E/W sweep honestly did not run.",
+        "only new-side changed line ranges decide blocking: untouched pre-existing findings are advisory context listed as out_of_scope (never blockers).",
+        "isolated ruff run (--isolated, --no-cache): repo lint config is NOT read; zero config law keeps verdicts reproducible.",
+        "v1 reviews unified diffs of .py files; other languages fall through to the syntax baseline silently-listed as non-Python rows."
+      ],
+      "platforms": [
+        "linux",
+        "windows",
+        "darwin"
+      ],
+      "provides": [
+        "python.review.diff_static_triage"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "advisory_findings",
+        "blocking_findings",
+        "complete",
+        "diff_sha256",
+        "files_touched",
+        "gate",
+        "output_path",
+        "output_sha256",
+        "output_verified",
+        "ruff",
+        "syntax_errors",
+        "verified"
+      ],
+      "source": {
+        "module": "ruff",
+        "type": "pypi",
+        "version_family": ">=0.5"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "independently_verified": true,
+        "mission_id": "ASTRA-VERIFY-DIFFTRIAGE-001",
+        "observed_effect": {
+          "chain": "natural-language issue -> orchestrator (apply + tests green) -> produced diff -> this gate",
+          "deterministic": "triage artifact byte-identical on rerun",
+          "e2e_loop_ms": [
+            382.2,
+            322.7
+          ],
+          "golden": "gate PASS, 0 blocking on a real choreographed rename diff",
+          "ruff": "0.17.3",
+          "sabotage": "injected undefined-name line -> gate FAIL with F821 at pkg/core.py:3"
+        },
+        "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIFFTRIAGE-001__RECEIPT.json",
+        "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-DIFFTRIAGE-001.json"
+      }
     }
   },
   "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
