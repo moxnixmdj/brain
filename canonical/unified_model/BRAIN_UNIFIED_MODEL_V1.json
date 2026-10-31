@@ -30474,7 +30474,7 @@
   "bound_capabilities": 146,
   "capabilities": 440,
   "engines": 26,
-  "knowledge_documents": 210,
+  "knowledge_documents": 211,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6537,
   "routing_tokens": 2262,
@@ -30485,7 +30485,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d8f371dbc20d9970d6032f47068c8bac7bb156cf1819b8e848abc0d612ebae76"
+  "value": "8dab94ec353762982e70131b5abd95dedfe64a0578e6deb1f28e750f681fe4cd"
  },
  "engines": [
   {
@@ -44496,6 +44496,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5708,
+   "headings": [
+    "Hardcore software-engineering problem inventory — V16",
+    "§1 What landed",
+    "§2 RETRACTED: \"build a chain runner\"",
+    "A caution about my own instrument",
+    "§3 The census split: chains are not what refuses the 47",
+    "§4 Still open, unchanged from V15",
+    "§5 The next change, in one sentence"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V16.md",
+   "sha256": "90b7e89f2ad0e0ec1c2e1b50e38693bf746e712d27b32dccbc010fedc096af2e",
+   "summary": "Measured 2026-10-31 on `fabf28c` (branch `arena/14753d8c-brain`). Supersedes V13–V15. This one is short on purpose: it records **one fix that landed** and **three measurements that change what the next session should do**.",
+   "terms": {
+    "13": 3,
+    "18": 3,
+    "22": 2,
+    "47": 5,
+    "84": 3,
+    "already": 7,
+    "answer": 4,
+    "before": 3,
+    "call": 3,
+    "census": 3,
+    "chain": 9,
+    "diff": 7,
+    "each": 3,
+    "empty": 6,
+    "false": 5,
+    "file": 3,
+    "first": 4,
+    "fix": 3,
+    "git": 4,
+    "inputs": 3,
+    "measured": 3,
+    "not": 8,
+    "one": 4,
+    "only": 3,
+    "own": 3,
+    "patch": 7,
+    "produce": 3,
+    "producers": 3,
+    "real": 3,
+    "refused": 5,
+    "refuses": 3,
+    "registry": 3,
+    "requests": 3,
+    "requires": 4,
+    "returns": 4,
+    "row": 11,
+    "rows": 6,
+    "runner": 4,
+    "seed": 4,
+    "selected": 4,
+    "sentence": 3,
+    "so": 5,
+    "step": 5,
+    "still": 3,
+    "token": 5,
+    "v15": 4,
+    "whose": 3,
+    "wiring": 4
+   },
+   "title": "Hardcore software-engineering problem inventory — V16",
+   "title_terms": [
+    "hardcore",
+    "inventory",
+    "problem",
+    "software-engineering",
+    "v16"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23697,
    "headings": [
     "What is actually missing — the complete problem list for a hardcore software engineer",
@@ -58189,10 +58264,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1001,
+  "included_source_count": 1002,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8cb1468e566aaf79506c5c42bfd7534be53538bd0da455e0458daaf16a873f7a"
+  "source_tree_digest": "85c444da1b4e44406210121bf4b929314fce5d6dcb636612cd8d9f7c9659fbd5"
  },
  "research_index": [
   {
