@@ -1,0 +1,430 @@
+{
+ "action_id": "A_CERTIFICATE_MAY_ONLY_CLAIM_THE_WORK_THAT_WAS_DONE_V1_20261031_V1",
+ "action_intent_id": "A_CERTIFICATE_MAY_ONLY_CLAIM_THE_WORK_THAT_WAS_DONE_V1_20261031_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Refuse a certificate when the work it names did not happen: a measurement may not answer a run of a named file or an analysis, a completeness claim needs a scope that can contain the answer, an enumeration is never a scalar from inside a list, a diagnosis is not a test selection, and a gate that names an unavailable checker is not complete.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+ "date": "2026-10-31",
+ "intent": "Refuse a certificate when the work it names did not happen: a measurement may not answer a run of a named file or an analysis, a completeness claim needs a scope that can contain the answer, an enumeration is never a scalar from inside a list, a diagnosis is not a test selection, and a gate that names an unavailable checker is not complete.",
+ "causal_blocker": "A run is certified by an artifact that measures instead of executing, a completeness claim is certified over a scope of one file, and an enumeration is answered by a scalar taken from the first record: measured 2026-10-31 on current main, six of seventeen PASSes were wrong -- 'Run the script <f>', 'Run a static analysis pass on <dir>' and 'Run the tests in <t>' were all answered by python.repository.acceptance.measure.v1, whose own artifact reports test_count 0, tests_pass false, terminal_authority false and hard_nonclaims[0] == MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE; 'Find every caller of build_plan in <f>' was answered by an index over <f> alone (1 of 7 call sites) with 'truncated': false; 'Which tests does <f> break' delivered the integer 0 from records.0.tests; and 'Check for security vulnerabilities in <f>' called itself complete with bandit absent.",
+ "measured_effect": "Six sentences that returned PASS with wrong or empty answers now fail closed and name the reason: 'Run the tests in canonical/tests/test_swe_typed_plan_v1.py' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.2 s (was PASS in 8.7 s); 'Run the script canonical/runtime/goal_compilation_benchmark_v1.py' FAIL_CLOSED__ROUTE_ADMISSION_REJECTED; 'Run a static analysis pass on canonical/runtime' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.6 s (was PASS in 9.6 s); 'Find every caller of build_plan in <f>' FAIL_CLOSED__ANSWER_SCOPE_UNPROVEN naming SEARCH_SCOPE_IS_THE_STATED_FILE; 'Which tests does <f> break' FAIL_CLOSED__ANSWER_SHAPE_UNSERVED instead of delivering 0; 'Find the fault in <f>' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED instead of a test selection. The two neighbours that were already correct still pass with their payloads ('List the functions', 'Show the last three git commits'), and the repository's own pinned laws still hold (a security review of a clean file is a review; a measurement may answer 'run the test suite in <dir>'). Nine law tests in canonical/tests/test_a_certificate_requires_the_work_v1.py run in 0.5 s.",
+ "expected_parent_frontier_change": "No certificate without the work: the door refuses an execution request answered by a measurement, a completeness claim over a single-file scope, an enumeration answered by a scalar, and a diagnosis answered by a test selection; the security gate stops claiming completeness when bandit is absent.",
+ "expected_parent_change": "No certificate without the work: the door refuses an execution request answered by a measurement, a completeness claim over a single-file scope, an enumeration answered by a scalar, and a diagnosis answered by a test selection; the security gate stops claiming completeness when bandit is absent.",
+ "stop_condition": "Stop when the 13 new tests are green, the seven measured sentences behave as stated, the unified model recompiles byte-identically, and both pre-existing red sets are unchanged.",
+ "falsification_condition": "Re-run the thirteen sentences above through live_brain_route_admission_v1.solve: any PASS whose answer is a count where the sentence asked for members, any PASS for a rewrite verb the row does not declare, or any change to the seven sentences that worked before, falsifies this intent.",
+ "prior_work_reused": "_shape_errors (the existing wrong-KIND-of-row gate), _STATED_EFFECTS' STATED_LINT_OR_FORMAT rule (extended by two tokens), _written_artifacts, the answer_shape_v1 projection and its ENUMERATE classification, and the security gate's existing substitution record (bandit: brain-ast-security-v1). No new capability, adapter, registry row or verifier.",
+ "progress_evidence_paths": [
+  "HARDCORE_SWE_PROBLEMS_20261031_V4.md"
+ ],
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work.' and, on scope: 'hardcore software engineering only; PDF/DOCX/XLSX work is not to be counted or pursued', with the target stated as 'the most advanced, fastest, smartest software engineer'. Zero spend, no external model, fail closed.",
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "governance_change": false,
+ "weakens_existing_guard": false,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "user_authorized_governance_change": false,
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "load_bearing_primary": {
+  "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "4/13",
+  "success_probability_lcb": 0.95,
+  "wall_clock_cost_ub": 1,
+  "stop_condition": "Stop when the 13 new tests are green, the seven measured sentences behave as stated, the unified model recompiles byte-identically, and both pre-existing red sets are unchanged.",
+  "measured_effect": "Six sentences that returned PASS with wrong or empty answers now fail closed and name the reason: 'Run the tests in canonical/tests/test_swe_typed_plan_v1.py' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.2 s (was PASS in 8.7 s); 'Run the script canonical/runtime/goal_compilation_benchmark_v1.py' FAIL_CLOSED__ROUTE_ADMISSION_REJECTED; 'Run a static analysis pass on canonical/runtime' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.6 s (was PASS in 9.6 s); 'Find every caller of build_plan in <f>' FAIL_CLOSED__ANSWER_SCOPE_UNPROVEN naming SEARCH_SCOPE_IS_THE_STATED_FILE; 'Which tests does <f> break' FAIL_CLOSED__ANSWER_SHAPE_UNSERVED instead of delivering 0; 'Find the fault in <f>' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED instead of a test selection. The two neighbours that were already correct still pass with their payloads ('List the functions', 'Show the last three git commits'), and the repository's own pinned laws still hold (a security review of a clean file is a review; a measurement may answer 'run the test suite in <dir>'). Nine law tests in canonical/tests/test_a_certificate_requires_the_work_v1.py run in 0.5 s.",
+  "interpretation": "A benchmark cannot measure a door that certifies wrong answers: the four coding/automation obligations are scored through this door, and on the measured corpus 5 of the 7 wrong answers were delivered by it. Closing the two predicates is a prerequisite of reading any coding-benchmark number as evidence, not a substitute for the capability work itself."
+ },
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/answer_shape_v1.py",
+   "canonical/runtime/declared_input_derivation_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "SWE_FIXES_20261031_V1.md"
+  ],
+  "route_class": "INTEGRATE"
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "43676be3a788257eb70edfe36b27f470d6b33edf",
+  "real_outcome": "Six sentences that returned PASS with wrong or empty answers now fail closed and name the reason: 'Run the tests in canonical/tests/test_swe_typed_plan_v1.py' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.2 s (was PASS in 8.7 s); 'Run the script canonical/runtime/goal_compilation_benchmark_v1.py' FAIL_CLOSED__ROUTE_ADMISSION_REJECTED; 'Run a static analysis pass on canonical/runtime' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED in 0.6 s (was PASS in 9.6 s); 'Find every caller of build_plan in <f>' FAIL_CLOSED__ANSWER_SCOPE_UNPROVEN naming SEARCH_SCOPE_IS_THE_STATED_FILE; 'Which tests does <f> break' FAIL_CLOSED__ANSWER_SHAPE_UNSERVED instead of delivering 0; 'Find the fault in <f>' FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED instead of a test selection. The two neighbours that were already correct still pass with their payloads ('List the functions', 'Show the last three git commits'), and the repository's own pinned laws still hold (a security review of a clean file is a review; a measurement may answer 'run the test suite in <dir>'). Nine law tests in canonical/tests/test_a_certificate_requires_the_work_v1.py run in 0.5 s.",
+  "required_capability": "Answer-shape reconciliation at the door's single exit, and an operation binding that reads the sentence's verb instead of its nouns. Both are internal invariants over data the repository already has; neither is an external capability.",
+  "proxy_goals_deleted": [
+   "Making the caller read the artifact after a PASS: refused, the door delivers it.",
+   "Adding an adapter or a registry row per wrongly-answered sentence: refused, projection reads the artifact that already exists.",
+   "A second git operation vocabulary: refused, git's own subcommand list and the row's own OPS tuple are the vocabulary."
+  ],
+  "surviving_necessity": "The producer of a result and the consumer of a sentence are two different components, and only a gate at their junction can compare them.",
+  "obs_goal": {
+   "real_outcome": "A run of a named file runs it or says it did not; an every-X answer is searched over a scope that can contain every X; an enumeration is a collection; a diagnosis names a fault; a gate that names a checker ran it.",
+   "proxy_goals_deleted": [
+    "Green test counts are a proxy, not the outcome: 12 of 62 PASSed and 7 of those were wrong, so PASS rate alone was the defect.",
+    "A correct artifact on disk is a proxy: it was already correct, hashed and verified, and the caller still got a count."
+   ],
+   "surviving_necessity": "The outcome is a property of the pair (sentence, delivered payload); nothing except the door sees both at once."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "live_brain_route_admission_v1._close_observations already rewrites a PASS from a filesystem observation (observed_effect_errors); the same shape carries the answer gate.",
+    "write_authority_v1 already reads a row's own limitation to refuse a change it declares it cannot make; declared_input_derivation_v1 already reads a row's declared contract.",
+    "git_repository_operate.OPS and its OP_NOT_DECLARED refusal already name the seven operations the row has, and the row's limitations already publish them.",
+    "swe_typed_plan_v1._effect_consistent already gates on the registry's effect vocabulary."
+   ],
+   "external_existing_routes_checked": [
+    "jsonschema 4.26.0 / pydantic: validates a payload against a DECLARED schema; cannot decide that a count fails 'list the functions'.",
+    "jmespath 1.1.0 / glom 25.12.0 / jsonpath-ng 1.15.0: project a path that the caller must already have chosen from the sentence.",
+    "GroundEval (arXiv 2606.22737, 2026): deterministic artifact/trace checking for agent evaluation, offline, requires its own domain configuration."
+   ],
+   "capability_work_deleted": [
+    "No projection engine written: the aliases are a table of the field names the repository's own adapters publish.",
+    "No git verb table invented: git help -a supplies the vocabulary, _GIT_OPERATION_GRAMMAR supplies the implemented set."
+   ],
+   "surviving_gap": "The sentence-to-field vocabulary (_ALIASES/_NOUNS) is the one thing no external route supplies, and it is 13 rows long."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "INTRINSIC",
+   "delete_bypass_substitute_options": [
+    "DELETE: the count-only answer path is deleted for enumerations -- a result that holds no answering field is refused, not summarized.",
+    "BYPASS: a caller could re-read the artifact itself, but that moves the reconciliation to the caller and leaves pass:true false for it.",
+    "SUBSTITUTE: a schema validator substitutes only if a schema is declared per sentence, which is the vocabulary again with a dependency attached."
+   ],
+   "surviving_causal_blocker": "The result and the artifact are produced by the adapter and consumed by the door, and no component compared the payload to the ask."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "REUSE: copy the field the adapter already wrote onto answer, at the door's single exit (selected).",
+    "INTEGRATE: bind the sentence's own verb as op and let the row refuse it by name (selected, 3 lines in the binder).",
+    "SYNTHESIZE: a per-sentence answer schema registry (rejected: 62 sentences today, unbounded tomorrow).",
+    "SUBSTITUTE: jsonschema/jmespath/glom in the producer path (rejected: a dependency and a declared schema still has to be derived from the sentence).",
+    "WHITE_BOX_HARVEST: none applicable -- no donor owns this invariant."
+   ],
+   "losing_routes_reason": "Every rejected route either re-derives the same sentence-to-field vocabulary behind a dependency, or moves the gate out of the one place every exit passes through.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the sentence plus the artifact bytes the adapter already hashed: the tests build the exact measured payloads (a count beside a callers_of map, an audit.ast function list, a definition_count), so no synthetic capability claim is made."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "The corpus rows that recorded a wrong PASS as a pass (V3 §1-A) are superseded by the measurements in SWE_FIXES_20261031_V1.md.",
+    "No caller had to change: the answer is an addition to the result, and the refusal keeps the old status under runtime_status_before_answer_shape_check."
+   ],
+   "adjacent_capabilities_absorbed": [
+    "tool_truth_errors' envelope-versus-stdout reading is the same class one layer down and is untouched; the answer gate does not duplicate it.",
+    "main's STATED_ANSWER_NOT_PROVIDED gate (bisect must name its commit) is a different question about a different payload and both run."
+   ],
+   "fresh_reuse_plan": "The next count-instead-of-collection row is fixed by adding its field name to the alias table, not by a new gate."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "The 62-sentence corpus is not re-run to answer one question: the four git sentences and the five extraction sentences are the measurement.",
+    "asked() is 7-21 us, and the artifact is opened only when the result holds no answering field."
+   ],
+   "search_stop_decision": "Stopped the external search when four independent source classes agreed that no library decides which field answers a human sentence; the remaining challengers were projection engines that take the path as input.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "REUSE_THE_ARTIFACT_FIELD_AT_THE_DOORS_SINGLE_EXIT_SELECTED",
+   "BIND_THE_SENTENCE_VERB_AND_LET_THE_ROW_REFUSE_BY_NAME_SELECTED",
+   "PER_SENTENCE_ANSWER_SCHEMA_REGISTRY_REJECTED_UNBOUNDED",
+   "JSONSCHEMA_OR_PYDANTIC_SCHEMA_IN_THE_PRODUCER_PATH_REJECTED_DEPENDENCY_AND_STILL_NEEDS_THE_VOCABULARY",
+   "JMESPATH_GLOM_JSONPATH_PROJECTION_REJECTED_PATH_MUST_ALREADY_BE_CHOSEN_FROM_THE_SENTENCE",
+   "GROUNDEVAL_TRACE_CHECKING_REJECTED_OFFLINE_EVALUATOR_NOT_A_DOOR_GATE",
+   "DERIVE_NO_OPERATION_FOR_AN_UNDECLARED_VERB_REJECTED_IN_FAVOUR_OF_BINDING_IT_SO_THE_ROW_NAMES_IT"
+  ],
+  "deleted_or_bypassed_paths": [
+   "count-only PASS for an enumeration",
+   "read operation certified for a rewrite verb the row does not declare"
+  ],
+  "selected_surviving_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
+  "why_selected_route_is_fastest_sufficient": "It uses four facts the repository already has -- the artifact the adapter wrote and hashed, the row's own OPS tuple, git's own verb list, and the door's existing status-rewrite at its single exit -- costs 7-21 us per sentence, adds no dependency, and converts five wrong passes into the real answer and four into the row's own refusal.",
+  "expected_parent_level_state_change": "No certificate without the work: the door refuses an execution request answered by a measurement, a completeness claim over a single-file scope, an enumeration answered by a scalar, and a diagnosis answered by a test selection; the security gate stops claiming completeness when bandit is absent.",
+  "stop_condition": "Stop when the 13 new tests are green, the seven measured sentences behave as stated, the unified model recompiles byte-identically, and both pre-existing red sets are unchanged.",
+  "route_frontier": {
+   "discovery_required": true,
+   "incumbent_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
+   "checked_at_utc": "2026-10-31T16:21:44Z",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "HARDCORE_SWE_PROBLEMS_20261031_V3.md section 1-A: 12 PASS, 7 wrong, 5 of them a count for a request to extract.",
+     "canonical/runtime/bound_capabilities/git_repository_operate.py: OPS = (log, status, diff, show, blame, branch, commit) and OP_NOT_DECLARED:<op>:declared=...",
+     "BOUND_CAPABILITY_REGISTRY_V1.json git.repository.operate.v1 limitations: 'No push, rebase, merge, reset or history rewrite.'",
+     "measured 2026-10-31 on 4b1baa2: 'Revert the last commit' PASS op=log; 'Reset the working tree to HEAD~1' PASS op=status; 'Stash the working tree changes' PASS op=status; 'Push the current branch to origin' PASS op=branch."
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.pydantic.dev/latest/concepts/json_schema/ -- the 'required' keyword is a property of a declared model, not of a sentence.",
+     "https://jmespath.org/specification.html -- a JMESPath expression is an INPUT to the evaluator; the caller must already know the path.",
+     "https://json-schema.org/understanding-json-schema/reference/object#required -- required fields are declared by the schema author."
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/jsonschema/json -- jsonschema 4.26.0, requires_python >=3.10.",
+     "https://pypi.org/pypi/jmespath/json -- jmespath 1.1.0, requires_python >=3.9.",
+     "https://pypi.org/pypi/glom/json -- glom 25.12.0.",
+     "https://pypi.org/pypi/jsonpath-ng/json -- jsonpath-ng 1.15.0, requires_python >=3.11."
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/html/2606.22737v2 -- GroundEval (2026) scores an agent's answer against the artifacts it actually fetched; an offline evaluator, not a producer-path gate.",
+     "https://medium.com/@pvginkel/my-ai-workflow-part-5-grounding-cite-or-dont-claim-8ee3f438ce49 -- 'cite or don't claim': the evidence must travel in the answer, which is what the answer field does.",
+     "https://github.com/OmAr-Kader/apis-response-validator -- schema-driven API response validator, Node ecosystem, requires the schema."
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "validate API response contains collection not count answer shape check library"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "JMESPath glom jsonpath-ng projection library select nested field python pypi"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "runtime schema validation python jsonschema pydantic check required field present before returning result"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 new release grounded answer verification agent output must cite artifact field"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "challenger_routes": [
+    {
+     "route": "JSONSCHEMA_OR_PYDANTIC_VALIDATION_OF_THE_RESULT_DICT",
+     "evidence": [
+      "https://pypi.org/pypi/jsonschema/json 4.26.0",
+      "https://docs.pydantic.dev/latest/concepts/json_schema/"
+     ],
+     "qualification_evidence": [
+      "jsonschema 4.26.0 is installed-checkable from pypi.org and validates a declared schema deterministically"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY",
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "It answers 'does this payload match the schema I declared', never 'does this payload answer the sentence'.",
+      "CAPABILITY_STRENGTH": "Needs one schema per sentence shape, which is the vocabulary this change already owns.",
+      "WALL_CLOCK": "Comparable on a hot dict, but the schema has to be derived from the sentence first.",
+      "INCREMENTAL_COST": "Adds a third-party dependency to a zero-dependency, zero-spend producer path.",
+      "RELIABILITY": "Deterministic, but vacuous without the sentence mapping.",
+      "VERIFIABILITY": "Its own errors are precise; they cannot name the missing collection."
+     }
+    },
+    {
+     "route": "JMESPATH_OR_GLOM_PROJECTION_OF_THE_ARTIFACT",
+     "evidence": [
+      "https://pypi.org/pypi/jmespath/json 1.1.0",
+      "https://pypi.org/pypi/glom/json 25.12.0",
+      "https://jmespath.org/specification.html"
+     ],
+     "qualification_evidence": [
+      "jmespath 1.1.0 and glom 25.12.0 both project a caller-supplied path over nested JSON"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY",
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Correct on the path it is given; choosing the path from the sentence is exactly the remaining problem.",
+      "CAPABILITY_STRENGTH": "Strictly narrower: no notion of a noun, an alias table, or a refusal reason.",
+      "WALL_CLOCK": "Microseconds for a compiled expression, but the expression is per-sentence work.",
+      "INCREMENTAL_COST": "Third-party dependency for a 40-line breadth-first lookup.",
+      "RELIABILITY": "Deterministic; adds an install requirement to every environment.",
+      "VERIFIABILITY": "Returns the wrong thing silently when the path misses, where the gate must refuse."
+     }
+    },
+    {
+     "route": "GROUNDEVAL_STYLE_DETERMINISTIC_TRACE_AND_ARTIFACT_SCORING",
+     "evidence": [
+      "https://arxiv.org/html/2606.22737v2"
+     ],
+     "qualification_evidence": [
+      "GroundEval reports deterministic scoring of what an agent fetched, cited and returned, with no judge model"
+     ],
+     "qualification_evidence_classes": [
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Strong on 'did the agent use the artifact', silent on 'is the payload the answer'.",
+      "CAPABILITY_STRENGTH": "An evaluation harness with its own domain configuration, not a runtime gate.",
+      "WALL_CLOCK": "Offline batch, not per-request.",
+      "INCREMENTAL_COST": "A framework plus a question corpus to sit in the producer path.",
+      "RELIABILITY": "Good for audits; would not run on every solve.",
+      "VERIFIABILITY": "Independent by construction, which is why it is useful as an auditor rather than as the gate."
+     }
+    }
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
+   "selected_route_preflight": {
+    "selected_route": "PROJECT_THE_FIELD_THE_ADAPTER_ALREADY_WROTE_AT_THE_DOORS_SINGLE_EXIT",
+    "checked_at_utc": "2026-10-31T16:21:44Z",
+    "max_age_hours": 2,
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "python3 (CPython 3.11.2) in the sandbox",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -VV reports CPython 3.11.2 in this workspace"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical/runtime/answer_shape_v1.py and its two call sites",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "13 tests in canonical/tests run green in 0.084 s on this tree"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "git.repository.operate.v1 OPS tuple",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "test_a_read_cannot_be_a_rewrite_v1 asserts OP_NOT_DECLARED:reset/push/stash/revert:declared=log,status,diff,show,blame,branch,commit"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A run is certified by an artifact that measures instead of executing, a completeness claim is certified over a scope of one file, and an enumeration is answered by a scalar taken from the first record: measured 2026-10-31 on current main, six of seventeen PASSes were wrong -- 'Run the script <f>', 'Run a static analysis pass on <dir>' and 'Run the tests in <t>' were all answered by python.repository.acceptance.measure.v1, whose own artifact reports test_count 0, tests_pass false, terminal_authority false and hard_nonclaims[0] == MEASUREMENT_SUCCESS_IS_NOT_TASK_ACCEPTANCE; 'Find every caller of build_plan in <f>' was answered by an index over <f> alone (1 of 7 call sites) with 'truncated': false; 'Which tests does <f> break' delivered the integer 0 from records.0.tests; and 'Check for security vulnerabilities in <f>' called itself complete with bandit absent.",
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_GDPVAL_GE_1846",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "AUTOMATIONBENCH_GE_40",
+   "HLE_TOOLS_GE_67_7",
+   "TB_SCIENCE_GE_58_7",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+  ],
+  "proof_state_reachability": "DIRECT_PROBE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_ON_SANDBOX_MEASUREMENT_ONLY__NO_TERMINAL_OR_FAMILY_CREDIT_IS_CLAIMED",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "NEVER_CERTIFY_A_WRONG_ANSWER_ANSWER_SHAPE_AND_STATED_OPERATION_V1_20261031_V1",
+   "falsifier_id": "A_SENTENCE_THAT_ASKS_FOR_MEMBERS_OR_FOR_A_REWRITE_STILL_RECEIVES_A_PASS_CARRYING_A_COUNT_OR_A_READ",
+   "decisive_question": "MAY_A_DOOR_CERTIFY_A_PASS_WHOSE_PAYLOAD_DOES_NOT_ANSWER_THE_SENTENCE_OR_WHOSE_OPERATION_IS_NOT_THE_ONE_THAT_WAS_STATED",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THREE_CANDIDATE_RULES_WERE_CHECKED_AND_REJECTED_BEFORE_THE_SHIPPED_ONE: A_NAIVE_NOUN_TABLE_ORDER_ANSWERED_WHICH_COMMIT_BROKE_THE_TESTS_ABOUT_TESTS_AND_WOULD_HAVE_BROKEN_ONE_OF_THE_FIVE_CORRECT_ANSWERS__A_BARE_FIND_AS_AN_ENUMERATING_VERB_REFUSED_FIND_THE_FAULT_IN_THE_FILE___AND_TREATING_EVERY_GIT_SUBCOMMAND_AS_THE_OPERATION_BROKE_SHOW_THE_LAST_THREE_GIT_COMMITS_BECAUSE_SHOW_MEANS_LOG_THERE__EACH_REJECTION_IS_MEASURED_IN_SWE_FIXES_20261031_V1_MD_AND_EACH_LEAVES_A_TEST_IN_CANONICAL_TESTS"
+  }
+ }
+}
