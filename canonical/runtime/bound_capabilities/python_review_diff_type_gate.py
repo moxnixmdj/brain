@@ -53,6 +53,8 @@ from canonical.runtime.bound_capabilities.python_review_diff_static_triage impor
     _parse_diff_ranges,
 )
 
+from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import python_interpreter_works, typecheck_python_source
+
 SCHEMA = "PROJECT_BRAIN_DIFF_TYPE_GATE_V1"
 
 
@@ -157,11 +159,28 @@ def run(args, root):
                                 advisory.append(item)
                         else:
                             advisory.append({**item, "out_of_scope": "preexisting"})
+    elif python_interpreter_works(python_exe, timeout_s):
+        if not syntax_errors:
+            for rel in sorted(files_on_disk):
+                src_text = files_on_disk[rel].read_text(encoding="utf-8", errors="replace")
+                for r in typecheck_python_source(src_text, rel):
+                    item = {"file": rel,
+                            "line": int(r["line"]),
+                            "code": str(r["code"]),
+                            "severity": str(r["severity"]),
+                            "message": str(r["message"])[:300]}
+                    if _in_ranges(changed[rel], item["line"]):
+                        if item["severity"] == "error":
+                            blocking.append(item)
+                        else:
+                            advisory.append(item)
+                    else:
+                        advisory.append({**item, "out_of_scope": "preexisting"})
     elif probe.returncode != 0 or "mypy" not in probe.stdout.strip().lower():
         mypy_version = None
 
     if mypy_version is None:
-        gate = "FAIL" if syntax_errors else "PASS_BASELINE_ONLY"
+        gate = "FAIL" if (syntax_errors or blocking) else "PASS_BASELINE_ONLY"
     elif syntax_errors or blocking:
         gate = "FAIL"
     else:

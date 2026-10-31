@@ -93,10 +93,10 @@ def _run_adapter(cid: str, args: dict, world: pathlib.Path) -> dict:
 
 def _python_ok(world: pathlib.Path, argv: list[str]) -> tuple[bool, str]:
     """Run a suite with THIS process's python, in the world, and report the truth."""
+    from canonical.runtime.bound_capabilities._swe_static_soundness_v1 import universal_test_argv
     env = {"PYTHONDONTWRITEBYTECODE": "1", "PYTHONPATH": str(world),
            "PATH": "/usr/local/bin:/usr/bin:/bin"}
-    proc = subprocess.run([sys.executable, "-B", "-m", "pytest", "-q",
-                           "-p", "no:cacheprovider"] + argv,
+    proc = subprocess.run(universal_test_argv(sys.executable, argv),
                           cwd=str(world), capture_output=True, text=True,
                           timeout=300, env=env)
     tail = "\n".join((proc.stdout + proc.stderr).strip().splitlines()[-4:])

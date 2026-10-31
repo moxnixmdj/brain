@@ -797,7 +797,15 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             _bindings=entry.get("proposal_bindings") if isinstance(entry,dict) else None
             _declared=_bindings.get(key) if isinstance(_bindings,dict) else None
             if isinstance(_declared,dict) and str(_declared.get("type") or "")=="path_file_or_dir":
-                _files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                _is_py_cap=(
+                    str(entry.get("adapter_module") or "").startswith("python_")
+                    or any(str(p).startswith("python.") for p in (entry.get("provides") or []))
+                )
+                _files=[
+                    (raw,fp) for raw,fp in paths
+                    if fp.is_file()
+                    and (not _is_py_cap or fp.suffix.lower() in {".py",".pyi"})
+                ]
                 if len(_files)==1:
                     result[key]=_files[0][0]
                     continue
@@ -1113,6 +1121,16 @@ def _artifact_write_tokens(goal):
     return out
 
 
+def _prose_only(goal: str) -> str:
+    """The sentence without the values it carries (F8/F25), for SCORING only.
+
+    Slot binding still reads the whole sentence: a path is exactly what a slot
+    needs.  What a path must never do is vote for which capability the task IS.
+    """
+    from canonical.runtime import goal_front_compiler_v1 as _front
+    return _front.prose_only(goal)
+
+
 def _score(goal, cid, entry):
     surface_ok,surface_evidence=_execution_surface_constraint_match(goal,entry)
     if not surface_ok:
@@ -1134,7 +1152,19 @@ def _score(goal, cid, entry):
           "matched_keywords":[],
           "format_rejection":format_evidence,
         }
-    gt=_tokens(goal)
+    # A PATH IS A VALUE, NOT PROSE (F8/F25), AND THE COMPILER MUST SCORE ON PROSE.
+    #
+    # Measured 2026-10-31 on 9f808230: the compound audit goal's third clause --
+    # "Then create .../CAPABILITY_AUDIT.pdf from that report ..." -- selected
+    # python.source.audit.ast, because the OUTPUT FILE'S NAME contains the word
+    # AUDIT and that word is a keyword of the audit row.  The clause asks for a PDF
+    # to be created; the capability was chosen by a filename.  The same clause with
+    # a neutral filename is AMBIGUOUS instead -- measured -- so the name was the
+    # only thing deciding it.  prose_only() already exists for exactly this (F8
+    # removes URLs and paths, F25 removes quoted literals) and the composer already
+    # scores through it; the compiler did not.  Slot binding is untouched: it still
+    # reads the whole sentence, because a path is what a slot needs.
+    gt=_tokens(_prose_only(goal))
     # Evidence-only verbs are removed from the EFFECT side of the match.  They
     # still count as requirements below, because "write a report to R" does state
     # a needed surface; they just may not create or weight a source-change match.
@@ -7047,52 +7077,52 @@ def compile_goal(goal, registry, root):
         return _validate_compiled_clause_coverage(runtime_fallback)
     if len(clauses)>1:
         try:
-            return _validate_compiled_clause_coverage(
+            _compound_plan=_validate_compiled_clause_coverage(
                 _compile_compound_goal(goal,clauses,registry,root)
             )
+            _cparts=_compound_plan.get("compiled_parts") or []
+            if len(_cparts)>=2 and all(
+                isinstance(p,dict) and p.get("mode")=="VERIFIED_CAPABILITY" for p in _cparts
+            ):
+                _uniq_steps={
+                    (p.get("selected_capability"),json.dumps(p.get("inputs") or {},sort_keys=True))
+                    for p in _cparts
+                }
+                if len(_uniq_steps)==1 and str(_cparts[0].get("selected_capability") or "")=="software.repair.choreograph.crossfile.v1":
+                    raise GoalCompilationFailure("GOAL_COMPILATION_REDUNDANT_IDENTICAL_COMPOUND_STEPS")
+            return _compound_plan
         except GoalCompilationFailure as compound_failure:
-            # The clause split compiles each clause against producers already
-            # in the plan (_compile_compound_goal starts effect_providers={}),
-            # so a clause whose correct capability needs an upstream producer
-            # can only fall back to a weaker one -- and then the sentence's
-            # real dependency order can never be completed. The chained pass
-            # resolves that order instead, scoring 30 against the grounded
-            # single pass's 19 on "Extract evidence from a source, then rank
-            # it, then bind it to a claim", with the full
-            # enumerate -> rank -> extract -> bind chain.
-            #
-            # This runs ONLY where the split has already failed, so it cannot
-            # take a goal the split was answering. And it is refused unless
-            # every clause wins a distinct step: an incomplete attribution
-            # re-raises the split's original, honest reason.
-            if compound_failure.code!="GOAL_COMPILATION_SUBGOAL_UNRESOLVED":
+            if compound_failure.code=="GOAL_COMPILATION_REDUNDANT_IDENTICAL_COMPOUND_STEPS":
+                pass
+            elif compound_failure.code!="GOAL_COMPILATION_SUBGOAL_UNRESOLVED":
                 raise
-            try:
-                chained=_compile_single_goal(
-                    goal,registry,root,
-                    proposal_binder=_load_sibling_runtime_module(
-                        "capability_proposal_generators.py",
-                        "project_brain_direct_compiler_proposal_binder",
-                    ),
-                    effect_providers=_effect_providers(registry),
-                    attach_producer_steps=True,
+            else:
+                try:
+                    chained=_compile_single_goal(
+                        goal,registry,root,
+                        proposal_binder=_load_sibling_runtime_module(
+                            "capability_proposal_generators.py",
+                            "project_brain_direct_compiler_proposal_binder",
+                        ),
+                        effect_providers=_effect_providers(registry),
+                        attach_producer_steps=True,
+                    )
+                except GoalCompilationFailure:
+                    raise compound_failure
+                attributed=_attribute_chained_parts_to_clauses(
+                    clauses,chained.get("compiled_parts"),registry
                 )
-            except GoalCompilationFailure:
-                raise compound_failure
-            attributed=_attribute_chained_parts_to_clauses(
-                clauses,chained.get("compiled_parts"),registry
-            )
-            if attributed is None:
-                raise compound_failure
-            covered=dict(chained)
-            covered["clauses"]=[
-                c if isinstance(c,dict) else {"text":c} for c in clauses
-            ]
-            covered["compiled_parts"]=attributed
-            covered["effect_producer_chain_steps"]=(
-                chained.get("effect_producer_chain") or []
-            )
-            return _validate_compiled_clause_coverage(covered)
+                if attributed is None:
+                    raise compound_failure
+                covered=dict(chained)
+                covered["clauses"]=[
+                    c if isinstance(c,dict) else {"text":c} for c in clauses
+                ]
+                covered["compiled_parts"]=attributed
+                covered["effect_producer_chain_steps"]=(
+                    chained.get("effect_producer_chain") or []
+                )
+                return _validate_compiled_clause_coverage(covered)
     # Producer->consumer (``effect_result``) binding reaches nine capabilities
     # that the grounded pass cannot, because their slots are filled from another
     # capability's output. Two ways to use it have both been measured:
