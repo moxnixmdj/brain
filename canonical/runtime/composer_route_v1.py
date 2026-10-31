@@ -915,6 +915,27 @@ _INSIDE_THE_FILE_NOUNS = (
     r"semicolon|semicolons|whitespace|trailing|leading|license|licence"
 )
 
+# A mutating prose command consumes EVERY object its verb names.  ``rm`` has an
+# arity of one, so a sentence that names a second thing to delete -- "Delete
+# <b>/prod.db and the app directory, then report what you removed" -- states two
+# deletions, and serving it with ``rm -r <b>/prod.db`` performs one of them and
+# silently drops the other, because the second object is a NOUN PHRASE and never
+# becomes a path.  Measured 2026-10-31 on the hardcore SWE surface: that sentence
+# deleted the database file, left the directory standing, and reported
+# ``PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`` -- an
+# irreversible effect certified as the whole request.
+#
+# The rule is the arity rule's dual.  Arity says a pattern that wants two paths
+# and finds one is refused; this says a pattern that wants one object and finds
+# two is refused as well.  It is stated as the SHAPE of a second object -- a
+# conjunction followed by a noun phrase whose head is a directory, folder or tree
+# -- and not as a list of sentences, so it applies to every row that deletes.
+_SECOND_DELETION_OBJECT = re.compile(
+    r"\b(?:and|&|,)\s+(?:also\s+|then\s+)?(?:the\s+|its\s+|all\s+|every\s+|a\s+|an\s+)?"
+    r"(?:[\w./*-]+\s+){1,2}?(?:sub-?director(?:y|ies)|director(?:y|ies)|"
+    r"folders?|trees?|dirs?)\b")
+
+
 _PROSE_COMMAND: tuple[tuple[str, str, Any, int], ...] = (
     # Synonyms measured rather than guessed: "duplicate the file a as b" bound
     # nothing at all, so a request the machine can do was refused for want of one
@@ -2814,10 +2835,9 @@ def _prose_argv(sentence: str) -> list[str] | None:
             return [program, *_cut_flags(column), str(paths[0])]
         if program == "cp" and _DIRECTORY_REQUEST.search(text):
             return [program, "-r", str(paths[0]), str(paths[1])]
-        if program == "rm" and re.search(
-            r"\band\s+(?:the\s+|a\s+)?[A-Za-z0-9_./-]+\s+(?:directory|folder|file|database)\b",
-            sentence, re.IGNORECASE,
-        ):
+        if program == "rm" and _SECOND_DELETION_OBJECT.search(text):
+            # Two deletions named, one command available.  Refuse rather than
+            # perform the first and report the pair as done.
             return None
         if (program == "rm" and _DIRECTORY_REQUEST.search(text)
                 and not re.search(r"\bfiles?\b|\*|\bnamed\b|\bpattern\b", text)):
