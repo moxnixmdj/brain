@@ -30489,7 +30489,7 @@
   "engines": 26,
   "knowledge_documents": 206,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6532,
+  "research_index_records": 6533,
   "routing_tokens": 2262,
   "skills": 18,
   "source_index_entry_points": 428,
@@ -30498,7 +30498,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8e3a939d108c3e28e39087c125c44cfbe1c80526f56bcc0128401e51786e5507"
+  "value": "7e4f3dd0660edaec3ace760e4389d74e42ffd7dfd79f8ab851bd826da1bd3a4c"
  },
  "engines": [
   {
@@ -200423,6 +200423,51 @@
     "so": 2,
     "v1": 2,
     "verifies": 2
+   }
+  },
+  {
+   "action_id": "A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1",
+   "capability": false,
+   "date": "2026-10-31",
+   "id": "research:canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "83a72a6e4369526ac0bf455ea7e50074a2a085b526fef20b556bcb2e90dcb6c5",
+   "status": "",
+   "terms": {
+    "10": 1,
+    "18": 1,
+    "2-sentence": 1,
+    "2026-10-31": 1,
+    "20261031": 1,
+    "22": 1,
+    "25": 1,
+    "28": 2,
+    "321": 1,
+    "68": 1,
+    "a_census_that_cannot_fail_is_not_a_gate_v1_20261031_v1": 1,
+    "after": 1,
+    "against": 1,
+    "anything": 1,
+    "artifact": 1,
+    "being": 1,
+    "builds": 1,
+    "but": 1,
+    "census": 4,
+    "every": 2,
+    "exits": 2,
+    "fix_race": 2,
+    "floor": 3,
+    "green": 2,
+    "measured": 2,
+    "nobody": 2,
+    "not": 3,
+    "now": 2,
+    "number": 2,
+    "runs": 2,
+    "tests": 2,
+    "v1": 2
    }
   },
   {
