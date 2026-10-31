@@ -37,6 +37,20 @@ The missing-input negative control now uses the registered Python symbol index i
 
 The compiled artifact is regenerated from the final tree; its own digest block and PR record identify it. The current digest is deliberately not embedded in this root knowledge document, avoiding a self-referential compiler input.
 
+## Concurrent upstream restoration
+
+Main advanced from restoration rung 46 to rung 52 (`4ed8fce1`) while the initial verification ran. Its changes were registry-only and were integrated without dropping any upstream declaration. Two of our three navigation restorations are now also upstream, leaving just one additional declaration relative to that base. The actual public-contract test derives the primary route independently from the current registry and checks its reported identity/basis exactly; it still independently checks the repaired function on 401 inputs.
+
+Post-integration measurements:
+
+- Caller/destination/integration/public-contract smoke: **74 passed, 12.65 s**.
+- Wider routing/acceptance: **55 passed, 12 failed, 14.09 s**; remaining failures are disclosed, not treated as green.
+- Model diagnostics: **31/33**, including the independently checked source audit restored upstream and all **5/5 negative controls**. SQLite creation and test-audit execution remain failing.
+
+The integrated 16-module run also passed all **299 cases in 97.38 seconds** on the rung-52 registry. No whole-suite or overall speedup claim follows from this.
+
+Main then advanced to rung 54 (`7502e90b`), again changing only the registry. All three original navigation restorations are now upstream; this branch adds **zero registry declarations** relative to that base. Post-update smoke passed **74/74 in 11.70 s**. The full 299-case run above was not rerun after this final registry-only update. The regenerated artifact covers the current registry, not the earlier smaller catalog.
+
 ## Corrected landing diagnosis
 
 The live GitHub branch-rules endpoint `repos/moxnixmdj/brain/rules/branches/main` declares the signed `referee/repo-integrity-guard` as its required status check, with strict up-to-date enforcement and a pull-request requirement. The local missing-intent and scope diagnostics remain failures, but they are not listed as required status checks by that endpoint. Earlier statements that they necessarily prevent any normal GitHub merge were too strong.
