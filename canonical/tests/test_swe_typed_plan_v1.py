@@ -117,19 +117,37 @@ class TypedPlanEvidenceTests(unittest.TestCase):
         "Type-check the file X" and no-op'd to a PASS with the source unchanged.
         The plan must refuse effect-inconsistent goals so the front door keeps
         its fail-closed verdict.  Independent oracle: the live solve() verdict
-        and the filesystem (source bytes unchanged)."""
+        and the filesystem (source bytes unchanged).
+
+        Re-measured 2026-10-29.  This test used to assert ``build_plan is None`` for both
+        sentences, which was only true while NO capability that type-checks or lints was
+        reachable.  Both now are -- ``python.review.diff_type_gate.v1`` runs mypy and
+        ``python.review.diff_static_triage.v1`` runs ruff, each on the change set the
+        declared-input derivation builds from the stated file -- so the absence is gone and
+        the pin has to name the falsifier it was actually protecting: the plan may never be a
+        capability that does not state the effect, the door may never pass via one, and the
+        file must not be edited by a read-only gate.  The refusal path is still pinned by the
+        negative control at the end (no stated file -> no change set -> no plan).
+        """
         base = _fresh("effect")
         calc = _rel(base / "pkg/calc.py")
-        for goal in ("Type-check the file %s." % calc,
-                     "Lint the file %s." % calc):
-            # plan layer refuses
-            self.assertIsNone(plan.build_plan(goal, ROOT), goal)
-            # and the live door stays fail-closed with no retry credit
+        for goal, effect in (("Type-check the file %s." % calc, "type"),
+                             ("Lint the file %s." % calc, "triage")):
+            chosen = plan.build_plan(goal, ROOT)
+            if chosen is not None:
+                cid = str(chosen[2].get("selected_capability") or "")
+                self.assertIn(effect, cid, (goal, cid))
             result = door.solve({"task_id": "SWE_effect", "goal": goal})
-            self.assertIs(result.get("pass"), False, (goal, result.get("status")))
-            self.assertNotIn("typed_swe_retry", result, goal)
+            if result.get("pass") is True:
+                cid = str(result.get("compiled_capability_id") or "")
+                self.assertIn(effect, cid,
+                              "a PASS that does not come from the stated effect: %s" % cid)
+            # a read-only gate never edits the file it reviews
             self.assertEqual((base / "pkg/calc.py").read_text(),
                              "def add(a, b):\n    return a - b\n", goal)
+        # negative control: with nothing stated there is no change set, so no plan
+        with mock.patch.object(derivation, "stated_existing_files", return_value=[]):
+            self.assertIsNone(plan.build_plan("Type-check the file %s." % calc, ROOT))
 
     def test_refactor_module_is_relative_to_source_root(self):
         """The three refactor adapters resolve ``module`` relative to
@@ -178,14 +196,30 @@ class LiveFrontDoorRetryTests(unittest.TestCase):
 
     def test_a_failing_retry_never_forges_a_pass(self):
         """Where the adapter itself cannot do the job, the door stays fail-closed.
-        The Point: the retry must not convert an honest adapter fault into credit."""
-        base = _fresh("honest_fail")
-        # Bare "fix X": primary executes a composed chain (executed=True), so the
-        # conservative guard must NOT re-run anything; verdict stays fail-closed.
-        goal = "fix %s" % _rel(base / "pkg/calc.py")
+
+        The Point: no credit without a REPAIR THE FILESYSTEM CAN SEE.
+
+        This case used to be a bare "fix <calc.py>" on the full fixture, and it passed because the
+        repair route could not be reached at all.  It is reachable now -- measured 2026-10-30, the
+        same sentence turns ``return a - b`` into ``return a + b`` and the suite gate goes red to
+        green, i.e. credit the filesystem confirms.  So the guard is exercised where the adapter
+        genuinely cannot do the job: a stated source with NO test that could prove the repair.  The
+        adapter's own contract needs the red test it must turn green; without one there is nothing
+        to verify against, and the door must refuse instead of editing by faith.
+        """
+        base = WORK / "honest_fail"
+        if base.exists():
+            shutil.rmtree(base)
+        (base / "pkg").mkdir(parents=True)
+        source = base / "pkg/calc.py"
+        source.write_text("def add(a, b):\n    return a - b\n", encoding="utf-8")
+        before = source.read_bytes()
+        goal = "fix %s" % _rel(source)
         result = door.solve({"task_id": "SWE_honest", "goal": goal})
-        self.assertIs(result.get("pass"), False)
+        self.assertIs(result.get("pass"), False, result.get("status"))
         self.assertNotIn("typed_swe_retry", result)
+        # Independent oracle: the refusal left the source exactly as it found it.
+        self.assertEqual(source.read_bytes(), before)
 
     def test_non_swe_front_door_refusals_are_byte_for_byte_unchanged(self):
         """The three pinned regression goals are non-SWE: retry never fires."""
@@ -260,7 +294,18 @@ class EffectFamilyEnumerationTests(unittest.TestCase):
         self.assertIs(result.get("pass"), True, result.get("status"))
         self.assertIsNone(result.get("tool_truth_errors"))
         self.assertIsNone(result.get("observed_effect_errors"))
+        # The artifact's PLACE is read from the run, not assumed: an earlier version of this
+        # test looked only inside the user's tree, which is where the report went when the
+        # adapter was writing it over the file the sentence named (measured 2026-10-29).  It
+        # now goes to the spool, so the test follows what the run says it produced -- and the
+        # independent oracle below (the two real callers by name) is unchanged.
         reports = list(base.rglob("*.json"))
+        for row in result.get("execution") or []:
+            produced = str(((row or {}).get("result") or {}).get("output_path") or "")
+            if produced:
+                candidate = ROOT / produced
+                if candidate.is_file():
+                    reports.append(candidate)
         self.assertTrue(reports, "no report artifact was written")
         callers = set()
         for rf in reports:

@@ -605,6 +605,23 @@ _MAX_RETRIES = 6
 _FILENAME = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_./-]*\.[A-Za-z0-9_]{1,8}")
 
 
+_REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+def _target_bases(named: str) -> list[pathlib.Path]:
+    """The directories a stated output name can be relative to.
+
+    The same two bases the rest of the door uses: the working directory, and the
+    repository root this module lives in.  A name that is absolute stands alone.
+    """
+    if pathlib.Path(named).is_absolute():
+        return [pathlib.Path("/")]
+    bases = [pathlib.Path.cwd()]
+    if _REPO_ROOT not in bases:
+        bases.append(_REPO_ROOT)
+    return bases
+
+
 def output_name(gap: str) -> str | None:
     """The file the goal asks for, read out of the goal.
 
@@ -1012,6 +1029,30 @@ def discover(gap: str, budget: int = 120, seed: int = 11,
 
     named = output_name(gap) or ""
     target = named if named.endswith(suffix) else ("input.txt" + suffix)
+
+    # A file that is ALREADY THERE is not a file this route can have produced.
+    #
+    # Every oracle below asks one question: did `target` appear?  (`is_goal =
+    # target in snapshot`.)  When the goal names a file that already exists, the
+    # oracle is satisfied before any program runs, so no action can be credited
+    # with creating it and no plan can be verified by it -- the route cannot
+    # learn anything, and it must not claim it did.  It still paid for the whole
+    # search: measured 2026-10-29, "Format <calc.py>" spent **48.7 s** running
+    # 442 actions (5,046 subprocesses) to conclude
+    # OPEN__NO_USABLE_PRIOR_EXPERIENCE, and 13 forms of "Format"/"Replace ... in"
+    # in a 45-request matrix spent 33-51 s each to refuse in the same way.
+    #
+    # The two early exits above are the same shape -- "this route cannot possibly
+    # answer that, so say so before acting" -- and this is the third case of it.
+    # It is cheaper AND safer: refusing here also means no exploration ever runs
+    # a program with the user's existing file as its target.
+    if named and any((base / named).exists() for base in _target_bases(named)):
+        return {"closed": False,
+                "status": "OPEN__THE_TARGET_ALREADY_EXISTS",
+                "detail": ("this route can only prove that a program MADE %s, and it is "
+                           "already there, so no action it runs can be credited with "
+                           "producing it" % named),
+                "suffix": suffix, "target": named}
     # candidates by NAME (gzip for .gz) and by MEANING (convert for resize)
     progs = programs_for(suffix)
     for _p in programs_for_goal(gap):

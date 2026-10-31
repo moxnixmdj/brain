@@ -73,10 +73,22 @@ MAX_TIMEOUT_S=600
 
 
 def _run_test(argv:list[str],cwd:pathlib.Path,timeout:int)->tuple[int|None,bytes]:
-    """Run the stated test command verbatim.  No shell, so nothing is invented."""
+    """Run the stated test command verbatim.  No shell, so nothing is invented.
+
+    The command line is the caller's; the IMPORT PATH is the tree's.  Measured
+    2026-10-29: without the shared ``_source_env`` the gate that matters most --
+    "the stated test passes IN PLACE, against the real source tree, after the
+    write" -- could not run at all in a package layout.  The patch was found, the
+    bytes were written, and the in-place verification then failed with the same
+    ModuleNotFoundError the pre-apply gate had seen, so ``from pkg.calc import
+    add`` was reported as FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY
+    even though the candidate was correct.  One environment, one definition,
+    shared with every other member of the repair family.
+    """
     try:
         proc=subprocess.run(
             argv,cwd=str(cwd),capture_output=True,timeout=timeout,check=False,
+            env={**os.environ,**_REPAIR._PATCH._source_env(cwd)},
         )
     except subprocess.TimeoutExpired:
         return None,b"TIMEOUT"
@@ -202,6 +214,16 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str])->dict[str,Any]:
         # cannot be read as "I changed something".
         out["pass"]=True
         out["output_verified"]=True
+        # SAY THE FACT IN THE VOCABULARY THE DOOR ALREADY HONOURS.  ``already_satisfied`` is how
+        # every repair loop in this repository reports a green baseline (the door maps
+        # ``BASELINE_ALREADY_PASSES`` onto it), and a request whose post-state already holds owes no
+        # byte change.  This adapter measured exactly that -- ``applied`` false, ``files_written``
+        # empty, ``pre_apply_test_returncode`` 0 -- and stated it only in ``status``, so the door's
+        # source-change gate read the unchanged file as a promise it had failed to keep: measured
+        # 2026-10-31, the idempotent sentence "Repair <src> so that the unit tests in <t> pass" on an
+        # already-green tree came back FAIL_CLOSED__PROMISED_SOURCE_CHANGE_NOT_APPLIED.
+        out["already_satisfied"]=True
+        out["edited"]=False
         out["status"]="PASS__STATED_TEST_ALREADY_PASSES_NOTHING_TO_REPAIR"
         out["detail"]=(
             "The stated test passes on the current source, measured before any write, "

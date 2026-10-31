@@ -36,7 +36,6 @@ from typing import Any, Mapping
 from canonical.runtime import capability_selection_retrieval_v1 as selection
 from canonical.runtime import declared_input_derivation_v1 as derivation
 from canonical.runtime import goal_compiler
-from canonical.runtime import goal_front_compiler_v1 as front
 from canonical.runtime import live_integrated_brain_v1 as live_brain
 
 SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
@@ -55,16 +54,87 @@ SCHEMA = "PROJECT_BRAIN_SWE_TYPED_PLAN_V1"
 
 _FAMILIES: tuple[tuple[tuple[str, ...], tuple[str, ...], str], ...] = (
     # (goal triggers, registry-keyword terms to enumerate candidates, required effect token in cid)
-    (("move the function", "move the class", "move symbol", "relocate function", "relocate class"),
-     ("move_symbol", "relocate symbol"), "move_symbol"),
-    (("add a parameter", "add parameter", "new parameter"),
-     ("add_parameter", "signature evolution"), "source.add_parameter"),
-    (("add a function", "implement a function", "implement function", "create a function"),
-     ("implement_function_spec", "function specification"), "implement_function_spec"),
-    (("regression test that would have caught", "add a regression test"),
-     ("python.tests.regression.synthesized",), "choreograph"),
     (("caller", "who calls", "call site", "call graph", "find every call"),
      ("caller", "call graph", "who calls"), "symbol"),
+    # A BUG REPORT IS A REPAIR REQUEST.  Measured 2026-10-29: "Bug: <S> add()
+    # returns the wrong value. Failing test: <T>." has no imperative verb, so no
+    # lexical route saw a request for a change: the primary compiler planned
+    # docx.document.create_from_json_record for it (matched on the single token
+    # "value") and the selector's own decisive route picked the repair LOOP, whose
+    # contract is a candidate patch with the source restored -- a PASS over a file
+    # that was still broken.  The effect vocabulary in
+    # capability_selection_retrieval_v1._EFFECT_WORDS has always listed bug/broken/
+    # failing as repair words; what was missing was the same three-part family the
+    # caller-finding route already uses.  The registry's own keyword data then makes
+    # this decisive with no id table: of the four rows whose declared surface
+    # mentions landing a fix, exactly one (python.software.repair.apply.verified.v1)
+    # admits every input the sentence states, and its name carries the effect token.
+    # A TYPE CHECK IS A REVIEW.  Measured 2026-10-29: "Type-check the file X" is an explicit SWE
+    # request (the verb list has it) whose lexical shortlist never proposed the one capability that
+    # does it, while the primary door reached a CONTRACT sampler
+    # (python.contract.check.crosshair.v1).  The declared-input derivation can now hand
+    # python.review.diff_type_gate.v1 the change set it declares, so the family route -- which lets
+    # admit() be the oracle over rows the registry's OWN keywords name -- becomes decisive.
+    (("type-check", "type check", "typecheck", "type checks", "mypy"),
+     ("type_gate", "typecheck", "type check", "type-check", "mypy"), "type"),
+    # THE EFFECT A BUG REPORT STATES IS REPAIR, NOT "APPLY SOMETHING".
+    #
+    # The token was "apply", and once the declared-input derivation could hand a review change set
+    # to any row that declares ``diff_path``, TWO rows bound a repair sentence:
+    # ``python.software.repair.apply.verified.v1`` and ``python.repo.diff_apply_full_testgate.v1``
+    # ("apply a diff to a tree and run the whole suite").  The second one's change set is the stated
+    # file REWRITTEN AS ITSELF, so admitting it turned "fix this broken function" into "apply a
+    # no-op patch, suite passes" -- the false PASS this repository exists to refuse, one layer up.
+    # Measured 2026-10-30 on ``efe0877``: five red tests in
+    # ``canonical.tests.test_swe_typed_plan_v1``, all of them this ambiguity.  The sentence states
+    # a repair; the row that repairs says so in its name; the row that applies a SUPPLIED diff does
+    # not, and no diff is supplied here.
+    (("bug:", "bug report", "bug in", "broken", "failing test", "test fails",
+      "tests fail", "returns the wrong", "wrong value", "does not pass",
+      "doesn't pass"),
+     ("apply", "land", "write the fix"), "repair"),
+    # THE FOUR REVIEW GATES ARE MEASUREMENTS, AND A MEASUREMENT NAMES ITS EFFECT.
+    # Measured 2026-10-29: each of these four rows exists, executes and reports a real
+    # verdict, and none was reachable from the sentence that describes it -- the lexical
+    # shortlist proposed composers and PDF converters instead, so "measure the test
+    # coverage of <file>" was answered with FAIL__RAW_GOAL_COMPILATION_GAP and "review
+    # <file> for security issues" reached a document converter.  The family route is the
+    # established wiring for exactly this ("type check" above): enumerate by the
+    # registry's OWN keywords, let admit() be the oracle, require the effect token in the
+    # id.  Nothing is added to the registry and no id table is hardcoded.
+    # EXTRACT INTO A FUNCTION.  ``python.refactor.extract_function.v1`` has been in the registry
+    # since the refactor round and no sentence could reach it: the lexical matcher answered "extract
+    # ... into a new function named sum2 in <f>" with math.numeric_expression.sympy, and the family
+    # route had no row for the effect.  Measured 2026-10-30.  The declared-input derivation can now
+    # hand it the whole coordinate (module, qualname, statement span, new name, run_tests), so the
+    # family becomes decisive on admission exactly like the review gates and the type check.
+    (("extract", "into a new function", "pull out into"), ("extract", "refactor"), "extract"),
+    # WHAT A RENAME REALLY TOUCHES IS THE QUESTION BEFORE THE RENAME.
+    #
+    # `python.source.crossfile_edit.choreograph.v1` plans every site a checked-in change must touch
+    # -- the thing grep gets wrong.  Its `edits_path` had no producer anywhere in the pipeline, so
+    # measured 2026-10-30 all three ordinary sentences for it refused:
+    #
+    #   "Which files must change to rename the symbol `mul` to `multiply` in <dir>?"
+    #        -> software.repair.choreograph.crossfile.v1, a MUTATOR, refused for answering a
+    #           read-only question with a writer
+    #   "Plan the rename of ..." -> the symbol index, refused PROMISED_SOURCE_CHANGE_NOT_APPLIED
+    #
+    # `declared_input_derivation_v1` can now prove the whole contract (the stated rename pair, the
+    # stated directory as source_root, and the ONE module under it that really defines the symbol),
+    # so the family route becomes decisive on admission exactly like the review gates above.  The
+    # token is `crossfile_edit`, which only the PLANNER carries -- the repair choreographer shares
+    # the words "crossfile"/"choreograph" and would otherwise make the family ambiguous.
+    (("which files must change", "what has to change", "what must change", "files must change",
+      "sites must change", "cross-file", "crossfile", "plan the rename"),
+     ("cross-file", "choreograph", "plan"), "crossfile_edit"),
+    (("test coverage", "coverage"), ("coverage",), "coverage"),
+    (("security issue", "security review", "security audit", "security scan",
+      "vulnerab", "check for security"), ("security", "vulnerab", "bandit"), "security"),
+    (("mutation score", "mutation test", "mutants", "mutation coverage"),
+     ("mutation", "mutant"), "mutation"),
+    (("performance regression", "performance review", "benchmark", "slower than",
+      "timing regression"), ("performance", "perf", "benchmark"), "perf"),
     # Measured 2026-10-29: "Show the last three git commits" is the plainest thing a
     # software engineer asks, and the machine had no git capability at all -- it
     # returned PASS through an inventory row (see live_brain_route_admission_v1.
@@ -97,13 +167,20 @@ def stated_family_token(goal: str) -> str | None:
     fam = _family_terms(goal)
     return fam[1] if fam else None
 
+# A sentence that ASKS ABOUT a defect is not a request to change the file.  The
+# family route is authoritative once it fires, so "Explain the bug in X" would
+# otherwise be answered by editing X -- a change nobody asked for.  Analysis words
+# therefore keep the family route out of the way, and the lexical/typed paths
+# decide (and fail closed) exactly as they did before.
+_ANALYSIS_ONLY_TRIGGERS = ("explain", "describe", "summarise", "summarize",
+                           "diagnose", "why is", "why does", "how does", "review the")
+
 
 def _family_terms(goal: str) -> tuple[tuple[str, ...], str] | None:
-    # Paths and quoted values are task data, not evidence of an effect family.
-    low = front.prose_only(str(goal or "")).lower()
+    low = str(goal or "").lower()
+    if any(word in low for word in _ANALYSIS_ONLY_TRIGGERS):
+        return None
     for triggers, terms, token in _FAMILIES:
-        if token == "symbol" and ("update every caller" in low or "rename " in low):
-            continue
         if any(t in low for t in triggers):
             return terms, token
     return None
@@ -119,8 +196,7 @@ def is_swe_request(goal: str) -> bool:
     return _family_terms(goal) is not None
 
 
-def _execution_template(entry: Mapping[str, Any], removed: set[str],
-                        extra_inputs: Mapping[str, Any] | None = None) -> dict[str, Any]:
+def _execution_template(entry: Mapping[str, Any], removed: set[str]) -> dict[str, Any]:
     """Copy the adapter's declared template, dropping ONLY adapter-defaulted
     ``${input.*}`` placeholders.  Slots with a bound value (including derived
     ones) are kept so the adapter still receives them at run time."""
@@ -130,8 +206,6 @@ def _execution_template(entry: Mapping[str, Any], removed: set[str],
         value = args[key]
         if key in removed and isinstance(value, str) and "${input." in value:
             args.pop(key, None)
-    if extra_inputs and extra_inputs.get("synthesize_regression_test") is True:
-        args["synthesize_regression_test"] = True
     template["args"] = args
     return template
 
@@ -173,16 +247,6 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
     """
     from canonical.runtime import goal_front_compiler_v1 as front
     prose = front.prose_only(goal).lower()
-    if re.search(r"\b(?:find\s+every\s+caller|who\s+calls)\b", prose):
-        if not any("symbol" in str(c).lower() for c in capability_ids):
-            return "R10_CALLER_QUERY_EFFECT_UNSERVED"
-    if re.search(r"\badd\s+(?:a\s+)?regression\s+test\b", prose) and re.search(r"\b(?:fix|repair)\b", prose):
-        has_reg_cap = any(
-            (((registry.get(str(c)) or {}).get("action_template") or {}).get("args") or {}).get("synthesize_regression_test") is True
-            for c in capability_ids
-        )
-        if not has_reg_cap:
-            return "R10_REGRESSION_TEST_EFFECT_UNSERVED"
     imperative = re.search(
         r"(?:^|[.;\n]|\bthen\b|\band\b)\s*"
         r"(?:(?:please|first|next)\s+|(?:can|could|would)\s+you\s+(?:please\s+)?)?"
@@ -200,7 +264,7 @@ def implementation_effect_error(goal: str, capability_ids, registry: Mapping[str
         return None
     # These are actual registry effect namespaces, not keyword relevance or id
     # substrings such as 'patch' (which could mean a report-only patch search).
-    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.', '.feature.implement.')
+    material = ('.source.write.', '.refactor.', '.edit.', '.issue_to_pr.')
     for cid in capability_ids:
         entry = registry.get(str(cid)) or {}
         if any(any(part in str(effect) for part in material)
@@ -241,11 +305,10 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     a real registry row that must bind every declared input from the sentence.
 
     Measured 2026-10-28: "Find every caller of the function add in X" enumerates
-    {symbol.index.ast, change_impact.testselect}; symbol.index.ast names the
-    requested effect and its artifact is a REAL callers_of map. Later input
-    derivation also made testselect/an inliner bindable, so effect eligibility
-    must precede ambiguity counting, not rely on unrelated tools failing to
-    bind. Multiple effect-eligible admissions still refuse.
+    {symbol.index.ast, change_impact.testselect}; only symbol.index.ast admits
+    (specific) and names the effect -> decisive, and its artifact is a REAL
+    callers_of map.  test-gen/lint/typecheck/extract enumerate to zero-or-many
+    admitted and therefore stay honestly fail-closed (no false PASS).
     """
     fam = _family_terms(goal)
     if fam is None:
@@ -255,18 +318,24 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     for cid, entry in sorted(registry.items()):
         if not cid.startswith(_FAMILY_SWE_PREFIXES):
             continue
-        # Apply the existing family-effect constraint BEFORE admission and
-        # ambiguity counting. Shared keywords and bindable inputs do not make
-        # an inliner/test selector an answer to a caller-index request. Filtering
-        # only after len(admitted) rejected the real index when those unrelated
-        # tools became bindable, and wasted their contract-binding work.
-        if token not in cid.lower():
-            continue
         surface = " ".join(map(str, (entry.get("keywords") or []) +
                                (entry.get("provides") or []))) + " " + cid
         low = surface.lower()
         if any(term in low for term in terms):
             candidates.append(cid)
+    if not candidates:
+        return None
+    # THE TOKEN IS THE DISCRIMINATOR, SO IT FILTERS BEFORE THE ORACLE RUNS.
+    #
+    # The third element of every family row is the effect the answer's NAME must state -- it was
+    # only checked after exactly one candidate had been admitted, which is the wrong order: a row
+    # that shares a keyword but does not produce the effect could not be the answer, yet its
+    # admission made the decision AMBIGUOUS and the request fail closed.  Measured 2026-10-29:
+    # "measure the test coverage of <file>" enumerated five rows, three of them bound, and the
+    # coverage gate -- the only row whose name states the effect -- was lost to that ambiguity.
+    # Filtering first is a tightening: no candidate the token excludes could ever have been
+    # returned, and every family that was decisive before is still decisive.
+    candidates = [cid for cid in candidates if token in str(cid).lower()]
     if not candidates:
         return None
     admitted: list[tuple[str, dict]] = []
@@ -285,7 +354,7 @@ def _resolve_family(goal: str, root: pathlib.Path, registry: dict,
     return cid, inputs
 
 
-def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, dict, dict] | None:
+def build_plan(goal: str, root: Any) -> tuple[dict, dict, dict] | None:
     """Return ``(registry, admissible, compiled)`` for a DECISIVE typed SWE
     selection, or ``None``.  ``None`` means: not a SWE request, ambiguous, no
     bindable proposal, effect-inconsistent, or any fault — the caller keeps its
@@ -300,8 +369,7 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
     if not is_swe_request(goal):
         return None
     try:
-        registry = (dict(compiled_context[0]) if compiled_context is not None
-                    else dict(live_brain.load_verified_registry()))
+        registry = dict(live_brain.load_verified_registry())
         declared = selection.declarations(root)
         cid = ""
         inputs: dict = {}
@@ -336,26 +404,9 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
         inputs = {**inputs, **values}
         removed = set((report.get("adapter_defaulted") or {}).keys())
 
-        # Destination identity comes from the stated ROLE, not file existence.
-        # F7/F13 can spool an occupied report elsewhere; then repair preflight
-        # checks that spool instead of the user's destination, making the verdict
-        # depend on previous requests. Reuse the front compiler's role detector
-        # (including its aliases and repeated-mention handling). This grants no
-        # overwrite authority: the existing adapter/preflight still judges the
-        # actual destination. Multiple stated destinations are ambiguous.
-        destinations = (front._named_output_destinations(goal, entry, ("output_path",), root)
-                        if "output_path" in inputs else set())
-        if len(destinations) > 1:
-            return None
-        if destinations:
-            inputs["output_path"] = next(iter(destinations))
-        else:
-            # Only relocate an incidental source binding. Never move a report
-            # the sentence explicitly directs onto an existing source file;
-            # preserve that path so the write/repair guards can refuse it.
-            relocated = _fresh_output_path(goal, root, inputs)
-            if relocated:
-                inputs["output_path"] = relocated
+        relocated = _fresh_output_path(goal, root, inputs)
+        if relocated:
+            inputs["output_path"] = relocated
 
         # The three refactor adapters (rename_parameter / rename_symbol /
         # extract_function) resolve ``module`` RELATIVE to ``source_root``:
@@ -372,7 +423,7 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
             inputs["module"] = mod[len(sr.rstrip("/")) + 1:]
 
         exec_entry = dict(entry)
-        exec_entry["action_template"] = _execution_template(entry, removed, inputs)
+        exec_entry["action_template"] = _execution_template(entry, removed)
         admissible[cid] = exec_entry
 
         # Prefer the real compiled shape when the lexical compiler can produce
@@ -380,10 +431,7 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
         # lossless raw-task contract reads); fall back to a synthetic single-
         # capability plan when the compiler raised (the short-sentence case).
         try:
-            if compiled_context is None:
-                _, _, real = live_brain.compile_against_live_registry(goal, root)
-            else:
-                real = compiled_context[2]
+            _, _, real = live_brain.compile_against_live_registry(goal, root)
             compiled = dict(real)
         except Exception:
             compiled = {
@@ -394,15 +442,7 @@ def build_plan(goal: str, root: Any, *, compiled_context=None) -> tuple[dict, di
         compiled["selected_capability"] = cid
         compiled["inputs"] = inputs
         compiled["compiler_mode"] = "SWE_TYPED_PLAN_V1"
-        # The original lexical plan may describe a DIFFERENT capability. Its
-        # effects and evidence cannot follow a corrected typed selection.
-        compiled["target_effects"] = list(entry.get("provides") or []) or [cid]
-        compiled["initial_facts"] = list(entry.get("requires") or [])
-        compiled["compiled_parts"] = []
-        compiled["capabilities"] = [cid]
-        score, _, evidence = goal_compiler._score(goal, cid, entry)
-        compiled["score"] = score
-        compiled["match_evidence"] = evidence
+        compiled.setdefault("target_effects", list(entry.get("provides") or []) or [cid])
         compiled.pop("capability_dag", None)
         compiled.pop("controller_actions", None)
         return (registry, admissible, compiled)

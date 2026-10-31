@@ -1,0 +1,15 @@
+{
+  "answer": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets/config.py:4",
+  "files_scanned": 2,
+  "finding_count": 1,
+  "findings": [
+    {
+      "line": 4,
+      "path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets/config.py",
+      "redacted": "AKIA\u202620",
+      "signature": "aws_access_key_id"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_PYTHON_SECRET_SCAN_V1",
+  "source_root": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__WORLD/secrets"
+}

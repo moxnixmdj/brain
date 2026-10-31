@@ -188,22 +188,15 @@ def run(args, root):
         _fail("MODULE_MUST_BE_PY")
     module_abs = _safe_path(src_abs, module_rel, must_exist=True)
     qualname = str(args.get("qualname") or "")
-    raw_new_name = args.get("new_name")
-    new_name = str(raw_new_name if raw_new_name is not None else "")
-    new_name_was_defaulted = new_name in ("", "_extracted_helper")
-    if new_name == "":
-        new_name = "_extracted_helper"
+    new_name = str(args.get("new_name") or "")
     if not new_name.isidentifier() or keyword.iskeyword(new_name):
         _fail("INVALID_IDENTIFIER:new_name")
-    raw_start = args.get("start_line")
-    raw_end = args.get("end_line")
-    region_was_defaulted = raw_start in (None, "", 0, "0") and raw_end in (None, "", 0, "0")
     try:
-        start = 0 if region_was_defaulted else int(args.get("start_line"))
-        end = 0 if region_was_defaulted else int(args.get("end_line"))
+        start = int(args.get("start_line"))
+        end = int(args.get("end_line"))
     except (TypeError, ValueError):
         _fail("REGION_INVALID")
-    if not region_was_defaulted and not (start >= 1 and end >= start):
+    if not (start >= 1 and end >= start):
         _fail("REGION_INVALID")
     out_rel = str(args.get("output_path") or "")
     out_abs = _safe_path(repo, out_rel)
@@ -214,18 +207,7 @@ def run(args, root):
     # derived itself is run through the loader instead.
     verify_argv = [python_exe, "-m", "pytest", "-q",
                    "-p", "no:cacheprovider"] + run_tests
-    if run_tests:
-        import importlib.util as _ilu
-        if _ilu.find_spec("pytest") is None and all(str(x).endswith(".py") for x in run_tests):
-            from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
-                suite_argv as _suite_argv_explicit,
-            )
-            resolved_explicit = [
-                str((src_abs / str(x)).resolve()) if not Path(str(x)).is_absolute() else str(x)
-                for x in run_tests
-            ]
-            verify_argv = _suite_argv_explicit(python_exe, *resolved_explicit)
-    if not run_tests and ("run_tests" not in args or args.get("capability_id")):
+    if not run_tests:
         # The verification law below is the adapter's own: "the named suite runs
         # after the bytes are rewritten; red => every byte restored and
         # TESTS_RED_AFTER_EDIT; no tests => verified stays false loudly."  That
@@ -250,16 +232,7 @@ def run(args, root):
             from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import (
                 suite_argv as _suite_argv,
             )
-            try:
-                discovered = [str(x) for x in _discover_test_files(src_abs)]
-            except FileNotFoundError:
-                discovered = []
-            if (not discovered
-                    and bool(str(args.get("goal") or "").strip())
-                    and (src_abs / "__init__.py").is_file()
-                    and (src_abs.parent == repo or repo in src_abs.parent.parents)
-                    and (src_abs.parent / "tests").is_dir()):
-                discovered = [str(x) for x in _discover_test_files(src_abs.parent / "tests")]
+            discovered = [str(x) for x in _discover_test_files(src_abs)]
             if discovered:
                 run_tests = discovered
                 # Not pytest.  suite_argv collects through unittest's loader and
@@ -282,42 +255,6 @@ def run(args, root):
         _fail("SYNTAX_ERROR_IN_FILE:" + module_rel + ":" + str(exc))
 
     fn = _fn_lookup(tree, qualname.split("."))
-
-    if new_name_was_defaulted:
-        existing_top = {
-            getattr(n, "name", "")
-            for n in tree.body
-            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
-        }
-        cand = f"_{fn.name}_extracted"
-        idx = 2
-        while cand in existing_top or cand == fn.name:
-            cand = f"_{fn.name}_extracted_{idx}"
-            idx += 1
-        new_name = cand
-
-    if region_was_defaulted or (start == 0 and end == 0):
-        # Deterministic control-flow-free body slicing: find the longest contiguous
-        # statement run in fn.body (excluding docstring) without return/yield/loop-escape.
-        body_stmts = list(fn.body)
-        if (body_stmts
-                and isinstance(body_stmts[0], ast.Expr)
-                and isinstance(getattr(body_stmts[0], "value", None), ast.Constant)
-                and isinstance(body_stmts[0].value.value, str)):
-            body_stmts = body_stmts[1:]
-        best_run: list[ast.stmt] = []
-        cur_run: list[ast.stmt] = []
-        for stmt in body_stmts:
-            if _has_blocking_cf(stmt) is None:
-                cur_run.append(stmt)
-                if len(cur_run) > len(best_run):
-                    best_run = list(cur_run)
-            else:
-                cur_run = []
-        if not best_run:
-            _fail("NO_EXTRACTABLE_REGION:" + qualname)
-        start = best_run[0].lineno
-        end = getattr(best_run[-1], "end_lineno", best_run[-1].lineno)
 
     # region must be a contiguous run of complete statements at exactly ONE
     # statement-chain level.  Descend ONLY through same-scope block-stmts —
@@ -495,15 +432,10 @@ def run(args, root):
     evidence = {"run_tests": run_tests}
     gate = "PASS"
     if run_tests:
+        env = {"PYTHONDONTWRITEBYTECODE": "1"}
         import os
         env = dict(os.environ)
         env["PYTHONDONTWRITEBYTECODE"] = "1"
-        py_roots = [str(src_abs)]
-        if (src_abs / "__init__.py").is_file() and (src_abs.parent == repo or repo in src_abs.parent.parents):
-            py_roots.insert(0, str(src_abs.parent))
-        if env.get("PYTHONPATH"):
-            py_roots.append(env["PYTHONPATH"])
-        env["PYTHONPATH"] = os.pathsep.join(py_roots)
         try:
             proc = subprocess.run(verify_argv,
                                   cwd=src_abs, capture_output=True, text=True,

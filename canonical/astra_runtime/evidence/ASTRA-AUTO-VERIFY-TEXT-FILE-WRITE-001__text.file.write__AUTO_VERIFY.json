@@ -1,0 +1,26 @@
+{
+  "adapter_result": {
+    "adapter": "file_write_text",
+    "content_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+    "output_bytes": 74,
+    "output_path": "canonical/astra_runtime/tmp/tfw_verify/TEXT_FILE_WRITE_PROOF.txt",
+    "output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+    "output_verified": true
+  },
+  "capability_id": "text.file.write",
+  "independent_method": "pathlib.Path.read_bytes + hashlib.sha256, no adapter code involved",
+  "independent_output_bytes": 74,
+  "independent_output_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+  "independent_verified": true,
+  "origin_mission_id": "ASTRA-VERIFY-TEXT-FILE-WRITE-001",
+  "schema": "PROJECT_BRAIN_AUTO_BINDING_VERIFICATION_V1",
+  "semantic_roundtrip": {
+    "expected_content_sha256": "8ce68071a92cb992f8dfae9d70db838c0996f6960f8c4f489e3e72e0c21faad6",
+    "implementation_independent": true,
+    "reason": "The bytes on disk were re-derived and hashed by a code path that shares nothing with the adapter, and the digest equals the sha256 of the content that was requested.",
+    "verified": true
+  },
+  "status": "VERIFIED",
+  "verification_mission_id": "ASTRA-AUTO-VERIFY-TEXT-FILE-WRITE-001",
+  "verified_at_utc": "2026-10-23T17:06:12Z"
+}

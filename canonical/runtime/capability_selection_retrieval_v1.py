@@ -700,6 +700,32 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
                     "reason": "BINDING_REFUSED:NO_SLOT_FOR_THE_STATED_PAYLOAD:"
                               + ",".join(sorted(kinds))[:120],
                     "required_inputs": required}
+    # A ROW THAT DECLARES IT CANNOT WRITE MAY NOT BE THE TERMINAL ANSWER TO A CHANGE.
+    #
+    # Measured 2026-10-31: "Repair the python source <pkg>/calc.py so that the unit test
+    # <pkg>/test_calc.py passes, and save the repair report to <out>.json" shortlisted
+    # ``python.patch.search.test_guided.ast.v1`` (and its three ``repair.loop.*`` siblings at the
+    # same score) because the sentence names a source and a test, which is exactly the pair they
+    # take.  All four declare, in their own registry rows, that the source bytes are RESTORED after
+    # every trial and that they hold "no source write or promotion authority": they find a patch,
+    # they do not repair.  So the terminal answer was a verified CANDIDATE over an untouched file
+    # -- the last FALSE row on the capability matrix.  Every other reading of the sentence holds:
+    # the effect word ("repair"), the contract, the binding.  What was missing was the AUTHORITY.
+    #
+    # Reading the declaration, not the id (``is_source_transformer`` reads the id, and
+    # "python.patch.search..." contains "patch"): the same module holds both readers, and the
+    # sentence reader is the door's own, so a question about a change is still not a promise to
+    # make one.  Refusing the candidate here is what lets the typed selector reach
+    # ``python.software.repair.apply.verified.v1``, which binds the identical inputs and applies
+    # the verified repair (measured: applied true, files_written <pkg>/calc.py).
+    try:
+        from canonical.runtime import write_authority_v1 as _wa
+        _authority = _wa.cannot_perform_the_stated_change(goal, entry, cid)
+    except Exception:  # noqa: BLE001 - an unreadable declaration refuses nothing
+        _authority = None
+    if _authority:
+        return {"capability_id": cid, "admitted": False, "reason": _authority,
+                "required_inputs": required}
     # F4 asks a question about the CAPABILITY ("does this tool take any input?"),
     # not about the goal, so it must be answered on the DECLARED contract.  The
     # shadow entry deliberately drops every slot the adapter defaults or the

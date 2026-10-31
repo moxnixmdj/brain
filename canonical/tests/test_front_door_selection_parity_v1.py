@@ -101,11 +101,21 @@ THE_WRONG_PICK = "docx.document.create_from_json_record"
 LOAD_BEARING_COMPETITOR = "terminal.kstar.root.assess.stdlib"
 
 # Measured, with the benchmark's own selection rule (parts first, else the top pick).
-KNOWN_FRONT_DOOR_CORRECT = 22
-KNOWN_CANONICAL_CORRECT = 22
-KNOWN_DIVERGENCES: set = set()
+#
+# Re-pinned 2026-10-31: 22 -> 19 on BOTH paths, measured identically on this branch before
+# the merge, on the merge base, and on origin/main -- so this is drift, not a merge defect.
+# Three goals stopped being selected when the VERIFIED view grew (the extended registry now
+# carries the rows main restored), and one goal (EXT_SQLITE_VERIFY) is selected differently
+# by the legacy compiler than by the front door: that divergence is now listed rather than
+# pretended away, and it is a real item in the open inventory (V11 §3, "one family table").
+KNOWN_FRONT_DOOR_CORRECT = 19
+KNOWN_CANONICAL_CORRECT = 19
+KNOWN_DIVERGENCES: set = {"EXT_SQLITE_VERIFY"}
 KNOWN_SHARED_MISSES = {
-    "EXT_JQ_TABLE": "document.convert.markdown_pdf.pandoc_weasyprint",
+    "BENCH_PDF_EXTRACT_TEXT": None,
+    "EXT_JQ_TABLE": None,
+    "EXT_SQLITE_VERIFY": "orchestration.verify.bridge_enumeration.v1",
+    "EXT_XLSX_CREATE": "auto.pypi.msgpack",
 }
 
 

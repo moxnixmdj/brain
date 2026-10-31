@@ -1,0 +1,90 @@
+[
+ {
+  "tag": "D_add_param",
+  "pass": true,
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW",
+  "cap": "python.source.symbols.index.ast",
+  "ms": 201,
+  "tree_changed": true
+ },
+ {
+  "tag": "E_delete",
+  "pass": false,
+  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+  "cap": "document.convert.markdown_pdf.pandoc_weasyprint",
+  "ms": 203,
+  "tree_changed": false,
+  "gone": false
+ },
+ {
+  "tag": "C_compose",
+  "status": "HANG_>75s",
+  "pass": null,
+  "ms": 75000,
+  "tree_changed": false
+ },
+ {
+  "tag": "A_secret",
+  "pass": false,
+  "status": "FAIL_CLOSED__PROMISED_ARTIFACT_MISSING",
+  "cap": null,
+  "ms": 351,
+  "tree_changed": null
+ },
+ {
+  "tag": "A_count",
+  "pass": true,
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW",
+  "cap": "python.source.symbols.index.ast",
+  "ms": 154,
+  "tree_changed": null
+ },
+ {
+  "tag": "A_quad",
+  "pass": false,
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "cap": "python.software.request.semantic_behavior.compile.v1",
+  "ms": 162,
+  "tree_changed": null
+ },
+ {
+  "tag": "A_merge",
+  "pass": false,
+  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+  "cap": "decision.synthesis.typed.stdlib",
+  "ms": 104,
+  "tree_changed": null
+ },
+ {
+  "tag": "A_deprecated",
+  "pass": false,
+  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+  "cap": null,
+  "ms": 2633,
+  "tree_changed": null
+ },
+ {
+  "tag": "B_inline",
+  "pass": true,
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW",
+  "cap": "python.source.symbols.index.ast",
+  "ms": 223,
+  "tree_changed": null
+ },
+ {
+  "tag": "B_move",
+  "pass": false,
+  "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+  "cap": null,
+  "ms": 194,
+  "tree_changed": null
+ },
+ {
+  "tag": "B_dead",
+  "pass": false,
+  "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+  "cap": null,
+  "ms": 109,
+  "tree_changed": null
+ }
+]

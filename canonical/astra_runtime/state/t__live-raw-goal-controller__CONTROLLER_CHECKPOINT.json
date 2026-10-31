@@ -1,0 +1,77 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "pdf.extract.text.pypdf",
+          "max_pages": 200,
+          "path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf"
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "pdf.extract.text.pypdf",
+          "max_pages": 200,
+          "path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf"
+        },
+        "expect": {
+          "field": "text",
+          "type": "field_nonempty"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "bound_capability",
+        "capability_id": "pdf.extract.text.pypdf",
+        "dependency": {
+          "project": "pypdf",
+          "status": "INSTALLED_VERIFIED",
+          "version": "6.19.0",
+          "wheel_sha256": "7e5d6e730e7dae87d560a2cee218b852f6498c8be61966f3cd02ead971e48d14"
+        },
+        "pages_processed": 1,
+        "pages_total": 1,
+        "source_path": "canonical/astra_runtime/tmp/BOUND_PDF_TEXT_TEST.pdf",
+        "text": "PROJECT BRAIN BOUND PDF CAPABILITY VERIFIED",
+        "text_bytes": 43,
+        "text_sha256": "97fa8642db783ccc4c477a1ab0dc72a144da2932106ae51b9818eb7fc4b8030c",
+        "text_truncated": false
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "RAW_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "RAW_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T21:23:45.474802+00:00",
+  "mission_id": "t",
+  "next_action_index": 2,
+  "plan_sha256": "3ae85e72ec162211ea7805cfaaa5b57176b222fb038849db06b02a42edad1a91",
+  "resume_count": 12,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-31T10:59:58.619540+00:00"
+}

@@ -298,7 +298,23 @@ def run(args, root):
                 row["reason"] = "EXPLICIT_PATH_LIST__MODULE_WIDE"
     affected, _reached = _affected_modules(index, set(py_changed), changed_symbols)
 
-    test_roots = args.get("test_roots") or ["tests", "canonical/tests"]
+    # THE TESTS THAT COVER A MODULE ARE NOT ONLY THE ONES IN THE REPOSITORY'S TEST ROOTS.
+    #
+    # ``test_roots`` defaulted to two literal directories, so a test file sitting BESIDE the changed
+    # module -- the ordinary layout of any package, and the layout of every tree a sentence names
+    # by path -- was never even considered: ``candidate_test_count: 0`` next to
+    # ``affected_module_count: 2`` with the test module already named in ``affected_modules``.
+    # Measured 2026-10-30 on ``canonical/astra_runtime/tmp/m1/cov``: ``selected_tests: []`` for a
+    # change to ``calc.py`` that ``test_calc.py`` imports, which a caller reads as "nothing to run".
+    # The anchor the sentence states (``source_root``) is added to the roots: it is evidence, not a
+    # widening -- the index is already resolved from that same anchor.
+    _declared_roots = [str(r) for r in (args.get("test_roots") or ["tests", "canonical/tests"])]
+    _anchor = None
+    try:
+        _anchor = str(source_root.relative_to(repo)).replace("\\", "/")
+    except ValueError:
+        _anchor = None
+    test_roots = _declared_roots + ([_anchor] if _anchor and _anchor not in _declared_roots else [])
     test_rows = []
     seen = set()
     for module in index.get("modules") or []:

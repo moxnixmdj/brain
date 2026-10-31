@@ -784,6 +784,23 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if rp.is_file() and rp.parent!=rr and rr in rp.parent.parents:
                     result[key]=str(rp.parent.relative_to(rr))
                     continue
+            # ... UNLESS THE ROW ITSELF SAYS IT TAKES THE FILE.
+            #
+            # ``proposal_bindings`` is where a capability declares the shape of a slot, and the
+            # analysis rows declare ``source_root`` as ``path_file_or_dir``.  Without this the
+            # sentence's one stated file was widened to its parent, the row answered a question
+            # nobody asked, and the answer still counted as a pass.  Measured 2026-10-31 on the
+            # capability matrix: "Count the functions in <pkg>/calc.py" reported 12 definitions
+            # over 8 files for a question about the 2 in one file -- REAL on this branch, FALSE
+            # on origin/main.  Declaration-driven, never global: a row that only says
+            # ``source_root`` (a repair loop, a test runner) still gets the parent.
+            _bindings=entry.get("proposal_bindings") if isinstance(entry,dict) else None
+            _declared=_bindings.get(key) if isinstance(_bindings,dict) else None
+            if isinstance(_declared,dict) and str(_declared.get("type") or "")=="path_file_or_dir":
+                _files=[(raw,fp) for raw,fp in paths if fp.is_file()]
+                if len(_files)==1:
+                    result[key]=_files[0][0]
+                    continue
         if key.endswith("_path"):
             stem=key[:-5].lower()
             output_stems={"output","result","report","screenshot","image","artifact","destination","dest"}

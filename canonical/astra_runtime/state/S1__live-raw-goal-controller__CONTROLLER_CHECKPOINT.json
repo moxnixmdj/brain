@@ -1,0 +1,220 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "Find every caller of the function load_verified_registry in canonical/astra_runtime/tmp/x3",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/daa6ca11fd5f1456_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+          "goal": "Find every caller of the function load_verified_registry in canonical/astra_runtime/tmp/x3",
+          "output_path": "canonical/astra_runtime/tmp/auto_proposal/daa6ca11fd5f1456_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "broad_objective_decomposition": null,
+        "broad_objective_decomposition_available": false,
+        "candidate_capability_ids": [
+          "terminal.kstar.root.assess.stdlib"
+        ],
+        "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+        "clauses": [
+          {
+            "candidates": [
+              {
+                "binding_affordance": {
+                  "has_goal_url": false,
+                  "proposal_binding_count": 0,
+                  "proposal_bindings_cover_all_inputs": false,
+                  "url_consumable": false
+                },
+                "capability_id": "terminal.kstar.root.assess.stdlib",
+                "combined_score": 8.533333333333333,
+                "input_bindability": {
+                  "bound_input_keys": [],
+                  "proposal_binding_keys": [],
+                  "verified": true
+                },
+                "lexical": {
+                  "matched_goal_tokens": [
+                    "runtime"
+                  ],
+                  "matched_identity": [],
+                  "matched_keywords": [
+                    [
+                      "runtime",
+                      "runtime"
+                    ]
+                  ],
+                  "matched_provides": [],
+                  "score": 4
+                },
+                "matched_distinctive_tokens": [
+                  "runtime"
+                ],
+                "provides": [
+                  "terminal.kstar.root.assessment",
+                  "terminal.scope_complete.proof_or_minimum_residual",
+                  "terminal.tournament.failure.witness"
+                ],
+                "requires": [],
+                "similarity": {
+                  "coverage": 0.1,
+                  "score": 4.533333333333333,
+                  "sequence_ratio": 0.23333333333333334,
+                  "shared_tokens": [
+                    "runtime"
+                  ]
+                }
+              }
+            ],
+            "constraints": [],
+            "end": 90,
+            "index": 0,
+            "output_contract": {
+              "extensions": [],
+              "paths": [
+                "canonical/astra_runtime/tmp/x3"
+              ]
+            },
+            "rejected_unbindable_candidates": [
+              {
+                "capability_id": "plain_goal.bound_capability.grounding.stdlib",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+                "error": "CapabilityProposalFailure:PROPOSAL_EFFECT_PROVIDER_MISSING:plain_goal.bound_capability.grounding.verify.stdlib:result_path:plain_goal.bound_capability.grounding"
+              },
+              {
+                "capability_id": "python.refactor.extract_function.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:end_line"
+              },
+              {
+                "capability_id": "python.software.request.semantic_behavior.compile.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.audit.ast",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.audit.ast:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              },
+              {
+                "capability_id": "python.source.change_impact.testselect.v1",
+                "error": "GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:changed_paths"
+              },
+              {
+                "capability_id": "python.source.symbols.index.ast",
+                "error": "CapabilityProposalFailure:GOAL_LITERAL_BINDING_FAILED:python.source.symbols.index.ast:GoalCompilationFailure:GOAL_INPUT_BINDING_REQUIRED:output_path"
+              }
+            ],
+            "start": 0,
+            "status": "UNBOUND_INPUTS_NOT_GROUNDED",
+            "text": "Find every caller of the function load_verified_registry in canonical/astra_runtime/tmp/x3"
+          }
+        ],
+        "dependency": {
+          "modules": [
+            "difflib",
+            "hashlib",
+            "json",
+            "re",
+            "pathlib"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "external_discovery_allowed_for_unresolved_only": true,
+        "goal": "Find every caller of the function load_verified_registry in canonical/astra_runtime/tmp/x3",
+        "goal_sha256": "daa6ca11fd5f145696b74b7a96eebe8fc961a1bfab54e6a13b167d05d5ad7bb7",
+        "grounded_clause_count": 1,
+        "input_contract_bindability_enforced": true,
+        "model_dependency_count": 0,
+        "output_path": "canonical/astra_runtime/tmp/auto_proposal/daa6ca11fd5f1456_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json",
+        "output_sha256": "a25ebe97462c0eca0d8a582f5e001a215ba0498508ca0ed7fb85de1da685c494",
+        "output_verified": true,
+        "schema": "PROJECT_BRAIN_PLAIN_GOAL_BOUND_GROUNDING_V1",
+        "unresolved_clause_indexes": [],
+        "whole_goal_external_discovery_forbidden_if_any_bound_grounding": true
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "Find every caller of the function load_verified_registry in canonical/astra_runtime/tmp/x3",
+          "result_path": {
+            "$result": {
+              "cycle": 0,
+              "field": "output_path"
+            }
+          }
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+          "goal": "Find every caller of the function load_verified_registry in canonical/astra_runtime/tmp/x3",
+          "result_path": "canonical/astra_runtime/tmp/auto_proposal/daa6ca11fd5f1456_effect-producer_plain-goal-bound-capability-grounding-stdlib_output-path.json"
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "capability_id": "plain_goal.bound_capability.grounding.verify.stdlib",
+        "dependency": {
+          "modules": [
+            "hashlib",
+            "json",
+            "pathlib",
+            "re"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "model_dependency_count": 0,
+        "producer_independent": true,
+        "reason": "STATUS_INVALID",
+        "verified": false
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "EFFECT_PRODUCER_CHAIN_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-10-29T19:55:09.421045+00:00",
+  "mission_id": "S1",
+  "next_action_index": 3,
+  "plan_sha256": "ce206b55c28a4a1f096cbebdbd99f9f4f4a0aae8aa2c435b7235b1330300b4ee",
+  "resume_count": 0,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-10-29T19:55:09.469484+00:00"
+}

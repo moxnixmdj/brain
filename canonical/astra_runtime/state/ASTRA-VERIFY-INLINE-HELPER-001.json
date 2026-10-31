@@ -1,0 +1,9 @@
+{
+ "capability_id": "python.refactor.inline_helper.v1",
+ "independent_verified": true,
+ "mission_id": "ASTRA-VERIFY-INLINE-HELPER-001",
+ "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__RECEIPT.json",
+ "receipt_sha256": "aef3ec8faaaa5841ca9e9440a78ff52c7acbef1491b8150ed69b65df61fb4557",
+ "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_PROVENANCE_STATE_V1",
+ "verified_at": "2026-10-31T09:09:14Z"
+}
