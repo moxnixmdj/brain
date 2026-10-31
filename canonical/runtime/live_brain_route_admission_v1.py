@@ -2529,7 +2529,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 # rules. Use it before ANY lexical dispatch, even when the raw
                 # id looks compatible: its output may still bind onto source.
                 if selected and (_typed_plan._family_terms(prose) is not None
-                                 or not _typed_plan._effect_consistent(prose, selected)):
+                                 or not _typed_plan._effect_consistent(
+                                     prose, selected, (context[0] or {}).get(selected))):
                     corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
                     if corrected is None:
                         # Structured obligations are unbound regardless of which
