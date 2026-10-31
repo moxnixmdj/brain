@@ -452,11 +452,36 @@ def _security_review_ran(b: pathlib.Path, r: dict) -> bool:
 
 
 def _mutation_score_measured(b: pathlib.Path, r: dict) -> bool:
+    """A mutation verdict, from either of the two rows that really measure one.
+
+    The oracle used to accept only the DIFF gate's schema, so "Measure the mutation score of X"
+    was scored FALSE even when ``python.tests.mutation_score.v1`` had run every mutant and
+    written the arithmetic down: measured 2026-10-31, that run produced two mutants, both
+    killed, ``mutation_score: 1.0``.  The sentence names a MEASUREMENT, not a diff gate, so both
+    shapes are accepted -- but only against the evidence, never against a self-report: the score
+    row must have actually enumerated its mutants and the arithmetic must close.
+    """
     for doc in _artifacts(r):
         if doc.get("schema") == "PROJECT_BRAIN_DIFF_MUTATION_GATE_V1" \
                 and doc.get("gate") == "PASS" \
                 and isinstance(doc.get("kill_ratio"), (int, float)):
             return True
+        if doc.get("schema") != "PROJECT_BRAIN_PYTHON_TESTS_MUTATION_SCORE_V1":
+            continue
+        mutants = doc.get("mutants")
+        total = doc.get("total_mutants")
+        score = doc.get("mutation_score")
+        if not isinstance(mutants, list) or not mutants or not isinstance(total, int) or total < 1:
+            continue
+        if len(mutants) != total or not isinstance(score, (int, float)):
+            continue
+        killed = sum(1 for m in mutants if isinstance(m, dict) and m.get("status") == "killed")
+        survived = sum(1 for m in mutants if isinstance(m, dict) and m.get("status") == "survived")
+        if killed + survived != total:
+            continue
+        if abs(float(score) - killed / total) > 1e-9:
+            continue
+        return True
     return False
 
 

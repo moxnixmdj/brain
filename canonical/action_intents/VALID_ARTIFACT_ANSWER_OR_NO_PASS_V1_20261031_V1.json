@@ -1,0 +1,236 @@
+{
+  "action_id": "VALID_ARTIFACT_ANSWER_OR_NO_PASS_V1_20261031_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "action_summary": "THE FRONT DOOR NOW READS THE VERDICT IT ASKED FOR. Three rows of the 54-case capability matrix were PASS with a negative or absent answer underneath: a review sentence answered by a MUTATOR that edited the file it was only asked about, a git bisect that named the commit it started from as the regression, and a mutation score the harness refused to read because it arrived in the score row's shape instead of the diff gate's. No subsystem was written for any of them: the read-only shape rule, the single exit every door path passes through, and the matrix oracle already existed and were each one predicate away from the truth.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "execution_guard/swe_capability_matrix_v1.py",
+      "canonical/tests/test_a_review_is_not_answered_by_a_mutator_v1.py",
+      "canonical/tests/test_a_bisect_without_a_known_good_commit_is_not_certified_v1.py",
+      "canonical/tests/test_a_mutation_score_is_measured_not_asserted_v1.py",
+      "canonical/action_intents/VALID_ARTIFACT_ANSWER_OR_NO_PASS_V1_20261031_V1.json"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_CAPABILITY_THAT_RAN_AND_REPORTED_A_NEGATIVE_OR_ABSENT_VERDICT_WAS_CERTIFIED_PASS__THE_DOOR_ASKED_WHETHER_THE_ROW_HAD_EXECUTED_IT_DID_NOT_ASK_WHETHER_WHAT_THE_SENTENCE_NAMED_HAD_BEEN_ANSWERED__MEASURED_2026_10_31_ON_THREE_MATRIX_ROWS_REVIEW_ANSWERED_BY_A_MUTATOR_THAT_DAMAGED_A_FILE_THE_SENTENCE_ONLY_ASKED_ABOUT__BISECT_WITH_NO_KNOWN_GOOD_SIDE_REPORTING_THE_STARTING_COMMIT__MUTATION_SCORE_MEASURED_2_OF_2_KILLED_AND_GRADED_FALSE_BY_AN_ORACLE_THAT_ONLY_KNEW_ONE_SCHEMA",
+  "canonical_base_commit": "5bc5ab81cae0f08ef68a92afcbf6a6c37deeba41",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "A_CAPABILITY_THAT_RAN_AND_REPORTED_A_NEGATIVE_OR_ABSENT_VERDICT_WAS_CERTIFIED_PASS__THE_DOOR_ASKED_WHETHER_THE_ROW_HAD_EXECUTED_IT_DID_NOT_ASK_WHETHER_WHAT_THE_SENTENCE_NAMED_HAD_BEEN_ANSWERED__MEASURED_2026_10_31_ON_THREE_MATRIX_ROWS_REVIEW_ANSWERED_BY_A_MUTATOR_THAT_DAMAGED_A_FILE_THE_SENTENCE_ONLY_ASKED_ABOUT__BISECT_WITH_NO_KNOWN_GOOD_SIDE_REPORTING_THE_STARTING_COMMIT__MUTATION_SCORE_MEASURED_2_OF_2_KILLED_AND_GRADED_FALSE_BY_AN_ORACLE_THAT_ONLY_KNEW_ONE_SCHEMA",
+  "date": "2026-10-31",
+  "expected_parent_change": "THE_REVIEW_SHAPE_RULE_READS_A_REVIEW_AS_A_QUESTION_AND_A_DECLARATION_OF_SOURCE_EDITING_OUTRANKS_A_READ_SOUNDING_WORD_IN_PROVIDES__THE_SINGLE_DOOR_EXIT_ASKS_THE_ARTIFACT_FOR_THE_ANSWER_THE_SENTENCE_NAMED__AND_THE_MATRIX_ORACLE_ACCEPTS_EITHER_MUTATION_SHAPE_BUT_NEVER_A_SELF_REPORT",
+  "expected_parent_frontier_change": "THE_REVIEW_SHAPE_RULE_READS_A_REVIEW_AS_A_QUESTION_AND_A_DECLARATION_OF_SOURCE_EDITING_OUTRANKS_A_READ_SOUNDING_WORD_IN_PROVIDES__THE_SINGLE_DOOR_EXIT_ASKS_THE_ARTIFACT_FOR_THE_ANSWER_THE_SENTENCE_NAMED__AND_THE_MATRIX_ORACLE_ACCEPTS_EITHER_MUTATION_SHAPE_BUT_NEVER_A_SELF_REPORT",
+  "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. And merge all of your work.\"",
+  "falsification_condition": "RE_BIND_THE_REVIEW_SENTENCE_TO_SOFTWARE_REPAIR_CHOREOGRAPH_CROSSFILE_AND_SEE_A_FILE_THE_REVIEW_ONLY_ASKED_ABOUT_CHANGE__OR_HAND_THE_DOOR_A_BISECT_ARTIFACT_WITH_LAST_GOOD_COMMIT_NULL_AND_SEE_IT_CERTIFIED__OR_HAND_THE_ORACLE_A_SCORE_WHOSE_ARITHMETIC_DOES_NOT_CLOSE_AND_SEE_IT_ACCEPTED",
+  "governance_change": true,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_PASS_NOW_REQUIRES_THE_ANSWER_THE_SENTENCE_NAMED_SO_THE_MATRIX_CAN_NO_LONGER_REPORT_A_SUCCESS_THAT_DID_NOT_HAPPEN_WHICH_IS_THE_CONDITION_FOR_ANY_BENCHMARK_NUMBER_TO_MEAN_ANYTHING",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/live_brain_route_admission_v1.py",
+    "canonical/runtime/goal_front_compiler_v1.py",
+    "execution_guard/swe_capability_matrix_v1.py",
+    "canonical/tests/test_a_wrong_kind_of_row_cannot_certify_the_work_v1.py",
+    "canonical/tests/test_a_review_of_a_file_is_a_change_set_of_that_file_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "5bc5ab81cae0f08ef68a92afcbf6a6c37deeba41",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "THE_READ_SOUNDING_WORD_ESCAPE_FOR_A_ROW_THAT_DECLARES_SOURCE_EDITING",
+      "CERTIFYING_PASS_WITHOUT_ASKING_THE_ARTIFACT_FOR_THE_ANSWER_THE_SENTENCE_NAMED",
+      "AN_ORACLE_THAT_ONLY_RECOGNISES_ONE_MUTATION_SCHEMA"
+    ],
+    "expected_parent_level_state_change": "THE_REVIEW_SHAPE_RULE_READS_A_REVIEW_AS_A_QUESTION_AND_A_DECLARATION_OF_SOURCE_EDITING_OUTRANKS_A_READ_SOUNDING_WORD_IN_PROVIDES__THE_SINGLE_DOOR_EXIT_ASKS_THE_ARTIFACT_FOR_THE_ANSWER_THE_SENTENCE_NAMED__AND_THE_MATRIX_ORACLE_ACCEPTS_EITHER_MUTATION_SHAPE_BUT_NEVER_A_SELF_REPORT",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "REVERTING_ANY_OF_THE_THREE_RETURNS_A_CERTIFIED_PASS_OVER_AN_ANSWER_THAT_WAS_NEVER_GIVEN",
+      "intrinsic_or_path_specific": "GENERAL__EVERY_DOOR_EXIT_PASSES_THROUGH_close_observations_AND_THE_SHAPE_RULE_READS_ANY_ROW_S_OWN_DECLARATION_SO_A_FUTURE_WRITING_ROW_THAT_CANNOT_ANSWER_A_QUESTION_IS_REFUSED_BY_THE_SAME_LINE",
+      "surviving_causal_blocker": "A_CAPABILITY_THAT_RAN_AND_REPORTED_A_NEGATIVE_OR_ABSENT_VERDICT_WAS_CERTIFIED_PASS__THE_DOOR_ASKED_WHETHER_THE_ROW_HAD_EXECUTED_IT_DID_NOT_ASK_WHETHER_WHAT_THE_SENTENCE_NAMED_HAD_BEEN_ANSWERED__MEASURED_2026_10_31_ON_THREE_MATRIX_ROWS_REVIEW_ANSWERED_BY_A_MUTATOR_THAT_DAMAGED_A_FILE_THE_SENTENCE_ONLY_ASKED_ABOUT__BISECT_WITH_NO_KNOWN_GOOD_SIDE_REPORTING_THE_STARTING_COMMIT__MUTATION_SCORE_MEASURED_2_OF_2_KILLED_AND_GRADED_FALSE_BY_AN_ORACLE_THAT_ONLY_KNEW_ONE_SCHEMA"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_REGISTRY_ROW__THE_FIX_IS_THREE_PREDICATES_IN_FILES_THAT_ALREADY_EXISTED",
+      "existing_inherited_routes_checked": [
+        "live_brain_route_admission_v1",
+        "goal_front_compiler_v1",
+        "capability_selection_retrieval_v1",
+        "declared_input_derivation_v1",
+        "execution_guard/swe_capability_matrix_v1"
+      ],
+      "external_existing_routes_checked": "None needed: the read-only shape rule, the answer gate and the artifact oracle already existed in-tree; each was one predicate short of the truth.",
+      "surviving_gap": "A_VERDICT_THE_RUN_EMITTED_BUT_THE_DOOR_NEVER_READ__THE_REMAINING_FIVE_ANALYSIS_ROWS_ARE_REFUSED_FOR_MEASURED_ENVIRONMENT_REASONS_BANDIT_AND_RUFF_ABSENT_NOT_FOR_A_MISSING_MECHANISM"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "RAISING_THE_MATRIX_REAL_COUNT",
+        "TURNING_REFUSALS_INTO_PASSES",
+        "ADDING_CAPABILITY_ROWS"
+      ],
+      "real_outcome": "Three sentences that were previously certified without an answer now either get the answer the row was asked for or are refused with the reason: the review no longer edits the reviewed file, the bisect no longer names its own starting point as the breaking commit, and the measured mutation score is read as the measurement it is.",
+      "surviving_necessity": "A matrix row that says FALSE is honest; a matrix row that says PASS over a negative artifact is the defect this repository exists to refuse. The three rows were FALSE or DAMAGED and are now REAL or refused; the count that moved is REAL 13 to 14 and DAMAGED 1 to 0."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "REUSE_THE_EXISTING_SHAPE_RULE_THE_EXISTING_EXIT_AND_THE_EXISTING_ORACLE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_THREE_FALSE_ROWS_WERE_DIAGNOSED_ONCE_WITH_A_SCRIPT_THAT_PRINTS_THE_SELECTED_ROW_ITS_STATUS_AND_ITS_ORACLE_AND_THE_MATRIX_THEN_MEASURED_ALL_FIFTY_FOUR_CASES_ONCE",
+      "search_stop_decision": "STOPPED_AFTER_THE_THREE_ROWS_THAT_WERE_PASS_WITH_A_NEGATIVE_OR_ABSENT_ANSWER__THE_OTHER_THIRTY_NINE_NON_REAL_ROWS_REFUSE_HONESTLY_AND_ARE_A_DIFFERENT_DEFECT_CLASS"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": false,
+      "losing_routes_reason": "A blacklist of capability ids is a list that ages; the row's own declaration is the fact the registry already carries, and it is the same declaration that admits a real writer when the sentence really promises a change.",
+      "routes_ranked": [
+        "REUSE_THE_EXISTING_PREDICATES__SELECTED",
+        "SUBSTITUTE_A_NEW_SECURITY_VERIFIER__SLOWER_AND_LARGER",
+        "BYPASS_BY_ROW_BLACKLIST__NON_GENERAL",
+        "DELETE_THE_ROUTE__FALSE_NEGATIVE"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_MATRIX_RUNS_EVERY_CASE_AGAINST_A_REAL_TREE_AND_READS_THE_ARTIFACT_THE_RUN_WROTE"
+    },
+    "real_outcome": "A sentence that named an answer is no longer certified unless the written artifact carries that answer, and a review is no longer answered by a row that edits the reviewed file. The three matrix rows that were PASS over a negative or absent verdict are one REAL and two honest refusals.",
+    "required_capability": "A_FRONT_DOOR_THAT_READS_THE_VERDICT_IT_ASKED_FOR",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "The routes are in this repository: the predicate, the exit and the oracle already exist and were read at their base blobs. Nothing outside the tree can change whether a verdict is read."
+    },
+    "routes_considered": [
+      "DELETE_THE_REVIEW_ROUTE_ENTIRELY__REFUSES_WORK_THAT_REAL_GATES_CAN_DO",
+      "BYPASS_BY_BLACKLISTING_THE_CHOREOGRAPHER_ID__THE_NEXT_WRITING_ROW_WOULD_PASS",
+      "SUBSTITUTE_A_NEW_SECURITY_VERIFIER__A_SUBSYSTEM_FOR_A_PREDICATE",
+      "REUSE_THE_EXISTING_SHAPE_RULE_AND_THE_SINGLE_EXIT_AND_THE_EXISTING_ORACLE__CHOSEN"
+    ],
+    "selected_route": "DECLARE_THE_ARTIFACT_A_CAPABILITY_REALLY_EMITS_SO_THE_PLANNER_CAN_CHAIN_IT_TO_THE_VERIFIER_THAT_ALREADY_REQUIRES_THAT_TYPE",
+    "selected_surviving_route": "READ_THE_VERDICT_THE_RUN_ALREADY_EMITTED__NARROW_THE_EXISTING_SHAPE_RULE_BY_THE_ROW_S_OWN_DECLARATION_AND_PUT_THE_ANSWER_GATE_IN_THE_ONE_EXIT_EVERY_PATH_PASSES_THROUGH",
+    "stop_condition": "TWENTY_NEW_TESTS_PASS__MATRIX_54_CASES_14_REAL_0_FALSE_40_REFUSED_0_DAMAGED_MEDIAN_138MS__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE__THE_EIGHT_DOOR_TESTS_THAT_REMAIN_RED_ARE_THE_EIGHT_THAT_ALREADY_FAIL_ON_MAIN_BECAUSE_BANDIT_AND_RUFF_ARE_NOT_INSTALLED_IN_THIS_ENVIRONMENT",
+    "why_selected_route_is_fastest_sufficient": "Every other route -- a new verifier, a new registry row, a per-capability keyword blacklist -- adds a moving part that can be bypassed by the next early return or the next row. The three predicates cost no new file, no new row and no extra work per request: the matrix median stayed at 138 ms."
+  },
+  "route_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "READ_THE_VERDICT_THE_RUN_ALREADY_EMITTED_INSTEAD_OF_TRUSTING_THAT_IT_RAN__SHAPE_RULE_ANSWER_GATE_AND_ORACLE",
+  "stop_condition": "TWENTY_NEW_TESTS_PASS__MATRIX_54_CASES_14_REAL_0_FALSE_40_REFUSED_0_DAMAGED_MEDIAN_138MS__UNIFIED_MODEL_VERIFIER_33_OF_33_AFTER_RECOMPILE__THE_EIGHT_DOOR_TESTS_THAT_REMAIN_RED_ARE_THE_EIGHT_THAT_ALREADY_FAIL_ON_MAIN_BECAUSE_BANDIT_AND_RUFF_ARE_NOT_INSTALLED_IN_THIS_ENVIRONMENT",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": true,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__THREE_PREDICATES_IN_EXISTING_GATES_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "8cfc3a10b693c5bb7f8c8a72ef03bc309d1fb064",
+          "note": "Base blob the new gate changes: at this blob every exit could certify PASS without asking the artifact for the answer the sentence named.",
+          "path": "canonical/runtime/live_brain_route_admission_v1.py"
+        },
+        {
+          "git_blob_sha": "f100b01f4778df22638b92efa9e3f21f6586e4db",
+          "note": "Base blob the new oracle changes: at this blob the mutation oracle recognised only the diff gate's schema and graded a real measurement FALSE.",
+          "path": "execution_guard/swe_capability_matrix_v1.py"
+        }
+      ],
+      "decisive_question": "WHEN_A_ROW_RUNS_AND_REPORTS_A_NEGATIVE_OR_ABSENT_VERDICT_CAN_THE_FRONT_DOOR_STILL_CERTIFY_PASS__AND_IS_A_MEASUREMENT_GRADED_FALSE_ONLY_BECAUSE_IT_ARRIVED_IN_A_DIFFERENT_SHAPE",
+      "falsifier_id": "REVERT_EACH_PREDICATE_AND_SEE_THE_MATRIX_RETURN_TO_THIRTEEN_REAL_THREE_FALSE_ONE_DAMAGED",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "FIRST_ATTEMPT_NARROWED_THE_READ_ONLY_RULE_BY_MATCHING_WORDS_IN_provides_AND_THE_MUTATOR_SLIPPED_THROUGH_BECAUSE_ITS_PROVIDES_SAY_call_graph__CORRECTED_TO_READ_THE_ROW_S_OWN_DECLARATION_OF_SOURCE_EDITING_AND_PINNED_BY_A_TEST_THAT_SWEEPS_THE_WHOLE_REGISTRY_SO_NO_READING_ROW_LOSES_THE_ESCAPE__SECOND_ATTEMPT_PUT_THE_ANSWER_GATE_ON_THE_SINGLE_CAPABILITY_PATH_ONLY_AND_BOTH_MEASURED_LIES_WERE_COMPOSED_RUNS__CORRECTED_TO_close_observations_THE_ONE_FUNCTION_EVERY_EXIT_PASSES_THROUGH",
+      "proposal_id": "VALID_ARTIFACT_ANSWER_OR_NO_PASS_V1_20261031_V1"
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The shape rule is narrowed for exactly one class -- a row whose own declaration says it edits source -- and no other; every row whose provides are a read surface and which declares no source editing keeps the escape, pinned by a test that sweeps the whole registry. The answer gate only fires when the sentence names an answer and the written artifact does not carry it, and it lives in the single function every door exit passes through, so it cannot be bypassed by a new early return."
+}

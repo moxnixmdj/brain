@@ -1934,7 +1934,7 @@ def declared_effect_ids(goal: str, registry: Mapping[str, Mapping[str, Any]]) ->
     return sorted(strong) if strong else sorted(weak)
 
 
-def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
+def stated_answer_errors(goal: str, entry: Mapping[str, Any], cid: str = "") -> list[str]:
     """A sentence that asks for X must be answered by something that declares X.
 
     Only the sentence and the capability's own declaration are consulted: its id, what it
@@ -1946,7 +1946,12 @@ def stated_answer_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     text = str(goal or "")
     if not text.strip():
         return []
-    cid = str(entry.get("capability_id") or entry.get("id") or "")
+    # THE REFUSAL MUST NAME THE ROW.  ``load_verified_registry()`` keys its entries by capability id
+    # instead of repeating it inside the entry, so a caller holding the entry reported
+    # ``..._ANSWERED_BY_A_WRITER:UNNAMED`` -- a diagnosis nobody can act on, measured 2026-10-31
+    # while pinning the review rule.  The caller knows the id (it looked the entry up by it), so it
+    # may say so; the in-entry lookup stays as the fallback for entries that do carry one.
+    cid = str(cid or entry.get("capability_id") or entry.get("id") or "")
     surface = " ".join([cid,
                         " ".join(str(x) for x in (entry.get("provides") or [])),
                         " ".join(str(x) for x in (entry.get("keywords") or []))])
@@ -2015,6 +2020,24 @@ _PLAN_REQUEST_RE = re.compile(
     r"^\s*(?:please\s+)?(?:plan|propose|outline|sketch|draft|map out)\b", re.IGNORECASE)
 _PLAN_THEN_DO_RE = re.compile(
     r"\b(?:then|and|also)\b[^.\n]{0,40}\b(?:apply|implement|execute|perform|carry out|do it)\b",
+    re.IGNORECASE)
+
+
+# A REVIEW IS A QUESTION ABOUT A FILE, NOT A JOB ON IT.
+#
+# Measured 2026-10-31 in the capability matrix: "Review <f> for security issues" was answered by
+# ``software.repair.choreograph.crossfile.v1`` -- a MUTATOR -- which ran its
+# ``dead_code_and_import_pruning`` mode over the reviewed project and edited a file the sentence
+# never named (DAMAGED: bench_calc.py), then returned pass=True with no security verdict in the
+# artifact.  The row declared "security" (it can REMOVE an sql injection), which satisfied the
+# effect table, and the shape rule did not fire because "review" is not one of its read-only openers.
+# A sentence that asks for a VERDICT promises no byte change, so it belongs to the same shape as
+# "find"/"show": the answering row must read, and a row that writes is the wrong kind of row.
+# Scoped by the sentence's own promise: "review and fix the injection" promises a change and is
+# untouched by this rule.
+_REVIEW_REQUEST_RE = re.compile(
+    r"^\s*(?:please\s+)?(?:review|audit|assess|scan|inspect|evaluate|check)\b"
+    r"|\b(?:security|code|design|style)\s+(?:review|audit|scan)\b",
     re.IGNORECASE)
 
 
@@ -2096,10 +2119,23 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
     # retry; the correct read-only row was one typed selection away.
     _writes = bool(_MUTATION_PROVIDES_RE.search(provides)) or \
         bool(front.capability_edits_source(entry))
-    if ((_READ_ONLY_REQUEST_RE.search(text) or _asks_only_for_a_plan(text))
+    _read_only_request = bool(_READ_ONLY_REQUEST_RE.search(text) or _asks_only_for_a_plan(text))
+    if _REVIEW_REQUEST_RE.search(text) and not _sentence_promises_a_change(text):
+        _read_only_request = True
+    # A WORD IN "provides" DOES NOT OUTRANK A DECLARATION OF WRITE AUTHORITY.
+    #
+    # ``software.repair.choreograph.crossfile.v1`` lists read-sounding words among what it provides
+    # ("call graph", "crossfile"), so ``_READ_SURFACE_RE`` excused it from the read-only rule above
+    # while its own registry row declares that it edits source -- and it acted on that authority,
+    # pruning dead code out of a file the review sentence had only asked about.  A row that declares
+    # ``capability_edits_source`` cannot be the answer to a question about a file; that is the
+    # declaration, and the wording of a keyword is not.  Rows that read for a living keep the
+    # escape, because the escape is what puts a read row in front of a question.
+    _declares_edits = bool(front.capability_edits_source(entry))
+    if (_read_only_request
             and _writes
-            and not _READ_SURFACE_RE.search(provides)
-            and not _declares_it_does_not_write(entry)):
+            and not _declares_it_does_not_write(entry)
+            and not (_READ_SURFACE_RE.search(provides) and not _declares_edits)):
         out.append("STATED_READ_ONLY_QUESTION_ANSWERED_BY_A_WRITER:" + (cid or "UNNAMED"))
     language = _LANGUAGE_OF_GOAL_RE.search(text)
     if (language and _PYTHON_ONLY_RE.search(surface)
@@ -2828,6 +2864,52 @@ def _blind_change_evidence(result: Mapping[str, Any]) -> list[str]:
     return out
 
 
+# A STATED ANSWER MUST BE IN THE ARTIFACT, NOT IMPLIED BY A PASS.
+#
+# Measured 2026-10-31 in the capability matrix: "Bisect the regression that broke the test in <T>"
+# reached ``git.history.bisect_regression.v1``, which really ran ``git bisect``, probed ONE commit,
+# found no known-good commit, and reported ``breaking_commit: <repo HEAD>`` with
+# ``last_good_commit: None`` -- and the door certified it PASS__...EXACT_SEMANTIC_ACCEPTANCE.  A
+# bisect without a good side has not attributed anything: it has run the failing side of a search it
+# never bounded.  The sentence states the answer it wants (the commit), so the artifact must carry
+# one that was actually bracketed by a known-good commit; otherwise this is the same
+# "the sentence asked for X and X was not provided" class the answer gate already names.
+_BISECT_ANSWER_RE = re.compile(r"\bbisect\b|\bwhich commit\b|\bwhen did\b[^.\n]{0,40}?\bbreak\b",
+                               re.IGNORECASE)
+
+
+def _written_artifacts(result: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Every JSON artifact the run says it wrote, parsed.  A report blob is not an answer."""
+    docs: list[dict[str, Any]] = []
+    for row in (result.get("execution") or []):
+        produced = str((((row or {}).get("result") or {}).get("output_path")) or "")
+        if not produced:
+            continue
+        try:
+            docs.append(json.loads((ROOT / produced).read_text(encoding="utf-8")))
+        except Exception:  # noqa: BLE001 - a non-JSON artifact answers nothing
+            continue
+    return docs
+
+
+def stated_answer_payload_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
+    """The answer the sentence named, checked against the artifact the run wrote."""
+    text = str(goal or "")
+    docs = _written_artifacts(result) if isinstance(result, Mapping) else []
+    if _BISECT_ANSWER_RE.search(text):
+        for doc in docs:
+            if not isinstance(doc, Mapping):
+                continue
+            if "breaking_commit" not in doc and "last_good_commit" not in doc:
+                continue
+            if not doc.get("breaking_commit"):
+                return ["BISECT_NAMED_NO_COMMIT"]
+            if not doc.get("last_good_commit"):
+                return ["BISECT_WITHOUT_A_KNOWN_GOOD_COMMIT"]
+            return []
+    return []
+
+
 def _close_observations(result: dict[str, Any], goal: str,
                          before: Mapping[str, Any] | None,
                          artifacts: list[str] | None = None) -> dict[str, Any]:
@@ -2873,6 +2955,15 @@ def _close_observations(result: dict[str, Any], goal: str,
                                 .replace("_EXECUTED_AND_VERIFIED", "_EXECUTED_APPLIED_UNVERIFIED")
                                 .replace("EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
                                          "EXACT_SEMANTIC_ACCEPTANCE_APPLIED_UNVERIFIED"))
+    if result.get("pass") is True:
+        unanswered_payload = stated_answer_payload_errors(goal, result)
+        if unanswered_payload:
+            result["runtime_status_before_answer_payload_check"] = result.get("status")
+            result["status"] = "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED"
+            result["pass"] = False
+            result["failure_class"] = "STATED_ANSWER_NOT_PROVIDED"
+            result["stated_answer_payload_errors"] = unanswered_payload
+            return result
     if result.get("pass") is not True or before is None:
         return result
     observed = observed_effect_errors(goal, before, observe_world(goal), result, artifacts)
@@ -3810,7 +3901,8 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
     _declared = str(compiled.get("capability_id") or compiled.get("selected_capability") or "")
     # Only a capability that was actually about to run can be refused for not answering: with no
     # compiled capability there is no claim to reject, and the request keeps its own refusal.
-    declared_answer_errors = (stated_answer_errors(normalized, dict(admissible.get(_declared) or {}))
+    declared_answer_errors = (stated_answer_errors(normalized, dict(admissible.get(_declared) or {}),
+                                                   _declared)
                               if _declared else [])
     if declared_answer_errors:
         refused = _fail(task_id, "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
@@ -4036,7 +4128,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         result["failure_class"] = "PROMISED_SOURCE_CHANGE_NOT_APPLIED"
         result["promised_source_change_errors"] = unchanged
     unanswered = stated_answer_errors(
-        normalized, dict(admissible.get(_answered_by) or {})) \
+        normalized, dict(admissible.get(_answered_by) or {}), str(_answered_by or "")) \
         if result.get("pass") is True else []
     if unanswered:
         result["runtime_status_before_answer_check"] = result.get("status")
