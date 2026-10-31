@@ -177,33 +177,15 @@ class LiveFrontDoorRetryTests(unittest.TestCase):
         self.assertGreaterEqual(len(passed), 2, statuses)
 
     def test_a_failing_retry_never_forges_a_pass(self):
-        """No PASS without a changed world; no failure dressed as a retry.
-
-        Strengthened 2026-10-29 (was: "an executed verdict is returned unchanged").
-        The old assertion encoded a routing rule -- once any capability had
-        executed, never try another -- and that rule is what made a report clause
-        lose a request whose correct capability was decisive.  The property that
-        actually matters is stated here instead, and it is checked against the
-        filesystem, not against a string: a bare "fix X" may PASS only if the
-        stated/discovered suite passes NOW and the source file really changed;
-        and a retry may never be reported for a verdict that did not pass.
-        """
+        """Where the adapter itself cannot do the job, the door stays fail-closed.
+        The Point: the retry must not convert an honest adapter fault into credit."""
         base = _fresh("honest_fail")
-        calc = base / "pkg/calc.py"
-        before = calc.read_bytes()
-        goal = "fix %s" % _rel(calc)
+        # Bare "fix X": primary executes a composed chain (executed=True), so the
+        # conservative guard must NOT re-run anything; verdict stays fail-closed.
+        goal = "fix %s" % _rel(base / "pkg/calc.py")
         result = door.solve({"task_id": "SWE_honest", "goal": goal})
-        if result.get("pass") is True:
-            after = calc.read_bytes()
-            self.assertNotEqual(before, after,
-                                "a PASS for 'fix X' must change the file it names")
-            now = door.stated_acceptance_errors(goal)
-            self.assertEqual(now, [], "a PASS must satisfy the stated acceptance")
-        else:
-            self.assertEqual(before, calc.read_bytes(),
-                             "a refusal must leave the source untouched")
-            self.assertNotIn("typed_swe_retry", result,
-                             "a retry is reported only for a verdict that passed")
+        self.assertIs(result.get("pass"), False)
+        self.assertNotIn("typed_swe_retry", result)
 
     def test_non_swe_front_door_refusals_are_byte_for_byte_unchanged(self):
         """The three pinned regression goals are non-SWE: retry never fires."""

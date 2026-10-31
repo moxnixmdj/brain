@@ -1365,6 +1365,28 @@ _REPAIR_VERB_RE = re.compile(r"\b(?:repair|fix|patch|correct)\b", re.IGNORECASE)
 _EDIT_PROMISE_RE = re.compile(
     r"\b(?:repair|fix|patch|correct|add|insert|update|modify|replace|rewrite|"
     r"refactor|extract|inline|rename|split|strip)\b", re.IGNORECASE)
+# ...and the verb must be used AS A VERB.  `add`, `move` and `split` are also the
+# names of functions, and English says so in front of a name.  Measured: without
+# this, "Find every caller of the function add in <pkg/mod.py>" -- a question
+# that promises nothing about any file's bytes -- matched `add`, demanded mod.py
+# change, and refused a run that had answered correctly with a callers report.
+# So a match is a promise only when it is not naming a symbol (def/class/
+# function/method/named/called/parameter/argument/variable/symbol/module/file
+# immediately before it) and is not a call (`add(`).
+_NAME_INTRODUCTION_RE = re.compile(
+    r"(?:\b(?:def|class|function|method|parameter|argument|variable|symbol|"
+    r"attribute|field|module|file|named|called|helper)\s+(?:of\s+|the\s+)*)$",
+    re.IGNORECASE)
+
+
+def _edit_promise_matches(text: str):
+    """Every edit-promise verb used AS a verb, left to right."""
+    for m in _EDIT_PROMISE_RE.finditer(text):
+        if text[m.end():m.end() + 1] == "(":
+            continue
+        if _NAME_INTRODUCTION_RE.search(text[max(0, m.start() - 40):m.start()]):
+            continue
+        yield m
 # "a measured acceptance repair report" is a noun phrase naming an artifact,
 # not an instruction to mutate a source file.  A file actually named report.py
 # is still a repair target: the negative lookahead keeps that distinction.
@@ -1401,7 +1423,7 @@ def _promised_source_files(goal: str) -> list[str]:
     # fail a goal that did exactly what it said.  So take the nearest source file
     # after each repair verb, not every source file in the sentence.
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _edit_promise_matches(text):
         if _REPAIR_REPORT_PHRASE_RE.match(text[m.end():m.end() + 100]):
             # The next words are "report"/"receipt"/...: the sentence asks for
             # evidence about a candidate, not for an existing source file to be
@@ -1472,7 +1494,7 @@ def _promised_source_roots(goal: str) -> list[str]:
     paths = [(raw, path) for raw, path in goal_compiler._repo_paths(goal, ROOT)
              if not front._CAPABILITY_ID_SHAPE.fullmatch(str(raw))]
     out = []
-    for m in _EDIT_PROMISE_RE.finditer(text):
+    for m in _edit_promise_matches(text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
             continue
         best_raw, best_path, best_pos = None, None, None
@@ -2357,6 +2379,26 @@ def solve(request: Mapping[str, Any]) -> dict[str, Any]:
                 "incremental_spend_usd": 0,
             }
             return retry
+        # The retry may not REPLACE this verdict, but the reason it was refused is
+        # the most readable sentence in the run: the primary status here is a
+        # routing failure ("R3_WEAK_EVIDENCE" naming a DOCX converter), while the
+        # retry reached the capability the sentence named and was stopped by a
+        # gate with a real reason. Measured: "Add a parameter qty ... update every
+        # caller" refused correctly and told the caller only about the DOCX
+        # converter, discarding PROMISED_SOURCE_CHANGE_NOT_APPLIED: app/models.py.
+        if retry.get("pass") is not True:
+            result["typed_swe_retry_refusal"] = {
+                "schema": "SWE_TYPED_RETRY_REFUSAL_V1",
+                "primary_status": result.get("status"),
+                "status": retry.get("status"),
+                "failure_class": retry.get("failure_class"),
+                "selected_capability": plan[2].get("selected_capability"),
+                "compiled_capability_id": retry.get("compiled_capability_id"),
+                "promised_source_change_errors": retry.get("promised_source_change_errors"),
+                "observed_effect_errors": retry.get("observed_effect_errors"),
+                "promised_artifact_errors": retry.get("promised_artifact_errors"),
+                "model_dependency_count": 0,
+            }
     except Exception:  # any fault in the OPTIONAL retry keeps the primary verdict
         pass
     return result
