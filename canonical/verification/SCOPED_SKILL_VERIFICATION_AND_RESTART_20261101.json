@@ -1,0 +1,326 @@
+{
+  "actual_base_comparison": {
+    "all_current_failed_case_ids_reproduced": true,
+    "base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+    "execution_root": "separate actual git archive, not substituted module bytes",
+    "failed": 11,
+    "failed_cases": [
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_no_op_goal_is_refused_at_the_door_and_a_real_repair_is_not",
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_source_root_key_binds_from_the_goal",
+      "canonical.tests.test_live_brain_route_admission_v1::test_both_live_doors_give_the_same_verdict_on_one_sentence",
+      "canonical.tests.test_live_brain_route_admission_v1::test_path_token_only_match_is_rejected_before_execution",
+      "canonical.tests.test_live_brain_route_admission_v1::test_r9_does_not_move_the_compile_or_selection_rates",
+      "canonical.tests.test_live_brain_route_admission_v1::test_single_word_evidence_is_rejected",
+      "canonical.tests.test_repair_search_reuse_v1::test_pool_parses_source_once_not_once_per_mutation",
+      "canonical.tests.test_repair_search_reuse_v1::test_same_candidate_bytes_order_and_priority_as_parse_per_edit[class C:\\n    async def f(self, x):\\n        while x < 3:\\n            x = x + 1\\n        return x\\n]",
+      "canonical.tests.test_repair_search_reuse_v1::test_same_candidate_bytes_order_and_priority_as_parse_per_edit[def f(x):\\n    return x < 3\\n]",
+      "canonical.tests.test_repair_search_reuse_v1::test_same_candidate_bytes_order_and_priority_as_parse_per_edit[def f(x):\\r\\n    return not (x < 3 and x != 2)\\r\\n]",
+      "canonical.tests.test_test_paths_required_is_derivable_at_every_site_that_raises_it_v1.ThePreviouslyFixedSentencesStillWorkTests::test_which_tests_break_still_answers"
+    ],
+    "junit_sha256": "e96fd423cd65cf775266183d099baa52f24106c300495bfa05b2f0b9b6dd68f2",
+    "passed": 59,
+    "seconds": 16.18,
+    "subtests_passed": 11
+  },
+  "all_six_phases_complete": false,
+  "authority": "SELF_RUN_SANDBOX_OBSERVATIONS_ONLY__NO_PROMOTION_OR_INDEPENDENT_CERTIFICATION",
+  "base_commit": "1174c81f7b7d4f3b8873c5e3ccf2992d3a0282ca",
+  "broader": {
+    "failed": 11,
+    "failed_cases": [
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_no_op_goal_is_refused_at_the_door_and_a_real_repair_is_not",
+      "canonical.tests.test_live_brain_route_admission_v1::test_a_source_root_key_binds_from_the_goal",
+      "canonical.tests.test_live_brain_route_admission_v1::test_both_live_doors_give_the_same_verdict_on_one_sentence",
+      "canonical.tests.test_live_brain_route_admission_v1::test_path_token_only_match_is_rejected_before_execution",
+      "canonical.tests.test_live_brain_route_admission_v1::test_r9_does_not_move_the_compile_or_selection_rates",
+      "canonical.tests.test_live_brain_route_admission_v1::test_single_word_evidence_is_rejected",
+      "canonical.tests.test_repair_search_reuse_v1::test_pool_parses_source_once_not_once_per_mutation",
+      "canonical.tests.test_repair_search_reuse_v1::test_same_candidate_bytes_order_and_priority_as_parse_per_edit[class C:\\n    async def f(self, x):\\n        while x < 3:\\n            x = x + 1\\n        return x\\n]",
+      "canonical.tests.test_repair_search_reuse_v1::test_same_candidate_bytes_order_and_priority_as_parse_per_edit[def f(x):\\n    return x < 3\\n]",
+      "canonical.tests.test_repair_search_reuse_v1::test_same_candidate_bytes_order_and_priority_as_parse_per_edit[def f(x):\\r\\n    return not (x < 3 and x != 2)\\r\\n]",
+      "canonical.tests.test_test_paths_required_is_derivable_at_every_site_that_raises_it_v1.ThePreviouslyFixedSentencesStillWorkTests::test_which_tests_break_still_answers"
+    ],
+    "junit_sha256": "9b47fb4a66716d549e51520f07b706d177e7289fb099cdadad66d2c9fc68b4aa",
+    "passed": 528,
+    "resources": {
+      "child_system_seconds": 11.485464,
+      "child_user_seconds": 98.257258,
+      "command": [
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "junit_family=xunit1",
+        "canonical/tests/test_swe_transform_contracts_v1.py",
+        "canonical/tests/test_swe_learning_reuse_contracts_v1.py",
+        "canonical/tests/test_swe_cache_and_scope_reuse_v1.py",
+        "canonical/tests/test_swe_semantic_reuse_boundaries_v1.py",
+        "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py",
+        "canonical/tests/test_swe_intent_scope_regressions_v1.py",
+        "canonical/tests/test_hardcore_swe_kernel_v1.py",
+        "canonical/tests/test_pipeline_exec_v1.py",
+        "canonical/tests/test_environment_learning_v1.py",
+        "canonical/tests/test_transfer_learning_v1.py",
+        "canonical/tests/test_real_environments_v1.py",
+        "canonical/tests/test_universal_learning_contract_v1.py",
+        "canonical/tests/test_universal_learning_mechanism_v6.py",
+        "canonical/tests/test_universal_learning_proof_program_v7.py",
+        "canonical/tests/test_universal_learning_equivalence_basis_v8.py",
+        "canonical/tests/test_universal_learning_meta_policy_v9.py",
+        "canonical/tests/test_universal_learning_acceptance_reducer_v1.py",
+        "canonical/tests/test_live_learning_cycle_v1.py",
+        "canonical/tests/test_live_brain_route_admission_v1.py",
+        "canonical/tests/test_raw_goal_trace_acceptance_v1.py",
+        "canonical/tests/test_code_tree_sitter_swe_v1.py",
+        "canonical/tests/test_swe_acceptance_boundaries_20261031_v1.py",
+        "canonical/tests/test_module_invocation_evidence_remeasure_v1.py",
+        "canonical/tests/test_root3_subprocess_mediator_v1.py",
+        "canonical/tests/test_root3_subprocess_kwarg_totality_v2.py",
+        "canonical/tests/test_scoped_skill_verification_and_restart_v1.py",
+        "canonical/tests/test_a_learned_skill_is_durable_and_general_v1.py",
+        "canonical/tests/test_incremental_semantic_graph_and_swe_upgrades_v1.py",
+        "canonical/tests/test_repair_search_reuse_v1.py",
+        "canonical/tests/test_python_repository_acceptance_measurement_v1.py",
+        "canonical/tests/test_python_measured_objective_acceptance_v1.py",
+        "canonical/tests/test_python_repair_semantic_acceptance_v9.py",
+        "canonical/tests/test_test_paths_required_is_derivable_at_every_site_that_raises_it_v1.py",
+        "canonical/tests/test_which_files_are_tests_is_a_fact_about_the_tree_v1.py",
+        "--junitxml=/home/user/scoped_skill_broad.xml"
+      ],
+      "elapsed_seconds": 112.27627566600017,
+      "max_child_rss_kib": 220120,
+      "resource_scope": "POSIX waited-for child accounting; max RSS is not an aggregate process-tree peak",
+      "returncode": 1
+    },
+    "seconds": 111.37,
+    "skipped": 1,
+    "subtests_passed": 34
+  },
+  "capability_credit_delta": 0,
+  "date": "2026-11-01",
+  "existing_authorization_tests": {
+    "failed": 0,
+    "modules": [
+      "test_executable_skill_verification_authenticator_v1.py",
+      "test_universal_parameterized_skill_candidate_v1.py",
+      "test_universal_verified_skill_ratchet_v1.py"
+    ],
+    "passed": 17,
+    "seconds": 0.86
+  },
+  "focused": {
+    "artifact_sha256": "c5e1786a20277ef74d20316c4c8bb82e01a4cdf3d4bee59fffdafaf6f29cc51a",
+    "failed": 0,
+    "note": "Final production source; all 114 focused cases also belong to the final broader run.",
+    "passed": 114,
+    "seconds": 16.59
+  },
+  "independent_verification": false,
+  "model_and_integrity_tests": {
+    "failed": 0,
+    "note": "Observed before report indexing; final official compiler and model-only revalidation are run after this report is written, with external logs to avoid report/model digest self-reference.",
+    "passed": 68,
+    "seconds": 84.69,
+    "subtests_passed": 911
+  },
+  "ownership_credit_delta": 0,
+  "producer": "Arena model-assisted development session",
+  "qualified_properties": [
+    "Boolean and truthy callbacks cannot supply TEST_SUITE assurance; legacy booleans are CALLER_PREDICATE only.",
+    "Passing typed results bind the actual candidate SHA256, verification kind and declared scope; TEST_SUITE requires positive observed count, zero exit code and measurement hashes.",
+    "Original-example failing/passing project evidence is distinct from constructed alpha-renamed structural-twin evidence.",
+    "Contracts bind exact typed dependency/precondition values and contribute to skill identity; unsupported constraints fail closed.",
+    "Persistent invalidation and counterexamples survive reopen and duplicate teaching does not silently reactivate an invalidated rule.",
+    "SQLite generation triggers plus file identity invalidate the cache on supported cross-writer changes/deletion; lookups return detached copies.",
+    "A live database recheck refuses a candidate invalidated/deleted while its verifier was running.",
+    "Repair transfer occurs from a ledger package fixture to a separately built workshop package fixture in a fresh interpreter.",
+    "Learning-disabled and actual artifact removal controls return no learned repair; restoring the artifact restores the same skill repair.",
+    "Copied-tree project execution passes three held-out tests without changing either original source tree or test file.",
+    "Empty/all-skipped suites, wrong arithmetic lessons, mismatched scope/dependencies, test rewrite aliases and symlink trees are rejected by their tested boundaries."
+  ],
+  "remaining_limits": [
+    "Finite, deliberately simple arithmetic-pattern fixtures; not an advanced engineering curriculum, unseen-environment mastery, universal learning or sentience evidence.",
+    "Caller-supplied typed verifier results, scope identifiers and observed dependency contexts remain trusted inputs and can be fabricated; this is not authenticated independent verification.",
+    "Passing declared project tests does not prove the complete user request or semantic equivalence on all inputs.",
+    "Original project source is not automatically edited; the returned candidate is verified in copied projects. Callers retain responsibility for applying a checked proposal.",
+    "Legacy compatibility calls can still propose semantically wrong repairs when supplied weak predicates; they are explicitly not behavioral assurance, and strict scoped recall refuses legacy records.",
+    "Project execution is copied-tree isolation, not an OS/security sandbox; trusted tests only. Existing runner timeout/process behavior is inherited.",
+    "Power-loss durability, concurrent legacy migration, indefinite retention/backup recovery, adversarial raw-file replacement and large-scale contention are not established.",
+    "At most 128 candidate rules per language are retrieved; this is not complete retrieval across an unbounded skill inventory.",
+    "Eleven selected-suite failures reproduced at the exact starting commit remain unresolved; no all-green repository claim.",
+    "Prior broader governance/module-evidence drift and Root3 issues are not discharged by this batch."
+  ],
+  "restart_trace": {
+    "baseline": {
+      "oracle_calls": 1,
+      "pid": 9190,
+      "result": {
+        "candidate_sha256": "191d2ddbf50999277b792025a2703248a0b5e7d18892d8d1dcc3951e40bd0fbd",
+        "evidence": {
+          "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+          "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+          "returncode": 1,
+          "snapshot_sha256": "5be7739f199ce0f3b8493ad5e91cad929a8a6457dc15837050fcf2747cbdb4fd",
+          "test_count": 3,
+          "test_evidence": {
+            "returncode": 1,
+            "stderr_sha256": "acf149d6526daca82aae44cdc9d043415f2e1a8e9aeb9f41963a6cfff29abd64",
+            "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "test_count": 3,
+            "timed_out": false
+          }
+        },
+        "kind": "TEST_SUITE",
+        "passed": false,
+        "scope_id": "sum-two-monetary-amounts/v1"
+      },
+      "skill_count": 0
+    },
+    "cold": {
+      "oracle_calls": 0,
+      "pid": 9192,
+      "result": null,
+      "skill_count": 0
+    },
+    "disabled": {
+      "oracle_calls": 0,
+      "pid": 9198,
+      "result": null,
+      "skill_count": 1
+    },
+    "fallback_search_algorithm": null,
+    "independent_verification": false,
+    "original_projects_unchanged": true,
+    "removed": {
+      "oracle_calls": 0,
+      "pid": 9199,
+      "result": null,
+      "skill_count": 0
+    },
+    "replay": {
+      "oracle_calls": 1,
+      "pid": 9196,
+      "result": {
+        "from_crystallized_memory": true,
+        "patched_source": "def sum_costs(material, labor):\n    return material + labor\n",
+        "skeleton_fp": "fd7c0523c6966e62",
+        "skill_id": "skill_ff552d26391cea8cf6231f4b",
+        "verification": {
+          "candidate_sha256": "eea9fbdcdc4bc3f01572fd97989ce8ef9e615fbd58338f9d08e2a369b01b9dcf",
+          "evidence": {
+            "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+            "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+            "returncode": 0,
+            "snapshot_sha256": "119047b3b3647074f7f9b5769a859c1f1ac103af025147a80533d5e5e10f3397",
+            "test_count": 3,
+            "test_evidence": {
+              "returncode": 0,
+              "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+              "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "test_count": 3,
+              "timed_out": false
+            }
+          },
+          "kind": "TEST_SUITE",
+          "scope_id": "sum-two-monetary-amounts/v1",
+          "whole_task_correctness_proved": false
+        },
+        "whole_task_correctness_proved": false
+      },
+      "skill_count": 1
+    },
+    "restored": {
+      "oracle_calls": 1,
+      "pid": 9200,
+      "result": {
+        "from_crystallized_memory": true,
+        "patched_source": "def sum_costs(material, labor):\n    return material + labor\n",
+        "skeleton_fp": "fd7c0523c6966e62",
+        "skill_id": "skill_ff552d26391cea8cf6231f4b",
+        "verification": {
+          "candidate_sha256": "eea9fbdcdc4bc3f01572fd97989ce8ef9e615fbd58338f9d08e2a369b01b9dcf",
+          "evidence": {
+            "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+            "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+            "returncode": 0,
+            "snapshot_sha256": "119047b3b3647074f7f9b5769a859c1f1ac103af025147a80533d5e5e10f3397",
+            "test_count": 3,
+            "test_evidence": {
+              "returncode": 0,
+              "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+              "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "test_count": 3,
+              "timed_out": false
+            }
+          },
+          "kind": "TEST_SUITE",
+          "scope_id": "sum-two-monetary-amounts/v1",
+          "whole_task_correctness_proved": false
+        },
+        "whole_task_correctness_proved": false
+      },
+      "skill_count": 1
+    },
+    "scope": "two separately constructed Python package projects; one arithmetic repair pattern",
+    "taught": {
+      "oracle_calls": 2,
+      "pid": 9193,
+      "result": {
+        "crystallized": true,
+        "hole_count": 2,
+        "skeleton_fp": "fd7c0523c6966e62",
+        "skill_id": "skill_ff552d26391cea8cf6231f4b",
+        "state": "ACTIVE",
+        "training_verification": {
+          "candidate_sha256": "b4f11cfcf74af1a726f275faf93119ccd08c844a934e3432d9085a8164075eed",
+          "evidence": {
+            "measurement_program_sha256": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+            "measurement_spec_sha256": "cb0b45eeaff7deed069b2ea43c4911943a74d10d06806c4d007dd35ee1f55308",
+            "returncode": 0,
+            "snapshot_sha256": "7a2916ab363bc8c31047575953be6c1a03bf802ecd5cb4d89ce636af1bd4dcdd",
+            "test_count": 3,
+            "test_evidence": {
+              "returncode": 0,
+              "stderr_sha256": "49c8d59ac666c4b061168b61f2599eb3e1204fbf5a708bbb7e892d3baf8f807f",
+              "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "test_count": 3,
+              "timed_out": false
+            }
+          },
+          "kind": "TEST_SUITE",
+          "scope_id": "sum-two-monetary-amounts/v1",
+          "whole_task_correctness_proved": false
+        },
+        "twin_verification": {
+          "kind": "STRUCTURAL_TWIN",
+          "whole_task_correctness_proved": false
+        },
+        "whole_task_correctness_proved": false
+      },
+      "skill_count": 1
+    },
+    "test_files_untouched": true
+  },
+  "reuse_decision": {
+    "external_model_runtime_calls": 0,
+    "independent_authenticator": "canonical/runtime/executable_skill_verification_authenticator_v1.py remains the separate authority for authenticated executable-skill verification; these local typed measurements do not satisfy that independent-receipt boundary.",
+    "no_new_runtime_dependency": true,
+    "not_replaced": "The separate episode/program learner and independent executable-skill authenticator are not replaced or impersonated.",
+    "reused": [
+      "VerifiedSkillStore / crystallized_skills SQLite table / pattern_json / anti-unification",
+      "python_repository_acceptance_measurement_v1 copied-tree measurement",
+      "python_test_guided_patch_search_v1 shared suite runner",
+      "existing pinned parser dependencies, unchanged"
+    ]
+  },
+  "schema": "PROJECT_BRAIN_SCOPED_SKILL_LOCAL_QUALIFICATION_V1",
+  "source_sha256": {
+    "canonical/swe_kernel/skill_verification_contract_v1.py": "a497b654176ee4ba4298602194f3e639af8b465cfc9f4b755fa884939f6119be",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py": "fe6d723544995f80cac78c3f0926f5f4cbe75d35e254db1cb7824e3dac243549",
+    "canonical/tests/test_scoped_skill_verification_and_restart_v1.py": "a8b4acdb0595e994435d2fdb32aad350c5dacae6a655096bee79cf8b8fc9c3f7"
+  },
+  "status": "BOUNDED_SCOPE_AND_RESTART_CONTROLS_PASS__INHERITED_FAILURES_REMAIN",
+  "terminal_credit_delta": 0,
+  "universal_mastery_claim": false
+}
