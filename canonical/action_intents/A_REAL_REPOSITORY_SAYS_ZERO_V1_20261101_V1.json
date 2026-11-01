@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::There is no working path from 'this test fails in this repository' to 'a proposed edit'. Measured on two real repositories -- pluggy (7 of 226 failing) and click (7 of 1014 failing) with an injected bug and each project's own suite as the oracle -- the door selects python.software.repair.apply.verified.v1, runs it, and returns STATED_ANSWER_NOT_PROVIDED or STATED_SWE_EFFECT_UNSERVED with the tree untouched: zero edits in four attempts. Feeding the failing tests back changes the sentence and nothing else, so attempt two behaves exactly like attempt one. The single-step census reports 41 of 49; the multi-step instrument reports 0 of 2, and the difference is not repair quality, it is that no edit is produced at all.",
- "canonical_base_commit": "cbba820568d84989408c3fba4f2308ef3884ea18",
+ "canonical_base_commit": "dd8668a1708083c3fd66ad49153f9571a760e26f",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -80,7 +80,7 @@
   "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "cbba820568d84989408c3fba4f2308ef3884ea18",
+  "canonical_base_commit": "dd8668a1708083c3fd66ad49153f9571a760e26f",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
