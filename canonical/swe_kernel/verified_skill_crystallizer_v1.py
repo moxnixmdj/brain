@@ -35,6 +35,7 @@ import json
 import os
 import pathlib
 import re
+import shutil
 import sqlite3
 import tempfile
 import time
@@ -73,18 +74,46 @@ _TOKEN_RE = re.compile(
     re.DOTALL,
 )
 
+_HOLE_PREFIX = {"ident": "?id", "num": "?num", "str": "?str"}
+_HOLE_KIND = {"hole_id": "ident", "hole_num": "num", "hole_str": "str"}
+# The identifier hole keeps its historical token name so rules already stored as ``hole_id``
+# still match; the literal holes are new and are named for their kind.
+_HOLE_TOKEN = {"ident": "hole_id", "num": "hole_num", "str": "hole_str"}
+
 _MEM_SKILLS: dict[str, list[dict[str, Any]]] = {}
 
 
+def _repo_root() -> pathlib.Path:
+    return pathlib.Path(__file__).resolve().parents[2]
+
+
 def _default_db_path() -> pathlib.Path:
+    """Where learned skills live. Durable by default, because a skill that does not survive a restart
+    is not a learned skill -- it is a cache.
+
+    The first implementation put this in ``tempfile.gettempdir()``, which is wiped with the sandbox.
+    Measured 2026-11-01: the store was already empty again one session after a full census had
+    taught it a rule, so "permanently learned" was literally false. ``canonical/astra_runtime/tmp/``
+    is inside the repository (so it survives), is already gitignored (so it never dirties the tree),
+    and is the same place the probes keep their fixtures.
+
+    Any rules at the legacy location are migrated once, so nothing already learned is lost.
+    """
     override = os.environ.get("BRAIN_VERIFIED_SKILL_DB")
     if override:
         p = pathlib.Path(override)
         p.parent.mkdir(parents=True, exist_ok=True)
         return p
-    base = pathlib.Path(tempfile.gettempdir()) / "brain_swe_semantic_graph_v1"
+    base = _repo_root() / "canonical" / "astra_runtime" / "tmp"
     base.mkdir(parents=True, exist_ok=True)
-    return base / "verified_skills_v1.sqlite"
+    target = base / "verified_skills_v1.sqlite"
+    legacy = pathlib.Path(tempfile.gettempdir()) / "brain_swe_semantic_graph_v1" / "verified_skills_v1.sqlite"
+    if not target.exists() and legacy.is_file():
+        try:
+            shutil.copy2(legacy, target)
+        except OSError:
+            pass
+    return target
 
 
 def _connect(db_path: pathlib.Path) -> sqlite3.Connection:
@@ -180,6 +209,20 @@ def anti_unify_code_rule(
     toks_a = _tokenize_code(after_clean, case_insensitive_kw=sql_mode)
 
     ident_map: dict[str, str] = {}
+    # IDENTIFIERS WERE NEVER THE ONLY THING A REPAIR GENERALIZES OVER.
+    #
+    # ``return t - 1`` -> ``return t`` is a repair about an off-by-one, not about the literal 1: the
+    # same fix applies to ``- 7``.  Abstracting identifiers only left the number concrete, so the
+    # rule matched its own training input and almost nothing else -- measured 2026-11-01 on the
+    # five-neighbour probe: 2 of 5 reached, and the two misses were exactly "same shape, different
+    # literal" and "same intent, different structure".
+    #
+    # Literals are now relational holes too, in their own namespaces (``?num0``, ``?str0``; a path
+    # is a string literal and lands in ``?str``).  Over-generalizing is SAFE here by construction:
+    # ``recall_and_apply_verified`` never returns a patch without running the caller's verifier, so
+    # a wider net costs a failed verification, never a wrong edit.  That is what makes widening the
+    # hole set the right trade -- the filter is the verifier, not the pattern.
+    hole_maps: dict[str, dict[str, str]] = {"ident": ident_map, "num": {}, "str": {}}
     pattern_tokens: list[tuple[str, str]] = []
     skeleton_parts: list[str] = []
 
@@ -187,15 +230,16 @@ def anti_unify_code_rule(
         if kind == "ws":
             pattern_tokens.append(("ws", " "))
             continue
-        if kind == "ident":
-            hole = ident_map.setdefault(val, f"?id{len(ident_map)}")
-            pattern_tokens.append(("hole_id", hole))
-            skeleton_parts.append("ID")
+        if kind in _HOLE_PREFIX:
+            bucket = hole_maps[kind]
+            hole = bucket.setdefault(val, f"{_HOLE_PREFIX[kind]}{len(bucket)}")
+            pattern_tokens.append((_HOLE_TOKEN[kind], hole))
+            skeleton_parts.append("ID" if kind == "ident" else kind.upper())
         else:
             pattern_tokens.append((kind, val))
             skeleton_parts.append(val.upper() if sql_mode and kind == "kw" else val)
 
-    if not ident_map:
+    if not any(hole_maps.values()):
         return None
 
     fresh_map: dict[str, str] = {}
@@ -203,13 +247,13 @@ def anti_unify_code_rule(
     for kind, val in toks_a:
         if kind == "ws":
             replacement_tokens.append(("ws", val))
+        elif kind in _HOLE_PREFIX and val in hole_maps[kind]:
+            replacement_tokens.append((_HOLE_TOKEN[kind], hole_maps[kind][val]))
         elif kind == "ident":
-            if val in ident_map:
-                replacement_tokens.append(("hole_id", ident_map[val]))
-            else:
-                fhole = fresh_map.setdefault(val, f"?fresh{len(fresh_map)}:{val}")
-                replacement_tokens.append(("fresh_id", fhole))
+            fhole = fresh_map.setdefault(val, f"?fresh{len(fresh_map)}:{val}")
+            replacement_tokens.append(("fresh_id", fhole))
         else:
+            # A literal the fix INTRODUCES is part of the fix and stays concrete.
             replacement_tokens.append((kind, val))
 
     skeleton_fp = hashlib.sha256("|".join(skeleton_parts).encode("utf-8")).hexdigest()[:16]
@@ -224,7 +268,7 @@ def anti_unify_code_rule(
         "language": language.lower(),
         "error_class": error_class,
         "skeleton_fp": skeleton_fp,
-        "hole_count": len(ident_map),
+        "hole_count": sum(len(b) for b in hole_maps.values()),
         "pattern_tokens": pattern_tokens,
         "replacement_tokens": replacement_tokens,
     }
@@ -268,8 +312,8 @@ def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> s
         matched = True
         for offset, (pk, pv) in enumerate(pat_non_ws):
             sk, sv, _, _ = src_tokens[start_idx + offset]
-            if pk == "hole_id":
-                if sk != "ident":
+            if pk in _HOLE_KIND:
+                if sk != _HOLE_KIND[pk]:
                     matched = False
                     break
                 prev = bindings.get(pv)
@@ -302,7 +346,12 @@ def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> s
         fresh_bindings: dict[str, str] = {}
         out_parts: list[str] = []
         for rk, rv in rule.get("replacement_tokens") or []:
-            if rk == "hole_id":
+            if rk in _HOLE_KIND:
+                # Every hole kind binds the same way: the value this rule captured from the source
+                # is written back.  Listing only ``hole_id`` here meant a ``hole_num``/``hole_str``
+                # replacement emitted the hole's own name (``?num0``) as literal text, which no
+                # parser accepts -- the rule then failed its own mutated-twin gate and was silently
+                # never stored.
                 bound = bindings.get(rv)
                 if bound is None:
                     matched = False

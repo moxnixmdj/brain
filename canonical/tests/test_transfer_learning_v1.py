@@ -8,6 +8,7 @@ cheaper, which is what "instant" has to mean to be worth anything.
 from __future__ import annotations
 
 import os
+import shutil
 import tempfile
 import unittest
 
@@ -222,3 +223,63 @@ class StoreTests(_Store, unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MemorySurvivesADifferentMachine(unittest.TestCase):
+    """Learn on one machine; be fast on the next one.
+
+    Measured 2026-11-01, before this class existed: the same computer, the same goal, and
+    ONE extra binary on ``PATH`` changed which programs the fingerprint acts out, so
+    ``similarity`` was **0.0** and ``recall`` was **[]**.  Everything learned on one image
+    was invisible on the next -- "learn it once, permanently" was true only for a machine
+    that never changes.
+
+    A fingerprint is a SAMPLE of the machine's vocabulary (this image exposes 623 programs;
+    no goal can afford to execute 623 actions to take a signature), so two fingerprints of
+    the same machine taken under different goals must still recognise each other.  What
+    makes that safe is that a recalled plan is only TRIED, and only if every action it
+    names exists here.
+    """
+
+    def setUp(self):
+        from canonical.runtime import transfer_learning_v1 as tl_
+        self.tl = tl_
+        self.store = tempfile.mkdtemp(prefix="brain-xmachine-")
+        self._saved = tl_.STATE_PATH
+        tl_.STATE_PATH = os.path.join(self.store, "episodes.json")
+
+    def tearDown(self):
+        self.tl.STATE_PATH = self._saved
+        shutil.rmtree(self.store, ignore_errors=True)
+
+    @staticmethod
+    def _fp(actions, shape="str", growth=1.0, revisits=0):
+        return {"actions": sorted(actions), "shapes": [shape],
+                "growth": growth, "revisits": revisits, "probes": 6}
+
+    def test_one_more_program_on_the_machine_does_not_erase_its_memory(self):
+        before = self._fp(["run_gzip", "run_gunzip", "run_tar", "run_cp"])
+        after = self._fp(["run_gzip", "run_gunzip", "run_tar", "run_cp", "run_xz"])
+        self.assertGreater(self.tl.similarity(before, after), 0.5)
+
+    def test_a_narrow_sample_of_the_same_machine_recognises_a_wide_one(self):
+        """16 actions seen for one goal, 40 for another, same machine."""
+        wide = ["run_%02d" % i for i in range(38)] + ["copy_input", "copy_to_out"]
+        narrow = wide[:14] + ["copy_input", "copy_to_out"]
+        self.assertGreater(self.tl.similarity(self._fp(wide), self._fp(narrow)), 0.5)
+
+    def test_a_different_kind_of_environment_still_refuses(self):
+        lock = self._fp(["+0", "+1", "+2"], shape="seq[int]3")
+        grid = self._fp(["up", "down", "left", "right"], shape="seq[int]2")
+        self.assertEqual(self.tl.similarity(lock, grid), 0.0)
+
+    def test_a_plan_naming_a_program_this_machine_lacks_is_not_replayed(self):
+        self.assertFalse(self.tl.replayable(["run_bzip2"], ["run_gzip", "copy_input"]))
+        self.assertTrue(self.tl.replayable(["run_gzip"], ["run_gzip", "copy_input"]))
+
+    def test_the_learned_plan_is_recalled_on_the_next_machine(self):
+        first = self._fp(["+0", "+1", "+2"])
+        self.tl.remember(first, "dial", ["+1", "+2"], reached=True)
+        second = self._fp(["+0", "+1", "+2", "+3"])     # one more action available
+        got = self.tl.recall(second, "dial")
+        self.assertEqual([r["plan"] for r in got], [["+1", "+2"]])

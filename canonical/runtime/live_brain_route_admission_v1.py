@@ -955,7 +955,27 @@ def _refusal_status_and_payload(exc: BaseException, selected: Any) -> tuple[str,
     if _ALREADY_SATISFIED_RE.search(_text):
         return None
     _refusal = _REFUSAL_CLASS_RE.match(_text)
-    if _refusal is None or _refusal.group(1) in _REFUSAL_CLASS_EXCLUDED:
+    if _refusal is None:
+        # A REFUSAL KEY DOES NOT HAVE TO CARRY A DETAIL.
+        #
+        # ``RuntimeError("NO_MODIFIED_PYTHON_FUNCTIONS_BETWEEN_REVISIONS")`` is one of the
+        # repository's own refusal keys -- it is a complete sentence of its own, with no colon and
+        # nothing to add -- and it was still reported as ``FAIL__LIVE_CONTROLLER_EXECUTION``.
+        # Measured on main at 29ada61: census request 32, the last unexplained row in the inventory.
+        #
+        # The distinction is structural, not lexical: a refusal key is a snake-case CONDITION name
+        # (a compound of words), while a crash label is a single word -- ``SEGFAULT``, ``Timeout``,
+        # ``KeyError``.  So a bare token counts only when it contains an underscore.  That keeps the
+        # rule falsifiable ("SEGFAULT is still a crash") instead of "any shouting word is a refusal".
+        _bare = _REFUSAL_TOKEN_RE.match(_text)
+        if (_bare is None or "_" not in _bare.group(1)
+                or _bare.group(1) in _REFUSAL_CLASS_EXCLUDED):
+            return None
+        _class = _bare.group(1)[:60]
+        return ("FAIL_CLOSED__CAPABILITY_REFUSED_" + _class,
+                "CAPABILITY_REFUSED:" + _class,
+                {"capability": selected, "error": True, "class": _class, "reason": _class})
+    if _refusal.group(1) in _REFUSAL_CLASS_EXCLUDED:
         return None
     _class = _refusal.group(1)[:60]
     _detail = _refusal.group(2).strip()[:_DETAIL_LIMIT]
@@ -1197,9 +1217,22 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise
     except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
         raise LocalExecutionFailure(str(exc)) from exc
-    result = fn(call_args, ROOT)
-    if not isinstance(result, dict):
-        raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
+    # Capture source independently of the producer. Its PASS bit cannot
+    # establish preservation of exports, literals or the original input domain.
+    from canonical.swe_kernel import transition_verifier_v1 as transition
+    guarded = transition.applicable(cid, call_args)
+    preimages = transition.capture(ROOT, call_args) if guarded else None
+    try:
+        result = fn(call_args, ROOT)
+        if not isinstance(result, dict):
+            raise LocalExecutionFailure("BOUND_CAPABILITY_RESULT_INVALID")
+        if preimages is not None:
+            result["transition_preimages"] = preimages
+            result["transition_check"] = transition.verify(ROOT, call_args, preimages)
+    except BaseException:
+        if preimages is not None:
+            transition.restore(ROOT, preimages)
+        raise
     result.setdefault("capability_id", cid)
     result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
     _check_expectation(action.get("expect"), result)
@@ -1322,6 +1355,7 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
             return _fail(task_id, "FAIL_CLOSED__CAPABILITY_REFUSED_" + _why.split(":")[0][:60],
                          "CAPABILITY_REFUSED:" + _why, started, executed=True,
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                         reason=type(exc).__name__ + ":" + str(exc),
                          refusal_payload=dict(_decoded), executor=LOCAL_EXECUTION_PROOF,
                          tool_executed=tool_executed)
         # "THE REQUESTED STATE ALREADY HOLDS" IS AN ANSWER, AND IT ARRIVES IN THE SAME SPELLING
@@ -1376,6 +1410,7 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
             _status, _reason, _payload = _refusal
             return _fail(task_id, _status, _reason, started, executed=True,
                          compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
+                         reason=type(exc).__name__ + ":" + str(exc),
                          refusal_payload=_payload, executor=LOCAL_EXECUTION_PROOF,
                          tool_executed=True)
         return _fail(task_id, "FAIL__LIVE_CONTROLLER_EXECUTION", "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE", started, executed=tool_executed,
@@ -5004,6 +5039,7 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
                          "CAPABILITY_REFUSED:" + _why, started,
                          compiled_capability_id=str(compiled.get("capability_id")
                                                     or compiled.get("selected_capability") or ""),
+                         reason=type(exc).__name__ + ":" + str(exc),
                          refusal_payload=dict(_decoded))
         return _fail(task_id, "FAIL_CLOSED__CAPABILITY_EXITED_PROCESS",
                      "CAPABILITY_EXITED_PROCESS:" + _payload[:300], started,

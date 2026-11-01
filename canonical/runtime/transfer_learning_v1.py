@@ -124,20 +124,67 @@ def _fp_key(fp: Mapping[str, Any]) -> str:
 
 
 def similarity(a: Mapping[str, Any], b: Mapping[str, Any]) -> float:
-    """How much two environments look alike. 0 means do not bother trying."""
+    """How much two environments look alike. 0 means do not bother trying.
+
+    THIS USED TO BE AN EQUALITY TEST, AND THAT MADE THE MEMORY LOCAL TO ONE MACHINE.
+    Measured 2026-11-01: the same computer, the same goal, and ONE extra binary on
+    ``PATH`` -- which changes which 14 programs the fingerprint acts out -- gave
+    ``similarity = 0.0`` and ``recall = []``.  Everything learned on one image was
+    invisible on the next, so "learn it once, permanently" was true only for a machine
+    that never changes, which is no machine.  A tool that is learned and then forgotten
+    the moment a colleague installs something is not memory.
+
+    What makes partial credit SAFE here is that a recalled plan is never believed: both
+    callers execute it and observe the goal (``drive`` checks ``is_goal``;
+    ``computer_env.discover`` re-verifies the produced format).  A wrong recall costs one
+    trial.  A zero recall costs every trial, forever.
+
+    So the gate now asks the question it always meant: is there enough SHARED structure
+    that replaying a plan is worth a try?  Disjoint actions still score 0.0 -- there is
+    nothing to replay when no action name is common.
+    """
     actions_a, actions_b = set(a.get("actions") or []), set(b.get("actions") or [])
     shapes_a, shapes_b = set(a.get("shapes") or []), set(b.get("shapes") or [])
-    if not actions_a or actions_a != actions_b:
-        return 0.0          # different action names: a plan cannot be replayed
+    if not actions_a or not actions_b or not (actions_a & actions_b):
+        return 0.0          # no action in common: a plan cannot even be started
     if shapes_a != shapes_b:
-        return 0.0          # different kind of state: a plan cannot apply
+        return 0.0          # a different KIND of state: the learned rules do not apply
+    # How much of the action vocabulary is shared gates everything else -- measured as
+    # OVERLAP, not Jaccard, because a fingerprint is a SAMPLE of the machine's vocabulary
+    # and not the whole of it.
+    #
+    # Measured 2026-11-01: this machine exposes 623 programs, and no goal can afford to
+    # act out 623 actions to take a fingerprint (each one is executed).  So each caller
+    # registers the shortlist its goal justifies -- 14 programs for ".gz", 38 for a wider
+    # goal -- and the two fingerprints describe THE SAME MACHINE with different samples.
+    # Jaccard calls that 16/40 = 0.4, below the recall floor: the memory would refuse to
+    # remember anything it learned under a different goal.  Overlap calls it 1.0, which is
+    # what it is: every action in the smaller sample is present in the larger one.
+    #
+    # What protects the wider reading is not this number -- it is that a recalled plan is
+    # only ever TRIED: `replayable` refuses one naming an action this machine lacks, and
+    # both callers execute the plan and observe the goal before believing it.
+    action_score = (len(actions_a & actions_b) / min(len(actions_a), len(actions_b)))
     growth_a = float(a.get("growth") or 0)
     growth_b = float(b.get("growth") or 0)
     growth_score = 1.0 / (1.0 + abs(growth_a - growth_b))
     rev_a = int(a.get("revisits") or 0)
     rev_b = int(b.get("revisits") or 0)
     rev_score = 1.0 / (1.0 + abs(rev_a - rev_b))
-    return round(0.7 * growth_score + 0.3 * rev_score, 6)
+    return round(action_score * (0.75 + 0.15 * growth_score + 0.10 * rev_score), 6)
+
+
+def replayable(plan: Sequence[Any], actions: Sequence[Any]) -> bool:
+    """Can this plan even be STARTED here?
+
+    A plan naming a program this machine does not have is not a plan that failed; it is
+    a plan from a different machine.  Replaying it would act() into nothing, observe no
+    goal, and -- worse -- be remembered as DISPROVEN, poisoning the one row that would
+    have worked once the program was installed.  Measured 2026-11-01: that is exactly
+    what a cross-machine recall would have recorded.
+    """
+    available = {str(a) for a in actions}
+    return bool(plan) and all(str(a) in available for a in plan)
 
 
 # --------------------------------------------------------------------------- #
@@ -152,14 +199,15 @@ def _load() -> list[dict[str, Any]]:
         return []
 
 
-def _save(rows: list[dict[str, Any]]) -> None:
+def _save(rows: list[dict[str, Any]]) -> bool:
     try:
         Path(STATE_PATH).parent.mkdir(parents=True, exist_ok=True)
         tmp = Path(str(STATE_PATH) + ".tmp")
         tmp.write_text(json.dumps(rows, indent=2, default=str), encoding="utf-8")
         tmp.replace(STATE_PATH)
+        return True
     except OSError:
-        pass
+        return False
 
 
 def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
@@ -192,11 +240,11 @@ def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
             row["trials"] = int(row.get("trials", 0)) + 1
             row["successes"] = int(row.get("successes", 0)) + (1 if reached else 0)
             row["last_used_utc"] = entry["last_used_utc"]
-            _save(rows[-DEFAULT_MAX_EPISODES:])
-            return row
+            persisted = _save(rows[-DEFAULT_MAX_EPISODES:])
+            return dict(row, persisted=persisted)
     rows.append(entry)
-    _save(rows[-DEFAULT_MAX_EPISODES:])
-    return entry
+    persisted = _save(rows[-DEFAULT_MAX_EPISODES:])
+    return dict(entry, persisted=persisted)
 
 
 def recall(fingerprint: Mapping[str, Any], goal_key: str | None = None, *,
@@ -231,6 +279,26 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
           max_depth: int = 6, heuristic: Callable[[Any], float] | None = None,
           use_transfer: bool = True, min_similarity: float = 0.5) -> dict[str, Any]:
     """Recall first, learn second, and prove either way by executing."""
+    # Count every call through the environment interface, including structural
+    # fingerprint probes and heuristic look-ahead. A replay trial is not one
+    # atomic interaction and must not be advertised as such.
+    counters = {'act_calls': 0, 'reset_calls': 0}
+    class MeteredEnvironment:
+        def __getattr__(self, name):
+            return getattr(env_original, name)
+        def act(self, action):
+            counters['act_calls'] += 1
+            return env_original.act(action)
+        def reset(self):
+            counters['reset_calls'] += 1
+            return env_original.reset()
+    env_original = env
+    env = MeteredEnvironment()
+    def finish(result):
+        return dict(result, interactions=dict(counters),
+                    interaction_scope='ENVIRONMENT_INTERFACE_CALLS_INCLUDING_PROBES',
+                    retention_policy={'hot_episode_limit': DEFAULT_MAX_EPISODES,
+                                      'all_experiences_retained_forever': False})
     started = time.time()
     from canonical.runtime import environment_learning_v1 as el
 
@@ -240,9 +308,16 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     transferred = None
     candidates = recall(fp, gkey, min_similarity=min_similarity) if use_transfer else []
 
+    available = [str(a) for a in actions]
+    tried = 0
     for cand in candidates:
-        env.reset()
         plan = [str(a) for a in (cand.get("plan") or [])]
+        if not replayable(plan, available):
+            # A plan from a machine that had a program this one does not.  Not tried,
+            # and NOT recorded as disproven: the row is still true elsewhere.
+            continue
+        tried += 1
+        env.reset()
         for action in plan:
             env.act(action)
         reached = False
@@ -250,17 +325,17 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             reached = bool(is_goal(env.state()))
         except Exception:
             reached = False
-        remember(fp, gkey, plan, reached=reached)
+        retained = remember(fp, gkey, plan, reached=reached)
         if reached:
-            return {
+            return finish({
                 "schema": SCHEMA, "status": PASS_TRANSFERRED, "pass": True,
                 "plan": plan, "plan_length": len(plan), "reached": True,
-                "transferred": True, "similarity": cand.get("similarity"),
-                "candidates_tried": 1,
+                "transferred": True, "episode_persisted": retained["persisted"], "similarity": cand.get("similarity"),
+                "candidates_tried": tried,
                 "authority": "RECALLED_PLAN_EXECUTED_GOAL_OBSERVED",
-                "trials_spent": 1,
+                "trials_spent": tried,
                 "duration_s": round(time.time() - started, 4),
-            }
+            })
         transferred = cand
 
     # carry the RULES across, not just the plan. The goal here is new, so a
@@ -287,7 +362,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
         partial = el.learn_model(env, actions, budget=take,
                                  seed=(seed or 0) + spent,
                                  max_depth=max_depth, heuristic=heuristic,
-                                 prior=prior or model_out or None)
+                                 prior=model_out or prior or None)
         spent += take
         model_out = partial.get("model") or {}
         # tried = whether this chunk earned anything new
@@ -314,11 +389,11 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             reached = False
         if reached:
             plan = [str(a) for a in candidate]
-            remember(fp, gkey, plan, reached=True, model=model_out)
-            return {
+            retained = remember(fp, gkey, plan, reached=True, model=model_out)
+            return finish({
                 "schema": SCHEMA, "status": PASS_TRANSFERRED if prior else PASS_LEARNED,
                 "pass": True, "plan": plan, "plan_length": len(plan),
-                "reached": True, "transferred": bool(prior),
+                "reached": True, "transferred": bool(prior), "episode_persisted": retained["persisted"],
                 "prior_transitions": sum(len(v) for v in (prior or {}).values()),
                 "trials_spent": spent, "budget": budget,
                 "saved_trials": max(0, budget - spent),
@@ -326,7 +401,7 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
                 "learned": partial,
                 "authority": "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED",
                 "duration_s": round(time.time() - started, 4),
-            }
+            })
 
     out = {
         "schema": SCHEMA,
@@ -339,13 +414,13 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
         "recall_candidates": len(candidates),
     }
     out["transferred"] = False
-    out["candidates_tried"] = len(candidates)
+    out["candidates_tried"] = tried
     out["prior_experience_used"] = bool(candidates)
     out["reached"] = False
     if transferred is not None:
         out["status"] = FAIL_TRANSFER_WRONG
     out["duration_s"] = round(time.time() - started, 4)
-    return out
+    return finish(out)
 
 
 def _goal_key(is_goal: Callable[[Any], bool]) -> str:
