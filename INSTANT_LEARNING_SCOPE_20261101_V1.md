@@ -14,11 +14,11 @@ argument including every place I was wrong; this section is what is true now.
 |---|---|---|
 | Instant learning works | **TRUE** | store, restart, bundle transport; 12 + 13 tests passing |
 | Instant learning works in **new arbitrary environments** | **TRUE** | 5/5 families, **10/10** new instances solved by recalled plan, several at **1 trial** (§0.7); cross-machine **7,147 → 699 ms**; variants mean **1,268 → 284 ms** |
-| "Does it once, learns it permanently" | **TRUE per environment and per language** | one-shot teaching **5/5 languages**; cross-language carry now **4/5** via `language_neutral_skill_bridge_v1` |
-| "Just give it a try in all those new environments" | **TRUE, but it is N tries, not one** | each language and each environment kind is learned separately; the bridge only carries *lexical* rewrites |
-| "Anything on a computer" | **LARGELY TRUE, LARGEST UNMEASURED SURFACE** | 90 `osworld_v21_*` modules, `computer_env_v1` (82 tests), positioned OCR, DOM/OCR consensus grounding, `elevate_trace_to_fastest_layer` (pixel/UI → sqlite <2 ms) — **not exercised end-to-end here** |
-| "Perfectly and permanently" | **"Permanently" now has a mechanism; "perfectly" is still FALSE, by design** | permanence is complete: `invalidate()` keeps the rule *and its counterexample*, and `rule_expiry_v1` (16 tests) ages a rule out when the interpreter, platform or a tool changes — FRESH / STALE / UNKNOWN, and only FRESH may be offered. "Perfectly" cannot be claimed: every recall re-runs a verifier, so the floor is the verifier, never zero. That is correct engineering, not a defect. |
-| "So we solve everything on a computer" | **NO — and the reason is now measured, not argued** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED. And see §The-real-limitation below: every generalization this session required **me** to author the scope of the lesson. |
+| "Does it once, learns it permanently" | **TRUE, verified end to end** | one-shot teaching **5/5 languages**. The bundle that ships holds **5 rules across python/go/typescript/rust**; a brand-new store in a fresh directory is seeded with all five and applies one to a **renamed** source it has never seen (`return p + p * t` -> `return p - p * t`). Permanence is real for the rules that exist. |
+| "Give it a try and after doing it **at least once** he learns **all of those**" | **FALSE — measured, three ways** | (1) 1 example -> **6/7**, 2 examples -> **6/7**, 3 examples -> **6/7**: more exposure bought nothing. (2) Taught the one case it missed *directly*, `derive_operator_swap` still returns `None` and it cannot solve the lesson it was just shown — the failure is **representational, not statistical**. (3) Measured on its own shipped corpus: **2/5** rules can reach past their instance, **3/5** replay and stop. Repetition moves the count of rules, never their reach. |
+| "Anything on a computer" | **STRUCTURED HALF EXECUTED; GUI HALF CLOSED MODULO THE OS** | code ops run for real (real filesystem, real `pytest`, real `git status`), state ops run **verbatim**, media ops run **real ffmpeg encodes** re-measured by an independent `ffprobe`. The GUI loop closes end to end against a virtual 1920x1080 desktop — "leftmost/rightmost red box" -> correct pixel -> world changes -> next screenshot differs. What remains is one sentence: *pyautogui drives a real OS.* `host_app_ops` still needs the VM's `libreoffice_calc`. |
+| "Perfectly and permanently" | **"Permanently" is now demonstrated; "perfectly" is FALSE, by design** | permanence is complete: `invalidate()` keeps the rule *and its counterexample*, and `rule_expiry_v1` (16 tests) ages a rule out when the interpreter, platform or a tool changes — FRESH / STALE / UNKNOWN, and only FRESH may be offered. "Perfectly" cannot be claimed: every recall re-runs a verifier, so the floor is the verifier, never zero. That is correct engineering, not a defect. |
+| "So we solve everything on a computer" | **NO — and the reason is now measured, not argued** | advanced probe **42 served / 7 refused**, each refusal naming its own cause; matrix 44 REAL / 0 FALSE / 0 DAMAGED. And see §The real limitation: the machine now authors a lesson's *scope* by measurement, but **I still author the hypothesis space** it chooses from. Those are different problems, and the second is harder. |
 | "We were making a sentient creature" | **THE MEASURABLE HALF EXISTS; SENTIENCE ITSELF IS NOT MEASURED AND IS NOT THE OBJECTIVE** | `ignorance_ledger_v1` — *"the machine's own model of what it does not know, ranked by what it is worth"* — **13 tests passing**. That is a genuine self-model, and it is the honest part of "knows what needs to be known". No instrument in the tree measures sentience; every receipt carries that non-claim; the canonical objective asks for the most capable problem solver, not for sentience. |
 
 ## The real limitation — and it took building, not searching, to see
@@ -28,6 +28,23 @@ its statement shape (1/7 → 6/7), and automatic expiry. Each one worked. Each o
 the same thing, and it is the honest answer to *"does instant learning solve everything?"*
 
 **In every case, the system learned the instance and I had to author the scope of the lesson.**
+
+*That has since moved one level up, and this is the sharpest form of the answer.* `select_probe`
+— exact version-space narrowing, written and tested and **called by nothing** — was wired to the
+crystallizer's rules as `rule_scope_learning_v1`, so the machine now narrows a rule's scope by
+measurement instead of assuming it. Measured: it picks the instance that can still settle
+something rather than the one that cannot, and it refuses to guess — with operator-shaped
+instances it reports `UNDERDETERMINED` between `SCOPE_OPERATOR` and `SCOPE_SEMANTIC` rather than
+claiming the narrower one; one disjunctive instance then settles it in **2 observations out of
+3 offered**. Then `SCOPE_SEMANTIC` — "same meaning,
+different shape", which was listed as *absent because nothing realises it* — was built for the
+boundary family, and the boundary lesson went from **6/7 to 7/7**.
+
+So the machine now authors the scope, **within a hypothesis space that I still author.** Building
+a third hypothesis did not widen the space by itself; it required a person to see that `a < b or
+a == b` means `a <= b` and to write the module that knows it. The frontier did not disappear. It
+moved from *"a human decides the scope"* to *"a human decides which shapes are representable"*,
+and that second question is strictly harder.
 
 * The crystallizer stored `return ?id0 <= ?id1` — a correct, verified record of *one* repair.
   It believed the lesson was "this statement shape". The lesson was actually "this operator
