@@ -21928,8 +21928,11 @@
    "input_names": [
     "limit",
     "message",
+    "message_source",
     "op",
     "repo_root",
+    "rev",
+    "staged",
     "target"
    ],
    "kind": "BOUND_CAPABILITY",
@@ -21943,7 +21946,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/git_repository_operate.py",
-    "source_sha256": "d7aa010514b322a3bbf65ad7c84730a3043ab1a0117ad50a3158b4749dbcede9",
+    "source_sha256": "cc57dd2e2a31fad90994a699feed7c1ea84e3b15d4a9fa854ac69b5bd07ff7c9",
     "source_type": "brain_bound_system_tool"
    },
    "provides": [
@@ -30868,7 +30871,7 @@
   "engines": 26,
   "knowledge_documents": 230,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6567,
+  "research_index_records": 6568,
   "routing_tokens": 2341,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30877,7 +30880,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "14285e435d69b95d8fcdb2b2302d01f161c51b4f721833d5e4c5dc1699cf8b7e"
+  "value": "40d0fbe1ee1d37e998bed07cf84ec70c8bb6ff239abfee61c3650739c498e48d"
  },
  "engines": [
   {
@@ -60598,7 +60601,7 @@
   "included_source_count": 1024,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "367cb00b39daf0b0b6b9c87010d46f1b7a66b25e6ed5f7a7ab61620bae045ca0"
+  "source_tree_digest": "70cfbdfb0864954f1eb1a2d8f4b9fc276865b0bb6d980b6d26aa8c4739dc6590"
  },
  "research_index": [
   {
@@ -206838,6 +206841,51 @@
    }
   },
   {
+   "action_id": "A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_STATED_REVISION_IS_THE_REVISION_THAT_IS_READ_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "292d23896198f56d55225ff0685c051cc734eb6d4fd86ae254dbe73db3e2eb4a",
+   "status": "",
+   "terms": {
+    "20261101": 1,
+    "a_refusal_names_the_reason_inside_it_v1": 1,
+    "a_stated_revision_is_the_revision_that_is_read_v1_20261101_v1": 1,
+    "about": 3,
+    "answer": 1,
+    "answered": 2,
+    "ask": 1,
+    "binding": 1,
+    "cannot": 1,
+    "certified": 1,
+    "change": 1,
+    "commit": 1,
+    "confused": 1,
+    "declared_input_derivation_v1": 1,
+    "declares": 1,
+    "diff": 1,
+    "different": 1,
+    "empty": 2,
+    "even": 1,
+    "false": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "git": 2,
+    "had": 1,
+    "head": 1,
+    "hunk": 1,
+    "no": 3,
+    "question": 2,
+    "read": 2,
+    "revision": 7,
+    "sentence": 2,
+    "so": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "A_STRUCTURED_REFUSAL_MUST_CARRY_ITS_REASON_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -234513,7 +234561,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "373f3e3da31eabf9723e2f0fe6cc8856ee0a7d25b9fcb9cc9d7ff0e221e8b927",
+   "sha256": "b339fb75442a62fca58978fe69471f8bec8d3cd54ac03cac0ef6b44da73042bb",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
    "symbol_count": 20,
    "symbols": [
