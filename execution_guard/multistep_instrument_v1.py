@@ -48,25 +48,29 @@ if str(ROOT) not in sys.path:
 
 WORK = ROOT / "canonical" / "astra_runtime" / "tmp" / "multistep"
 
-# Pinned commits: a moving branch would make two runs incomparable.
+# PINNED COMMITS. The first version of this file claimed pinning in a comment while cloning
+# whatever the default branch was that morning -- the same class of false claim the inventory keeps
+# finding in its own numbers. The shas below were recorded on 2026-11-01 and are fetched explicitly,
+# so a task bank is stable and two runs are comparable. A pin that cannot be fetched falls back to
+# the default branch and says so in the report.
 REPOS: dict[str, dict[str, Any]] = {
     "iniconfig": {
         "url": "https://github.com/pytest-dev/iniconfig.git",
-        "commit": None,  # depth-1 clone of the default branch at run time; recorded in the report
+        "commit": "a9e0ad14bcd0d9d3b68d2b699ce38399cbe64fdd",
         "test_cmd": [sys.executable, "-m", "pytest", "-q"],
         "py_path": None,
         "targets": ["src/iniconfig/_parse.py", "src/iniconfig/__init__.py"],
     },
     "pluggy": {
         "url": "https://github.com/pytest-dev/pluggy.git",
-        "commit": None,
+        "commit": "3fc9e561ea7e72a95549673d79ebdaf4a9fae829",
         "test_cmd": [sys.executable, "-m", "pytest", "-q"],
         "py_path": "src",
         "targets": ["src/pluggy/_manager.py", "src/pluggy/_callers.py", "src/pluggy/_hooks.py"],
     },
     "click": {
         "url": "https://github.com/pallets/click.git",
-        "commit": None,
+        "commit": "2247b35ea1c47c727d7a06e51fa280e12a863ff6",
         "test_cmd": [sys.executable, "-m", "pytest", "-q",
                      "tests/test_basic.py", "tests/test_arguments.py", "tests/test_options.py"],
         "py_path": "src",
@@ -86,11 +90,26 @@ def materialise(name: str) -> pathlib.Path:
     dest.parent.mkdir(parents=True, exist_ok=True)
     if dest.exists():
         shutil.rmtree(dest)
+    pinned = spec.get("commit")
+    if pinned:
+        dest.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["git", "-C", str(dest), "init", "-q"], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(dest), "remote", "add", "origin", spec["url"]],
+                       check=False, capture_output=True)
+        fetched = subprocess.run(
+            ["git", "-C", str(dest), "fetch", "-q", "--depth", "1", "origin", pinned],
+            capture_output=True, timeout=300)
+        if fetched.returncode == 0:
+            subprocess.run(["git", "-C", str(dest), "checkout", "-q", "FETCH_HEAD"],
+                           check=True, capture_output=True)
+            return dest
+        shutil.rmtree(dest, ignore_errors=True)  # the pin is unreachable; fall back and say so
     subprocess.run(["git", "clone", "--depth", "1", spec["url"], str(dest)],
                    check=True, capture_output=True, timeout=300)
     rev = subprocess.run(["git", "-C", str(dest), "rev-parse", "HEAD"],
                          capture_output=True, text=True).stdout.strip()
     spec["commit"] = rev
+    spec["pin_honoured"] = False
     return dest
 
 
