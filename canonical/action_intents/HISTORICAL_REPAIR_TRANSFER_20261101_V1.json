@@ -1,0 +1,375 @@
+{
+  "action_id": "HISTORICAL_REPAIR_TRANSFER_20261101_V1",
+  "action_intent_id": "HISTORICAL_REPAIR_TRANSFER_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "Qualify two pinned historical bug families with separate teaching, unseen-issue transfer, real copied-project verification, capable disabled baseline and required-refusal cases. Repair only reproduced shared blockers, preserving rename safety. Correct stale apply tests in the open. No universal, independent or terminal promotion claim.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "admission_record_timing": "RECORDED_BEFORE_SOURCE_EDITS",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "model_dependency_count_scope": "The deterministic runtime producer/solver route, not the model-assisted development session; development provenance is explicitly declared separately.",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
+      "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
+      "canonical/tests/test_historical_repair_transfer_v1.py",
+      "canonical/verification/HISTORICAL_REPAIR_TRANSFER_20261101_V1.md",
+      "hardcore_swe_surface_probe_20261030.py",
+      "canonical/tests/test_surface_regression_oracle_fresh_source_v1.py"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Retained repair currently uses the first syntactic match and its historical generalization beyond seeded expression tasks is unqualified; two legacy apply tests are stale.",
+  "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "Retained repair currently uses the first syntactic match and its historical generalization beyond seeded expression tasks is unqualified; two legacy apply tests are stale.",
+  "date": "2026-11-01",
+  "expected_parent_frontier_change": "Qualify two pinned historical bug families with separate teaching, unseen-issue transfer, real copied-project verification, capable disabled baseline and required-refusal cases. Repair only reproduced shared blockers, preserving rename safety. Correct stale apply tests in the open. No universal, independent or terminal promotion claim.",
+  "explicit_user_authorization": "User approved the stated immediate historical-repair and verification batch with Execute perfectly.",
+  "falsification_condition": "A zero-work command or changed test corpus authorizing success, an unverified applied patch, retained reuse across incompatible scope, or uncounted search/verification cost invalidates the relevant claim.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "highest_leverage_scope": "Measured existing-path verification gap; finite engineering prioritization, not universal optimality.",
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "estimate_semantics": "Conditional engineering planning inputs required by the admission scheduler, not measured benchmark improvement, statistical certification, or an independently validated global probability bound. No official obligation is discharged by this record.",
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/1000",
+    "interpretation": "Reliable production source effects and verified reusable repairs are prerequisites for coding capability. No obligation discharge, official benchmark gain or independent certification.",
+    "measured_effect": "Current-tree baseline reproduced openly: existing apply suite ran 13 tests in 5.926s, 11 passed, 1 failure and 1 error. Constant synthesis makes f(2)==99999 pass; rollback test supplies a 3-argument fake for a 4-argument function. Historical curriculum and multi-match blockers require direct probes before implementation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 86400
+  },
+  "merge_gate_followup": {
+    "authorization": "Subsequent explicit user instruction: Merge all your work.",
+    "original_admission_base_commit": "cacadec042d11bc87f57ec82c668ab35c361b21a",
+    "planned_fix": "Exclude __pycache__ and .pyc/.pyo from the scratch tree before git reverts application sources. Strengthen source freshness without changing oracle expectations, workflow or floor.",
+    "reason": "Incoming main integration requires exact-current-base blocker lease. CI census copied green bytecode into the reverted source project.",
+    "recorded_utc": "2026-11-01T14:06:44.818493+00:00",
+    "red_test": "canonical/tests/test_surface_regression_oracle_fresh_source_v1.py",
+    "refreshed_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+    "report_freeze_precedes_merge_authorization": true,
+    "reproduction": "New real-files regression with unchecked-hash green pycache fails on current oracle: suite green, correct value 5, but reverted bug hidden. No import/filesystem/process substitution."
+  },
+  "ownership_credit_delta": 0,
+  "post_probe_resolution": {
+    "actual_shared_solver_blocker": "No comparison in _pool at legacy caps 8 or default 24; correct <= to < appears at legacy index 25 with cap 128",
+    "all_in_cost_observability_complete": false,
+    "distinct_issues_solved_per_arm": {
+      "attempted": 2,
+      "baseline": 1,
+      "learning_enabled": 1
+    },
+    "implementation": "Reuse existing mutation and family-reserve machinery. Up to 4 additional comparison edits per guided file, single-only, excluding already included edits. Preserve original candidate slots/order and pair inventory.",
+    "initial_admission_and_hypothesis_retained": true,
+    "initial_first_match_hypothesis": "Inspected only; not proven dominant or changed",
+    "learning_transfer_advantage_demonstrated": false,
+    "multi_source_file_patch_qualification_complete": false,
+    "post_edit_metadata_fields_updated": [
+      "agent_orientation.progress_evidence_paths",
+      "post_probe_resolution"
+    ],
+    "qualification_report": "canonical/verification/HISTORICAL_REPAIR_TRANSFER_20261101_V1.json",
+    "recorded_utc": "2026-11-01T13:47:00.149920+00:00",
+    "result": "BOUNDED_SOLVER_RELIABILITY_GAIN__NO_DISTINCT_ISSUE_LEARNING_ADVANTAGE",
+    "same_issue_replay_demonstrated": true
+  },
+  "probe_specific": false,
+  "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
+  "recursive_obs": {
+    "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Stated-command exit code alone as proof that named tests passed",
+      "Parallel replacement search or skill storage"
+    ],
+    "expected_parent_level_state_change": "Qualify two pinned historical bug families with separate teaching, unseen-issue transfer, real copied-project verification, capable disabled baseline and required-refusal cases. Repair only reproduced shared blockers, preserving rename safety. Correct stale apply tests in the open. No universal, independent or terminal promotion claim.",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "Delete implicit assurance inference",
+        "Refuse unsupported contract constraints and out-of-scope recall",
+        "Reuse SQLite, existing copied-tree measurement and suite runner"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_EXISTING_SWE_TRANSFORM_AND_TRANSFER_IMPLEMENTATIONS",
+      "surviving_causal_blocker": "Retained repair currently uses the first syntactic match and its historical generalization beyond seeded expression tasks is unqualified; two legacy apply tests are stale."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "Replacement universal-learning architecture",
+        "Replacement parser",
+        "Parallel evidence/model format"
+      ],
+      "existing_inherited_routes_checked": [
+        "VerifiedSkillStore and its current removed-name pinning/typed contracts/invalidation",
+        "RetainedRepairSession and ProjectTestOracle in the production apply path",
+        "Existing token-based first-match substitution and minimal changed-hunk extraction",
+        "Existing AST mutation/search and source-aware copied-project measurement",
+        "Existing causal trace-to-workflow compiler and scope-aware crossfile choreographer; no replacement architecture"
+      ],
+      "external_existing_routes_checked": [
+        "Pinned licensed upstream boltons, more-itertools and itsdangerous sources; attribution and exact source SHAs in fixture provenance manifest.",
+        "Existing prior cache/parser metadata remains historical discovery context only, not qualification of the current solution."
+      ],
+      "surviving_gap": "Measure actual historical cross-issue transfer rather than assume pattern reuse; preserve failed/refused tasks. Source-only inserts currently fall back to full-module patterns; candidate application returns only its first syntactic match."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Universal mastery claims",
+        "Treating a producer PASS flag or low replay trial count as task correctness or total work"
+      ],
+      "real_outcome": "Qualify two pinned historical bug families with separate teaching, unseen-issue transfer, real copied-project verification, capable disabled baseline and required-refusal cases. Repair only reproduced shared blockers, preserving rename safety. Correct stale apply tests in the open. No universal, independent or terminal promotion claim.",
+      "surviving_necessity": "Correctly bound and freshly tested reuse rather than syntax-only lesson acceptance."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "Existing anti-unification and parameter holes",
+        "Existing SQLite schema with versioned pattern_json metadata",
+        "Existing repository measurement and test-suite execution machinery"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "Obsolete no-repair expectation where inherited synthesis solves the stated test",
+        "Mocked subprocess rollback test instead of real execution-boundary rollback",
+        "Assuming first syntactic match is the verified repair location"
+      ],
+      "fresh_reuse_plan": "Reuse the maintained interfaces. Revalidate changed dependencies; do not let retained success replace live verification."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "Reuse the existing current-tree test modules and official compiler instead of creating a new evidence architecture"
+      ],
+      "search_stop_decision": "For the finite reproduced defects, maintained substrate plus bounded contract glue is sufficient; stop search before pretending universal optimality. Reopen if new counterexamples or a qualified dominating route appears."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Trust fails known counterexamples; disabling all writes loses working positive cases; replacement learning does not fix source-transition invariants. No claim that every possible external route was exhaustively benchmarked.",
+      "routes_ranked": [
+        "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+        "KEEP_BOOLEAN_ONLY_VERIFICATION",
+        "REPLACE_LEARNER"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Pinned historical before/after source and upstream regression cases from boltons and more-itertools. Separate public consumer modules and authored audit/counterexamples where needed are explicitly labeled; these are repository-derived historical-bug projects, not full repository or benchmark certification."
+    },
+    "real_outcome": "Qualify two pinned historical bug families with separate teaching, unseen-issue transfer, real copied-project verification, capable disabled baseline and required-refusal cases. Repair only reproduced shared blockers, preserving rename safety. Correct stale apply tests in the open. No universal, independent or terminal promotion claim.",
+    "required_capability": "Scoped skill hypotheses revalidated with actual behavioral measurements rather than truthy callbacks.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "Keep the existing search solver as the fallback/baseline; scoped memory proposes, never bypasses verification.",
+            "CORRECTNESS": "Require actual declared corpus success and final source/test integrity; one reproduced no-work-command counterexample.",
+            "INCREMENTAL_COST": "Existing runtime mechanisms; no paid service or external-model runtime call.",
+            "RELIABILITY": "Historical qualification pending. Baseline two stale-test failures reproduced. Preserve incoming rename refusal and strict live verification.",
+            "VERIFIABILITY": "Actual child executions and original test/source byte comparisons, not independent certification.",
+            "WALL_CLOCK": "Measure complete search, proposal and verification costs; no unmeasured fastest claim."
+          },
+          "evidence": [
+            "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+            "canonical/tests/test_python_repair_apply_verified_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+            "canonical/tests/test_python_repair_apply_verified_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT"
+        }
+      ],
+      "checked_at_utc": "2026-11-01T13:17:43.056304+00:00",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_evidence_provenance": "Current local inspection plus GitHub primary commit/PR metadata and limited community commit search on 2026-11-01; no exhaustive or globally optimal route claim.",
+      "discovery_required": true,
+      "incumbent_route": "LEGACY_BOOLEAN_PREDICATE_AND_UNSCOPED_CACHE_RECALL",
+      "max_age_hours": 24,
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "GitHub repository search: python disk cache transactions"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "GitHub repository metadata: grantjenks/python-diskcache"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "GitHub issues search: repo:python/cpython lru_cache mutable"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "GitHub latest release: tree-sitter/py-tree-sitter"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T13:17:43.056304+00:00",
+        "execution_dependencies": [
+          {
+            "dependency": "CPython, pytest/pytest-subtests and maintained repair/measurement/store modules",
+            "evidence": [
+              "DIRECT_PROBE: baseline module 11 passed, 2 failed; reproduced false already-satisfied result without source edits; local pytest installed in isolated .venv."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "Current store, contract, oracle, production apply, AST candidates and causal workflow/compiler inspected; maintained composition preferred."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Limited GitHub commit search: more-itertools off-by-one returned no items; zero-size search located ichunked PR1305/issue1304 and chunked_even fix; boltons boundary search located bytes2human and Bits fixes. Not exhaustive."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "GitHub immutable source/patch metadata; standard-library tokenizer, AST and SQLite already present. No external learner/runtime model adopted."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/mahmoud/boltons/commit/c1c25da365cf14878cf5317147e7a09b5d124df5",
+          "https://github.com/mahmoud/boltons/commit/766b5547392fe8d54c1e000098499dc556bb5cb7",
+          "https://github.com/more-itertools/more-itertools/pull/1305",
+          "https://github.com/more-itertools/more-itertools/commit/fbd55137fe47b44f55190c3714c75f1b21bf834d"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+      "KEEP_BOOLEAN_ONLY_VERIFICATION",
+      "REPLACE_LEARNER"
+    ],
+    "selected_surviving_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+    "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+    "why_selected_route_is_fastest_sufficient": "Within the compared finite-scope routes, reuse the existing machinery and repair its shared preconditions rather than replace the stack. Comparative global optimality is unknown."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+  "selected_surviving_route": "INTEGRATE_EXISTING_SKILL_STORE_AND_MEASUREMENT",
+  "status": "PLANNED_BOUNDED_IMPLEMENTATION__NO_PROMOTION",
+  "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T13:17:43.056304+00:00",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "Finite scoped retained-repair verification only. No terminal proof, complete request semantics, benchmark acceptance or permanent mastery claim.",
+    "target_truth_obligations": [
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "fb0e70362cdf745286bda6056a4278ab0675e424",
+          "path": "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py"
+        },
+        {
+          "git_blob_sha": "0be9bd268566ffefa0b84390e0e9a607c1aacb0c",
+          "path": "canonical/tests/test_python_repair_apply_verified_v1.py"
+        }
+      ],
+      "decisive_question": "Does one historical teaching transfer to a genuinely different historical issue under live tests, with all refusal and discovery/verification costs reported?",
+      "falsifier_id": "HISTORICAL_REPAIR_TRANSFER_20261101_V1_WRONG_RULE_AND_ABLATION",
+      "known_counterexamples_checked": true,
+      "proposal_id": "HISTORICAL_REPAIR_TRANSFER_20261101_V1"
+    }
+  },
+  "weakens_existing_guard": false
+}

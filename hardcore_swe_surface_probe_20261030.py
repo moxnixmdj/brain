@@ -1149,7 +1149,11 @@ def oracle_refactor_then_test(base, result):
         scratch = base.parent / (base.name + "_revert")
         if scratch.exists():
             shutil.rmtree(scratch)
-        shutil.copytree(base, scratch)
+        # Reverting source must not reuse the green version's copied bytecode.
+        # Same-size, same-second rewrites can retain timestamp-valid caches;
+        # unchecked-hash caches hide the reverted bug regardless of timestamps.
+        shutil.copytree(base, scratch,
+                        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.pyo"))
         adv.git(scratch, "checkout", initial, "--", "app")
         cp = adv.sh([sys.executable, "-m", "unittest", "discover", "-s", "tests", "-t", "."],
                     scratch, 120)

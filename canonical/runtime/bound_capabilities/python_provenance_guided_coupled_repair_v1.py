@@ -55,8 +55,8 @@ def _guided_rows(repo,loc,prov,max_files,max_symbols):
  rows=list(by.values());rows.sort(key=lambda x:(-x["score"],x["rel"]))
  return rows[:max_files]
 
-def _items(rows,tests,per):
- pools={r["path"]:_COUPLED._pool(r,tests,per) for r in rows}
+def _items(rows,tests,per,*,comparison_reserve=0):
+ pools={r["path"]:_COUPLED._pool(r,tests,per,comparison_reserve=comparison_reserve) for r in rows}
  return [(r["path"],e) for r in rows for e in pools[r["path"]]]
 
 def _pair_space(n):return n*(n-1)//2
@@ -138,18 +138,23 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  for _row in rows:
   _row["focus"]=sorted(_focus.get(_row["rel"],set()))
  if not rows:raise GuidedRepairError("GUIDANCE_EMPTY")
- guided_items=_items(rows,tests,per)
+ all_guided_items=_items(rows,tests,per,comparison_reserve=4)
+ guided_items=[it for it in all_guided_items if it[1].get("family")!="comparison_reserve"]
+ comparison_items=[it for it in all_guided_items if it[1].get("family")=="comparison_reserve"]
  failure_text=_STRICT._text(base)
  control_rows=_COUPLED._localize(repo,src,tests,failure_text,control_files,control_symbols)
  control_items=_items(control_rows,tests,per)
  guidance={
   "guided_file_count":len(rows),
-  "guided_candidate_item_count":len(guided_items),
+  "guided_candidate_item_count":len(all_guided_items),
+  "guided_base_candidate_item_count":len(guided_items),
+  "comparison_reserve_item_count":len(comparison_items),
+  "guided_single_candidate_item_count":len(guided_items)+len(comparison_items),
   "guided_pair_space":_pair_space(len(guided_items)),
   "control_file_count":len(control_rows),
   "control_candidate_item_count":len(control_items),
   "control_pair_space":_pair_space(len(control_items)),
-  "candidate_item_reduction":len(control_items)-len(guided_items),
+  "candidate_item_reduction":len(control_items)-len(all_guided_items),
   "pair_space_reduction":_pair_space(len(control_items))-_pair_space(len(guided_items)),
  }
  guidance["guidance_reduced_candidate_items"]=guidance["candidate_item_reduction"]>0
@@ -157,7 +162,7 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
  originals={r["path"]:r["path"].read_bytes() for r in rows}
  single_scores={};tested_single=0
  winner=None;winner_mode=None;pair_count=0;crossed=False
- for p,e in guided_items:
+ for p,e in guided_items+comparison_items:
   if not _wall_left():break
   cand=_COUPLED._candidate(originals,[(p,e)])
   if cand is None:continue

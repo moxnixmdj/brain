@@ -36,7 +36,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Foreign `src/`-layout pytest repositories (`pluggy`, `click`) produced 0 edits on `multistep_instrument_v1.py` because fault localization only traced `unittest` at function granularity without `src/` PYTHONPATH or pasted-traceback filtering, `ComputerEnv` lacked checkpointed multi-step chains and metamorphic total-vs-distinct separation, and HTTP workflow compilation lacked stateful cookies/CSRF and verified portable bundles.",
-  "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+  "canonical_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -83,7 +83,7 @@
     "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+    "canonical_base_commit": "c64af36c85e9ba62698a5af2ec62a7cded1bc1ab",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "WHOLE_REPO_RGLOB_TEST_DISCOVERY_WHEN_FAILING_TEST_FILES_ARE_STATED",
