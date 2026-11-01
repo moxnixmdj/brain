@@ -1,0 +1,467 @@
+{
+  "action_id": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+  "action_intent_id": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+  "action_kind": "FRESH_REUSE",
+  "action_summary": "A sentence that names a DEFINITION to move was answered by a FILE command. Measured on main e304434033 with big.py holding a, b and c: \"Move b from <b>/big.py into <b>/out.py.\" bound shell.command.run argv ['mv', big.py, out.py] -- overwriting out.py with the source's bytes and DELETING big.py -- and reported PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED. The rule that refuses a file command for a named definition only fired when the sentence used the word 'function'; without it, nothing matched and the file died for a request about one function in it. \"Copy b from A into B\" was the same mistake without the deletion: the whole file was copied and certified. The row that answers the move existed all along -- python.refactor.move_symbol.v1 -- and now receives it: b leaves big.py, a and c stay, and the door reports the row it used. The discriminator is the sentence's grammar, not another noun list: in 'move|copy <OBJECT> from <SOURCE> ... <DESTINATION>' the OBJECT is what moves, and a file command can only be the answer when that object is a file. Copying a definition has no row and now refuses instead of copying the file; a real file move ('Move <path> to <path>') is unchanged. Measured after: the same sentence PASSes through move_symbol, and the ordinary-sentence SWE matrix is 6/6 with its module-split row down from 3.9 s to 336 ms.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/tests/test_a_refusal_names_the_reason_inside_it_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+    ],
+    "route_class": "REUSE"
+  },
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::`composer_route_v1._prose_argv` could only tell a file from a definition when the sentence spelled a definition noun. The object slot itself -- the word the sentence put where the thing being moved belongs -- was never read, so a bare name in that slot was silently treated as the file.",
+  "canonical_base_commit": "e304434033c9d8dfbfa851fea4c42992fdb7023e",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "`composer_route_v1._prose_argv` could only tell a file from a definition when the sentence spelled a definition noun. The object slot itself -- the word the sentence put where the thing being moved belongs -- was never read, so a bare name in that slot was silently treated as the file.",
+  "date": "2026-11-01",
+  "expected_parent_change": "canonical/runtime/composer_route_v1.py: `_states_a_file_as_the_object` reads the object of move/copy in the sentence (paths already masked) and refuses the mv/cp/rm reading unless that object is a file.",
+  "expected_parent_frontier_change": "A file command is never handed a definition to move: the sentence's object decides, and a name is edited while a file is moved.",
+  "explicit_user_authorization": "Owner instruction this session: hardcore software engineering only, all the hardcore SWE problems listed with measurements; the answers already exist in the tree so wire what is there rather than invent; do the optimal thing in the fastest way and only the right way; report honest numbers even when they contradict the previous claim. No external model, zero spend, fail closed.",
+  "falsification_condition": "FALSIFIED if any file command runs on a sentence whose object is a name, or if a sentence that names a path stops moving it.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/13",
+    "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__THE_YIELD_IS_THAT_A_REQUEST_ABOUT_ONE_DEFINITION_CAN_NO_LONGER_DESTROY_THE_FILE_AND_IS_ANSWERED_ELEVEN_TIMES_FASTER",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "BEFORE (main e304434033, big.py = a,b,c): 'Move b from big.py into out.py' -> shell.command.run ['mv', big.py, out.py]; result files = ['out.py'] (big.py deleted, a and c gone); pass=True. 'Copy b from big.py into out.py' -> ['cp', big.py, out.py]; out.py holds all of a,b,c; pass=True. AFTER: the move compiles python.refactor.move_symbol.v1 (files = big.py, out.py; big.py keeps a and c, out.py holds b), the copy refuses with nothing changed, and 'Move <path> to <path>' still moves the file. Ordinary-sentence matrix 6/6 (format 127 ms, unused 142 ms, types 121 ms, module split 336 ms -- down from 3.9 s because it no longer detours through the destructive route -- rename 70 ms, failing-test repair 7.7 s). Census 28/28. Door suite: the same 6 pre-existing failures as pristine main, plus every other test in the four-file group passing. The two shell-command suites are failure-for-failure identical to pristine main (12 failed / 337 passed on both). Five new tests, four red on pristine main.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/bound_capabilities/python_source_move_symbol.py (python.refactor.move_symbol.v1)",
+    "canonical/runtime/swe_typed_plan_v1.py (the stated move_symbol family)",
+    "composer_route_v1._INSIDE_THE_FILE_NOUNS (the noun-list rule this replaces for the object slot)"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "e304434033c9d8dfbfa851fea4c42992fdb7023e",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "A_WHOLE_FILE_DESTROYED_FOR_A_REQUEST_ABOUT_ONE_FUNCTION",
+      "A_DELETION_CERTIFIED_AS_AN_EXACT_SEMANTIC_ACCEPTANCE",
+      "A_NOUN_LIST_WHERE_THE_SENTENCE_ALREADY_SAYS_WHICH_OBJECT_IT_MEANS"
+    ],
+    "expected_parent_level_state_change": "A file command is never handed a definition to move: the sentence's object decides, and a name is edited while a file is moved.",
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "GENERAL__ANY_SENTENCE_WHOSE_OBJECT_IS_A_NAME_INSIDE_A_FILE",
+      "delete_bypass_substitute_options": "KEEPING_THE_NOUN_RULE_LEAVES_THE_BARE_NAME_DESTRUCTIVE",
+      "surviving_causal_blocker": "ONE_READER_DECIDED_WHAT_THE_OBJECT_WAS_AND_NEVER_READ_THE_OBJECT"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "python.refactor.move_symbol.v1 (already answers 'Extract b from A into B')",
+        "composer_route_v1._INSIDE_THE_FILE_NOUNS (the noun-list refusal already in _prose_argv)",
+        "composer_route_v1.extract_paths (paths are masked before the object is read)"
+      ],
+      "external_existing_routes_checked": "None needed: pathlib's join semantics already distinguish absolute from relative.",
+      "capability_work_deleted": "NO_NEW_ROW__THE_EXISTING_MOVE_SYMBOL_ROW_RECEIVES_THE_SENTENCE",
+      "surviving_gap": "COPYING_A_DEFINITION_HAS_NO_ROW__the door now refuses instead of copying the file"
+    },
+    "obs_goal": {
+      "real_outcome": "A request to move one definition moves that definition and leaves everything it did not name in place; a request no row can serve refuses instead of damaging the file.",
+      "proxy_goals_deleted": [
+        "TREATING_A_BARE_NAME_AS_A_FILE",
+        "ACCEPTING_A_DESTRUCTIVE_EFFECT_BECAUSE_THE_POSTCONDITION_MATCHED"
+      ],
+      "surviving_necessity": "A sentence can name a file or a thing inside one with the same word order; only the object decides."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "NONE",
+      "downstream_work_to_delete_or_supersede": "NONE",
+      "fresh_reuse_plan": "EXTEND_THE_ONE_FUNCTION_THAT_ALREADY_DECIDES_WHAT_A_STATED_PATH_IS"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "THE_DOOR_SUITE_AND_THE_CENSUS_RAN_ONCE_BEFORE_AND_AFTER",
+      "search_stop_decision": "STOPPED_WHEN_THE_COMPOSER_PRINTED_mv_WITH_A_NAME_AS_ITS_OPERAND"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Requiring the word 'function' leaves every bare name destructive; keying on a list of verbs moves the hole instead of closing it.",
+      "routes_ranked": [
+        {
+          "route": "KEEP_THE_NOUN_RULE_AND_REQUIRE_THE_WORD_FUNCTION__LEAVES_THE_BARE_NAME_DESTRUCTIVE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "DESTRUCTIVE_FOR_EVERY_BARE_NAME",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "WORDING_DEPENDENT",
+            "VERIFIABILITY": "WEAK",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "Measured: 'Move b from A into B' deleted the file and PASSed."
+          ],
+          "qualification_evidence": [
+            "direct probe on main e304434033: files=['out.py'] after the move"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "ROUTE_MOVE_TO_MOVE_SYMBOL_BY_ADDING_A_VERB_LIST__EVERY_NEW_VERB_IS_A_NEW_HOLE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "VERB_DEPENDENT",
+            "INCREMENTAL_COST": "A_LIST",
+            "RELIABILITY": "NEXT_SYNONYM_BREAKS_IT",
+            "VERIFIABILITY": "WEAK",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "A verb list answers 'move' and not 'relocate', 'shift', 'hoist'."
+          ],
+          "qualification_evidence": [
+            "the hole was exactly a missing word in a list"
+          ],
+          "qualification_evidence_classes": [
+            "ARCHITECTURAL"
+          ]
+        },
+        {
+          "route": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "CLOSES_THE_SHAPE",
+            "CORRECTNESS": "OBJECT_DECIDES",
+            "INCREMENTAL_COST": "ONE_PREDICATE",
+            "RELIABILITY": "GRAMMAR_NOT_VOCABULARY",
+            "VERIFIABILITY": "FIVE_TESTS_AND_THE_MATRIX",
+            "WALL_CLOCK": "FASTER (3.9s -> 336ms)"
+          },
+          "evidence": [
+            "After: the move compiles move_symbol and the file's other definitions survive."
+          ],
+          "qualification_evidence": [
+            "5 tests (4 red on main), matrix 6/6, census 28/28"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "NONE__THE_TESTS_READ_THE_REAL_FILES_THE_DOOR_EDITED"
+    },
+    "real_outcome": "A request to move one definition moves that definition and leaves everything it did not name in place; a request no row can serve refuses instead of damaging the file.",
+    "required_capability": "Tell the object of a move from the file it lives in.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "route": "KEEP_THE_NOUN_RULE_AND_REQUIRE_THE_WORD_FUNCTION__LEAVES_THE_BARE_NAME_DESTRUCTIVE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "DESTRUCTIVE_FOR_EVERY_BARE_NAME",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "WORDING_DEPENDENT",
+            "VERIFIABILITY": "WEAK",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "Measured: 'Move b from A into B' deleted the file and PASSed."
+          ],
+          "qualification_evidence": [
+            "direct probe on main e304434033: files=['out.py'] after the move"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "ROUTE_MOVE_TO_MOVE_SYMBOL_BY_ADDING_A_VERB_LIST__EVERY_NEW_VERB_IS_A_NEW_HOLE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME",
+            "CORRECTNESS": "VERB_DEPENDENT",
+            "INCREMENTAL_COST": "A_LIST",
+            "RELIABILITY": "NEXT_SYNONYM_BREAKS_IT",
+            "VERIFIABILITY": "WEAK",
+            "WALL_CLOCK": "SAME"
+          },
+          "evidence": [
+            "A verb list answers 'move' and not 'relocate', 'shift', 'hoist'."
+          ],
+          "qualification_evidence": [
+            "the hole was exactly a missing word in a list"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+          "resolution": "SELECTED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "CLOSES_THE_SHAPE",
+            "CORRECTNESS": "OBJECT_DECIDES",
+            "INCREMENTAL_COST": "ONE_PREDICATE",
+            "RELIABILITY": "GRAMMAR_NOT_VOCABULARY",
+            "VERIFIABILITY": "FIVE_TESTS_AND_THE_MATRIX",
+            "WALL_CLOCK": "FASTER (3.9s -> 336ms)"
+          },
+          "evidence": [
+            "After: the move compiles move_symbol and the file's other definitions survive."
+          ],
+          "qualification_evidence": [
+            "5 tests (4 red on main), matrix 6/6, census 28/28"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "checked_at_utc": "2026-11-01T15:31:18Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "A_NOUN_LIST_DECIDES_WHETHER_THE_OBJECT_IS_A_DEFINITION",
+      "max_age_hours": 24,
+      "negative_search_summary": "No external engine: the sentence's own object slot already answers the question, and pathlib/ast already supply everything else.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "refuse a write that destroys source"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "post-condition on bytes written by an adapter"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "python ast distinguish module from expression"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "restore preimage on destruction"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-01T15:31:18Z",
+        "execution_dependencies": [
+          {
+            "dependency": "python3 stdlib (ast, pathlib)",
+            "evidence": [
+              "DIRECT_PROBE: the module-vs-expression test was run on the real report bytes and on a real module"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "canonical/runtime/write_authority_v1.py + live_brain_route_admission_v1.py (in-tree)",
+            "evidence": [
+              "DIRECT_PROBE: 25 write tests, 18 door/formatter tests, census 28/28"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "the adapters themselves, unchanged",
+            "evidence": [
+              "DIRECT_PROBE: the census exercises the editing rows end to end"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "composer_route_v1._INSIDE_THE_FILE_NOUNS (the refusal this generalises)",
+          "bound_capabilities/python_source_move_symbol.py (the row that does the move)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "POSIX mv(1): a two-operand mv renames/replaces its source"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "python.refactor.move_symbol.v1 declares symbol/source_module/target_module"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "CWE-73/CWE-22 family: a name silently re-read as a different object"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "KEEP_THE_NOUN_RULE_AND_REQUIRE_THE_WORD_FUNCTION__LEAVES_THE_BARE_NAME_DESTRUCTIVE",
+      "ROUTE_MOVE_TO_MOVE_SYMBOL_BY_ADDING_A_VERB_LIST__EVERY_NEW_VERB_IS_A_NEW_HOLE",
+      "READ_THE_OBJECT_SLOT_OF_THE_SENTENCE__CHOSEN"
+    ],
+    "selected_route": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+    "selected_surviving_route": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+    "stop_condition": "STOP when 'Move <name> from A into B' moves the definition and keeps the rest of A, 'Copy <name> ...' refuses instead of copying the file, and a stated path is still moved as a path.",
+    "why_selected_route_is_fastest_sufficient": "One shape, read from the sentence's own grammar, at the single place that decides whether a file command is the answer. No new module, no new vocabulary, and the row that does the work already existed."
+  },
+  "route_id": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+  "stop_condition": "STOP when 'Move <name> from A into B' moves the definition and keeps the rest of A, 'Copy <name> ...' refuses instead of copying the file, and a stated path is still moved as a path.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-01T15:31:18Z",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NOT_APPLICABLE__ONE_PLACEHOLDER_RULE_ONE_ROLE_PHRASE_ONE_REGION_KIND_WITH_SANDBOX_MEASUREMENT_ONLY",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "A_DEFINITION_IS_NOT_A_FILE_TO_MOVE_V1_20261101_V1",
+      "decisive_question": "MAY_A_SENTENCE_THAT_NAMES_ONE_DEFINITION_DELETE_THE_FILE_THAT_HOLDS_IT",
+      "falsifier_id": "MOVE_B_FROM_A_INTO_B_WITH_A_HOLDING_OTHER_DEFINITIONS",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "NO_REPOSITORY_PATH_IS_BOUND_FOR_AN_OUTSIDE_PATH_AND_NO_IN_TREE_BINDING_CHANGED",
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/composer_route_v1.py",
+          "git_blob_sha": "2d5dc930765229b230b64a85b0fbc3d6b9917d0c"
+        }
+      ]
+    }
+  },
+  "weakens_existing_guard": "No guard is weakened. The noun-list refusal stays; the new rule is the grammar-level version of it, and it is narrower than a keyword list because it reads the sentence's own object slot.",
+  "progress_evidence_paths": [
+    "canonical/runtime/composer_route_v1.py",
+    "canonical/tests/test_a_definition_is_not_a_file_to_move_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ]
+}
