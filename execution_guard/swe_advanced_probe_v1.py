@@ -198,11 +198,22 @@ def census(axis_filter: str | None = None) -> list[dict]:
         elapsed = round((time.perf_counter() - started) * 1000)
         after = {p.relative_to(ROOT).as_posix(): _digest(p) for p in base.rglob("*") if p.is_file()}
         changed = sorted(p for p, d in before.items() if p in after and after[p] != d)
-        allowed = tuple("/" + a for a in allow)
+        # A DIRECTORY ALLOWANCE COVERS THE FILES INSIDE IT.  ``endswith("/pkg")`` alone never
+        # matches ``/pkg/mod.py``, so every sentence that authorises a package (". . . in <pkg>")
+        # was recorded as having made unauthorised edits -- a false accusation in the instrument,
+        # which is the same defect class as a false pass.  A bare directory entry now matches its
+        # subtree; an entry with a suffix still means exactly that file.
+        allowed = []
+        for a in allow:
+            a = "/" + a
+            allowed.append(a)
+            if not pathlib.PurePosixPath(a).suffix:
+                allowed.append(a + "/")
         # A git operation writes its own metadata by definition; .git/ is the tree the sentence
         # asked for, not a source edit the sentence did not name.
         unauthorised = [p for p in changed
-                        if "/.git/" not in p and not any(p.endswith(a) for a in allowed)]
+                        if "/.git/" not in p and not any(
+                            (p.endswith(a) or a.endswith("/") and a in p) for a in allowed)]
         rows.append(dict(n=i, axis=axis, goal=goal, status=status, served=passed,
                          selected=selected, ms=elapsed, changed=changed,
                          unauthorised=unauthorised, refusal=refusal, reason=reason))

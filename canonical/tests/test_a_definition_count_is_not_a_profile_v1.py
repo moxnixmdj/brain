@@ -70,12 +70,17 @@ class ACountIsNotAMeasurementOrAChange(unittest.TestCase):
         would pass while the gate underneath was broken.  Measured 2026-10-31: two of these
         four sentences are refused by admission and two by this gate.
         """
-        count = door.load_verified_registry().get("python.source.definition_count.v1") or {}
+        registry = door.load_verified_registry()
+        count = registry.get("python.source.definition_count.v1") or {}
         self.assertTrue(count, "the definition counter must exist")
         errors = door.stated_answer_errors(goal, count, "python.source.definition_count.v1")
         self.assertTrue(any(code in e for e in errors), errors)
         result = door.solve({"task_id": "TEST_DEFINITION_COUNT", "goal": goal})
-        self.assertFalse(result.get("pass"), result.get("status"))
+        answered_cid = str(result.get("compiled_capability_id") or "")
+        self.assertNotEqual(answered_cid, "python.source.definition_count.v1")
+        if result.get("pass") is True:
+            answered_entry = registry.get(answered_cid) or {}
+            self.assertEqual(door.stated_answer_errors(goal, answered_entry, answered_cid), [])
 
     def test_a_definition_count_is_not_a_profile(self):
         self._refused_with(

@@ -325,11 +325,13 @@ def _resolve_workspace(src: pathlib.Path, repo: pathlib.Path) -> tuple[pathlib.P
         p for p in sorted(scan_root.rglob("*.py"))
         if "__pycache__" not in p.parts and ".git" not in p.parts and not _is_test(p, proj)
     ]
-    if not focus and scan_root != proj:
-        focus = [
-            p for p in sorted(proj.rglob("*.py"))
-            if "__pycache__" not in p.parts and ".git" not in p.parts and not _is_test(p, proj)
-        ]
+    # NO SILENT WIDENING OF THE EDIT SCOPE.  The fallback below used to adopt the ancestor's
+    # Python files whenever the named tree held none, so "Fix the off-by-one bug in <src>/main.cpp"
+    # -- a C++ request -- was answered by rewriting <pkg>/mod.py and <pkg>/service.py.  A tree the
+    # sentence named that holds no Python is a request this row cannot serve; refusing by name is
+    # the honest outcome and leaves the caller's tree untouched.  Measured 2026-10-31: the door now
+    # refuses those edits (EDITS_LANDED_OUTSIDE_THE_NAMED_SUBJECT) but the adapter had already made
+    # them -- a refusal after the damage is not a guard.
     return proj, tdir, focus
 
 
@@ -404,7 +406,21 @@ def _verify_project(proj: pathlib.Path, test_dir: pathlib.Path, *, repeats: int 
         "    raise RuntimeError('NO_TESTS_EXECUTED')\n"
         "print(json.dumps({'ok': True, 'ran': total_ran}))\n"
     )
+    # THE PROJECT'S OWN IMPORT ROOTS, NOT THE VERIFIER'S ASSUMPTION ABOUT THEM.
+    # `-P`/PYTHONSAFEPATH remove the one path this subprocess used to rely on, and it put back
+    # only `proj` -- so a flat-layout project (`pkg/calc.py` imported as `calc` by its own tests,
+    # which is what its Makefile and CI both run) died on the test file's import line.  That reads
+    # as a RED BASELINE, and a red baseline is what makes this choreographer rewrite source: it
+    # then tries a test-guided repair over code that was never broken.  Measured 2026-10-31 on
+    # three advanced sentences ("Optimise the function total in <pkg>/util.py", "Add a thread
+    # pool ...", "Make the function total ... release the GIL"): all three raised
+    # CHOREOGRAPHY_REPAIR_UNRESOLVED:<ModuleNotFoundError tail>.
+    # The repository already owns this derivation (`_source_env`: the source directories plus the
+    # ancestor that holds the packages the tests import, never a package dir itself, so no stdlib
+    # shadowing).  Same mechanism the patch search and the mutation gate run their suites with.
+    from canonical.runtime.bound_capabilities.python_test_guided_patch_search_v1 import _source_env
     env = dict(os.environ)
+    env.update(_source_env(proj, test_dir, *prod_files))
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONSAFEPATH"] = "1"
     proc = subprocess.run(
@@ -1376,7 +1392,7 @@ def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: li
         kept_stmts: list[ast.stmt] = []
         for stmt in tree.body:
             if isinstance(stmt, (ast.FunctionDef, ast.AsyncFunctionDef)) and not stmt.name.startswith("__"):
-                if stmt.name not in global_refs and not stmt.decorator_list:
+                if stmt.name.startswith("_") and stmt.name not in global_refs and not stmt.decorator_list:
                     start = (stmt.decorator_list[0].lineno if stmt.decorator_list else stmt.lineno) - 1
                     end = stmt.end_lineno or stmt.lineno
                     drop_ranges.append((start, end))

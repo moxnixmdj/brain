@@ -314,15 +314,17 @@ case("extract_stated_statement",
 case("move_function", lambda b: "Move the function mul from %s to %s."
      % (rel(b, "pkg/calc.py"), rel(b, "pkg/mathx.py")),
      lambda b, r: (b / "pkg/mathx.py").is_file() and "def mul" in text_of(b / "pkg/mathx.py")
-     and "def mul" not in text_of(b / "pkg/calc.py"), "refactor")
+     and "def mul" not in text_of(b / "pkg/calc.py"), "refactor",
+     allow=("calc.py", "mathx.py", "test_calc.py"))
 case("add_type_hints", lambda b: "Add type hints to every function in %s." % rel(b, "pkg/calc.py"),
-     lambda b, r: "->" in text_of(b / "pkg/calc.py"), "refactor")
+     lambda b, r: "->" in text_of(b / "pkg/calc.py"), "refactor", allow=("calc.py",))
 case("extract_constant", lambda b: "Replace the magic number 3 in %s with a named constant."
      % rel(b, "pkg/calc.py"),
      lambda b, r: re.search(r"^[A-Z_]{3,}\s*=\s*3", text_of(b / "pkg/calc.py"), re.M) is not None,
-     "refactor")
+     "refactor", allow=("calc.py",))
 case("format_file", lambda b: "Format %s." % rel(b, "pkg/calc.py"),
-     lambda b, r: parses(b / "pkg/calc.py") and "def add" in text_of(b / "pkg/calc.py"), "refactor")
+     lambda b, r: parses(b / "pkg/calc.py") and "def add" in text_of(b / "pkg/calc.py"), "refactor",
+     allow=("calc.py",))
 
 # --- tests
 case("write_unit_test", lambda b: "Write a unit test for %s and save it to %s."
@@ -390,11 +392,12 @@ case("git_blame", lambda b: "Who last changed line 2 of %s?" % rel(b, "pkg/calc.
 
 # --- feature work
 case("add_cli_flag", lambda b: "Add a --verbose flag to the CLI in %s." % rel(b, "pkg/cli.py"),
-     lambda b, r: "verbose" in text_of(b / "pkg/cli.py"), "feature")
+     lambda b, r: "verbose" in text_of(b / "pkg/cli.py"), "feature", allow=("cli.py",))
 case("add_logging", lambda b: "Add logging to every function in %s." % rel(b, "pkg/mod.py"),
-     lambda b, r: "logging" in text_of(b / "pkg/mod.py"), "feature")
+     lambda b, r: "logging" in text_of(b / "pkg/mod.py"), "feature", allow=("mod.py",))
 case("add_retries", lambda b: "Add retry with backoff to the network call in %s."
-     % rel(b, "pkg/http.py"), lambda b, r: "retry" in text_of(b / "pkg/http.py").lower(), "feature")
+     % rel(b, "pkg/http.py"), lambda b, r: "retry" in text_of(b / "pkg/http.py").lower(), "feature",
+     allow=("http.py",))
 # THE REQUEST NAMES THE FILE IT WANTS CHANGED, SO THAT FILE IS NOT DAMAGE.
 #
 # Measured 2026-10-31: python.refactor.add_parameter.v1 did exactly what the sentence asked --
@@ -407,11 +410,11 @@ case("add_parameter", lambda b: "Add a parameter strict to the function total in
      allow=("util.py",))
 case("implement_issue", lambda b: "Implement this issue: add a subtract function to %s with a unit "
      "test." % rel(b, "pkg/calc.py"), lambda b, r: "def subtract" in text_of(b / "pkg/calc.py"),
-     "feature")
+     "feature", allow=("calc.py", "test_calc.py"))
 case("crossfile_feature", lambda b: "Add a divide function to %s and use it in %s."
      % (rel(b, "pkg/calc.py"), rel(b, "pkg/service.py")),
      lambda b, r: "def divide" in text_of(b / "pkg/calc.py") and "divide"
-     in text_of(b / "pkg/service.py"), "feature")
+     in text_of(b / "pkg/service.py"), "feature", allow=("calc.py", "service.py"))
 case("fix_failing_ci", lambda b: "The CI is failing because %s fails. Fix the build."
      % rel(b, "pkg/test_calc.py"), _repair, "feature", allow=_REPAIR_TARGETS)
 
@@ -533,15 +536,42 @@ def _mutation_score_measured(b: pathlib.Path, r: dict) -> bool:
 
 
 def _perf_gate_compared_both_sides(b: pathlib.Path, r: dict) -> bool:
-    """A perf verdict from two measured medians -- not from one side and an assumption."""
+    """A perf verdict from two measured medians -- not from one side and an assumption.
+
+    THE ORACLE WAS ASKING FOR A CERTAINTY THE REVIEW MAY HONESTLY REFUSE TO GIVE.
+
+    This function's own docstring names the property it wants: a verdict from TWO measured sides.
+    It then required ``gate == "PASS"``.  The gate emits three verdicts -- PASS, FAIL, and UNCLEAR --
+    and UNCLEAR is its documented answer when the two distributions overlap inside the tolerance
+    band: it measured both sides, and the difference is within noise.  That is a correct review
+    of a no-op change, and it was being scored as if the capability had not run.
+
+    Measured 2026-10-31 on bbc00a7: the same case, unchanged tree, gave 22 REAL once and 23 six
+    times, and the flickering case was this one -- ``perf_review`` refused with
+    REVIEW_RAN_AND_RETURNED_A_VERDICT.  Seven isolated runs of the same sentence passed, and the
+    artifacts measured ratios of 0.90 / 0.98 / 0.99 / 1.01 against a 1.10 limit: the band is
+    real, and contention occasionally pushes a run over it.  So the flake was the ORACLE
+    measuring the box's load, not the capability.
+
+    The replacement is strictly STRONGER about evidence and looser about verdict: the artifact
+    must be complete, must carry at least three timed runs on BOTH sides, and must report a
+    verdict the gate can actually reach.  FAIL is still refused -- a claimed regression on an
+    unchanged file is a false alarm, not a review.
+    """
     for doc in _artifacts(r):
         if doc.get("schema") != "PROJECT_BRAIN_DIFF_PERF_GATE_V1":
             continue
-        if doc.get("gate") != "PASS":
+        if doc.get("complete") is not True:
             continue
-        if isinstance(doc.get("anchor_median_ns"), (int, float)) \
-                and isinstance(doc.get("patched_median_ns"), (int, float)):
-            return True
+        if doc.get("gate") not in {"PASS", "UNCLEAR"}:
+            continue
+        if not all(isinstance(doc.get(k), (int, float))
+                   for k in ("anchor_median_ns", "patched_median_ns")):
+            continue
+        # Evidence that BOTH sides were actually timed, not asserted.
+        if len(doc.get("anchor_runs_ns") or []) < 3 or len(doc.get("patched_runs_ns") or []) < 3:
+            continue
+        return True
     return False
 
 
@@ -709,7 +739,9 @@ def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = Fals
         damaged = [p for p, d in before.items()
                    if (ROOT / p).is_file() and digest(ROOT / p) != d
                    and not any(p.endswith("/" + a) for a in allowed)
+                   and not (passed and world and spec["lane"] == "git" and "/.git/" in p)
                    and not any(k in p for k in ("out.json", "report", "spool_"))]
+        shutil.rmtree(base, ignore_errors=True)
         mark = ("REAL" if (passed and world)
                 else "FALSE" if passed
                 else "DAMAGE" if damaged else "refused")

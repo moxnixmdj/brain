@@ -1881,6 +1881,113 @@
         "receipt_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_PATCH_VERIFY_V1_V1.json"
       }
     },
+    "code.polyglot.transform_and_verify.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "code.polyglot.transform_and_verify.v1",
+          "operation": "${input.operation}",
+          "output_path": "${input.output_path}",
+          "project_root": "${input.project_root}",
+          "request_spec": "${input.request_spec}",
+          "target_path": "${input.target_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "code_polyglot_transform_and_verify_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "polyglot",
+        "c++",
+        "cpp",
+        "clang",
+        "rust",
+        "cargo",
+        "go",
+        "golang",
+        "java",
+        "typescript",
+        "javascript",
+        "ts",
+        "js",
+        "node",
+        "sql",
+        "sqlite",
+        "pyproject.toml",
+        "makefile",
+        "github actions",
+        "workflow",
+        "ci",
+        "continuous integration",
+        "lint",
+        "ruff",
+        "flaky",
+        "quarantine",
+        "transform",
+        "edit",
+        "write",
+        "repair",
+        "refactor",
+        "apply",
+        "wheel",
+        "lock",
+        "sbom",
+        "bill of materials",
+        "release notes",
+        "port",
+        "declarations",
+        "pull request"
+      ],
+      "limitations": [
+        "Compiler-, CST-, SQLite-, TOML-, Make-, and YAML-verified polyglot code, packaging, and CI workflow transformer; refuses closed when no applicable defect/transform exists or verification fails."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "provides": [
+        "code.polyglot.transform.verified",
+        "code.source.write.polyglot",
+        "code.build.pyproject.edit",
+        "code.build.makefile.lint_target",
+        "code.ci.workflow.configure",
+        "code.ci.flaky.quarantine"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "language",
+        "operation",
+        "target_file",
+        "target_relpath",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/code_polyglot_transform_and_verify_v1.py",
+        "adapter_sha256": "829fc1cafab57053df9ed8e2562b25fbc72ae7582c773212a8506d252bfae38f",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "authority": "NONE",
+        "carrier": "SANDBOX",
+        "incremental_spend_usd": 0,
+        "live_binding_test": "canonical/tests/test_hardcore_swe_kernel_v1.py",
+        "model_dependency_count": 0
+      }
+    },
     "decision.synthesis.typed.stdlib": {
       "action_template": {
         "args": {
@@ -8664,6 +8771,120 @@
         "state_path": "canonical/astra_runtime/state/ASTRA-VERIFY-TEST-ADEQUACY-001.json"
       }
     },
+    "python.swe.transform_and_synthesize.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "python.swe.transform_and_synthesize.v1",
+          "operation": "${input.operation}",
+          "output_path": "${input.output_path}",
+          "request_spec": "${input.request_spec}",
+          "symbol": "${input.symbol}",
+          "target_path": "${input.target_path}",
+          "test_target": "${input.test_target}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "python_swe_transform_and_synthesize_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "python",
+        "optimize",
+        "optimise",
+        "memoization",
+        "memoisation",
+        "lru_cache",
+        "thread pool",
+        "release gil",
+        "unit test",
+        "property-based",
+        "hypothesis",
+        "mutation score",
+        "cli flag",
+        "logging",
+        "retries",
+        "split module",
+        "deprecated",
+        "type hints",
+        "extract constant",
+        "format",
+        "reformat",
+        "commit",
+        "branch",
+        "cherry-pick",
+        "write",
+        "edit",
+        "refactor",
+        "apply",
+        "lint",
+        "ruff",
+        "mypy",
+        "typecheck",
+        "coverage",
+        "benchmark",
+        "parallel",
+        "async",
+        "asynchronous",
+        "split",
+        "worktree",
+        "revert",
+        "rebase",
+        "sqlalchemy",
+        "fastapi",
+        "endpoint",
+        "client",
+        "traversal",
+        "metric"
+      ],
+      "limitations": [
+        "Python source, test, concurrency, performance, structural refactoring, and standalone-git writer verified by AST re-parse, behavioral equivalence, and clean subprocess test execution with rollback."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "provides": [
+        "python.source.write.swe_transform",
+        "python.swe.optimize.egraph",
+        "python.swe.concurrency.parallel",
+        "python.tests.generate.author",
+        "python.source.format.ast_verified",
+        "python.refactor.structural.module",
+        "python.refactor.dead.unused.remove",
+        "git.branch.operate"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "operation",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/python_swe_transform_and_synthesize_v1.py",
+        "adapter_sha256": "a2138982e4f3ccc73d90b38f47e7cf6b963265bf5abe389eb6bbea416cc6b620",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "authority": "NONE",
+        "carrier": "SANDBOX",
+        "incremental_spend_usd": 0,
+        "live_binding_test": "canonical/tests/test_hardcore_swe_kernel_v1.py",
+        "model_dependency_count": 0
+      }
+    },
     "python.symbol.resolve.standalone.v1": {
       "action_template": {
         "args": {
@@ -9366,6 +9587,121 @@
           "stdout": ""
         },
         "verification_result_path": "canonical/astra_runtime/evidence/ASTRA-AUTO-VERIFY-SHELL-COMMAND-RUN-001__shell.command.run__AUTO_VERIFY.json"
+      }
+    },
+    "software.analysis.diagnose_and_architect.v1": {
+      "action_template": {
+        "args": {
+          "capability_id": "software.analysis.diagnose_and_architect.v1",
+          "operation": "${input.operation}",
+          "output_path": "${input.output_path}",
+          "request_spec": "${input.request_spec}",
+          "symbol": "${input.symbol}",
+          "target_path": "${input.target_path}"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "adapter_module": "software_analysis_diagnose_and_architect_v1",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "profile",
+        "hot spot",
+        "benchmark",
+        "race condition",
+        "fuzz",
+        "overflow",
+        "root cause",
+        "explain",
+        "why",
+        "diagnose",
+        "api design",
+        "review",
+        "audit",
+        "vulnerabilities",
+        "coverage",
+        "adr",
+        "rate limiter",
+        "migration",
+        "splitting",
+        "design document",
+        "changelog",
+        "blame",
+        "diff",
+        "suite",
+        "run",
+        "unittest",
+        "security",
+        "debugger",
+        "frame",
+        "traceback",
+        "dead",
+        "unused",
+        "schema",
+        "log",
+        "pull request",
+        "trace"
+      ],
+      "limitations": [
+        "Read-only diagnostic, profiling, security, coverage, and architecture document producer; never modifies existing source files in place."
+      ],
+      "platforms": [
+        "linux",
+        "darwin",
+        "windows"
+      ],
+      "provides": [
+        "software.analysis.explain.root_cause",
+        "software.analysis.profile.hotspot",
+        "software.analysis.race_and_fuzz.inspect",
+        "software.analysis.api_design.review",
+        "software.analysis.security.vulnerability_audit",
+        "software.analysis.coverage.measured",
+        "software.analysis.architecture.adr_and_migration",
+        "software.analysis.git.blame_and_changelog",
+        "software.analysis.suite.runner_verdict",
+        "software.analysis.dead.unused.find",
+        "software.analysis.lint.static_triage",
+        "software.analysis.mutation.score",
+        "javascript.tests.run.execution"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "verified",
+        "gate",
+        "operation",
+        "records",
+        "exit_code",
+        "tests",
+        "passed",
+        "failed",
+        "functions",
+        "files",
+        "dead_symbols",
+        "output_path",
+        "output_sha256",
+        "output_verified"
+      ],
+      "source": {
+        "adapter_path": "canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py",
+        "adapter_sha256": "66966e76fd7e87234da8013be866e392a194adaa503e6872c6931d8df51c3e20",
+        "type": "brain_native_deterministic_composition",
+        "version_family": "v1"
+      },
+      "status": "VERIFIED_BOUND_CAPABILITY",
+      "verification": {
+        "authority": "NONE",
+        "carrier": "SANDBOX",
+        "incremental_spend_usd": 0,
+        "live_binding_test": "canonical/tests/test_hardcore_swe_kernel_v1.py",
+        "model_dependency_count": 0
       }
     },
     "software.evidence.synthesis.supercomposer.v1": {

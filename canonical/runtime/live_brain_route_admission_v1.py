@@ -450,6 +450,12 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if futures and not output_keys:
         return {**base, "admitted": False, "rule": "R2_OUTPUT_ARTIFACT_UNSERVED"}
     if len(semantic) <= 1:
+        # ...unless the binder already knows WHY: then the string is the slot, not a verdict on
+        # the sentence.  Same refusal, same place in the chain, a cause the caller can act on.
+        if base.get("typed_binding_refused") and score > 0:
+            _slot = str(base.get("typed_binding_reason") or "").split(":")
+            return {**base, "admitted": False,
+                    "rule": "R13_DECLARED_INPUT_UNBINDABLE" + (":" + _slot[1] if len(_slot) > 1 else "")}
         return {**base, "admitted": False, "rule": "R3_WEAK_EVIDENCE"}
     # R9: a capability that consumes a FILE cannot run on a request that names no file.  Measured:
     # `extract text from a pdf file` selected pdf.extract.text.pypdf, whose only declared input is
@@ -1948,7 +1954,7 @@ _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
     # PRODUCTION of a test.  The ASKED side may not be "write the test NAME": "Find the
     # flaky test and write the test name to <answer.json>" asks for a name, and was read
     # as a request to author one.
-    (re.compile(r"\b(?:write|add|create|generate|author|produce|scaffold)\b[^.;]{0,48}?"
+    (re.compile(r"\b(?:write|add|create|generate|author|produce|scaffold)\b(?!\s*\()[^.;]{0,48}?"
                 r"\b(?:unit\s+|regression\s+|integration\s+|property[- ]based\s+)?"
                 r"(?:tests?|specs?|test\s+suite|test\s+file)\b"
                 r"(?!\s*(?:name|names|id|ids|list|path|paths|output|result|results|"
@@ -2345,6 +2351,11 @@ def _declares_effect_by_argument(arrays: "Sequence[Mapping[str, Any]]", code: st
 # wrote ``test_total.py``, and the declaration-reading check demoted a correct PASS.  The
 # contract is what the tree proves, not what the row advertises, so the exit compares the
 # world it observed before the run with the world it observes now.
+# The suffixes this repository already treats as source (``goal_front_compiler`` uses the same
+# set when it decides a report may not be written over the file it describes).
+_NAMED_SUBJECT_SOURCE_SUFFIXES = (".py", ".js", ".jsx", ".ts", ".tsx", ".rs", ".go", ".java",
+                                  ".c", ".h", ".cpp", ".hpp", ".rb", ".cs", ".kt", ".php",
+                                  ".swift", ".mjs", ".cjs")
 _TEST_FILE_SHAPE = re.compile(
     r"(?:^|/)(?:tests?|specs?)/"
     r"|(?:^|/)test_[^/]*\.(?:py|js|ts|tsx|rs|go|java|rb|cs)$"
@@ -2465,7 +2476,7 @@ _TRANSFORM_REQUEST_RE = re.compile(
     r"|\b(?:function|method|class)\b[^.\\n]{0,40}\binto (?:smaller|several|multiple|two)\b"
     r"|\bextract the (?:method|function|class)\b", re.IGNORECASE)
 _TRANSFORM_SURFACE_RE = re.compile(
-    r"\b(?:split|inline|decompos\w*|extract_function|extract\.function)\b", re.IGNORECASE)
+    r"\b(?:split|inline|decompos\w*|extract_function|extract\.function|move_symbol|move_function|move\.symbol)\b", re.IGNORECASE)
 
 # A QUESTION IS NOT ANSWERED BY SOMETHING THAT WRITES.  Measured shape 2 above: a repair
 # choreographer matched the words "call graph" in its own keyword list and certified a read-only
@@ -2513,6 +2524,9 @@ _REVIEW_REQUEST_RE = re.compile(
 def _asks_only_for_a_plan(text: str) -> bool:
     """The sentence asks for the PLAN, not for the change (see the two patterns above)."""
     sentence = str(text or "")
+    if re.match(r"^\s*(?:please\s+)?design\b", sentence, re.IGNORECASE):
+        if not goal_compiler._repo_paths(sentence, ROOT) and not _future_artifacts(sentence):
+            return True
     return bool(_PLAN_REQUEST_RE.match(sentence)) and not _PLAN_THEN_DO_RE.search(sentence)
 
 
@@ -2638,6 +2652,9 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
     if (re.search(r"\b(?:duplicat(?:ed|e|ion)|code\s+clones?)\b", text, re.IGNORECASE)
             and not re.search(r"\b(?:duplicat\w*|clone)\b", surface, re.IGNORECASE)):
         out.append("STATED_DUPLICATION_ANALYSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
+    if (re.match(r"^\s*(?:please\s+)?lint\b", text, re.IGNORECASE)
+            and not re.search(r"\b(?:lint|ruff|flake8|eslint)\b", surface, re.IGNORECASE)):
+        out.append("STATED_LINT_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
     provides = " ".join([cid, " ".join(str(x) for x in (entry.get("provides") or []))])
     # The row's OWN declaration decides whether it writes, and ``capability_edits_source`` is the one
     # predicate that reads it (it is what ``repair_output_collisions`` already uses).  The keyword
@@ -2677,7 +2694,8 @@ def _shape_errors(text: str, cid: str, entry: Mapping[str, Any], surface: str) -
                            + [str(x) for x in (entry.get("result_fields") or [])])
     if (_RUN_REQUEST_RE.search(text) and _MEASUREMENT_SURFACE_RE.search(declaration)
             and not _EXECUTION_SURFACE_RE.search(declaration)
-            and (_SUBJECT_FILE_RE.search(text) or _ANALYSIS_SURFACE_RE.search(text))):
+            and (_SUBJECT_FILE_RE.search(text) or _ANALYSIS_SURFACE_RE.search(text)
+                 or "`" in text or re.search(r"\bmake\s+\w+", text, re.IGNORECASE))):
         out.append("STATED_EXECUTION_ANSWERED_BY_A_MEASUREMENT:" + (cid or "UNNAMED"))
     if _DIAGNOSE_REQUEST_RE.search(text) and not _DIAGNOSE_SURFACE_RE.search(declaration):
         out.append("STATED_DIAGNOSIS_NOT_PROVIDED_BY_CAPABILITY:" + (cid or "UNNAMED"))
@@ -2740,6 +2758,12 @@ def _promised_source_files(goal: str) -> list[str]:
         # capability was refused with PROMISED_SOURCE_UNCHANGED:<test file> while
         # the source it repaired was correctly restored.
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
+            continue
+        if m.group(0).lower() == "add" and re.match(
+            r"^\s+(?:a\s+|an\s+)?(?:unit\s+|property[- ]based\s+|regression\s+)?(?:tests?|benchmarks?)\s+(?:for|that)\b",
+            text[m.end():m.end() + 56],
+            re.IGNORECASE,
+        ):
             continue
         best = None
         best_at = None
@@ -2819,6 +2843,12 @@ def _promised_source_roots(goal: str) -> list[str]:
     out = []
     for m in _intent_verb_matches(_EDIT_PROMISE_RE, text):
         if text[m.end():m.end() + 24].lstrip().lower().startswith(_TOOL_NOUNS):
+            continue
+        if m.group(0).lower() == "add" and re.match(
+            r"^\s+(?:the\s+|a\s+)?dependenc",
+            text[m.end():m.end() + 36],
+            re.IGNORECASE,
+        ):
             continue
         best_raw, best_path, best_pos = None, None, None
         for raw, path in paths:
@@ -3011,11 +3041,21 @@ def _statement_patch_authority(raw: str, artifacts: Mapping[str, Any] | None,
     return False
 
 
-def _py_files_under(root: str, limit: int = 50) -> list[str]:
+_ROOT_SOURCE_SUFFIXES = (
+    ".py", ".yml", ".yaml", ".sql", ".toml", ".ts", ".tsx", ".js", ".mjs",
+    ".go", ".rs", ".java", ".cpp", ".cc", ".c", ".h", ".hpp", ".md", ".txt",
+)
+
+
+def _py_files_under(root: str, limit: int = 80) -> list[str]:
     base = ROOT / root
     out: list[str] = []
     try:
-        for path in sorted(base.rglob("*.py")):
+        for path in sorted(base.rglob("*")):
+            if not path.is_file() or "__pycache__" in path.parts or ".git" in path.parts:
+                continue
+            if path.suffix.lower() not in _ROOT_SOURCE_SUFFIXES and path.name != "Makefile":
+                continue
             out.append(str(path.relative_to(ROOT)))
             if len(out) >= limit:
                 break
@@ -3067,7 +3107,11 @@ def promised_source_change_errors(goal: str, before: Mapping[str, str],
     # Requiring every file in the tree to change would refuse a correct repair of
     # one module; requiring nothing would accept a run that touched no file at all.
     for root, files_before in (roots_before or {}).items():
-        changed = any(_source_digest(rel) != digest for rel, digest in files_before.items())
+        files_now = _py_files_under(root)
+        changed = (
+            set(files_now) != set(files_before)
+            or any(_source_digest(rel) != digest for rel, digest in files_before.items())
+        )
         if changed or _statement_patch_authority(root, artifacts, before_files, goal):
             continue
         errors.append("PROMISED_SOURCE_UNCHANGED:" + root)
@@ -3234,10 +3278,88 @@ def _destructive_targets(goal: str) -> set[str]:
 def _git_head(path: Path) -> str:
     """The commit this path's repository is on, or '' when it is not one."""
     try:
+        cur = path.resolve()
+        if cur.is_file():
+            cur = cur.parent
+        git_dir: Path | None = None
+        for d in (cur, *cur.parents):
+            cand = d / ".git"
+            if cand.is_dir():
+                git_dir = cand
+                break
+            if cand.is_file():
+                txt = cand.read_text(encoding="utf-8").strip()
+                if txt.startswith("gitdir:"):
+                    gd = (d / txt.split(":", 1)[1].strip()).resolve()
+                    if gd.is_dir():
+                        git_dir = gd
+                        break
+        if git_dir is None:
+            return ""
+        head_txt = (git_dir / "HEAD").read_text(encoding="utf-8").strip()
+        if re.fullmatch(r"[0-9a-f]{40}", head_txt):
+            return head_txt
+        if head_txt.startswith("ref:"):
+            ref_rel = head_txt.split(":", 1)[1].strip()
+            ref_file = git_dir / ref_rel
+            if ref_file.is_file():
+                sha = ref_file.read_text(encoding="utf-8").strip()
+                if re.fullmatch(r"[0-9a-f]{40}", sha):
+                    return sha
+            packed = git_dir / "packed-refs"
+            if packed.is_file():
+                for ln in packed.read_text(encoding="utf-8").splitlines():
+                    if ln and not ln.startswith(("#", "^")):
+                        parts = ln.split()
+                        if len(parts) >= 2 and parts[1] == ref_rel:
+                            return parts[0]
         proc = subprocess.run(["git", "-C", str(path), "rev-parse", "HEAD"],
                               capture_output=True, text=True, timeout=10)
         return proc.stdout.strip() if proc.returncode == 0 else ""
     except Exception:  # noqa: BLE001 - no git is not an effect
+        return ""
+
+
+def _git_refs_state(path: Path) -> str:
+    try:
+        if not path.exists():
+            return ""
+        cur = path.resolve()
+        if cur.is_file():
+            cur = cur.parent
+        git_dir: Path | None = None
+        for d in (cur, *cur.parents):
+            cand = d / ".git"
+            if cand.is_dir():
+                git_dir = cand
+                break
+            if cand.is_file():
+                txt = cand.read_text(encoding="utf-8").strip()
+                if txt.startswith("gitdir:"):
+                    gd = (d / txt.split(":", 1)[1].strip()).resolve()
+                    if gd.is_dir():
+                        git_dir = gd
+                        break
+        if git_dir is None:
+            return ""
+        parts: list[str] = []
+        head_f = git_dir / "HEAD"
+        if head_f.is_file():
+            parts.append("HEAD=" + head_f.read_text(encoding="utf-8", errors="replace").strip())
+        heads_dir = git_dir / "refs" / "heads"
+        if heads_dir.is_dir():
+            for rf in sorted(heads_dir.rglob("*")):
+                if rf.is_file():
+                    parts.append(
+                        "ref:" + rf.relative_to(heads_dir).as_posix() + "=" + rf.read_text(encoding="utf-8", errors="replace").strip()
+                    )
+        wt_dir = git_dir / "worktrees"
+        if wt_dir.is_dir():
+            for wf in sorted(wt_dir.iterdir()):
+                if wf.is_dir():
+                    parts.append("wt:" + wf.name)
+        return "|".join(parts)
+    except Exception:
         return ""
 
 
@@ -3271,6 +3393,10 @@ def _observation_roots(goal: str) -> list[Path]:
             parent = parent.parent
         if parent not in roots:
             roots.append(parent)
+        if parent != ROOT and parent.parent != ROOT:
+            sibling_tests = parent.parent / "tests"
+            if sibling_tests.is_dir() and sibling_tests not in roots:
+                roots.append(sibling_tests)
     # never walk a directory twice: a root that contains another root is dropped
     return [r for r in roots if not any(o != r and r in o.parents for o in roots)]
 
@@ -3290,15 +3416,14 @@ def observe_world(goal: str) -> dict[str, Any]:
     files: dict[str, tuple[int, int]] = {}
     walked = []
     for root in _observation_roots(goal):
-        try:
-            count = sum(1 for _ in itertools.islice(root.rglob("*"), _OBSERVATION_MAX_FILES + 1))
-        except OSError:
+        snap = _kernel._snapshot(str(root), max_entries=_OBSERVATION_MAX_FILES)
+        if len(snap) > _OBSERVATION_MAX_FILES:
             continue
-        if count > _OBSERVATION_MAX_FILES:
-            continue
-        walked.append(str(root.relative_to(ROOT)) if root != ROOT else ".")
-        for rel, stat_row in _kernel._snapshot(str(root)).items():
-            files[str(Path(root, rel).relative_to(ROOT))] = stat_row
+        rel_root = str(root.relative_to(ROOT)) if root != ROOT else "."
+        walked.append(rel_root)
+        prefix = "" if rel_root == "." else rel_root + "/"
+        for rel, stat_row in snap.items():
+            files[prefix + rel] = stat_row
     parses: dict[str, bool] = {}
     for raw in stated:
         path = ROOT / raw
@@ -3314,9 +3439,11 @@ def observe_world(goal: str) -> dict[str, Any]:
                 pass
             if path.suffix.lower() == ".py":
                 parses[raw] = _is_python_code(path.read_text(encoding="utf-8", errors="replace"))
-    head = _git_head(ROOT / stated[0]) if stated else ""
+    existing_stated = [s for s in stated if (ROOT / s).exists()]
+    head = _git_head(ROOT / existing_stated[0]) if existing_stated else ""
+    git_refs = _git_refs_state(ROOT / existing_stated[0]) if existing_stated else ""
     return {"files": files, "walks": walked, "parses": parses,
-            "git_head": head, "stated": stated}
+            "git_head": head, "git_refs": git_refs, "stated": stated}
 
 
 def observed_effect_errors(goal: str, before: Mapping[str, Any],
@@ -3363,11 +3490,17 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
         # sentence promised, not by a token scan of the sentence.
         promised_file = bool(artifacts) or bool(_promised_source_files(goal)) \
             or bool(_promised_source_roots(goal)) or _sentence_promises_a_change(goal)
+        from canonical.runtime import execute_v1 as _kernel
+        _moved_rows = _kernel._diff(before.get("files") or {}, after.get("files") or {})
+        # ``changed`` is a BOOL ("did anything move"), not a list: three of the site's own
+        # callers were passing it around as if it were paths.  The paths are here.
+        _moved_paths = list(_moved_rows.get("added") or []) + list(_moved_rows.get("modified") or [])
         if promised_file:
             present = any((ROOT / a).is_file() for a in (artifacts or []))
-            from canonical.runtime import execute_v1 as _kernel
-            moved = _kernel._diff(before.get("files") or {}, after.get("files") or {})["changed"]
-            committed = bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")
+            moved = bool(_moved_rows.get("changed"))
+            committed = (bool(after.get("git_head")) and after.get("git_head") != before.get("git_head")) or (
+                bool(after.get("git_refs")) and after.get("git_refs") != before.get("git_refs")
+            )
             stdout_filter_verified = False
             if not artifacts and isinstance(result.get("composer_execution"), Mapping):
                 steps = list((result.get("composer_execution") or {}).get("steps") or [])
@@ -3384,7 +3517,65 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
                     stdout_filter_verified = True
             if not (present or moved or committed or stdout_filter_verified):
                 errors.append("NO_OBSERVED_EFFECT")
+        # NOT NESTED UNDER THE PROMISE.  A sentence whose verb is not in the change-verb table is
+        # exactly where this fires -- "Optimise the function total in <f>; it is too slow on large
+        # inputs" promises a change and none of its words say so -- so the check reads the ROW's
+        # declaration (does it edit source?) and the run's own movement, never the sentence's verb.
+        if _moved_paths:
+            rows, _cids = _executed_rows(result)
+            if any(front.capability_edits_source(row) for row in rows):
+                outside = _effect_landed_outside_the_named_subject(goal, _moved_paths, artifacts)
+                if outside:
+                    errors.append(outside)
     return errors
+
+
+def _effect_landed_outside_the_named_subject(goal: str, moved: "Sequence[str]",
+                                             artifacts: "list[str] | None" = None) -> str:
+    """The run edited something, but not the file the sentence named.
+
+    Measured 2026-10-31 on the advanced census.  ``software.repair.crossfile.choreograph`` was
+    handed ``pkg/`` (the tree holding the file the sentence named) and ran the only pass it could
+    find a use for -- dead-code pruning -- so ``pkg/mod.py`` and ``pkg/service.py`` were rewritten
+    and ``pkg/util.py``, the file the sentence was ABOUT, kept its exact bytes.  The door certified
+    PASS for "Optimise the function total in <pkg>/util.py; it is too slow on large inputs" and for
+    "Make the function total in <pkg>/util.py release the GIL while summing": ``output_verified``
+    true, stated effect untouched.  That is the defect class this file exists to refuse -- a run
+    that happened being reported as the run that was asked for.
+
+    Read structurally, from facts already on hand:
+      * the sentence names at least one file that EXISTS (a named path to be created is not a
+        subject, it is an output),
+      * the run moved at least one file, and none of the moved files is one of those,
+      * the movement includes a source file that is not a test -- a regression test the same
+        sentence asked for is not an edit of the subject, and neither is a report artifact.
+
+    A run that only writes its report, only creates tests, or changes nothing at all is untouched
+    by this rule; so is a sentence that names no existing file.
+    """
+    artifacts = [str(a) for a in (artifacts or [])]
+    # A NAMED TEST IS A WITNESS, NOT THE SUBJECT OF A SOURCE EDIT.  "The test in <pkg>/test_calc.py
+    # is failing, make the suite pass" names the test to run; the edit belongs in the source it
+    # exercises, and refusing that repair would be the false-negative class this door refuses to
+    # produce (measured: the capability matrix's `repair_test_file` lane).
+    # A cross-language port, TypeScript declaration generation, benchmark harness creation,
+    # or module relocation reads or relocates the named source file and writes the requested sibling destination.
+    if re.search(r"\bport\b|\btype\s+declarations?\b|\bmove\s+(?:the\s+)?module\b|\badd\s+a\s+benchmark\b", str(goal or ""), re.I):
+        return ""
+    named = [raw for raw in _stated_paths(goal)
+             if (ROOT / raw).is_file() and not _TEST_FILE_SHAPE.search(raw)]
+    if not named:
+        return ""
+    moved = [str(m) for m in moved]
+    if not moved or any(m in named for m in moved):
+        return ""
+    source_moves = [m for m in moved
+                    if m.lower().endswith(_NAMED_SUBJECT_SOURCE_SUFFIXES)
+                    and not _TEST_FILE_SHAPE.search(m)
+                    and m not in artifacts]
+    if not source_moves:
+        return ""
+    return "EDITS_LANDED_OUTSIDE_THE_NAMED_SUBJECT:" + ",".join(sorted(source_moves)[:3])
 
 
 def _blind_change_evidence(result: Mapping[str, Any]) -> list[str]:
@@ -3468,9 +3659,14 @@ def _scope_claim_errors(goal: str, result: Mapping[str, Any]) -> list[str]:
         if not isinstance(files, int):
             files = doc.get("parsed_file_count") or doc.get("file_count")
         # A single-file scope is the one case that is provably too small to answer "every X":
-        # a call site can live in any other module, and one file is not the codebase.
+        # a call site can live in any other module, and one file is not the codebase -- unless
+        # that single file IS the only Python module in its package and parent directory.
         if scope.strip().endswith((".py", ".pyw")) and files in (None, 1, 0):
-            return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
+            scope_p = (ROOT / scope.strip()).resolve()
+            parent_py = list(scope_p.parent.glob("*.py")) if scope_p.parent.is_dir() else []
+            upper_py = list(scope_p.parent.parent.glob("*.py")) if scope_p.parent.parent.is_dir() else []
+            if len(parent_py) != 1 or len(upper_py) > 0:
+                return ["SEARCH_SCOPE_IS_THE_STATED_FILE:" + scope.strip()]
     return []
 
 
@@ -4246,7 +4442,18 @@ def _typed_plan_is_stated(request: Any) -> bool:
         # an effect family, the row that DECLARES that family is the answer; the family's own
         # plan then runs through the same gate chain, so nothing is skipped by being first.
         token = _typed.stated_family_token(goal)
-        if token in (_typed.GIT_FAMILY_TOKEN, "extract", "security", "coverage", "mutation", "perf"):
+        if token in (
+            _typed.GIT_FAMILY_TOKEN,
+            "extract",
+            "security",
+            "coverage",
+            "mutation",
+            "perf",
+            "lint",
+            "polyglot.transform_and_verify",
+            "swe.transform_and_synthesize",
+            "diagnose_and_architect",
+        ):
             return True
         # The CHANGE-SET QUESTION, and only that shape.  Measured 2026-10-31: "Which files must
         # change to rename the symbol `mul` to `multiply` in <dir>?" was answered by a definitions
@@ -5216,7 +5423,10 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     _typed_plan._family_terms(prose) is not None
                     or not _typed_plan._effect_consistent(
                         prose, selected, (context[0] or {}).get(selected))))
-                compound = not selected and bool(context[2].get("compiled_parts"))
+                compound = not selected and (
+                    bool(context[2].get("compiled_parts"))
+                    or _typed_plan._family_terms(prose) is not None
+                )
                 if contradicted or compound:
                     corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
                     if corrected is None and contradicted:
@@ -5227,7 +5437,8 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                                    else "STATED_SWE_EFFECT_UNSERVED")
                         return _fail(str((request or {}).get("task_id") or ""),
                                      "FAIL_CLOSED__" + failure, failure, perf_counter_ns(),
-                                     compiled_capability_id=selected, executed=False,
+                                     compiled_capability_id=(None if failure == "STATED_SWE_EFFECT_UNSERVED" else selected),
+                                     executed=False,
                                      stated_answer_errors=stated_answer_errors(
                                          goal, (context[0] or {}).get(selected) or {}, selected))
                     if corrected is not None:

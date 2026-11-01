@@ -1104,6 +1104,9 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
             return files[0]
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED", key + ":" + str(len(files)) + "_existing_files_named")
     if key in _PATH_DIR_KEYS:
+        exact_file = gc._declared_exact_file_scope(entry, key, paths, goal)
+        if exact_file is not None:
+            return exact_file
         dirs = [raw for raw, p in paths if p.is_dir()]
         if len(dirs) == 1:
             return dirs[0]
@@ -2071,7 +2074,8 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         val_abs = (root / value).resolve()
         exists = val_abs.exists()
         inside_source_root = (
-            exists
+            not edits_source
+            and exists
             and src_root_abs is not None
             and (val_abs == src_root_abs or src_root_abs in val_abs.parents)
             and verb_dest != value

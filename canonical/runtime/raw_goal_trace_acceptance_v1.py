@@ -2570,7 +2570,86 @@ def _inspect_rename_parameter(args, result, root):
     return True, "", {"files_reparsed": len(edits)}
 
 
+def _inspect_polyglot_transform(args, result, root):
+    if result.get("verified") is not True or result.get("gate") != "PASS":
+        return False, "POLYGLOT_TRANSFORM_NOT_VERIFIED", {}
+    tgt_rel = str(result.get("target_relpath") or args.get("target_path") or "")
+    tgt = _inside(root, tgt_rel)
+    if not tgt_rel or tgt is None or not tgt.is_file():
+        return False, "POLYGLOT_TARGET_FILE_ABSENT", {"target": tgt_rel}
+    raw_bytes = tgt.read_bytes()
+    claimed_sha = str(result.get("target_sha256") or "")
+    if claimed_sha and _digest(raw_bytes) != claimed_sha:
+        return False, "POLYGLOT_TARGET_SHA256_MISMATCH", {"target": tgt_rel}
+    lang = str(result.get("language") or "")
+    if lang == "toml":
+        import tomllib
+        try:
+            tomllib.loads(raw_bytes.decode("utf-8"))
+        except Exception:
+            return False, "POLYGLOT_TOML_PARSE_FAILED", {"target": tgt_rel}
+    elif lang == "sql":
+        import sqlite3
+        conn = sqlite3.connect(":memory:")
+        try:
+            conn.executescript(raw_bytes.decode("utf-8"))
+        except sqlite3.Error:
+            return False, "POLYGLOT_SQL_EXECUTESCRIPT_FAILED", {"target": tgt_rel}
+        finally:
+            conn.close()
+    elif lang == "python":
+        try:
+            ast.parse(raw_bytes)
+        except (SyntaxError, ValueError):
+            return False, "POLYGLOT_PYTHON_AST_UNPARSEABLE", {"target": tgt_rel}
+    return True, "", {"language": lang, "target": tgt_rel, "bytes": len(raw_bytes)}
+
+
+def _inspect_python_swe_transform(args, result, root):
+    if result.get("verified") is not True or result.get("gate") != "PASS":
+        return False, "PYTHON_SWE_TRANSFORM_NOT_VERIFIED", {}
+    op = str(result.get("operation") or args.get("operation") or "")
+    if op.startswith("git_"):
+        repo_r = str(result.get("repo_root") or "")
+        if not repo_r or not Path(repo_r).is_dir():
+            return False, "PYTHON_SWE_GIT_REPO_INVALID", {}
+        return True, "", {"operation": op, "head": result.get("head") or result.get("new_head")}
+    tgt_rel = str(result.get("target_relpath") or args.get("target_path") or "")
+    tgt = _inside(root, tgt_rel)
+    if not tgt_rel or tgt is None or not tgt.is_file():
+        return False, "PYTHON_SWE_TARGET_FILE_ABSENT", {"target": tgt_rel}
+    raw_bytes = tgt.read_bytes()
+    claimed_sha = str(result.get("target_sha256") or "")
+    if claimed_sha and _digest(raw_bytes) != claimed_sha:
+        return False, "PYTHON_SWE_TARGET_SHA256_MISMATCH", {"target": tgt_rel}
+    try:
+        ast.parse(raw_bytes)
+    except (SyntaxError, ValueError):
+        return False, "PYTHON_SWE_AST_UNPARSEABLE", {"target": tgt_rel}
+    return True, "", {"operation": op, "target": tgt_rel, "bytes": len(raw_bytes)}
+
+
+def _inspect_diagnose_and_architect(args, result, root):
+    if result.get("verified") is not True or result.get("gate") != "PASS":
+        return False, "DIAGNOSE_ARCHITECT_NOT_VERIFIED", {}
+    out_rel = str(result.get("output_path") or args.get("output_path") or "")
+    out_p = _inside(root, out_rel)
+    if not out_rel or out_p is None or not out_p.is_file():
+        return False, "DIAGNOSE_ARCHITECT_REPORT_ABSENT", {"output_path": out_rel}
+    try:
+        doc = json.loads(out_p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False, "DIAGNOSE_ARCHITECT_REPORT_INVALID_JSON", {"output_path": out_rel}
+    op = str(doc.get("operation") or "")
+    if not op:
+        return False, "DIAGNOSE_ARCHITECT_OPERATION_MISSING", {}
+    return True, "", {"operation": op, "output_path": out_rel}
+
+
 INSPECTORS: dict[str, Inspector] = {
+    "code.polyglot.transform_and_verify.v1": _inspect_polyglot_transform,
+    "python.swe.transform_and_synthesize.v1": _inspect_python_swe_transform,
+    "software.analysis.diagnose_and_architect.v1": _inspect_diagnose_and_architect,
     "software.repair.choreograph.crossfile.v1": _inspect_crossfile_report,
     "pdf.extract.text.pypdf": _inspect_pdf_extract_text,
     "python.source.audit.ast": _inspect_python_source_audit,

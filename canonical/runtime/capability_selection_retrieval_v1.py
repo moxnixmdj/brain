@@ -624,8 +624,20 @@ def admit(goal: str, cid: str, entry: Mapping[str, Any], root: Any,
     # original contract still decides which capabilities the request may name.
     try:
         from canonical.runtime import declared_input_derivation_v1 as _derivation
-        _in_scope = (_derivation.is_swe_request(goal)
-                     and str(cid).startswith(_derivation.SWE_CID_PREFIXES))
+        # WHICH REQUEST MAY DERIVE ITS INPUTS IS DECIDED BY THE ROW, NOT BY THE SENTENCE.
+        # This used to be ``is_swe_request(goal) and cid.startswith(...)``: a 40-entry curated
+        # verb list (`fix`, `rename`, `refactor`, `bug`, ...) stood between a software-engineering
+        # capability and the tree proof of its own arguments.  Measured 2026-10-31 on 96a8d03:
+        # "Optimise the function total in <f>; it is too slow on large inputs", "Add a thread pool
+        # to <f> that totals the list in parallel" and "Make the function total in <f> release the
+        # GIL while summing" all name an existing source file and state a real effect, and all
+        # three were refused at admission because none of them contains a word from that list --
+        # the repair row they rank first declares that file's tree as its own source root.
+        # The row's identity is the structural fact (the id prefix is the row's own declaration,
+        # and derivation only ever returns values PROVED AGAINST A STATED FILE); the vocabulary
+        # was a second, weaker gate on the same decision.  Nothing wider than the row it names.
+        _in_scope = (str(cid).startswith(_derivation.SWE_CID_PREFIXES)
+                     or _derivation.is_swe_request(goal))
         if _in_scope:
             _shadow, _derived_values, _derivation_report = _derivation.binding_view(goal, entry, root)
             _bind_contract = _shadow.get("action_template") or contract

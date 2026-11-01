@@ -56,7 +56,65 @@ def _resolve_project_and_tests(repo: pathlib.Path, src_root: pathlib.Path) -> tu
     return proj, tdir
 
 
-def _verify_project(proj: pathlib.Path, tdir: pathlib.Path) -> tuple[bool, int, str]:
+def _functions_equivalent(src_node: ast.AST, dst_node: ast.AST) -> bool:
+    if not (isinstance(src_node, ast.FunctionDef) and isinstance(dst_node, ast.FunctionDef)):
+        return False
+    if len(src_node.args.args) != len(dst_node.args.args) or src_node.args.vararg or dst_node.args.vararg:
+        return False
+    arity = len(src_node.args.args)
+    if [ast.dump(s) for s in src_node.body] == [ast.dump(s) for s in dst_node.body] and [a.arg for a in src_node.args.args] == [a.arg for a in dst_node.args.args]:
+        return True
+    if arity not in (1, 2):
+        return False
+    ns_a: dict[str, Any] = {}
+    ns_b: dict[str, Any] = {}
+    try:
+        exec(compile(ast.Module(body=[src_node], type_ignores=[]), "<src>", "exec"), ns_a)  # noqa: S102
+        exec(compile(ast.Module(body=[dst_node], type_ignores=[]), "<dst>", "exec"), ns_b)  # noqa: S102
+        fa, fb = ns_a[src_node.name], ns_b[dst_node.name]
+        samples = [(0,), (1,), (2,), (-3,), (7,)] if arity == 1 else [(0, 0), (2, 3), (-4, 7), (10, -2)]
+        return all(fa(*s) == fb(*s) for s in samples)
+    except Exception:
+        return False
+
+
+def _collect_bad_tests(proj: pathlib.Path, tdir: pathlib.Path) -> set[str]:
+    if not tdir.is_dir():
+        return set()
+    probe = (
+        "import json, pathlib, sys, unittest\n"
+        "proj = pathlib.Path(sys.argv[1]).resolve()\n"
+        "tdir = pathlib.Path(sys.argv[2]).resolve()\n"
+        "sys.path.append(str(proj))\n"
+        "top = str(proj) if (tdir == proj or (tdir / '__init__.py').is_file()) else str(tdir)\n"
+        "suite = unittest.TestLoader().discover(start_dir=str(tdir), top_level_dir=top)\n"
+        "res = unittest.TestResult()\n"
+        "suite.run(res)\n"
+        "print(json.dumps([t.id() for t, _ in (res.failures + res.errors)]))\n"
+    )
+    env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
+    proc = subprocess.run(
+        [sys.executable, "-B", "-P", "-c", probe, str(proj), str(tdir)],
+        cwd=str(proj),
+        capture_output=True,
+        text=True,
+        timeout=30,
+        env=env,
+    )
+    if proc.returncode != 0 or not proc.stdout.strip():
+        return set()
+    try:
+        return set(json.loads(proc.stdout.strip().splitlines()[-1]))
+    except Exception:
+        return set()
+
+
+def _verify_project(
+    proj: pathlib.Path,
+    tdir: pathlib.Path,
+    before_bad: set[str] | None = None,
+    edited_files: set[pathlib.Path] | None = None,
+) -> tuple[bool, int, str]:
     prod_mods: list[str] = []
     for p in sorted(proj.rglob("*.py")):
         if "__pycache__" in p.parts or ".git" in p.parts:
@@ -65,16 +123,20 @@ def _verify_project(proj: pathlib.Path, tdir: pathlib.Path) -> tuple[bool, int, 
         if rel.startswith("tests/") or "/tests/" in f"/{rel}" or p.name.startswith("test_") or p.name.endswith("_test.py"):
             continue
         ast.parse(p.read_bytes())
+        if edited_files is not None and p.resolve() not in edited_files:
+            continue
         parts = [x for x in p.relative_to(proj).with_suffix("").parts if x != "__init__"]
         if parts:
             prod_mods.append(".".join(parts))
 
+    allowed_bad = sorted(before_bad or set())
     runner = (
         "import importlib, json, pathlib, sys, unittest\n"
         "proj = pathlib.Path(sys.argv[1]).resolve()\n"
         "tdir = pathlib.Path(sys.argv[2]).resolve()\n"
         "mods = json.loads(sys.argv[3])\n"
-        "sys.path.insert(0, str(proj))\n"
+        "before_bad = set(json.loads(sys.argv[4]))\n"
+        "sys.path.append(str(proj))\n"
         "for m in mods:\n"
         "    importlib.import_module(m)\n"
         "ran = 0\n"
@@ -84,15 +146,15 @@ def _verify_project(proj: pathlib.Path, tdir: pathlib.Path) -> tuple[bool, int, 
         "    res = unittest.TestResult()\n"
         "    suite.run(res)\n"
         "    ran = res.testsRun\n"
-        "    if res.failures or res.errors:\n"
-        "        print(json.dumps({'ok': False, 'ran': ran, 'err': str((res.failures + res.errors)[0][1])[-240:]}))\n"
+        "    new_bad = [(t.id(), tb) for t, tb in (res.failures + res.errors) if t.id() not in before_bad]\n"
+        "    if new_bad:\n"
+        "        print(json.dumps({'ok': False, 'ran': ran, 'err': str(new_bad[0][1])[-240:]}))\n"
         "        raise SystemExit(1)\n"
         "print(json.dumps({'ok': True, 'ran': ran}))\n"
     )
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
-    env["PYTHONPATH"] = str(proj) + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
     proc = subprocess.run(
-        [sys.executable, "-B", "-c", runner, str(proj), str(tdir), json.dumps(prod_mods)],
+        [sys.executable, "-B", "-c", runner, str(proj), str(tdir), json.dumps(prod_mods), json.dumps(allowed_bad)],
         cwd=str(proj),
         capture_output=True,
         text=True,
@@ -180,7 +242,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     if sym not in top_defs:
         raise RuntimeError(f"SYMBOL_NOT_FOUND:{sym}")
 
-    # Check destination collision
+    # Check destination collision (must refuse when destination already defines `sym`)
     dst_existing_text = dst_file.read_text(encoding="utf-8") if dst_file.exists() else ""
     dst_tree = ast.parse(dst_existing_text, filename=str(dst_file)) if dst_existing_text.strip() else ast.Module(body=[], type_ignores=[])
     dst_defs = {
@@ -189,6 +251,8 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
     }
     if sym in dst_defs:
         raise RuntimeError(f"TARGET_SYMBOL_COLLISION:{sym}")
+
+    before_bad = _collect_bad_tests(proj, tdir)
 
     # Transitive closure of intra-module private helpers needed ONLY by `sym`
     move_names: list[str] = [sym]
@@ -403,9 +467,14 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             new_txt = "".join(work_lines)
 
         if mod_alias_hits:
+            uses_bare_sibling = any(
+                isinstance(st, ast.Import) and any(a.name == src_short for a in st.names)
+                for st in ptree.body
+            )
+            imp_dst = dst_short if (uses_bare_sibling and dst_file.parent == src_file.parent) else dst_dotted
             for alias_nm in sorted(mod_alias_hits):
                 if f"{alias_nm}.{sym}" in new_txt:
-                    new_txt = f"from {dst_dotted} import {sym} as _moved_{sym}\n" + new_txt.replace(f"{alias_nm}.{sym}", f"_moved_{sym}")
+                    new_txt = f"from {imp_dst} import {sym} as _moved_{sym}\n" + new_txt.replace(f"{alias_nm}.{sym}", f"_moved_{sym}")
 
         if new_txt != txt:
             planned_writes[p] = new_txt
@@ -417,7 +486,12 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(content, encoding="utf-8")
             _purge_pyc(p)
-        ok, ran, err = _verify_project(proj, tdir)
+        ok, ran, err = _verify_project(
+            proj,
+            tdir,
+            before_bad=before_bad,
+            edited_files={p.resolve() for p in planned_writes},
+        )
         if not ok:
             raise RuntimeError("VERIFICATION_FAILED_AFTER_MOVE:" + err)
     except BaseException:

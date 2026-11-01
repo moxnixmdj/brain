@@ -1,14 +1,14 @@
 {
  "entries": {
   "m1": {
-   "accesses": 6146,
-   "blamed": 1301,
+   "accesses": 6260,
+   "blamed": 1313,
    "content": "/tmp/brain-cli-reg-cik5wdk5/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793264467.0945606,
-   "credited": 1416,
+   "credited": 1461,
    "id": "m1",
    "kind": "acquired_capability",
-   "last_accessed": 1793475156.4934466,
+   "last_accessed": 1793505508.9659553,
    "tags": [
     "/tmp/brain-cli-reg-cik5wdk5/regme",
     "cli"
@@ -31,14 +31,14 @@
    ]
   },
   "m10": {
-   "accesses": 12560,
-   "blamed": 1418,
+   "accesses": 12674,
+   "blamed": 1430,
    "content": "/tmp/brain-cli-reg-770jz7z_/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793297609.314542,
-   "credited": 3095,
+   "credited": 3140,
    "id": "m10",
    "kind": "acquired_capability",
-   "last_accessed": 1793475156.4943156,
+   "last_accessed": 1793505508.9678097,
    "tags": [
     "/tmp/brain-cli-reg-770jz7z_/regme",
     "cli"
@@ -122,14 +122,14 @@
    ]
   },
   "m2": {
-   "accesses": 8467,
-   "blamed": 1466,
+   "accesses": 8581,
+   "blamed": 1478,
    "content": "/tmp/brain-cli-reg-swdba71u/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793264467.158527,
-   "credited": 1954,
+   "credited": 1999,
    "id": "m2",
    "kind": "acquired_capability",
-   "last_accessed": 1793475156.4945946,
+   "last_accessed": 1793505508.9672437,
    "tags": [
     "/tmp/brain-cli-reg-swdba71u/regme",
     "cli"
@@ -152,14 +152,14 @@
    ]
   },
   "m3": {
-   "accesses": 9398,
-   "blamed": 1789,
+   "accesses": 9512,
+   "blamed": 1801,
    "content": "/tmp/brain-cli-reg-xn_guh_e/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793264467.2400823,
-   "credited": 2564,
+   "credited": 2609,
    "id": "m3",
    "kind": "acquired_capability",
-   "last_accessed": 1793475156.494022,
+   "last_accessed": 1793505508.9667733,
    "tags": [
     "/tmp/brain-cli-reg-xn_guh_e/regme",
     "cli"
@@ -238,14 +238,14 @@
    ]
   },
   "m6": {
-   "accesses": 8643,
-   "blamed": 1819,
+   "accesses": 8757,
+   "blamed": 1831,
    "content": "/tmp/brain-cli-reg-rficng_7/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793266064.5255597,
-   "credited": 2305,
+   "credited": 2350,
    "id": "m6",
    "kind": "acquired_capability",
-   "last_accessed": 1793475156.4937594,
+   "last_accessed": 1793505508.966361,
    "tags": [
     "/tmp/brain-cli-reg-rficng_7/regme",
     "cli"

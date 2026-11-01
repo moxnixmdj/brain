@@ -15,6 +15,9 @@ name: swe-advanced-census
 # 2026-10-31: 3 -> 4. The rename sentence that states "the public function total" now reaches
 # the rename row that already existed (see test_the_function_name_is_the_one_the_file_defines_v1).
 #
+# 2026-10-31: 4 -> 5. "Show me the diff of <file> against HEAD~1" reaches the repository row that
+# already declared `diff` in OPS (see test_a_row_declares_only_what_it_implements_v1).
+#
 # The floor is the count that exists today, not a target. When a change raises it, raise the
 # floor in the same pull request -- that is the only way the guard keeps meaning what it says.
 #
@@ -31,7 +34,7 @@ on:
       floor:
         description: "Minimum number of the 49 advanced requests that must reach a verified outcome"
         required: false
-        default: "4"
+        default: "5"
 
 permissions:
   contents: read
@@ -55,7 +58,7 @@ jobs:
         shell: bash
         run: |
           FLOOR="${{ github.event.inputs.floor }}"
-          FLOOR="${FLOOR:-4}"
+          FLOOR="${FLOOR:-5}"
           python execution_guard/swe_advanced_probe_v1.py \
             --json /tmp/advanced.json --floor "$FLOOR" \
             --summary "$GITHUB_STEP_SUMMARY" 2>&1 | tee /tmp/advanced.log
