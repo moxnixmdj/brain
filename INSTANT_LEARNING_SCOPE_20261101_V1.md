@@ -75,6 +75,69 @@ If a newer measurement does exist outside this checkout, the path to settle it i
 
 ---
 
+## 0.5 The claim, run as an experiment (2026-11-01)
+
+Arguments do not settle this, so it was executed. New probe:
+`instant_learning_transfer_probe_20261101.py`. One lesson taught into a fresh store,
+then offered a ladder of instances. A case counts as solved **only if the patched source
+passes real executable tests**.
+
+Lesson: *a half-open range is exclusive at the upper bound — `<= hi` must be `< hi`.*
+Taught from `def within(x, hi): return x <= hi` → `return x < hi`.
+
+Teaching result: **crystallized: true**, `skill_id skill_971b4c5e6052b817`, store count 1.
+
+| case | family | language | recall | solved |
+|---|---|---|---|---|
+| C1 alpha-renamed twin | control | python | PROPOSED | **yes** |
+| C2 same shape, new literal | control | python | NO_PROPOSAL | no |
+| N1 operator inside a larger return expression | novel | python | NO_PROPOSAL | no |
+| N2 operator inside an `if`-statement | novel | python | NO_PROPOSAL | no |
+| N3 operator in a `while` guard | novel | python | NO_PROPOSAL | no |
+| N4 operands flipped (`hi >= x`) | novel | python | NO_PROPOSAL | no |
+| N5 class method with `self` | novel | python | PROPOSED | **yes** |
+| N6 negated form `not (x > hi)` | novel | python | NO_PROPOSAL | no |
+| N7 expanded form `x < hi or x == hi` | novel | python | NO_PROPOSAL | no |
+| X1 Go | cross-language | go | NO_RULES_FOR_LANGUAGE | not reachable |
+| X2 Rust | cross-language | rust | NO_RULES_FOR_LANGUAGE | not reachable |
+| X3 TypeScript | cross-language | typescript | NO_RULES_FOR_LANGUAGE | not reachable |
+| X4 C++ | cross-language | cpp | NO_RULES_FOR_LANGUAGE | not reachable |
+
+**Executable cases solved: 2 of 9. Controls 1/2. Novel same-lesson shapes 1/7.
+Cross-language reachable 0/4.**
+
+### The part that is not a sample, and is decided by construction
+
+`X1–X4` is not a weak sample — it is a **structural zero**. `_load_rules` selects
+`WHERE domain='swe_code_repair' AND language=?` (`verified_skill_crystallizer_v1.py:262`).
+The language is part of the lookup key, so a lesson taught in Python is **never offered** to
+Go, Rust, TypeScript or C++ — not refused after consideration, **not consulted at all**.
+Verified directly: python rules visible 1, go rules visible 0, cpp rules visible 0, and a
+novel Go instance after a taught lesson returns `NO_PROPOSAL`.
+
+So the sentence *"he does them once and learns all of them permanently"* is **false across
+the language boundary by design**, even when the lesson is literally the identical token
+swap. A new environment in a different language starts from zero regardless of how much was
+learned before. That is the sharpest single fact against the claim, and no amount of
+"trying it in more environments" changes it — the rule has to be re-taught per language.
+
+### The part that is a sample, and is labelled as one
+
+Within Python the probe reached **1 of 7** structurally novel instances. This is one lesson,
+one teacher, 13 cases — a probe, not a census, and it does **not** on its own overturn the
+tree's larger measurements. What it does is confirm the direction those measurements already
+report: the lesson transports across *renaming* and across *method-vs-function* placement,
+and stops at any change of statement kind or operator form.
+
+### What would change this
+
+Teach the identical lesson in **each** language and re-run X1–X4: if cross-language reach is
+still 0, the language key must be removed or a language-neutral skeleton introduced. And
+re-run with 20 novel instances rather than 7. If the novel-hit rate comes back high, this
+section is wrong and is replaced by that measurement.
+
+---
+
 ## 1. The truth ledger
 
 | claim | status | the measurement |
