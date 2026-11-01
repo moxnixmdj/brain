@@ -472,6 +472,66 @@ different machine, not a code gap.
 
 ---
 
+## 10.5 The loop closes, and what is left is exactly one sentence
+
+The 90 OSWorld modules were said to be unexercisable. That was half wrong. The *desktop* is
+absent -- no browser, no chromedriver, no Xvfb, no tesseract -- but the **loop** never needed
+one. `execute_typed_action` and `observe` are already written against `env: Any`, and the
+contract they demand is four members:
+
+```
+env.vm_screen_size   -> (width, height)
+env.instruction      -> str
+env.step(command)    -> (obs, reward, done, info)   obs has "screenshot" and "instruction"
+env.render(mode)     -> screenshot bytes
+```
+
+That is a seam, not a wall. So the loop was closed against a virtual 1920x1080 desktop
+(`canonical/tests/virtual_desktop_v1.py`) -- Pillow-drawn, with a command interpreter for the
+exact pyautogui strings this repo compiles to.
+
+**Real, not simulated:** `BrainOSWorldAgent` (the shipped adapter, including its 1920x1080
+protocol gate), `route_relational_visual` / `ground_visual_region` (the shipped pixel policy),
+`compile_actions` -> `compile_osworld_pyautogui` (the shipped compiler),
+`execute_typed_action` / `observe` (the shipped surface validator and observer).
+**Simulated:** only the desktop.
+
+### Measured
+
+| task | agent saw | agent said | world moved | reward |
+|---|---|---|---|---|
+| "click the **leftmost** red box" | two red boxes | `pyautogui.click(x=300, y=500, …)` | `left` selected, `right` not | **1.0** |
+| "click the **rightmost** red box" | same screen | `pyautogui.click(x=1600, y=500, …)` | `right` selected, `left` not | **1.0** |
+| no red box on screen | empty screen | `WAIT` | **no click recorded** | 0.0 |
+| two boxes tied on x | tied screen | `WAIT` | **no click recorded** | 0.0 |
+
+The click lands **inside the correct widget's rect**, decided from raw PNG bytes, and the action
+changes what the next screenshot shows -- that is what makes it a loop rather than a function.
+
+### Why the passing result is not self-congratulation
+
+A harness that quietly ignored a command it did not understand would manufacture a passing loop
+from nothing, so `VirtualDesktop` **raises** on any unrecognised command, and a test pins that.
+
+Then the harness was mutated: a `BlindDesktop` whose click always lands on the first widget,
+ignoring coordinates. Verdict -- **caught**. The `leftmost` case is missed (the mutant guesses
+right by luck), but `rightmost` fails, and because the two directions are mutually exclusive a
+constant-answering desktop can never pass both. The pair has teeth that neither test has alone.
+
+### The claim, narrowed to one sentence
+
+> The Brain, through its shipped OSWorld adapter, turns a screenshot and an instruction into a
+> validated click that lands on the correct widget and changes the world -- with everything
+> above replaced by a double except the operating system itself.
+
+`canonical/tests/test_computer_use_loop_end_to_end_v1.py` -- **12 passed**.
+
+What remains unmeasured is no longer "the computer-use stack". It is one sentence: *pyautogui
+drives a real operating system.* That needs a machine with a display, and no amount of code
+written here substitutes for it.
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
