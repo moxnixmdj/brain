@@ -48,12 +48,30 @@ would have learned from the same experience.** The machine generalizes over what
 generalize over. Widening that automatically — deciding its own hypothesis space — is the real
 frontier, and it is not a learning-rate or a memory-capacity problem.
 
-**Concretely, that makes the next move obvious and cheap:** every time a rule fails to fire,
-that failure is a *scope* signal. A rule that fires on instance A and misses structurally
-similar instance B is evidence about where its scope should end. The refusal is already
-recorded (`A_REFUSAL_KEY_MAY_CARRY_NO_DETAIL`); nothing yet consumes it as scope evidence.
-That single loop — failure → scope revision, not just failure → new rule — is worth more than
-any additional mechanism in this tree.
+**Concretely, that makes the next move obvious:** every time a rule fails to fire, that failure
+is a *scope* signal. A rule that fires on instance A and misses structurally similar instance B
+is evidence about where its scope should end.
+
+**Correction, immediately after writing that.** I said nothing in the tree consumes failures as
+scope evidence. That was wrong again, and the very module that does it is present and tested:
+
+* **`canonical/runtime/finite_capability_diagnosis.py`** — *"Exact finite-hypothesis capability
+  diagnosis and probe selection … a finite frozen version space with predeclared probe
+  outcomes, choose the probe lexicographically by diagnostic power first"*. This is **version
+  space narrowing**: the exact mathematics of "run the probe that eliminates the most remaining
+  hypotheses". **7 tests passing.**
+* **`software_repair_loop_cegis_hypothesis_v1`** and **`software_patch_cegis_z3_v1`** — CEGIS,
+  counterexample-guided inductive synthesis: synthesize, test, use the counterexample to
+  constrain the next attempt. That *is* failure → revised hypothesis.
+
+So hypothesis-space revision was never missing. **What is missing is one wire.** Measured:
+`select_probe` has **no caller anywhere in the tree** — the module is an orphan. The learned-rule
+store does not consult the version-space diagnoser, and the CEGIS loops do not feed their
+counterexamples back as scope constraints on crystallized rules.
+
+That is the whole remaining gap, stated precisely: **four mechanisms that each work, and no
+edge between the learner and the diagnoser.** Everything else this session was me failing to
+find things; this one is a genuine absent connection, and it is a small one.
 
 ## What is smartest to do, ranked by measured value
 
