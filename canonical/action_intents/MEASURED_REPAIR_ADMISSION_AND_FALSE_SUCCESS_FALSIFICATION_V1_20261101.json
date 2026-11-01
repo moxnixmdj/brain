@@ -6,8 +6,26 @@
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
-  "earlier_routes_exhausted_reason": "The challenger routes were checked and resolved in the frontier: mutation testing and test-suite augmentation measure the suite afterwards, and LLM-based patch assessment needs a model call, which the standing zero-spend and zero-model-dependency constraints forbid.",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Challengers were checked and resolved in the route frontier: mutation testing and test-suite augmentation measure the suite after the fact, and LLM-based patch assessment needs a model call, which the standing zero-spend and zero-model-dependency constraints forbid.",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
    "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
