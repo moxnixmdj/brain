@@ -14,7 +14,10 @@ import ast
 import builtins
 import hashlib
 import json
+import os
 import pathlib
+import subprocess
+import sys
 
 _BUILTIN_NAMES = frozenset(dir(builtins))
 
@@ -410,6 +413,10 @@ def _parse_single_module_worker(item):
     rel, sha, path_str = item
     try:
         raw = pathlib.Path(path_str).read_bytes()
+        if hashlib.sha256(raw).hexdigest() != sha:
+            return ("err", {"path": rel, "sha256": sha,
+                            "error": "SOURCE_CHANGED_DURING_PARSE",
+                            "detail": "Worker bytes differ from the parent snapshot"})
         tree = ast.parse(raw.decode("utf-8"), filename=path_str)
     except Exception as exc:
         return ("err", {
@@ -431,6 +438,17 @@ def _parse_single_module_worker(item):
     }
     row["row_sha256"] = _row_sha(row)
     return ("ok", row)
+
+
+def _parse_batch_subprocess(batch):
+    """CPU workers use the already-mediated subprocess boundary, not fork pools."""
+    proc = subprocess.run([sys.executable, str(pathlib.Path(__file__).resolve()), "--parse-batch"],
+                          input=json.dumps(batch), capture_output=True, text=True,
+                          timeout=120, check=True)
+    rows = json.loads(proc.stdout)
+    if not isinstance(rows, list) or len(rows) != len(batch):
+        raise RuntimeError("INDEX_WORKER_RESULT_INVALID")
+    return rows
 
 
 def _collect_index_parts(source_root_arg, root, cached=None):
@@ -461,19 +479,17 @@ def _collect_index_parts(source_root_arg, root, cached=None):
         ordered_rels.append(rel)
         to_parse.append((rel, sha, str(path)))
 
-    use_mp = False
-    if len(to_parse) >= 64:
-        try:
-            import multiprocessing
-            use_mp = not multiprocessing.current_process().daemon and (os.cpu_count() or 1) > 1
-        except Exception:
-            use_mp = False
-
-    if use_mp:
-        from concurrent.futures import ProcessPoolExecutor
-        workers = min(os.cpu_count() or 4, 8)
-        with ProcessPoolExecutor(max_workers=workers) as ex:
-            results = list(ex.map(_parse_single_module_worker, to_parse, chunksize=max(8, len(to_parse) // (workers * 4))))
+    if len(to_parse) >= 64 and (os.cpu_count() or 1) > 1:
+        # Threads schedule independent Python children; AST CPU work is outside
+        # the GIL. All child creation is visible to Root3's subprocess mediator.
+        # Stable map order preserves the serial artifact exactly. Worker errors
+        # propagate; no denied/failed subprocess silently falls back to a bypass.
+        from concurrent.futures import ThreadPoolExecutor
+        workers = min(os.cpu_count() or 1, 4)
+        chunk = max(8, (len(to_parse) + workers * 4 - 1) // (workers * 4))
+        batches = [to_parse[i:i + chunk] for i in range(0, len(to_parse), chunk)]
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            results = [row for batch in executor.map(_parse_batch_subprocess, batches) for row in batch]
     else:
         results = [_parse_single_module_worker(item) for item in to_parse]
 
@@ -577,3 +593,13 @@ def run(args, root):
         "parsed_module_count": len(modules) - reused + len(unparseable),
         "reused_module_count": reused,
     }
+
+
+if __name__ == "__main__":
+    if sys.argv[1:] != ["--parse-batch"]:
+        raise SystemExit("Expected --parse-batch")
+    batch = json.load(sys.stdin)
+    if not isinstance(batch, list):
+        raise SystemExit("Invalid parse batch")
+    json.dump([_parse_single_module_worker(item) for item in batch], sys.stdout,
+              separators=(",", ":"))

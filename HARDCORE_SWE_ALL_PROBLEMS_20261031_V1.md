@@ -34,7 +34,7 @@ fail-closed answer gate it has ever had. The gap is three separate things, in th
 |---|---|
 | advanced census (49 hardcore sentences) | **4 served / 45 refused** |
 | capability matrix (54 cases) | **23 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
-| matrix latency | median 63 ms  p90 462 ms  max 2930 ms |
+| matrix latency | median 64 ms  p90 427 ms  max 2790 ms |
 | live verified registry | 440 rows, 88 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -60,7 +60,7 @@ Ordered by how much of a real engineer's day the class covers, not by how hard i
 | **refactor** | move, split module, rename across the repo, replace all uses, add type hints, extract | 6 | 2 | extract and cross-repo rename work; move, split, replace-all and type hints refuse |
 | **tests** | unit, property-based, regression-from-bug, mutation-score raising, fuzzing | 6 | 1 | only running a suite and explaining failures works |
 | **debug** | failing test to cause, 'why does this return None', bisect | 3 | 0 | the rows exist but are chosen wrongly or fail inside the controller |
-| **perf** | profiling, optimisation, benchmark against a parent commit, memoisation | 4 | 0 | no profiler is installed and no row answers 'which function is the hot spot' |
+| **perf** | profiling, optimisation, benchmark against a parent commit, memoisation | 4 | 0 | no profiler is installed, and no row answers 'which function is the hot spot' |
 | **systems** | race detection, thread pools, GIL release | 3 | 0 | the only row claiming these declares them as effects it does not implement |
 | **polyglot** | C++, Rust, Go, Java, TypeScript, SQL | 7 | 0 | the machine is Python-only: there is no row that edits any other language |
 | **git** | commit, branch, diff, cherry-pick, changelog | 5 | 0 | no row performs a git operation; the history row is chosen for all five |
@@ -107,9 +107,9 @@ built to catch them.
 | defect | count | what it means | cheapest correct fix |
 |---|---|---|---|
 | `FAIL_CLOSED__ROUTE_ADMISSION_REJECTED` | 10 | a row was chosen whose declared inputs this sentence cannot supply | extend the derivation pattern that fixed #38: derive the stated object (module, span, symbol) before binding |
-| `FAIL__LIVE_CONTROLLER_EXECUTION` | 10 | the composed chain ran and failed (missing substrate or a wrong sub-row) | make the declared dependency part of admission: a chain whose substrate is absent must refuse by name |
 | `FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED` | 9 | the chosen row does not declare the effect the sentence states (honest refusal) | none — this is the gate working; the fix is to build the missing capability, not the plumbing |
-| `FAIL__RAW_GOAL_COMPILATION_GAP` | 7 | the sentence could not be compiled into any executable shape at all | one compiler shape per sentence family that has no template — or refuse it as NO_ROW instead of as a gap |
+| `FAIL__LIVE_CONTROLLER_EXECUTION` | 9 | the composed chain ran and failed (missing substrate or a wrong sub-row) | make the declared dependency part of admission: a chain whose substrate is absent must refuse by name |
+| `FAIL__RAW_GOAL_COMPILATION_GAP` | 8 | the sentence could not be compiled into any executable shape at all | one compiler shape per sentence family that has no template — or refuse it as NO_ROW instead of as a gap |
 | `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED` | 6 | the row ran and its answer was not the answer the sentence asked for | selection: the answer gate is right, the choice of row is wrong |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_WORKTREE_NOT_DIRECTORY` | 1 | the row's own contract refused the stated object | bind `worktree_path` from the stated file's parent, the same way #38's span was derived |
 | `FAIL_CLOSED__CAPABILITY_REFUSED_NO_TESTS_DISCOVERED` | 1 | the row's own contract found nothing to measure | state the test root or refuse early; a census that finds nothing is not an answer |
@@ -123,9 +123,9 @@ built to catch them.
 | `python.tests.mutation_score.v1` | [1, 14, 16, 30] | STATED_SWE_EFFECT_UNSERVED x1; ROUTE_ADMISSION_REJECTED x1; LIVE_CONTROLLER_EXECUTION x1; STATED_ANSWER_NOT_PROVIDED x1 |
 | `python.source.dead_code.v1` | [2, 17, 20, 28] | STATED_ANSWER_NOT_PROVIDED x2; STATED_SWE_EFFECT_UNSERVED x1; ROUTE_ADMISSION_REJECTED x1 |
 | `python.refactor.inline_helper.v1` | [12, 33, 34, 37] | LIVE_CONTROLLER_EXECUTION x3; STATED_SWE_EFFECT_UNSERVED x1 |
-| `git.history.bisect_regression.v1` | [19, 32, 43, 44] | LIVE_CONTROLLER_EXECUTION x3; STATED_ANSWER_NOT_PROVIDED x1 |
+| `git.history.bisect_regression.v1` | [19, 32, 43] | LIVE_CONTROLLER_EXECUTION x2; STATED_ANSWER_NOT_PROVIDED x1 |
 
-Those 5 rows are chosen for **24 of the 49** sentences. Selection here is
+Those 5 rows are chosen for **23 of the 49** sentences. Selection here is
 trigger-word driven, and a generic row with a large trigger vocabulary wins almost every sentence.
 This is the single highest-leverage defect in the inventory: fix selection and several distinct
 capability classes improve at once, with no new capability code.
@@ -201,11 +201,20 @@ These matter more than any single refusal, and none of them is measured by a 49-
 6. **The census measures the environment as much as the machine.** 4 of the 49 sentences turn
    on which packages happen to be installed, and the matrix prints `unmeasurable lanes` but
    does not fail. A number that moves when a pip cache is cold is not a capability number.
-7. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports
+7. **The matrix is not deterministic.** Seven consecutive runs on one unchanged tree gave
+   22 REAL once and 23 REAL six times, with the printed REAL list identical every time. A
+   number that moves on an unchanged tree cannot be regressed against, so the floor the
+   census workflow enforces is measuring partly the machine's mood.
+8. **At least one census sentence is ill-posed.** Request 33 says *move the function `add`
+   from mod.py into calc.py*, and both files define `add`, so the move collides and the
+   refusal is CORRECT. The ambiguity rule caught it (it declined to pick a symbol whose
+   definition is not unique across the stated files). A denominator that counts that
+   sentence as a capability the machine lacks overstates the gap.
+9. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports
    `add_dependency` FALSE **and** DAMAGED, while the full run reports the same case refused with
    a clean tree. The single-lane fixture lacks the shared setup the case depends on, so every
    lane-only number is suspect until the fixture is shared.
-8. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real
+10. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real
    software engineering is unbounded, so this corpus can be satisfied without being a good engineer.
    It needs real repositories and adversarial sentences, not more fixtures.
 
@@ -217,8 +226,8 @@ Ranked by capability bought per hour, using the counts above as the estimate of 
 
 | # | move | reaches | why first |
 |---|---|---|---|
-| 1 | typed selection keyed on the stated effect and object, replacing trigger-word magnets | **24/49** | no new capability code; several classes improve at once |
-| 2 | declare the substrate contract per row and refuse early when it is absent | 10 chains + 12 pypi rows | turns silent controller death into a named, actionable refusal |
+| 1 | typed selection keyed on the stated effect and object, replacing trigger-word magnets | **23/49** | no new capability code; several classes improve at once |
+| 2 | declare the substrate contract per row and refuse early when it is absent | 9 chains + 12 pypi rows | turns silent controller death into a named, actionable refusal |
 | 3 | extend the #38 derivation pattern to the stated object of every family | 10 | proven once, cheap to repeat |
 | 4 | install the work substrate (pytest, hypothesis, ruff, mypy, coverage, tree-sitter, a profiler) | unblocks tests/perf/review/impact | without it, several rows can never run |
 | 5 | build the three absent classes: build files, CI configuration, git operations | 14 | whole classes with no row; each is mechanical and verifiable |
@@ -275,7 +284,7 @@ Ranked by capability bought per hour, using the counts above as the estimate of 
 | 41 | review | Audit the dependency list in …/41_review/pyproject.toml for known vulnerabilities. | `**none**` | STATED_SWE_EFFECT_UNSERVED |
 | 42 | git | Commit the changes in …/42_git/pkg with a clear message. | `git.repository.operate.v1` | ROUTE_ADMISSION_REJECTED |
 | 43 | git | Create a branch named feature/x and commit …/43_git/pkg/calc.py there. | `git.history.bisect_regression.v1` | LIVE_CONTROLLER_EXECUTION |
-| 44 | git | Show me the diff of …/44_git/pkg/calc.py against HEAD~1. | `git.history.bisect_regression.v1` | LIVE_CONTROLLER_EXECUTION |
+| 44 | git | Show me the diff of …/44_git/pkg/calc.py against HEAD~1. | `**none**` | RAW_GOAL_COMPILATION_GAP |
 | 45 | git | Cherry-pick the last commit onto a new branch. | `**none**` | STATED_SWE_EFFECT_UNSERVED |
 | 46 | git | Write the changelog entry for the last three commits. | `**none**` | STATED_SWE_EFFECT_UNSERVED |
 | 47 | design | Design the API for a rate limiter and write an ADR. | `**none**` | RAW_GOAL_COMPILATION_GAP |

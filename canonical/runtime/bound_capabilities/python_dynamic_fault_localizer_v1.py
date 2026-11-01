@@ -169,6 +169,8 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
    if _picked is None:
     _picked=next((v for v in reversed(list(_last_in.values())) if v),None)
    if _picked:last_lines.add(_picked)
+ # Ochiai is primary; traceback/last-line hints break ties, never override
+ # contrary passing coverage (a shared callee is often the last frame).
  ranked=[]
  for (rel,line,func),c in line_counts.items():
   # Only source executed by a failing run can be fault guidance. Passing-only
@@ -180,10 +182,10 @@ def run(args:Mapping[str,Any],root:str|os.PathLike[str]):
   reasons=[]
   if f and not q:reasons.append("FAIL_ONLY_EXECUTION")
   if q:reasons.append("PASSING_TEST_OVERLAP")
-  if (rel,line,func) in tbset:score+=1.0;reasons.append("FAILING_TRACEBACK_FRAME")
-  if (rel,line,func) in last_lines:score+=2.0;reasons.append("LAST_EXECUTED_LINE_IN_FAILING_RUN")
-  ranked.append({"path":rel,"line":line,"function":func,"fail_coverage":f,"pass_coverage":q,"ochiai":round(score-(1.0 if "FAILING_TRACEBACK_FRAME" in reasons else 0.0),12),"score":round(score,12),"reasons":reasons})
- ranked.sort(key=lambda x:(-x["score"],-x["fail_coverage"],x["pass_coverage"],x["path"],x["line"],x["function"]))
+  if (rel,line,func) in tbset:reasons.append("FAILING_TRACEBACK_FRAME")
+  if (rel,line,func) in last_lines:reasons.append("LAST_EXECUTED_LINE_IN_FAILING_RUN")
+  ranked.append({"path":rel,"line":line,"function":func,"fail_coverage":f,"pass_coverage":q,"ochiai":round(score,12),"score":round(score,12),"reasons":reasons})
+ ranked.sort(key=lambda x:(-x["score"],-int("FAILING_TRACEBACK_FRAME" in x["reasons"]),-int("LAST_EXECUTED_LINE_IN_FAILING_RUN" in x["reasons"]),-x["fail_coverage"],x["pass_coverage"],x["path"],x["line"],x["function"]))
  # AN EMPTY LOCALIZATION IS NOT A PASS.  Measured 2026-10-31: this adapter returned
  # PASS__BOUNDED_DYNAMIC_FAULT_LOCALIZATION with ranked_lines == [] and ranked_symbols == []
  # while every test died on its own import line -- a consumer cannot tell that from a
