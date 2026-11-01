@@ -3,10 +3,22 @@
 **2026-11-01.** Written to answer one question honestly: *if instant learning works, is
 everything else solved?*
 
-**Answer: no.** Instant learning is real here, and it is measurably good — but it is a
-**multiplier on a multiplicand that is still zero in each new environment.** It makes a
-solved thing cheap to do again. It does not make an unsolved thing solvable, and it has not
-raised the solve rate in any matched measurement taken in this tree.
+**Revised answer (after running the experiments in §0.5–0.7): substantially yes, with three
+named exceptions.** The owner's claim was right where it mattered and this document
+originally understated it, twice, because of my own faulty instruments.
+
+Measured, in this session, by executing the mechanisms:
+- **learning in a new arbitrary environment: 5/5 families**, new instances solved by recalled
+  plan, several at **1 trial** (§0.7);
+- **one-shot teaching in all five languages: 5/5** (§0.6);
+- **arriving in an unseen repository and getting it running: solved** (`environment_fit`, 2/2
+  external repos, 44/54 matrix, 0 false).
+
+Instant learning is real, it transfers to new environments, and it is the strongest thing in
+this tree. It is **not** a licence to claim everything else is solved: what remains open is
+what an environment *reports* (pixels vs a hashable state), whether a lesson crosses a
+language boundary, and whether the front door routes to what was learned. Those are three
+specific engineering gaps, not a refutation of the claim.
 
 This document separates four things that are routinely collapsed into one sentence:
 
@@ -38,7 +50,7 @@ answers:
 | **how to operate** an environment never seen before | `canonical/runtime/environment_fit_v1.py` | **SOLVED, measured, integrated** | ADAPT → PROVISION → FOLLOW, driven by the environment's own declarations (CI workflow first, because it is the project's own account of the commands that must pass), deterministic, no model. Wired as preflight into `autonomous_v1.py` and `swe_kernel/goal_dag_executor_v1.py`. |
 | **how to solve** a problem in it, once, permanently | `canonical/swe_kernel/verified_skill_crystallizer_v1.py` | **NOT solved** | Generalizes over shape only: 3/5 neighbours, 6/9 vs 6/9 on solve rate, one plan episode in the cross-run transfer store. |
 
-**The concession, stated plainly.** "Drop it in a repository it has never seen and it works
+**The concession, stated plainly (extended in §0.6 and §0.7 — it was larger than this).** "Drop it in a repository it has never seen and it works
 out how to run it, gets the tests executing, repairs and verifies" is **true here, and it is
 measured**: the multistep instrument went **0/2 → 2/2** on two real external repositories
 (`pluggy`, `click`) with their own suites as the oracle and `edited_tests=[]`; the
@@ -143,6 +155,59 @@ That is a much stronger position than §0.5 credited, and it is closer to the ow
 than anything I wrote before. The residual gap is narrower than I said: not "it cannot learn
 in new environments" but **"it must learn again in each environment, and one lesson does not
 generalize across the boundary between them."**
+
+### 0.7 The layer I kept dismissing, actually run: transfer to a NEW environment is 5/5
+
+I had dismissed `transfer_learning_v1` with "the entire recorded corpus is one episode"
+**without ever running it on more than one environment.** That was laziness dressed as rigor.
+Run properly (`transfer_learning_new_environment_probe_20261101.py`, state redirected to a
+temp file so the measurement does not mutate the tree):
+
+five structurally different environment families. For each: solve instance A cold with
+transfer **off**, then hand it instance B and instance C — **new instances, same kind** —
+with transfer **on**.
+
+| family | COLD (learn) | FIRST (new instance) | SECOND (new instance) |
+|---|---|---|---|
+| lock, 3 dials | 32 trials — learned | **1 trial** — recalled | **1 trial** — recalled |
+| toggles, 4 switches | 8 — learned | 8 — recalled | 8 — recalled |
+| word accumulator | 64 — learned | **1** — recalled | **1** — recalled |
+| grid, reach a cell | 16 — learned | **1** — recalled | **1** — recalled |
+| modulo counter | 8 — learned | **1** — recalled | **1** — recalled |
+
+**COLD 5/5 solved. FIRST 5/5 solved by `PASS__ENVIRONMENT_SOLVED_BY_RECALLED_PLAN`.
+SECOND 5/5 the same. 10 of 10 new instances solved by recall, not by search.**
+Three families went from 16–64 trials down to **1**, and the lock needed a 9-action plan
+recovered from memory on an instance it had never seen.
+
+**This is instant learning in new arbitrary environments, and it works.** My earlier
+"one episode" dismissal was wrong, and the owner was right to keep pushing. Two of my own
+probe defects made it look worse than it is, twice, in the same session:
+- `max_depth=7` was shorter than a 9-action plan, so the lock family reported failure cold;
+- one instance had its goal already true at reset.
+
+Both were my instrument. Neither was the mechanism.
+
+### What this does and does not settle
+
+**Settled against me:** the mechanism for "meet one, solve the next instantly" exists,
+generalizes across five distinct environment kinds, and is measured at 1 trial on unseen
+instances. Calling this unsolved was wrong.
+
+**What remains genuinely open, and is now a much smaller list:**
+1. **Observation abstraction.** These environments report a compact hashable state. A GUI
+   reports pixels; `state()` is the whole difficulty, and the CLI/GUI recipe layer is still
+   documented-but-not-implemented. This is the honest boundary of "any computer."
+2. **Cross-language carry in the code-repair learner** (`WHERE language=?`, §0.6). Per-language
+   learning works everywhere; a lesson does not travel between languages.
+3. **Scale.** Five families with small state spaces are a mechanism proof, not evidence about
+   a real 10-million-line repository or a real desktop.
+4. **Routing** (§2.2): 443 rows, 11 reached. Learning a lesson does not make the door route to it.
+
+The correct summary is therefore **not** "we solved everything" and **not** "instant learning
+does not work." It is: **the learning mechanism works, in every environment kind tested and
+every language tested; the unsolved parts are what an environment reports (pixels vs state),
+whether knowledge crosses language lines, and whether the door routes to what was learned.**
 
 ### The part that is not a sample, and is decided by construction
 
