@@ -101,7 +101,7 @@
     "source_executable": "tar",
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
-    "source_sha256": "644aa3bedfe0734eddbdb9a94fa19013d56865e614a6eb0ee69ddd93e7b77dfe",
+    "source_sha256": "fe52e145e56eb7b492e6020b19049b0be1c9c7e66b81ba8ba2f19f2f76ec516d",
     "source_type": "system_tool"
    },
    "provides": [
@@ -30154,7 +30154,7 @@
     "source_executable": null,
     "source_module": "sqlite3",
     "source_path": "canonical/runtime/bound_capabilities/sqlite_verify_cli.py",
-    "source_sha256": "c67c70439629a3568abbc2db8759719b430169b3ebdad4e8c141b8fad7c7b3fc",
+    "source_sha256": "7be12b3448fae1e889f58f62e6289423aed10ed42baa9e151d256eefecc8e902",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6603,
+  "research_index_records": 6604,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "840a81ae0fb413a2c7e13b7a2703fc3acb1175be7504a228c5839d40f7aa0380"
+  "value": "8704e49c2c264a1c02035333c4087cc382778bf8696923da589a222dc0d433ab"
  },
  "engines": [
   {
@@ -61527,7 +61527,7 @@
   "included_source_count": 1033,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8bef70caaeaeadf7bac4b1571e6b1d75ae757c239acf55fa1732288c05a60d74"
+  "source_tree_digest": "e27cac5c08fff272ccc340ddee2119d7173061fe5e1744906db822b32dd3cc72"
  },
  "research_index": [
   {
@@ -143183,7 +143183,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EXPECT_DISCRIMINATION_BASELINE_20261101_V1.json",
    "schema": "",
-   "sha256": "fad287321d546114e6134721685c19db144a4cc99b8abc32a6c2dbcc97c494a2",
+   "sha256": "457021d121c4f1f3838a20ef89fc09c50efb50e8affade528abee75e6c5b5fa4",
    "status": "",
    "terms": {
     "20261101": 1,
@@ -211615,6 +211615,51 @@
    }
   },
   {
+   "action_id": "MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MAKE_THREE_VERIFIERS_RE_READABLE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ac43241374e8832a9041419e1f2a9b527dba2c2ef58f9b4aad5207a9281a25ab",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "able": 1,
+    "adapter": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "all": 1,
+    "archive_path": 1,
+    "artifact": 1,
+    "become": 1,
+    "behind": 1,
+    "benchmark": 1,
+    "bytes": 1,
+    "check": 1,
+    "claim": 1,
+    "classified": 1,
+    "dead": 1,
+    "else": 1,
+    "externally": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "judged": 1,
+    "key": 1,
+    "make": 1,
+    "make_three_verifiers_re_readable_v1_20261102": 1,
+    "measurement": 1,
+    "moves": 1,
+    "no": 1,
+    "nobody": 1,
+    "only": 1,
+    "party": 1,
+    "produced": 1,
+    "three": 4,
+    "verdict": 2,
+    "verifiers": 3
+   }
+  },
+  {
    "action_id": "MEASURED_REPAIR_ADMISSION_AND_FALSE_SUCCESS_FALSIFICATION_V1_20261101",
    "capability": false,
    "date": "2026-11-01",
@@ -225449,7 +225494,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/xlsx_verify_openpyxl.py",
-   "sha256": "4bb4e14b9d7497ffacbbc86403cd80960ee491e0212dfa037f41c35c90c9ad49",
+   "sha256": "2a2c8b7ecad982d90b853a488e892b30e8eaa53b6e503230d0aa68435a6768fc",
    "summary": "Independently reopen an XLSX workbook and compare it to canonical JSON records.",
    "symbol_count": 11,
    "symbols": [
