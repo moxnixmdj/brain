@@ -245,6 +245,93 @@ def check(root: pathlib.Path, args: Mapping[str, Any], capability_id: str) -> No
         raise WriteAuthorityViolation(reason)
 
 
+# --------------------------------------------------------------------------- #
+# the destination that was never a candidate SOURCE
+# --------------------------------------------------------------------------- #
+# `violation()` above refuses a write when the destination IS a source the action
+# also handed the capability.  Measured on main 2026-11-01, that leaves one shape
+# completely open -- a destination that is a source file but was NOT named as one:
+#
+#     run_adapter_locally("software.hardcore.kernel.orchestrate.v1",
+#                         {"args": {"output_path": "…/u.py"}})
+#       -> RAN, and u.py is now the adapter's JSON report
+#
+# The binder produces exactly that when a goal names a file and the row declares
+# both `output_path` and `source_root`, because with no directory in the sentence
+# there is nothing to put in the source slot.  The pre-check cannot see it; the
+# bytes can.  So the destination is watched across the run: if it existed as
+# Python and parses, and after the run it no longer parses, the run replaced a
+# source with a report.  The original bytes are restored and the call fails, which
+# is the only direction a report of destruction may go.
+_WATCH_SUFFIXES = (".py", ".pyi")
+
+
+def _parses_as_a_module(data: bytes) -> bool:
+    """Python that is a MODULE, not an expression that happens to parse.
+
+    ``compile()`` is not enough and this is the measurement that proves it: the JSON
+    report the hardcore orchestrator wrote over a source file -- ``{"a": 1, ...}`` --
+    parses cleanly as a dict literal, so "still parses" said yes to a destroyed module.
+    A module has definitions, imports, assignments or calls at top level; a report is
+    one bare expression.  This is the same distinction the door's own
+    ``_is_python_code`` draws, made in the one place that sees every write.
+    """
+    import ast as _ast
+    try:
+        tree = _ast.parse(data.decode("utf-8", "replace"))
+    except (SyntaxError, ValueError):
+        return False
+    body = [node for node in tree.body
+            if not (isinstance(node, _ast.Expr) and isinstance(node.value, _ast.Constant))]
+    if not body:
+        return False
+    if len(body) == 1 and isinstance(body[0], _ast.Expr) and isinstance(
+            body[0].value, (_ast.Dict, _ast.List)):
+        return False
+    return True
+
+
+def watch_destinations(root: pathlib.Path, args: Mapping[str, Any]) -> dict[str, bytes]:
+    """Remember the Python source files this action could overwrite."""
+    root = pathlib.Path(root).resolve()
+    watched: dict[str, bytes] = {}
+    for slot in OUTPUT_SLOTS:
+        path = _as_path(root, args.get(slot))
+        if path is None or not path.is_file() or path.suffix.lower() not in _WATCH_SUFFIXES:
+            continue
+        try:
+            data = path.read_bytes()
+        except OSError:
+            continue
+        if not _parses_as_a_module(data):
+            continue
+        watched[str(path)] = data
+    return watched
+
+
+def restore_if_a_source_was_replaced(root: pathlib.Path, watched: Mapping[str, bytes]) -> None:
+    """Put back any watched source that no longer parses, and refuse the call."""
+    for raw, before in (watched or {}).items():
+        path = pathlib.Path(raw)
+        try:
+            now = path.read_bytes()
+        except OSError:
+            continue
+        if now == before:
+            continue
+        if _parses_as_a_module(now):
+            continue
+        try:
+            raw_path = pathlib.Path(raw)
+            raw_path.write_bytes(before)
+        except OSError:
+            raise WriteAuthorityViolation(
+                "OUTPUT_REPLACED_A_SOURCE_WITH_NON_SOURCE_AND_COULD_NOT_RESTORE:" + raw)
+        raise WriteAuthorityViolation(
+            "OUTPUT_REPLACED_A_SOURCE_WITH_NON_SOURCE:" + raw
+            + ":bytes=%d->%d" % (len(before), len(now)))
+
+
 def check_report(root: pathlib.Path, destination: Any, inputs: Any) -> None:
     """Protect explicit report roles, even when the producer edits source.
 
