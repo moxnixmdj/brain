@@ -1616,6 +1616,68 @@ def _try_dead_code_pruning(proj: pathlib.Path, test_dir: pathlib.Path, focus: li
     return None
 
 
+def _try_live_trace_synthesis_repair(
+    proj: pathlib.Path,
+    test_dir: pathlib.Path,
+    focus: list[pathlib.Path],
+) -> list[pathlib.Path] | None:
+    """Synthesize function bodies from live runtime failure-frame & assertion values."""
+    try:
+        from canonical.swe_kernel.whitebox_introspector_and_trace_synthesizer_v1 import (
+            synthesize_candidates_for_file,
+        )
+    except Exception:
+        return None
+
+    test_files = [
+        p for p in sorted(test_dir.rglob("*.py"))
+        if "__pycache__" not in p.parts and (p.name.startswith("test_") or p.name.endswith("_test.py"))
+    ]
+    if not test_files:
+        return None
+    src_files = [
+        p for p in focus
+        if not (p.name.startswith("test_") or p.name.endswith("_test.py"))
+    ]
+    for src_f in src_files:
+        orig_bytes = src_f.read_bytes()
+        orig_txt = orig_bytes.decode("utf-8", errors="replace")
+        try:
+            cands = synthesize_candidates_for_file(src_f, proj=proj, test_files=test_files)
+        except Exception:
+            cands = []
+        for idx, patched_txt in enumerate(cands):
+            desc = f"obs_synth_{idx}"
+            try:
+                src_f.write_text(patched_txt, encoding="utf-8")
+                _purge_pyc(src_f)
+                sieve_ok, _ = _inproc_sieve(proj, test_dir, prioritized_tests=test_files)
+                if not sieve_ok:
+                    continue
+                ok, _ran, _ = _verify_project(proj, test_dir)
+                if ok:
+                    try:
+                        from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+                        VerifiedSkillStore().crystallize_patch(
+                            skill_family="python_repair_ast_patch",
+                            operator_id=f"live_trace_synth:{desc}",
+                            before_code=orig_txt,
+                            after_code=patched_txt,
+                            proof_kind="clean_subprocess_test_suite_pass",
+                        )
+                    except Exception:
+                        pass
+                    return [src_f]
+            finally:
+                if not src_f.exists():
+                    src_f.write_bytes(orig_bytes)
+            src_f.write_bytes(orig_bytes)
+            _purge_pyc(src_f)
+        src_f.write_bytes(orig_bytes)
+        _purge_pyc(src_f)
+    return None
+
+
 def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dict[str, Any]:
     repo = pathlib.Path(root_path).resolve()
     src_raw = str(args.get("source_root") or "").strip()
@@ -1674,6 +1736,12 @@ def _run_in_place(args: Mapping[str, Any], root_path: pathlib.Path | str) -> dic
             edited = _try_test_guided_repair(proj, test_dir, focus) if _has_tests else None
             if edited is not None:
                 mode_applied = "test_guided_ast_repair"
+            elif _has_tests:
+                edited = _try_live_trace_synthesis_repair(proj, test_dir, focus)
+                if edited is not None:
+                    mode_applied = "live_trace_observational_synthesis"
+                else:
+                    raise RuntimeError("CHOREOGRAPHY_REPAIR_UNRESOLVED:" + _err[:200])
             else:
                 raise RuntimeError("CHOREOGRAPHY_REPAIR_UNRESOLVED:" + _err[:200])
         else:

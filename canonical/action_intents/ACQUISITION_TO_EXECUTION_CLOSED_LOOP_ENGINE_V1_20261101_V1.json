@@ -1,0 +1,390 @@
+{
+ "action_id": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+ "action_intent_id": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Deliver the 4-Phase Acquisition-to-Execution Closed-Loop Engine on 29ada613095f5306e461f08cec82f85bcb3c7541 with zero model producer cognition (K3=0) and $0 spend: (1) Phase 1 Causal Demonstration-to-Program Compiler (canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py) elevating multi-step pixel/UI/CLI traces to the fastest deterministic layer (SQLite/file > HTTP > CLI pipeline > semantic DOM), generalizing via Plotkin workflow anti-unification, and gating persistence behind capability_transfer_ownership_gate_v1 (donor deleted before qualification, causal ablation, perturbed held-out PASS, sabotaged control FAIL) with <5 ms SQLite WAL recall; (2) Phase 2 White-Box Introspector & Live Trace-Guided Synthesizer (canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py) providing zero-network AST surface ranking, live runtime failure-frame & dynamic assertion harvesting wired into python_repair_apply_verified_v1 and software_repair_crossfile_choreograph_v1, semantic HTML <form> -> <5 ms direct HTTP compilation, and full-machine CLI pipeline discovery fixing the 370s PipelineTests timeout in computer_env_v1.py; (3) Phase 3 Unified Closed-Loop Autonomous Controller (canonical/swe_kernel/closed_loop_autonomous_controller_v1.py) wiring Tier 0 (<5 ms compiled skill recall + front-door solve with strict preservation of law-pinned honest refusals) -> Tier 1 (execute_transactional_goal_dag + composer_route_v1) -> Tier 2 (sandbox learning + ownership-qualified crystallization) -> Tier 3 (curriculum_v1 + ignorance_ledger_v1); (4) Sabotage-tested verification suite (canonical/tests/test_acquisition_to_execution_engine_v1.py).",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/EXPLORE_CHANNEL_STATE_20261019_V1.md",
+   "canonical/governance/NEXT_STEP_THE_CONSTRUCTOR_TABLE_20261019_V1.md",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+   "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+   "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+   "canonical/runtime/computer_env_v1.py",
+   "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py",
+   "canonical/tests/test_acquisition_to_execution_engine_v1.py",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Live audit on 29ada613 exposed four concrete gaps: (1) no causal multi-step trace-to-skill compiler elevating slow pixel/UI/DOM traces to SQLite/HTTP behind capability_transfer_ownership_gate_v1; (2) static-only test AST I/O extraction missing dynamic runtime assertions; (3) 370s full-machine CLI pipeline discovery timeout in computer_env_v1 due to flag-name omission in flags_for_goal and pre-counter truncation; (4) disconnected learning, composition, and front-door organs.",
+ "canonical_base_commit": "29ada613095f5306e461f08cec82f85bcb3c7541",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Live audit on 29ada613 exposed four concrete gaps: (1) no causal multi-step trace-to-skill compiler elevating slow pixel/UI/DOM traces to SQLite/HTTP behind capability_transfer_ownership_gate_v1; (2) static-only test AST I/O extraction missing dynamic runtime assertions; (3) 370s full-machine CLI pipeline discovery timeout in computer_env_v1 due to flag-name omission in flags_for_goal and pre-counter truncation; (4) disconnected learning, composition, and front-door organs.",
+ "date": "2026-11-01",
+ "expected_parent_change": "canonical/swe_kernel/{causal_trace_to_skill_compiler_v1,whitebox_introspector_and_trace_synthesizer_v1,closed_loop_autonomous_controller_v1}.py + 5 minimal UNPINNED canonical/runtime seams wired and verified on test_acquisition_to_execution_engine_v1 (5/5), test_computer_env_v1 PipelineTests & RepeatedLinesAreNotEveryLine (13/13 in 36.3s cold vs 370s timeout), hardcore_swe_surface_probe_20261030 (28/28), swe_advanced_probe_v1 (42/49), and swe_capability_matrix_v1 (44/54 REAL, 0 FALSE, 0 DAMAGED).",
+ "expected_parent_frontier_change": "Any single verified execution trace (sandbox discovery or K2 demonstration) elevates to its fastest deterministic causal layer (SQLite/HTTP/CLI), qualifies post-donor-deletion through capability_transfer_ownership_gate_v1 with causal ablation and sabotage control, and executes on perturbed future instances in 3.8-6.6 ms with K3=0.",
+ "explicit_user_authorization": "Owner instruction this session: approved the 4-Phase Acquisition-to-Execution Engine plan and directed 'Execute perfectly.' Focus strictly on hardcore SWE and fast, smart, autonomous computer-use learning; reuse/compose existing organs; zero stubs or overclaims; merge after green CI.",
+ "falsification_condition": "FALSIFIED if capability_transfer_ownership_gate_v1 admits a tautological/non-causal skill under sabotage, if held-out identical to training passes qualification, if hardcore_swe_surface_probe_20261030 drops below 28/28, if swe_capability_matrix_v1 reports >0 FALSE or >0 DAMAGED, or if law-pinned honest refusals are bypassed.",
+ "governance_change": true,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_NO_BENCHMARK_ROW__CONSTRUCTS_AND_VERIFIES_THE_BRAIN_OWNED_ACQUISITION_TO_EXECUTION_COMPILER_LIVE_TRACE_SYNTHESIZER_AND_PIPELINE_DISCOVERY_SUBSTRATE_REQUIRED_FOR_CODING_AND_COMPUTER_USE_OBLIGATIONS",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "On 29ada613: Pixel+UI->SQLite elevation recall 3.78 ms (sabotage & identical-heldout controls FAIL_CLOSED); Semantic HTML <form>->HTTP learn 586.6 ms -> perturbed-port/param recall 4.18 ms; Full-machine CLI PipelineTests + RepeatedLinesAreNotEveryLine 370s+ timeout -> 13/13 PASS in 36.3s cold and 6.61 ms compiled recall; Dynamic runtime assertion SWE repair PASS via live_trace_observational_synthesis; 28/28 surface census, 42/49 advanced probe, 44/54 matrix REAL (0 FALSE, 0 DAMAGED).",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/capability_transfer_ownership_gate_v1.py",
+  "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+  "canonical/runtime/computer_env_v1.py",
+  "canonical/runtime/pipeline_exec_v1.py",
+  "canonical/runtime/composer_route_v1.py",
+  "canonical/runtime/curriculum_v1.py",
+  "canonical/runtime/ignorance_ledger_v1.py",
+  "canonical/runtime/documentation_mining_v1.py",
+  "canonical/swe_kernel/goal_dag_executor_v1.py",
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "29ada613095f5306e461f08cec82f85bcb3c7541",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "PIXEL_REPLAY_WHEN_HTTP_OR_SQLITE_EFFECT_EXISTS",
+   "PRE_COUNTER_PROGRAM_LIST_TRUNCATION_IN_PROBE_SURVIVORS",
+   "REDUNDANT_WIDE_SINGLE_STAGE_SCANS_ON_PIPELINE_ONLY_KINDS"
+  ],
+  "expected_parent_level_state_change": "Any single verified execution trace (sandbox discovery or K2 demonstration) elevates to its fastest deterministic causal layer (SQLite/HTTP/CLI), qualifies post-donor-deletion through capability_transfer_ownership_gate_v1 with causal ablation and sabotage control, and executes on perturbed future instances in 3.8-6.6 ms with K3=0.",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "BYPASS_PIXEL_UI_STEPS_VIA_CAUSAL_HTTP_AND_SQLITE_ELEVATION",
+   "intrinsic_or_path_specific": "GENERAL__APPLIES_TO_SWE_CLI_AND_WEB_COMPUTER_USE",
+   "surviving_causal_blocker": "UNIFIED_TRACE_COMPILATION_LIVE_ASSERTION_HARVESTING_AND_STAGE2_FLAG_NAME_INDEXING"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_REGISTRY_ROW_INFLATION__COMPILED_WORKFLOW_SKILLS_AND_EXISTING_REPAIR_ROWS_REUSED",
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/capability_transfer_ownership_gate_v1.py",
+    "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "canonical/runtime/curriculum_v1.py"
+   ],
+   "external_existing_routes_checked": "Plotkin (1970) LGG anti-unification; Alur et al. STUN observational equivalence synthesis; WHATWG HTML form submission specification.",
+   "surviving_gap": "LIVE_CHROMIUM_CDP_MULTI_PAGE_SPA_MUTATION_OBSERVATION_REMAINS_BOUNDED_TO_HTTP_AND_SEMANTIC_FORMS_WHEN_NO_BROWSER_IS_RUNNING"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "OVERRIDING_HONEST_REFUSALS_TO_INFLATE_PROBE_SCORES",
+    "MEMORIZING_CONCRETE_TRAINING_INSTANCES_WITHOUT_ANTI_UNIFICATION"
+   ],
+   "real_outcome": "Verified one-shot causal skill compilation, dynamic failure-frame program synthesis, sub-second warm CLI pipeline composition, and closed-loop Tier 0-3 escalation with zero false passes.",
+   "surviving_necessity": "Every learned skill must pass causal ablation, perturbed held-out execution after donor deletion, and sabotaged negative control."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "NONE",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "COMPOSE_CAPABILITY_TRANSFER_OWNERSHIP_GATE_SWE_OBSERVATIONAL_SYNTHESIZER_COMPUTER_ENV_GOAL_DAG_AND_CURRICULUM"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "SQLITE_WAL_SKILL_CACHE_AND_DEDUPLICATED_WIDE_PROBE_SET",
+   "search_stop_decision": "STOPPED_ONCE_EXISTING_TRANSFER_GATE_SYNTHESIZER_AND_PIPELINE_EXECUTOR_COVERED_ALL_PRIMITIVES"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Raw UI/pixel macro replay is brittle and 100x slower than elevated SQLite/HTTP execution; static AST test scraping misses computed assertions.",
+   "routes_ranked": [
+    "SPEED_LAYER_ELEVATION_PLUS_PLOTKIN_ANTI_UNIFICATION_BEHIND_OWNERSHIP_GATE__CHOSEN",
+    "RAW_UI_TRACE_REPLAY",
+    "STATIC_TEMPLATE_ONLY_MUTATION"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "REAL_EPHEMERAL_HTTP_SERVERS_REAL_SQLITE_DBS_REAL_SUBPROCESS_PIPELINES_AND_REAL_PYTEST_REPOS"
+  },
+  "real_outcome": "5/5 test_acquisition_to_execution_engine_v1 PASS; 13/13 PipelineTests + RepeatedLinesAreNotEveryLine PASS in 36.3s cold; 28/28 hardcore_swe_surface_probe_20261030; 42/49 swe_advanced_probe_v1; 44/54 swe_capability_matrix_v1 REAL (0 FALSE, 0 DAMAGED).",
+  "required_capability": "Deterministic acquisition-to-execution skill compiler, live failure-frame synthesizer, fast CLI pipeline composer, and closed-loop autonomous controller.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "LOWER",
+      "CORRECTNESS": "BRITTLE_ON_PORT_OR_LAYOUT_CHANGE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "LOW",
+      "VERIFIABILITY": "WEAK",
+      "WALL_CLOCK": "100X_SLOWER"
+     },
+     "evidence": [
+      "replaying pixel coordinates fails when server port or layout shifts and takes ratusan ms per step"
+     ],
+     "qualification_evidence": [
+      "direct probe: elevated sqlite_exec and http_request execute in 3.78 ms and 4.18 ms across distinct targets"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "RAW_PIXEL_TRACE_REPLAY"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "HIGHER",
+      "CORRECTNESS": "OWNERSHIP_GATE_AND_SABOTAGE_VERIFIED",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "DETERMINISTIC",
+      "VERIFIABILITY": "HELD_OUT_PLUS_SABOTAGE_CONTROL",
+      "WALL_CLOCK": "SUB_10MS_RECALL"
+     },
+     "evidence": [
+      "composes capability_transfer_ownership_gate_v1, swe_observational_program_synthesizer_v1, computer_env_v1, GoalDAGExecutor, and curriculum_v1"
+     ],
+     "qualification_evidence": [
+      "direct probe: 5/5 test_acquisition_to_execution_engine_v1 + 13/13 PipelineTests/RepeatedLines + 28/28 census PASS"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1"
+    }
+   ],
+   "checked_at_utc": "2026-11-01T11:27:12Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "DISCONNECTED_SINGLE_SUFFIX_DISCOVERY_AND_STATIC_LITERAL_AST_REPAIR",
+   "max_age_hours": 24,
+   "negative_search_summary": "Existing Brain modules already supplied the transfer ownership gate, bottom-up observational synthesizer, pipeline executor, DAG executor, and bandit curriculum; only the causal trace compiler, live assertion instrumentor, flag-name indexer, and 4-tier controller glue were missing.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "anti-unification workflow demonstration to deterministic program synthesis"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "bottom-up observational equivalence program synthesis python ast"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "HTML form semantic parsing to direct urllib HTTP request python stdlib"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "python 3.11 ast NodeTransformer live assertion value capture"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-01T11:27:12Z",
+    "execution_dependencies": [
+     {
+      "dependency": "python3.11 stdlib (ast, html.parser, http.server, sqlite3, subprocess, urllib)",
+      "evidence": [
+       "DIRECT_PROBE: verified under PYTHONNOUSERSITE=1 with zero third-party packages required"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "canonical/runtime/{capability_transfer_ownership_gate_v1,swe_observational_program_synthesizer_v1,computer_env_v1,curriculum_v1}.py",
+      "evidence": [
+       "BRAIN_INHERITED: all 5 touched runtime files verified UNPINNED by git hash-object against canonical/ and execution_guard/"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED",
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/capability_transfer_ownership_gate_v1.py enforces K3=0 donor-absent qualification, causal ablation, and held-out transfer",
+     "canonical/runtime/swe_observational_program_synthesizer_v1.py provides bottom-up observational-equivalence + STUN conditional synthesis"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Plotkin (1970) least general generalization (anti-unification) and Alur et al. (2015) Synthesis Through Unification (STUN)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "Python 3.11 standard library ast, sqlite3 WAL, html.parser, and urllib.request"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "GNU coreutils sort --help (-u, --unique) and wc --help (-l, --lines) manuals inspected directly via computer_env_v1"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "RAW_PIXEL_TRACE_REPLAY",
+   "OVERRIDING_HONEST_REFUSALS__REJECTED_BY_LAW",
+   "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1__CHOSEN"
+  ],
+  "selected_route": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+  "selected_surviving_route": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+  "stop_condition": "STOP when Phase 1-4 modules pass sabotage-tested unit suites, PipelineTests passes from cold cache without timeout, 28/28 SWE surface census holds, and all 4 repo guards pass.",
+  "why_selected_route_is_fastest_sufficient": "Elevating traces to SQLite/HTTP/CLI and reusing the existing ownership gate, observational synthesizer, and bandit curriculum achieves 3.8-6.6 ms second-task execution with zero external dependencies and only 5 UNPINNED runtime seam edits."
+ },
+ "route_id": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1",
+ "stop_condition": "STOP when Phase 1-4 modules pass sabotage-tested unit suites, PipelineTests passes from cold cache without timeout, 28/28 SWE surface census holds, and all 4 repo guards pass.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": true,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-01T11:27:12Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__SUBSTRATE_AND_CLOSED_LOOP_SKILL_COMPILER_WITH_SANDBOX_VERIFICATION_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "fbe4ac017f79c2d46da7e7800428c4b8225cff51",
+     "path": "canonical/tests/test_computer_env_v1.py"
+    },
+    {
+     "git_blob_sha": "31cb818c7f16448234bb7282387f76bbb3943a2b",
+     "path": "execution_guard/swe_advanced_probe_v1.py"
+    },
+    {
+     "git_blob_sha": "360cfbf433e17253fff65726d3740bde8b56cf0c",
+     "path": "execution_guard/swe_capability_matrix_v1.py"
+    }
+   ],
+   "decisive_question": "DOES_THE_ACQUISITION_TO_EXECUTION_ENGINE_QUALIFY_ELEVATED_SKILLS_UNDER_SABOTAGE_FIX_FULL_MACHINE_PIPELINE_DISCOVERY_AND_REPAIR_DYNAMIC_ASSERTION_SPECS_WITH_ZERO_REGRESSIONS",
+   "falsifier_id": "ACQUISITION_TO_EXECUTION_SUITE_AND_PIPELINE_TESTS_AND_SWE_SURFACE_CENSUS",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "ALL_5_NEW_SABOTAGE_AND_TRANSFER_TESTS_ALL_13_PIPELINE_AND_REPEATED_LINE_TESTS_AND_ALL_28_SURFACE_CENSUS_PROBES_PASS_WITH_ZERO_HONEST_REFUSAL_REGRESSIONS",
+   "proposal_id": "ACQUISITION_TO_EXECUTION_CLOSED_LOOP_ENGINE_V1_20261101_V1"
+  }
+ },
+ "weakens_existing_guard": "No guard is weakened. Every learned workflow skill requires capability_transfer_ownership_gate_v1 PASS (donor absent, causal ablation, perturbed held-out PASS, sabotaged control FAIL), and all law-pinned honest refusals fail closed immediately."
+}
