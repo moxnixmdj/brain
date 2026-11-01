@@ -250,8 +250,17 @@ def case(name: str, goal, oracle, lane: str, timeout: int = 60,
     ``allow`` names the files the request itself asks to change.  Anything ELSE that moves is
     damage: an agent that edits a file nobody asked it to touch is worse than one that refuses.
     """
-    CASES.append(dict(name=name, goal=goal, oracle=oracle, lane=lane, timeout=timeout,
-                      allow=allow))
+    # THE FIXTURE DIRECTORY IS KEYED ON REGISTRATION, NOT ON THE LABEL.
+    #
+    # ``build()`` names its directory after the case and **rmtree**s it before writing, so two cases
+    # sharing a label shared a directory and destroyed each other's fixture: ``measure_coverage`` is
+    # registered twice, once in the toolchain lane (over ``pkg``) and once in the analysis lane (over
+    # ``cov/calc.py``), and one wiped the other's tree mid-run.  That is also why the headline count
+    # and the distinct-name count disagreed by one (44 cases, 43 names) and why the REAL list printed
+    # a name twice.  Registration index makes the directory unique whatever the label is, so a future
+    # duplicate label cannot silently merge two fixtures again.
+    CASES.append(dict(name=name, dir="%03d_%s" % (len(CASES) + 1, name), goal=goal, oracle=oracle,
+                      lane=lane, timeout=timeout, allow=allow))
 
 
 def _repair(base, result=None):
@@ -640,7 +649,7 @@ def markdown(rows: list[dict]) -> str:
     for r in rows:
         mark = {"REAL": "**REAL**", "FALSE": "**FALSE**", "refused": "refused",
                 "DAMAGE": "**DAMAGE**"}.get(r["mark"], r["mark"])
-        base_rel = "canonical/astra_runtime/tmp/frontier_matrix/%s/" % r["case"]
+        base_rel = "canonical/astra_runtime/tmp/frontier_matrix/%s/" % r["dir"]
         shown = r["goal"].replace(base_rel, "").replace("|", "\\|")
         out.append("| %s | `%s` | %s | %d | `%s` |"
                    % (r["lane"], shown, mark, r["ms"], str(r["status"])[:60]))
@@ -725,7 +734,7 @@ def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = Fals
     for spec in CASES:
         if lane and spec["lane"] != lane:
             continue
-        base = build(spec["name"], spec["lane"])
+        base = build(spec["dir"], spec["lane"])
         goal = spec["goal"](base)
         before = {p.relative_to(ROOT).as_posix(): digest(p)
                   for p in base.rglob("*") if p.is_file()}
@@ -762,9 +771,9 @@ def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = Fals
         mark = ("REAL" if (passed and world)
                 else "FALSE" if passed
                 else "DAMAGE" if damaged else "refused")
-        rows.append(dict(case=spec["name"], lane=spec["lane"], goal=goal, status=status,
-                         passed=passed, world=world, ms=elapsed_ms, damaged=damaged,
-                         note=note, mark=mark))
+        rows.append(dict(case=spec["name"], dir=spec["dir"], lane=spec["lane"], goal=goal,
+                         status=status, passed=passed, world=world, ms=elapsed_ms,
+                         damaged=damaged, note=note, mark=mark))
         if not (as_json or as_markdown):
             tail = ("DAMAGED:" + ",".join(d.split("/")[-1] for d in damaged[:3])) if damaged else ""
             print(f"{spec['lane']:10s} {spec['name']:22s} {mark:8s} {elapsed_ms:7d}ms "

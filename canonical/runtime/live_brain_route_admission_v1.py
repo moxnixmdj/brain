@@ -958,14 +958,27 @@ def _refusal_status_and_payload(exc: BaseException, selected: Any) -> tuple[str,
     if _refusal is None or _refusal.group(1) in _REFUSAL_CLASS_EXCLUDED:
         return None
     _class = _refusal.group(1)[:60]
-    _detail = _refusal.group(2).strip()[:200]
-    _inner = _REFUSAL_CLASS_RE.match(_detail) or _REFUSAL_TOKEN_RE.match(_detail)
-    if _inner is not None:
+    _detail = _refusal.group(2).strip()[:_DETAIL_LIMIT]
+    # THE CHAIN CAN BE DEEPER THAN TWO.  ``POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM`` is two
+    # levels; ``CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM`` is three, and the
+    # door's own wrapper is not a reason.  Unwrapping exactly once made six different refusals report
+    # the same ``POLYGLOT_REFUSED`` class again the moment an outer wrapper appeared -- measured on
+    # main at 85e2b81: 5 distinct classes instead of 9.  The reason is the LAST class token in the
+    # chain, so walk inwards until the payload stops being a class token.
+    _reason = _detail
+    for _ in range(8):
+        _inner = _REFUSAL_CLASS_RE.match(_detail) or _REFUSAL_TOKEN_RE.match(_detail)
+        if _inner is None:
+            break
         _class = _inner.group(1)[:60]
+        if _inner.re.groups > 1 and _inner.lastindex:
+            _detail = _inner.group(2).strip()[:_DETAIL_LIMIT]
+        else:
+            _detail = ""
     return ("FAIL_CLOSED__CAPABILITY_REFUSED_" + _class,
-            "CAPABILITY_REFUSED:" + (_detail or _class),
+            "CAPABILITY_REFUSED:" + (_reason or _class),
             {"capability": selected, "error": True, "class": _class,
-             "reason": _detail or _class})
+             "reason": _reason or _class})
 
 
 def _fail(task_id: str, status: str, failure_class: str, started: int, **extra: Any) -> dict[str, Any]:
@@ -1333,45 +1346,17 @@ def _execute_locally(task_id: str, goal: str, compiled: Mapping[str, Any], entry
                 "tool_executed": tool_executed,
                 "elapsed_ms": max(0, (perf_counter_ns() - started) // 1_000_000),
             }
-        # THE SECOND SPELLING OF THE SAME REFUSAL: ``RuntimeError("GUARD_KEY:detail")``.
         # A guard key is the repository's own vocabulary for "I read the request and refused it";
-        # reporting it as LIVE_CONTROLLER_EXECUTION told the caller the machine had broken when it
-        # had answered.  Measured 2026-11-01: 7 of 13 census refusals were exactly this.
-        if type(exc) is RuntimeError and _ADAPTER_REFUSAL_KEY_RE.match(str(exc).strip()):
-            _why = str(exc).strip()[:200]
-            return _fail(task_id, "FAIL_CLOSED__CAPABILITY_REFUSED_" + _why.split(":")[0][:60],
-                         "CAPABILITY_REFUSED:" + _why, started, executed=True,
-                         compiled_capability_id=selected, compiler_mode=compiled.get("compiler_mode"),
-                         refusal_payload={"error": True, "capability": str(selected), "reason": _why},
-                         executor=LOCAL_EXECUTION_PROOF, tool_executed=tool_executed)
-        # "IT ALREADY PASSES" IS AN ANSWER, AND IT IS THE ONE THE REPAIR LOOP ALREADY COMPUTED.
+        # reporting it as LIVE_CONTROLLER_EXECUTION told the caller the machine had broken when it had
+        # answered.  Measured 2026-11-01: 7 of 13 census refusals were exactly this.
         #
-        # Every repair adapter refuses with ``BASELINE_ALREADY_PASSES`` when the named test passes
-        # BEFORE any edit (python_software_repair_loop_v1, the iterative and coupled loops, the patch
-        # search, the provenance-guided repair).  The door turned that into
-        # ``FAIL__LIVE_CONTROLLER_EXECUTION`` with the reason buried in the exception: the caller was
-        # told the controller failed, when the machine had just proven the requested end state holds.
-        # Measured 2026-10-30 on the flagship repair route.  The requested post-state is true, so the
-        # request is satisfied -- with the baseline evidence, and with ``edited: false`` so nothing
-        # can read it as a repair that happened.
-        if _ALREADY_SATISFIED_RE.search(str(exc)):
-            return {
-                "schema": LIVE_SCHEMA,
-                "status": "PASS__REQUESTED_STATE_ALREADY_HOLDS",
-                "pass": True,
-                "task_id": task_id,
-                "executed": True,
-                "edited": False,
-                "already_satisfied": True,
-                "compiled_capability_id": selected,
-                "compiler_mode": compiled.get("compiler_mode"),
-                "reason": type(exc).__name__ + ":" + str(exc),
-                "answer_artifact": {"already_satisfied": True, "edited": False,
-                                    "evidence": (type(exc).__name__ + ":" + str(exc))[:300]},
-                "execution_proof_type": LOCAL_EXECUTION_PROOF,
-                "tool_executed": tool_executed,
-                "elapsed_ms": max(0, (perf_counter_ns() - started) // 1_000_000),
-            }
+        # Two independent repairs for it landed the same day.  The one that sat here matched every
+        # all-caps message -- which includes ``BASELINE_ALREADY_PASSES:test_x`` and ``NOTHING_TO_DO:x``,
+        # an ANSWER and not a refusal -- and it reported the OUTER token, so
+        # ``CAPABILITY_REFUSED:POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM`` came back as
+        # ``POLYGLOT_REFUSED`` and six distinct refusals collapsed onto one class again.  There is one
+        # classifier: it runs after the already-satisfied branch, it excludes the control-flow keys,
+        # and it walks the chain to its last token.  See ``_refusal_status_and_payload``.
         _refusal = _refusal_status_and_payload(exc, selected)
         if _refusal is not None:
             _status, _reason, _payload = _refusal
@@ -4326,6 +4311,7 @@ _JUDGED_FAILURE_CLASSES = frozenset({
 # branch above already owns it, and a plain human message cannot match.
 _REFUSAL_CLASS_RE = re.compile(r"^([A-Z][A-Z0-9_]{2,}):(.*)$", re.DOTALL)
 _REFUSAL_TOKEN_RE = re.compile(r"^([A-Z][A-Z0-9_]{2,})$")
+_DETAIL_LIMIT = 200
 _REFUSAL_CLASS_EXCLUDED = frozenset({"ACTION_EXPECTATION_FAILED"})
 
 _ALREADY_SATISFIED_RE = re.compile(r"BASELINE_ALREADY_PASSES|ALREADY_SATISFIED|NOTHING_TO_DO",
