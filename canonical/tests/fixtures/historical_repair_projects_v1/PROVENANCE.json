@@ -1,0 +1,215 @@
+{
+  "schema": "PINNED_HISTORICAL_REPAIR_FIXTURES_V1",
+  "cases": [
+    {
+      "id": "bits_capacity",
+      "repository": "https://github.com/mahmoud/boltons",
+      "before_commit": "e66cade323f5c11cebb4bd0f099e634b245adccd",
+      "fixed_commit": "c1c25da365cf14878cf5317147e7a09b5d124df5",
+      "source_path": "boltons/mathutils.py",
+      "upstream_test_path": "tests/test_mathutils.py",
+      "selected_test": "test_bits_len_bound",
+      "files": [
+        "bits_capacity/before.py",
+        "bits_capacity/after.py",
+        "bits_capacity/upstream_tests.txt"
+      ]
+    },
+    {
+      "id": "unit_boundary",
+      "repository": "https://github.com/mahmoud/boltons",
+      "before_commit": "8a2a93d8213e1fa4da30c8167ab1a18caad17a17",
+      "fixed_commit": "766b5547392fe8d54c1e000098499dc556bb5cb7",
+      "source_path": "boltons/strutils.py",
+      "upstream_test_path": "tests/test_strutils.py",
+      "selected_test": "test_bytes2human",
+      "files": [
+        "unit_boundary/before.py",
+        "unit_boundary/after.py",
+        "unit_boundary/upstream_tests.txt"
+      ]
+    },
+    {
+      "id": "ichunked_zero",
+      "repository": "https://github.com/more-itertools/more-itertools",
+      "before_commit": "790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5",
+      "fixed_commit": "f89d7a3331ba6b5421273e556c0a738e3dd1dd35",
+      "source_path": "more_itertools/more.py",
+      "upstream_test_path": "tests/test_more.py",
+      "selected_test": "IchunkedTests",
+      "files": [
+        "ichunked_zero/before.py",
+        "ichunked_zero/after.py",
+        "ichunked_zero/upstream_tests.txt",
+        "ichunked_zero/recipes.py",
+        "ichunked_zero/init.py"
+      ]
+    },
+    {
+      "id": "chunked_even_zero",
+      "repository": "https://github.com/more-itertools/more-itertools",
+      "before_commit": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+      "fixed_commit": "fbd55137fe47b44f55190c3714c75f1b21bf834d",
+      "source_path": "more_itertools/more.py",
+      "upstream_test_path": "tests/test_more.py",
+      "selected_test": "ChunkedEvenTests",
+      "files": [
+        "chunked_even_zero/before.py",
+        "chunked_even_zero/after.py",
+        "chunked_even_zero/upstream_tests.txt",
+        "chunked_even_zero/recipes.py",
+        "chunked_even_zero/init.py"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "local_file": "bits_capacity/before.py",
+      "upstream_path": "boltons/mathutils.py",
+      "commit": "e66cade323f5c11cebb4bd0f099e634b245adccd",
+      "source_url": "https://github.com/mahmoud/boltons/blob/e66cade323f5c11cebb4bd0f099e634b245adccd/boltons/mathutils.py",
+      "sha256": "298f80d272dd69510a3c6ed50e6ad76f28ac5e9f92aec0aab81322f7c88369a4",
+      "git_blob_sha": "1367a5413bbb9c6f3754da50c33b073641ac40df"
+    },
+    {
+      "local_file": "bits_capacity/after.py",
+      "upstream_path": "boltons/mathutils.py",
+      "commit": "c1c25da365cf14878cf5317147e7a09b5d124df5",
+      "source_url": "https://github.com/mahmoud/boltons/blob/c1c25da365cf14878cf5317147e7a09b5d124df5/boltons/mathutils.py",
+      "sha256": "3d81dc8b44136299857373a8f53d50dbf0be7aabfa34e7bcfee7c6b41b3b3236",
+      "git_blob_sha": "ae3ecd923d44e33ac1878b9dae28865e477da1c0"
+    },
+    {
+      "local_file": "bits_capacity/upstream_tests.txt",
+      "upstream_path": "tests/test_mathutils.py",
+      "commit": "c1c25da365cf14878cf5317147e7a09b5d124df5",
+      "source_url": "https://github.com/mahmoud/boltons/blob/c1c25da365cf14878cf5317147e7a09b5d124df5/tests/test_mathutils.py",
+      "sha256": "fbf22ea607aee4d54be679457f166ef243e0a1a13bfde1f4c52bf6fcec05e77f",
+      "git_blob_sha": "3cf7dbf3b824563378d1ca9ea442e3744f9d1725"
+    },
+    {
+      "local_file": "unit_boundary/before.py",
+      "upstream_path": "boltons/strutils.py",
+      "commit": "8a2a93d8213e1fa4da30c8167ab1a18caad17a17",
+      "source_url": "https://github.com/mahmoud/boltons/blob/8a2a93d8213e1fa4da30c8167ab1a18caad17a17/boltons/strutils.py",
+      "sha256": "48adba7e3a92d7a79270238759f9a1ecc669d21b3ce789be2777f7e32d9b27ae",
+      "git_blob_sha": "9763fc0a507cc7f12318ea924f53ca14f1b6698a"
+    },
+    {
+      "local_file": "unit_boundary/after.py",
+      "upstream_path": "boltons/strutils.py",
+      "commit": "766b5547392fe8d54c1e000098499dc556bb5cb7",
+      "source_url": "https://github.com/mahmoud/boltons/blob/766b5547392fe8d54c1e000098499dc556bb5cb7/boltons/strutils.py",
+      "sha256": "f7f4873406d3913372c9d2b1296cc5e3efb87e88808457e93fc212a5df2de18e",
+      "git_blob_sha": "69484458d604f853ef1b26f4c031882736f7be44"
+    },
+    {
+      "local_file": "unit_boundary/upstream_tests.txt",
+      "upstream_path": "tests/test_strutils.py",
+      "commit": "766b5547392fe8d54c1e000098499dc556bb5cb7",
+      "source_url": "https://github.com/mahmoud/boltons/blob/766b5547392fe8d54c1e000098499dc556bb5cb7/tests/test_strutils.py",
+      "sha256": "699483e9e16e1929b88fc6eb6a925cc802435434f00d79c87a13f1857147739e",
+      "git_blob_sha": "b46081e7946e0c581cd672c6004a34c892383684"
+    },
+    {
+      "local_file": "ichunked_zero/before.py",
+      "upstream_path": "more_itertools/more.py",
+      "commit": "790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5/more_itertools/more.py",
+      "sha256": "a05c57c1a0e206e0fb13aa9b205eba86e1af2e1282a3b23bad8ce85afac71098",
+      "git_blob_sha": "c128bc958dd8ed85384c2714848fd6f7d28f2cac"
+    },
+    {
+      "local_file": "ichunked_zero/after.py",
+      "upstream_path": "more_itertools/more.py",
+      "commit": "f89d7a3331ba6b5421273e556c0a738e3dd1dd35",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/f89d7a3331ba6b5421273e556c0a738e3dd1dd35/more_itertools/more.py",
+      "sha256": "bc51d6f1c05613084fb566a8310771ab946864f0bb4815d26d4c6bb8d44bf9ff",
+      "git_blob_sha": "940b8009cc6ee72518d5f2364a3ef4221854b033"
+    },
+    {
+      "local_file": "ichunked_zero/upstream_tests.txt",
+      "upstream_path": "tests/test_more.py",
+      "commit": "f89d7a3331ba6b5421273e556c0a738e3dd1dd35",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/f89d7a3331ba6b5421273e556c0a738e3dd1dd35/tests/test_more.py",
+      "sha256": "0cd2fcebc8b1d801bebeb8bea4a77ef105f5afc4c6cc16ac29fcad24ce0136cf",
+      "git_blob_sha": "1fdf22a17754d8f34d2403afb8b10ae6f27550bd"
+    },
+    {
+      "local_file": "ichunked_zero/recipes.py",
+      "upstream_path": "more_itertools/recipes.py",
+      "commit": "790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5/more_itertools/recipes.py",
+      "sha256": "ea9ac19767d3949d72bd0fc24f51aff33f24a693201b5d8e595a0d58ef8f4b1c",
+      "git_blob_sha": "d39d8cf8f4ff052f99f9f3634c27484c3759f350"
+    },
+    {
+      "local_file": "ichunked_zero/init.py",
+      "upstream_path": "more_itertools/__init__.py",
+      "commit": "790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/790bb0bb2c03e7a07282e5f16f4b1fde35b8fcf5/more_itertools/__init__.py",
+      "sha256": "19cb2d318e8d45eb7d56136a55f1452c9469d21597571c31d752aa8232a2c07b",
+      "git_blob_sha": "c8678d0776dc5d46e3b23b247a2987cad64abf71"
+    },
+    {
+      "local_file": "chunked_even_zero/before.py",
+      "upstream_path": "more_itertools/more.py",
+      "commit": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/4aeb4338ae1407d8da9723e86da99efeb446f719/more_itertools/more.py",
+      "sha256": "1bdc5f323ea18906436a42268b942d5b4d15ac8b3ff17c1211a59fb192fa068e",
+      "git_blob_sha": "9c56ab37558733ece94d676f71d502d8048bc1d5"
+    },
+    {
+      "local_file": "chunked_even_zero/after.py",
+      "upstream_path": "more_itertools/more.py",
+      "commit": "fbd55137fe47b44f55190c3714c75f1b21bf834d",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/fbd55137fe47b44f55190c3714c75f1b21bf834d/more_itertools/more.py",
+      "sha256": "cd3df816024f66b970581ed594b3080a0fc6f079b3f6b44339ecb73835830332",
+      "git_blob_sha": "426a19b740a5cacfbb93dae4247969364e2fe638"
+    },
+    {
+      "local_file": "chunked_even_zero/upstream_tests.txt",
+      "upstream_path": "tests/test_more.py",
+      "commit": "fbd55137fe47b44f55190c3714c75f1b21bf834d",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/fbd55137fe47b44f55190c3714c75f1b21bf834d/tests/test_more.py",
+      "sha256": "1cf4564c6d26e1133f2e5c8a4b050fe2e498318c03d66a317cc89e5a48fcb27b",
+      "git_blob_sha": "00a78728ca85ef64b69db5e1396bc14d38a854c9"
+    },
+    {
+      "local_file": "chunked_even_zero/recipes.py",
+      "upstream_path": "more_itertools/recipes.py",
+      "commit": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/4aeb4338ae1407d8da9723e86da99efeb446f719/more_itertools/recipes.py",
+      "sha256": "468ab191bbb5fd62e8603d741e6983acdfa9d697d0ff9252b0c56ffdd24ca9bc",
+      "git_blob_sha": "4ab172110dbf0f16f9fb39591e677a38fcff8cca"
+    },
+    {
+      "local_file": "chunked_even_zero/init.py",
+      "upstream_path": "more_itertools/__init__.py",
+      "commit": "4aeb4338ae1407d8da9723e86da99efeb446f719",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/4aeb4338ae1407d8da9723e86da99efeb446f719/more_itertools/__init__.py",
+      "sha256": "e7988a22d707340f59eb4cc01a4a534994fdcfb8420c01f768b42fd5e9caeccc",
+      "git_blob_sha": "bbed89ba2985def0ec623fa838c12f4cb106602c"
+    },
+    {
+      "local_file": "LICENSE.boltons",
+      "upstream_path": "LICENSE",
+      "commit": "c1c25da365cf14878cf5317147e7a09b5d124df5",
+      "source_url": "https://github.com/mahmoud/boltons/blob/c1c25da365cf14878cf5317147e7a09b5d124df5/LICENSE",
+      "sha256": "c301912653a8d8c99eab6212aa3aea8d164ea249d8ad53c941e0558a0a5ac1e3",
+      "git_blob_sha": "6a4c9d2496f53c61c99ae7c113e6ed94b15b038c"
+    },
+    {
+      "local_file": "LICENSE.more-itertools",
+      "upstream_path": "LICENSE",
+      "commit": "f89d7a3331ba6b5421273e556c0a738e3dd1dd35",
+      "source_url": "https://github.com/more-itertools/more-itertools/blob/f89d7a3331ba6b5421273e556c0a738e3dd1dd35/LICENSE",
+      "sha256": "09f1c8c9e941af3e584d59641ea9b87d83c0cb0fd007eb5ef391a7e2643c1a46",
+      "git_blob_sha": "0a523bece3e50519653c4d7a38399baa487fefa1"
+    }
+  ],
+  "source_and_upstream_test_snapshots_unmodified": true,
+  "network_required_at_test_time": false,
+  "full_upstream_repository_coverage": false,
+  "independent_certification": false
+}
