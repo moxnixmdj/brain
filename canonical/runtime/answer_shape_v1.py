@@ -405,6 +405,151 @@ def deliver_observation(result: "dict[str, Any]") -> list[str]:
     return []
 
 
+# A PASS MUST HAND OVER WHAT THE ROW FOUND.  Measured 2026-11-01 on ``34124aa``: of the 34
+# advanced-census sentences that PASS, **33 returned ``answer: null``**, and of the 42
+# capability-matrix cases that PASS with the world changed, 37 did.  Seventy of the 77 passing
+# executions wrote a report to ``output_path`` holding the answer --
+# ``hot_spot_function``, ``root_causes``, ``findings``, ``vulnerabilities``, ``migration_steps``,
+# ``test_evidence`` -- and the door read none of them, because ``asked()`` knows thirteen nouns
+# and every other sentence took ``None`` straight to ``return []``.
+#
+# The work was done.  The rows named their findings.  The caller was told nothing.  This is the
+# same defect class as ``observed_effect`` (fixed in PR #6504) one level up: the projection was
+# looking for the sentence's grammar instead of reading the result it was handed.
+#
+# The surface is the row's own result minus the fields every row fills in to describe itself.
+# Nothing is invented: a field is delivered only if the row produced it.
+_BOOKKEEPING_FIELDS: frozenset[str] = frozenset({
+    "schema", "adapter", "capability", "capability_id", "dependency", "target",
+    "target_file", "target_relpath", "target_sha256", "manifest", "subject", "repo_root",
+    "output_path", "output_sha256", "output_verified", "output_bytes", "query",
+    "capability_id", "operation", "verified", "gate", "pass", "status", "complete",
+    "terminal_authority", "hard_nonclaims", "model_dependency_count", "incremental_spend_usd",
+    "external_general_purpose_model_runtime_dependency_count", "edit_plan", "action_template",
+})
+
+# Words that carry no subject; a match on one of these says nothing about which field answers.
+_STOPWORD_TOKENS: frozenset[str] = frozenset({
+    "the", "and", "for", "with", "that", "this", "from", "into", "then", "than", "all", "any",
+    "every", "each", "its", "their", "them", "they", "there", "these", "those", "what", "which",
+    "who", "why", "when", "where", "how", "does", "did", "was", "were", "are", "has", "have",
+    "had", "can", "could", "should", "would", "will", "make", "made", "tell", "show", "give",
+    "find", "list", "write", "add", "use", "using", "used", "please", "file",
+    "code", "source", "python", "module", "package", "project", "and", "not", "out", "new",
+})
+
+
+def _tokens(text: str) -> dict[str, int]:
+    """Whole words, lowercased, plural-folded, mapped to the position they LAST appear at.
+
+    The position is what makes the ranking read the sentence rather than its word bag: a
+    question puts the thing it is about at the end ("… for known vulnerabilities", "… and write
+    an ADR"), so a field that matches a later word is answering the head of the sentence, not
+    its topic.  No stemmer, no model, no dependency.
+    """
+    out: dict[str, int] = {}
+    for at, word in enumerate(re.findall(r"[a-z][a-z0-9]*", str(text or "").lower())):
+        if len(word) < 3 or word in _STOPWORD_TOKENS:
+            continue
+        out[word[:-1] if len(word) > 4 and word.endswith("s") else word] = at
+    return out
+
+
+def _field_rank(field: str, wanted: "Mapping[str, int]") -> tuple[int, int, int]:
+    """(how many of the sentence's words the field name carries, where the last one sat, length).
+
+    Ties are real: "root cause" names both ``cause`` and ``root_causes``, and "audit the
+    dependency list for vulnerabilities" names both ``dependency_count`` and ``vulnerabilities``.
+    The later word wins, then the longer name -- the field that carries more of the sentence.
+    """
+    matched = {tok: at for tok, at in wanted.items()
+               if tok in _tokens(field.replace("_", " "))}
+    last = max(matched.values()) if matched else -1
+    return (len(matched), last, len(field))
+
+
+def answer_surface(inner: Mapping[str, Any]) -> dict[str, Any]:
+    """The fields of a row's own result that are findings rather than bookkeeping."""
+    return {k: v for k, v in inner.items() if k not in _BOOKKEEPING_FIELDS}
+
+
+def deliver_surface(goal: str, result: "dict[str, Any]", rows: "list[Mapping[str, Any]] | None" = None) -> list[str]:
+    """Hand over the row's findings when the sentence asked for no named collection.
+
+    The field the sentence's own words point at is delivered on its own; when no field name
+    shares a word with the sentence, the whole surface is delivered, because a question that
+    was answered deserves the answer even when the row named it something the sentence did not
+    anticipate.  Never refuses: the shape gate above is where a refusal belongs.
+    """
+    if result.get("answer") is not None:
+        return []
+    wanted = _tokens(goal)
+    for row in (rows if rows is not None else list(result.get("execution") or [])):
+        inner = row.get("result") if isinstance(row, Mapping) else None
+        if not isinstance(inner, Mapping):
+            continue
+        # A ROW THAT NAMED ITS ANSWER HAS ANSWERED.  ``python.fault.localize.v1`` returns
+        # ``{"answer": "apply_discount", ...}`` and the law
+        # ``test_the_gate_stays_out_of_the_way_for_a_named_answer`` pins that the gate must not
+        # re-shape that into an envelope: the sentence asked for a name, the row gave the name,
+        # and wrapping it would be the gate inventing a projection.
+        if "answer" in inner:
+            continue
+        surface = answer_surface(inner)
+        if not surface:
+            continue
+        best_field, best_rank = "", (0, -1, 0)
+        for field in surface:
+            rank = _field_rank(str(field), wanted)
+            if rank[0] and rank > best_rank:
+                best_field, best_rank = str(field), rank
+        # The field name must describe where the VALUE came from: when the whole surface is
+        # delivered there is no single source field, and saying "findings" while handing over
+        # four other fields would be a small lie in a file about not telling them.
+        field = best_field or "result"
+        value = surface[best_field] if best_field else surface
+        shown = _bounded(value)
+        count = len(value) if isinstance(value, (Mapping, list, tuple)) else 1
+        result["answer"] = {
+            "schema": SCHEMA,
+            "noun": best_field.split("_")[0] if best_field else "result",
+            "field": field,
+            "source": "result",
+            "count": count,
+            "value": shown,
+            "truncated": (len(shown) if isinstance(shown, (Mapping, list, tuple)) else 1) < count,
+        }
+        return []
+    return []
+
+
+def lift_named_answer(result: "dict[str, Any]") -> bool:
+    """Hand over a row's OWN ``answer`` field, verbatim, when the result carries none.
+
+    ``python.source.complexity.v1`` and ``python.source.definition_count.v1`` answer with a field
+    literally named ``answer``.  The shape gate must not re-shape that (the pinned law
+    ``test_the_gate_stays_out_of_the_way_for_a_named_answer``), and the first version of this
+    file therefore did nothing with it -- measured 2026-11-01: both matrix cases PASSed with
+    ``answer: None`` while the row held the answer one level down.  Not re-shaping and not
+    delivering are two different decisions, and only the first one was ever made.
+
+    The value travels EXACTLY as the row stated it: no envelope, no noun, no count.
+    """
+    if result.get("answer") is not None:
+        return False
+    rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
+    if not rows:
+        for step in ((result.get("composer_execution") or {}).get("steps") or []):
+            if isinstance(step, Mapping) and isinstance(step.get("result"), Mapping):
+                rows.append({"capability_id": step.get("capability_id"), "result": step["result"]})
+    for row in rows:
+        inner = row.get("result") if isinstance(row.get("result"), Mapping) else None
+        if inner is not None and inner.get("answer") is not None:
+            result["answer"] = inner["answer"]
+            return True
+    return False
+
+
 def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = None) -> list[str]:
     """Deliver the answer the sentence asked for, or say why it cannot be delivered.
 
@@ -414,7 +559,10 @@ def deliver(goal: str, result: Mapping[str, Any], root: pathlib.Path | None = No
     """
     shape = asked(goal)
     if shape is None:
-        return deliver_observation(result)  # type: ignore[arg-type]
+        delivered = deliver_observation(result)  # type: ignore[arg-type]
+        if result.get("answer") is None:  # type: ignore[attr-defined]
+            deliver_surface(goal, result)  # type: ignore[arg-type]
+        return delivered
     rows: list[Mapping[str, Any]] = [r for r in (result.get("execution") or []) if isinstance(r, Mapping)]
     if not rows:
         for step in ((result.get("composer_execution") or {}).get("steps") or []):

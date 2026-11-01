@@ -4,7 +4,7 @@
   "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
   "pass_": true,
   "cap": "python.software.repair.apply.verified.v1",
-  "ms": 1522,
+  "ms": 531,
   "world": {
    "add_fixed": true,
    "renamed": false,
@@ -12,7 +12,6 @@
     ".apply_repair_a.json",
     "__init__.cpython-311.pyc",
     "a.json",
-    "calc.cpython-311.pyc",
     "test_calc.cpython-311.pyc"
    ]
   },
@@ -23,16 +22,13 @@
   "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
   "pass_": true,
   "cap": "python.software.repair.apply.verified.v1",
-  "ms": 832,
+  "ms": 409,
   "world": {
    "add_fixed": true,
    "renamed": false,
    "new_files": [
-    ".apply_repair_typed_swe_report.json",
     "__init__.cpython-311.pyc",
-    "calc.cpython-311.pyc",
-    "test_calc.cpython-311.pyc",
-    "typed_swe_report.json"
+    "test_calc.cpython-311.pyc"
    ]
   },
   "reason": "None"
@@ -42,16 +38,13 @@
   "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
   "pass_": true,
   "cap": "python.software.repair.apply.verified.v1",
-  "ms": 739,
+  "ms": 320,
   "world": {
    "add_fixed": true,
    "renamed": false,
    "new_files": [
-    ".apply_repair_typed_swe_report.json",
     "__init__.cpython-311.pyc",
-    "calc.cpython-311.pyc",
-    "test_calc.cpython-311.pyc",
-    "typed_swe_report.json"
+    "test_calc.cpython-311.pyc"
    ]
   },
   "reason": "None"
@@ -61,13 +54,12 @@
   "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
   "pass_": true,
   "cap": "python.software.repair.apply.verified.v1",
-  "ms": 993,
+  "ms": 415,
   "world": {
    "add_fixed": true,
    "renamed": false,
    "new_files": [
     "__init__.cpython-311.pyc",
-    "calc.cpython-311.pyc",
     "test_calc.cpython-311.pyc"
    ]
   },
@@ -78,7 +70,7 @@
   "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
   "pass_": true,
   "cap": "python.refactor.rename_parameter.v1",
-  "ms": 911,
+  "ms": 164,
   "world": {
    "add_fixed": false,
    "renamed": true,
@@ -90,10 +82,10 @@
  },
  {
   "task": "rename_calls",
-  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+  "status": "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED",
   "pass_": false,
   "cap": null,
-  "ms": 183,
+  "ms": 83,
   "world": {
    "add_fixed": false,
    "renamed": false,
@@ -103,51 +95,51 @@
  },
  {
   "task": "write_test",
-  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
-  "pass_": false,
-  "cap": "chart.raster.axis_title_unit_binding.v1",
-  "ms": 115,
-  "world": {
-   "add_fixed": false,
-   "renamed": false,
-   "new_files": []
-  },
-  "reason": "ModuleNotFoundError:No module named 'PIL'"
- },
- {
-  "task": "explain_fail",
-  "status": "FAIL_CLOSED__WRITE_AUTHORITY_REFUSED",
-  "pass_": false,
-  "cap": "code.impact.tree_sitter.testselect.v1",
-  "ms": 53,
-  "world": {
-   "add_fixed": false,
-   "renamed": false,
-   "new_files": []
-  },
-  "reason": "Blocker:OUTPUT_OVERWRITES_A_STATED_SOURCE:output_path=canonical/astra_runtime/tmp/swe2/explain_fail/"
- },
- {
-  "task": "find_callers",
-  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
   "pass_": true,
-  "cap": "python.source.symbols.index.ast",
-  "ms": 159,
+  "cap": "python.swe.transform_and_synthesize.v1",
+  "ms": 42,
   "world": {
    "add_fixed": false,
    "renamed": false,
    "new_files": [
-    "typed_swe_report.json"
+    "test_util_cases.py"
    ]
   },
   "reason": "None"
  },
  {
-  "task": "extract_fn",
-  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "task": "explain_fail",
+  "status": "FAIL_CLOSED__CAPABILITY_REFUSED_DIAGNOSE_ARCHITECT_REFUSED",
   "pass_": false,
-  "cap": "python.software.request.semantic_behavior.compile.v1",
-  "ms": 65,
+  "cap": "software.analysis.diagnose_and_architect.v1",
+  "ms": 15,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "find_callers",
+  "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+  "pass_": true,
+  "cap": "python.source.symbols.index.ast",
+  "ms": 74,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "None"
+ },
+ {
+  "task": "extract_fn",
+  "status": "FAIL_CLOSED__CAPABILITY_REFUSED_REGION_INVALID",
+  "pass_": false,
+  "cap": "python.refactor.extract_function.v1",
+  "ms": 30,
   "world": {
    "add_fixed": false,
    "renamed": false,
@@ -157,36 +149,36 @@
  },
  {
   "task": "type_check",
-  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "status": "FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT",
   "pass_": false,
-  "cap": "python.contract.check.crosshair.v1",
-  "ms": 70,
+  "cap": "python.review.diff_type_gate.v1",
+  "ms": 53,
   "world": {
    "add_fixed": false,
    "renamed": false,
    "new_files": []
   },
-  "reason": "None"
+  "reason": "LocalExecutionFailure:ACTION_EXPECTATION_FAILED:gate:OBSERVED='PASS_BASELINE_ONLY'"
  },
  {
   "task": "lint",
-  "status": "FAIL_CLOSED__COMPOSED_STEP_RAISED_OUTCOME_UNKNOWN",
+  "status": "FAIL_CLOSED__REVIEW_RAN_AND_RETURNED_A_VERDICT",
   "pass_": false,
-  "cap": null,
-  "ms": 140,
+  "cap": "python.review.diff_static_triage.v1",
+  "ms": 60,
   "world": {
    "add_fixed": false,
    "renamed": false,
    "new_files": []
   },
-  "reason": "None"
+  "reason": "LocalExecutionFailure:ACTION_EXPECTATION_FAILED:gate:OBSERVED='PASS_SYNTAX_ONLY'"
  },
  {
   "task": "git_log",
-  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
-  "pass_": false,
-  "cap": "python.repository.acceptance.measure.v1",
-  "ms": 137,
+  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
+  "pass_": true,
+  "cap": "git.repository.operate.v1",
+  "ms": 18,
   "world": {
    "add_fixed": false,
    "renamed": false,
@@ -196,10 +188,23 @@
  },
  {
   "task": "git_commit",
-  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
+  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
   "pass_": false,
-  "cap": null,
-  "ms": 282,
+  "cap": "git.repository.operate.v1",
+  "ms": 49,
+  "world": {
+   "add_fixed": false,
+   "renamed": false,
+   "new_files": []
+  },
+  "reason": "GitOperateError:GIT_FAILED:commit -m wip --no-verify --quiet:On branch arena/3918bb60-brain\nChanges "
+ },
+ {
+  "task": "debug_test",
+  "status": "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED",
+  "pass_": false,
+  "cap": "python.tests.mutation_score.v1",
+  "ms": 85,
   "world": {
    "add_fixed": false,
    "renamed": false,
@@ -208,27 +213,11 @@
   "reason": "None"
  },
  {
-  "task": "debug_test",
-  "status": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED",
-  "pass_": true,
-  "cap": "python.patch.search.test_guided.ast.v1",
-  "ms": 984,
-  "world": {
-   "add_fixed": false,
-   "renamed": false,
-   "new_files": [
-    "__init__.cpython-311.pyc",
-    "calc.cpython-311.pyc"
-   ]
-  },
-  "reason": "None"
- },
- {
   "task": "profile",
-  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
-  "pass_": false,
-  "cap": "python.software.request.semantic_behavior.compile.v1",
-  "ms": 61,
+  "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+  "pass_": true,
+  "cap": "software.analysis.diagnose_and_architect.v1",
+  "ms": 15,
   "world": {
    "add_fixed": false,
    "renamed": false,
@@ -238,23 +227,23 @@
  },
  {
   "task": "multi_file",
-  "status": "FAIL__LIVE_CONTROLLER_EXECUTION",
+  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
   "pass_": false,
   "cap": "python.software.repair.loop.test_guided.ast.v1",
-  "ms": 78,
+  "ms": 54,
   "world": {
    "add_fixed": false,
    "renamed": false,
    "new_files": []
   },
-  "reason": "RepairLoopError:PATH_INVALID:c"
+  "reason": "None"
  },
  {
   "task": "dep_add",
-  "status": "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+  "status": "FAIL__RAW_GOAL_COMPILATION_GAP",
   "pass_": false,
-  "cap": "finance.saccr.credit.addon.v1",
-  "ms": 171,
+  "cap": null,
+  "ms": 523,
   "world": {
    "add_fixed": false,
    "renamed": false,

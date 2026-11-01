@@ -35,7 +35,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A sentence that states which revision to read was answered about a different revision and certified VERIFIED: rows: [], output_verified: True, PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED, while `git diff HEAD~1` had a hunk. The registry row declares no slot for a revision, declared_input_derivation_v1 has no binding for one, and swe_git_fixture_v1 seeds a single commit so the instrument cannot even ask the question.",
- "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
+ "canonical_base_commit": "68c3e9a5814d622a15b342aff408deba3f6a14b4",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -82,7 +82,7 @@
   "execution_guard/swe_capability_matrix_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
+  "canonical_base_commit": "68c3e9a5814d622a15b342aff408deba3f6a14b4",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "A_PLACEHOLDER_THAT_OUTRANKS_A_PROOF",
@@ -392,15 +392,15 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "a03b6307661566b4bf97fc12f074872e9eb36036",
+     "git_blob_sha": "ae9cb364054c94489ad4ff611d5e78846c42bfff",
      "path": "canonical/runtime/live_brain_route_admission_v1.py"
     },
     {
-     "git_blob_sha": "88e7f02269f4a9a97a21c19bae6a34e6c0e88d9c",
+     "git_blob_sha": "31cb818c7f16448234bb7282387f76bbb3943a2b",
      "path": "execution_guard/swe_advanced_probe_v1.py"
     },
     {
-     "git_blob_sha": "e989ba98af9f6fd069b6ba975095b8b5933893f1",
+     "git_blob_sha": "7c48659d98c66204258e9146e3e940db990074da",
      "path": "execution_guard/swe_capability_matrix_v1.py"
     },
     {

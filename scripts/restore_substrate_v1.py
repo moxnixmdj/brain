@@ -62,26 +62,29 @@ def install(requirements: pathlib.Path) -> None:
                     "--quiet", "-r", str(requirements)], cwd=ROOT, check=True)
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--check", action="store_true", help="verify only, install nothing")
-    ns = ap.parse_args()
+def verify() -> dict[str, object]:
+    """The whole substrate verdict as data, so an instrument can gate on it.
 
+    Split out of ``main()`` on 2026-11-01 because the census and the matrix were printing
+    capability numbers on an image that had none of these tools, and the only reader of this
+    fact was a human looking at a log line.  One owner of the measurement, two readers: this
+    script for people, ``execution_guard/substrate_precondition_v1.py`` for the instruments.
+    Nothing here installs; ``--check`` and the precondition both call it.
+    """
     good, missing = present()
-    if missing and not ns.check:
-        # Sequential on purpose: the manifest is hashed, the review tools are not.
-        install(KERNEL_MANIFEST)
-        install(REVIEW_TOOLS)
-        good, missing = present()
-
     binaries = [b for b in REQUIRED_BINARIES if not _which(b)]
-    print("SUBSTRATE  modules_present=%d/%d  binaries_missing=%s"
-          % (len(good), len(REQUIRED_MODULES), ",".join(binaries) or "none"))
+    state: dict[str, object] = {
+        "modules_present": len(good),
+        "modules_total": len(REQUIRED_MODULES),
+        "modules_missing": list(missing),
+        "binaries_missing": binaries,
+        "parser_installed": None,
+        "parser_expected": None,
+    }
     if missing:
-        print("  modules_missing:", ",".join(missing))
-        print("  verdict: SUBSTRATE_INCOMPLETE -- lanes that need these measure an ENVIRONMENT gap,")
-        print("           not a capability gap, and the matrix reports them as unmeasurable.")
-        return 1
+        state["verdict"] = "SUBSTRATE_INCOMPLETE"
+        state["ready"] = False
+        return state
     # Load the kernel's own declared identity last: it is the authority on the parser generation,
     # and a mismatched generation is exactly the failure this script exists to prevent.
     sys.path.insert(0, str(ROOT))
@@ -89,10 +92,38 @@ def main() -> int:
     import importlib.metadata as md
     have = md.version("tree-sitter")
     want = kernel.SUBSTRATE["tree_sitter"]
+    state["parser_installed"] = have
+    state["parser_expected"] = want
+    state["ready"] = have == want
+    state["verdict"] = "SUBSTRATE_READY" if have == want else "SUBSTRATE_INCOMPLETE"
+    return state
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true", help="verify only, install nothing")
+    ns = ap.parse_args()
+
+    if present()[1] and not ns.check:
+        # Sequential on purpose: the manifest is hashed, the review tools are not.
+        install(KERNEL_MANIFEST)
+        install(REVIEW_TOOLS)
+
+    state = verify()
+    print("SUBSTRATE  modules_present=%d/%d  binaries_missing=%s"
+          % (state["modules_present"], state["modules_total"],
+             ",".join(state["binaries_missing"]) or "none"))  # type: ignore[arg-type]
+    if state["modules_missing"]:
+        print("  modules_missing:", ",".join(state["modules_missing"]))  # type: ignore[arg-type]
+        print("  verdict: SUBSTRATE_INCOMPLETE -- lanes that need these measure an ENVIRONMENT gap,")
+        print("           not a capability gap, and the matrix reports them as unmeasurable.")
+        return 1
     print("  parser: installed=%s expected=%s %s"
-          % (have, want, "MATCH" if have == want else "MISMATCH"))
-    if have != want:
-        print("  verdict: SUBSTRATE_INCOMPLETE -- the kernel was harvested against %s" % want)
+          % (state["parser_installed"], state["parser_expected"],
+             "MATCH" if state["ready"] else "MISMATCH"))
+    if not state["ready"]:
+        print("  verdict: SUBSTRATE_INCOMPLETE -- the kernel was harvested against %s"
+              % state["parser_expected"])
         return 1
     print("  verdict: SUBSTRATE_READY")
     return RETURNCODE_OK
