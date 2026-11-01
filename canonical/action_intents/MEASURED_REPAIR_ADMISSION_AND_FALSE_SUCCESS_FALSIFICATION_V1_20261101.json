@@ -6,32 +6,15 @@
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
-  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
-  "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "",
-  "incremental_spend_usd": 0,
-  "laws_read_this_session": [
-   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
-   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
-   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
-   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
-   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
-   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
-   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
-   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
-   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
-   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
-   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-   "AGENTS.md"
-  ],
+  "earlier_routes_exhausted_reason": "The challenger routes were checked and resolved in the frontier: mutation testing and test-suite augmentation measure the suite afterwards, and LLM-based patch assessment needs a model call, which the standing zero-spend and zero-model-dependency constraints forbid.",
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "producer_cognition_model_dependency_count": 0,
-  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/runtime/declared_input_derivation_v1.py",
-   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+   "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+   "canonical/runtime/verifier_falsification_v1.py",
+   "canonical/verification/REPAIR_ADMISSION_KNOWN_COUNTEREXAMPLE_20261101_V1.json"
   ],
-  "route_class": "REUSE"
+  "route_class": "INTEGRATE"
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The closed-loop repair verifier, the skill qualification receipt and the grounded-action fallback each asserted a verdict (tests pass / held-out independence / action verified) that no check in the same call had computed, so the system could certify itself without evidence.",
@@ -49,29 +32,20 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "2869dbe14244527ba9025c898f3ba4a92ccbfacc",
+  "canonical_base_commit": "18519cd194a6890544073c7d5343946127a475cd",
   "constructive_gap_for_open_obligation_ids": [
-   "AUTOMATIONBENCH_GE_40",
-   "CHARTOGRAPHY_TOOLS_GE_89",
-   "CODING_CURSORBENCH_GE_57_8",
-   "CODING_FRONTIERCODE_GE_54_4",
    "CODING_TB4_GE_66_4",
-   "FINANCE_ACCOUNTING_INDEX_GE_61",
-   "FINANCE_AGENT_V2_GE_58_59",
-   "HLE_TOOLS_GE_67_7",
-   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
-   "OSWORLD_2_1_PARTIAL_GE_81_8",
-   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
-   "PROWORK_GDPVAL_GE_1846",
-   "TB_SCIENCE_GE_58_7"
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
   ],
   "expected_obligation_discharge_lcb": 0,
-  "expected_obligation_unlock_lcb": "0/13",
-  "interpretation": "One refused matrix case is missing grammar clause, not missing capability",
+  "expected_obligation_unlock_lcb": "1/10",
+  "highest_leverage_now": true,
+  "interpretation": "A forecast, not a measurement, and no benchmark row changed. Three coding obligations are gated by a closed-loop solver that returned REPAIRED_AND_VERIFIED for an edit which passed the visible tests without reading its inputs, and an external measurement (STING, 77% of SWE-bench Verified instances admit a surviving variant) says this failure mode is widespread, so a coding score taken through that solver does not establish the capability it is credited for. Removing the false-success mode is a precondition for those three obligations, not a discharge of them. The 1/10 unlock bound is an estimate and is recorded as one.",
   "open_obligation_ids": [],
   "scope_complete_discharge": false,
-  "stop_condition": "STOP when stated_git_operations Create a branch == (branch,) and metaphor is () and matrix git_branch REAL",
-  "success_probability_lcb": 0.95,
+  "stop_condition": "STOP when repair_input_dependency_gate_v1 refuses a two-file repair that reads neither input, when compile_and_qualify_skill refuses a replay as qualification, when grounded_action_v1.act refuses an absent stated path, and when verifier_falsification_v1 reports 0 bad rows.",
+  "success_probability_lcb": "9/10",
   "wall_clock_cost_ub": 1
  },
  "measured_effect": "Before: 0/5 honest repairs on the planted two-file bug, held-out 110.0/85.0 unchanged; qualification PASS with no held-out instance; caller database deleted; VERIFIED_ACTION on an absent path; registry unrunnable as a script, 4/96 readable. After: 5/5 honest repairs, held-out 100.0/295.0; qualification refused without a distinct held-out instance; database intact; absent path refused at admission; registry 95/98 proven able to fail, 0 bad, 3 untested. No tolerance widened.",
