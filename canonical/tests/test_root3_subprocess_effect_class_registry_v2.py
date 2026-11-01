@@ -6,9 +6,25 @@ from canonical.runtime import root3_subprocess_effect_class_registry_v2 as reg
 
 
 def test_current_registry_preserves_legacy_and_defaults_new_sites():
+    # 2026-11-01: re-measured on the current tree. All 18 legacy verified sites
+    # are accounted for: 17 still exist and are preserved with their legacy
+    # classes, 1 (sqlite_verify_cli.py:66) was discharged to in-process sqlite3
+    # and is recorded in the registry's disappearance provenance.
+    from canonical.runtime.root3_subprocess_effect_class_registry_v1 import EXPECTED
+    from canonical.runtime.root3_subprocess_effect_class_registry_v2 import (
+        _LEGACY_DISAPPEARANCE_PROVENANCE,
+        _norm_key,
+    )
     out = reg.compile_effect_classes()
     assert out["process_site_count"] >= out["legacy_verified_mapping_count"]
-    assert out["legacy_verified_mapping_count"] == 18
+    preserved = {
+        _norm_key(x["module_path"], int(x["lineno"]), x["source_api"]): x["effect_class"]
+        for x in out["classified_sites"]
+        if x["classification_provenance"] == "PRESERVED_LEGACY_VERIFIED_MAPPING"
+    }
+    assert len(preserved) == 17
+    assert preserved == {k: v for k, v in EXPECTED.items() if k not in _LEGACY_DISAPPEARANCE_PROVENANCE}
+    assert len(EXPECTED) == 18
     assert (
         out["legacy_verified_mapping_count"]
         + out["conservative_default_deny_count"]

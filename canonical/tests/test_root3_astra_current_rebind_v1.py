@@ -22,13 +22,17 @@ CURRENT = {
     ("canonical/runtime/astra_runtime.py", 1215, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
     ("canonical/runtime/astra_runtime.py", 5777, "subprocess.run"): "BOUND_CHILD_CODE_EXECUTION",
 }
+# 2026-11-01: current -> legacy line remap re-measured on this commit by
+# compiling the process universe: the same six semantic sites now sit at
+# 400 (run_shell), 862/940 (pip online/wheelhouse), 1408 (apt), 1769
+# (_goal_action child), 6539 (_verify_and_promote child).
 _ASTRA_LINE_REMAP = {
-    357: 325,
-    707: 595,
-    785: 673,
-    1051: 939,
-    1334: 1215,
-    5997: 5777,
+    400: 325,
+    862: 595,
+    940: 673,
+    1408: 939,
+    1769: 1215,
+    6539: 5777,
 }
 
 OLD_LINES = {263, 526, 604, 849, 864, 871, 1140, 5702}
@@ -36,7 +40,9 @@ OLD_LINES = {263, 526, 604, 849, 864, 871, 1140, 5702}
 
 def test_current_astra_blob_and_exact_eight_process_sites():
     astra = ROOT / ASTRA_REL
-    assert EXPECTED_ASTRA_BLOB == "0c613137b9c578c8afadb9482da08e2fc268deb7"
+    # 2026-11-01: rebound to the current blob aa91d571..., which the
+    # 2026-10-06/2026-10-11 verification receipts already pin as current.
+    assert EXPECTED_ASTRA_BLOB == "aa91d571a881d4ff97d30d2c1386fa10439434d9"
     assert git_blob_sha(astra) == EXPECTED_ASTRA_BLOB
     tree = ast.parse(astra.read_text(encoding="utf-8"), filename=ASTRA_REL)
     v = _Visitor(ASTRA_REL)

@@ -47,16 +47,25 @@ _LEGACY_LINE_REMAP: dict[str, dict[int, int]] = {
     },
     "canonical/runtime/astra_runtime.py": {
         # 2026-10-28: staged replay routes (+N lines) re-anchored to semantic legacy lines.
+        # 2026-11-01: re-measured against the current tree by compiling the process
+        # universe on this commit. Current subprocess.run sites in astra_runtime.py:
+        # 400 run_shell (ARBITRARY_COMMAND_EXECUTION -> legacy 325), 862 pip online
+        # and 940 pip wheelhouse plus 1408 sudo apt-get install (PACKAGE_ENV_MUTATION
+        # -> legacy 595/673/939 in file order), 1769 _goal_action child and 6539
+        # _verify_and_promote_acquisition child (BOUND_CHILD_CODE_EXECUTION ->
+        # legacy 1215/5777 in file order). Same semantic sites, shifted lines only.
         400: 325,
-        781: 595,
-        859: 673,
-        1309: 939,
-        1653: 1215,
-        6405: 5777,
+        862: 595,
+        940: 673,
+        1408: 939,
+        1769: 1215,
+        6539: 5777,
     },
     "canonical/runtime/bound_capabilities/yq_yaml_json.py": {23: 21},
     "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": {53: 32},
-    "canonical/runtime/bound_capabilities/python_test_audit.py": {136: 50},
+    # 2026-11-01: python_test_audit.py subprocess.run site re-measured at line 144
+    # (legacy 50, BOUND_CHILD_CODE_EXECUTION); comment reflow moved it from 136.
+    "canonical/runtime/bound_capabilities/python_test_audit.py": {144: 50},
 }
 
 # Legacy pins whose semantic obligation is discharged by refactor on #6300:

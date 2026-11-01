@@ -11,7 +11,11 @@ WRAPPER = "canonical/runtime/astra_mediated_runtime_v1.py"
 MONITOR = "canonical/runtime/material_effect_reference_monitor_v1.py"
 
 EXPECTED_BLOBS = {
-    ASTRA: "0c613137b9c578c8afadb9482da08e2fc268deb7",
+    # 2026-11-01: astra_runtime.py rebound to the current blob
+    # aa91d571a881d4ff97d30d2c1386fa10439434d9 (already pinned as current by the
+    # 2026-10-06/2026-10-11 verification receipts). Signatures, channels and
+    # sinks re-measured unchanged on the same date.
+    ASTRA: "aa91d571a881d4ff97d30d2c1386fa10439434d9",
     WRAPPER: "eec2aaf7076e3bd2374ee581e498554d08a8dcce",
     MONITOR: "5abf7d4ee927c9b8084eaee08b9e86e28d88aa54",
 }

@@ -25,9 +25,28 @@ class ReadOnlyDeclaredQueryExecutorV2Tests(unittest.TestCase):
         return {"allowed": True, "authorization_sha256": "a" * 64}
 
     def test_supported_set_is_exact_current_read_only_class(self):
-        current = {k for k,v in EXPECTED.items() if v == "READ_ONLY_DECLARED_QUERY"}
-        self.assertEqual(len(current), 5)
-        self.assertEqual(set(ro.SUPPORTED), current | set(ro.APT_SUPPORTED))
+        # 2026-11-01: re-measured on the current tree. The executor supports
+        # the four current file-query sites (current line numbers; the legacy
+        # sqlite_verify_cli.py:66 site was discharged to in-process sqlite3)
+        # plus the three apt-cache discovery profiles. Every file-query entry
+        # must normalize to a legacy READ_ONLY_DECLARED_QUERY key.
+        from canonical.runtime.root3_subprocess_effect_class_registry_v2 import _norm_key
+        file_query = {
+            ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py", 53, "subprocess.run"),
+            ("canonical/runtime/bound_capabilities/jq_query.py", 41, "subprocess.run"),
+            ("canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py", 44, "subprocess.run"),
+            ("canonical/runtime/bound_capabilities/yq_yaml_json.py", 23, "subprocess.run"),
+        }
+        apt = {
+            ("canonical/runtime/capability_discovery.py", 267, "subprocess.run"),
+            ("canonical/runtime/capability_discovery.py", 359, "subprocess.run"),
+            ("canonical/runtime/capability_discovery.py", 368, "subprocess.run"),
+        }
+        self.assertEqual(set(ro.APT_SUPPORTED), apt)
+        self.assertEqual(set(ro.SUPPORTED) - apt, file_query)
+        legacy_ro = {k for k, v in EXPECTED.items() if v == "READ_ONLY_DECLARED_QUERY"}
+        for key in file_query:
+            self.assertIn(_norm_key(*key), legacy_ro)
 
     def _ctx(self, line, argv, timeout):
         return {

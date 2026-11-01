@@ -16,19 +16,28 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 ASTRA_REL = "canonical/runtime/astra_runtime.py"
 C1_VERIFY_REL = "canonical/verification/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_DELTA_VERIFICATION_20261005_V5.json"
-EXPECTED_ASTRA_BLOB = "0c613137b9c578c8afadb9482da08e2fc268deb7"
+# 2026-11-01: rebound to the current astra_runtime.py blob
+# aa91d571a881d4ff97d30d2c1386fa10439434d9, which the 2026-10-06/2026-10-11
+# verification receipts already pin as the current byte identity. Older blobs
+# stay allowed as history.
+EXPECTED_ASTRA_BLOB = "aa91d571a881d4ff97d30d2c1386fa10439434d9"
 _ALLOWED_ASTRA_BLOBS = {
     "15dd59ad644c5c73a9218dba4fcc17f880d725f0",
     "85977747574cf7f393ca22a2c65268ed283ab3fe",
     "0c613137b9c578c8afadb9482da08e2fc268deb7",
+    "aa91d571a881d4ff97d30d2c1386fa10439434d9",
 }
+# 2026-11-01: current -> legacy line remap re-measured by compiling the process
+# universe on this commit. Same six semantic sites as the legacy registry, at
+# current lines: run_shell 400, pip online 862, pip wheelhouse 940, sudo apt-get
+# 1408, _goal_action child 1769, _verify_and_promote_acquisition child 6539.
 _ASTRA_LINE_REMAP = {
-    357: 325,
-    707: 595,
-    785: 673,
-    1051: 939,
-    1334: 1215,
-    5997: 5777,
+    400: 325,
+    862: 595,
+    940: 673,
+    1408: 939,
+    1769: 1215,
+    6539: 5777,
 }
 EXPECTED_C1_VERIFY_BLOB = "519f02995f6ff7cb344cecab1d4a9a5615e6b36e"
 SNAPSHOT_REL = "canonical/runtime/apt_metadata_snapshot_v1.py"
@@ -107,6 +116,32 @@ _ALLOWED_C1_MODULE_BLOBS = {
     "canonical/runtime/goal_compiler.py": "983126e65544efa098870afb8cc69898652dcc4c",
     "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py": "f2d96dd40c01cde214443108fe5f9f372cf04444",
     "canonical/runtime/continuous_obs_runtime.py": "45ffa99025b733e500d42c823b7b633d706c13f0",
+    # 2026-11-01: re-anchored to current blobs measured with git hash-object on
+    # this commit. The child-process surface over the 48 scanned paths was
+    # re-measured at the same time: 18 call sites (17 run + 1 popen), 0 forbidden
+    # APIs, unchanged from the C1 delta record -- only line numbers and module
+    # identities shifted (e.g. capability_discovery lost its apt-cache children
+    # to in-process lookups; pdf_ocr_tesseract gained the positioned OCR child).
+    "canonical/runtime/capability_proposal_generators.py": "e3b72f8c36f02c20168f1e20dafa301ee2450fca",
+    "canonical/runtime/capability_planner.py": "66eab76f2b17287f9c421468d71d552bb0aaed04",
+    "canonical/runtime/capability_discovery.py": "c719aea0c6866b07301212f27039bcf86cba1e28",
+    "canonical/runtime/goal_compiler.py": "4aaf9eadea741d3aa011a30f90fb9fad97a221f8",
+    "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py": "de34a0d30fba1af3b8fccde52733ea250c5d4111",
+    "canonical/runtime/bound_capabilities/grounded_executable_composition.py": "d0e5555c084993878fefc9901afe4e75ec78e872",
+    "canonical/runtime/bound_capabilities/grounded_executable_composition_verify.py": "52d4f5cd8dc52fe6bc79ce528c78f18116bf386c",
+    "canonical/runtime/auto_capability_acquisition.py": "e9633e3a3e8f8e9b82f5d661448ae5c79cd20bb2",
+    "canonical/runtime/auto_python_source_codec_acquisition.py": "1cc85f698e329fa27d7c2d13e22d110b52d2ec3f",
+    "canonical/runtime/bound_capabilities/archive_tarfile.py": "5aa3c85c69858ab44df1174d6d4f5f84868106dc",
+    "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": "9d062ffb163714e2730874e88b2591942493c668",
+    "canonical/runtime/bound_capabilities/cli_command.py": "56c325e9d6792c6b5a3779e13ea3fa5b9bd4994a",
+    "canonical/runtime/bound_capabilities/docx_verify_ooxml_intent.py": "e33c062a755a1776b12c6774de7d33ecaecd4792",
+    "canonical/runtime/bound_capabilities/objective_relevance_bm25.py": "409d7b9d9b7b7d0073126f7ea348db499e02b6c8",
+    "canonical/runtime/bound_capabilities/python_source_audit.py": "dfa3b30f262ed8f667913ebf37a4d822de7f48ab",
+    "canonical/runtime/bound_capabilities/python_test_audit.py": "044bb3536a1b0bf8dfd2806e7a342f444745f255",
+    "canonical/runtime/bound_capabilities/sqlite_table_stdlib.py": "01456e7161f9e7a66f4be90752c196873a247025",
+    "canonical/runtime/bound_capabilities/sqlite_verify_cli.py": "00068ec92df212cbea43a15bbd882cf54ff8e50f",
+    "canonical/runtime/bound_capabilities/xlsx_table_xlsxwriter.py": "f10e1bbcba48276473c2ab6f6ab2452c7cc7705c",
+    "canonical/runtime/bound_capabilities/yq_yaml_json.py": "57228021778bb17de535104a0b9940e5b4bb331a",
 }
 
 
@@ -194,7 +229,12 @@ def compile_registry(root: Path = ROOT) -> dict[str, Any]:
         raise ChildProcessRegistryError(
             f"PROCESS_API_COUNT_DRIFT:run={run_count}:popen={popen_count}"
         )
-    if len(modules_with_children) != 12:
+    # 2026-11-01: re-measured 11 modules with children on the current tree
+    # (capability_discovery.py no longer spawns; its apt lookups are in-process).
+    # The call-site totals above (18 rows, 17 run, 1 popen) are unchanged from
+    # the C1 delta, so no process site appeared or vanished -- only ownership
+    # moved between modules.
+    if len(modules_with_children) != 11:
         raise ChildProcessRegistryError(
             "CHILD_PROCESS_MODULE_COUNT_DRIFT:" + str(len(modules_with_children))
         )

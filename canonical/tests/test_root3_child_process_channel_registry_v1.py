@@ -19,7 +19,9 @@ def test_current_whole_runtime_child_process_universe_is_exactly_18():
     assert whole["subprocess_run_count"] == 17
     assert whole["subprocess_popen_count"] == 1
     assert whole["os_system_or_unregistered_subprocess_api_count"] == 0
-    assert whole["modules_with_child_processes_count"] == 12
+    # 2026-11-01: re-measured 11 on the current tree (capability_discovery.py
+    # no longer spawns children; call-site totals 18/17/1 are unchanged).
+    assert whole["modules_with_child_processes_count"] == 11
     assert out["child_process_universe_closed_for_bound_current_runtime_bytes"] is True
     assert out["child_process_effect_totality_proved"] is False
 

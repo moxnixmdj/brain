@@ -28,12 +28,23 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
     def allow(self, request):
         return {"allowed": True, "authorization_sha256": "a" * 64}
 
-    def test_supported_subset_is_exactly_five_of_current_eight(self):
-        current={k for k,v in EXPECTED.items() if v=="READ_ONLY_DECLARED_QUERY"}
-        self.assertEqual(len(current),5)
-        self.assertEqual(len(ro.SUPPORTED),5)
-        self.assertTrue(set(ro.SUPPORTED).issubset(current))
-        self.assertEqual(len(current-set(ro.SUPPORTED)),0)
+    def test_supported_subset_is_exactly_the_current_read_only_sites(self):
+        # 2026-11-01: re-measured on the current tree. The five legacy
+        # READ_ONLY_DECLARED_QUERY keys normalize (current->legacy remap) to
+        # tar:32, jq:41, tesseract:44, yq:21 and sqlite:66; sqlite_verify_cli.py
+        # no longer spawns a child (in-process sqlite3, see effect-class
+        # registry v2 disappearance provenance), so four current sites remain,
+        # at current lines tar:53, jq:41, tesseract:44, yq:23.
+        current_sites={
+            ("canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",53,"subprocess.run"),
+            ("canonical/runtime/bound_capabilities/jq_query.py",41,"subprocess.run"),
+            ("canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",44,"subprocess.run"),
+            ("canonical/runtime/bound_capabilities/yq_yaml_json.py",23,"subprocess.run"),
+        }
+        legacy_ro={k for k,v in EXPECTED.items() if v=="READ_ONLY_DECLARED_QUERY"}
+        self.assertEqual(len(legacy_ro),5)
+        self.assertEqual(set(ro.SUPPORTED),current_sites)
+        self.assertEqual(len(ro.SUPPORTED),4)
 
     def test_target_is_nested_inside_namespace_wrapper_not_raw_spawn(self):
         import base64
@@ -72,7 +83,12 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
               "args":(["sqlite3","-json",str(db),"UPDATE x SET y=1"],),
               "kwargs":{"text":True,"capture_output":True,"timeout":60},
             }
-            with self.assertRaisesRegex(ro.ReadOnlyQueryDenied,"MUTATING_OR_UNKNOWN_SQL"):
+            # 2026-11-01: sqlite_verify_cli.py was refactored to in-process
+            # sqlite3 and no longer has a subprocess call site, so a request
+            # citing the removed legacy site is now denied at callsite lookup
+            # (fail-closed, still before any spawn) instead of at the SQL
+            # shape check. The no-spawn property below is unchanged.
+            with self.assertRaisesRegex(ro.ReadOnlyQueryDenied,"READ_ONLY_QUERY_CALLSITE_NOT_YET_SUPPORTED"):
                 ex(ctx)
         self.assertEqual(calls,[])
 
@@ -88,7 +104,7 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
               "effect_class":"READ_ONLY_DECLARED_QUERY",
               "callsite":{
                 "module_path":"canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py",
-                "lineno":32,"process_api":"subprocess.run",
+                "lineno":53,"process_api":"subprocess.run",
               },
               "args":(["tar","-tzf",str(archive)],),
               "kwargs":{"text":True,"capture_output":True,"timeout":60},
@@ -149,7 +165,7 @@ class ReadOnlyLocalFileExecutorTests(unittest.TestCase):
               "effect_class":"READ_ONLY_DECLARED_QUERY",
               "callsite":{
                 "module_path":"canonical/runtime/bound_capabilities/yq_yaml_json.py",
-                "lineno":21,"process_api":"subprocess.run",
+                "lineno":23,"process_api":"subprocess.run",
               },
               "args":(["yq",".",str(y)],),
               "kwargs":{"cwd":root,"text":True,"capture_output":True,"timeout":60},
