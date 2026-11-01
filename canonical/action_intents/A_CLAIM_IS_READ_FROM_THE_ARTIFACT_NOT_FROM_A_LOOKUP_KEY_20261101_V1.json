@@ -38,7 +38,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Both answers were derived from a lookup -- an exception's class, a package's name -- instead of from the datum the answer is about: the key the adapter raised and the version the sentence pinned. Each was still certified, because the layer that certifies reads the verdict, not the evidence.",
-  "canonical_base_commit": "05762527e13e2d3345032f9b365df17b661c781f",
+  "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -53,7 +53,7 @@
   "incremental_spend_usd": 0,
   "intent": "Classify by the artifact: the key the adapter named, the version the sentence pinned.",
   "load_bearing_primary": {
-    "canonical_base_commit": "05762527e13e2d3345032f9b365df17b661c781f",
+    "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -89,7 +89,7 @@
   ],
   "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
   "recursive_obs": {
-    "canonical_base_commit": "05762527e13e2d3345032f9b365df17b661c781f",
+    "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
