@@ -29197,7 +29197,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
-    "source_sha256": "d98529458f96c17f8ae00436366cb1930a2391b5fb45ad0bc0fc0c88de6a303a",
+    "source_sha256": "16f94c827cb8d0de5aa9d92b620fcb379d4fab327cc5c864e0d37c33c4734d0f",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -30877,7 +30877,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "571e9a9cadc2889946891125e5946b5e67e86099e88a91b0f0c1974be6051457"
+  "value": "14f1cdf6317d862348c9c7329270281fa451e9afa535edbbbb28b887e9f1ba0c"
  },
  "engines": [
   {
@@ -60002,20 +60002,22 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 4647,
+   "bytes": 5098,
    "headings": [
     "SWE reuse validation — 2026-11-01",
     "Scope",
     "Counterexamples and tests",
     "Latest measurements and limits",
-    "Reuse sources"
+    "Reuse sources",
+    "Final integrated regression readback"
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_REUSE_VALIDATION_20261101.md",
-   "sha256": "b02695d2d51c0b7055714ab01c1b3e0079f2a79987bb0c880a351e0b2c1b4499",
+   "sha256": "aa4e709621882d2e4e3db205797509f06432c79a3be793dee2fc459008bf34ea",
    "summary": "Authority: NONE. Model-assisted development; regression results are not independent capability, benchmark, ownership or terminal credit.",
    "terms": {
     "10": 2,
+    "28": 3,
     "advanced": 2,
     "ambiguous": 3,
     "api": 3,
@@ -60030,37 +60032,36 @@
     "caller": 2,
     "cannot": 2,
     "capability": 2,
-    "case": 2,
-    "claim": 2,
-    "code": 2,
-    "compiler": 2,
-    "controls": 4,
-    "count": 2,
+    "controls": 5,
     "cpython": 5,
-    "current-tree": 2,
     "existing": 4,
-    "explicit": 2,
     "explicitly": 3,
     "failures": 3,
-    "file": 2,
-    "final": 2,
-    "found": 2,
+    "final": 5,
     "github.com": 6,
     "https": 6,
+    "including": 3,
+    "integrated": 4,
     "main": 3,
     "named": 3,
     "no": 5,
     "not": 11,
-    "only": 3,
-    "passes": 8,
+    "official": 3,
+    "only": 4,
+    "pass": 3,
+    "passes": 9,
     "pickle": 4,
     "public": 3,
     "python": 4,
     "real": 3,
+    "regression": 3,
     "removal": 5,
+    "results": 3,
     "reuse": 4,
     "scope": 6,
-    "subtests": 3,
+    "seconds": 3,
+    "subtests": 4,
+    "surface": 3,
     "swe": 3,
     "tests": 3
    },
@@ -60333,7 +60334,7 @@
   "included_source_count": 1021,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b06977cf56e4cf3af5306d077e8e6d242a523d08fd63e050ca584bfc2d276108"
+  "source_tree_digest": "75ba8fe11e5a81e317a0c69db1ef4d62dd33dd1520fc646243cc5851cdd618a5"
  },
  "research_index": [
   {
@@ -211643,7 +211644,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SWE_CONTENT_SCOPE_AND_API_REUSE_20261101_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "46a6245284db8647dfe34ae36095b3e2ecf6ccc54ffbbbaecb51588f4dfda78d",
+   "sha256": "41e5768f43cad7efc1101bca70be471c51748159b5c331aaa32012336b808b06",
    "status": "",
    "terms": {
     "20261101": 1,

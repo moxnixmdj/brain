@@ -30,3 +30,7 @@ Only the exact tested scope is claimed. No proof of universal optimality, speed 
 ## Reuse sources
 
 CPython's [pickle warning](https://github.com/python/cpython/blob/main/Doc/library/pickle.rst) explicitly disallows loading untrusted pickle bytes; the repair removes that path. [hashlib](https://github.com/python/cpython/blob/main/Lib/hashlib.py) supplies content identity already reused elsewhere in Brain. A bounded GitHub repository search found [DiskCache](https://github.com/grantjenks/python-diskcache) and [ring](https://github.com/youknowone/ring); adding a caching package is unnecessary for this bounded in-process count cache. Community search included [shelve corruption](https://github.com/python/cpython/issues/91228) and a [proposed pickle REDUCE interception hook](https://github.com/python/cpython/issues/153347). These are acquisition-time sources only, not runtime producers or independent verification of this patch.
+
+## Final integrated regression readback
+
+The final integrated pass (including named-removal controls) reports **321 passes, 5 subtests** in 28.57 seconds. The unchanged surface census reaches **28/28** with `--floor 28`. Load-bearing admission and the current-base drift guard both pass. Native evidence is refreshed only through the official remeasurement tool. The final generated-model and signed-referee results are reported in the pull request.

@@ -46881,7 +46881,7 @@
     },
     "solve": {
      "doc": "Public entry: explicit structured obligations can never be ignored.",
-     "passing_cases": 29,
+     "passing_cases": 30,
      "signature": {
       "params": [
        "request"
@@ -46987,11 +46987,12 @@
      "tier": "TEST_EVIDENCED"
     }
    },
-   "sha256": "fc03bf5ea79e4ed25575ec18caaba34a320febefd0a168b6e6a225348c023931",
+   "sha256": "7176e6da3da8cacc0f59bf1ac17c7d2f14dd44736124509f30315691d8de65a2",
    "tests": {
     "canonical/tests/test_a_revision_is_a_value_not_a_topic_v1.py": "18cab48f0060699348643d357e2c371f086cd4192dee412bb2fb66a96b66d162",
     "canonical/tests/test_a_row_declares_only_what_it_implements_v1.py": "5e9f773cecbe39f0efc7145d95c878b1ff7164b5576416743ff5026b245eab31",
     "canonical/tests/test_diagnosis_source_and_test_roles_v1.py": "3abeb789b32c84c76d81f8b78fc1960041b30cba7bbad692e5c31db9d961146c",
+    "canonical/tests/test_swe_cache_and_scope_reuse_v1.py": "80d541812deaef02e5d1d1705994b7f32135ca27c2233ccba3ae15d101831242",
     "canonical/tests/test_swe_intent_scope_regressions_v1.py": "7c8b06d1ea8cc6712bc9c14a644c3d98b4cc37150d9511c1e19c295862d97b15",
     "canonical/tests/test_swe_typed_plan_v1.py": "1cc0be72c1e9995d0016d192f53ec04ce0ef27ece1376b5393bfae612b886918",
     "canonical/tests/test_the_write_lane_runs_the_capability_the_sentence_asked_for_v1.py": "78aa784aaabbb28ada352e0bf9a79a2b3b28f3ea1e17d9c916725a5fd282fa3e"
@@ -97792,12 +97793,10 @@
  },
  "remeasurement": {
   "authority": "NONE__SANDBOX_MEASUREMENT_OF_EXISTING_TESTS_NOT_A_TRUE_CAPABILITY_RECEIPT",
-  "junit_cases_observed": 318,
+  "junit_cases_observed": 321,
   "measured_platform": "linux",
   "measured_python": "3.11",
   "modules": [
-   "canonical/runtime/goal_compiler.py",
-   "canonical/runtime/goal_front_compiler_v1.py",
    "canonical/runtime/live_brain_route_admission_v1.py"
   ],
   "refused": [],
