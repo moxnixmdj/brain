@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6612,
+  "research_index_records": 6614,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 430,
-  "source_index_modules": 1906
+  "source_index_modules": 1907
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6ef62cc1a39e12fb0665ef42c29faf471026ad3b5bfebc7285169fbc82b7e0e8"
+  "value": "fe97648074630723386e7757c0fdc7552125ba3f2d8d7996fa3f97a97ac81b97"
  },
  "engines": [
   {
@@ -148844,6 +148844,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/HARD_SLICE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/HARD_SLICE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "a51dc400295f9c121f0543c651a0fe6f7a5425c5346619098a3c2369092cd5d2",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "hard": 1,
+    "known": 1,
+    "slice": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-05",
    "id": "research:canonical/verification/HIDDEN_EVALUATOR_MONOTONE_COUPLING_WOLFRAM_VERIFICATION_20261005_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -210279,6 +210298,51 @@
    }
   },
   {
+   "action_id": "EXTERNAL_HARD_SLICE_LETS_A_REFUSAL_LIFT_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/EXTERNAL_HARD_SLICE_LETS_A_REFUSAL_LIFT_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/EXTERNAL_HARD_SLICE_LETS_A_REFUSAL_LIFT_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "87d84390a1d712fcf46541bac157b477b4d9560b757d2a83c348f95d8402ed4d",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "acceptance": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "attempts": 2,
+    "becomes": 1,
+    "benchmark": 1,
+    "blocks": 1,
+    "but": 1,
+    "cage": 1,
+    "change": 1,
+    "chooses": 1,
+    "escapable": 1,
+    "escape": 1,
+    "evidence": 1,
+    "external": 1,
+    "external_hard_slice_lets_a_refusal_lift_v1_20261102": 1,
+    "gate": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hard": 1,
+    "honest": 2,
+    "ledger": 1,
+    "lets": 1,
+    "lift": 2,
+    "measures": 1,
+    "moves": 1,
+    "need": 1,
+    "needed": 1,
+    "no": 1,
+    "none": 1,
+    "overconfidence": 2,
+    "refusal": 3,
+    "system": 2
+   }
+  },
+  {
    "action_id": "FAIL_CLOSED_MEANS_THE_WORLD_IS_UNCHANGED_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -240544,6 +240608,45 @@
     "repeat": 1,
     "score_effect": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/external_hard_slice_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/external_hard_slice_v1.py",
+   "sha256": "018c8f0a69607adcb2ebd441b5ab5dc69e9de62bc5e5cf6f9911b80f9eb3d498",
+   "summary": "The hard slice: work chosen by evidence the system does not get to curate.",
+   "symbol_count": 6,
+   "symbols": [
+    "Candidate",
+    "SliceError",
+    "_settled",
+    "candidates",
+    "run",
+    "select"
+   ],
+   "terms": {
+    "candidate": 1,
+    "candidates": 1,
+    "chosen": 1,
+    "curate": 1,
+    "evidence": 1,
+    "external": 1,
+    "get": 1,
+    "hard": 2,
+    "not": 1,
+    "run": 1,
+    "select": 1,
+    "settled": 1,
+    "slice": 2,
+    "sliceerror": 1,
+    "system": 1,
+    "v1": 1,
+    "work": 1
    }
   },
   {
