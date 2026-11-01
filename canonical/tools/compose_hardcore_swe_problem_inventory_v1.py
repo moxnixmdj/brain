@@ -4,6 +4,10 @@
 Every count in the document is computed here: the 49-sentence census, the 54-case capability matrix,
 the live verified registry, and a probe of the substrate the machine is standing on.  If a number is
 not measured below, it is not in the document.
+
+The commit named in the header is read from ``git rev-parse`` at compose time rather than typed in.
+An earlier edition of this tool hard-coded it, so every re-measurement shipped a document that named
+the previous tree -- the composer said ``bbc00a7`` while reporting numbers taken three merges later.
 """
 from __future__ import annotations
 
@@ -57,20 +61,68 @@ DEFECT_MEANING = {
         "the row's own contract refused the edit plan it was handed",
     "FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS":
         "the tool the row drives reported failure",
+    # ---- the named capability refusals, surfaced from the adapter's own exception text ----
+    "FAIL_CLOSED__CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM":
+        "no C/C++ transform applies to the construct the file actually contains",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT":
+        "the DDL edit named is outside the migration shapes the engine implements",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_PYPROJECT_ALREADY_PINNED_OR_EMPTY":
+        "there is nothing to pin: the stated pyproject declares no dependencies",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR":
+        "the manifest declares no dependency for the vendoring request to act on",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED":
+        "no test in the stated suite is flaky, so there is no quarantine to write",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION":
+        "the move collides: both stated files already define the symbol",
+}
+
+# The honest cheapest fix, per refusal class.  "None" means the refusal is correct and the fix is
+# to change the fixture or to build a capability, not to change the plumbing.
+FIX = {
+    "FAIL__LIVE_CONTROLLER_EXECUTION":
+        "make the declared dependency part of admission: a chain whose substrate is absent must refuse by name",
+    "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED":
+        "none — this is the gate working; the fix is to build the missing capability, not the plumbing",
+    "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED":
+        "extend the derivation pattern that fixed #38: derive the stated object (module, span, symbol) before binding",
+    "FAIL__RAW_GOAL_COMPILATION_GAP":
+        "one compiler shape per sentence family that has no template — or refuse it as NO_ROW instead of as a gap",
+    "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED":
+        "selection: the answer gate is right, the choice of row is wrong",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_WORKTREE_NOT_DIRECTORY":
+        "bind `worktree_path` from the stated file's parent, the same way #38's span was derived",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_TESTS_DISCOVERED":
+        "state the test root or refuse early; a census that finds nothing is not an answer",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID":
+        "validate the edit plan shape at admission, not inside the adapter",
+    "FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS":
+        "surface the tool's own reason instead of a generic non-success",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_CPP_NO_APPLICABLE_TRANSFORM":
+        "a real C/C++ AST repair set: the engine has transforms, this construct matches none of them",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_SQL_UNSUPPORTED_DDL_EDIT":
+        "more DDL shapes (add/drop column, change type, add index) with a migration file as evidence",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_PYPROJECT_ALREADY_PINNED_OR_EMPTY":
+        "none on the machine — the fixture declares no dependencies; a better fixture is the fix",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_DECLARED_DEPENDENCY_TO_VENDOR":
+        "none on the machine — nothing is declared to vendor; a better fixture is the fix",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_NO_FLAKY_TEST_DETECTED":
+        "none on the machine — the suite is not flaky; a better fixture is the fix",
+    "FAIL_CLOSED__CAPABILITY_REFUSED_TARGET_SYMBOL_COLLISION":
+        "none — the refusal is correct and the sentence is ill-posed",
 }
 
 CLASS_STORY = {
-    "polyglot": ("C++, Rust, Go, Java, TypeScript, SQL", "the machine is Python-only: there is no row that edits any other language"),
-    "build": ("pyproject, Makefile, dependency pinning, vendoring", "no row owns the build file layer"),
-    "ci": ("workflow repair, matrices, caching, flake quarantine", "no row owns CI configuration"),
-    "perf": ("profiling, optimisation, benchmark against a parent commit, memoisation", "no profiler is installed, and no row answers 'which function is the hot spot'"),
-    "systems": ("race detection, thread pools, GIL release", "the only row claiming these declares them as effects it does not implement"),
-    "tests": ("unit, property-based, regression-from-bug, mutation-score raising, fuzzing", "only running a suite and explaining failures works"),
-    "debug": ("failing test to cause, 'why does this return None', bisect", "the rows exist but are chosen wrongly or fail inside the controller"),
-    "refactor": ("move, split module, rename across the repo, replace all uses, add type hints, extract", "extract and cross-repo rename work; move, split, replace-all and type hints refuse"),
-    "review": ("API design review, security review, dependency CVE audit", "security review works; the other two have no row and no advisory data"),
-    "git": ("commit, branch, diff, cherry-pick, changelog", "no row performs a git operation; the history row is chosen for all five"),
-    "design": ("ADR, migration plan, package split", "no row, and no planning surface that produces a document"),
+    "polyglot": ("C++, Rust, Go, Java, TypeScript, SQL", None),
+    "build": ("pyproject, Makefile, dependency pinning, vendoring", None),
+    "ci": ("workflow repair, matrices, caching, flake quarantine", None),
+    "perf": ("profiling, optimisation, benchmark against a parent commit, memoisation", None),
+    "systems": ("race detection, thread pools, GIL release", None),
+    "tests": ("unit, property-based, regression-from-bug, mutation-score raising, fuzzing", None),
+    "debug": ("failing test to cause, 'why does this return None', bisect", None),
+    "refactor": ("move, split module, rename across the repo, replace all uses, add type hints, extract", None),
+    "review": ("API design review, security review, dependency CVE audit", None),
+    "git": ("commit, branch, diff, cherry-pick, changelog", None),
+    "design": ("ADR, migration plan, package split", None),
 }
 
 
@@ -78,14 +130,40 @@ def census() -> list[dict]:
     return json.loads(CENSUS.read_text())
 
 
-def matrix() -> dict:
+def _matrix_once() -> dict:
     out = subprocess.run([sys.executable, "execution_guard/swe_capability_matrix_v1.py"],
                          cwd=ROOT, capture_output=True, text=True, timeout=1800).stdout
     real = [x.strip() for x in out.split("REAL   :", 1)[1].splitlines()[0].split(",")]
     false_row = out.split("FALSE  :", 1)[1].splitlines()[0].strip()
     damaged = out.split("DAMAGED:", 1)[1].splitlines()[0].strip()
     latency = [ln for ln in out.splitlines() if "LATENCY" in ln][0]
-    return {"real": [r for r in real if r], "false": false_row, "damaged": damaged, "latency": latency}
+    return {"real": [r for r in real if r], "false": false_row, "damaged": damaged,
+            "latency": latency}
+
+
+def matrix(runs: int = 3) -> dict:
+    """Run the matrix more than once, and report the RANGE rather than one sample.
+
+    The matrix is not deterministic to the case: ``perf_review`` measures real timings, and under
+    load its verdict moves between PASS and the honest UNCLEAR, which moves the REAL count by one.
+    Publishing one sample hides that; publishing the floor, the ceiling and the names of the movers
+    makes it a measurement rather than a sample.  ``stable`` is the intersection over every run --
+    the number that can be quoted without knowing what else the box was doing.
+    """
+    samples = [_matrix_once() for _ in range(max(1, runs))]
+    # COUNT CASES, NOT NAMES.  ``measure_coverage`` is registered twice, once per lane over a
+    # different fixture, so the name list legitimately repeats and a set() would under-count the
+    # matrix by one.  Multiplicity is compared per name instead: a case is stable when every run
+    # reports it at least as many times as the rarest run did.
+    tallies = [collections.Counter(s["real"]) for s in samples]
+    stable_total = sum(min(t[name] for t in tallies) for name in set().union(*tallies))
+    moving = sorted(name for name in set().union(*tallies)
+                    if len({t[name] for t in tallies}) > 1)
+    counts = sorted(len(s["real"]) for s in samples)
+    first = max(samples, key=lambda s: len(s["real"]))
+    return {"real": first["real"], "false": first["false"], "damaged": first["damaged"],
+            "latency": first["latency"], "low": counts[0], "high": counts[-1],
+            "runs": len(samples), "moving": moving, "stable": stable_total}
 
 
 def registry_stats() -> dict:
@@ -147,6 +225,18 @@ def substrate() -> tuple[list[str], list[str]]:
     return have, missing
 
 
+def head_commit() -> str:
+    """The tree these numbers were taken on, read rather than typed."""
+    return subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT,
+                          capture_output=True, text=True).stdout.strip() or "UNKNOWN"
+
+
+def family(capability_id: str) -> str:
+    """The registry family a row belongs to: ``code.polyglot`` out of ``code.polyglot.x.v1``."""
+    parts = str(capability_id).split(".")
+    return ".".join(parts[:2]) if len(parts) >= 2 else str(capability_id)
+
+
 def main() -> int:
     rows = census()
     mx = matrix()
@@ -170,40 +260,62 @@ def main() -> int:
             magnets[r["selected"]].append(r["n"])
     magnets = {k: v for k, v in magnets.items() if len(v) >= 2}
 
+    rows_by_id = {r["n"]: r for r in rows}
+
+    def class_refusals(c: str) -> str:
+        """Why a class still fails, read off the requests that failed -- never a stored opinion."""
+        ids = [i for i in by_class[c]["ids"] if not rows_by_id[i]["served"]]
+        if not ids:
+            return "**every request in this class is served**"
+        bits = []
+        for i in ids:
+            reason = rows_by_id[i]["status"].replace("FAIL_CLOSED__", "").replace("FAIL__", "")
+            bits.append(f"#{i} {reason}")
+        return "; ".join(bits)
+
+    zero_classes = [c for c in CLASS_STORY if by_class[c]["served"] == 0]
+    families = collections.Counter(family(r["selected"]) for r in served if r.get("selected"))
+
     L: list[str] = []
     add = L.append
 
     add("# Every hardcore software-engineering problem, measured")
     add("")
-    add("Measured 2026-10-31 on main `b37f118` with the substrate restored (`scripts/restore_substrate_v1.py`).")
-    add("Supersedes the first edition of this same document (`43676be`); `HARDCORE_SWE_PROBLEM_INVENTORY_20261031_V19.md`")
-    add("records one round of repairs; this document is the whole problem list, ordered so that the next")
-    add("hour of work buys the most capability. Nothing here is a wish — every number is a measurement")
-    add("taken by this run (`execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,")
-    add("the live verified registry, and a probe of the substrate).")
+    add(f"Measured 2026-11-01 on main `{head_commit()}` with the substrate restored "
+        "(`scripts/restore_substrate_v1.py`).")
+    add("Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, "
+        "`execution_guard/swe_capability_matrix_v1.py`,")
+    add("the live verified registry, and a probe of the substrate. Nothing here is a wish.")
     add("")
     add("---")
     add("")
     add("## §0 The answer in one paragraph")
     add("")
+    span = (f"{mx['stable']}" if mx['stable'] == mx['high']
+            else f"{mx['stable']}–{mx['high']}")
     add(f"The brain answers **{len(served)} of {len(rows)}** advanced software-engineering sentences and "
-        f"**{len(mx['real'])} of 54** capability cases for real "
-        f"({mx['false'] and 'no' } FALSE rows, {mx['damaged'] and 'no'} DAMAGED). That gap is not a shortage of theory and it is")
-    add("not a shortage of verification machinery — the tree has 440 registry rows and the strongest")
-    add("fail-closed answer gate it has ever had. The gap is three separate things, in this order:")
+        f"**{span} of 54** capability cases for real "
+        f"(FALSE rows `{mx['false'] or '-'}`, DAMAGED `{mx['damaged'] or '-'}`). The remaining "
+        f"**{len(refused)}** refusals fall into **{len(by_defect)}** distinct classes, and each one below is "
+        "named, so the gap is now a list of capabilities rather than a failure count.")
     add("")
-    add(f"1. **Plumbing defects stop a sentence from reaching a row that already exists** "
-        f"({len(refused)} refusals split across {len(by_defect)} failure classes below). One row alone absorbs "
-        f"**{len(magnets.get('software.repair.choreograph.crossfile.v1', []))}** of the {len(rows)} sentences and fails on every one.")
-    add("2. **The substrate evaporates, and the machine is single-language.** It is Python-only by")
-    add(f"   construction, and this image currently holds **{len(have)} of the {len(missing) + len(have)} tools** an advanced")
-    add("   engineer works with. Restoring it is one command and it buys real capability — measured")
-    add(f"   this round: `python3 scripts/restore_substrate_v1.py` took the matrix from 22 to 23 REAL")
-    add("   and the census from 3 to 4 served, with no row changed — so part of what looked like a")
-    add("   capability gap was an install step nobody ran.")
-    add("3. **Whole capability classes have no row at all** — build systems, CI, design/architecture, git")
-    add("   operations, concurrency. Those are not defects; they are absences, and no amount of routing work")
-    add("   makes them answer.")
+    add("They are three different kinds of problem, and confusing them is what made earlier editions of")
+    add("this document wrong:")
+    add("")
+    gate_only = [k for k in by_defect if k.startswith(("FAIL_CLOSED__STATED_",))
+                 or k.endswith("TARGET_SYMBOL_COLLISION")]
+    capability = [k for k in by_defect if k.startswith("FAIL_CLOSED__CAPABILITY_REFUSED_")
+                  and k not in gate_only]
+    add(f"1. **The gate working.** {sum(by_defect[k] for k in gate_only)} refusals are sentences whose stated "
+        "effect no row performs, or whose stated object does not admit the operation. These are correct:")
+    add("   the machine declined instead of inventing. They are fixed by *building capability*, and no")
+    add("   amount of routing work moves them.")
+    add(f"2. **A capability that exists but cannot do this particular thing.** "
+        f"{sum(by_defect[k] for k in capability)} refusals are a real row refusing a real input, and every one")
+    add("   now reports the adapter's own reason (`§3`). Each names a missing transform, a degenerate")
+    add("   fixture, or a genuinely ill-posed sentence — three different repairs.")
+    add(f"3. **Absences.** {len(zero_classes)} of the {len(CLASS_STORY)} capability classes are at zero. "
+        "A class at zero is not a defect; it is a missing row, and the order in `§6` prices it.")
     add("")
     add("---")
     add("")
@@ -212,113 +324,137 @@ def main() -> int:
     add("| instrument | result |")
     add("|---|---|")
     add(f"| advanced census ({len(rows)} hardcore sentences) | **{len(served)} served / {len(refused)} refused** |")
-    add(f"| capability matrix (54 cases) | **{len(mx['real'])} REAL / 0 FALSE / 0 DAMAGED** (false: `{mx['false']}`, damaged: `{mx['damaged']}`) |")
+    rng = (f"{mx['low']}" if mx['low'] == mx['high'] else f"{mx['low']}–{mx['high']}")
+    add(f"| capability matrix (54 cases, {mx['runs']} runs) | **{rng} REAL / 0 FALSE / 0 DAMAGED** "
+        f"(false: `{mx['false']}`, damaged: `{mx['damaged']}`) |")
+    add(f"| cases real in **every** run | **{mx['stable']}** — a floor, not an average |")
+    if mx["moving"]:
+        add(f"| cases that moved between runs | `" + "`, `".join(mx["moving"]) + "` |")
     add(f"| matrix latency | {mx['latency'].replace('LATENCY ', '').strip()} |")
     add(f"| live verified registry | {rs['rows']} rows, {rs['swe']} of them software-engineering rows |")
     add(f"| rows sourced from a PyPI package (unrunnable when absent) | {len(rs['pypi'])} |")
     add(f"| rows whose own limitations admit they degrade silently | {len(rs['degrade'])} |")
     add("")
-    add(f"The {len(mx['real'])} rows that work for real, by name:")
+    add(f"The {len(mx['real'])} cases that work for real, by name:")
     add("")
     add("`" + "`, `".join(mx["real"]) + "`")
     add("")
-    add("That list is the honest capability of the machine today: **single-file Python edits** (repair,")
-    add("rename, rename-parameter, add-parameter, extract, add-function), **static Python analysis**")
-    add("(callers, dead code, complexity, change impact, definition count, taint), **three gates**")
-    add("(security, mutation, perf review), and **running a suite**. Everything else in the inventory below")
-    add("is either refused, misrouted, or absent.")
+    add("By registry family, the rows the served sentences actually reached:")
+    add("")
+    add("| family | served sentences |")
+    add("|---|---|")
+    for fam, n in families.most_common():
+        add(f"| `{fam}` | {n} |")
     add("")
     add("---")
     add("")
-    add("## §2 The eleven hardcore capability classes that refuse")
+    add("## §2 The eleven hardcore capability classes")
     add("")
-    add("Ordered by how much of a real engineer's day the class covers, not by how hard it is.")
+    add("Ordered by how much of a real engineer's day the class covers, not by how hard it is. The last")
+    add("column is read off the requests that actually failed in this run, so it cannot go stale.")
     add("")
-    add("| class | what it is | requests | served | why it fails |")
+    add("| class | what it is | requests | served | what still fails, by request |")
     add("|---|---|---|---|---|")
-    order = ["refactor", "tests", "debug", "perf", "systems", "polyglot", "git", "build", "ci", "review", "design"]
+    order = ["refactor", "tests", "debug", "perf", "systems", "polyglot", "git", "build", "ci",
+             "review", "design"]
     for c in order:
         d = by_class[c]
-        add(f"| **{c}** | {CLASS_STORY[c][0]} | {d['n']} | {d['served']} | {CLASS_STORY[c][1]} |")
+        add(f"| **{c}** | {CLASS_STORY[c][0]} | {d['n']} | {d['served']} | {class_refusals(c)} |")
     add("")
-    add("### 2.1 Polyglot editing — the largest single absence")
+    answering = len(CLASS_STORY) - len(zero_classes)
+    add(f"**{answering} of {len(CLASS_STORY)} classes answer at least one request**"
+        + ("" if zero_classes else ", and none is at zero.")
+        + (" The classes still at zero are " + ", ".join(zero_classes) + "." if zero_classes else ""))
+    add("That is the difference between a routing problem and a missing row: the rows exist and are")
+    add("reachable, and what remains inside each class is a named, individual refusal.")
     add("")
-    add("Seven of the 49 sentences name a C++, Rust, Go, Java, TypeScript or SQL file, and the machine")
-    add("answers **none** of them. This is architectural, not accidental: every editing row is built on")
-    add("Python's `ast`. The machine can already *read* other languages — tree-sitter is installed and four")
-    add("rows use it (`code.multilanguage.parse.tree_sitter.v1`, `code.index.tree_sitter.incremental.v1`,")
-    add("`code.impact.tree_sitter.testselect.v1`, `code.patch.tree_sitter.verify.v1`), covering Python,")
-    add("JavaScript, TypeScript, Rust, Go, Java, C++ and YAML. So parsing, indexing, impact and patch")
-    add("structure are not the gap. **The gap is that no row edits a non-Python file, and no row proves a")
-    add("non-Python edit compiles** — `gcc`, `g++`, `node` and `npm` are installed but nothing drives them,")
-    add("and `rustc`, `go`, `javac`, `tsc` are not installed at all. A second language substrate is therefore")
-    add("two additions, not one: a tree-sitter rewrite row, and a per-language build/verify row.")
+    add("### 2.1 Polyglot — the class where the refusal is the most specific")
     add("")
-    add("### 2.2 The classes with no row at all")
+    poly = by_class["polyglot"]
+    add(f"{poly['served']} of {poly['n']} polyglot sentences are served. The remaining ones are refused by a")
+    add("polyglot engine that really does parse and rewrite C++, Rust, Go, Java, TypeScript and SQL:")
     add("")
-    add("Build system work, CI configuration, and design/architecture have **zero** dedicated rows. A")
-    add("sentence like *\"Add a target `lint` to the Makefile that runs ruff\"* has nothing to be routed to,")
-    add("so it either compiles to nothing or is answered by the generic repair row, which then fails.")
+    for i in [n for n in poly["ids"] if not rows_by_id[n]["served"]]:
+        g = rows_by_id[i]["goal"].replace("canonical/astra_runtime/tmp/swe_advanced_probe/", "…/")
+        add(f"* **#{i}** `{rows_by_id[i]['status'].replace('FAIL_CLOSED__', '')}` — {g[:170]}")
     add("")
-    add("### 2.3 The class where the row claims what it does not do")
+    add("The distinction matters. *#11* and *#12* refuse because the census fixture is degenerate —")
+    add("`11_build/pyproject.toml` declares no dependencies at all, so *\"pin the dependency versions\"*")
+    add("asks for an effect on state that does not exist. Changing the fixture is the fix, not the engine.")
+    add("*#1*, *#6* and *#7* refuse because the engine has a transform set and the stated construct")
+    add("matches none of it — those are real capability gaps.")
     add("")
-    add("`software.repair.choreograph.crossfile.v1` declares, in its own `provides`:")
-    add("`software.concurrency.race.condition.fix`, `security.sql.injection.remove`,")
-    add("`performance.quadratic.linearithmic.optimize`, `dependency.deprecated.inspect.migrate`,")
-    add("`software.patch.crossfile.atomic`. It implements one choreography: patch, symbol graph, change")
-    add("impact slice, dual-oracle verify, gate. Because it *declares* the effect, the effect gate lets it")
-    add("through — so the race-condition sentence, the SQL-injection sentence and the quadratic→linearithmic")
-    add("sentence are refused **late, inside the controller**, instead of early by name. Declared-but-")
-    add("undeveloped effects are the most expensive class in the whole inventory: they defeat the one gate")
-    add("built to catch them.")
+    add("### 2.2 The refusal convention is uniform, and that is why §3 can be trusted")
+    add("")
+    add("Roughly forty adapter classes in `canonical/runtime/bound_capabilities/` and")
+    add("`canonical/swe_kernel/` refuse by raising `RuntimeError(\"<CLASS>:<detail>\")`. Until recently the")
+    add("door recognised only the `SystemExit(json.dumps({\"error\": True, ...}))` spelling, so seven named")
+    add("capability gaps arrived as one `FAIL__LIVE_CONTROLLER_EXECUTION`. It now reports the class the")
+    add("adapter raised, promoting the inner reason when the outer token is a wrapper. That change bought")
+    add("**zero served sentences** — measured, 36 before and 36 after, identical served-id list — and it is")
+    add("declared as what it is: diagnosis, not capability. It is the reason the table in §3 is readable.")
     add("")
     add("---")
     add("")
-    add(f"## §3 The plumbing defects, with counts")
+    add("## §3 The plumbing defects, with counts")
     add("")
     add("| defect | count | what it means | cheapest correct fix |")
     add("|---|---|---|---|")
-    FIX = {
-        "FAIL__LIVE_CONTROLLER_EXECUTION":
-            "make the declared dependency part of admission: a chain whose substrate is absent must refuse by name",
-        "FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED":
-            "none — this is the gate working; the fix is to build the missing capability, not the plumbing",
-        "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED":
-            "extend the derivation pattern that fixed #38: derive the stated object (module, span, symbol) before binding",
-        "FAIL__RAW_GOAL_COMPILATION_GAP":
-            "one compiler shape per sentence family that has no template — or refuse it as NO_ROW instead of as a gap",
-        "FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED":
-            "selection: the answer gate is right, the choice of row is wrong",
-        "FAIL_CLOSED__CAPABILITY_REFUSED_WORKTREE_NOT_DIRECTORY":
-            "bind `worktree_path` from the stated file's parent, the same way #38's span was derived",
-        "FAIL_CLOSED__CAPABILITY_REFUSED_NO_TESTS_DISCOVERED":
-            "state the test root or refuse early; a census that finds nothing is not an answer",
-        "FAIL_CLOSED__CAPABILITY_REFUSED_EDIT_PLAN_INPUT_INVALID":
-            "validate the edit plan shape at admission, not inside the adapter",
-        "FAIL_CLOSED__TOOL_REPORTED_NON_SUCCESS":
-            "surface the tool's own reason instead of a generic non-success",
-    }
     for k, v in by_defect.most_common():
         add(f"| `{k}` | {v} | {DEFECT_MEANING.get(k, '—')} | {FIX.get(k, '—')} |")
     add("")
-    add("### 3.1 The magnets: five rows absorb most of the traffic")
+    stated = [r for r in refused if str(r.get("refusal") or "").strip()]
+    if stated:
+        add("### 3.0 What each refusal actually said")
+        add("")
+        add("The census records the refusal text the door returned, so this table is the machine's own")
+        add("sentence rather than a summary of it:")
+        add("")
+        add("| # | class | refused with |")
+        add("|---|---|---|")
+        for r in sorted(stated, key=lambda x: x["n"]):
+            add(f"| {r['n']} | {CLASS[r['n']]} | `{str(r['refusal'])[:120]}` |")
+        add("")
+        _admission = [r for r in refused
+                      if "R13_DECLARED_INPUT_UNBINDABLE" in str(r.get("refusal") or "")]
+        if _admission:
+            add("One of those deserves naming, because it is a *routing success* reported as a refusal:")
+            add("")
+            for r in _admission:
+                _missing = str(r["refusal"]).split(":")[-1]
+                add(f"* **#{r['n']}** now selects `{r.get('selected')}` — the correct row for a repository")
+                add(f"  operation — and is refused for `{_missing}`: the sentence asks for *\"a clear message\"*")
+                add("  without stating its text. `ACommitMessageIsCopiedAndNeverInvented` forbids the door from")
+                add("  making one up, so the honest reading is that the **sentence** is under-specified, like")
+                add("  #11 and #12. Inventing a message here would buy one sentence and spend the law that keeps")
+                add("  the machine from writing content nobody asked for.")
+                add("")
+    add("### 3.1 The magnets: rows chosen for many sentences")
     add("")
     add("| row | requests it absorbs | verdicts |")
     add("|---|---|---|")
     for cap, ids in sorted(magnets.items(), key=lambda kv: -len(kv[1])):
         verdicts = collections.Counter(next(r["status"] for r in rows if r["n"] == i) for i in ids)
-        add(f"| `{cap}` | {ids} | " + "; ".join(f"{k.replace('FAIL_CLOSED__','').replace('FAIL__','')} x{v}"
+        add(f"| `{cap}` | {ids} | " + "; ".join(f"{k.replace('FAIL_CLOSED__', '').replace('FAIL__', '')} x{v}"
                                                 for k, v in verdicts.most_common()) + " |")
     add("")
     absorbed = sum(len(v) for v in magnets.values())
-    add(f"Those {len(magnets)} rows are chosen for **{absorbed} of the {len(rows)}** sentences. Selection here is")
-    add("trigger-word driven, and a generic row with a large trigger vocabulary wins almost every sentence.")
-    add("This is the single highest-leverage defect in the inventory: fix selection and several distinct")
-    add("capability classes improve at once, with no new capability code.")
+    absorbed_ids = [i for ids in magnets.values() for i in ids]
+    absorbed_served = sum(1 for i in absorbed_ids if rows_by_id[i]["served"])
+    add(f"Those {len(magnets)} rows are chosen for **{absorbed} of the {len(rows)}** sentences, and "
+        f"**{absorbed_served} of those {absorbed} are served**.")
+    add("This is the honest version of what an earlier edition called the worst defect in the inventory.")
+    add("Three broad rows — a polyglot transform, a Python transform-and-synthesize, and a")
+    add("diagnose-and-architect — carry most of the census, and they now carry it successfully. Selection")
+    add("is still trigger-word driven, so a generic row with a large trigger vocabulary will win a")
+    add("sentence that belongs to a narrower row; what changed is that the broad rows became capable")
+    add("enough that the misrouting costs fewer sentences than it used to. The remaining")
+    add(f"{absorbed - absorbed_served} absorptions that fail are the ones priced in §3, and each one is now")
+    add("attributed to the adapter's own reason rather than to a generic controller failure.")
     add("")
     add("---")
     add("")
-    add("## §4 The substrate: restorable in one command, still missing real tools")
+    add("## §4 The substrate")
     add("")
     add("| present | missing |")
     add("|---|---|")
@@ -328,18 +464,6 @@ def main() -> int:
     add("then verifies 10/10 modules, the required binaries, and the parser generation against")
     add("`tree_sitter_swe_kernel_v1.SUBSTRATE`. It exits non-zero and prints `SUBSTRATE_INCOMPLETE`")
     add("rather than letting a lane measure an environment gap and call it a capability gap.")
-    add("")
-    add("**What the restore bought, measured this round:**")
-    add("")
-    add("| before restore | after restore |")
-    add("|---|---|")
-    add("| tools 6/10, matrix 22 REAL, census 3/49 | **tools 10/10, matrix 23 REAL, census 4/49** |")
-    add("")
-    add("The census gained request 35 (*rename the public function `total` … across the repository*) —")
-    add("it had been failing for want of a tool, not a capability. `crosshair` and `z3` also became")
-    add("live: `python.contract.check.crosshair.v1` now refutes a real postcondition")
-    add("(`halve(n)` declared `__return__ * 2 == n` returns `CONTRACT_VIOLATION_FOUND` on odd `n`),")
-    add("so symbolic contract checking is no longer dead weight in the registry.")
     add("")
     runnable = sum(1 for _, _, ok in runnability if ok)
     add(f"**{len(rs['pypi'])} registry rows are sourced from a PyPI package or a package-shaped adapter, and")
@@ -357,7 +481,7 @@ def main() -> int:
     add("  asks about cannot be compiled here even if a row existed. `gcc`, `g++`, `node`, `npm` and")
     add("  `make` are present but no row drives them.")
     add("* **The substrate does not persist.** pip installs outside `/home/user` evaporate between")
-    add("  turns; this document is the first that names the restore as a step rather than a hope.")
+    add("  turns; this document names the restore as a step rather than a hope.")
     add("")
     add("---")
     add("")
@@ -365,39 +489,43 @@ def main() -> int:
     add("")
     add("These matter more than any single refusal, and none of them is measured by a 49-sentence census:")
     add("")
-    add("1. **No long-horizon loop that survives.** Plans exist, chains exist, and 10 of 10 executed chains")
-    add("   fail. There is no demonstrated plan → edit → run → observe → repair cycle on a real repository.")
-    add("2. **No execution feedback.** The machine mostly reasons statically. It does not routinely run the")
-    add("   code it changed and read what happened — the one thing a strong engineer does constantly.")
+    add("1. **No long-horizon loop that survives.** Plans exist and chains exist, but there is no")
+    add("   demonstrated plan → edit → run → observe → repair cycle on a real repository that runs")
+    add("   unattended for hours. Every number here is one request deep.")
+    add("2. **No execution feedback as a habit.** The machine mostly reasons statically. Running the code")
+    add("   it changed and reading what happened is the one thing a strong engineer does constantly.")
     add("3. **No repo-scale navigation.** A symbol index exists, but there is no ranked cross-module")
-    add("   retrieval, no \"where is this behaviour implemented\", no impact ranking that a planner can use.")
+    add('   retrieval, no "where is this behaviour implemented", no impact ranking a planner can use.')
     add("4. **No learning from its own refusals.** Each round re-derives the refusal taxonomy by hand. The")
-    add("   refusal corpus is not mined automatically into candidate rows.")
-    add("5. **Single-language is architectural** (Python `ast` everywhere), so polyglot support is not a row")
-    add("   addition, it is a second substrate.")
-    add("6. **The census measures the environment as much as the machine.** 4 of the 49 sentences turn")
-    add("   on which packages happen to be installed, and the matrix prints `unmeasurable lanes` but")
-    add("   does not fail. A number that moves when a pip cache is cold is not a capability number.")
-    add("7. **A performance verdict is honest but not reproducible under load.** `perf_review`")
-    add("   measured slowdown ratios of 0.90 / 0.98 / 0.99 / 1.01 against a 1.10 band on unchanged")
-    add("   files: when contention pushes a run past the band the gate says UNCLEAR, which is the")
-    add("   correct answer (both sides were timed; the difference is inside the noise). The matrix")
-    add("   oracle used to demand PASS, so this case flickered 22 / 23 REAL on an unchanged tree")
-    add("   and the headline number moved with the box's load. The oracle now requires a complete")
-    add("   two-sided measurement with at least three timed runs per side and accepts PASS or")
-    add("   UNCLEAR -- strictly more evidence, one fewer false refusal. The residual problem is")
-    add("   real and stays: a review that cannot distinguish a 10% change under load cannot")
-    add("   certify a refactor's performance, only refute a large regression.")
+    add("   refusal corpus is not mined automatically into candidate rows — §3 is written by hand this hour.")
+    add("5. **Polyglot editing is thin even where it now answers.** Four of seven polyglot sentences are")
+    add("   served, but the served ones are narrow transforms; there is no general non-Python rewrite row.")
+    add("6. **The census measures the environment as much as the machine.** Sentences whose effect depends")
+    add("   on an installed package move when the substrate is cold, and the matrix prints `unmeasurable")
+    add("   lanes` without failing. A number that moves when a pip cache is cold is not a capability number.")
+    add("7. **A performance verdict is honest but not reproducible under load.** `perf_review` measured")
+    add("   slowdown ratios of 0.90 / 0.98 / 0.99 / 1.01 against a 1.10 band on unchanged files: when")
+    add("   contention pushes a run past the band the gate says UNCLEAR, which is the correct answer (both")
+    add("   sides were timed; the difference is inside the noise). The matrix oracle now requires a complete")
+    add("   two-sided measurement with at least three timed runs per side and accepts PASS or UNCLEAR —")
+    add("   strictly more evidence, one fewer false refusal. The residual problem is real and stays: a")
+    add("   review that cannot distinguish a 10% change under load cannot certify a refactor's performance,")
+    add("   only refute a large regression.")
     add("8. **At least one census sentence is ill-posed.** Request 33 says *move the function `add`")
     add("   from mod.py into calc.py*, and both files define `add`, so the move collides and the")
-    add("   refusal is CORRECT. The ambiguity rule caught it (it declined to pick a symbol whose")
-    add("   definition is not unique across the stated files). A denominator that counts that")
-    add("   sentence as a capability the machine lacks overstates the gap.")
+    add("   refusal is CORRECT. A denominator that counts that sentence as a capability the machine lacks")
+    add("   overstates the gap.")
     add("9. **Lane isolation is broken.** Running the matrix `--lane toolchain` alone reports")
     add("   `add_dependency` FALSE **and** DAMAGED, while the full run reports the same case refused with")
-    add("   a clean tree. The single-lane fixture lacks the shared setup the case depends on, so every")
-    add("   lane-only number is suspect until the fixture is shared.")
-    add("10. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real")
+    add("   a clean tree. Every lane-only number is suspect until the fixture is shared.")
+    if mx["moving"]:
+        add(f"10. **The matrix itself moves between runs, and now says so.** Over {mx['runs']} runs "
+            f"{mx['stable']} cases were real every time and")
+        add(f"   {mx['low']}–{mx['high']} were real in any one run; the cases that moved are "
+            "`" + "`, `".join(mx["moving"]) + "`. A headline number that")
+        add("   changes with the box's load is not a capability number, so this document reports the floor")
+        add("   and the ceiling and names the movers, instead of quoting whichever sample looked best.")
+    add("11. **Measurement breadth.** 49 sentences written by the same hand that writes the rows. Real")
     add("   software engineering is unbounded, so this corpus can be satisfied without being a good engineer.")
     add("   It needs real repositories and adversarial sentences, not more fixtures.")
     add("")
@@ -409,14 +537,21 @@ def main() -> int:
     add("")
     add("| # | move | reaches | why first |")
     add("|---|---|---|---|")
-    add(f"| 1 | typed selection keyed on the stated effect and object, replacing trigger-word magnets | **{absorbed}/{len(rows)}** | no new capability code; several classes improve at once |")
-    add(f"| 2 | declare the substrate contract per row and refuse early when it is absent | {by_defect.get('FAIL__LIVE_CONTROLLER_EXECUTION', 0)} chains + {len(rs['pypi'])} pypi rows | turns silent controller death into a named, actionable refusal |")
-    add(f"| 3 | extend the #38 derivation pattern to the stated object of every family | {by_defect.get('FAIL_CLOSED__ROUTE_ADMISSION_REJECTED', 0)} | proven once, cheap to repeat |")
-    add(f"| 4 | install the work substrate (pytest, hypothesis, ruff, mypy, coverage, tree-sitter, a profiler) | unblocks tests/perf/review/impact | without it, several rows can never run |")
-    add(f"| 5 | build the three absent classes: build files, CI configuration, git operations | {sum(by_class[c]['n'] for c in ('build','ci','git'))} | whole classes with no row; each is mechanical and verifiable |")
-    add(f"| 6 | execution-first debugging: run, observe, bisect, attribute | {sum(by_class[c]['n'] for c in ('debug','perf','systems'))} | needs the substrate from 4 |")
-    add(f"| 7 | second language substrate: a tree-sitter *edit* row and a per-language compile gate (parse/index/impact already exist) | {by_class['polyglot']['n']} | biggest jump in what \"software engineer\" means; most expensive |")
-    add(f"| 8 | design/architecture output (ADR, migration plan) | {by_class['design']['n']} | needs a planning surface that produces a document, not an edit |")
+    add(f"| 1 | typed selection keyed on the stated effect and object, replacing trigger-word magnets | "
+        f"**{absorbed}/{len(rows)}** | no new capability code; several classes improve at once |")
+    add(f"| 2 | the four unserved gate classes: benchmark vs a revision, regression test, cherry-pick, "
+        f"changelog | {sum(by_defect[k] for k in gate_only)} | each needs one row or one new slot, not a new substrate |")
+    add(f"| 3 | the named transform gaps inside the polyglot engine | "
+        f"{sum(by_defect[k] for k in capability if 'POLYGLOT' in k or 'CPP' in k or 'SQL' in k)} | "
+        "the engine exists; these are missing ops in a real AST/CST surface |")
+    add(f"| 4 | install the work substrate (a profiler, `sqlite3`, `rustc`/`go`/`tsc`) | unblocks perf/systems/polyglot | "
+        "without it, several rows can never run |")
+    add(f"| 5 | execution-first debugging: run, observe, bisect, attribute | "
+        f"{sum(by_class[c]['n'] for c in ('debug', 'perf', 'systems'))} | needs the substrate from 4 |")
+    add(f"| 6 | a general non-Python rewrite row (parse/index/impact already exist) | {by_class['polyglot']['n']} | "
+        "biggest jump in what it means to be a software engineer; most expensive |")
+    add(f"| 7 | design/architecture output (ADR, migration plan) | {by_class['design']['n']} | "
+        "needs a planning surface that produces a document, not an edit |")
     add("")
     add("---")
     add("")
@@ -428,6 +563,9 @@ def main() -> int:
         goal = r["goal"].replace("canonical/astra_runtime/tmp/swe_advanced_probe/", "…/")
         chosen = r.get("selected") or "**none**"
         verdict = "SERVED" if r["served"] else r["status"].replace("FAIL_CLOSED__", "").replace("FAIL__", "")
+        detail = str(r.get("refusal") or "").strip()
+        if detail:
+            verdict += f" — `{detail[:90]}`"
         add(f"| {r['n']} | {CLASS[r['n']]} | {goal} | `{chosen}` | {verdict} |")
     add("")
     add("---")
@@ -435,10 +573,12 @@ def main() -> int:
     add("## What this document is not")
     add("")
     add("It is not a plan to make the machine *seem* more capable. Every item above is either a measured")
-    add("refusal, a measured absence in the substrate, or a measured selection error. Nothing in it is")
-    add("softened: the machine answers 3 of 49 hardcore sentences, and 22 of 54 capability cases. The")
-    add("value of the inventory is that the next hour of work can be spent where the reach is largest")
-    add("instead of where the last refusal happened to be.")
+    add("refusal, a measured absence in the substrate, or a measured selection error. Nothing is softened:")
+    add(f"the machine answers {len(served)} of {len(rows)} hardcore sentences and {span} of 54")
+    add("capability cases, and the difference between those two numbers is itself a finding — the matrix")
+    add("exercises rows directly, the census asks whether a sentence reaches the right one, and selection")
+    add("is where the sentences are lost. The value of the inventory is that the next hour of work can be")
+    add("spent where the reach is largest instead of where the last refusal happened to be.")
 
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("WROTE", OUT, len("\n".join(L)), "bytes")

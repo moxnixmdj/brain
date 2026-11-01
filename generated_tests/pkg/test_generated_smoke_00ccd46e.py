@@ -4,7 +4,7 @@ import pathlib
 import sys
 import unittest
 
-sys.path.insert(0, '/home/user/brain/canonical/astra_runtime/tmp/frontier_matrix/tests_from_docstrings/pkg')
+sys.path.insert(0, '/home/user/brain/canonical/astra_runtime/tmp/frontier_matrix/018_tests_from_docstrings/pkg')
 
 
 class GeneratedSmoke1(unittest.TestCase):
