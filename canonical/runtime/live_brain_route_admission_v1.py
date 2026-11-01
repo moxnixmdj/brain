@@ -1214,6 +1214,11 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     try:
         from canonical.runtime import write_authority_v1 as _write_authority
         _write_authority.check(ROOT, call_args, cid)
+        # A destination that was never a candidate SOURCE is invisible to the check
+        # above; the bytes are not.  Watched here, verified after the run, restored
+        # and refused if the adapter replaced Python source with something that is
+        # not Python (measured on main 2026-11-01 with the hardcore orchestrator).
+        _watched_sources = _write_authority.watch_destinations(ROOT, call_args)
     except LocalExecutionFailure:
         raise
     except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
@@ -1234,6 +1239,10 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         if preimages is not None:
             transition.restore(ROOT, preimages)
         raise
+    try:
+        _write_authority.restore_if_a_source_was_replaced(ROOT, _watched_sources)
+    except Exception as exc:  # noqa: BLE001 - a destroyed source is a closed refusal
+        raise LocalExecutionFailure(str(exc)) from exc
     result.setdefault("capability_id", cid)
     result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
     _check_expectation(action.get("expect"), result)
@@ -5813,6 +5822,37 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
         except Exception:
             plan = None
         if plan is None:
+            # A STATED EFFECT THIS REGISTRY CANNOT NAME MAY STILL BE A COMMAND WHOSE
+            # RESULT THIS TREE CAN CHECK -- and the composer is the thing that knows.
+            #
+            # Measured 2026-11-01: "Format <path>/calc.py." refused here in 56 ms with
+            # FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED (`STATED_LINT_OR_FORMAT_NOT_
+            # PERFORMED_BY_CAPABILITY:UNNAMED`) while the composer already carried a
+            # row routing that exact sentence to `ruff format`, and the acceptance
+            # layer a postcondition re-deriving the promise by re-running
+            # `ruff format --check`.  Both halves existed; the typed-plan resolver
+            # answered first and answered NO, and nothing ever asked the composer.
+            #
+            # Only the composer's own verified result is accepted here: `_try_composed`
+            # returns None when no chain reaches the goal, and when a chain ran it
+            # returns that run's verdict, pass or fail, rather than this branch's words.
+            _goal_text = _request_goal(request)
+            _before = observe_world(_goal_text)
+            composed = _try_composed(str(request.get("task_id") or ""),
+                                     _goal_text, perf_counter_ns())
+            if isinstance(composed, Mapping) and composed.get("pass") is True:
+                # NO OBSERVED EFFECT, NO PASS.  The repository's rule, stated in
+                # test_a_formatter_is_verified_by_its_own_check_v1: a sentence that
+                # promises a change and leaves the world identical is not a result,
+                # however true the postcondition is.  The chain's own verdict is
+                # downgraded here rather than reported as a success.
+                if observe_world(_goal_text) != _before:
+                    return composed
+                return _fail(str(request.get("task_id") or ""),
+                             "FAIL_CLOSED__NO_OBSERVED_EFFECT", "NO_OBSERVED_EFFECT",
+                             perf_counter_ns(), executed=True,
+                             reason="COMMAND_LEFT_THE_WORLD_UNCHANGED",
+                             composed_status=composed.get("status"))
             # This stated family is authoritative even when planning refuses.
             # Do not spend a second compile on a different lexical question.
             return _fail(str(request.get("task_id") or ""),
@@ -5867,6 +5907,26 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                 if contradicted or compound:
                     corrected = _typed_plan.build_plan(goal, ROOT, compiled_context=context)
                     if corrected is None and contradicted:
+                        # A STATED EFFECT THIS REGISTRY CANNOT NAME MAY STILL BE A
+                        # COMMAND WHOSE RESULT THIS TREE CAN CHECK.
+                        #
+                        # Measured 2026-11-01: "Format <file>" refused in 56 ms with
+                        # FAIL_CLOSED__STATED_SWE_EFFECT_UNSERVED -- nothing in the
+                        # registry declares a `format` effect -- while the composer
+                        # had a row routing that exact sentence to `ruff format` and
+                        # the acceptance layer had a postcondition re-deriving the
+                        # promise from disk.  Both halves existed and the door never
+                        # asked the composer, because the typed-plan resolver answers
+                        # first and answers NO.
+                        #
+                        # Composition is only consulted here, and only its own
+                        # verified result is accepted: `_try_composed` returns None
+                        # when no chain reaches the goal, and a chain that ran is
+                        # reported by it rather than by this branch.
+                        composed = _try_composed(str((request or {}).get("task_id") or ""),
+                                                 goal, perf_counter_ns())
+                        if isinstance(composed, Mapping) and composed.get("pass") is True:
+                            return composed
                         # Structured obligations are unbound regardless of which
                         # lexical route happened to fail first. Preserve that
                         # public refusal contract across route-selection drift.
