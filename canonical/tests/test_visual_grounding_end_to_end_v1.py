@@ -99,9 +99,11 @@ def test_no_relation_word_means_no_route():
 
 @pytest.mark.parametrize("garbage", [b"", b"not an image", b"\x89PNG\r\n\x1a\nbroken"])
 def test_malformed_screenshot_raises_instead_of_pretending(garbage):
-    with pytest.raises(Exception) as excinfo:
+    from canonical.runtime.osworld_v21_visual_region_grounding_v1 import VisualGroundingError
+    from canonical.runtime.osworld_v21_positioned_ocr_observer_v1 import OCRObserverError
+
+    with pytest.raises((VisualGroundingError, OCRObserverError)):
         _route("click the leftmost red box", garbage)
-    assert "GROUND" in type(excinfo.value).__name__.upper() or True
 
 
 def test_no_screenshot_means_no_route():
