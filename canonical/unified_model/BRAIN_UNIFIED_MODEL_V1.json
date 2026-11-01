@@ -30952,16 +30952,16 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6616,
+  "research_index_records": 6618,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 431,
-  "source_index_modules": 1909
+  "source_index_modules": 1910
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f1247d6bbbf9d2d302aa06ef983c6171f410be99a86e376feec863bcde819140"
+  "value": "586b7dd3289410d8c64d97e8c5f874a321c74a44d4b034b25f4334da10b03570"
  },
  "engines": [
   {
@@ -142222,6 +142222,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/DERIVED_INSPECTOR_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DERIVED_INSPECTOR_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "707cec44f93021b25fe5efe2bbda07eb3b79f50120b383bd4ef5fb88696796ee",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "derived": 1,
+    "inspector": 1,
+    "known": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/DIFFERENTIAL_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -209953,6 +209972,51 @@
    }
   },
   {
+   "action_id": "DERIVE_INSPECTORS_AND_REFUSE_THE_UNFALSIFIABLE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/DERIVE_INSPECTORS_AND_REFUSE_THE_UNFALSIFIABLE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DERIVE_INSPECTORS_AND_REFUSE_THE_UNFALSIFIABLE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e99d380ec4c86fbca7ed1aa0dc872731a76d271ff32ec10f172549e7907d32cf",
+   "status": "",
+   "terms": {
+    "152": 1,
+    "20261102": 1,
+    "43": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "agent-session": 1,
+    "already": 1,
+    "automated": 1,
+    "because": 1,
+    "benchmark": 1,
+    "cannot": 1,
+    "capabilities": 1,
+    "capability": 1,
+    "checkers": 1,
+    "contain": 1,
+    "correct": 1,
+    "coverage": 1,
+    "creation": 1,
+    "derivation": 1,
+    "derive": 1,
+    "derive_inspectors_and_refuse_the_unfalsifiable_v1_20261102": 1,
+    "derived": 1,
+    "each": 1,
+    "environments": 1,
+    "fail": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "hand": 1,
+    "human": 1,
+    "independently": 1,
+    "inspected": 1,
+    "inspector": 2,
+    "inspectors": 2,
+    "like": 1
+   }
+  },
+  {
    "action_id": "DURABLE_ARTIFACT_DIGEST_REPORTED_UNDER_THE_NAME_THE_CAPABILITY_USES_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -237980,6 +238044,45 @@
     "universal": 1,
     "v5": 2,
     "verify_receipt": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/derived_inspector_flywheel_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/derived_inspector_flywheel_v1.py",
+   "sha256": "483bcfe9ec58e2371c0b183fe8dba5c54ba2ba7e85da3d3ce062756eb1f3ae37",
+   "summary": "Derive an inspector from the environment's own checker, then try to kill it.",
+   "symbol_count": 7,
+   "symbols": [
+    "Derivation",
+    "DerivationError",
+    "Flight",
+    "Requirement",
+    "_literals",
+    "_tally",
+    "derive"
+   ],
+   "terms": {
+    "checker": 1,
+    "derivation": 1,
+    "derivationerror": 1,
+    "derive": 2,
+    "derived": 1,
+    "environment": 1,
+    "flight": 1,
+    "flywheel": 1,
+    "inspector": 2,
+    "kill": 1,
+    "literals": 1,
+    "own": 1,
+    "requirement": 1,
+    "tally": 1,
+    "try": 1,
+    "v1": 1
    }
   },
   {
