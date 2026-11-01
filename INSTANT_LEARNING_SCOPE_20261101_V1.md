@@ -798,10 +798,25 @@ it did not fix the reported outcome, its blast radius could not be verified (col
 `canonical/tests` is already broken in 24 modules by missing `numpy`/`opencv`), and shipping a
 binder change on faith is the thing this document keeps refusing to do.
 
-The fix, when it is done properly, is at admission rather than at any of the four layers: **if the
-goal states a path that does not exist, no candidate may be admitted while substituting a different
-path for that slot.** One rule, at the top, instead of three fallbacks each independently deciding
-it is allowed.
+**The fix, and it is done.** At admission rather than at any of the four layers: if the goal states
+a path that does not exist, the call refuses before anything is bound, so no fallback gets the
+chance to substitute. One rule at the top instead of three fallbacks each deciding it is allowed.
+
+| | before | after |
+|---|---|---|
+| absent stated directory | `VERIFIED_ACTION`, 2,078 files audited | `REFUSED__STATED_PATH_ABSENT_IN_THE_WORKSPACE` |
+| the same directory, present | `VERIFIED_ACTION`, 2,290 files | unchanged |
+| `verifier_falsification_v1` | 94/98 proven able to fail, **1 bad** | **95/98, 0 bad**, 3 untested (environment) |
+
+`world_binding_v1.stated_paths_absent_in_workspace()` is called by `grounded_action_v1.act`
+beside the existing kind-contradiction refusal. Only extensionless names count — a name with a
+suffix is a destination, which `_future_artifacts` already owns — and only when the sentence
+names nothing that does exist, so a goal pointing at real work keeps its reading.
+
+What is *not* claimed: the whole suite is not green, and cannot be on this box — collection
+across `canonical/tests` already fails in 24 modules on missing `numpy`/`opencv`, so no change
+here can be validated against it. The three suites that exercise this path pass (16 tests), the
+guard passes, and the refusal is visible rather than a substitution.
 
 <!-- correction: 2026-11-01, the section above was written after the rule was found; the earlier
 sections of this document predate it. -->
