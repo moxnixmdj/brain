@@ -1,9 +1,9 @@
 {
-  "action_id": "A_CLAIM_IS_READ_FROM_THE_ARTIFACT_NOT_FROM_A_LOOKUP_KEY_20261101_V1",
-  "action_intent_id": "A_CLAIM_IS_READ_FROM_THE_ARTIFACT_NOT_FROM_A_LOOKUP_KEY_20261101_V1",
+  "action_id": "A_CENSUS_ON_AN_EMPTY_SUBSTRATE_IS_NOT_A_CENSUS_20261101_V1",
+  "action_intent_id": "A_CENSUS_ON_AN_EMPTY_SUBSTRATE_IS_NOT_A_CENSUS_20261101_V1",
   "action_intent_path": null,
   "action_kind": "GOVERNANCE_GUARD",
-  "action_summary": "Two claims were computed from a lookup key instead of from the artifact, one layer apart, and both were certified. (1) The door classified an adapter refusal by the EXCEPTION CLASS it arrived in -- SystemExit(json) parsed, RuntimeError(\"GUARD_KEY:detail\") not -- so 7 of the 13 refusals in the 49-sentence advanced census came back FAIL__LIVE_CONTROLLER_EXECUTION, the status of an adapter bug, with the cause the exception already named discarded (POLYGLOT_REFUSED:CPP_NO_APPLICABLE_TRANSFORM x2, SQL_UNSUPPORTED_DDL_EDIT, PYPROJECT_ALREADY_PINNED_OR_EMPTY, NO_DECLARED_DEPENDENCY_TO_VENDOR, NO_FLAKY_TEST_DETECTED, TARGET_SYMBOL_COLLISION:add). (2) The dependency audit classified a package by its NAME: membership in a six-entry advisory dict was the whole test, so requests==2.32.3, pyyaml==6.0.1 and cryptography==43.0.0 -- all past their fixes -- were reported vulnerable and the door stamped exact semantic acceptance over the report. Both now read the artifact: the refusal keeps its own key, and the audit compares the pinned version to the fixed version and names what it could not judge.",
+  "action_summary": "The image ships gcc, g++, node, make and git and none of pytest, ruff, mypy, hypothesis, tree_sitter, coverage, bandit, crosshair or z3. scripts/restore_substrate_v1.py fixes that in 12 s and verifies itself, and no instrument read its verdict: measured 2026-11-01, same commit, a bare venv against the restored image, the advanced census printed 35 of 49 served on BOTH and exited 0 with a board, while the matrix printed 41 REAL on the bare venv and 43 on the restored one. The two marks that differ are lint and type_check, which answer PASS_SYNTAX_ONLY / PASS_BASELINE_ONLY when ruff and mypy are absent -- verdicts about the interpreter, printed in the column reserved for verdicts about the tree, with nothing to distinguish them. The census and the matrix now ask the restore script's own verify() (one owner, one measurement) before they measure: if the substrate is absent they restore it once and, if it is still absent, print CENSUS_NOT_MEASURED / MATRIX_NOT_MEASURED with what is missing, exit 2, and write no board. --allow-incomplete-substrate still measures that comparison on purpose, with the caveat printed before the first number.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -28,32 +28,34 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
-      "canonical/runtime/live_brain_route_admission_v1.py",
-      "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
-      "canonical/tests/test_a_refusal_already_named_is_not_a_crash_v1.py",
-      "canonical/tests/test_a_dependency_finding_requires_a_vulnerable_version_v1.py",
+      "execution_guard/substrate_precondition_v1.py",
+      "execution_guard/swe_advanced_probe_v1.py",
+      "execution_guard/swe_capability_matrix_v1.py",
+      "scripts/restore_substrate_v1.py",
+      "canonical/tests/test_a_census_on_an_empty_substrate_is_not_a_census_v1.py",
+      ".github/workflows/swe-advanced-census.yml",
       "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
     ],
     "route_class": "REUSE"
   },
   "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Both answers were derived from a lookup -- an exception's class, a package's name -- instead of from the datum the answer is about: the key the adapter raised and the version the sentence pinned. Each was still certified, because the layer that certifies reads the verdict, not the evidence.",
-  "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::An instrument reported a number it could not source. Whether a green gate was a fact about the code or about the interpreter was decided by a lookup in the environment and printed in a column that could not show the difference, and the one command that resolves it was never called by anything.",
+  "canonical_base_commit": "c49ea46d46e20e6017a5ac232b5dcbfbc2a19741",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "Both answers were derived from a lookup -- an exception's class, a package's name -- instead of from the datum the answer is about: the key the adapter raised and the version the sentence pinned. Each was still certified, because the layer that certifies reads the verdict, not the evidence.",
+  "causal_blocker": "An instrument reported a number it could not source. Whether a green gate was a fact about the code or about the interpreter was decided by a lookup in the environment and printed in a column that could not show the difference, and the one command that resolves it was never called by anything.",
   "date": "2026-11-01",
-  "expected_parent_change": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
-  "expected_parent_frontier_change": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
+  "expected_parent_change": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
+  "expected_parent_frontier_change": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
   "explicit_user_authorization": "Owner instruction this session 2026-10-31, verbatim: \"All of your problems I already solved in the brain or somewhere on the internet hidden as tools or hidden somewhere on the repos, or there are perfect ideas on some research papers. Do the optimal in the fastest way. Everything must be insanely fast, only the right way. and merge all of your work\"",
-  "falsification_condition": "If a guard-key refusal is reported as a controller crash again, if a package past its fix is reported vulnerable again, if a package the table cannot judge reads as clean, or if any board loses a pass, this action was wrong.",
+  "falsification_condition": "If a board is ever printed again on an image where the restore script's verify() says the substrate is absent, if a restored image loses a mark against origin/main, or if --allow-incomplete-substrate ever prints its numbers without the caveat first, this action was wrong.",
   "governance_change": true,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
-  "intent": "Classify by the artifact: the key the adapter named, the version the sentence pinned.",
+  "intent": "A number must be about the tree it names, and an image that cannot measure must say so instead.",
   "load_bearing_primary": {
-    "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
+    "canonical_base_commit": "c49ea46d46e20e6017a5ac232b5dcbfbc2a19741",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -61,14 +63,14 @@
     ],
     "expected_obligation_discharge_lcb": 0,
     "expected_obligation_unlock_lcb": "1/13",
-    "interpretation": "EVIDENCE_IS_THE_DATUM_NOT_A_LOOKUP_KEY",
-    "measured_effect": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
+    "interpretation": "A_BOARD_IS_A_CLAIM_ABOUT_THE_TREE_OR_IT_IS_NOT_PRINTED",
+    "measured_effect": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": 0.5,
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
+  "measured_effect": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
     "canonical/runtime/declared_input_derivation_v1.py",
@@ -81,15 +83,17 @@
     "hardcore_swe_surface_probe_20261030.py"
   ],
   "progress_evidence_paths": [
-    "canonical/runtime/live_brain_route_admission_v1.py",
-    "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
-    "canonical/tests/test_a_refusal_already_named_is_not_a_crash_v1.py",
-    "canonical/tests/test_a_dependency_finding_requires_a_vulnerable_version_v1.py",
+    "execution_guard/substrate_precondition_v1.py",
+    "execution_guard/swe_advanced_probe_v1.py",
+    "execution_guard/swe_capability_matrix_v1.py",
+    "scripts/restore_substrate_v1.py",
+    "canonical/tests/test_a_census_on_an_empty_substrate_is_not_a_census_v1.py",
+    ".github/workflows/swe-advanced-census.yml",
     "HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md"
   ],
   "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
   "recursive_obs": {
-    "canonical_base_commit": "0bd93f98c517a5f75f202c96d3e59fc55b79ef69",
+    "canonical_base_commit": "c49ea46d46e20e6017a5ac232b5dcbfbc2a19741",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
@@ -97,18 +101,18 @@
       "THE_SILENT_WIDENING_OF_AN_EDIT_SCOPE_TO_THE_ANCESTOR_TREE",
       "CERTIFICATION_OF_A_RUN_THAT_MOVED_FILES_THE_SENTENCE_NEVER_NAMED"
     ],
-    "expected_parent_level_state_change": "Same commit, before and after. 49-sentence advanced census: served 36/49 both sides; the 7 crash-shaped refusals become FAIL_CLOSED__CAPABILITY_REFUSED_<KEY> with refusal_payload carrying the adapter's reason. Dependency audit: safe versions 3 findings -> 0, requests==2.19.0 -> one finding with fixed_in 2.31.0, unknown/unpinned packages -> unchecked_dependencies. 54-case matrix 44 REAL / 0 FALSE / 0 DAMAGED both sides; 18 ordinary sentences 11/18 both sides; 28-task ladder 27 PASS both sides. No pass is minted and no false PASS survives.",
+    "expected_parent_level_state_change": "Measured 2026-11-01, clean origin/main, one variable at a time. Bare venv (0 of 10 tools): census 35/49 served, exit 0, board written; matrix 41 REAL, exit 0, board written. Restored image: census 35/49; matrix 43 REAL. After this change, on the bare venv: census exit 2 with CENSUS_NOT_MEASURED and no JSON written; matrix exit 2 with MATRIX_NOT_MEASURED and no JSON written. On the restored image both boards are byte-for-byte the same verdicts as origin/main: 35/49 and 43 REAL / 0 FALSE / 0 DAMAGED. This action mints no pass; it deletes two marks that were about the machine.",
     "iteration_limit": 4,
     "obs_blocker": {
-      "delete_bypass_substitute_options": "TREATING_EVERY_RUNTIMEERROR_AS_A_REFUSAL__REJECTED_THE_MESSAGE_MUST_BE_A_GUARD_KEY; SHIPPING_A_LARGER_HARDCODED_ADVISORY_TABLE__REJECTED_A_TABLE_THAT_DOES_NOT_COMPARE_IS_WRONG_AT_ANY_SIZE; REWRITING_EACH_ADAPTER_TO_RAISE_SystemExit__REJECTED_ONE_RULE_BEATS_N_ADAPTER_EDITS",
-      "intrinsic_or_path_specific": "Path-specific: one predicate and one branch in the door; one comparison in one operation.",
-      "surviving_causal_blocker": "A lookup key stood in for the datum the answer was about."
+      "delete_bypass_substitute_options": "INSTALLING_THE_TOOLS_INSIDE_EACH_INSTRUMENT__REJECTED_THAT_IS_A_SECOND_OWNER; PRINTING_A_WARNING_AND_MEASURING_ANYWAY__REJECTED_A_WARNING_DOES_NOT_STOP_A_BOARD_BEING_QUOTED; DELETING_THE_INCOMPLETE_CASES__REJECTED_THAT_HIDES_THE_GAP_DO_NOT_WIDEN_OR_NARROW_THE_BOARD",
+      "intrinsic_or_path_specific": "Path-specific: one gate, reused by two instruments, plus one workflow step.",
+      "surviving_causal_blocker": "The instrument had no source for its own number."
     },
     "obs_capability": {
-      "capability_work_deleted": "NO_NEW_EXCEPTION_TYPE_NO_NEW_ADVISORY_SERVICE_NO_ADAPTER_EDITS",
-      "existing_inherited_routes_checked": "The door already parsed one refusal spelling and already had the typed refusal status prefix; the audit operation and its report already existed.",
-      "external_existing_routes_checked": "An OSV/PyPI advisory feed is the real source for P2 but needs the network and a freshness policy; not claimed here.",
-      "surviving_gap": "The advisory table is still six packages (now stated); the 6 remaining census refusals are capability absences and routing gaps, listed in HARDCORE_SWE_ALL_PROBLEMS_20261101_V1.md."
+      "capability_work_deleted": "NO_NEW_MEASUREMENT_NO_NEW_CASE_NO_NEW_TOOL_TABLE",
+      "existing_inherited_routes_checked": "scripts/restore_substrate_v1.py already ran, verified 10/10 modules, checked the parser generation and printed a verdict; the matrix already had its own tool probe, which this replaces as the gate rather than duplicating.",
+      "external_existing_routes_checked": "Hermetic CI images (the standard practice of baking the toolchain into the runner) solve the same problem by moving it; that is a change to the environment, not to the instrument, and this action does not claim it.",
+      "surviving_gap": "The bare-image comparison still exists behind --allow-incomplete-substrate; rustc, go, javac and tsc are still absent and are capability absences (P6), not substrate ones."
     },
     "obs_goal": {
       "proxy_goals_deleted": [
@@ -170,10 +174,10 @@
     "why_selected_route_is_fastest_sufficient": "Three edits of a few lines each, six tests, and the census re-measures in six seconds. Each one removes a gate and reads a fact already on hand, so nothing new is computed and nothing new can be wrong."
   },
   "required_capability": "EVIDENCE_THAT_NAMES_THE_FACT_IT_WAS_DECIDED_ON",
-  "resolution": "An adapter refusal keeps its own key all the way to the caller whichever spelling it used, and a dependency finding exists only when the pinned version is below the fixed one, with the audit's blind spots named in its own artifact.",
-  "route_id": "CLASSIFY_FROM_THE_ARTIFACT",
+  "resolution": "Both instruments call the restore script's verify() before measuring, restore once if the substrate is absent, and refuse with an exit code and no artefact if it still is. The workflow runs the restore as a step.",
+  "route_id": "ASK_THE_OWNER_BEFORE_MEASURING",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "CLASSIFY_FROM_THE_ARTIFACT",
+  "selected_route": "ASK_THE_OWNER_BEFORE_MEASURING",
   "stop_condition": "ADVANCED_CENSUS_5_TO_6_OF_49_SENTENCE_36_SERVED_BY_THE_CHOREOGRAPHER_CODEMOD_PASS__MATRIX_21_REAL_0_FALSE_0_DAMAGED_UNCHANGED__SURFACE_28_OF_28__SIX_NEW_TESTS_PASS__THREE_FALSE_PASSES_FOUND_AND_CLOSED_IN_THE_SAME_CHANGE_18_23_AND_36_WERE_CERTIFIED_WHILE_PKG_MOD_PY_AND_PKG_SERVICE_PY_MOVED_AND_THE_NAMED_FILE_DID_NOT",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
@@ -206,19 +210,15 @@
     "tournament": {
       "counterexample_receipts": [
         {
-          "git_blob_sha": "a03b6307661566b4bf97fc12f074872e9eb36036",
-          "path": "canonical/runtime/live_brain_route_admission_v1.py"
-        },
-        {
-          "git_blob_sha": "166fadde10ec12dbb1420b54ff4c67819ba306ae",
-          "path": "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py"
+          "git_blob_sha": "6050e0aa09a91954a2dbf2b604dfe7fa0f35e398",
+          "path": "scripts/restore_substrate_v1.py"
         }
       ],
-      "decisive_question": "IS_THE_CLAIM_READ_FROM_THE_ARTIFACT_OR_FROM_A_LOOKUP_KEY",
-      "falsifier_id": "A_CLASS_OR_A_NAME_OUTRANKS_THE_DATUM",
+      "decisive_question": "IS_THE_NUMBER_ABOUT_THE_TREE_OR_ABOUT_THE_INTERPRETER",
+      "falsifier_id": "AN_ENVIRONMENT_FACT_PRINTED_AS_A_CAPABILITY_FACT_IS_GOOD_ENOUGH",
       "known_counterexamples_checked": true,
       "no_known_counterexample_reason": "THE_DELIVERED_VALUE_IS_DECODED_WHOLE_FROM_THE_FILE_AND_A_MEMBER_THAT_DOES_NOT_FIT_IS_DROPPED_NOT_SHORTENED",
-      "proposal_id": "A_CLAIM_IS_READ_FROM_THE_ARTIFACT_NOT_FROM_A_LOOKUP_KEY_20261101_V1"
+      "proposal_id": "A_CENSUS_ON_AN_EMPTY_SUBSTRATE_IS_NOT_A_CENSUS_20261101_V1"
     }
   },
   "weakens_existing_guard": "No guard is weakened. The effect gate gains a third reading (what moved), the choreographer loses a silent scope widening, the binder loses a curated word list that only ever refused work the row could do, and R3 keeps its meaning by naming the slot when the binder already knows it."

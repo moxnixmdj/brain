@@ -44,6 +44,10 @@ _HERE = str(pathlib.Path(__file__).resolve().parent)
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 from swe_git_fixture_v1 import seed_repository  # noqa: E402
+# The matrix marks a case REAL only if the gate it names actually ran. Without ruff/mypy/coverage
+# a green gate is `PASS_SYNTAX_ONLY`/`PASS_BASELINE_ONLY`, which is a fact about the image. Same
+# rule as the census: restore once, then refuse to mark anything if the substrate is still absent.
+from substrate_precondition_v1 import precondition  # noqa: E402
 
 WORK = ROOT / "canonical/astra_runtime/tmp/frontier_matrix"
 
@@ -698,8 +702,21 @@ def _report_preconditions() -> None:
         print("  WARNING: %d leftover spool artifacts; a run must start from a clean scratch "
               "or two runs are not comparable" % len(pre["leftovers"]))
 
-def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = False) -> int:
+def run(lane: str | None = None, as_json: bool = False, as_markdown: bool = False,
+        allow_incomplete_substrate: bool = False, restore_if_missing: bool = True) -> int:
     from canonical.runtime import live_brain_route_admission_v1 as door
+
+    # A MARK IS ONLY REAL IF THE GATE IT NAMES RAN.  Without ruff/mypy/pytest the review gates
+    # answer PASS_SYNTAX_ONLY / PASS_BASELINE_ONLY; marking that row REAL is a claim about this
+    # image.  The census next door has the same gate, from the same owner.
+    # The verdict goes to stderr: `--json` writes the board to stdout, and a banner inside that
+    # JSON makes every consumer's parse fail -- a gate that breaks the instrument it guards.
+    substrate = precondition(allow_incomplete=allow_incomplete_substrate,
+                             restore_if_missing=restore_if_missing, out=sys.stderr)
+    if not substrate.usable:
+        print("MATRIX_NOT_MEASURED: SUBSTRATE_INCOMPLETE -- %s" % substrate.reason)
+        print("  A mark printed here would be a fact about this image, not about the tree.")
+        return 2
 
     WORK.mkdir(parents=True, exist_ok=True)
     if not (as_json or as_markdown):
@@ -787,5 +804,11 @@ if __name__ == "__main__":
     ap.add_argument("--lane")
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--markdown", action="store_true")
+    ap.add_argument("--no-restore", action="store_true",
+                    help="verify the substrate but do not restore it")
+    ap.add_argument("--allow-incomplete-substrate", action="store_true",
+                    help="mark anyway, with the environment caveat printed first")
     ns = ap.parse_args()
-    sys.exit(run(ns.lane, ns.json, ns.markdown))
+    sys.exit(run(ns.lane, ns.json, ns.markdown,
+                 allow_incomplete_substrate=ns.allow_incomplete_substrate,
+                 restore_if_missing=not ns.no_restore))

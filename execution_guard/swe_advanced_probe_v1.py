@@ -49,6 +49,14 @@ _HERE = str(pathlib.Path(__file__).resolve().parent)
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 from swe_git_fixture_v1 import seed_repository  # noqa: E402
+# ...AND IT REFUSES TO COUNT ON A MACHINE THAT IS NOT THE ONE THE ROWS DESCRIBE.
+#
+# Measured 2026-11-01, same commit, same 49 sentences: 36 served on a bare image and 36 after
+# `scripts/restore_substrate_v1.py`. The census number did not move, but the REVIEW lane did --
+# `lint` and `type_check` came back PASS_SYNTAX_ONLY / PASS_BASELINE_ONLY without the tools, and
+# a reader cannot tell a verdict about the tree from a verdict about the image. Restoring is one
+# command; this instrument now runs it, and refuses to print a census if it still fails.
+from substrate_precondition_v1 import precondition  # noqa: E402
 
 # A sentence that talks about history is asked of a tree that has some.  The predicate is about
 # the sentence (HEAD~, commit, branch, bisect, git, changelog), never a curated case list, so a
@@ -311,7 +319,21 @@ def main(argv: list[str] | None = None) -> int:
     # The census already knows the refusal taxonomy, so the histogram belongs here rather
     # than in a YAML heredoc that can only guess at the field names.
     ap.add_argument("--summary", default=None, help="append a markdown census to this file")
+    # An environment with no ruff/mypy/pytest does not measure fewer capabilities; it measures
+    # the same capabilities through gates that cannot run, and prints the result in the same
+    # column. Restore first (one command, ~12 s), and only measure what is left.
+    ap.add_argument("--no-restore", action="store_true",
+                    help="verify the substrate but do not restore it")
+    ap.add_argument("--allow-incomplete-substrate", action="store_true",
+                    help="measure anyway, with the environment caveat printed first")
     ns = ap.parse_args(argv)
+
+    substrate = precondition(allow_incomplete=ns.allow_incomplete_substrate,
+                             restore_if_missing=not ns.no_restore)
+    if not substrate.usable:
+        print("CENSUS_NOT_MEASURED: SUBSTRATE_INCOMPLETE -- %s" % substrate.reason)
+        print("  A census printed here would be a fact about this image, not about the tree.")
+        return 2
 
     rows = census(ns.axis)
     for row in rows:
@@ -336,6 +358,8 @@ def main(argv: list[str] | None = None) -> int:
     if ns.summary:
         summary(ns.summary, rows, served, ns.floor, floor_met)
         print("WROTE", ns.summary)
+    if not substrate.ready:
+        print("SUBSTRATE_CAVEAT: measured on an incomplete substrate -- %s" % substrate.reason)
     print("AUTHORITY NONE -- single-machine census, not independent verification")
     if not floor_met:
         print("SERVED FLOOR NOT MET: %d < %d" % (served, ns.floor))

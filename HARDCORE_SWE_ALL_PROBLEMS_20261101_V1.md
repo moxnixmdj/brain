@@ -53,6 +53,7 @@ rewriting `return a - b` to `return a + b`). The problems are, in order of what 
 | 28-task surface ladder | 28/28 reached, **27 PASS**, 1 refused by design, 0 false PASS | 27 PASS |
 | 49-sentence advanced census (no oracle) | 36 served / **13 refused** | 36 served / 13 refused |
 | 54-case capability matrix | **42 REAL** / 0 FALSE / 0 DAMAGED, median 79 ms | **44 REAL** / 0 FALSE / 0 DAMAGED, median 73 ms |
+| 2026-11-01 re-measure, bare venv vs restored, clean `origin/main` | 41 REAL, exit 0 | 43 REAL, exit 0 |
 
 The two sentences the substrate buys are the two the registry advertises as *gates*:
 
@@ -99,9 +100,20 @@ are all absent; `gcc, g++, node, make, git` are present. 38 modules mention pyte
 hypothesis, 145 mention coverage, 13 mention ruff, 12 mypy, 12 tree_sitter. Rows sourced from a
 package: `pypi` 12, `npm` 3, `apt` 11. Costs: two review gates degrade to `PASS_*_ONLY`; 12 rows
 whose evidence is a third-party tool cannot be run; nothing in the image runs the restore.
-**Fix:** the restore is already written and takes 12 s → make it the first step of the machine's own
-boot and make its verdict (`SUBSTRATE_READY`) a precondition the census reads. Measured payoff:
-+2 sentences, +2 matrix cases, no new code.
+**Fix (landed 2026-11-01):** the restore was already written and takes 12 s, so it is now the first
+step of the census workflow and its verdict is a precondition both instruments read
+(`execution_guard/substrate_precondition_v1.py`, one owner: `restore_substrate_v1.verify`). Measured
+on a bare venv and on the restored image, same commit, same sentences:
+
+```
+bare venv (0 of 10 tools)   census 35 of 49 served   matrix 41 REAL   exit 0, board written
+restored image              census 35 of 49 served   matrix 43 REAL
+after this change, bare     census NOT_MEASURED      matrix NOT_MEASURED   exit 2, no board written
+```
+
+The census count does not move, which is why this stayed invisible for two weeks; the two matrix
+cases that do are `lint` and `type_check`. A board printed on the bare image was 41 marks, 2 of
+which were facts about the interpreter. It is now a refusal instead.
 
 ### P2 — A served answer can be false, and "exact semantic acceptance" certifies it
 Measured, `6aa5dab`:
@@ -201,7 +213,7 @@ branch` — that is this worktree's state). The refusal saved it; nothing in the
 
 | # | action | measured/expected delta | cost |
 |---|---|---|---|
-| 1 | run `scripts/restore_substrate_v1.py` at boot; make `SUBSTRATE_READY` a census precondition | **9/18 → 11/18**, matrix **42 → 44** | 12 s, no code |
+| 1 | run `scripts/restore_substrate_v1.py` at boot; make `SUBSTRATE_READY` a census precondition | **9/18 → 11/18**, matrix **41 → 43** on a bare image; a bare board is now a refusal | done 2026-11-01 |
 | 2 | land this branch: refusal taxonomy + version-correct audit | 7 misreported crashes → refusals; audit false positives → 0 | done, unmerged |
 | 3 | bind the three slot shapes (P4): directory-wide rename, unstated body, dependency add | up to +3 on the 18-sentence board, +2 matrix | one binding rule each |
 | 4 | "nothing to do" as verified already-satisfied (P5) | up to +3 census | vocabulary + 3 state checks |
