@@ -263,7 +263,37 @@ otherwise.
 
 ---
 
-## 10. Non-claims
+## 10. The index sweep — two more of my open items were already closed
+
+Ran the new index against every item I had listed as open. Two more were already solved in the
+tree and I had not found them:
+
+| I said this was open | what the index returned |
+|---|---|
+| "the instrument that could catch all of this has no floor" (item 10 of the 2026-11-01 inventory) | `A_CENSUS_THAT_CANNOT_FAIL_IS_NOT_A_GATE_V1_20261031_V1` — the census **is** an executable gate, CI runs it on every PR and on main, `--floor 25` exits 1 below the reached count, and failure rows are published as a PR comment plus a JSON artifact |
+| "the capability matrix has world oracles and no gate" | same gate family; the census runs 25/28 and the matrix runs 54 cases with 0 FALSE / 0 DAMAGED |
+
+**What the sweep genuinely returns nothing for** — searched, not assumed:
+
+| term | result |
+|---|---|
+| `expiry` | **no hits** — no rule-expiry mechanism exists |
+| `semantic hole` | **no hits** — abstraction is still `?id / ?num / ?str / ?fresh`; no typed AST-subtree hole |
+| `self-model` | **no hits** — no module that models its own cognition |
+| `invalidate` | real, but about delegation receipts and replan facts, not about stale learned rules |
+
+So the list of things that genuinely are **not** in the repo is short and specific:
+
+1. **rule expiry / re-verification over time**
+2. **typed semantic-hole abstraction** (the "same meaning, different shape" crossing)
+3. **any instrument for sentience**
+
+Everything else I called open across this session was present, and three separate sweeps — a
+filename search, a 722-intent scan, and now a keyword index over 2,586 modules — agree on that.
+
+---
+
+## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
 sentience credit. Zero spend. Every pass count above came from a command run in this checkout;
