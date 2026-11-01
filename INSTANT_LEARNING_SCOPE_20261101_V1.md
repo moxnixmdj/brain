@@ -3,6 +3,13 @@
 **2026-11-01.** Written to answer one question honestly: *if instant learning works, is
 everything else solved?*
 
+> **SUPERSEDED IN PART — read `WHERE_THE_SOLUTIONS_LIVE_20261101_V1.md` first.**
+> The owner stated the solutions exist in this repository under non-obvious names. That was
+> correct, and this document's gaps were mostly search failures: 90 `osworld_v21_*` modules,
+> `computer_env_v1` (82 tests), `elevate_trace_to_fastest_layer` (pixel→sqlite in <2 ms), and
+> 12 passing tests for cross-checkout rule transport were all present while I reported their
+> absence. Only **one** gap in this document survives verification: cross-language carry.
+
 **Revised answer (after running the experiments in §0.5–0.7): substantially yes, with three
 named exceptions.** The owner's claim was right where it mattered and this document
 originally understated it, twice, because of my own faulty instruments.
