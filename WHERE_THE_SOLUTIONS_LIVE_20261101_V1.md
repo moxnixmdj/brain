@@ -871,6 +871,71 @@ single discriminating instance rather than asserted.
 
 ---
 
+## 10.11 What the system actually remembers, measured on itself
+
+Section 10.9 measured a synthetic lesson. This section measures the system's own shipped memory:
+`canonical/astra_runtime/skills/VERIFIED_SKILLS_BUNDLE_V1.json`. The SQLite store is generated
+state and does not travel between machines, so the bundle is the only memory that ships.
+
+### The whole memory
+
+| language | rules |
+|---|---|
+| python | 2 |
+| go | 1 |
+| typescript | 1 |
+| rust | 1 |
+| **total** | **5** |
+
+### Permanence: verified
+
+A brand-new store, in a fresh directory, seeded only from the bundle, holds **all five rules**.
+And the faithful recall path applies one to a source it has never seen:
+
+```
+shipped rule   return ?id0 + ?id0 * ?id1  ->  return ?id0 - ?id0 * ?id1
+input          def price(p, t):  return p + p * t
+output         def price(p, t):  return p - p * t
+```
+
+Renamed identifiers, correct edit, zero exposure on this machine. **"Learned once, still there,
+still usable" is true** -- for the five rules that exist.
+
+### Coverage: the ceiling, on its own corpus
+
+| shipped rules | |
+|---|---|
+| operator-representable (can reach past their instance) | **2 / 5** |
+| replay only (skeleton and stop) | **3 / 5** |
+
+Same ratio as the synthetic boundary lesson, arrived at independently. The ceiling is
+structural, not a property of one example.
+
+### Precision: the two paths are not the same instrument
+
+Given `def other(a, b): return a + b` -- which the shipped rule was **not** taught:
+
+| path | result |
+|---|---|
+| faithful token rule | **NO MATCH** -- `a + b` is not `?id0 + ?id0 * ?id1` |
+| crude operator swap | proposes `return a - b` |
+
+The crude path fires on the operator alone and over-proposes. It is safe **only** because it
+cannot accept anything -- every candidate goes to the caller's verifier. That is why the 6/7 and
+7/7 numbers in 10.9 are proposals, not accepted edits, and why "cannot accept" is tested rather
+than assumed.
+
+### A false alarm, recorded
+
+The recall path first looked broken: it returned NO MATCH for a source the operator path solved.
+It was not broken. That source was not an instance of the rule -- its pattern binds the same hole
+twice. The measurement was wrong, not the module. It is written down because the opposite
+conclusion would have been reported as a serious defect on the strength of a badly chosen input.
+
+`test_shipped_skill_memory_v1.py` -- **7 passed**.
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
