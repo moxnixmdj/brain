@@ -30922,7 +30922,7 @@
   "engines": 26,
   "knowledge_documents": 230,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6572,
+  "research_index_records": 6573,
   "routing_tokens": 2356,
   "skills": 18,
   "source_index_entry_points": 429,
@@ -30931,7 +30931,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "981577ccd9e38c503e9a155d15ac715bc749496924882306d617f05137800cee"
+  "value": "6275d994915c85a4ba2ec825c21b96bd35115ba4be9560d5e1adf04a033f4723"
  },
  "engines": [
   {
@@ -210038,6 +210038,51 @@
    }
   },
   {
+   "action_id": "LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LEARNED_ONCE_IS_FAST_ON_THE_NEXT_MACHINE_V1_20261101_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "946b9234b314b08a7905063da91bdb44172dc916eb3168ed5d86fc0481612d6a",
+   "status": "",
+   "terms": {
+    "0.0": 1,
+    "20261101": 1,
+    "623-program": 1,
+    "across": 1,
+    "action": 2,
+    "because": 1,
+    "being": 1,
+    "change": 1,
+    "colleague": 1,
+    "cumulative": 1,
+    "earned": 1,
+    "environments": 1,
+    "equality": 1,
+    "every": 1,
+    "experience": 1,
+    "fast": 1,
+    "fingerprints": 1,
+    "forgotten": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "installs": 1,
+    "instead": 1,
+    "learned": 1,
+    "learned_once_is_fast_on_the_next_machine_v1_20261101_v1": 2,
+    "learning": 1,
+    "local": 1,
+    "machine": 4,
+    "memory": 2,
+    "moment": 1,
+    "next": 2,
+    "one": 3,
+    "set": 2,
+    "v1": 2
+   }
+  },
+  {
    "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -283826,9 +283871,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/transfer_learning_v1.py",
-   "sha256": "8e2d7a43b7361acef1a55e533e8d1932b3e0cdeb8089cfbd15f253b7be2689e2",
+   "sha256": "cf5a763ef3613796fce49987f58da004fe3f88ac84b4909692489400c7f13cb9",
    "summary": "Experience carries over. An environment is not the first one ever seen.",
-   "symbol_count": 11,
+   "symbol_count": 12,
    "symbols": [
     "_fp_key",
     "_goal_key",
@@ -283838,6 +283883,7 @@
     "fingerprint",
     "recall",
     "remember",
+    "replayable",
     "shape_of",
     "similarity",
     "stats"
@@ -283859,6 +283905,7 @@
     "over": 1,
     "recall": 1,
     "remember": 1,
+    "replayable": 1,
     "save": 1,
     "seen": 1,
     "shape_of": 1,
