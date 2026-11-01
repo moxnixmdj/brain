@@ -89,7 +89,10 @@ class RepairApplyVerifiedTests(unittest.TestCase):
             self.assertEqual((root/"m.py").read_bytes(),original)
 
     def test_no_bounded_repair_means_no_write(self):
-        td,root=self.fixture(src="def f(x):\n    return x\n",test="from m import f\nassert f(2)==99999\n")
+        # Conflicting requirements on the same evaluated value cannot be repaired
+        # by this bounded pure-expression solver. A constant is a valid repair
+        # for the old single-input test and is tested explicitly below.
+        td,root=self.fixture(src="def f(x):\n    return x\n",test="from m import f\nvalue=f(2)\nassert value==99999\nassert value!=99999\n")
         original=(root/"m.py").read_bytes()
         with td:
             out=self.go(root,max_pair_candidates=10,mutations_per_file=4)
@@ -99,28 +102,39 @@ class RepairApplyVerifiedTests(unittest.TestCase):
             self.assertEqual(out["files_written"],[])
             self.assertEqual((root/"m.py").read_bytes(),original)
 
+    def test_trace_synthesis_can_repair_a_single_observed_constant(self):
+        import subprocess
+        td,root=self.fixture(src="def f(x):\n    return x\n",test="from m import f\nassert f(2)==99999\n")
+        with td:
+            out=self.go(root,max_pair_candidates=10,mutations_per_file=4)
+            self.assertTrue(out["pass"],out)
+            self.assertTrue(out["applied"],out)
+            self.assertEqual(out["repair_mode"],"live_trace_observational_synthesis")
+            checked=subprocess.run([sys.executable,"test_all.py"],cwd=root,capture_output=True)
+            self.assertEqual(checked.returncode,0,checked.stderr)
+            # This one stated input is not proof of general request semantics.
+
     def test_a_patch_that_fails_in_place_is_rolled_back_byte_for_byte(self):
-        # The nearest world in which the accepting test above must fail: the same
-        # verified patch, but the stated test does not pass in place afterwards.
-        td,root=self.fixture()
+        # Exercise the actual application boundary, not a mocked subprocess helper.
+        # The caller command accepts addition; the actual corpus requires multiplication.
+        td,root=self.fixture(src="def f(a,b):\n    return a-b\n",
+                             test="from m import f\nassert f(2,3)==6\n")
         original=(root/"m.py").read_bytes()
-        real=applyv1._run_test
-        calls={"n":0}
-        def fake(argv,cwd,timeout):
-            calls["n"]+=1
-            return (1,b"") if calls["n"]==1 else (1,b"STILL_BROKEN")
-        applyv1._run_test=fake
-        try:
-            with td:
-                out=self.go(root)
-                self.assertFalse(out["pass"],out)
-                self.assertEqual(out["status"],"FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY")
-                self.assertFalse(out["applied"])
-                self.assertTrue(out["source_restored"])
-                self.assertEqual(out["files_written"],[])
-                self.assertEqual((root/"m.py").read_bytes(),original)
-        finally:
-            applyv1._run_test=real
+        original_test=(root/"test_all.py").read_bytes()
+        command="import pathlib; assert 'a+b' in pathlib.Path('m.py').read_text().replace(' ','')"
+        with td:
+            out=self.go(root,test_argv=[sys.executable,"-c",command,"test_all.py"],
+                        max_pair_candidates=8,mutations_per_file=12)
+            self.assertEqual(out["pre_apply_test_returncode"],1)
+            self.assertEqual(out["post_apply_test_returncode"],0)
+            self.assertNotEqual(out["post_apply_corpus"]["returncode"],0)
+            self.assertFalse(out["pass"],out)
+            self.assertEqual(out["status"],"FAIL_CLOSED__IN_PLACE_VERIFICATION_FAILED_AFTER_APPLY")
+            self.assertFalse(out["applied"])
+            self.assertTrue(out["source_restored"])
+            self.assertEqual(out["files_written"],[])
+            self.assertEqual((root/"m.py").read_bytes(),original)
+            self.assertEqual((root/"test_all.py").read_bytes(),original_test)
 
     def test_a_patch_whose_bytes_do_not_match_its_own_hash_never_reaches_the_disk(self):
         td,root=self.fixture()

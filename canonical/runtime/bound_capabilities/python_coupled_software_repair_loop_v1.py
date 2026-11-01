@@ -110,7 +110,7 @@ def _edit_node(raw,lines,target,desc,replacer):
  start,end,rb=span
  if raw[start:end]==rb:return None
  return {"start":start,"end":end,"replacement":rb,"mutation":desc}
-def _pool(row,tests,per_file):
+def _pool(row,tests,per_file,*,comparison_reserve=0):
  p=row["path"]
  try:
   text=p.read_bytes().decode("utf-8");tree=ast.parse(text,filename=str(p))
@@ -162,7 +162,21 @@ def _pool(row,tests,per_file):
  # appended -- legacy indices, pair-space membership and every existing budget
  # stay byte-identical to what the ladder receipts measured.
  dropped=[e for _,e in out if e.get("family")=="dropped_operand"][:8]
- return legacy+neigh+guards+dropped
+ base=legacy+neigh+guards+dropped
+ # Preserve every existing slot/order. Large docstrings and literals can consume
+ # the whole legacy budget before an executed comparison (historical bytes2human).
+ # The guided consumer may request a bounded SINGLE-only reserve; default callers
+ # and all existing pair products keep their original pool exactly.
+ extra=[]
+ if comparison_reserve:
+  cap=max(0,min(int(comparison_reserve),4))
+  included={(e["start"],e["end"],e["replacement"]) for e in base}
+  for _,e in out:
+   if e["mutation"].get("kind")!="COMPARE_SWAP":continue
+   if (e["start"],e["end"],e["replacement"]) in included:continue
+   if len(extra)>=cap:break
+   extra.append(dict(e,family="comparison_reserve"))
+ return base+extra
 def _apply(text,edits):
  raw=text.encode(); es=sorted(edits,key=lambda e:(e["start"],e["end"]));last=-1
  for e in es:
