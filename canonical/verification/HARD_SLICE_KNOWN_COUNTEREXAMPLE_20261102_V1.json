@@ -1,0 +1,23 @@
+{
+ "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+ "date": "2026-11-01",
+ "proposal": "Select attempts by external evidence (inspector-verified failures + missing inspectors) so a refusal can be lifted by honest work (canonical/runtime/external_hard_slice_v1.py)",
+ "falsifier_id": "EXTERNAL_WORK_IS_NOT_AN_EXTERNAL_NUMBER",
+ "decisive_question": "Does choosing the work externally also make the stated probabilities honest?",
+ "answer": "NO",
+ "counterexamples": [
+  "The system still chooses the number. Only the work is external; the probability comes from state(cid). A system that states 0.5 for everything separates nothing and is correctly classified NO_DISCRIMINATION -- but a system that states a mildly varying, uninformative number can nudge the overconfidence term under the ceiling without becoming better at knowing itself. The gate measures the claimed number, and the claim is still the system's.",
+  "Uninspected-first means the slice is dominated by capabilities nobody can check. Settling those as failures is honest but uninformative: it pushes the ledger toward pessimism rather than toward truth, and pessimism is cheap to achieve by failing on purpose.",
+  "The difficulty signal is historical. A capability that fails for an unrelated environmental reason is over-sampled forever; there is no mechanism that notices a failure cause has changed.",
+  "Nothing requires the slice to be run. A caller that never invokes it leaves the gate exactly as frozen as before, and no guard forces the invocation."
+ ],
+ "measured": {
+  "before_slice": "MEASURED_OVERCONFIDENCE, overconfidence 0.20, gate refuses",
+  "after_slice": "NO_MEASURED_OVERCONFIDENCE, overconfidence 0.1375, gate does not refuse",
+  "slice": "12 attempted, 7 accepted, 5 refused by the gate and still attempted",
+  "selection_excludes": "the system's own stated confidence",
+  "measured_on": "2026-11-01"
+ },
+ "implication": "The cage counterexample from OVERCONFIDENCE_GATE_KNOWN_COUNTEREXAMPLE_20261102_V1 is closed for the mechanism: a refused system can now accumulate evidence and escape. It is not closed for the measurement: which number gets recorded is still the system's own claim, so calibration remains a statement about the claims rather than about self-knowledge.",
+ "what_would_close_it": "An external generator of the probability itself -- a baseline predictor fitted on prior inspector outcomes that the system cannot edit -- scored against the same ledger, so the gate compares the system's claim to a number the system did not author."
+}
