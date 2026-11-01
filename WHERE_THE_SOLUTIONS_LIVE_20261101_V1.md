@@ -670,6 +670,85 @@ A skip is not a pass.
 
 ---
 
+## 10.8 "The solutions are in the repo, the names are hard to find" -- measured, not argued
+
+The owner has said this repeatedly and has been right every time. Rather than search by name
+again, the search was automated: `canonical/tools/census_orphan_capabilities_v1.py` builds a
+name-level call graph over 5222 files and classifies every module-level function and class.
+
+### Name level
+
+| class | count | meaning |
+|---|---|---|
+| `LIVE` | 2146 | referenced by a non-test module outside its own file |
+| `TEST_ONLY` | 1153 | referenced **only** from tests -- specified, never used |
+| `ORPHAN` | 1010 | referenced nowhere |
+| *(ambiguous, skipped)* | 737 | names defined in more than three modules; too common to classify |
+
+Restricted to public **functions** in modules that also have a test and a `SCHEMA`: **180 orphan
+functions across 116 modules.**
+
+### Module level, which is the sharper question
+
+A function called by another function in its own file is not dead code -- but if nothing outside
+its tests imports the file, the capability is unreachable from production.
+
+| measurement | count |
+|---|---|
+| modules under `runtime/` + `swe_kernel/` | 2299 |
+| imported by no non-test module | **1784** |
+| ...and not even named as a string anywhere in non-test code | **1305** |
+| ...which nonetheless have a matching test | **895** |
+| ...with no test at all | 410 |
+
+The string check matters: this tree dispatches by name in 101 places, so a module that appears as
+a literal may be reachable dynamically and is **not** counted. Every exclusion here moves the
+number down, so 1305 is a conservative bound, not an inflated one.
+
+Artifact: `canonical/evidence/UNREACHABLE_CAPABILITY_MODULES_V1.json` (regenerate with
+`--modules`, do not hand-edit).
+
+### The instrument was tested, and it was wrong twice
+
+A census that cannot be trusted is worse than no census.
+
+1. `_is_test` did a **substring** match over the whole path. Pytest hands out temp directories
+   named `test_something0`, so every file was classified as a test and the census came back
+   empty. It now inspects path components.
+2. Modules were matched against import statements by exact name, but imports are absolute
+   (`canonical.runtime.x`) while a scan rooted at `canonical` names them relatively
+   (`runtime.x`). They are now matched on suffixes.
+
+Both bugs were found by `test_census_orphan_capabilities_v1.py` (**4 passed**), which builds a
+synthetic tree whose answer is known by construction.
+
+### The honest part
+
+Pointed at this session's own work, the census says:
+
+```
+TEST_ONLY   learn_scope            rule_scope_learning_v1.py
+TEST_ONLY   scope_is              rule_scope_learning_v1.py
+TEST_ONLY   derive_operator_swap   operator_generalization_v1.py
+TEST_ONLY   record_taught          rule_expiry_v1.py
+```
+
+**`learn_scope` -- the module built two sections ago to give the orphan `select_probe` a caller
+-- is itself called only by its tests.** The diagnosis reproduced on the diagnosis.
+
+That is not fixed by inventing a call site. `learn_scope` needs instances and a verifier, and no
+production path currently holds both; wiring it to a site that does not exist would be exactly
+the fiction this document is about. It stays `TEST_ONLY`, and is labelled as such, until a
+caller that genuinely has evidence asks it.
+
+### What this actually answers
+
+The claim was never that the repo is empty. The claim was *the answers are here and cannot be
+found*. That is now a number: **1305 capability modules, 895 of them with tests, reachable from
+nothing**. Naming is not the difficulty. Reachability is.
+
+---
+
 ## 11. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality or
