@@ -1713,6 +1713,14 @@
       }
     },
     "main_commit": "073540db10dc8f56d5193281f24f2bd32f13550e",
+    "model_governance_run": {
+      "failed": 1,
+      "failed_case": "test_brain_module_invoke_v1.EvidenceTests::test_check_mode_finds_no_drift",
+      "passed": 85,
+      "seconds": 73.78,
+      "stale_evidence_rows": 21,
+      "subtests_passed": 913
+    },
     "refusal_reason_regression_run": {
       "passed": 102,
       "seconds": 8.9,

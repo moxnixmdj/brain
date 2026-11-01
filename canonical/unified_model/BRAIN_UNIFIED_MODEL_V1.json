@@ -30931,7 +30931,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "125ea535465100cb985999ef4882adca6c1a9cfa2eac4f8975b6195c1063c96d"
+  "value": "e044fb7647967811af19b1c3dac11616b2c1d56a43133969532c3ac30a9d1841"
  },
  "engines": [
   {
@@ -60691,7 +60691,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 10186,
+   "bytes": 10354,
    "headings": [
     "SWE transformation and retained-plan reuse: bounded implementation batch",
     "Implemented",
@@ -60703,7 +60703,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.md",
-   "sha256": "76569ac6e660205fb46a4bb2dd9eeef436b4ca189b40302b06b102c8031c4c71",
+   "sha256": "7b59eee6a03d96fb829e700f5e66b4daaa3875cdf4a89e6796678034226a19a1",
    "summary": "Date: 2026-11-01. Base: `05762527e13e2d3345032f9b365df17b661c781f`. Authority: NONE. These are agent-produced sandbox measurements, not independent capability receipts, terminal credit, or evidence of universal mastery.",
    "terms": {
     "15": 4,
@@ -60724,18 +60724,19 @@
     "edits": 4,
     "evidence": 8,
     "existing": 6,
-    "failed": 9,
+    "failed": 10,
     "failures": 4,
+    "final": 4,
     "functions": 4,
-    "integrated": 4,
+    "integrated": 5,
     "integration": 5,
     "learning": 8,
     "measurements": 4,
-    "model": 4,
+    "model": 5,
     "no": 13,
     "not": 25,
     "only": 4,
-    "passed": 10,
+    "passed": 12,
     "qualification": 5,
     "refused": 5,
     "remain": 4,
@@ -60750,10 +60751,9 @@
     "skill": 4,
     "source": 4,
     "split": 4,
-    "subtests": 4,
+    "subtests": 5,
     "test": 4,
-    "tests": 11,
-    "were": 4
+    "tests": 12
    },
    "title": "SWE transformation and retained-plan reuse: bounded implementation batch",
    "title_terms": [
@@ -60796,7 +60796,7 @@
   "included_source_count": 1025,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0ff7fef955c7303f14f9412ddb7f242be57052ae91606e1d25e9df1c2482a78d"
+  "source_tree_digest": "11414d66838fe134d29f98e5ad9c1d61c3a965fe82d79ced9f24bfd1833e743b"
  },
  "research_index": [
   {
@@ -176887,7 +176887,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/SWE_TRANSFORM_REUSE_BATCH_20261101.json",
    "schema": "SWE_TRANSFORM_REUSE_BATCH_MEASUREMENT_V1",
-   "sha256": "0d7219cd62e8f7d1ce1512acaa79ef4d0861fb099d52adfb79d7d4c41854f597",
+   "sha256": "578931cc42f88a9e9112d2ba693eae3e142fad37866ab53e32b6f0685bfa104e",
    "status": "",
    "terms": {
     "20261101": 1,
