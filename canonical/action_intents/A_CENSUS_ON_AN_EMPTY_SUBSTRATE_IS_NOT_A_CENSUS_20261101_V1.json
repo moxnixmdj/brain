@@ -40,7 +40,7 @@
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::An instrument reported a number it could not source. Whether a green gate was a fact about the code or about the interpreter was decided by a lookup in the environment and printed in a column that could not show the difference, and the one command that resolves it was never called by anything.",
-  "canonical_base_commit": "c49ea46d46e20e6017a5ac232b5dcbfbc2a19741",
+  "canonical_base_commit": "85e2b81cee3b78029167e3ba3744e3dd2c8eaf46",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -55,7 +55,7 @@
   "incremental_spend_usd": 0,
   "intent": "A number must be about the tree it names, and an image that cannot measure must say so instead.",
   "load_bearing_primary": {
-    "canonical_base_commit": "c49ea46d46e20e6017a5ac232b5dcbfbc2a19741",
+    "canonical_base_commit": "85e2b81cee3b78029167e3ba3744e3dd2c8eaf46",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -93,7 +93,7 @@
   ],
   "real_outcome": "A software-engineering sentence that names a source file and states an effect is either served by editing that file and verified, or refused by a cause the caller can act on; a run that edits something else is never certified as the answer.",
   "recursive_obs": {
-    "canonical_base_commit": "c49ea46d46e20e6017a5ac232b5dcbfbc2a19741",
+    "canonical_base_commit": "85e2b81cee3b78029167e3ba3744e3dd2c8eaf46",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "A_TWO_STAGE_DECISION_WHERE_THE_SECOND_STAGE_COULD_ONLY_SAY_NO",
