@@ -751,6 +751,63 @@ was good, and the old code said something had.
 
 ---
 
+## 6.3 The rule that fixes it is already written in the code, twice, and three mechanisms below it defeat it
+
+The owner's claim is that the solutions are in the repository and hard to find. This section is a
+case where that is literally true, and where the finding is not a missing solution but a **rule
+that is stated and then defeated below itself**.
+
+`canonical/runtime/world_binding_v1.py` contains, as a comment in the shipping code:
+
+> A PATH THE GOAL NAMES THAT IS NOT THERE IS A FACT, NOT A GAP.
+> `audit the python source canonical/runtime/NO_SUCH_DIRECTORY_HERE` was promoted to its parent
+> and audited 2078 files the user never asked about, then reported VERIFIED. The work was real and
+> it was about the wrong thing, which is worse than refusing: a refusal is visible, a
+> substitution is not.
+
+And eleven lines later, the same file states the precedence rule:
+
+> GOAL > DEMONSTRATED RECEIPT > WORLD HEURISTIC. ... It never outranks the goal: `bound` was
+> settled above, and a slot the goal named is never revisited here.
+
+Both rules are correct. Both are **defeated**, and the repository's own falsification registry
+(`verifier_falsification_v1`, 98 counterexamples) is what says so:
+
+```
+AFFIRMED  grounded_action_v1.act   a path that does not exist replaced by one that does
+```
+
+Measured on 2026-11-01, `grounded_action_v1.act("audit the python source canonical/runtime/
+NO_SUCH_DIRECTORY_HERE")` returns `VERIFIED_ACTION`. Traced layer by layer:
+
+| layer | behaviour | verdict |
+|---|---|---|
+| path extraction (`goal_compiler._repo_paths`) | yields the full absent path | correct |
+| binding (`world_binding_v1._pick_path`) | returns `None` for an absent stated path | **correct — the rule works here** |
+| demonstrated receipt (`complete_inputs`, `filled_from_demonstrated_case`) | fills the refused slot from the capability's own recorded run: `source_root=canonical/runtime` | **substitutes** |
+| world heuristic (`_world_path_for`) | after the receipt was blocked in a scratch experiment, picked `ab_optional_inputs_20261030.py` — an unrelated file that happens to exist | **substitutes** |
+
+The mechanism of the defeat is the interesting part: `_pick_path`'s refusal is **silent**. The slot
+never enters `bound`, so the later code cannot tell "the goal named nothing" from "the goal named
+something that is not there" — and both fallbacks are allowed to act on the second case. A refusal
+that leaves no mark is indistinguishable from an absence of opinion.
+
+I removed the demonstrated-receipt substitution in a scratch experiment and watched the defect
+**move down one layer** to the world heuristic. That change was then reverted rather than shipped:
+it did not fix the reported outcome, its blast radius could not be verified (collection across
+`canonical/tests` is already broken in 24 modules by missing `numpy`/`opencv`), and shipping a
+binder change on faith is the thing this document keeps refusing to do.
+
+The fix, when it is done properly, is at admission rather than at any of the four layers: **if the
+goal states a path that does not exist, no candidate may be admitted while substituting a different
+path for that slot.** One rule, at the top, instead of three fallbacks each independently deciding
+it is allowed.
+
+<!-- correction: 2026-11-01, the section above was written after the rule was found; the earlier
+sections of this document predate it. -->
+
+---
+
 ## 7. Non-claims
 
 No capability, ownership, benchmark, acceptance, promotion, terminal, permanence, optimality
