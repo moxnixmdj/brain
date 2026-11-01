@@ -1214,6 +1214,11 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
     try:
         from canonical.runtime import write_authority_v1 as _write_authority
         _write_authority.check(ROOT, call_args, cid)
+        # A destination that was never a candidate SOURCE is invisible to the check
+        # above; the bytes are not.  Watched here, verified after the run, restored
+        # and refused if the adapter replaced Python source with something that is
+        # not Python (measured on main 2026-11-01 with the hardcore orchestrator).
+        _watched_sources = _write_authority.watch_destinations(ROOT, call_args)
     except LocalExecutionFailure:
         raise
     except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
@@ -1234,6 +1239,10 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         if preimages is not None:
             transition.restore(ROOT, preimages)
         raise
+    try:
+        _write_authority.restore_if_a_source_was_replaced(ROOT, _watched_sources)
+    except Exception as exc:  # noqa: BLE001 - a destroyed source is a closed refusal
+        raise LocalExecutionFailure(str(exc)) from exc
     result.setdefault("capability_id", cid)
     result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
     _check_expectation(action.get("expect"), result)
