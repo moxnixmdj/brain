@@ -23,6 +23,12 @@ is recorded. From the pairs:
 
 THE RULE THAT MAKES THIS FALSIFIABLE
 ------------------------------------
+A second way to fake it is a curated diet: declare predictions only on the tasks you expect to pass,
+and the ledger looks calibrated while saying nothing about the tasks you fail. So the best verdict is
+capped by the sample: fewer than MIN_HARD_FRACTION predictions below HARD_PREDICTION_BELOW and the
+result can never be CALIBRATED -- it is CALIBRATED_ONLY_ON_EASY_TASKS, and a sample that contains
+only one outcome cannot be scored for discrimination at all.
+
 A constant predictor -- always 0.9, always "yes" -- cannot beat the base rate and has zero
 discrimination. So a system whose self-model is decoration is not merely unimpressive here, it is
 *classified* as decoration: NO_DISCRIMINATION or WORSE_THAN_BASE_RATE. A module that only reported
@@ -62,13 +68,20 @@ MIN_SETTLED = 20
 MIN_DISCRIMINATION = 0.05
 # Claiming more than this beyond the delivered rate is systematically overconfident.
 MAX_OVERCONFIDENCE = 0.15
+# Below this probability the system is saying it expects to fail.
+HARD_PREDICTION_BELOW = 0.5
+# A sample with fewer than this share of hard predictions is a curated diet. It can be scored, but
+# it cannot certify calibration, because the errors it would have caught were never attempted.
+MIN_HARD_FRACTION = 0.25
 
 VERDICTS = (
     "INSUFFICIENT_EVIDENCE",
+    "UNREPRESENTATIVE_SAMPLE",
     "NO_DISCRIMINATION",
     "WORSE_THAN_BASE_RATE",
     "SYSTEMATICALLY_OVERCONFIDENT",
     "SYSTEMATICALLY_UNDERCONFIDENT",
+    "CALIBRATED_ONLY_ON_EASY_TASKS",
     "CALIBRATED",
 )
 
@@ -216,7 +229,10 @@ def score(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
     discrimination = (sum(passed) / len(passed) - sum(failed) / len(failed)
                       if passed and failed else 0.0)
     overconfidence = mean_p - base_rate
-    verdict, reason = _verdict(n, skill, discrimination, overconfidence)
+    hard = sum(1 for p, _ in pairs if p < HARD_PREDICTION_BELOW)
+    hard_fraction = hard / n
+    both_classes = bool(passed) and bool(failed)
+    verdict, reason = _verdict(n, skill, discrimination, overconfidence, hard_fraction, both_classes)
     return {
         "schema": SCHEMA,
         "n": n,
@@ -227,6 +243,13 @@ def score(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
         "mean_predicted": round(mean_p, 6),
         "observed_pass_rate": round(base_rate, 6),
         "overconfidence": round(overconfidence, 6),
+        # How much of the sample the system expected to fail. A clean score on a diet of easy tasks
+        # is not calibration, so the number travels with the verdict that depends on it.
+        "hard_predictions": hard,
+        "hard_fraction": round(hard_fraction, 6),
+        "required_hard_fraction": MIN_HARD_FRACTION,
+        "outcome_classes_observed": int(both_classes) + (0 if both_classes else
+                                                          (1 if (passed or failed) else 0)),
         "verdict": verdict,
         "reason": reason,
         # Said here so a reader of the JSON cannot mistake the scope of the number.
@@ -235,9 +258,13 @@ def score(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
     }
 
 
-def _verdict(n: int, skill: float, discrimination: float, overconfidence: float) -> tuple[str, str]:
+def _verdict(n: int, skill: float, discrimination: float, overconfidence: float,
+             hard_fraction: float = 1.0, both_classes: bool = True) -> tuple[str, str]:
     if n < MIN_SETTLED:
         return "INSUFFICIENT_EVIDENCE", f"SETTLED_PREDICTIONS_{n}_BELOW_{MIN_SETTLED}"
+    if not both_classes:
+        # Without both outcomes there is no contrast to measure, so no claim either way.
+        return "UNREPRESENTATIVE_SAMPLE", "ONLY_ONE_OUTCOME_CLASS_OBSERVED"
     if discrimination <= MIN_DISCRIMINATION:
         # A constant predictor lands here: it separates nothing, whatever its Brier score.
         return "NO_DISCRIMINATION", "BELIEF_DOES_NOT_SEPARATE_PASS_FROM_FAIL"
@@ -247,6 +274,10 @@ def _verdict(n: int, skill: float, discrimination: float, overconfidence: float)
         return "SYSTEMATICALLY_OVERCONFIDENT", "CLAIMS_MORE_THAN_IT_DELIVERS"
     if overconfidence < -MAX_OVERCONFIDENCE:
         return "SYSTEMATICALLY_UNDERCONFIDENT", "DELIVERS_MORE_THAN_IT_CLAIMS"
+    if hard_fraction < MIN_HARD_FRACTION:
+        # The numbers look good, but the sample never asked the system to predict its own failure.
+        return ("CALIBRATED_ONLY_ON_EASY_TASKS",
+                f"HARD_PREDICTION_FRACTION_{hard_fraction:.2f}_BELOW_{MIN_HARD_FRACTION}")
     return "CALIBRATED", "BEATS_BASE_RATE_AND_SEPARATES_OUTCOMES"
 
 
@@ -261,7 +292,8 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(report["schema"])
         for key in ("n", "brier", "brier_base_rate", "skill_over_base_rate", "discrimination",
-                    "mean_predicted", "observed_pass_rate", "overconfidence"):
+                    "mean_predicted", "observed_pass_rate", "overconfidence",
+                    "hard_predictions", "hard_fraction"):
             print(f"  {key:<22} {report.get(key)}")
         print(f"  verdict                {report['verdict']} ({report['reason']})")
         print(f"  measures               {report['measures']}")

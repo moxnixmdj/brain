@@ -30952,7 +30952,7 @@
   "engines": 26,
   "knowledge_documents": 239,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6608,
+  "research_index_records": 6610,
   "routing_tokens": 2360,
   "skills": 18,
   "source_index_entry_points": 430,
@@ -30961,7 +30961,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0227f6e38d581c84277bc842a3a58a08cfc54ab7c69261ab2e225e55a329cb4f"
+  "value": "bc0f4e1a131b709b7f5e7d17666602551eee223c020bded4ffa2470920f14cf8"
  },
  "engines": [
   {
@@ -176550,6 +176550,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/verification/SELF_PREDICTION_SAMPLE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SELF_PREDICTION_SAMPLE_KNOWN_COUNTEREXAMPLE_20261102_V1.json",
+   "schema": "PROJECT_BRAIN_KNOWN_COUNTEREXAMPLE_RECEIPT_V1",
+   "sha256": "a3b51c99f601ffefe0c92bfb6e0bfa66ae6bbfc0bcd7d873d44c4c3a9f2658be",
+   "status": "",
+   "terms": {
+    "20261102": 1,
+    "counterexample": 1,
+    "known": 1,
+    "prediction": 1,
+    "sample": 1,
+    "self": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/SEMANTIC_PAIR_NONIDENTIFIABILITY_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -209202,6 +209222,51 @@
     "so": 2,
     "source.candidates.enumerate.stdlib": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "CAP_CALIBRATION_VERDICT_BY_SAMPLE_V1_20261102",
+   "capability": false,
+   "date": "2026-11-01",
+   "id": "research:canonical/action_intents/CAP_CALIBRATION_VERDICT_BY_SAMPLE_V1_20261102.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CAP_CALIBRATION_VERDICT_BY_SAMPLE_V1_20261102.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "59986f5ac2e3a39f746b1556247f9ac8f06494a370d50dd94f495c46eb464930",
+   "status": "",
+   "terms": {
+    "0.0975": 1,
+    "0.3": 1,
+    "0.48": 1,
+    "20261102": 1,
+    "add_create_branch_clause_to_grammar": 1,
+    "attempted": 1,
+    "benchmark": 1,
+    "brier": 1,
+    "calibrated": 1,
+    "calibration": 1,
+    "cap": 1,
+    "cap_calibration_verdict_by_sample_v1_20261102": 1,
+    "caught": 1,
+    "certified": 1,
+    "curated": 1,
+    "diet": 1,
+    "discrimination": 1,
+    "errors": 1,
+    "every": 1,
+    "expected": 1,
+    "expects": 1,
+    "fail": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "good": 1,
+    "looked": 1,
+    "moves": 1,
+    "must": 1,
+    "never": 1,
+    "no": 1,
+    "number": 1,
+    "only": 1,
+    "self-model": 2
    }
   },
   {
@@ -278403,7 +278468,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/self_prediction_calibration_v1.py",
-   "sha256": "f0af7068cb0b67ec3755a9f8f6254ed03137b62c08842f15442742c3b8cc7882",
+   "sha256": "9875d17b7c1fef101c74a337b28abf28fe007b9025c1258fcdf2e97564955737",
    "summary": "Does the system's model of itself predict anything?",
    "symbol_count": 7,
    "symbols": [
