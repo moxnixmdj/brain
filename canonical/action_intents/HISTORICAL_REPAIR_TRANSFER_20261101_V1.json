@@ -32,13 +32,15 @@
       "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py",
       "canonical/runtime/bound_capabilities/python_provenance_guided_coupled_repair_v1.py",
       "canonical/tests/test_historical_repair_transfer_v1.py",
-      "canonical/verification/HISTORICAL_REPAIR_TRANSFER_20261101_V1.md"
+      "canonical/verification/HISTORICAL_REPAIR_TRANSFER_20261101_V1.md",
+      "hardcore_swe_surface_probe_20261030.py",
+      "canonical/tests/test_surface_regression_oracle_fresh_source_v1.py"
     ],
     "route_class": "INTEGRATE"
   },
   "benchmark_or_family_rank_authority": false,
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Retained repair currently uses the first syntactic match and its historical generalization beyond seeded expression tasks is unqualified; two legacy apply tests are stale.",
-  "canonical_base_commit": "cacadec042d11bc87f57ec82c668ab35c361b21a",
+  "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -52,7 +54,7 @@
   "highest_leverage_scope": "Measured existing-path verification gap; finite engineering prioritization, not universal optimality.",
   "incremental_spend_usd": 0,
   "load_bearing_primary": {
-    "canonical_base_commit": "cacadec042d11bc87f57ec82c668ab35c361b21a",
+    "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
     "constructive_gap_for_open_obligation_ids": [
       "CODING_CURSORBENCH_GE_57_8",
       "CODING_FRONTIERCODE_GE_54_4",
@@ -68,6 +70,17 @@
     "stop_condition": "Stop after bounded source/test/model revalidation and ordinary admission; disclose inherited failures and remaining curriculum. If proposing a PR, do not merge without current authorization or bypass any required check.",
     "success_probability_lcb": "1/2",
     "wall_clock_cost_ub": 86400
+  },
+  "merge_gate_followup": {
+    "authorization": "Subsequent explicit user instruction: Merge all your work.",
+    "original_admission_base_commit": "cacadec042d11bc87f57ec82c668ab35c361b21a",
+    "planned_fix": "Exclude __pycache__ and .pyc/.pyo from the scratch tree before git reverts application sources. Strengthen source freshness without changing oracle expectations, workflow or floor.",
+    "reason": "Incoming main integration requires exact-current-base blocker lease. CI census copied green bytecode into the reverted source project.",
+    "recorded_utc": "2026-11-01T14:06:44.818493+00:00",
+    "red_test": "canonical/tests/test_surface_regression_oracle_fresh_source_v1.py",
+    "refreshed_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+    "report_freeze_precedes_merge_authorization": true,
+    "reproduction": "New real-files regression with unchecked-hash green pycache fails on current oracle: suite green, correct value 5, but reverted bug hidden. No import/filesystem/process substitution."
   },
   "ownership_credit_delta": 0,
   "post_probe_resolution": {
@@ -95,7 +108,7 @@
   "probe_specific": false,
   "producer_development_provenance": "Model-assisted Arena coding session; no Brain benchmark, ownership, capability or terminal promotion claimed. The implemented runtime route invokes no external general-purpose model.",
   "recursive_obs": {
-    "canonical_base_commit": "cacadec042d11bc87f57ec82c668ab35c361b21a",
+    "canonical_base_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Stated-command exit code alone as proof that named tests passed",

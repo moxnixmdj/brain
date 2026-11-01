@@ -88,6 +88,22 @@
   "external_general_purpose_model_calls_in_runtime": 0,
   "independent_certification": false,
   "merge_authorized_in_this_batch": false,
+  "merge_stage_followup": {
+    "census_reproduction": "A deterministic real unchecked-hash green bytecode cache reproduces the same false-negative oracle result before the fix (1 failed / 0.35s). The scratch copy now excludes compiled Python caches; the unchanged required assertion passes (1 passed / 0.36s).",
+    "changes": "Refresh exact-base metadata while preserving original admission base; exclude __pycache__, .pyc and .pyo when creating the reverted scratch project. No workflow, floor, oracle expectation or production learning gate weakened.",
+    "ci_initial_failures": [
+      "Stale exact-base blocker lease after integrating main",
+      "Surface census 27/28: reverted bug hidden in regression oracle"
+    ],
+    "combined_tree_integration_tests": "220 passed / 289.65s",
+    "combined_tree_model_tests": "137 passed, 911 subtests passed / 49.12s",
+    "combined_tree_model_verifier": "33/33 PASS",
+    "incoming_main_commit": "5eedc03643d93f76827fc963f7c76aa27edb1d5a",
+    "latest_ci_outcome": "Pending new commit checks; do not infer acceptance from this report.",
+    "new_regression_test": "canonical/tests/test_surface_regression_oracle_fresh_source_v1.py",
+    "pull_request": 6555,
+    "recorded_utc": "2026-11-01T14:07:19.175756+00:00"
+  },
   "model_assisted_development": true,
   "negative_controls": [
     {
@@ -1771,6 +1787,7 @@
     "upstream_tests": "Exact selected AST function/class bodies, not full upstream suites"
   },
   "status": "BOUNDED_SOLVER_RELIABILITY_GAIN__NO_DISTINCT_ISSUE_LEARNING_ADVANTAGE",
+  "subsequent_merge_authorization": true,
   "summary": {
     "boundary": {
       "arms": {

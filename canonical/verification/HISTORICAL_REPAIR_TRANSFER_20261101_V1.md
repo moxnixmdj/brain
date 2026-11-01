@@ -198,5 +198,29 @@ Authored paths pass `git diff --check`. Exact imported snapshots intentionally
 retain upstream trailing whitespace and the boltons license's CRLF; the global
 whitespace check reports those imported lines. They were not silently normalized
 or exempted through changes to enforcement. The official projection is recompiled
-and verified again after this documentation-only update. No GitHub CI, PR, commit
-or merge has been performed for this batch; changes remain on the session branch.
+and verified again after this documentation-only update. At this initial report freeze no GitHub CI, PR, commit
+or merge had been performed; subsequent authorized merge-stage work follows.
+
+## Subsequent authorized merge-stage validation (PR #6555)
+
+The user subsequently authorized **Merge all your work**. Incoming main through
+`5eedc03643d93f76827fc963f7c76aa27edb1d5a` was integrated, preserving all changes
+and resolving only a generated projection conflict with the official compiler.
+The combined tree passed **220 integration tests / 289.65s**, model suites
+**137 tests + 911 subtests / 49.12s**, and official verifier **33/33**.
+
+Initial CI exposed two real acceptance blockers: an exact-base lease still bound
+to the original admission commit, and a **27/28** surface census false negative
+when checking the reverted regression-test project. Exact-base metadata is
+refreshed while retaining the original admission commit. A deterministic real-file
+regression reproduces the latter by compiling a green unchecked-hash bytecode cache:
+the copied cache hides the reverted buggy source, giving the same false-negative
+fields as CI. The new test failed before the repair (**0.35s**) and passed afterward
+(**0.36s**). Scratch copying now excludes `__pycache__`, `.pyc` and `.pyo` so the
+revert-and-rerun oracle actually observes reverted source. This also prevents
+same-size, same-second timestamp-cache reuse. No clock, filesystem, loader or
+process behavior is substituted. No assertion, census floor, workflow, independent
+referee, or production verification gate is weakened.
+
+This follow-up preserves the original historical comparison and its nonclaims.
+Actual subsequent PR checks, not the existence of this document, authorize merge.
