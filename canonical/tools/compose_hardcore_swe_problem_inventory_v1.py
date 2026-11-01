@@ -831,11 +831,12 @@ def main() -> int:
     _ms = multistep_measurement()
     _ms_note = (f"measured {_ms['solved']} of {_ms['scored']}" if _ms.get("measured") and _ms.get("scored")
                 else "not yet measured")
-    add(f"| 1 | **let the sentence reach the capability that can already do it**: the repair works when "
-        f"called with a source root and one failing test file, and three admissions still stop the "
-        f"same task arriving as a sentence (§8: {_ms_note}) | the capability path passes, the door "
-        f"path does not | the work is done and unreachable, which is cheaper to fix than doing it "
-        f"again |")
+    add(f"| 1 | **rank a candidate by how many failures it removes, not by whether it reaches zero**: "
+        f"the engine accepts the first candidate that makes its corpus green, so a patch that halves "
+        f"the failures of a two-file fault outranks the one-line repair that removes all of them; the "
+        f"engine already scores every run it makes (§8.1: {_ms_note}) | the true one-line repair greens "
+        f"226 tests in 1.7 s and the search does not reach it in 300 s | one selection rule, no new "
+        f"capability, and it is the last step between a measured repair and a served one |")
     add(f"| 2 | **selection** for the {len(selection)} remaining sentences | {len(selection)} sentence(s) | "
         "cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |")
     add(f"| 3 | **capability** for the {len(capability)} remaining sentences | {len(capability)} sentence(s) | "

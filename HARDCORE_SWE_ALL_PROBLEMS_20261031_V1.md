@@ -1,6 +1,6 @@
 # Every hardcore software-engineering problem, measured
 
-Measured 2026-11-01 on the tree of `13442e9` (branched from main `e529c7b`) with the substrate restored (`scripts/restore_substrate_v1.py`).
+Measured 2026-11-01 on the tree of `fd7f6ee` (branched from main `e529c7b`) with the substrate restored (`scripts/restore_substrate_v1.py`).
 Every number below was taken by this run: `execution_guard/swe_advanced_probe_v1.py`, `execution_guard/swe_capability_matrix_v1.py`,
 the live verified registry, and a probe of the substrate. Nothing here is a wish.
 
@@ -30,7 +30,7 @@ this document wrong:
 | advanced census (49 hardcore sentences) | **41 served / 8 refused** |
 | capability matrix (54 cases, 3 runs) | **44 REAL / 0 FALSE / 0 DAMAGED** (false: `-`, damaged: `-`) |
 | cases real in **every** run | **44** — a floor, not an average |
-| matrix latency | median 120 ms  p90 726 ms  max 2338 ms |
+| matrix latency | median 94 ms  p90 635 ms  max 1684 ms |
 | live verified registry | 443 rows, 91 of them software-engineering rows |
 | rows sourced from a PyPI package (unrunnable when absent) | 12 |
 | rows whose own limitations admit they degrade silently | 23 |
@@ -261,7 +261,7 @@ That split decides the order, because it decides what a number means:
 
 | # | move | measured reach | why at this position |
 |---|---|---|---|
-| 1 | **let the sentence reach the capability that can already do it**: the repair works when called with a source root and one failing test file, and three admissions still stop the same task arriving as a sentence (§8: measured 0 of 2) | the capability path passes, the door path does not | the work is done and unreachable, which is cheaper to fix than doing it again |
+| 1 | **rank a candidate by how many failures it removes, not by whether it reaches zero**: the engine accepts the first candidate that makes its corpus green, so a patch that halves the failures of a two-file fault outranks the one-line repair that removes all of them; the engine already scores every run it makes (§8.1: measured 0 of 2) | the true one-line repair greens 226 tests in 1.7 s and the search does not reach it in 300 s | one selection rule, no new capability, and it is the last step between a measured repair and a served one |
 | 2 | **selection** for the 3 remaining sentences | 3 sentence(s) | cheap, and each one exposes a real missing row underneath (cherry-pick, changelog) |
 | 3 | **capability** for the 0 remaining sentences | 0 sentence(s) | real work, but a small ceiling; do it after the instrument exists |
 | 4 | **execution substrate**: a profiler, `gdb`/`valgrind`/`strace`, `sqlite3`, `rustc`/`go`/`tsc` | unblocks perf, systems and polyglot verification | without it several rows can never run, and no row may pretend otherwise |
